@@ -1,0 +1,1109 @@
+{
+  "status": "passed",
+  "sourceHash": {
+    "src/simulation.ts": "0947998dbc3b56471d8a3ee18f2a04a331d0ae042f5ee1625f3db828eb15da24",
+    "src/simulation/extensions.ts": "0e07cbbb4abe3b4f18b7d647aa9b593adc47efe84428dc6f64d3449ae980b023",
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd"
+  },
+  "speed": 8,
+  "ticks": 10000,
+  "scope": "One actual generated city at explicit 8x fast-forward; no renderer or default-speed performance claim.",
+  "elapsedGameMinutes": 20000,
+  "totals": {
+    "sales": 146022.5850068233,
+    "saleCount": 11917,
+    "saleTax": 11681.806800545888,
+    "fares": 66284,
+    "payrollPublicRequested": 37209.37623481223,
+    "payrollPublicPaid": 37209.37623481223,
+    "payrollPrivate": 50019.820350626054,
+    "wageTax": 6978.335726835052,
+    "operations": 28800.000000002387,
+    "security": 2580,
+    "financeDelta": -49578.56570554523
+  },
+  "ledger": {
+    "城市公共运转支出": {
+      "count": 42,
+      "amount": -29846.41720249239
+    },
+    "交通居民科研投入": {
+      "count": 1,
+      "amount": 200
+    },
+    "城市税收与公共收入": {
+      "count": 291,
+      "amount": 46185.983495014414
+    },
+    "能源居民科研投入": {
+      "count": 1,
+      "amount": 200
+    },
+    "公共采购异常挪用": {
+      "count": 46,
+      "amount": -2629.3319980671804
+    },
+    "居民诊疗费": {
+      "count": 29,
+      "amount": 870
+    },
+    "贫困居民医疗福利支出": {
+      "count": 53,
+      "amount": -1590
+    }
+  },
+  "snapshots": [
+    {
+      "tick": 0,
+      "day": 0,
+      "hour": 8,
+      "treasury": 80000,
+      "gdp": 0,
+      "npcMoney": 199414.65893373237,
+      "wages": {
+        "sales": 0,
+        "saleCount": 0,
+        "saleTax": 0,
+        "fares": 0,
+        "payrollPublicRequested": 0,
+        "payrollPublicPaid": 0,
+        "payrollPrivate": 0,
+        "wageTax": 0,
+        "operations": 0,
+        "security": 0,
+        "financeDelta": 0
+      },
+      "ledger": {},
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 56,
+        "employees": 291,
+        "averageProfit": 0
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 90.92857142857143,
+        "meanHunger": 77.18245901117122,
+        "meanFatigue": 82.51174210165945,
+        "livingMeanHealth": 90.92857142857143,
+        "livingMeanHunger": 77.18245901117122,
+        "livingMeanFatigue": 82.51174210165945,
+        "researchCompleted": 0,
+        "companies": 12,
+        "zeroCapitalCompanies": 0,
+        "playerAlive": true
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 0
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 65.1449271151796,
+          "profit": 0,
+          "employees": 2
+        },
+        {
+          "id": "company-2",
+          "capital": 50.45391919557005,
+          "profit": 0,
+          "employees": 1
+        },
+        {
+          "id": "company-3",
+          "capital": 79.3269628379494,
+          "profit": 0,
+          "employees": 1
+        },
+        {
+          "id": "company-4",
+          "capital": 80,
+          "profit": 0,
+          "employees": 3
+        },
+        {
+          "id": "company-5",
+          "capital": 38.72681683395058,
+          "profit": 0,
+          "employees": 3
+        },
+        {
+          "id": "company-6",
+          "capital": 38.93696180777624,
+          "profit": 0,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 33.79047064576298,
+          "profit": 0,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 80,
+          "profit": 0,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 65.30928195314482,
+          "profit": 0,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 66.15498571656644,
+          "profit": 0,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 52.24742556251586,
+          "profit": 0,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 71.40725131845102,
+          "profit": 0,
+          "employees": 0
+        }
+      ]
+    },
+    {
+      "tick": 1000,
+      "day": 1,
+      "hour": 17.333333333333332,
+      "treasury": 75173.55948951679,
+      "gdp": 17973.493556675796,
+      "npcMoney": 196653.02802775634,
+      "wages": {
+        "sales": 15909.493556675814,
+        "saleCount": 1487,
+        "saleTax": 1272.7594845340668,
+        "fares": 2064,
+        "payrollPublicRequested": 6318.5556116959015,
+        "payrollPublicPaid": 6318.5556116959015,
+        "payrollPrivate": 10423.389596843546,
+        "wageTax": 1339.3556166831547,
+        "operations": 2880.0000000000687,
+        "security": 504,
+        "financeDelta": -6386.440510483211
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 23,
+          "amount": -5905.89783770201
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "城市税收与公共收入": {
+          "count": 10,
+          "amount": 881.5700840655627
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 56,
+        "employees": 283,
+        "averageProfit": -28.708677101754446
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 91.93299840980295,
+        "meanHunger": 74.86596528098217,
+        "meanFatigue": 77.14660989701223,
+        "livingMeanHealth": 91.93299840980295,
+        "livingMeanHunger": 74.86596528098217,
+        "livingMeanFatigue": 77.14660989701223,
+        "researchCompleted": 1,
+        "companies": 12,
+        "zeroCapitalCompanies": 5,
+        "playerAlive": true
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 0,
+          "profit": -140.71637154136755,
+          "employees": 2
+        },
+        {
+          "id": "company-2",
+          "capital": 0,
+          "profit": -55.54890939259246,
+          "employees": 1
+        },
+        {
+          "id": "company-3",
+          "capital": 58.076962837949836,
+          "profit": -21.250000000000046,
+          "employees": 1
+        },
+        {
+          "id": "company-4",
+          "capital": 0,
+          "profit": -159.43740024944978,
+          "employees": 3
+        },
+        {
+          "id": "company-5",
+          "capital": 0,
+          "profit": -176.9955887078911,
+          "employees": 3
+        },
+        {
+          "id": "company-6",
+          "capital": 19.353628474443013,
+          "profit": -19.583333333333375,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 0,
+          "profit": -42.60165092406372,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 272.44641659556373,
+          "profit": 201.7194754389404,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 44.05928195314527,
+          "profit": -21.250000000000046,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 44.9049857165669,
+          "profit": -21.250000000000046,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 30.997425562516284,
+          "profit": -21.250000000000046,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 51.8239179851181,
+          "profit": -19.583333333333375,
+          "employees": 0
+        }
+      ]
+    },
+    {
+      "tick": 3000,
+      "day": 4,
+      "hour": 12,
+      "treasury": 77212.08751803201,
+      "gdp": 63873.72812897399,
+      "npcMoney": 166531.72538514872,
+      "wages": {
+        "sales": 50793.72812897403,
+        "saleCount": 4275,
+        "saleTax": 4063.4982503179276,
+        "fares": 13080,
+        "payrollPublicRequested": 12862.767981699057,
+        "payrollPublicPaid": 12862.767981699057,
+        "payrollPrivate": 21022.92731737781,
+        "wageTax": 2710.855623926142,
+        "operations": 8640.000000000146,
+        "security": 1428,
+        "financeDelta": -14439.912481967986
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 29,
+          "amount": -11170.424670153894
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "城市税收与公共收入": {
+          "count": 71,
+          "amount": 8094.010562684882
+        },
+        "能源居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "公共采购异常挪用": {
+          "count": 2,
+          "amount": -111.49837449897531
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 75,
+        "employees": 227,
+        "averageProfit": -12.612051295500459
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 92.63476788000112,
+        "meanHunger": 66.19610389610388,
+        "meanFatigue": 78.49217532467542,
+        "livingMeanHealth": 92.63476788000112,
+        "livingMeanHunger": 66.19610389610388,
+        "livingMeanFatigue": 78.49217532467542,
+        "researchCompleted": 2,
+        "companies": 12,
+        "zeroCapitalCompanies": 4,
+        "playerAlive": true
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 1
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 2.1819227978174354,
+          "profit": -299.76999768034983,
+          "employees": 0
+        },
+        {
+          "id": "company-2",
+          "capital": 0,
+          "profit": -137.2850683084324,
+          "employees": 1
+        },
+        {
+          "id": "company-3",
+          "capital": 22.52140728239509,
+          "profit": -56.80555555555507,
+          "employees": 1
+        },
+        {
+          "id": "company-4",
+          "capital": 0,
+          "profit": -270.7182822201666,
+          "employees": 0
+        },
+        {
+          "id": "company-5",
+          "capital": 0.21560750300005793,
+          "profit": -294.5650086680552,
+          "employees": 0
+        },
+        {
+          "id": "company-6",
+          "capital": 0,
+          "profit": -50.13888888888855,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 121.54953398463678,
+          "profit": 26.674920344025992,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 713.9377028290771,
+          "profit": 738.1669471726184,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 8.503726397590526,
+          "profit": -56.80555555555507,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 9.349430161012151,
+          "profit": -56.80555555555507,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 0,
+          "profit": -56.80555555555507,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 33.73171393489935,
+          "profit": -37.67553738355244,
+          "employees": 0
+        }
+      ]
+    },
+    {
+      "tick": 5000,
+      "day": 7,
+      "hour": 6.666666666666667,
+      "treasury": 80878.95252622943,
+      "gdp": 110160.914345515,
+      "npcMoney": 139584.98716268197,
+      "wages": {
+        "sales": 82240.91434551499,
+        "saleCount": 6745,
+        "saleTax": 6579.273147641234,
+        "fares": 27920,
+        "payrollPublicRequested": 21517.79082451451,
+        "payrollPublicPaid": 21517.79082451451,
+        "payrollPrivate": 33001.77023280606,
+        "wageTax": 4361.56488458564,
+        "operations": 14399.999999998545,
+        "security": 2172,
+        "financeDelta": -24959.047473770566
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 33,
+          "amount": -17781.764873960652
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "城市税收与公共收入": {
+          "count": 133,
+          "amount": 18473.64265550929
+        },
+        "能源居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "公共采购异常挪用": {
+          "count": 6,
+          "amount": -382.09468145957214
+        },
+        "居民诊疗费": {
+          "count": 3,
+          "amount": 90
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 116,
+        "employees": 166,
+        "averageProfit": -12.08394778539314
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 91.54735501492985,
+        "meanHunger": 42.57662337662319,
+        "meanFatigue": 81.22344155844152,
+        "livingMeanHealth": 91.54735501492985,
+        "livingMeanHunger": 42.57662337662319,
+        "livingMeanFatigue": 81.22344155844152,
+        "researchCompleted": 2,
+        "companies": 12,
+        "zeroCapitalCompanies": 9,
+        "playerAlive": true
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 1
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 0,
+          "profit": -330.32555323591095,
+          "employees": 0
+        },
+        {
+          "id": "company-2",
+          "capital": 0,
+          "profit": -246.20733113932698,
+          "employees": 0
+        },
+        {
+          "id": "company-3",
+          "capital": 0,
+          "profit": -92.36111111110982,
+          "employees": 1
+        },
+        {
+          "id": "company-4",
+          "capital": 0,
+          "profit": -306.2738377757286,
+          "employees": 0
+        },
+        {
+          "id": "company-5",
+          "capital": 0,
+          "profit": -310.61815997746857,
+          "employees": 0
+        },
+        {
+          "id": "company-6",
+          "capital": 0,
+          "profit": -80.69444444444342,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 387.5469574481981,
+          "profit": 327.01797779678554,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 536.0325917333371,
+          "profit": 702.6113916170564,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 0,
+          "profit": -92.36111111110982,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 0,
+          "profit": -92.36111111110982,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 0,
+          "profit": -86.89825396824712,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 3.1761583793444927,
+          "profit": -68.2310929391073,
+          "employees": 0
+        }
+      ]
+    },
+    {
+      "tick": 7000,
+      "day": 10,
+      "hour": 1.3333333333333333,
+      "treasury": 89075.83651807359,
+      "gdp": 160495.4592970877,
+      "npcMoney": 104235.39450645198,
+      "wages": {
+        "sales": 114063.45929708851,
+        "saleCount": 9285,
+        "saleTax": 9125.076743767102,
+        "fares": 46432,
+        "payrollPublicRequested": 28714.122338836638,
+        "payrollPublicPaid": 28714.122338836638,
+        "payrollPrivate": 40973.4500318023,
+        "wageTax": 5575.005789651119,
+        "operations": 20159.99999999933,
+        "security": 2424,
+        "financeDelta": -35082.163481926415
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 36,
+          "amount": -23187.97863694423
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "城市税收与公共收入": {
+          "count": 197,
+          "amount": 32922.7388314931
+        },
+        "能源居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "公共采购异常挪用": {
+          "count": 23,
+          "amount": -1308.1236764752196
+        },
+        "居民诊疗费": {
+          "count": 7,
+          "amount": 210
+        },
+        "贫困居民医疗福利支出": {
+          "count": 2,
+          "amount": -60
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 0,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 129,
+        "employees": 146,
+        "averageProfit": 4.086980261197815
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 88.31751819113974,
+        "meanHunger": 47.24269480519469,
+        "meanFatigue": 69.09990259740266,
+        "livingMeanHealth": 88.31751819113974,
+        "livingMeanHunger": 47.24269480519469,
+        "livingMeanFatigue": 69.09990259740266,
+        "researchCompleted": 2,
+        "companies": 12,
+        "zeroCapitalCompanies": 7,
+        "playerAlive": true
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 1
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 0,
+          "profit": -364.63110879147274,
+          "employees": 0
+        },
+        {
+          "id": "company-2",
+          "capital": 0,
+          "profit": -285.5128866948877,
+          "employees": 0
+        },
+        {
+          "id": "company-3",
+          "capital": 1.776444444444536,
+          "profit": -154.89603081481226,
+          "employees": 1
+        },
+        {
+          "id": "company-4",
+          "capital": 0,
+          "profit": -345.5793933312913,
+          "employees": 0
+        },
+        {
+          "id": "company-5",
+          "capital": 10.433906686442697,
+          "profit": -315.7330015578862,
+          "employees": 0
+        },
+        {
+          "id": "company-6",
+          "capital": 0,
+          "profit": -110.16799999999822,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 354.7875678522045,
+          "profit": 381.5265905606638,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 359.6421464627467,
+          "profit": 663.3058360614937,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 0,
+          "profit": -131.6666666666645,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 0,
+          "profit": -165.76867015538616,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 15.136912473451162,
+          "profit": -79.81689705035133,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 0,
+          "profit": -102.53664849466207,
+          "employees": 0
+        }
+      ]
+    },
+    {
+      "tick": 10000,
+      "day": 14,
+      "hour": 5.333333333333333,
+      "treasury": 93405.43429445477,
+      "gdp": 212306.58500682158,
+      "npcMoney": 69509.32042009682,
+      "wages": {
+        "sales": 146022.5850068233,
+        "saleCount": 11917,
+        "saleTax": 11681.806800545888,
+        "fares": 66284,
+        "payrollPublicRequested": 37209.37623481223,
+        "payrollPublicPaid": 37209.37623481223,
+        "payrollPrivate": 50019.820350626054,
+        "wageTax": 6978.335726835052,
+        "operations": 28800.000000002387,
+        "security": 2580,
+        "financeDelta": -49578.56570554523
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 42,
+          "amount": -29846.41720249239
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "城市税收与公共收入": {
+          "count": 291,
+          "amount": 46185.983495014414
+        },
+        "能源居民科研投入": {
+          "count": 1,
+          "amount": 200
+        },
+        "公共采购异常挪用": {
+          "count": 46,
+          "amount": -2629.3319980671804
+        },
+        "居民诊疗费": {
+          "count": 29,
+          "amount": 870
+        },
+        "贫困居民医疗福利支出": {
+          "count": 53,
+          "amount": -1590
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 0,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 132,
+        "employees": 133,
+        "averageProfit": 0.760116772933281
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 80.58143768503204,
+        "meanHunger": 29.721915584415722,
+        "meanFatigue": 77.51290584415585,
+        "livingMeanHealth": 80.58143768503204,
+        "livingMeanHunger": 29.721915584415722,
+        "livingMeanFatigue": 77.51290584415585,
+        "researchCompleted": 2,
+        "companies": 12,
+        "zeroCapitalCompanies": 7,
+        "playerAlive": false
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 1
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 0,
+          "profit": -411.2977754581479,
+          "employees": 0
+        },
+        {
+          "id": "company-2",
+          "capital": 0,
+          "profit": -338.84622002823073,
+          "employees": 0
+        },
+        {
+          "id": "company-3",
+          "capital": 0,
+          "profit": -264.7163949986476,
+          "employees": 0
+        },
+        {
+          "id": "company-4",
+          "capital": 0,
+          "profit": -398.91272666463436,
+          "employees": 0
+        },
+        {
+          "id": "company-5",
+          "capital": 10.289589330340505,
+          "profit": -333.2119310631862,
+          "employees": 0
+        },
+        {
+          "id": "company-6",
+          "capital": 0,
+          "profit": -156.83466666666382,
+          "employees": 0
+        },
+        {
+          "id": "company-7",
+          "capital": 189.54531909943546,
+          "profit": 320.51861975363653,
+          "employees": 1
+        },
+        {
+          "id": "company-8",
+          "capital": 124.99406690301683,
+          "profit": 609.9725027281506,
+          "employees": 0
+        },
+        {
+          "id": "company-9",
+          "capital": 5.046190476190503,
+          "profit": -179.53714285713946,
+          "employees": 0
+        },
+        {
+          "id": "company-10",
+          "capital": 0,
+          "profit": -219.10200348871828,
+          "employees": 1
+        },
+        {
+          "id": "company-11",
+          "capital": 91.15800801473267,
+          "profit": -3.795801509069876,
+          "employees": 0
+        },
+        {
+          "id": "company-12",
+          "capital": 0,
+          "profit": -149.20331516132768,
+          "employees": 0
+        }
+      ]
+    }
+  ],
+  "deaths": [],
+  "starts": [
+    {
+      "tick": 60,
+      "day": 0,
+      "hour": 10,
+      "id": "citizen-488",
+      "role": "scientist",
+      "sector": "traffic",
+      "moneyBefore": 339.00097431614995,
+      "moneyAfter": 139.00097431614995,
+      "grossWage": 0,
+      "debit": 200,
+      "exactDebitVerified": true,
+      "ledgerCredit": 200,
+      "hunger": 54.4138734249864,
+      "fatigue": 76.16514442530459,
+      "education": 3,
+      "skill": 36.01699999999996,
+      "workKind": "school"
+    },
+    {
+      "tick": 1530,
+      "day": 2,
+      "hour": 11,
+      "id": "citizen-28",
+      "role": "科研员",
+      "sector": "energy",
+      "moneyBefore": 368.73438741874867,
+      "moneyAfter": 168.73438741874867,
+      "grossWage": 0,
+      "debit": 200,
+      "exactDebitVerified": true,
+      "ledgerCredit": 200,
+      "hunger": 59.599999999999625,
+      "fatigue": 91.07999999999964,
+      "education": 3,
+      "skill": 51.010999999999974,
+      "workKind": "workshop",
+      "workFacility": "data"
+    }
+  ],
+  "researchFunding": 400,
+  "exactResearchDebits": 2,
+  "researchCompleted": 2,
+  "reconciliationResidual": 4.4397893361747265e-8
+}

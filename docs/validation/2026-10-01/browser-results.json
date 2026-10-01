@@ -1,0 +1,88 @@
+{
+  "browser": "Chromium with SwiftShader on Linux",
+  "buildEntry": "/assets/index-C-rbdlOs.js",
+  "sourceHashes": {
+    "src/simulation.ts": "0947998dbc3b56471d8a3ee18f2a04a331d0ae042f5ee1625f3db828eb15da24",
+    "src/simulation/extensions.ts": "0e07cbbb4abe3b4f18b7d647aa9b593adc47efe84428dc6f64d3449ae980b023",
+    "src/main.ts": "f625fa6d0433232907b44f170565418b8e9738dbd73b85a1b57c26e599dbb558",
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/renderer.ts": "62c678fc189daafcebb0eeec8a248188d6b4d986c635790dbe6131927154ef74",
+    "src/controller.ts": "54b19dd67195a7b3e8b083fd2d5d9544accbb4e968077148e7061ad0809042c2",
+    "src/ui.ts": "0e99e1911108add8043e8bae125277da8f466f05328bc4569bac7020e0201ed8"
+  },
+  "note": "Functional rendering verification; these FPS do not represent macOS hardware performance.",
+  "results": [
+    {
+      "name": "world boots, WebGL renders and city simulation advances",
+      "districts": 11,
+      "buildings": 612,
+      "citizens": 616,
+      "vehicles": 344,
+      "tick": 3,
+      "drawCalls": 160,
+      "triangles": 1350056,
+      "fps": 0
+    },
+    {
+      "name": "native button keyboard activation remains accessible",
+      "key": "Space"
+    },
+    {
+      "name": "manual time and paused simulation with day/night rendering",
+      "dayHour": 15.5,
+      "nightHour": 22
+    },
+    {
+      "name": "actual keyboard first-person movement",
+      "metres": 4.79999999999928
+    },
+    {
+      "name": "enter actual building and transact against real stock and balance",
+      "ok": true,
+      "message": "在清溪水岸·西溪院·商肆1购买1份食物，花费11.9云币。",
+      "before": 600,
+      "after": 588.0685714285714
+    },
+    {
+      "name": "browser save/load restores state",
+      "before": 588.0685714285714,
+      "after": 588.0685714285714,
+      "saved": 718775
+    },
+    {
+      "name": "municipal permissions, genuine basement and upper-floor save restoration",
+      "publicNext": 19,
+      "denied": true,
+      "basement": -2,
+      "restoredFloor": 17,
+      "footprintWidths": [
+        144,
+        126,
+        108,
+        90,
+        72
+      ],
+      "position": {
+        "x": 406.96,
+        "y": 387.2,
+        "z": -264
+      }
+    },
+    {
+      "name": "actual keyboard driving advances the vehicle and carries the player",
+      "metres": 3.6334530830471943,
+      "controlling": true,
+      "passengerDistance": 0,
+      "mode": "walk"
+    },
+    {
+      "name": "jet view flies continuously through the world",
+      "metres": 93.45792815553028
+    },
+    {
+      "name": "quality changes and compact viewport remain usable",
+      "horizontalOverflow": false
+    }
+  ],
+  "errors": []
+}

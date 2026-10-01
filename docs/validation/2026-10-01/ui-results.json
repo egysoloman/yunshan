@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "browser": "Chromium",
+  "scope": "DOM with the real generated world and Simulation; no renderer or macOS performance claim.",
+  "checks": 15,
+  "results": [
+    "Native Space activation opens panel",
+    "District navigation uses real district IDs",
+    "Dynamic refresh preserves keyboard focus",
+    "Closing panel returns focus to toggle",
+    "Bank state cache refreshes independently of player cash",
+    "Vehicle state, passengers, cargo, speed stay live",
+    "Merchant identity stack enables company founding with real cash/ownership changes",
+    "Scientist qualification displays the correct requirement",
+    "Cooking command consumes actual ingredients and starts a persistent job",
+    "Actual court command starts pursuit and UI prevents immediate dating",
+    "Engagement UI shows waiting and dispatches actual marriage/shared-home changes",
+    "Severe hostility blocks small talk and pays real 65-coin compensation without instant repair",
+    "Imported entity strings remain text, never DOM markup",
+    "600x360 landscape keeps context usable without horizontal overflow",
+    "390x844 portrait panel has no horizontal overflow"
+  ],
+  "errors": []
+}
