@@ -95,3 +95,30 @@ test('a floor-level voxel is a usable step while a taller stack cannot be walked
     assert(controller.position.x < 0.9);
   }, true, blocks);
 });
+
+test('a new traveler starts on foot and camera modes require an actual acquired aircraft', () => {
+  fixture(controller => {
+    assert.equal(controller.mode, 'walk');
+    assert.deepEqual(controller.walkingPosition, controller.world.spawn);
+    const before = controller.position;
+    assert.equal(controller.setMode('jet', before), false);
+    assert.equal(controller.mode, 'walk'); assert.deepEqual(controller.position, before);
+    assert.equal(controller.setMode('drone', before), false);
+    controller.resetView(); assert.deepEqual(controller.position, before);
+  });
+});
+
+test('bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable', () => {
+  fixture((controller, _building, keyboard) => {
+    controller.world.edges.push({ id: 'real-bridge', from: 'a', to: 'b', mode: 'bridge', length: 80, capacity: 20, points: [{ x: 300, y: 254.6, z: -40 }, { x: 300, y: 254.6, z: 40 }] });
+    const press = (code: string, type = 'keydown') => { const event = new Event(type); Object.assign(event, { code, repeat: false }); keyboard.dispatchEvent(event); };
+    controller.setMode('walk', { x: 303.4, y: 254.6, z: 0 }); controller.yaw = 0;
+    press('KeyD'); controller.step(.1, false); assert.equal(controller.position.x, 303.4);
+    press('KeyD', 'keyup'); press('KeyW'); controller.step(.1, false);
+    assert(controller.position.z < -.4); assert.equal(controller.position.y, 254.6);
+    press('KeyW', 'keyup');
+    controller.setMode('walk', { x: 303.4, y: 254.6, z: 38 }); controller.yaw = 0;
+    press('KeyD'); controller.step(.1, false);
+    assert(controller.position.x > 303.8, 'last six metres must keep access at the bridge join');
+  });
+});

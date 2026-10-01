@@ -94,6 +94,12 @@ function naturalHeight(world: WorldDefinition, x: number, z: number) {
   return Math.max(2, y);
 }
 
+/** Read-only mountain sample for the render shell's segment-indexed cuttings.
+ * It does not change generation, movement surfaces or the city's layout. */
+export function naturalTerrainHeight(world: WorldDefinition, x: number, z: number): number {
+  return naturalHeight(world, x, z);
+}
+
 /** Ground beneath the city: foundations and road cuttings are part of the terrain. */
 export function terrainHeight(world: WorldDefinition, x: number, z: number): number {
   const index = indexFor(world);

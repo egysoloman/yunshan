@@ -140,6 +140,9 @@ test('bank operations preserve account balances and reject unaffordable or inval
 test('work pays for an actual local shift and cannot be repeated immediately for unlimited income', () => {
   const { sim, world } = create();
   const workshop = world.buildings.find(building => building.kind === 'workshop')!;
+  // Fund both shifts from a real wallet; the employer cannot pay an unfunded wage.
+  const employer = sim.state.shops.find(shop => shop.buildingId === workshop.id)!;
+  sim.state.player.money -= 100; sim.transferShopFunds(employer, 100);
   walkTo(sim, workshop.door);
   const before = { money: sim.state.player.money, experience: sim.state.player.experience };
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, true);
@@ -255,6 +258,9 @@ test('an eligible local campaign takes time to win an election, including across
 test('saving preserves a paid work shift cooldown instead of allowing immediate duplicate payment', () => {
   const { sim, world } = create();
   const workshop = world.buildings.find(building => building.kind === 'workshop')!;
+  // Fund both shifts from a real wallet; the employer cannot pay an unfunded wage.
+  const employer = sim.state.shops.find(shop => shop.buildingId === workshop.id)!;
+  sim.state.player.money -= 100; sim.transferShopFunds(employer, 100);
   walkTo(sim, workshop.door);
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, true);
   const restored = new Simulation(fixture());
@@ -755,11 +761,13 @@ test('actual private wages are expensed once and initial staff counts refer to r
   const worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
   assert.ok(worker);
   const moneyBefore = worker.money, profitBefore = shop.profit;
-  const runtime = Reflect.get(sim, 'runtime'), elapsed = 12;
+  const runtime = Reflect.get(sim, 'runtime'), fundsBefore = sim.shopFunds(shop);
+  let facilitiesPaid = 0; sim.onEvent('business-expense', event => { if (event.shopId === shop.id) facilitiesPaid += event.amount ?? 0; });
   sim.emitEvent({ type: 'wage', citizenId: worker.id, districtId: worker.districtId, amount: 32 });
   sim.step(.25);
   assert.ok(Math.abs(worker.money - moneyBefore - 32 * (1 - sim.state.taxRate)) < 1e-8);
-  assert.ok(Math.abs(shop.profit - profitBefore + 32 + elapsed / 1440 * 20) < 1e-8, 'only the real salary and separate premises expense should reduce profit');
+  assert.ok(Math.abs(shop.profit - profitBefore + 32 + facilitiesPaid) < 1e-8, 'only the real salary and actual occupied facilities expense should reduce profit');
+  assert.ok(Math.abs(sim.shopFunds(shop) - fundsBefore + 32 + facilitiesPaid) < 1e-8, 'private payroll and premises expense must come from its real operating account');
   assert.equal(runtime.wages.length, 0, 'settled salary cannot remain queued for a second payment');
 });
 
@@ -771,10 +779,11 @@ test('public laboratory staff use the city budget and public wings cannot be bou
   const worker = sim.state.citizens.find(c => c.workId === wing.id && c.role !== '学生')!;
   assert.ok(worker); assert.equal(worker.role, '科研员');
   const moneyBefore = worker.money, treasuryBefore = sim.state.treasury;
+  let operationNet = 0; sim.onEvent('public-procurement', event => { operationNet += (event.amount ?? 0) * (1 - sim.state.taxRate); });
   sim.emitEvent({ type: 'wage', citizenId: worker.id, districtId: worker.districtId, amount: 40 });
   sim.step(.25);
   assert.ok(Math.abs(worker.money - moneyBefore - 40 * .92) < 1e-8);
-  assert.ok(Math.abs(sim.state.treasury - treasuryBefore + 40 * .92 + .25 * 1.44) < 1e-8, 'city wages, their actual tax and operating expense must settle the public account');
+  assert.ok(Math.abs(sim.state.treasury - treasuryBefore + 40 * .92 + operationNet) < 1e-8, 'city wages, their actual tax and supplied public operations must settle the public account');
   walkTo(sim, wing.door); sim.state.player.identities = ['traveler', 'merchant', 'scientist'];
   const cash = sim.state.player.money;
   assert.equal(sim.command({ type: 'purchase', targetId: wing.id }).ok, false);
@@ -832,16 +841,18 @@ test('citizens pay a real fare before boarding and keep walking when they cannot
   for (const cash of [5, 3]) {
     const sim = new Simulation(fixture()), citizen = sim.state.citizens[0], vehicle = sim.state.vehicles.find(v => v.kind === 'road' && v.direction === 1)!;
     const dock = sim.worldDefinition.buildings.find(b => b.kind === 'dock' && b.districtId === citizen.districtId)!;
-    const runtime = Reflect.get(sim, 'runtime'); vehicle.nextDeparture = 10000;
+    const runtime = Reflect.get(sim, 'runtime'); vehicle.nextDeparture = 481; // a real imminent boarding window
     citizen.position = { ...vehicle.position }; citizen.role = '工人'; citizen.workId = dock.id; citizen.destinationId = dock.id;
     citizen.money = cash; citizen.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
     citizen.route = [{ ...citizen.position }, { ...dock.door }]; citizen.routeIndex = 1;
+    sim.state.shops.find(shop => shop.buildingId === dock.id)!.employees++;
     runtime.activities[citizen.id] = 'work'; runtime.decisionAt[citizen.id] = 10000;
-    let paid = 0, ownFare = 0; sim.onEvent('transit-fare', e => { paid += e.amount ?? 0; if (e.citizenId === citizen.id) ownFare += e.amount ?? 0; });
+    let paid = 0, ownFare = 0, operationNet = 0; sim.onEvent('transit-fare', e => { paid += e.amount ?? 0; if (e.citizenId === citizen.id) ownFare += e.amount ?? 0; });
+    sim.onEvent('public-procurement', event => { operationNet += (event.amount ?? 0) * (1 - sim.state.taxRate); });
     const funds = sim.state.treasury; sim.setFocus(citizen.position, 'drone'); sim.step(.25);
     if (cash >= 4) { assert.equal(citizen.state, 'riding'); assert.equal(citizen.money, 1); assert.equal(ownFare, 4); }
     else { assert.notEqual(citizen.state, 'riding'); assert.equal(citizen.money, 3); assert.equal(ownFare, 0); }
-    assert.ok(Math.abs(sim.state.treasury - funds - paid + .25 * 1.44) < 1e-8, 'only actual tickets fund transit, apart from the stated operating expense');
+    assert.ok(Math.abs(sim.state.treasury - funds - paid + operationNet) < 1e-8, 'actual tickets fund transit and actual supplied operations settle the public account');
   }
 });
 
@@ -926,14 +937,14 @@ test('a real police response records duty attendance and transfers its earned pa
   const crime = { id: 'crime-1', districtId: officer.districtId, position: { x: 1100, y: 0, z: 100 }, severity: 1, status: 'open' as 'open' | 'responding' | 'resolved', responseAt: 0 };
   sim.state.crimes.push(crime); const runtime = Reflect.get(sim, 'runtime') as { crimeId: number; dispatches: Record<string, unknown>; wages: { citizenId: string; amount: number }[]; taxes: number; operatingCost: number; attendance: Record<string, number> }; runtime.crimeId = 1;
   sim.step(.25); assert.ok(runtime.dispatches[officer.id]);
-  let payment = 0, cashBefore = 0, treasuryBefore = 0, expectedPublicCost = 0, taxes = 0, operations = 0;
+  let payment = 0, cashBefore = 0, treasuryBefore = 0, expectedPublicCost = 0, taxes = 0, operations = 0, payrollObserved = false;
   sim.onEvent('wage', event => { if (event.citizenId === officer.id) payment += event.amount ?? 0; });
   sim.onPhase('commerce', state => {
     if (!runtime.wages.some(wage => wage.citizenId === officer.id)) return;
-    cashBefore = officer.money; treasuryBefore = state.treasury; taxes = runtime.taxes; operations = runtime.operatingCost;
-    expectedPublicCost = runtime.wages.filter(wage => !state.shops.some(shop => shop.buildingId === state.citizens.find(c => c.id === wage.citizenId)!.workId)).reduce((sum, wage) => sum + wage.amount, 0);
-    taxes += runtime.wages.reduce((sum, wage) => sum + wage.amount * state.taxRate, 0);
+    cashBefore = officer.money; treasuryBefore = state.treasury; taxes = runtime.taxes; operations = 0; expectedPublicCost = 0; payrollObserved = true;
   });
+  sim.onEvent('public-procurement', event => { if (payrollObserved) { operations += event.amount ?? 0; taxes += (event.amount ?? 0) * sim.state.taxRate; } });
+  sim.onEvent('wage-paid', event => { if (payrollObserved) { if (!event.shopId) expectedPublicCost += event.amount ?? 0; taxes += (event.amount ?? 0) * sim.state.taxRate; } });
   sim.onPhase('finance', state => {
     if (!payment) return;
     assert.ok(Math.abs(officer.money - cashBefore - payment * (1 - state.taxRate)) < 1e-8);

@@ -1,13 +1,16 @@
 import * as THREE from 'three';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
-import { terrainHeight } from './world';
+import { samplePolyline, terrainHeight } from './world';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
+import { ArchitectureDetailManager } from './rendering/architecture-detail';
+import { BRIDGE_OPEN_END, deckWidth, guardrailOffset, guardrailSegment, GUARDRAIL_THICKNESS } from './transport-geometry';
 
-const PALETTE = { wall: '#b98253', stone: '#647a70', wood: '#493e36', roof: '#3f7465', glass: '#3c777e', amber: '#ffc978', cyan: '#88e9d7', red: '#b45b43' };
+const PALETTE = { wall: '#d2c6aa', stone: '#8a948d', wood: '#564739', roof: '#355b58', glass: '#5c9399', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
+type LocalBox = (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string) => void;
 
 /** Static geometry is collected by material and district, rather than by house. */
 class BoxBatch {
@@ -19,12 +22,12 @@ class BoxBatch {
     const list = this.parts.get(key) ?? [];
     list.push({ matrix, color: new THREE.Color(color ?? PALETTE[key]), ...tag }); this.parts.set(key, list);
   }
-  segment(key: MaterialKey, a: Vec3, b: Vec3, width: number, height: number, lift = 0) {
+  segment(key: MaterialKey, a: Vec3, b: Vec3, width: number, height: number, lift = 0, color?: string) {
     const va = new THREE.Vector3(a.x, a.y + lift, a.z), vb = new THREE.Vector3(b.x, b.y + lift, b.z);
     const direction = vb.clone().sub(va), length = direction.length();
     if (length < .01) return;
     const matrix = new THREE.Matrix4().compose(va.add(vb).multiplyScalar(.5), new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), direction.normalize()), new THREE.Vector3(width, height, length));
-    const list = this.parts.get(key) ?? []; list.push({ matrix, color: new THREE.Color(PALETTE[key]) }); this.parts.set(key, list);
+    const list = this.parts.get(key) ?? []; list.push({ matrix, color: new THREE.Color(color ?? PALETTE[key]) }); this.parts.set(key, list);
   }
   build(refs?: Map<string, InteriorRef[]>): THREE.Group {
     const group = new THREE.Group();
@@ -51,6 +54,7 @@ export class CityRenderer implements CityRendererAPI {
   readonly renderer: THREE.WebGLRenderer;
   private materials: Record<MaterialKey, THREE.MeshStandardMaterial>;
   private landscape: ReturnType<typeof buildLandscape>;
+  private architectureDetail: ArchitectureDetailManager;
   private chunks: CityChunk[] = [];
   private interiors = new Map<string, InteriorRef[]>();
   private insideId: string | null = null;
@@ -95,6 +99,21 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
     this.materials = Object.fromEntries(Object.keys(PALETTE).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : .83, metalness: key === 'glass' ? .32 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
+    for (const key of ['wall', 'wood', 'stone'] as const) this.materials[key].onBeforeCompile = shader => {
+      shader.vertexShader = 'varying vec3 vArchitecture;\n' + shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+        vec4 architecture=vec4(transformed,1.0);
+        #ifdef USE_INSTANCING
+        architecture=instanceMatrix*architecture;
+        #endif
+        vArchitecture=(modelMatrix*architecture).xyz;`);
+      shader.fragmentShader = 'varying vec3 vArchitecture;\n' + shader.fragmentShader;
+      shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
+        vec3 grainCell=floor(vArchitecture*5.0);
+        float pigment=fract(sin(dot(grainCell,vec3(12.9898,78.233,39.425)))*43758.5453);
+        diffuseColor.rgb*=.97+pigment*.06;
+        ${key === 'stone' ? 'float joint=step(.97,fract(vArchitecture.y*2.5));diffuseColor.rgb*=1.0-joint*.09;' : key === 'wood' ? 'diffuseColor.rgb*=.98+sin(vArchitecture.y*36.0+vArchitecture.x*3.0)*.025;' : ''}`);
+    };
     this.scene.add(this.sun, this.moon, this.fill);
     for (const light of this.interiorLights) { light.visible = false; this.scene.add(light); }
     this.sun.position.set(-1100, 2200, 500); this.moon.position.set(1300, 1300, -900);
@@ -108,6 +127,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
     this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
+    this.architectureDetail = new ArchitectureDetailManager(world.buildings); this.scene.add(this.architectureDetail.group);
     const signalCount = this.world.nodes.filter(node => node.station).length;
     this.signalRed = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
     this.signalGreen = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
@@ -117,7 +137,9 @@ export class CityRenderer implements CityRendererAPI {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
     }
-    this.camera.position.set(1780, 1040, 2040); this.camera.lookAt(70, 265, -300);
+    const arrivalShop = this.world.buildings.filter(b => b.kind === 'market' && b.districtId === 'market').sort((a, b) => Math.hypot(a.door.x - world.spawn.x, a.door.z - world.spawn.z) - Math.hypot(b.door.x - world.spawn.x, b.door.z - world.spawn.z))[0];
+    this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
+    this.camera.lookAt(arrivalShop?.door.x ?? world.spawn.x, world.spawn.y + 1.2, arrivalShop?.door.z ?? world.spawn.z - 60);
     this.resize();
   }
 
@@ -133,7 +155,7 @@ export class CityRenderer implements CityRendererAPI {
 
   private buildHouse(b: Building, batch: BoxBatch, far: boolean) {
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);
-    const wallColor = b.kind === 'police' ? '#929a7c' : b.kind === 'school' ? '#c1aa7e' : b.kind === 'bank' || b.kind === 'hall' ? '#b59367' : b.seed % 3 === 0 ? '#bb8a68' : '#ad7955';
+    const wallColor = b.kind === 'workshop' ? '#a39681' : b.kind === 'bank' ? '#a7b9b6' : b.kind === 'police' ? '#8d9992' : b.kind === 'clinic' ? '#d5ded0' : b.kind === 'school' ? '#dbd4b8' : b.kind === 'hall' || b.kind === 'core' ? '#c6b78f' : b.kind === 'station' || b.kind === 'airport' || b.kind === 'starport' ? '#acbfbc' : ['#cfc6b0', '#c0bea7', '#e2d5ba', '#c8b7a0'][b.seed % 4];
     const box = (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor = -1, roof = false, color?: string) => { const c = Math.cos(b.rotation), s = Math.sin(b.rotation); const material = far && key === 'wood' ? 'roof' : far && key === 'stone' ? 'wall' : key; const visibleHeight = far && key === 'amber' && sy < .5 ? .65 : sy; batch.box(material, b.position.x + x * c + z * s, base + y, b.position.z + z * c - x * s, sx, visibleHeight, sz, color ?? PALETTE[key], b.rotation, far ? undefined : { building: b.id, floor, roof }); };
     box('stone', 0, -basements * fh - .5, 0, w + 3, 1.2, d + 3, -basements - 1);
     // South-facing doorway and stone apron always connect to the actual door node.
@@ -154,19 +176,19 @@ export class CityRenderer implements CityRendererAPI {
       return;
     }
     if (far) {
-      const simple = b.kind !== 'core' && w < 55;
       for (let first = 0; first < floors;) {
         const dimension = getFloorDimensions(b, first); let end = first + 1;
         while (end < floors) { const next = getFloorDimensions(b, end); if (next.width !== dimension.width || next.depth !== dimension.depth) break; end++; }
         const bw = dimension.width, bd = dimension.depth, bottom = first * fh, tall = (end - first) * fh;
         box('wall', 0, bottom + tall / 2, 0, bw, tall, bd, -1, false, wallColor);
-        this.roof(box, bw, bd, end * fh, -1, end === floors ? 1 : .75, simple);
-        if (b.kind === 'core' || height > 28 || floors > 2) this.roof(box, bw * 1.035, bd * 1.035, bottom + tall * .5, -1, .65, simple);
+        this.programRoof(b, box, bw, bd, end * fh, -1, end === floors ? 1 : .65, true);
+        if (b.kind === 'core' || b.kind === 'hall' || b.kind === 'home' && floors > 5) this.programRoof(b, box, bw * 1.035, bd * 1.035, bottom + tall * .5, -1, .55, true);
         for (const x of [-bw * .3, bw * .3]) box('wood', x, bottom + tall / 2, bd / 2 + .3, Math.max(.4, bw * .02), tall, .7);
         const litLevels = Math.min(b.kind === 'core' ? 3 : 4, end - first);
         for (let level = 0; level < litLevels; level++) for (const x of [-bw * .3, -bw * .1, bw * .1, bw * .3]) box('amber', x, bottom + 2 + (level + .4) * tall / litLevels, bd / 2 + .75, Math.min(4, bw * .12), 1.6, .18);
         first = end;
       }
+      this.programExterior(b, box, true);
       return;
     }
     for (let f = -basements; f < floors; f++) {
@@ -244,12 +266,13 @@ export class CityRenderer implements CityRendererAPI {
         }
       }
       if (floors > 1) for (let step = 0; step < 10; step++) box('stone', hx, y + (step + 1) * fh / 20, hz + (step - 5) * Math.min(.42, d * .035), Math.min(2.8, w * .15), (step + 1) * fh / 10, Math.min(.48, d * .04), f);
-      const roofPeriod = b.kind === 'core' ? Math.max(2, Math.round(floors / 8)) : Math.max(2, Math.round(floors / 3));
+      const roofPeriod = b.kind === 'core' ? 6 : b.kind === 'home' ? 4 : b.kind === 'hall' || b.kind === 'school' ? 3 : floors;
       const nextWidth = f >= 0 && f < floors - 1 ? getFloorDimensions(b, f + 1).width : w;
-      if (f >= 0 && (f === floors - 1 || (f + 1) % roofPeriod === 0 || nextWidth !== w)) this.roof(box, w * (f === floors - 1 ? 1 : 1.07), d * (f === floors - 1 ? 1 : 1.07), y + fh, f, f === floors - 1 ? 1 : .65);
+      if (f >= 0 && (f === floors - 1 || (f + 1) % roofPeriod === 0 || nextWidth !== w)) this.programRoof(b, box, w * (f === floors - 1 ? 1 : 1.035), d * (f === floors - 1 ? 1 : 1.035), y + fh, f, f === floors - 1 ? 1 : .55, false);
       if (f === 0 || f === floors - 1) for (const x of [-w * .37, w * .37]) { box('amber', x, y + doorH - .4, d / 2 + 1.1, .8, 1.25, .8, f); box('red', x, y + doorH + .35, d / 2 + 1.1, 1, .16, 1, f); }
       for (const x of [-w * .22, w * .22]) { box('amber', x, y + fh * .72, 0, 2.2, .24, 2.2, f); box('wood', x, y + fh * .85, 0, .12, fh * .27, .12, f); }
     }
+    this.programExterior(b, box, false);
     // Energy bands are part of the buildings, powered by the simulated core.
     box('cyan', 0, .75, -d / 2 - .35, w + 1, .17, .23, 0);
     if (b.kind === 'core' || b.kind === 'hall' || b.kind === 'starport') {
@@ -258,15 +281,120 @@ export class CityRenderer implements CityRendererAPI {
     }
   }
 
-  private roof(box: (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string) => void, w: number, d: number, y: number, floor: number, magnitude: number, simple = false) {
+  private roof(box: LocalBox, w: number, d: number, y: number, floor: number, magnitude: number, simple = false) {
     const overhang = Math.max(2, Math.min(6, w * .12)), rise = Math.max(2.2, Math.min(8, w * .15)) * magnitude;
     box('wood', 0, y + .12, 0, w + overhang * 1.3, .35, d + overhang * 1.3, floor, true);
-    const levels = simple ? 3 : 5;
-    for (let step = 0; step < levels; step++) { const fraction = step / levels; box('roof', 0, y + .6 + fraction * rise, 0, (w + overhang * 2) * (1 - fraction * .78), .72, (d + overhang * 2) * (1 - fraction * .76), floor, true, step % 2 ? '#467a68' : '#386858'); }
+    const levels = simple ? 4 : Math.max(6, Math.ceil(rise / .4));
+    for (let step = 0; step < levels; step++) { const fraction = step / levels; box('roof', 0, y + .4 + fraction * rise, 0, (w + overhang * 2) * (1 - fraction * .78), rise / levels + .2, (d + overhang * 2) * (1 - fraction * .76), floor, true, step % 3 ? '#395f5b' : '#416a61'); }
     box('roof', 0, y + rise + .8, 0, Math.max(3, w * .4), .6, Math.max(1, d * .13), floor, true);
     box('amber', 0, y + .2, d / 2 + overhang * .8, w + overhang, .12, .16, floor, true);
     // Stepped rising corners create a readable flying-eave silhouette.
     for (const sx of [-1, 1]) for (const sz of [-1, 1]) for (let i = simple ? 2 : 0; i < 3; i++) box('roof', sx * (w / 2 + overhang * (.45 + i * .2)), y + .7 + i * .43, sz * (d / 2 + overhang * (.45 + i * .2)), overhang * .55, .58, overhang * .55, floor, true);
+    if (!simple) {
+      // Individual tiled ribs and paired bracket arms read at walking distance.
+      for (let x = -w / 2; x <= w / 2; x += Math.max(2, w / 18)) box('roof', x, y + .7, d / 2 + overhang * .7, .2, .2, overhang * .8, floor, true, '#769080');
+      for (const x of [-w * .4, -w * .2, 0, w * .2, w * .4]) for (const z of [-d / 2, d / 2]) { box('wood', x, y - .45, z, 1.2, .4, 1.8, floor, true); box('wood', x, y - .15, z, 2, .2, 2.4, floor, true); }
+    }
+  }
+
+  /** Roof profiles are tied to the building's actual program. Structural slabs,
+   * walls, entries, stairs and floor footprints remain the authoritative ones. */
+  private programRoof(b: Building, box: LocalBox, w: number, d: number, y: number, floor: number, magnitude: number, far: boolean) {
+    const shifted = (ox: number, oz: number): LocalBox => (key, x, yy, z, sx, sy, sz, f, r, color) => box(key, x + ox, yy, z + oz, sx, sy, sz, f, r, color);
+    const gable = (ox: number, width: number, depth: number, rise: number, color = '#53645b') => {
+      const levels = far ? 4 : Math.max(6, Math.ceil(rise / .4));
+      box('wood', ox, y + .2, 0, width + 2.4, .4, depth + 2.4, floor, true);
+      for (let step = 0; step < levels; step++) box('roof', ox, y + .4 + step * rise / levels, 0, width + 3 - step / levels * width, rise / levels + .2, depth + 3, floor, true, color);
+      box('wood', ox, y + rise + .5, 0, .6, .6, depth + 4, floor, true);
+      for (const z of [-depth / 2 - 1.4, depth / 2 + 1.4]) box('roof', ox, y + rise + .8, z, .8, .4, 2, floor, true, color);
+    };
+    if (b.kind === 'workshop' && b.districtId !== 'core') {
+      const bays = far ? 3 : Math.max(3, Math.round(w / 13));
+      for (let bay = 0; bay < bays; bay++) { const width = w / bays, x = -w / 2 + width * (bay + .5); gable(x, width - 1, d, 2.2 * magnitude, '#5e6d64'); box('glass', x + width * .23, y + 1.5, 0, 1.4, .8, d * .7, floor, true); }
+    } else if (b.kind === 'home' || b.kind === 'farm') {
+      // Terraced family houses and tall apartment blocks share pitched tiles,
+      // while the number of ridges changes with the real residential footprint.
+      const bays = b.kind === 'farm' ? 1 : w > 35 ? 2 : 1;
+      for (let bay = 0; bay < bays; bay++) gable((bay - (bays - 1) / 2) * w / bays, w / bays - .8, d, Math.min(4.8, w / bays * .17) * magnitude, b.seed % 3 === 0 ? '#605b51' : '#4f6660');
+    } else if (b.kind === 'market') {
+      gable(0, w * .66, d, 3.2 * magnitude, '#775a47');
+      for (const side of [-1, 1]) box('roof', side * w * .4, y + .5, 0, w * .22, .6, d + 3, floor, true, '#766754');
+    } else if (b.kind === 'bank' || b.kind === 'clinic') {
+      box('stone', 0, y + .3, 0, w + 1.6, .6, d + 1.6, floor, true, b.kind === 'bank' ? '#859d99' : '#a6b8a7');
+      for (const side of [-1, 1]) box('wood', side * w * .4, y + 1.8, 0, .6, 3, d * .78, floor, true);
+      box('glass', 0, y + 1.8, 0, w * .64, .4, d * .65, floor, true);
+      if (b.kind === 'bank') this.roof(shifted(0, -d * .15), w * .42, d * .4, y + 3, floor, .6, far);
+      else for (const side of [-1, 1]) box('roof', side * w * .33, y + .8, d * .25, w * .22, .8, d * .25, floor, true, '#72906c');
+    } else if (b.kind === 'station' || b.kind === 'airport') {
+      for (let bay = 0; bay < 3; bay++) this.roof(shifted((bay - 1) * w * .32, 0), w * .3, d, y + Math.abs(bay - 1) * .6, floor, .45 * magnitude, far);
+      box('glass', 0, y + 1.5, 0, w * .13, .8, d * .8, floor, true);
+    } else if (b.kind === 'dock') {
+      gable(0, w, d * .7, 2 * magnitude, '#526860');
+    } else {
+      this.roof(box, w, d, y, floor, magnitude, far);
+    }
+  }
+
+  private programExterior(b: Building, box: LocalBox, far: boolean) {
+    const w = b.width, d = b.depth, h = b.height, fh = h / b.floors;
+    const top = b.floors - 1;
+    if (b.kind === 'home') {
+      for (let floor = far ? 2 : 1; floor < b.floors; floor += far ? 4 : 2) {
+        const y = floor * fh;
+        for (const side of [-1, 1]) {
+          box('wood', side * w * .28, y + .2, d / 2 + 1, w * .28, .4, 2.4, floor);
+          box('wood', side * w * .28, y + 1.2, d / 2 + 2.1, w * .28, .2, .2, floor);
+          if (!far) for (let rail = 0; rail < 5; rail++) box('wood', side * w * .28 + (rail - 2) * w * .05, y + .7, d / 2 + 2.1, .2, 1, .2, floor);
+          box('roof', side * w * .4, y + .7, d / 2 + 1.8, 1.6, .8, .6, floor, false, '#75916b');
+        }
+      }
+      if (!far) { box('stone', -w * .3, .3, d / 2 + 5, w * .22, .6, 7, 0); box('wood', -w * .41, 1.2, d / 2 + 5, .2, 1.6, 6, 0); box('wood', -w * .19, 1.2, d / 2 + 5, .2, 1.6, 6, 0); }
+    } else if (b.kind === 'market') {
+      // Public doorway stays clear between the two usable shopfront bays.
+      for (const side of [-1, 1]) {
+        box('roof', side * w * .3, 3.5, d / 2 + 2, w * .3, .4, 5.6, 0, false, '#987649');
+        box('wood', side * w * .3, 1, d / 2 + 1.2, w * .25, 1.8, 1.6, 0);
+        for (const xx of [-.12, .12]) box('wood', side * w * .3 + xx * w, 1.8, d / 2 + 4.4, .4, 3.6, .4, 0);
+        if (!far) for (let crate = 0; crate < 4; crate++) box(crate % 2 ? 'red' : 'roof', side * w * .3 + (crate - 1.5) * 1.3, 2.1, d / 2 + 1.4, 1, .4, .8, 0, false, crate % 2 ? '#b77851' : '#8b9c67');
+        box('amber', side * w * .3, 4.4, d / 2 + .6, w * .22, .8, .2, 0);
+      }
+    } else if (b.kind === 'workshop' && b.districtId !== 'core') {
+      for (const side of [-1, 1]) { box('stone', side * w * .36, h + 3, -d * .25, 2.8, 8, 2.8, top, true, '#7b8580'); box('wood', side * w * .36, h + 7.2, -d * .25, 3.6, .8, 3.6, top, true); }
+      for (let column = 0; column < 5; column++) box('wood', (column - 2) * w * .19, h * .5, d / 2 + .4, .6, h, .8, 0);
+      if (!far) { box('stone', -w * .36, 1.8, d / 2 + 3, w * .2, 3.6, 4, 0); for (let crate = 0; crate < 4; crate++) box('wood', -w * .4 + crate * 1.4, .8, d / 2 + 6, 1.2, 1.6, 1.2, 0); }
+    } else if (b.kind === 'bank') {
+      for (const side of [-1, 1]) for (let column = 0; column < (far ? 2 : 4); column++) box('stone', side * (w * .22 + column * w * .065), h * .5, d / 2 + .7, .8, h, 1.2, 0, false, '#6c827d');
+      box('glass', 0, h * .58, d / 2 + .4, w * .32, h * .7, .2, 0);
+      box('cyan', 0, h * .65, d / 2 + .7, w * .25, .4, .2, 0);
+      for (const side of [-1, 1]) box('stone', side * w * .32, 2.8, d / 2 + 2, 1.2, 5.6, 1.2, 0);
+    } else if (b.kind === 'hall' || b.kind === 'school' || b.kind === 'police') {
+      const ceremonial = b.kind === 'hall', columns = far ? 4 : ceremonial ? 8 : 6;
+      for (let i = 0; i < columns; i++) { const x = -w * .42 + i * w * .84 / (columns - 1); box('wood', x, fh * .65, d / 2 + 2.6, ceremonial ? 1.2 : .8, fh * 1.3, ceremonial ? 1.2 : .8, 0); box('stone', x, .4, d / 2 + 2.6, 1.6, .8, 1.6, 0); }
+      this.roof((key, x, y, z, sx, sy, sz, f, r, color) => box(key, x, y, z + d / 2 + 1.8, sx, sy, sz, f, r, color), w * .9, 5, fh * 1.3, 0, .35, far);
+      if (!far) { for (const side of [-1, 1]) box('stone', side * w * .41, 1.4, d / 2 + 6.6, w * .16, 2.8, .6, 0); box('amber', 0, fh * .94, d / 2 + .5, w * .22, 1.2, .2, 0); }
+      if (b.kind === 'school') for (const side of [-1, 1]) box('wood', side * w * .35, h * .5, d / 2 + .4, 1, h, 1, 0);
+      if (b.kind === 'police') { box('stone', w * .36, h + 3, -d * .25, 4, 6, 4, top, true); box('cyan', w * .36, h + 6.4, -d * .25, 1.2, .8, 1.2, top, true); }
+    } else if (b.kind === 'station' || b.kind === 'airport') {
+      for (const side of [-1, 1]) { box('glass', side * w * .28, fh * .6, d / 2 + .3, w * .32, fh * .8, .2, 0); box('cyan', side * w * .28, 3.8, d / 2 + .7, w * .3, .4, .2, 0); }
+      if (!far) { for (const side of [-1, 1]) box('wood', side * w * .33, .8, d / 2 + 3.4, w * .17, .4, .8, 0); }
+    } else if (b.kind === 'dock') {
+      box('wood', 0, -.3, 0, w + 3, .6, d + 3, 0);
+      for (const side of [-1, 1]) for (const z of [-d * .4, 0, d * .4]) box('wood', side * w * .43, -3, z, .8, 6, .8, 0);
+      for (const side of [-1, 1]) { box('wood', side * w * .48, 1.1, 0, .2, .2, d, 0); if (!far) for (let n = 0; n < 7; n++) box('wood', side * w * .48, .6, (n - 3) * d / 7, .2, 1.2, .2, 0); }
+    } else if (b.kind === 'clinic') {
+      for (let floor = 1; floor < b.floors; floor += far ? 3 : 1) { box('stone', 0, floor * fh + .1, d / 2 + .5, w, .6, 1, floor, false, '#d0d8c7'); box('glass', 0, floor * fh + fh * .55, d / 2 + .3, w * .78, .8, .2, floor); }
+      box('red', w * .31, fh * .75, d / 2 + .7, 1.8, .6, .2, 0); box('red', w * .31, fh * .75, d / 2 + .7, .6, 1.8, .2, 0);
+    } else if (b.kind === 'core') {
+      // Five real six-storey volumes are expressed as stone podiums and open
+      // flying-eave galleries, rather than thirty identical roof stripes.
+      for (let first = 0; first < b.floors; first += 6) {
+        const dimension = getFloorDimensions(b, first), yy = first * fh;
+        for (const column of [-.42, -.28, -.14, .14, .28, .42]) { box('wood', column * dimension.width, yy + fh * 2.8, dimension.depth / 2 + 1.2, 2.4, fh * 5.6, 2.4, first, false, '#796043'); box('stone', column * dimension.width, yy + .7, dimension.depth / 2 + 1.2, 3.8, 1.4, 3.8, first, false, '#b4b39c'); }
+        box('stone', 0, yy + .4, 0, dimension.width + 2, .8, dimension.depth + 2, first);
+        box('amber', 0, yy + fh * 5.72, dimension.depth / 2 + 1.7, dimension.width + 3, .4, .4, first);
+        if (!far) for (let floor = first; floor < Math.min(first + 6, b.floors); floor++) { const y = floor * fh; for (const side of [-1, 1]) box('glass', side * dimension.width * .23, y + fh * .52, dimension.depth / 2 + .29, dimension.width * .36, fh * .38, .18, floor, false, '#667e75'); }
+      }
+    }
   }
 
   private buildNetwork() {
@@ -278,17 +406,34 @@ export class CityRenderer implements CityRendererAPI {
         const a = edge.points[i - 1], b = edge.points[i];
         if (edge.mode === 'ferry') continue;
         if (edge.mode === 'cable') { batch.segment('wood', a, b, .45, .45, 9); batch.segment('cyan', a, b, .15, .15, 8.5); continue; }
-        if (edge.mode === 'lift') { batch.segment('stone', a, b, 6, 6); batch.segment('cyan', { ...a, x: a.x + 3.2 }, { ...b, x: b.x + 3.2 }, .3, .3); continue; }
+        if (edge.mode === 'lift') {
+          // An open four-post lift cage preserves the real central travel axis
+          // while allowing the adjacent waterfall to remain visible through it.
+          for (const x of [-2.5, 2.5]) for (const z of [-2.5, 2.5]) batch.segment('stone', { ...a, x: a.x + x, z: a.z + z }, { ...b, x: b.x + x, z: b.z + z }, .6, .6, 0, '#a4b0a2');
+          for (let y = Math.min(a.y, b.y); y <= Math.max(a.y, b.y); y += 12) { for (const x of [-2.5, 2.5]) batch.box('wood', a.x + x, y, a.z, .6, .6, 5.6, '#698780'); for (const z of [-2.5, 2.5]) batch.box('wood', a.x, y, a.z + z, 5.6, .6, .6, '#698780'); }
+          batch.segment('cyan', { ...a, x: a.x + 3.2 }, { ...b, x: b.x + 3.2 }, .3, .3); continue;
+        }
         const rail = edge.mode === 'maglev' || edge.mode === 'lightRail';
-        const width = edge.id === 'road-airport-runway-strip' ? 36 : rail ? 6 : edge.mode === 'bridge' ? 9 : 8;
-        batch.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25);
+        const width = deckWidth(edge);
+        batch.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
         if (rail) { batch.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); batch.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
-        else batch.segment('amber', a, b, .12, .06, .1);
+        else if (edge.mode !== 'bridge') batch.segment('stone', a, b, .16, .08, .07, '#d1c6a1');
+        // Curbs, paving seams and separate shoulders make the travelled deck
+        // legible at body height without widening the shared collision surface.
+        const dx = b.x - a.x, dz = b.z - a.z, horizontal = Math.hypot(dx, dz) || 1, nx = -dz / horizontal, nz = dx / horizontal;
+        for (const side of [-1, 1]) {
+          const offset = guardrailOffset(edge), aa = { x: a.x + nx * offset * side, y: a.y, z: a.z + nz * offset * side }, bb = { x: b.x + nx * offset * side, y: b.y, z: b.z + nz * offset * side };
+          batch.segment('stone', aa, bb, rail ? .35 : .4, rail ? .5 : .2, rail ? -.1 : .12, '#c0c2ac');
+          const elevated = (a.y + b.y) / 2 - terrainHeight(this.world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
+          if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') { const span = guardrailSegment(edge, i); if (span) batch.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771'); }
+        }
+        if (edge.mode === 'road' && !edge.id.includes('runway')) { const middle = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 + .04, z: (a.z + b.z) / 2 }; batch.segment('stone', { ...middle, x: middle.x - nx * 3.5, z: middle.z - nz * 3.5 }, { ...middle, x: middle.x + nx * 3.5, z: middle.z + nz * 3.5 }, .08, .04, 0, '#757e73'); }
         const length = Math.hypot(b.x - a.x, b.z - a.z), interval = rail ? 80 : 70;
         // Spacing spans all samples of the same edge, including the world's 4m rails.
-        for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(this.world, x, z); if (y - ground > 5) batch.box('stone', x, (y + ground) / 2, z, rail ? 3 : 4, Math.max(1, y - ground), rail ? 3 : 4); }
+        for (let along = interval - supportRemainder; along <= length; along += interval) { const t = along / Math.max(.01, length), x = a.x + (b.x - a.x) * t, z = a.z + (b.z - a.z) * t, y = a.y + (b.y - a.y) * t, ground = terrainHeight(this.world, x, z); if (y - ground > 5 && edge.mode !== 'bridge') { const tall = y - ground; batch.box('stone', x, ground + 1, z, rail ? 7 : 8, 2, rail ? 7 : 8, '#939e91'); batch.box('stone', x, ground + tall / 2, z, rail ? 3 : 4, tall, rail ? 3 : 4, '#a0aaa0'); batch.box('stone', x, y - 1.3, z, width + 1, 1.8, 4, '#929d92'); if (tall > 25) for (let tie = ground + 12; tie < y - 5; tie += 16) batch.box('wood', x, tie, z, rail ? 4 : 5, .6, rail ? 4 : 5); } }
         supportRemainder = (supportRemainder + length) % interval;
       }
+      if (edge.mode === 'bridge') this.buildBridge(edge, batch);
     }
     for (const node of this.world.nodes) {
       const p = node.position;
@@ -296,6 +441,35 @@ export class CityRenderer implements CityRendererAPI {
       else if (node.id.includes('junction') || node.id.includes('road')) { batch.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); }
     }
     this.scene.add(batch.build());
+  }
+
+  private buildBridge(edge: NetworkEdge, batch: BoxBatch) {
+    if (edge.points.length < 2) return;
+    const length = edge.points.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - edge.points[i].x, p.z - edge.points[i].z), 0);
+    const arcLength = edge.points.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - edge.points[i].x, p.y - edge.points[i].y, p.z - edge.points[i].z), 0);
+    const samples = Math.max(8, Math.ceil(length / 8));
+    const point = (t: number, side: number, lift: number) => { const p = samplePolyline(edge.points, t), a = samplePolyline(edge.points, Math.max(0, t - .01)), b = samplePolyline(edge.points, Math.min(1, t + .01)), dx = b.x - a.x, dz = b.z - a.z, l = Math.hypot(dx, dz) || 1; return { x: p.x - dz / l * side * 4.1, y: p.y + lift, z: p.z + dx / l * side * 4.1 }; };
+    const suspension = length > 140;
+    for (const side of [-1, 1]) {
+      for (let i = 0; i <= samples; i++) {
+        const t = i / samples, deck = point(t, side, 0);
+        const openEnd = t * arcLength < BRIDGE_OPEN_END || (1 - t) * arcLength < BRIDGE_OPEN_END;
+        if (!openEnd) batch.box('wood', deck.x, deck.y + .55, deck.z, .4, 1.1, .4, '#6c7871');
+        if (suspension) {
+          const lift = t < .16 ? 3 + t / .16 * 27 : t > .84 ? 3 + (1 - t) / .16 * 27 : 30 - 21 * Math.sin((t - .16) / .68 * Math.PI);
+          const cable = point(t, side, lift);
+          if (i) { const previousT = (i - 1) / samples, previousLift = previousT < .16 ? 3 + previousT / .16 * 27 : previousT > .84 ? 3 + (1 - previousT) / .16 * 27 : 30 - 21 * Math.sin((previousT - .16) / .68 * Math.PI); batch.segment('wood', point(previousT, side, previousLift), cable, .5, .5, 0, '#627d7c'); }
+          if (!openEnd) batch.segment('stone', { ...deck, y: deck.y + 1.1 }, cable, .2, .2, 0, '#9eb1a7');
+        }
+      }
+      for (const t of suspension ? [.16, .84] : [0, 1]) {
+        const deck = point(t, side, 0), ground = terrainHeight(this.world, deck.x, deck.z), height = deck.y - ground + (suspension ? 32 : 2.4);
+        batch.box('stone', deck.x, ground + .8, deck.z, 9, 1.6, 9, '#a4aa9b');
+        batch.box('stone', deck.x, ground + height / 2, deck.z, suspension ? 3.6 : 4.8, height, suspension ? 3.6 : 4.8, '#8c9b95');
+        if (suspension) { const across = point(t, -side, 28); batch.segment('stone', { ...deck, y: deck.y + 28 }, across, 1.6, 1.6, 0, '#8b9b95'); this.roof((key, x, y, z, sx, sy, sz) => batch.box(key, deck.x + x, deck.y + y, deck.z + z, sx, sy, sz), 5, 5, 32, 0, .35, true); }
+      }
+    }
+    for (const t of [0, 1]) { const p = samplePolyline(edge.points, t), ground = terrainHeight(this.world, p.x, p.z); batch.box('stone', p.x, (p.y + ground) / 2, p.z, 12, Math.max(1, p.y - ground), 10, '#a2a88f'); }
   }
 
   private buildGateways() {
@@ -357,7 +531,8 @@ export class CityRenderer implements CityRendererAPI {
       const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, fog: true })); sprite.visible = false; this.scene.add(sprite); return sprite;
     };
-    for (const building of this.world.buildings.filter(b => b.districtId === 'core')) {
+    const signed = new Set<string>();
+    for (const building of this.world.buildings.filter(b => { if (b.districtId === 'core') return true; if (b.kind === 'home' || b.kind === 'farm') return false; const key = `${b.districtId}:${b.kind}`; if (signed.has(key)) return false; signed.add(key); return true; })) {
       const sprite = make(building.name); if (sprite) { sprite.position.set(building.door.x, building.position.y + Math.min(5.2, building.height / building.floors * .8), building.door.z + .8); sprite.scale.set(Math.min(18, Math.max(8, building.width * .35)), 2.4, 1); this.labels.push({ building, sprite }); }
       if (building.kind === 'core') {
         const uses = building.floorUses;
@@ -381,12 +556,14 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   update(state: SimState, elapsed: number) {
+    this.landscape.update(this.camera.position, this.quality);
+    this.architectureDetail.update(this.camera.position, { buildingId: this.insideId, floor: this.insideFloor }, this.quality);
     for (const material of this.landscape.water) if (material.uniforms.time) material.uniforms.time.value = elapsed;
     const angle = (state.hour - 6) / 24 * Math.PI * 2, altitude = Math.sin(angle), daylight = THREE.MathUtils.smoothstep(altitude, -.12, .28), twilight = Math.max(0, 1 - Math.abs(altitude) * 4);
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
     this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, -900); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
-    this.sun.intensity = daylight * 2.8; this.moon.intensity = (1 - daylight) * .82; this.fill.intensity = .94 + daylight * 1.05;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#b1d5cf'), daylight); this.fill.groundColor.set('#243c3b').lerp(new THREE.Color('#5e6850'), daylight);
+    this.sun.intensity = daylight * 2.8; this.moon.intensity = (1 - daylight) * .82; this.fill.intensity = 1.15 + daylight * 1.85;
+    this.fill.color.set('#89aec3').lerp(new THREE.Color('#c1d9d0'), daylight); this.fill.groundColor.set('#344d4b').lerp(new THREE.Color('#839078'), daylight);
     const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#b9cec4'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
     const top = new THREE.Color('#071822').lerp(new THREE.Color('#739fb1'), daylight);
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
@@ -406,16 +583,18 @@ export class CityRenderer implements CityRendererAPI {
       this.put(this.signalGreen, signalIndex, p.x + 12, p.y + 3.15, p.z + 11.4, 1, 1, 1, 0, phase === 1 ? '#7ff0bd' : '#0a2018'); signalIndex++;
     }
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.needsUpdate = true; if (signal.instanceColor) signal.instanceColor.needsUpdate = true; }
-    for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id : this.insideId === label.building.id && this.insideFloor === label.floor;
+    const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
+    for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
     for (const chunk of this.chunks) { const dist = Math.hypot(chunk.center.x - this.camera.position.x, chunk.center.z - this.camera.position.z, (chunk.center.y - this.camera.position.y) * .6); const visible = dist < this.distance + chunk.radius; const near = dist < (this.quality === 'high' ? 1500 : this.quality === 'low' ? 650 : 1050) + chunk.radius * .35 || (this.insideId !== null && this.world.buildings.find(b => b.id === this.insideId)?.districtId === this.world.districts[this.chunks.indexOf(chunk)]?.id); chunk.detail.visible = visible && near; chunk.distant.visible = visible && !near; }
     let npcCount = 0;
     for (const citizen of state.citizens) {
       if (citizen.tier === 'statistical' || npcCount >= this.npcPool.capacity) continue;
       const p = citizen.position, dist = Math.hypot(p.x - this.camera.position.x, p.z - this.camera.position.z); if (dist > Math.min(this.distance, this.quality === 'low' ? 1000 : 1900)) continue;
       const color = citizen.role.includes('police') || citizen.role.includes('警') ? '#657f92' : citizen.role.includes('merchant') || citizen.role.includes('商') ? '#be8454' : citizen.role.includes('teacher') || citizen.role.includes('师') ? '#7c9a81' : '#b59169';
-      this.put(this.npcPool.body, npcCount, p.x, p.y + 1.1, p.z, .65, 1.15, .43, 0, color);
-      this.put(this.npcPool.head, npcCount, p.x, p.y + 1.88, p.z, .53, .5, .53, 0, '#d8b68b');
-      this.put(this.npcPool.trim, npcCount, p.x, p.y + .4, p.z, .55, .65, .4, 0, '#4e5c59'); npcCount++;
+      const age = state.extension?.actorProfiles[citizen.id]?.age ?? 30, stature = age < 4 ? .32 : age < 12 ? .65 : age < 18 ? .86 : 1;
+      this.put(this.npcPool.body, npcCount, p.x, p.y + 1.1 * stature, p.z, .65 * stature, 1.15 * stature, .43 * stature, 0, color);
+      this.put(this.npcPool.head, npcCount, p.x, p.y + 1.88 * stature, p.z, .53 * stature, .5 * stature, .53 * stature, 0, '#d8b68b');
+      this.put(this.npcPool.trim, npcCount, p.x, p.y + .4 * stature, p.z, .55 * stature, .65 * stature, .4 * stature, 0, '#4e5c59'); npcCount++;
     }
     for (const mesh of [this.npcPool.body, this.npcPool.head, this.npcPool.trim]) { mesh.count = npcCount; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
     const counts = new Map<string, number>();
@@ -452,6 +631,7 @@ export class CityRenderer implements CityRendererAPI {
   setRenderDistance(distance: number) { this.distance = THREE.MathUtils.clamp(distance, 1400, 11000); this.camera.far = Math.max(15000, this.distance * 1.6); this.camera.updateProjectionMatrix(); }
   setDynamicResolution(enabled: boolean) { this.dynamicResolution = enabled; if (!enabled) { this.resolutionScale = 1; this.resize(); } }
   dispose() {
+    this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     this.scene.traverse(object => { if (object instanceof THREE.Mesh || object instanceof THREE.Points) { geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : [object.material]) { if ('map' in material && material.map instanceof THREE.Texture) material.map.dispose(); materials.add(material); } if (object instanceof THREE.InstancedMesh) object.dispose(); } else if (object instanceof THREE.Sprite) { object.material.map?.dispose(); materials.add(object.material); } });

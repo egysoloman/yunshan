@@ -1,0 +1,25 @@
+
+> yunshan-city@0.1.0 test:browser
+> node scripts/browser-test.mjs
+
+PASS world boots in first person with real city aircraft and live simulation
+PASS native button keyboard activation remains accessible
+PASS manual time and paused simulation with day/night rendering
+PASS actual keyboard first-person movement
+PASS enter actual building and transact against real stock and balance
+PASS browser save/load restores state
+PASS municipal permissions, genuine basement and upper-floor save restoration
+PASS actual keyboard driving advances the vehicle and carries the player
+PASS military identity, actual keyboard VTOL flight, passenger position, safe return and exit
+page.waitForFunction: Timeout 60000ms exceeded.
+    at /workspace/yunshan/scripts/browser-test.mjs:264:14 {
+  log: [],
+  name: 'TimeoutError'
+}
+  ➜  Local:   http://127.0.0.1:4173/
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

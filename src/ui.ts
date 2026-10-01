@@ -1,4 +1,6 @@
-import type { Building, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
+import { getAviationPads } from './aviation';
+import { civicSite, publicFloor } from './simulation/culture';
+import type { AerialVehicle, Building, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -25,7 +27,7 @@ const relationshipTitle = (rel: Relationship): string => {
 const districtKind = (value: string) => districtKinds[value] ?? value;
 const itemName = (value: string) => value.startsWith('ingredient:') ? ingredientNames[value.slice(11)] ?? value : value.startsWith('dish:') ? recipes[value.slice(5)]?.name ?? value : inventoryNames[value] ?? value;
 type Pane = keyof typeof paneNames;
-type ContextKind = 'building' | 'citizen' | 'vehicle';
+type ContextKind = 'building' | 'citizen' | 'vehicle' | 'aircraft';
 const money = (n: number) => `${(Math.trunc(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} 云币`;
 const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleString('zh-CN');
 const clock = (hour: number) => `${String(Math.floor(hour) % 24).padStart(2, '0')}:${String(Math.floor((hour % 1) * 60)).padStart(2, '0')}`;
@@ -90,11 +92,11 @@ export class CityUI {
         <div class="city-brand"><span class="brand-seal" aria-hidden="true">云</span><div><h1>云山巨城</h1><p>一座山水之间的未来之城</p></div><span class="brand-rule" aria-hidden="true"></span><span class="brand-caption">山河入城<br>万家灯火</span></div>
         <div class="world-status"><span class="live-marker"><i></i> LIVE</span><span data-ref="day">初抵云山</span><strong data-ref="clock">—</strong><span data-ref="weather"></span><button type="button" class="icon-button" data-action="help" aria-label="展开操作说明" title="操作说明">?</button><button type="button" class="panel-toggle" data-action="panel" data-testid="panel-toggle" aria-expanded="false" aria-controls="city-panel"><span class="panel-toggle-symbol">☷</span><span>城市手册</span></button></div>
       </header>
-      <div class="welcome-note" data-ref="welcome"><span class="welcome-dot"></span><div><strong>初抵云山，天地皆可游。</strong><span>拖动鼠标环顾 · WASD 漫游 · 选择步行，走入城中生活</span></div><button type="button" class="icon-button" data-action="dismiss-welcome" aria-label="关闭欢迎提示">×</button></div>
+      <div class="welcome-note" data-ref="welcome"><span class="welcome-dot"></span><div><strong>初抵云山，天地皆可游。</strong><span>你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得</span></div><button type="button" class="icon-button" data-action="dismiss-welcome" aria-label="关闭欢迎提示">×</button></div>
       <div class="navigation-strip" data-ref="navigation" hidden><span class="route-dot"></span><div><span class="eyebrow">正在导航</span><strong data-ref="destination"></strong></div><span data-ref="route-distance"></span><button type="button" class="text-button" data-action="transit">查看线路</button></div>
       <div class="aim-point" data-ref="aim" hidden aria-hidden="true"></div>
       <aside class="context-card glass-card" data-ref="context" aria-label="附近交互" hidden><div class="context-tabs" data-ref="context-tabs"></div><div data-ref="context-body"></div></aside>
-      <section class="landscape-label" aria-label="当前地点"><span class="eyebrow"><span class="tiny-diamond">◇</span> <span data-ref="district-kind">山水长卷</span></span><h2 data-ref="district-name">云山巨城</h2><p data-ref="landscape-description">重峦之间，一城灯火。</p><div class="location-meta"><span data-ref="view-mode">无人机</span><span class="meta-separator"></span><span data-ref="coordinates"></span></div></section>
+      <section class="landscape-label" aria-label="当前地点"><span class="eyebrow"><span class="tiny-diamond">◇</span> <span data-ref="district-kind">山水长卷</span></span><h2 data-ref="district-name">云山巨城</h2><p data-ref="landscape-description">重峦之间，一城灯火。</p><div class="location-meta"><span data-ref="view-mode">城中生活</span><span class="meta-separator"></span><span data-ref="coordinates"></span></div></section>
       <aside class="minimap-card glass-card" data-ref="minimap"><div class="mini-heading"><span>山城舆图</span><button type="button" class="text-button" data-action="transit" aria-label="打开城区导航">导航 ↗</button></div><canvas width="420" height="270" class="minimap" data-ref="map" role="img" aria-label="真实城区与交通网络地图，琥珀圆点为玩家，白色标记为镜头位置"></canvas><div class="map-legend"><span><i class="legend-player"></i>旅人</span><span><i class="legend-transit"></i>交通</span><span data-ref="map-tier"></span></div></aside>
       <aside id="city-panel" class="city-panel glass-card" data-ref="panel" hidden aria-label="城市手册"><div class="panel-heading"><div><span class="eyebrow">YUNSHAN · FIELD NOTES</span><h2>城市手册</h2></div><button type="button" class="icon-button" data-action="close-panel" aria-label="收起城市手册">×</button></div><nav class="panel-tabs" role="tablist" aria-label="手册分类"><button id="tab-life" type="button" role="tab" aria-controls="pane-life" data-pane="life" aria-selected="true">生活</button><button id="tab-city" type="button" role="tab" aria-controls="pane-city" data-pane="city" aria-selected="false">城市</button><button id="tab-transit" type="button" role="tab" aria-controls="pane-transit" data-pane="transit" aria-selected="false">交通</button><button id="tab-relations" type="button" role="tab" aria-controls="pane-relations" data-pane="relations" aria-selected="false">人脉</button><button id="tab-settings" type="button" role="tab" aria-controls="pane-settings" data-pane="settings" aria-selected="false">设置</button></nav>
       <div class="panel-scroll">
@@ -102,10 +104,10 @@ export class CityUI {
         <section id="pane-city" role="tabpanel" aria-labelledby="tab-city" data-panel-pane="city" hidden><div class="section-intro"><span class="eyebrow">一城生息</span><h3>万家灯火，各循其序。</h3><p class="note">能源、交通、人物、商业与治理随时间持续运转。以下数值来自当前模拟。</p></div><div class="city-meters" data-ref="city-meters"></div><div class="metric-grid" data-ref="city-metrics"></div><div class="panel-section"><h3>公共治理<span class="section-hint">市长权限 · 延迟生效</span></h3><label class="range-label" for="tax-slider"><span>营业税率</span><output data-ref="tax-label">12%</output></label><input id="tax-slider" type="range" min="0" max="30" step="1" value="12" aria-label="营业税率" data-ref="tax" data-input="tax"><label class="range-label" for="police-slider"><span>治安预算</span><output data-ref="police-label">—</output></label><input id="police-slider" type="range" min="0" max="100" step="5" value="45" aria-label="治安预算" data-ref="police" data-input="police"><button type="button" class="action-button full-width" data-action="policy" data-ref="policy-button">提交市政方案</button><p class="note" data-ref="policy-note"></p></div><div class="panel-section"><h3>城区运行<span data-ref="simulation-tiers" class="section-hint"></span></h3><div data-ref="district-list"></div></div><div class="panel-section"><h3>治安纪事</h3><div data-ref="crime-list"></div></div><div class="panel-section"><h3>模拟顺序</h3><p class="system-order" data-ref="system-order"></p></div></section>
         <section id="pane-transit" role="tabpanel" aria-labelledby="tab-transit" data-panel-pane="transit" hidden><div class="section-intro"><span class="eyebrow">山城血脉</span><h3>沿轨道，越山水。</h3><p class="note">选择城区设置导航目的地。路线标记指引方向；步行、飞行或实际搭乘载具前往。</p></div><div class="transit-summary" data-ref="transit-summary"></div><div class="panel-section"><h3>目的地<span class="section-hint">点击设为导航</span></h3><div class="destination-list" data-ref="destination-list"></div></div><div class="panel-section"><h3>客运与航班<span class="section-hint">实时载具</span></h3><div data-ref="departures"></div></div><div class="panel-section"><h3>当前乘坐</h3><div data-ref="current-vehicle"></div></div><div class="panel-section"><h3>路口调度</h3><p class="note">警察与市长可调整附近路口，交通流会响应。</p><div class="button-grid"><button type="button" class="action-button" data-action="signal" data-value="1">调度附近路口</button><button type="button" class="action-button" data-action="signal" data-value="2">恢复自动调度</button></div></div></section>
         <section id="pane-relations" role="tabpanel" aria-labelledby="tab-relations" data-panel-pane="relations" hidden><div class="section-intro"><span class="eyebrow">城中故人</span><h3>相逢有迹，往事有声。</h3><p class="note">每次交谈、礼物与冲突都留下记忆。接近城中居民，可了解其住处、工作与生活状态。</p></div><div data-ref="partner"></div><div class="relationship-list" data-ref="relationship-list"></div><div data-ref="relationship-detail"></div></section>
-        <section id="pane-settings" role="tabpanel" aria-labelledby="tab-settings" data-panel-pane="settings" hidden><div class="section-intro"><span class="eyebrow">随心游览</span><h3>留住此刻，轻装远行。</h3></div><div class="panel-section"><h3>画面与性能</h3><label class="field-label" for="quality-select">画质档位</label><select id="quality-select" data-testid="quality-select" data-ref="quality" data-input="quality" aria-label="画质档位"><option value="low">轻量 · 节省资源</option><option value="balanced">均衡 · 推荐</option><option value="high">精致 · 更多细节</option></select><label class="range-label" for="distance-slider"><span>渲染距离</span><output data-ref="distance-label">3,600 m</output></label><input id="distance-slider" data-ref="distance" data-input="renderDistance" type="range" min="900" max="6000" step="300" value="3600" aria-label="渲染距离"><label class="field-label" for="fps-select">帧率上限</label><select id="fps-select" data-ref="fps-cap" data-input="fpsCap" aria-label="帧率上限"><option value="30">30 FPS · 省电</option><option value="60">60 FPS · 流畅</option><option value="120">120 FPS</option></select><label class="check-row"><input type="checkbox" data-ref="dynamic" data-input="dynamicResolution" checked><span>动态分辨率</span><small>按帧时调节</small></label><label class="range-label" for="simulation-slider"><span>附近模拟精度</span><output data-ref="simulation-label">100%</output></label><input id="simulation-slider" data-ref="simulation-detail" data-input="simulationDetail" type="range" min="0.5" max="2" step="0.1" value="1" aria-label="附近模拟精度"><div class="performance-readout" data-ref="performance"></div><p class="note">macOS 建议从均衡画质与 60 FPS 开始。较早机型可选择轻量、30 FPS 和动态分辨率。</p></div><div class="panel-section"><h3>存档与旅程</h3><div class="button-grid"><button type="button" class="action-button" data-action="save" data-testid="save">保存进度</button><button type="button" class="action-button" data-action="load" data-testid="load">读取进度</button><button type="button" class="action-button" data-action="export">导出 JSON</button><button type="button" class="action-button" data-action="import">导入 JSON</button></div><input type="file" accept="application/json,.json" data-ref="file" hidden aria-label="选择本地存档文件"><p class="note">存档保存在本机浏览器；导入与导出使用本地 JSON 文件。</p><button type="button" class="action-button full-width" data-action="reset">回到山城全景</button></div><div class="panel-section"><h3>操作说明</h3><div class="control-guide"><span>W A S D</span><p>移动 / 漫游</p><span>鼠标拖动</span><p>环顾 · 双击进入鼠标锁定</p><span>Shift</span><p>加速</p><span>R / Q</span><p>飞行升高 / 降低</p><span>E</span><p>进出建筑 / 使用楼梯 / 交互</p><span>V</span><p>切换视角</p><span>Esc</span><p>释放鼠标</p></div></div></section>
+        <section id="pane-settings" role="tabpanel" aria-labelledby="tab-settings" data-panel-pane="settings" hidden><div class="section-intro"><span class="eyebrow">随心游览</span><h3>留住此刻，轻装远行。</h3></div><div class="panel-section"><h3>画面与性能</h3><label class="field-label" for="quality-select">画质档位</label><select id="quality-select" data-testid="quality-select" data-ref="quality" data-input="quality" aria-label="画质档位"><option value="low">轻量 · 节省资源</option><option value="balanced">均衡 · 推荐</option><option value="high">精致 · 更多细节</option></select><label class="range-label" for="distance-slider"><span>渲染距离</span><output data-ref="distance-label">3,600 m</output></label><input id="distance-slider" data-ref="distance" data-input="renderDistance" type="range" min="900" max="6000" step="300" value="3600" aria-label="渲染距离"><label class="field-label" for="fps-select">帧率上限</label><select id="fps-select" data-ref="fps-cap" data-input="fpsCap" aria-label="帧率上限"><option value="30">30 FPS · 省电</option><option value="60">60 FPS · 流畅</option><option value="120">120 FPS</option></select><label class="check-row"><input type="checkbox" data-ref="dynamic" data-input="dynamicResolution" checked><span>动态分辨率</span><small>按帧时调节</small></label><label class="range-label" for="simulation-slider"><span>附近模拟精度</span><output data-ref="simulation-label">100%</output></label><input id="simulation-slider" data-ref="simulation-detail" data-input="simulationDetail" type="range" min="0.5" max="2" step="0.1" value="1" aria-label="附近模拟精度"><div class="performance-readout" data-ref="performance"></div><p class="note">macOS 建议从均衡画质与 60 FPS 开始。较早机型可选择轻量、30 FPS 和动态分辨率。</p></div><div class="panel-section"><h3>存档与旅程</h3><div class="button-grid"><button type="button" class="action-button" data-action="save" data-testid="save">保存进度</button><button type="button" class="action-button" data-action="load" data-testid="load">读取进度</button><button type="button" class="action-button" data-action="export">导出 JSON</button><button type="button" class="action-button" data-action="import">导入 JSON</button></div><input type="file" accept="application/json,.json" data-ref="file" hidden aria-label="选择本地存档文件"><p class="note">存档保存在本机浏览器；导入与导出使用本地 JSON 文件。</p><button type="button" class="action-button full-width" data-action="reset">调整当前视线</button></div><div class="panel-section"><h3>操作说明</h3><div class="control-guide"><span>W A S D</span><p>移动 / 漫游</p><span>鼠标拖动</span><p>环顾 · 双击进入鼠标锁定</p><span>Shift</span><p>加速</p><span>R / Q</span><p>飞行升高 / 降低</p><span>E</span><p>进出建筑 / 使用楼梯 / 交互</p><span>V</span><p>找无人机 / 返航</p><span>Esc</span><p>释放鼠标</p></div></div></section>
       </div></aside>
-      <div class="help-popover glass-card" data-ref="help" hidden><div class="mini-heading"><strong>随心入城</strong><button type="button" class="icon-button" data-action="help" aria-label="收起操作说明">×</button></div><div class="control-guide"><span>W A S D</span><p>自由移动</p><span>鼠标拖动</span><p>环顾 · 双击锁定</p><span>Shift</span><p>加速</p><span>R / Q</span><p>飞行升高 / 降低</p><span>E</span><p>建筑、楼梯与附近交互</p><span>V</span><p>切换视角</p><span>Esc</span><p>释放鼠标</p></div><p class="note">在步行视角接近入口，可进入建筑；书院学习、钱庄业务与职业考核均需到场。</p></div>
-      <footer class="exploration-dock glass-card" aria-label="游览与时间控制"><div class="view-controls" role="group" aria-label="游览视角"><button type="button" data-action="mode" data-mode="drone" data-testid="mode-drone" aria-pressed="true"><span class="mode-symbol" aria-hidden="true">◇</span>无人机</button><button type="button" data-action="mode" data-mode="walk" data-testid="mode-walk" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">人</span>步行</button><button type="button" data-action="mode" data-mode="jet" data-testid="mode-jet" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">↗</span>飞行</button></div><span class="dock-divider"></span><div class="time-controls"><button type="button" class="pause-button" data-action="pause" data-testid="pause-toggle" aria-label="暂停时间" aria-pressed="false" data-ref="pause">Ⅱ</button><div class="time-range"><div class="time-range-label"><span>昼夜流转</span><output data-ref="time-label">—</output></div><input type="range" min="0" max="23.99" step="0.01" value="8" data-ref="time" data-input="time" data-testid="time-slider" aria-label="一天中的时刻"><div class="sun-marks" aria-hidden="true"><span>子夜</span><span>晨</span><span>午</span><span>暮</span><span>夜</span></div></div><select aria-label="模拟时间速度" class="speed-select" data-input="speed" data-ref="speed"><option value="1">1×</option><option value="3">3×</option><option value="10">10×</option><option value="16">16×</option></select></div></footer>
+      <div class="help-popover glass-card" data-ref="help" hidden><div class="mini-heading"><strong>随心入城</strong><button type="button" class="icon-button" data-action="help" aria-label="收起操作说明">×</button></div><div class="control-guide"><span>W A S D</span><p>自由移动</p><span>鼠标拖动</span><p>环顾 · 双击锁定</p><span>Shift</span><p>加速</p><span>R / Q</span><p>飞行升高 / 降低</p><span>E</span><p>建筑、楼梯与附近交互</p><span>V</span><p>找无人机 / 返航</p><span>Esc</span><p>释放鼠标</p></div><p class="note">在步行视角接近入口，可进入建筑；书院学习、钱庄业务与职业考核均需到场。</p></div>
+      <footer class="exploration-dock glass-card" aria-label="游览与时间控制"><div class="view-controls" role="group" aria-label="城市移动与航空器"><button type="button" data-action="mode" data-mode="drone" data-testid="mode-drone" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">◇</span>找无人机</button><button type="button" data-action="mode" data-mode="walk" data-testid="mode-walk" aria-pressed="true"><span class="mode-symbol" aria-hidden="true">人</span>步行</button><button type="button" data-action="mode" data-mode="jet" data-testid="mode-jet" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">↗</span>去机场</button></div><span class="dock-divider"></span><div class="time-controls"><button type="button" class="pause-button" data-action="pause" data-testid="pause-toggle" aria-label="暂停时间" aria-pressed="false" data-ref="pause">Ⅱ</button><div class="time-range"><div class="time-range-label"><span>昼夜流转</span><output data-ref="time-label">—</output></div><input type="range" min="0" max="23.99" step="0.01" value="8" data-ref="time" data-input="time" data-testid="time-slider" aria-label="一天中的时刻"><div class="sun-marks" aria-hidden="true"><span>子夜</span><span>晨</span><span>午</span><span>暮</span><span>夜</span></div></div><select aria-label="模拟时间速度" class="speed-select" data-input="speed" data-ref="speed"><option value="1">1×</option><option value="3">3×</option><option value="10">10×</option><option value="16">16×</option></select></div></footer>
       <div class="toast" data-ref="toast" role="status" aria-live="polite" hidden></div>
       <div class="render-stats" data-ref="render-stats" aria-label="性能数据"></div>`;
     this.addExtensionSections();
@@ -151,6 +153,18 @@ export class CityUI {
     const organizations = element('div', 'panel-section');
     organizations.innerHTML = `<h3>社区与组织</h3><div data-ref="organization-list"></div><div class="button-grid" data-ref="culture-actions"></div>`;
     this.root.querySelector('#pane-relations')!.append(organizations);
+    const aviation = element('div', 'panel-section');
+    aviation.innerHTML = '<h3>航空器与停机位</h3><div data-ref="aviation-list"></div>';
+    this.root.querySelector('#pane-transit')!.append(aviation);
+    const family = element('div', 'panel-section');
+    family.innerHTML = '<h3>家庭与下一代</h3><div data-ref="family-life"></div>';
+    this.root.querySelector('#pane-life')!.append(family);
+    const culture = element('div', 'panel-section');
+    culture.innerHTML = `<h3>作品与见闻</h3><div data-ref="culture-job"></div><div data-cultural-form><label class="field-label" for="work-kind">创作形式</label><select id="work-kind" data-ref="work-kind"><option value="literature">文学 · 120 分钟</option><option value="art">绘画 · 180 分钟</option></select><label class="field-label" for="work-title">作品标题</label><input id="work-title" data-ref="work-title" type="text" maxlength="40" placeholder="为作品起一个名字"><label class="field-label" for="work-text">作品内容</label><textarea id="work-text" data-ref="work-text" minlength="20" maxlength="1200" placeholder="至少 20 字，记录山城里的故事与景物"></textarea><button type="button" class="action-button full-width" data-action="create-work" data-ref="create-work">在此创作 · 60 云币</button><p class="note">在书院或山顶亭实际创作，离开现场会暂停；完成后到市集、亭子或公共议事厅发表。</p></div><div data-ref="culture-works"></div>`;
+    this.root.querySelector('#pane-life')!.append(culture);
+    const information = element('div', 'panel-section');
+    information.innerHTML = `<h3>公共信息与议事</h3><div data-cultural-form><label class="field-label" for="report-kind">信息主题</label><select id="report-kind" data-ref="report-kind"><option value="water">溪水与环境</option><option value="safety">城区治安</option><option value="budget">公共预算</option></select><label class="field-label" for="report-value">记录数值（留空采用现场真实值）</label><input id="report-value" data-ref="report-value" type="number" min="0" max="1000000000000" placeholder="留空采用真实观察"><label class="field-label" for="report-text">见闻记录</label><textarea id="report-text" data-ref="report-text" minlength="20" maxlength="400" placeholder="至少 20 字，记下这次观察"></textarea><button type="button" class="action-button full-width" data-action="publish-report" data-ref="publish-report">公开发布见闻 · 20 云币</button><p class="note">在公共场所发布，预算信息须到公共议事厅；书院或议事厅可核验，更正会保留原有记录。</p></div><div data-ref="culture-reports"></div><div data-cultural-form><label class="field-label" for="petition-topic">公共诉求</label><select id="petition-topic" data-ref="petition-topic"><option value="education">教育与书院</option><option value="health">医疗与健康</option><option value="transport">交通与出行</option></select><label class="field-label" for="petition-title">议事标题</label><input id="petition-title" data-ref="petition-title" type="text" maxlength="40" placeholder="填写简短标题"><label class="field-label" for="petition-text">具体诉求</label><textarea id="petition-text" data-ref="petition-text" minlength="20" maxlength="400" placeholder="至少 20 字，说清地点、问题与希望改变的事"></textarea><button type="button" class="action-button full-width" data-action="file-petition" data-ref="file-petition">在议事厅备案 · 10 云币</button><p class="note">公共议事厅现场备案；一天后收到公开回复，公共支出须受实际预算约束。</p></div><div data-ref="culture-petitions"></div>`;
+    this.root.querySelector('#pane-city')!.append(information);
   }
   private setText(name: string, value: string): void { const node = this.ref(name); if (node.textContent !== value) node.textContent = value; }
   private setInput(name: string, value: string): void { const node = this.ref<HTMLInputElement | HTMLSelectElement>(name); if (document.activeElement !== node && node.value !== value) node.value = value; }
@@ -163,7 +177,7 @@ export class CityUI {
     const workplaces: Record<string, BuildingKind[]> = { traveler: ['market', 'workshop', 'farm', 'dock'], police: ['police'], soldier: ['police', 'starport'], teacher: ['school'], driver: ['station', 'airport', 'starport', 'dock'], merchant: ['market', 'workshop', 'farm'], mayor: ['hall', 'core'], scientist: ['school', 'core', 'workshop'], official: ['hall', 'core'], council: ['hall', 'core'] };
     return Object.entries(workplaces).some(([role, kinds]) => this.hasRole(role) && kinds.includes(kind));
   }
-  private canAct(): boolean { return this.view?.mode === 'walk' && this.state?.extension?.actorProfiles.player?.alive !== false; }
+  private canAct(): boolean { return this.view?.mode === 'walk' && !this.state?.aviation?.activeAircraftId && this.state?.extension?.actorProfiles.player?.alive !== false; }
   private atBuilding(id: string): boolean {
     if (!this.canAct() || !this.state) return false;
     const building = this.world.buildings.find(b => b.id === id);
@@ -234,6 +248,7 @@ export class CityUI {
     const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
     if (!button || button.disabled) return;
     if (button.dataset.pane) { this.setPane(button.dataset.pane as Pane); return; }
+    if (button.dataset.aircraftNav) { this.actions.navigateAircraft?.(button.dataset.aircraftNav); return; }
     if (button.dataset.context) { this.contextKind = button.dataset.context as ContextKind; this.contextSignature = ''; this.refreshContext(); return; }
     if (button.dataset.citizen) { this.selectedCitizen = button.dataset.citizen; this.refreshPanel(); return; }
     if (button.dataset.company) { this.selectedCompany = button.dataset.company; this.refreshPanel(); return; }
@@ -271,11 +286,19 @@ export class CityUI {
       case 'city': this.setPanel(true, 'city'); break;
       case 'industry': this.setPanel(true, 'industry'); break;
       case 'found-company': this.actions.command({ type: 'foundCompany', targetId: building?.id, value: Number(this.ref<HTMLSelectElement>('company-capital').value) }); break;
+      case 'life': this.setPanel(true, 'life'); break;
+      case 'create-work': this.actions.command({ type: 'createWork', targetId: this.ref<HTMLSelectElement>('work-kind').value, title: this.ref<HTMLInputElement>('work-title').value, text: this.ref<HTMLTextAreaElement>('work-text').value }); break;
+      case 'publish-report': {
+        const value = this.ref<HTMLInputElement>('report-value').value;
+        this.actions.command({ type: 'publishReport', targetId: this.ref<HTMLSelectElement>('report-kind').value, text: this.ref<HTMLTextAreaElement>('report-text').value, ...(value ? { value: Number(value) } : {}) }); break;
+      }
+      case 'file-petition': this.actions.command({ type: 'filePetition', targetId: this.ref<HTMLSelectElement>('petition-topic').value, title: this.ref<HTMLInputElement>('petition-title').value, text: this.ref<HTMLTextAreaElement>('petition-text').value }); break;
       case 'cook': this.actions.command({ type: 'cook', targetId: this.ref<HTMLSelectElement>('recipe').value, value: Number(this.ref<HTMLInputElement>('heat').value) }); break;
     }
   };
   private onInput = (event: Event): void => {
     const input = event.target as HTMLInputElement;
+    if (input.closest('[data-cultural-form]')) { this.updateCultureButtons(); return; }
     switch (input.dataset.input) {
       case 'time': this.setText('time-label', clock(Number(input.value))); this.actions.command({ type: 'setTime', value: Number(input.value) }); break;
       case 'tax': this.policyDirty = true; this.setText('tax-label', `${input.value}%`); break;
@@ -287,6 +310,7 @@ export class CityUI {
   };
   private onChange = (event: Event): void => {
     const input = event.target as HTMLInputElement | HTMLSelectElement;
+    if (input.closest('[data-cultural-form]')) { this.updateCultureButtons(); return; }
     switch (input.dataset.input) {
       case 'quality': this.actions.setQuality(input.value as ViewState['quality']); break;
       case 'speed': this.actions.command({ type: 'speed', value: Number(input.value) }); break;
@@ -327,7 +351,7 @@ export class CityUI {
     this.setText('landscape-description', view.inside ? `已进入 ${view.nearbyBuilding?.name ?? '建筑'} · 使用 E 进出，楼梯处可换层` : this.sceneDescription(district.id, state.hour));
     const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId);
     const driving = (state.player.inventory.driving ?? 0) === 1;
-    this.setText('view-mode', `${vehicle ? `${driving ? '驾驶' : '乘坐'}${modeNames[vehicle.kind]}` : view.mode === 'walk' ? roleNames[state.player.role] : view.mode === 'jet' ? '自由飞行' : '无人机漫游'}${view.inside ? ' · 室内' : ''}`);
+    this.setText('view-mode', `${vehicle ? `${driving ? '驾驶' : '乘坐'}${modeNames[vehicle.kind]}` : view.mode === 'walk' ? roleNames[state.player.role] : view.mode === 'jet' ? '战机机舱' : '观景无人机机舱'}${view.inside ? ' · 室内' : ''}`);
     this.setText('coordinates', `${Math.round(view.position.x)} / ${Math.round(view.position.y)} / ${Math.round(view.position.z)} m`);
     this.ref('aim').hidden = view.mode !== 'walk';
     this.setText('render-stats', `${rounded(view.fps)} FPS · ${rounded(view.drawCalls)} draw`);
@@ -361,8 +385,8 @@ export class CityUI {
     const focusData = focused instanceof HTMLButtonElement && this.ref('panel').contains(focused) ? { ...focused.dataset } : null;
     const focusText = focused?.textContent;
     this.lastPanelRefresh = performance.now();
-    if (this.pane === 'life') this.renderLife();
-    if (this.pane === 'city') this.renderCity();
+    if (this.pane === 'life') { this.renderLife(); this.renderFamily(); this.renderCulture(); }
+    if (this.pane === 'city') { this.renderCity(); this.renderCulture(); }
     if (this.pane === 'industry') this.renderIndustry();
     if (this.pane === 'transit') this.renderTransit();
     if (this.pane === 'relations') this.renderRelationships();
@@ -584,9 +608,96 @@ export class CityUI {
     const meals = Object.entries(recipes).filter(([id]) => (inventory[`dish:${id}`] ?? 0) > 0);
     this.ref('cooking-actions').replaceChildren(...meals.map(([id, recipe]) => commandButton(`享用${recipe.name} · ${inventory[`dish:${id}`]} 份`, 'eat', id, undefined, !this.canAct())));
   }
+  private atCultureBuilding(id: string): boolean {
+    const building = this.world.buildings.find(b => b.id === id);
+    if (!building || !this.state || !this.atBuilding(id)) return false;
+    const level = Math.floor((this.state.player.position.y - building.position.y + .01) / (building.height / Math.max(1, building.floors)));
+    return publicFloor(building, level);
+  }
+  private atCultureSite(...kinds: BuildingKind[]): boolean {
+    return this.world.buildings.some(b => (kinds.includes(b.kind) || kinds.includes('hall') && civicSite(b)) && this.atCultureBuilding(b.id));
+  }
+  private updateCultureButtons(): void {
+    const textReady = (name: string, max: number) => { const n = this.ref<HTMLTextAreaElement>(name).value.trim().length; return n >= 20 && n <= max; };
+    this.ref<HTMLButtonElement>('create-work').disabled = !this.canAct() || !this.atCultureSite('school', 'pavilion') || !this.ref<HTMLInputElement>('work-title').value.trim() || !textReady('work-text', 1200) || (this.state?.player.money ?? 0) < 60 || !!this.state?.culture?.project || (this.state?.player.needs.hunger ?? 0) < 40 || (this.state?.player.needs.fatigue ?? 0) < 40;
+    this.ref<HTMLButtonElement>('publish-report').disabled = !this.canAct() || !this.atCultureSite('market', 'pavilion', 'hall') || !textReady('report-text', 400) || (this.state?.player.money ?? 0) < 20 || this.ref<HTMLSelectElement>('report-kind').value === 'budget' && !this.atCultureSite('hall');
+    this.ref<HTMLButtonElement>('file-petition').disabled = !this.canAct() || !this.atCultureSite('hall') || !this.ref<HTMLInputElement>('petition-title').value.trim() || !textReady('petition-text', 400) || (this.state?.player.money ?? 0) < 10;
+  }
+  private renderCulture(): void {
+    this.updateCultureButtons();
+    const culture = this.state?.culture, state = this.state!;
+    const project = culture?.project;
+    const site = project && this.world.buildings.find(b => b.id === project.siteId);
+    const activity = state.paused ? '时间暂停' : project && this.atCultureBuilding(project.siteId) && state.hour >= 7 && state.hour < 22 && state.player.needs.hunger >= 40 && state.player.needs.fatigue >= 40 ? '现场创作' : '离场、夜间或休息暂停';
+    this.ref('culture-job').replaceChildren(project ? field(`正在创作《${project.title}》`, `${Math.floor(project.workedMinutes)} / ${project.requiredMinutes} 现场分钟 · ${site?.name ?? '创作场所'} · ${activity}`) : element('p', 'note', '当前没有创作项目。作品由实际现场时间完成，居民读完后留下记忆与学习反馈。'));
+    this.ref('culture-works').replaceChildren(...(culture?.works ?? []).map(work => {
+      const card = element('div', 'panel-section');
+      card.append(element('strong', '', `《${work.title}》`), element('p', 'note', `${work.genre === 'literature' ? '文学' : '绘画'} · 品质 ${Math.round(work.quality)} · ${work.publishedAt === null ? '未公开稿件' : `已有 ${work.readIds.length} 位读者`}`), element('p', '', work.text));
+      if (work.publishedAt === null && work.authorId === 'player') card.append(commandButton('现场发表 · 20 云币', 'publishWork', work.id, undefined, !this.canAct() || !this.atCultureSite('market', 'pavilion', 'hall') || state.player.money < 20));
+      else card.append(element('p', 'note', `发表地点：${this.world.buildings.find(b => b.id === work.siteId)?.name ?? '公共场所'}。每位居民需实际在场阅读 15 分钟。`));
+      return card;
+    }));
+    const reportNames = { water: '水质', safety: '治安', budget: '公开公库' }, statusNames = { unchecked: '待核验', verified: '证据一致', false: '已核验不实', corrected: '已更正，旧记录保留' };
+    this.ref('culture-reports').replaceChildren(...(culture?.reports ?? []).map(report => {
+      const card = element('div', 'panel-section');
+      card.append(field(`${reportNames[report.metric]} · ${statusNames[report.status]}`, `主张 ${report.claim.toFixed(2)}`), element('p', '', report.text), element('p', 'note', `原主张 ${report.originalClaim.toFixed(2)} · 发布时公开观测 ${report.evidence.observedValue.toFixed(2)}（Tick ${report.evidence.observedTick}）`), element('p', 'note', `现场读者 ${report.readIds.length} · 传播触达 ${report.reachedIds.length} · 已读更正 ${report.correctionReadIds.length}`));
+      if (report.status === 'unchecked') card.append(commandButton('到书院或大厅核验 · 10 云币', 'verifyReport', report.id, undefined, !this.canAct() || !this.atCultureSite('school', 'hall') || state.player.money < 10));
+      if (report.status === 'false' && report.authorId === 'player') card.append(commandButton('到原发布处或大厅更正 · 5 云币', 'correctReport', report.id, undefined, !this.canAct() || !(this.atCultureBuilding(report.siteId) || this.atCultureSite('hall')) || state.player.money < 5));
+      return card;
+    }));
+    const topicNames = { education: '教育', health: '医疗', transport: '交通' };
+    this.ref('culture-petitions').replaceChildren(...(culture?.petitions ?? []).map(petition => {
+      const card = element('div', 'panel-section');
+      card.append(element('strong', '', petition.title), element('p', '', petition.text), element('p', 'note', `${topicNames[petition.topic]} · ${petition.signerIds.length} 位现场联署 · ${petition.status === 'answered' ? '已公开回复' : `还需 ${Math.max(0, Math.ceil((petition.replyAt - culture!.lastUpdate) / 60))} 小时回复`}`));
+      if (petition.reply) card.append(element('p', '', petition.reply));
+      return card;
+    }));
+  }
+  private aircraftContent(craft: AerialVehicle): HTMLElement {
+    const state = this.state!, active = state.aviation?.activeAircraftId === craft.id;
+    const pad = getAviationPads(this.world).find(p => p.id === craft.homePadId);
+    const near = this.canAct() && spatialDistance(state.player.position, craft.position) <= 6 && !state.player.vehicleId;
+    const body = element('div');
+    const status = craft.charging ? '地面补能中' : craft.status === 'parked' ? '停机坪已停稳' : craft.status === 'landing' ? '自动返航与进近' : '实际飞行中';
+    body.append(element('h3', '', craft.name), element('p', 'context-subtitle', `${status} · 电量 ${Math.round(craft.battery)}% · ${Math.round(craft.speed)} m/s`), element('p', 'note', pad?.name ?? '城市航空器'));
+    const controls = element('div', 'button-grid context-actions');
+    if (active) controls.append(commandButton('返航并安全落地 · E', 'landAircraft', craft.id, undefined, craft.status !== 'flying'), commandButton('退出机舱 · E', 'leaveAircraft', craft.id, undefined, craft.status !== 'parked'));
+    else if (near) {
+      if (craft.kind === 'drone') controls.append(commandButton(craft.reserved ? '结束租约并归还' : '租用 · 24 云币', craft.reserved ? 'returnAircraft' : 'rentAircraft', craft.id, undefined, !craft.reserved && (state.player.money < 24 || craft.charging || craft.battery < 30)));
+      controls.append(commandButton('进入机舱', 'boardAircraft', craft.id, undefined, craft.charging || craft.battery < 30 || craft.kind === 'drone' && !craft.reserved));
+      controls.append(commandButton(`地面补能 · ${Math.ceil((100 - craft.battery) * .16)} 云币`, 'refuelAircraft', craft.id, undefined, craft.charging || craft.battery > 99.9));
+    } else {
+      const nav = element('button', 'action-button full-width', `沿路导航 · ${rounded(spatialDistance(state.player.position, craft.position))} m`);
+      nav.type = 'button'; nav.dataset.aircraftNav = craft.id; nav.disabled = !!state.aviation?.activeAircraftId; controls.append(nav);
+    }
+    body.append(controls, element('p', 'note', craft.kind === 'drone' ? '这是可载人的自动驾驶观景无人机。旅行者现场租用、登机，身体随航空器移动；空中不能退出，返航落地后继续生活。' : '军用垂直起降战机需要累计卫士与驾驶员身份。在机场现场登机，R 升空后持续前进，滚轮调速；低电量或恶劣天气会返航。'));
+    if (active) body.append(element('p', 'context-hint', 'WASD 操控 · 拖动改变朝向 · R / Q 升降 · E / V 返航；只有停稳才能退出。'));
+    return body;
+  }
+  private renderAviation(): void {
+    this.ref('aviation-list').replaceChildren(...(this.state?.aviation?.aircraft ?? []).map(craft => this.aircraftContent(craft)));
+  }
+  private renderFamily(): void {
+    const state = this.state!, family = state.family;
+    const body = this.ref('family-life'); body.replaceChildren();
+    if (!family) { body.append(element('p', 'note', '家庭状态尚未建立。')); return; }
+    const spouse = state.citizens.find(c => c.id === state.player.partnerId);
+    if (spouse) body.append(commandButton('与伴侣商议生育', 'planFamily', spouse.id, undefined, !this.canAct()), element('p', 'note', '需要共同住所、双方健康与意愿、教育和真实扶养储备；孕期为 270 个游戏日，时间按城市日历推进。'));
+    const pregnancies = family.pregnancies.filter(p => p.parentIds.includes('player'));
+    for (const pregnancy of pregnancies) body.append(field('孕期与扶养储备', `${Math.max(0, Math.ceil((pregnancy.dueAt - family.lastUpdate) / 1440))} 日后预产 · ${money(pregnancy.escrow)}`));
+    const children = Object.entries(family.children).filter(([, child]) => child.parentIds.includes('player'));
+    for (const [id, child] of children) {
+      const resident = state.citizens.find(c => c.id === id), profile = state.extension?.actorProfiles[id];
+      body.append(field(resident?.name ?? id, `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident?.education ?? 0} · 到校 ${Math.round(child.attendanceMinutes)} 分钟`));
+      const controls = element('div', 'button-grid');
+      controls.append(commandButton('到场扶养 · 20 云币', 'supportFamily', id, 20, !this.canAct() || state.player.money < 20), commandButton('在书院办理入学', 'enrollChild', id, undefined, !this.canAct() || !this.atKind('school') || !!child.schoolId)); body.append(controls);
+    }
+    body.append(element('p', 'note', `${children.length} 位子女 · ${Object.keys(family.estates).length} 笔实际遗产结算。出生、扶养、到校学习与财产继承保存在城市中。`));
+  }
   private renderTransit(): void {
     const state = this.state!;
     const view = this.view!;
+    this.renderAviation();
     const modes = new Set(this.world.edges.map(edge => edge.mode));
     this.ref('transit-summary').replaceChildren(field('交通网络', `${this.world.nodes.length} 节点 · ${this.world.edges.length} 连接`), field('运行载具', `${state.vehicles.length} 辆 / 艘`), element('p', 'note', [...modes].map(mode => modeNames[mode]).join(' · ')));
     this.ref('destination-list').replaceChildren(...this.world.districts.map(d => {
@@ -684,9 +795,10 @@ export class CityUI {
     const view = this.view;
     const state = this.state;
     const available: ContextKind[] = [];
-    if (view.nearbyBuilding) available.push('building');
-    if (view.nearbyCitizen) available.push('citizen');
-    if (view.nearbyVehicle || state.player.vehicleId) available.push('vehicle');
+    if (view.nearbyAircraft || state.aviation?.activeAircraftId) available.push('aircraft');
+    if (view.nearbyBuilding && !state.aviation?.activeAircraftId) available.push('building');
+    if (view.nearbyCitizen && !state.aviation?.activeAircraftId) available.push('citizen');
+    if (!state.aviation?.activeAircraftId && (view.nearbyVehicle || state.player.vehicleId)) available.push('vehicle');
     this.ref('context').hidden = available.length === 0;
     this.root.classList.toggle('has-context', available.length > 0);
     if (!available.length) { this.contextSignature = ''; return; }
@@ -694,10 +806,11 @@ export class CityUI {
     const building = view.nearbyBuilding;
     const citizen = view.nearbyCitizen;
     const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId) ?? view.nearbyVehicle;
+    const aircraft = state.aviation?.aircraft.find(a => a.id === state.aviation?.activeAircraftId) ?? view.nearbyAircraft;
     const shop = state.shops.find(s => s.buildingId === building?.id);
     const rel = state.relationships.find(r => r.npcId === citizen?.id);
     const floor = building && view.inside ? Math.floor((state.player.position.y - building.position.y) / (building.height / building.floors)) : 0;
-    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player].join('|');
+    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player].join('|');
     if (signature === this.contextSignature) return;
     const focused = document.activeElement;
     if ((focused instanceof HTMLInputElement || focused instanceof HTMLSelectElement) && this.ref('context').contains(focused) && signature.split('|').slice(0, 6).join('|') === this.contextSignature.split('|').slice(0, 6).join('|')) return;
@@ -711,7 +824,9 @@ export class CityUI {
     }));
     const body = this.ref('context-body'); body.replaceChildren();
     const walk = this.canAct();
-    if (this.contextKind === 'building' && building) {
+    if (this.contextKind === 'aircraft' && aircraft) {
+      body.append(this.aircraftContent(aircraft));
+    } else if (this.contextKind === 'building' && building) {
       body.append(element('span', 'eyebrow', `${kindNames[building.kind]} · ${view.inside ? '已进入' : '附近场所'}`), element('h3', '', building.name));
       const currentFloor = floor >= 0 ? `${floor + 1} 层` : `地下 ${Math.abs(floor)} 层`;
       const floorUse = floor >= 0 ? building.floorUses?.[floor] : building.basementUses?.[Math.abs(floor) - 1];
@@ -721,6 +836,7 @@ export class CityUI {
       this.buildingActions(controls, building, !walk);
       if (controls.childElementCount) body.append(controls);
       if (shop) body.append(element('p', 'note', `食物 ${money(shop.price)} · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`));
+      if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
       if (building.kind === 'bank') this.renderBank(body, building, !walk);
       if (building.kind === 'school') body.append(element('p', 'note', '先学习，再选择职业考核。学习提高教育，工作积累经验。'));
       if (building.publicFloors !== undefined) body.append(element('p', 'note', '公共服务楼层可自由进入；其余空间按各楼层权限开放，持有多个身份可使用对应设施。'));

@@ -36,11 +36,11 @@ export function installExtensions(simulation: Simulation): void {
   const world = simulation.worldDefinition;
   const buildings = new Map(world.buildings.map(b => [b.id, b]));
   const districts = new Set(world.districts.map(d => d.id));
-  const actorIds = new Set(['player', ...simulation.state.citizens.map(c => c.id)]);
+  let actorIds = new Set(['player', ...simulation.state.citizens.map(c => c.id)]);
   let citizensById = new Map(simulation.state.citizens.map(c => [c.id, c]));
   let mappedState = simulation.state;
   const state = () => simulation.state;
-  const citizens = () => { if (mappedState !== state()) { mappedState = state(); citizensById = new Map(mappedState.citizens.map(c => [c.id, c])); } return citizensById; };
+  const citizens = () => { if (mappedState !== state() || citizensById.size !== state().citizens.length) { mappedState = state(); citizensById = new Map(mappedState.citizens.map(c => [c.id, c])); actorIds = new Set(['player', ...citizensById.keys()]); } return citizensById; };
   const ext = () => state().extension as Extension;
   const initialize = (): Extension => {
     const s = state(), at = s.day * 1440 + s.hour * 60;
@@ -89,6 +89,7 @@ export function installExtensions(simulation: Simulation): void {
   const tech = (sector: Sector) => ext().technologies.find(t => t.sector === sector)!;
   const refreshOwner = (company: Company) => { const holders = Object.entries(company.shareholders).filter(([id, n]) => id !== 'exchange' && n > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])); if (holders[0]) company.ownerId = holders[0][0]; };
   const payActor = (id: string, amount: number) => { if (id === 'player') state().player.money = clamp(state().player.money + amount, 0, 1e9); else { const c = citizens().get(id); if (c) c.money = clamp(c.money + amount, 0, 1e9); } };
+  const incorporate = (shop: typeof simulation.state.shops[number], owner: string) => { if (shop.ownerId && (shop.cash ?? 0) > 0) payActor(shop.ownerId, shop.cash!); shop.cash = 0; shop.ownerId = owner; };
   const createCase = (npcId: string, amount: number, evidence: number): AuditCase | null => {
     const e = ext(), existing = e.audits.find(a => a.npcId === npcId && ['suspected', 'reported', 'investigating'].includes(a.status));
     if (existing) { existing.evidence = clamp(existing.evidence + evidence); existing.diverted = Math.max(existing.diverted, amount); return existing; }
@@ -114,7 +115,8 @@ export function installExtensions(simulation: Simulation): void {
         const d = s.districts[Math.floor(simulation.nextRandom() * s.districts.length)], severity = 5 + e.environment.stormRisk * .12;
         d.energy = clamp(d.energy - severity); d.prosperity = clamp(d.prosperity - severity * .4); d.pollution = clamp(d.pollution + severity * .3);
         e.environment.lastDisaster = `${world.districts.find(def => def.id === d.id)!.name}山洪`; e.environment.waterQuality = clamp(e.environment.waterQuality - severity);
-        const response = Math.min(s.treasury, severity * 30); publicFunds('player', -response, '山洪应急救灾支出', d.id);
+        const response = simulation.purchasePublicSupplies(Math.min(s.treasury, severity * 30), d.id, 'emergency-procurement');
+        if (response > 0) { e.runtime.lastTreasury -= response; record('player', -response, '山洪应急救灾支出', d.id); }
         for (const c of s.citizens.filter(c => c.districtId === d.id)) { const p = e.actorProfiles[c.id]; if (p.alive) { p.health = clamp(p.health - severity * .2); p.stress = clamp(p.stress + severity); } }
         for (const v of s.vehicles.filter(v => world.edges.find(edge => edge.id === v.edgeId)?.points.some(p => distance(p, world.districts.find(def => def.id === d.id)!.center) < 500))) v.nextDeparture += severity;
         notice('disaster', `${e.environment.lastDisaster}：道路与班次受阻，公共资金投入${response.toFixed(0)}文救灾。`, d.id);
@@ -125,6 +127,7 @@ export function installExtensions(simulation: Simulation): void {
   simulation.onPhase('traffic', s => { for (const v of s.vehicles) { const base = ({ road: 18, maglev: 50, lightRail: 25, cable: 6, lift: 4, ferry: 8, bridge: 4, flight: 120 })[v.kind]; v.speed = base * (1 + tech('traffic').level * .035) * (1 - ext().environment.stormRisk * .002); } });
   simulation.onPhase('people', (s, minutes) => {
     const e = ext();
+    citizens();
     const die = (id: string, p: LifeProfile) => {
       p.alive = false; p.health = 0; if (!p.historyTags.includes('生命终结')) p.historyTags.push('生命终结');
       const npc = citizens().get(id); if (npc) { npc.state = 'dead'; npc.route = []; npc.routeIndex = 0; npc.destinationId = null; }
@@ -133,7 +136,10 @@ export function installExtensions(simulation: Simulation): void {
     };
     for (const id of actorIds) {
       const p = e.actorProfiles[id], npc = citizens().get(id), c = npc ?? s.player;
-      p.family = c.partnerId ? [c.partnerId] : [];
+      const family = s.family;
+      const relatives = (p.family ?? []).filter(member => family?.children[id]?.parentIds.includes(member) || family?.children[member]?.parentIds.includes(id)
+        || family?.studentGuardians[id]?.includes(member) || family?.studentGuardians[member]?.includes(id));
+      p.family = [...new Set([...relatives, ...(c.partnerId ? [c.partnerId] : [])])];
       if (!p.alive) { if (npc) { npc.state = 'dead'; npc.destinationId = null; npc.route = []; npc.routeIndex = 0; } continue; }
       if (p.health <= 0 || p.age >= 110) { die(id, p); continue; }
       p.age = clamp(p.age + minutes / (1440 * 365), 0, 140);
@@ -148,13 +154,18 @@ export function installExtensions(simulation: Simulation): void {
         if (p.health < 60 && cool(`heal:${id}`)) {
           const clinic = world.buildings.find(b => b.kind === 'clinic' && simulation.isNearBuilding(b, npc!.position, 20));
           if (clinic && (npc!.money >= 30 || s.treasury >= 30 && e.institutions.welfare >= 30)) {
+            let fulfillment = 1;
             if (npc!.money >= 30) { npc!.money -= 30; publicFunds(id, 30, '居民诊疗费', clinic.districtId); }
-            else publicFunds(id, -30, '贫困居民医疗福利支出', clinic.districtId);
-            p.health = clamp(p.health + 25 + tech('medicine').level); p.stress = clamp(p.stress - 8); cooldown(`heal:${id}`, 240);
+            else {
+              const paid = simulation.purchasePublicSupplies(30, clinic.districtId, 'medical-procurement');
+              fulfillment = paid / 30;
+              if (paid > 0) { e.runtime.lastTreasury -= paid; record(id, -paid, '贫困居民医疗福利支出', clinic.districtId); }
+            }
+            if (fulfillment > 0) { p.health = clamp(p.health + (25 + tech('medicine').level) * fulfillment); p.stress = clamp(p.stress - 8 * fulfillment); cooldown(`heal:${id}`, 240); }
           }
         }
       }
-      if (npc && npc.role === '学生' && (npc.education ?? 0) >= 3 && p.skill >= 35) {
+      if (npc && npc.role === '学生' && p.age >= 18 && (npc.education ?? 0) >= 3 && p.skill >= 35) {
         const school = world.buildings.find(b => b.kind === 'school' && simulation.isNearBuilding(b, npc.position));
         if (school) { npc.role = 'scientist'; npc.workId = school.id; if (!p.historyTags.includes('学成参与科研')) p.historyTags.push('学成参与科研'); npc.historyTags = [...new Set([...(npc.historyTags ?? []), '学成参与科研'])]; }
       }
@@ -165,25 +176,22 @@ export function installExtensions(simulation: Simulation): void {
     const job = e.cooking;
     if (job && e.lastUpdate + 1e-7 >= job.finishAt) { s.player.inventory[`dish:${job.recipeId}`] = (s.player.inventory[`dish:${job.recipeId}`] ?? 0) + 1; s.player.inventory[`dishQuality:${job.recipeId}`] = job.quality; e.stats.mealsCooked++; e.actorProfiles.player.skill = clamp(e.actorProfiles.player.skill + .8); e.cooking = null; notice('cook', `${RECIPES[job.recipeId as Recipe].name}已完成，品质${Math.round(job.quality)}，成品放入行囊。`); }
   });
-  simulation.onPhase('commerce', (s, minutes) => {
-    const agriculture = tech('agriculture').level, manufacturing = tech('manufacturing').level;
-    for (const shop of s.shops) { const kind = buildings.get(shop.buildingId)!.kind, level = kind === 'farm' ? agriculture : kind === 'workshop' ? manufacturing : 0; if (level && shop.open) { const produced = minutes * level * .004 * s.energy / 100; shop.inventory = clamp(shop.inventory + produced, 0, 10000); shop.profit -= produced * 2; const d = s.districts.find(d => d.id === shop.districtId)!; d.pollution = clamp(d.pollution + produced * (kind === 'farm' ? .006 : .02)); } }
-  });
+  simulation.onEvent('production', event => { const shop = state().shops.find(shop => shop.id === event.shopId); if (!shop) return; const kind = buildings.get(shop.buildingId)!.kind, d = state().districts.find(d => d.id === shop.districtId)!; d.pollution = clamp(d.pollution + (event.amount ?? 0) * (kind === 'farm' ? .006 : .02)); });
   simulation.onPhase('finance', s => {
     const e = ext();
     if (e.lastUpdate + 1e-7 >= e.runtime.nextLedgerAt) { const delta = s.treasury - e.runtime.lastTreasury; if (Math.abs(delta) > .000001) record('player', delta, delta > 0 ? '城市税收与公共收入' : '城市公共运转支出', world.districts[0].id); e.runtime.lastTreasury = s.treasury; e.runtime.nextLedgerAt = e.lastUpdate + 60; }
     for (const company of e.companies) {
       const shop = s.shops.find(shop => shop.buildingId === company.buildingId)!; const cursor = e.runtime.companyCursors[company.id];
       const revenue = shop.revenue - cursor.revenue, profit = shop.profit - cursor.profit;
-      company.revenue = clamp(company.revenue + revenue, 0, 1e12); company.profit = clamp(company.profit + profit, -1e12, 1e12); company.capital = clamp(company.capital + profit, 0, 1e9);
+      company.revenue = clamp(company.revenue + revenue, 0, 1e12); company.profit = clamp(company.profit + profit, -1e12, 1e12);
       company.employees = shop.employees; company.inventory = shop.inventory; cursor.revenue = shop.revenue; cursor.profit = shop.profit;
-      company.sharePrice = clamp((company.capital + Math.max(0, company.profit) * 2 + 300 * company.level) / company.shares, .05, 1e6);
+      company.sharePrice = clamp((company.capital - simulation.shopPayrollDebt(shop) + Math.max(0, company.profit) * 2 + 300 * company.level) / company.shares, .05, 1e6);
     }
     const totalRevenue = s.shops.reduce((n, shop) => n + shop.revenue, 0);
     for (const company of e.companies) company.marketShare = totalRevenue > 0 ? company.revenue / totalRevenue : 0;
     if (e.lastUpdate + 1e-7 >= e.runtime.nextCompanyAt) {
       e.runtime.nextCompanyAt = e.lastUpdate + 60;
-      for (const company of e.companies) if (company.profit > 0 && company.capital > 100) { const dividend = Math.min(company.capital * .01, company.profit * .003); for (const [actorId, shares] of Object.entries(company.shareholders)) if (actorId !== 'exchange') { const payout = dividend * shares / company.shares; company.capital -= payout; payActor(actorId, payout); } }
+      for (const company of e.companies) if (company.profit > 0 && company.capital > 100 && simulation.shopPayrollDebt(s.shops.find(shop => shop.buildingId === company.buildingId)!) <= 1e-8) { const dividend = Math.min(company.capital * .01, company.profit * .003); for (const [actorId, shares] of Object.entries(company.shareholders)) if (actorId !== 'exchange') { const payout = dividend * shares / company.shares; company.capital -= payout; payActor(actorId, payout); if (payout > 0) simulation.emitEvent({ type: 'business-dividend', citizenId: actorId, shopId: s.shops.find(shop => shop.buildingId === company.buildingId)!.id, districtId: company.districtId, amount: payout }); } }
       for (const org of e.organizations) if (org.kind === 'charity' && org.funds >= 10) { const needy = s.citizens.filter(c => e.actorProfiles[c.id].alive && c.money < 80).sort((a, b) => a.money - b.money).slice(0, 8); const spending = Math.min(org.funds, needy.length * 10); if (needy.length) { org.funds -= spending; for (const c of needy) { c.money += spending / needy.length; e.actorProfiles[c.id].stress = clamp(e.actorProfiles[c.id].stress - 3); } e.institutions.welfare = clamp(e.institutions.welfare + spending * .002); record('player', -spending, '互助社实际救济', world.districts[0].id, 'household'); } }
       // Skills and accumulated resources open actual opportunities to residents,
       // rather than permanently reserving enterprise and science for the player.
@@ -194,7 +202,7 @@ export function installExtensions(simulation: Simulation): void {
           c.money -= 250; publicFunds(c.id, 50, '居民创业登记费', workplace.districtId);
           const shop = s.shops.find(shop => shop.buildingId === workplace.id)!;
           const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${c.name}百工商社`, ownerId: c.id, buildingId: workplace.id, districtId: workplace.districtId, capital: 200, shares: 1000, sharePrice: .5, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { [c.id]: 1000 }, foundedAt: e.lastUpdate, parentId: null };
-          e.companies.push(company); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit }; c.role = 'merchant'; if (!profile.historyTags.includes('自主创业')) profile.historyTags.push('自主创业'); notice('company', `${c.name}凭技能与积蓄创办${company.name}，登记和资本均由本人实际支付。`, c.districtId);
+          incorporate(shop, c.id); e.companies.push(company); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit }; c.role = 'merchant'; if (!profile.historyTags.includes('自主创业')) profile.historyTags.push('自主创业'); notice('company', `${c.name}凭技能与积蓄创办${company.name}，登记和资本均由本人实际支付。`, c.districtId);
         }
         // A personally funded project costs 200; retain 100 for food and care.
         // Residents first meet their current hunger/rest needs before investing.
@@ -262,7 +270,7 @@ export function installExtensions(simulation: Simulation): void {
       if (!shop || b.facility) return fail('公共科研与政务设施不能登记为私营公司。');
       p.money -= capital + 50; publicFunds('player', 50, '公司登记费', b.districtId);
       const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${b.name}商社`, ownerId: 'player', buildingId: b.id, districtId: b.districtId, capital, shares: 1000, sharePrice: (capital + 300) / 1000, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { player: 1000 }, foundedAt: e.lastUpdate, parentId: null };
-      e.companies.push(company); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit };
+      incorporate(shop, 'player'); e.companies.push(company); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit };
       return success(`已创办${company.name}，投入${capital}文资本、50文登记费，持有全部1000股。`);
     }
     if (['expandCompany', 'hire', 'listCompany', 'buyShares', 'sellShares', 'acquireCompany'].includes(command.type)) {
@@ -308,6 +316,7 @@ export function installExtensions(simulation: Simulation): void {
           p.money -= cost; company.capital += cost; company.shareholders.exchange -= count; company.shareholders.player = (company.shareholders.player ?? 0) + count;
         } else {
           if ((company.shareholders.player ?? 0) < count || company.capital < cost || p.money + cost > 1e9) return fail('持股或公司回购现金不足。');
+          if (count === company.shareholders.player && !Object.entries(company.shareholders).some(([id, holding]) => id !== 'player' && id !== 'exchange' && holding > 0)) return fail('公司需要真实持股经营负责人，出售最后一股前须将管理股权转给其他居民。');
           company.shareholders.player -= count; company.shareholders.exchange = (company.shareholders.exchange ?? 0) + count; company.capital -= cost; p.money += cost;
         }
         refreshOwner(company); record('player', command.type === 'buyShares' ? cost : -cost, '交易所股权成交', company.districtId, 'company');
@@ -342,8 +351,8 @@ export function installExtensions(simulation: Simulation): void {
       const shop = s.shops.find(shop => shop.buildingId === b.id), price = INGREDIENTS[ingredient] * count;
       if (!shop || b.facility) return fail('请到有实际食材库存的私营商铺购买。');
       if (!shop.open || shop.inventory < count || p.money < price) return fail('商铺休业、库存或现金不足。');
-      p.money -= price; shop.inventory -= count; shop.revenue += price; shop.profit += price * (1 - s.taxRate) - count * 4; shop.customers += count; p.inventory[`ingredient:${ingredient}`] = (p.inventory[`ingredient:${ingredient}`] ?? 0) + count;
-      simulation.emitEvent({ type: 'sale', amount: price, districtId: shop.districtId });
+      p.money -= price; shop.inventory -= count; shop.revenue += price; shop.profit += price * (1 - s.taxRate) - (b.kind === 'market' ? count * 4 : 0); simulation.transferShopFunds(shop, price * (1 - s.taxRate)); shop.customers += count; p.inventory[`ingredient:${ingredient}`] = (p.inventory[`ingredient:${ingredient}`] ?? 0) + count;
+      simulation.emitEvent({ type: 'sale', amount: price, shopId: shop.id, districtId: shop.districtId });
       return success(`购买${count}份${ingredient === 'grain' ? '谷米' : ingredient === 'fish' ? '溪鱼' : '蔬菜'}，花费${price}文。`);
     }
     if (command.type === 'cook') {
@@ -432,6 +441,7 @@ export function installExtensions(simulation: Simulation): void {
   simulation.registerSaveValidator(candidate => {
     const value = candidate.extension as Extension | undefined;
     if (value === undefined) return; // The pre-extension format remains importable.
+    const actorIds = new Set(['player', ...candidate.citizens.map(c => c.id)]);
     const ensure = (condition: unknown, name: string): void => { if (!condition) throw new Error(`扩展存档无效：${name}`); };
     const num = (n: unknown, min: number, max: number, name: string, integer = false): void => ensure(finite(n) && n >= min && n <= max && (!integer || Number.isInteger(n)), name);
     const str = (n: unknown, name: string, max = 200): void => ensure(typeof n === 'string' && n.length <= max, name);
@@ -457,6 +467,7 @@ export function installExtensions(simulation: Simulation): void {
     const profiles = object(value.actorProfiles, actorIds.size, 'life profiles'); exactKeys(profiles, actorIds, 'life identities');
     for (const [id, p] of Object.entries(profiles)) { ensure(dictionary(p) && typeof p.alive === 'boolean', 'life profile'); num(p.age, 0, 140, 'age'); num(p.health, 0, 100, 'health'); num(p.mood, 0, 100, 'mood'); num(p.stress, 0, 100, 'stress'); num(p.skill, 0, 100, 'skill'); if (!p.alive) ensure(p.health === 0, 'dead actor health'); const family = array(p.family, 32, 'family'); ensure(new Set(family).size === family.length && family.every(member => actorIds.has(member) && member !== id), 'family reference'); for (const tag of array(p.historyTags, 128, 'history tags')) str(tag, 'history tag', 120); }
     for (const row of array(value.publicLedger, 512, 'ledger')) { ensure(dictionary(row) && actorIds.has(row.actorId) && districts.has(row.districtId) && ['public', 'company', 'household'].includes(row.account), 'ledger references'); num(row.tick, 0, candidate.tick, 'ledger tick', true); num(row.amount, -1e12, 1e12, 'ledger amount'); str(row.purpose, 'ledger purpose'); }
+    for (const row of value.publicLedger) if (row.sourceEvent !== undefined) ensure(row.sourceEvent === 'transit-fare' && row.account === 'public' && row.amount > 0, 'ledger source event');
     const auditIds = new Set<string>();
     for (const item of array(value.audits, 128, 'audits')) { ensure(dictionary(item) && typeof item.id === 'string' && /^audit-[1-9][0-9]*$/.test(item.id) && !auditIds.has(item.id) && Number(item.id.slice(6)) < value.nextAuditId && actorIds.has(item.npcId) && item.npcId !== 'player', 'audit references'); auditIds.add(item.id); num(item.evidence, 0, 100, 'evidence'); num(item.diverted, 0, 1e9, 'diversion'); num(item.createdAt, 0, value.lastUpdate, 'case creation'); num(item.responseAt, 0, 1e12, 'case response'); ensure(['suspected', 'reported', 'investigating', 'prosecuted', 'cleared'].includes(item.status), 'audit status'); if (item.status === 'investigating') ensure(item.responseAt >= item.createdAt, 'investigation timer'); }
     if (value.cooking !== null) { const job = value.cooking; ensure(dictionary(job) && Object.hasOwn(RECIPES, job.recipeId), 'cooking recipe'); num(job.startedAt, 0, value.lastUpdate, 'cooking started'); num(job.finishAt, job.startedAt, 1e12, 'cooking finish'); ensure(Math.abs(job.finishAt - job.startedAt - RECIPES[job.recipeId as Recipe].minutes) < 1e-7, 'cooking duration'); num(job.quality, 5, 100, 'cooking quality'); }

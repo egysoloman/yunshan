@@ -60,6 +60,12 @@ function extension(sim: Simulation): CityExtensionState {
 }
 
 function clone<T>(value: T): T { return JSON.parse(JSON.stringify(value)) as T; }
+function observeDividends(sim: Simulation) {
+  const payments = new Map<string, number>();
+  sim.onPhase('commerce', () => payments.clear());
+  sim.onEvent('business-dividend', event => { if (event.citizenId) payments.set(event.citizenId, (payments.get(event.citizenId) ?? 0) + (event.amount ?? 0)); });
+  return payments;
+}
 function walkTo(sim: Simulation, position: Vec3) { sim.setFocus({ ...position }, 'walk'); }
 function building(world: WorldDefinition, kind: BuildingKind, districtIndex = 0): Building {
   const result = world.buildings.find(item => item.kind === kind && item.districtId === world.districts[districtIndex].id);
@@ -395,10 +401,22 @@ test('completed technologies change their connected city systems and expose ecol
           for (const district of city.state.districts) district.pollution = 100;
           ok(city, { type: 'setTime', value: 23 });
         }
+        if (effect.sector === 'agriculture' || effect.sector === 'manufacturing') {
+          // An upgrade changes attended production. Give both cities actual
+          // working space rather than expecting inventory to grow unattended.
+          const kind = effect.sector === 'agriculture' ? 'farm' : 'workshop';
+          for (const shop of city.state.shops.filter(shop => world.buildings.find(b => b.id === shop.buildingId)!.kind === kind)) shop.inventory = 0;
+          const site = building(world, kind), shop = city.state.shops.find(shop => shop.buildingId === site.id)!;
+          const worker = city.state.citizens.find(c => c.role !== '学生')!;
+          worker.workId = site.id; worker.role = kind === 'farm' ? '农民' : '工人'; shop.employees++;
+          worker.position = { ...site.position, y: site.position.y + .6 }; worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0;
+          worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+          const core = Reflect.get(city, 'runtime'); core.activities[worker.id] = 'work'; core.decisionAt[worker.id] = 10000;
+        }
       }
       ok(sim, { type: 'research', targetId: effect.sector, value: 200 });
-      advanceMinutes(sim, 122);
-      advanceMinutes(control, 122);
+      advanceMinutes(sim, effect.sector === 'agriculture' || effect.sector === 'manufacturing' ? 142 : 122);
+      advanceMinutes(control, effect.sector === 'agriculture' || effect.sector === 'manufacturing' ? 142 : 122);
       assert.ok(effect.value(sim) > effect.value(control), `${effect.sector} research must benefit the connected running system`);
       const pollution = (city: Simulation) => city.state.districts.reduce((sum, district) => sum + district.pollution, 0);
       if (effect.sector !== 'energy') assert.ok(pollution(sim) > pollution(control), 'research externalities must feed back into actual district pollution');
@@ -666,6 +684,8 @@ test('legacy core saves initialize extension state and remain playable', () => {
   sim.step(0.25);
   const legacy = JSON.parse(sim.exportSave()) as { state: SimState };
   Reflect.deleteProperty(legacy.state, 'extension');
+  Reflect.deleteProperty(legacy.state, 'family');
+  Reflect.deleteProperty(legacy.state, 'culture');
   const restored = new Simulation(fixture());
   const result = restored.importSave(JSON.stringify(legacy));
   assert.equal(result.ok, true, result.message);
@@ -723,7 +743,8 @@ test('bereavement follows current partners and divorce removes stale life profil
     extension(sim).actorProfiles[victim.id].health = 0;
     sim.step(0.25);
     control.step(0.25);
-    assert.deepEqual(extension(sim).actorProfiles[victim.id].family, [partner.id]);
+    assert.ok(extension(sim).actorProfiles[victim.id].family.includes(partner.id));
+    assert.equal(extension(sim).actorProfiles[victim.id].family.includes(former.id), false, 'former partners detach while actual guardians and descendants remain');
     assert.ok(extension(sim).actorProfiles[partner.id].historyTags.includes('悼念亲人'));
     assert.ok(extension(sim).actorProfiles[partner.id].mood < extension(control).actorProfiles[partner.id].mood - 15);
     assert.equal(extension(sim).actorProfiles[former.id].historyTags.includes('悼念亲人'), false);
@@ -739,8 +760,8 @@ test('bereavement follows current partners and divorce removes stale life profil
     former.partnerId = null;
     extension(sim).actorProfiles[victim.id].health = 0;
     sim.step(0.25);
-    assert.deepEqual(extension(sim).actorProfiles[victim.id].family, []);
-    assert.deepEqual(extension(sim).actorProfiles[former.id].family, []);
+    assert.equal(extension(sim).actorProfiles[victim.id].family.includes(former.id), false);
+    assert.equal(extension(sim).actorProfiles[former.id].family.includes(victim.id), false);
     assert.equal(extension(sim).actorProfiles[former.id].historyTags.includes('悼念亲人'), false);
   });
 });
@@ -871,6 +892,7 @@ test('saved extension accounting cursors, cooldown identities and funded researc
 
 test('corruption moves actual public funds into an eligible poor actor, and evidence leads to delayed recovery rather than a reward', () => {
   const { sim, world } = create();
+  const dividends = observeDividends(sim);
   const e = extension(sim);
   sim.state.player.money = 10_000;
   const publicActors = sim.state.citizens;
@@ -906,13 +928,13 @@ test('corruption moves actual public funds into an eligible poor actor, and evid
     const diverted = entries.reduce((sum, entry) => sum - entry.amount, 0);
     assert.ok(diverted > 0, 'the public ledger must record an actual outflow');
     approximately(sim.state.treasury,
-      beforeFinance.treasury + beforeFinance.taxes - beforeFinance.operatingCost - diverted,
+      beforeFinance.treasury + beforeFinance.taxes - beforeFinance.operatingCost * (1 - sim.state.taxRate) - diverted,
       'corruption must debit treasury after normal city finance');
     for (const entry of entries) {
       const citizen = sim.state.citizens.find(item => item.id === entry.actorId)!;
       assert.ok(citizen);
-      approximately(citizen.money - beforeFinance.actorMoney[citizen.id], -entry.amount,
-        'the named actor must receive exactly the diverted public funds');
+      approximately(citizen.money - beforeFinance.actorMoney[citizen.id], -entry.amount + (dividends.get(citizen.id) ?? 0),
+        'the named actor receives exactly diverted funds plus separately funded business dividends');
     }
     transferred = true;
   });
@@ -996,6 +1018,7 @@ test('public resource diversions require the real civic job in either language a
   const data = world.buildings.find(site => site.facility === 'data')!;
   data.kind = 'workshop'; // The generated city's actual data laboratory is a civic workshop.
   const sim = new Simulation(world);
+  const dividends = observeDividends(sim);
   ok(sim, { type: 'speed', value: 8 });
   const e = extension(sim);
   const cases = [
@@ -1041,7 +1064,7 @@ test('public resource diversions require the real civic job in either language a
     const entries = e.publicLedger.filter(entry => entry.tick === sim.state.tick && entry.purpose.includes('挪用'));
     if (!entries.length) return;
     assert.ok(before);
-    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost
+    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost * (1 - sim.state.taxRate)
       + residentResearchPayments(sim) + entries.reduce((sum, entry) => sum + entry.amount, 0),
     'actual civic diversions and simultaneous research must settle the same treasury');
     for (const entry of entries) {
@@ -1049,8 +1072,8 @@ test('public resource diversions require the real civic job in either language a
       if (!subject) continue;
       assert.equal(subject.eligible, true, 'private workplaces or ordinary residents cannot withdraw city funds');
       assert.ok(entry.amount < 0);
-      approximately(subject.citizen.money - before.money.get(entry.actorId)!, -entry.amount,
-        'the actual civic actor receives exactly the amount taken from treasury');
+      approximately(subject.citizen.money - before.money.get(entry.actorId)!, -entry.amount + (dividends.get(entry.actorId) ?? 0),
+        'the civic actor receives exactly treasury funds plus observed funded business dividends');
       credited.set(entry.actorId, (credited.get(entry.actorId) ?? 0) - entry.amount);
     }
   });
@@ -1111,7 +1134,8 @@ test('NPCs use clinics autonomously and paid or welfare treatment settles real a
     await t.test(poor ? 'publicly funded treatment' : 'resident paid treatment', () => {
       const { sim, world } = create();
       const e = extension(sim);
-      const citizen = sim.state.citizens[0];
+      const citizen = sim.state.citizens.find(c => c.role !== '学生')!;
+      citizen.role = '工人'; // isolate clinic finance from student household support
       const clinic = building(world, 'clinic');
       const purpose = poor ? '贫困居民医疗福利支出' : '居民诊疗费';
       citizen.money = poor ? 0 : 100;
@@ -1236,7 +1260,7 @@ test('a trained student becomes a scientist and pays for research whose saved co
     if (funded || !Object.values(runtime().researchJobs).some(job => job.actorId === scholar.id)) return;
     assert.ok(before);
     assert.equal(before.money - scholar.money, 200, 'resident research spends the researcher’s own cash');
-    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost + residentResearchPayments(sim),
+    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost * (1 - sim.state.taxRate) + residentResearchPayments(sim),
       'the scholar and every simultaneous resident investment must reach the actual public research account');
     funded = true;
   });
@@ -1394,7 +1418,7 @@ test('a skilled worker uses accumulated personal savings to found a company with
     assert.equal(company.capital, 200);
     assert.ok(e.publicLedger.some(entry => entry.tick === sim.state.tick && entry.actorId === worker.id
       && entry.purpose === '居民创业登记费' && entry.amount === 50));
-    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost + 50 + residentResearchPayments(sim),
+    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost * (1 - sim.state.taxRate) + 50 + residentResearchPayments(sim),
       'company registration and simultaneous personally funded research must settle the real treasury');
     sharesAreConserved(company);
     assert.equal(company.shareholders[worker.id], company.shares);

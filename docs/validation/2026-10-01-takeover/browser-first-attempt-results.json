@@ -1,0 +1,42 @@
+{
+  "buildEntry": "/assets/index-BRpHvhna.js",
+  "sourceHashes": {
+    "src/simulation.ts": "dbd3d7d7386a16f71732a913745b773e98835282bf506b932ed6a69431db84ef",
+    "src/simulation/extensions.ts": "9f10811d05c7ed2e5a69c47f04782e4b928b7f722a72645122ed218deff97693",
+    "src/main.ts": "c56daf091a18eb1de86a5eb719979b9dd5cb675ef792e82ec752666ac81c0674",
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553",
+    "src/renderer.ts": "77fdc0722e4ebbe42ff1a725a4f05fcf9508e8f8a73fbc8423e97d74cf463dc6",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/ui.ts": "7298f08c4550538b0da818b7edf18d62cf72bc7e18a43897384fe87fd21a396a",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/simulation/family.ts": "01fbc1bb2ade9607380d4aca1a94ff390313d42d5c389a4621bd3d1a51137c19",
+    "src/simulation/culture.ts": "a40432ca03410050b36111b7693d4c25c2c4a7af9328e6af693c0c4339a74d21",
+    "src/persistence.ts": "9598e05a95679128aa135bb6712e99d33888cc2c90d6cfb797b1b89c5e57099e",
+    "src/transport-geometry.ts": "32087fb6c1a5576eeed03e69b64fba60117295ee97b24cd0c6bf8681bc92e8b0"
+  },
+  "results": [
+    {
+      "name": "world boots in first person with real city aircraft and live simulation",
+      "districts": 11,
+      "buildings": 612,
+      "citizens": 616,
+      "vehicles": 344,
+      "tick": 8,
+      "drawCalls": 259,
+      "triangles": 4419098,
+      "fps": 0
+    },
+    {
+      "name": "native button keyboard activation remains accessible",
+      "key": "Space"
+    },
+    {
+      "name": "manual time and paused simulation with day/night rendering",
+      "dayHour": 15.5,
+      "nightHour": 22
+    }
+  ],
+  "errors": [],
+  "failure": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('mode-walk')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" data-mode=\"walk\" data-action=\"mode\" aria-pressed=\"true\" data-testid=\"mode-walk\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+}

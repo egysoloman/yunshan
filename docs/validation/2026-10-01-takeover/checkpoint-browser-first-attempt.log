@@ -1,0 +1,30 @@
+
+> yunshan-city@0.1.0 test:browser
+> node scripts/browser-test.mjs
+
+PASS world boots in first person with real city aircraft and live simulation
+PASS native button keyboard activation remains accessible
+PASS manual time and paused simulation with day/night rendering
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByTestId('mode-walk')[22m
+[2m    - locator resolved to <button type="button" data-mode="walk" data-action="mode" aria-pressed="true" data-testid="mode-walk">…</button>[22m
+[2m  - attempting click action[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+
+    at /workspace/yunshan/scripts/browser-test.mjs:70:39 {
+  log: [
+    "  - waiting for getByTestId('mode-walk')",
+    '    - locator resolved to <button type="button" data-mode="walk" data-action="mode" aria-pressed="true" data-testid="mode-walk">…</button>',
+    '  - attempting click action',
+    '    - waiting for element to be visible, enabled and stable'
+  ],
+  name: 'TimeoutError'
+}
+  ➜  Local:   http://127.0.0.1:4173/
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

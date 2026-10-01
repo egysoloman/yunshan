@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { getWalkHeight } from './world';
 import { getFloorDimensions, getStairPosition } from './access';
-import type { Building, Vec3, ViewMode, VoxelModification, WorldDefinition } from './types';
+import { blocksTransportBarrier } from './transport-geometry';
+import type { AerialVehicle, AviationControls, Building, Vec3, ViewMode, VoxelModification, WorldDefinition } from './types';
 
 const EYE_HEIGHT = 1.72;
 const BODY_RADIUS = 0.35;
@@ -9,7 +10,7 @@ const distance2 = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.z - b.z);
 
 /** Only transforms the player's camera. Simulation and rendering stay independent. */
 export class PlayerController {
-  mode: ViewMode = 'drone';
+  mode: ViewMode = 'walk';
   yaw = 0;
   pitch = -0.35;
   inside: Building | null = null;
@@ -19,8 +20,6 @@ export class PlayerController {
   private dragging = false;
   private pointerX = 0;
   private pointerY = 0;
-  private overviewPosition = new THREE.Vector3();
-  private overviewQuaternion = new THREE.Quaternion();
   private feet: Vec3;
   private listeners: (() => void)[] = [];
 
@@ -28,9 +27,8 @@ export class PlayerController {
 
   constructor(readonly camera: THREE.PerspectiveCamera, readonly canvas: HTMLCanvasElement, readonly world: WorldDefinition, private onAction: (key: string) => void, private canAccess: (building: Building, floor: number) => boolean = () => true, private modifications: () => readonly VoxelModification[] = () => []) {
     this.feet = { ...world.spawn };
-    this.overviewPosition.copy(camera.position);
-    this.overviewQuaternion.copy(camera.quaternion);
     this.readAngles();
+    this.setMode('walk', world.spawn);
     this.listen(window, 'keydown', (event) => {
       const e = event as KeyboardEvent;
       if (e.defaultPrevented) return;
@@ -71,23 +69,24 @@ export class PlayerController {
       const e = event as WheelEvent;
       e.preventDefault();
       if (this.mode === 'jet') this.jetSpeed = THREE.MathUtils.clamp(this.jetSpeed - e.deltaY * 0.06, 25, 250);
-      else if (this.mode === 'drone') {
-        const direction = new THREE.Vector3();
-        camera.getWorldDirection(direction);
-        camera.position.addScaledVector(direction, -e.deltaY * 0.45);
-        this.clampFlight();
-      }
+      else if (this.mode === 'drone') this.jetSpeed = THREE.MathUtils.clamp(this.jetSpeed - e.deltaY * 0.06, 25, 150);
     }, { passive: false });
   }
 
-  get position(): Vec3 { return this.mode === 'walk' ? { ...this.feet } : { x: this.camera.position.x, y: this.camera.position.y, z: this.camera.position.z }; }
+  get position(): Vec3 { return { ...this.feet }; }
   get walkingPosition(): Vec3 { return { ...this.feet }; }
   get moving(): boolean { return this.keys.size > 0 || this.mode === 'jet'; }
   get drivingControls(): { throttle: number; turn: number; brake: boolean } {
     return { throttle: Number(this.keys.has('KeyW') || this.keys.has('ArrowUp')) - Number(this.keys.has('KeyS') || this.keys.has('ArrowDown')), turn: Number(this.keys.has('KeyD') || this.keys.has('ArrowRight')) - Number(this.keys.has('KeyA') || this.keys.has('ArrowLeft')), brake: this.keys.has('Space') };
   }
 
-  setMode(mode: ViewMode, playerPosition: Vec3): void {
+  get aviationControls(): AviationControls {
+    const drive = this.drivingControls;
+    return { forward: drive.throttle, strafe: drive.turn, climb: Number(this.keys.has('KeyR') || this.keys.has('Space')) - Number(this.keys.has('KeyQ') || this.keys.has('ControlLeft')), yaw: this.yaw, pitch: this.pitch, speed: this.jetSpeed, boost: this.keys.has('ShiftLeft') || this.keys.has('ShiftRight') };
+  }
+
+  setMode(mode: ViewMode, playerPosition: Vec3, aircraft?: AerialVehicle): boolean {
+    if (mode !== 'walk' && (!aircraft || aircraft.kind !== mode)) { this.blockedAccess = '航空视角需要在城市停机位租用并实际登机。'; return false; }
     this.keys.clear();
     if (this.mode === 'walk') this.feet = { ...playerPosition };
     this.mode = mode;
@@ -107,13 +106,20 @@ export class PlayerController {
       }
       this.camera.position.set(this.feet.x, this.feet.y + EYE_HEIGHT, this.feet.z);
       this.pitch = -0.05;
-    } else if (mode === 'jet') {
-      this.camera.position.y = Math.max(this.camera.position.y, getWalkHeight(this.world, this.camera.position.x, this.camera.position.z) + 40);
-      this.pitch = -0.03;
-    } else {
-      this.camera.position.y = Math.max(this.camera.position.y, getWalkHeight(this.world, this.camera.position.x, this.camera.position.z) + 12);
+    } else if (aircraft) {
+      this.yaw = aircraft.yaw; this.pitch = aircraft.pitch; this.jetSpeed = 85;
+      this.syncAircraft(aircraft);
     }
     this.orient();
+    return true;
+  }
+
+  syncAircraft(aircraft: AerialVehicle): void {
+    this.feet = { ...aircraft.position, y: aircraft.position.y + .3 };
+    this.camera.position.set(aircraft.position.x, aircraft.position.y + 1.15, aircraft.position.z);
+    this.inside = null;
+    this.floor = 0;
+    if (aircraft.status === 'landing') { this.yaw = aircraft.yaw; this.pitch = aircraft.pitch; this.orient(); }
   }
 
   syncPassenger(position: Vec3): void {
@@ -123,11 +129,8 @@ export class PlayerController {
   }
 
   resetView(): void {
-    this.mode = 'drone';
-    this.inside = null;
-    this.camera.position.copy(this.overviewPosition);
-    this.camera.quaternion.copy(this.overviewQuaternion);
-    this.readAngles();
+    this.pitch = -0.05;
+    this.orient();
   }
 
   /** Door use crosses only the existing opening; doors do not teleport between buildings. */
@@ -162,9 +165,9 @@ export class PlayerController {
     return true;
   }
 
-  step(seconds: number, passenger: boolean, paused = false): void {
+  step(seconds: number, passenger: boolean, _paused = false): void {
     const dt = Math.min(seconds, 0.1);
-    if (passenger || (paused && this.mode === 'jet')) return;
+    if (passenger || this.mode !== 'walk') return;
     const sprint = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
     let forward = Number(this.keys.has('KeyW') || this.keys.has('ArrowUp')) - Number(this.keys.has('KeyS') || this.keys.has('ArrowDown'));
     let strafe = Number(this.keys.has('KeyD') || this.keys.has('ArrowRight')) - Number(this.keys.has('KeyA') || this.keys.has('ArrowLeft'));
@@ -177,17 +180,6 @@ export class PlayerController {
       this.walkTo(this.feet.x + dx, this.feet.z);
       this.walkTo(this.feet.x, this.feet.z + dz);
       this.camera.position.set(this.feet.x, this.feet.y + EYE_HEIGHT, this.feet.z);
-    } else {
-      const dir = new THREE.Vector3();
-      this.camera.getWorldDirection(dir);
-      const right = new THREE.Vector3(Math.cos(this.yaw), 0, -Math.sin(this.yaw));
-      const speed = this.mode === 'jet' ? this.jetSpeed : (sprint ? 240 : 85);
-      if (this.mode === 'jet') forward = 1 + forward * 0.6;
-      this.camera.position.addScaledVector(dir, forward * speed * dt);
-      this.camera.position.addScaledVector(right, strafe * speed * dt);
-      const climb = Number(this.keys.has('KeyR') || this.keys.has('Space')) - Number(this.keys.has('KeyQ') || this.keys.has('ControlLeft'));
-      this.camera.position.y += climb * speed * dt;
-      this.clampFlight();
     }
   }
 
@@ -198,6 +190,7 @@ export class PlayerController {
     x = THREE.MathUtils.clamp(x, -limit, limit);
     z = THREE.MathUtils.clamp(z, -limit, limit);
     const candidate = { x, y: this.feet.y, z };
+    if (!this.inside && blocksTransportBarrier(this.world, this.feet, candidate, BODY_RADIUS)) return;
     for (const b of this.world.buildings) {
       if (b.kind === 'pavilion') continue;
       if (Math.abs(x - b.position.x) > b.width / 2 + 1 || Math.abs(z - b.position.z) > b.depth / 2 + 1) continue;
@@ -236,13 +229,6 @@ export class PlayerController {
     const level = b.id === this.inside?.id ? this.floor : 0;
     const { width, depth } = getFloorDimensions(b, level);
     return Math.abs(p.x - b.position.x) < width / 2 - margin && Math.abs(p.z - b.position.z) < depth / 2 - margin;
-  }
-  private clampFlight(): void {
-    const limit = this.world.size * 0.52;
-    this.camera.position.x = THREE.MathUtils.clamp(this.camera.position.x, -limit, limit);
-    this.camera.position.z = THREE.MathUtils.clamp(this.camera.position.z, -limit, limit);
-    const floor = getWalkHeight(this.world, this.camera.position.x, this.camera.position.z);
-    this.camera.position.y = THREE.MathUtils.clamp(this.camera.position.y, floor + (this.mode === 'jet' ? 12 : 2), 1800);
   }
   private readAngles(): void { const e = new THREE.Euler().setFromQuaternion(this.camera.quaternion, 'YXZ'); this.yaw = e.y; this.pitch = e.x; }
   private orient(): void { this.camera.quaternion.setFromEuler(new THREE.Euler(this.pitch, this.yaw, 0, 'YXZ')); }

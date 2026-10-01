@@ -18,16 +18,24 @@ const check = (name, data) => { results.push({ name, ...data }); console.log(`PA
 try {
   const buildIndex = await readFile('dist/index.html', 'utf8');
   buildEntry = buildIndex.match(/src="([^"]+\.js)"/)?.[1] ?? null;
-  sourceHashes = Object.fromEntries(await Promise.all(['src/simulation.ts', 'src/simulation/extensions.ts', 'src/main.ts', 'src/world.ts', 'src/renderer.ts', 'src/controller.ts', 'src/ui.ts'].map(async path => [path, createHash('sha256').update(await readFile(path)).digest('hex')])));
+  sourceHashes = Object.fromEntries(await Promise.all(['src/simulation.ts', 'src/simulation/extensions.ts', 'src/main.ts', 'src/world.ts', 'src/renderer.ts', 'src/controller.ts', 'src/ui.ts', 'src/aviation.ts', 'src/aviation-renderer.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/persistence.ts', 'src/transport-geometry.ts'].map(async path => [path, createHash('sha256').update(await readFile(path)).digest('hex')])));
   await mkdir('artifacts', { recursive: true });
+  // Confirm this child owns the requested port before touching the endpoint.
+  // A response from another preview process cannot verify this build.
   for (let attempt = 0; attempt < 100; attempt++) {
-    try { const response = await fetch(`http://127.0.0.1:${port}`); if (response.ok) break; } catch { /* startup */ }
     if (server.exitCode !== null) throw new Error(`Preview failed: ${output}`);
+    if (output.includes(`http://127.0.0.1:${port}`)) break;
     await new Promise(resolve => setTimeout(resolve, 100));
-    if (attempt === 99) throw new Error(`Preview timeout: ${output}`);
+    if (attempt === 99) throw new Error(`Preview startup marker missing: ${output}`);
   }
+  const served = await fetch(`http://127.0.0.1:${port}`);
+  if (!served.ok) throw new Error(`Preview HTTP ${served.status}`);
+  const servedEntry = (await served.text()).match(/src="([^"]+\.js)"/)?.[1] ?? null;
+  assert(buildEntry && servedEntry === buildEntry, `Preview served ${servedEntry}; expected ${buildEntry}`);
+
   browser = await chromium.launch({ executablePath: process.env.YUNSHAN_CHROMIUM ?? '/usr/bin/chromium', headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+  page.setDefaultTimeout(120_000); // Software WebGL can spend over 30s producing the frames needed for action stability.
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(`${message.text()} ${message.location().url}`.trim()); });
   await page.goto(`http://127.0.0.1:${port}/?debug=1`, { waitUntil: 'networkidle', timeout: 90_000 });
@@ -37,7 +45,9 @@ try {
     return { districts: world.districts.length, buildings: world.buildings.length, citizens: simulation.state.citizens.length, vehicles: simulation.state.vehicles.length, tick: simulation.state.tick, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, fps: getView().fps };
   });
   assert(initial.districts >= 7 && initial.buildings >= 150 && initial.citizens >= 200 && initial.vehicles > 10 && initial.drawCalls > 0 && initial.triangles > 1000);
-  check('world boots, WebGL renders and city simulation advances', initial);
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  assert(await page.evaluate(() => window.__YUNSHAN__.simulation.state.aviation.aircraft.length > 1));
+  check('world boots in first person with real city aircraft and live simulation', initial);
   const panelToggle = page.getByTestId('panel-toggle');
   const expanded = await panelToggle.getAttribute('aria-expanded');
   await panelToggle.focus();
@@ -52,10 +62,10 @@ try {
   assert.equal(await page.evaluate(() => window.__YUNSHAN__.simulation.state.tick), pausedTick);
   const dayHour = await page.evaluate(() => window.__YUNSHAN__.simulation.state.hour);
   assert(Math.abs(dayHour - 15.5) < 0.01);
-  await page.screenshot({ path: 'artifacts/day.png' });
+  await page.screenshot({ timeout: 120_000, path: 'artifacts/day.png' });
   await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'setTime', value: 22 }));
   await page.waitForTimeout(500);
-  await page.screenshot({ path: 'artifacts/night.png' });
+  await page.screenshot({ timeout: 120_000, path: 'artifacts/night.png' });
   check('manual time and paused simulation with day/night rendering', { dayHour, nightHour: 22 });
 
   await page.getByTestId('mode-walk').click();
@@ -81,7 +91,7 @@ try {
   assert.equal(entered.inside, true);
   assert.equal(entered.nearbyId, entered.id);
   await page.waitForTimeout(300);
-  await page.screenshot({ path: 'artifacts/interior.png' });
+  await page.screenshot({ timeout: 120_000, path: 'artifacts/interior.png' });
   const purchase = await page.evaluate(id => {
     const { simulation } = window.__YUNSHAN__;
     const before = simulation.state.player.money;
@@ -188,15 +198,76 @@ try {
   await page.evaluate(async () => { await window.__YUNSHAN__.actions.load(); });
 
   await page.getByTestId('mode-jet').click();
-  const jetStart = await page.evaluate(() => window.__YUNSHAN__.controller.position);
-  await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'pause', value: 0 }));
-  await page.waitForFunction(before => Math.hypot(window.__YUNSHAN__.controller.position.x - before.x, window.__YUNSHAN__.controller.position.z - before.z) > 12, jetStart, { timeout: 20_000 });
-  const jetEnd = await page.evaluate(() => window.__YUNSHAN__.controller.position);
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.simulation.state.aviation.activeAircraftId), null);
+  const jetFixture = await page.evaluate(() => {
+    const { simulation, controller, actions } = window.__YUNSHAN__;
+    const craft = simulation.state.aviation.aircraft.find(c => c.kind === 'jet');
+    simulation.state.player.position = { ...craft.position, x: craft.position.x + 4, y: craft.position.y - .6 };
+    simulation.state.player.identities = ['traveler', 'driver']; simulation.state.player.role = 'driver';
+    controller.setMode('walk', simulation.state.player.position); actions.command({ type: 'setTime', value: 10 });
+    simulation.state.weather = '晴'; simulation.state.visibility = 1;
+    return { id: craft.id, position: { ...craft.position } };
+  });
+  await page.getByTestId('mode-jet').click();
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  await page.evaluate(() => window.__YUNSHAN__.simulation.state.player.identities.push('soldier'));
+  await page.getByTestId('mode-jet').click();
   assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'jet');
-  assert(Math.hypot(jetStart.x - jetEnd.x, jetStart.z - jetEnd.z) > 10);
-  check('jet view flies continuously through the world', { metres: Math.hypot(jetStart.x - jetEnd.x, jetStart.z - jetEnd.z) });
+  await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'pause', value: 0 }));
+  await page.keyboard.down('KeyR');
+  await page.waitForFunction(start => window.__YUNSHAN__.controller.position.y - start.y > 35, jetFixture.position, { timeout: 30_000 });
+  await page.keyboard.up('KeyR');
+  const jetStart = await page.evaluate(() => ({ ...window.__YUNSHAN__.controller.position }));
+  await page.waitForFunction(before => Math.hypot(window.__YUNSHAN__.controller.position.x - before.x, window.__YUNSHAN__.controller.position.z - before.z) > 12, jetStart, { timeout: 30_000 });
+  const jetEnd = await page.evaluate(() => {
+    const { simulation, controller } = window.__YUNSHAN__;
+    const craft = simulation.state.aviation.aircraft.find(c => c.id === simulation.state.aviation.activeAircraftId);
+    return { position: controller.position, passengerDistance: Math.hypot(craft.position.x - simulation.state.player.position.x, craft.position.z - simulation.state.player.position.z), battery: craft.battery };
+  });
+  assert.equal(jetEnd.passengerDistance, 0); assert(jetEnd.battery < 100);
+  await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'pause', value: 1 }));
+  await page.locator('canvas').first().hover({ position: { x: 950, y: 350 } });
+  await page.mouse.wheel(0, -1000);
+  await page.waitForFunction(() => window.__YUNSHAN__.simulation.state.aviation.controls.speed === window.__YUNSHAN__.controller.jetSpeed && window.__YUNSHAN__.controller.jetSpeed > 120, null, { timeout: 30_000 });
+  const savedFlightSpeed = await page.evaluate(async () => { const d = window.__YUNSHAN__; const speed = d.controller.jetSpeed; await d.actions.save(); d.controller.jetSpeed = 85; await d.actions.load(); return { requested: speed, restored: d.controller.jetSpeed, mode: d.controller.mode }; });
+  assert.equal(savedFlightSpeed.restored, savedFlightSpeed.requested); assert.equal(savedFlightSpeed.mode, 'jet');
+  await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'pause', value: 0 }));
+  await page.getByTestId('mode-walk').click();
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'jet');
+  await page.keyboard.press('KeyE');
+  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', jetFixture.id, { timeout: 60_000 });
+  await page.keyboard.press('KeyE');
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  check('military identity, actual keyboard VTOL flight, passenger position, safe return and exit', { metres: Math.hypot(jetStart.x - jetEnd.position.x, jetStart.z - jetEnd.position.z), battery: jetEnd.battery });
 
   await page.getByTestId('mode-drone').click();
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  const droneFixture = await page.evaluate(() => {
+    const { simulation, controller, actions } = window.__YUNSHAN__;
+    actions.command({ type: 'pause', value: 1 });
+    const craft = simulation.state.aviation.aircraft.find(c => c.kind === 'drone');
+    simulation.state.player.position = { ...craft.position, x: craft.position.x + 2, y: craft.position.y - .6 };
+    controller.setMode('walk', simulation.state.player.position);
+    return { id: craft.id, position: { ...craft.position }, money: simulation.state.player.money, treasury: simulation.state.treasury };
+  });
+  await page.keyboard.press('KeyE');
+  const rental = await page.evaluate(() => ({ cash: window.__YUNSHAN__.simulation.state.player.money, treasury: window.__YUNSHAN__.simulation.state.treasury, active: window.__YUNSHAN__.simulation.state.aviation.activeAircraftId }));
+  assert.equal(rental.cash, droneFixture.money - 24); assert.equal(rental.treasury, droneFixture.treasury + 24); assert.equal(rental.active, null);
+  await page.keyboard.press('KeyE');
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'drone');
+  await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'pause', value: 0 }));
+  await page.keyboard.down('KeyR');
+  await page.waitForFunction(start => window.__YUNSHAN__.controller.position.y - start.y > 30, droneFixture.position, { timeout: 30_000 });
+  await page.keyboard.up('KeyR');
+  await page.keyboard.press('KeyE');
+  await page.waitForFunction(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.status === 'parked', droneFixture.id, { timeout: 60_000 });
+  await page.keyboard.press('KeyE');
+  await page.evaluate(id => window.__YUNSHAN__.actions.command({ type: 'returnAircraft', targetId: id }), droneFixture.id);
+  assert.equal(await page.evaluate(() => window.__YUNSHAN__.controller.mode), 'walk');
+  assert.equal(await page.evaluate(id => window.__YUNSHAN__.simulation.state.aviation.aircraft.find(c => c.id === id)?.reserved, droneFixture.id), false);
+  check('city drone rental transfers cash, boards on foot, flies, lands, exits and ends the lease', { fee: 24 });
+
   await page.evaluate(() => window.__YUNSHAN__.actions.setQuality('low'));
   await page.setViewportSize({ width: 768, height: 900 });
   await page.waitForTimeout(400);

@@ -1,0 +1,130 @@
+{
+  "checkedAt": "2026-10-01",
+  "status": "blocked",
+  "authorizedReferenceCount": 9,
+  "localFilesObtained": 0,
+  "imagesViewed": 0,
+  "workflow": "Official Library prepare_materialize with exact user-supplied Library IDs, followed by the current Library file transfer helper. No search guesses or alternate download routes.",
+  "error": "library file transfer failed: download failed",
+  "connectionError": "URLError <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "classification": "Observed outbound proxy access restriction. First five links were valid until about 15:25 UTC when checked about 14:27 UTC; no expiry or file-missing evidence.",
+  "hosts": [
+    "oaisdmntprwestus2.blob.core.windows.net",
+    "oaisdmntprcentralus.blob.core.windows.net",
+    "oaisdmntprkoreacentral.blob.core.windows.net",
+    "oaisdmntprukwest.blob.core.windows.net"
+  ],
+  "references": [
+    {
+      "library_file_id": "libfile_907d3c89332881919750c14a8bc41e06",
+      "file_name": "QQ_1790864225185.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 1411684,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_b2f427556a508191b4da01a835886145",
+      "file_name": "QQ_1790864250126.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 1163743,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_bb5435a295488191a1bc3fda3bc7d09e",
+      "file_name": "QQ_1790864262656.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 941198,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_ebd20a9daa148191bf6bf0c5ab68dbdb",
+      "file_name": "QQ_1790864288690.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 1420096,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_7ae69fa0367081919f383a47d1d1f659",
+      "file_name": "image(6).png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 3179701,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_4510fb6ec33c8191ac489204dcd9f213",
+      "file_name": "119033.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 2790162,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_7315101181108191a33221a93cd564be",
+      "file_name": "119034.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 2749824,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_48b6393ac66881919da75c4ef69d8853",
+      "file_name": "119035.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 2903346,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    },
+    {
+      "library_file_id": "libfile_da7f5c5df3e081918d6dd2eb20953890",
+      "file_name": "119036.png",
+      "mime_type": "image/png",
+      "expectedSizeBytes": 2732124,
+      "bytesDownloaded": 0,
+      "pixelsViewed": false
+    }
+  ],
+  "scope": "All 9 authorized Library records resolved; none of the 9 original image pixel files could be materialized. Text descriptions are not image inspection evidence.",
+  "githubResolution": {
+    "commit": "6955d37",
+    "at": "2026-10-01T15:49:19.884215+00:00",
+    "source": "Authorized repository git fetch and fast-forward; five uploaded original PNGs",
+    "files": [
+      {
+        "path": "参考图/参考图1.png",
+        "bytes": 2656640,
+        "sha256": "5f36a4d0c513e368a3e124df250fc4a0bd4ff822a961f0e0e2ed134bac10e3b8",
+        "pixelsViewed": true
+      },
+      {
+        "path": "参考图/参考图2.png",
+        "bytes": 2712178,
+        "sha256": "074aa791d8cede78c2d99e8da3f32b50066f20b6e5b21381f5102bd29e5bcca9",
+        "pixelsViewed": true
+      },
+      {
+        "path": "参考图/参考图3.png",
+        "bytes": 2677513,
+        "sha256": "11e05cbe94b32f69f506b49a88063b8e9fb6e005f504decc47181054f3489f7d",
+        "pixelsViewed": true
+      },
+      {
+        "path": "参考图/参考图4.png",
+        "bytes": 2803503,
+        "sha256": "f8b76e7b7f6a2977cb32f7b0e581bdefdd7327432dec77991c22fdd169e0b3b3",
+        "pixelsViewed": true
+      },
+      {
+        "path": "参考图/参考图5.png",
+        "bytes": 2990016,
+        "sha256": "4e33ab1733fb6b4aeb18c387f41183fcf7bbae448194f0c3a9c33a99f916f3a5",
+        "pixelsViewed": true
+      }
+    ],
+    "blockingVisualReferenceAccess": false
+  }
+}

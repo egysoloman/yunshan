@@ -1,5 +1,8 @@
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
 import { installExtensions } from './simulation/extensions';
+import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
+import { installFamily } from './simulation/family';
+import { installCulture } from './simulation/culture';
 import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building } from './types';
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
@@ -12,7 +15,8 @@ const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.
 const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
-type Event = { type: string; amount?: number; citizenId?: string; shopId?: string; districtId?: string; vehicleId?: string; crimeId?: string; minutes?: number };
+const initialCommuteCache = new WeakMap<WorldDefinition, { fingerprint: string; homes: Map<string, Map<string, number>> }>();
+type Event = { type: string; amount?: number; citizenId?: string; shopId?: string; districtId?: string; vehicleId?: string; crimeId?: string; minutes?: number; requestedAmount?: number; quantity?: number };
 class EventBus {
   private handlers = new Map<string, ((event: Event) => void)[]>();
   on(type: string, handler: (event: Event) => void) { const list = this.handlers.get(type) ?? []; list.push(handler); this.handlers.set(type, list); }
@@ -21,16 +25,21 @@ class EventBus {
 interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
-  wages: { citizenId: string; amount: number; districtId: string }[];
+  wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null }[];
+  wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
+  freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
+  cargoSources?: Record<string, string>;
   campaign: { countAt: number; votes: number } | null;
   signalOverrides: Record<string, number>; constructionId: number; energyBoostUntil: number;
   operatingCost: number; restAt: number; relationshipAt: Record<string, number>; lastInvestmentAt: number;
+  publicSupply?: number;
   riders: Record<string, { vehicleId: string; stopNodeId: string; arrived?: boolean }>;
   links: { from: string; to: string; type: string; affection: number; trust: number }[];
   impressions: Record<string, { affection: number; trust: number }>; districtRelationMeans: Record<string, number>;
   decisionAt: Record<string, number>; activities: Record<string, string>;
   attendance: Record<string, number>;
+  shopLabor?: Record<string, number>;
   customers: Record<string, string>;
   driving: { vehicleId: string | null; throttle: number; turn: number; brake: boolean; speed: number };
   dispatches: Record<string, { crimeId: string; arrived: boolean }>;
@@ -55,6 +64,7 @@ export class Simulation implements SimulationAPI {
   private readonly saveValidators: ((candidateState: SimState) => void)[] = [];
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
+  private readonly baselineCitizenIds = new Set<string>();
   private minutes = .25;
   private employment = new Set<string>();
   private readonly workforce = new Map<string, Citizen[]>();
@@ -69,6 +79,7 @@ export class Simulation implements SimulationAPI {
     this.runtime = { rng: (world.seed >>> 0) || 1, accumulator: 0, weatherAt: 9 * 60, crimeAt: 8 * 60 + 40, payrollAt: 17 * 60, commerceAt: 8 * 60, financeAt: 8 * 60, socialAt: 8 * 60, eventId: 0, crimeId: 0, focus: copy(world.spawn), mode: 'drone', detail: 1, workAt: -10000, studyAt: -10000, wages: [], taxes: 0, freight: {}, playerBusinesses: [], investment: 0, campaign: null, signalOverrides: {}, constructionId: 0, energyBoostUntil: 0, operatingCost: 0, restAt: -10000, relationshipAt: {}, lastInvestmentAt: -10000, riders: {}, links: [], impressions: {}, districtRelationMeans: {}, decisionAt: {}, activities: {}, attendance: {}, customers: {}, driving: { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 }, dispatches: {}, relationshipClock: 480, hostileAt: {} };
     this.state = { version: 1, seed: world.seed, tick: 0, day: 0, hour: 8, paused: false, speed: 1, weather: '晴', visibility: 1, energy: 98, treasury: 80000, taxRate: .08, policeBudget: .3, support: 58, bankBalance: 0, loan: 0, gdp: 0, lastSystemOrder: [], districts: world.districts.map(d => ({ id: d.id, energy: 98, safety: 84, employment: .94, prosperity: 68, pollution: 8, tier: 'statistical', residents: d.population, crimeCount: 0 })), citizens: [], vehicles: [], shops: [], player: { position: copy(world.spawn), role: 'traveler', identities: ['traveler'], money: 600, reputation: 0, needs: { hunger: 85, fatigue: 90, social: 70, fun: 70 }, inventory: { block: 32 }, homeId: null, education: 0, experience: 0, partnerId: null, vehicleId: null }, relationships: [], crimes: [], events: [], metrics: { trades: 0, commutes: 0, crimesResolved: 0, freight: 0, flights: 0 }, voxels: [] };
     this.initializeCitizens();
+    for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
     this.runtime.dispatches = {};
@@ -90,6 +101,11 @@ export class Simulation implements SimulationAPI {
     this.updateTiers();
     this.updateSignals();
     installExtensions(this);
+    this.initializeShopAccounts();
+    this.onLoad(() => this.initializeShopAccounts());
+    installAviation(this);
+    installFamily(this);
+    installCulture(this);
     this.notice('arrival', '来自星海的旅行者抵达云山。城市正在独立运行，欢迎步行探索。');
   }
   private addNeighbor(from: string, node: string, edge: NetworkEdge) { const list = this.neighbors.get(from) ?? []; list.push({ node, edge }); this.neighbors.set(from, list); }
@@ -102,6 +118,8 @@ export class Simulation implements SimulationAPI {
     const homes = this.world.buildings.filter(b => b.kind === 'home');
     const schools = this.world.buildings.filter(b => b.kind === 'school');
     const workplaces = this.world.buildings.filter(b => ['market', 'workshop', 'farm', 'bank', 'hall', 'police', 'school', 'clinic', 'station', 'airport', 'starport', 'dock', 'core'].includes(b.kind));
+    let sharedCommutes = initialCommuteCache.get(this.world);
+    if (!sharedCommutes || sharedCommutes.fingerprint !== this.fingerprint) { sharedCommutes = { fingerprint: this.fingerprint, homes: new Map() }; initialCommuteCache.set(this.world, sharedCommutes); }
     for (let i = 0; i < count; i++) {
       const district = this.world.districts[i % this.world.districts.length];
       const student = Math.floor(i / this.world.districts.length) % 11 === 0;
@@ -109,12 +127,16 @@ export class Simulation implements SimulationAPI {
       const home = (districtHomes.length ? districtHomes : homes.length ? homes : this.world.buildings)[Math.floor(i / this.world.districts.length) % Math.max(1, districtHomes.length || homes.length || this.world.buildings.length)];
       const districtJobs = workplaces.filter(b => b.districtId === district.id);
       const availableJobs = districtJobs.length ? districtJobs : workplaces.length ? workplaces : this.world.buildings;
-      const nearbyJobs = availableJobs.filter(b => distance(home.door, b.door) <= 500);
-      const jobPool = nearbyJobs.length ? nearbyJobs : [...availableJobs].sort((a, b) => distance(home.door, a.door) - distance(home.door, b.door)).slice(0, 4);
+      const homeNode = this.buildingNode(home); let costs = sharedCommutes.homes.get(homeNode.id);
+      if (!costs) { costs = this.walkingTree(homeNode.id).costs; sharedCommutes.homes.set(homeNode.id, costs); }
+      const commute = (b: Building) => distance(home.door, homeNode.position) + (costs.get(this.buildingNode(b).id) ?? Infinity) + distance(this.buildingNode(b).position, b.door);
+      const reachableJobs = availableJobs.filter(b => finite(commute(b)));
+      const nearbyJobs = reachableJobs.filter(b => commute(b) <= 500);
+      const jobPool = nearbyJobs.length ? nearbyJobs : [...reachableJobs].sort((a, b) => commute(a) - commute(b)).slice(0, 4);
       // Residency and ordinary employment share a real neighbourhood. A global
       // array index previously assigned 3–6 km daily walks without transit.
-      const defaultWork = jobPool[Math.floor(i / this.world.districts.length) % jobPool.length];
-      const school = schools.find(b => b.districtId === district.id) ?? schools.reduce<Building | null>((best, b) => !best || distance(b.door, home.door) < distance(best.door, home.door) ? b : best, null);
+      const defaultWork = jobPool[Math.floor(i / this.world.districts.length) % jobPool.length] ?? availableJobs[0];
+      const school = schools.reduce<Building | null>((best, b) => finite(commute(b)) && (!best || commute(b) < commute(best)) ? b : best, null);
       const work = student ? school ?? defaultWork : defaultWork;
       const facilityRole = ({ data: '科研员', energy: '工程师', administration: '官员', mayor: '官员', council: '议员', emergency: '警察', treasury: '财政官', archives: '档案员', embassy: '使节' } as Record<string, string>)[work.facility ?? ''];
       const role = facilityRole ?? ({ market: '商人', workshop: '工人', farm: '农民', bank: '钱庄职员', hall: '官员', police: '警察', school: '老师', clinic: '医生', station: '驾驶员', airport: '驾驶员', starport: '驾驶员', dock: '搬运工', core: '工程师' } as Record<string, string>)[work.kind] ?? '工人';
@@ -131,17 +153,59 @@ export class Simulation implements SimulationAPI {
   private refreshWorkforce(): void {
     this.workforce.clear();
     for (const citizen of this.state.citizens) {
-      if (citizen.role === '学生' || this.state.extension?.actorProfiles[citizen.id]?.alive === false) continue;
+      if (citizen.role === '学生' || (this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 18 || this.state.extension?.actorProfiles[citizen.id]?.alive === false) continue;
       const roster = this.workforce.get(citizen.workId) ?? []; roster.push(citizen); this.workforce.set(citizen.workId, roster);
     }
   }
   private isEmployed(citizen: Citizen): boolean {
-    if (citizen.role === '学生') return false;
+    if (citizen.role === '学生' || (this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 18) return false;
     const shop = this.state.shops.find(s => s.buildingId === citizen.workId);
     const index = this.workforce.get(citizen.workId)?.indexOf(citizen) ?? -1;
-    return !shop || shop.profit > -240 && index >= 0 && index < shop.employees;
+    return !shop || shop.profit > -600 && index >= 0 && index < shop.employees;
   }
-  private registerAttendance(citizen: Citizen, elapsed: number): void { this.employment.add(citizen.id); this.runtime.attendance[citizen.id] = Math.min(480, (this.runtime.attendance[citizen.id] ?? 0) + elapsed); }
+  private registerAttendance(citizen: Citizen, elapsed: number): void {
+    const previous = this.runtime.attendance[citizen.id] ?? 0;
+    const credited = Math.min(elapsed, Math.max(0, 480 - previous));
+    this.employment.add(citizen.id); this.runtime.attendance[citizen.id] = previous + credited;
+    const shop = this.state.shops.find(s => s.buildingId === citizen.workId);
+    if (shop && credited > 0) { const labor = this.runtime.shopLabor ??= {}; labor[shop.id] = (labor[shop.id] ?? 0) + credited; }
+  }
+  /** A company's capital is its operating account, never a second copy of cash. */
+  shopFunds(shop: Shop): number { return this.state.extension?.companies.find(c => c.buildingId === shop.buildingId)?.capital ?? shop.cash ?? 0; }
+  shopPayrollDebt(shop: Shop): number { return (this.runtime.wageArrears ?? []).filter(owed => owed.shopId === shop.id).reduce((sum, owed) => sum + owed.amount, 0); }
+  transferShopFunds(shop: Shop, amount: number): void {
+    const company = this.state.extension?.companies.find(c => c.buildingId === shop.buildingId);
+    if (company) company.capital = clamp(company.capital + amount, 0, 1e9);
+    else shop.cash = clamp((shop.cash ?? 0) + amount, 0, 1e9);
+  }
+  purchasePublicSupplies(request: number, districtId?: string, eventType = 'public-procurement'): number {
+    let paid = 0;
+    const suppliers = this.state.shops.filter(shop => ['farm', 'workshop', 'dock'].includes(this.buildings.get(shop.buildingId)!.kind) && shop.inventory > 0).sort((a, b) => Number(b.districtId === districtId) - Number(a.districtId === districtId) || b.inventory - a.inventory);
+    for (const supplier of suppliers) {
+      const payment = Math.min(Math.max(0, request - paid), this.state.treasury, supplier.inventory * 4);
+      if (payment <= 1e-9) break;
+      const net = payment * (1 - this.state.taxRate), consumed = payment / 4;
+      supplier.inventory -= consumed; this.state.treasury -= payment; this.transferShopFunds(supplier, net); supplier.revenue += payment; supplier.profit += net; this.runtime.taxes += payment - net; paid += payment;
+      this.bus.emit({ type: eventType, shopId: supplier.id, districtId: supplier.districtId, amount: payment, quantity: consumed });
+    }
+    return paid;
+  }
+  private initializeShopAccounts(): void {
+    for (const shop of this.state.shops) {
+      const owner = this.state.citizens.find(c => c.id === shop.ownerId) ?? this.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生' && this.state.extension?.actorProfiles[c.id]?.alive !== false) ?? this.state.citizens.find(c => c.districtId === shop.districtId && c.role !== '学生');
+      if (owner && shop.ownerId !== 'player') shop.ownerId = owner.id;
+      if (shop.cash !== undefined) continue;
+      // Pre-account saves migrate by moving the proprietor's existing savings.
+      // Incorporated shops already hold their separately recorded real capital.
+      const company = this.state.extension?.companies.find(c => c.buildingId === shop.buildingId);
+      const contribution = !company && shop.employees > 0 && owner ? Math.min(owner.money * .2, 80) : 0;
+      if (owner) owner.money -= contribution;
+      shop.cash = contribution;
+    }
+    for (const citizen of this.state.citizens) citizen.food ??= 0;
+    this.runtime.shopLabor ??= {}; this.runtime.cargoSources ??= {};
+    this.runtime.freightLots ??= Object.fromEntries(Object.entries(this.runtime.freight).map(([id, quantity]) => [id, [{ shopId: null, quantity }]]));
+  }
   private passengerCapacity(vehicle: Vehicle): number { return vehicle.kind === 'road' ? vehicle.cargo > 0 ? 2 : 10 : vehicle.kind === 'flight' ? 80 : Math.max(4, this.edges.get(vehicle.edgeId)?.capacity ?? 24); }
   private initializeSocialGraph() {
     const citizens = this.state.citizens;
@@ -164,9 +228,11 @@ export class Simulation implements SimulationAPI {
   }
   private connectSystems() {
     for (const phase of ORDER) this.bus.on(`system:${phase}`, () => this[phase]());
-    this.bus.on('wage', e => { if (e.citizenId && e.districtId) this.runtime.wages.push({ citizenId: e.citizenId, districtId: e.districtId, amount: e.amount ?? 0 }); });
+    this.bus.on('wage', e => { if (e.citizenId && e.districtId) { const citizen = this.state.citizens.find(c => c.id === e.citizenId); const shopId = citizen ? this.state.shops.find(shop => shop.buildingId === citizen.workId)?.id ?? null : null; this.runtime.wages.push({ citizenId: e.citizenId, districtId: e.districtId, amount: e.amount ?? 0, shopId }); } });
     this.bus.on('sale', e => { this.runtime.taxes += (e.amount ?? 0) * this.state.taxRate; this.state.gdp += e.amount ?? 0; this.state.metrics.trades++; });
-    this.bus.on('cargo-arrived', e => { if (e.districtId) this.runtime.freight[e.districtId] = (this.runtime.freight[e.districtId] ?? 0) + (e.amount ?? 0); this.state.metrics.freight += e.amount ?? 0; });
+    this.bus.on('business-expense', e => { this.state.treasury += e.amount ?? 0; });
+    this.bus.on('wholesale', e => { this.runtime.taxes += (e.amount ?? 0) * this.state.taxRate; });
+    this.bus.on('cargo-arrived', e => { if (e.districtId) { this.runtime.freight[e.districtId] = (this.runtime.freight[e.districtId] ?? 0) + (e.amount ?? 0); const lots = this.runtime.freightLots ??= {}, deliveries = lots[e.districtId] ??= [], owner = e.shopId ?? null; const existing = deliveries.find(lot => lot.shopId === owner); if (existing) existing.quantity += e.amount ?? 0; else deliveries.push({ shopId: owner, quantity: e.amount ?? 0 }); } this.state.metrics.freight += e.amount ?? 0; });
     this.bus.on('crime-resolved', e => { const district = this.state.districts.find(d => d.id === e.districtId); if (district) district.safety = clamp(district.safety + 1.8); this.state.metrics.crimesResolved++; });
     this.bus.on('commute', () => this.state.metrics.commutes++);
     this.bus.on('flight', () => this.state.metrics.flights++);
@@ -236,7 +302,7 @@ export class Simulation implements SimulationAPI {
   private energy() {
     const night = this.state.hour < 6 || this.state.hour >= 19;
     const demand = 53 + (night ? 19 : 8) + this.state.shops.filter(s => s.open).length * .08 + this.state.vehicles.length * .08;
-    const generation = 93 + Math.sin(this.now / 130) * 3 + (this.now < this.runtime.energyBoostUntil ? 20 : 0);
+    const generation = (93 + Math.sin(this.now / 130) * 3 + (this.now < this.runtime.energyBoostUntil ? 20 : 0)) * (.35 + .65 * (this.runtime.publicSupply ?? 1));
     this.state.energy = clamp(generation / Math.max(1, demand) * 78 - this.state.districts.reduce((n, d) => n + d.pollution, 0) / Math.max(1, this.state.districts.length) * .08);
     for (const district of this.state.districts) district.energy = clamp(this.state.energy - district.pollution * .04);
     this.runtime.operatingCost += this.minutes * (.9 + this.state.policeBudget * 1.8);
@@ -286,7 +352,7 @@ export class Simulation implements SimulationAPI {
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
         }
-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo }); vehicle.cargo = 0; const producer = this.state.shops.find(s => s.districtId === node.districtId && ['farm', 'workshop', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && s.inventory >= 1); if (producer) { vehicle.cargo = Math.min(producer.inventory, vehicle.kind === 'flight' ? 60 : 28); producer.inventory -= vehicle.cargo; } }
+        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; const producer = this.state.shops.find(s => s.districtId === node.districtId && ['farm', 'workshop', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && s.inventory >= 1); if (producer) { vehicle.cargo = Math.min(producer.inventory, vehicle.kind === 'flight' ? 60 : 28); producer.inventory -= vehicle.cargo; (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id; } }
         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id);
@@ -393,6 +459,8 @@ export class Simulation implements SimulationAPI {
       const profile = this.state.extension?.actorProfiles[citizen.id];
       if (building.kind === 'clinic' && profile && profile.health < 60 && (citizen.money >= 30 || this.state.treasury >= 30)) add(building, 'heal', (60 - profile.health) * 3 + profile.stress * .1);
       if (building.districtId !== citizen.districtId) continue;
+      const child = this.state.family?.children[citizen.id];
+      if (building.kind === 'school' && child && child.schoolId !== building.id) continue;
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
       if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0));
       if (['pavilion', 'station', 'clinic'].includes(building.kind) && citizen.needs.fatigue < 25) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
@@ -418,9 +486,11 @@ export class Simulation implements SimulationAPI {
       if ((this.state.tick + i) % frequency) continue;
       const elapsed = this.minutes * frequency;
       citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
+      if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
       citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
       citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
       citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
+      if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); continue; }
       const dispatch = this.runtime.dispatches[citizen.id];
       if (dispatch) {
         const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
@@ -449,29 +519,39 @@ export class Simulation implements SimulationAPI {
 
       const previousActivity = this.runtime.activities[citizen.id];
       const previousShop = this.state.shops.find(s => s.buildingId === citizen.destinationId);
-      const committedNeed = !!citizen.destinationId && (previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || previousActivity === 'heal' && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25);
+      const committedNeed = !!citizen.destinationId && (previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || previousActivity === 'heal' && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
       if (!committedNeed && (!citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
         const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
       this.setDestination(citizen, destination);
       if (distance(citizen.position, destination.door) > 200) {
+        const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
+        const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
         const transit = this.state.vehicles.find(v => {
           if (v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
           const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
-          return distance(end.position, destination.door) + 60 < distance(citizen.position, destination.door);
+          const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
+          const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
+          return rideTime + remainingWalk / walkingSpeed + 15 < walkingTime;
         });
         if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); continue; }
       }
-      if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0) && !this.moveCitizen(citizen, elapsed)) continue;
+      let arrivedElapsed = elapsed;
+      if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
+        let remainingDistance = 0, point = citizen.position;
+        for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
+        if (!this.moveCitizen(citizen, elapsed)) continue;
+        arrivedElapsed = Math.max(0, elapsed - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
+      }
       if (!this.isNearBuilding(destination, citizen.position, 1)) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       const activity = this.runtime.activities[citizen.id];
       if (destination.id === home.id || activity === 'rest') {
         citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + elapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + elapsed * .08);
       } else if (activity === 'work') {
         if (!this.isEmployed(citizen)) { citizen.state = 'unemployed'; citizen.destinationId = null; continue; }
-        if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + elapsed * .035); this.registerAttendance(citizen, elapsed);
+        if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
       } else if (activity === 'study') {
-        citizen.state = 'studying'; citizen.education = clamp((citizen.education ?? 0) + elapsed * .0004, 0, 20); if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + elapsed * .003); citizen.needs.social = clamp(citizen.needs.social + elapsed * .02);
+        citizen.state = 'studying'; if (!this.state.family?.children[citizen.id]) citizen.education = clamp((citizen.education ?? 0) + arrivedElapsed * .0004, 0, 20); if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02);
       } else if (activity === 'social') {
         citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + elapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + elapsed * .09);
       } else if (activity === 'heal') {
@@ -506,12 +586,44 @@ export class Simulation implements SimulationAPI {
       const serviceFailure = district.energy <= 25 || shop.profit <= -600;
       shop.open = scheduledOpen && !serviceFailure;
       shop.customers = 0;
+      const labor = this.runtime.shopLabor?.[shop.id] ?? 0;
+      if (this.runtime.shopLabor) delete this.runtime.shopLabor[shop.id];
       const cargo = this.runtime.freight[shop.districtId] ?? 0;
-      if (cargo > 0 && building.kind === 'market') { const received = Math.min(cargo, 14); shop.inventory = clamp(shop.inventory + received, 0, 10000); this.runtime.freight[shop.districtId] = cargo - received; }
+      if (cargo > 0 && building.kind === 'market' && shop.inventory < 36) {
+        const lots = this.runtime.freightLots ??= {}, deliveries = lots[shop.districtId] ??= [{ shopId: null, quantity: cargo }];
+        let received = 0;
+        while (deliveries.length && received < 14 && shop.inventory < 70 && this.shopFunds(shop) >= 4) {
+          const lot = deliveries[0], quantity = Math.min(lot.quantity, 14 - received, 70 - shop.inventory, Math.floor(this.shopFunds(shop) / 4)), payment = quantity * 4;
+          if (quantity <= 0) break;
+          this.transferShopFunds(shop, -payment);
+          const source = this.state.shops.find(s => s.id === lot.shopId);
+          if (source) { const net = payment * (1 - this.state.taxRate); this.transferShopFunds(source, net); source.revenue += payment; source.profit += net; this.bus.emit({ type: 'wholesale', shopId: source.id, districtId: source.districtId, amount: payment }); }
+          else this.bus.emit({ type: 'business-expense', shopId: shop.id, districtId: shop.districtId, amount: payment });
+          lot.quantity -= quantity; shop.inventory += quantity; received += quantity;
+          if (lot.quantity < 1e-7) deliveries.shift();
+        }
+        this.runtime.freight[shop.districtId] = Math.max(0, cargo - received);
+      }
       if (shop.open && ['farm', 'workshop', 'dock'].includes(building.kind)) {
-        const input = building.kind === 'workshop' ? Math.min(this.runtime.freight[shop.districtId] ?? 0, 10) : 8;
-        if (building.kind === 'workshop') this.runtime.freight[shop.districtId] = Math.max(0, (this.runtime.freight[shop.districtId] ?? 0) - input);
-        shop.inventory = clamp(shop.inventory + input * district.energy / 100, 0, 10000);
+        const technology = this.state.extension?.technologies.find(t => t.sector === (building.kind === 'farm' ? 'agriculture' : 'manufacturing'))?.level ?? 0;
+        const produced = Math.min(Math.max(0, 120 - shop.inventory), labor / 30 * district.energy / 100 * (1 + technology * .12));
+        shop.inventory = clamp(shop.inventory + produced, 0, 10000);
+        if (produced > 0) this.bus.emit({ type: 'production', shopId: shop.id, districtId: shop.districtId, amount: produced, minutes: labor });
+      }
+      // Retail replenishment is a paid, finite transfer of a producer's stock.
+      // Empty/absent workers cannot create saleable inventory or supplier income.
+      if (shop.open && building.kind === 'market' && shop.inventory < 36 && this.shopFunds(shop) >= 4) {
+        const suppliers = this.state.shops.filter(s => s.id !== shop.id && s.districtId === shop.districtId && ['farm', 'workshop', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && s.inventory >= 1).sort((a, b) => b.inventory - a.inventory);
+        for (const supplier of suppliers) {
+          const quantity = Math.min(Math.floor(supplier.inventory), 70 - shop.inventory, Math.floor(this.shopFunds(shop) / 4));
+          if (quantity <= 0) break;
+          const payment = quantity * 4, net = payment * (1 - this.state.taxRate);
+          supplier.inventory -= quantity; shop.inventory += quantity;
+          this.transferShopFunds(shop, -payment); this.transferShopFunds(supplier, net);
+          supplier.revenue += payment; supplier.profit += net;
+          this.bus.emit({ type: 'wholesale', shopId: supplier.id, districtId: supplier.districtId, amount: payment });
+          if (shop.inventory >= 70) break;
+        }
       }
       if (shop.open) {
         for (const [citizenId, shopId] of Object.entries(this.runtime.customers)) {
@@ -523,20 +635,27 @@ export class Simulation implements SimulationAPI {
           if (distance(citizen.position, building.position) > Math.max(building.width, building.depth) / 2 + 3) continue;
           const trust = this.state.relationships.find(r => r.npcId === citizen.id)?.trust ?? 0;
           const price = shop.price * (trust > 55 ? .95 : 1);
-          citizen.money -= price; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); citizen.needs.fun = clamp(citizen.needs.fun + 8); shop.inventory--; shop.customers++; shop.revenue += price; shop.profit += price * (1 - this.state.taxRate) - 4;
-          this.bus.emit({ type: 'sale', amount: price, districtId: shop.districtId });
+          const quantity = Math.min((citizen.food ?? 0) < 1 ? 2 : 1, Math.floor(citizen.money / price), Math.floor(shop.inventory));
+          const cost = price * quantity, net = cost * (1 - this.state.taxRate);
+          citizen.money -= cost; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); citizen.food = (citizen.food ?? 0) + quantity - 1; citizen.needs.fun = clamp(citizen.needs.fun + 8); shop.inventory -= quantity; shop.customers += quantity; shop.revenue += cost; shop.profit += net - (building.kind === 'market' ? 4 * quantity : 0);
+          this.transferShopFunds(shop, net);
+          this.bus.emit({ type: 'sale', amount: cost, citizenId: citizen.id, shopId: shop.id, districtId: shop.districtId });
         }
         // Wages are charged once, when finance transfers the attended salary.
         // Only the separately modelled premises/utilities expense accrues here.
-        shop.profit -= elapsed / 1440 * 20;
+        const occupancy = Math.min(1, labor / elapsed);
+        const utilities = Math.min(this.shopFunds(shop), elapsed / 1440 * 20 * occupancy);
+        this.transferShopFunds(shop, -utilities); shop.profit -= utilities;
+        if (utilities > 0) this.bus.emit({ type: 'business-expense', amount: utilities, shopId: shop.id, districtId: shop.districtId });
       }
       const scarcity = clamp((70 - shop.inventory) / 70, -.4, 2);
       const demand = shop.customers / Math.max(1, shop.employees);
       shop.price = clamp(shop.price + (12 * (1 + scarcity * .5 + demand * .08) - shop.price) * .04, 5, 40);
-      if (shop.profit < -240) shop.employees = Math.max(0, shop.employees - 1);
       const rosterSize = this.workforce.get(shop.buildingId)?.length ?? 0;
       shop.employees = Math.min(shop.employees, rosterSize);
-      if (shop.profit > 200 && shop.employees < rosterSize) shop.employees++;
+      // Payroll decides affordability once per attended shift. A rolling profit
+      // threshold must not dismiss the same roster every ten game minutes.
+      if (shop.profit > 200 && this.shopFunds(shop) > 64 && shop.employees < rosterSize) shop.employees++;
       const feedback = commercialFeedback.get(district.id) ?? { sum: 0, count: 0 };
       feedback.sum += serviceFailure ? -.07 : scheduledOpen ? shop.customers * .07 - .01 : 0; feedback.count++; commercialFeedback.set(district.id, feedback);
       district.pollution = clamp(district.pollution + (building.kind === 'workshop' ? .005 : -.002) * elapsed / 10);
@@ -544,21 +663,44 @@ export class Simulation implements SimulationAPI {
     for (const district of this.state.districts) {
       const feedback = commercialFeedback.get(district.id);
       if (feedback?.count) district.prosperity = clamp(district.prosperity + feedback.sum / feedback.count * elapsed / 10);
-      const adults = this.state.citizens.filter(c => c.districtId === district.id && c.role !== '学生' && this.state.extension?.actorProfiles[c.id]?.alive !== false);
+      const adults = this.state.citizens.filter(c => c.districtId === district.id && c.role !== '学生' && (this.state.extension?.actorProfiles[c.id]?.age ?? 20) >= 18 && this.state.extension?.actorProfiles[c.id]?.alive !== false);
       district.employment = adults.length ? adults.filter(c => this.isEmployed(c)).length / adults.length : 1;
     }
     this.runtime.customers = {};
   }
   private finance() {
-    for (const wage of this.runtime.wages) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (!citizen) continue; const workplace = this.buildings.get(citizen.workId)!; const employer = this.state.shops.find(s => s.buildingId === workplace.id); const amount = employer ? wage.amount : Math.min(this.state.treasury, wage.amount); if (employer) employer.profit -= amount; else this.state.treasury -= amount; const tax = amount * this.state.taxRate; citizen.money = clamp(citizen.money + amount - tax, 0, 1e9); this.runtime.taxes += tax; }
+    const requestedOperation = this.runtime.operatingCost;
+    // Public upkeep consumes real supplies from productive firms. Payment is
+    // reserved before salaries and tax is remitted through the normal queue.
+    const operationPaid = this.purchasePublicSupplies(requestedOperation);
+    this.runtime.publicSupply = requestedOperation > 1e-9 ? operationPaid / requestedOperation : 1;
+    this.runtime.operatingCost = 0;
+    const pending = new Map<string, { citizenId: string; shopId: string | null; amount: number }>();
+    const accrue = (citizenId: string, shopId: string | null, amount: number) => { const key = `${shopId ?? 'public'}:${citizenId}`, owed = pending.get(key); if (owed) owed.amount += amount; else pending.set(key, { citizenId, shopId, amount }); };
+    for (const owed of this.runtime.wageArrears ?? []) accrue(owed.citizenId, owed.shopId, owed.amount);
+    for (const wage of this.runtime.wages) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (citizen) accrue(citizen.id, wage.shopId === undefined ? this.state.shops.find(s => s.buildingId === citizen.workId)?.id ?? null : wage.shopId, wage.amount); }
+    const privateRequests = new Map<string, number>();
+    let publicRequest = 0;
+    for (const wage of pending.values()) { if (wage.shopId) privateRequests.set(wage.shopId, (privateRequests.get(wage.shopId) ?? 0) + wage.amount); else publicRequest += wage.amount; }
+    const publicRatio = Math.min(1, this.state.treasury / Math.max(1e-9, publicRequest));
+    const privateRatios = new Map(this.state.shops.map(shop => [shop.id, Math.min(1, this.shopFunds(shop) / Math.max(1e-9, privateRequests.get(shop.id) ?? 0))]));
+    const arrears: NonNullable<Runtime['wageArrears']> = [];
+    for (const wage of pending.values()) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (!citizen) continue; const employer = wage.shopId ? this.state.shops.find(s => s.id === wage.shopId)! : null; const amount = employer ? wage.amount * privateRatios.get(employer.id)! : wage.amount * publicRatio; if (employer) { this.transferShopFunds(employer, -amount); employer.profit -= amount; } else this.state.treasury -= amount; const tax = amount * this.state.taxRate; citizen.money = clamp(citizen.money + amount - tax, 0, 1e9); this.runtime.taxes += tax; const unpaid = wage.amount - amount; if (unpaid > 1e-8) arrears.push({ ...wage, amount: unpaid }); if (amount > 0) this.bus.emit({ type: 'wage-paid', citizenId: citizen.id, shopId: employer?.id, districtId: citizen.districtId, amount, requestedAmount: wage.amount }); }
+    this.runtime.wageArrears = arrears;
     this.runtime.wages.length = 0;
-    this.state.treasury = clamp(this.state.treasury + this.runtime.taxes - this.runtime.operatingCost, 0, 1e12); this.runtime.taxes = 0; this.runtime.operatingCost = 0;
+    this.state.treasury = clamp(this.state.treasury + this.runtime.taxes, 0, 1e12); this.runtime.taxes = 0;
     if (this.now + 1e-7 >= this.runtime.financeAt) {
       const hours = Math.max(1, (this.now - this.runtime.financeAt + 60) / 60); this.runtime.financeAt = this.now + 60;
       this.state.bankBalance = clamp(this.state.bankBalance * (1 + .000015 * hours), 0, 1e9);
       this.state.loan = clamp(this.state.loan * (1 + .00008 * hours), 0, 1e9);
       if (this.runtime.investment > 0) { const prosperity = this.state.districts.reduce((n, d) => n + d.prosperity, 0) / this.state.districts.length; this.state.player.money = clamp(this.state.player.money + this.runtime.investment * .0008 * (prosperity - 35) / 30 * hours, 0, 1e9); }
-      for (const id of this.runtime.playerBusinesses) { const shop = this.state.shops.find(s => s.id === id); if (shop && !this.state.extension?.companies.some(company => company.buildingId === shop.buildingId)) { const dividend = Math.max(0, shop.profit) * .005; this.state.player.money += dividend; shop.profit -= dividend; } }
+      for (const shop of this.state.shops) if (!this.state.extension?.companies.some(company => company.buildingId === shop.buildingId) && shop.profit > 0 && this.shopPayrollDebt(shop) <= 1e-8) {
+        const recipient = this.runtime.playerBusinesses.includes(shop.id) ? this.state.player : this.state.citizens.find(c => c.id === shop.ownerId);
+        if (!recipient) continue;
+        const reserve = 64 + shop.employees * 32, dividend = Math.max(0, this.shopFunds(shop) - reserve) * Math.min(1, .03 * hours);
+        this.transferShopFunds(shop, -dividend); recipient.money = clamp(recipient.money + dividend, 0, 1e9);
+        if (dividend > 0) this.bus.emit({ type: 'business-dividend', citizenId: 'id' in recipient ? recipient.id : 'player', shopId: shop.id, districtId: shop.districtId, amount: dividend });
+      }
     }
   }
   private security() {
@@ -579,7 +721,9 @@ export class Simulation implements SimulationAPI {
         const target = this.world.buildings.reduce((a, b) => distance(a.door, crime.position) < distance(b.door, crime.position) ? a : b);
         const officer = this.state.citizens.filter(c => this.citizenIdentity(c) === 'police' && c.needs.hunger >= 35 && c.needs.fatigue >= 30 && (this.state.extension?.actorProfiles[c.id]?.health ?? 100) >= 45 && !this.runtime.dispatches[c.id] && !this.runtime.riders[c.id] && this.state.extension?.actorProfiles[c.id]?.alive !== false).map(c => ({ citizen: c, travel: this.walkingDistance(c, target) })).filter(candidate => finite(candidate.travel)).sort((a, b) => a.travel - b.travel)[0]?.citizen;
         if (!officer) continue;
-        crime.status = 'responding'; this.state.treasury = Math.max(0, this.state.treasury - 12 * crime.severity);
+        const supplies = this.state.shops.filter(shop => ['farm', 'workshop', 'dock'].includes(this.buildings.get(shop.buildingId)!.kind)).reduce((sum, shop) => sum + shop.inventory, 0);
+        if (supplies * 4 < 12 * crime.severity) continue;
+        this.purchasePublicSupplies(12 * crime.severity, crime.districtId, 'security-procurement'); crime.status = 'responding';
         this.bus.emit({ type: 'dispatch', citizenId: officer.id, crimeId: crime.id });
         const route = officer.route ?? []; let remaining = 0; for (let index = officer.routeIndex ?? 0; index < route.length; index++) remaining += distance(index === (officer.routeIndex ?? 0) ? officer.position : route[index - 1], route[index]);
         crime.responseAt = this.now + 10 + remaining / (this.state.weather === '雨' ? 3.1 : 4.2);
@@ -693,6 +837,7 @@ export class Simulation implements SimulationAPI {
     if (command.value !== undefined && !finite(command.value)) return fail('参数必须是有限数字。');
     if (command.position !== undefined && !this.validPosition(command.position)) return fail('位置超出世界范围。');
     if (!['pause', 'speed', 'setTime'].includes(command.type) && this.state.extension?.actorProfiles.player?.alive === false) return fail('角色生命已结束，无法继续行动；可调节时间或读取存档。');
+    if (this.state.aviation?.activeAircraftId && !['pause', 'speed', 'setTime'].includes(command.type) && !AIRCRAFT_COMMANDS.has(command.type)) return fail('请先在合法停机坪降落并离开机舱，再进行地面生活与职业操作。');
     for (const handler of this.commandHandlers) { const result = handler(command); if (result) return result; }
     const p = this.state.player;
     if (command.type === 'pause') { if (command.value !== undefined && ![0, 1].includes(command.value)) return fail('暂停参数为0或1。'); this.state.paused = command.value === undefined ? !this.state.paused : command.value === 1; return success(this.state.paused ? '时间已暂停。' : '城市继续运行。'); }
@@ -713,7 +858,7 @@ export class Simulation implements SimulationAPI {
       const quantity = command.value ?? 1; if (!Number.isInteger(quantity) || quantity < 1 || quantity > 30) return fail('购买数量须为1至30的整数。');
       if (!shop.open || shop.inventory < quantity) return fail('商铺休业或库存不足。');
       const cost = shop.price * quantity; if (p.money < cost) return fail('现金不足。');
-      p.money -= cost; shop.inventory -= quantity; shop.revenue += cost; shop.profit += cost * (1 - this.state.taxRate) - quantity * 4; shop.customers += quantity; p.inventory.food = (p.inventory.food ?? 0) + quantity; p.needs.hunger = clamp(p.needs.hunger + 25); this.bus.emit({ type: 'sale', amount: cost, districtId: shop.districtId }); return success(`在${building.name}购买${quantity}份食物，花费${cost.toFixed(1)}云币。`);
+      p.money -= cost; shop.inventory -= quantity; shop.revenue += cost; shop.profit += cost * (1 - this.state.taxRate) - (building.kind === 'market' ? quantity * 4 : 0); this.transferShopFunds(shop, cost * (1 - this.state.taxRate)); shop.customers += quantity; p.inventory.food = (p.inventory.food ?? 0) + quantity; p.needs.hunger = clamp(p.needs.hunger + 25); this.bus.emit({ type: 'sale', amount: cost, shopId: shop.id, districtId: shop.districtId }); return success(`在${building.name}购买${quantity}份食物，花费${cost.toFixed(1)}云币。`);
     }
     if (command.type === 'work') {
       const roleKinds: Record<Role, string[]> = { traveler: ['market', 'workshop', 'farm', 'dock'], police: ['police'], soldier: ['police', 'starport'], teacher: ['school'], driver: ['station', 'airport', 'starport', 'dock'], merchant: ['market', 'workshop', 'farm'], mayor: ['hall', 'core'], scientist: ['school', 'core', 'workshop', 'data', 'energy'], official: ['hall', 'core', 'administration', 'emergency', 'embassy', 'archives', 'energy'], council: ['hall', 'core', 'council', 'administration'] };
@@ -726,8 +871,9 @@ export class Simulation implements SimulationAPI {
       if (p.needs.fatigue < 15 || p.needs.hunger < 12) return fail('请先休息和进食。');
       const workRole = canWork(p.role) ? p.role : permitted.find(canWork)!; const wage = workRole === 'traveler' ? 35 : workRole === 'mayor' ? 95 : 62;
       const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop && this.state.treasury < wage) return fail('公共雇主本班预算不足，请等待财政恢复后再工作。');
+      if (shop && this.shopFunds(shop) < wage) return fail('私营雇主本班现金不足，请等待真实销售或资本投入后再工作。');
       this.runtime.workAt = this.now; const net = wage * (1 - this.state.taxRate); p.money += net; this.runtime.taxes += wage - net; p.experience++; p.reputation += .8; p.needs.fatigue = clamp(p.needs.fatigue - 12); p.needs.hunger = clamp(p.needs.hunger - 7);
-      if (shop) { shop.inventory += 6; shop.profit -= wage; } else this.state.treasury -= wage;
+      if (shop) { this.transferShopFunds(shop, -wage); shop.inventory += 6; shop.profit -= wage; } else this.state.treasury -= wage;
       if (workRole === 'police' || workRole === 'soldier') { const district = this.state.districts.find(d => d.id === building.districtId)!; district.safety = clamp(district.safety + 1); }
       if (workRole === 'teacher') this.state.support = clamp(this.state.support + .2);
       return success(`完成${building.name}的一班工作，净薪酬${net.toFixed(1)}云币，经验提升。`);
@@ -755,7 +901,7 @@ export class Simulation implements SimulationAPI {
     }
     if (command.type === 'business') {
       const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock']); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
-      const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('公共科研与政务设施不能作为私营商铺承包。'); if (this.state.extension?.companies.some(company => company.buildingId === building.id)) return fail('此商铺已公司化，请通过股权交易取得控制权。'); if (this.runtime.playerBusinesses.includes(shop.id)) return fail('这间商铺已由你经营。'); if (p.money < 300) return fail('承包资金需要300云币。'); p.money -= 300; this.runtime.playerBusinesses.push(shop.id); shop.inventory += 35; p.inventory.businesses = this.runtime.playerBusinesses.length; p.inventory[`business:${building.id}`] = 1; return success(`获得${building.name}经营权，库存已投入，实际在册雇员继续工作，盈利将按时分红。`);
+      const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('公共科研与政务设施不能作为私营商铺承包。'); if (this.state.extension?.companies.some(company => company.buildingId === building.id)) return fail('此商铺已公司化，请通过股权交易取得控制权。'); if (this.runtime.playerBusinesses.includes(shop.id)) return fail('这间商铺已由你经营。'); if (p.money < 300) return fail('承包资金需要300云币。'); p.money -= 300; this.transferShopFunds(shop, 250); this.state.treasury += 50; this.runtime.playerBusinesses.push(shop.id); shop.inventory += 35; p.inventory.businesses = this.runtime.playerBusinesses.length; p.inventory[`business:${building.id}`] = 1; return success(`获得${building.name}经营权，库存已投入，实际在册雇员继续工作，盈利将按时分红。`);
     }
     if (command.type === 'exam') {
       if (command.targetId === 'study') { const school = this.buildingNear(undefined, ['school']); if (!school) return fail('请到学堂学习。'); if (p.money < 40) return fail('学习费用需要40云币。'); p.money -= 40; p.education++; p.experience++; return success('完成学堂课程：教育与经验各提升1，可报考职业资格。'); }
@@ -905,13 +1051,18 @@ export class Simulation implements SimulationAPI {
       const districts = array(s.districts, this.world.districts.length, 'districts'); ensure(districts.length === this.world.districts.length, 'district count'); unique(districts, 'duplicate districts');
       const districtIds = new Set(this.world.districts.map(d => d.id));
       for (const d of districts) { ensure(districtIds.has(d.id), 'district id'); for (const key of ['energy', 'safety', 'prosperity', 'pollution']) number(d[key], 0, 100, `district.${key}`); number(d.employment, 0, 1, 'employment'); number(d.residents, 0, 1e8, 'residents'); number(d.crimeCount, 0, 1e10, 'crimeCount', true); ensure(['active', 'regional', 'statistical'].includes(d.tier), 'district tier'); }
-      const expectedCitizenIds = new Set(this.state.citizens.map(c => c.id));
+      const registered = s.family?.children;
+      if (registered !== undefined) ensure(registered && typeof registered === 'object' && !Array.isArray(registered), 'birth registration');
+      const expectedCitizenIds = new Set(this.baselineCitizenIds);
+      for (const id of Object.keys(registered ?? {})) { ensure(/^resident-[1-9][0-9]*$/.test(id), 'registered resident identity'); expectedCitizenIds.add(id); }
       const citizens = array(s.citizens, 1024, 'citizens'); ensure(citizens.length === expectedCitizenIds.size, 'citizen count'); unique(citizens, 'duplicate citizens');
       for (const c of citizens) { ensure(expectedCitizenIds.has(c.id) && districtIds.has(c.districtId), 'citizen identity'); ensure(this.buildings.has(c.homeId) && this.buildings.has(c.workId), 'citizen building'); vec(c.position, 'citizen position'); string(c.name, 'citizen name', 80); string(c.role, 'citizen role', 60); string(c.state, 'citizen state', 40); if (c.skills !== undefined) { ensure(c.skills && typeof c.skills === 'object' && Object.keys(c.skills).length <= 32, 'citizen skills'); for (const value of Object.values(c.skills)) number(value, 0, 100, 'citizen skill'); } if (c.education !== undefined) number(c.education, 0, 10000, 'citizen education'); for (const tag of array(c.socialIdentities ?? [], 32, 'social identities')) string(tag, 'social identity', 100); for (const tag of array(c.historyTags ?? [], 32, 'history tags')) string(tag, 'history tag', 100); ensure(c.destinationId === null || this.buildings.has(c.destinationId), 'destination'); money(c.money, 'citizen money'); needs(c.needs, 'citizen needs'); ensure(['active', 'regional', 'statistical'].includes(c.tier), 'citizen tier'); if (c.route !== undefined) for (const point of array(c.route, 1024, 'route')) vec(point, 'route position'); if (c.routeIndex !== undefined) number(c.routeIndex, 0, c.route?.length ?? 0, 'routeIndex', true); ensure(c.partnerId == null || c.partnerId === 'player' || expectedCitizenIds.has(c.partnerId), 'citizen partner'); }
       const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id)); const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
       for (const v of vehicles) { ensure(expectedVehicleIds.has(v.id), 'vehicle identity'); const edge = this.edges.get(v.edgeId); ensure(edge && edge.mode === v.kind, 'vehicle edge'); vec(v.position, 'vehicle position'); number(v.progress, 0, 1, 'progress'); ensure(v.direction === 1 || v.direction === -1, 'direction'); number(v.speed, 0, 2000, 'vehicle speed'); string(v.state, 'vehicle state', 40); number(v.passengers, 0, 5000, 'passengers', true); number(v.cargo, 0, 10000, 'cargo'); number(v.nextDeparture, -10000, 1e12, 'departure'); }
       const shops = array(s.shops, 512, 'shops'); ensure(shops.length === this.state.shops.length, 'shop count'); unique(shops, 'duplicate shops');
       const shopIds = new Set(this.state.shops.map(shop => shop.id)); for (const shop of shops) { ensure(shopIds.has(shop.id) && this.buildings.has(shop.buildingId) && districtIds.has(shop.districtId), 'shop identity'); number(shop.inventory, 0, 10000, 'inventory'); number(shop.price, 0, 1e5, 'price'); money(shop.revenue, 'revenue'); number(shop.profit, -1e12, 1e12, 'profit'); number(shop.customers, 0, 100000, 'customers'); number(shop.employees, 0, 10000, 'employees', true); ensure(typeof shop.open === 'boolean', 'shop open'); }
+      for (const citizen of citizens) if (citizen.food !== undefined) number(citizen.food, 0, 6, 'stored food', true);
+      for (const shop of shops) { if (shop.cash !== undefined) number(shop.cash, 0, 1e9, 'shop cash'); if (shop.ownerId !== undefined) ensure(shop.ownerId === 'player' || expectedCitizenIds.has(shop.ownerId), 'shop owner'); }
       const p = s.player; ensure(p && ROLES.includes(p.role), 'player role'); if (p.identities !== undefined) { const identities = array(p.identities, ROLES.length, 'identities'); ensure(identities.every(role => ROLES.includes(role)) && new Set(identities).size === identities.length, 'player identities'); } vec(p.position, 'player position'); money(p.money, 'player money'); number(p.reputation, -100, 1e8, 'reputation'); needs(p.needs, 'player needs'); ensure(p.homeId === null || this.buildings.get(p.homeId)?.kind === 'home', 'player home'); number(p.education, 0, 1e8, 'education', true); number(p.experience, 0, 1e8, 'experience', true); ensure(p.partnerId === null || expectedCitizenIds.has(p.partnerId), 'player partner'); ensure(p.vehicleId === null || expectedVehicleIds.has(p.vehicleId), 'player vehicle'); ensure(p.inventory && typeof p.inventory === 'object' && !Array.isArray(p.inventory) && Object.keys(p.inventory).length <= 128, 'player inventory'); for (const [key, value] of Object.entries(p.inventory)) { string(key, 'inventory key', 80); money(value, `inventory.${key}`); }
       const relationships = array(s.relationships, 1024, 'relationships'); ensure(new Set(relationships.map(v => v.npcId)).size === relationships.length, 'duplicate relationships'); for (const relation of relationships) { ensure(expectedCitizenIds.has(relation.npcId), 'relationship citizen'); number(relation.affection, -100, 100, 'affection'); number(relation.trust, -100, 100, 'trust'); string(relation.type, 'relationship type', 40); number(relation.encounters, 0, 1e8, 'encounters', true); for (const memory of array(relation.memories, 12, 'memories')) { number(memory.tick, 0, s.tick, 'memory tick', true); string(memory.text, 'memory text', 240); number(memory.impact, -100, 100, 'memory impact'); } for (const tag of array(relation.tags, 32, 'tags')) string(tag, 'tag', 100); }
       for (const relation of relationships) {
@@ -932,8 +1083,13 @@ export class Simulation implements SimulationAPI {
       number(r.rng, 1, 4294967295, 'rng', true); number(r.accumulator, 0, TICK_SECONDS + 1e-9, 'accumulator'); ensure(r.accumulator < TICK_SECONDS, 'accumulator boundary');
       for (const key of ['weatherAt', 'crimeAt', 'payrollAt', 'commerceAt', 'financeAt', 'socialAt', 'workAt', 'studyAt', 'energyBoostUntil', 'restAt', 'lastInvestmentAt']) number(r[key], -10000, 1e12, key);
       for (const key of ['eventId', 'crimeId', 'constructionId']) number(r[key], 0, 1e12, key, true); ensure(r.eventId >= lastId, 'event counter'); vec(r.focus, 'focus'); ensure(['drone', 'walk', 'jet'].includes(r.mode), 'mode'); number(r.detail, .5, 2, 'detail'); money(r.taxes, 'taxes'); money(r.operatingCost, 'operatingCost'); money(r.investment, 'investment');
-      for (const wage of array(r.wages, 1024, 'wages')) { ensure(expectedCitizenIds.has(wage.citizenId) && districtIds.has(wage.districtId), 'wage identity'); money(wage.amount, 'wage amount'); }
+      for (const wage of array(r.wages, 1024, 'wages')) { ensure(expectedCitizenIds.has(wage.citizenId) && districtIds.has(wage.districtId), 'wage identity'); ensure(wage.shopId === undefined || wage.shopId === null || shopIds.has(wage.shopId), 'wage employer'); money(wage.amount, 'wage amount'); }
+      if (r.wageArrears !== undefined) { const claims = new Set<string>(); for (const wage of array(r.wageArrears, 2048, 'wage arrears')) { ensure(wage && expectedCitizenIds.has(wage.citizenId) && (wage.shopId === null || shopIds.has(wage.shopId)), 'wage arrears references'); money(wage.amount, 'wage arrears amount'); const key = `${wage.shopId ?? 'public'}:${wage.citizenId}`; ensure(!claims.has(key), 'duplicate wage claim'); claims.add(key); } }
       ensure(r.freight && typeof r.freight === 'object' && !Array.isArray(r.freight), 'freight'); for (const [id, amount] of Object.entries(r.freight)) { ensure(districtIds.has(id), 'freight district'); money(amount, 'freight amount'); }
+      if (r.shopLabor !== undefined) { ensure(r.shopLabor && typeof r.shopLabor === 'object' && !Array.isArray(r.shopLabor), 'shop labor'); for (const [id, minutes] of Object.entries(r.shopLabor)) { ensure(shopIds.has(id), 'shop labor identity'); number(minutes, 0, 100000, 'shop labor minutes'); } }
+      if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment');
+      if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+      if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
       ensure(r.campaign === null || r.campaign && finite(r.campaign.countAt) && r.campaign.countAt >= 0 && finite(r.campaign.votes) && r.campaign.votes >= 0 && r.campaign.votes <= 100, 'campaign');
       ensure(r.signalOverrides && typeof r.signalOverrides === 'object', 'signals'); for (const [id, value] of Object.entries(r.signalOverrides)) ensure(this.world.nodes.some(n => n.id === id) && (value === 0 || value === 1), 'signal override');
