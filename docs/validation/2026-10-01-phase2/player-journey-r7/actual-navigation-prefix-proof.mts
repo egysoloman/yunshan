@@ -1,0 +1,11 @@
+import {createWorld,getWalkHeight} from '/tmp/yunshan-phase2-root-coherent-02/src/world.ts';
+import {planWalkingJourney} from '/tmp/yunshan-phase2-root-coherent-02/src/journey.ts';
+import {getFloorDimensions} from '/tmp/yunshan-phase2-root-coherent-02/src/access.ts';
+import {writeFile} from 'node:fs/promises';
+const world=createWorld(20261001,'current-v2-r5'),from={x:-348,y:50,z:512},blocked={x:-381,y:50,z:517};
+const ids=new Set(world.edges.filter(e=>e.mode==='road'||e.mode==='bridge').flatMap(e=>[e.from,e.to]));
+const nearby=world.nodes.filter(n=>ids.has(n.id)).map(n=>({...n,distance:Math.hypot(n.position.x-from.x,n.position.y-from.y,n.position.z-from.z)})).sort((a,b)=>a.distance-b.distance).slice(0,8);
+const plan=planWalkingJourney(world,from,'academy-b13');
+const actualSchool=world.buildings.find(b=>b.name==='文澜学苑·西溪院·书院4')!;const journey=planWalkingJourney(world,from,actualSchool.id);
+const nearBuildings=world.buildings.filter(b=>Math.abs(b.position.x-blocked.x)<b.width/2+4&&Math.abs(b.position.z-blocked.z)<b.depth/2+4).map(b=>({...b,currentFloor:Math.floor((blocked.y-b.position.y+.01)/(b.height/b.floors)),currentFloorDimensions:getFloorDimensions(b,Math.floor((blocked.y-b.position.y+.01)/(b.height/b.floors)))}));
+const result={scope:'Read-only CPU authority and production public journey prefix using real recorded normal-player partial/blocked HUD coordinates. No browser/profile/state writes; rounded coordinates distinguished from raw body.',snapshot:'/tmp/yunshan-phase2-root-coherent-02',recipe:'current-v2-r5',from,blocked,school:{id:actualSchool.id,name:actualSchool.name,door:actualSchool.door},nearestNodes:nearby,productionPlan:journey,blockedWalkHeight:getWalkHeight(world,blocked.x,blocked.z,blocked.y),nearBuildings};await writeFile('/workspace/yunshan/artifacts/phase2-player-journey-r7/navigation-prefix-proof.json',JSON.stringify(result,null,2));console.log(JSON.stringify({nearest:nearby[0],firstPoints:journey?.points.slice(0,8),nearBuildings:nearBuildings.map(b=>({id:b.id,kind:b.kind,position:b.position,width:b.width,depth:b.depth,height:b.height,floors:b.floors,door:b.door,currentFloor:b.currentFloor})),ground:result.blockedWalkHeight}));
