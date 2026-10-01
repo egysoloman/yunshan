@@ -1,0 +1,33 @@
+{
+  "worldBuildings": 612,
+  "terrainSupport": {
+    "ordinaryBuildingCentersChecked": 610,
+    "unsupportedBuildingCenters": 0,
+    "excluded": ["core-main: two real underground floors", "core-dock-building: waterborne dock"],
+    "uniqueGroundRoadPointsChecked": 8582,
+    "buriedRoadPoints": 0,
+    "coreBasementTerrainHeight": 237.8000030517578,
+    "coreLowestFloorHeight": 239,
+    "formerlyAffectedLowRoadTerrainHeight": 327.6000061035156,
+    "formerlyAffectedLowRoadDeckHeight": 328.4
+  },
+  "typescript": "npx tsc --noEmit: passed",
+  "browser": {
+    "engine": "Chromium, Linux SwiftShader WebGL2",
+    "viewport": [1440, 900],
+    "pixelRatio": 0.72,
+    "consoleOrPageErrors": 0,
+    "httpErrors": 0,
+    "overviewDrawCalls": 160,
+    "overviewTriangles": 1350056,
+    "softwareRendererFps": 1,
+    "macOSHardwarePerformance": "not measured"
+  },
+  "screenshotsCapturedAndInspected": [
+    "renderer-day.png",
+    "renderer-night.png",
+    "renderer-core.png",
+    "renderer-basement.png",
+    "renderer-waterfront.png"
+  ]
+}

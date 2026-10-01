@@ -1,0 +1,92 @@
+{
+  "environment": "Linux cloud · Node v24.19.0; simulation CPU timings only, not macOS rendering FPS",
+  "sourceHashes": {
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/simulation.ts": "0947998dbc3b56471d8a3ee18f2a04a331d0ae042f5ee1625f3db828eb15da24",
+    "src/simulation/extensions.ts": "0e07cbbb4abe3b4f18b7d647aa9b593adc47efe84428dc6f64d3449ae980b023",
+    "src/types.ts": "16a6cb1d7a4c8096180457b00527140bf680534d10c181936da98d9234e37030"
+  },
+  "simulationSpeed": 8,
+  "scope": "Accelerated long-run verification; ordinary play starts at 1×",
+  "districts": 11,
+  "buildings": 612,
+  "networkEdges": 691,
+  "citizens": 616,
+  "vehicles": 344,
+  "generatedMs": 1198.5602760000002,
+  "initializedMs": 67.52038599999992,
+  "calls": 10000,
+  "ticks": 10000,
+  "gameDays": 14,
+  "identicalContinuationTicks": 24,
+  "totalSimulationMs": 116494.17128600001,
+  "medianStepMs": 11.196222999991733,
+  "p95StepMs": 17.765645999999833,
+  "maxStepMs": 84.66315499999996,
+  "saveBytes": 1353102,
+  "initialHeapMB": 19.49151611328125,
+  "beforeCollectionHeapMB": 174.455078125,
+  "retainedHeapMB": 76.52011108398438,
+  "collectedBeforeMeasurement": true,
+  "retainedHeapScope": "One shared world and two live simulations, plus save text; heap after explicit GC, not browser GPU memory",
+  "metrics": {
+    "trades": 11917,
+    "commutes": 19509,
+    "crimesResolved": 42,
+    "freight": 6612.5740123885325,
+    "flights": 223
+  },
+  "society": {
+    "aliveCitizens": 616,
+    "averageHealth": 80.58143768503204,
+    "playerAlive": false,
+    "companies": 12,
+    "audits": 0,
+    "technologyLevels": [
+      {
+        "sector": "traffic",
+        "level": 1
+      },
+      {
+        "sector": "energy",
+        "level": 1
+      },
+      {
+        "sector": "information",
+        "level": 0
+      },
+      {
+        "sector": "security",
+        "level": 0
+      },
+      {
+        "sector": "medicine",
+        "level": 0
+      },
+      {
+        "sector": "agriculture",
+        "level": 0
+      },
+      {
+        "sector": "manufacturing",
+        "level": 0
+      }
+    ],
+    "extensionStats": {
+      "mealsCooked": 0,
+      "researchCompleted": 2,
+      "corruptionRecovered": 0,
+      "donations": 0,
+      "festivals": 0
+    },
+    "treasury": 93405.43429445477,
+    "minimumTreasury": 74736.01768081632,
+    "averageNeeds": {
+      "hunger": 29.721915584415722,
+      "fatigue": 77.51290584415585,
+      "social": 34.09108554767089,
+      "fun": 76.55084902884037
+    },
+    "deaths": []
+  }
+}
