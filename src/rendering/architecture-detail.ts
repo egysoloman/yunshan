@@ -8,13 +8,56 @@ export const ARCHITECTURE_DETAIL_INSTANCES = 640;
 export interface ArchitectureInterior { buildingId: string | null; floor?: number }
 export interface ArchitectureDetailPart {
   position: Vec3; size: Vec3; color: string; floor: number; roof: boolean;
-  purpose: 'door' | 'window' | 'bracket' | 'tile' | 'masonry' | 'program';
+  purpose: 'door' | 'window' | 'frame' | 'bracket' | 'tile' | 'masonry' | 'program' | 'lantern' | 'sign';
   rotation?: [number, number, number]; luminous?: boolean;
 }
 interface DetailReference { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
-interface DetailEntry { group: THREE.Group; references: DetailReference[]; floor: number; quality: Quality; instanceCount: number; sign?: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>; interiorKey: string }
+interface DetailEntry { group: THREE.Group; references: DetailReference[]; floor: number; quality: Quality; instanceCount: number; sign?: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshStandardMaterial>; interiorKey: string }
 const q = (number: number) => Math.round(number * 5) / 5;
 const WOOD = '#75563c', EDGE = '#b89763', STONE = '#a1a394', DARK = '#42534a', TILE = '#69766a';
+
+export interface ArchitectureFacadeWindow { face: 'front' | 'left' | 'right'; x: number; y: number; width: number; height: number; broad?: boolean }
+/** Matches the existing structural renderer. Keeping its measurements together
+ * also gives the future shared facade layout a single integration point. */
+export function architectureFacadeLayout(building: Building, floor: number) {
+  const { width, depth } = getFloorDimensions(building, floor), fh = building.height / Math.max(1, building.floors), y = floor * fh;
+  const wallHeight = building.kind === 'core' && floor === building.floors - 1 ? 1.1 : Math.max(2.4, fh - .5);
+  const doorWidth = Math.min(5, width * .22), doorHeight = Math.min(4.4, wallHeight * .72), windows: ArchitectureFacadeWindow[] = [];
+  if (wallHeight > 1.1) {
+    if (building.kind === 'core') for (const side of [-1, 1]) windows.push({ face: 'front', x: side * width * .23, y: y + fh * .52, width: width * .36, height: fh * .38, broad: true });
+    else {
+      const count = Math.max(2, Math.min(8, Math.floor(width / 5)));
+      for (let n = 0; n < count; n++) {
+        const x = -width * .4 + n * width * .8 / Math.max(1, count - 1), ww = Math.min(3.8, width / count * .78);
+        // Include the sill's entire width in the shared entrance clearance.
+        if (Math.abs(x) - ww / 2 - .4 >= doorWidth / 2 + .2) windows.push({ face: 'front', x, y: y + fh * .57, width: ww, height: Math.min(2.4, fh * .5) });
+      }
+    }
+    for (const face of ['left', 'right'] as const) for (const z of [-depth * .3, 0, depth * .3]) windows.push({ face, x: z, y: y + fh * .57, width: Math.min(3.4, depth * .18), height: Math.min(2.4, fh * .5) });
+  }
+  return { width, depth, floorHeight: fh, y, wallHeight, doorWidth, doorHeight, windows };
+}
+
+/** Exact front edge of the current roof profile, not an invented roof laid over
+ * the building. Flat glass roofs deliberately have no tile decoration. */
+export function architectureRoofEdge(building: Building, floor: number) {
+  const { width, depth, floorHeight: fh } = architectureFacadeLayout(building, floor);
+  const period = building.kind === 'core' ? 6 : building.kind === 'home' ? 4 : building.kind === 'hall' || building.kind === 'school' ? 3 : building.floors;
+  const top = floor === building.floors - 1, next = getFloorDimensions(building, Math.min(floor + 1, building.floors - 1));
+  if (!top && (floor + 1) % period !== 0 && next.width === width) return null;
+  if (building.kind === 'bank' || building.kind === 'clinic') return null;
+  const rw = width * (top ? 1 : 1.035), rd = depth * (top ? 1 : 1.035), yy = (floor + 1) * fh;
+  const gabled = ['home', 'farm', 'market', 'dock'].includes(building.kind) || building.kind === 'workshop' && building.districtId !== 'core';
+  const overhang = gabled ? 1.5 : Math.max(2, Math.min(12, (building.kind === 'station' || building.kind === 'airport' ? rw * .3 : rw) * .14));
+  return { y: yy, z: (building.kind === 'dock' ? rd * .7 : rd) / 2 + overhang, width: rw, fasciaZ: (building.kind === 'dock' ? rd * .7 : rd) / 2 + (gabled ? 1.2 : overhang * .65), gabled };
+}
+
+export function architectureSignPlacement(building: Building) {
+  const { doorWidth, doorHeight } = architectureFacadeLayout(building, 0);
+  return building.kind === 'pavilion'
+    ? { x: 0, y: building.height * .72, z: building.depth * .4 + .65, width: q(Math.min(3.2, building.width * .28)), height: .8, vertical: false }
+    : { x: -(doorWidth / 2 + 2.6), y: Math.max(2.2, doorHeight - .2), z: building.depth / 2 + .7, width: 1, height: q(Math.min(3.2, Math.max(2.4, doorHeight + .2))), vertical: true };
+}
 
 export function architectureFunctionLabel(building: Building): string {
   if (building.facility) return ({ mayor: '市长官署', council: '议政听证', administration: '政务受理', data: '城市数据', energy: '能源调度', emergency: '应急指挥', embassy: '使节接待', archives: '档案阅览', treasury: '城市金库' })[building.facility];
@@ -24,14 +67,18 @@ export function architectureFunctionLabel(building: Building): string {
 /** Geometry is generated for a nearby floor band, never for the whole city.
  * All coordinates are local to the existing building's structural base. */
 export function buildArchitectureDetails(building: Building, nearFloor = 0, limit = ARCHITECTURE_DETAIL_INSTANCES): ArchitectureDetailPart[] {
-  const parts: ArchitectureDetailPart[] = [], fh = building.height / Math.max(1, building.floors);
+  const parts: ArchitectureDetailPart[] = [], ground = architectureFacadeLayout(building, 0), fh = ground.floorHeight;
   const box = (purpose: ArchitectureDetailPart['purpose'], x: number, y: number, z: number, sx: number, sy: number, sz: number, color = WOOD, floor = 0, roof = false, rotation?: [number, number, number], luminous = false) => {
     if (parts.length >= limit || Math.min(sx, sy, sz) <= 0) return;
     parts.push({ purpose, position: { x: q(x), y: q(y), z: q(z) }, size: { x: Math.max(.2, q(sx)), y: Math.max(.2, q(sy)), z: Math.max(.2, q(sz)) }, color, floor, roof, ...(rotation ? { rotation } : {}), ...(luminous ? { luminous } : {}) });
   };
-  const w = building.width, d = building.depth, doorWidth = Math.min(5, w * .22), doorHeight = Math.min(4.4, Math.max(2.4, fh - .5) * .72), front = d / 2;
-  // A pavilion has open sides in the authoritative building: decorate its
-  // columns/benches rather than inventing doors or window frames in empty air.
+  const w = ground.width, d = ground.depth, { doorWidth, doorHeight } = ground, front = d / 2;
+  const lantern = (x: number, y: number, z: number) => {
+    box('lantern', x, y, z, .6, .8, .6, '#e7bc73', 0, false, undefined, true);
+    for (const level of [-.5, .5]) box('lantern', x, y + level, z, .8, .2, .8, '#7c3e32');
+    for (const xx of [-.3, .3]) box('lantern', x + xx, y, z + .4, .2, .8, .2, WOOD);
+    box('lantern', x, y - .7, z, .2, .4, .2, '#a66446');
+  };
   if (building.kind === 'pavilion') {
     for (const x of [-w * .4, w * .4]) for (const z of [-d * .4, d * .4]) {
       box('masonry', x, .2, z, 1.8, .4, 1.8, STONE);
@@ -44,112 +91,141 @@ export function buildArchitectureDetails(building: Building, nearFloor = 0, limi
     for (const side of [-1, 1]) for (let n = -3; n <= 3; n++) box('program', side * w * .32, 1.5, n * Math.min(.8, d / 10), .2, .8, .2, WOOD);
     return parts;
   }
-  // A jamb's inside edge stays outside the authoritative open doorway. Door
-  // hardware and open shutter leaves sit against the side walls, not its axis.
+  // Open leaves lie flat against the wall. No new threshold or object occupies
+  // the six-metre approach to the authoritative south opening.
   for (const side of [-1, 1]) {
     const x = side * (doorWidth / 2 + .4);
-    box('door', x, doorHeight / 2, front + .5, .4, doorHeight, .6, WOOD);
-    box('door', x, .2, front + .5, .8, .4, .8, STONE);
-    box('door', x, doorHeight + .1, front + .5, .8, .4, .8, EDGE);
-    box('door', x, 1.2, front + .9, .2, .4, .2, EDGE);
+    box('door', x, doorHeight / 2, front + .4, .4, doorHeight, .6, WOOD);
+    box('door', x, .2, front + .4, .8, .4, .8, STONE);
+    box('door', x, doorHeight + .1, front + .4, .8, .4, .8, EDGE);
+    box('door', x, 1.2, front + .7, .2, .4, .2, EDGE);
     const leaf = side * (doorWidth / 2 + 1.2);
     for (let slat = 0; slat < 3; slat++) box('door', leaf + (slat - 1) * .4, doorHeight / 2, front + .35, .2, doorHeight - .4, .2, slat === 1 ? EDGE : WOOD);
-    for (const height of [.6, Math.max(.8, doorHeight - .6)]) box('door', leaf, height, front + .5, 1.2, .2, .2, WOOD);
-    // Human-scale hanging lantern: lattice casing, rather than a plain glowing cube.
-    const lanternX = side * (doorWidth / 2 + 2.6), ly = Math.max(1.6, doorHeight - .25);
-    box('door', lanternX, ly + .65, front + 1, .2, .6, .2, WOOD);
-    box('door', lanternX, ly, front + 1, .6, .8, .6, '#e7bc73', 0, false, undefined, true);
-    for (const level of [-.5, .5]) box('door', lanternX, ly + level, front + 1, .8, .2, .8, '#7c3e32');
-    for (const xx of [-.3, .3]) box('door', lanternX + xx, ly, front + 1.4, .2, .8, .2, WOOD);
-    box('door', lanternX, ly - .7, front + 1, .2, .4, .2, '#a66446');
+    for (const height of [.6, Math.max(.8, doorHeight - .6)]) box('door', leaf, height, front + .45, 1.2, .2, .2, WOOD);
   }
-  box('door', 0, doorHeight + .5, front + .5, doorWidth + 1.4, .4, 1, EDGE);
-  box('door', 0, doorHeight + .75, front + .5, doorWidth + 2, .2, 1.4, WOOD);
+  box('door', 0, doorHeight + .5, front + .4, doorWidth + 1.4, .4, 1, EDGE);
+  box('door', 0, doorHeight + .75, front + .4, doorWidth + 2, .2, 1.4, WOOD);
+  // The narrow shop/residence plaque is a physical framed object, attached to a
+  // timber arm beside the door rather than facing the camera as a giant label.
+  const sign = architectureSignPlacement(building);
+  box('sign', sign.x, sign.y, sign.z - .2, sign.width + .2, sign.height + .2, .2, WOOD);
+  for (const side of [-1, 1]) box('sign', sign.x + side * (sign.width / 2 + .1), sign.y, sign.z, .2, sign.height + .4, .2, EDGE);
+  for (const yy of [-1, 1]) box('sign', sign.x, sign.y + yy * (sign.height / 2 + .1), sign.z, sign.width + .4, .2, .2, EDGE);
+  box('sign', sign.x, sign.y + sign.height / 2 + .4, front + .35, .2, .2, 1, WOOD);
+  // A wall-side lantern post stays in the existing solid-wall collision strip.
+  // It adds pedestrian scale without inventing a free-standing street obstacle.
+  const lampX = Math.max(doorWidth / 2 + 4.2, Math.min(w * .42, w / 2 - 1)), lampZ = front + .3;
+  box('lantern', lampX, .2, lampZ, .6, .4, .6, STONE);
+  box('lantern', lampX, 2, lampZ, .2, 3.8, .2, DARK);
+  box('lantern', lampX - .3, 3.9, lampZ + .2, .8, .2, .6, WOOD);
+  lantern(lampX - .6, 3.1, lampZ + .25);
+  const doorLampX = doorWidth / 2 + 2.6;
+  box('lantern', doorLampX, Math.max(2.2, doorHeight) + .2, front + .3, .2, .2, .8, WOOD);
+  lantern(doorLampX, Math.max(1.8, doorHeight - .6), front + .6);
 
-  // Small staggered facing stones provide a legible masonry scale without
-  // rebuilding or thickening walls. Preserve the south entrance's clear strip.
-  const stoneColumns = Math.min(32, Math.floor(w / 1.2));
+  // A continuous low stone skirt supports the timber bays. Small relief blocks
+  // cover only the central nearby facade instead of tiling the whole city.
+  const stoneSpan = (w - doorWidth - 1.2) / 2;
+  for (const side of [-1, 1]) box('masonry', side * (doorWidth / 2 + .6 + stoneSpan / 2), .4, front + .1, stoneSpan, .8, .4, STONE);
+  for (const side of [-1, 1]) box('masonry', side * (w / 2 + .1), .4, 0, .4, .8, d, STONE);
+  const stoneColumns = Math.min(30, Math.floor(w / 1.2));
   for (let row = 0; row < 2; row++) for (let n = 0; n < stoneColumns; n++) {
     const x = (n - (stoneColumns - 1) / 2) * 1.2 + (row ? .4 : 0);
     if (Math.abs(x) < doorWidth / 2 + .8) continue;
-    box('masonry', x, .2 + row * .4, front + .35, 1, .2, .2, (n + row + building.seed) % 3 ? STONE : '#bdbaa6');
+    box('masonry', x, .2 + row * .4, front + .4, 1, .2, .2, (n + row + building.seed) % 3 ? '#b7b4a0' : '#858d82');
   }
-
-  // Function details decorate the existing shop/porch bays. They deliberately
-  // avoid adding items in the central route from the street to the door.
   for (const side of [-1, 1]) {
     const bay = side * Math.max(doorWidth / 2 + 3, w * .3);
-    if (building.kind === 'market') {
+    if (building.kind === 'home') {
+      // Household objects attach to the existing wall and balcony strip. The
+      // central public approach and actual doorway remain completely open.
+      const xx = side * Math.max(doorWidth / 2 + 3.8, w * .34), zz = front + .3;
+      box('program', xx, .4, zz, 1.2, .6, .4, building.seed % 2 ? '#956248' : '#788070');
+      box('program', xx, .75, zz, 1.4, .2, .6, '#b3916d');
+      for (const stem of [-.4, 0, .4]) {
+        box('program', xx + stem, 1.05, zz, .2, .4, .2, '#61764b');
+        box('program', xx + stem, 1.25 + (stem === 0 ? .2 : 0), zz + .1, .4, .2, .2, building.seed % 3 ? '#9f715c' : '#c6ab65');
+      }
+      if (side < 0 && building.seed % 2 === 0) {
+        box('program', xx, 2.7, zz, 2.8, .2, .2, WOOD);
+        for (let item = 0; item < 3; item++) {
+          box('program', xx + (item - 1) * .8, 2.05, zz, .6, 1, .2, ['#748b7c', '#c4b493', '#8e9aa0'][item]);
+          box('program', xx + (item - 1) * .8, 2.65, zz, .2, .2, .2, EDGE);
+        }
+      }
+    } else if (building.kind === 'market') {
       for (let n = -3; n <= 3; n++) box('program', bay + n * .4, 1.05, front + 2.1, .2, 1.4, .2, n % 2 ? WOOD : EDGE);
       for (const y of [.4, 1.7]) box('program', bay, y, front + 2.2, 3.2, .2, .4, WOOD);
       box('program', bay, 3.35, front + 4.5, 3.2, .2, .2, EDGE);
       for (let n = -2; n <= 2; n++) box('program', bay + n * .6, 3.15, front + 4.5, .4, .4, .2, n % 2 ? '#c4a16b' : '#846548');
+      for (let crate = 0; crate < 3; crate++) for (let item = 0; item < 4; item++) box('program', bay + (crate - 1) * 1.3 + (item % 2 - .5) * .2, 2.4 + Math.floor(item / 2) * .2, front + 1.4, .2, .2, .2, crate === 0 ? '#aa654d' : crate === 1 ? '#bfa063' : '#73874d');
     } else if (building.kind === 'workshop' || building.kind === 'farm' || building.kind === 'dock') {
-      const z = front + 3.1;
-      for (const x of [-1.3, 1.3]) box('program', bay + x, 1.4, z, .2, 2.8, .2, WOOD);
-      for (const y of [.5, 1.3, 2.2]) { box('program', bay, y, z, 3, .2, 1, EDGE); for (let slat = -2; slat <= 2; slat++) box('program', bay + slat * .6, y + .3, z + .35, .4, .4, .4, '#9c8660'); }
-    } else if (building.kind === 'home') {
-      for (let n = -2; n <= 2; n++) box('program', bay + n * .4, .9, front + .4, .2, 1.2, .2, n % 2 ? WOOD : EDGE);
-      box('program', bay, 1.6, front + .4, 2.4, .2, .4, WOOD);
+      for (const x of [-1.3, 1.3]) box('program', bay + x, 1.4, front + 3.1, .2, 2.8, .2, WOOD);
+      for (const y of [.5, 1.3, 2.2]) { box('program', bay, y, front + 3.1, 3, .2, 1, EDGE); for (let slat = -2; slat <= 2; slat++) box('program', bay + slat * .6, y + .3, front + 3.45, .4, .4, .4, '#9c8660'); }
     } else if (['hall', 'core', 'police', 'school', 'bank'].includes(building.kind)) {
       const x = side * Math.max(doorWidth / 2 + 2, Math.min(w * .2, 12));
       for (const y of [.3, .6]) box('program', x, y, front + 1.5, 1.4 - y, .2, 1.4 - y, STONE);
       box('program', x, doorHeight + .2, front + 1.5, 1.2, .2, 1.2, EDGE);
       box('program', x, doorHeight - .15, front + 1.5, .8, .4, .8, WOOD);
     } else if (building.kind === 'clinic') {
-      box('program', bay, 2, front + .5, .4, 2, .2, '#a95644');
-      box('program', bay, 2, front + .5, 1.6, .4, .2, '#a95644');
+      box('program', bay, 2, front + .5, .4, 2, .2, '#a95644'); box('program', bay, 2, front + .5, 1.6, .4, .2, '#a95644');
     }
   }
 
   const center = THREE.MathUtils.clamp(Math.floor(nearFloor), 0, Math.max(0, building.floors - 1));
   const selected = [...new Set([center, center + 1, center - 1])].filter(floor => floor >= 0 && floor < building.floors).slice(0, building.kind === 'core' ? 2 : 3);
   for (const floor of selected) {
-    const { width, depth } = getFloorDimensions(building, floor), y = floor * fh;
-    const opening = Math.min(5, width * .22), count = Math.max(2, Math.min(building.kind === 'core' ? 18 : 8, Math.floor(width / 5)));
-    const faceBox = (face: 'front' | 'left' | 'right', x: number, yy: number, offset: number, sx: number, sy: number, sz: number, color = WOOD) => {
-      if (face === 'front') box('window', x, yy, depth / 2 + offset, sx, sy, sz, color, floor);
-      else box('window', (face === 'left' ? -1 : 1) * (width / 2 + offset), yy, x, sz, sy, sx, color, floor);
+    const layout = architectureFacadeLayout(building, floor), { width, depth, y, wallHeight, windows } = layout;
+    const faceBox = (purpose: 'frame' | 'window', face: ArchitectureFacadeWindow['face'], x: number, yy: number, offset: number, sx: number, sy: number, sz: number, color = WOOD) => {
+      if (face === 'front') box(purpose, x, yy, depth / 2 + offset, sx, sy, sz, color, floor);
+      else box(purpose, (face === 'left' ? -1 : 1) * (width / 2 + offset), yy, x, sz, sy, sx, color, floor);
     };
-    const lattice = (face: 'front' | 'left' | 'right', x: number, cy: number, ww: number, hh: number, broad = false) => {
-      for (const edge of [-1, 1]) { faceBox(face, x + edge * ww / 2, cy, .46, .2, hh + .4, .2); faceBox(face, x, cy + edge * hh / 2, .46, ww + .4, .2, .2); }
+    // Full-height posts and a head beam share the window's bay. Upper diagonal
+    // braces terminate at those same posts; they are not isolated roof trinkets.
+    for (const window of windows.filter(window => window.face === 'front')) {
+      const half = window.width / 2 + .6, postHeight = Math.max(.4, wallHeight - .8);
+      for (const side of [-1, 1]) {
+        const x = window.x + side * half;
+        if (Math.abs(x) - .3 < layout.doorWidth / 2 + .2) continue;
+        faceBox('frame', 'front', x, y + .8 + postHeight / 2, .35, .4, postHeight, .4);
+        if (floor === 0) faceBox('frame', 'front', x, .9, .35, .6, .2, .6, STONE);
+        box('bracket', x - side * .3, y + wallHeight - .5, depth / 2 + .5, .2, .8, .2, EDGE, floor, false, [0, 0, side * Math.PI / 4]);
+      }
+      faceBox('frame', 'front', window.x, y + wallHeight - .1, .38, window.width + 1.6, .2, .6, WOOD);
+      if (building.kind === 'home' || building.kind === 'workshop' || building.kind === 'farm' || building.kind === 'school') {
+        const apronHeight = Math.min(.8, Math.max(.2, window.y - window.height / 2 - y - .8));
+        faceBox('frame', 'front', window.x, y + .8 + apronHeight / 2, .34, window.width + .4, apronHeight, .2, building.kind === 'school' ? DARK : WOOD);
+        faceBox('frame', 'front', window.x, y + .8 + apronHeight, .5, window.width + .6, .2, .4, EDGE);
+      }
+    }
+    for (const window of windows) {
+      // Side grids on the camera's floor, with one bay on adjacent floors,
+      // preserve the near-floor composition within the fixed instance budget.
+      if (window.face !== 'front' && floor !== center && window.x !== 0) continue;
+      const { face, x, y: cy, width: ww, height: hh, broad } = window;
+      for (const edge of [-1, 1]) { faceBox('window', face, x + edge * ww / 2, cy, .46, .2, hh + .4, .2); faceBox('window', face, x, cy + edge * hh / 2, .46, ww + .4, .2, .2); }
       const divisions = broad ? Math.min(12, Math.max(3, Math.floor(ww / 2.4))) : 3;
-      for (let n = 1; n < divisions; n++) faceBox(face, x - ww / 2 + n * ww / divisions, cy, .48, .2, hh, .2, EDGE);
-      for (const level of [-.22, .22]) faceBox(face, x, cy + level * hh, .48, ww, .2, .2, EDGE);
-      faceBox(face, x, cy - hh / 2 - .3, .58, ww + .6, .2, .4, STONE);
-      faceBox(face, x, cy + hh / 2 + .3, .6, ww + .6, .2, .6, WOOD);
-    };
-    // The core's broad curtain panels get a measured wooden arcade grid. Other
-    // windows match the actual base renderer's centres and dimensions exactly.
-    if (building.kind === 'core') for (const side of [-1, 1]) lattice('front', side * width * .23, y + fh * .52, width * .36, fh * .38, true);
-    else for (let n = 0; n < count; n++) {
-      const x = -width * .4 + n * width * .8 / Math.max(1, count - 1);
-      const windowWidth = Math.min(2.4, width / count * .6);
-      if (Math.abs(x) - windowWidth / 2 - .4 < opening / 2 + .2) continue;
-      lattice('front', x, y + fh * .57, windowWidth, Math.min(2, fh * .38));
+      for (let n = 1; n < divisions; n++) faceBox('window', face, x - ww / 2 + n * ww / divisions, cy, .48, .2, hh, .2, EDGE);
+      for (const level of [-.22, .22]) faceBox('window', face, x, cy + level * hh, .48, ww, .2, .2, EDGE);
+      faceBox('window', face, x, cy - hh / 2 - .3, .58, ww + .6, .2, .4, STONE);
+      faceBox('window', face, x, cy + hh / 2 + .3, .6, ww + .6, .2, .6, WOOD);
     }
-    for (const face of ['left', 'right'] as const) for (const z of [-depth * .3, 0, depth * .3]) lattice(face, z, y + fh * .57, Math.min(2.7, depth * .15), Math.min(2.4, fh * .4));
-
-    const period = building.kind === 'core' ? 6 : building.kind === 'home' ? 4 : building.kind === 'hall' || building.kind === 'school' ? 3 : building.floors;
-    const roof = floor === building.floors - 1 || (floor + 1) % period === 0 || getFloorDimensions(building, Math.min(floor + 1, building.floors - 1)).width !== width;
-    const eaveY = y + fh, z = depth / 2 + .6;
-    // Stepped bearing blocks and diagonal braces attach to the existing beam.
-    for (const column of [-.42, -.26, .26, .42]) {
-      const x = width * column;
-      box('bracket', x, eaveY - .9, z, .6, .4, .6, WOOD, floor, roof);
-      box('bracket', x, eaveY - .6, z + .3, 1, .2, 1, EDGE, floor, roof);
-      box('bracket', x, eaveY - .3, z + .5, 1.4, .2, 1.4, WOOD, floor, roof);
-      box('bracket', x, eaveY - .65, z + .75, .2, 1.4, .2, EDGE, floor, roof, [Math.PI / 4, 0, 0]);
-      for (const step of [-1, 1]) box('bracket', x + step * .45, eaveY - .45, z + .25, .2, .6, .2, WOOD, floor, roof);
-    }
-    if (roof) {
-      // Individual eave-end tiles form a readable 0.6 m rhythm over the central
-      // entrance bay. The distant/full roof silhouette is left to its owner.
-      const tileSpan = Math.min(14, width * .75), tiles = Math.floor(tileSpan / .6);
+    const roofEdge = architectureRoofEdge(building, floor);
+    if (roofEdge) {
+      // Fine eave pieces attach to the real profile's front edge. The structural
+      // roof remains untouched; there is no second floating decorative roof.
+      const span = Math.min(12, width * .6), tiles = Math.floor(span / .6);
+      box('tile', 0, roofEdge.y + .1, roofEdge.fasciaZ + .1, span + .8, .2, .2, WOOD, floor, true);
       for (let tile = 0; tile < tiles; tile++) {
         const x = (tile - (tiles - 1) / 2) * .6;
-        box('tile', x, eaveY + .35, depth / 2 + 1.2, .4, .2, .6, tile % 3 ? TILE : '#829080', floor, true);
-        box('tile', x, eaveY + .5, depth / 2 + 1.2, .2, .2, .6, TILE, floor, true);
+        box('tile', x, roofEdge.y + .65, roofEdge.z, .4, .2, .8, tile % 3 ? TILE : '#829080', floor, true);
+        box('tile', x, roofEdge.y + .8, roofEdge.z - .2, .2, .2, .6, TILE, floor, true);
+      }
+      for (const column of [-.38, -.2, .2, .38]) {
+        const x = width * column, z = depth / 2 + .25;
+        box('bracket', x, roofEdge.y - .5, z, .6, .2, .6, WOOD, floor, true);
+        box('bracket', x, roofEdge.y - .3, z + .3, 1, .2, 1, EDGE, floor, true);
+        box('bracket', x, roofEdge.y - .5, z + .4, .2, .8, .2, EDGE, floor, true, [Math.PI / 4, 0, 0]);
       }
     }
   }
@@ -203,7 +279,13 @@ export class ArchitectureDetailManager {
     this.group.userData = this.getStats();
   }
 
-  getStats() { return { activeBuildings: this.entries.size, activeBuildingIds: [...this.entries.keys()], instances: [...this.entries.values()].reduce((sum, entry) => sum + entry.instanceCount, 0), created: this.created, released: this.released, maxBuildings: ARCHITECTURE_DETAIL_BUILDINGS, maxInstancesPerBuilding: ARCHITECTURE_DETAIL_INSTANCES, loadDistance: ARCHITECTURE_DETAIL_DISTANCE }; }
+  setLighting(daylight: number, power: number): void {
+    if (this.disposed) return;
+    this.light.emissiveIntensity = THREE.MathUtils.clamp(power, 0, 1) * (.08 + (1 - THREE.MathUtils.clamp(daylight, 0, 1)) * 1.7);
+    this.group.userData = this.getStats();
+  }
+
+  getStats() { return { activeBuildings: this.entries.size, activeBuildingIds: [...this.entries.keys()], instances: [...this.entries.values()].reduce((sum, entry) => sum + entry.instanceCount, 0), created: this.created, released: this.released, maxBuildings: ARCHITECTURE_DETAIL_BUILDINGS, maxInstancesPerBuilding: ARCHITECTURE_DETAIL_INSTANCES, loadDistance: ARCHITECTURE_DETAIL_DISTANCE, lanternEmission: this.light.emissiveIntensity }; }
 
   private create(building: Building, floor: number, quality: Quality): DetailEntry {
     const parts = buildArchitectureDetails(building, floor, quality === 'low' ? 384 : quality === 'high' ? 640 : 576);
@@ -211,7 +293,7 @@ export class ArchitectureDetailManager {
     const references: DetailReference[] = [];
     for (const luminous of [false, true]) {
       const selected = parts.filter(part => !!part.luminous === luminous); if (!selected.length) continue;
-      const mesh = new THREE.InstancedMesh(this.cube, luminous ? this.light : this.solid, selected.length); mesh.name = luminous ? '灯笼暖光' : '木作 · 窗棂 · 斗拱 · 砖石';
+      const mesh = new THREE.InstancedMesh(this.cube, luminous ? this.light : this.solid, selected.length); mesh.name = luminous ? '灯笼暖光' : '木构开间 · 窗棂 · 斗拱 · 砖石 · 门牌';
       selected.forEach((part, index) => {
         const rotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(...(part.rotation ?? [0, 0, 0])));
         const matrix = new THREE.Matrix4().compose(new THREE.Vector3(part.position.x, part.position.y, part.position.z), rotation, new THREE.Vector3(part.size.x, part.size.y, part.size.z));
@@ -221,16 +303,28 @@ export class ArchitectureDetailManager {
     }
     const entry: DetailEntry = { group, references, floor, quality, instanceCount: parts.length, interiorKey: '' };
     if (typeof document !== 'undefined') {
-      const canvas = document.createElement('canvas'); canvas.width = 768; canvas.height = 192; const context = canvas.getContext('2d');
+      const placement = architectureSignPlacement(building);
+      const canvas = document.createElement('canvas'); canvas.width = placement.vertical ? 512 : 768; canvas.height = placement.vertical ? 1024 : 192; const context = canvas.getContext('2d');
       if (context) {
-        context.fillStyle = building.kind === 'home' ? '#554735' : '#31514c'; context.fillRect(0, 0, 768, 192);
-        context.strokeStyle = '#c5a269'; context.lineWidth = 9; context.strokeRect(8, 8, 752, 176);
-        context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillStyle = '#eed8ae'; context.font = '600 54px "Noto Serif CJK SC", serif'; context.fillText(building.name, 384, 68, 706);
-        context.fillStyle = '#c4d2b7'; context.font = '400 34px "Noto Sans CJK SC", sans-serif'; context.fillText(architectureFunctionLabel(building), 384, 136, 706);
+        context.fillStyle = '#dcd1ac'; context.fillRect(0, 0, canvas.width, canvas.height);
+        context.strokeStyle = '#6e5238'; context.lineWidth = 9; context.strokeRect(14, 14, canvas.width - 28, canvas.height - 28);
+        context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillStyle = '#4c3928';
+        if (placement.vertical) {
+          const characters = Array.from(building.name), step = Math.min(90, 900 / Math.max(1, characters.length));
+          context.font = `600 ${Math.min(82, step * .85)}px "Noto Serif CJK SC", serif`;
+          characters.forEach((character, index) => context.fillText(character, 342, 64 + step * (index + .5), 142));
+          const functionName = architectureFunctionLabel(building).split('·').at(-1)!.trim();
+          context.font = '500 66px "Noto Serif CJK SC", serif';
+          Array.from(functionName).forEach((character, index) => context.fillText(character, 146, 100 + index * 88, 130));
+          context.strokeStyle = '#875b42'; context.lineWidth = 7; context.strokeRect(86, 810, 118, 118);
+          context.font = '500 48px "Noto Serif CJK SC", serif'; context.fillStyle = '#875b42'; context.fillText('云', 145, 870, 100);
+        } else {
+          context.font = '600 54px "Noto Serif CJK SC", serif'; context.fillText(building.name, 384, 68, 706);
+          context.font = '400 34px "Noto Sans CJK SC", sans-serif'; context.fillText(architectureFunctionLabel(building), 384, 136, 706);
+        }
         const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 1;
-        const fh = building.height / building.floors, doorHeight = Math.min(4.4, Math.max(2.4, fh - .5) * .72), width = Math.min(5.4, building.width * .3);
-        const sign = new THREE.Mesh(new THREE.PlaneGeometry(width, width * .25), new THREE.MeshBasicMaterial({ map: texture, toneMapped: false })); sign.name = `门牌 · ${architectureFunctionLabel(building)}`;
-        sign.position.set(0, building.kind === 'pavilion' ? building.height * .72 : doorHeight + .9, building.kind === 'pavilion' ? building.depth * .4 + .65 : building.depth / 2 + 1.05); group.add(sign); entry.sign = sign;
+        const sign = new THREE.Mesh(new THREE.PlaneGeometry(placement.width, placement.height), new THREE.MeshStandardMaterial({ map: texture, roughness: 1, metalness: 0 })); sign.name = `门牌 · ${architectureFunctionLabel(building)}`;
+        sign.position.set(placement.x, placement.y, placement.z + .12); group.add(sign); entry.sign = sign;
       }
     }
     return entry;

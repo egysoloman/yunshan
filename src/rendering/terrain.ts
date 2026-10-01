@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
-import { naturalTerrainHeight } from '../world';
+import { getWaterfallPath, terrainHeight } from '../world';
 
 interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
@@ -19,7 +19,7 @@ export function buildLandscape(world: WorldDefinition): {
   const group = new THREE.Group(), vegetation = new THREE.Group();
   group.name = '山水 · 分层岩壳与连续水系'; vegetation.name = '山林 · 松柏竹木'; group.add(vegetation);
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
-  const cube = new THREE.BoxGeometry(1, 1, 1); geometries.add(cube);
+  const cube = new THREE.BoxGeometry(1, 1, 1), canopy = cube; geometries.add(cube);
   const earth = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1, vertexColors: true });
   const rock = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .97 });
   const leaf = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1 });
@@ -33,14 +33,16 @@ export function buildLandscape(world: WorldDefinition): {
     shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
       vec3 cell=floor(vLandPosition*5.0);
       float grain=fract(sin(dot(cell,vec3(12.9898,78.233,39.425)))*43758.5453);
-      float stratum=sin(vLandPosition.y*2.4+sin(vLandPosition.x*.023)*.7);
-      diffuseColor.rgb*=.96+grain*.08;
-      diffuseColor.rgb*=mix(1.0,.87+stratum*.07,1.0-smoothstep(.25,.75,abs(vLandNormal.y)));`);
+      float cliff=1.0-smoothstep(.25,.75,abs(vLandNormal.y));
+      diffuseColor.rgb*=.94+grain*.12;
+      vec3 weatherCell=floor(vLandPosition*.18);
+      float weather=fract(sin(dot(weatherCell,vec3(31.13,17.71,53.29)))*15731.743);
+      diffuseColor.rgb*=mix(1.0,.89+weather*.13,cliff);`);
   };
   const transform = new THREE.Object3D();
-  function batch(name: string, blocks: Block[], material: THREE.Material, parent = group) {
+  function batch(name: string, blocks: Block[], material: THREE.Material, parent = group, geometry: THREE.BufferGeometry = cube) {
     if (!blocks.length) return;
-    const mesh = new THREE.InstancedMesh(cube, material, blocks.length); mesh.name = name;
+    const mesh = new THREE.InstancedMesh(geometry, material, blocks.length); mesh.name = name;
     blocks.forEach((b, i) => { transform.position.set(b.x, b.y, b.z); transform.scale.set(b.w, b.h, b.d); transform.rotation.set(0, 0, 0); transform.updateMatrix(); mesh.setMatrixAt(i, transform.matrix); mesh.setColorAt(i, b.color); });
     mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     mesh.computeBoundingSphere(); parent.add(mesh);
@@ -58,71 +60,51 @@ export function buildLandscape(world: WorldDefinition): {
   }
   const river: Segment[] = world.river.slice(1).map((point, i) => ({ a: world.river[i], b: point, width: 12 + Math.min(i + 1, 5) * .6 }));
   const fallTop = world.waterfall.top, fallBottom = world.waterfall.bottom;
-  const fallProfile = [fallTop, { x: fallTop.x, y: fallTop.y, z: fallTop.z + 34 }, { x: fallBottom.x, y: fallBottom.y, z: fallTop.z + 44 }, fallBottom];
+  const fallProfile = getWaterfallPath(world);
   const riverAt = (x: number, z: number) => {
     let best = { distance: Infinity, y: 0, width: 14 };
     for (const s of river) { const t = progress(x, z, s.a, s.b), dist = distanceToSegment(x, z, s.a, s.b); if (dist < best.distance) best = { distance: dist, y: s.a.y + (s.b.y - s.a.y) * t, width: s.width }; }
     return best;
   };
   const heightCache = new Map<string, number>();
-  function surfaceHeight(x: number, z: number) {
-    const key = `${x}:${z}`, cached = heightCache.get(key); if (cached !== undefined) return cached;
-    const nearby = buildings.get(bucket(x, z)) ?? [];
-    for (const b of nearby) if (Math.abs(x - b.position.x) <= b.width / 2 + 2 && Math.abs(z - b.position.z) <= b.depth / 2 + 2) {
-      const basement = b.basements && Math.abs(x - b.position.x) < b.width / 2 - .8 && Math.abs(z - b.position.z) < b.depth / 2 - .8;
-      const inside = Math.abs(x - b.position.x) < b.width / 2 && Math.abs(z - b.position.z) < b.depth / 2;
-      const top = quantize(basement ? b.position.y - b.basements! * b.height / b.floors - .6 : b.position.y - (inside ? .16 : 0)); heightCache.set(key, top); return top;
-    }
-    let y = naturalTerrainHeight(world, x, z);
-    const r = riverAt(x, z);
-    let roadDistance = Infinity, roadY = y, roadWidth = 5;
-    for (const s of roads.get(bucket(x, z)) ?? []) if (s.cutting && !(s.bridge && r.distance < 25)) { const distance = distanceToSegment(x, z, s.a, s.b); if (distance < roadDistance) { roadDistance = distance; roadY = s.a.y + (s.b.y - s.a.y) * progress(x, z, s.a, s.b) - .6; roadWidth = s.width; } }
-    if (roadDistance < roadWidth + 14 && (roadWidth === 22 || roadY - y < 12) && r.distance > 20) y += (roadY - y) * (1 - THREE.MathUtils.smoothstep(roadDistance, roadWidth, roadWidth + 14));
-    for (const b of nearby) { const outside = Math.hypot(Math.max(0, Math.abs(x - b.position.x) - b.width / 2 - 2), Math.max(0, Math.abs(z - b.position.z) - b.depth / 2 - 2)); if (outside < 12) y += (b.position.y - y) * (1 - THREE.MathUtils.smoothstep(outside, 0, 12)); }
-    if (r.distance < r.width + 2) y = Math.min(y, r.y - 2.2 + Math.max(0, r.distance - r.width) * .5);
-    const poolDistance = Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z);
-    if (poolDistance < 50) y = Math.min(y, world.waterfall.bottom.y - 2.4 + Math.max(0, poolDistance - 42) * .25);
-    // The gorge opens towards the pool, leaving the falling sheet visible from
-    // both banks. A sheet-width cut left tall foreground banks across its view.
-    for (let i = 1; i < fallProfile.length; i++) if (distanceToSegment(x, z, fallProfile[i - 1], fallProfile[i]) < (i === 1 ? world.waterfall.width / 2 + 2 : 46)) { const t = progress(x, z, fallProfile[i - 1], fallProfile[i]); y = Math.min(y, fallProfile[i - 1].y + (fallProfile[i].y - fallProfile[i - 1].y) * t - 3); }
+  function surfaceHeight(x: number, z: number, includeBasements = true) {
+    const key = `${x}:${z}:${includeBasements}`, cached = heightCache.get(key); if (cached !== undefined) return cached;
+    const y = terrainHeight(world, x, z, includeBasements);
     const result = quantize(y); heightCache.set(key, result); return result;
   }
-  const palette = { rock: new THREE.Color('#a0a895'), cliff: new THREE.Color('#a2aaa2'), soil: new THREE.Color('#a1967e'), grass: new THREE.Color('#748c66'), gravel: new THREE.Color('#b5ad91'), wet: new THREE.Color('#87978a') };
+  const palette = { rock: new THREE.Color('#5b6863'), cliff: new THREE.Color('#737d73'), soil: new THREE.Color('#887457'), grass: new THREE.Color('#43673b'), gravel: new THREE.Color('#abae9b'), wet: new THREE.Color('#5d817b') };
   function groundColor(x: number, z: number, y: number, slope: number, side = false) {
     const r = riverAt(x, z), field = Math.sin(x / 43) * Math.cos(z / 58), broad = Math.sin(x / 240 + z / 180);
     let color: THREE.Color;
-    if (side || slope > .7) color = palette.cliff.clone().lerp(palette.soil, .24 + broad * .1);
-    else if (r.distance < r.width + 14 || Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z) < 62) color = palette.gravel.clone().lerp(palette.wet, .32 + field * .08);
-    else if (slope > .26 || y > 410) color = palette.rock.clone().lerp(palette.grass, .15 + field * .1);
-    else color = palette.grass.clone().lerp(palette.soil, .2 + field * .12);
+    const meadow = palette.grass.clone().lerp(palette.soil, .12 + field * .08), stone = palette.cliff.clone().lerp(palette.rock, .3 + broad * .12);
+    const face = side ? 1 : THREE.MathUtils.smoothstep(slope, .32, 1.1), alpine = THREE.MathUtils.smoothstep(y, 465, 590);
+    color = meadow.lerp(stone, Math.max(face, alpine));
+    const wetness = 1 - THREE.MathUtils.smoothstep(r.distance, r.width + 2, r.width + 20), plunge = 1 - THREE.MathUtils.smoothstep(Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z), 45, 72);
+    color.lerp(palette.gravel.clone().lerp(palette.wet, .32 + field * .08), Math.max(wetness, plunge));
     return color.multiplyScalar(.96 + broad * .06);
   }
   function mesh(name: string, data: Surface, parent: THREE.Group) {
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(data.positions, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(data.colors, 3)); geometry.setIndex(data.indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere(); geometries.add(geometry);
-    const result = new THREE.Mesh(geometry, earth); result.name = name; parent.add(result); return result;
+    const result = new THREE.Mesh(geometry, earth); result.name = name; result.receiveShadow = true; parent.add(result); return result;
   }
   function quad(data: Surface, vertices: number[], color: THREE.Color) {
     const start = data.positions.length / 3; data.positions.push(...vertices); for (let i = 0; i < 4; i++) data.colors.push(color.r, color.g, color.b); data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
   }
+  const proxySteps = new Map<string, number>();
   function shell(tx: number, tz: number, step: number, stepped: boolean, parent: THREE.Group) {
     const data: Surface = { positions: [], colors: [], indices: [] };
+    const hangingLeaves: Block[] = [];
     const nearbyBuildings = buildings.get(`${tx}:${tz}`) ?? [];
-    const nearbyRoads = roads.get(`${tx}:${tz}`) ?? [];
     const half = step / 2;
-    const height = (x: number, z: number) => surfaceHeight(x, z);
+    const height = (x: number, z: number) => surfaceHeight(x, z, stepped);
     for (let x = tx * TILE; x < (tx + 1) * TILE; x += step) for (let z = tz * TILE; z < (tz + 1) * TILE; z += step) {
       const xs = [x, x + step], zs = [z, z + step];
-      const centreX = x + half, centreZ = z + half;
-      const centreHeight = height(centreX, centreZ);
-      const variation = Math.max(Math.abs(height(x, centreZ) - centreHeight), Math.abs(height(x + step, centreZ) - centreHeight), Math.abs(height(centreX, z) - centreHeight), Math.abs(height(centreX, z + step) - centreHeight));
-      const cut = nearbyRoads.some(s => distanceToSegment(centreX, centreZ, s.a, s.b) < s.width + step && s.a.y + (s.b.y - s.a.y) * progress(centreX, centreZ, s.a, s.b) < height(centreX, centreZ) + 12)
-        || nearbyBuildings.some(b => Math.abs(centreX - b.position.x) < b.width / 2 + step + 8 && Math.abs(centreZ - b.position.z) < b.depth / 2 + step + 8)
-        || Math.hypot(centreX - fallTop.x, centreZ - fallTop.z) < 140;
-      const subdivision = !stepped && (cut && variation > 1.2 || variation > step * .5) ? Math.min(step, 4) : step;
-      for (let offset = subdivision; offset < step; offset += subdivision) { xs.push(x + offset); zs.push(z + offset); }
+      // The waterfall lip/drop are a shared world feature, not a global
+      // resolution increase. Propagating their rows keeps adjacent tiles sewn.
+      if (!stepped) for (const zz of [fallProfile[1].z, fallProfile[2].z]) if (zz > z && zz < z + step && !zs.includes(zz)) zs.push(zz);
       // Exact footprint cuts retain the existing excavated basements and shared
       // floor dimensions even when a coarse proxy runs across a facade.
-      for (const b of nearbyBuildings) if (x < b.position.x + b.width / 2 && x + step > b.position.x - b.width / 2 && z < b.position.z + b.depth / 2 && z + step > b.position.z - b.depth / 2) {
+      for (const b of stepped ? nearbyBuildings : []) if (x < b.position.x + b.width / 2 && x + step > b.position.x - b.width / 2 && z < b.position.z + b.depth / 2 && z + step > b.position.z - b.depth / 2) {
         for (const xx of [b.position.x - b.width / 2, b.position.x + b.width / 2]) if (xx > x && xx < x + step) xs.push(xx);
         for (const zz of [b.position.z - b.depth / 2, b.position.z + b.depth / 2]) if (zz > z && zz < z + step) zs.push(zz);
       }
@@ -135,40 +117,76 @@ export function buildLandscape(world: WorldDefinition): {
         if (stepped) {
           quad(data, [a, top, c, a, top, d, b, top, d, b, top, c], color);
           const side = groundColor(mx, mz, top, slope, true), west = height(a - localHalf, mz), east = height(b + localHalf, mz), north = height(mx, c - localHalf), south = height(mx, d + localHalf);
-          if (west < top) quad(data, [a, west, d, a, top, d, a, top, c, a, west, c], side);
-          if (east < top) quad(data, [b, east, c, b, top, c, b, top, d, b, east, d], side);
-          if (north < top) quad(data, [a, north, c, a, top, c, b, top, c, b, north, c], side);
-          if (south < top) quad(data, [b, south, d, b, top, d, a, top, d, a, south, d], side);
+          const wall = (vertices: number[], low: number, faceX: number, faceZ: number, nx: number, nz: number) => {
+            if (low >= top) return;
+            quad(data, vertices, side);
+            if (hangingLeaves.length >= 360 || top - low < 4 || hash(mx, mz, world.seed) < .74 || !clearGround(mx, mz, .4)) return;
+            for (let layer = 0; layer < Math.min(12, Math.floor((top - low) / 1.2)) && hangingLeaves.length < 360; layer++) {
+              const spread = (hash(mx + layer, mz, world.seed) - .5) * Math.min(1.2, localStep * .6), yy = quantize(top - .6 - layer * 1.2);
+              hangingLeaves.push({ x: faceX + nx * .15 - nz * spread, y: yy, z: faceZ + nz * .15 + nx * spread, w: nx ? .2 : .6, h: .8, d: nx ? .6 : .2, color: new THREE.Color(layer % 3 ? '#4d6840' : '#7b8850') });
+            }
+          };
+          wall([a, west, d, a, top, d, a, top, c, a, west, c], west, a, mz, -1, 0);
+          wall([b, east, c, b, top, c, b, top, d, b, east, d], east, b, mz, 1, 0);
+          wall([a, north, c, a, top, c, b, top, c, b, north, c], north, mx, c, 0, -1);
+          wall([b, south, d, b, top, d, a, top, d, a, south, d], south, mx, d, 0, 1);
         } else {
-          const inside = nearbyBuildings.find(building => Math.abs(mx - building.position.x) < building.width / 2 && Math.abs(mz - building.position.z) < building.depth / 2);
-          const h = (xx: number, zz: number) => inside ? top : height(xx, zz);
-          const ac = h(a, c), ad = h(a, d), bd = h(b, d), bc = h(b, c);
-          quad(data, [a, ac, c, a, ad, d, b, bd, d, b, bc, c], color);
-          // Proxy resolution changes and exact footprint cuts form T-junctions.
-          // Close their exposed perimeter below both surfaces rather than
-          // relying on one neighbour-centre sample to supply a missing face.
-          if (cut || subdivision < step) {
-            const bottom = Math.min(ac, ad, bd, bc, height(a - localHalf, mz), height(b + localHalf, mz), height(mx, c - localHalf), height(mx, d + localHalf)) - 16;
-            const side = groundColor(mx, mz, top, slope, true);
-            quad(data, [a, bottom, d, a, ad, d, a, ac, c, a, bottom, c], side);
-            quad(data, [b, bottom, c, b, bc, c, b, bd, d, b, bottom, d], side);
-            quad(data, [a, bottom, c, a, ac, c, b, bc, c, b, bottom, c], side);
-            quad(data, [b, bottom, d, b, bd, d, a, ad, d, a, bottom, d], side);
+          const ring: number[][] = [];
+          const point = (xx: number, zz: number) => ring.push([xx, height(xx, zz), zz]);
+          const edge = (x1: number, z1: number, x2: number, z2: number, neighbour: number) => {
+            point(x1, z1);
+            if (neighbour >= step) return;
+            const increasing = x1 !== x2 ? x2 > x1 : z2 > z1, lo = Math.min(x1 !== x2 ? x1 : z1, x1 !== x2 ? x2 : z2), hi = Math.max(x1 !== x2 ? x1 : z1, x1 !== x2 ? x2 : z2);
+            const cuts: number[] = [];
+            for (let at = (Math.floor(lo / neighbour) + 1) * neighbour; at < hi; at += neighbour) cuts.push(at);
+            if (!increasing) cuts.reverse();
+            for (const at of cuts) point(x1 !== x2 ? at : x1, x1 !== x2 ? z1 : at);
+          };
+          edge(a, c, a, d, a === tx * TILE ? proxySteps.get(`${tx - 1}:${tz}`) ?? step : step);
+          edge(a, d, b, d, d === (tz + 1) * TILE ? proxySteps.get(`${tx}:${tz + 1}`) ?? step : step);
+          edge(b, d, b, c, b === (tx + 1) * TILE ? proxySteps.get(`${tx + 1}:${tz}`) ?? step : step);
+          edge(b, c, a, c, c === tz * TILE ? proxySteps.get(`${tx}:${tz - 1}`) ?? step : step);
+          if (ring.length === 4) quad(data, ring.flat(), color);
+          else {
+            // Only the common border receives its neighbour's samples. A
+            // centre fan joins those samples without splitting the opposite
+            // interior edge and creating another unmatched T-junction.
+            const start = data.positions.length / 3;
+            data.positions.push(mx, height(mx, mz), mz, ...ring.flat());
+            for (let i = 0; i <= ring.length; i++) data.colors.push(color.r, color.g, color.b);
+            for (let i = 0; i < ring.length; i++) data.indices.push(start, start + 1 + i, start + 1 + (i + 1) % ring.length);
           }
         }
       }
     }
-    return mesh(stepped ? `近景岩土壳 ${tx}:${tz}` : `山形表面代理 ${tx}:${tz}`, data, parent);
+    const result = mesh(stepped ? `近景岩土壳 ${tx}:${tz}` : `山形表面代理 ${tx}:${tz}`, data, parent);
+    if (stepped) batch('真实岩壁 · 附壁垂藤', hangingLeaves, leaf, parent);
+    return result;
   }
   const tiles: TerrainTile[] = [];
   const extent = Math.ceil(world.size / 2 / TILE);
+  const reliefTiles: { x: number; z: number; score: number }[] = [];
   for (let x = -extent; x < extent; x++) for (let z = -extent; z < extent; z++) {
     const cx = (x + .5) * TILE, cz = (z + .5) * TILE;
-    const populated = buildings.has(`${x}:${z}`) || riverAt(cx, cz).distance < 100 || Math.hypot(cx - world.waterfall.top.x, cz - world.waterfall.top.z) < 160;
-    tiles.push({ x, z, coarse: shell(x, z, populated ? 8 : 16, false, group), used: 0, indexStart: 0, originalIndices: [], hidden: false });
+    const heights = [surfaceHeight(cx - 48, cz, false), surfaceHeight(cx + 48, cz, false), surfaceHeight(cx, cz - 48, false), surfaceHeight(cx, cz + 48, false)];
+    const score = (Math.max(...heights) - Math.min(...heights)) / (1 + Math.hypot(cx - fallTop.x, cz - fallTop.z) / 1800);
+    proxySteps.set(`${x}:${z}`, 16); reliefTiles.push({ x, z, score });
   }
+  reliefTiles.sort((a, b) => b.score - a.score || a.x - b.x || a.z - b.z);
+  // Spend a fixed geometry budget on real steep landforms across the city,
+  // rather than one global increase or a camera-only decorative cliff.
+  reliefTiles.slice(0, 120).forEach(tile => proxySteps.set(`${tile.x}:${tile.z}`, 8));
+  reliefTiles.slice(0, 10).forEach(tile => proxySteps.set(`${tile.x}:${tile.z}`, 4));
+  for (let x = -extent; x < extent; x++) for (let z = -extent; z < extent; z++) tiles.push({ x, z, coarse: shell(x, z, proxySteps.get(`${x}:${z}`)!, false, group), used: 0, indexStart: 0, originalIndices: [], hidden: false });
+  // Sew the lighting as well as the positions across cell and tile borders.
+  // Averaging the existing solid faces needs no extra terrain-height queries.
+  const sharedNormals = new Map<string, THREE.Vector3>();
+  for (const tile of tiles) { const positions = tile.coarse.geometry.getAttribute('position'), normals = tile.coarse.geometry.getAttribute('normal'); for (let i = 0; i < positions.count; i++) { const id = `${positions.getX(i)}:${positions.getZ(i)}`, normal = sharedNormals.get(id) ?? new THREE.Vector3(); normal.x += normals.getX(i); normal.y += normals.getY(i); normal.z += normals.getZ(i); sharedNormals.set(id, normal); } }
+  sharedNormals.forEach(normal => normal.normalize());
+  for (const tile of tiles) { const positions = tile.coarse.geometry.getAttribute('position'), normals = tile.coarse.geometry.getAttribute('normal'), colors = tile.coarse.geometry.getAttribute('color'); for (let i = 0; i < positions.count; i++) { const x = positions.getX(i), z = positions.getZ(i), normal = sharedNormals.get(`${x}:${z}`)!; normals.setXYZ(i, normal.x, normal.y, normal.z); const color = groundColor(x, z, positions.getY(i), Math.hypot(normal.x, normal.z) / Math.max(.001, normal.y)); colors.setXYZ(i, color.r, color.g, color.b); } }
+  sharedNormals.clear();
   const coarseChunks = new Map<string, TerrainTile[]>();
-  for (const tile of tiles) { const key = `${Math.floor(tile.x / 8)}:${Math.floor(tile.z / 8)}`, list = coarseChunks.get(key) ?? []; list.push(tile); coarseChunks.set(key, list); }
+  for (const tile of tiles) { const key = `${Math.floor(tile.x / 4)}:${Math.floor(tile.z / 4)}`, list = coarseChunks.get(key) ?? []; list.push(tile); coarseChunks.set(key, list); }
   for (const [key, members] of coarseChunks) {
     const originals = members.map(tile => tile.coarse.geometry), merged = mergeGeometries(originals);
     if (!merged) throw new Error('Terrain proxy geometry could not be merged');
@@ -193,18 +211,47 @@ export function buildLandscape(world: WorldDefinition): {
     const r = riverAt(x, z); return r.distance > r.width + margin && Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z) > 56;
   }
   const trunks: Block[] = [], crowns: Block[] = [], bushes: Block[] = [];
-  for (let i = 0; i < 55000 && trunks.length < 3600; i++) {
-    const mountain = world.mountains[i % world.mountains.length], clustered = i % 4 !== 0;
-    const x = quantize(clustered ? mountain.x + (hash(i, 38, world.seed) - .5) * mountain.radius * 1.9 : (hash(i, 38, world.seed) - .5) * world.size * .95), z = quantize(clustered ? mountain.z + (hash(i, 73, world.seed) - .5) * mountain.radius * 1.9 : (hash(i, 73, world.seed) - .5) * world.size * .95), y = surfaceHeight(x, z);
-    if (y < 8 || y > 630 || !clearGround(x, z, 8)) continue;
-    if (Math.abs(surfaceHeight(x + 8, z) - y) > 12 || Math.abs(surfaceHeight(x, z + 8) - y) > 12) continue;
-    const height = quantize(12 + hash(i, 92, world.seed) * 16), color = new THREE.Color('#385d46').lerp(new THREE.Color('#7d936b'), hash(i, 91, world.seed) * .7);
+  // Woodland grows in overlapping stands along the actual neighbourhood edge
+  // and the mountain shoulder. Each stand retains its canopy mass in far LOD.
+  const stands = world.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {
+    const angle = side / 8 * Math.PI * 2 + index * .21, distance = district.radius * .86;
+    return { x: district.center.x + Math.cos(angle) * distance, z: district.center.z + Math.sin(angle) * distance, radius: 100 };
+  }));
+  for (const mountain of world.mountains) for (let side = 0; side < 5; side++) { const angle = side / 5 * Math.PI * 2; stands.push({ x: mountain.x + Math.cos(angle) * mountain.radius * .54, z: mountain.z + Math.sin(angle) * mountain.radius * .54, radius: 65 }); }
+  if (!stands.length) stands.push({ x: 0, z: 0, radius: world.size * .35 });
+  for (let i = 0; i < 70000 && trunks.length < 5200; i++) {
+    const stand = stands[i % stands.length], angle = hash(i, 38, world.seed) * Math.PI * 2, radius = Math.sqrt(hash(i, 73, world.seed)) * stand.radius;
+    const x = quantize(stand.x + Math.cos(angle) * radius), z = quantize(stand.z + Math.sin(angle) * radius), y = surfaceHeight(x, z);
+    if (y < 8 || y > 630 || !clearGround(x, z, 3)) continue;
+    if (Math.abs(surfaceHeight(x + 2, z) - y) > 8 || Math.abs(surfaceHeight(x, z + 2) - y) > 8) continue;
+    const height = quantize(16 + hash(i, 92, world.seed) * 15), species = Math.floor(i / stands.length) % 9;
+    const color = new THREE.Color(species === 0 ? '#ad6b3a' : species === 1 ? '#a79541' : species === 2 ? '#6b854c' : '#365d40').lerp(new THREE.Color('#83986c'), hash(i, 91, world.seed) * .35);
     trunks.push({ x, y: y + height * .35, z, w: .8, h: height * .7, d: .8, color: new THREE.Color('#6b5c45') });
     // Each tier has projecting voxel branches, leaving light between crowns.
-    for (let tier = 0; tier < 4; tier++) { const width = quantize(height * (.52 - tier * .105)); crowns.push({ x, y: y + height * (.48 + tier * .135), z, w: width, h: quantize(height * .11), d: width, color: color.clone().multiplyScalar(.93 + tier * .04) }); if (i % 3 === 0) crowns.push({ x: x + width * .12, y: y + height * (.52 + tier * .135), z: z - width * .08, w: width * .68, h: quantize(height * .13), d: width * .68, color }); }
+    for (let tier = 0; tier < 4; tier++) { const width = quantize(height * (.84 - tier * .13)); crowns.push({ x: x + (tier % 2 ? 1 : -1) * height * .11, y: y + height * (.49 + tier * .12), z: z + height * .075 * (tier - 1), w: width, h: quantize(height * .23), d: width * .8, color: color.clone().multiplyScalar(.85 + tier * .06) }); }
     if (i % 2 === 0) bushes.push({ x: x + 3.2, y: y + .9, z: z + 2, w: 2.8, h: 1.8, d: 2.2, color: color.clone().lerp(new THREE.Color('#819169'), .2) });
   }
-  batch('山林树干', trunks, rock, vegetation); batch('分枝松冠', crowns, leaf, vegetation); batch('山林灌木', bushes, leaf, vegetation);
+  const forestChunks: { x: number; z: number; detail: THREE.Group; proxy: THREE.Group }[] = [];
+  const forest = new Map<string, { trunks: Block[]; crowns: Block[]; bushes: Block[] }>();
+  for (const [key, blocks] of [['trunks', trunks], ['crowns', crowns], ['bushes', bushes]] as const) for (const block of blocks) {
+    const cell = `${Math.floor(block.x / 384)}:${Math.floor(block.z / 384)}`, lists = forest.get(cell) ?? { trunks: [], crowns: [], bushes: [] };
+    lists[key].push(block); forest.set(cell, lists);
+  }
+  for (const [key, lists] of forest) {
+    const [x, z] = key.split(':').map(Number), detail = new THREE.Group(), proxy = new THREE.Group();
+    detail.name = `林木近景 ${key}`; proxy.name = `远林冠影 ${key}`; vegetation.add(detail, proxy);
+    batch('山林树干', lists.trunks, rock, detail); batch('错层乔木冠', lists.crowns, leaf, detail, canopy); batch('山林灌木', lists.bushes, leaf, detail, canopy);
+    const distantCrowns = lists.trunks.flatMap((t, i) => {
+      const color = lists.crowns[i * 4]?.color ?? new THREE.Color('#527151');
+      return [0, 1].map(tier => ({ ...t, x: t.x + (tier ? 1 : -1) * t.h * .15, y: t.y + t.h * (.42 + tier * .35), z: t.z + tier * t.h * .1, w: quantize(t.h * (tier ? .9 : 1.25)), h: quantize(t.h * .55), d: quantize(t.h * (tier ? .75 : 1.08)), color: color.clone().multiplyScalar(tier ? 1.08 : .92) }));
+    });
+    batch('远林树干代理', lists.trunks, rock, proxy); batch('远林错层树冠代理', distantCrowns, leaf, proxy, canopy);
+    detail.visible = false; forestChunks.push({ x: (x + .5) * 384, z: (z + .5) * 384, detail, proxy });
+  }
+
+  // The rock face is the actual continuous terrain shell. No floating or
+  // buried cuboids substitute for its solid surface; weathered ribs use its
+  // world-space material normals and the near shell keeps real stepped faces.
 
   const water: THREE.ShaderMaterial[] = [createWater(false), createWater(true)]; materials.add(water[0]); materials.add(water[1]);
   const bankBlocks: Block[] = [], reeds: Block[] = [];
@@ -249,6 +296,10 @@ export function buildLandscape(world: WorldDefinition): {
     if (cell === lastCell && quality === lastQuality) return;
     heightCache.clear();
     lastCell = cell; lastQuality = quality; epoch++;
+    for (const forest of forestChunks) {
+      const near = Math.hypot(camera.x - forest.x, camera.z - forest.z) < (quality === 'high' ? 720 : 320);
+      forest.detail.visible = near; forest.proxy.visible = !near;
+    }
     const selected: TerrainTile[] = [];
     for (const tile of tiles) {
       const wanted = close && Math.abs(tile.x - centreX) <= (quality === 'low' ? 0 : 1) && Math.abs(tile.z - centreZ) <= (quality === 'low' ? 0 : 1);
@@ -258,10 +309,11 @@ export function buildLandscape(world: WorldDefinition): {
         if (!tile.fine) {
           tile.fine = new THREE.Group(); tile.fineStep = step; tile.fine.name = `近景土石与植被 ${tile.x}:${tile.z}`; group.add(tile.fine); shell(tile.x, tile.z, step, true, tile.fine);
           const smallRocks: Block[] = [], grass: Block[] = [];
-          for (let i = 0; i < (quality === 'low' ? 80 : 260); i++) {
-            const x = quantize((tile.x + hash(i, 400 + tile.z, world.seed)) * TILE), z = quantize((tile.z + hash(i, 500 + tile.x, world.seed)) * TILE), y = surfaceHeight(x, z);
+          for (let i = 0; i < (quality === 'low' ? 48 : 150); i++) {
+            const patch = Math.floor(i / 12), px = (tile.x + hash(patch, 400 + tile.z, world.seed)) * TILE, pz = (tile.z + hash(patch, 500 + tile.x, world.seed)) * TILE;
+            const x = quantize(px + (hash(i, 611, world.seed) - .5) * 9), z = quantize(pz + (hash(i, 612, world.seed) - .5) * 9), y = surfaceHeight(x, z);
             if (!clearGround(x, z, 1.2)) continue;
-            if (i % 3 === 0) smallRocks.push({ x, y: y + .2, z, w: .4 + .2 * (i % 4), h: .4, d: .4 + .2 * (i % 3), color: new THREE.Color(i % 2 ? '#a7ab9a' : '#878c7d') });
+            if (i % 12 === 0) smallRocks.push({ x, y: y + .2, z, w: .4 + .2 * (i % 4), h: .4, d: .4 + .2 * (i % 3), color: new THREE.Color(i % 2 ? '#a7ab9a' : '#878c7d') });
             else for (let stem = 0; stem < 3; stem++) grass.push({ x: x + stem * .2, y: y + .3, z: z + (stem % 2) * .2, w: .2, h: .4 + (stem % 2) * .2, d: .2, color: new THREE.Color(i % 2 ? '#869a71' : '#5e7958') });
           }
           batch('近景 · 0.2m碎石', smallRocks, rock, tile.fine); batch('近景 · 0.2m草叶', grass, leaf, tile.fine);
@@ -271,10 +323,11 @@ export function buildLandscape(world: WorldDefinition): {
       if (tile.hidden !== wanted) { const index = tile.coarse.geometry.index!; for (let i = 0; i < tile.originalIndices.length; i++) index.setX(tile.indexStart + i, wanted ? tile.originalIndices[0] : tile.originalIndices[i]); index.needsUpdate = true; tile.hidden = wanted; }
     }
     const cached = tiles.filter(tile => tile.fine).sort((a, b) => b.used - a.used); for (const tile of cached.slice(18)) destroyFine(tile);
-    group.userData.lod = { visibleFineTiles: selected.length, cachedFineTiles: Math.min(18, cached.length), tileMetres: TILE, surfaceStep: quality === 'high' ? 1 : 2, voxelMetres: world.voxelSize, lowAltitude: close };
+    group.userData.lod = { visibleFineTiles: selected.length, cachedFineTiles: Math.min(18, cached.length), tileMetres: TILE, surfaceStep: quality === 'high' ? 1 : 2, voxelMetres: world.voxelSize, lowAltitude: close, proxyStep: 16, proxyChunkMetres: 384, forestDetailChunks: forestChunks.filter(chunk => chunk.detail.visible).length };
     heightCache.clear();
   }
   group.userData.water = { continuous: true, riverVertices: world.river.length * 2, plungePoolRadius: 50, waterfallDrop: top.y - bottom.y };
+  group.userData.woodland = { stands: stands.length, trees: trunks.length, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0 };
   return { group, water, vegetation, update, dispose() { group.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); }); geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); group.clear(); } };
 }
 

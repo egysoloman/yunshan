@@ -1,0 +1,109 @@
+✔ generated neighbours are assigned jobs by the walkable graph, including mountain detours (1946.455128ms)
+✔ an underfunded private employer pays its real cash proportionally and settles each wage once (130.500789ms)
+✔ production requires actual attendance and technology improves that labour instead of producing unattended stock (32.669862ms)
+✖ public operations consume existing goods and credit their real supplier without creating money (35.084011ms)
+✔ a stored meal is consumed after closing time and does not credit money or create food (23.636753ms)
+✔ legacy accounts migrate from real proprietor savings and new ownership and cash survive exact continuation (266.232682ms)
+✖ funded clinical care consumes one real material and cannot heal from an empty supplier (919.082897ms)
+✖ actual attendance retains its employer and promised wage rate across mid-shift changes and save/load (55.210647ms)
+✔ wage contracts reject changed amounts and employers atomically, while legacy unpaid expense migrates once (151.862942ms)
+✔ share repurchases reserve both unpaid and not-yet-due actual wages (24.298728ms)
+✔ native housing, education, qualifications and police rewards have actual public counterparties (6.539504ms)
+✔ future public shifts require actual departmental witnesses and reserve past promises before authorizing cash (120.846352ms)
+✔ construction purchases finite material and completes only after attended work, without saleable stock creation (52.02269ms)
+✔ private employers approve only onsite cash-backed minutes and preserve losses, old claims and future cash protection (76.853485ms)
+✖ a capped worker wallet retains its wage claim until a real receiving capacity is available (12.348501ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 11
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4140.149463
+
+✖ failing tests:
+
+test at tests/economy.test.ts:1:6588
+✖ public operations consume existing goods and credit their real supplier without creating money (35.084011ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(purchase > 0)
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/economy.test.ts:95:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/economy.test.ts:1:9517
+✖ funded clinical care consumes one real material and cannot heal from an empty supplier (919.082897ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 4
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/economy.test.ts:154:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 4,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/economy.test.ts:1:11475
+✖ actual attendance retains its employer and promised wage rate across mid-shift changes and save/load (55.210647ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(restored.shopFunds(restoredSecond) <= funds[1] - employerDue[1] + 1e-8)
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/economy.test.ts:185:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/economy.test.ts:1:27076
+✖ a capped worker wallet retains its wage claim until a real receiving capacity is available (12.348501ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  80.3312 !== 80
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/economy.test.ts:309:43)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 80.3312,
+    expected: 80,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

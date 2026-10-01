@@ -1,0 +1,96 @@
+✔ family installation adds real student guardians without minting money or moving homes and jobs (140.603696ms)
+✔ legacy family saves migrate existing guardians without new money and reject hidden version-two executor data atomically (133.985178ms)
+✖ family planning requires marriage time, bilateral willingness, real shared space and two funded adults (561.37737ms)
+✖ time-of-day controls cannot skip gestation, and delivery persists a zero-age citizen and conserves escrow (439.389991ms)
+✔ student support debits a real guardian, keeps reserves and cannot be repeated within its saved daily interval (418.521732ms)
+✔ infants consume transferred real food and personal child support never creates cash (238.719916ms)
+✔ enrollment needs a real child at the school; only healthy attended lessons accumulate education and adulthood enables work (1175.872353ms)
+✔ death transfers exact cash and integer shares to the living spouse and child, then remains deterministic after reload (475.618472ms)
+✔ six actual school days complete lessons without commands or fabricated education increments (10036.648394ms)
+✔ an adult without enrolled schooling can seek a real unskilled job without a fabricated graduation (120.502819ms)
+✔ new adult job searches use the actual home commute rather than proximity to a distant market (129.308572ms)
+✔ invalid population, ancestry, timer, escrow and deceased-estate references reject atomically (667.808744ms)
+✔ a carrier death refunds real pregnancy escrow before inheritance and never produces a phantom child (88.129889ms)
+✔ pregnancy refunds retain the real escrow at the wallet ceiling until actual bank repayment creates room (137.801373ms)
+✔ biological kinship blocks courting and family planning while seeded foster support is a distinct relationship (129.507416ms)
+✔ shared housing checks both adults, capacity and real commute, preserves position and jobs, and funds a conserved joint account (99.176505ms)
+✖ a real bilateral household move keeps the ongoing gestation and registers delivery at the new shared home (190.229494ms)
+✔ joint family food purchases pay an actual finite shop and divorce refunds the remaining joint property once (123.620499ms)
+✔ weddings and funerals consume real supplies and public venue fees, then require thirty actual on-site minutes (262.759424ms)
+✔ NPC relationships arise from real proximity and bilateral willingness, with complete stage deadlines before marriage (1342.467951ms)
+✔ shared accounts, autonomous relationship clocks, ceremonies and care references reject corrupted saves atomically (197.770763ms)
+✔ a nearby proposed home with a five-kilometre real detour is rejected without moving jobs or minting money (27.271956ms)
+✔ a willing established NPC couple reaches a feasible shared home on real routes before funding an autonomous pregnancy (468.575641ms)
+✔ orphan care transfers real food from an actual present adult while retaining the deceased biological parents (99.10575ms)
+✔ family customers settle actual consigned producers once and use the same retail cost as ordinary buyers (89.32454ms)
+✔ family food uses the saved immutable FIFO purchase costs without paying the supplier a second time (93.304354ms)
+✔ a valuable but illiquid estate keeps its debt and assets until an actual on-site buyer pays, then clears debt before inheritance (281.420423ms)
+✔ noncorporate inheritance transfers actual ownership while operating cash, goods and consignment claims stay in the business (87.501524ms)
+✔ forged executor receipts, nonexistent buyers and nonexistent business ownership reject without changing a pending estate (285.877838ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 26
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19188.572141
+
+✖ failing tests:
+
+test at tests/family.test.ts:1:7458
+✖ family planning requires marriage time, bilateral willingness, real shared space and two funded adults (561.37737ms)
+  AssertionError [ERR_ASSERTION]: serialization order differs
+      at sameSave (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:32:10)
+      at TestContext.<anonymous> (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:111:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'fail',
+    diff: 'simple'
+  }
+
+test at tests/family.test.ts:1:8924
+✖ time-of-day controls cannot skip gestation, and delivery persists a zero-age citizen and conserves escrow (439.389991ms)
+  AssertionError [ERR_ASSERTION]: serialization order differs
+      at sameSave (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:32:10)
+      at TestContext.<anonymous> (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:132:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'fail',
+    diff: 'simple'
+  }
+
+test at tests/family.test.ts:1:24640
+✖ a real bilateral household move keeps the ongoing gestation and registers delivery at the new shared home (190.229494ms)
+  AssertionError [ERR_ASSERTION]: serialization order differs
+      at sameSave (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:32:10)
+      at TestContext.<anonymous> (/tmp/yunshan-family-cache-isolated/tests/family.test.ts:335:240)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'fail',
+    diff: 'simple'
+  }

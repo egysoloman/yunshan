@@ -1,0 +1,78 @@
+{
+  "scope": "Follow-up legal public-floor29 full-state save test for both latest v2 and historical r5; production identical to prior immutable full9 run",
+  "testsPassed": 1,
+  "testsFailed": 0,
+  "sourceSnapshot": "/tmp/yunshan-world-layout-v3-r5-public-03",
+  "strictTypeScriptExitCode": 0,
+  "onlyPriorChange": "Test fixture uses public floor29 and asserts canAccessFloor instead of using restricted floor25.",
+  "runtimeSourcesUnchanged": true,
+  "evidenceRecords": [
+    {
+      "check": "actual-v2-full-save-upper-floor-voxel-finance-routes-continuation",
+      "layout": "current-v2",
+      "worldFingerprint": "cf899fc3",
+      "originalPosition": {
+        "x": 430,
+        "y": 480.8,
+        "z": -250
+      },
+      "restoredPosition": {
+        "x": 430,
+        "y": 480.8,
+        "z": -250
+      },
+      "wallet": 600,
+      "treasury": 80020.05119999999,
+      "bankCash": 0,
+      "fullSaveSha256": "33811aad012380264e1fcfb99771ff41fd2642a6a02142a458714b80a1f9c595",
+      "chosenRoutes": 616,
+      "voxelEdits": 1,
+      "exactFullRoundTrip": true,
+      "continuationTicks": 24,
+      "exactFullContinuation": true,
+      "wrongV3ImportAtomicRejected": true,
+      "foreignLabelsIgnored": true
+    },
+    {
+      "check": "actual-v2-full-save-upper-floor-voxel-finance-routes-continuation",
+      "layout": "current-v2-r5",
+      "worldFingerprint": "c70ebca5",
+      "originalPosition": {
+        "x": 430,
+        "y": 480.8,
+        "z": -250
+      },
+      "restoredPosition": {
+        "x": 430,
+        "y": 480.8,
+        "z": -250
+      },
+      "wallet": 600,
+      "treasury": 80020.05119999999,
+      "bankCash": 0,
+      "fullSaveSha256": "782cfc0958e80ba40a8dcba0e720071c11625bc88ca72eddb29e0e09aaad66ee",
+      "chosenRoutes": 616,
+      "voxelEdits": 1,
+      "exactFullRoundTrip": true,
+      "continuationTicks": 24,
+      "exactFullContinuation": true,
+      "wrongV3ImportAtomicRejected": true,
+      "foreignLabelsIgnored": true
+    }
+  ],
+  "ownedLiveMatchesSnapshot": {
+    "src/persistence/world-layout.ts": true,
+    "tests/world-layout.test.ts": true,
+    "src/world.ts": true
+  },
+  "limits": [
+    "The actual r5 browser profile was not accessed. Native UI load/export is a separate integration run.",
+    "The initial position is a legal public-floor fixture, not a claimed keyboard ascent."
+  ],
+  "files": {
+    "world-layout-v3-r5-public-results.json": "1f6d14909449cf59c1250189696595128a8a8b0fd70a34a7638725a1e1ab1439",
+    "world-layout-v3-r5-public-tests.log": "9aada517304a754636a4f6def07a16a07ad0ab4c142ca8718eeb9c9907daff71",
+    "snapshot-manifest.json": "87b663e6b454dded0dec53912cec5952d6557ddd8e76fd97133cacf8487cd192",
+    "world-layout-v3-r5-public-tsc.log": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+  }
+}

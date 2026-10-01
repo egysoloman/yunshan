@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation.ts';
-import { createWorld } from '../src/world.ts';
+import { createWorld, getWalkHeight } from '../src/world.ts';
+import { blocksTransportBarrier } from '../src/transport-geometry.ts';
 import { activeAircraft, setAircraftControls } from '../src/aviation.ts';
 import { GAME_DAY } from '../src/simulation/family.ts';
 import { assembleSave, partitionSave } from '../src/persistence/partition.ts';
-import type { WorldDefinition } from '../src/types.ts';
+import type { Building, BuildingKind, WorldDefinition } from '../src/types.ts';
 
 const world = createWorld();
 const restore = (source: Simulation, sourceWorld: WorldDefinition = world) => {
@@ -15,6 +16,17 @@ const restore = (source: Simulation, sourceWorld: WorldDefinition = world) => {
   assert.equal(restored.exportSave(), saved, 'loading a current save must preserve its entire state');
   return restored;
 };
+
+test('the public river road remains walkable across the intersecting bridge apron', () => {
+  const road = world.edges.find(edge => edge.id === 'road-river-quarter-3-river-station')!;
+  assert(road.points.some((point, index) => index > 0 && point.x === -664 && road.points[index - 1].x === -664
+    && Math.min(point.z, road.points[index - 1].z) <= 1035.4 && Math.max(point.z, road.points[index - 1].z) >= 1044));
+  for (const [fromZ, toZ] of [[1035.4, 1036], [1036, 1035.4], [1040, 1044], [1044, 1040]]) {
+    const from = { x: -664, y: getWalkHeight(world, -664, fromZ, 18.6), z: fromZ };
+    const to = { x: -664, y: getWalkHeight(world, -664, toZ, from.y), z: toZ };
+    assert.equal(blocksTransportBarrier(world, from, to), false, `an actual road step ${fromZ}→${toZ} must not be blocked by another network's railing`);
+  }
+});
 
 test('a player-founded operating company keeps its proprietor and capital through exact reload', () => {
   const simulation = new Simulation(world);
@@ -43,6 +55,20 @@ test('selling the last privately held company shares cannot produce an unreadabl
   let result = simulation.command({ type: 'foundCompany', targetId: site.id, value: 3000 }); assert.equal(result.ok, true, result.message);
   const company = simulation.state.extension!.companies.find(company => company.buildingId === site.id)!;
   result = simulation.command({ type: 'expandCompany', targetId: company.id, value: 100 }); assert.equal(result.ok, true, result.message);
+  // Expansion now needs real construction time and attended labor before listing.
+  assert.equal(company.level, 1);
+  simulation.command({ type: 'speed', value: 8 });
+  const shop = simulation.state.shops.find(shop => shop.buildingId === site.id)!, worker = simulation.state.citizens.find(person => simulation.state.extension!.actorProfiles[person.id].age >= 18)!;
+  shop.employees = Math.max(1, shop.employees); company.employees = shop.employees;
+  let pinAttendance = true;
+  simulation.onPhase('traffic', () => {
+    if (!pinAttendance) return;
+    worker.workId = site.id; worker.role = '工人'; worker.position = { x: site.position.x, y: site.position.y + .6, z: site.position.z + 1.2 };
+    worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0; worker.money = Math.min(worker.money, 100);
+    worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+  });
+  for (let tick = 0; company.level < 2 && tick < 64; tick++) simulation.step(.25);
+  pinAttendance = false; assert.equal(company.level, 2, 'a listing fixture must first finish actual on-site construction');
   simulation.state.player.position = { ...world.buildings.find(site => site.kind === 'bank')!.door };
   result = simulation.command({ type: 'listCompany', targetId: company.id }); assert.equal(result.ok, true, result.message);
   const before = simulation.exportSave();
@@ -107,4 +133,53 @@ test('late dynamic-actor and flight reference validation rejects without changin
   }
   for (let tick = 0; tick < 24; tick++) { simulation.step(.25); twin.step(.25); }
   assert.equal(simulation.exportSave(), twin.exportSave());
+});
+
+/** A small actual facility network isolates the cross-module financial save contract. */
+function fundedPublicService() {
+  const kinds: BuildingKind[] = ['home', 'school', 'market', 'pavilion', 'hall', 'workshop', 'clinic', 'station', 'bank'];
+  const district = { id: 'integration-public', name: '公共履约集成街坊', kind: 'school', center: { x: 0, y: 0, z: 0 }, radius: 1000, color: '#779ab0', population: 384 };
+  const buildings: Building[] = kinds.map((kind, index) => ({ id: `integration-${kind}`, name: `集成${kind}`, kind, districtId: district.id, position: { x: index * 70, y: 0, z: 0 }, door: { x: index * 70, y: 0, z: 6 }, width: 12, depth: 12, height: 12, floors: 2, rotation: 0, capacity: 128, seed: index }));
+  buildings.push({ id: 'integration-core', name: '集成市政阁', kind: 'core', facility: 'mayor', districtId: district.id, position: { x: 700, y: 0, z: 0 }, door: { x: 700, y: 0, z: 6 }, width: 20, depth: 20, height: 18, floors: 3, publicFloors: 1, floorPermissions: ['public', 'mayor', 'public'], floorUses: ['公共大厅', '市长决策层', '公共观景'], rotation: 0, capacity: 100, seed: 99 });
+  const nodes = [0, 1].map(index => ({ id: `integration-node-${index}`, name: `集成驿站${index}`, districtId: district.id, position: { x: index * 700, y: 0, z: 20 }, station: true }));
+  const localWorld: WorldDefinition = { seed: 718, voxelSize: .2, size: 2500, districts: [district], buildings, nodes, edges: [{ id: 'integration-road', mode: 'road', from: nodes[0].id, to: nodes[1].id, length: 700, capacity: 40, points: nodes.map(node => node.position) }], mountains: [], spawn: { ...buildings[0].door }, river: [], waterfall: { top: { x: 800, y: 60, z: 800 }, bottom: { x: 800, y: 0, z: 800 }, width: 10 } };
+  const simulation = new Simulation(localWorld), state = simulation.state;
+  simulation.command({ type: 'speed', value: 8 });
+  const hall = buildings.find(building => building.kind === 'hall')!;
+  simulation.setFocus({ ...hall.door }, 'walk');
+  const filing = simulation.command({ type: 'filePetition', targetId: 'education', title: '实物与预算共同履约', text: '记录这个真实街坊的教育需求，公开联署并核对实际资金、材料、场所与服务人员。' });
+  assert.equal(filing.ok, true, filing.message);
+  // Fixed real residents isolate signature attendance, without bypassing the actual petition phase.
+  simulation.onPhase('traffic', () => { for (const person of state.citizens.slice(2, 5)) { person.position = { x: hall.position.x, y: .6, z: 1.2 }; person.workId = hall.id; person.role = 'teacher'; person.destinationId = hall.id; person.route = []; person.routeIndex = 0; person.needs = { hunger: 100, fatigue: 100, social: 80, fun: 50 }; } });
+  simulation.step(.25); simulation.step(.25);
+  const petition = state.culture!.petitions[0]; assert.ok(petition.signerIds.length >= 3);
+  state.extension!.lastUpdate = state.family!.lastUpdate = state.culture!.lastUpdate = petition.replyAt - 2;
+  simulation.step(.25);
+  const core = buildings.find(building => building.kind === 'core')!;
+  state.player.identities = ['traveler', 'mayor']; state.player.role = 'mayor';
+  simulation.setFocus({ x: core.position.x, y: core.position.y + 6.6, z: core.position.z }, 'walk');
+  const approval = simulation.command({ type: 'reviewPetition', targetId: petition.id }); assert.equal(approval.ok, true, approval.message);
+  simulation.step(.25);
+  const order = state.culture!.orders[0]; assert.equal(order.state, 'active'); assert.equal(order.spent, 24); assert.equal(order.receivedUnits, 6);
+  return { simulation, localWorld, order };
+}
+
+test('funded civic services and fiscal authorizations must survive together or reject atomically', () => {
+  const { simulation, localWorld, order } = fundedPublicService(), saved = simulation.exportSave(), twin = restore(simulation, localWorld);
+  const partitioned = assembleSave(partitionSave(saved, localWorld)); assert.equal(partitioned, saved);
+  for (const mutate of [
+    (document: any) => { document.runtime.publicBudgets = []; },
+    (document: any) => { document.runtime.publicBudgets.find((budget: any) => budget.id === order.id).spent = 0; },
+    (document: any) => { document.runtime.publicBudgets.find((budget: any) => budget.id === order.id).closedAt = document.state.culture.lastUpdate; },
+    (document: any) => { document.state.culture.orders = []; document.state.culture.petitions[0].executionId = null; },
+    (document: any) => { delete document.state.culture; },
+    (document: any) => { const culture = document.state.culture; culture.version = 1; for (const key of ['orders', 'nextOrderId', 'playerServiceId', 'transportMaintenance']) delete culture[key]; for (const petition of culture.petitions) delete petition.executionId; },
+  ]) {
+    const document = JSON.parse(saved); mutate(document);
+    const result = simulation.importSave(JSON.stringify(document)); assert.equal(result.ok, false, 'cash authorization, material receipts and service order cannot be separated in a save');
+    assert.equal(simulation.exportSave(), saved, 'failed cross-module validation preserves all live data and RNG');
+  }
+  const clean = restore(simulation, localWorld);
+  for (let tick = 0; tick < 24; tick++) { clean.step(.25); twin.step(.25); }
+  assert.equal(clean.exportSave(), twin.exportSave(), 'rejected data cannot alter deterministic continuation');
 });

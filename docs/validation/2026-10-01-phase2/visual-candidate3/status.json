@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-10-01T20:25:29.047219+00:00",
+  "scope": "Targeted CPU geometry and strict build only. No GL capture of these revisions yet; visual acceptance is pending. Other owners may have mutated unrelated source during these runs.",
+  "tests": {
+    "pass": 15,
+    "fail": 0,
+    "durationMs": 60167.524944
+  },
+  "previousStrictFailure": "clinical.ts:149: CommandResult | undefined incompatible with CommandResult | null; unrelated owner, original failure retained.",
+  "sourceHashes": {
+    "src/renderer.ts": "4d24e2c393486f54f0a2db5c898b760e49a358fe1fbfcf6324df59bcbef50b51",
+    "src/rendering/terrain.ts": "a2d124906c2e662afaa4d3603b30fbeceed91f946d960f77ca9e5bc5c48e8f17",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/architecture-detail.ts": "afa42a0d2f41ddada494e793983ac4b0330956022f19eb75b2fe1721f3d070dd",
+    "tests/rendering.test.ts": "272cff38b3e46d706bf83049a5721969204c61ce2cb04d19700e0197ceed5693"
+  }
+}

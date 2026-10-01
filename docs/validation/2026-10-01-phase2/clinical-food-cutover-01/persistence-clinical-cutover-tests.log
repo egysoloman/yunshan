@@ -1,0 +1,35 @@
+8:50:53 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+✔ partition reassembly rejects missing entities instead of returning a partial city (1114.122774ms)
+✔ family/service/stock books follow their real owners and sites while preserving original array and object order (2.514763ms)
+✔ the complete funded player work contract belongs to the mandatory independent player record (0.769813ms)
+✔ clinical payer custody stays mandatory in the player record while sites and patients keep their own chunks (1.77475ms)
+✔ a missing map-only geographic chunk rejects a partial custody or service book (0.517141ms)
+✔ real IndexedDB saves the complete generated city in geographic chunks and resumes identically (4379.133339ms)
+✔ a real onsite work escrow roundtrips and player damage recovers one complete funded generation (3702.850955ms)
+✔ real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation (3857.941611ms)
+✔ a damaged clinical player custody body recovers the complete prior generation with all original cash and stock (2884.324983ms)
+✔ unchanged, player-only and global-only saves physically avoid rewriting city chunks (2676.518955ms)
+✔ one changed NPC route writes one chunk despite global route-pool renumbering (2582.007526ms)
+✔ cross-chunk movement and deletion leave no duplicate or missing entities after reload (2288.389059ms)
+✔ an aborted multi-store transaction with unavailable fallback preserves the prior city (2331.119204ms)
+✔ missing or corrupted current data recovers the complete prior generation and bounds retained records (2449.67705ms)
+✔ a checksum-damaged generation is recovered, repaired and retains its valid recovery generation (3097.763098ms)
+✔ overlapping queued saves stay ordered and the final complete city survives a browser reload (3524.593746ms)
+✔ version-one IndexedDB and localStorage saves remain readable through upgrade and new saves (2552.984625ms)
+✔ unavailable IndexedDB uses one atomic fallback envelope and later IDB saves supersede it (2321.095072ms)
+✔ a modern session opens only global/player and reads requested chunks through a bounded LRU (2099.538032ms)
+✔ a pinned session survives four later saves from another page and releases its archived records (4268.476689ms)
+✔ late chunk damage invalidates the whole reader and recovery creates a distinct prior-generation reader (2215.410733ms)
+✔ explicit materialization preserves the full import contract and identical continuation (4281.175302ms)
+✔ expired readers cannot silently re-pin and a new save collects their archived records (2219.263049ms)
+✔ damaged global/player headers select the complete previous generation without reading city chunks (2024.806587ms)
+✔ on-demand readers retain the explicit whole-blob compatibility path for version-one and local saves (2211.097185ms)
+✔ reader heartbeats renew their durable lease and a rejected renewal invalidates cached parts (2219.725165ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62696.20727

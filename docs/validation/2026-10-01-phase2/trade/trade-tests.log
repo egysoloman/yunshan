@@ -1,0 +1,26 @@
+✔ a 12 coin sale of 4 coin consigned goods splits one funded receipt without creating cash (46.99493ms)
+✔ owned goods sell first and fractional owned stock keeps its actual ownership (79.72257ms)
+✔ an unsold lot returns to the same producer without transferring owned goods or earned wages (10.702969ms)
+✔ no producer stock gives no supply and repeated requests without customers stay within the small trial (33.027419ms)
+✔ recent demand and labour are measured from actual quantities and expire on the monotonic clock (19.84483ms)
+✔ live custody saves exactly, malformed lots reject atomically and legacy saves create an empty book (153.792235ms)
+✔ a rejected settlement cannot mutate lot ownership or supplier accounts (21.336297ms)
+✔ quotations are read-only and preflight supplier capacity before any buyer debit (27.518523ms)
+✔ real purchase and ingredient commands split consigned receipts and persist their actual sale quantities (40.392174ms)
+✔ the real NPC commerce stage pays the supplier from its shopper receipt without an extra transfer (9.666533ms)
+✔ real commands reject unfunded wholesale margins and capped suppliers before any wallet or inventory change (26.98743ms)
+✔ producer quotes use real earned attendance, 56 percent energy production and paid utilities without mutating accounts (26.460336ms)
+✔ old 4 coin custody contracts remain frozen beside new observed-price lots and settle their exact prices (57.490825ms)
+✔ paid owned stock records actual purchase cost once, sells FIFO and rejects inconsistent save bases atomically (88.097935ms)
+✔ legacy custody and owned inventory gain only historical cost metadata and keep all past profits and debts (52.20506ms)
+✔ real observed-price wholesale purchases feed FIFO costs into actual player sales once (33.996214ms)
+✔ real wholesale respects the buyer budget and supplier credit capacity before stock or funds change (17.937267ms)
+✔ market player work pays a real service wage without creating goods or charging their cost twice (30.211588ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1084.332304

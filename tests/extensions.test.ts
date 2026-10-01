@@ -67,6 +67,18 @@ function observeDividends(sim: Simulation) {
   return payments;
 }
 function walkTo(sim: Simulation, position: Vec3) { sim.setFocus({ ...position }, 'walk'); }
+function pinClinicDoctor(sim: Simulation, patientId = 'player', doctorId?: string) {
+  const clinic = building(sim.worldDefinition, 'clinic');
+  const doctor = doctorId ? sim.state.citizens.find(c => c.id === doctorId)! : sim.state.citizens.find(c => c.id !== patientId && c.role !== '学生' && !sim.state.shops.some(shop => shop.buildingId === c.workId || sim.shopOwnerId(shop) === c.id))!;
+  assert.ok(doctor, 'a real adult public employee must be available for the physician fixture');
+  doctor.role = '医生'; doctor.workId = clinic.id; extension(sim).actorProfiles[doctor.id].health = 100;
+  sim.onPhase('traffic', () => {
+    doctor.position = { ...clinic.door }; doctor.destinationId = clinic.id; doctor.route = []; doctor.routeIndex = 0;
+    doctor.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+    const core = Reflect.get(sim, 'runtime'); core.activities[doctor.id] = 'work'; core.decisionAt[doctor.id] = 1e9;
+  });
+  return doctor;
+}
 function building(world: WorldDefinition, kind: BuildingKind, districtIndex = 0): Building {
   const result = world.buildings.find(item => item.kind === kind && item.districtId === world.districts[districtIndex].id);
   assert.ok(result, `the fixture must provide a ${kind} facility`);
@@ -94,6 +106,24 @@ function advanceUntil(sim: Simulation, predicate: () => boolean, limit = 4000) {
 function advanceMinutes(sim: Simulation, minutes: number, limit = 4000) {
   const deadline = extension(sim).lastUpdate + minutes;
   advanceUntil(sim, () => extension(sim).lastUpdate + 1e-7 >= deadline, limit);
+}
+
+function finishConstruction(sim: Simulation, company: Company) {
+  const job = Reflect.get(extension(sim), 'runtime').constructionJobs[company.id], site = sim.worldDefinition.buildings.find(building => building.id === company.buildingId)!;
+  const worker = sim.state.citizens.find(citizen => citizen.workId === site.id && citizen.role !== '学生' && extension(sim).actorProfiles[citizen.id].age >= 18)!;
+  assert.ok(worker, 'construction needs an actual adult employee');
+  const runtime = Reflect.get(sim, 'runtime');
+  sim.onPhase('traffic', () => {
+    if (job.completedAt !== null) return;
+    worker.position = { ...site.door }; worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0;
+    worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+    runtime.activities[worker.id] = 'work'; runtime.decisionAt[worker.id] = sim.state.day * 1440 + sim.state.hour * 60 + 60;
+  });
+  walkTo(sim, site.door);
+  const before = extension(sim).lastUpdate;
+  advanceUntil(sim, () => job.completedAt !== null, 300);
+  assert.equal(job.workedMinutes, 60); assert.equal(job.consumedUnits, job.materialUnits);
+  assert.ok(extension(sim).lastUpdate > before, 'construction cannot finish in its authorizing command');
 }
 
 function residentResearchPayments(sim: Simulation) {
@@ -188,13 +218,17 @@ test('company founding and expansion require local merchant authority and move r
     rejectWithoutMutation(sim, { type: 'expandCompany', targetId: company.id, value });
   }
   const before = { capital: company.capital, money: sim.state.player.money, level: company.level };
-  const treasury = sim.state.treasury;
+  const treasury = sim.state.treasury, suppliersBefore = sim.state.shops.filter(shop => ['farm', 'workshop', 'dock'].includes(world.buildings.find(building => building.id === shop.buildingId)!.kind)).reduce((sum, shop) => sum + sim.shopFunds(shop), 0);
   ok(sim, { type: 'expandCompany', targetId: company.id, value: 300 });
   assert.equal(before.money - sim.state.player.money, 300);
-  approximately(company.capital - before.capital + sim.state.treasury - treasury, 300,
-    'expansion must allocate the full investment to working capital and public construction');
+  const suppliersAfter = sim.state.shops.filter(shop => ['farm', 'workshop', 'dock'].includes(world.buildings.find(building => building.id === shop.buildingId)!.kind)).reduce((sum, shop) => sum + sim.shopFunds(shop), 0);
+  const job = Reflect.get(extension(sim), 'runtime').constructionJobs[company.id];
+  approximately(company.capital - before.capital + sim.state.treasury - treasury + suppliersAfter - suppliersBefore + job.materialCost * sim.state.taxRate, 300,
+    'expansion allocates working capital, actual supplier money, pending supplier tax and its public permit');
   assert.ok(company.capital > before.capital);
-  assert.ok(company.level > before.level);
+  assert.equal(company.level, before.level, 'physical construction must wait for actual onsite labor');
+  finishConstruction(sim, company);
+  assert.equal(company.level, before.level + 1);
   sharesAreConserved(company);
   walkTo(sim, { ...site.door, z: site.door.z + 100 });
   rejectWithoutMutation(sim, { type: 'hire', targetId: company.id, value: 1 });
@@ -274,6 +308,7 @@ test('listing, share trading and acquisition conserve ownership and settle actua
   rejectWithoutMutation(sim, { type: 'listCompany', targetId: company.id });
   walkTo(sim, world.buildings.find(item => item.id === company.buildingId)!.door);
   ok(sim, { type: 'expandCompany', targetId: company.id, value: 300 });
+  finishConstruction(sim, company);
   const initialShares = company.shares;
   const money = sim.state.player.money;
   walkTo(sim, bank.door);
@@ -378,14 +413,15 @@ test('each of the seven technologies spends resources and completes after elapse
 });
 
 test('completed technologies change their connected city systems and expose ecological costs', async t => {
+  const produced = new WeakMap<Simulation, { units: number; minutes: number }>();
   const effects: { sector: Technology['sector']; value: (sim: Simulation) => number }[] = [
     { sector: 'traffic', value: sim => sim.state.vehicles.reduce((sum, vehicle) => sum + vehicle.speed, 0) },
     { sector: 'energy', value: sim => sim.state.energy },
     { sector: 'information', value: sim => extension(sim).institutions.education },
     { sector: 'security', value: sim => sim.state.districts.reduce((sum, district) => sum + district.safety, 0) },
     { sector: 'medicine', value: sim => extension(sim).actorProfiles.player.health },
-    { sector: 'agriculture', value: sim => sim.state.shops.filter(shop => sim.worldDefinition.buildings.find(item => item.id === shop.buildingId)!.kind === 'farm').reduce((sum, shop) => sum + shop.inventory, 0) },
-    { sector: 'manufacturing', value: sim => sim.state.shops.filter(shop => sim.worldDefinition.buildings.find(item => item.id === shop.buildingId)!.kind === 'workshop').reduce((sum, shop) => sum + shop.inventory, 0) },
+    { sector: 'agriculture', value: sim => produced.get(sim)!.units },
+    { sector: 'manufacturing', value: sim => produced.get(sim)!.units },
   ];
   for (const effect of effects) {
     await t.test(effect.sector, () => {
@@ -402,8 +438,8 @@ test('completed technologies change their connected city systems and expose ecol
           ok(city, { type: 'setTime', value: 23 });
         }
         if (effect.sector === 'agriculture' || effect.sector === 'manufacturing') {
-          // An upgrade changes attended production. Give both cities actual
-          // working space rather than expecting inventory to grow unattended.
+          // Compare actual output, including goods subsequently purchased by
+          // residents or public services. Ending stock alone omits those goods.
           const kind = effect.sector === 'agriculture' ? 'farm' : 'workshop';
           for (const shop of city.state.shops.filter(shop => world.buildings.find(b => b.id === shop.buildingId)!.kind === kind)) shop.inventory = 0;
           const site = building(world, kind), shop = city.state.shops.find(shop => shop.buildingId === site.id)!;
@@ -412,12 +448,28 @@ test('completed technologies change their connected city systems and expose ecol
           worker.position = { ...site.position, y: site.position.y + .6 }; worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0;
           worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
           const core = Reflect.get(city, 'runtime'); core.activities[worker.id] = 'work'; core.decisionAt[worker.id] = 10000;
+          const ownerId = city.shopOwnerId(shop), owner = ownerId === 'player' ? city.state.player : city.state.citizens.find(c => c.id === ownerId)!;
+          owner.position = clone(site.door); owner.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+          const capital = Math.max(0, 80 - city.shopFunds(shop));
+          assert.ok(owner.money >= capital); owner.money -= capital; city.transferShopFunds(shop, capital);
+          extension(city).actorProfiles[ownerId!].health = 100;
+          const output = { units: 0, minutes: 0 }; produced.set(city, output);
+          city.onEvent('production', event => { if (event.shopId === shop.id) { output.units += event.amount ?? 0; output.minutes += event.minutes ?? 0; } });
+          city.onPhase('traffic', () => {
+            // Controlled onsite staff receive a real employer-funded contract;
+            // no wage, attendance, labour or output is injected by this fixture.
+            owner.position = clone(site.door); worker.position = clone(site.door);
+            worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0;
+            core.activities[worker.id] = 'work'; core.decisionAt[worker.id] = 10000;
+          });
         }
       }
       ok(sim, { type: 'research', targetId: effect.sector, value: 200 });
       advanceMinutes(sim, effect.sector === 'agriculture' || effect.sector === 'manufacturing' ? 142 : 122);
       advanceMinutes(control, effect.sector === 'agriculture' || effect.sector === 'manufacturing' ? 142 : 122);
-      assert.ok(effect.value(sim) > effect.value(control), `${effect.sector} research must benefit the connected running system`);
+      assert.ok(effect.value(sim) > effect.value(control), `${effect.sector} research must benefit the connected running system (${effect.value(sim)} vs ${effect.value(control)}; labour ${JSON.stringify(produced.get(sim))} / ${JSON.stringify(produced.get(control))})`);
+      if (produced.has(sim)) approximately(produced.get(sim)!.minutes, produced.get(control)!.minutes,
+        'the technology comparison must use the same actual funded labour');
       const pollution = (city: Simulation) => city.state.districts.reduce((sum, district) => sum + district.pollution, 0);
       if (effect.sector !== 'energy') assert.ok(pollution(sim) > pollution(control), 'research externalities must feed back into actual district pollution');
       assert.ok(extension(sim).environment.biodiversity < extension(control).environment.biodiversity,
@@ -554,6 +606,7 @@ test('medical treatment pays an actual clinic fee and preserves its cooldown thr
   const { sim, world } = create();
   const clinic = building(world, 'clinic');
   sim.state.player.money = 1000;
+  const doctor = pinClinicDoctor(sim);
   extension(sim).actorProfiles.player.health = 40;
   walkTo(sim, { ...clinic.door, z: clinic.door.z + 100 });
   rejectWithoutMutation(sim, { type: 'heal', targetId: 'player' });
@@ -561,9 +614,14 @@ test('medical treatment pays an actual clinic fee and preserves its cooldown thr
   const money = sim.state.player.money;
   ok(sim, { type: 'heal', targetId: 'player' });
   assert.equal(sim.state.player.money, money - 30);
-  assert.equal(extension(sim).actorProfiles.player.health, 65);
+  assert.equal(extension(sim).actorProfiles.player.health, 40, 'a payment only reserves real treatment; it does not heal immediately');
   rejectWithoutMutation(sim, { type: 'heal', targetId: 'player' });
+  advanceUntil(sim, () => sim.state.clinical!.orders[0].state === 'completed');
+  assert.ok(extension(sim).actorProfiles.player.health >= 65);
+  assert.equal(sim.state.clinical!.orders[0].workedMinutes, 20);
+  assert.equal(sim.state.clinical!.orders[0].consumedUnits, 1);
   const restored = restoredFrom(sim);
+  pinClinicDoctor(restored, 'player', doctor.id);
   ok(restored, { type: 'setTime', value: 23 });
   rejectWithoutMutation(restored, { type: 'heal', targetId: 'player' });
   advanceMinutes(restored, 58);
@@ -571,7 +629,10 @@ test('medical treatment pays an actual clinic fee and preserves its cooldown thr
   advanceMinutes(restored, 2);
   const before = extension(restored).actorProfiles.player.health;
   ok(restored, { type: 'heal', targetId: 'player' });
-  assert.ok(extension(restored).actorProfiles.player.health > before);
+  assert.equal(extension(restored).actorProfiles.player.health, before);
+  ok(restored, { type: 'setTime', value: 8 });
+  advanceUntil(restored, () => restored.state.clinical!.orders[1].state === 'completed');
+  assert.ok(extension(restored).actorProfiles.player.health >= before + 25);
 });
 
 test('death ends an actor’s activities and treatment cannot revive them; aging follows elapsed simulated time', () => {
@@ -686,6 +747,8 @@ test('legacy core saves initialize extension state and remain playable', () => {
   Reflect.deleteProperty(legacy.state, 'extension');
   Reflect.deleteProperty(legacy.state, 'family');
   Reflect.deleteProperty(legacy.state, 'culture');
+  for (const key of ['banking', 'trade', 'journey', 'aviation', 'playerLabor', 'clinical']) Reflect.deleteProperty(legacy.state, key);
+  for (const key of ['privateLabor', 'publicLabor', 'publicLaborReviewAt', 'publicBudgets', 'playerLaborVersion', 'persistedModules']) Reflect.deleteProperty(Reflect.get(legacy, 'runtime'), key);
   const restored = new Simulation(fixture());
   const result = restored.importSave(JSON.stringify(legacy));
   assert.equal(result.ok, true, result.message);
@@ -1047,6 +1110,8 @@ test('public resource diversions require the real civic job in either language a
     return { ...item, citizen, workplace };
   });
   const credited = new Map<string, number>();
+  let actualProcurement = 0;
+  sim.onEvent('public-procurement', event => { actualProcurement += event.amount ?? 0; });
   let before: { treasury: number; taxes: number; operatingCost: number; money: Map<string, number> } | null = null;
   sim.onPhase('time', () => {
     for (const { citizen, workplace } of subjects) {
@@ -1058,13 +1123,14 @@ test('public resource diversions require the real civic job in either language a
   });
   sim.onPhase('commerce', () => {
     const runtime = (JSON.parse(sim.exportSave()) as { runtime: { taxes: number; operatingCost: number } }).runtime;
+    actualProcurement = 0;
     before = { treasury: sim.state.treasury, ...runtime, money: new Map(subjects.map(({ citizen }) => [citizen.id, citizen.money])) };
   });
   sim.onPhase('finance', () => {
     const entries = e.publicLedger.filter(entry => entry.tick === sim.state.tick && entry.purpose.includes('挪用'));
     if (!entries.length) return;
     assert.ok(before);
-    approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost * (1 - sim.state.taxRate)
+    approximately(sim.state.treasury, before.treasury + before.taxes - actualProcurement * (1 - sim.state.taxRate)
       + residentResearchPayments(sim) + entries.reduce((sum, entry) => sum + entry.amount, 0),
     'actual civic diversions and simultaneous research must settle the same treasury');
     for (const entry of entries) {
@@ -1108,6 +1174,7 @@ test('charitable donations are spent from organization funds to actual poor resi
   ok(sim, { type: 'donate', targetId: relief.id, value: 50 });
   assert.equal(relief.funds, 50);
   const welfare = e.institutions.welfare;
+  const dividends = observeDividends(sim);
   let before: { funds: number; wealth: number } | null = null;
   let paid = 0;
   sim.onPhase('commerce', () => {
@@ -1118,8 +1185,9 @@ test('charitable donations are spent from organization funds to actual poor resi
     const spending = before.funds - relief.funds;
     if (spending <= 0) return;
     paid += spending;
-    approximately(sim.state.citizens.reduce((sum, citizen) => sum + citizen.money, 0) - before.wealth + residentResearchPayments(sim), spending,
-      'social relief and simultaneous personally funded research must settle actual resident accounts');
+    const businessIncome = [...dividends.entries()].filter(([actorId]) => actorId !== 'player').reduce((sum, [, amount]) => sum + amount, 0);
+    approximately(sim.state.citizens.reduce((sum, citizen) => sum + citizen.money, 0) - before.wealth + residentResearchPayments(sim) - businessIncome, spending,
+      'social relief, actual business dividends and personally funded research must reconcile resident accounts');
   });
   advanceMinutes(sim, 60);
   assert.equal(paid, 50);
@@ -1129,44 +1197,77 @@ test('charitable donations are spent from organization funds to actual poor resi
   restoredFrom(sim);
 });
 
-test('NPCs use clinics autonomously and paid or welfare treatment settles real accounts with saved cooldowns', async t => {
-  for (const poor of [false, true]) {
-    await t.test(poor ? 'publicly funded treatment' : 'resident paid treatment', () => {
-      const { sim, world } = create();
-      const e = extension(sim);
-      const citizen = sim.state.citizens.find(c => c.role !== '学生')!;
-      citizen.role = '工人'; // isolate clinic finance from student household support
-      const clinic = building(world, 'clinic');
-      const purpose = poor ? '贫困居民医疗福利支出' : '居民诊疗费';
-      citizen.money = poor ? 0 : 100;
-      e.actorProfiles[citizen.id].health = 40;
-      citizen.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
-      let treasury = sim.state.treasury;
-      let medicalTreasury = sim.state.treasury;
-      sim.onPhase('traffic', () => { citizen.position = clone(clinic.door); treasury = sim.state.treasury; });
-      sim.onPhase('people', () => { medicalTreasury = sim.state.treasury; });
-      sim.step(0.25);
-      assert.equal(citizen.money, poor ? 0 : 70);
-      assert.ok(e.actorProfiles[citizen.id].health >= 65);
-      const fee = e.publicLedger.find(entry => entry.actorId === citizen.id && entry.purpose === purpose);
-      assert.ok(fee);
-      assert.equal(fee.amount, poor ? -30 : 30);
-      approximately(medicalTreasury - treasury, fee.amount,
-        'NPC clinic finance must settle the exact fee against the public treasury');
-      const restored = restoredFrom(sim);
-      const restoredCitizen = restored.state.citizens.find(item => item.id === citizen.id)!;
-      restored.onPhase('traffic', () => {
-        restoredCitizen.position = clone(clinic.door);
-        restoredCitizen.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
-        extension(restored).actorProfiles[citizen.id].health = 40;
+test('NPCs use clinics autonomously and actual paid or authorized public treatment settles saved accounts', async t => {
+  await t.test('resident paid treatment and saved follow-up deadline', () => {
+    const { sim, world } = create(), e = extension(sim), clinic = building(world, 'clinic');
+    const citizen = sim.state.citizens.find(c => c.role !== '学生')!;
+    citizen.role = '工人'; citizen.money = 100; e.actorProfiles[citizen.id].health = 40;
+    let otherIncome = 0;
+    sim.onEvent('business-dividend', event => { if (event.citizenId === citizen.id) otherIncome += event.amount ?? 0; });
+    const doctor = pinClinicDoctor(sim, citizen.id);
+    const pinPatient = (city: Simulation, patientId: string, resetHealth = false) => {
+      const patient = city.state.citizens.find(c => c.id === patientId)!;
+      city.onPhase('traffic', () => {
+        patient.position = clone(clinic.door); patient.destinationId = clinic.id; patient.route = []; patient.routeIndex = 0;
+        patient.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+        const core = Reflect.get(city, 'runtime'); core.activities[patientId] = 'heal'; core.decisionAt[patientId] = 1e9;
+        if (resetHealth) extension(city).actorProfiles[patientId].health = 40;
       });
-      advanceMinutes(restored, 238);
-      assert.equal(extension(restored).publicLedger.filter(entry => entry.actorId === citizen.id && entry.purpose === purpose).length, 1);
-      advanceMinutes(restored, 2);
-      assert.equal(extension(restored).publicLedger.filter(entry => entry.actorId === citizen.id && entry.purpose === purpose).length, 2,
-        'a restored autonomous clinic visit must wait for the original four hour revisit deadline');
+    };
+    pinPatient(sim, citizen.id); sim.step(.25);
+    assert.equal(citizen.money, 70); assert.ok(e.actorProfiles[citizen.id].health < 41);
+    const order = sim.state.clinical!.orders[0]; assert.equal(order.funded, 30);
+    advanceUntil(sim, () => order.state === 'completed');
+    assert.ok(e.actorProfiles[citizen.id].health >= 65); assert.equal(order.workedMinutes, 20); assert.equal(order.consumedUnits, 1);
+    approximately(order.purchasePaid + order.serviceFee, 30, 'a completed fee pays real materials and the earned public service exactly once');
+    const fee = e.publicLedger.find(entry => entry.actorId === citizen.id && entry.purpose === '现场20分钟诊疗已赚服务费');
+    assert.ok(fee); assert.equal(fee.amount, order.serviceFee);
+    const restored = restoredFrom(sim); pinClinicDoctor(restored, citizen.id, doctor.id); pinPatient(restored, citizen.id, true);
+    restored.onEvent('business-dividend', event => { if (event.citizenId === citizen.id) otherIncome += event.amount ?? 0; });
+    advanceMinutes(restored, 58); assert.equal(restored.state.clinical!.orders.length, 1);
+    advanceMinutes(restored, 2); assert.equal(restored.state.clinical!.orders.length, 2);
+    approximately(restored.state.citizens.find(c => c.id === citizen.id)!.money - otherIncome, 40, 'two paid visits debit exactly 60 while preserving independent earned business dividends');
+    advanceUntil(restored, () => restored.state.clinical!.orders[1].state === 'completed');
+    assert.equal(restored.state.clinical!.stats.completed, 2); assert.equal(restored.state.clinical!.stock[clinic.id].consumedUnits, 2);
+    restoredFrom(restored);
+  });
+  await t.test('poor residents receive care only from actual authorized public service', () => {
+    const world = fixture(), clinic = building(world, 'clinic'), hall = building(world, 'hall');
+    hall.floorPermissions = ['public', 'mayor']; hall.publicFloors = 1;
+    const sim = new Simulation(world); ok(sim, { type: 'speed', value: 8 });
+    const patient = sim.state.citizens.find(c => c.role !== '学生')!;
+    patient.role = '工人'; patient.money = 0; extension(sim).actorProfiles[patient.id].health = 40;
+    pinClinicDoctor(sim, patient.id);
+    sim.onPhase('traffic', () => {
+      patient.position = clone(clinic.door); patient.destinationId = clinic.id; patient.route = []; patient.routeIndex = 0;
+      patient.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+      const core = Reflect.get(sim, 'runtime'); core.activities[patient.id] = 'heal'; core.decisionAt[patient.id] = 1e9;
     });
-  }
+    sim.step(.25); assert.equal(sim.state.clinical!.orders.length, 0);
+    assert.ok(extension(sim).actorProfiles[patient.id].health < 41, 'poverty alone cannot create free medicine or unauthorised welfare spending');
+    walkTo(sim, hall.door); ok(sim, { type: 'filePetition', targetId: 'health', title: '医疗照护', text: '请安排真实医师到场，为贫困居民采购耗材并提供公共医疗服务。' });
+    const petition = sim.state.culture!.petitions[0];
+    for (const signer of sim.state.citizens.filter(c => c.id !== patient.id && c.role !== '医生').slice(2, 5)) {
+      sim.onPhase('traffic', () => {
+        signer.position = clone(hall.door); signer.destinationId = hall.id; signer.route = []; signer.routeIndex = 0;
+        signer.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+        const core = Reflect.get(sim, 'runtime'); core.activities[signer.id] = 'social'; core.decisionAt[signer.id] = 1e9;
+      });
+    }
+    advanceMinutes(sim, 4); assert.ok(petition.signerIds.length >= 3);
+    // A legitimate saved deadline isolates deliberation from city-wide supply;
+    // signatures, authorisation, material payment and service still run normally.
+    const delta = petition.replyAt - 2 - extension(sim).lastUpdate;
+    extension(sim).lastUpdate += delta; sim.state.family!.lastUpdate += delta; sim.state.culture!.lastUpdate += delta;
+    sim.step(.25); const order = sim.state.culture!.orders[0]; assert.ok(order);
+    grant(sim, 'mayor'); sim.setFocus({ x: hall.position.x, y: hall.position.y + 6.6, z: hall.position.z }, 'walk');
+    ok(sim, { type: 'reviewPetition', targetId: petition.id });
+    advanceUntil(sim, () => order.servedIds.includes(patient.id));
+    assert.equal(patient.money, 0); assert.ok(extension(sim).actorProfiles[patient.id].health >= 65);
+    assert.equal(order.serviceMinutes[patient.id], 20); assert.ok(order.consumedUnits >= 1);
+    assert.ok(order.spent > 0); approximately(order.receipts.reduce((sum, receipt) => sum + receipt.paid, 0), order.spent, 'public care must have conserved paid supplies');
+    restoredFrom(sim);
+  });
 });
 
 test('research and audits operate inside tall and underground facilities rather than requiring the ground floor doorway', () => {
@@ -1415,7 +1516,7 @@ test('a skilled worker uses accumulated personal savings to found a company with
     if (founded || !company) return;
     assert.ok(before);
     assert.equal(before.money - worker.money, 250);
-    assert.equal(company.capital, 200);
+    approximately(company.capital, 200 + sim.shopProtectedFunds(sim.state.shops.find(shop => shop.buildingId === company.buildingId)!), 'founding preserves wages and already accepted future labor promises in the sole company cash account');
     assert.ok(e.publicLedger.some(entry => entry.tick === sim.state.tick && entry.actorId === worker.id
       && entry.purpose === '居民创业登记费' && entry.amount === 50));
     approximately(sim.state.treasury, before.treasury + before.taxes - before.operatingCost * (1 - sim.state.taxRate) + 50 + residentResearchPayments(sim),

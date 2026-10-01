@@ -1,0 +1,15 @@
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open 'artifacts/freight-city-prefix.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async writeFile (node:internal/fs/promises:1317:14)
+    at async <anonymous> (/tmp/yunshan-food-reload-proof-20261001/scripts/freight-city-prefix.ts:18:1) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'artifacts/freight-city-prefix.json'
+}
+
+Node.js v24.19.0

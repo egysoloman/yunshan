@@ -1,0 +1,910 @@
+[
+  {
+    "days": 30,
+    "status": "failed",
+    "ticks": 21600,
+    "treasury": 7606.282958783883,
+    "npc": {
+      "alive": 556,
+      "total": 616,
+      "livingMeanHealth": 56.07764490421129,
+      "livingMeanHunger": 2.424460431654686,
+      "poor": 217,
+      "zeroCapitalCompanies": 0
+    },
+    "moneyConservationResidual": -3.300374373793602e-08,
+    "reconciliationResidual": -2.0550032786559314e-08,
+    "sourceStable": true,
+    "failure": "AssertionError [ERR_ASSERTION]: baseline residents must remain alive throughout the audited 30-day path\n\n60 !== 0\n\n    at <anonymous> (/tmp/yunshan-economy-funded-contracts-20261001/scripts/economy-audit.ts:226:10)",
+    "publicService": {
+      "fundedMinutes": null,
+      "actualMinutes": null,
+      "plannedFullMinutes": null,
+      "reservedCash": 0,
+      "statistics": {
+        "approvedMinutes": 1064196,
+        "unfundedMinutes": 863484,
+        "workedMinutes": 506113.15717350034,
+        "privateMoves": 24
+      },
+      "shifts": [
+        {
+          "id": "public-shift-10",
+          "day": 10,
+          "cap": 12418.183573460812,
+          "approvedBy": [
+            "citizen-270",
+            "citizen-534"
+          ],
+          "siteId": "core-b19"
+        },
+        {
+          "id": "public-shift-11",
+          "day": 11,
+          "cap": 12386.333967719136,
+          "approvedBy": [
+            "citizen-291",
+            "citizen-555"
+          ],
+          "siteId": "government-b13"
+        },
+        {
+          "id": "public-shift-12",
+          "day": 12,
+          "cap": 8073.4517112433905,
+          "approvedBy": [
+            "citizen-182",
+            "citizen-446"
+          ],
+          "siteId": "core-b22"
+        },
+        {
+          "id": "public-shift-13",
+          "day": 13,
+          "cap": 9256.323614055469,
+          "approvedBy": [
+            "citizen-16",
+            "citizen-280"
+          ],
+          "siteId": "government-b10"
+        },
+        {
+          "id": "public-shift-14",
+          "day": 14,
+          "cap": 1226.8442517001472,
+          "approvedBy": [
+            "citizen-359",
+            "citizen-557"
+          ],
+          "siteId": "summit-b19"
+        },
+        {
+          "id": "public-shift-15",
+          "day": 15,
+          "cap": 2674.809657651487,
+          "approvedBy": [
+            "citizen-435",
+            "citizen-523"
+          ],
+          "siteId": "core-b28"
+        },
+        {
+          "id": "public-shift-16",
+          "day": 16,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-27",
+            "citizen-291"
+          ],
+          "siteId": "government-b13"
+        },
+        {
+          "id": "public-shift-17",
+          "day": 17,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        },
+        {
+          "id": "public-shift-24",
+          "day": 24,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        },
+        {
+          "id": "public-shift-25",
+          "day": 25,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        }
+      ]
+    },
+    "privateLabor": {
+      "rosterJobs": 276,
+      "plannedMinutes": 0,
+      "actualMinutes": 0,
+      "reservedCash": 0,
+      "restrictedShops": 0,
+      "statistics": {
+        "approvedMinutes": 1978411,
+        "workedMinutes": 1687148.9421836033,
+        "restrictedReviews": 0
+      }
+    },
+    "finalProduction": 18176.976151422605,
+    "finalProductionMinutes": 881020.63454471,
+    "wageArrears": {
+      "public": 0,
+      "private": 0,
+      "publicEarnedNotDue": 0,
+      "privateEarnedNotDue": 89.7431380831886
+    },
+    "sha256": "f87d0c4da9a0a869dbf771d3a41564e45fe83f7588341456e7ceba7a4faecbc9",
+    "dayRows": [
+      {
+        "day": 0,
+        "treasury": 80000,
+        "hunger": 77.18245901117122,
+        "alive": 616,
+        "production": 0,
+        "productionMinutes": 0,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": null
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": null
+        }
+      },
+      {
+        "day": 7,
+        "treasury": 39845.62076415572,
+        "hunger": 52.25308441558434,
+        "alive": 616,
+        "production": 5242.587489730414,
+        "productionMinutes": 243425.7726406971,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 562522,
+            "workedMinutes": 518760.6797813254,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 137760,
+          "actualMinutes": 3780,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 12190.160157192871,
+          "statistics": {
+            "approvedMinutes": 275520,
+            "unfundedMinutes": 0,
+            "workedMinutes": 80926.92180720622,
+            "privateMoves": 0
+          }
+        }
+      },
+      {
+        "day": 7,
+        "treasury": 40061.737075847384,
+        "hunger": 57.335876623376684,
+        "alive": 616,
+        "production": 5242.587489730414,
+        "productionMinutes": 243425.7726406971,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 2400,
+          "actualMinutes": 8,
+          "reservedCash": 218.31387959252032,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 564922,
+            "workedMinutes": 518768.6797813254,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 137760,
+          "actualMinutes": 4478,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 12125.944157192873,
+          "statistics": {
+            "approvedMinutes": 275520,
+            "unfundedMinutes": 0,
+            "workedMinutes": 81624.92180720622,
+            "privateMoves": 0
+          }
+        }
+      },
+      {
+        "day": 14,
+        "treasury": 6719.174143616977,
+        "hunger": 50.50860389610408,
+        "alive": 616,
+        "production": 11988.044533465974,
+        "productionMinutes": 565651.7609235086,
+        "privateLabor": {
+          "rosterJobs": 286,
+          "plannedMinutes": 3360,
+          "actualMinutes": 128,
+          "reservedCash": 287.40435053743033,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1151281,
+            "workedMinutes": 1022628.2914289996,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 13776,
+          "actualMinutes": 580.7186797612528,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 1173.5699320224955,
+          "statistics": {
+            "approvedMinutes": 1034061,
+            "unfundedMinutes": 205779,
+            "workedMinutes": 481401.7070283834,
+            "privateMoves": 21
+          }
+        }
+      },
+      {
+        "day": 21,
+        "treasury": 38.30124773548137,
+        "hunger": 20.483116883116804,
+        "alive": 616,
+        "production": 14563.816121137053,
+        "productionMinutes": 700902.5691976291,
+        "privateLabor": {
+          "rosterJobs": 289,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1573406,
+            "workedMinutes": 1358401.5870987955,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 588924,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      },
+      {
+        "day": 30,
+        "treasury": 7606.282958783883,
+        "hunger": 2.424460431654686,
+        "alive": 556,
+        "production": 18176.976151422605,
+        "productionMinutes": 881020.63454471,
+        "privateLabor": {
+          "rosterJobs": 276,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1978411,
+            "workedMinutes": 1687148.9421836033,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 863484,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      }
+    ],
+    "deathCount": 60,
+    "firstDeaths": [
+      {
+        "id": "citizen-95",
+        "tick": 16489,
+        "day": 23,
+        "age": 25.062743531189806,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 100,
+        "money": 289.62584517129744,
+        "before": {
+          "health": 0.008570436056747618,
+          "hunger": 0,
+          "fatigue": 100,
+          "money": 289.62584517129744,
+          "role": "官员",
+          "state": "sleeping",
+          "destinationId": "summit-b11",
+          "position": {
+            "x": 134.79999999999998,
+            "y": 500.6,
+            "z": -1186.4
+          }
+        },
+        "homeWorkDistance": 159.28490198383528,
+        "clinicDistance": 650.4269982096376,
+        "foodDistance": null
+      },
+      {
+        "id": "citizen-282",
+        "tick": 17626,
+        "day": 24,
+        "age": 32.06707001526982,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 72.00000000000051,
+        "money": 275.74483423109535,
+        "before": {
+          "health": 0.003343251422542496,
+          "hunger": 0,
+          "fatigue": 72.28000000000051,
+          "money": 275.74483423109535,
+          "role": "官员",
+          "state": "riding",
+          "destinationId": "market-b71",
+          "position": {
+            "x": -281.3,
+            "y": 81.50537814795439,
+            "z": 317.1459713520732
+          }
+        },
+        "homeWorkDistance": 147.36159608256148,
+        "clinicDistance": 434.103595319659,
+        "foodDistance": 443.2844281119384
+      },
+      {
+        "id": "citizen-348",
+        "tick": 17651,
+        "day": 24,
+        "age": 53.06716514464584,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 69.75999999999988,
+        "money": 304.7133951173282,
+        "before": {
+          "health": 0.004233874537696764,
+          "hunger": 0,
+          "fatigue": 69.75999999999988,
+          "money": 304.7133951173282,
+          "role": "官员",
+          "state": "riding",
+          "destinationId": "academy-b2",
+          "position": {
+            "x": -57.3,
+            "y": 515.5893368148926,
+            "z": -1191.2145644448685
+          }
+        },
+        "homeWorkDistance": 147.36159608256148,
+        "clinicDistance": 652.3100049325703,
+        "foodDistance": 1319.9154513589122
+      }
+    ]
+  },
+  {
+    "days": 60,
+    "status": "failed",
+    "ticks": 43200,
+    "treasury": 65766.34558786772,
+    "npc": {
+      "alive": 244,
+      "total": 616,
+      "livingMeanHealth": 38.02075187686861,
+      "livingMeanHunger": 0.6918032786885263,
+      "poor": 84,
+      "zeroCapitalCompanies": 0
+    },
+    "moneyConservationResidual": -3.230525180697441e-08,
+    "reconciliationResidual": -2.066371962428093e-08,
+    "sourceStable": true,
+    "failure": "AssertionError [ERR_ASSERTION]: baseline residents must remain alive throughout the audited 60-day path\n\n372 !== 0\n\n    at <anonymous> (/tmp/yunshan-economy-funded-contracts-20261001/scripts/economy-audit.ts:226:10)",
+    "publicService": {
+      "fundedMinutes": null,
+      "actualMinutes": null,
+      "plannedFullMinutes": null,
+      "reservedCash": 0,
+      "statistics": {
+        "approvedMinutes": 1064196,
+        "unfundedMinutes": 863484,
+        "workedMinutes": 506113.15717350034,
+        "privateMoves": 24
+      },
+      "shifts": [
+        {
+          "id": "public-shift-10",
+          "day": 10,
+          "cap": 12418.183573460812,
+          "approvedBy": [
+            "citizen-270",
+            "citizen-534"
+          ],
+          "siteId": "core-b19"
+        },
+        {
+          "id": "public-shift-11",
+          "day": 11,
+          "cap": 12386.333967719136,
+          "approvedBy": [
+            "citizen-291",
+            "citizen-555"
+          ],
+          "siteId": "government-b13"
+        },
+        {
+          "id": "public-shift-12",
+          "day": 12,
+          "cap": 8073.4517112433905,
+          "approvedBy": [
+            "citizen-182",
+            "citizen-446"
+          ],
+          "siteId": "core-b22"
+        },
+        {
+          "id": "public-shift-13",
+          "day": 13,
+          "cap": 9256.323614055469,
+          "approvedBy": [
+            "citizen-16",
+            "citizen-280"
+          ],
+          "siteId": "government-b10"
+        },
+        {
+          "id": "public-shift-14",
+          "day": 14,
+          "cap": 1226.8442517001472,
+          "approvedBy": [
+            "citizen-359",
+            "citizen-557"
+          ],
+          "siteId": "summit-b19"
+        },
+        {
+          "id": "public-shift-15",
+          "day": 15,
+          "cap": 2674.809657651487,
+          "approvedBy": [
+            "citizen-435",
+            "citizen-523"
+          ],
+          "siteId": "core-b28"
+        },
+        {
+          "id": "public-shift-16",
+          "day": 16,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-27",
+            "citizen-291"
+          ],
+          "siteId": "government-b13"
+        },
+        {
+          "id": "public-shift-17",
+          "day": 17,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        },
+        {
+          "id": "public-shift-24",
+          "day": 24,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        },
+        {
+          "id": "public-shift-25",
+          "day": 25,
+          "cap": 0,
+          "approvedBy": [
+            "citizen-39",
+            "citizen-303"
+          ],
+          "siteId": "core-b12"
+        }
+      ]
+    },
+    "privateLabor": {
+      "rosterJobs": 180,
+      "plannedMinutes": 0,
+      "actualMinutes": 0,
+      "reservedCash": 0,
+      "restrictedShops": 0,
+      "statistics": {
+        "approvedMinutes": 2037931,
+        "workedMinutes": 1727458.0875542595,
+        "restrictedReviews": 0
+      }
+    },
+    "finalProduction": 18235.768190363342,
+    "finalProductionMinutes": 887888.612742202,
+    "wageArrears": {
+      "public": 0,
+      "private": 0,
+      "publicEarnedNotDue": 0,
+      "privateEarnedNotDue": 1.4933333333333332
+    },
+    "sha256": "430afa1960c04fc228db96e2feb982e311f98be193055b1a145271f792c39ae4",
+    "dayRows": [
+      {
+        "day": 0,
+        "treasury": 80000,
+        "hunger": 77.18245901117122,
+        "alive": 616,
+        "production": 0,
+        "productionMinutes": 0,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": null
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": null
+        }
+      },
+      {
+        "day": 7,
+        "treasury": 39845.62076415572,
+        "hunger": 52.25308441558434,
+        "alive": 616,
+        "production": 5242.587489730414,
+        "productionMinutes": 243425.7726406971,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 562522,
+            "workedMinutes": 518760.6797813254,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 137760,
+          "actualMinutes": 3780,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 12190.160157192871,
+          "statistics": {
+            "approvedMinutes": 275520,
+            "unfundedMinutes": 0,
+            "workedMinutes": 80926.92180720622,
+            "privateMoves": 0
+          }
+        }
+      },
+      {
+        "day": 7,
+        "treasury": 40061.737075847384,
+        "hunger": 57.335876623376684,
+        "alive": 616,
+        "production": 5242.587489730414,
+        "productionMinutes": 243425.7726406971,
+        "privateLabor": {
+          "rosterJobs": 265,
+          "plannedMinutes": 2400,
+          "actualMinutes": 8,
+          "reservedCash": 218.31387959252032,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 564922,
+            "workedMinutes": 518768.6797813254,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 137760,
+          "actualMinutes": 4478,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 12125.944157192873,
+          "statistics": {
+            "approvedMinutes": 275520,
+            "unfundedMinutes": 0,
+            "workedMinutes": 81624.92180720622,
+            "privateMoves": 0
+          }
+        }
+      },
+      {
+        "day": 14,
+        "treasury": 6719.174143616977,
+        "hunger": 50.50860389610408,
+        "alive": 616,
+        "production": 11988.044533465974,
+        "productionMinutes": 565651.7609235086,
+        "privateLabor": {
+          "rosterJobs": 286,
+          "plannedMinutes": 3360,
+          "actualMinutes": 128,
+          "reservedCash": 287.40435053743033,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1151281,
+            "workedMinutes": 1022628.2914289996,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": 13776,
+          "actualMinutes": 580.7186797612528,
+          "plannedFullMinutes": 137760,
+          "reservedCash": 1173.5699320224955,
+          "statistics": {
+            "approvedMinutes": 1034061,
+            "unfundedMinutes": 205779,
+            "workedMinutes": 481401.7070283834,
+            "privateMoves": 21
+          }
+        }
+      },
+      {
+        "day": 21,
+        "treasury": 38.30124773548137,
+        "hunger": 20.483116883116804,
+        "alive": 616,
+        "production": 14563.816121137053,
+        "productionMinutes": 700902.5691976291,
+        "privateLabor": {
+          "rosterJobs": 289,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1573406,
+            "workedMinutes": 1358401.5870987955,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 588924,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      },
+      {
+        "day": 30,
+        "treasury": 7606.282958783883,
+        "hunger": 2.424460431654686,
+        "alive": 556,
+        "production": 18176.976151422605,
+        "productionMinutes": 881020.63454471,
+        "privateLabor": {
+          "rosterJobs": 276,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 1978411,
+            "workedMinutes": 1687148.9421836033,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 863484,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      },
+      {
+        "day": 45,
+        "treasury": 37255.93712885652,
+        "hunger": 1.4011299435028293,
+        "alive": 354,
+        "production": 18225.980737158556,
+        "productionMinutes": 886752.612742202,
+        "privateLabor": {
+          "rosterJobs": 222,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 2027371,
+            "workedMinutes": 1721567.3770490577,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 863484,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      },
+      {
+        "day": 60,
+        "treasury": 65766.34558786772,
+        "hunger": 0.6918032786885263,
+        "alive": 244,
+        "production": 18235.768190363342,
+        "productionMinutes": 887888.612742202,
+        "privateLabor": {
+          "rosterJobs": 180,
+          "plannedMinutes": 0,
+          "actualMinutes": 0,
+          "reservedCash": 0,
+          "restrictedShops": 0,
+          "statistics": {
+            "approvedMinutes": 2037931,
+            "workedMinutes": 1727458.0875542595,
+            "restrictedReviews": 0
+          }
+        },
+        "publicService": {
+          "fundedMinutes": null,
+          "actualMinutes": null,
+          "plannedFullMinutes": null,
+          "reservedCash": 0,
+          "statistics": {
+            "approvedMinutes": 1064196,
+            "unfundedMinutes": 863484,
+            "workedMinutes": 506113.15717350034,
+            "privateMoves": 24
+          }
+        }
+      }
+    ],
+    "deathCount": 372,
+    "firstDeaths": [
+      {
+        "id": "citizen-95",
+        "tick": 16489,
+        "day": 23,
+        "age": 25.062743531189806,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 100,
+        "money": 289.62584517129744,
+        "before": {
+          "health": 0.008570436056747618,
+          "hunger": 0,
+          "fatigue": 100,
+          "money": 289.62584517129744,
+          "role": "官员",
+          "state": "sleeping",
+          "destinationId": "summit-b11",
+          "position": {
+            "x": 134.79999999999998,
+            "y": 500.6,
+            "z": -1186.4
+          }
+        },
+        "homeWorkDistance": 159.28490198383528,
+        "clinicDistance": 650.4269982096376,
+        "foodDistance": null
+      },
+      {
+        "id": "citizen-282",
+        "tick": 17626,
+        "day": 24,
+        "age": 32.06707001526982,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 72.00000000000051,
+        "money": 275.74483423109535,
+        "before": {
+          "health": 0.003343251422542496,
+          "hunger": 0,
+          "fatigue": 72.28000000000051,
+          "money": 275.74483423109535,
+          "role": "官员",
+          "state": "riding",
+          "destinationId": "market-b71",
+          "position": {
+            "x": -281.3,
+            "y": 81.50537814795439,
+            "z": 317.1459713520732
+          }
+        },
+        "homeWorkDistance": 147.36159608256148,
+        "clinicDistance": 434.103595319659,
+        "foodDistance": 443.2844281119384
+      },
+      {
+        "id": "citizen-348",
+        "tick": 17651,
+        "day": 24,
+        "age": 53.06716514464584,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 69.75999999999988,
+        "money": 304.7133951173282,
+        "before": {
+          "health": 0.004233874537696764,
+          "hunger": 0,
+          "fatigue": 69.75999999999988,
+          "money": 304.7133951173282,
+          "role": "官员",
+          "state": "riding",
+          "destinationId": "academy-b2",
+          "position": {
+            "x": -57.3,
+            "y": 515.5893368148926,
+            "z": -1191.2145644448685
+          }
+        },
+        "homeWorkDistance": 147.36159608256148,
+        "clinicDistance": 652.3100049325703,
+        "foodDistance": 1319.9154513589122
+      }
+    ]
+  }
+]

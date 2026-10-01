@@ -1,5 +1,9 @@
 import { getAviationPads } from './aviation';
-import { civicSite, publicFloor } from './simulation/culture';
+import { canReviewPetition, civicSite, publicFloor } from './simulation/culture';
+import { publicDepartures } from './journey';
+import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from './simulation/family';
+import { bankingAvailableLoanCash, bankingBalanceSheet, bankingReserveRequired } from './simulation/banking';
+import { clinicalAtPosition, clinicalVisitDeadline } from './simulation/clinical';
 import type { AerialVehicle, Building, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
@@ -13,7 +17,7 @@ const relationNames: Record<string, string> = { stranger: '陌生人', acquainta
 const romanceNames = { single: '单身', crush: '暗恋', pursuit: '追求中', dating: '交往中', engaged: '订婚', married: '已婚', family: '共同家庭' };
 const hostilityNames = { none: '无敌意', discontent: '不满', rivalry: '竞争', feud: '仇敌', enemy: '敌人', mortalEnemy: '死敌' };
 const hostilityRank = { none: 0, discontent: 1, rivalry: 2, feud: 3, enemy: 4, mortalEnemy: 5 };
-const inventoryNames: Record<string, string> = { food: '食物', block: '体素材料', investment: '投资份额', businesses: '经营商铺', driving: '驾驶操作权' };
+const inventoryNames: Record<string, string> = { food: '食物', material: '工业物料', block: '体素材料', investment: '投资份额', businesses: '经营商铺', driving: '驾驶操作权' };
 const ingredientNames: Record<string, string> = { grain: '稻米', vegetable: '时蔬', fish: '溪鱼' };
 const recipes: Record<string, { name: string; minutes: number; ingredients: Record<string, number> }> = { rice: { name: '山居菜饭', minutes: 30, ingredients: { grain: 2, vegetable: 1 } }, fishSoup: { name: '清溪鱼汤', minutes: 45, ingredients: { fish: 1, vegetable: 2 } }, festivalMeal: { name: '云山团圆宴', minutes: 60, ingredients: { grain: 2, fish: 1, vegetable: 2 } } };
 const activity = (value: string) => activityNames[value] ?? value;
@@ -33,6 +37,7 @@ const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleSt
 const clock = (hour: number) => `${String(Math.floor(hour) % 24).padStart(2, '0')}:${String(Math.floor((hour % 1) * 60)).padStart(2, '0')}`;
 const distance = (a: { x: number; z: number }, b: { x: number; z: number }) => Math.hypot(a.x - b.x, a.z - b.z);
 const spatialDistance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+const playerLaborLabel = (state: SimState): string => state.playerLabor?.job ? '已有工班 · 回到原场所继续' : '开始 60 分钟现场工班';
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, className = '', text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
   node.className = className;
@@ -52,6 +57,55 @@ function commandButton(label: string, type: Command['type'], targetId?: string, 
   if (value !== undefined) button.dataset.value = String(value);
   button.disabled = disabled;
   return button;
+}
+
+/** Update live content without detaching a native control for the same action. */
+function reconcileContent(host: HTMLElement, desired: HTMLElement): void {
+  const key = (node: Node): string => {
+    if (!(node instanceof HTMLElement)) return node.nodeName;
+    if (node.id) return `${node.tagName}#${node.id}`;
+    if (node instanceof HTMLButtonElement) return `button:${['command', 'target', 'value', 'action', 'bank', 'x', 'y', 'z'].map(name => node.dataset[name] ?? '').join('|')}`;
+    if (node.classList.contains('data-row')) return `field:${node.firstElementChild?.textContent ?? ''}`;
+    if (node instanceof HTMLDetailsElement) return `details:${node.querySelector('summary')?.textContent ?? ''}`;
+    return `${node.tagName}.${node.className}`;
+  };
+  const existing = new Map<string, Node[]>();
+  for (const child of Array.from(host.childNodes)) { const id = key(child), list = existing.get(id) ?? []; list.push(child); existing.set(id, list); }
+  let previous: Node | null = null;
+  const retained = new Set<Node>();
+  for (const next of Array.from(desired.childNodes)) {
+    const current = existing.get(key(next))?.shift() ?? next;
+    if (current !== next && current instanceof HTMLElement && next instanceof HTMLElement) {
+      for (const attribute of Array.from(current.attributes)) if (attribute.name !== 'open' && !next.hasAttribute(attribute.name)) current.removeAttribute(attribute.name);
+      for (const attribute of Array.from(next.attributes)) if (attribute.name !== 'open' && current.getAttribute(attribute.name) !== attribute.value) current.setAttribute(attribute.name, attribute.value);
+      reconcileContent(current, next);
+      if (current instanceof HTMLSelectElement && next instanceof HTMLSelectElement && document.activeElement !== current) current.value = next.value;
+    } else if (current !== next && current.textContent !== next.textContent) current.textContent = next.textContent;
+    const anchor: ChildNode | null = previous ? previous.nextSibling : host.firstChild;
+    if (current !== anchor) host.insertBefore(current, anchor);
+    previous = current; retained.add(current);
+  }
+  for (const child of Array.from(host.childNodes)) if (!retained.has(child)) child.remove();
+}
+
+/** Keep native controls connected across live distance/time updates. */
+function navigationButtons(host: HTMLElement, items: { id: string; name: string; subtitle?: string; distance: string; selected?: boolean }[], key: 'destination' | 'navigation'): void {
+  const existing = new Map(Array.from(host.children).filter((node): node is HTMLButtonElement => node instanceof HTMLButtonElement).map(button => [button.dataset[key]!, button]));
+  const wanted = new Set(items.map(item => item.id));
+  for (const item of items) {
+    let button = existing.get(item.id);
+    if (!button) {
+      button = element('button', 'destination-button'); button.type = 'button'; button.dataset[key] = item.id;
+      const text = element('div'); text.append(element('strong'), element('span')); button.append(text, element('span', 'destination-distance')); host.append(button);
+    }
+    button.classList.toggle('selected', !!item.selected);
+    button.setAttribute('aria-label', `导航至${item.name}`);
+    const label = button.querySelector('strong')!, subtitle = button.querySelector('div > span')!, metres = button.querySelector('.destination-distance')!;
+    if (label.textContent !== item.name) label.textContent = item.name;
+    if (subtitle.textContent !== (item.subtitle ?? '')) subtitle.textContent = item.subtitle ?? '';
+    if (metres.textContent !== item.distance) metres.textContent = item.distance;
+  }
+  for (const [id, button] of existing) if (!wanted.has(id)) button.remove();
 }
 
 /** DOM overlay. All simulation and imported strings are written as text, never HTML. */
@@ -145,7 +199,7 @@ export class CityUI {
     industry.innerHTML = `<div class="section-intro"><span class="eyebrow">百业与新知</span><h3>从一间铺子，到一城产业。</h3><p class="note">企业的雇员、库存、营收与股价随经营变化，科研投入会逐步影响公共系统。</p></div><div data-ref="company-summary"></div><div class="panel-section"><h3>我的事业</h3><div data-ref="company-actions"><label class="field-label" for="company-capital">创办公司的初始资本</label><select id="company-capital" data-ref="company-capital" aria-label="公司初始资本"><option value="300">300 云币</option><option value="500" selected>500 云币</option><option value="1000">1,000 云币</option></select><button type="button" class="action-button full-width" data-action="found-company" data-ref="found-company">在此创办公司</button><p class="note" data-ref="found-note"></p></div><div class="company-list" data-ref="company-list"></div><div data-ref="company-detail"></div></div><div class="panel-section"><h3>产业版图<span class="section-hint">控股与并购</span></h3><p class="note">已控制至少一家企业的商人，可到目标公司现场洽谈并购。报价按未持有股份与实时股价计算。</p><div data-ref="company-market"></div></div><div class="panel-section"><h3>交易所<span class="section-hint">钱庄现场业务</span></h3><p class="note">买卖按每股实时价格结算，每次 10 股。上市要求企业 2 级、资本 600 云币，发行费 200 云币。</p><div data-ref="stock-list"></div></div><div class="panel-section"><h3>科技与未来<span class="section-hint">两小时研究周期</span></h3><label class="field-label" for="research-budget">研究投入</label><select id="research-budget" data-ref="research-budget" aria-label="研究投入预算"><option value="100">100 云币</option><option value="200" selected>200 云币</option><option value="500">500 云币</option><option value="1000">1,000 云币</option></select><p class="note">持科研身份与教育 3，在书院或天枢阁研究；新技术逐步影响系统，也有副作用。</p><div data-ref="research-list"></div></div>`;
     this.root.querySelector('#pane-transit')!.before(industry);
     const life = element('div', 'panel-section');
-    life.innerHTML = `<h3>身心与生活</h3><div data-ref="life-profile"></div><div data-ref="health-actions"></div><div class="panel-section"><h3>烟火食事<span class="section-hint">厨房与食材</span></h3><div data-ref="cooking-status"></div><div data-ref="ingredient-actions"></div><label class="field-label" for="recipe-select">选择料理</label><select id="recipe-select" data-ref="recipe" aria-label="选择料理食谱"><option value="rice">山居菜饭 · 30 分钟</option><option value="fishSoup">清溪鱼汤 · 45 分钟</option><option value="festivalMeal">云山团圆宴 · 60 分钟</option></select><p class="note" data-ref="recipe-note"></p><label class="range-label" for="heat-slider"><span>烹饪火候</span><output data-ref="heat-label">60</output></label><input id="heat-slider" data-ref="heat" data-input="heat" type="range" min="0" max="100" step="1" value="60" aria-label="烹饪火候"><button type="button" class="action-button full-width" data-action="cook" data-ref="cook-button">开始烹饪</button><div data-ref="cooking-actions"></div><p class="note">市集、农场或码头购买食材；自家住宅、医馆或市集可烹饪，料理完成后可食用。</p></div>`;
+    life.innerHTML = `<h3>身心与生活</h3><div data-ref="life-profile"></div><div data-ref="health-actions"></div><div data-ref="clinical-orders"></div><div class="panel-section"><h3>烟火食事<span class="section-hint">厨房与食材</span></h3><div data-ref="cooking-status"></div><div data-ref="ingredient-actions"></div><label class="field-label" for="recipe-select">选择料理</label><select id="recipe-select" data-ref="recipe" aria-label="选择料理食谱"><option value="rice">山居菜饭 · 30 分钟</option><option value="fishSoup">清溪鱼汤 · 45 分钟</option><option value="festivalMeal">云山团圆宴 · 60 分钟</option></select><p class="note" data-ref="recipe-note"></p><label class="range-label" for="heat-slider"><span>烹饪火候</span><output data-ref="heat-label">60</output></label><input id="heat-slider" data-ref="heat" data-input="heat" type="range" min="0" max="100" step="1" value="60" aria-label="烹饪火候"><button type="button" class="action-button full-width" data-action="cook" data-ref="cook-button">开始烹饪</button><div data-ref="cooking-actions"></div><p class="note">市集、农场或码头购买食材；自家住宅、医馆或市集可烹饪，料理完成后可食用。</p></div>`;
     this.root.querySelector('#pane-life')!.append(life);
     const publicSystems = element('div', 'panel-section');
     publicSystems.innerHTML = `<h3>山水与公共服务</h3><div data-ref="public-services"></div><div class="panel-section"><h3>审计与司法<span class="section-hint">证据与处置记录</span></h3><div data-ref="audit-actions"></div><div data-ref="audit-list"></div></div><div class="panel-section"><h3>公共账目<span class="section-hint">最近收支</span></h3><ol class="event-list" data-ref="public-ledger"></ol></div>`;
@@ -159,12 +213,23 @@ export class CityUI {
     const family = element('div', 'panel-section');
     family.innerHTML = '<h3>家庭与下一代</h3><div data-ref="family-life"></div>';
     this.root.querySelector('#pane-life')!.append(family);
+    const labor = element('div', 'panel-section');
+    labor.append(element('h3', '', '现场工班'));
+    const laborBody = element('div'); laborBody.dataset.ref = 'player-labor'; labor.append(laborBody);
+    this.root.querySelector('[data-ref="daily-actions"]')!.after(labor);
     const culture = element('div', 'panel-section');
     culture.innerHTML = `<h3>作品与见闻</h3><div data-ref="culture-job"></div><div data-cultural-form><label class="field-label" for="work-kind">创作形式</label><select id="work-kind" data-ref="work-kind"><option value="literature">文学 · 120 分钟</option><option value="art">绘画 · 180 分钟</option></select><label class="field-label" for="work-title">作品标题</label><input id="work-title" data-ref="work-title" type="text" maxlength="40" placeholder="为作品起一个名字"><label class="field-label" for="work-text">作品内容</label><textarea id="work-text" data-ref="work-text" minlength="20" maxlength="1200" placeholder="至少 20 字，记录山城里的故事与景物"></textarea><button type="button" class="action-button full-width" data-action="create-work" data-ref="create-work">在此创作 · 60 云币</button><p class="note">在书院或山顶亭实际创作，离开现场会暂停；完成后到市集、亭子或公共议事厅发表。</p></div><div data-ref="culture-works"></div>`;
     this.root.querySelector('#pane-life')!.append(culture);
     const information = element('div', 'panel-section');
     information.innerHTML = `<h3>公共信息与议事</h3><div data-cultural-form><label class="field-label" for="report-kind">信息主题</label><select id="report-kind" data-ref="report-kind"><option value="water">溪水与环境</option><option value="safety">城区治安</option><option value="budget">公共预算</option></select><label class="field-label" for="report-value">记录数值（留空采用现场真实值）</label><input id="report-value" data-ref="report-value" type="number" min="0" max="1000000000000" placeholder="留空采用真实观察"><label class="field-label" for="report-text">见闻记录</label><textarea id="report-text" data-ref="report-text" minlength="20" maxlength="400" placeholder="至少 20 字，记下这次观察"></textarea><button type="button" class="action-button full-width" data-action="publish-report" data-ref="publish-report">公开发布见闻 · 20 云币</button><p class="note">在公共场所发布，预算信息须到公共议事厅；书院或议事厅可核验，更正会保留原有记录。</p></div><div data-ref="culture-reports"></div><div data-cultural-form><label class="field-label" for="petition-topic">公共诉求</label><select id="petition-topic" data-ref="petition-topic"><option value="education">教育与书院</option><option value="health">医疗与健康</option><option value="transport">交通与出行</option></select><label class="field-label" for="petition-title">议事标题</label><input id="petition-title" data-ref="petition-title" type="text" maxlength="40" placeholder="填写简短标题"><label class="field-label" for="petition-text">具体诉求</label><textarea id="petition-text" data-ref="petition-text" minlength="20" maxlength="400" placeholder="至少 20 字，说清地点、问题与希望改变的事"></textarea><button type="button" class="action-button full-width" data-action="file-petition" data-ref="file-petition">在议事厅备案 · 10 云币</button><p class="note">公共议事厅现场备案；一天后收到公开回复，公共支出须受实际预算约束。</p></div><div data-ref="culture-petitions"></div>`;
     this.root.querySelector('#pane-city')!.append(information);
+    const services = element('div', 'panel-section');
+    services.innerHTML = '<h3>议程与实际公共服务</h3><div data-ref="service-orders"></div>';
+    this.root.querySelector('#pane-city')!.append(services);
+    const destinations = element('div', 'panel-section');
+    destinations.innerHTML = '<h3>具体场所与出行路线</h3><label class="field-label" for="journey-preference">出行方式</label><select id="journey-preference" data-ref="journey-preference"><option value="walk">沿道路与桥面步行</option><option value="transit">步行到站与现场购票换乘</option></select><label class="field-label" for="destination-kind">寻找场所</label><select id="destination-kind" data-ref="destination-kind" data-input="destination-kind"><option value="school">书院</option><option value="bank">钱庄</option><option value="market">市集</option><option value="home">住宅</option><option value="clinic">医馆</option><option value="station">车站</option><option value="hall">议事堂</option><option value="airport">机场</option><option value="starport">星港</option><option value="pavilion">山顶亭</option><option value="dock">码头</option></select><div data-ref="destination-targets"></div><div data-ref="transit-route"></div><div data-ref="walking-guide"></div><button type="button" class="action-button full-width" data-ref="cancel-journey" data-command="cancelJourney">取消当前导航</button>';
+    this.root.querySelector('#pane-transit .transit-summary')!.after(destinations);
+    const stopLabel=element('label','field-label','查询实际停靠点');stopLabel.htmlFor='departure-stop';const stops=element('select');stops.id='departure-stop';stops.dataset.ref='departure-stop';stops.dataset.input='departure-stop';const nearby=element('option','','最近停靠点');nearby.value='';stops.append(nearby);for(const node of this.world.nodes.filter(n=>n.station)){const option=element('option','',node.name);option.value=node.id;stops.append(option);}this.root.querySelector('[data-ref=departures]')!.before(stopLabel,stops);
   }
   private setText(name: string, value: string): void { const node = this.ref(name); if (node.textContent !== value) node.textContent = value; }
   private setInput(name: string, value: string): void { const node = this.ref<HTMLInputElement | HTMLSelectElement>(name); if (document.activeElement !== node && node.value !== value) node.value = value; }
@@ -190,6 +255,14 @@ export class CityUI {
   }
   private atKind(...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id)); }
   private atFacility(...facilities: NonNullable<Building['facility']>[]): boolean { return this.world.buildings.some(b => !!b.facility && facilities.includes(b.facility) && this.atBuilding(b.id)); }
+  private canStartTreatment(patientId = 'player'): boolean {
+    const state = this.state, payer = state?.extension?.actorProfiles.player;
+    if (!state || !this.canAct() || !payer?.alive || payer.age < 18 || state.player.money < 30) return false;
+    const patient = patientId === 'player' ? state.player : state.citizens.find(person => person.id === patientId), profile = state.extension?.actorProfiles[patientId];
+    if (!patient || !profile?.alive || profile.health <= 0 || profile.health >= 100 || state.clinical?.orders.some(order => order.patientId === patientId && !['completed', 'cancelled'].includes(order.state)) || clinicalVisitDeadline(state, patientId) > (state.extension?.lastUpdate ?? 0)) return false;
+    const patientPermission = patientId === 'player' ? state.player : { role: 'traveler' as const, identities: ['traveler' as const] };
+    return this.world.buildings.some(site => clinicalAtPosition(site, state.player.position, state.player) && clinicalAtPosition(site, patient.position, patientPermission) && state.citizens.some(doctor => doctor.id !== patientId && doctor.workId === site.id && ['医生', 'doctor'].includes(doctor.role) && state.extension?.actorProfiles[doctor.id]?.alive && (state.extension.actorProfiles[doctor.id]?.age ?? 0) >= 18));
+  }
   private controlled(company: Company): boolean { return (company.shareholders.player ?? 0) > company.shares / 2; }
   private socialClock(): number { return this.state?.extension?.lastUpdate ?? (this.state ? this.state.day * 1440 + this.state.hour * 60 : 0); }
   private romanceAge(rel: Relationship): number { return Math.max(0, this.socialClock() - (rel.romanceSince ?? this.socialClock())); }
@@ -252,7 +325,8 @@ export class CityUI {
     if (button.dataset.context) { this.contextKind = button.dataset.context as ContextKind; this.contextSignature = ''; this.refreshContext(); return; }
     if (button.dataset.citizen) { this.selectedCitizen = button.dataset.citizen; this.refreshPanel(); return; }
     if (button.dataset.company) { this.selectedCompany = button.dataset.company; this.refreshPanel(); return; }
-    if (button.dataset.destination) { this.actions.travel(button.dataset.destination); return; }
+    if (button.dataset.destination) { this.actions.travel(button.dataset.destination,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); return; }
+    if (button.dataset.navigation) { if (this.actions.navigateTarget) this.actions.navigateTarget(button.dataset.navigation,this.ref<HTMLSelectElement>('journey-preference').value as 'walk'|'transit'); else this.actions.travel(button.dataset.navigation); return; }
     if (button.dataset.command) {
       this.actions.command({ type: button.dataset.command as Command['type'], targetId: button.dataset.target, value: button.dataset.value === undefined ? undefined : Number(button.dataset.value), position: button.dataset.x === undefined ? undefined : { x: Number(button.dataset.x), y: Number(button.dataset.y), z: Number(button.dataset.z) } });
       return;
@@ -281,6 +355,7 @@ export class CityUI {
       case 'study': this.actions.command({ type: 'exam', targetId: 'study' }); break;
       case 'policy': this.policyDirty = false; this.actions.command({ type: 'policy', taxRate: Number(this.ref<HTMLInputElement>('tax').value) / 100, policeBudget: Number(this.ref<HTMLInputElement>('police').value) / 100, targetId: building?.id }); break;
       case 'signal': this.actions.command({ type: 'signal', value: Number(button.dataset.value), position: state?.player.position }); break;
+      case 'purchase-carry': this.actions.command({ type: 'purchase', targetId: button.dataset.target, value: 2 }); break;
       case 'bank': this.actions.command({ type: button.dataset.bank as Command['type'], targetId: building?.id, value: Number(this.root.querySelector<HTMLSelectElement>('#bank-amount')?.value ?? 100) }); break;
       case 'relations': this.setPanel(true, 'relations'); this.selectedCitizen = this.view?.nearbyCitizen?.id ?? null; this.renderRelationships(); break;
       case 'city': this.setPanel(true, 'city'); break;
@@ -316,6 +391,8 @@ export class CityUI {
       case 'speed': this.actions.command({ type: 'speed', value: Number(input.value) }); break;
       case 'fpsCap': this.actions.setSetting('fpsCap', Number(input.value)); break;
       case 'dynamicResolution': this.actions.setSetting('dynamicResolution', (input as HTMLInputElement).checked); break;
+      case 'departure-stop':
+      case 'destination-kind': if (this.state && this.view) this.renderTransit(); break;
     }
     if (input === this.ref('career') && this.state && this.view) this.renderCareer();
     if (input.id === 'bank-amount') this.bankAmount = Number(input.value);
@@ -358,9 +435,10 @@ export class CityUI {
     const target = this.world.districts.find(d => d.id === view.targetDistrict);
     this.ref('navigation').hidden = !target;
     if (target) {
-      this.setText('destination', target.name);
-      const meters = distance(view.position, target.center);
-      this.setText('route-distance', meters < target.radius ? '已抵达城区' : meters >= 1000 ? `${(meters / 1000).toFixed(1)} km` : `${rounded(meters)} m`);
+      const goal = view.transitJourney?.destination ?? view.journey?.destination;
+      this.setText('destination', goal?.name ?? target.name);
+      const meters = goal ? spatialDistance(view.position,goal.position) : distance(view.position,target.center);
+      this.setText('route-distance', goal ? meters < 8 && !state.player.vehicleId ? '已到实际入口' : `${rounded(meters)} m 至入口` : meters < target.radius ? '已抵达城区' : meters >= 1000 ? `${(meters / 1000).toFixed(1)} km` : `${rounded(meters)} m`);
     }
     this.refreshContext();
     this.drawMap();
@@ -407,7 +485,10 @@ export class CityUI {
     this.renderNeeds(this.ref('needs'), player.needs);
     const building = this.view!.nearbyBuilding;
     const absent = !building || !this.canAct();
-    this.ref('daily-actions').replaceChildren(commandButton('就地工作', 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind)), commandButton('休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
+    const daily = element('div');
+    daily.append(commandButton(playerLaborLabel(state), 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind) || !!state.playerLabor?.job), commandButton('休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
+    reconcileContent(this.ref('daily-actions'), daily);
+    reconcileContent(this.ref('player-labor'), this.laborContent());
     this.ref('growth').replaceChildren(field('教育', `${player.education}`), field('工作经验', `${player.experience}`));
     this.renderCareer();
     const items = Object.entries(player.inventory).filter(([item, amount]) => amount > 0 && !item.startsWith('business:') && !item.startsWith('dishQuality:'));
@@ -591,7 +672,12 @@ export class CityUI {
     else this.ref('life-profile').replaceChildren(field('年龄 / 健康', `${profile.age.toFixed(1)} 岁 / ${Math.round(profile.health)}`), field('心情 / 压力', `${Math.round(profile.mood)} / ${Math.round(profile.stress)}`), field('生活技能', String(Math.round(profile.skill))), element('p', 'note', profile.historyTags.join(' · ')));
     const cooking = extension?.cooking;
     this.ref('cooking-status').replaceChildren(cooking ? field('正在烹饪', `${recipes[cooking.recipeId]?.name ?? cooking.recipeId} · 剩余 ${Math.max(0, Math.ceil(cooking.finishAt - (extension?.lastUpdate ?? 0)))} 分钟`) : element('p', 'note', '厨房暂无料理制作。'));
-    this.ref('health-actions').replaceChildren(commandButton('医馆治疗 · 30 云币', 'heal', 'player', undefined, !extension || !this.atKind('clinic') || this.state!.player.money < 30 || (profile?.health ?? 100) >= 100));
+    const health = element('div');
+    health.append(commandButton('登记诊疗 · 30 云币托管', 'heal', 'player', undefined, !this.canStartTreatment()), element('p', 'note', '须到医馆公共层；材料到货、合资格医生与患者共同完成 20 分钟后才恢复健康。离场暂停。'));
+    const visitWait = Math.ceil(clinicalVisitDeadline(this.state!, 'player') - (extension?.lastUpdate ?? 0));
+    if (visitWait > 0) health.append(element('p', 'note', `复诊间隔还需 ${visitWait} 分钟，原有诊疗间隔继续保留。`));
+    reconcileContent(this.ref('health-actions'), health);
+    reconcileContent(this.ref('clinical-orders'), this.clinicalContent());
     const building = this.view?.nearbyBuilding;
     const shop = this.state!.shops.find(s => s.buildingId === building?.id);
     const canBuy = this.atKind('market', 'farm', 'dock') && !!shop?.open;
@@ -606,7 +692,11 @@ export class CityUI {
     const inHome = !!this.state!.player.homeId && this.atBuilding(this.state!.player.homeId);
     this.ref<HTMLButtonElement>('cook-button').disabled = !extension || !!cooking || !ingredientReady || !(inHome || this.atKind('clinic', 'market'));
     const meals = Object.entries(recipes).filter(([id]) => (inventory[`dish:${id}`] ?? 0) > 0);
-    this.ref('cooking-actions').replaceChildren(...meals.map(([id, recipe]) => commandButton(`享用${recipe.name} · ${inventory[`dish:${id}`]} 份`, 'eat', id, undefined, !this.canAct())));
+    const mealActions = element('div', 'button-grid context-actions');
+    mealActions.append(commandButton(`食用随身食物 · ${inventory.food ?? 0} 份`, 'eat', 'food', undefined, !this.canAct() || (inventory.food ?? 0) < 1));
+    for (const [id, recipe] of meals) mealActions.append(commandButton(`享用${recipe.name} · ${inventory[`dish:${id}`]} 份`, 'eat', id, undefined, !this.canAct()));
+    mealActions.append(element('p', 'note', '随身食物每次实际吃 1 份；无需厨房。购餐并带走的余量可在途中食用。'));
+    reconcileContent(this.ref('cooking-actions'), mealActions);
   }
   private atCultureBuilding(id: string): boolean {
     const building = this.world.buildings.find(b => b.id === id);
@@ -650,8 +740,32 @@ export class CityUI {
       const card = element('div', 'panel-section');
       card.append(element('strong', '', petition.title), element('p', '', petition.text), element('p', 'note', `${topicNames[petition.topic]} · ${petition.signerIds.length} 位现场联署 · ${petition.status === 'answered' ? '已公开回复' : `还需 ${Math.max(0, Math.ceil((petition.replyAt - culture!.lastUpdate) / 60))} 小时回复`}`));
       if (petition.reply) card.append(element('p', '', petition.reply));
+      if (petition.executionId) card.append(element('p', 'note', `执行记录 ${petition.executionId}；可在下方查看预算、供货与现场服务。`));
       return card;
     }));
+    const orderNames = { agenda: '列入议程', awaitingReview: '等待程序审核', awaitingBudget: '等待合法预算', awaitingSupply: '等待实际供货', active: '现场服务中', fulfilled: '服务已完成', rejected: '已驳回' };
+    const decisionSite = this.world.buildings.find(b => this.atBuilding(b.id) && canReviewPetition(b, Math.floor((state.player.position.y - b.position.y + .01) / (b.height / b.floors)), state.player));
+    this.ref('service-orders').replaceChildren(...(culture?.orders ?? []).map(order => {
+      const card = element('div', 'panel-section'), serviceSite = this.world.buildings.find(b => b.id === order.siteId);
+      card.append(field(`${topicNames[order.topic]} · ${orderNames[order.state]}`, order.id), element('p', '', order.lastReason), field('服务场所', serviceSite?.name ?? order.siteId), field('授权上限 / 实际支出', `${money(order.authorizedCap)} / ${money(order.spent)}`), field('到货 / 已消耗 / 目标', `${order.receivedUnits} / ${order.consumedUnits} / ${order.targetUnits} 份`), field('实际受益居民 / 在岗人员', `${order.servedIds.length} / ${order.staffIds.length}`), field('我的现场服务', `${Math.floor(order.serviceMinutes.player ?? 0)} / ${order.requiredMinutes} 分钟`));
+      if (order.approvedBy.length) card.append(element('p', 'note', `预算署名：${order.approvedBy.map(id => id === 'player' ? '本人' : state.citizens.find(c => c.id === id)?.name ?? id).join('、')}`));
+      const controls = element('div', 'button-grid context-actions');
+      if (['agenda', 'awaitingReview'].includes(order.state)) controls.append(commandButton('市长现场审议 · 上限 40 云币', 'reviewPetition', order.petitionId, 40, !this.canAct() || !decisionSite), commandButton('市长现场驳回', 'reviewPetition', order.petitionId, 0, !this.canAct() || !decisionSite));
+      if (order.state === 'active' && order.topic !== 'transport') controls.append(commandButton(order.servedIds.includes('player') ? '本项服务已经完成' : culture?.playerServiceId === order.id ? '已参加，等待现场服务完成' : '到场接受公共服务', 'attendService', order.id, undefined, !this.canAct() || !this.atCultureBuilding(order.siteId) || state.player.needs.hunger < 40 || state.player.needs.fatigue < 35 || order.servedIds.includes('player') || culture?.playerServiceId === order.id || !!culture?.playerServiceId && culture.playerServiceId !== order.id || order.topic === 'health' && (state.extension?.actorProfiles.player?.health ?? 100) >= 95));
+      if (controls.childElementCount) card.append(controls);
+      const maintenance = culture?.transportMaintenance[order.siteId];
+      if (maintenance) card.append(element('p', 'note', `真实维护窗口还余 ${Math.max(0, Math.ceil(maintenance.maintainedUntil - culture!.lastUpdate))} 游戏分钟，影响该站点后续班次间隔。`));
+      if (order.receipts.length) {
+        const receipts = element('details', 'relationship-choices'); receipts.append(element('summary', '', `${order.receipts.length} 笔实际采购回执`));
+        for (const receipt of order.receipts) {
+          receipts.append(field(`${receipt.procurementId} · ${receipt.budgetId}`, `${receipt.quantity} 份 / ${money(receipt.paid)} / 税 ${money(receipt.tax)}`));
+          for (const lot of receipt.lots) receipts.append(element('p', 'note', `${state.shops.find(s => s.id === lot.shopId)?.id ?? lot.shopId}：${lot.quantity} 份 × ${money(lot.unitPrice)}，实收 ${money(lot.net)}。`));
+        }
+        card.append(receipts);
+      }
+      return card;
+    }));
+    if (!culture?.orders?.length) this.ref('service-orders').append(element('p', 'note', '备案、联署与公开回复后进入程序审核；合法预算与实际库存到位后，服务才会开展。'));
   }
   private aircraftContent(craft: AerialVehicle): HTMLElement {
     const state = this.state!, active = state.aviation?.activeAircraftId === craft.id;
@@ -678,21 +792,53 @@ export class CityUI {
     this.ref('aviation-list').replaceChildren(...(this.state?.aviation?.aircraft ?? []).map(craft => this.aircraftContent(craft)));
   }
   private renderFamily(): void {
-    const state = this.state!, family = state.family;
-    const body = this.ref('family-life'); body.replaceChildren();
+    const state = this.state!, family = state.family, body = this.ref('family-life'); body.replaceChildren();
     if (!family) { body.append(element('p', 'note', '家庭状态尚未建立。')); return; }
     const spouse = state.citizens.find(c => c.id === state.player.partnerId);
-    if (spouse) body.append(commandButton('与伴侣商议生育', 'planFamily', spouse.id, undefined, !this.canAct()), element('p', 'note', '需要共同住所、双方健康与意愿、教育和真实扶养储备；孕期为 270 个游戏日，时间按城市日历推进。'));
-    const pregnancies = family.pregnancies.filter(p => p.parentIds.includes('player'));
-    for (const pregnancy of pregnancies) body.append(field('孕期与扶养储备', `${Math.max(0, Math.ceil((pregnancy.dueAt - family.lastUpdate) / 1440))} 日后预产 · ${money(pregnancy.escrow)}`));
-    const children = Object.entries(family.children).filter(([, child]) => child.parentIds.includes('player'));
-    for (const [id, child] of children) {
-      const resident = state.citizens.find(c => c.id === id), profile = state.extension?.actorProfiles[id];
-      body.append(field(resident?.name ?? id, `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident?.education ?? 0} · 到校 ${Math.round(child.attendanceMinutes)} 分钟`));
-      const controls = element('div', 'button-grid');
-      controls.append(commandButton('到场扶养 · 20 云币', 'supportFamily', id, 20, !this.canAct() || state.player.money < 20), commandButton('在书院办理入学', 'enrollChild', id, undefined, !this.canAct() || !this.atKind('school') || !!child.schoolId)); body.append(controls);
+    if (spouse) {
+      body.append(commandButton('与伴侣商议生育', 'planFamily', spouse.id, undefined, !this.canAct()), element('p', 'note', '婚后共同生活、双方健康与意愿、真实扶养储备均需满足；孕期为 270 个游戏日。'));
+      const home = this.world.buildings.find(b => b.kind === 'home' && this.atBuilding(b.id));
+      if (home) body.append(commandButton('双方现场登记共同住所 · 各 20 云币', 'moveHousehold', home.id, undefined, !this.canAct() || state.player.money < 120 || spouse.money < 120 || family.households.some(h => h.closedAt === null && h.homeId === home.id && h.actorIds.includes('player'))), element('p', 'note', '双方需到场同意，住房容量与原岗位道路通勤均需通过核验；登记后原位置和工作保留。'));
     }
-    body.append(element('p', 'note', `${children.length} 位子女 · ${Object.keys(family.estates).length} 笔实际遗产结算。出生、扶养、到校学习与财产继承保存在城市中。`));
+    for (const pregnancy of family.pregnancies.filter(p => p.parentIds.includes('player'))) body.append(field('孕期与扶养储备', state.extension?.actorProfiles[pregnancy.carrierId]?.alive === false ? `孕育已中止，托管等待钱包容量或遗产清算后原额退款 · ${money(pregnancy.escrow)}` : `${Math.max(0, Math.ceil((pregnancy.dueAt - family.lastUpdate) / 1440))} 日后预产 · ${money(pregnancy.escrow)}`));
+    for (const account of family.households.filter(h => h.actorIds.includes('player'))) {
+      const card = element('div', 'organization-row');
+      card.append(field(this.world.buildings.find(b => b.id === account.homeId)?.name ?? account.homeId, account.closedAt === null ? '有效共同账户' : '已按双方均分结清'), field('共同现金 / 已消费 / 已返还', `${money(account.balance)} / ${money(account.spent)} / ${money(account.returned)}`), field('我的实际存入', money(account.contributions.player ?? 0)));
+      if (account.closedAt === null) card.append(commandButton('在家存入共同资金 · 20 云币', 'fundHousehold', account.id, 20, !this.atBuilding(account.homeId) || state.player.money < 120));
+      for (const receipt of account.expenses.slice(-3).reverse()) card.append(element('p', 'note', `实际照护购食：${state.citizens.find(c => c.id === receipt.targetId)?.name ?? receipt.targetId} · ${receipt.quantity} 份 · ${money(receipt.amount)} → ${receipt.recipientId}`));
+      body.append(card);
+    }
+    const dependents = state.citizens.filter(c => isFamilyDependent(state, c.id));
+    for (const resident of dependents) {
+      const id = resident.id, child = family.children[id], profile = state.extension?.actorProfiles[id];
+      body.append(field(resident.name, `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident.education ?? 0} · 食物储备 ${resident.food ?? 0} 份${child ? ` · 到校 ${Math.round(child.attendanceMinutes)} 分钟` : ''}`));
+      const near = spatialDistance(state.player.position, resident.position) <= 24, controls = element('div', 'button-grid');
+      controls.append(commandButton('到场扶养 · 20 云币', 'supportFamily', id, 20, !this.canAct() || !near || state.player.money < 20));
+      if (child) controls.append(commandButton('在书院办理入学 · 40 云币', 'enrollChild', id, undefined, !this.canAct() || !near || !this.atKind('school') || !!child.schoolId || (profile?.age ?? 0) < 6 || (profile?.age ?? 0) >= 18 || state.player.money < 40));
+      const account = family.households.find(h => h.closedAt === null && h.actorIds.includes('player') && h.homeId === resident.homeId);
+      if (account) controls.append(commandButton('现场照护购食 / 交出背包食物', 'householdMeal', id, undefined, !this.canAct() || !near || (resident.food ?? 0) >= 6), element('p', 'note', '在共同住所交出一份背包食物，或与子女到真实商铺用共同现金购买一份库存；资金与食物分别记账。'));
+      body.append(controls);
+    }
+    const venue = this.world.buildings.find(b => this.atBuilding(b.id) && publicFamilyVenue(b, state.player.position));
+    const ceremonies = family.ceremonies.filter(c => c.organizerId === 'player');
+    if (canHoldFamilyCeremony(state, 'wedding') && !ceremonies.some(c => c.kind === 'wedding' && c.subjectId === spouse?.id)) body.append(commandButton('亭馆筹办婚礼 · 30 云币与食物 2 份', 'holdCeremony', 'wedding', undefined, !venue || state.player.money < 30 || (state.player.inventory.food ?? 0) < 2));
+    const estates = Object.entries(family.estates).filter(([id, estate]) => estate.heirIds.includes('player') || state.extension?.actorProfiles[id]?.family.includes('player'));
+    for (const [id, estate] of estates) {
+      body.append(field(`${state.citizens.find(c => c.id === id)?.name ?? id} · 遗产`, estate.status === 'awaitingExecutor' ? '等待真实继承人 / 执行人' : `已结算现金 ${money(estate.cash)} · ${estate.heirIds.length} 位继承人`));
+      if (estate.bankSettlement) body.append(element('p', 'note', `钱庄清债 ${money(estate.bankSettlement.debtPaid)}；转移存款债权 ${money(estate.bankSettlement.depositClaimsTransferred)}；未收回坏账 ${money(estate.bankSettlement.unpaidLoss)}。`));
+      if (canHoldFamilyCeremony(state,id) && !ceremonies.some(c => c.kind === 'funeral' && c.subjectId === id)) body.append(commandButton('亭馆筹办葬礼 · 30 云币与材料 2 块', 'holdCeremony', id, undefined, !venue || state.player.money < 30 || (state.player.inventory.block ?? 0) < 2));
+    }
+    for (const sale of family.estateSales ?? []) {
+      if (sale.state !== 'offered') continue;
+      const company = state.extension?.companies.find(c => c.id === sale.assetId), shop = state.shops.find(s => s.id === sale.assetId), site = this.world.buildings.find(b => b.id === (company?.buildingId ?? shop?.buildingId));
+      const validVenue=this.world.buildings.some(b=>this.atBuilding(b.id)&&isEstateSaleVenue(state,sale,b,Math.floor((state.player.position.y-b.position.y+.01)/(b.height/Math.max(1,b.floors)))));
+      const debt=state.banking?.accounts[sale.deceasedId];
+      body.append(field('亡者实际贷款本金 / 利息',`${money(debt?.loanPrincipal??0)} / ${money(debt?.loanInterest??0)}`));
+      body.append(field('遗产偿债真实出让', `${company?.name ?? site?.name ?? sale.assetId} · 余 ${sale.quantity-sale.soldQuantity} ${sale.kind === 'shares' ? '份股份' : '间商铺'} · 每份 ${money(sale.unitPrice)}`), commandButton('现场购买一份偿债资产', 'buyEstateAsset',sale.id,1,!this.canAct() || !validVenue || state.player.money < sale.unitPrice+100), element('p','note',`已收真实货款 ${money(sale.proceeds)}；由亡者账户清偿债务后，余产才会结算继承。`));
+      for(const receipt of sale.receipts.slice(-3))body.append(element('p','note',`实际买家 ${receipt.buyerId} · ${receipt.quantity} 份 · ${money(receipt.paid)}。`));
+    }
+    for (const ceremony of ceremonies) body.append(field(ceremony.kind === 'wedding' ? '家庭婚礼' : '亲人葬礼', ceremony.completedAt === null ? `${Math.floor(ceremony.workedMinutes)} / 30 分钟现场筹办` : `已完成 · ${ceremony.guestIds.length} 位亲友实际到场`), element('p', 'note', `${this.world.buildings.find(b => b.id === ceremony.siteId)?.name ?? ceremony.siteId} · 已支付 ${money(ceremony.paid)}、耗用 ${ceremony.materialUnits} 份用品。离场暂停，亲友到场才会留下记忆。`));
+    body.append(element('p', 'note', `${dependents.length} 位真实受养家人。出生、共同账户、到校学习、仪式与继承记录随存档恢复。`));
   }
   private renderTransit(): void {
     const state = this.state!;
@@ -700,23 +846,50 @@ export class CityUI {
     this.renderAviation();
     const modes = new Set(this.world.edges.map(edge => edge.mode));
     this.ref('transit-summary').replaceChildren(field('交通网络', `${this.world.nodes.length} 节点 · ${this.world.edges.length} 连接`), field('运行载具', `${state.vehicles.length} 辆 / 艘`), element('p', 'note', [...modes].map(mode => modeNames[mode]).join(' · ')));
-    this.ref('destination-list').replaceChildren(...this.world.districts.map(d => {
-      const button = element('button', `destination-button${view.targetDistrict === d.id ? ' selected' : ''}`);
-      button.type = 'button'; button.dataset.destination = d.id; button.setAttribute('aria-label', `导航至${d.name}`);
-      const text = element('div'); text.append(element('strong', '', d.name), element('span', '', districtKind(d.kind)));
-      const meters = distance(view.position, d.center);
-      button.append(text, element('span', 'destination-distance', meters < d.radius ? '此处' : meters >= 1000 ? `${(meters / 1000).toFixed(1)} km ↗` : `${rounded(meters)} m ↗`)); return button;
-    }));
-    const departures = state.vehicles.filter(v => v.kind !== 'road' && v.kind !== 'bridge').sort((a, b) => a.nextDeparture - b.nextDeparture).slice(0, 7);
-    this.ref('departures').replaceChildren(...departures.map(vehicle => {
-      const edge = this.world.edges.find(e => e.id === vehicle.edgeId);
-      const node = this.world.nodes.find(n => n.id === edge?.to);
+    navigationButtons(this.ref('destination-list'), this.world.districts.map(d => {
+      const meters = distance(view.position,d.center);
+      return {id:d.id,name:d.name,subtitle:districtKind(d.kind),selected:view.targetDistrict===d.id,distance:meters<d.radius?'此处':meters>=1000?`${(meters/1000).toFixed(1)} km ↗`:`${rounded(meters)} m ↗`};
+    }), 'destination');
+    const kind = this.ref<HTMLSelectElement>('destination-kind').value;
+    navigationButtons(this.ref('destination-targets'),this.world.buildings.filter(b=>b.kind===kind).sort((a,b)=>spatialDistance(view.position,a.door)-spatialDistance(view.position,b.door)).slice(0,8).map(b=>({id:b.id,name:b.name,distance:`${Math.round(spatialDistance(view.position,b.door))} m ↗`})), 'navigation');
+    const route = view.transitJourney, routeBody = this.ref('transit-route'); routeBody.replaceChildren();
+    this.ref<HTMLButtonElement>('cancel-journey').disabled = !state.journey?.targetId;
+    if (route) {
+      routeBody.append(field('公共交通目的地',route.destination.name),field('分段登乘票款 / 换乘 / 步行',`${money(route.fare)} / ${route.transfers} 次 / ${Math.round(route.walkingMetres)} 米`),element('p','note','每次登车前核对实际下一站；抵达合法停靠点后自行下车，接续班次到现场查询。导航不会代买票或移动身体。'));
+      const legs=element('ol','event-list');
+      for(const leg of route.legs){const item=element('li');item.dataset.routeMode=leg.mode;item.dataset.fromNode=leg.fromNodeId;item.dataset.toNode=leg.toNodeId;item.append(element('p','',`${leg.mode==='walk'?'步行':modeNames[leg.mode]} · ${this.world.nodes.find(n=>n.id===leg.fromNodeId)?.name??leg.fromNodeId} → ${this.world.nodes.find(n=>n.id===leg.toNodeId)?.name??leg.toNodeId}${leg.fare?` · 登乘 ${money(leg.fare)}`:''}`));legs.append(item);}routeBody.append(legs);
+      if (!route.legs.some(l=>l.mode!=='walk')) routeBody.append(element('p','note','当前可用连接以步行为宜；可重新选择目的地或等待实际载具恢复。'));
+    }
+    const recorded=state.journey;
+    if(recorded?.targetId&&recorded.lastArrival)routeBody.append(field('最近真实到站',`${this.world.nodes.find(n=>n.id===recorded.lastArrival!.nodeId)?.name??recorded.lastArrival.nodeId} · ${recorded.lastArrival.vehicleId}`));
+    if(recorded?.vehicleId)routeBody.append(field('当前实际乘坐',`${recorded.vehicleId} · 下一站 ${this.world.nodes.find(n=>n.id===recorded.nextStopNodeId)?.name??'查询中'}`));
+    const journey = view.journey, guide = this.ref('walking-guide'); guide.replaceChildren();
+    if (journey && !state.player.vehicleId) {
+      guide.append(field('步行目的地',journey.destination.name),element('p','note',`道路与桥面路线 ${Math.round(journey.metres)} 米；需自行步行，或到真实站点购票换乘。`));
+      if (journey.stairsFromFloor !== null && view.inside) guide.append(element('p','note','请在楼梯处按 E 回到一层，再沿门口道路出发。'));
+      let nearest=0; for(let i=1;i<journey.points.length;i++)if(spatialDistance(view.position,journey.points[i])<spatialDistance(view.position,journey.points[nearest]))nearest=i;
+      const waypoints=element('ol','event-list');let arc=0,count=0;
+      for(let i=nearest+1;i<journey.points.length&&count<4;i++){
+        arc+=spatialDistance(journey.points[i-1],journey.points[i]); if(arc<40&&i!==journey.points.length-1)continue;
+        const p=journey.points[i], item=element('li');item.dataset.waypoint=String(i);item.dataset.x=String(p.x);item.dataset.y=String(p.y);item.dataset.z=String(p.z);
+        item.append(element('p','',`${i===journey.points.length-1?'目的地入口':'沿金线继续'} · 约 ${Math.round(spatialDistance(view.position,p))} 米`));waypoints.append(item);arc=0;count++;
+      }
+      guide.append(waypoints);
+    }
+    const stopId=this.ref<HTMLSelectElement>('departure-stop').value||route?.legs.find(l=>l.mode!=='walk')?.fromNodeId||this.world.nodes.filter(n=>n.station).sort((a,b)=>spatialDistance(view.position,a.position)-spatialDistance(view.position,b.position))[0]?.id;
+    const departures = publicDepartures(this.world,state,stopId).slice(0,12);
+    const timetableClock=(minute:number)=>`第 ${Math.floor(minute/1440)+1} 日 ${clock((minute%1440)/60)}`;
+    this.ref('departures').replaceChildren(...departures.map(departure => {
       const row = element('div', 'departure-row');
-      row.append(element('strong', '', modeNames[vehicle.kind]), element('span', '', `${node?.name ?? '城际'} · ${activity(vehicle.state)}`), element('small', '', `${vehicle.passengers} 人`)); return row;
+      row.append(element('strong', '', `${modeNames[departure.mode]} · ${departure.vehicleId}`),element('span', '',`${departure.from.name} → ${departure.to.name}`),element('small', '',departure.reason??(departure.departed?`${activity(departure.state)} · 预计到站 ${departure.arrivalAt===null?'待确认':timetableClock(departure.arrivalAt)}`:`发车 ${departure.departureAt===null?'待确认':timetableClock(departure.departureAt)} · ${departure.passengers} 人`))); return row;
     }));
+    if(!departures.length)this.ref('departures').append(element('p','note','当前停靠点没有可确认的载具班次，请查看其他站点。'));
     const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId);
-    if (vehicle) this.ref('current-vehicle').replaceChildren(field(modeNames[vehicle.kind], `${vehicle.passengers} 人 · ${activity(vehicle.state)}`), commandButton('下车 / 下船', 'leaveVehicle', vehicle.id));
-    else this.ref('current-vehicle').replaceChildren(element('p', 'note', '尚未乘坐。接近站点或载具，步行视角可购票上车。'));
+    const current = this.ref('current-vehicle'), leave = current.querySelector<HTMLButtonElement>('[data-command="leaveVehicle"]');
+    if (vehicle) {
+      if (leave?.dataset.target !== vehicle.id) current.replaceChildren(field(modeNames[vehicle.kind], ''),commandButton('下车 / 下船','leaveVehicle',vehicle.id));
+      current.querySelector('strong')!.textContent = `${vehicle.passengers} 人 · ${activity(vehicle.state)}`;
+    } else if (leave || !current.childElementCount) current.replaceChildren(element('p','note','尚未乘坐。接近站点或载具，步行视角可购票上车。'));
     const canSignal = view.mode === 'walk' && this.hasRole('police', 'mayor');
     for (const button of this.root.querySelectorAll<HTMLButtonElement>('[data-action="signal"]')) button.disabled = !canSignal;
   }
@@ -803,14 +976,20 @@ export class CityUI {
     this.root.classList.toggle('has-context', available.length > 0);
     if (!available.length) { this.contextSignature = ''; return; }
     if (!available.includes(this.contextKind)) this.contextKind = available[0];
+    const tabs=this.ref('context-tabs'),existingTabs=new Map(Array.from(tabs.querySelectorAll<HTMLButtonElement>('[data-context]')).map(button=>[button.dataset.context!,button]));
+    for(const kind of available){let button=existingTabs.get(kind);if(!button){button=element('button');button.type='button';button.dataset.context=kind;tabs.append(button);}const label=kind==='building'?'场所':kind==='citizen'?'居民':kind==='aircraft'?'航空器':'载具';if(button.textContent!==label)button.textContent=label;button.classList.toggle('selected',kind===this.contextKind);button.setAttribute('aria-pressed',String(kind===this.contextKind));}
+    for(const [kind,button]of existingTabs)if(!available.includes(kind as ContextKind))button.remove();
+
     const building = view.nearbyBuilding;
-    const citizen = view.nearbyCitizen;
-    const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId) ?? view.nearbyVehicle;
+    const citizen = this.contextKind === 'citizen' ? view.nearbyCitizen : null;
+    const vehicle = this.contextKind === 'vehicle' ? state.vehicles.find(v => v.id === state.player.vehicleId) ?? view.nearbyVehicle : null;
     const aircraft = state.aviation?.aircraft.find(a => a.id === state.aviation?.activeAircraftId) ?? view.nearbyAircraft;
     const shop = state.shops.find(s => s.buildingId === building?.id);
     const rel = state.relationships.find(r => r.npcId === citizen?.id);
     const floor = building && view.inside ? Math.floor((state.player.position.y - building.position.y) / (building.height / building.floors)) : 0;
-    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player].join('|');
+    const job = state.playerLabor?.job;
+    const clinicalSignature = state.clinical?.orders.filter(order => order.payerId === 'player' || order.patientId === 'player' || order.patientId === citizen?.id).map(order => [order.id, order.state, Math.floor(order.workedMinutes * 10), order.escrow, order.purchasePaid, order.serviceFee, order.refunded, order.reservedUnits, order.consumedUnits, order.lastReason].join(':')).join(';');
+    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health].join('|');
     if (signature === this.contextSignature) return;
     const focused = document.activeElement;
     if ((focused instanceof HTMLInputElement || focused instanceof HTMLSelectElement) && this.ref('context').contains(focused) && signature.split('|').slice(0, 6).join('|') === this.contextSignature.split('|').slice(0, 6).join('|')) return;
@@ -818,11 +997,7 @@ export class CityUI {
     const previousDetails = [...this.ref('context').querySelectorAll('details')].map(detail => detail.open);
     const summaryIndex = [...this.ref('context').querySelectorAll('summary')].indexOf(focused as HTMLElement);
     this.contextSignature = signature;
-    this.ref('context-tabs').replaceChildren(...available.map(kind => {
-      const button = element('button', kind === this.contextKind ? 'selected' : '', kind === 'building' ? '场所' : kind === 'citizen' ? '居民' : '载具');
-      button.type = 'button'; button.dataset.context = kind; button.setAttribute('aria-pressed', String(kind === this.contextKind)); return button;
-    }));
-    const body = this.ref('context-body'); body.replaceChildren();
+    const body = element('div');
     const walk = this.canAct();
     if (this.contextKind === 'aircraft' && aircraft) {
       body.append(this.aircraftContent(aircraft));
@@ -835,7 +1010,9 @@ export class CityUI {
       const controls = element('div', 'button-grid context-actions');
       this.buildingActions(controls, building, !walk);
       if (controls.childElementCount) body.append(controls);
-      if (shop) body.append(element('p', 'note', `食物 ${money(shop.price)} · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`));
+      if (state.playerLabor?.job) body.append(this.laborContent());
+      if (building.kind === 'clinic') body.append(this.clinicalContent());
+      if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
       if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
       if (building.kind === 'bank') this.renderBank(body, building, !walk);
       if (building.kind === 'school') body.append(element('p', 'note', '先学习，再选择职业考核。学习提高教育，工作积累经验。'));
@@ -877,7 +1054,7 @@ export class CityUI {
         more.append(element('p', 'note', `调解需 ${reconcileCost} 云币，间隔 60 分钟；${rank >= 3 && remaining ? `重大争执后还需 ${remaining} 分钟平复。` : '关系修复随信任与后续相处逐步发生。'}${rank >= 4 ? '重度敌对需至少两次调解，24 小时没有新冲突且好感、信任恢复，才会逐步缓和。' : ''}`));
       }
       body.append(more);
-      if (this.atKind('clinic')) body.append(commandButton('协助就医 · 30 云币', 'heal', citizen.id, undefined, !walk || state.player.money < 30));
+      if (this.atKind('clinic')) body.append(commandButton('协助登记诊疗 · 30 云币托管', 'heal', citizen.id, undefined, !this.canStartTreatment(citizen.id)), this.clinicalContent(citizen.id));
       if (this.hasRole('mayor') && this.atKind('hall', 'core')) {
         const publicActions = element('details', 'relationship-choices'); publicActions.append(element('summary', '', '公务任命 · 公共金库支出 100'));
         const options = element('div', 'button-grid context-actions');
@@ -896,6 +1073,7 @@ export class CityUI {
       }
       body.append(controls, element('p', 'note', state.player.vehicleId && state.player.inventory.driving === 1 ? 'W / S 油门与减速 · A / D 路口转向 · 空格刹车。抵达停靠点后可下车。' : state.player.vehicleId ? '玩家随真实载具前行；抵达站点并停稳后，可下车继续游览。' : '候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。'));
     }
+    reconcileContent(this.ref('context-body'), body);
     [...this.ref('context').querySelectorAll('details')].forEach((detail, index) => { detail.open = previousDetails[index] ?? false; });
     if (focusData && focused && !focused.isConnected) {
       const replacement = [...this.ref('context').querySelectorAll<HTMLButtonElement>('button')].find(button => Object.entries(focusData).every(([key, value]) => button.dataset[key] === value));
@@ -906,9 +1084,18 @@ export class CityUI {
   private buildingActions(controls: HTMLElement, building: Building, disabled: boolean): void {
     const role = this.state!.player.role;
     const kind = building.kind;
+    const shop = this.state!.shops.find(shop => shop.buildingId === building.id);
     if (kind === 'home') controls.append(commandButton('租住 · 80 云币', 'rent', building.id, undefined, disabled), commandButton('休息', 'rest', building.id, undefined, disabled));
-    if (kind === 'market') controls.append(commandButton('购买食物', 'purchase', building.id, undefined, disabled), commandButton('临工 / 经营', 'work', building.id, undefined, disabled));
-    if (['workshop', 'farm', 'dock'].includes(kind)) controls.append(commandButton('开始工作', 'work', building.id, undefined, disabled));
+    if (shop && ['market', 'farm', 'dock', 'workshop'].includes(kind)) {
+      const materials = kind === 'workshop';
+      controls.append(commandButton(materials ? `购买工业物料 · ${money(shop.price)}` : `购餐，吃 1 份 · ${money(shop.price)}`, 'purchase', building.id, 1, disabled || !shop.open || shop.inventory < 1 || this.state!.player.money < shop.price));
+      if (!materials) {
+        const carry = element('button', 'action-button', `购餐并带 1 份 · ${money(shop.price * 2)}`); carry.type = 'button'; carry.dataset.action = 'purchase-carry'; carry.dataset.target = building.id;
+        carry.disabled = disabled || !shop.open || shop.inventory < 2 || this.state!.player.money < shop.price * 2; controls.append(carry);
+      }
+    }
+    if (kind === 'market') controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, disabled || !!this.state!.playerLabor?.job));
+    if (['workshop', 'farm', 'dock'].includes(kind)) controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, disabled || !!this.state!.playerLabor?.job));
     if (['market', 'workshop'].includes(kind) && !building.facility && this.state!.shops.some(shop => shop.buildingId === building.id) && this.hasRole('merchant')) controls.append(commandButton('承包商铺 · 300 云币', 'business', building.id, undefined, disabled));
     if (kind === 'school') controls.append(commandButton('学习 · 40 云币', 'exam', 'study', undefined, disabled), commandButton('教师考核 · 80 云币', 'exam', 'teacher', 3, disabled));
     if (kind === 'police') controls.append(commandButton('警察考核 · 80 云币', 'exam', 'police', 1, disabled), commandButton('卫士考核 · 80 云币', 'exam', 'soldier', 2, disabled));
@@ -924,8 +1111,9 @@ export class CityUI {
     if (building.facility === 'data' || kind === 'school' || kind === 'core') {
       const research = element('button', 'action-button', '产业与科研'); research.type = 'button'; research.dataset.action = 'industry'; controls.append(research);
     }
-    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) controls.append(commandButton('履行职务', 'work', building.id, undefined, disabled));
+    if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) controls.append(commandButton(playerLaborLabel(this.state!), 'work', building.id, undefined, disabled || !!this.state!.playerLabor?.job));
     if (['pavilion', 'clinic', 'station'].includes(kind)) controls.append(commandButton('休息片刻', 'rest', building.id, undefined, disabled));
+    if (kind === 'clinic') controls.append(commandButton('登记诊疗 · 30 云币托管', 'heal', 'player', undefined, !this.canStartTreatment()));
     if (kind === 'core' || building.facility === 'energy') controls.append(commandButton('维修水能 · 100 云币', 'energy', building.id, 20, disabled || !this.hasRole('mayor', 'driver', 'soldier', 'scientist', 'official')));
     if (kind === 'police' && this.hasRole('police', 'soldier')) {
       const crime = this.state!.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, this.state!.player.position) <= 40).sort((a, b) => spatialDistance(a.position, this.state!.player.position) - spatialDistance(b.position, this.state!.player.position))[0];
@@ -942,14 +1130,63 @@ export class CityUI {
       controls.append(remove);
     }
   }
+  private clinicalContent(patientId = 'player'): HTMLElement {
+    const body = element('div', 'clinical-orders'), state = this.state!;
+    const nearby = this.view?.nearbyBuilding;
+    if (nearby?.kind === 'clinic') {
+      const doctors = state.citizens.filter(doctor => doctor.workId === nearby.id && ['医生', 'doctor'].includes(doctor.role) && state.extension?.actorProfiles[doctor.id]?.alive && (state.extension.actorProfiles[doctor.id]?.age ?? 0) >= 18);
+      body.append(field('本诊所真实任职成年医生', `${doctors.length} 人`), element('p', 'note', doctors.length ? '诊疗还需医生实际出勤与患者共同在场；任职名单不等于正在接诊。' : '本诊所尚无任职的成年医生，当前无法承诺诊疗。'));
+    }
+    const orders = (state.clinical?.orders ?? []).filter(order => order.payerId === 'player' || order.patientId === 'player' || order.patientId === patientId).slice(-6).reverse();
+    if (!orders.length) { body.append(element('p', 'note', '暂无个人诊疗订单。30 云币先进入托管，实际采购和诊疗才会结算。')); return body; }
+    const names = { awaitingSupply: '等待真实材料供货', awaitingDoctor: '等待医生与患者实际在场', inTreatment: '现场诊疗中', refundPending: '退款仍在托管，等待钱包容量', completed: '诊疗已完成', cancelled: '诊疗已取消' };
+    for (const order of orders) {
+      const card = element('article', 'company-card'), patient = order.patientId === 'player' ? '自己' : state.citizens.find(person => person.id === order.patientId)?.name ?? order.patientId;
+      card.dataset.clinicalOrder = order.id;
+      card.append(element('strong', '', `${patient} · ${names[order.state]}`), field('真实诊疗场所', this.world.buildings.find(site => site.id === order.siteId)?.name ?? order.siteId), field('医患共同现场时间', `${Math.floor(order.workedMinutes * 10) / 10} / ${order.requiredMinutes} 分钟`), field('剩余托管款 / 已实付材料', `${money(order.escrow)} / ${money(order.purchasePaid)}`), field('已赚取服务费 / 已退款', `${money(order.serviceFee)} / ${money(order.refunded)}`), field('保留材料 / 已耗用材料', `${order.reservedUnits} / ${order.consumedUnits} 份`), element('p', 'note', order.lastReason));
+      for (const [doctorId, minutes] of Object.entries(order.staffMinutes)) card.append(field('真实出勤医生', `${state.citizens.find(person => person.id === doctorId)?.name ?? doctorId} · ${Math.floor(minutes * 10) / 10} 分钟`));
+      for (const receipt of order.receipts) for (const lot of receipt.lots) {
+        const shop = state.shops.find(shop => shop.id === lot.shopId), supplier = this.world.buildings.find(site => site.id === shop?.buildingId);
+        card.append(field('实际采购回执', `${supplier?.name ?? lot.shopId} · ${lot.quantity} 份 × ${money(lot.unitPrice)} · 实付 ${money(lot.gross)}`));
+      }
+      if (order.payerId === 'player' && !['completed', 'cancelled'].includes(order.state) && order.cancelledAt === null) card.append(commandButton('取消诊疗，退回未赚托管款', 'cancelTreatment', order.id, undefined, !this.canAct()), element('p', 'note', '已经支付的材料费用不退，未用物料留在诊所，后续订单可实际复用。'));
+      body.append(card);
+    }
+    return body;
+  }
+  private laborContent(): HTMLElement {
+    const content = element('div', 'player-labor-card'), state = this.state!, labor = state.playerLabor;
+    const job = labor?.job ?? labor?.history.at(-1);
+    if (!job) { content.append(element('p', 'note', '亲自到工作场所开始 60 分钟工班。工资由雇主真实现金托管，按现场劳动结算；离场、夜间或身体需要照料时暂停。')); return content; }
+    const site = this.world.buildings.find(building => building.id === job.siteId);
+    const names = { working: '现场劳动中', paused: '工班暂停', refundPending: '未赚工资等待原雇主接收', completed: '工班已完成', cancelled: '工班已取消' };
+    content.append(field(names[job.status], site?.name ?? job.siteId), field('实际现场劳动', `${Math.floor(job.workedMinutes * 10) / 10} / ${job.requiredMinutes} 分钟`), field('已结算税前工资 / 未赚取托管工资', `${money(job.paidGross)} / ${money(job.escrow)}`));
+    content.append(field('已实际到手净薪 / 已实际缴税', `${money(job.paidNet)} / ${money(job.paidTax)}`));
+    if (job.refundedGross > 0) content.append(field('已原额退回雇主', money(job.refundedGross)));
+    if (job.pauseReason) content.append(element('p', 'note', job.pauseReason));
+    if (labor?.job) content.append(commandButton('结束工班并退回未赚取工资', 'cancelWork', undefined, undefined, job.status === 'refundPending'));
+    content.append(element('p', 'note', '托管余额尚未赚取，不能当作随身资产。税费按实际工资结算；改变显示时刻不会完成劳动。'));
+    return content;
+  }
   private renderBank(body: HTMLElement, building: Building, disabled: boolean): void {
     body.append(field('钱庄存款', money(this.state!.bankBalance)), field('借贷余额', money(this.state!.loan)));
+    const bank = this.state!.banking;
+    if (bank) {
+      const accounts=Object.values(bank.accounts),account=bank.accounts.player,sheet=bankingBalanceSheet(bank);
+      body.append(field('银行实际资金池',money(bank.cash)),field('存款债权 / 贷款本金债权',`${money(accounts.reduce((n,a)=>n+a.deposits,0))} / ${money(accounts.reduce((n,a)=>n+a.loanPrincipal,0))}`),field('准备金 / 当前可贷款现金',`${money(bankingReserveRequired(bank))} / ${money(bankingAvailableLoanCash(bank))}`),field('我的贷款本金 / 贷款利息',`${money(account?.loanPrincipal??0)} / ${money(account?.loanInterest??0)}`),field('我的待付存款利息',money(account?.interestDue??0)),field('实收贷款息可分配余额',money(bank.profitAvailable)));
+      body.append(field('实际资产 / 负债 / 净值',`${money(sheet.assets)} / ${money(sheet.liabilities)} / ${money(sheet.equity)}`),field('贷款利息应收 / 存息应付',`${money(sheet.loanInterestReceivable)} / ${money(sheet.interestPayable)}`));
+      body.append(element('p','note','银行资金池来自实际现场存款。准备金保留后才能放贷；存息由实收贷款利息利润支付，债权金额不会自动成为现金。'));
+      if(bank.legacyInvestmentPrincipal>0)body.append(field('旧投资本金 / 实际保管现金',`${money(sheet.legacyEscrowClaims)} / ${money(sheet.legacyEscrowAssets)}`),commandButton('兑回旧投资本金', 'redeemLegacyInvestment', building.id, Math.min(this.bankAmount,bank.legacyInvestmentPrincipal), disabled));
+      const receipts=element('details','relationship-choices');receipts.append(element('summary','', '我的最近银行回执'));
+      for(const receipt of bank.receipts.filter(r=>r.actorId==='player').slice(-5).reverse())receipts.append(field(`${receipt.id} · ${receipt.kind}`,money(receipt.amount)),element('p','note',`资金池 ${money(receipt.cashBefore)} → ${money(receipt.cashAfter)}；本金 ${money(receipt.principal)}，利息 ${money(receipt.interest)}。`));
+      body.append(receipts);
+    }
     const label = element('label', 'field-label', '业务金额'); label.htmlFor = 'bank-amount';
     const amount = element('select'); amount.id = 'bank-amount'; amount.setAttribute('aria-label', '钱庄业务金额');
     for (const value of [100, 300, 1000]) { const option = element('option', '', money(value)); option.value = String(value); amount.append(option); }
     amount.value = String(this.bankAmount);
     const controls = element('div', 'button-grid context-actions');
-    for (const [labelText, type] of [['存入', 'deposit'], ['取出', 'withdraw'], ['申请贷款', 'loan'], ['偿还借贷', 'repay'], ['投资', 'invest']] as const) {
+    for (const [labelText, type] of [['存入', 'deposit'], ['取出', 'withdraw'], ['申请贷款', 'loan'], ['偿还借贷', 'repay'], ['代购上市股票', 'invest']] as const) {
       const button = element('button', 'action-button', labelText); button.type = 'button'; button.dataset.action = 'bank'; button.dataset.bank = type; button.dataset.target = building.id; button.disabled = disabled; controls.append(button);
     }
     body.append(label, amount, controls);

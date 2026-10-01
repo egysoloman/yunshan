@@ -1,0 +1,51 @@
+{
+  "scope": "Read-only native download record and browser source manifest subset; no browser profile data copied.",
+  "browserRunManifestSource": "/workspace/yunshan/artifacts/phase2-player-journey-r6/run-manifest.json",
+  "browserRunManifestSHA256": "b2821a5663479dfaf9095c5dd77adb98968413f16d63d3baa8ff1e80a6e2650c",
+  "browserRunStartedAt": "2026-10-01T21:53:14.110375+00:00",
+  "sourceSnapshot": "/tmp/yunshan-phase2-root-coherent-02",
+  "source81HashesMatchIndependentCPUCopy": true,
+  "fileCount": 81,
+  "entry": "/assets/index-BZMcZl-r.js",
+  "entrySHA256": "d4f43364e7f5bb52bdb18b7c9e1445714361e858cfb18be0b2f2c2387d9309ba",
+  "normalSettings": {
+    "viewport": [
+      800,
+      600
+    ],
+    "quality": "low",
+    "renderDistance": 900
+  },
+  "publicResumeExportRecord": {
+    "name": "resume-export",
+    "at": "2026-10-01T21:54:06.081Z",
+    "stage": "resume",
+    "coordinates": {
+      "x": -445,
+      "y": 43,
+      "z": 550
+    },
+    "district": "千灯市集",
+    "clock": "14:45",
+    "day": "第 1 日",
+    "mode": "星际旅行者",
+    "location": "重峦之间，街巷与轨道连接一城生息。",
+    "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+    "toast": "存档已导出，保留该文件即可跨浏览器恢复。",
+    "wallet": "509.16 云币",
+    "identities": "星际旅行者",
+    "home": "居于 千灯市集·灯市街·里居6",
+    "growth": "教育0工作经验0",
+    "render": "0 FPS · 572 draw",
+    "needs": "饱腹96精力100社交65娱乐78",
+    "petitions": "",
+    "exportedPath": "/workspace/yunshan/artifacts/phase2-player-journey-r6/resume-ui-export.json",
+    "exportBytes": 1798521,
+    "exportSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+    "suggestedFilename": "yunshan-day-0.json",
+    "scope": "Actual native UI export preserved for independent read-only world/continuation review; this harness does not edit or import the downloaded JSON."
+  },
+  "browserResultsSource": "/workspace/yunshan/artifacts/phase2-player-journey-r6/results.json",
+  "browserResultsAtReadSHA256": "0d123a086b7db18fcc994a18600b9662171eba29fef9f1bd223d2e119fd13d6b",
+  "warning": "Browser results may later acquire later ordinary journey records; this archived subset describes the actual prior export only."
+}

@@ -1,0 +1,49 @@
+{
+  "archivedAt": "2026-10-01T20:10:58.451Z",
+  "scope": "Before clinical schema and clinical partition changes; raw evidence retained without rewriting results.",
+  "counts": {
+    "persistence": "23/23",
+    "trade": "18/18",
+    "architectureDetail": "9/9",
+    "chunkResidency": "9/9"
+  },
+  "provenance": {
+    "persistence": {
+      "at": "2026-10-01T18:36:39.454Z",
+      "changedTrackedSources": [
+        "src/simulation.ts"
+      ],
+      "environment": "Linux Chromium real IndexedDB, Vite source modules; no WebGL renderer"
+    },
+    "trade": {
+      "at": "2026-10-01T18:54:02.064Z",
+      "changedTrackedSources": [],
+      "environment": "Node real Simulation commands, attendance accounting, onsite employer review and commerce stage; no WebGL"
+    },
+    "chunkResidency": {
+      "at": "2026-10-01T18:50:35.061Z",
+      "changedTrackedSources": [],
+      "environment": "Node Three.js actual geometry/instance disposal and far matrices; no WebGL or renderer integration claim"
+    }
+  },
+  "limits": [
+    "Persistence run had concurrent src/simulation.ts changes; it is not a full frozen-source acceptance.",
+    "Architecture log does not record dependency hashes; renderer roof profile source was coordinated separately.",
+    "Chunk residency uses real Three.js resources and fixed far matrices in Node; production renderer hook and WebGL verification belong to the renderer owner.",
+    "Main simulation import remains complete-state restoration; statistical distant simulation is not implemented."
+  ],
+  "priorFailure": {
+    "file": "trade-legacy-diagnostic.log",
+    "cause": "A modern module-manifest fixture removed the trade body and wrongly expected legacy acceptance. Final test retains atomic rejection and uses a legitimate pre-manifest, non-consigned legacy fixture."
+  },
+  "sha256": {
+    "persistence-tests.log": "94b8ee04b283c28f827a183815171b3d81e9fa580b3bb541f662a52dc6c74d79",
+    "persistence-results.json": "163e19e7b05701e0700414cce507882f7c96cb16ea3d53c6ca6dbbf60a88f062",
+    "trade-tests.log": "85e7033d3f0b07dfb70283cb0f994c36f9d743921aa7438dbff8743ec5567e63",
+    "trade-results.json": "b8795a6b98f75383beec83b06a600451ddf7997e36991451e41b82632353ee44",
+    "architecture-detail-tests.log": "1afbd3ee4160646b87676359275a9769978aa3d238b42ac15c61001794521afc",
+    "chunk-residency-tests.log": "7b8f643bd4b1c3b27f0107bf8c8a4b615b183064e1d010c53e65f822a310882c",
+    "chunk-residency-results.json": "7cadb4c994130f3f111b05eee29478e6addb183734d367297fb9daaf1473cb64",
+    "trade-legacy-diagnostic.log": "acfaa0b880968e9074bc871b27a2b229a3b32b39fe10b5f71ce71529e34ac7db"
+  }
+}

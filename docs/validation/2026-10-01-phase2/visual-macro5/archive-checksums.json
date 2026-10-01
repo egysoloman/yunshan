@@ -1,0 +1,118 @@
+{
+  "scope": "All original macro5 artifacts plus actual external wrappers and independent CPU diagnostic scripts; PNG bytes unchanged.",
+  "originalArtifactDirectory": "/workspace/yunshan/artifacts/phase2-visual-macro5",
+  "files": {
+    "bridge-public-road.json": {
+      "bytes": 5914,
+      "sha256": "d14e7155ef48c981dc4e9a5411d96bf6e98d1b854a015c38f2527a4edf83f6f5"
+    },
+    "bridge-public-road.png": {
+      "bytes": 768376,
+      "sha256": "4def53b664d327ff4e285a6eed7909d84d5a6798ea7c4f4cc2decb69c3b43ba0"
+    },
+    "bridge-structure.json": {
+      "bytes": 5669,
+      "sha256": "a358be6931e1e4a42fa43fe27ab2b8a4f59d6017a9239f937a2d2effc332beac"
+    },
+    "bridge-structure.png": {
+      "bytes": 72814,
+      "sha256": "e63c00d4df6b3d7623f0906b118ae9fc7b3b4b08f95a027a3de155afae9d049c"
+    },
+    "bridge-walk-center.json": {
+      "bytes": 5966,
+      "sha256": "7cf957784a596da4bdc351de184ecc031ba06cf5f500c135029949f1d29e5bcf"
+    },
+    "bridge-walk-center.png": {
+      "bytes": 441400,
+      "sha256": "31e2bebbd8d7f43d388ed179e72687c24f4f69eb1f601bb4486789f78ef5bb16"
+    },
+    "capture-results-core-waterfall,market-street,residential-first-person,bridge-structure,bridge-walk-center,bridge-public-road.json": {
+      "bytes": 47463,
+      "sha256": "9c86adf36f971cfe5a09c65f23a50edb7f2d90cf00505c06003283caab79217b"
+    },
+    "capture-wrapper.mjs": {
+      "bytes": 13693,
+      "sha256": "214cbd98199a90f92ed64c2494a98c1fb843c5093bc5e236556cd87c8919f6fb"
+    },
+    "capture.log": {
+      "bytes": 1196,
+      "sha256": "de6d7bca26681e3ab95009db7039cfad980af3514153f5b7e80d57cd778609eb"
+    },
+    "core-triangle-rays-precise.json": {
+      "bytes": 5098,
+      "sha256": "eda4fe434a9cc1e0e3522495406a1aec3aa733bec769ffecdbd5a3a4c8af9e24"
+    },
+    "core-triangle-rays-precise.log": {
+      "bytes": 2364,
+      "sha256": "37252f31329cc3ab3547bb7025fec46cf7b63732dd3d35d6896a6bbc06620d8f"
+    },
+    "core-triangle-rays-precise.mts": {
+      "bytes": 2046,
+      "sha256": "4395592d34d83a66fddb8bb9487e32f0b3988babfd83021473833d100e201cf8"
+    },
+    "core-triangle-rays.json": {
+      "bytes": 7418,
+      "sha256": "5aa7734211953805b5167261da2ea06fd3379f10fa7955bca3b15291d425c911"
+    },
+    "core-triangle-rays.log": {
+      "bytes": 3495,
+      "sha256": "62d7ed418bfb5e378948fbdac31c149fe3de761fd92e2a3cdfdf91327d022a7c"
+    },
+    "core-triangle-rays.mts": {
+      "bytes": 2026,
+      "sha256": "d9ac95a05e381e6c3ba6e67bdd118cee9119a563b750e6ca6bb0e5d3cb9ec959"
+    },
+    "core-waterfall.json": {
+      "bytes": 4217,
+      "sha256": "3d12cbb04c2bf9707efc84c045d19f7af1b5fc162de6ad610c341fad495c1f5c"
+    },
+    "core-waterfall.png": {
+      "bytes": 1398185,
+      "sha256": "a1b84e16e0607c1a8aa55a0fd75ae1f99fd2493ec1bc7063634be21ee73d4576"
+    },
+    "market-street.json": {
+      "bytes": 5300,
+      "sha256": "246dd9f1de523178deb71ddae62c38ef67c39146f86a5a64413ad6ad1d74a4af"
+    },
+    "market-street.png": {
+      "bytes": 510573,
+      "sha256": "93e20d379d61e787c4160321c34f2463b2f1af4b0136c6dc9765f8b638923778"
+    },
+    "npc/npc-adult.png": {
+      "bytes": 400367,
+      "sha256": "116e0c8d46081d9034de09448cd5c7e3007792ce4a2eb52d86152c9e41972ceb"
+    },
+    "npc/npc-elder.png": {
+      "bytes": 336419,
+      "sha256": "743dfccf0223301fa2ecd4ba266214336c3668623443c9d0379fc6ba31a81fc7"
+    },
+    "npc/results.json": {
+      "bytes": 16733,
+      "sha256": "aebfbeac63cd3286041775f1604af0ae503d3e3da6d9c2ccb75b2cf04427ef38"
+    },
+    "npc-capture.log": {
+      "bytes": 5951,
+      "sha256": "c419238e6941902b98ead78367bb05e3aade26a415c46397874c644d6e382bfc"
+    },
+    "npc-wrapper.mjs": {
+      "bytes": 20140,
+      "sha256": "c27c40c729af8f6507eff6d1aa7bf081337136b6c797375190f537a87478957d"
+    },
+    "residential-first-person.json": {
+      "bytes": 5334,
+      "sha256": "71ee8bbad22d8be3201b85b0535a59aefab255001bbb77be000d0628dae4c3a4"
+    },
+    "residential-first-person.png": {
+      "bytes": 460974,
+      "sha256": "29a5d1f67a236caf192d61a1fae41064f29fa0d480f346ac434f12e021b6f9e2"
+    },
+    "run-manifest.json": {
+      "bytes": 2948,
+      "sha256": "43292badf4296d42b3742e839ba9aa4f56c7d500d6b0e9296df1e60e8e70ba19"
+    },
+    "source-snapshot.json": {
+      "bytes": 25046,
+      "sha256": "f3d8ade3c28218896e5dc28368bf62426945ffddc2628f89ad2478fa87e706f3"
+    }
+  }
+}

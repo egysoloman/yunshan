@@ -3,17 +3,31 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createWorld } from '../src/world';
 import { Simulation } from '../src/simulation';
+import { bankingBalanceSheet } from '../src/simulation/banking';
 import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/types';
 
-// One deterministic city, 10,000 fixed ticks at explicit 8x fast-forward.
-// This checks resource flows and elapsed gameplay, not rendering performance.
-const ticks = 10_000;
+// One deterministic generated city; optional longer runs retain the same guards.
+// This measures finite resources and gameplay, not rendering performance.
+const argumentsByName = new Map<string, string>();
+for (let index = 2; index < process.argv.length; index += 2) {
+  const name = process.argv[index], value = process.argv[index + 1];
+  assert.ok(['--days', '--tax-rate', '--police-budget', '--seed', '--out'].includes(name) && value !== undefined && !argumentsByName.has(name), `invalid audit argument ${name}`);
+  argumentsByName.set(name, value);
+}
+const numeric = (name: string, fallback: number, min: number, max: number) => { const value = argumentsByName.has(name) ? Number(argumentsByName.get(name)) : fallback; assert.ok(Number.isFinite(value) && value >= min && value <= max, `invalid ${name}`); return value; };
 const speed = 8;
+const requestedDays = numeric('--days', 10_000 * .25 * speed / 1440, 1, 120);
+const ticks = Math.ceil(requestedDays * 1440 / (.25 * speed));
+const seed = numeric('--seed', 20261001, 1, 4294967295); assert.ok(Number.isInteger(seed));
+const initialPolicy = { taxRate: numeric('--tax-rate', .08, 0, .3), policeBudget: numeric('--police-budget', .3, 0, 1) };
+const artifact = argumentsByName.get('--out') ?? 'artifacts/economy-audit.json';
+assert.ok(/^artifacts\/[a-zA-Z0-9-]+\.json$/.test(artifact), 'audit output must be a named JSON artifact');
 const sourceHash = Object.fromEntries(await Promise.all([
-  'src/simulation.ts', 'src/simulation/extensions.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/aviation.ts', 'src/world.ts', 'src/access.ts',
+  'src/simulation.ts', 'src/simulation/extensions.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/simulation/clinical.ts', 'src/simulation/banking.ts', 'src/simulation/trade.ts', 'src/simulation/player-labor.ts', 'src/simulation/journeys.ts', 'src/journey.ts', 'src/aviation.ts', 'src/world.ts', 'src/access.ts',
 ].map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
-const world = createWorld();
+const world = createWorld(seed);
 const sim = new Simulation(world);
+sim.state.taxRate = initialPolicy.taxRate; sim.state.policeBudget = initialPolicy.policeBudget;
 assert.equal(sim.command({ type: 'speed', value: speed }).ok, true);
 const extension = () => sim.state.extension! as CityExtensionState & {
   runtime: { nextCompanyAt: number; researchJobs: Record<string, {
@@ -23,13 +37,13 @@ const extension = () => sim.state.extension! as CityExtensionState & {
 // Read-only observation of the same persisted accounting queues used by finance.
 // No world, citizen, RNG or bookkeeping values are injected by this audit.
 interface Bookkeeping { taxes: number; operatingCost: number; wages: { citizenId: string; amount: number; shopId?: string | null }[];
-  wageArrears?: { citizenId: string; shopId: string | null; amount: number }[] }
+  wageArrears?: { citizenId: string; shopId: string | null; amount: number }[]; wageAccruals?: { citizenId: string; shopId: string | null; amount: number }[] }
 const core = () => Reflect.get(sim, 'runtime') as Bookkeeping;
 const buildings = new Map(world.buildings.map(building => [building.id, building]));
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const totals = { sales: 0, saleCount: 0, saleTax: 0, fares: 0, payrollPublicRequested: 0,
   payrollPublicPaid: 0, payrollPrivateRequested: 0, payrollPrivate: 0, wageTax: 0, wholesale: 0, wholesaleTax: 0,
-  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, security: 0, financeDelta: 0 };
+  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, civicProcurement: 0, security: 0, financeDelta: 0 };
 const ledger: Record<string, { count: number; amount: number; eventObserved: number }> = {};
 const seenLedger = new WeakSet<LedgerEntry>();
 const deaths: Record<string, unknown>[] = [];
@@ -60,6 +74,7 @@ sim.onEvent('wholesale', event => { totals.wholesale += event.amount ?? 0; total
 sim.onEvent('business-expense', event => { totals.businessExpenses += event.amount ?? 0; });
 sim.onEvent('stored-meal', event => { totals.storedMeals += event.amount ?? 0; });
 sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; assert.ok((event.minutes ?? 0) > 0); });
+sim.onEvent('wage-earned', event => { if (event.shopId) totals.payrollPrivateRequested += event.amount ?? 0; else totals.payrollPublicRequested += event.amount ?? 0; });
 sim.onEvent('wage-paid', event => {
   const paid = event.amount ?? 0;
   if (event.shopId) totals.payrollPrivate += paid;
@@ -67,9 +82,10 @@ sim.onEvent('wage-paid', event => {
   totals.wageTax += paid * sim.state.taxRate;
   assert.ok(paid <= (event.requestedAmount ?? 0) + 1e-7, 'paid wage cannot exceed its actual request');
 });
-sim.onPhase('energy', () => { totals.operationsRequested += core().operatingCost; });
-sim.onEvent('public-procurement', event => { totals.operations += event.amount ?? 0; totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; assert.ok(Math.abs((event.amount ?? 0) - (event.quantity ?? 0) * 4) < 1e-7); });
-for (const eventType of ['security-procurement', 'emergency-procurement', 'medical-procurement']) sim.onEvent(eventType, event => { totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; assert.ok(Math.abs((event.amount ?? 0) - (event.quantity ?? 0) * 4) < 1e-7); });
+sim.onEvent('municipal-operation-accrual', event => { totals.operationsRequested += event.amount ?? 0; });
+sim.onEvent('public-procurement', event => { totals.operations += event.amount ?? 0; totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; assert.ok((event.unitPrice ?? 0) >= 4 && Math.abs((event.amount ?? 0) - (event.quantity ?? 0) * (event.unitPrice ?? 0)) < 1e-7); });
+sim.onEvent('civic-procurement', event => { totals.civicProcurement += event.amount ?? 0; totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; });
+for (const eventType of ['security-procurement', 'emergency-procurement', 'medical-procurement']) sim.onEvent(eventType, event => { totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; assert.ok((event.unitPrice ?? 0) >= 4 && Math.abs((event.amount ?? 0) - (event.quantity ?? 0) * (event.unitPrice ?? 0)) < 1e-7); });
 sim.onPhase('traffic', () => {
   for (const citizen of sim.state.citizens) if (extension().actorProfiles[citizen.id].alive) {
     beforeLife.set(citizen.id, { health: extension().actorProfiles[citizen.id].health,
@@ -91,12 +107,6 @@ sim.onPhase('people', () => {
       foodDistance: food.length ? Math.min(...food.map(shop => distance(citizen.position, buildings.get(shop.buildingId)!.door))) : null });
   }
   beforeFinance = sim.state.treasury;
-  for (const wage of core().wages) {
-    const citizen = sim.state.citizens.find(c => c.id === wage.citizenId)!;
-    const employer = wage.shopId === undefined ? sim.state.shops.find(shop => shop.buildingId === citizen.workId) : sim.state.shops.find(shop => shop.id === wage.shopId);
-    if (employer) totals.payrollPrivateRequested += wage.amount;
-    else totals.payrollPublicRequested += wage.amount;
-  }
 });
 sim.onPhase('commerce', () => {
   if (extension().lastUpdate + 1e-7 < extension().runtime.nextCompanyAt) return;
@@ -145,7 +155,7 @@ sim.onPhase('feedback', () => {
     if (row.account !== 'public') continue;
     const aggregate = ledger[row.purpose] ??= { count: 0, amount: 0, eventObserved: 0 };
     aggregate.count++; aggregate.amount += row.amount;
-    if (row.sourceEvent === 'transit-fare') aggregate.eventObserved += row.amount;
+    if (row.sourceEvent === 'transit-fare' || row.sourceEvent === 'public-payroll-escrow') aggregate.eventObserved += row.amount;
   }
 });
 
@@ -155,8 +165,14 @@ function snapshot() {
   const mean = (list: Citizen[], value: (citizen: Citizen) => number) => list.length ? list.reduce((n, c) => n + value(c), 0) / list.length : 0;
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
+    playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
+    policy: { taxRate: s.taxRate, policeBudget: s.policeBudget }, publicBudget: sim.publicBudgetSnapshot(), publicService: sim.publicServiceCoverage(), privateLabor: sim.privateLaborCoverage(),
+    banking: s.banking ? { balanceSheet: bankingBalanceSheet(s.banking), cash: s.banking.cash, deposits: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.deposits, 0), loans: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.loanPrincipal + account.loanInterest, 0), legacyInvestmentCash: s.banking.legacyInvestmentCash } : null,
+    npcBankDeposits: actors.reduce((sum, citizen) => sum + (s.banking?.accounts[citizen.id]?.deposits ?? 0), 0),
     wageArrears: { public: (core().wageArrears ?? []).filter(owed => owed.shopId === null).reduce((sum, owed) => sum + owed.amount, 0),
-      private: (core().wageArrears ?? []).filter(owed => owed.shopId !== null).reduce((sum, owed) => sum + owed.amount, 0) }, ledger: structuredClone(ledger),
+      private: (core().wageArrears ?? []).filter(owed => owed.shopId !== null).reduce((sum, owed) => sum + owed.amount, 0),
+      publicEarnedNotDue: (core().wageAccruals ?? []).filter(owed => owed.shopId === null).reduce((sum, owed) => sum + owed.amount, 0),
+      privateEarnedNotDue: (core().wageAccruals ?? []).filter(owed => owed.shopId !== null).reduce((sum, owed) => sum + owed.amount, 0) }, ledger: structuredClone(ledger),
     shops: { total: s.shops.length, open: s.shops.filter(shop => shop.open).length,
       belowClosureThreshold: s.shops.filter(shop => shop.profit < -600).length,
       zeroEmployees: s.shops.filter(shop => shop.employees === 0).length,
@@ -172,15 +188,17 @@ function snapshot() {
       storedFood: actors.reduce((sum, c) => sum + (c.food ?? 0), 0),
       byRole: Object.fromEntries([...new Set(actors.map(c => c.role))].map(role => { const group = actors.filter(c => c.role === role); return [role, { count: group.length, money: mean(group, c => c.money), hunger: mean(group, c => c.needs.hunger), health: mean(group, c => e.actorProfiles[c.id].health) }]; })) },
     technologies: e.technologies.map(t => ({ sector: t.sector, level: t.level })),
-    companies: e.companies.map(c => ({ id: c.id, capital: c.capital, profit: c.profit, employees: c.employees })) };
+    companies: e.companies.map(c => { const shop = s.shops.find(shop => shop.buildingId === c.buildingId)!; return { id: c.id, capital: c.capital, profit: c.profit, employees: c.employees, inventory: shop.inventory, wageLiability: sim.shopPayrollDebt(shop), revenue: c.revenue, workId: c.buildingId }; }) };
 }
 function meanShops(profits: number[]) { return profits.length ? profits.reduce((sum, p) => sum + p, 0) / profits.length : 0; }
 function moneySupply() {
   const s = sim.state, e = extension();
-  return s.treasury + core().taxes + s.player.money + s.bankBalance + s.citizens.reduce((sum, c) => sum + c.money, 0)
+  return s.treasury + core().taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + (Reflect.get(sim, 'runtime').investment ?? 0)) + s.citizens.reduce((sum, c) => sum + c.money, 0)
     + s.shops.filter(shop => !e.companies.some(c => c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, c) => sum + c.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0)
-    + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0);
+    + (s.playerLabor?.job?.escrow ?? 0)
+    + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
+    + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0);
 }
 
 try {
@@ -189,25 +207,26 @@ try {
   for (let tick = 0; tick < ticks; tick++) {
     sim.step(.25);
     if (tick % 1000 === 0) sim.setFocus(world.districts[Math.floor(tick / 1000) % world.districts.length].center, tick % 2000 === 0 ? 'walk' : 'drone');
-    if ([1000, 3000, 5000, 7000, ticks].includes(sim.state.tick)) {
+    const dayTicks = 1440 / (.25 * speed);
+    if ([1000, 3000, 5000, 7000, ticks].includes(sim.state.tick) || sim.state.tick % dayTicks === 0) {
       const sample = snapshot(); snapshots.push(sample);
       console.log(JSON.stringify({ tick: sample.tick, day: sample.day, treasury: sample.treasury, npc: sample.npc }));
     }
   }
-  assert.ok(starts.length > 0 && exactResearchDebits > 0);
-  assert.ok(extension().stats.researchCompleted > 0);
-  assert.equal(deaths.length, 0, 'baseline residents must remain alive throughout the audited fourteen-day path');
   // Periodic '城市…' rows summarize earlier movements; adding those again would double-count.
   const explicit = Object.entries(ledger).filter(([purpose]) => !purpose.startsWith('城市')).reduce((sum, [, row]) => sum + row.amount - row.eventObserved, 0);
   const expected = initialTreasury + totals.saleTax + totals.wholesaleTax + totals.procurementTax + totals.businessExpenses + totals.wageTax + totals.fares
-    - totals.payrollPublicPaid - totals.operations - totals.security + explicit - core().taxes;
+    - totals.payrollPublicPaid - totals.operations - totals.security - totals.civicProcurement + explicit - core().taxes - (sim.state.playerLabor?.job?.employer.kind === 'public' ? sim.state.playerLabor.job.escrow : 0);
   reconciliationResidual = expected - sim.state.treasury;
   assert.ok(Math.abs(reconciliationResidual) < 1e-6, `treasury reconciliation residual ${reconciliationResidual}`);
   moneyConservationResidual = initialMoneySupply - moneySupply();
   assert.ok(Math.abs(moneyConservationResidual) < 1e-6, `city cash conservation residual ${moneyConservationResidual}`);
   const debts = snapshot().wageArrears;
-  assert.ok(Math.abs(totals.payrollPrivateRequested - totals.payrollPrivate - debts.private) < 1e-6, 'private earned salaries equal actual payment plus retained worker claims');
-  assert.ok(Math.abs(totals.payrollPublicRequested - totals.payrollPublicPaid - debts.public) < 1e-6, 'public earned salaries equal actual payment plus retained worker claims');
+  assert.ok(Math.abs(totals.payrollPrivateRequested - totals.payrollPrivate - debts.private - debts.privateEarnedNotDue) < 1e-6, 'private earned salaries equal actual payment plus retained worker claims');
+  assert.ok(Math.abs(totals.payrollPublicRequested - totals.payrollPublicPaid - debts.public - debts.publicEarnedNotDue) < 1e-6, 'public earned salaries equal actual payment plus retained worker claims');
+  assert.ok(starts.length > 0 && exactResearchDebits > 0);
+  assert.ok(extension().stats.researchCompleted > 0);
+  assert.equal(deaths.length, 0, `baseline residents must remain alive throughout the audited ${requestedDays}-day path`);
 } catch (error) {
   failure = error instanceof Error ? error.stack ?? error.message : String(error);
   process.exitCode = 1;
@@ -215,9 +234,9 @@ try {
 const endSourceHash = Object.fromEntries(await Promise.all(Object.keys(sourceHash).map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
 if (JSON.stringify(sourceHash) !== JSON.stringify(endSourceHash)) { failure ??= 'Simulation source changed during the audit; rerun after freezing the validated files.'; process.exitCode = 1; }
 await mkdir(new URL('../artifacts/', import.meta.url), { recursive: true });
-await writeFile(new URL('../artifacts/economy-audit.json', import.meta.url), JSON.stringify({
-  status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, ticks: sim.state.tick,
-  scope: 'One actual generated city at explicit 8x fast-forward; no renderer or default-speed performance claim.',
+await writeFile(new URL(`../${artifact}`, import.meta.url), JSON.stringify({
+  status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, seed, requestedDays, initialPolicy, ticks: sim.state.tick,
+  scope: 'One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.',
   elapsedGameMinutes: extension().lastUpdate - initialMinute, totals, ledger, snapshots, deaths, starts,
   researchFunding, exactResearchDebits, researchCompleted: extension().stats.researchCompleted,
   reconciliationResidual, moneyConservationResidual, initialMoneySupply, finalMoneySupply: moneySupply(),
@@ -227,5 +246,5 @@ await writeFile(new URL('../artifacts/economy-audit.json', import.meta.url), JSO
 }, null, 2));
 console.log(JSON.stringify({ status: failure ? 'failed' : 'passed', deaths: deaths.length,
   treasury: sim.state.treasury, researchCompleted: extension().stats.researchCompleted,
-  researchFunding, reconciliationResidual, moneyConservationResidual, artifact: 'artifacts/economy-audit.json' }));
+  researchFunding, reconciliationResidual, moneyConservationResidual, artifact }));
 if (failure) console.error(failure);

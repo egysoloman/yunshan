@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "scope": "Independent read-only third trusted-world generation and fixture decompression/count/finite/header validation; physical samples were actually reevaluated in the archived second fresh process, not repeated here.",
+  "records": [
+    {
+      "seed": 20261001,
+      "fingerprint": "3ae62474",
+      "worldSHA256": "c9f254c958108d097c3cc48fcb2d72e899473b8785e786eface97e128f58b51c",
+      "gzipSHA256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "jsonSHA256": "4aefcebe303a9e23dbfd6d8e91fc47d60e164ca5cf67b7bc18c9dce2629b61ce",
+      "counts": {
+        "buildings": 612,
+        "nodes": 674,
+        "edges": 691,
+        "sampledRoadBridgeEdges": 675,
+        "gridSamples": 841,
+        "doorSamples": 1224,
+        "deckVertices": 10539,
+        "deckMidpoints": 9864,
+        "deckSamples": 20403,
+        "gradeSamples": 9864,
+        "floorSamples": 64,
+        "riverPoints": 9,
+        "waterfallPoints": 4,
+        "waterSamples": 13
+      }
+    },
+    {
+      "seed": 7,
+      "fingerprint": "683b390f",
+      "worldSHA256": "0a19f99be7dca066e8d60c51a7dcd32912a5ed16828e70b1965fb79d3c68aa8d",
+      "gzipSHA256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "jsonSHA256": "2e56dba7e5083934182e116069b00204976b0bb69b3748f7d3b964203da51d67",
+      "counts": {
+        "buildings": 612,
+        "nodes": 674,
+        "edges": 691,
+        "sampledRoadBridgeEdges": 675,
+        "gridSamples": 841,
+        "doorSamples": 1224,
+        "deckVertices": 10411,
+        "deckMidpoints": 9736,
+        "deckSamples": 20147,
+        "gradeSamples": 9736,
+        "floorSamples": 64,
+        "riverPoints": 9,
+        "waterfallPoints": 4,
+        "waterSamples": 13
+      }
+    },
+    {
+      "seed": 2024,
+      "fingerprint": "652f4767",
+      "worldSHA256": "89fae5c1fff17c524b1c66302804e0ba2ad33fd27b603bdf1ded04274898890a",
+      "gzipSHA256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "jsonSHA256": "9ac4a29a5594217f90a8c2971eb408ba0b2d488ed0a158b9457a1ff01fb1a283",
+      "counts": {
+        "buildings": 612,
+        "nodes": 674,
+        "edges": 691,
+        "sampledRoadBridgeEdges": 675,
+        "gridSamples": 841,
+        "doorSamples": 1224,
+        "deckVertices": 10417,
+        "deckMidpoints": 9742,
+        "deckSamples": 20159,
+        "gradeSamples": 9742,
+        "floorSamples": 64,
+        "riverPoints": 9,
+        "waterfallPoints": 4,
+        "waterSamples": 13
+      }
+    }
+  ]
+}

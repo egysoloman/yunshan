@@ -1,0 +1,309 @@
+{
+  "scope": "Read-only first-day replay at four matching original audit prefixes; queries do not mutate exportSave; not another long audit.",
+  "events": [
+    {
+      "tick": 401,
+      "day": 0,
+      "hour": 21.366666666666667,
+      "id": "citizen-191",
+      "districtId": "academy",
+      "wallet": 414.4642719621792,
+      "hunger": 19.64370623850278,
+      "food": 0,
+      "activity": "eat",
+      "state": "moving",
+      "destinationId": "west-b41",
+      "currentDirectDecision": {
+        "activity": "eat",
+        "destinationId": "west-b41"
+      },
+      "foodRouteCount": 109,
+      "advertisedRoutes": 56,
+      "ownDistrictFoodSites": 0,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [
+        {
+          "shopId": "shop-west-b41",
+          "districtId": "west",
+          "stock": 74,
+          "price": 11.498375475631583,
+          "straight": 651.2742045997642,
+          "walking": 779.628143671281
+        },
+        {
+          "shopId": "shop-west-b54",
+          "districtId": "west",
+          "stock": 90,
+          "price": 10.351145028297491,
+          "straight": 576.625093497435,
+          "walking": 783.1857076083752
+        }
+      ],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 402,
+      "day": 0,
+      "hour": 21.4,
+      "id": "citizen-94",
+      "districtId": "core",
+      "wallet": 492.76313441129685,
+      "hunger": 18.563938371697404,
+      "food": 0,
+      "activity": "eat",
+      "state": "moving",
+      "destinationId": "market-b42",
+      "currentDirectDecision": {
+        "activity": "eat",
+        "destinationId": "east-b37"
+      },
+      "foodRouteCount": 109,
+      "advertisedRoutes": 56,
+      "ownDistrictFoodSites": 1,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [
+        {
+          "shopId": "shop-east-b37",
+          "districtId": "east",
+          "stock": 79,
+          "price": 11.044044090942219,
+          "straight": 693.0474379658615,
+          "walking": 1148.8935941226414
+        },
+        {
+          "shopId": "shop-east-b50",
+          "districtId": "east",
+          "stock": 86,
+          "price": 10.588894065927315,
+          "straight": 847.6121086818182,
+          "walking": 1206.166121404256
+        }
+      ],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 404,
+      "day": 0,
+      "hour": 21.466666666666665,
+      "id": "citizen-604",
+      "districtId": "starport",
+      "wallet": 376.3044459122267,
+      "hunger": 19.95946031911295,
+      "food": 0,
+      "activity": "eat",
+      "state": "moving",
+      "destinationId": "summit-b15",
+      "currentDirectDecision": {
+        "activity": "eat",
+        "destinationId": "summit-b15"
+      },
+      "foodRouteCount": 109,
+      "advertisedRoutes": 20,
+      "ownDistrictFoodSites": 0,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [
+        {
+          "shopId": "shop-east-b37",
+          "districtId": "east",
+          "stock": 79,
+          "price": 11.044044090942219,
+          "straight": 868.5498143701318,
+          "walking": 1849.3783903525236
+        },
+        {
+          "shopId": "shop-east-b50",
+          "districtId": "east",
+          "stock": 86,
+          "price": 10.588894065927315,
+          "straight": 569.2652899927939,
+          "walking": 1906.6509176341383
+        }
+      ],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 408,
+      "day": 0,
+      "hour": 21.6,
+      "id": "citizen-456",
+      "districtId": "government",
+      "wallet": 457.66454682862076,
+      "hunger": 18.47102263043631,
+      "food": 0,
+      "activity": "eat",
+      "state": "moving",
+      "destinationId": "summit-b2",
+      "currentDirectDecision": {
+        "activity": "eat",
+        "destinationId": "summit-b2"
+      },
+      "foodRouteCount": 109,
+      "advertisedRoutes": 19,
+      "ownDistrictFoodSites": 0,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [
+        {
+          "shopId": "shop-summit-b2",
+          "districtId": "summit",
+          "stock": 86,
+          "price": 10.66813475106986,
+          "straight": 355.34044758019695,
+          "walking": 609.71526928259
+        },
+        {
+          "shopId": "shop-summit-b8",
+          "districtId": "summit",
+          "stock": 54,
+          "price": 12.609631675972677,
+          "straight": 563.2840456853279,
+          "walking": 839.5962836395422
+        }
+      ],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 436,
+      "day": 0,
+      "hour": 22.533333333333335,
+      "id": "citizen-100",
+      "districtId": "market",
+      "wallet": 436.8756330633527,
+      "hunger": 19.89840063261815,
+      "food": 0,
+      "activity": "rest",
+      "state": "moving",
+      "destinationId": "market-b37",
+      "currentDirectDecision": {
+        "activity": "rest",
+        "destinationId": "market-b37"
+      },
+      "foodRouteCount": 0,
+      "advertisedRoutes": 0,
+      "ownDistrictFoodSites": 38,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 503,
+      "day": 1,
+      "hour": 0.7666666666666667,
+      "id": "citizen-553",
+      "districtId": "west",
+      "wallet": 438.3067907532677,
+      "hunger": 19.7565222985111,
+      "food": 0,
+      "activity": "rest",
+      "state": "sleeping",
+      "destinationId": "west-b66",
+      "currentDirectDecision": {
+        "activity": "rest",
+        "destinationId": "west-b66"
+      },
+      "foodRouteCount": 0,
+      "advertisedRoutes": 0,
+      "ownDistrictFoodSites": 19,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 522,
+      "day": 1,
+      "hour": 1.4,
+      "id": "citizen-266",
+      "districtId": "workshop",
+      "wallet": 291.551717302278,
+      "hunger": 19.89642743710433,
+      "food": 0,
+      "activity": "rest",
+      "state": "sleeping",
+      "destinationId": "workshop-b37",
+      "currentDirectDecision": {
+        "activity": "rest",
+        "destinationId": "workshop-b37"
+      },
+      "foodRouteCount": 0,
+      "advertisedRoutes": 0,
+      "ownDistrictFoodSites": 16,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [],
+      "unchangedByQueries": true
+    },
+    {
+      "tick": 591,
+      "day": 1,
+      "hour": 3.7,
+      "id": "citizen-273",
+      "districtId": "airport",
+      "wallet": 346.29069729239285,
+      "hunger": 18.432228505099197,
+      "food": 0,
+      "activity": "rest",
+      "state": "sleeping",
+      "destinationId": "airport-b3",
+      "currentDirectDecision": {
+        "activity": "rest",
+        "destinationId": "airport-b3"
+      },
+      "foodRouteCount": 0,
+      "advertisedRoutes": 0,
+      "ownDistrictFoodSites": 12,
+      "ownDistrictOpenFood": 0,
+      "nearestFood": [],
+      "unchangedByQueries": true
+    }
+  ],
+  "prefix": [
+    {
+      "tick": 180,
+      "treasury": 79959.31921863399,
+      "energy": 67.59922333048698,
+      "hunger": 64.36982593185337,
+      "stock": 14399.462977449282,
+      "alive": 616
+    },
+    {
+      "tick": 360,
+      "treasury": 71753.8794071006,
+      "energy": 60.476974906372334,
+      "hunger": 69.78334402989434,
+      "stock": 13139.021354851808,
+      "alive": 616
+    },
+    {
+      "tick": 540,
+      "treasury": 71370.47264151639,
+      "energy": 69.63547669501499,
+      "hunger": 53.573756290409406,
+      "stock": 12407.427849160378,
+      "alive": 616
+    },
+    {
+      "tick": 720,
+      "treasury": 71233.59054765174,
+      "energy": 68.91962487446352,
+      "hunger": 49.12793623809934,
+      "stock": 12077.916423482897,
+      "alive": 616
+    }
+  ],
+  "proof": [
+    {
+      "tick": 180,
+      "exact": true
+    },
+    {
+      "tick": 360,
+      "exact": true
+    },
+    {
+      "tick": 540,
+      "exact": true
+    },
+    {
+      "tick": 720,
+      "exact": true
+    }
+  ]
+}

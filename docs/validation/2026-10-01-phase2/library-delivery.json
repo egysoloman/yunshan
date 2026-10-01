@@ -1,0 +1,42 @@
+{
+  "stageCommit": "ee3e7a1ab33050234eca2dfdcf35a4c04ab13941",
+  "status": "failed",
+  "libraryIDs": [],
+  "reason": "Library upload network failed before upload preparation; no attachments delivered",
+  "originalManifest": {
+    "yunshan-ee3e7a1-evidence.zip": {
+      "bytes": 14648833,
+      "sha256": "091281aeac37c01774e2a11985125ba4de782078a48126b7d2785e4bfb174467"
+    },
+    "yunshan-ee3e7a1-memo.md": {
+      "bytes": 51284,
+      "sha256": "baa5d3d19f0e5b5fdc3d51abba220f6f5e2b0d015fc932df15274d59d7586ac2"
+    },
+    "yunshan-ee3e7a1-requirements.md": {
+      "bytes": 11782,
+      "sha256": "4b530c5b2a77f6acae79cd84a33f5e70daa4a365bd7ecdcd4d3bec9c8bb5f20e"
+    },
+    "yunshan-ee3e7a1-review.pdf": {
+      "bytes": 19099405,
+      "sha256": "5ad3d74d6e5bedccd23283055e6928643f5358b696c9c2f960648b3d1a84f556"
+    },
+    "yunshan-ee3e7a1-source.zip": {
+      "bytes": 354039,
+      "sha256": "60eaada92a35044e853f2c28619fbd8587a2499231b973a38963603bc89510d2"
+    },
+    "yunshan-original-references.zip": {
+      "bytes": 13780344,
+      "sha256": "a4baa1c555173141a2df838edfcdbc6c6b48d0d6dd412f94f1343252f780662a"
+    }
+  },
+  "error": "library upload failed: hosted apps tools/list request failed: network",
+  "retry": {
+    "recordedAt": "2026-10-01T20:30:09Z",
+    "method": "unchanged official Library batch helper with the original six-file request",
+    "exitCode": 1,
+    "libraryIDs": [],
+    "error": "library upload failed: hosted apps tools/list request failed: network",
+    "resultsEmpty": true,
+    "manualFallbackUsed": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "at": "2026-10-01T20:50:53.917Z",
+  "environment": "Node real Simulation commands, attendance accounting, onsite employer review and commerce stage; no WebGL",
+  "initialHashes": {
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/clinical.ts": "6c30a61bc410eb299999108b1067e7d30b2eab0b80db64d2f65f65e2896f3d17",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "tests/trade.test.ts": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+    "tests/fixtures/trade-industrial-v1.json": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9"
+  },
+  "finalHashes": {
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/clinical.ts": "6c30a61bc410eb299999108b1067e7d30b2eab0b80db64d2f65f65e2896f3d17",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "tests/trade.test.ts": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+    "tests/fixtures/trade-industrial-v1.json": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9"
+  },
+  "evidence": [
+    {
+      "check": "actual-food-and-ingredient-commands",
+      "buyerSpent": 28,
+      "retailReceived": 13.759999999999998,
+      "supplierReceived": 11.040000000000006,
+      "taxesQueued": 3.2,
+      "cashResidual": 0,
+      "physicalStock": 1,
+      "soldUnits": 3,
+      "consumedFood": 1
+    },
+    {
+      "check": "onsite-funded-shift-production-cost-quote",
+      "laborMinutes": 480,
+      "energy": 56,
+      "quantity": 8.96,
+      "unitPrice": 6.17,
+      "costWindowUnits": 8.96,
+      "earnedLaborCost": 44.16,
+      "actualUtilities": 6.666666666666666,
+      "quoteUnchangedSave": true
+    },
+    {
+      "check": "real-dynamic-wholesale-then-purchase",
+      "purchasedUnits": 8,
+      "purchaseUnitPrice": 6.17,
+      "purchaseGross": 49.36,
+      "soldUnits": 3,
+      "consumerGross": 37.32891428571429,
+      "inventoryCost": 18.509999999999998,
+      "retailProfitChange": 15.83260114285715,
+      "supplierSecondReceipt": 0,
+      "cashResidual": -2.9103830456733704e-11,
+      "remainingStock": 5
+    },
+    {
+      "check": "real-sixty-minute-market-service-work",
+      "startedEscrow": 35,
+      "workedMinutes": 60,
+      "paidGross": 35,
+      "paidNet": 32.199999999999996,
+      "paidTax": 2.799999999999998,
+      "producedUnits": 0,
+      "actualPayments": 240,
+      "actualExpense": 34.99999999999781,
+      "stockChangesAtPayment": 0,
+      "basisUnchangedAtAllPayments": true,
+      "cashResidual": 1.280568540096283e-9
+    },
+    {
+      "check": "actual-v1-industrial-custody-migration",
+      "capturedAt": "2026-10-01T20:34:12.061Z",
+      "originalTradeSha256": "d092910e2bb183efd12626f3a653c5d925f8de5842757e40ff6f99f1212cd888",
+      "lotId": "consignment-1",
+      "frozenUnitPrice": 4,
+      "initialUnits": 4,
+      "migratedUnits": 4,
+      "soldUnits": 1,
+      "returnedUnits": 3,
+      "newIndustrialSupply": 0,
+      "exactModernRoundTrip": true,
+      "exactContinuationTicks": 24,
+      "cashResidual": 0
+    },
+    {
+      "check": "actual-public-material-receipts-producer-demand",
+      "eventTypes": [
+        "public-procurement",
+        "security-procurement",
+        "emergency-procurement",
+        "medical-procurement",
+        "civic-procurement"
+      ],
+      "quantities": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        null,
+        2
+      ],
+      "supplierSoldUnits": 10,
+      "supplierReceived": 36.8,
+      "publicGross": 40,
+      "paidTax": 3.1999999999999984,
+      "extraWholesale": 0,
+      "extraSale": 0,
+      "foodStockUnchanged": 40,
+      "cashResidual": 0
+    }
+  ]
+}

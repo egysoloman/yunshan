@@ -1,0 +1,54 @@
+{
+  "scope": "Read-only default14d audit, no shared source edits; new 30/60d not run. NPC survival guard passes but accessibility and treasury remain unsafe.",
+  "requestedDays": 14,
+  "ticks": 10080,
+  "seed": 20261001,
+  "sourceFileCount": 30,
+  "sourceStable": true,
+  "auditSourceFileCount": 13,
+  "auditStatus": "passed",
+  "NPC": {
+    "total": 616,
+    "alive": 616,
+    "meanHunger": 30.740259740259752,
+    "meanHealth": 86.51246561747098,
+    "poor": 102,
+    "hungryUnder20": 319,
+    "cashRichStarving": 287,
+    "noStoredMeal": 457,
+    "depletedWorkers": 379
+  },
+  "finalTreasury": 11292.468624234414,
+  "moneyResidual": -3.6961864680051804e-08,
+  "fiscalResidual": -4.023968358524144e-08,
+  "food": {
+    "initial": 17954,
+    "newProduction": 2401.9951706233296,
+    "consumed": 11700,
+    "final": 8655.995170623326,
+    "residual": 3.637978807091713e-12,
+    "dailyNew": 171.57108361595212,
+    "idealDailyDemand": 852.9230769230769
+  },
+  "materials": {
+    "initial": 4860,
+    "newProduction": 6482.723506316464,
+    "actualConsumed": 9020.098508884026,
+    "final": 2322.624997432422,
+    "residual": 1.6370904631912708e-11
+  },
+  "access": {
+    "poorWalletForEveryInStockFood": 0,
+    "noStockInOwnDistrict": 275,
+    "noOpenStockInOwnDistrict": 275,
+    "noRouteToAnyAffordableOpenFood": 0,
+    "blockedOnlyBy1200CrossDistrict": 239,
+    "nearestActualAffordableOpenFoodOver500": 282,
+    "nearestActualAffordableOpenFoodOver1000": 280,
+    "nearestActualAffordableOpenFoodOver2500": 255,
+    "currentlyChoosingEat": 57,
+    "otherActivityWithNoAdvertisedFood": 229,
+    "advertisedFoodUnsellable": 0
+  },
+  "emptyFreightCarrierCount": 60
+}

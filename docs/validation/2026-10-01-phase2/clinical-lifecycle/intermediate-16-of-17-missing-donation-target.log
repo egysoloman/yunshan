@@ -1,0 +1,48 @@
+✔ paid care starts with real adult funding and public clinic presence, without instant health (258.635183ms)
+✔ shared clinical geometry respects rotated floor sizes, protected floors and the two-metre entrance (16.007603ms)
+✔ children may receive sponsored care, but their own wallets cannot approve adult treatment funding (195.005855ms)
+✔ available food cannot substitute for exhausted industrial clinical materials (46.383223ms)
+✔ one observed-price material and twenty actual doctor-patient minutes settle conserved cash and health (165.48222ms)
+✔ leaving the clinic pauses attended minutes and a resumed save continues byte-identically (528.732186ms)
+✔ a departed, hungry or deceased physician cannot supply attended work (128.665629ms)
+✔ missing or genuinely unaffordable material waits with escrow and creates no health or stock (159.65983ms)
+✔ cancellation refunds only unused money, retaining purchased stock for exactly one later treatment (148.607372ms)
+✔ unused pre-purchase cancellation transfers the same thirty real coins back exactly once (75.456913ms)
+✔ payer and patient deaths both stop care; sunk material costs remain physical clinic stock (176.221235ms)
+✔ a capped refund stays an auditable escrow obligation until the actual payer can receive it (144.280358ms)
+✔ doctor capacity is shared across public and paid care and each patient gets one simultaneous slot (31.591944ms)
+✔ actual simultaneous paid patients occupy only two slots of one attended doctor (167.253048ms)
+✔ finite receipt, escrow, identity, timing and physical inventory corruption rejects atomically (855.778868ms)
+✔ a real heal command delegates into the same clinical lifecycle and module deletion cannot erase escrow (105.368953ms)
+✖ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (35.905271ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3588.737114
+
+✖ failing tests:
+
+test at tests/clinical.test.ts:1:18371
+✖ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (35.905271ms)
+  AssertionError [ERR_ASSERTION]: 组织不存在。
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/clinical.test.ts:163:142)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

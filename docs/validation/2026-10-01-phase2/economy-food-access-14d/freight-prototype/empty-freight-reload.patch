@@ -1,0 +1,35 @@
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -85,6 +85,7 @@
+   private readonly loadHooks: (() => void)[] = [];
+   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
+   private readonly baselineCitizenIds = new Set<string>();
++  private readonly freightCapacities = new Map<string, number>();
+   private minutes = .25;
+   private employment = new Set<string>();
+   private accrualIndexSource?: WageAccrual[];
+@@ -119,6 +120,7 @@
+       const count = stationRoad ? 2 : 1;
+       for (let i = 0; i < count; i++) { const progress = i / count; this.state.vehicles.push({ id: `vehicle-${e.id}-${i}`, kind: e.mode, position: this.pointOn(e, progress), edgeId: e.id, progress, direction: i % 2 === 0 ? 1 : -1, speed: this.speedFor(e.mode), state: 'waiting', passengers: 0, cargo: e.mode === 'road' && i === 1 ? 28 : e.mode === 'flight' ? 60 : 0, nextDeparture: 8 * 60 + (e.mode === 'flight' ? 20 : i * 3) }); }
+     }
++    for (const vehicle of this.state.vehicles) if (vehicle.cargo > 0) this.freightCapacities.set(vehicle.id, vehicle.kind === 'flight' ? 60 : 28);
+     this.connectSystems();
+     this.updateTiers();
+     this.updateSignals();
+@@ -656,7 +658,15 @@
+           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
+           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
+         }
+-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; const producer = this.state.shops.find(s => s.districtId === node.districtId && ['farm', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && this.shopCommodity(s) === 'food' && s.inventory >= 1); if (producer) { vehicle.cargo = Math.min(producer.inventory, vehicle.kind === 'flight' ? 60 : 28); producer.inventory -= vehicle.cargo; (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id; } }
++        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
++        // Freight capacity is the immutable role of the generated carrier. An
++        // empty truck can pick up again, while passenger buses cannot become
++        // freighters merely because there is stock somewhere in the district.
++        const freightCapacity = this.freightCapacities.get(vehicle.id);
++        if (freightCapacity && vehicle.cargo === 0) {
++          const producer = this.state.shops.find(s => this.shopCommodity(s) === 'food' && ['farm', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && s.inventory >= 1 && this.isNearBuilding(this.buildings.get(s.buildingId)!, node.position, 2));
++          if (producer) { vehicle.cargo = Math.min(producer.inventory, freightCapacity); producer.inventory -= vehicle.cargo; (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id; this.bus.emit({ type: 'cargo-loaded', vehicleId: vehicle.id, nodeId: node.id, shopId: producer.id, districtId: producer.districtId, amount: vehicle.cargo, quantity: vehicle.cargo }); }
++        }
+         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
+         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
+         let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id);

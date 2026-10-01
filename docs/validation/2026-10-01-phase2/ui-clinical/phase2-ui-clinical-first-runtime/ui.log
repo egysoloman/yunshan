@@ -1,0 +1,25 @@
+
+> yunshan-city@0.1.0 test:ui
+> node scripts/ui-test.mjs
+
+8:55:29 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /工班已完成/. Input:
+
+'现场劳动中\n' +
+  '清溪水岸·西溪院·商肆1\n' +
+  '实际现场劳动\n' +
+  '55.2 / 60 分钟\n' +
+  '已结算税前工资 / 未赚取托管工资\n' +
+  '32.22 云币 / 2.77 云币\n' +
+  '已实际到手净薪 / 已实际缴税\n' +
+  '29.65 云币 / 2.57 云币\n' +
+  '结束工班并退回未赚取工资\n' +
+  '\n' +
+  '托管余额尚未赚取，不能当作随身资产。税费按实际工资结算；改变显示时刻不会完成劳动。'
+
+    at file:///tmp/yunshan-ui-clinical-final-1790887996118/scripts/ui-test.mjs:137:9
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

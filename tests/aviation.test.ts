@@ -109,10 +109,21 @@ test('ground charging consumes real cash and time, and cannot be boarded while c
 
 test('legacy saves gain the deterministic parked fleet without changing player cash or position', () => {
   const s = new Simulation(world), legacy = JSON.parse(s.exportSave()); delete legacy.state.aviation;
+  // A genuinely pre-manifest save can gain a module; a current manifest that
+  // declares aviation cannot silently replace a missing persisted fleet.
+  delete legacy.runtime.persistedModules;
   const before = { money: legacy.state.player.money, position: legacy.state.player.position };
   assert.equal(s.importSave(JSON.stringify(legacy)).ok, true);
   assert.equal(s.state.aviation!.aircraft.length, getAviationPads(world).length);
   assert.equal(s.state.player.money, before.money); assert.deepEqual(s.state.player.position, before.position);
+});
+
+test('a current save declaring aviation rejects a missing fleet without replacing state', () => {
+  const s = new Simulation(world), before = s.exportSave(), damaged = JSON.parse(before);
+  assert(damaged.runtime.persistedModules.includes('aviation'));
+  delete damaged.state.aviation;
+  assert.equal(s.importSave(JSON.stringify(damaged)).ok, false);
+  assert.equal(s.exportSave(), before);
 });
 
 test('small irregular worlds outside the nominal square round-trip their own parked fleet for multiple seeds', () => {

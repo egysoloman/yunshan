@@ -1,0 +1,226 @@
+{
+  "name": "core-waterfall",
+  "hour": 12,
+  "eye": [
+    440,
+    325,
+    640
+  ],
+  "target": [
+    210,
+    215,
+    -45
+  ],
+  "drawCalls": 564,
+  "triangles": 574340,
+  "shadowSubmission": {
+    "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+    "colourPass": {
+      "calls": 564,
+      "triangles": 574340
+    },
+    "totalPass": {
+      "calls": 564,
+      "triangles": 574340
+    },
+    "shadowCalls": 0,
+    "shadowTriangles": 0,
+    "pixelRatio": 1
+  },
+  "glErrors": [],
+  "residency": {
+    "stats": {
+      "resident": 0,
+      "total": 482,
+      "created": 11,
+      "released": 11,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 0,
+    "actualMeshes": 0,
+    "actualInstances": 0,
+    "ownedGeometryCount": 0,
+    "interiorBuildingRefs": 0,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [],
+    "observed": {
+      "creates": 0,
+      "releases": 11,
+      "geometryDisposals": 104,
+      "instanceDisposals": 104,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 518,
+      "textures": 4
+    }
+  },
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "usedTimes": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "usedTimes": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "usedTimes": 1,
+      "diagnostics": null
+    }
+  ],
+  "architectureDetail": {
+    "activeBuildings": 0,
+    "activeBuildingIds": [],
+    "instances": 0,
+    "created": 8,
+    "released": 8,
+    "maxBuildings": 8,
+    "maxInstancesPerBuilding": 640,
+    "loadDistance": 180,
+    "lanternEmission": 0.05315558591507113
+  },
+  "terrainLod": {
+    "water": {
+      "continuous": true,
+      "riverVertices": 18,
+      "plungePoolRadius": 50,
+      "waterfallDrop": 153
+    },
+    "woodland": {
+      "stands": 122,
+      "trees": 5200,
+      "canopyLayers": 4,
+      "farCanopyLayers": 2,
+      "distribution": "continuous district rim belts and mountain shoulders",
+      "floatingRockBodies": 0
+    },
+    "lod": {
+      "visibleFineTiles": 0,
+      "cachedFineTiles": 9,
+      "tileMetres": 96,
+      "surfaceStep": 2,
+      "voxelMetres": 0.2,
+      "lowAltitude": false,
+      "proxyStep": 16,
+      "proxyChunkMetres": 384,
+      "forestDetailChunks": 1
+    }
+  },
+  "waterObjects": [
+    "山腰轻云 · 瀑潭水雾",
+    "瀑潭飞沫 · 落水冲击雾",
+    "瀑潭→清溪→水岸 · 共顶点连续水面",
+    "溪岸 · 灰白水蚀石",
+    "溪岸 · 细茎芦苇",
+    "云瀑 · 153m落差水帘",
+    "瀑下潭 · 可见落水与下游接合",
+    "瀑潭 · 体素泡沫"
+  ]
+}

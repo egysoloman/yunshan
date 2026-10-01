@@ -1,0 +1,32 @@
+{
+  "recordedAtUtc": "2026-10-01T20:59:15.480967+00:00",
+  "workspace": "/workspace/yunshan",
+  "head": "ee3e7a1ab33050234eca2dfdcf35a4c04ab13941",
+  "testCommand": "node --import tsx --test --test-isolation=none tests/clinical.test.ts tests/culture.test.ts tests/family.test.ts",
+  "tests": 65,
+  "passed": 65,
+  "failed": 0,
+  "scope": {
+    "clinical": 21,
+    "family": 29,
+    "culture": 15
+  },
+  "strictCommand": "npx tsc --noEmit --pretty false",
+  "strictExit": 0,
+  "evidenceScope": "Live shared workspace targeted validation; immutable full-suite/UI/benchmark are separately owned by root. Source SHA values below were recorded after the successful runs, not claimed as a before-and-after frozen execution.",
+  "sourceSha256": {
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "tests/clinical.test.ts": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+    "tests/culture.test.ts": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+    "tests/family.test.ts": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+    "tests/fixtures/clinical-legacy-heal-ee3e7a1.json": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e"
+  },
+  "legacyGeneratorCommit": "ee3e7a1ab33050234eca2dfdcf35a4c04ab13941"
+}

@@ -1,0 +1,43 @@
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (100.089412ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (59.599736ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (14.750798ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (87.294041ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (84.878199ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (33.964207ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (4.838523ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (16.601563ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (16.280312ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (484.924461ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (1121.453275ms)
+✔ a saved module manifest prevents missing financial custody from being mistaken for a legacy save (361.171639ms)
+✔ paid care starts with real adult funding and public clinic presence, without instant health (224.320207ms)
+✔ one observed-price material and twenty actual doctor-patient minutes settle conserved cash and health (191.778552ms)
+✔ leaving the clinic pauses attended minutes and a resumed save continues byte-identically (617.222606ms)
+✔ a departed, hungry or deceased physician cannot supply attended work (141.410374ms)
+✔ missing or genuinely unaffordable material waits with escrow and creates no health or stock (257.714892ms)
+✔ cancellation refunds only unused money, retaining purchased stock for exactly one later treatment (149.012254ms)
+✔ unused pre-purchase cancellation transfers the same thirty real coins back exactly once (175.553346ms)
+✔ payer and patient deaths both stop care; sunk material costs remain physical clinic stock (204.954234ms)
+✔ a capped refund stays an auditable escrow obligation until the actual payer can receive it (487.302957ms)
+✔ doctor capacity is shared across public and paid care and each patient gets one simultaneous slot (61.599094ms)
+✔ actual simultaneous paid patients occupy only two slots of one attended doctor (1010.255267ms)
+✔ finite receipt, escrow, identity, timing and physical inventory corruption rejects atomically (713.406245ms)
+✔ a real heal command delegates into the same clinical lifecycle and module deletion cannot erase escrow (108.409968ms)
+✔ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (89.559181ms)
+✔ starting work holds funded cash; only sixty actual onsite minutes finish and release wages (842.356451ms)
+✔ leaving and display-time changes pause work; cancellation returns only unearned escrow once (494.00576ms)
+✔ tax changes preserve actual net-pay receipts and the original gross wage (2904.714191ms)
+✔ public work uses protected real treasury escrow, releases earnings and refunds the unused remainder (284.742073ms)
+✔ death preserves earned pay and returns unearned employer funds without inventing inheritance (168.350599ms)
+✔ a half-completed funded job saves and resumes exactly; malformed payroll rejects atomically (1606.306048ms)
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (2201.291743ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (4298.976747ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (8108.021264ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 28772.755891

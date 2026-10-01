@@ -1,0 +1,226 @@
+{
+  "scope": "Immutable full legacy, historical r5, latest v2 and physical v3 authority compatibility",
+  "testsPassed": 9,
+  "testsFailed": 0,
+  "strictTypeScriptExitCode": 0,
+  "sourceSnapshot": "/tmp/yunshan-world-layout-v3-r5-compat-02",
+  "allSnapshotSourcesUnchanged": true,
+  "runtimeSourceHashesUnchanged": true,
+  "evidenceRecords": [
+    {
+      "check": "frozen-current-v2-physical-world",
+      "seed": 20261001,
+      "fingerprint": "cf899fc3",
+      "fullWorldSha256": "84b8b884849245e969c6e95f82bc966b3124a72fc24c995e0627d7422c32ee6d",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10608,
+      "gradeSamples": 9864,
+      "floorSamples": 64,
+      "waterSamples": 13
+    },
+    {
+      "check": "frozen-current-v2-physical-world",
+      "seed": 7,
+      "fingerprint": "92ecc4b4",
+      "fullWorldSha256": "5d4437f6b146d03c4bf52f9c4deacdabf6d38e7880f14b0102a4978bf64a5ebf",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10481,
+      "gradeSamples": 9736,
+      "floorSamples": 64,
+      "waterSamples": 13
+    },
+    {
+      "check": "frozen-current-v2-physical-world",
+      "seed": 2024,
+      "fingerprint": "571566dc",
+      "fullWorldSha256": "f5b6bdb24c4b6b311f159f582963f4e0dca2830f706b1413b64e935e5fe6bc56",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10487,
+      "gradeSamples": 9742,
+      "floorSamples": 64,
+      "waterSamples": 13
+    },
+    {
+      "check": "independently-captured-original-main-physical-world",
+      "seed": 20261001,
+      "fingerprint": "c519111b",
+      "sourceRevisions": [
+        "26f0c69",
+        "ee3e7a1"
+      ],
+      "mainWorldSha256": "6409c4b888dfdd8ca9fb19f479e5b8e37d51596dffcaf6383853a634f520b13b",
+      "checkpointWorldSha256": "6409c4b888dfdd8ca9fb19f479e5b8e37d51596dffcaf6383853a634f520b13b",
+      "legacyJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10502,
+      "maximumObservedDifference": 0
+    },
+    {
+      "check": "independently-captured-original-main-physical-world",
+      "seed": 7,
+      "fingerprint": "f986bae8",
+      "sourceRevisions": [
+        "26f0c69",
+        "ee3e7a1"
+      ],
+      "mainWorldSha256": "4437465aaba42e2d2cc1d4c55560cab4146ab48f291df403147dc6db19e44d06",
+      "checkpointWorldSha256": "4437465aaba42e2d2cc1d4c55560cab4146ab48f291df403147dc6db19e44d06",
+      "legacyJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10360,
+      "maximumObservedDifference": 0
+    },
+    {
+      "check": "independently-captured-original-main-physical-world",
+      "seed": 2024,
+      "fingerprint": "db537ffa",
+      "sourceRevisions": [
+        "26f0c69",
+        "ee3e7a1"
+      ],
+      "mainWorldSha256": "44693a2cfab8032e30adec77f4e52fecc4eaa22e9c3e650d5f52a334772ddebc",
+      "checkpointWorldSha256": "44693a2cfab8032e30adec77f4e52fecc4eaa22e9c3e650d5f52a334772ddebc",
+      "legacyJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10381,
+      "maximumObservedDifference": 0
+    },
+    {
+      "check": "frozen-actual-r5-historical-source-world",
+      "seed": 20261001,
+      "historicalRecipe": "current-v2-r5",
+      "originalLayout": "current-v2",
+      "fingerprint": "c70ebca5",
+      "fullWorldSha256": "762a1b9f34f01f12190312228494668400e2fb0f49b689ac3c1ed0b0071d482b",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10596
+    },
+    {
+      "check": "frozen-actual-r5-historical-source-world",
+      "seed": 7,
+      "historicalRecipe": "current-v2-r5",
+      "originalLayout": "current-v2",
+      "fingerprint": "67f0766",
+      "fullWorldSha256": "089414236ae1ba72b9c0580609b0b27461d6e266d256a7b2a489cecaca271827",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10468
+    },
+    {
+      "check": "frozen-actual-r5-historical-source-world",
+      "seed": 2024,
+      "historicalRecipe": "current-v2-r5",
+      "originalLayout": "current-v2",
+      "fingerprint": "f2262884",
+      "fullWorldSha256": "85a1dd9779d477dc714b6d39b4a2310a5fc1dee073c3f2239915a57f0aec6b64",
+      "completeJsonIdentical": true,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10475
+    },
+    {
+      "check": "v3-real-physical-heightfield-has-distinct-identity",
+      "seed": 20261001,
+      "v2Fingerprint": "cf899fc3",
+      "v3Fingerprint": "3ae62474",
+      "buildingsGraphIdentical": true,
+      "gridSamples": 841,
+      "changedGround": 360,
+      "changedWalking": 360
+    },
+    {
+      "check": "v3-real-physical-heightfield-has-distinct-identity",
+      "seed": 7,
+      "v2Fingerprint": "92ecc4b4",
+      "v3Fingerprint": "683b390f",
+      "buildingsGraphIdentical": true,
+      "gridSamples": 841,
+      "changedGround": 359,
+      "changedWalking": 359
+    },
+    {
+      "check": "v3-real-physical-heightfield-has-distinct-identity",
+      "seed": 2024,
+      "v2Fingerprint": "571566dc",
+      "v3Fingerprint": "652f4767",
+      "buildingsGraphIdentical": true,
+      "gridSamples": 841,
+      "changedGround": 356,
+      "changedWalking": 356
+    },
+    {
+      "check": "actual-v2-full-save-upper-floor-voxel-finance-routes-continuation",
+      "layout": "current-v2",
+      "worldFingerprint": "cf899fc3",
+      "originalPosition": {
+        "x": 430,
+        "y": 449.6,
+        "z": -250
+      },
+      "restoredPosition": {
+        "x": 430,
+        "y": 449.6,
+        "z": -250
+      },
+      "wallet": 600,
+      "treasury": 80020.05119999999,
+      "bankCash": 0,
+      "fullSaveSha256": "3bcb13e02610479e20b8e1979595b7220d1378fe29dae11dd6e81c9287ed3095",
+      "chosenRoutes": 616,
+      "voxelEdits": 1,
+      "exactFullRoundTrip": true,
+      "continuationTicks": 24,
+      "exactFullContinuation": true,
+      "wrongV3ImportAtomicRejected": true,
+      "foreignLabelsIgnored": true
+    },
+    {
+      "check": "actual-v2-full-save-upper-floor-voxel-finance-routes-continuation",
+      "layout": "current-v2-r5",
+      "worldFingerprint": "c70ebca5",
+      "originalPosition": {
+        "x": 430,
+        "y": 449.6,
+        "z": -250
+      },
+      "restoredPosition": {
+        "x": 430,
+        "y": 449.6,
+        "z": -250
+      },
+      "wallet": 600,
+      "treasury": 80020.05119999999,
+      "bankCash": 0,
+      "fullSaveSha256": "75bae9a9b1b17b2a74792f876c7023739741dc6d9dc8966cb9949ccb4128ef04",
+      "chosenRoutes": 616,
+      "voxelEdits": 1,
+      "exactFullRoundTrip": true,
+      "continuationTicks": 24,
+      "exactFullContinuation": true,
+      "wrongV3ImportAtomicRejected": true,
+      "foreignLabelsIgnored": true
+    }
+  ],
+  "limits": [
+    "Actual r5 native browser-profile restore/export is owned by integration and is not asserted in these CPU tests.",
+    "This run used saved-position floor25 with valid save schema; the follow-up public-floor29 target adds an explicit floor-permission precondition without changing production."
+  ],
+  "files": {
+    "world-layout-v3-r5-compat-tsc.log": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+    "world-layout-v3-r5-compat-results.json": "7bc1e8ba90892d18b3c320fd5d787a5d5597d1a74c4ec1f111c8306f05ceae01",
+    "snapshot-manifest.json": "470549cac27560277b4eb94a04177a7182f9e757d3179f7591749e439e4e18ee",
+    "world-layout-v3-r5-compat-tests.log": "18b9e6f676f98e02f1bf746480dd2b864fea569e2329ce555c8299ac2b33bcad"
+  }
+}

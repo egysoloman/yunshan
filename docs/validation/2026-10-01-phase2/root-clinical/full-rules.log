@@ -1,0 +1,513 @@
+
+> yunshan-city@0.1.0 test
+> node --import tsx --test --test-isolation=none tests/*.test.ts
+
+8:36:36 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+✔ civic halls and observation deck remain public while office and underground access require earned permissions (1160.99577ms)
+✔ identity packages accumulate and preserve access across a change of displayed profession (0.29348ms)
+✔ stepped occupied floors use a shared vertical shaft while underground retains its full footprint (1.390755ms)
+✔ near architecture generates no city instances at startup, caps its live budget and releases distant buffers (22.802599ms)
+✔ human-scale facade details leave every generated building south doorway and approach clear (227.018639ms)
+✔ eave details touch the real structural roof rather than creating a second floating roof (208.435179ms)
+✔ the open observation floor stays free of invented window walls (0.478437ms)
+✔ narrow physical plaques retain the full building name and release their own GPU resources (3.086783ms)
+✔ lanterns follow continuous daylight and actual power without adding point lights (1.091574ms)
+✔ high core floors attach their front lattice to the shared narrowed footprint (0.377299ms)
+✔ interior cutaways hide tagged upper decorations and restore them on leaving (3.450144ms)
+✔ pavilions stay open and function signs describe actual building uses (0.432966ms)
+✔ aircraft stands are actual clear city locations beside stations and the airport (7.590081ms)
+✔ remote mode selection cannot rent or board and a real rental transfers cash to public funds (168.610846ms)
+✔ drone flying moves the passenger, uses energy, and requires an actual landing before exiting (2108.371311ms)
+✔ military aircraft checks both accumulated identities and ground weather permission (572.18447ms)
+✔ player flight responds in seconds independently of city speed and respects pause (633.73269ms)
+✔ airborne saves restore identity, passenger and deterministic continuation; bad aircraft references reject atomically (813.167239ms)
+✔ ground charging consumes real cash and time, and cannot be boarded while charging (339.288479ms)
+✔ legacy saves gain the deterministic parked fleet without changing player cash or position (142.462986ms)
+✔ a current save declaring aviation rejects a missing fleet without replacing state (111.539834ms)
+✔ small irregular worlds outside the nominal square round-trip their own parked fleet for multiple seeds (105.4493ms)
+✔ rental and ground charging remain visible receipts while event-based treasury reconciliation counts them once (89.500857ms)
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (17.672315ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (25.216973ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (6.024054ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (24.15178ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (46.218806ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (16.118625ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (3.061479ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (12.302854ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (9.118059ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (228.537782ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (371.859358ms)
+✔ a saved module manifest prevents missing financial custody from being mistaken for a legacy save (197.747057ms)
+✔ building metadata partitions the unchanged authority without allocating any near geometry (10.700503ms)
+✔ actual near resources remain bounded while travel unloads geometry, interior refs and instance buffers (57.415011ms)
+✔ inside priority and every recreated resource preserve the current high-floor room cutaway (4.441065ms)
+✔ shell distance includes real upper and underground floors instead of the ground-center height (0.963658ms)
+✔ real residential door exit keeps its near geometry and every rotated city entrance is covered at low quality (36.869018ms)
+✔ a rotated wide building bounding circle cannot outrank the actual nearby body (0.513386ms)
+✔ a finite exit margin prevents boundary churn and still releases or rebuilds real resources (0.570274ms)
+✔ quality reduction and a new inside chunk evict before allocating, with a strict live capacity (1.277558ms)
+✔ failed creation/publication retains the far silhouette and rolls back owned resources and indices (1.679572ms)
+✔ resident anatomy has real adult stature, quantized solid limbs and stable individual clothing (1.785534ms)
+✔ face ink uses one shared texture instead of eye or mouth boxes on every NPC (0.728196ms)
+✔ elapsed render time and paused simulation never invent walking displacement or advance a step (95.688699ms)
+✔ large crowds stay in two shared draws and far residents omit faces and accessories (114.985987ms)
+✔ actual death renders a low corpse at the same location until the funeral finishes (32.363533ms)
+✔ paid care starts with real adult funding and public clinic presence, without instant health (110.319425ms)
+✔ one observed-price material and twenty actual doctor-patient minutes settle conserved cash and health (148.555676ms)
+✔ leaving the clinic pauses attended minutes and a resumed save continues byte-identically (396.188222ms)
+✔ a departed, hungry or deceased physician cannot supply attended work (103.087823ms)
+✔ missing or genuinely unaffordable material waits with escrow and creates no health or stock (93.169354ms)
+✔ cancellation refunds only unused money, retaining purchased stock for exactly one later treatment (108.007824ms)
+✔ unused pre-purchase cancellation transfers the same thirty real coins back exactly once (45.452179ms)
+✔ payer and patient deaths both stop care; sunk material costs remain physical clinic stock (110.041898ms)
+✔ a capped refund stays an auditable escrow obligation until the actual payer can receive it (85.204243ms)
+✔ doctor capacity is shared across public and paid care and each patient gets one simultaneous slot (38.853571ms)
+✔ actual simultaneous paid patients occupy only two slots of one attended doctor (138.904562ms)
+✔ finite receipt, escrow, identity, timing and physical inventory corruption rejects atomically (457.439088ms)
+✔ a real heal command delegates into the same clinical lifecycle and module deletion cannot erase escrow (69.316184ms)
+✔ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (63.496635ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (3.45931ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.594691ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.012765ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.49634ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.33704ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (0.733372ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (3.931338ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (2.635178ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.493898ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (1361.90705ms)
+✔ creation requires a real public studio, money and text; leaving pauses actual work and save/load resumes it (513.730352ms)
+✔ publication spends actual funds and only completed on-site reading improves residents and author relationships (351.228198ms)
+✔ published works naturally get real readers in the generated schedules, with no reader teleport or supplied skill (630.607839ms)
+✔ public reports preserve observed evidence and spread through actual nearby residents; truthful verification gives no cash reward (70.01134ms)
+✔ a claim contradicting real evidence is publicly marked false and an actual correction restores only part of reader trust (88.752234ms)
+✔ ordinary public petitions collect real on-site signatures, wait a full monotonic day and receive saved public replies (267.460455ms)
+✔ the actual civic core public floor admits ordinary petitions while protected floors reject even a mayor publication (46.092948ms)
+✔ corrupted source conclusions, reader identities, completed work time and petition deadlines reject atomically (474.924829ms)
+✔ an actual petition produces a distinct authorized service order and conserved finite procurement receipts (83.706772ms)
+✔ public education needs staff, material and real attendance; leaving pauses and restored instances continue identically (284.789651ms)
+✔ actual public clinical treatment consumes a funded unit after doctor attendance and twenty minutes (103.112699ms)
+✔ zero discretionary cash or supplier stock waits without free service and retries after a genuine donor payment (325.298914ms)
+✔ dynamic supply quotes buy only actual material within the approved cap and preserve an unfinished partial service (393.753359ms)
+✔ station upkeep consumes actual parts and attended work before any future dispatch maintenance exists (246.724583ms)
+✔ forged service receipts, materials, authorizations, actor references and completed timings reject atomically (278.243977ms)
+✔ generated neighbours are assigned jobs by the walkable graph, including mountain detours (1434.674056ms)
+✔ an underfunded private employer pays its real cash proportionally and settles each wage once (57.819126ms)
+✔ production requires actual attendance and technology improves that labour instead of producing unattended stock (21.457404ms)
+✔ public operations consume existing goods and credit their real supplier without creating money (17.070734ms)
+✔ a stored meal is consumed after closing time and does not credit money or create food (15.563766ms)
+✔ legacy accounts migrate from real proprietor savings and new ownership and cash survive exact continuation (332.370152ms)
+✖ welfare treatment consumes finite medical supplies and cannot heal from an empty supplier (33.491162ms)
+✔ actual attendance retains its employer and promised wage rate across mid-shift changes and save/load (114.971788ms)
+✔ wage contracts reject changed amounts and employers atomically, while legacy unpaid expense migrates once (184.794637ms)
+✔ share repurchases reserve both unpaid and not-yet-due actual wages (39.063351ms)
+✔ native housing, education, qualifications and police rewards have actual public counterparties (13.551862ms)
+✔ future public shifts require actual departmental witnesses and reserve past promises before authorizing cash (183.692838ms)
+✔ construction purchases finite material and completes only after attended work, without saleable stock creation (134.541473ms)
+✔ private employers approve only onsite cash-backed minutes and preserve losses, old claims and future cash protection (63.417981ms)
+✔ a capped worker wallet retains its wage claim until a real receiving capacity is available (19.247894ms)
+✔ extension installation supplies all research sectors and persistent profiles without changing the ten phase order (56.884889ms)
+✔ company founding and expansion require local merchant authority and move real money into recorded ownership (268.260467ms)
+▶ a civic facility in a commercial building shape cannot create a private company or sell nonexistent food stock
+  ✔ public data facility in a workshop (20.710507ms)
+  ✔ public data facility in a market (28.091302ms)
+  ✔ public data facility in a farm (24.290252ms)
+✔ a civic facility in a commercial building shape cannot create a private company or sell nonexistent food stock (74.313545ms)
+✔ a company records each actual shop sale once, and a saved city keeps the revenue cursor (801.108345ms)
+✔ listing, share trading and acquisition conserve ownership and settle actual buyer and seller balances (309.904469ms)
+✔ research requires nearby scientific training and rejects unfunded or unknown projects atomically (157.499704ms)
+▶ each of the seven technologies spends resources and completes after elapsed research time
+  ✔ traffic (773.31913ms)
+  ✔ energy (559.526896ms)
+  ✔ information (591.105573ms)
+  ✔ security (560.131848ms)
+  ✔ medicine (579.252387ms)
+  ✔ agriculture (563.998987ms)
+  ✔ manufacturing (563.144831ms)
+✔ each of the seven technologies spends resources and completes after elapsed research time (4194.375996ms)
+▶ completed technologies change their connected city systems and expose ecological costs
+  ✔ traffic (708.673006ms)
+  ✔ energy (681.094805ms)
+  ✔ information (1425.455142ms)
+  ✔ security (745.472516ms)
+  ✔ medicine (839.894193ms)
+  ✔ agriculture (1047.059678ms)
+  ✔ manufacturing (933.279425ms)
+✔ completed technologies change their connected city systems and expose ecological costs (6384.385656ms)
+✔ pausing freezes extension jobs and manually changing the hour does not complete paid research (567.623041ms)
+✔ ingredients come from real local shop stock and cooking consumes a recipe before a saved timer produces its meal (678.088731ms)
+▶ fish soup and festival meals use their own ingredients and stated preparation times
+  ✔ fishSoup (411.321545ms)
+  ✔ festivalMeal (198.882558ms)
+✔ fish soup and festival meals use their own ingredients and stated preparation times (613.588054ms)
+✔ cooking heat changes the quality of a meal while using the same actual ingredients (20.510428ms)
+✖ medical treatment pays an actual clinic fee and preserves its cooldown through save/load (18.561108ms)
+✔ death ends an actor’s activities and treatment cannot revive them; aging follows elapsed simulated time (179.367245ms)
+✔ organizations retain membership, accept real donations, and run paid festivals with saved cooldowns (782.485345ms)
+✔ pending research, cooking, companies and social actions resume deterministically with fractional frames (7892.938307ms)
+✖ legacy core saves initialize extension state and remain playable (38.25116ms)
+✔ a failed load hook rolls back extension actor caches and the complete running timeline (2555.728476ms)
+▶ bereavement follows current partners and divorce removes stale life profile family associations
+  ✔ current partner receives the memory (55.257818ms)
+  ✔ divorced partner is detached before death (17.703679ms)
+✔ bereavement follows current partners and divorce removes stale life profile family associations (73.84008ms)
+✔ extension validation rejects invalid resources, ownership, actor references and timers atomically (829.798791ms)
+✔ saved extension accounting cursors, cooldown identities and funded research jobs are validated before replacement (609.552432ms)
+✔ corruption moves actual public funds into an eligible poor actor, and evidence leads to delayed recovery rather than a reward (6096.457739ms)
+▶ public resource diversions require the real civic job in either language and exclude private employers and ordinary workers
+  ✔ 科研员 at data (1.627879ms)
+  ✔ 科学家 at data (0.158727ms)
+  ✔ scientist at data (0.181935ms)
+  ✔ 议员 at council (0.116254ms)
+  ✔ council at council (0.103653ms)
+  ✔ 财政官 at treasury (0.093505ms)
+  ✔ official at treasury (0.119568ms)
+  ✔ 工程师 at energy (0.103523ms)
+  ✔ mayor at mayor (0.122339ms)
+  ✔ 钱庄职员 at bank (0.174978ms)
+  ✔ official at bank (0.173615ms)
+  ✔ scientist at school (0.119201ms)
+  ✔ scientist at workshop (0.20622ms)
+  ✔ 工人 at data (0.133619ms)
+  ✔ 工人 at treasury (0.094684ms)
+✔ public resource diversions require the real civic job in either language and exclude private employers and ordinary workers (6783.843817ms)
+✔ charitable donations are spent from organization funds to actual poor residents (421.546752ms)
+▶ NPCs use clinics autonomously and paid or welfare treatment settles real accounts with saved cooldowns
+  ✖ resident paid treatment (34.743207ms)
+  ✖ publicly funded treatment (36.224471ms)
+✖ NPCs use clinics autonomously and paid or welfare treatment settles real accounts with saved cooldowns (72.097143ms)
+✔ research and audits operate inside tall and underground facilities rather than requiring the ground floor doorway (306.49937ms)
+✔ appointments require qualified nearby residents and spend treasury funds while preserving the real assigned job (176.975186ms)
+✔ a trained student becomes a scientist and pays for research whose saved completion advances that resident’s skill (2294.620287ms)
+▶ autonomous research respects personal reserves and urgent needs while accepting a trained Chinese research profession
+  ✔ 299 cash cannot fund research and keep its reserve (206.600104ms)
+  ✔ hungry researcher first needs food (213.692179ms)
+  ✔ exhausted researcher first needs rest (193.339686ms)
+  ✔ 300 cash and satisfied needs allow the actual Chinese research profession (191.824714ms)
+✔ autonomous research respects personal reserves and urgent needs while accepting a trained Chinese research profession (807.189313ms)
+✔ the generated city autonomously funds and completes research through actual trained residents and laboratories (59137.47387ms)
+ℹ generated city: tick 2160, 1 real resident investments, 1 completed experiments, 1 exact personal debits
+✔ a skilled worker uses accumulated personal savings to found a company with real capital and registration fees (1089.716662ms)
+✔ an ordinary traveler can report real ledger evidence before an audit case exists, with remote and repeated reports rejected atomically (862.165775ms)
+✔ market share includes sales at actual competing city shops outside registered companies (17.293679ms)
+✔ a deterministic mountain flood damages the district and residents and spends actual emergency funds (50.516109ms)
+✔ the extension remains finite, bounded, recoverable and deterministic over multiple accelerated game weeks (37399.867992ms)
+✔ family installation adds real student guardians without minting money or moving homes and jobs (38.008936ms)
+✔ legacy family saves migrate existing guardians without new money and reject hidden version-two executor data atomically (67.394995ms)
+✔ family planning requires marriage time, bilateral willingness, real shared space and two funded adults (378.364308ms)
+✔ time-of-day controls cannot skip gestation, and delivery persists a zero-age citizen and conserves escrow (356.723618ms)
+✔ student support debits a real guardian, keeps reserves and cannot be repeated within its saved daily interval (264.383205ms)
+✔ infants consume transferred real food and personal child support never creates cash (230.953809ms)
+✔ enrollment needs a real child at the school; only healthy attended lessons accumulate education and adulthood enables work (787.319892ms)
+✔ death transfers exact cash and integer shares to the living spouse and child, then remains deterministic after reload (257.308429ms)
+✔ six actual school days complete lessons without commands or fabricated education increments (5583.713946ms)
+✔ an adult without enrolled schooling can seek a real unskilled job without a fabricated graduation (59.144667ms)
+✔ new adult job searches use the actual home commute rather than proximity to a distant market (64.128335ms)
+✔ invalid population, ancestry, timer, escrow and deceased-estate references reject atomically (298.267445ms)
+✔ a carrier death refunds real pregnancy escrow before inheritance and never produces a phantom child (51.201577ms)
+✔ pregnancy refunds retain the real escrow at the wallet ceiling until actual bank repayment creates room (91.488804ms)
+✔ biological kinship blocks courting and family planning while seeded foster support is a distinct relationship (74.926251ms)
+✔ shared housing checks both adults, capacity and real commute, preserves position and jobs, and funds a conserved joint account (50.372081ms)
+✔ a real bilateral household move keeps the ongoing gestation and registers delivery at the new shared home (104.980409ms)
+✔ joint family food purchases pay an actual finite shop and divorce refunds the remaining joint property once (87.806736ms)
+✔ weddings and funerals consume real supplies and public venue fees, then require thirty actual on-site minutes (166.569991ms)
+✔ NPC relationships arise from real proximity and bilateral willingness, with complete stage deadlines before marriage (1029.941066ms)
+✔ shared accounts, autonomous relationship clocks, ceremonies and care references reject corrupted saves atomically (103.611019ms)
+✔ a nearby proposed home with a five-kilometre real detour is rejected without moving jobs or minting money (23.438915ms)
+✔ a willing established NPC couple reaches a feasible shared home on real routes before funding an autonomous pregnancy (298.561177ms)
+✔ orphan care transfers real food from an actual present adult while retaining the deceased biological parents (63.076492ms)
+✔ family customers settle actual consigned producers once and use the same retail cost as ordinary buyers (56.623599ms)
+✔ family food uses the saved immutable FIFO purchase costs without paying the supplier a second time (49.921738ms)
+✔ a valuable but illiquid estate keeps its debt and assets until an actual on-site buyer pays, then clears debt before inheritance (139.652183ms)
+✔ noncorporate inheritance transfers actual ownership while operating cash, goods and consignment claims stay in the business (47.110777ms)
+✔ forged executor receipts, nonexistent buyers and nonexistent business ownership reject without changing a pending estate (171.617573ms)
+✔ the public river road remains walkable across the intersecting bridge apron (53.682087ms)
+✔ a player-founded operating company keeps its proprietor and capital through exact reload (1349.485225ms)
+✔ selling the last privately held company shares cannot produce an unreadable operating company (2660.67759ms)
+✔ an actual newborn and airborne passenger survive geographic partitioning and deterministic continuation together (2239.288748ms)
+✔ late dynamic-actor and flight reference validation rejects without changing live state or continuation (2656.500446ms)
+✔ funded civic services and fiscal authorizations must survive together or reject atomically (573.647551ms)
+✔ walking guidance follows real roads and bridges rather than a shorter aircraft route (1.291501ms)
+✔ every generated district has a walking route and explicit building guidance reaches its real door (1567.422872ms)
+✔ upper-floor guidance includes the shared stair shaft and entrance before joining the street (1235.591678ms)
+✔ public timetable uses the actual direction, departure clock and current energy (1.335806ms)
+✔ a departing vehicle publishes its genuine next stop without inventing a new departure (0.377989ms)
+✔ public route connects real services and transfer stops without booking or changing any actor (1.402042ms)
+✔ journey intentions persist exact actual targets and malformed references reject atomically (1561.151959ms)
+✔ a current save declaring journey rejects a missing intent without replacing state (1371.090193ms)
+✔ riding records the actual reached node before a vehicle turns and no navigation command pays fares (1507.51308ms)
+✔ partition reassembly rejects missing entities instead of returning a partial city (1.038599ms)
+✔ family/service/stock books follow their real owners and sites while preserving original array and object order (1.153932ms)
+✔ the complete funded player work contract belongs to the mandatory independent player record (0.661826ms)
+✔ a missing map-only geographic chunk rejects a partial custody or service book (0.465945ms)
+✔ real IndexedDB saves the complete generated city in geographic chunks and resumes identically (4510.078941ms)
+✔ a real onsite work escrow roundtrips and player damage recovers one complete funded generation (3596.857581ms)
+✔ unchanged, player-only and global-only saves physically avoid rewriting city chunks (2513.489356ms)
+✔ one changed NPC route writes one chunk despite global route-pool renumbering (2488.947097ms)
+✔ cross-chunk movement and deletion leave no duplicate or missing entities after reload (2181.877773ms)
+✔ an aborted multi-store transaction with unavailable fallback preserves the prior city (2102.405487ms)
+✔ missing or corrupted current data recovers the complete prior generation and bounds retained records (2788.467168ms)
+✔ a checksum-damaged generation is recovered, repaired and retains its valid recovery generation (2523.591ms)
+✔ overlapping queued saves stay ordered and the final complete city survives a browser reload (2392.105195ms)
+✔ version-one IndexedDB and localStorage saves remain readable through upgrade and new saves (2572.185539ms)
+✔ unavailable IndexedDB uses one atomic fallback envelope and later IDB saves supersede it (2457.730418ms)
+✔ a modern session opens only global/player and reads requested chunks through a bounded LRU (2747.062141ms)
+✔ a pinned session survives four later saves from another page and releases its archived records (4368.899021ms)
+✔ late chunk damage invalidates the whole reader and recovery creates a distinct prior-generation reader (2828.418258ms)
+✔ explicit materialization preserves the full import contract and identical continuation (4946.527763ms)
+✔ expired readers cannot silently re-pin and a new save collects their archived records (2407.649476ms)
+✔ damaged global/player headers select the complete previous generation without reading city chunks (2223.025595ms)
+✔ on-demand readers retain the explicit whole-blob compatibility path for version-one and local saves (2306.898602ms)
+✔ reader heartbeats renew their durable lease and a rejected renewal invalidates cached parts (2205.366486ms)
+✔ starting work holds funded cash; only sixty actual onsite minutes finish and release wages (760.467282ms)
+✔ leaving and display-time changes pause work; cancellation returns only unearned escrow once (263.800683ms)
+✔ tax changes preserve actual net-pay receipts and the original gross wage (1895.761421ms)
+✔ public work uses protected real treasury escrow, releases earnings and refunds the unused remainder (142.598476ms)
+✔ death preserves earned pay and returns unearned employer funds without inventing inheritance (143.531783ms)
+✔ a half-completed funded job saves and resumes exactly; malformed payroll rejects atomically (986.330761ms)
+✔ trusted historical layouts retain their complete generated geometry (3326.546671ms)
+✔ actual instanced middle eaves and fascia leave every occupied upper storey clear (1255.04737ms)
+✔ the actual low-quality doorway retains its open near shell and evicts real room buffers (78.749198ms)
+✔ the real dock bridge and intersecting station streets share walkable deck grades (8.962787ms)
+✔ actual network handrails, posts and hangers leave the shared river crossing open at body height (1116.846816ms)
+✔ connected water and streamed ground retain topology, voxel heights and a bounded detail cache (7390.550766ms)
+✔ ticks run all city systems in the required causal order, and pausing freezes the city (49.942011ms)
+✔ the clock progresses continuously and wraps to a new day (22.648179ms)
+✔ changing the time rebuilds citizen schedules and changes shop opening hours (35.645628ms)
+✔ nearby purchases consume stock, pay the shop, and satisfy hunger; remote purchases have no effect (23.722335ms)
+✔ social encounters require proximity and retain relationship memories after leaving the neighbourhood (41.642667ms)
+✔ bank operations preserve account balances and reject unaffordable or invalid amounts (30.65785ms)
+✔ work pays for an actual local shift and cannot be repeated immediately for unlimited income (213.552293ms)
+✔ education and a local professional exam unlock police permissions (20.740267ms)
+✔ only a nearby authorized officer can resolve a crime and receive the resulting credit (16.607607ms)
+✔ public police dispatch and complete a funded response without player intervention (114.182424ms)
+✔ mayoral policies take effect after the stated delay and keep invalid policies out of the queue (467.986237ms)
+✔ an eligible local campaign takes time to win an election, including across save/load (478.589184ms)
+✔ saving preserves a paid work shift cooldown instead of allowing immediate duplicate payment (232.386391ms)
+✔ a passenger follows a moving vehicle and can leave it without teleporting back to the boarding point (252.925629ms)
+✔ driving requires the corresponding professional permission and an accessible vehicle (12.36591ms)
+✔ persistent citizen identities and their home/work assignments survive simulation tier changes (153.086566ms)
+✔ remote camera focus changes simulation detail while walking moves the actual player (10.892588ms)
+✔ save/load resumes the same clock, random events, vehicle schedules, and fractional tick timer (2351.450743ms)
+✔ malformed and incompatible saves are rejected without partially replacing the live city (27.483376ms)
+✔ save validation rejects corrupt numbers, foreign references, duplicate entities, and another world (198.981718ms)
+✔ professional certificates accumulate and retain enforcement permissions after a new career (12.62056ms)
+✔ facility utility lets urgent hunger override the default working schedule (25.1404ms)
+✔ sparse family relationships propagate the memory of harming a loved one (17.045004ms)
+✔ owned room voxel changes use a 0.2m grid and conserve construction material (12.666777ms)
+✔ traffic lights expose the same signal state used by vehicle rules and permissioned overrides (52.740611ms)
+✔ the complete city survives multiple days and restores a large genuine save deterministically (34486.223108ms)
+✔ manual driving obeys throttle and brake input rather than running an automatic passenger journey (293.012674ms)
+✔ manual intersection steering selects a real left or right branch of the road graph (270.911958ms)
+✔ large civic interiors and basement rooms retain local interactions while restricted floors require permission (13.807701ms)
+✔ energy and data wings advertise their actual functions without granting public visitors staff powers (12.958181ms)
+✔ a funded police response cannot close a distant case until a real dispatched officer arrives (285.737218ms)
+✔ mutual romance advances once to shared residence and divorce leaves lasting memories (1461.859668ms)
+✔ stepped civic floors reject interactions in empty air outside the actual level footprint (14.425819ms)
+✔ a high affinity single citizen develops an autonomous crush without forcing mutual commitment (20.449837ms)
+✔ pausing and changing the displayed hour cannot bypass pursuit and engagement elapsed time (224.737531ms)
+✔ repeated real conflicts progress through all hostile stages and repairing severe harm requires time and restitution (671.778849ms)
+✔ new relationship metadata rejects forged future timers and unknown stages atomically (100.493571ms)
+✔ citizens use the shared narrow stair core and occupy rooms inside the selected upper floor (25.136915ms)
+✔ student cohorts are distributed across every district and have a real school address (1349.859534ms)
+✔ the default clock and physical movement remain consistent across all simulation tiers (317.458793ms)
+✔ actual private wages are expensed once and initial staff counts refer to real non-student workers (21.597076ms)
+✔ public laboratory staff use the city budget and public wings cannot be bought as retail shops (22.293292ms)
+✔ Chinese and earned English scientific identities grant the same actual laboratory floor access (12.830631ms)
+✔ ordinary initial jobs belong to each citizen residential district whenever it provides employment (1476.65426ms)
+✔ public transport fares conserve the actual payer and city balances, including flight tickets (20.606911ms)
+✔ citizens pay a real fare before boarding and keep walking when they cannot afford it (55.717605ms)
+✔ an exhausted or critically sick dispatched officer leaves the task and must actually recover before reassignment (28.480604ms)
+✔ urgent citizens commit to one reachable food trip through repeated decision windows and buy actual stock (51.815662ms)
+✔ manual control leaves automatic departure waiting while a passenger cannot drive an early departure (129.297816ms)
+✖ arriving passengers keep a still feasible meal destination and replan only when its food service is unavailable (38.648719ms)
+✔ a real police response records duty attendance and transfers its earned payroll from the public employer (1347.787113ms)
+✔ routine overnight business closing preserves the district prosperity of a functioning city (1548.020556ms)
+✔ equal proportions of idle viable shops have equal commercial feedback regardless of building count (30.705932ms)
+✖ real insolvent businesses still close and reduce district prosperity through the normalized feedback (412.334618ms)
+✔ a 12 coin sale of 4 coin consigned goods splits one funded receipt without creating cash (9.706999ms)
+✔ owned goods sell first and fractional owned stock keeps its actual ownership (42.967228ms)
+✔ an unsold lot returns to the same producer without transferring owned goods or earned wages (6.575349ms)
+✔ no producer stock gives no supply and repeated requests without customers stay within the small trial (16.755024ms)
+✔ recent demand and labour are measured from actual quantities and expire on the monotonic clock (6.735035ms)
+✔ live custody saves exactly, malformed lots reject atomically and legacy saves create an empty book (141.748124ms)
+✔ a rejected settlement cannot mutate lot ownership or supplier accounts (11.408596ms)
+✔ quotations are read-only and preflight supplier capacity before any buyer debit (22.917938ms)
+✔ real purchase and ingredient commands split consigned receipts and persist their actual sale quantities (23.726712ms)
+✔ the real NPC commerce stage pays the supplier from its shopper receipt without an extra transfer (6.241116ms)
+✔ real commands reject unfunded wholesale margins and capped suppliers before any wallet or inventory change (16.898806ms)
+✔ producer quotes use real earned attendance, 56 percent energy production and paid utilities without mutating accounts (19.607857ms)
+✔ old 4 coin custody contracts remain frozen beside new observed-price lots and settle their exact prices (44.446654ms)
+✔ paid owned stock records actual purchase cost once, sells FIFO and rejects inconsistent save bases atomically (79.653339ms)
+✔ legacy custody and owned inventory gain only historical cost metadata and keep all past profits and debts (48.755491ms)
+✔ real observed-price wholesale purchases feed FIFO costs into actual player sales once (35.250665ms)
+✔ real wholesale respects the buyer budget and supplier credit capacity before stock or funds change (18.272056ms)
+✔ market player work pays a real service wage without creating goods or charging their cost twice (813.586887ms)
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (1365.402411ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (3840.705045ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (5887.741023ms)
+✔ seeded city generation preserves scale, distinct districts, and deterministic variation (2408.069377ms)
+✔ all generated assets use voxel units and have usable floors and south-facing doors (54.147489ms)
+✔ building footprints never overlap, including generated landmarks (32.160507ms)
+✔ every building footprint has a level terrain foundation and accessible interior floor (26.923645ms)
+✔ ground transport avoids every building interior and keeps grades walkable after voxel rounding (2596.811775ms)
+✔ elevated rail, cable, and flight routes clear buildings and terrain along every segment (1022.306642ms)
+✔ all entrances attach exactly to the road graph and every district is connected (139.465384ms)
+✔ the Tianshu landmark has usable public areas, distinct civic wings, and lower service buildings (1.182077ms)
+✔ the expanded city has connected purpose-built neighbourhoods and leaves open mountain land (9.847433ms)
+✔ Tianshu has excavated usable underground archives and treasury beneath its actual main hall (0.630871ms)
+✔ ordinary buildings fit their mountain shoulders rather than tall artificial pedestals (13.315729ms)
+✔ Tianshu has five real shrinking floor footprints and full-size basement space (0.677645ms)
+✔ vertical transport reaches the cliff and waterfall ferries link both lower city docks (2.610578ms)
+✔ the airport runway is a connected flat ground strip shared by departing flights (3.075239ms)
+✔ cross-valley carriageways preserve the landscape below their supported bridge decks (55.327162ms)
+✔ Dijkstra chooses total travel weight, respects modes, and supports bidirectional links (0.539692ms)
+✔ polyline sampling uses 3D arc length, clamps endpoints, and handles degenerate paths (0.203564ms)
+✔ walking heights choose road and bridge decks using the player elevation at crossings (0.395605ms)
+ℹ tests 352
+ℹ suites 0
+ℹ pass 344
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 340509.57914
+
+✖ failing tests:
+
+test at tests/economy.test.ts:1:9421
+✖ welfare treatment consumes finite medical supplies and cannot heal from an empty supplier (33.491162ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 4
+  
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/economy.test.ts:143:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 4,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/extensions.test.ts:1:29807
+✖ medical treatment pays an actual clinic fee and preserves its cooldown through save/load (18.561108ms)
+  AssertionError [ERR_ASSERTION]: heal: 该诊所没有已任职的成年医生，不能承诺诊疗。
+  
+  false !== true
+  
+      at ok (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:78:10)
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:602:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/extensions.test.ts:1:35821
+✖ legacy core saves initialize extension state and remain playable (38.25116ms)
+  AssertionError [ERR_ASSERTION]: 读档失败：Cannot read properties of undefined (reading 'lastUpdate')
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:733:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/extensions.test.ts:1:62608
+✖ resident paid treatment (34.743207ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  100 !== 70
+  
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:1196:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at TestContext.test (node:internal/test_runner/test:394:20)
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:1181:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 100,
+    expected: 70,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/extensions.test.ts:1:62608
+✖ publicly funded treatment (36.224471ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(e.actorProfiles[citizen.id].health >= 65)
+  
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:1197:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at TestContext.test (node:internal/test_runner/test:394:20)
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/extensions.test.ts:1181:13)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/simulation.test.ts:1:50802
+✖ arriving passengers keep a still feasible meal destination and replan only when its food service is unavailable (38.648719ms)
+  Error: 零售购入成本需要已发生的真实库存增加。
+      at recordOwnedStockPurchase (/tmp/yunshan-phase2-root-clinical-01/src/simulation/trade.ts:76:111)
+      at Simulation.recordOwnedStockPurchase (/tmp/yunshan-phase2-root-clinical-01/src/simulation.ts:383:89)
+      at Simulation.commerce (/tmp/yunshan-phase2-root-clinical-01/src/simulation.ts:968:76)
+      at <anonymous> (/tmp/yunshan-phase2-root-clinical-01/src/simulation.ts:518:79)
+      at EventBus.emit (/tmp/yunshan-phase2-root-clinical-01/src/simulation.ts:28:83)
+      at Simulation.step (/tmp/yunshan-phase2-root-clinical-01/src/simulation.ts:561:85)
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/simulation.test.ts:928:50)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at tests/simulation.test.ts:1:56268
+✖ real insolvent businesses still close and reduce district prosperity through the normalized feedback (412.334618ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(sim.state.shops.every(shop => !shop.open))
+  
+      at TestContext.<anonymous> (/tmp/yunshan-phase2-root-clinical-01/tests/simulation.test.ts:990:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

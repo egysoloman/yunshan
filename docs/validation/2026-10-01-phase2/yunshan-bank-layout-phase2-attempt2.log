@@ -1,0 +1,22 @@
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (57.517141ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (57.601929ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (14.483762ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (44.37687ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (90.390306ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (29.427775ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (6.326444ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (13.633969ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (13.955417ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (459.520185ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (602.040696ms)
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (2451.940294ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (15511.431251ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (7860.987588ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27394.176329

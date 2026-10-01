@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-01T21:07:43.669Z",
+  "environment": "Node authoritative generator and terrain/getWalkHeight functions; no renderer or WebGL",
+  "frozenSourceHashes": {
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015",
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "src/persistence/world-layout.ts": "b4483cb936aabe9801a47693b7ca1e3fdae3ec3bc58fb7e6249bf1c836c3aed6",
+    "package.json": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+    "tsconfig.json": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+  },
+  "legacySourceHashes": {
+    "26f0c69": {
+      "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+      "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+      "src/types.ts": "16a6cb1d7a4c8096180457b00527140bf680534d10c181936da98d9234e37030"
+    },
+    "ee3e7a1": {
+      "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553",
+      "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+      "src/types.ts": "19504ee762f09e23cb6fce6f19519b22bf6a3cb1b6c7683ec6076cff4130c7b0"
+    }
+  },
+  "currentV2": [
+    {
+      "seed": 20261001,
+      "layout": "current-v2",
+      "worldSha256": "84b8b884849245e969c6e95f82bc966b3124a72fc24c995e0627d7422c32ee6d",
+      "fingerprint": "cf899fc3",
+      "buildings": 612,
+      "nodes": 674,
+      "edges": 691,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10608,
+      "floorSamples": 64,
+      "waterSamples": 13
+    },
+    {
+      "seed": 7,
+      "layout": "current-v2",
+      "worldSha256": "5d4437f6b146d03c4bf52f9c4deacdabf6d38e7880f14b0102a4978bf64a5ebf",
+      "fingerprint": "92ecc4b4",
+      "buildings": 612,
+      "nodes": 674,
+      "edges": 691,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10481,
+      "floorSamples": 64,
+      "waterSamples": 13
+    },
+    {
+      "seed": 2024,
+      "layout": "current-v2",
+      "worldSha256": "f5b6bdb24c4b6b311f159f582963f4e0dca2830f706b1413b64e935e5fe6bc56",
+      "fingerprint": "571566dc",
+      "buildings": 612,
+      "nodes": 674,
+      "edges": 691,
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10487,
+      "floorSamples": 64,
+      "waterSamples": 13
+    }
+  ],
+  "legacy": [
+    {
+      "seed": 20261001,
+      "fingerprint": "c519111b",
+      "mainWorldSha256": "6409c4b888dfdd8ca9fb19f479e5b8e37d51596dffcaf6383853a634f520b13b",
+      "checkpointWorldSha256": "6409c4b888dfdd8ca9fb19f479e5b8e37d51596dffcaf6383853a634f520b13b",
+      "legacyBodySha256": "6409c4b888dfdd8ca9fb19f479e5b8e37d51596dffcaf6383853a634f520b13b",
+      "mainCheckpointExact": true,
+      "legacyBodyExact": true,
+      "checkpointMaximumDifference": 0,
+      "legacyMaximumDifference": 0,
+      "mismatchCount": 0,
+      "firstMismatches": [],
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10502
+    },
+    {
+      "seed": 7,
+      "fingerprint": "f986bae8",
+      "mainWorldSha256": "4437465aaba42e2d2cc1d4c55560cab4146ab48f291df403147dc6db19e44d06",
+      "checkpointWorldSha256": "4437465aaba42e2d2cc1d4c55560cab4146ab48f291df403147dc6db19e44d06",
+      "legacyBodySha256": "4437465aaba42e2d2cc1d4c55560cab4146ab48f291df403147dc6db19e44d06",
+      "mainCheckpointExact": true,
+      "legacyBodyExact": true,
+      "checkpointMaximumDifference": 0,
+      "legacyMaximumDifference": 0,
+      "mismatchCount": 0,
+      "firstMismatches": [],
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10360
+    },
+    {
+      "seed": 2024,
+      "fingerprint": "db537ffa",
+      "mainWorldSha256": "44693a2cfab8032e30adec77f4e52fecc4eaa22e9c3e650d5f52a334772ddebc",
+      "checkpointWorldSha256": "44693a2cfab8032e30adec77f4e52fecc4eaa22e9c3e650d5f52a334772ddebc",
+      "legacyBodySha256": "44693a2cfab8032e30adec77f4e52fecc4eaa22e9c3e650d5f52a334772ddebc",
+      "mainCheckpointExact": true,
+      "legacyBodyExact": true,
+      "checkpointMaximumDifference": 0,
+      "legacyMaximumDifference": 0,
+      "mismatchCount": 0,
+      "firstMismatches": [],
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10381
+    }
+  ],
+  "limits": [
+    "Samples are CPU authority checks, not a browser collision walkthrough.",
+    "Fingerprints for legacy/v2 predate heightfield versioning; v3 requires a new authority descriptor."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "archivedAt": "2026-10-01T20:17:51.666Z",
+  "tests": "9/9",
+  "changedTrackedSources": [],
+  "correction": "Narrow-phase body priority inverse rotation now matches actual THREE.Matrix4.makeRotationY; independent transformed long-axis interior point checks the sign.",
+  "currentWorldImpact": "All 612 currently generated buildings use rotation zero, so this correction changes no current world selection or isolated GPU candidate behavior.",
+  "oldEvidence": "../pre-clinical-storage-trade-residency remains intact.",
+  "validation": [
+    "Node real Three.js resources, disposal and fixed far matrices; no WebGL process started here.",
+    "npx tsc --noEmit and git diff --check passed."
+  ],
+  "sha256": {
+    "chunk-residency-tests.log": "d1c85e2c5a68eda97d4dd77b22fd2844fcbbd124a3e16b9e1ff02bb7d6ce4d35",
+    "chunk-residency-results.json": "d0351c4cd89767708722cd293bf7958f7785faf9abd8a2b4c4ff6334c8829a2c"
+  }
+}

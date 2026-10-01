@@ -1,0 +1,2515 @@
+{
+  "scope": "Normal-URL keyboard/mouse journey with public DOM observations",
+  "records": [
+    {
+      "name": "arrival",
+      "at": "2026-10-01T18:11:04.736Z",
+      "stage": "arrival",
+      "coordinates": {
+        "x": -330,
+        "y": 52,
+        "z": 487
+      },
+      "district": "千灯市集",
+      "clock": "08:08",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "晨雾渐散，街巷间的一天正在开始。",
+      "context": "云游载人无人机停机坪已停稳 · 电量 100% · 0 m/s千灯市集观景机租赁点沿路导航 · 17 m这是可载人的自动驾驶观景无人机。旅行者现场租用、登机，身体随航空器移动；空中不能退出，返航落地后继续生活。",
+      "toast": "",
+      "wallet": "600 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 528 draw",
+      "petitions": ""
+    },
+    {
+      "name": "shopping",
+      "at": "2026-10-01T18:24:14.580Z",
+      "stage": "shopping",
+      "coordinates": {
+        "x": -499,
+        "y": 41,
+        "z": 575
+      },
+      "district": "千灯市集",
+      "clock": "12:41",
+      "day": "第 1 日",
+      "mode": "星际旅行者 · 室内",
+      "location": "已进入 千灯市集·灯市街·商肆4 · 使用 E 进出，楼梯处可换层",
+      "context": "市集 · 已进入千灯市集·灯市街·商肆41 层离开建筑 / 使用楼梯 · E购买食物临工 / 经营商人考核 · 80 云币食物 10.81 云币 · 库存 89 · 客流 0",
+      "toast": "在千灯市集·灯市街·商肆4购买1份食物，花费10.8云币。",
+      "wallet": "589.16 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 385 draw",
+      "petitions": "",
+      "before": 600,
+      "after": 589.16,
+      "receipt": "在千灯市集·灯市街·商肆4购买1份食物，花费10.8云币。"
+    },
+    {
+      "name": "home",
+      "at": "2026-10-01T18:38:14.381Z",
+      "stage": "home",
+      "coordinates": {
+        "x": -445,
+        "y": 43,
+        "z": 546
+      },
+      "district": "千灯市集",
+      "clock": "14:39",
+      "day": "第 1 日",
+      "mode": "星际旅行者 · 室内",
+      "location": "已进入 千灯市集·灯市街·里居6 · 使用 E 进出，楼梯处可换层",
+      "context": "住宅 · 已进入千灯市集·灯市街·里居61 层离开建筑 / 使用楼梯 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X",
+      "toast": "在千灯市集·灯市街·里居6休息，体力恢复。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 392 draw",
+      "petitions": "",
+      "rental": {
+        "before": 589.16,
+        "after": 509.16,
+        "receipt": "租住千灯市集·灯市街·里居6，可在此休息和改造房间。"
+      },
+      "resting": {
+        "before": 509.16,
+        "after": 509.16,
+        "receipt": "在千灯市集·灯市街·里居6休息，体力恢复。"
+      }
+    },
+    {
+      "name": "home-saved",
+      "at": "2026-10-01T18:38:31.886Z",
+      "stage": "home",
+      "coordinates": {
+        "x": -445,
+        "y": 43,
+        "z": 550
+      },
+      "district": "千灯市集",
+      "clock": "14:45",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "重峦之间，街巷与轨道连接一城生息。",
+      "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+      "toast": "旅程已保存在当前浏览器。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 149 draw",
+      "petitions": "",
+      "scope": "Actual UI save with the simulation paused; later journey stages have not run",
+      "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+    }
+  ],
+  "inputs": [
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"quality\"]')",
+      "value": "low"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-range",
+      "target": "render-distance",
+      "value": 900
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "market"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"market-b13\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "public-navigation",
+      "destination": "千灯市集·灯市街·商肆4",
+      "waypoints": [
+        {
+          "index": 3,
+          "x": -328,
+          "y": 52,
+          "z": 480,
+          "text": "沿金线继续 · 约 7 米"
+        },
+        {
+          "index": 7,
+          "x": -344,
+          "y": 51,
+          "z": 504,
+          "text": "沿金线继续 · 约 22 米"
+        },
+        {
+          "index": 10,
+          "x": -376,
+          "y": 49.800000000000004,
+          "z": 512,
+          "text": "沿金线继续 · 约 52 米"
+        },
+        {
+          "index": 12,
+          "x": -424,
+          "y": 48.6,
+          "z": 512,
+          "text": "沿金线继续 · 约 97 米"
+        }
+      ]
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -169.69029614079437,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -330,
+        "y": 52,
+        "z": 487
+      },
+      "after": {
+        "x": -330,
+        "y": 53,
+        "z": 457
+      },
+      "target": {
+        "x": -330,
+        "y": 52.6,
+        "z": 460
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 314.4309981948939,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -330,
+        "y": 53,
+        "z": 457
+      },
+      "after": {
+        "x": -329,
+        "y": 53,
+        "z": 462
+      },
+      "target": {
+        "x": -328,
+        "y": 52.400000000000006,
+        "z": 464
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 74.26705125313153,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -329,
+        "y": 53,
+        "z": 462
+      },
+      "after": {
+        "x": -328,
+        "y": 52,
+        "z": 481
+      },
+      "target": {
+        "x": -328,
+        "y": 52,
+        "z": 480
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 263.5499421957917,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -328,
+        "y": 52,
+        "z": 481
+      },
+      "after": {
+        "x": -337,
+        "y": 52,
+        "z": 480
+      },
+      "target": {
+        "x": -336,
+        "y": 51.800000000000004,
+        "z": 480
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -265.8567104458718,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -337,
+        "y": 52,
+        "z": 480
+      },
+      "after": {
+        "x": -336,
+        "y": 51,
+        "z": 494
+      },
+      "target": {
+        "x": -336,
+        "y": 51.400000000000006,
+        "z": 496
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 142.74549122132973,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -336,
+        "y": 51,
+        "z": 494
+      },
+      "after": {
+        "x": -345,
+        "y": 51,
+        "z": 496
+      },
+      "target": {
+        "x": -344,
+        "y": 51.2,
+        "z": 496
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -163.39088607159786,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -345,
+        "y": 51,
+        "z": 496
+      },
+      "after": {
+        "x": -344,
+        "y": 51,
+        "z": 506
+      },
+      "target": {
+        "x": -344,
+        "y": 51,
+        "z": 504
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 6.7099948228407,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -344,
+        "y": 51,
+        "z": 506
+      },
+      "after": {
+        "x": -353,
+        "y": 51,
+        "z": 504
+      },
+      "target": {
+        "x": -352,
+        "y": 50.800000000000004,
+        "z": 504
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -6.7099948228404775,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -353,
+        "y": 51,
+        "z": 504
+      },
+      "after": {
+        "x": -352,
+        "y": 51,
+        "z": 513
+      },
+      "target": {
+        "x": -352,
+        "y": 50.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 258.93130014674887,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -352,
+        "y": 51,
+        "z": 513
+      },
+      "after": {
+        "x": -382,
+        "y": 50,
+        "z": 512
+      },
+      "target": {
+        "x": -376,
+        "y": 49.800000000000004,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 73.3166914970685,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -382,
+        "y": 50,
+        "z": 512
+      },
+      "after": {
+        "x": -377,
+        "y": 50,
+        "z": 512
+      },
+      "target": {
+        "x": -376,
+        "y": 49.800000000000004,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -87.19755119659759,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -377,
+        "y": 50,
+        "z": 512
+      },
+      "after": {
+        "x": -397,
+        "y": 49,
+        "z": 513
+      },
+      "target": {
+        "x": -400,
+        "y": 49.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 107.25018479888078,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -397,
+        "y": 49,
+        "z": 513
+      },
+      "after": {
+        "x": -402,
+        "y": 49,
+        "z": 511
+      },
+      "target": {
+        "x": -400,
+        "y": 49.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -122.3912779394063,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -402,
+        "y": 49,
+        "z": 511
+      },
+      "after": {
+        "x": -422,
+        "y": 49,
+        "z": 513
+      },
+      "target": {
+        "x": -424,
+        "y": 48.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 27.95528981425515,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -422,
+        "y": 49,
+        "z": 513
+      },
+      "after": {
+        "x": -452,
+        "y": 48,
+        "z": 512
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 74.38335452286849,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -452,
+        "y": 48,
+        "z": 512
+      },
+      "after": {
+        "x": -447,
+        "y": 48,
+        "z": 512
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -87.19755119659759,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -447,
+        "y": 48,
+        "z": 512
+      },
+      "after": {
+        "x": -477,
+        "y": 47,
+        "z": 513
+      },
+      "target": {
+        "x": -472,
+        "y": 47.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 21.39903124663774,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -477,
+        "y": 47,
+        "z": 513
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 512
+      },
+      "target": {
+        "x": -472,
+        "y": 47.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 269.3972955482591,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 512
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 532
+      },
+      "target": {
+        "x": -472,
+        "y": 46.6,
+        "z": 534.6
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 532
+      },
+      "after": {
+        "x": -471,
+        "y": 46,
+        "z": 562
+      },
+      "target": {
+        "x": -472,
+        "y": 46,
+        "z": 557.4
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 15.843990008657697,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 46,
+        "z": 562
+      },
+      "after": {
+        "x": -472,
+        "y": 46,
+        "z": 557
+      },
+      "target": {
+        "x": -472,
+        "y": 46,
+        "z": 557.4
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -15.843990008658585,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 46,
+        "z": 557
+      },
+      "after": {
+        "x": -471,
+        "y": 45,
+        "z": 577
+      },
+      "target": {
+        "x": -472,
+        "y": 45.400000000000006,
+        "z": 580
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 107.25018479888088,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 45,
+        "z": 577
+      },
+      "after": {
+        "x": -473,
+        "y": 45,
+        "z": 582
+      },
+      "target": {
+        "x": -472,
+        "y": 45.400000000000006,
+        "z": 580
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -123.41872221234173,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -473,
+        "y": 45,
+        "z": 582
+      },
+      "after": {
+        "x": -471,
+        "y": 45,
+        "z": 606
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 8.015608037619248,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 45,
+        "z": 606
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 601
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -311.847070624159,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 601
+      },
+      "after": {
+        "x": -471,
+        "y": 44,
+        "z": 631
+      },
+      "target": {
+        "x": -472,
+        "y": 44.2,
+        "z": 625.4000000000001
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 28.294599173252017,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 44,
+        "z": 631
+      },
+      "after": {
+        "x": -472,
+        "y": 44,
+        "z": 626
+      },
+      "target": {
+        "x": -472,
+        "y": 44.2,
+        "z": 625.4000000000001
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -28.294599173251722,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 44,
+        "z": 626
+      },
+      "after": {
+        "x": -472,
+        "y": 44,
+        "z": 646
+      },
+      "target": {
+        "x": -472,
+        "y": 43.6,
+        "z": 648
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 170.3758914345781,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 44,
+        "z": 646
+      },
+      "after": {
+        "x": -491,
+        "y": 43,
+        "z": 648
+      },
+      "target": {
+        "x": -492,
+        "y": 43,
+        "z": 648
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -1.7360954130241668,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -491,
+        "y": 43,
+        "z": 648
+      },
+      "after": {
+        "x": -510,
+        "y": 43,
+        "z": 651
+      },
+      "target": {
+        "x": -510,
+        "y": 42.6,
+        "z": 650
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 51.792086365760156,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -510,
+        "y": 43,
+        "z": 651
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "target": {
+        "x": -496,
+        "y": 42.2,
+        "z": 648
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -133.2343311907175,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "target": {
+        "x": -496,
+        "y": 41.800000000000004,
+        "z": 626.6
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "after": {
+        "x": -497,
+        "y": 41,
+        "z": 608
+      },
+      "target": {
+        "x": -496,
+        "y": 41.2,
+        "z": 605.4
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -22.18938792527486,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -497,
+        "y": 41,
+        "z": 608
+      },
+      "after": {
+        "x": -501,
+        "y": 41,
+        "z": 578
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.800000000000004,
+        "z": 584
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 302.5514800844191,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -501,
+        "y": 41,
+        "z": 578
+      },
+      "after": {
+        "x": -499,
+        "y": 41,
+        "z": 583
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.800000000000004,
+        "z": 584
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -258.88647901729365,
+      "dy": 0
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -499,
+        "y": 41,
+        "z": 583
+      },
+      "after": {
+        "x": -499,
+        "y": 41,
+        "z": 578
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 576.8000000000001
+      }
+    },
+    {
+      "stage": "shopping",
+      "type": "key",
+      "key": "KeyE",
+      "purpose": "enter"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-ref=\"context-body\"]').locator('[data-command=\"purchase\"][data-target=\"market-b13\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "key",
+      "key": "KeyE",
+      "purpose": "leave",
+      "building": "market-b13"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "home"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"market-b21\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "public-navigation",
+      "destination": "千灯市集·灯市街·里居6",
+      "waypoints": [
+        {
+          "index": 4,
+          "x": -496,
+          "y": 41.800000000000004,
+          "z": 626.6,
+          "text": "沿金线继续 · 约 48 米"
+        },
+        {
+          "index": 7,
+          "x": -512,
+          "y": 42.6,
+          "z": 632,
+          "text": "沿金线继续 · 约 55 米"
+        },
+        {
+          "index": 9,
+          "x": -496,
+          "y": 42.6,
+          "z": 608,
+          "text": "沿金线继续 · 约 29 米"
+        },
+        {
+          "index": 12,
+          "x": -472,
+          "y": 42.6,
+          "z": 592,
+          "text": "沿金线继续 · 约 30 米"
+        }
+      ]
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -26.60999523741104,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -499,
+        "y": 41,
+        "z": 579
+      },
+      "after": {
+        "x": -498,
+        "y": 41,
+        "z": 584
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.800000000000004,
+        "z": 584
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -4.452425352215136,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -498,
+        "y": 41,
+        "z": 584
+      },
+      "after": {
+        "x": -496,
+        "y": 41,
+        "z": 603
+      },
+      "target": {
+        "x": -496,
+        "y": 41.2,
+        "z": 605.4
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 31.062420589626225,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -496,
+        "y": 41,
+        "z": 603
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 633
+      },
+      "target": {
+        "x": -496,
+        "y": 41.800000000000004,
+        "z": 626.6
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -87.19755119659774,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 633
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "target": {
+        "x": -496,
+        "y": 41.800000000000004,
+        "z": 626.6
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 87.19755119659759,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "target": {
+        "x": -496,
+        "y": 42.2,
+        "z": 648
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 133.23433119071706,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "after": {
+        "x": -510,
+        "y": 43,
+        "z": 650
+      },
+      "target": {
+        "x": -510,
+        "y": 42.6,
+        "z": 650
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 237.07747961458256,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -510,
+        "y": 43,
+        "z": 650
+      },
+      "after": {
+        "x": -513,
+        "y": 43,
+        "z": 631
+      },
+      "target": {
+        "x": -512,
+        "y": 42.6,
+        "z": 632
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 260.06979022817166,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -513,
+        "y": 43,
+        "z": 631
+      },
+      "after": {
+        "x": -498,
+        "y": 43,
+        "z": 632
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 632
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -195.47030587405936,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -498,
+        "y": 43,
+        "z": 632
+      },
+      "after": {
+        "x": -497,
+        "y": 43,
+        "z": 612
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 53.94581041280764,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -497,
+        "y": 43,
+        "z": 612
+      },
+      "after": {
+        "x": -496,
+        "y": 43,
+        "z": 607
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 142.74549122132996,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 43,
+        "z": 607
+      },
+      "after": {
+        "x": -486,
+        "y": 43,
+        "z": 608
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -20.8062699986525,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -486,
+        "y": 43,
+        "z": 608
+      },
+      "after": {
+        "x": -481,
+        "y": 43,
+        "z": 608
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -182.79250559964643,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -481,
+        "y": 43,
+        "z": 608
+      },
+      "after": {
+        "x": -481,
+        "y": 43,
+        "z": 598
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 34.243289139556516,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -481,
+        "y": 43,
+        "z": 598
+      },
+      "after": {
+        "x": -480,
+        "y": 43,
+        "z": 593
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 107.09755161116941,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -480,
+        "y": 43,
+        "z": 593
+      },
+      "after": {
+        "x": -470,
+        "y": 43,
+        "z": 592
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -189.86085471219212,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -470,
+        "y": 43,
+        "z": 592
+      },
+      "after": {
+        "x": -473,
+        "y": 43,
+        "z": 563
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 49.11277520945134,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -473,
+        "y": 43,
+        "z": 563
+      },
+      "after": {
+        "x": -472,
+        "y": 43,
+        "z": 568
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -137.80025564833872,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 43,
+        "z": 568
+      },
+      "after": {
+        "x": -442,
+        "y": 41,
+        "z": 568
+      },
+      "target": {
+        "x": -448,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -87.19755119659774,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -442,
+        "y": 41,
+        "z": 568
+      },
+      "after": {
+        "x": -447,
+        "y": 43,
+        "z": 568
+      },
+      "target": {
+        "x": -448,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": 277.37025638089426,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -447,
+        "y": 43,
+        "z": 568
+      },
+      "after": {
+        "x": -445,
+        "y": 43,
+        "z": 558
+      },
+      "target": {
+        "x": -445.20000000000005,
+        "y": 42.6,
+        "z": 560
+      }
+    },
+    {
+      "stage": "home",
+      "type": "mouse-drag",
+      "dx": -80.30659106833183,
+      "dy": 0
+    },
+    {
+      "stage": "home",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -445,
+        "y": 43,
+        "z": 558
+      },
+      "after": {
+        "x": -446,
+        "y": 43,
+        "z": 549
+      },
+      "target": {
+        "x": -445.20000000000005,
+        "y": 42.6,
+        "z": 547.8000000000001
+      }
+    },
+    {
+      "stage": "home",
+      "type": "key",
+      "key": "KeyE",
+      "purpose": "enter"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-ref=\"context-body\"]').locator('[data-command=\"rent\"][data-target=\"market-b21\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-ref=\"context-body\"]').locator('[data-command=\"rest\"][data-target=\"market-b21\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "key",
+      "key": "KeyE",
+      "purpose": "leave",
+      "building": "market-b21"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('save')"
+    },
+    {
+      "stage": "home",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    }
+  ],
+  "errors": []
+}

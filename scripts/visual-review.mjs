@@ -55,6 +55,10 @@ try {
     { name: 'road-first-person', hour: 12, network: 'road', street: true },
     { name: 'bridge-structure', hour: 12, network: 'bridge' },
     { name: 'bridge-first-person', hour: 12, network: 'bridge', street: true },
+    { name: 'bridge-walk-center', hour: 12, network: 'bridge', street: true, centerline: true },
+    // Separate public-road view; preserve the obstructed old bridge-structure
+    // camera as diagnostic evidence. This is an optical view, not a journey.
+    { name: 'bridge-public-road', hour: 12, eye: [-664, 20.32, 1052], target: [-638, 23, 1040] },
     { name: 'overview-night', hour: 22, eye: [1780, 1040, 2040], target: [0, 180, 0] },
     { name: 'core-night', hour: 22, eye: [440, 325, 640], target: [210, 215, -45] },
   ];
@@ -82,7 +86,8 @@ try {
         if (!edge) throw new Error(`Missing ${shot.name} edge`);
         const index = Math.floor(edge.points.length * .4), p = edge.points[index], ahead = edge.points[Math.min(edge.points.length - 1, index + 2)];
         const dx = ahead.x - p.x, dz = ahead.z - p.z, length = Math.hypot(dx, dz) || 1;
-        eye = shot.street ? [p.x - dz / length * 2.6, p.y + 1.72, p.z + dx / length * 2.6]
+        const lateral = shot.centerline ? 0 : 2.6;
+        eye = shot.street ? [p.x - dz / length * lateral, p.y + 1.72, p.z + dx / length * lateral]
           : [p.x - dz / length * 58, p.y + 22, p.z + dx / length * 58];
         target = shot.street ? [ahead.x, ahead.y + 1.72, ahead.z] : [p.x, p.y, p.z];
       }

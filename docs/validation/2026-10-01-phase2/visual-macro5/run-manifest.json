@@ -1,0 +1,71 @@
+{
+  "snapshot": "/tmp/yunshan-phase2-root-coherent-01",
+  "sourceManifest": "/tmp/yunshan-phase2-root-coherent-01/source-snapshot.json",
+  "manifestSHA256": "f3d8ade3c28218896e5dc28368bf62426945ffddc2628f89ad2478fa87e706f3",
+  "fullCopiedFilesUnchanged": true,
+  "fileCount": 81,
+  "actualBuildEntry": "/assets/index-9RmW2nKM.js",
+  "actualBuildSHA256": "4c8d85a0c70ec591e5edd8ab1f8336b02408f812f0acfb6fb0bcb09b872d9e57",
+  "macroWrapper": {
+    "path": "/tmp/yunshan-phase2-visual-macro5-capture.mjs",
+    "sha256": "214cbd98199a90f92ed64c2494a98c1fb843c5093bc5e236556cd87c8919f6fb",
+    "sourceScriptSHA256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+    "scope": "Same six diagnostic cameras; same independent observers as macro4; actual startup/residency disposal, shader/GL/page errors, one complete forced shadow submission. No snapshot source files changed."
+  },
+  "playerHarness": {
+    "externalPath": "/workspace/yunshan/scripts/player-journey.mjs",
+    "externalSHA256": "a97a6686738877c136ec2c7a36cbf43b09aebc1cb170d36345e448c6e156f1e7",
+    "copiedPath": "/tmp/yunshan-phase2-root-coherent-01/scripts/player-journey.mjs",
+    "copiedSHA256": "a6dc503974f857143cbef8b8d2632c82b5653cea298c8ba7994c3e70148312e3",
+    "same": false
+  },
+  "npcWrapper": {
+    "path": "/tmp/yunshan-phase2-visual-macro5-npc.mjs",
+    "sha256": "c27c40c729af8f6507eff6d1aa7bf081337136b6c797375190f537a87478957d",
+    "originalSourceScriptSHA256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+    "scope": "Same actual initial adults/elders, real head basis, paused pose and two draw tests; read-only shader diagnostics."
+  },
+  "sixViewCompletion": {
+    "status": "passed",
+    "exitCode": 0,
+    "resultSHA256": "9c86adf36f971cfe5a09c65f23a50edb7f2d90cf00505c06003283caab79217b",
+    "allCopiedFilesUnchanged": true,
+    "entryUnchanged": true,
+    "sourceStartEndSame": true,
+    "errors": [],
+    "warnings": [],
+    "glErrorCount": 0,
+    "shaderFailedCount": 0
+  },
+  "npcCompletion": {
+    "status": "passed-with-unavailable-child-fixture",
+    "checks": 2,
+    "exitCode": 0,
+    "resultSHA256": "aebfbeac63cd3286041775f1604af0ae503d3e3da6d9c2ccb75b2cf04427ef38",
+    "sameEntry": true,
+    "sourcesSameManifest": true,
+    "errors": [],
+    "skipped": [
+      {
+        "check": "actual child near appearance",
+        "reason": "No actual renderable 6–17-year-old resident exists in this city snapshot; no age or citizen state was changed.",
+        "minActualAge": 20.000003805175027
+      }
+    ],
+    "actualGroups": [
+      {
+        "id": "citizen-551",
+        "age": 31.000003805175027,
+        "draws": 2
+      },
+      {
+        "id": "citizen-133",
+        "age": 63.00000380517503,
+        "draws": 2
+      }
+    ]
+  },
+  "allCopiedFilesUnchangedAtEnd": true,
+  "gpuReleased": true,
+  "gpuScope": "Owned macro4198/NPC4199 browser/preview ended; root CPU rules may still be running."
+}

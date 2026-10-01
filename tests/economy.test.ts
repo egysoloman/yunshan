@@ -23,10 +23,16 @@ function placeAtWork(sim: Simulation, worker: Citizen, shop: Shop) {
   worker.route = []; worker.routeIndex = 0; worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
   runtime(sim).activities[worker.id] = 'work'; runtime(sim).decisionAt[worker.id] = 10000;
   sim.setFocus(worker.position, 'drone');
+  const owner = shop.ownerId === 'player' ? sim.state.player : sim.state.citizens.find(citizen => citizen.id === shop.ownerId)!;
+  owner.position = { ...building.door }; owner.needs.hunger = 100; owner.needs.fatigue = 100;
+  Reflect.get(sim, 'refreshWorkforce').call(sim);
+  if (runtime(sim).privateLabor) runtime(sim).privateLabor.nextReviewAt = sim.state.extension!.lastUpdate;
+  Reflect.get(sim, 'reviewPrivateShifts').call(sim);
 }
 function moneySupply(sim: Simulation) {
   const s = sim.state, e = s.extension!;
-  return s.treasury + runtime(sim).taxes + s.player.money + s.citizens.reduce((sum, c) => sum + c.money, 0)
+  return s.treasury + runtime(sim).taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + runtime(sim).investment) + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0) + s.citizens.reduce((sum, c) => sum + c.money, 0)
+    + (s.playerLabor?.job?.escrow ?? 0) + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + s.shops.filter(shop => !e.companies.some(company => company.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, company) => sum + company.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0);
 }
@@ -53,7 +59,7 @@ test('an underfunded private employer pays its real cash proportionally and sett
   sim.step(.25);
   assert.ok(Math.abs(shop.cash) < 1e-8);
   for (let i = 0; i < workers.length; i++) assert.ok(Math.abs(workers[i].money - before[i] - 15 * .92) < 1e-8);
-  assert.equal(shop.profit, profit - 30); assert.equal(runtime(sim).wages.length, 0);
+  assert.equal(shop.profit, profit - 40, 'all earned wages are expenses even when ten remain unpaid'); assert.equal(runtime(sim).wages.length, 0);
   assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-7, 'salary, tax and supplier procurement all have funded counterparties');
   assert.equal(sim.shopPayrollDebt(shop), 10, 'an unfunded earned wage remains owed to the actual workers');
   const restored = new Simulation(sim.worldDefinition), result = restored.importSave(sim.exportSave()); assert.equal(result.ok, true, result.message);
@@ -81,15 +87,58 @@ test('production requires actual attendance and technology improves that labour 
 });
 
 test('public operations consume existing goods and credit their real supplier without creating money', () => {
-  const sim = new Simulation(fixture()), supplier = sim.state.shops.find(s => s.buildingId === 'farm')!;
-  for (const shop of sim.state.shops) shop.inventory = shop === supplier ? 10 : shop.buildingId === 'market' ? 90 : 0;
+  const sim = new Simulation(fixture()), supplier = sim.state.shops.find(s => s.buildingId === 'workshop')!;
+  for (const shop of sim.state.shops) shop.inventory = shop === supplier ? 10 : shop.buildingId === 'market' ? 90 : shop.buildingId === 'farm' ? 12 : 0;
+  const food = sim.state.shops.find(shop => shop.buildingId === 'farm')!;
   let purchase = 0, units = 0; sim.onEvent('public-procurement', event => { purchase += event.amount ?? 0; units += event.quantity ?? 0; assert.equal(event.shopId, supplier.id); });
   const supply = moneySupply(sim), funds = sim.shopFunds(supplier), treasury = sim.state.treasury;
   sim.step(.25);
   assert.ok(purchase > 0); assert.ok(Math.abs(supplier.inventory - (10 - units)) < 1e-8);
   assert.ok(Math.abs(sim.shopFunds(supplier) - funds - purchase * .92) < 1e-8);
   assert.ok(Math.abs(sim.state.treasury - treasury + purchase * .92) < 1e-8);
+  assert.equal(food.inventory, 12, 'public upkeep cannot consume residents\' food stock');
   assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-7);
+});
+
+test('native meals consume one portion, carry only the remainder, and workshop purchases stay material', () => {
+  const sim = new Simulation(fixture()), market = sim.state.shops.find(shop => shop.buildingId === 'market')!, workshop = sim.state.shops.find(shop => shop.buildingId === 'workshop')!;
+  sim.state.player.needs.hunger = 10;
+  sim.setFocus(sim.worldDefinition.buildings.find(building => building.id === market.buildingId)!.door, 'walk');
+  const cash = moneySupply(sim), stock = market.inventory, money = sim.state.player.money;
+  let consumed = 0; sim.onEvent('food-consumed', event => { if (event.citizenId === 'player') consumed += event.amount ?? 0; });
+  assert.equal(sim.command({ type: 'purchase', value: 2 }).ok, true);
+  assert.equal(market.inventory, stock - 2); assert.equal(sim.state.player.money, money - market.price * 2);
+  assert.equal(sim.state.player.inventory.food, 1); assert.equal(sim.state.player.needs.hunger, 62); assert.equal(consumed, 1);
+  const bought = sim.exportSave(), restored = new Simulation(fixture()); assert.equal(restored.importSave(bought).ok, true); assert.equal(restored.exportSave(), bought);
+  assert.equal(sim.command({ type: 'eat', targetId: 'food' }).ok, true);
+  assert.equal(sim.state.player.inventory.food, 0); assert.equal(sim.state.player.needs.hunger, 100); assert.equal(consumed, 2);
+  const empty = sim.exportSave(); assert.equal(sim.command({ type: 'eat', targetId: 'food' }).ok, false); assert.equal(sim.exportSave(), empty);
+  sim.setFocus(sim.worldDefinition.buildings.find(building => building.id === workshop.buildingId)!.door, 'walk');
+  const materials = workshop.inventory, funds = sim.shopFunds(workshop), hunger = sim.state.player.needs.hunger;
+  assert.equal(sim.command({ type: 'purchase', value: 2 }).ok, true);
+  assert.equal(workshop.inventory, materials - 2); assert.equal(sim.state.player.inventory.material, 2); assert.equal(sim.state.player.inventory.food, 0);
+  assert.equal(sim.state.player.needs.hunger, hunger); assert.equal(consumed, 2);
+  assert.ok(Math.abs(sim.shopFunds(workshop) - funds - workshop.price * 2 * .92) < 1e-8);
+  assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+});
+
+test('food freight leaves industrial material with its real producer', () => {
+  const world = fixture();
+  for (const building of world.buildings) { building.position.x *= 10; building.door.x *= 10; }
+  for (const node of world.nodes) node.position.x *= 10;
+  for (const edge of world.edges) edge.length *= 10;
+  const sim = new Simulation(world), workshop = sim.state.shops.find(shop => shop.buildingId === 'workshop')!;
+  for (const shop of sim.state.shops) if (sim.shopCommodity(shop) === 'food') shop.inventory = 0;
+  sim.state.trade!.ownedLots = {};
+  const carrier = sim.state.vehicles.find(vehicle => vehicle.kind === 'road')!;
+  carrier.cargo = 1; carrier.progress = .99999; carrier.direction = 1; carrier.state = 'moving';
+  runtime(sim).signalOverrides[world.edges.find(edge => edge.id === carrier.edgeId)!.to] = 1;
+  const material = workshop.inventory, cash = moneySupply(sim); let upkeep = 0;
+  sim.onEvent('public-procurement', event => { if (event.shopId === workshop.id) upkeep += event.quantity ?? 0; });
+  sim.step(.25);
+  assert.equal(carrier.cargo, 0, 'the empty food chain cannot load industrial stock onto a food carrier');
+  assert.ok(Math.abs(workshop.inventory - material + upkeep) < 1e-8);
+  assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
 });
 
 test('a stored meal is consumed after closing time and does not credit money or create food', () => {
@@ -121,22 +170,198 @@ test('legacy accounts migrate from real proprietor savings and new ownership and
 });
 
 
-test('welfare treatment consumes finite medical supplies and cannot heal from an empty supplier', () => {
-  const sim = new Simulation(fixture()), supplier = sim.state.shops.find(shop => shop.buildingId === 'farm')!;
-  const citizen = sim.state.citizens.find(c => c.role !== '学生')!, profile = sim.state.extension!.actorProfiles[citizen.id];
-  citizen.money = 0; profile.health = 40; citizen.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+test('funded clinical care consumes one real material and cannot heal from an empty supplier', () => {
+  const sim = new Simulation(fixture()), supplier = sim.state.shops.find(shop => shop.buildingId === 'workshop')!, profile = sim.state.extension!.actorProfiles.player;
+  profile.health = 40;
+  // The private patient's funded escrow remains usable even when the public
+  // operator cannot buy any of the clinic's finite material first.
+  sim.state.treasury = 0;
+  Reflect.get(sim.state.extension!, 'runtime').nextCompanyAt = sim.state.extension!.lastUpdate + 1e6;
   for (const shop of sim.state.shops) shop.inventory = 0;
+  for (const vehicle of sim.state.vehicles) vehicle.cargo = 0;
+  sim.state.trade!.ownedLots = {};
   const clinic = sim.worldDefinition.buildings.find(building => building.kind === 'clinic')!;
-  sim.onPhase('traffic', () => { citizen.position = { ...clinic.door }; });
+  const doctor = sim.state.citizens.find(c => c.role === '医生')!; assert.ok(doctor);
+  sim.onPhase('traffic', () => {
+    doctor.position = { ...clinic.door }; doctor.destinationId = clinic.id; doctor.route = []; doctor.routeIndex = 0;
+    doctor.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 }; runtime(sim).activities[doctor.id] = 'work'; runtime(sim).decisionAt[doctor.id] = 1e9;
+  });
+  sim.setFocus(clinic.door, 'walk');
   let payment = 0, consumed = 0;
-  sim.onEvent('medical-procurement', event => { payment += event.amount ?? 0; consumed += event.quantity ?? 0; assert.equal(event.shopId, supplier.id); });
+  sim.onEvent('wholesale', event => { if (event.purpose !== 'clinical-material') return; payment += event.amount ?? 0; consumed += event.quantity ?? 0; assert.equal(event.shopId, supplier.id); });
   const supply = moneySupply(sim);
+  assert.equal(sim.command({ type: 'heal' }).ok, true);
   sim.step(.25);
   assert.equal(payment, 0); assert.ok(profile.health < 41, 'empty medical supply cannot provide a full treatment');
-  supplier.inventory = 1; const funds = sim.shopFunds(supplier), health = profile.health;
-  sim.step(.25);
+  assert.equal(sim.state.clinical!.orders[0].escrow, 30);
+  supplier.inventory = 1; supplier.employees = 0; const funds = sim.shopFunds(supplier), health = profile.health;
+  // Isolate clinical cash from ordinary upkeep purchases and producers' own
+  // output. No material is created during treatment by this boundary fixture.
+  runtime(sim).financeAt = runtime(sim).relationshipClock + 1e6;
+  for (let tick = 0; tick < 500 && sim.state.clinical!.orders[0].state !== 'completed'; tick++) sim.step(.25);
   assert.equal(payment, 4); assert.equal(consumed, 1); assert.equal(supplier.inventory, 0);
-  assert.ok(profile.health > health + 3 && profile.health < health + 4, 'one available unit supplies exactly a fraction of the thirty-coin treatment');
+  assert.equal(sim.state.clinical!.orders[0].workedMinutes, 20); assert.equal(sim.state.clinical!.orders[0].consumedUnits, 1);
+  assert.ok(profile.health >= health + 25, 'only a completed real twenty-minute treatment provides the full health improvement');
   assert.ok(Math.abs(sim.shopFunds(supplier) - funds - 4 * .92) < 1e-8);
   assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-7);
+});
+
+
+test('actual attendance retains its employer and promised wage rate across mid-shift changes and save/load', () => {
+  const world = fixture(), sim = new Simulation(world), first = sim.state.shops.find(shop => shop.buildingId === 'market')!, second = sim.state.shops.find(shop => shop.buildingId === 'workshop')!;
+  const worker = sim.state.citizens.find(c => c.workId === first.buildingId && c.role !== '学生')!;
+  placeAtWork(sim, worker, first); sim.step(.25);
+  const original = { ...runtime(sim).wageAccruals.find((claim: { citizenId: string }) => claim.citizenId === worker.id) };
+  assert.equal(original.shopId, first.id); assert.ok(original.minutes > 0);
+  sim.state.districts[0].prosperity = 10; sim.step(.25);
+  const same = runtime(sim).wageAccruals.find((claim: { citizenId: string }) => claim.citizenId === worker.id);
+  assert.equal(same.ratePerMinute, original.ratePerMinute, 'the promised rate cannot be repriced after work');
+  worker.workId = second.buildingId; second.employees++; placeAtWork(sim, worker, second); sim.step(.25);
+  const claims = runtime(sim).wageAccruals.filter((claim: { citizenId: string }) => claim.citizenId === worker.id);
+  assert.equal(claims.length, 2); assert.equal(claims[0].shopId, first.id); assert.equal(claims[1].shopId, second.id);
+  assert.ok(claims[1].ratePerMinute < claims[0].ratePerMinute);
+  const restored = new Simulation(world), result = restored.importSave(sim.exportSave()); assert.equal(result.ok, true, result.message); assert.equal(restored.exportSave(), sim.exportSave());
+  const employerDue = claims.map((claim: { amount: number }) => claim.amount), before = restored.state.citizens.find(c => c.id === worker.id)!.money;
+  const restoredFirst = restored.state.shops.find(shop => shop.id === first.id)!, restoredSecond = restored.state.shops.find(shop => shop.id === second.id)!;
+  const funds = [restored.shopFunds(restoredFirst), restored.shopFunds(restoredSecond)], profits = [restoredFirst.profit, restoredSecond.profit];
+  const receipts = new Map<string, number>();
+  restored.onEvent('public-procurement', event => { if (event.shopId) receipts.set(event.shopId, (receipts.get(event.shopId) ?? 0) + (event.amount ?? 0) * (1 - restored.state.taxRate)); });
+  restored.state.citizens.find(c => c.id === worker.id)!.role = '学生'; // Earned wages survive loss of employment.
+  for (const citizen of restored.state.citizens) citizen.needs.hunger = 100;
+  runtime(restored).payrollAt = restored.state.hour * 60;
+  restored.step(.25);
+  assert.ok(Math.abs(restored.state.citizens.find(c => c.id === worker.id)!.money - before - employerDue.reduce((sum: number, owed: number) => sum + owed, 0) * .92) < 1e-8);
+  assert.ok(Math.abs(restored.shopFunds(restoredFirst) - funds[0] + employerDue[0] - (receipts.get(restoredFirst.id) ?? 0)) < 1e-8);
+  assert.ok(Math.abs(restored.shopFunds(restoredSecond) - funds[1] + employerDue[1] - (receipts.get(restoredSecond.id) ?? 0)) < 1e-8);
+  assert.equal(restoredFirst.profit, profits[0] + (receipts.get(restoredFirst.id) ?? 0), 'paying an accrued salary does not charge the expense twice');
+  assert.equal(restoredSecond.profit, profits[1] + (receipts.get(restoredSecond.id) ?? 0));
+});
+
+test('wage contracts reject changed amounts and employers atomically, while legacy unpaid expense migrates once', () => {
+  const world = fixture(), sim = new Simulation(world), shop = sim.state.shops.find(shop => shop.buildingId === 'market')!, worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
+  placeAtWork(sim, worker, shop); sim.step(.25);
+  for (const corrupt of [(save: any) => { save.runtime.wageAccruals[0].amount++; }, (save: any) => { save.runtime.wageAccruals[0].shopId = null; }, (save: any) => { save.runtime.attendance[save.runtime.wageAccruals[0].citizenId]++; }]) {
+    const save = JSON.parse(sim.exportSave()); corrupt(save); const prior = sim.exportSave(); assert.equal(sim.importSave(JSON.stringify(save)).ok, false); assert.equal(sim.exportSave(), prior);
+  }
+  const legacy = JSON.parse(new Simulation(world).exportSave()), target = legacy.state.shops.find((item: Shop) => item.id === shop.id);
+  delete legacy.runtime.accountingVersion; delete legacy.runtime.wageAccruals; legacy.runtime.wageArrears = [{ citizenId: worker.id, shopId: shop.id, amount: 25 }];
+  const restored = new Simulation(world), result = restored.importSave(JSON.stringify(legacy)); assert.equal(result.ok, true, result.message);
+  assert.equal(restored.state.shops.find(item => item.id === shop.id)!.profit, target.profit - 25);
+  const again = new Simulation(world), loaded = again.importSave(restored.exportSave()); assert.equal(loaded.ok, true, loaded.message); assert.equal(again.exportSave(), restored.exportSave());
+});
+
+test('share repurchases reserve both unpaid and not-yet-due actual wages', () => {
+  const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'market')!;
+  sim.state.player.identities = ['traveler', 'merchant']; sim.setFocus(sim.worldDefinition.buildings.find(b => b.id === shop.buildingId)!.door, 'walk'); assert.equal(sim.command({ type: 'foundCompany', targetId: shop.buildingId, value: 300 }).ok, true);
+  const company = sim.state.extension!.companies.find(company => company.buildingId === shop.buildingId)!;
+  assert.ok(company); const worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
+  company.listed = true; company.shareholders = { player: 900, [worker.id]: 100 }; company.sharePrice = 1; company.capital = 20;
+  placeAtWork(sim, worker, shop); sim.step(.25); company.capital = 20; company.sharePrice = 1;
+  sim.emitEvent({ type: 'wage', citizenId: worker.id, districtId: worker.districtId, shopId: shop.id, amount: 15 });
+  const debt = sim.shopPayrollDebt(shop); assert.ok(debt > 15);
+  const protectedCash = sim.shopProtectedFunds(shop); assert.ok(protectedCash > debt, 'already accepted future wages are protected too');
+  const recapitalization = protectedCash + 5 - company.capital; sim.state.player.money -= recapitalization; company.capital += recapitalization;
+  const bank = sim.worldDefinition.buildings.find(building => building.kind === 'bank')!; sim.setFocus(bank.door, 'walk');
+  const before = sim.exportSave(); assert.equal(sim.command({ type: 'sellShares', targetId: company.id, value: 10 }).ok, false); assert.equal(sim.exportSave(), before);
+  assert.equal(sim.command({ type: 'sellShares', targetId: company.id, value: 4 }).ok, true); assert.ok(Math.abs(company.capital - protectedCash - 1) < 1e-8); assert.equal(sim.shopPayrollDebt(shop), debt);
+});
+
+test('native housing, education, qualifications and police rewards have actual public counterparties', () => {
+  const sim = new Simulation(fixture()), home = sim.worldDefinition.buildings.find(b => b.kind === 'home')!, school = sim.worldDefinition.buildings.find(b => b.kind === 'school')!;
+  const cash = moneySupply(sim), treasury = sim.state.treasury;
+  sim.setFocus(home.door, 'walk'); assert.equal(sim.command({ type: 'rent', targetId: home.id }).ok, true);
+  sim.setFocus(school.door, 'walk'); assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true); assert.equal(sim.command({ type: 'exam', targetId: 'teacher' }).ok, true);
+  assert.equal(sim.state.treasury, treasury + 200); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+  sim.state.player.identities!.push('police'); const crime = { id: 'crime-funded-test', districtId: 'district', position: { ...school.door }, severity: 2, status: 'open' as const, createdAt: 480, responseAt: 0 };
+  sim.state.crimes.push(crime); const before = sim.state.player.money, publicBefore = sim.state.treasury;
+  assert.equal(sim.command({ type: 'resolveCrime', targetId: crime.id }).ok, true); assert.equal(sim.state.treasury, publicBefore - 36); assert.equal(sim.state.player.money, before + 36 * .92); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+});
+
+
+test('future public shifts require actual departmental witnesses and reserve past promises before authorizing cash', () => {
+  const world = fixture(), template = world.buildings.find(b => b.kind === 'bank')!;
+  world.buildings.push({ ...template, id: 'hall', name: 'hall', kind: 'hall', position: { x: 210, y: 20, z: 0 }, door: { x: 210, y: 20, z: 5 } });
+  world.nodes.push({ id: 'hall-door', districtId: 'district', name: 'hall', position: { x: 210, y: 20, z: 5 }, station: true });
+  world.edges.push({ id: 'road-hall', from: 'bank-door', to: 'hall-door', mode: 'road', length: 30, capacity: 20, points: [{ x: 180, y: 20, z: 5 }, { x: 210, y: 20, z: 5 }] });
+  const sim = new Simulation(world), officials = sim.state.citizens.filter(c => c.workId === 'hall' && c.role === '官员').slice(0, 2);
+  assert.equal(officials.length, 2); sim.state.treasury = 3000;
+  const cash = moneySupply(sim), policy = { taxRate: sim.state.taxRate, policeBudget: sim.state.policeBudget }, review = () => { runtime(sim).publicLaborReviewAt = 0; if (runtime(sim).publicLabor) runtime(sim).publicLabor.nextReviewAt = 0; Reflect.get(sim, 'reviewPublicShifts').call(sim); };
+  review(); assert.equal(runtime(sim).publicLabor.shifts.length, 0, 'no onsite officers means no approval');
+  for (const official of officials) { official.position = { x: 210, y: 20.6, z: 0 }; official.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 }; }
+  review(); const plan = runtime(sim).publicLabor.shifts[0]; assert.ok(plan); assert.equal(plan.day, 1); assert.deepEqual(plan.approvedBy, officials.map(official => official.id));
+  assert.equal(plan.cap, 0, 'standing wages and essential upkeep consume the available cash before a future commitment');
+  assert.equal(sim.state.treasury, 3000); assert.equal(moneySupply(sim), cash); assert.deepEqual({ taxRate: sim.state.taxRate, policeBudget: sim.state.policeBudget }, policy);
+  const worker = sim.state.citizens.find(c => c.workId === 'school' && c.role === '老师')!;
+  sim.state.day = 1; sim.state.hour = 8; sim.state.extension!.lastUpdate += 1440; sim.state.family!.lastUpdate += 1440; sim.state.culture!.lastUpdate += 1440; sim.state.banking!.nextInterestAt = sim.state.extension!.lastUpdate + 60;
+  let publicEarned = 0; sim.onEvent('wage-earned', event => { if (event.citizenId === worker.id) publicEarned += event.amount ?? 0; });
+  placeAtWork(sim, worker, { ...sim.state.shops[0], buildingId: 'school' }); sim.step(.25);
+  assert.equal(publicEarned, 0, 'an unfunded future shift cannot demand new unpaid labour'); assert.equal(sim.state.extension!.actorProfiles[worker.id].alive, true);
+  const save = sim.exportSave(), restored = new Simulation(world), result = restored.importSave(save); assert.equal(result.ok, true, result.message); assert.equal(restored.exportSave(), save);
+  for (const mutate of [(bad: any) => { bad.runtime.publicLabor.shifts[0].cap++; }, (bad: any) => { bad.runtime.publicLabor.shifts[0].approvedBy = [worker.id, officials[0].id]; }, (bad: any) => { bad.runtime.publicLabor.shifts[0].assignments[0].workedMinutes = 1; }]) { const bad = JSON.parse(save); mutate(bad); assert.equal(restored.importSave(JSON.stringify(bad)).ok, false); assert.equal(restored.exportSave(), save); }
+});
+
+test('construction purchases finite material and completes only after attended work, without saleable stock creation', () => {
+  const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'market')!, worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
+  sim.state.player.identities = ['traveler', 'merchant']; sim.state.player.money = 2000; sim.setFocus(sim.worldDefinition.buildings.find(b => b.id === shop.buildingId)!.door, 'walk');
+  assert.equal(sim.command({ type: 'foundCompany', targetId: shop.buildingId, value: 500 }).ok, true);
+  const company = sim.state.extension!.companies.find(item => item.buildingId === shop.buildingId)!, baseline = company.capital, stock = shop.inventory, cash = moneySupply(sim);
+  const producers = sim.state.shops.filter(item => ['farm', 'workshop'].includes(item.buildingId)), unitsBefore = producers.reduce((sum, item) => sum + item.inventory, 0);
+  assert.equal(sim.command({ type: 'expandCompany', targetId: company.id, value: 300 }).ok, true);
+  const job = Reflect.get(sim.state.extension!, 'runtime').constructionJobs[company.id]; assert.equal(company.level, 1); assert.equal(company.capital, baseline + 180); assert.equal(shop.inventory, stock); assert.equal(job.materialUnits, 22.5);
+  assert.equal(producers.reduce((sum, item) => sum + item.inventory, 0), unitsBefore - 22.5); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+  const restored = new Simulation(sim.worldDefinition), loaded = restored.importSave(sim.exportSave()); assert.equal(loaded.ok, true, loaded.message); assert.equal(restored.exportSave(), sim.exportSave());
+  placeAtWork(sim, worker, shop); assert.equal(sim.command({ type: 'speed', value: 16 }).ok, true);
+  for (let ticks = 0; company.level < 2 && ticks < 100; ticks++) sim.step(.25);
+  assert.equal(company.level, 2); assert.equal(job.workedMinutes, 60); assert.equal(job.consumedUnits, 22.5); assert.notEqual(job.completedAt, null);
+  assert.ok(shop.inventory <= stock, 'construction stock never enters the food inventory'); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+  const empty = new Simulation(fixture()); empty.state.player.identities = ['traveler', 'merchant']; empty.state.player.money = 2000; const site = empty.state.shops.find(item => item.buildingId === 'market')!; empty.setFocus(empty.worldDefinition.buildings.find(b => b.id === site.buildingId)!.door, 'walk'); assert.equal(empty.command({ type: 'foundCompany', targetId: site.buildingId, value: 500 }).ok, true);
+  for (const item of empty.state.shops) item.inventory = 0; empty.state.trade!.ownedLots = {};
+  const before = empty.exportSave(), target = empty.state.extension!.companies.find(item => item.buildingId === site.buildingId)!; assert.equal(empty.command({ type: 'expandCompany', targetId: target.id, value: 300 }).ok, false); assert.equal(empty.exportSave(), before);
+});
+
+test('private employers approve only onsite cash-backed minutes and preserve losses, old claims and future cash protection', () => {
+  const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'workshop')!, site = sim.worldDefinition.buildings.find(building => building.id === shop.buildingId)!;
+  const workers = sim.state.citizens.filter(citizen => citizen.workId === site.id && citizen.role !== '学生').slice(0, 2); assert.equal(workers.length, 2);
+  for (const citizen of sim.state.citizens.filter(citizen => citizen.workId === site.id && !workers.includes(citizen))) citizen.role = '学生';
+  shop.employees = 2; sim.transferBusinessOwnership(shop.id, workers[0].id);
+  // The owner takes back only unpromised opening capital; no account is topped up.
+  const withdrawn = sim.shopFunds(shop) - 20; sim.transferShopFunds(shop, -withdrawn); workers[0].money += withdrawn;
+  shop.profit = -900; sim.emitEvent({ type: 'wage', citizenId: workers[1].id, shopId: shop.id, districtId: shop.districtId, amount: 10 });
+  Reflect.get(sim, 'refreshWorkforce').call(sim); const supply = moneySupply(sim), loss = shop.profit;
+  Reflect.get(sim, 'reviewPrivateShifts').call(sim); assert.equal(sim.shopCommittedPayroll(shop), 0, 'an absent owner cannot promise new wages');
+  workers[0].position = { ...site.door }; workers[0].needs.hunger = 100; workers[0].needs.fatigue = 100;
+  runtime(sim).privateLabor.nextReviewAt = sim.state.extension!.lastUpdate; Reflect.get(sim, 'reviewPrivateShifts').call(sim);
+  const plan = runtime(sim).privateLabor.shifts[shop.id]; assert.ok(plan.reviews.length > 0);
+  assert.ok(sim.shopCommittedPayroll(shop) > 0 && sim.shopCommittedPayroll(shop) <= 20 - 10 - 20 * 8 / 24 + 1e-8);
+  assert.ok(plan.assignments.every((item: { minutesCap: number }) => item.minutesCap < 480), 'limited cash cannot authorize a full roster shift');
+  const minutes = plan.assignments.find((item: { citizenId: string }) => item.citizenId === workers[0].id).minutesCap;
+  Reflect.get(sim, 'registerAttendance').call(sim, workers[0], 480);
+  assert.equal(runtime(sim).attendance[workers[0].id], minutes, 'only accepted minutes can become actual earned labor');
+  const earned = runtime(sim).wageAccruals.find((item: { citizenId: string }) => item.citizenId === workers[0].id).amount;
+  assert.ok(Math.abs(shop.profit - loss + earned) < 1e-8, 'recovery does not reset historical losses or omit new labor cost');
+  assert.equal(runtime(sim).wages[0].amount, 10, 'the original creditor keeps the complete previously earned claim');
+  assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-7, 'review and labor accrual cannot create cash');
+  const save = sim.exportSave(), restored = new Simulation(fixture()); assert.equal(restored.importSave(save).ok, true); assert.equal(restored.exportSave(), save);
+  for (const corrupt of [(data: any) => { data.runtime.privateLabor.shifts[shop.id].assignments[0].minutesCap += 1; }, (data: any) => { data.runtime.privateLabor.shifts[shop.id].reviews[0].ownerPosition.x += 300; }, (data: any) => { data.runtime.privateLabor.shifts[shop.id].reviews[0].cash = 0; }]) {
+    const data = JSON.parse(save); corrupt(data); const before = restored.exportSave(); assert.equal(restored.importSave(JSON.stringify(data)).ok, false); assert.equal(restored.exportSave(), before);
+  }
+  const remaining = sim.shopCommittedPayroll(shop), recapitalization = 50; workers[0].money -= recapitalization; sim.transferShopFunds(shop, recapitalization);
+  runtime(sim).privateLabor.nextReviewAt = sim.state.extension!.lastUpdate; Reflect.get(sim, 'reviewPrivateShifts').call(sim);
+  assert.ok(sim.shopCommittedPayroll(shop) > remaining, 'only a real new receipt can fund an amended shift');
+  assert.equal(shop.profit, loss - earned); assert.equal(runtime(sim).wages[0].amount, 10); assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-7);
+});
+
+test('a capped worker wallet retains its wage claim until a real receiving capacity is available', () => {
+  const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'workshop')!, worker = sim.state.citizens.find(citizen => citizen.workId === shop.buildingId && citizen.role !== '学生')!;
+  worker.money = 1e9; const supply = moneySupply(sim), funds = sim.shopFunds(shop);
+  let receipts = 0; sim.onEvent('public-procurement', event => { if (event.shopId === shop.id) receipts += (event.amount ?? 0) * (1 - sim.state.taxRate); });
+  sim.emitEvent({ type: 'wage', citizenId: worker.id, shopId: shop.id, districtId: shop.districtId, amount: 10 });
+  const profit = shop.profit; sim.step(.25);
+  assert.equal(worker.money, 1e9); assert.equal(sim.shopFunds(shop), funds + receipts);
+  assert.equal(runtime(sim).wageArrears.find((item: { citizenId: string }) => item.citizenId === worker.id).amount, 10);
+  assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-6, 'a capped recipient cannot burn the funded wage');
+  const recipient = sim.state.citizens.find(citizen => citizen.id !== worker.id)!; worker.money -= 10; recipient.money += 10;
+  sim.step(.25); assert.ok(Math.abs(worker.money - (1e9 - 10 + 10 * .92)) < 1e-7);
+  assert.ok(!runtime(sim).wageArrears.some((item: { citizenId: string }) => item.citizenId === worker.id)); assert.ok(Math.abs(shop.profit - profit - receipts) < 1e-8, 'deferred payment does not charge the original wage expense twice');
+  assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-6);
 });

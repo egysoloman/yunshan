@@ -1,0 +1,924 @@
+{
+  "at": "2026-10-01T22:08:04.072Z",
+  "scope": "Actual native r5 export CPU save/continuation and partition proof, coherent02 BZMc source; no browser/profile/GL access, no normal walking actions, no production edits.",
+  "sourceManifest": "source-manifest.json",
+  "sourceSnapshot": "/tmp/yunshan-phase2-root-coherent-02",
+  "fileCount": 81,
+  "sourceHashesStable": true,
+  "nativeExportOriginalSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+  "nativeExportBytes": 1798521,
+  "nativeExportUnchanged": true,
+  "actualWorld": {
+    "selectedRecipe": "current-v2-r5",
+    "worldOutputLayout": "current-v2",
+    "fingerprint": "c70ebca5",
+    "worldSHA256": "762a1b9f34f01f12190312228494668400e2fb0f49b689ac3c1ed0b0071d482b",
+    "homeId": "market-b21",
+    "homeName": "千灯市集·灯市街·里居6"
+  },
+  "originalCheckpoint": {
+    "source": "/workspace/yunshan/artifacts/phase2-player-journey-r5/results.json",
+    "sourceSHA256": "be00d4852f31502583e0251d88643539a81ad68d70cfd7d04568e6150cfcdcd0",
+    "at": "2026-10-01T18:38:31.886Z",
+    "body": {
+      "x": -445,
+      "y": 43,
+      "z": 550
+    },
+    "wallet": "509.16 云币",
+    "clock": "14:45",
+    "day": "第 1 日",
+    "home": "居于 千灯市集·灯市街·里居6"
+  },
+  "exactNative": {
+    "tick": 1620,
+    "day": 0,
+    "hour": 14.75,
+    "player": {
+      "position": {
+        "x": -445.20000000000005,
+        "y": 42.6,
+        "z": 549.8000000000001
+      },
+      "role": "traveler",
+      "identities": [
+        "traveler"
+      ],
+      "money": 509.1676755148238,
+      "reputation": 1,
+      "needs": {
+        "hunger": 95.62499999999687,
+        "fatigue": 99.89200000000017,
+        "social": 65.13999999999982,
+        "fun": 78.3549999999941
+      },
+      "inventory": {
+        "block": 32,
+        "food": 1
+      },
+      "homeId": "market-b21",
+      "education": 0,
+      "experience": 0,
+      "partnerId": null,
+      "vehicleId": null
+    },
+    "rng": 1133483520,
+    "accumulator": 0.1329999999999636,
+    "playerLabor": {
+      "version": 1,
+      "nextId": 1,
+      "nextAvailableAt": 885,
+      "lastObservedAt": 885,
+      "job": null,
+      "history": [],
+      "stats": {
+        "reservedGross": 0,
+        "paidGross": 0,
+        "refundedGross": 0,
+        "workedMinutes": 0,
+        "completed": 0
+      }
+    },
+    "clinical": {
+      "version": 1,
+      "nextOrderId": 1,
+      "orders": [],
+      "stock": {},
+      "nextVisitAt": {},
+      "stats": {
+        "funded": 0,
+        "purchasePaid": 0,
+        "serviceFees": 0,
+        "refunded": 0,
+        "completed": 0,
+        "cancelled": 0
+      },
+      "archived": {
+        "funded": 0,
+        "purchasePaid": 0,
+        "serviceFees": 0,
+        "refunded": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "count": 0
+      }
+    },
+    "ownershipSHA256": "29dbcd590560cb946c3e32b5d5676d13d3842d33c608645309a63a1433d57517",
+    "financialSHA256": "f81cbf9873fde23f62fa83944f40e46fb22efb2692697acb001c18ca13491c2e",
+    "companyCount": 12,
+    "shopCount": 210,
+    "citizenCount": 616,
+    "vehicleCount": 344,
+    "routePoolPoints": 6773,
+    "citizensWithRoutes": 616,
+    "voxelCount": 0,
+    "playerBusinesses": [],
+    "persistedModules": [
+      "extension",
+      "aviation",
+      "banking",
+      "family",
+      "culture",
+      "journey",
+      "trade",
+      "playerLabor",
+      "clinical"
+    ]
+  },
+  "restore": {
+    "nativeImportSuccess": true,
+    "exportByteExact": true,
+    "ownershipExact": true,
+    "financialExact": true,
+    "exportSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+    "assembledByteExact": true,
+    "partCount": 119,
+    "geographicChunks": 117,
+    "partBytes": [
+      {
+        "id": "global",
+        "bytes": 294658
+      },
+      {
+        "id": "player",
+        "bytes": 1433
+      },
+      {
+        "id": "chunk:-1:-1",
+        "bytes": 10974
+      },
+      {
+        "id": "chunk:-1:-2",
+        "bytes": 42786
+      },
+      {
+        "id": "chunk:-1:-3",
+        "bytes": 3420
+      },
+      {
+        "id": "chunk:-1:-4",
+        "bytes": 418
+      },
+      {
+        "id": "chunk:-1:-5",
+        "bytes": 4475
+      },
+      {
+        "id": "chunk:-1:-6",
+        "bytes": 35483
+      },
+      {
+        "id": "chunk:-1:0",
+        "bytes": 11378
+      },
+      {
+        "id": "chunk:-1:1",
+        "bytes": 20425
+      },
+      {
+        "id": "chunk:-1:2",
+        "bytes": 35105
+      },
+      {
+        "id": "chunk:-1:3",
+        "bytes": 5930
+      },
+      {
+        "id": "chunk:-2:-1",
+        "bytes": 17152
+      },
+      {
+        "id": "chunk:-2:-2",
+        "bytes": 16996
+      },
+      {
+        "id": "chunk:-2:-3",
+        "bytes": 24028
+      },
+      {
+        "id": "chunk:-2:-5",
+        "bytes": 39523
+      },
+      {
+        "id": "chunk:-2:-6",
+        "bytes": 2930
+      },
+      {
+        "id": "chunk:-2:0",
+        "bytes": 11884
+      },
+      {
+        "id": "chunk:-2:1",
+        "bytes": 43818
+      },
+      {
+        "id": "chunk:-2:2",
+        "bytes": 19205
+      },
+      {
+        "id": "chunk:-2:3",
+        "bytes": 7068
+      },
+      {
+        "id": "chunk:-2:4",
+        "bytes": 30476
+      },
+      {
+        "id": "chunk:-3:-1",
+        "bytes": 9109
+      },
+      {
+        "id": "chunk:-3:-2",
+        "bytes": 25443
+      },
+      {
+        "id": "chunk:-3:-3",
+        "bytes": 18355
+      },
+      {
+        "id": "chunk:-3:0",
+        "bytes": 438
+      },
+      {
+        "id": "chunk:-3:1",
+        "bytes": 43092
+      },
+      {
+        "id": "chunk:-3:2",
+        "bytes": 29936
+      },
+      {
+        "id": "chunk:-3:3",
+        "bytes": 36041
+      },
+      {
+        "id": "chunk:-3:4",
+        "bytes": 12151
+      },
+      {
+        "id": "chunk:-3:5",
+        "bytes": 6707
+      },
+      {
+        "id": "chunk:-4:-1",
+        "bytes": 9250
+      },
+      {
+        "id": "chunk:-4:-2",
+        "bytes": 21226
+      },
+      {
+        "id": "chunk:-4:-3",
+        "bytes": 19108
+      },
+      {
+        "id": "chunk:-4:-4",
+        "bytes": 12096
+      },
+      {
+        "id": "chunk:-4:0",
+        "bytes": 23439
+      },
+      {
+        "id": "chunk:-4:1",
+        "bytes": 24144
+      },
+      {
+        "id": "chunk:-4:2",
+        "bytes": 26149
+      },
+      {
+        "id": "chunk:-4:3",
+        "bytes": 47996
+      },
+      {
+        "id": "chunk:-4:4",
+        "bytes": 51981
+      },
+      {
+        "id": "chunk:-4:5",
+        "bytes": 7854
+      },
+      {
+        "id": "chunk:-5:-1",
+        "bytes": 18732
+      },
+      {
+        "id": "chunk:-5:-2",
+        "bytes": 17242
+      },
+      {
+        "id": "chunk:-5:-3",
+        "bytes": 17145
+      },
+      {
+        "id": "chunk:-5:-4",
+        "bytes": 2202
+      },
+      {
+        "id": "chunk:-5:0",
+        "bytes": 22262
+      },
+      {
+        "id": "chunk:-5:1",
+        "bytes": 27951
+      },
+      {
+        "id": "chunk:-5:2",
+        "bytes": 660
+      },
+      {
+        "id": "chunk:-5:3",
+        "bytes": 5952
+      },
+      {
+        "id": "chunk:-5:4",
+        "bytes": 1075
+      },
+      {
+        "id": "chunk:-6:-1",
+        "bytes": 22516
+      },
+      {
+        "id": "chunk:-6:-2",
+        "bytes": 19943
+      },
+      {
+        "id": "chunk:-6:-3",
+        "bytes": 20231
+      },
+      {
+        "id": "chunk:-6:-4",
+        "bytes": 3674
+      },
+      {
+        "id": "chunk:-6:0",
+        "bytes": 39260
+      },
+      {
+        "id": "chunk:-6:1",
+        "bytes": 42498
+      },
+      {
+        "id": "chunk:-6:2",
+        "bytes": 17349
+      },
+      {
+        "id": "chunk:-7:-1",
+        "bytes": 1919
+      },
+      {
+        "id": "chunk:-7:-3",
+        "bytes": 1302
+      },
+      {
+        "id": "chunk:-7:0",
+        "bytes": 12103
+      },
+      {
+        "id": "chunk:-7:1",
+        "bytes": 8989
+      },
+      {
+        "id": "chunk:-7:2",
+        "bytes": 62
+      },
+      {
+        "id": "chunk:0:-1",
+        "bytes": 6299
+      },
+      {
+        "id": "chunk:0:-2",
+        "bytes": 11422
+      },
+      {
+        "id": "chunk:0:-3",
+        "bytes": 22664
+      },
+      {
+        "id": "chunk:0:-4",
+        "bytes": 786
+      },
+      {
+        "id": "chunk:0:-5",
+        "bytes": 18672
+      },
+      {
+        "id": "chunk:0:-6",
+        "bytes": 22013
+      },
+      {
+        "id": "chunk:0:0",
+        "bytes": 4421
+      },
+      {
+        "id": "chunk:0:1",
+        "bytes": 3000
+      },
+      {
+        "id": "chunk:0:2",
+        "bytes": 60
+      },
+      {
+        "id": "chunk:1:-1",
+        "bytes": 4911
+      },
+      {
+        "id": "chunk:1:-2",
+        "bytes": 22313
+      },
+      {
+        "id": "chunk:1:-3",
+        "bytes": 35121
+      },
+      {
+        "id": "chunk:1:-4",
+        "bytes": 27067
+      },
+      {
+        "id": "chunk:1:0",
+        "bytes": 26407
+      },
+      {
+        "id": "chunk:2:-1",
+        "bytes": 1201
+      },
+      {
+        "id": "chunk:2:-2",
+        "bytes": 13990
+      },
+      {
+        "id": "chunk:2:-3",
+        "bytes": 39867
+      },
+      {
+        "id": "chunk:2:-4",
+        "bytes": 23556
+      },
+      {
+        "id": "chunk:2:0",
+        "bytes": 8033
+      },
+      {
+        "id": "chunk:2:5",
+        "bytes": 394
+      },
+      {
+        "id": "chunk:3:-1",
+        "bytes": 26574
+      },
+      {
+        "id": "chunk:3:-2",
+        "bytes": 24058
+      },
+      {
+        "id": "chunk:3:-3",
+        "bytes": 28796
+      },
+      {
+        "id": "chunk:3:-4",
+        "bytes": 4319
+      },
+      {
+        "id": "chunk:3:-5",
+        "bytes": 6238
+      },
+      {
+        "id": "chunk:3:0",
+        "bytes": 19220
+      },
+      {
+        "id": "chunk:3:2",
+        "bytes": 21816
+      },
+      {
+        "id": "chunk:3:3",
+        "bytes": 46252
+      },
+      {
+        "id": "chunk:3:4",
+        "bytes": 26852
+      },
+      {
+        "id": "chunk:3:5",
+        "bytes": 3072
+      },
+      {
+        "id": "chunk:4:-1",
+        "bytes": 24272
+      },
+      {
+        "id": "chunk:4:-2",
+        "bytes": 49083
+      },
+      {
+        "id": "chunk:4:-3",
+        "bytes": 772
+      },
+      {
+        "id": "chunk:4:-4",
+        "bytes": 1449
+      },
+      {
+        "id": "chunk:4:-5",
+        "bytes": 34813
+      },
+      {
+        "id": "chunk:4:-6",
+        "bytes": 21504
+      },
+      {
+        "id": "chunk:4:-7",
+        "bytes": 4377
+      },
+      {
+        "id": "chunk:4:0",
+        "bytes": 784
+      },
+      {
+        "id": "chunk:4:2",
+        "bytes": 30710
+      },
+      {
+        "id": "chunk:4:3",
+        "bytes": 9922
+      },
+      {
+        "id": "chunk:4:4",
+        "bytes": 11396
+      },
+      {
+        "id": "chunk:5:-1",
+        "bytes": 23256
+      },
+      {
+        "id": "chunk:5:-2",
+        "bytes": 14435
+      },
+      {
+        "id": "chunk:5:-3",
+        "bytes": 58
+      },
+      {
+        "id": "chunk:5:-4",
+        "bytes": 6843
+      },
+      {
+        "id": "chunk:5:-5",
+        "bytes": 9599
+      },
+      {
+        "id": "chunk:5:-6",
+        "bytes": 20842
+      },
+      {
+        "id": "chunk:5:-7",
+        "bytes": 274
+      },
+      {
+        "id": "chunk:5:0",
+        "bytes": 5130
+      },
+      {
+        "id": "chunk:5:2",
+        "bytes": 19576
+      },
+      {
+        "id": "chunk:5:3",
+        "bytes": 18418
+      },
+      {
+        "id": "chunk:5:4",
+        "bytes": 26744
+      },
+      {
+        "id": "chunk:6:-4",
+        "bytes": 436
+      },
+      {
+        "id": "chunk:6:-5",
+        "bytes": 28960
+      },
+      {
+        "id": "chunk:6:-6",
+        "bytes": 22230
+      },
+      {
+        "id": "chunk:6:-7",
+        "bytes": 313
+      },
+      {
+        "id": "chunk:6:5",
+        "bytes": 64
+      }
+    ],
+    "independentPlayerBytes": 1433,
+    "requiredPlayerClinicalIndices": [],
+    "actualPlayerClinicalOrders": 0,
+    "actualClinicalStockEntries": 0,
+    "requiredPlayerLaborPresent": true
+  },
+  "negativeCases": [
+    {
+      "name": "missing independent player body",
+      "rejected": true,
+      "reason": "Error: 存档分区不完整。",
+      "simulationUnchangedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9"
+    },
+    {
+      "name": "missing required empty player clinical custody",
+      "rejected": true,
+      "reason": "Error: 玩家托管实体分区不完整。",
+      "simulationUnchangedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9"
+    },
+    {
+      "name": "missing player labor escrow body",
+      "rejected": true,
+      "reason": "Error: 缺失或重复玩家存档字段。",
+      "simulationUnchangedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9"
+    },
+    {
+      "name": "missing real geographical chunk",
+      "rejected": true,
+      "reason": "Error: 缺失存档实体。",
+      "simulationUnchangedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9"
+    },
+    {
+      "name": "missing required clinical module declared in native save",
+      "rejected": true,
+      "reason": "读档失败：无效存档字段：persisted module bodies and manifest。",
+      "simulationUnchangedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9"
+    }
+  ],
+  "untrustedLabelIgnored": true,
+  "unknownFingerprintRejected": true,
+  "continuation": {
+    "operation": "Real command({type:pause,value:0}) on two independent CPU instances then 24 calls step(.25) each, original native export never rewritten.",
+    "actualTicks": 24,
+    "actualGameMinutes": 6,
+    "all24FullExportsByteEqual": true,
+    "ticks": [
+      {
+        "index": 1,
+        "tick": 1621,
+        "day": 0,
+        "hour": 14.754166666666666,
+        "sha256": "6959b54320bba32423dbbf68e90586a0599a6d2f38228966a4d27125cba04e5c",
+        "bytes": 1799171,
+        "equal": true
+      },
+      {
+        "index": 2,
+        "tick": 1622,
+        "day": 0,
+        "hour": 14.758333333333333,
+        "sha256": "5f256f4b1dbeb4af41ae42d011e3e7dfd91501acbb7b71f45938ed90754a149e",
+        "bytes": 1799037,
+        "equal": true
+      },
+      {
+        "index": 3,
+        "tick": 1623,
+        "day": 0,
+        "hour": 14.7625,
+        "sha256": "7d25f56ade42619d4addb138f454bc0b7768883f037fe72443610fec3051337b",
+        "bytes": 1799085,
+        "equal": true
+      },
+      {
+        "index": 4,
+        "tick": 1624,
+        "day": 0,
+        "hour": 14.766666666666667,
+        "sha256": "5a16478bf471fd4783da3c0a4df71f4c99ff31653d63651e3470ba8c2536358e",
+        "bytes": 1799511,
+        "equal": true
+      },
+      {
+        "index": 5,
+        "tick": 1625,
+        "day": 0,
+        "hour": 14.770833333333334,
+        "sha256": "3a21d241e20cff8930ae245c357fe7da022792bc42aa466178d960f792ec5ded",
+        "bytes": 1799961,
+        "equal": true
+      },
+      {
+        "index": 6,
+        "tick": 1626,
+        "day": 0,
+        "hour": 14.775,
+        "sha256": "ad2eba1a678073604c8f3bc90555ba2e523f475bcb77e257b7a597af3bb2151f",
+        "bytes": 1799343,
+        "equal": true
+      },
+      {
+        "index": 7,
+        "tick": 1627,
+        "day": 0,
+        "hour": 14.779166666666667,
+        "sha256": "d669266a313fbafb6f602f18b1bd9ee85147ced525b5d469dfc75ed8e3d28c64",
+        "bytes": 1799167,
+        "equal": true
+      },
+      {
+        "index": 8,
+        "tick": 1628,
+        "day": 0,
+        "hour": 14.783333333333333,
+        "sha256": "7de2813ca83967b94e4ff018a9703bd58a98efebd13c355091b56d29dd7671e1",
+        "bytes": 1799129,
+        "equal": true
+      },
+      {
+        "index": 9,
+        "tick": 1629,
+        "day": 0,
+        "hour": 14.7875,
+        "sha256": "9a41a9c08de02c616b8b106600f6f9faf7444884a12aacb5cdafff62b0553608",
+        "bytes": 1798911,
+        "equal": true
+      },
+      {
+        "index": 10,
+        "tick": 1630,
+        "day": 0,
+        "hour": 14.791666666666666,
+        "sha256": "1ddfaba6c05f9f83b2032758bfc42ceb72e15883bd1c8f655fa4461cef5d0154",
+        "bytes": 1799985,
+        "equal": true
+      },
+      {
+        "index": 11,
+        "tick": 1631,
+        "day": 0,
+        "hour": 14.795833333333333,
+        "sha256": "9be7429c5a5a8b5e3468487ed18618c8155edd1714d30cac22e707484bbf4509",
+        "bytes": 1799662,
+        "equal": true
+      },
+      {
+        "index": 12,
+        "tick": 1632,
+        "day": 0,
+        "hour": 14.8,
+        "sha256": "5f091e84b41565c47b7df9901c77a9c510fc25766c454824a9efe2b4beec58a2",
+        "bytes": 1798501,
+        "equal": true
+      },
+      {
+        "index": 13,
+        "tick": 1633,
+        "day": 0,
+        "hour": 14.804166666666667,
+        "sha256": "a8e7b049dad99e2ef65fbb80c0dcd9d4b1af18e660efb45ee1b0cc6e4f14c5d5",
+        "bytes": 1799170,
+        "equal": true
+      },
+      {
+        "index": 14,
+        "tick": 1634,
+        "day": 0,
+        "hour": 14.808333333333334,
+        "sha256": "b62d406c220285338197f8ef6f5b4cea05e8c884af7ecdb7a87e99f3be8ea6f4",
+        "bytes": 1798825,
+        "equal": true
+      },
+      {
+        "index": 15,
+        "tick": 1635,
+        "day": 0,
+        "hour": 14.8125,
+        "sha256": "65e0b935ca650b915930d006485c9c4575126abdaa26dca15b56abdd4980cbde",
+        "bytes": 1798989,
+        "equal": true
+      },
+      {
+        "index": 16,
+        "tick": 1636,
+        "day": 0,
+        "hour": 14.816666666666666,
+        "sha256": "07dc2b12cccfd5cf97b14e105b4d9ec2e56bbcd082ae3a296e716be79678b9f1",
+        "bytes": 1799338,
+        "equal": true
+      },
+      {
+        "index": 17,
+        "tick": 1637,
+        "day": 0,
+        "hour": 14.820833333333333,
+        "sha256": "2dcf4a991d74a2816d2b8abe3cf88f279dc709707d3e359c98da23ce00cb0ef3",
+        "bytes": 1799629,
+        "equal": true
+      },
+      {
+        "index": 18,
+        "tick": 1638,
+        "day": 0,
+        "hour": 14.825,
+        "sha256": "377724f5a3d8fc4cf1691ab360dbe20457d75334d958ea09b95a2ac897e49c32",
+        "bytes": 1798589,
+        "equal": true
+      },
+      {
+        "index": 19,
+        "tick": 1639,
+        "day": 0,
+        "hour": 14.829166666666667,
+        "sha256": "61537c24c4b1e74ae98b4646e1513d49e52b35d6734c66a325577ee1f17ab839",
+        "bytes": 1798982,
+        "equal": true
+      },
+      {
+        "index": 20,
+        "tick": 1640,
+        "day": 0,
+        "hour": 14.833333333333334,
+        "sha256": "bfa4cc6fdb67a9f03fb8bb56cd0e2423d0f55ddc3477ed006a1d0dfe21e5cae2",
+        "bytes": 1784813,
+        "equal": true
+      },
+      {
+        "index": 21,
+        "tick": 1641,
+        "day": 0,
+        "hour": 14.8375,
+        "sha256": "969aaac2fe288887dbda29270a23e380b2d53b4357dbbf28751122d2895d04f9",
+        "bytes": 1788760,
+        "equal": true
+      },
+      {
+        "index": 22,
+        "tick": 1642,
+        "day": 0,
+        "hour": 14.841666666666667,
+        "sha256": "d79e55471e751dbe79c09a36f9dc69e7aae4c064fa3d5b8bf86e906b94d31d6d",
+        "bytes": 1791142,
+        "equal": true
+      },
+      {
+        "index": 23,
+        "tick": 1643,
+        "day": 0,
+        "hour": 14.845833333333333,
+        "sha256": "5af42d1c61bf8155024977309e238e4242b24318836d44b827b2ebe54c6e22f4",
+        "bytes": 1793586,
+        "equal": true
+      },
+      {
+        "index": 24,
+        "tick": 1644,
+        "day": 0,
+        "hour": 14.85,
+        "sha256": "14ec4e8d1084803e280bb04d5a6e3f3b7cea3160bc86187dbf4157977e82530f",
+        "bytes": 1793667,
+        "equal": true
+      }
+    ],
+    "final": {
+      "tick": 1644,
+      "day": 0,
+      "hour": 14.85,
+      "player": {
+        "position": {
+          "x": -445.20000000000005,
+          "y": 42.6,
+          "z": 549.8000000000001
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 509.1676755148238,
+        "reputation": 1,
+        "needs": {
+          "hunger": 95.41499999999672,
+          "fatigue": 99.78400000000033,
+          "social": 65.06799999999981,
+          "fun": 78.30099999999402
+        },
+        "inventory": {
+          "block": 32,
+          "food": 1
+        },
+        "homeId": "market-b21",
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "rng": 2752972230,
+      "accumulator": 0.1329999999999636,
+      "sha256": "14ec4e8d1084803e280bb04d5a6e3f3b7cea3160bc86187dbf4157977e82530f",
+      "bytes": 1793667
+    },
+    "finalPartitionByteExact": true
+  },
+  "limits": [
+    "UI checkpoint has rounded coordinates and truncated wallet; exact fractional original values come from the real native export.",
+    "The actual saved clinical and player job escrow are empty; funded-clinical cases remain covered by separately archived 26 storage tests.",
+    "CPU deterministic continuation does not count as completing the normal browser school/clinic/flight journey.",
+    "Partition proof uses pure split/reassembly APIs, not new browser IndexedDB writes or a partial Simulation restore.",
+    "Far city actors remain full individual simulation; statistical simulation is not implemented."
+  ]
+}

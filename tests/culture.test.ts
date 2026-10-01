@@ -23,10 +23,15 @@ function restore(sim: Simulation) { const next = new Simulation(sim.worldDefinit
 function same(first: Simulation, second: Simulation) { assert.ok(first.exportSave() === second.exportSave(), 'both instances must serialize identically after the same commands and steps'); }
 function completedWork(genre = 'literature') { const sim = create(); move(sim, site(sim, 'school')); ok(sim, { type: 'createWork', targetId: genre, title: '山城长卷', text: BODY }); advance(sim, genre === 'literature' ? 120 : 180); assert.equal(sim.state.culture!.project, null); const work = sim.state.culture!.works[0]; assert.ok(work); return { sim, work }; }
 /** Real resident and facility are fixed in place only to isolate the attendance boundary. */
-function pinReader(sim: Simulation, citizen: Citizen, building: Building) {
+function pinReader(sim: Simulation, citizen: Citizen, building: Building, activity: 'social' | 'work' = 'social') {
   citizen.education = 2; citizen.role = 'teacher'; citizen.workId = building.id;
-  sim.onPhase('traffic', () => { citizen.position = { x: building.position.x, y: building.position.y + .6, z: building.position.z + 1.2 }; citizen.destinationId = building.id; citizen.route = []; citizen.routeIndex = 0; citizen.needs = { hunger: 100, fatigue: 100, social: 80, fun: 50 }; });
+  sim.onPhase('traffic', () => {
+    citizen.position = { x: building.position.x, y: building.position.y + .6, z: building.position.z + 1.2 }; citizen.destinationId = building.id; citizen.route = []; citizen.routeIndex = 0; citizen.needs = { hunger: 100, fatigue: 100, social: 80, fun: 50 };
+    // Isolate the actual activity being tested, without adding attendance or a wage claim.
+    const runtime = Reflect.get(sim, 'runtime'); runtime.activities[citizen.id] = activity; runtime.decisionAt[citizen.id] = sim.state.day * 1440 + sim.state.hour * 60 + 10;
+  });
 }
+function publicWorker(sim: Simulation) { const worker = sim.state.citizens.find(person => person.role !== '学生' && sim.state.extension!.actorProfiles[person.id].age >= 18 && !sim.state.shops.some(shop => shop.ownerId === person.id || shop.buildingId === person.workId)); assert.ok(worker, 'the service fixture requires an existing adult public worker, never a private shop owner'); return worker; }
 
 test('creation requires a real public studio, money and text; leaving pauses actual work and save/load resumes it', () => {
   const sim = create(); reject(sim, { type: 'createWork', targetId: 'literature', title: '山城', text: BODY });
@@ -148,5 +153,136 @@ test('corrupted source conclusions, reader identities, completed work time and p
     data => { data.state.culture.petitions[0].signerIds = ['absent']; },
   ];
   for (const mutate of mutations) { const before = sim.exportSave(), data = JSON.parse(before); mutate(data); assert.equal(sim.importSave(JSON.stringify(data)).ok, false); assert.equal(sim.exportSave(), before); }
+  restore(sim);
+});
+
+/** The deadline is a valid saved boundary; all signatures are acquired in the people phase. */
+function queuedService(topic: 'education' | 'health' | 'transport') {
+  const sim = create(), hall = site(sim, 'hall');
+  for (const citizen of sim.state.citizens) if (['官员', '财政官', 'official', '议员', 'council'].includes(citizen.role)) citizen.role = '档案员';
+  move(sim, hall); ok(sim, { type: 'filePetition', targetId: topic, title: '具体公共服务', text: BODY });
+  const petition = sim.state.culture!.petitions[0];
+  for (const citizen of sim.state.citizens.slice(2, 5)) pinReader(sim, citizen, hall);
+  advance(sim, 4); assert.ok(petition.signerIds.length >= 3);
+  const delta = petition.replyAt - 2 - sim.state.culture!.lastUpdate;
+  sim.state.extension!.lastUpdate += delta; sim.state.family!.lastUpdate += delta; sim.state.culture!.lastUpdate += delta;
+  sim.step(.25);
+  const order = sim.state.culture!.orders[0]; assert.ok(order); assert.equal(petition.executionId, order.id); assert.equal(order.state, 'awaitingReview');
+  return { sim, petition, order };
+}
+function mayorApprove(sim: Simulation, petitionId: string) {
+  const core = site(sim, 'core');
+  reject(sim, { type: 'reviewPetition', targetId: petitionId });
+  sim.state.player.role = 'mayor'; sim.state.player.identities = ['traveler', 'mayor'];
+  move(sim, core); reject(sim, { type: 'reviewPetition', targetId: petitionId });
+  sim.setFocus({ x: core.position.x, y: core.position.y + 6.6, z: core.position.z }, 'walk');
+  ok(sim, { type: 'reviewPetition', targetId: petitionId });
+}
+
+test('an actual petition produces a distinct authorized service order and conserved finite procurement receipts', () => {
+  const { sim, petition, order } = queuedService('education');
+  const treasury = sim.state.treasury; assert.equal(order.spent, 0); assert.equal(order.receivedUnits, 0); assert.equal(order.servedIds.length, 0);
+  mayorApprove(sim, petition.id); assert.equal(order.authorizedCap, 40); assert.deepEqual(order.approvedBy, ['player']);
+  assert.equal(sim.state.treasury, treasury, 'authorization is an expense limit, never newly created cash');
+  reject(sim, { type: 'reviewPetition', targetId: petition.id });
+  advance(sim, 2); assert.equal(order.state, 'active'); assert.equal(order.spent, 24); assert.equal(order.receivedUnits, 6); assert.equal(order.consumedUnits, 0);
+  assert.ok(order.receipts.length > 0); assert.equal(order.receipts.reduce((sum, receipt) => sum + receipt.paid, 0), order.spent);
+  for (const receipt of order.receipts) {
+    assert.equal(receipt.budgetId, order.id); assert.ok(receipt.lots.every(lot => sim.state.shops.some(shop => shop.id === lot.shopId)));
+    assert.ok(Math.abs(receipt.paid - receipt.tax - receipt.lots.reduce((sum, lot) => sum + lot.net, 0)) < 1e-8);
+    for (const lot of receipt.lots) assert.ok(Math.abs(lot.gross - lot.quantity * lot.unitPrice) < 1e-8);
+  }
+  assert.equal(order.servedIds.length, 0, 'a reply, authorization and purchase do not complete actual education');
+  restore(sim);
+});
+
+test('public education needs staff, material and real attendance; leaving pauses and restored instances continue identically', () => {
+  const { sim, petition, order } = queuedService('education'); mayorApprove(sim, petition.id); advance(sim, 2);
+  const school = site(sim, 'school'), worker = publicWorker(sim);
+  move(sim, school); sim.state.player.needs.hunger = sim.state.player.needs.fatigue = 100;
+  ok(sim, { type: 'attendService', targetId: order.id });
+  const education = sim.state.player.education;
+  for (const citizen of sim.state.citizens) if (citizen.workId === school.id) citizen.role = '档案员';
+  advance(sim, 20); assert.equal(order.serviceMinutes.player ?? 0, 0); assert.equal(order.consumedUnits, 0);
+  pinReader(sim, worker, school, 'work'); worker.role = '老师';
+  advance(sim, 20); assert.equal(order.serviceMinutes.player, 20); assert.equal(sim.state.player.education, education);
+  move(sim, site(sim, 'home')); advance(sim, 10); assert.equal(order.serviceMinutes.player, 20);
+  move(sim, school);
+  const clean = restore(sim), next = restore(sim);
+  // Saved state resumes naturally; identical real staff positioning hooks isolate this boundary.
+  for (const instance of [clean, next]) { const person = instance.state.citizens.find(citizen => citizen.id === worker.id)!; pinReader(instance, person, school, 'work'); person.role = '老师'; }
+  for (let index = 0; index < 20; index++) { clean.step(.25); next.step(.25); }
+  same(clean, next);
+  const completed = clean.state.culture!.orders.find(item => item.id === order.id)!;
+  assert.ok(completed.servedIds.includes('player')); assert.equal(completed.serviceMinutes.player, 60); assert.equal(clean.state.player.education, education + 1); assert.ok(completed.consumedUnits >= 1);
+  reject(clean, { type: 'attendService', targetId: order.id }); restore(clean);
+});
+
+test('actual public clinical treatment consumes a funded unit after doctor attendance and twenty minutes', () => {
+  const { sim, petition, order } = queuedService('health'); mayorApprove(sim, petition.id); advance(sim, 2);
+  const clinic = site(sim, 'clinic'), doctor = publicWorker(sim);
+  pinReader(sim, doctor, clinic, 'work'); doctor.role = '医生';
+  move(sim, clinic); sim.state.player.needs.hunger = sim.state.player.needs.fatigue = 100; sim.state.extension!.actorProfiles.player.health = 50;
+  ok(sim, { type: 'attendService', targetId: order.id });
+  advance(sim, 18); assert.equal(order.servedIds.includes('player'), false); assert.equal(order.consumedUnits, 0);
+  const health = sim.state.extension!.actorProfiles.player.health; advance(sim, 2);
+  assert.ok(order.servedIds.includes('player')); assert.equal(order.serviceMinutes.player, 20); assert.ok(sim.state.extension!.actorProfiles.player.health > health + 24.8, 'the same twenty-minute material-backed clinical protocol applies to public and paid patients');
+  assert.equal(order.consumedUnits, order.servedIds.length); assert.ok(order.spent >= order.consumedUnits * 4);
+  restore(sim);
+});
+
+test('zero discretionary cash or supplier stock waits without free service and retries after a genuine donor payment', () => {
+  const { sim, petition, order } = queuedService('health'); mayorApprove(sim, petition.id);
+  sim.state.treasury = 0; advance(sim, 2); assert.equal(order.receivedUnits, 0); assert.equal(order.spent, 0); assert.equal(order.state, 'awaitingBudget');
+  const clean = restore(sim), next = restore(sim); for (let index = 0; index < 20; index++) { clean.step(.25); next.step(.25); } same(clean, next);
+  // A real existing citizen funds the public account; the next automatic purchase still uses the same authorization.
+  const donor = sim.state.citizens[8], contribution = Math.min(donor.money, 100); donor.money -= contribution; sim.state.treasury += contribution;
+  for (const shop of sim.state.shops) shop.inventory = 0;
+  sim.state.trade!.ownedLots = {};
+  advance(sim, 62); assert.equal(order.receivedUnits, 0); assert.equal(order.consumedUnits, 0); assert.equal(order.servedIds.length, 0);
+  restore(sim);
+});
+
+test('dynamic supply quotes buy only actual material within the approved cap and preserve an unfinished partial service', () => {
+  const { sim, petition, order } = queuedService('health'); mayorApprove(sim, petition.id);
+  const producer = sim.state.shops.find(shop => site(sim, 'workshop').id === shop.buildingId)!;
+  // An expensive historical production window is a quote fixture; it cannot pay for procurement.
+  sim.state.trade!.activity[producer.id] = [{ at: Math.floor(sim.state.culture!.lastUpdate / 10) * 10, sold: 0, supplied: 0, labor: 60, produced: 4, shortages: 0, earnedLaborCost: 40, actualUtilities: 0 }];
+  advance(sim, 2); assert.equal(order.spent, 40); assert.ok(order.receivedUnits > 3 && order.receivedUnits < 4); assert.equal(order.targetUnits, 6); assert.equal(order.consumedUnits, 0);
+  const receipt = order.receipts[0]; assert.ok(receipt.lots[0].unitPrice > 10); assert.equal(receipt.reason, 'budget'); assert.ok(Math.abs(receipt.quantity * receipt.lots[0].unitPrice - receipt.paid) < 1e-7);
+  reject(sim, { type: 'reviewPetition', targetId: petition.id, value: 80 }); assert.equal(order.authorizedCap, 40, 'the family/culture layer cannot increase a previously approved public cap');
+  const clinic = site(sim, 'clinic'), doctor = publicWorker(sim); pinReader(sim, doctor, clinic, 'work'); doctor.role = '医生';
+  for (const patient of sim.state.citizens.slice(12, 14)) { pinReader(sim, patient, clinic); sim.state.extension!.actorProfiles[patient.id].health = 50; }
+  move(sim, clinic); sim.state.player.needs.hunger = sim.state.player.needs.fatigue = 100; sim.state.extension!.actorProfiles.player.health = 50; ok(sim, { type: 'attendService', targetId: order.id });
+  advance(sim, 62); assert.equal(order.consumedUnits, 3); assert.equal(order.servedIds.length, 3); assert.ok(order.servedIds.includes('player')); assert.equal(order.state, 'awaitingBudget'); assert.equal(order.completedAt, null); assert.match(order.lastReason, /授权额度已经耗尽/);
+  assert.equal(order.spent, 40); assert.ok(order.receivedUnits < order.targetUnits); const clean = restore(sim), next = restore(sim);
+  for (let index = 0; index < 24; index++) { clean.step(.25); next.step(.25); } same(clean, next);
+});
+
+test('station upkeep consumes actual parts and attended work before any future dispatch maintenance exists', () => {
+  const { sim, petition, order } = queuedService('transport'); mayorApprove(sim, petition.id); advance(sim, 2);
+  const station = site(sim, 'station'), driver = publicWorker(sim); pinReader(sim, driver, station, 'work'); driver.role = '驾驶员';
+  for (let attempt = 0; attempt < 5 && !sim.isOnDuty(driver.id, station.id); attempt++) advance(sim, 2);
+  assert.equal(sim.isOnDuty(driver.id, station.id), true, 'the newly assigned worker must actually begin duty before the sixty-minute maintenance window');
+  const startedMinutes = order.serviceMinutes[driver.id] ?? 0;
+  advance(sim, 58 - startedMinutes); assert.equal(order.serviceMinutes[driver.id], 58); assert.equal(sim.state.culture!.transportMaintenance[station.id], undefined); assert.equal(order.consumedUnits, 0);
+  advance(sim, 2); assert.equal(order.state, 'fulfilled', JSON.stringify({ minutes: order.serviceMinutes, staff: order.staffIds, driverId: driver.id, driverState: driver.state, duty: sim.isOnDuty(driver.id, station.id), reason: order.lastReason })); assert.equal(order.consumedUnits, 4); assert.equal(order.spent, 16);
+  const record = sim.state.culture!.transportMaintenance[station.id]; assert.equal(record.orderId, order.id); assert.equal(record.maintainedUntil, order.completedAt! + 7 * 1440); assert.ok(order.staffIds.includes(driver.id));
+  const clean = restore(sim), next = restore(sim); for (let i = 0; i < 24; i++) { clean.step(.25); next.step(.25); } same(clean, next);
+});
+
+test('forged service receipts, materials, authorizations, actor references and completed timings reject atomically', () => {
+  const { sim, petition, order } = queuedService('education'); mayorApprove(sim, petition.id); advance(sim, 2);
+  const mutate: ((save: any) => void)[] = [
+    save => { save.state.culture.orders[0].spent++; },
+    save => { save.state.culture.orders[0].receivedUnits++; },
+    save => { save.state.culture.orders[0].approvedBy = ['absent']; },
+    save => { save.state.culture.orders[0].receipts[0].lots[0].shopId = 'absent'; },
+    save => { save.state.culture.orders[0].receipts[0].lots[0].unitPrice++; },
+    save => { save.state.culture.orders[0].serviceMinutes.player = 60; save.state.culture.orders[0].servedIds = ['player']; save.state.culture.orders[0].consumedUnits = 1; },
+    save => { save.state.culture.petitions[0].executionId = 'service-999'; },
+    save => { save.state.culture.transportMaintenance[order.siteId] = { orderId: order.id, maintainedUntil: sim.state.culture!.lastUpdate + 7 * 1440, units: 4 }; },
+  ];
+  for (const change of mutate) { const before = sim.exportSave(), save = JSON.parse(before); change(save); assert.equal(sim.importSave(JSON.stringify(save)).ok, false); assert.equal(sim.exportSave(), before); }
   restore(sim);
 });
