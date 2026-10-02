@@ -1,0 +1,36 @@
+✖ v5 is opt-in and its sampled surfaces have real limited foundations; inherited body/water stay exact (2552.039037ms)
+✔ ordinary fixed-speed W reaches all three actual sale points and the upper work floor; room/stock are real (3369.31062ms)
+✔ the new bank connection is a real 3.2m pedestrian road with same-height joins and normal W both ways (4388.148196ms)
+✔ flower-bed rims and trunks are actual body blockers while the sales approach stays open (0.464998ms)
+✔ actual emitted near/far resident mesh tops match shared support; physical geometry changes identity (773.804713ms)
+✔ native save matches the regenerated v5 fingerprint; unknown identity and wrong layout reject atomically (21989.332104ms)
+✔ 52m public street is physically continuous and the public planner consumes the real bank-to-market link (6423.536648ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 43661.002115
+
+✖ failing tests:
+
+test at tests/market-block.test.ts:1:2796
+✖ v5 is opt-in and its sampled surfaces have real limited foundations; inherited body/water stay exact (2552.039037ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(surface.bottom[i].y<p.y)
+  
+      at TestContext.<anonymous> (/tmp/yunshan-v5-market-block-01/prototype-01/candidate-final/tests/market-block.test.ts:34:188)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

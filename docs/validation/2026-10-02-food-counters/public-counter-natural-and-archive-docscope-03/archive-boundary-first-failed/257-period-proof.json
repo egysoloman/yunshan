@@ -1,0 +1,67 @@
+{
+  "scope": "256 actual original payroll callbacks from lawful setTime(16.99) plus real quarter-minute steps; NOT 256 natural days or city stability/performance; original actual queued debt kept",
+  "start": 2070,
+  "time": 2262.75,
+  "progress": [
+    {
+      "epoch": 1,
+      "time": 2070.75,
+      "periods": 1,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    },
+    {
+      "epoch": 2,
+      "time": 2071.5,
+      "periods": 2,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    },
+    {
+      "epoch": 64,
+      "time": 2118,
+      "periods": 64,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    },
+    {
+      "epoch": 128,
+      "time": 2166,
+      "periods": 128,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    },
+    {
+      "epoch": 255,
+      "time": 2261.25,
+      "periods": 255,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    },
+    {
+      "epoch": 256,
+      "time": 2262,
+      "periods": 256,
+      "actualQueuedDebt": 0,
+      "ledgerOutstanding": 0,
+      "queuedRows": 0
+    }
+  ],
+  "load256": {
+    "ok": true,
+    "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+  },
+  "exportExact256": true,
+  "thrown": "柜台结算证据已满；保留已赚工资，须先扩展合法历史归档。",
+  "oldDebtRetained": true,
+  "originalQueuedRowsUnchanged": true,
+  "periodsUnchanged": true,
+  "finalEpoch": 256,
+  "finalQueuedDebt": 0,
+  "finalAccruals": []
+}

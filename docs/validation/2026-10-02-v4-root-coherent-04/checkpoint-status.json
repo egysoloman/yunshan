@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-02T03:43:33.336557+00:00",
-  "fullRules": "RUNNING",
+  "capturedAt": "2026-10-02T05:23:24.310731+00:00",
+  "fullRules": "PASS",
   "fullRulesProcessSession": 42667,
   "fullRulesLog": "/tmp/yunshan-v4-root-coherent-04/root-validation/rules.log",
   "sourceCount": 99,
@@ -14,7 +14,25 @@
     "passed": 30,
     "exitCode": 0
   },
-  "visualAcceptance": "BLOCKED_REFERENCE_PIXELS_UNAVAILABLE",
-  "GL": "NOT_RUN",
-  "fullGoal": "NOT_COMPLETE"
+  "visualAcceptance": "NEW_REFERENCE_BLOCKED_PIXELS_UNAVAILABLE; OLD_REFERENCE_ART_FAIL",
+  "GL": "ORIGINAL_BROWSER_FAIL_4_PASS_1_FAIL_6_NOT_RUN; FIXED_SIX_TECHNICAL_PASS_6_OF_6; BODY_JOURNEY_PENDING",
+  "fullGoal": "NOT_COMPLETE",
+  "fullRulesExitCode": 0,
+  "fullRulesCounts": {
+    "exitCode": 0,
+    "tests": 465,
+    "pass": 465,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "startedAt": "2026-10-02T03:38:25.736896+00:00",
+    "endedAt": "2026-10-02T04:56:14.077721+00:00",
+    "rawLogSHA256": "8c825b167081e0601977353a8050cfa2921c40e7936ae4eac03a41eb4484bd1d"
+  },
+  "originalSixSameSourcePassed": 6,
+  "fullRulesLogSHA256": "8c825b167081e0601977353a8050cfa2921c40e7936ae4eac03a41eb4484bd1d",
+  "browserGPUOwner": "/root/visual_resume",
+  "artQuality": "FAIL",
+  "rootActualVisualReview": "root-visual-review.json"
 }

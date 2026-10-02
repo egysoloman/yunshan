@@ -1,0 +1,9 @@
+{
+  "command": "node --import tsx --test docscope/natural-v1-day.test.ts",
+  "exitCode": 1,
+  "tests": 1,
+  "pass": 0,
+  "fail": 1,
+  "sourcesStartEndEqual": true,
+  "scope": "actual functional natural 17:00 to day1 10:00 plus24 clone, no timing benchmark"
+}

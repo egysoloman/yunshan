@@ -1,0 +1,51 @@
+{
+  "scope": "Read-only comparison; prototype uses coherent03. This does not merge or verify coherent04 integration.",
+  "coherent03ManifestSHA256": "0bc282091535675f4b6b9726572346e810d71671d2a41e28adac4734c215dd34",
+  "coherent04ManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "inputCounts": {
+    "coherent03": 99,
+    "coherent04": 99,
+    "prototypeFixed": 102
+  },
+  "changes": [
+    {
+      "path": "src/persistence/partition.ts",
+      "coherent03": "8d38bc9ea8f4d8848c310281723e63a9482c3ff4adf6685ffb9630a768c17afa",
+      "coherent04": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088"
+    },
+    {
+      "path": "src/persistence/route-encoding.ts",
+      "coherent03": "feab56c39ec60cfbd006d4c0988cd8ac862b468aecd3f416f882ea6136c3139b",
+      "coherent04": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "tests/extensions.test.ts",
+      "coherent03": "726c3f0c1a9339c1dd9af7d271376dd9efedf9ed880c2f2147c1cff6ac1a2eed",
+      "coherent04": "8ae61c0d840c1257ba92eaca69040aadaa85fbaedd3963abee4b7d4857e8ce95"
+    },
+    {
+      "path": "tests/route-encoding.test.ts",
+      "coherent03": "4937b3830fe91409e1ef33a18bde54c1f6eff84a53c86fb85fcaefcffeaa3258",
+      "coherent04": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4"
+    },
+    {
+      "path": "tests/simulation.test.ts",
+      "coherent03": "a591dcd073d9395860a3b332fbb190695a8199e4b97ff7738b8f898117cc19e0",
+      "coherent04": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37"
+    },
+    {
+      "path": "开发备忘录.md",
+      "coherent03": "c4dcc619d41d5ba0b18c8225e616b929fc3dc2e4d4a80d4c54bb62b2402ad049",
+      "coherent04": "1e5fcacd29c9fea8ac614a8aaa1f273cf0cd87037d0c8aced749d6bcc084bf47"
+    }
+  ],
+  "meaning": {
+    "src/persistence/route-encoding.ts": "04 removes forcePaged; new paged-v1 rejects duplicate coordinates, too-small pools and noncanonical first-reference ordering. Existing pooled-v1 contract remains.",
+    "src/persistence/partition.ts": "04 requires regenerated partition route encoding to equal original generation and validates regenerated routes.",
+    "tests/route-encoding.test.ts": "04 adds malformed canonical pool and partition-generation rejection cases.",
+    "tests/extensions.test.ts": "04 adds actual generated-research import/route extent/save size diagnostics.",
+    "tests/simulation.test.ts": "04 adds actual natural-city save diagnostics and original pooled-v1 atomic rejection when true pool exceeds cap.",
+    "开发备忘录.md": "04 snapshot memo differs; this prototype carries original 03 memo as historical input, not latest project completion."
+  },
+  "mergeStatus": "Parent reported git apply --check fixed.patch exit0 on current tree; NOT_APPLIED here; integrated build/rules/save/GL require a new freeze."
+}

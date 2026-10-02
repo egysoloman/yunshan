@@ -1,0 +1,3150 @@
+{
+  "scope": "new genuine original v1 writer normal createWorld fixture; natural ticks only, no setTime/player rescue/role/job/position/cash/stock/needs/deadline assignments",
+  "original": {
+    "workerId": "citizen-142",
+    "workId": "starport-b2",
+    "earned": 38.251477333333334,
+    "minutes": 416,
+    "stocks": [
+      {
+        "id": "counter-stock-1",
+        "sourceLotId": "freight-lot-22",
+        "origin": {
+          "location": "node",
+          "districtId": "starport",
+          "shopId": null,
+          "receivedQuantity": 28,
+          "nodeId": "starport-quarter-2",
+          "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+          "fromEdgeId": "road-starport-quarter-2-starport-station",
+          "direction": -1,
+          "arrivedAt": 508,
+          "position": {
+            "x": 1576.2984709834516,
+            "y": 402.6,
+            "z": -1410.0630325720126
+          }
+        },
+        "unitPrice": 4,
+        "received": 8,
+        "remaining": 8,
+        "sold": 0,
+        "returned": 0,
+        "pickedAt": 744,
+        "deliveredAt": 808,
+        "carrierId": "citizen-142",
+        "location": "counter"
+      }
+    ]
+  },
+  "planned": false,
+  "accepted": false,
+  "finalClosed": false,
+  "rows": [
+    {
+      "time": 1020,
+      "hour": 17,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1000,
+            "stage": "serve",
+            "resumeStage": "assembly",
+            "reason": "",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "state": "foodCounterDuty",
+          "destinationId": "starport-b2",
+          "needs": {
+            "hunger": 39.93020247207021,
+            "fatigue": 53.068516870876785,
+            "social": 67.29089771314302,
+            "fun": 49.934317634925236
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1493.8,
+            "y": 421.6,
+            "z": -1432.2
+          },
+          "state": "working",
+          "destinationId": "starport-b2",
+          "needs": {
+            "hunger": 50.42660910924894,
+            "fatigue": 63.835442467983846,
+            "social": 88.57812502738363,
+            "fun": 39.914078686609855
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1080,
+      "hour": 18,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1064,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1493.8,
+            "y": 400.6,
+            "z": -1432.2
+          },
+          "state": "socializing",
+          "destinationId": "starport-b2",
+          "needs": {
+            "hunger": 36.730202472070204,
+            "fatigue": 50.82851687087678,
+            "social": 74.01089771314304,
+            "fun": 54.41431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1493.8,
+            "y": 421.6,
+            "z": -1432.2
+          },
+          "state": "socializing",
+          "destinationId": "starport-b2",
+          "needs": {
+            "hunger": 47.22660910924894,
+            "fatigue": 61.595442467983844,
+            "social": 95.29812502738363,
+            "fun": 44.39407868660985
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1140,
+      "hour": 19,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1128,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1540.64,
+            "y": 420.2860570617879,
+            "z": -1502.4
+          },
+          "state": "moving",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 33.5302024720702,
+            "fatigue": 48.58851687087678,
+            "social": 73.05089771314304,
+            "fun": 53.13431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1493.8,
+            "y": 421.6,
+            "z": -1432.2
+          },
+          "state": "socializing",
+          "destinationId": "starport-b2",
+          "needs": {
+            "hunger": 44.02660910924894,
+            "fatigue": 59.35544246798384,
+            "social": 100,
+            "fun": 48.87407868660985
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1200,
+      "hour": 20,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1192,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "atHome",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 30.3302024720702,
+            "fatigue": 54.02851687087678,
+            "social": 72.09089771314305,
+            "fun": 56.33431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1560,
+            "y": 395.00453456940573,
+            "z": -1344.9188974339493
+          },
+          "state": "moving",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 40.826609109248935,
+            "fatigue": 57.11544246798384,
+            "social": 99.04,
+            "fun": 47.59407868660985
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1260,
+      "hour": 21,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1256,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1560,
+            "y": 392.32575875785153,
+            "z": -1320.0912581375605
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 27.130202472070202,
+            "fatigue": 51.78851687087678,
+            "social": 71.13089771314306,
+            "fun": 55.054317634925226
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "atHome",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 37.62660910924893,
+            "fatigue": 62.55544246798384,
+            "social": 98.08000000000001,
+            "fun": 50.79407868660985
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1320,
+      "hour": 22,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1320,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1348.6456462873716,
+            "y": 365.5870258251164,
+            "z": -1280
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 23.930202472070203,
+            "fatigue": 49.548516870876774,
+            "social": 70.17089771314306,
+            "fun": 53.774317634925225
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "atHome",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 34.42660910924893,
+            "fatigue": 67.99544246798384,
+            "social": 97.12000000000002,
+            "fun": 53.99407868660985
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1380,
+      "hour": 23,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1320,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1348.6456462873716,
+            "y": 365.5870258251164,
+            "z": -1280
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 23.930202472070203,
+            "fatigue": 49.548516870876774,
+            "social": 70.17089771314306,
+            "fun": 53.774317634925225
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 31.22660910924893,
+            "fatigue": 88.15544246798385,
+            "social": 96.16000000000003,
+            "fun": 57.194078686609856
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1440,
+      "hour": 0,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1384,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1560,
+            "y": 392.32575875785153,
+            "z": -1320.0912581375605
+          },
+          "state": "moving",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 20.730202472070204,
+            "fatigue": 47.30851687087677,
+            "social": 69.21089771314307,
+            "fun": 52.494317634925224
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 28.02660910924893,
+            "fatigue": 100,
+            "social": 95.20000000000003,
+            "fun": 60.39407868660986
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1500,
+      "hour": 1,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1448,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 17.530202472070204,
+            "fatigue": 67.46851687087677,
+            "social": 68.25089771314308,
+            "fun": 55.69431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 24.82660910924893,
+            "fatigue": 100,
+            "social": 94.24000000000004,
+            "fun": 63.59407868660986
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1560,
+      "hour": 2,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1512,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 14.330202472070205,
+            "fatigue": 87.62851687087678,
+            "social": 67.29089771314308,
+            "fun": 58.89431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 21.626609109248932,
+            "fatigue": 100,
+            "social": 93.28000000000004,
+            "fun": 66.79407868660986
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1620,
+      "hour": 3,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1576,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 11.130202472070206,
+            "fatigue": 100,
+            "social": 66.33089771314309,
+            "fun": 62.09431763492523
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 18.426609109248933,
+            "fatigue": 100,
+            "social": 92.32000000000005,
+            "fun": 69.99407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1680,
+      "hour": 4,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1640,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 7.930202472070206,
+            "fatigue": 100,
+            "social": 65.3708977131431,
+            "fun": 65.29431763492524
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 15.226609109248933,
+            "fatigue": 100,
+            "social": 91.36000000000006,
+            "fun": 73.19407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1740,
+      "hour": 5,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1704,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 4.730202472070205,
+            "fatigue": 100,
+            "social": 64.4108977131431,
+            "fun": 68.49431763492524
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 12.026609109248934,
+            "fatigue": 100,
+            "social": 90.40000000000006,
+            "fun": 76.39407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1800,
+      "hour": 6,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1768,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1556.4,
+            "y": 424.40000000000003,
+            "z": -1494
+          },
+          "state": "sleeping",
+          "destinationId": "starport-b6",
+          "needs": {
+            "hunger": 1.5302024720702052,
+            "fatigue": 100,
+            "social": 63.4508977131431,
+            "fun": 71.69431763492524
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "atHome",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 8.826609109248935,
+            "fatigue": 100,
+            "social": 89.44000000000007,
+            "fun": 79.59407868660988
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1860,
+      "hour": 7,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1832,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1560,
+            "y": 392.32575875785153,
+            "z": -1320.0912581375605
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 97.76,
+            "social": 62.4908977131431,
+            "fun": 70.41431763492524
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1693,
+            "y": 400.00000000000006,
+            "z": -1308.8
+          },
+          "state": "atHome",
+          "destinationId": "starport-b38",
+          "needs": {
+            "hunger": 8.826609109248935,
+            "fatigue": 100,
+            "social": 89.44000000000007,
+            "fun": 79.59407868660988
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1920,
+      "hour": 8,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1896,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1348.6456462873716,
+            "y": 365.5870258251164,
+            "z": -1280
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 95.52000000000001,
+            "social": 61.5308977131431,
+            "fun": 69.13431763492524
+          },
+          "food": 0,
+          "money": 473.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1560,
+            "y": 395.72327563169506,
+            "z": -1352.2369882499859
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 5.6266091092489345,
+            "fatigue": 97.76,
+            "social": 88.48000000000008,
+            "fun": 78.31407868660988
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 1980,
+      "hour": 9,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1960,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1371.2925492279549,
+            "y": 368.6,
+            "z": -1279.861016212048
+          },
+          "state": "riding",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 93.28000000000002,
+            "social": 60.5708977131431,
+            "fun": 67.85431763492524
+          },
+          "food": 0,
+          "money": 469.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1501.375329861456,
+            "y": 383.5375329861456,
+            "z": -1288
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 2.4266091092489344,
+            "fatigue": 95.52000000000001,
+            "social": 87.52000000000008,
+            "fun": 77.03407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2040,
+      "hour": 10,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 1960,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1230.7,
+            "y": 275.22727526312514,
+            "z": -756.8984136220596
+          },
+          "state": "riding",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 91.04000000000002,
+            "social": 59.610897713143096,
+            "fun": 66.57431763492524
+          },
+          "food": 0,
+          "money": 469.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1296,
+            "y": 352.90627186551563,
+            "z": -1242.3909878496436
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 93.28000000000002,
+            "social": 86.56000000000009,
+            "fun": 75.75407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2100,
+      "hour": 11,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2088,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 952,
+            "y": 214.44735653362213,
+            "z": -387.6372948180236
+          },
+          "state": "moving",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 88.80000000000003,
+            "social": 58.650897713143095,
+            "fun": 65.29431763492524
+          },
+          "food": 0,
+          "money": 469.22422167376317,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1272,
+            "y": 315.200217956785,
+            "z": -1000.2515665643924
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 91.04000000000002,
+            "social": 85.6000000000001,
+            "fun": 74.47407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2160,
+      "hour": 12,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2152,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 52,
+            "fatigue": 86.56000000000003,
+            "social": 57.690897713143094,
+            "fun": 72.01431763492523
+          },
+          "food": 1,
+          "money": 443.4591997750353,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1232,
+            "y": 277.66234622325726,
+            "z": -774.0871498112275
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 88.80000000000003,
+            "social": 84.6400000000001,
+            "fun": 73.19407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2220,
+      "hour": 13,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2216,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 48.8,
+            "fatigue": 84.32000000000004,
+            "social": 56.730897713143094,
+            "fun": 70.73431763492523
+          },
+          "food": 1,
+          "money": 443.4591997750353,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1232,
+            "y": 239.9588112457625,
+            "z": -507.94454997008813
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 86.56000000000003,
+            "social": 83.6800000000001,
+            "fun": 71.91407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2280,
+      "hour": 14,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2280,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 96.8,
+            "fatigue": 82.08000000000004,
+            "social": 55.77089771314309,
+            "fun": 77.45431763492523
+          },
+          "food": 1,
+          "money": 430.4786592711514,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1136,
+            "y": 202.48791374036003,
+            "z": -337.7708124311429
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 84.32000000000004,
+            "social": 82.72000000000011,
+            "fun": 70.63407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2340,
+      "hour": 15,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2280,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 96.8,
+            "fatigue": 82.08000000000004,
+            "social": 55.77089771314309,
+            "fun": 77.45431763492523
+          },
+          "food": 1,
+          "money": 430.4786592711514,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1288,
+            "y": 213.57012313229734,
+            "z": -284.7510261024778
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 82.08000000000004,
+            "social": 81.76000000000012,
+            "fun": 69.35407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2400,
+      "hour": 16,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2344,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 93.6,
+            "fatigue": 79.84000000000005,
+            "social": 54.81089771314309,
+            "fun": 76.17431763492523
+          },
+          "food": 1,
+          "money": 430.4786592711514,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1344,
+            "y": 231.9537068712147,
+            "z": -334.2947390229672
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 79.84000000000005,
+            "social": 80.80000000000013,
+            "fun": 68.07407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    },
+    {
+      "time": 2400,
+      "hour": 16,
+      "counter": {
+        "state": "open",
+        "tasks": [
+          {
+            "id": "food-task-1",
+            "citizenId": "citizen-142",
+            "contract": {
+              "id": "standing-day-0",
+              "day": 0,
+              "workId": "starport-b2",
+              "ratePerMinute": 0.09195066666666667,
+              "availableMinutes": 420.1289081342635,
+              "payrollEpoch": null
+            },
+            "acceptedAt": 584,
+            "lastObservedAt": 2344,
+            "stage": "paused",
+            "resumeStage": "serve",
+            "reason": "原工班时间、开放时段或身体条件不足",
+            "nodeId": null,
+            "routeKey": null,
+            "workedMinutes": 416,
+            "earned": 38.251477333333334,
+            "pickup": null,
+            "handoffMinutes": 0,
+            "returnLoadingMinutes": 0,
+            "returnUnloadingMinutes": 0,
+            "allocated": {
+              "assemblyTravel": 19.368968035510036,
+              "assembly": 10,
+              "fetchTravel": 25.921036202471427,
+              "deliveryTravel": 25.921036202471413,
+              "sales": 0,
+              "returnTravel": 0,
+              "loading": 2,
+              "handoff": 2,
+              "counterWait": 330.7889595595471,
+              "staffHandover": 0
+            },
+            "continuationOf": null,
+            "endedAt": null,
+            "endReason": "legacy-evidence-unavailable"
+          }
+        ],
+        "stocks": [
+          {
+            "id": "counter-stock-1",
+            "sourceLotId": "freight-lot-22",
+            "origin": {
+              "location": "node",
+              "districtId": "starport",
+              "shopId": null,
+              "receivedQuantity": 28,
+              "nodeId": "starport-quarter-2",
+              "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+              "fromEdgeId": "road-starport-quarter-2-starport-station",
+              "direction": -1,
+              "arrivedAt": 508,
+              "position": {
+                "x": 1576.2984709834516,
+                "y": 402.6,
+                "z": -1410.0630325720126
+              }
+            },
+            "unitPrice": 4,
+            "received": 8,
+            "remaining": 8,
+            "sold": 0,
+            "returned": 0,
+            "pickedAt": 744,
+            "deliveredAt": 808,
+            "carrierId": "citizen-142",
+            "location": "counter"
+          }
+        ]
+      },
+      "actors": [
+        {
+          "id": "citizen-142",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 944.6,
+            "y": 222.6,
+            "z": -554.1999999999999
+          },
+          "state": "shopping",
+          "destinationId": "east-b8",
+          "needs": {
+            "hunger": 93.6,
+            "fatigue": 79.84000000000005,
+            "social": 54.81089771314309,
+            "fun": 76.17431763492523
+          },
+          "food": 1,
+          "money": 430.4786592711514,
+          "onDuty": false
+        },
+        {
+          "id": "citizen-230",
+          "role": "官员",
+          "workId": "starport-b2",
+          "position": {
+            "x": 1344,
+            "y": 231.9537068712147,
+            "z": -334.2947390229672
+          },
+          "state": "moving",
+          "destinationId": "east-b2",
+          "needs": {
+            "hunger": 0,
+            "fatigue": 79.84000000000005,
+            "social": 80.80000000000013,
+            "fun": 68.07407868660987
+          },
+          "food": 0,
+          "money": 443.39835607443115,
+          "onDuty": false
+        }
+      ]
+    }
+  ],
+  "requests": [],
+  "fullSaveExact": true,
+  "clone24TicksExact": true,
+  "originalEarnedRetained": true,
+  "originalMinutesRetained": true
+}

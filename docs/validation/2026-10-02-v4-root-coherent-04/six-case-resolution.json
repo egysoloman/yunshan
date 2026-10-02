@@ -1,0 +1,120 @@
+{
+  "capturedAt": "2026-10-02T04:58:08.627553+00:00",
+  "implementationCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+  "sourceManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "frozenSourceCount": 99,
+  "currentAndCommittedRuntimeTestBuildInputs": 94,
+  "currentAndCommittedRuntimeTestBuildMismatches": [],
+  "fullSuite": {
+    "exitCode": 0,
+    "tests": 465,
+    "pass": 465,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "startedAt": "2026-10-02T03:38:25.736896+00:00",
+    "endedAt": "2026-10-02T04:56:14.077721+00:00",
+    "rawLogSHA256": "8c825b167081e0601977353a8050cfa2921c40e7936ae4eac03a41eb4484bd1d"
+  },
+  "originalSixCases": [
+    {
+      "name": "the generated city autonomously funds and completes research through actual trained residents and laboratories",
+      "failureLocation": "tests/extensions.test.ts:1489",
+      "actualCauseOrLimit": "Exact importer error: 读档失败：无效存档字段：route pool。 Actual research investment/completion/personal debit succeeded; restore rejected before 24-tick continuation.",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ the generated city autonomously funds and completes research through actual trained residents and laboratories (1643145.694478ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Lossless bounded route paging implemented; same-source build passed; regression is running.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    },
+    {
+      "name": "selling the last privately held company shares cannot produce an unreadable operating company",
+      "failureLocation": "tests/integration.test.ts:71",
+      "actualCauseOrLimit": "Construction remained level 1. The old controlled worker coordinate was not the actual work point; listing/disposal/restore were not reached.",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ selling the last privately held company shares cannot produce an unreadable operating company (131039.521797ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Fixture moved to the shared accessible work point, keeping funding, roles, 64-tick cap and original level assertion. Rerun running.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    },
+    {
+      "name": "a real onsite work escrow roundtrips and player damage recovers one complete funded generation",
+      "failureLocation": "tests/persistence.test.ts:197",
+      "actualCauseOrLimit": "Real work command rejected old doorway: 请到该建筑可访问楼层的实际工作点开始工班。 Recovery assertions were not reached.",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ a real onsite work escrow roundtrips and player damage recovers one complete funded generation (48516.4741ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Fixture moved to the actual work point. Funding/40 ticks/whole-generation damage recovery assertions retained. Rerun running.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    },
+    {
+      "name": "real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation",
+      "failureLocation": "tests/persistence.test.ts:78 shared fixture",
+      "actualCauseOrLimit": "Real registration rejected old doorway: 伤患和付款人须共同到达诊所公共诊疗层。",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation (71773.553335ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Patient and payer now use actual accessible service points. Original fees/procurement/reuse/stock/continuation assertions retained. Rerun running.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    },
+    {
+      "name": "a damaged clinical player custody body recovers the complete prior generation with all original cash and stock",
+      "failureLocation": "tests/persistence.test.ts:78 shared fixture",
+      "actualCauseOrLimit": "Same registration rejection before damaged-generation recovery.",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ a damaged clinical player custody body recovers the complete prior generation with all original cash and stock (18377.627697ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Same real service-point fixture migration. Original full cash/stock recovery assertions retained. Rerun running.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    },
+    {
+      "name": "the complete city survives multiple days and restores a large genuine save deterministically",
+      "failureLocation": "tests/simulation.test.ts:483",
+      "actualCauseOrLimit": "Actual 1200-tick city save import returned false. The original assertion did not print importer reason; the route-pool cause remains an inference until exact diagnostic is captured.",
+      "sameFrozenSourceFinalStatus": "PASS",
+      "actualFinalLogLine": "✔ the complete city survives multiple days and restores a large genuine save deterministically (985725.290237ms)",
+      "implementedInCommit": "3b81522aa3382a8b79798bc1b295e72a7016d5db",
+      "originalRepairStatusAt2026_10_02_03_28": "Same lossless codec fix under test. Original alive/trade/freight/flights/8MB and full 24-tick continuation assertions retained. Full rerun still NOT_RUN.",
+      "repairStatus": "Verified PASS in the complete coherent04 same-source 465/465 run; original failed assertions and business conditions are retained."
+    }
+  ],
+  "naturalResearchSave": {
+    "generatedResearchSave": true,
+    "importResult": {
+      "ok": true,
+      "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+    },
+    "encoding": "paged-v1",
+    "poolExtents": [
+      32768,
+      3650
+    ],
+    "maxActorRoute": 574,
+    "saveBytes": 3152864
+  },
+  "natural1200TickCitySave": {
+    "completeCitySave": true,
+    "tick": 1200,
+    "encoding": "paged-v1",
+    "poolExtents": [
+      32768,
+      721
+    ],
+    "maxActorRoute": 516,
+    "saveBytes": 3069380
+  },
+  "reproducedInheritedOldPoolRejectionUsingThisGenuineNaturalSave": {
+    "exactOldPoolRejection": {
+      "ok": false,
+      "message": "读档失败：无效存档字段：route pool。"
+    },
+    "originalPointCount": 33489
+  },
+  "original1200RunErrorLimit": "The original coherent01 assertion did not expose the import error. The retained old decoder is reproduced here against the current genuine natural save; this is not a claim that original unseen save bytes or pool size were captured.",
+  "assertionScope": "Original case assertions remain intact. Research retains its original full export continuation checks. The 1200-tick case retains its original public SimState deep comparison after 24 ticks; it does not by itself assert economic steady state, survival of every actor, or byte equality of every private module export.",
+  "newGL": "NOT_RUN",
+  "newReferencePixels": "NOT_VIEWED",
+  "artAcceptance": "BLOCKED",
+  "fullGoal": "NOT_COMPLETE"
+}

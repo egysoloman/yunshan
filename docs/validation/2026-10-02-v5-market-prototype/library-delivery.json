@@ -1,0 +1,77 @@
+{
+  "scope": "One confirmed local ZIP below50MiB; current Library skill direct-single-create route. Exactly one attempt; no retry/fallback.",
+  "skill": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/SKILL.md",
+  "startedAt": "2026-10-02T04:46:35.237Z",
+  "endedAt": "2026-10-02T04:47:17.283Z",
+  "localPath": "/workspace/yunshan-deliverables/v5-market-prototype-20261002/云山-v5市集街台-隔离原型与原始验证.zip",
+  "bytes": 35698162,
+  "sha256": "869faf9af9779eaca3fa9b0c6c6705f9294df05dd62edce4d487bea1d419b90c",
+  "rawResult": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "operation": "create_library_file",
+      "status": "succeeded",
+      "path": "/云山-v5市集街台-隔离原型与原始验证.zip",
+      "file_id": "file_0000000019c481f69a8c462dc1071916",
+      "library_file_id": "libfile_5003a76d5ee48191a1a5bc6861213fae",
+      "file_name": "云山-v5市集街台-隔离原型与原始验证.zip",
+      "current_version_number": 0,
+      "restored_from_version_number": null,
+      "xattrs": [
+        {
+          "name": "user.library-file-version",
+          "value": "0"
+        }
+      ],
+      "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+      "mime_type": "application/zip",
+      "library_artifact_type": "other",
+      "file_size_bytes": 35698162,
+      "external_connectors_accessed": false
+    },
+    "isError": false
+  },
+  "exception": null,
+  "metadataHelperResult": {
+    "chunk_id": "0f7fbc",
+    "wall_time_seconds": 0.007150995,
+    "exit_code": 0,
+    "original_token_count": 29,
+    "output": "/workspace/yunshan-deliverables/v5-market-prototype-20261002/云山-v5市集街台-隔离原型与原始验证.zip\n"
+  },
+  "libraryState": "SAVED",
+  "libraryIDs": [
+    "libfile_5003a76d5ee48191a1a5bc6861213fae"
+  ],
+  "fileID": "file_0000000019c481f69a8c462dc1071916",
+  "libraryPath": "/云山-v5市集街台-隔离原型与原始验证.zip",
+  "version": 0,
+  "resultParsingCorrection": "Tool returned direct structuredContent rather than declared {result}. Initial result wrapper missed confirmed success; applied local metadata after correction. No second create/readback/retry was performed.",
+  "currentSkillHelpers": {
+    "folder": "/tmp/yunshan-v5-library-helpers-20261002-current-01",
+    "source": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/scripts/",
+    "files": [
+      {
+        "name": "library_file_transfer.py",
+        "bytes": 11084,
+        "sha256": "5e1557817be17db06e2375f8c34ed83e948d520242e5ee4cb50a30c7a4c83378"
+      },
+      {
+        "name": "library_hosted_apps.py",
+        "bytes": 12576,
+        "sha256": "97d029b097ace62b744c82dfde20ef6921ed543a33a771ecf6452bd655d11b59"
+      },
+      {
+        "name": "library_upload.py",
+        "bytes": 43937,
+        "sha256": "f362d45d5e4a17a690e5aff1c795eb62e645cf5db5771a52a84fb1850ea06fb1"
+      }
+    ],
+    "contentsMatchFetchedSkill": true
+  }
+}

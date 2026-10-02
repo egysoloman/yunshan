@@ -1,0 +1,16 @@
+ACTUAL_DOCUMENT_GATE {"at":"2026-10-02T05:00:06.610Z","requestedURL":"http://127.0.0.1:4173/?debug=1","actualPageURL":"http://127.0.0.1:4173/?debug=1","moduleURLs":["http://127.0.0.1:4173/assets/index-DV9HXMzR.js"],"loadedAsset":{"url":"http://127.0.0.1:4173/assets/index-DV9HXMzR.js","status":200,"bytes":634694,"sha256":"fee4c40b14b4ac44f0e1ea475b469df689470a1f3446f8d67fab1a2b7a0c1711","fromServiceWorker":false}}
+PASS world boots in first person with real city aircraft and live simulation
+PASS native button keyboard activation remains accessible
+PASS manual time and paused simulation with day/night rendering
+PASS actual keyboard first-person movement
+AssertionError [ERR_ASSERTION]: {"ok":false,"message":"请到商铺入口附近购物。","before":600,"after":600}
+    at file:///tmp/yunshan-v4-root-coherent-04/scripts/browser-test.mjs:104:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+  ➜  Local:   http://127.0.0.1:4173/
+

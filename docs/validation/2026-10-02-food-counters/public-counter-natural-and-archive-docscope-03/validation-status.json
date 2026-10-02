@@ -1,0 +1,82 @@
+{
+  "scope": "isolated old-layout docscope only; zero shared source mutations, zero isolated src mutations this stage",
+  "functionalScopes": {
+    "controlled-natural-v1": {
+      "command": "node --import tsx --test docscope/natural-v1-day.test.ts",
+      "exitCode": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "sourcesStartEndEqual": true,
+      "scope": "actual functional natural 17:00 to day1 10:00 plus24 clone, no timing benchmark"
+    },
+    "player-rescue-v1": {
+      "command": "node --import tsx --test docscope/natural-v1-supported.test.ts",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "exitCode": 0,
+      "sourceStartEndEqual": true,
+      "classification": "player rescue, not autonomous recovery; day1 standing, real day2 plan"
+    },
+    "archive-boundary-first-failed": {
+      "tests": 2,
+      "pass": 0,
+      "fail": 2,
+      "exitCode": 1,
+      "sourceStartEndEqual": true,
+      "classification": [
+        "fixture premise failed: finance pays actual wage in same original tick, no unpaid debt demonstrated",
+        "genuine 256-payroll callback boundary:257 throws; 256 saveexact; retained debt comparison vacuous zero"
+      ],
+      "scope": "short functional scheduler acceleration, not 256 days/audit/performance"
+    },
+    "paid-receipt-negative-checks": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "exitCode": 0,
+      "sourceStartEndEqual": true,
+      "scope": "archive-receipts; functional only"
+    },
+    "normal-v1-writer-capture": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "exitCode": 0,
+      "sourceStartEndEqual": true,
+      "scope": "normal original v1 city capture, no direct field edits; original17 payment"
+    },
+    "normal-v1-natural-migration": {
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "exitCode": 1,
+      "sourceStartEndEqual": true,
+      "scope": "normal-v1-natural; functional only"
+    }
+  },
+  "strictReaderDocscope": {
+    "exitCode": 0,
+    "command": "npx tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution Bundler --lib ES2022,DOM --types node --skipLibCheck <six docscope files>",
+    "initialFailuresPreserved": 2
+  },
+  "strictWriterCapture": {
+    "exitCode": 0,
+    "command": "same CLI strict flags, docscope/capture-normal-v1.test.ts"
+  },
+  "productionPatch": "NOT_IMPLEMENTED_PENDING_CONTRACT_REVIEW",
+  "v4FloorPlanProfile": "EXPLICITLY_REJECTED_UNSUPPORTED",
+  "normalNaturalV1NextDayFormalPerformance": "FAILED_TO_OBTAIN_QUORUM/CONTINUATION; two real failed cases preserved",
+  "rescue": "PASSED day1standing continuation / day2formal commitment only; actual day2performance NOT_RUN",
+  "historyArchive": "NOT_IMPLEMENTED;257 callback actual failure preserved",
+  "nonzeroOutstandingDebtRetention": "NOT_VERIFIED; first test premise failed, zero comparisons not evidence",
+  "unpaidToForgedPaid": "NOT_RUN without genuine unpaid fixture",
+  "256TaskLifecycle": "SOURCE_GUARD_ONLY_NOT_RUNTIME_RUN",
+  "fullNpm": "NOT_RUN",
+  "longAudit": "NOT_RUN",
+  "GL": "NOT_RUN",
+  "benchmark": "NOT_RUN",
+  "libraryUpload": "NOT_REQUESTED_OR_ATTEMPTED_THIS_STAGE; previous ID preserved",
+  "previousLibraryID": "libfile_8a9233e82e58819186c9fed5f18deaf8"
+}

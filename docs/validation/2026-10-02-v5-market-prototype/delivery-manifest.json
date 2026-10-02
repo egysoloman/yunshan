@@ -1,0 +1,42 @@
+{
+  "createdAt": "2026-10-02T04:45:25.277037+00:00",
+  "localPath": "/workspace/yunshan-deliverables/v5-market-prototype-20261002/云山-v5市集街台-隔离原型与原始验证.zip",
+  "bytes": 35698162,
+  "sha256": "869faf9af9779eaca3fa9b0c6c6705f9294df05dd62edce4d487bea1d419b90c",
+  "entries": 546,
+  "allCRC": "PASS",
+  "allArchivedEntryOriginalSHA256": "PASS",
+  "sourceStillExact": {
+    "baseline99": true,
+    "firstFailed102": true,
+    "fixed102": true
+  },
+  "contains": [
+    "complete baseline99",
+    "complete failed102 plus dist",
+    "complete fixed102 plus dist",
+    "firstFAIL/raw + fixed7PASS/raw",
+    "15 world byte comparisons +2265 probes +5zero-tick save pairs",
+    "5006 actual motor step telemetry",
+    "initial sitefit failures",
+    "explicit03to04 delta"
+  ],
+  "excludes": [
+    "node_modules",
+    "browser profiles",
+    "credentials",
+    "new private references",
+    "old reference PNGs"
+  ],
+  "libraryRoute": "direct-single-create",
+  "libraryState": "SAVED",
+  "libraryIDs": [
+    "libfile_5003a76d5ee48191a1a5bc6861213fae"
+  ],
+  "evidenceIndexSHA256": "6a2bba0000cf5f5874a283c8a76632c10c332a77f990d2599715d90c39d9466e",
+  "libraryResultPath": "/workspace/yunshan/docs/validation/2026-10-02-v5-market-prototype/library-delivery.json",
+  "zipSHA256AfterLibraryAttempt": "869faf9af9779eaca3fa9b0c6c6705f9294df05dd62edce4d487bea1d419b90c",
+  "fileID": "file_0000000019c481f69a8c462dc1071916",
+  "libraryPath": "/云山-v5市集街台-隔离原型与原始验证.zip",
+  "version": 0
+}
