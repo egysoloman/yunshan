@@ -1,0 +1,95 @@
+✖ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (3810.40516ms)
+✔ glass panes are physical barriers while declared door openings allow a .35m body (2585.278709ms)
+✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (3382.325013ms)
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (764.325409ms)
+✔ v4 courtyard is genuinely supported outdoor ground and continuous W returns through an actual opening (753.095644ms)
+✖ v4 actual W walks both stair flights up and down at 3.4m storey height without E or reset (440.4983ms)
+✖ v4 actual W walks both stair flights up and down at 6.6m storey height without E or reset (533.459643ms)
+✔ v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing (42.97917ms)
+✔ v4 rotated entrance has the same physical local door and legacy E preserves arbitrary shaft x/z exactly (326.607433ms)
+✔ v4 exposed roof supports restored feet, blocks its actual volume and remains outside a room (18.468905ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 7
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10238.144744
+
+✖ failing tests:
+
+test at tests/architecture-floor-plan.test.ts:1:419
+✖ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (3810.40516ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      x: -878.8000000000001,
+      y: 24.6,
+  +   z: 809.0000000000001
+  -   z: 809
+    }
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/architecture-floor-plan.test.ts:9:65)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { x: -878.8000000000001, y: 24.6, z: 809.0000000000001 },
+    expected: { x: -878.8000000000001, y: 24.6, z: 809 },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/controller-v4.test.ts:1:4893
+✖ v4 actual W walks both stair flights up and down at 3.4m storey height without E or reset (440.4983ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + -0
+  - 0
+  
+      at <anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:62:47)
+      at fixture (/workspace/yunshan/tests/controller-v4.test.ts:20:8)
+      at TestContext.<anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:59:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: -0,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/controller-v4.test.ts:1:4893
+✖ v4 actual W walks both stair flights up and down at 6.6m storey height without E or reset (533.459643ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + -0
+  - 0
+  
+      at <anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:62:47)
+      at fixture (/workspace/yunshan/tests/controller-v4.test.ts:20:8)
+      at TestContext.<anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:59:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: -0,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

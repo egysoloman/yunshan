@@ -1486,6 +1486,10 @@ test('the generated city autonomously funds and completes research through actua
   t.diagnostic(`generated city: tick ${sim.state.tick}, ${funded.size} real resident investments, ${extension(sim).stats.researchCompleted} completed experiments, ${exactPersonalDebits} exact personal debits`);
   const restored = new Simulation(world);
   const result = restored.importSave(sim.exportSave());
+  const routeDocument = JSON.parse(sim.exportSave());
+  t.diagnostic(JSON.stringify({ generatedResearchSave: true, importResult: result, encoding: routeDocument.routeEncoding,
+    poolExtents: routeDocument.routeEncoding === 'paged-v1' ? routeDocument.routePool.map((page: unknown[]) => page.length) : [routeDocument.routePool.length],
+    maxActorRoute: Math.max(...routeDocument.state.citizens.map((citizen: any) => citizen.route?.length ?? 0)), saveBytes: Buffer.byteLength(sim.exportSave()) }));
   assert.equal(result.ok, true, result.message);
   for (let index = 0; index < 24; index++) { sim.step(0.25); restored.step(0.25); }
   assert.equal(restored.exportSave(), sim.exportSave(), 'the generated research result and its funding cooldown must continue deterministically');

@@ -1,7 +1,8 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
+import { getBuildingBody } from '../architecture-floor-plan';
 import { beginClinicalTreatment } from './clinical';
-import type { AuditCase, CityExtensionState, Command, CommandResult, Company, LifeProfile, Role, Technology, Vec3 } from '../types';
+import type { AuditCase, Building, BuildingFunctionPoint, CityExtensionState, Command, CommandResult, Company, LifeProfile, Player, Role, Technology, Vec3 } from '../types';
 
 export const TECHNOLOGY_SECTORS = ['traffic', 'energy', 'information', 'security', 'medicine', 'agriculture', 'manufacturing'] as const;
 export const INGREDIENTS = { grain: 8, vegetable: 6, fish: 14 } as const;
@@ -85,7 +86,8 @@ export function installExtensions(simulation: Simulation): void {
   const notice = (type: string, text: string, districtId?: string) => { simulation.appendNotice(type, text, districtId); simulation.emitEvent({ type: `extension:${type}`, districtId }); };
   const role = (...roles: Role[]) => roles.some(r => simulation.hasIdentity(r));
   const atBuilding = (b: typeof world.buildings[number]) => simulation.isNearBuilding(b) && canAccessFloor(b, Math.floor((state().player.position.y - b.position.y + .01) / (b.height / Math.max(1, b.floors))), state().player);
-  const nearby = (kinds: string[], id?: string, facilities: string[] = []) => world.buildings.filter(b => (kinds.includes(b.kind) || !!b.facility && facilities.includes(b.facility)) && (!id || b.id === id) && atBuilding(b)).sort((a, b) => distance(state().player.position, a.door) - distance(state().player.position, b.door))[0];
+  const atFunctionPoint = (b: Building, purpose: BuildingFunctionPoint['purpose'], position = state().player.position, person: Pick<Player, 'role' | 'identities'> = state().player) => !getBuildingBody(b) || simulation.isAtBuildingFunctionPoint(b, position, purpose, person);
+  const nearby = (kinds: string[], id?: string, facilities: string[] = [], purpose?: BuildingFunctionPoint['purpose']) => world.buildings.filter(b => (kinds.includes(b.kind) || !!b.facility && facilities.includes(b.facility)) && (!id || b.id === id) && atBuilding(b) && (!purpose || atFunctionPoint(b, purpose))).sort((a, b) => distance(state().player.position, a.door) - distance(state().player.position, b.door))[0];
   const controlled = (company: Company) => (company.shareholders.player ?? 0) > company.shares / 2;
   const cool = (key: string) => (ext().runtime.cooldowns[key] ?? -1e9) <= ext().lastUpdate + 1e-7;
   const cooldown = (key: string, minutes: number) => { ext().runtime.cooldowns[key] = ext().lastUpdate + minutes; };
@@ -192,7 +194,7 @@ export function installExtensions(simulation: Simulation): void {
       for (const c of s.citizens) {
         const profile = e.actorProfiles[c.id], workplace = buildings.get(c.workId)!;
         if (!profile.alive) continue;
-        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && !e.companies.some(company => company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
+        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: ['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler', identities: [['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler'] }) && !e.companies.some(company => company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
           c.money -= 250; publicFunds(c.id, 50, '居民创业登记费', workplace.districtId);
           const shop = s.shops.find(shop => shop.buildingId === workplace.id)!;
           const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${c.name}百工商社`, ownerId: c.id, buildingId: workplace.id, districtId: workplace.districtId, capital: 200, shares: 1000, sharePrice: .5, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { [c.id]: 1000 }, foundedAt: e.lastUpdate, parentId: null };
@@ -200,7 +202,7 @@ export function installExtensions(simulation: Simulation): void {
         }
         // A personally funded project costs 200; retain 100 for food and care.
         // Residents first meet their current hunger/rest needs before investing.
-        if (['scientist', '科研员', '科学家'].includes(c.role) && (c.education ?? 0) >= 3 && profile.skill >= 35 && c.money >= 300 && c.needs.hunger >= 40 && c.needs.fatigue >= 40 && cool(`research:${c.id}`) && (workplace.kind === 'school' || workplace.kind === 'core' || workplace.facility === 'data') && simulation.isNearBuilding(workplace, c.position)) {
+        if (['scientist', '科研员', '科学家'].includes(c.role) && (c.education ?? 0) >= 3 && profile.skill >= 35 && c.money >= 300 && c.needs.hunger >= 40 && c.needs.fatigue >= 40 && cool(`research:${c.id}`) && (workplace.kind === 'school' || workplace.kind === 'core' || workplace.facility === 'data') && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: 'scientist', identities: ['scientist'] })) {
           const t = e.technologies.filter(t => t.level < 20 && !e.runtime.researchJobs[t.sector]).sort((a, b) => a.level - b.level)[0];
           if (t) { c.money -= 200; publicFunds(c.id, 200, `${sectorNames[t.sector]}居民科研投入`, c.districtId); t.funding = 200; t.progress = 0; e.runtime.researchJobs[t.sector] = { startedAt: e.lastUpdate, finishAt: e.lastUpdate + 120, budget: 200, actorId: c.id }; cooldown(`research:${c.id}`, 1440); }
         }
@@ -264,7 +266,7 @@ export function installExtensions(simulation: Simulation): void {
     if (!e.actorProfiles.player.alive || e.actorProfiles.player.health <= 0) return fail('生命已终结，不能进行生活与职业操作。');
     const amount = (fallback: number, min: number, max: number) => { const n = command.value ?? fallback; return finite(n) && Number.isInteger(n) && n >= min && n <= max ? n : null; };
     if (command.type === 'foundCompany') {
-      const b = nearby(['market', 'workshop', 'farm', 'dock'], command.targetId), capital = amount(500, 300, 100000);
+      const b = nearby(['market', 'workshop', 'farm', 'dock'], command.targetId, [], 'work'), capital = amount(500, 300, 100000);
       if (!role('merchant')) return fail('需要商人经营资格。');
       if (!b) return fail('请到商业设施现场登记公司。');
       if (capital === null) return fail('初始资本须为300至100000的整数。');
@@ -283,8 +285,8 @@ export function installExtensions(simulation: Simulation): void {
       const shop = s.shops.find(shop => shop.buildingId === company.buildingId)!;
       if (['expandCompany', 'hire', 'listCompany', 'acquireCompany'].includes(command.type) && !role('merchant')) return fail('需要商人经营资格。');
       if (['expandCompany', 'hire', 'listCompany'].includes(command.type) && !controlled(company)) return fail('需要持有公司过半股权。');
-      if (['expandCompany', 'hire', 'acquireCompany'].includes(command.type) && !nearby(['market', 'workshop', 'farm', 'dock'], company.buildingId)) return fail('请到目标公司的经营场所。');
-      if (['listCompany', 'buyShares', 'sellShares'].includes(command.type) && !nearby(['bank'])) return fail('请到钱庄办理上市与股权交易。');
+      if (['expandCompany', 'hire', 'acquireCompany'].includes(command.type) && !nearby(['market', 'workshop', 'farm', 'dock'], company.buildingId, [], 'work')) return fail('请到目标公司的经营场所。');
+      if (['listCompany', 'buyShares', 'sellShares'].includes(command.type) && !nearby(['bank'], undefined, [], 'service')) return fail('请到钱庄办理上市与股权交易。');
       if (command.type === 'expandCompany') {
         const investment = amount(300, 100, 50000);
         if (investment === null || company.level >= 20) return fail('扩张投入须为100至50000的整数，等级上限20。');
@@ -349,7 +351,7 @@ export function installExtensions(simulation: Simulation): void {
       const sector = command.targetId as Sector, budget = amount(200, 100, 2000);
       if (!TECHNOLOGY_SECTORS.includes(sector) || budget === null) return fail('请选择有效研究领域，预算为100至2000文整数。');
       if (!role('scientist') || p.education < 3 || Math.max(e.actorProfiles.player.skill, p.education * 8) < 24) return fail('科研需要科研人员身份、教育3与对应技能。');
-      const b = nearby(['school', 'core'], undefined, sector === 'energy' ? ['data', 'energy'] : ['data']);
+      const b = nearby(['school', 'core'], undefined, sector === 'energy' ? ['data', 'energy'] : ['data'], 'work');
       if (!b) return fail('请到书院或天枢数据中心开展研究。');
       const t = tech(sector);
       if (e.runtime.researchJobs[sector] || t.level >= 20 || p.money < budget) return fail('研究正在运行、等级达到上限或预算现金不足。');
@@ -359,7 +361,7 @@ export function installExtensions(simulation: Simulation): void {
     if (command.type === 'buyIngredient') {
       const ingredient = command.targetId as keyof typeof INGREDIENTS, count = amount(1, 1, 20);
       if (!Object.hasOwn(INGREDIENTS, ingredient) || count === null) return fail('食材种类无效，数量须为1至20整数。');
-      const b = nearby(['market', 'farm', 'dock']); if (!b) return fail('请到市集、农场或码头购买食材。');
+      const b = nearby(['market', 'farm', 'dock'], undefined, [], 'sale'); if (!b) return fail('请到市集、农场或码头购买食材。');
       const shop = s.shops.find(shop => shop.buildingId === b.id), price = INGREDIENTS[ingredient] * count;
       if (!shop || b.facility) return fail('请到有实际食材库存的私营商铺购买。');
       if (!shop.open || shop.inventory < count || p.money < price) return fail('商铺休业、库存或现金不足。');

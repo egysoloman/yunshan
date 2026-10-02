@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { getFloorDimensions } from '../access';
+import { boundaryLoops, getBuildingBody, getFloorPlanRoofRegions, type BuildingBody, type FloorPlan, type RoofRegion, type Wall } from '../architecture-floor-plan';
 import type { Building, Quality, Vec3 } from '../types';
 
 export const ARCHITECTURE_DETAIL_DISTANCE = 180;
@@ -64,9 +65,161 @@ export function architectureFunctionLabel(building: Building): string {
   return ({ home: '家居 · 住宅', market: '买卖 · 食材', workshop: '百工 · 制造', bank: '钱庄 · 金融', hall: '公厅 · 政务', police: '巡警 · 治安', school: '学苑 · 课堂', clinic: '医馆 · 诊疗', station: '驿站 · 乘车', core: '天枢 · 市政', pavilion: '山亭 · 观景', airport: '空港 · 航班', starport: '星港 · 星际', farm: '农庄 · 田作', dock: '水驿 · 渡船' })[building.kind];
 }
 
+interface ProgramSignPlacement {
+  x: number; y: number; z: number; width: number; height: number; vertical: true;
+  rotation: [number, number, number]; wall: Wall; from: number; to: number;
+}
+const wallBasis = (wall: Wall) => {
+  const length = Math.hypot(wall.b[0] - wall.a[0], wall.b[1] - wall.a[1]);
+  const dx = (wall.b[0] - wall.a[0]) / length, dz = (wall.b[1] - wall.a[1]) / length;
+  return { length, dx, dz, nx: dz, nz: -dx };
+};
+const wallPoint = (wall: Wall, along: number, normal = 0) => {
+  const { dx, dz, nx, nz } = wallBasis(wall);
+  return { x: wall.a[0] + dx * along + nx * normal, z: wall.a[1] + dz * along + nz * normal };
+};
+const wallDistanceSquared = (wall: Wall, point: { x: number; z: number }) => {
+  const { length, dx, dz } = wallBasis(wall), along = THREE.MathUtils.clamp((point.x - wall.a[0]) * dx + (point.z - wall.a[1]) * dz, 0, length);
+  const nearest = wallPoint(wall, along);
+  return (nearest.x - point.x) ** 2 + (nearest.z - point.z) ** 2;
+};
+
+/** A plaque needs a real uncut wall bay. The entrance wall can be narrower
+ * than the plaque, in which case its adjacent solid wall carries the sign. */
+export function architectureProgramSignPlacement(building: Building): ProgramSignPlacement | null {
+  const plan = getBuildingBody(building)?.floorPlans.find(plan => plan.floor === 0);
+  if (!plan) return null;
+  const entrance = plan.walls.find(wall => wall.opening?.use === 'entrance');
+  const focus = entrance?.opening ? wallPoint(entrance, (entrance.opening.from + entrance.opening.to) / 2) : { x: 0, z: building.depth / 2 };
+  for (const wall of [...plan.walls].sort((a, b) => wallDistanceSquared(a, focus) - wallDistanceSquared(b, focus))) {
+    const { length, nx, nz } = wallBasis(wall), gaps = [...(wall.opening ? [wall.opening] : []), ...(wall.windows ?? [])].sort((a, b) => a.from - b.from);
+    let start = 0;
+    for (const end of [...gaps, { from: length, to: length }]) {
+      if (end.from - start >= 1.6 - 1e-7) {
+        const from = q(start + .4), to = q(from + .8), position = wallPoint(wall, (from + to) / 2, wall.thickness / 2);
+        const height = q(Math.min(2.4, wall.height - .4));
+        if (height < 1.6) continue;
+        return { ...position, y: plan.y + .4 + height / 2, width: .8, height, vertical: true,
+          rotation: [0, Math.atan2(nx, nz), 0], wall, from, to };
+      }
+      start = Math.max(start, end.to);
+    }
+  }
+  return null;
+}
+
+export interface ArchitectureProgramRoofEdge { a: [number, number]; b: [number, number]; y: number; floor: number; region: RoofRegion }
+/** Only outer roof edges receive eave decoration. Rectangular cover seams and
+ * the sloping gable end are not another flat eave over a courtyard. */
+export function architectureProgramRoofEdges(building: Building): ArchitectureProgramRoofEdge[] {
+  const body = getBuildingBody(building); if (!body) return [];
+  const roofs = getFloorPlanRoofRegions(body), groups = new Map<string, RoofRegion[]>(), edges: ArchitectureProgramRoofEdge[] = [];
+  for (const roof of roofs) { const key = `${roof.floor}:${roof.bottom}`; const group = groups.get(key) ?? []; group.push(roof); groups.set(key, group); }
+  for (const group of groups.values()) for (const loop of boundaryLoops(group.map(roof => roof.rect))) for (let i = 0; i < loop.length; i++) {
+    const a = loop[i], b = loop[(i + 1) % loop.length], dx = Math.sign(b[0] - a[0]), dz = Math.sign(b[1] - a[1]);
+    const length = Math.hypot(b[0] - a[0], b[1] - a[1]), cuts = new Set([0, length]);
+    for (const roof of group) for (const corner of [[roof.rect.x0, roof.rect.z0], [roof.rect.x1, roof.rect.z1]]) {
+      const u = (corner[0] - a[0]) * dx + (corner[1] - a[1]) * dz;
+      if (u > 0 && u < length) cuts.add(u);
+    }
+    const sorted = [...cuts].sort((x, y) => x - y);
+    for (let j = 0; j < sorted.length - 1; j++) {
+      const from = sorted[j], to = sorted[j + 1], x = a[0] + dx * (from + to) / 2, z = a[1] + dz * (from + to) / 2;
+      const roof = group.find(roof => x >= roof.rect.x0 - 1e-7 && x <= roof.rect.x1 + 1e-7 && z >= roof.rect.z0 - 1e-7 && z <= roof.rect.z1 + 1e-7);
+      if (!roof || roof.kind === 'gable' && (roof.gableAxis === 'x' ? dx !== 0 : dz !== 0)) continue;
+      edges.push({ a: [a[0] + dx * from, a[1] + dz * from], b: [a[0] + dx * to, a[1] + dz * to],
+        y: roof.kind === 'gable' ? q(roof.bottom + .4) : roof.top, floor: roof.floor, region: roof });
+    }
+  }
+  return edges;
+}
+
+/** The new profile decorates shared walls and real window cuts. Historical
+ * profiles continue through the original emitter below without changed data. */
+function buildProgramArchitectureDetails(building: Building, body: BuildingBody, nearFloor: number, limit: number): ArchitectureDetailPart[] {
+  const parts: ArchitectureDetailPart[] = [], cap = Math.max(0, Math.min(ARCHITECTURE_DETAIL_INSTANCES, Math.floor(limit)));
+  const put = (purpose: ArchitectureDetailPart['purpose'], x0: number, x1: number, y0: number, y1: number, z0: number, z1: number, color: string, floor: number, roof = false, luminous = false) => {
+    const lo = { x: q(Math.min(x0, x1)), y: q(Math.min(y0, y1)), z: q(Math.min(z0, z1)) }, hi = { x: q(Math.max(x0, x1)), y: q(Math.max(y0, y1)), z: q(Math.max(z0, z1)) };
+    if (parts.length >= cap || hi.x <= lo.x || hi.y <= lo.y || hi.z <= lo.z) return;
+    parts.push({ purpose, position: { x: (lo.x + hi.x) / 2, y: (lo.y + hi.y) / 2, z: (lo.z + hi.z) / 2 },
+      size: { x: hi.x - lo.x, y: hi.y - lo.y, z: hi.z - lo.z }, color, floor, roof, ...(luminous ? { luminous } : {}) });
+  };
+  const mounted = (purpose: ArchitectureDetailPart['purpose'], wall: Wall, from: number, to: number, bottom: number, top: number, inward: number, outward: number, color: string, floor: number, roof = false, luminous = false) => {
+    const corners = [wallPoint(wall, from, inward), wallPoint(wall, from, outward), wallPoint(wall, to, inward), wallPoint(wall, to, outward)];
+    put(purpose, Math.min(...corners.map(p => p.x)), Math.max(...corners.map(p => p.x)), bottom, top, Math.min(...corners.map(p => p.z)), Math.max(...corners.map(p => p.z)), color, floor, roof, luminous);
+  };
+  const ground = body.floorPlans.find(plan => plan.floor === 0)!;
+  const entrance = ground.walls.find(wall => wall.opening?.use === 'entrance'), focus = entrance?.opening ? wallPoint(entrance, (entrance.opening.from + entrance.opening.to) / 2) : { x: 0, z: building.depth / 2 };
+  const orderedWalls = (plan: FloorPlan) => [...plan.walls].sort((a, b) => Number(b.opening?.use === 'entrance') - Number(a.opening?.use === 'entrance') || wallDistanceSquared(a, focus) - wallDistanceSquared(b, focus));
+  for (const wall of orderedWalls(ground).filter(wall => wall.opening).slice(0, 8)) {
+    const opening = wall.opening!, n = wall.thickness / 2;
+    for (const u of [opening.from - .2, opening.to]) mounted('door', wall, u, u + .2, ground.y, ground.y + opening.height, -n, n, WOOD, 0);
+    mounted('door', wall, opening.from - .2, opening.to + .2, ground.y + opening.height, ground.y + opening.height + .2, -n, n, EDGE, 0);
+    mounted('door', wall, opening.from - .4, opening.to + .4, ground.y + opening.height + .2, ground.y + opening.height + .4, -n, n, WOOD, 0);
+    if (opening.use === 'entrance') {
+      const u = opening.to + .4, y = Math.max(2.4, opening.height - .4);
+      mounted('lantern', wall, u - .2, u + .2, y + .2, y + .4, -n, n + .6, WOOD, 0);
+      mounted('lantern', wall, u - .2, u + .2, y - .4, y + .2, n, n + .6, '#e7bc73', 0, false, true);
+      for (const yy of [y - .6, y + .2]) mounted('lantern', wall, u - .4, u + .4, yy, yy + .2, n, n + .8, '#7c3e32', 0);
+    }
+  }
+  const sign = architectureProgramSignPlacement(building);
+  if (sign) {
+    const lo = sign.y - sign.height / 2, hi = sign.y + sign.height / 2, n = sign.wall.thickness / 2;
+    mounted('sign', sign.wall, sign.from - .2, sign.to + .2, lo - .2, hi + .2, -n, n, WOOD, 0);
+    for (const u of [sign.from - .2, sign.to]) mounted('sign', sign.wall, u, u + .2, lo - .2, hi + .2, 0, n, EDGE, 0);
+    for (const yy of [lo - .2, hi]) mounted('sign', sign.wall, sign.from - .2, sign.to + .2, yy, yy + .2, 0, n, EDGE, 0);
+  }
+  const center = THREE.MathUtils.clamp(Math.floor(nearFloor), 0, Math.max(0, building.floors - 1)), selected = [center, center + 1, center - 1].filter(floor => floor >= 0 && floor < building.floors);
+  for (const floor of selected) {
+    const plan = body.floorPlans.find(plan => plan.floor === floor)!;
+    const windows = orderedWalls(plan).flatMap(wall => (wall.windows ?? []).map(window => ({ wall, window }))).sort((a, b) => {
+      const p = wallPoint(a.wall, (a.window.from + a.window.to) / 2), r = wallPoint(b.wall, (b.window.from + b.window.to) / 2);
+      return (p.x - focus.x) ** 2 + (p.z - focus.z) ** 2 - (r.x - focus.x) ** 2 - (r.z - focus.z) ** 2;
+    }).slice(0, cap <= 384 ? floor === center ? 8 : 4 : floor === center ? 14 : 7);
+    for (const { wall, window } of windows) {
+      const { from, to, bottom, top } = window, low = plan.y + bottom, high = plan.y + top, n = wall.thickness / 2;
+      for (const u of [from - .2, to]) mounted('window', wall, u, u + .2, low - .2, high + .2, -n, n, WOOD, floor);
+      for (const yy of [low - .2, high]) mounted('window', wall, from - .2, to + .2, yy, yy + .2, -n, n, WOOD, floor);
+      for (const fraction of [1 / 3, 2 / 3]) { const u = q(from + (to - from) * fraction); mounted('window', wall, u - .2, u, low, high, 0, n, EDGE, floor); }
+      const midY = q((low + high) / 2); mounted('window', wall, from, to, midY - .2, midY, 0, n, EDGE, floor);
+      mounted('window', wall, from - .2, to + .2, low - .4, low - .2, -n, n, STONE, floor);
+      mounted('window', wall, from - .2, to + .2, high + .2, high + .4, -n, n, EDGE, floor);
+    }
+    for (const wall of orderedWalls(plan).slice(0, floor === center ? 12 : 6)) {
+      const { length } = wallBasis(wall), n = wall.thickness / 2;
+      mounted('frame', wall, 0, length, plan.y + wall.height - .2, plan.y + wall.height, -n, n, WOOD, floor);
+      if (floor === 0) for (const [from, to] of wall.opening ? [[0, wall.opening.from], [wall.opening.to, length]] : [[0, length]]) {
+        if (to - from < .8) continue;
+        mounted('masonry', wall, from + .2, to - .2, plan.y, plan.y + .4, 0, n, STONE, floor);
+      }
+    }
+  }
+  const roofs = architectureProgramRoofEdges(building).filter(edge => selected.includes(edge.floor)).sort((a, b) => {
+    const d = (edge: ArchitectureProgramRoofEdge) => (edge.a[0] - focus.x) ** 2 + (edge.a[1] - focus.z) ** 2;
+    return Number(b.floor === center) - Number(a.floor === center) || d(a) - d(b);
+  }).slice(0, cap <= 384 ? 6 : 10);
+  for (const edge of roofs) {
+    const wall: Wall = { a: edge.a, b: edge.b, height: .2, thickness: .2 }, { length } = wallBasis(wall);
+    const span = Math.min(7.2, length), from = q((length - span) / 2), to = q(from + span);
+    mounted('tile', wall, from, to, edge.y - .2, edge.y, 0, .2, WOOD, edge.floor, true);
+    for (let u = from + .2; u <= to - .2 + 1e-7; u += .6) mounted('tile', wall, u - .2, u + .2, edge.y, edge.y + .2, -.2, .2, TILE, edge.floor, true);
+    const plan = body.floorPlans.find(plan => plan.floor === edge.floor)!;
+    for (const u of [from + .6, to - .6]) {
+      if (u < from || u > to) continue;
+      const point = wallPoint(wall, u), below = plan.walls.find(candidate => wallDistanceSquared(candidate, point) < 1e-7);
+      if (!below || edge.region.bottom - (plan.y + below.height) < .2) continue;
+      mounted('bracket', wall, u - .2, u + .2, plan.y + below.height, edge.region.bottom, -.2, .2, EDGE, edge.floor, true);
+    }
+  }
+  return parts;
+}
+
 /** Geometry is generated for a nearby floor band, never for the whole city.
  * All coordinates are local to the existing building's structural base. */
 export function buildArchitectureDetails(building: Building, nearFloor = 0, limit = ARCHITECTURE_DETAIL_INSTANCES): ArchitectureDetailPart[] {
+  const body = getBuildingBody(building);
+  if (body) return buildProgramArchitectureDetails(building, body, nearFloor, limit);
   const parts: ArchitectureDetailPart[] = [], ground = architectureFacadeLayout(building, 0), fh = ground.floorHeight;
   const box = (purpose: ArchitectureDetailPart['purpose'], x: number, y: number, z: number, sx: number, sy: number, sz: number, color = WOOD, floor = 0, roof = false, rotation?: [number, number, number], luminous = false) => {
     if (parts.length >= limit || Math.min(sx, sy, sz) <= 0) return;
@@ -302,8 +455,9 @@ export class ArchitectureDetailManager {
       mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; mesh.computeBoundingSphere(); group.add(mesh);
     }
     const entry: DetailEntry = { group, references, floor, quality, instanceCount: parts.length, interiorKey: '' };
-    if (typeof document !== 'undefined') {
-      const placement = architectureSignPlacement(building);
+    const body = getBuildingBody(building), programPlacement = body ? architectureProgramSignPlacement(building) : null;
+    const placement = body ? programPlacement : architectureSignPlacement(building);
+    if (typeof document !== 'undefined' && placement) {
       const canvas = document.createElement('canvas'); canvas.width = placement.vertical ? 512 : 768; canvas.height = placement.vertical ? 1024 : 192; const context = canvas.getContext('2d');
       if (context) {
         context.fillStyle = '#dcd1ac'; context.fillRect(0, 0, canvas.width, canvas.height);
@@ -324,7 +478,11 @@ export class ArchitectureDetailManager {
         }
         const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = 1;
         const sign = new THREE.Mesh(new THREE.PlaneGeometry(placement.width, placement.height), new THREE.MeshStandardMaterial({ map: texture, roughness: 1, metalness: 0 })); sign.name = `门牌 · ${architectureFunctionLabel(building)}`;
-        sign.position.set(placement.x, placement.y, placement.z + .12); group.add(sign); entry.sign = sign;
+        if (programPlacement) {
+          const angle = programPlacement.rotation[1];
+          sign.rotation.set(...programPlacement.rotation); sign.position.set(placement.x + Math.sin(angle) * .02, placement.y, placement.z + Math.cos(angle) * .02);
+        } else sign.position.set(placement.x, placement.y, placement.z + .12);
+        group.add(sign); entry.sign = sign;
       }
     }
     return entry;

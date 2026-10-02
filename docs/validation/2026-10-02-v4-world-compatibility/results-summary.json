@@ -1,0 +1,170 @@
+{
+  "at": "2026-10-02T01:34:37.559853+00:00",
+  "archiveFormat": 1,
+  "scope": "Actual immutable final19 CPU tests and exact profiling archive. No GL, browser-profile access, reference-art acceptance, remote write, macOS benchmark, or statistical-region simulation claim.",
+  "gitHead": "373165d0923d789b4042d7757116521b2683ed73",
+  "final19": {
+    "cwd": "/tmp/yunshan-v4-world-final-01",
+    "sourceInputs": 92,
+    "sourceThreeWayExact": true,
+    "sourceAfterRunExact": true,
+    "strictCommand": "npx tsc --noEmit",
+    "strictExit": 0,
+    "rulesCommand": "node --cpu-prof --cpu-prof-dir=diagnostics --cpu-prof-name=world-save-final.cpuprofile --import tsx --import ./diagnostics/progress-hook.mjs --test --test-isolation=none tests/world-layout.test.ts tests/world-v4.test.ts",
+    "rulesExit": 0,
+    "tests": 19,
+    "pass": 19,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 389586.253418,
+    "progressStart": "2026-10-02T01:09:13.833Z",
+    "progressFinish": "2026-10-02T01:15:43.245Z",
+    "worldLayoutTestSha256": "05b0cff2804d3ccdf4f763b1f4124fe26830adeba849cafc8aa626668ab69e51",
+    "worldV4TestSha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+    "providerSha256": "ec3fd0fdc4e9f0b4614a905a58be7ee6bbf0d85d3c92c978c0b80967ca6f895e",
+    "caseDurations": [
+      {
+        "at": "2026-10-02T01:09:19.033Z",
+        "event": "case-finished",
+        "name": "new journeys use the current layout and its fingerprint matches the simulation save contract",
+        "durationMs": 4556.274498999999
+      },
+      {
+        "at": "2026-10-02T01:09:32.265Z",
+        "event": "case-finished",
+        "name": "all three v2 worlds retain their frozen full JSON, fingerprints and authoritative terrain and walking surfaces",
+        "durationMs": 13229.802370000001
+      },
+      {
+        "at": "2026-10-02T01:09:39.323Z",
+        "event": "case-finished",
+        "name": "legacy worlds retain full main and checkpoint JSON plus their independently captured physical samples",
+        "durationMs": 7057.926518
+      },
+      {
+        "at": "2026-10-02T01:09:56.483Z",
+        "event": "case-finished",
+        "name": "the historical r5 recipe reproduces every old world byte, fingerprint and sampled physical surface across three seeds",
+        "durationMs": 17158.486448999996
+      },
+      {
+        "at": "2026-10-02T01:10:09.007Z",
+        "event": "case-finished",
+        "name": "v3 identifies the changed physical heightfield even when every building, road and station matches v2",
+        "durationMs": 12522.791337999995
+      },
+      {
+        "at": "2026-10-02T01:10:11.273Z",
+        "event": "case-finished",
+        "name": "v3 fingerprints cover physical geology inputs and ignore untrusted extra descriptor fields",
+        "durationMs": 2265.4857859999975
+      },
+      {
+        "at": "2026-10-02T01:10:30.330Z",
+        "event": "case-finished",
+        "name": "all three v3 worlds keep their full frozen JSON and every captured physical sample after v4 is introduced",
+        "durationMs": 19055.82675300001
+      },
+      {
+        "at": "2026-10-02T01:11:02.356Z",
+        "event": "case-finished",
+        "name": "a complete v3 save retains its actual upper floor, voxel edits, finances and routes instead of acquiring the v4 rooms",
+        "durationMs": 32025.144661
+      },
+      {
+        "at": "2026-10-02T01:11:33.632Z",
+        "event": "case-finished",
+        "name": "v2 and historical r5 saves keep their surface, upper floor, voxel edit and entire financial state after v4",
+        "durationMs": 31275.269971999995
+      },
+      {
+        "at": "2026-10-02T01:11:43.138Z",
+        "event": "case-finished",
+        "name": "a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks",
+        "durationMs": 9504.958832000004
+      },
+      {
+        "at": "2026-10-02T01:11:55.147Z",
+        "event": "case-finished",
+        "name": "the original native r5 export selects its historical recipe and continues 24 actual ticks after v4",
+        "durationMs": 12008.49304999999
+      },
+      {
+        "at": "2026-10-02T01:12:06.255Z",
+        "event": "case-finished",
+        "name": "an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection",
+        "durationMs": 11108.431495999976
+      },
+      {
+        "at": "2026-10-02T01:12:37.158Z",
+        "event": "case-finished",
+        "name": "v4 is a deterministic physical building opt-in while inheriting the complete v3 landscape and graph",
+        "durationMs": 30901.703949999996
+      },
+      {
+        "at": "2026-10-02T01:12:39.891Z",
+        "event": "case-finished",
+        "name": "the six v4 building families join their real ground use points to the city entrance through shared walls",
+        "durationMs": 2731.8612810000195
+      },
+      {
+        "at": "2026-10-02T01:12:43.991Z",
+        "event": "case-finished",
+        "name": "v4 upper courtyards and wings remove actual walking support instead of keeping rectangular ghost rooms",
+        "durationMs": 4099.645614999987
+      },
+      {
+        "at": "2026-10-02T01:12:46.556Z",
+        "event": "case-finished",
+        "name": "an absent v4 upper wing exposes its real lower roof or open ground courtyard slab",
+        "durationMs": 2562.743622000009
+      },
+      {
+        "at": "2026-10-02T01:12:48.738Z",
+        "event": "case-finished",
+        "name": "v4 support uses the real yaw footprint and cannot pull feet up to a higher storey",
+        "durationMs": 2181.7839870000025
+      },
+      {
+        "at": "2026-10-02T01:13:12.041Z",
+        "event": "case-finished",
+        "name": "v4 fingerprints include generated rooms, permissions and functional points while imported descriptors stay untrusted",
+        "durationMs": 23302.401718999987
+      },
+      {
+        "at": "2026-10-02T01:15:43.244Z",
+        "event": "case-finished",
+        "name": "a complete v4 occupied-floor save reassembles byte-exact and continues every module for 24 ticks",
+        "durationMs": 151202.895386
+      }
+    ]
+  },
+  "intermediate19": {
+    "cwd": "/tmp/yunshan-v4-world-candidate-01",
+    "strictExit": 0,
+    "rulesExit": 0,
+    "tests": 19,
+    "pass": 19,
+    "durationMs": 301365.69328,
+    "providerSha256": "3ef77f9f315724ee5fa158178a373c6d91718e26903daf2ba8ae2e241bcb3264",
+    "completedNaturallyBeforeStop": true
+  },
+  "pending20AtArchive": {
+    "worldLayoutTests": 13,
+    "worldV4Tests": 7,
+    "newTest": "a legacy public-floor traveler save includes actual chosen routes and exact partitioned 24-tick continuation",
+    "worldLayoutTestSha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+    "newCaseExecuted": false,
+    "note": "Original legacy protected-floor25 controlled SaveValidator fixture remains byte-identical to final19. New public29 traveler fixture is separate and unrun."
+  },
+  "profile": {
+    "sha256": "b868ef70affed96abedfcc731898a38ff7462244c2d5f5ad9036dbc02e3c6cd4",
+    "weightedSampleDurationSeconds": 389.6426,
+    "scope": "Sampled function attribution, not hardware benchmark. Last150s is only an approximate slice of the actual151.203s occupied-floor case. Inclusive shares overlap; anonymous functions are aggregated by transformed URL and line1."
+  },
+  "baselineSupplement": {
+    "path": "/tmp/yunshan-v4-compat-review-373165d",
+    "scope": "Read-only independent checkpoint373165d generation/physical/body evidence. Large emitted-building/controller raw captures remain in its original directory and are not included in this lightweight supplement."
+  }
+}

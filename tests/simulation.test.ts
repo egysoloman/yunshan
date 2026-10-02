@@ -468,7 +468,7 @@ test('traffic lights expose the same signal state used by vehicle rules and perm
   assert.ok(sim.state.signals?.[node.id] === 0 || sim.state.signals?.[node.id] === 1);
 });
 
-test('the complete city survives multiple days and restores a large genuine save deterministically', async () => {
+test('the complete city survives multiple days and restores a large genuine save deterministically', async t => {
   const { createWorld } = await import('../src/world.ts');
   const world = createWorld(), sim = new Simulation(world);
   sim.command({ type: 'speed', value: 8 });
@@ -480,6 +480,16 @@ test('the complete city survives multiple days and restores a large genuine save
   assert.ok(sim.state.metrics.flights > 0);
   const saved = sim.exportSave(), restored = new Simulation(world);
   assert.ok(saved.length < 8_000_000);
+  const routeDocument = JSON.parse(saved);
+  t.diagnostic(JSON.stringify({ completeCitySave: true, tick: sim.state.tick, encoding: routeDocument.routeEncoding,
+    poolExtents: routeDocument.routeEncoding === 'paged-v1' ? routeDocument.routePool.map((page: unknown[]) => page.length) : [routeDocument.routePool.length],
+    maxActorRoute: Math.max(...routeDocument.state.citizens.map((citizen: any) => citizen.route?.length ?? 0)), saveBytes: Buffer.byteLength(saved) }));
+  if (routeDocument.routeEncoding === 'paged-v1') {
+    const originalEncoding = { ...routeDocument, routeEncoding: 'pooled-v1', routePool: routeDocument.routePool.flat() }, oldReader = new Simulation(world), before = oldReader.exportSave();
+    const result = oldReader.importSave(JSON.stringify(originalEncoding));
+    t.diagnostic(JSON.stringify({ exactOldPoolRejection: result, originalPointCount: originalEncoding.routePool.length }));
+    assert.equal(result.ok, false); assert.match(result.message, /route pool/); assert.equal(oldReader.exportSave(), before);
+  }
   assert.equal(restored.importSave(saved).ok, true);
   for (let i = 0; i < 24; i++) { sim.step(.25); restored.step(.25); }
   assert.deepEqual(restored.state, sim.state);

@@ -1,4 +1,5 @@
-import type { Vec3, WorldDefinition } from '../types';
+import type { WorldDefinition } from '../types';
+import { decodeCitizenRoutes, encodeCitizenRoutes } from './route-encoding';
 
 export const SAVE_CHUNK_SIZE = 256;
 export type SaveWorld = Pick<WorldDefinition, 'buildings' | 'districts' | 'nodes'>;
@@ -40,12 +41,8 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   if (object(document.state.culture)) order['state.culture'] = Object.keys(document.state.culture);
   if (object(document.state.trade)) order['state.trade'] = Object.keys(document.state.trade);
   if (object(document.state.clinical)) order['state.clinical'] = Object.keys(document.state.clinical);
-  if (document.routeEncoding === 'pooled-v1') {
-    if (!Array.isArray(document.routePool) || !Array.isArray(document.state.citizens)) throw new Error('无效存档路线池。');
-    for (const citizen of document.state.citizens) if (citizen.route !== undefined) {
-      if (!Array.isArray(citizen.route)) throw new Error('无效存档路线。');
-      citizen.route = citizen.route.map((index: unknown) => { if (!Number.isInteger(index) || (index as number) < 0 || (index as number) >= document.routePool.length) throw new Error('无效存档路线索引。'); return document.routePool[index as number]; });
-    }
+  if (document.routeEncoding !== undefined) {
+    decodeCitizenRoutes(document.routeEncoding, document.routePool, document.state.citizens);
     delete document.routePool;
   }
   const chunks = new Map<string, Chunk>(), player: Document = { values: Object.create(null), maps: Object.create(null), arrays: Object.create(null) };
@@ -134,10 +131,14 @@ export function assembleSave(parts: SavePart[]): string {
     const expected = layout.order[path], target = valueAt(document, path);
     if (!Array.isArray(expected) || new Set(expected).size !== expected.length || Object.keys(target).length !== expected.length || expected.some(key => !Object.hasOwn(target, key))) throw new Error('缺失存档映射。');
   }
-  if (document.routeEncoding === 'pooled-v1') {
-    const routePool: Vec3[] = [], ids = new Map<string, number>();
-    for (const citizen of document.state.citizens) if (citizen.route !== undefined) citizen.route = citizen.route.map((point: Vec3) => { const key = `${point.x},${point.y},${point.z}`; let id = ids.get(key); if (id === undefined) { id = routePool.length; ids.set(key, id); routePool.push(point); } return id; });
-    document.routePool = routePool;
+  if (document.routeEncoding !== undefined) {
+    if (document.routeEncoding !== 'pooled-v1' && document.routeEncoding !== 'paged-v1') throw new Error('无效存档路线编码。');
+    const encoded = encodeCitizenRoutes(document.state.citizens);
+    if (encoded.routeEncoding !== document.routeEncoding) throw new Error('存档分区路线编码与完整代际不匹配。');
+    decodeCitizenRoutes(encoded.routeEncoding, encoded.routePool,
+      encoded.citizens.map(citizen => ({ ...citizen, route: citizen.route?.slice() })));
+    document.state.citizens = encoded.citizens;
+    document.routePool = encoded.routePool;
   }
   // Preserve object-key order too: deterministic export/continuation tooling can
   // compare the reconstructed version-one export byte for byte.

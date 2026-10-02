@@ -1,0 +1,15 @@
+{
+  "requestedAt": "2026-10-02T01:30:53.533418+00:00",
+  "method": "GET",
+  "url": "https://openapi.tripo3d.ai/v3/account/balance",
+  "authorizationHeaderSent": true,
+  "credentialPrintedOrArchived": false,
+  "generationRequested": false,
+  "status": "NETWORK_BLOCKED",
+  "httpStatus": null,
+  "proxyConnectStatus": 403,
+  "errorType": "URLError",
+  "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+  "accountBalance": "UNKNOWN",
+  "apiKeyValidity": "NOT_VALIDATED"
+}

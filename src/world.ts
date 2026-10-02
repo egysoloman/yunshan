@@ -1,10 +1,12 @@
 import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, TransportMode, Vec3, WorldDefinition } from './types';
 import { getFloorDimensions } from './access';
+import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
-export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v3';
+export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v4';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
+export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
 
 const UNIT = .2;
 const q = (n: number) => Math.round(n / UNIT) * UNIT;
@@ -47,8 +49,15 @@ function indexFor(world: WorldDefinition) {
   if (!index) {
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' ? 70 : 14;
-    for (const b of world.buildings) buckets(index.buildings, b, b.position.x - b.width / 2 - margin, b.position.x + b.width / 2 + margin, b.position.z - b.depth / 2 - margin, b.position.z + b.depth / 2 + margin);
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' ? 70 : 14;
+    for (const b of world.buildings) {
+      let halfWidth = b.width / 2, halfDepth = b.depth / 2;
+      if (b.floorPlanProfile) {
+        const c = Math.abs(Math.cos(b.rotation)), s = Math.abs(Math.sin(b.rotation));
+        halfWidth = (b.width * c + b.depth * s) / 2; halfDepth = (b.width * s + b.depth * c) / 2;
+      }
+      buckets(index.buildings, b, b.position.x - halfWidth - margin, b.position.x + halfWidth + margin, b.position.z - halfDepth - margin, b.position.z + halfDepth + margin);
+    }
     indices.set(world, index);
   }
   while (index.indexedEdges < world.edges.length) {
@@ -193,7 +202,8 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   // breaks evenly spaced proxy facets without shifting houses or rail stops.
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
-  if ((world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'current-v3') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+  if (layout === 'current-v3' || layout === 'current-v4') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -233,8 +243,28 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
 /** The floor/road surface is returned without a camera-eye offset. */
 export function getWalkHeight(world: WorldDefinition, x: number, z: number, referenceHeight?: number): number {
   const index = indexFor(world);
-  for (const b of index.buildings.get(key(x, z)) ?? []) if (Math.abs(x - b.position.x) <= b.width / 2 && Math.abs(z - b.position.z) <= b.depth / 2) {
+  for (const b of index.buildings.get(key(x, z)) ?? []) {
+    let halfWidth = b.width / 2, halfDepth = b.depth / 2;
+    if (b.floorPlanProfile) {
+      const c = Math.abs(Math.cos(b.rotation)), s = Math.abs(Math.sin(b.rotation));
+      halfWidth = (b.width * c + b.depth * s) / 2; halfDepth = (b.width * s + b.depth * c) / 2;
+    }
+    if (!(Math.abs(x - b.position.x) <= halfWidth && Math.abs(z - b.position.z) <= halfDepth)) continue;
     const floor = referenceHeight === undefined ? 0 : clamp(Math.round((referenceHeight - b.position.y - .6) / (b.height / b.floors)), -(b.basements ?? 0), b.floors - 1);
+    if (b.floorPlanProfile) {
+      // An absent upper wing exposes the actual slab below it. Never replace
+      // that slab with the original rectangular envelope or fall through it.
+      const reference = { x, y: referenceHeight ?? b.position.y + .6, z };
+      let highest = getFloorPlanRoofSupport(b, reference, 0)?.y;
+      for (let candidate = floor; candidate >= -(b.basements ?? 0); candidate--) {
+        const support = floorPlanSupport(b, candidate, reference, 0);
+        // Ground foundations have a real .6m plinth. A higher storey must not
+        // attract feet from the air between floors; stairs select real treads.
+        if (support && (referenceHeight === undefined || support.y <= referenceHeight + .6 + 1e-8)) highest = Math.max(highest ?? -Infinity, support.y);
+      }
+      if (highest !== undefined) return highest;
+      continue;
+    }
     const footprint = getFloorDimensions(b, floor);
     if (Math.abs(x - b.position.x) <= footprint.width / 2 && Math.abs(z - b.position.z) <= footprint.depth / 2) return b.position.y + .6 + floor * b.height / b.floors;
   }
@@ -512,6 +542,12 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
         building.floorPermissions = ['public', 'public', 'public', 'official', 'official', 'driver', 'driver', 'scientist', 'teacher', 'official', 'scientist', 'scientist', 'scientist', 'official', 'official', 'official', 'police', 'police', 'police', 'public', 'council', 'council', 'official', 'official', 'official', 'mayor', 'mayor', 'mayor', 'public', 'public'];
         const tiers = [[144, 112], [126, 98], [108, 84], [90, 70], [72, 56]];
         Object.assign(building, { floorFootprints: Array.from({ length: floors }, (_, floor) => ({ width: tiers[Math.floor(floor / 6)][0], depth: tiers[Math.floor(floor / 6)][1] })) });
+      }
+      if (layoutVersion === 'current-v4' && kind !== 'core' && kind !== 'pavilion') {
+        building.floorPlanProfile = 'v4-program-bodies-02';
+        const entrance = getBuildingEntrance(building);
+        building.door = { x: q(entrance.x), y: q(entrance.y), z: q(entrance.z) };
+        building.functionPoints = Array.from({ length: floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
       }
       world.buildings.push(building);
       if (!civic) {

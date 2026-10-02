@@ -1,0 +1,2883 @@
+{
+  "scope": "Read-only original 14-day final save; no ticks, new counter, money, goods, staffing, approval or modified production source",
+  "at": 20640,
+  "day": 14,
+  "hour": 8,
+  "weather": "晴",
+  "walkingSpeed": 4.2,
+  "saveSha256": "eb36bd85bcc83f798d7bfd3599bc79f1c41172b7b429bfae22aa6ccc075621d1",
+  "snapshotSourceCount": 32,
+  "unchanged": true,
+  "finalSaveRoundtripExact": true,
+  "budget": {
+    "cash": 11198.788716185003,
+    "publicWagesDue": 0,
+    "publicWagesEarned": 202.1480779158566,
+    "forecastPayroll": 11863.680566496138,
+    "reservedPayroll": 4844.988290139066,
+    "essentialOperations": 2073.6,
+    "reserve": 14139.428644411995,
+    "authorizedRemaining": 0,
+    "available": 0
+  },
+  "publicLabor": {
+    "standingUntilDay": 8,
+    "today": {
+      "id": "public-shift-14",
+      "approvedAt": 19442,
+      "siteId": "core-b12",
+      "approvedBy": [
+        "citizen-39",
+        "citizen-303"
+      ],
+      "cap": 4918.220290139065,
+      "assignments": 287,
+      "minutesCap": 195
+    }
+  },
+  "authorityGroups": [
+    {
+      "workId": "government-b10",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "summit-b12",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "government-b13",
+      "onsiteHealthy": [
+        "citizen-555"
+      ],
+      "onDuty": [
+        "citizen-555"
+      ]
+    },
+    {
+      "workId": "summit-b19",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "core-b12",
+      "onsiteHealthy": [
+        "citizen-39"
+      ],
+      "onDuty": []
+    },
+    {
+      "workId": "summit-b6",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "summit-b9",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b8",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "core-b28",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b5",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b2",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "core-b22",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "government-b29",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "core-b19",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b31",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b18",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b21",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b15",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b37",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "starport-b24",
+      "onsiteHealthy": [],
+      "onDuty": []
+    },
+    {
+      "workId": "government-b16",
+      "onsiteHealthy": [],
+      "onDuty": []
+    }
+  ],
+  "districts": [
+    {
+      "districtId": "academy",
+      "population": 56,
+      "richHungry": 8,
+      "existingPool": 140,
+      "existingLots": [
+        {
+          "shopId": null,
+          "quantity": 140
+        }
+      ],
+      "existingFoodShops": 0,
+      "candidates": [
+        {
+          "id": "academy-b45",
+          "name": "文澜学苑·西溪院·书院12",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -415.6,
+            "y": 204.60000000000002,
+            "z": -130.8
+          },
+          "capacity": 552,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 4,
+          "healthyStaff": 1,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 16,
+            "within1000": 18,
+            "maximum": 2482.345764007927
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 4,
+            "within1000": 8,
+            "maximum": 731.4082763748559
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-1",
+              "distanceFromDoor": 179.45472966740107,
+              "distanceOnFoot": 272.92635231551685,
+              "roundTripMinutesOnFoot": 129.96492967405564,
+              "position": {
+                "x": -540,
+                "y": 198.60000000000002,
+                "z": -260
+              }
+            },
+            {
+              "id": "academy-quarter-3",
+              "distanceFromDoor": 220.44727260730625,
+              "distanceOnFoot": 947.9018861455179,
+              "roundTripMinutesOnFoot": 451.38185054548467,
+              "position": {
+                "x": -215,
+                "y": 184.60000000000002,
+                "z": -220
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b13",
+          "name": "文澜学苑·西溪院·书院4",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -593.4,
+            "y": 196.60000000000002,
+            "z": -306.6
+          },
+          "capacity": 564,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 4,
+            "within500": 16,
+            "within1000": 44,
+            "maximum": 2323.095536798348
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 1,
+            "within500": 5,
+            "within1000": 8,
+            "maximum": 572.1580491652769
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-1",
+              "distanceFromDoor": 70.90218614401111,
+              "distanceOnFoot": 113.67612510593797,
+              "roundTripMinutesOnFoot": 54.13148814568475,
+              "position": {
+                "x": -540,
+                "y": 198.60000000000002,
+                "z": -260
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 246.3719139837169,
+              "distanceOnFoot": 437.7580491652769,
+              "roundTripMinutesOnFoot": 208.45621388822707,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b48",
+          "name": "文澜学苑·北岭院·书院13",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -676.4000000000001,
+            "y": 211.20000000000002,
+            "z": -350.20000000000005
+          },
+          "capacity": 430,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 16,
+            "within1000": 18,
+            "maximum": 2457.2043098205627
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 4,
+            "within1000": 8,
+            "maximum": 706.2668221874917
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-1",
+              "distanceFromDoor": 164.01146301402238,
+              "distanceOnFoot": 247.7848981281528,
+              "roundTripMinutesOnFoot": 117.99280863245372,
+              "position": {
+                "x": -540,
+                "y": 198.60000000000002,
+                "z": -260
+              }
+            },
+            {
+              "id": "academy-quarter-0",
+              "distanceFromDoor": 236.20914461552925,
+              "distanceOnFoot": 909.9124517444066,
+              "roundTripMinutesOnFoot": 433.2916436878126,
+              "position": {
+                "x": -560,
+                "y": 228.60000000000002,
+                "z": -555
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b29",
+          "name": "文澜学苑·西溪院·书院8",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -653.8000000000001,
+            "y": 174,
+            "z": -136
+          },
+          "capacity": 534,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 16,
+            "within1000": 18,
+            "maximum": 2470.0413762276557
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 4,
+            "within1000": 8,
+            "maximum": 719.1038885945848
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-1",
+              "distanceFromDoor": 170.09291578428542,
+              "distanceOnFoot": 260.62196453524587,
+              "roundTripMinutesOnFoot": 124.10569739773612,
+              "position": {
+                "x": -540,
+                "y": 198.60000000000002,
+                "z": -260
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 395.82976138739247,
+              "distanceOnFoot": 584.7038885945848,
+              "roundTripMinutesOnFoot": 278.43042314027844,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b10",
+          "name": "文澜学苑·东岚院·书院3",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -277.2,
+            "y": 236.60000000000002,
+            "z": -564.4
+          },
+          "capacity": 445,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 8,
+          "healthyStaff": 7,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 7,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 4,
+            "within500": 10,
+            "within1000": 50,
+            "maximum": 2285.7624702632947
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 3,
+            "within1000": 8,
+            "maximum": 871.8219670385986
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-2",
+              "distanceFromDoor": 79.62537284057134,
+              "distanceOnFoot": 96.6211186926718,
+              "roundTripMinutesOnFoot": 46.0100565203199,
+              "position": {
+                "x": -200,
+                "y": 238.60000000000002,
+                "z": -545
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 182.6231091620116,
+              "distanceOnFoot": 400.424982630224,
+              "roundTripMinutesOnFoot": 190.67856315724953,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b26",
+          "name": "文澜学苑·东岚院·书院7",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -288.2,
+            "y": 235,
+            "z": -397.6
+          },
+          "capacity": 455,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 4,
+          "healthyStaff": 2,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 2,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 12,
+            "maximum": 2450.802797853754
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 6,
+            "maximum": 1036.8622946290575
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 87.47319589451388,
+              "distanceOnFoot": 565.465310220683,
+              "roundTripMinutesOnFoot": 269.2691953431824,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            },
+            {
+              "id": "academy-quarter-2",
+              "distanceFromDoor": 171.81082620137764,
+              "distanceOnFoot": 261.66144628313083,
+              "roundTripMinutesOnFoot": 124.60068870625277,
+              "position": {
+                "x": -200,
+                "y": 238.60000000000002,
+                "z": -545
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b7",
+          "name": "文澜学苑·南坡院·书院2",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -302.6,
+            "y": 182.60000000000002,
+            "z": -204.8
+          },
+          "capacity": 528,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 2,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 2,
+            "within500": 10,
+            "within1000": 38,
+            "maximum": 2363.771162863484
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 8,
+            "maximum": 949.8306596387878
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-3",
+              "distanceFromDoor": 88.93143426258234,
+              "distanceOnFoot": 127.54006545975106,
+              "roundTripMinutesOnFoot": 60.73336450464336,
+              "position": {
+                "x": -215,
+                "y": 184.60000000000002,
+                "z": -220
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 217.31497877504896,
+              "distanceOnFoot": 478.4336752304132,
+              "roundTripMinutesOnFoot": 227.82555963353008,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b23",
+          "name": "文澜学苑·南坡院·书院6",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -177.60000000000002,
+            "y": 186.60000000000002,
+            "z": -117.60000000000001
+          },
+          "capacity": 504,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 2,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 2,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 28,
+            "maximum": 2406.1267961981794
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 8,
+            "maximum": 992.1862929734834
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-3",
+              "distanceFromDoor": 109.03448995616019,
+              "distanceOnFoot": 169.89569879444676,
+              "roundTripMinutesOnFoot": 80.90271371164131,
+              "position": {
+                "x": -215,
+                "y": 184.60000000000002,
+                "z": -220
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 350.5930974791146,
+              "distanceOnFoot": 520.7893085651089,
+              "roundTripMinutesOnFoot": 247.994908840528,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b39",
+          "name": "文澜学苑·南坡院·书院10",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -82.4,
+            "y": 188.60000000000002,
+            "z": -271.8
+          },
+          "capacity": 516,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 1,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 20,
+            "maximum": 2429.7980415963307
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 7,
+            "maximum": 1015.8575383716346
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-3",
+              "distanceFromDoor": 142.414886862294,
+              "distanceOnFoot": 193.566944192598,
+              "roundTripMinutesOnFoot": 92.17473532980856,
+              "position": {
+                "x": -215,
+                "y": 184.60000000000002,
+                "z": -220
+              }
+            },
+            {
+              "id": "academy-quarter-2",
+              "distanceFromDoor": 301.6090184328048,
+              "distanceOnFoot": 848.2644179008123,
+              "roundTripMinutesOnFoot": 403.9354370956249,
+              "position": {
+                "x": -200,
+                "y": 238.60000000000002,
+                "z": -545
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b16",
+          "name": "文澜学苑·北岭院·书院5",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -580.4,
+            "y": 226.60000000000002,
+            "z": -618.8000000000001
+          },
+          "capacity": 415,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 4,
+          "healthyStaff": 2,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 2,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 4,
+            "within500": 8,
+            "within1000": 46,
+            "maximum": 2320.805323705443
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 2,
+            "within1000": 8,
+            "maximum": 906.8648204807465
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-0",
+              "distanceFromDoor": 67.01193923473643,
+              "distanceOnFoot": 97.42220651545713,
+              "roundTripMinutesOnFoot": 46.391526912122444,
+              "position": {
+                "x": -560,
+                "y": 228.60000000000002,
+                "z": -555
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 297.09527091490367,
+              "distanceOnFoot": 435.46783607237194,
+              "roundTripMinutesOnFoot": 207.365636224939,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b0",
+          "name": "文澜学苑·北岭院·书院1",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -475.6,
+            "y": 230.60000000000002,
+            "z": -506.20000000000005
+          },
+          "capacity": 470,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 1,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 8,
+            "within1000": 32,
+            "maximum": 2384.1975527300096
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 2,
+            "within1000": 8,
+            "maximum": 970.2570495053134
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-0",
+              "distanceFromDoor": 97.51307604624107,
+              "distanceOnFoot": 160.81443554002396,
+              "roundTripMinutesOnFoot": 76.57830263810665,
+              "position": {
+                "x": -560,
+                "y": 228.60000000000002,
+                "z": -555
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 144.85095788430263,
+              "distanceOnFoot": 498.8600650969388,
+              "roundTripMinutesOnFoot": 237.55241195092322,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b32",
+          "name": "文澜学苑·北岭院·书院9",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -704.8000000000001,
+            "y": 230.60000000000002,
+            "z": -485.6
+          },
+          "capacity": 425,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 2,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 2,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 8,
+            "within1000": 12,
+            "maximum": 2464.7931779265914
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 1,
+            "within1000": 6,
+            "maximum": 1050.8526747018955
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-0",
+              "distanceFromDoor": 160.5845571653763,
+              "distanceOnFoot": 241.410060736606,
+              "roundTripMinutesOnFoot": 114.95717177933618,
+              "position": {
+                "x": -560,
+                "y": 228.60000000000002,
+                "z": -555
+              }
+            },
+            {
+              "id": "academy-quarter-1",
+              "distanceFromDoor": 281.2088192073642,
+              "distanceOnFoot": 903.5376143528597,
+              "roundTripMinutesOnFoot": 430.2560068346951,
+              "position": {
+                "x": -540,
+                "y": 198.60000000000002,
+                "z": -260
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b55",
+          "name": "文澜学苑·南坡院·书院14",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": 0.6000000000000001,
+            "y": 104.80000000000001,
+            "z": -211.20000000000002
+          },
+          "capacity": 552,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 1,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 0,
+            "maximum": 2981.1116733137387
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 0,
+            "maximum": 2672.8195171069497
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-3",
+              "distanceFromDoor": 230.06268710940503,
+              "distanceOnFoot": 2552.316142469237,
+              "roundTripMinutesOnFoot": 1215.3886392710651,
+              "position": {
+                "x": -215,
+                "y": 184.60000000000002,
+                "z": -220
+              }
+            },
+            {
+              "id": "academy-quarter-2",
+              "distanceFromDoor": 411.7830011061651,
+              "distanceOnFoot": 2505.226396636127,
+              "roundTripMinutesOnFoot": 1192.964950779108,
+              "position": {
+                "x": -200,
+                "y": 238.60000000000002,
+                "z": -545
+              }
+            }
+          ]
+        },
+        {
+          "id": "academy-b42",
+          "name": "文澜学苑·东岚院·书院11",
+          "kind": "school",
+          "facility": null,
+          "door": {
+            "x": -48.6,
+            "y": 207,
+            "z": -537.6
+          },
+          "capacity": 415,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 32,
+            "maximum": 2368.4499532811615
+          },
+          "richHungryCurrentCoverage": {
+            "population": 8,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 8,
+            "maximum": 954.5094500564653
+          },
+          "nearestStationNodes": [
+            {
+              "id": "academy-quarter-2",
+              "distanceFromDoor": 154.83952983653757,
+              "distanceOnFoot": 786.9163295856429,
+              "roundTripMinutesOnFoot": 374.722061707449,
+              "position": {
+                "x": -200,
+                "y": 238.60000000000002,
+                "z": -545
+              }
+            },
+            {
+              "id": "academy-station",
+              "distanceFromDoor": 345.80323885122874,
+              "distanceOnFoot": 483.11246564809073,
+              "roundTripMinutesOnFoot": 230.0535550705194,
+              "position": {
+                "x": -370,
+                "y": 206.6,
+                "z": -410
+              }
+            }
+          ]
+        }
+      ],
+      "foodDemandIdealDaily": 77.53846153846153,
+      "initialPoolDaysAtIdealDemand": 1.8055555555555556
+    },
+    {
+      "districtId": "government",
+      "population": 56,
+      "richHungry": 41,
+      "existingPool": 168,
+      "existingLots": [
+        {
+          "shopId": null,
+          "quantity": 168
+        }
+      ],
+      "existingFoodShops": 0,
+      "candidates": [
+        {
+          "id": "government-b10",
+          "name": "玉衡官署·东岚院·议事堂3",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 619.6,
+            "y": 342.6,
+            "z": -911.8000000000001
+          },
+          "capacity": 592,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 5,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 38,
+            "maximum": 2668.082882594099
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 5,
+            "within500": 9,
+            "within1000": 27,
+            "maximum": 2734.521451062076
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-2",
+              "distanceFromDoor": 73.48060968718212,
+              "distanceOnFoot": 109.41969457404275,
+              "roundTripMinutesOnFoot": 52.10461646382988,
+              "position": {
+                "x": 680,
+                "y": 344.6,
+                "z": -870
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 235.26878245955209,
+              "distanceOnFoot": 448.488963127168,
+              "roundTripMinutesOnFoot": 213.56617291769905,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b13",
+          "name": "玉衡官署·西溪院·议事堂4",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 336.8,
+            "y": 298.6,
+            "z": -605.4
+          },
+          "capacity": 462,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 1,
+          "onDutyStaff": 1,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 10,
+            "within1000": 43,
+            "maximum": 2646.4953838934657
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 28,
+            "maximum": 2712.9339523614426
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-1",
+              "distanceFromDoor": 66.7487827604369,
+              "distanceOnFoot": 89.09674640339621,
+              "roundTripMinutesOnFoot": 42.42702209685534,
+              "position": {
+                "x": 350,
+                "y": 300.6,
+                "z": -540
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 195.57965129327746,
+              "distanceOnFoot": 426.90146442653503,
+              "roundTripMinutesOnFoot": 203.28641163168334,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b29",
+          "name": "玉衡官署·西溪院·议事堂8",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 201.8,
+            "y": 284.40000000000003,
+            "z": -484.20000000000005
+          },
+          "capacity": 560,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 1,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 1,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 14,
+            "maximum": 2788.8406770148526
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 13,
+            "maximum": 2855.2792454828295
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-1",
+              "distanceFromDoor": 159.18329058038722,
+              "distanceOnFoot": 231.44203952478287,
+              "roundTripMinutesOnFoot": 110.21049501180136,
+              "position": {
+                "x": 350,
+                "y": 300.6,
+                "z": -540
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 376.1979797925555,
+              "distanceOnFoot": 569.2467575479217,
+              "roundTripMinutesOnFoot": 271.06988454662934,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b26",
+          "name": "玉衡官署·东岚院·议事堂7",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 577.6,
+            "y": 341.20000000000005,
+            "z": -736.4000000000001
+          },
+          "capacity": 450,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 14,
+            "maximum": 2811.490256478045
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 9,
+            "within1000": 16,
+            "maximum": 2877.928824946022
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-station",
+              "distanceFromDoor": 83.63181212911753,
+              "distanceOnFoot": 591.8963370111139,
+              "roundTripMinutesOnFoot": 281.8553985767209,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            },
+            {
+              "id": "government-quarter-2",
+              "distanceFromDoor": 168.36353524442274,
+              "distanceOnFoot": 252.82706845798867,
+              "roundTripMinutesOnFoot": 120.39384212285174,
+              "position": {
+                "x": 680,
+                "y": 344.6,
+                "z": -870
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b42",
+          "name": "玉衡官署·东岚院·议事堂11",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 819.6,
+            "y": 325.20000000000005,
+            "z": -790
+          },
+          "capacity": 511,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 14,
+            "maximum": 2807.024499938124
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 9,
+            "within1000": 16,
+            "maximum": 2873.463068406101
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-2",
+              "distanceFromDoor": 162.06332095819832,
+              "distanceOnFoot": 248.36131191806768,
+              "roundTripMinutesOnFoot": 118.26729138955604,
+              "position": {
+                "x": 680,
+                "y": 344.6,
+                "z": -870
+              }
+            },
+            {
+              "id": "government-quarter-3",
+              "distanceFromDoor": 237.14619963221,
+              "distanceOnFoot": 942.5374324131212,
+              "roundTripMinutesOnFoot": 448.82734876815294,
+              "position": {
+                "x": 715,
+                "y": 290.6,
+                "z": -580
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b16",
+          "name": "玉衡官署·北岭院·议事堂5",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 346.8,
+            "y": 354.6,
+            "z": -922.8000000000001
+          },
+          "capacity": 504,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 9,
+            "within1000": 43,
+            "maximum": 2604.989349313322
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 7,
+            "within500": 10,
+            "within1000": 30,
+            "maximum": 2671.4279177812987
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-0",
+              "distanceFromDoor": 68.1694946438655,
+              "distanceOnFoot": 71.16305567055996,
+              "roundTripMinutesOnFoot": 33.887169366933314,
+              "position": {
+                "x": 340,
+                "y": 356.6,
+                "z": -855
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 263.92059411876147,
+              "distanceOnFoot": 385.39542984639104,
+              "roundTripMinutesOnFoot": 183.5216332601862,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b0",
+          "name": "玉衡官署·北岭院·议事堂1",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 412.6,
+            "y": 358.6,
+            "z": -783.8000000000001
+          },
+          "capacity": 432,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 9,
+            "within1000": 38,
+            "maximum": 2701.1667759190022
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 1,
+            "within500": 10,
+            "within1000": 24,
+            "maximum": 2767.605344386979
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-0",
+              "distanceFromDoor": 101.70644030738661,
+              "distanceOnFoot": 167.34048227624055,
+              "roundTripMinutesOnFoot": 79.68594394106692,
+              "position": {
+                "x": 340,
+                "y": 356.6,
+                "z": -855
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 119.33649902691131,
+              "distanceOnFoot": 481.5728564520716,
+              "roundTripMinutesOnFoot": 229.3204078343198,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b23",
+          "name": "玉衡官署·南坡院·议事堂6",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 726.2,
+            "y": 292.6,
+            "z": -470.8
+          },
+          "capacity": 648,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 19,
+            "maximum": 2760.712631904002
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 2,
+            "within500": 5,
+            "within1000": 18,
+            "maximum": 2827.151200371979
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-3",
+              "distanceFromDoor": 109.79107431845266,
+              "distanceOnFoot": 186.0118604951432,
+              "roundTripMinutesOnFoot": 88.57707642625866,
+              "position": {
+                "x": 715,
+                "y": 290.6,
+                "z": -580
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 330.76741072844527,
+              "distanceOnFoot": 541.1187124370715,
+              "roundTripMinutesOnFoot": 257.67557735098643,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b45",
+          "name": "玉衡官署·西溪院·议事堂12",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 472.6,
+            "y": 301.8,
+            "z": -429.20000000000005
+          },
+          "capacity": 560,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 14,
+            "maximum": 2815.099012425483
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 5,
+            "maximum": 2881.53758089346
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-1",
+              "distanceFromDoor": 165.2538653103158,
+              "distanceOnFoot": 257.7003749354136,
+              "roundTripMinutesOnFoot": 122.71446425495886,
+              "position": {
+                "x": 350,
+                "y": 300.6,
+                "z": -540
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 283.05342251949537,
+              "distanceOnFoot": 595.5050929585525,
+              "roundTripMinutesOnFoot": 283.5738537897869,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b7",
+          "name": "玉衡官署·南坡院·议事堂2",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 633.8000000000001,
+            "y": 290.6,
+            "z": -592.6
+          },
+          "capacity": 497,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 4,
+            "within1000": 8,
+            "maximum": 2336.864951199129
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 1,
+            "within500": 4,
+            "within1000": 9,
+            "maximum": 2318.884009739289
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-3",
+              "distanceFromDoor": 82.17177130864339,
+              "distanceOnFoot": 2091.941940823047,
+              "roundTripMinutesOnFoot": 996.1628289633557,
+              "position": {
+                "x": 715,
+                "y": 290.6,
+                "z": -580
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 181.2214115384824,
+              "distanceOnFoot": 1736.8350888811187,
+              "roundTripMinutesOnFoot": 827.064328038628,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b32",
+          "name": "玉衡官署·北岭院·议事堂9",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 188,
+            "y": 320.40000000000003,
+            "z": -833.4000000000001
+          },
+          "capacity": 648,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 5,
+            "maximum": 2391.7591776746267
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 1,
+            "within1000": 2,
+            "maximum": 2458.1977461426036
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-0",
+              "distanceFromDoor": 157.73712308775,
+              "distanceOnFoot": 2037.6970245178516,
+              "roundTripMinutesOnFoot": 970.3319164370721,
+              "position": {
+                "x": 340,
+                "y": 356.6,
+                "z": -855
+              }
+            },
+            {
+              "id": "government-station",
+              "distanceFromDoor": 335.54314178656676,
+              "distanceOnFoot": 1723.4646503420204,
+              "roundTripMinutesOnFoot": 820.6974525438192,
+              "position": {
+                "x": 500,
+                "y": 324.6,
+                "z": -710
+              }
+            }
+          ]
+        },
+        {
+          "id": "government-b39",
+          "name": "玉衡官署·南坡院·议事堂10",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 864,
+            "y": 259.8,
+            "z": -588.4
+          },
+          "capacity": 474,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 14,
+            "maximum": 2752.4271538179846
+          },
+          "richHungryCurrentCoverage": {
+            "population": 41,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 15,
+            "maximum": 2818.8657222859615
+          },
+          "nearestStationNodes": [
+            {
+              "id": "government-quarter-3",
+              "distanceFromDoor": 152.38175743834955,
+              "distanceOnFoot": 887.9400862929823,
+              "roundTripMinutesOnFoot": 422.82861252046774,
+              "position": {
+                "x": 715,
+                "y": 290.6,
+                "z": -580
+              }
+            },
+            {
+              "id": "government-quarter-2",
+              "distanceFromDoor": 346.90863350455845,
+              "distanceOnFoot": 871.9025029041793,
+              "roundTripMinutesOnFoot": 415.1916680496092,
+              "position": {
+                "x": 680,
+                "y": 344.6,
+                "z": -870
+              }
+            }
+          ]
+        }
+      ],
+      "foodDemandIdealDaily": 77.53846153846153,
+      "initialPoolDaysAtIdealDemand": 2.166666666666667
+    },
+    {
+      "districtId": "starport",
+      "population": 56,
+      "richHungry": 56,
+      "existingPool": 172,
+      "existingLots": [
+        {
+          "shopId": null,
+          "quantity": 172
+        }
+      ],
+      "existingFoodShops": 0,
+      "candidates": [
+        {
+          "id": "starport-b10",
+          "name": "云外星港·东岚院·驿站3",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1637.6000000000001,
+            "y": 402.6,
+            "z": -1456
+          },
+          "capacity": 129,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 15,
+            "within1000": 41,
+            "maximum": 1626.0000757207972
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 4,
+            "within500": 15,
+            "within1000": 40,
+            "maximum": 1674.4621325860537
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 77.6837177277196,
+              "distanceOnFoot": 107.62775637732008,
+              "roundTripMinutesOnFoot": 51.251312560628605,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 322.0896769534846,
+              "distanceOnFoot": 461.29206045888213,
+              "roundTripMinutesOnFoot": 219.662885932801,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b18",
+          "name": "云外星港·东岚院·议事堂5",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1597.2,
+            "y": 404.6,
+            "z": -1304.6000000000001
+          },
+          "capacity": 483,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 15,
+            "within1000": 25,
+            "maximum": 1691.3186917261678
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 1,
+            "within500": 14,
+            "within1000": 31,
+            "maximum": 1739.7807485914243
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 107.73114684249848,
+              "distanceOnFoot": 172.9463723826908,
+              "roundTripMinutesOnFoot": 82.35541542032895,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            },
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 221.53103620034838,
+              "distanceOnFoot": 893.1776013537618,
+              "roundTripMinutesOnFoot": 425.3226673113151,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b26",
+          "name": "云外星港·东岚院·驿站7",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1460.6000000000001,
+            "y": 400.40000000000003,
+            "z": -1493.2
+          },
+          "capacity": 132,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 15,
+            "within1000": 20,
+            "maximum": 1717.0118346219
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 13,
+            "within1000": 23,
+            "maximum": 1765.4738914871566
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 141.47240013514997,
+              "distanceOnFoot": 198.63951527842298,
+              "roundTripMinutesOnFoot": 94.59024537067761,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 233.82437854081863,
+              "distanceOnFoot": 552.303819359985,
+              "roundTripMinutesOnFoot": 263.00181874285,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b2",
+          "name": "云外星港·东岚院·议事堂1",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "capacity": 432,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 15,
+            "within1000": 41,
+            "maximum": 1627.2406713938572
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 4,
+            "within500": 15,
+            "within1000": 40,
+            "maximum": 1675.7027282591137
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 84.87661633217947,
+              "distanceOnFoot": 108.86835205037997,
+              "roundTripMinutesOnFoot": 51.84207240494284,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 182.101729810565,
+              "distanceOnFoot": 462.53265613194196,
+              "roundTripMinutesOnFoot": 220.25364577711522,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b15",
+          "name": "云外星港·南坡院·议事堂4",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1604.8000000000002,
+            "y": 352.6,
+            "z": -1005
+          },
+          "capacity": 450,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 11,
+            "within1000": 21,
+            "maximum": 1709.516176899083
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 2,
+            "within500": 11,
+            "within1000": 21,
+            "maximum": 1757.9782337643394
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 105.38994259415848,
+              "distanceOnFoot": 178.2412367476589,
+              "roundTripMinutesOnFoot": 84.87677940364709,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 361.95585366174157,
+              "distanceOnFoot": 544.8081616371679,
+              "roundTripMinutesOnFoot": 259.4324579224609,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b31",
+          "name": "云外星港·南坡院·议事堂8",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1661.6000000000001,
+            "y": 354.6,
+            "z": -1176.2
+          },
+          "capacity": 539,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 11,
+            "within1000": 16,
+            "maximum": 1722.2201438966592
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 2,
+            "within500": 11,
+            "within1000": 19,
+            "maximum": 1770.6822007619157
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 138.07244475274578,
+              "distanceOnFoot": 190.94520374523518,
+              "roundTripMinutesOnFoot": 90.92628749773104,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            },
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 253.9015557258364,
+              "distanceOnFoot": 911.1764327163062,
+              "roundTripMinutesOnFoot": 433.8935393887172,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b23",
+          "name": "云外星港·南坡院·驿站6",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1463,
+            "y": 348.6,
+            "z": -1065.8
+          },
+          "capacity": 126,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 6,
+            "within500": 11,
+            "within1000": 26,
+            "maximum": 1669.19597656941
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 6,
+            "within500": 11,
+            "within1000": 27,
+            "maximum": 1717.6580334346665
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 91.79128498937142,
+              "distanceOnFoot": 137.92103641798596,
+              "roundTripMinutesOnFoot": 65.67668400856473,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 234.3728653236121,
+              "distanceOnFoot": 504.48796130749497,
+              "roundTripMinutesOnFoot": 240.23236252737854,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b7",
+          "name": "云外星港·南坡院·驿站2",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1582.2,
+            "y": 350.6,
+            "z": -1161.6000000000001
+          },
+          "capacity": 117,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 11,
+            "within500": 11,
+            "within1000": 36,
+            "maximum": 1630.9615691580975
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 8,
+            "within500": 11,
+            "within1000": 34,
+            "maximum": 1679.423626023354
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 73.9756716765723,
+              "distanceOnFoot": 99.6866290066734,
+              "roundTripMinutesOnFoot": 47.46982333651114,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 243.66247146411365,
+              "distanceOnFoot": 466.25355389618244,
+              "roundTripMinutesOnFoot": 222.02550185532496,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b13",
+          "name": "云外星港·西溪院·驿站4",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1247.4,
+            "y": 344.6,
+            "z": -1149.8
+          },
+          "capacity": 129,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 5,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 10,
+            "within1000": 46,
+            "maximum": 1070.485454451993
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 6,
+            "within500": 10,
+            "within1000": 42,
+            "maximum": 1139.4407604049884
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 83.742462347366,
+              "distanceOnFoot": 96.3848473086683,
+              "roundTripMinutesOnFoot": 45.897546337461094,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 180.4405719343629,
+              "distanceOnFoot": 444.60486466754173,
+              "roundTripMinutesOnFoot": 211.7166022226389,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b5",
+          "name": "云外星港·西溪院·议事堂2",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1096.8,
+            "y": 340.6,
+            "z": -1169.6000000000001
+          },
+          "capacity": 546,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 5,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 10,
+            "within1000": 46,
+            "maximum": 1082.0825809627156
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 10,
+            "within1000": 42,
+            "maximum": 1151.037886915711
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 76.5009803858749,
+              "distanceOnFoot": 107.98197381939094,
+              "roundTripMinutesOnFoot": 51.419987533043304,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 295.99054038938476,
+              "distanceOnFoot": 456.20199117826434,
+              "roundTripMinutesOnFoot": 217.23904341822112,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b29",
+          "name": "云外星港·西溪院·驿站8",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1101,
+            "y": 345.40000000000003,
+            "z": -1257.4
+          },
+          "capacity": 129,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 15,
+            "maximum": 1165.685578957745
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 1,
+            "within500": 10,
+            "within1000": 21,
+            "maximum": 1234.6408849107404
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 138.15064241616838,
+              "distanceOnFoot": 191.58497181442024,
+              "roundTripMinutesOnFoot": 91.23093895924774,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 229.59529611906243,
+              "distanceOnFoot": 888.481905841888,
+              "roundTripMinutesOnFoot": 423.08662182947046,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b42",
+          "name": "云外星港·东岚院·驿站11",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1469.8000000000002,
+            "y": 399.20000000000005,
+            "z": -1284.4
+          },
+          "capacity": 123,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 2,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 15,
+            "maximum": 1772.129686264893
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 11,
+            "within1000": 16,
+            "maximum": 1820.5917431301496
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 104.47851453767919,
+              "distanceOnFoot": 607.421671002978,
+              "roundTripMinutesOnFoot": 289.24841476332284,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            },
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 163.87177914454927,
+              "distanceOnFoot": 253.75736692141595,
+              "roundTripMinutesOnFoot": 120.83684139115044,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b21",
+          "name": "云外星港·西溪院·议事堂6",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1149,
+            "y": 342.6,
+            "z": -1015.4000000000001
+          },
+          "capacity": 640,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 20,
+            "maximum": 1163.6628848034932
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 1,
+            "within500": 10,
+            "within1000": 21,
+            "maximum": 1232.6181907564885
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 120.66548802370949,
+              "distanceOnFoot": 189.56227766016846,
+              "roundTripMinutesOnFoot": 90.26775126674688,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 345.7313407835627,
+              "distanceOnFoot": 537.7822950190418,
+              "roundTripMinutesOnFoot": 256.0868071519247,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b37",
+          "name": "云外星港·西溪院·议事堂10",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1316.4,
+            "y": 348.6,
+            "z": -1100.6000000000001
+          },
+          "capacity": 450,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 10,
+            "within1000": 10,
+            "maximum": 1193.5486442753377
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 1,
+            "within500": 9,
+            "within1000": 17,
+            "maximum": 1262.503950228333
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 155.37477272710657,
+              "distanceOnFoot": 219.44803713201281,
+              "roundTripMinutesOnFoot": 104.49906530095848,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 188.3011417915461,
+              "distanceOnFoot": 567.6680544908862,
+              "roundTripMinutesOnFoot": 270.3181211861363,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b8",
+          "name": "云外星港·北岭院·议事堂3",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1160.4,
+            "y": 386.6,
+            "z": -1517.4
+          },
+          "capacity": 584,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 3,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 5,
+            "within1000": 36,
+            "maximum": 1618.8085875761676
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 5,
+            "within500": 5,
+            "within1000": 34,
+            "maximum": 1667.270644441424
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 69.7633141414598,
+              "distanceOnFoot": 105.42365564565803,
+              "roundTripMinutesOnFoot": 50.20174078364668,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 317.1985498075299,
+              "distanceOnFoot": 454.1005723142524,
+              "roundTripMinutesOnFoot": 216.23836776869163,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b16",
+          "name": "云外星港·北岭院·驿站5",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1260.4,
+            "y": 390.6,
+            "z": -1380.4
+          },
+          "capacity": 129,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 21,
+            "maximum": 1685.3979078130953
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 2,
+            "within500": 5,
+            "within1000": 21,
+            "maximum": 1733.8599646783518
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 99.94158293723387,
+              "distanceOnFoot": 172.01297588258586,
+              "roundTripMinutesOnFoot": 81.91094089646946,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 150.25418463390628,
+              "distanceOnFoot": 520.6898925511803,
+              "roundTripMinutesOnFoot": 247.9475678815144,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b24",
+          "name": "云外星港·北岭院·议事堂7",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1069.8,
+            "y": 373.8,
+            "z": -1360.6000000000001
+          },
+          "capacity": 426,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 1,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 5,
+            "maximum": 1760.6294861985048
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 6,
+            "maximum": 1809.0915430637613
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 164.47321970460717,
+              "distanceOnFoot": 247.24455426799523,
+              "roundTripMinutesOnFoot": 117.73550203237868,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            },
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 246.8437562507913,
+              "distanceOnFoot": 944.141488295463,
+              "roundTripMinutesOnFoot": 449.5911849026014,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b40",
+          "name": "云外星港·北岭院·议事堂11",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1030.2,
+            "y": 316.20000000000005,
+            "z": -1285.2
+          },
+          "capacity": 525,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 5,
+            "within1000": 10,
+            "maximum": 1265.4634928033745
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 7,
+            "within1000": 10,
+            "maximum": 1334.4187987563698
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-1",
+              "distanceFromDoor": 203.53879237138065,
+              "distanceOnFoot": 291.3628856600497,
+              "roundTripMinutesOnFoot": 138.74423126669032,
+              "position": {
+                "x": 1165,
+                "y": 342.6,
+                "z": -1135
+              }
+            },
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 254.2220289432054,
+              "distanceOnFoot": 988.2598196875174,
+              "roundTripMinutesOnFoot": 470.599914136913,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b32",
+          "name": "云外星港·北岭院·驿站9",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1197.2,
+            "y": 330.8,
+            "z": -1595.2
+          },
+          "capacity": 129,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 15,
+            "maximum": 1702.0448272294593
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 15,
+            "maximum": 1750.5068840947158
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-0",
+              "distanceFromDoor": 147.06365968518534,
+              "distanceOnFoot": 886.0137286361385,
+              "roundTripMinutesOnFoot": 421.9112993505421,
+              "position": {
+                "x": 1200,
+                "y": 388.6,
+                "z": -1460
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 361.4411708701708,
+              "distanceOnFoot": 537.3368119675441,
+              "roundTripMinutesOnFoot": 255.8746723654972,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b34",
+          "name": "云外星港·东岚院·议事堂9",
+          "kind": "hall",
+          "facility": null,
+          "door": {
+            "x": 1718.8000000000002,
+            "y": 317.8,
+            "z": -1438.6000000000001
+          },
+          "capacity": 584,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 11,
+            "maximum": 2044.9778159261266
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 11,
+            "maximum": 2093.439872791383
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-2",
+              "distanceFromDoor": 169.3736697364737,
+              "distanceOnFoot": 1233.9341047457735,
+              "roundTripMinutesOnFoot": 587.5876689265588,
+              "position": {
+                "x": 1575,
+                "y": 402.6,
+                "z": -1410
+              }
+            },
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 384.22680801838925,
+              "distanceOnFoot": 513.7028757747025,
+              "roundTripMinutesOnFoot": 244.62041703557261,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            }
+          ]
+        },
+        {
+          "id": "starport-b39",
+          "name": "云外星港·南坡院·驿站10",
+          "kind": "station",
+          "facility": null,
+          "door": {
+            "x": 1583.6000000000001,
+            "y": 299,
+            "z": -930.8000000000001
+          },
+          "capacity": 132,
+          "publicFloors": null,
+          "groundPublic": true,
+          "groundUse": null,
+          "registeredStaff": 0,
+          "healthyStaff": 0,
+          "onDutyStaff": 0,
+          "healthyPromisedStaff": 0,
+          "homeCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 0,
+            "maximum": 1755.3123960548774
+          },
+          "richHungryCurrentCoverage": {
+            "population": 56,
+            "within250": 0,
+            "within500": 0,
+            "within1000": 2,
+            "maximum": 1803.7744529201339
+          },
+          "nearestStationNodes": [
+            {
+              "id": "starport-quarter-3",
+              "distanceFromDoor": 175.36578913801856,
+              "distanceOnFoot": 957.1713056824715,
+              "roundTripMinutesOnFoot": 455.79585984879594,
+              "position": {
+                "x": 1550,
+                "y": 350.6,
+                "z": -1095
+              }
+            },
+            {
+              "id": "starport-station",
+              "distanceFromDoor": 415.22254274063687,
+              "distanceOnFoot": 590.6043807929624,
+              "roundTripMinutesOnFoot": 281.2401813299821,
+              "position": {
+                "x": 1370,
+                "y": 368.6,
+                "z": -1280
+              }
+            }
+          ]
+        }
+      ],
+      "foodDemandIdealDaily": 77.53846153846153,
+      "initialPoolDaysAtIdealDemand": 2.2182539682539684
+    }
+  ]
+}

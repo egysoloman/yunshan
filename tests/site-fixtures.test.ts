@@ -14,7 +14,7 @@ const market: Building = { id: 'test-market', name: '街边市集', kind: 'marke
 const mini: WorldDefinition = { seed: 1, size: 4400, voxelSize: .2, buildings: [market], districts: [], nodes: [], edges: [], mountains: [], spawn: { x: 0, y: .6, z: 14 }, waterfall: { top: { x: 500, y: 100, z: 500 }, bottom: { x: 500, y: 0, z: 500 }, width: 10 }, river: [{ x: 500, y: 0, z: 500 }] };
 
 test('counter geometry rests on actual ground and leaves a body-height public doorway clear', () => {
-  const world = createWorld(), building = world.buildings.find(b => b.id === 'market-b0')!;
+  const world = createWorld(20261001, 'current-v3'), building = world.buildings.find(b => b.id === 'market-b0')!;
   const before = JSON.stringify(world), counters = marketCounters(world, building);
   assert.equal(counters.length, 2);
   for (const counter of counters) {
@@ -29,7 +29,7 @@ test('counter geometry rests on actual ground and leaves a body-height public do
 });
 
 test('actual near and far building emitters align the cabinet and tabletop with the shared physical counter', () => {
-  const world = createWorld(), building = world.buildings.find(b => b.id === 'market-b0')!;
+  const world = createWorld(20261001, 'current-v3'), building = world.buildings.find(b => b.id === 'market-b0')!;
   // Exercise the real production building path without constructing WebGL.
   // Its local emitter adds the building's floor base before submitting boxes.
   const renderer = Object.create(CityRenderer.prototype) as {

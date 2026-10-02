@@ -1,0 +1,49 @@
+{
+  "newTests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "relatedTests": {
+    "passed": 131,
+    "failed": 0,
+    "cancelled": 0,
+    "durationMs": 153363.906483,
+    "files": [
+      "tests/located-freight.test.ts",
+      "tests/economy.test.ts",
+      "tests/simulation.test.ts",
+      "tests/trade.test.ts",
+      "tests/persistence.test.ts"
+    ]
+  },
+  "strictExit": 0,
+  "diffCheckExit": 0,
+  "patchApplyCheck": true,
+  "city": {
+    "sourceFiles": 32,
+    "actualTicks": 80,
+    "continuationTicks": 24,
+    "unloadsAt80": 63,
+    "pickupsAt80": 4,
+    "unloadedAt80": 1828,
+    "loadedAt80": 112,
+    "cashResidualAt80": 2.3283064365386963e-10,
+    "foodResidualAt80": 0,
+    "cargoResidualAt80": 0,
+    "normalizedBaselinePrefixExact": true,
+    "partitionExact": true,
+    "saveExact": true,
+    "additionalUnloadsIn24": 1,
+    "additionalPickupsIn24": 1,
+    "oldCityMigration": {
+      "capturedBaselineTick": 80,
+      "originalSaveByteExact": true,
+      "firstNativeUnloadAfterTicks": 1,
+      "oldOwnerChecks": 14,
+      "oldPrivateOwnerChecks": 3,
+      "oldOriginsHaveNoGuessedNode": true,
+      "migratedSaveExact": true
+    }
+  },
+  "scope": "Isolated 32-source coherent05 prototype. No full npmtest, build/browser/GPU, v4 integration or new 14/30/60-day audit."
+}

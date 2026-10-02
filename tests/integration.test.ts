@@ -6,9 +6,18 @@ import { blocksTransportBarrier } from '../src/transport-geometry.ts';
 import { activeAircraft, setAircraftControls } from '../src/aviation.ts';
 import { GAME_DAY } from '../src/simulation/family.ts';
 import { assembleSave, partitionSave } from '../src/persistence/partition.ts';
-import type { Building, BuildingKind, WorldDefinition } from '../src/types.ts';
+import { getBuildingBody, getBuildingUsePoints } from '../src/architecture-floor-plan.ts';
+import type { Building, BuildingFunctionPoint, BuildingKind, Player, WorldDefinition } from '../src/types.ts';
 
 const world = createWorld();
+// Controlled onsite fixtures use the actual supported programme position.
+// Their roles, money, tick limits and business/save assertions stay unchanged.
+function fixturePoint(simulation: Simulation, building: Building, purpose: BuildingFunctionPoint['purpose'], person: Pick<Player, 'role' | 'identities'> = simulation.state.player) {
+  if (!getBuildingBody(building)) return { ...building.door };
+  const point = getBuildingUsePoints(building, 0).find(point => point.purpose === purpose && simulation.isAtBuildingFunctionPoint(building, point.position, purpose, person));
+  assert.ok(point, `A controlled ${purpose} fixture requires a real accessible point in ${building.id}`);
+  return { ...point.position };
+}
 const restore = (source: Simulation, sourceWorld: WorldDefinition = world) => {
   const saved = source.exportSave(), restored = new Simulation(sourceWorld);
   const result = restored.importSave(saved);
@@ -33,7 +42,7 @@ test('a player-founded operating company keeps its proprietor and capital throug
   simulation.state.player.identities = ['traveler', 'merchant'];
   const site = world.buildings.find(site => ['market', 'workshop', 'farm', 'dock'].includes(site.kind)
     && !site.facility && !simulation.state.extension!.companies.some(company => company.buildingId === site.id))!;
-  simulation.state.player.position = { ...site.door };
+  simulation.state.player.position = fixturePoint(simulation, site, 'work');
   const result = simulation.command({ type: 'foundCompany', targetId: site.id, value: 300 });
   assert.equal(result.ok, true, result.message);
   const shop = simulation.state.shops.find(shop => shop.buildingId === site.id)!;
@@ -51,7 +60,7 @@ test('selling the last privately held company shares cannot produce an unreadabl
   simulation.state.player.identities = ['traveler', 'merchant']; simulation.state.player.money = 10000;
   const site = world.buildings.find(site => ['market', 'workshop', 'farm', 'dock'].includes(site.kind)
     && !site.facility && !simulation.state.extension!.companies.some(company => company.buildingId === site.id))!;
-  simulation.state.player.position = { ...site.door };
+  simulation.state.player.position = fixturePoint(simulation, site, 'work');
   let result = simulation.command({ type: 'foundCompany', targetId: site.id, value: 3000 }); assert.equal(result.ok, true, result.message);
   const company = simulation.state.extension!.companies.find(company => company.buildingId === site.id)!;
   result = simulation.command({ type: 'expandCompany', targetId: company.id, value: 100 }); assert.equal(result.ok, true, result.message);
@@ -60,16 +69,17 @@ test('selling the last privately held company shares cannot produce an unreadabl
   simulation.command({ type: 'speed', value: 8 });
   const shop = simulation.state.shops.find(shop => shop.buildingId === site.id)!, worker = simulation.state.citizens.find(person => simulation.state.extension!.actorProfiles[person.id].age >= 18)!;
   shop.employees = Math.max(1, shop.employees); company.employees = shop.employees;
+  const workerPosition = fixturePoint(simulation, site, 'work', { role: 'traveler', identities: ['traveler'] });
   let pinAttendance = true;
   simulation.onPhase('traffic', () => {
     if (!pinAttendance) return;
-    worker.workId = site.id; worker.role = '工人'; worker.position = { x: site.position.x, y: site.position.y + .6, z: site.position.z + 1.2 };
+    worker.workId = site.id; worker.role = '工人'; worker.position = { ...workerPosition };
     worker.destinationId = site.id; worker.route = []; worker.routeIndex = 0; worker.money = Math.min(worker.money, 100);
     worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
   });
   for (let tick = 0; company.level < 2 && tick < 64; tick++) simulation.step(.25);
   pinAttendance = false; assert.equal(company.level, 2, 'a listing fixture must first finish actual on-site construction');
-  simulation.state.player.position = { ...world.buildings.find(site => site.kind === 'bank')!.door };
+  simulation.state.player.position = fixturePoint(simulation, world.buildings.find(site => site.kind === 'bank')!, 'service');
   result = simulation.command({ type: 'listCompany', targetId: company.id }); assert.equal(result.ok, true, result.message);
   const before = simulation.exportSave();
   result = simulation.command({ type: 'sellShares', targetId: company.id, value: company.shareholders.player });

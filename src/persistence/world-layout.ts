@@ -1,4 +1,5 @@
-import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, createWorld } from '../world';
+import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, createWorld } from '../world';
+import { getBuildingBody, getFloorPlanRoofRegions } from '../architecture-floor-plan';
 import type { CityLayoutVersion } from '../world';
 import type { WorldDefinition } from '../types';
 
@@ -14,14 +15,27 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // graph, so its code-owned recipe and all physical inputs need a new identity.
   // selectSavedWorld only calls this with regenerated trusted candidates. An
   // imported file's layout/terrain/geometry labels are never used as inputs.
-  const terrain = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'current-v3' ? {
+  const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+  const terrain = layout === 'current-v3' || layout === 'current-v4' ? {
     algorithm: GEOLOGICAL_GEOMETRY_VERSION,
     voxelSize: world.voxelSize, size: world.size, mountains: world.mountains,
     districts: world.districts.map(district => [district.id, district.center, district.radius]),
     waterfall: world.waterfall, river: world.river,
     buildingPhysics: world.buildings.map(site => [site.id, site.rotation, site.floors, site.basements]),
   } : undefined;
-  const text = JSON.stringify(terrain ? { ...geometry, terrain } : geometry);
+  // A v4 identity includes the generated physical rooms, voids, openings and
+  // support planes. A marker alone cannot describe their usable geometry.
+  // This extra descriptor is deliberately absent from all four old recipes.
+  const architecture = layout === 'current-v4' ? {
+    algorithm: ARCHITECTURAL_GEOMETRY_VERSION,
+    buildings: world.buildings.map(site => {
+      const body = getBuildingBody(site);
+      return [site.id, site.seed, site.floorPlanProfile, site.functionPoints,
+        site.floorUses, site.floorPermissions, site.publicFloors, site.requiredPermission,
+        body ? [body.family, body.roofRhythm, body.floorPlans, getFloorPlanRoofRegions(body)] : null];
+    }),
+  } : undefined;
+  const text = JSON.stringify(architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry);
   let hash = 2166136261;
   for (let index = 0; index < text.length; index++) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
   return (hash >>> 0).toString(16);

@@ -1,0 +1,4 @@
+import {createWorld} from '/workspace/yunshan/src/world.ts';
+import {getBuildingFloorPlan,containsUnion,canStandInFloorPlan,getFloorPlanFixtures} from '/workspace/yunshan/src/architecture-floor-plan.ts';
+const w=createWorld(20261001,'current-v4'),b=w.buildings.find(b=>b.id==='river-b1')!,p=getBuildingFloorPlan(b,0)!;
+console.log(JSON.stringify({b:{id:b.id,kind:b.kind,width:b.width,depth:b.depth},fixtures:getFloorPlanFixtures(b,p),points:p.usePoints,checks:p.usePoints.map(point=>{const r={x0:Math.round((point.x-1.6)*5)/5,x1:Math.round((point.x+1.6)*5)/5,z0:Math.round((point.z-2)*5)/5,z1:Math.round((point.z-.8)*5)/5};return{r,clearances:p.usePoints.map(u=>Math.max(r.x0-u.x,0,u.x-r.x1)**2+Math.max(r.z0-u.z,0,u.z-r.z1)**2),corners:[[r.x0,r.z0],[r.x0,r.z1],[r.x1,r.z0],[r.x1,r.z1]].map(([x,z])=>({x,z,inside:containsUnion(p.interior,x,z),stand:canStandInFloorPlan(p,x,z,.05)}))}})},null,2));

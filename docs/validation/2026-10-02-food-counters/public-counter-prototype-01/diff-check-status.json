@@ -1,0 +1,19 @@
+{
+  "initialNoIndexCheck": {
+    "exitCode": 1,
+    "messages": "",
+    "scope": "no-index diff reports changed content; no whitespace diagnostic"
+  },
+  "replacementWhitespaceErrorCheck": {
+    "args": [
+      "git",
+      "apply",
+      "--check",
+      "--whitespace=error",
+      "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

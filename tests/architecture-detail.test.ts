@@ -8,7 +8,8 @@ import { createRoofGeometry, type RoofProfile } from '../src/rendering/architect
 import { ArchitectureDetailManager, buildArchitectureDetails, ARCHITECTURE_DETAIL_INSTANCES, architectureFunctionLabel, architectureSignPlacement } from '../src/rendering/architecture-detail.ts';
 import type { Building } from '../src/types.ts';
 
-const world = createWorld();
+// These assertions describe the preserved rectangular/curved-roof contract.
+const world = createWorld(20261001, 'current-v3');
 
 test('near architecture generates no city instances at startup, caps its live budget and releases distant buffers', () => {
   const manager = new ArchitectureDetailManager(world.buildings);

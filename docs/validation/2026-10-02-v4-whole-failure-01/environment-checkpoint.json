@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-10-02T03:41:48.936036+00:00",
+  "commandSucceeded": true,
+  "workspaceExists": true,
+  "gitHead": "37c97ac6dce68fcada82434d309afbd7d5c6ae17",
+  "branch": "takeover-city-life",
+  "dirtyEntries": 53,
+  "snapshotExists": true,
+  "rulesStatusExists": false,
+  "rulesLogBytes": 3248,
+  "build": {
+    "exitCode": 0,
+    "sourceCount": 99,
+    "sourceUnchanged": true,
+    "endedAt": "2026-10-02T03:34:04.085812+00:00",
+    "rawLogSHA256": "4ee62dc52696b8ad831f55e4d507339a3f139f99952b4ea1ee46ee3131187710"
+  },
+  "codec-final": {
+    "exitCode": 0,
+    "sourceCount": 99,
+    "sourceUnchanged": true,
+    "endedAt": "2026-10-02T03:37:34.452753+00:00",
+    "rawLogSHA256": "3eda967ebbef3307209ea9501abccbf04f716c5ebf87b27f19498140732f2909"
+  },
+  "ui": {
+    "exitCode": 0,
+    "sourceCount": 99,
+    "sourceUnchanged": true,
+    "endedAt": "2026-10-02T03:37:51.213754+00:00",
+    "rawLogSHA256": "7627232c792521d6e71b93533bb50da9ed0d3d5265d2ef2b3cb3bae9b52d6d2e"
+  },
+  "fullRulesLastLines": [
+    "✔ glass panes are physical barriers while declared door openings allow a .35m body (4365.173688ms)",
+    "✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (2151.837161ms)",
+    "✔ aircraft stands are actual clear city locations beside stations and the airport (12.06516ms)",
+    "✔ remote mode selection cannot rent or board and a real rental transfers cash to public funds (558.467767ms)",
+    "✔ drone flying moves the passenger, uses energy, and requires an actual landing before exiting (94025.226252ms)"
+  ]
+}

@@ -1,0 +1,16 @@
+✔ v4 supported courtyard is outside a facility and cannot purchase through the old door radius (76.524204ms)
+✔ v4 actual NPC meal route ends at a real sale point and advances only at the existing walking speed (19821.239234ms)
+✔ v4 public exit guidance uses a wall-free route from both a room and the ground courtyard (212.223493ms)
+✔ v4 guidance replans from an actual mid-flight stair tread without flattening the actor to a floor (253.797341ms)
+✔ v4 work commands require the real accessible work point, while unmarked room proximity remains unchanged (39.76848ms)
+✔ v4 qualified teaching work earns only at its work point and pauses in another real room (6394.741754ms)
+✔ v4 upper work points preserve floor permissions even for a qualified teacher (29.273594ms)
+✔ v4 an urgent need in the same building reroutes a real stair-bound citizen to the correct ground service point (1698.002741ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 28908.004327

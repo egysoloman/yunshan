@@ -3,6 +3,7 @@ import { getAviationPads } from './aviation';
 import { getWalkHeight } from './world';
 import { blocksTransportBarrier } from './transport-geometry';
 import { blocksMarketCounter, marketCounters, type MarketCounter } from './site-fixtures';
+import { FLOOR_PLAN_PROFILE, blocksFloorPlanMovement, findBuildingFloorPlanRoute, floorPlanSupport } from './architecture-floor-plan';
 import type { NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
 
 export interface JourneyDestination { id: string; name: string; districtId: string; position: Vec3; nodeId: string }
@@ -38,6 +39,10 @@ function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3): boolean {
     const candidate={x,y:feet.y,z};
     if(blocksMarketCounter(counters,feet,candidate,.35,1.72)||blocksTransportBarrier(world,feet,candidate,.35))return false;
     for(const b of world.buildings){
+      if(b.floorPlanProfile===FLOOR_PLAN_PROFILE){
+        if(Math.hypot(x-b.position.x,z-b.position.z)<=Math.hypot(b.width,b.depth)/2+1&&blocksFloorPlanMovement(b,0,feet,candidate,.35,1.72))return false;
+        continue;
+      }
       if(b.kind==='pavilion'||Math.abs(x-b.position.x)>b.width/2+1||Math.abs(z-b.position.z)>b.depth/2+1)continue;
       const size=getFloorDimensions(b,0),opening=Math.abs(x-b.door.x)<Math.max(1.5,Math.min(2.7,b.width*.1));
       const south=Math.abs(z-(b.position.z+size.depth/2))<1,other=Math.abs(Math.abs(x-b.position.x)-size.width/2)<.7||Math.abs(z-(b.position.z-size.depth/2))<.7;
@@ -59,11 +64,22 @@ function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3): boolean {
 function walkingAccess(world: WorldDefinition, from: Vec3): WalkingAccess | null {
   const roadEdges=world.edges.filter(walkable),nodeMap=new Map(world.nodes.map(n=>[n.id,n]));
   const prefix:Vec3[]=[{...from}];let position=from,stairsFromFloor:number|null=null;
-  const interior=world.buildings.find(b=>{const level=Math.round((from.y-b.position.y-.6)/(b.height/b.floors)),size=getFloorDimensions(b,level);return level>=-(b.basements??0)&&level<b.floors&&Math.abs(from.y-(b.position.y+.6+level*b.height/b.floors))<1.5&&Math.abs(from.x-b.position.x)<size.width/2-.35&&Math.abs(from.z-b.position.z)<size.depth/2-.35;});
+  const interior=world.buildings.find(b=>{
+    if(b.floorPlanProfile===FLOOR_PLAN_PROFILE)return floorPlanWalkingLevel(b,from)!==null;
+    const level=Math.round((from.y-b.position.y-.6)/(b.height/b.floors)),size=getFloorDimensions(b,level);return level>=-(b.basements??0)&&level<b.floors&&Math.abs(from.y-(b.position.y+.6+level*b.height/b.floors))<1.5&&Math.abs(from.x-b.position.x)<size.width/2-.35&&Math.abs(from.z-b.position.z)<size.depth/2-.35;
+  });
   if(interior){
-    const level=Math.round((from.y-interior.position.y-.6)/(interior.height/interior.floors));
-    if(level!==0){stairsFromFloor=level;prefix.push(getStairPosition(interior,level),getStairPosition(interior,0));}
-    append(prefix,interior.door);position=interior.door;
+    if(interior.floorPlanProfile===FLOOR_PLAN_PROFILE){
+      const level=floorPlanWalkingLevel(interior,from)!;
+      const counters=worldCounters(world),route=findBuildingFloorPlanRoute(interior,level,0,from,interior.door,.35,counters.length?(a,b)=>blocksMarketCounter(counters,a,b,.35,1.72):undefined);
+      if(!route)return null;
+      if(level!==0)stairsFromFloor=level;
+      for(const p of route)append(prefix,p);position=interior.door;
+    }else{
+      const level=Math.round((from.y-interior.position.y-.6)/(interior.height/interior.floors));
+      if(level!==0){stairsFromFloor=level;prefix.push(getStairPosition(interior,level),getStairPosition(interior,0));}
+      append(prefix,interior.door);position=interior.door;
+    }
     const doorNode=world.nodes.find(n=>dist(n.position,position)<.01&&roadEdges.some(e=>e.from===n.id||e.to===n.id));
     if(doorNode)return {anchors:[{nodeId:doorNode.id,points:prefix,edgeIds:[],metres:metres(prefix)}],stairsFromFloor};
   }
@@ -89,6 +105,17 @@ function walkingAccess(world: WorldDefinition, from: Vec3): WalkingAccess | null
     anchors.push({nodeId,points,edgeIds:remaining>.01?[projection.edge.id]:[],metres:metres(points)});
   }
   return anchors.length?{anchors,stairsFromFloor}:null;
+}
+
+/** Courtyards and galleries are outside rooms, yet their real slab and walls
+ * still govern the route from an actor standing there to the public street. */
+function floorPlanWalkingLevel(building: WorldDefinition['buildings'][number], position: Vec3): number | null {
+  const height=building.height/building.floors,level=Math.round((position.y-building.position.y-.6)/height);
+  for(const candidate of [level,level-1,level+1]){
+    const support=floorPlanSupport(building,candidate,position);
+    if(support&&Math.abs(support.y-position.y)<=.26)return support.floor;
+  }
+  return null;
 }
 
 interface Connection { edge: NetworkEdge; to: string; mode: JourneyLeg['mode']; vehicles: string[]; cost: number }

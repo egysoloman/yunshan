@@ -93,6 +93,10 @@ let blocksVersion = '';
 const matrix = new THREE.Matrix4();
 
 const actions: UIActions = {
+  isAtBuildingFunctionPoint(buildingId, purpose) {
+    const building = world.buildings.find(site => site.id === buildingId);
+    return !!building && simulation.isAtBuildingFunctionPoint(building, simulation.state.player.position, purpose);
+  },
   command: execute,
   navigateTarget(targetId,preference) { actions.travel(targetId,preference); },
   navigateAircraft(aircraftId) { const craft = simulation.state.aviation?.aircraft.find(a => a.id === aircraftId); if (craft) setMode(craft.kind, craft.id); },

@@ -1,4 +1,5 @@
 import type { Building, Player, Role } from './types';
+import { getBuildingBody,getFloorPlanStairPosition } from './architecture-floor-plan';
 
 /** Actual occupiable footprint; underground rooms retain the structural base. */
 export function getFloorDimensions(building: Building, floor: number): { width: number; depth: number } {
@@ -7,6 +8,7 @@ export function getFloorDimensions(building: Building, floor: number): { width: 
 
 /** The shared vertical shaft stays inside every level, including stepped towers. */
 export function getStairPosition(building: Building, floor: number): { x: number; y: number; z: number } {
+  if(getBuildingBody(building))return getFloorPlanStairPosition(building,floor);
   const footprints = building.floorFootprints?.length ? building.floorFootprints : [building];
   const width = Math.min(building.width, ...footprints.map(level => level.width));
   const depth = Math.min(building.depth, ...footprints.map(level => level.depth));

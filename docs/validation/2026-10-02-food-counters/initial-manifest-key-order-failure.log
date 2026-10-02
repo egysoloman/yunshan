@@ -1,0 +1,8 @@
+/tmp/yunshan-empty-freight-production14-20261001/scripts/food-counter-analysis.ts:14
+if (JSON.stringify(sourceStart) !== JSON.stringify(snapshotManifest.sourceCopy)) throw new Error('Read-only analysis must use the original 32-source immutable audit snapshot');
+                                                                                       ^
+
+Error: Read-only analysis must use the original 32-source immutable audit snapshot
+    at <anonymous> (/tmp/yunshan-empty-freight-production14-20261001/scripts/food-counter-analysis.ts:14:88)
+
+Node.js v24.19.0

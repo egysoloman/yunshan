@@ -1,0 +1,2795 @@
+{
+  "scope": "Only 720-tick diagnostic replay: four complete original observer samples equal; all independently frozen fields of day-one sample equal. Original detailed positions were mutable actor references and six positions differ, so this is NOT whole-state or five-full-sample equivalence. Native budgeting probe occurs solely in a separate exact-restored clone; no real license/counter, no source modification or new long-term audit.",
+  "sourceStart": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "986d1619e351fc9b199fb8ed236d96721a691c19cbe0444b32c0e4a8b37f5bad",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "sourceEnd": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "986d1619e351fc9b199fb8ed236d96721a691c19cbe0444b32c0e4a8b37f5bad",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "originalPrefixComparedTicks": [
+    0,
+    180,
+    360,
+    540,
+    720
+  ],
+  "fullyMatchedSampleTicks": [
+    0,
+    180,
+    360,
+    540
+  ],
+  "prefixExact": false,
+  "allIndependentlyFrozenSampleFieldsExact": true,
+  "mutablePositionDifferences": [
+    {
+      "id": "citizen-6",
+      "originalLateWrittenPosition": {
+        "x": 473.3732302925412,
+        "y": 335.15968469880534,
+        "z": -736
+      },
+      "replayedActualPosition": {
+        "x": 512,
+        "y": 279.1695201389979,
+        "z": -427.39040277995707
+      }
+    },
+    {
+      "id": "citizen-10",
+      "originalLateWrittenPosition": {
+        "x": 1344,
+        "y": 232.11228675222011,
+        "z": -343.87747735434584
+      },
+      "replayedActualPosition": {
+        "x": 1349.9786954874478,
+        "y": 365.77336603587975,
+        "z": -1280
+      }
+    },
+    {
+      "id": "citizen-15",
+      "originalLateWrittenPosition": {
+        "x": -369.6788056592961,
+        "y": 206.34304452743686,
+        "z": -405.824473570849
+      },
+      "replayedActualPosition": {
+        "x": -270.1054135010702,
+        "y": 197.29275925477756,
+        "z": -360
+      }
+    },
+    {
+      "id": "citizen-16",
+      "originalLateWrittenPosition": {
+        "x": 184.8,
+        "y": 502.6,
+        "z": -1111.6
+      },
+      "replayedActualPosition": {
+        "x": 549.6802058554031,
+        "y": 331.77160225222264,
+        "z": -784
+      }
+    },
+    {
+      "id": "citizen-21",
+      "originalLateWrittenPosition": {
+        "x": 1133.0112832485356,
+        "y": 193.78617768056648,
+        "z": -280
+      },
+      "replayedActualPosition": {
+        "x": 1330.69932051509,
+        "y": 363.074903985828,
+        "z": -1280
+      }
+    },
+    {
+      "id": "citizen-27",
+      "originalLateWrittenPosition": {
+        "x": 501.4398296960766,
+        "y": 324.88796593921535,
+        "z": -710.7199148480382
+      },
+      "replayedActualPosition": {
+        "x": 472,
+        "y": 340.06599320777354,
+        "z": -761.5199611872771
+      }
+    }
+  ],
+  "firstFailure": {
+    "all": {
+      "tick": 401,
+      "at": 1282,
+      "day": 0,
+      "hour": 21.366666666666667,
+      "weather": "晴",
+      "id": "citizen-191",
+      "districtId": "academy",
+      "homeId": "academy-b35",
+      "workId": "academy-b23",
+      "role": "老师",
+      "wallet": 410.4642719621792,
+      "hunger": 19.64370623850278,
+      "food": 0,
+      "position": {
+        "x": -698.2414524881219,
+        "y": 234.20318865293245,
+        "z": -448
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "west-b41"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 54,
+      "nearestFood": {
+        "shopId": "shop-west-b41",
+        "districtId": "west",
+        "price": 11.45260692891843,
+        "inventory": 75,
+        "straight": 531.8995134254083,
+        "travel": 658.7269081181815,
+        "minutesOnFoot": 156.83974002813846,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 140,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71576.38487783051,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1121.9116454153211,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15847.376011731048,
+        "authorizedRemaining": 0,
+        "available": 55729.008866099466
+      }
+    },
+    "academy": {
+      "tick": 401,
+      "at": 1282,
+      "day": 0,
+      "hour": 21.366666666666667,
+      "weather": "晴",
+      "id": "citizen-191",
+      "districtId": "academy",
+      "homeId": "academy-b35",
+      "workId": "academy-b23",
+      "role": "老师",
+      "wallet": 410.4642719621792,
+      "hunger": 19.64370623850278,
+      "food": 0,
+      "position": {
+        "x": -698.2414524881219,
+        "y": 234.20318865293245,
+        "z": -448
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "west-b41"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 54,
+      "nearestFood": {
+        "shopId": "shop-west-b41",
+        "districtId": "west",
+        "price": 11.45260692891843,
+        "inventory": 75,
+        "straight": 531.8995134254083,
+        "travel": 658.7269081181815,
+        "minutesOnFoot": 156.83974002813846,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 140,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71576.38487783051,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1121.9116454153211,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15847.376011731048,
+        "authorizedRemaining": 0,
+        "available": 55729.008866099466
+      }
+    },
+    "starport": {
+      "tick": 404,
+      "at": 1288,
+      "day": 0,
+      "hour": 21.466666666666665,
+      "weather": "晴",
+      "id": "citizen-604",
+      "districtId": "starport",
+      "homeId": "starport-b41",
+      "workId": "starport-b29",
+      "role": "驾驶员",
+      "wallet": 376.3044459122267,
+      "hunger": 19.95946031911295,
+      "food": 0,
+      "position": {
+        "x": 1237.134459724478,
+        "y": 356.4953586838639,
+        "z": -1016
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "summit-b15"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 20,
+      "nearestFood": {
+        "shopId": "shop-east-b37",
+        "districtId": "east",
+        "price": 11.037587096430777,
+        "inventory": 79,
+        "straight": 868.5498143701318,
+        "travel": 1849.3783903525236,
+        "minutesOnFoot": 440.3281881791723,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 172,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71567.9260298305,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1136.631645415321,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2472.7679999999996,
+        "reserve": 16261.264011731048,
+        "authorizedRemaining": 0,
+        "available": 55306.66201809945
+      }
+    },
+    "government": {
+      "tick": 408,
+      "at": 1296,
+      "day": 0,
+      "hour": 21.6,
+      "weather": "晴",
+      "id": "citizen-456",
+      "districtId": "government",
+      "homeId": "government-b22",
+      "workId": "government-b10",
+      "role": "官员",
+      "wallet": 461.66454682862076,
+      "hunger": 18.47102263043631,
+      "food": 0,
+      "position": {
+        "x": 232,
+        "y": 422.5923635432956,
+        "z": -979.3849345331175
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "summit-b2"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 18,
+      "nearestFood": {
+        "shopId": "shop-summit-b2",
+        "districtId": "summit",
+        "price": 10.67093785419285,
+        "inventory": 86,
+        "straight": 402.1239226524312,
+        "travel": 729.0924478343952,
+        "minutesOnFoot": 173.5934399605703,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 168,
+      "foodShopStock": 14633.481410558776,
+      "publicBudget": {
+        "cash": 71581.64842502812,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1151.351645415321,
+        "forecastPayroll": 12651.67491368417,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15876.626559099492,
+        "authorizedRemaining": 0,
+        "available": 55705.02186592863
+      }
+    }
+  },
+  "firstQuorum": {
+    "tick": 21,
+    "at": 522,
+    "siteId": "government-b13",
+    "actors": [
+      {
+        "id": "citizen-27",
+        "role": "官员",
+        "workId": "government-b13",
+        "position": {
+          "x": 333.2,
+          "y": 319.6,
+          "z": -625.8
+        },
+        "hunger": 61.34491729303262,
+        "fatigue": 75.3741412968561,
+        "attendance": 8.623152052292376,
+        "onDuty": true
+      },
+      {
+        "id": "citizen-555",
+        "role": "官员",
+        "workId": "government-b13",
+        "position": {
+          "x": 335,
+          "y": 302.8,
+          "z": -625.8
+        },
+        "hunger": 71.57945226863959,
+        "fatigue": 71.67172744150272,
+        "attendance": 12.28355574070607,
+        "onDuty": true
+      }
+    ],
+    "standingAppropriation": true,
+    "publicBudget": {
+      "cash": 79906.1183999999,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 5.799360000704605,
+      "forecastPayroll": 12627.155200000037,
+      "reservedPayroll": 0,
+      "essentialOperations": 2073.6,
+      "reserve": 14706.554560000743,
+      "authorizedRemaining": 0,
+      "available": 65199.56383999916
+    }
+  },
+  "firstStaffDuty": {
+    "government": {
+      "tick": 21,
+      "at": 522,
+      "id": "citizen-27",
+      "role": "官员",
+      "siteId": "government-b13",
+      "hunger": 61.34491729303262,
+      "fatigue": 75.3741412968561,
+      "attendance": 8.623152052292376,
+      "position": {
+        "x": 333.2,
+        "y": 319.6,
+        "z": -625.8
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79906.1183999999,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 5.799360000704605,
+        "forecastPayroll": 12627.155200000037,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14706.554560000743,
+        "authorizedRemaining": 0,
+        "available": 65199.56383999916
+      }
+    },
+    "academy": {
+      "tick": 26,
+      "at": 532,
+      "id": "citizen-422",
+      "role": "老师",
+      "siteId": "academy-b16",
+      "hunger": 91.47063805554063,
+      "fatigue": 80.73402277705259,
+      "attendance": 8.920380020679016,
+      "position": {
+        "x": -576.8,
+        "y": 226.6,
+        "z": -639.4
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79894.74907791348,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 10.57833873366599,
+        "forecastPayroll": 12626.612715789433,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14710.7910545231,
+        "authorizedRemaining": 0,
+        "available": 65183.95802339038
+      }
+    },
+    "starport": {
+      "tick": 27,
+      "at": 534,
+      "id": "citizen-21",
+      "role": "驾驶员",
+      "siteId": "starport-b10",
+      "hunger": 67.7116673259996,
+      "fatigue": 87.15550372189841,
+      "attendance": 12.032930195130614,
+      "position": {
+        "x": 1635.8000000000002,
+        "y": 402.6,
+        "z": -1470.6000000000001
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79901.4462747559,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 13.0424989356548,
+        "forecastPayroll": 12626.098231578959,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14712.740730514613,
+        "authorizedRemaining": 0,
+        "available": 65188.70554424129
+      }
+    }
+  },
+  "quorumEvents": [
+    {
+      "tick": 21,
+      "at": 522,
+      "siteId": "government-b13",
+      "actorIds": [
+        "citizen-27",
+        "citizen-555"
+      ],
+      "publicBudget": {
+        "cash": 79906.1183999999,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 5.799360000704605,
+        "forecastPayroll": 12627.155200000037,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14706.554560000743,
+        "authorizedRemaining": 0,
+        "available": 65199.56383999916
+      }
+    },
+    {
+      "tick": 26,
+      "at": 532,
+      "siteId": "summit-b6",
+      "actorIds": [
+        "citizen-40",
+        "citizen-502"
+      ],
+      "publicBudget": {
+        "cash": 79894.74907791348,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 10.57833873366599,
+        "forecastPayroll": 12626.612715789433,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14710.7910545231,
+        "authorizedRemaining": 0,
+        "available": 65183.95802339038
+      }
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "siteId": "summit-b9",
+      "actorIds": [
+        "citizen-315",
+        "citizen-447"
+      ],
+      "publicBudget": {
+        "cash": 79892.57664056834,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 25.7119931252506,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14724.845340493626,
+        "authorizedRemaining": 0,
+        "available": 65167.73130007471
+      }
+    },
+    {
+      "tick": 35,
+      "at": 550,
+      "siteId": "summit-b19",
+      "actorIds": [
+        "citizen-29",
+        "citizen-95",
+        "citizen-557"
+      ],
+      "publicBudget": {
+        "cash": 79887.27744056833,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 45.454843092455484,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14744.58819046083,
+        "authorizedRemaining": 0,
+        "available": 65142.6892501075
+      }
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "siteId": "summit-b12",
+      "actorIds": [
+        "citizen-348",
+        "citizen-414"
+      ],
+      "publicBudget": {
+        "cash": 79884.62784056833,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 63.06369347567438,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14762.19704084405,
+        "authorizedRemaining": 0,
+        "available": 65122.43079972427
+      }
+    },
+    {
+      "tick": 40,
+      "at": 560,
+      "siteId": "government-b10",
+      "actorIds": [
+        "citizen-280",
+        "citizen-456"
+      ],
+      "publicBudget": {
+        "cash": 79842.52427939339,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 123.21234395093603,
+        "forecastPayroll": 12624.969347368447,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14821.781691319384,
+        "authorizedRemaining": 0,
+        "available": 65020.742588074005
+      }
+    },
+    {
+      "tick": 41,
+      "at": 562,
+      "siteId": "core-b12",
+      "actorIds": [
+        "citizen-39",
+        "citizen-303",
+        "citizen-567"
+      ],
+      "publicBudget": {
+        "cash": 79839.87467939338,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 139.0771207451937,
+        "forecastPayroll": 12624.969347368447,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14837.646468113642,
+        "authorizedRemaining": 0,
+        "available": 65002.22821127974
+      }
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "siteId": "starport-b18",
+      "actorIds": [
+        "citizen-307",
+        "citizen-505"
+      ],
+      "publicBudget": {
+        "cash": 79840.3754723217,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 215.88156089198978,
+        "forecastPayroll": 12624.760996491206,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14914.242557383197,
+        "authorizedRemaining": 0,
+        "available": 64926.1329149385
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "starport-b2",
+      "actorIds": [
+        "citizen-142",
+        "citizen-230"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "core-b22",
+      "actorIds": [
+        "citizen-182",
+        "citizen-446"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "core-b19",
+      "actorIds": [
+        "citizen-270",
+        "citizen-534"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 65,
+      "at": 610,
+      "siteId": "core-b28",
+      "actorIds": [
+        "citizen-83",
+        "citizen-171",
+        "citizen-259",
+        "citizen-347",
+        "citizen-391",
+        "citizen-435"
+      ],
+      "publicBudget": {
+        "cash": 79981.508964509,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 832.8717798110703,
+        "forecastPayroll": 12666.998245614046,
+        "reservedPayroll": 0,
+        "essentialOperations": 5142.527999999999,
+        "reserve": 18642.398025425115,
+        "authorizedRemaining": 0,
+        "available": 61339.11093908389
+      }
+    }
+  ],
+  "deliveries": [
+    {
+      "tick": 11,
+      "at": 502,
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741497
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 12,
+      "at": 504,
+      "vehicleId": "vehicle-road-west-quarter-2-west-station-1",
+      "nodeId": "west-quarter-2",
+      "districtId": "west",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -883.96,
+        "y": 274.6,
+        "z": -659.22
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 12,
+      "at": 504,
+      "vehicleId": "vehicle-road-summit-quarter-0-summit-station-1",
+      "nodeId": "summit-quarter-0",
+      "districtId": "summit",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -220.77999999999977,
+        "y": 538.6,
+        "z": -1326.0400000000002
+      },
+      "endpointDistance": 1.3000000000000171,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 12,
+      "at": 504,
+      "vehicleId": "vehicle-road-summit-quarter-2-summit-station-1",
+      "nodeId": "summit-quarter-2",
+      "districtId": "summit",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 91.29466116840801,
+        "y": 534.6,
+        "z": -1369.8823035301448
+      },
+      "endpointDistance": 1.2999999999999925,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "nodeId": "market-quarter-3",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -210.0926211649845,
+        "y": 36.6,
+        "z": 666.2966963097799
+      },
+      "endpointDistance": 1.2999999999999785,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-workshop-quarter-2-workshop-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1008.7044905142817,
+        "y": 160.60000000000002,
+        "z": 79.89204087619002
+      },
+      "endpointDistance": 1.2999999999999647,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-academy-quarter-1-academy-station-1",
+      "nodeId": "academy-quarter-1",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -539.0807611844575,
+        "y": 198.60000000000002,
+        "z": -260.9192388155425
+      },
+      "endpointDistance": 1.2999999999999623,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-government-quarter-0-government-station-1",
+      "nodeId": "government-quarter-0",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 339.6847036874527,
+        "y": 356.6,
+        "z": -856.2611852501889
+      },
+      "endpointDistance": 1.2999999999999539,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -570.1838477631086,
+        "y": 18.6,
+        "z": 1171.2869343417594
+      },
+      "endpointDistance": 1.29999999999993,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "academy-quarter-3",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -213.73881474981107,
+        "y": 184.60000000000002,
+        "z": -219.68470368745275
+      },
+      "endpointDistance": 1.300000000000002,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-government-quarter-2-government-station-1",
+      "nodeId": "government-quarter-2",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 681.3,
+        "y": 344.6,
+        "z": -870
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-east-quarter-2-east-station-1",
+      "nodeId": "east-quarter-2",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1339.6847036874528,
+        "y": 232.60000000000002,
+        "z": -376.26118525018893
+      },
+      "endpointDistance": 1.2999999999999814,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-0-starport-station-1",
+      "nodeId": "starport-quarter-0",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1201.3,
+        "y": 388.6,
+        "z": -1460
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+      "nodeId": "starport-quarter-2",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1576.2984709834516,
+        "y": 402.6,
+        "z": -1410.0630325720126
+      },
+      "endpointDistance": 1.3000000000000915,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -928.7060838971113,
+        "y": 24.6,
+        "z": 869.8743770773892
+      },
+      "endpointDistance": 1.2999999999999974,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "market-quarter-0",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -540.3152963125474,
+        "y": 70.60000000000001,
+        "z": 343.73881474981107
+      },
+      "endpointDistance": 1.3000000000000365,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "market-quarter-2",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -168.91833461736076,
+        "y": 78.60000000000001,
+        "z": 284.27888974490725
+      },
+      "endpointDistance": 1.3000000000000147,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-workshop-quarter-1-workshop-station-1",
+      "nodeId": "workshop-quarter-1",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1408.918334617361,
+        "y": 122.60000000000001,
+        "z": 364.2788897449069
+      },
+      "endpointDistance": 1.29999999999992,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-quarter-3",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1039.9458802918741,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "endpointDistance": 1.300000000000021,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-west-quarter-1-west-station-1",
+      "nodeId": "west-quarter-1",
+      "districtId": "west",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1320,
+        "y": 288.6,
+        "z": -441.3
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-west-quarter-3-west-station-1",
+      "nodeId": "west-quarter-3",
+      "districtId": "west",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -958.7,
+        "y": 238.60000000000002,
+        "z": -315
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "academy-quarter-0",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -558.7,
+        "y": 228.60000000000002,
+        "z": -555
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-2-academy-station-1",
+      "nodeId": "academy-quarter-2",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -199.94588029187432,
+        "y": 238.60000000000002,
+        "z": -543.70112700498
+      },
+      "endpointDistance": 1.2999999999999556,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-1-government-station-1",
+      "nodeId": "government-quarter-1",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 351.16275534829987,
+        "y": 300.6,
+        "z": -540.58137767415
+      },
+      "endpointDistance": 1.2999999999999872,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-3-government-station-1",
+      "nodeId": "government-quarter-3",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 716.0400000000001,
+        "y": 290.6,
+        "z": -579.2200000000001
+      },
+      "endpointDistance": 1.2999999999999772,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-summit-quarter-1-summit-station-1",
+      "nodeId": "summit-quarter-1",
+      "districtId": "summit",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -201.3,
+        "y": 494.6,
+        "z": -1085
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-summit-quarter-3-summit-station-1",
+      "nodeId": "summit-quarter-3",
+      "districtId": "summit",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 93.7010727667652,
+        "y": 500.6,
+        "z": -1110.0528019200501
+      },
+      "endpointDistance": 1.3000000000000034,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-east-quarter-1-east-station-1",
+      "nodeId": "east-quarter-1",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 918.7,
+        "y": 168.60000000000002,
+        "z": -125
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-airport-quarter-1-airport-station-1",
+      "nodeId": "airport-quarter-1",
+      "districtId": "airport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 939.6847036874531,
+        "y": 64.60000000000001,
+        "z": 1063.738814749811
+      },
+      "endpointDistance": 1.300000000000092,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-airport-quarter-3-airport-station-1",
+      "nodeId": "airport-quarter-3",
+      "districtId": "airport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1355,
+        "y": 64.60000000000001,
+        "z": 1081.3
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-1-starport-station-1",
+      "nodeId": "starport-quarter-1",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1164.5889039041779,
+        "y": 342.6,
+        "z": -1136.2332882874655
+      },
+      "endpointDistance": 1.2999999999999023,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-3-starport-station-1",
+      "nodeId": "starport-quarter-3",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1549.9218284597696,
+        "y": 350.6,
+        "z": -1093.702352432169
+      },
+      "endpointDistance": 1.29999999999995,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 16,
+      "at": 512,
+      "vehicleId": "vehicle-road-east-quarter-3-east-station-1",
+      "nodeId": "east-quarter-3",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1296.2332882874657,
+        "y": 162.60000000000002,
+        "z": -75.41109609582188
+      },
+      "endpointDistance": 1.3000000000000371,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 17,
+      "at": 514,
+      "vehicleId": "vehicle-road-core-quarter-1-core-station-1",
+      "nodeId": "core-quarter-1",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 720,
+        "y": 234.60000000000002,
+        "z": -38.7
+      },
+      "endpointDistance": 1.2999999999999972,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -929.9002945514501,
+        "y": 16.6,
+        "z": 1148.703829168848
+      },
+      "endpointDistance": 1.299999999999965,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-market-quarter-1-market-station-1",
+      "nodeId": "market-quarter-1",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -510.1435609838973,
+        "y": 42.6,
+        "z": 648.7079511449243
+      },
+      "endpointDistance": 1.2999999999999745,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-workshop-quarter-0-workshop-station-1",
+      "nodeId": "workshop-quarter-0",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.23328828746568
+      },
+      "endpointDistance": 1.3000000000000191,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-west-quarter-0-west-station-1",
+      "nodeId": "west-quarter-0",
+      "districtId": "west",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1288.7059682621696,
+        "y": 312.6,
+        "z": -720.1244261286379
+      },
+      "endpointDistance": 1.3000000000001044,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-core-quarter-0-core-station-1",
+      "nodeId": "core-quarter-0",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 228.9183346173608,
+        "y": 238.60000000000002,
+        "z": 34.278889744907204
+      },
+      "endpointDistance": 1.299999999999991,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-east-quarter-0-east-station-1",
+      "nodeId": "east-quarter-0",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 921.3,
+        "y": 224.60000000000002,
+        "z": -470
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-airport-quarter-0-airport-station-1",
+      "nodeId": "airport-quarter-0",
+      "districtId": "airport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 930.1838477631085,
+        "y": 64.60000000000001,
+        "z": 748.7130656582405
+      },
+      "endpointDistance": 1.3000000000000265,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 18,
+      "at": 516,
+      "vehicleId": "vehicle-road-airport-quarter-2-airport-station-1",
+      "nodeId": "airport-quarter-2",
+      "districtId": "airport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1359.9189082279981,
+        "y": 64.60000000000001,
+        "z": 746.2974683520277
+      },
+      "endpointDistance": 1.3000000000000018,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 26,
+      "at": 532,
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "nodeId": "core-quarter-2",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 270,
+        "y": 294.6,
+        "z": -638.7
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "vehicleId": "vehicle-road-workshop-station-west-station-1",
+      "nodeId": "workshop-station",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1190.411096095822,
+        "y": 142.6,
+        "z": 208.76671171253432
+      },
+      "endpointDistance": 1.3000000000000191,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "vehicleId": "vehicle-road-west-station-academy-station-1",
+      "nodeId": "west-station",
+      "districtId": "west",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -1078.7,
+        "y": 270.6,
+        "z": -550
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "vehicleId": "vehicle-road-core-station-government-station-1",
+      "nodeId": "core-station",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 400,
+        "y": 254.6,
+        "z": -158.7
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "vehicleId": "vehicle-road-core-station-east-station-1",
+      "nodeId": "core-station",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 400,
+        "y": 254.6,
+        "z": -161.3
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "vehicleId": "vehicle-road-core-quarter-3-core-station-1",
+      "nodeId": "core-quarter-3",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 700.5813776741498,
+        "y": 298.6,
+        "z": -611.1627553482999
+      },
+      "endpointDistance": 1.2999999999999872,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "river-station",
+      "districtId": "river",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -739.0807611844575,
+        "y": 18.6,
+        "z": 979.0807611844575
+      },
+      "endpointDistance": 1.2999999999999623,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-road-academy-station-core-station-1",
+      "nodeId": "academy-station",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -368.70795114492427,
+        "y": 206.6,
+        "z": -410.14356098389726
+      },
+      "endpointDistance": 1.300000000000025,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-flight-airport-runway-west-starport-station-0",
+      "nodeId": "starport-station",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 60,
+      "position": {
+        "x": 1370,
+        "y": 368.6,
+        "z": -1280
+      },
+      "endpointDistance": 0,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 37,
+      "at": 554,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "market-station",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -328.8372446517001,
+        "y": 52.6,
+        "z": 459.4186223258501
+      },
+      "endpointDistance": 1.3000000000000125,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 39,
+      "at": 558,
+      "vehicleId": "vehicle-road-government-station-summit-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.4186223258501,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.3000000000000125,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 39,
+      "at": 558,
+      "vehicleId": "vehicle-road-airport-runway-west-airport-station-1",
+      "nodeId": "airport-runway-west",
+      "districtId": "airport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 709.8946565205135,
+        "y": 14.6,
+        "z": 1488.7042752023174
+      },
+      "endpointDistance": 1.2999999999999967,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 41,
+      "at": 562,
+      "vehicleId": "vehicle-road-east-station-starport-station-1",
+      "nodeId": "east-station",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1110,
+        "y": 190.6,
+        "z": -281.3
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 42,
+      "at": 564,
+      "vehicleId": "vehicle-road-market-station-workshop-station-1",
+      "nodeId": "market-station",
+      "districtId": "market",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -328.83724465170013,
+        "y": 52.6,
+        "z": 459.41862232585004
+      },
+      "endpointDistance": 1.2999999999999872,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 44,
+      "at": 568,
+      "vehicleId": "vehicle-flight-airport-runway-west-workshop-station-0",
+      "nodeId": "workshop-station",
+      "districtId": "workshop",
+      "sourceShopId": null,
+      "quantity": 60,
+      "position": {
+        "x": -1190,
+        "y": 142.6,
+        "z": 210
+      },
+      "endpointDistance": 0,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "vehicleId": "vehicle-road-east-station-airport-station-1",
+      "nodeId": "east-station",
+      "districtId": "east",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1110,
+        "y": 190.6,
+        "z": -281.3
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "vehicleId": "vehicle-road-government-station-starport-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.41862232585004,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 48,
+      "at": 576,
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b26",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 50,
+      "at": 580,
+      "vehicleId": "vehicle-road-core-lift-bottom-east-station-1",
+      "nodeId": "core-lift-bottom",
+      "districtId": "core",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 139.22,
+        "y": 103.6,
+        "z": 33.96
+      },
+      "endpointDistance": 1.3,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 59,
+      "at": 598,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b57",
+      "quantity": 28,
+      "position": {
+        "x": -928.7047224800081,
+        "y": 16.6,
+        "z": 1149.889292519659
+      },
+      "endpointDistance": 1.299999999999975,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 81,
+      "at": 642,
+      "vehicleId": "vehicle-road-core-lift-bottom-east-station-1",
+      "nodeId": "core-lift-bottom",
+      "districtId": "core",
+      "sourceShopId": "shop-core-dock-building",
+      "quantity": 28,
+      "position": {
+        "x": 139.21999999999997,
+        "y": 103.6,
+        "z": 33.96000000000002
+      },
+      "endpointDistance": 1.3,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 102,
+      "at": 684,
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b16",
+      "quantity": 28,
+      "position": {
+        "x": -928.7252451216018,
+        "y": 24.6,
+        "z": 869.7450490243201
+      },
+      "endpointDistance": 1.3000000000000513,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 104,
+      "at": 688,
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b6",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741496
+      },
+      "endpointDistance": 1.2999999999999874,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 118,
+      "at": 716,
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-quarter-0",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b44",
+      "quantity": 28,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.23328828746565
+      },
+      "endpointDistance": 1.2999999999999923,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 129,
+      "at": 738,
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b29",
+      "quantity": 28,
+      "position": {
+        "x": -929.8564390161033,
+        "y": 16.6,
+        "z": 1148.7079511449242
+      },
+      "endpointDistance": 1.3000000000000187,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 153,
+      "at": 786,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b39",
+      "quantity": 28,
+      "position": {
+        "x": -571.296170831152,
+        "y": 18.6,
+        "z": 1169.9002945514499
+      },
+      "endpointDistance": 1.2999999999999825,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 158,
+      "at": 796,
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b6",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741496
+      },
+      "endpointDistance": 1.2999999999999874,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 163,
+      "at": 806,
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b44",
+      "quantity": 28,
+      "position": {
+        "x": -931.2931463040005,
+        "y": 24.6,
+        "z": 869.8666859480409
+      },
+      "endpointDistance": 1.2999999999999832,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 165,
+      "at": 810,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b19",
+      "quantity": 28,
+      "position": {
+        "x": -571.2920488550757,
+        "y": 18.6,
+        "z": 1169.8564390161025
+      },
+      "endpointDistance": 1.2999999999999934,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 166,
+      "at": 812,
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b6",
+      "quantity": 28,
+      "position": {
+        "x": -1008.705640429241,
+        "y": 160.60000000000002,
+        "z": 79.87903181581676
+      },
+      "endpointDistance": 1.2999999999999619,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 173,
+      "at": 826,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b23",
+      "quantity": 28,
+      "position": {
+        "x": -568.7130656582406,
+        "y": 18.6,
+        "z": 1169.816152236891
+      },
+      "endpointDistance": 1.2999999999999945,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 177,
+      "at": 834,
+      "vehicleId": "vehicle-road-east-quarter-2-east-station-1",
+      "nodeId": "core-lift-bottom",
+      "districtId": "core",
+      "sourceShopId": "shop-core-dock-building",
+      "quantity": 28,
+      "position": {
+        "x": 139.21999999999997,
+        "y": 103.6,
+        "z": 33.96000000000002
+      },
+      "endpointDistance": 1.3,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 183,
+      "at": 846,
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b38",
+      "quantity": 28,
+      "position": {
+        "x": -1010,
+        "y": 160.60000000000002,
+        "z": 81.3
+      },
+      "endpointDistance": 1.2999999999999972,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 190,
+      "at": 860,
+      "vehicleId": "vehicle-road-core-station-government-station-1",
+      "nodeId": "core-lift-bottom",
+      "districtId": "core",
+      "sourceShopId": "shop-core-dock-building",
+      "quantity": 28,
+      "position": {
+        "x": 139.21999999999997,
+        "y": 103.6,
+        "z": 33.96000000000002
+      },
+      "endpointDistance": 1.3,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 205,
+      "at": 890,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b26",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 220,
+      "at": 920,
+      "vehicleId": "vehicle-road-east-station-airport-station-1",
+      "nodeId": "core-lift-bottom",
+      "districtId": "core",
+      "sourceShopId": "shop-core-dock-building",
+      "quantity": 6,
+      "position": {
+        "x": 139.21999999999997,
+        "y": 103.6,
+        "z": 33.96000000000002
+      },
+      "endpointDistance": 1.3,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 221,
+      "at": 922,
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b3",
+      "quantity": 28,
+      "position": {
+        "x": -570.1176964698552,
+        "y": 18.6,
+        "z": 1171.294661168408
+      },
+      "endpointDistance": 1.300000000000063,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 234,
+      "at": 948,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b38",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741496
+      },
+      "endpointDistance": 1.2999999999999874,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 242,
+      "at": 964,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b54",
+      "quantity": 28,
+      "position": {
+        "x": -929.90029455145,
+        "y": 24.6,
+        "z": 868.703829168848
+      },
+      "endpointDistance": 1.2999999999999736,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 242,
+      "at": 964,
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-quarter-3",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b3",
+      "quantity": 28,
+      "position": {
+        "x": -1039.9458802918743,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 261,
+      "at": 1002,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b29",
+      "quantity": 28,
+      "position": {
+        "x": -929.8564390161033,
+        "y": 16.6,
+        "z": 1148.7079511449242
+      },
+      "endpointDistance": 1.3000000000000187,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 294,
+      "at": 1068,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b44",
+      "quantity": 28,
+      "position": {
+        "x": -931.2931463040005,
+        "y": 24.6,
+        "z": 869.8666859480409
+      },
+      "endpointDistance": 1.2999999999999832,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 318,
+      "at": 1116,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b38",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741496
+      },
+      "endpointDistance": 1.2999999999999874,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 319,
+      "at": 1118,
+      "vehicleId": "vehicle-road-market-quarter-1-market-station-1",
+      "nodeId": "workshop-quarter-1",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b60",
+      "quantity": 28,
+      "position": {
+        "x": -1408.9183346173606,
+        "y": 122.60000000000001,
+        "z": 364.27888974490736
+      },
+      "endpointDistance": 1.300000000000046,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 330,
+      "at": 1140,
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b12",
+      "quantity": 28,
+      "position": {
+        "x": -928.7079511449242,
+        "y": 24.6,
+        "z": 869.8564390161031
+      },
+      "endpointDistance": 1.3000000000000436,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 336,
+      "at": 1152,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b10",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 354,
+      "at": 1188,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b22",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 381,
+      "at": 1242,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b19",
+      "quantity": 28,
+      "position": {
+        "x": -571.2920488550757,
+        "y": 18.6,
+        "z": 1169.8564390161025
+      },
+      "endpointDistance": 1.2999999999999934,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 399,
+      "at": 1278,
+      "vehicleId": "vehicle-road-workshop-station-west-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b22",
+      "quantity": 28,
+      "position": {
+        "x": -1008.7100387602721,
+        "y": 160.60000000000002,
+        "z": 79.83875484503459
+      },
+      "endpointDistance": 1.3000000000000211,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 399,
+      "at": 1278,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "workshop-quarter-0",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b12",
+      "quantity": 28,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.2332882874657
+      },
+      "endpointDistance": 1.3000000000000325,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 432,
+      "at": 1344,
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "river-quarter-0",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b44",
+      "quantity": 28,
+      "position": {
+        "x": -931.2931463040005,
+        "y": 24.6,
+        "z": 869.8666859480409
+      },
+      "endpointDistance": 1.2999999999999832,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 442,
+      "at": 1364,
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b32",
+      "quantity": 28,
+      "position": {
+        "x": -929.8161522368908,
+        "y": 16.6,
+        "z": 1151.2869343417594
+      },
+      "endpointDistance": 1.3000000000000105,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 445,
+      "at": 1370,
+      "vehicleId": "vehicle-road-workshop-quarter-0-workshop-station-1",
+      "nodeId": "workshop-quarter-1",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b9",
+      "quantity": 28,
+      "position": {
+        "x": -1408.9183346173604,
+        "y": 122.60000000000001,
+        "z": 364.27888974490764
+      },
+      "endpointDistance": 1.3000000000000778,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 450,
+      "at": 1380,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "workshop-station",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b41",
+      "quantity": 28,
+      "position": {
+        "x": -1188.705338831592,
+        "y": 142.6,
+        "z": 210.1176964698557
+      },
+      "endpointDistance": 1.3000000000001068,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 466,
+      "at": 1412,
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b22",
+      "quantity": 28,
+      "position": {
+        "x": -1008.7100387602721,
+        "y": 160.60000000000002,
+        "z": 79.83875484503459
+      },
+      "endpointDistance": 1.3000000000000211,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 489,
+      "at": 1458,
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-station",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b45",
+      "quantity": 28,
+      "position": {
+        "x": -739.0807611844575,
+        "y": 18.6,
+        "z": 979.0807611844575
+      },
+      "endpointDistance": 1.2999999999999623,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 495,
+      "at": 1470,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-quarter-0",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b44",
+      "quantity": 28,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.23328828746565
+      },
+      "endpointDistance": 1.2999999999999923,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 560,
+      "at": 1600,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-quarter-3",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b3",
+      "quantity": 28,
+      "position": {
+        "x": -1039.9458802918743,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 565,
+      "at": 1610,
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b26",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 600,
+      "at": 1680,
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-quarter-2",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b10",
+      "quantity": 28,
+      "position": {
+        "x": -668.8372446517001,
+        "y": 30.6,
+        "z": 780.58137767415
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 603,
+      "at": 1686,
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b38",
+      "quantity": 28,
+      "position": {
+        "x": -1010,
+        "y": 160.60000000000002,
+        "z": 81.3
+      },
+      "endpointDistance": 1.2999999999999972,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 623,
+      "at": 1726,
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b6",
+      "quantity": 28,
+      "position": {
+        "x": -1008.705640429241,
+        "y": 160.60000000000002,
+        "z": 79.87903181581676
+      },
+      "endpointDistance": 1.2999999999999619,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 627,
+      "at": 1734,
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "workshop-quarter-0",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b12",
+      "quantity": 28,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.2332882874657
+      },
+      "endpointDistance": 1.3000000000000325,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 628,
+      "at": 1736,
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b6",
+      "quantity": 28,
+      "position": {
+        "x": -1008.705640429241,
+        "y": 160.60000000000002,
+        "z": 79.87903181581676
+      },
+      "endpointDistance": 1.2999999999999619,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 640,
+      "at": 1760,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-quarter-2",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b6",
+      "quantity": 28,
+      "position": {
+        "x": -1008.705640429241,
+        "y": 160.60000000000002,
+        "z": 79.87903181581676
+      },
+      "endpointDistance": 1.2999999999999619,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 646,
+      "at": 1772,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "river-quarter-3",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b39",
+      "quantity": 28,
+      "position": {
+        "x": -571.296170831152,
+        "y": 18.6,
+        "z": 1169.9002945514499
+      },
+      "endpointDistance": 1.2999999999999825,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 699,
+      "at": 1878,
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "river-quarter-1",
+      "districtId": "river",
+      "sourceShopId": "shop-river-b55",
+      "quantity": 28,
+      "position": {
+        "x": -928.7047224800081,
+        "y": 16.6,
+        "z": 1149.8892925196587
+      },
+      "endpointDistance": 1.2999999999999943,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 702,
+      "at": 1884,
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "workshop-quarter-3",
+      "districtId": "workshop",
+      "sourceShopId": "shop-workshop-b3",
+      "quantity": 28,
+      "position": {
+        "x": -1039.9458802918743,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "endpointDistance": 1.3000000000000114,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    }
+  ],
+  "zeroMarketDistrictDeliveries": [
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-academy-quarter-1-academy-station-1",
+      "nodeId": "academy-quarter-1",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -539.0807611844575,
+        "y": 198.60000000000002,
+        "z": -260.9192388155425
+      },
+      "endpointDistance": 1.2999999999999623,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-government-quarter-0-government-station-1",
+      "nodeId": "government-quarter-0",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 339.6847036874527,
+        "y": 356.6,
+        "z": -856.2611852501889
+      },
+      "endpointDistance": 1.2999999999999539,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "academy-quarter-3",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -213.73881474981107,
+        "y": 184.60000000000002,
+        "z": -219.68470368745275
+      },
+      "endpointDistance": 1.300000000000002,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-government-quarter-2-government-station-1",
+      "nodeId": "government-quarter-2",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 681.3,
+        "y": 344.6,
+        "z": -870
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-0-starport-station-1",
+      "nodeId": "starport-quarter-0",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1201.3,
+        "y": 388.6,
+        "z": -1460
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+      "nodeId": "starport-quarter-2",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1576.2984709834516,
+        "y": 402.6,
+        "z": -1410.0630325720126
+      },
+      "endpointDistance": 1.3000000000000915,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "academy-quarter-0",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -558.7,
+        "y": 228.60000000000002,
+        "z": -555
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-2-academy-station-1",
+      "nodeId": "academy-quarter-2",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -199.94588029187432,
+        "y": 238.60000000000002,
+        "z": -543.70112700498
+      },
+      "endpointDistance": 1.2999999999999556,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-1-government-station-1",
+      "nodeId": "government-quarter-1",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 351.16275534829987,
+        "y": 300.6,
+        "z": -540.58137767415
+      },
+      "endpointDistance": 1.2999999999999872,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-3-government-station-1",
+      "nodeId": "government-quarter-3",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 716.0400000000001,
+        "y": 290.6,
+        "z": -579.2200000000001
+      },
+      "endpointDistance": 1.2999999999999772,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-1-starport-station-1",
+      "nodeId": "starport-quarter-1",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1164.5889039041779,
+        "y": 342.6,
+        "z": -1136.2332882874655
+      },
+      "endpointDistance": 1.2999999999999023,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-3-starport-station-1",
+      "nodeId": "starport-quarter-3",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1549.9218284597696,
+        "y": 350.6,
+        "z": -1093.702352432169
+      },
+      "endpointDistance": 1.29999999999995,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-road-academy-station-core-station-1",
+      "nodeId": "academy-station",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -368.70795114492427,
+        "y": 206.6,
+        "z": -410.14356098389726
+      },
+      "endpointDistance": 1.300000000000025,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-flight-airport-runway-west-starport-station-0",
+      "nodeId": "starport-station",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 60,
+      "position": {
+        "x": 1370,
+        "y": 368.6,
+        "z": -1280
+      },
+      "endpointDistance": 0,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 39,
+      "at": 558,
+      "vehicleId": "vehicle-road-government-station-summit-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.4186223258501,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.3000000000000125,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "vehicleId": "vehicle-road-government-station-starport-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.41862232585004,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    }
+  ],
+  "publicAuthorizationProbe": {
+    "request": {
+      "id": "food-counter-review-probe",
+      "siteId": "academy-b10",
+      "purpose": "food-distribution",
+      "cap": 40,
+      "approvedAt": 522,
+      "approvedBy": [
+        "citizen-27",
+        "citizen-555"
+      ]
+    },
+    "authorized": true,
+    "cashBefore": 79906.1183999999,
+    "cashAfter": 79906.1183999999,
+    "authorizedRemaining": 40,
+    "originalReplayUnmodifiedByProbe": true,
+    "cloneSaveChanged": true
+  },
+  "originalLogNodeVehicleMissing": true,
+  "ticks": 720
+}

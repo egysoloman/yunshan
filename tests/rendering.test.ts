@@ -25,7 +25,9 @@ test('trusted historical layouts retain their complete generated geometry', () =
 });
 
 test('actual instanced middle eaves and fascia leave every occupied upper storey clear', () => {
-  const generated = renderWorld(), buildings = [generated.buildings.find(b => b.id === 'core-main')!, generated.buildings.find(b => b.kind === 'home' && b.floors >= 12)!, generated.buildings.find(b => b.kind === 'hall' && b.floors >= 7)!];
+  // This is the retained four-recipe rectangular renderer contract. V4's
+  // occupied wings and true courts are tested against their shared FloorPlans.
+  const generated = createWorld(20261001, 'current-v3'), buildings = [generated.buildings.find(b => b.id === 'core-main')!, generated.buildings.find(b => b.kind === 'home' && b.floors >= 12)!, generated.buildings.find(b => b.kind === 'hall' && b.floors >= 7)!];
   const renderer = Object.create(CityRenderer.prototype) as any;
   renderer.world = { ...generated, buildings }; renderer.scene = new THREE.Scene(); renderer.chunks = []; renderer.interiors = new Map(); renderer.distantRefs = new Map();
   renderer.materials = Object.fromEntries(['wall', 'wood', 'stone', 'roof', 'glass', 'cyan', 'amber', 'red'].map(key => [key, new THREE.MeshStandardMaterial()]));

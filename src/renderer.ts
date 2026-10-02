@@ -4,6 +4,8 @@ import { samplePolyline, terrainHeight } from './world';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
 import { createRoofGeometry, type RoofProfile } from './rendering/architecture-layout';
+import { buildProgramArchitecture, type ArchitectureTemplate } from './rendering/architecture-bodies';
+import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floor-plan';
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
@@ -13,7 +15,7 @@ import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_T
 
 const PALETTE = { wall: '#d2c6aa', stone: '#8a948d', wood: '#564739', roof: '#355b58', glass: '#5c9399', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40' };
 type MaterialKey = keyof typeof PALETTE;
-interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] } }
+interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
 type LocalBox = { (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string): void; profile?: (profile: RoofProfile) => void };
 
@@ -27,11 +29,11 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 class BoxBatch {
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
-  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building: string; floor?: number; roof?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade']) {
+  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building: string; floor?: number; roof?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
     if (sx <= 0 || sy <= 0 || sz <= 0) return;
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), rotation), new THREE.Vector3(sx, sy, sz));
     const list = this.parts.get(key) ?? [];
-    list.push({ matrix, color: new THREE.Color(color ?? PALETTE[key]), ...tag, profile, facade }); this.parts.set(key, list);
+    list.push({ matrix, color: new THREE.Color(color ?? PALETTE[key]), ...tag, profile, facade, template }); this.parts.set(key, list);
   }
   segment(key: MaterialKey, a: Vec3, b: Vec3, width: number, height: number, lift = 0, color?: string) {
     const va = new THREE.Vector3(a.x, a.y + lift, a.z), vb = new THREE.Vector3(b.x, b.y + lift, b.z);
@@ -45,11 +47,21 @@ class BoxBatch {
     for (const [key, allParts] of this.parts) {
       const cells = new Map<string, Part[]>();
       for (const part of allParts) {
-        const cell = (cellSize ? `${Math.floor(part.matrix.elements[12] / cellSize)}:${Math.floor(part.matrix.elements[14] / cellSize)}` : 'all') + (part.distanceDetail ? ':detail' : '') + (part.profile ? `:${part.profile.form}:${part.profile.simple}:${part.profile.innerHole?.join(',') ?? 'solid'}` : ':box');
+        const cell = (cellSize ? `${Math.floor(part.matrix.elements[12] / cellSize)}:${Math.floor(part.matrix.elements[14] / cellSize)}` : 'all') + (part.distanceDetail ? ':detail' : '') + (part.template ? `:template:${part.template.key}` : part.profile ? `:${part.profile.form}:${part.profile.simple}:${part.profile.innerHole?.join(',') ?? 'solid'}` : ':box');
         const list = cells.get(cell) ?? []; list.push(part); cells.set(cell, list);
       }
       for (const [cell, parts] of cells) {
-      const mesh = new THREE.InstancedMesh(parts[0].profile ? createRoofGeometry(parts[0].profile.form, parts[0].profile.simple, parts[0].profile.innerHole) : new THREE.BoxGeometry(1, 1, 1), this.materials[key], parts.length);
+      const template = parts[0].template;
+      const geometry = template ? new THREE.BufferGeometry() : parts[0].profile ? createRoofGeometry(parts[0].profile.form, parts[0].profile.simple, parts[0].profile.innerHole) : new THREE.BoxGeometry(1, 1, 1);
+      if (template) {
+        // Every batch matrix is centred. The shared roof template is converted
+        // from its original minimum-corner anchor exactly once by its producer.
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(template.positions, 3));
+        geometry.setAttribute('normal', new THREE.Float32BufferAttribute(template.normals, 3));
+        geometry.setAttribute('uv', new THREE.Float32BufferAttribute(template.uvs, 2));
+        geometry.setIndex(template.indices);
+      }
+      const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
@@ -265,6 +277,15 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   private buildHouse(b: Building, batch: BoxBatch, far: boolean) {
+    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near');
+    if (programParts) {
+      for (const part of programParts) {
+        const position = buildingWorldPosition(b, part.position);
+        batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
+          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof }, undefined, part.facade, part.template);
+      }
+      return;
+    }
     const w = b.width, d = b.depth, height = b.height, base = b.position.y + .6, floors = Math.max(1, b.floors), fh = height / floors, basements = Math.max(0, b.basements ?? 0);
     const wallColor = b.kind === 'workshop' ? '#a39681' : b.kind === 'bank' ? '#a7b9b6' : b.kind === 'police' ? '#8d9992' : b.kind === 'clinic' ? '#d5ded0' : b.kind === 'school' ? '#dbd4b8' : b.kind === 'hall' || b.kind === 'core' ? '#c6b78f' : b.kind === 'station' || b.kind === 'airport' || b.kind === 'starport' ? '#acbfbc' : ['#cfc6b0', '#c0bea7', '#e2d5ba', '#c8b7a0'][b.seed % 4];
     const emit = (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor: number, roof: boolean, color?: string) => {
@@ -781,7 +802,19 @@ export class CityRenderer implements CityRendererAPI {
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
     this.architectureDetail.setLighting(daylight, state.energy / 100);
     const room = this.insideId ? this.world.buildings.find(b => b.id === this.insideId) : undefined;
-    for (let i = 0; i < this.interiorLights.length; i++) { const light = this.interiorLights[i]; light.visible = !!room; if (room) { const dimension = getFloorDimensions(room, this.insideFloor), floorHeight = room.height / room.floors; light.position.set(room.position.x + (i ? 1 : -1) * dimension.width * .22, room.position.y + .6 + this.insideFloor * floorHeight + floorHeight * .68, room.position.z); light.intensity = Math.max(90, dimension.width * 13) * energy; light.distance = Math.max(dimension.width, dimension.depth) * 1.25; } }
+    for (let i = 0; i < this.interiorLights.length; i++) {
+      const light = this.interiorLights[i]; light.visible = !!room;
+      if (room) {
+        const dimension = getFloorDimensions(room, this.insideFloor), floorHeight = room.height / room.floors;
+        const plan = getBuildingFloorPlan(room, this.insideFloor), point = plan?.usePoints[i % plan.usePoints.length];
+        if (plan) light.visible = i < plan.usePoints.length;
+        if (plan && point) {
+          const position = buildingWorldPosition(room, { x: point.x, y: plan.y + floorHeight * .68, z: point.z });
+          light.position.set(position.x, position.y, position.z);
+        } else light.position.set(room.position.x + (i ? 1 : -1) * dimension.width * .22, room.position.y + .6 + this.insideFloor * floorHeight + floorHeight * .68, room.position.z);
+        light.intensity = Math.max(90, dimension.width * 13) * energy; light.distance = Math.max(dimension.width, dimension.depth) * 1.25;
+      }
+    }
     this.materials.glass.transparent = true; this.materials.glass.opacity = .72; this.materials.glass.depthWrite = false;
     this.materials.glass.emissive.set('#b49d6c'); this.materials.glass.emissiveIntensity = (1 - daylight) * .42;
     let signalIndex = 0;

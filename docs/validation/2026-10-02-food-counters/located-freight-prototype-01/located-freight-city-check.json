@@ -1,0 +1,1282 @@
+{
+  "scope": "Isolated original coherent05 world, 80 actual default city ticks at explicit 8x (160 game minutes). No cash/goods/jobs/policy/position injections. This is not a 14/30/60-day audit or v4 build verification.",
+  "oldCityMigration": {
+    "capturedBaselineTick": 80,
+    "originalSaveByteExact": true,
+    "firstNativeUnloadAfterTicks": 1,
+    "oldOwnerChecks": 14,
+    "oldPrivateOwnerChecks": 3,
+    "oldOriginsHaveNoGuessedNode": true,
+    "migratedSaveExact": true
+  },
+  "sourceFiles": 32,
+  "startSourceHash": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "986d1619e351fc9b199fb8ed236d96721a691c19cbe0444b32c0e4a8b37f5bad",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "e60653156acd7d3672d90c002979eff364375e9c760a5d3c8b9f4a599710a4fb",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "endSourceHash": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "986d1619e351fc9b199fb8ed236d96721a691c19cbe0444b32c0e4a8b37f5bad",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "e60653156acd7d3672d90c002979eff364375e9c760a5d3c8b9f4a599710a4fb",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "baselineSource": "/tmp/yunshan-empty-freight-production14-20261001",
+  "prefix": [
+    {
+      "tick": 1,
+      "normalizedSaveExact": true
+    },
+    {
+      "tick": 16,
+      "normalizedSaveExact": true
+    },
+    {
+      "tick": 40,
+      "normalizedSaveExact": true
+    },
+    {
+      "tick": 80,
+      "normalizedSaveExact": true
+    }
+  ],
+  "initialCash": 280736.15793671925,
+  "finalCash": 280736.157936719,
+  "cashResidual": 2.3283064365386963e-10,
+  "initialFood": 17954,
+  "produced": 10.599331508004463,
+  "consumed": 39,
+  "finalFood": 17925.599331508005,
+  "foodResidual": 0,
+  "initialCargo": 1744,
+  "loaded": 112,
+  "unloaded": 1828,
+  "finalCargo": 28,
+  "cargoResidual": 0,
+  "liveLots": 63,
+  "trackingVersion": 1,
+  "arrivals": [
+    {
+      "tick": 11,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "nodeId": "river-quarter-2",
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "fromEdgeId": "road-river-quarter-2-river-station",
+      "direction": -1,
+      "arrivedAt": 502,
+      "position": {
+        "x": -668.8372446517,
+        "y": 30.6,
+        "z": 780.5813776741497
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 12,
+      "type": "cargo-arrived",
+      "districtId": "west",
+      "amount": 28,
+      "nodeId": "west-quarter-2",
+      "vehicleId": "vehicle-road-west-quarter-2-west-station-1",
+      "fromEdgeId": "road-west-quarter-2-west-station",
+      "direction": -1,
+      "arrivedAt": 504,
+      "position": {
+        "x": -883.96,
+        "y": 274.6,
+        "z": -659.22
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 12,
+      "type": "cargo-arrived",
+      "districtId": "summit",
+      "amount": 28,
+      "nodeId": "summit-quarter-0",
+      "vehicleId": "vehicle-road-summit-quarter-0-summit-station-1",
+      "fromEdgeId": "road-summit-quarter-0-summit-station",
+      "direction": -1,
+      "arrivedAt": 504,
+      "position": {
+        "x": -220.77999999999977,
+        "y": 538.6,
+        "z": -1326.0400000000002
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 12,
+      "type": "cargo-arrived",
+      "districtId": "summit",
+      "amount": 28,
+      "nodeId": "summit-quarter-2",
+      "vehicleId": "vehicle-road-summit-quarter-2-summit-station-1",
+      "fromEdgeId": "road-summit-quarter-2-summit-station",
+      "direction": -1,
+      "arrivedAt": 504,
+      "position": {
+        "x": 91.29466116840801,
+        "y": 534.6,
+        "z": -1369.8823035301448
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 13,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-quarter-3",
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "fromEdgeId": "road-market-quarter-3-market-station",
+      "direction": -1,
+      "arrivedAt": 506,
+      "position": {
+        "x": -210.0926211649845,
+        "y": 36.6,
+        "z": 666.2966963097799
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 13,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "nodeId": "workshop-quarter-2",
+      "vehicleId": "vehicle-road-workshop-quarter-2-workshop-station-1",
+      "fromEdgeId": "road-workshop-quarter-2-workshop-station",
+      "direction": -1,
+      "arrivedAt": 506,
+      "position": {
+        "x": -1008.7044905142817,
+        "y": 160.60000000000002,
+        "z": 79.89204087619002
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 13,
+      "type": "cargo-arrived",
+      "districtId": "academy",
+      "amount": 28,
+      "nodeId": "academy-quarter-1",
+      "vehicleId": "vehicle-road-academy-quarter-1-academy-station-1",
+      "fromEdgeId": "road-academy-quarter-1-academy-station",
+      "direction": -1,
+      "arrivedAt": 506,
+      "position": {
+        "x": -539.0807611844575,
+        "y": 198.60000000000002,
+        "z": -260.9192388155425
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 13,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-quarter-0",
+      "vehicleId": "vehicle-road-government-quarter-0-government-station-1",
+      "fromEdgeId": "road-government-quarter-0-government-station",
+      "direction": -1,
+      "arrivedAt": 506,
+      "position": {
+        "x": 339.6847036874527,
+        "y": 356.6,
+        "z": -856.2611852501889
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "nodeId": "river-quarter-3",
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "fromEdgeId": "road-river-quarter-3-river-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": -570.1838477631086,
+        "y": 18.6,
+        "z": 1171.2869343417594
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "academy",
+      "amount": 28,
+      "nodeId": "academy-quarter-3",
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "fromEdgeId": "road-academy-quarter-3-academy-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": -213.73881474981107,
+        "y": 184.60000000000002,
+        "z": -219.68470368745275
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-quarter-2",
+      "vehicleId": "vehicle-road-government-quarter-2-government-station-1",
+      "fromEdgeId": "road-government-quarter-2-government-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": 681.3,
+        "y": 344.6,
+        "z": -870
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-quarter-2",
+      "vehicleId": "vehicle-road-east-quarter-2-east-station-1",
+      "fromEdgeId": "road-east-quarter-2-east-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": 1339.6847036874528,
+        "y": 232.60000000000002,
+        "z": -376.26118525018893
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "starport",
+      "amount": 28,
+      "nodeId": "starport-quarter-0",
+      "vehicleId": "vehicle-road-starport-quarter-0-starport-station-1",
+      "fromEdgeId": "road-starport-quarter-0-starport-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": 1201.3,
+        "y": 388.6,
+        "z": -1460
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 14,
+      "type": "cargo-arrived",
+      "districtId": "starport",
+      "amount": 28,
+      "nodeId": "starport-quarter-2",
+      "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+      "fromEdgeId": "road-starport-quarter-2-starport-station",
+      "direction": -1,
+      "arrivedAt": 508,
+      "position": {
+        "x": 1576.2984709834516,
+        "y": 402.6,
+        "z": -1410.0630325720126
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "nodeId": "river-quarter-0",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "fromEdgeId": "road-river-quarter-0-river-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -928.7060838971113,
+        "y": 24.6,
+        "z": 869.8743770773892
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-quarter-0",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "fromEdgeId": "road-market-quarter-0-market-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -540.3152963125474,
+        "y": 70.60000000000001,
+        "z": 343.73881474981107
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-quarter-2",
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "fromEdgeId": "road-market-quarter-2-market-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -168.91833461736076,
+        "y": 78.60000000000001,
+        "z": 284.27888974490725
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "nodeId": "workshop-quarter-1",
+      "vehicleId": "vehicle-road-workshop-quarter-1-workshop-station-1",
+      "fromEdgeId": "road-workshop-quarter-1-workshop-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -1408.918334617361,
+        "y": 122.60000000000001,
+        "z": 364.2788897449069
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "nodeId": "workshop-quarter-3",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "fromEdgeId": "road-workshop-quarter-3-workshop-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -1039.9458802918741,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "west",
+      "amount": 28,
+      "nodeId": "west-quarter-1",
+      "vehicleId": "vehicle-road-west-quarter-1-west-station-1",
+      "fromEdgeId": "road-west-quarter-1-west-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -1320,
+        "y": 288.6,
+        "z": -441.3
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "west",
+      "amount": 28,
+      "nodeId": "west-quarter-3",
+      "vehicleId": "vehicle-road-west-quarter-3-west-station-1",
+      "fromEdgeId": "road-west-quarter-3-west-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -958.7,
+        "y": 238.60000000000002,
+        "z": -315
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "academy",
+      "amount": 28,
+      "nodeId": "academy-quarter-0",
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "fromEdgeId": "road-academy-quarter-0-academy-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -558.7,
+        "y": 228.60000000000002,
+        "z": -555
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "academy",
+      "amount": 28,
+      "nodeId": "academy-quarter-2",
+      "vehicleId": "vehicle-road-academy-quarter-2-academy-station-1",
+      "fromEdgeId": "road-academy-quarter-2-academy-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -199.94588029187432,
+        "y": 238.60000000000002,
+        "z": -543.70112700498
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-quarter-1",
+      "vehicleId": "vehicle-road-government-quarter-1-government-station-1",
+      "fromEdgeId": "road-government-quarter-1-government-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 351.16275534829987,
+        "y": 300.6,
+        "z": -540.58137767415
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-quarter-3",
+      "vehicleId": "vehicle-road-government-quarter-3-government-station-1",
+      "fromEdgeId": "road-government-quarter-3-government-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 716.0400000000001,
+        "y": 290.6,
+        "z": -579.2200000000001
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "summit",
+      "amount": 28,
+      "nodeId": "summit-quarter-1",
+      "vehicleId": "vehicle-road-summit-quarter-1-summit-station-1",
+      "fromEdgeId": "road-summit-quarter-1-summit-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": -201.3,
+        "y": 494.6,
+        "z": -1085
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "summit",
+      "amount": 28,
+      "nodeId": "summit-quarter-3",
+      "vehicleId": "vehicle-road-summit-quarter-3-summit-station-1",
+      "fromEdgeId": "road-summit-quarter-3-summit-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 93.7010727667652,
+        "y": 500.6,
+        "z": -1110.0528019200501
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-quarter-1",
+      "vehicleId": "vehicle-road-east-quarter-1-east-station-1",
+      "fromEdgeId": "road-east-quarter-1-east-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 918.7,
+        "y": 168.60000000000002,
+        "z": -125
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "airport",
+      "amount": 28,
+      "nodeId": "airport-quarter-1",
+      "vehicleId": "vehicle-road-airport-quarter-1-airport-station-1",
+      "fromEdgeId": "road-airport-quarter-1-airport-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 939.6847036874531,
+        "y": 64.60000000000001,
+        "z": 1063.738814749811
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "airport",
+      "amount": 28,
+      "nodeId": "airport-quarter-3",
+      "vehicleId": "vehicle-road-airport-quarter-3-airport-station-1",
+      "fromEdgeId": "road-airport-quarter-3-airport-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 1355,
+        "y": 64.60000000000001,
+        "z": 1081.3
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "starport",
+      "amount": 28,
+      "nodeId": "starport-quarter-1",
+      "vehicleId": "vehicle-road-starport-quarter-1-starport-station-1",
+      "fromEdgeId": "road-starport-quarter-1-starport-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 1164.5889039041779,
+        "y": 342.6,
+        "z": -1136.2332882874655
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 15,
+      "type": "cargo-arrived",
+      "districtId": "starport",
+      "amount": 28,
+      "nodeId": "starport-quarter-3",
+      "vehicleId": "vehicle-road-starport-quarter-3-starport-station-1",
+      "fromEdgeId": "road-starport-quarter-3-starport-station",
+      "direction": -1,
+      "arrivedAt": 510,
+      "position": {
+        "x": 1549.9218284597696,
+        "y": 350.6,
+        "z": -1093.702352432169
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 16,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-quarter-3",
+      "vehicleId": "vehicle-road-east-quarter-3-east-station-1",
+      "fromEdgeId": "road-east-quarter-3-east-station",
+      "direction": -1,
+      "arrivedAt": 512,
+      "position": {
+        "x": 1296.2332882874657,
+        "y": 162.60000000000002,
+        "z": -75.41109609582188
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 17,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-quarter-1",
+      "vehicleId": "vehicle-road-core-quarter-1-core-station-1",
+      "fromEdgeId": "road-core-quarter-1-core-station",
+      "direction": -1,
+      "arrivedAt": 514,
+      "position": {
+        "x": 720,
+        "y": 234.60000000000002,
+        "z": -38.7
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "nodeId": "river-quarter-1",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "fromEdgeId": "road-river-quarter-1-river-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": -929.9002945514501,
+        "y": 16.6,
+        "z": 1148.703829168848
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-quarter-1",
+      "vehicleId": "vehicle-road-market-quarter-1-market-station-1",
+      "fromEdgeId": "road-market-quarter-1-market-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": -510.1435609838973,
+        "y": 42.6,
+        "z": 648.7079511449243
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "nodeId": "workshop-quarter-0",
+      "vehicleId": "vehicle-road-workshop-quarter-0-workshop-station-1",
+      "fromEdgeId": "road-workshop-quarter-0-workshop-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": -1405.411096095822,
+        "y": 170.60000000000002,
+        "z": 66.23328828746568
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "west",
+      "amount": 28,
+      "nodeId": "west-quarter-0",
+      "vehicleId": "vehicle-road-west-quarter-0-west-station-1",
+      "fromEdgeId": "road-west-quarter-0-west-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": -1288.7059682621696,
+        "y": 312.6,
+        "z": -720.1244261286379
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-quarter-0",
+      "vehicleId": "vehicle-road-core-quarter-0-core-station-1",
+      "fromEdgeId": "road-core-quarter-0-core-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": 228.9183346173608,
+        "y": 238.60000000000002,
+        "z": 34.278889744907204
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-quarter-0",
+      "vehicleId": "vehicle-road-east-quarter-0-east-station-1",
+      "fromEdgeId": "road-east-quarter-0-east-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": 921.3,
+        "y": 224.60000000000002,
+        "z": -470
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "airport",
+      "amount": 28,
+      "nodeId": "airport-quarter-0",
+      "vehicleId": "vehicle-road-airport-quarter-0-airport-station-1",
+      "fromEdgeId": "road-airport-quarter-0-airport-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": 930.1838477631085,
+        "y": 64.60000000000001,
+        "z": 748.7130656582405
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 18,
+      "type": "cargo-arrived",
+      "districtId": "airport",
+      "amount": 28,
+      "nodeId": "airport-quarter-2",
+      "vehicleId": "vehicle-road-airport-quarter-2-airport-station-1",
+      "fromEdgeId": "road-airport-quarter-2-airport-station",
+      "direction": -1,
+      "arrivedAt": 516,
+      "position": {
+        "x": 1359.9189082279981,
+        "y": 64.60000000000001,
+        "z": 746.2974683520277
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 26,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-quarter-2",
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "fromEdgeId": "road-core-quarter-2-core-station",
+      "direction": -1,
+      "arrivedAt": 532,
+      "position": {
+        "x": 270,
+        "y": 294.6,
+        "z": -638.7
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 33,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "nodeId": "workshop-station",
+      "vehicleId": "vehicle-road-workshop-station-west-station-1",
+      "fromEdgeId": "road-workshop-station-west-station",
+      "direction": -1,
+      "arrivedAt": 546,
+      "position": {
+        "x": -1190.411096095822,
+        "y": 142.6,
+        "z": 208.76671171253432
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 33,
+      "type": "cargo-arrived",
+      "districtId": "west",
+      "amount": 28,
+      "nodeId": "west-station",
+      "vehicleId": "vehicle-road-west-station-academy-station-1",
+      "fromEdgeId": "road-west-station-academy-station",
+      "direction": -1,
+      "arrivedAt": 546,
+      "position": {
+        "x": -1078.7,
+        "y": 270.6,
+        "z": -550
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 33,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-station",
+      "vehicleId": "vehicle-road-core-station-government-station-1",
+      "fromEdgeId": "road-core-station-government-station",
+      "direction": -1,
+      "arrivedAt": 546,
+      "position": {
+        "x": 400,
+        "y": 254.6,
+        "z": -158.7
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 33,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-station",
+      "vehicleId": "vehicle-road-core-station-east-station-1",
+      "fromEdgeId": "road-core-station-east-station",
+      "direction": -1,
+      "arrivedAt": 546,
+      "position": {
+        "x": 400,
+        "y": 254.6,
+        "z": -161.3
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 33,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-quarter-3",
+      "vehicleId": "vehicle-road-core-quarter-3-core-station-1",
+      "fromEdgeId": "road-core-quarter-3-core-station",
+      "direction": -1,
+      "arrivedAt": 546,
+      "position": {
+        "x": 700.5813776741498,
+        "y": 298.6,
+        "z": -611.1627553482999
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 36,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "nodeId": "river-station",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "fromEdgeId": "road-river-station-market-station",
+      "direction": -1,
+      "arrivedAt": 552,
+      "position": {
+        "x": -739.0807611844575,
+        "y": 18.6,
+        "z": 979.0807611844575
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 36,
+      "type": "cargo-arrived",
+      "districtId": "academy",
+      "amount": 28,
+      "nodeId": "academy-station",
+      "vehicleId": "vehicle-road-academy-station-core-station-1",
+      "fromEdgeId": "road-academy-station-core-station",
+      "direction": -1,
+      "arrivedAt": 552,
+      "position": {
+        "x": -368.70795114492427,
+        "y": 206.6,
+        "z": -410.14356098389726
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 36,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "shopId": "shop-river-b16",
+      "nodeId": "river-quarter-0",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "fromEdgeId": "road-river-b16-door-river-quarter-0",
+      "direction": 1,
+      "arrivedAt": 552,
+      "position": {
+        "x": -928.7252451216018,
+        "y": 24.6,
+        "z": 869.7450490243201
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 36,
+      "type": "cargo-arrived",
+      "districtId": "starport",
+      "amount": 60,
+      "nodeId": "starport-station",
+      "vehicleId": "vehicle-flight-airport-runway-west-starport-station-0",
+      "fromEdgeId": "flight-airport-runway-west-starport-station",
+      "direction": 1,
+      "arrivedAt": 552,
+      "position": {
+        "x": 1370,
+        "y": 368.6,
+        "z": -1280
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 37,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-station",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "fromEdgeId": "road-market-station-academy-station",
+      "direction": -1,
+      "arrivedAt": 554,
+      "position": {
+        "x": -328.8372446517001,
+        "y": 52.6,
+        "z": 459.4186223258501
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 39,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-station",
+      "vehicleId": "vehicle-road-government-station-summit-station-1",
+      "fromEdgeId": "road-government-station-summit-station",
+      "direction": -1,
+      "arrivedAt": 558,
+      "position": {
+        "x": 499.4186223258501,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 39,
+      "type": "cargo-arrived",
+      "districtId": "airport",
+      "amount": 28,
+      "nodeId": "airport-runway-west",
+      "vehicleId": "vehicle-road-airport-runway-west-airport-station-1",
+      "fromEdgeId": "road-airport-runway-west-airport-station",
+      "direction": -1,
+      "arrivedAt": 558,
+      "position": {
+        "x": 709.8946565205135,
+        "y": 14.6,
+        "z": 1488.7042752023174
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 40,
+      "type": "cargo-arrived",
+      "districtId": "river",
+      "amount": 28,
+      "shopId": "shop-river-b23",
+      "nodeId": "river-quarter-3",
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "fromEdgeId": "road-river-b23-door-river-quarter-3",
+      "direction": 1,
+      "arrivedAt": 560,
+      "position": {
+        "x": -568.7130656582406,
+        "y": 18.6,
+        "z": 1169.816152236891
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 41,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-station",
+      "vehicleId": "vehicle-road-east-station-starport-station-1",
+      "fromEdgeId": "road-east-station-starport-station",
+      "direction": -1,
+      "arrivedAt": 562,
+      "position": {
+        "x": 1110,
+        "y": 190.6,
+        "z": -281.3
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 42,
+      "type": "cargo-arrived",
+      "districtId": "market",
+      "amount": 28,
+      "nodeId": "market-station",
+      "vehicleId": "vehicle-road-market-station-workshop-station-1",
+      "fromEdgeId": "road-market-station-workshop-station",
+      "direction": -1,
+      "arrivedAt": 564,
+      "position": {
+        "x": -328.83724465170013,
+        "y": 52.6,
+        "z": 459.41862232585004
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 44,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 60,
+      "nodeId": "workshop-station",
+      "vehicleId": "vehicle-flight-airport-runway-west-workshop-station-0",
+      "fromEdgeId": "flight-airport-runway-west-workshop-station",
+      "direction": 1,
+      "arrivedAt": 568,
+      "position": {
+        "x": -1190,
+        "y": 142.6,
+        "z": 210
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 45,
+      "type": "cargo-arrived",
+      "districtId": "east",
+      "amount": 28,
+      "nodeId": "east-station",
+      "vehicleId": "vehicle-road-east-station-airport-station-1",
+      "fromEdgeId": "road-east-station-airport-station",
+      "direction": -1,
+      "arrivedAt": 570,
+      "position": {
+        "x": 1110,
+        "y": 190.6,
+        "z": -281.3
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 45,
+      "type": "cargo-arrived",
+      "districtId": "government",
+      "amount": 28,
+      "nodeId": "government-station",
+      "vehicleId": "vehicle-road-government-station-starport-station-1",
+      "fromEdgeId": "road-government-station-starport-station",
+      "direction": -1,
+      "arrivedAt": 570,
+      "position": {
+        "x": 499.41862232585004,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 48,
+      "type": "cargo-arrived",
+      "districtId": "workshop",
+      "amount": 28,
+      "shopId": "shop-workshop-b35",
+      "nodeId": "workshop-quarter-3",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "fromEdgeId": "road-workshop-b35-door-workshop-quarter-3",
+      "direction": 1,
+      "arrivedAt": 576,
+      "position": {
+        "x": -1039.9458802918741,
+        "y": 112.60000000000001,
+        "z": 416.2988729950201
+      },
+      "passengers": 0
+    },
+    {
+      "tick": 50,
+      "type": "cargo-arrived",
+      "districtId": "core",
+      "amount": 28,
+      "nodeId": "core-lift-bottom",
+      "vehicleId": "vehicle-road-core-lift-bottom-east-station-1",
+      "fromEdgeId": "road-core-lift-bottom-east-station",
+      "direction": -1,
+      "arrivedAt": 580,
+      "position": {
+        "x": 139.22,
+        "y": 103.6,
+        "z": 33.96
+      },
+      "passengers": 0
+    }
+  ],
+  "pickups": [
+    {
+      "tick": 26,
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-b16-door",
+      "shopId": "shop-river-b16",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28
+    },
+    {
+      "tick": 30,
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "nodeId": "river-b23-door",
+      "shopId": "shop-river-b23",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28
+    },
+    {
+      "tick": 32,
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-b35-door",
+      "shopId": "shop-workshop-b35",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28
+    },
+    {
+      "tick": 66,
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-core-lift-bottom-east-station-1",
+      "nodeId": "core-dock-building-door",
+      "shopId": "shop-core-dock-building",
+      "districtId": "core",
+      "amount": 28,
+      "quantity": 28
+    }
+  ],
+  "saveExact": true,
+  "partitionExact": true,
+  "extraContinuationTicks": 24,
+  "continuation": {
+    "fromTick": 80,
+    "toTick": 104,
+    "additionalUnloads": 1,
+    "additionalPickups": 1,
+    "additionalUnloaded": 28,
+    "additionalLoaded": 28,
+    "totalUnloadsAt104": 64,
+    "totalPickupsAt104": 5,
+    "totalUnloadedAt104": 1856,
+    "totalLoadedAt104": 140,
+    "endSourceHash": {
+      "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+      "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+      "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+      "src/journey.ts": "986d1619e351fc9b199fb8ed236d96721a691c19cbe0444b32c0e4a8b37f5bad",
+      "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+      "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+      "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+      "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+      "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+      "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "src/simulation.ts": "e60653156acd7d3672d90c002979eff364375e9c760a5d3c8b9f4a599710a4fb",
+      "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+      "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+      "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+      "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+      "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+      "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+      "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+      "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+      "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+    }
+  }
+}

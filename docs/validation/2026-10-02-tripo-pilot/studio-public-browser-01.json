@@ -1,0 +1,12 @@
+{
+  "method": "public-page-only",
+  "requestedUrl": "https://studio.tripo3d.ai/",
+  "freshBrowserContext": true,
+  "userAccountSession": false,
+  "apiCredentialUsed": false,
+  "generationSubmitted": false,
+  "pages": [],
+  "errors": [],
+  "status": "PAGE_LOAD_FAILED",
+  "error": "page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://studio.tripo3d.ai/\nCall log:\n\u001b[2m  - navigating to \"https://studio.tripo3d.ai/\", waiting until \"domcontentloaded\"\u001b[22m\n"
+}

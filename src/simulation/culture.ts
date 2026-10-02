@@ -1,5 +1,6 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
+import { getBuildingBody } from '../architecture-floor-plan';
 import { clinicalHealthGain, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
 
@@ -54,7 +55,8 @@ export function installCulture(simulation: Simulation): void {
   const notice = (type: string, text: string, districtId?: string) => { simulation.appendNotice(type, text, districtId); simulation.emitEvent({ type: `extension:${type}`, districtId }); };
   const alive = (id: string) => state().extension!.actorProfiles[id]?.alive === true;
   const floor = (site: Building, position: { y: number }) => Math.floor((position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors)));
-  const atSite = (site: Building) => simulation.isNearBuilding(site) && publicFloor(site, floor(site, state().player.position)) && canAccessFloor(site, floor(site, state().player.position), state().player);
+  const atSite = (site: Building) => simulation.isNearBuilding(site) && publicFloor(site, floor(site, state().player.position)) && canAccessFloor(site, floor(site, state().player.position), state().player)
+    && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site));
   const nearby = (kinds: string[]) => world.buildings.filter(site => (kinds.includes(site.kind) || kinds.includes('hall') && civicSite(site)) && atSite(site)).sort((a, b) => distance(a.door, state().player.position) - distance(b.door, state().player.position))[0];
   const publicPayment = (amount: number, purpose: string, site: Building) => {
     state().player.money -= amount; state().treasury += amount;
@@ -73,7 +75,9 @@ export function installCulture(simulation: Simulation): void {
   const readersAt = (site: Building) => state().citizens.filter(citizen => {
     if (!alive(citizen.id) || state().extension!.actorProfiles[citizen.id].age < 6 || !simulation.isNearBuilding(site, citizen.position, 2)) return false;
     const role = (['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'].includes(citizen.role) ? citizen.role : 'traveler') as Role;
-    return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), { role, identities: [role] });
+    const identity = { role, identities: [role] };
+    return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)
+      && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, citizen.position, undefined, identity));
   });
   const staffAt = (order: ServiceOrder) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && simulation.isOnDuty(person.id, order.siteId));
   const makeOrder = (petition: CivicPetition): ServiceOrder | null => {

@@ -1,0 +1,34 @@
+✔ the original pooled route bytes stay exact at the unchanged 32768-point boundary (113.432114ms)
+✔ a second route page preserves every exact coordinate and bounded actor route (141.281758ms)
+▶ paged routes reject malformed pages, indices, points and actor or route capacity
+  ✔ unknown encoding (32.475399ms)
+  ✔ 33 pages exceeds actor-route capacity (26.32508ms)
+  ✔ oversize page (27.196517ms)
+  ✔ nonfinal page hole (60.271522ms)
+  ✔ empty final page (183.9195ms)
+  ✔ nonarray page (88.55651ms)
+  ✔ duplicate coordinates (66.23452ms)
+  ✔ invalid point (68.186585ms)
+  ✔ negative index (36.262101ms)
+  ✔ fractional index (37.805651ms)
+  ✔ out of bounds index (33.134848ms)
+  ✔ string index (42.146206ms)
+  ✔ noncanonical first reference (33.187991ms)
+  ✔ unreferenced point (47.519046ms)
+  ✔ point count exceeds route references (43.413048ms)
+  ✔ 1025-point actor route (16.164551ms)
+  ✔ 1025 actors (21.055538ms)
+  ✔ invalid actor (15.937877ms)
+✔ paged routes reject malformed pages, indices, points and actor or route capacity (939.297332ms)
+✔ partition assembly rejects a changed generation that would change the original route encoding (279.981213ms)
+✔ four trusted older layouts preserve the old complete pooled save and partition bytes (7762.49356ms)
+✔ a complete city with over 32768 real-road sample points keeps whole and partition saves and identical continuation (149252.861384ms)
+ℹ {"encoding":"paged-v1","pages":[32768,8151],"pointCount":40919,"actors":616,"singleRouteLimit":1024,"saveBytes":3222219,"beforeSHA256":"f5848a9712c0a95b2f088d088838357662c49ca1fb81cbb41eac226fd2ccaf47","continuedTicks":24,"continuationSHA256":"3e9b386b99d06f0a950bcd11a5798b3d2e6ef13c95db921bbf8b400d0ad501eb","originalPoolAtomicRejection":"读档失败：无效存档字段：route pool。","wholeAndPartitionExact":true}
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159005.85542

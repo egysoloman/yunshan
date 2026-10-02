@@ -1,6 +1,7 @@
 import type { Simulation } from '../simulation';
 import type { Building, Role, SimState } from '../types';
 import { canAccessFloor } from '../access';
+import { getBuildingBody } from '../architecture-floor-plan';
 
 export interface PlayerLaborEmployer { kind: 'shop' | 'public'; siteId: string; districtId: string; shopId: string | null }
 export interface PlayerLaborJob {
@@ -40,7 +41,8 @@ function permittedRole(site: Building, role: Role): boolean {
 }
 const now = (state: SimState) => state.extension!.lastUpdate;
 const atSite = (simulation: Simulation, site: Building) => simulation.isNearBuilding(site, simulation.state.player.position, 2)
-  && canAccessFloor(site, Math.floor((simulation.state.player.position.y - site.position.y + .01) / (site.height / site.floors)), simulation.state.player);
+  && canAccessFloor(site, Math.floor((simulation.state.player.position.y - site.position.y + .01) / (site.height / site.floors)), simulation.state.player)
+  && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, simulation.state.player.position, 'work'));
 
 /** Wages are held cash until the player actually performs the agreed work. */
 export function installPlayerLabor(simulation: Simulation, accounting: PlayerLaborAccounting): void {

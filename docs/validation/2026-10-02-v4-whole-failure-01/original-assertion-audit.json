@@ -1,0 +1,52 @@
+{
+  "scope": "AST call text and order only. This does not substitute for original runtime assertions or establish fixture correctness.",
+  "originalRoot": "/tmp/yunshan-v4-root-coherent-01",
+  "candidateRoot": "/tmp/yunshan-v4-root-coherent-04",
+  "records": [
+    {
+      "path": "scripts/ui-test.mjs",
+      "originalSHA256": "6ad6f0a3b479cf9683ab63093e54b5add7718ff0a39f21275b62d6adb765695a",
+      "candidateSHA256": "69f6e254d2a95a09689facfe14708bbb4ca1b9afd27165260c7e1d1e1c189bae",
+      "originalAssertions": 142,
+      "candidateAssertions": 142,
+      "allOriginalAssertionTextAndOrderPreserved": true,
+      "missing": []
+    },
+    {
+      "path": "tests/integration.test.ts",
+      "originalSHA256": "f44a463f90d66ecf8877883d8b420b4109fc01f2ff7e5669c517685df18543f9",
+      "candidateSHA256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "originalAssertions": 40,
+      "candidateAssertions": 41,
+      "allOriginalAssertionTextAndOrderPreserved": true,
+      "missing": []
+    },
+    {
+      "path": "tests/persistence.test.ts",
+      "originalSHA256": "3fa012bcccf2cebc8d12bc85cb86222e2e1f46e5e0911b182239e585e4e14247",
+      "candidateSHA256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "originalAssertions": 182,
+      "candidateAssertions": 182,
+      "allOriginalAssertionTextAndOrderPreserved": true,
+      "missing": []
+    },
+    {
+      "path": "tests/extensions.test.ts",
+      "originalSHA256": "726c3f0c1a9339c1dd9af7d271376dd9efedf9ed880c2f2147c1cff6ac1a2eed",
+      "candidateSHA256": "8ae61c0d840c1257ba92eaca69040aadaa85fbaedd3963abee4b7d4857e8ce95",
+      "originalAssertions": 301,
+      "candidateAssertions": 301,
+      "allOriginalAssertionTextAndOrderPreserved": true,
+      "missing": []
+    },
+    {
+      "path": "tests/simulation.test.ts",
+      "originalSHA256": "a591dcd073d9395860a3b332fbb190695a8199e4b97ff7738b8f898117cc19e0",
+      "candidateSHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "originalAssertions": 344,
+      "candidateAssertions": 347,
+      "allOriginalAssertionTextAndOrderPreserved": true,
+      "missing": []
+    }
+  ]
+}

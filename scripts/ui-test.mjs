@@ -25,15 +25,28 @@ import {PlayerController} from '/src/controller.ts';
 import {activeAircraft,setAircraftControls} from '/src/aviation.ts';
 import {planWalkingJourney,planTransitJourney} from '/src/journey.ts';
 import {quoteConsignmentSale} from '/src/simulation/trade.ts';
+import {getBuildingBody,getBuildingUsePoints,floorPlanSupport} from '/src/architecture-floor-plan.ts';
+import {canAccessFloor} from '/src/access.ts';
+import {clinicalAtPosition} from '/src/simulation/clinical.ts';
 import {PerspectiveCamera} from 'three';
 const world=createWorld();const simulation=new Simulation(world);
 const canvas=document.createElement('canvas');canvas.setAttribute('aria-label','Keyboard controller fixture');document.getElementById('app').append(canvas);
 const controller=new PlayerController(new PerspectiveCamera(),canvas,world,()=>{});
 const view={mode:'drone',quality:'balanced',fps:60,drawCalls:120,triangles:40000,position:{...world.spawn},nearbyBuilding:null,nearbyCitizen:null,nearbyVehicle:null,targetDistrict:null,inside:false,renderDistance:3600,fpsCap:60,dynamicResolution:true,simulationDetail:1};
 let ui;const commands=[];const commandResults=[];
-const actions={command(command){commands.push(command);const r=simulation.command(command);commandResults.push({command,result:r});if(r.ok&&['boardAircraft','leaveAircraft'].includes(command.type)){const craft=activeAircraft(simulation.state);view.mode=craft?.kind??'walk';view.position={...simulation.state.player.position};controller.setMode(view.mode,view.position,craft)}ui.notify(r.message,r.ok);ui.update(simulation.state,view)},setMode(mode){view.mode=mode;ui.update(simulation.state,view)},setQuality(quality){view.quality=quality;ui.update(simulation.state,view)},navigateTarget(id,preference='walk'){this.travel(id,preference)},travel(id,preference='walk'){simulation.command({type:'planJourney',targetId:id,value:preference==='transit'?1:0});view.transitJourney=preference==='transit'?planTransitJourney(world,simulation.state,simulation.state.player.position,id):null;view.journey=view.transitJourney?.approach??planWalkingJourney(world,simulation.state.player.position,id);view.targetDistrict=view.transitJourney?.destination.districtId??view.journey?.destination.districtId??id;ui.update(simulation.state,view)},interact(){},save(){},load(){},exportSave(){},importSave(){},setSetting(key,value){view[key]=value;ui.update(simulation.state,view)},resetView(){}};
+const actions={isAtBuildingFunctionPoint(id,purpose){const site=world.buildings.find(site=>site.id===id);return !!site&&simulation.isAtBuildingFunctionPoint(site,simulation.state.player.position,purpose)},command(command){commands.push(command);const r=simulation.command(command);commandResults.push({command,result:r});if(r.ok&&['boardAircraft','leaveAircraft'].includes(command.type)){const craft=activeAircraft(simulation.state);view.mode=craft?.kind??'walk';view.position={...simulation.state.player.position};controller.setMode(view.mode,view.position,craft)}ui.notify(r.message,r.ok);ui.update(simulation.state,view)},setMode(mode){view.mode=mode;ui.update(simulation.state,view)},setQuality(quality){view.quality=quality;ui.update(simulation.state,view)},navigateTarget(id,preference='walk'){this.travel(id,preference)},travel(id,preference='walk'){simulation.command({type:'planJourney',targetId:id,value:preference==='transit'?1:0});view.transitJourney=preference==='transit'?planTransitJourney(world,simulation.state,simulation.state.player.position,id):null;view.journey=view.transitJourney?.approach??planWalkingJourney(world,simulation.state.player.position,id);view.targetDistrict=view.transitJourney?.destination.districtId??view.journey?.destination.districtId??id;ui.update(simulation.state,view)},interact(){},save(){},load(){},exportSave(){},importSave(){},setSetting(key,value){view[key]=value;ui.update(simulation.state,view)},resetView(){}};
 ui=new CityUI(document.getElementById('app'),world,actions);ui.update(simulation.state,view);
-window.fixture={world,simulation,view,ui,controller,commands,commandResults,quoteConsignmentSale,setAircraftControls,at(kind){const b=world.buildings.find(b=>b.kind===kind&&!b.facility);view.mode='walk';view.inside=false;view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...b.door};view.position={...b.door};ui.update(simulation.state,view);return b.id},atShop(kind,quantity=1){const b=world.buildings.find(b=>{const shop=simulation.state.shops.find(shop=>shop.buildingId===b.id);return b.kind===kind&&shop?.open&&shop.inventory>=quantity&&simulation.state.player.money>=shop.price*quantity});if(!b)throw Error('No actual available shop: '+JSON.stringify({kind,quantity,cash:simulation.state.player.money,hour:simulation.state.hour,shops:simulation.state.shops.filter(shop=>world.buildings.find(b=>b.id===shop.buildingId)?.kind===kind).map(shop=>({id:shop.id,open:shop.open,inventory:shop.inventory,price:shop.price}))}));view.mode='walk';view.inside=false;view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...b.door};view.position={...b.door};ui.update(simulation.state,view);return b.id}};
+// Controlled positioning only: never enter by granting a role, sending a
+// purchase/work command, editing cash/stock, or crediting elapsed minutes.
+function fixturePoint(site,purpose,person=simulation.state.player){
+  if(!getBuildingBody(site))return {...site.door};
+  const point=getBuildingUsePoints(site,0).find(point=>point.purpose===purpose&&canAccessFloor(site,point.floor,person)&&simulation.isAtBuildingFunctionPoint(site,point.position,purpose,person));
+  if(!point)throw Error('No actual public ground-floor fixture point: '+JSON.stringify({siteId:site.id,purpose}));
+  const support=floorPlanSupport(site,point.floor,point.position);
+  if(!support||!['room','stairs'].includes(support.kind))throw Error('Fixture point lacks shared room support: '+point.id);
+  return {...point.position};
+}
+window.fixture={world,simulation,view,ui,controller,commands,commandResults,quoteConsignmentSale,setAircraftControls,fixturePoint,clinicalAtPosition,canAccessFloor,atPoint(kind,purpose){const b=typeof kind==='string'?world.buildings.find(b=>b.kind===kind&&!b.facility):kind;if(!b)throw Error('No actual fixture building: '+kind);const position=fixturePoint(b,purpose),before=commands.length;view.mode='walk';view.inside=!!getBuildingBody(b);view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...position};view.position={...position};ui.update(simulation.state,view);if(commands.length!==before)throw Error('Fixture positioning issued a command');return b.id},at(kind){const b=world.buildings.find(b=>b.kind===kind&&!b.facility);view.mode='walk';view.inside=false;view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...b.door};view.position={...b.door};ui.update(simulation.state,view);return b.id},atShop(kind,quantity=1){const b=world.buildings.find(b=>{const shop=simulation.state.shops.find(shop=>shop.buildingId===b.id);return b.kind===kind&&shop?.open&&shop.inventory>=quantity&&simulation.state.player.money>=shop.price*quantity});if(!b)throw Error('No actual available shop: '+JSON.stringify({kind,quantity,cash:simulation.state.player.money,hour:simulation.state.hour,shops:simulation.state.shops.filter(shop=>world.buildings.find(b=>b.id===shop.buildingId)?.kind===kind).map(shop=>({id:shop.id,open:shop.open,inventory:shop.inventory,price:shop.price}))}));return this.atPoint(b,'sale')}};
 setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
 </script></body></html>`;
   server = await createServer({
@@ -84,7 +97,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
 
  await page.getByRole('button',{name:'收起城市手册'}).click();
  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.testid),'panel-toggle');results.push('Closing panel returns focus to toggle');
- await page.evaluate(()=>{const f=window.fixture;f.at('bank');f.simulation.state.bankBalance=3100;f.simulation.state.loan=2200;f.ui.update(f.simulation.state,f.view)});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('bank','service');f.simulation.state.bankBalance=3100;f.simulation.state.loan=2200;f.ui.update(f.simulation.state,f.view)});
  assert.match(await page.locator('[data-ref="context-body"]').innerText(),/3,100.*云币/);assert.match(await page.locator('[data-ref="context-body"]').innerText(),/2,200.*云币/);results.push('Bank state cache refreshes independently of player cash');
  await page.evaluate(()=>{const f=window.fixture;f.bankCashBefore=f.simulation.state.player.money;f.bankPoolBefore=f.simulation.state.banking.cash;});
  await page.locator('[data-ref="context-body"] [data-bank="deposit"]').click();
@@ -102,7 +115,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  assert.equal(await page.evaluate(()=>window.fixture.placeTab===document.querySelector('[data-context="building"]')),true);
  await page.evaluate(()=>{const f=window.fixture;f.view.nearbyCitizen=null;f.ui.update(f.simulation.state,f.view);});results.push('Native place tabs keep the same DOM nodes across nearby actor updates and live selection changes');
 
- await page.evaluate(()=>{const f=window.fixture;f.at('market');f.laborCash=f.simulation.state.player.money;f.laborWorkButton=document.querySelector('[data-ref="context-body"] [data-command="work"]');f.laborPurchaseButton=document.querySelector('[data-ref="context-body"] [data-command="purchase"]');});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('market','work');f.laborCash=f.simulation.state.player.money;f.laborWorkButton=document.querySelector('[data-ref="context-body"] [data-command="work"]');f.laborPurchaseButton=document.querySelector('[data-ref="context-body"] [data-command="purchase"]');});
  await page.locator('[data-ref="context-body"] [data-command="work"]').click();
  assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.playerLabor.job.workedMinutes),0);
@@ -125,7 +138,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.playerLabor.history.at(-1).status),'cancelled');
  assert(await page.evaluate(()=>window.fixture.simulation.state.playerLabor.history.at(-1).refundedGross)>0);
  results.push('Native work and purchase controls stay connected while actual wages accrue; leaving pauses work and cancel returns unearned escrow');
- await page.evaluate(()=>{const f=window.fixture;f.at('market');f.laborCompletedCash=f.simulation.state.player.money;f.laborCompletedWorkButton=document.querySelector('[data-ref="context-body"] [data-command="work"]');});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('market','work');f.laborCompletedCash=f.simulation.state.player.money;f.laborCompletedWorkButton=document.querySelector('[data-ref="context-body"] [data-command="work"]');});
  await page.locator('[data-ref="context-body"] [data-command="work"]').click();
  assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
  await page.evaluate(()=>{const f=window.fixture;for(let i=0;i<240;i++){f.simulation.step(.25);if(i%10===0)f.ui.update(f.simulation.state,f.view);}f.ui.update(f.simulation.state,f.view);});
@@ -144,12 +157,12 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  // Simulation effects; this DOM fixture is not an ordinary player journey.
  await page.evaluate(()=>{
    const f=window.fixture,s=f.simulation.state;
-   f.at('clinic');s.extension.actorProfiles.player.health=60;f.ui.update(s,f.view);
+   f.atPoint('clinic','service');s.extension.actorProfiles.player.health=60;f.ui.update(s,f.view);
    if(!document.querySelector('[data-ref="context-body"] [data-command="heal"]').disabled)throw Error('Unstaffed actual first clinic must not promise a treatment');
    const site=f.world.buildings.find(site=>site.kind==='clinic'&&s.citizens.some(doctor=>doctor.workId===site.id&&['医生','doctor'].includes(doctor.role)&&s.extension.actorProfiles[doctor.id].alive&&s.extension.actorProfiles[doctor.id].age>=18));
    if(!site)throw Error('No genuinely staffed clinic in generated city');
    f.clinicalSiteId=site.id;
-   f.atClinical=()=>{f.view.mode='walk';f.view.inside=false;f.view.nearbyBuilding=site;f.view.nearbyCitizen=null;f.view.nearbyVehicle=null;s.player.position={...site.door};f.view.position={...site.door};f.simulation.setFocus(s.player.position,'walk');f.ui.update(s,f.view);};
+   f.atClinical=()=>{f.atPoint(site,'service');f.simulation.setFocus(s.player.position,'walk');f.ui.update(s,f.view);};
    f.atClinical();f.clinicalCash=s.player.money;f.clinicalHealth=s.extension.actorProfiles.player.health;f.clinicalContextButton=document.querySelector('[data-ref="context-body"] [data-command="heal"]');
  });
  await page.locator('[data-ref="context-body"] [data-command="heal"]').click();
@@ -180,7 +193,17 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
    if(!doctor)throw Error('Real clinic has no employed adult physician fixture');
    f.clinicalDoctorId=doctor.id;f.clinicalPinActive=true;
    const runtime=Reflect.get(f.simulation,'runtime');
-   const place=()=>{if(!f.clinicalPinActive)return;doctor.position={x:site.position.x,y:site.position.y+.6,z:site.position.z+1.2};doctor.destinationId=site.id;doctor.route=[];doctor.routeIndex=0;runtime.activities[doctor.id]='work';runtime.decisionAt[doctor.id]=s.day*1440+s.hour*60+10;};
+   const doctorPermission={role:'traveler',identities:['traveler']}; // The clinical model normalizes the existing 医生 role this way on public floors.
+   // A controlled physician position follows his already planned real work
+   // point. Repeatedly pinning ground while clearing routes prevents arrival
+   // when the v4 planner has selected another lawful public clinical floor.
+   const plannedWorkPosition=doctor.route?.at(-1);
+   const plannedWorkPoint=site.floorPlanProfile==='v4-program-bodies-02'&&plannedWorkPosition?site.functionPoints?.find(point=>point.purpose==='work'&&Math.hypot(point.position.x-plannedWorkPosition.x,point.position.y-plannedWorkPosition.y,point.position.z-plannedWorkPosition.z)<1e-8):null;
+   if(site.floorPlanProfile==='v4-program-bodies-02'&&(!plannedWorkPoint||!f.canAccessFloor(site,plannedWorkPoint.floor,doctorPermission)||!f.simulation.isAtBuildingFunctionPoint(site,plannedWorkPosition,'work',doctorPermission)))throw Error('Existing physician route lacks an accessible actual work point');
+   const doctorWorkPosition=plannedWorkPoint?{...plannedWorkPosition}:f.fixturePoint(site,'work',doctorPermission);
+   if(plannedWorkPoint)console.log('CLINICAL_EXISTING_WORK_TARGET',JSON.stringify({doctorId:doctor.id,siteId:site.id,pointId:plannedWorkPoint.id,floor:plannedWorkPoint.floor,position:doctorWorkPosition,canAccess:f.canAccessFloor(site,plannedWorkPoint.floor,doctorPermission),clinicalAtPosition:f.clinicalAtPosition(site,doctorWorkPosition,doctorPermission),patientClinicalAtPosition:f.clinicalAtPosition(site,s.player.position,s.player)}));
+   if(!f.clinicalAtPosition(site,doctorWorkPosition,doctorPermission))throw Error('Actual doctor work point is outside the public clinical service area');
+   const place=()=>{if(!f.clinicalPinActive)return;doctor.position={...doctorWorkPosition};doctor.destinationId=site.id;doctor.route=[];doctor.routeIndex=0;runtime.activities[doctor.id]='work';runtime.decisionAt[doctor.id]=s.day*1440+s.hour*60+10;};
    doctor.needs={hunger:100,fatigue:100,social:100,fun:100};place();f.simulation.onPhase('traffic',place);
    for(let i=0;i<16;i++)f.simulation.step(.25);
    if(!f.simulation.isOnDuty(doctor.id,site.id))throw Error('Doctor has not accrued actual attendance');
@@ -249,17 +272,17 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  await page.evaluate(()=>{const f=window.fixture;f.view.nearbyBuilding=null;f.view.nearbyVehicle={...f.simulation.state.vehicles[0],state:'waiting',passengers:1,cargo:5,speed:2};f.ui.update(f.simulation.state,f.view)});
  await page.evaluate(()=>{const f=window.fixture;f.view.nearbyVehicle.state='moving';f.view.nearbyVehicle.passengers=9;f.view.nearbyVehicle.cargo=60;f.view.nearbyVehicle.speed=30;f.ui.update(f.simulation.state,f.view)});
  const vehicle=await page.locator('[data-ref="context-body"]').innerText();assert.match(vehicle,/行进中/);assert.match(vehicle,/9 位乘客/);assert.match(vehicle,/货物 60/);assert.match(vehicle,/30 m/);results.push('Vehicle state, passengers, cargo, speed stay live');
- await page.evaluate(()=>{const f=window.fixture;f.at('market');f.simulation.state.player.identities=['traveler','merchant'];f.simulation.state.player.role='traveler';f.simulation.state.player.money=3000;f.ui.update(f.simulation.state,f.view)});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('market','work');f.simulation.state.player.identities=['traveler','merchant'];f.simulation.state.player.role='traveler';f.simulation.state.player.money=3000;f.ui.update(f.simulation.state,f.view)});
  await page.getByTestId('panel-toggle').click();
  await page.getByRole('tab',{name:'产业',exact:true}).click();
  assert.equal(await page.locator('[data-ref="found-company"]').isEnabled(),true);
  await page.locator('[data-ref="found-company"]').click();
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.extension.companies.filter(c=>c.ownerId==='player').length),1);results.push('Merchant identity stack enables company founding with real cash/ownership changes');
  await page.getByRole('tab',{name:'生活',exact:true}).click();
- await page.evaluate(()=>{const f=window.fixture;f.simulation.state.player.education=3;f.simulation.state.player.identities.push('scientist');f.at('school');f.ui.update(f.simulation.state,f.view)});
+ await page.evaluate(()=>{const f=window.fixture;f.simulation.state.player.education=3;f.simulation.state.player.identities.push('scientist');f.atPoint('school','work');f.ui.update(f.simulation.state,f.view)});
  await page.locator('[data-ref="career"]').selectOption('7');
  assert.match(await page.locator('[data-ref="career-note"]').innerText(),/教育至少 3/);results.push('Scientist qualification displays the correct requirement');
- await page.evaluate(()=>{const f=window.fixture;f.at('market');const s=f.simulation.state.shops.find(s=>s.buildingId===f.view.nearbyBuilding.id);f.simulation.state.player.inventory['ingredient:grain']=2;f.simulation.state.player.inventory['ingredient:vegetable']=1;f.ui.update(f.simulation.state,f.view)});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('market','work');const s=f.simulation.state.shops.find(s=>s.buildingId===f.view.nearbyBuilding.id);f.simulation.state.player.inventory['ingredient:grain']=2;f.simulation.state.player.inventory['ingredient:vegetable']=1;f.ui.update(f.simulation.state,f.view)});
  await page.locator('[data-ref="cook-button"]').click();
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.extension.cooking.recipeId),'rice');assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.inventory['ingredient:grain']),0);results.push('Cooking command consumes actual ingredients and starts a persistent job');
  // Controlled relationship starting states exercise the DOM/command contract;
@@ -306,7 +329,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  await page.evaluate(()=>window.fixture.at('market'));
  await page.evaluate(()=>{const f=window.fixture;const b={...f.view.nearbyBuilding,name:'<img src=x onerror=alert(1)>'};f.view.nearbyBuilding=b;f.ui.update(f.simulation.state,f.view)});
  assert.equal(await page.locator('[data-ref="context-body"] img').count(),0);assert.match(await page.locator('[data-ref="context-body"]').innerText(),/<img/);results.push('Imported entity strings remain text, never DOM markup');
- await page.evaluate(()=>{const f=window.fixture;f.at('school');f.beforeCultureCash=f.simulation.state.player.money});
+ await page.evaluate(()=>{const f=window.fixture;f.atPoint('school','work');f.beforeCultureCash=f.simulation.state.player.money});
  await page.getByRole('tab',{name:'生活',exact:true}).click();
  await page.locator('[data-ref="work-title"]').fill('清溪行记');
  await page.locator('[data-ref="work-text"]').fill('从清溪沿石阶走进书院，城中的人们在灯火和晨雾之间开始各自的生活。');
@@ -315,7 +338,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.culture.project.title),'清溪行记');
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.culture.project.workedMinutes),0);
  results.push('Culture form creates a paid persistent project and requires actual time on site');
- await page.evaluate(()=>window.fixture.at('hall'));
+ await page.evaluate(()=>window.fixture.atPoint('hall','service'));
  await page.getByRole('tab',{name:'城市',exact:true}).click();
  await page.locator('[data-ref="report-text"]').fill('今日沿清溪走到公共大厅，记录水质的现场观测，供城中居民查阅并共同核验。');
  await page.locator('[data-ref="publish-report"]').click();

@@ -1,0 +1,967 @@
+{"causeTransition":"foodOpenSitesUnder10","tick":420,"day":0,"hour":22,"energy":64.26002168117932,"treasury":71576.64012341808,"hunger":65.85527260532346}
+{"foodMaterialDay":1,"treasury":71327.54277614571,"energy":69.33198266396637,"food":{"stock":13943.805088405115,"inTransit":3150,"totalStock":17427.805088405115,"consumerStored":334,"storedConsumed":57,"immediateConsumed":597,"inferredConsumed":654,"openAvailableSites":155,"demandPortionsPerDay":852.9230769230769},"people":{"total":616,"alive":616,"meanHunger":51.30010242096255,"meanHealth":91.86365266280319,"poor":0,"hungryUnder20":207,"cashRichStarving":207,"noStoredMeal":282,"depletedWorkers":228},"totals":{"farm":{"sites":31,"employees":28,"employedPeople":28,"staffedSites":17,"openSites":31,"stock":3867.323677846339,"cash":1625.3148325089453,"protectedCash":214.58429142386552,"actualRemainingCash":1410.73054108508,"acceptedMinutes":1920,"workedMinutes":14,"futureReserved":175.08462768163898,"ownerAtSite":4,"ownerHealthyAtSite":4,"ownerUnfundedReviewNeed":0,"recentSold":26,"zeroProductionWindowWithLabor":0,"profitable":5,"actualDutyPeople":1,"fundedOfferSites":5},"dock":{"sites":16,"employees":17,"employedPeople":17,"staffedSites":10,"openSites":16,"stock":1042.481410558775,"cash":444.37937959970657,"protectedCash":16.182148740740736,"actualRemainingCash":428.1972308589659,"acceptedMinutes":0,"workedMinutes":0,"futureReserved":0,"ownerAtSite":0,"ownerHealthyAtSite":0,"ownerUnfundedReviewNeed":0,"recentSold":0,"zeroProductionWindowWithLabor":0,"profitable":2,"actualDutyPeople":0,"fundedOfferSites":0},"workshop":{"sites":54,"employees":75,"employedPeople":75,"staffedSites":41,"openSites":54,"stock":4800.788103732082,"cash":2681.514098418812,"protectedCash":130.05036217528763,"actualRemainingCash":2551.4637362435237,"acceptedMinutes":0,"workedMinutes":0,"futureReserved":0,"ownerAtSite":0,"ownerHealthyAtSite":0,"ownerUnfundedReviewNeed":0,"recentSold":83.51999999999994,"zeroProductionWindowWithLabor":0,"profitable":22,"actualDutyPeople":0,"fundedOfferSites":32},"market":{"sites":109,"employees":145,"employedPeople":145,"staffedSites":66,"openSites":109,"stock":9034,"cash":7641.214254962731,"protectedCash":822.5508643461011,"actualRemainingCash":6818.663390616628,"acceptedMinutes":6780,"workedMinutes":148.6491473356076,"futureReserved":609.2711463665514,"ownerAtSite":8,"ownerHealthyAtSite":8,"ownerUnfundedReviewNeed":0,"recentSold":125,"zeroProductionWindowWithLabor":4,"profitable":26,"actualDutyPeople":5,"fundedOfferSites":25}}}
+{
+  "scope": "Only 720-tick diagnostic replay: four complete original observer samples equal; all independently frozen fields of day-one sample equal. Original detailed positions were mutable actor references and six positions differ, so this is NOT whole-state or five-full-sample equivalence. Native budgeting probe occurs solely in a separate exact-restored clone; no real license/counter, no source modification or new long-term audit.",
+  "originalPrefixComparedTicks": [
+    0,
+    180,
+    360,
+    540,
+    720
+  ],
+  "fullyMatchedSampleTicks": [
+    0,
+    180,
+    360,
+    540
+  ],
+  "prefixExact": false,
+  "allIndependentlyFrozenSampleFieldsExact": true,
+  "mutablePositionDifferences": [
+    {
+      "id": "citizen-6",
+      "originalLateWrittenPosition": {
+        "x": 473.3732302925412,
+        "y": 335.15968469880534,
+        "z": -736
+      },
+      "replayedActualPosition": {
+        "x": 512,
+        "y": 279.1695201389979,
+        "z": -427.39040277995707
+      }
+    },
+    {
+      "id": "citizen-10",
+      "originalLateWrittenPosition": {
+        "x": 1344,
+        "y": 232.11228675222011,
+        "z": -343.87747735434584
+      },
+      "replayedActualPosition": {
+        "x": 1349.9786954874478,
+        "y": 365.77336603587975,
+        "z": -1280
+      }
+    },
+    {
+      "id": "citizen-15",
+      "originalLateWrittenPosition": {
+        "x": -369.6788056592961,
+        "y": 206.34304452743686,
+        "z": -405.824473570849
+      },
+      "replayedActualPosition": {
+        "x": -270.1054135010702,
+        "y": 197.29275925477756,
+        "z": -360
+      }
+    },
+    {
+      "id": "citizen-16",
+      "originalLateWrittenPosition": {
+        "x": 184.8,
+        "y": 502.6,
+        "z": -1111.6
+      },
+      "replayedActualPosition": {
+        "x": 549.6802058554031,
+        "y": 331.77160225222264,
+        "z": -784
+      }
+    },
+    {
+      "id": "citizen-21",
+      "originalLateWrittenPosition": {
+        "x": 1133.0112832485356,
+        "y": 193.78617768056648,
+        "z": -280
+      },
+      "replayedActualPosition": {
+        "x": 1330.69932051509,
+        "y": 363.074903985828,
+        "z": -1280
+      }
+    },
+    {
+      "id": "citizen-27",
+      "originalLateWrittenPosition": {
+        "x": 501.4398296960766,
+        "y": 324.88796593921535,
+        "z": -710.7199148480382
+      },
+      "replayedActualPosition": {
+        "x": 472,
+        "y": 340.06599320777354,
+        "z": -761.5199611872771
+      }
+    }
+  ],
+  "firstFailure": {
+    "all": {
+      "tick": 401,
+      "at": 1282,
+      "day": 0,
+      "hour": 21.366666666666667,
+      "weather": "晴",
+      "id": "citizen-191",
+      "districtId": "academy",
+      "homeId": "academy-b35",
+      "workId": "academy-b23",
+      "role": "老师",
+      "wallet": 410.4642719621792,
+      "hunger": 19.64370623850278,
+      "food": 0,
+      "position": {
+        "x": -698.2414524881219,
+        "y": 234.20318865293245,
+        "z": -448
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "west-b41"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 54,
+      "nearestFood": {
+        "shopId": "shop-west-b41",
+        "districtId": "west",
+        "price": 11.45260692891843,
+        "inventory": 75,
+        "straight": 531.8995134254083,
+        "travel": 658.7269081181815,
+        "minutesOnFoot": 156.83974002813846,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 140,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71576.38487783051,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1121.9116454153211,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15847.376011731048,
+        "authorizedRemaining": 0,
+        "available": 55729.008866099466
+      }
+    },
+    "academy": {
+      "tick": 401,
+      "at": 1282,
+      "day": 0,
+      "hour": 21.366666666666667,
+      "weather": "晴",
+      "id": "citizen-191",
+      "districtId": "academy",
+      "homeId": "academy-b35",
+      "workId": "academy-b23",
+      "role": "老师",
+      "wallet": 410.4642719621792,
+      "hunger": 19.64370623850278,
+      "food": 0,
+      "position": {
+        "x": -698.2414524881219,
+        "y": 234.20318865293245,
+        "z": -448
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "west-b41"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 54,
+      "nearestFood": {
+        "shopId": "shop-west-b41",
+        "districtId": "west",
+        "price": 11.45260692891843,
+        "inventory": 75,
+        "straight": 531.8995134254083,
+        "travel": 658.7269081181815,
+        "minutesOnFoot": 156.83974002813846,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 140,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71576.38487783051,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1121.9116454153211,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15847.376011731048,
+        "authorizedRemaining": 0,
+        "available": 55729.008866099466
+      }
+    },
+    "starport": {
+      "tick": 404,
+      "at": 1288,
+      "day": 0,
+      "hour": 21.466666666666665,
+      "weather": "晴",
+      "id": "citizen-604",
+      "districtId": "starport",
+      "homeId": "starport-b41",
+      "workId": "starport-b29",
+      "role": "驾驶员",
+      "wallet": 376.3044459122267,
+      "hunger": 19.95946031911295,
+      "food": 0,
+      "position": {
+        "x": 1237.134459724478,
+        "y": 356.4953586838639,
+        "z": -1016
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "summit-b15"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 20,
+      "nearestFood": {
+        "shopId": "shop-east-b37",
+        "districtId": "east",
+        "price": 11.037587096430777,
+        "inventory": 79,
+        "straight": 868.5498143701318,
+        "travel": 1849.3783903525236,
+        "minutesOnFoot": 440.3281881791723,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 172,
+      "foodShopStock": 14642.481410558776,
+      "publicBudget": {
+        "cash": 71567.9260298305,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1136.631645415321,
+        "forecastPayroll": 12651.864366315727,
+        "reservedPayroll": 0,
+        "essentialOperations": 2472.7679999999996,
+        "reserve": 16261.264011731048,
+        "authorizedRemaining": 0,
+        "available": 55306.66201809945
+      }
+    },
+    "government": {
+      "tick": 408,
+      "at": 1296,
+      "day": 0,
+      "hour": 21.6,
+      "weather": "晴",
+      "id": "citizen-456",
+      "districtId": "government",
+      "homeId": "government-b22",
+      "workId": "government-b10",
+      "role": "官员",
+      "wallet": 461.66454682862076,
+      "hunger": 18.47102263043631,
+      "food": 0,
+      "position": {
+        "x": 232,
+        "y": 422.5923635432956,
+        "z": -979.3849345331175
+      },
+      "state": "moving",
+      "activity": "eat",
+      "nativeChoice": {
+        "activity": "eat",
+        "destinationId": "summit-b2"
+      },
+      "affordableOpenFood": 109,
+      "advertisedOpenFood": 18,
+      "nearestFood": {
+        "shopId": "shop-summit-b2",
+        "districtId": "summit",
+        "price": 10.67093785419285,
+        "inventory": 86,
+        "straight": 402.1239226524312,
+        "travel": 729.0924478343952,
+        "minutesOnFoot": 173.5934399605703,
+        "advertised": true,
+        "closesAt": 22
+      },
+      "localFreight": 168,
+      "foodShopStock": 14633.481410558776,
+      "publicBudget": {
+        "cash": 71581.64842502812,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1151.351645415321,
+        "forecastPayroll": 12651.67491368417,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 15876.626559099492,
+        "authorizedRemaining": 0,
+        "available": 55705.02186592863
+      }
+    }
+  },
+  "firstQuorum": {
+    "tick": 21,
+    "at": 522,
+    "siteId": "government-b13",
+    "actors": [
+      {
+        "id": "citizen-27",
+        "role": "官员",
+        "workId": "government-b13",
+        "position": {
+          "x": 333.2,
+          "y": 319.6,
+          "z": -625.8
+        },
+        "hunger": 61.34491729303262,
+        "fatigue": 75.3741412968561,
+        "attendance": 8.623152052292376,
+        "onDuty": true
+      },
+      {
+        "id": "citizen-555",
+        "role": "官员",
+        "workId": "government-b13",
+        "position": {
+          "x": 335,
+          "y": 302.8,
+          "z": -625.8
+        },
+        "hunger": 71.57945226863959,
+        "fatigue": 71.67172744150272,
+        "attendance": 12.28355574070607,
+        "onDuty": true
+      }
+    ],
+    "standingAppropriation": true,
+    "publicBudget": {
+      "cash": 79906.1183999999,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 5.799360000704605,
+      "forecastPayroll": 12627.155200000037,
+      "reservedPayroll": 0,
+      "essentialOperations": 2073.6,
+      "reserve": 14706.554560000743,
+      "authorizedRemaining": 0,
+      "available": 65199.56383999916
+    }
+  },
+  "firstStaffDuty": {
+    "government": {
+      "tick": 21,
+      "at": 522,
+      "id": "citizen-27",
+      "role": "官员",
+      "siteId": "government-b13",
+      "hunger": 61.34491729303262,
+      "fatigue": 75.3741412968561,
+      "attendance": 8.623152052292376,
+      "position": {
+        "x": 333.2,
+        "y": 319.6,
+        "z": -625.8
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79906.1183999999,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 5.799360000704605,
+        "forecastPayroll": 12627.155200000037,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14706.554560000743,
+        "authorizedRemaining": 0,
+        "available": 65199.56383999916
+      }
+    },
+    "academy": {
+      "tick": 26,
+      "at": 532,
+      "id": "citizen-422",
+      "role": "老师",
+      "siteId": "academy-b16",
+      "hunger": 91.47063805554063,
+      "fatigue": 80.73402277705259,
+      "attendance": 8.920380020679016,
+      "position": {
+        "x": -576.8,
+        "y": 226.6,
+        "z": -639.4
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79894.74907791348,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 10.57833873366599,
+        "forecastPayroll": 12626.612715789433,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14710.7910545231,
+        "authorizedRemaining": 0,
+        "available": 65183.95802339038
+      }
+    },
+    "starport": {
+      "tick": 27,
+      "at": 534,
+      "id": "citizen-21",
+      "role": "驾驶员",
+      "siteId": "starport-b10",
+      "hunger": 67.7116673259996,
+      "fatigue": 87.15550372189841,
+      "attendance": 12.032930195130614,
+      "position": {
+        "x": 1635.8000000000002,
+        "y": 402.6,
+        "z": -1470.6000000000001
+      },
+      "standingAppropriation": true,
+      "publicBudget": {
+        "cash": 79901.4462747559,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 13.0424989356548,
+        "forecastPayroll": 12626.098231578959,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14712.740730514613,
+        "authorizedRemaining": 0,
+        "available": 65188.70554424129
+      }
+    }
+  },
+  "quorumEvents": [
+    {
+      "tick": 21,
+      "at": 522,
+      "siteId": "government-b13",
+      "actorIds": [
+        "citizen-27",
+        "citizen-555"
+      ],
+      "publicBudget": {
+        "cash": 79906.1183999999,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 5.799360000704605,
+        "forecastPayroll": 12627.155200000037,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14706.554560000743,
+        "authorizedRemaining": 0,
+        "available": 65199.56383999916
+      }
+    },
+    {
+      "tick": 26,
+      "at": 532,
+      "siteId": "summit-b6",
+      "actorIds": [
+        "citizen-40",
+        "citizen-502"
+      ],
+      "publicBudget": {
+        "cash": 79894.74907791348,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 10.57833873366599,
+        "forecastPayroll": 12626.612715789433,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14710.7910545231,
+        "authorizedRemaining": 0,
+        "available": 65183.95802339038
+      }
+    },
+    {
+      "tick": 33,
+      "at": 546,
+      "siteId": "summit-b9",
+      "actorIds": [
+        "citizen-315",
+        "citizen-447"
+      ],
+      "publicBudget": {
+        "cash": 79892.57664056834,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 25.7119931252506,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14724.845340493626,
+        "authorizedRemaining": 0,
+        "available": 65167.73130007471
+      }
+    },
+    {
+      "tick": 35,
+      "at": 550,
+      "siteId": "summit-b19",
+      "actorIds": [
+        "citizen-29",
+        "citizen-95",
+        "citizen-557"
+      ],
+      "publicBudget": {
+        "cash": 79887.27744056833,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 45.454843092455484,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14744.58819046083,
+        "authorizedRemaining": 0,
+        "available": 65142.6892501075
+      }
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "siteId": "summit-b12",
+      "actorIds": [
+        "citizen-348",
+        "citizen-414"
+      ],
+      "publicBudget": {
+        "cash": 79884.62784056833,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 63.06369347567438,
+        "forecastPayroll": 12625.533347368375,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14762.19704084405,
+        "authorizedRemaining": 0,
+        "available": 65122.43079972427
+      }
+    },
+    {
+      "tick": 40,
+      "at": 560,
+      "siteId": "government-b10",
+      "actorIds": [
+        "citizen-280",
+        "citizen-456"
+      ],
+      "publicBudget": {
+        "cash": 79842.52427939339,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 123.21234395093603,
+        "forecastPayroll": 12624.969347368447,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14821.781691319384,
+        "authorizedRemaining": 0,
+        "available": 65020.742588074005
+      }
+    },
+    {
+      "tick": 41,
+      "at": 562,
+      "siteId": "core-b12",
+      "actorIds": [
+        "citizen-39",
+        "citizen-303",
+        "citizen-567"
+      ],
+      "publicBudget": {
+        "cash": 79839.87467939338,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 139.0771207451937,
+        "forecastPayroll": 12624.969347368447,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14837.646468113642,
+        "authorizedRemaining": 0,
+        "available": 65002.22821127974
+      }
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "siteId": "starport-b18",
+      "actorIds": [
+        "citizen-307",
+        "citizen-505"
+      ],
+      "publicBudget": {
+        "cash": 79840.3754723217,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 215.88156089198978,
+        "forecastPayroll": 12624.760996491206,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14914.242557383197,
+        "authorizedRemaining": 0,
+        "available": 64926.1329149385
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "starport-b2",
+      "actorIds": [
+        "citizen-142",
+        "citizen-230"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "core-b22",
+      "actorIds": [
+        "citizen-182",
+        "citizen-446"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 58,
+      "at": 596,
+      "siteId": "core-b19",
+      "actorIds": [
+        "citizen-270",
+        "citizen-534"
+      ],
+      "publicBudget": {
+        "cash": 79800.6195078371,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 587.7421407104623,
+        "forecastPayroll": 12623.430245614016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2503.872,
+        "reserve": 15715.044386324478,
+        "authorizedRemaining": 0,
+        "available": 64085.575121512615
+      }
+    },
+    {
+      "tick": 65,
+      "at": 610,
+      "siteId": "core-b28",
+      "actorIds": [
+        "citizen-83",
+        "citizen-171",
+        "citizen-259",
+        "citizen-347",
+        "citizen-391",
+        "citizen-435"
+      ],
+      "publicBudget": {
+        "cash": 79981.508964509,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 832.8717798110703,
+        "forecastPayroll": 12666.998245614046,
+        "reservedPayroll": 0,
+        "essentialOperations": 5142.527999999999,
+        "reserve": 18642.398025425115,
+        "authorizedRemaining": 0,
+        "available": 61339.11093908389
+      }
+    }
+  ],
+  "zeroMarketDistrictDeliveries": [
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-academy-quarter-1-academy-station-1",
+      "nodeId": "academy-quarter-1",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -539.0807611844575,
+        "y": 198.60000000000002,
+        "z": -260.9192388155425
+      },
+      "endpointDistance": 1.2999999999999623,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 13,
+      "at": 506,
+      "vehicleId": "vehicle-road-government-quarter-0-government-station-1",
+      "nodeId": "government-quarter-0",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 339.6847036874527,
+        "y": 356.6,
+        "z": -856.2611852501889
+      },
+      "endpointDistance": 1.2999999999999539,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "academy-quarter-3",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -213.73881474981107,
+        "y": 184.60000000000002,
+        "z": -219.68470368745275
+      },
+      "endpointDistance": 1.300000000000002,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-government-quarter-2-government-station-1",
+      "nodeId": "government-quarter-2",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 681.3,
+        "y": 344.6,
+        "z": -870
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-0-starport-station-1",
+      "nodeId": "starport-quarter-0",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1201.3,
+        "y": 388.6,
+        "z": -1460
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 14,
+      "at": 508,
+      "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+      "nodeId": "starport-quarter-2",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1576.2984709834516,
+        "y": 402.6,
+        "z": -1410.0630325720126
+      },
+      "endpointDistance": 1.3000000000000915,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "academy-quarter-0",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -558.7,
+        "y": 228.60000000000002,
+        "z": -555
+      },
+      "endpointDistance": 1.2999999999999545,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-academy-quarter-2-academy-station-1",
+      "nodeId": "academy-quarter-2",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -199.94588029187432,
+        "y": 238.60000000000002,
+        "z": -543.70112700498
+      },
+      "endpointDistance": 1.2999999999999556,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-1-government-station-1",
+      "nodeId": "government-quarter-1",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 351.16275534829987,
+        "y": 300.6,
+        "z": -540.58137767415
+      },
+      "endpointDistance": 1.2999999999999872,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-government-quarter-3-government-station-1",
+      "nodeId": "government-quarter-3",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 716.0400000000001,
+        "y": 290.6,
+        "z": -579.2200000000001
+      },
+      "endpointDistance": 1.2999999999999772,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-1-starport-station-1",
+      "nodeId": "starport-quarter-1",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1164.5889039041779,
+        "y": 342.6,
+        "z": -1136.2332882874655
+      },
+      "endpointDistance": 1.2999999999999023,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 15,
+      "at": 510,
+      "vehicleId": "vehicle-road-starport-quarter-3-starport-station-1",
+      "nodeId": "starport-quarter-3",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 1549.9218284597696,
+        "y": 350.6,
+        "z": -1093.702352432169
+      },
+      "endpointDistance": 1.29999999999995,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-road-academy-station-core-station-1",
+      "nodeId": "academy-station",
+      "districtId": "academy",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": -368.70795114492427,
+        "y": 206.6,
+        "z": -410.14356098389726
+      },
+      "endpointDistance": 1.300000000000025,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 36,
+      "at": 552,
+      "vehicleId": "vehicle-flight-airport-runway-west-starport-station-0",
+      "nodeId": "starport-station",
+      "districtId": "starport",
+      "sourceShopId": null,
+      "quantity": 60,
+      "position": {
+        "x": 1370,
+        "y": 368.6,
+        "z": -1280
+      },
+      "endpointDistance": 0,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 39,
+      "at": 558,
+      "vehicleId": "vehicle-road-government-station-summit-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.4186223258501,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.3000000000000125,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    },
+    {
+      "tick": 45,
+      "at": 570,
+      "vehicleId": "vehicle-road-government-station-starport-station-1",
+      "nodeId": "government-station",
+      "districtId": "government",
+      "sourceShopId": null,
+      "quantity": 28,
+      "position": {
+        "x": 499.41862232585004,
+        "y": 324.6,
+        "z": -711.1627553482999
+      },
+      "endpointDistance": 1.300000000000038,
+      "evidence": "Read-only per-vehicle actual cargo-before + same-tick actual load - cargo-after; matches native cargo-arrived totals by owner and district. Original 14-day log did not store unloading vehicle/node."
+    }
+  ],
+  "publicAuthorizationProbe": {
+    "request": {
+      "id": "food-counter-review-probe",
+      "siteId": "academy-b10",
+      "purpose": "food-distribution",
+      "cap": 40,
+      "approvedAt": 522,
+      "approvedBy": [
+        "citizen-27",
+        "citizen-555"
+      ]
+    },
+    "authorized": true,
+    "cashBefore": 79906.1183999999,
+    "cashAfter": 79906.1183999999,
+    "authorizedRemaining": 40,
+    "originalReplayUnmodifiedByProbe": true,
+    "cloneSaveChanged": true
+  },
+  "originalLogNodeVehicleMissing": true,
+  "ticks": 720
+}

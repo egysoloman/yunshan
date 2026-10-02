@@ -1,0 +1,12 @@
+import {writeFileSync} from 'node:fs';
+import {PerspectiveCamera} from 'three';
+import {PlayerController} from './src/controller.ts';
+import {getBuildingEntrance,getBuildingFloorPlan,floorPlanSupport,blocksFloorPlanMovement} from './src/architecture-floor-plan.ts';
+import {getWalkHeight} from './src/world.ts';
+import type {Building,WorldDefinition} from './src/types.ts';
+const b:Building={id:'edge-market',districtId:'town',name:'market',kind:'market',position:{x:0,y:0,z:0},width:40,depth:32,height:12,floors:3,rotation:0,door:{x:0,y:.6,z:16},capacity:50,seed:7,floorPlanProfile:'v4-program-bodies-02'};b.door=getBuildingEntrance(b);
+const world:WorldDefinition={seed:911,voxelSize:.2,size:4000,districts:[{id:'town',name:'town',kind:'market',center:{x:0,y:0,z:0},radius:1200,color:'#888',population:50}],buildings:[b],nodes:[],edges:[],mountains:[],spawn:{x:18,y:0,z:17},waterfall:{top:{x:1800,y:100,z:1800},bottom:{x:1800,y:0,z:1800},width:10},river:[{x:1800,y:0,z:1800},{x:1800,y:0,z:1900}]};
+const keys=Object.assign(new EventTarget(),{closest:()=>null}),doc=Object.assign(new EventTarget(),{pointerLockElement:null});Object.defineProperty(globalThis,'window',{value:keys,configurable:true});Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
+const c=new PlayerController(new PerspectiveCamera(),new EventTarget() as HTMLCanvasElement,world,()=>{},()=>true);
+const event=new Event('keydown');Object.assign(event,{code:'KeyW',repeat:false});keys.dispatchEvent(event);c.yaw=0;for(let i=0;i<40;i++)c.step(.015,false);
+const result={start:world.spawn,end:c.position,target:{x:18,y:.6,z:15},pureCollision:blocksFloorPlanMovement(b,0,{x:18,y:0,z:17},{x:18,y:.6,z:15}),bodySupportInside:floorPlanSupport(b,0,{x:18,y:.6,z:15}),targetWalkHeight:getWalkHeight(world,18,15,.6),crossed:c.position.z<15.6};writeFileSync('exterior-court-probe.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));c.dispose();

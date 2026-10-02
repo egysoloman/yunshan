@@ -1,5 +1,6 @@
 import type { Building, Vec3, WorldDefinition } from './types';
 import { getWalkHeight } from './world';
+import { buildingWorldPosition, getBuildingFloorPlan, getFloorPlanFixtures } from './architecture-floor-plan';
 
 /** Public exterior objects use one physical description for drawing and walking.
  * These counters belong to the existing market, and create no shops or goods. */
@@ -15,6 +16,14 @@ const toWorld = (building: Building, x: number, z: number) => ({
 
 export function marketCounters(world: WorldDefinition, building: Building): MarketCounter[] {
   if (building.kind !== 'market') return [];
+  const plan = getBuildingFloorPlan(building, 0);
+  if (plan) return getFloorPlanFixtures(building, plan).filter(fixture => fixture.kind === 'counter').map(fixture => {
+    const { rect, bottom, top } = fixture, local = { x: (rect.x0 + rect.x1) / 2, y: plan.y + (bottom + top) / 2, z: (rect.z0 + rect.z1) / 2 };
+    const position = buildingWorldPosition(building, local);
+    return { id: `${building.id}-${fixture.id}`, buildingId: building.id, position,
+      localPosition: { ...local, y: position.y - building.position.y },
+      size: { x: rect.x1 - rect.x0, y: top - bottom, z: rect.z1 - rect.z0 }, rotation: building.rotation };
+  });
   const width = quantum(Math.min(3.2, building.width * .18)), depth = 1.2;
   const result: MarketCounter[] = [];
   for (const side of [-1, 1]) {

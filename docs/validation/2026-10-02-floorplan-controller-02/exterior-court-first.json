@@ -1,0 +1,29 @@
+{
+  "start": {
+    "x": 18,
+    "y": 0,
+    "z": 17
+  },
+  "end": {
+    "x": 18,
+    "y": 0,
+    "z": 16.06400000000001
+  },
+  "target": {
+    "x": 18,
+    "y": 0.6,
+    "z": 15
+  },
+  "pureCollision": false,
+  "bodySupportInside": {
+    "kind": "courtyard",
+    "floor": 0,
+    "y": 0.6,
+    "local": {
+      "x": 18,
+      "z": 15
+    }
+  },
+  "targetWalkHeight": 0.6,
+  "crossed": false
+}

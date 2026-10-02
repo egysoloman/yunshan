@@ -1,4 +1,6 @@
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
+import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
+import { blocksMarketCounter, marketCounters } from './site-fixtures';
 import { installExtensions } from './simulation/extensions';
 import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
 import { installFamily, isCloseKin } from './simulation/family';
@@ -8,7 +10,8 @@ import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
 import { savedWorldFingerprint } from './persistence/world-layout';
-import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building } from './types';
+import { decodeCitizenRoutes, encodeCitizenRoutes } from './persistence/route-encoding';
+import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building, BuildingFunctionPoint } from './types';
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
@@ -255,7 +258,8 @@ export class Simulation implements SimulationAPI {
     if (this.state.hour < 6 || this.state.hour >= 17) return;
     for (const shop of this.state.shops) {
       const site = this.buildings.get(shop.buildingId)!, ownerId = this.shopOwnerId(shop), owner = ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === ownerId), profile = ownerId ? this.state.extension?.actorProfiles[ownerId] : undefined;
-      if (!owner || !ownerId || !profile?.alive || profile.age < 18 || profile.health < 45 || owner.needs.hunger < 40 || owner.needs.fatigue < 35 || !this.isNearBuilding(site, owner.position, 2)) continue;
+      if (!owner || !ownerId || !profile?.alive || profile.age < 18 || profile.health < 45 || owner.needs.hunger < 40 || owner.needs.fatigue < 35 || !this.isNearBuilding(site, owner.position, 2)
+        || site.floorPlanProfile === FLOOR_PLAN_PROFILE && !this.isAtBuildingFunctionPoint(site, owner.position, 'work', ownerId === 'player' ? this.state.player : { role: this.citizenIdentity(owner as Citizen), identities: [this.citizenIdentity(owner as Citizen)] })) continue;
       let plan = labor.shifts[shop.id];
       if (!plan || plan.day !== day) plan = labor.shifts[shop.id] = { day, shopId: shop.id, assignments: [], reviews: [] };
       const roster = (this.workforce.get(site.id) ?? []).slice(0, shop.employees);
@@ -364,7 +368,8 @@ export class Simulation implements SimulationAPI {
     const groups = new Map<string, Citizen[]>();
     for (const official of this.state.citizens) {
       const site = this.buildings.get(official.workId);
-      if (!site || !['hall', 'core', 'bank'].includes(site.kind) || !['official', 'council', 'mayor'].includes(this.citizenIdentity(official)) || this.state.extension?.actorProfiles[official.id]?.alive === false || official.needs.hunger < 40 || official.needs.fatigue < 35 || !this.isNearBuilding(site, official.position, 2) || this.state.hour < 8 || this.state.hour >= 17) continue;
+      if (!site || !['hall', 'core', 'bank'].includes(site.kind) || !['official', 'council', 'mayor'].includes(this.citizenIdentity(official)) || this.state.extension?.actorProfiles[official.id]?.alive === false || official.needs.hunger < 40 || official.needs.fatigue < 35 || !this.isNearBuilding(site, official.position, 2)
+        || site.floorPlanProfile === FLOOR_PLAN_PROFILE && !this.isAtBuildingFunctionPoint(site, official.position, 'work', { role: this.citizenIdentity(official), identities: [this.citizenIdentity(official)] }) || this.state.hour < 8 || this.state.hour >= 17) continue;
       const group = groups.get(site.id) ?? []; group.push(official); groups.set(site.id, group);
     }
     const reviewers = [...groups.entries()].filter(([, actors]) => actors.length >= 2).sort((a, b) => a[0].localeCompare(b[0]))[0];
@@ -389,7 +394,8 @@ export class Simulation implements SimulationAPI {
   isOnDuty(citizenId: string, siteId: string): boolean {
     const citizen = this.state.citizens.find(c => c.id === citizenId), site = this.buildings.get(siteId);
     return !!citizen && !!site && citizen.workId === siteId && citizen.state === 'working' && this.isEmployed(citizen)
-      && this.state.extension?.actorProfiles[citizenId]?.alive !== false && (this.runtime.attendance[citizenId] ?? 0) > 0 && this.isNearBuilding(site, citizen.position, 2);
+      && this.state.extension?.actorProfiles[citizenId]?.alive !== false && (this.runtime.attendance[citizenId] ?? 0) > 0 && this.isNearBuilding(site, citizen.position, 2)
+      && (site.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.isAtBuildingFunctionPoint(site, citizen.position, 'work', { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] }));
   }
   quoteSupply(shopId: string, quantity: number) { return quoteSupply(this, shopId, quantity); }
   recordOwnedStockPurchase(shopId: string, quantity: number, unitPrice: number): void { recordOwnedStockPurchase(this, shopId, quantity, unitPrice); }
@@ -730,8 +736,15 @@ export class Simulation implements SimulationAPI {
     this.cacheRoute(key, points); return points;
   }
   private walkingAnchors(citizen: Citizen): { node: string; cost: number; points: Vec3[] }[] {
-    const interior = this.world.buildings.find(b => this.isNearBuilding(b, citizen.position, 0));
+    const interior = this.world.buildings.find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
     if (interior) {
+      if (interior.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+        const presence = this.floorPlanPresence(interior, citizen.position)!;
+        const points = this.floorPlanRoute(interior, presence.floor, 0, citizen.position, interior.door);
+        if (!points) return [];
+        const node = this.buildingNode(interior); points.push(copy(node.position));
+        return [{ node: node.id, cost: points.slice(1).reduce((n, p, i) => n + distance(points[i], p), 0), points }];
+      }
       const floor = Math.floor((citizen.position.y - interior.position.y + .01) / (interior.height / interior.floors));
       const points = [copy(citizen.position), ...(floor ? [getStairPosition(interior, floor), getStairPosition(interior, 0)] : []), copy(interior.door)];
       const node = this.buildingNode(interior); points.push(copy(node.position)); let cost = 0; for (let i = 1; i < points.length; i++) cost += distance(points[i - 1], points[i]);
@@ -747,6 +760,7 @@ export class Simulation implements SimulationAPI {
   private routeFromCitizen(citizen: Citizen, destination: Building, anchors = this.walkingAnchors(citizen)): Vec3[] {
     const target = this.buildingNode(destination);
     const best = [...anchors].sort((a, b) => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity) - b.cost - (this.walkingTree(b.node).costs.get(target.id) ?? Infinity))[0];
+    if (!best) return [copy(citizen.position)];
     const network = this.nodePath(best.node, target.id); if (!network.length) return [copy(citizen.position)];
     return [...best.points, ...network.slice(1), copy(destination.door)];
   }
@@ -763,7 +777,25 @@ export class Simulation implements SimulationAPI {
     this.cacheRoute(key, points); return points;
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
-    if (!rebuild && citizen.destinationId === destination.id) return;
+    if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
+    if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+      const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action);
+      const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
+      const points = this.buildingFunctionPoints(destination).filter(point => point.purpose === purpose && Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(destination, floor, person))
+        && (action === 'work' || action === 'rest' || point.floor === 0) && !destination.floorUses?.[point.floor]?.includes('观景'));
+      const previousTarget = citizen.route?.at(-1);
+      if (!rebuild && citizen.destinationId === destination.id && previousTarget && points.some(point => distance(point.position, previousTarget) < 1e-8)) return;
+      const candidates = points.length ? [...points.slice(hash(`${citizen.id}:${destination.id}`) % points.length), ...points.slice(0, hash(`${citizen.id}:${destination.id}`) % points.length)] : [];
+      const presence = this.floorPlanPresence(destination, citizen.position);
+      let interior: Vec3[] | null = null;
+      for (const point of candidates) { interior = this.floorPlanRoute(destination, presence?.floor ?? 0, point.floor, presence ? citizen.position : destination.door, point.position); if (interior) break; }
+      if (presence) {
+        citizen.destinationId = destination.id; citizen.route = interior ?? [copy(citizen.position)]; citizen.routeIndex = 1; citizen.state = interior ? 'moving' : 'unreachable'; return;
+      }
+      const outside = this.routeFromCitizen(citizen, destination);
+      citizen.destinationId = destination.id; citizen.route = interior && outside.length > 1 ? [...outside, ...interior.slice(1)] : [copy(citizen.position)];
+      citizen.routeIndex = 1; citizen.state = interior && outside.length > 1 ? 'moving' : 'unreachable'; return;
+    }
     const row = hash(citizen.id) % 5 - 2;
     const role = this.citizenIdentity(citizen);
     const action = this.runtime.activities[citizen.id];
@@ -918,8 +950,8 @@ export class Simulation implements SimulationAPI {
         if (!this.moveCitizen(citizen, elapsed)) continue;
         arrivedElapsed = Math.max(0, elapsed - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
       }
-      if (!this.isNearBuilding(destination, citizen.position, 1)) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       const activity = this.runtime.activities[citizen.id];
+      if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity), { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] })) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       if (destination.id === home.id || activity === 'rest') {
         citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + elapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + elapsed * .08);
       } else if (activity === 'work') {
@@ -1163,6 +1195,16 @@ export class Simulation implements SimulationAPI {
   private notice(type: string, text: string, districtId?: string) { this.state.events.push({ id: ++this.runtime.eventId, tick: this.state.tick, type, text, ...(districtId ? { districtId } : {}) }); if (this.state.events.length > 100) this.state.events.shift(); }
   isNearBuilding(building: Building, position: Vec3 = this.state.player.position, doorRadius = 32): boolean {
     if (!this.validPosition(position)) return false;
+    if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+      const presence = this.floorPlanPresence(building, position);
+      if (presence) return presence.kind === 'room' || presence.kind === 'stairs';
+      const floor = getBuildingFloorPlan(building, 0), local = buildingLocalPosition(building, position);
+      // The real doorway remains usable at its boundary. An exterior approach
+      // preserves the caller's radius; the same radius never turns a courtyard,
+      // wall or absent upper-floor slab into an occupied room.
+      return !!floor && Math.abs(position.y - building.door.y) < 1.5 && distance(position, building.door) <= doorRadius
+        && (!contains(floor.broadphase, local.x, local.z) || distance(position, building.door) < .4);
+    }
     const floorHeight = building.height / Math.max(1, building.floors), floor = Math.floor((position.y - building.position.y + .01) / floorHeight);
     if (floor === 0 && distance(position, building.door) <= doorRadius) return true;
     if (floor < -(building.basements ?? 0) || floor >= building.floors) return false;
@@ -1171,15 +1213,45 @@ export class Simulation implements SimulationAPI {
     const dimensions = getFloorDimensions(building, floor);
     return Math.abs(x) <= dimensions.width / 2 && Math.abs(z) <= dimensions.depth / 2 && position.y >= building.position.y - floorHeight * (building.basements ?? 0) - .5 && position.y <= building.position.y + building.height + .5;
   }
+  private floorPlanPresence(building: Building, position: Vec3) {
+    const floor = Math.round((position.y - building.position.y - .6) / (building.height / building.floors));
+    for (const candidate of [floor, floor - 1, floor + 1]) {
+      const support = floorPlanSupport(building, candidate, position);
+      if (support && Math.abs(support.y - position.y) <= .26) return support;
+    }
+    return null;
+  }
+  private buildingFunctionPoints(building: Building): BuildingFunctionPoint[] {
+    return building.functionPoints ?? Array.from({ length: building.floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
+  }
+  private activityPointPurpose(activity: string | undefined): BuildingFunctionPoint['purpose'] {
+    return activity === 'eat' ? 'sale' : ['work', 'businessReview', 'budgetReview'].includes(activity ?? '') ? 'work' : 'service';
+  }
+  /** A v4 facility is used at its real point on a legally accessible floor.
+   * Unmarked recipes retain their existing proximity/permission contract. */
+  isAtBuildingFunctionPoint(building: Building, position: Vec3 = this.state.player.position, purpose?: BuildingFunctionPoint['purpose'], person: Pick<Player, 'role' | 'identities'> = this.state.player, radius = 2): boolean {
+    if (building.floorPlanProfile !== FLOOR_PLAN_PROFILE) return this.isNearBuilding(building, position, radius);
+    const presence = this.floorPlanPresence(building, position);
+    return !!presence && (presence.kind === 'room' || presence.kind === 'stairs') && this.buildingFunctionPoints(building).some(point => point.floor === presence.floor && (!purpose || point.purpose === purpose) && canAccessFloor(building, point.floor, person) && distance(position, point.position) <= radius);
+  }
+  private floorPlanRoute(building: Building, fromFloor: number, toFloor: number, from: Vec3, to: Vec3): Vec3[] | null {
+    const key = `floor:${building.id}:${fromFloor}>${toFloor}:${this.pointKey(from)}>${this.pointKey(to)}`;
+    const cached = this.state.voxels.length === 0 ? this.routeCache.get(key) : undefined;
+    if (cached) return cached.map(copy);
+    const counters = marketCounters(this.world, building);
+    const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, counters.length ? (a, b) => blocksMarketCounter(counters, a, b, .35, 1.72) : undefined);
+    if (route && this.state.voxels.length === 0) this.cacheRoute(key, route.map(copy));
+    return route;
+  }
   private floorAccessible(building: Building): boolean { const floorHeight = building.height / Math.max(1, building.floors); const floor = Math.floor((this.state.player.position.y - building.position.y + .01) / floorHeight); return canAccessFloor(building, floor, this.state.player); }
   private validPosition(p: unknown): p is Vec3 { if (!p || typeof p !== 'object') return false; const v = p as Vec3; const limit = Math.max(10000, this.world.size * 3); return finite(v.x) && finite(v.y) && finite(v.z) && Math.abs(v.x) <= limit && Math.abs(v.z) <= limit && v.y >= -1000 && v.y <= limit; }
-  private buildingNear(targetId: string | undefined, kinds: string[]): Building | null {
+  private buildingNear(targetId: string | undefined, kinds: string[], purpose?: BuildingFunctionPoint['purpose']): Building | null {
     const explicitShop = this.state.shops.find(s => s.id === targetId);
     const explicit = targetId ? this.buildings.get(explicitShop?.buildingId ?? targetId) : undefined;
     if (targetId && !explicit) return null;
     const matches = (b: Building) => kinds.includes(b.kind) || !!b.facility && kinds.includes(b.facility);
     const candidates = explicit ? [explicit] : this.world.buildings.filter(matches);
-    return candidates.filter(b => matches(b) && this.isNearBuilding(b) && this.floorAccessible(b)).sort((a, b) => Number(this.isNearBuilding(b, this.state.player.position, 0)) - Number(this.isNearBuilding(a, this.state.player.position, 0)) || distance(this.state.player.position, a.door) - distance(this.state.player.position, b.door))[0] ?? null;
+    return candidates.filter(b => matches(b) && this.isNearBuilding(b) && this.floorAccessible(b) && (b.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.isAtBuildingFunctionPoint(b, this.state.player.position, purpose))).sort((a, b) => Number(this.isNearBuilding(b, this.state.player.position, 0)) - Number(this.isNearBuilding(a, this.state.player.position, 0)) || distance(this.state.player.position, a.door) - distance(this.state.player.position, b.door))[0] ?? null;
   }
   private relation(npc: Citizen) {
     let relation = this.state.relationships.find(r => r.npcId === npc.id);
@@ -1226,6 +1298,10 @@ export class Simulation implements SimulationAPI {
     if (command.position !== undefined && !this.validPosition(command.position)) return fail('位置超出世界范围。');
     if (!['pause', 'speed', 'setTime'].includes(command.type) && this.state.extension?.actorProfiles.player?.alive === false) return fail('角色生命已结束，无法继续行动；可调节时间或读取存档。');
     if (this.state.aviation?.activeAircraftId && !['pause', 'speed', 'setTime'].includes(command.type) && !AIRCRAFT_COMMANDS.has(command.type)) return fail('请先在合法停机坪降落并离开机舱，再进行地面生活与职业操作。');
+    if (command.type === 'work') {
+      const site = command.targetId ? this.buildings.get(command.targetId) : this.world.buildings.find(building => this.isNearBuilding(building));
+      if (site?.floorPlanProfile === FLOOR_PLAN_PROFILE && !this.isAtBuildingFunctionPoint(site, this.state.player.position, 'work')) return fail('请到该建筑可访问楼层的实际工作点开始工班。');
+    }
     for (const handler of this.commandHandlers) { const result = handler(command); if (result) return result; }
     const p = this.state.player;
     if (command.type === 'pause') { if (command.value !== undefined && ![0, 1].includes(command.value)) return fail('暂停参数为0或1。'); this.state.paused = command.value === undefined ? !this.state.paused : command.value === 1; return success(this.state.paused ? '时间已暂停。' : '城市继续运行。'); }
@@ -1241,7 +1317,7 @@ export class Simulation implements SimulationAPI {
       return success(`已调至${this.state.hour.toFixed(1)}时，作息与班次已重新排程。`);
     }
     if (command.type === 'purchase') {
-      const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock']); if (!building) return fail('请到商铺入口附近购物。');
+      const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'sale'); if (!building) return fail('请到商铺入口附近购物。');
       const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('这是公共科研或政务设施，不经营零售商品。');
       const quantity = command.value ?? 1; if (!Number.isInteger(quantity) || quantity < 1 || quantity > 30) return fail('购买数量须为1至30的整数。');
       if (!shop.open || shop.inventory < quantity) return fail('商铺休业或库存不足。');
@@ -1256,7 +1332,7 @@ export class Simulation implements SimulationAPI {
       this.bus.emit({ type: 'sale', amount: cost, shopId: shop.id, districtId: shop.districtId, quantity, purpose: commodity }); return success(`在${building.name}购买${quantity}份${commodity === 'food' ? '食物' : '工业物料'}，花费${cost.toFixed(1)}云币。`);
     }
     if (command.type === 'rest') {
-      const building = this.buildingNear(command.targetId, ['pavilion', 'clinic', 'station', 'home']);
+      const building = this.buildingNear(command.targetId, ['pavilion', 'clinic', 'station', 'home'], 'service');
       const homeNear = building?.id === p.homeId;
       if (!building || building.kind === 'home' && !homeNear) return fail('请到已租住所、亭子、站点或诊所休息。');
       if (this.now - this.runtime.restAt < 20 - 1e-7) return fail('刚刚已休息过，请稍后再休息。');
@@ -1277,7 +1353,7 @@ export class Simulation implements SimulationAPI {
       return success(`${building.name}已办理${command.type}，金额${amount.toFixed(1)}云币。`);
     }
     if (command.type === 'business') {
-      const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock']); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
+      const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'work'); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
       const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('公共科研与政务设施不能作为私营商铺承包。'); if (this.state.extension?.companies.some(company => company.buildingId === building.id)) return fail('此商铺已公司化，请通过股权交易取得控制权。'); if (this.runtime.playerBusinesses.includes(shop.id)) return fail('这间商铺已由你经营。'); if (p.money < 300) return fail('承包资金需要300云币。'); const priorOwner = shop.ownerId === 'player' ? p : this.state.citizens.find(citizen => citizen.id === shop.ownerId), refund = priorOwner ? Math.max(0, this.shopFunds(shop) - this.shopProtectedFunds(shop)) : 0;
       if (priorOwner && priorOwner.money + refund > 1e9) return fail('原经营者现金账户已达上限。');
       if (priorOwner) { this.transferShopFunds(shop, -refund); priorOwner.money += refund; }
@@ -1398,10 +1474,9 @@ export class Simulation implements SimulationAPI {
     return fail('暂不支持此项操作。');
   }
   exportSave(): string {
-    const routePool: Vec3[] = [], pointIds = new Map<string, number>();
-    const citizens = this.state.citizens.map(c => ({ ...c, route: c.route?.map(point => { const key = `${point.x},${point.y},${point.z}`; let id = pointIds.get(key); if (id === undefined) { id = routePool.length; pointIds.set(key, id); routePool.push(point); } return id; }) }));
+    const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: 1, worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding: 'pooled-v1', routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: 1, worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, persistedModules } });
   }
   importSave(json: string): CommandResult {
     try {
@@ -1432,9 +1507,7 @@ export class Simulation implements SimulationAPI {
       number(r.relationshipClock, 0, 1e12, 'relationship clock'); if (r.hostileAt === undefined) r.hostileAt = {};
       ensure(r.hostileAt && typeof r.hostileAt === 'object' && !Array.isArray(r.hostileAt), 'hostile timers');
       if (data.routeEncoding !== undefined) {
-        ensure(data.routeEncoding === 'pooled-v1', 'route encoding');
-        const pool = array(data.routePool, 32768, 'route pool'); for (const point of pool) vec(point, 'pooled route position');
-        for (const citizen of array(s.citizens, 1024, 'encoded citizens')) if (citizen.route !== undefined) citizen.route = array(citizen.route, 1024, 'encoded route').map(index => { number(index, 0, pool.length - 1, 'route point index', true); return copy(pool[index]); });
+        decodeCitizenRoutes(data.routeEncoding, data.routePool, s.citizens, point => vec(point, 'pooled route position'));
       }
       number(s.tick, 0, 1e10, 'tick', true); number(s.day, 0, 1e8, 'day', true); ensure(finite(s.hour) && s.hour >= 0 && s.hour < 24, 'hour'); ensure(typeof s.paused === 'boolean', 'paused'); number(s.speed, .25, 16, 'speed'); ensure(['晴', '云', '雨', '雾'].includes(s.weather), 'weather'); number(s.visibility, 0, 1, 'visibility'); number(s.energy, 0, 100, 'energy'); money(s.treasury, 'treasury'); number(s.taxRate, 0, .3, 'taxRate'); number(s.policeBudget, 0, 1, 'policeBudget'); number(s.support, 0, 100, 'support'); money(s.bankBalance, 'bankBalance'); money(s.loan, 'loan'); money(s.gdp, 'gdp');
       ensure(JSON.stringify(s.lastSystemOrder) === JSON.stringify(ORDER) || Array.isArray(s.lastSystemOrder) && s.lastSystemOrder.length === 0 && s.tick === 0, 'system order');
@@ -1508,6 +1581,12 @@ export class Simulation implements SimulationAPI {
           for (const review of array(plan.reviews, 150, 'private employer reviews')) {
             ensure(review && (review.ownerId === 'player' || expectedCitizenIds.has(review.ownerId)), 'private employer signature');
             number(review.at, plan.day * 1440, Math.min(time, (plan.day + 1) * 1440), 'private approval time'); vec(review.ownerPosition, 'private employer location'); ensure(this.isNearBuilding(site!, review.ownerPosition, 2), 'private approval onsite');
+            if (site!.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+              const presence = this.floorPlanPresence(site!, review.ownerPosition);
+              // A signature records its actual place. A later career change
+              // cannot rewrite the signer's historical floor permission.
+              ensure(presence && this.buildingFunctionPoints(site!).some(point => point.purpose === 'work' && point.floor === presence.floor && distance(point.position, review.ownerPosition) <= 2), 'private approval work point');
+            }
             for (const key of ['cash', 'earnedDebt', 'priorCommitment', 'operatingReserve', 'addedCommitment']) money(review[key], `private funding ${key}`);
             ensure(review.addedCommitment > 0 && review.cash <= 1e9 && review.cash - review.earnedDebt - review.priorCommitment - review.operatingReserve >= review.addedCommitment - 1e-6, 'private promise funded by actual cash'); funded += review.addedCommitment;
           }

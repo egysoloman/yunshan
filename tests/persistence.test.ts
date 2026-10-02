@@ -68,7 +68,14 @@ async function fixture(t: TestContext, oldDatabase = false): Promise<Page> {
         return Object.fromEntries(entries);
       } finally { db.close(); }
     };
-    window.saveTest = { persistence, world, simulation, Simulation, puts, gets, originalPut, inspect };
+    const pointsPath = '/src/architecture-floor-plan.ts', points = await import(pointsPath);
+    const fixturePoint = (site: any, purpose: 'work' | 'service' | 'sale', person: any = simulation.state.player) => {
+      if (!points.getBuildingBody(site)) return { ...site.door };
+      const point = points.getBuildingUsePoints(site, 0).find((point: any) => point.purpose === purpose && simulation.isAtBuildingFunctionPoint(site, point.position, purpose, person));
+      if (!point) throw new Error(`A controlled ${purpose} fixture requires a real accessible point in ${site.id}`);
+      return { ...point.position };
+    };
+    window.saveTest = { persistence, world, simulation, Simulation, puts, gets, originalPut, inspect, fixturePoint };
   });
   return page;
 }
@@ -86,7 +93,7 @@ async function fundedClinicalFixture(t: TestContext): Promise<Page> {
     // conditions. Funding, procurement, cancellation and reuse use live APIs.
     sim.state.extension.actorProfiles.player.health = 70; sim.state.extension.actorProfiles[patient.id].health = 70;
     sim.state.player.needs = { hunger: 95, fatigue: 95, social: 90, fun: 90 }; patient.needs = { hunger: 95, fatigue: 95, social: 90, fun: 90 };
-    sim.setFocus(first.door, 'walk'); patient.position = { ...second.door };
+    sim.setFocus(f.fixturePoint(first, 'service'), 'walk'); patient.position = f.fixturePoint(second, 'service', { role: 'traveler', identities: ['traveler'] });
     const playerStart = clinical.beginClinicalTreatment(sim, { patientId: 'player', payerId: 'player', siteId: first.id }); if (!playerStart.ok) throw new Error(playerStart.message);
     const npcStart = clinical.beginClinicalTreatment(sim, { patientId: patient.id, payerId: patient.id, siteId: second.id }); if (!npcStart.ok) throw new Error(npcStart.message);
     f.clinicalOriginal = sim.exportSave(); await f.persistence.writeSavedGame(f.clinicalOriginal, f.world);
@@ -198,7 +205,7 @@ test('a real onsite work escrow roundtrips and player damage recovers one comple
     const f = window.saveTest, sim = f.simulation, shop = sim.state.shops.find((shop: any) => f.world.buildings.find((site: any) => site.id === shop.buildingId)?.kind === 'market');
     const investor = sim.state.citizens.find((actor: any) => actor.money >= 200); investor.money -= 200; sim.transferShopFunds(shop, 200);
     sim.state.player.needs = { hunger: 95, fatigue: 95, social: 90, fun: 90 };
-    sim.setFocus(f.world.buildings.find((site: any) => site.id === shop.buildingId).door, 'walk');
+    sim.setFocus(f.fixturePoint(f.world.buildings.find((site: any) => site.id === shop.buildingId), 'work'), 'walk');
     const started = sim.command({ type: 'work', targetId: shop.buildingId }); if (!started.ok) throw new Error(started.message);
     const original = sim.exportSave(); await f.persistence.writeSavedGame(original, f.world);
     for (let tick = 0; tick < 40; tick++) sim.step(.25);

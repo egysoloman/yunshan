@@ -1,5 +1,6 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor, getFloorDimensions } from '../access';
+import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
 import type { Building, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export interface ClinicalReceipt { commodity: 'materials'; procurementId: string; purchasedAt: number; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
@@ -49,6 +50,11 @@ export function clinicalAtPosition(site: Building, position: Vec3, person: Pick<
   if (![position.x, position.y, position.z].every(Number.isFinite)) return false;
   const level = Math.floor((position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors)));
   if (!clinicalPublicFloor(site, level, person)) return false;
+  if (getBuildingBody(site)) {
+    const support = floorPlanSupport(site, level, position);
+    return !!support && (support.kind === 'room' || support.kind === 'stairs') &&
+      getBuildingUsePoints(site, level).some(point => point.purpose === 'service' && Math.hypot(point.position.x - position.x, point.position.y - position.y, point.position.z - position.z) <= 2);
+  }
   if (level === 0 && Math.hypot(position.x - site.door.x, position.y - site.door.y, position.z - site.door.z) <= 2) return true;
   const dx = position.x - site.position.x, dz = position.z - site.position.z, x = dx * Math.cos(site.rotation) + dz * Math.sin(site.rotation), z = -dx * Math.sin(site.rotation) + dz * Math.cos(site.rotation), size = getFloorDimensions(site, level);
   return Math.abs(x) <= size.width / 2 && Math.abs(z) <= size.depth / 2 && position.y >= site.position.y - .5 && position.y <= site.position.y + site.height + .5;

@@ -1,5 +1,6 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
+import { getBuildingBody } from '../architecture-floor-plan';
 import type { CommandResult, Role, SimState } from '../types';
 
 export interface BankAccount { deposits: number; loanPrincipal: number; loanInterest: number; interestDue: number; closed: boolean }
@@ -78,7 +79,8 @@ export function installBanking(simulation: Simulation): void {
       if (targetId && targetId !== site.id || !simulation.isNearBuilding(site, actor.position)) return false;
       const level = Math.floor((actor.position.y - site.position.y + .01) / (site.height / site.floors));
       const role = id === 'player' ? s.player.role : 'traveler' as Role;
-      return canAccessFloor(site, level, { role, identities: id === 'player' ? s.player.identities : [role] });
+      const identity = { role, identities: id === 'player' ? s.player.identities : [role] };
+      return canAccessFloor(site, level, identity) && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, actor.position, 'service', identity));
     });
   };
   simulation.registerCommandHandler(command => {
