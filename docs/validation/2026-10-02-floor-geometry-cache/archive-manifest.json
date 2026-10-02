@@ -1,0 +1,1660 @@
+{
+  "createdAt": "2026-10-02T16:49:21.861031+00:00",
+  "payloadCount": 273,
+  "payloadBytes": 31102361,
+  "sourceCounts": {
+    "before": 105,
+    "candidate": 106
+  },
+  "scope": "Complete independent before105/candidate106, final patch/test, all actual failed and successful evidence/runner/save/performance originals. Library metadata helper/private receipts are outside this artifact. No node_modules/browser userdata/Git/env/credentials/signed URL. No source mutations during archived functional/benchmark runs.",
+  "sensitivePatternCounts": {
+    "private-key": 0,
+    "openai-secret": 0,
+    "aws-access-key": 0,
+    "bearer-secret": 0,
+    "github-token": 0,
+    "signed-aws-url": 0,
+    "signed-provider-url": 0
+  },
+  "scanException": "archive-originals.py regex specification itself excluded from secret-pattern counting; every payload including gzip decompressed JSON was scanned otherwise.",
+  "records": [
+    {
+      "name": "README-final.md",
+      "bytes": 4184,
+      "sha256": "4ec2ab443d9975a13418e3e961180ab3f7d4556d1d94927b0fbaf216110adb60",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/README-final.md"
+    },
+    {
+      "name": "archive-originals.py",
+      "bytes": 4268,
+      "sha256": "2ffee1e8bf4047dedcbab92d89bfa6d88db9bcf6969f9a520021b9e8d4870383",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/archive-originals.py"
+    },
+    {
+      "name": "before/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/.gitattributes"
+    },
+    {
+      "name": "before/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/.gitignore"
+    },
+    {
+      "name": "before/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/AGENTS.md"
+    },
+    {
+      "name": "before/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/index.html"
+    },
+    {
+      "name": "before/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/package-lock.json"
+    },
+    {
+      "name": "before/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/package.json"
+    },
+    {
+      "name": "before/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/public/favicon.svg"
+    },
+    {
+      "name": "before/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/benchmark.ts"
+    },
+    {
+      "name": "before/scripts/browser-test.mjs",
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/browser-test.mjs"
+    },
+    {
+      "name": "before/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/economy-audit.ts"
+    },
+    {
+      "name": "before/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/layout-browser-test.mjs"
+    },
+    {
+      "name": "before/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/player-journey.mjs"
+    },
+    {
+      "name": "before/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/space-browser-test.mjs"
+    },
+    {
+      "name": "before/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/ui-test.mjs"
+    },
+    {
+      "name": "before/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/scripts/visual-review.mjs"
+    },
+    {
+      "name": "before/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/access.ts"
+    },
+    {
+      "name": "before/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/architecture-floor-plan.ts"
+    },
+    {
+      "name": "before/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/aviation-renderer.ts"
+    },
+    {
+      "name": "before/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/aviation.ts"
+    },
+    {
+      "name": "before/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/controller.ts"
+    },
+    {
+      "name": "before/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/journey.ts"
+    },
+    {
+      "name": "before/src/main.ts",
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/main.ts"
+    },
+    {
+      "name": "before/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/persistence.ts"
+    },
+    {
+      "name": "before/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/persistence/partition.ts"
+    },
+    {
+      "name": "before/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/persistence/route-encoding.ts"
+    },
+    {
+      "name": "before/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/persistence/session.ts"
+    },
+    {
+      "name": "before/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/persistence/world-layout.ts"
+    },
+    {
+      "name": "before/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/renderer.ts"
+    },
+    {
+      "name": "before/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "name": "before/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/architecture-detail.ts"
+    },
+    {
+      "name": "before/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/architecture-layout.ts"
+    },
+    {
+      "name": "before/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/chunk-residency.ts"
+    },
+    {
+      "name": "before/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "name": "before/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/market-goods.ts"
+    },
+    {
+      "name": "before/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/rendering/terrain.ts"
+    },
+    {
+      "name": "before/src/simulation.ts",
+      "bytes": 204660,
+      "sha256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation.ts"
+    },
+    {
+      "name": "before/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/banking.ts"
+    },
+    {
+      "name": "before/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/clinical.ts"
+    },
+    {
+      "name": "before/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/culture.ts"
+    },
+    {
+      "name": "before/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/extensions.ts"
+    },
+    {
+      "name": "before/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/family.ts"
+    },
+    {
+      "name": "before/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/home-rest.ts"
+    },
+    {
+      "name": "before/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/journeys.ts"
+    },
+    {
+      "name": "before/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/player-labor.ts"
+    },
+    {
+      "name": "before/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/simulation/trade.ts"
+    },
+    {
+      "name": "before/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/site-fixtures.ts"
+    },
+    {
+      "name": "before/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/style.css"
+    },
+    {
+      "name": "before/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/transport-geometry.ts"
+    },
+    {
+      "name": "before/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/types.ts"
+    },
+    {
+      "name": "before/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/ui.ts"
+    },
+    {
+      "name": "before/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/src/world.ts"
+    },
+    {
+      "name": "before/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/access.test.ts"
+    },
+    {
+      "name": "before/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/architecture-bodies.test.ts"
+    },
+    {
+      "name": "before/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "name": "before/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/architecture-detail.test.ts"
+    },
+    {
+      "name": "before/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "name": "before/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/aviation.test.ts"
+    },
+    {
+      "name": "before/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/banking.test.ts"
+    },
+    {
+      "name": "before/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/chunk-residency.test.ts"
+    },
+    {
+      "name": "before/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/citizen-appearance.test.ts"
+    },
+    {
+      "name": "before/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/clinical.test.ts"
+    },
+    {
+      "name": "before/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/controller-v4.test.ts"
+    },
+    {
+      "name": "before/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/controller.test.ts"
+    },
+    {
+      "name": "before/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/culture.test.ts"
+    },
+    {
+      "name": "before/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/economy.test.ts"
+    },
+    {
+      "name": "before/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/extensions.test.ts"
+    },
+    {
+      "name": "before/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/family.test.ts"
+    },
+    {
+      "name": "before/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "name": "before/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/npc-rest-offer-native.json"
+    },
+    {
+      "name": "before/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "name": "before/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "name": "before/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/home-rest.test.ts"
+    },
+    {
+      "name": "before/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/integration.test.ts"
+    },
+    {
+      "name": "before/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/journey.test.ts"
+    },
+    {
+      "name": "before/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/npc-clock.test.ts"
+    },
+    {
+      "name": "before/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/npc-home-rest-voxels.test.ts"
+    },
+    {
+      "name": "before/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "sha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/npc-public-rest.test.ts"
+    },
+    {
+      "name": "before/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/persistence.test.ts"
+    },
+    {
+      "name": "before/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/player-labor.test.ts"
+    },
+    {
+      "name": "before/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/rendering.test.ts"
+    },
+    {
+      "name": "before/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/route-encoding.test.ts"
+    },
+    {
+      "name": "before/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/simulation.test.ts"
+    },
+    {
+      "name": "before/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/site-fixtures.test.ts"
+    },
+    {
+      "name": "before/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/trade.test.ts"
+    },
+    {
+      "name": "before/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/v4-extensions.test.ts"
+    },
+    {
+      "name": "before/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/v4-services.test.ts"
+    },
+    {
+      "name": "before/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/v4-simulation.test.ts"
+    },
+    {
+      "name": "before/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/world-layout.test.ts"
+    },
+    {
+      "name": "before/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/world-v4.test.ts"
+    },
+    {
+      "name": "before/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tests/world.test.ts"
+    },
+    {
+      "name": "before/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/tsconfig.json"
+    },
+    {
+      "name": "before/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/vite.config.ts"
+    },
+    {
+      "name": "before/\u5f00\u53d1\u5907\u5fd8\u5f55.md",
+      "bytes": 173654,
+      "sha256": "0c56306c139f9be6a226f09d8d62c8918fd8af969635fdd6c67b8b88afcfb8dc",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/\u5f00\u53d1\u5907\u5fd8\u5f55.md"
+    },
+    {
+      "name": "before/\u63d0\u793a\u8bcd.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/before/\u63d0\u793a\u8bcd.md"
+    },
+    {
+      "name": "candidate.patch",
+      "bytes": 16576,
+      "sha256": "b6b28a748e3c3bc4b0d5f8623fb018a7ebd1c70db5040698bf8a79152936197a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate.patch"
+    },
+    {
+      "name": "candidate/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/.gitattributes"
+    },
+    {
+      "name": "candidate/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/.gitignore"
+    },
+    {
+      "name": "candidate/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/AGENTS.md"
+    },
+    {
+      "name": "candidate/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/index.html"
+    },
+    {
+      "name": "candidate/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/package-lock.json"
+    },
+    {
+      "name": "candidate/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/package.json"
+    },
+    {
+      "name": "candidate/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/public/favicon.svg"
+    },
+    {
+      "name": "candidate/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/benchmark.ts"
+    },
+    {
+      "name": "candidate/scripts/browser-test.mjs",
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/browser-test.mjs"
+    },
+    {
+      "name": "candidate/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/economy-audit.ts"
+    },
+    {
+      "name": "candidate/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/layout-browser-test.mjs"
+    },
+    {
+      "name": "candidate/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/player-journey.mjs"
+    },
+    {
+      "name": "candidate/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/space-browser-test.mjs"
+    },
+    {
+      "name": "candidate/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/ui-test.mjs"
+    },
+    {
+      "name": "candidate/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/scripts/visual-review.mjs"
+    },
+    {
+      "name": "candidate/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/access.ts"
+    },
+    {
+      "name": "candidate/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/architecture-floor-plan.ts"
+    },
+    {
+      "name": "candidate/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/aviation-renderer.ts"
+    },
+    {
+      "name": "candidate/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/aviation.ts"
+    },
+    {
+      "name": "candidate/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/controller.ts"
+    },
+    {
+      "name": "candidate/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/journey.ts"
+    },
+    {
+      "name": "candidate/src/main.ts",
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/main.ts"
+    },
+    {
+      "name": "candidate/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/persistence.ts"
+    },
+    {
+      "name": "candidate/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/persistence/partition.ts"
+    },
+    {
+      "name": "candidate/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/persistence/route-encoding.ts"
+    },
+    {
+      "name": "candidate/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/persistence/session.ts"
+    },
+    {
+      "name": "candidate/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/persistence/world-layout.ts"
+    },
+    {
+      "name": "candidate/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/renderer.ts"
+    },
+    {
+      "name": "candidate/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "name": "candidate/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/architecture-detail.ts"
+    },
+    {
+      "name": "candidate/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/architecture-layout.ts"
+    },
+    {
+      "name": "candidate/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/chunk-residency.ts"
+    },
+    {
+      "name": "candidate/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "name": "candidate/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/market-goods.ts"
+    },
+    {
+      "name": "candidate/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/rendering/terrain.ts"
+    },
+    {
+      "name": "candidate/src/simulation.ts",
+      "bytes": 204660,
+      "sha256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation.ts"
+    },
+    {
+      "name": "candidate/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/banking.ts"
+    },
+    {
+      "name": "candidate/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/clinical.ts"
+    },
+    {
+      "name": "candidate/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/culture.ts"
+    },
+    {
+      "name": "candidate/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/extensions.ts"
+    },
+    {
+      "name": "candidate/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/family.ts"
+    },
+    {
+      "name": "candidate/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/home-rest.ts"
+    },
+    {
+      "name": "candidate/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/journeys.ts"
+    },
+    {
+      "name": "candidate/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/player-labor.ts"
+    },
+    {
+      "name": "candidate/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/simulation/trade.ts"
+    },
+    {
+      "name": "candidate/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/site-fixtures.ts"
+    },
+    {
+      "name": "candidate/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/style.css"
+    },
+    {
+      "name": "candidate/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/transport-geometry.ts"
+    },
+    {
+      "name": "candidate/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/types.ts"
+    },
+    {
+      "name": "candidate/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/ui.ts"
+    },
+    {
+      "name": "candidate/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/src/world.ts"
+    },
+    {
+      "name": "candidate/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/access.test.ts"
+    },
+    {
+      "name": "candidate/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/architecture-bodies.test.ts"
+    },
+    {
+      "name": "candidate/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "name": "candidate/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/architecture-detail.test.ts"
+    },
+    {
+      "name": "candidate/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "name": "candidate/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/aviation.test.ts"
+    },
+    {
+      "name": "candidate/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/banking.test.ts"
+    },
+    {
+      "name": "candidate/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/chunk-residency.test.ts"
+    },
+    {
+      "name": "candidate/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/citizen-appearance.test.ts"
+    },
+    {
+      "name": "candidate/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/clinical.test.ts"
+    },
+    {
+      "name": "candidate/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/controller-v4.test.ts"
+    },
+    {
+      "name": "candidate/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/controller.test.ts"
+    },
+    {
+      "name": "candidate/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/culture.test.ts"
+    },
+    {
+      "name": "candidate/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/economy.test.ts"
+    },
+    {
+      "name": "candidate/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/extensions.test.ts"
+    },
+    {
+      "name": "candidate/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/family.test.ts"
+    },
+    {
+      "name": "candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "name": "candidate/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/npc-rest-offer-native.json"
+    },
+    {
+      "name": "candidate/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "name": "candidate/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "name": "candidate/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/floor-plan-derived-cache.test.ts"
+    },
+    {
+      "name": "candidate/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/home-rest.test.ts"
+    },
+    {
+      "name": "candidate/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/integration.test.ts"
+    },
+    {
+      "name": "candidate/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/journey.test.ts"
+    },
+    {
+      "name": "candidate/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/npc-clock.test.ts"
+    },
+    {
+      "name": "candidate/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/npc-home-rest-voxels.test.ts"
+    },
+    {
+      "name": "candidate/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "sha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/npc-public-rest.test.ts"
+    },
+    {
+      "name": "candidate/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/persistence.test.ts"
+    },
+    {
+      "name": "candidate/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/player-labor.test.ts"
+    },
+    {
+      "name": "candidate/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/rendering.test.ts"
+    },
+    {
+      "name": "candidate/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/route-encoding.test.ts"
+    },
+    {
+      "name": "candidate/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/simulation.test.ts"
+    },
+    {
+      "name": "candidate/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/site-fixtures.test.ts"
+    },
+    {
+      "name": "candidate/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/trade.test.ts"
+    },
+    {
+      "name": "candidate/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/v4-extensions.test.ts"
+    },
+    {
+      "name": "candidate/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/v4-services.test.ts"
+    },
+    {
+      "name": "candidate/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/v4-simulation.test.ts"
+    },
+    {
+      "name": "candidate/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/world-layout.test.ts"
+    },
+    {
+      "name": "candidate/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/world-v4.test.ts"
+    },
+    {
+      "name": "candidate/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tests/world.test.ts"
+    },
+    {
+      "name": "candidate/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/tsconfig.json"
+    },
+    {
+      "name": "candidate/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/vite.config.ts"
+    },
+    {
+      "name": "candidate/\u5f00\u53d1\u5907\u5fd8\u5f55.md",
+      "bytes": 173654,
+      "sha256": "0c56306c139f9be6a226f09d8d62c8918fd8af969635fdd6c67b8b88afcfb8dc",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/\u5f00\u53d1\u5907\u5fd8\u5f55.md"
+    },
+    {
+      "name": "candidate/\u63d0\u793a\u8bcd.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/candidate/\u63d0\u793a\u8bcd.md"
+    },
+    {
+      "name": "evidence/actual07-final-save.json",
+      "bytes": 2995754,
+      "sha256": "7ea0ed5934179195de715522a33a35d5cf4bbb9e5585e384a71cd168da522018",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/actual07-final-save.json"
+    },
+    {
+      "name": "evidence/actual07-initial-save.json",
+      "bytes": 2940385,
+      "sha256": "03e7155cdaddce72a3e09fdb8dda49017f6b4d03771976d7356781fbf38f79f6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/actual07-initial-save.json"
+    },
+    {
+      "name": "evidence/attempt01/candidate-manifest-pre-run.json",
+      "bytes": 11026,
+      "sha256": "f7584b778cc4f1ebac6da55be1f6371b22b556d58ad2dfc2bc77c0080f441998",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/attempt01/candidate-manifest-pre-run.json"
+    },
+    {
+      "name": "evidence/attempt01/candidate.patch",
+      "bytes": 16541,
+      "sha256": "dd3fc6dfe24c3f1f71fa743a40c4f34ccd1505a3a5a886aacd69fd410c7926ca",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/attempt01/candidate.patch"
+    },
+    {
+      "name": "evidence/attempt01/floor-plan-derived-cache.test.ts",
+      "bytes": 7126,
+      "sha256": "89f035b7990cec1bc57f3eb3cde441eec8daba4b08f90ff29712627e184c8263",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/attempt01/floor-plan-derived-cache.test.ts"
+    },
+    {
+      "name": "evidence/attempt01/new-mutable-tests.log",
+      "bytes": 2878,
+      "sha256": "287c5415f653327b368198dbc0c8d3d43a769a5791b3873324dc3de2ca083dff",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/attempt01/new-mutable-tests.log"
+    },
+    {
+      "name": "evidence/attempt01/pure-run-status.json",
+      "bytes": 45534,
+      "sha256": "9157f7e69ec19931b8570c2fbdd3124db67638d9b358f6cb8cc6313b183466b9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/attempt01/pure-run-status.json"
+    },
+    {
+      "name": "evidence/baseline-manifest.json",
+      "bytes": 11070,
+      "sha256": "f51b8648bab35c7f0f7d6328f3b76461ef9be981fe560ed0b49f46eaa7586ffa",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/baseline-manifest.json"
+    },
+    {
+      "name": "evidence/candidate-manifest-first-static-draft.json",
+      "bytes": 11126,
+      "sha256": "108639f98768bd1daf27878cef9c9cfeeea263c7e258fd30837e352f661d3c35",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/candidate-manifest-first-static-draft.json"
+    },
+    {
+      "name": "evidence/candidate-manifest-pre-run.json",
+      "bytes": 11026,
+      "sha256": "5ea00a2c050d86e02ae7f6a98f25a7b17d41673f6c9984f355640ee872bcfe49",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/candidate-manifest-pre-run.json"
+    },
+    {
+      "name": "evidence/candidate-manifest.json",
+      "bytes": 11026,
+      "sha256": "5ea00a2c050d86e02ae7f6a98f25a7b17d41673f6c9984f355640ee872bcfe49",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/candidate-manifest.json"
+    },
+    {
+      "name": "evidence/candidate-plan.md",
+      "bytes": 3926,
+      "sha256": "523f4cd0d5dce4cfa0fa869ff19df6f965ad9e8ad34d4dc6b2f006d34b5438ef",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/candidate-plan.md"
+    },
+    {
+      "name": "evidence/current-v4-final-save.json",
+      "bytes": 2275665,
+      "sha256": "211aba28435b4ed59b46552aae39a5fd1d7a087ab21b3e82a1fad70c62666b64",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/current-v4-final-save.json"
+    },
+    {
+      "name": "evidence/current-v4-initial-save.json",
+      "bytes": 695126,
+      "sha256": "16340541ea16aa46b4e9d75b5b2c5bfd9d0fd84062b5ed85dea2e6f08a48db87",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/current-v4-initial-save.json"
+    },
+    {
+      "name": "evidence/mutable-review.md",
+      "bytes": 17905,
+      "sha256": "20ca34da693a2b0d4eeb06c3c91ec5036f9ab13dae250c6edddab037602c3c70",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/mutable-review.md"
+    },
+    {
+      "name": "evidence/native-r5-final-save.json",
+      "bytes": 1802932,
+      "sha256": "7b0a491026f3a83e52e0e9cf1f4ed98bd63e76d1ff4f55cc3854af0056460871",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/native-r5-final-save.json"
+    },
+    {
+      "name": "evidence/native-r5-initial-save.json",
+      "bytes": 1798521,
+      "sha256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/native-r5-initial-save.json"
+    },
+    {
+      "name": "evidence/new-mutable-tests.log",
+      "bytes": 673,
+      "sha256": "a45ead1b4bf447ef4f22f999c9c7c0f1a5f175a83e88843301563aa8c47b8a1e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/new-mutable-tests.log"
+    },
+    {
+      "name": "evidence/original-related-tests.log",
+      "bytes": 4476,
+      "sha256": "e5ebe0af572895c3f8902af238c8c42ae39aba1ab1e720a953bb28b82a796bbb",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/original-related-tests.log"
+    },
+    {
+      "name": "evidence/patch-reviewed-v1.patch",
+      "bytes": 15646,
+      "sha256": "5d3cb94bde644803c6e861809baa53ac3070403925d41b93acb75c3f876c4e79",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/patch-reviewed-v1.patch"
+    },
+    {
+      "name": "evidence/provider-static-reviewed-95eb4b.ts",
+      "bytes": 44810,
+      "sha256": "95eb4b0418807c9089f5bc66c755f7ad5c4d5b3ab2bb80a1d23cbb8c8804a951",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/provider-static-reviewed-95eb4b.ts"
+    },
+    {
+      "name": "evidence/pure-run-status.json",
+      "bytes": 46541,
+      "sha256": "2da08853ed0f3471eb6ded5f39f6911cd5a98c6a390589073ddced18eb159623",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/pure-run-status.json"
+    },
+    {
+      "name": "evidence/query-differential-result.json",
+      "bytes": 6387,
+      "sha256": "aec874c93e5d510139614de73ac915eb8e556feec7652e1494528fc4f186c9f6",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/query-differential-result.json"
+    },
+    {
+      "name": "evidence/query-differential.log",
+      "bytes": 70,
+      "sha256": "273200da34b21b7203c2c6f13256f06cca7e42fcde1433118336fd02c32dac3d",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/query-differential.log"
+    },
+    {
+      "name": "evidence/reconstructed-source-provenance.json",
+      "bytes": 346,
+      "sha256": "d44fd9c990b35e7a5ea47e9467e1cacbc15c40ffc226c3582e77d5b788c369d7",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/reconstructed-source-provenance.json"
+    },
+    {
+      "name": "evidence/runner-static-tsc-corrected.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/runner-static-tsc-corrected.log"
+    },
+    {
+      "name": "evidence/runner-static-tsc-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/runner-static-tsc-final.log"
+    },
+    {
+      "name": "evidence/runner-static-tsc.log",
+      "bytes": 176,
+      "sha256": "3d8fa56275bd073dd229761612edd0ea945388d82e500f09fd5e475c2cb73a83",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/runner-static-tsc.log"
+    },
+    {
+      "name": "evidence/save-exact-actual07-static.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact-actual07-static.log"
+    },
+    {
+      "name": "evidence/save-exact-before-actual07.mts",
+      "bytes": 4807,
+      "sha256": "1372fd35aac3dc50a6dc66b476ebd57c0d092bdd6ff0fa268c63b77aacb534e3",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact-before-actual07.mts"
+    },
+    {
+      "name": "evidence/save-exact-initial-static-failed-reconstructed.mts",
+      "bytes": 4686,
+      "sha256": "e6b1cab4f12b21a6d6c24972b5677bad1549d43cf15621eb99cb8cad93f53624",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact-initial-static-failed-reconstructed.mts"
+    },
+    {
+      "name": "evidence/save-exact-result.json",
+      "bytes": 58090,
+      "sha256": "ded893ad8aaf0e2fbcf10682ff09a464d31f2b8aafc0d1b3886ff11db61c895e",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact-result.json"
+    },
+    {
+      "name": "evidence/save-exact-run-status.json",
+      "bytes": 47162,
+      "sha256": "2660a099b95cddc61c92d5b73d3810ceb20bc88f11df465e0130808bb1a68aaa",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact-run-status.json"
+    },
+    {
+      "name": "evidence/save-exact.log",
+      "bytes": 204,
+      "sha256": "5d9c1b2b768f608f2a1aab4f8e384ab87e952207f6741290ebd7059e50f82970",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/save-exact.log"
+    },
+    {
+      "name": "evidence/startup-perf-abba-1-before.json",
+      "bytes": 3438,
+      "sha256": "42be076bc9b215bc9b375cf7f7e433f063d4a0fcab12d9c197f9e532d3f51a53",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-1-before.json"
+    },
+    {
+      "name": "evidence/startup-perf-abba-1-before.log",
+      "bytes": 188,
+      "sha256": "e7d2695e2246ddf24a89d039ac3039d142ecb74b300f7b813d8a3a054c259a28",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-1-before.log"
+    },
+    {
+      "name": "evidence/startup-perf-abba-2-candidate.json",
+      "bytes": 3436,
+      "sha256": "d5ad7e9866a981f34ef59d99710f245824f9d4a1fe613f7f6ef1af5ec08dbe6b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-2-candidate.json"
+    },
+    {
+      "name": "evidence/startup-perf-abba-2-candidate.log",
+      "bytes": 194,
+      "sha256": "67ab70b26813736d915d910af23688462517fef2c712a923f152073685e79692",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-2-candidate.log"
+    },
+    {
+      "name": "evidence/startup-perf-abba-3-candidate.json",
+      "bytes": 3435,
+      "sha256": "82d26d973674ffd07739d16cbe6ffcfeb5b65ddce13c87db7e897c957866f194",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-3-candidate.json"
+    },
+    {
+      "name": "evidence/startup-perf-abba-3-candidate.log",
+      "bytes": 195,
+      "sha256": "5836ae8e7d4c032d81843e38deb793024659e3183a0f5d99579f122a2de2d3d2",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-3-candidate.log"
+    },
+    {
+      "name": "evidence/startup-perf-abba-4-before.json",
+      "bytes": 3433,
+      "sha256": "665dcccc36360146100f599c0509aa1232695551707b26fc715c744067c5f94b",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-4-before.json"
+    },
+    {
+      "name": "evidence/startup-perf-abba-4-before.log",
+      "bytes": 189,
+      "sha256": "1685c21110de116455be559344ae4d7d072384c40d8fe220e5848d094811aa0a",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-4-before.log"
+    },
+    {
+      "name": "evidence/startup-perf-abba-status.json",
+      "bytes": 64853,
+      "sha256": "d7807367ff3ec43ba2a082ec35394bb75741aef55b7caaa1cddf087416607de9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-abba-status.json"
+    },
+    {
+      "name": "evidence/startup-perf-static.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-static.log"
+    },
+    {
+      "name": "evidence/startup-perf-summary.json",
+      "bytes": 11358,
+      "sha256": "b23a713f599a1faedc86b783c901ccbbe4605f8dbf0f2fd43bf5fe1144f6ed66",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-perf-summary.json"
+    },
+    {
+      "name": "evidence/startup-performance-contract.md",
+      "bytes": 1942,
+      "sha256": "ad7507954b52eb7bc582426ee6da112f2731e097b352d73233764634376b2770",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/startup-performance-contract.md"
+    },
+    {
+      "name": "evidence/tsc-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/tsc-final.log"
+    },
+    {
+      "name": "evidence/tsc-fixture-corrected.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/tsc-fixture-corrected.log"
+    },
+    {
+      "name": "evidence/tsc-initial.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/tsc-initial.log"
+    },
+    {
+      "name": "evidence/tsc-pre-run.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/tsc-pre-run.log"
+    },
+    {
+      "name": "evidence/verification-as-of-pure.md",
+      "bytes": 2281,
+      "sha256": "8d8314864f8618973ae6c66f375dcfadb4c64807edb7aa2f2d967aafd81ae124",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/evidence/verification-as-of-pure.md"
+    },
+    {
+      "name": "original-inputs/actual11-actual-final-save.json.gz",
+      "bytes": 497128,
+      "sha256": "3adb528378775b48c030bb063edad166a6c6e85b81840abef5968d27088ffcb0",
+      "originalPath": "/tmp/yunshan-npc-public-rest-coherent11-actual-01/actual/actual-final-save.json.gz"
+    },
+    {
+      "name": "original-inputs/actual11-after-24-actual-save.json.gz",
+      "bytes": 498067,
+      "sha256": "9a4baffdc89754a7da68b4fa3ef6a67c7fa8a03fa467ecea54b731ac341ead47",
+      "originalPath": "/tmp/yunshan-npc-public-rest-coherent11-actual-01/actual/after-24-actual-save.json.gz"
+    },
+    {
+      "name": "query-differential.mts",
+      "bytes": 11550,
+      "sha256": "ef055bfb6db399e443584820eb2b1d061e66390ccd3a21b7da4839578abcd2ee",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/query-differential.mts"
+    },
+    {
+      "name": "run-pure.py",
+      "bytes": 2739,
+      "sha256": "6972ceaa05114e7b0a745acaebf92cc8b99dcb28f6527f31a9cc0674573459f9",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/run-pure.py"
+    },
+    {
+      "name": "run-save-exact.py",
+      "bytes": 2683,
+      "sha256": "342535f936ec44db3f5f3b67a3cd4f44f8a82dc9ea013c8f201faded9e7ad185",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/run-save-exact.py"
+    },
+    {
+      "name": "run-startup-perf.py",
+      "bytes": 3912,
+      "sha256": "231d1860d0ce1d4af0ca13044142e057e591911ea239fad5ac148303e8f607af",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/run-startup-perf.py"
+    },
+    {
+      "name": "save-exact.mts",
+      "bytes": 7112,
+      "sha256": "60e490ca3b5c3147eed26751d76d759bed9792a76811b5abc32cb35a677dd55c",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/save-exact.mts"
+    },
+    {
+      "name": "startup-perf.mts",
+      "bytes": 3658,
+      "sha256": "3ad9ff27e30547e39f6994bd1aed8e7fa018d0805c0122d3203d31390514fdda",
+      "originalPath": "/tmp/yunshan-floor-geometry-cache-candidate-01/startup-perf.mts"
+    }
+  ]
+}

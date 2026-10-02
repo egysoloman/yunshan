@@ -96,10 +96,33 @@ try {
   await page.waitForTimeout(300);
   await page.screenshot({ timeout: 120_000, path: 'artifacts/interior.png' });
   const purchase = await page.evaluate(id => {
-    const { simulation } = window.__YUNSHAN__;
+    const { world, simulation, controller, canAccessBuilding, getView } = window.__YUNSHAN__;
+    const building = world.buildings.find(b => b.id === id);
+    let controlledSalePlacement = null;
+    if (building?.floorPlanProfile === 'v4-program-bodies-02') {
+      // Controlled transaction setup only, separate from the actual door entry
+      // above. Being indoors is insufficient: v4 purchases use a real sale point.
+      // This position setup does not prove a native walk from door to counter.
+      const candidates = (building.functionPoints ?? []).filter(point => point.floor === 0 && point.purpose === 'sale'
+        && canAccessBuilding(building, point.floor)
+        && simulation.isAtBuildingFunctionPoint(building, point.position, 'sale'));
+      candidates.sort((a, b) => Number(b.id.includes(':sale-center:')) - Number(a.id.includes(':sale-center:')) || a.id.localeCompare(b.id));
+      const point = candidates[0];
+      if (!point) throw Error('The same actual market has no accessible ground-floor sale point');
+      const beforePosition = { ...simulation.state.player.position };
+      simulation.state.player.position = { ...point.position };
+      controller.setMode('walk', simulation.state.player.position);
+      const actual = { ...controller.position }, range = Math.hypot(actual.x - point.position.x, actual.y - point.position.y, actual.z - point.position.z);
+      if (controller.floor !== point.floor || controller.inside?.id !== id || getView().nearbyBuilding?.id !== id
+        || range > 1e-6 || !simulation.isAtBuildingFunctionPoint(building, simulation.state.player.position, 'sale')) {
+        throw Error('Controlled sale placement did not satisfy the unchanged production floor/body/permission/range rules');
+      }
+      controlledSalePlacement = { scope: 'Controlled actual v4 sale-point setup; not ordinary W traversal evidence',
+        beforePosition, point, actual, floor: controller.floor, insideId: controller.inside.id, range };
+    }
     const before = simulation.state.player.money;
     const result = simulation.command({ type: 'purchase', targetId: id, value: 1 });
-    return { ...result, before, after: simulation.state.player.money };
+    return { ...result, before, after: simulation.state.player.money, controlledSalePlacement };
   }, entered.id);
   assert(purchase.ok && purchase.after < purchase.before, JSON.stringify(purchase));
   check('enter actual building and transact against real stock and balance', purchase);

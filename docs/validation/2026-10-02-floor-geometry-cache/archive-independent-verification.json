@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "archiveSha256": "492c206a77247b4da9b603cb4a52a4e9f6734878e1642909fd732a90ba4e15b8",
+  "memberCount": 274,
+  "allMembersIncludingScanSpecificationAndManifestScanned": true,
+  "gzipPayloadsDecompressedForScan": true,
+  "allRecordHashesAndDirectOriginalBytesEqual": true,
+  "crcAllPass": true,
+  "sensitivePatternCounts": {
+    "private-key": 0,
+    "openai-secret": 0,
+    "aws-access-key": 0,
+    "bearer-secret": 0,
+    "github-token": 0,
+    "signed-aws-url": 0,
+    "signed-provider-url": 0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "actualAtUTC": "2026-10-02T17:16:54.805Z",
+  "stage": "actual native W approach and native E doorway",
+  "exitCode": 1,
+  "resultsCount": 0,
+  "errors": [
+    "Harness AssertionError [ERR_ASSERTION]: Actual body did not reach waypoint: {\"label\":\"exterior-approach\",\"target\":{\"x\":-390.8,\"y\":76.46415094339623,\"z\":334.6},\"actual\":{\"x\":-390.8,\"y\":76.6,\"z\":331.7999999999993}}"
+  ],
+  "setupCount": 1,
+  "pulses": 100,
+  "nonzeroPulses": 17,
+  "horizontalDeltas": [
+    4.8
+  ],
+  "positions": [
+    [
+      76.2377358490566,
+      336.6,
+      ""
+    ],
+    [
+      76.6,
+      331.7999999999993,
+      "market-b24"
+    ]
+  ],
+  "commandsCount": 0,
+  "sourceStable": true,
+  "sharedExecutableStable": true,
+  "entryStable": true,
+  "mapsStable": true,
+  "scope": "Read-only analysis of raw native12 movement. Main applies current key state to capped whole 1s slow frame; actual accepted keydown/up timestamps were not captured, so no claimed per-event duration trace. E/rent/rest/UI save/load/IDB not executed. Original failure unchanged."
+}

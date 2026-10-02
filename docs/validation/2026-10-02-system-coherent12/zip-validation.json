@@ -1,0 +1,30 @@
+{
+  "atUTC": "2026-10-02T17:25:10.912500+00:00",
+  "zip": "/tmp/yunshan-coherent12-compiled-validation-ready-01/delivery/yunshan-coherent12-compiled-browser-and-native-home-originals-20261002.zip",
+  "zipBytes": 10975499,
+  "zipSHA256": "fc8fdf67f6c215b01e6d5926b20fa199f78c44d81a7f3a40ae9f1b137827b170",
+  "members": 218,
+  "indexedPayloadCount": 217,
+  "uncompressedBytes": 20595897,
+  "fullCRC": "PASS",
+  "everyMemberByteEqual": "PASS",
+  "originalSourceFilesStartEndEqual": "PASS",
+  "frozenSource106Stable": "PASS",
+  "distFiles": 7,
+  "sourceManifestSHA256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+  "sensitivePatternHitCounts": {
+    "awsAccessKey": 0,
+    "privateKey": 0,
+    "openaiKey": 0,
+    "bearerCredential": 0,
+    "signedURL": 0
+  },
+  "gzipExpandedMembers": 12,
+  "createRoute": "one new local ZIP under50MiB; current Library skill direct-create fast path; once only",
+  "scope": {
+    "rootBuild": 0,
+    "rootRelatedTests": "28/28 exit0",
+    "formalBrowser": "11/11 errors[] exit0",
+    "nativeHome": "exit1 first W waypoint; no E/rent/rest/nativeIDB"
+  }
+}

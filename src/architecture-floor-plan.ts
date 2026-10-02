@@ -272,28 +272,79 @@ export function canStandInFloorPlan(p:FloorPlan,x:number,z:number,radius=.35):bo
   if(radius>0)for(const loop of supportCache.get(p)!.boundaries)for(let i=0;i<loop.length;i++) if(segmentDistanceSquared(x,z,loop[i],loop[(i+1)%loop.length])<radius*radius-eps)return false;
   return ![...wallPanels(p),...p.fixtures].some(w=>w.bottom<1.72&&w.top>.05&&(radius===0?contains(w.rect,x,z):circleRectDistanceSquared(x,z,w.rect)<radius*radius-eps));
 }
-function nearPlans(b:Building,p:FloorPlan):FloorPlan[] {return getBuildingBody(b)!.floorPlans.filter(f=>Math.abs(f.floor-p.floor)<=1);}
-function stairSurfaces(b:Building,p:FloorPlan):StairSurface[]{return nearPlans(b,p).flatMap(f=>[...f.stairTreads,...f.stairLandings]);}
-function localSolids(b:Building,p:FloorPlan):{rect:Rect;bottom:number;top:number;steppable:boolean}[] {
+// These lists are private derived views. FloorPlan and the existing wall/slab
+// cache results stay public and mutable, so membership is checked on each read.
+const nearbyCache=new WeakMap<FloorPlan,FloorPlan[]>();
+function nearPlans(b:Building,p:FloorPlan):FloorPlan[] {
+  const plans=getBuildingBody(b)!.floorPlans,cached=nearbyCache.get(p);let index=0,unchanged=!!cached;
+  for(let i=0;i<plans.length;i++)if(i in plans){const f=plans[i];if(Math.abs(f.floor-p.floor)<=1){if(cached?.[index]!==f)unchanged=false;index++;}}
+  if(unchanged&&index===cached!.length)return cached!;
+  const result=plans.filter(f=>Math.abs(f.floor-p.floor)<=1);nearbyCache.set(p,result);return result;
+}
+const stairSurfaceCache=new WeakMap<FloorPlan,StairSurface[]>();
+function stairSurfaces(b:Building,p:FloorPlan,plans=nearPlans(b,p)):StairSurface[]{
+  const cached=stairSurfaceCache.get(p);let index=0,unchanged=!!cached;
+  for(const f of plans){for(const s of f.stairTreads){if(cached?.[index]!==s)unchanged=false;index++;}for(const s of f.stairLandings){if(cached?.[index]!==s)unchanged=false;index++;}}
+  if(unchanged&&index===cached!.length)return cached!;
+  const result:StairSurface[]=[];for(const f of plans)result.push(...f.stairTreads,...f.stairLandings);stairSurfaceCache.set(p,result);return result;
+}
+interface LocalSolid {rect:Rect;bottom:number;top:number;steppable:boolean}
+const localSolidCache=new WeakMap<FloorPlan,LocalSolid[]>();
+function uncachedLocalSolids(b:Building,p:FloorPlan):LocalSolid[] {
   const result=nearPlans(b,p).flatMap(f=>[...wallPanels(f),...f.fixtures].map(s=>({rect:s.rect,bottom:f.y+s.bottom,top:f.y+s.top,steppable:false})));
   result.push(...stairSurfaces(b,p).map(s=>({...s,steppable:true})));
-  // Upper floors are real ceiling slabs with the same actual hole subtraction.
   for(const f of nearPlans(b,p))if(f.floor>p.floor)result.push(...getFloorPlanSlabRegions(f).map(rect=>({rect,bottom:f.y-.2,top:f.y,steppable:false})));
   return result;
 }
+function localSolids(b:Building,p:FloorPlan,plans=nearPlans(b,p),surfaces=stairSurfaces(b,p,plans)):LocalSolid[] {
+  const cached=localSolidCache.get(p);let index=0,unchanged=!!cached;
+  const check=(rect:Rect,bottom:number,top:number,steppable:boolean)=>{const s=cached?.[index++];if(!s||s.rect!==rect||s.bottom!==bottom||s.top!==top||s.steppable!==steppable)unchanged=false;};
+  for(const f of plans){for(const s of wallPanels(f))check(s.rect,f.y+s.bottom,f.y+s.top,false);for(const s of f.fixtures)check(s.rect,f.y+s.bottom,f.y+s.top,false);}
+  for(const s of surfaces){if(!s)return uncachedLocalSolids(b,p);check(s.rect,s.bottom,s.top,true);}
+  // Read the existing slab cache rather than deriving a new slab lifetime.
+  for(const f of plans)if(f.floor>p.floor){const regions=getFloorPlanSlabRegions(f);for(let i=0;i<regions.length;i++){if(!(i in regions))return uncachedLocalSolids(b,p);check(regions[i],f.y-.2,f.y,false);}}
+  if(unchanged&&index===cached!.length)return cached!;
+  const result:LocalSolid[]=[];
+  for(const f of plans){for(const s of wallPanels(f))result.push({rect:s.rect,bottom:f.y+s.bottom,top:f.y+s.top,steppable:false});for(const s of f.fixtures)result.push({rect:s.rect,bottom:f.y+s.bottom,top:f.y+s.top,steppable:false});}
+  for(const s of surfaces)result.push({rect:s.rect,bottom:s.bottom,top:s.top,steppable:true});
+  for(const f of plans)if(f.floor>p.floor)for(const r of getFloorPlanSlabRegions(f))result.push({rect:r,bottom:f.y-.2,top:f.y,steppable:false});
+  // A rect is shared, so nested coordinate edits remain live. Replacing it or
+  // changing a copied height/member is detected by the checks above.
+  localSolidCache.set(p,result);return result;
+}
+interface RectSnapshot {rect:Rect;x0:number;x1:number;z0:number;z1:number}
+interface SupportFootprint {regions:Rect[];boundaries:[number,number][][]|null}
+interface SupportFootprints {y:number;base:RectSnapshot[];stairs:(RectSnapshot&{top:number})[];byTop:Map<number,SupportFootprint>}
+const supportFootprintCache=new WeakMap<FloorPlan,SupportFootprints>();
+const snapshotRect=(r:Rect):RectSnapshot=>({rect:r,x0:r.x0,x1:r.x1,z0:r.z0,z1:r.z1});
+const sameRect=(saved:RectSnapshot,r:Rect)=>saved.rect===r&&saved.x0===r.x0&&saved.x1===r.x1&&saved.z0===r.z0&&saved.z1===r.z1;
+function supportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurface[]):SupportFootprints {
+  const cached=supportFootprintCache.get(p);
+  let unchanged=!!cached&&cached.y===p.y&&cached.base.length===base.length&&cached.stairs.length===surfaces.length;
+  if(unchanged)for(let i=0;i<base.length;i++)if((i in base)!==(i in cached!.base)||(i in base&&!sameRect(cached!.base[i],base[i]))){unchanged=false;break;}
+  if(unchanged)for(let i=0;i<surfaces.length;i++)if(cached!.stairs[i].top!==surfaces[i].top||!sameRect(cached!.stairs[i],surfaces[i].rect)){unchanged=false;break;}
+  if(unchanged)return cached!;
+  const stairs=surfaces.map(s=>({top:s.top,...snapshotRect(s.rect)}));
+  const result:SupportFootprints={y:p.y,base:base.map(snapshotRect),stairs,byTop:new Map()};
+  // Clear all height entries when their mutable geometry changes. This also
+  // bounds the map to the current floor height and current stair heights.
+  supportFootprintCache.set(p,result);return result;
+}
 export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radius=.35):FloorSupport|null {
-  const p=getBuildingFloorPlan(b,floor);if(!p)return null;const local=buildingLocalPosition(b,worldPosition),surfaces=stairSurfaces(b,p);
+  const p=getBuildingFloorPlan(b,floor);if(!p)return null;const local=buildingLocalPosition(b,worldPosition),plans=nearPlans(b,p),surfaces=stairSurfaces(b,p,plans);
   const choices:{top:number;kind:FloorSupport['kind'];floor:number;link?:FloorSupport['link']}[]=[];
   const base=getFloorPlanSlabRegions(p);
   // A centre surface must still be reachable from the current feet. Its full
   // body footprint is evaluated at that surface's landing height, so the next
   // real .2m tread can support the front of a .35m disk over an upper shaft.
   const supportedAt=new Map<number,boolean>();
+  let footprints:SupportFootprints|undefined;
   const diskSupportedAt=(top:number):boolean=>{
     const cached=supportedAt.get(top);if(cached!==undefined)return cached;
-    const nearStepRects=surfaces.filter(s=>s.top<=top+.22+eps&&s.top>=top-.42-eps).map(s=>s.rect);
-    const footprint=[...base,...nearStepRects];
-    const supported=containsUnion(footprint,local.x,local.z)&&(radius===0||boundaryLoops(footprint).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
+    footprints??=supportFootprints(p,base,surfaces);
+    let footprint=footprints.byTop.get(top);
+    if(!footprint){const regions=[...base];for(const s of surfaces)if(s.top<=top+.22+eps&&s.top>=top-.42-eps)regions.push(s.rect);footprint={regions,boundaries:null};footprints.byTop.set(top,footprint);}
+    const supported=containsUnion(footprint.regions,local.x,local.z)&&(radius===0||(footprint.boundaries??=boundaryLoops(footprint.regions)).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
     supportedAt.set(top,supported);return supported;
   };
   if(!surfaces.some(s=>contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps)&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&diskSupportedAt(p.y)) {
@@ -308,11 +359,11 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   // A restored actor on a real fixture top is supported; it is not lifted there.
   for(const f of p.fixtures)if(contains(f.rect,local.x,local.z)&&Math.abs(local.y-(p.y+f.top))<.01)choices.push({top:p.y+f.top,kind:'room',floor});
   choices.sort((a,z)=>Math.abs(a.top-local.y)-Math.abs(z.top-local.y)||z.top-a.top);
-  const solids=radius>0?localSolids(b,p):[];
+  const solids=radius>0?localSolids(b,p,plans,surfaces):[];
   // Keep the existing lazy descriptor-cache priming without allocating solids.
   // FloorPlan arrays remain public and mutable; this preserves their existing
   // cache lifetime even when a radius-zero query precedes a later body query.
-  if(!(radius>0))for(const f of nearPlans(b,p)) {
+  if(!(radius>0))for(const f of plans) {
     wallPanels(f);if(f.floor>p.floor)getFloorPlanSlabRegions(f);
   }
   for(const choice of choices) {
