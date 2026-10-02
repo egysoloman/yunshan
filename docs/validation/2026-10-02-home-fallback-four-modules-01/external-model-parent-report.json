@@ -1,0 +1,30 @@
+{
+  "provenance": "Parent relayed Mac-side report; producer/root have not received or inspected the GLB.",
+  "technical": {
+    "status": "REPORTED_PASS",
+    "facts": [
+      "15 actual meshes separately saved and reassembled with reported error 0",
+      "courtyard open",
+      "main entrance opening goes through"
+    ]
+  },
+  "artAndReuse": {
+    "status": "REPORTED_FAIL",
+    "qualifiedReusableAssets": 0,
+    "facts": [
+      "wall and window merged",
+      "main gate includes long side-wall pieces",
+      "flower box missing"
+    ]
+  },
+  "libraryIds": {
+    "glb": "libfile_b738b17c940c81918b0f64379db95377",
+    "fullPackage": "libfile_a14927c4846881919d08ad38d04f3021",
+    "idsReport": "libfile_ca205334e0508191b1d209a5933dd656"
+  },
+  "feeScope": "One approved 60-credit whole-house segmentation experiment only; no new payment or regeneration performed here.",
+  "macStatus": "Paused awaiting independent component reference/control.",
+  "localGlbInspection": false,
+  "integration": false,
+  "newTripoCalls": 0
+}

@@ -1,0 +1,1230 @@
+{
+  "status": "STATIC_REFERENCE_MAPPING_ONLY",
+  "created_at": "2026-10-02T08:06:27.432515+00:00",
+  "pilot_id": "market-b24",
+  "namespace": "REF-A01..REF-A12 and REF-B01..REF-B16; image labels do not rename BOM IDs",
+  "reference_count": 28,
+  "bom_physical_kind_count": 52,
+  "bom_assembly_recipe_count": 16,
+  "bom_full_row_count": 77,
+  "full_bom_scope_retained": true,
+  "furniture_physical_kind_count_retained": 21,
+  "source_bom_summary": {
+    "physicalMasterKinds": 52,
+    "requiredPhysicalKinds": 50,
+    "optionalDecorativeKinds": 2,
+    "assemblyRecipeKinds": 16,
+    "materialPackages": 6,
+    "lifeInterfaceEntries": 3,
+    "fullTableRows": 77,
+    "pilotExistingRoughMasterKinds": 21,
+    "projectReusableRoughMasterKindsIncludingLegacyTrough": 22,
+    "projectGenuinelyNewGeometryMasters": 30,
+    "pilotAbsentRequirements": 31,
+    "newPhysicalRequirementsThisRevision": 5,
+    "newRecipeRequirementsThisRevision": 5,
+    "externalMeshesReady": 0,
+    "actualNewInstalls": 0,
+    "approvedExternalMounts": 0
+  },
+  "source_files": [
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/bom-full-revision03.json",
+      "bytes": 360710,
+      "sha256": "8fedd18c1d2fb126a852efcf75ee5629d280d9ba32b0f6cb91b0b8306fa0cd12",
+      "read_only": true
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/reference-interface-revision03.json",
+      "bytes": 67847,
+      "sha256": "35b9b3497723c45550180f50ba132b336fd75df8fb059e6beb9b844357ebfb2f",
+      "read_only": true
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/physical-masters-revision03.csv",
+      "bytes": 97629,
+      "sha256": "1432b1c682aae16c1c6207e519ca2ec959e57e3440bf1bcfd1e6dd0388dbcc1b",
+      "read_only": true
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/reference-access.json",
+      "bytes": 1861,
+      "sha256": "db21959e760bd40c681381010496832ca2eeabccb558d9c7642d9fe6a57a22b0",
+      "read_only": true
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/庭院建筑模块图鉴.png",
+      "bytes": 2113455,
+      "sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "read_only": true
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/立面与细部组件.png",
+      "bytes": 2167302,
+      "sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "read_only": true
+    }
+  ],
+  "references": [
+    {
+      "name": "庭院建筑模块图鉴.png",
+      "libraryID": "libfile_777077629f1881919983bd78e489cbe6",
+      "fileID": "file_00000000faac82118270e76254c8884f",
+      "version": 0,
+      "bytes": 2113455,
+      "sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "localOriginal": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/庭院建筑模块图鉴.png",
+      "rootActualPixelView": true,
+      "imageEdited": false,
+      "dimensionAuthority": "STYLE_REFERENCE_ONLY; exact dimensions come from native provider and fit audit",
+      "access": "Official Library read and prepare succeeded; native image pixels unavailable in read; authorized exact returned file-ID download succeeded; original PNG then view_image inspected",
+      "xattrApplied": true,
+      "mapping_agent_actual_pixel_view": true,
+      "mapping_agent_view_method": "tools.view_image; original detail",
+      "image_edited_by_mapping_task": false
+    },
+    {
+      "name": "立面与细部组件.png",
+      "libraryID": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "fileID": "file_00000000618c8211967ae5140942500c",
+      "version": 0,
+      "bytes": 2167302,
+      "sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "localOriginal": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/立面与细部组件.png",
+      "rootActualPixelView": true,
+      "imageEdited": false,
+      "dimensionAuthority": "STYLE_REFERENCE_ONLY; exact dimensions come from native provider and fit audit",
+      "access": "Official Library read and prepare succeeded; native image pixels unavailable in read; authorized exact returned file-ID download succeeded; original PNG then view_image inspected",
+      "xattrApplied": true,
+      "mapping_agent_actual_pixel_view": true,
+      "mapping_agent_view_method": "tools.view_image; original detail",
+      "image_edited_by_mapping_task": false
+    }
+  ],
+  "counting_contract": "28为两图可见参考条目，含复合开间/屋檐/桥廊装配；不是28物理母版、28新submesh或28 Tripo作业。物理ID、recipe、material与逻辑接口分列。未从图估算实例数/米制尺寸。",
+  "workflow_evidence": "Mapping agent actually viewed both original PNGs with view_image, then read exact formal BOM03 JSON/CSV. No new render, model generation, GPU, simulation or runtime source changes.",
+  "active_reference_scope": "这两图为用户新组件风格/拆件目标；原BOM03旧原图和已上传包保持。新图是外观证据，不是支撑/碰撞/洞口/路线/资金/生活功能权威。",
+  "authorization": "This mapping authorizes no generation, payment, export, upload or new mounted asset. Existing model trials remain separately recorded by root; this task performs no paid call.",
+  "known_gaps": [
+    {
+      "reference_ids": [
+        "REF-B03",
+        "REF-A09",
+        "REF-B16"
+      ],
+      "gap": "独立石柱/桥头端柱/支座没有精确52物理ID；不以A04墙角或A23水平梁冒认。"
+    },
+    {
+      "reference_ids": [
+        "REF-B12",
+        "REF-A08"
+      ],
+      "gap": "独立墙格栅没有精确52物理ID；A10只可关联窗棂族，真实通风孔另需共享geometry和功能。"
+    },
+    {
+      "reference_ids": [
+        "REF-A05",
+        "REF-A06",
+        "REF-A07",
+        "REF-A08"
+      ],
+      "gap": "完整开间没有现成精确R01..16配方；作为参考装配视图保留，不计新增子mesh。"
+    },
+    {
+      "reference_ids": [
+        "REF-B09",
+        "REF-A03",
+        "REF-B13",
+        "REF-B15"
+      ],
+      "gap": "壁灯/檐下灯/入口灯/地灯是候选安装变体，F20或D05原pivot不得无条件复用；批准0。"
+    },
+    {
+      "reference_ids": [
+        "REF-B01"
+      ],
+      "gap": "落地窗对本真实bottom.8窗洞存在几何不适配；首批保原洞改风格，改变洞口须新可信版本。"
+    },
+    {
+      "reference_ids": [
+        "REF-B11"
+      ],
+      "gap": "长槽植株装配不能补齐独立B01/B02盆景参考；独立盆景仍保留且缺这两图精确展示。"
+    }
+  ],
+  "actual_new_installs": 0,
+  "approved_new_mounts": 0,
+  "new_model_generation_calls": 0,
+  "new_paid_calls": 0,
+  "rows": [
+    {
+      "reference_id": "REF-A01",
+      "reference_name": "屋顶中段",
+      "reference_sheet": "A",
+      "sheet_cell": "row1-col1",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "双坡瓦面、长屋脊、青色条及两端小暖光构成一个展示装配。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A14",
+        "A17",
+        "A18",
+        "A19",
+        "D05"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M04",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A14": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A17": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A18": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A19": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "沿真实gable RoofRegion、脊线和roof edge重新生成；图片没有米制尺寸。青条读取真实能源状态；多件装配不另算新物理母版。",
+      "id_or_interface_gap": "整段组合无精确既有配方ID；屋脊端部/灯具端口与实际梁长待定义。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A02",
+      "reference_name": "山墙端段",
+      "reference_sheet": "A",
+      "sheet_cell": "row1-col2",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "隆起脊端、双坡末端、左右檐缘和青/暖发光细部。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A03",
+        "A14",
+        "A17",
+        "A18",
+        "A19",
+        "D05"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A14": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A17": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A18": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A19": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "屋面/端墙须来自同一共享RoofRegion与wall；不得复制一个封闭bbox填真实院洞。",
+      "id_or_interface_gap": "完整山墙端装配无既有精确配方；封脊造型仅A19族计划改型。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A03",
+      "reference_name": "直线檐口",
+      "reference_sheet": "A",
+      "sheet_cell": "row1-col3",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "长直瓦檐、端部方块和一列檐下暖光。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A17",
+        "A18",
+        "D03",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M04",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A17": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A18": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A17/A18/D03分别是檐封板、瓦小件、墙顶视觉梁；F20仅待定义檐下灯变体。檐口位置服从真实roof edge，装饰不承力。",
+      "id_or_interface_gap": "檐下连列灯挂接不是F20现顶灯/床边灯端口，须独立参数变体；无现成整体檐口recipe。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A04",
+      "reference_name": "飞檐转角",
+      "reference_sheet": "A",
+      "sheet_cell": "row1-col4",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "两向转角瓦檐、上翘阶差端、青条和檐下暖光。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A14",
+        "A17",
+        "A18",
+        "A19",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M04",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A14": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A17": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A18": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A19": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "转角须从真实正向roof edge参数重建，不负scale镜像或随意拉伸外模；真实屋面空洞保留。",
+      "id_or_interface_gap": "转角拼缝、飞檐占用及灯变体未设计/验fit；不是旧A04墙角母版改名。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A05",
+      "reference_name": "首层开间",
+      "reference_sheet": "A",
+      "sheet_cell": "row2-col1",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "墙柱框、玻璃门窗、铺地/小台阶、暖壁光和青条组合的整开间。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A03",
+        "A06",
+        "A07",
+        "A08",
+        "A09",
+        "A10",
+        "D03",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R13"
+      ],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A06": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A07": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A08": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A09": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "按实际wall/opening/window/slab装配；门4.8×2.8净空、窗bottom0.8与1.4高不由图更改。参考首层开间是装配视图，不是BOM A05隔断或一个新submesh。",
+      "id_or_interface_gap": "R13只关联玻璃金属立面；R01..16没有整首层开间精确配方。独立柱、壁灯/入口阶适配另列REF-B03/B09/B13。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A06",
+      "reference_name": "上层开间",
+      "reference_sheet": "A",
+      "sheet_cell": "row2-col2",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "上层玻璃立面、透明护栏、两侧槽植绿化、壁光与青条。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A03",
+        "A04",
+        "A09",
+        "A10",
+        "A13",
+        "B03",
+        "D03",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R13",
+        "R16"
+      ],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A09": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "B03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "上层真实slab/层权限/窗孔保留；A13仅护栏族候选变体，B03槽须支持面与植株独立接口。透明材质M05不新增一个玻璃护栏母版。",
+      "id_or_interface_gap": "没有整上层开间精确recipe；阳台/护栏/长槽安装与通路须可信描述批准，当前0。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A07",
+      "reference_name": "转角开间",
+      "reference_sheet": "A",
+      "sheet_cell": "row2-col3",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "两正面玻璃/石墙转角、上方横梁、壁光及角部绿化。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A03",
+        "A04",
+        "A09",
+        "A10",
+        "B03",
+        "D03",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R13",
+        "R16"
+      ],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A09": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "B03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "两wall切线和外法线分别声明；A04是墙角收口而非整开间。转角玻璃/槽不能挤占门窗或身体路径。",
+      "id_or_interface_gap": "整转角开间无精确recipe；独立石柱及角槽挂接待补规格。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A08",
+      "reference_name": "实墙开间",
+      "reference_sheet": "A",
+      "sheet_cell": "row2-col4",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "石色实墙、嵌入方格栅、顶梁和两侧暖壁灯。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A03",
+        "A04",
+        "A10",
+        "D03",
+        "D04",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "实体墙必须按共享wallPanels；A10只可作为格栅窗棂风格族候选，不能凭图切新通风孔。整实墙开间非BOM A08五金。",
+      "id_or_interface_gap": "独立墙格栅与整实墙开间没有精确物理/装配ID；见REF-B12。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A09",
+      "reference_name": "门楼框架",
+      "reference_sheet": "A",
+      "sheet_cell": "row3-col1",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "开放门楼、左右柱、横向顶梁和两侧青/暖光板。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A06",
+        "D03",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A06": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A06仅门套族候选；门楼图不决定本栋真实入口或新路线。D03顶梁只视觉，不能视作共享承力实体。",
+      "id_or_interface_gap": "两独立柱与自立门楼支撑/配方没有精确52/16 ID，A23桥梁不能直接充当立柱或门梁。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A10",
+      "reference_name": "连桥直段",
+      "reference_sheet": "A",
+      "sheet_cell": "row3-col2",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "铺面板、两侧玻璃栏、边梁和底部暖光组成直桥段。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A13",
+        "A23",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R15"
+      ],
+      "bom_material_ids": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A23": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "R15仅已有计划组合，A23只待新可信结构；板/支座/栏/landing/route/access/save必须同一authority，当前新连桥安装0。",
+      "id_or_interface_gap": "透明桥栏是A13族候选参数变体；两端支座/梁板受力和路由未批准。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A11",
+      "reference_name": "连廊转角",
+      "reference_sheet": "A",
+      "sheet_cell": "row3-col3",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "L形铺板、连续转角玻璃栏、边柱及底部发光。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A02",
+        "A13",
+        "A23",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R15"
+      ],
+      "bom_material_ids": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A23": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "L转角须真实正向端口、共享支撑及两段route/landing；REF-A11不是BOM A11踏步，也不是新子mesh计数。",
+      "id_or_interface_gap": "R15尚无已验L形recipe/柱/栏角接口；参考图不能批准新的可走拓扑。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-A12",
+      "reference_name": "台基模块",
+      "reference_sheet": "A",
+      "sheet_cell": "row3-col4",
+      "image_file": "庭院建筑模块图鉴.png",
+      "image_sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+      "image_library_id": "libfile_777077629f1881919983bd78e489cbe6",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "长矩形石色台座与上铺板；无图示真实地形或下方支撑。",
+      "mapping_kind": "REFERENCE_ASSEMBLY_VIEW",
+      "bom_physical_ids": [
+        "A01",
+        "A02",
+        "D04"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02",
+        "M03"
+      ],
+      "mapping_relations": {
+        "A01": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A01基础、A02板、D04附墙石饰分工保留；限真实占用投影，不扩大整片台地或填院孔。",
+      "id_or_interface_gap": "基础包络、地形接合和台基组合实例TBD；REF-A12不是BOM A12楼梯平台。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B01",
+      "reference_name": "落地窗",
+      "reference_sheet": "B",
+      "sheet_cell": "row1-col1",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "全高多片青玻璃窗、金属框、顶部青条和角点发光。",
+      "mapping_kind": "CONDITIONAL_FACADE_VARIANT_WITH_GEOMETRY_MISMATCH",
+      "bom_physical_ids": [
+        "A09",
+        "A10",
+        "D05"
+      ],
+      "related_bom_recipe_ids": [
+        "R13"
+      ],
+      "bom_material_ids": [
+        "M05"
+      ],
+      "mapping_relations": {
+        "A09": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "本栋真实窗洞bottom0.8m、玻璃高1.4m；图中落地窗不能直接替换或声称fit。首批只能保0.8窗台改风格；若要全高洞口须新可信geometry/profile/collision/fingerprint并复验。",
+      "id_or_interface_gap": "整落地窗不匹配本真实洞口；54洞/53玻璃旧零厚缺陷仍开放。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B02",
+      "reference_name": "玻璃门",
+      "reference_sheet": "B",
+      "sheet_cell": "row1-col2",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "双扇玻璃门、门把手、框与两侧暖光/上方青条。",
+      "mapping_kind": "CONDITIONAL_DOOR_ASSEMBLY",
+      "bom_physical_ids": [
+        "A06",
+        "A07",
+        "A08",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M05"
+      ],
+      "mapping_relations": {
+        "A06": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A07": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A08": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "复用A06/A07/A08 ID家族；玻璃门材质用M05，不借A09固定窗板冒充开合门叶。按4.8×2.8真入口、门底/铰轴与开合碰撞/存档同状态定义。",
+      "id_or_interface_gap": "没有已制作/可开合门叶或玻璃门精确recipe；双叶数和壁灯接口尚待批准。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B03",
+      "reference_name": "石柱",
+      "reference_sheet": "B",
+      "sheet_cell": "row1-col3",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "独立石色立柱、上下块与嵌暖光面。",
+      "mapping_kind": "NO_EXACT_PHYSICAL_MASTER_ID",
+      "bom_physical_ids": [],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02",
+        "M03"
+      ],
+      "mapping_relations": {},
+      "adaptation_and_authority": "只能记录外观和独立柱需求；墙角A04/装饰梁D03/水平桥梁A23都不是该柱的精确ID。若必须独立拆柱，需后续BOM扩展及真实支撑/占用/原点规格。",
+      "id_or_interface_gap": "52物理ID中无独立石柱；本任务不分配新BOM物理ID。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B04",
+      "reference_name": "横梁",
+      "reference_sheet": "B",
+      "sheet_cell": "row1-col4",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "独立长石色/暗边横梁，两端块和底部暖光。",
+      "mapping_kind": "CONDITIONAL_VISUAL_BEAM_OR_STRUCTURAL_BEAM",
+      "bom_physical_ids": [
+        "D03",
+        "A23",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "D03": "VISUAL_WALL_TOP_BEAM_FAMILY_ONLY",
+        "A23": "SKYWALK_STRUCTURAL_BEAM_FAMILY_ONLY; not generic doorway support",
+        "F20": "PENDING_UNDERSIDE_LAMP_PARAMETER_VARIANT"
+      },
+      "adaptation_and_authority": "D03仅可作墙顶视觉封边/横梁风格；A23只限待批准桥廊承力梁，不是任意门楼承力。真实承力语义与支座不能从外观推定。",
+      "id_or_interface_gap": "图示门楼/立柱横梁若承担结构，缺独立共享描述/精确ID；不能将D03升级成已承力。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B05",
+      "reference_name": "栏杆直段",
+      "reference_sheet": "B",
+      "sheet_cell": "row2-col1",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "金属柱框和一段透明青玻璃护栏。",
+      "mapping_kind": "CONDITIONAL_GUARDRAIL_VARIANT",
+      "bom_physical_ids": [
+        "A13"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M05"
+      ],
+      "mapping_relations": {
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A13护栏族＋M05材质候选；须真实barrier、上沿/安装点/玻璃占用和0.35m身体净空，不能只有视觉可穿透。",
+      "id_or_interface_gap": "旧A13定义楼梯/洞口栏，桥/阳台直栏仍需参数/端口审批，当前批准0。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B06",
+      "reference_name": "栏杆转角",
+      "reference_sheet": "B",
+      "sheet_cell": "row2-col2",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "两直护栏以正交角柱拼接，透明玻璃位于两正面。",
+      "mapping_kind": "CONDITIONAL_GUARDRAIL_CORNER_ASSEMBLY",
+      "bom_physical_ids": [
+        "A13"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M05"
+      ],
+      "mapping_relations": {
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "按同A13族两正向段加显式角连接；不能负scale镜像、不能双面共面叠片或两次计算角柱。",
+      "id_or_interface_gap": "独立角连接件是否参数派生或需要后续新ID尚待真实拆件；不另增本轮52数量。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B07",
+      "reference_name": "楼板底板",
+      "reference_sheet": "B",
+      "sheet_cell": "row2-col3",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "方形铺板、边沿暗梁、前缘青条及底部暖光。",
+      "mapping_kind": "CONDITIONAL_SLAB_ASSEMBLY",
+      "bom_physical_ids": [
+        "A02",
+        "D03",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A02 slabRegions权威支撑/孔不变；边条/灯另分A/D/F母版，图片整板不是新的单一物理ID。",
+      "id_or_interface_gap": "外悬方板/受力不得由图批准；边条与底灯安装0，精确尺寸待真实slab。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B08",
+      "reference_name": "屋脊端饰",
+      "reference_sheet": "B",
+      "sheet_cell": "row2-col4",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "高起阶差脊端、瓦檐短段和青条。",
+      "mapping_kind": "CONDITIONAL_ROOF_END_ASSEMBLY",
+      "bom_physical_ids": [
+        "A17",
+        "A18",
+        "A19",
+        "D05"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M04",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A17": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A18": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A19": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A19是封脊族，A17/A18是真檐/瓦族；依实际gable轴线/端点改型，不把REF-B08等同BOM A08五金。",
+      "id_or_interface_gap": "端饰独立分件与屋脊接缝待设计；精确母版数不能从一个图示端饰确定。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B09",
+      "reference_name": "暖光壁灯",
+      "reference_sheet": "B",
+      "sheet_cell": "row3-col1",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "竖长暖光灯面、暗框和顶底石块构成壁灯。",
+      "mapping_kind": "CONDITIONAL_LAMP_MOUNT_VARIANT",
+      "bom_physical_ids": [
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02",
+        "M05"
+      ],
+      "mapping_relations": {
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "F20可作灯具家族条件改型；其当前仅顶灯/床边灯，壁装须重新声明背板origin和protected mount/真实能源/灯光预算。D01入口灯笼不同形体。",
+      "id_or_interface_gap": "没有壁灯精确物理变体/recipe/批准挂点；不直接复用吊灯pivot。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B10",
+      "reference_name": "青色灯带",
+      "reference_sheet": "B",
+      "sheet_cell": "row3-col2",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "两端暗块包围一根长直青色条。",
+      "mapping_kind": "CONDITIONAL_ENERGY_STRIP_VARIANT",
+      "bom_physical_ids": [
+        "D05"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M05"
+      ],
+      "mapping_relations": {
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "D05独立条形族；沿真实正坐标端口与背面安装面定义。M05只材质，发光须读取真实能源而不制造供电。",
+      "id_or_interface_gap": "图无米制长度；直段、端盖/转角与安装位均TBD。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B11",
+      "reference_name": "长条花槽",
+      "reference_sheet": "B",
+      "sheet_cell": "row3-col3",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "一个长槽中多簇绿植，槽壁前有暗饰面；不是独立圆盆或单棵树。",
+      "mapping_kind": "CONDITIONAL_TROUGH_AND_PLANT_ASSEMBLY",
+      "bom_physical_ids": [
+        "B03"
+      ],
+      "related_bom_recipe_ids": [
+        "R16"
+      ],
+      "bom_material_ids": [
+        "M02",
+        "M03"
+      ],
+      "mapping_relations": {
+        "B03": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "B03是旧跨域粗槽族、本栋0，R16组合植物接口；盆底/槽支撑与土面植根分别声明。ENV-072/073相关植株/材质待核，不能以B01+B02独立盆景整套塞进.4m旧槽。",
+      "id_or_interface_gap": "两图未展示独立B01盆器与B02剪裁盆株；长槽不能充当这两个的精确图生参考。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B12",
+      "reference_name": "墙面格栅",
+      "reference_sheet": "B",
+      "sheet_cell": "row3-col4",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "石色方框包围暗色格栅面。",
+      "mapping_kind": "NO_EXACT_WALL_GRILLE_MASTER_ID; CONDITIONAL_WINDOW_MUNTIN_FAMILY",
+      "bom_physical_ids": [
+        "A10"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M01",
+        "M02",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A10": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A10只关联窗棂视觉族；独立墙装背面、厚度和占用未定义。若要通风，真实wall开口/authority与功能须新设计，不能贴格栅就声称通风。",
+      "id_or_interface_gap": "52无独立墙格栅精确ID；A10仅条件风格联系，不是精确适配。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B13",
+      "reference_name": "入口台阶",
+      "reference_sheet": "B",
+      "sheet_cell": "row4-col1",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "宽石阶、两侧斜边/压边和脚端暖光。",
+      "mapping_kind": "CONDITIONAL_ENTRY_STAIR_ASSEMBLY",
+      "bom_physical_ids": [
+        "A11",
+        "A12",
+        "D04",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A11": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A12": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D04": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "A11/A12仅踏步/平台家族复用；现有1.6×.4踏步不证明该宽入口梯fit。实际入口高差/landing/door swing/路由由共享provider，不能加假阶或抬身体。",
+      "id_or_interface_gap": "入口宽阶/侧边及脚灯变体未设计/批准；不能借本栋楼梯已运行结论证明新门前台阶。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B14",
+      "reference_name": "庭院铺地",
+      "reference_sheet": "B",
+      "sheet_cell": "row4-col2",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "平整石色方形拼缝铺板。",
+      "mapping_kind": "CONDITIONAL_SLAB_SURFACE_VARIANT",
+      "bom_physical_ids": [
+        "A02"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "以真实slabRegions/terrain支持面作视觉铺装，拼缝不能制造额外通路、填院洞或扩大台地。",
+      "id_or_interface_gap": "图中板块数量不作实际铺板实例数；尺寸/重复数TBD。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B15",
+      "reference_name": "铺地灯线",
+      "reference_sheet": "B",
+      "sheet_cell": "row4-col3",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "石铺面中一条正交青色发光线路。",
+      "mapping_kind": "CONDITIONAL_GROUND_LIGHT_STRIP_ASSEMBLY",
+      "bom_physical_ids": [
+        "A02",
+        "D05"
+      ],
+      "related_bom_recipe_ids": [],
+      "bom_material_ids": [
+        "M02",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "D05可作灯带族候选，但背面墙装pivot不能直接拿来地面嵌装；需地面背板/正基/槽占用新参数，A02权威厚度和孔不变。",
+      "id_or_interface_gap": "地面嵌装变体、直角连接、能源与无共面闪烁方案未验；安装0。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    },
+    {
+      "reference_id": "REF-B16",
+      "reference_name": "桥头连接段",
+      "reference_sheet": "B",
+      "sheet_cell": "row4-col4",
+      "image_file": "立面与细部组件.png",
+      "image_sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe",
+      "image_library_id": "libfile_4b9d5e80a7648191a502c9f5fb4c0559",
+      "pixel_evidence": "ACTUAL_VIEW_IMAGE_ORIGINAL_PNG; label and visible composition observed; no crop/edit",
+      "observed_composition": "短铺板、两侧透明护栏、四端柱/灯组成桥头。",
+      "mapping_kind": "REFERENCE_SKYWALK_LANDING_ASSEMBLY",
+      "bom_physical_ids": [
+        "A02",
+        "A13",
+        "A23",
+        "D05",
+        "F20"
+      ],
+      "related_bom_recipe_ids": [
+        "R15"
+      ],
+      "bom_material_ids": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "mapping_relations": {
+        "A02": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A13": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "A23": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "D05": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval",
+        "F20": "CONDITIONAL_STYLE_OR_PARAMETER_VARIANT; no fit approval"
+      },
+      "adaptation_and_authority": "R15计划桥廊组合＋真实landing/支座/route/access，同数据才能批准；A02/A13/A23只是相应母版族，不是现成已通行桥头。",
+      "id_or_interface_gap": "独立端柱/支座无精确52物理ID；两端高度/接缝/通路当前未批准。",
+      "status": "REFERENCE_MAPPING_PLANNED; NO_NEW_MODEL_OR_APPROVED_MOUNT",
+      "planned_instances": "TBD; no instance count inferred from the illustration",
+      "actual_new_installs": 0,
+      "approved_new_mounts": 0,
+      "new_model_jobs_authorized_by_this_mapping": 0,
+      "reference_is_physics_or_dimension_authority": false
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "label": "upper1-to-next-stairs",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -403.6,
+      "y": 80,
+      "z": 307.6
+    },
+    {
+      "x": -403.6,
+      "y": 80,
+      "z": 307.6
+    }
+  ],
+  "start": {
+    "x": -403.594315350413,
+    "y": 80,
+    "z": 307.60244191428717
+  },
+  "steps": 0,
+  "motorSeconds": 0,
+  "samples": [],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 124670.70000000298,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 124670.70000000298,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -403.594315350413,
+    "y": 80,
+    "z": 307.60244191428717
+  },
+  "floor": 1,
+  "inside": "market-b24",
+  "protectedStateUnchanged": true
+}

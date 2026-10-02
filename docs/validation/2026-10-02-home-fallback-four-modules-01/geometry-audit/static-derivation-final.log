@@ -1,0 +1,108 @@
+{
+  "status": "STATIC_PROPOSED_MODULE_GEOMETRY_CALCULATED",
+  "computedCandidates": 4,
+  "approvedInstalls": 0,
+  "wallReplacementParts": [
+    "near:28",
+    "near:29"
+  ],
+  "windowPane": "near:192",
+  "windowWallCoplanarAreas": [
+    {
+      "id": "near:188",
+      "area": 0.08
+    },
+    {
+      "id": "near:189",
+      "area": 0.28
+    },
+    {
+      "id": "near:190",
+      "area": 0.08
+    },
+    {
+      "id": "near:191",
+      "area": 0.64
+    },
+    {
+      "id": "near:193",
+      "area": 0.64
+    },
+    {
+      "id": "near:194",
+      "area": 0.08
+    },
+    {
+      "id": "near:195",
+      "area": 0.28
+    },
+    {
+      "id": "near:196",
+      "area": 0.08
+    }
+  ],
+  "windowTotalWallCoplanarArea": 2.16,
+  "windowPaneFineCoplanarArea": 0.8,
+  "doorSwingConflicts": [
+    {
+      "nativeId": "detail:6",
+      "partBounds": {
+        "min": {
+          "x": -3.2,
+          "y": 1.8,
+          "z": 17.4
+        },
+        "max": {
+          "x": -2.4,
+          "y": 2,
+          "z": 18.2
+        }
+      },
+      "overlap": {
+        "min": {
+          "x": -2.5,
+          "y": 1.8,
+          "z": 17.4
+        },
+        "max": {
+          "x": -2.4,
+          "y": 2,
+          "z": 18.2
+        }
+      },
+      "overlapVolumeM3": 0.016
+    },
+    {
+      "nativeId": "detail:7",
+      "partBounds": {
+        "min": {
+          "x": -3.2,
+          "y": 2.6,
+          "z": 17.4
+        },
+        "max": {
+          "x": -2.4,
+          "y": 2.8,
+          "z": 18.2
+        }
+      },
+      "overlap": {
+        "min": {
+          "x": -2.5,
+          "y": 2.6,
+          "z": 17.4
+        },
+        "max": {
+          "x": -2.4,
+          "y": 2.8,
+          "z": 18.2
+        }
+      },
+      "overlapVolumeM3": 0.016
+    }
+  ],
+  "bonsaiRingSamples": 72,
+  "bonsaiMinDiskMargin": 0.05,
+  "sourceUnchanged": true,
+  "elapsedMilliseconds": 112.470529
+}

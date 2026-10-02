@@ -1,0 +1,35 @@
+{
+  "uploadedFile": "/tmp/yunshan-home-pilot-bom-01/bom-full.csv",
+  "sha256": "8bb5e81a9a1dead50d0730fdf4f6d931380181994fb4e72337920e2a91da7d3f",
+  "scope": "Original draft, before latest pilot evidence correction. 47 physical masters; models not ready.",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "operation": "create_library_file",
+      "status": "succeeded",
+      "path": "/bom-full.csv",
+      "file_id": "file_00000000232481f6ac8431e74b91f480",
+      "library_file_id": "libfile_3c87ce7ef38c8191b7c19f6cafd527b3",
+      "file_name": "bom-full.csv",
+      "current_version_number": 0,
+      "restored_from_version_number": null,
+      "xattrs": [
+        {
+          "name": "user.library-file-version",
+          "value": "0"
+        }
+      ],
+      "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+      "mime_type": "text/csv",
+      "library_artifact_type": "sheet",
+      "file_size_bytes": 69471,
+      "external_connectors_accessed": false
+    },
+    "isError": false
+  }
+}

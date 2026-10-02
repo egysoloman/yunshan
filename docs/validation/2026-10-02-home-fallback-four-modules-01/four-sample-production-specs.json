@@ -1,0 +1,1589 @@
+{
+  "revision": "four-modules-01",
+  "status": "SPECIFICATION_ONLY; zero actual sample meshes and zero approved installations",
+  "dimensionAuthority": "Actual native FloorPlan and geometry audit; images are style references only.",
+  "geometryAuditExpected": "geometry-audit/four-module-contract.json",
+  "modules": [
+    {
+      "moduleId": "SAMPLE-WALL-01",
+      "bomIds": [
+        "A03"
+      ],
+      "name": "可重复实墙段",
+      "dimensionsM": [
+        1.4,
+        3.0,
+        0.4
+      ],
+      "assetBounds": {
+        "min": [
+          -0.7,
+          0,
+          -0.2
+        ],
+        "max": [
+          0.7,
+          3,
+          0.2
+        ]
+      },
+      "pivot": "实体墙段底面中心",
+      "selector": {
+        "floor": 0,
+        "wall": 1,
+        "field": "floor:0:wall:1"
+      },
+      "candidateRepeats": 2,
+      "referenceIds": [
+        "REF-A08",
+        "REF-B03",
+        "REF-B04"
+      ],
+      "joinedSpanM": 2.8,
+      "opening": null,
+      "joinPorts": [
+        {
+          "id": "left",
+          "position": [
+            -0.7,
+            0,
+            0
+          ],
+          "normal": [
+            -1,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "right",
+          "position": [
+            0.7,
+            0,
+            0
+          ],
+          "normal": [
+            1,
+            0,
+            0
+          ]
+        }
+      ],
+      "requiredIntegration": "Mutually exclusive replacement of near:28+near:29 and two proper-rotation1.4m pieces with shared end caps hidden; retain original wallPanels and corners to wall0/wall2. No source-ID/LOD/cutaway owner adapter currently exists.",
+      "prompt": "制作单个独立、可重复拼接的未来国风体素实墙模块：宽1.4m、高3.0m、深0.4m，底面中心为原点，+Y向上，+Z为对外立面，+X为接缝宽方向。前后表面在z=±0.2，左右接面在x=±0.7，均平整可对齐。米制模型，不归一化后伪称尺寸。浅米石材与深灰金属边界，清楚0.2m结构节律、精细材质与有界浅浮雕；不要每块都随机凹凸、不要厚于0.4m，不添加窗、门、邻墙、柱脚平台、屋檐、灯具。最多两个材质；无烘焙阳光阴影、无负缩放、无骨骼动画。它将用两件同母版拼满真实2.8m墙段，不把相邻接缝扩大，也不含整个开间。参考REF-A08仅风格参考。",
+      "geometryModuleId": "WALL-1400-3000-400",
+      "providerDescriptorIds": [
+        "floor:0:wall:1"
+      ],
+      "candidateMounts": [
+        {
+          "localMount": {
+            "x": 0.8,
+            "y": 0,
+            "z": -16.5
+          },
+          "worldMount": {
+            "x": -390,
+            "y": 76.6,
+            "z": 299.7
+          },
+          "yawDeg": 90,
+          "buildingLocalBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "worldBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "matrix4ColumnMajor": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -390,
+            76.6,
+            299.7,
+            1
+          ],
+          "determinant": 1,
+          "outwardNormal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "localMount": {
+            "x": 0.8,
+            "y": 0,
+            "z": -15.1
+          },
+          "worldMount": {
+            "x": -390,
+            "y": 76.6,
+            "z": 301.1
+          },
+          "yawDeg": 90,
+          "buildingLocalBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "worldBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "matrix4ColumnMajor": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -390,
+            76.6,
+            301.1,
+            1
+          ],
+          "determinant": 1,
+          "outwardNormal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      "protectedVolumeEvidence": "geometry-audit/four-module-contract.json#/modules/0/protectedVolumes",
+      "occupiedSolidsEvidence": "geometry-audit/four-module-contract.json#/modules/0/occupiedSolids",
+      "staticAudit": {
+        "status": "CANDIDATE_ONLY",
+        "checks": [
+          "Exact two-piece .2m-grid 2.8m length and 3m authority height",
+          "Each matrix determinant +1",
+          "No real doorway/window cut on wall1",
+          "Union has exact original .4m occupied thickness"
+        ],
+        "failures": [],
+        "staticEnvelope": "CALCULATED_MATCH",
+        "meshFit": "NOT_RUN"
+      },
+      "requiredAuthorityChange": [
+        "Semantic renderer replacement/LOD/cutaway owner adapter absent; no extra physics volume permitted."
+      ],
+      "meshFit": "NOT_RUN; no actual new GLB returned",
+      "renderReplacement": {
+        "replaceWholeNativeNearPartIds": [
+          "near:28",
+          "near:29"
+        ],
+        "coarsePartBounds": [
+          {
+            "id": "near:28",
+            "bounds": {
+              "min": {
+                "x": 0.6,
+                "y": 0,
+                "z": -17.2
+              },
+              "max": {
+                "x": 1,
+                "y": 0.8,
+                "z": -14.4
+              }
+            }
+          },
+          {
+            "id": "near:29",
+            "bounds": {
+              "min": {
+                "x": 0.6,
+                "y": 0.8,
+                "z": -17.2
+              },
+              "max": {
+                "x": 1,
+                "y": 3,
+                "z": -14.4
+              }
+            }
+          }
+        ],
+        "retainPhysics": "Original wallPanels unchanged.",
+        "adapterPresent": false
+      },
+      "join": {
+        "buildingLocalPlaneZ": -15.8,
+        "worldPoint": {
+          "x": -390,
+          "y": 76.6,
+          "z": 300.4
+        },
+        "pair": [
+          "mount0:x-minus",
+          "mount1:x-plus"
+        ],
+        "endCaps": "Hide both shared caps; one owner for visible outside wall. Boundary connections to wall0/wall2 keep their original corner authority."
+      },
+      "selectorClarification": "Complete wall1 length2.8m. Not wall0 full3.2m bay or guessed inset2.8m sub-region. Whole native near28/29 are the mutually exclusive render ownership unit.",
+      "referenceClarification": "REF-A08 includes a lattice facade assembly; only material/rhythm informs the solid-wall sample. It does not authorise a new opening or physical lattice."
+    },
+    {
+      "moduleId": "SAMPLE-WINDOW-01",
+      "bomIds": [
+        "A09",
+        "A10"
+      ],
+      "name": "窗台窗框/栅/玻璃独立套件",
+      "dimensionsM": [
+        2.0,
+        2.2,
+        0.4
+      ],
+      "assetBounds": {
+        "min": [
+          -1,
+          0,
+          -0.2
+        ],
+        "max": [
+          1,
+          2.2,
+          0.2
+        ]
+      },
+      "pivot": "完整九件窗套外包络底面中点",
+      "selector": {
+        "floor": 0,
+        "wall": 18,
+        "window": 0
+      },
+      "candidateRepeats": 1,
+      "referenceIds": [
+        "REF-B01",
+        "REF-B12",
+        "REF-B10"
+      ],
+      "opening": {
+        "min": [
+          -0.8,
+          0.4,
+          -0.2
+        ],
+        "max": [
+          0.8,
+          1.8,
+          0.2
+        ],
+        "clearSizeM": [
+          1.6,
+          1.4
+        ],
+        "meaning": "Glazed aperture in retained authority wall; not a walk-through or floor-to-ceiling window."
+      },
+      "glassEnvelopeLocal": {
+        "min": [
+          -0.8,
+          0.4,
+          0
+        ],
+        "max": [
+          0.8,
+          1.8,
+          0.2
+        ]
+      },
+      "joinPorts": [
+        {
+          "id": "wall-inner-plane",
+          "position": [
+            0,
+            0,
+            -0.2
+          ],
+          "normal": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "wall-outer-plane",
+          "position": [
+            0,
+            0,
+            0.2
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ]
+        }
+      ],
+      "requiredIntegration": "Atomic replacement of near:192 pane and nine detail:59..67 pieces, plus bounded ring crop of adjacent wall visual subparts near:188/189/190/191/193/194/195/196. Never delete those complete walls. Preserve collision pane. Adapter absent; direct additive mounting fails co-planar overlap.",
+      "prompt": "制作独立未来国风体素窗台窗套件，外框含上下帽沿完整外包络宽2.0m、高2.2m、深0.4m；原点为外框底面中心。+Y上，+Z朝庭院，外包络x[-1,1]、y[0,2.2]、z[-0.2,0.2]。真实玻璃孔宽1.6m、高1.4m，孔范围x[-0.8,0.8]、y[0.4,1.8]；不要把孔延伸到地面，不做落地窗。玻璃分件占z[0,0.2]且材质透光，栅与框独立命名；玻璃按栅条投影切成互不重叠的格片，栅条区域只有一个可见表面所有者，不把整玻璃前脸与同面的栅条重复叠加；保留可透见院落的玻璃，不用青色实面遮满。深灰细框、浅石帽沿、克制青能量边线依参考REF-B01/B12，但不要邻墙、楼板、花槽或大门。最多两个材质（框与透光玻璃），青光用独立发光遮罩，不能烘焙光影。全套要独立导出，九件外框栅沿与玻璃可辨认。注意本样是现有窗台窗的替换规范，不是图中落地窗已适配。",
+      "geometryModuleId": "WINDOW-2000-2200-400",
+      "providerDescriptorIds": [
+        "floor:0:wall:18:window:0"
+      ],
+      "candidateMounts": [
+        {
+          "localMount": {
+            "x": -11.2,
+            "y": 0.4,
+            "z": 15.2
+          },
+          "worldMount": {
+            "x": -402,
+            "y": 77,
+            "z": 331.4
+          },
+          "yawDeg": 0,
+          "matrix4ColumnMajor": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -402,
+            77,
+            331.4,
+            1
+          ],
+          "worldBasis": {
+            "X": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 0,
+              "y": 0,
+              "z": 1
+            }
+          },
+          "determinant": 1
+        }
+      ],
+      "protectedVolumeEvidence": "geometry-audit/four-module-contract.json#/modules/1/protectedVolumes",
+      "occupiedSolidsEvidence": "geometry-audit/four-module-contract.json#/modules/1/occupiedSolids",
+      "staticAudit": {
+        "status": "CANDIDATE_ONLY",
+        "staticEnvelope": "CALCULATED_EXISTING_FRAME_MATCH",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Nondegenerate true opening",
+          "Exact nine existing detail parts and pane source IDs",
+          "Matrix det+1",
+          "Protected door/stair/use zones not occupied"
+        ],
+        "failures": [
+          "No semantic native instance replacement/crop owner API",
+          "Pane+9 parts alone still leaves eight real coplanar coarse-wall overlaps"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Renderer source-ID/partition/LOD-cutaway replacement adapter required; keep wallPanels, door holes and fingerprints unchanged.",
+        "Outward protrusion alternative is not this fit: new envelope would need fresh shared collision/clearance validation."
+      ],
+      "meshFit": "NOT_RUN; no actual new GLB returned",
+      "renderReplacement": {
+        "removeWholeNativeNearPartIds": [
+          "near:192"
+        ],
+        "removeOldDetailSourceIds": [
+          "detail:59",
+          "detail:60",
+          "detail:61",
+          "detail:62",
+          "detail:63",
+          "detail:64",
+          "detail:65",
+          "detail:66",
+          "detail:67"
+        ],
+        "oldNearFloorReferences": [
+          {
+            "id": "detail:59",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 59
+              },
+              {
+                "nearFloor": 1,
+                "index": 266
+              }
+            ]
+          },
+          {
+            "id": "detail:60",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 60
+              },
+              {
+                "nearFloor": 1,
+                "index": 267
+              }
+            ]
+          },
+          {
+            "id": "detail:61",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 61
+              },
+              {
+                "nearFloor": 1,
+                "index": 268
+              }
+            ]
+          },
+          {
+            "id": "detail:62",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 62
+              },
+              {
+                "nearFloor": 1,
+                "index": 269
+              }
+            ]
+          },
+          {
+            "id": "detail:63",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 63
+              },
+              {
+                "nearFloor": 1,
+                "index": 270
+              }
+            ]
+          },
+          {
+            "id": "detail:64",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 64
+              },
+              {
+                "nearFloor": 1,
+                "index": 271
+              }
+            ]
+          },
+          {
+            "id": "detail:65",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 65
+              },
+              {
+                "nearFloor": 1,
+                "index": 272
+              }
+            ]
+          },
+          {
+            "id": "detail:66",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 66
+              },
+              {
+                "nearFloor": 1,
+                "index": 273
+              }
+            ]
+          },
+          {
+            "id": "detail:67",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 67
+              },
+              {
+                "nearFloor": 1,
+                "index": 274
+              }
+            ]
+          }
+        ],
+        "cropNativeWallIds": [
+          "near:188",
+          "near:189",
+          "near:190",
+          "near:191",
+          "near:193",
+          "near:194",
+          "near:195",
+          "near:196"
+        ],
+        "cropPolicy": "One near-module owner: hide coarse pane+9 fine parts and subtract matching opaque frame-ring volumes from eight coarse wall boxes, keep the rest. Use disjoint box/face partitions with exclusive visible face ownership. No polygonOffset/depthBias/transparent overdraw fix.",
+        "normalPolicy": "New glass/frame visible surfaces must use exclusive ownership; retain original proxy .2m glass collision; actual GLB glass geometry/seams must be inspected before approval.",
+        "cutawayAndLOD": "Native/coarse source masks and asset visibility share floor/distance/cutaway owner; fine enabled XOR old pane/details. Far coarse proxy remains bounded. No runtime semantic replacement adapter exists."
+      },
+      "coplanarWallUnionAreaM2": 2.16,
+      "coplanarPaneMullionUnionAreaM2": 0.8,
+      "referenceClarification": "REF-B01 is floor-to-ceiling glass style; actual wall opening begins at body-local y0.8m. Selected sample is a sill window, not a compatible floor-to-ceiling replacement."
+    },
+    {
+      "moduleId": "SAMPLE-GATE-FRAME-01",
+      "bomIds": [
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "name": "开放大门框（门扇后续权威阻塞）",
+      "dimensionsM": [
+        5.6,
+        3.2,
+        0.4
+      ],
+      "assetBounds": {
+        "min": [
+          -2.8,
+          0,
+          -0.2
+        ],
+        "max": [
+          2.8,
+          3.2,
+          0.2
+        ]
+      },
+      "pivot": "主入口门框底面/净孔中心",
+      "selector": {
+        "floor": 0,
+        "wall": 12,
+        "opening": "main-entrance"
+      },
+      "candidateRepeats": 1,
+      "referenceIds": [
+        "REF-A09",
+        "REF-B02",
+        "REF-B09"
+      ],
+      "opening": {
+        "min": [
+          -2.4,
+          0,
+          -0.2
+        ],
+        "max": [
+          2.4,
+          2.8,
+          0.2
+        ],
+        "clearSizeM": [
+          4.8,
+          2.8
+        ],
+        "meaning": "Must remain physically open in this static frame sample."
+      },
+      "joinPorts": [
+        {
+          "id": "left-ground",
+          "position": [
+            -2.5,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "right-ground",
+          "position": [
+            2.5,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "top",
+          "position": [
+            0,
+            3.2,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "requiredIntegration": "Replace only actual frame detail:0..3 with protected open aperture. No existing authoritative leaf/open-close state. A07/A08 movable leaves/hinges require separately reviewed shared state, swept collision, route/access and save contracts. Do not install closed static leaves. Hypothetical left leaf at90deg has positive-volume intersections0.016m3 each with lantern detail6 and detail7; it is not a approved sweep. Hypothetical left leaf at90deg has positive-volume intersections0.016m3 each with lantern detail6 and detail7; it is not a approved sweep. Open frame itself must also locally crop near:133..139 exact ring cuts (2.16m2 coface overlap); retain all remaining native walls, do not delete entire walls. See final supplement.",
+      "prompt": "制作单独开放主门框，完整宽5.6m、高3.2m、厚0.4m；底面中心原点，+Y上、+Z对外。净门洞x[-2.4,2.4]、y[0,2.8]，宽4.8m高2.8m，必须贯穿z[-0.2,0.2]完全留空，不添加门扇、玻璃封片、台阶、地板、长侧墙或邻屋。两竖框在x±2.5，高2.8m宽0.2m；下横头宽5.2m厚0.2m中心y2.9；上帽沿宽5.6m厚0.2m中心y3.1。未来国风深灰金属/浅石框、温暖细灯与克制青色服务面装饰可用材质表达，不额外突出保护体。参考REF-A09门楼框风格，不把REF-B02玻璃门直接封在此口。四个框件清楚命名并作为独立套件导出；最多两材质，无烘焙阳光、无人物、无相邻立面。当前只制作开放静态门框；可开合门扇不是此次已经成立的功能。",
+      "geometryModuleId": "DOORFRAME-5600-3200-400",
+      "providerDescriptorIds": [
+        "floor:0:wall:12:opening"
+      ],
+      "candidateMounts": [
+        {
+          "localMount": {
+            "x": 0,
+            "y": 0,
+            "z": 17.2
+          },
+          "worldMount": {
+            "x": -390.8,
+            "y": 76.6,
+            "z": 333.4
+          },
+          "yawDeg": 0,
+          "matrix4ColumnMajor": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -390.8,
+            76.6,
+            333.4,
+            1
+          ],
+          "worldBasis": {
+            "X": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 0,
+              "y": 0,
+              "z": 1
+            }
+          },
+          "determinant": 1
+        }
+      ],
+      "protectedVolumeEvidence": "geometry-audit/four-module-contract.json#/modules/2/protectedVolumes",
+      "occupiedSolidsEvidence": "geometry-audit/four-module-contract.json#/modules/2/occupiedSolids",
+      "staticAudit": {
+        "status": "REQUIRES_AUTHORITY_CHANGE",
+        "staticFrameEnvelope": "CALCULATED_EXISTING_MATCH",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Real4.8x2.8 opening and zero raised threshold",
+          "3m interior public path samples all support .35 body",
+          "Frame matrix det+1"
+        ],
+        "failures": [
+          "No shared hinge/open/closed/collision/save authority",
+          "Hypothetical90-degree left leaf intersects existing lantern caps; exact positive-volume witness retained"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Implement code-owned door state, hinges, swept solid/route blocking, permissions and saved lifecycle before functional leaves. Current-v4/native saved authority cannot be silently changed.",
+        "Resolve actual lantern/leaf sweep conflict through shared geometry before approving a swing. No arbitrary relocation/depth bias approved."
+      ],
+      "meshFit": "NOT_RUN; no actual new GLB returned",
+      "hypotheticalLeafState": {
+        "presentInAuthority": false,
+        "eachNominalSize": [
+          2.4,
+          2.8,
+          0.2
+        ],
+        "leftHingeLocal": {
+          "x": -2.4,
+          "y": 0,
+          "z": 17.2
+        },
+        "leftHingeWorld": {
+          "x": -393.2,
+          "y": 76.6,
+          "z": 333.4
+        },
+        "rightHingeLocal": {
+          "x": 2.4,
+          "y": 0,
+          "z": 17.2
+        },
+        "rightHingeWorld": {
+          "x": -388.4,
+          "y": 76.6,
+          "z": 333.4
+        },
+        "leftOpenAngleDegrees": -90,
+        "rightOpenAngleDegrees": 90,
+        "hingeAxis": "+Y",
+        "left90Bounds": {
+          "min": {
+            "x": -2.5,
+            "y": 0,
+            "z": 17.2
+          },
+          "max": {
+            "x": -2.3,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "swingConflicts": [
+          {
+            "nativeId": "detail:6",
+            "partBounds": {
+              "min": {
+                "x": -3.2,
+                "y": 1.8,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2,
+                "z": 18.2
+              }
+            },
+            "overlap": {
+              "min": {
+                "x": -2.5,
+                "y": 1.8,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2,
+                "z": 18.2
+              }
+            },
+            "overlapVolumeM3": 0.016
+          },
+          {
+            "nativeId": "detail:7",
+            "partBounds": {
+              "min": {
+                "x": -3.2,
+                "y": 2.6,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2.8,
+                "z": 18.2
+              }
+            },
+            "overlap": {
+              "min": {
+                "x": -2.5,
+                "y": 2.6,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2.8,
+                "z": 18.2
+              }
+            },
+            "overlapVolumeM3": 0.016
+          }
+        ],
+        "leftQuarterSweepEnvelope": {
+          "min": {
+            "x": -2.5,
+            "y": 0,
+            "z": 17.1
+          },
+          "max": {
+            "x": 0.1,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "rightQuarterSweepEnvelope": {
+          "min": {
+            "x": -0.1,
+            "y": 0,
+            "z": 17.1
+          },
+          "max": {
+            "x": 2.5,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "currentAuthority": "No leaves, hinge transform, open/closed state or leaf route obstacle in FloorPlan. useDoor crosses an existing opening."
+      },
+      "frameOnlySupplement": {
+        "moduleId": "DOORFRAME-5600-3200-400",
+        "primarySample": "OPEN_FRAME_ONLY",
+        "fit": {
+          "status": "CANDIDATE_ONLY",
+          "staticEnvelope": "CALCULATED_EXISTING_MATCH",
+          "meshFit": "NOT_RUN"
+        },
+        "dimensions": [
+          5.6,
+          3.2,
+          0.4
+        ],
+        "clearOpening": [
+          4.8,
+          2.8
+        ],
+        "oldDetailIds": [
+          "detail:0",
+          "detail:1",
+          "detail:2",
+          "detail:3"
+        ],
+        "coplanarAudit": {
+          "planeLocalZ": 17.4,
+          "planeWorldZ": 333.6,
+          "wallFaceConflicts": [
+            {
+              "nativePartId": "near:133",
+              "nativeBounds": {
+                "min": {
+                  "x": 2.4,
+                  "y": 0,
+                  "z": 17
+                },
+                "max": {
+                  "x": 3.2,
+                  "y": 0.8,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:0",
+                  "rect": {
+                    "x0": 2.4,
+                    "x1": 2.6,
+                    "y0": 0,
+                    "y1": 0.8
+                  },
+                  "areaM2": 0.16,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": 2.4,
+                      "y": 0,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": 2.6,
+                      "y": 0.8,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.16,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:134",
+              "nativeBounds": {
+                "min": {
+                  "x": 2.4,
+                  "y": 0.8,
+                  "z": 17
+                },
+                "max": {
+                  "x": 3.2,
+                  "y": 2.8,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:0",
+                  "rect": {
+                    "x0": 2.4,
+                    "x1": 2.6,
+                    "y0": 0.8,
+                    "y1": 2.8
+                  },
+                  "areaM2": 0.4,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": 2.4,
+                      "y": 0.8,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": 2.6,
+                      "y": 2.8,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.4,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:135",
+              "nativeBounds": {
+                "min": {
+                  "x": 2.4,
+                  "y": 2.8,
+                  "z": 17
+                },
+                "max": {
+                  "x": 3.2,
+                  "y": 3,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:2",
+                  "rect": {
+                    "x0": 2.4,
+                    "x1": 2.6,
+                    "y0": 2.8,
+                    "y1": 3
+                  },
+                  "areaM2": 0.04,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": 2.4,
+                      "y": 2.8,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": 2.6,
+                      "y": 3,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.04,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:136",
+              "nativeBounds": {
+                "min": {
+                  "x": -2.4,
+                  "y": 2.8,
+                  "z": 17
+                },
+                "max": {
+                  "x": 2.4,
+                  "y": 3,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:2",
+                  "rect": {
+                    "x0": -2.4,
+                    "x1": 2.4,
+                    "y0": 2.8,
+                    "y1": 3
+                  },
+                  "areaM2": 0.96,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": -2.4,
+                      "y": 2.8,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": 2.4,
+                      "y": 3,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.96,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:137",
+              "nativeBounds": {
+                "min": {
+                  "x": -3.2,
+                  "y": 0,
+                  "z": 17
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 0.8,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:1",
+                  "rect": {
+                    "x0": -2.6,
+                    "x1": -2.4,
+                    "y0": 0,
+                    "y1": 0.8
+                  },
+                  "areaM2": 0.16,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": -2.6,
+                      "y": 0,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": -2.4,
+                      "y": 0.8,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.16,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:138",
+              "nativeBounds": {
+                "min": {
+                  "x": -3.2,
+                  "y": 0.8,
+                  "z": 17
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 2.8,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:1",
+                  "rect": {
+                    "x0": -2.6,
+                    "x1": -2.4,
+                    "y0": 0.8,
+                    "y1": 2.8
+                  },
+                  "areaM2": 0.4,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": -2.6,
+                      "y": 0.8,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": -2.4,
+                      "y": 2.8,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.4,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            },
+            {
+              "nativePartId": "near:139",
+              "nativeBounds": {
+                "min": {
+                  "x": -3.2,
+                  "y": 2.8,
+                  "z": 17
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 3,
+                  "z": 17.4
+                }
+              },
+              "planeBuildingLocal": {
+                "axis": "z",
+                "value": 17.4
+              },
+              "planeWorld": {
+                "axis": "z",
+                "value": 333.6
+              },
+              "pairs": [
+                {
+                  "detailId": "detail:2",
+                  "rect": {
+                    "x0": -2.6,
+                    "x1": -2.4,
+                    "y0": 2.8,
+                    "y1": 3
+                  },
+                  "areaM2": 0.04,
+                  "visualVolumeCut": {
+                    "min": {
+                      "x": -2.6,
+                      "y": 2.8,
+                      "z": 17
+                    },
+                    "max": {
+                      "x": -2.4,
+                      "y": 3,
+                      "z": 17.4
+                    }
+                  }
+                }
+              ],
+              "unionFaceOverlapAreaM2": 0.04,
+              "remainingOwner": "Keep every native region outside listed exact cuts. Fine module owns its frame; no duplicate exposed coplanar face. Collision wallPanels and hole remain unchanged."
+            }
+          ],
+          "unionFaceOverlapAreaM2": 2.16,
+          "method": "Exact positive-area native wall/frame faces, no GL observation."
+        },
+        "renderReplacement": "Atomic: replace detail0..3; split/subtract their exact opaque frame cuts from these coarse wall parts, retain all remainder, one visible frame owner. Native/coarse/fine share distance/floor/cutaway masks. Renderer adapter is absent.",
+        "leaves": {
+          "status": "REQUIRES_AUTHORITY_CHANGE",
+          "notPartOfPrimarySample": true,
+          "authorityPresent": false,
+          "positiveVolumeSwingWitnesses": [
+            {
+              "nativeId": "detail:6",
+              "partBounds": {
+                "min": {
+                  "x": -3.2,
+                  "y": 1.8,
+                  "z": 17.4
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 2,
+                  "z": 18.2
+                }
+              },
+              "overlap": {
+                "min": {
+                  "x": -2.5,
+                  "y": 1.8,
+                  "z": 17.4
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 2,
+                  "z": 18.2
+                }
+              },
+              "overlapVolumeM3": 0.016
+            },
+            {
+              "nativeId": "detail:7",
+              "partBounds": {
+                "min": {
+                  "x": -3.2,
+                  "y": 2.6,
+                  "z": 17.4
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 2.8,
+                  "z": 18.2
+                }
+              },
+              "overlap": {
+                "min": {
+                  "x": -2.5,
+                  "y": 2.6,
+                  "z": 17.4
+                },
+                "max": {
+                  "x": -2.4,
+                  "y": 2.8,
+                  "z": 18.2
+                }
+              },
+              "overlapVolumeM3": 0.016
+            }
+          ],
+          "warning": "Original contract overall REQUIRES_AUTHORITY_CHANGE includes hypothetical leaves. It does not prevent a frame-only candidate; neither candidate is approved."
+        }
+      },
+      "frameOnlyStaticStatus": {
+        "status": "CANDIDATE_ONLY",
+        "staticEnvelope": "CALCULATED_EXISTING_MATCH",
+        "meshFit": "NOT_RUN"
+      },
+      "geometrySupplementSHA256": "c0342a26fd0e6508bfeb6b02f662e4a04a49624d0e456a9d58d4ed2e6eb54660"
+    },
+    {
+      "moduleId": "SAMPLE-BONSAI-01",
+      "bomIds": [
+        "B01",
+        "B02",
+        "R12"
+      ],
+      "name": "方盆＋矮干剪裁冠组合",
+      "dimensionsM": [
+        0.8,
+        1.3,
+        0.8
+      ],
+      "assetBounds": {
+        "min": [
+          -0.4,
+          0,
+          -0.4
+        ],
+        "max": [
+          0.4,
+          1.3,
+          0.4
+        ]
+      },
+      "pivot": "盆器底面中心（树根独立原点为土面中心）",
+      "selector": {
+        "floor": 0,
+        "region": "courtyard",
+        "localSupportCandidate": {
+          "x": 12,
+          "y": 0,
+          "z": 10
+        }
+      },
+      "candidateRepeats": 1,
+      "referenceIds": [
+        "REF-B11",
+        "REF-A06"
+      ],
+      "opening": {
+        "meaning": "Actual open pot mouth, not a closed solid cuboid.",
+        "clearSizeM": [
+          0.6,
+          0.6
+        ]
+      },
+      "subParts": [
+        {
+          "id": "B01",
+          "dimensionsM": [
+            0.8,
+            0.4,
+            0.8
+          ],
+          "assetOrigin": [
+            0,
+            0,
+            0
+          ],
+          "assemblyMount": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "B02",
+          "dimensionsM": [
+            0.8,
+            1,
+            0.8
+          ],
+          "assetOrigin": [
+            0,
+            0,
+            0
+          ],
+          "assemblyMount": [
+            0,
+            0.3,
+            0
+          ]
+        }
+      ],
+      "joinPorts": [
+        {
+          "id": "pot-ground",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "id": "soil-root",
+          "position": [
+            0,
+            0.3,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "requiredIntegration": "True shared support, new pot/plant occupied solids and .35 body route clearance must be registered through an approved fixture/profile. Actual candidate audit is not a current authoritative fixture or installed model. Do not add visual-only physical pot players can walk through.",
+      "prompt": "制作可独立组装的未来国风体素方盆景：两个明确分件B01盆器、B02矮干剪裁冠，不混入阳台、墙、长花槽、地面。B01外尺寸0.8m宽×0.4m高×0.8m深，盆底中心原点，+Y向上、+Z朝展示面；盆口净0.6×0.6m，必须有真实底、薄壁和空口，土面y0.30m。B02根基原点在盆土面，独立包络0.8m×1.0m×0.8m，组装后整体0.8m×1.3m×0.8m；矮干有清晰分枝，树冠用有层次的剪裁体素簇，不把整棵自然树任意缩小。浅石或深陶盆与绿色冠两材质；局部根入土结构不能穿盆底，冠不出指定包络。风格参照REF-B11植物细度而非复制整条长花槽。无地面阴影贴片、无骨骼、无邻接建筑。容器和植株分别保留独立尺度接口，组合不是第三个新增模型。",
+      "geometryModuleId": "BONSAI-ASSEMBLY-800-1300-800",
+      "providerDescriptorIds": [
+        "floor:0:courtyard:7"
+      ],
+      "candidateMounts": [
+        {
+          "localMount": {
+            "x": 12,
+            "y": 0,
+            "z": 10
+          },
+          "worldMount": {
+            "x": -378.8,
+            "y": 76.6,
+            "z": 326.2
+          },
+          "yawDeg": 0,
+          "matrix4ColumnMajor": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -378.8,
+            76.6,
+            326.2,
+            1
+          ],
+          "worldBasis": {
+            "X": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 0,
+              "y": 0,
+              "z": 1
+            }
+          },
+          "determinant": 1
+        }
+      ],
+      "protectedVolumeEvidence": "geometry-audit/four-module-contract.json#/modules/3/protectedVolumes",
+      "occupiedSolidsEvidence": "geometry-audit/four-module-contract.json#/modules/3/occupiedSolids",
+      "staticAudit": {
+        "status": "CANDIDATE_ONLY",
+        "staticEnvelope": "CALCULATED_SUPPORTED_AND_CIRCULATABLE",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Entire .8m square lies inside supported bounding disk",
+          "All four sides have complete .35 body/1.72 head clearance",
+          "Protected3m door path, real stairs/holes/function2m zones untouched",
+          "Matrix det+1"
+        ],
+        "failures": [
+          "No pot/plant GLB received",
+          "No live placement fixture/collision/save authority registered"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Register actual pot/plant occupied geometry, placement identity/collision and persistence through shared object authority before mounting. Conservative bounds are not an invented hollow-pot mesh or approved collider."
+      ],
+      "meshFit": "NOT_RUN; no actual new GLB returned",
+      "supportAuditSummary": {
+        "query": {
+          "kind": "courtyard",
+          "floor": 0,
+          "y": 76.6,
+          "local": {
+            "x": 12,
+            "z": 10
+          }
+        },
+        "sampleCount": 72,
+        "maxSampleSpacingM": 0.1,
+        "minimumBodyMarginToEnvelopeM": 0.05
+      }
+    }
+  ],
+  "notCountedAsCompleted": [
+    "Paid generation",
+    "Tripo models",
+    "GLB validation",
+    "source replacement adapter",
+    "new door state",
+    "new bonsai fixture",
+    "native integration/GPU acceptance"
+  ],
+  "geometryContractSHA256": "f57211bfb88c04cc9af8cec5cce0e0b202e290498c66eede602104a6effcdd40",
+  "sampleToGeometryModuleIds": {
+    "SAMPLE-WALL-01": "WALL-1400-3000-400",
+    "SAMPLE-WINDOW-01": "WINDOW-2000-2200-400",
+    "SAMPLE-GATE-FRAME-01": "DOORFRAME-5600-3200-400",
+    "SAMPLE-BONSAI-01": "BONSAI-ASSEMBLY-800-1300-800"
+  }
+}

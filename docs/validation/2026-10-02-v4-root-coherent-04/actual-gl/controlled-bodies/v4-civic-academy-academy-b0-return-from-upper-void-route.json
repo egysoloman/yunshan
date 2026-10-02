@@ -1,0 +1,162 @@
+{
+  "label": "v4-civic-academy-academy-b0-return-from-upper-void",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -496.2001712602656,
+      "y": 234.4,
+      "z": -541.1655899044365
+    },
+    {
+      "x": -496.208,
+      "y": 234.4,
+      "z": -541.6
+    }
+  ],
+  "start": {
+    "x": -496.2001712602656,
+    "y": 234.4,
+    "z": -541.1655899044365
+  },
+  "steps": 6,
+  "motorSeconds": 0.09,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.2001712602656,
+        "y": 234.4,
+        "z": -541.1655899044365
+      },
+      "after": {
+        "x": -496.2014686006263,
+        "y": 234.4,
+        "z": -541.2375782153487
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998205,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.2014686006263,
+        "y": 234.4,
+        "z": -541.2375782153487
+      },
+      "after": {
+        "x": -496.202765940987,
+        "y": 234.4,
+        "z": -541.3095665262608
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998205,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.202765940987,
+        "y": 234.4,
+        "z": -541.3095665262608
+      },
+      "after": {
+        "x": -496.2040632813476,
+        "y": 234.4,
+        "z": -541.381554837173
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998102,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.2040632813476,
+        "y": 234.4,
+        "z": -541.381554837173
+      },
+      "after": {
+        "x": -496.2053606217083,
+        "y": 234.4,
+        "z": -541.4535431480851
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998205,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.2053606217083,
+        "y": 234.4,
+        "z": -541.4535431480851
+      },
+      "after": {
+        "x": -496.2066579620689,
+        "y": 234.4,
+        "z": -541.5255314589973
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998102,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -496.2066579620689,
+        "y": 234.4,
+        "z": -541.5255314589973
+      },
+      "after": {
+        "x": -496.2079553024296,
+        "y": 234.4,
+        "z": -541.5975197699095
+      },
+      "floor": 1,
+      "inside": "academy-b0",
+      "metres": 0.07199999999998205,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 142996.6000000015,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 143007.3999999985,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -496.2079553024296,
+    "y": 234.4,
+    "z": -541.5975197699095
+  },
+  "floor": 1,
+  "inside": "academy-b0",
+  "protectedStateUnchanged": true
+}

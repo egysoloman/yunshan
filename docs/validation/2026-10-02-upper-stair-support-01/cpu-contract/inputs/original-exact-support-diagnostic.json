@@ -1,0 +1,1208 @@
+{
+  "scope": "Pure read-only exact frozen provider helpers; no controller stepping, actor movement, source mutation or browser",
+  "sourcePath": "/tmp/yunshan-v4-root-coherent-04/src/architecture-floor-plan.ts",
+  "sourceStartSHA": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+  "sourceEndSHA": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+  "exportOnlyCopySHA": "62b3580b6975a7863e28f8d4c22eeda1fcbf9a0e466d57049232cbe8aacf620f",
+  "buildingId": "market-b24",
+  "probes": [
+    {
+      "label": "actual last supported browser pose",
+      "floor": 1,
+      "point": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "local": {
+        "x": -13.79997341778062,
+        "y": 3.4,
+        "z": -7.408525276356045
+      },
+      "bodyRadius": 0.35,
+      "oldFeetHeightThreshold": [
+        2.98,
+        3.62
+      ],
+      "centerInsideFootprint": true,
+      "diskSupported": true,
+      "nearestBoundaryEdges": [
+        {
+          "a": [
+            -13,
+            -7
+          ],
+          "b": [
+            -14.6,
+            -7
+          ],
+          "distance": 0.40852527635604474
+        },
+        {
+          "a": [
+            -13,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -7
+          ],
+          "distance": 0.7999734177806204
+        },
+        {
+          "a": [
+            -14.6,
+            -7
+          ],
+          "b": [
+            -14.6,
+            -7.8
+          ],
+          "distance": 0.8000265822193793
+        },
+        {
+          "a": [
+            -12.6,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -7.8
+          ],
+          "distance": 0.8906233369992715
+        },
+        {
+          "a": [
+            -14.6,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -7.8
+          ],
+          "distance": 0.8906710905321517
+        },
+        {
+          "a": [
+            -14.8,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -2.2
+          ],
+          "distance": 1.0000265822193803
+        },
+        {
+          "a": [
+            -12.6,
+            -6.6
+          ],
+          "b": [
+            -12.6,
+            -7.8
+          ],
+          "distance": 1.1999734177806207
+        },
+        {
+          "a": [
+            -11,
+            -6.6
+          ],
+          "b": [
+            -12.6,
+            -6.6
+          ],
+          "distance": 1.4469448247554995
+        },
+        {
+          "a": [
+            -11,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -6.6
+          ],
+          "distance": 2.7999734177806204
+        },
+        {
+          "a": [
+            -10.8,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -7.8
+          ],
+          "distance": 2.827207739012151
+        }
+      ],
+      "selectedSurfaces": [
+        {
+          "id": "return-7",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 2.8,
+          "top": 3,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "return-8",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3,
+          "top": 3.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "return-9",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread"
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing"
+        }
+      ],
+      "choices": [
+        {
+          "id": "lower-link",
+          "fromFloor": 1,
+          "toFloor": 2,
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "top": 3.4,
+          "kind": "stairs",
+          "floor": 1,
+          "rejectedBy": []
+        }
+      ],
+      "bodySupport": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.408525276356045
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "centerSupport": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.408525276356045
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "nearbySolids": [
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 0,
+          "top": 0.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": -0.2,
+          "top": 0,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "landing",
+          "steppable": true
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing",
+          "steppable": true
+        }
+      ],
+      "movementBlockedAtOldY": false
+    },
+    {
+      "label": "actual blocked next .072m step, current old feet height",
+      "floor": 1,
+      "point": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.863474723644
+      },
+      "local": {
+        "x": -13.79997341778062,
+        "y": 3.4,
+        "z": -7.336525276356042
+      },
+      "bodyRadius": 0.35,
+      "oldFeetHeightThreshold": [
+        2.98,
+        3.62
+      ],
+      "centerInsideFootprint": true,
+      "diskSupported": false,
+      "nearestBoundaryEdges": [
+        {
+          "a": [
+            -13,
+            -7
+          ],
+          "b": [
+            -14.6,
+            -7
+          ],
+          "distance": 0.336525276356042
+        },
+        {
+          "a": [
+            -13,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -7
+          ],
+          "distance": 0.7999734177806204
+        },
+        {
+          "a": [
+            -14.6,
+            -7
+          ],
+          "b": [
+            -14.6,
+            -7.8
+          ],
+          "distance": 0.8000265822193793
+        },
+        {
+          "a": [
+            -12.6,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -7.8
+          ],
+          "distance": 0.9245357151632652
+        },
+        {
+          "a": [
+            -14.6,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -7.8
+          ],
+          "distance": 0.9245817171642884
+        },
+        {
+          "a": [
+            -14.8,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -2.2
+          ],
+          "distance": 1.0000265822193803
+        },
+        {
+          "a": [
+            -12.6,
+            -6.6
+          ],
+          "b": [
+            -12.6,
+            -7.8
+          ],
+          "distance": 1.1999734177806207
+        },
+        {
+          "a": [
+            -11,
+            -6.6
+          ],
+          "b": [
+            -12.6,
+            -6.6
+          ],
+          "distance": 1.4079792917836003
+        },
+        {
+          "a": [
+            -11,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -6.6
+          ],
+          "distance": 2.7999734177806204
+        },
+        {
+          "a": [
+            -10.8,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -7.8
+          ],
+          "distance": 2.8380732830099595
+        }
+      ],
+      "selectedSurfaces": [
+        {
+          "id": "return-7",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 2.8,
+          "top": 3,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "return-8",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3,
+          "top": 3.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "return-9",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread"
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing"
+        }
+      ],
+      "choices": [],
+      "bodySupport": null,
+      "centerSupport": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80.19999999999999,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "nearbySolids": [
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 0,
+          "top": 0.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 0.2,
+          "top": 0.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": -0.2,
+          "top": 0,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "landing",
+          "steppable": true
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 3.6,
+          "top": 3.8,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing",
+          "steppable": true
+        }
+      ],
+      "movementBlockedAtOldY": true
+    },
+    {
+      "label": "read-only hypothetical first-tread raised pose, NOT assigned to actor",
+      "floor": 1,
+      "point": {
+        "x": -404.59997341778063,
+        "y": 80.2,
+        "z": 308.863474723644
+      },
+      "local": {
+        "x": -13.79997341778062,
+        "y": 3.6000000000000028,
+        "z": -7.336525276356042
+      },
+      "bodyRadius": 0.35,
+      "oldFeetHeightThreshold": [
+        3.180000000000003,
+        3.820000000000003
+      ],
+      "centerInsideFootprint": true,
+      "diskSupported": true,
+      "nearestBoundaryEdges": [
+        {
+          "a": [
+            -13,
+            -6.6
+          ],
+          "b": [
+            -14.6,
+            -6.6
+          ],
+          "distance": 0.7365252763560424
+        },
+        {
+          "a": [
+            -13,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -6.6
+          ],
+          "distance": 0.7999734177806204
+        },
+        {
+          "a": [
+            -14.6,
+            -6.6
+          ],
+          "b": [
+            -14.6,
+            -7.8
+          ],
+          "distance": 0.8000265822193793
+        },
+        {
+          "a": [
+            -12.6,
+            -7.8
+          ],
+          "b": [
+            -13,
+            -7.8
+          ],
+          "distance": 0.9245357151632652
+        },
+        {
+          "a": [
+            -14.6,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -7.8
+          ],
+          "distance": 0.9245817171642884
+        },
+        {
+          "a": [
+            -14.8,
+            -7.8
+          ],
+          "b": [
+            -14.8,
+            -2.2
+          ],
+          "distance": 1.0000265822193803
+        },
+        {
+          "a": [
+            -12.6,
+            -7
+          ],
+          "b": [
+            -12.6,
+            -7.8
+          ],
+          "distance": 1.1999734177806207
+        },
+        {
+          "a": [
+            -11,
+            -7
+          ],
+          "b": [
+            -12.6,
+            -7
+          ],
+          "distance": 1.2462686167141555
+        },
+        {
+          "a": [
+            -11,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -7
+          ],
+          "distance": 2.7999734177806204
+        },
+        {
+          "a": [
+            -10.8,
+            -7.8
+          ],
+          "b": [
+            -11,
+            -7.8
+          ],
+          "distance": 2.8380732830099595
+        }
+      ],
+      "selectedSurfaces": [
+        {
+          "id": "return-8",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3,
+          "top": 3.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "return-9",
+          "rect": {
+            "x0": -12.6,
+            "x1": -11,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread"
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 3.6,
+          "top": 3.8,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread"
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing"
+        }
+      ],
+      "choices": [
+        {
+          "id": "up-1",
+          "fromFloor": 1,
+          "toFloor": 2,
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "top": 3.6,
+          "kind": "stairs",
+          "floor": 1,
+          "rejectedBy": []
+        }
+      ],
+      "bodySupport": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80.19999999999999,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "centerSupport": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80.19999999999999,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "nearbySolids": [
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 0,
+          "top": 0.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 0.2,
+          "top": 0.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": -0.2,
+          "top": 0,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "landing",
+          "steppable": true
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 3.6,
+          "top": 3.8,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing",
+          "steppable": true
+        }
+      ],
+      "movementBlockedAtOldY": false
+    },
+    {
+      "label": "same local stair edge on ground floor, original earlier PASS scope",
+      "floor": 0,
+      "point": {
+        "x": -404.59997341778063,
+        "y": 76.6,
+        "z": 308.863474723644
+      },
+      "local": {
+        "x": -13.79997341778062,
+        "y": -5.662137425588298e-15,
+        "z": -7.336525276356042
+      },
+      "bodyRadius": 0.35,
+      "oldFeetHeightThreshold": [
+        -0.42000000000000565,
+        0.21999999999999434
+      ],
+      "centerInsideFootprint": true,
+      "diskSupported": true,
+      "nearestBoundaryEdges": [
+        {
+          "a": [
+            -20,
+            17.2
+          ],
+          "b": [
+            -20,
+            -17.2
+          ],
+          "distance": 6.20002658221938
+        },
+        {
+          "a": [
+            -20,
+            -17.2
+          ],
+          "b": [
+            20,
+            -17.2
+          ],
+          "distance": 9.863474723643957
+        },
+        {
+          "a": [
+            20,
+            17.2
+          ],
+          "b": [
+            -20,
+            17.2
+          ],
+          "distance": 24.53652527635604
+        },
+        {
+          "a": [
+            20,
+            -17.2
+          ],
+          "b": [
+            20,
+            17.2
+          ],
+          "distance": 33.79997341778062
+        }
+      ],
+      "selectedSurfaces": [
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 0,
+          "top": 0.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread"
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": -0.2,
+          "top": 0,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "landing"
+        }
+      ],
+      "choices": [
+        {
+          "id": "up-1",
+          "fromFloor": 0,
+          "toFloor": 1,
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "top": 0.2,
+          "kind": "stairs",
+          "floor": 0,
+          "rejectedBy": []
+        }
+      ],
+      "bodySupport": {
+        "kind": "stairs",
+        "floor": 0,
+        "y": 76.8,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 0,
+          "toFloor": 1
+        }
+      },
+      "centerSupport": {
+        "kind": "stairs",
+        "floor": 0,
+        "y": 76.8,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 0,
+          "toFloor": 1
+        }
+      },
+      "nearbySolids": [
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 0,
+          "top": 0.2,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 0.2,
+          "top": 0.4,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": -0.2,
+          "top": 0,
+          "fromFloor": 0,
+          "toFloor": 1,
+          "kind": "landing",
+          "steppable": true
+        },
+        {
+          "id": "up-1",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.4,
+            "z1": -7
+          },
+          "bottom": 3.4,
+          "top": 3.6,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "up-2",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7,
+            "z1": -6.6
+          },
+          "bottom": 3.6,
+          "top": 3.8,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "tread",
+          "steppable": true
+        },
+        {
+          "id": "lower-link",
+          "rect": {
+            "x0": -14.6,
+            "x1": -13,
+            "z0": -7.8,
+            "z1": -7.4
+          },
+          "bottom": 3.2,
+          "top": 3.4,
+          "fromFloor": 1,
+          "toFloor": 2,
+          "kind": "landing",
+          "steppable": true
+        }
+      ],
+      "movementBlockedAtOldY": true
+    }
+  ]
+}

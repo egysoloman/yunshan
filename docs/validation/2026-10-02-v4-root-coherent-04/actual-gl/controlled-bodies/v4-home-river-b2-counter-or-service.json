@@ -1,0 +1,250 @@
+{
+  "actualBody": {
+    "position": {
+      "x": -593.8000000000001,
+      "y": 32.6,
+      "z": 799.2
+    },
+    "floor": 0,
+    "inside": "river-b2",
+    "blockedAccess": null,
+    "eye": [
+      -593.8000000000001,
+      34.32,
+      799.2
+    ],
+    "yaw": -0.0665681637744053,
+    "pitch": -0.05
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 12,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": true,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 689,
+      "triangles": 877698
+    },
+    "total": {
+      "calls": 746,
+      "triangles": 956456
+    },
+    "shadowCalls": 57,
+    "shadowTriangles": 78758
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    },
+    {
+      "id": 25,
+      "diagnostics": null
+    },
+    {
+      "id": 26,
+      "diagnostics": null
+    },
+    {
+      "id": 27,
+      "diagnostics": null
+    },
+    {
+      "id": 28,
+      "diagnostics": null
+    },
+    {
+      "id": 29,
+      "diagnostics": null
+    },
+    {
+      "id": 30,
+      "diagnostics": null
+    },
+    {
+      "id": 31,
+      "diagnostics": null
+    },
+    {
+      "id": 32,
+      "diagnostics": null
+    },
+    {
+      "id": 33,
+      "diagnostics": null
+    },
+    {
+      "id": 34,
+      "diagnostics": null
+    },
+    {
+      "id": 35,
+      "diagnostics": null
+    },
+    {
+      "id": 36,
+      "diagnostics": null
+    },
+    {
+      "id": 37,
+      "diagnostics": null
+    },
+    {
+      "id": 38,
+      "diagnostics": null
+    },
+    {
+      "id": 39,
+      "diagnostics": null
+    },
+    {
+      "id": 40,
+      "diagnostics": null
+    },
+    {
+      "id": 41,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 8,
+      "total": 482,
+      "created": 19,
+      "released": 11,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 8,
+    "actualMeshes": 56,
+    "actualInstances": 9816,
+    "ownedGeometryCount": 56,
+    "interiorBuildingRefs": 11,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 8,
+      "releases": 11,
+      "geometryDisposals": 75,
+      "instanceDisposals": 75,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 655,
+      "textures": 11
+    }
+  },
+  "verticalHits": [],
+  "name": "v4-home-river-b2-counter-or-service",
+  "buildingId": "river-b2",
+  "declaredDiagnosticCameraAim": null,
+  "scope": "Actual WebGL fixed-source controlled body capture; not a normal player journey or Mac performance/reference-art pass."
+}

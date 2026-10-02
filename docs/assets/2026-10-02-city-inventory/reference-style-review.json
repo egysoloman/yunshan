@@ -1,0 +1,27 @@
+{
+  "previousV2": {
+    "observedAt": "2026-10-02T06:48:14.915225+00:00",
+    "imageName": "market-b24-reference-v2.png",
+    "bytes": 2684312,
+    "sha256": "2761909fdfa690f85f6580cbb73e551c8800994b1f6a430d97284aa16e0508b8",
+    "actualRootMaterialization": "Authorized download_file succeeded; actual view_image pixel inspection completed",
+    "disposition": "REJECTED_STYLE_CANDIDATE_BY_USER",
+    "parentLatestInstruction": "Voxel and future Chinese style required. v2 is traditional realistic courtyard; Mac model submission paused while image reference is redone. Keep only the intended courtyard level relationship, not this style.",
+    "rootPixelFinding": "Image uses realistic curved tiled roofs, realistic wood/stones and traditional balustrades with small metallic accents; it does not show the required readable fine voxel construction or convincing future technology.",
+    "geometryLimit": "Concept reference is not CAD, actual 9+3 roof proof, physical door clearance, source dimensions or a completed 3D house. No geometry recipe is modified.",
+    "targetStyle": "Readable small-grid hard edges and stepped eaves; modular facades; future metal and glass, energy light strips and cantilevered corridors; preserve authoritative building/door/stair/support interfaces.",
+    "generationStatus": "No Tripo model received by root. Parent authorised one60-credit untextured segmentation experiment; extra payments unapproved; submission is paused awaiting replacement style reference.",
+    "fullGoal": "NOT_COMPLETE"
+  },
+  "current": {
+    "imageName": "market-b24-reference-v3-voxel-future.png",
+    "bytes": 2547717,
+    "sha256": "572209fcd7d260debbc624c42949cf887c27862c75f57ed8ae71ad1dcbe90574",
+    "actualRootDownloadAndPixelInspection": true,
+    "disposition": "CURRENT_STYLE_REFERENCE_V3_NOT_CAD_OR_IMPLEMENTED_ASSET",
+    "featuresSeen": "Small-grid hard stepped eaves, square posts/modules, metal/glass facade, cyan energy strips, warm module lights, a glass-metal cross-courtyard elevated corridor.",
+    "authorityLimit": "The elevated corridor is a new style proposal, not source FloorPlan geometry, walkability or clearance proof. No roof count/CAD/precise interface claim.",
+    "experimentAuthorization": "Parent confirms exactly one60-credit untextured segmentation test authorised. Extra payments unapproved; no submitted task/model result has reached root.",
+    "fallback": "If segmentation is unsatisfactory, produce and validate independently reusable walls/windows/gate/bonsai and all full household parts with explicit assembly interfaces."
+  }
+}

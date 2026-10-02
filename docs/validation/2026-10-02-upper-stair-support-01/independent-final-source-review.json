@@ -1,0 +1,36 @@
+{
+  "reviewer": "/root/architecture_review",
+  "reportedAt": "2026-10-02T08:36:00Z",
+  "mode": "read-only final audit; no file edits or tests/GPU started",
+  "result": "PASS_NO_SUBMISSION_BLOCKER_FOUND",
+  "providerDiff": "candidate landing height full support disk with per-query height cache",
+  "controllerUnchangedSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+  "preserved": [
+    "centre reachability +.22/-.42",
+    "radius .35 and full union boundary",
+    "true floor openings and treads",
+    "solid/headroom collision",
+    "access permissions"
+  ],
+  "regressionDiff": "existing 3.4/6.6m cases extended to 0→1→2→1→0 plus exact browser failure pose normal W",
+  "runtime94CurrentMatchRootChecks": true,
+  "related": {
+    "tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "exit": 0
+  },
+  "buildExit": 0,
+  "new05GL": {
+    "positivePassed": 17,
+    "expectedBlockedHoles": 2,
+    "routes": 19,
+    "roundtrip": "0→1→2→1→0",
+    "rawArchived": 58,
+    "actualNewHTTPEntry": "200 / fb95a40c52a9a18c86510d004398d89128ee473994c3c53359c964c4d736581c / non-SW"
+  },
+  "newFullSuite": "NOT_RUN",
+  "art": "FAIL",
+  "ordinaryJourney": "NOT_RUN_THIS_BATCH",
+  "macOS": "NOT_VALIDATED"
+}

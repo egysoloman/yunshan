@@ -1,0 +1,76 @@
+{
+  "revision": "03",
+  "scope": "52 physical/16 assemblies/77 total BOM rows; current style V3 only; no generated/installed/approved models or new authority routes.",
+  "libraryFileId": "libfile_c09c6cd169a481918d809c2f4210c1b6",
+  "fileId": "file_000000007f5c81f6a5da3e69891a1483",
+  "version": 0,
+  "uploadStatus": "succeeded",
+  "localZIP": "/tmp/yunshan-home-pilot-bom-01/market-b24-home-bom-revision03.zip",
+  "bytes": 8442241,
+  "sha256": "d0b6ea46ae156343518bc46f40d733de48941e9b7e3c1c5407c9c141b1e55ebf",
+  "memberCount": 112,
+  "CRCAndOriginalByteSHAAllPass": true,
+  "officialCurrentMetadataHelperExitCode": 0,
+  "localLibraryIdentityMatches": true,
+  "base67RowsAnd47IDsUnchanged": true,
+  "old02ZIPUnchanged": true,
+  "pilotRoughMasterKinds": 21,
+  "wholeProjectReusableRoughMasterKinds": 22,
+  "wholeProjectNewGeometryKinds": 30,
+  "pilotAbsentRequirementKinds": 31,
+  "currentCatalogRows": 1068,
+  "currentCatalogExtractSHA": "bf8b54c6134248d675bce53143fdafcefcdfc495b6271a82e51de1db91872f53",
+  "paidGenerationCalls": 0,
+  "newActualModelInstalls": 0,
+  "approvedExternalMounts": 0,
+  "sourceEdits": 0,
+  "newGPUOrGameTests": 0,
+  "receiptCredentialScanCounts": {
+    "private_key_blocks": 0,
+    "credential_value_strings": 0,
+    "signed_url_parameters": 0
+  },
+  "currentAuthority": "One60-credit V3 shell-segmentation experiment approved; no submission/model/charge evidence received; additional paid fallback not authorized.",
+  "files": [
+    {
+      "name": "bom-full-revision03.csv",
+      "bytes": 126706,
+      "sha256": "afa9a55ca4a06962f1872615f792d2f7e2c67f13967a2da5070a3e1656bbafdb"
+    },
+    {
+      "name": "bom-full-revision03.json",
+      "bytes": 360710,
+      "sha256": "8fedd18c1d2fb126a852efcf75ee5629d280d9ba32b0f6cb91b0b8306fa0cd12"
+    },
+    {
+      "name": "reference-interface-revision03.csv",
+      "bytes": 46363,
+      "sha256": "c4f494c5819b800fa08b9c9d6e174570ccf9bb474a13286680d89d53f837d710"
+    },
+    {
+      "name": "reference-interface-revision03.json",
+      "bytes": 67847,
+      "sha256": "35b9b3497723c45550180f50ba132b336fd75df8fb059e6beb9b844357ebfb2f"
+    },
+    {
+      "name": "README.md",
+      "bytes": 5315,
+      "sha256": "d59fcd7fe4fb81c1fe2b8e75f99f42ade0fa11976b698119e935c6cb1648de6f"
+    },
+    {
+      "name": "consistency.json",
+      "bytes": 1449,
+      "sha256": "bf783fd8f963b2287e64525d0a6b73b824f6b3c5b41cef949dabf1455d97e779"
+    },
+    {
+      "name": "zip-validation-revision03.json",
+      "bytes": 25294,
+      "sha256": "9fb7c8662c69e9c510a2e67135fe6de4410d21e2eca44e739c3d6e7a3558bd55"
+    },
+    {
+      "name": "library-upload-revision03.json",
+      "bytes": 1400,
+      "sha256": "c6a5901cf15a28ae1e825ae3b16e77439063e20a03819b9ded788c95243166a0"
+    }
+  ]
+}

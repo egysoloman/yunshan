@@ -1,0 +1,31 @@
+{
+  "consumer": "root",
+  "items": [
+    {
+      "libraryID": "libfile_30da5f5b3fcc8191a9a8b8dfa84393aa",
+      "fileID": "file_00000000fe84822fa8712df16b343a98",
+      "name": "建筑组件库：体素风模块化图鉴-2.png",
+      "expectedBytes": 2239701
+    },
+    {
+      "libraryID": "libfile_65b1952b69888191bd2f96b6ad637742",
+      "fileID": "file_00000000268c81f5865a82915652bff8",
+      "name": "山城古风现代建筑模块化组件库-1.png",
+      "expectedBytes": 2302275
+    }
+  ],
+  "officialLibraryReadAndPrepare": "SUCCEEDED_METADATA_ONLY",
+  "nativeImageReadWarning": "Native image pixels were unavailable; returned extracted text only.",
+  "returnedExactFileIDDownload": "FAILED_BOTH: file could not be authorized or resolved",
+  "officialPreparedSignedTransferGET": "FAILED_BOTH: URLError, no HTTP status observed",
+  "officialSkillHelperResults": "Producer city_vehicles separately attempted each exact transfer once; helper exit1 with library file transfer failed: download failed; originals preserved in this directory",
+  "rootReceivedNativePixels": 0,
+  "rootActualView": false,
+  "inventedHTTPStatusOrAuthDiagnosis": false,
+  "signedURLsSavedInGitOrPackage": false,
+  "twoEarlierBuildingReferences": "Actually downloaded, viewed and SHA-preserved; 28-item mapping remains usable",
+  "interiorReferenceMappingAdded": 0,
+  "existingFullFurnitureBOMPreserved": true,
+  "userClarification": "User says generated Tripo meshes are poor, not that these new reference images are poor. Parent has actually viewed the new references; this consumer has not.",
+  "nextRecovery": "Normally transfer the authorized original images into this execution environment, then inspect actual pixels before mapping; do not infer furniture shapes from OCR or parent descriptions"
+}

@@ -1,0 +1,238 @@
+{
+  "actualBody": {
+    "position": {
+      "x": 1370,
+      "y": 388.6,
+      "z": -1424.1999999998918
+    },
+    "floor": 0,
+    "inside": "starport-b0",
+    "blockedAccess": null,
+    "eye": [
+      1370,
+      390.32000000000005,
+      -1424.1999999998918
+    ],
+    "yaw": 0,
+    "pitch": -0.05
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 12,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": false,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 109,
+      "triangles": 237730
+    },
+    "total": {
+      "calls": 153,
+      "triangles": 377212
+    },
+    "shadowCalls": 44,
+    "shadowTriangles": 139482
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    },
+    {
+      "id": 25,
+      "diagnostics": null
+    },
+    {
+      "id": 26,
+      "diagnostics": null
+    },
+    {
+      "id": 27,
+      "diagnostics": null
+    },
+    {
+      "id": 28,
+      "diagnostics": null
+    },
+    {
+      "id": 29,
+      "diagnostics": null
+    },
+    {
+      "id": 30,
+      "diagnostics": null
+    },
+    {
+      "id": 31,
+      "diagnostics": null
+    },
+    {
+      "id": 32,
+      "diagnostics": null
+    },
+    {
+      "id": 33,
+      "diagnostics": null
+    },
+    {
+      "id": 34,
+      "diagnostics": null
+    },
+    {
+      "id": 35,
+      "diagnostics": null
+    },
+    {
+      "id": 36,
+      "diagnostics": null
+    },
+    {
+      "id": 37,
+      "diagnostics": null
+    },
+    {
+      "id": 38,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 6,
+      "total": 482,
+      "created": 19,
+      "released": 13,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 6,
+    "actualMeshes": 39,
+    "actualInstances": 9560,
+    "ownedGeometryCount": 39,
+    "interiorBuildingRefs": 7,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 8,
+      "releases": 13,
+      "geometryDisposals": 89,
+      "instanceDisposals": 89,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 489,
+      "textures": 7
+    }
+  },
+  "verticalHits": [],
+  "name": "v4-transport-waterfront-starport-b0-counter-or-service",
+  "buildingId": "starport-b0",
+  "declaredDiagnosticCameraAim": null,
+  "scope": "Actual WebGL fixed-source controlled body capture; not a normal player journey or Mac performance/reference-art pass."
+}

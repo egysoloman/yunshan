@@ -1,0 +1,127 @@
+{
+  "scope": "Producer post-run actual pixel review and bounded function result; separate from raw57 run files, source/results/old04 failures unchanged",
+  "at": "2026-10-02T07:23:07.327416+00:00",
+  "functionalStatus": "PASS_SINGLE_HOME_THREE_FLOOR_ROUNDTRIP",
+  "runExitCode": 0,
+  "captures": 8,
+  "motorRoutes": 19,
+  "positiveMotorRoutes": 17,
+  "expectedHoleBlockedMotorRoutes": 2,
+  "source99Stable": true,
+  "allProvenanceStable": true,
+  "fixtureAndHelperStable": true,
+  "entrySHA256": "fb95a40c52a9a18c86510d004398d89128ee473994c3c53359c964c4d736581c",
+  "runManifestSHA256": "f8383a117e8d9a1345023f7b1b1ba879410961f62db69d59e790bb96cfbda405",
+  "relatedCPUChecks": 26,
+  "relatedCPUExitCode": 0,
+  "strictBuildExitCode": 0,
+  "newSourceFullRules": "NOT_RUN",
+  "old465": "Frozen04 only, unchanged",
+  "samePilotGeometryAsOld04": true,
+  "bodyExactJSONSHA256": "ac302b79c381ded7e075d5c2a108d5e612ee6a5c290e05c6087f9732c66dba68",
+  "finalActualState": {
+    "position": {
+      "x": -403.6056850325325,
+      "y": 76.6,
+      "z": 307.6024104537938
+    },
+    "floor": 0,
+    "inside": "market-b24",
+    "money": 520,
+    "homeId": "market-b24",
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "hour": 9.1,
+    "speed": 1
+  },
+  "floor0Hole": "NOT_APPLICABLE: actual authoritative floor0 stairHole=null; no invented hole negative",
+  "floor1And2Holes": "Expected disk rejection; both original motor status=failed retained and actual visible resident geometry has no matching height triangle at targets",
+  "permissionScope": "Actual default traveler then legitimate renter, all0/1/2 permissions true at each recorded landing; unauthorized browser scenario NOT_RUN, belongs to related CPU evidence only",
+  "ownedDisposalAfter": {
+    "stats": {
+      "resident": 0,
+      "total": 482,
+      "created": 16,
+      "released": 16,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": true
+    },
+    "actualSceneGroups": 0,
+    "actualMeshes": 0,
+    "actualInstances": 0,
+    "ownedGeometryCount": 0,
+    "interiorBuildingRefs": 0,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 5,
+      "releases": 16,
+      "geometryDisposals": 110,
+      "instanceDisposals": 110,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 0,
+      "textures": 1
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "art": "FAIL_REMAINS",
+  "macOS": "NOT_VALIDATED",
+  "nativeJourney": "NOT_RUN_THIS_BATCH",
+  "NPCNaturalDoorBed": "NOT_RUN_THIS_BATCH",
+  "actualViewedPixels": [
+    {
+      "path": "home-door.png",
+      "sha256": "ab6f7f884a137e4d7cc92dda27fe8c387cf627212d4b0763ffafd2448a871608",
+      "actualPixelInspection": true,
+      "finding": "Same huge black canopy, flat pale walls/columns, broken striped window edges; no art improvement."
+    },
+    {
+      "path": "floor-1-hole.png",
+      "sha256": "3db091b27f7b47c2f06a9950d90dbbad85468fdb1d6b76f3f3b474f4ef5cb01f",
+      "actualPixelInspection": true,
+      "finding": "Real opening visible between crude unrailed pale stair blocks; flat bright material and window stripes."
+    },
+    {
+      "path": "old-failure-first-tread-passed.png",
+      "sha256": "ff6c6e8e114c4eb7bac1f1663c29e7e95f79f740a39af69aa7aae77e422e4c47",
+      "actualPixelInspection": true,
+      "finding": "Bad near-downward camera composition filled by orange slab/floor; motor+resident support prove movement but image cannot establish stair beauty."
+    },
+    {
+      "path": "stairs-12-half-turn.png",
+      "sha256": "e557973e75e00b70401bd491c5286cc5834cfafb1b5ee414b01b5443137f80ff",
+      "actualPixelInspection": true,
+      "finding": "Step sequence visible at right/lower, large pale blocks and broad orange floor, no readable rail/finish."
+    },
+    {
+      "path": "home-stair-upper2.png",
+      "sha256": "d14a95231eb465c9e2c4474bfcf2af9908465bb8286d499a4dc91cc069c025b9",
+      "actualPixelInspection": true,
+      "finding": "Upper flight/hole visible, primitive unrailed treads and striped window/frame edges."
+    },
+    {
+      "path": "floor-2-hole.png",
+      "sha256": "4af465a8c3d6a56445ad3bdddc87395c73b2d3d88cf13c5c2eb85e009dd11707",
+      "actualPixelInspection": true,
+      "finding": "Actual upper hole visible beside stair block; texture/lighting/facade still crude."
+    },
+    {
+      "path": "home-returned-floor1.png",
+      "sha256": "190eadf304efa9c707e29706a3bbda78636e949ce6dd4aed6d65ab20db55423b",
+      "actualPixelInspection": true,
+      "finding": "Bad almost vertical upward camera composition shows sky, not a usable stair scene. Raw body/route/mesh prove returned floor1 only."
+    },
+    {
+      "path": "home-returned-ground.png",
+      "sha256": "29bfb587ed4a8045e68f2dbedfdc474c10184d214b93573be3a621c994787e43",
+      "actualPixelInspection": true,
+      "finding": "Bad upward camera similarly sky-dominated; raw body/route/mesh prove returned floor0 only."
+    }
+  ]
+}

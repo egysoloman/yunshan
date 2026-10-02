@@ -1,0 +1,181 @@
+{
+  "label": "v4-home-river-b2-return-from-upper-void",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -598.3998177337102,
+      "y": 36,
+      "z": 800.0038883473626
+    },
+    {
+      "x": -598.36,
+      "y": 36,
+      "z": 799.5000000000001
+    }
+  ],
+  "start": {
+    "x": -598.3998177337102,
+    "y": 36,
+    "z": 800.0038883473626
+  },
+  "steps": 7,
+  "motorSeconds": 0.105,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3998177337102,
+        "y": 36,
+        "z": 800.0038883473626
+      },
+      "after": {
+        "x": -598.394145906389,
+        "y": 36,
+        "z": 799.9321120951977
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000001334,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.394145906389,
+        "y": 36,
+        "z": 799.9321120951977
+      },
+      "after": {
+        "x": -598.3884740790678,
+        "y": 36,
+        "z": 799.8603358430328
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000001334,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3884740790678,
+        "y": 36,
+        "z": 799.8603358430328
+      },
+      "after": {
+        "x": -598.3828022517466,
+        "y": 36,
+        "z": 799.7885595908679
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000001334,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3828022517466,
+        "y": 36,
+        "z": 799.7885595908679
+      },
+      "after": {
+        "x": -598.3771304244253,
+        "y": 36,
+        "z": 799.716783338703
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000002231,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3771304244253,
+        "y": 36,
+        "z": 799.716783338703
+      },
+      "after": {
+        "x": -598.3714585971042,
+        "y": 36,
+        "z": 799.645007086538
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000001334,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3714585971042,
+        "y": 36,
+        "z": 799.645007086538
+      },
+      "after": {
+        "x": -598.3657867697829,
+        "y": 36,
+        "z": 799.5732308343731
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000002231,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -598.3657867697829,
+        "y": 36,
+        "z": 799.5732308343731
+      },
+      "after": {
+        "x": -598.3601149424617,
+        "y": 36,
+        "z": 799.5014545822082
+      },
+      "floor": 1,
+      "inside": "river-b2",
+      "metres": 0.07200000000001334,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 183740.29999999702,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 183759.6000000015,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -598.3601149424617,
+    "y": 36,
+    "z": 799.5014545822082
+  },
+  "floor": 1,
+  "inside": "river-b2",
+  "protectedStateUnchanged": true
+}

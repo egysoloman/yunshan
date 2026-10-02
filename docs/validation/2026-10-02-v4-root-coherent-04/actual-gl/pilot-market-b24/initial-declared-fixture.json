@@ -1,0 +1,101 @@
+{
+  "position": {
+    "x": -390.8,
+    "y": 76.37358490566038,
+    "z": 335.40000000000003
+  },
+  "money": 600,
+  "role": "traveler",
+  "identities": [
+    "traveler"
+  ],
+  "hour": 8.083333333333334,
+  "speed": 1,
+  "building": {
+    "id": "market-b24",
+    "districtId": "market",
+    "name": "千灯市集·钱庄街·里居7",
+    "kind": "home",
+    "position": {
+      "x": -390.8,
+      "y": 76,
+      "z": 316.20000000000005
+    },
+    "width": 40,
+    "depth": 34.4,
+    "height": 10.200000000000001,
+    "floors": 3,
+    "rotation": 0,
+    "door": {
+      "x": -390.8,
+      "y": 76.60000000000001,
+      "z": 333.40000000000003
+    },
+    "capacity": 129,
+    "seed": 668619109,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.39999999999999,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.39999999999999,
+          "z": 307.20000000000005
+        }
+      }
+    ]
+  },
+  "fixtureScope": "Initial outside position only; graphics fixed for observation; clock natural and live"
+}

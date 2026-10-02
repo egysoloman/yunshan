@@ -1,0 +1,34 @@
+✔ civic halls and observation deck remain public while office and underground access require earned permissions (1.077394ms)
+✔ identity packages accumulate and preserve access across a change of displayed profession (0.232579ms)
+✔ stepped occupied floors use a shared vertical shaft while underground retains its full footprint (1.351157ms)
+✔ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (7172.869714ms)
+✔ glass panes are physical barriers while declared door openings allow a .35m body (2751.54831ms)
+✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (2339.986226ms)
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (404.257012ms)
+✔ v4 courtyard is genuinely supported outdoor ground and continuous W returns through an actual opening (433.412563ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 3.4m storey height without E or reset (367.751801ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 6.6m storey height without E or reset (468.764096ms)
+✔ v4 exact market-b24 upper first-tread pose advances a .35m body by normal W (4.047952ms)
+✔ v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing (33.852953ms)
+✔ v4 rotated entrance has the same physical local door and legacy E preserves arbitrary shaft x/z exactly (187.196105ms)
+✔ v4 exposed roof supports restored feet, blocks its actual volume and remains outside a room (11.678518ms)
+✔ v4 actual W cannot pass the physical market counter or walk off the top-floor stair hole (27.614779ms)
+✔ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (44.297185ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (4.082714ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (1.024346ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (0.975426ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.388379ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.404271ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (1.149226ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (2.676382ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (6.027113ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.874899ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (2941.777157ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18461.75435

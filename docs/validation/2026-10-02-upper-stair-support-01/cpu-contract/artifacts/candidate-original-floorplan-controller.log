@@ -1,0 +1,21 @@
+✔ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (8672.192052ms)
+✔ glass panes are physical barriers while declared door openings allow a .35m body (2699.443663ms)
+✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (2272.481513ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (7.454553ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (4.953357ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (0.809585ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.40932ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.329901ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (0.912323ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (6.750991ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (36.722854ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.545685ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (5954.972569ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14046.238249

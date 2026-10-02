@@ -5,3 +5,8 @@ docs/validation/**/*.patch -whitespace
 docs/validation/**/*.diff -whitespace
 # Generated PDF streams may use ASCII encodings but are binary artifacts.
 *.pdf binary
+# Keep uploaded CSV originals byte-exact while accepting their standard CRLF.
+docs/assets/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/validation/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Matplotlib SVG path streams are generated graphic originals.
+docs/validation/**/engineering-diagrams/*.svg binary

@@ -1,0 +1,76 @@
+{
+  "count_data_reused_from": "/tmp/yunshan-city-structure-audit-01/structure.json",
+  "count_probe_head": "fdbc0d13bbafd04a9a0eb19d31d96cbddf9d8536",
+  "current_head": "6c70d27fd96123a68fbd6125a326e065d54df37c",
+  "no_world_generation_or_simulation_this_task": true,
+  "protected_production_sources": [
+    {
+      "path": "src/world.ts",
+      "original_audit_sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "current_sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "equal": true
+    },
+    {
+      "path": "src/types.ts",
+      "original_audit_sha256": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda",
+      "current_sha256": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda",
+      "equal": true
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "original_audit_sha256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+      "current_sha256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+      "equal": true
+    },
+    {
+      "path": "src/renderer.ts",
+      "original_audit_sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "current_sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "equal": true
+    },
+    {
+      "path": "src/transport-geometry.ts",
+      "original_audit_sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "current_sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "equal": true
+    },
+    {
+      "path": "src/controller.ts",
+      "original_audit_sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "current_sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "equal": true
+    },
+    {
+      "path": "src/journey.ts",
+      "original_audit_sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "current_sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "equal": true
+    },
+    {
+      "path": "src/aviation.ts",
+      "original_audit_sha256": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+      "current_sha256": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+      "equal": true
+    },
+    {
+      "path": "src/aviation-renderer.ts",
+      "original_audit_sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "current_sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "equal": true
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "original_audit_sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "current_sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "equal": true
+    },
+    {
+      "path": "src/main.ts",
+      "original_audit_sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "current_sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "equal": true
+    }
+  ],
+  "count_original_bytes": 184987,
+  "count_original_sha256": "d949d25543a48441d9b62b6f58d82bea93127747cad7e8b2a0582469deabeb23"
+}

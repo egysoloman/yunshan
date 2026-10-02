@@ -1,0 +1,48 @@
+{
+  "buildEntry": "/assets/index-DV9HXMzR.js",
+  "sourceHashes": {
+    "src/simulation.ts": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047",
+    "src/simulation/extensions.ts": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+    "src/main.ts": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+    "src/world.ts": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "src/ui.ts": "abe5bddf0924ff625caa9f116461ef4815374a26c3170c5e7d0c995acc3c67bd",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/culture.ts": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+  },
+  "harnessSHA256": "5d109c43fcb2b593fd21ac5d8942d0ff733e14befa17c952f22ff8dbbb445e77",
+  "results": [
+    {
+      "name": "world boots in first person with real city aircraft and live simulation",
+      "districts": 11,
+      "buildings": 612,
+      "citizens": 616,
+      "vehicles": 344,
+      "tick": 20,
+      "drawCalls": 709,
+      "triangles": 902368,
+      "fps": 0
+    },
+    {
+      "name": "native button keyboard activation remains accessible",
+      "key": "Space"
+    },
+    {
+      "name": "manual time and paused simulation with day/night rendering",
+      "dayHour": 15.5,
+      "nightHour": 22
+    },
+    {
+      "name": "actual keyboard first-person movement",
+      "metres": 4.799999999999028
+    }
+  ],
+  "errors": [],
+  "aviationStage": null,
+  "failure": "Error: Actual native W sale setup did not reach {\"x\":-859.0000000000001,\"y\":18.6,\"z\":1127.4}"
+}

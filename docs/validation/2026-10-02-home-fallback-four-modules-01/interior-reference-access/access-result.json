@@ -1,0 +1,33 @@
+{
+  "status": "PREPARE_SUCCEEDED_MATERIALIZE_FAILED",
+  "route": "Current official Library prepare_materialize plus unmodified library_file_transfer.py materialize, once per complete transfer object",
+  "files": [
+    {
+      "libraryId": "libfile_30da5f5b3fcc8191a9a8b8dfa84393aa",
+      "fileId": "file_00000000fe84822fa8712df16b343a98",
+      "fileName": "建筑组件库：体素风模块化图鉴-2.png",
+      "version": 0,
+      "localOriginalAvailable": false,
+      "producerActualPixelView": false,
+      "helperExit": 1,
+      "stderr": "library file transfer failed: download failed"
+    },
+    {
+      "libraryId": "libfile_65b1952b69888191bd2f96b6ad637742",
+      "fileId": "file_00000000268c81f5865a82915652bff8",
+      "fileName": "山城古风现代建筑模块化组件库-1.png",
+      "version": 0,
+      "localOriginalAvailable": false,
+      "producerActualPixelView": false,
+      "helperExit": 1,
+      "stderr": "library file transfer failed: download failed"
+    }
+  ],
+  "downloadAttempts": 2,
+  "retries": 0,
+  "actualImagesAvailable": 0,
+  "additionalFurnitureMappingsMade": 0,
+  "dimensionAuthority": "None; unavailable new images not used as geometry or mesh-fit evidence",
+  "signedTransferURLsArchived": false,
+  "helperPath": "/tmp/yunshan-four-modules-library-current-20261002/library_file_transfer.py"
+}

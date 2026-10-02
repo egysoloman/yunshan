@@ -1,0 +1,44 @@
+{
+  "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+  "scope": "Existing actual buildings and normal W motor. One-site projection retains original mountain/water/road/transport data and exact tested building dimensions/floors/fixtures/stairs/roofs. Unrelated buildings omitted, so terrain fallback is not the complete-world terrain contract. Continuous stairs have full real provider support; no world regeneration, simulation or GL.",
+  "records": [
+    {
+      "case": "actual upper slab soffit W rejection",
+      "start": {
+        "x": -402.6,
+        "y": 82.8,
+        "z": 309.80000000000007
+      },
+      "after": {
+        "x": -402.168,
+        "y": 82.8,
+        "z": 309.80000000000007
+      },
+      "local": {
+        "x": -11.367999999999995,
+        "y": 6.1999999999999975,
+        "z": -6.399999999999977
+      },
+      "hole": {
+        "x0": -14.8,
+        "x1": -10.8,
+        "z0": -7.8,
+        "z1": -2.2
+      },
+      "tread": {
+        "id": "return-6",
+        "rect": {
+          "x0": -12.6,
+          "x1": -11,
+          "z0": -6.6,
+          "z1": -6.2
+        },
+        "bottom": 6,
+        "top": 6.2,
+        "fromFloor": 1,
+        "toFloor": 2,
+        "kind": "tread"
+      }
+    }
+  ]
+}

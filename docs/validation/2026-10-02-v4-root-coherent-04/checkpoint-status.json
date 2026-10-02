@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-02T05:23:24.310731+00:00",
+  "capturedAt": "2026-10-02T06:41:49.735051+00:00",
   "fullRules": "PASS",
   "fullRulesProcessSession": 42667,
   "fullRulesLog": "/tmp/yunshan-v4-root-coherent-04/root-validation/rules.log",
@@ -15,7 +15,7 @@
     "exitCode": 0
   },
   "visualAcceptance": "NEW_REFERENCE_BLOCKED_PIXELS_UNAVAILABLE; OLD_REFERENCE_ART_FAIL",
-  "GL": "ORIGINAL_BROWSER_FAIL_4_PASS_1_FAIL_6_NOT_RUN; FIXED_SIX_TECHNICAL_PASS_6_OF_6; BODY_JOURNEY_PENDING",
+  "GL": "ORIGINAL_BROWSER_FAIL; FIXED_SIX_TECHNICAL_6_OF_6_ART_FAIL; CONTROLLED_SEVEN_FLOOR0_TO1_PLUS_ROOF_PASS; ORDINARY_SHOPPING_EXIT_FAIL; SINGLE_HOME_FLOOR1_TO2_FAIL",
   "fullGoal": "NOT_COMPLETE",
   "fullRulesExitCode": 0,
   "fullRulesCounts": {
@@ -34,5 +34,8 @@
   "fullRulesLogSHA256": "8c825b167081e0601977353a8050cfa2921c40e7936ae4eac03a41eb4484bd1d",
   "browserGPUOwner": "/root/visual_resume",
   "artQuality": "FAIL",
-  "rootActualVisualReview": "root-visual-review.json"
+  "rootActualVisualReview": "root-visual-review.json",
+  "migratedBrowser": "FAIL_NATIVE_SETUP_BOTH_VERSIONS; 4_ORIGINAL_CHECKS_PASS; ORIGINAL_PURCHASE_AND_REMAINDER_NOT_RUN",
+  "ordinaryURL": "SHOPPING_PUBLIC_ACTION_PASS; EXIT_FAIL; THIRD_PURCHASE_REAL; SAVE_STAGE_NOT_RUN",
+  "singleHome": "market-b24 rent/rest PASS; floor0-to1 PASS; floor1-to2 FAIL; no kitchen/bath, bed-target interaction or fine-art acceptance"
 }

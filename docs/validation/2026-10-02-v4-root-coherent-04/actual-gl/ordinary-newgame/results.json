@@ -1,0 +1,1990 @@
+{
+  "status": "failed",
+  "scope": "Normal-URL player actions with keyboard/mouse and public DOM only; static map planning is recorded separately; software GPU does not establish macOS performance",
+  "workspace": "/tmp/yunshan-v4-root-coherent-04",
+  "harnessPath": "/tmp/yunshan-v4-browser-visual-prepared-04/ordinary-player-journey.mjs",
+  "harnessHash": "70d97419bc7be5ead3537c37994f037e1b3583956408039baa29395439b06db0",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "url": "http://127.0.0.1:4191/",
+  "resume": null,
+  "plannedLayout": "current-v4",
+  "plannedFingerprint": "80cd31e2",
+  "publicGraphics": {
+    "quality": "balanced",
+    "renderDistance": "default"
+  },
+  "stopAfter": "shopping",
+  "stage": "shopping",
+  "completedStage": "shopping",
+  "persistentProfile": null,
+  "buildEntry": "/assets/index-DV9HXMzR.js",
+  "buildHash": "fee4c40b14b4ac44f0e1ea475b469df689470a1f3446f8d67fab1a2b7a0c1711",
+  "sourceHashes": {
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "src/journey.ts": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+    "src/main.ts": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047",
+    "src/simulation/banking.ts": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+    "src/simulation/clinical.ts": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+    "src/simulation/culture.ts": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+    "src/simulation/extensions.ts": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda",
+    "src/ui.ts": "abe5bddf0924ff625caa9f116461ef4815374a26c3170c5e7d0c995acc3c67bd",
+    "src/world.ts": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f"
+  },
+  "sourceHashesAfter": {
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "src/journey.ts": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+    "src/main.ts": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047",
+    "src/simulation/banking.ts": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+    "src/simulation/clinical.ts": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+    "src/simulation/culture.ts": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+    "src/simulation/extensions.ts": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda",
+    "src/ui.ts": "abe5bddf0924ff625caa9f116461ef4815374a26c3170c5e7d0c995acc3c67bd",
+    "src/world.ts": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f"
+  },
+  "records": [
+    {
+      "name": "arrival",
+      "at": "2026-10-02T05:50:12.895Z",
+      "stage": "arrival",
+      "coordinates": {
+        "x": -330,
+        "y": 52,
+        "z": 487
+      },
+      "district": "千灯市集",
+      "clock": "08:15",
+      "day": "第 1 日",
+      "speed": "1",
+      "mode": "星际旅行者",
+      "location": "晨雾渐散，街巷间的一天正在开始。",
+      "context": "云游载人无人机停机坪已停稳 · 电量 100% · 0 m/s千灯市集观景机租赁点沿路导航 · 17 m这是可载人的自动驾驶观景无人机。旅行者现场租用、登机，身体随航空器移动；空中不能退出，返航落地后继续生活。",
+      "toast": "",
+      "wallet": "600 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 709 draw",
+      "needs": "饱腹84精力90社交70娱乐70",
+      "petitions": ""
+    },
+    {
+      "name": "reached-real-sale-point",
+      "at": "2026-10-02T05:59:53.398Z",
+      "stage": "shopping",
+      "coordinates": {
+        "x": -500,
+        "y": 41,
+        "z": 567
+      },
+      "district": "千灯市集",
+      "clock": "12:35",
+      "day": "第 1 日",
+      "speed": "1",
+      "mode": "星际旅行者 · 室内",
+      "location": "已进入 千灯市集·灯市街·商肆4 · 使用 E 进出，楼梯处可换层",
+      "context": "市集 · 已进入千灯市集·灯市街·商肆41 层离开建筑 / 使用楼梯 · E请进入可使用的房间，站到对应功能点 2 米内；门外、庭院和房间远角不能办理。购物：1 层（-498.6, 40.6, 567.8） · 位置到位；工作：1 层（-498.6, 40.6, 567.8） · 位置到位。身份、营业、余额和身体条件仍须满足。购餐，吃 1 份 · 10.83 云币购餐并带 1 份 · 21.66 云币开始 60 分钟现场工班商人考核 · 80 云币食物 10.83 云币 / 份 · 库存 90 · 客流 0购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。",
+      "toast": "进入千灯市集·灯市街·商肆4，可在生活面板使用设施。楼内左后角为楼梯。",
+      "wallet": "600 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 501 draw",
+      "needs": "饱腹79精力87社交68娱乐69",
+      "petitions": "",
+      "buildingId": "market-b13",
+      "plannedSale": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      }
+    },
+    {
+      "name": "shopping",
+      "at": "2026-10-02T06:00:11.947Z",
+      "stage": "shopping",
+      "coordinates": {
+        "x": -500,
+        "y": 41,
+        "z": 567
+      },
+      "district": "千灯市集",
+      "clock": "12:39",
+      "day": "第 1 日",
+      "speed": "1",
+      "mode": "星际旅行者 · 室内",
+      "location": "已进入 千灯市集·灯市街·商肆4 · 使用 E 进出，楼梯处可换层",
+      "context": "市集 · 已进入千灯市集·灯市街·商肆41 层离开建筑 / 使用楼梯 · E请进入可使用的房间，站到对应功能点 2 米内；门外、庭院和房间远角不能办理。购物：1 层（-498.6, 40.6, 567.8） · 位置到位；工作：1 层（-498.6, 40.6, 567.8） · 位置到位。身份、营业、余额和身体条件仍须满足。购餐，吃 1 份 · 10.83 云币购餐并带 1 份 · 21.66 云币开始 60 分钟现场工班商人考核 · 80 云币食物 10.83 云币 / 份 · 库存 88 · 客流 2购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。",
+      "toast": "在千灯市集·灯市街·商肆4购买2份食物，花费21.7云币。",
+      "wallet": "578.33 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 501 draw",
+      "needs": "饱腹100精力85社交67娱乐67",
+      "petitions": "",
+      "before": 600,
+      "after": 578.33,
+      "receipt": "在千灯市集·灯市街·商肆4购买2份食物，花费21.7云币。"
+    },
+    {
+      "name": "failure",
+      "at": "2026-10-02T06:01:19.611Z",
+      "stage": "shopping",
+      "coordinates": {
+        "x": -500,
+        "y": 41,
+        "z": 567
+      },
+      "district": "千灯市集",
+      "clock": "13:03",
+      "day": "第 1 日",
+      "speed": "1",
+      "mode": "星际旅行者 · 室内",
+      "location": "已进入 千灯市集·灯市街·商肆4 · 使用 E 进出，楼梯处可换层",
+      "context": "市集 · 已进入千灯市集·灯市街·商肆41 层离开建筑 / 使用楼梯 · E请进入可使用的房间，站到对应功能点 2 米内；门外、庭院和房间远角不能办理。购物：1 层（-498.6, 40.6, 567.8） · 位置到位；工作：1 层（-498.6, 40.6, 567.8） · 位置到位。身份、营业、余额和身体条件仍须满足。购餐，吃 1 份 · 10.79 云币购餐并带 1 份 · 21.59 云币开始 60 分钟现场工班商人考核 · 80 云币食物 10.79 云币 / 份 · 库存 87 · 客流 0购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。",
+      "toast": "在千灯市集·灯市街·商肆4购买1份食物，花费10.8云币。",
+      "wallet": "578.33 云币",
+      "identities": "星际旅行者",
+      "home": "尚未在城中安家",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 501 draw",
+      "needs": "饱腹100精力85社交67娱乐67",
+      "petitions": ""
+    }
+  ],
+  "inputs": [
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"quality\"]')",
+      "value": "balanced"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "arrival",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "market"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"market-b13\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "public-navigation",
+      "destination": "千灯市集·灯市街·商肆4",
+      "waypoints": [
+        {
+          "index": 6,
+          "x": -328,
+          "y": 52,
+          "z": 480,
+          "text": "沿金线继续 · 约 7 米"
+        },
+        {
+          "index": 10,
+          "x": -344,
+          "y": 51,
+          "z": 504,
+          "text": "沿金线继续 · 约 22 米"
+        },
+        {
+          "index": 13,
+          "x": -376,
+          "y": 49.800000000000004,
+          "z": 512,
+          "text": "沿金线继续 · 约 52 米"
+        },
+        {
+          "index": 15,
+          "x": -424,
+          "y": 48.6,
+          "z": 512,
+          "text": "沿金线继续 · 约 97 米"
+        }
+      ]
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "planned-ground-route",
+      "source": "src/journey.ts",
+      "sourceSHA256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "from": {
+        "x": -330,
+        "y": 52,
+        "z": 487
+      },
+      "targetId": "market-b13-door",
+      "points": [
+        {
+          "x": -330,
+          "y": 52,
+          "z": 487
+        },
+        {
+          "x": -328,
+          "y": 51.5375,
+          "z": 487
+        },
+        {
+          "x": -328,
+          "y": 51.800000000000004,
+          "z": 480
+        },
+        {
+          "x": -328,
+          "y": 52.400000000000006,
+          "z": 464
+        },
+        {
+          "x": -330,
+          "y": 52.6,
+          "z": 460
+        },
+        {
+          "x": -328,
+          "y": 52.400000000000006,
+          "z": 464
+        },
+        {
+          "x": -328,
+          "y": 52,
+          "z": 480
+        },
+        {
+          "x": -336,
+          "y": 51.800000000000004,
+          "z": 480
+        },
+        {
+          "x": -336,
+          "y": 51.400000000000006,
+          "z": 496
+        },
+        {
+          "x": -344,
+          "y": 51.2,
+          "z": 496
+        },
+        {
+          "x": -344,
+          "y": 51,
+          "z": 504
+        },
+        {
+          "x": -352,
+          "y": 50.800000000000004,
+          "z": 504
+        },
+        {
+          "x": -352,
+          "y": 50.6,
+          "z": 512
+        },
+        {
+          "x": -376,
+          "y": 49.800000000000004,
+          "z": 512
+        },
+        {
+          "x": -400,
+          "y": 49.2,
+          "z": 512
+        },
+        {
+          "x": -424,
+          "y": 48.6,
+          "z": 512
+        },
+        {
+          "x": -448,
+          "y": 48,
+          "z": 512
+        },
+        {
+          "x": -472,
+          "y": 47.2,
+          "z": 512
+        },
+        {
+          "x": -472,
+          "y": 46.6,
+          "z": 534.6
+        },
+        {
+          "x": -472,
+          "y": 46,
+          "z": 557.4
+        },
+        {
+          "x": -472,
+          "y": 45.400000000000006,
+          "z": 580
+        },
+        {
+          "x": -472,
+          "y": 44.800000000000004,
+          "z": 602.6
+        },
+        {
+          "x": -472,
+          "y": 44.2,
+          "z": 625.4000000000001
+        },
+        {
+          "x": -472,
+          "y": 43.6,
+          "z": 648
+        },
+        {
+          "x": -492,
+          "y": 43,
+          "z": 648
+        },
+        {
+          "x": -510,
+          "y": 42.6,
+          "z": 650
+        },
+        {
+          "x": -496,
+          "y": 42.2,
+          "z": 648
+        },
+        {
+          "x": -496,
+          "y": 41.800000000000004,
+          "z": 626.6
+        },
+        {
+          "x": -496,
+          "y": 41.2,
+          "z": 605.4
+        },
+        {
+          "x": -498.6,
+          "y": 40.800000000000004,
+          "z": 584
+        },
+        {
+          "x": -498.6,
+          "y": 40.6,
+          "z": 576.8000000000001
+        }
+      ],
+      "edgeIds": [
+        "road-river-station-market-station",
+        "road-market-quarter-1-market-station",
+        "road-market-b13-door-market-quarter-1"
+      ],
+      "metres": 485.7895062671224,
+      "scope": "Pure production road/bridge planner using the public current body; no browser state or position writes."
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -140.77751658213268,
+      "dy": 0,
+      "at": "2026-10-02T05:50:47.580Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -330,
+        "y": 52,
+        "z": 487
+      },
+      "after": {
+        "x": -328,
+        "y": 53,
+        "z": 463
+      },
+      "target": {
+        "x": -328,
+        "y": 52.400000000000006,
+        "z": 464
+      },
+      "startedAt": "2026-10-02T05:50:47.580Z",
+      "endedAt": "2026-10-02T05:51:02.444Z",
+      "elapsedMs": 14864,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -224.91364740785087,
+      "dy": 0,
+      "at": "2026-10-02T05:51:11.329Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -328,
+        "y": 53,
+        "z": 463
+      },
+      "after": {
+        "x": -331,
+        "y": 53,
+        "z": 459
+      },
+      "target": {
+        "x": -330,
+        "y": 52.6,
+        "z": 460
+      },
+      "startedAt": "2026-10-02T05:51:11.329Z",
+      "endedAt": "2026-10-02T05:51:13.076Z",
+      "elapsedMs": 1747,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -576,
+      "dy": 0,
+      "at": "2026-10-02T05:51:22.410Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -455.3365167709367,
+      "dy": 0,
+      "at": "2026-10-02T05:51:27.441Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -331,
+        "y": 53,
+        "z": 459
+      },
+      "after": {
+        "x": -328,
+        "y": 53,
+        "z": 463
+      },
+      "target": {
+        "x": -328,
+        "y": 52.400000000000006,
+        "z": 464
+      },
+      "startedAt": "2026-10-02T05:51:27.441Z",
+      "endedAt": "2026-10-02T05:51:30.058Z",
+      "elapsedMs": 2617,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 180.13983342352824,
+      "dy": 0,
+      "at": "2026-10-02T05:51:41.275Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -328,
+        "y": 53,
+        "z": 463
+      },
+      "after": {
+        "x": -328,
+        "y": 52,
+        "z": 478
+      },
+      "target": {
+        "x": -328,
+        "y": 52,
+        "z": 480
+      },
+      "startedAt": "2026-10-02T05:51:41.275Z",
+      "endedAt": "2026-10-02T05:51:47.501Z",
+      "elapsedMs": 6226,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 441.9392212226774,
+      "dy": 0,
+      "at": "2026-10-02T05:51:52.006Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -328,
+        "y": 52,
+        "z": 478
+      },
+      "after": {
+        "x": -337,
+        "y": 52,
+        "z": 480
+      },
+      "target": {
+        "x": -336,
+        "y": 51.800000000000004,
+        "z": 480
+      },
+      "startedAt": "2026-10-02T05:51:52.006Z",
+      "endedAt": "2026-10-02T05:51:56.681Z",
+      "elapsedMs": 4675,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -462.7454912213297,
+      "dy": 0,
+      "at": "2026-10-02T05:52:03.316Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -337,
+        "y": 52,
+        "z": 480
+      },
+      "after": {
+        "x": -336,
+        "y": 51,
+        "z": 494
+      },
+      "target": {
+        "x": -336,
+        "y": 51.400000000000006,
+        "z": 496
+      },
+      "startedAt": "2026-10-02T05:52:03.316Z",
+      "endedAt": "2026-10-02T05:52:09.807Z",
+      "elapsedMs": 6491,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 462.74549122132964,
+      "dy": 0,
+      "at": "2026-10-02T05:52:18.288Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -336,
+        "y": 51,
+        "z": 494
+      },
+      "after": {
+        "x": -341,
+        "y": 51,
+        "z": 496
+      },
+      "target": {
+        "x": -344,
+        "y": 51.2,
+        "z": 496
+      },
+      "startedAt": "2026-10-02T05:52:18.288Z",
+      "endedAt": "2026-10-02T05:52:20.112Z",
+      "elapsedMs": 1824,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -322.3489977991534,
+      "dy": 0,
+      "at": "2026-10-02T05:52:23.859Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -341,
+        "y": 51,
+        "z": 496
+      },
+      "after": {
+        "x": -344,
+        "y": 51,
+        "z": 505
+      },
+      "target": {
+        "x": -344,
+        "y": 51,
+        "z": 504
+      },
+      "startedAt": "2026-10-02T05:52:23.859Z",
+      "endedAt": "2026-10-02T05:52:28.850Z",
+      "elapsedMs": 4991,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 445.4602170236953,
+      "dy": 0,
+      "at": "2026-10-02T05:52:32.789Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -344,
+        "y": 51,
+        "z": 505
+      },
+      "after": {
+        "x": -349,
+        "y": 51,
+        "z": 504
+      },
+      "target": {
+        "x": -352,
+        "y": 50.800000000000004,
+        "z": 504
+      },
+      "startedAt": "2026-10-02T05:52:32.789Z",
+      "endedAt": "2026-10-02T05:52:34.854Z",
+      "elapsedMs": 2065,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -445.4602170236953,
+      "dy": 0,
+      "at": "2026-10-02T05:52:39.207Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -349,
+        "y": 51,
+        "z": 504
+      },
+      "after": {
+        "x": -352,
+        "y": 51,
+        "z": 513
+      },
+      "target": {
+        "x": -352,
+        "y": 50.6,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:52:39.207Z",
+      "endedAt": "2026-10-02T05:52:43.208Z",
+      "elapsedMs": 4001,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 417.88941187430424,
+      "dy": 0,
+      "at": "2026-10-02T05:52:46.969Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -352,
+        "y": 51,
+        "z": 513
+      },
+      "after": {
+        "x": -376,
+        "y": 50,
+        "z": 512
+      },
+      "target": {
+        "x": -376,
+        "y": 49.800000000000004,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:52:46.969Z",
+      "endedAt": "2026-10-02T05:52:57.384Z",
+      "elapsedMs": 10415,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -13.880859699529458,
+      "dy": 0,
+      "at": "2026-10-02T05:53:01.555Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -376,
+        "y": 50,
+        "z": 512
+      },
+      "after": {
+        "x": -400,
+        "y": 49,
+        "z": 513
+      },
+      "target": {
+        "x": -400,
+        "y": 49.2,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:53:01.555Z",
+      "endedAt": "2026-10-02T05:53:12.120Z",
+      "elapsedMs": 10565,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 13.880859699529458,
+      "dy": 0,
+      "at": "2026-10-02T05:53:16.690Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -400,
+        "y": 49,
+        "z": 513
+      },
+      "after": {
+        "x": -424,
+        "y": 49,
+        "z": 512
+      },
+      "target": {
+        "x": -424,
+        "y": 48.6,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:53:16.690Z",
+      "endedAt": "2026-10-02T05:53:28.323Z",
+      "elapsedMs": 11633,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -13.880859699529458,
+      "dy": 0,
+      "at": "2026-10-02T05:53:36.766Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -424,
+        "y": 49,
+        "z": 512
+      },
+      "after": {
+        "x": -463,
+        "y": 48,
+        "z": 513
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:53:36.766Z",
+      "endedAt": "2026-10-02T05:53:53.589Z",
+      "elapsedMs": 16823,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:54:00.677Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 449.0081632713231,
+      "dy": 0,
+      "at": "2026-10-02T05:54:06.773Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -463,
+        "y": 48,
+        "z": 513
+      },
+      "after": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:54:06.773Z",
+      "endedAt": "2026-10-02T05:54:14.381Z",
+      "elapsedMs": 7608,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -576,
+      "dy": 0,
+      "at": "2026-10-02T05:54:18.809Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -449.0081632713231,
+      "dy": 0,
+      "at": "2026-10-02T05:54:31.911Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      },
+      "after": {
+        "x": -477,
+        "y": 47,
+        "z": 513
+      },
+      "target": {
+        "x": -472,
+        "y": 47.2,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:54:31.911Z",
+      "endedAt": "2026-10-02T05:54:47.559Z",
+      "elapsedMs": 15648,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:54:53.393Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 405.39903124663755,
+      "dy": 0,
+      "at": "2026-10-02T05:54:57.975Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -477,
+        "y": 47,
+        "z": 513
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 512
+      },
+      "target": {
+        "x": -472,
+        "y": 47.2,
+        "z": 512
+      },
+      "startedAt": "2026-10-02T05:54:57.975Z",
+      "endedAt": "2026-10-02T05:55:02.998Z",
+      "elapsedMs": 5023,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:55:10.045Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 13.39729554825908,
+      "dy": 0,
+      "at": "2026-10-02T05:55:29.290Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 512
+      },
+      "after": {
+        "x": -472,
+        "y": 46,
+        "z": 540
+      },
+      "target": {
+        "x": -472,
+        "y": 46.6,
+        "z": 534.6
+      },
+      "startedAt": "2026-10-02T05:55:29.290Z",
+      "endedAt": "2026-10-02T05:55:41.480Z",
+      "elapsedMs": 12190,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -576,
+      "dy": 0,
+      "at": "2026-10-02T05:55:45.272Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -471.1975511965977,
+      "dy": 0,
+      "at": "2026-10-02T05:55:49.596Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 46,
+        "z": 540
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 536
+      },
+      "target": {
+        "x": -472,
+        "y": 46.6,
+        "z": 534.6
+      },
+      "startedAt": "2026-10-02T05:55:49.596Z",
+      "endedAt": "2026-10-02T05:55:52.173Z",
+      "elapsedMs": 2577,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:55:58.456Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 471.1975511965977,
+      "dy": 0,
+      "at": "2026-10-02T05:56:03.586Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 536
+      },
+      "after": {
+        "x": -471,
+        "y": 46,
+        "z": 555
+      },
+      "target": {
+        "x": -472,
+        "y": 46,
+        "z": 557.4
+      },
+      "startedAt": "2026-10-02T05:56:03.586Z",
+      "endedAt": "2026-10-02T05:56:10.895Z",
+      "elapsedMs": 7309,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 13.326229041096562,
+      "dy": 0,
+      "at": "2026-10-02T05:56:13.948Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 46,
+        "z": 555
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 583
+      },
+      "target": {
+        "x": -472,
+        "y": 45.400000000000006,
+        "z": 580
+      },
+      "startedAt": "2026-10-02T05:56:13.948Z",
+      "endedAt": "2026-10-02T05:56:25.464Z",
+      "elapsedMs": 11516,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -13.326229041096632,
+      "dy": 0,
+      "at": "2026-10-02T05:56:30.007Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 583
+      },
+      "after": {
+        "x": -471,
+        "y": 44,
+        "z": 617
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      },
+      "startedAt": "2026-10-02T05:56:30.007Z",
+      "endedAt": "2026-10-02T05:56:51.393Z",
+      "elapsedMs": 21387,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:56:58.905Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 448.0865066338616,
+      "dy": 0,
+      "at": "2026-10-02T05:57:02.497Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 44,
+        "z": 617
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 603
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      },
+      "startedAt": "2026-10-02T05:57:02.497Z",
+      "endedAt": "2026-10-02T05:57:09.297Z",
+      "elapsedMs": 6800,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -576,
+      "dy": 0,
+      "at": "2026-10-02T05:57:14.175Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -448.0865066338616,
+      "dy": 0,
+      "at": "2026-10-02T05:57:18.445Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 603
+      },
+      "after": {
+        "x": -471,
+        "y": 44,
+        "z": 627
+      },
+      "target": {
+        "x": -472,
+        "y": 44.2,
+        "z": 625.4000000000001
+      },
+      "startedAt": "2026-10-02T05:57:18.445Z",
+      "endedAt": "2026-10-02T05:57:27.093Z",
+      "elapsedMs": 8648,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 15.861034425661048,
+      "dy": 0,
+      "at": "2026-10-02T05:57:36.007Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 44,
+        "z": 627
+      },
+      "after": {
+        "x": -471,
+        "y": 44,
+        "z": 646
+      },
+      "target": {
+        "x": -472,
+        "y": 43.6,
+        "z": 648
+      },
+      "startedAt": "2026-10-02T05:57:36.007Z",
+      "endedAt": "2026-10-02T05:57:42.405Z",
+      "elapsedMs": 6398,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 476.08717239171904,
+      "dy": 0,
+      "at": "2026-10-02T05:57:49.049Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -471,
+        "y": 44,
+        "z": 646
+      },
+      "after": {
+        "x": -490,
+        "y": 43,
+        "z": 648
+      },
+      "target": {
+        "x": -492,
+        "y": 43,
+        "z": 648
+      },
+      "startedAt": "2026-10-02T05:57:49.049Z",
+      "endedAt": "2026-10-02T05:57:56.253Z",
+      "elapsedMs": 7205,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -1.5723153828019212,
+      "dy": 0,
+      "at": "2026-10-02T05:57:59.956Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -490,
+        "y": 43,
+        "z": 648
+      },
+      "after": {
+        "x": -509,
+        "y": 43,
+        "z": 651
+      },
+      "target": {
+        "x": -510,
+        "y": 42.6,
+        "z": 650
+      },
+      "startedAt": "2026-10-02T05:57:59.956Z",
+      "endedAt": "2026-10-02T05:58:07.915Z",
+      "elapsedMs": 7959,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:58:11.585Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 428.8208193423565,
+      "dy": 0,
+      "at": "2026-10-02T05:58:16.179Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -509,
+        "y": 43,
+        "z": 651
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "target": {
+        "x": -496,
+        "y": 42.2,
+        "z": 648
+      },
+      "startedAt": "2026-10-02T05:58:16.179Z",
+      "endedAt": "2026-10-02T05:58:24.045Z",
+      "elapsedMs": 7866,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -447.999159580337,
+      "dy": 0,
+      "at": "2026-10-02T05:58:28.799Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 647
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "target": {
+        "x": -496,
+        "y": 41.800000000000004,
+        "z": 626.6
+      },
+      "startedAt": "2026-10-02T05:58:28.799Z",
+      "endedAt": "2026-10-02T05:58:38.699Z",
+      "elapsedMs": 9900,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 628
+      },
+      "after": {
+        "x": -497,
+        "y": 41,
+        "z": 604
+      },
+      "target": {
+        "x": -496,
+        "y": 41.2,
+        "z": 605.4
+      },
+      "startedAt": "2026-10-02T05:58:38.787Z",
+      "endedAt": "2026-10-02T05:58:50.982Z",
+      "elapsedMs": 12195,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -26.609995237412654,
+      "dy": 0,
+      "at": "2026-10-02T05:58:55.610Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -497,
+        "y": 41,
+        "z": 604
+      },
+      "after": {
+        "x": -500,
+        "y": 41,
+        "z": 585
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.800000000000004,
+        "z": 584
+      },
+      "startedAt": "2026-10-02T05:58:55.610Z",
+      "endedAt": "2026-10-02T05:59:05.004Z",
+      "elapsedMs": 9394,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 82.9770705712046,
+      "dy": 0,
+      "at": "2026-10-02T05:59:09.576Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -500,
+        "y": 41,
+        "z": 585
+      },
+      "after": {
+        "x": -497,
+        "y": 41,
+        "z": 567
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 576.8000000000001
+      },
+      "startedAt": "2026-10-02T05:59:09.576Z",
+      "endedAt": "2026-10-02T05:59:21.343Z",
+      "elapsedMs": 11767,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 576,
+      "dy": 0,
+      "at": "2026-10-02T05:59:27.462Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 468.77628627561376,
+      "dy": 0,
+      "at": "2026-10-02T05:59:31.909Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -497,
+        "y": 41,
+        "z": 567
+      },
+      "after": {
+        "x": -498,
+        "y": 41,
+        "z": 577
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 576.8000000000001
+      },
+      "startedAt": "2026-10-02T05:59:31.909Z",
+      "endedAt": "2026-10-02T05:59:35.813Z",
+      "elapsedMs": 3904,
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "key",
+      "key": "KeyE",
+      "purpose": "enter"
+    },
+    {
+      "stage": "shopping",
+      "type": "real-sale-candidates",
+      "candidates": [
+        {
+          "id": "0:sale-center:sale",
+          "position": {
+            "x": -498.6,
+            "y": 40.6,
+            "z": 567.8000000000001
+          },
+          "route": [
+            {
+              "x": -499,
+              "y": 40.6,
+              "z": 575
+            },
+            {
+              "x": -498.6,
+              "y": 40.6,
+              "z": 567.8000000000001
+            }
+          ]
+        },
+        {
+          "id": "0:sale-west:sale",
+          "position": {
+            "x": -510.6,
+            "y": 40.6,
+            "z": 567.8000000000001
+          },
+          "route": [
+            {
+              "x": -499,
+              "y": 40.6,
+              "z": 575
+            },
+            {
+              "x": -501,
+              "y": 40.6,
+              "z": 571.6
+            },
+            {
+              "x": -504.20000000000005,
+              "y": 40.6,
+              "z": 569.2
+            },
+            {
+              "x": -510.6,
+              "y": 40.6,
+              "z": 567.8000000000001
+            }
+          ]
+        },
+        {
+          "id": "0:sale-east:sale",
+          "position": {
+            "x": -486.6,
+            "y": 40.6,
+            "z": 567.8000000000001
+          },
+          "route": [
+            {
+              "x": -499,
+              "y": 40.6,
+              "z": 575
+            },
+            {
+              "x": -493.8,
+              "y": 40.6,
+              "z": 569.2
+            },
+            {
+              "x": -486.6,
+              "y": 40.6,
+              "z": 567.8000000000001
+            }
+          ]
+        }
+      ],
+      "selection": "Shortest actually mapped reachable sale route from public HUD; no camera/art selection"
+    },
+    {
+      "stage": "shopping",
+      "type": "public-static-indoor-route",
+      "buildingId": "market-b13",
+      "start": {
+        "x": -499,
+        "y": 41,
+        "z": 575
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      },
+      "points": [
+        {
+          "x": -499,
+          "y": 40.6,
+          "z": 575
+        },
+        {
+          "x": -498.6,
+          "y": 40.6,
+          "z": 567.8000000000001
+        }
+      ],
+      "scope": "Node map planning only; browser remains ordinary URL and native elapsed-frame keys/mouse. No controller or game globals."
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": 18.4995017485714,
+      "dy": 0,
+      "at": "2026-10-02T05:59:42.353Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "native-indoor-walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -499,
+        "y": 41,
+        "z": 575
+      },
+      "after": {
+        "x": -498,
+        "y": 41,
+        "z": 570
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      },
+      "startedAt": "2026-10-02T05:59:42.353Z",
+      "endedAt": "2026-10-02T05:59:45.180Z",
+      "elapsedMs": 2827,
+      "remaining": 2.280350850198216,
+      "elapsedScope": "Actual ordinary RAF walking at default1x; no batch motor calls or sprint"
+    },
+    {
+      "stage": "shopping",
+      "type": "real-sale-eligibility",
+      "publicPosition": {
+        "x": -498,
+        "y": 41,
+        "z": 570
+      },
+      "mappedTarget": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      },
+      "remaining": 2.280350850198216,
+      "available": false
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-drag",
+      "dx": -107.25018479888568,
+      "dy": 0,
+      "at": "2026-10-02T05:59:50.553Z",
+      "native": true
+    },
+    {
+      "stage": "shopping",
+      "type": "native-indoor-walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -498,
+        "y": 41,
+        "z": 570
+      },
+      "after": {
+        "x": -500,
+        "y": 41,
+        "z": 567
+      },
+      "target": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      },
+      "startedAt": "2026-10-02T05:59:50.553Z",
+      "endedAt": "2026-10-02T05:59:53.276Z",
+      "elapsedMs": 2723,
+      "remaining": 1.612451549659724,
+      "elapsedScope": "Actual ordinary RAF walking at default1x; no batch motor calls or sprint"
+    },
+    {
+      "stage": "shopping",
+      "type": "real-sale-eligibility",
+      "publicPosition": {
+        "x": -500,
+        "y": 41,
+        "z": 567
+      },
+      "mappedTarget": {
+        "x": -498.6,
+        "y": 40.6,
+        "z": 567.8000000000001
+      },
+      "remaining": 1.612451549659724,
+      "available": true
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-ref=\"context-body\"]').locator('[data-action=\"purchase-carry\"][data-target=\"market-b13\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "shopping",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    }
+  ],
+  "errors": [],
+  "failure": "Error: Timed out: physical door exit\n    at until (/tmp/yunshan-v4-browser-visual-prepared-04/ordinary-player-journey.mjs:203:11)\n    at async leave (/tmp/yunshan-v4-browser-visual-prepared-04/ordinary-player-journey.mjs:425:5)\n    at async run (/tmp/yunshan-v4-browser-visual-prepared-04/ordinary-player-journey.mjs:543:45)\n    at async <anonymous> (/tmp/yunshan-v4-browser-visual-prepared-04/ordinary-player-journey.mjs:170:6)"
+}

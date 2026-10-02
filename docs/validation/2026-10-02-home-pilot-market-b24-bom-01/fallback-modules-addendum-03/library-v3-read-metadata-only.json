@@ -1,0 +1,54 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "api_tool_source": "files/read",
+    "results": [
+      {
+        "version_id": null,
+        "name": "market-b24-reference-v3-voxel-future.png",
+        "mime_type": "image/png",
+        "size_bytes": 2547717,
+        "created_at": "2026-10-02T06:48:41.141759Z",
+        "modified_at": "2026-10-02T06:48:41.141759Z",
+        "file_provider": "native",
+        "library_file_id": "libfile_2d6c56a76aec8191a536f60bd12ae787",
+        "library_artifact_type": "image_gen",
+        "ref_id": "libfile_2d6c56a76aec8191a536f60bd12ae787",
+        "file_id": "file_00000000ca9481f6b9cfaa21b578325e",
+        "surface": "library",
+        "requested_file_id": "libfile_2d6c56a76aec8191a536f60bd12ae787",
+        "start_line": 1,
+        "end_line": 10,
+        "total_lines": 10,
+        "has_more": false,
+        "pages": [],
+        "num_pages": 0,
+        "warnings": [
+          "Native image pixels were unavailable; returned extracted text only."
+        ],
+        "api_tool_source": "files/read",
+        "read_index": 0,
+        "mode": "image_file",
+        "include_text": true,
+        "include_images": true,
+        "requested_start_page": null,
+        "requested_end_page": null,
+        "next_start_line": null,
+        "next_start_page": null,
+        "next_read": null,
+        "next_image_read": null,
+        "content": [
+          "Caption: Modern detailed building complex with blue neon accents and traditional tiled roofs.\nSource: 3D render of a building complex\nPhotoCategory: illustration\nSummary: The image shows a large, multi-level architectural complex rendered in a stylized 3D style. It features interconnected courtyards, glass-walled balconies, and dark tiled roofs with turquoise neon trim. Warm lighting highlights entrances, railings, and greenery on balconies, giving a futuristic yet traditional aesthetic.\nTopic: Architecture\nSubtopic: 3D render\nLocations: \nPeople: \nQuery: futuristic traditional courtyard building 3D render\nOCR:"
+        ]
+      }
+    ],
+    "warnings": [],
+    "external_connectors_accessed": false
+  },
+  "isError": false
+}

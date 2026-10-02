@@ -1,0 +1,57 @@
+{
+  "status": "STATIC_SUPPLEMENT_ONLY",
+  "sourceUnchanged": true,
+  "doorNativeCoplanarAreas": [
+    {
+      "id": "near:133",
+      "area": 0.16
+    },
+    {
+      "id": "near:134",
+      "area": 0.4
+    },
+    {
+      "id": "near:135",
+      "area": 0.04
+    },
+    {
+      "id": "near:136",
+      "area": 0.96
+    },
+    {
+      "id": "near:137",
+      "area": 0.16
+    },
+    {
+      "id": "near:138",
+      "area": 0.4
+    },
+    {
+      "id": "near:139",
+      "area": 0.04
+    }
+  ],
+  "doorTotalCoplanarArea": 2.16,
+  "protectedStairSweeps": 2,
+  "protectedModuleExclusions": [
+    {
+      "module": "WALL-1400-3000-400",
+      "conflicts": 0
+    },
+    {
+      "module": "WINDOW-2000-2200-400",
+      "conflicts": 0
+    },
+    {
+      "module": "DOORFRAME-5600-3200-400",
+      "conflicts": 0
+    },
+    {
+      "module": "BONSAI-ASSEMBLY-800-1300-800",
+      "conflicts": 0
+    }
+  ],
+  "approvedInstalls": 0,
+  "GL": "NOT_RUN",
+  "normalW": "NOT_RUN"
+}

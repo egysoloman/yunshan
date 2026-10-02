@@ -1,0 +1,384 @@
+{
+  "revision": "four-modules-01",
+  "scope": "Specification, static native geometry audit,28reference mapping, unedited original images and root engineering diagrams; no model production/integration",
+  "moduleFamilies": 4,
+  "candidateMounts": 5,
+  "actualInstalls": 0,
+  "approvedMounts": 0,
+  "returnedQualifiedMeshes": 0,
+  "newPaidCalls": 0,
+  "GPUInThisTask": false,
+  "sensitivePatternMatches": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3066,
+      "sha256": "bc051debd8d4bed9ff2fc5f8db9980121c2a4d4adf853c218820e4654d1ceca7"
+    },
+    {
+      "path": "appendix/bom03-identity-and-furniture-retention.json",
+      "bytes": 3498,
+      "sha256": "ef417065f26949bf6c93149eeb8fb4e6245018fcac7d636a5ffbe276045767d9"
+    },
+    {
+      "path": "appendix/current05-roundtrip-results.json",
+      "bytes": 1186650,
+      "sha256": "e8a4b5d1a834688ac2a8c48a07cf899abbfd753d9e3c9a765228671346bd3575"
+    },
+    {
+      "path": "appendix/current05-scope.json",
+      "bytes": 789,
+      "sha256": "e71eb419c94cff5d57f449de1e42afe89aa423b81a667e572b2cf69a5fe1b63d"
+    },
+    {
+      "path": "appendix/prior-window-static-report/analysis.json",
+      "bytes": 12698,
+      "sha256": "0f3bce0f83db7dc5a1d1e600dbe1acc35f72331a909fb8463c3eb40d5b8a5409"
+    },
+    {
+      "path": "appendix/prior-window-static-report/analysis.md",
+      "bytes": 2877,
+      "sha256": "e990834f36453ecddbd3c019e0fd91066d8078614d3a8cebfeb76814ecb902f7"
+    },
+    {
+      "path": "engineering-diagrams/actual-ground-plan-four-candidates.png",
+      "bytes": 176208,
+      "sha256": "1dc2d4303422537d344b3e1d281125071c129af5770cae503653b6a98030a410"
+    },
+    {
+      "path": "engineering-diagrams/actual-ground-plan-four-candidates.svg",
+      "bytes": 75917,
+      "sha256": "ee1916d21c2a1fcfda74302f827cabb2fe44056ba385fb316722e7f361faa246"
+    },
+    {
+      "path": "engineering-diagrams/diagram-delivery.json",
+      "bytes": 878,
+      "sha256": "61f26c5dd1ed5b47f1d5ffe2bbb3368d54410fe9f906c3d200ceef05811dfd3f"
+    },
+    {
+      "path": "engineering-diagrams/diagram-provenance.json",
+      "bytes": 1420,
+      "sha256": "630aea63ac2faf9579435104bcc126bbba5c8212b74d579f6d3a14aad38e59f8"
+    },
+    {
+      "path": "engineering-diagrams/draw-four-module-diagrams.py",
+      "bytes": 9282,
+      "sha256": "3930cd2d4df859f3fd278987da220bdc1bed0fa562664ce2bb5a4837b53a769a"
+    },
+    {
+      "path": "engineering-diagrams/four-module-metric-interfaces.png",
+      "bytes": 293054,
+      "sha256": "7ced4e0642f529a5c164086c7fba60185c6fc9a18223f9051ca7bbd2b8561b37"
+    },
+    {
+      "path": "engineering-diagrams/four-module-metric-interfaces.svg",
+      "bytes": 53194,
+      "sha256": "58f5997c6f652c2290228335fa4e42ce3f1ff045be3adb0d84cf64ed10d20c89"
+    },
+    {
+      "path": "engineering-diagrams/library-diagrams-upload-01.json",
+      "bytes": 1684,
+      "sha256": "c6552edf1d5428a389b25a553585f1d972cdf2621b2e96e14bc87354742adf79"
+    },
+    {
+      "path": "external-model-parent-report.json",
+      "bytes": 1031,
+      "sha256": "1021ec4f12afbf63b61cccccb085e2805ddd447d7f744e214a989474b842241a"
+    },
+    {
+      "path": "four-sample-production-specs.csv",
+      "bytes": 4712,
+      "sha256": "7efaa92dc4268a4e21741fdd32034ba59d0bf0d51c549f1efc8f51e3b90678a1"
+    },
+    {
+      "path": "four-sample-production-specs.json",
+      "bytes": 45668,
+      "sha256": "187ff33946919f0979b72a631f609f4edb0b73c9e24a5c105d09fbb1c3340232"
+    },
+    {
+      "path": "geometry-audit/README.md",
+      "bytes": 8695,
+      "sha256": "90a208aa734784d176855b4db2fe2bfdd4a876386722b3e067e49567c8a4eecd"
+    },
+    {
+      "path": "geometry-audit/archive-geometry-audit.py",
+      "bytes": 8730,
+      "sha256": "edb4a260bca329cd71202d88c57b8afbc1980bb3180bb77e5d712a632c878aca"
+    },
+    {
+      "path": "geometry-audit/derive-four-modules.mts",
+      "bytes": 21346,
+      "sha256": "7e6ee449ff2d18c21dc82ea5bca81d1d611b79311ac12908343a1e11c3cb7924"
+    },
+    {
+      "path": "geometry-audit/derive-supplement.mts",
+      "bytes": 8430,
+      "sha256": "f2bce2ccbceeb27cae1395e3219e43dfd1f88fac993593889fa7168eb9b02afc"
+    },
+    {
+      "path": "geometry-audit/four-module-contract.json",
+      "bytes": 130790,
+      "sha256": "f57211bfb88c04cc9af8cec5cce0e0b202e290498c66eede602104a6effcdd40"
+    },
+    {
+      "path": "geometry-audit/geometry-audit-supplement.json",
+      "bytes": 25897,
+      "sha256": "c0342a26fd0e6508bfeb6b02f662e4a04a49624d0e456a9d58d4ed2e6eb54660"
+    },
+    {
+      "path": "geometry-audit/inputs/raw-counts.json",
+      "bytes": 1648071,
+      "sha256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+    },
+    {
+      "path": "geometry-audit/provenance.json",
+      "bytes": 6710,
+      "sha256": "8abae6712a8612410979726aa1e08d0b3dad4ff721ae64a9e1c80ce621724fd6"
+    },
+    {
+      "path": "geometry-audit/secret-pattern-scan.json",
+      "bytes": 525,
+      "sha256": "8b2fd8e9c69362f45df827ead0cfb58f24b9a427cf007aad0365bb4bcd49ca69"
+    },
+    {
+      "path": "geometry-audit/sha256-manifest.json",
+      "bytes": 3756,
+      "sha256": "0e3af429a8fbf91bdd27c05114682092c576f9950f3d758905c4961675696f3a"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee"
+    },
+    {
+      "path": "geometry-audit/source-snapshot/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "geometry-audit/static-derivation-final.log",
+      "bytes": 1884,
+      "sha256": "ff4641f61d0418117b42e9a630b37dae26e9f1464d4b64895c0bd6b496cccbf4"
+    },
+    {
+      "path": "geometry-audit/static-derivation-first-door-edge-rejection.log",
+      "bytes": 604,
+      "sha256": "654bf8ccdb874f1b851208946501d9b480fe0484f5d0bb2bebe6ab8a095f418b"
+    },
+    {
+      "path": "geometry-audit/static-derivation-first-failure-signedzero.log",
+      "bytes": 9759,
+      "sha256": "024a72e80ab890db5231006bf10e9e060e9fc0315a287350eefc75f4c0c7e87d"
+    },
+    {
+      "path": "geometry-audit/static-supplement-first-reference-path-failure.log",
+      "bytes": 905,
+      "sha256": "434b82e454cb8a6b82f4163ab14f10cd45a34ce75cf0838d952b651b91983352"
+    },
+    {
+      "path": "geometry-audit/static-supplement.log",
+      "bytes": 965,
+      "sha256": "3aa9d75d00181a61b5d51d361408baee5d268a7cd7fdb23996cc37ca2f59c76d"
+    },
+    {
+      "path": "interior-reference-access/README.md",
+      "bytes": 419,
+      "sha256": "1e4bf97748c177a0fffb2171f18f66cc382373775474225a93f5125c6aee3ce4"
+    },
+    {
+      "path": "interior-reference-access/access-result.json",
+      "bytes": 1340,
+      "sha256": "ff4ec911e74b10d3765f8bd04738f999231afe47f128e6e329a7a1679cb33910"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-1.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-1.stderr.log",
+      "bytes": 46,
+      "sha256": "4a07a36163d9c73ca6ec508459e57399cf61f5b7d76726ae5f198378fd392744"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-2.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-2.stderr.log",
+      "bytes": 46,
+      "sha256": "4a07a36163d9c73ca6ec508459e57399cf61f5b7d76726ae5f198378fd392744"
+    },
+    {
+      "path": "interior-reference-access/official-helper-interior-2.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "interior-reference-access/root-access-summary.json",
+      "bytes": 1789,
+      "sha256": "47e22823fc9ff15509ab2e8844a81090c0cacb1203a5d2d085db39bd53ef3064"
+    },
+    {
+      "path": "producer-metadata-check.json",
+      "bytes": 292,
+      "sha256": "66a0388692710a02e0fb9a5a6686dc1e9ce780ea579fd8ca5e6c86d3c79f39d0"
+    },
+    {
+      "path": "producer-review.json",
+      "bytes": 801,
+      "sha256": "29fb18a901a0579d6915cc4d3c8688d612c28744331234ed02fdfb2adeed84c1"
+    },
+    {
+      "path": "producer-source-end.json",
+      "bytes": 639,
+      "sha256": "e8735d7b3be9fd3d6fb01032c93b00c4d4af33562dfbdbf089feea945c9f721e"
+    },
+    {
+      "path": "producer-source-start.json",
+      "bytes": 786,
+      "sha256": "51f967a935c69bbc1d3f21068e5f20a38c81b4ea3cbfa5c13ccc4a1b3f15f47d"
+    },
+    {
+      "path": "production-prompts/SAMPLE-BONSAI-01.txt",
+      "bytes": 953,
+      "sha256": "6e96156c3b945b6d3189a3a48158ac62b6b3c9f4f5d1b25b5da85c5b9ac2bb7e"
+    },
+    {
+      "path": "production-prompts/SAMPLE-GATE-FRAME-01.txt",
+      "bytes": 926,
+      "sha256": "ef557d0da7fd81523e566d143e2a7e75c5573f5b967fd07e3b04fabe4bcfdc4e"
+    },
+    {
+      "path": "production-prompts/SAMPLE-WALL-01.txt",
+      "bytes": 852,
+      "sha256": "7392e6fe1325fc5227bbfae9a0a651944eeee61f9f5dca1c98f8b3eef381be0e"
+    },
+    {
+      "path": "production-prompts/SAMPLE-WINDOW-01.txt",
+      "bytes": 1107,
+      "sha256": "e6551f22d4cba9039695ea40eaab78c490ac575fb4fbc2140443a3412769c086"
+    },
+    {
+      "path": "reference-mapping/README.md",
+      "bytes": 2898,
+      "sha256": "ea0fb6decbf4946101c3e3ef3db99de7f3f052c733e07074ab2722ec9460863f"
+    },
+    {
+      "path": "reference-mapping/consistency.json",
+      "bytes": 3326,
+      "sha256": "815b2076c268e6e2e708540461f8c29ca17128a38f28ba1d46f0e8054fdd59c5"
+    },
+    {
+      "path": "reference-mapping/file-manifest.json",
+      "bytes": 3683,
+      "sha256": "9458294b06ea81176cdd196e0258ceef6b99abd39248ad4954b6054889b7a45e"
+    },
+    {
+      "path": "reference-mapping/minimum-joinable-subset.json",
+      "bytes": 4833,
+      "sha256": "cd9ec265578a2ddd78cd973b622020e391cf1be57fbd60bc83686e1355a26a84"
+    },
+    {
+      "path": "reference-mapping/physical52-reference-coverage.csv",
+      "bytes": 12997,
+      "sha256": "820bdd063696e03e30356d802ae1808cc4eb613aaebb55c3f28d111200a4d5db"
+    },
+    {
+      "path": "reference-mapping/physical52-reference-coverage.json",
+      "bytes": 154462,
+      "sha256": "ba975a8dcb2f0ed37817eb79e6ef9f71ea3d87e9d08c24a5207a9dfff93df582"
+    },
+    {
+      "path": "reference-mapping/production-spec-cross-review.json",
+      "bytes": 5538,
+      "sha256": "12038be4a0956790782f15552000b5047725e55d37c5db4f2dc832e9b772ce5c"
+    },
+    {
+      "path": "reference-mapping/reference-to-bom52.csv",
+      "bytes": 30109,
+      "sha256": "35cb38c966e36b0f7490bb0ff3aaf87bad963098215fe3fb6dae7056ed7c5a4e"
+    },
+    {
+      "path": "reference-mapping/reference-to-bom52.json",
+      "bytes": 57864,
+      "sha256": "4f98b87f80844008ccfd2158582f52f0a69e82b0f9effa6c54a84428a09aa117"
+    },
+    {
+      "path": "references/reference-access.json",
+      "bytes": 1861,
+      "sha256": "db21959e760bd40c681381010496832ca2eeabccb558d9c7642d9fe6a57a22b0"
+    },
+    {
+      "path": "references/庭院建筑模块图鉴.png",
+      "bytes": 2113455,
+      "sha256": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31"
+    },
+    {
+      "path": "references/立面与细部组件.png",
+      "bytes": 2167302,
+      "sha256": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe"
+    },
+    {
+      "path": "sample-coordinate-and-acceptance-contract.json",
+      "bytes": 2512,
+      "sha256": "64a0feacf102272ea1563d927a495ca7d2363a343b70191ca47fcc66759faeb6"
+    },
+    {
+      "path": "source-excerpts/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    {
+      "path": "source-excerpts/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    {
+      "path": "source-excerpts/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a"
+    },
+    {
+      "path": "source-excerpts/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee"
+    },
+    {
+      "path": "source-excerpts/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    }
+  ]
+}

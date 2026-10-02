@@ -1,0 +1,1576 @@
+[
+  {
+    "资产ID": "A01",
+    "中文名称": "地基台基/与地形接合体",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "terrainHeight与共享slab轮廓；地形/院洞不填；新可信geometry recipe",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实基础占用投影底面；施工最小角",
+    "dimensions": "计划：仅在真实占用轮廓下；当前地层石板底76.4/顶76.6，地形基高76",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": []
+  },
+  {
+    "资产ID": "A02",
+    "中文名称": "楼板/地层院落铺装板",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "getFloorPlanSlabRegions；支撑高度/洞口原样",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "共享slab rect最小角/支撑平面",
+    "dimensions": [
+      [
+        2.4,
+        0.2,
+        4.2
+      ],
+      [
+        2.4,
+        0.2,
+        16.2
+      ],
+      [
+        4,
+        0.2,
+        0.4
+      ],
+      [
+        4,
+        0.2,
+        3.6
+      ],
+      [
+        5.2,
+        0.2,
+        9.2
+      ],
+      [
+        11.6,
+        0.2,
+        9.2
+      ],
+      [
+        12.8,
+        0.2,
+        13.6
+      ],
+      [
+        20.8,
+        0.2,
+        9.4
+      ],
+      [
+        40,
+        0.2,
+        34.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A01"
+    ]
+  },
+  {
+    "资产ID": "A03",
+    "中文名称": "承围墙/实体墙板",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "wallPanels/boundaryLoops + actual floor y；旧几何不可隐改",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实wall a端/底面，切线+法线",
+    "dimensions": [
+      [
+        0.4,
+        0.2,
+        0.4
+      ],
+      [
+        0.4,
+        0.2,
+        0.8
+      ],
+      [
+        0.4,
+        0.2,
+        1
+      ],
+      [
+        0.4,
+        0.2,
+        1.2
+      ],
+      [
+        0.4,
+        0.2,
+        1.6
+      ],
+      [
+        0.4,
+        0.2,
+        2
+      ],
+      [
+        0.4,
+        0.2,
+        2.4
+      ],
+      [
+        0.4,
+        0.2,
+        2.6
+      ],
+      [
+        0.4,
+        0.2,
+        3
+      ],
+      [
+        0.4,
+        0.2,
+        3.2
+      ],
+      [
+        0.4,
+        0.2,
+        3.4
+      ],
+      [
+        0.4,
+        0.2,
+        4.8
+      ],
+      [
+        0.4,
+        0.2,
+        5.2
+      ],
+      [
+        0.4,
+        0.6,
+        1.6
+      ],
+      [
+        0.4,
+        0.6,
+        2
+      ],
+      [
+        0.4,
+        0.6,
+        3
+      ],
+      [
+        0.4,
+        0.6,
+        4.8
+      ],
+      [
+        0.4,
+        0.6,
+        5.2
+      ],
+      [
+        0.4,
+        0.8,
+        0.4
+      ],
+      [
+        0.4,
+        0.8,
+        0.8
+      ],
+      [
+        0.4,
+        0.8,
+        1
+      ],
+      [
+        0.4,
+        0.8,
+        1.2
+      ],
+      [
+        0.4,
+        0.8,
+        1.6
+      ],
+      [
+        0.4,
+        0.8,
+        2
+      ],
+      [
+        0.4,
+        0.8,
+        2.2
+      ],
+      [
+        0.4,
+        0.8,
+        2.4
+      ],
+      [
+        0.4,
+        0.8,
+        2.6
+      ],
+      [
+        0.4,
+        0.8,
+        2.8
+      ],
+      [
+        0.4,
+        0.8,
+        3
+      ],
+      [
+        0.4,
+        0.8,
+        3.2
+      ],
+      [
+        0.4,
+        0.8,
+        3.4
+      ],
+      [
+        0.4,
+        0.8,
+        3.8
+      ],
+      [
+        0.4,
+        0.8,
+        4
+      ],
+      [
+        0.4,
+        0.8,
+        4.8
+      ],
+      [
+        0.4,
+        0.8,
+        5.0
+      ],
+      [
+        0.4,
+        0.8,
+        5.2
+      ],
+      [
+        0.4,
+        0.8,
+        5.6
+      ],
+      [
+        0.4,
+        1.4,
+        1
+      ],
+      [
+        0.4,
+        1.4,
+        1.6
+      ],
+      [
+        0.4,
+        1.4,
+        2
+      ],
+      [
+        0.4,
+        1.4,
+        2.2
+      ],
+      [
+        0.4,
+        1.4,
+        3
+      ],
+      [
+        0.4,
+        1.4,
+        3.2
+      ],
+      [
+        0.4,
+        1.4,
+        3.4
+      ],
+      [
+        0.4,
+        1.4,
+        4.8
+      ],
+      [
+        0.4,
+        1.4,
+        5.0
+      ],
+      [
+        0.4,
+        1.4,
+        5.2
+      ],
+      [
+        0.4,
+        1.4,
+        5.6
+      ],
+      [
+        0.4,
+        2.0,
+        0.4
+      ],
+      [
+        0.4,
+        2.0,
+        0.8
+      ],
+      [
+        0.4,
+        2.0,
+        1
+      ],
+      [
+        0.4,
+        2.0,
+        1.2
+      ],
+      [
+        0.4,
+        2.0,
+        2.4
+      ],
+      [
+        0.4,
+        2.0,
+        2.6
+      ],
+      [
+        0.4,
+        2.2,
+        0.4
+      ],
+      [
+        0.4,
+        2.2,
+        2.8
+      ],
+      [
+        0.4,
+        2.2,
+        3.8
+      ],
+      [
+        0.4,
+        2.2,
+        4
+      ],
+      [
+        0.8,
+        0.2,
+        0.4
+      ],
+      [
+        0.8,
+        0.8,
+        0.4
+      ],
+      [
+        0.8,
+        2.0,
+        0.4
+      ],
+      [
+        0.8,
+        2.2,
+        0.4
+      ],
+      [
+        1.6,
+        0.2,
+        0.4
+      ],
+      [
+        1.6,
+        0.6,
+        0.4
+      ],
+      [
+        1.6,
+        0.8,
+        0.4
+      ],
+      [
+        1.6,
+        1.4,
+        0.4
+      ],
+      [
+        1.6,
+        2.0,
+        0.4
+      ],
+      [
+        2,
+        0.2,
+        0.4
+      ],
+      [
+        2,
+        0.8,
+        0.4
+      ],
+      [
+        2,
+        2.0,
+        0.4
+      ],
+      [
+        2.4,
+        0.8,
+        0.4
+      ],
+      [
+        2.4,
+        1.4,
+        0.4
+      ],
+      [
+        2.4,
+        2.2,
+        0.4
+      ],
+      [
+        3.2,
+        0.2,
+        0.4
+      ],
+      [
+        3.2,
+        0.8,
+        0.4
+      ],
+      [
+        3.2,
+        1.4,
+        0.4
+      ],
+      [
+        4,
+        0.8,
+        0.4
+      ],
+      [
+        4,
+        1.4,
+        0.4
+      ],
+      [
+        4.8,
+        0.2,
+        0.4
+      ],
+      [
+        4.8,
+        0.6,
+        0.4
+      ],
+      [
+        4.8,
+        0.8,
+        0.4
+      ],
+      [
+        4.8,
+        1.4,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "A04",
+    "中文名称": "墙角收口/转角构件",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "wallPanels/boundaryLoops + actual floor y；旧几何不可隐改",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实wall a端/底面，切线+法线",
+    "dimensions": "计划0.2m基准，薄饰面可更细",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "A05",
+    "中文名称": "室内隔断板/隔断开口",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "wallPanels/boundaryLoops + actual floor y；旧几何不可隐改",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实wall a端/底面，切线+法线",
+    "dimensions": "待共享plan批准",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02",
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "A06",
+    "中文名称": "门套/门框构件",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "Wall.opening + shared door state；4.8×2.8入口；2.8净高不可扣",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实门洞底面中心；门叶另声明铰轴",
+    "dimensions": [
+      [
+        0.2,
+        2.8,
+        0.4
+      ],
+      [
+        0.4,
+        0.2,
+        3.6
+      ],
+      [
+        0.4,
+        0.2,
+        3.8
+      ],
+      [
+        0.4,
+        0.2,
+        4
+      ],
+      [
+        0.4,
+        0.2,
+        4.2
+      ],
+      [
+        0.4,
+        2.8,
+        0.2
+      ],
+      [
+        3.6,
+        0.2,
+        0.4
+      ],
+      [
+        4.0,
+        0.2,
+        0.4
+      ],
+      [
+        5.2,
+        0.2,
+        0.4
+      ],
+      [
+        5.6,
+        0.2,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "A07",
+    "中文名称": "可开合门扇",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "Wall.opening + shared door state；4.8×2.8入口；2.8净高不可扣",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实门洞底面中心；门叶另声明铰轴",
+    "dimensions": "主入口门洞4.8×2.8；可拆成两正旋转叶片，尺寸待共享door设计",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A06",
+      "A08"
+    ]
+  },
+  {
+    "资产ID": "A08",
+    "中文名称": "门/柜五金把手与合页",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "Wall.opening + shared door state；4.8×2.8入口；2.8净高不可扣",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实门洞底面中心；门叶另声明铰轴",
+    "dimensions": "计划0.2m实体基准；视觉细节可更细",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A07",
+      "F10"
+    ]
+  },
+  {
+    "资产ID": "A09",
+    "中文名称": "窗玻璃板",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "Wall.windows/wallPanels；54洞/53玻璃缺陷保留；修复需新可信版本",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实window from端/下缘；法线朝室外",
+    "dimensions": [
+      [
+        0.2,
+        1.4,
+        1.6
+      ],
+      [
+        0.4,
+        1.4,
+        1.6
+      ],
+      [
+        1.6,
+        1.4,
+        0.2
+      ],
+      [
+        1.6,
+        1.4,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A10"
+    ]
+  },
+  {
+    "资产ID": "A10",
+    "中文名称": "窗框/窗棂/窗楣饰带套件",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "Wall.windows/wallPanels；54洞/53玻璃缺陷保留；修复需新可信版本",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实window from端/下缘；法线朝室外",
+    "dimensions": [
+      [
+        0.2,
+        0.2,
+        1.6
+      ],
+      [
+        0.2,
+        1.4,
+        0.2
+      ],
+      [
+        0.2,
+        1.8,
+        0.4
+      ],
+      [
+        0.4,
+        0.2,
+        2
+      ],
+      [
+        0.4,
+        1.8,
+        0.2
+      ],
+      [
+        1.6,
+        0.2,
+        0.2
+      ],
+      [
+        2,
+        0.2,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A09"
+    ]
+  },
+  {
+    "资产ID": "A11",
+    "中文名称": "楼梯踏步板",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "stairTreads/stairLandings/stairHole + .35身体净空 + barrier descriptor",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实StairSurface rect最小角/下支撑面",
+    "dimensions": [
+      [
+        1.6,
+        0.2,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "A12",
+    "中文名称": "楼梯换向/下连接平台",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "stairTreads/stairLandings/stairHole + .35身体净空 + barrier descriptor",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实StairSurface rect最小角/下支撑面",
+    "dimensions": [
+      [
+        1.6,
+        0.2,
+        0.4
+      ],
+      [
+        3.6,
+        0.2,
+        1.6
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02",
+      "A11"
+    ]
+  },
+  {
+    "资产ID": "A13",
+    "中文名称": "楼梯/洞口安全扶手栏杆",
+    "reference_family": "traditional-home-shell",
+    "independent_interface": "stairTreads/stairLandings/stairHole + .35身体净空 + barrier descriptor",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实StairSurface rect最小角/下支撑面",
+    "dimensions": "计划高约1.0..1.2；实际净宽/洞口长度待共同描述",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A11",
+      "A12"
+    ]
+  },
+  {
+    "资产ID": "A14",
+    "中文名称": "坡屋面双坡壳",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": [
+      [
+        2.4,
+        1.2,
+        4.2
+      ],
+      [
+        2.4,
+        1.2,
+        16.2
+      ],
+      [
+        4,
+        1.2,
+        0.4
+      ],
+      [
+        4,
+        1.2,
+        8.4
+      ],
+      [
+        4.8,
+        1.2,
+        5.4
+      ],
+      [
+        6.4,
+        1.2,
+        9
+      ],
+      [
+        6.4,
+        1.2,
+        15.4
+      ],
+      [
+        12.8,
+        1.2,
+        13.6
+      ],
+      [
+        20.8,
+        1.2,
+        18.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "A15",
+    "中文名称": "院廊平屋面",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": [
+      [
+        1.6,
+        0.2,
+        2.8
+      ],
+      [
+        2.4,
+        0.2,
+        4.2
+      ],
+      [
+        4.8,
+        0.2,
+        3.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "A16",
+    "中文名称": "屋面量化补缝条",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": [
+      [
+        20.8,
+        0.4,
+        0.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A14",
+      "A15"
+    ]
+  },
+  {
+    "资产ID": "A17",
+    "中文名称": "檐缘封板/檐口木条",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": [
+      [
+        0.2,
+        0.2,
+        0.2
+      ],
+      [
+        0.2,
+        0.2,
+        0.4
+      ],
+      [
+        0.2,
+        0.2,
+        0.6
+      ],
+      [
+        0.2,
+        0.2,
+        2
+      ],
+      [
+        0.2,
+        0.2,
+        2.8
+      ],
+      [
+        0.2,
+        0.2,
+        4
+      ],
+      [
+        0.2,
+        0.2,
+        4.2
+      ],
+      [
+        0.2,
+        0.2,
+        4.4
+      ],
+      [
+        0.2,
+        0.2,
+        5.4
+      ],
+      [
+        0.2,
+        0.2,
+        7.2
+      ],
+      [
+        4,
+        0.2,
+        0.2
+      ],
+      [
+        4.8,
+        0.2,
+        0.2
+      ],
+      [
+        7.2,
+        0.2,
+        0.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A14",
+      "A15"
+    ]
+  },
+  {
+    "资产ID": "A18",
+    "中文名称": "檐瓦小件",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": [
+      [
+        0.4,
+        0.2,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A14",
+      "A17"
+    ]
+  },
+  {
+    "资产ID": "A19",
+    "中文名称": "屋脊封脊构件",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": "依9共享gable真实轴线/长度",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A14"
+    ]
+  },
+  {
+    "资产ID": "A20",
+    "中文名称": "檐沟/雨落管",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "getFloorPlanRoofRegions/architectureProgramRoofEdges；9gable/3gallery/1strip",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实RoofRegion支承平面最小角/roof-edge端点",
+    "dimensions": "待真实排水边缘/落点",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A14",
+      "A15"
+    ]
+  },
+  {
+    "资产ID": "A21",
+    "中文名称": "檐下承托/斗拱视觉母版（可选）",
+    "reference_family": "traditional-home-roof-and-eaves",
+    "independent_interface": "36现.4³括架anchor；1.2×.8×1与.5均不fit；真实mesh/保护体校验后才可批准",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "斗拱承托底面中心；+Z檐外",
+    "dimensions": [
+      [
+        0.4,
+        0.4,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A17"
+    ]
+  },
+  {
+    "资产ID": "A22",
+    "中文名称": "门/窗楣浮雕条视觉母版（可选）",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "真实opening/window wall法线；1.6×.4×.2；入口3段计划、59总排布候选、批准0",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "楣条靠墙面下缘中点；+Z檐/墙外",
+    "dimensions": "母版1.6×0.4×0.2；首门4.8宽分3段，无拉伸",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A06",
+      "A10"
+    ]
+  },
+  {
+    "资产ID": "F01",
+    "中文名称": "床架/床基",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "home-bed fixture 2.4×1.2×.6（现3）；床睡眠usepoint/ownership/timing尚未实现",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": [
+      [
+        2.4,
+        0.6,
+        1.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F02",
+    "中文名称": "床垫",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "home-bed fixture 2.4×1.2×.6（现3）；床睡眠usepoint/ownership/timing尚未实现",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": [
+      [
+        2.4,
+        0.2,
+        1.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F01"
+    ]
+  },
+  {
+    "资产ID": "F03",
+    "中文名称": "枕头",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "home-bed fixture 2.4×1.2×.6（现3）；床睡眠usepoint/ownership/timing尚未实现",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划每床1；建议0.6×0.4×0.2",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F01",
+      "F02"
+    ]
+  },
+  {
+    "资产ID": "F04",
+    "中文名称": "被褥/床罩",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "home-bed fixture 2.4×1.2×.6（现3）；床睡眠usepoint/ownership/timing尚未实现",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划每床1；依2.4×1.2床包络",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F01",
+      "F02"
+    ]
+  },
+  {
+    "资产ID": "F05",
+    "中文名称": "桌面板母版",
+    "reference_family": "traditional-home-furniture",
+    "independent_interface": "program:table fixture 2.4×1.2×.8（现3）；不能挡真实service/work点",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": [
+      [
+        2.4,
+        0.2,
+        1.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F06"
+    ]
+  },
+  {
+    "资产ID": "F06",
+    "中文名称": "桌架/侧支撑母版",
+    "reference_family": "traditional-home-furniture",
+    "independent_interface": "program:table fixture 2.4×1.2×.8（现3）；不能挡真实service/work点",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": [
+      [
+        0.2,
+        0.6,
+        1.0
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F07",
+    "中文名称": "沙发框架",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约2.4×1.0×0.6；位置/净空待共同方案",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F08",
+    "中文名称": "沙发软垫母版",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "软垫1母版→4计划实例；尺寸需沙发frame方案，模型未知，不按整城图自动拆",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划2座垫+2背垫；同一母版正旋转派生，实际尺寸待座架方案",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F07"
+    ]
+  },
+  {
+    "资产ID": "F09",
+    "中文名称": "餐椅/工作椅母版",
+    "reference_family": "traditional-home-furniture",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划餐椅4+工作椅1；约0.6×0.6×1.0",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02",
+      "F05"
+    ]
+  },
+  {
+    "资产ID": "F10",
+    "中文名称": "储物柜体母版",
+    "reference_family": "traditional-home-furniture",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划衣柜1/食品储物柜1；尺寸待合法room/layout",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02",
+      "A07",
+      "A08"
+    ]
+  },
+  {
+    "资产ID": "F11",
+    "中文名称": "厨房台面/柜基",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约2.4×0.6×0.8；尺寸和点位未批准",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F12",
+    "中文名称": "水槽/洗面盆母版",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "shared bathroom/kitchen fixture + actual water/drain/need/time；不造供水/恢复值",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划厨房1+卫生间1；不同参数派生同凹盆母版",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F11",
+      "F14"
+    ]
+  },
+  {
+    "资产ID": "F13",
+    "中文名称": "灶台/炉具",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约0.8×0.6×0.2；未放置",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F11"
+    ]
+  },
+  {
+    "资产ID": "F14",
+    "中文名称": "水龙头母版",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "shared bathroom/kitchen fixture + actual water/drain/need/time；不造供水/恢复值",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划随厨房槽/洗面盆各1",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F12"
+    ]
+  },
+  {
+    "资产ID": "F15",
+    "中文名称": "坐便器",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "shared bathroom/kitchen fixture + actual water/drain/need/time；不造供水/恢复值",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约0.6×0.8×0.8，未放置",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F16",
+    "中文名称": "淋浴底盘/排水盘",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "shared bathroom/kitchen fixture + actual water/drain/need/time；不造供水/恢复值",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约1.2×1.2×0.2",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02"
+    ]
+  },
+  {
+    "资产ID": "F17",
+    "中文名称": "淋浴管/花洒组件",
+    "reference_family": "traditional-home-kitchen-bath",
+    "independent_interface": "shared bathroom/kitchen fixture + actual water/drain/need/time；不造供水/恢复值",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约0.4×1.8×0.2；未放置",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F16"
+    ]
+  },
+  {
+    "资产ID": "F18",
+    "中文名称": "显示器机壳/支座",
+    "reference_family": "traditional-home-modern-office",
+    "independent_interface": "办公桌承托 + actual state-driven display/energy/work；电子使用点尚未生成",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "底面中心；+Y上/+Z朝使用者；受共享fixture包络约束",
+    "dimensions": "计划约0.8×0.6×0.2，支座由桌面承托",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F05",
+      "F19"
+    ]
+  },
+  {
+    "资产ID": "F19",
+    "中文名称": "显示器显示面",
+    "reference_family": "traditional-home-modern-office",
+    "independent_interface": "办公桌承托 + actual state-driven display/energy/work；电子使用点尚未生成",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "显示面的下缘中心；+Z朝使用者，与F18屏幕平面配合；面内宽高TBD",
+    "dimensions": "计划与F18屏框一致；显示实际数据，不固定虚假动画",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "F18"
+    ]
+  },
+  {
+    "资产ID": "F20",
+    "中文名称": "室内灯具母版",
+    "reference_family": "traditional-home-furniture",
+    "independent_interface": "actual lighting/energy/daylight + protected mount；室内灯计划6未放",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "吊灯版本悬挂顶点/床灯版本底面中心，作为同母版参数派生分别声明；非共用任意pivot",
+    "dimensions": "计划顶灯3+床边灯3；参数派生，未放置",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A02",
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "F21",
+    "中文名称": "窗帘/布帘母版",
+    "reference_family": "traditional-home-soft-furnishings",
+    "independent_interface": "新共享fixture/安装描述待定；不以模型bbox改变FloorPlan；未批准新位姿",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "帘轨中点/顶部悬挂线，+Y上/+Z朝室内；窗洞净空仍provider权威",
+    "dimensions": "按真实窗尺寸派生；正旋转，无非uniform外模拉伸",
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A10"
+    ]
+  },
+  {
+    "资产ID": "D01",
+    "中文名称": "入口灯笼组件",
+    "reference_family": "traditional-home-detail",
+    "independent_interface": "actual entrance lanternPlacement：1外门灯笼装配/4子件；材质/光源预算与daylight，不能冒充6盏室内灯",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "入口灯笼悬挂顶点；+Y上/+Z朝门外；挂链/发光面依原4子件布局",
+    "dimensions": [
+      [
+        0.4,
+        0.2,
+        1
+      ],
+      [
+        0.4,
+        0.6,
+        0.6
+      ],
+      [
+        0.8,
+        0.2,
+        0.8
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A06"
+    ]
+  },
+  {
+    "资产ID": "D02",
+    "中文名称": "住宅门牌框",
+    "reference_family": "traditional-home-doors-windows-and-signs",
+    "independent_interface": "architectureProgramSignPlacement：1门牌框5子件，文本来自building实际名称；已有本栋controlled图，精细可读性未合格",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "靠墙安装面下缘中点；+Y上/+Z向外，文字不镜像",
+    "dimensions": [
+      [
+        0.2,
+        0.2,
+        1.2
+      ],
+      [
+        0.2,
+        2.8,
+        0.2
+      ],
+      [
+        0.4,
+        2.8,
+        1.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A06"
+    ]
+  },
+  {
+    "资产ID": "D03",
+    "中文名称": "墙顶木构封边/横梁",
+    "reference_family": "traditional-home-detail",
+    "independent_interface": "wallPanels/boundaryLoops + actual floor y；旧几何不可隐改",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实wall a端/底面，切线+法线",
+    "dimensions": [
+      [
+        0.4,
+        0.2,
+        0.4
+      ],
+      [
+        0.4,
+        0.2,
+        2.8
+      ],
+      [
+        0.4,
+        0.2,
+        3.8
+      ],
+      [
+        0.4,
+        0.2,
+        4
+      ],
+      [
+        0.4,
+        0.2,
+        4.8
+      ],
+      [
+        0.4,
+        0.2,
+        5.4
+      ],
+      [
+        0.4,
+        0.2,
+        8.2
+      ],
+      [
+        0.4,
+        0.2,
+        8.4
+      ],
+      [
+        0.4,
+        0.2,
+        13.6
+      ],
+      [
+        0.4,
+        0.2,
+        15.8
+      ],
+      [
+        0.4,
+        0.2,
+        16.2
+      ],
+      [
+        0.4,
+        0.2,
+        18.6
+      ],
+      [
+        0.4,
+        0.2,
+        19.2
+      ],
+      [
+        0.8,
+        0.2,
+        0.4
+      ],
+      [
+        2.4,
+        0.2,
+        0.4
+      ],
+      [
+        4.8,
+        0.2,
+        0.4
+      ],
+      [
+        6.4,
+        0.2,
+        0.4
+      ],
+      [
+        10.4,
+        0.2,
+        0.4
+      ],
+      [
+        12.8,
+        0.2,
+        0.4
+      ],
+      [
+        16.8,
+        0.2,
+        0.4
+      ],
+      [
+        20.8,
+        0.2,
+        0.4
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03"
+    ]
+  },
+  {
+    "资产ID": "D04",
+    "中文名称": "地层石裙饰条",
+    "reference_family": "traditional-home-detail",
+    "independent_interface": "wallPanels/boundaryLoops + actual floor y；旧几何不可隐改",
+    "scale": "m；+Yup/+Zout；正uniform缩放须实际占用批准；0/90/180/270旋转；禁负scale镜像/非uniform拉伸；程序参数变型重新生成共享几何，不拉外模",
+    "origin": "真实wall a端/底面，切线+法线",
+    "dimensions": [
+      [
+        0.2,
+        0.4,
+        0.4
+      ],
+      [
+        0.2,
+        0.4,
+        0.6
+      ],
+      [
+        0.2,
+        0.4,
+        0.8
+      ],
+      [
+        0.2,
+        0.4,
+        2.2
+      ],
+      [
+        0.2,
+        0.4,
+        5.8
+      ],
+      [
+        0.2,
+        0.4,
+        7.6
+      ],
+      [
+        0.4,
+        0.4,
+        0.2
+      ],
+      [
+        1.2,
+        0.4,
+        0.2
+      ],
+      [
+        4.4,
+        0.4,
+        0.2
+      ],
+      [
+        10,
+        0.4,
+        0.2
+      ]
+    ],
+    "reference_status": "风格族规划。没有新统一参考图或模型生成；未证明imagine/Tripo能成套独立拆件。；Mac单对象分割方案60无纹理另列，尚未实测成套独立GLB/重组，不当已支持接口",
+    "dependency_asset_ids": [
+      "A03",
+      "A01"
+    ]
+  }
+]

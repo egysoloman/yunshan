@@ -1,0 +1,51 @@
+{
+  "createdAt": "2026-10-02T06:13:42.925228+00:00",
+  "domain": "life/furniture/commerce/production/education/research/medical/governance/culture",
+  "rows": 226,
+  "byType": {
+    "基础组件": 160,
+    "组合模板": 50,
+    "材质贴图": 12,
+    "配色尺寸变体": 4,
+    "动画特效": 0
+  },
+  "byState": {
+    "已集成代码生成": 5,
+    "隔离原型未集成": 1,
+    "缺失待制": 220,
+    "待核实": 0
+  },
+  "scope": "Actual source audit and production requirement inventory, not generated asset count, executed game validation or art acceptance. No API calls, model generation, simulator/GPU or source mutations.",
+  "sourcePaths": [
+    "src/architecture-floor-plan.ts",
+    "src/rendering/architecture-bodies.ts",
+    "src/rendering/architecture-detail.ts",
+    "src/site-fixtures.ts",
+    "src/rendering/market-goods.ts",
+    "src/simulation.ts",
+    "src/simulation/extensions.ts",
+    "src/simulation/culture.ts",
+    "src/simulation/family.ts",
+    "src/simulation/clinical.ts",
+    "src/simulation/trade.ts",
+    "src/ui.ts",
+    "src/types.ts",
+    "提示词.md"
+  ],
+  "sourceSha256": {
+    "src/architecture-floor-plan.ts": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/simulation.ts": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047",
+    "src/simulation/extensions.ts": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+    "src/simulation/culture.ts": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/clinical.ts": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/ui.ts": "abe5bddf0924ff625caa9f116461ef4815374a26c3170c5e7d0c995acc3c67bd",
+    "src/types.ts": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda",
+    "提示词.md": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+  }
+}

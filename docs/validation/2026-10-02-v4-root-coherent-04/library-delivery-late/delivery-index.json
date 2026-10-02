@@ -1,0 +1,27 @@
+{
+  "scope": "New distinct producer originals; old root7 failed batch remains failed and was not retried. Root independently rechecked ZIP bytes/member count/CRC/direct-stream credential patterns.",
+  "deliveries": [
+    {
+      "name": "controlled-originals",
+      "libraryID": "libfile_1bb625ca5edc81919d2b2cfc73888920",
+      "fileID": "file_0000000099d881f6b87291b3e8dbce9f",
+      "bytes": 31672972,
+      "sha256": "cc63a2416552452f1c9ea0658a00428246fd08ddc06f9c26c2554deb370311b5",
+      "members": 340,
+      "status": "SUCCEEDED_ONCE",
+      "scope": "57PNG/223raw; controlled seven buildings floor0-to1 and independent roof; not all high floors/native/Mac/artPASS"
+    },
+    {
+      "name": "home-and-ordinary-originals",
+      "libraryID": "libfile_7eba8a76e8bc81918eacd039ef55f27d",
+      "fileID": "file_00000000416c81f682d06914ea453d3b",
+      "bytes": 14190862,
+      "sha256": "bfca3e6546b976e0e33e97b47a59848e8fc5545ad51991b310449b4e170f7909",
+      "members": 192,
+      "status": "SUCCEEDED_ONCE",
+      "scope": "16PNG; original pilot upperfloorFAIL and ordinary exitFAIL preserved; finalwalletnotreopened; raw sourceprovenance exact"
+    }
+  ],
+  "originalRootFailedBatch": "NO_LIBRARY_IDS_UNCHANGED",
+  "productionSourceChanged": false
+}

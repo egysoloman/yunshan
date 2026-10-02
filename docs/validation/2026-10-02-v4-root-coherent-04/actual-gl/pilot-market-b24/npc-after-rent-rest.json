@@ -1,0 +1,87 @@
+{
+  "at": "2026-10-02T06:15:35.312Z",
+  "stage": "after-rent-rest",
+  "seed": 20261001,
+  "layout": "current-v4",
+  "tick": 128,
+  "hour": 8.533333333333333,
+  "day": 0,
+  "scope": "Read-only actual current-v4 fresh runtime citizen homeId/state/position/routes. No NPC placement, home assignment, clock steps or saved-profile claim.",
+  "residents": [
+    {
+      "id": "citizen-67",
+      "homeId": "market-b24",
+      "workId": "market-b22",
+      "state": "moving",
+      "tier": "active",
+      "position": {
+        "x": -389.2039018149976,
+        "y": 60.46028713640159,
+        "z": 464
+      },
+      "destinationId": "market-b22",
+      "routeIndex": 9,
+      "routeLength": 56,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -184.20000000000002,
+        "y": 83,
+        "z": 425.40000000000003
+      }
+    },
+    {
+      "id": "citizen-276",
+      "homeId": "market-b24",
+      "workId": "market-b35",
+      "state": "moving",
+      "tier": "active",
+      "position": {
+        "x": -389.2039018149976,
+        "y": 60.46028713640159,
+        "z": 464
+      },
+      "destinationId": "market-b35",
+      "routeIndex": 9,
+      "routeLength": 297,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -287.8,
+        "y": 82.6,
+        "z": 522.8
+      }
+    },
+    {
+      "id": "citizen-485",
+      "homeId": "market-b24",
+      "workId": "academy-b55",
+      "state": "atHome",
+      "tier": "active",
+      "position": {
+        "x": -398.8,
+        "y": 80,
+        "z": 307.20000000000005
+      },
+      "destinationId": "market-b24",
+      "routeIndex": 32,
+      "routeLength": 32,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -398.8,
+        "y": 80,
+        "z": 307.20000000000005
+      }
+    }
+  ]
+}

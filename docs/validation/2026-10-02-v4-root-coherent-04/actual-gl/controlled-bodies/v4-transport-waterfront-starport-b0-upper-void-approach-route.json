@@ -1,0 +1,42 @@
+{
+  "label": "v4-transport-waterfront-starport-b0-upper-void-approach",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": 1328.272,
+      "y": 395.20000000000005,
+      "z": -1416.5
+    }
+  ],
+  "start": {
+    "x": 1328.272,
+    "y": 395.20000000000005,
+    "z": -1416.5
+  },
+  "steps": 0,
+  "motorSeconds": 0,
+  "samples": [],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 160456,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 160456.1000000015,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": 1328.272,
+    "y": 395.20000000000005,
+    "z": -1416.5
+  },
+  "floor": 1,
+  "inside": "starport-b0",
+  "protectedStateUnchanged": true
+}

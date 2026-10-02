@@ -1,0 +1,31 @@
+{
+  "status": "PACKAGED_NOT_UPLOADED",
+  "at": "2026-10-02T07:25:38.480383+00:00",
+  "archive": "/workspace/yunshan/artifacts/yunshan-v4-upper-stair-single-home-originals-01.zip",
+  "bytes": 11921198,
+  "sha256": "0e652f6a442c5f74261a8a82d7dc9e3a1a9eb24038fedd1a1a8a78b2657d8751",
+  "zipMembers": 183,
+  "originalRawFiles": 57,
+  "postReviewFiles": 1,
+  "PNG": 8,
+  "CRC": "PASS",
+  "perMemberSHA256": "PASS",
+  "secretScan": {
+    "status": "PASS",
+    "scope": "All packaged bytes, including decompressed exact repo gzip fixtures",
+    "byteStreams": 181,
+    "decompressedGzipEntries": 12,
+    "matches": 0,
+    "patterns": [
+      "signedURL",
+      "privateKey",
+      "literalBearer",
+      "awsKey",
+      "privateLibraryRef"
+    ],
+    "privateProfilesIncluded": false,
+    "externalStateIncluded": false
+  },
+  "newSourceFullRules": "NOT_RUN",
+  "source99Stable": true
+}

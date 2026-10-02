@@ -1,0 +1,33 @@
+{
+  "stage": "legal-rent-rest",
+  "position": {
+    "x": -398.8,
+    "y": 76.6,
+    "z": 307.20000000000005
+  },
+  "actualFloor": 0,
+  "inside": "market-b24",
+  "blockedAccess": null,
+  "role": "traveler",
+  "identities": [
+    "traveler"
+  ],
+  "homeId": "market-b24",
+  "money": 520,
+  "hour": 8.216666666666667,
+  "speed": 1,
+  "allowed": [
+    {
+      "floor": 0,
+      "allowed": true
+    },
+    {
+      "floor": 1,
+      "allowed": true
+    },
+    {
+      "floor": 2,
+      "allowed": true
+    }
+  ]
+}

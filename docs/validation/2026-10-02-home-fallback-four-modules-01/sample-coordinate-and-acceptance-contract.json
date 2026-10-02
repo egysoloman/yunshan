@@ -1,0 +1,78 @@
+{
+  "schema": "yunshan-visual-sample-contract-v1",
+  "buildingId": "market-b24",
+  "worldRecipe": "current-v4",
+  "seed": 20261001,
+  "unit": "meter",
+  "up": "+Y",
+  "front": "+Z outward",
+  "properBasis": {
+    "assetX": "R=(N.z,0,-N.x)",
+    "assetY": [
+      0,
+      1,
+      0
+    ],
+    "assetZ": "N outward",
+    "determinant": 1,
+    "yaw": "atan2(N.x,N.z)"
+  },
+  "transform": {
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "allowedRepeatRotationDeg": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "negativeScale": false,
+    "nonUniformScale": false,
+    "normalisedBoundingBoxAsDimensionProof": false
+  },
+  "physics": {
+    "authoritativeGridM": 0.2,
+    "playerRadiusM": 0.35,
+    "eyeHeightM": 1.72,
+    "source": "Building FloorPlan/support/walls/stairs/function points remain authoritative.",
+    "subGridVisualDetail": "Proposed visual-only bevel/engraving detail; cannot redefine physical walls, supports or openings.",
+    "modelsAreCollisionAuthority": false
+  },
+  "materials": {
+    "maxPerSampleProposal": 2,
+    "pbr": [
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal",
+      "emissiveMask where needed"
+    ],
+    "lighting": "No baked sunlight/shadows; glass must transmit instead of being an opaque cyan panel.",
+    "emission": "Cyan energy strip and warm lamp are distinct masks in the opaque material; real lighting/circuit is separate.",
+    "textures": "Preserve original deliverable textures. Existing Mac quote uses original 2K; no 1K runtime optimisation has been performed."
+  },
+  "unsupported": [
+    "skin",
+    "animation embedded in static wall/window/frame/bonsai asset",
+    "adjacent facade/roof/stairs included in one sample",
+    "closed doorway disguised as a surface texture"
+  ],
+  "acceptance": [
+    "Actual triangulated mesh dimensions and named pivots",
+    "Independent GLB retained and a second positive rotation instance reassembled",
+    "Protected openings tested against triangles, not only outer bounding box",
+    "Atomic source replacement and local visual wall crop where required",
+    "Unchanged authority collision/support/path/permissions and source fingerprint, unless an explicitly reviewed new state/profile is introduced",
+    "Native player traversal/interaction and near pixel inspection after future integration"
+  ],
+  "current": {
+    "modelsReturnedForTheseSamples": 0,
+    "approvedNewMounts": 0,
+    "actualInstalls": 0,
+    "gpuRunsInThisTask": 0,
+    "paidGenerationCallsInThisTask": 0
+  }
+}

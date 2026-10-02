@@ -1,0 +1,2427 @@
+{
+  "label": "v4-transport-waterfront-core-interchange-stairs-up-first-flight",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": 655.8,
+      "y": 254.6,
+      "z": -140
+    },
+    {
+      "x": 654.8,
+      "y": 254.6,
+      "z": -139.6
+    },
+    {
+      "x": 654.8,
+      "y": 254.79999999999998,
+      "z": -139
+    },
+    {
+      "x": 654.8,
+      "y": 255,
+      "z": -138.6
+    },
+    {
+      "x": 654.8,
+      "y": 255.2,
+      "z": -138.2
+    },
+    {
+      "x": 654.8,
+      "y": 255.4,
+      "z": -137.8
+    },
+    {
+      "x": 654.8,
+      "y": 255.6,
+      "z": -137.4
+    },
+    {
+      "x": 654.8,
+      "y": 255.79999999999998,
+      "z": -137
+    },
+    {
+      "x": 654.8,
+      "y": 256,
+      "z": -136.6
+    },
+    {
+      "x": 654.8,
+      "y": 256.2,
+      "z": -136.2
+    },
+    {
+      "x": 654.8,
+      "y": 256.4,
+      "z": -135.8
+    },
+    {
+      "x": 654.8,
+      "y": 256.6,
+      "z": -135.4
+    },
+    {
+      "x": 654.8,
+      "y": 256.8,
+      "z": -135
+    },
+    {
+      "x": 654.8,
+      "y": 257,
+      "z": -134.6
+    },
+    {
+      "x": 654.8,
+      "y": 257.2,
+      "z": -134.2
+    },
+    {
+      "x": 654.8,
+      "y": 257.4,
+      "z": -133.8
+    },
+    {
+      "x": 654.8,
+      "y": 257.6,
+      "z": -133.4
+    },
+    {
+      "x": 654.8,
+      "y": 257.6,
+      "z": -132.4
+    }
+  ],
+  "start": {
+    "x": 655.8,
+    "y": 254.6,
+    "z": -140
+  },
+  "steps": 121,
+  "motorSeconds": 1.7243818669639408,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.8,
+        "y": 254.6,
+        "z": -140
+      },
+      "after": {
+        "x": 655.7331496782563,
+        "y": 254.6,
+        "z": -139.9732598713025
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.7331496782563,
+        "y": 254.6,
+        "z": -139.9732598713025
+      },
+      "after": {
+        "x": 655.6662993565126,
+        "y": 254.6,
+        "z": -139.946519742605
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.6662993565126,
+        "y": 254.6,
+        "z": -139.946519742605
+      },
+      "after": {
+        "x": 655.5994490347689,
+        "y": 254.6,
+        "z": -139.9197796139075
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.5994490347689,
+        "y": 254.6,
+        "z": -139.9197796139075
+      },
+      "after": {
+        "x": 655.5325987130252,
+        "y": 254.6,
+        "z": -139.89303948521
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.5325987130252,
+        "y": 254.6,
+        "z": -139.89303948521
+      },
+      "after": {
+        "x": 655.4657483912815,
+        "y": 254.6,
+        "z": -139.8662993565125
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.4657483912815,
+        "y": 254.6,
+        "z": -139.8662993565125
+      },
+      "after": {
+        "x": 655.3988980695378,
+        "y": 254.6,
+        "z": -139.83955922781502
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.3988980695378,
+        "y": 254.6,
+        "z": -139.83955922781502
+      },
+      "after": {
+        "x": 655.332047747794,
+        "y": 254.6,
+        "z": -139.81281909911755
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000004718,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.332047747794,
+        "y": 254.6,
+        "z": -139.81281909911755
+      },
+      "after": {
+        "x": 655.2651974260503,
+        "y": 254.6,
+        "z": -139.78607897042005
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.2651974260503,
+        "y": 254.6,
+        "z": -139.78607897042005
+      },
+      "after": {
+        "x": 655.1983471043065,
+        "y": 254.6,
+        "z": -139.75933884172258
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000004718,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.1983471043065,
+        "y": 254.6,
+        "z": -139.75933884172258
+      },
+      "after": {
+        "x": 655.1314967825629,
+        "y": 254.6,
+        "z": -139.73259871302508
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.1314967825629,
+        "y": 254.6,
+        "z": -139.73259871302508
+      },
+      "after": {
+        "x": 655.0646464608191,
+        "y": 254.6,
+        "z": -139.70585858432761
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000004718,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 655.0646464608191,
+        "y": 254.6,
+        "z": -139.70585858432761
+      },
+      "after": {
+        "x": 654.9977961390754,
+        "y": 254.6,
+        "z": -139.67911845563012
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 654.9977961390754,
+        "y": 254.6,
+        "z": -139.67911845563012
+      },
+      "after": {
+        "x": 654.9309458173316,
+        "y": 254.6,
+        "z": -139.65237832693265
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000004718,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": 654.9309458173316,
+        "y": 254.6,
+        "z": -139.65237832693265
+      },
+      "after": {
+        "x": 654.8640954955879,
+        "y": 254.6,
+        "z": -139.62563819823515
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07199999999995219,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.014381866963998399,
+      "before": {
+        "x": 654.8640954955879,
+        "y": 254.6,
+        "z": -139.62563819823515
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.6
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.06903296142719231,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.6
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.528
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.528
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.456
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.456
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.384
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.384
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.31199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.31199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.23999999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.6,
+        "z": -139.23999999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.16799999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.16799999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.09599999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 2,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.09599999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.02399999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -139.02399999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.95199999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.95199999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.87999999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.87999999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.80799999999996
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 254.79999999999998,
+        "z": -138.80799999999996
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.73599999999996
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.73599999999996
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.66399999999996
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 3,
+      "dt": 0.013333333333325944,
+      "before": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.66399999999996
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.6
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.06399999999996453,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.6
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.528
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.528
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.456
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255,
+        "z": -138.456
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.384
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.384
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.31199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.31199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.23999999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 4,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.23999999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.2
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.2
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.128
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.128
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.05599999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.2,
+        "z": -138.05599999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.98399999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.98399999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.91199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.91199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.83999999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 5,
+      "dt": 0.008333333333325754,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.83999999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.8
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999996362,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.8
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.728
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.728
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.656
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.4,
+        "z": -137.656
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.584
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.584
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.512
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.512
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.44
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 6,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.44
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.4
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.4
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.328
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.328
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.256
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.6,
+        "z": -137.256
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.184
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.184
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.112
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.112
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.04
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 7,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137.04
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -137
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -136.928
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -136.928
+      },
+      "after": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -136.856
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 255.79999999999998,
+        "z": -136.856
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.784
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.784
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.712
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.712
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.64
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 8,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.64
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.6
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.6
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.528
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.528
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.456
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256,
+        "z": -136.456
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.384
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.384
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.31199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.31199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.23999999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 9,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.23999999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.2
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.2
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.128
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.128
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.05599999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.2,
+        "z": -136.05599999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.98399999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.98399999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.91199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.91199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.83999999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 10,
+      "dt": 0.008333333333325754,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.83999999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.8
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999996362,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.8
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.728
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.728
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.656
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.4,
+        "z": -135.656
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.584
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.584
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.512
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.512
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.44
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 11,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.44
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.4
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.4
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.328
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.328
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.256
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.6,
+        "z": -135.256
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.184
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.184
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.112
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.112
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.04
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 12,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135.04
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -135
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -134.928
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -134.928
+      },
+      "after": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -134.856
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 256.8,
+        "z": -134.856
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.784
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.784
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.712
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.712
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.64
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 13,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.64
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.6
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.6
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.528
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.528
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.456
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257,
+        "z": -134.456
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.384
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.384
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.31199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.31199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.23999999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 14,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.23999999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.2
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.2
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.128
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.128
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.05599999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.2,
+        "z": -134.05599999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.98399999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.98399999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.91199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.91199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.83999999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 15,
+      "dt": 0.008333333333325754,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.83999999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.8
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999996362,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.8
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.728
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.728
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.656
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.4,
+        "z": -133.656
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.584
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.584
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.512
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.512
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.44
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 16,
+      "dt": 0.008333333333331677,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.44
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.4
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.03999999999999204,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.4
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.328
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.328
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.256
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.256
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.184
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.184
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.112
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.112
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.04
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -133.04
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.968
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.968
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.896
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.896
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.82399999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.82399999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.75199999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.75199999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.67999999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.67999999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.60799999999998
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.60799999999998
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.53599999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.015,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.53599999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.46399999999997
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    },
+    {
+      "waypoint": 17,
+      "dt": 0.013333333333325944,
+      "before": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.46399999999997
+      },
+      "after": {
+        "x": 654.8,
+        "y": 257.6,
+        "z": -132.4
+      },
+      "floor": 0,
+      "inside": "core-interchange",
+      "metres": 0.06399999999996453,
+      "blocked": null,
+      "eyeHeight": 1.7200000000000273
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 151787.1000000015,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 152008,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": 654.8,
+    "y": 257.6,
+    "z": -132.4
+  },
+  "floor": 0,
+  "inside": "core-interchange",
+  "protectedStateUnchanged": true
+}

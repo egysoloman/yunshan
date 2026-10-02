@@ -1,0 +1,55 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "results": [
+      {
+        "operation": "create_library_file",
+        "status": "succeeded",
+        "path": "/actual-ground-plan-four-candidates.png",
+        "file_id": "file_00000000eddc81f6a91b69ef9bd57fd6",
+        "library_file_id": "libfile_d8fea747d46081918e3e62c7bfc363fd",
+        "file_name": "actual-ground-plan-four-candidates.png",
+        "current_version_number": 0,
+        "restored_from_version_number": null,
+        "xattrs": [
+          {
+            "name": "user.library-file-version",
+            "value": "0"
+          }
+        ],
+        "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+        "mime_type": "image/png",
+        "library_artifact_type": "image",
+        "file_size_bytes": 176208
+      },
+      {
+        "operation": "create_library_file",
+        "status": "succeeded",
+        "path": "/four-module-metric-interfaces.png",
+        "file_id": "file_00000000511081f6a593270a03d5c169",
+        "library_file_id": "libfile_3d781179386c8191884ead2e1a06544e",
+        "file_name": "four-module-metric-interfaces.png",
+        "current_version_number": 0,
+        "restored_from_version_number": null,
+        "xattrs": [
+          {
+            "name": "user.library-file-version",
+            "value": "0"
+          }
+        ],
+        "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+        "mime_type": "image/png",
+        "library_artifact_type": "image",
+        "file_size_bytes": 293054
+      }
+    ],
+    "warnings": [],
+    "external_connectors_accessed": false
+  },
+  "isError": false
+}

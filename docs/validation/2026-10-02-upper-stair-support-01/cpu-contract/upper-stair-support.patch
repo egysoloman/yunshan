@@ -1,0 +1,68 @@
+--- a/src/architecture-floor-plan.ts
++++ b/src/architecture-floor-plan.ts
+@@ -285,16 +285,23 @@
+   const p=getBuildingFloorPlan(b,floor);if(!p)return null;const local=buildingLocalPosition(b,worldPosition),surfaces=stairSurfaces(b,p);
+   const choices:{top:number;kind:FloorSupport['kind'];floor:number;link?:FloorSupport['link']}[]=[];
+   const base=getFloorPlanSlabRegions(p);
+-  const nearStepRects=surfaces.filter(s=>s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps).map(s=>s.rect);
+-  const footprint=[...base,...nearStepRects];
+-  const diskSupported=containsUnion(footprint,local.x,local.z)&&(radius===0||boundaryLoops(footprint).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
+-  if(!surfaces.some(s=>contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps)&&diskSupported&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)) {
++  // A centre surface must still be reachable from the current feet. Its full
++  // body footprint is evaluated at that surface's landing height, so the next
++  // real .2m tread can support the front of a .35m disk over an upper shaft.
++  const supportedAt=new Map<number,boolean>();
++  const diskSupportedAt=(top:number):boolean=>{
++    const cached=supportedAt.get(top);if(cached!==undefined)return cached;
++    const nearStepRects=surfaces.filter(s=>s.top<=top+.22+eps&&s.top>=top-.42-eps).map(s=>s.rect);
++    const footprint=[...base,...nearStepRects];
++    const supported=containsUnion(footprint,local.x,local.z)&&(radius===0||boundaryLoops(footprint).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
++    supportedAt.set(top,supported);return supported;
++  };
++  if(!surfaces.some(s=>contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps)&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&diskSupportedAt(p.y)) {
+     const kind=contains(p.stairLanding,local.x,local.z)?'stairs':containsUnion(p.interior,local.x,local.z)?'room':containsUnion(p.circulation,local.x,local.z)?'gallery':'courtyard';choices.push({top:p.y,kind,floor:p.floor});
+   }
+   const onStair=surfaces.some(s=>contains(s.rect,local.x,local.z));
+   if(onStair)for(const s of surfaces) {
+-    const overlap=contains(s.rect,local.x,local.z)&&diskSupported;
+-    if(!overlap || s.top>local.y+.22+eps || s.top<local.y-.42-eps)continue;
++    if(!contains(s.rect,local.x,local.z) || s.top>local.y+.22+eps || s.top<local.y-.42-eps || !diskSupportedAt(s.top))continue;
+     const target=getBuildingFloorPlan(b,s.toFloor)!;
+     choices.push({top:s.top,kind:'stairs',floor:s.top>=target.y-eps?s.toFloor:s.fromFloor,link:{fromFloor:s.fromFloor,toFloor:s.toFloor}});
+   }
+--- a/tests/controller-v4.test.ts
++++ b/tests/controller-v4.test.ts
+@@ -57,14 +57,32 @@
+   });
+ });
+ 
+-for(const h of [3.4,6.6])test(`v4 actual W walks both stair flights up and down at ${h}m storey height without E or reset`,()=>{
++for(const h of [3.4,6.6])test(`v4 actual W walks both stair flights through 0→1→2→1→0 at ${h}m storey height without E or reset`,()=>{
+   const b=building('market',h);fixture(b,(c,keys)=>{
+     const stairs=getFloorPlanStairRoute(b,0,1)!;assert(stairs.length>20);c.setMode('walk',stairs[0]);const initial={...c.position};walk(c,keys,stairs);
+     assert.equal(c.floor,1);assert(Math.abs(c.position.y-(.6+h))<1e-8);assert.equal(insideId(c),b.id);
++    const upper=getFloorPlanStairRoute(b,1,2)!;assert(getBuildingFloorPlan(b,1)!.stairHole,'upper ascent must cross a real floor opening');walk(c,keys,upper);
++    assert.equal(c.floor,2);assert(Math.abs(c.position.y-(.6+2*h))<1e-8);assert.equal(insideId(c),b.id);
++    walk(c,keys,[...upper].reverse());assert.equal(c.floor,1);assert(Math.abs(c.position.y-(.6+h))<1e-8);
+     walk(c,keys,[...stairs].reverse());assert.equal(c.floor,0);assert(Math.abs(c.position.y-.6)<1e-8);assert(Math.hypot(c.position.x-initial.x,c.position.z-initial.z)<.03);
+   });
+ });
+ 
++// Exact current-v4 production home and browser pose that failed on the first
++// 1→2 riser. This uses the normal motor; the test never assigns the raised y.
++test('v4 exact market-b24 upper first-tread pose advances a .35m body by normal W',()=>{
++  const b:Building={id:'market-b24',districtId:'market',name:'千灯市集·钱庄街·里居7',kind:'home',position:{x:-390.8,y:76,z:316.20000000000005},width:40,depth:34.4,height:10.200000000000001,floors:3,rotation:0,door:{x:-390.8,y:76.60000000000001,z:333.40000000000003},capacity:129,seed:668619109,floorPlanProfile:'v4-program-bodies-02'};
++  const from={x:-404.59997341778063,y:80,z:308.791474723644};
++  fixture(b,(c,keys)=>{
++    c.setMode('walk',from);assert.deepEqual(c.position,from);assert.equal(c.floor,1);
++    key(keys,'KeyW');c.yaw=Math.PI;c.step(.015,false);key(keys,'KeyW',false);
++    assert(Math.abs(c.position.z-(from.z+.072))<1e-8,'full body must advance onto the reachable first upper tread');
++    assert(Math.abs(c.position.y-(from.y+.2))<1e-7,'motor selects the real .2m raised tread');
++    assert.equal(c.floor,1);assert.equal(insideId(c),b.id);assert.equal(c.blockedAccess,null);
++    const actual=floorPlanSupport(b,c.floor,c.position,.35);assert(actual);assert(Math.abs(actual.y-c.position.y)<1e-7);
++  });
++});
++
+ test('v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing',()=>{
+   const b=building();fixture(b,(c,keys)=>{
+     const route=getFloorPlanStairRoute(b,0,1)!;c.setMode('walk',route[0]);key(keys,'KeyW');c.yaw=Math.atan2(-(route[1].x-c.position.x),-(route[1].z-c.position.z));for(let i=0;i<15;i++)c.step(.015,false);key(keys,'KeyW',false);
