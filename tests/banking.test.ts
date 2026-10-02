@@ -232,7 +232,7 @@ test('bank corruptions reject atomically and a funded ledger resumes with identi
 test('a saved module manifest prevents missing financial custody from being mistaken for a legacy save', () => {
   const sim = create(); assert.equal(command(sim, 'deposit', 300).ok, true); assert.equal(command(sim, 'loan', 100).ok, true);
   const valid = sim.exportSave(), original = JSON.parse(valid), modules: string[] = original.runtime.persistedModules;
-  assert.deepEqual(modules, ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical']);
+  assert.deepEqual(modules, ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest']);
   for (const name of modules) {
     const data = JSON.parse(valid); delete data.state[name];
     const result = sim.importSave(JSON.stringify(data));

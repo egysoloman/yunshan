@@ -1,0 +1,88 @@
+{
+  "createdAt": "2026-10-02T14:49:03.440701+00:00",
+  "source": "/tmp/yunshan-system-coherent-10",
+  "files": [
+    {
+      "file": "dom10-original-evidence.zip",
+      "bytes": 7200496,
+      "sha256": "eb205f44b17c252b1532404b4d8809470e636e69d2513e7ff6ef5c5d7a60cfe6"
+    },
+    {
+      "file": "dom10.log",
+      "bytes": 1327,
+      "sha256": "67ad050dfb423b74a50a9bda3fceb9d91ed15f8296920021b307e9ed7b50b713"
+    },
+    {
+      "file": "ui-run-status.json",
+      "bytes": 28798,
+      "sha256": "e669e93db492b3272748b4324043c4553360310e79e98af26de9a68c4afff36d"
+    },
+    {
+      "file": "source-snapshot.json",
+      "bytes": 21936,
+      "sha256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926"
+    },
+    {
+      "file": "related-run-status.json",
+      "bytes": 28212,
+      "sha256": "6b80c4694fdf376451ca00550eb5a287844343ae768b5ec40cc89199a42231fb"
+    },
+    {
+      "file": "build.log",
+      "bytes": 720,
+      "sha256": "b353d0f979df7c71b1a2f4f6ad5d0db67cf0eb4e4ac321626f0a809f14840d2a"
+    },
+    {
+      "file": "home-and-npc-clock.log",
+      "bytes": 4250,
+      "sha256": "04b49ad7e05c1b5a59875bb1fbeaa03c69f9a6ecf28bcb68662fc934b6366f46"
+    },
+    {
+      "file": "native-save-and-module-migration.log",
+      "bytes": 436,
+      "sha256": "c868ad279abba7c9791b019d1d5d90895936e97a928ce189bbe5a3ba913737f4"
+    },
+    {
+      "file": "library-delivery-run-status.json",
+      "bytes": 3028,
+      "sha256": "510a738589fd38f82f5cc96528be6735a3afd14ceac40625fff5a4d6206d00b9"
+    },
+    {
+      "file": "library-helper.stderr",
+      "bytes": 70,
+      "sha256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf"
+    },
+    {
+      "file": "library-final-cleanup-check.json",
+      "bytes": 653,
+      "sha256": "973c294e686c4890833d82dac183ba560d044fe14eeb6f342a03884f96a61c78"
+    },
+    {
+      "file": "ui-home-rest-active.png",
+      "bytes": 116511,
+      "sha256": "302971ff5e5dd3fdad3e5c3f56695e8b0ba7dfe7bc0cca0cc6547d853352ba45"
+    },
+    {
+      "file": "ui-home-rest-table.png",
+      "bytes": 118507,
+      "sha256": "a5e881769d4e7e052607cff561f02e1b7b3aa0a27391b2641ef415e21d868728"
+    },
+    {
+      "file": "ui-home-rest-paused.png",
+      "bytes": 119449,
+      "sha256": "fddddf6c7a28ff56ff79638c9abd0a8a183cd8818f8fbd5c4a998f6d91d228e3"
+    },
+    {
+      "file": "ui-home-rest-completed.png",
+      "bytes": 111812,
+      "sha256": "9663cf964ece4f2886dd170841bac49acce50f80ac943aed83544a2546e471a9"
+    },
+    {
+      "file": "ui-home-rest-cancelled.png",
+      "bytes": 118808,
+      "sha256": "f22a7975abf50717ca3a37e36788d2b8ccdd8d9510a5a807b91589d0089505b9"
+    }
+  ],
+  "gitStatus": "PREPARED_LOCAL_NOT_COMMITTED_OR_PUSHED",
+  "libraryStatus": "One fresh ordered batch failed before prepare due network, 0newID, no retry/fallback"
+}

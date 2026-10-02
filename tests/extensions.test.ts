@@ -747,16 +747,19 @@ test('legacy core saves initialize extension state and remain playable', () => {
   Reflect.deleteProperty(legacy.state, 'extension');
   Reflect.deleteProperty(legacy.state, 'family');
   Reflect.deleteProperty(legacy.state, 'culture');
-  for (const key of ['banking', 'trade', 'journey', 'aviation', 'playerLabor', 'clinical']) Reflect.deleteProperty(legacy.state, key);
+  for (const key of ['banking', 'trade', 'journey', 'aviation', 'playerLabor', 'clinical', 'homeRest']) Reflect.deleteProperty(legacy.state, key);
   for (const key of ['privateLabor', 'publicLabor', 'publicLaborReviewAt', 'publicBudgets', 'playerLaborVersion', 'persistedModules']) Reflect.deleteProperty(Reflect.get(legacy, 'runtime'), key);
   const restored = new Simulation(fixture());
   const result = restored.importSave(JSON.stringify(legacy));
   assert.equal(result.ok, true, result.message);
   assert.ok(extension(restored).actorProfiles.player);
   assert.equal(extension(restored).technologies.length, 7);
+  assert.equal(restored.state.homeRest, undefined, 'the historical unmarked recipe does not acquire a physical v4 home-rest module');
+  assert.equal(JSON.parse(restored.exportSave()).runtime.persistedModules.includes('homeRest'), false);
   const clock = extension(restored).lastUpdate;
   restored.step(0.25);
   assert.equal(extension(restored).lastUpdate, clock + 2);
+  assert.equal(restored.state.homeRest, undefined, 'legacy people hooks remain safe without introducing new idle module data');
   finiteTree(restored.state);
 });
 

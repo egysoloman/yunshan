@@ -1,0 +1,73 @@
+{
+  "createdAt": "2026-10-02T14:58:14.315614+00:00",
+  "source": "/tmp/yunshan-bedside-native-build-probe-01",
+  "files": [
+    {
+      "file": "native-build-probe-original-evidence.zip",
+      "bytes": 13295018,
+      "sha256": "ed35c350c7f3e5720d0707e927377d0978f7fb61310f54a40284f592ed4f5d01"
+    },
+    {
+      "file": "execution-status.json",
+      "bytes": 5530,
+      "sha256": "ebb59183e1e2cd3825cf3e6ed65f3e00e7487d8a2a2f5a593ecc365c36366d6f"
+    },
+    {
+      "file": "package-manifest.json",
+      "bytes": 65515,
+      "sha256": "739df4dfe832ae98d73fa2c45a4529fde4cb1594d6d4bb64dcd738c067fe7d8d"
+    },
+    {
+      "file": "package-status.json",
+      "bytes": 47301,
+      "sha256": "a7fd454e8146a7959617d2d784db0ac8acb9504a739e99e37b192d49df1c2831"
+    },
+    {
+      "file": "probe.mjs",
+      "bytes": 17862,
+      "sha256": "798674d0618c59e05b08e5ac45cf18d5d87dd6f3b9d42eeeb57a450e03fdf8df"
+    },
+    {
+      "file": "run-once.py",
+      "bytes": 4461,
+      "sha256": "0233ae9065a3bb0da65df75e2e42ca3db4373a41fa48aa847cc646a8635c7f6d"
+    },
+    {
+      "file": "README.md",
+      "bytes": 4319,
+      "sha256": "217eddb2cd35b82c3316b9d654c3566621245930ae38c9c34e50e2a130cb0cac"
+    },
+    {
+      "file": "geometry-original.json",
+      "bytes": 5135,
+      "sha256": "c0ce313693c181fa2761a9960350c0d1477f5068d6fa7a319ce4c46424220287"
+    },
+    {
+      "file": "west-b13-native.json",
+      "bytes": 3002,
+      "sha256": "baeed4f5e8d2d15b005ec25cb9925d68af11127c1421253c4b4f4b0b4e78fbee"
+    },
+    {
+      "file": "preparation-status.json",
+      "bytes": 1434,
+      "sha256": "03237442003ce48e5d4f6253dd16f20bc2735d1a7580f27a6659ebd803b0dcfe"
+    },
+    {
+      "file": "library-delivery-run-status.json",
+      "bytes": 55215,
+      "sha256": "8fb02b55e3f64fb2db126ae30e37bb1c9285e9dadafd928bffd61f1ce691e455"
+    },
+    {
+      "file": "library-helper.stderr",
+      "bytes": 70,
+      "sha256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf"
+    },
+    {
+      "file": "library-final-cleanup-check.json",
+      "bytes": 822,
+      "sha256": "673d3e7a9132de4696fca28684074ba5cd9c10b0f5b075fbd8655e0f82448f69"
+    }
+  ],
+  "gitStatus": "PREPARED_LOCAL_NOT_COMMITTED_OR_PUSHED",
+  "libraryStatus": "One fresh new probe upload failed before prepare due network; 0ID; original SHA unchanged"
+}

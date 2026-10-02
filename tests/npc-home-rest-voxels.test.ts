@@ -1,0 +1,237 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { Simulation } from '../src/simulation';
+import { blocksFloorPlanMovement, floorPlanSupport, getBuildingEntrance, getBuildingUsePoints } from '../src/architecture-floor-plan';
+import { savedWorldFingerprint } from '../src/persistence/world-layout';
+import * as rest from '../src/simulation/home-rest';
+import type { HomeRestPoint } from '../src/simulation/home-rest';
+import type { Building, Citizen, Role, Vec3, VoxelModification, WorldDefinition } from '../src/types';
+
+const EPS = 1e-7;
+const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
+const near = (actual: number, expected: number, message: string) => assert.ok(Math.abs(actual - expected) < 1e-8, `${message}: ${actual} != ${expected}`);
+const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+interface Runtime { activities: Record<string, string>; decisionAt: Record<string, number>; constructionId: number; peopleElapsed?: Record<string, number> }
+const runtime = (sim: Simulation): Runtime => Reflect.get(sim, 'runtime');
+const person = (sim: Simulation, actor: Citizen) => { const role = Reflect.get(sim, 'citizenIdentity').call(sim, actor) as Role; return { role, identities: [role] }; };
+
+/** Oracle is the unchanged player's pre-patch cube/body rule. The old source
+ * can run behavioral tests without importing the candidate's new export. */
+function blocked(position: Vec3, voxels: readonly { position: Vec3 }[]): boolean {
+  return voxels.some(v => {
+    if (v.position.y + .1 <= position.y + .01 || v.position.y - .1 >= position.y + 1.72) return false;
+    const dx = Math.max(Math.abs(v.position.x - position.x) - .1, 0), dz = Math.max(Math.abs(v.position.z - position.z) - .1, 0);
+    return dx * dx + dz * dz < .35 * .35 - EPS;
+  });
+}
+function world(): WorldDefinition {
+  // The existing real v4 three-floor home recipe; four unmarked public sites
+  // keep this a small 5-building fixture, never the default 612-building city.
+  const home: Building = { id: 'market-b24', districtId: 'market', name: '真实三层里居', kind: 'home', position: { x: -390.8, y: 76, z: 316.2 }, width: 40, depth: 34.4, height: 10.2, floors: 3, rotation: 0, door: { x: 0, y: 0, z: 0 }, capacity: 129, seed: 668619109, floorPlanProfile: 'v4-program-bodies-02' };
+  home.door = getBuildingEntrance(home);
+  home.functionPoints = Array.from({ length: home.floors }, (_, floor) => getBuildingUsePoints(home, floor)).flat();
+  const kinds: Building['kind'][] = ['pavilion', 'clinic', 'school', 'bank'];
+  const buildings = [home, ...kinds.map((kind, i): Building => ({ id: `voxel-${kind}`, districtId: 'market', name: kind, kind, position: { x: home.position.x + (i + 1) * 120, y: 76, z: home.position.z }, width: 20, depth: 20, height: 6, floors: 1, rotation: 0, door: { x: home.position.x + (i + 1) * 120, y: 76.6, z: home.position.z + 10 }, capacity: 50, seed: i + 7 }))];
+  const nodes = buildings.flatMap(b => [{ id: `${b.id}-door`, name: b.name, districtId: 'market', position: { ...b.door }, station: false }, { id: `${b.id}-street`, name: b.name, districtId: 'market', position: { x: b.position.x, y: 76.6, z: home.position.z + 35 }, station: false }]);
+  const edges: WorldDefinition['edges'] = buildings.map((b, i) => ({ id: `voxel-door-${b.id}`, from: nodes[i * 2].id, to: nodes[i * 2 + 1].id, mode: 'road', length: distance(nodes[i * 2].position, nodes[i * 2 + 1].position), capacity: 20, points: [nodes[i * 2].position, nodes[i * 2 + 1].position] }));
+  for (let i = 1; i < buildings.length; i++) edges.push({ id: `voxel-street-${i}`, from: nodes[i * 2 - 1].id, to: nodes[i * 2 + 1].id, mode: 'road', length: 120, capacity: 20, points: [nodes[i * 2 - 1].position, nodes[i * 2 + 1].position] });
+  return { seed: 911, voxelSize: .2, size: 4000, buildings, nodes, edges, districts: [{ id: 'market', name: '床侧体素受控回归', kind: 'market', center: { ...home.position }, radius: 1200, color: '#888888', population: 384 }], spawn: { ...home.door }, mountains: [], river: [], waterfall: { top: { x: 1800, y: 100, z: 1800 }, bottom: { x: 1800, y: 0, z: 1800 }, width: 10 } };
+}
+function outward(point: HomeRestPoint): Vec3 { return { x: point.side === 'x-plus' ? 1 : point.side === 'x-minus' ? -1 : 0, y: 0, z: point.side === 'z-plus' ? 1 : point.side === 'z-minus' ? -1 : 0 }; }
+function shifted(point: HomeRestPoint, amount: number): Vec3 { const direction = outward(point); return { ...point.position, x: point.position.x + amount * direction.x, z: point.position.z + amount * direction.z }; }
+function create(offset = 0) {
+  const sim = new Simulation(world()), home = sim.worldDefinition.buildings[0];
+  assert.equal(sim.state.citizens.length, 384, 'retain the entire native roster');
+  assert(sim.command({ type: 'setTime', value: 23 }).ok);
+  const actor = sim.state.citizens.find(c => sim.state.extension!.actorProfiles[c.id].age >= 18)!;
+  assert(actor);
+  const points = rest.homeRestPoints(home, 0);
+  const point = points.find(p => rest.homeRestPointAt(home, shifted(p, offset), person(sim, actor))?.id === p.id
+    && floorPlanSupport(home, p.floor, shifted(p, offset), .35)?.kind === 'room'
+    && !blocksFloorPlanMovement(home, p.floor, shifted(p, offset), shifted(p, offset), .35));
+  assert(point, 'controlled initial standing volume must be statically legal');
+  // Initial snapshot controls only: an adult is already within the legal bed
+  // radius with an existing completed route and a pending normal rest decision.
+  // Native needs, role, age, wallets, all other citizens and geometry are kept.
+  actor.position = shifted(point, offset); actor.destinationId = home.id;
+  actor.route = [{ ...point.position }, { ...point.position }]; actor.routeIndex = 2; actor.state = 'sleeping';
+  runtime(sim).activities[actor.id] = 'rest'; runtime(sim).decisionAt[actor.id] = 23 * 60 + 120;
+  sim.setFocus(point.position, 'drone');
+  assert.equal(actor.tier, 'active');
+  assert.equal(rest.homeRestPointAt(home, actor.position, person(sim, actor))?.id, point.id);
+  assert(actor.needs.fatigue < 99 && actor.needs.fun < 99, 'native needs leave measurable recovery headroom');
+  return { sim, home, actor, point };
+}
+function capture(sim: Simulation, name: string) {
+  const directory = process.env.YUNSHAN_VOXEL_EVIDENCE;
+  if (!directory) return;
+  mkdirSync(directory, { recursive: true });
+  writeFileSync(join(directory, `${name}.json`), sim.exportSave());
+}
+function placeSnapshotVoxel(sim: Simulation, position: Vec3): void {
+  // Schema-valid synthetic snapshot of one previously placed .2m cube, not
+  // proof of native build UI/command access. Debit one native block, keep old cubes,
+  // increment the native construction ID, then use the real atomic importer.
+  const data = JSON.parse(sim.exportSave());
+  const snapped = { x: Math.round(position.x * 5) / 5, y: Math.round(position.y * 5) / 5, z: Math.round(position.z * 5) / 5 };
+  assert(data.state.player.inventory.block >= 1);
+  data.state.player.inventory.block--;
+  data.state.voxels.push({ id: `voxel-${++data.runtime.constructionId}`, position: snapped, color: '#888888' });
+  const saved = JSON.stringify(data), result = sim.importSave(saved);
+  assert(result.ok, result.message); assert.equal(sim.exportSave(), saved, 'schema-valid synthetic placed-voxel snapshot must export exactly');
+}
+function assertReservations(sim: Simulation, home: Building) {
+  const points = Array.from({ length: home.floors }, (_, floor) => rest.homeRestPoints(home, floor)).flat(), counts = new Map<string, number>();
+  for (const actor of sim.state.citizens) {
+    if (actor.destinationId !== home.id || runtime(sim).activities[actor.id] !== 'rest') continue;
+    const point = points.find(p => actor.route?.at(-1) && distance(p.position, actor.route.at(-1)!) < 1e-8);
+    if (!point) continue;
+    counts.set(point.bedId, (counts.get(point.bedId) ?? 0) + 1);
+    assert.equal(counts.get(point.bedId), 1, 'different sides of one bed cannot overlap reservations');
+  }
+}
+function exactContinuation(sim: Simulation, name: string) {
+  const saved = sim.exportSave(), copy = new Simulation(sim.worldDefinition), fingerprint = savedWorldFingerprint(sim.worldDefinition);
+  const originalHomes = sim.state.citizens.map(c => c.homeId), voxels = clone(sim.state.voxels), wallet = sim.state.player.money;
+  const imported = copy.importSave(saved); assert(imported.ok, imported.message); assert.equal(copy.exportSave(), saved);
+  capture(sim, `${name}-saved`);
+  for (let i = 0; i < 24; i++) { sim.step(.25); copy.step(.25); assert.equal(copy.exportSave(), sim.exportSave(), `same snapshot must continue exactly at tick ${i + 1}`); assertReservations(sim, sim.worldDefinition.buildings[0]); }
+  assert.deepEqual(sim.state.voxels, voxels, 'never delete blocking cubes to make a regression pass');
+  assert.deepEqual(sim.state.citizens.map(c => c.homeId), originalHomes);
+  assert.equal(sim.state.player.money, wallet); assert.equal(savedWorldFingerprint(sim.worldDefinition), fingerprint);
+  capture(sim, `${name}-continued24`);
+}
+
+test('a placed voxel excludes an NPC blocked bed side after the same native bedside start', t => {
+  const { sim, home, actor, point } = create();
+  t.after(() => capture(sim, 'selection-final'));
+  const before = clone(actor.needs), nativeWallet = actor.money;
+  sim.step(.25);
+  near(actor.needs.fatigue, before.fatigue - .25 * .035 + .25 * .35, 'clear initial bedside restores only this actual quarter minute');
+  capture(sim, 'selection-before-placement');
+  placeSnapshotVoxel(sim, { ...point.position, y: point.position.y + .8 });
+  const current = sim.state.citizens.find(c => c.id === actor.id)!;
+  assert(blocked(point.position, sim.state.voxels));
+  const previous = clone(current.needs); capture(sim, 'selection-after-placement-before-tick');
+  sim.step(.25);
+  const target = current.route?.at(-1); assert(target);
+  assert(!blocked(target, sim.state.voxels), `chosen bed side must have live voxel clearance; fatigue delta=${current.needs.fatigue - previous.fatigue}`);
+  assert.notDeepEqual(target, point.position);
+  assert.equal(current.state, 'moving'); near(current.needs.fatigue, previous.fatigue - .25 * .035, 'travel to another side does not earn recovery');
+  assert.equal(current.money, nativeWallet); assertReservations(sim, home);
+});
+
+test('an NPC standing volume cannot recover inside a voxel while its canonical bed side stays clear', t => {
+  const { sim, home, actor, point } = create(.4);
+  t.after(() => capture(sim, 'standing-final'));
+  const before = clone(actor.needs);
+  sim.step(.25); near(actor.needs.fatigue, before.fatigue - .25 * .035 + .25 * .35, 'same clear near-point start recovers before placement');
+  capture(sim, 'standing-before-placement');
+  placeSnapshotVoxel(sim, { ...shifted(point, .8), y: point.position.y + .8 });
+  const current = sim.state.citizens.find(c => c.id === actor.id)!;
+  assert(!blocked(point.position, sim.state.voxels), 'canonical target remains dynamically clear');
+  assert(blocked(current.position, sim.state.voxels), 'actual body is blocked within the accepted .4m point radius');
+  assert.equal(rest.homeRestPointAt(home, current.position, person(sim, current))?.id, point.id);
+  const previous = clone(current.needs); capture(sim, 'standing-after-placement-before-tick');
+  sim.step(.25);
+  assert.deepEqual(current.route!.at(-1), point.position, 'endpoint filtering cannot explain this final body guard');
+  near(current.needs.fatigue, previous.fatigue - .25 * .035, 'a blocked actual standing body must not receive onsite sleep recovery');
+  near(current.needs.fun, previous.fun - .25 * .02, 'a blocked body must not receive onsite fun recovery');
+  assert.equal(current.state, 'unreachable'); assert.equal(current.destinationId, null);
+  exactContinuation(sim, 'standing');
+});
+
+test('the shared voxel predicate preserves the original player radial EPS and vertical contact boundaries', () => {
+  const predicate = Reflect.get(rest, 'homeRestPointBlockedByVoxels') as typeof blocked;
+  assert.equal(typeof predicate, 'function');
+  const origin = { x: 0, y: 0, z: 0 }, threshold = .35 * .35 - EPS, delta = 1e-8;
+  const cases: { position: Vec3; standing?: Vec3; expected: boolean }[] = [
+    { position: { x: 0, y: .8, z: 0 }, expected: true },
+    { position: { x: .1 + Math.sqrt(threshold - delta), y: .8, z: 0 }, expected: true },
+    { position: { x: .1 + Math.sqrt(threshold + delta), y: .8, z: 0 }, expected: false },
+    { position: { x: -.1 - Math.sqrt(threshold - delta), y: .8, z: 0 }, expected: true },
+    { position: { x: .1 + Math.sqrt((threshold - delta) / 2), y: .8, z: .1 + Math.sqrt((threshold - delta) / 2) }, expected: true },
+    { position: { x: 0, y: 0, z: 0 }, standing: { x: 0, y: .1 - .01, z: 0 }, expected: false },
+    { position: { x: 0, y: 0, z: 0 }, standing: { x: 0, y: .1 - .01 - 1e-6, z: 0 }, expected: true },
+    { position: { x: 0, y: 1.82, z: 0 }, expected: false },
+    { position: { x: 0, y: 1.82 - 1e-6, z: 0 }, expected: true },
+    { position: { x: 0, y: 3.4 + .8, z: 0 }, expected: false },
+  ];
+  assert.equal(cases[5].position.y + .1, cases[5].standing!.y + .01, 'the foot contact fixture must be exactly touching in actual floating-point arithmetic');
+  assert.equal(cases[7].position.y - .1, origin.y + 1.72, 'the head contact fixture must be exactly touching');
+  for (const item of cases) { const standing = item.standing ?? origin, voxels = [{ position: item.position }], before = clone(voxels); assert.equal(blocked(standing, voxels), item.expected); assert.equal(predicate(standing, voxels), item.expected); assert.deepEqual(voxels, before); }
+  const { sim, home, point } = create(); sim.state.player.homeId = home.id;
+  const occupiedQuery = { ...sim.state, player: { ...sim.state.player, position: { ...point.position } }, voxels: [{ id: 'query-only', color: '#888888', position: { ...point.position, y: point.position.y + .8 } }] };
+  assert.equal(rest.homeRestBlockedReason(occupiedQuery, home), '这张床已有居民实际到场休息，请选择另一床位。', 'resident occupancy keeps its original priority over voxels');
+  const playerPoint = Array.from({ length: home.floors }, (_, floor) => rest.homeRestPoints(home, floor)).flat().find(p => p.bedId !== point.bedId)!;
+  assert(playerPoint);
+  assert(sim.state.citizens.every(c => !['atHome', 'sleeping'].includes(c.state) || rest.homeRestPointAt(home, c.position, person(sim, c))?.bedId !== playerPoint.bedId), 'player boundary fixture must use an actually unoccupied different bed');
+  sim.setFocus(playerPoint.position, 'walk'); assert.equal(rest.homeRestBlockedReason(sim.state, home), '');
+  for (const item of cases) {
+    const standing = item.standing ?? origin;
+    const voxel: VoxelModification = { id: 'query-only', color: '#888888', position: { x: playerPoint.position.x + item.position.x - standing.x, y: playerPoint.position.y + item.position.y - standing.y, z: playerPoint.position.z + item.position.z - standing.z } };
+    const queryState = { ...sim.state, voxels: [voxel] };
+    assert.equal(rest.homeRestBlockedReason(queryState, home), blocked(sim.state.player.position, [voxel]) ? '床侧站立体积被放置的体素阻挡。' : '');
+  }
+  const wrongHome = { ...sim.state, player: { ...sim.state.player, homeId: null }, voxels: [{ id: 'query-only', color: '#888888', position: { ...playerPoint.position, y: playerPoint.position.y + .8 } }] };
+  assert.equal(rest.homeRestBlockedReason(wrongHome, home), '已不再租住原住宅。', 'keep the original player rejection precedence');
+});
+
+test('a voxel on another floor leaves the same actual NPC bedside available for recovery', () => {
+  const { sim, home, actor, point } = create();
+  placeSnapshotVoxel(sim, { ...point.position, y: point.position.y + home.height / home.floors + .8 });
+  const current = sim.state.citizens.find(c => c.id === actor.id)!, before = clone(current.needs);
+  assert(!blocked(current.position, sim.state.voxels)); sim.step(.25);
+  assert.equal(current.state, 'sleeping'); assert.deepEqual(current.route!.at(-1), point.position);
+  near(current.needs.fatigue, before.fatigue - .25 * .035 + .25 * .35, 'only overlapping vertical body volumes block recovery');
+  assertReservations(sim, home);
+});
+
+test('a deferred existing blocked-side reservation still owns its bed until its real update', () => {
+  const sim = new Simulation(world()), home = sim.worldDefinition.buildings[0]; assert(sim.command({ type: 'setTime', value: 23 }).ok); sim.step(.25);
+  const points = Array.from({ length: home.floors }, (_, floor) => rest.homeRestPoints(home, floor)).flat(), nextTick = sim.state.tick + 1;
+  const ownerIndex = sim.state.citizens.findIndex((c, i) => (nextTick + i) % 4 !== 0 && c.destinationId === home.id && runtime(sim).activities[c.id] === 'rest' && points.some(p => c.route?.at(-1) && distance(p.position, c.route.at(-1)!) < 1e-8));
+  assert(ownerIndex >= 0); const owner = sim.state.citizens[ownerIndex], target = owner.route!.at(-1)!, point = points.find(p => distance(p.position, target) < 1e-8)!;
+  const challengerIndex = sim.state.citizens.findIndex((c, i) => (nextTick + i) % 4 === 0 && sim.state.extension!.actorProfiles[c.id].age >= 18 && c.destinationId !== home.id && runtime(sim).activities[c.id] === 'rest');
+  assert(challengerIndex >= 0); const challengerId = sim.state.citizens[challengerIndex].id;
+  placeSnapshotVoxel(sim, { ...point.position, y: point.position.y + .8 });
+  const preservedOwner = sim.state.citizens[ownerIndex], challenger = sim.state.citizens[challengerIndex];
+  assert(points.some(p => p.bedId === point.bedId && !blocked(p.position, sim.state.voxels)), 'blocking one side must leave another side of the same reserved bed clear');
+  sim.setFocus({ x: home.position.x + 600, y: home.door.y, z: home.position.z }, 'drone');
+  assert.equal(preservedOwner.tier, 'regional'); assert.equal(challenger.tier, 'regional');
+  // A controlled due decision timer, without replacing native needs or cash.
+  runtime(sim).decisionAt[challengerId] = sim.state.day * 1440 + sim.state.hour * 60;
+  sim.step(.25);
+  assert.deepEqual(preservedOwner.route!.at(-1), target, 'the owner has not received its next people update');
+  near(runtime(sim).peopleElapsed![preservedOwner.id], .25, 'actual deferred quarter minute remains pending');
+  assert.notEqual(challenger.destinationId, home.id, 'a blocked route endpoint cannot implicitly release the other side of its reserved bed');
+  assertReservations(sim, home); exactContinuation(sim, 'reservation');
+});
+
+test('blocking every home bed side keeps the existing public rest fallback without deleting cubes', () => {
+  const { sim, home, actor } = create(), points = Array.from({ length: home.floors }, (_, floor) => rest.homeRestPoints(home, floor)).flat();
+  for (const point of points) placeSnapshotVoxel(sim, { ...point.position, y: point.position.y + .8 });
+  const current = sim.state.citizens.find(c => c.id === actor.id)!;
+  current.destinationId = null; const needs = clone(current.needs), money = current.money, voxels = clone(sim.state.voxels);
+  sim.step(.25);
+  const destination = sim.worldDefinition.buildings.find(b => b.id === current.destinationId); assert(destination);
+  assert(['pavilion', 'clinic'].includes(destination.kind)); assert.equal(current.state, 'moving');
+  near(current.needs.fatigue, needs.fatigue - .25 * .035, 'public approach cannot earn home sleep recovery');
+  assert.equal(current.money, money); assert.deepEqual(sim.state.voxels, voxels); assertReservations(sim, home);
+});
+
+test('unmarked home presence keeps its historical recovery and single-minute budget with placed cubes', () => {
+  const legacy = world(), home = legacy.buildings[0]; delete home.floorPlanProfile; delete home.functionPoints;
+  const sim = new Simulation(legacy); assert(sim.command({ type: 'setTime', value: 23 }).ok);
+  const actor = sim.state.citizens.find(c => sim.state.extension!.actorProfiles[c.id].age >= 18)!;
+  actor.position = { ...home.door }; actor.destinationId = home.id; actor.route = [{ ...home.door }, { ...home.door }]; actor.routeIndex = 2; actor.state = 'sleeping';
+  runtime(sim).activities[actor.id] = 'rest'; runtime(sim).decisionAt[actor.id] = 23 * 60 + 120; sim.setFocus(actor.position, 'drone');
+  placeSnapshotVoxel(sim, { ...actor.position, y: actor.position.y + .8 });
+  const current = sim.state.citizens.find(c => c.id === actor.id)!, before = clone(current.needs), voxels = clone(sim.state.voxels);
+  sim.step(.25); assert.equal(current.state, 'sleeping');
+  near(current.needs.fatigue, before.fatigue - .25 * .035 + .25 * .35, 'unmarked compatibility stays unchanged');
+  near(current.needs.fun, before.fun - .25 * .02 + .25 * .07, 'elapsed budget remains a single quarter minute');
+  assert.deepEqual(sim.state.voxels, voxels);
+});

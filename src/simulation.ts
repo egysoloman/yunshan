@@ -9,13 +9,14 @@ import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
+import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest } from './simulation/home-rest';
 import { savedWorldFingerprint } from './persistence/world-layout';
 import { decodeCitizenRoutes, encodeCitizenRoutes } from './persistence/route-encoding';
 import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building, BuildingFunctionPoint } from './types';
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -57,10 +58,11 @@ interface Runtime {
   signalOverrides: Record<string, number>; constructionId: number; energyBoostUntil: number;
   operatingCost: number; restAt: number; relationshipAt: Record<string, number>; lastInvestmentAt: number;
   publicSupply?: number; operationUnitPrice?: number;
-  riders: Record<string, { vehicleId: string; stopNodeId: string; arrived?: boolean }>;
+  riders: Record<string, { vehicleId: string; stopNodeId: string; arrived?: boolean; arrivedAt?: number }>;
   links: { from: string; to: string; type: string; affection: number; trust: number }[];
   impressions: Record<string, { affection: number; trust: number }>; districtRelationMeans: Record<string, number>;
   decisionAt: Record<string, number>; activities: Record<string, string>;
+  peopleElapsed?: Record<string, number>;
   attendance: Record<string, number>;
   shopLabor?: Record<string, number>;
   customers: Record<string, string>;
@@ -89,6 +91,7 @@ export class Simulation implements SimulationAPI {
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
+  private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private minutes = .25;
   private employment = new Set<string>();
   private accrualIndexSource?: WageAccrual[];
@@ -143,6 +146,7 @@ export class Simulation implements SimulationAPI {
     installTrade(this);
     installFamily(this);
     installCulture(this);
+    installHomeRest(this);
     this.notice('arrival', '来自星海的旅行者抵达云山。城市正在独立运行，欢迎步行探索。');
   }
   private addNeighbor(from: string, node: string, edge: NetworkEdge) { const list = this.neighbors.get(from) ?? []; list.push({ node, edge }); this.neighbors.set(from, list); }
@@ -633,6 +637,13 @@ export class Simulation implements SimulationAPI {
   }
   private updateSignals() { this.state.signals = Object.fromEntries(this.world.nodes.filter(n => (this.neighbors.get(n.id) ?? []).some(e => e.edge.mode === 'road')).map(n => [n.id, (this.runtime.signalOverrides[n.id] ?? ((Math.floor((this.now + 1e-7) / 6) + hash(n.id) % 4) % 2)) as 0 | 1])); }
   private traffic() {
+    // Keep an imported legacy save byte-identical until real time advances.
+    // Materialize its observation clock before a deferred actor can save again,
+    // so post-load time survives another import without backfilling old rides.
+    for (const rider of Object.values(this.runtime.riders)) if (rider.arrived === true && rider.arrivedAt === undefined) {
+      rider.arrivedAt = this.legacyRiderArrivalAt.get(rider) ?? (this.state.extension?.lastUpdate ?? this.now);
+      this.legacyRiderArrivalAt.delete(rider);
+    }
     this.updateSignals();
     const lanes = new Map<string, Vehicle[]>();
     for (const vehicle of this.state.vehicles) { const key = `${vehicle.edgeId}:${vehicle.direction}`; const list = lanes.get(key) ?? []; list.push(vehicle); lanes.set(key, list); }
@@ -664,7 +675,7 @@ export class Simulation implements SimulationAPI {
         const nodeId = vehicle.direction > 0 ? edge.to : edge.from;
         const node = this.world.nodes.find(n => n.id === nodeId)!;
         if (oldProgress > 0 && oldProgress < 1) this.bus.emit({ type: 'vehicle-arrived', vehicleId: vehicle.id, nodeId, fromEdgeId: edge.id, arrivedAt: this.state.extension?.lastUpdate ?? this.now });
-        for (const rider of Object.values(this.runtime.riders)) if (rider.vehicleId === vehicle.id && rider.stopNodeId === nodeId && !rider.arrived) { rider.arrived = true; vehicle.passengers = Math.max(0, vehicle.passengers - 1); }
+        for (const rider of Object.values(this.runtime.riders)) if (rider.vehicleId === vehicle.id && rider.stopNodeId === nodeId && !rider.arrived) { rider.arrived = true; rider.arrivedAt = this.state.extension?.lastUpdate ?? this.now; vehicle.passengers = Math.max(0, vehicle.passengers - 1); }
         if (vehicle.kind === 'road') {
           const offset = hash(nodeId) % 4;
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
@@ -776,12 +787,31 @@ export class Simulation implements SimulationAPI {
     const points = network.length ? [copy(from.door), ...network, copy(to.door)] : [];
     this.cacheRoute(key, points); return points;
   }
+  private availableHomeRestPoints(citizen: Citizen, home: Building) {
+    const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
+    const points = Array.from({ length: home.floors }, (_, floor) => homeRestPoints(home, floor)).flat()
+      .filter(point => Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(home, floor, person)));
+    const occupiedBeds = new Set<string>();
+    for (const other of this.state.citizens) {
+      if (other.id === citizen.id || other.destinationId !== home.id || this.runtime.activities[other.id] !== 'rest'
+        || this.state.extension?.actorProfiles[other.id]?.alive === false) continue;
+      const target = other.route?.at(-1); if (!target) continue;
+      const point = points.find(point => distance(point.position, target) < 1e-8);
+      if (point) occupiedBeds.add(point.bedId);
+    }
+    return points.filter(point => !homeRestPointBlockedByVoxels(point.position, this.state.voxels)
+      && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
+  }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
       const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action);
       const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
-      const points = this.buildingFunctionPoints(destination).filter(point => point.purpose === purpose && Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(destination, floor, person))
+      const restPoints = destination.kind === 'home' && action === 'rest' ? this.availableHomeRestPoints(citizen, destination) : null;
+      const availablePoints: BuildingFunctionPoint[] = restPoints
+        ? restPoints.map(point => ({ id: point.id, purpose: 'service', floor: point.floor, position: point.position }))
+        : this.buildingFunctionPoints(destination);
+      const points = availablePoints.filter(point => point.purpose === purpose && Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(destination, floor, person))
         && (action === 'work' || action === 'rest' || point.floor === 0) && !destination.floorUses?.[point.floor]?.includes('观景'));
       const previousTarget = citizen.route?.at(-1);
       if (!rebuild && citizen.destinationId === destination.id && previousTarget && points.some(point => distance(point.position, previousTarget) < 1e-8)) return;
@@ -825,12 +855,13 @@ export class Simulation implements SimulationAPI {
   private chooseFacility(citizen: Citizen): { destination: Building; activity: string } {
     const hour = this.state.hour, night = hour >= 22 || hour < 6, shift = hour >= 7.5 && hour < 17.5;
     const home = this.buildings.get(citizen.homeId)!, work = this.buildings.get(citizen.workId)!;
+    const homeBedAvailable = home.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.availableHomeRestPoints(citizen, home).length > 0;
     const anchors = this.walkingAnchors(citizen);
     const candidates: { destination: Building; activity: string; score: number }[] = [];
     const add = (b: Building, activity: string, score: number) => { const target = this.buildingNode(b); const travel = Math.min(...anchors.map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); if (finite(travel)) candidates.push({ destination: b, activity, score: score - Math.min(150, travel / 12) }); };
     // A facility advertises a service; citizens compare that offer against needs,
     // liquidity, memories and travel cost. A work shift is a preference, not a lock.
-    add(home, 'rest', (100 - citizen.needs.fatigue) * .8 + (night ? 140 : !shift ? 18 : 0) + (citizen.needs.fatigue < 25 ? 110 : 0));
+    if (homeBedAvailable) add(home, 'rest', (100 - citizen.needs.fatigue) * .8 + (night ? 140 : !shift ? 18 : 0) + (citizen.needs.fatigue < 25 ? 110 : 0));
     if (shift && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) {
       for (const shop of this.state.shops) if (this.shopOwnerId(shop) === citizen.id && this.privateWorkAllowance(citizen, shop) <= 0) add(this.buildings.get(shop.buildingId)!, 'businessReview', 70);
     }
@@ -864,7 +895,7 @@ export class Simulation implements SimulationAPI {
       if (building.kind === 'school' && child && child.schoolId !== building.id) continue;
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);
       if (['pavilion', 'hall', 'dock'].includes(building.kind)) add(building, 'social', (100 - citizen.needs.social) * .8 + (100 - citizen.needs.fun) * .35 - (night ? 60 : 0));
-      if (['pavilion', 'station', 'clinic'].includes(building.kind) && citizen.needs.fatigue < 25) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
+      if (['pavilion', 'station', 'clinic'].includes(building.kind) && (citizen.needs.fatigue < 25 || night && !homeBedAvailable)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
     }
     candidates.sort((a, b) => b.score - a.score);
     const chosen = candidates[0]; return chosen ? { destination: chosen.destination, activity: chosen.activity } : { destination: home, activity: 'rest' };
@@ -882,11 +913,16 @@ export class Simulation implements SimulationAPI {
     this.refreshWorkforce();
     this.reviewPrivateShifts();
     const hour = this.state.hour;
+    const pendingMinutes = this.runtime.peopleElapsed ??= {};
     for (let i = 0; i < this.state.citizens.length; i++) {
       const citizen = this.state.citizens[i]; const frequency = citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
-      if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
-      if ((this.state.tick + i) % frequency) continue;
-      const elapsed = this.minutes * frequency;
+      if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
+      // Accumulate actual ticks while a tier defers this actor. Multiplying by
+      // the actor's current tier would lose or duplicate time after a tier or
+      // speed change, and would credit time before a new actor existed.
+      const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
+      if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; continue; }
+      delete pendingMinutes[citizen.id];
       citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);
       if (citizen.needs.hunger < 48 && (citizen.food ?? 0) >= 1) { citizen.food!--; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); this.bus.emit({ type: 'stored-meal', citizenId: citizen.id, amount: 1 }); }
       citizen.needs.fatigue = clamp(citizen.needs.fatigue - elapsed * .035);
@@ -905,13 +941,18 @@ export class Simulation implements SimulationAPI {
       }
       this.considerPrivateOpportunity(citizen);
       const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
+      let availableMinutes = elapsed;
       const riding = this.runtime.riders[citizen.id];
       if (riding) {
         const vehicle = this.state.vehicles.find(v => v.id === riding.vehicleId)!;
         const stop = this.world.nodes.find(n => n.id === riding.stopNodeId)!;
         citizen.position = copy(riding.arrived ? stop.position : vehicle.position); citizen.state = 'riding';
-        if (!riding.arrived && (vehicle.state === 'moving' || distance(vehicle.position, stop.position) > 40)) continue;
-        delete this.runtime.riders[citizen.id]; if (!riding.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1);
+        // Traffic records arrival at its discrete endpoint observation. Deferred
+        // ride minutes still decay needs, but cannot be reused for walking or
+        // onsite recovery. An unobserved legacy arrival starts from this phase.
+        if (!riding.arrived) continue;
+        availableMinutes = Math.min(elapsed, Math.max(0, (this.state.extension?.lastUpdate ?? this.now) - (riding.arrivedAt ?? (this.state.extension?.lastUpdate ?? this.now))));
+        delete this.runtime.riders[citizen.id];
         citizen.position = copy(stop.position); citizen.route = []; citizen.routeIndex = 0;
         const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
         if (ongoing) this.setDestination(citizen, ongoing, true);
@@ -931,6 +972,7 @@ export class Simulation implements SimulationAPI {
         const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
       this.setDestination(citizen, destination);
+      if (citizen.state === 'unreachable') { citizen.destinationId = null; continue; }
       if (distance(citizen.position, destination.door) > 200) {
         const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
         const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
@@ -943,17 +985,21 @@ export class Simulation implements SimulationAPI {
         });
         if (transit) { const edge = this.edges.get(transit.edgeId)!; citizen.money -= 4; this.bus.emit({ type: 'transit-fare', amount: 4, citizenId: citizen.id, vehicleId: transit.id, districtId: citizen.districtId }); this.runtime.riders[citizen.id] = { vehicleId: transit.id, stopNodeId: transit.direction > 0 ? edge.to : edge.from }; transit.passengers++; citizen.state = 'riding'; citizen.position = copy(transit.position); this.bus.emit({ type: 'commute', citizenId: citizen.id }); continue; }
       }
-      let arrivedElapsed = elapsed;
+      let arrivedElapsed = availableMinutes;
       if ((citizen.routeIndex ?? 0) < (citizen.route?.length ?? 0)) {
         let remainingDistance = 0, point = citizen.position;
         for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
-        if (!this.moveCitizen(citizen, elapsed)) continue;
-        arrivedElapsed = Math.max(0, elapsed - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
+        if (!this.moveCitizen(citizen, availableMinutes)) continue;
+        arrivedElapsed = Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
       }
       const activity = this.runtime.activities[citizen.id];
-      if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity), { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] })) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
+      const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
+      const atActivityPoint = destination.kind === 'home' && activity === 'rest'
+        ? !!homeRestPointAt(destination, citizen.position, person) && !homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)
+        : this.isAtBuildingFunctionPoint(destination, citizen.position, this.activityPointPurpose(activity), person);
+      if (!this.isNearBuilding(destination, citizen.position, 1) || destination.floorPlanProfile === FLOOR_PLAN_PROFILE && !atActivityPoint) { citizen.state = 'unreachable'; citizen.destinationId = null; continue; }
       if (destination.id === home.id || activity === 'rest') {
-        citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + elapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + elapsed * .08);
+        citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
       } else if (activity === 'work') {
         if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor?.jobs[citizen.id] || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
         if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
@@ -966,9 +1012,9 @@ export class Simulation implements SimulationAPI {
       } else if (activity === 'service') {
         citizen.state = 'attendingService';
       } else if (activity === 'social') {
-        citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + elapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + elapsed * .09);
+        citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
       } else if (activity === 'heal') {
-        citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .03);
+        citizen.state = 'healing'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * .03);
       } else if (activity === 'eat') {
         citizen.state = 'shopping';
         this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
@@ -1335,6 +1381,7 @@ export class Simulation implements SimulationAPI {
       const building = this.buildingNear(command.targetId, ['pavilion', 'clinic', 'station', 'home'], 'service');
       const homeNear = building?.id === p.homeId;
       if (!building || building.kind === 'home' && !homeNear) return fail('请到已租住所、亭子、站点或诊所休息。');
+      if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) return fail('请到已租住宅的真实床旁开始休息。');
       if (this.now - this.runtime.restAt < 20 - 1e-7) return fail('刚刚已休息过，请稍后再休息。');
       const cost = homeNear ? 0 : building.kind === 'clinic' ? 15 : 5; if (p.money < cost) return fail('休憩费用不足。');
       this.receivePublicFee(cost, '公共休憩设施服务费', building.districtId); p.needs.fatigue = clamp(p.needs.fatigue + (homeNear ? 38 : 23)); p.needs.fun = clamp(p.needs.fun + 12); this.runtime.restAt = this.now; return success(`在${building.name}休息，体力恢复。`);
@@ -1647,7 +1694,13 @@ export class Simulation implements SimulationAPI {
       ensure(r.signalOverrides && typeof r.signalOverrides === 'object', 'signals'); for (const [id, value] of Object.entries(r.signalOverrides)) ensure(this.world.nodes.some(n => n.id === id) && (value === 0 || value === 1), 'signal override');
       ensure(r.relationshipAt && typeof r.relationshipAt === 'object', 'relationship timers'); for (const [id, at] of Object.entries(r.relationshipAt)) { ensure(expectedCitizenIds.has(id.startsWith('reconcile:') ? id.slice(10) : id), 'relationship timer id'); number(at, -10000, 1e12, 'relationship timer'); }
       if (s.signals !== undefined) { ensure(s.signals && typeof s.signals === 'object' && !Array.isArray(s.signals), 'signals'); for (const [id, phase] of Object.entries(s.signals)) ensure(this.world.nodes.some(n => n.id === id) && (phase === 0 || phase === 1), 'signal phase'); }
-      ensure(r.riders && typeof r.riders === 'object' && !Array.isArray(r.riders), 'riders'); for (const [id, rider] of Object.entries(r.riders) as [string, any][]) ensure(expectedCitizenIds.has(id) && expectedVehicleIds.has(rider.vehicleId) && this.world.nodes.some(n => n.id === rider.stopNodeId) && (rider.arrived === undefined || typeof rider.arrived === 'boolean'), 'rider references');
+      ensure(r.riders && typeof r.riders === 'object' && !Array.isArray(r.riders), 'riders'); for (const [id, rider] of Object.entries(r.riders) as [string, any][]) {
+        ensure(rider && typeof rider === 'object' && !Array.isArray(rider) && expectedCitizenIds.has(id) && expectedVehicleIds.has(rider.vehicleId) && this.world.nodes.some(n => n.id === rider.stopNodeId) && (rider.arrived === undefined || typeof rider.arrived === 'boolean'), 'rider references');
+        if (rider.arrivedAt !== undefined) { ensure(rider.arrived === true, 'rider arrival state'); number(rider.arrivedAt, 0, s.extension?.lastUpdate ?? s.day * 1440 + s.hour * 60, 'rider arrival clock'); }
+        // Candidate object keys cannot affect live riders if a later validator
+        // rejects this import. Do not rewrite an old save before its first tick.
+        else if (rider.arrived === true) this.legacyRiderArrivalAt.set(rider, s.extension?.lastUpdate ?? s.day * 1440 + s.hour * 60);
+      }
       const socialLinks = array(r.links, 4096, 'social links'); const socialKeys = new Set<string>(); for (const link of socialLinks) { ensure(expectedCitizenIds.has(link.from) && expectedCitizenIds.has(link.to) && link.from !== link.to, 'social link identities'); const key = [link.from, link.to].sort().join(':'); ensure(!socialKeys.has(key), 'duplicate social link'); socialKeys.add(key); ensure(['family', 'coworker', 'neighbor', 'rival'].includes(link.type), 'social link type'); number(link.affection, -100, 100, 'social link affection'); number(link.trust, -100, 100, 'social link trust'); }
       ensure(r.impressions && typeof r.impressions === 'object' && !Array.isArray(r.impressions), 'social impressions'); for (const [id, impression] of Object.entries(r.impressions) as [string, any][]) { ensure(expectedCitizenIds.has(id), 'impression identity'); number(impression.affection, -100, 100, 'impression affection'); number(impression.trust, -100, 100, 'impression trust'); }
       ensure(r.districtRelationMeans && typeof r.districtRelationMeans === 'object', 'district relationship means'); for (const [id, mean] of Object.entries(r.districtRelationMeans)) { ensure(districtIds.has(id), 'district relationship identity'); number(mean, -100, 100, 'district relationship mean'); }
@@ -1658,6 +1711,10 @@ export class Simulation implements SimulationAPI {
       ensure(r.driving && typeof r.driving === 'object' && (r.driving.vehicleId === null || expectedVehicleIds.has(r.driving.vehicleId) && r.driving.vehicleId === p.vehicleId), 'driving vehicle'); number(r.driving.throttle, -1, 1, 'driving throttle'); number(r.driving.turn, -1, 1, 'driving turn'); ensure(typeof r.driving.brake === 'boolean', 'driving brake'); number(r.driving.speed, 0, 200, 'driving speed');
       ensure(r.dispatches && typeof r.dispatches === 'object' && !Array.isArray(r.dispatches), 'dispatches'); for (const [id, dispatch] of Object.entries(r.dispatches) as [string, any][]) ensure(expectedCitizenIds.has(id) && crimes.some(c => c.id === dispatch.crimeId) && typeof dispatch.arrived === 'boolean', 'dispatch references');
       for (const [id, at] of Object.entries(r.hostileAt)) { ensure(expectedCitizenIds.has(id), 'hostile timer identity'); number(at, 0, 1e12, 'hostile timer'); }
+      if (r.peopleElapsed !== undefined) {
+        ensure(r.peopleElapsed && typeof r.peopleElapsed === 'object' && !Array.isArray(r.peopleElapsed), 'deferred people minutes');
+        for (const [id, minutes] of Object.entries(r.peopleElapsed)) { ensure(expectedCitizenIds.has(id), 'deferred actor identity'); number(minutes, 0, 60 + 1e-7, 'deferred actor minutes'); }
+      }
       // Validation finishes before either live object is replaced: rejected saves are atomic.
       for (const validator of this.saveValidators) validator(s as SimState);
       const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } this.employment.clear(); this.refreshWorkforce(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };

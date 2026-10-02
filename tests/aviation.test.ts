@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation.ts';
-import { activeAircraft, getAviationPads, setAircraftControls, DRONE_RENTAL_FEE } from '../src/aviation.ts';
+import { activeAircraft, getAviationPads, setAircraftControls, DRONE_RENTAL_FEE, aircraftBoardingBlockedReason } from '../src/aviation.ts';
 import { createWorld } from '../src/world.ts';
 import type { AerialVehicle, AviationControls } from '../src/types.ts';
 
@@ -156,4 +156,30 @@ test('rental and ground charging remain visible receipts while event-based treas
   assert.equal(s.state.treasury - beforeTreasury, observedFares + unobservedExplicit);
   assert.equal(beforeCash - s.state.player.money, 29);
   assert.equal(s.state.aviation!.stats.fees, 29);
+});
+
+
+test('onsite boarding eligibility stays read-only and agrees with refused weather, power, battery and identity commands', () => {
+  const failures: [string, (s: Simulation, craft: AerialVehicle) => void][] = [
+    ['rain', s => { s.state.weather = '雨'; }],
+    ['low visibility', s => { s.state.visibility = .34; }],
+    ['low energy', s => { s.state.energy = 14; }],
+    ['low battery', (_s, craft) => { craft.battery = 29; }],
+    ['charging', (_s, craft) => { craft.charging = true; }],
+    ['remote body', (s, craft) => { s.state.player.position = { ...craft.position, x: craft.position.x + 7 }; }],
+  ];
+  for (const [name, change] of failures) {
+    const s = new Simulation(world), craft = drone(s); approach(s, craft);
+    assert.equal(s.command({ type: 'rentAircraft', targetId: craft.id }).ok, true);
+    change(s, craft); const before = s.exportSave(), reason = aircraftBoardingBlockedReason(s.state, craft);
+    assert.ok(reason, name); assert.equal(s.exportSave(), before, `${name}: checking eligibility cannot change the city`);
+    assert.deepEqual(s.command({ type: 'boardAircraft', targetId: craft.id }), { ok: false, message: reason }, name);
+    assert.equal(s.exportSave(), before, `${name}: refusal cannot charge, board or alter the passenger`);
+  }
+  const s = new Simulation(world), jet = s.state.aviation!.aircraft.find(craft => craft.kind === 'jet')!;
+  approach(s, jet); s.state.player.role = 'driver'; s.state.player.identities = ['driver'];
+  assert.match(aircraftBoardingBlockedReason(s.state, jet), /卫士和驾驶员/);
+  const before = s.exportSave(); assert.equal(s.command({ type: 'boardAircraft', targetId: jet.id }).ok, false); assert.equal(s.exportSave(), before);
+  s.state.player.identities.push('soldier'); assert.equal(aircraftBoardingBlockedReason(s.state, jet), '');
+  assert.equal(s.command({ type: 'boardAircraft', targetId: jet.id }).ok, true); assert.equal(s.state.aviation!.activeAircraftId, jet.id);
 });

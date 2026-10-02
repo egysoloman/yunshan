@@ -1,4 +1,4 @@
-import { getAviationPads } from './aviation';
+import { aircraftBoardingBlockedReason, getAviationPads } from './aviation';
 import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from './architecture-floor-plan';
 import { canAccessFloor } from './access';
 import { canReviewPetition, civicSite, publicFloor } from './simulation/culture';
@@ -6,6 +6,7 @@ import { publicDepartures } from './journey';
 import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from './simulation/family';
 import { bankingAvailableLoanCash, bankingBalanceSheet, bankingReserveRequired } from './simulation/banking';
 import { clinicalAtPosition, clinicalVisitDeadline } from './simulation/clinical';
+import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simulation/home-rest';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
@@ -509,7 +510,9 @@ export class CityUI {
     const building = this.view!.nearbyBuilding;
     const absent = !building || !this.canAct();
     const daily = element('div');
-    daily.append(commandButton(playerLaborLabel(state), 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind) || !!state.playerLabor?.job), commandButton('休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
+    const homeRest = building?.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE;
+    daily.append(commandButton(playerLaborLabel(state), 'work', building?.id, undefined, absent || !building || !this.canWorkAt(building.kind) || !!state.playerLabor?.job), commandButton(homeRest ? state.homeRest?.session?.state === 'paused' ? '继续床旁休息' : `床旁休息 · ${HOME_REST_MINUTES} 分钟` : '休息片刻', 'rest', building?.id, undefined, absent || !building || !['home', 'clinic', 'pavilion', 'station'].includes(building.kind) || !!homeRest && !this.homeRestAvailable(building!)), commandButton('租住住宅 · 80 云币', 'rent', building?.id, undefined, absent || building?.kind !== 'home'));
+    if (state.homeRest?.session) daily.append(this.homeRestContent());
     reconcileContent(this.ref('daily-actions'), daily);
     reconcileContent(this.ref('player-labor'), this.laborContent());
     this.ref('growth').replaceChildren(field('教育', `${player.education}`), field('工作经验', `${player.experience}`));
@@ -802,7 +805,9 @@ export class CityUI {
     if (active) controls.append(commandButton('返航并安全落地 · E', 'landAircraft', craft.id, undefined, craft.status !== 'flying'), commandButton('退出机舱 · E', 'leaveAircraft', craft.id, undefined, craft.status !== 'parked'));
     else if (near) {
       if (craft.kind === 'drone') controls.append(commandButton(craft.reserved ? '结束租约并归还' : '租用 · 24 云币', craft.reserved ? 'returnAircraft' : 'rentAircraft', craft.id, undefined, !craft.reserved && (state.player.money < 24 || craft.charging || craft.battery < 30)));
-      controls.append(commandButton('进入机舱', 'boardAircraft', craft.id, undefined, craft.charging || craft.battery < 30 || craft.kind === 'drone' && !craft.reserved));
+      const boardingReason = aircraftBoardingBlockedReason(state, craft);
+      controls.append(commandButton('进入机舱', 'boardAircraft', craft.id, undefined, !!boardingReason));
+      if (boardingReason) body.append(element('p', 'context-hint', boardingReason));
       controls.append(commandButton(`地面补能 · ${Math.ceil((100 - craft.battery) * .16)} 云币`, 'refuelAircraft', craft.id, undefined, craft.charging || craft.battery > 99.9));
     } else {
       const nav = element('button', 'action-button full-width', `沿路导航 · ${rounded(spatialDistance(state.player.position, craft.position))} m`);
@@ -1013,8 +1018,10 @@ export class CityUI {
     const floor = building && view.inside ? Math.floor((state.player.position.y - building.position.y) / (building.height / building.floors)) : 0;
     const job = state.playerLabor?.job;
     const clinicalSignature = state.clinical?.orders.filter(order => order.payerId === 'player' || order.patientId === 'player' || order.patientId === citizen?.id).map(order => [order.id, order.state, Math.floor(order.workedMinutes * 10), order.escrow, order.purchasePaid, order.serviceFee, order.refunded, order.reservedUnits, order.consumedUnits, order.lastReason].join(':')).join(';');
-    const functionSignature = building?.floorPlanProfile === FLOOR_PLAN_PROFILE ? [this.atBuilding(building.id), this.atBuilding(building.id, 'work'), this.atBuilding(building.id, 'sale'), this.atBuilding(building.id, 'service'), building.kind === 'clinic' ? this.canStartTreatment() : '', citizen ? this.canStartTreatment(citizen.id) : ''].join(':') : '';
-    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, functionSignature].join('|');
+    const functionSignature = building?.floorPlanProfile === FLOOR_PLAN_PROFILE ? [this.atBuilding(building.id), this.atBuilding(building.id, 'work'), this.atBuilding(building.id, 'sale'), this.atBuilding(building.id, 'service'), building.kind === 'clinic' ? this.canStartTreatment() : '', citizen ? this.canStartTreatment(citizen.id) : '', building.kind === 'home' ? this.homeRestAvailable(building) : ''].join(':') : '';
+    const restSignature = [state.homeRest?.session?.state, state.homeRest?.session?.pauseReason, Math.floor((state.homeRest?.session?.progressMinutes ?? 0) * 10), state.homeRest?.history.length].join(':');
+    const boardingSignature = aircraft ? aircraftBoardingBlockedReason(state, aircraft) : '';
+    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, restSignature, boardingSignature, functionSignature].join('|');
     if (signature === this.contextSignature) return;
     const focused = document.activeElement;
     if ((focused instanceof HTMLInputElement || focused instanceof HTMLSelectElement) && this.ref('context').contains(focused) && signature.split('|').slice(0, 6).join('|') === this.contextSignature.split('|').slice(0, 6).join('|') && (building?.floorPlanProfile !== FLOOR_PLAN_PROFILE || functionSignature === this.contextSignature.split('|').at(-1))) return;
@@ -1038,6 +1045,7 @@ export class CityUI {
       if (controls.childElementCount) body.append(controls);
       if (state.playerLabor?.job) body.append(this.laborContent());
       if (building.kind === 'clinic') body.append(this.clinicalContent());
+      if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.homeRestContent(building));
       if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
       if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
       if (building.kind === 'bank') this.renderBank(body, building, !walk);
@@ -1115,7 +1123,7 @@ export class CityUI {
     const role = this.state!.player.role;
     const kind = building.kind;
     const shop = this.state!.shops.find(shop => shop.buildingId === building.id);
-    if (kind === 'home') controls.append(commandButton('租住 · 80 云币', 'rent', building.id, undefined, siteDisabled), commandButton('休息', 'rest', building.id, undefined, serviceDisabled));
+    if (kind === 'home') controls.append(commandButton('租住 · 80 云币', 'rent', building.id, undefined, siteDisabled), commandButton(building.floorPlanProfile === FLOOR_PLAN_PROFILE ? this.state!.homeRest?.session?.state === 'paused' ? '继续床旁休息' : `床旁休息 · ${HOME_REST_MINUTES} 分钟` : '休息', 'rest', building.id, undefined, building.floorPlanProfile === FLOOR_PLAN_PROFILE ? disabled || !this.homeRestAvailable(building) : serviceDisabled));
     if (shop && ['market', 'farm', 'dock', 'workshop'].includes(kind)) {
       const materials = kind === 'workshop';
       controls.append(commandButton(materials ? `购买工业物料 · ${money(shop.price)}` : `购餐，吃 1 份 · ${money(shop.price)}`, 'purchase', building.id, 1, saleDisabled || !shop.open || shop.inventory < 1 || this.state!.player.money < shop.price));
@@ -1159,6 +1167,29 @@ export class CityUI {
       if (voxel) { remove.dataset.x = String(voxel.position.x); remove.dataset.y = String(voxel.position.y); remove.dataset.z = String(voxel.position.z); }
       controls.append(remove);
     }
+  }
+  private homeRestAvailable(building: Building): boolean {
+    const state = this.state!, session = state.homeRest?.session;
+    return session?.state !== 'active' && (!session || session.buildingId === building.id)
+      && !homeRestBlockedReason(state, building, session?.pointId);
+  }
+  private homeRestContent(building?: Building): HTMLElement {
+    const body = element('div', 'home-rest-card'), state = this.state!, session = state.homeRest?.session;
+    body.dataset.homeRest = session?.state ?? 'idle';
+    if (session && (!building || building.id === session.buildingId)) {
+      const home = this.world.buildings.find(home => home.id === session.buildingId);
+      body.append(field(`${home?.name ?? '住所'} · ${session.floor + 1} 层床旁`, `${session.state === 'paused' ? '已暂停' : '休息中'} · ${(Math.floor(session.progressMinutes * 10) / 10).toFixed(1)} / ${HOME_REST_MINUTES} 分钟`));
+      body.append(element('p', 'note', session.pauseReason || '正在按实际在场时间恢复精力，离开床旁会暂停。'));
+      body.append(commandButton('结束休息', 'cancelRest'));
+    } else if (building) {
+      const floor = Math.round((state.player.position.y - building.position.y - .6) / (building.height / building.floors));
+      const points = homeRestPoints(building, floor);
+      const nearest = points.sort((a, b) => spatialDistance(a.position, state.player.position) - spatialDistance(b.position, state.player.position))[0];
+      body.append(element('p', 'context-hint', state.player.homeId !== building.id ? '租住后，可到床旁休息。' : nearest ? `走到本层床旁休息，距最近床旁 ${rounded(spatialDistance(nearest.position, state.player.position))} 米。` : '本层没有可使用的床旁位置，请到住宅生活楼层。'));
+    }
+    const last = state.homeRest?.history.at(-1);
+    if (!session && last && (!building || last.buildingId === building.id)) body.append(element('p', 'note', last.state === 'completed' ? `已完成 ${HOME_REST_MINUTES} 分钟休息。` : `上次休息已结束，实际休息 ${(Math.floor(last.progressMinutes * 10) / 10).toFixed(1)} 分钟。`));
+    return body;
   }
   private clinicalContent(patientId = 'player'): HTMLElement {
     const body = element('div', 'clinical-orders'), state = this.state!;

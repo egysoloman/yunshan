@@ -14,6 +14,9 @@ const results=[];
 const errors=[];
 let browser;
 let failure;
+// BEGIN readonly UI failure diagnostic reference
+let diagnosticPage;
+// END readonly UI failure diagnostic reference
 try {
   await mkdir(artifactsDir, { recursive: true });
   const fixtureHTML = `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><link rel="icon" href="data:,"><body><div id="app"></div><script type="module">
@@ -28,6 +31,9 @@ import {quoteConsignmentSale} from '/src/simulation/trade.ts';
 import {getBuildingBody,getBuildingUsePoints,floorPlanSupport} from '/src/architecture-floor-plan.ts';
 import {canAccessFloor} from '/src/access.ts';
 import {clinicalAtPosition} from '/src/simulation/clinical.ts';
+// BEGIN home-rest derived fixture imports
+import {homeRestPoints,homeRestPointAt} from '/src/simulation/home-rest.ts';
+// END home-rest derived fixture imports
 import {PerspectiveCamera} from 'three';
 const world=createWorld();const simulation=new Simulation(world);
 const canvas=document.createElement('canvas');canvas.setAttribute('aria-label','Keyboard controller fixture');document.getElementById('app').append(canvas);
@@ -47,6 +53,10 @@ function fixturePoint(site,purpose,person=simulation.state.player){
   return {...point.position};
 }
 window.fixture={world,simulation,view,ui,controller,commands,commandResults,quoteConsignmentSale,setAircraftControls,fixturePoint,clinicalAtPosition,canAccessFloor,atPoint(kind,purpose){const b=typeof kind==='string'?world.buildings.find(b=>b.kind===kind&&!b.facility):kind;if(!b)throw Error('No actual fixture building: '+kind);const position=fixturePoint(b,purpose),before=commands.length;view.mode='walk';view.inside=!!getBuildingBody(b);view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...position};view.position={...position};ui.update(simulation.state,view);if(commands.length!==before)throw Error('Fixture positioning issued a command');return b.id},at(kind){const b=world.buildings.find(b=>b.kind===kind&&!b.facility);view.mode='walk';view.inside=false;view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...b.door};view.position={...b.door};ui.update(simulation.state,view);return b.id},atShop(kind,quantity=1){const b=world.buildings.find(b=>{const shop=simulation.state.shops.find(shop=>shop.buildingId===b.id);return b.kind===kind&&shop?.open&&shop.inventory>=quantity&&simulation.state.player.money>=shop.price*quantity});if(!b)throw Error('No actual available shop: '+JSON.stringify({kind,quantity,cash:simulation.state.player.money,hour:simulation.state.hour,shops:simulation.state.shops.filter(shop=>world.buildings.find(b=>b.id===shop.buildingId)?.kind===kind).map(shop=>({id:shop.id,open:shop.open,inventory:shop.inventory,price:shop.price}))}));return this.atPoint(b,'sale')}};
+// BEGIN home-rest controlled positioning helpers
+window.fixture.homeRestPoints=homeRestPoints;window.fixture.homeRestPointAt=homeRestPointAt;
+window.fixture.placeHomeRest=(site,position)=>{const before=commands.length;view.mode='walk';view.inside=true;view.nearbyBuilding=site;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...position};view.position={...position};ui.update(simulation.state,view);if(commands.length!==before)throw Error('Home rest fixture positioning issued a command');};
+// END home-rest controlled positioning helpers
 setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
 </script></body></html>`;
   server = await createServer({
@@ -69,6 +79,9 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
   await server.listen();
   browser=await chromium.launch({executablePath:process.env.YUNSHAN_CHROMIUM ?? '/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu']});
   const page=await browser.newPage({viewport:{width:1440,height:900}});
+  // BEGIN readonly UI failure diagnostic page
+  diagnosticPage=page;
+  // END readonly UI failure diagnostic page
   page.on('pageerror',error=>errors.push(error.message));
   page.on('console',message=>{ if (message.type()==='error') errors.push(message.text()); });
  await page.goto(`http://127.0.0.1:${port}/ui-verify.html`,{waitUntil:'networkidle'});
@@ -371,6 +384,21 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  await page.waitForFunction(()=>document.querySelector('[data-ref="family-life"]')?.textContent.includes('0 / 30 分钟现场筹办'));
  assert.match(await page.locator('[data-ref="family-life"]').innerText(),/0 \/ 30 分钟现场筹办/);results.push('Family ceremony native UI pays actual cash and food while preserving the unfinished 30-minute attendance job');
 
+ // BEGIN fresh-game aviation positive prerequisites
+ // Earlier work, care and culture checks advance real weather. A positive
+ // boarding check starts a legitimate new game, retaining every flight
+ // assertion below and never forcing the weather, money, needs or clock.
+ await page.reload({waitUntil:'networkidle'});
+ await page.waitForFunction(()=>window.ready);
+ await page.getByTestId('panel-toggle').click();
+ const flightPrerequisites=await page.evaluate(()=>{const s=window.fixture.simulation.state;return {weather:s.weather,visibility:s.visibility,energy:s.energy,clock:s.extension.lastUpdate,cash:s.player.money,alive:s.extension.actorProfiles.player.alive,vehicleId:s.player.vehicleId,activeAircraftId:s.aviation.activeAircraftId,identities:s.player.identities};});
+ assert.notEqual(flightPrerequisites.weather,'雨');
+ assert(flightPrerequisites.visibility>=.35&&flightPrerequisites.energy>=15);
+ assert.equal(flightPrerequisites.alive,true);
+ assert.equal(flightPrerequisites.vehicleId,null);
+ assert.equal(flightPrerequisites.activeAircraftId,null);
+ await writeFile(new URL('ui-aircraft-positive-prerequisites.json',artifactsDir),JSON.stringify(flightPrerequisites,null,2)+'\n');
+ // END fresh-game aviation positive prerequisites
  await page.evaluate(()=>{const f=window.fixture,c=f.simulation.state.aviation.aircraft.find(c=>c.kind==='drone');f.aircraftId=c.id;f.beforeAircraftCash=f.simulation.state.player.money;f.simulation.state.player.position={...c.position,x:c.position.x+2,y:c.position.y-.6};f.view.position={...f.simulation.state.player.position};f.view.nearbyAircraft=c;f.view.nearbyBuilding=null;f.view.nearbyCitizen=null;f.view.nearbyVehicle=null;f.view.mode='walk';f.ui.update(f.simulation.state,f.view)});
  assert.match(await page.locator('[data-ref="context-body"]').innerText(),/旅行者现场租用/);
  await page.locator('[data-ref="context-body"] [data-command="rentAircraft"]').click();
@@ -390,10 +418,132 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  await page.screenshot({path:fileURLToPath(new URL('ui-landscape.png',artifactsDir))});
  await page.setViewportSize({width:390,height:844});await page.getByTestId('panel-toggle').click();await page.getByRole('tab',{name:'设置',exact:true}).click();await page.screenshot({path:fileURLToPath(new URL('ui-mobile.png',artifactsDir))});
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);results.push('390x844 portrait panel has no horizontal overflow');
+ // BEGIN additive native home-rest lifecycle checks
+ // Start a fresh normal game after all original 30 checks. This resets through
+ // the real constructor, never by injecting cash, needs, food, roles or clocks.
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto(`http://127.0.0.1:${port}/ui-verify.html`,{waitUntil:'networkidle'});
+ await page.waitForFunction(()=>window.ready);
+ await page.evaluate(()=>{
+   const f=window.fixture,s=f.simulation.state;
+   const home=f.world.buildings.find(b=>b.id==='market-b24'&&f.homeRestPoints(b,0).some(p=>f.canAccessFloor(b,p.floor,s.player)))
+     ??f.world.buildings.find(b=>b.kind==='home'&&b.floorPlanProfile==='v4-program-bodies-02'&&f.homeRestPoints(b,0).some(p=>f.canAccessFloor(b,p.floor,s.player)));
+   if(!home)throw Error('No actual accessible v4 home bed in generated world');
+   f.restHome=home;f.restTable=f.fixturePoint(home,'service');
+   f.restBed=f.homeRestPoints(home,0).find(p=>f.canAccessFloor(home,p.floor,s.player));
+   if(!f.restBed||f.homeRestPointAt(home,f.restTable,s.player))throw Error('Fixture table and bed-side must be distinct real points');
+   f.atPoint(home,'service');
+   f.restEvidence={scope:'Additional native DOM controls with real generated current-v4 and Simulation; controlled table/bed-side positioning only, no Renderer, no ordinary walk/bed journey or hardware performance claim.',homeId:home.id,profile:home.floorPlanProfile,tablePoint:{...f.restTable},bedPoint:{...f.restBed},initial:{cash:s.player.money,fatigue:s.player.needs.fatigue,fun:s.player.needs.fun,hunger:s.player.needs.hunger,clock:s.extension.lastUpdate,actors:s.citizens.length,speed:s.speed},phases:[]};
+   f.restInitialFatigue=s.player.needs.fatigue;f.restInitialCash=s.player.money;
+ });
+ assert.equal(await page.evaluate(()=>window.fixture.restInitialCash),600);
+ assert(await page.evaluate(()=>window.fixture.restInitialFatigue)>=90);
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rent"]').isEnabled(),true);
+ await page.locator('[data-ref="context-body"] [data-command="rent"]').click();
+ assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.homeId),await page.evaluate(()=>window.fixture.restHome.id));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.money),520);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue),await page.evaluate(()=>window.fixture.restInitialFatigue));
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rest"]').isDisabled(),true);
+ await page.evaluate(()=>{const f=window.fixture;f.restTableBefore=f.simulation.exportSave();f.actionsRestAtTable=f.simulation.command({type:'rest',targetId:f.restHome.id});});
+ assert.equal(await page.evaluate(()=>window.fixture.actionsRestAtTable.ok),false);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.exportSave()),await page.evaluate(()=>window.fixture.restTableBefore));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session),null);
+ await page.screenshot({path:fileURLToPath(new URL('ui-home-rest-table.png',artifactsDir))});
+ results.push('Native v4 home rent spends 80 real coins; table-side rest is disabled and its command rejects atomically without instant recovery');
+
+ await page.evaluate(()=>{const f=window.fixture;f.placeHomeRest(f.restHome,f.restBed.position);f.restStartFatigue=f.simulation.state.player.needs.fatigue;f.restStartFun=f.simulation.state.player.needs.fun;f.restStartClock=f.simulation.state.extension.lastUpdate;});
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rest"]').isEnabled(),true);
+ await page.locator('[data-ref="context-body"] [data-command="rest"]').click();
+ assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.state),'active');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),0);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue),await page.evaluate(()=>window.fixture.restStartFatigue));
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rest"]').isDisabled(),true);
+ await page.evaluate(()=>{const f=window.fixture;f.restSessionId=f.simulation.state.homeRest.session.id;for(let i=0;i<8;i++)f.simulation.step(.25);f.ui.update(f.simulation.state,f.view);f.restEvidence.phases.push({phase:'partial',session:{...f.simulation.state.homeRest.session},fatigue:f.simulation.state.player.needs.fatigue,fun:f.simulation.state.player.needs.fun,clock:f.simulation.state.extension.lastUpdate});});
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),2);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.extension.lastUpdate-window.fixture.restStartClock)-2)<1e-7);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue-window.fixture.restStartFatigue)-(38/20-.018)*2)<1e-7);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fun-window.fixture.restStartFun)-(12/20-.009)*2)<1e-7);
+ assert.match(await page.locator('[data-ref="context-body"] .home-rest-card').innerText(),/休息中.*2.*20.*分钟/);
+ await page.screenshot({path:fileURLToPath(new URL('ui-home-rest-active.png',artifactsDir))});
+ results.push('Native bed-side rest starts at zero progress, disables duplicate activation and earns only two actual minutes of recovery minus ordinary need decay');
+
+ await page.evaluate(()=>{const f=window.fixture;f.restBeforePauseFatigue=f.simulation.state.player.needs.fatigue;f.placeHomeRest(f.restHome,f.restTable);for(let i=0;i<4;i++)f.simulation.step(.25);f.ui.update(f.simulation.state,f.view);});
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.state),'paused');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),2);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue-window.fixture.restBeforePauseFatigue)+.018)<1e-7);
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rest"]').isDisabled(),true);
+ assert.match(await page.locator('[data-ref="context-body"] .home-rest-card').innerText(),/已暂停/);
+ await page.screenshot({path:fileURLToPath(new URL('ui-home-rest-paused.png',artifactsDir))});
+ await page.evaluate(()=>{const f=window.fixture;f.placeHomeRest(f.restHome,f.restBed.position);for(let i=0;i<4;i++)f.simulation.step(.25);f.ui.update(f.simulation.state,f.view);f.restEvidence.phases.push({phase:'returned-but-paused',session:{...f.simulation.state.homeRest.session},clock:f.simulation.state.extension.lastUpdate});});
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.state),'paused');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),2);
+ assert.equal(await page.locator('[data-ref="context-body"] [data-command="rest"]').isEnabled(),true);
+ assert.match(await page.locator('[data-ref="context-body"] [data-command="rest"]').innerText(),/继续床旁休息/);
+ await page.locator('[data-ref="context-body"] [data-command="rest"]').click();
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.id),await page.evaluate(()=>window.fixture.restSessionId));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.state),'active');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),2);
+ await page.evaluate(()=>{const f=window.fixture;f.restSave=f.simulation.exportSave();f.restClone=new f.simulation.constructor(f.world);f.restLoaded=f.restClone.importSave(f.restSave);f.restSelfLoaded=f.simulation.importSave(f.restSave);f.ui.update(f.simulation.state,f.view);});
+ assert.equal(await page.evaluate(()=>window.fixture.restLoaded.ok),true);
+ assert.equal(await page.evaluate(()=>window.fixture.restSelfLoaded.ok),true);
+ assert.equal(await page.evaluate(()=>window.fixture.restClone.exportSave()),await page.evaluate(()=>window.fixture.restSave));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.exportSave()),await page.evaluate(()=>window.fixture.restSave));
+ results.push('Leaving the real bed pauses without recovery; returning remains paused until native explicit resume, and active save/load retains exact progress');
+
+ await page.evaluate(()=>{const f=window.fixture;let expectedFatigue=f.simulation.state.player.needs.fatigue,expectedFun=f.simulation.state.player.needs.fun;for(let i=0;i<72;i++){expectedFatigue=Math.min(100,Math.max(0,expectedFatigue-.25*.018)+.25*38/20);expectedFun=Math.min(100,Math.max(0,expectedFun-.25*.009)+.25*12/20);f.simulation.step(.25);f.restClone.step(.25);}f.restExpectedFatigue=expectedFatigue;f.restExpectedFun=expectedFun;f.restContinuedExact=f.restClone.exportSave()===f.simulation.exportSave();f.ui.update(f.simulation.state,f.view);f.restEvidence.phases.push({phase:'completed',history:{...f.simulation.state.homeRest.history.at(-1)},fatigue:f.simulation.state.player.needs.fatigue,fun:f.simulation.state.player.needs.fun,expectedFatigue,expectedFun,continuedExact:f.restContinuedExact,clock:f.simulation.state.extension.lastUpdate});});
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session),null);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.history.at(-1).state),'completed');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.history.at(-1).progressMinutes),20);
+ assert.equal(await page.evaluate(()=>window.fixture.restContinuedExact),true);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue-window.fixture.restExpectedFatigue))<1e-7);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fun-window.fixture.restExpectedFun))<1e-7);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.money),520);
+ assert.match(await page.locator('[data-ref="context-body"] .home-rest-card').innerText(),/已完成 20 分钟休息/);
+ await page.screenshot({path:fileURLToPath(new URL('ui-home-rest-completed.png',artifactsDir))});
+ results.push('A restored native bed session completes only after twenty actual on-site minutes, keeps wallet cash and clamps recovery with ordinary decay');
+
+ await page.locator('[data-ref="context-body"] [data-command="rest"]').click();
+ assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
+ await page.evaluate(()=>{const f=window.fixture;for(let i=0;i<4;i++)f.simulation.step(.25);f.restCancelFatigue=f.simulation.state.player.needs.fatigue;f.restCancelFun=f.simulation.state.player.needs.fun;f.ui.update(f.simulation.state,f.view);});
+ assert(await page.evaluate(()=>window.fixture.restCancelFun)<100);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session.progressMinutes),1);
+ await page.locator('[data-ref="context-body"] [data-command="cancelRest"]').click();
+ assert.equal(await page.evaluate(()=>window.fixture.commandResults.at(-1).result.ok),true);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.session),null);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.history.at(-1).state),'cancelled');
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.homeRest.history.at(-1).progressMinutes),1);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue),await page.evaluate(()=>window.fixture.restCancelFatigue));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fun),await page.evaluate(()=>window.fixture.restCancelFun));
+ await page.evaluate(()=>{const f=window.fixture;for(let i=0;i<4;i++)f.simulation.step(.25);f.ui.update(f.simulation.state,f.view);f.restEvidence.phases.push({phase:'cancelled',history:{...f.simulation.state.homeRest.history.at(-1)},fatigue:f.simulation.state.player.needs.fatigue,fun:f.simulation.state.player.needs.fun,funBeforeCancel:f.restCancelFun,clock:f.simulation.state.extension.lastUpdate});});
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fatigue-window.fixture.restCancelFatigue)+.018)<1e-7);
+ assert(Math.abs(await page.evaluate(()=>window.fixture.simulation.state.player.needs.fun-window.fixture.restCancelFun)+.009)<1e-7);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.money),520);
+ assert.match(await page.locator('[data-ref="context-body"] .home-rest-card').innerText(),/上次休息已结束/);
+ await page.screenshot({path:fileURLToPath(new URL('ui-home-rest-cancelled.png',artifactsDir))});
+ await writeFile(new URL('ui-home-rest-evidence.json',artifactsDir),JSON.stringify(await page.evaluate(()=>window.fixture.restEvidence),null,2)+'\n');
+ results.push('Native cancellation preserves the one-minute receipt without extra recovery; subsequent ticks only apply normal fatigue decay');
+ // END additive native home-rest lifecycle checks
  assert.deepEqual(errors,[]);
  console.log(`${results.length} UI integration checks passed, no browser errors.`);
 } catch (error) {
  failure = error instanceof Error ? error.stack ?? error.message : String(error);
+ // BEGIN readonly UI failure diagnostic capture
+ // Retain the original assertion and result. This observes the actual rejected
+ // command and complete save without changing gameplay or its prerequisites.
+ if(diagnosticPage&&!diagnosticPage.isClosed())try{
+   const diagnostic=await diagnosticPage.evaluate(()=>{
+     const f=window.fixture;if(!f)return {fixtureAvailable:false};
+     const s=f.simulation.state;
+     return {fixtureAvailable:true,clock:{tick:s.tick,day:s.day,hour:s.hour,speed:s.speed,paused:s.paused,at:s.extension?.lastUpdate},weather:s.weather,visibility:s.visibility,energy:s.energy,player:{position:{...s.player.position},money:s.player.money,vehicleId:s.player.vehicleId,identities:s.player.identities,alive:s.extension?.actorProfiles.player.alive,needs:{...s.player.needs}},view:{mode:f.view.mode,position:{...f.view.position},inside:f.view.inside,nearbyBuildingId:f.view.nearbyBuilding?.id??null,nearbyAircraftId:f.view.nearbyAircraft?.id??null},aircraft:s.aviation,commands:f.commandResults.slice(-10),homeRest:s.homeRest,save:f.simulation.exportSave()};
+   });
+   const {save,...summary}=diagnostic;
+   await writeFile(new URL('ui-failure-diagnostic.json',artifactsDir),JSON.stringify(summary,null,2)+'\n');
+   if(typeof save==='string')await writeFile(new URL('ui-failure-save.json',artifactsDir),save);
+   await diagnosticPage.screenshot({path:fileURLToPath(new URL('ui-failure.png',artifactsDir))});
+ }catch(diagnosticError){console.error('Read-only UI failure diagnostic could not complete:',diagnosticError);}
+ // END readonly UI failure diagnostic capture
  console.error(failure);
  process.exitCode = 1;
 } finally {

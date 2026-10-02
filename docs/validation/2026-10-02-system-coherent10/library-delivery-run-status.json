@@ -1,0 +1,78 @@
+{
+  "status": "COMPLETED",
+  "startedAt": "2026-10-02T14:21:19.025899+00:00",
+  "command": [
+    "python3",
+    "/tmp/yunshan-system-coherent-10/library-delivery-01/helpers/library_upload.py"
+  ],
+  "cwd": "/tmp/yunshan-system-coherent-10/library-delivery-01",
+  "orderedLocalPaths": [
+    "/tmp/yunshan-system-coherent-10/dom10-original-evidence.zip",
+    "/tmp/yunshan-npc-bed-voxel-candidate-01/npc-bed-voxel-evidence.zip"
+  ],
+  "operation": "create_library_file",
+  "attempts": 1,
+  "retriesAllowed": false,
+  "directFallbackAllowed": false,
+  "hashesBefore": {
+    "/tmp/yunshan-system-coherent-10/dom10-original-evidence.zip": {
+      "bytes": 7200496,
+      "sha256": "eb205f44b17c252b1532404b4d8809470e636e69d2513e7ff6ef5c5d7a60cfe6"
+    },
+    "/tmp/yunshan-npc-bed-voxel-candidate-01/npc-bed-voxel-evidence.zip": {
+      "bytes": 15446618,
+      "sha256": "f789c0ce5c58f636d58c256214f0e8535d95bc0f66f5d250df4afdc9b60db3d2"
+    }
+  },
+  "request": "/tmp/yunshan-system-coherent-10/library-delivery-01/request.json",
+  "helperSourceReceipt": "/tmp/yunshan-system-coherent-10/library-delivery-01/helper-source-receipt.json",
+  "stdout": "/tmp/yunshan-system-coherent-10/library-delivery-01/helper.stdout",
+  "stderr": "/tmp/yunshan-system-coherent-10/library-delivery-01/helper.stderr",
+  "scope": "New frozen10 DOM ZIP then NPC bed-voxel candidate ZIP, no current memo update, no old09 retry or existing entity mutation",
+  "pid": 157193,
+  "endedAt": "2026-10-02T14:21:19.194744+00:00",
+  "exitCode": 1,
+  "hashesAfter": {
+    "/tmp/yunshan-system-coherent-10/dom10-original-evidence.zip": {
+      "bytes": 7200496,
+      "sha256": "eb205f44b17c252b1532404b4d8809470e636e69d2513e7ff6ef5c5d7a60cfe6"
+    },
+    "/tmp/yunshan-npc-bed-voxel-candidate-01/npc-bed-voxel-evidence.zip": {
+      "bytes": 15446618,
+      "sha256": "f789c0ce5c58f636d58c256214f0e8535d95bc0f66f5d250df4afdc9b60db3d2"
+    }
+  },
+  "originalsUnchanged": true,
+  "stdoutBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrBytes": 70,
+  "stderrSha256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "helperResultParseError": "JSONDecodeError",
+  "libraryOutcome": "NOT_UPLOADED",
+  "stage": "FAILED_BEFORE_PREPARE",
+  "prepareStarted": false,
+  "transferStarted": false,
+  "finalizeStarted": false,
+  "orderedResults": [
+    {
+      "local_path": "/tmp/yunshan-system-coherent-10/dom10-original-evidence.zip",
+      "status": "not_saved",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    },
+    {
+      "local_path": "/tmp/yunshan-npc-bed-voxel-candidate-01/npc-bed-voxel-evidence.zip",
+      "status": "not_saved",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    }
+  ],
+  "sanitizedError": "library upload failed: hosted apps tools/list request failed: network",
+  "stopped": true,
+  "retryPerformed": false,
+  "fallbackPerformed": false,
+  "old09TaskRetried": false,
+  "oldLibraryEntitiesTouched": false
+}

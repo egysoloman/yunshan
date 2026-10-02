@@ -1,0 +1,121 @@
+{
+  "createdAt": "2026-10-02T13:15:09.018866+00:00",
+  "source": "coherent09 frozen102",
+  "files": [
+    {
+      "file": "dom09-original-evidence.zip",
+      "bytes": 7188882,
+      "sha256": "1b1c74c3774cf48a361d3e0f75715679c0d365e718c9453a8909f0ff0eb8de53"
+    },
+    {
+      "file": "dom09.log",
+      "bytes": 1328,
+      "sha256": "430dae217afa8a0d42d4a217509e48ecc093999d27ba1233c26339f46c7362e9"
+    },
+    {
+      "file": "ui-run-status.json",
+      "bytes": 28578,
+      "sha256": "3671b7130704577e77e6adde6b884ba8076cf2378aeb669c9f9415d1944153e3"
+    },
+    {
+      "file": "dom09-package-manifest.json",
+      "bytes": 22391,
+      "sha256": "c2f80116757e7bfa4cbcbed2270ebe72a5ba59e88af6775416e057c747fd19ed"
+    },
+    {
+      "file": "dom09-package-status.json",
+      "bytes": 847,
+      "sha256": "67c3875d1129aa30695591ae22a9108788f1402188d67a39da4d5c0d736e86f2"
+    },
+    {
+      "file": "source-snapshot.json",
+      "bytes": 21900,
+      "sha256": "46840299e7fa38d822797048eebbd361cb33e238404f5c0d20aaa04af459dc5d"
+    },
+    {
+      "file": "related-run-status.json",
+      "bytes": 27096,
+      "sha256": "b49f299397a1f597168dc021b85b43b29d4513aed69176f6510fd6081c700080"
+    },
+    {
+      "file": "build.log",
+      "bytes": 720,
+      "sha256": "c60993dc6a0a1d63da71310c17e212bf0b0ad445536f29b8a22fb54aa57dbc37"
+    },
+    {
+      "file": "home-and-npc-clock.log",
+      "bytes": 3476,
+      "sha256": "e81207081ed83777194868d364fec1b046c6417a0f67dcebb1fae979ece0b1ae"
+    },
+    {
+      "file": "native-save-and-module-migration.log",
+      "bytes": 437,
+      "sha256": "c7f973029fb98f348e607805e08186dd829d1453fa5d5f19d32fb908bb193546"
+    },
+    {
+      "file": "library-delivery-run-status.json",
+      "bytes": 3073,
+      "sha256": "bc8f341d4cc822294322e1b429f7c1302c5dca91f4a44f0f576706c3c5c78dd4"
+    },
+    {
+      "file": "library-preflight.json",
+      "bytes": 1543,
+      "sha256": "f18bc4307cd842871c187a5e0dd2d802fe7ff67d39c90f3c1f2d22879131cc61"
+    },
+    {
+      "file": "library-helper.stderr",
+      "bytes": 70,
+      "sha256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf"
+    },
+    {
+      "file": "开发备忘录-2026-10-02-1304原件.md",
+      "bytes": 161408,
+      "sha256": "65c96028e2f8082101d45d40624aea38f112aa209bf1ccfc9e2985ec0dbcdafb"
+    },
+    {
+      "file": "ui-home-rest-active.png",
+      "bytes": 116511,
+      "sha256": "302971ff5e5dd3fdad3e5c3f56695e8b0ba7dfe7bc0cca0cc6547d853352ba45"
+    },
+    {
+      "file": "ui-home-rest-table.png",
+      "bytes": 118503,
+      "sha256": "dc5c566ca0b2ba6a10a891e8211ea99e9f43ba8f6ea4b02909410cb7e570ee7b"
+    },
+    {
+      "file": "ui-home-rest-paused.png",
+      "bytes": 119449,
+      "sha256": "fddddf6c7a28ff56ff79638c9abd0a8a183cd8818f8fbd5c4a998f6d91d228e3"
+    },
+    {
+      "file": "ui-home-rest-completed.png",
+      "bytes": 111812,
+      "sha256": "9663cf964ece4f2886dd170841bac49acce50f80ac943aed83544a2546e471a9"
+    },
+    {
+      "file": "ui-home-rest-cancelled.png",
+      "bytes": 118808,
+      "sha256": "f22a7975abf50717ca3a37e36788d2b8ccdd8d9510a5a807b91589d0089505b9"
+    },
+    {
+      "file": "related-native-world-layout-results-original.json",
+      "bytes": 14515,
+      "sha256": "016a59203592f8ee06dcfb08b01ec4127b7d794205b57a9dda3842b4b92c6982",
+      "scope": "Original 12:16 related native r5 result preserved before official full suite later overwrites its output path; matches DOM preexisting-artifact receipt."
+    },
+    {
+      "file": "whole.log",
+      "bytes": 54993,
+      "sha256": "6aa60ea63aa6cfaf8608a8d370cf2d7e80f5a5cb5b8d52e1c98b0e863d607ce3"
+    },
+    {
+      "file": "whole-run-status.json",
+      "bytes": 21591,
+      "sha256": "af6443a70fc09b1fe4067bc1e335583435ea82e972f2b5c7af28c8e909cb3144"
+    }
+  ],
+  "libraryStatus": "NOT_SAVED; network failure before prepare, 0 Library IDs; no retry/direct fallback",
+  "gitStatus": "PREPARED_LOCAL_NOT_COMMITTED_OR_PUSHED",
+  "note": "Static delivery copy only. Official full suite and GPU/natural checks are not complete; source runtime edits remain unstaged.",
+  "updatedAt": "2026-10-02T14:13:03.251847+00:00"
+}

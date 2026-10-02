@@ -49,6 +49,20 @@ export function activeAircraft(state: SimState): AerialVehicle | undefined {
   return state.aviation?.aircraft.find(a => a.id === state.aviation?.activeAircraftId);
 }
 
+/** The same live boarding rules drive the command and its onsite controls. */
+export function aircraftBoardingBlockedReason(state: SimState, craft: AerialVehicle): string {
+  if (state.extension?.actorProfiles.player?.alive === false) return '角色生命已结束，无法继续行动；可调节时间或读取存档。';
+  if (state.aviation?.activeAircraftId || craft.status !== 'parked' || distance(state.player.position, craft.position) > 6 || state.player.vehicleId)
+    return '请步行到停稳航空器的舱门 6 米内，不能远程进入驾驶舱。';
+  if (craft.charging || craft.battery < 30) return '正在补能或电量不足 30%，暂不能起飞。';
+  if (state.weather === '雨' || state.visibility < .35 || state.energy < 15) return '雷雨、低能见度或城市供能不足，机场暂不许可起飞。';
+  const identity = (role: 'soldier' | 'driver') => state.player.role === role || state.player.identities?.includes(role);
+  if (craft.kind === 'jet' && (!identity('soldier') || !identity('driver')))
+    return '战机驾驶需要同时取得卫士和驾驶员身份：巡检司报到、书院学习与站点驾驶考核后再来机场。';
+  if (craft.kind === 'drone' && !craft.reserved) return '请先在停机位支付观景无人机租用费。';
+  return '';
+}
+
 /** Input is saved and integrated by the existing traffic phase, never by rendering. */
 export function setAircraftControls(state: SimState, input: AviationControls): void {
   if (!activeAircraft(state) || ![input.forward, input.strafe, input.climb, input.yaw, input.pitch, input.speed].every(v => Number.isFinite(v)) || typeof input.boost !== 'boolean') return;
@@ -105,11 +119,7 @@ export function installAviation(simulation: Simulation): void {
       return ok(`租用${craft.name}，${DRONE_RENTAL_FEE} 云币进入公共航空服务账户。旅行者可使用自动驾驶操控，无需军籍；请在舱门登机。`);
     }
     if (command.type === 'boardAircraft') {
-      if (air().activeAircraftId || !canApproach(craft)) return fail('请步行到停稳航空器的舱门 6 米内，不能远程进入驾驶舱。');
-      if (craft.charging || craft.battery < 30) return fail('正在补能或电量不足 30%，暂不能起飞。');
-      if (state().weather === '雨' || state().visibility < .35 || state().energy < 15) return fail('雷雨、低能见度或城市供能不足，机场暂不许可起飞。');
-      if (craft.kind === 'jet' && (!simulation.hasIdentity('soldier') || !simulation.hasIdentity('driver'))) return fail('战机驾驶需要同时取得卫士和驾驶员身份：巡检司报到、书院学习与站点驾驶考核后再来机场。');
-      if (craft.kind === 'drone' && !craft.reserved) return fail('请先在停机位支付观景无人机租用费。');
+      const reason = aircraftBoardingBlockedReason(state(), craft); if (reason) return fail(reason);
       craft.reserved = true; air().activeAircraftId = craft.id; air().controls = { ...idleControls(), yaw: craft.yaw, pitch: craft.pitch }; sync(craft);
       return ok(`已进入${craft.name}。R / Q 升降，WASD 操控，拖动环顾；战机离地后持续前进。返航会实际飞回机坪，落地后可退出。`);
     }

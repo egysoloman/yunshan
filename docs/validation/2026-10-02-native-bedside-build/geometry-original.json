@@ -1,0 +1,205 @@
+{
+  "status": "STATIC_PRECONDITIONS_FOUND_COMMAND_NOT_RUN",
+  "sourceRoot": "/tmp/yunshan-system-coherent-10/source",
+  "sourceManifestSHA256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926",
+  "allInputCount": 103,
+  "sourceUnchanged": true,
+  "worldUnchanged": true,
+  "rawWorldSHA256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8",
+  "canonicalCentreAuditUnchanged": true,
+  "geometryCandidates": 24,
+  "best": {
+    "buildingId": "west-b13",
+    "recipe": "current-v4",
+    "profile": "v4-program-bodies-02",
+    "floor": 0,
+    "bedId": "west-b13:floor:0:bed:home-bed",
+    "pointId": "west-b13:floor:0:bed:home-bed:side:x-plus",
+    "canonical": {
+      "x": -1402.8,
+      "y": 286.6,
+      "z": -501.20000000000005
+    },
+    "service": {
+      "id": "0:program:service",
+      "purpose": "service",
+      "floor": 0,
+      "position": {
+        "x": -1398,
+        "y": 286.6,
+        "z": -496.8
+      }
+    },
+    "offsetId": "toward-service-exact-0.4",
+    "q": {
+      "x": -1402.5051383439197,
+      "y": 286.6,
+      "z": -500.92971014859313
+    },
+    "canonicalToActualDistanceM": 0.39999999999993435,
+    "qHomeRestPointAtId": "west-b13:floor:0:bed:home-bed:side:x-plus",
+    "qCheck": {
+      "support": {
+        "floor": 0,
+        "kind": "room",
+        "y": 286.6
+      },
+      "feetDelta": 0,
+      "blocked": false,
+      "permission": true
+    },
+    "a": {
+      "x": -1399.6,
+      "y": 286.6,
+      "z": -498
+    },
+    "aLocal": {
+      "x": -7.399999999999864,
+      "y": 2.275957200481571e-14,
+      "z": -7.599999999999966
+    },
+    "playerServiceDistanceM": 1.9999999999999205,
+    "aCheck": {
+      "support": {
+        "floor": 0,
+        "kind": "room",
+        "y": 286.6
+      },
+      "feetDelta": 0,
+      "blocked": false,
+      "permission": true
+    },
+    "v": {
+      "x": -1402.2,
+      "y": 286.8,
+      "z": -500.6
+    },
+    "vLocal": {
+      "x": -10,
+      "y": 0.2000000000000114,
+      "z": -10.199999999999989
+    },
+    "voxelHeightOffsetM": 0.2,
+    "buildDistanceM": 3.6823905279045053,
+    "dynamicAtQ": true,
+    "dynamicAtCanonical": false,
+    "targetNearBuildingStatic": true,
+    "targetSupport": {
+      "floor": 0,
+      "kind": "room",
+      "y": 286.6,
+      "feetDelta": 0.19999999999998863
+    },
+    "status": "STATIC_GEOMETRIC_PRECONDITIONS_ONLY",
+    "buildCommand": "NOT_RUN",
+    "NPCSimulation": "NOT_RUN",
+    "staticShaftToPlayerRoute": [
+      {
+        "x": -1401.416,
+        "y": 286.6,
+        "z": -496.50000000000006
+      },
+      {
+        "x": -1399.6,
+        "y": 286.6,
+        "z": -498
+      }
+    ]
+  },
+  "requestedHeight08Candidate": {
+    "buildingId": "west-b13",
+    "recipe": "current-v4",
+    "profile": "v4-program-bodies-02",
+    "floor": 0,
+    "bedId": "west-b13:floor:0:bed:home-bed",
+    "pointId": "west-b13:floor:0:bed:home-bed:side:x-plus",
+    "canonical": {
+      "x": -1402.8,
+      "y": 286.6,
+      "z": -501.20000000000005
+    },
+    "service": {
+      "id": "0:program:service",
+      "purpose": "service",
+      "floor": 0,
+      "position": {
+        "x": -1398,
+        "y": 286.6,
+        "z": -496.8
+      }
+    },
+    "offsetId": "toward-service-exact-0.4",
+    "q": {
+      "x": -1402.5051383439197,
+      "y": 286.6,
+      "z": -500.92971014859313
+    },
+    "canonicalToActualDistanceM": 0.39999999999993435,
+    "qHomeRestPointAtId": "west-b13:floor:0:bed:home-bed:side:x-plus",
+    "qCheck": {
+      "support": {
+        "floor": 0,
+        "kind": "room",
+        "y": 286.6
+      },
+      "feetDelta": 0,
+      "blocked": false,
+      "permission": true
+    },
+    "a": {
+      "x": -1399.6,
+      "y": 286.6,
+      "z": -498
+    },
+    "aLocal": {
+      "x": -7.399999999999864,
+      "y": 2.275957200481571e-14,
+      "z": -7.599999999999966
+    },
+    "playerServiceDistanceM": 1.9999999999999205,
+    "aCheck": {
+      "support": {
+        "floor": 0,
+        "kind": "room",
+        "y": 286.6
+      },
+      "feetDelta": 0,
+      "blocked": false,
+      "permission": true
+    },
+    "v": {
+      "x": -1402.2,
+      "y": 287.4,
+      "z": -500.6
+    },
+    "vLocal": {
+      "x": -10,
+      "y": 0.7999999999999773,
+      "z": -10.199999999999989
+    },
+    "voxelHeightOffsetM": 0.8,
+    "buildDistanceM": 3.762977544445456,
+    "dynamicAtQ": true,
+    "dynamicAtCanonical": false,
+    "targetNearBuildingStatic": false,
+    "targetSupport": null,
+    "status": "STATIC_GEOMETRIC_PRECONDITIONS_ONLY",
+    "buildCommand": "NOT_RUN",
+    "NPCSimulation": "NOT_RUN"
+  },
+  "observations": [
+    "Height +.8 meets distance and dynamic-body distinction but lacks target floorPlanPresence/nearBuilding; current command needs that additional precondition. Height +.2 is offered separately only if all gates hold."
+  ],
+  "assumptions": [
+    "player already rents the actual native home",
+    "build block inventory and voxel cap permit it",
+    "no conflicting prior voxel in the target cell"
+  ],
+  "elapsedSeconds": 0.10746340300000003,
+  "simulationImports": 0,
+  "worldConstructions": 0,
+  "NPCticks": 0,
+  "buildCommands": 0,
+  "GPU": 0,
+  "tests": 0
+}

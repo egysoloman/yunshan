@@ -1,0 +1,37 @@
+✔ real market-b24 beds derive connected .35-floor points through all three floors without touching geometry or fingerprint (50.623813ms)
+✔ starting and repeating rest cannot instantly credit needs, minutes or money; exact onsite completion credits once (76.31876ms)
+✔ leaving pauses without backfilling time; return requires an explicit legal resume with original progress (11.618464ms)
+✔ display time, pause and missed callbacks grant no elapsed recovery or load catchup (15.602112ms)
+✔ start rejects wrong ownership, feet height, permission, work, treatment and vehicles without mutating a save (52.727983ms)
+✔ a rented v4 home does not intercept untargeted public rest, and cached points remain private (4.97137ms)
+✔ loss of permissions or boarding interrupts actual active time; death or home change cancels without payout (20.40597ms)
+✔ cancel is explicit, releases the physical bed, and keeps only a bounded completed tail (65.396498ms)
+✔ active and paused save roundtrips resume byte-exactly for identical future people ticks (49.25734ms)
+✔ old module absence migrates to empty session; malformed clocks, bed ids, feet and progress are rejected atomically (28.609757ms)
+✔ real standing head obstruction cannot use a bed-side point even though the bed itself still exists (3.692046ms)
+✔ a live NPC actually resting on the same bed blocks entry; a route, another floor or a dead NPC does not (7.644582ms)
+✔ actual night NPC chooses a real reachable bed side; a player occupying that bed makes it choose another physical bed (1449.571209ms)
+✔ actual oversubscribed home at night reserves each bed once and sends overflow to public rest without travelling recovery (2784.070279ms)
+✔ actual Simulation home rest starts without instant credit and completes only after twenty real minutes (11355.92129ms)
+✔ actual Simulation rejects the old desk point and preserves untargeted public station fees (1830.622933ms)
+✔ actual Simulation active rest saves exactly, continues identically and rejects bad bed/manifest atomically (10865.884042ms)
+✔ a final home walk consumes its part of the tick before sleep restores fatigue and fun (19.211006ms)
+✔ a social arrival restores social and fun only for the remaining onsite interval (16.07691ms)
+✔ a healing arrival does not credit the approach as onsite recovery (15.806139ms)
+✔ tier and speed changes conserve actual elapsed needs and walking minutes, including deferred ticks (58.417728ms)
+✔ real deferred minutes survive save/load and identical tier/speed continuation exactly (222.579074ms)
+✔ unknown actor IDs, negative or excessive deferred minutes reject the complete save atomically (118.673512ms)
+✔ a native rail arrival has zero post-arrival movement in its discrete traffic tick (38.37349ms)
+✔ sixteen real deferred ticks cannot reuse ride time after an endpoint observed on the final tick (66.931051ms)
+✔ a stopped vehicle within forty metres cannot teleport an unarrived passenger to the stop (9.536178ms)
+✔ a deferred observed arrival survives tier and speed changes without backfilling its ride interval (28.761291ms)
+✔ an observed deferred arrival saves exactly and continues identically for twenty-four ticks (362.509063ms)
+✔ legacy arrived records migrate at the imported clock and malformed arrival clocks reject atomically (774.531816ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 30916.470309

@@ -1,0 +1,77 @@
+{
+  "status": "COMPLETED",
+  "startedAt": "2026-10-02T13:08:34.043528+00:00",
+  "command": [
+    "python3",
+    "/tmp/yunshan-system-coherent-09/library-delivery-01/helpers/library_upload.py"
+  ],
+  "cwd": "/tmp/yunshan-system-coherent-09/library-delivery-01",
+  "orderedLocalPaths": [
+    "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip",
+    "/tmp/yunshan-system-coherent-09/library-delivery-01/开发备忘录-2026-10-02-1304原件.md"
+  ],
+  "operation": "create_library_file",
+  "attempts": 1,
+  "retriesAllowed": false,
+  "directFallbackAllowed": false,
+  "hashesBefore": {
+    "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip": {
+      "bytes": 7188882,
+      "sha256": "1b1c74c3774cf48a361d3e0f75715679c0d365e718c9453a8909f0ff0eb8de53"
+    },
+    "/tmp/yunshan-system-coherent-09/library-delivery-01/开发备忘录-2026-10-02-1304原件.md": {
+      "bytes": 161408,
+      "sha256": "65c96028e2f8082101d45d40624aea38f112aa209bf1ccfc9e2985ec0dbcdafb"
+    }
+  },
+  "request": "/tmp/yunshan-system-coherent-09/library-delivery-01/request.json",
+  "helperSourceReceipt": "/tmp/yunshan-system-coherent-09/library-delivery-01/helper-source-receipt.json",
+  "stdout": "/tmp/yunshan-system-coherent-09/library-delivery-01/helper.stdout",
+  "stderr": "/tmp/yunshan-system-coherent-09/library-delivery-01/helper.stderr",
+  "scope": "09 DOM original ZIP only and immutable memo; no whole/GPU evidence and no existing Library updates",
+  "pid": 152855,
+  "endedAt": "2026-10-02T13:08:34.217762+00:00",
+  "exitCode": 1,
+  "hashesAfter": {
+    "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip": {
+      "bytes": 7188882,
+      "sha256": "1b1c74c3774cf48a361d3e0f75715679c0d365e718c9453a8909f0ff0eb8de53"
+    },
+    "/tmp/yunshan-system-coherent-09/library-delivery-01/开发备忘录-2026-10-02-1304原件.md": {
+      "bytes": 161408,
+      "sha256": "65c96028e2f8082101d45d40624aea38f112aa209bf1ccfc9e2985ec0dbcdafb"
+    }
+  },
+  "originalsUnchanged": true,
+  "stdoutBytes": 0,
+  "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrBytes": 70,
+  "stderrSha256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "helperResultParseError": "JSONDecodeError",
+  "libraryOutcome": "NOT_SAVED",
+  "stage": "FAILED_BEFORE_PREPARE",
+  "prepareStarted": false,
+  "transferStarted": false,
+  "finalizeStarted": false,
+  "orderedResults": [
+    {
+      "local_path": "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip",
+      "status": "not_saved",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    },
+    {
+      "local_path": "/tmp/yunshan-system-coherent-09/library-delivery-01/开发备忘录-2026-10-02-1304原件.md",
+      "status": "not_saved",
+      "library_file_id": null,
+      "file_id": null,
+      "version": null
+    }
+  ],
+  "sanitizedError": "library upload failed: hosted apps tools/list request failed: network",
+  "stopped": true,
+  "retryPerformed": false,
+  "fallbackPerformed": false,
+  "oldLibraryEntitiesTouched": false
+}
