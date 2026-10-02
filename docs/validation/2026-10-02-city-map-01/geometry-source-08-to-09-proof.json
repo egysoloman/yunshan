@@ -1,0 +1,33 @@
+{
+  "status": "PASS_STATIC_WORLD_SOURCE_CLOSURE_EQUAL",
+  "files": [
+    {
+      "path": "src/world.ts",
+      "coherent08SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "coherent09SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "equal": true
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "coherent08SHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "coherent09SHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "equal": true
+    },
+    {
+      "path": "src/access.ts",
+      "coherent08SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "coherent09SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "equal": true
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "coherent08SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "coherent09SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "equal": true
+    }
+  ],
+  "worldConstructions": 1,
+  "new09WorldConstruction": false,
+  "simulationConstructions": 0,
+  "argument": "native World at seed20261001/current-v4 came from08; world.ts plus runtime geometry/access closure and world fingerprint code byte-identical in09. No09 runtime validation claimed."
+}
