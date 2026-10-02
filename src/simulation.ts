@@ -890,7 +890,10 @@ export class Simulation implements SimulationAPI {
     }
     for (const building of this.world.buildings) {
       if (building.kind === 'clinic' && profile && profile.health < 60 && citizen.money >= 30) add(building, 'heal', (60 - profile.health) * 3 + profile.stress * .1);
-      if (building.districtId !== citizen.districtId) continue;
+      if (building.districtId !== citizen.districtId) {
+        if (night && !homeBedAvailable && ['pavilion', 'station', 'clinic'].includes(building.kind)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + 140);
+        continue;
+      }
       const child = this.state.family?.children[citizen.id];
       if (building.kind === 'school' && child && child.schoolId !== building.id) continue;
       if (building.kind === 'school' && hour >= 7 && hour < 19) add(building, 'study', Math.max(0, 4 - (citizen.education ?? 0)) * 8 + (citizen.role === '学生' && shift ? 55 : 0) + (citizen.skills?.learning ?? 20) * .2);

@@ -1,0 +1,511 @@
+[
+  {
+    "seq": 1,
+    "atUTC": "2026-10-02T15:29:35.892Z",
+    "afterNavigationMs": null,
+    "type": "owned-server-provenance",
+    "serverPID": 160504,
+    "independentlyFetchedAsset": {
+      "status": 200,
+      "bytes": 647004,
+      "sha256": "fe863519166c8abc0c7db84fc53517089532434948903fb777e1e28f0afd247b"
+    },
+    "servedEntry": "/assets/index-IZpNJKPR.js"
+  },
+  {
+    "seq": 2,
+    "atUTC": "2026-10-02T15:29:39.041Z",
+    "afterNavigationMs": 0,
+    "type": "navigation-start",
+    "url": "http://127.0.0.1:4187/?debug=1",
+    "waitUntil": "commit",
+    "budgetMs": 90000
+  },
+  {
+    "seq": 3,
+    "atUTC": "2026-10-02T15:29:39.204Z",
+    "afterNavigationMs": 163,
+    "type": "navigation-committed"
+  },
+  {
+    "seq": 4,
+    "atUTC": "2026-10-02T15:29:39.398Z",
+    "afterNavigationMs": 357,
+    "type": "snapshot-returned",
+    "label": "elapsed-0",
+    "debugPresent": false,
+    "tick": null,
+    "readyState": "interactive",
+    "rafCount": 0
+  },
+  {
+    "seq": 5,
+    "atUTC": "2026-10-02T15:29:39.411Z",
+    "afterNavigationMs": 370,
+    "type": "CDP-metrics",
+    "label": "elapsed-0",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90936.546134
+      },
+      {
+        "name": "Frames",
+        "value": 4
+      },
+      {
+        "name": "Nodes",
+        "value": 43
+      },
+      {
+        "name": "LayoutCount",
+        "value": 2
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.000236
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.02694
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0.000441
+      },
+      {
+        "name": "TaskDuration",
+        "value": 0.132769
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 1863140
+      }
+    ]
+  },
+  {
+    "seq": 6,
+    "atUTC": "2026-10-02T15:29:39.491Z",
+    "afterNavigationMs": 450,
+    "type": "DOMContentLoaded"
+  },
+  {
+    "seq": 7,
+    "atUTC": "2026-10-02T15:29:39.491Z",
+    "afterNavigationMs": 450,
+    "type": "load"
+  },
+  {
+    "seq": 8,
+    "atUTC": "2026-10-02T15:29:39.681Z",
+    "afterNavigationMs": 640,
+    "type": "browser-loaded-entry",
+    "status": 200,
+    "bytes": 647004,
+    "sha256": "fe863519166c8abc0c7db84fc53517089532434948903fb777e1e28f0afd247b"
+  },
+  {
+    "seq": 9,
+    "atUTC": "2026-10-02T15:29:44.441Z",
+    "afterNavigationMs": 5400,
+    "type": "screenshot-unavailable",
+    "label": "initial",
+    "error": "TimeoutError: page.screenshot: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n"
+  },
+  {
+    "seq": 10,
+    "atUTC": "2026-10-02T15:29:47.448Z",
+    "afterNavigationMs": 8407,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-1000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 11,
+    "atUTC": "2026-10-02T15:29:47.455Z",
+    "afterNavigationMs": 8414,
+    "type": "CDP-metrics",
+    "label": "elapsed-1000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90944.592286
+      },
+      {
+        "name": "Frames",
+        "value": 5
+      },
+      {
+        "name": "Nodes",
+        "value": 59
+      },
+      {
+        "name": "LayoutCount",
+        "value": 3
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.000375
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.027056
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0.036591
+      },
+      {
+        "name": "TaskDuration",
+        "value": 8.163761
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 151831304
+      }
+    ]
+  },
+  {
+    "seq": 12,
+    "atUTC": "2026-10-02T15:29:50.467Z",
+    "afterNavigationMs": 11426,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-5000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 13,
+    "atUTC": "2026-10-02T15:29:50.548Z",
+    "afterNavigationMs": 11507,
+    "type": "CDP-metrics",
+    "label": "elapsed-5000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90947.632983
+      },
+      {
+        "name": "Frames",
+        "value": 4
+      },
+      {
+        "name": "Nodes",
+        "value": 45
+      },
+      {
+        "name": "LayoutCount",
+        "value": 3
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.000375
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.027056
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0.036591
+      },
+      {
+        "name": "TaskDuration",
+        "value": 11.20445
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 161201200
+      }
+    ]
+  },
+  {
+    "seq": 14,
+    "atUTC": "2026-10-02T15:29:57.052Z",
+    "afterNavigationMs": 18011,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-15000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 15,
+    "atUTC": "2026-10-02T15:29:57.066Z",
+    "afterNavigationMs": 18025,
+    "type": "CDP-metrics",
+    "label": "elapsed-15000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90954.203487
+      },
+      {
+        "name": "Frames",
+        "value": 1
+      },
+      {
+        "name": "Nodes",
+        "value": 33
+      },
+      {
+        "name": "LayoutCount",
+        "value": 3
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.000375
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.027056
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0.036591
+      },
+      {
+        "name": "TaskDuration",
+        "value": 17.774968
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 179813124
+      }
+    ]
+  },
+  {
+    "seq": 16,
+    "atUTC": "2026-10-02T15:30:12.059Z",
+    "afterNavigationMs": 33018,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-30000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 17,
+    "atUTC": "2026-10-02T15:30:12.066Z",
+    "afterNavigationMs": 33025,
+    "type": "CDP-metrics",
+    "label": "elapsed-30000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90969.203836
+      },
+      {
+        "name": "Frames",
+        "value": 1
+      },
+      {
+        "name": "Nodes",
+        "value": 1597
+      },
+      {
+        "name": "LayoutCount",
+        "value": 5
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.000609
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.027795
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 3.477575
+      },
+      {
+        "name": "TaskDuration",
+        "value": 32.761861
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 325994452
+      }
+    ]
+  },
+  {
+    "seq": 18,
+    "atUTC": "2026-10-02T15:30:42.047Z",
+    "afterNavigationMs": 63006,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-60000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 19,
+    "atUTC": "2026-10-02T15:30:42.051Z",
+    "afterNavigationMs": 63010,
+    "type": "CDP-metrics",
+    "label": "elapsed-60000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 90999.190845
+      },
+      {
+        "name": "Frames",
+        "value": 1
+      },
+      {
+        "name": "Nodes",
+        "value": 1645
+      },
+      {
+        "name": "LayoutCount",
+        "value": 6
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.16575
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.060487
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 23.508855
+      },
+      {
+        "name": "TaskDuration",
+        "value": 62.741153
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 369515404
+      }
+    ]
+  },
+  {
+    "seq": 20,
+    "atUTC": "2026-10-02T15:31:02.052Z",
+    "afterNavigationMs": 83011,
+    "type": "snapshot-unavailable",
+    "label": "elapsed-80000",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "seq": 21,
+    "atUTC": "2026-10-02T15:31:02.061Z",
+    "afterNavigationMs": 83020,
+    "type": "CDP-metrics",
+    "label": "elapsed-80000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 91019.19708
+      },
+      {
+        "name": "Frames",
+        "value": 1
+      },
+      {
+        "name": "Nodes",
+        "value": 1682
+      },
+      {
+        "name": "LayoutCount",
+        "value": 7
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.166603
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.060858
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 43.501694
+      },
+      {
+        "name": "TaskDuration",
+        "value": 82.74721
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 442744208
+      }
+    ]
+  },
+  {
+    "seq": 22,
+    "atUTC": "2026-10-02T15:31:02.062Z",
+    "afterNavigationMs": 83021,
+    "type": "single-debugger-pause-request",
+    "caution": "Diagnostic intervention only; no normal/native/FPS claim"
+  },
+  {
+    "seq": 23,
+    "atUTC": "2026-10-02T15:31:03.063Z",
+    "afterNavigationMs": 84022,
+    "type": "single-debugger-pause-unavailable",
+    "error": "Error: enable single diagnostic pause: observer deadline 1000ms"
+  },
+  {
+    "seq": 24,
+    "atUTC": "2026-10-02T15:31:07.086Z",
+    "afterNavigationMs": 88045,
+    "type": "snapshot-returned",
+    "label": "elapsed-88000",
+    "debugPresent": true,
+    "tick": 8,
+    "readyState": "complete",
+    "rafCount": 4
+  },
+  {
+    "seq": 25,
+    "atUTC": "2026-10-02T15:31:07.089Z",
+    "afterNavigationMs": 88048,
+    "type": "CDP-metrics",
+    "label": "elapsed-88000",
+    "metrics": [
+      {
+        "name": "Timestamp",
+        "value": 91024.229514
+      },
+      {
+        "name": "Frames",
+        "value": 1
+      },
+      {
+        "name": "Nodes",
+        "value": 1620
+      },
+      {
+        "name": "LayoutCount",
+        "value": 8
+      },
+      {
+        "name": "LayoutDuration",
+        "value": 0.166951
+      },
+      {
+        "name": "RecalcStyleDuration",
+        "value": 0.061076
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 44.790165
+      },
+      {
+        "name": "TaskDuration",
+        "value": 84.643887
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 164783140
+      }
+    ]
+  },
+  {
+    "seq": 26,
+    "atUTC": "2026-10-02T15:31:09.043Z",
+    "afterNavigationMs": 90002,
+    "type": "screenshot-unavailable",
+    "label": "final",
+    "error": "TimeoutError: page.screenshot: Timeout 1952ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n"
+  }
+]

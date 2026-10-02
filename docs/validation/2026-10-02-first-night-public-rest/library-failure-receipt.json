@@ -1,0 +1,39 @@
+{
+  "status": "LIBRARY_NEW_BATCH_FAILED_NO_CONFIRMED_FILE_IDS",
+  "attemptCount": 1,
+  "exitCode": 1,
+  "startedAt": "2026-10-02T15:56:35Z",
+  "endedAt": "2026-10-02T15:56:36Z",
+  "classification": "NETWORK_CONNECTION_FAILURE",
+  "libraryIDs": [],
+  "structuredResultsCount": 0,
+  "beforeAfterArtifactBytesSHAIdentical": true,
+  "artifacts": [
+    {
+      "path": "/tmp/yunshan-first-night-home-evidence-10-v2-11-01/yunshan-first-night-original-fail-and-public-rest-v2-coherent11.zip",
+      "bytes": 90727197,
+      "sha256After": "9d9c5fe433cd3ecc83b063c1a2972249493d07276f113c3656bfd573353c1df6"
+    },
+    {
+      "path": "/tmp/yunshan-first-night-home-evidence-10-v2-11-01/README.md",
+      "bytes": 3335,
+      "sha256After": "1019746c9fd535f6c0a07e63c058f335a3bb88f56e431b283815f9e231a9a2e6"
+    },
+    {
+      "path": "/tmp/yunshan-first-night-home-evidence-10-v2-11-01/final-delivery-receipt.json",
+      "bytes": 1279,
+      "sha256After": "e1417b025825b2e6c04c57055f65498441d60c47b3c0bc7d6b87abafefc6dea7"
+    }
+  ],
+  "privateHelperStdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "privateHelperStderrSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "privateHelperOutputNotPublished": true,
+  "requestSHA256": "222c24a0f918101c414ae7a9bf71f3f7ed2b98e46c73daaa6883cd6a42511c3b",
+  "helperResourceSHA256": {
+    "library_upload.py": "f362d45d5e4a17a690e5aff1c795eb62e645cf5db5771a52a84fb1850ea06fb1",
+    "library_hosted_apps.py": "97d029b097ace62b744c82dfde20ef6921ed543a33a771ecf6452bd655d11b59",
+    "library_file_transfer.py": "5e1557817be17db06e2375f8c34ed83e948d520242e5ee4cb50a30c7a4c83378"
+  },
+  "noDirectFallbackRetryOrSharingChanges": true,
+  "limitation": "No successful prepare/finalize receipt or Library ID. Local immutable package exists; not a Library attachment. Original failed tasks were not retried."
+}

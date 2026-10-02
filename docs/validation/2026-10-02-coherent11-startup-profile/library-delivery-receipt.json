@@ -1,0 +1,40 @@
+{
+  "artifact": "/tmp/yunshan-coherent11-boot-profile-ready-01/delivery/yunshan-coherent11-startup-cpu-profile-originals-20261002.zip",
+  "attemptedAt": "2026-10-02T16:08:37.860Z",
+  "completedAt": "2026-10-02T16:08:44.268Z",
+  "route": "Current c1/library required one new local file under 50MiB: create_library_file + same-invocation official apply-xattrs on success",
+  "attemptCount": 1,
+  "retried": false,
+  "status": "succeeded",
+  "libraryIDs": [
+    "libfile_90d7036d3cc08191bedffcc298c544b7"
+  ],
+  "fileID": "file_000000009098820d9899a5be0454097a",
+  "version": 0,
+  "fileName": "yunshan-coherent11-startup-cpu-profile-originals-20261002.zip",
+  "libraryPath": "/yunshan-coherent11-startup-cpu-profile-originals-20261002.zip",
+  "metadataHelper": {
+    "exitCode": 0,
+    "correctedLocallyOnly": true,
+    "stdoutPath": "/tmp/yunshan-profile11-library-current-a1_mxfq0/metadata-local-correction.stdout",
+    "stderrPath": "/tmp/yunshan-profile11-library-current-a1_mxfq0/metadata-local-correction.stderr",
+    "allReturnedXattrsExact": true
+  },
+  "privateResultPath": "/tmp/yunshan-profile11-library-current-a1_mxfq0/create-result-private.json",
+  "error": null,
+  "sourceRuntimeModified": false,
+  "metadataFirstAttempt": {
+    "exitCode": 1,
+    "reason": "Local archive was chmod0444 before xattr write; Permission denied. Upload succeeded and is not repeated.",
+    "stderrPath": "/tmp/yunshan-profile11-library-current-a1_mxfq0/metadata.stderr"
+  },
+  "artifactBytes": 7932780,
+  "artifactSHA256": "7b11d5bcba6cf9eda88c9ec8041a89fce96635f88274b63c77ab2328533bada1",
+  "zipMembers": 137,
+  "postUploadCRC": true,
+  "postUploadBytesUnchanged": true,
+  "rawProfileSHA256": "e6905e952854f8b7967a76817543056aa37106f6dc3680ffb47eb20fea208515",
+  "officialHelperSHA256": "5e1557817be17db06e2375f8c34ed83e948d520242e5ee4cb50a30c7a4c83378",
+  "identityMetadataPersisted": true,
+  "metadataCorrectedAt": "2026-10-02T16:09:45.066723+00:00"
+}

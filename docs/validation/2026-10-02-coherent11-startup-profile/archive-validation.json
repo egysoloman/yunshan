@@ -1,0 +1,31 @@
+{
+  "zip": "/tmp/yunshan-coherent11-boot-profile-ready-01/delivery/yunshan-coherent11-startup-cpu-profile-originals-20261002.zip",
+  "bytes": 7932780,
+  "sha256": "7b11d5bcba6cf9eda88c9ec8041a89fce96635f88274b63c77ab2328533bada1",
+  "members": 137,
+  "payloadMembers": 136,
+  "allCRCPass": true,
+  "allMemberSHAAndOriginalBytesPass": true,
+  "frozen105AllSHAExact": true,
+  "entryAndMapsExact": true,
+  "rawProfileSHA256": "e6905e952854f8b7967a76817543056aa37106f6dc3680ffb47eb20fea208515",
+  "originalNegativeTimeDeltas": 9,
+  "rawNegativeValuesEdited": false,
+  "credentialSignedURLPatternCounts": {
+    "awsAccessKey": 0,
+    "privateKey": 0,
+    "openaiKey": 0,
+    "signedURL": 0,
+    "literalBearer": 0
+  },
+  "indexSHA256": "8bc1bb719c789c092da27ad6ebc7ed5a5e6cc6fbda519d6b1bf12e49fb3df2e0",
+  "sourceManifestSHA256": "72dd109f5ba725ed8f02646f87d99d1d6046d8f18a9bf91a34c43710c6f780c6",
+  "excluded": [
+    "node_modules",
+    "browser user-data/profile",
+    "credentials",
+    "signed transfer URLs",
+    "previous frozen10 original28 ZIP"
+  ],
+  "libraryUploadAttempted": false
+}

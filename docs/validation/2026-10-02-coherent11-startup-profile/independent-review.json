@@ -1,0 +1,12 @@
+{
+  "type": "Independent agent read-only review summary, derived from original profile report/events/snapshots and selected frozen source; no additional run",
+  "reviewer": "/root/city_vehicles/compiled_boot_static_review",
+  "finding": "Count sums and source call relationships match the actual profile. Evidence supports early people -> building route/path/collision JS sampling; does not establish a particular line defect, GPU cause, original frozen10 timeout cause, or elapsed-time fractions.",
+  "cautions": [
+    "Inclusive scopes overlap and cannot be added",
+    "Function-begin source-map nearest segment is a source reference, not execution PC",
+    "Constructor and early runtime coexist in this profile",
+    "Program and GC cannot be reassigned to JS self/GPU",
+    "Top50 missing controller or nearChunk is not proof of zero cost; full-node aggregation supplies bounded counts"
+  ]
+}

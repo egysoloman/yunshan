@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-10-02T16:12:29.334937+00:00",
+  "status": "ROOT_INDEPENDENT_BYTES_AND_CRC_VERIFIED_PENDING_COMMIT",
+  "zipSHA256": "7b11d5bcba6cf9eda88c9ec8041a89fce96635f88274b63c77ab2328533bada1",
+  "zipMembers": 137,
+  "indexedPayloadMembers": 136,
+  "everyIndexedMemberMatchesOriginalBytes": true,
+  "credentialPatternCounts": {
+    "tripo": 0,
+    "openai": 0,
+    "github": 0,
+    "aws": 0,
+    "privateKey": 0,
+    "bearer": 0,
+    "signed": 0
+  },
+  "libraryID": "libfile_90d7036d3cc08191bedffcc298c544b7",
+  "copied": [
+    {
+      "file": "READOUT.md",
+      "bytes": 6013,
+      "sha256": "d0ddeaea9b64b9a8bf0434f88e7ecfde7efb10eeb0566343ce9690503fdf8401"
+    },
+    {
+      "file": "archive-member-index.json",
+      "bytes": 36307,
+      "sha256": "8bc1bb719c789c092da27ad6ebc7ed5a5e6cc6fbda519d6b1bf12e49fb3df2e0"
+    },
+    {
+      "file": "archive-validation.json",
+      "bytes": 1089,
+      "sha256": "18f82d961a25d3c6a5c4d1d18f6dd156bdb8c35d4ca61ba5e205b8469c741c56"
+    },
+    {
+      "file": "independent-review.json",
+      "bytes": 899,
+      "sha256": "8649e22077fdc721c0f7d56e873f896fb4f11cce20f3a8143f0a3e275a76b245"
+    },
+    {
+      "file": "library-delivery-receipt.json",
+      "bytes": 1948,
+      "sha256": "52329c79a5ead5a869f6dbd50f6eb5bf5f412e8b96690dbb85b389193b626057"
+    },
+    {
+      "file": "phase-readout.json",
+      "bytes": 8671,
+      "sha256": "8c86a48f534ebd883f6831a6ccdc75a5caca9f6119525a56473130bc7cc249e0"
+    },
+    {
+      "file": "yunshan-coherent11-startup-cpu-profile-originals-20261002.zip",
+      "bytes": 7932780,
+      "sha256": "7b11d5bcba6cf9eda88c9ec8041a89fce96635f88274b63c77ab2328533bada1"
+    }
+  ],
+  "scope": "Diagnostic only, not browser11/native/Mac/art PASS. Existing raw failures preserved."
+}

@@ -1,0 +1,386 @@
+{
+  "scope": "Portable pure offer dependency fixture: native building, profile and actor offer fields are reused; actor route is an explicit empty Vec3[] because save-wire pooled routes are not Citizen routes. Bed capacity, graph reachability, costs and dayparts are controlled dependencies. No Simulation instantiated or stepped; no native runtime-state or physical-path validity claim.",
+  "originalWorldGzipSHA256": "a42a28aa72cf23cb6a5e018efd781d858c359ed4b0c46e2d5148415f87382609",
+  "originalSaveRawSHA256": "8fcd65704caa3978b3864001b067ad707d9ae559ae4597ab0a71676e235f4d23",
+  "nativeClock": 1440,
+  "actor": {
+    "id": "citizen-563",
+    "name": "许星3",
+    "districtId": "workshop",
+    "homeId": "workshop-b24",
+    "workId": "workshop-b16",
+    "role": "工人",
+    "skills": {
+      "craft": 36,
+      "learning": 59,
+      "social": 50
+    },
+    "socialIdentities": [
+      "communityMember"
+    ],
+    "historyTags": [
+      "云山居民"
+    ],
+    "education": 3,
+    "position": {
+      "x": -1424,
+      "y": 151.02170069223587,
+      "z": -77.10534788227568
+    },
+    "state": "unreachable",
+    "destinationId": null,
+    "money": 254.42506785153802,
+    "needs": {
+      "hunger": 79.19038260974938,
+      "fatigue": 64.99874933661498,
+      "social": 50.077782137070415,
+      "fun": 63.84263153043778
+    },
+    "tier": "regional",
+    "route": [],
+    "routeIndex": 0,
+    "partnerId": null,
+    "food": 1
+  },
+  "home": {
+    "id": "workshop-b24",
+    "districtId": "workshop",
+    "name": "青铜工坊·铸造院·里居7",
+    "kind": "home",
+    "position": {
+      "x": -1254,
+      "y": 170.8,
+      "z": 83.2
+    },
+    "width": 43.6,
+    "depth": 33.2,
+    "height": 10.200000000000001,
+    "floors": 3,
+    "rotation": 0,
+    "door": {
+      "x": -1254,
+      "y": 171.4,
+      "z": 99.80000000000001
+    },
+    "capacity": 135,
+    "seed": 1852254696,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -1262.8,
+          "y": 171.4,
+          "z": 74.60000000000001
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -1262.8,
+          "y": 171.4,
+          "z": 74.60000000000001
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -1262.8,
+          "y": 174.8,
+          "z": 74.60000000000001
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -1262.8,
+          "y": 174.8,
+          "z": 74.60000000000001
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -1262.8,
+          "y": 178.20000000000002,
+          "z": 74.60000000000001
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -1262.8,
+          "y": 178.20000000000002,
+          "z": 74.60000000000001
+        }
+      }
+    ]
+  },
+  "work": {
+    "id": "workshop-b16",
+    "districtId": "workshop",
+    "name": "青铜工坊·铸造院·工坊5",
+    "kind": "workshop",
+    "position": {
+      "x": -1471.4,
+      "y": 168,
+      "z": 7.2
+    },
+    "width": 56,
+    "depth": 41.6,
+    "height": 19.200000000000003,
+    "floors": 4,
+    "rotation": 0,
+    "door": {
+      "x": -1471.4,
+      "y": 168.60000000000002,
+      "z": 28
+    },
+    "capacity": 288,
+    "seed": 46408443,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -1471.4,
+          "y": 168.6,
+          "z": -6.999999999999999
+        }
+      },
+      {
+        "id": "0:program:sale",
+        "purpose": "sale",
+        "floor": 0,
+        "position": {
+          "x": -1471.4,
+          "y": 168.6,
+          "z": -6.999999999999999
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -1471.4,
+          "y": 173.4,
+          "z": -6.999999999999999
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -1471.4,
+          "y": 178.2,
+          "z": -6.999999999999999
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": -1471.4,
+          "y": 183,
+          "z": -6.999999999999999
+        }
+      }
+    ]
+  },
+  "publicRest": {
+    "id": "academy-b2",
+    "districtId": "academy",
+    "name": "文澜学苑·东岚院·医馆1",
+    "kind": "clinic",
+    "position": {
+      "x": -198.20000000000002,
+      "y": 240,
+      "z": -457
+    },
+    "width": 49.6,
+    "depth": 39.2,
+    "height": 26.6,
+    "floors": 7,
+    "rotation": 0,
+    "door": {
+      "x": -198.20000000000002,
+      "y": 240.60000000000002,
+      "z": -437.40000000000003
+    },
+    "capacity": 420,
+    "seed": 1494887331,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 240.6,
+          "z": -457
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 240.6,
+          "z": -457
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 244.4,
+          "z": -457
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 244.4,
+          "z": -457
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 248.2,
+          "z": -457
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 248.2,
+          "z": -457
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 252,
+          "z": -457
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 252,
+          "z": -457
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 255.79999999999998,
+          "z": -457
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 255.79999999999998,
+          "z": -457
+        }
+      },
+      {
+        "id": "5:program:work",
+        "purpose": "work",
+        "floor": 5,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 259.6,
+          "z": -457
+        }
+      },
+      {
+        "id": "5:program:service",
+        "purpose": "service",
+        "floor": 5,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 259.6,
+          "z": -457
+        }
+      },
+      {
+        "id": "6:program:work",
+        "purpose": "work",
+        "floor": 6,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 263.4,
+          "z": -457
+        }
+      },
+      {
+        "id": "6:program:service",
+        "purpose": "service",
+        "floor": 6,
+        "position": {
+          "x": -198.20000000000002,
+          "y": 263.4,
+          "z": -457
+        }
+      }
+    ]
+  },
+  "actorProfile": {
+    "age": 43.0018264840179,
+    "health": 94.87968403153864,
+    "mood": 66.67959607315164,
+    "stress": 0.46042198196566325,
+    "alive": true,
+    "skill": 36.168000000000205,
+    "family": [],
+    "historyTags": [
+      "云山居民"
+    ]
+  },
+  "actorRouteScope": "EMPTY_CONTROLLED_ROUTE_NOT_NATIVE_SAVE_WIRE"
+}
