@@ -1,0 +1,30 @@
+✖ paid original attendance can be saved after setting the visible clock back before 17:00 (563.645669ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1121.819857
+
+✖ failing tests:
+
+test at tests/food-distribution-lifecycle.test.ts:1:2724
+✖ paid original attendance can be saved after setting the visible clock back before 17:00 (563.645669ms)
+  AssertionError [ERR_ASSERTION]: 读档失败：食品柜台存档字段：任务劳动须包含于原实际出勤
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-lifecycle-prototype-20261002/tests/food-distribution-lifecycle.test.ts:39:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

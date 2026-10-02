@@ -1,0 +1,30 @@
+✖ 17:00 interrupted handover retains the old custodian, and next funded day walks closing food back (806.939153ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1400.82319
+
+✖ failing tests:
+
+test at tests/food-distribution-lifecycle.test.ts:1:18038
+✖ 17:00 interrupted handover retains the old custodian, and next funded day walks closing food back (806.939153ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-handover-old-selection-20261002/tests/food-distribution-lifecycle.test.ts:145:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

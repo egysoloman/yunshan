@@ -1,0 +1,48 @@
+{
+  "createdAt": "2026-10-02T03:51:51.497987+00:00",
+  "baseDirectory": "/tmp/yunshan-food-counter-prototype-20261002",
+  "checkDirectory": "/tmp/yunshan-food-counter-lifecycle-apply-check-20261002",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "--whitespace=error",
+        "/workspace/yunshan/docs/validation/2026-10-02-food-counters/public-counter-lifecycle-prototype-02/food-counter-lifecycle.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/yunshan/docs/validation/2026-10-02-food-counters/public-counter-lifecycle-prototype-02/food-counter-lifecycle.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "--reverse",
+        "--check",
+        "/workspace/yunshan/docs/validation/2026-10-02-food-counters/public-counter-lifecycle-prototype-02/food-counter-lifecycle.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "exactAppliedBytes": {
+    "src/simulation.ts": true,
+    "src/simulation/food-distribution.ts": true,
+    "tests/food-distribution-lifecycle.test.ts": true,
+    "tests/fixtures/food-counter-paid-v1.json": true
+  },
+  "patchSha256": "c45324af5c32d474a9c8416a5f8428f9e7c52c45793a370c644f99f1cb7d5b99"
+}

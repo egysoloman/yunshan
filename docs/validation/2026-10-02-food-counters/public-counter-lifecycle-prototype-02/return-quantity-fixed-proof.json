@@ -1,0 +1,146 @@
+{
+  "source": "freight-lot-1",
+  "stock": {
+    "id": "counter-stock-1",
+    "sourceLotId": "freight-lot-1",
+    "origin": {
+      "location": "node",
+      "districtId": "customers",
+      "shopId": null,
+      "receivedQuantity": 28,
+      "nodeId": "market-door",
+      "vehicleId": "vehicle-food-road-1",
+      "fromEdgeId": "food-road",
+      "direction": 1,
+      "arrivedAt": 484,
+      "position": {
+        "x": 300,
+        "y": 20,
+        "z": 6.3
+      }
+    },
+    "unitPrice": 4,
+    "received": 8,
+    "remaining": 0,
+    "sold": 0,
+    "returned": 8,
+    "pickedAt": 580,
+    "deliveredAt": 664,
+    "carrierId": "citizen-3",
+    "location": "returned"
+  },
+  "freightBefore": 20,
+  "freight": {
+    "customers": 84
+  },
+  "lots": {
+    "customers": [
+      {
+        "shopId": null,
+        "quantity": 28,
+        "id": "freight-lot-1"
+      },
+      {
+        "shopId": null,
+        "quantity": 28,
+        "id": "freight-lot-2"
+      },
+      {
+        "shopId": null,
+        "quantity": 28,
+        "id": "freight-lot-3"
+      }
+    ]
+  },
+  "origins": {
+    "freight-lot-1": {
+      "location": "node",
+      "districtId": "customers",
+      "shopId": null,
+      "receivedQuantity": 28,
+      "nodeId": "market-door",
+      "vehicleId": "vehicle-food-road-1",
+      "fromEdgeId": "food-road",
+      "direction": 1,
+      "arrivedAt": 484,
+      "position": {
+        "x": 300,
+        "y": 20,
+        "z": 6.3
+      }
+    },
+    "freight-lot-2": {
+      "location": "node",
+      "districtId": "customers",
+      "shopId": null,
+      "receivedQuantity": 28,
+      "nodeId": "home-door",
+      "vehicleId": "vehicle-hall-road-1",
+      "fromEdgeId": "hall-road",
+      "direction": -1,
+      "arrivedAt": 1463.25,
+      "position": {
+        "x": 600,
+        "y": 20,
+        "z": 3.7
+      }
+    },
+    "freight-lot-3": {
+      "location": "node",
+      "districtId": "customers",
+      "shopId": null,
+      "receivedQuantity": 28,
+      "nodeId": "home-door",
+      "vehicleId": "vehicle-workshop-road-1",
+      "fromEdgeId": "workshop-road",
+      "direction": -1,
+      "arrivedAt": 1475.25,
+      "position": {
+        "x": 600,
+        "y": 20,
+        "z": 3.7
+      }
+    }
+  },
+  "returns": [
+    {
+      "type": "counter-food-returned",
+      "citizenId": "citizen-3",
+      "nodeId": "market-door",
+      "districtId": "customers",
+      "quantity": 8
+    }
+  ],
+  "arrivals": [
+    {
+      "type": "cargo-arrived",
+      "districtId": "customers",
+      "amount": 28,
+      "nodeId": "home-door",
+      "vehicleId": "vehicle-hall-road-1",
+      "fromEdgeId": "hall-road",
+      "direction": -1,
+      "arrivedAt": 1463.25,
+      "position": {
+        "x": 600,
+        "y": 20,
+        "z": 3.7
+      }
+    },
+    {
+      "type": "cargo-arrived",
+      "districtId": "customers",
+      "amount": 28,
+      "nodeId": "home-door",
+      "vehicleId": "vehicle-workshop-road-1",
+      "fromEdgeId": "workshop-road",
+      "direction": -1,
+      "arrivedAt": 1475.25,
+      "position": {
+        "x": 600,
+        "y": 20,
+        "z": 3.7
+      }
+    }
+  ]
+}

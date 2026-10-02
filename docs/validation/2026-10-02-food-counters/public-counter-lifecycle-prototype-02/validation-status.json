@@ -1,0 +1,50 @@
+{
+  "createdAt": "2026-10-02T03:54:56.586815+00:00",
+  "scope": "isolated old-layout only; no shared v4 changes",
+  "workingDirectory": "/tmp/yunshan-food-counter-lifecycle-prototype-20261002",
+  "baseDirectory": "/tmp/yunshan-food-counter-prototype-20261002",
+  "finalFunctional": {
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "cancelled": 0,
+    "exitCode": 0,
+    "log": "lifecycle-delivery-functional.log",
+    "testFiles": [
+      "tests/food-distribution-lifecycle.test.ts",
+      "tests/food-distribution.test.ts"
+    ],
+    "newLifecycleTests": 9,
+    "previousCounterTests": 9
+  },
+  "strict": {
+    "exitCode": 0,
+    "log": "strict-lifecycle-delivery.log"
+  },
+  "sourceAssets": 33,
+  "tsSourceCount": 32,
+  "otherSourceAssets": [
+    "src/style.css"
+  ],
+  "testAndConfigurationInputs": 8,
+  "startEndHashesEqual": true,
+  "deliveredFiles": {
+    "src/simulation.ts": "9e6a8261a74881237d7f0bc59e73d7cfd784ed69d55daa3f07586b8f4b91784a",
+    "src/simulation/food-distribution.ts": "419f19a921f70db8b242f532364a0f2f721dcbc9eab240f3efe86e63a7f77e85",
+    "tests/food-distribution-lifecycle.test.ts": "d610eca17dd559dff0625ffded554252e58cb8c2ef7c850b062487b853c5c0ad",
+    "tests/fixtures/food-counter-paid-v1.json": "7c9c2da87c4b90fae8a2762498ac6d008727da338ae05da172d2d9aeac3d8386"
+  },
+  "patchSha256": "c45324af5c32d474a9c8416a5f8428f9e7c52c45793a370c644f99f1cb7d5b99",
+  "notRun": [
+    "full npm test",
+    "production/v4 integration",
+    "GL/browser/native UI",
+    "14/30/60 day economy audit",
+    "performance comparison/benchmark",
+    "full long-lived payroll/task archive compaction",
+    "actual migrated-v1 next-day renewal"
+  ],
+  "library": {
+    "attempt": "pending separate official create; no Library ID currently exists"
+  }
+}

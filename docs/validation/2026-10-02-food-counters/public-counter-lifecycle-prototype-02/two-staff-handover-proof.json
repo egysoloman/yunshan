@@ -1,0 +1,108 @@
+{
+  "handover": {
+    "fromTaskId": "food-task-2",
+    "toTaskId": "food-task-3",
+    "requestedAt": 664,
+    "requiredMinutes": 1,
+    "fromPosition": {
+      "x": 630,
+      "y": 20,
+      "z": 5
+    },
+    "toPosition": {
+      "x": 630,
+      "y": 20,
+      "z": 5
+    },
+    "carriedQuantity": 0,
+    "stockIds": [
+      "counter-stock-1"
+    ],
+    "completedAt": 665,
+    "cancelledAt": null,
+    "reason": ""
+  },
+  "from": {
+    "id": "food-task-2",
+    "citizenId": "citizen-3",
+    "contract": {
+      "id": "standing-day-0",
+      "day": 0,
+      "workId": "school",
+      "ratePerMinute": 0.092,
+      "availableMinutes": 296,
+      "payrollEpoch": 0
+    },
+    "continuationOf": "food-task-1",
+    "acceptedAt": 664,
+    "lastObservedAt": 665,
+    "endedAt": 665,
+    "endReason": "onsite-handover-completed",
+    "stage": "finished",
+    "resumeStage": "handover",
+    "reason": "",
+    "nodeId": null,
+    "routeKey": null,
+    "workedMinutes": 1,
+    "earned": 0.092,
+    "pickup": null,
+    "handoffMinutes": 0,
+    "returnLoadingMinutes": 0,
+    "returnUnloadingMinutes": 0,
+    "allocated": {
+      "assemblyTravel": 0,
+      "assembly": 0,
+      "fetchTravel": 0,
+      "deliveryTravel": 0,
+      "sales": 0,
+      "returnTravel": 0,
+      "loading": 0,
+      "handoff": 0,
+      "counterWait": 0,
+      "staffHandover": 1
+    }
+  },
+  "to": {
+    "id": "food-task-3",
+    "citizenId": "citizen-11",
+    "contract": {
+      "id": "standing-day-0",
+      "day": 0,
+      "workId": "school",
+      "ratePerMinute": 0.092,
+      "availableMinutes": 296,
+      "payrollEpoch": 0
+    },
+    "continuationOf": null,
+    "acceptedAt": 664,
+    "lastObservedAt": 667.25,
+    "endedAt": null,
+    "endReason": "",
+    "stage": "serve",
+    "resumeStage": "serve",
+    "reason": "",
+    "nodeId": null,
+    "routeKey": null,
+    "workedMinutes": 3.25,
+    "earned": 0.299,
+    "pickup": null,
+    "handoffMinutes": 0,
+    "returnLoadingMinutes": 0,
+    "returnUnloadingMinutes": 0,
+    "allocated": {
+      "assemblyTravel": 0,
+      "assembly": 0,
+      "fetchTravel": 0,
+      "deliveryTravel": 0,
+      "sales": 0,
+      "returnTravel": 0,
+      "loading": 0,
+      "handoff": 0,
+      "counterWait": 2.25,
+      "staffHandover": 1
+    }
+  },
+  "priorTaskUnchanged": false,
+  "foodResidual": 0,
+  "cashResidual": 0
+}

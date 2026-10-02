@@ -1,0 +1,1085 @@
+{
+  "staff": {
+    "id": "citizen-3",
+    "name": "白溪",
+    "districtId": "customers",
+    "homeId": "home",
+    "workId": "school",
+    "role": "老师",
+    "skills": {
+      "craft": 21,
+      "learning": 27.26008572611301,
+      "social": 38
+    },
+    "socialIdentities": [
+      "communityMember"
+    ],
+    "historyTags": [
+      "云山居民"
+    ],
+    "education": 3.034678096815063,
+    "position": {
+      "x": 630,
+      "y": 20.6,
+      "z": 1
+    },
+    "state": "working",
+    "destinationId": "school",
+    "money": 455.8145650378548,
+    "needs": {
+      "hunger": 47.99999999999926,
+      "fatigue": 97.19999999999999,
+      "social": 88.5364923460322,
+      "fun": 98.40000000000003
+    },
+    "tier": "active",
+    "route": [
+      {
+        "x": 600,
+        "y": 20.6,
+        "z": 1
+      },
+      {
+        "x": 600,
+        "y": 20,
+        "z": 5
+      },
+      {
+        "x": 600,
+        "y": 20,
+        "z": 5
+      },
+      {
+        "x": 600,
+        "y": 20,
+        "z": 5
+      },
+      {
+        "x": 630,
+        "y": 20,
+        "z": 5
+      },
+      {
+        "x": 630,
+        "y": 20,
+        "z": 5
+      },
+      {
+        "x": 630,
+        "y": 20.6,
+        "z": 1
+      }
+    ],
+    "routeIndex": 7,
+    "partnerId": null,
+    "food": 0
+  },
+  "point": {
+    "x": 630,
+    "y": 20,
+    "z": 5
+  },
+  "activity": "work",
+  "plan": {
+    "id": "public-shift-1",
+    "day": 1,
+    "approvedAt": 664,
+    "siteId": "hall",
+    "approvedBy": [
+      "citizen-5",
+      "citizen-13"
+    ],
+    "cap": 6226.559999999988,
+    "assignments": [
+      {
+        "citizenId": "citizen-3",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 66.93107157941364
+      },
+      {
+        "citizenId": "citizen-5",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 54.22395109212141
+      },
+      {
+        "citizenId": "citizen-9",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-11",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 70.77396448044155
+      },
+      {
+        "citizenId": "citizen-13",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 54.22395109212141
+      },
+      {
+        "citizenId": "citizen-17",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-19",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-21",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-23",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-25",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-27",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-29",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-33",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-35",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-37",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-41",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-43",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-44",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-49",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-51",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-53",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-57",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-59",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-61",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-65",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-69",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-73",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-75",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-77",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-81",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-83",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-85",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-88",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-89",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-91",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-93",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-97",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-99",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-101",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-105",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      {
+        "citizenId": "citizen-107",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-109",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-113",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-115",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-117",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-121",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-123",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-125",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-129",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-131",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-133",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-137",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-139",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-141",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-145",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-147",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-149",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-153",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-157",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-161",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-163",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-165",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-169",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-171",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-173",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-179",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-181",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-185",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-187",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-189",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-193",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-195",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-197",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-201",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-203",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-205",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-209",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-211",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-213",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.22744055161154
+      },
+      {
+        "citizenId": "citizen-217",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-219",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-225",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-227",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-229",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-233",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-235",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-237",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-241",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-245",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-249",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-251",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-253",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-257",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-259",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-261",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-264",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-267",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-269",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-273",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-275",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-277",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-281",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-283",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-285",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.22744055161154
+      },
+      {
+        "citizenId": "citizen-289",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-291",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-293",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-297",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-299",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-301",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-305",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-307",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.89410721827824
+      },
+      {
+        "citizenId": "citizen-308",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-309",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-313",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-315",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-317",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-321",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-323",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-325",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-329",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-333",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-337",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-339",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-341",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-345",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-347",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-349",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-353",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-355",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-357",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-361",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.58816602225119
+      },
+      {
+        "citizenId": "citizen-363",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-365",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.148887002125484
+      },
+      {
+        "citizenId": "citizen-369",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.529839383077886
+      },
+      {
+        "citizenId": "citizen-371",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-373",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.20721364129877
+      },
+      {
+        "citizenId": "citizen-374",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.81555366879219
+      },
+      {
+        "citizenId": "citizen-377",
+        "workId": "market",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 7.608392932563946
+      },
+      {
+        "citizenId": "citizen-379",
+        "workId": "school",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 71.87388030796548
+      },
+      {
+        "citizenId": "citizen-381",
+        "workId": "hall",
+        "ratePerMinute": 0.092,
+        "minutesCap": 480,
+        "workedMinutes": 55.22744055161154
+      }
+    ]
+  },
+  "now": 1520,
+  "visibleTime": 2000
+}
