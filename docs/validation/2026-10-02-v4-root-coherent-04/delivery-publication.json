@@ -1,0 +1,55 @@
+{
+  "recordedAt": "2026-10-02T03:52:54.544463+00:00",
+  "LibraryStatus": "FAILED_BEFORE_APP_PREPARATION",
+  "libraryIDs": [],
+  "libraryFileCount": 0,
+  "errorVerbatim": "library upload failed: hosted apps tools/list request failed: network",
+  "files": [
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-v4-源码与回归原件-0348.zip",
+      "bytes": 6382411,
+      "sha256": "c28f6fc1cc2fc36b95c0857c18ba91185e3822a17ad17f83ea1c3154ab772386",
+      "library_artifact_type": "other"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-开发备忘录-0348.md",
+      "bytes": 114699,
+      "sha256": "9c95696a96879087b55dd4159a8fe87af92f796c010604b8512558198e0b8cad",
+      "library_artifact_type": "report"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-v4-功能检查点-0348.md",
+      "bytes": 1820,
+      "sha256": "2c2adecf95c94cc62adf73a4e0018082b6663637354904078a1c3975b2982561",
+      "library_artifact_type": "report"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-临床实际采购-UI.png",
+      "bytes": 196356,
+      "sha256": "898a65dd0bd0716c5baa13558e068426f12ce8b137706727ffd8ab150befe300",
+      "library_artifact_type": "image"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-临床实际完成-UI.png",
+      "bytes": 197636,
+      "sha256": "c70f07acea2609524649cea010658fba12718dbb4ee30dbd10deb4a3978cb41a",
+      "library_artifact_type": "image"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-横屏界面-UI.png",
+      "bytes": 43662,
+      "sha256": "2f9cdfb856790077f1606f73205db66848446a56b98b0abaf17bd8ef3b3e3564",
+      "library_artifact_type": "image"
+    },
+    {
+      "file": "docs/validation/2026-10-02-v4-root-coherent-04/deliverables/云山-窄屏界面-UI.png",
+      "bytes": 62682,
+      "sha256": "ff33e407bb403f43e0d1b4bc5a7baac3a714c9ff5834e3a1c46ae7c99936ccd2",
+      "library_artifact_type": "image"
+    }
+  ],
+  "GitFallback": "AUTHORIZED_WORK_BRANCH_PENDING_PUSH",
+  "fullRules": "RUNNING",
+  "visualAcceptance": "BLOCKED",
+  "scope": "Original function-test PNGs do not contain a rendered game world; source ZIP/memo/checkpoint is staged original evidence."
+}
