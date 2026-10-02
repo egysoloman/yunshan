@@ -1,0 +1,22 @@
+{
+  "orderedCreateBatch": 2,
+  "helperInvocationCount": 1,
+  "helperExitCode": 1,
+  "libraryFileIds": [],
+  "savedFiles": 0,
+  "status": "FAILED_NETWORK",
+  "exactError": "library upload failed: hosted apps tools/list request failed: network",
+  "noFallbackOrDuplicateAttempt": true,
+  "deliverables": [
+    {
+      "file": "yunshan-art-kit-brief.md",
+      "bytes": 23607,
+      "sha256": "8d8c060ef4f227a16c272e263fe1d29c81711f8f42d9e5afd6d5811877a58681"
+    },
+    {
+      "file": "yunshan-tripo-pilot-plan.zip",
+      "bytes": 5435,
+      "sha256": "40896e6f6ba5237d1a32251d2bfd7ccd018f7994a3374260b11bc881a90aff73"
+    }
+  ]
+}

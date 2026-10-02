@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-10-02T01:20:21.131799+00:00",
+  "status": "NOT_GENERATED_NETWORK_BLOCKED",
+  "cliVersion": "0.5.1",
+  "officialCliInstalled": true,
+  "dryRunExitCode": 0,
+  "dryRunValid": true,
+  "selectedModel": "P1-20260311",
+  "generationApiCallsPlanned": 1,
+  "assetId": "market-hanging-lantern-01",
+  "faceBudget": 1800,
+  "generationRequestsSubmitted": 0,
+  "knownGenerationCreditsConsumed": 0,
+  "apiKeyValidation": "NOT_VALIDATED",
+  "actualBalanceQueryExitCode": 7,
+  "actualBalanceQueryError": "network error: fetch failed",
+  "connectionEvidenceType": "Recorded observations from actual tool outputs, not an invented raw transcript",
+  "connectionChecks": [
+    {
+      "host": "https://openapi.tripo3d.ai/v3",
+      "method": "HEAD, no credential",
+      "scope": "default sandbox",
+      "exitCode": 56,
+      "observedProxyResponse": "HTTP/1.1 403 Forbidden; CONNECT tunnel failed"
+    },
+    {
+      "host": "https://openapi.tripo3d.ai/v3",
+      "method": "HEAD, no credential",
+      "scope": "authorized escalation",
+      "exitCode": 56,
+      "observedProxyResponse": "HTTP/1.1 403 Forbidden; CONNECT tunnel failed"
+    }
+  ],
+  "spendingAuthorization": "PENDING_USER_RESPONSE",
+  "estimatedStandardTextP1Credits": 40,
+  "pricingSource": "https://developers.tripo3d.ai/en/models/p1",
+  "noSecretsInEvidence": true,
+  "noCredentialsStoredInRepository": true,
+  "model": "NOT_AVAILABLE",
+  "preview": "NOT_AVAILABLE",
+  "gameIntegration": "NOT_RUN",
+  "runtimeVisualAcceptance": "NOT_RUN"
+}
