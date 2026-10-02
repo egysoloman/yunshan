@@ -6,6 +6,8 @@ import { buildLandscape } from './rendering/terrain';
 import { createRoofGeometry, type RoofProfile } from './rendering/architecture-layout';
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
+import { MarketGoodsPool } from './rendering/market-goods';
+import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
@@ -102,6 +104,7 @@ export class CityRenderer implements CityRendererAPI {
   private sky: THREE.Mesh;
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
+  private marketGoods: MarketGoodsPool;
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
   private vehiclePools = new Map<string, MovingPool>();
@@ -223,6 +226,7 @@ export class CityRenderer implements CityRendererAPI {
     this.signalGreen = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
+    this.marketGoods = new MarketGoodsPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
@@ -513,10 +517,17 @@ export class CityRenderer implements CityRendererAPI {
       // Public doorway stays clear between the two usable shopfront bays.
       for (const side of [-1, 1]) {
         box('roof', side * w * .3, 3.5, d / 2 + 2, w * .3, .4, 5.6, 0, false, '#987649');
-        box('wood', side * w * .3, 1, d / 2 + 1.2, w * .25, 1.8, 1.6, 0);
         for (const xx of [-.12, .12]) box('wood', side * w * .3 + xx * w, 1.8, d / 2 + 4.4, .4, 3.6, .4, 0);
-        if (!far) for (let crate = 0; crate < 4; crate++) box(crate % 2 ? 'red' : 'roof', side * w * .3 + (crate - 1.5) * 1.3, 2.1, d / 2 + 1.4, 1, .4, .8, 0, false, crate % 2 ? '#b77851' : '#8b9c67');
         box('amber', side * w * .3, 4.4, d / 2 + .6, w * .22, .8, .2, 0);
+      }
+      for (const counter of marketCounters(this.world, b)) {
+        const p = counter.localPosition, size = counter.size;
+        // Exterior fixtures use ground coordinates; the building emitter adds
+        // its .6m floor base. Remove that lift so cabinet, collision and food
+        // samples all use the same authoritative top and bottom.
+        const y = p.y - .6;
+        box('wood', p.x, y - .1, p.z, size.x, .8, size.z, 0);
+        box('wood', p.x, y + .4, p.z, size.x, .2, size.z, 0, false, '#8b7358');
       }
     } else if (b.kind === 'workshop' && b.districtId !== 'core') {
       for (const side of [-1, 1]) { box('stone', side * w * .36, h + 3, -d * .25, 2.8, 8, 2.8, top, true, '#7b8580'); box('wood', side * w * .36, h + 7.2, -d * .25, 3.6, .8, 3.6, top, true); }
@@ -783,6 +794,7 @@ export class CityRenderer implements CityRendererAPI {
     const detailedSigns = new Set<string>(this.architectureDetail.group.userData.activeBuildingIds ?? []);
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
+    this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
     const counts = new Map<string, number>();
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
@@ -822,6 +834,7 @@ export class CityRenderer implements CityRendererAPI {
   dispose() {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
+    this.marketGoods.dispose();
     this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();

@@ -1,0 +1,16 @@
+PASS resume
+/workspace/yunshan/scripts/player-journey.mjs:578
+  if (failure) throw new Error(failure);
+                     ^
+
+Error: mouse.down: Target page, context or browser has been closed
+    at turn (/workspace/yunshan/scripts/player-journey.mjs:281:53)
+    at async walkPoint (/workspace/yunshan/scripts/player-journey.mjs:315:7)
+    at async walkToNode (/workspace/yunshan/scripts/player-journey.mjs:349:47)
+    at async enter (/workspace/yunshan/scripts/player-journey.mjs:362:5)
+    at async run (/workspace/yunshan/scripts/player-journey.mjs:491:23)
+    at async <anonymous> (/workspace/yunshan/scripts/player-journey.mjs:167:6)
+    at run (/workspace/yunshan/scripts/player-journey.mjs:578:22)
+    at async <anonymous> (/workspace/yunshan/scripts/player-journey.mjs:167:6)
+
+Node.js v24.19.0

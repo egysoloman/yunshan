@@ -1,0 +1,55 @@
+{
+  "recordedAt": "2026-10-01T23:15:21.462594+00:00",
+  "status": "FAILED; not integrated",
+  "scope": "CPU depth diagnostic only, conservative floor-body occlusion; no actual GPU/material/roof/openings rendering",
+  "producer": "visual_resume",
+  "rootReviewedImages": [
+    "baseline-core-cpu-depth.png",
+    "prototype-core-cpu-depth.png"
+  ],
+  "members": {
+    "README.txt": "19ab7aa2af691357e27416059c06c870f711869cf87ba3c18dece1bccb48643d",
+    "baseline-core-cpu-depth-mask.png": "fee1173028f97a595147d999cec146fbab1c157fb37ac13f6cfb352b2a7eeabe",
+    "baseline-core-cpu-depth.png": "f8c801ede3ecdeb9df30981df3cddd931979e073e370fcbe000f6caaf8845a9e",
+    "baseline-core-cpu.png": "fafbbde5b4a7f9a2daf20ecbf01758baed17f8fb0dd8f6017d1c653f45bf261f",
+    "depth-report.json": "2315aff5d2cc499f547a80d841e12f1f1ca01eefb273e3b6675d41084196361d",
+    "depth-run.log": "abd2250cedeb786ec843bb26c65b943215f9ffa7828da660fb6637f6950c920f",
+    "depth.py": "8bb45dc2f70960c37b1f3fff8fbafbae9088c981b7546ed819f38218225fd377",
+    "forest-model.json": "7522feeea026ee9fe6aaa0cd1e44300077f0740bbd8b51d7cbda580d7a6d831e",
+    "frozen/src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "frozen/src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "frozen/src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "frozen/src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874",
+    "greedy-heightcolumn-failure-report.json": "4e218b65dad86f1a2954d55444aa353207d0b0aa46bc6186a0e408fb4851a6d4",
+    "interpolated-canopy-failure-report.json": "2698da2168369b7d54d7fe82b7b554ea036104dbcf5e6a53a3b6a95fcaa0de73",
+    "interpolated-canopy-failure.png": "392fd814ad7f6ce2c53e6c65e2dc1ee5c385b6ebc0b7de6672bc463e31c6dac3",
+    "manifest.json": "5bac1ac715ebdff5c9bcdf194ce863348cb152600805e39b282c76f52060fb7b",
+    "near-forest-model.json": "0d14a33a6aaffd17c7f744329d7d0d5ee52540d52d5f666dda58e7b649dd5102",
+    "original-roots-initial-failure.json": "8eda1007ad94a12274f1034f25952fe78488466ce504c418ca1f2693185adaca",
+    "project.py": "f5126fd0bcbcd692e17e944bb46574163ec886038544ddcb1d74a24875cded31",
+    "projection-report.json": "6a3c61e9e8a0467e1b13dfc7a6a6e452dc56e14f05e4a6bfc5d7104b86e8502e",
+    "prototype-core-cpu-depth-mask.png": "a99a8839cd771e92da292d892ca9a02ea6168ab7c42a9e416f0dd610266a0b4e",
+    "prototype-core-cpu-depth.png": "ae16f1f5ff46b72437bb4190b8ab076c2723c3286fc1144649bd6445d9d17735",
+    "prototype.ts": "05d157ce72b96063fc4103ffd2b2d13e801adc6d80c9c3107337e3da584dad0b",
+    "raw-voxel-source.ts": "1c2881f4815dca3a9a96a4c76d7145fe0cc66dd8b5b5bee9705bbc2baa86cb7e",
+    "report.json": "06897275078ecd5ab9d4e2586a5f4026af99224b1fac0b2515ee81e405bb2453",
+    "root-placement.json": "cca1c17d3c9e6da3d652bd2318cee272a8ee2195dd6d6d78f1d56397786ec3e1",
+    "run.log": "4bd52be2e185fbf7f0037e69f62d299f4c1d16bc2f3bf26f389e398c57fe714e"
+  },
+  "zip": {
+    "bytes": 4158217,
+    "sha256": "97b87314151d7fbb27d940ae3fd47ae6c362fad456d38b739384c61515e365c0"
+  },
+  "productionChanged": false,
+  "candidateFarTriangles": 318738,
+  "proposedBudget": [
+    40000,
+    60000
+  ],
+  "projectedVisibleCrownAndTrunkPixels": {
+    "before": 190576,
+    "after": 113808,
+    "changePercent": -40.3
+  },
+  "plantablePixelDenominatorMeasured": false
+}

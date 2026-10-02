@@ -1,0 +1,21 @@
+✔ walking guidance follows real roads and bridges rather than a shorter aircraft route (5.277358ms)
+✔ starting midway along a bent road retains its remaining vertices before graph routing (1.112924ms)
+✔ overlapping road levels join the actual walking surface rather than a nearby lower node (4.355139ms)
+✔ actual r7 native body rejoins its upper street and reaches the endpoint using the unchanged controller (4521.779417ms)
+✔ bridge access stays on the genuine dry deck and does not offer a riverbed shortcut (1.140627ms)
+✔ every generated district has a walking route and explicit building guidance reaches its real door (1831.562655ms)
+✔ upper-floor guidance includes the shared stair shaft and entrance before joining the street (1083.628512ms)
+✔ public timetable uses the actual direction, departure clock and current energy (0.725037ms)
+✔ a departing vehicle publishes its genuine next stop without inventing a new departure (0.28809ms)
+✔ public route connects real services and transfer stops without booking or changing any actor (0.869126ms)
+✔ journey intentions persist exact actual targets and malformed references reject atomically (1499.607197ms)
+✔ a current save declaring journey rejects a missing intent without replacing state (1375.157154ms)
+✔ riding records the actual reached node before a vehicle turns and no navigation command pays fares (1704.773821ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12999.522471

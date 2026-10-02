@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { PerspectiveCamera } from 'three';
+import { planWalkingJourney } from './src/journey.ts';
+import { marketCounters, blocksMarketCounter } from './src/site-fixtures.ts';
+import { getWalkHeight } from './src/world.ts';
+import { PlayerController } from './src/controller.ts';
+import type { WorldDefinition, SimState } from './src/types.ts';
+const sha=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
+const manifest=JSON.parse(readFileSync('source-manifest.json','utf8'));
+const check=()=>assert.deepEqual(Object.fromEntries(Object.keys(manifest.sourceHashes).map(path=>[path,sha(readFileSync(path))])),manifest.sourceHashes);
+check();const p=(x:number,y=0,z=0)=>({x,y,z});
+const market={id:'test-market',name:'街边市集',kind:'market' as const,districtId:'town',position:p(0),width:32,depth:24,height:8,floors:2,rotation:0,door:p(0,.6,12),capacity:50,seed:1};
+const world:WorldDefinition={seed:1,voxelSize:.2,size:4400,mountains:[],buildings:[market],spawn:p(0,.6,14),districts:[],nodes:[{id:'A',name:'A',districtId:'town',position:market.door,station:false},{id:'B',name:'B',districtId:'town',position:p(0,.6,40),station:true}],edges:[{id:'market-street',from:'A',to:'B',mode:'road',length:28,capacity:20,points:[market.door,p(0,.6,40)]}],waterfall:{top:p(500,100,500),bottom:p(500,0,500),width:10},river:[p(500,0,500)]};
+const counters=marketCounters(world,market),counter=counters[0];assert(counter);
+const from=p(counter.position.x-counter.size.x/2-2,getWalkHeight(world,counter.position.x-counter.size.x/2-2,counter.position.z,market.door.y),counter.position.z);
+const route=planWalkingJourney(world,from,'B');assert(route);const projection=route.points[1];
+let feet={...from},blocked=false;const steps=Math.ceil(Math.hypot(projection.x-from.x,projection.z-from.z)/.2);
+for(let i=1;i<=steps;i++){const x=from.x+(projection.x-from.x)*i/steps,z=from.z+(projection.z-from.z)*i/steps;for(const candidate of [{x,y:feet.y,z:feet.z},{x,y:feet.y,z}]){if(blocksMarketCounter(counters,feet,candidate)){blocked=true;break;}feet={...candidate,y:getWalkHeight(world,candidate.x,candidate.z,feet.y)};}if(blocked)break;}
+assert(blocked,'old planner must return a connector crossing the real shared counter');
+const keyboard=Object.assign(new EventTarget(),{closest:()=>null}),doc=Object.assign(new EventTarget(),{pointerLockElement:null});Object.defineProperty(globalThis,'window',{value:keyboard,configurable:true});Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
+const controller=new PlayerController(new PerspectiveCamera(),new EventTarget()as HTMLCanvasElement,world,()=>{},()=>true,()=>[]);controller.setMode('walk',from);
+const event=new Event('keydown');Object.assign(event,{code:'KeyW',repeat:false});keyboard.dispatchEvent(event);controller.yaw=Math.atan2(from.x-projection.x,from.z-projection.z);for(let i=0;i<100;i++)controller.step(.1,false);
+const actualFinal=controller.position;controller.dispose();assert(actualFinal.x<counter.position.x-counter.size.x/2-.35+.001);assert(Math.hypot(actualFinal.x-projection.x,actualFinal.z-projection.z)>5);check();
+const result={status:'OLD_COUNTER_ROUTE_FAILURE_REPRODUCED',scope:manifest.scope,sourceCount:89,sourceHashesStable:true,counter,actualFrom:from,oldRoute:route,sharedCounterBlocksConnector:blocked,actualController:{key:'KeyW',steps:100,dt:.1,actualFinal,unreachedProjection:projection},world};writeFileSync('counter-baseline-results.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

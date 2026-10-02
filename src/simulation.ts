@@ -75,6 +75,7 @@ export class Simulation implements SimulationAPI {
   private readonly bus = new EventBus();
   private readonly buildings: Map<string, Building>;
   private readonly edges: Map<string, NetworkEdge>;
+  private readonly freightCarriers = new Map<string, { kind: Vehicle['kind']; cargoCapacity: number }>();
   private readonly fingerprint: string;
   private readonly neighbors = new Map<string, { node: string; edge: NetworkEdge }[]>();
   private readonly routeCache = new Map<string, Vec3[]>();
@@ -117,7 +118,14 @@ export class Simulation implements SimulationAPI {
       const stationRoad = e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
       if (e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
       const count = stationRoad ? 2 : 1;
-      for (let i = 0; i < count; i++) { const progress = i / count; this.state.vehicles.push({ id: `vehicle-${e.id}-${i}`, kind: e.mode, position: this.pointOn(e, progress), edgeId: e.id, progress, direction: i % 2 === 0 ? 1 : -1, speed: this.speedFor(e.mode), state: 'waiting', passengers: 0, cargo: e.mode === 'road' && i === 1 ? 28 : e.mode === 'flight' ? 60 : 0, nextDeparture: 8 * 60 + (e.mode === 'flight' ? 20 : i * 3) }); }
+      for (let i = 0; i < count; i++) {
+        const progress = i / count, id = `vehicle-${e.id}-${i}`;
+        // These capacities belong to the trusted generated fleet, independently
+        // of whether an imported instance currently carries any stock.
+        const cargoCapacity = e.mode === 'road' && i === 1 ? 28 : e.mode === 'flight' ? 60 : 0;
+        if (cargoCapacity > 0) this.freightCarriers.set(id, { kind: e.mode, cargoCapacity });
+        this.state.vehicles.push({ id, kind: e.mode, position: this.pointOn(e, progress), edgeId: e.id, progress, direction: i % 2 === 0 ? 1 : -1, speed: this.speedFor(e.mode), state: 'waiting', passengers: 0, cargo: cargoCapacity, nextDeparture: 8 * 60 + (e.mode === 'flight' ? 20 : i * 3) });
+      }
     }
     this.connectSystems();
     this.updateTiers();
@@ -656,7 +664,24 @@ export class Simulation implements SimulationAPI {
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
         }
-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; const producer = this.state.shops.find(s => s.districtId === node.districtId && ['farm', 'dock'].includes(this.buildings.get(s.buildingId)!.kind) && this.shopCommodity(s) === 'food' && s.inventory >= 1); if (producer) { vehicle.cargo = Math.min(producer.inventory, vehicle.kind === 'flight' ? 60 : 28); producer.inventory -= vehicle.cargo; (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id; } }
+        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
+        const freightCarrier = this.freightCarriers.get(vehicle.id);
+        const activePassengers = Object.values(this.runtime.riders).filter(rider => rider.vehicleId === vehicle.id && !rider.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
+        // Empty road carriers retain their existing ten-seat passenger use.
+        // Cargo cannot replace people who boarded legitimately while empty.
+        const loadedPassengerCapacity = vehicle.kind === 'road' ? 2 : this.passengerCapacity(vehicle);
+        if (freightCarrier?.kind === vehicle.kind && vehicle.cargo === 0 && Math.max(vehicle.passengers, activePassengers) <= loadedPassengerCapacity) {
+          const producer = this.state.shops.find(shop => {
+            const site = this.buildings.get(shop.buildingId)!;
+            return ['farm', 'dock'].includes(site.kind) && this.shopCommodity(shop) === 'food' && shop.inventory >= 1
+              && this.isNearBuilding(site, node.position, 2) && this.isNearBuilding(site, vehicle.position, 2);
+          });
+          if (producer) {
+            vehicle.cargo = Math.min(producer.inventory, freightCarrier.cargoCapacity); producer.inventory -= vehicle.cargo;
+            (this.runtime.cargoSources ??= {})[vehicle.id] = producer.id;
+            this.bus.emit({ type: 'cargo-loaded', vehicleId: vehicle.id, nodeId, shopId: producer.id, districtId: producer.districtId, amount: vehicle.cargo, quantity: vehicle.cargo });
+          }
+        }
         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id);

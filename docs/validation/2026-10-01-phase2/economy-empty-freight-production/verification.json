@@ -1,0 +1,16 @@
+{
+  "checkpoint": "3f01707581eef697572ffa58bdb994bef037e98d",
+  "checkpointBase": {
+    "src/simulation.ts": "7bd2e10e0680ecf1f8a79f1d43f6dde2cde17b216179a534f7ff85a6952acdd3",
+    "tests/economy.test.ts": "10b7721f64c81e6cfc360978ce25df301cefb2d7b4888b69a4403b03563cd216"
+  },
+  "ownedFilesAfterVerification": {
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "tests/economy.test.ts": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d"
+  },
+  "relatedTests": 119,
+  "relatedPass": 119,
+  "strictExit": 0,
+  "sourceHashScope": "Related-test hashes taken after verification only; immutable actual-city src uses separate 3-way snapshot manifest with start/end hashes.",
+  "initialFailures": "wrong fixture command driveInput replaced by existing public driveInput API; additional actual return ticks required after exact24 continuation; no production assertions weakened."
+}

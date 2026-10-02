@@ -1,0 +1,44 @@
+{
+  "scope": "Read-only execution/document provenance gate. Exact workspace/89 copied files/entry bytes plus actual page DOM script URLs and actual loaded asset response bytes. No game globals, controls or saved data are changed.",
+  "startedAt": "2026-10-01T23:46:35.103Z",
+  "workspace": "/tmp/yunshan-phase3-root-coherent-05",
+  "actualCwd": "/tmp/yunshan-phase3-root-coherent-05",
+  "actualArgv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/tmp/yunshan-player-single-page-harness/player-journey.mjs",
+    "--workspace=/tmp/yunshan-phase3-root-coherent-05",
+    "--output=/workspace/yunshan/artifacts/phase3-player-journey-r10",
+    "--layout=current-v2-r5",
+    "--resume-after=home",
+    "--resume-checkpoint=walking-saved",
+    "--resume-from=/workspace/yunshan/artifacts/phase3-player-journey-r9/results.json",
+    "--profile=/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile",
+    "--port=4193",
+    "--viewport=800x600",
+    "--quality=low",
+    "--render-distance=900",
+    "--stop-after=school",
+    "--timeout-ms=7200000"
+  ],
+  "expectedEntry": "/assets/index-BH13EXr_.js",
+  "expectedSHA": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+  "sourceFiles": 89,
+  "gateSHA256": "b927360ec6b305e9038801102eebfb07f2868ea29086ebeb0de837631ba58995",
+  "documents": [
+    {
+      "at": "2026-10-01T23:46:49.950Z",
+      "pageURL": "http://127.0.0.1:4193/",
+      "requestedURL": "http://127.0.0.1:4193/",
+      "moduleURLs": [
+        "http://127.0.0.1:4193/assets/index-BH13EXr_.js"
+      ],
+      "loadedAsset": {
+        "url": "http://127.0.0.1:4193/assets/index-BH13EXr_.js",
+        "status": 200,
+        "bytes": 588447,
+        "sha256": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+        "fromServiceWorker": false
+      }
+    }
+  ]
+}

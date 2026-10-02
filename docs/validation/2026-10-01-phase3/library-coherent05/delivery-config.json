@@ -1,0 +1,110 @@
+{
+  "phase": "phase3-coherent05",
+  "root": "/workspace/yunshan",
+  "snapshot": "/tmp/yunshan-phase3-root-coherent-05",
+  "output": "/workspace/yunshan-deliverables/phase3-coherent05",
+  "expectedSourceCount": 89,
+  "buildEntry": "/assets/index-BH13EXr_.js",
+  "buildSHA256": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+  "rulesStatus": "docs/validation/2026-10-01-phase3/root-coherent-05/run-status.json",
+  "uiResults": "docs/validation/2026-10-01-phase3/ui-coherent05/ui-results.json",
+  "uiManifest": "docs/validation/2026-10-01-phase3/ui-coherent05/run-manifest.json",
+  "economySummary": "docs/validation/2026-10-01-phase2/economy-empty-freight-production/result-summary.json",
+  "economyAnalysis": "docs/validation/2026-10-01-phase2/economy-empty-freight-production/food-material-final-analysis.json",
+  "referenceAccess": "docs/validation/2026-10-01-takeover/reference-access.json",
+  "browser": {
+    "resultsPath": "docs/validation/2026-10-01-phase3/browser-coherent05/browser-results.json",
+    "manifestPath": "docs/validation/2026-10-01-phase3/browser-coherent05/run-manifest.json",
+    "exitCode": 0
+  },
+  "macro": {
+    "manifestPath": "docs/validation/2026-10-01-phase3/visual-coherent05/run-manifest.json",
+    "captureResultsPath": "docs/validation/2026-10-01-phase3/visual-coherent05/capture-results-core-waterfall,market-street,residential-first-person,bridge-structure,bridge-walk-center,bridge-public-road.json",
+    "documentProvenancePath": "docs/validation/2026-10-01-phase3/visual-coherent05/document-provenance.json",
+    "completedTechnicalViews": 6,
+    "errors": [],
+    "pngPaths": {
+      "core-waterfall": "docs/validation/2026-10-01-phase3/visual-coherent05/core-waterfall.png",
+      "market-street": "docs/validation/2026-10-01-phase3/visual-coherent05/market-street.png",
+      "residential-first-person": "docs/validation/2026-10-01-phase3/visual-coherent05/residential-first-person.png",
+      "bridge-walk-center": "docs/validation/2026-10-01-phase3/visual-coherent05/bridge-walk-center.png",
+      "bridge-structure": "docs/validation/2026-10-01-phase3/visual-coherent05/bridge-structure.png",
+      "bridge-public-road": "docs/validation/2026-10-01-phase3/visual-coherent05/bridge-public-road.png"
+    }
+  },
+  "rootReview": {
+    "confirmed": true,
+    "reviewedAt": "Root confirmed viewing all six in delegated message; exact review clock not supplied",
+    "rootMessage": "根已确认最终05全部gatesREADY：真正05浏览器11/11、六固定图技术6/6，89/entry/loadedDOMSHA9b1f相符；根实际查看全部六图判参考FAIL。右柜台高度/食品小修有效，左橙物未确认。r10实际经过市场站并原生保存[-315,52,461]/第1日22:37/509.16，学校未到。最新memo/matrix已23:52更新，89验证后仅文档与已经r9/r10验证的外部单页harness3c8改变；生产src/tests仍同05。",
+    "visualStatus": "FAIL",
+    "visualSummary": "本轮右侧柜台高度与食品显示小修有效，但整体仍偏离原参考：裸浅坡、方冠疏林、同质盒楼及空坪/深檐仍明显。局部几何修复与规则通过不能替代宏伟层次和近街细节的视觉验收。",
+    "sceneNotes": {
+      "core-waterfall": "瀑布与水路可辨，裸坡/方冠/同质楼仍未合参考",
+      "market-street": "右侧柜台小修有效；左橙物归属未确认",
+      "residential-first-person": "住宅近景完整保留；整体仍未合参考",
+      "bridge-walk-center": "真实固定桥面视点，技术通过不等于美术通过",
+      "bridge-structure": "原固定视点保留，不用另机位替换失败构图",
+      "bridge-public-road": "真实公共路桥视点，整体仍未合参考"
+    },
+    "ordinaryJourneySummary": "r10正常URL严格恢复r9后，12段真实W经过市场站；HUD前后弦长累计约124.35m，非逐帧精确里程。原生暂停保存第1日22:37、[-315,52,461]、509.16；学校未到，学习/考核/驾驶/政务及全旅程未完成。",
+    "memoUpdatedAt": "2026-10-01 23:52 UTC（根确认的分钟，未提供秒）",
+    "matrixUpdatedAt": "2026-10-01 23:52 UTC（根确认的分钟，未提供秒）",
+    "rootConfirmationReceivedAt": "2026-10-01T23:50:18Z"
+  },
+  "evidenceDirectories": [
+    "docs/validation/2026-10-01-phase3/root-coherent-04",
+    "docs/validation/2026-10-01-phase3/ui-coherent04",
+    "docs/validation/2026-10-01-phase3/browser-coherent04",
+    "docs/validation/2026-10-01-phase3/market-counters",
+    "docs/validation/2026-10-01-phase3/journey-road-access-01",
+    "docs/validation/2026-10-01-phase3/player-r7-prefix03",
+    "docs/validation/2026-10-01-phase3/player-journey-r8",
+    "docs/validation/2026-10-01-phase2/economy-empty-freight-production",
+    "docs/validation/2026-10-01-phase3/root-coherent-05",
+    "docs/validation/2026-10-01-phase3/ui-coherent05",
+    "docs/validation/2026-10-01-phase3/visual-coherent04",
+    "docs/validation/2026-10-01-phase3/browser-coherent05",
+    "docs/validation/2026-10-01-phase3/visual-coherent05",
+    "docs/validation/2026-10-01-phase3/browser-coherent04-repeat-invalid-for05",
+    "docs/validation/2026-10-01-phase3/player-journey-r9",
+    "docs/validation/2026-10-01-phase3/player-journey-r10",
+    "docs/validation/2026-10-01-phase3/counter-floor-base-regression",
+    "docs/validation/2026-10-01-phase3/forest-canopy-failed-01",
+    "docs/validation/2026-10-01-phase3/architecture-prototype-02",
+    "docs/validation/2026-10-01-phase3/utilities-planning-only"
+  ],
+  "excludeComponents": [
+    "browser-profile",
+    "profile",
+    "profiles",
+    "node_modules",
+    ".git",
+    "prototype",
+    "freight-prototype"
+  ],
+  "memo": "开发备忘录.md",
+  "matrix": "docs/需求实现验证矩阵.md",
+  "displayName": "coherent05",
+  "expectedRuleCount": 390,
+  "expectedUICount": 30,
+  "rulesRawSHA256": "e7a5b6dd58d7bf6a5b371a5d5e93f1a4bee3293153f3b5addd175b5f8ba68143",
+  "historicalInvalidBrowserBatchNote": "First labeled05 browser batch served04/n3tM and is INVALID_FOR05; original failure-scope results are preserved separately, never counted as05. The canonical corrected snapshot05/BH13/9b1f actual browser completed11/11.",
+  "captionPolicy": "The orange foreground object is unidentified. Do not attribute it to a market counter. The +0.6m counter render mismatch is proven by actual buildHouse near/far CPU output, independently from image object identification.",
+  "evidenceFiles": [
+    "docs/validation/2026-10-01-phase3/README.md",
+    "docs/validation/2026-10-01-phase3/root-visual-review-05.json",
+    "docs/validation/2026-10-01-phase3/post-validation-delta.json",
+    "docs/validation/2026-10-01-phase3/architecture-prototype-review-02.md",
+    "docs/视觉返工审查与方案.md"
+  ],
+  "historicalArchiveLinks": [
+    "docs/validation/2026-10-01-phase3/forest-canopy-failed-01/original-prototype.zip",
+    "docs/validation/2026-10-01-phase3/architecture-prototype-02/original-prototype.zip"
+  ],
+  "externalTestedHarness": "docs/validation/2026-10-01-phase3/player-journey-r10/executed-player-journey.mjs",
+  "externalTestedHarnessSHA256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+  "nativeJourneyResults": "docs/validation/2026-10-01-phase3/player-journey-r10/results.json",
+  "nativeJourneyManifest": "docs/validation/2026-10-01-phase3/player-journey-r10/run-manifest.json",
+  "rootReviewPath": "docs/validation/2026-10-01-phase3/root-visual-review-05.json",
+  "postValidationDelta": "docs/validation/2026-10-01-phase3/post-validation-delta.json"
+}

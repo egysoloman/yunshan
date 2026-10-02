@@ -1,2 +1,7 @@
 # Preserve raw test output, including whitespace in Node assertion diffs.
 docs/validation/**/*.log -whitespace
+# Archive patch context lines byte-for-byte, including a lone space for a blank line.
+docs/validation/**/*.patch -whitespace
+docs/validation/**/*.diff -whitespace
+# Generated PDF streams may use ASCII encodings but are binary artifacts.
+*.pdf binary

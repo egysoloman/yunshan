@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createWorld } from '../src/world';
-import type { BuildingKind, Citizen, Shop, WorldDefinition } from '../src/types';
+import type { Building, BuildingKind, Citizen, Shop, WorldDefinition } from '../src/types';
 
 function fixture(): WorldDefinition {
   const kinds: BuildingKind[] = ['home', 'market', 'workshop', 'school', 'farm', 'clinic', 'bank'];
@@ -364,4 +364,215 @@ test('a capped worker wallet retains its wage claim until a real receiving capac
   sim.step(.25); assert.ok(Math.abs(worker.money - (1e9 - 10 + 10 * .92)) < 1e-7);
   assert.ok(!runtime(sim).wageArrears.some((item: { citizenId: string }) => item.citizenId === worker.id)); assert.ok(Math.abs(shop.profit - profit - receipts) < 1e-8, 'deferred payment does not charge the original wage expense twice');
   assert.ok(Math.abs(moneySupply(sim) - supply) < 1e-6);
+});
+
+function freightFixture(): WorldDefinition { const kinds = ['farm', 'market', 'home'] as const; const buildings: Building[] = kinds.map((kind, i) => ({ id: kind, kind, name: kind, districtId: i ? 'customers' : 'growers', position: { x: i * 300, y: 20, z: 0 }, door: { x: i * 300, y: 20, z: 5 }, width: 10, depth: 10, height: 8, floors: 1, rotation: 0, capacity: 80, seed: i })); const nodes = buildings.map(b => ({ id: b.id + '-door', districtId: b.districtId, name: b.name, position: { ...b.door }, station: true })); return { seed: 20261001, voxelSize: .2, size: 1600, buildings, nodes, edges: [{ id: 'food-road', from: nodes[0].id, to: nodes[1].id, mode: 'road', length: 300, capacity: 20, points: [nodes[0].position, nodes[1].position] }, { id: 'home-road', from: nodes[1].id, to: nodes[2].id, mode: 'bridge', length: 300, capacity: 20, points: [nodes[1].position, nodes[2].position] }], mountains: [], districts: [{ id: 'growers', name: 'growers', kind: 'river', center: { x: 0, y: 20, z: 0 }, radius: 300, color: '#aaa', population: 12 }, { id: 'customers', name: 'customers', kind: 'market', center: { x: 450, y: 20, z: 0 }, radius: 400, color: '#bbb', population: 12 }], spawn: { ...buildings[2].door }, waterfall: { top: { x: 900, y: 50, z: 0 }, bottom: { x: 900, y: 20, z: 0 }, width: 10 }, river: [] }; }
+function foodSupply(s: Simulation) { return s.state.shops.filter(shop => s.shopCommodity(shop) === 'food').reduce((n, shop) => n + shop.inventory, 0) + s.state.vehicles.reduce((n, v) => n + v.cargo, 0) + Object.values(runtime(s).freight as Record<string, number>).reduce((n, q) => n + q, 0) + s.state.citizens.reduce((n, c) => n + (c.food ?? 0), 0) + (s.state.player.inventory.food ?? 0); }
+function prepareFreightFixture() { const s = new Simulation(freightFixture()), farm = s.state.shops.find(shop => shop.buildingId === 'farm')!, market = s.state.shops.find(shop => shop.buildingId === 'market')!, truck = s.state.vehicles.find(v => v.id === 'vehicle-food-road-1')!; for (const c of s.state.citizens)
+    c.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 }; for (const v of s.state.vehicles) {
+    v.cargo = 0;
+    if (v !== truck)
+        v.nextDeparture = 1e6;
+} farm.inventory = 80; farm.employees = 0; market.inventory = 0; market.employees = 0; s.state.trade!.ownedLots = {}; const owner = s.state.citizens.find(c => c.id === market.ownerId)!; const refund = s.shopFunds(market); s.transferShopFunds(market, -refund); owner.money += refund; truck.nextDeparture = 480; s.command({ type: 'speed', value: 8 }); return { s, farm, market, truck, owner }; }
+const stepUntil = (s: Simulation, condition: () => boolean, cap = 1200) => { let i = 0; for (; i < cap && !condition(); i++)
+    s.step(.25); assert.ok(condition(), `actual carrier condition unmet after ${i} ticks`); return i; };
+test('an empty existing freight carrier loads at the real farm, delivers owner custody, and loads again after exact restoration', () => {
+    const { s, farm, market, truck, owner } = prepareFreightFixture(), initialCash = moneySupply(s), initialGoods = foodSupply(s), initialLoss = farm.profit;
+    let loaded = 0, delivered = 0, wholesale = 0, quantity = 0;
+    const hook = (sim: Simulation) => { sim.onEvent('cargo-loaded', e => { if (e.vehicleId === truck.id) {
+        assert.equal(e.shopId, farm.id);
+        assert.equal(e.nodeId, 'farm-door');
+        assert.ok(sim.isNearBuilding(sim.worldDefinition.buildings.find(b => b.id === 'farm')!, sim.state.vehicles.find(v => v.id === truck.id)!.position, 2));
+        loaded++;
+    } }); sim.onEvent('cargo-arrived', e => { if (e.shopId === farm.id)
+        delivered += e.amount ?? 0; }); sim.onEvent('wholesale', e => { if (e.shopId === farm.id) {
+        wholesale += e.amount ?? 0;
+        quantity += e.quantity ?? 0;
+    } }); };
+    hook(s);
+    stepUntil(s, () => loaded === 1);
+    assert.equal(truck.cargo, 28);
+    assert.equal(farm.inventory, 52);
+    assert.equal(runtime(s).cargoSources[truck.id], farm.id);
+    assert.equal(moneySupply(s), initialCash);
+    assert.equal(foodSupply(s), initialGoods);
+    assert.equal(farm.profit, initialLoss);
+    const saved = s.exportSave();
+    let restored = new Simulation(freightFixture());
+    const result = restored.importSave(saved);
+    assert.equal(result.ok, true, result.message);
+    assert.equal(restored.exportSave(), saved);
+    hook(restored);
+    const buyer = restored.state.shops.find(shop => shop.id === market.id)!, proprietor = restored.state.citizens.find(c => c.id === owner.id)!, producer = restored.state.shops.find(shop => shop.id === farm.id)!;
+    proprietor.money -= 40;
+    restored.transferShopFunds(buyer, 40);
+    const producerFunds = restored.shopFunds(producer), beforeProfit = buyer.profit;
+    stepUntil(restored, () => delivered === 28 && wholesale >= 40);
+    assert.equal(wholesale, 40);
+    assert.equal(quantity, 10);
+    assert.equal(buyer.inventory, 10);
+    assert.equal(runtime(restored).freightLots.customers[0].shopId, farm.id);
+    assert.equal(runtime(restored).freightLots.customers[0].quantity, 18);
+    assert.ok(Math.abs(restored.shopFunds(producer) - producerFunds - 36.8) < 1e-8);
+    assert.equal(runtime(restored).taxes, 0);
+    assert.ok(Math.abs(foodSupply(restored) - initialGoods) < 1e-8);
+    assert.ok(Math.abs(moneySupply(restored) - initialCash) < 1e-7);
+    assert.equal(buyer.profit, beforeProfit, 'acquiring stock capitalizes its paid cost, not another profit expense');
+    assert.equal(restored.state.trade!.ownedLots![buyer.id][0].quantity, 10);
+    assert.equal(restored.state.trade!.ownedLots![buyer.id][0].unitPrice, 4);
+    const emptySave = restored.exportSave();
+    assert.equal(restored.state.vehicles.find(v => v.id === truck.id)!.cargo, 0);
+    const afterEmptySave = new Simulation(freightFixture());
+    const emptyLoad = afterEmptySave.importSave(emptySave);
+    assert.equal(emptyLoad.ok, true, emptyLoad.message);
+    assert.equal(afterEmptySave.exportSave(), emptySave);
+    hook(afterEmptySave);
+    restored = afterEmptySave;
+    stepUntil(restored, () => loaded === 2);
+    assert.equal(restored.state.vehicles.find(v => v.id === truck.id)!.cargo, 28);
+    assert.equal(restored.state.shops.find(x => x.id === producer.id)!.inventory, 24);
+    assert.equal(runtime(restored).cargoSources[truck.id], producer.id);
+    assert.ok(Math.abs(foodSupply(restored) - initialGoods) < 1e-8);
+    assert.ok(Math.abs(moneySupply(restored) - initialCash) < 1e-7);
+});
+test('a passenger bus cannot load nearby farm stock and freight cannot load a remote same-district farm', () => {
+    const { s, farm, truck } = prepareFreightFixture();
+    const bus = s.state.vehicles.find(v => v.id === 'vehicle-food-road-0')!;
+    truck.nextDeparture = 1e6;
+    bus.nextDeparture = 480;
+    bus.direction = -1;
+    bus.progress = .5;
+    let busLoads = 0;
+    s.onEvent('cargo-loaded', e => { if (e.vehicleId === bus.id)
+        busLoads++; });
+    const start = farm.inventory;
+    for (let i = 0; i < 120; i++)
+        s.step(.25);
+    assert.equal(bus.cargo, 0);
+    assert.equal(busLoads, 0);
+    assert.equal(farm.inventory, start);
+    const remoteWorld = freightFixture();
+    remoteWorld.buildings.find(b => b.id === 'farm')!.districtId = 'customers';
+    remoteWorld.nodes.find(n => n.id === 'farm-door')!.districtId = 'customers';
+    const remote = new Simulation(remoteWorld), remoteFarm = remote.state.shops.find(x => x.buildingId === 'farm')!, carrier = remote.state.vehicles.find(v => v.id === 'vehicle-food-road-1')!;
+    for (const v of remote.state.vehicles) {
+        v.cargo = 0;
+        if (v !== carrier)
+            v.nextDeparture = 1e6;
+    }
+    remoteFarm.employees = 0;
+    remoteFarm.inventory = 80;
+    remote.state.shops.find(x => x.buildingId === 'market')!.inventory = 0;
+    remote.state.trade!.ownedLots = {};
+    carrier.nextDeparture = 480;
+    carrier.direction = 1;
+    carrier.progress = .99999;
+    runtime(remote).signalOverrides['market-door'] = 1;
+    let loads = 0;
+    remote.onEvent('cargo-loaded', () => loads++);
+    remote.step(.25);
+    assert.equal(carrier.cargo, 0);
+    assert.equal(loads, 0, 'the stock at a different node cannot teleport into a truck');
+});
+test('both loaded and empty generated freight carriers resume the exact same 24 ticks', () => {
+    for (const loaded of [false, true]) {
+        const { s, truck } = prepareFreightFixture();
+        if (loaded)
+            stepUntil(s, () => truck.cargo === 28);
+        const saved = s.exportSave(), restored = new Simulation(freightFixture());
+        const result = restored.importSave(saved);
+        assert.equal(result.ok, true, result.message);
+        assert.equal(restored.exportSave(), saved);
+        for (let tick = 0; tick < 24; tick++) {
+            s.step(.25);
+            restored.step(.25);
+            assert.equal(restored.exportSave(), s.exportSave(), `${loaded ? 'loaded' : 'empty'} carrier, tick ${tick + 1}`);
+        }
+    }
+});
+test('real ten-seat passengers and their driver keep their places when a freight pickup would require two seats', () => {
+    const { s, farm, truck } = prepareFreightFixture();
+    const market = s.worldDefinition.buildings.find(b => b.id === 'market')!;
+    truck.position = { ...market.door };
+    truck.progress = 1;
+    truck.direction = -1;
+    s.state.player.identities = ['traveler', 'driver'];
+    s.setFocus(market.door, 'walk');
+    assert.equal(s.command({ type: 'drive', targetId: truck.id }).ok, true);
+    const passengers = s.state.citizens.slice(0, 9), beforeFares = s.state.treasury;
+    for (const passenger of passengers) {
+        passenger.position = { ...market.door };
+        passenger.destinationId = 'farm';
+        passenger.route = [];
+        passenger.routeIndex = 0;
+        passenger.needs = { hunger: 15, fatigue: 100, social: 100, fun: 100 };
+        passenger.food = 0;
+        runtime(s).activities[passenger.id] = 'eat';
+        runtime(s).decisionAt[passenger.id] = 10000;
+    }
+    s.step(.25);
+    assert.equal(truck.passengers, 10, 'nine people actually bought native tickets, plus the driver');
+    assert.equal(s.state.treasury - beforeFares, 36);
+    for (const passenger of passengers) {
+        assert.equal(runtime(s).riders[passenger.id].vehicleId, truck.id);
+        // These paid passengers take a round trip. The stop is a real referenced
+        // node; the existing rider model keeps them aboard at intermediate nodes.
+        runtime(s).riders[passenger.id].stopNodeId = 'market-door';
+    }
+    let pickupArrival = false, pickups = 0;
+    s.onEvent('cargo-loaded', () => pickups++);
+    s.onPhase('traffic', () => {
+        if (truck.progress === 0 && truck.edgeId === 'food-road' && truck.direction === 1)
+            pickupArrival = true;
+    });
+    s.driveInput(1, 0, false);
+    stepUntil(s, () => pickupArrival, 120);
+    assert.equal(truck.cargo, 0);
+    assert.equal(farm.inventory, 80);
+    assert.equal(pickups, 0);
+    assert.equal(truck.passengers, 10);
+    assert.equal(s.state.player.vehicleId, truck.id);
+    assert.equal(runtime(s).driving.vehicleId, truck.id);
+    assert.equal(runtime(s).driving.throttle, 1);
+    for (const passenger of passengers)
+        assert.equal(runtime(s).riders[passenger.id].arrived, undefined);
+    const saved = s.exportSave(), restored = new Simulation(freightFixture());
+    const result = restored.importSave(saved);
+    assert.equal(result.ok, true, result.message);
+    assert.equal(restored.exportSave(), saved);
+    for (let tick = 0; tick < 24; tick++) {
+        s.step(.25);
+        restored.step(.25);
+    }
+    assert.equal(restored.exportSave(), s.exportSave(), 'driver and paid passenger contracts survive exact continuation');
+    const remainingTicks = stepUntil(s, () => pickups > 0, 120);
+    for (let tick = 0; tick < remainingTicks; tick++)
+        restored.step(.25);
+    assert.equal(restored.exportSave(), s.exportSave());
+    assert.ok(pickups > 0, 'after the actual paid passengers finish their round trip, the driver can collect the existing stock');
+});
+test('a saved passenger bus carrying existing stock never gains a generated freight role', () => {
+    const { s, farm, truck } = prepareFreightFixture();
+    const bus = s.state.vehicles.find(v => v.id === 'vehicle-food-road-0')!;
+    truck.nextDeparture = 1e6;
+    bus.nextDeparture = 480;
+    bus.direction = -1;
+    bus.progress = .5;
+    farm.inventory -= 7;
+    bus.cargo = 7;
+    runtime(s).cargoSources[bus.id] = farm.id;
+    const stock = foodSupply(s), cash = moneySupply(s), saved = s.exportSave();
+    const restored = new Simulation(freightFixture());
+    const result = restored.importSave(saved);
+    assert.equal(result.ok, true, result.message);
+    assert.equal(restored.exportSave(), saved);
+    let pickups = 0;
+    restored.onEvent('cargo-loaded', () => pickups++);
+    stepUntil(restored, () => (runtime(restored).freight.growers ?? 0) === 7);
+    assert.equal(restored.state.vehicles.find(v => v.id === bus.id)!.cargo, 0);
+    assert.equal(restored.state.shops.find(shop => shop.id === farm.id)!.inventory, 73);
+    assert.equal(pickups, 0);
+    assert.equal(runtime(restored).freightLots.growers[0].shopId, farm.id);
+    assert.ok(Math.abs(foodSupply(restored) - stock) < 1e-8);
+    assert.ok(Math.abs(moneySupply(restored) - cash) < 1e-8);
 });

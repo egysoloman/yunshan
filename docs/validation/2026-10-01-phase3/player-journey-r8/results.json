@@ -1,0 +1,804 @@
+{
+  "status": "failed",
+  "scope": "Normal-URL player actions with keyboard/mouse and public DOM only; static map planning is recorded separately; software GPU does not establish macOS performance",
+  "workspace": "/tmp/yunshan-phase3-root-coherent-04",
+  "harnessPath": "/workspace/yunshan/scripts/player-journey.mjs",
+  "harnessHash": "9945c52abeb466471c9b4f39972190ad18313bf1bd6afa56fa450b769bc307fd",
+  "viewport": {
+    "width": 800,
+    "height": 600
+  },
+  "url": "http://127.0.0.1:4193/",
+  "resume": {
+    "after": "home",
+    "results": "/workspace/yunshan/artifacts/phase2-player-journey-r7/results.json",
+    "resultsHash": "6b2167d485c99d6df72e767e021572114ec39c9540602ca18411ba16a41aab92",
+    "checkpoint": "walking-saved"
+  },
+  "plannedLayout": "current-v2-r5",
+  "plannedFingerprint": "c70ebca5",
+  "publicGraphics": {
+    "quality": "low",
+    "renderDistance": "900"
+  },
+  "stopAfter": "school",
+  "stage": "school",
+  "completedStage": "home",
+  "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile",
+  "buildEntry": "/assets/index-n3tM-54D.js",
+  "buildHash": "ebdd21602dfac48e4dfb958ec980f4fa8ddc24d543eb6739c92a3c5d9c38067b",
+  "sourceHashes": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "01e3de8c9e07d9970aa14f3fb94a52cf135c3ca83f6034fb3f1b73303824e957",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "sourceHashesAfter": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "01e3de8c9e07d9970aa14f3fb94a52cf135c3ca83f6034fb3f1b73303824e957",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "records": [
+    {
+      "name": "resume",
+      "at": "2026-10-01T23:05:29.910Z",
+      "stage": "resume",
+      "coordinates": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "district": "千灯市集",
+      "clock": "20:57",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "夜色入山，万家灯火沿谷而生。",
+      "context": "钱庄 · 附近场所千灯市集·灯市街·钱庄1114 层 · 658 人容量进入 / 使用建筑 · E钱庄存款0 云币借贷余额0 云币银行实际资金池800 云币存款债权 / 贷款本金债权800 云币 / 0 云币准备金 / 当前可贷款现金80 云币 / 720 云币我的贷款本金 / 贷款利息0 云币 / 0 云币我的待付存款利息0 云币实收贷款息可分配余额0 云币实际资产 / 负债 / 净值800 云币 / 800 云币 / 0 云币贷款利息应收 / 存息应付0 云币 / 0 云币银行资金池来自实际现场存款。准备金保留后才能放贷；存息由实收贷款利息利润支付，债权金额不会自动成为现金。我的最近银行回执业务金额100 云币300 云币1,000 云币存入取出申请贷款偿还借贷代购上市股票走近门口按 E 进入，楼梯处按 E 换层。",
+      "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 566 draw",
+      "needs": "饱腹83精力93社交61娱乐75",
+      "petitions": "",
+      "resumeAfter": "home",
+      "priorResults": "/workspace/yunshan/artifacts/phase2-player-journey-r7/results.json",
+      "priorResultsHash": "6b2167d485c99d6df72e767e021572114ec39c9540602ca18411ba16a41aab92",
+      "priorCheckpoint": {
+        "name": "walking-saved",
+        "at": "2026-10-01T22:19:56.474Z",
+        "stage": "school",
+        "coordinates": {
+          "x": -380,
+          "y": 50,
+          "z": 517
+        },
+        "district": "千灯市集",
+        "clock": "20:57",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "夜色入山，万家灯火沿谷而生。",
+        "context": "钱庄 · 附近场所千灯市集·灯市街·钱庄1114 层 · 658 人容量进入 / 使用建筑 · E钱庄存款0 云币借贷余额0 云币银行实际资金池800 云币存款债权 / 贷款本金债权800 云币 / 0 云币准备金 / 当前可贷款现金80 云币 / 720 云币我的贷款本金 / 贷款利息0 云币 / 0 云币我的待付存款利息0 云币实收贷款息可分配余额0 云币实际资产 / 负债 / 净值800 云币 / 800 云币 / 0 云币贷款利息应收 / 存息应付0 云币 / 0 云币银行资金池来自实际现场存款。准备金保留后才能放贷；存息由实收贷款利息利润支付，债权金额不会自动成为现金。我的最近银行回执业务金额100 云币300 云币1,000 云币存入取出申请贷款偿还借贷代购上市股票走近门口按 E 进入，楼梯处按 E 换层。",
+        "toast": "旅程已保存在当前浏览器。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 162 draw",
+        "needs": "饱腹83精力93社交61娱乐75",
+        "petitions": "",
+        "completedStage": "home",
+        "incompleteStage": "school",
+        "target": {
+          "x": -380.40000000000003,
+          "y": 45.400000000000006,
+          "z": 520
+        },
+        "scope": "Actual paused UI save during ground travel. The destination facility and its action have not been reached or passed.",
+        "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+      },
+      "restored": {
+        "at": "2026-10-01T23:05:28.592Z",
+        "stage": "resume",
+        "coordinates": {
+          "x": -380,
+          "y": 50,
+          "z": 517
+        },
+        "district": "千灯市集",
+        "clock": "20:57",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "夜色入山，万家灯火沿谷而生。",
+        "context": "钱庄 · 附近场所千灯市集·灯市街·钱庄1114 层 · 658 人容量进入 / 使用建筑 · E钱庄存款0 云币借贷余额0 云币银行实际资金池800 云币存款债权 / 贷款本金债权800 云币 / 0 云币准备金 / 当前可贷款现金80 云币 / 720 云币我的贷款本金 / 贷款利息0 云币 / 0 云币我的待付存款利息0 云币实收贷款息可分配余额0 云币实际资产 / 负债 / 净值800 云币 / 800 云币 / 0 云币贷款利息应收 / 存息应付0 云币 / 0 云币银行资金池来自实际现场存款。准备金保留后才能放贷；存息由实收贷款利息利润支付，债权金额不会自动成为现金。我的最近银行回执业务金额100 云币300 云币1,000 云币存入取出申请贷款偿还借贷代购上市股票走近门口按 E 进入，楼梯处按 E 换层。",
+        "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 566 draw",
+        "needs": "饱腹83精力93社交61娱乐75",
+        "petitions": ""
+      },
+      "plannedLayout": "current-v2-r5"
+    }
+  ],
+  "inputs": [
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"quality\"]')",
+      "value": "low"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-range",
+      "target": "render-distance",
+      "value": 900
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('load')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "school"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"academy-b13\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "public-navigation",
+      "destination": "文澜学苑·西溪院·书院4",
+      "waypoints": [
+        {
+          "index": 4,
+          "x": -352,
+          "y": 50.800000000000004,
+          "z": 504,
+          "text": "沿金线继续 · 约 31 米"
+        },
+        {
+          "index": 8,
+          "x": -336,
+          "y": 51.800000000000004,
+          "z": 480,
+          "text": "沿金线继续 · 约 57 米"
+        },
+        {
+          "index": 13,
+          "x": -312,
+          "y": 55.6,
+          "z": 464,
+          "text": "沿金线继续 · 约 86 米"
+        },
+        {
+          "index": 15,
+          "x": -312,
+          "y": 62.6,
+          "z": 416,
+          "text": "沿金线继续 · 约 122 米"
+        }
+      ]
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "planned-ground-route",
+      "source": "src/journey.ts",
+      "sourceSHA256": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+      "from": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "targetId": "academy-b13-door",
+      "points": [
+        {
+          "x": -380,
+          "y": 50,
+          "z": 517
+        },
+        {
+          "x": -380,
+          "y": 49.7,
+          "z": 512
+        },
+        {
+          "x": -376,
+          "y": 49.800000000000004,
+          "z": 512
+        },
+        {
+          "x": -352,
+          "y": 50.6,
+          "z": 512
+        },
+        {
+          "x": -352,
+          "y": 50.800000000000004,
+          "z": 504
+        },
+        {
+          "x": -344,
+          "y": 51,
+          "z": 504
+        },
+        {
+          "x": -344,
+          "y": 51.2,
+          "z": 496
+        },
+        {
+          "x": -336,
+          "y": 51.400000000000006,
+          "z": 496
+        },
+        {
+          "x": -336,
+          "y": 51.800000000000004,
+          "z": 480
+        },
+        {
+          "x": -328,
+          "y": 52,
+          "z": 480
+        },
+        {
+          "x": -328,
+          "y": 52.400000000000006,
+          "z": 464
+        },
+        {
+          "x": -330,
+          "y": 52.6,
+          "z": 460
+        },
+        {
+          "x": -328,
+          "y": 53.2,
+          "z": 464
+        },
+        {
+          "x": -312,
+          "y": 55.6,
+          "z": 464
+        },
+        {
+          "x": -312,
+          "y": 59,
+          "z": 440
+        },
+        {
+          "x": -312,
+          "y": 62.6,
+          "z": 416
+        },
+        {
+          "x": -312,
+          "y": 66,
+          "z": 392
+        },
+        {
+          "x": -312,
+          "y": 69.4,
+          "z": 368
+        },
+        {
+          "x": -288,
+          "y": 73,
+          "z": 368
+        },
+        {
+          "x": -288,
+          "y": 74.2,
+          "z": 360
+        },
+        {
+          "x": -280,
+          "y": 75.2,
+          "z": 360
+        },
+        {
+          "x": -280,
+          "y": 78.60000000000001,
+          "z": 336.8
+        },
+        {
+          "x": -280,
+          "y": 82,
+          "z": 313.8
+        },
+        {
+          "x": -280,
+          "y": 85.4,
+          "z": 290.6
+        },
+        {
+          "x": -280,
+          "y": 88.60000000000001,
+          "z": 267.6
+        },
+        {
+          "x": -280,
+          "y": 92,
+          "z": 244.4
+        },
+        {
+          "x": -280,
+          "y": 95.4,
+          "z": 221.4
+        },
+        {
+          "x": -280,
+          "y": 98.80000000000001,
+          "z": 198.20000000000002
+        },
+        {
+          "x": -280,
+          "y": 102,
+          "z": 175.20000000000002
+        },
+        {
+          "x": -280,
+          "y": 105.4,
+          "z": 152
+        },
+        {
+          "x": -280,
+          "y": 108.80000000000001,
+          "z": 128.8
+        },
+        {
+          "x": -280,
+          "y": 112.2,
+          "z": 105.80000000000001
+        },
+        {
+          "x": -280,
+          "y": 115.4,
+          "z": 82.60000000000001
+        },
+        {
+          "x": -280,
+          "y": 118.80000000000001,
+          "z": 59.6
+        },
+        {
+          "x": -280,
+          "y": 122.2,
+          "z": 36.4
+        },
+        {
+          "x": -280,
+          "y": 125.60000000000001,
+          "z": 13.4
+        },
+        {
+          "x": -280,
+          "y": 128.8,
+          "z": -9.8
+        },
+        {
+          "x": -280,
+          "y": 132.20000000000002,
+          "z": -32.800000000000004
+        },
+        {
+          "x": -280,
+          "y": 135.6,
+          "z": -56
+        },
+        {
+          "x": -288,
+          "y": 136.8,
+          "z": -56
+        },
+        {
+          "x": -288,
+          "y": 140,
+          "z": -78.60000000000001
+        },
+        {
+          "x": -288,
+          "y": 143.4,
+          "z": -101.4
+        },
+        {
+          "x": -288,
+          "y": 146.6,
+          "z": -124
+        },
+        {
+          "x": -288,
+          "y": 149.8,
+          "z": -146.6
+        },
+        {
+          "x": -288,
+          "y": 153.20000000000002,
+          "z": -169.4
+        },
+        {
+          "x": -288,
+          "y": 156.4,
+          "z": -192
+        },
+        {
+          "x": -264,
+          "y": 160,
+          "z": -192
+        },
+        {
+          "x": -264,
+          "y": 163.20000000000002,
+          "z": -214
+        },
+        {
+          "x": -264,
+          "y": 166.20000000000002,
+          "z": -236
+        },
+        {
+          "x": -264,
+          "y": 169.4,
+          "z": -258
+        },
+        {
+          "x": -264,
+          "y": 172.60000000000002,
+          "z": -280
+        },
+        {
+          "x": -280,
+          "y": 175,
+          "z": -280
+        },
+        {
+          "x": -280,
+          "y": 177.4,
+          "z": -296
+        },
+        {
+          "x": -280,
+          "y": 179.60000000000002,
+          "z": -312
+        },
+        {
+          "x": -288,
+          "y": 180.8,
+          "z": -312
+        },
+        {
+          "x": -288,
+          "y": 183.20000000000002,
+          "z": -328
+        },
+        {
+          "x": -296,
+          "y": 184.20000000000002,
+          "z": -328
+        },
+        {
+          "x": -296,
+          "y": 187.8,
+          "z": -352
+        },
+        {
+          "x": -304,
+          "y": 189,
+          "z": -352
+        },
+        {
+          "x": -304,
+          "y": 190,
+          "z": -360
+        },
+        {
+          "x": -320,
+          "y": 192.4,
+          "z": -360
+        },
+        {
+          "x": -320,
+          "y": 193.60000000000002,
+          "z": -368
+        },
+        {
+          "x": -336,
+          "y": 195.8,
+          "z": -368
+        },
+        {
+          "x": -336,
+          "y": 197,
+          "z": -376
+        },
+        {
+          "x": -352,
+          "y": 199.4,
+          "z": -376
+        },
+        {
+          "x": -352,
+          "y": 200.4,
+          "z": -384
+        },
+        {
+          "x": -360,
+          "y": 201.60000000000002,
+          "z": -384
+        },
+        {
+          "x": -360,
+          "y": 202.8,
+          "z": -392
+        },
+        {
+          "x": -368,
+          "y": 204,
+          "z": -392
+        },
+        {
+          "x": -370,
+          "y": 206.6,
+          "z": -410
+        },
+        {
+          "x": -376,
+          "y": 206.4,
+          "z": -408
+        },
+        {
+          "x": -376,
+          "y": 206.20000000000002,
+          "z": -400
+        },
+        {
+          "x": -400,
+          "y": 205.60000000000002,
+          "z": -400
+        },
+        {
+          "x": -424,
+          "y": 205,
+          "z": -400
+        },
+        {
+          "x": -448,
+          "y": 204.4,
+          "z": -400
+        },
+        {
+          "x": -472,
+          "y": 203.8,
+          "z": -400
+        },
+        {
+          "x": -472,
+          "y": 203.4,
+          "z": -384
+        },
+        {
+          "x": -492,
+          "y": 203,
+          "z": -384
+        },
+        {
+          "x": -512,
+          "y": 202.4,
+          "z": -384
+        },
+        {
+          "x": -512,
+          "y": 202.20000000000002,
+          "z": -376
+        },
+        {
+          "x": -536,
+          "y": 201.8,
+          "z": -376
+        },
+        {
+          "x": -536,
+          "y": 201.20000000000002,
+          "z": -352
+        },
+        {
+          "x": -536,
+          "y": 200.60000000000002,
+          "z": -328
+        },
+        {
+          "x": -536,
+          "y": 200,
+          "z": -304
+        },
+        {
+          "x": -536,
+          "y": 199.4,
+          "z": -280
+        },
+        {
+          "x": -536,
+          "y": 198.8,
+          "z": -256
+        },
+        {
+          "x": -540,
+          "y": 198.60000000000002,
+          "z": -260
+        },
+        {
+          "x": -536,
+          "y": 198.60000000000002,
+          "z": -256
+        },
+        {
+          "x": -536,
+          "y": 198.20000000000002,
+          "z": -276
+        },
+        {
+          "x": -536,
+          "y": 197.8,
+          "z": -296
+        },
+        {
+          "x": -555.2,
+          "y": 197.4,
+          "z": -296
+        },
+        {
+          "x": -574.2,
+          "y": 197.20000000000002,
+          "z": -296
+        },
+        {
+          "x": -593.4,
+          "y": 196.8,
+          "z": -296
+        },
+        {
+          "x": -593.4,
+          "y": 196.60000000000002,
+          "z": -306.6
+        }
+      ],
+      "edgeIds": [
+        "road-market-quarter-1-market-station",
+        "road-market-station-academy-station",
+        "road-academy-quarter-1-academy-station",
+        "road-academy-b13-door-academy-quarter-1"
+      ],
+      "metres": 1620.9805148414462,
+      "scope": "Pure production road/bridge planner using the public current body; no browser state or position writes."
+    }
+  ],
+  "errors": [],
+  "failure": "mouse.down: Target page, context or browser has been closed\n    at turn (/workspace/yunshan/scripts/player-journey.mjs:281:53)\n    at async walkPoint (/workspace/yunshan/scripts/player-journey.mjs:315:7)\n    at async walkToNode (/workspace/yunshan/scripts/player-journey.mjs:349:47)\n    at async enter (/workspace/yunshan/scripts/player-journey.mjs:362:5)\n    at async run (/workspace/yunshan/scripts/player-journey.mjs:491:23)\n    at async <anonymous> (/workspace/yunshan/scripts/player-journey.mjs:167:6)"
+}

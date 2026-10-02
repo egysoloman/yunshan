@@ -1,0 +1,1964 @@
+{
+  "status": "passed",
+  "scope": "Linux Chromium SwiftShader fixed pixelRatio1/FOV48/noon/1440x900 optical inspection; camera poses match macro6, old adaptive resolution images remain distinct. Not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-n3tM-54D.js",
+  "buildHash": "ebdd21602dfac48e4dfb958ec980f4fa8ddc24d543eb6739c92a3c5d9c38067b",
+  "sourceHashes": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "01e3de8c9e07d9970aa14f3fb94a52cf135c3ca83f6034fb3f1b73303824e957",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "sourceHashesAfter": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/journey.ts": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/rendering/architecture-detail.ts": "01e3de8c9e07d9970aa14f3fb94a52cf135c3ca83f6034fb3f1b73303824e957",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "startupResidency": {
+    "stats": {
+      "resident": 11,
+      "total": 482,
+      "created": 11,
+      "released": 0,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 11,
+    "actualMeshes": 104,
+    "actualInstances": 18998,
+    "ownedGeometryCount": 104,
+    "interiorBuildingRefs": 17,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [
+      {
+        "id": "-4:5",
+        "buildings": [
+          "market-b41"
+        ]
+      },
+      {
+        "id": "-3:4",
+        "buildings": [
+          "market-b26",
+          "market-b50"
+        ]
+      },
+      {
+        "id": "-3:5",
+        "buildings": [
+          "market-b35"
+        ]
+      },
+      {
+        "id": "-4:4",
+        "buildings": [
+          "market-b54"
+        ]
+      },
+      {
+        "id": "-5:5",
+        "buildings": [
+          "market-b21",
+          "market-b37"
+        ]
+      },
+      {
+        "id": "-4:6",
+        "buildings": [
+          "market-b31"
+        ]
+      },
+      {
+        "id": "-5:4",
+        "buildings": [
+          "market-b28"
+        ]
+      },
+      {
+        "id": "-2:4",
+        "buildings": [
+          "market-b22"
+        ]
+      },
+      {
+        "id": "-5:6",
+        "buildings": [
+          "market-b1",
+          "market-b17"
+        ]
+      },
+      {
+        "id": "-5:3",
+        "buildings": [
+          "market-b0",
+          "market-b4",
+          "market-b24"
+        ]
+      },
+      {
+        "id": "-3:3",
+        "buildings": [
+          "market-b6",
+          "market-b10"
+        ]
+      }
+    ],
+    "observed": {
+      "creates": 0,
+      "releases": 0,
+      "geometryDisposals": 0,
+      "instanceDisposals": 0,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 534,
+      "textures": 10
+    }
+  },
+  "consoleWarnings": [],
+  "captures": [
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 564,
+      "triangles": 576252,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 564,
+          "triangles": 576252
+        },
+        "totalPass": {
+          "calls": 564,
+          "triangles": 576252
+        },
+        "shadowCalls": 0,
+        "shadowTriangles": 0,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 0,
+          "total": 482,
+          "created": 11,
+          "released": 11,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 0,
+        "actualMeshes": 0,
+        "actualInstances": 0,
+        "ownedGeometryCount": 0,
+        "interiorBuildingRefs": 0,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [],
+        "observed": {
+          "creates": 0,
+          "releases": 11,
+          "geometryDisposals": 104,
+          "instanceDisposals": 104,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 519,
+          "textures": 4
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 5,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 0,
+        "activeBuildingIds": [],
+        "instances": 0,
+        "created": 8,
+        "released": 8,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 0,
+          "cachedFineTiles": 9,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": false,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 1
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫"
+      ]
+    },
+    {
+      "name": "market-street",
+      "hour": 12,
+      "eye": [
+        -464.40000000000003,
+        72.32000000000001,
+        327
+      ],
+      "target": [
+        -469.40000000000003,
+        74,
+        292.40000000000003
+      ],
+      "buildingId": "market-b0",
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 434,
+      "triangles": 594266,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 434,
+          "triangles": 594266
+        },
+        "totalPass": {
+          "calls": 500,
+          "triangles": 742864
+        },
+        "shadowCalls": 66,
+        "shadowTriangles": 148598,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 7,
+          "total": 482,
+          "created": 18,
+          "released": 11,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 7,
+        "actualMeshes": 66,
+        "actualInstances": 9521,
+        "ownedGeometryCount": 66,
+        "interiorBuildingRefs": 10,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [
+          {
+            "id": "-5:3",
+            "buildings": [
+              "market-b0",
+              "market-b4",
+              "market-b24"
+            ]
+          },
+          {
+            "id": "-6:2",
+            "buildings": [
+              "market-b20",
+              "market-b44"
+            ]
+          },
+          {
+            "id": "-6:4",
+            "buildings": [
+              "market-b8"
+            ]
+          },
+          {
+            "id": "-4:4",
+            "buildings": [
+              "market-b54"
+            ]
+          },
+          {
+            "id": "-5:4",
+            "buildings": [
+              "market-b28"
+            ]
+          },
+          {
+            "id": "-5:1",
+            "buildings": [
+              "market-b74"
+            ]
+          },
+          {
+            "id": "-4:3",
+            "buildings": [
+              "market-b30"
+            ]
+          }
+        ],
+        "observed": {
+          "creates": 7,
+          "releases": 11,
+          "geometryDisposals": 104,
+          "instanceDisposals": 104,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 603,
+          "textures": 9
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 5,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 24,
+          "usedTimes": 2,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "market-b0",
+          "market-b4",
+          "market-b24",
+          "market-b20",
+          "market-b8",
+          "market-b54",
+          "market-b44",
+          "market-b28"
+        ],
+        "instances": 3246,
+        "created": 16,
+        "released": 8,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 16,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 3
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫"
+      ]
+    },
+    {
+      "name": "residential-first-person",
+      "hour": 12,
+      "eye": [
+        -1197,
+        316.32000000000005,
+        -686.6
+      ],
+      "target": [
+        -1202,
+        318,
+        -721.8000000000001
+      ],
+      "buildingId": "west-b0",
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 146,
+      "triangles": 298552,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 146,
+          "triangles": 298552
+        },
+        "totalPass": {
+          "calls": 228,
+          "triangles": 435222
+        },
+        "shadowCalls": 82,
+        "shadowTriangles": 136670,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 7,
+          "total": 482,
+          "created": 25,
+          "released": 18,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 7,
+        "actualMeshes": 73,
+        "actualInstances": 8811,
+        "ownedGeometryCount": 73,
+        "interiorBuildingRefs": 13,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [
+          {
+            "id": "-13:-8",
+            "buildings": [
+              "west-b0"
+            ]
+          },
+          {
+            "id": "-12:-7",
+            "buildings": [
+              "west-b24",
+              "west-b50"
+            ]
+          },
+          {
+            "id": "-13:-7",
+            "buildings": [
+              "west-b4"
+            ]
+          },
+          {
+            "id": "-12:-8",
+            "buildings": [
+              "west-b54",
+              "west-b68"
+            ]
+          },
+          {
+            "id": "-13:-9",
+            "buildings": [
+              "west-b20",
+              "west-b44"
+            ]
+          },
+          {
+            "id": "-14:-7",
+            "buildings": [
+              "west-b8",
+              "west-b37"
+            ]
+          },
+          {
+            "id": "-13:-6",
+            "buildings": [
+              "west-b41",
+              "west-b48",
+              "west-b75"
+            ]
+          }
+        ],
+        "observed": {
+          "creates": 14,
+          "releases": 18,
+          "geometryDisposals": 170,
+          "instanceDisposals": 170,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 619,
+          "textures": 11
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 5,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 25,
+          "usedTimes": 3,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "west-b0",
+          "west-b24",
+          "west-b4",
+          "west-b54",
+          "west-b20",
+          "west-b50",
+          "west-b44",
+          "west-b37"
+        ],
+        "instances": 3536,
+        "created": 24,
+        "released": 16,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 3
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫"
+      ]
+    },
+    {
+      "name": "bridge-structure",
+      "hour": 12,
+      "eye": [
+        -648,
+        40.6,
+        982
+      ],
+      "target": [
+        -648,
+        18.6,
+        1040
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 142,
+      "triangles": 293630,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 142,
+          "triangles": 293630
+        },
+        "totalPass": {
+          "calls": 208,
+          "triangles": 384084
+        },
+        "shadowCalls": 66,
+        "shadowTriangles": 90454,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 7,
+          "total": 482,
+          "created": 32,
+          "released": 25,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 7,
+        "actualMeshes": 66,
+        "actualInstances": 4688,
+        "ownedGeometryCount": 66,
+        "interiorBuildingRefs": 10,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [
+          {
+            "id": "-7:10",
+            "buildings": [
+              "river-b50"
+            ]
+          },
+          {
+            "id": "-8:10",
+            "buildings": [
+              "river-b48",
+              "river-b59"
+            ]
+          },
+          {
+            "id": "-8:9",
+            "buildings": [
+              "river-b30"
+            ]
+          },
+          {
+            "id": "-7:9",
+            "buildings": [
+              "river-b6",
+              "river-b26"
+            ]
+          },
+          {
+            "id": "-7:11",
+            "buildings": [
+              "river-b15"
+            ]
+          },
+          {
+            "id": "-6:10",
+            "buildings": [
+              "river-b39"
+            ]
+          },
+          {
+            "id": "-9:10",
+            "buildings": [
+              "river-b28",
+              "river-b45"
+            ]
+          }
+        ],
+        "observed": {
+          "creates": 21,
+          "releases": 25,
+          "geometryDisposals": 243,
+          "instanceDisposals": 243,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 654,
+          "textures": 10
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 5,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 26,
+          "usedTimes": 2,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "river-b50",
+          "river-b59",
+          "river-b30",
+          "river-b26",
+          "river-b48",
+          "river-b6",
+          "river-b15",
+          "river-b39"
+        ],
+        "instances": 3300,
+        "created": 32,
+        "released": 24,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 2
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "细部 · 清溪水岸·东岚院·里居13",
+        "细部 · 清溪水岸·南坡院·商肆15",
+        "细部 · 清溪水岸·东岚院·商肆8",
+        "细部 · 清溪水岸·东岚院·渡口7",
+        "细部 · 清溪水岸·北岭院·渡口13",
+        "细部 · 清溪水岸·东岚院·梯田农舍2",
+        "细部 · 清溪水岸·南坡院·里居4",
+        "细部 · 清溪水岸·南坡院·渡口10"
+      ]
+    },
+    {
+      "name": "bridge-walk-center",
+      "hour": 12,
+      "eye": [
+        -648,
+        20.32,
+        1040
+      ],
+      "target": [
+        -690.6,
+        20.32,
+        1040
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 196,
+      "triangles": 313002,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 196,
+          "triangles": 313002
+        },
+        "totalPass": {
+          "calls": 265,
+          "triangles": 397520
+        },
+        "shadowCalls": 69,
+        "shadowTriangles": 84518,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 9,
+          "total": 482,
+          "created": 34,
+          "released": 25,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 9,
+        "actualMeshes": 84,
+        "actualInstances": 5597,
+        "ownedGeometryCount": 84,
+        "interiorBuildingRefs": 13,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [
+          {
+            "id": "-7:10",
+            "buildings": [
+              "river-b50"
+            ]
+          },
+          {
+            "id": "-8:10",
+            "buildings": [
+              "river-b48",
+              "river-b59"
+            ]
+          },
+          {
+            "id": "-8:9",
+            "buildings": [
+              "river-b30"
+            ]
+          },
+          {
+            "id": "-7:9",
+            "buildings": [
+              "river-b6",
+              "river-b26"
+            ]
+          },
+          {
+            "id": "-7:11",
+            "buildings": [
+              "river-b15"
+            ]
+          },
+          {
+            "id": "-6:10",
+            "buildings": [
+              "river-b39"
+            ]
+          },
+          {
+            "id": "-9:10",
+            "buildings": [
+              "river-b28",
+              "river-b45"
+            ]
+          },
+          {
+            "id": "-8:11",
+            "buildings": [
+              "river-b35"
+            ]
+          },
+          {
+            "id": "-7:12",
+            "buildings": [
+              "river-b7",
+              "river-b11"
+            ]
+          }
+        ],
+        "observed": {
+          "creates": 23,
+          "releases": 25,
+          "geometryDisposals": 243,
+          "instanceDisposals": 243,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 723,
+          "textures": 11
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 5,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 27,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 28,
+          "usedTimes": 1,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "river-b50",
+          "river-b59",
+          "river-b15",
+          "river-b35",
+          "river-b48",
+          "river-b30",
+          "river-b39",
+          "river-b11"
+        ],
+        "instances": 2948,
+        "created": 40,
+        "released": 32,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 2
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "细部 · 清溪水岸·东岚院·里居13",
+        "细部 · 清溪水岸·南坡院·商肆15",
+        "细部 · 清溪水岸·南坡院·里居4",
+        "细部 · 清溪水岸·南坡院·梯田农舍9",
+        "细部 · 清溪水岸·北岭院·渡口13",
+        "细部 · 清溪水岸·东岚院·商肆8",
+        "细部 · 清溪水岸·南坡院·渡口10",
+        "细部 · 清溪水岸·南坡院·商肆3"
+      ]
+    },
+    {
+      "name": "bridge-public-road",
+      "hour": 12,
+      "eye": [
+        -664,
+        20.32,
+        1052
+      ],
+      "target": [
+        -638,
+        23,
+        1040
+      ],
+      "opticalSettings": {
+        "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; same camera poses as macro6. Prior adaptive-resolution PNGs remain separate evidence.",
+        "pixelRatio": 1,
+        "fov": 48,
+        "aspect": 1.6,
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "worldSeed": 20261001,
+        "worldLayout": "current-v3"
+      },
+      "drawCalls": 720,
+      "triangles": 760782,
+      "shadowSubmission": {
+        "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+        "colourPass": {
+          "calls": 720,
+          "triangles": 760782
+        },
+        "totalPass": {
+          "calls": 787,
+          "triangles": 838748
+        },
+        "shadowCalls": 67,
+        "shadowTriangles": 77966,
+        "pixelRatio": 1
+      },
+      "glErrors": [],
+      "residency": {
+        "stats": {
+          "resident": 9,
+          "total": 482,
+          "created": 34,
+          "released": 25,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        },
+        "actualSceneGroups": 9,
+        "actualMeshes": 84,
+        "actualInstances": 5597,
+        "ownedGeometryCount": 84,
+        "interiorBuildingRefs": 13,
+        "hiddenFarMismatch": 0,
+        "residentChunks": [
+          {
+            "id": "-7:10",
+            "buildings": [
+              "river-b50"
+            ]
+          },
+          {
+            "id": "-8:10",
+            "buildings": [
+              "river-b48",
+              "river-b59"
+            ]
+          },
+          {
+            "id": "-8:9",
+            "buildings": [
+              "river-b30"
+            ]
+          },
+          {
+            "id": "-7:9",
+            "buildings": [
+              "river-b6",
+              "river-b26"
+            ]
+          },
+          {
+            "id": "-7:11",
+            "buildings": [
+              "river-b15"
+            ]
+          },
+          {
+            "id": "-6:10",
+            "buildings": [
+              "river-b39"
+            ]
+          },
+          {
+            "id": "-9:10",
+            "buildings": [
+              "river-b28",
+              "river-b45"
+            ]
+          },
+          {
+            "id": "-8:11",
+            "buildings": [
+              "river-b35"
+            ]
+          },
+          {
+            "id": "-7:12",
+            "buildings": [
+              "river-b7",
+              "river-b11"
+            ]
+          }
+        ],
+        "observed": {
+          "creates": 23,
+          "releases": 25,
+          "geometryDisposals": 243,
+          "instanceDisposals": 243,
+          "initialWatchedGroups": 11
+        },
+        "gpuMemory": {
+          "geometries": 853,
+          "textures": 11
+        }
+      },
+      "shaderPrograms": [
+        {
+          "id": 0,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 1,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 2,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 3,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 4,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 5,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 6,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 7,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 8,
+          "usedTimes": 8,
+          "diagnostics": null
+        },
+        {
+          "id": 9,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 10,
+          "usedTimes": 6,
+          "diagnostics": null
+        },
+        {
+          "id": 11,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 12,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 13,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 14,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 23,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 16,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 17,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 18,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 19,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 20,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 21,
+          "usedTimes": 2,
+          "diagnostics": null
+        },
+        {
+          "id": 22,
+          "usedTimes": 1,
+          "diagnostics": null
+        },
+        {
+          "id": 27,
+          "usedTimes": 3,
+          "diagnostics": null
+        },
+        {
+          "id": 28,
+          "usedTimes": 1,
+          "diagnostics": null
+        }
+      ],
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "river-b50",
+          "river-b59",
+          "river-b15",
+          "river-b35",
+          "river-b48",
+          "river-b30",
+          "river-b11",
+          "river-b45"
+        ],
+        "instances": 3002,
+        "created": 41,
+        "released": 33,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180,
+        "lanternEmission": 0.05315558591507113
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "woodland": {
+          "stands": 122,
+          "trees": 5200,
+          "canopyLayers": 4,
+          "farCanopyLayers": 2,
+          "distribution": "continuous district rim belts and mountain shoulders",
+          "floatingRockBodies": 0
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true,
+          "proxyStep": 16,
+          "proxyChunkMetres": 384,
+          "forestDetailChunks": 2
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭飞沫 · 落水冲击雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "细部 · 清溪水岸·东岚院·里居13",
+        "细部 · 清溪水岸·南坡院·商肆15",
+        "细部 · 清溪水岸·南坡院·里居4",
+        "细部 · 清溪水岸·南坡院·梯田农舍9",
+        "细部 · 清溪水岸·北岭院·渡口13",
+        "细部 · 清溪水岸·东岚院·商肆8",
+        "细部 · 清溪水岸·南坡院·商肆3",
+        "细部 · 清溪水岸·西溪院·渡口12"
+      ]
+    }
+  ],
+  "errors": []
+}

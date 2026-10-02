@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "ticks": 10080,
+  "sourceCount": 32,
+  "auditSourceCount": 13,
+  "sourceStable": true,
+  "coreSHA": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+  "NPC": {
+    "total": 616,
+    "alive": 616,
+    "meanHunger": 29.928246753246746,
+    "meanHealth": 86.18449490478211,
+    "poor": 111,
+    "hungryUnder20": 304,
+    "cashRichStarving": 276,
+    "noStoredMeal": 449,
+    "depletedWorkers": 367
+  },
+  "playerAlive": false,
+  "treasury": 11198.788716185003,
+  "moneyResidual": -3.702007234096527e-08,
+  "fiscalResidual": -4.0196027839556336e-08,
+  "freight": {
+    "initialVehicleCargo": 1744,
+    "loadedUnits": 6825.173930101232,
+    "unloadedUnits": 8569.173930101233,
+    "finalVehicleCargo": 0,
+    "cargoResidual": -1.8189894035458565e-12
+  },
+  "actualLoads": 294,
+  "actualCarriers": 44,
+  "everyPickupPhysical": true,
+  "food": {
+    "initial": 17954,
+    "new": 2745.0657008327216,
+    "consumed": 11641,
+    "final": 9058.065700832723,
+    "residual": -1.8189894035458565e-12,
+    "dailyNew": 196.07612148805154,
+    "dailyIdealNeed": 852.9230769230769
+  },
+  "materials": {
+    "initial": 4860,
+    "new": 6332.6247395899945,
+    "consumed": 9305.517255806582,
+    "final": 1887.1074837831482,
+    "residual": 2.6489033189136535e-10
+  },
+  "access": {
+    "poorWalletForEveryInStockFood": 0,
+    "noStockInOwnDistrict": 268,
+    "noOpenStockInOwnDistrict": 268,
+    "noRouteToAnyAffordableOpenFood": 0,
+    "blockedOnlyBy1200CrossDistrict": 236,
+    "nearestActualAffordableOpenFoodOver500": 274,
+    "nearestActualAffordableOpenFoodOver1000": 274,
+    "nearestActualAffordableOpenFoodOver2500": 254,
+    "currentlyChoosingEat": 46,
+    "otherActivityWithNoAdvertisedFood": 226,
+    "advertisedFoodUnsellable": 0
+  },
+  "trend": {
+    "cashChangePercent": 15.981071788719326,
+    "unpaidPrivateWages": 283.3504495234665,
+    "steadyStateEstablished": false
+  },
+  "scope": "Existing fourteen-day guards pass; public/food-access deficits remain, new30/60 not run."
+}

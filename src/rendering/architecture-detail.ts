@@ -154,11 +154,11 @@ export function buildArchitectureDetails(building: Building, nearFloor = 0, limi
         }
       }
     } else if (building.kind === 'market') {
-      for (let n = -3; n <= 3; n++) box('program', bay + n * .4, 1.05, front + 2.1, .2, 1.4, .2, n % 2 ? WOOD : EDGE);
-      for (const y of [.4, 1.7]) box('program', bay, y, front + 2.2, 3.2, .2, .4, WOOD);
+      // Counter solids come from the shared site-fixture geometry. Fixed high
+      // fences and painted produce here would contradict its body clearance
+      // and the live market's stock, which MarketGoodsPool displays separately.
       box('program', bay, 3.35, front + 4.5, 3.2, .2, .2, EDGE);
       for (let n = -2; n <= 2; n++) box('program', bay + n * .6, 3.15, front + 4.5, .4, .4, .2, n % 2 ? '#c4a16b' : '#846548');
-      for (let crate = 0; crate < 3; crate++) for (let item = 0; item < 4; item++) box('program', bay + (crate - 1) * 1.3 + (item % 2 - .5) * .2, 2.4 + Math.floor(item / 2) * .2, front + 1.4, .2, .2, .2, crate === 0 ? '#aa654d' : crate === 1 ? '#bfa063' : '#73874d');
     } else if (building.kind === 'workshop' || building.kind === 'farm' || building.kind === 'dock') {
       for (const x of [-1.3, 1.3]) box('program', bay + x, 1.4, front + 3.1, .2, 2.8, .2, WOOD);
       for (const y of [.5, 1.3, 2.2]) { box('program', bay, y, front + 3.1, 3, .2, 1, EDGE); for (let slat = -2; slat <= 2; slat++) box('program', bay + slat * .6, y + .3, front + 3.45, .4, .4, .4, '#9c8660'); }

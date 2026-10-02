@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "scope": "Same actual provider/controller cabinet-side fixture as immutable03 failure. Shared guard now rejects both planners explicitly; no claimed terrain detour.",
+  "sourceCount": 89,
+  "sourceHashesStable": true,
+  "counter": {
+    "id": "test-market-counter-west",
+    "buildingId": "test-market",
+    "position": {
+      "x": -9.600000000000001,
+      "z": 13.200000000000001,
+      "y": 0.5
+    },
+    "localPosition": {
+      "x": -9.600000000000001,
+      "y": 0.5,
+      "z": 13.200000000000001
+    },
+    "size": {
+      "x": 3.2,
+      "y": 1,
+      "z": 1.2
+    },
+    "rotation": 0
+  },
+  "actualFrom": {
+    "x": -13.200000000000001,
+    "y": 0,
+    "z": 13.200000000000001
+  },
+  "walking": null,
+  "transit": null,
+  "unchangedWorldAndPlayer": true,
+  "actualController": {
+    "key": "KeyW",
+    "steps": 100,
+    "dt": 0.1,
+    "actualFinal": {
+      "x": -11.76,
+      "y": 0,
+      "z": 13.200000000000001
+    },
+    "unreachedProjection": {
+      "x": 0,
+      "y": 0.6,
+      "z": 13.200000000000001
+    }
+  },
+  "oldPlannerHadCrossing": true
+}
