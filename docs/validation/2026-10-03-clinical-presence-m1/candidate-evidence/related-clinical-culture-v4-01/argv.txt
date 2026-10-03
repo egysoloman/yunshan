@@ -1,0 +1,8 @@
+node
+--import
+tsx
+--test
+--test-isolation=none
+tests/clinical.test.ts
+tests/culture.test.ts
+tests/v4-services.test.ts

@@ -1,0 +1,147 @@
+✖ paid care does not credit a funded doctor on another real public floor (272.537035ms)
+✖ paid care resumes at the shared ground station for twenty new actual minutes, retaining its one purchase (284.705722ms)
+✖ a material-backed public order does not count a doctor on a different supported public floor (167.035305ms)
+✖ one matching doctor still has only two slots shared by public and paid patients (203.149232ms)
+✔ unmarked paid care keeps the old cross-floor contract and exact continuation (641.610584ms)
+✖ a saved placed cube blocks the live station volume without erasing six already earned treatment minutes (159.399767ms)
+✖ earlier unmatched public patients do not starve later same-station patients or widen two real doctor slots (242.17968ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 1
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2310.412533
+
+✖ failing tests:
+
+test at tests/clinical-presence-regression.test.ts:1:295
+✖ paid care does not credit a funded doctor on another real public floor (272.537035ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:11:43)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/clinical-presence-regression.test.ts:1:1038
+✖ paid care resumes at the shared ground station for twenty new actual minutes, retaining its one purchase (284.705722ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:22:43)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/clinical-presence-regression.test.ts:1:2014
+✖ a material-backed public order does not count a doctor on a different supported public floor (167.035305ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:34:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/clinical-presence-regression.test.ts:1:2522
+✖ one matching doctor still has only two slots shared by public and paid patients (203.149232ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:42:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/clinical-presence-regression.test.ts:1:3838
+✖ a saved placed cube blocks the live station volume without erasing six already earned treatment minutes (159.399767ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:58:35)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/clinical-presence-regression.test.ts:1:5883
+✖ earlier unmatched public patients do not starve later same-station patients or widen two real doctor slots (242.17968ms)
+  AssertionError [ERR_ASSERTION]: actual people-phase attendance must establish funded duty
+  
+  false !== true
+  
+      at setup (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts:63:27)
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts:84:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,57 @@
+{
+  "atUTC": "2026-10-03T02:07:00.625690+00:00",
+  "baseGit": "7a49f670e40820d0b89ca433cff0e38c9f63db92",
+  "method": "Assert exact old/new file hashes, preserve other source; copy only 3 reviewed runtime files + 3 new test/fixture files",
+  "changes": [
+    {
+      "path": "src/simulation/clinical.ts",
+      "originSHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "candidateSHA256": "7c5e112ff7b28ae3bc0e11169f5e918af1760b9c25ec1960bfbbc4e4045dffee",
+      "bytes": 31068
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "originSHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "candidateSHA256": "f6280b07d9b6b36de74c7b3320a60f9258c808776303cb88a3af6753372b6381",
+      "bytes": 50538
+    },
+    {
+      "path": "src/simulation.ts",
+      "originSHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+      "candidateSHA256": "bc00e75bb79aa593f00be637a86cb1e25da813bd74f90c241d3177753911d80b",
+      "bytes": 208809
+    },
+    {
+      "path": "tests/clinical-presence-fixture.ts",
+      "originSHA256": null,
+      "candidateSHA256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "bytes": 11041
+    },
+    {
+      "path": "tests/clinical-presence-regression.test.ts",
+      "originSHA256": null,
+      "candidateSHA256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "bytes": 8248
+    },
+    {
+      "path": "tests/clinical-presence-contract.test.ts",
+      "originSHA256": null,
+      "candidateSHA256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1",
+      "bytes": 13936
+    }
+  ],
+  "candidateSuccessfulScopes": [
+    "strict-05",
+    "candidate-sixteen-01 16/16",
+    "related-clinical-culture-v4-01 38/38",
+    "build-01"
+  ],
+  "rootCompositeValidation": "NOT_RUN_YET",
+  "doesNotClaim": [
+    "full npm",
+    "GPU/native14 result for medical source",
+    "Mac",
+    "default care coverage",
+    "whole goal complete"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "checkedAtUTC": "2026-10-03T02:15:56.441409+00:00",
+  "archive": "yunshan-M1-clinical-presence-coherent15-source-evidence-20261003.zip",
+  "bytes": 17762789,
+  "sha256": "64c23239c836060d5735bff327a3139002f0b94b5b5c554319206fe45b82c692",
+  "CRC": "PASS",
+  "members": 477,
+  "originalPayloadsDirectByteEqual": 474,
+  "xattrOrExtraBytes": 0,
+  "actualCredentialSignaturePatternsChecked": 7,
+  "actualMatches": 0,
+  "sourceBaseScopes": {
+    "actual14": {
+      "inputCount": 108,
+      "allCapturedInputsStillEqual": true,
+      "snapshotSHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb"
+    },
+    "coherent15": {
+      "inputCount": 111,
+      "allCapturedInputsStillEqual": true,
+      "snapshotSHA256": "81c0c69fe21d54c38aec04de703485799e320f1814fff9ef622eb0f2323dc367"
+    }
+  },
+  "candidate48": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+  "actualBaseline": "2 PASS / 5 behavior FAIL; first two invalid fixtures retained",
+  "rootIntegrated": "build + 97/97 actual; no whole npm/native medical/Mac/steady claim"
+}

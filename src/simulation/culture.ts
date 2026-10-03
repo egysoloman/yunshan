@@ -1,7 +1,7 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
 import { getBuildingBody } from '../architecture-floor-plan';
-import { clinicalHealthGain, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
+import { clinicalHealthGain, clinicalPairAtServiceStation, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
 
 export type WorkGenre = 'literature' | 'art';
@@ -117,10 +117,13 @@ export function installCulture(simulation: Simulation): void {
     }
     const present = readersAt(site).filter(person => !staff.some(worker => worker.id === person.id) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && !order.servedIds.includes(person.id) && (order.topic !== 'health' || state().extension!.actorProfiles[person.id].health < 95 && clinicalVisitDeadline(state(), person.id) <= now()));
     const playerPresent = culture().playerServiceId === order.id && alive('player') && atSite(site) && state().player.needs.hunger >= 40 && state().player.needs.fatigue >= 35 && !order.servedIds.includes('player') && (order.topic !== 'health' || state().extension!.actorProfiles.player.health < 95 && clinicalVisitDeadline(state(), 'player') <= now());
-    const ids = [...(playerPresent ? ['player'] : []), ...present.map(person => person.id)].slice(0, staff.length * (order.topic === 'health' ? 2 : 4));
+    const candidates = [...(playerPresent ? ['player'] : []), ...present.map(person => person.id)];
+    // An unmatched patient must not occupy the candidate prefix forever. Real
+    // health capacity is bounded by the shared per-doctor slot allocator below.
+    const ids = order.topic === 'health' ? candidates : candidates.slice(0, staff.length * 4);
     for (const id of ids) {
       if (order.receivedUnits - order.consumedUnits < 1 - 1e-7) break;
-      if (order.topic === 'health' && !staff.some(doctor => takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
+      if (order.topic === 'health' && !staff.some(doctor => clinicalPairAtServiceStation(simulation, site, doctor.id, id) && takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
       order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + minutes);
       if (order.serviceMinutes[id] < rule.minutes - 1e-7) continue;
       order.consumedUnits++; order.servedIds.push(id);

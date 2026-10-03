@@ -1,0 +1,34 @@
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+✔ same-floor distinct real stations do not pair or spend a doctor slot; two-metre station admission stays intact (73.649244ms)
+✔ marked station pairing requires public ACL and an actual supported .35m body (27.968452ms)
+✔ moving from a legitimate station preserves already earned partial treatment and exact save/24-tick continuation (604.98392ms)
+✔ default generated clinic has physically supported co-located points and only real doctors prefer its ground station (977.680143ms)
+✔ a failed preferred interior route still tries the original legal upper-floor fallback (523.264959ms)
+✔ no declared ground service station keeps the original legal work-point selection (321.639886ms)
+✔ a real default upper-floor doctor keeps the old legal target when a saved placed cube blocks ground (967.02404ms)
+✔ a ground route selected earlier is replanned without rebuild when a saved placed cube blocks its station (528.229554ms)
+✔ a clear work body within two metres does not prefer an obstructed or unsupported service centre (462.352998ms)
+✔ paid care does not credit a funded doctor on another real public floor (471.91529ms)
+✔ paid care resumes at the shared ground station for twenty new actual minutes, retaining its one purchase (336.427754ms)
+✔ a material-backed public order does not count a doctor on a different supported public floor (739.041153ms)
+✔ one matching doctor still has only two slots shared by public and paid patients (745.050204ms)
+✔ unmarked paid care keeps the old cross-floor contract and exact continuation (303.71605ms)
+✔ a saved placed cube blocks the live station volume without erasing six already earned treatment minutes (742.409204ms)
+✔ earlier unmatched public patients do not starve later same-station patients or widen two real doctor slots (738.218749ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11376.996234

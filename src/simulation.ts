@@ -5,6 +5,7 @@ import { installExtensions } from './simulation/extensions';
 import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
 import { installFamily, isCloseKin } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
+import { clinicalServiceStationsAtPosition } from './simulation/clinical';
 import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
@@ -815,12 +816,22 @@ export class Simulation implements SimulationAPI {
         : this.buildingFunctionPoints(destination);
       const points = availablePoints.filter(point => point.purpose === purpose && Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(destination, floor, person))
         && (action === 'work' || action === 'rest' || point.floor === 0) && !destination.floorUses?.[point.floor]?.includes('观景'));
+      // Real doctors can share the public ground diagnosis station with the
+      // existing patient route. Other clinic staff keep their original points.
+      const clinicalWork = action === 'work' && destination.kind === 'clinic' && ['医生', 'doctor'].includes(citizen.role);
+      const clinicalPoints = clinicalWork
+        ? points.filter(point => point.floor === 0 && clinicalServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
       const previousTarget = citizen.route?.at(-1);
-      if (!rebuild && citizen.destinationId === destination.id && previousTarget && points.some(point => distance(point.position, previousTarget) < 1e-8)) return;
-      const candidates = points.length ? [...points.slice(hash(`${citizen.id}:${destination.id}`) % points.length), ...points.slice(0, hash(`${citizen.id}:${destination.id}`) % points.length)] : [];
+      if (!rebuild && citizen.destinationId === destination.id && previousTarget && (clinicalWork ? clinicalPoints : points).some(point => distance(point.position, previousTarget) < 1e-8)) return;
+      const originalCandidates = points.length ? [...points.slice(hash(`${citizen.id}:${destination.id}`) % points.length), ...points.slice(0, hash(`${citizen.id}:${destination.id}`) % points.length)] : [];
+      const preferred = clinicalPoints.length ? [...clinicalPoints.slice(hash(`${citizen.id}:${destination.id}`) % clinicalPoints.length), ...clinicalPoints.slice(0, hash(`${citizen.id}:${destination.id}`) % clinicalPoints.length)] : [];
+      const candidates = [...preferred, ...originalCandidates.filter(point => !clinicalPoints.includes(point))];
       const presence = this.floorPlanPresence(destination, citizen.position);
-      let interior: Vec3[] | null = null;
-      for (const point of candidates) { interior = this.floorPlanRoute(destination, presence?.floor ?? 0, point.floor, presence ? citizen.position : destination.door, point.position); if (interior) break; }
+      let interior: Vec3[] | null = null, selected: BuildingFunctionPoint | undefined;
+      for (const point of candidates) { interior = this.floorPlanRoute(destination, presence?.floor ?? 0, point.floor, presence ? citizen.position : destination.door, point.position); if (interior) { selected = point; break; } }
+      // If a preferred station is physically unreachable, retain a still-valid
+      // old work route selected through the original fallback order.
+      if (!rebuild && citizen.destinationId === destination.id && previousTarget && selected && distance(selected.position, previousTarget) < 1e-8) return;
       if (presence) {
         citizen.destinationId = destination.id; citizen.route = interior ?? [copy(citizen.position)]; citizen.routeIndex = 1; citizen.state = interior ? 'moving' : 'unreachable'; return;
       }

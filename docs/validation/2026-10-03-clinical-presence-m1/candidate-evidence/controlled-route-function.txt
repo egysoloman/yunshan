@@ -1,0 +1,20 @@
+export function attachControls(sim: Simulation, controls: Controls): void {
+  const originalDestination = Reflect.get(sim, 'setDestination');
+  // Keep this controlled fixture at its explicitly declared real station.
+  // This only isolates pairing from route choice; core physical guards, finite
+  // employment allowance and actual registerAttendance still execute normally.
+  // The generated-world routing tests do not install these controls.
+  Reflect.set(sim, 'setDestination', (person: Citizen, destination: Building, rebuild = false) => {
+    const pin = controls.get(person.id);
+    if (pin?.siteId === destination.id) { person.destinationId = destination.id; person.route = [{ ...pin.position }]; person.routeIndex = 1; return; }
+    return originalDestination.call(sim, person, destination, rebuild);
+  });
+  sim.onPhase('traffic', () => {
+    for (const [id, pin] of controls) {
+      const person = sim.state.citizens.find(person => person.id === id)!;
+      person.position = { ...pin.position }; person.destinationId = pin.siteId; person.route = [{ ...pin.position }]; person.routeIndex = 1;
+      person.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+      runtime(sim).activities[id] = pin.activity; runtime(sim).decisionAt[id] = sim.state.day * 1440 + sim.state.hour * 60 + 10;
+    }
+  });
+}

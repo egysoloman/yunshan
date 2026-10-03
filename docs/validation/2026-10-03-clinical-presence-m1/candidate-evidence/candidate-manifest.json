@@ -1,0 +1,100 @@
+{
+  "status": "ISOLATED_FINAL_FUNCTIONAL_VERIFIED_NOT_SHARED_APPLIED",
+  "origin": "/tmp/yunshan-system-coherent-14/source",
+  "runtimeGO": true,
+  "proposedTestCount": 16,
+  "baselineActual": "original-seven-03 2 PASS 5 behavior FAIL; previous 0/7 and 1/7 were fixture failures",
+  "changes": [
+    {
+      "path": "src/simulation/clinical.ts",
+      "originSHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "candidateSHA256": "7c5e112ff7b28ae3bc0e11169f5e918af1760b9c25ec1960bfbbc4e4045dffee",
+      "bytes": 31068
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "originSHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "candidateSHA256": "f6280b07d9b6b36de74c7b3320a60f9258c808776303cb88a3af6753372b6381",
+      "bytes": 50538
+    },
+    {
+      "path": "01-shared-presence.patch",
+      "SHA256": "67c594b45abc11b6db0ea5176669013ccd5b927e222d9deccfc97bb410c2afd6"
+    },
+    {
+      "path": "src/simulation.ts",
+      "originSHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+      "candidateSHA256": "bc00e75bb79aa593f00be637a86cb1e25da813bd74f90c241d3177753911d80b",
+      "bytes": 208809
+    },
+    {
+      "path": "02-doctor-ground-routing.patch",
+      "SHA256": "9d5c04e91081b050c6844399d3cf856a95656792266d24eea27a939c53c075e0"
+    },
+    {
+      "path": "tests/clinical-presence-fixture.ts",
+      "originSHA256": null,
+      "candidateSHA256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "bytes": 11041
+    },
+    {
+      "path": "tests/clinical-presence-regression.test.ts",
+      "originSHA256": null,
+      "candidateSHA256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "bytes": 8248
+    },
+    {
+      "path": "tests/clinical-presence-contract.test.ts",
+      "originSHA256": null,
+      "candidateSHA256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1",
+      "bytes": 13936
+    },
+    {
+      "path": "03-proposed-tests.patch",
+      "SHA256": "4564cef19875c452720bb6a18367829f2befc707adad8cbb85c9a7d81f72482f"
+    }
+  ],
+  "actualFinalNewTests": {
+    "pass": 16,
+    "fail": 0
+  },
+  "actualRelatedTests": {
+    "clinical": 21,
+    "culture": 15,
+    "v4Services": 2,
+    "pass": 38,
+    "fail": 0
+  },
+  "strictExitCode": 0,
+  "buildExitCode": 0,
+  "buildEntry": "candidate/dist/assets/index-DE32DbEy.js",
+  "candidateInputFileCount": 48,
+  "candidateFreezeSHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+  "finalRunsMatchCandidateFreeze": {
+    "strict-05": true,
+    "candidate-sixteen-01": true,
+    "related-clinical-culture-v4-01": true,
+    "build-01": true
+  },
+  "patchApplyCheck": {
+    "origin": "/tmp/yunshan-system-coherent-14/source",
+    "exitCode": 0
+  },
+  "ownedRuntimeJobsReleased": true,
+  "controlledRouteFunctionSHA256": "449989165ea7a42861def227af9df6722ab17446e8a8a43bd9face2a4beac50e",
+  "physicalCashFunctionSHA256": "689a56b0fa6e0dac446663096d8c58e85381fa6717405711b56b2f19e3ff4e96",
+  "baselineSameBytes": {
+    "clinical-presence-fixture.ts": true,
+    "clinical-presence-regression.test.ts": true
+  },
+  "notRun": [
+    "full npm test",
+    "browser/GL/native UI",
+    "default clinical coverage audit",
+    "14/30/60 days",
+    "performance benchmark"
+  ],
+  "sharedSourceApplied": false,
+  "ZIPProduced": false,
+  "libraryUploaded": false
+}
