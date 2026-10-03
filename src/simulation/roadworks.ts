@@ -6,6 +6,7 @@ import { canAccessFloor } from '../access';
 import { getWalkHeight } from '../world';
 import { homeRestPointBlockedByVoxels } from './home-rest';
 import { claimActorActivityMinutes } from './activity-minutes';
+import { roadRepairDemand, residentRoadRepairRequester } from './road-demands';
 import { validateJointActorActivityCapacity, type ActorActivityClaim } from './activity-capacity';
 
 const EPS = 1e-7, REQUIRED_MINUTES = 60, MATERIALS = 1, PLAYER_FUNDS = 100, MAX_JOBS = 128, MAX_LABOR_RECEIPTS = 256, MAX_MODULE_BYTES = 768 * 1024, NEW_ORDER_BYTES = 512 * 1024;
@@ -18,6 +19,7 @@ export interface RoadworksAccounting {
   returnPublicEscrow(request: RoadBudgetEscrowRequest): number;
   accrueTax(amount: number): void;
 }
+export interface RoadworksController { requestResidentDemand(demandId: string): string | null }
 export interface RoadworkTask { jobId: string; nodeId: string; point: Vec3; stage: 'pickup' | 'worksite'; acceptedAt: number; buildingId?: string }
 export interface RoadMaterialReceipt { at: number; shopId: string; workerId: string; nodeId: string; point: Vec3; quantity: 1; unitPrice: number; gross: number; net: number; tax: number; taxRate: number }
 export interface RoadLaborReceipt { at: number; firstTick: number; lastTick: number; paymentCount: number; actorId: string; startAt: number; endAt: number; minutes: number; ratePerMinute: number; taxRate: number; gross: number; net: number; tax: number; nodeId: string; point: Vec3 }
@@ -204,17 +206,20 @@ function canCoalesce(receipt: RoadLaborReceipt | undefined, actorId: string, rat
   return !!receipt && receipt.actorId === actorId && receipt.ratePerMinute === rate && receipt.taxRate === tax && receipt.nodeId === nodeId
     && distance(receipt.point, point) < EPS && receipt.endAt === startAt;
 }
-function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' | 'public', accounting: RoadworksAccounting): CommandResult {
+function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' | 'public', accounting: RoadworksAccounting, residentDemandId?: string): CommandResult {
   const closure = edgeId && roadClosure(sim.state, edgeId), state = sim.state;
   if (!closure || closure.reopenedAt !== null) return { ok: false, message: '该现有道路没有待修的真实关闭记录。' };
-  if (distance(state.player.position, closure.worksite) > 2 || state.player.vehicleId || state.aviation?.activeAircraftId || !footClear(sim, state.player.position)) return { ok: false, message: '请到关闭道路安全端现场提出维修，不能遥控或穿过闭段。' };
-  if (payerId === 'public' && !['official', 'council', 'mayor'].some(role => sim.hasIdentity(role as Role))) return { ok: false, message: '公共维修申请须由实际具备公共身份者提交，支出仍须合法审批。' };
+  const demand = residentDemandId ? roadRepairDemand(state, residentDemandId) : null;
+  const resident = demand && state.citizens.find(actor => actor.id === demand.actorId);
+  if (residentDemandId && (!demand || !resident || payerId !== 'public' || demand.closureId !== closure.id || demand.edgeId !== edgeId || demand.resolvedAt !== null || demand.repairId !== null || !state.extension?.actorProfiles[resident.id]?.alive)) return { ok: false, message: '没有该具名、真实受阻且尚未关联维修的居民需求。' };
+  if (!demand && (distance(state.player.position, closure.worksite) > 2 || state.player.vehicleId || state.aviation?.activeAircraftId || !footClear(sim, state.player.position))) return { ok: false, message: '请到关闭道路安全端现场提出维修，不能遥控或穿过闭段。' };
+  if (!demand && payerId === 'public' && !['official', 'council', 'mayor'].some(role => sim.hasIdentity(role as Role))) return { ok: false, message: '公共维修申请须由实际具备公共身份者提交，支出仍须合法审批。' };
   const current = body(state);
   if (moduleBytes(state) > NEW_ORDER_BYTES || new TextEncoder().encode(sim.exportSave()).length > 7 * 1024 * 1024) return { ok: false, message: '保存空间已接近保护上限；既有钱料和工资凭据保留，暂不接受新单。' };
   if (current && (current.jobs.length >= MAX_JOBS || current.jobs.some(job => !ended(job) && job.closureId === closure.id))) return { ok: false, message: '原在办/退款或128受保护档案仍保留，不能重复开单。' };
-  if (!state.extension!.actorProfiles.player.alive || payerId === 'player' && state.player.money < PLAYER_FUNDS) return { ok: false, message: '存活申请者和真实100文托管余额不足。' };
+  if (!demand && !state.extension!.actorProfiles.player.alive || payerId === 'player' && state.player.money < PLAYER_FUNDS) return { ok: false, message: '存活申请者和真实100文托管余额不足。' };
   const works = activate(sim, accounting), now = clock(state), job: RoadRepairJob = {
-    id: 'road-repair-' + works.nextId++, closureId: closure.id, edgeId: closure.edgeId, requestedBy: 'player', payerId,
+    id: 'road-repair-' + works.nextId++, closureId: closure.id, edgeId: closure.edgeId, requestedBy: resident?.id ?? 'player', payerId,
     worksiteNodeId: closure.worksiteNodeId, worksite: copy(closure.worksite), startedAt: now, lastObservedAt: now,
     status: payerId === 'public' ? 'awaitingBudget' : 'awaitingWorker', reason: '等待有限材料经费、合法审批及真实居民自愿履约。', workerId: null, acceptedAt: null, ratePerMinute: 0, contract: null,
     supplierShopId: null, supplierNodeId: null, supplierPoint: null, requiredMinutes: 60, workedMinutes: 0, contributions: {}, laborReceipts: [],
@@ -230,7 +235,17 @@ export function roadworksStatus(state: SimState, edgeId: string) {
   const material = job ? lot(state, job) : undefined;
   return { supported: !!closure, closure: closure ?? null, job, materialStage: !material ? 'unbought' : material.retained ? 'retained' : material.location.kind === 'consumed' ? 'consumed' : material.location.kind === 'worksite' ? 'delivered' : 'carried' };
 }
-export function installRoadworks(sim: Simulation, accounting: RoadworksAccounting): void {
+export function requestResidentRoadRepair(sim: Simulation, demandId: string, accounting: RoadworksAccounting): string | null {
+  const demand = roadRepairDemand(sim.state,demandId), closure = demand && roadClosureById(sim.state,demand.closureId);
+  if (!demand || !closure || closure.reopenedAt !== null || demand.resolvedAt !== null || !sim.state.extension?.actorProfiles[demand.actorId]?.alive) return null;
+  if (demand.repairId !== null) { const linked = body(sim.state)?.jobs.find(job => job.id === demand.repairId && job.closureId === demand.closureId); return linked?.id ?? null; }
+  const current = body(sim.state)?.jobs.find(job => !ended(job) && job.closureId === closure.id);
+  if (current) return current.id;
+  const result = create(sim,closure.edgeId,'public',accounting,demandId);
+  return result.ok ? body(sim.state)!.jobs.at(-1)!.id : null;
+}
+
+export function installRoadworks(sim: Simulation, accounting: RoadworksAccounting): RoadworksController {
   let observedState = sim.state, phaseTick = -1, phaseClock = -1, phaseMinutes = 0;
   const seen = new WeakSet<object>();
   sim.onPhase('time', (state, minutes) => { observedState = state; phaseTick = state.tick; phaseClock = clock(state); phaseMinutes = minutes; });
@@ -311,6 +326,7 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
     }
   });
   sim.registerSaveValidator(state => validateRoadworksState(state, sim.worldDefinition));
+  return { requestResidentDemand: demandId => requestResidentRoadRepair(sim,demandId,accounting) };
 }
 
 export function validateRoadworksState(candidate: SimState, world: WorldDefinition): void {
@@ -333,7 +349,7 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
     const closure = roadClosureById(state,job.closureId), edge = world.edges.find(edge=>edge.id===job.edgeId);
     ensure(closure && edge && closure.edgeId===edge.id && ['road','bridge'].includes(edge.mode), '真实关闭与现有道路引用');
     ensure(job.worksiteNodeId===closure!.worksiteNodeId && distance(job.worksite,closure!.worksite)<EPS, '原安全端工地'); vector(job.worksite,'工地坐标');
-    ensure(['player','public'].includes(job.payerId) && job.requestedBy==='player', '原请求与付款主体');
+    ensure(['player','public'].includes(job.payerId) && (job.requestedBy==='player' || job.payerId==='public' && actors.has(job.requestedBy) && residentRoadRepairRequester(state,job.id,job.requestedBy,job.closureId)), '原请求与付款主体/具名受阻需求');
     ensure(['awaitingBudget','awaitingSupply','awaitingWorker','carrying','working','paused','refundPending','completed','cancelled'].includes(job.status) && typeof job.reason==='string' && job.reason.length<=1000, '状态');
     num(job.startedAt,Math.max(works.activatedAt,closure!.occurredAt),now,'下单时间'); num(job.lastObservedAt,job.startedAt,now,'观察时间');
     const stop = job.completedAt ?? job.cancelledAt ?? now;

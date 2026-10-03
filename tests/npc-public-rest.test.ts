@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { Simulation } from '../src/simulation';
 import { homeRestPoints } from '../src/simulation/home-rest';
 import type { HomeRestPoint } from '../src/simulation/home-rest';
-import type { Building, BuildingFunctionPoint, Citizen, LifeProfile, Role, Vec3 } from '../src/types';
+import type { Building, BuildingFunctionPoint, Citizen, LifeProfile, NetworkEdge, Role, Vec3 } from '../src/types';
 
 interface NativeFixture { actor: Citizen; home: Building; work: Building; publicRest: Building; actorProfile: LifeProfile }
 const native = JSON.parse(readFileSync(new URL('./fixtures/npc-rest-offer-native.json', import.meta.url), 'utf8')) as NativeFixture;
@@ -12,7 +12,7 @@ const clone = <T>(value: T): T => structuredClone(value);
 interface Choice { destination: Building; activity: string }
 interface Facade {
   state: { hour: number; shops: never[]; relationships: never[]; extension: { actorProfiles: Record<string, LifeProfile> } };
-  world: { buildings: Building[] }; buildings: Map<string, Building>; runtime: { activities: Record<string, string> };
+  world: { buildings: Building[]; edges: NetworkEdge[] }; buildings: Map<string, Building>; runtime: { activities: Record<string, string> };
   availableHomeRestPoints: () => HomeRestPoint[];
   walkingAnchors: () => { node: string; cost: number; points: Vec3[] }[];
   walkingTree: () => { costs: Map<string, number> };
@@ -20,12 +20,16 @@ interface Facade {
   isEmployed: () => boolean; citizenIdentity: () => Role;
 }
 interface RouteFacade extends Facade {
+  citizenRoadRevisions: WeakMap<Citizen, number>; ensureRoadRouting: () => number;
+  routeCache: Map<string, Vec3[]>; walkingTrees: Map<string, unknown>;
+  routingState?: Facade['state']; routingRevision: number;
   activityPointPurpose: (activity?: string) => BuildingFunctionPoint['purpose'];
   buildingFunctionPoints?: () => BuildingFunctionPoint[];
   floorPlanPresence: () => null; floorPlanRoute: () => Vec3[] | null; routeFromCitizen: () => Vec3[];
 }
 const choose = Reflect.get(Simulation.prototype, 'chooseFacility') as (this: Facade, citizen: Citizen) => Choice;
 const setDestination = Reflect.get(Simulation.prototype, 'setDestination') as (this: RouteFacade, citizen: Citizen, building: Building) => void;
+const ensureRoadRouting = Reflect.get(Simulation.prototype, 'ensureRoadRouting') as RouteFacade['ensureRoadRouting'];
 const activityPointPurpose = Reflect.get(Simulation.prototype, 'activityPointPurpose') as RouteFacade['activityPointPurpose'];
 
 /** Pure dependency fixtures exercise the real private selection/routing methods.
@@ -39,7 +43,7 @@ function fixture(options: { bedAvailable?: boolean; publicWalkable?: boolean; ni
   const node = (building: Building) => ({ id: `fixture-node:${building.id}` });
   const facade: Facade = {
     state: { hour: night ? 0 : 12, shops: [], relationships: [], extension: { actorProfiles: { [actor.id]: clone(native.actorProfile) } } },
-    world: { buildings: [home, publicRest] }, buildings: new Map([home, work, publicRest].map(building => [building.id, building])),
+    world: { buildings: [home, publicRest], edges: [] }, buildings: new Map([home, work, publicRest].map(building => [building.id, building])),
     runtime: { activities: { [actor.id]: 'rest' } }, availableHomeRestPoints: () => bedAvailable ? [point] : [],
     walkingAnchors: () => [{ node: 'fixture-origin', cost: 0, points: [actor.position] }],
     walkingTree: () => ({ costs: new Map([[node(home).id, 100], [node(publicRest).id, publicWalkable ? 200 : Infinity]]) }),
@@ -48,6 +52,8 @@ function fixture(options: { bedAvailable?: boolean; publicWalkable?: boolean; ni
   return { facade, actor, home, publicRest };
 }
 const routeFacade = (facade: Facade, actor: Citizen, target: Building): RouteFacade => ({
+  citizenRoadRevisions: new WeakMap(), ensureRoadRouting,
+  routeCache: new Map(), walkingTrees: new Map(), routingRevision: -1,
   ...facade, activityPointPurpose, floorPlanPresence: () => null,
   floorPlanRoute: () => { throw new Error('an absent or forbidden point must not be routed'); },
   routeFromCitizen: () => [actor.position, target.door],

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import type { Building, Vec3 } from '../types';
-import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type RoofRegion } from '../architecture-floor-plan';
+import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type Rect, type RoofRegion, type WallPanel } from '../architecture-floor-plan';
 
 /** Normalized, centre-anchored geometry; one template per roof orientation.
  * Its final instance bounds, rather than a second proxy envelope, describe the
@@ -15,6 +15,23 @@ export interface ProgramArchitecturePart {
   template?: ArchitectureTemplate; facade?: readonly [number, number, number, number];
 }
 const roofTemplates = new Map<string, ArchitectureTemplate>();
+export const PROGRAM_WALL_FINISH_PANEL_BUDGET = 128;
+export interface ProgramWallFinish { rect: Rect; bottom: number; top: number; material: 'wall' | 'wood' }
+
+/** Material boundaries divide the original opaque wall, never cover a window
+ * or add a post outside that wall. All four pieces share its original solid. */
+export function partitionProgramWallFinish(panel: WallPanel, bottom: number, top: number): ProgramWallFinish[] {
+  const r = panel.rect, alongX = r.x1 - r.x0 >= r.z1 - r.z0, lo = alongX ? r.x0 : r.z0, hi = alongX ? r.x1 : r.z1;
+  if (panel.kind !== 'solid') return [];
+  if (hi - lo < .8 - 1e-7 || top - bottom < .4 - 1e-7) return [{ rect: r, bottom, top, material: 'wall' }];
+  const slice = (from: number, to: number): Rect => alongX ? { ...r, x0: from, x1: to } : { ...r, z0: from, z1: to };
+  return [
+    { rect: r, bottom: top - .2, top, material: 'wood' },
+    { rect: slice(lo, lo + .2), bottom, top: top - .2, material: 'wood' },
+    { rect: slice(hi - .2, hi), bottom, top: top - .2, material: 'wood' },
+    { rect: slice(lo + .2, hi - .2), bottom, top: top - .2, material: 'wall' },
+  ];
+}
 
 /** The original prototype's two closed five-point gables, converted from
  * [0,1] minimum-corner coordinates to the batch's [-.5,.5] centred coordinates.
@@ -38,12 +55,12 @@ export function programRoofTemplate(axis: 'x' | 'z'): ArchitectureTemplate {
   indexed.dispose(); flat.dispose(); roofTemplates.set(axis, template); return template;
 }
 
-export function programRoofPart(region: RoofRegion): ProgramArchitecturePart {
+export function programRoofPart(region: RoofRegion, timberFinish = false): ProgramArchitecturePart {
   const { rect, bottom, top } = region;
   return { material: region.kind === 'gallery-flat' ? 'wood' : 'roof',
     position: { x: (rect.x0 + rect.x1) / 2, y: (bottom + top) / 2, z: (rect.z0 + rect.z1) / 2 },
     size: { x: rect.x1 - rect.x0, y: top - bottom, z: rect.z1 - rect.z0 },
-    color: region.kind === 'gallery-flat' ? '#887155' : '#456760', floor: region.floor, roof: true, purpose: 'roof',
+    color: region.kind === 'gallery-flat' ? timberFinish ? '#75583e' : '#887155' : timberFinish ? '#52645f' : '#456760', floor: region.floor, roof: true, purpose: 'roof',
     ...(region.kind === 'gable' ? { template: programRoofTemplate(region.gableAxis!) } : {}) };
 }
 
@@ -53,7 +70,9 @@ export function programRoofPart(region: RoofRegion): ProgramArchitecturePart {
 export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'): ProgramArchitecturePart[] | null {
   const body = getBuildingBody(building); if (!body) return null;
   const parts: ProgramArchitecturePart[] = [];
-  const wallColor = building.kind === 'clinic' ? '#dad9c5' : building.kind === 'bank' ? '#b5beb2' : building.kind === 'workshop' ? '#b5a58c' : building.kind === 'school' ? '#d9ceb0' : ['#d6c6a7', '#c3bea3', '#ddcfb0', '#ccba9c'][building.seed % 4];
+  const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0;
+  const wallColor = timberFinish ? building.kind === 'market' ? '#d4c8b2' : ['#d9d3c4', '#cbc9bc', '#ded8ca', '#cfccbe'][building.seed % 4]
+    : building.kind === 'clinic' ? '#dad9c5' : building.kind === 'bank' ? '#b5beb2' : building.kind === 'workshop' ? '#b5a58c' : building.kind === 'school' ? '#d9ceb0' : ['#d6c6a7', '#c3bea3', '#ddcfb0', '#ccba9c'][building.seed % 4];
   const box = (material: ProgramArchitecturePart['material'], x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string, floor: number, purpose: ProgramArchitecturePart['purpose'], roof = false, facade?: ProgramArchitecturePart['facade']) => {
     if (Math.min(sx, sy, sz) <= 1e-7) return;
     parts.push({ material, position: { x, y, z }, size: { x: sx, y: sy, z: sz }, color, floor, purpose, roof, ...(facade ? { facade } : {}) });
@@ -88,8 +107,19 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
         if (panel.kind === 'glass') add('glass', panel.bottom, panel.top, '#738c7e', 'window');
         else {
           const skirt = Math.min(.8, panel.top);
-          if (panel.bottom < skirt) add('stone', panel.bottom, skirt, '#939487', 'wall');
-          if (panel.top > Math.max(panel.bottom, skirt)) add(plan.floor < 0 ? 'stone' : 'wall', Math.max(panel.bottom, skirt), panel.top, wallColor, 'wall');
+          if (panel.bottom < skirt) add('stone', panel.bottom, skirt, timberFinish && plan.floor >= 0 ? '#87938c' : '#939487', 'wall');
+          const low = Math.max(panel.bottom, skirt);
+          if (panel.top > low) {
+            const finish = timberFinish && plan.floor >= 0 && finishedPanels < PROGRAM_WALL_FINISH_PANEL_BUDGET ? partitionProgramWallFinish(panel, low, panel.top) : null;
+            if (finish && finish.length > 1) {
+              finishedPanels++;
+              for (const piece of finish) {
+                const q = piece.rect;
+                box(piece.material, (q.x0 + q.x1) / 2, plan.y + (piece.bottom + piece.top) / 2, (q.z0 + q.z1) / 2,
+                  q.x1 - q.x0, piece.top - piece.bottom, q.z1 - q.z0, piece.material === 'wood' ? '#70533a' : wallColor, plan.floor, 'wall');
+              }
+            } else add(plan.floor < 0 ? 'stone' : 'wall', low, panel.top, wallColor, 'wall');
+          }
         }
       }
       // The table, bed and counter solids also belong to the shared plan.
@@ -133,6 +163,6 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
       }
     }
   }
-  for (const roof of getFloorPlanRoofRegions(body)) parts.push(programRoofPart(roof));
+  for (const roof of getFloorPlanRoofRegions(body)) parts.push(programRoofPart(roof, timberFinish));
   return parts;
 }

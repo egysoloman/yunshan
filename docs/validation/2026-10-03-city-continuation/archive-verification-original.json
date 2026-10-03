@@ -1,0 +1,78 @@
+{
+  "status": "FINAL_ARCHIVES_CREATED_AND_VERIFIED_NOT_UPLOADED",
+  "verifiedAt": "2026-10-03T22:16:41.166811+00:00",
+  "archives": [
+    {
+      "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/archives/Yunshan_City_Continuation_ROOT05_Runtime_20261003.zip",
+      "filename": "Yunshan_City_Continuation_ROOT05_Runtime_20261003.zip",
+      "bytes": 19820137,
+      "sha256": "5478cd05781c43795d498745b326df891e212d8c6d21833178f286fb9b8d4bc9",
+      "memberCount": 444,
+      "CRC": "PASS",
+      "memberSHA256": "PASS",
+      "secretMatches": 0,
+      "under32MiB": true
+    },
+    {
+      "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/archives/Yunshan_City_Continuation_History_Evidence_20261003.zip",
+      "filename": "Yunshan_City_Continuation_History_Evidence_20261003.zip",
+      "bytes": 19709812,
+      "sha256": "7487a493cc01231de058a99d1f8b459afab4ae095fcec827a1b9024282af97f0",
+      "memberCount": 865,
+      "CRC": "PASS",
+      "memberSHA256": "PASS",
+      "secretMatches": 0,
+      "under32MiB": true
+    }
+  ],
+  "payloadMembers": 1309,
+  "uncompressedPayloadBytes": 149073185,
+  "inputManifest": {
+    "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/zip-inputs.json",
+    "sha256": "c7a9704a4070477d74d1dbf0eed1394a4760fa8fa6e6785a6e7c535c6218a773"
+  },
+  "inArchiveManifest": {
+    "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/payload/BUNDLE-MANIFEST.json",
+    "sha256": "c169495c8b07fbef2e90774ed63096a2030471a18fd5f06cb7beabcc16475251",
+    "selfHashRecordedExternally": true
+  },
+  "actualMemberIndex": {
+    "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/archive-members.json",
+    "sha256": "67c0157dc6ecd345d0159383924e321d85a085b49af2eec0728c0690ae2eb7cf"
+  },
+  "splitManifest": {
+    "path": "/tmp/yunshan-city-continuation-delivery-20261003-01/split-plan.json",
+    "sha256": "55b7235c4c07bab7f2c91de213b8d72008c689383ec816c6fe1c6f7167bae5f0"
+  },
+  "allMemberPathsAcrossZIPsExactlyOnce": true,
+  "allMemberCRCAndSHA256": "PASS",
+  "original1281FilesUnmodified": true,
+  "secretScan": {
+    "matches": 0,
+    "checks": [
+      "tripo_key",
+      "github_token",
+      "openai_token",
+      "private_key",
+      "aws_access_id",
+      "bearer_token"
+    ],
+    "gzipContentsScanned": true,
+    "beforeAndAfterCompression": true
+  },
+  "noDependenciesCredentialsPrivateHelpersOrOfficialMZAssets": true,
+  "noOriginalFailuresDeleted": true,
+  "frozenDocs": {
+    "FINALREPORT.md": "4ae6917377cb3e4ae2381f9376c47a8c9fda3b9a67dcb4ad610cac91e1d1bdd3",
+    "FINALMEMO.md": "18ecb3c3fc446d486c1741d58e520d8b25f6345f050cba4709919128a1f67b4a",
+    "FINALMATRIX.md": "f065e5601d21ad0c18a49abf20382d198a2030fa46b91f6fd28233ea5660f752"
+  },
+  "economicAttributionOriginalCount": 20,
+  "ROOT05FinalNativeArtifactCount": 78,
+  "librarySaved": false,
+  "libraryIDs": [],
+  "repositoryChanged": false,
+  "gitCommitted": false,
+  "gitPushed": false,
+  "next": "Root performs the unique Library batch, native memo expected version5, and separately records actual Library/Git results."
+}

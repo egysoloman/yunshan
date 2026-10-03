@@ -185,7 +185,7 @@ function acquire(simulation: Simulation, listing: ShopListing, buyerId: string, 
   simulation.emitEvent({ type: 'shop-contract-accepted', citizenId: buyerId, shopId: shop.id, amount: listing.price, districtId: shop.districtId });
   return success(`真实${listing.kind === 'sale' ? '买价已付卖方' : '首期租金已付出租人，押金独立托管'}，${capital}文另入原经营账户；仍须真实采购、工资授权与60分钟员工修缮后重开。`);
 }
-function restart(simulation: Simulation, shop: Shop, operatorId: string): CommandResult {
+function restart(simulation: Simulation, shop: Shop, operatorId: string, fundFromWallet = false): CommandResult {
   const state = simulation.state, title = titleOf(state, shop.id), lease = activeLease(state, shop.id), at = clock(state);
   if (!title || !privateMarket(state, simulation.worldDefinition, shop) || title.state !== 'suspended' || title.listingId || shop.ownerId !== operatorId
     || !eligibleOperator(state, operatorId) || !onsite(simulation, shop, operatorId) || lease?.state === 'defaulted' || !shopLifecycleAllowsSpaceUse(state, shop.id)) return fail('请由合资格现经营者在原工作点申请重开；挂牌与违约租约须先处理。');
@@ -207,7 +207,23 @@ function restart(simulation: Simulation, shop: Shop, operatorId: string): Comman
     if (remaining > EPS || commodity === 'materials' && remaining > 0) return fail('本区真实有限物料或食品不足，不能生成重开用品。');
   }
   const gross = purchases.reduce((sum, row) => sum + row.gross, 0), tax = purchases.reduce((sum, row) => sum + row.gross - row.net, 0);
-  if (simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < gross + 20 * 8 / 24 || state.treasury + tax > 1e12) return fail('工资、租金与旧债受保护；实际采购后仍须保留营运现金。');
+  const funds = simulation.shopFunds(shop), protectedFunds = simulation.shopProtectedFunds(shop), required = gross + 20 * 8 / 24;
+  if (state.treasury + tax > 1e12) return fail('工资、租金与旧债受保护；实际采购后仍须保留营运现金。');
+  if (funds - protectedFunds < required) {
+    if (!fundFromWallet) return fail('工资、租金与旧债受保护；实际采购后仍须保留营运现金。');
+    // A resident can choose one real wallet contribution after all procurement
+    // checks. Round up to cents, then check the same addition used by fundShop:
+    // cancellation against a large protected balance can otherwise lose an ulp.
+    const cents = Math.ceil((required - (funds - protectedFunds)) * 100);
+    let contribution = cents / 100;
+    if (funds + contribution - protectedFunds < required || funds + contribution - gross - protectedFunds < 20 * 8 / 24) contribution = (cents + 1) / 100;
+    const operator = actor(state, operatorId)!;
+    if (operator.money - contribution < RESERVE) return fail('本人钱包补足真实采购和原受保护余额后仍须保留100文生活储备。');
+    const funded = applyShopLifecycleCommand(simulation, { type: 'fundShop', targetId: shop.id, value: contribution }, operatorId)!;
+    if (!funded.ok) return funded;
+    // fundShop has no event callback. It preserves this active lease's reserve;
+    // no further rejecting preflight follows the successful wallet transfer.
+  }
   simulation.transferShopFunds(shop, -gross);
   for (const row of purchases) {
     const supplier = state.shops.find(supplier => supplier.id === row.supplierId)!;
@@ -323,13 +339,13 @@ export function installShopLifecycle(simulation: Simulation): void {
       if (!title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) suspend(simulation, shop, citizen.id, 'economic-distress');
       const current = titleOf(simulation.state, shop.id);
       if (current?.state === 'suspended' && !current.listingId) {
-        const begun = eligibleOperator(simulation.state, citizen.id) && restart(simulation, shop, citizen.id).ok;
+        const begun = eligibleOperator(simulation.state, citizen.id) && restart(simulation, shop, citizen.id, true).ok;
         if (!begun && current.assetOwnerId === citizen.id && shopLifecycleCanDispose(simulation.state, shop.id)) list(simulation, shop, citizen.id, citizen.money < 300 ? 'lease' : 'sale', citizen.money < 300 ? 25 : 100);
       }
       return;
     }
     const listing = stateOf(simulation).shopLifecycle?.listings.filter(listing => listing.shopId === shop.id && listing.state === 'offered').sort((a, b) => a.price + a.deposit - b.price - b.deposit || a.id.localeCompare(b.id))[0];
-    if (listing && acquire(simulation, listing, citizen.id, CAPITAL).ok) restart(simulation, shop, citizen.id);
+    if (listing && acquire(simulation, listing, citizen.id, CAPITAL).ok) restart(simulation, shop, citizen.id, true);
   });
   simulation.onPhase('finance', () => observeFinance(simulation));
   simulation.registerCommandHandler(command => applyShopLifecycleCommand(simulation, command, 'player'));

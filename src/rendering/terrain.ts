@@ -10,6 +10,41 @@ interface TerrainTile { x: number; z: number; coarse: THREE.Mesh; fine?: THREE.G
 const TILE = 96;
 const quantize = (value: number) => Math.round(value / .2) * .2;
 
+/** Shared crown templates retain the original unit box's exact outer bounds.
+ * Lobes give the crown a stepped silhouette without allocating another tree,
+ * moving a stand, or changing any instance's centre or scale. */
+export function createTreeCrownGeometry(lod: 'near' | 'far'): THREE.BufferGeometry {
+  const lobes = lod === 'near' ? [
+    [0, 0, 0, .56, 1, .58],
+    [-.38, -.02, .04, .24, .58, .58],
+    [.38, .03, -.08, .24, .66, .52],
+    [-.1, -.12, -.4, .62, .54, .2],
+    [.08, .02, .4, .66, .68, .2],
+  ] : [
+    [0, 0, 0, .62, 1, .62],
+    [0, -.09, 0, 1, .62, .62],
+    [0, -.04, 0, .62, .58, 1],
+  ];
+  const parts = lobes.map(([x, y, z, w, h, d], index) => {
+    const geometry = new THREE.BoxGeometry(w, h, d); geometry.translate(x, y, z);
+    const positions = geometry.getAttribute('position'), normals = geometry.getAttribute('normal'), colors: number[] = [];
+    for (let vertex = 0; vertex < positions.count; vertex++) {
+      // Small fixed face/value differences make adjacent voxel lobes readable.
+      // The instanced species colour still supplies the whole tree's pigment.
+      const normalY = normals.getY(vertex), face = normalY > .5 ? 1.04 : normalY < -.5 ? .65 : .87;
+      const shade = face * (.96 + positions.getY(vertex) * .08) * (1 - index * .018);
+      colors.push(shade, shade, shade);
+    }
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3)); return geometry;
+  });
+  const geometry = mergeGeometries(parts);
+  parts.forEach(part => part.dispose());
+  if (!geometry) throw new Error('Tree crown template could not be merged');
+  geometry.computeBoundingBox(); geometry.computeBoundingSphere();
+  geometry.userData.crown = { lod, lobes: lobes.length, triangles: geometry.index!.count / 3, normalizedBounds: [-.5, .5] };
+  return geometry;
+}
+
 /** The distant shell is a surface proxy. Ground-level stepped shells and small
  * rocks/plants are generated only around the camera and evicted after use. */
 export function buildLandscape(world: WorldDefinition): {
@@ -19,11 +54,13 @@ export function buildLandscape(world: WorldDefinition): {
   const group = new THREE.Group(), vegetation = new THREE.Group();
   group.name = '山水 · 分层岩壳与连续水系'; vegetation.name = '山林 · 松柏竹木'; group.add(vegetation);
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
-  const cube = new THREE.BoxGeometry(1, 1, 1), canopy = cube; geometries.add(cube);
+  const cube = new THREE.BoxGeometry(1, 1, 1), nearCanopy = createTreeCrownGeometry('near'), farCanopy = createTreeCrownGeometry('far');
+  geometries.add(cube); geometries.add(nearCanopy); geometries.add(farCanopy);
   const earth = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1, vertexColors: true });
   const rock = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .97 });
   const leaf = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 1 });
-  materials.add(earth); materials.add(rock); materials.add(leaf);
+  const crownLeaf = leaf.clone(); crownLeaf.vertexColors = true;
+  materials.add(earth); materials.add(rock); materials.add(leaf); materials.add(crownLeaf);
   // Fine pigment and horizontal sediment continue across proxy boundaries; the
   // grain is tied to world coordinates rather than a repeated tile texture.
   earth.onBeforeCompile = shader => {
@@ -240,12 +277,12 @@ export function buildLandscape(world: WorldDefinition): {
   for (const [key, lists] of forest) {
     const [x, z] = key.split(':').map(Number), detail = new THREE.Group(), proxy = new THREE.Group();
     detail.name = `林木近景 ${key}`; proxy.name = `远林冠影 ${key}`; vegetation.add(detail, proxy);
-    batch('山林树干', lists.trunks, rock, detail); batch('错层乔木冠', lists.crowns, leaf, detail, canopy); batch('山林灌木', lists.bushes, leaf, detail, canopy);
+    batch('山林树干', lists.trunks, rock, detail); batch('错层乔木冠', lists.crowns, crownLeaf, detail, nearCanopy); batch('山林灌木', lists.bushes, leaf, detail);
     const distantCrowns = lists.trunks.flatMap((t, i) => {
       const color = lists.crowns[i * 4]?.color ?? new THREE.Color('#527151');
       return [0, 1].map(tier => ({ ...t, x: t.x + (tier ? 1 : -1) * t.h * .15, y: t.y + t.h * (.42 + tier * .35), z: t.z + tier * t.h * .1, w: quantize(t.h * (tier ? .9 : 1.25)), h: quantize(t.h * .55), d: quantize(t.h * (tier ? .75 : 1.08)), color: color.clone().multiplyScalar(tier ? 1.08 : .92) }));
     });
-    batch('远林树干代理', lists.trunks, rock, proxy); batch('远林错层树冠代理', distantCrowns, leaf, proxy, canopy);
+    batch('远林树干代理', lists.trunks, rock, proxy); batch('远林错层树冠代理', distantCrowns, crownLeaf, proxy, farCanopy);
     detail.visible = false; forestChunks.push({ x: (x + .5) * 384, z: (z + .5) * 384, detail, proxy });
   }
 
@@ -327,7 +364,8 @@ export function buildLandscape(world: WorldDefinition): {
     heightCache.clear();
   }
   group.userData.water = { continuous: true, riverVertices: world.river.length * 2, plungePoolRadius: 50, waterfallDrop: top.y - bottom.y };
-  group.userData.woodland = { stands: stands.length, trees: trunks.length, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0 };
+  group.userData.woodland = { stands: stands.length, trees: trunks.length, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0,
+    sharedCrownGeometries: 2, nearCrownTriangles: nearCanopy.index!.count / 3, farCrownTriangles: farCanopy.index!.count / 3 };
   return { group, water, vegetation, update, dispose() { group.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); }); geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); group.clear(); } };
 }
 

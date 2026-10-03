@@ -1,10 +1,10 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
 import { getBuildingBody } from '../architecture-floor-plan';
-import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalVisitDeadline, installClinical } from './clinical';
+import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
 import { educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
-import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
+import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export type WorkGenre = 'literature' | 'art';
 export type ReportMetric = 'water' | 'safety' | 'budget';
@@ -20,8 +20,14 @@ export interface CityReport {
 }
 export interface CivicPetition { id: string; authorId: string; topic: PetitionTopic; title: string; text: string; siteId: string; filedAt: number; replyAt: number; status: 'open' | 'answered'; signerIds: string[]; reply: string | null; answeredAt: number | null; executionId?: string | null }
 export interface SupplyReceipt { procurementId: string; budgetId: string; purchasedAt: number; paid: number; quantity: number; tax: number; reason?: 'budget' | 'supply' | 'authorization'; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
+/** One actually consumed public-care unit. Old consumption is never backfilled. */
+export interface PublicHealthConsumptionReceipt {
+  id: string; orderId: string; patientId: string; siteId: string; consumedAt: number;
+  consumptionIndex: number; quantity: 1; minutes: 20; floor: number; pointId: string; point: Vec3;
+}
 export interface ServiceOrder {
   clinicalTimingVersion?: 2;
+  healthWasteVersion?: 1; healthConsumptionBaseline?: number; healthConsumptions?: PublicHealthConsumptionReceipt[];
   id: string; petitionId: string; topic: PetitionTopic; siteId: string;
   state: 'agenda' | 'awaitingReview' | 'awaitingBudget' | 'awaitingSupply' | 'active' | 'fulfilled' | 'rejected';
   scheduledAt: number; approvedAt: number | null; approvedBy: string[]; authorizedCap: number; spent: number;
@@ -43,6 +49,21 @@ const object = (value: unknown): value is Record<string, any> => !!value && type
 const clamp = (n: number, min = 0, max = 100) => Math.max(min, Math.min(max, n));
 const distance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const sameClaim = (report: Pick<CityReport, 'claim' | 'evidence'>) => Math.abs(report.claim - report.evidence.observedValue) <= 1e-7;
+interface PublicHealthEvent { type: string; citizenId?: string; siteId?: string; procurementId?: string; budgetId?: string; quantity?: number; minutes?: number; occurredAt?: number }
+const publicHealthEvents = new WeakMap<object, { state: SimState; receipt: PublicHealthConsumptionReceipt }>();
+export function findPublicHealthConsumption(state: SimState, sourceId: string): PublicHealthConsumptionReceipt | undefined {
+  return state.culture?.orders?.flatMap(order => order.healthConsumptions ?? []).find(receipt => receipt.id === sourceId);
+}
+/** Private source certification, not a public emitEvent route to create waste. */
+export function publicHealthConsumption(simulation: Simulation, event: PublicHealthEvent): Readonly<PublicHealthConsumptionReceipt> | null {
+  const certified = publicHealthEvents.get(event), state = simulation.state;
+  if (!certified || certified.state !== state || event.type !== 'public-health-consumed') return null;
+  const r = certified.receipt, order = state.culture?.orders.find(order => order.id === r.orderId);
+  if (state.extension?.lastUpdate !== r.consumedAt || order?.healthWasteVersion !== 1 || !order.healthConsumptions?.includes(r)
+    || event.citizenId !== r.patientId || event.siteId !== r.siteId || event.procurementId !== r.orderId || event.budgetId !== r.id
+    || event.quantity !== 1 || event.minutes !== 20 || event.occurredAt !== r.consumedAt) return null;
+  return Object.freeze({ ...r, point: Object.freeze({ ...r.point }) });
+}
 export const civicSite = (site: Building) => site.kind === 'hall' || site.kind === 'core' && site.facility === 'mayor';
 export const publicFloor = (site: Building, level: number) => level >= 0 && level < site.floors && (site.floorPermissions?.[level] ? site.floorPermissions[level] === 'public' : site.publicFloors === undefined || level < site.publicFloors);
 export const canReviewPetition = (site: Building, level: number, player: Pick<Player, 'role' | 'identities'>) => site.facility === 'mayor' && site.floorPermissions?.[level] === 'mayor' && (player.role === 'mayor' || player.identities?.includes('mayor') === true) && canAccessFloor(site, level, player);
@@ -144,7 +165,19 @@ export function installCulture(simulation: Simulation): void {
       if (order.serviceMinutes[id] < rule.minutes - 1e-7) continue;
       order.consumedUnits++; order.servedIds.push(id);
       const profile = state().extension!.actorProfiles[id];
-      if (order.topic === 'health') { profile.health = clamp(profile.health + clinicalHealthGain(state())); profile.stress = clamp(profile.stress - 2); state().clinical!.nextVisitAt[id] = now() + 60; }
+      if (order.topic === 'health') {
+        profile.health = clamp(profile.health + clinicalHealthGain(state())); profile.stress = clamp(profile.stress - 2); state().clinical!.nextVisitAt[id] = now() + 60;
+        const person = id === 'player' ? state().player : state().citizens.find(person => person.id === id)!;
+        const station = clinicalServiceStationsAtPosition(site, person.position, id === 'player' ? state().player : { role: 'traveler', identities: ['traveler'] }, state().voxels)[0];
+        const level = station?.floor ?? floor(site, person.position);
+        if (order.healthWasteVersion === undefined) {
+          order.healthWasteVersion = 1; order.healthConsumptionBaseline = order.consumedUnits - 1; order.healthConsumptions = [];
+        }
+        const receipt: PublicHealthConsumptionReceipt = Object.freeze({ id: `public-health:${order.id}:${order.consumedUnits}`, orderId: order.id, patientId: id, siteId: site.id, consumedAt: now(), consumptionIndex: order.consumedUnits, quantity: 1, minutes: 20, floor: level, pointId: station?.id ?? `legacy:${level}`, point: Object.freeze({ ...(station?.position ?? person.position) }) });
+        order.healthConsumptions!.push(receipt);
+        const event: PublicHealthEvent = { type: 'public-health-consumed', citizenId: id, siteId: site.id, procurementId: order.id, budgetId: receipt.id, quantity: 1, minutes: 20, occurredAt: now() };
+        publicHealthEvents.set(event, { state: state(), receipt }); simulation.emitEvent(event);
+      }
       else { profile.skill = clamp(profile.skill + 1); if (id === 'player') { state().player.education++; state().player.experience++; } else { const person = state().citizens.find(person => person.id === id)!; person.skills ??= {}; person.skills.learning = clamp((person.skills.learning ?? 0) + 2); if (profile.age >= 18) person.education = (person.education ?? 0) + 1; } }
       simulation.emitEvent({ type: 'civic-service', citizenId: id, districtId: site.districtId, quantity: 1, minutes: rule.minutes });
       if (id === 'player') culture().playerServiceId = null;
@@ -420,6 +453,27 @@ export function validateCultureState(candidate: SimState, world: WorldDefinition
     for (const [id, minutes] of Object.entries(order.serviceMinutes)) { ensure(ids.has(id), '服务计时主体'); num(minutes, 0, rule.minutes, '服务实际分钟'); ensure(order.approvedAt !== null && receipts.length > 0 && (minutes as number) <= c.lastUpdate - receipts[0].purchasedAt + 1e-7, '不得凭空累积服务时间'); }
     ensure(served.every(id => order.serviceMinutes[id] >= rule.minutes - 1e-7) && (!served.length || staff.length > 0), '材料与现场人员时数共同完成服务');
     if (order.topic === 'transport') ensure(order.consumedUnits === (served.length ? rule.units : 0) && served.length <= 1 && served.every(id => staff.includes(id)), '真实工作人员履约维修'); else ensure(order.consumedUnits === served.length, '服务一人实际耗用一份');
+    const healthFields = [order.healthWasteVersion, order.healthConsumptionBaseline, order.healthConsumptions];
+    if (healthFields.some(value => value !== undefined)) {
+      ensure(order.topic === 'health' && order.healthWasteVersion === 1, '公共诊疗消耗来源版本');
+      num(order.healthConsumptionBaseline, 0, rule.units - 1, '旧消耗迁移水位', true);
+      const sources = array(order.healthConsumptions, rule.units, '公共诊疗消耗原件');
+      ensure(sources.length > 0 && order.consumedUnits === order.healthConsumptionBaseline + sources.length, '只保存启用后的实际耗用');
+      let previous = Math.max(order.scheduledAt, order.approvedAt ?? order.scheduledAt, receipts[0]?.purchasedAt ?? order.scheduledAt);
+      for (let index = 0; index < sources.length; index++) {
+        const r = sources[index], consumptionIndex = order.healthConsumptionBaseline + index + 1;
+        ensure(object(r) && r.id === `public-health:${order.id}:${consumptionIndex}` && r.orderId === order.id && r.siteId === order.siteId && r.patientId === served[consumptionIndex - 1] && r.consumptionIndex === consumptionIndex && r.quantity === 1 && r.minutes === 20, '具名实际公共材料消耗');
+        num(r.consumedAt, previous, c.lastUpdate, '实际耗用时钟'); previous = r.consumedAt;
+        ensure(receipts.length > 0 && r.consumedAt >= receipts[0].purchasedAt + rule.minutes - 1e-7, '采购后实际完成二十分钟护理');
+        num(r.floor, 0, site!.floors - 1, '耗用所在楼层', true);
+        ensure(typeof r.pointId === 'string' && r.pointId.length <= 240 && object(r.point) && [r.point.x, r.point.y, r.point.z].every(finite) && publicFloor(site!, r.floor), '公共耗用实际站点');
+        if (getBuildingBody(site!)) ensure(clinicalServiceStationsAtPosition(site!, r.point, { role: 'traveler', identities: ['traveler'] }, []).some(point => point.id === r.pointId && point.floor === r.floor && distance(point.position, r.point) < 1e-7), '可信诊疗站来源');
+        else {
+          const dx = r.point.x - site!.position.x, dz = r.point.z - site!.position.z, x = dx * Math.cos(site!.rotation) + dz * Math.sin(site!.rotation), z = -dx * Math.sin(site!.rotation) + dz * Math.cos(site!.rotation), dimensions = site!.floorFootprints?.[r.floor] ?? site!;
+          ensure(r.pointId === `legacy:${r.floor}` && Math.floor((r.point.y - site!.position.y + .01) / (site!.height / Math.max(1, site!.floors))) === r.floor && (r.floor === 0 && distance(r.point, site!.door) <= 2 || Math.abs(x) <= dimensions.width / 2 && Math.abs(z) <= dimensions.depth / 2), '旧设施保留实际耗用位置');
+        }
+      }
+    }
     if (order.approvedAt === null) ensure(!signers.length && order.authorizedCap === 0 && order.spent === 0 && order.receivedUnits === 0 && order.consumedUnits === 0 && !Object.keys(order.serviceMinutes).length && ['agenda', 'awaitingReview', 'rejected'].includes(order.state), '未授权不得采购履约');
     else { num(order.approvedAt, order.scheduledAt, c.lastUpdate, '真实批准时刻'); ensure(order.authorizedCap >= 40 && (signers.length === 1 && signers[0] === 'player' || signers.length === 2 && !signers.includes('player') && order.authorizedCap === 40), '法定权限与小额联合审批'); }
     if (order.state === 'fulfilled') { num(order.completedAt, order.approvedAt! + rule.minutes, c.lastUpdate, '实际履约完成时间'); ensure(order.consumedUnits === rule.units, '必须全部真实履约'); }

@@ -1,6 +1,6 @@
 # 云山 RPG Maker 桥接契约
 
-规则内核冻结为已推送的 `6785ca7dcca09e8e97afd610cfd52176c7a1cfb1`。`src/` 未改；新增适配器不接入公共维修/美术/F1未提交候选，也不删改原3D。此目录提供真实内核与合法移动接口，供另一个制作任务编排完整 RPG Maker MZ 工程；本目录本身不是 MZ 工程，不能把它误报为全游戏完成。
+本目录保留规则内核 `6785ca7dcca09e8e97afd610cfd52176c7a1cfb1` 的冻结桥接版本。后续城市源码独立接合道路需求、财政到期、店主自筹与公共护理卫生；这些变更不会自动进入旧桥接产物或私有MZ ZIP。此目录提供真实内核与合法移动接口，供制作任务编排完整 RPG Maker MZ 工程；本目录本身不是 MZ 工程，不能把它误报为全游戏完成。
 
 ## 直接使用浏览器文件
 
@@ -51,9 +51,11 @@ MZ `Game_Player`/事件坐标是 `city.playerLocation()` 的投影，不能反�
 
 ## 源码与复现
 
-从包含本目录的Git交接提交恢复源码后：
+复现此历史冻结时，从已交接的 `3f560d99ae331cbed5c614c855d6ec177faea22f` 创建独立检出，再运行以下命令；该提交包含本适配器和逐字对应的6785源码。后续城市源码不能绕过旧哈希守卫直接构建成同一版本：
 
 ```sh
+git worktree add --detach /tmp/yunshan-bridge-6785 3f560d99ae331cbed5c614c855d6ec177faea22f
+cd /tmp/yunshan-bridge-6785
 npm ci
 node node_modules/typescript/bin/tsc --noEmit --project adapters/rpg-maker/tsconfig.json
 node --import tsx --test --test-isolation=none adapters/rpg-maker/walker.test.ts adapters/rpg-maker/bridge.test.ts
@@ -71,3 +73,5 @@ node adapters/rpg-maker/build.mjs --out /tmp/yunshan-core-new-bundle
 两者兼容边界是原 `yunshan-save` 完整核心字符串及同一可信世界配方/指纹。原私有工程的外层wrapper不必与本目录 `yunshan-mz-save` 相同；迁移时提取并校验canonical core save后交 `importSave`，不能冒称两个外层格式可直接互换。私有工程必须保留原碰撞/ACL/唯一frame顺序，不能重复推进MZ移动或第二模拟。
 
 本轮Linux Node/隔离VM诊断中，默认世界首个完整模拟tick实际约8–11.5秒；这是具体诊断条件下的结果，尚未证明实时性能。原plain VM两轮因CPU时间过长中止记录保留；最终测试只在VM内捕获其自有Math/JSON标准引用以避开context全局代理开销，正式浏览器IIFE字节不改，也不注入宿主游戏/DOM/Three对象。后续应单独测量真实宿主性能。
+
+2026-10-03后续制作方报告：独立dot MZ候选已采用仅 `architecture-floor-plan.ts` 的已验窄性能补丁，initial＋32完整核心保存相同；旧Library私有ZIP尚未替换。此报告区分制作方新候选和旧交付包，不改变本目录6785冻结，也不是根环境重跑MZ、编辑器GUI或macOS性能的证据。

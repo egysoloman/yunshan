@@ -53,6 +53,39 @@ function fixturePoint(site,purpose,person=simulation.state.player){
   return {...point.position};
 }
 window.fixture={world,simulation,view,ui,controller,commands,commandResults,quoteConsignmentSale,setAircraftControls,fixturePoint,clinicalAtPosition,canAccessFloor,atPoint(kind,purpose){const b=typeof kind==='string'?world.buildings.find(b=>b.kind===kind&&!b.facility):kind;if(!b)throw Error('No actual fixture building: '+kind);const position=fixturePoint(b,purpose),before=commands.length;view.mode='walk';view.inside=!!getBuildingBody(b);view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...position};view.position={...position};ui.update(simulation.state,view);if(commands.length!==before)throw Error('Fixture positioning issued a command');return b.id},at(kind){const b=world.buildings.find(b=>b.kind===kind&&!b.facility);view.mode='walk';view.inside=false;view.nearbyBuilding=b;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...b.door};view.position={...b.door};ui.update(simulation.state,view);return b.id},atShop(kind,quantity=1){const b=world.buildings.find(b=>{const shop=simulation.state.shops.find(shop=>shop.buildingId===b.id);return b.kind===kind&&shop?.open&&shop.inventory>=quantity&&simulation.state.player.money>=shop.price*quantity});if(!b)throw Error('No actual available shop: '+JSON.stringify({kind,quantity,cash:simulation.state.player.money,hour:simulation.state.hour,shops:simulation.state.shops.filter(shop=>world.buildings.find(b=>b.id===shop.buildingId)?.kind===kind).map(shop=>({id:shop.id,open:shop.open,inventory:shop.inventory,price:shop.price}))}));return this.atPoint(b,'sale')}};
+// Controlled existing business entitlement, adapted from
+// tests/extensions.test.ts:declareExistingCorporateFixtureEntitlement.
+// This is a corporate UI opening condition, not a natural market purchase.
+window.fixture.declareExistingCorporateFixtureEntitlement=(shop,ownerId)=>{
+  const sim=simulation,s=sim.state,e=s.extension,r=Reflect.get(sim,'runtime');
+  const assert={ok(value,message){if(!value)throw Error(message)},equal(actual,expected,message){if(actual!==expected)throw Error(message)}};
+  assert.equal(shop.lifecycleVersion,undefined,'managed shops keep their separate entity obligations');
+  assert.ok(!s.shopLifecycle?.titles?.[shop.id],'opening shop must have no lifecycle title');
+  assert.ok(!s.shopLifecycle?.leases.some(lease=>lease.shopId===shop.id),'opening shop must have no lease or residual deposit obligation');
+  assert.ok(!e.companies.some(company=>company.buildingId===shop.buildingId),'opening shop must not already be incorporated');
+  const priorId=shop.ownerId,prior=priorId==='player'?s.player:s.citizens.find(person=>person.id===priorId);
+  assert.ok(prior,'the actual original holder receives only their unprotected opening capital');
+  const cash=()=>s.treasury+r.taxes+s.player.money+s.citizens.reduce((sum,person)=>sum+person.money,0)
+    +s.shops.filter(item=>!e.companies.some(company=>company.buildingId===item.buildingId)).reduce((sum,item)=>sum+(item.cash??0),0)
+    +e.companies.reduce((sum,company)=>sum+company.capital,0)+e.organizations.reduce((sum,organization)=>sum+organization.funds,0)
+    +(s.banking?s.banking.cash+s.banking.legacyInvestmentCash:s.bankBalance+r.investment)
+    +(s.playerLabor?.job?.escrow??0)+(s.education?.course?.escrow??0)+(s.clinical?.orders.reduce((sum,order)=>sum+order.escrow,0)??0)
+    +(s.power?.repairs.reduce((sum,job)=>sum+job.escrow,0)??0)+(s.shopLifecycle?.leases.reduce((sum,lease)=>sum+lease.depositEscrow,0)??0)
+    +(s.hygiene?.jobs.reduce((sum,job)=>sum+job.escrow,0)??0)+(s.roadworks?.jobs.reduce((sum,job)=>sum+job.escrow,0)??0)
+    +(s.family?.pregnancies.reduce((sum,pregnancy)=>sum+pregnancy.escrow,0)??0)+(s.family?.households.reduce((sum,household)=>sum+household.balance,0)??0);
+  const books=()=>JSON.stringify({inventory:shop.inventory,employees:shop.employees,open:shop.open,profit:shop.profit,revenue:shop.revenue,trade:s.trade,
+    wages:r.wages,wageArrears:r.wageArrears,wageAccruals:r.wageAccruals,privateLabor:r.privateLabor,publicLabor:r.publicLabor,publicBudgets:r.publicBudgets,publicLedger:e.publicLedger});
+  const beforeCash=cash(),beforeBooks=books(),protectedCash=sim.shopProtectedFunds(shop),returned=Math.max(0,sim.shopFunds(shop)-protectedCash),priorCash=prior.money,playerCash=s.player.money,shopCash=sim.shopFunds(shop);
+  assert.ok(prior.money+returned<=1e9,'opening capital must fit the original holder without clipping');
+  sim.transferShopFunds(shop,-returned);prior.money+=returned;
+  assert.equal(shop.ownerId,priorId,"return the original holder's real capital before declaring existing entitlement");
+  assert.equal(sim.transferBusinessOwnership(shop.id,ownerId),true,'core authority must accept this unmarked opening entitlement');
+  assert.ok(Math.abs(cash()-beforeCash)<1e-8,'opening fixture conserves all actual cash including escrows');
+  assert.equal(books(),beforeBooks,'all original goods, purchase costs, profits, wages and promised shifts survive');
+  assert.equal(sim.shopProtectedFunds(shop),protectedCash,'all earned and promised wage claims remain protected');
+  assert.equal(s.player.money,playerCash,'existing entitlement does not fund the player wallet');
+  return {kind:'controlled-existing-business-entitlement',naturalPurchase:false,shopId:shop.id,priorId,ownerId,returned,priorCashBefore:priorCash,priorCashAfter:prior.money,playerCashBefore:playerCash,playerCashAfter:s.player.money,shopCashBefore:shopCash,shopCashAfter:sim.shopFunds(shop),totalCashBefore:beforeCash,totalCashAfter:cash(),protectedCashBefore:protectedCash,protectedCashAfter:sim.shopProtectedFunds(shop),booksPreserved:books()===beforeBooks};
+};
 // BEGIN home-rest controlled positioning helpers
 window.fixture.homeRestPoints=homeRestPoints;window.fixture.homeRestPointAt=homeRestPointAt;
 window.fixture.placeHomeRest=(site,position)=>{const before=commands.length;view.mode='walk';view.inside=true;view.nearbyBuilding=site;view.nearbyCitizen=null;view.nearbyVehicle=null;simulation.state.player.position={...position};view.position={...position};ui.update(simulation.state,view);if(commands.length!==before)throw Error('Home rest fixture positioning issued a command');};
@@ -288,6 +321,26 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
  await page.evaluate(()=>{const f=window.fixture;f.atPoint('market','work');f.simulation.state.player.identities=['traveler','merchant'];f.simulation.state.player.role='traveler';f.simulation.state.player.money=3000;f.ui.update(f.simulation.state,f.view)});
  await page.getByTestId('panel-toggle').click();
  await page.getByRole('tab',{name:'产业',exact:true}).click();
+ // Preserve the real unowned-market refusal before declaring this controlled opening.
+ assert.equal(await page.locator('[data-ref="found-company"]').isEnabled(),false);
+ await page.evaluate(()=>{const f=window.fixture,s=f.simulation.state,shop=s.shops.find(shop=>shop.buildingId===f.view.nearbyBuilding.id);f.corporateRejected={cash:s.player.money,commands:f.commands.length,results:f.commandResults.length,save:f.simulation.exportSave(),shopId:shop.id,ownerId:shop.ownerId,lifecycleVersion:shop.lifecycleVersion,title:s.shopLifecycle?.titles?.[shop.id],leases:s.shopLifecycle?.leases.filter(lease=>lease.shopId===shop.id)??[]};document.querySelector('[data-ref="found-company"]').click();});
+ assert.notEqual(await page.evaluate(()=>window.fixture.corporateRejected.ownerId),'player');
+ assert.equal(await page.evaluate(()=>window.fixture.corporateRejected.lifecycleVersion),undefined);
+ assert.equal(await page.evaluate(()=>window.fixture.corporateRejected.title),undefined);
+ assert.deepEqual(await page.evaluate(()=>window.fixture.corporateRejected.leases),[]);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.player.money),await page.evaluate(()=>window.fixture.corporateRejected.cash));
+ assert.equal(await page.evaluate(()=>window.fixture.commands.length),await page.evaluate(()=>window.fixture.corporateRejected.commands));
+ assert.equal(await page.evaluate(()=>window.fixture.commandResults.length),await page.evaluate(()=>window.fixture.corporateRejected.results));
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.exportSave()),await page.evaluate(()=>window.fixture.corporateRejected.save),'disabled native control cannot spend or call the company command');
+ const corporateOpening=await page.evaluate(()=>{const f=window.fixture,shop=f.simulation.state.shops.find(shop=>shop.buildingId===f.view.nearbyBuilding.id);f.corporateOpening=f.declareExistingCorporateFixtureEntitlement(shop,'player');f.ui.update(f.simulation.state,f.view);return f.corporateOpening;});
+ assert.equal(corporateOpening.kind,'controlled-existing-business-entitlement');assert.equal(corporateOpening.naturalPurchase,false);
+ assert(Math.abs(corporateOpening.totalCashAfter-corporateOpening.totalCashBefore)<1e-8);assert(Math.abs(corporateOpening.priorCashAfter-corporateOpening.priorCashBefore-corporateOpening.returned)<1e-8);
+ assert.equal(corporateOpening.playerCashAfter,corporateOpening.playerCashBefore);assert.equal(corporateOpening.protectedCashAfter,corporateOpening.protectedCashBefore);assert.equal(corporateOpening.booksPreserved,true);
+ assert.equal(await page.evaluate(()=>window.fixture.simulation.state.shops.find(shop=>shop.id===window.fixture.corporateOpening.shopId).ownerId),'player');
+ assert.equal(await page.evaluate(()=>window.fixture.commands.length),await page.evaluate(()=>window.fixture.corporateRejected.commands));
+ // update() intentionally refreshes an open panel at a 700ms cadence.
+ // Wait for that real refresh; retain the original enabled assertion below.
+ await page.waitForFunction(()=>!document.querySelector('[data-ref="found-company"]')?.disabled,null,{timeout:10000});
  assert.equal(await page.locator('[data-ref="found-company"]').isEnabled(),true);
  await page.locator('[data-ref="found-company"]').click();
  assert.equal(await page.evaluate(()=>window.fixture.simulation.state.extension.companies.filter(c=>c.ownerId==='player').length),1);results.push('Merchant identity stack enables company founding with real cash/ownership changes');
@@ -536,7 +589,7 @@ setInterval(()=>ui.update(simulation.state,view),200);window.ready=true;
    const diagnostic=await diagnosticPage.evaluate(()=>{
      const f=window.fixture;if(!f)return {fixtureAvailable:false};
      const s=f.simulation.state;
-     return {fixtureAvailable:true,clock:{tick:s.tick,day:s.day,hour:s.hour,speed:s.speed,paused:s.paused,at:s.extension?.lastUpdate},weather:s.weather,visibility:s.visibility,energy:s.energy,player:{position:{...s.player.position},money:s.player.money,vehicleId:s.player.vehicleId,identities:s.player.identities,alive:s.extension?.actorProfiles.player.alive,needs:{...s.player.needs}},view:{mode:f.view.mode,position:{...f.view.position},inside:f.view.inside,nearbyBuildingId:f.view.nearbyBuilding?.id??null,nearbyAircraftId:f.view.nearbyAircraft?.id??null},aircraft:s.aviation,commands:f.commandResults.slice(-10),homeRest:s.homeRest,save:f.simulation.exportSave()};
+     return {fixtureAvailable:true,clock:{tick:s.tick,day:s.day,hour:s.hour,speed:s.speed,paused:s.paused,at:s.extension?.lastUpdate},weather:s.weather,visibility:s.visibility,energy:s.energy,player:{position:{...s.player.position},money:s.player.money,vehicleId:s.player.vehicleId,identities:s.player.identities,alive:s.extension?.actorProfiles.player.alive,needs:{...s.player.needs}},view:{mode:f.view.mode,position:{...f.view.position},inside:f.view.inside,nearbyBuildingId:f.view.nearbyBuilding?.id??null,nearbyAircraftId:f.view.nearbyAircraft?.id??null},aircraft:s.aviation,commands:f.commandResults.slice(-10),corporateOpening:f.corporateOpening??null,homeRest:s.homeRest,save:f.simulation.exportSave()};
    });
    const {save,...summary}=diagnostic;
    await writeFile(new URL('ui-failure-diagnostic.json',artifactsDir),JSON.stringify(summary,null,2)+'\n');

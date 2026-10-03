@@ -1,0 +1,470 @@
+{
+  "recordedAt": "2026-10-03T21:53:23.416823+00:00",
+  "baseCommit": "a1e7f05849590da2e108d05ee69f2ba46ee9ff2d",
+  "branch": "takeover-city-life",
+  "completeGoal": false,
+  "frozenRoot05InputCount": 175,
+  "coreSha256": "a361bf6857af3d7f6ab1c22e91897ee8f43def4825c0d16740138074aefb74c4",
+  "receipts": {
+    "build01": {
+      "phase": "build01",
+      "start": "2026-10-03T20:16:05.157669+00:00",
+      "end": "2026-10-03T20:16:17.551123+00:00",
+      "exit": 0,
+      "timedOut": false,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "c0e47a69ed4934822f592ba97119580e0f5cd639a177819fe2d0fe0001fc96bc",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577",
+      "distHashes": {
+        "assets/index-BNNBsAUQ.js": "715fc38bbd38623c7214fcaa8283225b90262371120f76adae030a3005f3ca68",
+        "assets/index-BNNBsAUQ.js.map": "890a593033212c7d7ee635616c4dca68892cca17fa3eea4915181cef67bdc17e",
+        "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+        "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+        "assets/three-vwNga81B.js.map": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+        "favicon.svg": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+        "index.html": "3a6fa78f2bfe74006be5a4635bda85bb52908b1083d04bcc9cb00cc92990acee"
+      }
+    },
+    "ui01": {
+      "phase": "ui01",
+      "start": "2026-10-03T20:17:10.800822+00:00",
+      "end": "2026-10-03T20:20:13.214586+00:00",
+      "exit": 0,
+      "timedOut": false,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "5efc00e85ff9b1b4a85832c0bc69c11e58aba3623c95978139e62520bed9e670",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577"
+    },
+    "browser01": {
+      "phase": "browser01",
+      "start": "2026-10-03T20:20:45.766107+00:00",
+      "end": "2026-10-03T20:30:18.386064+00:00",
+      "exit": 0,
+      "timedOut": false,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "b48017949e078ed1c916efed8454a840b1b981de4f6dc9c513810f0ab8f44db3",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577"
+    },
+    "old-public-reader01": {
+      "phase": "old-public-reader01",
+      "start": "2026-10-03T21:00:57.967399+00:00",
+      "end": "2026-10-03T21:00:59.917606+00:00",
+      "exit": 0,
+      "timedOut": false,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "d885e100839e68fec256f4e5c7a4eb9439ae3da40bac761f62e1fc597a22a91c",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577"
+    },
+    "full-suite01": {
+      "phase": "full-suite01",
+      "start": "2026-10-03T20:16:39.615283+00:00",
+      "end": "2026-10-03T21:46:39.846152+00:00",
+      "exit": -15,
+      "timedOut": true,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "c826fc38ce1636638dc5b943e0e72b5cb54374f52bb4539f850850a4e9b15dc8",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577"
+    },
+    "economy14-01": {
+      "phase": "economy14-01",
+      "start": "2026-10-03T20:16:39.614380+00:00",
+      "end": "2026-10-03T21:35:14.772678+00:00",
+      "exit": 1,
+      "timedOut": false,
+      "inputCount": 175,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "a91254ebeb15e50ff4bfb26ce100232697a9c3e2c36f660566ac482ea8810656",
+      "wrapperSha256": "bd2ddc0b5dbe23d27249c59e3f46be198512c035dc84503fef81bce587c20577"
+    }
+  },
+  "fullSuite": {
+    "status": "TIMEOUT_PARTIAL",
+    "observedSkipLines": 4,
+    "runnerFinalSummaryAvailable": false,
+    "failureNames": [
+      "✖ unwalkable public offers are filtered and a full home still rejects routing without changing needs or wallet (4.387144ms)",
+      "✖ marked public service permissions remain authoritative when setting a destination (3.054198ms)",
+      "✖ v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash (170385.770101ms)",
+      "✖ v4 expansion and hiring use the real company work point without free materials, payroll or completion (158122.277922ms)",
+      "✖ v4 financial fixture uses a real bank service point for listing and finite issued share exchange (165334.449835ms)",
+      "✖ v4 acquisition denies another room and settles actual shareholders at the target work point (160108.736328ms)"
+    ],
+    "remainingCasesNotCompleted": true,
+    "originalRunNotRestarted": true,
+    "orphanCleanup": {
+      "cleanedAt": "2026-10-03T21:49:02.552977+00:00",
+      "reason": "Original full-suite bound elapsed; npm parent exited after group TERM while its verified Node test child remained active. Only that owned child was killed.",
+      "pid": 262013,
+      "verifiedStartTicks": "19455712",
+      "verifiedOriginalProcessGroup": 261989,
+      "signal": "SIGKILL",
+      "remainingGroupMembers": [
+        {
+          "pid": 262013,
+          "state": "Z",
+          "startTicks": "19455712"
+        },
+        {
+          "pid": 262308,
+          "state": "Z",
+          "startTicks": "19461139"
+        }
+      ],
+      "activeRemaining": [],
+      "rawSha256Before": "c826fc38ce1636638dc5b943e0e72b5cb54374f52bb4539f850850a4e9b15dc8",
+      "rawSha256After": "c826fc38ce1636638dc5b943e0e72b5cb54374f52bb4539f850850a4e9b15dc8",
+      "rawUnchanged": true,
+      "originalReceiptPreserved": true,
+      "runRestarted": false
+    },
+    "observedTopLevelPassLines": 702,
+    "observedNestedPassLines": 83,
+    "observedTopLevelFailLines": 6,
+    "observedPassLinesAreNotRunnerTotals": true
+  },
+  "publicRestFixture": {
+    "installedAt": "2026-10-03T21:32:59.953553+00:00",
+    "head": "a1e7f05849590da2e108d05ee69f2ba46ee9ff2d",
+    "inputCount": 175,
+    "beforeAll175MatchedRoot05": true,
+    "delta": [
+      "tests/npc-public-rest.test.ts"
+    ],
+    "beforeTestSha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+    "afterTestSha256": "0f2d1e4d86a479846cd9b759ec8b48af1315b491556255a255d083197167a516",
+    "runtimeSourceChanged": false,
+    "auditDriverChanged": false,
+    "originalAssertionsChanged": false,
+    "candidateScopedResult": "10 PASS / 0 FAIL; isolated typecheck exit0",
+    "wholeRoot05RunRemainsHistoricalAndUntouched": true,
+    "backup": "/tmp/yunshan-guarded-install-20261003-03"
+  },
+  "economy14": {
+    "status": "failed",
+    "auditStatus": "failed",
+    "speed": 8,
+    "seed": 20261001,
+    "requestedDays": 14,
+    "ticks": 10080,
+    "elapsedGameMinutes": 20160,
+    "initialPolicy": {
+      "taxRate": 0.08,
+      "policeBudget": 0.3
+    },
+    "sourceHash": {
+      "scripts/economy-audit.ts": "6dd0d9e36ba6fca79dbaebb78b49539ccde415aeac22b29fc70a3d894713411f",
+      "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "src/architecture-floor-plan.ts": "27431000d8f47ad5c5ece0e8c9319362c0610efda53559854a317995f1fc5f08",
+      "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "src/hygiene-ui.ts": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "src/main.ts": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "src/persistence/partition.ts": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "src/renderer.ts": "817f1a7462d51222ff7b98932e8046045b4e4f41a3c53d43c7056d13458e2426",
+      "src/rendering/architecture-bodies.ts": "9a0a21580e1ace1e9df21ae91d4187933ce53e95b82e92639e00ae6b0ea75e86",
+      "src/rendering/architecture-detail.ts": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "src/rendering/terrain.ts": "dc38bb8db71aba80bcd5d227731873abb906a9d12dbd5d546ea259594402ae85",
+      "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "src/simulation.ts": "a361bf6857af3d7f6ab1c22e91897ee8f43def4825c0d16740138074aefb74c4",
+      "src/simulation/activity-capacity.ts": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "src/simulation/banking.ts": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "src/simulation/culture.ts": "08cc2f50a188cd137796d50c7704d28c647c602fca997f7ed701c11a41ace76f",
+      "src/simulation/education.ts": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "src/simulation/extensions.ts": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "src/simulation/family.ts": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "src/simulation/hygiene.ts": "0bce38b7a7e4205d0970dbbac80b449c66ed1a75cad8a862a9bddd637498eb64",
+      "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "src/simulation/player-labor.ts": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+      "src/simulation/roadworks.ts": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105",
+      "src/simulation/shop_lifecycle.ts": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff",
+      "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "src/types.ts": "93c6529d09a634ee6d661d4dd17dfacb12323c4a122b08c9ac8407c56aa63ec6",
+      "src/ui.ts": "0fdecfd1ebe87df4455c5c5f8df6c559fbde6c741213f7530284101039dd2cac",
+      "src/world.ts": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843"
+    },
+    "endSourceHash": {
+      "scripts/economy-audit.ts": "6dd0d9e36ba6fca79dbaebb78b49539ccde415aeac22b29fc70a3d894713411f",
+      "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "src/architecture-floor-plan.ts": "27431000d8f47ad5c5ece0e8c9319362c0610efda53559854a317995f1fc5f08",
+      "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "src/hygiene-ui.ts": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "src/main.ts": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "src/persistence/partition.ts": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "src/renderer.ts": "817f1a7462d51222ff7b98932e8046045b4e4f41a3c53d43c7056d13458e2426",
+      "src/rendering/architecture-bodies.ts": "9a0a21580e1ace1e9df21ae91d4187933ce53e95b82e92639e00ae6b0ea75e86",
+      "src/rendering/architecture-detail.ts": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "src/rendering/terrain.ts": "dc38bb8db71aba80bcd5d227731873abb906a9d12dbd5d546ea259594402ae85",
+      "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "src/simulation.ts": "a361bf6857af3d7f6ab1c22e91897ee8f43def4825c0d16740138074aefb74c4",
+      "src/simulation/activity-capacity.ts": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "src/simulation/banking.ts": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "src/simulation/culture.ts": "08cc2f50a188cd137796d50c7704d28c647c602fca997f7ed701c11a41ace76f",
+      "src/simulation/education.ts": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "src/simulation/extensions.ts": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "src/simulation/family.ts": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "src/simulation/hygiene.ts": "0bce38b7a7e4205d0970dbbac80b449c66ed1a75cad8a862a9bddd637498eb64",
+      "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "src/simulation/player-labor.ts": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+      "src/simulation/roadworks.ts": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105",
+      "src/simulation/shop_lifecycle.ts": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff",
+      "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "src/types.ts": "93c6529d09a634ee6d661d4dd17dfacb12323c4a122b08c9ac8407c56aa63ec6",
+      "src/ui.ts": "0fdecfd1ebe87df4455c5c5f8df6c559fbde6c741213f7530284101039dd2cac",
+      "src/world.ts": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843"
+    },
+    "finalSave": {
+      "path": "artifacts/economy-root05-14-final.save.json",
+      "bytes": 3031686,
+      "sha256": "933329dc11b36cb549c91239149ac7df2f44e07fabb64e708513d9d0dac2edd8"
+    },
+    "saveValidation": {
+      "status": "passed",
+      "immediateEqual": true,
+      "futureTicks": 24,
+      "futureEqual": true,
+      "futureSaveSha256": "fb6a415288f1e91497eced465ac9ed7eb1f192d965085fbfaaa922fd4155e63d"
+    },
+    "economicTrend": {
+      "cashChangePercent": 19.896106045137273,
+      "unpaidPrivateWages": 147.76254393001727,
+      "steadyStateEstablished": false
+    },
+    "initialMoneySupply": 280736.15793671925,
+    "finalMoneySupply": 280736.15793675266,
+    "reconciliationResidual": -3.5644916351884604e-08,
+    "moneyConservationResidual": -3.341119736433029e-08,
+    "deaths": [
+      {
+        "id": "citizen-228",
+        "tick": 9117,
+        "day": 12,
+        "age": 23.034691780814935,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 0,
+        "money": 199.29706620239858,
+        "before": {
+          "health": 0.003774551128937282,
+          "hunger": 0,
+          "fatigue": 0,
+          "money": 199.29706620239858,
+          "role": "商人",
+          "state": "unreachable",
+          "destinationId": null,
+          "position": {
+            "x": 1389.9520000000002,
+            "y": 220.20000000000002,
+            "z": -243.62698100608847
+          }
+        },
+        "homeWorkDistance": 182.80459512824072,
+        "clinicDistance": 70.68361890615319,
+        "foodDistance": null
+      },
+      {
+        "id": "citizen-289",
+        "tick": 9356,
+        "day": 13,
+        "age": 39.035601217682085,
+        "health": 0,
+        "hunger": 0,
+        "fatigue": 0,
+        "money": 0,
+        "before": {
+          "health": 0.012280520210673999,
+          "hunger": 0,
+          "fatigue": 0,
+          "money": 424.06032995346237,
+          "role": "商人",
+          "state": "unreachable",
+          "destinationId": null,
+          "position": {
+            "x": -1019.76,
+            "y": 281.6,
+            "z": -754.5963915022352
+          }
+        },
+        "homeWorkDistance": 152.6026212094668,
+        "clinicDistance": 486.8787600194392,
+        "foodDistance": null
+      }
+    ],
+    "failure": "AssertionError [ERR_ASSERTION]: baseline residents must remain alive throughout the audited 14-day path\n\n2 !== 0\n\n    at <anonymous> (/tmp/yunshan-continuation-20261003-05/source/scripts/economy-audit.ts:266:10)"
+  },
+  "economyInitialFinal": {
+    "npcMoney": [
+      191794.17330026394,
+      229953.7454084788
+    ],
+    "treasury": [
+      80000,
+      16950.180448232102
+    ],
+    "privateEmployees": [
+      265,
+      278
+    ],
+    "finalNpc": {
+      "alive": 614,
+      "total": 616,
+      "meanHealth": 84.66648349836109,
+      "meanHunger": 5.087012987013003,
+      "meanFatigue": 96.14960198557127,
+      "livingMeanHealth": 84.94227008956096,
+      "livingMeanHunger": 5.103583061889267,
+      "livingMeanFatigue": 96.46279287151775,
+      "researchCompleted": 1,
+      "companies": 18,
+      "zeroCapitalCompanies": 0,
+      "playerAlive": false,
+      "poor": 87,
+      "storedFood": 17,
+      "byRole": {
+        "学生": {
+          "count": 59,
+          "money": 90.06045088546878,
+          "hunger": 4.29152542372881,
+          "health": 86.97183032302314
+        },
+        "农民": {
+          "count": 27,
+          "money": 518.1041884093905,
+          "hunger": 27.200000000000166,
+          "health": 99.16159009972732
+        },
+        "钱庄职员": {
+          "count": 41,
+          "money": 476.68084721064304,
+          "hunger": 9.639024390243915,
+          "health": 83.39897510806094
+        },
+        "merchant": {
+          "count": 6,
+          "money": 2611.9664705926048,
+          "hunger": 0,
+          "health": 94.40008649264512
+        },
+        "医生": {
+          "count": 51,
+          "money": 432.3623212594312,
+          "hunger": 0.9882352941176371,
+          "health": 87.09932463277333
+        },
+        "官员": {
+          "count": 83,
+          "money": 367.3817070511984,
+          "hunger": 2.5783132530120287,
+          "health": 69.24483575238051
+        },
+        "驾驶员": {
+          "count": 47,
+          "money": 402.0416643432803,
+          "hunger": 0.2382978723404254,
+          "health": 76.46113958770631
+        },
+        "商人": {
+          "count": 140,
+          "money": 364.66778302989496,
+          "hunger": 5.731428571428587,
+          "health": 89.96527380274698
+        },
+        "老师": {
+          "count": 34,
+          "money": 268.15899170555014,
+          "hunger": 0.6117647058823543,
+          "health": 90.44134007205209
+        },
+        "警察": {
+          "count": 22,
+          "money": 384.6418310758182,
+          "hunger": 0,
+          "health": 62.086184330667955
+        },
+        "工人": {
+          "count": 75,
+          "money": 417.6366034305278,
+          "hunger": 1.7920000000000642,
+          "health": 88.91885924611074
+        },
+        "搬运工": {
+          "count": 17,
+          "money": 157.45706908985855,
+          "hunger": 30.447058823529552,
+          "health": 97.9109720008943
+        },
+        "科研员": {
+          "count": 7,
+          "money": 51.117211952830594,
+          "hunger": 0,
+          "health": 87.14497927518813
+        },
+        "scientist": {
+          "count": 7,
+          "money": 143.7403321495397,
+          "hunger": 0,
+          "health": 85.36830828614502
+        }
+      }
+    }
+  },
+  "art": "FAIL",
+  "macHardware": "NOT_RUN",
+  "arbitraryMapImport": "NOT_COMPLETE",
+  "libraryDelivery": "See delivery-receipt.json; no success or new ID is inferred here."
+}

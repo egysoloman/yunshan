@@ -6,6 +6,7 @@ import { collectActorActivityClaims, type ActorActivityClaim } from './activity-
 import { powerSupplyAt } from './power';
 import { homeRestPointBlockedByVoxels } from './home-rest';
 import { recordWasteContact, yv1WasteSourceAt } from './pathology';
+import { findPublicHealthConsumption, publicHealthConsumption } from './culture';
 import type { Building, Citizen, CommandResult, SimState, Vec3, WorldDefinition } from '../types';
 
 /** Gameplay units, not chemical mass or a licensed terminal disposal facility. */
@@ -14,10 +15,13 @@ const EPS = 1e-7, MINUTES = 10, CAPACITY = 8, CASH_LIMIT = 1e9, HISTORY = 64, MA
 const clock = (state: SimState) => state.extension!.lastUpdate;
 const terminal = (job: DisinfectionJob) => job.state === 'completed' || job.state === 'cancelled';
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-export interface WasteSourceReceipt { orderId: string; patientId: string; completedAt: number; clinicalConsumedAtSite: number; quantity: 1 }
+export interface ClinicalWasteSourceReceipt { kind?: undefined; orderId: string; patientId: string; completedAt: number; clinicalConsumedAtSite: number; quantity: 1 }
+export interface PublicHealthWasteSourceReceipt { kind: 'public-health'; sourceId: string; orderId: string; patientId: string; completedAt: number; publicConsumedAtOrder: number; quantity: 1 }
+export type WasteSourceReceipt = ClinicalWasteSourceReceipt | PublicHealthWasteSourceReceipt;
 export interface WasteSourceArchive { count: number; firstOrderId: string | null; lastOrderId: string | null; firstAt: number | null; lastAt: number | null }
 export interface WastePathogenSource { pathogenId: 'YV1'; episodeId: string; actorId: string; rootReceiptId: string; infectiousFrom: number; infectiousUntil: number; contaminatedAt: number }
 export interface WasteBatch {
+  sourceKind?: 'public-health';
   id: string; siteId: string; floor: number; pointId: string; point: Vec3; patientId: string;
   material: 'used-clinical-material'; hazard: 'used-material' | 'YV1'; pathogenSource: WastePathogenSource | null;
   generatedUnits: number; contaminatedUnits: number; reservedUnits: number; sealedUnits: number; cleaningResidualUnits: number;
@@ -160,13 +164,24 @@ export function installHygiene(simulation: Simulation): void {
     // completion position; never invent an authoritative furniture ID.
     const floor = station?.floor ?? Math.floor((person.position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors))), pointId = station?.id ?? `legacy:${floor}`, point = station?.position ?? person.position;
     const h = activate(simulation), pathogenSource = yv1WasteSourceAt(state, order.patientId, clock(state)), hazard = pathogenSource ? 'YV1' : 'used-material';
-    let batch = h.batches.find(batch => batch.siteId === site.id && batch.floor === floor && batch.pointId === pointId && batch.patientId === order.patientId && batch.hazard === hazard && distance(batch.point, point) < EPS && (!pathogenSource || batch.pathogenSource?.episodeId === pathogenSource.episodeId && batch.pathogenSource.contaminatedAt === pathogenSource.contaminatedAt));
+    let batch = h.batches.find(batch => batch.sourceKind === undefined && batch.siteId === site.id && batch.floor === floor && batch.pointId === pointId && batch.patientId === order.patientId && batch.hazard === hazard && distance(batch.point, point) < EPS && (!pathogenSource || batch.pathogenSource?.episodeId === pathogenSource.episodeId && batch.pathogenSource.contaminatedAt === pathogenSource.contaminatedAt));
     if (!batch) { batch = { id: `waste-${h.nextBatchId++}`, siteId: site.id, floor, pointId, point: { ...point }, patientId: order.patientId, material: 'used-clinical-material', hazard, pathogenSource, generatedUnits: 0, contaminatedUnits: 0, reservedUnits: 0, sealedUnits: 0, cleaningResidualUnits: 0, containedUnits: 0, archivedProcessedUnits: 0, sourceReceipts: [], sourceArchive: emptyArchive(), firstAt: clock(state), lastAt: clock(state) }; h.batches.push(batch); }
     batch.generatedUnits++; batch.contaminatedUnits++; batch.lastAt = clock(state); if (pathogenSource) batch.pathogenSource = pathogenSource; collectNewUnits(state, batch, 1);
     batch.sourceReceipts.push({ orderId: order.id, patientId: order.patientId, completedAt: clock(state), clinicalConsumedAtSite: consumed, quantity: 1 });
     if (batch.sourceReceipts.length > HISTORY) { const old = batch.sourceReceipts.shift()!, a = batch.sourceArchive; a.count++; a.firstOrderId ??= old.orderId; a.firstAt ??= old.completedAt; a.lastOrderId = old.orderId; a.lastAt = old.completedAt; }
     prior.consumed.set(site.id, consumed); h.lastObservedAt = clock(state);
     simulation.emitEvent({ type: 'hygiene-waste-generated', citizenId: order.patientId, siteId: site.id, procurementId: order.id, quantity: 1, purpose: batch.id });
+  });
+  simulation.onEvent('public-health-consumed', event => {
+    const source = publicHealthConsumption(simulation, event); if (!source) return;
+    const state = simulation.state;
+    if (state.hygiene?.batches.some(batch => batch.sourceReceipts.some(receipt => receipt.kind === 'public-health' && receipt.sourceId === source.id))) return;
+    const h = activate(simulation), pathogenSource = yv1WasteSourceAt(state, source.patientId, source.consumedAt);
+    // Each public consumption retains its own immutable source, including the
+    // original pathogen time. It never changes paid clinical stock counters.
+    const batch: WasteBatch = { sourceKind: 'public-health', id: `waste-${h.nextBatchId++}`, siteId: source.siteId, floor: source.floor, pointId: source.pointId, point: { ...source.point }, patientId: source.patientId, material: 'used-clinical-material', hazard: pathogenSource ? 'YV1' : 'used-material', pathogenSource, generatedUnits: 1, contaminatedUnits: 1, reservedUnits: 0, sealedUnits: 0, cleaningResidualUnits: 0, containedUnits: 0, archivedProcessedUnits: 0, sourceReceipts: [{ kind: 'public-health', sourceId: source.id, orderId: source.orderId, patientId: source.patientId, completedAt: source.consumedAt, publicConsumedAtOrder: source.consumptionIndex, quantity: 1 }], sourceArchive: emptyArchive(), firstAt: source.consumedAt, lastAt: source.consumedAt };
+    h.batches.push(batch); collectNewUnits(state, batch, 1); h.lastObservedAt = clock(state);
+    simulation.emitEvent({ type: 'hygiene-waste-generated', citizenId: source.patientId, siteId: source.siteId, procurementId: source.orderId, quantity: 1, purpose: batch.id });
   });
   simulation.registerCommandHandler(command => {
     if (command.type === 'disinfectWaste') return beginDisinfection(simulation, command.targetId ?? '', command.value ?? 20);
@@ -220,7 +235,8 @@ export function installHygiene(simulation: Simulation): void {
 }
 
 export function validateHygieneState(state: SimState, world: WorldDefinition): void {
-  const h = state.hygiene; if (h === undefined) return;
+  const publicSources = state.culture?.orders?.flatMap(order => order.healthConsumptions ?? []) ?? [];
+  const h = state.hygiene; if (h === undefined) { if (publicSources.length) throw new Error('卫生存档无效：公共耗用缺少真实废物。'); return; }
   const ensure = (condition: unknown, label: string): void => { if (!condition) throw new Error(`卫生存档无效：${label}`); };
   const object = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object' && !Array.isArray(value);
   const number = (value: unknown, min: number, max: number, label: string, integer = false): void => ensure(typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max && (!integer || Number.isInteger(value)), label);
@@ -231,7 +247,7 @@ export function validateHygieneState(state: SimState, world: WorldDefinition): v
   const batchIds = new Set<string>(), sourceIds = new Set<string>(), generated = new Map<string, number>(), capacities = new Map<string, number>(), completed = new Map<string, number>(), reserved = new Map<string, number>();
   for (const b of h.batches) {
     ensure(object(b) && /^waste-[1-9]\d*$/.test(b.id) && !batchIds.has(b.id) && Number(b.id.slice(6)) < h.nextBatchId, '唯一批次'); batchIds.add(b.id);
-    const site = sites.get(b.siteId); ensure(site?.kind === 'clinic' && actorIds.has(b.patientId) && b.material === 'used-clinical-material', '真实用品来源主体');
+    const site = sites.get(b.siteId); ensure(site?.kind === 'clinic' && actorIds.has(b.patientId) && b.material === 'used-clinical-material' && (b.sourceKind === undefined || b.sourceKind === 'public-health'), '真实用品来源主体');
     number(b.floor, 0, site!.floors - 1, '真实楼层', true); ensure(typeof b.pointId === 'string' && b.pointId.length <= 240 && object(b.point) && [b.point.x, b.point.y, b.point.z].every(value => typeof value === 'number' && Number.isFinite(value)), '实际站点');
     if (getBuildingBody(site!)) ensure(clinicalServiceStationsAtPosition(site!, b.point, { role: 'traveler', identities: ['traveler'] }, []).some(point => point.id === b.pointId && point.floor === b.floor && distance(point.position, b.point) < EPS), '可信公共服务站');
     else ensure(b.pointId === `legacy:${b.floor}` && clinicalAtSitePosition(site!, b.point, b.floor), '旧设施实际位置');
@@ -241,12 +257,26 @@ export function validateHygieneState(state: SimState, world: WorldDefinition): v
     ensure(b.generatedUnits >= 1 && b.reservedUnits <= b.contaminatedUnits && b.cleaningResidualUnits === b.sealedUnits && b.containedUnits <= b.generatedUnits + b.cleaningResidualUnits, '废物保管数量'); close(b.generatedUnits, b.contaminatedUnits + b.sealedUnits, '原用品不消失');
     number(b.firstAt, h.activatedAt, now, '最初废物时间'); number(b.lastAt, b.firstAt, now, '末次废物时间'); ensure(Array.isArray(b.sourceReceipts) && b.sourceReceipts.length <= HISTORY && object(b.sourceArchive), '源回执容器'); number(b.sourceArchive.count, 0, 1e9, '聚合源计数', true);
     if (b.sourceArchive.count === 0) ensure(b.sourceArchive.firstOrderId === null && b.sourceArchive.lastOrderId === null && b.sourceArchive.firstAt === null && b.sourceArchive.lastAt === null, '空源归档'); else { ensure(/^clinical-[1-9]\d*$/.test(b.sourceArchive.firstOrderId ?? '') && /^clinical-[1-9]\d*$/.test(b.sourceArchive.lastOrderId ?? ''), '源归档名称'); number(b.sourceArchive.firstAt, b.firstAt, b.lastAt, '归档开始'); number(b.sourceArchive.lastAt, b.sourceArchive.firstAt!, b.lastAt, '归档结束'); }
+    if (b.sourceKind === 'public-health') ensure(b.generatedUnits === 1 && b.sourceReceipts.length === 1 && b.sourceReceipts[0].kind === 'public-health' && b.sourceArchive.count === 0, '公共源保留单份不可变原件，不作临床聚合归档');
     let previous = b.sourceArchive.lastAt ?? b.firstAt;
-    for (const r of b.sourceReceipts) { ensure(object(r) && /^clinical-[1-9]\d*$/.test(r.orderId) && !sourceIds.has(r.orderId) && r.patientId === b.patientId && r.quantity === 1, '唯一真实消耗回执'); sourceIds.add(r.orderId); number(r.completedAt, previous, b.lastAt, '源时钟'); previous = r.completedAt; number(r.clinicalConsumedAtSite, 1, state.clinical?.stock[b.siteId]?.consumedUnits ?? 0, '实际累计消耗', true); const order = state.clinical?.orders.find(order => order.id === r.orderId); if (order) ensure(order.state === 'completed' && order.patientId === r.patientId && order.siteId === b.siteId && order.completedAt === r.completedAt && order.consumedUnits === 1, '仍保留源订单对账'); }
-    close(b.generatedUnits, b.sourceArchive.count + b.sourceReceipts.length, '源单位与批次数'); generated.set(b.siteId, (generated.get(b.siteId) ?? 0) + b.generatedUnits);
+    for (const r of b.sourceReceipts) {
+      ensure(object(r) && r.patientId === b.patientId && r.quantity === 1, '真实消耗主体');
+      number(r.completedAt, previous, b.lastAt, '源时钟'); previous = r.completedAt;
+      if (r.kind === 'public-health') {
+        ensure(b.sourceKind === 'public-health' && typeof r.sourceId === 'string' && !sourceIds.has(r.sourceId) && b.generatedUnits === 1 && b.sourceReceipts.length === 1 && b.sourceArchive.count === 0 && b.firstAt === r.completedAt && b.lastAt === r.completedAt, '唯一公共耗用原件'); sourceIds.add(r.sourceId);
+        const source = findPublicHealthConsumption(state, r.sourceId);
+        ensure(source && source.orderId === r.orderId && source.patientId === r.patientId && source.siteId === b.siteId && source.consumedAt === r.completedAt && source.consumptionIndex === r.publicConsumedAtOrder && source.floor === b.floor && source.pointId === b.pointId && distance(source.point, b.point) < EPS, '公共订单耗用及站点对账');
+      } else {
+        ensure(r.kind === undefined && b.sourceKind === undefined && /^clinical-[1-9]\d*$/.test(r.orderId) && !sourceIds.has(r.orderId), '唯一真实临床消耗回执'); sourceIds.add(r.orderId);
+        number(r.clinicalConsumedAtSite, 1, state.clinical?.stock[b.siteId]?.consumedUnits ?? 0, '实际累计消耗', true);
+        const order = state.clinical?.orders.find(order => order.id === r.orderId); if (order) ensure(order.state === 'completed' && order.patientId === r.patientId && order.siteId === b.siteId && order.completedAt === r.completedAt && order.consumedUnits === 1, '仍保留源订单对账');
+      }
+    }
+    close(b.generatedUnits, b.sourceArchive.count + b.sourceReceipts.length, '源单位与批次数'); if (b.sourceKind === undefined) generated.set(b.siteId, (generated.get(b.siteId) ?? 0) + b.generatedUnits);
     const key = `${b.siteId}:${b.floor}:${b.pointId}`; capacities.set(key, (capacities.get(key) ?? 0) + b.containedUnits); completed.set(b.id, b.archivedProcessedUnits); reserved.set(b.id, 0);
   }
   ensure(h.nextBatchId === h.batches.length + 1, '批次从不删除'); for (const value of capacities.values()) ensure(value <= CAPACITY, '有限原站点容器');
+  ensure(publicSources.every(source => sourceIds.has(source.id)), '每份新公共耗用都保留废物，不倒填旧单位');
   for (const [siteId, baseline] of Object.entries(h.clinicalBaseline)) { ensure(sites.get(siteId)?.kind === 'clinic', '迁移源设施'); number(baseline, 0, state.clinical?.stock[siteId]?.consumedUnits ?? 0, '迁移消费水位', true); }
   for (const [siteId, s] of Object.entries(state.clinical?.stock ?? {})) close(s.consumedUnits, (h.clinicalBaseline[siteId] ?? 0) + (generated.get(siteId) ?? 0), '只记激活后的真实临床消耗');
   ensure(object(h.stats) && object(h.archived), '累计账'); for (const totals of [h.stats, h.archived]) for (const key of ['funded', 'purchasePaid', 'refunded', 'workedMinutes', 'completed', 'cancelled'] as const) number(totals[key], 0, 1e12, `累计${key}`, key === 'completed' || key === 'cancelled'); number(h.archived.count, 0, 1e9, '已结归档数', true); close(h.archived.count, h.archived.completed + h.archived.cancelled, '归档状态'); close(h.archived.funded, h.archived.purchasePaid + h.archived.refunded, '归档托管守恒');

@@ -835,8 +835,8 @@ export class CityRenderer implements CityRendererAPI {
     const angle = (state.hour - 6) / 24 * Math.PI * 2, altitude = Math.sin(angle), daylight = THREE.MathUtils.smoothstep(altitude, -.12, .28), twilight = Math.max(0, 1 - Math.abs(altitude) * 4);
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
     this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, altitude * 1400); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
-    this.sun.intensity = daylight * 3.6; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .58 + daylight * .5;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#e1dfcc'), daylight); this.fill.groundColor.set('#344d4b').lerp(new THREE.Color('#887961'), daylight);
+    this.sun.intensity = daylight * 3.6; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .58 + daylight * .22;
+    this.fill.color.set('#89aec3').lerp(new THREE.Color('#b9d3dd'), daylight); this.fill.groundColor.set('#344d4b').lerp(new THREE.Color('#4c5955'), daylight);
     const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#bdd7dd'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
     const top = new THREE.Color('#071822').lerp(new THREE.Color('#418daf'), daylight);
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);

@@ -631,6 +631,22 @@ export class CityUI {
       const card = element('div', 'system-card'); card.dataset.roadEdge = edge.id;
       const from = this.world.nodes.find(node => node.id === edge.from), to = this.world.nodes.find(node => node.id === edge.to);
       card.append(element('strong', '', `${from?.name ?? edge.from} ↔ ${to?.name ?? edge.to}`), element('p', 'note', '山洪关闭：新来者须改道；已在路段内的人车沿许可出口离开。'));
+      const demands = state.roadDemands?.demands.filter(demand => demand.closureId === closure.id) ?? [];
+      if (demands.length) {
+        card.append(field('居民提出的维修需求', `${demands.length} 位居民的真实行程受阻`));
+        for (const demand of demands.slice(-3)) {
+          const actor = state.citizens.find(citizen => citizen.id === demand.actorId);
+          const goal = this.world.buildings.find(building => building.id === demand.goalId);
+          const linkedJob = state.roadworks?.jobs.find(job => job.id === demand.repairId);
+          const progress = !linkedJob ? '已记录需求，等候可承接的维修订单'
+            : linkedJob.cancelledAt !== null ? '原公共维修订单已取消，受阻记录保留'
+            : linkedJob.approvedAt === null ? '已交公共维修订单，等待实际审批'
+            : '公共维修订单已获批，等待实际搬料与施工';
+          const cause = element('p', 'note', `${actor?.name ?? demand.actorId}：前往${goal?.name ?? demand.goalId}的原行程受阻，${progress}。`);
+          cause.dataset.roadDemand = demand.id;
+          card.append(cause);
+        }
+      }
       const status = roadworksStatus(state, edge.id), job = status.job;
       const goto = element('button', 'action-button', '前往工地开放端'); goto.setAttribute('type', 'button'); goto.dataset.navigation = closure.worksiteNodeId; card.append(goto);
       if (job) {

@@ -3,6 +3,7 @@ import { getBuildingBody } from '../architecture-floor-plan';
 import { clinicalAtSite, clinicalServiceStationsAtPosition } from './clinical';
 import type { SimState, WorldDefinition } from '../types';
 import { hygieneContactWindows, type WasteBatch, type WastePathogenSource } from './hygiene';
+import { findPublicHealthConsumption, publicHealthConsumption } from './culture';
 
 /** Fictional game parameters. They are not medical/epidemiological estimates. */
 export const YV1_RULES = Object.freeze({ id: 'YV1-contact-enteric-v1' as const, pathogenId: 'YV1' as const, label: 'YV1 接触性肠道病（虚构游戏规则）', incubationMinutes: 240, infectiousMinutes: 720, recoveryMinutes: 1440, immuneMinutes: 4320, wasteViableMinutes: 1440, doseWindowMinutes: 60, infectiousDose: 5, symptomaticHealthPerMinute: .02, recoveringHealthPerMinute: .005 });
@@ -19,12 +20,15 @@ export interface PathologyExposureReceipt {
   siteId: string; floor: number; pointId: string; startAt: number; endAt: number; sourceContaminatedAt: number;
   sourceInfectiousFrom: number; sourceInfectiousUntil: number; protectionFactor: number; effectiveDose: number; susceptibleFrom: number; immunityWitness: PathologyImmunityWitness | null;
 }
+export interface ClinicalPathologySupportReceipt { kind?: undefined; orderId: string; siteId: string; completedAt: number; consumedUnits: 1; minutes: 20; relief: number }
+export interface PublicHealthPathologySupportReceipt { kind: 'public-health'; sourceId: string; orderId: string; siteId: string; completedAt: number; publicConsumptionIndex: number; consumedUnits: 1; minutes: 20; relief: number }
+export type PathologySupportReceipt = ClinicalPathologySupportReceipt | PublicHealthPathologySupportReceipt;
 export interface PathologyEpisode {
   id: string; actorId: string; pathogenId: 'YV1'; rootReceiptId: string; origin: 'controlled-validation' | 'waste-contact';
   exposedAt: number; incubatingUntil: number; infectiousFrom: number; infectiousUntil: number; recoveryAt: number; immuneUntil: number;
   phase: 'incubating' | 'symptomatic' | 'recovering' | 'recovered' | 'dead'; severity: number; symptomRelief: number; susceptibleFrom: number; immunityWitness: PathologyImmunityWitness | null;
   discoveredAt: number | null; lastObservedAt: number; burdenObservedAt: number; symptomaticMinutes: number; recoveringMinutes: number; healthBurden: number; exposureReceipts: PathologyExposureReceipt[];
-  supportReceipts: { orderId: string; siteId: string; completedAt: number; consumedUnits: 1; minutes: 20; relief: number }[];
+  supportReceipts: PathologySupportReceipt[];
 }
 export interface PathologyState {
   version: 1; rulesetId: typeof YV1_RULES.id; nextEpisodeId: number; nextReceiptId: number; activatedAt: number; lastObservedAt: number;
@@ -128,6 +132,14 @@ export function installPathology(simulation: Simulation): void {
     const relief = Math.min(15, Math.max(0, 40 - episode.symptomRelief)); if (relief === 0) return; episode.symptomRelief += relief;
     episode.supportReceipts.push({ orderId: order.id, siteId: order.siteId, completedAt: clock(state), consumedUnits: 1, minutes: 20, relief }); updateEpisode(state, episode);
   });
+  simulation.onEvent('public-health-consumed', event => {
+    const source = publicHealthConsumption(simulation, event); if (!source) return;
+    const state = simulation.state, episode = state.pathology?.episodes[source.patientId];
+    if (!episode || !['symptomatic', 'recovering'].includes(phaseAt(state, episode, source.consumedAt)) || episode.supportReceipts.some(receipt => receipt.kind === 'public-health' && receipt.sourceId === source.id)) return;
+    const relief = Math.min(15, Math.max(0, 40 - episode.symptomRelief)); if (relief === 0) return;
+    episode.symptomRelief += relief;
+    episode.supportReceipts.push({ kind: 'public-health', sourceId: source.id, orderId: source.orderId, siteId: source.siteId, completedAt: source.consumedAt, publicConsumptionIndex: source.consumptionIndex, consumedUnits: 1, minutes: 20, relief }); updateEpisode(state, episode);
+  });
   simulation.registerSaveValidator(state => validatePathologyState(state, simulation.worldDefinition));
 }
 
@@ -174,7 +186,22 @@ export function validatePathologyState(state: SimState, world: WorldDefinition):
     ensure(['incubating', 'symptomatic', 'recovering', 'recovered', 'dead'].includes(e.phase) && e.discoveredAt === null, '不冒已完成具名检查或化验'); number(e.symptomRelief, 0, 40, '护理缓解'); number(e.severity, 0, 40, '游戏症状'); ensure(Array.isArray(e.exposureReceipts) && e.exposureReceipts.length <= DOSE_HISTORY && new Set(e.exposureReceipts.map(r => r.id)).size === e.exposureReceipts.length && Array.isArray(e.supportReceipts) && e.supportReceipts.length <= 64, '唯一病例回执');
     if (initial) ensure(e.exposureReceipts.length === 0 && p.sourceReceipts.some(r => r.id === e.rootReceiptId && r.actorId === e.actorId && r.at === e.exposedAt), '受控病例起点');
     else { ensure(e.exposureReceipts.length > 0, '感染须真实接触'); for (const r of e.exposureReceipts) { validateExposure(r); ensure(r.actorId === e.actorId && r.susceptibleFrom === e.susceptibleFrom && sameImmunity(r.immunityWitness, e.immunityWitness) && r.endAt <= e.exposedAt + EPS && r.endAt > e.exposedAt - YV1_RULES.doseWindowMinutes, '感染前真实滚动易感窗口'); } ensure(yv1DoseInWindow(e.exposureReceipts, e.exposedAt) + EPS >= YV1_RULES.infectiousDose, '足量真实接触'); }
-    let relief = 0; const supportIds = new Set<string>(); for (const r of e.supportReceipts) { ensure(object(r) && /^clinical-[1-9]\d*$/.test(r.orderId) && !supportIds.has(r.orderId) && sites.get(r.siteId)?.kind === 'clinic' && r.consumedUnits === 1 && r.minutes === 20, '真实临床支持回执'); supportIds.add(r.orderId); number(r.completedAt, e.exposedAt, now, '支持完成'); number(r.relief, 0, 15, '支持缓解'); const order = state.clinical?.orders.find(order => order.id === r.orderId); if (order) ensure(order.state === 'completed' && order.patientId === e.actorId && order.siteId === r.siteId && order.completedAt === r.completedAt && order.consumedUnits === 1, '仍保留临床订单'); relief += r.relief; } close(e.symptomRelief, relief, '只有真实支持缓解症状');
+    let relief = 0; const supportIds = new Set<string>();
+    for (const r of e.supportReceipts) {
+      ensure(object(r) && sites.get(r.siteId)?.kind === 'clinic' && r.consumedUnits === 1 && r.minutes === 20, '真实护理支持回执');
+      number(r.completedAt, e.exposedAt, now, '支持完成'); number(r.relief, 0, 15, '支持缓解');
+      if (r.kind === 'public-health') {
+        ensure(r.completedAt >= e.infectiousFrom && r.completedAt < e.recoveryAt, '公共护理必须在原症状或恢复期间，后来死亡不抹除历史');
+        ensure(typeof r.sourceId === 'string' && !supportIds.has(r.sourceId), '公共护理来源唯一'); supportIds.add(r.sourceId);
+        const source = findPublicHealthConsumption(state, r.sourceId);
+        ensure(source && source.orderId === r.orderId && source.patientId === e.actorId && source.siteId === r.siteId && source.consumedAt === r.completedAt && source.consumptionIndex === r.publicConsumptionIndex, '真实公共诊疗耗用回执');
+      } else {
+        ensure(r.kind === undefined && /^clinical-[1-9]\d*$/.test(r.orderId) && !supportIds.has(r.orderId), '真实临床支持回执'); supportIds.add(r.orderId);
+        const order = state.clinical?.orders.find(order => order.id === r.orderId); if (order) ensure(order.state === 'completed' && order.patientId === e.actorId && order.siteId === r.siteId && order.completedAt === r.completedAt && order.consumedUnits === 1, '仍保留临床订单');
+      }
+      relief += r.relief;
+    }
+    close(e.symptomRelief, relief, '只有真实支持缓解症状');
     if (p.episodes[e.actorId] === e) { ensure(e.lastObservedAt === now && e.burdenObservedAt === now && e.phase === phaseAt(state, e, now), '当前病例完整tick真实观察必须闭合'); const base = e.phase === 'symptomatic' ? 40 : e.phase === 'recovering' ? 15 : 0; close(e.severity, Math.max(0, base - e.symptomRelief), '症状不能冒病毒清除'); }
   }
   for (const [id, receipts] of Object.entries(p.pendingDose)) { ensure(actorIds.has(id) && Array.isArray(receipts) && receipts.length > 0 && receipts.length <= DOSE_HISTORY && new Set(receipts.map(r => r.id)).size === receipts.length, '有限唯一待积累接触'); let end = -Infinity; for (const r of receipts) { validateExposure(r); ensure(r.actorId === id && r.startAt >= end - EPS && r.endAt > now - YV1_RULES.doseWindowMinutes, '真实有序未过期待感染窗口'); end = r.endAt; } ensure(yv1DoseInWindow(receipts, now) < YV1_RULES.infectiousDose + EPS, '待感染剂量窗口'); }

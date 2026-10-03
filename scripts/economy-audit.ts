@@ -1,7 +1,7 @@
 import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { createWorld } from '../src/world';
 import { Simulation } from '../src/simulation';
 import { bankingBalanceSheet } from '../src/simulation/banking';
@@ -23,9 +23,27 @@ const seed = numeric('--seed', 20261001, 1, 4294967295); assert.ok(Number.isInte
 const initialPolicy = { taxRate: numeric('--tax-rate', .08, 0, .3), policeBudget: numeric('--police-budget', .3, 0, 1) };
 const artifact = argumentsByName.get('--out') ?? 'artifacts/economy-audit.json';
 assert.ok(/^artifacts\/[a-zA-Z0-9-]+\.json$/.test(artifact), 'audit output must be a named JSON artifact');
-const sourceHash = Object.fromEntries(await Promise.all([
-  'src/simulation.ts', 'src/simulation/extensions.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/simulation/clinical.ts', 'src/simulation/education.ts', 'src/simulation/activity-minutes.ts', 'src/simulation/activity-capacity.ts', 'src/simulation/funded-work.ts', 'src/simulation/power.ts', 'src/simulation/shop_lifecycle.ts', 'src/simulation/hygiene.ts', 'src/simulation/pathology.ts', 'src/simulation/banking.ts', 'src/simulation/trade.ts', 'src/simulation/player-labor.ts', 'src/simulation/journeys.ts', 'src/journey.ts', 'src/aviation.ts', 'src/world.ts', 'src/access.ts',
-].map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
+// Freeze every current source file, including dynamically installed modules and
+// their geometry/persistence dependencies. Rescan at the end to detect additions
+// or deletions, rather than hashing only the initial manually maintained list.
+async function sourceFiles(directory = 'src'): Promise<string[]> {
+  const entries = (await readdir(new URL(`../${directory}/`, import.meta.url), { withFileTypes: true }))
+    .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+  const files: string[] = [];
+  for (const entry of entries) {
+    assert.ok(entry.isFile() || entry.isDirectory(), `audit source must be a regular file or directory: ${directory}/${entry.name}`);
+    const file = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) files.push(...await sourceFiles(file));
+    else files.push(file);
+  }
+  return files;
+}
+async function auditSourceHashes(): Promise<Record<string, string>> {
+  const files = [...await sourceFiles(), 'scripts/economy-audit.ts'].sort();
+  return Object.fromEntries(await Promise.all(files.map(async file =>
+    [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
+}
+const sourceHash = await auditSourceHashes();
 const world = createWorld(seed);
 const sim = new Simulation(world);
 sim.state.taxRate = initialPolicy.taxRate; sim.state.policeBudget = initialPolicy.policeBudget;
@@ -44,7 +62,7 @@ const buildings = new Map(world.buildings.map(building => [building.id, building
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const totals = { sales: 0, saleCount: 0, saleTax: 0, fares: 0, payrollPublicRequested: 0,
   payrollPublicPaid: 0, payrollPrivateRequested: 0, payrollPrivate: 0, wageTax: 0, wholesale: 0, wholesaleTax: 0,
-  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, civicProcurement: 0, security: 0, financeDelta: 0 };
+  businessExpenses: 0, storedMeals: 0, production: 0, productionMinutes: 0, operationsRequested: 0, operations: 0, publicSupplies: 0, procurementTax: 0, civicProcurement: 0, security: 0, financeDelta: 0, roadworkPayroll: 0, roadworkMinutes: 0 };
 const ledger: Record<string, { count: number; amount: number; eventObserved: number }> = {};
 const seenLedger = new WeakSet<LedgerEntry>();
 const deaths: Record<string, unknown>[] = [];
@@ -82,6 +100,15 @@ sim.onEvent('wage-paid', event => {
   else totals.payrollPublicPaid += paid;
   totals.wageTax += paid * sim.state.taxRate;
   assert.ok(paid <= (event.requestedAmount ?? 0) + 1e-7, 'paid wage cannot exceed its actual request');
+});
+// Road wages are paid from the job's already-funded escrow. Its public debit
+// and refund have their own ledger entries; counting gross again as treasury
+// payroll would double-charge it. Only the actual remitted tax is revenue.
+sim.onEvent('roadwork-wage-paid', event => {
+  const gross = event.amount ?? 0, minutes = event.minutes ?? 0;
+  assert.ok(gross >= 0 && minutes > 0 && Math.abs(gross - minutes * (event.ratePerMinute ?? 0)) < 1e-7, 'road wage must match actual credited minutes and its frozen rate');
+  totals.roadworkPayroll += gross; totals.roadworkMinutes += minutes;
+  totals.wageTax += gross * sim.state.taxRate;
 });
 sim.onEvent('municipal-operation-accrual', event => { totals.operationsRequested += event.amount ?? 0; });
 sim.onEvent('public-procurement', event => { totals.operations += event.amount ?? 0; totals.publicSupplies += event.quantity ?? 0; totals.procurementTax += (event.amount ?? 0) * sim.state.taxRate; assert.ok((event.unitPrice ?? 0) >= 4 && Math.abs((event.amount ?? 0) - (event.quantity ?? 0) * (event.unitPrice ?? 0)) < 1e-7); });
@@ -167,6 +194,7 @@ function snapshot() {
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
     playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
+    roadworks: s.roadworks ? { escrow: s.roadworks.jobs.reduce((sum, job) => sum + job.escrow, 0), jobs: s.roadworks.jobs.map(job => ({ id: job.id, payerId: job.payerId, status: job.status, workedMinutes: job.workedMinutes, funded: job.funded, purchasePaid: job.purchasePaid, paidGross: job.paidGross, paidTax: job.paidTax, refunded: job.refunded, escrow: job.escrow })) } : null,
     power: s.power ? structuredClone(s.power) : null,
     hygiene: s.hygiene ? { escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock) } : null,
     education: s.education ? { course: s.education.course ? { ...s.education.course, staffMinutes: { ...s.education.course.staffMinutes } } : null, stats: { ...s.education.stats }, stock: structuredClone(s.education.stock) } : null,
@@ -201,6 +229,7 @@ function moneySupply() {
     + s.shops.filter(shop => !e.companies.some(c => c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, c) => sum + c.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0)
     + (s.playerLabor?.job?.escrow ?? 0)
+    + (s.roadworks?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.education?.course?.escrow ?? 0)
     + (s.power?.repairs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
@@ -239,11 +268,21 @@ try {
   failure = error instanceof Error ? error.stack ?? error.message : String(error);
   process.exitCode = 1;
 }
-const endSourceHash = Object.fromEntries(await Promise.all(Object.keys(sourceHash).map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
+const endSourceHash = await auditSourceHashes();
 if (JSON.stringify(sourceHash) !== JSON.stringify(endSourceHash)) { failure ??= 'Simulation source changed during the audit; rerun after freezing the validated files.'; process.exitCode = 1; }
 await mkdir(new URL('../artifacts/', import.meta.url), { recursive: true });
-await writeFile(new URL(`../${artifact}`, import.meta.url), JSON.stringify({
+// Preserve the actual terminal state for later causal review. This serialization
+// neither advances the city nor changes any balances or original audit guards.
+const finalSavePath = artifact.slice(0, -5) + '-final.save.json';
+const finalSaveText = sim.exportSave();
+await writeFile(new URL(`../${finalSavePath}`, import.meta.url), finalSaveText);
+const finalSave = { path: finalSavePath, bytes: Buffer.byteLength(finalSaveText), sha256: createHash('sha256').update(finalSaveText).digest('hex') };
+// Capture the baseline before exercising the real terminal state and its reader.
+// Audit event observers continue to run below; they must not rewrite these totals.
+const baselineResult = JSON.parse(JSON.stringify({
   status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, seed, requestedDays, initialPolicy, ticks: sim.state.tick,
+  finalSave, terminalTreasury: sim.state.treasury,
+  sourceHashScope: 'All regular src files and this audit driver; both ends recursively rescan the same source tree.',
   scope: 'One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.',
   elapsedGameMinutes: extension().lastUpdate - initialMinute, totals, ledger, snapshots, deaths, starts,
   researchFunding, exactResearchDebits, researchCompleted: extension().stats.researchCompleted,
@@ -251,8 +290,31 @@ await writeFile(new URL(`../${artifact}`, import.meta.url), JSON.stringify({
   economicTrend: snapshots.length ? { cashChangePercent: (snapshots.at(-1)!.npcMoney / snapshots[0].npcMoney - 1) * 100,
     unpaidPrivateWages: totals.payrollPrivateRequested - totals.payrollPrivate,
     steadyStateEstablished: false } : undefined, ...(failure ? { failure } : {}),
-}, null, 2));
-console.log(JSON.stringify({ status: failure ? 'failed' : 'passed', deaths: deaths.length,
-  treasury: sim.state.treasury, researchCompleted: extension().stats.researchCompleted,
-  researchFunding, reconciliationResidual, moneyConservationResidual, artifact }));
+}));
+let saveValidation: Record<string, unknown>;
+try {
+  const originalBytes = await readFile(new URL(`../${finalSavePath}`, import.meta.url), 'utf8');
+  assert.equal(originalBytes, finalSaveText, 'written terminal save must retain the original bytes');
+  const restored = new Simulation(world), result = restored.importSave(originalBytes);
+  assert.ok(result.ok, result.message);
+  assert.equal(restored.exportSave(), finalSaveText, 'terminal save must reproduce the actual terminal city');
+  for (let tick = 0; tick < 24; tick++) {
+    sim.step(.25); restored.step(.25);
+    assert.equal(restored.exportSave(), sim.exportSave(), `terminal reader diverged at future tick ${tick + 1}`);
+  }
+  const futureSave = sim.exportSave();
+  saveValidation = { status: 'passed', immediateEqual: true, futureTicks: 24, futureEqual: true,
+    futureSaveSha256: createHash('sha256').update(futureSave).digest('hex') };
+} catch (error) {
+  const saveFailure = error instanceof Error ? error.stack ?? error.message : String(error);
+  saveValidation = { status: 'failed', failure: saveFailure };
+  failure ??= saveFailure; process.exitCode = 1;
+}
+await writeFile(new URL(`../${artifact}`, import.meta.url), JSON.stringify({ ...baselineResult,
+  auditStatus: baselineResult.status, status: failure ? 'failed' : 'passed', saveValidation,
+  ...(failure ? { failure } : {}) }, null, 2));
+console.log(JSON.stringify({ status: failure ? 'failed' : 'passed', auditStatus: baselineResult.status,
+  deaths: baselineResult.deaths.length, treasury: baselineResult.terminalTreasury,
+  researchCompleted: baselineResult.researchCompleted, researchFunding: baselineResult.researchFunding,
+  reconciliationResidual, moneyConservationResidual, artifact, finalSave, saveValidation }));
 if (failure) console.error(failure);

@@ -359,6 +359,19 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   // A restored actor on a real fixture top is supported; it is not lifted there.
   for(const f of p.fixtures)if(contains(f.rect,local.x,local.z)&&Math.abs(local.y-(p.y+f.top))<.01)choices.push({top:p.y+f.top,kind:'room',floor});
   choices.sort((a,z)=>Math.abs(a.top-local.y)-Math.abs(z.top-local.y)||z.top-a.top);
+  if(radius>0&&choices.length===0) {
+    // An obstacle cannot supply a missing support choice. Retain the public
+    // descriptor-cache lifetime, including the original positive-radius order.
+    for(const f of plans) {
+      const panels=wallPanels(f);
+      // Sparse/null members previously threw in localSolids even without a
+      // support choice. Delegate these malformed inputs to that original path.
+      for(const s of panels)if(s==null){localSolids(b,p,plans,surfaces);return null;}
+      for(const s of f.fixtures)if(s==null){localSolids(b,p,plans,surfaces);return null;}
+    }
+    for(const f of plans)if(f.floor>p.floor)getFloorPlanSlabRegions(f);
+    return null;
+  }
   const solids=radius>0?localSolids(b,p,plans,surfaces):[];
   // Keep the existing lazy descriptor-cache priming without allocating solids.
   // FloorPlan arrays remain public and mutable; this preserves their existing
