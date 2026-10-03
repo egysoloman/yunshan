@@ -9,6 +9,7 @@ const here=dirname(fileURLToPath(import.meta.url)),repo=resolve(here,'../../..')
 const work=mkdtempSync(join(tmpdir(),'yunshan-empty-support-'));
 const hash=path=>createHash('sha256').update(readFileSync(path)).digest('hex');
 mkdirSync(join(work,'before'));mkdirSync(join(work,'after'));mkdirSync(join(work,'scripts'));
+writeFileSync(join(work,'package.json'),JSON.stringify({type:'module'})+'\n');
 const archive=execFileSync('git',['archive',base,'src'],{cwd:repo,maxBuffer:16*1024*1024});
 execFileSync('tar',['-x','-C',join(work,'before')],{input:archive});
 assert.equal(hash(join(work,'before/src/architecture-floor-plan.ts')),'b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42');

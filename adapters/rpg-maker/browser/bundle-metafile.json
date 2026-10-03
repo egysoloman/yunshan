@@ -1,0 +1,902 @@
+{
+  "inputs": {
+    "src/architecture-floor-plan.ts": {
+      "bytes": 44826,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/access.ts": {
+      "bytes": 2548,
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/roads.ts": {
+      "bytes": 27340,
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/world.ts": {
+      "bytes": 53722,
+      "imports": [
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/site-fixtures.ts": {
+      "bytes": 4366,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/activity-minutes.ts": {
+      "bytes": 2211,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/simulation/funded-work.ts": {
+      "bytes": 2589,
+      "imports": [
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/activity-capacity.ts": {
+      "bytes": 4695,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/simulation/power.ts": {
+      "bytes": 59025,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/funded-work.ts",
+          "kind": "import-statement",
+          "original": "./funded-work"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/shop_lifecycle.ts": {
+      "bytes": 52672,
+      "imports": [
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/clinical.ts": {
+      "bytes": 44993,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/education.ts": {
+      "bytes": 40038,
+      "imports": [
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/culture.ts": {
+      "bytes": 52353,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/education.ts",
+          "kind": "import-statement",
+          "original": "./education"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/extensions.ts": {
+      "bytes": 89519,
+      "imports": [
+        {
+          "path": "src/simulation/funded-work.ts",
+          "kind": "import-statement",
+          "original": "./funded-work"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./culture"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/aviation.ts": {
+      "bytes": 20244,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/roadworks.ts": {
+      "bytes": 45256,
+      "imports": [
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../roads"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/banking.ts": {
+      "bytes": 22254,
+      "imports": [
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/trade.ts": {
+      "bytes": 25973,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/simulation/family.ts": {
+      "bytes": 71339,
+      "imports": [
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/simulation/banking.ts",
+          "kind": "import-statement",
+          "original": "./banking"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./culture"
+        },
+        {
+          "path": "src/simulation/trade.ts",
+          "kind": "import-statement",
+          "original": "./trade"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/governance.ts": {
+      "bytes": 28875,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/transport-geometry.ts": {
+      "bytes": 9370,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/journey.ts": {
+      "bytes": 21182,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "./aviation"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        },
+        {
+          "path": "src/transport-geometry.ts",
+          "kind": "import-statement",
+          "original": "./transport-geometry"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "./site-fixtures"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "imports": [
+        {
+          "path": "src/journey.ts",
+          "kind": "import-statement",
+          "original": "../journey"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/player-labor.ts": {
+      "bytes": 14724,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/pathology.ts": {
+      "bytes": 29488,
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/hygiene.ts",
+          "kind": "import-statement",
+          "original": "./hygiene"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/simulation/hygiene.ts": {
+      "bytes": 44422,
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/pathology.ts",
+          "kind": "import-statement",
+          "original": "./pathology"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/persistence/world-layout.ts": {
+      "bytes": 4368,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/simulation.ts": {
+      "bytes": 238890,
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "./site-fixtures"
+        },
+        {
+          "path": "src/simulation/extensions.ts",
+          "kind": "import-statement",
+          "original": "./simulation/extensions"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./simulation/power"
+        },
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./simulation/shop_lifecycle"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "./aviation"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/simulation/roadworks.ts",
+          "kind": "import-statement",
+          "original": "./simulation/roadworks"
+        },
+        {
+          "path": "src/simulation/family.ts",
+          "kind": "import-statement",
+          "original": "./simulation/family"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./simulation/culture"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./simulation/clinical"
+        },
+        {
+          "path": "src/simulation/education.ts",
+          "kind": "import-statement",
+          "original": "./simulation/education"
+        },
+        {
+          "path": "src/simulation/governance.ts",
+          "kind": "import-statement",
+          "original": "./simulation/governance"
+        },
+        {
+          "path": "src/simulation/banking.ts",
+          "kind": "import-statement",
+          "original": "./simulation/banking"
+        },
+        {
+          "path": "src/simulation/journeys.ts",
+          "kind": "import-statement",
+          "original": "./simulation/journeys"
+        },
+        {
+          "path": "src/simulation/trade.ts",
+          "kind": "import-statement",
+          "original": "./simulation/trade"
+        },
+        {
+          "path": "src/simulation/player-labor.ts",
+          "kind": "import-statement",
+          "original": "./simulation/player-labor"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./simulation/home-rest"
+        },
+        {
+          "path": "src/simulation/hygiene.ts",
+          "kind": "import-statement",
+          "original": "./simulation/hygiene"
+        },
+        {
+          "path": "src/simulation/pathology.ts",
+          "kind": "import-statement",
+          "original": "./simulation/pathology"
+        },
+        {
+          "path": "src/persistence/world-layout.ts",
+          "kind": "import-statement",
+          "original": "./persistence/world-layout"
+        },
+        {
+          "path": "src/persistence/route-encoding.ts",
+          "kind": "import-statement",
+          "original": "./persistence/route-encoding"
+        }
+      ],
+      "format": "esm"
+    },
+    "adapters/rpg-maker/headless-walker.ts": {
+      "bytes": 18809,
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../../src/world"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../../src/access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../../src/architecture-floor-plan"
+        },
+        {
+          "path": "src/transport-geometry.ts",
+          "kind": "import-statement",
+          "original": "../../src/transport-geometry"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../../src/roads"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "../../src/site-fixtures"
+        }
+      ],
+      "format": "esm"
+    },
+    "adapters/rpg-maker/bridge.ts": {
+      "bytes": 15353,
+      "imports": [
+        {
+          "path": "src/simulation.ts",
+          "kind": "import-statement",
+          "original": "../../src/simulation"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../../src/world"
+        },
+        {
+          "path": "src/persistence/world-layout.ts",
+          "kind": "import-statement",
+          "original": "../../src/persistence/world-layout"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../../src/architecture-floor-plan"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../../src/access"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../../src/roads"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "../../src/aviation"
+        },
+        {
+          "path": "src/journey.ts",
+          "kind": "import-statement",
+          "original": "../../src/journey"
+        },
+        {
+          "path": "adapters/rpg-maker/headless-walker.ts",
+          "kind": "import-statement",
+          "original": "./headless-walker"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "bridge.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "adapters/rpg-maker/bridge.ts",
+      "inputs": {
+        "adapters/rpg-maker/bridge.ts": {
+          "bytesInOutput": 14062
+        },
+        "src/architecture-floor-plan.ts": {
+          "bytesInOutput": 42103
+        },
+        "src/access.ts": {
+          "bytesInOutput": 1918
+        },
+        "src/roads.ts": {
+          "bytesInOutput": 23535
+        },
+        "src/world.ts": {
+          "bytesInOutput": 48792
+        },
+        "src/site-fixtures.ts": {
+          "bytesInOutput": 3274
+        },
+        "src/simulation/activity-minutes.ts": {
+          "bytesInOutput": 1678
+        },
+        "src/simulation/funded-work.ts": {
+          "bytesInOutput": 1983
+        },
+        "src/simulation/home-rest.ts": {
+          "bytesInOutput": 14864
+        },
+        "src/simulation/activity-capacity.ts": {
+          "bytesInOutput": 3869
+        },
+        "src/simulation/power.ts": {
+          "bytesInOutput": 60786
+        },
+        "src/simulation/shop_lifecycle.ts": {
+          "bytesInOutput": 53386
+        },
+        "src/simulation/clinical.ts": {
+          "bytesInOutput": 42888
+        },
+        "src/simulation/education.ts": {
+          "bytesInOutput": 39189
+        },
+        "src/simulation/culture.ts": {
+          "bytesInOutput": 56062
+        },
+        "src/simulation/extensions.ts": {
+          "bytesInOutput": 96830
+        },
+        "src/aviation.ts": {
+          "bytesInOutput": 21769
+        },
+        "src/simulation/roadworks.ts": {
+          "bytesInOutput": 46457
+        },
+        "src/simulation/banking.ts": {
+          "bytesInOutput": 20610
+        },
+        "src/simulation/trade.ts": {
+          "bytesInOutput": 22093
+        },
+        "src/simulation/family.ts": {
+          "bytesInOutput": 75706
+        },
+        "src/simulation/governance.ts": {
+          "bytesInOutput": 29376
+        },
+        "src/transport-geometry.ts": {
+          "bytesInOutput": 6323
+        },
+        "src/journey.ts": {
+          "bytesInOutput": 17635
+        },
+        "src/simulation/journeys.ts": {
+          "bytesInOutput": 5839
+        },
+        "src/simulation/player-labor.ts": {
+          "bytesInOutput": 15001
+        },
+        "src/simulation/pathology.ts": {
+          "bytesInOutput": 27010
+        },
+        "src/simulation/hygiene.ts": {
+          "bytesInOutput": 44278
+        },
+        "src/persistence/world-layout.ts": {
+          "bytesInOutput": 3313
+        },
+        "src/persistence/route-encoding.ts": {
+          "bytesInOutput": 3869
+        },
+        "src/simulation.ts": {
+          "bytesInOutput": 241311
+        },
+        "adapters/rpg-maker/headless-walker.ts": {
+          "bytesInOutput": 19199
+        }
+      },
+      "bytes": 1107024
+    }
+  }
+}

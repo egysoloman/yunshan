@@ -1,0 +1,82 @@
+{
+  "reviewedAt": "2026-10-03T17:09:56.666575+00:00",
+  "status": "READ_ONLY_REVIEW_WITH_SCOPED_RUNTIME_EVIDENCE",
+  "testClaim": {
+    "root06FullRun": {
+      "tests": 14,
+      "pass": 13,
+      "fail": 1,
+      "exit": 1,
+      "failedTest": "upper-floor body cannot use ground door by event ID or flush queue",
+      "failedAt": "bridge.test.ts:269 fixture locator precondition, before useDoor assertions"
+    },
+    "targetedUpperDoor": {
+      "receipt": "/tmp/yunshan-mz-root07-20261003-01/upper-door01/receipt.json",
+      "receiptSha256": "cad528984397b13471beb2f2e8c394d3e2f32240450b07630b995f6508215057",
+      "raw": "/tmp/yunshan-mz-root07-20261003-01/upper-door01/raw.log",
+      "rawSha256": "f54e81063cbe5b780a44f6be1f9e3694fff109041c1134d9ee264e8c54b4a16b",
+      "exit": 0,
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "scope": "Corrected original generated bank floor1 fixture; real 3D door refusal and full envelope/queued command unchanged assertions. Independent targeted run only."
+    },
+    "allowedWording": "ROOT06全轮13 PASS/1 FAIL；ROOT07修正fixture后upper-door针对性1 PASS/0 FAIL。两者不是单轮14/14。",
+    "forbiddenWording": "本轮单次全14/14 PASS；13全轮通过+1 targeted不是一轮14/14。"
+  },
+  "canonicalSaveCompatibility": "exportCoreSave is the original yunshan-save/v1 core save; the yunshan-mz-save/v1 bridge envelope carries queue/results/fractional frame state and is not automatically accepted by the previously delivered parent MZ plugin.",
+  "parentMZDelivery": {
+    "libraryId": "libfile_3c0d4a37cd0081919db55fa1cee3f5b1",
+    "status": "PARENT_REPORTED_PRIVATE_NATIVE_MZ_1_10_0_ZIP_DELIVERED",
+    "runtime": "original frozen Simulation + CityUI + PlayerController",
+    "facadeAdopted": false,
+    "independentlyReopenedByThisReview": false
+  },
+  "runtimeEvidenceScope": [
+    "32-module browser-format IIFE was run in a Node VM with VM-own Math/JSON intrinsics and only TextEncoder/TextDecoder supplied; this is headless core evidence, not an actual browser/MZ GUI run.",
+    "ROOT06 +24 continuations cover standing-body ordinary stepping, whole-core save and bridge queue/receipt/fraction restoration plus legacy core continuation; do not extend them to every moving/stair/door interaction or arbitrary host integration.",
+    "Walker ROOT02 ten-case differential evidence is separate from ROOT06 bridge fourteen-test scope; do not add overlapping scopes.",
+    "ROOT03/ROOT05 terminated (-9) bridge rounds and ROOT02 type errors remain failures/incomplete historical evidence; retained raw records are not replaced by ROOT06 outcomes."
+  ],
+  "performance": {
+    "linuxCpuDiagnosticOnly": true,
+    "mzGuiMeasured": false,
+    "macHardwareMeasured": false,
+    "firstCoreTickObservedMs": {
+      "lexicalVmIntrinsics": 11490.992548
+    },
+    "note": "Direct/runtime diagnostics observe roughly 8–11.5 seconds for the first original core tick on this Linux host. This is a concrete startup/integration responsiveness limit, not MZ/macOS performance proof or long-run FPS."
+  },
+  "integrationRequirements": [
+    "Use one CitySession.advance per actual host frame with real seconds in [0,1]; preserve metre axes, 0.2m voxel, ground/basement floor indices and original entity IDs.",
+    "Project MZ Game_Player/events from authoritative playerLocation; do not write tile coordinates or another RNG/economy/NPC schedule into the original core.",
+    "Use useDoor/useStairs and original core commands; preserve three-dimensional 6m entrance range and original floor ACL instead of map-event authorization.",
+    "Integrate facade and bridge-envelope persistence into the parent MZ project before claiming the existing private ZIP uses the facade.",
+    "Run actual MZ GUI/open/play/save/load checks separately; arbitrary custom MZ geometry, official runtime compatibility and hardware performance are outside this review."
+  ],
+  "officialMZAssets": {
+    "writtenOrCopiedByThisReview": false,
+    "addedToGit": false,
+    "policy": "Keep official engine/trial assets out of public Git; original private parent delivery is distinct from this source/bundle facade."
+  },
+  "fullProjectGoals": "Economy steady state, complete game scope, outstanding systemic/mapping/visual requirements remain open per shared memo; this facade review does not certify their completion.",
+  "actionsNotPerformed": [
+    "Node execution",
+    "tsc",
+    "npm",
+    "browser",
+    "MZ GUI",
+    "ZIP creation",
+    "upload",
+    "Git mutation",
+    "official asset copying",
+    "shared memo editing"
+  ]
+}

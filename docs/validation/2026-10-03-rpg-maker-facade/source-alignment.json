@@ -1,0 +1,1644 @@
+{
+  "reviewedAt": "2026-10-03T17:09:56.601171+00:00",
+  "method": "Python/SHA-256 and read-only git show; no Node/tsc/npm/browser/ZIP/upload or repository changes",
+  "baseCommit": "6785ca7dcca09e8e97afd610cfd52176c7a1cfb1",
+  "coreSourceManifest": {
+    "path": "/tmp/yunshan-mz-root06-20261003-01/source/adapters/rpg-maker/core-source-manifest.json",
+    "sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad"
+  },
+  "frozenSrcCount": 49,
+  "actualRoot06SrcCount": 49,
+  "coreAllEqual": true,
+  "coreRows": [
+    {
+      "path": "src/access.ts",
+      "frozenSha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "git6785Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "sharedSha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "root03Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "root06Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "root07Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "allEqual": true
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "frozenSha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "git6785Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "sharedSha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "root03Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "root06Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "root07Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "allEqual": true
+    },
+    {
+      "path": "src/aviation-renderer.ts",
+      "frozenSha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "git6785Sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "sharedSha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "root03Sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "root06Sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "root07Sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "allEqual": true
+    },
+    {
+      "path": "src/aviation.ts",
+      "frozenSha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "git6785Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "sharedSha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "root03Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "root06Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "root07Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "allEqual": true
+    },
+    {
+      "path": "src/controller.ts",
+      "frozenSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "git6785Sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "sharedSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "root03Sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "root06Sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "root07Sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "allEqual": true
+    },
+    {
+      "path": "src/hygiene-ui.ts",
+      "frozenSha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "git6785Sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "sharedSha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "root03Sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "root06Sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "root07Sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "allEqual": true
+    },
+    {
+      "path": "src/journey.ts",
+      "frozenSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "git6785Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "sharedSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "root03Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "root06Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "root07Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "allEqual": true
+    },
+    {
+      "path": "src/main.ts",
+      "frozenSha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "git6785Sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "sharedSha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "root03Sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "root06Sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "root07Sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "allEqual": true
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "frozenSha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "git6785Sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "sharedSha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "root03Sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "root06Sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "root07Sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+      "allEqual": true
+    },
+    {
+      "path": "src/persistence/route-encoding.ts",
+      "frozenSha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "git6785Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "sharedSha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "root03Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "root06Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "root07Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "allEqual": true
+    },
+    {
+      "path": "src/persistence/session.ts",
+      "frozenSha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "git6785Sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "sharedSha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "root03Sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "root06Sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "root07Sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "allEqual": true
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "frozenSha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "git6785Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "sharedSha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "root03Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "root06Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "root07Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "allEqual": true
+    },
+    {
+      "path": "src/persistence.ts",
+      "frozenSha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "git6785Sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "sharedSha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "root03Sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "root06Sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "root07Sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "allEqual": true
+    },
+    {
+      "path": "src/renderer.ts",
+      "frozenSha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "git6785Sha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "sharedSha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "root03Sha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "root06Sha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "root07Sha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "frozenSha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "git6785Sha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "sharedSha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "root03Sha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "root06Sha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "root07Sha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "frozenSha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "git6785Sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "sharedSha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "root03Sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "root06Sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "root07Sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/architecture-layout.ts",
+      "frozenSha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "git6785Sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "sharedSha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "root03Sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "root06Sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "root07Sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/chunk-residency.ts",
+      "frozenSha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "git6785Sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "sharedSha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "root03Sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "root06Sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "root07Sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/citizen-appearance.ts",
+      "frozenSha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "git6785Sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "sharedSha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "root03Sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "root06Sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "root07Sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/market-goods.ts",
+      "frozenSha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "git6785Sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "sharedSha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "root03Sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "root06Sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "root07Sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/road-closures.ts",
+      "frozenSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "git6785Sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "sharedSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "root03Sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "root06Sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "root07Sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "allEqual": true
+    },
+    {
+      "path": "src/rendering/terrain.ts",
+      "frozenSha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "git6785Sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "sharedSha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "root03Sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "root06Sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "root07Sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "allEqual": true
+    },
+    {
+      "path": "src/roads.ts",
+      "frozenSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "git6785Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "sharedSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "root03Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "root06Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "root07Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "frozenSha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "git6785Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "sharedSha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "root03Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "root06Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "root07Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/activity-minutes.ts",
+      "frozenSha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "git6785Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "sharedSha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "root03Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "root06Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "root07Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "frozenSha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "git6785Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "sharedSha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "root03Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "root06Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "root07Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/clinical.ts",
+      "frozenSha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "git6785Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "sharedSha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "root03Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "root06Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "root07Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "frozenSha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "git6785Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "sharedSha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "root03Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "root06Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "root07Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "frozenSha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "git6785Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "sharedSha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "root03Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "root06Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "root07Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "frozenSha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "git6785Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "sharedSha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "root03Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "root06Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "root07Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/family.ts",
+      "frozenSha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "git6785Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "sharedSha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "root03Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "root06Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "root07Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/funded-work.ts",
+      "frozenSha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "git6785Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "sharedSha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "root03Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "root06Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "root07Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/governance.ts",
+      "frozenSha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "git6785Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "sharedSha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "root03Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "root06Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "root07Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/home-rest.ts",
+      "frozenSha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "git6785Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "sharedSha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "root03Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "root06Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "root07Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "frozenSha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "git6785Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "sharedSha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "root03Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "root06Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "root07Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/journeys.ts",
+      "frozenSha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "git6785Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "sharedSha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "root03Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "root06Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "root07Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/pathology.ts",
+      "frozenSha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "git6785Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "sharedSha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "root03Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "root06Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "root07Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "frozenSha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "git6785Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "sharedSha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "root03Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "root06Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "root07Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/power.ts",
+      "frozenSha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "git6785Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "sharedSha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "root03Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "root06Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "root07Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/roadworks.ts",
+      "frozenSha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "git6785Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "sharedSha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "root03Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "root06Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "root07Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/shop_lifecycle.ts",
+      "frozenSha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "git6785Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "sharedSha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "root03Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "root06Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "root07Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation/trade.ts",
+      "frozenSha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "git6785Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "sharedSha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "root03Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "root06Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "root07Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "allEqual": true
+    },
+    {
+      "path": "src/simulation.ts",
+      "frozenSha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "git6785Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "sharedSha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "root03Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "root06Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "root07Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "allEqual": true
+    },
+    {
+      "path": "src/site-fixtures.ts",
+      "frozenSha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "git6785Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "sharedSha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "root03Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "root06Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "root07Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "allEqual": true
+    },
+    {
+      "path": "src/style.css",
+      "frozenSha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "git6785Sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "sharedSha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "root03Sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "root06Sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "root07Sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "allEqual": true
+    },
+    {
+      "path": "src/transport-geometry.ts",
+      "frozenSha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "git6785Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "sharedSha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "root03Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "root06Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "root07Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "allEqual": true
+    },
+    {
+      "path": "src/types.ts",
+      "frozenSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "git6785Sha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "sharedSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "root03Sha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "root06Sha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "root07Sha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "allEqual": true
+    },
+    {
+      "path": "src/ui.ts",
+      "frozenSha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "git6785Sha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "sharedSha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "root03Sha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "root06Sha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "root07Sha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf",
+      "allEqual": true
+    },
+    {
+      "path": "src/world.ts",
+      "frozenSha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "git6785Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "sharedSha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "root03Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "root06Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "root07Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "allEqual": true
+    }
+  ],
+  "adapterRows": [
+    {
+      "path": "adapters/rpg-maker/README.md",
+      "root06Sha256": "2c8114fbe379433d9c6727c849acc8c51a55905a1fc2f267625363274199b51e",
+      "root03Sha256": "2c8114fbe379433d9c6727c849acc8c51a55905a1fc2f267625363274199b51e",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "1edbde7ca3507a0cd1e390cd8dbe541e49774a4428bce7b49e748f0762b7f671",
+      "root07EqualsRoot03": false,
+      "role": "documentation"
+    },
+    {
+      "path": "adapters/rpg-maker/bridge.test.ts",
+      "root06Sha256": "2c7c5c1135497c4d8bf2870bf5db3b081a9aa5cd40d62e7459ea110f9ed525df",
+      "root03Sha256": "c3f10b7eb2d1cd9aa2779704085403e279bb6017c6c36fdb4e076d30770ddbee",
+      "root06EqualsRoot03": false,
+      "root07Sha256": "08e8f1300930f5ec988312b59404c56d0e7b871ea846dfce3bc63d5ed29bcef0",
+      "root07EqualsRoot03": false,
+      "role": "test"
+    },
+    {
+      "path": "adapters/rpg-maker/bridge.ts",
+      "root06Sha256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "root03Sha256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "root07EqualsRoot03": true,
+      "role": "production-or-build-contract"
+    },
+    {
+      "path": "adapters/rpg-maker/build.mjs",
+      "root06Sha256": "99aa10e3f8fd167091a716b3a95d6f96da7de114d406e33f835d2a523a38f2d6",
+      "root03Sha256": "99aa10e3f8fd167091a716b3a95d6f96da7de114d406e33f835d2a523a38f2d6",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "99aa10e3f8fd167091a716b3a95d6f96da7de114d406e33f835d2a523a38f2d6",
+      "root07EqualsRoot03": true,
+      "role": "production-or-build-contract"
+    },
+    {
+      "path": "adapters/rpg-maker/core-source-manifest.json",
+      "root06Sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad",
+      "root03Sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad",
+      "root07EqualsRoot03": true,
+      "role": "production-or-build-contract"
+    },
+    {
+      "path": "adapters/rpg-maker/headless-walker.ts",
+      "root06Sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "root03Sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "root07EqualsRoot03": true,
+      "role": "production-or-build-contract"
+    },
+    {
+      "path": "adapters/rpg-maker/tsconfig.json",
+      "root06Sha256": "05b7e0178d7ba7fe52e91ccea11a7249753bbaf249391609581cccd4b1d90fa8",
+      "root03Sha256": "05b7e0178d7ba7fe52e91ccea11a7249753bbaf249391609581cccd4b1d90fa8",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "05b7e0178d7ba7fe52e91ccea11a7249753bbaf249391609581cccd4b1d90fa8",
+      "root07EqualsRoot03": true,
+      "role": "production-or-build-contract"
+    },
+    {
+      "path": "adapters/rpg-maker/walker-provenance.md",
+      "root06Sha256": "5520b08e64d9f0cc2c12a4a823ad90d18d12c6f585c6c8ddd249d03dded7cd44",
+      "root03Sha256": "5520b08e64d9f0cc2c12a4a823ad90d18d12c6f585c6c8ddd249d03dded7cd44",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "5520b08e64d9f0cc2c12a4a823ad90d18d12c6f585c6c8ddd249d03dded7cd44",
+      "root07EqualsRoot03": true,
+      "role": "documentation"
+    },
+    {
+      "path": "adapters/rpg-maker/walker.test.ts",
+      "root06Sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb",
+      "root03Sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb",
+      "root06EqualsRoot03": true,
+      "root07Sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb",
+      "root07EqualsRoot03": true,
+      "role": "test"
+    }
+  ],
+  "productionAdapterRoot06EqualsRoot03": true,
+  "productionAdapterRoot07EqualsRoot03": true,
+  "bundleMetafile": {
+    "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/bundle-metafile.json",
+    "sha256": "d10d180202b93da0a5ba966d3533df8bcafb86e9c48c1b1c5cc148fe8aba5c92"
+  },
+  "runtimeInputCount": 32,
+  "runtimeCoreCount": 30,
+  "runtimeAdapterCount": 2,
+  "runtimeInputsAligned": true,
+  "forbiddenRuntimeInputs": [],
+  "externalImportEdges": [],
+  "outputImportEdges": {
+    "bridge.js": []
+  },
+  "runtimeRows": [
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "bytesInMetafile": 44826,
+      "sourceBytes": 44826,
+      "root03Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "root06Sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "imports": [],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/access.ts",
+      "bytesInMetafile": 2548,
+      "sourceBytes": 2548,
+      "root03Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "root06Sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/roads.ts",
+      "bytesInMetafile": 27340,
+      "sourceBytes": 27340,
+      "root03Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "root06Sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/world.ts",
+      "bytesInMetafile": 53722,
+      "sourceBytes": 53722,
+      "root03Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "root06Sha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "imports": [
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/site-fixtures.ts",
+      "bytesInMetafile": 4366,
+      "sourceBytes": 4366,
+      "root03Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "root06Sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/activity-minutes.ts",
+      "bytesInMetafile": 2211,
+      "sourceBytes": 2211,
+      "root03Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "root06Sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "imports": [],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/funded-work.ts",
+      "bytesInMetafile": 2589,
+      "sourceBytes": 2589,
+      "root03Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "root06Sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "imports": [
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/home-rest.ts",
+      "bytesInMetafile": 16924,
+      "sourceBytes": 16924,
+      "root03Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "root06Sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "bytesInMetafile": 4695,
+      "sourceBytes": 4695,
+      "root03Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "root06Sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+      "imports": [],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/power.ts",
+      "bytesInMetafile": 59025,
+      "sourceBytes": 59025,
+      "root03Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "root06Sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/funded-work.ts",
+          "kind": "import-statement",
+          "original": "./funded-work"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/shop_lifecycle.ts",
+      "bytesInMetafile": 52672,
+      "sourceBytes": 52672,
+      "root03Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "root06Sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0",
+      "imports": [
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/clinical.ts",
+      "bytesInMetafile": 44993,
+      "sourceBytes": 44993,
+      "root03Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "root06Sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "bytesInMetafile": 40038,
+      "sourceBytes": 40038,
+      "root03Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "root06Sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5",
+      "imports": [
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "bytesInMetafile": 52353,
+      "sourceBytes": 52353,
+      "root03Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "root06Sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/education.ts",
+          "kind": "import-statement",
+          "original": "./education"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "bytesInMetafile": 89519,
+      "sourceBytes": 89519,
+      "root03Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "root06Sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "imports": [
+        {
+          "path": "src/simulation/funded-work.ts",
+          "kind": "import-statement",
+          "original": "./funded-work"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./culture"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/aviation.ts",
+      "bytesInMetafile": 20244,
+      "sourceBytes": 20244,
+      "root03Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "root06Sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/roadworks.ts",
+      "bytesInMetafile": 45256,
+      "sourceBytes": 45256,
+      "root03Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "root06Sha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3",
+      "imports": [
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../roads"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "bytesInMetafile": 22254,
+      "sourceBytes": 22254,
+      "root03Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "root06Sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "imports": [
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/trade.ts",
+      "bytesInMetafile": 25973,
+      "sourceBytes": 25973,
+      "root03Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "root06Sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "imports": [],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/family.ts",
+      "bytesInMetafile": 71339,
+      "sourceBytes": 71339,
+      "root03Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "root06Sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "imports": [
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./shop_lifecycle"
+        },
+        {
+          "path": "src/simulation/banking.ts",
+          "kind": "import-statement",
+          "original": "./banking"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./culture"
+        },
+        {
+          "path": "src/simulation/trade.ts",
+          "kind": "import-statement",
+          "original": "./trade"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/governance.ts",
+      "bytesInMetafile": 28875,
+      "sourceBytes": 28875,
+      "root03Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "root06Sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/transport-geometry.ts",
+      "bytesInMetafile": 9370,
+      "sourceBytes": 9370,
+      "root03Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "root06Sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/journey.ts",
+      "bytesInMetafile": 21182,
+      "sourceBytes": 21182,
+      "root03Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "root06Sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "./aviation"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "./world"
+        },
+        {
+          "path": "src/transport-geometry.ts",
+          "kind": "import-statement",
+          "original": "./transport-geometry"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "./site-fixtures"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/journeys.ts",
+      "bytesInMetafile": 5505,
+      "sourceBytes": 5505,
+      "root03Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "root06Sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "imports": [
+        {
+          "path": "src/journey.ts",
+          "kind": "import-statement",
+          "original": "../journey"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "bytesInMetafile": 14724,
+      "sourceBytes": 14724,
+      "root03Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "root06Sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/pathology.ts",
+      "bytesInMetafile": 29488,
+      "sourceBytes": 29488,
+      "root03Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "root06Sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404",
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/hygiene.ts",
+          "kind": "import-statement",
+          "original": "./hygiene"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "bytesInMetafile": 44422,
+      "sourceBytes": 44422,
+      "root03Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "root06Sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b",
+      "imports": [
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./clinical"
+        },
+        {
+          "path": "src/simulation/activity-minutes.ts",
+          "kind": "import-statement",
+          "original": "./activity-minutes"
+        },
+        {
+          "path": "src/simulation/activity-capacity.ts",
+          "kind": "import-statement",
+          "original": "./activity-capacity"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./power"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./home-rest"
+        },
+        {
+          "path": "src/simulation/pathology.ts",
+          "kind": "import-statement",
+          "original": "./pathology"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "bytesInMetafile": 4368,
+      "sourceBytes": 4368,
+      "root03Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "root06Sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../world"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../architecture-floor-plan"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/persistence/route-encoding.ts",
+      "bytesInMetafile": 4619,
+      "sourceBytes": 4619,
+      "root03Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "root06Sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "imports": [],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "src/simulation.ts",
+      "bytesInMetafile": 238890,
+      "sourceBytes": 238890,
+      "root03Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "root06Sha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb",
+      "imports": [
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "./access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "./architecture-floor-plan"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "./site-fixtures"
+        },
+        {
+          "path": "src/simulation/extensions.ts",
+          "kind": "import-statement",
+          "original": "./simulation/extensions"
+        },
+        {
+          "path": "src/simulation/power.ts",
+          "kind": "import-statement",
+          "original": "./simulation/power"
+        },
+        {
+          "path": "src/simulation/shop_lifecycle.ts",
+          "kind": "import-statement",
+          "original": "./simulation/shop_lifecycle"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "./aviation"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "./roads"
+        },
+        {
+          "path": "src/simulation/roadworks.ts",
+          "kind": "import-statement",
+          "original": "./simulation/roadworks"
+        },
+        {
+          "path": "src/simulation/family.ts",
+          "kind": "import-statement",
+          "original": "./simulation/family"
+        },
+        {
+          "path": "src/simulation/culture.ts",
+          "kind": "import-statement",
+          "original": "./simulation/culture"
+        },
+        {
+          "path": "src/simulation/clinical.ts",
+          "kind": "import-statement",
+          "original": "./simulation/clinical"
+        },
+        {
+          "path": "src/simulation/education.ts",
+          "kind": "import-statement",
+          "original": "./simulation/education"
+        },
+        {
+          "path": "src/simulation/governance.ts",
+          "kind": "import-statement",
+          "original": "./simulation/governance"
+        },
+        {
+          "path": "src/simulation/banking.ts",
+          "kind": "import-statement",
+          "original": "./simulation/banking"
+        },
+        {
+          "path": "src/simulation/journeys.ts",
+          "kind": "import-statement",
+          "original": "./simulation/journeys"
+        },
+        {
+          "path": "src/simulation/trade.ts",
+          "kind": "import-statement",
+          "original": "./simulation/trade"
+        },
+        {
+          "path": "src/simulation/player-labor.ts",
+          "kind": "import-statement",
+          "original": "./simulation/player-labor"
+        },
+        {
+          "path": "src/simulation/home-rest.ts",
+          "kind": "import-statement",
+          "original": "./simulation/home-rest"
+        },
+        {
+          "path": "src/simulation/hygiene.ts",
+          "kind": "import-statement",
+          "original": "./simulation/hygiene"
+        },
+        {
+          "path": "src/simulation/pathology.ts",
+          "kind": "import-statement",
+          "original": "./simulation/pathology"
+        },
+        {
+          "path": "src/persistence/world-layout.ts",
+          "kind": "import-statement",
+          "original": "./persistence/world-layout"
+        },
+        {
+          "path": "src/persistence/route-encoding.ts",
+          "kind": "import-statement",
+          "original": "./persistence/route-encoding"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "adapters/rpg-maker/headless-walker.ts",
+      "bytesInMetafile": 18809,
+      "sourceBytes": 18809,
+      "root03Sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "root06Sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "imports": [
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../../src/world"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../../src/access"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../../src/architecture-floor-plan"
+        },
+        {
+          "path": "src/transport-geometry.ts",
+          "kind": "import-statement",
+          "original": "../../src/transport-geometry"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../../src/roads"
+        },
+        {
+          "path": "src/site-fixtures.ts",
+          "kind": "import-statement",
+          "original": "../../src/site-fixtures"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    },
+    {
+      "path": "adapters/rpg-maker/bridge.ts",
+      "bytesInMetafile": 15353,
+      "sourceBytes": 15353,
+      "root03Sha256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "root06Sha256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "imports": [
+        {
+          "path": "src/simulation.ts",
+          "kind": "import-statement",
+          "original": "../../src/simulation"
+        },
+        {
+          "path": "src/world.ts",
+          "kind": "import-statement",
+          "original": "../../src/world"
+        },
+        {
+          "path": "src/persistence/world-layout.ts",
+          "kind": "import-statement",
+          "original": "../../src/persistence/world-layout"
+        },
+        {
+          "path": "src/architecture-floor-plan.ts",
+          "kind": "import-statement",
+          "original": "../../src/architecture-floor-plan"
+        },
+        {
+          "path": "src/access.ts",
+          "kind": "import-statement",
+          "original": "../../src/access"
+        },
+        {
+          "path": "src/roads.ts",
+          "kind": "import-statement",
+          "original": "../../src/roads"
+        },
+        {
+          "path": "src/aviation.ts",
+          "kind": "import-statement",
+          "original": "../../src/aviation"
+        },
+        {
+          "path": "src/journey.ts",
+          "kind": "import-statement",
+          "original": "../../src/journey"
+        },
+        {
+          "path": "adapters/rpg-maker/headless-walker.ts",
+          "kind": "import-statement",
+          "original": "./headless-walker"
+        }
+      ],
+      "forbiddenRuntimeInput": false,
+      "bytesMatchMetafile": true,
+      "sourceAligned": true
+    }
+  ],
+  "bundleLexicalChecks": {
+    "unresolvedCommonJSRequire": false,
+    "moduleImportStatement": false,
+    "nodeSpecifier": false,
+    "domGlobalReference": false,
+    "nodeGlobalReference": false,
+    "threeGlobalReference": false
+  },
+  "hostTokenNotes": [
+    "The word window in generated code denotes architecture window strings or locally declared classroom/research time-window variables, not browser window.",
+    "src/roads.ts:241 declares a local require validator. It is not a Node require import; the generated bundle has no unresolved require(...) call.",
+    "Node imports in build.mjs and bridge/walker tests are build/test-only and absent from the 32 runtime inputs.",
+    "No Three/DOM/Node runtime imports or external import edges appear in the actual esbuild metafile. ROOT06 full test also executes the exact formal IIFE without window/document/THREE/PIXI/require/process/$gameMap supplied by its VM host."
+  ],
+  "buildReceipt": {
+    "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/build-receipt.json",
+    "sha256": "da3c1e91f10998319d1eb6d1309f697ef6cc6c0b1f083cffd3681662edf8c866"
+  },
+  "bundleOutputs": [
+    {
+      "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/YunshanCore.js",
+      "bytes": 1107024,
+      "sha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+      "receiptSha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+      "receiptMatch": true
+    },
+    {
+      "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/bundle-metafile.json",
+      "bytes": 24120,
+      "sha256": "d10d180202b93da0a5ba966d3533df8bcafb86e9c48c1b1c5cc148fe8aba5c92",
+      "receiptSha256": "d10d180202b93da0a5ba966d3533df8bcafb86e9c48c1b1c5cc148fe8aba5c92",
+      "receiptMatch": true
+    },
+    {
+      "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/contract.json",
+      "bytes": 3869,
+      "sha256": "8a2f04942d8deda00eb2a2f5bdf185ed035d94825aeedabd93e9e449da478310",
+      "receiptSha256": "8a2f04942d8deda00eb2a2f5bdf185ed035d94825aeedabd93e9e449da478310",
+      "receiptMatch": true
+    },
+    {
+      "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/initial-core.save.json",
+      "bytes": 695178,
+      "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+      "receiptSha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+      "receiptMatch": true
+    },
+    {
+      "path": "/tmp/yunshan-mz-root03-20261003-01/bundle01/world-current-v4.json",
+      "bytes": 1730848,
+      "sha256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8",
+      "receiptSha256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8",
+      "receiptMatch": true
+    }
+  ],
+  "allBundleReceiptHashesMatch": true
+}
