@@ -1,0 +1,230 @@
+{
+  "status": "PARTIAL_DELIVERY_GIT_SUCCESS_LIBRARY_NOT_SAVED",
+  "fullGoalComplete": false,
+  "coreSourceCommit": "6785ca7dcca09e8e97afd610cfd52176c7a1cfb1",
+  "narrowPatchCommit": "1a602c8aac7538bea8557edcbf8636d272d217f5",
+  "facadeWorkerCommit": "3f560d99ae331cbed5c614c855d6ec177faea22f",
+  "mainUnchanged": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+  "library": {
+    "status": "BLOCKED_BEFORE_PREPARE_NO_WRITE",
+    "savedFileCount": 0,
+    "newLibraryIds": [],
+    "memoLibraryId": "libfile_7571a326de848191aec330d605a63845",
+    "memoExpectedAndUnchangedVersion": 5,
+    "reason": "Current executor cannot connect to Library save service; current bundled helper fails during read-only discovery before prepare/transfer/finalize",
+    "firstLocalErrorCorrected": "creates omitted replacement-only name metadata",
+    "unknownCommit": false,
+    "protocolFallback": false
+  },
+  "artifacts": [
+    {
+      "name": "Yunshan_6785_Verified_Empty_Support_Patch.zip",
+      "size": 30259,
+      "sha256": "9b233c30eda2b933e9da424d5f11c360735414d861d67426265f35b253e71198",
+      "originalCount": 12,
+      "memberShaAndCRCVerified": true,
+      "secretPatternMatches": 0,
+      "parts": [
+        {
+          "name": "Yunshan_6785_Verified_Empty_Support_Patch.zip",
+          "size": 30259,
+          "sha256": "9b233c30eda2b933e9da424d5f11c360735414d861d67426265f35b253e71198"
+        }
+      ]
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip",
+      "size": 130493196,
+      "sha256": "19c4155d051df8bc88962dbb1a32db760df9dfeb420da6e42ba3735b12b5c673",
+      "originalCount": 2643,
+      "memberShaAndCRCVerified": true,
+      "secretPatternMatches": 0,
+      "parts": [
+        {
+          "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part01",
+          "size": 29360128,
+          "sha256": "99617188d086c37f54d5967d493ad496082c1f050b231655997dc2c0bed9bd37"
+        },
+        {
+          "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part02",
+          "size": 29360128,
+          "sha256": "b54137a678126085177ec9e12d14ec3e53f63359b4aa24833caae0439d0f91d9"
+        },
+        {
+          "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part03",
+          "size": 29360128,
+          "sha256": "67772a9894681c75038d54cb3e6cc9f370763eb4302ec802881651aaa119be0a"
+        },
+        {
+          "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part04",
+          "size": 29360128,
+          "sha256": "8d56c984d35840e0588cc7e9a1df6d1c5ddb015b011c132531c4bc6c66c3cb90"
+        },
+        {
+          "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part05",
+          "size": 13052684,
+          "sha256": "c130859d4a1398680d7b5cf6f950ce655042de0943695f2e7b2d680642f1ab08"
+        }
+      ]
+    },
+    {
+      "name": "Yunshan_City_Continuation_Originals.zip",
+      "size": 76789972,
+      "sha256": "52da178c1fa90211156d552c1d9b0283805fc39a5d678470d3c4a0724f2d8272",
+      "originalCount": 1501,
+      "memberShaAndCRCVerified": true,
+      "secretPatternMatches": 0,
+      "parts": [
+        {
+          "name": "Yunshan_City_Continuation_Originals.zip.part01",
+          "size": 29360128,
+          "sha256": "82bfcd97f6d3948a3c18229dcf58412b234b80001446c4fcd782de88ec3bb4ec"
+        },
+        {
+          "name": "Yunshan_City_Continuation_Originals.zip.part02",
+          "size": 29360128,
+          "sha256": "fec0e95bba46f936b723b3c7511c1d5cd94b4d58136f6b67113fe4b6c728d20f"
+        },
+        {
+          "name": "Yunshan_City_Continuation_Originals.zip.part03",
+          "size": 18069716,
+          "sha256": "9fdd5b7c0f2c76aed3f18c6090f274d31356ff634e1b4539fbe88cf7094bdca3"
+        }
+      ]
+    }
+  ],
+  "pendingFiles": [
+    {
+      "name": "Yunshan_6785_Verified_Empty_Support_Patch.zip",
+      "size": 30259,
+      "sha256": "9b233c30eda2b933e9da424d5f11c360735414d861d67426265f35b253e71198",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "云山_本阶段交付报告.md",
+      "size": 3092,
+      "sha256": "b102bcd4abf54e4d3f9f7e17d3be85217daa4eda21b2082ad1eab53f2455a8fe",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "云山_验证结果.json",
+      "size": 119059,
+      "sha256": "15056bbcf02d2d31b7e7eb69864254e65944338b7ee639854cca591b0bdec7c8",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "archive-manifest.json",
+      "size": 2972,
+      "sha256": "f4c4cea76a561309e2b1aa2fa174085330ebafad29b44e0889b87109c5cf81d5",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "join-and-verify.py",
+      "size": 1082,
+      "sha256": "37782203851622ff8b341f852cadd1312d4e100cb067d192e8d7dab346d34018",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part01",
+      "size": 29360128,
+      "sha256": "99617188d086c37f54d5967d493ad496082c1f050b231655997dc2c0bed9bd37",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part02",
+      "size": 29360128,
+      "sha256": "b54137a678126085177ec9e12d14ec3e53f63359b4aa24833caae0439d0f91d9",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part03",
+      "size": 29360128,
+      "sha256": "67772a9894681c75038d54cb3e6cc9f370763eb4302ec802881651aaa119be0a",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part04",
+      "size": 29360128,
+      "sha256": "8d56c984d35840e0588cc7e9a1df6d1c5ddb015b011c132531c4bc6c66c3cb90",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_Facade_Worker_Performance_Originals.zip.part05",
+      "size": 13052684,
+      "sha256": "c130859d4a1398680d7b5cf6f950ce655042de0943695f2e7b2d680642f1ab08",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_City_Continuation_Originals.zip.part01",
+      "size": 29360128,
+      "sha256": "82bfcd97f6d3948a3c18229dcf58412b234b80001446c4fcd782de88ec3bb4ec",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_City_Continuation_Originals.zip.part02",
+      "size": 29360128,
+      "sha256": "fec0e95bba46f936b723b3c7511c1d5cd94b4d58136f6b67113fe4b6c728d20f",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "Yunshan_City_Continuation_Originals.zip.part03",
+      "size": 18069716,
+      "sha256": "9fdd5b7c0f2c76aed3f18c6090f274d31356ff634e1b4539fbe88cf7094bdca3",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "overview-day.png",
+      "size": 1332452,
+      "sha256": "e4c8c8bffe8a837697fff006949720176f3c5a63db98f65464be4ea0310fa2ec",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "core-waterfall.png",
+      "size": 1442165,
+      "sha256": "74901749024cff03e266b4290ad9af1a617774ac8b692ff851caf992b420dc61",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "market-street.png",
+      "size": 703681,
+      "sha256": "e64cc0569598149c86756c95a1695f0e21a77d02a6cb8e0c90417e15f86b2f7e",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "residential-first-person.png",
+      "size": 516752,
+      "sha256": "f41c46a2a39367718ede227ba347a0a13dcb88694b96a9eab8286394145e0d85",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    },
+    {
+      "name": "开发备忘录.md",
+      "size": 299498,
+      "sha256": "8971bca2541e8855b399f6d83e796ad8da36e6777299b734565f9ff8db21c386",
+      "status": "NOT_SAVED_TO_LIBRARY",
+      "library_file_id": null
+    }
+  ],
+  "remaining": [
+    "Parent MZ must explicitly adopt narrow performance patch/new source freeze and test own same-seed runtime; old MZ remains unchanged",
+    "MZ Worker UI/controller/save async wiring and NW/file/local GUI/Mac NOT_RUN",
+    "Cold first4 still25.744s; tick9-32 optimizedmax2555ms; UI isolation is not real-time guarantee",
+    "City ROOT32 and F1 candidates isolated; new14/F1fix runtime NOT_RUN; ART FAIL and full game goal open"
+  ]
+}
