@@ -63,7 +63,7 @@ export function researchPlayerContextReason(state: SimState, world: WorldDefinit
   const publicAt = (site: Building) => publicFloor(site, Math.floor((player.position.y - site.position.y + .01) / (site.height / site.floors))) && atSite(site);
   if (project && project.workedMinutes < project.requiredMinutes && studio && state.hour >= 7 && state.hour < 22 && player.needs.hunger >= 40 && player.needs.fatigue >= 40 && publicAt(studio)) return '正在原公共场所创作，不能重复使用劳动时间。';
   const service = state.culture?.orders.find(order => order.id === state.culture?.playerServiceId), serviceSite = service && world.buildings.find(site => site.id === service.siteId);
-  if (service?.state === 'active' && service.topic !== 'transport' && !service.servedIds.includes('player') && serviceSite && state.hour >= 8 && state.hour < 17 && player.needs.hunger >= 40 && player.needs.fatigue >= 35 && publicAt(serviceSite)) return '正在原公共服务站点参与服务，不能重复使用劳动时间。';
+  if (service?.state === 'active' && service.topic !== 'transport' && service.topic !== 'education' && !service.servedIds.includes('player') && serviceSite && state.hour >= 8 && state.hour < 17 && player.needs.hunger >= 40 && player.needs.fatigue >= 35 && publicAt(serviceSite)) return '正在原公共服务站点参与服务，不能重复使用劳动时间。';
   return '';
 }
 /** Fine processing belongs only to saved new tasks, never to visual tier. */

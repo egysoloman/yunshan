@@ -1,0 +1,28 @@
+{
+  "state": "FAILED_BEFORE_LIBRARY_WRITE",
+  "startedAtUTC": "2026-10-03T06:05:41.466862+00:00",
+  "endedAtUTC": "2026-10-03T06:05:41.603299+00:00",
+  "exitCode": 1,
+  "failure": "Library network failure during initial capability lookup, before prepare/create/replace/finalize.",
+  "archiveLibraryID": null,
+  "archiveFileID": null,
+  "archiveVersion": null,
+  "actualNewLibraryItems": 0,
+  "memoLibraryID": "libfile_7571a326de848191aec330d605a63845",
+  "memoLastConfirmedVersion": 4,
+  "memoVersion5Created": false,
+  "inputs": {
+    "/tmp/yunshan-education-e1-original-delivery-20261003-01/yunshan-E1-course-original-evidence-20261003.zip": {
+      "bytes": 93836706,
+      "sha256": "2e39effe9c02fd3a244497367bee44fa76ed7d4f26967681faafa1f92b2e6c5d"
+    },
+    "/workspace/yunshan/开发备忘录.md": {
+      "bytes": 234152,
+      "sha256": "7f20d4ec9f43712ca871975c93eb7f9d5c9ff9cdcd909903378215195c1b0fe3"
+    }
+  },
+  "inputsStable": true,
+  "sameBatchRetriedOrSwitchedToDirect": false,
+  "privateProviderOutputCommitted": false,
+  "fallback": "Complete original ZIP, actual UI screenshots, memo and public receipts retained for authorized work-branch Git delivery."
+}

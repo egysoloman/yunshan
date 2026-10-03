@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation.ts';
+import { completePaidCourse } from './education-fixture.ts';
 import type { BuildingKind, Relationship, SimState, Vec3, WorldDefinition } from '../src/types.ts';
 
 /** Two connected neighbourhoods isolate simulation rules from procedural world generation. */
@@ -169,7 +170,7 @@ test('education and a local professional exam unlock police permissions', () => 
   assert.equal(sim.state.player.role, 'traveler');
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, false);
   walkTo(sim, school.door);
-  assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true);
+  completePaidCourse(sim, school);
   assert.ok(sim.state.player.education >= 1);
   walkTo(sim, { x: police.door.x + 100, y: police.door.y, z: police.door.z });
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, false);
@@ -393,8 +394,7 @@ test('save validation rejects corrupt numbers, foreign references, duplicate ent
 
 test('professional certificates accumulate and retain enforcement permissions after a new career', () => {
   const { sim, world } = create();
-  walkTo(sim, world.buildings.find(b => b.kind === 'school')!.door);
-  assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true);
+  completePaidCourse(sim, world.buildings.find(b => b.kind === 'school')!);
   walkTo(sim, world.buildings.find(b => b.kind === 'police')!.door);
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, true);
   walkTo(sim, world.buildings.find(b => b.kind === 'market')!.door);

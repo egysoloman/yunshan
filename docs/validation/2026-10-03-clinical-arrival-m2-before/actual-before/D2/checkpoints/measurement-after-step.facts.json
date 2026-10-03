@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "label": "measurement-after-step",
+  "timing": "outside phase callbacks; actual step completed",
+  "tick": 2,
+  "clock": 488,
+  "day": 0,
+  "hour": 8.133333333333333,
+  "speed": 4.2,
+  "weather": "晴",
+  "actors": [
+    {
+      "citizen": {
+        "id": "citizen-4",
+        "name": "苏溪",
+        "districtId": "pair-district",
+        "homeId": "pair-home",
+        "workId": "pair-clinic",
+        "role": "医生",
+        "skills": {
+          "craft": 24,
+          "learning": 31,
+          "social": 44
+        },
+        "socialIdentities": [
+          "communityMember"
+        ],
+        "historyTags": [
+          "云山居民"
+        ],
+        "education": 4,
+        "position": {
+          "x": 300,
+          "y": 0.6,
+          "z": 0
+        },
+        "state": "working",
+        "destinationId": "pair-clinic",
+        "money": 345.02376476302743,
+        "needs": {
+          "hunger": 77.8240331720095,
+          "fatigue": 87.812666688608,
+          "social": 63.818900316804644,
+          "fun": 53.2614501362294
+        },
+        "tier": "active",
+        "route": [
+          {
+            "x": 300,
+            "y": 0.6,
+            "z": 0
+          },
+          {
+            "x": 300,
+            "y": 0.6,
+            "z": 0
+          }
+        ],
+        "routeIndex": 2,
+        "partnerId": null,
+        "food": 0
+      },
+      "profile": {
+        "age": 24.00001522070015,
+        "health": 86.00732804030376,
+        "mood": 68.76128221347373,
+        "stress": 21.272777777777776,
+        "alive": true,
+        "skill": 24.003999999999998,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "work",
+      "attendance": 8,
+      "peopleElapsed": 0
+    },
+    {
+      "citizen": {
+        "id": "citizen-1",
+        "name": "云溪",
+        "districtId": "pair-district",
+        "homeId": "pair-home",
+        "workId": "pair-workshop",
+        "role": "工人",
+        "skills": {
+          "craft": 15,
+          "learning": 19,
+          "social": 26
+        },
+        "socialIdentities": [
+          "familyMember"
+        ],
+        "historyTags": [
+          "云山居民"
+        ],
+        "education": 1,
+        "position": {
+          "x": 300,
+          "y": 0.6,
+          "z": 0
+        },
+        "state": "healing",
+        "destinationId": "pair-clinic",
+        "money": 326.5464097657241,
+        "needs": {
+          "hunger": 84.35112317828461,
+          "fatigue": 84.13953162881546,
+          "social": 85.5951620555669,
+          "fun": 85.33774072133005
+        },
+        "tier": "active",
+        "route": [
+          {
+            "x": 300,
+            "y": 0.6,
+            "z": 12.6
+          },
+          {
+            "x": 300,
+            "y": 0.6,
+            "z": 0
+          }
+        ],
+        "routeIndex": 2,
+        "partnerId": "citizen-0",
+        "food": 0
+      },
+      "profile": {
+        "age": 21.00001522070015,
+        "health": 83.00732804030376,
+        "mood": 66.93612913818218,
+        "stress": 18.371944444444445,
+        "alive": true,
+        "skill": 15,
+        "family": [
+          "citizen-0"
+        ],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "heal",
+      "peopleElapsed": 0
+    }
+  ],
+  "doctorId": "citizen-4",
+  "patientId": "citizen-1",
+  "orderId": "clinical-1",
+  "wages": [
+    {
+      "tick": 2,
+      "clock": 488,
+      "citizenId": "citizen-4",
+      "siteId": "pair-clinic",
+      "minutes": 4,
+      "amount": 0.368,
+      "start": 484,
+      "end": 488
+    }
+  ],
+  "meters": 12.6,
+  "order": {
+    "id": "clinical-1",
+    "patientId": "citizen-1",
+    "payerId": "player",
+    "siteId": "pair-clinic",
+    "startedAt": 480,
+    "state": "inTreatment",
+    "funded": 30,
+    "escrow": 26,
+    "purchasePaid": 4,
+    "serviceFee": 0,
+    "refunded": 0,
+    "receivedUnits": 1,
+    "reusedUnits": 0,
+    "reservedUnits": 1,
+    "consumedUnits": 0,
+    "workedMinutes": 4,
+    "requiredMinutes": 20,
+    "staffMinutes": {
+      "citizen-4": 4
+    },
+    "receipts": [
+      {
+        "commodity": "materials",
+        "procurementId": "clinical-1:receipt-1",
+        "purchasedAt": 484,
+        "paid": 4,
+        "quantity": 1,
+        "tax": 0.31999999999999984,
+        "lots": [
+          {
+            "shopId": "shop-pair-workshop",
+            "quantity": 1,
+            "unitPrice": 4,
+            "gross": 4,
+            "net": 3.68
+          }
+        ]
+      }
+    ],
+    "completedAt": null,
+    "cancelledAt": null,
+    "retryAt": 544,
+    "lastReason": "医生与患者共同诊疗4.0/20分钟；离場暂停。"
+  },
+  "clinicalStock": {
+    "pair-clinic": {
+      "receivedUnits": 1,
+      "consumedUnits": 0,
+      "availableUnits": 0,
+      "archivedPurchasedUnits": 0,
+      "archivedConsumedUnits": 0
+    }
+  },
+  "playerMoney": 570,
+  "publicLabor": null,
+  "wageAccruals": [
+    {
+      "citizenId": "citizen-4",
+      "shopId": null,
+      "workId": "pair-clinic",
+      "districtId": "pair-district",
+      "minutes": 8,
+      "ratePerMinute": 0.092,
+      "amount": 0.736
+    }
+  ],
+  "wageArrears": []
+}

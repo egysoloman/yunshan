@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
 import { createWorld } from '../src/world';
+import { completePaidCourse } from './education-fixture';
 import type { Building, BuildingKind, Citizen, Shop, WorldDefinition } from '../src/types';
 
 function fixture(): WorldDefinition {
@@ -32,7 +33,7 @@ function placeAtWork(sim: Simulation, worker: Citizen, shop: Shop) {
 function moneySupply(sim: Simulation) {
   const s = sim.state, e = s.extension!;
   return s.treasury + runtime(sim).taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + runtime(sim).investment) + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0) + s.citizens.reduce((sum, c) => sum + c.money, 0)
-    + (s.playerLabor?.job?.escrow ?? 0) + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
+    + (s.playerLabor?.job?.escrow ?? 0) + (s.education?.course?.escrow ?? 0) + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + s.shops.filter(shop => !e.companies.some(company => company.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, company) => sum + company.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0);
 }
@@ -270,8 +271,13 @@ test('native housing, education, qualifications and police rewards have actual p
   const sim = new Simulation(fixture()), home = sim.worldDefinition.buildings.find(b => b.kind === 'home')!, school = sim.worldDefinition.buildings.find(b => b.kind === 'school')!;
   const cash = moneySupply(sim), treasury = sim.state.treasury;
   sim.setFocus(home.door, 'walk'); assert.equal(sim.command({ type: 'rent', targetId: home.id }).ok, true);
-  sim.setFocus(school.door, 'walk'); assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true); assert.equal(sim.command({ type: 'exam', targetId: 'teacher' }).ok, true);
-  assert.equal(sim.state.treasury, treasury + 200); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
+  assert.equal(sim.state.treasury, treasury + 80, 'original rent fee enters the real public account');
+  const wallet = sim.state.player.money, grade = sim.state.player.education, taught = completePaidCourse(sim, school);
+  assert.equal(sim.state.player.money, wallet - 40); assert.equal(sim.state.player.education, grade + 1);
+  assert.equal(taught.workedMinutes, 60); assert.equal(taught.consumedUnits, 1); assert.ok(Math.abs(taught.purchasePaid + taught.serviceFees - 40) < 1e-7);
+  const examTreasury = sim.state.treasury, examWallet = sim.state.player.money;
+  assert.equal(sim.command({ type: 'exam', targetId: 'teacher' }).ok, true);
+  assert.equal(sim.state.treasury, examTreasury + 80); assert.equal(sim.state.player.money, examWallet - 80); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
   sim.state.player.identities!.push('police'); const crime = { id: 'crime-funded-test', districtId: 'district', position: { ...school.door }, severity: 2, status: 'open' as const, createdAt: 480, responseAt: 0 };
   sim.state.crimes.push(crime); const before = sim.state.player.money, publicBefore = sim.state.treasury;
   assert.equal(sim.command({ type: 'resolveCrime', targetId: crime.id }).ok, true); assert.equal(sim.state.treasury, publicBefore - 36); assert.equal(sim.state.player.money, before + 36 * .92); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);

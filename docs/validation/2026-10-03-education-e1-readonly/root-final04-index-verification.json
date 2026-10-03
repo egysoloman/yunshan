@@ -1,0 +1,205 @@
+{
+  "writtenAtUTC": "2026-10-03T05:48:16.348857+00:00",
+  "scope": "Independent root read-only hash verification of sealed producer final04 index; no new simulation or invented evidence gaps.",
+  "index": "/tmp/yunshan-education-course-revision04-17-01/run/evidence-index-final.json",
+  "indexSHA256": "6cf30a1ed8ea201a32f513b0add2ad73cfe3045455288da92684daae73863cb6",
+  "referencedFiles": 39,
+  "allMatch": true,
+  "files": [
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/source-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/education-course-from17.patch",
+      "expected": "19b7d93b81db646035d28f76cc79c754b7fa037ac2e80783ec0fa34fcc818d78",
+      "actual": "19b7d93b81db646035d28f76cc79c754b7fa037ac2e80783ec0fa34fcc818d78"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/revision04-import-only-from03.patch",
+      "expected": "4482f7f6257523fa6784d42534075099d46ea1750649f9ffb4834b41bd836689",
+      "actual": "4482f7f6257523fa6784d42534075099d46ea1750649f9ffb4834b41bd836689"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/metadata.json",
+      "expected": "99519b028f84a6d857d4dfcd239cf886991d0b560d969f1e598e3e6f1b9c5255",
+      "actual": "99519b028f84a6d857d4dfcd239cf886991d0b560d969f1e598e3e6f1b9c5255"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/evidence-index-03.json",
+      "expected": "5e7f1a947a90b59ff21e993ea4a8aab9baf727fa763bae11bcfe85188ec08433",
+      "actual": "5e7f1a947a90b59ff21e993ea4a8aab9baf727fa763bae11bcfe85188ec08433"
+    },
+    {
+      "path": "/tmp/yunshan-education-boundary-tests-prep-17-01/input/tests/education-boundary.test.ts",
+      "expected": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd",
+      "actual": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd"
+    },
+    {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/plain.json",
+      "expected": "d81832a80ab7f816389450103ba6726c533139c9accfde8c88ea2156cb841517",
+      "actual": "d81832a80ab7f816389450103ba6726c533139c9accfde8c88ea2156cb841517"
+    },
+    {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/addendum01.json",
+      "expected": "29c99b4c5e017317a733ff627f05ef37c0579e0e8c3126462368f82e994910f8",
+      "actual": "29c99b4c5e017317a733ff627f05ef37c0579e0e8c3126462368f82e994910f8"
+    },
+    {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/addendum02.json",
+      "expected": "ca3962fc601dbfc9a15a7b08216d5326baa16bab4f6ecb5ecfc769670fb304d4",
+      "actual": "ca3962fc601dbfc9a15a7b08216d5326baa16bab4f6ecb5ecfc769670fb304d4"
+    },
+    {
+      "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/receipt.json",
+      "expected": "1b33651560adc5d242c1d4afe6d2a11a122feea8cb0d411c4dacbfd9f58a1fc3",
+      "actual": "1b33651560adc5d242c1d4afe6d2a11a122feea8cb0d411c4dacbfd9f58a1fc3"
+    },
+    {
+      "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/genuine.save.json",
+      "expected": "e21c24c40568a5c135f35fc472f882d46a3210e5148c6e9b96c94890216e01ac",
+      "actual": "e21c24c40568a5c135f35fc472f882d46a3210e5148c6e9b96c94890216e01ac"
+    },
+    {
+      "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/forged.save.json",
+      "expected": "23175e386a33cfebc99903c3efb0fc6d46f46ea7243dcec9403a38962b15e234",
+      "actual": "23175e386a33cfebc99903c3efb0fc6d46f46ea7243dcec9403a38962b15e234"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.raw.log",
+      "expected": "7a7d16b26acd38fbe60900a4e38994b0d846498836b2565a68d9a4ba4ab7b783",
+      "actual": "7a7d16b26acd38fbe60900a4e38994b0d846498836b2565a68d9a4ba4ab7b783"
+    },
+    {
+      "path": "/tmp/yunshan-education-history-window-causal-20261003/run/afterfix/receipt.json",
+      "expected": "8c668f99dd96d01b8e4e7e6be583809cddd06c8ac4783c78e579731c7786a1e8",
+      "actual": "8c668f99dd96d01b8e4e7e6be583809cddd06c8ac4783c78e579731c7786a1e8"
+    },
+    {
+      "path": "/tmp/yunshan-education-history-window-causal-20261003/input/history-window-samebytes-afterfix.test.ts",
+      "expected": "3b837ed0bf54e57fc7de2d492f626e25e87e3aba9e8b5c76295085fbd06da5ae",
+      "actual": "3b837ed0bf54e57fc7de2d492f626e25e87e3aba9e8b5c76295085fbd06da5ae"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/related-course-entry-and-custody.receipt.json",
+      "expected": "ee7c9a752a412726ef22bd05e90ae84b1790a75f815eb3cfe89ff2e06913f2a5",
+      "actual": "ee7c9a752a412726ef22bd05e90ae84b1790a75f815eb3cfe89ff2e06913f2a5"
+    },
+    {
+      "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/preparation.json",
+      "expected": "806d82e279ae800e0ae126634aabb1da08752822cbd151d2c1d414dd2894b88f",
+      "actual": "806d82e279ae800e0ae126634aabb1da08752822cbd151d2c1d414dd2894b88f"
+    },
+    {
+      "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/source-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e"
+    },
+    {
+      "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/run/persistence-results.json",
+      "expected": "425c562fd7b525d53f7c2b81c7d189842c88f9da65d173e1305378e6e2cc0afa",
+      "actual": "425c562fd7b525d53f7c2b81c7d189842c88f9da65d173e1305378e6e2cc0afa"
+    },
+    {
+      "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/run/receipt.json",
+      "expected": "2063d8a5ff5270e2c5033c85cc1dffd6ccab9803de794f4068ff5fa3b047881a",
+      "actual": "2063d8a5ff5270e2c5033c85cc1dffd6ccab9803de794f4068ff5fa3b047881a"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.source-first-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.source-last-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.raw.log",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.source-first-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.source-last-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.raw.log",
+      "expected": "f7126c4888dc609151a126b501242060869757e1db5caa68a62bfc74d3cdfec6",
+      "actual": "f7126c4888dc609151a126b501242060869757e1db5caa68a62bfc74d3cdfec6"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.source-first-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.source-last-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.raw.log",
+      "expected": "31a9ea4d018c11b788eb63cc1bc6dc24117965ee77c52cb96d6800ed44df6b9c",
+      "actual": "31a9ea4d018c11b788eb63cc1bc6dc24117965ee77c52cb96d6800ed44df6b9c"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-first-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-last-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.raw.log",
+      "expected": "5ca4920302c2417bd1354aa54a0f88ed5af5e09bc058fae811ab64582585cf8c",
+      "actual": "5ca4920302c2417bd1354aa54a0f88ed5af5e09bc058fae811ab64582585cf8c"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.raw.log",
+      "expected": "dff61f655d6a9446caed06ca8238c455c43f10e5a950a9e7e6ef8fa471ab9548",
+      "actual": "dff61f655d6a9446caed06ca8238c455c43f10e5a950a9e7e6ef8fa471ab9548"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/cpu-release.json",
+      "expected": "069d88fe470321505876d76e19fbd9e91dd5f3ac6189bee02ef83d9a2ab46782",
+      "actual": "069d88fe470321505876d76e19fbd9e91dd5f3ac6189bee02ef83d9a2ab46782"
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-last-sha256.txt",
+      "expected": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+      "actual": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9"
+    }
+  ]
+}

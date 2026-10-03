@@ -1,0 +1,105 @@
+{
+  "task": "DOM revision02 canvas oracle narrow READONLY audit",
+  "createdUtc": "2026-10-03T05:52:36.411231+00:00",
+  "auditStatus": "STATIC_MATCH_NO_BUSINESS_DIFF",
+  "candidateExecutionStatus": "NOT_RUN_BY_THIS_REVIEWER",
+  "inputs": [
+    {
+      "path": "/tmp/yunshan-education-dom-prep-root18-20261003/education-ui.mjs",
+      "sha256": "89d96c57fe03ec6bc2076869cbba6cd42ee5b8abd500f8320fe49bc96d89aa41",
+      "bytes": 29608
+    },
+    {
+      "path": "/tmp/yunshan-education-dom-revision02-20261003/education-ui.mjs",
+      "sha256": "4b5b1a2a95a6c25526e59688d89325038ec099d1868785d6b2bc17b6abad529d",
+      "bytes": 30397
+    },
+    {
+      "path": "/tmp/yunshan-education-dom-revision02-20261003/canvas-oracle-only.patch",
+      "sha256": "a77d5e4fedf5baa21497bcdd33e736899b3ca8d2eeb214ca3feb86d5d60fe049",
+      "bytes": 1512
+    },
+    {
+      "path": "/tmp/yunshan-education-dom-prep-root18-20261003/run-education-dom.py",
+      "sha256": "fa53c60a1a25e6855e48e68aab9d4ccaf47988814d313475961ac2ebb0479958",
+      "bytes": 8549
+    },
+    {
+      "path": "/tmp/yunshan-education-dom-revision02-20261003/run-education-dom.py",
+      "sha256": "fa53c60a1a25e6855e48e68aab9d4ccaf47988814d313475961ac2ebb0479958",
+      "bytes": 8549
+    },
+    {
+      "path": "/tmp/yunshan-education-dom-revision02-20261003/oracle-fix-receipt.json",
+      "sha256": "772ac41cffec45eb88cc266dd57afa4272cc5f3e3c4620aa0dc27c1c443114d0",
+      "bytes": 986
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-18/source/src/ui.ts",
+      "sha256": "23da0cbecc2a7101913181def00aa16959d401432b32aa39f68a7b812f7c511a",
+      "bytes": 163652
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-18/source-snapshot.json",
+      "sha256": "84abdae7cbc54fe8bc78c661f1a71799167568125caa0f79ff9f168eeaab1094",
+      "bytes": 13259
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-18/education-dom-01/result.json",
+      "sha256": "43403796748f79bf425ffaef00ebe85d264acb4d2d1b018b09ee1500b51b021b",
+      "bytes": 31595
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-18/education-dom-01/actual-command-step-wage-observations.json",
+      "sha256": "069447160babd684ebb08caaba8c10ed84eb91312974ac7bcb884055b2973a33",
+      "bytes": 3788732
+    }
+  ],
+  "comparison": {
+    "singleReplaceHunk": [
+      [
+        "replace",
+        342,
+        343,
+        342,
+        353
+      ]
+    ],
+    "unchangedPrefixBytes": 27491,
+    "unchangedSuffixBytes": 2060,
+    "originalOracleBytes": 57,
+    "replacementOracleBytes": 846,
+    "wrapperByteExact": true,
+    "businessAssertionsAndStagingByteExactOutsideOracle": true,
+    "patchReconstructsAddedRemovedBytes": true
+  },
+  "actual18Source": {
+    "files": 125,
+    "uiMatchesActualManifest": true
+  },
+  "originalDOM01ReadOnlyFacts": {
+    "state": "FAIL",
+    "passedContracts": 5,
+    "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///tmp/yunshan-education-dom-prep-root18-20261003/education-ui.mjs:343:10",
+    "sourceStable": true,
+    "distStable": true,
+    "actualRecordedSteps": 272,
+    "completedTenPhaseTicks": 272,
+    "observedMonotonicMinutes": 68,
+    "nativeCommands": 4,
+    "finalGrade": 1,
+    "finalExperience": 1
+  },
+  "scopeLimit": "Known already-painted original2D minimap canvas inventory/readback. This is not a historical context-creation/GPU trace, Renderer/3D/ART/native-movement/macOS or production-entry execution proof. Existing original no-canvas design note is superseded by this factual audit; original file stays preserved.",
+  "execution": {
+    "node": false,
+    "parser": false,
+    "simulation": false,
+    "tests": false,
+    "build": false,
+    "browser": false,
+    "gpu": false,
+    "zip": false,
+    "sharedCandidateOrOriginalMutation": false
+  }
+}

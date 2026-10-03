@@ -41,6 +41,7 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   if (object(document.state.culture)) order['state.culture'] = Object.keys(document.state.culture);
   if (object(document.state.trade)) order['state.trade'] = Object.keys(document.state.trade);
   if (object(document.state.clinical)) order['state.clinical'] = Object.keys(document.state.clinical);
+  if (object(document.state.education)) order['state.education'] = Object.keys(document.state.education);
   if (document.routeEncoding !== undefined) {
     decodeCitizenRoutes(document.routeEncoding, document.routePool, document.state.citizens);
     delete document.routePool;
@@ -71,13 +72,16 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   for (const path of ['state.player', 'state.playerLabor', 'state.relationships', 'state.bankBalance', 'state.loan', 'state.extension.cooking', 'state.culture.project', 'state.culture.playerServiceId', 'runtime.playerBusinesses', 'runtime.investment', 'runtime.campaign', 'runtime.focus', 'runtime.mode', 'runtime.detail', 'runtime.workAt', 'runtime.studyAt', 'runtime.restAt', 'runtime.relationshipAt', 'runtime.driving', 'runtime.lastInvestmentAt']) {
     const at = ownerAt(document, path); if (at && Object.hasOwn(at.owner, at.key)) { player.values[path] = at.owner[at.key]; layout.playerValues!.push(path); delete at.owner[at.key]; }
   }
-  for (const path of ['state.extension.actorProfiles', 'state.extension.runtime.deprivation', 'state.extension.runtime.diversions', 'state.extension.runtime.companyCursors', 'state.extension.runtime.cooldowns', 'state.family.children', 'state.family.studentGuardians', 'state.family.careGuardians', 'state.family.nextSupportAt', 'state.family.nextPlanAt', 'state.family.estates', 'state.culture.transportMaintenance', 'state.trade.lots', 'state.trade.ownedLots', 'state.trade.activity', 'state.clinical.stock', 'state.clinical.nextVisitAt', 'runtime.riders', 'runtime.impressions', 'runtime.decisionAt', 'runtime.activities', 'runtime.attendance', 'runtime.customers', 'runtime.dispatches', 'runtime.hostileAt', 'runtime.freight', 'runtime.districtRelationMeans', 'state.signals', 'runtime.signalOverrides']) {
+  for (const path of ['state.education.course', 'state.education.history']) {
+    const at = ownerAt(document, path); if (at && Object.hasOwn(at.owner, at.key)) { player.values[path] = at.owner[at.key]; layout.playerValues!.push(path); delete at.owner[at.key]; }
+  }
+  for (const path of ['state.extension.actorProfiles', 'state.extension.runtime.deprivation', 'state.extension.runtime.diversions', 'state.extension.runtime.companyCursors', 'state.extension.runtime.cooldowns', 'state.family.children', 'state.family.studentGuardians', 'state.family.careGuardians', 'state.family.nextSupportAt', 'state.family.nextPlanAt', 'state.family.estates', 'state.culture.transportMaintenance', 'state.trade.lots', 'state.trade.ownedLots', 'state.trade.activity', 'state.clinical.stock', 'state.education.stock', 'state.clinical.nextVisitAt', 'runtime.riders', 'runtime.impressions', 'runtime.decisionAt', 'runtime.activities', 'runtime.attendance', 'runtime.customers', 'runtime.dispatches', 'runtime.hostileAt', 'runtime.freight', 'runtime.districtRelationMeans', 'state.signals', 'runtime.signalOverrides']) {
     const at = ownerAt(document, path), map = at?.owner[at.key];
     if (!at || !object(map)) continue;
     layout.maps.push(path);
     order[path] = Object.keys(map);
     for (const [key, value] of Object.entries(map)) {
-      if (path === 'state.clinical.stock') { const chunk = getChunk(buildingChunks.get(key) ?? districtChunk(key)); (chunk.maps[path] ??= Object.create(null))[key] = value; continue; }
+      if (path === 'state.clinical.stock' || path === 'state.education.stock') { const chunk = getChunk(buildingChunks.get(key) ?? districtChunk(key)); (chunk.maps[path] ??= Object.create(null))[key] = value; continue; }
       const entityId = path.endsWith('.cooldowns') ? key.slice(key.indexOf(':') + 1) : key;
       if (entityId === 'player' || path.endsWith('.cooldowns') && !citizenChunks.has(entityId) && !companyChunks.has(entityId)) { (player.maps[path] ??= Object.create(null))[key] = value; continue; }
       const chunk = getChunk(citizenChunks.get(entityId) ?? companyChunks.get(entityId) ?? shopChunks.get(entityId) ?? buildingChunks.get(entityId) ?? nodeChunks.get(entityId) ?? districtChunk(entityId));

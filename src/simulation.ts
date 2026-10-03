@@ -6,6 +6,7 @@ import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
 import { installFamily, isCloseKin } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
 import { clinicalServiceStationsAtPosition } from './simulation/clinical';
+import { educationNeedsContinuousPeople, educationServiceStationsAtPosition } from './simulation/education';
 import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
@@ -17,7 +18,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -50,7 +51,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; educationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -826,11 +827,16 @@ export class Simulation implements SimulationAPI {
       const clinicalWork = action === 'work' && destination.kind === 'clinic' && ['医生', 'doctor'].includes(citizen.role);
       const clinicalPoints = clinicalWork
         ? points.filter(point => point.floor === 0 && clinicalServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
+      const educationWork = action === 'work' && destination.kind === 'school' && ['老师', 'teacher'].includes(citizen.role)
+        && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active'));
+      const educationPoints = educationWork ? points.filter(point => point.floor === 0 && educationServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
+      const sharedServicePoints = clinicalWork ? clinicalPoints : educationWork ? educationPoints : points;
       const previousTarget = citizen.route?.at(-1);
-      if (!rebuild && citizen.destinationId === destination.id && previousTarget && (clinicalWork ? clinicalPoints : points).some(point => distance(point.position, previousTarget) < 1e-8)) return;
+      if (!rebuild && citizen.destinationId === destination.id && previousTarget && sharedServicePoints.some(point => distance(point.position, previousTarget) < 1e-8)) return;
       const originalCandidates = points.length ? [...points.slice(hash(`${citizen.id}:${destination.id}`) % points.length), ...points.slice(0, hash(`${citizen.id}:${destination.id}`) % points.length)] : [];
-      const preferred = clinicalPoints.length ? [...clinicalPoints.slice(hash(`${citizen.id}:${destination.id}`) % clinicalPoints.length), ...clinicalPoints.slice(0, hash(`${citizen.id}:${destination.id}`) % clinicalPoints.length)] : [];
-      const candidates = [...preferred, ...originalCandidates.filter(point => !clinicalPoints.includes(point))];
+      const preferredPoints = clinicalWork ? clinicalPoints : educationPoints;
+      const preferred = preferredPoints.length ? [...preferredPoints.slice(hash(`${citizen.id}:${destination.id}`) % preferredPoints.length), ...preferredPoints.slice(0, hash(`${citizen.id}:${destination.id}`) % preferredPoints.length)] : [];
+      const candidates = [...preferred, ...originalCandidates.filter(point => !preferredPoints.includes(point))];
       const presence = this.floorPlanPresence(destination, citizen.position);
       let interior: Vec3[] | null = null, selected: BuildingFunctionPoint | undefined;
       for (const point of candidates) { interior = this.floorPlanRoute(destination, presence?.floor ?? 0, point.floor, presence ? citizen.position : destination.door, point.position); if (interior) { selected = point; break; } }
@@ -941,7 +947,7 @@ export class Simulation implements SimulationAPI {
       // At most seven persisted new research jobs request fine task processing.
       // Preserve tier, ordinary actors' frequency, pending needs and real wages.
       const researchTask = researchActors.has(citizen.id);
-      const frequency = researchTask ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const frequency = researchTask || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1467,7 +1473,7 @@ export class Simulation implements SimulationAPI {
       p.money -= 250; this.transferShopFunds(shop, 250); this.receivePublicFee(50, '商铺承包登记费', building.districtId); this.transferBusinessOwnership(shop.id, 'player'); p.inventory.businesses = this.runtime.playerBusinesses.length; p.inventory[`business:${building.id}`] = 1; return success(`获得${building.name}经营权，250云币进入真实经营账户，库存仍须采购，实际在册雇员继续工作，盈利将按时分红。`);
     }
     if (command.type === 'exam') {
-      if (command.targetId === 'study') { const school = this.buildingNear(undefined, ['school']); if (!school) return fail('请到学堂学习。'); if (p.money < 40) return fail('学习费用需要40云币。'); this.receivePublicFee(40, '学堂课程费', school.districtId); p.education++; p.experience++; return success('完成学堂课程：教育与经验各提升1，可报考职业资格。'); }
+      if (command.targetId === 'study') return fail('请通过原课堂课程入口开始或继续学习。');
       const role = command.targetId && ROLES.includes(command.targetId as Role) ? command.targetId as Role : command.value === undefined ? 'teacher' : ROLES[command.value];
       if (!role || role === 'mayor') return fail('市长须通过议事堂选举，其余身份须报考对应职业。');
       if (role === 'traveler') { p.role = role; return success('恢复旅行者身份。'); }
@@ -1603,6 +1609,7 @@ export class Simulation implements SimulationAPI {
       ensure(data && data.format === 'yunshan-save' && data.version === 1 && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
       const s = data.state, r = data.runtime;
       ensure(s && r && typeof s === 'object' && typeof r === 'object', '状态或运行数据'); ensure(s.version === 1 && s.seed === this.world.seed, '状态版本');
+      if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
       if (r.persistedModules !== undefined) {
         const saved = array(r.persistedModules, PERSISTED_MODULES.length, 'persisted financial modules'), actual = PERSISTED_MODULES.filter(name => s[name] !== undefined && s[name] !== null);
         ensure(new Set(saved).size === saved.length && saved.every(name => PERSISTED_MODULES.includes(name) && s[name] && typeof s[name] === 'object') && saved.length === actual.length && actual.every(name => saved.includes(name)), 'persisted module bodies and manifest');
@@ -1656,6 +1663,8 @@ export class Simulation implements SimulationAPI {
       for (const wage of array(r.wages, 1024, 'wages')) { ensure(expectedCitizenIds.has(wage.citizenId) && districtIds.has(wage.districtId), 'wage identity'); ensure(wage.shopId === undefined || wage.shopId === null || shopIds.has(wage.shopId), 'wage employer'); ensure(wage.expenseAccrued === undefined || typeof wage.expenseAccrued === 'boolean', 'wage accounting'); money(wage.amount, 'wage amount'); }
       if (r.playerLaborVersion !== undefined) ensure(r.playerLaborVersion === 1 && s.playerLabor, 'player payroll custody module');
       if (s.playerLabor) ensure(r.playerLaborVersion === 1, 'player payroll custody marker');
+      if (r.educationVersion !== undefined) ensure(r.educationVersion === 1 && s.education, 'education custody module');
+      if (s.education) ensure(r.educationVersion === 1, 'education custody marker');
       ensure(r.accountingVersion === undefined || r.accountingVersion === 2, 'economic accounting version');
       if (r.wageAccruals !== undefined) {
         const keys = new Set<string>(), totals = new Map<string, number>();

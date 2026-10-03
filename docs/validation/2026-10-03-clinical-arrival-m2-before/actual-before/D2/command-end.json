@@ -1,0 +1,101 @@
+{
+  "id": "D2",
+  "status": "EXITED",
+  "startedAtUtc": "2026-10-03T06:06:05.190937+00:00",
+  "ownedPid": 207668,
+  "workerProc": {
+    "pid": 207668,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352233
+  },
+  "launcherProc": {
+    "pid": 207644,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352134
+  },
+  "wrapperPid": 207644,
+  "cwd": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01",
+  "argv": [
+    "node",
+    "--import",
+    "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+    "--test",
+    "--test-isolation=none",
+    "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/execution-prep/drivers/m2-npc-patient-late.test.ts"
+  ],
+  "selectedEnv": {
+    "YUNSHAN_M2_CAPTURE_DIR": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D2/checkpoints",
+    "YUNSHAN_M2_AUTHENTIC_HISTORY_INPUT": "UNSET",
+    "NODE_OPTIONS": "UNSET_OR_EMPTY"
+  },
+  "endedAtUtc": "2026-10-03T06:06:05.707390+00:00",
+  "exitCode": 1,
+  "ownedChildClosed": true,
+  "workerProcAfterWait": {
+    "pid": 207668,
+    "exists": false,
+    "state": null,
+    "startTicks": null,
+    "sameStart": false,
+    "sameOwnedProcessLive": false
+  },
+  "launcherProcAfterWorkerWait": {
+    "pid": 207644,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352134,
+    "sameStart": true,
+    "sameOwnedProcessLive": true
+  },
+  "classification": {
+    "actualChildExit": 1,
+    "traceCount": 1,
+    "causal": true,
+    "classification": "ACTUAL_OLD_TIMING_BEHAVIOR_FAIL",
+    "actualTreatmentDeltaMinutes": 4,
+    "boundedCurrentIntervalMinutes": 1,
+    "oracle": "ordered real source/route/physical/attendance assertions completed before trace; original hard assertion still present"
+  },
+  "checkpoints": [
+    {
+      "file": "bootstrap-after-step.facts.json",
+      "label": "bootstrap-after-step",
+      "tick": 1,
+      "clock": 484
+    },
+    {
+      "file": "bootstrap-before-step.facts.json",
+      "label": "bootstrap-before-step",
+      "tick": 0,
+      "clock": 480
+    },
+    {
+      "file": "constructed-before-step.facts.json",
+      "label": "constructed-before-step",
+      "tick": 0,
+      "clock": 480
+    },
+    {
+      "file": "measurement-after-step.facts.json",
+      "label": "measurement-after-step",
+      "tick": 2,
+      "clock": 488
+    },
+    {
+      "file": "measurement-before-step.facts.json",
+      "label": "measurement-before-step",
+      "tick": 1,
+      "clock": 484
+    }
+  ],
+  "stdout": {
+    "sha256": "02983bc1fc317da971a1de04a9d483ee018f540f844be15ea8b3a9ef415d6c8b",
+    "bytes": 1663
+  },
+  "stderr": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

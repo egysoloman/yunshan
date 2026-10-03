@@ -1,0 +1,62 @@
+{
+  "kind": "READONLY_STATIC_METADATA_NOT_RUNTIME_TEST",
+  "createdAtUTC": "2026-10-03T03:45:50.954371+00:00",
+  "sourceRoot": "/tmp/yunshan-education-course-prep-16-01/frozen/source",
+  "baseRoot": "/tmp/yunshan-system-coherent-16/source",
+  "baseSnapshotSHA256": "af930373394bafef704fb5c825a4b54419b407f3501044225d2a36dd353a4f41",
+  "metadataSHA256": {
+    "education-course-from16.patch": "5e8268cee8ef32555e5901713da64041662f6c3c16b307e8b0aba7dc92878471",
+    "source-sha256.txt": "afd281fd8f243ed5dc75434ead9bb0a86860f5dadbcf9ce0558a920d35ab5961",
+    "changed-sha256.txt": "1b5378c4a0faee0cd3c37b696913f2bc968de4c42df427f3fe544415768633df",
+    "implementation-review.md": "ae2650e1d9b2beca567628f73df1449281a0ac945f3668a87b0fb48eb9150dff"
+  },
+  "sourceDeclaredCount": 120,
+  "sourceActualCount": 127,
+  "sourceManifestMismatches": [
+    "dist/assets/index-DcKlDqDV.css",
+    "dist/assets/index-Q3RG9Gju.js",
+    "dist/assets/index-Q3RG9Gju.js.map",
+    "dist/assets/three-DfYROjRC.js",
+    "dist/assets/three-DfYROjRC.js.map",
+    "dist/favicon.svg",
+    "dist/index.html"
+  ],
+  "baseSnapshotDeclaredCount": 116,
+  "baseActualCount": 123,
+  "baseSnapshotMismatches": [
+    "dist/assets/index-DcKlDqDV.css",
+    "dist/assets/index-Q3RG9Gju.js",
+    "dist/assets/index-Q3RG9Gju.js.map",
+    "dist/assets/three-DfYROjRC.js",
+    "dist/assets/three-DfYROjRC.js.map",
+    "dist/favicon.svg",
+    "dist/index.html"
+  ],
+  "changedDeclaredCount": 16,
+  "changedActualCount": 16,
+  "changedPathSetMismatch": [],
+  "changedHashMismatches": [],
+  "actualChanges": [
+    "scripts/economy-audit.ts",
+    "scripts/player-journey.mjs",
+    "src/persistence/partition.ts",
+    "src/simulation.ts",
+    "src/simulation/banking.ts",
+    "src/simulation/culture.ts",
+    "src/simulation/education.ts",
+    "src/simulation/extensions.ts",
+    "src/types.ts",
+    "src/ui.ts",
+    "tests/economy.test.ts",
+    "tests/education-course.test.ts",
+    "tests/education-fixture.ts",
+    "tests/education-legacy-regression.test.ts",
+    "tests/simulation.test.ts",
+    "tests/v4-extensions.test.ts"
+  ],
+  "activityMinutesHelperSHA256": "5698aab3b0d74d6e34b6ef9d27b5c3d835e24e7c1bd2478080ba3afe71915ebd",
+  "activityMinutesHelperUnchangedFrom16": true,
+  "clinicalTestUnchangedFrom16": true,
+  "runtimeStatus": "NOT_RUN",
+  "forbiddenActionsPerformed": []
+}

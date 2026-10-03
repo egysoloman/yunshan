@@ -1,0 +1,894 @@
+{
+  "writtenAtUTC": "2026-10-03T06:14:02.401884+00:00",
+  "stagedFiles": 146,
+  "allStagedBytesMatchWorkspace": true,
+  "credentialPatterns": {
+    "tripo-key": 0,
+    "openai-key": 0,
+    "aws-access-id": 0,
+    "private-key": 0,
+    "bearer-value": 0,
+    "google-oauth": 0,
+    "signed-query": 0
+  },
+  "E1ArchiveExact": true,
+  "scope": "Verification before final staged receipt is added. No paid service or secret copied.",
+  "files": [
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/bootstrap-after-step.facts.json",
+      "bytes": 5930,
+      "sha256": "7ddef69a766ec2b73b583ef3e9b299be5e24c145667950bb1b83540d93ec8a7c",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/bootstrap-after-step.save.json",
+      "bytes": 406424,
+      "sha256": "42c3958b798880d400d9fa8416d7daca029efaf5468d60c5451e049479471ec4",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/bootstrap-before-step.facts.json",
+      "bytes": 3985,
+      "sha256": "22dff5daec9a3044e1a69ca283895604bf2bcd768edda3cf43043f1443db7248",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/bootstrap-before-step.save.json",
+      "bytes": 343082,
+      "sha256": "c530fece726ab63a029d0442154684e371fb11578220ff83d2d6a855056dd6bf",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/constructed-before-step.facts.json",
+      "bytes": 2973,
+      "sha256": "86f3a065e5f1a1bd457ee118cb4c27ff2e2ce35708b41e8e03a5993a16562e89",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/constructed-before-step.save.json",
+      "bytes": 342305,
+      "sha256": "b5287f48c50f39291e7c599e470bc29d591a0e0b3251b623a55cb749105e95a6",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/measurement-after-step.facts.json",
+      "bytes": 5220,
+      "sha256": "9a0192cd36d20f9d223fb28ede26f06a0fc21e18dcf4ad1c4d50dd7d53d9fc36",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/measurement-after-step.save.json",
+      "bytes": 408224,
+      "sha256": "26ecbed06893a5bffc2f5d73d822b25427dc8f329489dc912a5f093635e7b91e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/measurement-before-step.facts.json",
+      "bytes": 4780,
+      "sha256": "aac5412c167ef110a458aab61c8217b780bb1cc887074077433b3a2894d1e879",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/measurement-before-step.save.json",
+      "bytes": 406423,
+      "sha256": "67c3934829383b8b8d4910fde4135d0b74aeed650ad8bae12508a6ae7973a11e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/checkpoints/world.json",
+      "bytes": 5715,
+      "sha256": "11fb1d4ce40564f1cfdd66e3c4b48cc796a67a5525daee097f0a94d9cf4c488d",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/command-end.json",
+      "bytes": 2708,
+      "sha256": "3900e6001f5ba20ba0a3f63f96be243198056990cd8371b012c99dc2c3f4c9e9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/command-start.json",
+      "bytes": 933,
+      "sha256": "18531927fd6a0eff84bc95136852b208a1359e921cda60905634351d484b5b75",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/input-first.json",
+      "bytes": 110860,
+      "sha256": "0c357e4f22bac05049955e3707f72805c8f6ad36f43d1e55831dfa782dd28693",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/input-last.json",
+      "bytes": 110860,
+      "sha256": "c01a7090f000b40d7a0acee66131c20bcea2ed44edc6bbe0975f523bfddb146a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/members-sha256.json",
+      "bytes": 2688,
+      "sha256": "ae7d088455f8ee3fd1a83ae278ef690d9352b1b1b2d080168ef063860ef538de",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D1/stdout.log",
+      "bytes": 1610,
+      "sha256": "2eef26a2fd28e8e9faa6bd726adfc131a7de16f082e1f6cb5c05cf32a94dcf22",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/bootstrap-after-step.facts.json",
+      "bytes": 4941,
+      "sha256": "1ed1bad4af1f058574d6c777f835fdcda9a1e90d3740079a1c621dead0af06ed",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/bootstrap-after-step.save.json",
+      "bytes": 406520,
+      "sha256": "f81518c8da0ef2ff445edcab9779e55cb7194d2a2a3f353338c4b9f6bae2a5a5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/bootstrap-before-step.facts.json",
+      "bytes": 4206,
+      "sha256": "ebdb84e1be79a6054bbf394f89cac0dfd0b0f57d3994c324cd6a235bfb58887c",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/bootstrap-before-step.save.json",
+      "bytes": 343115,
+      "sha256": "70bcd85e4450f576e8228f7656868b4681713784ec50d2de919a6c1c41e71c0b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/constructed-before-step.facts.json",
+      "bytes": 2973,
+      "sha256": "86f3a065e5f1a1bd457ee118cb4c27ff2e2ce35708b41e8e03a5993a16562e89",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/constructed-before-step.save.json",
+      "bytes": 342305,
+      "sha256": "b5287f48c50f39291e7c599e470bc29d591a0e0b3251b623a55cb749105e95a6",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/measurement-after-step.facts.json",
+      "bytes": 5192,
+      "sha256": "dd84629a15bd57a3ceb710bddfa5342f840e5782028f61383fb65638ddfbfc4d",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/measurement-after-step.save.json",
+      "bytes": 408483,
+      "sha256": "db7a54f6b5daf45141139d60013450f68c029117ec856a8f23daf2c7d7ef52fa",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/measurement-before-step.facts.json",
+      "bytes": 5016,
+      "sha256": "0bcda7cd3b9f18c1864ced94b2ac1e57e9aef62b0a942d1fb21af9976945bf70",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/measurement-before-step.save.json",
+      "bytes": 406853,
+      "sha256": "0353880d31abb82a67d62ba784e36b119bbdc3087852435b32e0a85658011555",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/checkpoints/world.json",
+      "bytes": 5715,
+      "sha256": "11fb1d4ce40564f1cfdd66e3c4b48cc796a67a5525daee097f0a94d9cf4c488d",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/command-end.json",
+      "bytes": 2713,
+      "sha256": "5bb7d06850fa80d8343618e3d88c5d08a889591e7363bd278de65274bd0f567c",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/command-start.json",
+      "bytes": 938,
+      "sha256": "03ed501a1f1a077ac08232ce17eb4b20651ef5e69dfeaa7f33e972bcdbbdc293",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/input-first.json",
+      "bytes": 110860,
+      "sha256": "f72d33a3aac903523d9e0940e6f2d4ec9bffb6bbc659c8912efa11eadd7b9f62",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/input-last.json",
+      "bytes": 110860,
+      "sha256": "0c81fa6bb129bb7a452e822592d6d67cd8b036e6c2bc9904db34aa43742f106c",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/members-sha256.json",
+      "bytes": 2688,
+      "sha256": "ad2bceee9e62fb25b9763257d07c74586fcd4a3dd8939d04594c89ecb3ddfeb2",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/D2/stdout.log",
+      "bytes": 1663,
+      "sha256": "02983bc1fc317da971a1de04a9d483ee018f540f844be15ea8b3a9ef415d6c8b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/actual-causal-report.json",
+      "bytes": 7086,
+      "sha256": "1002d61d9918c8c3f27dc34627b384575d638c370ce631c29f5e9943235360ec",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/input-first.json",
+      "bytes": 110860,
+      "sha256": "08495250022f7398bc0a4f5f1c7d6aa8563727b394ae98114885726f80019528",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/input-last.json",
+      "bytes": 110860,
+      "sha256": "371f8da854752f9a9cfdcf0c7198a04a236ebd18dae0aa6ab52f1a0cec9d92fe",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/invocation-start.json",
+      "bytes": 828,
+      "sha256": "9ba5569e632a485054a3756de48e765e367f22f25df9a896d344b5996511ec59",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/members-sha256.json",
+      "bytes": 6336,
+      "sha256": "9bb88a688c6351c3cbbd2ab4c6c885bdf456115a943ee45b11138fbe3d85c1f9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/owned-process-closure.json",
+      "bytes": 518,
+      "sha256": "d884f7eeceec8ac692685d831ec9c430e1803777944f3621b621fafbbd06a41d",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/post-review-members-sha256.json",
+      "bytes": 7607,
+      "sha256": "af429439e2d989c38a45ff2aa9a166cf32974de9e7a4777749f39591e25468c2",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/actual-before/summary.json",
+      "bytes": 6885,
+      "sha256": "28a1240d1adb3bb7d6492767d2d017422d6996ed32c1bdf548b056189333e455",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/copied-originals.json",
+      "bytes": 21830,
+      "sha256": "20a9527df5134ed3db037a802e0819d55acf31e90a91b1afed349a92147d1b6a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/drivers/m2-checkpoints.ts",
+      "bytes": 2532,
+      "sha256": "ae8db8cc395868014d87fa7d91e2ac49dda917b0747361231bc0eeab7c84dfa2",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/drivers/m2-doctor-late.test.ts",
+      "bytes": 3537,
+      "sha256": "0d91b876c9c22a31edf91abc12c2352df4bf810669d54dbf16ecf70baa797b64",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/drivers/m2-fixture.ts",
+      "bytes": 8501,
+      "sha256": "712a53746a713de9ecfb68b9324dbe435011d47cdbc69045adfa9c5fa97ea5ab",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/drivers/m2-npc-patient-late.test.ts",
+      "bytes": 3693,
+      "sha256": "41cc0e02b7b3eed118168ea15eb40eac60be36a86bf3dec1e2ee381a1e0751b9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/drivers/m2-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/execution-inputs-v2.json",
+      "bytes": 80777,
+      "sha256": "c9763373dea80badfa7e0aaa992de8585d493ff2f00745150d6c129de321e777",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/execution-inputs.json",
+      "bytes": 79793,
+      "sha256": "c6f3e3034a1af3f67f03891d9897973dfecaac4389ae2ee1afc99ec42bb21d05",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/execution-preparation-manifest-v2.json",
+      "bytes": 1028,
+      "sha256": "8efab541ca64d34b68a035c57386051dc0e585a108c86f3662add92e9b49f73b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/execution-preparation-manifest.json",
+      "bytes": 2713,
+      "sha256": "d59a58766cb00ea30107527a1a04bd14ec7840abff7b4708cc5c7f0aee256038",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/execution-prepared-sha256.txt",
+      "bytes": 1111,
+      "sha256": "660360184b8ae1b2b2cfa365ed3cdf5d0de57134b55dfc230bb91af161010397",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/launch-m2-before-v2.sh",
+      "bytes": 332,
+      "sha256": "359b47117f016e4bb7dcabe89cf9f31b0b4714c56631209cfd6499aec6d3b4ff",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/launch-m2-before.sh",
+      "bytes": 329,
+      "sha256": "ae88f98854965bea53ce9f68578dbea6b28d8c0a93633a17993d81d257c6c8f0",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/passive-checkpoints.patch",
+      "bytes": 8803,
+      "sha256": "b93c432c3579a99d8bc318273509d21c4bf0ac8b9fefc4ef56b29873a5ebbcc5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/run-m2-before-v2.py",
+      "bytes": 10245,
+      "sha256": "a060d1150c07e178ac57b007e9b5433431de273c29362b07348b3a36516361d9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/run-m2-before.py",
+      "bytes": 8929,
+      "sha256": "a5ad947c1e4752c4378d968eccf9bc3e1ac08d81d0b8552a0997ba0345606610",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/static-passive-mirror-proof.json",
+      "bytes": 1028,
+      "sha256": "25c750733345813d73df2d93ba1a5723ce33e840448dab608de7d3d64f1aead5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/execution-prep/wrapper-contract.md",
+      "bytes": 2971,
+      "sha256": "ef3d2981c90132b8a3d8b2e545be2b8ba5cb22bf68ce54b237f9e31f0e253f4f",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-doctor-late.test.ts",
+      "bytes": 2792,
+      "sha256": "5f36c999ff7a1f45935c50c156e10bf974d20c0759b7e692c1f5502ff84c732b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-fixture.ts",
+      "bytes": 8483,
+      "sha256": "458107bb425a5570ef3fded6aea15ff64dbf54387fef4d7e3ffc78e1beea8689",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-history-64-cap-front.test.ts",
+      "bytes": 5632,
+      "sha256": "8774f5fe1c9c5f0bf3163e42aa103cf8b91d4f070d68e4249a547531288abafb",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-history-front-cap-contract.test.ts",
+      "bytes": 855,
+      "sha256": "1a8eadf7276ed7608a1e7b5f950bf32ea0c44bf7082e7efb775857a7e5aa058e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-npc-patient-late.test.ts",
+      "bytes": 2948,
+      "sha256": "89aab43bbd9c6c72a2c6999103fb42662aa8120a639d377e9b534b7fc1d63b86",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-clinical-arrival-m2-before/original-approved-drivers/m2-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/README.md",
+      "bytes": 3210,
+      "sha256": "2f89ff452f596d2dd3d9b961c13ca78da38329f90919917d9ea7385b7cdf76fa",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/candidate-evidence-index-final-v2.json",
+      "bytes": 28380,
+      "sha256": "136e71fa1b5f32282c74931c06537ffd2606bb3a1e344c77b6151bdfd5b55721",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/candidate-handoff.md",
+      "bytes": 5807,
+      "sha256": "4d09966567da6d2849507bd70b8e13031234b7a272189f8f3a255fe590f24d70",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/education-course-from17.patch",
+      "bytes": 1205639,
+      "sha256": "118c7f49c4ec8cf8bb25104abb7aa9724f00afc3f2929e13a6b97d49fcedab1a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/library-save-failure.json",
+      "bytes": 1178,
+      "sha256": "65f6925b71971cea386cd30d4493c667927591a434627dca15ba96bdf6d30dfc",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/original-files.json",
+      "bytes": 683439,
+      "sha256": "077e327d6889a610cb907098197c45b91e3cba9c4ea1fb456b2289b51a1a7e18",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/patch-format-correction.json",
+      "bytes": 1591,
+      "sha256": "873c271dac2b630a7329556ae63bea709cf2183e810ba344adc7340ed9c8c8be",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/prep-failure.json",
+      "bytes": 486,
+      "sha256": "b52956d49aaab09a70f69f22c20a893716a35a813ecebec7a874209e71968fd1",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/produce-before-emptyline-fix.py",
+      "bytes": 8201,
+      "sha256": "6240516b2caca29a003e9a1792426bac7cf9383e5452d93c7fae22a0340a5ac5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/produce.py",
+      "bytes": 8346,
+      "sha256": "b187b2e164be9ddc02b8abdee9eb2495450c9b3a3c404ead01a90ab7909f9dbf",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/production-receipt.json",
+      "bytes": 1254,
+      "sha256": "96f0344bc8c79bac7c34936251d0183fa84dd525347063e297ac5b520d0d5574",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/root-closed-archive-verification.json",
+      "bytes": 502,
+      "sha256": "eae3f693fcb017046789b815f938f8fe49d568f84e6e4abb5897084995eb7f82",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-attendance-e1/yunshan-E1-course-original-evidence-20261003.zip",
+      "bytes": 93836706,
+      "sha256": "2e39effe9c02fd3a244497367bee44fa76ed7d4f26967681faafa1f92b2e6c5d",
+      "mode": "Original ZIP member scan and direct1822 validation already complete; staged archive SHA exact"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/e1-final16-frozen-static-review.md",
+      "bytes": 19444,
+      "sha256": "eb85c4c6e15f6b74443c6ca66819418055adc770c66e8613ccee4fc8511dc55e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/final-readonly-identity-receipt.json",
+      "bytes": 1374,
+      "sha256": "9ee935cdfbedb1fde345fccaed15193dee5ab95a1808a6226bfb63c5a2daed03",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/first-readonly-binding-receipt.json",
+      "bytes": 2341,
+      "sha256": "8d49649ee7c71ac066642380fb9ba4f106361f2783a5a2652857399da8ee7776",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/memo-library-writeback-version4.json",
+      "bytes": 697,
+      "sha256": "7233ea8fffcef798eb7e94d1e52bd9f30077515ae571596e1a292aad13d24042",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/root-evidence-index01-verification.json",
+      "bytes": 18956,
+      "sha256": "2b23bed3b006627512aa210129180b63eb797092b3a6baac26450f934a2edf0a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/root-final04-index-verification.json",
+      "bytes": 11536,
+      "sha256": "d444f564192a8fb688131c105693585dd933f903e8214fb895e5e72f7720d3e0",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/root-index02-and-history-window-verification.json",
+      "bytes": 22533,
+      "sha256": "4a0298178aa0b778451f3cf64d615796e6e6d3831dffc92dbaa86dbb722b9a4e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-education-e1-readonly/static-patch-binding-addendum.json",
+      "bytes": 5424,
+      "sha256": "66351fe0a90a08c3e5208116ec73a50108e85e09bf1ea2ee0d9aaadb4850e250",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent17/git-delivery-7bfd349.json",
+      "bytes": 915,
+      "sha256": "ab2a06bd04e870b7590656b6fd0f92e97bfe0b923ff4773e70905788e222c643",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/build-receipt.json",
+      "bytes": 53582,
+      "sha256": "956716594e11937e0ab9cfea4180fef799196c8197596548167117ac287483f3",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/build.raw.log",
+      "bytes": 720,
+      "sha256": "408fa4264f47ded8792357f507eef51556a8d09f5c1d5aac33ff09313244a356",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/canvas-review-canvas-oracle-only.patch",
+      "bytes": 1512,
+      "sha256": "a77d5e4fedf5baa21497bcdd33e736899b3ca8d2eeb214ca3feb86d5d60fe049",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/canvas-review-oracle-fix-receipt.json",
+      "bytes": 986,
+      "sha256": "772ac41cffec45eb88cc266dd57afa4272cc5f3e3c4620aa0dc27c1c443114d0",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/canvas-review-receipt.json",
+      "bytes": 3810,
+      "sha256": "c09b7ceead4b32215305aa71592438b9f0ae23dd81875f8a495de85582489996",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/canvas-review-review.md",
+      "bytes": 3206,
+      "sha256": "70a7ae1d5331a5bf0e954bad52804bda2e16ca345a529fd968f14352a366cfa7",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/03-actual-doorway-paused.png",
+      "bytes": 142479,
+      "sha256": "37bee6aab9ab5163cc1460f92c3e1bfe6bded39d277daf9fbbf5994633b2f92f",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/06-real-cancel-refund-and-retained-material.png",
+      "bytes": 159423,
+      "sha256": "1747e2958a0a31dec45742de303d78f409a5b25c90ad5d6500155f6f5864f288",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/09-real-sixty-minute-completion.png",
+      "bytes": 149713,
+      "sha256": "241291d54eacfd4e6719d1974da56921df50dfd155b25a6ba0bd2062e613c0fc",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/binding-as-run.json",
+      "bytes": 2079,
+      "sha256": "51cc2e28c381ed22c3cf7c5489114345728573af7128a4c66461328204d23ac9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/education-ui-as-run.mjs",
+      "bytes": 29608,
+      "sha256": "89d96c57fe03ec6bc2076869cbba6cd42ee5b8abd500f8320fe49bc96d89aa41",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/first-failure.png",
+      "bytes": 149779,
+      "sha256": "10efb690b89ee6a019300df6b8d9dec7d8b1b5498bd32ba40b691027f747536c",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/raw.log",
+      "bytes": 587,
+      "sha256": "8bb58741dbbedece71c2b0a5a25d63c9c07f4d99ee9d341d894e1e63c1999233",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/resource-receipt.json",
+      "bytes": 68425,
+      "sha256": "cf2e17ae34b2a14d7b8a7f121960b0aeb2b44a43fbc1383ae8370625fcc6bbe0",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/result.json",
+      "bytes": 31595,
+      "sha256": "43403796748f79bf425ffaef00ebe85d264acb4d2d1b018b09ee1500b51b021b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/root-after-wrapper-process-check.json",
+      "bytes": 923,
+      "sha256": "705b3b0779aab04e3c75879bf81d54774fd661b48f4bae1f273996c1e1d898e0",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-01/run-education-dom-as-run.py",
+      "bytes": 8549,
+      "sha256": "fa53c60a1a25e6855e48e68aab9d4ccaf47988814d313475961ac2ebb0479958",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/03-actual-doorway-paused.png",
+      "bytes": 142479,
+      "sha256": "37bee6aab9ab5163cc1460f92c3e1bfe6bded39d277daf9fbbf5994633b2f92f",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/06-real-cancel-refund-and-retained-material.png",
+      "bytes": 159431,
+      "sha256": "14363a47ab55dc436e95a4ff800aea64ef151b3df141ca387136eb03e2dfb2cc",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/09-real-sixty-minute-completion.png",
+      "bytes": 149713,
+      "sha256": "241291d54eacfd4e6719d1974da56921df50dfd155b25a6ba0bd2062e613c0fc",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/binding-as-run.json",
+      "bytes": 2079,
+      "sha256": "2dc6deacc5ef7dbffe84954e6f9698faf7c339f81c52cb9bf23b567dc19f25d9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/education-ui-as-run.mjs",
+      "bytes": 30397,
+      "sha256": "4b5b1a2a95a6c25526e59688d89325038ec099d1868785d6b2bc17b6abad529d",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/raw.log",
+      "bytes": 144,
+      "sha256": "03e728ca4c2b9b1461c74917c7492c50e2010b53c6efefb9c0e7c90e0be22f62",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/resource-receipt.json",
+      "bytes": 68412,
+      "sha256": "c93133b84a5b5a61d764009dba2582c33197be443dc4368c8d8748e8dd769d6f",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/result.json",
+      "bytes": 31858,
+      "sha256": "02549db68c77f6a35d9d574441379d17227ad0da4575535912644a504b2bc928",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/root-after-wrapper-process-check.json",
+      "bytes": 820,
+      "sha256": "05cb3d45db5d88618c76a5712369e841cb7b1fdaa17486aa42c60d475972a53a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-02/run-education-dom-as-run.py",
+      "bytes": 8549,
+      "sha256": "fa53c60a1a25e6855e48e68aab9d4ccaf47988814d313475961ac2ebb0479958",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-binding-01.json",
+      "bytes": 2079,
+      "sha256": "51cc2e28c381ed22c3cf7c5489114345728573af7128a4c66461328204d23ac9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/education-dom-binding-02.json",
+      "bytes": 2079,
+      "sha256": "2dc6deacc5ef7dbffe84954e6f9698faf7c339f81c52cb9bf23b567dc19f25d9",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/guarded-integration.json",
+      "bytes": 5460,
+      "sha256": "3c5c6f9ed9e5f8b136de5196479b516b988205c1bf702a1ff20931a7c27c243a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/integrate-freeze.py",
+      "bytes": 3493,
+      "sha256": "90186ad981875368f88bcb2b949a0467116df8d4f06e5eec7def4755f6d081e7",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/run-build.py",
+      "bytes": 3860,
+      "sha256": "f73d59adf41af352fee36db9b6211f36477b6c1d0e064c184a0f92722c5355f7",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/validation/2026-10-03-system-coherent18/source-snapshot.json",
+      "bytes": 13259,
+      "sha256": "84abdae7cbc54fe8bc78c661f1a71799167568125caa0f79ff9f168eeaab1094",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "docs/需求实现验证矩阵.md",
+      "bytes": 55231,
+      "sha256": "54b3acaf0203bee98b2b17504c97b893175a0f03c0208cdec750f5fae215c0d7",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "scripts/economy-audit.ts",
+      "bytes": 20775,
+      "sha256": "61c05b8ee39feedfe951094bd2973a4bb3e5f22f92637539c4de3af6c8767b1f",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "scripts/player-journey.mjs",
+      "bytes": 46766,
+      "sha256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "bytes": 14720,
+      "sha256": "51b3b0f71c1cc0fc0bd6e85df7025cf02e5f2c3662dbed1998ee185791c32eb5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/simulation.ts",
+      "bytes": 210933,
+      "sha256": "f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "bytes": 21825,
+      "sha256": "5119b97033b2f638b3a628293bfdecd9b61aec1f24acf47a5c66fd668119513e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "bytes": 51793,
+      "sha256": "b9aebe594f59a6a6bb94b4a58dd3035a2d676532f351c42cd00f811b56229a22",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "bytes": 39470,
+      "sha256": "23fcd8245af65bba92d00a04ab8653b8c30c3d21caa03610692c177a3ea9bafa",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "bytes": 86996,
+      "sha256": "f3597888ee10984683e2171337212c0f8d8c172d64edd1c875a5ce91c402728b",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 12873,
+      "sha256": "8c3131b5cba4ff0a91610800922970be1c2d26c0e0f0364f86bd483bc93752a5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "src/ui.ts",
+      "bytes": 163652,
+      "sha256": "23da0cbecc2a7101913181def00aa16959d401432b32aa39f68a7b812f7c511a",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/economy.test.ts",
+      "bytes": 50715,
+      "sha256": "f9a45eb31e4d8591f7e278497effaed919a266181e24026d1e898296b7e627bb",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/education-boundary.test.ts",
+      "bytes": 25936,
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/education-course.test.ts",
+      "bytes": 37708,
+      "sha256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/education-fixture.ts",
+      "bytes": 18237,
+      "sha256": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/education-legacy-regression.test.ts",
+      "bytes": 4572,
+      "sha256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/education-saved-time.test.ts",
+      "bytes": 9383,
+      "sha256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/fixtures/education-different-start.save.json",
+      "bytes": 497118,
+      "sha256": "5e7bfcae17a5a9eeba08eea1092d4ae23afddd223956010a413a4f5c4dc9bcb5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/fixtures/education-same-start.save.json",
+      "bytes": 497437,
+      "sha256": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/fixtures/education-saved-time-provenance.md",
+      "bytes": 3089,
+      "sha256": "6548ac00106197b8d559ef2a3c6674943742f118ba550608e84c8439252fd978",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/simulation.test.ts",
+      "bytes": 66862,
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "tests/v4-extensions.test.ts",
+      "bytes": 13315,
+      "sha256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1",
+      "mode": "direct staged byte scan"
+    },
+    {
+      "path": "开发备忘录.md",
+      "bytes": 235368,
+      "sha256": "5be8ac1d5f368cec5457cbd955e1a076a7d8879e1ad8c114d4c9f7684f7795bd",
+      "mode": "direct staged byte scan"
+    }
+  ]
+}

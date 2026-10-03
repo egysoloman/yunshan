@@ -1,0 +1,29 @@
+{
+  "status": "ALL_OWNED_EXITED",
+  "checkedAtUtc": "2026-10-03T06:06:59.561016+00:00",
+  "observations": [
+    {
+      "pid": 207644,
+      "exists": false,
+      "state": null,
+      "startTicks": null
+    },
+    {
+      "pid": 207647,
+      "exists": false,
+      "state": null,
+      "startTicks": null
+    },
+    {
+      "pid": 207668,
+      "exists": false,
+      "state": null,
+      "startTicks": null
+    }
+  ],
+  "onlyOwnedPidsQueried": true,
+  "PTY": {
+    "sessionId": 53168,
+    "actualExitCode": 1
+  }
+}

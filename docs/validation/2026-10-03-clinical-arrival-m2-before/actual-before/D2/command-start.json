@@ -1,0 +1,33 @@
+{
+  "id": "D2",
+  "status": "RUNNING",
+  "startedAtUtc": "2026-10-03T06:06:05.190937+00:00",
+  "ownedPid": 207668,
+  "workerProc": {
+    "pid": 207668,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352233
+  },
+  "launcherProc": {
+    "pid": 207644,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352134
+  },
+  "wrapperPid": 207644,
+  "cwd": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01",
+  "argv": [
+    "node",
+    "--import",
+    "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+    "--test",
+    "--test-isolation=none",
+    "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/execution-prep/drivers/m2-npc-patient-late.test.ts"
+  ],
+  "selectedEnv": {
+    "YUNSHAN_M2_CAPTURE_DIR": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D2/checkpoints",
+    "YUNSHAN_M2_AUTHENTIC_HISTORY_INPUT": "UNSET",
+    "NODE_OPTIONS": "UNSET_OR_EMPTY"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "state": "INTEGRATED_AND_FROZEN_NOT_BUILT",
+  "writtenAtUTC": "2026-10-03T05:42:18.764662+00:00",
+  "baselineRoot17": "/tmp/yunshan-system-coherent-17/source",
+  "candidateRoot04": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+  "candidateManifestSHA256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+  "sourceInputs": 125,
+  "sharedExecutableInputs": 120,
+  "candidateExecutableExact": true,
+  "guardedChanges": [
+    {
+      "path": "scripts/economy-audit.ts",
+      "baseline17SHA256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "candidateSHA256": "61c05b8ee39feedfe951094bd2973a4bb3e5f22f92637539c4de3af6c8767b1f"
+    },
+    {
+      "path": "scripts/player-journey.mjs",
+      "baseline17SHA256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "candidateSHA256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861"
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "baseline17SHA256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "candidateSHA256": "51b3b0f71c1cc0fc0bd6e85df7025cf02e5f2c3662dbed1998ee185791c32eb5"
+    },
+    {
+      "path": "src/simulation.ts",
+      "baseline17SHA256": "050e442076230f6621c367923dc223ba6db47841087bf189f1ef17250e44470d",
+      "candidateSHA256": "f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85"
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "baseline17SHA256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "candidateSHA256": "5119b97033b2f638b3a628293bfdecd9b61aec1f24acf47a5c66fd668119513e"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "baseline17SHA256": "2d8edd0f62176d4aca12a998b16ff2f504ceab042418d33076a5cf43f409a701",
+      "candidateSHA256": "b9aebe594f59a6a6bb94b4a58dd3035a2d676532f351c42cd00f811b56229a22"
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "23fcd8245af65bba92d00a04ab8653b8c30c3d21caa03610692c177a3ea9bafa"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "baseline17SHA256": "42bcb7c2b0c69cf4104e3f74a2634e258412434f9ad499161b461e75c750301a",
+      "candidateSHA256": "f3597888ee10984683e2171337212c0f8d8c172d64edd1c875a5ce91c402728b"
+    },
+    {
+      "path": "src/types.ts",
+      "baseline17SHA256": "6c7a299f9b07bc7c1b6605a92a5245601fb492060d2d0732cb30c727f3ff4e45",
+      "candidateSHA256": "8c3131b5cba4ff0a91610800922970be1c2d26c0e0f0364f86bd483bc93752a5"
+    },
+    {
+      "path": "src/ui.ts",
+      "baseline17SHA256": "d1db9d01f8614150d86584b5bd30a54fe2a4287b41ad2b2571bae3f75d4c7aa6",
+      "candidateSHA256": "23da0cbecc2a7101913181def00aa16959d401432b32aa39f68a7b812f7c511a"
+    },
+    {
+      "path": "tests/economy.test.ts",
+      "baseline17SHA256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "candidateSHA256": "f9a45eb31e4d8591f7e278497effaed919a266181e24026d1e898296b7e627bb"
+    },
+    {
+      "path": "tests/education-boundary.test.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd"
+    },
+    {
+      "path": "tests/education-course.test.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967"
+    },
+    {
+      "path": "tests/education-fixture.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856"
+    },
+    {
+      "path": "tests/education-legacy-regression.test.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3"
+    },
+    {
+      "path": "tests/education-saved-time.test.ts",
+      "baseline17SHA256": null,
+      "candidateSHA256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e"
+    },
+    {
+      "path": "tests/fixtures/education-different-start.save.json",
+      "baseline17SHA256": null,
+      "candidateSHA256": "5e7bfcae17a5a9eeba08eea1092d4ae23afddd223956010a413a4f5c4dc9bcb5"
+    },
+    {
+      "path": "tests/fixtures/education-same-start.save.json",
+      "baseline17SHA256": null,
+      "candidateSHA256": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735"
+    },
+    {
+      "path": "tests/fixtures/education-saved-time-provenance.md",
+      "baseline17SHA256": null,
+      "candidateSHA256": "6548ac00106197b8d559ef2a3c6674943742f118ba550608e84c8439252fd978"
+    },
+    {
+      "path": "tests/simulation.test.ts",
+      "baseline17SHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "candidateSHA256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5"
+    },
+    {
+      "path": "tests/v4-extensions.test.ts",
+      "baseline17SHA256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "candidateSHA256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1"
+    }
+  ],
+  "preservedExcludedSharedFiles": [
+    ".gitattributes",
+    ".gitignore",
+    "AGENTS.md",
+    "开发备忘录.md",
+    "提示词.md"
+  ],
+  "noDirectoryOverwriteOrDependencyCopy": true,
+  "scope": "E1 attended courses, real escrow/procurement/refunds, actor capacity and import-only chronological guard. No energy candidate, M2 arrival-window fix, H2 pathology or dynamic-city completion."
+}

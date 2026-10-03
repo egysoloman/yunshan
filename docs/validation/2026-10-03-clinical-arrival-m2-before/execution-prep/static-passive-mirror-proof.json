@@ -1,0 +1,28 @@
+{
+  "status": "STATIC_TEXT_RECOVERY_ONLY_NOT_RUN",
+  "drivers": [
+    {
+      "file": "m2-doctor-late.test.ts",
+      "originalSha256": "5f36c999ff7a1f45935c50c156e10bf974d20c0759b7e692c1f5502ff84c732b",
+      "asRunMirrorSha256": "0d91b876c9c22a31edf91abc12c2352df4bf810669d54dbf16ecf70baa797b64",
+      "allOriginalAssertionsAndExecutionLinesPreserved": true,
+      "originalStepCalls": 2,
+      "asRunStepCalls": 2,
+      "passiveCheckpointCalls": 5
+    },
+    {
+      "file": "m2-npc-patient-late.test.ts",
+      "originalSha256": "89aab43bbd9c6c72a2c6999103fb42662aa8120a639d377e9b534b7fc1d63b86",
+      "asRunMirrorSha256": "41cc0e02b7b3eed118168ea15eb40eac60be36a86bf3dec1e2ee381a1e0751b9",
+      "allOriginalAssertionsAndExecutionLinesPreserved": true,
+      "originalStepCalls": 2,
+      "asRunStepCalls": 2,
+      "passiveCheckpointCalls": 5
+    }
+  ],
+  "fixtureOnlyRelativeImportRelocation": true,
+  "windowContractBytesIdentical": true,
+  "productPhaseHooksAdded": 0,
+  "newStepCalls": 0,
+  "runtimePatch": false
+}

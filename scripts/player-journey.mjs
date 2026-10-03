@@ -59,6 +59,7 @@ assert(CITY_LAYOUT_VERSIONS.includes(plannedLayout), 'Plan only a supported code
 const world = createWorld(20261001, plannedLayout);
 const { savedWorldFingerprint } = await import(path.join(root, 'src/persistence/world-layout.ts'));
 const { planWalkingJourney } = await import(path.join(root, 'src/journey.ts'));
+const { buildingLocalPosition, buildingWorldPosition, findBuildingFloorPlanRoute, getBuildingEntrance, getBuildingUsePoints } = await import(path.join(root, 'src/architecture-floor-plan.ts'));
 const plannedFingerprint = savedWorldFingerprint(world);
 const nodeMap = new Map(world.nodes.map(node => [node.id, node]));
 const adjacency = new Map();
@@ -303,26 +304,26 @@ async function run() {
     await focusWorld();
   }
   let walkingPulses = 0;
-  async function walkPoint(target) {
+  async function walkPoint(target, tolerance = 3) {
     let stagnant = 0, pulses = 0;
     for (;;) {
       const before = await coordinates(), remaining = horizontal(before, target);
       // HUD positions are rounded to metres. A three-metre road waypoint
       // tolerance also avoids oscillating across a point on slow GPU frames.
-      if (remaining <= 3) return;
+      if (remaining <= tolerance) return;
       assert(++pulses < 500, 'A waypoint requires fewer than 500 real input pulses');
       if (++walkingPulses % 20 === 0) await eatPortableMealIfNeeded();
       await turn(Math.atan2(-(target.x - before.x), -(target.z - before.z)));
       const sprint = remaining > 22;
       if (sprint) await page.keyboard.down('ShiftLeft');
       await page.keyboard.down('KeyW');
-      const travel = Math.max(1, remaining - 3);
-      try { await until(async () => { if (requestedCheckpoint) return true; const here = await coordinates(); return horizontal(here, before) >= travel || horizontal(here, target) <= 3; }, 'actual walking displacement', 45_000); }
+      const travel = Math.max(tolerance === 3 ? 1 : .1, remaining - tolerance);
+      try { await until(async () => { if (requestedCheckpoint) return true; const here = await coordinates(); return horizontal(here, before) >= travel || horizontal(here, target) <= tolerance; }, 'actual walking displacement', 45_000); }
       catch (error) { if (++stagnant >= 2) throw new Error(`Walking blocked at ${JSON.stringify(before)} toward ${JSON.stringify(target)}: ${error.message}`); }
       finally { await page.keyboard.up('KeyW'); if (sprint) await page.keyboard.up('ShiftLeft'); }
       const after = await coordinates();
       inputs.push({ stage, type: 'walk', keys: sprint ? ['KeyW', 'ShiftLeft'] : ['KeyW'], before, after, target });
-      if (inputs.length % 4 === 0 || horizontal(after, target) <= 3) {
+      if (inputs.length % 4 === 0 || horizontal(after, target) <= tolerance) {
         await writeFile(path.join(output, 'walking-progress.json'), JSON.stringify({ at: new Date().toISOString(), stage, coordinates: after, target, remaining: horizontal(after, target), inputCount: inputs.length }, null, 2));
         console.log(`Walking ${stage}: ${after.x}/${after.y}/${after.z}`);
       }
@@ -368,9 +369,22 @@ async function run() {
     yaw = 0;
   }
   async function leave(building) {
+    if (building.kind === 'school' && building.floorPlanProfile === 'v4-program-bodies-02') await classroomWalk(building, true);
     await closePanel(); await page.keyboard.press('KeyE');
     await until(async () => !(await ref('view-mode').textContent()).includes('室内'), 'physical door exit');
     yaw = Math.PI; inputs.push({ stage, type: 'key', key: 'KeyE', purpose: 'leave', building: building.id });
+  }
+  async function classroomWalk(building, returning = false) {
+    const station = (building.functionPoints ?? getBuildingUsePoints(building, 0)).find(point => point.floor === 0 && point.purpose === 'service');
+    assert(station, 'The original school needs an actual public ground classroom station');
+    const entrance = buildingLocalPosition(building, getBuildingEntrance(building));
+    const insideDoor = buildingWorldPosition(building, { ...entrance, z: entrance.z - 2 });
+    const hud = await coordinates(), from = { ...hud, y: station.position.y }, target = returning ? insideDoor : station.position;
+    const route = findBuildingFloorPlanRoute(building, 0, 0, from, target, .35);
+    assert(route, 'The production .35m floor planner must find the real classroom/door path');
+    inputs.push({ stage, type: 'planned-classroom-route', source: 'src/architecture-floor-plan.ts', sourceSHA256: sourceHashes['src/architecture-floor-plan.ts'], building: building.id, purpose: returning ? 'return to physical door' : 'actual classroom station', hud, target, points: route,
+      scope: 'Pure production geometry; projected ground height is a planner input. Only ordinary keyboard movement changes the browser player.' });
+    for (const point of route.slice(1)) await walkPoint(point, .75);
   }
   async function transaction(button, message, cost) {
     const before = await wallet(); await clickLiveButton(button);
@@ -499,10 +513,11 @@ async function run() {
     if (await shouldStop(stage)) return;
     }
     if (resumeIndex < 3) {
-    stage = 'school'; await enter(places.school); await panel('life'); await choosePublicOption(ref('career'), '4');
+    stage = 'school'; await enter(places.school); if (places.school.floorPlanProfile === 'v4-program-bodies-02') await classroomWalk(places.school); await panel('life'); await choosePublicOption(ref('career'), '4');
     assert(await ref('career-button').isDisabled(), 'A school is not the driver examination institution');
     const educationBefore = await ref('growth').textContent(), cashBefore = await wallet(); await panel('life');
-    await clickLiveButton(ref('study-button')); await until(async () => /完成学堂课程/.test(await ref('toast').textContent()), 'paid on-site course');
+    await clickLiveButton(ref('study-button')); await until(async () => /课程托管|教材/.test(await ref('toast').textContent()), 'actual forty-coin course admission');
+    await until(async () => /课程已完成/.test(await ref('education-course').textContent()), 'sixty real on-site minutes with actual teacher and textbook', 300_000);
     await sleep(850); const educationAfter = await ref('growth').textContent(); assert.notEqual(educationAfter, educationBefore);
     const cashAfter = await wallet(); assert(Math.abs(cashBefore - cashAfter - 40) < .02);
     await checkpoint('school', { cashBefore, cashAfter, educationBefore, educationAfter }); await leave(places.school);

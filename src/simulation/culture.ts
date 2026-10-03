@@ -1,8 +1,9 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
-import { claimActorActivityMinutes } from './activity-minutes';
 import { getBuildingBody } from '../architecture-floor-plan';
 import { clinicalHealthGain, clinicalPairAtServiceStation, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
+import { educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
+import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
 
 export type WorkGenre = 'literature' | 'art';
@@ -80,7 +81,7 @@ export function installCulture(simulation: Simulation): void {
     return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)
       && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, citizen.position, undefined, identity));
   });
-  const staffAt = (order: ServiceOrder) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && simulation.isOnDuty(person.id, order.siteId));
+  const staffAt = (order: ServiceOrder, minutes: number) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && (order.topic === 'education' ? educationStaffMinutes(simulation, person, order.siteId, minutes) > 0 : simulation.isOnDuty(person.id, order.siteId)));
   const makeOrder = (petition: CivicPetition): ServiceOrder | null => {
     const hearing = sites.get(petition.siteId)!, rule = SERVICE[petition.topic];
     const site = world.buildings.filter(site => site.districtId === hearing.districtId && site.kind === rule.kind && !site.facility).sort((a, b) => distance(a.door, hearing.door) - distance(b.door, hearing.door))[0];
@@ -103,8 +104,8 @@ export function installCulture(simulation: Simulation): void {
     notice('public-service', `${sites.get(order.siteId)!.name}完成服务，实际支出${order.spent.toFixed(1)}文，耗用${order.consumedUnits}份材料。`, sites.get(order.siteId)!.districtId);
   };
   const serve = (order: ServiceOrder, minutes: number) => {
-    const site = sites.get(order.siteId)!, staff = staffAt(order), rule = SERVICE[order.topic];
-    if (state().hour < 8 || state().hour >= 17 || !staff.length) { order.lastReason = '已采购材料保留；等候服务开放和合资格人员真实出勤。'; return; }
+    const site = sites.get(order.siteId)!, staff = staffAt(order, minutes), rule = SERVICE[order.topic];
+    if ((order.topic === 'education' ? educationOpenMinutes(state(), minutes) <= 0 : state().hour < 8 || state().hour >= 17) || !staff.length) { order.lastReason = '已采购材料保留；等候服务开放和合资格人员真实出勤。'; return; }
     for (const person of staff) if (!order.staffIds.includes(person.id)) order.staffIds.push(person.id);
     if (order.topic === 'transport') {
       if (order.receivedUnits - order.consumedUnits < rule.units - 1e-7) return;
@@ -121,12 +122,20 @@ export function installCulture(simulation: Simulation): void {
     const candidates = [...(playerPresent ? ['player'] : []), ...present.map(person => person.id)];
     // An unmatched patient must not occupy the candidate prefix forever. Real
     // health capacity is bounded by the shared per-doctor slot allocator below.
-    const ids = order.topic === 'health' ? candidates : candidates.slice(0, staff.length * 4);
+    const ids = candidates;
     for (const id of ids) {
       if (order.receivedUnits - order.consumedUnits < 1 - 1e-7) break;
       if (order.topic === 'health' && !staff.some(doctor => clinicalPairAtServiceStation(simulation, site, doctor.id, id) && takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
-      const credited = order.topic === 'education' ? claimActorActivityMinutes(simulation, id, `public-education:${order.id}`, Math.min(minutes, rule.minutes - (order.serviceMinutes[id] ?? 0)), minutes) : minutes;
-      order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + credited);
+      let credit = minutes;
+      if (order.topic === 'education') {
+        const teachers = staff.filter(teacher => educationPairAtStation(simulation, site, teacher, id) && educationSlotAvailable(simulation, teacher.id, id));
+        credit = Math.min(rule.minutes - (order.serviceMinutes[id] ?? 0), actorActivityAvailable(simulation, id, minutes), Math.max(0, ...teachers.map(teacher => educationStaffMinutes(simulation, teacher, site.id, minutes))));
+        if (credit <= 0) continue;
+        const teacher = teachers.find(teacher => educationStaffMinutes(simulation, teacher, site.id, minutes) >= credit - 1e-7)!;
+        const claimed = claimActorActivityMinutes(simulation, id, `public-education:${order.id}`, credit, minutes);
+        if (claimed !== credit || !takeEducationSlot(simulation, teacher.id, id)) continue;
+      }
+      order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + credit);
       if (order.serviceMinutes[id] < rule.minutes - 1e-7) continue;
       order.consumedUnits++; order.servedIds.push(id);
       const profile = state().extension!.actorProfiles[id];
@@ -328,6 +337,7 @@ export function installCulture(simulation: Simulation): void {
     else if (culture().version === 1) { Object.assign(culture(), { version: 2, nextOrderId: 1, orders: [], playerServiceId: null, transportMaintenance: {} }); for (const petition of culture().petitions) petition.executionId = null; }
   });
   installClinical(simulation);
+  installEducation(simulation);
 }
 
 export function validateCultureState(candidate: SimState, world: WorldDefinition): void {

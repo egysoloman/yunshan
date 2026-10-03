@@ -4,6 +4,7 @@ import { canAccessFloor } from '../src/access';
 import { buildingLocalPosition, buildingWorldPosition, canStandInFloorPlan, floorPlanSupport, getBuildingFloorPlan } from '../src/architecture-floor-plan';
 import { Simulation } from '../src/simulation';
 import { createWorld } from '../src/world';
+import { completePaidCourse } from './education-fixture';
 import type { Building, BuildingFunctionPoint, Command, Company, Role, Vec3 } from '../src/types';
 
 const world=createWorld(20261001,'current-v4');
@@ -38,7 +39,7 @@ function ok(sim:Simulation,c:Command){const result=sim.command(c);assert.equal(r
 function denied(sim:Simulation,c:Command){const before=sim.exportSave();const result=sim.command(c);assert.equal(result.ok,false,`${c.type} must deny another place: ${result.message}`);assert.equal(sim.exportSave(),before,'denial must preserve every state/runtime field');}
 function qualify(sim:Simulation,role:'merchant'|'scientist'){
   const school=places(sim,'school','work');at(sim,school.point.position);
-  for(let n=0;n<(role==='scientist'?3:1);n++)ok(sim,{type:'exam',targetId:'study'});
+  for(let n=0;n<(role==='scientist'?3:1);n++)completePaidCourse(sim,school.site);
   const venue=role==='merchant'?places(sim,'market','work'):school;at(sim,venue.point.position);ok(sim,{type:'exam',targetId:role});
   assert(sim.state.player.identities!.includes(role));assert.equal(sim.state.player.money,role==='merchant'?480:400);
 }

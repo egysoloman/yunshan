@@ -1,0 +1,28 @@
+{"label":"M2_DOCTOR_LATE","status":"ACTUAL_ONLY_IF_THIS_DRIVER_EXECUTED","record":{"doctor":"citizen-4","patient":"citizen-1","source":"original core route + original wage-earned attestation","meters":12.6,"speed":4.2,"routeUpperBoundMinutes":1,"phase":{"start":484,"end":488},"earned":{"start":487,"end":488,"minutes":1},"actualTreatmentDeltaMinutes":4,"before":{"clock":484,"worked":0,"health":83.00366401344,"money":570,"reserved":1,"consumed":0},"after":{"clock":488,"worked":4,"patientHealth":83.00732804030376,"money":570,"reserved":1,"consumed":0}}}
+✖ M2 doctor genuine arrival: treatment cannot exceed actual current earned onsite window (182.693933ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 734.304634
+
+✖ failing tests:
+
+test at execution-prep/drivers/m2-doctor-late.test.ts:2:991
+✖ M2 doctor genuine arrival: treatment cannot exceed actual current earned onsite window (182.693933ms)
+  AssertionError [ERR_ASSERTION]: treatment must not backdate the doctor into the travel part of this phase
+      at TestContext.<anonymous> (/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/execution-prep/drivers/m2-doctor-late.test.ts:36:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

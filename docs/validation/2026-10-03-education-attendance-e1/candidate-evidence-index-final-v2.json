@@ -1,0 +1,686 @@
+{
+  "schema": 1,
+  "writtenAtUTC": "2026-10-03T05:45:40.257113+00:00",
+  "scope": "E1 REV04 import-only chronological clearing guard plus meaningful saved-time and custody boundaries. No shared integration/build/GPU/ZIP/Library.",
+  "sources": {
+    "revision04": {
+      "source": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+      "sourceCount": 125,
+      "manifest": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/source-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "fullFrom17Patch": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/education-course-from17.patch",
+        "sha256": "19b7d93b81db646035d28f76cc79c754b7fa037ac2e80783ec0fa34fcc818d78",
+        "bytes": 1205581
+      },
+      "smallFrom03ImportOnlyPatch": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/revision04-import-only-from03.patch",
+        "sha256": "4482f7f6257523fa6784d42534075099d46ea1750649f9ffb4834b41bd836689",
+        "bytes": 2636
+      },
+      "metadata": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/metadata.json",
+        "sha256": "99519b028f84a6d857d4dfcd239cf886991d0b560d969f1e598e3e6f1b9c5255",
+        "bytes": 1593
+      },
+      "otherRuntimeEqualsOriginal03": true,
+      "canonicalReviewableFrom17Patch": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/reviewable-final/education-course-from17.patch",
+        "sha256": "118c7f49c4ec8cf8bb25104abb7aa9724f00afc3f2929e13a6b97d49fcedab1a",
+        "bytes": 1205639
+      },
+      "initialFrozenPatchSerializationDefect": "Two source fixtures have no terminal newline; missing standard markers concatenate following diff headers. Initial19b patch is retained, canonical118c is the usable delivery patch."
+    }
+  },
+  "priorEvidence": {
+    "index03": {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/evidence-index-03.json",
+      "sha256": "5e7f1a947a90b59ff21e993ea4a8aab9baf727fa763bae11bcfe85188ec08433",
+      "bytes": 95088
+    },
+    "nativeDraft": {
+      "path": "/tmp/yunshan-education-boundary-tests-prep-17-01/input/tests/education-boundary.test.ts",
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd",
+      "bytes": 25936
+    },
+    "originalIndex": {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/plain.json",
+      "sha256": "d81832a80ab7f816389450103ba6726c533139c9accfde8c88ea2156cb841517",
+      "bytes": 409577
+    },
+    "archiveAddendum01": {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/addendum01.json",
+      "sha256": "29c99b4c5e017317a733ff627f05ef37c0579e0e8c3126462368f82e994910f8",
+      "bytes": 7297
+    },
+    "archiveAddendum02": {
+      "path": "/tmp/yunshan-education-e1-original-index-20261003/addendum02.json",
+      "sha256": "ca3962fc601dbfc9a15a7b08216d5326baa16bab4f6ecb5ecfc769670fb304d4",
+      "bytes": 86005
+    }
+  },
+  "proofs": {
+    "original03HistoricalWindowFAIL": {
+      "receipt": {
+        "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/receipt.json",
+        "sha256": "1b33651560adc5d242c1d4afe6d2a11a122feea8cb0d411c4dacbfd9f58a1fc3",
+        "bytes": 27679
+      },
+      "genuine": {
+        "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/genuine.save.json",
+        "sha256": "e21c24c40568a5c135f35fc472f882d46a3210e5148c6e9b96c94890216e01ac",
+        "bytes": 412398
+      },
+      "forged": {
+        "path": "/tmp/yunshan-education-history-window-causal-20261003/run/before/forged.save.json",
+        "sha256": "23175e386a33cfebc99903c3efb0fc6d46f46ea7243dcec9403a38962b15e234",
+        "bytes": 412389
+      },
+      "scope": {
+        "label": "history-window-before",
+        "sourceRoot": "/tmp/yunshan-education-course-revision03-17-01/frozen-final/source",
+        "status": "COMPLETED",
+        "actualExitCode": 1,
+        "process": {
+          "pid": 202321,
+          "ppid": 202193,
+          "startedAtUTC": "2026-10-03T05:29:38.457Z",
+          "argv": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+            "/tmp/yunshan-education-history-window-causal-20261003/input/history-window-causal.test.ts"
+          ],
+          "execArgv": [
+            "--import",
+            "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+            "--import",
+            "/tmp/yunshan-education-course-revision03-17-01/record-owned-pid.mjs",
+            "--test",
+            "--test-isolation=none"
+          ]
+        },
+        "sourceFirst": {
+          "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.source-first-sha256.txt",
+          "sha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+          "bytes": 11856
+        },
+        "sourceLast": {
+          "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.source-last-sha256.txt",
+          "sha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+          "bytes": 11856
+        },
+        "sourceFirstLastEqual": true,
+        "raw": {
+          "path": "/tmp/yunshan-education-course-revision03-17-01/run/history-window-before.raw.log",
+          "sha256": "7a7d16b26acd38fbe60900a4e38994b0d846498836b2565a68d9a4ba4ab7b783",
+          "bytes": 1068
+        },
+        "started-at": "2026-10-03T05:29:37Z",
+        "finished-at": "2026-10-03T05:29:43Z",
+        "actualSummary": {
+          "tests": 1,
+          "pass": 0,
+          "fail": 1,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "casesFromActualRaw": [
+          {
+            "name": "real retained courses cannot overlap their earlier completed windows merely because the present clock is later",
+            "status": "✖",
+            "durationMs": 4388.173762
+          },
+          {
+            "name": "real retained courses cannot overlap their earlier completed windows merely because the present clock is later",
+            "status": "✖",
+            "durationMs": 4388.173762
+          }
+        ],
+        "containsHookEACCES": false
+      }
+    },
+    "sameOriginalHistoryBytesAfterFix": {
+      "receipt": {
+        "path": "/tmp/yunshan-education-history-window-causal-20261003/run/afterfix/receipt.json",
+        "sha256": "8c668f99dd96d01b8e4e7e6be583809cddd06c8ac4783c78e579731c7786a1e8",
+        "bytes": 634
+      },
+      "input": {
+        "path": "/tmp/yunshan-education-history-window-causal-20261003/input/history-window-samebytes-afterfix.test.ts",
+        "sha256": "3b837ed0bf54e57fc7de2d492f626e25e87e3aba9e8b5c76295085fbd06da5ae",
+        "bytes": 2548
+      }
+    },
+    "sevenSuitesOutputFailure": {
+      "receipt": {
+        "path": "/tmp/yunshan-education-course-revision03-17-01/run/related-course-entry-and-custody.receipt.json",
+        "sha256": "ee7c9a752a412726ef22bd05e90ae84b1790a75f815eb3cfe89ff2e06913f2a5",
+        "bytes": 928
+      },
+      "interpretation": "156 assertions PASS/0FAIL, actual exit0, but persistence after-hook EACCES prevented its evidence artifact; separate exact-code copy rerun handles output only."
+    },
+    "persistenceExternalOutputRepair": {
+      "preparation": {
+        "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/preparation.json",
+        "sha256": "806d82e279ae800e0ae126634aabb1da08752822cbd151d2c1d414dd2894b88f",
+        "bytes": 626
+      },
+      "inputManifest": {
+        "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/source-sha256.txt",
+        "sha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+        "bytes": 11856
+      },
+      "realAfterHookEvidence": {
+        "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/run/persistence-results.json",
+        "sha256": "425c562fd7b525d53f7c2b81c7d189842c88f9da65d173e1305378e6e2cc0afa",
+        "bytes": 11483
+      },
+      "receipt": {
+        "path": "/tmp/yunshan-education-persistence-artifact-repair-20261003/run/receipt.json",
+        "sha256": "2063d8a5ff5270e2c5033c85cc1dffd6ccab9803de794f4068ff5fa3b047881a",
+        "bytes": 1006
+      }
+    },
+    "finalReadonlyOriginal17": {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/baseline17-final-readonly.json",
+      "sha256": "2613450ba4ffb1122b1f743a2bad415aceecd018255d8aeaecf30f9e7a44f112",
+      "bytes": 236
+    }
+  },
+  "completedScopes": [
+    {
+      "label": "strict04",
+      "sourceRoot": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+      "status": "COMPLETED",
+      "actualExitCode": 0,
+      "process": {
+        "pid": 202957,
+        "ppid": 202828,
+        "startedAtUTC": "2026-10-03T05:33:42.349Z",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "/workspace/yunshan/node_modules/typescript/bin/tsc",
+          "--noEmit"
+        ],
+        "execArgv": [
+          "--import",
+          "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+          "--import",
+          "/tmp/yunshan-education-course-revision04-17-01/record-owned-pid.mjs"
+        ]
+      },
+      "sourceFirst": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.source-first-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceLast": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.source-last-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceFirstLastEqual": true,
+      "raw": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/strict04.raw.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "started-at": "2026-10-03T05:33:41Z",
+      "finished-at": "2026-10-03T05:33:49Z",
+      "actualSummary": {},
+      "casesFromActualRaw": [],
+      "containsHookEACCES": false
+    },
+    {
+      "label": "history-window-samebytes-afterfix",
+      "sourceRoot": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+      "status": "COMPLETED",
+      "actualExitCode": 0,
+      "process": {
+        "pid": 203309,
+        "ppid": 203180,
+        "startedAtUTC": "2026-10-03T05:34:55.492Z",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "/tmp/yunshan-education-history-window-causal-20261003/input/history-window-samebytes-afterfix.test.ts"
+        ],
+        "execArgv": [
+          "--import",
+          "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+          "--import",
+          "/tmp/yunshan-education-course-revision04-17-01/record-owned-pid.mjs",
+          "--test",
+          "--test-isolation=none"
+        ]
+      },
+      "sourceFirst": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.source-first-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceLast": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.source-last-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceFirstLastEqual": true,
+      "raw": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/history-window-samebytes-afterfix.raw.log",
+        "sha256": "f7126c4888dc609151a126b501242060869757e1db5caa68a62bfc74d3cdfec6",
+        "bytes": 248
+      },
+      "started-at": "2026-10-03T05:34:55Z",
+      "finished-at": "2026-10-03T05:34:58Z",
+      "actualSummary": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "casesFromActualRaw": [
+        {
+          "name": "the exact genuine historical save continues while its original three-field overlapping forge rejects atomically",
+          "status": "✔",
+          "durationMs": 2318.287098
+        }
+      ],
+      "containsHookEACCES": false
+    },
+    {
+      "label": "normal-saved-time-five",
+      "sourceRoot": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+      "status": "COMPLETED",
+      "actualExitCode": 0,
+      "process": {
+        "pid": 203630,
+        "ppid": 203501,
+        "startedAtUTC": "2026-10-03T05:35:44.487Z",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "tests/education-saved-time.test.ts"
+        ],
+        "execArgv": [
+          "--import",
+          "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+          "--import",
+          "/tmp/yunshan-education-course-revision04-17-01/record-owned-pid.mjs",
+          "--test",
+          "--test-isolation=none"
+        ]
+      },
+      "sourceFirst": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.source-first-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceLast": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.source-last-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceFirstLastEqual": true,
+      "raw": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/normal-saved-time-five.raw.log",
+        "sha256": "31a9ea4d018c11b788eb63cc1bc6dc24117965ee77c52cb96d6800ed44df6b9c",
+        "bytes": 755
+      },
+      "started-at": "2026-10-03T05:35:44Z",
+      "finished-at": "2026-10-03T05:37:51Z",
+      "actualSummary": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "casesFromActualRaw": [
+        {
+          "name": "genuine same-start course/research bytes continue exactly and reject the two-field coordinated forge",
+          "status": "✔",
+          "durationMs": 4971.433299
+        },
+        {
+          "name": "genuine different-start course/research bytes continue exactly and reject the two-field coordinated forge",
+          "status": "✔",
+          "durationMs": 5088.946494
+        },
+        {
+          "name": "a real completed sixty-minute course retained in history cannot be spent again by its same-start pending research",
+          "status": "✔",
+          "durationMs": 3097.087897
+        },
+        {
+          "name": "a genuinely earlier sixty-minute completed course leaves the later four-minute research suffix available",
+          "status": "✔",
+          "durationMs": 109474.72982
+        },
+        {
+          "name": "a later present clock cannot legalize overlapping retained course windows before the previous actual clearing",
+          "status": "✔",
+          "durationMs": 4029.868116
+        }
+      ],
+      "containsHookEACCES": false
+    },
+    {
+      "label": "education-boundary-six",
+      "sourceRoot": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+      "status": "COMPLETED",
+      "actualExitCode": 0,
+      "process": {
+        "pid": 204225,
+        "ppid": 204096,
+        "startedAtUTC": "2026-10-03T05:38:38.397Z",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "tests/education-boundary.test.ts"
+        ],
+        "execArgv": [
+          "--import",
+          "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+          "--import",
+          "/tmp/yunshan-education-course-revision04-17-01/record-owned-pid.mjs",
+          "--test",
+          "--test-isolation=none"
+        ]
+      },
+      "sourceFirst": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-first-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceLast": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-last-sha256.txt",
+        "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+        "bytes": 11955
+      },
+      "sourceFirstLastEqual": true,
+      "raw": {
+        "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.raw.log",
+        "sha256": "5ca4920302c2417bd1354aa54a0f88ed5af5e09bc058fae811ab64582585cf8c",
+        "bytes": 902
+      },
+      "started-at": "2026-10-03T05:38:37Z",
+      "finished-at": "2026-10-03T05:39:08Z",
+      "actualSummary": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "casesFromActualRaw": [
+        {
+          "name": "real partial education with its active purchase partitions exactly and resumes 24 ticks",
+          "status": "✔",
+          "durationMs": 6962.949784
+        },
+        {
+          "name": "real partial education with retained purchase and reused material partitions exactly and resumes 24 ticks",
+          "status": "✔",
+          "durationMs": 11678.061269
+        },
+        {
+          "name": "assembly rejects missing player education fields and missing real school stock without deleting other chunk entities",
+          "status": "✔",
+          "durationMs": 3593.453766
+        },
+        {
+          "name": "assembly preserves present stock keys while import rejects an invalid stock body atomically",
+          "status": "✔",
+          "durationMs": 2271.063415
+        },
+        {
+          "name": "declared cash-backed capacity opening uses actual withdrawals, preserves refundPending through partition and 24 ticks, then refunds once",
+          "status": "✔",
+          "durationMs": 2870.703007
+        },
+        {
+          "name": "native depositor cash funds a real loan; death keeps its claim pending until actual course refund and estate reconciliation",
+          "status": "✔",
+          "durationMs": 2183.638906
+        }
+      ],
+      "containsHookEACCES": false
+    },
+    {
+      "label": "persistence-evidence-repair",
+      "sourceRoot": "/tmp/yunshan-education-persistence-artifact-repair-20261003/source",
+      "status": "COMPLETED",
+      "actualExitCode": 0,
+      "process": {
+        "pid": 204627,
+        "ppid": 204499,
+        "startedAtUTC": "2026-10-03T05:39:48.792Z",
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "tests/persistence.test.ts"
+        ],
+        "execArgv": [
+          "--import",
+          "/workspace/yunshan/node_modules/tsx/dist/loader.mjs",
+          "--import",
+          "/tmp/yunshan-education-course-revision03-17-01/record-owned-pid.mjs",
+          "--test",
+          "--test-isolation=none"
+        ]
+      },
+      "sourceFirst": {
+        "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.source-first-sha256.txt",
+        "sha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+        "bytes": 11856
+      },
+      "sourceLast": {
+        "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.source-last-sha256.txt",
+        "sha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+        "bytes": 11856
+      },
+      "sourceFirstLastEqual": true,
+      "raw": {
+        "path": "/tmp/yunshan-education-course-revision03-17-01/run/persistence-evidence-repair.raw.log",
+        "sha256": "dff61f655d6a9446caed06ca8238c455c43f10e5a950a9e7e6ef8fa471ab9548",
+        "bytes": 3163
+      },
+      "started-at": "2026-10-03T05:39:48Z",
+      "finished-at": "2026-10-03T05:43:43Z",
+      "actualSummary": {
+        "tests": 26,
+        "pass": 26,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "casesFromActualRaw": [
+        {
+          "name": "partition reassembly rejects missing entities instead of returning a partial city",
+          "status": "✔",
+          "durationMs": 1220.753116
+        },
+        {
+          "name": "family/service/stock books follow their real owners and sites while preserving original array and object order",
+          "status": "✔",
+          "durationMs": 8.816536
+        },
+        {
+          "name": "the complete funded player work contract belongs to the mandatory independent player record",
+          "status": "✔",
+          "durationMs": 0.807728
+        },
+        {
+          "name": "clinical payer custody stays mandatory in the player record while sites and patients keep their own chunks",
+          "status": "✔",
+          "durationMs": 1.74788
+        },
+        {
+          "name": "a missing map-only geographic chunk rejects a partial custody or service book",
+          "status": "✔",
+          "durationMs": 0.595823
+        },
+        {
+          "name": "real IndexedDB saves the complete generated city in geographic chunks and resumes identically",
+          "status": "✔",
+          "durationMs": 40146.960674
+        },
+        {
+          "name": "a real onsite work escrow roundtrips and player damage recovers one complete funded generation",
+          "status": "✔",
+          "durationMs": 30093.667716
+        },
+        {
+          "name": "real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation",
+          "status": "✔",
+          "durationMs": 41469.965586
+        },
+        {
+          "name": "a damaged clinical player custody body recovers the complete prior generation with all original cash and stock",
+          "status": "✔",
+          "durationMs": 11085.740729
+        },
+        {
+          "name": "unchanged, player-only and global-only saves physically avoid rewriting city chunks",
+          "status": "✔",
+          "durationMs": 3641.808706
+        },
+        {
+          "name": "one changed NPC route writes one chunk despite global route-pool renumbering",
+          "status": "✔",
+          "durationMs": 3592.828938
+        },
+        {
+          "name": "cross-chunk movement and deletion leave no duplicate or missing entities after reload",
+          "status": "✔",
+          "durationMs": 3767.792157
+        },
+        {
+          "name": "an aborted multi-store transaction with unavailable fallback preserves the prior city",
+          "status": "✔",
+          "durationMs": 3497.472259
+        },
+        {
+          "name": "missing or corrupted current data recovers the complete prior generation and bounds retained records",
+          "status": "✔",
+          "durationMs": 3778.057696
+        },
+        {
+          "name": "a checksum-damaged generation is recovered, repaired and retains its valid recovery generation",
+          "status": "✔",
+          "durationMs": 3903.931073
+        },
+        {
+          "name": "overlapping queued saves stay ordered and the final complete city survives a browser reload",
+          "status": "✔",
+          "durationMs": 3864.301696
+        },
+        {
+          "name": "version-one IndexedDB and localStorage saves remain readable through upgrade and new saves",
+          "status": "✔",
+          "durationMs": 3493.95531
+        },
+        {
+          "name": "unavailable IndexedDB uses one atomic fallback envelope and later IDB saves supersede it",
+          "status": "✔",
+          "durationMs": 3208.422314
+        },
+        {
+          "name": "a modern session opens only global/player and reads requested chunks through a bounded LRU",
+          "status": "✔",
+          "durationMs": 3669.40765
+        },
+        {
+          "name": "a pinned session survives four later saves from another page and releases its archived records",
+          "status": "✔",
+          "durationMs": 7951.254711
+        },
+        {
+          "name": "late chunk damage invalidates the whole reader and recovery creates a distinct prior-generation reader",
+          "status": "✔",
+          "durationMs": 3819.672776
+        },
+        {
+          "name": "explicit materialization preserves the full import contract and identical continuation",
+          "status": "✔",
+          "durationMs": 46905.77619
+        },
+        {
+          "name": "expired readers cannot silently re-pin and a new save collects their archived records",
+          "status": "✔",
+          "durationMs": 3238.110994
+        },
+        {
+          "name": "damaged global/player headers select the complete previous generation without reading city chunks",
+          "status": "✔",
+          "durationMs": 3477.798446
+        },
+        {
+          "name": "on-demand readers retain the explicit whole-blob compatibility path for version-one and local saves",
+          "status": "✔",
+          "durationMs": 3753.037105
+        },
+        {
+          "name": "reader heartbeats renew their durable lease and a rejected renewal invalidates cached parts",
+          "status": "✔",
+          "durationMs": 3436.278055
+        }
+      ],
+      "containsHookEACCES": false
+    }
+  ],
+  "runningScopes": [],
+  "limitations": [
+    "All prior evidence and its original failures/gaps remain bound in evidence-index03. REV03 results are not asserted as execution of the new import-only REV04 guard.",
+    "Adjacent retained explicit course ordering and combined suffix bounds are necessary contracts, not authentication of arbitrary past history. Archived aggregates and grandfather records have no invented timestamps.",
+    "Capacity test uses an explicitly synthetic balanced opening bank asset/deposit claim; it does not establish natural wealth or economic steady state.",
+    "Death test is a controlled alive=false/health=0 boundary; it does not establish natural mortality.",
+    "Original new-course run was24PASS/1fixtureFAIL; separate corrected targeted1PASS is not a single25PASS run.",
+    "Prior source03 strict first131 includes inheriteddist; final124 and REV04 source125 exclude bundles and no E1 build has been performed here."
+  ],
+  "cpuRelease": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/run/cpu-release.json",
+    "sha256": "069d88fe470321505876d76e19fbd9e91dd5f3ac6189bee02ef83d9a2ab46782",
+    "bytes": 5257
+  },
+  "finalSourceLastActual": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/run/education-boundary-six.source-last-sha256.txt",
+    "sha256": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+    "bytes": 11955
+  },
+  "finalSourceLastEqualsFrozenManifest": true,
+  "status": "ALL_PLANNED_ISOLATED_SCOPES_COMPLETED_CPU_RELEASED",
+  "packagingCorrection": {
+    "canonicalFullPatch": {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/reviewable-final/education-course-from17.patch",
+      "sha256": "118c7f49c4ec8cf8bb25104abb7aa9724f00afc3f2929e13a6b97d49fcedab1a",
+      "bytes": 1205639
+    },
+    "formatCorrectionReceipt": {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/reviewable-final/patch-format-correction.json",
+      "sha256": "873c271dac2b630a7329556ae63bea709cf2183e810ba344adc7340ed9c8c8be",
+      "bytes": 1591
+    },
+    "observedReadOnlyValidation": {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/reviewable-final/patch-validation-observed-tool.json",
+      "sha256": "afa0327ed84251882eb5d5e73d377fbeeb4f63afe71891f574489ee2a41973de",
+      "bytes": 1622
+    },
+    "priorImmutableEvidenceIndex": {
+      "path": "/tmp/yunshan-education-course-revision04-17-01/run/evidence-index-final.json",
+      "sha256": "6cf30a1ed8ea201a32f513b0add2ad73cfe3045455288da92684daae73863cb6",
+      "bytes": 26301
+    },
+    "oldFrozenPatchRetainedAsFormatDefect": true,
+    "executedSource125Unchanged": true
+  },
+  "handoff": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/HANDOFF-v2.md",
+    "sha256": "4d09966567da6d2849507bd70b8e13031234b7a272189f8f3a255fe590f24d70",
+    "bytes": 5807
+  }
+}
