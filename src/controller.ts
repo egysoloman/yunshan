@@ -3,8 +3,9 @@ import { getWalkHeight } from './world';
 import { getFloorDimensions, getStairPosition } from './access';
 import { getBuildingBody,getBuildingFloorPlan,buildingLocalPosition,buildingWorldPosition,floorPlanSupport,blocksFloorPlanMovement,getFloorPlanStairPosition,getBuildingEntrance,getFloorPlanRoofSupport,getFloorPlanSlabRegions,boundaryLoops,containsUnion,type FloorPlan,type FloorSupport } from './architecture-floor-plan';
 import { blocksTransportBarrier } from './transport-geometry';
+import { roadMovementAllowed } from './roads';
 import { blocksMarketCounter, marketCounters, type MarketCounter } from './site-fixtures';
-import type { AerialVehicle, AviationControls, Building, Vec3, ViewMode, VoxelModification, WorldDefinition } from './types';
+import type { AerialVehicle, AviationControls, Building, SimState, Vec3, ViewMode, VoxelModification, WorldDefinition } from './types';
 
 const EYE_HEIGHT = 1.72;
 const BODY_RADIUS = 0.35;
@@ -36,7 +37,7 @@ export class PlayerController {
 
   blockedAccess: string | null = null;
 
-  constructor(readonly camera: THREE.PerspectiveCamera, readonly canvas: HTMLCanvasElement, readonly world: WorldDefinition, private onAction: (key: string) => void, private canAccess: (building: Building, floor: number) => boolean = () => true, private modifications: () => readonly VoxelModification[] = () => []) {
+  constructor(readonly camera: THREE.PerspectiveCamera, readonly canvas: HTMLCanvasElement, readonly world: WorldDefinition, private onAction: (key: string) => void, private canAccess: (building: Building, floor: number) => boolean = () => true, private modifications: () => readonly VoxelModification[] = () => [], private roadState: () => SimState | undefined = () => undefined) {
     this.marketCounters = world.buildings.flatMap(building => marketCounters(world, building));
     this.feet = { ...world.spawn };
     this.readAngles();
@@ -168,13 +169,16 @@ export class PlayerController {
       if(!isInside&&!this.canAccess(building,0)){this.blockedAccess=`${building.name}需要相应权限。`;return false;}
       const local=buildingLocalPosition(building,getBuildingEntrance(building));const next=buildingWorldPosition(building,{...local,z:local.z+(isInside?2:-2)});
       if(blocksFloorPlanMovement(building,0,this.feet,next,BODY_RADIUS,EYE_HEIGHT))return false;
+      if(!this.mayWalkTo(next))return false;
       this.feet=next;this.floor=0;this.supportingSite=isInside?null:building;this.inside=isInside?null:building;this.discardWalkingInput();
       this.camera.position.set(next.x,next.y+EYE_HEIGHT,next.z);this.yaw=building.rotation+(isInside?Math.PI:0);this.pitch=0;this.orient();return true;
     }
     const isInside = this.contains(building, this.feet, 0);
     if (!isInside && !this.canAccess(building, 0)) { this.blockedAccess = `${building.name}的核心区域需要相应权限。公共政务大厅始终开放。`; return false; }
     const z = building.door.z + (isInside ? 2 : -2);
-    this.feet = { x: building.door.x, y: building.position.y + 0.6, z };
+    const next = { x: building.door.x, y: building.position.y + 0.6, z };
+    if (!this.mayWalkTo(next)) return false;
+    this.feet = next;
     this.floor = 0;
     this.inside = isInside ? null : building;
     this.discardWalkingInput();
@@ -387,6 +391,7 @@ export class PlayerController {
     for(const block of this.modifications()){const p=block.position,top=p.y+.2;if(Math.abs(x-p.x)<.1+BODY_RADIUS&&Math.abs(z-p.z)<.1+BODY_RADIUS&&top>height&&top<=this.feet.y+.4+1e-7)height=top;}
     for(const block of this.modifications()){const p=block.position;if(Math.abs(x-p.x)<.1+BODY_RADIUS&&Math.abs(z-p.z)<.1+BODY_RADIUS&&p.y<height+EYE_HEIGHT&&p.y+.2>height+.01)return false;}
     if(!occupied&&!site&&Math.abs(height-this.feet.y)>2.6)return false;
+    if(!this.mayWalkTo({x,y:height,z}))return false;
     this.feet={x,y:height,z};this.inside=occupied;this.supportingSite=site;this.floor=nextFloor;return true;
   }
   private walkToLegacy(x: number, z: number): void {
@@ -425,9 +430,17 @@ export class PlayerController {
     }
     // Crossing mountain cliffs requires the road, lift or cableway.
     if (Math.abs(height - this.feet.y) > 2.6 && !building) return;
+    if (!this.mayWalkTo({ x, y: height, z })) return;
     this.floor = nextFloor;
     this.inside = building ?? null;
     this.feet = { x, y: height, z };
+  }
+
+  private mayWalkTo(to:Vec3):boolean {
+    const state=this.roadState();
+    if(!state||roadMovementAllowed(this.world,state,'player',this.feet,to))return true;
+    this.blockedAccess='道路已关闭；请等待通行，已在封闭路段内的行人须沿许可方向退出。';
+    return false;
   }
 
   private contains(b: Building, p: Vec3, margin: number): boolean {

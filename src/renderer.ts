@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
 import { samplePolyline, terrainHeight } from './world';
+import { RoadClosureOverlay } from './rendering/road-closures';
 import { getFloorDimensions, getStairPosition } from './access';
 import { buildLandscape } from './rendering/terrain';
 import { createRoofGeometry, type RoofProfile } from './rendering/architecture-layout';
@@ -121,6 +122,7 @@ export class CityRenderer implements CityRendererAPI {
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
   private marketGoods: MarketGoodsPool;
+  private roadClosures: RoadClosureOverlay;
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
   private vehiclePools = new Map<string, MovingPool>();
@@ -284,6 +286,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
+    this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
     this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
     this.architectureDetail = new ArchitectureDetailManager(world.buildings); this.scene.add(this.architectureDetail.group);
     const signalCount = this.world.nodes.filter(node => node.station).length;
@@ -821,6 +824,7 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   update(state: SimState, elapsed: number) {
+    this.roadClosures.update(state);
     const residents = this.nearChunks.update(this.camera.position, { quality: this.quality, insideBuildingId: this.insideId, renderDistance: this.distance });
     this.chunks = residents.map(({ chunk, resource }) => ({ center: { ...chunk.center }, radius: chunk.radius, detail: resource.group, near: true, buildingIds: new Set(chunk.buildingIds) }));
     this.scene.userData.buildingResidency = this.nearChunks.getStats();
@@ -924,6 +928,7 @@ export class CityRenderer implements CityRendererAPI {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
     this.marketGoods.dispose();
+    this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();

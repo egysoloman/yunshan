@@ -30,6 +30,14 @@ export function collectActorActivityClaims(state: SimState): ActorActivityClaim[
     for (const job of state.power.repairs) for (const [actorId, credit] of Object.entries(job.contributions))
       add({ id: 'power:' + job.id + ':' + actorId, actorId, startedAt: credit.startedAt, endedAt: credit.endedAt, workedMinutes: credit.workedMinutes });
   }
+  if (state.roadworks) {
+    // Roadworks retains exact contiguous/coalesced paid intervals. An aggregate
+    // contribution envelope would hide gaps and admit another job overlapping a
+    // later receipt. Its separate module validator still checks all totals.
+    for (const job of state.roadworks.jobs) for (const [index, receipt] of job.laborReceipts.entries())
+      add({ id: 'roadworks:' + job.id + ':' + receipt.actorId + ':' + index, actorId: receipt.actorId,
+        startedAt: receipt.startAt, endedAt: receipt.endAt, workedMinutes: receipt.minutes });
+  }
   if (state.hygiene) {
     for (const witness of state.hygiene.capacityHistory) add(witness);
     for (const job of state.hygiene.jobs) for (const [actorId, period] of Object.entries(job.staffWindows))

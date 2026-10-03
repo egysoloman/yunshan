@@ -7,8 +7,9 @@ import { PlayerController } from './controller';
 import { activeAircraft, AIRCRAFT_COMMANDS, getAviationPads, setAircraftControls } from './aviation';
 import { AviationRenderer } from './aviation-renderer';
 import { canAccessFloor } from './access';
-import { planTransitJourney, planWalkingJourney } from './journey';
-import type { TransitJourney, WalkingJourney } from './journey';
+import { JourneyNavigation } from './journey';
+import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './journey';
+import { releaseRoadExitPermit } from './roads';
 import { readSavedGame, writeSavedGame } from './persistence';
 import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
@@ -66,7 +67,7 @@ let view: ViewState;
 let notice = '';
 let fps = 0;
 let currentInterior: string | null = null;
-const controller = new PlayerController(city.camera, city.renderer.domElement, world, onKey, canAccessBuilding, () => simulation.state.voxels);
+const controller = new PlayerController(city.camera, city.renderer.domElement, world, onKey, canAccessBuilding, () => simulation.state.voxels, () => simulation.state);
 
 const targetMarker = new THREE.Group();
 const targetMaterial = new THREE.MeshBasicMaterial({ color: 0xeabf69, transparent: true, opacity: 0.65 });
@@ -84,6 +85,8 @@ navigationPath.visible = false;
 city.scene.add(navigationPath);
 let navigationJourney: WalkingJourney | null = null;
 let transitJourney: TransitJourney | null = null;
+const journeyNavigation = new JourneyNavigation(world);
+let navigationPlan: JourneyNavigationPlan | null = null;
 
 const placedBlocks = new THREE.InstancedMesh(new THREE.BoxGeometry(0.2, 0.2, 0.2), new THREE.MeshStandardMaterial({ color: '#d0b784', roughness: 0.9 }), 4096);
 placedBlocks.count = 0;
@@ -107,12 +110,12 @@ const actions: UIActions = {
     persistPreferences();
   },
   travel(targetId, preference = 'walk') {
-    const journey = planWalkingJourney(world, simulation.state.player.position, targetId);
-    if (!journey) return showNotice('此目的地没有连通的步行道路，请到真实站点查询交通。', false);
     const planned = simulation.command({ type: 'planJourney', targetId, value: preference === 'transit' ? 1 : 0 });
     if (!planned.ok) return showNotice(planned.message, false);
     syncNavigation();
-    showNotice(preference === 'transit' ? `公共交通方案至${journey.destination.name}；请先步行到首段乘车点，现场查看当前班次与票款。` : `步行导航至${journey.destination.name}，道路与桥面路线约 ${Math.round(journey.metres)} 米。${journey.stairsFromFloor !== null ? '请先在楼梯处按 E 回到一层。' : '金线通往实际入口或停靠点；公开班次可在交通手册查看。'}`);
+    if (navigationPlan?.unavailable) return showNotice(navigationPlan.unavailable, false);
+    const journey = navigationJourney!;
+    showNotice(preference === 'transit' ? `公共交通方案至${navigationPlan!.destination!.name}；请先步行到首段乘车点，现场查看当前班次与票款。` : `步行导航至${journey.destination.name}，道路与桥面路线约 ${Math.round(journey.metres)} 米。${journey.stairsFromFloor !== null ? '请先在楼梯处按 E 回到一层。' : '金线通往实际入口或停靠点；公开班次可在交通手册查看。'}`);
   },
   interact,
   async save() { await save(true); },
@@ -189,7 +192,10 @@ function frame(now: number): void {
   // Preserve real held-key intervals and small collision steps on slow frames.
   controller.stepWalkingFrame(now, rawDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; }
-  if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) simulation.state.player.position = controller.walkingPosition;
+  if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) {
+    simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
+  }
   if (activeAircraft(simulation.state)) setAircraftControls(simulation.state, controller.aviationControls);
   simulation.setFocus(controller.position, controller.mode);
   const driveAPI = simulation as Simulation & { isDriving?: (id?: string) => boolean; driveInput?: (throttle: number, turn: number, brake: boolean) => void };
@@ -200,6 +206,9 @@ function frame(now: number): void {
   const detailAPI = simulation as Simulation & { setDetail?: (detail: number) => void };
   detailAPI.setDetail?.(settings.simulationDetail);
   simulation.step(delta);
+  // Rebuild the gold line after canonical closures/reopening and after state
+  // replacement. The original journey remains the authority for its target.
+  syncNavigation(false);
   const aircraft = activeAircraft(simulation.state);
   if (aircraft) controller.syncAircraft(aircraft);
   else if (simulation.state.player.vehicleId) controller.syncPassenger(simulation.state.player.position);
@@ -237,7 +246,7 @@ function getView(): ViewState {
   const citizen = simulation.state.citizens.filter(n => n.tier !== 'statistical' && distance(position, n.position) < 8).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
   const vehicle = simulation.state.vehicles.filter(v => distance(position, v.position) < 24).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
   const aircraft = activeAircraft(simulation.state) ?? simulation.state.aviation?.aircraft.filter(a => distance(position, a.position) < 18).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
-  return { transitJourney, journey: navigationJourney, nearbyAircraft: aircraft, mode: controller.mode, ...settings, fps, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, position, nearbyBuilding: building, nearbyCitizen: citizen, nearbyVehicle: vehicle, targetDistrict, inside: Boolean(controller.inside), notice };
+  return { navigationUnavailable: navigationPlan?.unavailable ?? null, transitJourney, journey: navigationJourney, nearbyAircraft: aircraft, mode: controller.mode, ...settings, fps, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, position, nearbyBuilding: building, nearbyCitizen: citizen, nearbyVehicle: vehicle, targetDistrict, inside: Boolean(controller.inside), notice };
 }
 
 function execute(command: Command): void {
@@ -263,15 +272,17 @@ function syncPlayerView(): void {
   syncNavigation();
 }
 
-function syncNavigation(): void {
-  const targetId = simulation.state.journey?.targetId;
-  transitJourney = targetId && simulation.state.journey?.preference === 'transit' ? planTransitJourney(world,simulation.state,simulation.state.player.position,targetId) : null;
-  navigationJourney = transitJourney?.approach ?? (targetId ? planWalkingJourney(world, simulation.state.player.position, targetId) : null);
-  targetDistrict = transitJourney?.destination.districtId ?? navigationJourney?.destination.districtId ?? null;
-  targetMarker.visible = !!navigationJourney;
+function syncNavigation(force = true): void {
+  const next = journeyNavigation.read(simulation.state, force);
+  if (next === navigationPlan) return;
+  navigationPlan = next;
+  transitJourney = next.transit;
+  navigationJourney = next.walking;
+  targetDistrict = next.destination?.districtId ?? null;
+  targetMarker.visible = !!next.destination;
   navigationPath.visible = !!navigationJourney;
+  if (next.destination) targetMarker.position.copy(next.destination.position);
   if (navigationJourney) {
-    targetMarker.position.copy(navigationJourney.destination.position);
     navigationPath.geometry.dispose();
     navigationPath.geometry = new THREE.BufferGeometry().setFromPoints(navigationJourney.points.map(p => new THREE.Vector3(p.x,p.y+.3,p.z)));
   }
@@ -293,6 +304,7 @@ function setMode(mode: ViewMode, aircraftId?: string): void {
   }
   const pad = getAviationPads(world).find(p => p.id === craft.homePadId)!;
   actions.travel(pad.id);
+  if (navigationPlan?.unavailable) return;
   showNotice(`导航至${pad.name}。需步行走到机舱门旁${mode === 'drone' ? '支付 24 云币租用并登机；载人无人机使用自动驾驶，无远程摄像模式' : '登机；战机需要同时持有卫士与驾驶员资质'}。`);
 }
 
@@ -305,6 +317,7 @@ function interact(): void {
   if (controller.useStairs()) {
     const building = controller.inside!;
     simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
     city.setInterior(building.id, controller.floor);
     const level = controller.floor < 0 ? `地下 ${-controller.floor} 层` : `${controller.floor + 1} 层`;
     const use = controller.floor < 0 ? building.basementUses?.[-controller.floor - 1] : building.floorUses?.[controller.floor];
@@ -316,6 +329,7 @@ function interact(): void {
   const building = nearby.nearbyBuilding;
   if (building && controller.useDoor(building)) {
     simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
     city.setInterior(controller.inside?.id ?? null);
     showNotice(controller.inside ? `进入${building.name}，可在生活面板使用设施。楼内左后角为楼梯。` : `走出${building.name}。`);
     return;

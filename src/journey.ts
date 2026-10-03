@@ -2,6 +2,7 @@ import { getFloorDimensions, getStairPosition } from './access';
 import { getAviationPads } from './aviation';
 import { getWalkHeight } from './world';
 import { blocksTransportBarrier } from './transport-geometry';
+import { isRoadOpen, roadExitPermit, roadExitRoute, roadMovementAllowed, roadRevision } from './roads';
 import { blocksMarketCounter, marketCounters, type MarketCounter } from './site-fixtures';
 import { FLOOR_PLAN_PROFILE, blocksFloorPlanMovement, findBuildingFloorPlanRoute, floorPlanSupport } from './architecture-floor-plan';
 import type { NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
@@ -30,7 +31,7 @@ function worldCounters(world: WorldDefinition): readonly MarketCounter[] {
 /** A short sideways connection is sampled against the same floors, road heights,
  * cliff limit, market counters and transport barriers that the walking body consumes. It may not
  * cut through another building or wade across the river to reach a nearby deck. */
-function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3): boolean {
+function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3, state?: SimState): boolean {
   let feet={...from}; const distance=Math.hypot(to.x-from.x,to.z-from.z),steps=Math.max(1,Math.ceil(distance/.2));
   if(distance>64)return false;
   const counters=worldCounters(world);
@@ -53,7 +54,9 @@ function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3): boolean {
       const a=world.river[i-1],b=world.river[i],dx=b.x-a.x,dz=b.z-a.z,t=Math.max(0,Math.min(1,((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz||1)));
       if(Math.hypot(x-a.x-dx*t,z-a.z-dz*t)<15&&height<a.y+(b.y-a.y)*t+.2)return false;
     }
-    feet={x,y:height,z};return true;
+    const next={x,y:height,z};
+    if(state&&!roadMovementAllowed(world,state,'player',feet,next))return false;
+    feet=next;return true;
   };
   for(let i=1;i<=steps;i++){const x=from.x+(to.x-from.x)*i/steps,z=from.z+(to.z-from.z)*i/steps;if(!move(x,feet.z)||!move(feet.x,z))return false;}
   return Math.abs(feet.y-to.y)<.26;
@@ -61,8 +64,12 @@ function canJoinRoad(world: WorldDefinition, from: Vec3, to: Vec3): boolean {
 
 /** The actor joins the actual occupied road layer at a polyline projection.
  * Both endpoints retain the remaining physical segment before graph search. */
-function walkingAccess(world: WorldDefinition, from: Vec3): WalkingAccess | null {
-  const roadEdges=world.edges.filter(walkable),nodeMap=new Map(world.nodes.map(n=>[n.id,n]));
+function walkingAccess(world: WorldDefinition, from: Vec3, state?: SimState): WalkingAccess | null {
+  // Only a body captured on the deck when it closed may use its remaining
+  // segment. Ordinary projections cannot grant entry onto a closed edge.
+  const exit=state?roadExitRoute(world,state,'player',from):null;
+  if(exit)return {anchors:[{nodeId:exit.exitNodeId,points:exit.points.map(p=>({...p})),edgeIds:[exit.edgeId],metres:metres(exit.points)}],stairsFromFloor:null};
+  const roadEdges=world.edges.filter(edge=>walkable(edge)&&(!state||isRoadOpen(state,edge.id))),nodeMap=new Map(world.nodes.map(n=>[n.id,n]));
   const prefix:Vec3[]=[{...from}];let position=from,stairsFromFloor:number|null=null;
   const interior=world.buildings.find(b=>{
     if(b.floorPlanProfile===FLOOR_PLAN_PROFILE)return floorPlanWalkingLevel(b,from)!==null;
@@ -81,7 +88,7 @@ function walkingAccess(world: WorldDefinition, from: Vec3): WalkingAccess | null
       append(prefix,interior.door);position=interior.door;
     }
     const doorNode=world.nodes.find(n=>dist(n.position,position)<.01&&roadEdges.some(e=>e.from===n.id||e.to===n.id));
-    if(doorNode)return {anchors:[{nodeId:doorNode.id,points:prefix,edgeIds:[],metres:metres(prefix)}],stairsFromFloor};
+    if(doorNode&&roadConnectionAllowed(world,state,prefix))return {anchors:[{nodeId:doorNode.id,points:prefix,edgeIds:[],metres:metres(prefix)}],stairsFromFloor};
   }
   const projections:Projection[]=[];
   for(const edge of roadEdges){
@@ -95,16 +102,26 @@ function walkingAccess(world: WorldDefinition, from: Vec3): WalkingAccess | null
   const surface=getWalkHeight(world,position.x,position.z,position.y);
   const occupied=projections.filter(p=>p.horizontal<=(p.edge.id.includes('airport-runway-strip')?22:p.edge.mode==='bridge'?4:5)&&Math.abs(p.point.y-surface)<1e-5);
   const candidates=(occupied.length?occupied:projections).sort((a,b)=>(a.horizontal+Math.abs(a.point.y-position.y)*2)-(b.horizontal+Math.abs(b.point.y-position.y)*2));
-  const projection=candidates.find(p=>canJoinRoad(world,position,p.point));if(!projection)return null;
+  const projection=candidates.find(p=>canJoinRoad(world,position,p.point,state));if(!projection)return null;
   const anchors:Access[]=[];
   for(const forward of [false,true]){
     const nodeId=forward?projection.edge.to:projection.edge.from,node=nodeMap.get(nodeId);if(!node)continue;
     const points=prefix.map(p=>({...p}));append(points,projection.point);
     const path=forward?projection.edge.points.slice(projection.index):projection.edge.points.slice(0,projection.index).reverse();for(const p of path)append(points,p);append(points,node.position);
     const remaining=forward?projection.total-projection.along:projection.along;
-    anchors.push({nodeId,points,edgeIds:remaining>.01?[projection.edge.id]:[],metres:metres(points)});
+    if(roadConnectionAllowed(world,state,points))anchors.push({nodeId,points,edgeIds:remaining>.01?[projection.edge.id]:[],metres:metres(points)});
   }
   return anchors.length?{anchors,stairsFromFloor}:null;
+}
+
+/** Door/pad tails and sideways joins must obey the same dynamic entrance
+ * rule as the walking body, even when they carry no graph edge id. */
+function roadConnectionAllowed(world:WorldDefinition,state:SimState|undefined,points:readonly Vec3[]):boolean {
+  if(!state)return true;
+  for(let i=1;i<points.length;i++){
+    if(!roadMovementAllowed(world,state,'player',points[i-1],points[i]))return false;
+  }
+  return true;
 }
 
 /** Courtyards and galleries are outside rooms, yet their real slab and walls
@@ -147,21 +164,24 @@ export function resolveJourneyDestination(world: WorldDefinition, id: string): J
 
 /** A walking line follows ground roads and bridges, including the physical door
  * and shared stair shaft when the actor starts inside an upper/basement floor. */
-export function planWalkingJourney(world: WorldDefinition, from: Vec3, targetId: string): WalkingJourney | null {
-  const destination=resolveJourneyDestination(world,targetId),access=walkingAccess(world,from);if(!destination||!access)return null;
+export function planWalkingJourney(world: WorldDefinition, from: Vec3, targetId: string, state?: SimState): WalkingJourney | null {
+  const destination=resolveJourneyDestination(world,targetId),access=walkingAccess(world,from,state);if(!destination||!access)return null;
   const graph=new Map<string,Connection[]>();
-  for(const edge of world.edges.filter(walkable))for(const [a,b]of [[edge.from,edge.to],[edge.to,edge.from]]){const list=graph.get(a)??[];list.push({edge,to:b,mode:'walk',vehicles:[],cost:edge.length});graph.set(a,list);}
-  const found=search(access.anchors,graph,destination.nodeId);return found?walkingPlan(destination,access,found):null;
+  for(const edge of world.edges.filter(edge=>walkable(edge)&&(!state||isRoadOpen(state,edge.id))))for(const [a,b]of [[edge.from,edge.to],[edge.to,edge.from]]){const list=graph.get(a)??[];list.push({edge,to:b,mode:'walk',vehicles:[],cost:edge.length});graph.set(a,list);}
+  const found=search(access.anchors,graph,destination.nodeId);if(!found)return null;
+  const endpoint=world.nodes.find(n=>n.id===destination.nodeId)!;
+  return roadConnectionAllowed(world,state,[endpoint.position,destination.position])?walkingPlan(destination,access,found):null;
 }
 
 /** Connections use existing track, water and air edges with actual vehicles.
  * A connection is a route suggestion; only the live board promises a current
  * vehicle's next stop and clock. Future turns and reservations remain unknown. */
 export function planTransitJourney(world: WorldDefinition, state: SimState, from: Vec3, targetId: string): TransitJourney | null {
-  const destination=resolveJourneyDestination(world,targetId),access=walkingAccess(world,from);if(!destination||!access)return null;
+  const destination=resolveJourneyDestination(world,targetId),access=walkingAccess(world,from,state);if(!destination||!access)return null;
   const nodes=new Map(world.nodes.map(n=>[n.id,n]));
   const graph=new Map<string,Connection[]>();
   for(const edge of world.edges){
+    if(!isRoadOpen(state,edge.id))continue;
     const vehicles=state.vehicles.filter(v=>v.edgeId===edge.id&&v.kind===edge.mode&&v.state!=='noPower'&&v.state!=='grounded'&&!(v.kind==='flight'&&(state.hour<6||state.hour>=23||state.visibility<.6))&&!(v.id===state.player.vehicleId&&state.player.inventory.driving===1));
     const choices:Omit<Connection,'to'>[]=[];
     if(walkable(edge))choices.push({edge,mode:'walk',vehicles:[],cost:edge.length/4.8});
@@ -174,9 +194,35 @@ export function planTransitJourney(world: WorldDefinition, state: SimState, from
   const boarding=nodes.get(boardingNodeId)!;
   const approach=walkingPlan(firstRide<0?destination:{id:boarding.id,name:boarding.name,districtId:boarding.districtId,position:{...boarding.position},nodeId:boarding.id},access,{anchor:found.anchor,route:route.slice(0,firstRide<0?route.length:firstRide)});
   const lastNode=nodes.get(destination.nodeId)!;
+  if(!roadConnectionAllowed(world,state,[lastNode.position,destination.position]))return null;
   if(dist(lastNode.position,destination.position)>.01)legs.push({mode:'walk',fromNodeId:lastNode.id,toNodeId:lastNode.id,edgeIds:[],points:[{...lastNode.position},{...destination.position}],metres:dist(lastNode.position,destination.position),fare:0,vehicleIds:[]});
   const rides=legs.filter(l=>l.mode!=='walk');
   return {destination,legs,fare:rides.reduce((n,l)=>n+l.fare,0),walkingMetres:approach.metres+legs.slice(firstRide<0?legs.length:firstRide).filter(l=>l.mode==='walk').reduce((n,l)=>n+l.metres,0),transfers:Math.max(0,rides.length-1),approach};
+}
+
+export interface JourneyNavigationPlan { destination:JourneyDestination|null; walking:WalkingJourney|null; transit:TransitJourney|null; unavailable:string|null }
+
+/** The App consumes this derived cache. Loading another state with the same
+ * revision must invalidate it just as a closure in the current state does. */
+export class JourneyNavigation {
+  private state:SimState|undefined;
+  private revision=-1;
+  private targetId:string|null|undefined;
+  private preference:string|undefined;
+  private permit:string|null|undefined;
+  private plan:JourneyNavigationPlan={destination:null,walking:null,transit:null,unavailable:null};
+  constructor(private readonly world:WorldDefinition) {}
+  read(state:SimState,force=false):JourneyNavigationPlan {
+    const revision=roadRevision(state),targetId=state.journey?.targetId??null,preference=state.journey?.preference,exit=roadExitPermit(state,'player');
+    const permit=exit?`${exit.closureId}:${exit.closedRevision}:${exit.edgeId}:${exit.exitNodeId}:${exit.direction}:${exit.startAlong}`:null;
+    if(!force&&this.state===state&&this.revision===revision&&this.targetId===targetId&&this.preference===preference&&this.permit===permit)return this.plan;
+    this.state=state;this.revision=revision;this.targetId=targetId;this.preference=preference;this.permit=permit;
+    const destination=targetId?resolveJourneyDestination(this.world,targetId):null;
+    const transit=targetId&&preference==='transit'?planTransitJourney(this.world,state,state.player.position,targetId):null;
+    const walking=preference==='transit'?transit?.approach??null:targetId?planWalkingJourney(this.world,state.player.position,targetId,state):null;
+    this.plan={destination,walking,transit,unavailable:destination&&!walking?`至${destination.name}的${preference==='transit'?'公共交通':'步行'}路线暂不可达；目的地已保留，请等待道路恢复或选择可通行的行程。`:null};
+    return this.plan;
+  }
 }
 
 /** Public board reads current vehicles, direction and departure clocks. It does
@@ -185,7 +231,7 @@ export function publicDepartures(world: WorldDefinition,state: SimState,nodeId?:
   const edges=new Map(world.edges.map(e=>[e.id,e])),nodes=new Map(world.nodes.map(n=>[n.id,n])),time=now(state);
   return state.vehicles.flatMap(v=>{const edge=edges.get(v.edgeId);if(!edge||v.kind==='bridge')return[];const from=nodes.get(v.direction>0?edge.from:edge.to),to=nodes.get(v.direction>0?edge.to:edge.from);if(!from||!to||nodeId&&from.id!==nodeId&&to.id!==nodeId)return[];
     const departed=v.state==='moving'||v.state==='congested';
-    const reason=v.state==='grounded'||v.kind==='flight'&&(state.hour<6||state.hour>=23||state.visibility<.6)?'夜间或能见度限制停飞':v.state==='noPower'||state.energy<18?'等待城市供能':v.state==='redLight'?'等待合法信号':v.kind==='road'&&state.player.vehicleId===v.id&&state.player.inventory.driving===1?'由驾驶员实际操作':null;
+    const reason=!isRoadOpen(state,edge.id)?'道路已关闭；保留原行程，等待合法通行':v.state==='grounded'||v.kind==='flight'&&(state.hour<6||state.hour>=23||state.visibility<.6)?'夜间或能见度限制停飞':v.state==='noPower'||state.energy<18?'等待城市供能':v.state==='redLight'?'等待合法信号':v.kind==='road'&&state.player.vehicleId===v.id&&state.player.inventory.driving===1?'由驾驶员实际操作':null;
     const departureAt=departed||reason?null:Math.max(time,v.nextDeparture);
     const remaining=edge.length*(v.direction>0?1-v.progress:v.progress),speed=v.speed*Math.max(.3,state.energy/100)*(v.kind==='road'?.8+(state.hour>=7&&state.hour<9||state.hour>=17&&state.hour<19?-.22:.1):1);
     const arrivalAt=reason||speed<=0?null:(departureAt??time)+remaining/speed;

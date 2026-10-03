@@ -1,3 +1,5 @@
+import { isRoadOpen, roadClosure } from './roads';
+import { roadworksStatus } from './simulation/roadworks';
 import { aircraftBoardingBlockedReason, getAviationPads } from './aviation';
 import { researchPlayerContextReason, researchProgressInfo } from './simulation/extensions';
 import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from './architecture-floor-plan';
@@ -244,6 +246,8 @@ export class CityUI {
     const destinations = element('div', 'panel-section');
     destinations.innerHTML = '<h3>具体场所与出行路线</h3><label class="field-label" for="journey-preference">出行方式</label><select id="journey-preference" data-ref="journey-preference"><option value="walk">沿道路与桥面步行</option><option value="transit">步行到站与现场购票换乘</option></select><label class="field-label" for="destination-kind">寻找场所</label><select id="destination-kind" data-ref="destination-kind" data-input="destination-kind"><option value="school">书院</option><option value="bank">钱庄</option><option value="market">市集</option><option value="home">住宅</option><option value="clinic">医馆</option><option value="station">车站</option><option value="hall">议事堂</option><option value="airport">机场</option><option value="starport">星港</option><option value="pavilion">山顶亭</option><option value="dock">码头</option></select><div data-ref="destination-targets"></div><div data-ref="transit-route"></div><div data-ref="walking-guide"></div><button type="button" class="action-button full-width" data-ref="cancel-journey" data-command="cancelJourney">取消当前导航</button>';
     this.root.querySelector('#pane-transit .transit-summary')!.after(destinations);
+    const roadState = element('div', 'panel-section'); roadState.innerHTML = '<h3>道路与现场工程</h3><div data-ref="road-state"></div>';
+    destinations.after(roadState);
     const stopLabel=element('label','field-label','查询实际停靠点');stopLabel.htmlFor='departure-stop';const stops=element('select');stops.id='departure-stop';stops.dataset.ref='departure-stop';stops.dataset.input='departure-stop';const nearby=element('option','','最近停靠点');nearby.value='';stops.append(nearby);for(const node of this.world.nodes.filter(n=>n.station)){const option=element('option','',node.name);option.value=node.id;stops.append(option);}this.root.querySelector('[data-ref=departures]')!.before(stopLabel,stops);
   }
   private setText(name: string, value: string): void { const node = this.ref(name); if (node.textContent !== value) node.textContent = value; }
@@ -617,6 +621,34 @@ export class CityUI {
     this.renderPublicSystems();
     this.renderGovernance();
   }
+  private roadContent(): HTMLElement {
+    const content = element('div'), state = this.state!;
+    const closed = this.world.edges.filter(edge => !isRoadOpen(state, edge.id));
+    if (!closed.length) content.append(element('p', 'note', '当前没有因山洪关闭的道路。'));
+    const stages: Record<string, string> = { unbought: '等待实际采购', carried: '居民携料在途', delivered: '已送到工地', consumed: '已用于修复', retained: '保留实际材料资产' };
+    for (const edge of closed) {
+      const closure = roadClosure(state, edge.id); if (!closure) continue;
+      const card = element('div', 'system-card'); card.dataset.roadEdge = edge.id;
+      const from = this.world.nodes.find(node => node.id === edge.from), to = this.world.nodes.find(node => node.id === edge.to);
+      card.append(element('strong', '', `${from?.name ?? edge.from} ↔ ${to?.name ?? edge.to}`), element('p', 'note', '山洪关闭：新来者须改道；已在路段内的人车沿许可出口离开。'));
+      const status = roadworksStatus(state, edge.id), job = status.job;
+      const goto = element('button', 'action-button', '前往工地开放端'); goto.setAttribute('type', 'button'); goto.dataset.navigation = closure.worksiteNodeId; card.append(goto);
+      if (job) {
+        const worker = state.citizens.find(citizen => citizen.id === job.workerId);
+        card.append(field('具名施工者', worker?.name ?? '等候居民自愿承接'), field('有效现场施工', `${job.workedMinutes.toFixed(1)} / ${job.requiredMinutes} 分钟`), field('材料', stages[status.materialStage] ?? '等待履约'), field('未赚托管款', `${job.escrow.toFixed(2)} 云币`), element('p', 'note', job.reason));
+        if (job.payerId === 'public' && job.completedAt === null && job.cancelledAt === null) card.append(commandButton('市长现场审批施工预算', 'approveRoadRepair', job.id, 40, !this.canAct() || !this.hasRole('mayor')));
+        if (job.completedAt === null && job.cancelledAt === null || job.escrow > 1e-7 && job.cancelledAt !== null) card.append(commandButton('停止施工 · 结算未赚款', 'cancelRoadRepair', job.id, undefined, !this.canAct()));
+      }
+      if (!job || job.cancelledAt !== null && job.escrow <= 1e-7) {
+        const near = spatialDistance(state.player.position, closure.worksite) <= 16;
+        card.append(commandButton('托管100 · 申请道路修复', 'requestRoadRepair', edge.id, 0, !this.canAct() || !near || state.player.money < 100), commandButton('提出公共修路需求', 'requestRoadRepair', edge.id, 1, !this.canAct() || !near), element('p', 'note', '实际采购一份材料，由承接居民步行送到开放端工地；累计60分钟已付薪现场施工才恢复通行。'));
+      }
+      content.append(card);
+    }
+    const completed = state.roadworks?.jobs.filter(job => job.completedAt !== null).slice(-3) ?? [];
+    for (const job of completed) content.append(element('p', 'note', `已完成修路：${job.workedMinutes.toFixed(1)}分钟现场劳动，真实工资${job.paidGross.toFixed(2)}云币。`));
+    return content;
+  }
   private renderGovernance(): void {
     const state = this.state!, government = state.governance, host = this.ref('governance-record');
     if (!governanceSupported(this.world)) { host.replaceChildren(element('p', 'note', '当前城市沿原选举与政策规则运行。')); return; }
@@ -932,6 +964,7 @@ export class CityUI {
     body.append(element('p', 'note', `${dependents.length} 位真实受养家人。出生、共同账户、到校学习、仪式与继承记录随存档恢复。`));
   }
   private renderTransit(): void {
+    reconcileContent(this.ref('road-state'), this.roadContent());
     const state = this.state!;
     const view = this.view!;
     this.renderAviation();
@@ -955,6 +988,7 @@ export class CityUI {
     if(recorded?.targetId&&recorded.lastArrival)routeBody.append(field('最近真实到站',`${this.world.nodes.find(n=>n.id===recorded.lastArrival!.nodeId)?.name??recorded.lastArrival.nodeId} · ${recorded.lastArrival.vehicleId}`));
     if(recorded?.vehicleId)routeBody.append(field('当前实际乘坐',`${recorded.vehicleId} · 下一站 ${this.world.nodes.find(n=>n.id===recorded.nextStopNodeId)?.name??'查询中'}`));
     const journey = view.journey, guide = this.ref('walking-guide'); guide.replaceChildren();
+    if (view.navigationUnavailable) guide.append(element('p', 'note', view.navigationUnavailable));
     if (journey && !state.player.vehicleId) {
       guide.append(field('步行目的地',journey.destination.name),element('p','note',`道路与桥面路线 ${Math.round(journey.metres)} 米；需自行步行，或到真实站点购票换乘。`));
       if (journey.stairsFromFloor !== null && view.inside) guide.append(element('p','note','请在楼梯处按 E 回到一层，再沿门口道路出发。'));
@@ -1366,8 +1400,9 @@ export class CityUI {
     ctx.beginPath(); river.forEach((p, index) => index ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.lineWidth = 5; ctx.strokeStyle = 'rgba(105, 155, 159, .55)'; ctx.stroke();
     for (const edge of this.world.edges) {
       ctx.beginPath(); edge.points.forEach((p, index) => { const xy = project(p); if (index) ctx.lineTo(xy.x, xy.y); else ctx.moveTo(xy.x, xy.y); });
-      ctx.lineWidth = edge.mode === 'maglev' ? 2 : 1; ctx.strokeStyle = edge.mode === 'flight' ? 'rgba(139, 119, 91, .25)' : edge.mode === 'road' ? 'rgba(72, 91, 72, .25)' : 'rgba(93, 150, 139, .60)';
-      ctx.setLineDash(edge.mode === 'flight' ? [3, 4] : []); ctx.stroke();
+      const closed = !isRoadOpen(this.state, edge.id);
+      ctx.lineWidth = closed ? 3 : edge.mode === 'maglev' ? 2 : 1; ctx.strokeStyle = closed ? 'rgba(174, 65, 45, .9)' : edge.mode === 'flight' ? 'rgba(139, 119, 91, .25)' : edge.mode === 'road' ? 'rgba(72, 91, 72, .25)' : 'rgba(93, 150, 139, .60)';
+      ctx.setLineDash(closed ? [4, 2] : edge.mode === 'flight' ? [3, 4] : []); ctx.stroke();
     }
     ctx.setLineDash([]); this.mapPoints = [];
     for (const district of this.world.districts) {

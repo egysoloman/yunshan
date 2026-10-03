@@ -5,6 +5,8 @@ import { installExtensions, researchTaskActorIds, isCanonicalDisaster, isCanonic
 import { installPower, powerBinding, powerHasCapacityRoom, powerRepairPoint, powerTaskActorIds, validateLegacyEnergyContract, validatePowerBudgetCrossReferences, type LegacyEnergyContract } from './simulation/power';
 import { installShopLifecycle, shopLifecycleAllowsOperation, shopLifecycleAllowsNewPayroll, shopLifecycleAllowsSpaceUse, shopLifecycleReservedFunds, shopLifecycleBeforeBusinessTransfer, shopLifecycleOpportunities } from './simulation/shop_lifecycle';
 import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
+import { installRoadNetwork, isRoadOpen, roadRevision, roadExitRoute, roadMovementAllowed, releaseRoadExitPermit } from './roads';
+import { installRoadworks, roadworkTask, validateRoadworksBudgetCrossReferences } from './simulation/roadworks';
 import { installFamily, isCloseKin } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
 import { clinicalServiceStationsAtPosition, clinicalTaskActorIds } from './simulation/clinical';
@@ -23,7 +25,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -32,6 +34,9 @@ const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.
 const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
+const canonicalRoadworkPresence = new WeakSet<object>();
+/** Only actual core people-phase observations authorize material pickup or site labor. */
+export const isCanonicalRoadworkPresence = (event: object): boolean => canonicalRoadworkPresence.has(event);
 const initialCommuteCache = new WeakMap<WorldDefinition, { fingerprint: string; homes: Map<string, Map<string, number>> }>();
 type Event = { type: string; amount?: number; citizenId?: string; shopId?: string; districtId?: string; vehicleId?: string; crimeId?: string; minutes?: number; requestedAmount?: number; quantity?: number; expenseAccrued?: boolean; ratePerMinute?: number; unitPrice?: number; siteId?: string; procurementId?: string; budgetId?: string; purpose?: string; nodeId?: string; fromEdgeId?: string; arrivedAt?: number; creditedWorkStartAt?: number; creditedWorkEndAt?: number; laborJobId?: string; eventId?: number; severity?: number; occurredAt?: number; activityWindowStartAt?: number; activityWindowEndAt?: number; activityObservedTick?: number; activityObservedClock?: number; activityPosition?: Vec3 };
 class EventBus {
@@ -56,7 +61,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -94,6 +99,9 @@ export class Simulation implements SimulationAPI {
   private readonly neighbors = new Map<string, { node: string; edge: NetworkEdge }[]>();
   private readonly routeCache = new Map<string, Vec3[]>();
   private readonly walkingTrees = new Map<string, { costs: Map<string, number>; previous: Map<string, { node: string; edge: NetworkEdge }> }>();
+  private routingState?: SimState;
+  private routingRevision = -1;
+  private citizenRoadRevisions = new WeakMap<Citizen, number>();
   private readonly nodeAt = new Map<string, string>();
   private readonly doorNodes = new Map<string, WorldDefinition['nodes'][number]>();
   private readonly saveValidators: ((candidateState: SimState) => void)[] = [];
@@ -101,6 +109,7 @@ export class Simulation implements SimulationAPI {
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
+  private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
   private minutes = .25;
   private employment = new Set<string>();
   private accrualIndexSource?: WageAccrual[];
@@ -162,6 +171,11 @@ export class Simulation implements SimulationAPI {
       chargeRegistration: site => this.receivePublicFee(120, '具名居民选举登记费', site.districtId) });
     installPathology(this);
     installHygiene(this);
+    installRoadNetwork(this, { isCanonicalDisaster, activate: () => { this.runtime.roadNetworkVersion = 1; } });
+    installRoadworks(this, { isCanonicalRoadworkPresence, activate: () => { this.runtime.roadworksVersion = 1; },
+      travelCost: (citizenId, nodeId, point) => this.roadworkTravelCost(citizenId, nodeId, point),
+      takePublicEscrow: request => this.takeRoadworkPublicEscrow(request), returnPublicEscrow: request => this.returnRoadworkPublicEscrow(request), accrueTax: amount => { if (finite(amount) && amount >= 0) this.runtime.taxes += amount; } });
+    this.resetRoadRouting();
     // Actual public education claims this actor first; research uses only remaining minutes.
     this.onPhase('people', (_state, minutes) => researchLaborPhase(minutes));
     this.notice('arrival', '来自星海的旅行者抵达云山。城市正在独立运行，欢迎步行探索。');
@@ -463,6 +477,26 @@ export class Simulation implements SimulationAPI {
     if (!mayor && !(council.length >= 2) && !departmental) return false;
     budgets.push({ ...request, approvedBy: [...request.approvedBy], spent: 0, closedAt: null, signatures }); return true;
   }
+  private recordRoadworkPublicEscrow(amount: number, siteId: string): void {
+    const extension = this.state.extension!, site = this.buildings.get(siteId)!;
+    Reflect.get(extension, 'runtime').lastTreasury += amount;
+    extension.publicLedger.push({ tick: this.state.tick, actorId: 'player', account: 'public', amount, purpose: amount < 0 ? '道路修复授权资金真实划入工地托管' : '道路修复未赚工地托管资金真实退回', districtId: site.districtId });
+    if (extension.publicLedger.length > 512) extension.publicLedger.splice(0, extension.publicLedger.length - 512);
+  }
+  private takeRoadworkPublicEscrow(request: { budgetId: string; siteId: string; purpose: 'road-repair'; amount: number }): boolean {
+    const budget = this.runtime.publicBudgets?.find(item => item.id === request.budgetId && item.siteId === request.siteId && item.purpose === request.purpose && item.closedAt === null);
+    if (!budget || request.purpose !== 'road-repair' || !finite(request.amount) || request.amount <= 0 || request.amount > budget.cap - budget.spent) return false;
+    const snapshot = this.publicBudgetSnapshot(), otherCommitments = snapshot.authorizedRemaining - (budget.cap - budget.spent);
+    if (this.state.treasury - snapshot.reserve - otherCommitments < request.amount) return false;
+    this.state.treasury -= request.amount; budget.spent += request.amount; this.recordRoadworkPublicEscrow(-request.amount, request.siteId); return true;
+  }
+  private returnRoadworkPublicEscrow(request: { budgetId: string; siteId: string; purpose: 'road-repair'; amount: number }): number {
+    const budget = this.runtime.publicBudgets?.find(item => item.id === request.budgetId && item.siteId === request.siteId && item.purpose === request.purpose && item.closedAt === null);
+    if (!budget || request.purpose !== 'road-repair' || !finite(request.amount) || request.amount <= 0) return 0;
+    const refunded = Math.min(request.amount, Math.max(0, 1e12 - this.state.treasury), budget.spent);
+    if (refunded <= 0) return 0;
+    this.state.treasury += refunded; budget.spent -= refunded; this.recordRoadworkPublicEscrow(refunded, request.siteId); return refunded;
+  }
   closePublicBudget(id: string): boolean {
     const budget = this.runtime.publicBudgets?.find(item => item.id === id); if (!budget || budget.closedAt !== null) return false;
     budget.closedAt = this.state.extension?.lastUpdate ?? this.now; return true;
@@ -567,6 +601,14 @@ export class Simulation implements SimulationAPI {
   }
   private connectSystems() {
     for (const phase of ORDER) this.bus.on(`system:${phase}`, () => this[phase]());
+    const refreshRoadRoutes = () => {
+      // A close/reopen can occur after some people were processed this phase.
+      // Finish the pure routing revision now, so a save never carries an
+      // unrecorded WeakMap debt that only the live source would apply next tick.
+      this.ensureRoadRouting();
+      for (const citizen of this.state.citizens) this.refreshCitizenRoadRoute(citizen);
+    };
+    this.bus.on('road-edge-closed', refreshRoadRoutes); this.bus.on('road-edge-reopened', refreshRoadRoutes);
     this.bus.on('wage', e => {
       if (!e.citizenId || !e.districtId) return;
       const citizen = this.state.citizens.find(c => c.id === e.citizenId), shopId = e.expenseAccrued ? e.shopId ?? null : e.shopId ?? (citizen ? this.state.shops.find(shop => shop.buildingId === citizen.workId)?.id ?? null : null);
@@ -587,7 +629,7 @@ export class Simulation implements SimulationAPI {
       const officer = this.state.citizens.find(c => c.id === e.citizenId), crime = this.state.crimes.find(c => c.id === e.crimeId);
       if (!officer || !crime) return;
       const target = this.world.buildings.reduce((a, b) => distance(crime.position, b.door) < distance(crime.position, a.door) ? b : a);
-      officer.route = [...this.routeFromCitizen(officer, target), copy(crime.position)]; officer.destinationId = target.id; officer.routeIndex = 1; officer.state = 'responding'; this.runtime.dispatches[officer.id] = { crimeId: crime.id, arrived: false };
+      this.runtime.dispatches[officer.id] = { crimeId: crime.id, arrived: false }; this.rebuildDispatchRoute(officer, crime, target);
     });
     this.bus.on('officer-arrived', e => { const dispatch = e.citizenId && this.runtime.dispatches[e.citizenId]; if (dispatch && dispatch.crimeId === e.crimeId) dispatch.arrived = true; });
     this.bus.on('relationship-change', e => {
@@ -695,6 +737,19 @@ export class Simulation implements SimulationAPI {
     for (const vehicle of this.state.vehicles) { const key = `${vehicle.edgeId}:${vehicle.direction}`; const list = lanes.get(key) ?? []; list.push(vehicle); lanes.set(key, list); }
     for (const vehicle of this.state.vehicles) {
       const edge = this.edges.get(vehicle.edgeId)!;
+      const roadActor = `vehicle:${vehicle.id}`;
+      // Endpoint waiting is not occupancy permission. Only a captured mid-edge
+      // vehicle can leave a newly closed deck; an endpoint may select an open leg.
+      if (!isRoadOpen(this.state, edge.id) && (vehicle.progress === 0 || vehicle.progress === 1)) {
+        const nodeId = vehicle.progress === 0 ? edge.from : edge.to;
+        releaseRoadExitPermit(this.world, this.state, roadActor, vehicle.position);
+        const exits = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id && isRoadOpen(this.state, n.edge.id));
+        if (!exits.length) { vehicle.state = 'roadClosed'; if (this.isDriving(vehicle.id)) this.runtime.driving.speed = 0; continue; }
+        const outgoing = this.isDriving(vehicle.id) ? this.chooseTurn(edge, vehicle.progress === 0 ? -1 : 1, nodeId, exits) : exits[Math.floor(this.random() * exits.length)];
+        vehicle.edgeId = outgoing.edge.id; vehicle.direction = outgoing.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1;
+        vehicle.state = 'boarding'; vehicle.nextDeparture = Math.max(vehicle.nextDeparture, this.now + (this.isDriving(vehicle.id) ? 2 : 8));
+        continue;
+      }
       const energy = this.state.energy / 100;
       if (energy < .18 && vehicle.kind !== 'bridge') { vehicle.state = 'noPower'; continue; }
       if (vehicle.kind === 'flight' && (vehicle.progress === 0 || vehicle.progress === 1) && (this.state.hour < 6 || this.state.hour >= 23 || this.state.visibility < .6)) { vehicle.state = 'grounded'; continue; }
@@ -714,6 +769,7 @@ export class Simulation implements SimulationAPI {
         }
         if (Math.abs(nextProgress - oldProgress) < 1e-9) { vehicle.state = 'congested'; if (manual) this.runtime.driving.speed = 0; }
       }
+      if (!roadMovementAllowed(this.world, this.state, roadActor, vehicle.position, this.pointOn(edge, nextProgress))) { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
       vehicle.progress = nextProgress;
       vehicle.position = this.pointOn(edge, vehicle.progress);
       if (vehicle.kind === 'road') { const front = this.pointOn(edge, Math.min(1, vehicle.progress + .001)), back = this.pointOn(edge, Math.max(0, vehicle.progress - .001)); const dx = front.x - back.x, dz = front.z - back.z, length = Math.hypot(dx, dz); if (length > .001) { vehicle.position.x -= dz / length * vehicle.direction * 1.3; vehicle.position.z += dx / length * vehicle.direction * 1.3; } }
@@ -722,6 +778,9 @@ export class Simulation implements SimulationAPI {
         const node = this.world.nodes.find(n => n.id === nodeId)!;
         if (oldProgress > 0 && oldProgress < 1) this.bus.emit({ type: 'vehicle-arrived', vehicleId: vehicle.id, nodeId, fromEdgeId: edge.id, arrivedAt: this.state.extension?.lastUpdate ?? this.now });
         for (const rider of Object.values(this.runtime.riders)) if (rider.vehicleId === vehicle.id && rider.stopNodeId === nodeId && !rider.arrived) { rider.arrived = true; rider.arrivedAt = this.state.extension?.lastUpdate ?? this.now; vehicle.passengers = Math.max(0, vehicle.passengers - 1); }
+        releaseRoadExitPermit(this.world, this.state, roadActor, vehicle.position);
+        let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id && isRoadOpen(this.state, n.edge.id));
+        if (!isRoadOpen(this.state, edge.id) && !candidates.length) { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
         if (vehicle.kind === 'road') {
           const offset = hash(nodeId) % 4;
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
@@ -747,10 +806,12 @@ export class Simulation implements SimulationAPI {
         }
         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
-        let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id);
+        // The departure graph excludes every closed leg, including a reverse.
+        candidates = candidates.filter(n => isRoadOpen(this.state, n.edge.id));
         if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
         if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
-        else vehicle.direction *= -1;
+        else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
+        else { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
         vehicle.state = 'boarding';
         const maintenance = Object.entries(this.state.culture?.transportMaintenance ?? {}).some(([siteId, item]) => item.maintainedUntil > (this.state.extension?.lastUpdate ?? this.now) && item.units >= 4 && this.state.culture?.orders.some(order => order.id === item.orderId && order.state === 'fulfilled') && this.buildings.get(siteId)?.kind === 'station' && distance(this.buildings.get(siteId)!.door, node.position) <= 40);
         const dwell = manual ? 2 : vehicle.kind === 'flight' ? 75 : vehicle.kind === 'road' ? 8 : this.state.hour >= 22 || this.state.hour < 6 ? 48 : 16;
@@ -772,18 +833,69 @@ export class Simulation implements SimulationAPI {
   private nearestNode(position: Vec3) { let nearest = this.world.nodes[0]; let best = Infinity; for (const node of this.world.nodes) { const d = distance(position, node.position); if (d < best) { best = d; nearest = node; } } return nearest; }
   private pointKey(position: Vec3): string { return `${position.x}/${position.y}/${position.z}`; }
   private buildingNode(building: Building) { return this.doorNodes.get(building.id)!; }
+  private resetRoadRouting(): void {
+    this.routingState = undefined; this.routingRevision = -1; this.routeCache.clear(); this.walkingTrees.clear();
+    this.citizenRoadRevisions = new WeakMap(this.state.citizens.map(c => [c, roadRevision(this.state)] as const));
+  }
+  private ensureRoadRouting(): number {
+    const revision = roadRevision(this.state);
+    if (this.routingState !== this.state || this.routingRevision !== revision) {
+      this.routeCache.clear(); this.walkingTrees.clear(); this.routingState = this.state; this.routingRevision = revision;
+    }
+    return revision;
+  }
+  private roadRouteWaiting(citizen: Citizen): void { citizen.state = 'roadWaiting'; }
+  private refreshCitizenRoadRoute(citizen: Citizen): void {
+    const revision = this.ensureRoadRouting(), oldRevision = this.citizenRoadRevisions.get(citizen);
+    this.citizenRoadRevisions.set(citizen, revision);
+    if (oldRevision === undefined || oldRevision === revision || this.runtime.riders[citizen.id] || this.state.extension?.actorProfiles[citizen.id]?.alive === false) return;
+    const roadTask = this.state.roadworks && roadworkTask(this, citizen.id);
+    if (roadTask) {
+      citizen.route = this.routeToRoadwork(citizen, roadTask); citizen.routeIndex = 1;
+      citizen.state = citizen.route.length > 1 || distance(citizen.position, roadTask.point) < .05 ? 'roadWorkMoving' : 'roadWorkWaiting'; return;
+    }
+    const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
+    if (!destination) return;
+    const dispatch = this.runtime.dispatches[citizen.id], crime = dispatch && this.state.crimes.find(c => c.id === dispatch.crimeId);
+    // A real investigator already at this incident has no remaining travel
+    // obligation. A road revision must not send it back to the facility anchor.
+    if (crime && dispatch?.arrived && distance(citizen.position, crime.position) <= 3) return;
+    if (crime) this.rebuildDispatchRoute(citizen, crime, destination);
+    else this.setDestination(citizen, destination, true);
+  }
+  private rebuildDispatchRoute(officer: Citizen, crime: Crime, destination: Building): void {
+    // The nearest facility is an original routing anchor, never the crime's
+    // physical arrival point. Validate its full tail before paying a response.
+    const base = this.routeFromCitizen(officer, destination), route = [...base, copy(crime.position)];
+    officer.destinationId = destination.id; officer.route = route; officer.routeIndex = 1;
+    if ((base.length > 1 || distance(officer.position, destination.door) < .05) && this.roadPrefixAllowed(officer, route)) {
+      officer.state = 'responding'; return;
+    }
+    // A captured occupant may still leave in its original permitted direction.
+    // The dispatch, facility target and crime remain saved while its tail waits.
+    const exit = roadExitRoute(this.world, this.state, officer.id, officer.position);
+    if (exit && exit.points.length > 1 && this.roadPrefixAllowed(officer, exit.points)) {
+      officer.route = exit.points.map(copy); officer.routeIndex = 1; officer.state = 'responding'; return;
+    }
+    this.roadRouteWaiting(officer);
+  }
+  private roadPrefixAllowed(citizen: Citizen, points: Vec3[]): boolean {
+    return points.every((p, i) => !i || roadMovementAllowed(this.world, this.state, citizen.id, points[i - 1], p));
+  }
   private cacheRoute(key: string, points: Vec3[]): void { if (this.routeCache.size >= 2048) this.routeCache.delete(this.routeCache.keys().next().value!); this.routeCache.set(key, points); }
   private walkingTree(start: string) {
+    this.ensureRoadRouting();
     const cached = this.walkingTrees.get(start); if (cached) { this.walkingTrees.delete(start); this.walkingTrees.set(start, cached); return cached; }
     const costs = new Map<string, number>([[start, 0]]), previous = new Map<string, { node: string; edge: NetworkEdge }>();
     const heap: { node: string; cost: number }[] = [];
     const push = (entry: { node: string; cost: number }) => { heap.push(entry); let index = heap.length - 1; while (index) { const parent = (index - 1) >> 1; if (heap[parent].cost <= entry.cost) break; heap[index] = heap[parent]; index = parent; } heap[index] = entry; };
     const pop = () => { const first = heap[0], last = heap.pop()!; if (heap.length) { let index = 0; while (index * 2 + 1 < heap.length) { const left = index * 2 + 1, right = left + 1, child = right < heap.length && heap[right].cost < heap[left].cost ? right : left; if (heap[child].cost >= last.cost) break; heap[index] = heap[child]; index = child; } heap[index] = last; } return first; };
     push({ node: start, cost: 0 });
-    while (heap.length) { const next = pop(); if (next.cost !== costs.get(next.node)) continue; for (const neighbor of this.neighbors.get(next.node) ?? []) { if (!['road', 'bridge'].includes(neighbor.edge.mode)) continue; const cost = next.cost + neighbor.edge.length; if (cost < (costs.get(neighbor.node) ?? Infinity)) { costs.set(neighbor.node, cost); previous.set(neighbor.node, { node: next.node, edge: neighbor.edge }); push({ node: neighbor.node, cost }); } } }
+    while (heap.length) { const next = pop(); if (next.cost !== costs.get(next.node)) continue; for (const neighbor of this.neighbors.get(next.node) ?? []) { if (!['road', 'bridge'].includes(neighbor.edge.mode) || !isRoadOpen(this.state, neighbor.edge.id)) continue; const cost = next.cost + neighbor.edge.length; if (cost < (costs.get(neighbor.node) ?? Infinity)) { costs.set(neighbor.node, cost); previous.set(neighbor.node, { node: next.node, edge: neighbor.edge }); push({ node: neighbor.node, cost }); } } }
     const tree = { costs, previous }; if (this.walkingTrees.size >= 384) this.walkingTrees.delete(this.walkingTrees.keys().next().value!); this.walkingTrees.set(start, tree); return tree;
   }
   private nodePath(from: string, to: string): Vec3[] {
+    this.ensureRoadRouting();
     const key = `node:${from}>${to}`, cached = this.routeCache.get(key); if (cached) return cached;
     const previous = this.walkingTree(from).previous, legs: { node: string; edge: NetworkEdge }[] = []; let cursor = to;
     while (cursor !== from && previous.has(cursor)) { const leg = previous.get(cursor)!; legs.unshift(leg); cursor = leg.node; }
@@ -793,6 +905,8 @@ export class Simulation implements SimulationAPI {
     this.cacheRoute(key, points); return points;
   }
   private walkingAnchors(citizen: Citizen): { node: string; cost: number; points: Vec3[] }[] {
+    const permittedExit = roadExitRoute(this.world, this.state, citizen.id, citizen.position);
+    if (permittedExit) return [{ node: permittedExit.exitNodeId, cost: permittedExit.points.slice(1).reduce((n, p, i) => n + distance(permittedExit.points[i], p), 0), points: permittedExit.points.map(copy) }];
     const interior = this.world.buildings.find(b => b.floorPlanProfile === FLOOR_PLAN_PROFILE ? !!this.floorPlanPresence(b, citizen.position) : this.isNearBuilding(b, citizen.position, 0));
     if (interior) {
       if (interior.floorPlanProfile === FLOOR_PLAN_PROFILE) {
@@ -800,26 +914,28 @@ export class Simulation implements SimulationAPI {
         const points = this.floorPlanRoute(interior, presence.floor, 0, citizen.position, interior.door);
         if (!points) return [];
         const node = this.buildingNode(interior); points.push(copy(node.position));
-        return [{ node: node.id, cost: points.slice(1).reduce((n, p, i) => n + distance(points[i], p), 0), points }];
+        return this.roadPrefixAllowed(citizen, points) ? [{ node: node.id, cost: points.slice(1).reduce((n, p, i) => n + distance(points[i], p), 0), points }] : [];
       }
       const floor = Math.floor((citizen.position.y - interior.position.y + .01) / (interior.height / interior.floors));
       const points = [copy(citizen.position), ...(floor ? [getStairPosition(interior, floor), getStairPosition(interior, 0)] : []), copy(interior.door)];
       const node = this.buildingNode(interior); points.push(copy(node.position)); let cost = 0; for (let i = 1; i < points.length; i++) cost += distance(points[i - 1], points[i]);
-      return [{ node: node.id, cost, points }];
+      return this.roadPrefixAllowed(citizen, points) ? [{ node: node.id, cost, points }] : [];
     }
     // Reuse the street segment the citizen actually occupies. Replanning must
     // not send an actor back to an unrelated nearby building's entire route.
     const anchors: { node: string; cost: number; points: Vec3[] }[] = [], route = citizen.route ?? [], index = citizen.routeIndex ?? 0;
-    for (const direction of [-1, 1]) { const points = [copy(citizen.position)]; let cost = 0; for (let i = direction < 0 ? index - 1 : index; i >= 0 && i < route.length; i += direction) { cost += distance(points.at(-1)!, route[i]); points.push(copy(route[i])); const node = this.nodeAt.get(this.pointKey(route[i])); if (node) { anchors.push({ node, cost, points }); break; } } }
+    for (const direction of [-1, 1]) { const points = [copy(citizen.position)]; let cost = 0; for (let i = direction < 0 ? index - 1 : index; i >= 0 && i < route.length; i += direction) { if (!roadMovementAllowed(this.world, this.state, citizen.id, points.at(-1)!, route[i])) break; cost += distance(points.at(-1)!, route[i]); points.push(copy(route[i])); const node = this.nodeAt.get(this.pointKey(route[i])); if (node) { anchors.push({ node, cost, points }); break; } } }
     if (anchors.length) return anchors;
-    const node = this.nearestNode(citizen.position); return [{ node: node.id, cost: distance(citizen.position, node.position), points: [copy(citizen.position), copy(node.position)] }];
+    const node = this.nearestNode(citizen.position), points = [copy(citizen.position), copy(node.position)];
+    return this.roadPrefixAllowed(citizen, points) ? [{ node: node.id, cost: distance(citizen.position, node.position), points }] : [];
   }
   private routeFromCitizen(citizen: Citizen, destination: Building, anchors = this.walkingAnchors(citizen)): Vec3[] {
     const target = this.buildingNode(destination);
     const best = [...anchors].sort((a, b) => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity) - b.cost - (this.walkingTree(b.node).costs.get(target.id) ?? Infinity))[0];
     if (!best) return [copy(citizen.position)];
     const network = this.nodePath(best.node, target.id); if (!network.length) return [copy(citizen.position)];
-    return [...best.points, ...network.slice(1), copy(destination.door)];
+    const points = [...best.points, ...network.slice(1), copy(destination.door)];
+    return this.roadPrefixAllowed(citizen, points) ? points : [copy(citizen.position)];
   }
   buildingTravelDistance(fromId: string, toId: string): number {
     const from = this.buildings.get(fromId), to = this.buildings.get(toId); if (!from || !to) return Infinity;
@@ -828,6 +944,7 @@ export class Simulation implements SimulationAPI {
   }
   private walkingDistance(citizen: Citizen, destination: Building): number { const target = this.buildingNode(destination); return Math.min(...this.walkingAnchors(citizen).map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); }
   private route(from: Building, to: Building): Vec3[] {
+    this.ensureRoadRouting();
     const key = `${from.id}>${to.id}`; const cached = this.routeCache.get(key); if (cached) return cached;
     const network = this.nodePath(this.buildingNode(from).id, this.buildingNode(to).id);
     const points = network.length ? [copy(from.door), ...network, copy(to.door)] : [];
@@ -849,6 +966,7 @@ export class Simulation implements SimulationAPI {
       && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
+    this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
       const action = this.runtime.activities[citizen.id], purpose = this.activityPointPurpose(action);
@@ -887,7 +1005,7 @@ export class Simulation implements SimulationAPI {
       }
       const outside = this.routeFromCitizen(citizen, destination);
       citizen.destinationId = destination.id; citizen.route = interior && outside.length > 1 ? [...outside, ...interior.slice(1)] : [copy(citizen.position)];
-      citizen.routeIndex = 1; citizen.state = interior && outside.length > 1 ? 'moving' : 'unreachable'; return;
+      citizen.routeIndex = 1; citizen.state = interior && outside.length > 1 ? 'moving' : this.world.edges.some(edge => !isRoadOpen(this.state, edge.id)) ? 'roadWaiting' : 'unreachable'; return;
     }
     const row = hash(citizen.id) % 5 - 2;
     const role = this.citizenIdentity(citizen);
@@ -897,7 +1015,7 @@ export class Simulation implements SimulationAPI {
     const dimensions = getFloorDimensions(destination, floor), stair = getStairPosition(destination, floor);
     const roomPoint = { x: destination.position.x + row * Math.min(1.8, dimensions.width / 12), y: stair.y, z: destination.position.z + Math.min(1.2, dimensions.depth / 10) };
     const interior: Vec3[] = floor > 0 ? [getStairPosition(destination, 0), stair, roomPoint] : [roomPoint];
-    const outside = this.routeFromCitizen(citizen, destination); citizen.destinationId = destination.id; citizen.route = outside.length > 1 ? [...outside, ...interior] : outside; citizen.routeIndex = 1; citizen.state = 'moving';
+    const outside = this.routeFromCitizen(citizen, destination); citizen.destinationId = destination.id; citizen.route = outside.length > 1 ? [...outside, ...interior] : outside; citizen.routeIndex = 1; citizen.state = outside.length > 1 ? 'moving' : this.world.edges.some(edge => !isRoadOpen(this.state, edge.id)) ? 'roadWaiting' : 'unreachable';
   }
   private considerPrivateOpportunity(citizen: Citizen): void {
     const labor = this.runtime.publicLabor;
@@ -967,13 +1085,74 @@ export class Simulation implements SimulationAPI {
     candidates.sort((a, b) => b.score - a.score);
     const chosen = candidates[0]; return chosen ? { destination: chosen.destination, activity: chosen.activity } : { destination: home, activity: 'rest' };
   }
+  private routeToRoadwork(citizen: Citizen, task: NonNullable<ReturnType<typeof roadworkTask>>): Vec3[] {
+    const site = task.buildingId ? this.buildings.get(task.buildingId) : undefined;
+    if (site) {
+      const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
+      const actualPoint = this.buildingFunctionPoints(site).find(p => p.purpose === 'sale' && distance(p.position, task.point) < 1e-7);
+      if (site.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+        if (!actualPoint || !Array.from({ length: actualPoint.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(site, floor, person))) return [copy(citizen.position)];
+        const presence = this.floorPlanPresence(site, citizen.position), interior = this.floorPlanRoute(site, presence?.floor ?? 0, actualPoint.floor, presence ? citizen.position : site.door, task.point);
+        if (!interior) return [copy(citizen.position)];
+        if (presence) return interior;
+        const outside = this.routeFromCitizen(citizen, site); return outside.length > 1 ? [...outside, ...interior.slice(1)] : [copy(citizen.position)];
+      }
+    }
+    const target = this.world.nodes.find(n => n.id === task.nodeId); if (!target) return [copy(citizen.position)];
+    const anchors = this.walkingAnchors(citizen), candidates = anchors.map(anchor => ({ anchor, cost: anchor.cost + (this.walkingTree(anchor.node).costs.get(target.id) ?? Infinity) })).filter(item => finite(item.cost)).sort((a, b) => a.cost - b.cost);
+    if (!candidates.length) return [copy(citizen.position)];
+    const best = candidates[0].anchor, network = this.nodePath(best.node, target.id), points = [...best.points, ...network.slice(1), copy(task.point)];
+    return network.length && this.roadPrefixAllowed(citizen, points) ? points : [copy(citizen.position)];
+  }
+  private roadworkTravelCost(citizenId: string, nodeId: string, point: Vec3): number {
+    const citizen = this.state.citizens.find(c => c.id === citizenId); if (!citizen) return Infinity;
+    const site = this.world.buildings.find(b => this.buildingFunctionPoints(b).some(p => p.purpose === 'sale' && distance(p.position, point) < 1e-7));
+    const route = this.routeToRoadwork(citizen, { jobId: 'reachability', nodeId, point, stage: site ? 'pickup' : 'worksite', buildingId: site?.id, acceptedAt: this.state.extension!.lastUpdate });
+    return distance(citizen.position, point) < .05 ? 0 : route.length <= 1 ? Infinity : route.slice(1).reduce((sum, p, i) => sum + distance(route[i], p), 0);
+  }
+  private advanceRoadworker(citizen: Citizen, task: NonNullable<ReturnType<typeof roadworkTask>>, availableMinutes: number): void {
+    const end = citizen.route?.at(-1);
+    if (!end || distance(end, task.point) > 1e-7 || citizen.state === 'roadWorkWaiting') { citizen.route = this.routeToRoadwork(citizen, task); citizen.routeIndex = 1; }
+    if ((citizen.route?.length ?? 0) <= 1 && distance(citizen.position, task.point) > .05) { citizen.state = 'roadWorkWaiting'; return; }
+    // Deferred pre-task minutes still decay needs, but never move a newly
+    // assigned worker or become this task's onsite window.
+    const taskMinutes = Math.min(availableMinutes, this.minutes, Math.max(0, this.state.extension!.lastUpdate - task.acceptedAt));
+    let remaining = 0, previous = citizen.position;
+    for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remaining += distance(previous, next); previous = next; }
+    citizen.state = 'roadWorkMoving';
+    if (!this.moveCitizen(citizen, taskMinutes)) { if (String(citizen.state) === 'roadWaiting') citizen.state = 'roadWorkWaiting'; return; }
+    const arrivedMinutes = Math.min(this.minutes, Math.max(0, taskMinutes - remaining / (this.state.weather === '雨' ? 3.1 : 4.2)));
+    if (distance(citizen.position, task.point) > .05) { citizen.state = 'roadWorkWaiting'; return; }
+    citizen.state = task.stage === 'pickup' ? 'roadPickup' : 'roadWorking';
+    if (arrivedMinutes <= 0) return;
+    const observedClock = this.state.extension!.lastUpdate;
+    const event: Event = Object.freeze({ type: 'roadwork-presence', citizenId: citizen.id, laborJobId: task.jobId, nodeId: task.nodeId, purpose: task.stage, activityWindowStartAt: observedClock - arrivedMinutes, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+    canonicalRoadworkPresence.add(event); this.bus.emit(event);
+  }
   private moveCitizen(citizen: Citizen, minutes: number) {
     // `minutes` includes the tier's skipped ticks. One calendar minute represents
     // one simulated real second at 1×, for every tier, including police routes.
+    this.citizenRoadMovementRejected.delete(citizen);
+    this.refreshCitizenRoadRoute(citizen);
+    if (citizen.state === 'roadWaiting' || citizen.state === 'roadWorkWaiting') return false;
     let movement = minutes * (this.state.weather === '雨' ? 3.1 : 4.2);
     const route = citizen.route ?? []; let index = citizen.routeIndex ?? 0;
-    while (movement > 0 && index < route.length) { const next = route[index]; const d = distance(citizen.position, next); if (d <= movement) { citizen.position.x = next.x; citizen.position.y = next.y; citizen.position.z = next.z; movement -= d; index++; } else { const t = movement / d; citizen.position.x += (next.x - citizen.position.x) * t; citizen.position.y += (next.y - citizen.position.y) * t; citizen.position.z += (next.z - citizen.position.z) * t; movement = 0; } }
+    while (movement > 0 && index < route.length) {
+      const next = route[index], d = distance(citizen.position, next), t = d > movement ? movement / d : 1;
+      const proposed = { x: citizen.position.x + (next.x - citizen.position.x) * t, y: citizen.position.y + (next.y - citizen.position.y) * t, z: citizen.position.z + (next.z - citizen.position.z) * t };
+      if (!roadMovementAllowed(this.world, this.state, citizen.id, citizen.position, proposed)) {
+        citizen.routeIndex = index; this.citizenRoadMovementRejected.add(citizen);
+        const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
+        const dispatch = this.runtime.dispatches[citizen.id], crime = dispatch && this.state.crimes.find(c => c.id === dispatch.crimeId);
+        if (crime && destination) this.rebuildDispatchRoute(citizen, crime, destination);
+        else { if (!citizen.state.startsWith('roadWork') && destination) this.setDestination(citizen, destination, true); if (citizen.state !== 'moving') this.roadRouteWaiting(citizen); }
+        return false;
+      }
+      if (d <= movement) { citizen.position.x = next.x; citizen.position.y = next.y; citizen.position.z = next.z; releaseRoadExitPermit(this.world, this.state, citizen.id, citizen.position); movement -= d; index++; }
+      else { citizen.position.x += (next.x - citizen.position.x) * t; citizen.position.y += (next.y - citizen.position.y) * t; citizen.position.z += (next.z - citizen.position.z) * t; movement = 0; }
+    }
     citizen.routeIndex = index;
+    releaseRoadExitPermit(this.world, this.state, citizen.id, citizen.position);
     return index >= route.length;
   }
   private people() {
@@ -986,8 +1165,8 @@ export class Simulation implements SimulationAPI {
       const citizen = this.state.citizens[i];
       // At most seven persisted new research jobs request fine task processing.
       // Preserve tier, ordinary actors' frequency, pending needs and real wages.
-      const researchTask = researchActors.has(citizen.id);
-      const frequency = researchTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
+      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1001,6 +1180,7 @@ export class Simulation implements SimulationAPI {
       citizen.needs.social = clamp(citizen.needs.social - elapsed * .015);
       citizen.needs.fun = clamp(citizen.needs.fun - elapsed * .02);
       if ((this.state.extension?.actorProfiles[citizen.id]?.age ?? 20) < 6) { citizen.state = 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + elapsed * .12); continue; }
+      this.refreshCitizenRoadRoute(citizen);
       const dispatch = this.runtime.dispatches[citizen.id];
       if (dispatch) {
         const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
@@ -1009,9 +1189,21 @@ export class Simulation implements SimulationAPI {
           if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
           delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
         }
-        else { this.registerAttendance(citizen, elapsed); citizen.state = 'responding'; if (this.moveCitizen(citizen, elapsed)) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); } continue; }
+        else {
+          if (citizen.state === 'roadWaiting') continue;
+          citizen.state = 'responding'; const arrived = this.moveCitizen(citizen, elapsed), atCrime = arrived && distance(citizen.position, crime.position) <= 3;
+          if (arrived && !atCrime) {
+            // An old imported or shortened route ending at a facility/exit is
+            // not evidence that the officer reached the actual incident.
+            const destination = citizen.destinationId && this.buildings.get(citizen.destinationId);
+            if (destination) this.rebuildDispatchRoute(citizen, crime, destination); else this.roadRouteWaiting(citizen);
+          }
+          if (String(citizen.state) !== 'roadWaiting' && !this.citizenRoadMovementRejected.has(citizen) && (!arrived || atCrime)) this.registerAttendance(citizen, elapsed);
+          if (atCrime) { citizen.state = 'investigating'; this.bus.emit({ type: 'officer-arrived', citizenId: citizen.id, crimeId: crime.id }); }
+          continue;
+        }
       }
-      this.considerPrivateOpportunity(citizen);
+      if (!roadTask && citizen.state !== 'roadWaiting') this.considerPrivateOpportunity(citizen);
       const home = this.buildings.get(citizen.homeId)!; const work = this.buildings.get(citizen.workId)!;
       let availableMinutes = elapsed;
       const riding = this.runtime.riders[citizen.id];
@@ -1029,6 +1221,10 @@ export class Simulation implements SimulationAPI {
         const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId);
         if (ongoing) this.setDestination(citizen, ongoing, true);
       }
+      if (roadTask) { this.advanceRoadworker(citizen, roadTask, availableMinutes); continue; }
+      if (citizen.state.startsWith('roadWork') || citizen.state === 'roadPickup') {
+        const ongoing = citizen.destinationId && this.buildings.get(citizen.destinationId); if (ongoing) this.setDestination(citizen, ongoing, true);
+      }
       let destination: Building;
       const sleeping = hour >= 22 || hour < 6;
       const shift = hour >= 7.5 && hour < 17.5;
@@ -1038,18 +1234,19 @@ export class Simulation implements SimulationAPI {
       const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
       const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
       if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
-      const committedNeed = !!citizen.destinationId && (previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
+      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
       if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
       else if (!committedNeed && (!citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
         const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
       this.setDestination(citizen, destination);
+      if (citizen.state === 'roadWaiting') continue;
       if (citizen.state === 'unreachable') { citizen.destinationId = null; continue; }
       if (distance(citizen.position, destination.door) > 200) {
         const walkingSpeed = this.state.weather === '雨' ? 3.1 : 4.2;
         const walkingTime = this.walkingDistance(citizen, destination) / walkingSpeed;
         const transit = this.state.vehicles.find(v => {
-          if (v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
+          if (!isRoadOpen(this.state, v.edgeId) || v.state === 'roadClosed' || v.state === 'moving' || v.kind === 'flight' || citizen.money < 4 || v.passengers >= this.passengerCapacity(v) || distance(v.position, citizen.position) > 40) return false;
           const edge = this.edges.get(v.edgeId)!; const end = this.world.nodes.find(n => n.id === (v.direction > 0 ? edge.to : edge.from))!;
           const target = this.buildingNode(destination), remainingWalk = (this.walkingTree(end.id).costs.get(target.id) ?? Infinity) + distance(target.position, destination.door);
           const rideTime = Math.max(0, v.nextDeparture - this.now) + edge.length * (v.direction > 0 ? 1 - v.progress : v.progress) / Math.max(1, v.speed * this.state.energy / 100);
@@ -1396,6 +1593,7 @@ export class Simulation implements SimulationAPI {
     return !!presence && (presence.kind === 'room' || presence.kind === 'stairs') && this.buildingFunctionPoints(building).some(point => point.floor === presence.floor && (!purpose || point.purpose === purpose) && canAccessFloor(building, point.floor, person) && distance(position, point.position) <= radius);
   }
   private floorPlanRoute(building: Building, fromFloor: number, toFloor: number, from: Vec3, to: Vec3): Vec3[] | null {
+    this.ensureRoadRouting();
     const key = `floor:${building.id}:${fromFloor}>${toFloor}:${this.pointKey(from)}>${this.pointKey(to)}`;
     const cached = this.state.voxels.length === 0 ? this.routeCache.get(key) : undefined;
     if (cached) return cached.map(copy);
@@ -1610,7 +1808,7 @@ export class Simulation implements SimulationAPI {
       return success(`${citizen.name}记住了这次${command.type}，关系：${relation.type}，好感${relation.affection.toFixed(0)}。`);
     }
     if (command.type === 'ride' || command.type === 'drive') {
-      const vehicle = this.state.vehicles.find(v => v.id === command.targetId); if (!vehicle || distance(p.position, vehicle.position) > 35) return fail('请到车辆或站点附近上车。'); if (p.vehicleId) return fail('请先离开当前载具。'); if (vehicle.state === 'moving') return fail('请等车辆进站停稳后上车。');
+      const vehicle = this.state.vehicles.find(v => v.id === command.targetId); if (!vehicle || distance(p.position, vehicle.position) > 35) return fail('请到车辆或站点附近上车。'); if (p.vehicleId) return fail('请先离开当前载具。'); if (!isRoadOpen(this.state, vehicle.edgeId) || vehicle.state === 'roadClosed') return fail('此路段已关闭，请等候真实改道或修复后上车。'); if (vehicle.state === 'moving') return fail('请等车辆进站停稳后上车。');
       if (vehicle.passengers >= this.passengerCapacity(vehicle)) return fail('载具已满员，请等下一班。');
       if (command.type === 'drive' && (!['driver', 'police', 'soldier'].some(role => this.hasIdentity(role as Role)) || vehicle.kind !== 'road' && !(this.hasIdentity('driver') && vehicle.kind === 'flight'))) return fail('需驾驶员或执勤人员资格，且载具须符合许可。');
       const cost = command.type === 'drive' ? 0 : vehicle.kind === 'flight' ? 45 : 4; if (p.money < cost) return fail('票款不足。'); p.money -= cost; if (cost) this.bus.emit({ type: 'transit-fare', amount: cost, citizenId: 'player', vehicleId: vehicle.id }); p.vehicleId = vehicle.id; vehicle.passengers++; p.position = copy(vehicle.position); p.inventory.driving = command.type === 'drive' ? 1 : 0; this.runtime.driving = { vehicleId: command.type === 'drive' ? vehicle.id : null, throttle: 0, turn: 0, brake: true, speed: 0 }; if (command.type === 'drive') vehicle.nextDeparture = this.now; return success(command.type === 'drive' ? '取得载具操作权：W加速、S减速、空格刹车、A/D选择路口方向，须遵守信号。' : '已登车，角色位置将随真实载具移动。');
@@ -1663,6 +1861,7 @@ export class Simulation implements SimulationAPI {
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
       if (s.hygiene !== undefined || r.hygieneVersion !== undefined || s.pathology !== undefined || r.pathologyVersion !== undefined) ensure(r.persistedModules !== undefined, 'hygiene/pathology persisted manifest');
+      if (s.roadNetwork !== undefined || r.roadNetworkVersion !== undefined || s.roadworks !== undefined || r.roadworksVersion !== undefined) ensure(r.persistedModules !== undefined, 'road network and roadwork persisted manifest');
       if (s.power !== undefined || r.powerVersion !== undefined || r.legacyEnergyContractVersion !== undefined || r.legacyEnergyContract !== undefined) ensure(r.persistedModules !== undefined, 'power persisted manifest');
       if (s.governance !== undefined && s.governance !== null || r.governanceVersion !== undefined) ensure(r.persistedModules !== undefined, 'governance persisted manifest');
       if (s.governance !== undefined) ensure(r.campaign === null && s.policyPending === undefined, 'new governance cannot duplicate legacy political queues');
@@ -1727,6 +1926,10 @@ export class Simulation implements SimulationAPI {
       if (s.hygiene !== undefined) ensure(s.hygiene && r.hygieneVersion === 1, 'hygiene custody marker');
       if (r.pathologyVersion !== undefined) ensure(r.pathologyVersion === 1 && s.pathology, 'pathology provenance module');
       if (s.pathology !== undefined) ensure(s.pathology && r.pathologyVersion === 1, 'pathology provenance marker');
+      if (r.roadNetworkVersion !== undefined) ensure(r.roadNetworkVersion === 1 && s.roadNetwork, 'road network provenance module');
+      if (s.roadNetwork !== undefined) ensure(s.roadNetwork && r.roadNetworkVersion === 1, 'road network provenance marker');
+      if (r.roadworksVersion !== undefined) ensure(r.roadworksVersion === 1 && s.roadworks, 'roadwork custody module');
+      if (s.roadworks !== undefined) ensure(s.roadworks && r.roadworksVersion === 1, 'roadwork custody marker');
       if (r.powerVersion !== undefined) ensure(r.powerVersion === 1 && s.power, 'power body marker');
       if (s.power !== undefined) ensure(s.power && r.powerVersion === 1, 'power persistent marker');
       validateLegacyEnergyContract(r, s, this.world);
@@ -1820,6 +2023,7 @@ export class Simulation implements SimulationAPI {
         for (const budget of budgets.filter(budget => ['education', 'health', 'transport'].includes(budget.purpose))) ensure(s.culture.orders.some((order: ServiceOrder) => order.id === budget.id && order.approvedAt !== null), 'civic authorization must retain its service order');
       }
       validatePowerBudgetCrossReferences(s, r.publicBudgets ?? []);
+      validateRoadworksBudgetCrossReferences(s, r.publicBudgets ?? []);
       ensure(r.freight && typeof r.freight === 'object' && !Array.isArray(r.freight), 'freight'); for (const [id, amount] of Object.entries(r.freight)) { ensure(districtIds.has(id), 'freight district'); money(amount, 'freight amount'); }
       if (r.shopLabor !== undefined) { ensure(r.shopLabor && typeof r.shopLabor === 'object' && !Array.isArray(r.shopLabor), 'shop labor'); for (const [id, minutes] of Object.entries(r.shopLabor)) { ensure(shopIds.has(id), 'shop labor identity'); number(minutes, 0, 100000, 'shop labor minutes'); } }
       if (r.retailSalesSinceBatch !== undefined) {
@@ -1859,7 +2063,7 @@ export class Simulation implements SimulationAPI {
       }
       // Validation finishes before either live object is replaced: rejected saves are atomic.
       for (const validator of this.saveValidators) validator(s as SimState);
-      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } this.employment.clear(); this.refreshWorkforce(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
+      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
     } catch (error) { return { ok: false, message: `读档失败：${error instanceof Error ? error.message : '存档格式错误'}` }; }
   }
 }

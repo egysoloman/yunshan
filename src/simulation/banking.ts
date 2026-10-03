@@ -183,6 +183,7 @@ export function settleDeceasedAccount(simulation: Simulation, actorId: string, h
     || actorId === 'player' && (s.education?.course?.escrow ?? 0) > 0
     || actorId === 'player' && s.power?.repairs.some(job => job.payerId === 'player' && job.escrow > 0)
     || actorId === 'player' && s.hygiene?.jobs.some(job => job.payerId === 'player' && job.escrow > 0)
+    || actorId === 'player' && s.roadworks?.jobs.some(job => job.payerId === 'player' && job.escrow > 0)
     || actorId === 'player' && bank.legacyInvestmentPrincipal > 0;
   if (account.loanPrincipal + account.loanInterest > EPS && hasUnsoldEstateAssets) {
     // A share quote is not cash. The estate executor must find a funded buyer

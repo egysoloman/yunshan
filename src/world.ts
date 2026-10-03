@@ -1,4 +1,5 @@
-import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, TransportMode, Vec3, WorldDefinition } from './types';
+import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
+import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
@@ -295,12 +296,13 @@ export function samplePolyline(points: Vec3[], progress: number): Vec3 {
 }
 
 /** Bidirectional Dijkstra; an optional mode restricts the network being used. */
-export function findPath(world: WorldDefinition, fromNodeId: string, toNodeId: string, mode?: TransportMode): NetworkNode[] {
+export function findPath(world: WorldDefinition, fromNodeId: string, toNodeId: string, mode?: TransportMode, roadState?: Pick<SimState, 'roadNetwork'>): NetworkNode[] {
   const nodeMap = new Map(world.nodes.map(n => [n.id, n]));
   if (!nodeMap.has(fromNodeId) || !nodeMap.has(toNodeId)) return [];
   const adjacency = new Map<string, { to: string; length: number }[]>();
   for (const edge of world.edges) {
     if (mode && edge.mode !== mode) continue;
+    if (roadState && !isRoadOpen(roadState, edge.id)) continue;
     for (const [from, to] of [[edge.from, edge.to], [edge.to, edge.from]]) {
       const list = adjacency.get(from) ?? []; list.push({ to, length: edge.length }); adjacency.set(from, list);
     }
