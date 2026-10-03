@@ -1,8 +1,12 @@
 import type { Simulation } from '../simulation';
-import { canAccessFloor } from '../access';
-import { getBuildingBody } from '../architecture-floor-plan';
-import { beginClinicalTreatment } from './clinical';
-import type { AuditCase, Building, BuildingFunctionPoint, CityExtensionState, Command, CommandResult, Company, LifeProfile, Player, Role, Technology, Vec3 } from '../types';
+import { canAccessFloor, getFloorDimensions } from '../access';
+import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody } from '../architecture-floor-plan';
+import { getWalkHeight } from '../world';
+import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
+import { beginClinicalTreatment, clinicalAtPosition } from './clinical';
+import { publicFloor } from './culture';
+import { claimActorActivityMinutes } from './activity-minutes';
+import type { AuditCase, Building, BuildingFunctionPoint, CityExtensionState, Command, CommandResult, Company, LifeProfile, Player, ResearchJob, AttendedResearchJob, Role, SimState, Technology, Vec3, WorldDefinition } from '../types';
 
 export const TECHNOLOGY_SECTORS = ['traffic', 'energy', 'information', 'security', 'medicine', 'agriculture', 'manufacturing'] as const;
 export const INGREDIENTS = { grain: 8, vegetable: 6, fish: 14 } as const;
@@ -21,7 +25,9 @@ interface ExtensionRuntime {
   nextLedgerAt: number;
   lastTreasury: number;
   cooldowns: Record<string, number>;
-  researchJobs: Partial<Record<Sector, { startedAt: number; finishAt: number; budget: number; actorId?: string }>>;
+  researchJobs: Partial<Record<Sector, ResearchJob>>;
+  researchLaborVersion?: 1;
+  legacyResearchSectors?: Sector[];
   companyCursors: Record<string, { revenue: number; profit: number }>;
   deprivation: Record<string, number>;
   diversions: Record<string, number>;
@@ -33,10 +39,42 @@ const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const dictionary = (n: unknown): n is Record<string, any> => !!n && typeof n === 'object' && !Array.isArray(n);
 const sectorNames: Record<Sector, string> = { traffic: '交通', energy: '能源', information: '信息', security: '治安', medicine: '医疗', agriculture: '农业', manufacturing: '制造' };
+export interface ResearchProgressInfo { actorId: string; siteId: string | null; legacy: boolean; workedMinutes: number | null; remainingMinutes: number; state: 'active' | 'paused'; pauseReason: string }
+/** Read-only presentation data. New jobs never infer work from finishAt. */
+export function researchProgressInfo(state: Pick<SimState, 'extension'>, sector: Sector): ResearchProgressInfo | null {
+  const extension = state.extension as Extension | undefined, job = extension?.runtime?.researchJobs[sector];
+  if (!extension || !job) return null;
+  return job.laborVersion === 1
+    ? { actorId: job.actorId, siteId: job.siteId, legacy: false, workedMinutes: job.workedMinutes, remainingMinutes: Math.max(0, 120 - job.workedMinutes), state: job.state, pauseReason: job.pauseReason }
+    : { actorId: job.actorId ?? 'player', siteId: null, legacy: true, workedMinutes: null, remainingMinutes: Math.max(0, job.finishAt - extension.lastUpdate), state: 'active', pauseReason: '' };
+}
+/** Only an activity capable of using this actor at its actual site conflicts.
+ * Kept callbacks read-only so Simulation and UI query the same status rules. */
+export function researchPlayerContextReason(state: SimState, world: WorldDefinition, atSite: (site: Building, purpose?: BuildingFunctionPoint['purpose']) => boolean, phaseMinutes = 0): string {
+  const player = state.player, identities = [player.role, ...(player.identities ?? [])], work = state.playerLabor?.job;
+  const end = state.hour * 60, start = end - Math.max(0, phaseMinutes), workOpen = phaseMinutes > 0
+    ? Math.max(0, Math.min(end, 21 * 60) - Math.max(start, 6 * 60)) > 0 : state.hour >= 6 && state.hour < 21;
+  const workSite = work && world.buildings.find(site => site.id === work.siteId);
+  if (work && ['working', 'paused'].includes(work.status) && workSite && workOpen && identities.includes(work.role) && player.needs.hunger >= 12 && player.needs.fatigue >= 15 && atSite(workSite, 'work')) return '当前现场有未结束工班，不能重复使用劳动时间。';
+  const rest = state.homeRest?.session, home = rest && world.buildings.find(site => site.id === rest.buildingId);
+  if (rest?.state === 'active' && home && player.homeId === home.id && homeRestPointAt(home, player.position, player, rest.pointId)) return '正在原床侧休息，不能重复使用劳动时间。';
+  if (state.clinical?.orders.some(order => order.patientId === 'player' && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state) && (() => { const site = world.buildings.find(site => site.id === order.siteId); return !!site && clinicalAtPosition(site, player.position, player); })())) return '正在原诊疗站点参与治疗，请先离开或结束。';
+  const project = state.culture?.project, studio = project && world.buildings.find(site => site.id === project.siteId);
+  const publicAt = (site: Building) => publicFloor(site, Math.floor((player.position.y - site.position.y + .01) / (site.height / site.floors))) && atSite(site);
+  if (project && project.workedMinutes < project.requiredMinutes && studio && state.hour >= 7 && state.hour < 22 && player.needs.hunger >= 40 && player.needs.fatigue >= 40 && publicAt(studio)) return '正在原公共场所创作，不能重复使用劳动时间。';
+  const service = state.culture?.orders.find(order => order.id === state.culture?.playerServiceId), serviceSite = service && world.buildings.find(site => site.id === service.siteId);
+  if (service?.state === 'active' && service.topic !== 'transport' && !service.servedIds.includes('player') && serviceSite && state.hour >= 8 && state.hour < 17 && player.needs.hunger >= 40 && player.needs.fatigue >= 35 && publicAt(serviceSite)) return '正在原公共服务站点参与服务，不能重复使用劳动时间。';
+  return '';
+}
+/** Fine processing belongs only to saved new tasks, never to visual tier. */
+export function researchTaskActorIds(state: Pick<SimState, 'extension'>): ReadonlySet<string> {
+  const runtime = (state.extension as Extension | undefined)?.runtime;
+  return new Set(Object.values(runtime?.researchJobs ?? {}).filter((job): job is AttendedResearchJob => job?.laborVersion === 1 && job.actorId !== 'player').map(job => job.actorId));
+}
 const handled = new Set<Command['type']>(['foundCompany', 'expandCompany', 'listCompany', 'buyShares', 'sellShares', 'acquireCompany', 'hire', 'research', 'cook', 'buyIngredient', 'eat', 'audit', 'reportCorruption', 'investigate', 'heal', 'joinOrganization', 'donate', 'attendFestival', 'appoint']);
 
 /** Subscribes to the original ten phases. All timers and accounting cursors are saved. */
-export function installExtensions(simulation: Simulation): void {
+export function installExtensions(simulation: Simulation): (minutes: number) => void {
   const world = simulation.worldDefinition;
   const buildings = new Map(world.buildings.map(b => [b.id, b]));
   const districts = new Set(world.districts.map(d => d.id));
@@ -64,7 +102,7 @@ export function installExtensions(simulation: Simulation): void {
       environment: { waterQuality: 88, biodiversity: 82, stormRisk: 0, disasterAt: at + 1440, lastDisaster: '' },
       institutions: { education: 55, medical: 62, welfare: 45, culture: 58 }, lastUpdate: at, nextCompanyId: 1, nextAuditId: 1,
       stats: { mealsCooked: 0, researchCompleted: 0, corruptionRecovered: 0, donations: 0, festivals: 0 },
-      runtime: { version: 1, nextCompanyAt: at + 60, nextCorruptionAt: at + 120, nextLedgerAt: at + 60, lastTreasury: s.treasury, cooldowns: {}, researchJobs: {}, companyCursors: {}, deprivation: {}, diversions: {}, constructionJobs: {} },
+      runtime: { version: 1, nextCompanyAt: at + 60, nextCorruptionAt: at + 120, nextLedgerAt: at + 60, lastTreasury: s.treasury, cooldowns: {}, researchJobs: {}, researchLaborVersion: 1, legacyResearchSectors: [], companyCursors: {}, deprivation: {}, diversions: {}, constructionJobs: {} },
     };
     // Existing businesses provide counterparties; seed capital comes from a real
     // proprietor, and the core shop remains the sole authority for trade receipts.
@@ -107,7 +145,92 @@ export function installExtensions(simulation: Simulation): void {
     e.audits.push(item); if (e.audits.length > 128) { const old = e.audits.findIndex(a => ['prosecuted', 'cleared'].includes(a.status)); if (old >= 0) e.audits.splice(old, 1); } return item;
   };
 
-  simulation.onPhase('time', (_s, minutes) => { ext().lastUpdate += minutes; });
+  // Each tick's core wage minutes are observed once, never earned again here.
+  const researchWorkWindows = new Map<string, { startAt: number; endAt: number; siteId: string }[]>();
+  let researchPhaseMinutes = 0, researchPhaseClock = -1, researchPhaseTick = -1;
+  let researchPlayerPhaseConflict = '';
+  const researchFloor = (site: Building, position: Vec3) => Math.round((position.y - site.position.y - .6) / (site.height / site.floors)) || 0;
+  const isResearchSite = (site: Building, sector: Sector) => ['school', 'core'].includes(site.kind) || site.facility === 'data' || sector === 'energy' && site.facility === 'energy';
+  const researchLabReason = (site: Building, floor: number, position: Vec3, person: Pick<Player, 'role' | 'identities'>): string => {
+    if (!canAccessFloor(site, floor, person) || researchFloor(site, position) !== floor) return '原实验楼层权限或脚点不满足。';
+    if (!simulation.isNearBuilding(site, position, 0) || !simulation.isAtBuildingFunctionPoint(site, position, 'work', person)) return '已离开原实验室实际工作点。';
+    if (getBuildingBody(site)) {
+      const support = floorPlanSupport(site, floor, position, .35);
+      if (!support || support.floor !== floor || !['room', 'stairs'].includes(support.kind) || Math.abs(support.y - position.y) > .26 || blocksFloorPlanMovement(site, floor, position, position, .35, 1.72)) return '实验室完整身体支撑或净空不满足。';
+    } else {
+      // The old recipes retain their shared rectangular floor geometry.
+      const dimensions = getFloorDimensions(site, floor), dx = position.x - site.position.x, dz = position.z - site.position.z;
+      const x = dx * Math.cos(site.rotation) + dz * Math.sin(site.rotation), z = -dx * Math.sin(site.rotation) + dz * Math.cos(site.rotation);
+      if (Math.abs(x) + .35 > dimensions.width / 2 || Math.abs(z) + .35 > dimensions.depth / 2 || site.height / site.floors < 1.72
+        || Math.abs(getWalkHeight(world, position.x, position.z, position.y) - position.y) > .26) return '实验室完整身体支撑或净空不满足。';
+    }
+    return homeRestPointBlockedByVoxels(position, state().voxels) ? '实验室站立体积被放置的体素阻挡。' : '';
+  };
+  const researchLaborReason = (sector: Sector, job: AttendedResearchJob, phaseMinutes = 0): string => {
+    const s = state(), profile = ext().actorProfiles[job.actorId], npc = job.actorId === 'player' ? undefined : citizens().get(job.actorId), actor = npc ?? (job.actorId === 'player' ? s.player : undefined), site = buildings.get(job.siteId);
+    if (!actor || !profile?.alive || profile.health <= 0) return '研究者生命已结束或不再存在。';
+    if (!site || !isResearchSite(site, sector)) return '原实验室不再提供该研究用途。';
+    if (actor.needs.hunger < 40 || actor.needs.fatigue < 40) return '研究者需要进食或休息。';
+    if (job.actorId === 'player') {
+      if (phaseMinutes > 0 && researchPhaseClock === ext().lastUpdate && researchPhaseTick === s.tick && researchPlayerPhaseConflict) return researchPlayerPhaseConflict;
+      if (!role('scientist') || s.player.education < 3 || Math.max(profile.skill, s.player.education * 8) < 24) return '缺少本研究所需科研资格。';
+      if (s.player.vehicleId || s.aviation?.activeAircraftId) return '乘车或驾驶期间不能计入实验劳动。';
+      const conflict = researchPlayerContextReason(s, world, (site, purpose) => atBuilding(site) && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, s.player.position, purpose, s.player)), phaseMinutes); if (conflict) return conflict;
+    } else if (!npc || !['scientist', '科研员', '科学家'].includes(npc.role) || (npc.education ?? 0) < 3 || profile.skill < 35 || profile.age < 18 || npc.state !== 'working' || npc.workId !== site.id) return '等候具名研究者回到原岗位真实工作。';
+    const person = job.actorId === 'player' ? s.player : { role: 'scientist' as const, identities: ['scientist' as const] };
+    return researchLabReason(site, job.floor, actor.position, person);
+  };
+  const beginResearchJob = (actorId: string, site: Building, budget: number): AttendedResearchJob => {
+    const position = actorId === 'player' ? state().player.position : citizens().get(actorId)!.position, clock = ext().lastUpdate;
+    return { startedAt: clock, finishAt: clock + 120, budget, actorId, laborVersion: 1, siteId: site.id, floor: researchFloor(site, position), workedMinutes: 0, lastObservedAt: clock, state: 'active', pauseReason: '' };
+  };
+  const observeResearchLabor = (minutes: number): void => {
+    const e = ext(), phaseMinutes = finite(minutes) && researchPhaseClock === e.lastUpdate && researchPhaseTick === state().tick ? Math.max(0, Math.min(minutes, researchPhaseMinutes)) : 0;
+    // Clip authenticated wage windows to this phase and each job's real start.
+    // Consumed ranges cannot be reused by another sector of the same actor.
+    const consumed = new Map<string, { startAt: number; endAt: number }[]>();
+    for (const sector of TECHNOLOGY_SECTORS) {
+      const job = e.runtime.researchJobs[sector]; if (job?.laborVersion !== 1) continue;
+      const observedAt = job.lastObservedAt, elapsed = Math.max(0, Math.min(phaseMinutes, e.lastUpdate - observedAt)); job.lastObservedAt = e.lastUpdate;
+      if (!(elapsed > 0)) continue;
+      const reason = researchLaborReason(sector, job, phaseMinutes);
+      if (reason) { job.state = 'paused'; job.pauseReason = reason; continue; }
+      if (job.workedMinutes >= 120) { job.state = 'active'; job.pauseReason = ''; continue; }
+      const lower = Math.max(job.startedAt, observedAt, e.lastUpdate - phaseMinutes);
+      const windows = job.actorId === 'player' ? [{ startAt: lower, endAt: e.lastUpdate }] : (researchWorkWindows.get(job.actorId) ?? []).filter(window => window.siteId === job.siteId);
+      let ranges = windows.map(window => ({ startAt: Math.max(lower, window.startAt), endAt: Math.min(e.lastUpdate, window.endAt) })).filter(window => window.endAt > window.startAt).sort((a, b) => a.startAt - b.startAt);
+      // Union duplicate/overlapping event ranges before assigning any time.
+      const merged: typeof ranges = [];
+      for (const range of ranges) { const last = merged.at(-1); if (last && range.startAt <= last.endAt) last.endAt = Math.max(last.endAt, range.endAt); else merged.push({ ...range }); }
+      ranges = merged;
+      for (const used of consumed.get(job.actorId) ?? []) ranges = ranges.flatMap(range => range.endAt <= used.startAt || range.startAt >= used.endAt ? [range] : [
+        ...(range.startAt < used.startAt ? [{ startAt: range.startAt, endAt: used.startAt }] : []),
+        ...(range.endAt > used.endAt ? [{ startAt: used.endAt, endAt: range.endAt }] : []),
+      ]);
+      const available = ranges.reduce((sum, range) => sum + range.endAt - range.startAt, 0);
+      const credited = claimActorActivityMinutes(simulation, job.actorId, `research:${sector}`, Math.min(elapsed, available, 120 - job.workedMinutes), phaseMinutes);
+      if (!(credited > 0)) { job.state = 'paused'; job.pauseReason = '本相位没有可用的现场劳动时间；实际课堂或其他课题已占用的分钟不能重复。'; continue; }
+      let remaining = credited; const used = consumed.get(job.actorId) ?? [];
+      for (const range of ranges) { const minutes = Math.min(remaining, range.endAt - range.startAt); if (minutes > 0) used.push({ startAt: range.startAt, endAt: range.startAt + minutes }); remaining -= minutes; if (!(remaining > 0)) break; }
+      consumed.set(job.actorId, used); job.workedMinutes += credited;
+      job.state = 'active'; job.pauseReason = ''; tech(sector).progress = job.workedMinutes / 120 * 100;
+    }
+  };
+  simulation.onEvent('wage-earned', event => {
+    if (!event.citizenId || event.citizenId === 'player' || !finite(event.minutes) || event.minutes <= 0 || !finite(event.amount) || event.amount < 0
+      || !finite(event.creditedWorkStartAt) || !finite(event.creditedWorkEndAt) || event.creditedWorkEndAt < event.creditedWorkStartAt
+      || event.creditedWorkEndAt > ext().lastUpdate + 1e-7 || Math.abs(event.creditedWorkEndAt - event.creditedWorkStartAt - event.minutes) > 1e-7
+      || researchPhaseClock !== ext().lastUpdate || researchPhaseTick !== state().tick) return;
+    const worker = citizens().get(event.citizenId); if (!worker || worker.state !== 'working' || event.siteId !== worker.workId) return;
+    if (!TECHNOLOGY_SECTORS.some(sector => { const job = ext().runtime.researchJobs[sector]; return job?.laborVersion === 1 && job.actorId === worker.id && job.siteId === worker.workId; })) return;
+    const windows = researchWorkWindows.get(worker.id) ?? []; windows.push({ startAt: event.creditedWorkStartAt, endAt: event.creditedWorkEndAt, siteId: worker.workId }); researchWorkWindows.set(worker.id, windows);
+  });
+  simulation.onPhase('time', (_s, minutes) => {
+    ext().lastUpdate += minutes; researchWorkWindows.clear(); researchPhaseMinutes = finite(minutes) ? Math.max(0, minutes) : 0; researchPhaseClock = ext().lastUpdate; researchPhaseTick = state().tick;
+    // A real active activity may complete and clear its pointer later this same
+    // phase. It still used this actor; terminal history does not latch next tick.
+    researchPlayerPhaseConflict = researchPlayerContextReason(state(), world, (site, purpose) => atBuilding(site) && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, state().player.position, purpose, state().player)), researchPhaseMinutes);
+  });
   simulation.onPhase('environment', (s, minutes) => {
     const e = ext(), pollution = s.districts.reduce((n, d) => n + d.pollution, 0) / Math.max(1, s.districts.length);
     e.environment.waterQuality = clamp(e.environment.waterQuality + minutes * ((90 - e.environment.waterQuality) * .0002 - pollution * .000035 + tech('agriculture').level * .0002));
@@ -204,7 +327,7 @@ export function installExtensions(simulation: Simulation): void {
         // Residents first meet their current hunger/rest needs before investing.
         if (['scientist', '科研员', '科学家'].includes(c.role) && (c.education ?? 0) >= 3 && profile.skill >= 35 && c.money >= 300 && c.needs.hunger >= 40 && c.needs.fatigue >= 40 && cool(`research:${c.id}`) && (workplace.kind === 'school' || workplace.kind === 'core' || workplace.facility === 'data') && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: 'scientist', identities: ['scientist'] })) {
           const t = e.technologies.filter(t => t.level < 20 && !e.runtime.researchJobs[t.sector]).sort((a, b) => a.level - b.level)[0];
-          if (t) { c.money -= 200; publicFunds(c.id, 200, `${sectorNames[t.sector]}居民科研投入`, c.districtId); t.funding = 200; t.progress = 0; e.runtime.researchJobs[t.sector] = { startedAt: e.lastUpdate, finishAt: e.lastUpdate + 120, budget: 200, actorId: c.id }; cooldown(`research:${c.id}`, 1440); }
+          if (t) { const job = beginResearchJob(c.id, workplace, 200); if (researchLabReason(workplace, job.floor, c.position, { role: 'scientist', identities: ['scientist'] })) continue; c.money -= 200; publicFunds(c.id, 200, `${sectorNames[t.sector]}居民科研投入`, c.districtId); t.funding = 200; t.progress = 0; e.runtime.researchJobs[t.sector] = job; cooldown(`research:${c.id}`, 1440); }
         }
       }
     }
@@ -240,7 +363,12 @@ export function installExtensions(simulation: Simulation): void {
     const e = ext();
     for (const t of e.technologies) {
       const job = e.runtime.researchJobs[t.sector];
-      if (job) { t.progress = clamp((e.lastUpdate - job.startedAt) / (job.finishAt - job.startedAt) * 100); if (e.lastUpdate + 1e-7 >= job.finishAt) { t.level++; t.progress = 100; t.funding = 0; t.sideEffect = clamp(t.sideEffect + job.budget / 200); delete e.runtime.researchJobs[t.sector]; e.stats.researchCompleted++; const researcher = e.actorProfiles[job.actorId ?? 'player']; researcher.skill = clamp(researcher.skill + 2); notice('research', `${sectorNames[t.sector]}技术完成研发，等级${t.level}；收益与生态副作用已进入城市参数。`); } }
+      if (job) {
+        const attended = job.laborVersion === 1;
+        t.progress = attended ? job.workedMinutes / 120 * 100 : clamp((e.lastUpdate - job.startedAt) / (job.finishAt - job.startedAt) * 100);
+        const completed = attended ? job.workedMinutes >= 120 - 1e-7 : e.lastUpdate + 1e-7 >= job.finishAt;
+        if (completed) { t.level++; t.progress = 100; t.funding = 0; t.sideEffect = clamp(t.sideEffect + job.budget / 200); delete e.runtime.researchJobs[t.sector]; if (e.runtime.legacyResearchSectors) e.runtime.legacyResearchSectors = e.runtime.legacyResearchSectors.filter(sector => sector !== t.sector); e.stats.researchCompleted++; const researcher = e.actorProfiles[job.actorId ?? 'player']; researcher.skill = clamp(researcher.skill + 2); notice('research', `${sectorNames[t.sector]}技术完成研发，等级${t.level}；收益与生态副作用已进入城市参数。`); }
+      }
       t.sideEffect = clamp(t.sideEffect - minutes * .0004);
     }
     const externality = e.technologies.reduce((n, t) => n + t.sideEffect, 0);
@@ -355,8 +483,9 @@ export function installExtensions(simulation: Simulation): void {
       if (!b) return fail('请到书院或天枢数据中心开展研究。');
       const t = tech(sector);
       if (e.runtime.researchJobs[sector] || t.level >= 20 || p.money < budget) return fail('研究正在运行、等级达到上限或预算现金不足。');
-      p.money -= budget; publicFunds('player', budget, `${sectorNames[sector]}科研投入`, b.districtId); t.funding = budget; t.progress = 0; e.runtime.researchJobs[sector] = { startedAt: e.lastUpdate, finishAt: e.lastUpdate + 120, budget };
-      return success(`${sectorNames[sector]}研究已投入${budget}文，需两小时实验，收益与副作用将影响城市。`);
+      const job = beginResearchJob('player', b, budget), reason = researchLaborReason(sector, job); if (reason) return fail(reason);
+      p.money -= budget; publicFunds('player', budget, `${sectorNames[sector]}科研投入`, b.districtId); t.funding = budget; t.progress = 0; e.runtime.researchJobs[sector] = job;
+      return success(`${sectorNames[sector]}研究已投入${budget}文，需在原实验室累计120分钟有效劳动，离场暂停；收益与副作用将影响城市。`);
     }
     if (command.type === 'buyIngredient') {
       const ingredient = command.targetId as keyof typeof INGREDIENTS, count = amount(1, 1, 20);
@@ -498,10 +627,37 @@ export function installExtensions(simulation: Simulation): void {
     const environment = object(value.environment, 8, 'environment'); for (const key of ['waterQuality', 'biodiversity', 'stormRisk']) num(environment[key], 0, 100, `environment ${key}`); num(environment.disasterAt, 0, 1e12, 'disaster timer'); str(environment.lastDisaster, 'disaster record');
     const institutions = object(value.institutions, 4, 'institutions'); for (const key of ['education', 'medical', 'welfare', 'culture']) num(institutions[key], 0, 100, `institution ${key}`);
     const stats = object(value.stats, 5, 'statistics'); for (const key of ['mealsCooked', 'researchCompleted', 'festivals']) num(stats[key], 0, 1e12, key, true); for (const key of ['corruptionRecovered', 'donations']) num(stats[key], 0, 1e12, key);
-    const r = object(value.runtime, 12, 'extension runtime'); ensure(r.version === 1, 'runtime version'); for (const key of ['nextCompanyAt', 'nextCorruptionAt', 'nextLedgerAt']) num(r[key], 0, 1e12, key); num(r.lastTreasury, -1e12, 1e12, 'treasury cursor');
+    const r = object(value.runtime, 14, 'extension runtime'); ensure(r.version === 1, 'runtime version'); for (const key of ['nextCompanyAt', 'nextCorruptionAt', 'nextLedgerAt']) num(r[key], 0, 1e12, key); num(r.lastTreasury, -1e12, 1e12, 'treasury cursor');
     const timers = object(r.cooldowns, 4096, 'cooldowns'); for (const [id, at] of Object.entries(timers)) { str(id, 'cooldown key', 120); ensure(['audit', 'donate', 'festival'].includes(id) || id.startsWith('heal:') && actorIds.has(id.slice(5)) || id.startsWith('appoint:') && actorIds.has(id.slice(8)) || id.startsWith('research:') && actorIds.has(id.slice(9)) || id.startsWith('expand:') && companyIds.has(id.slice(7)), 'cooldown identity'); num(at, 0, 1e12, 'cooldown timer'); }
     const jobs = object(r.researchJobs, 7, 'research jobs');
-    for (const [sector, job] of Object.entries(jobs)) { ensure(TECHNOLOGY_SECTORS.includes(sector as Sector) && dictionary(job), 'research job'); ensure(job.actorId === undefined || actorIds.has(job.actorId), 'research actor'); num(job.startedAt, 0, value.lastUpdate, 'research start'); num(job.finishAt, job.startedAt, 1e12, 'research finish'); ensure(Math.abs(job.finishAt - job.startedAt - 120) < 1e-7, 'research duration'); num(job.budget, 100, 2000, 'research budget', true); const t = technologies.find(t => t.sector === sector)!; ensure(t.funding === job.budget && t.level < 20, 'research funding'); }
+    const markedResearch = r.researchLaborVersion !== undefined;
+    ensure(!markedResearch || r.researchLaborVersion === 1, 'research labor version');
+    ensure(markedResearch || r.legacyResearchSectors === undefined, 'partial research runtime marker');
+    const legacyResearch = markedResearch ? array(r.legacyResearchSectors, 7, 'legacy research sectors') : Object.keys(jobs);
+    ensure(new Set(legacyResearch).size === legacyResearch.length && legacyResearch.every(sector => TECHNOLOGY_SECTORS.includes(sector) && jobs[sector] && jobs[sector].laborVersion === undefined), 'legacy research whitelist');
+    for (const [sector, job] of Object.entries(jobs)) {
+      ensure(TECHNOLOGY_SECTORS.includes(sector as Sector) && dictionary(job), 'research job'); ensure(job.actorId === undefined || actorIds.has(job.actorId), 'research actor');
+      num(job.startedAt, 0, value.lastUpdate, 'research start'); num(job.finishAt, job.startedAt, 1e12, 'research finish'); ensure(Math.abs(job.finishAt - job.startedAt - 120) < 1e-7, 'research duration');
+      num(job.budget, 100, 2000, 'research budget', true); const t = technologies.find(t => t.sector === sector)!; ensure(t.funding === job.budget && t.level < 20, 'research funding');
+      if (job.laborVersion === undefined) { ensure(legacyResearch.includes(sector), 'unmarked research outside legacy whitelist'); ensure(Object.keys(job).every(key => ['startedAt', 'finishAt', 'budget', 'actorId'].includes(key)), 'partial research labor marker'); continue; }
+      ensure(markedResearch && job.laborVersion === 1 && !legacyResearch.includes(sector) && typeof job.actorId === 'string' && actorIds.has(job.actorId), 'marked research actor/version');
+      const savedActor = job.actorId === 'player' ? candidate.player : candidate.citizens.find(person => person.id === job.actorId), site = buildings.get(job.siteId);
+      ensure(savedActor && site && isResearchSite(site, sector as Sector), 'research saved actor/site binding');
+      num(job.floor, -(site!.basements ?? 0), site!.floors - 1, 'research floor', true); ensure(!getBuildingBody(site!) || !!getBuildingBody(site!)!.floorPlans.find(plan => plan.floor === job.floor), 'research physical floor');
+      num(job.workedMinutes, 0, 120, 'research actual labor'); num(job.lastObservedAt, job.startedAt, value.lastUpdate, 'research observed clock');
+      ensure(Math.abs(job.lastObservedAt - value.lastUpdate) < 1e-7 && job.workedMinutes <= value.lastUpdate - job.startedAt + 1e-7, 'research no historical time credit');
+      ensure(Math.abs(t.progress - job.workedMinutes / 120 * 100) < 1e-7, 'research progress/labor consistency');
+      ensure(['active', 'paused'].includes(job.state), 'research labor state'); str(job.pauseReason, 'research pause reason', 120);
+      ensure(Object.keys(job).every(key => ['startedAt', 'finishAt', 'budget', 'actorId', 'laborVersion', 'siteId', 'floor', 'workedMinutes', 'lastObservedAt', 'state', 'pauseReason'].includes(key)), 'research job fields');
+    }
+    // Necessary feasible capacity for all pending marked jobs of one actor,
+    // including later-start suffixes; grandfather jobs carry no invented labor.
+    const actorJobs = new Map<string, AttendedResearchJob[]>();
+    for (const job of Object.values(jobs)) if (job.laborVersion === 1) { const list = actorJobs.get(job.actorId) ?? []; list.push(job as AttendedResearchJob); actorJobs.set(job.actorId, list); }
+    for (const list of actorJobs.values()) for (const cutoff of new Set(list.map(job => job.startedAt))) {
+      const worked = list.filter(job => job.startedAt >= cutoff).reduce((sum, job) => sum + job.workedMinutes, 0);
+      ensure(worked <= value.lastUpdate - cutoff + 1e-7, 'research actor pending suffix time capacity');
+    }
     for (const t of technologies) if (!jobs[t.sector]) ensure(t.funding === 0, 'unused research funding');
     const cursors = object(r.companyCursors, 128, 'company cursors'); exactKeys(cursors, companyIds, 'company accounting identities'); for (const [id, cursor] of Object.entries(cursors)) { ensure(dictionary(cursor), 'company cursor'); const c = companies.find(c => c.id === id)!, shop = candidate.shops.find(shop => shop.buildingId === c.buildingId)!; num(cursor.revenue, 0, shop.revenue + 1e-7, 'shop revenue cursor'); num(cursor.profit, -1e12, 1e12, 'shop profit cursor'); }
     if (r.constructionJobs !== undefined) for (const [id, job] of Object.entries(object(r.constructionJobs, 128, 'construction jobs'))) {
@@ -514,5 +670,11 @@ export function installExtensions(simulation: Simulation): void {
     for (const [id, minutes] of Object.entries(object(r.deprivation, actorIds.size, 'deprivation'))) { ensure(actorIds.has(id) && id !== 'player', 'deprivation actor'); num(minutes, 0, 1440 * 7, 'deprivation duration'); }
     for (const [id, amount] of Object.entries(object(r.diversions, actorIds.size, 'diversions'))) { ensure(actorIds.has(id) && id !== 'player', 'diversion actor'); num(amount, 0, 1e9, 'diversion amount'); }
   });
-  simulation.onLoad(() => { citizens(); if (!state().extension) state().extension = initialize(); });
+  simulation.onLoad(() => {
+    citizens(); if (!state().extension) state().extension = initialize();
+    const runtime = ext().runtime;
+    if (runtime.researchLaborVersion === undefined) { runtime.researchLaborVersion = 1; runtime.legacyResearchSectors = Object.keys(runtime.researchJobs) as Sector[]; }
+    researchWorkWindows.clear(); researchPhaseMinutes = 0; researchPhaseClock = -1; researchPhaseTick = -1; researchPlayerPhaseConflict = '';
+  });
+  return observeResearchLabor;
 }

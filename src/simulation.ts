@@ -1,7 +1,7 @@
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
 import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
 import { blocksMarketCounter, marketCounters } from './site-fixtures';
-import { installExtensions } from './simulation/extensions';
+import { installExtensions, researchTaskActorIds } from './simulation/extensions';
 import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
 import { installFamily, isCloseKin } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
@@ -27,7 +27,7 @@ const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
 const initialCommuteCache = new WeakMap<WorldDefinition, { fingerprint: string; homes: Map<string, Map<string, number>> }>();
-type Event = { type: string; amount?: number; citizenId?: string; shopId?: string; districtId?: string; vehicleId?: string; crimeId?: string; minutes?: number; requestedAmount?: number; quantity?: number; expenseAccrued?: boolean; ratePerMinute?: number; unitPrice?: number; siteId?: string; procurementId?: string; budgetId?: string; purpose?: string; nodeId?: string; fromEdgeId?: string; arrivedAt?: number };
+type Event = { type: string; amount?: number; citizenId?: string; shopId?: string; districtId?: string; vehicleId?: string; crimeId?: string; minutes?: number; requestedAmount?: number; quantity?: number; expenseAccrued?: boolean; ratePerMinute?: number; unitPrice?: number; siteId?: string; procurementId?: string; budgetId?: string; purpose?: string; nodeId?: string; fromEdgeId?: string; arrivedAt?: number; creditedWorkStartAt?: number; creditedWorkEndAt?: number };
 class EventBus {
   private handlers = new Map<string, ((event: Event) => void)[]>();
   on(type: string, handler: (event: Event) => void) { const list = this.handlers.get(type) ?? []; list.push(handler); this.handlers.set(type, list); }
@@ -139,7 +139,7 @@ export class Simulation implements SimulationAPI {
     this.connectSystems();
     this.updateTiers();
     this.updateSignals();
-    installExtensions(this);
+    const researchLaborPhase = installExtensions(this);
     this.initializeShopAccounts();
     this.onLoad(() => this.initializeShopAccounts());
     installPlayerLabor(this, { reserve: (siteId, gross) => this.reservePlayerLabor(siteId, gross), refund: (employer, amount) => this.refundPlayerLabor(employer, amount), pay: (job, gross, minutes) => this.payPlayerLabor(job, gross, minutes) });
@@ -150,6 +150,8 @@ export class Simulation implements SimulationAPI {
     installFamily(this);
     installCulture(this);
     installHomeRest(this);
+    // Actual public education claims this actor first; research uses only remaining minutes.
+    this.onPhase('people', (_state, minutes) => researchLaborPhase(minutes));
     this.notice('arrival', '来自星海的旅行者抵达云山。城市正在独立运行，欢迎步行探索。');
   }
   private addNeighbor(from: string, node: string, edge: NetworkEdge) { const list = this.neighbors.get(from) ?? []; list.push({ node, edge }); this.neighbors.set(from, list); }
@@ -216,10 +218,13 @@ export class Simulation implements SimulationAPI {
     if (credited > 0) {
       if (shop) { const assignment = this.privateShiftAssignment(citizen, shop); if (assignment) { assignment.workedMinutes += credited; this.runtime.privateLabor!.stats.workedMinutes += credited; } }
       else { const assignment = this.publicShiftAssignment(citizen); if (assignment) { assignment.workedMinutes += credited; this.runtime.publicLabor!.stats.workedMinutes += credited; } }
-      this.accrueWork(citizen, credited);
+      // Caps allocate the credited front of this actual post-arrival work window.
+      // This changes no wage quantity, cash, daily cap or shift allowance.
+      const startAt = (this.state.extension?.lastUpdate ?? this.now) - elapsed;
+      this.accrueWork(citizen, credited, true, { startAt, endAt: startAt + credited });
     }
   }
-  private accrueWork(citizen: Citizen, minutes: number, notify = true): void {
+  private accrueWork(citizen: Citizen, minutes: number, notify = true, workWindow?: { startAt: number; endAt: number }): void {
     const shop = this.state.shops.find(s => s.buildingId === citizen.workId), claims = this.runtime.wageAccruals ??= [];
     if (this.accrualIndexSource !== claims || this.accrualIndex.size !== claims.length) { this.accrualIndex.clear(); for (const item of claims) this.accrualIndex.set(`${item.citizenId}:${item.workId}`, item); this.accrualIndexSource = claims; }
     const key = `${citizen.id}:${citizen.workId}`; let claim = this.accrualIndex.get(key);
@@ -232,7 +237,7 @@ export class Simulation implements SimulationAPI {
     const earned = minutes * claim.ratePerMinute;
     claim.minutes += minutes; claim.amount += earned;
     if (shop) shop.profit -= earned;
-    if (notify) this.bus.emit({ type: 'wage-earned', citizenId: citizen.id, shopId: shop?.id, districtId: citizen.districtId, minutes, amount: earned, ratePerMinute: claim.ratePerMinute });
+    if (notify) this.bus.emit({ type: 'wage-earned', citizenId: citizen.id, shopId: shop?.id, districtId: citizen.districtId, minutes, amount: earned, ratePerMinute: claim.ratePerMinute, ...(workWindow ? { siteId: citizen.workId, creditedWorkStartAt: workWindow.startAt, creditedWorkEndAt: workWindow.endAt } : {}) });
   }
   /** A company's capital is its operating account, never a second copy of cash. */
   shopOwnerId(shop: Shop): string | undefined { return this.state.extension?.companies.find(company => company.buildingId === shop.buildingId)?.ownerId ?? shop.ownerId; }
@@ -930,8 +935,13 @@ export class Simulation implements SimulationAPI {
     this.reviewPrivateShifts();
     const hour = this.state.hour;
     const pendingMinutes = this.runtime.peopleElapsed ??= {};
+    const researchActors = researchTaskActorIds(this.state);
     for (let i = 0; i < this.state.citizens.length; i++) {
-      const citizen = this.state.citizens[i]; const frequency = citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const citizen = this.state.citizens[i];
+      // At most seven persisted new research jobs request fine task processing.
+      // Preserve tier, ordinary actors' frequency, pending needs and real wages.
+      const researchTask = researchActors.has(citizen.id);
+      const frequency = researchTask ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or

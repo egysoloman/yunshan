@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { Simulation } from '../src/simulation.ts';
+import { getWalkHeight } from '../src/world.ts';
 import { beginClinicalTreatment, cancelClinicalTreatment, clinicalAtSite, clinicalAtPosition, clinicalVisitDeadline, takeClinicalDoctorSlot } from '../src/simulation/clinical.ts';
 import { settleDeceasedAccount } from '../src/simulation/banking.ts';
 import type { Building, BuildingKind, Citizen, WorldDefinition } from '../src/types.ts';
@@ -207,7 +208,11 @@ test('an actual ee3e7a1 paid-heal export migrates its sixty-minute deadline and 
 
 test('actually funded and elapsed medicine research improves only completed material-backed clinical treatment', () => {
   const { sim } = setup(), school = sim.worldDefinition.buildings.find(site => site.kind === 'school')!, technology = sim.state.extension!.technologies.find(item => item.sector === 'medicine')!, beforeLevel = technology.level;
-  sim.state.player.role = 'scientist'; sim.state.player.identities = ['traveler', 'scientist']; sim.state.player.education = 3; sim.setFocus({ ...school.door }, 'walk');
+  sim.state.player.role = 'scientist'; sim.state.player.identities = ['traveler', 'scientist']; sim.state.player.education = 3;
+  // Keep the research actor on the shared actual school floor. Its old y0
+  // door-radius fixture was below the supported .6m standing height.
+  const lab = { ...school.position, y: getWalkHeight(sim.worldDefinition, school.position.x, school.position.z, school.position.y + .6) };
+  assert(Math.abs(lab.y - school.position.y - .6) < 1e-7); sim.setFocus(lab, 'walk');
   const money = sim.state.player.money, started = sim.command({ type: 'research', targetId: 'medicine', value: 100 }); assert.equal(started.ok, true, started.message); assert.equal(sim.state.player.money, money - 100); advance(sim, 118); assert.equal(technology.level, beforeLevel); advance(sim, 2); assert.equal(technology.level, beforeLevel + 1); assert.equal(technology.funding, 0);
   sim.setFocus({ ...clinic(sim).door }, 'walk'); const order = begin(sim); advance(sim, 20); assert.equal(order.workedMinutes, 18); const health = sim.state.extension!.actorProfiles.player.health; advance(sim, 2); assert.equal(order.state, 'completed'); assert.ok(sim.state.extension!.actorProfiles.player.health > health + 25 + technology.level - .2); restore(sim);
 });

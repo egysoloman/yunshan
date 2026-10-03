@@ -1,0 +1,20 @@
+3:31:48 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+{"state":"FAIL","checks":1,"errors":[],"sourceStable":true,"endedAtUTC":"2026-10-03T03:32:06.636Z"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0.5 !== 8
+
+    at file:///tmp/yunshan-research-ui-prep-20261003/research-ui.mjs:70:63 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 0.5,
+  expected: 8,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

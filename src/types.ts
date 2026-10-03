@@ -44,6 +44,11 @@ export interface Technology { sector: 'traffic' | 'energy' | 'information' | 'se
 export interface AuditCase { id: string; npcId: string; evidence: number; diverted: number; status: 'suspected' | 'reported' | 'investigating' | 'prosecuted' | 'cleared'; createdAt: number; responseAt: number }
 export interface LifeProfile { age: number; health: number; mood: number; stress: number; alive: boolean; skill: number; family: string[]; historyTags: string[] }
 export interface LedgerEntry { sourceEvent?: 'transit-fare' | 'public-payroll-escrow' | 'utility-payment'; tick: number; actorId: string; amount: number; purpose: string; account: 'public' | 'company' | 'household'; districtId: string }
+/** Unmarked pending jobs retain their historical deadline contract on load. */
+export interface LegacyResearchJob { startedAt: number; finishAt: number; budget: number; actorId?: string; laborVersion?: undefined }
+/** finishAt is the earliest deadline; actual attended work is authoritative. */
+export interface AttendedResearchJob { startedAt: number; finishAt: number; budget: number; actorId: string; laborVersion: 1; siteId: string; floor: number; workedMinutes: number; lastObservedAt: number; state: 'active' | 'paused'; pauseReason: string }
+export type ResearchJob = LegacyResearchJob | AttendedResearchJob;
 export interface CookingJob { recipeId: string; startedAt: number; finishAt: number; quality: number }
 export interface Organization { id: string; name: string; kind: string; members: string[]; reputation: number; funds: number }
 export interface CityExtensionState { version: number; companies: Company[]; technologies: Technology[]; audits: AuditCase[]; actorProfiles: Record<string, LifeProfile>; publicLedger: LedgerEntry[]; cooking: CookingJob | null; organizations: Organization[]; environment: { waterQuality: number; biodiversity: number; stormRisk: number; disasterAt: number; lastDisaster: string }; institutions: { education: number; medical: number; welfare: number; culture: number }; lastUpdate: number; nextCompanyId: number; nextAuditId: number; stats: { mealsCooked: number; researchCompleted: number; corruptionRecovered: number; donations: number; festivals: number } }

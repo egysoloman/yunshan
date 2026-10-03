@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation.ts';
-import { createWorld } from '../src/world.ts';
+import { createWorld, getWalkHeight } from '../src/world.ts';
 import type { Building, BuildingKind, CityExtensionState, Command, Company, Role, SimState, Technology, Vec3, WorldDefinition } from '../src/types.ts';
 
 /** Actual facilities and two connected districts keep these tests independent of world generation. */
@@ -67,6 +67,14 @@ function observeDividends(sim: Simulation) {
   return payments;
 }
 function walkTo(sim: Simulation, position: Vec3) { sim.setFocus({ ...position }, 'walk'); }
+// Continuous research requires an actual shared standing floor, not the old
+// permissive door-radius point at y0 or an arbitrary y80 suspended in a room.
+function labFoot(sim: Simulation, site: Building, floor = 0): Vec3 {
+  const height = site.position.y + floor * (site.height / site.floors) + .6;
+  const point = { ...site.position, y: getWalkHeight(sim.worldDefinition, site.position.x, site.position.z, height) };
+  assert(Math.abs(point.y - height) < 1e-7, 'shared legacy floor must support the actual research point');
+  return point;
+}
 function pinClinicDoctor(sim: Simulation, patientId = 'player', doctorId?: string) {
   const clinic = building(sim.worldDefinition, 'clinic');
   const doctor = doctorId ? sim.state.citizens.find(c => c.id === doctorId)! : sim.state.citizens.find(c => c.id !== patientId && c.role !== '学生' && !sim.state.shops.some(shop => shop.buildingId === c.workId || sim.shopOwnerId(shop) === c.id))!;
@@ -391,7 +399,7 @@ test('each of the seven technologies spends resources and completes after elapse
       sim.state.player.money = 10_000;
       sim.state.player.education = 3;
       grant(sim, 'scientist');
-      walkTo(sim, building(world, 'core').door);
+      walkTo(sim, labFoot(sim, building(world, 'core')));
       const before = { money: sim.state.player.money, level: technology.level, completed: extension(sim).stats.researchCompleted };
       ok(sim, { type: 'research', targetId: sector, value: 200 });
       assert.equal(sim.state.player.money, before.money - 200);
@@ -431,7 +439,7 @@ test('completed technologies change their connected city systems and expose ecol
         city.state.player.money = 10_000;
         city.state.player.education = 3;
         grant(city, 'scientist');
-        walkTo(city, building(world, 'core').door);
+        walkTo(city, labFoot(city, building(world, 'core')));
         extension(city).actorProfiles.player.health = 40;
         if (effect.sector === 'energy') {
           for (const district of city.state.districts) district.pollution = 100;
@@ -483,7 +491,7 @@ test('pausing freezes extension jobs and manually changing the hour does not com
   grant(sim, 'scientist');
   sim.state.player.money = 10_000;
   sim.state.player.education = 3;
-  walkTo(sim, building(world, 'core').door);
+  walkTo(sim, labFoot(sim, building(world, 'core')));
   ok(sim, { type: 'research', targetId: 'medicine', value: 200 });
   const technology = extension(sim).technologies.find(item => item.sector === 'medicine')!;
   const timer = extension(sim).lastUpdate;
@@ -720,7 +728,7 @@ test('pending research, cooking, companies and social actions resume determinist
   ok(sim, { type: 'cook', targetId: 'rice', value: 60 });
   grant(sim, 'scientist');
   sim.state.player.education = 3;
-  walkTo(sim, building(world, 'core').door);
+  walkTo(sim, labFoot(sim, building(world, 'core')));
   ok(sim, { type: 'research', targetId: 'energy', value: 200 });
   const organization = extension(sim).organizations[0];
   walkTo(sim, building(world, 'hall').door);
@@ -735,7 +743,11 @@ test('pending research, cooking, companies and social actions resume determinist
     restored.step(seconds);
     assert.equal(restored.exportSave(), sim.exportSave(), `restored extension diverged on frame ${index}`);
   }
-  assert.ok(extension(restored).stats.researchCompleted > 0);
+  assert.equal(extension(restored).technologies.find(t => t.sector === 'energy')!.level, 0, 'this player’s bound energy project cannot complete while away; other residents retain autonomous research');
+  assert.equal(extension(restored).technologies.find(t => t.sector === 'energy')!.progress, 0, 'saved absence cannot become laboratory labor');
+  walkTo(sim, labFoot(sim, building(world, 'core'))); walkTo(restored, labFoot(restored, building(world, 'core')));
+  for (let tick = 0; tick < 60; tick++) { sim.step(.25); restored.step(.25); assert.equal(restored.exportSave(), sim.exportSave()); }
+  assert.equal(extension(restored).technologies.find(t => t.sector === 'energy')!.level, 1, 'returning for120 actual minutes completes this player’s funded energy project');
   assert.ok(extension(restored).stats.mealsCooked > 0);
   sharesAreConserved(extension(restored).companies.find(item => item.id === company.id)!);
 });
@@ -904,7 +916,7 @@ test('saved extension accounting cursors, cooldown identities and funded researc
   foundCompany(sim, world);
   grant(sim, 'scientist');
   sim.state.player.education = 3;
-  walkTo(sim, building(world, 'core').door);
+  walkTo(sim, labFoot(sim, building(world, 'core')));
   ok(sim, { type: 'research', targetId: 'medicine', value: 200 });
   const valid = JSON.parse(sim.exportSave()) as { state: SimState };
   type Runtime = {
@@ -1290,13 +1302,13 @@ test('research and audits operate inside tall and underground facilities rather 
   sim.state.player.money = 10_000;
   sim.state.player.education = 3;
   grant(sim, 'scientist');
-  const high = { ...data.position, y: data.position.y + 80 };
+  const high = labFoot(sim, data, 6);
   assert.ok(Math.hypot(high.x - data.door.x, high.y - data.door.y, high.z - data.door.z) > 32);
   walkTo(sim, { ...high, x: high.x + data.width });
   rejectWithoutMutation(sim, { type: 'research', targetId: 'traffic', value: 200 });
   walkTo(sim, high);
   ok(sim, { type: 'research', targetId: 'traffic', value: 200 });
-  walkTo(sim, { ...energy.position, y: energy.position.y + 80 });
+  walkTo(sim, labFoot(sim, energy, 6));
   ok(sim, { type: 'research', targetId: 'energy', value: 200 });
   grant(sim, 'official');
   const underground = { ...archives.position, y: archives.position.y - 60 };

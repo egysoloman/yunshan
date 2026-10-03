@@ -1,0 +1,86 @@
+{
+  "createdAtUTC": "2026-10-03T02:20:28.678779+00:00",
+  "mode": "READ_ONLY_SOURCE_REVIEW_NO_NODE_SIM_TEST_BUILD_ZIP_LIBRARY",
+  "inputs": [
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/research-attendance.patch",
+      "bytes": 38132,
+      "sha256": "de8428080af2a05878fcea6b69c9f196fd56f91f01214f013b3f8b673bb4fec8"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/src/types.ts",
+      "bytes": 12767,
+      "sha256": "6c7a299f9b07bc7c1b6605a92a5245601fb492060d2d0732cb30c727f3ff4e45"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/src/simulation/extensions.ts",
+      "bytes": 82906,
+      "sha256": "22c4df3b470577f1c3b095a5b4fd8fafa88185dcf368d5d09fa446d17cf8156e"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/src/ui.ts",
+      "bytes": 158443,
+      "sha256": "d1db9d01f8614150d86584b5bd30a54fe2a4287b41ad2b2571bae3f75d4c7aa6"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/tests/research-labor.test.ts",
+      "bytes": 18076,
+      "sha256": "1736c6b96ed7439eb16789f357ffd1d923deee36e419d7b5a5b633f12046d041"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/tests/research-offsite-causal.test.ts",
+      "bytes": 2595,
+      "sha256": "2a0249874330e2bafde7aef5339b0e23ed3fef8a2ed2548517fdabf2ad8df9fc"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/candidate/tests/fixtures/research-city.ts",
+      "bytes": 6825,
+      "sha256": "0f1fe1a608a70327f3d75ec56ae316735253e875440c0565a4fd9334879cb3db"
+    },
+    {
+      "path": "/tmp/yunshan-research-attendance-prep-14-01/REVIEW.md",
+      "bytes": 5812,
+      "sha256": "5b761ba55b64bddfc1f38c58052547c20ccea85353f6c492a6ea2d11da223315"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-14/source-snapshot.json",
+      "bytes": 11653,
+      "sha256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source-snapshot.json",
+      "bytes": 11849,
+      "sha256": "81c0c69fe21d54c38aec04de703485799e320f1814fff9ef622eb0f2323dc367"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source/src/simulation.ts",
+      "bytes": 208809,
+      "sha256": "bc00e75bb79aa593f00be637a86cb1e25da813bd74f90c241d3177753911d80b"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source/src/simulation/clinical.ts",
+      "bytes": 31068,
+      "sha256": "7c5e112ff7b28ae3bc0e11169f5e918af1760b9c25ec1960bfbbc4e4045dffee"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source/src/simulation/culture.ts",
+      "bytes": 50538,
+      "sha256": "f6280b07d9b6b36de74c7b3320a60f9258c808776303cb88a3af6753372b6381"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541"
+    },
+    {
+      "path": "/tmp/yunshan-system-coherent-15/source/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    }
+  ],
+  "source15SnapshotMetadata": {
+    "createdAtUTC": "2026-10-03T02:07:00.672360+00:00",
+    "sourceRoot": "/tmp/yunshan-system-coherent-15/source",
+    "inputCount": 111
+  }
+}

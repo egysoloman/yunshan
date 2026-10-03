@@ -1,5 +1,6 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
+import { claimActorActivityMinutes } from './activity-minutes';
 import { getBuildingBody } from '../architecture-floor-plan';
 import { clinicalHealthGain, clinicalPairAtServiceStation, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
@@ -124,7 +125,8 @@ export function installCulture(simulation: Simulation): void {
     for (const id of ids) {
       if (order.receivedUnits - order.consumedUnits < 1 - 1e-7) break;
       if (order.topic === 'health' && !staff.some(doctor => clinicalPairAtServiceStation(simulation, site, doctor.id, id) && takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
-      order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + minutes);
+      const credited = order.topic === 'education' ? claimActorActivityMinutes(simulation, id, `public-education:${order.id}`, Math.min(minutes, rule.minutes - (order.serviceMinutes[id] ?? 0)), minutes) : minutes;
+      order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + credited);
       if (order.serviceMinutes[id] < rule.minutes - 1e-7) continue;
       order.consumedUnits++; order.servedIds.push(id);
       const profile = state().extension!.actorProfiles[id];

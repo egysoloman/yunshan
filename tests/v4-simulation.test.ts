@@ -46,9 +46,28 @@ test('v4 supported courtyard is outside a facility and cannot purchase through t
 });
 
 test('v4 actual NPC meal route ends at a real sale point and advances only at the existing walking speed',()=>{
-  const world=fixture(),sim=new Simulation(world),market=world.buildings.find(b=>b.kind==='market')!,citizen=sim.state.citizens[0];
+  const world=fixture(),sim=new Simulation(world),market=world.buildings.find(b=>b.kind==='market')!,shop=sim.state.shops.find(s=>s.buildingId===market.id)!,citizen=sim.state.citizens[0];
   citizen.needs={hunger:15,fatigue:100,social:100,fun:100};citizen.money=200;sim.setFocus(citizen.position,'walk');
-  let customerCount=0;sim.onEvent('customer',event=>{if(event.citizenId===citizen.id){customerCount++;assert(sim.isAtBuildingFunctionPoint(market,citizen.position,'sale',{role:'traveler',identities:['traveler']}));}});
+  let customerCount=0,ownSales=0,quantityAfterArrival=0,grossAfterArrival=0;
+  let arrival:{money:number;inventory:number;revenue:number;funds:number;food:number;hunger:number}|undefined;
+  sim.onEvent('customer',event=>{if(event.citizenId===citizen.id){
+    customerCount++;assert(sim.isAtBuildingFunctionPoint(market,citizen.position,'sale',{role:'traveler',identities:['traveler']}));
+    assert.equal(sim.state.lastSystemOrder.at(-1),'people');
+    assert(citizen.needs.hunger<30,'the actual people-stage customer event precedes commerce purchase');
+    assert.equal(citizen.money,200);assert.equal(citizen.food??0,0);
+    arrival={money:citizen.money,inventory:shop.inventory,revenue:shop.revenue,funds:sim.shopFunds(shop),food:citizen.food??0,hunger:citizen.needs.hunger};
+  }});
+  sim.onEvent('sale',event=>{if(!arrival||event.shopId!==shop.id)return;
+    assert.equal(sim.state.lastSystemOrder.at(-1),'commerce');
+    quantityAfterArrival+=event.quantity??0;grossAfterArrival+=event.amount??0;
+    assert(Math.abs(shop.inventory-(arrival.inventory-quantityAfterArrival))<1e-7,'this fixture has no food producer or freight: retail units leave existing stock');
+    assert(Math.abs(shop.revenue-(arrival.revenue+grossAfterArrival))<1e-7);
+    assert(Math.abs(sim.shopFunds(shop)-(arrival.funds+grossAfterArrival*(1-sim.state.taxRate)))<1e-7,'retail net proceeds enter the real shop account');
+    if(event.citizenId===citizen.id){ownSales++;assert((event.quantity??0)>0&&(event.amount??0)>0);
+      assert(Math.abs(citizen.money-(arrival.money-event.amount!))<1e-7);assert.equal(citizen.food,arrival.food+event.quantity!-1);
+      assert(Math.abs(citizen.needs.hunger-Math.min(100,arrival.hunger+52))<1e-7);
+    }
+  });
   const money=citizen.money;
   for(let tick=0;tick<500&&!customerCount;tick++){
     const before={...citizen.position};sim.step(.25);
@@ -56,8 +75,9 @@ test('v4 actual NPC meal route ends at a real sale point and advances only at th
     if(citizen.destinationId===market.id&&citizen.route?.length){assertClear(market,citizen.route);assert(market.functionPoints!.some(point=>point.purpose==='sale'&&distance(point.position,citizen.route!.at(-1)!)<1e-8));}
     if(!customerCount)assert.equal(citizen.money,money,'unfinished physical route cannot sell a meal');
   }
-  assert(customerCount>0,'citizen must actually arrive at the public sale point');
-  assert.equal(citizen.state,'shopping');assert(citizen.needs.hunger<30,'the customer event precedes the real commerce-stage purchase');
+  assert(customerCount>0,'citizen must actually arrive at the public sale point');assert.equal(ownSales,1,'arrival settles once in this actual commerce phase');
+  assert.equal(citizen.state,'shopping');assert(citizen.needs.hunger>=52);assert(citizen.money<money);
+  assert.deepEqual(sim.state.lastSystemOrder,['time','environment','energy','traffic','people','commerce','finance','security','politics','feedback']);
 });
 
 test('v4 public exit guidance uses a wall-free route from both a room and the ground courtyard',()=>{

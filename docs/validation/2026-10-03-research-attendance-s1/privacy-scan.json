@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scannedOriginalCount": 1057,
+  "rules": [
+    "private-key-block",
+    "aws-access-key",
+    "github-token",
+    "api-secret-token",
+    "signed-transfer-url"
+  ],
+  "alerts": [],
+  "excluded": [
+    {
+      "sourcePath": "/tmp/yunshan-system-coherent-14/source/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-system-coherent-15/source/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-research-attendance-repro-14-01/baseline/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-research-attendance-repro-14-01/candidate/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-research-attendance-fix-15-01/candidate/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-system-coherent-16/source/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    },
+    {
+      "sourcePath": "/tmp/yunshan-system-coherent-17/source/node_modules",
+      "reason": "dependency/cache or symlink; no file content copied"
+    }
+  ],
+  "matchedValuesNeverPrinted": true,
+  "scope": "Targeted credential/signed-transfer pattern scan plus explicit source allowlist; no private helper/provider directories read or copied."
+}
