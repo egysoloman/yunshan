@@ -1,0 +1,29 @@
+{
+  "state": "PUSH_SUCCEEDED",
+  "commit": "d801cf113b8b121897ebb11f0c089eb8b18246a6",
+  "branch": "takeover-city-life",
+  "startedAtUTC": "2026-10-03T06:15:08.852694+00:00",
+  "launcherPID": 208162,
+  "command": [
+    "git",
+    "push",
+    "origin",
+    "HEAD:takeover-city-life"
+  ],
+  "mainMerged": false,
+  "PRCreated": false,
+  "deployed": false,
+  "workerPID": 208165,
+  "exitCode": 0,
+  "endedAtUTC": "2026-10-03T06:15:18.390061+00:00",
+  "remoteRefs": {
+    "refs/heads/main": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "refs/heads/takeover-city-life": "d801cf113b8b121897ebb11f0c089eb8b18246a6"
+  },
+  "archiveSHA256": "2e39effe9c02fd3a244497367bee44fa76ed7d4f26967681faafa1f92b2e6c5d",
+  "archiveBytes": 93836706,
+  "archiveGitPath": "docs/validation/2026-10-03-education-attendance-e1/yunshan-E1-course-original-evidence-20261003.zip",
+  "E1LibraryID": null,
+  "LibrarySave": "Failed before create/replace due network; existing memo last confirmed4",
+  "receiptWrittenAfterFeatureCommit": true
+}
