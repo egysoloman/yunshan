@@ -1,0 +1,326 @@
+{
+  "status": "ISOLATED_CANDIDATE_TARGETED_VALIDATION_PASS_CITY_FOOD_ACCEPTANCE_NOT_ESTABLISHED",
+  "recordedAtUTC": "2026-10-03T00:59:30.993315+00:00",
+  "scope": {
+    "sourceRoot": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+    "baseSourceRoot": "/tmp/yunshan-system-coherent-12/source",
+    "baseSimulationSHA256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+    "finalSimulationSHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+    "finalRetailTestSHA256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57",
+    "sharedSourceEdited": false,
+    "commitPushZIPLibrary": "NOT_RUN_NOT_AUTHORIZED"
+  },
+  "sourcePatch": {
+    "path": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/retail-immediate-source.patch",
+    "sha256": "5924469676cd55b79223a5a109be2baf824168deb2c9ab0c08183d6c800f7f77",
+    "files": [
+      "src/simulation.ts",
+      "tests/retail-period.test.ts"
+    ],
+    "applyCheck": {
+      "command": "git apply --check ../candidate/retail-immediate-source.patch",
+      "cwd": "/tmp/yunshan-system-coherent-12/source",
+      "exitCode": 0,
+      "readOnly": true
+    }
+  },
+  "validation": {
+    "initialRetail": "9/9 PASS",
+    "firstStrict": "FAIL exit2 TS2554 optional diagnostic signature; preserved, then corrected",
+    "finalTargeted": "56/56 PASS: 38 top-level (retail10 + trade22 + route6) and 18 route negative subtests",
+    "build": "PASS npm run build (tsc --noEmit plus Vite)",
+    "fullNpmTest": "NOT_RUN; no use of historical496",
+    "GPUFormalBrowserMac": "NOT_RUN"
+  },
+  "realRunRecords": {
+    "retail-first": {
+      "label": "retail-first",
+      "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/retail-period.test.ts"
+      ],
+      "startedAtUTC": "2026-10-03T00:49:20.768958+00:00",
+      "wrapperPID": 172936,
+      "status": "PASS",
+      "childPID": 172939,
+      "exitCode": 0,
+      "endedAtUTC": "2026-10-03T00:49:40.056979+00:00",
+      "sourceStable": true,
+      "rawLogSHA256": "0b7bd00f190316591c2acb9f02573cba1fea093e7a0be2caca40846180da5cce",
+      "childExited": true
+    },
+    "strict-first": {
+      "label": "strict-first",
+      "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+      "command": [
+        "./node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "startedAtUTC": "2026-10-03T00:50:11.655370+00:00",
+      "wrapperPID": 173230,
+      "status": "FAIL",
+      "childPID": 173233,
+      "exitCode": 2,
+      "endedAtUTC": "2026-10-03T00:50:18.912299+00:00",
+      "sourceStable": true,
+      "rawLogSHA256": "f3c0ad6b75c429f4b8ceaf1e387f6410a87020a2a4a62bee4e2ad503be5f314d",
+      "childExited": true
+    },
+    "retail-trade-final": {
+      "label": "retail-trade-final",
+      "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/retail-period.test.ts",
+        "tests/trade.test.ts",
+        "tests/route-encoding.test.ts"
+      ],
+      "startedAtUTC": "2026-10-03T00:51:57.992351+00:00",
+      "wrapperPID": 173679,
+      "status": "PASS",
+      "childPID": 173682,
+      "exitCode": 0,
+      "endedAtUTC": "2026-10-03T00:54:14.064944+00:00",
+      "sourceStable": true,
+      "rawLogSHA256": "06614a56267cc02d13689d231329ada89d00b29b2a2d19fe478218f9a15ac013",
+      "childExited": true
+    },
+    "build-final": {
+      "label": "build-final",
+      "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedAtUTC": "2026-10-03T00:55:10.331485+00:00",
+      "wrapperPID": 174423,
+      "status": "PASS",
+      "childPID": 174426,
+      "exitCode": 0,
+      "endedAtUTC": "2026-10-03T00:55:20.765065+00:00",
+      "sourceStable": true,
+      "rawLogSHA256": "3d3b4c983f0fd8f07d2a6f00b73eb8dd8cfd1e422f296c83ff32f49efdff3dcb",
+      "childExited": true
+    },
+    "natural-final": {
+      "label": "natural-final",
+      "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--import",
+        "../headless-audit-register.mjs",
+        "../natural-late31-retail.mjs",
+        "--authorized-candidate-natural31-after-new-root-go",
+        "--exact24"
+      ],
+      "startedAtUTC": "2026-10-03T00:55:43.067304+00:00",
+      "wrapperPID": 174576,
+      "status": "PASS",
+      "childPID": 174579,
+      "exitCode": 0,
+      "endedAtUTC": "2026-10-03T00:57:42.252495+00:00",
+      "sourceStable": true,
+      "rawLogSHA256": "bc5994bfe353a887a628d6dcf86480004ef724c675509783a0668732935a5cdc",
+      "childExited": true
+    }
+  },
+  "natural": {
+    "directory": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/natural31-2026-10-03T00-55-43.233Z",
+    "resultSHA256": "6f10d43d654e6b6812b2cdcdc6e6842303d87cca3f13e19d8d9f2875fec8e69f",
+    "status": "NATURAL31_OBSERVATION_COMPLETE_CITY_FOOD_ACCEPTANCE_NOT_ESTABLISHED",
+    "steps": 31,
+    "mainSave": {
+      "tick": 211,
+      "clock": 1324,
+      "bytes": 3027288,
+      "sha256": "394a746f07978c6b65888f7bac44ea34d7f99692e1c0079271646b47f6d24265"
+    },
+    "exact24": "COMPLETE_FULL_SAVE_BYTES_EXACT",
+    "exact24Steps": 24,
+    "exact24LastSaveSHA256": "945f8f1d74345a8ddcaf6a837020e04fd0632e87ded2b7057de03f762ec264f8",
+    "lastTick": 235,
+    "lastHour": 23.666666666666668,
+    "cashMaxAbsoluteResidual": 2.9103830456733704e-10,
+    "worldSHAStart": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "worldSHAEnd": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "allInputSHAStable": true,
+    "inputManifestSHA256": "110da871ebb8a7531dd2cc8dbe49e9880e29712381da0c7afa28a5bad12a19a8",
+    "frozenInputCounts": {
+      "candidate": 107,
+      "base": 106,
+      "sharedExecutable": 101,
+      "prepared": 8
+    },
+    "headless": {
+      "window": "undefined",
+      "document": "undefined",
+      "requestAnimationFrame": "undefined",
+      "sourceImports": [
+        "src/simulation.ts",
+        "src/persistence/world-layout.ts"
+      ],
+      "rendererImported": false,
+      "rendererOrThreeImportGuardActive": true,
+      "worldInput": "Plain JSON-serializable WorldDefinition; building, road, coordinate and ACL contracts retained",
+      "worldJSONRoundtripExact": true
+    },
+    "natural191Receipt": {
+      "tick": 209,
+      "clock": 1316,
+      "quantity": 2,
+      "gross": 22.938114538631115,
+      "buyerBefore": 408.39193641383923,
+      "buyerAfter": 385.4538218752081,
+      "stockBefore": 75,
+      "stockAfter": 73,
+      "hungerBefore": 18.243706238502718,
+      "hungerAfter": 70.24370623850271,
+      "foodBefore": 0,
+      "foodAfter": 1,
+      "requestConsumedOnce": true
+    },
+    "actorCausalCoverage": {
+      "citizen-191": {
+        "actualCustomers": 1,
+        "actualSales": 1,
+        "coverage": "ACTUAL_NATIVE_SALE_OBSERVED",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-456": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-604": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-15": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-27": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-37": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-59": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      },
+      "citizen-94": {
+        "actualCustomers": 0,
+        "actualSales": 0,
+        "coverage": "PARTIAL_OR_ACTUAL_REJECTION_BOUNDARY_READ_TRACE",
+        "originalTrajectoryNotForced": true
+      }
+    },
+    "completeSaveExactEachContinuationTick": true,
+    "noActorOrClockInjection": true,
+    "aliveResidents": 616,
+    "playerAlive": true,
+    "allRetailOwnedPlusConsignedEqualsInventoryAtEachTick": true,
+    "endCityNeedsSnapshot": {
+      "hunger0": 0,
+      "hungerBelow30": 115
+    },
+    "errors": []
+  },
+  "originalFailuresPreserved": {
+    "allSelectedOriginalSHAStable": true,
+    "hashes": {
+      "/tmp/yunshan-food-access-current-v4-12-prep-01/run-late-2026-10-02T17-38-16.513Z/result.json": "e815d25a66d75bba600a7c329e928d277637d7973537084eda2e144ffeb9a137",
+      "/tmp/yunshan-food-access-current-v4-12-prep-01/run-late-2026-10-02T17-38-16.513Z/late/result.json": "0c20947ec05ba6a42292ba9634c3a8a6b0f27f88fe17ce342702676668e21e8a",
+      "/tmp/yunshan-food-access-current-v4-12-prep-01/run-late-2026-10-02T17-38-16.513Z/late/main-last-save.json": "14838ba49d446479c7378bce4b93e9b564657c29ff83270259a14a21e04c3d15",
+      "/tmp/yunshan-first-night-home-audit-10-01/run-v4-2026-10-02T14-25-00.567Z/result.json": "70054e13c0fd93c5ffbc3f2ee92818a9d54b65b69e9a3bbf174226901943fe85"
+    }
+  },
+  "remaining": {
+    "citizen456And604": "No actual customer/sale in original31, partial causal coverage",
+    "longFoodGap": "Historical daily production196.0761 versus ideal daily demand852.9231 remains independently unresolved; this short receipt is no steady-state proof",
+    "sharedIntegration": "NOT_RUN_NOT_AUTHORIZED",
+    "fullCityFoodAcceptance": "NOT_ESTABLISHED"
+  },
+  "ownedProcessRelease": {
+    "recordedAtUTC": "2026-10-03T00:59:30.917731+00:00",
+    "ownedProcesses": [
+      {
+        "pid": 172936,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 172939,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 173230,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 173233,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 173679,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 173682,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 174423,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 174426,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 174576,
+        "liveNonZombie": false
+      },
+      {
+        "pid": 174579,
+        "liveNonZombie": false
+      }
+    ],
+    "externalSignalsSent": false
+  },
+  "postValidationDocumentationOnly": {
+    "changed": "source/开发备忘录.md",
+    "runtimeTestsUnchanged": true,
+    "manifest": "final-deliverable-manifest.json"
+  },
+  "buildDistManifest": {
+    "path": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/build-dist-manifest.json",
+    "fileCount": 7,
+    "sha256": "e0e38337f17e759e6b51de235b338013f0b087cbe663ec7ba3601d49770252d3"
+  }
+}

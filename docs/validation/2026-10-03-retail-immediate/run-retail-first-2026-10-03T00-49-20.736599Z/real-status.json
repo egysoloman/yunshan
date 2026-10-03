@@ -1,0 +1,21 @@
+{
+  "label": "retail-first",
+  "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+  "command": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/retail-period.test.ts"
+  ],
+  "startedAtUTC": "2026-10-03T00:49:20.768958+00:00",
+  "wrapperPID": 172936,
+  "status": "PASS",
+  "childPID": 172939,
+  "exitCode": 0,
+  "endedAtUTC": "2026-10-03T00:49:40.056979+00:00",
+  "sourceStable": true,
+  "rawLogSHA256": "0b7bd00f190316591c2acb9f02573cba1fea093e7a0be2caca40846180da5cce",
+  "childExited": true
+}

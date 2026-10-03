@@ -1,0 +1,80 @@
+{
+  "atUTC": "2026-10-03T01:13:22.818437+00:00",
+  "state": "BOUND_ACTUAL14_NOT_RUN_NO_GPU_GO",
+  "sourceRoot": "/tmp/yunshan-system-coherent-14/source",
+  "actualInputCount": 108,
+  "actualSharedExecutableInputCount": 103,
+  "snapshotManifestSHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb",
+  "buildReceiptSHA256": "7125b5046ff201c57afb174ebd209594e5a262320a344afdde28c8b08456e917",
+  "rootActualBuildExitCode": 0,
+  "distEntry": "/assets/index-BK5BTGkK.js",
+  "distEntryBytes": 652667,
+  "distEntrySHA256": "c88765d0527dd33f7c58c862cd26ee03f33324b839022ce55d4e0282df09dbb4",
+  "sourceMaps": [
+    {
+      "assetPath": "/assets/index-BK5BTGkK.js.map",
+      "bytes": 1982120,
+      "sha256": "34c093226069e46123afba40a314978f7f39b565d726051c96713a05dbb2c6ae"
+    },
+    {
+      "assetPath": "/assets/three-DfYROjRC.js.map",
+      "bytes": 2719092,
+      "sha256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191"
+    }
+  ],
+  "frozen108HashMismatches": [],
+  "shared103HashMismatches": [],
+  "externalFiles": {
+    "native-home-rest.mjs": {
+      "bytes": 42558,
+      "sha256": "ad3e28b83dd8e718d894d50179ae5e9bdca0b831bea89fa260fb9a5ac273eed3"
+    },
+    "home-plan-readonly.mjs": {
+      "bytes": 10055,
+      "sha256": "1a83462cfc412cb607b08d05c9c16462adc2868fc32c85d3991672b722c902db"
+    },
+    "pending-source-contract.json": {
+      "bytes": 12703,
+      "sha256": "4d9ae1d980fb0a584925b990d8db03d8971942a356a437a074488e6556409807"
+    },
+    "source-contract.json": {
+      "bytes": 12703,
+      "sha256": "4d9ae1d980fb0a584925b990d8db03d8971942a356a437a074488e6556409807"
+    },
+    "source-snapshot-original.json": {
+      "bytes": 11653,
+      "sha256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb"
+    },
+    "build-receipt-original.json": {
+      "bytes": 23481,
+      "sha256": "7125b5046ff201c57afb174ebd209594e5a262320a344afdde28c8b08456e917"
+    }
+  },
+  "harnessSHA256": "ad3e28b83dd8e718d894d50179ae5e9bdca0b831bea89fa260fb9a5ac273eed3",
+  "plannerSHA256": "1a83462cfc412cb607b08d05c9c16462adc2868fc32c85d3991672b722c902db",
+  "unchangedBusinessAndRuntimeAssertContainingLinesCount": 72,
+  "businessAndRuntimeAssertLinesVerbatimPreserved": true,
+  "changedAssertionIdentityOnly": [
+    "state error message freeze14",
+    "root actual input108",
+    "root actual shared executable103"
+  ],
+  "original13EvidenceFilesRehashed": 17,
+  "original13EvidenceHashMismatches": [],
+  "newEvidenceRoot": "/tmp/yunshan-coherent14-native-frame-barrier-01/native-home-evidence",
+  "newEvidenceRootExists": false,
+  "nodeCheck": {
+    "receipt": "node-check-receipt.json",
+    "exitCode": 0,
+    "scope": "Syntax parsing only. Does not evaluate module or start browser/Simulation/server."
+  },
+  "NOT_RUN": [
+    "browser",
+    "GPU",
+    "Simulation",
+    "test",
+    "build",
+    "ZIP"
+  ],
+  "executionGate": "Wait for separate root GPU GO after food ZIP release. No launch performed. Any native evidence ZIP needs later artifact GO."
+}

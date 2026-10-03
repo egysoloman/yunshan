@@ -1,0 +1,87 @@
+{
+  "setupCount": 1,
+  "plan": {
+    "stage": {
+      "x": -390.8,
+      "y": 76.2377358490566,
+      "z": 336.6
+    },
+    "entrance": {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 333.40000000000003
+    }
+  },
+  "before": {
+    "player": {
+      "position": {
+        "x": -330,
+        "y": 51.5375,
+        "z": 487
+      },
+      "role": "traveler",
+      "identities": [
+        "traveler"
+      ],
+      "money": 600,
+      "reputation": 0,
+      "needs": {
+        "hunger": 84.89499999999992,
+        "fatigue": 89.94600000000008,
+        "social": 69.964,
+        "fun": 69.97299999999996
+      },
+      "inventory": {
+        "block": 32
+      },
+      "homeId": null,
+      "education": 0,
+      "experience": 0,
+      "partnerId": null,
+      "vehicleId": null
+    },
+    "tick": 12,
+    "at": 483
+  },
+  "after": {
+    "player": {
+      "position": {
+        "x": -390.8,
+        "y": 76.2377358490566,
+        "z": 336.6
+      },
+      "role": "traveler",
+      "identities": [
+        "traveler"
+      ],
+      "money": 600,
+      "reputation": 0,
+      "needs": {
+        "hunger": 84.89499999999992,
+        "fatigue": 89.94600000000008,
+        "social": 69.964,
+        "fun": 69.97299999999996
+      },
+      "inventory": {
+        "block": 32
+      },
+      "homeId": null,
+      "education": 0,
+      "experience": 0,
+      "partnerId": null,
+      "vehicleId": null
+    },
+    "tick": 12,
+    "at": 483
+  },
+  "actualFeet": {
+    "x": -390.8,
+    "y": 76.2377358490566,
+    "z": 336.6
+  },
+  "actualEye": {
+    "x": -390.8,
+    "y": 77.9577358490566,
+    "z": 336.6
+  }
+}

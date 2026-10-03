@@ -1,0 +1,17 @@
+{
+  "label": "strict-first",
+  "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+  "command": [
+    "./node_modules/.bin/tsc",
+    "--noEmit"
+  ],
+  "startedAtUTC": "2026-10-03T00:50:11.655370+00:00",
+  "wrapperPID": 173230,
+  "status": "FAIL",
+  "childPID": 173233,
+  "exitCode": 2,
+  "endedAtUTC": "2026-10-03T00:50:18.912299+00:00",
+  "sourceStable": true,
+  "rawLogSHA256": "f3c0ad6b75c429f4b8ceaf1e387f6410a87020a2a4a62bee4e2ad503be5f314d",
+  "childExited": true
+}

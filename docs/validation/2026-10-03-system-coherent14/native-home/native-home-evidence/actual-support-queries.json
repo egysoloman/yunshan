@@ -1,0 +1,593 @@
+[
+  {
+    "label": "exterior-approach",
+    "target": {
+      "x": -390.8,
+      "y": 76.46415094339623,
+      "z": 334.6
+    },
+    "observedTick": 72,
+    "actualFeet": {
+      "x": -390.8,
+      "y": 76.44574792452671,
+      "z": 334.7625600000141
+    },
+    "actualEye": {
+      "x": -390.8,
+      "y": 78.16574792452671,
+      "z": 334.7625600000141
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "ground-or-road",
+      "y": 76.44574792452671,
+      "floor": 0,
+      "source": "getWalkHeight(actualX,actualZ,actualFootY)",
+      "queryFeet": {
+        "x": -390.8,
+        "y": 76.44574792452671,
+        "z": 334.7625600000141
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full floor/door-edge/ground-edge/roof/other-body cases checked first; unsupported exceptions rejected",
+      "selectedPlanHeadClear": true,
+      "targetHeightUsed": false,
+      "note": "Matches existing exterior road/terrain height authority; does not claim a bridge/roof/modified-ground support contract"
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "service-table",
+    "target": {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 331.40000000000003
+    },
+    "observedTick": 92,
+    "actualFeet": {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 331.40000000000003
+    },
+    "actualEye": {
+      "x": -390.8,
+      "y": 78.32,
+      "z": 331.40000000000003
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": 0,
+          "z": 15.199999999999989
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -390.8,
+        "y": 76.6,
+        "z": 331.40000000000003
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "service-table",
+    "target": {
+      "x": -397.2,
+      "y": 76.6,
+      "z": 318.6
+    },
+    "observedTick": 156,
+    "actualFeet": {
+      "x": -397.1308272120156,
+      "y": 76.6,
+      "z": 318.7383455759688
+    },
+    "actualEye": {
+      "x": -397.1308272120156,
+      "y": 78.32,
+      "z": 318.7383455759688
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "gallery",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "gallery",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -6.330827212015606,
+          "z": 2.5383455759687763
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -397.1308272120156,
+        "y": 76.6,
+        "z": 318.7383455759688
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "service-table",
+    "target": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    },
+    "observedTick": 212,
+    "actualFeet": {
+      "x": -398.7977701863424,
+      "y": 76.6,
+      "z": 307.2154138389606
+    },
+    "actualEye": {
+      "x": -398.7977701863424,
+      "y": 78.32,
+      "z": 307.2154138389606
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -7.997770186342393,
+          "z": -8.98458616103943
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -398.7977701863424,
+        "y": 76.6,
+        "z": 307.2154138389606
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "bed-side",
+    "target": {
+      "x": -398.7977701863424,
+      "y": 76.6,
+      "z": 307.2154138389606
+    },
+    "observedTick": 236,
+    "actualFeet": {
+      "x": -398.7977701863424,
+      "y": 76.6,
+      "z": 307.2154138389606
+    },
+    "actualEye": {
+      "x": -398.7977701863424,
+      "y": 78.32,
+      "z": 307.2154138389606
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -7.997770186342393,
+          "z": -8.98458616103943
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -398.7977701863424,
+        "y": 76.6,
+        "z": 307.2154138389606
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "bed-side",
+    "target": {
+      "x": -408.40000000000003,
+      "y": 76.6,
+      "z": 304.20000000000005
+    },
+    "observedTick": 332,
+    "actualFeet": {
+      "x": -408.3125997938034,
+      "y": 76.6,
+      "z": 304.2274465198613
+    },
+    "actualEye": {
+      "x": -408.3125997938034,
+      "y": 78.32,
+      "z": 304.2274465198613
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -17.51259979380336,
+          "z": -11.972553480138743
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -408.3125997938034,
+        "y": 76.6,
+        "z": 304.2274465198613
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "bed-side",
+    "target": {
+      "x": -408.8,
+      "y": 76.6,
+      "z": 301.6
+    },
+    "observedTick": 364,
+    "actualFeet": {
+      "x": -408.7713514838085,
+      "y": 76.6,
+      "z": 301.7544366276617
+    },
+    "actualEye": {
+      "x": -408.7713514838085,
+      "y": 78.32,
+      "z": 301.7544366276617
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -17.971351483808462,
+          "z": -14.44556337233837
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -408.7713514838085,
+        "y": 76.6,
+        "z": 301.7544366276617
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "leave-bed",
+    "target": {
+      "x": -408.7713514838085,
+      "y": 76.6,
+      "z": 301.7544366276617
+    },
+    "observedTick": 388,
+    "actualFeet": {
+      "x": -408.7713514838085,
+      "y": 76.6,
+      "z": 301.7544366276617
+    },
+    "actualEye": {
+      "x": -408.7713514838085,
+      "y": 78.32,
+      "z": 301.7544366276617
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -17.971351483808462,
+          "z": -14.44556337233837
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -408.7713514838085,
+        "y": 76.6,
+        "z": 301.7544366276617
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "leave-bed",
+    "target": {
+      "x": -399.6,
+      "y": 76.6,
+      "z": 307.40000000000003
+    },
+    "observedTick": 492,
+    "actualFeet": {
+      "x": -399.6379494686325,
+      "y": 76.6,
+      "z": 307.37663963370187
+    },
+    "actualEye": {
+      "x": -399.6379494686325,
+      "y": 78.32,
+      "z": 307.37663963370187
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -8.837949468632473,
+          "z": -8.823360366298175
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -399.6379494686325,
+        "y": 76.6,
+        "z": 307.37663963370187
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "leave-bed",
+    "target": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    },
+    "observedTick": 508,
+    "actualFeet": {
+      "x": -398.9691280246181,
+      "y": 76.6,
+      "z": 307.23565216452255
+    },
+    "actualEye": {
+      "x": -398.9691280246181,
+      "y": 78.32,
+      "z": 307.23565216452255
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -8.16912802461809,
+          "z": -8.964347835477497
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -398.9691280246181,
+        "y": 76.6,
+        "z": 307.23565216452255
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "return-original-side",
+    "target": {
+      "x": -398.9691280246181,
+      "y": 76.6,
+      "z": 307.23565216452255
+    },
+    "observedTick": 532,
+    "actualFeet": {
+      "x": -398.9691280246181,
+      "y": 76.6,
+      "z": 307.23565216452255
+    },
+    "actualEye": {
+      "x": -398.9691280246181,
+      "y": 78.32,
+      "z": 307.23565216452255
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -8.16912802461809,
+          "z": -8.964347835477497
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -398.9691280246181,
+        "y": 76.6,
+        "z": 307.23565216452255
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "return-original-side",
+    "target": {
+      "x": -408.40000000000003,
+      "y": 76.6,
+      "z": 303.40000000000003
+    },
+    "observedTick": 628,
+    "actualFeet": {
+      "x": -408.3299705016697,
+      "y": 76.6,
+      "z": 303.42848186228724
+    },
+    "actualEye": {
+      "x": -408.3299705016697,
+      "y": 78.32,
+      "z": 303.42848186228724
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -17.52997050166971,
+          "z": -12.771518137712803
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -408.3299705016697,
+        "y": 76.6,
+        "z": 303.42848186228724
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  },
+  {
+    "label": "return-original-side",
+    "target": {
+      "x": -408.8,
+      "y": 76.6,
+      "z": 301.6
+    },
+    "observedTick": 652,
+    "actualFeet": {
+      "x": -408.75635919270667,
+      "y": 76.6,
+      "z": 301.7697689716813
+    },
+    "actualEye": {
+      "x": -408.75635919270667,
+      "y": 78.32,
+      "z": 301.7697689716813
+    },
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "query": {
+      "kind": "room",
+      "y": 76.6,
+      "floor": 0,
+      "support": {
+        "kind": "room",
+        "floor": 0,
+        "y": 76.6,
+        "local": {
+          "x": -17.956359192706657,
+          "z": -14.430231028318758
+        }
+      },
+      "source": "floorPlanSupport(actualFeet,.35)",
+      "queryFeet": {
+        "x": -408.75635919270667,
+        "y": 76.6,
+        "z": 301.7697689716813
+      },
+      "bodyRadius": 0.35,
+      "eyeHeight": 1.72,
+      "voxelCount": 0,
+      "sourcePriority": "Full body floor support is first, exactly as controller",
+      "selectedPlanHeadClear": true
+    },
+    "noPositionWrite": true
+  }
+]

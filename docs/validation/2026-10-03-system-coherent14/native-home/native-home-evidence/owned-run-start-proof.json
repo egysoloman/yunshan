@@ -1,0 +1,221 @@
+{
+  "atUTC": "2026-10-03T01:15:32.868209+00:00",
+  "rootNodePID": 177398,
+  "ownership": "Exact original wrapper/node PID and descendant tree; no broad matching or signals",
+  "ownedNonZombieProcesses": [
+    {
+      "pid": 177394,
+      "ppid": 177393,
+      "state": "S",
+      "startTicks": 12606071,
+      "argv": [
+        "python3",
+        "native-launch.py"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177398,
+      "ppid": 177394,
+      "state": "S",
+      "startTicks": 12606075,
+      "argv": [
+        "node",
+        "/tmp/yunshan-coherent14-native-frame-barrier-01/native-home-rest.mjs"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177409,
+      "ppid": 177398,
+      "state": "S",
+      "startTicks": 12606089,
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "node_modules/vite/bin/vite.js",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4189",
+        "--strictPort"
+      ],
+      "profile": null,
+      "port": "4189"
+    },
+    {
+      "pid": 177417,
+      "ppid": 177409,
+      "state": "S",
+      "startTicks": 12606103,
+      "argv": [
+        "/workspace/yunshan/node_modules/@esbuild/linux-x64/bin/esbuild",
+        "--service=0.28.2",
+        "--ping"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177429,
+      "ppid": 177398,
+      "state": "S",
+      "startTicks": 12606150,
+      "argv": [
+        "/usr/lib/chromium/chromium",
+        "--show-component-extension-options",
+        "--enable-gpu-rasterization",
+        "--no-default-browser-check",
+        "--disable-pings",
+        "--media-router=0",
+        "--enable-remote-extensions",
+        "--load-extension=",
+        "--disable-field-trial-config",
+        "--disable-background-networking",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-back-forward-cache",
+        "--disable-breakpad",
+        "--disable-client-side-phishing-detection",
+        "--disable-component-extensions-with-background-pages",
+        "--disable-component-update",
+        "--no-default-browser-check",
+        "--disable-default-apps",
+        "--disable-dev-shm-usage",
+        "--disable-edgeupdater",
+        "--disable-extensions",
+        "--disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion",
+        "--enable-features=CDPScreenshotNewSurface",
+        "--allow-pre-commit-input",
+        "--disable-hang-monitor",
+        "--disable-ipc-flooding-protection",
+        "--disable-popup-blocking",
+        "--disable-prompt-on-repost",
+        "--disable-renderer-backgrounding",
+        "--disable-updater-scheduler",
+        "--force-color-profile=srgb",
+        "--metrics-recording-only",
+        "--no-first-run",
+        "--password-store=basic",
+        "--use-mock-keychain",
+        "--no-service-autorun",
+        "--export-tagged-pdf",
+        "--disable-search-engine-choice-screen",
+        "--unsafely-disable-devtools-self-xss-warnings",
+        "--edge-skip-compat-layer-relaunch",
+        "--disable-infobars",
+        "--disable-search-engine-choice-screen",
+        "--disable-sync",
+        "--enable-unsafe-swiftshader",
+        "--headless",
+        "--hide-scrollbars",
+        "--mute-audio",
+        "--blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4",
+        "--no-sandbox",
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555",
+        "--remote-debugging-pipe",
+        "--no-startup-window"
+      ],
+      "profile": "/tmp/playwright_chromiumdev_profile-R9W555",
+      "port": null
+    },
+    {
+      "pid": 177447,
+      "ppid": 177429,
+      "state": "S",
+      "startTicks": 12606171,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=zygote --no-zygote-sandbox --no-sandbox --headless --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177448,
+      "ppid": 177429,
+      "state": "S",
+      "startTicks": 12606171,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=zygote --no-sandbox --headless --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --change-stack-guard-on-fork=enable --no-first-run --ozone-platform=headless --ozone-override-screen-size=800,600 --use-angle=swiftshader-webgl"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177467,
+      "ppid": 177447,
+      "state": "S",
+      "startTicks": 12606181,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=gpu-process --no-sandbox --disable-dev-shm-usage --disable-breakpad --enable-gpu-rasterization --headless --ozone-platform=headless --use-angle=swiftshader --enable-unsafe-swiftshader --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAASAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708988185955192"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177483,
+      "ppid": 177429,
+      "state": "S",
+      "startTicks": 12606233,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --mute-audio --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708989122997041"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177484,
+      "ppid": 177448,
+      "state": "S",
+      "startTicks": 12606238,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --mute-audio --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708990060038890"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177514,
+      "ppid": 177448,
+      "state": "S",
+      "startTicks": 12606252,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=renderer --top-chrome-webui --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=5 --time-ticks-at-unix-epoch=-1790864042858957 --launch-time-ticks=126062526947 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708990997080739"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177523,
+      "ppid": 177448,
+      "state": "S",
+      "startTicks": 12606257,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=7 --time-ticks-at-unix-epoch=-1790864042858957 --launch-time-ticks=126062569619 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708992871164437"
+      ],
+      "profile": null,
+      "port": null
+    },
+    {
+      "pid": 177526,
+      "ppid": 177448,
+      "state": "R",
+      "startTicks": 12606257,
+      "argv": [
+        "/usr/lib/chromium/chromium --type=renderer --crashpad-handler-pid=0 --enable-crash-reporter=,built on Debian GNU/Linux 13 (trixie) --noerrdialogs --user-data-dir=/tmp/playwright_chromiumdev_profile-R9W555 --disable-print-preview --change-stack-guard-on-fork=enable --no-sandbox --disable-dev-shm-usage --disable-back-forward-cache --disable-background-timer-throttling --disable-breakpad --force-color-profile=srgb --remote-debugging-pipe --allow-pre-commit-input --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --ozone-platform=headless --lang=en-US --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=6 --time-ticks-at-unix-epoch=-1790864042858957 --launch-time-ticks=126062572723 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,7263958902928290051,12472341254975354762,262144 --enable-features=CDPScreenshotNewSurface --disable-features=AutoDeElevate,AvoidUnnecessaryBeforeUnloadCheckSync,BlockOriginHeaderModificationOnRedirect,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,OptimizationHints,PaintHolding,ThirdPartyStoragePartitioning,Translate,msEdgeUpdateLaunchServicesPreferredVersion,msForceBrowserSignIn --variations-seed-version --pseudonymization-salt-handle=7,i,5520551615163581018,14417336631630570430,4 --trace-process-track-uuid=3190708991934122588"
+      ],
+      "profile": null,
+      "port": null
+    }
+  ],
+  "port4189Listeners": [
+    "LISTEN 0      0          127.0.0.1:4189      0.0.0.0:*          "
+  ],
+  "signalsSent": []
+}

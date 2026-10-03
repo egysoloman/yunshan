@@ -1,0 +1,21 @@
+✔ late W in a slow frame receives only its real held interval, with unchanged eye and speed (9.886156ms)
+✔ a completed 200ms pulse survives early idle time in a five-second frame and delayed keyup delivery (1.326218ms)
+✔ continuous W pays each interval once and a long held stall remains capped at one second (3.711933ms)
+✔ active budget keeps the latest active second in chronological order and ignores idle gaps (4.068305ms)
+✔ sprint, opposite keys and normalized diagonal arrows retain their original speed contracts (2.217039ms)
+✔ epoch timestamps normalize, invalid clocks fall back, and dispatch order clamps backward timestamps (0.898755ms)
+✔ an accepted event later than the supplied rAF timestamp waits for the next frame (0.711466ms)
+✔ a late event before an already consumed frame changes only unconsumed time and cannot roll the body back (1.463615ms)
+✔ blur, visibility and successful setMode discard pending movement while a rejected mode keeps it (1.531808ms)
+✔ paused walking retains the original motor while passenger frames consume without later replay (1.380094ms)
+✔ pre-reset queued presses cannot revive walking through later snapshots or pose changes; old keyup releases held state (2.108076ms)
+✔ native-failure home geometry permits exact timed W to the original exterior approach and E enters from outside (24.902522ms)
+✔ successful pose changes cut old walking budget while retaining held keys; failed doors leave it intact (3.070429ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 382.968063

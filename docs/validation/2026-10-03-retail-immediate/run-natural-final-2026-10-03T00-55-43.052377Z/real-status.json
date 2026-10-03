@@ -1,0 +1,23 @@
+{
+  "label": "natural-final",
+  "cwd": "/tmp/yunshan-food-retail-current-v4-candidate-12-01/source",
+  "command": [
+    "node",
+    "--import",
+    "tsx",
+    "--import",
+    "../headless-audit-register.mjs",
+    "../natural-late31-retail.mjs",
+    "--authorized-candidate-natural31-after-new-root-go",
+    "--exact24"
+  ],
+  "startedAtUTC": "2026-10-03T00:55:43.067304+00:00",
+  "wrapperPID": 174576,
+  "status": "PASS",
+  "childPID": 174579,
+  "exitCode": 0,
+  "endedAtUTC": "2026-10-03T00:57:42.252495+00:00",
+  "sourceStable": true,
+  "rawLogSHA256": "bc5994bfe353a887a628d6dcf86480004ef724c675509783a0668732935a5cdc",
+  "childExited": true
+}

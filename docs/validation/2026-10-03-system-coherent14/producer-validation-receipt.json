@@ -1,0 +1,32 @@
+{
+  "startedAtUTC": "2026-10-03T01:31:55.646153+00:00",
+  "endedAtUTC": "2026-10-03T01:31:59.043063+00:00",
+  "producerPID": 179288,
+  "wallSeconds": 3.3969259040022735,
+  "status": "ZIP_PRODUCED_CRC_ALL_INPUT_BYTES_MATCH_SENSITIVE7_ZERO",
+  "ZIP": "/tmp/yunshan-coherent14-native-artifact-01/yunshan-coherent14-native-home-full-and-native13-first-failure-20261003.zip",
+  "bytes": 14921761,
+  "sha256": "0fcb421ca62507f1becf37acb1002cec6d4e571ac9315c2f5b532c79c27c3910",
+  "memberCount": 233,
+  "indexedInputCount": 232,
+  "CRC": "ALL_PASS",
+  "eachIndexedMemberMatchesOriginalCurrentBytes": true,
+  "sourcePayloadCount": 108,
+  "sourceManifestSHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb",
+  "entrySHA256": "c88765d0527dd33f7c58c862cd26ee03f33324b839022ce55d4e0282df09dbb4",
+  "original13RawCount": 17,
+  "sensitivePatternCount": 7,
+  "sensitiveMatches": {
+    "private-key-material": [],
+    "aws-access-key-id": [],
+    "openai-api-secret": [],
+    "github-access-secret": [],
+    "slack-access-secret": [],
+    "google-oauth-secret": [],
+    "signed-or-credential-url": []
+  },
+  "indexSHA256": "6c8c29f6286954cb6a8cfb2c692d35f3624c6c087d667faed7211088097f6ec4",
+  "indexBytes": 80887,
+  "scope": "Packaging and validation only. No formal11, browser, GPU, Simulation, tests or build was launched.",
+  "Library": "NOT_SAVED_YET_SINGLE_CREATE_NEXT"
+}

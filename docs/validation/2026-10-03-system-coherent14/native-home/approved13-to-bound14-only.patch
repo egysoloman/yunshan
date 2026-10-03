@@ -1,0 +1,22 @@
+--- approved13/native-home-rest.mjs
++++ bound14/native-home-rest.mjs
+@@ -11,7 +11,7 @@
+ // Root must grant a new source binding and the exclusive GPU slot before this template can run.
+ assert.equal(process.env.YUNSHAN_COMPILED_VALIDATION_APPROVED, '1', 'NOT_RUN: explicit root source-binding and exclusive GPU approval is required');
+ const binding = JSON.parse(await readFile(new URL('./pending-source-contract.json', import.meta.url), 'utf8'));
+-assert.equal(binding.state, 'BOUND_AFTER_ROOT_FREEZE', 'NOT_RUN: new freeze13 actual manifest/count/entry/maps are UNBOUND; root must bind and separately approve GPU');
++assert.equal(binding.state, 'BOUND_AFTER_ROOT_FREEZE', 'NOT_RUN: new freeze14 actual manifest/count/entry/maps are UNBOUND; root must bind and separately approve GPU');
+ assert.equal(process.env.YUNSHAN_HOME_NATIVE_APPROVED, '1', 'NOT_RUN: explicit root GPU-slot approval is required');
+ const sourceRoot = resolve(binding.sourceRoot);
+ const evidenceRoot = resolve(process.env.YUNSHAN_HOME_EVIDENCE ?? binding.nativeEvidenceRoot);
+@@ -19,8 +19,8 @@
+ const sharedRoot = '/workspace/yunshan';
+ const nonExecutable = new Set(['.gitattributes', '.gitignore', 'AGENTS.md', '开发备忘录.md', '提示词.md']);
+ const buildingId = process.env.YUNSHAN_HOME_ID ?? 'market-b24';
+-assert.equal(binding.inputCount, 107, 'Actual root-approved coherent13 frozen count');
+-assert.equal(binding.sharedExecutableInputCount, 102, 'Actual root-approved coherent13 shared executable count');
++assert.equal(binding.inputCount, 108, 'Actual root-approved coherent14 frozen count');
++assert.equal(binding.sharedExecutableInputCount, 103, 'Actual root-approved coherent14 shared executable count');
+ const expectedEntry = binding.distEntry;
+ const expectedEntrySHA = binding.distEntrySHA256;
+ const expectedSourceManifestSHA = binding.snapshotManifestSHA256;

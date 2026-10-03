@@ -1,0 +1,14 @@
+{
+  "state": "ROOT_REVIEWED_AND_GUARDED_APPLIED",
+  "atUTC": "2026-10-03T01:02:38.170864+00:00",
+  "patchSHA256": "5924469676cd55b79223a5a109be2baf824168deb2c9ab0c08183d6c800f7f77",
+  "sourceSHA256": {
+    "src/simulation.ts": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+    "tests/retail-period.test.ts": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+  },
+  "candidateNaturalResultSHA256": "6f10d43d654e6b6812b2cdcdc6e6842303d87cca3f13e19d8d9f2875fec8e69f",
+  "originalCandidateByteExact": true,
+  "rootCompositeBuild": "NOT_RUN_YET",
+  "rootCompositeGPU": "NOT_RUN_YET",
+  "scope": "Isolated retail related56 and actual31+24 retained separately. Walking input source differs from retail candidate and will be validated in new composite14; no historicalfull496 claim."
+}

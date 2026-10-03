@@ -186,12 +186,8 @@ function frame(now: number): void {
   last = now;
   if (document.hidden) return;
   elapsed += delta;
-  // Small movement steps retain wall/voxel collision when a frame takes longer.
-  for (let remaining = delta; remaining > 1e-8;) {
-    const movementDelta = Math.min(remaining, 1 / 30);
-    controller.step(movementDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
-    remaining -= movementDelta;
-  }
+  // Preserve real held-key intervals and small collision steps on slow frames.
+  controller.stepWalkingFrame(now, rawDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; }
   if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) simulation.state.player.position = controller.walkingPosition;
   if (activeAircraft(simulation.state)) setAircraftControls(simulation.state, controller.aviationControls);

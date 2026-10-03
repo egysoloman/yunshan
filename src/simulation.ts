@@ -65,6 +65,8 @@ interface Runtime {
   peopleElapsed?: Record<string, number>;
   attendance: Record<string, number>;
   shopLabor?: Record<string, number>;
+  // Actual between-batch retail units; absent on untouched older saves.
+  retailSalesSinceBatch?: Record<string, number>;
   customers: Record<string, string>;
   driving: { vehicleId: string | null; throttle: number; turn: number; brake: boolean; speed: number };
   dispatches: Record<string, { crimeId: string; arrived: boolean }>;
@@ -1036,8 +1038,55 @@ export class Simulation implements SimulationAPI {
       this.runtime.attendance = {};
     }
   }
+  private retailOpenAtPhase(shop: Shop, building: Building): boolean {
+    const district = this.state.districts.find(d => d.id === shop.districtId)!;
+    return this.state.hour >= 6 && this.state.hour < (building.kind === 'market' ? 22 : 20)
+      && district.energy > 25 && !this.shopInsolvent(shop);
+  }
+  private settleRetailCustomers(shop: Shop, building: Building, betweenBatches: boolean): void {
+    for (const [citizenId, shopId] of Object.entries(this.runtime.customers)) {
+      if (shopId !== shop.id) continue;
+      const citizen = this.state.citizens.find(c => c.id === citizenId)!;
+      if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) continue;
+      const relation = this.state.relationships.find(r => r.npcId === citizen.id); if (relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)) continue;
+      if (this.shopCommodity(shop) !== 'food' || citizen.destinationId !== building.id || citizen.state !== 'shopping' || citizen.needs.hunger > 78 || citizen.money < shop.price || shop.inventory < 1) continue;
+      if (distance(citizen.position, building.position) > Math.max(building.width, building.depth) / 2 + 3) continue;
+      if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+        const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
+        if (!this.isAtBuildingFunctionPoint(building, citizen.position, 'sale', person)
+          || homeRestPointBlockedByVoxels(citizen.position, this.state.voxels)) continue;
+      }
+      const trust = this.state.relationships.find(r => r.npcId === citizen.id)?.trust ?? 0;
+      const price = shop.price * (trust > 55 ? .95 : 1);
+      const quantity = Math.min((citizen.food ?? 0) < 1 ? 2 : 1, Math.floor(citizen.money / price), Math.floor(shop.inventory));
+      const countedUnits = betweenBatches ? this.runtime.retailSalesSinceBatch?.[shop.id] ?? 0 : shop.customers;
+      // Valid imported counters must remain exportable after a real receipt.
+      if (countedUnits + quantity > 100000) continue;
+      const cost = price * quantity, net = cost * (1 - this.state.taxRate), beforeInventory = shop.inventory;
+      let supplierGross: number, inventoryCost: number; try { const quote = this.quoteConsignmentSale(shop.id, quantity, beforeInventory); supplierGross = quote.supplierGross; inventoryCost = quote.inventoryCost; } catch { continue; }
+      if (net < supplierGross || this.shopFunds(shop) + net - supplierGross > 1e9) continue;
+      citizen.money -= cost; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); citizen.food = (citizen.food ?? 0) + quantity - 1; citizen.needs.fun = clamp(citizen.needs.fun + 8); shop.inventory -= quantity; shop.revenue += cost; shop.profit += net - inventoryCost;
+      this.settleConsignmentSale(shop.id, quantity, beforeInventory); this.transferShopFunds(shop, net - supplierGross);
+      if (betweenBatches) {
+        const pending = this.runtime.retailSalesSinceBatch ??= {};
+        pending[shop.id] = (pending[shop.id] ?? 0) + quantity;
+      } else shop.customers += quantity;
+      // Consume only the successful request. Failed requests retain the same
+      // between-batch retry and end-of-batch clearing policy as before.
+      delete this.runtime.customers[citizenId];
+      this.bus.emit({ type: 'sale', amount: cost, citizenId: citizen.id, shopId: shop.id, districtId: shop.districtId, quantity });
+    }
+  }
   private commerce() {
-    if (this.now < this.runtime.commerceAt) return;
+    if (this.now < this.runtime.commerceAt) {
+      // Arrival requests settle in their actual opening period. Production,
+      // freight, utilities, employment, pricing and feedback stay on the batch.
+      for (const id of new Set(Object.values(this.runtime.customers))) {
+        const shop = this.state.shops.find(s => s.id === id), building = shop && this.buildings.get(shop.buildingId);
+        if (shop && building && this.retailOpenAtPhase(shop, building)) this.settleRetailCustomers(shop, building, true);
+      }
+      return;
+    }
     const elapsed = Math.max(10, this.now - this.runtime.commerceAt + 10); this.runtime.commerceAt = this.now + 10;
     const commercialFeedback = new Map<string, { sum: number; count: number }>();
     for (const shop of this.state.shops) {
@@ -1047,7 +1096,8 @@ export class Simulation implements SimulationAPI {
       // A restricted firm may clear existing finite stock. Historical losses
       // remain recorded; only funded new contracts can restart production.
       shop.open = scheduledOpen && !serviceFailure;
-      shop.customers = 0;
+      shop.customers = this.runtime.retailSalesSinceBatch?.[shop.id] ?? 0;
+      if (this.runtime.retailSalesSinceBatch) delete this.runtime.retailSalesSinceBatch[shop.id];
       const labor = this.runtime.shopLabor?.[shop.id] ?? 0;
       if (this.runtime.shopLabor) delete this.runtime.shopLabor[shop.id];
       const cargo = this.runtime.freight[shop.districtId] ?? 0;
@@ -1088,23 +1138,7 @@ export class Simulation implements SimulationAPI {
       }
       if (shop.open && building.kind === 'market' && shop.inventory < 4) this.supplyConsignment(shop.id, 70 - shop.inventory);
       if (shop.open) {
-        for (const [citizenId, shopId] of Object.entries(this.runtime.customers)) {
-          if (shopId !== shop.id) continue;
-          const citizen = this.state.citizens.find(c => c.id === citizenId)!;
-          if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) continue;
-          const relation = this.state.relationships.find(r => r.npcId === citizen.id); if (relation && this.hostilityRank(relation) >= 2 && this.playerOwnsShop(shop)) continue;
-          if (this.shopCommodity(shop) !== 'food' || citizen.destinationId !== building.id || citizen.state !== 'shopping' || citizen.needs.hunger > 78 || citizen.money < shop.price || shop.inventory < 1) continue;
-          if (distance(citizen.position, building.position) > Math.max(building.width, building.depth) / 2 + 3) continue;
-          const trust = this.state.relationships.find(r => r.npcId === citizen.id)?.trust ?? 0;
-          const price = shop.price * (trust > 55 ? .95 : 1);
-          const quantity = Math.min((citizen.food ?? 0) < 1 ? 2 : 1, Math.floor(citizen.money / price), Math.floor(shop.inventory));
-          const cost = price * quantity, net = cost * (1 - this.state.taxRate), beforeInventory = shop.inventory;
-          let supplierGross: number, inventoryCost: number; try { const quote = this.quoteConsignmentSale(shop.id, quantity, beforeInventory); supplierGross = quote.supplierGross; inventoryCost = quote.inventoryCost; } catch { continue; }
-          if (net < supplierGross || this.shopFunds(shop) + net - supplierGross > 1e9) continue;
-          citizen.money -= cost; citizen.needs.hunger = clamp(citizen.needs.hunger + 52); citizen.food = (citizen.food ?? 0) + quantity - 1; citizen.needs.fun = clamp(citizen.needs.fun + 8); shop.inventory -= quantity; shop.customers += quantity; shop.revenue += cost; shop.profit += net - inventoryCost;
-          this.settleConsignmentSale(shop.id, quantity, beforeInventory); this.transferShopFunds(shop, net - supplierGross);
-          this.bus.emit({ type: 'sale', amount: cost, citizenId: citizen.id, shopId: shop.id, districtId: shop.districtId, quantity });
-        }
+        this.settleRetailCustomers(shop, building, false);
         // Earned wages were charged at attendance; paying them later does not charge them again.
         // Only the separately modelled premises/utilities expense accrues here.
         const occupancy = Math.min(1, labor / elapsed);
@@ -1121,7 +1155,9 @@ export class Simulation implements SimulationAPI {
       // threshold must not dismiss the same roster every ten game minutes.
       if (shop.profit > 200 && this.shopFunds(shop) > 64 && shop.employees < rosterSize) shop.employees++;
       const feedback = commercialFeedback.get(district.id) ?? { sum: 0, count: 0 };
-      feedback.sum += serviceFailure ? -.07 : scheduledOpen ? shop.customers * .07 - .01 : 0; feedback.count++; commercialFeedback.set(district.id, feedback);
+      // Actual receipts from the opening period still contribute when this
+      // batch falls after closing. Availability penalties keep their schedule.
+      feedback.sum += shop.customers * .07 + (serviceFailure ? -.07 : scheduledOpen ? -.01 : 0); feedback.count++; commercialFeedback.set(district.id, feedback);
       district.pollution = clamp(district.pollution + (building.kind === 'workshop' ? .005 : -.002) * elapsed / 10);
     }
     for (const district of this.state.districts) {
@@ -1689,6 +1725,11 @@ export class Simulation implements SimulationAPI {
       }
       ensure(r.freight && typeof r.freight === 'object' && !Array.isArray(r.freight), 'freight'); for (const [id, amount] of Object.entries(r.freight)) { ensure(districtIds.has(id), 'freight district'); money(amount, 'freight amount'); }
       if (r.shopLabor !== undefined) { ensure(r.shopLabor && typeof r.shopLabor === 'object' && !Array.isArray(r.shopLabor), 'shop labor'); for (const [id, minutes] of Object.entries(r.shopLabor)) { ensure(shopIds.has(id), 'shop labor identity'); number(minutes, 0, 100000, 'shop labor minutes'); } }
+      if (r.retailSalesSinceBatch !== undefined) {
+        ensure(r.retailSalesSinceBatch && typeof r.retailSalesSinceBatch === 'object' && !Array.isArray(r.retailSalesSinceBatch), 'retail batch sales');
+        ensure(Object.keys(r.retailSalesSinceBatch).length <= shops.length, 'retail batch shop count');
+        for (const [id, quantity] of Object.entries(r.retailSalesSinceBatch)) { ensure(shopIds.has(id), 'retail batch shop identity'); number(quantity, 0, 100000, 'retail batch units', true); }
+      }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }

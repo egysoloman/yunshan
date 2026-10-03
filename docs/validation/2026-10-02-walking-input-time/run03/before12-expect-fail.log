@@ -1,0 +1,74 @@
+✖ late W in a slow frame receives only its real held interval, with unchanged eye and speed (16.251905ms)
+✖ a completed 200ms pulse survives early idle time in a five-second frame and delayed keyup delivery (1.94489ms)
+✖ pre-reset queued presses cannot revive walking through later snapshots or pose changes; old keyup releases held state (2.456467ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 386.149743
+
+✖ failing tests:
+
+test at ../evidence/baseline-controller-input-time.test.mts:1:3051
+✖ late W in a slow frame receives only its real held interval, with unchanged eye and speed (16.251905ms)
+  AssertionError [ERR_ASSERTION]: 200ms held is .96m, not a full caught-up second: -4.800000000000002 != -0.96
+      at close (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:9:67)
+      at <anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:63:5)
+      at fixture (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:34:5)
+      at TestContext.<anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:61:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at ../evidence/baseline-controller-input-time.test.mts:1:3373
+✖ a completed 200ms pulse survives early idle time in a five-second frame and delayed keyup delivery (1.94489ms)
+  AssertionError [ERR_ASSERTION]: : 0 != -0.96
+      at close (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:9:67)
+      at <anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:71:37)
+      at fixture (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:34:5)
+      at TestContext.<anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:69:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at ../evidence/baseline-controller-input-time.test.mts:1:9274
+✖ pre-reset queued presses cannot revive walking through later snapshots or pose changes; old keyup releases held state (2.456467ms)
+  AssertionError [ERR_ASSERTION]: : -8.999999999999998 != 0
+      at close (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:9:67)
+      at <anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:186:78)
+      at fixture (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:34:5)
+      at TestContext.<anonymous> (/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts:178:68)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at node:internal/test_runner/test:1285:31
+      at node:internal/process/task_queues:151:7 {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

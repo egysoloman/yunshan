@@ -1,0 +1,2048 @@
+{
+  "createdAtUTC": "2026-10-02T18:07:10.788325+00:00",
+  "scope": "BEFORE106_CANDIDATE107_33_TARGETED_TESTS_STRICT_BUILD_3_VERIFIED_OLD_NEGATIVES_NOT_GPU_NOT_MAC_NOT_NATIVE_ACCEPTANCE",
+  "beforeInputCount": 106,
+  "candidateInputCount": 107,
+  "runtimeAndTestChangedPaths": [
+    "src/controller.ts",
+    "src/main.ts",
+    "tests/controller-input-time.test.ts"
+  ],
+  "run03State": "PASS_TARGETED_AND_BUILD",
+  "run03StatusSHA256": "2bbea6675fa71ef01be68f3b8bc44370eef116b87514fe63be9ccdca1fabec8b",
+  "run02OldNegatives": "INVALID_NEGATIVE_UNSUPPORTED_FIXTURE_PRESERVED_NOT_ACCEPTED_AS_BUG_REPRODUCTION",
+  "memberCountExcludingThisIndex": 290,
+  "bytesExcludingThisIndex": 27923738,
+  "members": [
+    {
+      "member": "before/.gitattributes",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/.gitignore",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/AGENTS.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/index.html",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/package-lock.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/package.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/public/favicon.svg",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/benchmark.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/browser-test.mjs",
+      "bytes": 32618,
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/economy-audit.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/layout-browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/player-journey.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/space-browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/ui-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/scripts/visual-review.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/access.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/architecture-floor-plan.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/aviation-renderer.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/aviation.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/journey.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/main.ts",
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/persistence.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/persistence/partition.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/persistence/route-encoding.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/persistence/session.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/persistence/world-layout.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/renderer.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/architecture-bodies.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/architecture-detail.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/architecture-layout.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/chunk-residency.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/citizen-appearance.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/market-goods.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/rendering/terrain.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation.ts",
+      "bytes": 204660,
+      "sha256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/banking.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/clinical.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/culture.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/extensions.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/family.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/home-rest.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/journeys.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/player-labor.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/simulation/trade.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/site-fixtures.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/style.css",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/transport-geometry.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/types.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/ui.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/src/world.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/access.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/architecture-bodies.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/architecture-detail-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/architecture-detail.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/architecture-floor-plan.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/aviation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/banking.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/chunk-residency.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/citizen-appearance.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/clinical.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/controller-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/controller.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/culture.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/economy.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/extensions.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/family.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/npc-rest-offer-native.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/trade-industrial-v1.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/floor-plan-derived-cache.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/home-rest.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/integration.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/journey.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/npc-clock.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/npc-home-rest-voxels.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/npc-public-rest.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "sha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/persistence.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/player-labor.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/rendering.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/route-encoding.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/simulation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/site-fixtures.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/trade.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/v4-extensions.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/v4-services.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/v4-simulation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/world-layout.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/world-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tests/world.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/tsconfig.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/vite.config.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/开发备忘录.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/开发备忘录.md",
+      "bytes": 184241,
+      "sha256": "61be403e544441e4dde55d3208618f3525ea5b36490f49a2b28be8112fe3bdc0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "before/提示词.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/before/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/.gitattributes",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/.gitignore",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/AGENTS.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/index.html",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/package-lock.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/package.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/public/favicon.svg",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/benchmark.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/browser-test.mjs",
+      "bytes": 32618,
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/economy-audit.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/layout-browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/player-journey.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/space-browser-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/ui-test.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/scripts/visual-review.mjs",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/access.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/architecture-floor-plan.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/aviation-renderer.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/aviation.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/controller.ts",
+      "bytes": 27882,
+      "sha256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/journey.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/main.ts",
+      "bytes": 23940,
+      "sha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/persistence.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/persistence/partition.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/persistence/route-encoding.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/persistence/session.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/persistence/world-layout.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/renderer.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/architecture-bodies.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/architecture-detail.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/architecture-layout.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/chunk-residency.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/citizen-appearance.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/market-goods.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/rendering/terrain.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation.ts",
+      "bytes": 204660,
+      "sha256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/banking.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/clinical.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/culture.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/extensions.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/family.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/home-rest.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/journeys.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/player-labor.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/simulation/trade.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/site-fixtures.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/style.css",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/transport-geometry.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/types.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/ui.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/src/world.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/access.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/architecture-bodies.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/architecture-detail-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/architecture-detail.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/architecture-floor-plan.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/aviation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/banking.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/chunk-residency.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/citizen-appearance.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/clinical.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/controller-input-time.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "sha256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/controller-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/controller.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/culture.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/economy.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/extensions.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/family.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/npc-rest-offer-native.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/trade-industrial-v1.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/floor-plan-derived-cache.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/home-rest.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/integration.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/journey.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/npc-clock.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/npc-home-rest-voxels.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/npc-public-rest.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "sha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/persistence.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/player-labor.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/rendering.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/route-encoding.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/simulation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/site-fixtures.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/trade.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/v4-extensions.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/v4-services.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/v4-simulation.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/world-layout.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/world-v4.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tests/world.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/tsconfig.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/vite.config.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/开发备忘录.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/开发备忘录.md",
+      "bytes": 184241,
+      "sha256": "61be403e544441e4dde55d3208618f3525ea5b36490f49a2b28be8112fe3bdc0",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/提示词.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "kind": "original_source_input"
+    },
+    {
+      "member": "candidate/dist/assets/index-BVEM3iAs.js",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/assets/index-BVEM3iAs.js",
+      "bytes": 651292,
+      "sha256": "b9e8d05be43b2df30ef4cd863051b40baf915444dfc771fcb1ff69626588aa33",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/assets/index-BVEM3iAs.js.map",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/assets/index-BVEM3iAs.js.map",
+      "bytes": 1977808,
+      "sha256": "066077868a224de311830ffb537e3827ecc1e8bcc61fcc4d199681a326c69c62",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/assets/index-DcKlDqDV.css",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/assets/index-DcKlDqDV.css",
+      "bytes": 31135,
+      "sha256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/assets/three-DfYROjRC.js",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/assets/three-DfYROjRC.js",
+      "bytes": 502193,
+      "sha256": "276b9841c4a1a79b75fa5445e3df9182d4dd65ed17b4a5d08d807a6ae75e138b",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/assets/three-DfYROjRC.js.map",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/assets/three-DfYROjRC.js.map",
+      "bytes": 2719092,
+      "sha256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/favicon.svg",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "candidate/dist/index.html",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate/dist/index.html",
+      "bytes": 736,
+      "sha256": "a2e14db60c5c7cbce5e776bfa656daca85d7e679dc8e8eff63ec1f1fecdc91c4",
+      "kind": "run03_actual_build_output"
+    },
+    {
+      "member": "DESIGN.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/DESIGN.md",
+      "bytes": 4587,
+      "sha256": "2e3ee53fb4b7c289a833b9e126c5cf762b5238c777e8ce60d1eb1f23ea12de14",
+      "kind": "producer_or_design_original"
+    },
+    {
+      "member": "README-final.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/README-final.md",
+      "bytes": 5225,
+      "sha256": "f04070ce29c2c57ed12c21afeeb909f296110bcbb2429a227a512648e9dedcea",
+      "kind": "producer_or_design_original"
+    },
+    {
+      "member": "candidate.patch",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/candidate.patch",
+      "bytes": 27205,
+      "sha256": "b61d21d79d20627e22dc154ec3dfb9e6e3ce4d78515676b111736cee700b4a6a",
+      "kind": "producer_or_design_original"
+    },
+    {
+      "member": "run-targeted.py",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/run-targeted.py",
+      "bytes": 5755,
+      "sha256": "a89e24b15d228d13b67f86f15bb8f713953ef235f9fab6f36e7d092f02a7da0d",
+      "kind": "producer_or_design_original"
+    },
+    {
+      "member": "package-originals.py",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/package-originals.py",
+      "bytes": 8672,
+      "sha256": "ecfb196a72f2a4145e198afe23be60431c848a2db933e48aeada2f6dd3bac197",
+      "kind": "producer_or_design_original"
+    },
+    {
+      "member": "evidence/attempt01-accepted-clock/manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt01-accepted-clock/manifest.json",
+      "bytes": 410,
+      "sha256": "ca36dd2440d5b94f1769501a1cd0d12c6a9106ae43df448f31c447a6ebca2625",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt01-accepted-clock/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt01-accepted-clock/src/controller.ts",
+      "bytes": 25430,
+      "sha256": "08711868cc8997e20786edf892785a183ff2d30f07cf442ef800253116a09406",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt01-accepted-clock/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt01-accepted-clock/src/main.ts",
+      "bytes": 23937,
+      "sha256": "b38afd0a99174c75c93c4e73ed702f342e1b2e062471fa79bc837b31a202ee9c",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt02-reset-clipping/candidate.patch",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt02-reset-clipping/candidate.patch",
+      "bytes": 24173,
+      "sha256": "6275d08462b911aa9725122b7454a58ca325718234c2d17c228a9f3f366f6c3d",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt02-reset-clipping/manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt02-reset-clipping/manifest.json",
+      "bytes": 611,
+      "sha256": "4c4cb84edec659677607325a27f8a29904f4969400fb9c2d8f4b8cd12c2f7098",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt02-reset-clipping/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt02-reset-clipping/src/controller.ts",
+      "bytes": 27430,
+      "sha256": "f32ba2f466c4867790c50ac43ba001b039f99c10a2fa58de8697173b37f5f9b4",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt02-reset-clipping/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt02-reset-clipping/src/main.ts",
+      "bytes": 23940,
+      "sha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt02-reset-clipping/tests/controller-input-time.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt02-reset-clipping/tests/controller-input-time.test.ts",
+      "bytes": 12853,
+      "sha256": "2c1142b47116be835ddbcdc10d9e13b96dd2ab7ee7aa28f0643a8b701db28017",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/candidate.patch",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/candidate.patch",
+      "bytes": 26492,
+      "sha256": "05ef7009cf644fc893b45dd2c337acb3ea4629680f434074f7d77a06c4350472",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/evidence/baseline-controller-input-time.test.mts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/evidence/baseline-controller-input-time.test.mts",
+      "bytes": 15049,
+      "sha256": "6707ede1113b0f5fd00cf38dc88ddbc4590113360e5caace40989f10d89bdddc",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/evidence/candidate-manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/evidence/candidate-manifest.json",
+      "bytes": 11113,
+      "sha256": "fd6c9df54c55c121c62d7a150c4ca47a90309b6eeb47e46354a8ff9748b5a2b7",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/manifest.json",
+      "bytes": 988,
+      "sha256": "f23addccf02732dbe9a75ce4e5da84ba57861c19ec227bb1ca4a4f9ab6428055",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/run-targeted.py",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/run-targeted.py",
+      "bytes": 5259,
+      "sha256": "29fe6296bd3b4626f3bd0224a4a7e625d68496e732469f36329078eebb1430a2",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/src/controller.ts",
+      "bytes": 27882,
+      "sha256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/src/main.ts",
+      "bytes": 23940,
+      "sha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt03-tsc-fail/tests/controller-input-time.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt03-tsc-fail/tests/controller-input-time.test.ts",
+      "bytes": 14834,
+      "sha256": "de9416bef9b8d4dd08cf7e0ada3d4b045f28f72e09ffc31542d9505eaf7f06a0",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/candidate.patch",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/candidate.patch",
+      "bytes": 26566,
+      "sha256": "052165da75e4aa6217dfc1f3a839325ae7166ff3103e14b7f78de2240923bf2b",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/evidence/baseline-controller-input-time.test.mts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/evidence/baseline-controller-input-time.test.mts",
+      "bytes": 15122,
+      "sha256": "47d00339f52a840ab3b6e0e071ac3d456ab1c8a054f326de5d7b2754d5f06417",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/evidence/candidate-manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/evidence/candidate-manifest.json",
+      "bytes": 11113,
+      "sha256": "704472c233ca733267e5624be81da0418b1a38646ff2300059e0da2473e1e39c",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/manifest.json",
+      "bytes": 1269,
+      "sha256": "dba8cd6855102a98884824f1be1b5ed1587cec8493f951e9d288e49e2f55bde8",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/run-targeted.py",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/run-targeted.py",
+      "bytes": 5299,
+      "sha256": "5cb2cba9fbd7302f371973f9934db92617f7df27779c6c14219668607440ad46",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/src/controller.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/src/controller.ts",
+      "bytes": 27882,
+      "sha256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/src/main.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/src/main.ts",
+      "bytes": 23940,
+      "sha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/attempt04-unsupported-fixture/tests/controller-input-time.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/attempt04-unsupported-fixture/tests/controller-input-time.test.ts",
+      "bytes": 14907,
+      "sha256": "c91cb58c4c8a1b2b0952e561e13e7c7c9e52f9cc93d6a5ecdd3dd839f276e7ad",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/baseline-controller-input-time.test.mts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.mts",
+      "bytes": 15758,
+      "sha256": "5737c3cb390ff4fff041942d054c0d548be6b19372c1627ccc2156314f568996",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/baseline-controller-input-time.test.ts",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/baseline-controller-input-time.test.ts",
+      "bytes": 13068,
+      "sha256": "dbc2b08854e86a978e49d491c836b85d1d4e00eecef9db81690ba13aa867dc0c",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/before-manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/before-manifest.json",
+      "bytes": 11002,
+      "sha256": "dcd9dd4dba470362e439b2a6ff9057f6b7e1142af52f61672dea231581fb04b5",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/candidate-manifest-draft.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/candidate-manifest-draft.json",
+      "bytes": 11113,
+      "sha256": "a0d8c6ded692ebfff2f0403401a2a286767c26ce784c9efb0bc11a5f72ef1525",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/candidate-manifest.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/candidate-manifest.json",
+      "bytes": 11113,
+      "sha256": "ecded663893620de687a36c3567d5188e8ca0940d1735658c3144bd092c9a4db",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/independent-review-final.md",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/independent-review-final.md",
+      "bytes": 8155,
+      "sha256": "bab936790920c3d0b61c4a74d13247c104dc57f3f8233e0f2ba0754ea2daefa8",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/packaging-attempt01-self-pattern/delivery/payload-index.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/packaging-attempt01-self-pattern/delivery/payload-index.json",
+      "bytes": 94453,
+      "sha256": "915640484ebaca5005a11ee9eca5a377b710ae32ba919da116ee315f77a87b4e",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/packaging-attempt01-self-pattern/delivery/zip-validation.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/packaging-attempt01-self-pattern/delivery/zip-validation.json",
+      "bytes": 142,
+      "sha256": "3e7ef6d2e9d3fdd81c4092edd29673818e089e4ad97402f59c9e53114b5ccb4f",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/packaging-attempt01-self-pattern/failure-receipt.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/packaging-attempt01-self-pattern/failure-receipt.json",
+      "bytes": 829,
+      "sha256": "76d95f6d5519524d7004963a7635a6ad2ccd0041f13637bb0b86dfcf98efac99",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/packaging-attempt01-self-pattern/package-originals.py",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/packaging-attempt01-self-pattern/package-originals.py",
+      "bytes": 8642,
+      "sha256": "df9f5a15936aa080af01210293bcbfc7839e4b722cb8176498e08b05190bf7b7",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run01/run-status.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run01/run-status.json",
+      "bytes": 45977,
+      "sha256": "870d301f1b0a26580ada0506ddd8194528e2fad7acead4f08d23257c8c41dd22",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run01/strict-tsc.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run01/strict-tsc.log",
+      "bytes": 106,
+      "sha256": "f471e432dcca4c3236d3591a3c7388a3432214cb08017de50b7057c718705272",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run02/before12-expect-fail.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run02/before12-expect-fail.log",
+      "bytes": 4177,
+      "sha256": "3f10e5008878948db874ba4c23e543ce49de70100fda9de684afda36062bfb58",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run02/candidate-input-time.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run02/candidate-input-time.log",
+      "bytes": 16311,
+      "sha256": "15c94de48823229b4d0017e80ef387c72b86c0381b7f374bf59e54b858f5aee8",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run02/run-status.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run02/run-status.json",
+      "bytes": 47995,
+      "sha256": "a11d72b0d9ca472122453952299d95300b9b6cefdb7001e2ee08088e7f095353",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run02/strict-tsc.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run02/strict-tsc.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/before12-expect-fail.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/before12-expect-fail.log",
+      "bytes": 4173,
+      "sha256": "cca74abf8b3c9ad5201037edbbe293efc3faa677e69c5ae06c35cf316534a1ec",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/build.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/build.log",
+      "bytes": 720,
+      "sha256": "aec9083ec8fe00a3103d36c8f705761fcf667e7d113d9677bf8a569aa25a22be",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/candidate-input-time.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/candidate-input-time.log",
+      "bytes": 1605,
+      "sha256": "7f45c6e5af4e7b180d9ad01c9692c80fd5af3da8a941a3343e594d7589ca2871",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/original-controller.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/original-controller.log",
+      "bytes": 2347,
+      "sha256": "1b1d1242635ea4b530f9dfb9b9765b00a7ad47c7e33287b4b494b2c7274e9269",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/run-status.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/run-status.json",
+      "bytes": 49817,
+      "sha256": "2bbea6675fa71ef01be68f3b8bc44370eef116b87514fe63be9ccdca1fabec8b",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/run03/strict-tsc.log",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/run03/strict-tsc.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "evidence/static-checks.json",
+      "originalPath": "/tmp/yunshan-walking-input-time-candidate-01/evidence/static-checks.json",
+      "bytes": 1531,
+      "sha256": "891993e74092711d65504cc9bdf60d674b700c1eaf583ec5df9cf0aa9ac26cae",
+      "kind": "candidate_attempt_or_validation_original"
+    },
+    {
+      "member": "original-native12-failure/native-home-rest.mjs",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-rest.mjs",
+      "bytes": 33957,
+      "sha256": "6be4c3e04fe0eb3b75beb98542ee5f127a0efefeab05a4aeb32d5df2d1b84f87",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/home-plan-readonly.mjs",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/home-plan-readonly.mjs",
+      "bytes": 3980,
+      "sha256": "4cc610aecb1de600382b137872b649e66a5bf0fcf4306cc18224877a56d1a748",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/source-contract.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/source-contract.json",
+      "bytes": 12415,
+      "sha256": "e457bd662524e5f80975506e233d402348d18c9cf32cf0154919c801423868b6",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/source-snapshot-original.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/source-snapshot-original.json",
+      "bytes": 11498,
+      "sha256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/static-rebind-comparison.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/static-rebind-comparison.json",
+      "bytes": 1494,
+      "sha256": "8bbacdb9c63d2dc7dfa5ef8a794130306374bf7fbd00e5d552bb3eb687955281",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/01-controlled-home-exterior.png",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/01-controlled-home-exterior.png",
+      "bytes": 640116,
+      "sha256": "eb4c583eb299cd0b7329435b0a2813d560e98481f134af32a253b72856efcacd",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/FAIL-actual-model-save.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/FAIL-actual-model-save.json",
+      "bytes": 2305344,
+      "sha256": "3246652e20d03dc0b3c71973c18f76abfe1d474a9e18f1d370243bcfdae92234",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/FAIL-actual-native-home.png",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/FAIL-actual-native-home.png",
+      "bytes": 698655,
+      "sha256": "21136a282e5a8a5626f592e419ce796f693268d48e646730e48f89359120e03c",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/actual-home-plan.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/actual-home-plan.json",
+      "bytes": 4135,
+      "sha256": "8241f70faa2e754d8794a74b19216dfd4c817324c2cb36b47152ef458adacd72",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/controlled-start.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/controlled-start.json",
+      "bytes": 1597,
+      "sha256": "de5026d3e55218e281fb4a3acf1e13cd3013519c942e69d077ad64e9da5c64a5",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/loaded-document.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/loaded-document.json",
+      "bytes": 340,
+      "sha256": "3aae3d10f31cc345ad124f850e9c82adb7a09c57424396fac8426190b29afe05",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/native-home-results.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/native-home-results.json",
+      "bytes": 81685,
+      "sha256": "96c268e5552829d318a48c282106424c3a7d9512f08d9c35cadc297e3ffd1175",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/native-movement.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/native-movement.json",
+      "bytes": 293700,
+      "sha256": "4c7e342e08a4d94ca947174ae9acc9853c7018764b96e18b0e1bb1289e7b3898",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/owned-cleanup-browser.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/owned-cleanup-browser.json",
+      "bytes": 157,
+      "sha256": "848531e0e42e9b0e778b6a227100efa6b14651bbbe1f496728d06f5227a3fa9f",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/owned-cleanup-receipt.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/owned-cleanup-receipt.json",
+      "bytes": 680,
+      "sha256": "6e3553bf2baf686e781a56579f45f9314a6e0b8b78ea45ed16c80684a17e10f1",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/run-start.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/run-start.json",
+      "bytes": 22565,
+      "sha256": "31c7d92cbc3126a93af5519b33e89659ac646bfb552ad305bc2695835ba2a234",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/native-home-evidence/screenshots.json",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/screenshots.json",
+      "bytes": 5461,
+      "sha256": "ce6323fea8b9341dca27e2b9593c56b1f4c68a6ecdbdec026a018a0472a87f16",
+      "kind": "original_failed_native12_context"
+    },
+    {
+      "member": "original-native12-failure/freeze12-source-snapshot.json",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source-snapshot.json",
+      "bytes": 11498,
+      "sha256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+      "kind": "original_freeze12_binding"
+    }
+  ]
+}

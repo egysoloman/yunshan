@@ -1,0 +1,17 @@
+✔ a real queued arrival before close settles without the next batch; one request buys once (60.360802ms)
+✔ exactly22:00 rejects a queued sale even if its old shop.open flag is still true (24.056911ms)
+✔ closed batch clears failed requests and never debits the buyer or restores needs (9.820823ms)
+✔ wallet shortage, empty stock, invalid owned basis and capped retailer reject atomically (85.376952ms)
+✔ consignment net insufficiency and supplier capacity reject before buyer debit (36.906464ms)
+✔ owned FIFO then consigned supplier split uses only each actual buyer receipt (7.056001ms)
+✔ v4 clears only the actual legal sale point with the NPC identity (17632.48723ms)
+✔ actual between-batch volume drives the next batch once and never reuses old customers (22.101437ms)
+✔ optional pending volume saves exactly, rejects malformed imports atomically and restores24 full ticks (568.62298ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18986.372983

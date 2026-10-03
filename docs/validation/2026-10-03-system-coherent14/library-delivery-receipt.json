@@ -1,0 +1,38 @@
+{
+  "atUTC": "2026-10-03T01:34:03.192592+00:00",
+  "status": "SINGLE_NEW_LIBRARY_CREATE_SUCCEEDED_METADATA_HELPER0_ZIP_BYTES_UNCHANGED",
+  "ZIP": "/tmp/yunshan-coherent14-native-artifact-01/yunshan-coherent14-native-home-full-and-native13-first-failure-20261003.zip",
+  "bytes": 14921761,
+  "ZIPBeforeSaveSHA256": "0fcb421ca62507f1becf37acb1002cec6d4e571ac9315c2f5b532c79c27c3910",
+  "ZIPAfterSaveSHA256": "0fcb421ca62507f1becf37acb1002cec6d4e571ac9315c2f5b532c79c27c3910",
+  "createCallCount": 1,
+  "Library": {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "library_file_id": "libfile_af02c1c5014c819191c4e763a13f97aa",
+    "file_id": "file_0000000054348207b66acf0706d06f14",
+    "current_version_number": 0,
+    "file_name": "yunshan-coherent14-native-home-full-and-native13-first-failure-20261003.zip",
+    "path": "/yunshan-coherent14-native-home-full-and-native13-first-failure-20261003.zip",
+    "file_size_bytes": 14921761,
+    "mime_type": "application/zip",
+    "library_artifact_type": "other"
+  },
+  "metadataHelperExitCode": 0,
+  "resultHandlingCorrection": "Create succeeded. First response parser expected nested structuredContent.result; current result was direct structuredContent. Only parse/xattr persistence was corrected, no second upload/create. First misleading local NOT_CONFIRMED trace did not reflect a failed app operation.",
+  "producerPID": 179288,
+  "producerProcessPresent": false,
+  "crcAndOriginalByteValidationReceipt": "/tmp/yunshan-coherent14-native-artifact-01/producer-validation-receipt.json",
+  "allOriginalIndexedPayloads": 232,
+  "sensitivePatterns": 7,
+  "sensitiveMatches": {
+    "private-key-material": [],
+    "aws-access-key-id": [],
+    "openai-api-secret": [],
+    "github-access-secret": [],
+    "slack-access-secret": [],
+    "google-oauth-secret": [],
+    "signed-or-credential-url": []
+  },
+  "scope": "Artifact packing/validation and one new Library save only; no new browser/GPU/Sim/build/test/formal11."
+}

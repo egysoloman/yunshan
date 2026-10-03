@@ -9,6 +9,7 @@ import type { AerialVehicle, AviationControls, Building, Vec3, ViewMode, VoxelMo
 const EYE_HEIGHT = 1.72;
 const BODY_RADIUS = 0.35;
 const distance2 = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.z - b.z);
+const WALKING_KEYS = new Set(['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight']);
 
 /** Only transforms the player's camera. Simulation and rendering stay independent. */
 export class PlayerController {
@@ -19,6 +20,12 @@ export class PlayerController {
   floor = 0;
   jetSpeed = 85;
   private keys = new Set<string>();
+  private walkingKeys = new Set<string>();
+  private walkingInputs: { at: number; keys: ReadonlySet<string> }[] = [];
+  private walkingFrameKeys: ReadonlySet<string> = new Set();
+  private walkingFrameEnd = -Infinity;
+  private walkingResetAt = -Infinity;
+  private walkingInputAt = -Infinity;
   private dragging = false;
   private pointerX = 0;
   private pointerY = 0;
@@ -42,11 +49,16 @@ export class PlayerController {
       if (e.repeat && ['KeyV', 'KeyE', 'KeyF', 'KeyB', 'KeyX', 'KeyT'].includes(e.code)) return;
       if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
       this.keys.add(e.code);
+      if (WALKING_KEYS.has(e.code)) this.recordWalkingInput(e, true);
       if (['KeyV', 'KeyE', 'KeyF', 'KeyB', 'KeyX', 'KeyT', 'Escape'].includes(e.code)) this.onAction(e.code);
     });
-    this.listen(window, 'keyup', (event) => this.keys.delete((event as KeyboardEvent).code));
-    this.listen(window, 'blur', () => { this.keys.clear(); this.dragging = false; });
-    this.listen(document, 'visibilitychange', () => { this.keys.clear(); this.dragging = false; });
+    this.listen(window, 'keyup', (event) => {
+      const code = (event as KeyboardEvent).code;
+      this.keys.delete(code);
+      if (WALKING_KEYS.has(code)) this.recordWalkingInput(event as KeyboardEvent, false);
+    });
+    this.listen(window, 'blur', () => { this.clearInput(); this.dragging = false; });
+    this.listen(document, 'visibilitychange', () => { this.clearInput(); this.dragging = false; });
     this.listen(canvas, 'mousedown', (event) => {
       const e = event as MouseEvent;
       if (e.button !== 0) return;
@@ -92,7 +104,7 @@ export class PlayerController {
 
   setMode(mode: ViewMode, playerPosition: Vec3, aircraft?: AerialVehicle): boolean {
     if (mode !== 'walk' && (!aircraft || aircraft.kind !== mode)) { this.blockedAccess = '航空视角需要在城市停机位租用并实际登机。'; return false; }
-    this.keys.clear();
+    this.clearInput();
     if (this.mode === 'walk') this.feet = { ...playerPosition };
     this.mode = mode;
     this.floor = 0;
@@ -137,6 +149,7 @@ export class PlayerController {
 
   syncPassenger(position: Vec3): void {
     this.feet = { ...position };
+    this.discardWalkingInput();
     if (this.mode === 'walk') this.camera.position.set(position.x, position.y + EYE_HEIGHT + 0.5, position.z);
     this.inside = null;
     this.supportingSite = null;
@@ -155,7 +168,7 @@ export class PlayerController {
       if(!isInside&&!this.canAccess(building,0)){this.blockedAccess=`${building.name}需要相应权限。`;return false;}
       const local=buildingLocalPosition(building,getBuildingEntrance(building));const next=buildingWorldPosition(building,{...local,z:local.z+(isInside?2:-2)});
       if(blocksFloorPlanMovement(building,0,this.feet,next,BODY_RADIUS,EYE_HEIGHT))return false;
-      this.feet=next;this.floor=0;this.supportingSite=isInside?null:building;this.inside=isInside?null:building;
+      this.feet=next;this.floor=0;this.supportingSite=isInside?null:building;this.inside=isInside?null:building;this.discardWalkingInput();
       this.camera.position.set(next.x,next.y+EYE_HEIGHT,next.z);this.yaw=building.rotation+(isInside?Math.PI:0);this.pitch=0;this.orient();return true;
     }
     const isInside = this.contains(building, this.feet, 0);
@@ -164,6 +177,7 @@ export class PlayerController {
     this.feet = { x: building.door.x, y: building.position.y + 0.6, z };
     this.floor = 0;
     this.inside = isInside ? null : building;
+    this.discardWalkingInput();
     this.camera.position.set(this.feet.x, this.feet.y + EYE_HEIGHT, this.feet.z);
     this.yaw = isInside ? Math.PI : 0;
     this.pitch = 0;
@@ -188,15 +202,102 @@ export class PlayerController {
     else this.feet.y = b.position.y + 0.6 + this.floor * floorHeight;
     if(profiled)this.camera.position.set(this.feet.x,this.feet.y+EYE_HEIGHT,this.feet.z);
     else this.camera.position.y = this.feet.y + EYE_HEIGHT;
+    this.discardWalkingInput();
     return true;
   }
 
   step(seconds: number, passenger: boolean, _paused = false): void {
+    this.stepWithKeys(seconds, passenger, this.keys);
+  }
+
+  /** Normalized DOM occurrence timestamps and rAF use performance's ms origin.
+   * Read the complete frame interval, so idle time cannot erase a finished pulse.
+   * Retain at most the latest active second, matching the original movement cap.
+   * Pausing Simulation still permits walking, as in the original step API. */
+  stepWalkingFrame(now: number, rawSeconds: number, passenger: boolean, _paused = false): void {
+    const start = Math.max(now - Math.max(rawSeconds, 0) * 1000, this.walkingFrameEnd, this.walkingResetAt);
+    let time = start, keys = this.walkingFrameKeys, consumed = 0;
+    const intervals: { seconds: number; keys: ReadonlySet<string> }[] = [];
+    const collectUntil = (end: number) => {
+      const seconds = (end - time) / 1000;
+      const forward = Number(keys.has('KeyW') || keys.has('ArrowUp')) - Number(keys.has('KeyS') || keys.has('ArrowDown'));
+      const strafe = Number(keys.has('KeyD') || keys.has('ArrowRight')) - Number(keys.has('KeyA') || keys.has('ArrowLeft'));
+      if (seconds > 0 && (forward || strafe)) intervals.push({ seconds, keys });
+      time = end;
+    };
+    for (const input of this.walkingInputs) {
+      // An accepted event can be later than this rAF's supplied timestamp.
+      if (input.at > now) break;
+      if (input.at > start) collectUntil(input.at);
+      keys = input.keys;
+      consumed++;
+    }
+    if (now > time) collectUntil(now);
+    this.walkingFrameKeys = keys;
+    this.walkingInputs.splice(0, consumed);
+    this.walkingFrameEnd = Math.max(this.walkingFrameEnd, now);
+    const selected: { seconds: number; keys: ReadonlySet<string> }[] = [];
+    let budget = Math.min(Math.max(rawSeconds, 0), 1);
+    for (let i = intervals.length - 1; i >= 0 && budget > 0; i--) {
+      const interval = intervals[i], seconds = Math.min(interval.seconds, budget);
+      selected.push({ seconds, keys: interval.keys });
+      budget -= seconds;
+    }
+    // Replay selected intervals in their original order, through unchanged
+    // collision steps. Current live keys still drive vehicles and aircraft.
+    for (let i = selected.length - 1; i >= 0; i--) {
+      const interval = selected[i];
+      for (let remaining = interval.seconds; remaining > 1e-8;) {
+        const dt = Math.min(remaining, 1 / 30);
+        this.stepWithKeys(dt, passenger, interval.keys);
+        remaining -= dt;
+      }
+    }
+  }
+
+  private recordWalkingInput(event: KeyboardEvent, down: boolean): void {
+    const acceptedAt = performance.now();
+    let at = event.timeStamp;
+    if (!Number.isFinite(at) || at < 0) at = acceptedAt;
+    else if (at > acceptedAt + 1) {
+      // Legacy epoch timestamps may be translated to the document's origin;
+      // incompatible clocks fall back to the actual handler acceptance time.
+      const relative = at - performance.timeOrigin;
+      at = Number.isFinite(relative) && relative >= 0 && relative <= acceptedAt + 1 ? relative : acceptedAt;
+    }
+    // A queued pre-reset press cannot re-arm walking in a new pose. Keyup still
+    // releases held state. Vehicle/aircraft keys retain their original behavior.
+    if (down && at < this.walkingResetAt) return;
+    if (down) {
+      if (this.walkingKeys.has(event.code)) return;
+      this.walkingKeys.add(event.code);
+    } else if (!this.walkingKeys.delete(event.code)) return;
+    // Keep dispatch order at equal/backward times. Late events before a consumed
+    // frame change its next state, not its past; they cannot roll feet back.
+    at = Math.max(Math.min(at, acceptedAt), this.walkingResetAt, this.walkingInputAt);
+    this.walkingInputAt = at;
+    this.walkingInputs.push({ at, keys: new Set(this.walkingKeys) });
+  }
+
+  private clearInput(): void {
+    this.keys.clear();
+    this.walkingKeys.clear();
+    this.discardWalkingInput();
+  }
+
+  private discardWalkingInput(): void {
+    this.walkingInputs.length = 0;
+    this.walkingFrameKeys = new Set(this.walkingKeys);
+    this.walkingResetAt = performance.now();
+    this.walkingInputAt = this.walkingResetAt;
+  }
+
+  private stepWithKeys(seconds: number, passenger: boolean, keys: ReadonlySet<string>): void {
     const dt = Math.min(seconds, 0.1);
     if (passenger || this.mode !== 'walk') return;
-    const sprint = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
-    let forward = Number(this.keys.has('KeyW') || this.keys.has('ArrowUp')) - Number(this.keys.has('KeyS') || this.keys.has('ArrowDown'));
-    let strafe = Number(this.keys.has('KeyD') || this.keys.has('ArrowRight')) - Number(this.keys.has('KeyA') || this.keys.has('ArrowLeft'));
+    const sprint = keys.has('ShiftLeft') || keys.has('ShiftRight');
+    let forward = Number(keys.has('KeyW') || keys.has('ArrowUp')) - Number(keys.has('KeyS') || keys.has('ArrowDown'));
+    let strafe = Number(keys.has('KeyD') || keys.has('ArrowRight')) - Number(keys.has('KeyA') || keys.has('ArrowLeft'));
     const length = Math.hypot(forward, strafe);
     if (length > 1) { forward /= length; strafe /= length; }
     if (this.mode === 'walk') {
