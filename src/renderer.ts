@@ -62,7 +62,11 @@ class BoxBatch {
         geometry.setIndex(template.indices);
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
-      if (key === 'wall') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
+      if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
+      // The same material also paints transport and old furniture. Only the
+      // authoritative roof tag enables tile relief; the scalar shares the
+      // resident geometry's lifetime and introduces no per-tile instances.
+      if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? 1 : 0)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -146,7 +150,7 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
     this.materials = Object.fromEntries(Object.keys(PALETTE).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : .83, metalness: key === 'glass' ? .32 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
-    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v3`; this.materials[key].onBeforeCompile = shader => {
+    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v${key === 'wood' ? 4 : 3}`; this.materials[key].onBeforeCompile = shader => {
       shader.vertexShader = 'varying vec3 vArchitecture;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec4 architecture=vec4(transformed,1.0);
@@ -160,6 +164,38 @@ export class CityRenderer implements CityRendererAPI {
         float pigment=fract(sin(dot(grainCell,vec3(12.9898,78.233,39.425)))*43758.5453);
         diffuseColor.rgb*=.97+pigment*.06;
         ${key === 'stone' ? 'float joint=step(.97,fract(vArchitecture.y*2.5));diffuseColor.rgb*=1.0-joint*.09;' : key === 'wood' ? 'diffuseColor.rgb*=.98+sin(vArchitecture.y*36.0+vArchitecture.x*3.0)*.025;' : ''}`);
+      if (key === 'wood') {
+        shader.vertexShader = 'attribute vec4 instanceFacade;varying vec4 vCabinet;varying vec3 vCabinetPosition;varying vec3 vCabinetNormal;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvCabinet=instanceFacade;vCabinetPosition=position;vCabinetNormal=normal;');
+        shader.fragmentShader = 'varying vec4 vCabinet;varying vec3 vCabinetPosition;varying vec3 vCabinetNormal;\n' + shader.fragmentShader;
+        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
+          float cabinetRelief=0.0;
+          if(vCabinet.w>.5 && vCabinetNormal.z>.5 && vCabinet.y>.2){
+            vec2 panel=(vCabinetPosition.xy+.5)*vCabinet.xy;
+            vec2 pixel=max(fwidth(panel),vec2(.001));
+            float rowHeight=(vCabinet.y-.2)/3.0;
+            float row=(panel.y-.2)/rowHeight;
+            float horizontal=min(fract(row),1.0-fract(row))*rowHeight;
+            float vertical=min(panel.x-.2,vCabinet.x-.2-panel.x);
+            float inset=smoothstep(0.0,pixel.x,vertical)*smoothstep(.2,.2+pixel.y,panel.y);
+            float groove=(1.0-smoothstep(.012,.025+pixel.y,horizontal))*inset;
+            vec2 pull=vec2(abs(panel.x-vCabinet.x*.5),abs(fract(row)-.5)*rowHeight);
+            float handle=(1.0-smoothstep(.16,.18+pixel.x,pull.x))*(1.0-smoothstep(.025,.045+pixel.y,pull.y))*inset;
+            float cabinetDetail=1.0-smoothstep(.04,.16,max(pixel.x,pixel.y));
+            groove*=cabinetDetail;handle*=cabinetDetail;
+            diffuseColor.rgb*=1.0-groove*.3;
+            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.55,.38,.17),handle*.85);
+            cabinetRelief=-groove*.008+handle*.012;
+          }`);
+        // Unparametrized surface gradients, in view-space metres. The relief
+        // changes lighting only; the cabinet's intact solid and depth stay put.
+        shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+          vec3 cabinetDx=dFdx(-vViewPosition),cabinetDy=dFdy(-vViewPosition);
+          vec3 cabinetR1=cross(cabinetDy,normal),cabinetR2=cross(normal,cabinetDx);
+          float cabinetDet=dot(cabinetDx,cabinetR1)*faceDirection;
+          vec3 cabinetGrad=dFdx(cabinetRelief)*cabinetR1+dFdy(cabinetRelief)*cabinetR2;
+          if(abs(cabinetDet)>1e-10)normal=normalize(abs(cabinetDet)*normal-sign(cabinetDet)*cabinetGrad);`);
+      }
       if (key === 'wall') {
         shader.uniforms.facadeNight = this.facadeNight;
         shader.vertexShader = 'attribute vec4 instanceFacade;varying vec4 vFacade;varying vec3 vProxyPosition;varying vec3 vProxyNormal;\n' + shader.vertexShader;
@@ -192,25 +228,42 @@ export class CityRenderer implements CityRendererAPI {
         shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*facadeNight*vec3(.40,.27,.13);');
       }
     }; }
-    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v1';
+    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v2';
     this.materials.roof.onBeforeCompile = shader => {
-      shader.vertexShader = 'varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
+      shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec3 roofScale=vec3(1.0);
         #ifdef USE_INSTANCING
         roofScale=vec3(length(instanceMatrix[0].xyz),length(instanceMatrix[1].xyz),length(instanceMatrix[2].xyz));
         #endif
-        vRoofMetric=position*roofScale;vRoofNormal=normal;`);
-      shader.fragmentShader = 'varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.fragmentShader;
+        vRoofMetric=position*roofScale;vRoofNormal=normalize(normal/max(roofScale,vec3(.001)));vRoofSurface=instanceRoofSurface;`);
+      shader.fragmentShader = 'varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
-        if(abs(vRoofNormal.y)>.18){
-          vec2 tile=vRoofMetric.xz*vec2(2.5,1.7);
+        float roofRelief=0.0;
+        if(vRoofSurface>.5 && abs(vRoofNormal.y)>.18){
+          // .4m tile barrels run down the actual slope, with .6m laps. The
+          // opposite gable axis uses the other horizontal coordinate; metric
+          // scaling retains the same pattern through instancing and rotation.
+          bool slopeX=abs(vRoofNormal.x)>abs(vRoofNormal.z);
+          vec2 metric=slopeX?vRoofMetric.zx:vRoofMetric.xz;
+          metric.y/=max(.2,abs(vRoofNormal.y));
+          vec2 tile=metric*vec2(2.5,1.0/.6);
           vec2 width=max(fwidth(tile),vec2(.005));
           vec2 edge=min(fract(tile),1.0-fract(tile));
-          float seam=(1.0-smoothstep(.025,.025+width.x*1.2,edge.x))*.22+(1.0-smoothstep(.035,.035+width.y*1.2,edge.y))*.1;
-          float glaze=.94+sin(tile.x*6.283185)*.055;
-          diffuseColor.rgb*=glaze-seam;
+          float detail=1.0-smoothstep(.3,.9,max(width.x,width.y));
+          float barrel=.5-.5*cos(tile.x*6.283185);
+          float across=1.0-smoothstep(.035,.035+width.x*1.2,edge.x);
+          float lap=1.0-smoothstep(.035,.035+width.y*1.2,edge.y);
+          float glaze=.92+barrel*.1-across*.16-lap*.10;
+          diffuseColor.rgb*=mix(1.0,glaze,detail);
+          roofRelief=(barrel*.012-lap*.004)*detail;
         }`);
+      shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+        vec3 roofDx=dFdx(-vViewPosition),roofDy=dFdy(-vViewPosition);
+        vec3 roofR1=cross(roofDy,normal),roofR2=cross(normal,roofDx);
+        float roofDet=dot(roofDx,roofR1)*faceDirection;
+        vec3 roofGrad=dFdx(roofRelief)*roofR1+dFdy(roofRelief)*roofR2;
+        if(abs(roofDet)>1e-10)normal=normalize(abs(roofDet)*normal-sign(roofDet)*roofGrad);`);
     };
     this.scene.add(this.sun, this.sun.target, this.moon, this.fill);
     for (const light of this.interiorLights) { light.visible = false; this.scene.add(light); }
@@ -755,7 +808,10 @@ export class CityRenderer implements CityRendererAPI {
 
   private makePool(capacity: number, bodyMat: THREE.Material, headMat: THREE.Material, trimMat: THREE.Material): MovingPool {
     const body = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), bodyMat, capacity), head = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), headMat, capacity), trim = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), trimMat, capacity);
-    for (const mesh of [body, head, trim]) { mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh); }
+    for (const mesh of [body, head, trim]) {
+      if (mesh.material === this.materials.roof) mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
+      mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh);
+    }
     return { body, head, trim, capacity };
   }
 

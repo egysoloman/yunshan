@@ -95,16 +95,35 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
       // The table, bed and counter solids also belong to the shared plan.
       // Their display changes no inventory, wages or interaction state.
       for (const fixture of getFloorPlanFixtures(building, plan)) {
-        const r = fixture.rect, x = (r.x0 + r.x1) / 2, z = (r.z0 + r.z1) / 2, width = r.x1 - r.x0, depth = r.z1 - r.z0;
-        if (fixture.kind === 'table') {
-          box('wood', x, plan.y + fixture.top - .1, z, width, .2, depth, '#846346', plan.floor, 'furniture');
-          for (const dx of [-1, 1]) box('wood', x + dx * (width / 2 - .2), plan.y + fixture.top / 2 - .1, z, .2, fixture.top - .2, depth - .2, '#69523f', plan.floor, 'furniture');
+        const r = fixture.rect, width = r.x1 - r.x0, depth = r.z1 - r.z0, { bottom, top } = fixture, height = top - bottom;
+        const firstPart = parts.length;
+        // These are resident structural batches, separate from the facade
+        // detail budget. Each fixture has at most eight parts, all inside its
+        // authoritative solid; no cloth or handle can extend into a use point.
+        const furniture = (material: ProgramArchitecturePart['material'], x0: number, x1: number, low: number, high: number, z0: number, z1: number, color: string, facade?: ProgramArchitecturePart['facade']) => {
+          if (parts.length - firstPart >= 8 || x0 < r.x0 - 1e-7 || x1 > r.x1 + 1e-7 || z0 < r.z0 - 1e-7 || z1 > r.z1 + 1e-7 || low < bottom - 1e-7 || high > top + 1e-7) return;
+          box(material, (x0 + x1) / 2, plan.y + (low + high) / 2, (z0 + z1) / 2, x1 - x0, high - low, z1 - z0, color, plan.floor, 'furniture', false, facade);
+        };
+        if (fixture.kind === 'table' && height >= .4 && Math.min(width, depth) >= .4) {
+          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#a17c55');
+          for (const xx of [r.x0, r.x1 - .2]) for (const zz of [r.z0, r.z1 - .2]) furniture('wood', xx, xx + .2, bottom, top - .2, zz, zz + .2, '#69523f');
+          for (const zz of [r.z0, r.z1 - .2]) furniture('wood', r.x0, r.x1, top - .4, top - .2, zz, zz + .2, '#856246');
         } else if (fixture.kind === 'counter') {
-          box('wood', x, plan.y + (fixture.bottom + fixture.top - .2) / 2, z, width, fixture.top - fixture.bottom - .2, depth, '#806146', plan.floor, 'furniture');
-          box('wood', x, plan.y + fixture.top - .1, z, width, .2, depth, '#ab8a62', plan.floor, 'furniture');
+          // The intact .8m cabinet and .2m top retain the existing physical
+          // contract. Its wood material draws shallow drawer seams and pulls;
+          // this is a procedural surface, not extra inventory or an openable door.
+          furniture('wood', r.x0, r.x1, bottom, top - .2, r.z0, r.z1, '#806146', [width, height - .2, depth, 1]);
+          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#ab8a62');
+        } else if (fixture.kind === 'bed' && height >= .6 - 1e-7 && width >= 1.2 && depth >= .8) {
+          furniture('wood', r.x0, r.x1, bottom, top - .4, r.z0, r.z1, '#6c513d');
+          furniture('wall', r.x0 + .2, r.x1 - .2, top - .4, top - .2, r.z0 + .2, r.z1 - .2, '#d7d0b9');
+          for (const zz of [r.z0, r.z1 - .2]) furniture('wood', r.x0, r.x1, top - .4, top - .2, zz, zz + .2, '#8b6848');
+          for (const xx of [r.x0, r.x1 - .2]) furniture('wood', xx, xx + .2, top - .4, top, r.z0, r.z1, '#8b6848');
+          const quilt = ['#566c76', '#687962', '#97745d', '#666b86'][building.seed % 4];
+          furniture('wall', r.x0 + .8, r.x1 - .2, top - .2, top, r.z0 + .2, r.z1 - .2, quilt);
+          furniture('wall', r.x0 + .2, r.x0 + .6, top - .2, top, r.z0 + .2, r.z1 - .2, '#ebe3cb');
         } else {
-          box('wood', x, plan.y + (fixture.bottom + fixture.top) / 2, z, width, fixture.top - fixture.bottom, depth, '#846346', plan.floor, 'furniture');
-          if (fixture.kind === 'bed') box('wall', x, plan.y + fixture.top - .1, z, width, .2, depth, '#d4cdb5', plan.floor, 'furniture');
+          furniture('wood', r.x0, r.x1, bottom, top, r.z0, r.z1, '#846346');
         }
       }
       for (const surface of [...plan.stairTreads, ...plan.stairLandings]) {

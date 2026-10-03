@@ -1,4 +1,7 @@
+import { claimFundedActorWork } from './funded-work';
+import { powerHasCapacityRoom, powerSupplyAt } from './power';
 import type { Simulation } from '../simulation';
+import { shopLifecycleMayIncorporate, shopLifecycleAllowsOperation } from './shop_lifecycle';
 import { canAccessFloor, getFloorDimensions } from '../access';
 import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody } from '../architecture-floor-plan';
 import { getWalkHeight } from '../world';
@@ -34,6 +37,9 @@ interface ExtensionRuntime {
   constructionJobs?: Record<string, ConstructionJob>;
 }
 type Extension = CityExtensionState & { runtime: ExtensionRuntime };
+const canonicalDisasters = new WeakSet<object>(), canonicalResearchCompletions = new WeakSet<object>();
+export const isCanonicalDisaster = (event: object): boolean => canonicalDisasters.has(event);
+export const isCanonicalResearchCompletion = (event: object): boolean => canonicalResearchCompletions.has(event);
 const clamp = (n: number, min = 0, max = 100) => Math.max(min, Math.min(max, n));
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
@@ -121,7 +127,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     if (e.publicLedger.length > 512) e.publicLedger.splice(0, e.publicLedger.length - 512);
   };
   const publicFunds = (actor: string, amount: number, purpose: string, district: string) => { state().treasury = clamp(state().treasury + amount, 0, 1e12); ext().runtime.lastTreasury += amount; record(actor, amount, purpose, district); };
-  const notice = (type: string, text: string, districtId?: string) => { simulation.appendNotice(type, text, districtId); simulation.emitEvent({ type: `extension:${type}`, districtId }); };
+  const notice = (type: string, text: string, districtId?: string) => { const id = simulation.appendNotice(type, text, districtId); simulation.emitEvent({ type: `extension:${type}`, districtId }); return id; };
   const role = (...roles: Role[]) => roles.some(r => simulation.hasIdentity(r));
   const atBuilding = (b: typeof world.buildings[number]) => simulation.isNearBuilding(b) && canAccessFloor(b, Math.floor((state().player.position.y - b.position.y + .01) / (b.height / Math.max(1, b.floors))), state().player);
   const atFunctionPoint = (b: Building, purpose: BuildingFunctionPoint['purpose'], position = state().player.position, person: Pick<Player, 'role' | 'identities'> = state().player) => !getBuildingBody(b) || simulation.isAtBuildingFunctionPoint(b, position, purpose, person);
@@ -185,12 +191,13 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     return { startedAt: clock, finishAt: clock + 120, budget, actorId, laborVersion: 1, siteId: site.id, floor: researchFloor(site, position), workedMinutes: 0, lastObservedAt: clock, state: 'active', pauseReason: '' };
   };
   const observeResearchLabor = (minutes: number): void => {
-    const e = ext(), phaseMinutes = finite(minutes) && researchPhaseClock === e.lastUpdate && researchPhaseTick === state().tick ? Math.max(0, Math.min(minutes, researchPhaseMinutes)) : 0;
+    const s = state(), e = ext(), phaseMinutes = finite(minutes) && researchPhaseClock === e.lastUpdate && researchPhaseTick === state().tick ? Math.max(0, Math.min(minutes, researchPhaseMinutes)) : 0;
     // Clip authenticated wage windows to this phase and each job's real start.
     // Consumed ranges cannot be reused by another sector of the same actor.
     const consumed = new Map<string, { startAt: number; endAt: number }[]>();
     for (const sector of TECHNOLOGY_SECTORS) {
       const job = e.runtime.researchJobs[sector]; if (job?.laborVersion !== 1) continue;
+      if (!powerSupplyAt(s, job.siteId)) { job.lastObservedAt = e.lastUpdate; job.state = 'paused'; job.pauseReason = '本相位原实验室没有实际供电；没有离场或停电追赶分钟。'; continue; }
       const observedAt = job.lastObservedAt, elapsed = Math.max(0, Math.min(phaseMinutes, e.lastUpdate - observedAt)); job.lastObservedAt = e.lastUpdate;
       if (!(elapsed > 0)) continue;
       const reason = researchLaborReason(sector, job, phaseMinutes);
@@ -208,7 +215,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
         ...(range.endAt > used.endAt ? [{ startAt: used.endAt, endAt: range.endAt }] : []),
       ]);
       const available = ranges.reduce((sum, range) => sum + range.endAt - range.startAt, 0);
-      const credited = claimActorActivityMinutes(simulation, job.actorId, `research:${sector}`, Math.min(elapsed, available, 120 - job.workedMinutes), phaseMinutes);
+      const credited = s.power && job.actorId !== 'player' ? claimFundedActorWork(simulation, job.actorId, `research:${sector}`, ranges, Math.min(elapsed, available, 120 - job.workedMinutes), phaseMinutes).minutes : claimActorActivityMinutes(simulation, job.actorId, `research:${sector}`, Math.min(elapsed, available, 120 - job.workedMinutes), phaseMinutes);
       if (!(credited > 0)) { job.state = 'paused'; job.pauseReason = '本相位没有可用的现场劳动时间；实际课堂或其他课题已占用的分钟不能重复。'; continue; }
       let remaining = credited; const used = consumed.get(job.actorId) ?? [];
       for (const range of ranges) { const minutes = Math.min(remaining, range.endAt - range.startAt); if (minutes > 0) used.push({ startAt: range.startAt, endAt: range.startAt + minutes }); remaining -= minutes; if (!(remaining > 0)) break; }
@@ -247,11 +254,13 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
         if (response > 0) { e.runtime.lastTreasury -= response; record('player', -response, '山洪应急救灾支出', d.id); }
         for (const c of s.citizens.filter(c => c.districtId === d.id)) { const p = e.actorProfiles[c.id]; if (p.alive) { p.health = clamp(p.health - severity * .2); p.stress = clamp(p.stress + severity); } }
         for (const v of s.vehicles.filter(v => world.edges.find(edge => edge.id === v.edgeId)?.points.some(p => distance(p, world.districts.find(def => def.id === d.id)!.center) < 500))) v.nextDeparture += severity;
-        notice('disaster', `${e.environment.lastDisaster}：道路与班次受阻，公共资金投入${response.toFixed(0)}文救灾。`, d.id);
+        const eventId = notice('disaster', `${e.environment.lastDisaster}：道路与班次受阻，公共资金投入${response.toFixed(0)}文救灾。`, d.id);
+        const disaster = { type: 'environment-disaster', eventId, districtId: d.id, severity, occurredAt: e.lastUpdate };
+        canonicalDisasters.add(disaster); simulation.emitEvent(disaster);
       }
     }
   });
-  simulation.onPhase('energy', s => { const bonus = tech('energy').level * 1.2 - (100 - ext().environment.waterQuality) * .05 - ext().environment.stormRisk * .03; s.energy = clamp(s.energy + bonus); for (const d of s.districts) d.energy = clamp(d.energy + bonus); });
+  simulation.onPhase('energy', s => { if (s.power) return; const bonus = tech('energy').level * 1.2 - (100 - ext().environment.waterQuality) * .05 - ext().environment.stormRisk * .03; s.energy = clamp(s.energy + bonus); for (const d of s.districts) d.energy = clamp(d.energy + bonus); });
   simulation.onPhase('traffic', s => { for (const v of s.vehicles) { const base = ({ road: 18, maglev: 50, lightRail: 25, cable: 6, lift: 4, ferry: 8, bridge: 4, flight: 120 })[v.kind]; v.speed = base * (1 + tech('traffic').level * .035) * (1 - ext().environment.stormRisk * .002); } });
   simulation.onPhase('people', (s, minutes) => {
     const e = ext();
@@ -317,7 +326,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       for (const c of s.citizens) {
         const profile = e.actorProfiles[c.id], workplace = buildings.get(c.workId)!;
         if (!profile.alive) continue;
-        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: ['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler', identities: [['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler'] }) && !e.companies.some(company => company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
+        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: ['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler', identities: [['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler'] }) && (workplace.kind !== 'market' || shopLifecycleMayIncorporate(s, s.shops.find(shop => shop.buildingId === workplace.id)!, c.id)) && !e.companies.some(company => company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
           c.money -= 250; publicFunds(c.id, 50, '居民创业登记费', workplace.districtId);
           const shop = s.shops.find(shop => shop.buildingId === workplace.id)!;
           const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${c.name}百工商社`, ownerId: c.id, buildingId: workplace.id, districtId: workplace.districtId, capital: 200, shares: 1000, sharePrice: .5, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { [c.id]: 1000 }, foundedAt: e.lastUpdate, parentId: null };
@@ -325,7 +334,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
         }
         // A personally funded project costs 200; retain 100 for food and care.
         // Residents first meet their current hunger/rest needs before investing.
-        if (['scientist', '科研员', '科学家'].includes(c.role) && (c.education ?? 0) >= 3 && profile.skill >= 35 && c.money >= 300 && c.needs.hunger >= 40 && c.needs.fatigue >= 40 && cool(`research:${c.id}`) && (workplace.kind === 'school' || workplace.kind === 'core' || workplace.facility === 'data') && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: 'scientist', identities: ['scientist'] })) {
+        if (powerHasCapacityRoom(s) && ['scientist', '科研员', '科学家'].includes(c.role) && (c.education ?? 0) >= 3 && profile.skill >= 35 && c.money >= 300 && c.needs.hunger >= 40 && c.needs.fatigue >= 40 && cool(`research:${c.id}`) && (workplace.kind === 'school' || workplace.kind === 'core' || workplace.facility === 'data') && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: 'scientist', identities: ['scientist'] })) {
           const t = e.technologies.filter(t => t.level < 20 && !e.runtime.researchJobs[t.sector]).sort((a, b) => a.level - b.level)[0];
           if (t) { const job = beginResearchJob(c.id, workplace, 200); if (researchLabReason(workplace, job.floor, c.position, { role: 'scientist', identities: ['scientist'] })) continue; c.money -= 200; publicFunds(c.id, 200, `${sectorNames[t.sector]}居民科研投入`, c.districtId); t.funding = 200; t.progress = 0; e.runtime.researchJobs[t.sector] = job; cooldown(`research:${c.id}`, 1440); }
         }
@@ -367,7 +376,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
         const attended = job.laborVersion === 1;
         t.progress = attended ? job.workedMinutes / 120 * 100 : clamp((e.lastUpdate - job.startedAt) / (job.finishAt - job.startedAt) * 100);
         const completed = attended ? job.workedMinutes >= 120 - 1e-7 : e.lastUpdate + 1e-7 >= job.finishAt;
-        if (completed) { t.level++; t.progress = 100; t.funding = 0; t.sideEffect = clamp(t.sideEffect + job.budget / 200); delete e.runtime.researchJobs[t.sector]; if (e.runtime.legacyResearchSectors) e.runtime.legacyResearchSectors = e.runtime.legacyResearchSectors.filter(sector => sector !== t.sector); e.stats.researchCompleted++; const researcher = e.actorProfiles[job.actorId ?? 'player']; researcher.skill = clamp(researcher.skill + 2); notice('research', `${sectorNames[t.sector]}技术完成研发，等级${t.level}；收益与生态副作用已进入城市参数。`); }
+        if (completed) { t.level++; t.progress = 100; t.funding = 0; t.sideEffect = clamp(t.sideEffect + job.budget / 200); e.stats.researchCompleted++; if (simulation.state.power) { const completion = { type: 'research-completed-work', purpose: t.sector, citizenId: job.actorId ?? 'player', siteId: job.laborVersion === 1 ? job.siteId : undefined }; canonicalResearchCompletions.add(completion); simulation.emitEvent(completion); } delete e.runtime.researchJobs[t.sector]; if (e.runtime.legacyResearchSectors) e.runtime.legacyResearchSectors = e.runtime.legacyResearchSectors.filter(sector => sector !== t.sector); const researcher = e.actorProfiles[job.actorId ?? 'player']; researcher.skill = clamp(researcher.skill + 2); notice('research', `${sectorNames[t.sector]}技术完成研发，等级${t.level}；收益与生态副作用已进入城市参数。`); }
       }
       t.sideEffect = clamp(t.sideEffect - minutes * .0004);
     }
@@ -402,6 +411,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       if (p.money < capital + 50) return fail('现金不足：资本之外另需50文登记费。');
       const shop = s.shops.find(shop => shop.buildingId === b.id);
       if (!shop || b.facility) return fail('公共科研与政务设施不能登记为私营公司。');
+      if (b.kind === 'market' && !shopLifecycleMayIncorporate(s, shop, 'player')) return fail('需先依法取得原经营资产；在租经营或已有生命周期合同不得改公司壳绕过义务。');
       p.money -= capital + 50; publicFunds('player', 50, '公司登记费', b.districtId);
       const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${b.name}商社`, ownerId: 'player', buildingId: b.id, districtId: b.districtId, capital, shares: 1000, sharePrice: (capital + 300) / 1000, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { player: 1000 }, foundedAt: e.lastUpdate, parentId: null };
       company.capital += incorporate(shop, 'player'); e.companies.push(company); simulation.transferBusinessOwnership(shop.id, 'player'); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit };
@@ -493,7 +503,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       const b = nearby(['market', 'farm', 'dock'], undefined, [], 'sale'); if (!b) return fail('请到市集、农场或码头购买食材。');
       const shop = s.shops.find(shop => shop.buildingId === b.id), price = INGREDIENTS[ingredient] * count;
       if (!shop || b.facility) return fail('请到有实际食材库存的私营商铺购买。');
-      if (!shop.open || shop.inventory < count || p.money < price) return fail('商铺休业、库存或现金不足。');
+      if (!shop.open || !shopLifecycleAllowsOperation(s, shop.id) || shop.inventory < count || p.money < price) return fail('商铺休业、库存或现金不足。');
       const beforeInventory = shop.inventory, net = price * (1 - s.taxRate); let supplierGross: number, inventoryCost: number;
       try { const quote = simulation.quoteConsignmentSale(shop.id, count, beforeInventory); supplierGross = quote.supplierGross; inventoryCost = quote.inventoryCost; } catch { return fail('寄售货主账户暂不能结算。'); }
       if (net < supplierGross || simulation.shopFunds(shop) + net - supplierGross > 1e9) return fail('成交净款不足以支付实际供货者，或店铺账户已满。');
@@ -583,8 +593,11 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       const npc = s.citizens.find(c => c.id === command.targetId), index = amount(0, 0, 2), b = nearby(['hall', 'core'], undefined, ['mayor', 'council', 'administration']);
       if (!role('mayor') || !npc || !b || distance(p.position, npc.position) > 24 || !e.actorProfiles[npc.id].alive) return fail('市长须在政务设施现场任命身边仍活着的居民。');
       if (index === null || (npc.education ?? 0) < (index === 2 ? 3 : 2) || s.treasury < 100 || !cool(`appoint:${npc.id}`)) return fail('资格教育不足、公共资金不足100文或尚在一天任命间隔。');
-      const appointed = (['official', 'council', 'scientist'] as const)[index]; npc.role = appointed; npc.workId = b.id; npc.destinationId = null; npc.route = []; npc.routeIndex = 0; npc.historyTags = [...new Set([...(npc.historyTags ?? []), '公共职务任命'])]; publicFunds('player', -100, '公共岗位任命与培训', b.districtId); cooldown(`appoint:${npc.id}`, 1440);
-      return success(`已任命${npc.name}为${appointed === 'scientist' ? '科研人员' : appointed === 'council' ? '议员' : '公务员'}，工作场所与权限机会已改变。`);
+      const guild = e.organizations.find(organization => organization.id === 'org-guild' && organization.kind === 'guild');
+      if (simulation.publicBudgetSnapshot().available < 100 || !guild || !finite(guild.funds) || guild.funds < 0 || guild.funds > 1e9 - 100) return fail('已承诺的公共工资与预算须受保护；百工会培训基金须能接收100文拨款。');
+      const appointed = (['official', 'council', 'scientist'] as const)[index]; npc.role = appointed; npc.workId = b.id; npc.destinationId = null; npc.route = []; npc.routeIndex = 0; npc.historyTags = [...new Set([...(npc.historyTags ?? []), '公共职务任命'])]; publicFunds('player', -100, '公共岗位任命与培训', b.districtId); guild.funds += 100; cooldown(`appoint:${npc.id}`, 1440);
+      simulation.emitEvent({ type: 'public-appointment-funded', amount: 100, citizenId: npc.id, siteId: b.id, districtId: b.districtId, purpose: guild.id });
+      return success(`已任命${npc.name}为${appointed === 'scientist' ? '科研人员' : appointed === 'council' ? '议员' : '公务员'}，工作场所与权限机会已改变；100文职业培训经费已拨入${guild.name}基金，培训尚待实际开展。`);
     }
     return null;
   });

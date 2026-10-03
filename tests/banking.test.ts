@@ -169,6 +169,9 @@ test('bank brokerage acquires actual issued shares and pays the issuer without c
   world.buildings.push(workshop); world.nodes.push({ id: 'workshop-door', name: 'workshop', districtId: 'district', position: { ...workshop.door }, station: false });
   world.edges.push({ id: 'road-workshop', from: 'farm-door', to: 'workshop-door', mode: 'road', length: 30, capacity: 20, points: [farm.door, workshop.door] });
   const sim = new Simulation(world); sim.state.player.identities = ['traveler', 'merchant']; sim.state.player.money = 3000;
+  // Controlled existing entitlement for the brokerage contract; this is not a market acquisition.
+  const openingShop = sim.state.shops.find(shop => shop.buildingId === site.id)!;
+  assert.equal(openingShop.lifecycleVersion, undefined); assert.equal(sim.transferBusinessOwnership(openingShop.id, 'player'), true);
   sim.setFocus(site.door, 'walk'); assert.equal(sim.command({ type: 'foundCompany', targetId: site.id, value: 300 }).ok, true);
   const company = sim.state.extension!.companies[0];
   const expanded = sim.command({ type: 'expandCompany', targetId: company.id, value: 1000 });

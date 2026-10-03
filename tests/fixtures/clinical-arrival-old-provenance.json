@@ -1,0 +1,46 @@
+[
+  {
+    "case": "D1",
+    "stage": "measurement-before-step",
+    "sourcePath": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D1/checkpoints/measurement-before-step.save.json",
+    "relativePath": "tests/fixtures/clinical-arrival-old-D1-measurement-before-step.json",
+    "bytes": 406423,
+    "sha256": "67c3934829383b8b8d4910fde4135d0b74aeed650ad8bae12508a6ae7973a11e",
+    "genuineOldSource": "educational-final03 core f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+    "controlledInitialIntent": true,
+    "runtimeGeneratedSave": true
+  },
+  {
+    "case": "D1",
+    "stage": "measurement-after-step",
+    "sourcePath": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D1/checkpoints/measurement-after-step.save.json",
+    "relativePath": "tests/fixtures/clinical-arrival-old-D1-measurement-after-step.json",
+    "bytes": 408224,
+    "sha256": "26ecbed06893a5bffc2f5d73d822b25427dc8f329489dc912a5f093635e7b91e",
+    "genuineOldSource": "educational-final03 core f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+    "controlledInitialIntent": true,
+    "runtimeGeneratedSave": true
+  },
+  {
+    "case": "D2",
+    "stage": "measurement-before-step",
+    "sourcePath": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D2/checkpoints/measurement-before-step.save.json",
+    "relativePath": "tests/fixtures/clinical-arrival-old-D2-measurement-before-step.json",
+    "bytes": 406853,
+    "sha256": "0353880d31abb82a67d62ba784e36b119bbdc3087852435b32e0a85658011555",
+    "genuineOldSource": "educational-final03 core f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+    "controlledInitialIntent": true,
+    "runtimeGeneratedSave": true
+  },
+  {
+    "case": "D2",
+    "stage": "measurement-after-step",
+    "sourcePath": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/before-execution-20261003T060604.268277Z/D2/checkpoints/measurement-after-step.save.json",
+    "relativePath": "tests/fixtures/clinical-arrival-old-D2-measurement-after-step.json",
+    "bytes": 408483,
+    "sha256": "db7a54f6b5daf45141139d60013450f68c029117ec856a8f23daf2c7d7ef52fa",
+    "genuineOldSource": "educational-final03 core f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+    "controlledInitialIntent": true,
+    "runtimeGeneratedSave": true
+  }
+]

@@ -1,3 +1,4 @@
+import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation';
@@ -32,7 +33,7 @@ function placeAtWork(sim: Simulation, worker: Citizen, shop: Shop) {
 }
 function moneySupply(sim: Simulation) {
   const s = sim.state, e = s.extension!;
-  return s.treasury + runtime(sim).taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + runtime(sim).investment) + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0) + s.citizens.reduce((sum, c) => sum + c.money, 0)
+  return shopLifecycleHeldCash(s) + s.treasury + runtime(sim).taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + runtime(sim).investment) + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0) + s.citizens.reduce((sum, c) => sum + c.money, 0)
     + (s.playerLabor?.job?.escrow ?? 0) + (s.education?.course?.escrow ?? 0) + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + s.shops.filter(shop => !e.companies.some(company => company.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, company) => sum + company.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0);
@@ -162,6 +163,8 @@ test('legacy accounts migrate from real proprietor savings and new ownership and
   for (const shop of restored.state.shops) assert.ok(shop.cash !== undefined && shop.cash >= 0);
   const site = restored.state.shops[0]; restored.state.player.identities = ['traveler', 'merchant']; restored.state.player.money = 1000;
   restored.setFocus(restored.worldDefinition.buildings.find(b => b.id === site.buildingId)!.door, 'walk');
+  // Controlled post-migration opening entitlement, before the original real incorporation command.
+  assert.equal(site.lifecycleVersion, undefined); assert.equal(restored.transferBusinessOwnership(site.id, 'player'), true);
   assert.equal(restored.command({ type: 'foundCompany', targetId: site.buildingId, value: 300 }).ok, true);
   assert.equal(site.ownerId, 'player');
   const again = new Simulation(world); const loaded = again.importSave(restored.exportSave()); assert.equal(loaded.ok, true, loaded.message);
@@ -253,6 +256,8 @@ test('wage contracts reject changed amounts and employers atomically, while lega
 
 test('share repurchases reserve both unpaid and not-yet-due actual wages', () => {
   const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'market')!;
+  // Existing untracked player entitlement isolates the original corporate wage-reserve contract.
+  assert.equal(shop.lifecycleVersion, undefined); assert.equal(sim.transferBusinessOwnership(shop.id, 'player'), true);
   sim.state.player.identities = ['traveler', 'merchant']; sim.setFocus(sim.worldDefinition.buildings.find(b => b.id === shop.buildingId)!.door, 'walk'); assert.equal(sim.command({ type: 'foundCompany', targetId: shop.buildingId, value: 300 }).ok, true);
   const company = sim.state.extension!.companies.find(company => company.buildingId === shop.buildingId)!;
   assert.ok(company); const worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
@@ -309,6 +314,8 @@ test('future public shifts require actual departmental witnesses and reserve pas
 test('construction purchases finite material and completes only after attended work, without saleable stock creation', () => {
   const sim = new Simulation(fixture()), shop = sim.state.shops.find(item => item.buildingId === 'market')!, worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
   sim.state.player.identities = ['traveler', 'merchant']; sim.state.player.money = 2000; sim.setFocus(sim.worldDefinition.buildings.find(b => b.id === shop.buildingId)!.door, 'walk');
+  // Existing untracked player entitlement; no managed shop is converted or free purchase claimed.
+  assert.equal(shop.lifecycleVersion, undefined); assert.equal(sim.transferBusinessOwnership(shop.id, 'player'), true);
   assert.equal(sim.command({ type: 'foundCompany', targetId: shop.buildingId, value: 500 }).ok, true);
   const company = sim.state.extension!.companies.find(item => item.buildingId === shop.buildingId)!, baseline = company.capital, stock = shop.inventory, cash = moneySupply(sim);
   const producers = sim.state.shops.filter(item => ['farm', 'workshop'].includes(item.buildingId)), unitsBefore = producers.reduce((sum, item) => sum + item.inventory, 0);
@@ -320,7 +327,10 @@ test('construction purchases finite material and completes only after attended w
   for (let ticks = 0; company.level < 2 && ticks < 100; ticks++) sim.step(.25);
   assert.equal(company.level, 2); assert.equal(job.workedMinutes, 60); assert.equal(job.consumedUnits, 22.5); assert.notEqual(job.completedAt, null);
   assert.ok(shop.inventory <= stock, 'construction stock never enters the food inventory'); assert.ok(Math.abs(moneySupply(sim) - cash) < 1e-7);
-  const empty = new Simulation(fixture()); empty.state.player.identities = ['traveler', 'merchant']; empty.state.player.money = 2000; const site = empty.state.shops.find(item => item.buildingId === 'market')!; empty.setFocus(empty.worldDefinition.buildings.find(b => b.id === site.buildingId)!.door, 'walk'); assert.equal(empty.command({ type: 'foundCompany', targetId: site.buildingId, value: 500 }).ok, true);
+  const empty = new Simulation(fixture()); empty.state.player.identities = ['traveler', 'merchant']; empty.state.player.money = 2000; const site = empty.state.shops.find(item => item.buildingId === 'market')!;
+  // The empty-supplier negative case uses the same controlled existing entitlement.
+  assert.equal(site.lifecycleVersion, undefined); assert.equal(empty.transferBusinessOwnership(site.id, 'player'), true);
+  empty.setFocus(empty.worldDefinition.buildings.find(b => b.id === site.buildingId)!.door, 'walk'); assert.equal(empty.command({ type: 'foundCompany', targetId: site.buildingId, value: 500 }).ok, true);
   for (const item of empty.state.shops) item.inventory = 0; empty.state.trade!.ownedLots = {};
   const before = empty.exportSave(), target = empty.state.extension!.companies.find(item => item.buildingId === site.buildingId)!; assert.equal(empty.command({ type: 'expandCompany', targetId: target.id, value: 300 }).ok, false); assert.equal(empty.exportSave(), before);
 });

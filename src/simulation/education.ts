@@ -1,3 +1,5 @@
+import { powerSupplyAt, powerHasCapacityRoom } from './power';
+import { validateJointActorActivityCapacity } from './activity-capacity';
 import type { Simulation } from '../simulation';
 import { canAccessFloor, getFloorDimensions } from '../access';
 import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
@@ -67,6 +69,7 @@ function classroomInterval(state: SimState, minutes: number, startedAt = 0): Wor
   return { start: Math.max(end - Math.max(0, minutes), dayStart + 8 * 60, startedAt), end: Math.min(end, dayStart + 17 * 60) };
 }
 export function educationStaffMinutes(simulation: Simulation, teacher: Citizen, siteId: string, phaseMinutes: number, _paid = false, startedAt = 0): number {
+  if (!powerSupplyAt(simulation.state, siteId)) return 0;
   const profile = simulation.state.extension!.actorProfiles[teacher.id], intervals = phase(simulation).wages.get(teacher.id), window = classroomInterval(simulation.state, phaseMinutes, startedAt);
   if (teacher.workId !== siteId || !roles.includes(teacher.role) || !profile?.alive || profile.age < 18 || profile.health < 45 || teacher.needs.hunger < 40 || teacher.needs.fatigue < 35 || teacher.state !== 'working') return 0;
   // Core attests the original credited front interval. Clip that interval,
@@ -133,7 +136,9 @@ function ledger(simulation: Simulation, course: EducationCourse, amount: number,
   if (state.extension!.publicLedger.length > 512) state.extension!.publicLedger.splice(0, state.extension!.publicLedger.length - 512);
 }
 function archive(simulation: Simulation, course: EducationCourse): void {
-  const e = simulation.state.education!; e.history.push(course); e.course = null;
+  const e = simulation.state.education!;
+  if (simulation.state.power) simulation.emitEvent({ type: 'education-ended-work', citizenId: course.actorId, siteId: course.siteId, minutes: course.workedMinutes });
+  e.history.push(course); e.course = null;
   if (e.history.length > 64) {
     const old = e.history.shift()!, s = stock(simulation.state, old.siteId); e.archived.count++;
     for (const key of ['funded', 'purchasePaid', 'serviceFees', 'refunded', 'workedMinutes'] as const) e.archived[key] += old[key];
@@ -190,6 +195,7 @@ export function installEducation(simulation: Simulation): void {
     if (state.player.vehicleId || state.aviation?.activeAircraftId || state.player.needs.hunger < 40 || state.player.needs.fatigue < 35 || state.hour < 8 || state.hour >= 17) return fail('请在8至17点保持食物与体力、下车后开始课程。');
     if (!state.citizens.some(teacher => teacher.workId === site.id && roles.includes(teacher.role) && state.extension!.actorProfiles[teacher.id]?.alive && state.extension!.actorProfiles[teacher.id].age >= 18)) return fail('学校没有在册成年教师，不能承诺课程。');
     if (otherPlayerSession(simulation)) return fail('当前正在原场所劳动、休息或服务，请先结束，再报名课程。');
+    if (!powerHasCapacityRoom(state)) return fail('仍有交叉劳动强引用，见证档案容量不足；未扣课程款。');
     if (state.education && state.education.nextId >= 1e9) return fail('课程记录编号已达容量，请保留当前记录。');
     const e = state.education ??= { version: 1, nextId: 1, lastObservedAt: clock(state), course: null, history: [], stock: {}, stats: zero(), archived: { ...zero(), count: 0 } };
     Reflect.set(Reflect.get(simulation, 'runtime'), 'educationVersion', 1);
@@ -290,6 +296,7 @@ export function validateEducationState(state: SimState, world: WorldDefinition):
   let received = 0, consumed = 0;
   for (const [id, s] of Object.entries(e.stock)) { ensure(sites.get(id)?.kind === 'school' && object(s), '学校库存'); for (const key of ['receivedUnits', 'consumedUnits', 'availableUnits', 'archivedReceived', 'archivedConsumed'] as const) num(s[key], 0, 1e12, '实物数量', true); const m = materials.get(id) ?? { received: 0, consumed: 0, reserved: 0 }; close(s.receivedUnits, m.received + s.archivedReceived, '采购来源'); close(s.consumedUnits, m.consumed + s.archivedConsumed, '消耗来源'); close(s.receivedUnits, s.consumedUnits + s.availableUnits + m.reserved, '材料守恒'); received += s.archivedReceived; consumed += s.archivedConsumed; materials.delete(id); }
   ensure(materials.size === 0 && received <= e.archived.count && consumed === e.archived.completed, '归档来源');
+  if (state.power) { validateJointActorActivityCapacity(state); return; }
   // Only explicit new records contribute a necessary saved-time bound. Old
   // public education, grandfather research and archived aggregate statistics
   // have no compatible attended intervals and receive no invented labor.

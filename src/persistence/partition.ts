@@ -42,6 +42,10 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   if (object(document.state.trade)) order['state.trade'] = Object.keys(document.state.trade);
   if (object(document.state.clinical)) order['state.clinical'] = Object.keys(document.state.clinical);
   if (object(document.state.education)) order['state.education'] = Object.keys(document.state.education);
+  if (object(document.state.hygiene)) order['state.hygiene'] = Object.keys(document.state.hygiene);
+  if (object(document.state.pathology)) order['state.pathology'] = Object.keys(document.state.pathology);
+  if (object(document.state.power)) order['state.power'] = Object.keys(document.state.power);
+  if (object(document.state.shopLifecycle)) order['state.shopLifecycle'] = Object.keys(document.state.shopLifecycle);
   if (document.routeEncoding !== undefined) {
     decodeCitizenRoutes(document.routeEncoding, document.routePool, document.state.citizens);
     delete document.routePool;
@@ -54,18 +58,19 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   const nodeChunks = new Map(world?.nodes.map(node => [node.id, positionChunk(node.position)!]) ?? []);
   const districtChunk = (id: string): string => districtChunks.get(id) ?? `chunk:district:${id}`;
   const citizenChunks = new Map<string, string>((document.state.citizens ?? []).map((citizen: Document) => [citizen.id, positionChunk(citizen.position) ?? districtChunk(citizen.districtId)]));
+  const vehicleChunks = new Map<string, string>((document.state.vehicles ?? []).map((vehicle: Document) => [vehicle.id, positionChunk(vehicle.position) ?? districtChunk(vehicle.id)]));
   const playerChunk = positionChunk(document.state.player?.position); if (playerChunk) citizenChunks.set('player', playerChunk);
-  const locate = (value: Document): string => positionChunk(value.position) ?? buildingChunks.get(value.buildingId ?? value.homeId ?? value.siteId) ?? citizenChunks.get(value.npcId ?? value.citizenId ?? value.carrierId ?? value.deceasedId ?? value.actorIds?.[0] ?? value.authorId ?? value.from) ?? districtChunk(value.districtId ?? value.id ?? 'unlocated');
+  const locate = (value: Document): string => positionChunk(value.position) ?? buildingChunks.get(value.buildingId ?? value.homeId ?? value.siteId) ?? citizenChunks.get(value.npcId ?? value.citizenId ?? value.carrierId ?? value.deceasedId ?? value.actorIds?.[0] ?? value.authorId ?? value.actorId ?? value.patientId ?? value.from) ?? districtChunk(value.districtId ?? value.id ?? 'unlocated');
   const companyChunks = new Map<string, string>((document.state.extension?.companies ?? []).map((company: Document) => [company.id, locate(company)]));
   const shopChunks = new Map<string, string>((document.state.shops ?? []).map((shop: Document) => [shop.id, locate(shop)]));
-  for (const path of ['state.citizens', 'state.vehicles', 'state.aviation.aircraft', 'state.family.pregnancies', 'state.family.bonds', 'state.family.movePlans', 'state.family.households', 'state.family.ceremonies', 'state.family.estateSales', 'state.culture.orders', 'state.culture.petitions', 'state.culture.works', 'state.culture.reports', 'state.clinical.orders', 'state.shops', 'state.districts', 'state.crimes', 'state.voxels', 'state.extension.companies', 'state.extension.audits', 'runtime.links', 'runtime.wages']) {
+  for (const path of ['state.citizens', 'state.vehicles', 'state.aviation.aircraft', 'state.family.pregnancies', 'state.family.bonds', 'state.family.movePlans', 'state.family.households', 'state.family.ceremonies', 'state.family.estateSales', 'state.culture.orders', 'state.culture.petitions', 'state.culture.works', 'state.culture.reports', 'state.clinical.orders', 'state.hygiene.batches', 'state.hygiene.jobs', 'state.hygiene.capacityHistory', 'state.pathology.history', 'state.pathology.contacts', 'state.pathology.sourceReceipts', 'state.power.repairs', 'state.power.faults', 'state.power.capacityHistory', 'state.shopLifecycle.listings', 'state.shopLifecycle.leases', 'state.shopLifecycle.receipts', 'state.shops', 'state.districts', 'state.crimes', 'state.voxels', 'state.extension.companies', 'state.extension.audits', 'runtime.links', 'runtime.wages']) {
     const at = ownerAt(document, path), array = at?.owner[at.key];
     if (!at || !Array.isArray(array)) continue;
     layout.arrays[path] = array.length;
-    if (path === 'state.clinical.orders') { player.arrays[path] = []; layout.playerArrays![path] = []; }
+    if (path === 'state.clinical.orders' || path === 'state.hygiene.jobs' || path === 'state.power.repairs') { player.arrays[path] = []; layout.playerArrays![path] = []; }
     array.forEach((value, index) => {
-      if (path === 'state.clinical.orders' && value.payerId === 'player') { player.arrays[path].push({ index, value }); layout.playerArrays![path].push(index); }
-      else { const chunk = getChunk(locate(value)); (chunk.arrays[path] ??= []).push({ index, value }); }
+      if ((path === 'state.clinical.orders' || path === 'state.hygiene.jobs' || path === 'state.power.repairs') && value.payerId === 'player') { player.arrays[path].push({ index, value }); layout.playerArrays![path].push(index); }
+      else { const chunk = getChunk(path === 'state.power.repairs' ? buildingChunks.get(document.state.power.operatorSiteId) ?? locate(value) : path === 'state.power.faults' ? buildingChunks.get(document.state.power.sourceSiteId) ?? locate(value) : path.startsWith('state.shopLifecycle.') ? shopChunks.get(value.shopId) ?? locate(value) : locate(value)); (chunk.arrays[path] ??= []).push({ index, value }); }
     });
     delete at.owner[at.key];
   }
@@ -75,16 +80,16 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   for (const path of ['state.education.course', 'state.education.history']) {
     const at = ownerAt(document, path); if (at && Object.hasOwn(at.owner, at.key)) { player.values[path] = at.owner[at.key]; layout.playerValues!.push(path); delete at.owner[at.key]; }
   }
-  for (const path of ['state.extension.actorProfiles', 'state.extension.runtime.deprivation', 'state.extension.runtime.diversions', 'state.extension.runtime.companyCursors', 'state.extension.runtime.cooldowns', 'state.family.children', 'state.family.studentGuardians', 'state.family.careGuardians', 'state.family.nextSupportAt', 'state.family.nextPlanAt', 'state.family.estates', 'state.culture.transportMaintenance', 'state.trade.lots', 'state.trade.ownedLots', 'state.trade.activity', 'state.clinical.stock', 'state.education.stock', 'state.clinical.nextVisitAt', 'runtime.riders', 'runtime.impressions', 'runtime.decisionAt', 'runtime.activities', 'runtime.attendance', 'runtime.customers', 'runtime.dispatches', 'runtime.hostileAt', 'runtime.freight', 'runtime.districtRelationMeans', 'state.signals', 'runtime.signalOverrides']) {
+  for (const path of ['state.extension.actorProfiles', 'state.extension.runtime.deprivation', 'state.extension.runtime.diversions', 'state.extension.runtime.companyCursors', 'state.extension.runtime.cooldowns', 'state.family.children', 'state.family.studentGuardians', 'state.family.careGuardians', 'state.family.nextSupportAt', 'state.family.nextPlanAt', 'state.family.estates', 'state.culture.transportMaintenance', 'state.trade.lots', 'state.trade.ownedLots', 'state.trade.activity', 'state.clinical.stock', 'state.education.stock', 'state.hygiene.stock', 'state.hygiene.clinicalBaseline', 'state.pathology.episodes', 'state.pathology.pendingDose', 'state.power.buildingMeters', 'state.power.vehicleMeters', 'state.shopLifecycle.titles', 'state.clinical.nextVisitAt', 'runtime.riders', 'runtime.impressions', 'runtime.decisionAt', 'runtime.activities', 'runtime.attendance', 'runtime.customers', 'runtime.dispatches', 'runtime.hostileAt', 'runtime.freight', 'runtime.districtRelationMeans', 'state.signals', 'runtime.signalOverrides']) {
     const at = ownerAt(document, path), map = at?.owner[at.key];
     if (!at || !object(map)) continue;
     layout.maps.push(path);
     order[path] = Object.keys(map);
     for (const [key, value] of Object.entries(map)) {
-      if (path === 'state.clinical.stock' || path === 'state.education.stock') { const chunk = getChunk(buildingChunks.get(key) ?? districtChunk(key)); (chunk.maps[path] ??= Object.create(null))[key] = value; continue; }
+      if (path === 'state.clinical.stock' || path === 'state.education.stock' || path === 'state.hygiene.stock' || path === 'state.hygiene.clinicalBaseline' || path === 'state.power.buildingMeters') { const chunk = getChunk(buildingChunks.get(key) ?? districtChunk(key)); (chunk.maps[path] ??= Object.create(null))[key] = value; continue; }
       const entityId = path.endsWith('.cooldowns') ? key.slice(key.indexOf(':') + 1) : key;
       if (entityId === 'player' || path.endsWith('.cooldowns') && !citizenChunks.has(entityId) && !companyChunks.has(entityId)) { (player.maps[path] ??= Object.create(null))[key] = value; continue; }
-      const chunk = getChunk(citizenChunks.get(entityId) ?? companyChunks.get(entityId) ?? shopChunks.get(entityId) ?? buildingChunks.get(entityId) ?? nodeChunks.get(entityId) ?? districtChunk(entityId));
+      const chunk = getChunk(citizenChunks.get(entityId) ?? vehicleChunks.get(entityId) ?? companyChunks.get(entityId) ?? shopChunks.get(entityId) ?? buildingChunks.get(entityId) ?? nodeChunks.get(entityId) ?? districtChunk(entityId));
       (chunk.maps[path] ??= Object.create(null))[key] = value;
     }
     delete at.owner[at.key];

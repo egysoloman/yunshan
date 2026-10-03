@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "attemptedAtUTC": "2026-10-03T10:46:00Z",
+  "recordedAtUTC": "2026-10-03T10:50:04.389615+00:00",
+  "attemptCount": 1,
+  "processExitCode": 1,
+  "status": "FAILED_BEFORE_LIBRARY_WRITE_CONNECTION_UNAVAILABLE",
+  "newLibraryIds": 0,
+  "orderedResults": [
+    {
+      "filename": "yunshan-dynamic-city-services-original-evidence-20261003.zip",
+      "localPath": "/tmp/yunshan-dynamic-city-delivery-output-20261003-01/yunshan-dynamic-city-services-original-evidence-20261003.zip",
+      "purpose": "create_library_file",
+      "sha256": "86462ab6a015309b5d0d897c50a5be979e6001416cee9f868b74e31fcb705255",
+      "bytes": 367653712,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "REPORT.md",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/REPORT.md",
+      "purpose": "create_library_file",
+      "sha256": "9919e1dca97d52ad20dd8e0c578073301d6bbf0071dcc6c0c30370ffff57daa1",
+      "bytes": 20120,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "yunshan-22-market-street-20261003.png",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/yunshan-22-market-street-20261003.png",
+      "purpose": "create_library_file",
+      "sha256": "58ce1113a619a50963d4188c1b1898bd314dafc92c4307d542e9eadfaef91873",
+      "bytes": 619192,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "yunshan-22-home-bed-20261003.png",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/yunshan-22-home-bed-20261003.png",
+      "purpose": "create_library_file",
+      "sha256": "f75e1528c744cb7c2ff33d9b8ab25a19f7bc78c4d9fc4f8f8a8c14efc12325b7",
+      "bytes": 314557,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "yunshan-22-counter-20261003.png",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/yunshan-22-counter-20261003.png",
+      "purpose": "create_library_file",
+      "sha256": "66477535d21fb1e69f5ef8978ca0cbcc8f1bc231a028b146b8e630a876ea98d5",
+      "bytes": 94947,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "yunshan-22-core-waterfall-20261003.png",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/yunshan-22-core-waterfall-20261003.png",
+      "purpose": "create_library_file",
+      "sha256": "1b43d3607860eb70b945dc842b53df46c099505ac52abdaae0e93cd8372bb1e1",
+      "bytes": 1346066,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "validation-results.json",
+      "localPath": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/validation-results.json",
+      "purpose": "create_library_file",
+      "sha256": "10db744f2203d87f5a44a411261e64c4fdac495cd46dca9a5d405f6b6ef35d77",
+      "bytes": 4209,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null
+    },
+    {
+      "filename": "开发备忘录.md",
+      "localPath": "/workspace/yunshan/开发备忘录.md",
+      "purpose": "replace_library_file",
+      "sha256": "55f6272e8ff81eee272864acc851a92ba4893be827435ca732b643736b10894b",
+      "bytes": 259869,
+      "outcome": "NOT_CREATED_OR_REPLACED_CONNECTION_FAILED_BEFORE_PREPARATION",
+      "newLibraryFileId": null,
+      "newVersion": null,
+      "existingLibraryFileId": "libfile_7571a326de848191aec330d605a63845",
+      "retainedExpectedVersion": 4,
+      "lastConfirmedLibraryVersion": 4,
+      "latestLocalTextDelivered": false
+    }
+  ],
+  "retryAttempted": false,
+  "alternateLibraryWriteRouteAttempted": false,
+  "memoLibraryVersionAdvanced": false,
+  "userFacingReason": "Library连接阶段失败，未创建新附件或替换备忘录；本轮原件改以授权工作分支交付。"
+}

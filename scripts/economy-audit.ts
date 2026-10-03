@@ -1,3 +1,4 @@
+import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -23,7 +24,7 @@ const initialPolicy = { taxRate: numeric('--tax-rate', .08, 0, .3), policeBudget
 const artifact = argumentsByName.get('--out') ?? 'artifacts/economy-audit.json';
 assert.ok(/^artifacts\/[a-zA-Z0-9-]+\.json$/.test(artifact), 'audit output must be a named JSON artifact');
 const sourceHash = Object.fromEntries(await Promise.all([
-  'src/simulation.ts', 'src/simulation/extensions.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/simulation/clinical.ts', 'src/simulation/education.ts', 'src/simulation/activity-minutes.ts', 'src/simulation/banking.ts', 'src/simulation/trade.ts', 'src/simulation/player-labor.ts', 'src/simulation/journeys.ts', 'src/journey.ts', 'src/aviation.ts', 'src/world.ts', 'src/access.ts',
+  'src/simulation.ts', 'src/simulation/extensions.ts', 'src/simulation/family.ts', 'src/simulation/culture.ts', 'src/simulation/clinical.ts', 'src/simulation/education.ts', 'src/simulation/activity-minutes.ts', 'src/simulation/activity-capacity.ts', 'src/simulation/funded-work.ts', 'src/simulation/power.ts', 'src/simulation/shop_lifecycle.ts', 'src/simulation/hygiene.ts', 'src/simulation/pathology.ts', 'src/simulation/banking.ts', 'src/simulation/trade.ts', 'src/simulation/player-labor.ts', 'src/simulation/journeys.ts', 'src/journey.ts', 'src/aviation.ts', 'src/world.ts', 'src/access.ts',
 ].map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
 const world = createWorld(seed);
 const sim = new Simulation(world);
@@ -166,6 +167,8 @@ function snapshot() {
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
     playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
+    power: s.power ? structuredClone(s.power) : null,
+    hygiene: s.hygiene ? { escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock) } : null,
     education: s.education ? { course: s.education.course ? { ...s.education.course, staffMinutes: { ...s.education.course.staffMinutes } } : null, stats: { ...s.education.stats }, stock: structuredClone(s.education.stock) } : null,
     policy: { taxRate: s.taxRate, policeBudget: s.policeBudget }, publicBudget: sim.publicBudgetSnapshot(), publicService: sim.publicServiceCoverage(), privateLabor: sim.privateLaborCoverage(),
     banking: s.banking ? { balanceSheet: bankingBalanceSheet(s.banking), cash: s.banking.cash, deposits: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.deposits, 0), loans: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.loanPrincipal + account.loanInterest, 0), legacyInvestmentCash: s.banking.legacyInvestmentCash } : null,
@@ -199,7 +202,10 @@ function moneySupply() {
     + e.companies.reduce((sum, c) => sum + c.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0)
     + (s.playerLabor?.job?.escrow ?? 0)
     + (s.education?.course?.escrow ?? 0)
+    + (s.power?.repairs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
+    + shopLifecycleHeldCash(s)
+    + (s.hygiene?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0);
 }
 

@@ -204,6 +204,9 @@ test('death transfers exact cash and integer shares to the living spouse and chi
   const { sim, spouse, child } = birthFixture();
   sim.state.player.identities = ['traveler', 'merchant']; sim.state.player.role = 'merchant';
   const site = sim.worldDefinition.buildings.find(site => site.kind === 'market')!; sim.state.player.position = { ...site.door };
+  // Controlled existing market entitlement isolates share inheritance, rather than claiming a free acquisition.
+  const openingShop = sim.state.shops.find(shop => shop.buildingId === site.id)!;
+  assert.equal(openingShop.lifecycleVersion, undefined); assert.equal(sim.transferBusinessOwnership(openingShop.id, 'player'), true);
   ok(sim, { type: 'foundCompany', targetId: site.id, value: 500 });
   const company = sim.state.extension!.companies[0];
   assert.ok(company); company.shareholders = { [spouse.id]: 999, player: 1 }; company.shares = 1000; company.ownerId = spouse.id;

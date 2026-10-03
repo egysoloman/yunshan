@@ -1,4 +1,5 @@
 import type { Simulation } from '../simulation';
+import { shopLifecyclePendingEstateAssets } from './shop_lifecycle';
 import { canAccessFloor } from '../access';
 import { getBuildingBody } from '../architecture-floor-plan';
 import type { CommandResult, Role, SimState } from '../types';
@@ -174,12 +175,14 @@ export function settleDeceasedAccount(simulation: Simulation, actorId: string, h
   if (offset > 0) receipt(s, actorId, 'estate-offset', offset, bank.cash, offset - offsetInterest, offsetInterest);
   const cashPayment = Math.min(actor.money, account.loanPrincipal + account.loanInterest);
   if (cashPayment > 0) { repay(s, actorId, cashPayment); result.debtPaid += cashPayment; }
-  const hasUnsoldEstateAssets = s.extension!.companies.some(company => (company.shareholders[actorId] ?? 0) > 0)
+  const hasUnsoldEstateAssets = shopLifecyclePendingEstateAssets(s, actorId) || s.extension!.companies.some(company => (company.shareholders[actorId] ?? 0) > 0)
     || s.shops.some(shop => shop.ownerId === actorId && !s.extension!.companies.some(company => company.buildingId === shop.buildingId))
     || s.family?.households.some(household => household.actorIds.includes(actorId) && household.closedAt === null && household.balance > 0)
     || s.family?.pregnancies.some(pregnancy => pregnancy.parentIds.includes(actorId) && pregnancy.escrow > 0)
     || s.clinical?.orders.some(order => order.payerId === actorId && order.escrow > 0)
     || actorId === 'player' && (s.education?.course?.escrow ?? 0) > 0
+    || actorId === 'player' && s.power?.repairs.some(job => job.payerId === 'player' && job.escrow > 0)
+    || actorId === 'player' && s.hygiene?.jobs.some(job => job.payerId === 'player' && job.escrow > 0)
     || actorId === 'player' && bank.legacyInvestmentPrincipal > 0;
   if (account.loanPrincipal + account.loanInterest > EPS && hasUnsoldEstateAssets) {
     // A share quote is not cash. The estate executor must find a funded buyer

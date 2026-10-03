@@ -173,11 +173,39 @@ function grant(sim: Simulation, identity: Role) {
   sim.state.player.role = identity;
 }
 
+function declareExistingCorporateFixtureEntitlement(sim: Simulation, shop: Simulation['state']['shops'][number], ownerId: string) {
+  // Controlled existing entitlement for corporate contracts, not evidence of a market sale.
+  assert.equal(shop.lifecycleVersion, undefined, 'a managed shop must retain its separate entity obligations');
+  const priorId = shop.ownerId!, prior = priorId === 'player' ? sim.state.player : sim.state.citizens.find(person => person.id === priorId)!;
+  assert.ok(prior, 'the actual original holder receives only their unprotected opening capital');
+  const cash = () => sim.state.treasury + Reflect.get(sim, 'runtime').taxes + sim.state.player.money + sim.state.citizens.reduce((sum, person) => sum + person.money, 0)
+    + sim.state.shops.filter(item => !extension(sim).companies.some(company => company.buildingId === item.buildingId)).reduce((sum, item) => sum + (item.cash ?? 0), 0)
+    + extension(sim).companies.reduce((sum, company) => sum + company.capital, 0) + extension(sim).organizations.reduce((sum, organization) => sum + organization.funds, 0)
+    + (sim.state.banking ? sim.state.banking.cash + sim.state.banking.legacyInvestmentCash : sim.state.bankBalance + Reflect.get(sim, 'runtime').investment)
+    + (sim.state.playerLabor?.job?.escrow ?? 0) + (sim.state.education?.course?.escrow ?? 0) + (sim.state.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
+    + (sim.state.power?.repairs.reduce((sum, job) => sum + job.escrow, 0) ?? 0) + (sim.state.shopLifecycle?.leases.reduce((sum, lease) => sum + lease.depositEscrow, 0) ?? 0)
+    + (sim.state.hygiene?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
+    + (sim.state.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (sim.state.family?.households.reduce((sum, household) => sum + household.balance, 0) ?? 0);
+  const books = () => JSON.stringify({ inventory: shop.inventory, profit: shop.profit, revenue: shop.revenue, trade: sim.state.trade,
+    wages: Reflect.get(sim, 'runtime').wages, wageArrears: Reflect.get(sim, 'runtime').wageArrears,
+    wageAccruals: Reflect.get(sim, 'runtime').wageAccruals, privateLabor: Reflect.get(sim, 'runtime').privateLabor });
+  const beforeCash = cash(), beforeBooks = books(), protectedCash = sim.shopProtectedFunds(shop), returned = Math.max(0, sim.shopFunds(shop) - protectedCash);
+  assert.ok(prior.money + returned <= 1e9, 'opening capital must fit the original holder without clipping');
+  sim.transferShopFunds(shop, -returned); prior.money += returned;
+  assert.equal(shop.ownerId, priorId, "return the original holder's real capital before declaring the existing entitlement");
+  assert.equal(sim.transferBusinessOwnership(shop.id, ownerId), true);
+  assert.ok(Math.abs(cash() - beforeCash) < 1e-8, 'opening fixture conserves total actual cash');
+  assert.equal(books(), beforeBooks, 'all original goods, purchase costs, profits, wages and promised shifts survive the opening fixture');
+  assert.equal(sim.shopProtectedFunds(shop), protectedCash, 'all earned and promised wage claims remain protected');
+}
+
 function foundCompany(sim: Simulation, world: WorldDefinition, districtIndex = 0) {
   const site = world.buildings.find(item => item.districtId === world.districts[districtIndex].id
     && ['market', 'workshop', 'farm', 'dock'].includes(item.kind)
     && !extension(sim).companies.some(company => company.buildingId === item.id));
   assert.ok(site, 'the fixture must contain an unoccupied commercial facility');
+  const shop = sim.state.shops.find(shop => shop.buildingId === site.id)!;
+  declareExistingCorporateFixtureEntitlement(sim, shop, 'player');
   walkTo(sim, site.door);
   ok(sim, { type: 'foundCompany', targetId: site.id, value: 500 });
   const company = extension(sim).companies.find(item => item.buildingId === site.id && item.ownerId === 'player');
@@ -1363,11 +1391,16 @@ test('a trained student becomes a scientist and pays for research whose saved co
   const runtime = () => (extension(sim) as CityExtensionState & { runtime: { researchJobs: Record<string, ResearchJob> } }).runtime;
   let funded = false;
   let before: { money: number; treasury: number; taxes: number; operatingCost: number } | null = null;
-  sim.onPhase('traffic', () => {
-    if (funded) return;
-    scholar.position = clone(school.door);
-    scholar.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
-  });
+  // Controlled onsite work fixture: the ordinary people phase must still
+  // create the original employer's authenticated attendance/wage windows.
+  const pinWork = (city: Simulation) => {
+    const person = city.state.citizens.find(citizen => citizen.id === scholar.id)!;
+    const point = labFoot(city, school);
+    person.position = point; person.destinationId = school.id; person.route = [{ ...point }]; person.routeIndex = 1;
+    person.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
+    const core = Reflect.get(city, 'runtime'); core.activities[person.id] = 'work'; core.decisionAt[person.id] = 1e9;
+  };
+  sim.onPhase('traffic', () => pinWork(sim));
   sim.onPhase('commerce', () => {
     const coreRuntime = (JSON.parse(sim.exportSave()) as { runtime: { taxes: number; operatingCost: number } }).runtime;
     before = { money: scholar.money, treasury: sim.state.treasury, ...coreRuntime };
@@ -1395,6 +1428,7 @@ test('a trained student becomes a scientist and pays for research whose saved co
   advanceMinutes(sim, 60);
   assert.equal(e.technologies.find(item => item.sector === sector)!.level, level);
   const restored = restoredFrom(sim);
+  restored.onPhase('traffic', () => pinWork(restored));
   advanceMinutes(sim, 60);
   advanceMinutes(restored, 60);
   assert.deepEqual(restored.state, sim.state);
@@ -1423,8 +1457,10 @@ test('autonomous research respects personal reserves and urgent needs while acce
       researcher.role = '科研员'; researcher.workId = lab.id; researcher.education = 3; researcher.money = item.cash;
       extension(sim).actorProfiles[researcher.id].skill = 35;
       sim.onPhase('traffic', () => {
-        researcher.position = clone(lab.door);
+        const point = labFoot(sim, lab);
+        researcher.position = point; researcher.destinationId = lab.id; researcher.route = [{ ...point }]; researcher.routeIndex = 1;
         researcher.needs = { hunger: item.hunger, fatigue: item.fatigue, social: 100, fun: 100 };
+        const core = Reflect.get(sim, 'runtime'); core.activities[researcher.id] = 'work'; core.decisionAt[researcher.id] = 1e9;
       });
       walkTo(sim, lab.door);
       advanceMinutes(sim, 60);
@@ -1520,6 +1556,8 @@ test('a skilled worker uses accumulated personal savings to found a company with
   worker.role = '工人'; worker.workId = site.id; worker.education = 1; worker.money = 1000;
   e.actorProfiles[worker.id].skill = 45;
   let founded = false;
+  let declaredEntitlement = false;
+  const shop = sim.state.shops.find(shop => shop.buildingId === site.id)!;
   let before: { money: number; treasury: number; taxes: number; operatingCost: number } | null = null;
   sim.onPhase('traffic', () => {
     if (founded) return;
@@ -1527,6 +1565,12 @@ test('a skilled worker uses accumulated personal savings to found a company with
     worker.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
   });
   sim.onPhase('commerce', () => {
+    // Declare the controlled existing entitlement once at the actual review
+    // boundary, after original-owner trading and before this finance snapshot.
+    if (!declaredEntitlement && !founded && e.lastUpdate + 1e-7 >= Reflect.get(e, 'runtime').nextCompanyAt) {
+      declareExistingCorporateFixtureEntitlement(sim, shop, worker.id);
+      declaredEntitlement = true;
+    }
     const coreRuntime = (JSON.parse(sim.exportSave()) as { runtime: { taxes: number; operatingCost: number } }).runtime;
     before = { money: worker.money, treasury: sim.state.treasury, ...coreRuntime };
   });

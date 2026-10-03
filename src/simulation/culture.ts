@@ -1,7 +1,7 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor } from '../access';
 import { getBuildingBody } from '../architecture-floor-plan';
-import { clinicalHealthGain, clinicalPairAtServiceStation, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
+import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalVisitDeadline, installClinical } from './clinical';
 import { educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
@@ -21,6 +21,7 @@ export interface CityReport {
 export interface CivicPetition { id: string; authorId: string; topic: PetitionTopic; title: string; text: string; siteId: string; filedAt: number; replyAt: number; status: 'open' | 'answered'; signerIds: string[]; reply: string | null; answeredAt: number | null; executionId?: string | null }
 export interface SupplyReceipt { procurementId: string; budgetId: string; purchasedAt: number; paid: number; quantity: number; tax: number; reason?: 'budget' | 'supply' | 'authorization'; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
 export interface ServiceOrder {
+  clinicalTimingVersion?: 2;
   id: string; petitionId: string; topic: PetitionTopic; siteId: string;
   state: 'agenda' | 'awaitingReview' | 'awaitingBudget' | 'awaitingSupply' | 'active' | 'fulfilled' | 'rejected';
   scheduledAt: number; approvedAt: number | null; approvedBy: string[]; authorizedCap: number; spent: number;
@@ -81,12 +82,12 @@ export function installCulture(simulation: Simulation): void {
     return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)
       && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, citizen.position, undefined, identity));
   });
-  const staffAt = (order: ServiceOrder, minutes: number) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && (order.topic === 'education' ? educationStaffMinutes(simulation, person, order.siteId, minutes) > 0 : simulation.isOnDuty(person.id, order.siteId)));
+  const staffAt = (order: ServiceOrder, minutes: number) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && (order.topic === 'education' ? educationStaffMinutes(simulation, person, order.siteId, minutes) > 0 : order.topic === 'health' ? clinicalDoctorMinutes(simulation, person, order.siteId, minutes) > 0 : simulation.isOnDuty(person.id, order.siteId)));
   const makeOrder = (petition: CivicPetition): ServiceOrder | null => {
     const hearing = sites.get(petition.siteId)!, rule = SERVICE[petition.topic];
     const site = world.buildings.filter(site => site.districtId === hearing.districtId && site.kind === rule.kind && !site.facility).sort((a, b) => distance(a.door, hearing.door) - distance(b.door, hearing.door))[0];
     if (!site) return null;
-    const order: ServiceOrder = { id: `service-${culture().nextOrderId++}`, petitionId: petition.id, topic: petition.topic, siteId: site.id, state: 'agenda', scheduledAt: now(), approvedAt: null, approvedBy: [], authorizedCap: 0, spent: 0, receivedUnits: 0, consumedUnits: 0, targetUnits: rule.units, requiredMinutes: rule.minutes, servedIds: [], serviceMinutes: {}, staffIds: [], receipts: [], retryAt: now(), completedAt: null, lastReason: '议题已排入公共服务议程，等待有权限的实际在岗人员审核。' };
+    const order: ServiceOrder = { ...(petition.topic === 'health' ? { clinicalTimingVersion: 2 as const } : {}), id: `service-${culture().nextOrderId++}`, petitionId: petition.id, topic: petition.topic, siteId: site.id, state: 'agenda', scheduledAt: now(), approvedAt: null, approvedBy: [], authorizedCap: 0, spent: 0, receivedUnits: 0, consumedUnits: 0, targetUnits: rule.units, requiredMinutes: rule.minutes, servedIds: [], serviceMinutes: {}, staffIds: [], receipts: [], retryAt: now(), completedAt: null, lastReason: '议题已排入公共服务议程，等待有权限的实际在岗人员审核。' };
     culture().orders.push(order); petition.executionId = order.id; return order;
   };
   const authorize = (order: ServiceOrder, signers: string[], cap: number): boolean => {
@@ -125,8 +126,12 @@ export function installCulture(simulation: Simulation): void {
     const ids = candidates;
     for (const id of ids) {
       if (order.receivedUnits - order.consumedUnits < 1 - 1e-7) break;
-      if (order.topic === 'health' && !staff.some(doctor => clinicalPairAtServiceStation(simulation, site, doctor.id, id) && takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
       let credit = minutes;
+      if (order.topic === 'health') {
+        const earliest = Math.max(order.scheduledAt, order.approvedAt ?? order.scheduledAt, order.receipts[0]?.purchasedAt ?? order.scheduledAt);
+        credit = 0;
+        if (!staff.some(doctor => (credit = claimClinicalCareMinutes(simulation, site, doctor, id, minutes, earliest, rule.minutes - (order.serviceMinutes[id] ?? 0))) > 1e-7)) continue;
+      }
       if (order.topic === 'education') {
         const teachers = staff.filter(teacher => educationPairAtStation(simulation, site, teacher, id) && educationSlotAvailable(simulation, teacher.id, id));
         credit = Math.min(rule.minutes - (order.serviceMinutes[id] ?? 0), actorActivityAvailable(simulation, id, minutes), Math.max(0, ...teachers.map(teacher => educationStaffMinutes(simulation, teacher, site.id, minutes))));
@@ -396,6 +401,7 @@ export function validateCultureState(candidate: SimState, world: WorldDefinition
     ensure(object(order) && /^service-[1-9][0-9]*$/.test(order.id) && Number(order.id.slice(8)) < c.nextOrderId && !orderIds.has(order.id) && Object.hasOwn(SERVICE, order.topic), '议程标识'); orderIds.add(order.id);
     const petition = c.petitions.find(petition => petition.id === order.petitionId), site = sites.get(order.siteId), rule = SERVICE[order.topic as PetitionTopic];
     ensure(!!petition && petition.executionId === order.id && petition.status === 'answered' && petition.signerIds.length >= 3 && petition.topic === order.topic && !!site && site.kind === rule.kind && site.districtId === sites.get(petition.siteId)!.districtId, '议程必须对应真实程序及本区设施');
+    ensure(order.clinicalTimingVersion === undefined || order.topic === 'health' && order.clinicalTimingVersion === 2, '诊疗到场计时版本');
     ensure(['agenda', 'awaitingReview', 'awaitingBudget', 'awaitingSupply', 'active', 'fulfilled', 'rejected'].includes(order.state), '履约状态');
     num(order.scheduledAt, petition!.replyAt, c.lastUpdate, '排入议程时间'); num(order.targetUnits, rule.units, rule.units, '法定服务数量'); num(order.requiredMinutes, rule.minutes, rule.minutes, '服务所需时数'); num(order.retryAt, order.scheduledAt, 1e12, '采购重试时钟'); str(order.lastReason, 1, 1000, '议程公开原因');
     const signers = array(order.approvedBy, 2, '授权署名'); ensure(new Set(signers).size === signers.length && signers.every(id => ids.has(id)), '授权署名引用');

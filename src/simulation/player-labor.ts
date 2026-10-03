@@ -19,7 +19,7 @@ export interface PlayerLaborState {
 export interface PlayerLaborAccounting {
   reserve(siteId: string, gross: number): PlayerLaborEmployer | null;
   refund(employer: PlayerLaborEmployer, amount: number): boolean;
-  pay(job: PlayerLaborJob, gross: number, minutes: number): void;
+  pay(job: PlayerLaborJob, gross: number, minutes: number, interval: { startAt: number; endAt: number }): void;
 }
 const EPS = 1e-7, SHIFT_MINUTES = 60;
 const ROLE_KINDS: Record<Role, string[]> = {
@@ -114,7 +114,8 @@ export function installPlayerLabor(simulation: Simulation, accounting: PlayerLab
     const tax = gross * state.taxRate;
     job.workedMinutes = worked; job.paidGross = earned; job.paidNet += gross - tax; job.paidTax += tax; job.escrow = job.gross - earned;
     labor().stats.workedMinutes += credited; labor().stats.paidGross += gross; job.status = 'working'; job.pauseReason = '';
-    accounting.pay(job, gross, credited);
+    const creditedStartAt = now(state) - elapsed + Math.max(0, 6 * 60 - start);
+    accounting.pay(job, gross, credited, { startAt: creditedStartAt, endAt: creditedStartAt + credited });
     state.player.needs.fatigue = Math.max(0, state.player.needs.fatigue - credited * .2);
     state.player.needs.hunger = Math.max(0, state.player.needs.hunger - credited * (7 / SHIFT_MINUTES));
     if (worked === job.requiredMinutes) archive(job, true);

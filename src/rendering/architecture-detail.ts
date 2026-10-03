@@ -203,13 +203,26 @@ function buildProgramArchitectureDetails(building: Building, body: BuildingBody,
     const wall: Wall = { a: edge.a, b: edge.b, height: .2, thickness: .2 }, { length } = wallBasis(wall);
     const span = Math.min(7.2, length), from = q((length - span) / 2), to = q(from + span);
     mounted('tile', wall, from, to, edge.y - .2, edge.y, 0, .2, WOOD, edge.floor, true);
-    for (let u = from + .2; u <= to - .2 + 1e-7; u += .6) mounted('tile', wall, u - .2, u + .2, edge.y, edge.y + .2, -.2, .2, TILE, edge.floor, true);
+    // The real gable's .4m edge gets a dark lower fascia. Gallery roofs are
+    // only .2m thick, so they retain their original single timber band.
+    if (edge.region.kind !== 'gallery-flat') mounted('tile', wall, from, to, edge.y - .4, edge.y - .2, 0, .2, '#4e3c2c', edge.floor, true);
+    let tileIndex = 0;
+    for (let u = from + .2; u <= to - .2 + 1e-7; u += .6) {
+      mounted('tile', wall, u - .2, u + .2, edge.y, edge.y + .2, -.2, .2, tileIndex++ % 3 === 0 ? '#829080' : TILE, edge.floor, true);
+    }
     const plan = body.floorPlans.find(plan => plan.floor === edge.floor)!;
     for (const u of [from + .6, to - .6]) {
       if (u < from || u > to) continue;
       const point = wallPoint(wall, u), below = plan.walls.find(candidate => wallDistanceSquared(candidate, point) < 1e-7);
       if (!below || edge.region.bottom - (plan.y + below.height) < .2) continue;
-      mounted('bracket', wall, u - .2, u + .2, plan.y + below.height, edge.region.bottom, -.2, .2, EDGE, edge.floor, true);
+      const wallTop = plan.y + below.height;
+      if (edge.region.bottom - wallTop >= .4 - 1e-7) {
+        // Two nested timber levels fit entirely in the existing roof gap.
+        // The short upper arm stays within the selected eave span; it never
+        // lowers the doorway or introduces a post into the public route.
+        mounted('bracket', wall, u - .2, u + .2, wallTop, edge.region.bottom - .2, 0, .2, EDGE, edge.floor, true);
+        mounted('bracket', wall, u - .6, u + .6, edge.region.bottom - .2, edge.region.bottom, -.2, .2, WOOD, edge.floor, true);
+      } else mounted('bracket', wall, u - .2, u + .2, wallTop, edge.region.bottom, -.2, .2, EDGE, edge.floor, true);
     }
   }
   return parts;

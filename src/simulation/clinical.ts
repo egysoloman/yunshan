@@ -1,11 +1,13 @@
 import type { Simulation } from '../simulation';
 import { canAccessFloor, getFloorDimensions } from '../access';
 import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
-import { homeRestPointBlockedByVoxels } from './home-rest';
+import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
+import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export interface ClinicalReceipt { commodity: 'materials'; procurementId: string; purchasedAt: number; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
 export interface ClinicalOrder {
+  timingVersion?: 2;
   id: string; patientId: string; payerId: string; siteId: string; startedAt: number;
   state: 'awaitingSupply' | 'awaitingDoctor' | 'inTreatment' | 'refundPending' | 'completed' | 'cancelled';
   funded: number; escrow: number; purchasePaid: number; serviceFee: number; refunded: number;
@@ -95,17 +97,171 @@ export function clinicalPairAtServiceStation(simulation: Simulation, site: Build
   return doctorStations.some(point => patientStations.some(other => point.id === other.id && point.floor === other.floor &&
     Math.hypot(point.position.x - other.position.x, point.position.y - other.position.y, point.position.z - other.position.z) < 1e-8));
 }
-function doctors(simulation: Simulation, site: Building, onDuty: boolean): Citizen[] {
+function doctors(simulation: Simulation, site: Building, onDuty: boolean, phaseMinutes = 0): Citizen[] {
   const s = simulation.state;
-  return s.citizens.filter(person => person.workId === site.id && ['医生', 'doctor'].includes(person.role) && profile(s, person.id)?.alive && profile(s, person.id).age >= 18 && (!onDuty || person.needs.hunger >= 40 && person.needs.fatigue >= 35 && profile(s, person.id).health >= 45 && clinicalAtSite(simulation, site, person.id) && simulation.isOnDuty(person.id, site.id)));
+  return s.citizens.filter(person => person.workId === site.id && ['医生', 'doctor'].includes(person.role) && profile(s, person.id)?.alive && profile(s, person.id).age >= 18 && (!onDuty || person.needs.hunger >= 40 && person.needs.fatigue >= 35 && profile(s, person.id).health >= 45 && clinicalAtSite(simulation, site, person.id) && clinicalDoctorMinutes(simulation, person, site.id, phaseMinutes) > 0));
 }
-const slots = new WeakMap<Simulation, { state: SimState; tick: number; doctors: Map<string, number>; patients: Set<string> }>();
-/** Public and paid care share two concurrent patient slots per real doctor. */
+interface CareInterval { start: number; end: number }
+interface SiteInterval extends CareInterval { siteId: string }
+interface ArrivalInterval extends SiteInterval { purpose: string; position: Vec3 }
+interface CarePhase {
+  state: SimState; tick: number; clock: number; wages: Map<string, SiteInterval[]>;
+  arrivals: Map<string, ArrivalInterval>; playerStations: Map<string, Set<string>>; blockedPlayer: boolean;
+  doctors: Map<string, number>; patients: Set<string>; covered: Map<string, CareInterval[]>; serial: number;
+}
+const carePhases = new WeakMap<Simulation, CarePhase>();
+function carePhase(simulation: Simulation): CarePhase {
+  let item = carePhases.get(simulation);
+  const state = simulation.state;
+  if (!item || item.state !== state || item.tick !== state.tick || item.clock !== clock(state)) {
+    item = { state, tick: state.tick, clock: clock(state), wages: new Map(), arrivals: new Map(), playerStations: new Map(), blockedPlayer: false, doctors: new Map(), patients: new Set(), covered: new Map(), serial: 0 };
+    carePhases.set(simulation, item);
+  }
+  return item;
+}
+function careInterval(state: SimState, minutes: number, earliestAt = 0): CareInterval {
+  const end = clock(state), dayStart = end - state.hour * 60;
+  return { start: Math.max(end - Math.max(0, minutes), dayStart + 8 * 60, earliestAt), end: Math.min(end, dayStart + 17 * 60) };
+}
+function intersection(...ranges: CareInterval[]): CareInterval { return { start: Math.max(...ranges.map(range => range.start)), end: Math.min(...ranges.map(range => range.end)) }; }
+function union(ranges: CareInterval[]): CareInterval[] {
+  const merged: CareInterval[] = [];
+  for (const range of ranges.filter(range => range.end > range.start).sort((a, b) => a.start - b.start)) {
+    const last = merged.at(-1);
+    if (last && range.start <= last.end) last.end = Math.max(last.end, range.end); else merged.push({ ...range });
+  }
+  return merged;
+}
+const length = (ranges: readonly CareInterval[]) => ranges.reduce((sum, range) => sum + Math.max(0, range.end - range.start), 0);
+function stationKeys(simulation: Simulation, site: Building, person: Citizen | Player, id: string): Set<string> {
+  if (!clinicalAtSite(simulation, site, id)) return new Set();
+  if (!getBuildingBody(site)) return new Set([`legacy:${Math.floor((person.position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors)))}`]);
+  const identity = id === 'player' ? simulation.state.player : { role: roleOf(person), identities: [roleOf(person)] };
+  return new Set(clinicalServiceStationsAtPosition(site, person.position, identity, simulation.state.voxels).map(point => `${point.floor}:${point.id}`));
+}
+/** Active conflicts are read at the start and end of this phase. A completed
+ * final work slice cannot disappear before the later medical observer. */
+function playerCareConflict(simulation: Simulation): boolean {
+  const state = simulation.state, player = state.player;
+  if (player.vehicleId || state.aviation?.activeAircraftId) return true;
+  const at = (id: string, purpose?: 'work' | 'service') => {
+    const site = simulation.worldDefinition.buildings.find(site => site.id === id);
+    return !!site && simulation.isNearBuilding(site, player.position, 2) && canAccessFloor(site, Math.floor((player.position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors))), player)
+      && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, player.position, purpose));
+  };
+  const job = state.playerLabor?.job;
+  const planned = job ? Math.min(.25 * state.speed, job.requiredMinutes - job.workedMinutes) * job.ratePerMinute * (1 - state.taxRate) : 0;
+  if (job && ['working', 'paused'].includes(job.status) && job.workedMinutes < job.requiredMinutes && job.escrow > 0 && simulation.hasIdentity(job.role) && state.hour >= 6 && state.hour < 21 && player.needs.hunger >= 12 && player.needs.fatigue >= 15 && player.money + planned <= MONEY_LIMIT && at(job.siteId, 'work')) return true;
+  const rest = state.homeRest?.session, home = rest && simulation.worldDefinition.buildings.find(site => site.id === rest.buildingId);
+  if (rest?.state === 'active' && home && player.homeId === home.id && homeRestPointAt(home, player.position, player, rest.pointId) && !homeRestPointBlockedByVoxels(player.position, state.voxels)) return true;
+  const project = state.culture?.project;
+  return !!project && project.workedMinutes < project.requiredMinutes && state.hour >= 7 && state.hour < 22 && player.needs.hunger >= 40 && player.needs.fatigue >= 40 && at(project.siteId);
+}
+function actorArrivalWindow(simulation: Simulation, site: Building, id: string, minutes: number, purpose: 'work' | 'service', earliestAt = 0): CareInterval | null {
+  const person = actor(simulation.state, id), p = carePhase(simulation);
+  if (!person || !profile(simulation.state, id)?.alive || !clinicalAtSite(simulation, site, id)) return null;
+  if (id === 'player') {
+    if (p.blockedPlayer || playerCareConflict(simulation)) return null;
+    const before = p.playerStations.get(site.id), current = stationKeys(simulation, site, person, id);
+    if (!before || ![...current].some(key => before.has(key))) return null;
+    return careInterval(simulation.state, minutes, earliestAt);
+  }
+  const observed = p.arrivals.get(id);
+  if (!observed || observed.siteId !== site.id || observed.purpose !== purpose || Math.hypot(person.position.x - observed.position.x, person.position.y - observed.position.y, person.position.z - observed.position.z) > EPS) return null;
+  return intersection(careInterval(simulation.state, minutes, earliestAt), observed);
+}
+function doctorWindows(simulation: Simulation, doctor: Citizen, siteId: string, minutes: number, earliestAt = 0): CareInterval[] {
+  const state = simulation.state, site = simulation.worldDefinition.buildings.find(site => site.id === siteId), info = profile(state, doctor.id);
+  if (!site || site.kind !== 'clinic' || doctor.workId !== siteId || !['医生', 'doctor'].includes(doctor.role) || !info?.alive || info.age < 18 || info.health < 45 || doctor.needs.hunger < 40 || doctor.needs.fatigue < 35 || doctor.state !== 'working') return [];
+  const arrival = actorArrivalWindow(simulation, site, doctor.id, minutes, 'work', earliestAt);
+  if (!arrival) return [];
+  return union((carePhase(simulation).wages.get(doctor.id) ?? []).filter(range => range.siteId === siteId).map(range => intersection(range, arrival)));
+}
+/** Genuine current core credited front windows, never isOnDuty fallback or
+ * an inferred suffix of an old accumulated attendance event. */
+export function clinicalDoctorWorkWindows(simulation: Simulation, doctor: Citizen, siteId: string, phaseMinutes: number, earliestAt = 0): readonly Readonly<CareInterval>[] {
+  return doctorWindows(simulation, doctor, siteId, phaseMinutes, earliestAt).map(range => Object.freeze({ ...range }));
+}
+export function clinicalDoctorMinutes(simulation: Simulation, doctor: Citizen, siteId: string, phaseMinutes: number, earliestAt = 0): number {
+  return length(clinicalDoctorWorkWindows(simulation, doctor, siteId, phaseMinutes, earliestAt));
+}
+/** Real served interval union for other activities. Scalar used minutes alone
+ * cannot locate a late patient's occupied tail in the doctor's work window. */
+export function clinicalDoctorUsedWorkWindows(simulation: Simulation, doctorId: string): readonly Readonly<CareInterval>[] {
+  return (carePhase(simulation).covered.get(doctorId) ?? []).map(range => Object.freeze({ ...range }));
+}
+function slotAvailable(simulation: Simulation, doctorId: string, patientId: string): boolean {
+  const p = carePhase(simulation);
+  return doctorId !== patientId && !p.patients.has(patientId) && (p.doctors.get(doctorId) ?? 0) < 2;
+}
+/** Public and paid care retain two concurrent patients per real doctor. */
 export function takeClinicalDoctorSlot(simulation: Simulation, doctorId: string, patientId: string): boolean {
-  let allocation = slots.get(simulation);
-  if (!allocation || allocation.state !== simulation.state || allocation.tick !== simulation.state.tick) { allocation = { state: simulation.state, tick: simulation.state.tick, doctors: new Map(), patients: new Set() }; slots.set(simulation, allocation); }
-  if (doctorId === patientId || allocation.patients.has(patientId) || (allocation.doctors.get(doctorId) ?? 0) >= 2) return false;
-  allocation.doctors.set(doctorId, (allocation.doctors.get(doctorId) ?? 0) + 1); allocation.patients.add(patientId); return true;
+  if (!slotAvailable(simulation, doctorId, patientId)) return false;
+  const p = carePhase(simulation); p.doctors.set(doctorId, (p.doctors.get(doctorId) ?? 0) + 1); p.patients.add(patientId); return true;
+}
+/** Claim one patient window and only the previously uncovered union of the
+ * doctor's work intervals. Two overlapping patients consume one doctor clock. */
+export function claimClinicalCareMinutes(simulation: Simulation, site: Building, doctor: Citizen, patientId: string, phaseMinutes: number, earliestAt: number, remainingMinutes: number): number {
+  if (!slotAvailable(simulation, doctor.id, patientId) || !clinicalPairAtServiceStation(simulation, site, doctor.id, patientId)) return 0;
+  const patient = actor(simulation.state, patientId);
+  if (!patient || patient.needs.hunger < 20 || patient.needs.fatigue < 15) return 0;
+  const arrival = actorArrivalWindow(simulation, site, patientId, phaseMinutes, 'service', earliestAt);
+  if (!arrival) return 0;
+  const ranges = union(doctorWindows(simulation, doctor, site.id, phaseMinutes, earliestAt).map(range => intersection(range, arrival)));
+  const p = carePhase(simulation), key = doctor.id, covered = p.covered.get(key) ?? [];
+  let patientLeft = Math.min(Math.max(0, remainingMinutes), actorActivityAvailable(simulation, patientId, phaseMinutes)), doctorLeft = actorActivityAvailable(simulation, doctor.id, phaseMinutes);
+  const selected: CareInterval[] = [];
+  let newlyUsed = 0;
+  for (const range of ranges) {
+    const cuts = [range.start, range.end, ...covered.flatMap(item => [item.start, item.end]).filter(at => at > range.start && at < range.end)].sort((a, b) => a - b);
+    for (let i = 1; i < cuts.length && patientLeft > EPS; i++) {
+      const start = cuts[i - 1], end = cuts[i], shared = covered.some(item => item.start <= start && item.end >= end);
+      const used = Math.min(end - start, patientLeft, shared ? Infinity : doctorLeft);
+      if (used <= EPS) continue;
+      selected.push({ start, end: start + used }); patientLeft -= used;
+      if (!shared) { newlyUsed += used; doctorLeft -= used; }
+    }
+  }
+  const actual = length(selected);
+  if (actual <= EPS) return 0;
+  // There are no callbacks between these deterministic, already bounded claims.
+  if (newlyUsed > EPS && claimActorActivityMinutes(simulation, doctor.id, `clinical-doctor:${site.id}:${key}:${p.serial++}`, newlyUsed, phaseMinutes) !== newlyUsed) return 0;
+  if (claimActorActivityMinutes(simulation, patientId, `clinical-patient:${patientId}`, actual, phaseMinutes) !== actual || !takeClinicalDoctorSlot(simulation, doctor.id, patientId)) return 0;
+  p.covered.set(key, union([...covered, ...selected])); return actual;
+}
+/** Persisted medical commitments request fine people processing without
+ * changing anyone's tier, speed, accumulated needs or wage allowance. */
+export function clinicalTaskActorIds(state: SimState): ReadonlySet<string> {
+  const ids = new Set<string>(), sites = new Set<string>();
+  for (const order of state.clinical?.orders ?? []) if (['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state)) { sites.add(order.siteId); ids.add(order.patientId); }
+  for (const order of state.culture?.orders ?? []) if (order.topic === 'health' && order.state === 'active') sites.add(order.siteId);
+  for (const citizen of state.citizens) {
+    const info = state.extension?.actorProfiles[citizen.id];
+    if (!info?.alive) continue;
+    const doctor = sites.has(citizen.workId) && ['医生', 'doctor'].includes(citizen.role) && info.age >= 18;
+    const publicPatient = !!citizen.destinationId && state.culture?.orders.some(order => order.topic === 'health' && order.state === 'active' && order.siteId === citizen.destinationId);
+    if (doctor || publicPatient) ids.add(citizen.id);
+  }
+  ids.delete('player'); return ids;
+}
+function installCareWindows(simulation: Simulation): void {
+  simulation.onPhase('time', () => {
+    const p = carePhase(simulation); p.blockedPlayer = playerCareConflict(simulation);
+    for (const site of simulation.worldDefinition.buildings) if (site.kind === 'clinic' && simulation.isNearBuilding(site, simulation.state.player.position, 2)) {
+      const keys = stationKeys(simulation, site, simulation.state.player, 'player'); if (keys.size) p.playerStations.set(site.id, keys);
+    }
+  });
+  simulation.onEvent('wage-earned', event => {
+    const worker = event.citizenId && simulation.state.citizens.find(person => person.id === event.citizenId), p = carePhase(simulation);
+    if (!worker || !['医生', 'doctor'].includes(worker.role) || !simulation.worldDefinition.buildings.some(site => site.id === worker.workId && site.kind === 'clinic') || event.siteId !== worker.workId || !Number.isFinite(event.minutes) || event.minutes! <= 0 || !Number.isFinite(event.amount) || event.amount! < 0 || !Number.isFinite(event.creditedWorkStartAt) || event.creditedWorkStartAt! < 0 || !Number.isFinite(event.creditedWorkEndAt) || event.creditedWorkEndAt! > p.clock + EPS || event.creditedWorkEndAt! <= event.creditedWorkStartAt! || Math.abs(event.creditedWorkEndAt! - event.creditedWorkStartAt! - event.minutes!) > EPS) return;
+    const ranges = p.wages.get(worker.id) ?? []; ranges.push({ start: event.creditedWorkStartAt!, end: event.creditedWorkEndAt!, siteId: event.siteId }); p.wages.set(worker.id, ranges);
+  });
+  simulation.onEvent('clinical-activity-window', event => {
+    const worker = event.citizenId && simulation.state.citizens.find(person => person.id === event.citizenId), p = carePhase(simulation), position = event.activityPosition;
+    if (!worker || !event.siteId || !position || ![position.x, position.y, position.z].every(Number.isFinite) || event.activityObservedTick !== p.tick || event.activityObservedClock !== p.clock || event.activityWindowEndAt !== p.clock || !Number.isFinite(event.activityWindowStartAt) || event.activityWindowStartAt! < 0 || event.activityWindowStartAt! >= p.clock || !['work', 'service'].includes(event.purpose ?? '') || Math.hypot(worker.position.x - position.x, worker.position.y - position.y, worker.position.z - position.z) > EPS) return;
+    p.arrivals.set(worker.id, { start: event.activityWindowStartAt!, end: p.clock, siteId: event.siteId, purpose: event.purpose!, position: { ...position } });
+  });
+  simulation.onLoad(() => carePhases.delete(simulation));
 }
 function ledger(simulation: Simulation, order: ClinicalOrder, amount: number, purpose: string, account: 'household' | 'public'): void {
   const s = simulation.state, districtId = simulation.worldDefinition.buildings.find(site => site.id === order.siteId)!.districtId;
@@ -141,7 +297,7 @@ export function beginClinicalTreatment(simulation: Simulation, request: { patien
   if (payer.money < FEE || c.orders.length >= LIMIT || c.nextOrderId >= 1e9) return fail('需要30文真实托管款，且诊所订单队列须有空位。');
   if (c.orders.some(order => order.patientId === request.patientId && !terminal(order)) || clinicalVisitDeadline(s, request.patientId) > clock(s)) return fail('该患者已有未结订单或尚在已保存复诊间隔内。');
   const material = stock(s, site.id), reuse = Math.min(1, material.availableUnits);
-  const order: ClinicalOrder = { id: `clinical-${c.nextOrderId++}`, ...request, startedAt: clock(s), state: reuse ? 'awaitingDoctor' : 'awaitingSupply', funded: FEE, escrow: FEE, purchasePaid: 0, serviceFee: 0, refunded: 0, receivedUnits: 0, reusedUnits: reuse, reservedUnits: reuse, consumedUnits: 0, workedMinutes: 0, requiredMinutes: MINUTES, staffMinutes: {}, receipts: [], completedAt: null, cancelledAt: null, retryAt: clock(s), lastReason: reuse ? '已分配诊所现有物料，等待实际医生与患者到场。' : '30文进入托管；等待实际采购一份诊疗材料。' };
+  const order: ClinicalOrder = { timingVersion: 2, id: `clinical-${c.nextOrderId++}`, ...request, startedAt: clock(s), state: reuse ? 'awaitingDoctor' : 'awaitingSupply', funded: FEE, escrow: FEE, purchasePaid: 0, serviceFee: 0, refunded: 0, receivedUnits: 0, reusedUnits: reuse, reservedUnits: reuse, consumedUnits: 0, workedMinutes: 0, requiredMinutes: MINUTES, staffMinutes: {}, receipts: [], completedAt: null, cancelledAt: null, retryAt: clock(s), lastReason: reuse ? '已分配诊所现有物料，等待实际医生与患者到场。' : '30文进入托管；等待实际采购一份诊疗材料。' };
   payer.money -= FEE; material.availableUnits -= reuse; c.orders.push(order); c.stats.funded += FEE; ledger(simulation, order, -FEE, '诊疗30文进入真实托管', 'household'); simulation.emitEvent({ type: 'clinical-start', citizenId: request.patientId, amount: FEE, siteId: site.id, procurementId: order.id });
   return { ok: true, message: '诊疗已登记；材料到货、医生与患者共同完成20分钟后才恢复健康。' };
 }
@@ -169,6 +325,7 @@ function procure(simulation: Simulation, order: ClinicalOrder, site: Building): 
 export function installClinical(simulation: Simulation): void {
   const sites = new Map(simulation.worldDefinition.buildings.map(site => [site.id, site]));
   simulation.state.clinical = initialize();
+  installCareWindows(simulation);
   simulation.onPhase('people', (s, minutes) => {
     const c = s.clinical!;
     const availableDoctors = new Map<string, Citizen[]>();
@@ -180,12 +337,14 @@ export function installClinical(simulation: Simulation): void {
       const patient = actor(s, order.patientId)!;
       if (clinicalVisitDeadline(s, order.patientId) > clock(s)) { order.state = 'awaitingDoctor'; order.lastReason = '既有公共或付费诊疗复诊间隔尚未结束；物料与托管款保留。'; continue; }
       if (clock(s) <= order.startedAt + EPS || s.hour < 8 || s.hour >= 17 || !clinicalAtSite(simulation, site, order.patientId) || patient.needs.hunger < 20 || patient.needs.fatigue < 15) { order.state = 'awaitingDoctor'; order.lastReason = '已购材料保留；等候开放时间、患者在场和体力恢复。'; continue; }
-      if (!availableDoctors.has(site.id)) availableDoctors.set(site.id, doctors(simulation, site, true));
-      const doctor = availableDoctors.get(site.id)!.find(person => clinicalPairAtServiceStation(simulation, site, person.id, order.patientId) && takeClinicalDoctorSlot(simulation, person.id, order.patientId));
-      if (!doctor) { order.state = 'awaitingDoctor'; order.lastReason = '材料保留；没有合资格医生在同一诊疗服务站实际出勤，或当下诊疗容量已满。'; continue; }
-      // A completed treatment can settle only into the finite real public cash account.
+      if (!availableDoctors.has(site.id)) availableDoctors.set(site.id, doctors(simulation, site, true, minutes));
+      // Check finite settlement before consuming any shared activity or slot.
       if (s.treasury + order.escrow > MONEY_LIMIT) { order.state = 'awaitingDoctor'; order.lastReason = '公库收款容量已满；未赚服务费保留托管。'; continue; }
-      const worked = Math.min(minutes, MINUTES - order.workedMinutes); order.workedMinutes += worked; order.staffMinutes[doctor.id] = (order.staffMinutes[doctor.id] ?? 0) + worked; order.state = 'inTreatment'; order.lastReason = `医生与患者共同诊疗${order.workedMinutes.toFixed(1)}/20分钟；离場暂停。`;
+      const earliest = Math.max(order.startedAt, order.receipts[0]?.purchasedAt ?? order.startedAt);
+      let worked = 0;
+      const doctor = availableDoctors.get(site.id)!.find(person => (worked = claimClinicalCareMinutes(simulation, site, person, order.patientId, minutes, earliest, MINUTES - order.workedMinutes)) > EPS);
+      if (!doctor) { order.state = 'awaitingDoctor'; order.lastReason = '材料保留；没有合资格医生与患者同站的真实到场计薪交集，或当下诊疗容量已满。'; continue; }
+      order.workedMinutes += worked; order.staffMinutes[doctor.id] = (order.staffMinutes[doctor.id] ?? 0) + worked; order.state = 'inTreatment'; order.lastReason = `医生与患者共同诊疗${order.workedMinutes.toFixed(1)}/20分钟；离場暂停。`;
       if (order.workedMinutes < MINUTES - EPS) continue;
       order.reservedUnits--; order.consumedUnits++; stock(s, site.id).consumedUnits++;
       profile(s, order.patientId).health = clamp(profile(s, order.patientId).health + clinicalHealthGain(s)); profile(s, order.patientId).stress = clamp(profile(s, order.patientId).stress - 8);
@@ -223,6 +382,7 @@ export function validateClinicalState(s: SimState, world: WorldDefinition): void
   for (const o of c.orders) {
     ensure(object(o) && /^clinical-[1-9]\d*$/.test(o.id) && !seen.has(o.id) && Number(o.id.slice(9)) < c.nextOrderId, '订单身份'); seen.add(o.id);
     ensure(ids.has(o.patientId) && ids.has(o.payerId) && sites.get(o.siteId)?.kind === 'clinic' && profile(s, o.payerId)?.age >= 18, '主体与诊所引用');
+    ensure(o.timingVersion === undefined || o.timingVersion === 2, '到场计时版本');
     ensure(['awaitingSupply', 'awaitingDoctor', 'inTreatment', 'refundPending', 'completed', 'cancelled'].includes(o.state), '订单状态'); number(o.startedAt, 0, now, '开始时间'); number(o.retryAt, o.startedAt, now + 60, '供货重试');
     if (!terminal(o)) { ensure(!pending.has(o.patientId), '患者重复未结订单'); pending.add(o.patientId); }
     ensure(typeof o.lastReason === 'string' && o.lastReason.length <= 240 && o.requiredMinutes === MINUTES && o.funded === FEE, '固定条件');
@@ -238,6 +398,7 @@ export function validateClinicalState(s: SimState, world: WorldDefinition): void
       const lot = receipt.lots[0]; ensure(object(lot) && sourceIds.has(lot.shopId) && lot.quantity === 1, '真实供应引用'); number(lot.unitPrice, EPS, FEE, '实际报价'); number(lot.gross, EPS, FEE, '实际货款'); close(lot.gross, lot.unitPrice, '报价货款'); number(lot.net, 0, lot.gross, '供应净款'); close(receipt.paid, lot.gross, '采购货款'); close(receipt.tax, lot.gross - lot.net, '货款税守恒'); paid += receipt.paid; received += receipt.quantity;
     }
     close(paid, o.purchasePaid, '累计采购支出'); close(received, o.receivedUnits, '累计实物到货');
+    if (o.timingVersion === 2) ensure(o.workedMinutes <= now - Math.max(o.startedAt, o.receipts[0]?.purchasedAt ?? o.startedAt) + EPS, '新订单不得借采购前时间');
     if (o.completedAt !== null) number(o.completedAt, o.startedAt + MINUTES, now, '完成时间'); if (o.cancelledAt !== null) number(o.cancelledAt, o.startedAt, now, '停止时间');
     if (o.state === 'completed') ensure(o.completedAt !== null && o.cancelledAt === null && o.workedMinutes === MINUTES && o.consumedUnits === 1 && o.reservedUnits === 0 && o.escrow === 0 && o.refunded === 0 && o.serviceFee === FEE - o.purchasePaid, '完成闭环');
     else if (o.state === 'cancelled' || o.state === 'refundPending') ensure(o.cancelledAt !== null && o.completedAt === null && o.serviceFee === 0 && o.consumedUnits === 0 && o.reservedUnits === 0 && o.workedMinutes < MINUTES && (o.state === 'cancelled' ? o.escrow === 0 : o.escrow > 0), '取消与退款');

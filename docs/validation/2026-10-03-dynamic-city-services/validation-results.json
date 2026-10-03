@@ -1,0 +1,112 @@
+{
+  "createdAtUTC": "2026-10-03T10:33:21.235964+00:00",
+  "state": "STAGE_IMPLEMENTED_VERIFIED_FULL_GAME_INCOMPLETE",
+  "sourceInputs": 150,
+  "sourceManifestSha256": "daf32d2cf72a235a99afa4d7c74425475e39e12a1a3fbe8a217ff7dafb6cf691",
+  "build": "PASS fresh22",
+  "rules22": {
+    "pass": 20,
+    "fail": 0,
+    "skip": 0
+  },
+  "native22": "PASS two paid appointments, ordinary arrival, two paid ballots,119.75/120 then24exact",
+  "softwareGPU22": {
+    "pass": 75,
+    "PNG": 14,
+    "errors": 0,
+    "warnings": 0,
+    "backend": "Linux Chromium WebGL2 ANGLE Vulkan SwiftShader; no Mac/FPS"
+  },
+  "priorRanges": {
+    "related21": "132/132 PASS",
+    "profession21": "7/7 PASS",
+    "consumer21": "5/5 PASS",
+    "Native21": "5 PASS +1 original zero-seat prerequisite FAIL",
+    "contract20": "293 total/288 PASS/5 FAIL preserved"
+  },
+  "fullNpm22": "NOT_RUN",
+  "longEconomic30or60days22": "NOT_RUN_OLD_FAILURES_REMAIN",
+  "art": "FAIL",
+  "newQualifiedExternal3DAssets": 0,
+  "commercialSkyscrapers": 0,
+  "rawEvidence": [
+    {
+      "name": "build22",
+      "originalPath": "/tmp/yunshan-system-coherent-22/build01/receipt.json",
+      "bytes": 986,
+      "sha256": "25cd64196658e39b4d1530c157258a8b9ee242df0701c145d83b5bd9165b87f9"
+    },
+    {
+      "name": "rules22",
+      "originalPath": "/tmp/yunshan-system-coherent-22/appointment-governance01/receipt.json",
+      "bytes": 299,
+      "sha256": "7afadeab323e5eb212e07afa7f14cbb7de5404af2393e5526bf8e71eb0544c87"
+    },
+    {
+      "name": "native22",
+      "originalPath": "/tmp/yunshan-system-coherent-22/native-dom-08-governance-policy-staffing/result.json",
+      "bytes": 260622,
+      "sha256": "d4e1999081781bd863362baf5ced088939a0758741bfad391c0aa7aca131a224"
+    },
+    {
+      "name": "native22Resources",
+      "originalPath": "/tmp/yunshan-system-coherent-22/native-dom-08-governance-policy-staffing/resource-receipt.json",
+      "bytes": 81275,
+      "sha256": "6d76ddb08eb10491a7bbdfeb87e8cbc1daf066f16fda09ca299998d1b07107b0"
+    },
+    {
+      "name": "gpu22",
+      "originalPath": "/tmp/yunshan-system-coherent-22/visual-gpu01/result.json",
+      "bytes": 687271,
+      "sha256": "6d0520fd0d9f80b434fd966c64428379fe513a988fc7ee61d7915ca3e819fd3e"
+    },
+    {
+      "name": "gpu22Closure",
+      "originalPath": "/tmp/yunshan-system-coherent-22/visual-gpu-launch01/cleanup-independent02.json",
+      "bytes": 1547,
+      "sha256": "24fa6c6274d77d7fdc9268364dde58642ecf78362becf91f1319ab9b54ce5b68"
+    },
+    {
+      "name": "shared22",
+      "originalPath": "/tmp/yunshan-system-coherent-22/shared-source-integration-receipt.json",
+      "bytes": 851,
+      "sha256": "57ae714c7de5b60c2f7e01055d2d0421ab05f2b83a4847c7a5a62e086f3fe7d1"
+    },
+    {
+      "name": "visualReview",
+      "originalPath": "/tmp/yunshan-system-coherent-22/root-visual-review.json",
+      "bytes": 1576,
+      "sha256": "4ba2deef97f56b37a92220b405b035867e13477e3c7f9d7bef4de8746127bdae"
+    },
+    {
+      "name": "rules21",
+      "originalPath": "/tmp/yunshan-system-coherent-21/rulesnew01/receipt.json",
+      "bytes": 260,
+      "sha256": "206d767fd70e4052374e66d4938cf034b46e942bf460f83571a938392266afef"
+    },
+    {
+      "name": "contracts20",
+      "originalPath": "/tmp/yunshan-system-coherent-20/contracts01/receipt.json",
+      "bytes": 261,
+      "sha256": "8c556cf73a3f24f15234b3703ee1c8f766b2c4668e5153807506f6aeb42fab51"
+    },
+    {
+      "name": "appointmentOld21TrueFailure",
+      "originalPath": "/tmp/yunshan-appoint-cash-causal-root21-20261003-02/receipt.json",
+      "bytes": 4005,
+      "sha256": "ebd5f63459ee3899c633093385e6a874cb4ffe192940ece88b640f3da9c8bd8b"
+    }
+  ],
+  "remaining": [
+    "Actual road closures/revision and worksite recovery",
+    "Demolition/title/compensation/relocation",
+    "Spatial fire/earthquake damage/evacuation",
+    "Natural pathogen sources/public-health waste/terminal disposal",
+    "Physical electric grid",
+    "Economic steady state",
+    "Deep education/research/culture and natural family years",
+    "CBD/art reference quality",
+    "True statistical simulation/world streaming/macOS"
+  ],
+  "delivery": "See independent delivery-receipt.json; no Library/Git success inferred."
+}

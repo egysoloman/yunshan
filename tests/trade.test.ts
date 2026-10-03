@@ -352,9 +352,9 @@ test('market player work pays a real service wage without creating goods or char
   simulation.state.player.needs = { hunger: 95, fatigue: 95, social: 90, fun: 90 };
   simulation.setFocus(simulation.worldDefinition.buildings.find(site => site.id === retail.buildingId)!.door, 'walk');
   const pay = simulation.payPlayerLabor.bind(simulation), payments: { gross: number; minutes: number; profitChange: number; stockChange: number; basisUnchanged: boolean }[] = [];
-  simulation.payPlayerLabor = (job, gross, minutes) => {
+  simulation.payPlayerLabor = (job, gross, minutes, interval) => {
     const profitBefore = retail.profit, stockBefore = retail.inventory, basisBefore = JSON.stringify(trade(simulation).ownedLots);
-    pay(job, gross, minutes);
+    pay(job, gross, minutes, interval);
     const receipt = { gross, minutes, profitChange: retail.profit - profitBefore, stockChange: retail.inventory - stockBefore, basisUnchanged: JSON.stringify(trade(simulation).ownedLots) === basisBefore };
     assert(Math.abs(receipt.profitChange + gross) < 1e-8); assert.equal(receipt.stockChange, 0); assert.equal(receipt.basisUnchanged, true); payments.push(receipt);
   };

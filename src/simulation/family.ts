@@ -1,4 +1,5 @@
 import type { Simulation } from '../simulation';
+import { shopLifecycleAssetOwnerId, shopLifecycleCanDispose } from './shop_lifecycle';
 import { settleDeceasedAccount } from './banking';
 import { publicFloor } from './culture';
 import { quoteSupply } from './trade';
@@ -275,7 +276,7 @@ export function installFamily(simulation: Simulation): void {
       family().estateSales.push({ id: `estate-sale-${family().nextEstateSaleId++}`, deceasedId: id, kind, assetId, unitPrice: price, quantity, soldQuantity: 0, proceeds: 0, createdAt: now(), state: 'offered', receipts: [] });
     };
     for (const company of state().extension!.companies) if ((company.shareholders[id] ?? 0) > 0) add('shares', company.id, company.sharePrice, company.shareholders[id]);
-    for (const shop of state().shops) if (shop.ownerId === id && !state().extension!.companies.some(company => company.buildingId === shop.buildingId)) {
+    for (const shop of state().shops) if (shopLifecycleAssetOwnerId(state(), shop) === id && shopLifecycleCanDispose(state(), shop.id) && !state().extension!.companies.some(company => company.buildingId === shop.buildingId)) {
       const consigned = (state().trade?.lots[shop.id] ?? []).reduce((sum, lot) => sum + lot.quantity, 0);
       const ownedStockValue = buildings.get(shop.buildingId)!.kind === 'market' ? (state().trade?.ownedLots?.[shop.id] ?? []).reduce((sum, lot) => sum + lot.quantity * lot.unitPrice, 0) : Math.max(0, shop.inventory - consigned) * quoteSupply(simulation, shop.id, shop.inventory).unitPrice;
       add('business', shop.id, Math.max(1, simulation.shopFunds(shop) + ownedStockValue - simulation.shopPayrollDebt(shop)), 1);
@@ -288,7 +289,7 @@ export function installFamily(simulation: Simulation): void {
     const company = sale.kind === 'shares' ? state().extension!.companies.find(company => company.id === sale.assetId) : undefined;
     const shop = sale.kind === 'business' ? state().shops.find(shop => shop.id === sale.assetId) : undefined;
     if (company) { if ((company.shareholders[sale.deceasedId] ?? 0) < quantity) return false; }
-    else if (!shop || shop.ownerId !== sale.deceasedId || !simulation.transferBusinessOwnership(shop.id, buyerId)) return false;
+    else if (!shop || shopLifecycleAssetOwnerId(state(), shop) !== sale.deceasedId || !shopLifecycleCanDispose(state(), shop.id) || !simulation.transferBusinessOwnership(shop.id, buyerId)) return false;
     transfer(buyerId, sale.deceasedId, paid, '遗产执行人变卖真实买方付款');
     if (company) {
       company.shareholders[sale.deceasedId] -= quantity; company.shareholders[buyerId] = (company.shareholders[buyerId] ?? 0) + quantity;
@@ -357,7 +358,7 @@ export function installFamily(simulation: Simulation): void {
         const holders = Object.entries(company.shareholders).filter(([holder, amount]) => holder !== 'exchange' && amount > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
         if (holders.length) company.ownerId = holders[0][0];
       }
-      for (const shop of s.shops) if (shop.ownerId === id && !s.extension!.companies.some(company => company.buildingId === shop.buildingId)) {
+      for (const shop of s.shops) if (shopLifecycleAssetOwnerId(s, shop) === id && shopLifecycleCanDispose(s, shop.id) && !s.extension!.companies.some(company => company.buildingId === shop.buildingId)) {
         const heir = [...heirs].sort((a, b) => Number(profile(b).age >= 18) - Number(profile(a).age >= 18) || a.localeCompare(b))[0];
         if (simulation.transferBusinessOwnership(shop.id, heir)) { estate.businesses ??= {}; estate.businesses[shop.id] = heir; }
       }
