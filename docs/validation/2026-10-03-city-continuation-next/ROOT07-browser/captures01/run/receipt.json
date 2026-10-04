@@ -1,0 +1,30 @@
+{
+  "startedAt": "2026-10-04T01:44:00.018378+00:00",
+  "endedAt": "2026-10-04T01:44:07.839606+00:00",
+  "argv": [
+    "node",
+    "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs",
+    "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/capture-originals",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization.json"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "ownedPid": 22652,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 22672,
+      "state": "Z",
+      "parent": 1,
+      "group": 22652,
+      "session": 22652,
+      "startTicks": 906667
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

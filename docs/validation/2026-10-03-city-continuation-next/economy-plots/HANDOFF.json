@@ -1,0 +1,221 @@
+{
+  "task": "ROOT07 scientific chart v5 authorized labels",
+  "producer": "/root/final_plot_polish",
+  "namespace": "/workspace/yunshan-work/ROOT07-economy-plots-v5-20261004-01",
+  "status": "PASS",
+  "originalAuditStatus": "failed",
+  "saveValidation": {
+    "status": "passed",
+    "immediateEqual": true,
+    "futureTicks": 24,
+    "futureEqual": true,
+    "futureSaveSha256": "6c23e232b4d71e8ce59d950c7a77ddfca7bfe18ae22457a5ec408e591ff0a389"
+  },
+  "steadyStateEstablished": false,
+  "completeGoal": false,
+  "actualSamples": 19,
+  "addedInterpolatedSamples": 0,
+  "sourceContract": {
+    "frozenInputs": 241,
+    "productionSources": 55,
+    "totalGuardedFiles": 312,
+    "inputsStable": true,
+    "auditSHA256": "2e81c0efc71a0f059028529286400397fec0a49b40afd47695e6cd3aaf43ac32"
+  },
+  "generator": {
+    "v4Path": "/workspace/yunshan-work/plot-root07-audit-v4-20261004.py",
+    "v4SHA256": "c2f823f362125daa6caa66a28171c2036eba28382843e7fd5fc6c3485e9c5439",
+    "v5Path": "/workspace/yunshan-work/plot-root07-audit-v5-20261004.py",
+    "v5SHA256": "e3a25d8da2c9ca6da90c55bc228813bf8b67a2a27ea734c535f4f2d65557393f",
+    "namespaceCopy": "/workspace/yunshan-work/ROOT07-economy-plots-v5-20261004-01/plot-root07-audit-v5-20261004.py",
+    "patchPath": "v4-to-v5.patch",
+    "patchSHA256": "0d6bab919fd8fe1043210170c3d5b81549c688758ea5db03b7626e21e5f7237a",
+    "onlyChanges": [
+      "Fifth plot title clarifies private employment and wages already due",
+      "Right axis says 私营到期欠薪（文，右轴）",
+      "Footer explicitly states actual failed survival audit, passed complete reader+24, no established steady state"
+    ],
+    "plotDataFieldsAxesLayoutAndAllNativeAuditGuardsUnchanged": true
+  },
+  "originalV4": {
+    "allFilesRetainedAndUnchanged": true,
+    "allFilesByteExactCopies": true,
+    "files": [
+      {
+        "path": "ALL_FILES_SHA256.json",
+        "bytes": 4552,
+        "sha256": "ea4cec32c7cb0e6fffa2432404ad5549069faa39a0c869f40f27fa9783cd15da"
+      },
+      {
+        "path": "HANDOFF.json",
+        "bytes": 3001,
+        "sha256": "238a564c6b690a8b30e91b0cfd053975abfa323fe0d45a161db334b136dee864"
+      },
+      {
+        "path": "HANDOFF.md",
+        "bytes": 2015,
+        "sha256": "9f68fb0967f59bec944daa0980f60a02e30c9b420755cc185b48d27a7db9aa47"
+      },
+      {
+        "path": "closed-receipt.json",
+        "bytes": 674,
+        "sha256": "f1028825e29cc780f737337c03c001128ab7bb80ee48e5d026c4523237f32797"
+      },
+      {
+        "path": "command.json",
+        "bytes": 674,
+        "sha256": "a15717d75e00c35c67f4a4357aa40a6981c679b32782f9215dbcd2ce254bbece"
+      },
+      {
+        "path": "evidence/inputs-after.json",
+        "bytes": 56918,
+        "sha256": "405fc87b990a2b23b85bac43eaf04633babdc67872e8979cc872cbc8bdbe9ac4"
+      },
+      {
+        "path": "evidence/inputs-before.json",
+        "bytes": 56918,
+        "sha256": "405fc87b990a2b23b85bac43eaf04633babdc67872e8979cc872cbc8bdbe9ac4"
+      },
+      {
+        "path": "evidence/original-audit-run-receipt.json",
+        "bytes": 770,
+        "sha256": "d33b35a2b22375a3b6d2266c8fe5c875d4c6f5121cfebc56b63958c5eb79f5a0"
+      },
+      {
+        "path": "evidence/original-frozen-inputs.json",
+        "bytes": 27166,
+        "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40"
+      },
+      {
+        "path": "evidence/pdffonts.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "evidence/pdffonts.stdout.log",
+        "bytes": 376,
+        "sha256": "caa14a73515a527fe55ad5ec572c0409756cf4ad428905be3c03e9a513d41fb6"
+      },
+      {
+        "path": "evidence/pdfinfo.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "evidence/pdfinfo.stdout.log",
+        "bytes": 460,
+        "sha256": "904c9b8ef66424574ba17acc62f85aa31b3da75a7c8efbcd19aace74a49bdde7"
+      },
+      {
+        "path": "generated-originals/plot-receipt.json",
+        "bytes": 998,
+        "sha256": "58538ede3d22bf14d61be65de7c106ec50b28e076f7ff5ee60c77dd303c45a77"
+      },
+      {
+        "path": "generated-originals/云山巨城-ROOT07-14日审计.pdf",
+        "bytes": 85516,
+        "sha256": "e32d5a33a18c1b29d81f499375cded0a33beacb2eb1be119eed830f06af081c1"
+      },
+      {
+        "path": "generated-originals/云山巨城-ROOT07-14日审计.png",
+        "bytes": 366174,
+        "sha256": "45f959763d99adfaaf5e5a424c91c8ff4dd15a987e2f4a65f4caa470adeb607a"
+      },
+      {
+        "path": "generated-originals/云山巨城-ROOT07-14日审计.svg",
+        "bytes": 249396,
+        "sha256": "0dbf30cf213eae036dacd9b0f49bf571f9abd686d8dfbac0f019d03793f6c296"
+      },
+      {
+        "path": "original-v3/plot-receipt.json",
+        "bytes": 998,
+        "sha256": "abeafe846da0179647d14a25d2e030fa497b2e5bf008d29c3895cecb2affd1fe"
+      },
+      {
+        "path": "original-v3/plot-root07-audit-v3-20261004.py",
+        "bytes": 7056,
+        "sha256": "6381ce0eeebd6d374a49d0756aa1ed636d996e5e39390f6172a3859f50ce396c"
+      },
+      {
+        "path": "original-v3/云山巨城-ROOT07-14日审计.pdf",
+        "bytes": 87151,
+        "sha256": "8dcde88cb5e368e4d5b95438000c0ddbea8136e6b0a637f5ea8d9d626d94cdb0"
+      },
+      {
+        "path": "original-v3/云山巨城-ROOT07-14日审计.png",
+        "bytes": 363788,
+        "sha256": "5514d191d462970943517a062f2b39f4373d53cc8b7e30a43252035b2cd51955"
+      },
+      {
+        "path": "original-v3/云山巨城-ROOT07-14日审计.svg",
+        "bytes": 250850,
+        "sha256": "7e9794a7b072b3808e87ba9d2c419426dac1df9c7cb0a6fe33087678fa3a181d"
+      },
+      {
+        "path": "plot-root07-audit-v4-20261004.py",
+        "bytes": 7077,
+        "sha256": "c2f823f362125daa6caa66a28171c2036eba28382843e7fd5fc6c3485e9c5439"
+      },
+      {
+        "path": "raw.log",
+        "bytes": 468,
+        "sha256": "af46cfc7a893b31ac7b062b9cb2b0a8fdd87d92108afeb59791cd8c5c1ed82a0"
+      },
+      {
+        "path": "run-plot-v4.py",
+        "bytes": 4145,
+        "sha256": "136d815554066686c533a4c6b608aed786103c2a753c4a39781eec40eea280f0"
+      },
+      {
+        "path": "run-receipt.json",
+        "bytes": 1368,
+        "sha256": "2389ba6542f4f3f307515bbe10e79897cf653a1ea04fd78be3525f7e2874dceb"
+      },
+      {
+        "path": "v3-to-v4.patch",
+        "bytes": 828,
+        "sha256": "eac418b59fcf4ff50051d8e5b4c6a2d42a129e0d96c83d64235353d879bb9758"
+      },
+      {
+        "path": "visual-and-vector-validation.json",
+        "bytes": 1909,
+        "sha256": "75b31afd6ea9bac768a413d439c2aa7983d5d403b0c90b7577a4f7907d2bdd3b"
+      }
+    ],
+    "copiesIn": "original-v4/",
+    "originalV3CopiesRetainedWithinV4": true
+  },
+  "generatedOriginals": {
+    "云山巨城-ROOT07-14日审计.png": {
+      "bytes": 365889,
+      "sha256": "86ea153667873bf1f659973330367376c6cf48582857490003168e746b1b5fa3"
+    },
+    "云山巨城-ROOT07-14日审计.svg": {
+      "bytes": 245214,
+      "sha256": "7e94347f3d1f728f75827f6ed95df47d0f7bc7431cc71e2314fb947c3bd8d618"
+    },
+    "云山巨城-ROOT07-14日审计.pdf": {
+      "bytes": 83349,
+      "sha256": "71ca9658d33372a8ee66de05af3a6ba4a094ab9f14099f1a2c1fe7579aac1635"
+    }
+  },
+  "wageLineScope": {
+    "plottedField": "snapshots[].wageArrears.private",
+    "meaning": "Private wages already due and still unpaid",
+    "all19PlottedValuesZero": true,
+    "notIncludedInLine": "Earned wages whose settlement is not yet due",
+    "terminalSamplePrivateEarnedNotDue": 363.0976082298044,
+    "terminalSamplePublicEarnedNotDue": 877.0842859800221,
+    "noClaimAllWageLiabilitiesZero": true
+  },
+  "needsValueScope": "Original hunger and fatigue values rise with satisfaction; fields and samples unchanged",
+  "runReceipt": "run-receipt.json",
+  "rawLog": "raw.log",
+  "rawSHA256": "c48a55308460516940b4c30e89ba4764fa12b19da5fddc0e15ead05caf63c347",
+  "viewReceipt": "visual-and-vector-validation.json",
+  "fileIndex": "ALL_FILES_SHA256.json",
+  "closedReceipt": "closed-receipt.json",
+  "libraryStatus": "NOT_ATTEMPTED_BY_THIS_PRODUCER; root handles authorized batch",
+  "gitStatus": "NOT_TOUCHED_BY_THIS_PRODUCER",
+  "simulationStatus": "NOT_RUN_BY_THIS_PRODUCER"
+}

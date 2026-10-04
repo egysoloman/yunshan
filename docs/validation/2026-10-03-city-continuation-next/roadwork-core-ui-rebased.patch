@@ -1,0 +1,71 @@
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -8,7 +8,7 @@
+ import { installShopLifecycle, shopLifecycleAllowsOperation, shopLifecycleAllowsNewPayroll, shopLifecycleAllowsSpaceUse, shopLifecycleReservedFunds, shopLifecycleBeforeBusinessTransfer, shopLifecycleOpportunities } from './simulation/shop_lifecycle';
+ import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
+ import { installRoadNetwork, isRoadOpen, roadRevision, roadExitRoute, roadMovementAllowed, releaseRoadExitPermit } from './roads';
+-import { installRoadworks, roadworkTask, validateRoadworksBudgetCrossReferences } from './simulation/roadworks';
++import { installRoadworks, roadworkTask, roadworkActorId, validateRoadworksBudgetCrossReferences } from './simulation/roadworks';
+ import { captureBlockedRoadIntent, roadIntentStillBlocked, installRoadDemands, type RoadBlockWitness } from './simulation/road-demands';
+ import { installFamily, isCloseKin, recordSchoolSelfStudy } from './simulation/family';
+ import { installCulture, type ServiceOrder } from './simulation/culture';
+@@ -71,7 +71,7 @@
+   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
+   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
+   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
+-  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
++  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
+   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
+   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
+@@ -187,7 +187,7 @@
+     installPathology(this);
+     installHygiene(this);
+     installRoadNetwork(this, { isCanonicalDisaster, activate: () => { this.runtime.roadNetworkVersion = 1; } });
+-    const roadworks = installRoadworks(this, { isCanonicalRoadworkPresence, activate: () => { this.runtime.roadworksVersion = 1; },
++    const roadworks = installRoadworks(this, { isCanonicalRoadworkPresence, activate: (version = 1) => { this.runtime.roadworksVersion = version; },
+       travelCost: (citizenId, nodeId, point) => this.roadworkTravelCost(citizenId, nodeId, point),
+       takePublicEscrow: request => this.takeRoadworkPublicEscrow(request), returnPublicEscrow: request => this.returnRoadworkPublicEscrow(request), accrueTax: amount => { if (finite(amount) && amount >= 0) this.runtime.taxes += amount; } });
+     installRoadDemands(this, { isCanonicalRoadBlock, activate: () => { this.runtime.roadDemandsVersion = 1; }, requestRepair: demandId => roadworks.requestResidentDemand(demandId) });
+@@ -1065,7 +1065,7 @@
+     if (Object.values(this.runtime.privateLabor?.shifts ?? {}).some(shift => shift.day === day && shift.assignments.some(item => item.citizenId === citizen.id && item.minutesCap > item.workedMinutes))) return false;
+     const research = this.state.extension && Reflect.get(this.state.extension, 'runtime')?.researchJobs;
+     if (Object.values(research ?? {}).some(raw => (raw as { actorId?: string }).actorId === citizen.id)) return false;
+-    if (this.state.roadworks?.jobs.some(job => job.workerId === citizen.id && job.completedAt === null && job.cancelledAt === null)
++    if (this.state.roadworks?.jobs.some(job => roadworkActorId(job) === citizen.id && job.completedAt === null && job.cancelledAt === null)
+       || powerTaskActorIds(this.state).has(citizen.id) || clinicalTaskActorIds(this.state).has(citizen.id)
+       || educationNeedsContinuousPeople(this.state, citizen) || familyEducationTaskActorIds(this.state).has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
+     return true;
+@@ -2142,8 +2142,8 @@
+       if (s.roadNetwork !== undefined) ensure(s.roadNetwork && r.roadNetworkVersion === 1, 'road network provenance marker');
+       if (r.roadDemandsVersion !== undefined) ensure(r.roadDemandsVersion === 1 && s.roadDemands, 'road demand cause module');
+       if (s.roadDemands !== undefined) ensure(s.roadDemands && r.roadDemandsVersion === 1, 'road demand cause marker');
+-      if (r.roadworksVersion !== undefined) ensure(r.roadworksVersion === 1 && s.roadworks, 'roadwork custody module');
+-      if (s.roadworks !== undefined) ensure(s.roadworks && r.roadworksVersion === 1, 'roadwork custody marker');
++      if (r.roadworksVersion !== undefined) ensure((r.roadworksVersion === 1 || r.roadworksVersion === 2) && s.roadworks, 'roadwork custody module');
++      if (s.roadworks !== undefined) ensure(s.roadworks && (r.roadworksVersion === 1 || r.roadworksVersion === 2) && (r.roadworksVersion === 2 ? s.roadworks.replacementVersion === 1 : s.roadworks.replacementVersion === undefined), 'roadwork custody marker');
+       if (r.powerVersion !== undefined) ensure(r.powerVersion === 1 && s.power, 'power body marker');
+       if (s.power !== undefined) ensure(s.power && r.powerVersion === 1, 'power persistent marker');
+       validateLegacyEnergyContract(r, s, this.world);
+--- a/src/ui.ts
++++ b/src/ui.ts
+@@ -1,5 +1,5 @@
+ import { isRoadOpen, roadClosure } from './roads';
+-import { roadworksStatus } from './simulation/roadworks';
++import { roadworksStatus, roadworkActorId } from './simulation/roadworks';
+ import { aircraftBoardingBlockedReason, getAviationPads } from './aviation';
+ import { researchPlayerContextReason, researchProgressInfo } from './simulation/extensions';
+ import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from './architecture-floor-plan';
+@@ -651,7 +651,11 @@
+       const status = roadworksStatus(state, edge.id), job = status.job;
+       const goto = element('button', 'action-button', '前往工地开放端'); goto.setAttribute('type', 'button'); goto.dataset.navigation = closure.worksiteNodeId; card.append(goto);
+       if (job) {
+-        const worker = state.citizens.find(citizen => citizen.id === job.workerId);
++        const worker = state.citizens.find(citizen => citizen.id === roadworkActorId(job));
++        if (job.replacement) {
++          const original = state.citizens.find(citizen => citizen.id === job.workerId);
++          card.append(field('原施工者（保留合同历史）', original?.name ?? job.workerId ?? '尚未签约'), field('接续记录', `${job.replacement.contracts.length} 任 / ${job.replacement.pickups.length} 次实际领回`));
++        }
+         card.append(field('具名施工者', worker?.name ?? '等候居民自愿承接'), field('有效现场施工', `${job.workedMinutes.toFixed(1)} / ${job.requiredMinutes} 分钟`), field('材料', stages[status.materialStage] ?? '等待履约'), field('未赚托管款', `${job.escrow.toFixed(2)} 云币`), element('p', 'note', job.reason));
+         if (job.payerId === 'public' && job.completedAt === null && job.cancelledAt === null) card.append(commandButton('市长现场审批施工预算', 'approveRoadRepair', job.id, 40, !this.canAct() || !this.hasRole('mayor')));
+         if (job.completedAt === null && job.cancelledAt === null || job.escrow > 1e-7 && job.cancelledAt !== null) card.append(commandButton('停止施工 · 结算未赚款', 'cancelRoadRepair', job.id, undefined, !this.canAct()));

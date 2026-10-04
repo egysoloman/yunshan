@@ -1,14 +1,15 @@
 import { isRoadOpen, roadClosure } from './roads';
-import { roadworksStatus } from './simulation/roadworks';
+import { roadworksStatus, roadworkActorId } from './simulation/roadworks';
 import { aircraftBoardingBlockedReason, getAviationPads } from './aviation';
 import { researchPlayerContextReason, researchProgressInfo } from './simulation/extensions';
 import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from './architecture-floor-plan';
 import { canAccessFloor } from './access';
 import { canReviewPetition, civicSite, publicFloor } from './simulation/culture';
 import { publicDepartures } from './journey';
+import { familyEducationCourses } from './simulation/family-education';
 import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from './simulation/family';
 import { bankingAvailableLoanCash, bankingBalanceSheet, bankingReserveRequired } from './simulation/banking';
-import { shopLifecycleMayIncorporate } from './simulation/shop_lifecycle';
+import { shopLifecycleMayIncorporate, shopLifecycleAllowsSpaceUse } from './simulation/shop_lifecycle';
 import { clinicalAtPosition, clinicalVisitDeadline } from './simulation/clinical';
 import { powerBinding } from './simulation/power';
 import { educationAtPosition, educationServiceStationsAtPosition } from './simulation/education';
@@ -650,7 +651,11 @@ export class CityUI {
       const status = roadworksStatus(state, edge.id), job = status.job;
       const goto = element('button', 'action-button', '前往工地开放端'); goto.setAttribute('type', 'button'); goto.dataset.navigation = closure.worksiteNodeId; card.append(goto);
       if (job) {
-        const worker = state.citizens.find(citizen => citizen.id === job.workerId);
+        const worker = state.citizens.find(citizen => citizen.id === roadworkActorId(job));
+        if (job.replacement) {
+          const original = state.citizens.find(citizen => citizen.id === job.workerId);
+          card.append(field('原施工者（保留合同历史）', original?.name ?? job.workerId ?? '尚未签约'), field('接续记录', `${job.replacement.contracts.length} 任 / ${job.replacement.pickups.length} 次实际领回`));
+        }
         card.append(field('具名施工者', worker?.name ?? '等候居民自愿承接'), field('有效现场施工', `${job.workedMinutes.toFixed(1)} / ${job.requiredMinutes} 分钟`), field('材料', stages[status.materialStage] ?? '等待履约'), field('未赚托管款', `${job.escrow.toFixed(2)} 云币`), element('p', 'note', job.reason));
         if (job.payerId === 'public' && job.completedAt === null && job.cancelledAt === null) card.append(commandButton('市长现场审批施工预算', 'approveRoadRepair', job.id, 40, !this.canAct() || !this.hasRole('mayor')));
         if (job.completedAt === null && job.cancelledAt === null || job.escrow > 1e-7 && job.cancelledAt !== null) card.append(commandButton('停止施工 · 结算未赚款', 'cancelRoadRepair', job.id, undefined, !this.canAct()));
@@ -712,7 +717,7 @@ export class CityUI {
     this.ref('company-summary').replaceChildren(field('全城企业', `${extension.companies.length} 家`), field('持有企业', `${owned.length} 家`), field('研发成果', `${extension.stats.researchCompleted} 项`));
     const capital = Number(this.ref<HTMLSelectElement>('company-capital').value);
     const building = this.view.nearbyBuilding;
-    const canFound = !!building && !building.facility && state.shops.some(shop => shop.buildingId === building.id) && ['market', 'workshop', 'farm', 'dock'].includes(building.kind) && this.atBuilding(building.id, 'work') && this.hasRole('merchant') && state.player.money >= capital + 50 && !extension.companies.some(c => c.buildingId === building.id) && (building.kind !== 'market' || shopLifecycleMayIncorporate(state, state.shops.find(shop => shop.buildingId === building.id)!, 'player'));
+    const canFound = !!building && !building.facility && state.shops.some(shop => shop.buildingId === building.id) && ['market', 'workshop', 'farm', 'dock'].includes(building.kind) && this.atBuilding(building.id, 'work') && this.hasRole('merchant') && state.player.money >= capital + 50 && !extension.companies.some(c => c.shopBindingReleasedAt === undefined && c.buildingId === building.id) && (building.kind !== 'market' || shopLifecycleMayIncorporate(state, state.shops.find(shop => shop.buildingId === building.id)!, 'player'));
     this.ref<HTMLButtonElement>('found-company').disabled = !canFound;
     this.setText('found-note', `需商人资格，在市集、工坊、农场或码头创办；资本 ${money(capital)} 加登记费 50 云币，现金进入公司账户。${building?.floorPlanProfile === FLOOR_PLAN_PROFILE ? ` ${this.functionPointHint(building, ['work']).textContent}` : ''}`);
     if (!this.selectedCompany && owned.length) this.selectedCompany = owned[0].id;
@@ -726,8 +731,9 @@ export class CityUI {
     if (company) {
       const detail = element('div', 'company-detail');
       detail.append(element('h4', '', company.name), field('规模 / 资本', `${company.level} 级 · ${money(company.capital)}`), field('营收 / 利润', `${money(company.revenue)} / ${money(company.profit)}`), field('库存 / 雇员', `${rounded(company.inventory)} / ${company.employees}`), field('市占率', `${(company.marketShare * 100).toFixed(1)}%`), field('每股价格', `${company.sharePrice.toFixed(2)} 云币`));
+      if (company.shopBindingReleasedAt !== undefined) detail.append(field('原经营场地', '租赁资产已归还；公司资本、股份及历史继续保留，当前无经营场地。'));
       const controlled = this.controlled(company) && this.hasRole('merchant');
-      const onSite = this.atBuilding(company.buildingId, 'work');
+      const onSite = company.shopBindingReleasedAt === undefined && this.atBuilding(company.buildingId, 'work');
       const controls = element('div', 'button-grid context-actions');
       controls.append(commandButton('扩张 · 投入 300', 'expandCompany', company.id, 300, !controlled || !onSite || state.player.money < 300), commandButton('雇佣 · 1 位员工', 'hire', company.id, 1, !controlled || !onSite || company.capital < 50), commandButton('申请上市 · 200', 'listCompany', company.id, undefined, !controlled || !this.atKindPoint('service', 'bank') || company.listed || company.level < 2 || company.capital < 600 || state.player.money < 200));
       const workplace = this.world.buildings.find(b => b.id === company.buildingId);
@@ -886,6 +892,19 @@ export class CityUI {
       const card = element('div', 'panel-section'), serviceSite = this.world.buildings.find(b => b.id === order.siteId);
       card.append(field(`${topicNames[order.topic]} · ${orderNames[order.state]}`, order.id), element('p', '', order.lastReason), field('服务场所', serviceSite?.name ?? order.siteId), field('授权上限 / 实际支出', `${money(order.authorizedCap)} / ${money(order.spent)}`), field('到货 / 已消耗 / 目标', `${order.receivedUnits} / ${order.consumedUnits} / ${order.targetUnits} 份`), field('实际受益居民 / 在岗人员', `${order.servedIds.length} / ${order.staffIds.length}`), field('我的现场服务', `${Math.floor(order.serviceMinutes.player ?? 0)} / ${order.requiredMinutes} 分钟`));
       if (order.approvedBy.length) card.append(element('p', 'note', `预算署名：${order.approvedBy.map(id => id === 'player' ? '本人' : state.citizens.find(c => c.id === id)?.name ?? id).join('、')}`));
+      for (const extra of culture?.supplementalBudgets?.requests.filter(r => r.orderId === order.id) ?? []) {
+        const supplement = element('div', 'panel-section');
+        supplement.append(field('独立追加审议', extra.id), field('申请上限 / 追加实付', `${money(extra.cap)} / ${money(extra.spent)}`), field('原授权 / 原实付（保持）', `${money(order.authorizedCap)} / ${money(order.spent)}`), field('申请时尚缺 / 当时报价', `${extra.missingUnits.toFixed(3)} 份 / ${money(extra.quotedGross)}`));
+        for (const lot of extra.quoteLots) supplement.append(element('p', 'note', `${lot.shopId}：现有供货申请 ${lot.quantity.toFixed(3)} 份 × ${money(lot.unitPrice)}；报价不是实物或支出，采购仍按成交时有限报价。`));
+        if (extra.approvedAt !== null) supplement.append(element('p', 'note', `独立署名：${extra.signatures.map(s => s.actorId === 'player' ? '当选市长（本人）' : state.citizens.find(c => c.id === s.actorId)?.name ?? s.actorId).join('、')} · ${extra.closedAt === null ? '实际采购中' : '已关账，原回执保留'}`));
+        else if (extra.closedAt !== null) supplement.append(element('p', 'note', '订单已结束，未批准的申请关闭；没有发生追加开支。'));
+        else {
+          const term = state.governance?.term, election = state.governance?.elections.find(e => e.id === term?.electionId);
+          const elected = !!term && term.endedAt === null && culture!.lastUpdate >= term.startsAt && culture!.lastUpdate < term.endsAt && election?.result === 'elected';
+          supplement.append(commandButton(`当选市长现场审议 · 追加 ${money(extra.cap)}`, 'reviewPetition', extra.id, undefined, !this.canAct() || !decisionSite || !elected), element('p', 'note', elected ? decisionSite ? '审批仍须留足既有工资、运维和其他授权；无可支配现金或实物则继续等待。' : '请到实际市长决策层审议。两名真正议员在合法工作点联审也可批准，普通官员无追加权限。' : '追加款须由当选市长或两名真正议员审议。普通官员的原40文部门上限保持，身份标签不等于当选任期。'));
+        }
+        card.append(supplement);
+      }
       const controls = element('div', 'button-grid context-actions');
       if (['agenda', 'awaitingReview'].includes(order.state)) controls.append(commandButton('市长现场审议 · 上限 40 云币', 'reviewPetition', order.petitionId, 40, !this.canAct() || !decisionSite), commandButton('市长现场驳回', 'reviewPetition', order.petitionId, 0, !this.canAct() || !decisionSite));
       if (order.state === 'active' && order.topic !== 'transport') controls.append(commandButton(order.servedIds.includes('player') ? '本项服务已经完成' : culture?.playerServiceId === order.id ? '已参加，等待现场服务完成' : '到场接受公共服务', 'attendService', order.id, undefined, !this.canAct() || !this.atCultureBuilding(order.siteId) || state.player.needs.hunger < 40 || state.player.needs.fatigue < 35 || order.servedIds.includes('player') || culture?.playerServiceId === order.id || !!culture?.playerServiceId && culture.playerServiceId !== order.id || order.topic === 'health' && (state.extension?.actorProfiles.player?.health ?? 100) >= 95));
@@ -950,14 +969,18 @@ export class CityUI {
     const dependents = state.citizens.filter(c => isFamilyDependent(state, c.id));
     for (const resident of dependents) {
       const id = resident.id, child = family.children[id], profile = state.extension?.actorProfiles[id];
-      body.append(field(resident.name, `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident.education ?? 0} · 食物储备 ${resident.food ?? 0} 份${child ? ` · 到校 ${Math.round(child.attendanceMinutes)} 分钟` : ''}`));
+      body.append(field(resident.name, `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident.education ?? 0} · 食物储备 ${resident.food ?? 0} 份${child ? ` · 新增正式学时 ${Math.round(family.formalLearning?.[id]?.earnedMinutes ?? 0)} 分钟 · 个人自习 ${Math.round(child.selfStudyMinutes ?? 0)} 分钟` : ''}`));
       const near = spatialDistance(state.player.position, resident.position) <= 24, controls = element('div', 'button-grid');
       controls.append(commandButton('到场扶养 · 20 云币', 'supportFamily', id, 20, !this.canAct() || !near || state.player.money < 20));
       if (child) controls.append(commandButton('在书院办理入学 · 40 云币', 'enrollChild', id, undefined, !this.canAct() || !near || !this.atKind('school') || !!child.schoolId || (profile?.age ?? 0) < 6 || (profile?.age ?? 0) >= 18 || state.player.money < 40));
       const account = family.households.find(h => h.closedAt === null && h.actorIds.includes('player') && h.homeId === resident.homeId);
       if (account) controls.append(commandButton('现场照护购食 / 交出背包食物', 'householdMeal', id, undefined, !this.canAct() || !near || (resident.food ?? 0) >= 6), element('p', 'note', '在共同住所交出一份背包食物，或与子女到真实商铺用共同现金购买一份库存；资金与食物分别记账。'));
-      body.append(controls);
+      body.append(controls, this.familyEducationCard(resident));
     }
+    const dependentIds = new Set(dependents.map(resident => resident.id));
+    const formerPayers = [...new Set(familyEducationCourses(state).filter(course => course.payerId === 'player' && !dependentIds.has(course.actorId)).map(course => course.actorId))];
+    if (formerPayers.length) body.append(element('h4', '', '我原先实付的子女课程'), element('p', 'note', '监护关系变化或子女去世后，原付款、退款和课程来源仍保留。原付款权利不授予新的代签资格。'));
+    for (const id of formerPayers) { const resident = state.citizens.find(person => person.id === id); if (resident) body.append(this.familyEducationCard(resident)); }
     const venue = this.world.buildings.find(b => this.atBuilding(b.id) && publicFamilyVenue(b, state.player.position));
     const ceremonies = family.ceremonies.filter(c => c.organizerId === 'player');
     if (canHoldFamilyCeremony(state, 'wedding') && !ceremonies.some(c => c.kind === 'wedding' && c.subjectId === spouse?.id)) body.append(commandButton('亭馆筹办婚礼 · 30 云币与食物 2 份', 'holdCeremony', 'wedding', undefined, !venue || state.player.money < 30 || (state.player.inventory.food ?? 0) < 2));
@@ -1132,8 +1155,9 @@ export class CityUI {
     const clinicalSignature = state.clinical?.orders.filter(order => order.payerId === 'player' || order.patientId === 'player' || order.patientId === citizen?.id).map(order => [order.id, order.state, Math.floor(order.workedMinutes * 10), order.escrow, order.purchasePaid, order.serviceFee, order.refunded, order.reservedUnits, order.consumedUnits, order.lastReason].join(':')).join(';');
     const functionSignature = building?.floorPlanProfile === FLOOR_PLAN_PROFILE ? [this.atBuilding(building.id), this.atBuilding(building.id, 'work'), this.atBuilding(building.id, 'sale'), this.atBuilding(building.id, 'service'), building.kind === 'clinic' ? this.canStartTreatment() : '', citizen ? this.canStartTreatment(citizen.id) : '', building.kind === 'home' ? this.homeRestAvailable(building) : ''].join(':') : '';
     const restSignature = [hygieneSignature(state, building?.id), state.homeRest?.session?.state, state.homeRest?.session?.pauseReason, Math.floor((state.homeRest?.session?.progressMinutes ?? 0) * 10), state.homeRest?.history.length, state.education?.course?.id, state.education?.course?.status, state.education?.course?.reason, Math.floor((state.education?.course?.workedMinutes ?? 0) * 10), state.education?.course?.escrow, state.education?.history.length].join(':');
+    const familyEducationSignature = building?.kind === 'school' ? [Math.floor(state.hour * 60), state.familyEducation?.nextId, ...state.citizens.filter(c => isFamilyDependent(state, c.id)).map(c => [c.id, c.education, state.extension?.actorProfiles[c.id]?.age, Math.round(c.position.x * 10), Math.round(c.position.y * 10), Math.round(c.position.z * 10), state.family?.children[c.id]?.schoolId, state.family?.children[c.id]?.attendanceMinutes, state.familyEducation?.active.find(course => course.actorId === c.id)?.status, state.familyEducation?.active.find(course => course.actorId === c.id)?.workedMinutes, state.familyEducation?.active.find(course => course.actorId === c.id)?.escrow, state.familyEducation?.active.find(course => course.actorId === c.id)?.reason].join(':'))].join(';') : '';
     const boardingSignature = aircraft ? aircraftBoardingBlockedReason(state, aircraft) : '';
-    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.shopLifecycle?.nextReceiptId, state.shopLifecycle?.nextListingId, state.shopLifecycle?.titles[shop?.id ?? '']?.state, Math.floor((state.shopLifecycle?.titles[shop?.id ?? '']?.reopen?.workedMinutes ?? 0) * 10), state.shopLifecycle?.leases.find(lease => lease.shopId === shop?.id && lease.state !== 'ended')?.arrears, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, restSignature, boardingSignature, functionSignature].join('|');
+    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.shopLifecycle?.nextReceiptId, state.shopLifecycle?.nextListingId, state.shopLifecycle?.titles[shop?.id ?? '']?.state, Math.floor((state.shopLifecycle?.titles[shop?.id ?? '']?.reopen?.workedMinutes ?? 0) * 10), state.shopLifecycle?.leases.find(lease => lease.shopId === shop?.id && lease.state !== 'ended')?.arrears, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, restSignature, boardingSignature, familyEducationSignature, functionSignature].join('|');
     if (signature === this.contextSignature) return;
     const focused = document.activeElement;
     if ((focused instanceof HTMLInputElement || focused instanceof HTMLSelectElement) && this.ref('context').contains(focused) && signature.split('|').slice(0, 6).join('|') === this.contextSignature.split('|').slice(0, 6).join('|') && (building?.floorPlanProfile !== FLOOR_PLAN_PROFILE || functionSignature === this.contextSignature.split('|').at(-1))) return;
@@ -1157,12 +1181,12 @@ export class CityUI {
       if (controls.childElementCount) body.append(controls);
       if (state.playerLabor?.job) body.append(this.laborContent());
       if (building.kind === 'clinic') body.append(this.clinicalContent());
-      if (building.kind === 'school') body.append(this.educationContent());
+      if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));
       if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.homeRestContent(building));
       if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
       if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
       if (building.kind === 'bank') this.renderBank(body, building, !walk);
-      if (building.kind === 'school') body.append(element('p', 'note', '先学习，再选择职业考核。学习提高教育，工作积累经验。'));
+      if (building.kind === 'school') body.append(element('p', 'note', '普通自习增长学习技能；正式学历需要完成有教师、教材和实际教学的课程。' ));
       if (building.publicFloors !== undefined) body.append(element('p', 'note', '公共服务楼层可自由进入；其余空间按各楼层权限开放，持有多个身份可使用对应设施。'));
       if (building.floorUses?.length) {
         const guide = element('details', 'relationship-choices'); guide.append(element('summary', '', '楼层与空间导览'));
@@ -1236,15 +1260,17 @@ export class CityUI {
     const role = this.state!.player.role;
     const kind = building.kind;
     const shop = this.state!.shops.find(shop => shop.buildingId === building.id);
-    if (shop && kind === 'market' && !this.state!.extension?.companies.some(company => company.buildingId === building.id)) {
+    const lifecycleCompany = this.state!.extension?.companies.find(company => company.shopBindingReleasedAt === undefined && company.buildingId === building.id);
+    if (shop && kind === 'market' && (!lifecycleCompany || lifecycleCompany.shopBindingId === shop.id)) {
       const lifecycle = this.state!.shopLifecycle, title = lifecycle?.titles[shop.id], listing = lifecycle?.listings.find(listing => listing.id === title?.listingId && listing.state === 'offered');
       const lease = lifecycle?.leases.find(lease => lease.shopId === shop.id && lease.state !== 'ended');
       if (listing && listing.sellerId !== 'player') controls.append(commandButton(listing.kind === 'sale' ? `购买原店资产 · 买价${money(listing.price)}＋注资200＋登记50` : `承租经营资产 · 日租${money(listing.price)}＋押金${money(listing.deposit)}＋注资200＋登记50`, listing.kind === 'sale' ? 'buyShop' : 'leaseShop', listing.id, 200, workDisabled || !this.hasRole('merchant')));
-      if (shop.ownerId === 'player') {
+      const operatorIsPlayer = lifecycleCompany ? lifecycleCompany.ownerId === 'player' && (lifecycleCompany.shareholders.player ?? 0) > lifecycleCompany.shares / 2 : shop.ownerId === 'player';
+      if (operatorIsPlayer) {
         controls.append(commandButton('注入本人营运资金 · 200 云币', 'fundShop', shop.id, 200, workDisabled || this.state!.player.money < 300));
         if (!title || title.state === 'operating') controls.append(commandButton('由本人办理停业', 'suspendShop', shop.id, undefined, workDisabled));
-        if (title?.state === 'suspended' && !listing) controls.append(commandButton('采购修缮物料并申请重开 · 60员工分钟', 'restartShop', shop.id, undefined, workDisabled));
-        if (title?.state === 'suspended' && title.assetOwnerId === 'player' && !listing && !lease) controls.append(commandButton('授权出售经营资产 · 100 云币', 'listShopForSale', shop.id, 100, workDisabled), commandButton('授权经营资产出租 · 日租25/押金50/七日', 'listShopForLease', shop.id, 25, workDisabled));
+        if (title?.state === 'suspended' && !listing) controls.append(commandButton('采购修缮物料并申请重开 · 60员工分钟', 'restartShop', shop.id, undefined, workDisabled || !shopLifecycleAllowsSpaceUse(this.state!, shop.id)));
+        if (title?.state === 'suspended' && title.assetOwnerId === 'player' && !listing && !lease && !lifecycleCompany) controls.append(commandButton('授权出售经营资产 · 100 云币', 'listShopForSale', shop.id, 100, workDisabled), commandButton('授权经营资产出租 · 日租25/押金50/七日', 'listShopForLease', shop.id, 25, workDisabled));
         if (listing?.sellerId === 'player') controls.append(commandButton('撤回本人挂牌', 'withdrawShopListing', shop.id, undefined, workDisabled));
         if (lease?.tenantId === 'player') controls.append(commandButton(`付欠租 · ${money(lease.arrears)}`, 'payShopRent', shop.id, undefined, workDisabled || lease.arrears <= 0), commandButton('办理退租并清押金', 'endShopLease', shop.id, undefined, workDisabled));
       }
@@ -1288,7 +1314,7 @@ export class CityUI {
       const crime = this.state!.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, this.state!.player.position) <= 40).sort((a, b) => spatialDistance(a.position, this.state!.player.position) - spatialDistance(b.position, this.state!.player.position))[0];
       controls.append(commandButton('处置附近案件', 'resolveCrime', crime?.id, undefined, disabled || !crime));
     }
-    const company = this.state!.extension?.companies.find(c => c.buildingId === building.id);
+    const company = this.state!.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === building.id);
     const controlsSpace = company ? this.controlled(company) : this.state!.player.inventory[`business:${building.id}`] === 1;
     if (this.state!.player.homeId === building.id || controlsSpace) {
       controls.append(commandButton('放置体素 · B', 'build', building.id, undefined, siteDisabled));
@@ -1320,6 +1346,42 @@ export class CityUI {
     }
     const last = state.homeRest?.history.at(-1);
     if (!session && last && (!building || last.buildingId === building.id)) body.append(element('p', 'note', last.state === 'completed' ? `已完成 ${HOME_REST_MINUTES} 分钟休息。` : `上次休息已结束，实际休息 ${(Math.floor(last.progressMinutes * 10) / 10).toFixed(1)} 分钟。`));
+    return body;
+  }
+  private familyEducationContent(site: Building): HTMLElement {
+    const body = element('section', 'family-education'), state = this.state!;
+    body.append(element('h4', '', '子女正式课程'), element('p', 'note', '入学登记后，由在世成年父母或登记监护人在原课堂签约。每课另付40云币托管，累计8份真实课程、480分钟才提高学校学历一级。'));
+    const dependents = state.citizens.filter(c => isFamilyDependent(state, c.id) && (state.family?.children[c.id]?.schoolId === site.id || c.role === '学生' && c.workId === site.id));
+    const currentIds = new Set(dependents.map(resident => resident.id)), priorIds = [...new Set(familyEducationCourses(state).filter(course => course.siteId === site.id && course.payerId === 'player' && !currentIds.has(course.actorId)).map(course => course.actorId))];
+    if (!dependents.length) body.append(element('p', 'context-hint', '此书院没有你已登记入学的在世受养子女。亲友关系或同住不授予代签资格；可先在生活面板办理子女入学。'));
+    for (const resident of dependents) body.append(this.familyEducationCard(resident));
+    if (priorIds.length) body.append(element('h4', '', '我在此书院原先实付的课程'), element('p', 'note', '原课程和未赚退款仍按原付款人保留；新的签约仍核验当前法定监护关系。'));
+    for (const id of priorIds) { const resident = state.citizens.find(person => person.id === id); if (resident) body.append(this.familyEducationCard(resident)); }
+    return body;
+  }
+  private familyEducationCard(resident: Citizen): HTMLElement {
+    const body = element('article', 'company-card'), state = this.state!, child = state.family?.children[resident.id], profile = state.extension?.actorProfiles[resident.id], payer = state.extension?.actorProfiles.player;
+    body.dataset.familyEducationChild = resident.id;
+    const siteId = child?.schoolId ?? (resident.role === '学生' ? resident.workId : undefined), site = this.world.buildings.find(b => b.id === siteId && b.kind === 'school');
+    const formal = state.family?.formalLearning?.[resident.id], records = familyEducationCourses(state).filter(c => c.actorId === resident.id), active = state.familyEducation?.active.find(c => c.actorId === resident.id), last = active ?? records.at(-1);
+    const guardian = isFamilyDependent(state, resident.id), legal = !!guardian && !!payer?.alive && payer.age >= 18 && !!profile?.alive && profile.age >= 6 && profile.age < 18;
+    const together = !!site && educationAtPosition(site, state.player.position, state.player, state.voxels) && educationAtPosition(site, resident.position, { role: 'traveler', identities: ['traveler'] }, state.voxels) && spatialDistance(state.player.position, resident.position) <= 2 && !state.player.vehicleId && !state.aviation?.activeAircraftId;
+    const staff = site && state.citizens.some(c => c.workId === site.id && ['teacher', '老师'].includes(c.role) && state.extension?.actorProfiles[c.id]?.alive && state.extension.actorProfiles[c.id].age >= 18);
+    body.append(element('strong', '', `${resident.name} · ${site?.name ?? '尚未登记入学'}`), field('学校学历 / 新增正式学时', `${resident.education ?? 0} 级 / ${Math.round(formal?.earnedMinutes ?? 0)} 分钟`), field('保留的家庭课程来源', `${records.filter(c => c.status === 'completed').length} 份实付完整课`));
+    if (formal && (formal.baselineEducation > 0 || (formal.legacyEducationCarry ?? 0) > 0 || formal.baselineAttendanceMinutes > 0)) body.append(field('原保有资格 / 旧到校记录', `${formal.baselineEducation + (formal.legacyEducationCarry ?? 0)} 级 / ${Math.round(formal.baselineAttendanceMinutes)} 分钟`), element('p', 'note', '原资格继续保留。旧到校记录不重算为新正式授课；新增正式学时只来自真实教材与实际教师完成的课程。'));
+    const reason = !profile?.alive ? '受养子女已去世，不能开始新课程；原付款、未赚退款和课程历史仍保留。' : !payer?.alive ? '当前付款人已去世，不能签新约；原课程未赚款按原付款人及既有遗产规则处理。' : !guardian ? '你不是该居民当前已登记的法定监护人，不能新代签；原付款权利继续保留。' : !legal ? '正式子女课程限在世6至17岁受养人，由在世成年监护人签约。' : !site ? '先由监护人与子女在书院办理入学，再签实际课程。' : !together ? '请与子女共同走到原书院同一公共课堂，两人相距2米内再签约或恢复。' : state.hour < 8 || state.hour >= 17 ? '课堂8至17点办理；离场或夜间不补算课程分钟。' : !staff ? '原书院没有在册成年教师，不能承诺课程。' : state.player.money < 40 && !active ? '原付款钱包不足40云币；课程尚未签约，没有扣款。' : '你有已登记监护资格且双方到场。课程将等待真实教材和同课堂教师的实际付薪时窗。';
+    body.append(element('p', 'context-hint', reason));
+    if (!active) body.append(commandButton('为子女签一课 · 40云币托管', 'enrollFamilyCourse', resident.id, undefined, !this.canAct() || !legal || !together || !staff || state.hour < 8 || state.hour >= 17 || state.player.money < 40));
+    if (last) {
+      const names = { awaitingSupply:'等待真实教材', waiting:'等候教师与身体条件', studying:'共同课堂授课', paused:'离场暂停', refundPending:'原钱包容量不足，退款仍托管', completed:'实际课程已完成', cancelled:'已取消并保留历史' };
+      body.append(field('本笔原课堂', this.world.buildings.find(building => building.id === last.siteId)?.name ?? last.siteId), field('原课程状态 / 本课已赚分钟', `${names[last.status]} / ${(Math.floor(last.workedMinutes * 10) / 10).toFixed(1)} / 60`), field('原付款监护人', last.payerId === 'player' ? '你' : state.citizens.find(c => c.id === last.payerId)?.name ?? last.payerId), field('剩余托管 / 实购教材 / 已赚服务 / 已退', `${money(last.escrow)} / ${money(last.purchasePaid)} / ${money(last.serviceFees)} / ${money(last.refunded)}`), element('p', 'note', last.reason));
+      if (last.receipt) body.append(field('真实教材来源', `${this.world.buildings.find(b => b.id === state.shops.find(s => s.id === last.receipt!.shopId)?.buildingId)?.name ?? last.receipt.shopId} · 1份 × ${money(last.receipt.unitPrice)}`));
+      for (const [teacherId, minutes] of Object.entries(last.staffMinutes)) body.append(field('实际授课教师', `${state.citizens.find(c => c.id === teacherId)?.name ?? teacherId} · ${(Math.floor(minutes * 10) / 10).toFixed(1)} 分钟`));
+      if (active) {
+        if (active.resumeRequired) body.append(commandButton('同原课堂恢复 · 不再收费', 'resumeFamilyCourse', active.id, undefined, !this.canAct() || !legal || !together || active.payerId !== 'player' || active.cancelledAt !== null));
+        body.append(commandButton('取消原课程，退未赚款', 'cancelFamilyCourse', active.id, undefined, !this.canAct() || !payer?.alive || payer.age < 18 || active.payerId !== 'player'), element('p', 'note', '仅原付款监护人办理。已赚服务费不退，已购但未耗教材留原学校；未赚款退原钱包，原课程历史继续保留。'));
+      }
+    }
     return body;
   }
   private educationContent(): HTMLElement {

@@ -265,6 +265,8 @@ test('real paid road completion leaves every saved NPC route ready for an exact 
 test('an originally arrived real investigator stays at its incident through a canonical road revision and exact 24-step reload', () => {
   const sim = new Simulation(dispatchWorld()); sim.step(.25);
   const { officer, crime, dispatch } = nativeDispatch(sim);
+  const kit=core(sim).policeSupplies.kits[crime.id],consumption:object[]=[];assert(kit);assert.equal(kit.receivedUnits,3*crime.severity);assert.equal(kit.consumedUnits,0);assert.equal(kit.consumedAt,null);
+  sim.onEvent('police-supply-consumed',event=>{if(event.crimeId===crime.id)consumption.push(structuredClone(event));});
   for (let i = 0; i < 240 && !dispatch.arrived; i++) sim.step(.25);
   assert(dispatch.arrived, 'the original police must physically finish its original open-road response');
   assert.equal(crime.status, 'responding', 'the original responseAt timer still requires real onsite investigation');
@@ -290,7 +292,8 @@ test('an originally arrived real investigator stays at its incident through a ca
     assert.deepEqual(officer.position, position, 'the original responseAt investigation remains at the actual incident');
   }
   assert.equal(crime.status, 'resolved', 'the original security timer resolves the actual investigated case'); assert.equal(sim.state.metrics.crimesResolved, resolvedBefore + 1);
-  assert.equal(core(sim).dispatches[officer.id], dispatch, 'the real original assignment persists until the next ordinary people phase');
+  assert.equal(core(sim).dispatches[officer.id], undefined, 'actual kit-consuming resolution releases its dispatch in the same security phase');
+  assert.equal(kit.consumedUnits,3*crime.severity);assert.equal(kit.consumedAt,clock(sim));assert.equal(consumption.length,1);assert.equal((consumption[0] as {quantity:number}).quantity,3*crime.severity);
   const beforeDeparture = { ...officer.position }; sim.step(.25); next.step(.25); assert.equal(next.exportSave(), sim.exportSave(), 'full real dispatch-release phase');
   assert.equal(core(sim).dispatches[officer.id], undefined, 'the original resolved-case lifecycle releases its own dispatch');
   assert(officer.position.x < beforeDeparture.x, 'ordinary 1x choice starts leaving toward the captured west exit');

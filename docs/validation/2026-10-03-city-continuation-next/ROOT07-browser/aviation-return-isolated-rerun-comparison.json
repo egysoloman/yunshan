@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-04T02:23:17.016866+00:00",
+  "status": "ORIGINAL_HARNESS_ORIGINAL60SECOND_WINDOW_PASSES_IN_EXCLUSIVE_RERUN",
+  "sameOriginalHarness": true,
+  "harnessSHA256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+  "sameSource": true,
+  "sameBuildEntry": true,
+  "firstRun": {
+    "status": "FAIL",
+    "observedChecks": 8,
+    "gpuExclusive": false,
+    "failure": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.",
+    "rawSHA256": "3680816c89632e3c233a74b9bb2def0d8cbcdd5b69e614c4f7f5d5a9749a8cf7",
+    "preserved": true
+  },
+  "secondRun": {
+    "status": "PASS",
+    "observedChecks": 11,
+    "gpuExclusive": true,
+    "errors": [],
+    "rawSHA256": "a12fd4c99e72d7ce62e4801a122244eaeb6575211263874094890ed3e956562b",
+    "ownedActiveDescendants": []
+  },
+  "interpretation": "Identical source and original wall-clock window passed after other browser/rule scopes ended. This supports resource-context sensitivity; exact causal attribution is not proved because the original catch did not capture a full native terminal save or frame/return time series. No production source fix was made.",
+  "secondRunOriginalPNGViewed": [
+    {
+      "name": "day.png",
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/artifacts-after-originals/artifacts/day.png",
+      "sha256": "8f72829ec011c906820ce610c37f9595367afa7078556a4a5e3e252959dd4b2e",
+      "bytes": 633049,
+      "actualViewCompleted": true,
+      "sameSHA256AsRetainedWebGL01": false
+    },
+    {
+      "name": "night.png",
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/artifacts-after-originals/artifacts/night.png",
+      "sha256": "d02a5a613b69af2aed54d3c833afe7928cf10e7de772d8777e795fa84d4617dc",
+      "bytes": 558845,
+      "actualViewCompleted": true,
+      "sameSHA256AsRetainedWebGL01": false
+    },
+    {
+      "name": "interior.png",
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/artifacts-after-originals/artifacts/interior.png",
+      "sha256": "cbb35f689657c2acc72fc0fc6a8d3ad1397a6efe9081c234597dcf96f1f6d19d",
+      "bytes": 592692,
+      "actualViewCompleted": true,
+      "sameSHA256AsRetainedWebGL01": false
+    }
+  ],
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN"
+}

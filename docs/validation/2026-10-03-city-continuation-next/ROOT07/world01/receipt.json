@@ -1,0 +1,50 @@
+{
+  "startedAt": "2026-10-04T01:38:24.558793+00:00",
+  "endedAt": "2026-10-04T02:10:24.982203+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/world-v4.test.ts",
+    "tests/world-v5.test.ts",
+    "tests/world-v6-commercial.test.ts",
+    "tests/world-v6-commercial-routes.test.ts",
+    "tests/world-v6-office.test.ts",
+    "tests/world-layout.test.ts",
+    "tests/stair-continuity.test.ts",
+    "tests/architecture-floor-plan.test.ts",
+    "tests/floor-plan-derived-cache.test.ts",
+    "tests/route-encoding.test.ts",
+    "tests/chunk-residency.test.ts",
+    "tests/persistence.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "e75e49ef7a0e32a0e08428ddf54385426816d3af1e9e9e167f779d65a0699064",
+  "ownedPid": 21607,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 21632,
+      "state": "Z",
+      "parent": 1,
+      "group": 21607,
+      "session": 21607,
+      "startTicks": 872954
+    },
+    {
+      "pid": 21667,
+      "state": "Z",
+      "parent": 1,
+      "group": 21607,
+      "session": 21607,
+      "startTicks": 874807
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

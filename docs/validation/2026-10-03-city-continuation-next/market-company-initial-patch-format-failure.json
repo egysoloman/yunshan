@@ -1,0 +1,7 @@
+{
+  "status": "CHECK_FAILED_NO_MUTATION",
+  "exitCode": 128,
+  "stderr": "error: patch fragment without header at line 733: @@ -0,0 +1 @@",
+  "cause": "difflib failed to declare absent final newline on actual original one-line JSON fixture; patch byte format only, no source or assertions changed.",
+  "originalBadPatchSHA256": "7bbfc9455e0cec1c6f9c384403ade1fd5db597f9fbed3d098ec5e8968cfaa277"
+}

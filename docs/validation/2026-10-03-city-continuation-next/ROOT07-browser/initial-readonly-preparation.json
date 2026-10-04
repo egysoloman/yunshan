@@ -1,0 +1,82 @@
+{
+  "at": "2026-10-04T01:28:45.131925+00:00",
+  "status": "PREPARED_NOT_RUN_WAITING_ROOT_EXPLICIT_BUILD_PASS_GPU_NOTICE",
+  "sourcePath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+  "inputCount": 241,
+  "frozenManifestSHA256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40",
+  "rootBuildPath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/build01",
+  "rootBuildReceipt": {
+    "startedAt": "2026-10-04T01:25:50.885680+00:00",
+    "endedAt": "2026-10-04T01:26:03.960205+00:00",
+    "argv": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 241,
+    "inputsStable": true,
+    "rawSHA256": "0a2841d664707bbfaa0fbfacae9690232be67b3bb4077e1ac092f8a078cd2899",
+    "ownedPid": 20104,
+    "finalOwnedSessionMembers": [
+      {
+        "pid": 20140,
+        "state": "Z",
+        "parent": 1,
+        "group": 20104,
+        "session": 20104,
+        "startTicks": 798511
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "drivers": {
+    "README.md": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/README.md",
+      "bytes": 4230,
+      "sha256": "6388715ed4c33fd42354446d19ae7ba8a5e780ee8e8282d7a23c68d7c1ac362a"
+    },
+    "authorization-template.json": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/authorization-template.json",
+      "bytes": 347,
+      "sha256": "f967e6099729e506f0d9fb55e85f7f0a8c4f00b85cec6042e6b7feff4928b009"
+    },
+    "capture-root07.mjs": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs",
+      "bytes": 17797,
+      "sha256": "87e2f7e5c52c6a85fcd6517f2a50ad0db395ea2ca580043cedc277708e2183d5"
+    },
+    "preparation-status.json": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/preparation-status.json",
+      "bytes": 1844,
+      "sha256": "8849e893a646b0c70f3bcfb898381dd4c8dc7648d7075d3f5f8c893665e87fbe"
+    },
+    "run-phase-v2-original.py": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/run-phase-v2-original.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "run-root07.py": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/run-root07.py",
+      "bytes": 9378,
+      "sha256": "73e07e20452ceae5a7bf8eef0389f9eed43c01e0545ef4126ecdab038d60a3c1"
+    },
+    "source-contract-observations.json": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/source-contract-observations.json",
+      "bytes": 1572,
+      "sha256": "7ff7b33f034ab615ae8f243452060b3f8542eea13aa4b6346a138e1ada4d60ef"
+    },
+    "候选开发备忘录.md": {
+      "sourcePath": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/候选开发备忘录.md",
+      "bytes": 2274,
+      "sha256": "68e2cab381ccc6df75f6f8c0050875ca494d65b0f81a39dd83704c82a05ed18d"
+    }
+  },
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "priorTmpOriginals": "LOST_NOT_REPLACED_BY_NEW_WORKSPACE_RUN",
+  "Library": "ROOT_UNIFIED_DELIVERY_ONLY"
+}

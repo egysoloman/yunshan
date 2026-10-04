@@ -4,7 +4,11 @@ import type { Building, BuildingFunctionPoint, Vec3 } from './types';
 export const FLOOR_PLAN_GEOMETRY_VERSION = 'architecture-v4-program-bodies-02-stairs-v1';
 export type Family = 'home' | 'market' | 'workshop' | 'civic-academy' | 'finance-health' | 'transport-waterfront';
 export const FLOOR_PLAN_PROFILE = 'v4-program-bodies-02' as const;
-export type Candidate = 'v4-wings';
+/** Explicit trusted-recipe input. Undefined keeps the original v4 descriptor. */
+export const CONTINUOUS_STAIR_GEOMETRY_REVISION = 2 as const;
+type StairBuilding = Building & { stairGeometryRevision?: typeof CONTINUOUS_STAIR_GEOMETRY_REVISION };
+const continuousStairs = (b: Building) => (b as StairBuilding).stairGeometryRevision === CONTINUOUS_STAIR_GEOMETRY_REVISION;
+export type Candidate = 'v4-wings' | 'v6-commercial';
 export type Material = 'stone' | 'plaster' | 'timber' | 'tile' | 'glass';
 export interface Rect { x0: number; x1: number; z0: number; z1: number }
 export interface Wall { a: [number, number]; b: [number, number]; thickness: number; height: number; opening?: { from: number; to: number; height: number; use: 'entrance' | 'courtyard' }; windows?: { from: number; to: number; bottom: number; top: number }[] }
@@ -21,7 +25,7 @@ export interface BuildingBody {
   buildingId: string; family: Family; candidate: Candidate; needsV4: boolean;
   preserveExistingMesh: boolean;
   immutableDimensions: { width: number; depth: number; height: number; floors: number; basements: number; door: Vec3 };
-  floorPlans: FloorPlan[]; roofRhythm: 'split-gable' | 'hall-and-shops' | 'industrial-spans' | 'court-wings' | 'hall-and-service-tower' | 'covered-platform';
+  floorPlans: FloorPlan[]; roofRhythm: 'split-gable' | 'hall-and-shops' | 'industrial-spans' | 'court-wings' | 'hall-and-service-tower' | 'covered-platform' | 'terraced-finance-tower';
 }
 export interface MeshData { positions: number[]; indices: number[] }
 export interface MeshPart { material: Material; floor: number; purpose: 'slab' | 'wall' | 'body' | 'roof'; mesh: MeshData; instance?: { rect: Rect; bottom: number; top: number; geometry?: { key: string; positions: number[]; normals: number[]; uvs: number[]; indices: number[]; bytes: number } } }
@@ -113,7 +117,8 @@ function createFloorFixtures(b:Building,p:FloorPlan):FloorFixture[] {
 export function getFloorPlanFixtures(_b:Building,p:FloorPlan):readonly FloorFixture[]{return p.fixtures;}
 
 function makeBody(b: Building): BuildingBody {
-  const candidate: Candidate = 'v4-wings';
+  const commercial = b.commercialGeometryRevision === 1;
+  const candidate: Candidate = commercial ? 'v6-commercial' : 'v4-wings';
   const family = familyOf(b), plans: FloorPlan[] = [], floorHeight = b.height / b.floors;
   const keepEnvelope = false;
   for (let floor = -(b.basements ?? 0) || 0; floor < b.floors; floor++) {
@@ -126,7 +131,7 @@ function makeBody(b: Building): BuildingBody {
     const spine = norm(-.08, .08, -.42, floor === 0 ? .5 : .05);
     // Candidate 02 gives each programme a distinct occupied topology. All
     // rectangles are shared physical rooms, rather than drawn facade labels.
-    if (keepEnvelope || floor < 0) interior = [full];
+    if (commercial || keepEnvelope || floor < 0) interior = [full];
     else if (family === 'home') {
       interior = [norm(-.5, .02, -.5, .04), spine];
       if (floor < 2) interior.push(norm(.14, .46, -.34, .06), norm(-.06, .18, -.18, -.06));
@@ -174,9 +179,10 @@ function makeBody(b: Building): BuildingBody {
       }
       wall.windows = [];
       for (let mid = 2.4; mid < length - 1.6; mid += 4.8) {
-        const from=q(mid-.8),to=q(mid+.8);
+        const half = commercial ? 1.8 : .8, from=q(mid-half),to=q(mid+half);
+        if (to > length-.6) continue;
         if (wall.opening && from < wall.opening.to+.6 && to > wall.opening.from-.6) continue;
-        wall.windows.push({from,to,bottom:.8,top:q(Math.min(2.2,height-.4))});
+        wall.windows.push({from,to,bottom:commercial ? .4 : .8,top:q(commercial ? height-.4 : Math.min(2.2,height-.4))});
       }
       return wall;
     }));
@@ -184,7 +190,7 @@ function makeBody(b: Building): BuildingBody {
       : family === 'finance-health' && b.kind !== 'bank' && !keepEnvelope && floor >= 0 ? { x: 0, z: 0 }
       : family === 'transport-waterfront' && !keepEnvelope && floor > 0 ? { x: q(-w * .40), z: q(-d * .08) }
       : { x: 0, z: q(-d * .34) };
-    const usePoints = family === 'market' && floor === 0 && !keepEnvelope ? [{ id: 'sale-west', x: q(-w * .35), z: q(d * .18) }, { id: 'sale-center', x: 0, z: q(d * .18) }, { id: 'sale-east', x: q(w * .35), z: q(d * .18) }] : [{ id: 'program', ...usePoint }];
+    const usePoints = commercial && floor >= 2 ? [{ id: 'program', ...usePoint }, { id: 'office-west', x: q(-w*.18), z: q(d*.12) }, { id: 'office-east', x: q(w*.22), z: q(d*.12) }] : family === 'market' && floor === 0 && !keepEnvelope ? [{ id: 'sale-west', x: q(-w * .35), z: q(d * .18) }, { id: 'sale-center', x: 0, z: q(d * .18) }, { id: 'sale-east', x: q(w * .35), z: q(d * .18) }] : [{ id: 'program', ...usePoint }];
     plans.push({ floor, y: q(floor * floorHeight), ceilingY: q((floor + 1) * floorHeight), broadphase: full, interior, circulation, courtyard, fixtures:[],stairTreads:[],stairLandings:[],stairHole: floor > -(b.basements ?? 0) ? rect(stair.x-2,stair.x+2,stair.z+.8,stair.z+.8+longestRun+2) : null, stairLanding: rect(stair.x-1.8,stair.x+1.8,stair.z-.8,stair.z+.8), walls, stair, usePoint, usePoints, program: floor < 0 ? b.basementUses?.[-floor - 1] ?? '地下空间' : b.floorUses?.[floor] ?? b.kind, permission: floor < 0 ? 'original-canAccessFloor' : b.floorPermissions?.[floor] ?? (floor < (b.publicFloors ?? b.floors) ? 'public' : b.requiredPermission ?? 'public') });
   }
   for(let index=0;index<plans.length;index++) {
@@ -192,14 +198,27 @@ function makeBody(b: Building): BuildingBody {
     if(next) {
       const levels=Math.round((next.y-p.y)/.2),a=Math.floor(levels/2),z=levels-a,run=Math.max(a,z)*.4,start=p.stair.z+.8,offset=run-a*.4;
       const surface=(id:string,region:Rect,top:number,kind:StairSurface['kind']):StairSurface=>({id,rect:region,bottom:q(top-.2),top:q(top),fromFloor:p.floor,toFloor:next.floor,kind});
-      if(offset>.01)p.stairLandings.push(surface('lower-link',rect(p.stair.x-1.8,p.stair.x-.2,start,start+offset),p.y,'landing'));
-      for(let i=1;i<=a;i++)p.stairTreads.push(surface(`up-${i}`,rect(p.stair.x-1.8,p.stair.x-.2,start+offset+(i-1)*.4,start+offset+i*.4),p.y+i*.2,'tread'));
-      p.stairLandings.push(surface('half-turn',rect(p.stair.x-1.8,p.stair.x+1.8,start+run,start+run+1.6),p.y+a*.2,'landing'));
-      for(let i=1;i<=z;i++)p.stairTreads.push(surface(`return-${i}`,rect(p.stair.x+.2,p.stair.x+1.8,start+run-i*.4,start+run-(i-1)*.4),p.y+(a+i)*.2,'tread'));
+      if(continuousStairs(b)) {
+        // Quantize the common origin once, then use integer voxel offsets.
+        // Algebraically equal floating half-grid expressions otherwise round
+        // opposite ways and leave a genuine .2m gap at the shared turn.
+        const origin=Math.round(start*5),going=2,runTicks=Math.max(a,z)*going,offsetTicks=runTicks-a*going;
+        const edge=(ticks:number)=>(origin+ticks)/5;
+        if(offsetTicks>0)p.stairLandings.push(surface('lower-link',rect(p.stair.x-1.8,p.stair.x-.2,edge(0),edge(offsetTicks)),p.y,'landing'));
+        for(let i=1;i<=a;i++)p.stairTreads.push(surface(`up-${i}`,rect(p.stair.x-1.8,p.stair.x-.2,edge(offsetTicks+(i-1)*going),edge(offsetTicks+i*going)),p.y+i*.2,'tread'));
+        p.stairLandings.push(surface('half-turn',rect(p.stair.x-1.8,p.stair.x+1.8,edge(runTicks),edge(runTicks+8)),p.y+a*.2,'landing'));
+        for(let i=1;i<=z;i++)p.stairTreads.push(surface(`return-${i}`,rect(p.stair.x+.2,p.stair.x+1.8,edge(runTicks-i*going),edge(runTicks-(i-1)*going)),p.y+(a+i)*.2,'tread'));
+      } else {
+        // Preserve old trusted v4 geometry and its complete save fingerprint.
+        if(offset>.01)p.stairLandings.push(surface('lower-link',rect(p.stair.x-1.8,p.stair.x-.2,start,start+offset),p.y,'landing'));
+        for(let i=1;i<=a;i++)p.stairTreads.push(surface(`up-${i}`,rect(p.stair.x-1.8,p.stair.x-.2,start+offset+(i-1)*.4,start+offset+i*.4),p.y+i*.2,'tread'));
+        p.stairLandings.push(surface('half-turn',rect(p.stair.x-1.8,p.stair.x+1.8,start+run,start+run+1.6),p.y+a*.2,'landing'));
+        for(let i=1;i<=z;i++)p.stairTreads.push(surface(`return-${i}`,rect(p.stair.x+.2,p.stair.x+1.8,start+run-i*.4,start+run-(i-1)*.4),p.y+(a+i)*.2,'tread'));
+      }
     }
   }
   for(const p of plans)p.fixtures=createFloorFixtures(b,p);
-  return { buildingId: b.id, family, candidate, needsV4: !keepEnvelope, preserveExistingMesh: keepEnvelope, immutableDimensions: { width: b.width, depth: b.depth, height: b.height, floors: b.floors, basements: b.basements ?? 0, door: { ...b.door } }, floorPlans: plans, roofRhythm: ({ home: 'split-gable', market: 'hall-and-shops', workshop: 'industrial-spans', 'civic-academy': 'court-wings', 'finance-health': 'hall-and-service-tower', 'transport-waterfront': 'covered-platform' })[family] as BuildingBody['roofRhythm'] };
+  return { buildingId: b.id, family, candidate, needsV4: !keepEnvelope, preserveExistingMesh: keepEnvelope, immutableDimensions: { width: b.width, depth: b.depth, height: b.height, floors: b.floors, basements: b.basements ?? 0, door: { ...b.door } }, floorPlans: plans, roofRhythm: commercial ? 'terraced-finance-tower' : ({ home: 'split-gable', market: 'hall-and-shops', workshop: 'industrial-spans', 'civic-academy': 'court-wings', 'finance-health': 'hall-and-service-tower', 'transport-waterfront': 'covered-platform' })[family] as BuildingBody['roofRhythm'] };
 }
 
 
@@ -207,6 +226,8 @@ export interface WallPanel { rect: Rect; bottom: number; top: number; kind: 'sol
 export interface FloorSupport { kind: 'room' | 'courtyard' | 'gallery' | 'stairs' | 'roof'; floor: number; y: number; local: { x: number; z: number }; link?: {fromFloor:number;toFloor:number} }
 export interface RoofRegion { rect: Rect; bottom: number; top: number; floor: number; kind: 'gallery-flat' | 'weather-strip' | 'gable'; gableAxis?: 'x' | 'z'; anchor: 'minimum' }
 interface BodyCache {
+  commercial: boolean;
+  continuousStairs: boolean;
   width: number; depth: number; height: number; floors: number; basements: number; rotation: number;
   x: number; y: number; z: number; kind: Building['kind']; publicFloors: Building['publicFloors'];
   requiredPermission: Building['requiredPermission']; facility: Building['facility'];
@@ -216,9 +237,9 @@ const bodies = new WeakMap<Building, BodyCache>();
 export function getBuildingBody(b: Building): BuildingBody | null {
   if (b.floorPlanProfile !== FLOOR_PLAN_PROFILE || b.id === 'core-main' || b.kind === 'pavilion') return null;
   const cached=bodies.get(b);
-  if(cached && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
+  if(cached && cached.commercial===(b.commercialGeometryRevision===1) && cached.continuousStairs===continuousStairs(b) && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
   const body=makeBody(b);
-  bodies.set(b,{width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
+  bodies.set(b,{commercial:b.commercialGeometryRevision===1,continuousStairs:continuousStairs(b),width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
   return body;
 }
 export function getBuildingFloorPlan(b: Building,floor: number): FloorPlan | null { return getBuildingBody(b)?.floorPlans.find(p=>p.floor===floor) ?? null; }
@@ -314,18 +335,27 @@ function localSolids(b:Building,p:FloorPlan,plans=nearPlans(b,p),surfaces=stairS
 }
 interface RectSnapshot {rect:Rect;x0:number;x1:number;z0:number;z1:number}
 interface SupportFootprint {regions:Rect[];boundaries:[number,number][][]|null}
-interface SupportFootprints {y:number;base:RectSnapshot[];stairs:(RectSnapshot&{top:number})[];byTop:Map<number,SupportFootprint>}
+interface SupportFootprints {y:number;base:RectSnapshot[];slabs:{plan:FloorPlan;top:number;regions:RectSnapshot[]}[];stairs:(RectSnapshot&{top:number})[];byTop:Map<number,SupportFootprint>}
 const supportFootprintCache=new WeakMap<FloorPlan,SupportFootprints>();
 const snapshotRect=(r:Rect):RectSnapshot=>({rect:r,x0:r.x0,x1:r.x1,z0:r.z0,z1:r.z1});
 const sameRect=(saved:RectSnapshot,r:Rect)=>saved.rect===r&&saved.x0===r.x0&&saved.x1===r.x1&&saved.z0===r.z0&&saved.z1===r.z1;
-function supportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurface[]):SupportFootprints {
+function supportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurface[],plans:FloorPlan[]):SupportFootprints {
   const cached=supportFootprintCache.get(p);
   let unchanged=!!cached&&cached.y===p.y&&cached.base.length===base.length&&cached.stairs.length===surfaces.length;
   if(unchanged)for(let i=0;i<base.length;i++)if((i in base)!==(i in cached!.base)||(i in base&&!sameRect(cached!.base[i],base[i]))){unchanged=false;break;}
   if(unchanged)for(let i=0;i<surfaces.length;i++)if(cached!.stairs[i].top!==surfaces[i].top||!sameRect(cached!.stairs[i],surfaces[i].rect)){unchanged=false;break;}
+  if(unchanged) {
+    if(cached!.slabs.length!==plans.length)unchanged=false;
+    for(let i=0;i<plans.length;i++) {
+      const plan=plans[i],regions=getFloorPlanSlabRegions(plan),saved=cached!.slabs[i];
+      if(!saved||saved.plan!==plan||saved.top!==plan.y||saved.regions.length!==regions.length){unchanged=false;continue;}
+      for(let j=0;j<regions.length;j++)if((j in regions)!==(j in saved.regions)||(j in regions&&!sameRect(saved.regions[j],regions[j]))){unchanged=false;break;}
+    }
+  }
   if(unchanged)return cached!;
   const stairs=surfaces.map(s=>({top:s.top,...snapshotRect(s.rect)}));
-  const result:SupportFootprints={y:p.y,base:base.map(snapshotRect),stairs,byTop:new Map()};
+  const slabs=plans.map(plan=>({plan,top:plan.y,regions:getFloorPlanSlabRegions(plan).map(snapshotRect)}));
+  const result:SupportFootprints={y:p.y,base:base.map(snapshotRect),slabs,stairs,byTop:new Map()};
   // Clear all height entries when their mutable geometry changes. This also
   // bounds the map to the current floor height and current stair heights.
   supportFootprintCache.set(p,result);return result;
@@ -341,9 +371,9 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   let footprints:SupportFootprints|undefined;
   const diskSupportedAt=(top:number):boolean=>{
     const cached=supportedAt.get(top);if(cached!==undefined)return cached;
-    footprints??=supportFootprints(p,base,surfaces);
+    footprints??=supportFootprints(p,base,surfaces,plans);
     let footprint=footprints.byTop.get(top);
-    if(!footprint){const regions=[...base];for(const s of surfaces)if(s.top<=top+.22+eps&&s.top>=top-.42-eps)regions.push(s.rect);footprint={regions,boundaries:null};footprints.byTop.set(top,footprint);}
+    if(!footprint){const regions:Rect[]=[];for(const slab of footprints.slabs)if(slab.top<=top+.22+eps&&slab.top>=top-.42-eps)regions.push(...slab.regions.map(s=>s.rect));for(const s of surfaces)if(s.top<=top+.22+eps&&s.top>=top-.42-eps)regions.push(s.rect);footprint={regions,boundaries:null};footprints.byTop.set(top,footprint);}
     const supported=containsUnion(footprint.regions,local.x,local.z)&&(radius===0||(footprint.boundaries??=boundaryLoops(footprint.regions)).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
     supportedAt.set(top,supported);return supported;
   };
@@ -431,10 +461,39 @@ function routeGrid(p:FloorPlan,radius:number):RouteGrid {
   const walkable=new Uint8Array(nx*nz);for(let z=0;z<nz;z++)for(let x=0;x<nx;x++)walkable[z*nx+x]=Number(canStandInFloorPlan(p,x0+x*step,z0+z*step,radius));
   const g={x0,z0,nx,nz,step,walkable};maps.set(radius,g);return g;
 }
+interface StairRecovery { link:NonNullable<FloorSupport['link']>; index:number; point:Vec3; distance:number }
+/** A stair/slab union can support a body while the planar slab alone cannot.
+ * At an upper exit the selected slab support has no link. Recover only through
+ * an adjacent real stair route with a supported, clear connector, and retain
+ * that exact connector in the returned route rather than cutting to a vertex. */
+function stairRecoveries(b:Building,p:FloorPlan,from:Vec3,radius:number,support:FloorSupport|null,segmentBlocked?:(from:Vec3,to:Vec3)=>boolean):StairRecovery[]|null {
+  if(!support)return null;
+  const local=buildingLocalPosition(b,from);
+  if(Math.abs(from.y-(b.position.y+.6+p.y))<=.01&&canStandInFloorPlan(p,local.x,local.z,radius))return null;
+  if(!support.link&&support.kind!=='stairs')return null;
+  const candidates:StairRecovery[]=[];
+  for(const fromFloor of support.link?[support.link.fromFloor]:[p.floor-1,p.floor]) {
+    const route=getFloorPlanStairRoute(b,fromFloor,fromFloor+1);if(!route)continue;
+    for(let i=0;i<route.length-1;i++) {
+      const a=route[i],z=route[i+1],dx=z.x-a.x,dy=z.y-a.y,dz=z.z-a.z,l2=dx*dx+dy*dy+dz*dz;
+      const t=l2?Math.max(0,Math.min(1,((from.x-a.x)*dx+(from.y-a.y)*dy+(from.z-a.z)*dz)/l2)):0;
+      const nearest={x:a.x+t*dx,y:a.y+t*dy,z:a.z+t*dz},d=Math.hypot(nearest.x-from.x,nearest.y-from.y,nearest.z-from.z);
+      if((!support.link&&Math.abs(nearest.y-from.y)>.01)||segmentBlocked?.(from,nearest)||blocksFloorPlanMovement(b,p.floor,from,nearest,radius))continue;
+      const steps=Math.max(1,Math.ceil(d/.1));let clear=true;
+      for(let step=0;step<=steps;step++) {
+        const fraction=step/steps,point={x:from.x+(nearest.x-from.x)*fraction,y:from.y+(nearest.y-from.y)*fraction,z:from.z+(nearest.z-from.z)*fraction};
+        const actual=floorPlanSupport(b,p.floor,point,radius);
+        if(!actual||(!support.link&&Math.abs(actual.y-point.y)>.01)){clear=false;break;}
+      }
+      if(clear)candidates.push({link:{fromFloor,toFloor:fromFloor+1},index:i,point:nearest,distance:d});
+    }
+  }
+  return candidates.sort((a,z)=>a.distance-z.distance||a.link.fromFloor-z.link.fromFloor||a.index-z.index);
+}
 /** Deterministic physical route on one shared floor. Legacy/unknown returns null. */
 export function findFloorPlanRoute(b:Building,floor:number,fromWorld:Vec3,toWorld:Vec3,radius=.35,segmentBlocked?: (from:Vec3,to:Vec3)=>boolean):Vec3[]|null {
   const p=getBuildingFloorPlan(b,floor);if(!p)return null;
-  const support=floorPlanSupport(b,floor,fromWorld,radius);if(support?.link&&Math.abs(fromWorld.y-(b.position.y+.6+p.y))>.01)return findBuildingFloorPlanRoute(b,floor,floor,fromWorld,toWorld,radius,segmentBlocked);
+  const support=floorPlanSupport(b,floor,fromWorld,radius);if(stairRecoveries(b,p,fromWorld,radius,support,segmentBlocked)!==null)return findBuildingFloorPlanRoute(b,floor,floor,fromWorld,toWorld,radius,segmentBlocked);
   const originalFrom=buildingLocalPosition(b,fromWorld),originalTo=buildingLocalPosition(b,toWorld);
   const endpoint=(point:Vec3):Vec3|null=>{
     if(canStandInFloorPlan(p,point.x,point.z,radius))return {...point,y:p.y};
@@ -471,25 +530,43 @@ export function findFloorPlanRoute(b:Building,floor:number,fromWorld:Vec3,toWorl
   if(Math.hypot(originalTo.x-to.x,originalTo.z-to.z)>eps)world.push({...toWorld});return world;
 }
 
-/** Actual .2-rise/.4-going stair surfaces provide every cross-floor waypoint. */
+/** Actual .2-rise/.4-going surfaces remain authoritative. Only the declared
+ * commercial route revision keeps straight-flight endpoints instead of each
+ * collinear tread centre, retaining landings/turns within the saved route cap. */
 export function getFloorPlanStairRoute(b:Building,fromFloor:number,toFloor:number):Vec3[]|null {
   if(toFloor!==fromFloor+1)return null;const p=getBuildingFloorPlan(b,fromFloor),next=getBuildingFloorPlan(b,toFloor);if(!p||!next||!p.stairTreads.length)return null;
   const cx=p.stair.x,cz=p.stair.z,left=cx-1,right=cx+1,local:Vec3[]=[{x:cx,y:p.y,z:cz},{x:left,y:p.y,z:cz+.4}];
   const lower=p.stairLandings.find(s=>s.id==='lower-link');if(lower)local.push({x:left,y:lower.top,z:(lower.rect.z0+lower.rect.z1)/2});
-  for(const t of p.stairTreads.filter(s=>s.id.startsWith('up-')))local.push({x:left,y:t.top,z:(t.rect.z0+t.rect.z1)/2});
+  const compact=b.commercialGeometryRevision===1&&b.commercialRouteRevision===1&&continuousStairs(b);
+  const flight=(prefix:string)=>{const treads=p.stairTreads.filter(s=>s.id.startsWith(prefix));return compact&&treads.length>2?[treads[0],treads[treads.length-1]]:treads;};
+  for(const t of flight('up-'))local.push({x:left,y:t.top,z:(t.rect.z0+t.rect.z1)/2});
   const turn=p.stairLandings.find(s=>s.id==='half-turn')!;const z=(turn.rect.z0+turn.rect.z1)/2;local.push({x:left,y:turn.top,z},{x:right,y:turn.top,z});
-  for(const t of p.stairTreads.filter(s=>s.id.startsWith('return-')))local.push({x:right,y:t.top,z:(t.rect.z0+t.rect.z1)/2});
+  for(const t of flight('return-'))local.push({x:right,y:t.top,z:(t.rect.z0+t.rect.z1)/2});
   local.push({x:right,y:next.y,z:cz+.4},{x:cx,y:next.y,z:cz});return local.map(point=>buildingWorldPosition(b,point));
 }
 export function findBuildingFloorPlanRoute(b:Building,fromFloor:number,toFloor:number,fromWorld:Vec3,toWorld:Vec3,radius=.35,segmentBlocked?:(from:Vec3,to:Vec3)=>boolean):Vec3[]|null {
   if(!getBuildingFloorPlan(b,fromFloor)||!getBuildingFloorPlan(b,toFloor))return null;
   const p=getBuildingFloorPlan(b,fromFloor)!,support=floorPlanSupport(b,fromFloor,fromWorld,radius);
-  if(support?.link&&Math.abs(fromWorld.y-(b.position.y+.6+p.y))>.01) {
-    const link=support.link,whole=getFloorPlanStairRoute(b,link.fromFloor,link.toFloor)!;
-    let index=0,distance=Infinity;for(let i=0;i<whole.length;i++){const candidate=Math.hypot(whole[i].x-fromWorld.x,whole[i].y-fromWorld.y,whole[i].z-fromWorld.z);if(candidate<distance){distance=candidate;index=i;}}
-    const down=toFloor<=link.fromFloor,path=down?whole.slice(0,index+1).reverse():whole.slice(index),exitFloor=down?link.fromFloor:link.toFloor,exit=path[path.length-1];
-    const tail=findBuildingFloorPlanRoute(b,exitFloor,toFloor,exit,toWorld,radius,segmentBlocked);if(!tail)return null;
-    const result=[{...fromWorld},...path,...tail.slice(1)];for(let i=1;i<result.length;i++)if(segmentBlocked?.(result[i-1],result[i]))return null;return result;
+  const recoveries=stairRecoveries(b,p,fromWorld,radius,support,segmentBlocked);
+  if(recoveries!==null) {
+    // An empty list means recovery failed; do not flatten supported stair feet
+    // onto the floor's planar y. Try clear attachments in distance order.
+    for(const recovery of recoveries) {
+      const {link,index,point}=recovery,whole=getFloorPlanStairRoute(b,link.fromFloor,link.toFloor)!;
+      const down=toFloor<=link.fromFloor,path=down?whole.slice(0,index+1).reverse():whole.slice(index+1),exitFloor=down?link.fromFloor:link.toFloor,exit=path[path.length-1];
+      const prefix=[{...fromWorld},point,...path],exitPlan=getBuildingFloorPlan(b,exitFloor)!;
+      const exitLocal=buildingLocalPosition(b,exit);
+      // Recovery must finish on a real planar landing. A mutated descriptor or
+      // body radius that cannot stand there cannot recursively recover again.
+      if(!canStandInFloorPlan(exitPlan,exitLocal.x,exitLocal.z,radius)||prefix.some((point,i)=>i>0&&segmentBlocked?.(prefix[i-1],point)))continue;
+      const tail=findBuildingFloorPlanRoute(b,exitFloor,toFloor,exit,toWorld,radius,segmentBlocked);if(!tail)continue;
+      const result=[...prefix,...tail.slice(1)];
+      // Preserve the caller's complete-segment guard, including a ground door
+      // endpoint appended by the planar tail and the prefix/tail seam.
+      if(result.some((point,i)=>i>0&&segmentBlocked?.(result[i-1],point)))continue;
+      return result;
+    }
+    return null;
   }
   if(fromFloor===toFloor)return findFloorPlanRoute(b,fromFloor,fromWorld,toWorld,radius,segmentBlocked);
   const start=getFloorPlanStairPosition(b,fromFloor),end=getFloorPlanStairPosition(b,toFloor),first=findFloorPlanRoute(b,fromFloor,fromWorld,start,radius,segmentBlocked),last=findFloorPlanRoute(b,toFloor,end,toWorld,radius,segmentBlocked);if(!first||!last)return null;

@@ -1,0 +1,333 @@
+{
+  "at": "2026-10-04T02:43:17.828607+00:00",
+  "status": "PASS_ORIGINAL7_AND_READONLY_NATIVE_EVIDENCE",
+  "original7Results": [
+    "School native UI rejects absent child and signs a true 40-cash guardian escrow only when both are physically present.",
+    "Actual UI reports one real supplier receipt, a paid native teacher, earned minutes, original payer and escrow; partial study grants no qualification.",
+    "Physical departure pauses teaching, and original guardian physically resumes the same course with no catchup or second charge.",
+    "Cancel native UI returns only actual unearned escrow to original wallet, keeps the paid unused textbook at school and retains all partial history.",
+    "Existing life/family pane exposes the same causal native school contract and preserved original canceled history.",
+    "After a controlled child death, original payer retains visible canceled tuition rights in the family pane while new dependent signing is disabled.",
+    "Real resulting canceled course save imports byte exactly; browser has no console or page errors."
+  ],
+  "nativeStages": [
+    {
+      "stage": "school-partial-course",
+      "tick": 65,
+      "day": 0,
+      "hour": 8.270833333333334,
+      "player": {
+        "position": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "money": 420,
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ]
+      },
+      "childId": "resident-1",
+      "childEducation": 0,
+      "reader": {
+        "ok": true,
+        "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "exact": true
+      },
+      "originalSimulationUnchanged": true,
+      "saveBytes": 450966,
+      "saveSHA256": "914eae488ec4c0bd5edb4cd3dfbfdc40d8af5177b093c5e38d41e130e0d75e9f",
+      "pngSHA256": "33d92083923c23bc265d3d870da7b56617e6601224fc6c323cc71f0875303479",
+      "course": {
+        "id": "family-course-1",
+        "actorId": "resident-1",
+        "payerId": "player",
+        "guardianKind": "parent",
+        "guardianIds": [
+          "player",
+          "citizen-206"
+        ],
+        "siteId": "education-school",
+        "pointId": "0:program:service",
+        "point": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "floor": 0,
+        "status": "studying",
+        "funded": 40,
+        "workedMinutes": 7.75,
+        "escrow": 31.350000000000044,
+        "purchasePaid": 4,
+        "serviceFees": 4.65,
+        "refunded": 0,
+        "receivedUnits": 1,
+        "reusedUnits": 0,
+        "reservedUnits": 1,
+        "consumedUnits": 0,
+        "receipt": {
+          "purchasedAt": 3553924.25,
+          "shopId": "shop-education-workshop",
+          "quantity": 1,
+          "unitPrice": 4,
+          "gross": 4,
+          "net": 3.68,
+          "tax": 0.31999999999999984
+        },
+        "staffMinutes": {
+          "citizen-2": 7.75
+        },
+        "startedAt": 3553924,
+        "cancelledAt": null
+      },
+      "calls": [
+        {
+          "command": {
+            "type": "enrollFamilyCourse",
+            "targetId": "resident-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "40文由法定监护人实付托管；每课须真实教材和教师共同六十分钟。"
+          }
+        }
+      ],
+      "actuallyViewedPNG": true,
+      "actualChildAlive": true
+    },
+    {
+      "stage": "household-cancelled-before-death",
+      "tick": 73,
+      "day": 0,
+      "hour": 8.304166666666667,
+      "player": {
+        "position": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "money": 451.35,
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ]
+      },
+      "childId": "resident-1",
+      "childEducation": 0,
+      "reader": {
+        "ok": true,
+        "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "exact": true
+      },
+      "originalSimulationUnchanged": true,
+      "saveBytes": 446127,
+      "saveSHA256": "bbe4377b9ff7bce7bc30898a55d92a63cb7fb09daf0dd0d40c68254b8c4321c2",
+      "pngSHA256": "f1c338bb4cfb5891a27ca96b7b17b065d9d77cd5486f9b44d3cae361330c1b01",
+      "course": {
+        "id": "family-course-1",
+        "actorId": "resident-1",
+        "payerId": "player",
+        "guardianKind": "parent",
+        "guardianIds": [
+          "player",
+          "citizen-206"
+        ],
+        "siteId": "education-school",
+        "pointId": "0:program:service",
+        "point": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "floor": 0,
+        "status": "cancelled",
+        "funded": 40,
+        "workedMinutes": 7.75,
+        "escrow": 0,
+        "purchasePaid": 4,
+        "serviceFees": 4.65,
+        "refunded": 31.350000000000044,
+        "receivedUnits": 1,
+        "reusedUnits": 0,
+        "reservedUnits": 0,
+        "consumedUnits": 0,
+        "receipt": {
+          "purchasedAt": 3553924.25,
+          "shopId": "shop-education-workshop",
+          "quantity": 1,
+          "unitPrice": 4,
+          "gross": 4,
+          "net": 3.68,
+          "tax": 0.31999999999999984
+        },
+        "staffMinutes": {
+          "citizen-2": 7.75
+        },
+        "startedAt": 3553924,
+        "cancelledAt": 3553934
+      },
+      "calls": [
+        {
+          "command": {
+            "type": "enrollFamilyCourse",
+            "targetId": "resident-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "40文由法定监护人实付托管；每课须真实教材和教师共同六十分钟。"
+          }
+        },
+        {
+          "command": {
+            "type": "resumeFamilyCourse",
+            "targetId": "family-course-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "原课程现场恢复，不重复收费；只计之后的真实教师与子女共同窗口。"
+          }
+        },
+        {
+          "command": {
+            "type": "cancelFamilyCourse",
+            "targetId": "family-course-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "课程停止；已赚服务保留，未赚款退原付款人，未耗真实教材保留原学堂。"
+          }
+        }
+      ],
+      "actuallyViewedPNG": true,
+      "actualChildAlive": true
+    },
+    {
+      "stage": "after-death",
+      "tick": 74,
+      "day": 0,
+      "hour": 8.308333333333334,
+      "player": {
+        "position": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "money": 501.35,
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ]
+      },
+      "childId": "resident-1",
+      "childEducation": 0,
+      "reader": {
+        "ok": true,
+        "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "exact": true
+      },
+      "originalSimulationUnchanged": true,
+      "saveBytes": 447418,
+      "saveSHA256": "a67ffdf37023c30e8beaa47575e918563482cf8ac147469ebb40c0b5c4911eab",
+      "pngSHA256": "b5d97971d8182a5a8daaea3d3b460d3a26f1fe6f004e6c8c3eff8bbd46685e63",
+      "course": {
+        "id": "family-course-1",
+        "actorId": "resident-1",
+        "payerId": "player",
+        "guardianKind": "parent",
+        "guardianIds": [
+          "player",
+          "citizen-206"
+        ],
+        "siteId": "education-school",
+        "pointId": "0:program:service",
+        "point": {
+          "x": 180,
+          "y": 0.6,
+          "z": -13
+        },
+        "floor": 0,
+        "status": "cancelled",
+        "funded": 40,
+        "workedMinutes": 7.75,
+        "escrow": 0,
+        "purchasePaid": 4,
+        "serviceFees": 4.65,
+        "refunded": 31.350000000000044,
+        "receivedUnits": 1,
+        "reusedUnits": 0,
+        "reservedUnits": 0,
+        "consumedUnits": 0,
+        "receipt": {
+          "purchasedAt": 3553924.25,
+          "shopId": "shop-education-workshop",
+          "quantity": 1,
+          "unitPrice": 4,
+          "gross": 4,
+          "net": 3.68,
+          "tax": 0.31999999999999984
+        },
+        "staffMinutes": {
+          "citizen-2": 7.75
+        },
+        "startedAt": 3553924,
+        "cancelledAt": 3553934
+      },
+      "calls": [
+        {
+          "command": {
+            "type": "enrollFamilyCourse",
+            "targetId": "resident-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "40文由法定监护人实付托管；每课须真实教材和教师共同六十分钟。"
+          }
+        },
+        {
+          "command": {
+            "type": "resumeFamilyCourse",
+            "targetId": "family-course-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "原课程现场恢复，不重复收费；只计之后的真实教师与子女共同窗口。"
+          }
+        },
+        {
+          "command": {
+            "type": "cancelFamilyCourse",
+            "targetId": "family-course-1"
+          },
+          "result": {
+            "ok": true,
+            "message": "课程停止；已赚服务保留，未赚款退原付款人，未耗真实教材保留原学堂。"
+          }
+        }
+      ],
+      "actuallyViewedPNG": true,
+      "actualChildAlive": false
+    }
+  ],
+  "sourceCount": 241,
+  "runtimeSourceCount": 55,
+  "uiSHA256": "0a5b600ea4be90b4f5aaa0c919a4a999a7bf84245c13bc7dd39dac31493deecf",
+  "externalDriverSHA256": "2881919d55d86df58508257e9b0c265964d6fb24afd5532c347bd4ae14f41768",
+  "sevenOriginalBlockSHA256": "2e7cf67eb83bff4a7489fcc7d447625e632d10238e428eb5d8c40e3d648fe251",
+  "actualResultSHA256": "503c4447a1ec3d9b1349351feb254ae47fee961b2196e5dbf9864a2b2b129f41",
+  "rawSHA256": "5ce03091aeeaaf94f7938a5ecebc812cbc8fe9be3019a37e1046cda8f97b8ce9",
+  "inputsStable": true,
+  "distStable": true,
+  "scope": "Native DOM with actual saved Simulation and controlled physical classroom fixture. No WebGL/GPU, natural commute, age growth or 14-day claim.",
+  "legacyAndGuardianScope": "Frozen UI preserves current-guardian, former-payer/refund and legacy-qualified labels. DOM7 assertions unchanged; separate legacy/care/death Node inputs archived only, no additional DOM cases.",
+  "notVerified": [
+    "current-guardian-change browser branch",
+    "legacy-qualified label browser branch",
+    "natural growth/commute/default full city family life",
+    "mayor/new roadcrew/company return additional browser branches"
+  ],
+  "nativeEvidenceScope": "Additional read-only saves/world/DOM/calls after original school and household screenshots plus actual after-death observer. Original seventh saveCheck remains cancelled-before-death; after-death reader evidence is separately identified.",
+  "visualScope": "All three original PNGs actually viewed. DOM-only page has no3D renderer; supplied view.fps60/drawCalls0 are controlled UI values, not measured hardware performance. Household card PNG captured during existing CSS pane transition; original byte retained.",
+  "walletAfterDeath": "Native inheritance adds50 from child cash100 split among two heirs. Terminal wallet501.35 is not a tuition refund of50 and is not constructed by the evidence driver."
+}

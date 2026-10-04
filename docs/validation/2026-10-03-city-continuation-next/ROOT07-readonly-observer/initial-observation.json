@@ -1,0 +1,136 @@
+{
+  "observedAt": "2026-10-04T01:49:17.552101+00:00",
+  "status": "RUNNING",
+  "latestProgress": {
+    "kind": "progress",
+    "tick": 1000,
+    "requestedTicks": 10080,
+    "elapsedGameMinutes": 2000,
+    "alive": 616,
+    "treasury": 69118.87999038426
+  },
+  "latestDailySample": {
+    "tick": 1000,
+    "day": 1,
+    "treasury": 69118.87999038426,
+    "npc": {
+      "alive": 616,
+      "total": 616,
+      "meanHealth": 91.71007891731786,
+      "meanHunger": 76.69010318029832,
+      "meanFatigue": 76.32917709246254,
+      "livingMeanHealth": 91.71007891731786,
+      "livingMeanHunger": 76.69010318029832,
+      "livingMeanFatigue": 76.32917709246254,
+      "researchCompleted": 1,
+      "companies": 12,
+      "zeroCapitalCompanies": 0,
+      "playerAlive": true,
+      "poor": 0,
+      "storedFood": 388,
+      "byRole": {
+        "学生": {
+          "count": 64,
+          "money": 278.769608063953,
+          "hunger": 86.35937500000007,
+          "health": 91.64654068361912
+        },
+        "农民": {
+          "count": 28,
+          "money": 326.5577989294903,
+          "hunger": 81.10204164779512,
+          "health": 93.1367529059407
+        },
+        "钱庄职员": {
+          "count": 41,
+          "money": 331.0624297213396,
+          "hunger": 63.94295626785252,
+          "health": 91.38057256697513
+        },
+        "商人": {
+          "count": 145,
+          "money": 317.54754915087443,
+          "hunger": 83.39234287219338,
+          "health": 92.64165435381335
+        },
+        "医生": {
+          "count": 51,
+          "money": 334.64237055959717,
+          "hunger": 81.7956121318089,
+          "health": 91.75259554949044
+        },
+        "官员": {
+          "count": 83,
+          "money": 353.1893212439362,
+          "hunger": 66.07699746890675,
+          "health": 90.43913564669525
+        },
+        "驾驶员": {
+          "count": 47,
+          "money": 345.4744150312995,
+          "hunger": 60.564138038376235,
+          "health": 91.00258610425051
+        },
+        "老师": {
+          "count": 34,
+          "money": 326.94962547665887,
+          "hunger": 86.54117647058824,
+          "health": 91.06215289516416
+        },
+        "警察": {
+          "count": 22,
+          "money": 358.70810506634064,
+          "hunger": 73.31143316875047,
+          "health": 90.6172893971386
+        },
+        "工人": {
+          "count": 75,
+          "money": 299.3327473107078,
+          "hunger": 72.79683257757102,
+          "health": 92.00493107948725
+        },
+        "搬运工": {
+          "count": 17,
+          "money": 286.5121099082258,
+          "hunger": 80.4352941176483,
+          "health": 93.81359543002918
+        },
+        "科研员": {
+          "count": 7,
+          "money": 261.43584645745943,
+          "hunger": 94.9714285714285,
+          "health": 88.15456820322107
+        },
+        "scientist": {
+          "count": 2,
+          "money": 176.38173917007734,
+          "hunger": 90,
+          "health": 87.81444846700023
+        }
+      }
+    },
+    "derivedNpcMoneyFromExactPrintedRoleMeans": 197732.94149777887,
+    "derivationScope": "Derived by summing printed role count * printed role mean; not a physical-cash conservation check."
+  },
+  "rawPrefixSHA256": "912fda33161aba22b4a1cdfbe7a6bb0d286748b845c31d94876f21f31d8f7272",
+  "observerOwnedProcess": {
+    "pid": 23397,
+    "group": 23397,
+    "argv": [
+      "python",
+      "-u",
+      "/workspace/yunshan-work/root07-economy-readonly-observer-20261004-01/observe.py"
+    ],
+    "membersAtStart": [
+      {
+        "pid": 23397,
+        "state": "R",
+        "parent": 23384,
+        "group": 23397,
+        "session": 23397,
+        "startTicks": 924645
+      }
+    ]
+  },
+  "observerScriptSHA256": "337a6295e6ba26caf06677959b09f171331ef46a8bfc68e89a581cdc42b20ef2"
+}

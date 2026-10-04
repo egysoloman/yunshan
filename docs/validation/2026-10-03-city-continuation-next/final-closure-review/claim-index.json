@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "status": "STATIC_CONFIRMED_FROM_ACTUAL_ENDED_ORIGINALS",
+    "claim": "Actual audit FAIL615/playerDead;10080ticks/20160min;56 source hashes;actual terminal bytes/SHA; independent immediate/full24 PASSED.",
+    "evidence": "ROOT07-terminal-binding-review.json",
+    "sha256": "26639b1feddb4b13cfaeceead052f3d2d65ea3a085799917614d5937311dfeb6"
+  },
+  {
+    "id": "2",
+    "status": "STATIC_CONFIRMED_FROM_ACTUAL_ENDED_ORIGINALS",
+    "claim": "Previously13 completed scopes plus actual ended14d make14 current records, not13; no crossscope sum.",
+    "evidence": "report-originals-review.json",
+    "sha256": "0e858f56afb8380aad1cc584c5379446cb9bcaad7b7af4418ef5d6d7d629722d"
+  },
+  {
+    "id": "3",
+    "status": "STATIC_BYTEEXACT_CONFIRMED",
+    "claim": "3 death summary files +15 observer originals match original bytes and receipt SHA.",
+    "evidence": "Git-copy-byte-review.json",
+    "sha256": "bd254bf0d46778907bdd5bc259c9b3ff850ea305f57e444e16c345cc2d5ccb1d"
+  },
+  {
+    "id": "4",
+    "status": "CLOSED_EXIT0_HISTORICAL_MARKER_PRESENT",
+    "claim": "Exit0/active[]/ownedPID absent;status.json remains historicalRUNNING, final authorityterminal-report/observerreceipt; Git copy receipt marks historical.",
+    "evidence": "observer-final-closure-review.json",
+    "sha256": "ed754ae329bb933aa3059e9c859599acec5358871f216fa1cf64424a3bc3b4e4"
+  },
+  {
+    "id": "5",
+    "status": "PACK_BLOCKED_WAITING_PRODUCERS",
+    "claim": "43 unique groups present;packAllowedfalse;waiting producer+ROOT08;this review to be added only after close.",
+    "evidence": "plan-closure-review.json",
+    "sha256": "c44af61e4392955b46118e8ddeeb460e55ee23b2a30acd5daf790b1cc9935a85"
+  },
+  {
+    "id": "6",
+    "status": "STATIC_CODE_REVIEWED_NOT_RUN",
+    "claim": "Preserves full original source paths/fails/full saves/producerZIPs.64MiB files are ordered chunks of one ZIP. Independent actual-part readback and complete member names/count validation required after packing.",
+    "evidence": "static-code-review.json",
+    "sha256": "f9a6def401d2307aa8b1e1aeab3720b4e561fe315b0499aaeb52135708f2e58a"
+  },
+  {
+    "id": "7",
+    "status": "PENDING_ACTUAL_FINAL_INVENTORY_RUN",
+    "claim": "Collector outer zero is insufficient;root must require decodedPASS bound to finalinventorySHA and reject incomplete/error/source-change counts before actual delivery.",
+    "evidence": "transport-readiness-review.json",
+    "sha256": "9490e631e703f103801c46216e0da68e7d2043d6af234f53665162285cf7406f"
+  },
+  {
+    "id": "8",
+    "status": "STATIC_GUARDS_CONFIRMED_NOT_EXECUTED",
+    "claim": "Fresh FROZEN_CURRENT_SOURCE/strictallSHA/nooverlay;manifestbytes equality;explicitrequire immune-O;runtimeMatchesROOT07false;historicalMZ compiled label.",
+    "evidence": "static-code-review.json",
+    "sha256": "f9a6def401d2307aa8b1e1aeab3720b4e561fe315b0499aaeb52135708f2e58a"
+  },
+  {
+    "id": "9",
+    "status": "NOT_YET_CONFIRMED",
+    "claim": "No archive or Library result produced by this reviewer. Container paths alone are not delivered artifacts;root owns actual final batch or verified Git fallback.",
+    "evidence": "transport-readiness-review.json",
+    "sha256": "9490e631e703f103801c46216e0da68e7d2043d6af234f53665162285cf7406f"
+  },
+  {
+    "id": "10",
+    "status": "RUNNING_WAIT_FOR_ACTUAL_RECEIPTS",
+    "claim": "No active group archived or inferredPASS;new runtime and newtest require actual new manifest/sourcepack receipt.ROOT07 241+8=249 applies only old distinct manifest and extras.",
+    "evidence": "plan-closure-review.json",
+    "sha256": "c44af61e4392955b46118e8ddeeb460e55ee23b2a30acd5daf790b1cc9935a85"
+  }
+]

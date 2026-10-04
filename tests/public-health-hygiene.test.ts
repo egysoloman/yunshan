@@ -161,6 +161,12 @@ test('actual old-origin care stays byte-identical, and only a future public pati
 
 function incubatingPublicCare() {
   const context = prepare(), { sim, site, doctor, controls, order } = context;
+  // This case intentionally isolates two manual material/contact contracts.
+  // The public-care approval is already real; reviewers return home so the
+  // new autonomous housekeeping does not consume the pending manual units.
+  for (const person of sim.state.citizens.filter(person => ['官员', '财政官', 'official', '议员', 'council'].includes(person.role))) {
+    const home = sim.worldDefinition.buildings.find(site => site.id === person.homeId)!; pin(sim, controls, person.id, home, home.door);
+  }
   assert.ok(seedControlledYV1Source(sim, 'player', 'controlled primary source for actual incubating public care'));
   finish(context); advance(sim, sim.state.clinical!.nextVisitAt.player - at(sim));
   const paid = begin(sim, site); for (let tick = 0; paid.state !== 'completed' && tick < 30; tick++) sim.step(.25);

@@ -4,6 +4,7 @@ import { canAccessFloor } from '../src/access';
 import { buildingLocalPosition, buildingWorldPosition, canStandInFloorPlan, floorPlanSupport, getBuildingFloorPlan } from '../src/architecture-floor-plan';
 import { Simulation } from '../src/simulation';
 import { createWorld } from '../src/world';
+import { applyShopLifecycleCommand } from '../src/simulation/shop_lifecycle';
 import { completePaidCourse } from './education-fixture';
 import type { Building, BuildingFunctionPoint, Command, Company, Role, Vec3 } from '../src/types';
 
@@ -51,7 +52,38 @@ function fundedMerchant(){const sim=fresh();qualify(sim,'merchant');const before
   for(const c of sim.state.citizens){const amount=Math.min(remaining,Math.max(0,c.money-100));c.money-=amount;sim.state.player.money+=amount;remaining-=amount;if(!remaining)break;}
   assert.equal(remaining,0);close(physicalCash(sim),before);return sim;
 }
-function companyAt(sim:Simulation){const location=places(sim,'market','work',b=>!sim.state.extension!.companies.some(c=>c.buildingId===b.id));at(sim,location.point.position);const before=physicalCash(sim),wallet=sim.state.player.money,treasury=sim.state.treasury;ok(sim,{type:'foundCompany',targetId:location.site.id,value:300});const company=sim.state.extension!.companies.find(c=>c.buildingId===location.site.id)!;
+/** The initial-wallet founder earns the missing cash through actual original
+ * funded player shifts at legal work points. Each shift keeps the native 60
+ * minute rate, escrow, employer reserve and needs checks. Arrival is controlled
+ * as in the original geometry fixture; no other resident is sent to a bank. */
+function earnFoundingCashByRealWork(sim:Simulation){
+  for(let shift=0;sim.state.player.money<601&&shift<3;shift++){
+    const sites=world.buildings.filter(b=>b.kind==='market'&&b.floorPlanProfile==='v4-program-bodies-02'&&sim.state.shops.some(s=>s.buildingId===b.id&&s.open)).sort((a,b)=>sim.shopFunds(sim.state.shops.find(s=>s.buildingId===b.id)!)-sim.shopFunds(sim.state.shops.find(s=>s.buildingId===a.id)!));
+    const attempts:string[]=[];let started=false;
+    for(const site of sites){const location=places(sim,'market','work',b=>b.id===site.id);at(sim,location.point.position);const result=sim.command({type:'work',targetId:site.id});attempts.push(`${site.id}: ${result.message}`);if(result.ok){started=true;break;}}
+    assert(started,`a native employer must fund an actual shift: ${attempts.join(' | ')}`);
+    const job=sim.state.playerLabor!.job!,wallet=sim.state.player.money,clock=sim.state.extension!.lastUpdate;assert.equal(job.requiredMinutes,60);assert.equal(job.workedMinutes,0);assert.equal(job.gross,62);assert.equal(job.escrow,62);
+    for(let tick=0;sim.state.playerLabor!.job?.id===job.id&&tick<240;tick++)sim.step(.25);
+    const finished=sim.state.playerLabor!.history.find(j=>j.id===job.id)!;assert(finished,'the actual bounded sixty-minute shift must complete');assert.equal(finished.status,'completed');assert.equal(finished.workedMinutes,60);assert.equal(finished.paidGross,62);assert.equal(finished.escrow,0);assert.equal(sim.state.extension!.lastUpdate,clock+60);close(sim.state.player.money,wallet+finished.paidNet);
+  }
+  assert(sim.state.player.money>=601,'original wallet plus actual earned wages must fund the purchase and original founding charge');
+}
+
+/** One initial seller presence fixture, followed by actual authorized sale,
+ * real 200 operating contribution and 50 fee. No ownership/cash/stock is written.
+ * The initial-wallet founder first completes original paid player shifts. */
+function acquireMarket(sim:Simulation,location:ReturnType<typeof places>){
+  at(sim,location.point.position);denied(sim,{type:'foundCompany',targetId:location.site.id,value:300});
+  if(sim.state.player.money<601)earnFoundingCashByRealWork(sim);
+  const shop=sim.state.shops.find(s=>s.buildingId===location.site.id)!,sellerId=shop.ownerId!,seller=sim.state.citizens.find(c=>c.id===sellerId)!;
+  seller.position={...location.point.position}; // controlled one-time original seller, no role/needs/skill edit
+  const before=physicalCash(sim),sellerCash=seller.money,wallet=sim.state.player.money,shopCash=sim.shopFunds(shop),treasury=sim.state.treasury;
+  const stopped=applyShopLifecycleCommand(sim,{type:'suspendShop',targetId:shop.id},sellerId)!;assert(stopped.ok,stopped.message);
+  const listed=applyShopLifecycleCommand(sim,{type:'listShopForSale',targetId:shop.id,value:1},sellerId)!;assert(listed.ok,listed.message);
+  at(sim,location.point.position);ok(sim,{type:'buyShop',targetId:sim.state.shopLifecycle!.listings.at(-1)!.id,value:200});
+  assert.equal(seller.money,sellerCash+1);assert.equal(sim.state.player.money,wallet-251);assert.equal(sim.shopFunds(shop),shopCash+200);assert.equal(sim.state.treasury,treasury+50);assert.equal(shop.ownerId,'player');close(physicalCash(sim),before);
+}
+function companyAt(sim:Simulation){const location=places(sim,'market','work',b=>!sim.state.extension!.companies.some(c=>c.buildingId===b.id));acquireMarket(sim,location);at(sim,location.point.position);const before=physicalCash(sim),wallet=sim.state.player.money,treasury=sim.state.treasury;ok(sim,{type:'foundCompany',targetId:location.site.id,value:300});const company=sim.state.extension!.companies.find(c=>c.buildingId===location.site.id)!;
   assert.equal(sim.state.player.money,wallet-350);assert.equal(sim.state.treasury,treasury+50);assert.equal(company.shareholders.player,1000);assert.equal(company.shares,1000);close(physicalCash(sim),before);return {...location,company};
 }
 
@@ -60,7 +92,7 @@ test('v4 founding denies a supported far room and its exterior entrance before s
   at(sim,p.farRoom);assert(sim.isNearBuilding(p.site,p.farRoom,0));assert(!sim.isAtBuildingFunctionPoint(p.site,p.farRoom,'work'));denied(sim,{type:'foundCompany',targetId:p.site.id,value:300});
   at(sim,p.site.door);assert(sim.isNearBuilding(p.site));assert(!sim.isAtBuildingFunctionPoint(p.site,p.site.door,'work'));denied(sim,{type:'foundCompany',targetId:p.site.id,value:300});
   if(p.court){at(sim,p.court);assert.equal(floorPlanSupport(p.site,0,p.court)!.kind,'courtyard');denied(sim,{type:'foundCompany',targetId:p.site.id,value:300});}
-  at(sim,p.point.position);const before=physicalCash(sim),wallet=sim.state.player.money,treasury=sim.state.treasury;ok(sim,{type:'foundCompany',targetId:p.site.id,value:300});assert.equal(sim.state.player.money,wallet-350);assert.equal(sim.state.treasury,treasury+50);close(physicalCash(sim),before);
+  acquireMarket(sim,p);at(sim,p.point.position);const before=physicalCash(sim),wallet=sim.state.player.money,treasury=sim.state.treasury;ok(sim,{type:'foundCompany',targetId:p.site.id,value:300});assert.equal(sim.state.player.money,wallet-350);assert.equal(sim.state.treasury,treasury+50);close(physicalCash(sim),before);
 });
 
 test('v4 expansion and hiring use the real company work point without free materials, payroll or completion',()=>{

@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-04T01:48:05.494775+00:00",
+  "status": "ALREADY_ENDED_ORIGINAL_CAPTURE_DRIVER_FAILED_BEFORE_BROWSER_LAUNCH",
+  "originalCleanupAttemptReceipt": "captures01/exclusive-conflict-cleanup-receipt.json",
+  "actualPhaseEndedAt": "2026-10-04T01:44:08.296933+00:00",
+  "actualFailure": "TypeError: Cannot read properties of undefined (reading 'launch')",
+  "captureCount": 0,
+  "browserWasLaunched": false,
+  "signalsActuallySent": [],
+  "note": "Previous cleanup attempt labelled abort, but precise inspection found no active owned ancestor because the original driver had already ended. Retain both originals and this correction; no root rule process was signaled."
+}

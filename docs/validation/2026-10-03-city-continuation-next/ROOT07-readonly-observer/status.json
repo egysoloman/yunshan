@@ -1,0 +1,147 @@
+{
+  "observedAt": "2026-10-04T03:15:03.940096+00:00",
+  "status": "RUNNING",
+  "receiptPresent": true,
+  "artifactPresent": true,
+  "latestProgress": {
+    "kind": "progress",
+    "tick": 10000,
+    "requestedTicks": 10080,
+    "elapsedGameMinutes": 20000,
+    "alive": 615,
+    "treasury": 20269.331948565363
+  },
+  "latestDailySample": {
+    "tick": 10080,
+    "day": 14,
+    "treasury": 20249.58879177444,
+    "npc": {
+      "alive": 615,
+      "total": 616,
+      "meanHealth": 86.83713204734673,
+      "meanHunger": 29.46753246753247,
+      "meanFatigue": 87.35699683989105,
+      "livingMeanHealth": 86.97833063604159,
+      "livingMeanHunger": 29.515447154471552,
+      "livingMeanFatigue": 87.49904073719169,
+      "researchCompleted": 1,
+      "companies": 21,
+      "zeroCapitalCompanies": 0,
+      "playerAlive": false,
+      "poor": 111,
+      "storedFood": 152,
+      "byRole": {
+        "学生": {
+          "count": 61,
+          "money": 81.02890393927338,
+          "hunger": 26.87868852459013,
+          "health": 87.15676917166951
+        },
+        "农民": {
+          "count": 27,
+          "money": 515.4204494289936,
+          "hunger": 65.60000000000011,
+          "health": 100
+        },
+        "钱庄职员": {
+          "count": 41,
+          "money": 522.4899154704472,
+          "hunger": 33.15121951219505,
+          "health": 87.1386107878571
+        },
+        "merchant": {
+          "count": 9,
+          "money": 1782.8154367037625,
+          "hunger": 38.044444444444466,
+          "health": 97.116036075294
+        },
+        "医生": {
+          "count": 51,
+          "money": 474.51308549066323,
+          "hunger": 18.211764705882327,
+          "health": 89.5105283779469
+        },
+        "官员": {
+          "count": 83,
+          "money": 399.6063764775291,
+          "hunger": 6.693975903614435,
+          "health": 71.9859754901995
+        },
+        "驾驶员": {
+          "count": 47,
+          "money": 412.1574256081592,
+          "hunger": 16.059574468085035,
+          "health": 78.12074951740075
+        },
+        "商人": {
+          "count": 137,
+          "money": 343.95229768921644,
+          "hunger": 34.34744525547448,
+          "health": 92.2662088686912
+        },
+        "老师": {
+          "count": 34,
+          "money": 250.87480468031822,
+          "hunger": 41.45882352941189,
+          "health": 96.1450232959811
+        },
+        "警察": {
+          "count": 22,
+          "money": 402.5835735181752,
+          "hunger": 20.127272727272725,
+          "health": 63.22368656111119
+        },
+        "工人": {
+          "count": 75,
+          "money": 326.04712311954364,
+          "hunger": 35.722666666666754,
+          "health": 90.04583822920071
+        },
+        "搬运工": {
+          "count": 17,
+          "money": 158.10632556108752,
+          "hunger": 73.364705882353,
+          "health": 99.99284292353207
+        },
+        "科研员": {
+          "count": 7,
+          "money": 53.29877236040238,
+          "hunger": 29.42857142857142,
+          "health": 89.56118441864872
+        },
+        "scientist": {
+          "count": 5,
+          "money": 120.18479437079729,
+          "hunger": 22.000000000000014,
+          "health": 87.2535830390195
+        }
+      }
+    }
+  },
+  "rawPrefixBytes": 46124,
+  "rawPrefixSHA256": "d0d3add3a238177493f53da5f9a26fff163e96d7eef8f5bd31e123c13da30cba",
+  "auditOwnedProcess": {
+    "pid": 21540,
+    "group": 21540,
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "scripts/economy-audit.ts",
+      "--days",
+      "14",
+      "--out",
+      "artifacts/root07-economy-14d.json"
+    ],
+    "membersAtStart": [
+      {
+        "pid": 21540,
+        "state": "R",
+        "parent": 21537,
+        "group": 21540,
+        "session": 21540,
+        "startTicks": 869225
+      }
+    ]
+  }
+}

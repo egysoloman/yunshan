@@ -1,3 +1,5 @@
+import { validateSupplementalBudgetCrossReferences } from './simulation/supplemental-budget';
+import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
 import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
 import { blocksMarketCounter, marketCounters } from './site-fixtures';
@@ -6,10 +8,11 @@ import { installPower, powerBinding, powerHasCapacityRoom, powerRepairPoint, pow
 import { installShopLifecycle, shopLifecycleAllowsOperation, shopLifecycleAllowsNewPayroll, shopLifecycleAllowsSpaceUse, shopLifecycleReservedFunds, shopLifecycleBeforeBusinessTransfer, shopLifecycleOpportunities } from './simulation/shop_lifecycle';
 import { AIRCRAFT_COMMANDS, installAviation } from './aviation';
 import { installRoadNetwork, isRoadOpen, roadRevision, roadExitRoute, roadMovementAllowed, releaseRoadExitPermit } from './roads';
-import { installRoadworks, roadworkTask, validateRoadworksBudgetCrossReferences } from './simulation/roadworks';
+import { installRoadworks, roadworkTask, roadworkActorId, validateRoadworksBudgetCrossReferences } from './simulation/roadworks';
 import { captureBlockedRoadIntent, roadIntentStillBlocked, installRoadDemands, type RoadBlockWitness } from './simulation/road-demands';
-import { installFamily, isCloseKin } from './simulation/family';
+import { installFamily, isCloseKin, recordSchoolSelfStudy } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
+import { installFamilyEducation, familyEducationOpportunities, familyEducationTaskActorIds, observeFamilyEducationArrival } from './simulation/family-education';
 import { clinicalServiceStationsAtPosition, clinicalTaskActorIds } from './simulation/clinical';
 import { educationNeedsContinuousPeople, educationServiceStationsAtPosition } from './simulation/education';
 import { installGovernance } from './simulation/governance';
@@ -18,6 +21,7 @@ import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
 import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest } from './simulation/home-rest';
+import { validatePublicDisinfectionBudgetCrossReferences } from './simulation/hygiene-public';
 import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
 import { installPathology } from './simulation/pathology';
 import { savedWorldFingerprint } from './persistence/world-layout';
@@ -26,7 +30,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -35,6 +39,9 @@ const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.
 const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
+const canonicalNpcWages = new WeakSet<object>();
+/** Only immutable actual native attendance notifications certify paid work. */
+export const isCanonicalNpcWage = (event: object): boolean => canonicalNpcWages.has(event);
 const canonicalRoadworkPresence = new WeakSet<object>();
 const canonicalRoadBlock = new WeakSet<object>();
 export const isCanonicalRoadBlock = (event: object): boolean => canonicalRoadBlock.has(event);
@@ -64,7 +71,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -84,6 +91,7 @@ interface Runtime {
   retailSalesSinceBatch?: Record<string, number>;
   customers: Record<string, string>;
   driving: { vehicleId: string | null; throttle: number; turn: number; brake: boolean; speed: number };
+  policeSuppliesVersion?: 1; policeSupplies?: PoliceSupplies;
   dispatches: Record<string, { crimeId: string; arrived: boolean }>;
   relationshipClock: number;
   hostileAt: Record<string, number>;
@@ -170,6 +178,7 @@ export class Simulation implements SimulationAPI {
     installTrade(this);
     installFamily(this);
     installCulture(this);
+    installFamilyEducation(this);
     installHomeRest(this);
     installPower(this, { activate: () => { this.runtime.powerVersion = 1; }, legacy: () => this.legacyEnergyContract(), publicSupply: () => this.runtime.publicSupply ?? 1, isCanonicalDisaster, isCanonicalResearchCompletion });
     installShopLifecycle(this);
@@ -178,7 +187,7 @@ export class Simulation implements SimulationAPI {
     installPathology(this);
     installHygiene(this);
     installRoadNetwork(this, { isCanonicalDisaster, activate: () => { this.runtime.roadNetworkVersion = 1; } });
-    const roadworks = installRoadworks(this, { isCanonicalRoadworkPresence, activate: () => { this.runtime.roadworksVersion = 1; },
+    const roadworks = installRoadworks(this, { isCanonicalRoadworkPresence, activate: (version = 1) => { this.runtime.roadworksVersion = version; },
       travelCost: (citizenId, nodeId, point) => this.roadworkTravelCost(citizenId, nodeId, point),
       takePublicEscrow: request => this.takeRoadworkPublicEscrow(request), returnPublicEscrow: request => this.returnRoadworkPublicEscrow(request), accrueTax: amount => { if (finite(amount) && amount >= 0) this.runtime.taxes += amount; } });
     installRoadDemands(this, { isCanonicalRoadBlock, activate: () => { this.runtime.roadDemandsVersion = 1; }, requestRepair: demandId => roadworks.requestResidentDemand(demandId) });
@@ -270,17 +279,20 @@ export class Simulation implements SimulationAPI {
     const earned = minutes * claim.ratePerMinute;
     claim.minutes += minutes; claim.amount += earned;
     if (shop) shop.profit -= earned;
-    if (notify) this.bus.emit({ type: 'wage-earned', citizenId: citizen.id, shopId: shop?.id, districtId: citizen.districtId, minutes, amount: earned, ratePerMinute: claim.ratePerMinute, ...(workWindow ? { siteId: citizen.workId, creditedWorkStartAt: workWindow.startAt, creditedWorkEndAt: workWindow.endAt } : {}) });
+    if (notify) {
+      const event: Event = Object.freeze({ type: 'wage-earned', citizenId: citizen.id, shopId: shop?.id, districtId: citizen.districtId, minutes, amount: earned, ratePerMinute: claim.ratePerMinute, ...(workWindow ? { siteId: citizen.workId, creditedWorkStartAt: workWindow.startAt, creditedWorkEndAt: workWindow.endAt } : {}) });
+      canonicalNpcWages.add(event); this.bus.emit(event);
+    }
   }
   /** A company's capital is its operating account, never a second copy of cash. */
-  shopOwnerId(shop: Shop): string | undefined { return this.state.extension?.companies.find(company => company.buildingId === shop.buildingId)?.ownerId ?? shop.ownerId; }
+  shopOwnerId(shop: Shop): string | undefined { return this.state.extension?.companies.find(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)?.ownerId ?? shop.ownerId; }
   /** Farms grow meals and fishing docks land food; workshops make service and
    * construction supplies. Classification changes no stock or cash balances. */
   shopCommodity(shop: Shop): 'food' | 'materials' { return this.buildings.get(shop.buildingId)?.kind === 'workshop' ? 'materials' : 'food'; }
   private shopInsolvent(shop: Shop): boolean {
     return shop.profit <= -600 && shop.inventory < 1e-7 && this.shopFunds(shop) - this.shopProtectedFunds(shop) < 20 * 8 / 24;
   }
-  shopFunds(shop: Shop): number { return this.state.extension?.companies.find(c => c.buildingId === shop.buildingId)?.capital ?? shop.cash ?? 0; }
+  shopFunds(shop: Shop): number { return this.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId)?.capital ?? shop.cash ?? 0; }
   shopPayrollDebt(shop: Shop): number { return [...(this.runtime.wageArrears ?? []), ...(this.runtime.wageAccruals ?? []), ...this.runtime.wages].filter(owed => owed.shopId === shop.id).reduce((sum, owed) => sum + owed.amount, 0); }
   shopCommittedPayroll(shop: Shop): number {
     const shift = this.runtime.privateLabor?.shifts[shop.id], day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440);
@@ -338,7 +350,7 @@ export class Simulation implements SimulationAPI {
   }
   consumeShopLabor(shopId: string, minutes: number): number { const labor = this.runtime.shopLabor ??= {}, consumed = Math.min(Math.max(0, minutes), labor[shopId] ?? 0); labor[shopId] = (labor[shopId] ?? 0) - consumed; return consumed; }
   transferShopFunds(shop: Shop, amount: number): void {
-    const company = this.state.extension?.companies.find(c => c.buildingId === shop.buildingId);
+    const company = this.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId);
     if (company) company.capital = clamp(company.capital + amount, 0, 1e9);
     else shop.cash = clamp((shop.cash ?? 0) + amount, 0, 1e9);
   }
@@ -384,7 +396,7 @@ export class Simulation implements SimulationAPI {
     if (!shop || actorId !== 'player' && !this.state.citizens.some(citizen => citizen.id === actorId)) return false;
     if (!shopLifecycleBeforeBusinessTransfer(this, shop, actorId)) return false;
     shop.ownerId = actorId; this.runtime.playerBusinesses = this.runtime.playerBusinesses.filter(id => id !== shopId);
-    if (actorId === 'player' && !this.state.extension?.companies.some(company => company.buildingId === shop.buildingId)) this.runtime.playerBusinesses.push(shopId);
+    if (actorId === 'player' && !this.state.extension?.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)) this.runtime.playerBusinesses.push(shopId);
     this.state.player.inventory.businesses = this.runtime.playerBusinesses.length;
     this.state.player.inventory[`business:${shop.buildingId}`] = actorId === 'player' ? 1 : 0;
     return true;
@@ -563,12 +575,12 @@ export class Simulation implements SimulationAPI {
       if (shop.cash !== undefined) continue;
       // Pre-account saves migrate by moving the proprietor's existing savings.
       // Incorporated shops already hold their separately recorded real capital.
-      const company = this.state.extension?.companies.find(c => c.buildingId === shop.buildingId);
+      const company = this.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId);
       const contribution = !company && shop.employees > 0 && owner ? Math.min(owner.money * .2, 80) : 0;
       if (owner) owner.money -= contribution;
       shop.cash = contribution;
     }
-    for (const id of [...this.runtime.playerBusinesses]) { const shop = this.state.shops.find(shop => shop.id === id); if (shop && shop.lifecycleVersion !== 1 && !this.state.extension?.companies.some(company => company.buildingId === shop.buildingId)) this.transferBusinessOwnership(id, 'player'); }
+    for (const id of [...this.runtime.playerBusinesses]) { const shop = this.state.shops.find(shop => shop.id === id); if (shop && shop.lifecycleVersion !== 1 && !this.state.extension?.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)) this.transferBusinessOwnership(id, 'player'); }
     for (const citizen of this.state.citizens) citizen.food ??= 0;
     this.runtime.shopLabor ??= {}; this.runtime.cargoSources ??= {};
     this.runtime.freightLots ??= Object.fromEntries(Object.entries(this.runtime.freight).map(([id, quantity]) => [id, [{ shopId: null, quantity }]]));
@@ -1012,7 +1024,7 @@ export class Simulation implements SimulationAPI {
       const clinicalPoints = clinicalWork
         ? points.filter(point => point.floor === 0 && clinicalServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
       const educationWork = action === 'work' && destination.kind === 'school' && ['老师', 'teacher'].includes(citizen.role)
-        && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active'));
+        && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active') || this.state.familyEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null));
       const educationPoints = educationWork ? points.filter(point => point.floor === 0 && educationServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
       const savedPowerPoint = action === 'work' && ['工程师', 'scientist', '科学家'].includes(citizen.role) ? powerRepairPoint(this.state, citizen.id, destination.id) : null;
       const powerPoints = savedPowerPoint ? points.filter(point => point.id === savedPowerPoint.id && point.floor === savedPowerPoint.floor && distance(point.position, savedPowerPoint.position) < 1e-7 && !homeRestPointBlockedByVoxels(point.position, this.state.voxels) && !blocksFloorPlanMovement(destination, point.floor, point.position, point.position, .35, 1.72)) : [];
@@ -1053,9 +1065,9 @@ export class Simulation implements SimulationAPI {
     if (Object.values(this.runtime.privateLabor?.shifts ?? {}).some(shift => shift.day === day && shift.assignments.some(item => item.citizenId === citizen.id && item.minutesCap > item.workedMinutes))) return false;
     const research = this.state.extension && Reflect.get(this.state.extension, 'runtime')?.researchJobs;
     if (Object.values(research ?? {}).some(raw => (raw as { actorId?: string }).actorId === citizen.id)) return false;
-    if (this.state.roadworks?.jobs.some(job => job.workerId === citizen.id && job.completedAt === null && job.cancelledAt === null)
+    if (this.state.roadworks?.jobs.some(job => roadworkActorId(job) === citizen.id && job.completedAt === null && job.cancelledAt === null)
       || powerTaskActorIds(this.state).has(citizen.id) || clinicalTaskActorIds(this.state).has(citizen.id)
-      || educationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
+      || educationNeedsContinuousPeople(this.state, citizen) || familyEducationTaskActorIds(this.state).has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
     return true;
   }
   private foodHiringWorkDistance(citizen: Citizen, site: Building): number {
@@ -1194,6 +1206,7 @@ export class Simulation implements SimulationAPI {
     // A facility advertises a service; citizens compare that offer against needs,
     // liquidity, memories and travel cost. A work shift is a preference, not a lock.
     for (const opportunity of shopLifecycleOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
+    for (const opportunity of familyEducationOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     if (homeBedAvailable) add(home, 'rest', (100 - citizen.needs.fatigue) * .8 + (night ? 140 : !shift ? 18 : 0) + (citizen.needs.fatigue < 25 ? 110 : 0));
     if (shift && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) {
       for (const shop of this.state.shops) if (this.shopOwnerId(shop) === citizen.id && this.privateWorkAllowance(citizen, shop) <= 0) add(this.buildings.get(shop.buildingId)!, 'businessReview', 70);
@@ -1311,13 +1324,13 @@ export class Simulation implements SimulationAPI {
     this.reviewPrivateShifts();
     const hour = this.state.hour;
     const pendingMinutes = this.runtime.peopleElapsed ??= {};
-    const researchActors = researchTaskActorIds(this.state), powerActors = powerTaskActorIds(this.state), clinicalActors = clinicalTaskActorIds(this.state);
+    const researchActors = researchTaskActorIds(this.state), powerActors = powerTaskActorIds(this.state), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
     for (let i = 0; i < this.state.citizens.length; i++) {
       const citizen = this.state.citizens[i];
       // At most seven persisted new research jobs request fine task processing.
       // Preserve tier, ordinary actors' frequency, pending needs and real wages.
       const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1336,8 +1349,8 @@ export class Simulation implements SimulationAPI {
       if (dispatch) {
         const crime = this.state.crimes.find(c => c.id === dispatch.crimeId);
         const health = this.state.extension?.actorProfiles[citizen.id]?.health ?? 100;
-        if (!crime || crime.status !== 'responding' || this.publicWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
-          if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
+        if (!crime || crime.status !== 'responding' || this.policeWorkAllowance(citizen) <= 0 || citizen.needs.hunger < 20 || citizen.needs.fatigue < 15 || health < 35) {
+          if (crime?.status === 'responding') { crime.status = 'open'; crime.responseAt = 0; this.bus.emit({ type: 'police-response-withdrawn', citizenId: citizen.id, crimeId: crime.id, districtId: crime.districtId, quantity: this.runtime.policeSupplies?.kits[crime.id]?.receivedUnits ?? 0, purpose: this.policeWorkAllowance(citizen) <= 0 ? 'work-allowance' : 'needs' }); this.notice('dispatch', `${citizen.name}因补给或健康需要退出响应，事件等待有行动能力的巡警接替。`, crime.districtId); }
           delete this.runtime.dispatches[citizen.id]; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0;
         }
         else {
@@ -1435,11 +1448,11 @@ export class Simulation implements SimulationAPI {
       } else if (activity === 'businessReview') {
         citizen.state = 'reviewingBusiness';
       } else if (activity === 'study') {
-        citizen.state = 'studying'; if (!this.state.family?.children[citizen.id]) citizen.education = clamp((citizen.education ?? 0) + arrivedElapsed * .0004, 0, 20); if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02);
+        citizen.state = 'studying'; if (citizen.skills) citizen.skills.learning = clamp(citizen.skills.learning + arrivedElapsed * .003); citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .02); recordSchoolSelfStudy(this, citizen, destination, arrivedElapsed); observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
       } else if (activity === 'budgetReview') {
         citizen.state = 'reviewingBudget';
       } else if (activity === 'service') {
-        citizen.state = 'attendingService';
+        citizen.state = 'attendingService'; observeFamilyEducationArrival(this, citizen, destination, arrivedElapsed);
       } else if (activity === 'social') {
         citizen.state = 'socializing'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .12); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .09);
       } else if (activity === 'heal') {
@@ -1621,7 +1634,7 @@ export class Simulation implements SimulationAPI {
       this.state.loan = clamp(this.state.loan * (1 + .00008 * hours), 0, 1e9);
       if (this.runtime.investment > 0) { const prosperity = this.state.districts.reduce((n, d) => n + d.prosperity, 0) / this.state.districts.length; this.state.player.money = clamp(this.state.player.money + this.runtime.investment * .0008 * (prosperity - 35) / 30 * hours, 0, 1e9); }
       }
-      for (const shop of this.state.shops) if (!this.state.extension?.companies.some(company => company.buildingId === shop.buildingId) && shop.profit > 0 && this.shopPayrollDebt(shop) <= 1e-8) {
+      for (const shop of this.state.shops) if (!this.state.extension?.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId) && shop.profit > 0 && this.shopPayrollDebt(shop) <= 1e-8) {
         const recipient = shop.ownerId === 'player' ? this.state.player : this.state.citizens.find(c => c.id === shop.ownerId);
         if (this.state.extension?.actorProfiles[shop.ownerId ?? '']?.alive === false) continue;
         if (!recipient) continue;
@@ -1630,6 +1643,52 @@ export class Simulation implements SimulationAPI {
         if (dividend > 0) this.bus.emit({ type: 'business-dividend', citizenId: 'id' in recipient ? recipient.id : 'player', shopId: shop.id, districtId: shop.districtId, amount: dividend });
       }
     }
+  }
+  policeSupplyCoverage() {
+    const stock = this.runtime.policeSupplies;
+    return stock ? { receivedUnits: stock.totals.receivedUnits, consumedUnits: stock.totals.consumedUnits, heldUnits: stock.totals.receivedUnits - stock.totals.consumedUnits, gross: stock.totals.gross, tax: stock.totals.tax } : null;
+  }
+  private policeWorkAllowance(citizen: Citizen): number {
+    return Math.min(this.publicWorkAllowance(citizen), Math.max(0, 480 - (this.runtime.attendance[citizen.id] ?? 0)));
+  }
+  private preparePoliceSupply(crime: Crime): boolean {
+    const stock = this.runtime.policeSupplies, kit = stock?.kits[crime.id];
+    if (policeSupplyReady(kit)) return true;
+    const at = this.state.extension?.lastUpdate ?? this.now;
+    if (kit && at < kit.retryAt - 1e-7) return false;
+    // A retained incident kit belongs to the public, even when its officer
+    // withdraws. Only an actual missing quantity can be purchased again.
+    const suppliers = this.state.shops.filter(shop => this.shopCommodity(shop) === 'materials' && shop.inventory > 0);
+    if (!suppliers.length || stock && !kit && Object.keys(stock.kits).length >= 200 || (kit?.receipts.length ?? 0) + suppliers.length > 256) return false;
+    // Refuse new obligations before cash/stock mutation if receipt history has
+    // no storage headroom. Held kits and unpaid wages are never trimmed.
+    const recordHeadroom = 1024 + suppliers.reduce((sum, supplier) => sum + JSON.stringify({ shopId: supplier.id }).length + 384, 0);
+    if (JSON.stringify(stock ?? {}).length + recordHeadroom > 512 * 1024) return false;
+    const missing = Math.max(0, 3 * crime.severity - (kit?.receivedUnits ?? 0));
+    // Four coins was a base-price estimate. Actual finite industrial quotes
+    // price the same three-unit recipe; protected promises remain untouched.
+    let remaining = missing, quotedGross = 0;
+    for (const supplier of [...suppliers].sort((a, b) => Number(b.districtId === crime.districtId) - Number(a.districtId === crime.districtId) || b.inventory - a.inventory)) {
+      const quote = this.quoteSupply(supplier.id, Math.min(supplier.inventory, remaining));
+      quotedGross += quote.quantity * quote.unitPrice; remaining -= quote.quantity; if (remaining <= 1e-7) break;
+    }
+    const receipt = this.purchasePublicSupplyReceipt({ requestedGross: Math.min(1e9 - (kit?.gross ?? 0), quotedGross), requestedQuantity: missing, districtId: crime.districtId, eventType: 'security-procurement', purpose: `incident:${crime.id}`, procurementId: crime.id });
+    if (receipt.quantity <= 0 || receipt.paid <= 0) return false;
+    const ledger = this.runtime.policeSupplies ??= createPoliceSupplies(this.state.crimes);
+    this.runtime.policeSuppliesVersion = 1;
+    recordPolicePurchase(ledger, crime, receipt, this.state.extension?.lastUpdate ?? this.now, this.state.taxRate);
+    return policeSupplyReady(ledger.kits[crime.id]);
+  }
+  private finishPoliceResponse(crime: Crime): void {
+    crime.status = 'resolved';
+    const quantity = this.runtime.policeSupplies ? consumePoliceSupply(this.runtime.policeSupplies, crime.id, this.state.extension?.lastUpdate ?? this.now) : 0;
+    for (const [id, dispatch] of Object.entries(this.runtime.dispatches)) if (dispatch.crimeId === crime.id) {
+      delete this.runtime.dispatches[id];
+      const citizen = this.state.citizens.find(citizen => citizen.id === id);
+      if (citizen) { citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; }
+    }
+    if (quantity > 0) this.bus.emit({ type: 'police-supply-consumed', crimeId: crime.id, districtId: crime.districtId, quantity });
+    this.bus.emit({ type: 'crime-resolved', crimeId: crime.id, districtId: crime.districtId });
   }
   private security() {
     if (this.now + 1e-7 >= this.runtime.crimeAt) {
@@ -1647,18 +1706,18 @@ export class Simulation implements SimulationAPI {
       const district = this.state.districts.find(d => d.id === crime.districtId)!;
       if (crime.status === 'open' && this.state.treasury > 50 && this.state.policeBudget > .05) {
         const target = this.world.buildings.reduce((a, b) => distance(a.door, crime.position) < distance(b.door, crime.position) ? a : b);
-        const officer = this.state.citizens.filter(c => this.citizenIdentity(c) === 'police' && c.needs.hunger >= 35 && c.needs.fatigue >= 30 && (this.state.extension?.actorProfiles[c.id]?.health ?? 100) >= 45 && !this.runtime.dispatches[c.id] && !this.runtime.riders[c.id] && this.state.extension?.actorProfiles[c.id]?.alive !== false).map(c => ({ citizen: c, travel: this.walkingDistance(c, target) })).filter(candidate => finite(candidate.travel)).sort((a, b) => a.travel - b.travel)[0]?.citizen;
+        const officer = this.state.citizens.filter(c => this.citizenIdentity(c) === 'police' && this.policeWorkAllowance(c) > 0 && c.needs.hunger >= 35 && c.needs.fatigue >= 30 && (this.state.extension?.actorProfiles[c.id]?.health ?? 100) >= 45 && !this.runtime.dispatches[c.id] && !this.runtime.riders[c.id] && this.state.extension?.actorProfiles[c.id]?.alive !== false).map(c => ({ citizen: c, travel: this.walkingDistance(c, target) })).filter(candidate => finite(candidate.travel)).sort((a, b) => a.travel - b.travel)[0]?.citizen;
         if (!officer) continue;
-        const supplies = this.state.shops.filter(shop => ['farm', 'workshop', 'dock'].includes(this.buildings.get(shop.buildingId)!.kind)).reduce((sum, shop) => sum + shop.inventory, 0);
-        if (supplies * 4 < 12 * crime.severity) continue;
-        this.purchasePublicSupplies(12 * crime.severity, crime.districtId, 'security-procurement'); crime.status = 'responding';
+        if (!this.preparePoliceSupply(crime)) continue;
+        crime.status = 'responding';
         this.bus.emit({ type: 'dispatch', citizenId: officer.id, crimeId: crime.id });
         const route = officer.route ?? []; let remaining = 0; for (let index = officer.routeIndex ?? 0; index < route.length; index++) remaining += distance(index === (officer.routeIndex ?? 0) ? officer.position : route[index - 1], route[index]);
         crime.responseAt = this.now + 10 + remaining / (this.state.weather === '雨' ? 3.1 : 4.2);
-      } else if (crime.status === 'responding') { const assigned = Object.entries(this.runtime.dispatches).find(([, dispatch]) => dispatch.crimeId === crime.id); if (!assigned || this.state.extension?.actorProfiles[assigned[0]]?.alive === false) { if (assigned) delete this.runtime.dispatches[assigned[0]]; crime.status = 'open'; crime.responseAt = 0; } else if (assigned[1].arrived && this.now + 1e-7 >= crime.responseAt) { crime.status = 'resolved'; this.bus.emit({ type: 'crime-resolved', districtId: crime.districtId }); } }
+      } else if (crime.status === 'responding') { const assigned = Object.entries(this.runtime.dispatches).find(([, dispatch]) => dispatch.crimeId === crime.id); if (!assigned || this.state.extension?.actorProfiles[assigned[0]]?.alive === false) { if (assigned) delete this.runtime.dispatches[assigned[0]]; crime.status = 'open'; crime.responseAt = 0; } else if (assigned[1].arrived && this.now + 1e-7 >= crime.responseAt) { const officer = this.state.citizens.find(person => person.id === assigned[0]); if (officer && this.policeWorkAllowance(officer) > 0 && officer.needs.hunger >= 20 && officer.needs.fatigue >= 15 && (this.state.extension?.actorProfiles[officer.id]?.health ?? 100) >= 35 && distance(officer.position, crime.position) <= 3) this.finishPoliceResponse(crime); } }
       else district.safety = clamp(district.safety - this.minutes * .001 * crime.severity);
     }
     if (this.state.crimes.length > 120) this.state.crimes = this.state.crimes.filter(c => c.status !== 'resolved').concat(this.state.crimes.filter(c => c.status === 'resolved').slice(-60));
+    if (this.runtime.policeSupplies) archivePoliceSupplies(this.runtime.policeSupplies, this.state.crimes);
   }
   private politics() {
     this.reviewPublicShifts();
@@ -1769,7 +1828,7 @@ export class Simulation implements SimulationAPI {
     this.initializeRelationshipStages(relation); return relation;
   }
   private romanceStage(relation: Relationship): NonNullable<Relationship['romanceStage']> { return relation.romanceStage ?? (relation.type === 'spouse' ? 'married' : relation.type === 'lover' ? 'dating' : 'single'); }
-  private playerOwnsShop(shop: Shop): boolean { const company = this.state.extension?.companies.find(c => c.buildingId === shop.buildingId); return company ? (company.shareholders.player ?? 0) > company.shares / 2 : shop.ownerId === 'player'; }
+  private playerOwnsShop(shop: Shop): boolean { const company = this.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId); return company ? (company.shareholders.player ?? 0) > company.shares / 2 : shop.ownerId === 'player'; }
   private hostilityRank(relation: Relationship): number { if (relation.hostilityStage) return HOSTILITY_STAGES.indexOf(relation.hostilityStage); const conflicts = relation.conflicts ?? relation.memories.filter(m => m.impact <= -20).length; if (relation.type === 'enemy') return relation.affection <= -90 && conflicts >= 5 ? 5 : 4; if (relation.type === 'foe') return 3; if (relation.type === 'rival') return 2; return relation.affection <= -90 && relation.trust <= -80 && conflicts >= 5 ? 5 : relation.affection <= -70 && conflicts >= 4 ? 4 : relation.affection <= -45 && conflicts >= 3 ? 3 : relation.affection <= -25 && conflicts >= 2 ? 2 : relation.affection < -5 ? 1 : 0; }
   private initializeRelationshipStages(relation: Relationship): void {
     relation.romanceStage ??= this.romanceStage(relation); relation.hostilityStage ??= HOSTILITY_STAGES[this.hostilityRank(relation)]; relation.romanceSince ??= this.runtime.relationshipClock; relation.hostilitySince ??= this.runtime.relationshipClock;
@@ -1867,7 +1926,7 @@ export class Simulation implements SimulationAPI {
     if (command.type === 'business') {
       const building = this.buildingNear(command.targetId, ['market', 'workshop', 'farm', 'dock'], 'work'); if (!building) return fail('请到商业设施入口洽谈经营。'); if (!this.hasIdentity('merchant')) return fail('取得商人经营资格后可承包店铺。');
       if (building.kind === 'market') return fail('请使用资产持有人授权挂牌的真实购买或承租入口，不能仅付款替换现经营者。');
-      const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('公共科研与政务设施不能作为私营商铺承包。'); if (this.state.extension?.companies.some(company => company.buildingId === building.id)) return fail('此商铺已公司化，请通过股权交易取得控制权。'); if (this.runtime.playerBusinesses.includes(shop.id)) return fail('这间商铺已由你经营。'); if (p.money < 300) return fail('承包资金需要300云币。'); const priorOwner = shop.ownerId === 'player' ? p : this.state.citizens.find(citizen => citizen.id === shop.ownerId), refund = priorOwner ? Math.max(0, this.shopFunds(shop) - this.shopProtectedFunds(shop)) : 0;
+      const shop = this.state.shops.find(s => s.buildingId === building.id); if (!shop) return fail('公共科研与政务设施不能作为私营商铺承包。'); if (this.state.extension?.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === building.id)) return fail('此商铺已公司化，请通过股权交易取得控制权。'); if (this.runtime.playerBusinesses.includes(shop.id)) return fail('这间商铺已由你经营。'); if (p.money < 300) return fail('承包资金需要300云币。'); const priorOwner = shop.ownerId === 'player' ? p : this.state.citizens.find(citizen => citizen.id === shop.ownerId), refund = priorOwner ? Math.max(0, this.shopFunds(shop) - this.shopProtectedFunds(shop)) : 0;
       if (priorOwner && priorOwner.money + refund > 1e9) return fail('原经营者现金账户已达上限。');
       if (priorOwner) { this.transferShopFunds(shop, -refund); priorOwner.money += refund; }
       p.money -= 250; this.transferShopFunds(shop, 250); this.receivePublicFee(50, '商铺承包登记费', building.districtId); this.transferBusinessOwnership(shop.id, 'player'); p.inventory.businesses = this.runtime.playerBusinesses.length; p.inventory[`business:${building.id}`] = 1; return success(`获得${building.name}经营权，250云币进入真实经营账户，库存仍须采购，实际在册雇员继续工作，盈利将按时分红。`);
@@ -1891,7 +1950,7 @@ export class Simulation implements SimulationAPI {
       if (!finite(taxRate) || taxRate < 0 || taxRate > .3 || !finite(policeBudget) || policeBudget < 0 || policeBudget > 1) return fail('税率范围0至30%，警务预算范围0至100%。'); this.state.policyPending = { taxRate, policeBudget, applyAt: this.now + 120 }; return success('政策已送议会审议，两小时后生效；财政、治安和支持率将随之反馈。');
     }
     if (command.type === 'resolveCrime') {
-      if (!['police', 'soldier'].some(role => this.hasIdentity(role as Role))) return fail('警察或士兵有权处理事件。'); const crime = this.state.crimes.find(c => c.id === command.targetId); if (!crime || crime.status === 'resolved') return fail('事件不存在或已经解决。'); if (distance(p.position, crime.position) > 40) return fail('请亲自前往事件现场。'); const reward = 18 * crime.severity; if (this.state.treasury < reward) return fail('公共预算不足以支付本次现场警务报酬。'); crime.status = 'resolved'; this.bus.emit({ type: 'crime-resolved', districtId: crime.districtId }); this.state.treasury -= reward; p.money += reward * (1 - this.state.taxRate); this.runtime.taxes += reward * this.state.taxRate; this.bus.emit({ type: 'wage-earned', citizenId: 'player', districtId: crime.districtId, amount: reward }); this.bus.emit({ type: 'wage-paid', citizenId: 'player', districtId: crime.districtId, amount: reward, requestedAmount: reward }); p.reputation += 3; p.experience++; return success('现场事件处理完成，警务履历与社区声望提升。');
+      if (!['police', 'soldier'].some(role => this.hasIdentity(role as Role))) return fail('警察或士兵有权处理事件。'); const crime = this.state.crimes.find(c => c.id === command.targetId); if (!crime || crime.status === 'resolved') return fail('事件不存在或已经解决。'); if (distance(p.position, crime.position) > 40) return fail('请亲自前往事件现场。'); const reward = 18 * crime.severity; if (this.state.treasury < reward) return fail('公共预算不足以支付本次现场警务报酬。'); this.finishPoliceResponse(crime); this.state.treasury -= reward; p.money += reward * (1 - this.state.taxRate); this.runtime.taxes += reward * this.state.taxRate; this.bus.emit({ type: 'wage-earned', citizenId: 'player', districtId: crime.districtId, amount: reward }); this.bus.emit({ type: 'wage-paid', citizenId: 'player', districtId: crime.districtId, amount: reward, requestedAmount: reward }); p.reputation += 3; p.experience++; return success('现场事件处理完成，警务履历与社区声望提升。');
     }
     if (['socialize', 'gift', 'court', 'propose', 'divorce', 'conflict', 'reconcile'].includes(command.type)) {
       const citizen = this.state.citizens.find(c => c.id === command.targetId); if (!citizen || distance(p.position, citizen.position) > 24) return fail('请走到对方身边交谈。');
@@ -1975,7 +2034,7 @@ export class Simulation implements SimulationAPI {
       if (!['mayor', 'driver', 'soldier', 'scientist', 'official'].some(role => this.hasIdentity(role as Role))) return fail('需要公共工程操作资格。'); if (!this.buildingNear(command.targetId, ['core', 'energy'])) return fail('请到瀑布能源核心维修。'); if (p.money < 100) return fail('维修材料需要100云币。'); if (this.now < this.runtime.energyBoostUntil) return fail('能源核心仍在维护增益期间。'); this.receivePublicFee(100, '能源设施维护材料费', this.buildingNear(command.targetId, ['core', 'energy'])!.districtId); this.runtime.energyBoostUntil = this.now + 240; p.experience++; p.reputation += 2; return success('水能装置修复，未来四小时能源供应提升，交通与商铺随供电反馈。');
     }
     if (command.type === 'build' || command.type === 'demolish') {
-      const building = this.buildingNear(command.targetId, ['home', 'market', 'workshop', 'farm', 'dock']); if (!building) return fail('请到有使用权的建筑入口附近改造。'); const company = this.state.extension?.companies.find(c => c.buildingId === building.id); const owned = p.homeId === building.id || (company ? (company.shareholders.player ?? 0) > company.shares / 2 : this.runtime.playerBusinesses.some(id => this.state.shops.find(s => s.id === id)?.buildingId === building.id)); if (!owned || this.state.shops.some(shop => shop.buildingId === building.id && !shopLifecycleAllowsSpaceUse(this.state, shop.id))) return fail('仅能改造自己租住或仍有合法使用许可的经营空间。');
+      const building = this.buildingNear(command.targetId, ['home', 'market', 'workshop', 'farm', 'dock']); if (!building) return fail('请到有使用权的建筑入口附近改造。'); const company = this.state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === building.id); const owned = p.homeId === building.id || (company ? (company.shareholders.player ?? 0) > company.shares / 2 : this.runtime.playerBusinesses.some(id => this.state.shops.find(s => s.id === id)?.buildingId === building.id)); if (!owned || this.state.shops.some(shop => shop.buildingId === building.id && !shopLifecycleAllowsSpaceUse(this.state, shop.id))) return fail('仅能改造自己租住或仍有合法使用许可的经营空间。');
       const requested = command.position ?? { x: p.position.x + .6, y: p.position.y + .1, z: p.position.z };
       const position = { x: Math.round(requested.x / .2) * .2, y: Math.round(requested.y / .2) * .2, z: Math.round(requested.z / .2) * .2 };
       if (distance(p.position, position) > 4 || !this.isNearBuilding(building, position, 12)) return fail('改造范围为本人4米内的所属房间或其入口附近。');
@@ -2011,6 +2070,7 @@ export class Simulation implements SimulationAPI {
       ensure(s && r && typeof s === 'object' && typeof r === 'object', '状态或运行数据'); ensure(s.version === 1 && s.seed === this.world.seed, '状态版本');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
+      if (s.familyEducation !== undefined || r.familyEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.familyEducation && r.familyEducationVersion === 1, 'family education custody manifest');
       if (s.hygiene !== undefined || r.hygieneVersion !== undefined || s.pathology !== undefined || r.pathologyVersion !== undefined) ensure(r.persistedModules !== undefined, 'hygiene/pathology persisted manifest');
       if (s.roadNetwork !== undefined || r.roadNetworkVersion !== undefined || s.roadworks !== undefined || r.roadworksVersion !== undefined || s.roadDemands !== undefined || r.roadDemandsVersion !== undefined) ensure(r.persistedModules !== undefined, 'road network and roadwork persisted manifest');
       if (s.power !== undefined || r.powerVersion !== undefined || r.legacyEnergyContractVersion !== undefined || r.legacyEnergyContract !== undefined) ensure(r.persistedModules !== undefined, 'power persisted manifest');
@@ -2073,6 +2133,7 @@ export class Simulation implements SimulationAPI {
       if (s.playerLabor) ensure(r.playerLaborVersion === 1, 'player payroll custody marker');
       if (r.educationVersion !== undefined) ensure(r.educationVersion === 1 && s.education, 'education custody module');
       if (s.education) ensure(r.educationVersion === 1, 'education custody marker');
+      ensure(s.familyEducation === undefined && r.familyEducationVersion === undefined || s.familyEducation && r.familyEducationVersion === 1, 'family education body and version');
       if (r.hygieneVersion !== undefined) ensure(r.hygieneVersion === 1 && s.hygiene, 'hygiene custody module');
       if (s.hygiene !== undefined) ensure(s.hygiene && r.hygieneVersion === 1, 'hygiene custody marker');
       if (r.pathologyVersion !== undefined) ensure(r.pathologyVersion === 1 && s.pathology, 'pathology provenance module');
@@ -2081,8 +2142,8 @@ export class Simulation implements SimulationAPI {
       if (s.roadNetwork !== undefined) ensure(s.roadNetwork && r.roadNetworkVersion === 1, 'road network provenance marker');
       if (r.roadDemandsVersion !== undefined) ensure(r.roadDemandsVersion === 1 && s.roadDemands, 'road demand cause module');
       if (s.roadDemands !== undefined) ensure(s.roadDemands && r.roadDemandsVersion === 1, 'road demand cause marker');
-      if (r.roadworksVersion !== undefined) ensure(r.roadworksVersion === 1 && s.roadworks, 'roadwork custody module');
-      if (s.roadworks !== undefined) ensure(s.roadworks && r.roadworksVersion === 1, 'roadwork custody marker');
+      if (r.roadworksVersion !== undefined) ensure((r.roadworksVersion === 1 || r.roadworksVersion === 2) && s.roadworks, 'roadwork custody module');
+      if (s.roadworks !== undefined) ensure(s.roadworks && (r.roadworksVersion === 1 || r.roadworksVersion === 2) && (r.roadworksVersion === 2 ? s.roadworks.replacementVersion === 1 : s.roadworks.replacementVersion === undefined), 'roadwork custody marker');
       if (r.powerVersion !== undefined) ensure(r.powerVersion === 1 && s.power, 'power body marker');
       if (s.power !== undefined) ensure(s.power && r.powerVersion === 1, 'power persistent marker');
       validateLegacyEnergyContract(r, s, this.world);
@@ -2175,8 +2236,10 @@ export class Simulation implements SimulationAPI {
         }
         for (const budget of budgets.filter(budget => ['education', 'health', 'transport'].includes(budget.purpose))) ensure(s.culture.orders.some((order: ServiceOrder) => order.id === budget.id && order.approvedAt !== null), 'civic authorization must retain its service order');
       }
+      validateSupplementalBudgetCrossReferences(s, r.publicBudgets ?? []);
       validatePowerBudgetCrossReferences(s, r.publicBudgets ?? []);
       validateRoadworksBudgetCrossReferences(s, r.publicBudgets ?? []);
+      validatePublicDisinfectionBudgetCrossReferences(s, r.publicBudgets ?? []);
       ensure(r.freight && typeof r.freight === 'object' && !Array.isArray(r.freight), 'freight'); for (const [id, amount] of Object.entries(r.freight)) { ensure(districtIds.has(id), 'freight district'); money(amount, 'freight amount'); }
       if (r.shopLabor !== undefined) { ensure(r.shopLabor && typeof r.shopLabor === 'object' && !Array.isArray(r.shopLabor), 'shop labor'); for (const [id, minutes] of Object.entries(r.shopLabor)) { ensure(shopIds.has(id), 'shop labor identity'); number(minutes, 0, 100000, 'shop labor minutes'); } }
       if (r.retailSalesSinceBatch !== undefined) {
@@ -2188,7 +2251,7 @@ export class Simulation implements SimulationAPI {
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
-      for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player'), 'managed business mirror must reflect actual operating owner');
+      for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
       ensure(r.campaign === null || r.campaign && finite(r.campaign.countAt) && r.campaign.countAt >= 0 && finite(r.campaign.votes) && r.campaign.votes >= 0 && r.campaign.votes <= 100, 'campaign');
       ensure(r.signalOverrides && typeof r.signalOverrides === 'object', 'signals'); for (const [id, value] of Object.entries(r.signalOverrides)) ensure(this.world.nodes.some(n => n.id === id) && (value === 0 || value === 1), 'signal override');
       ensure(r.relationshipAt && typeof r.relationshipAt === 'object', 'relationship timers'); for (const [id, at] of Object.entries(r.relationshipAt)) { ensure(expectedCitizenIds.has(id.startsWith('reconcile:') ? id.slice(10) : id), 'relationship timer id'); number(at, -10000, 1e12, 'relationship timer'); }
@@ -2209,6 +2272,7 @@ export class Simulation implements SimulationAPI {
       ensure(r.customers && typeof r.customers === 'object' && !Array.isArray(r.customers), 'customers'); for (const [id, shopId] of Object.entries(r.customers)) ensure(expectedCitizenIds.has(id) && shopIds.has(shopId as string), 'customer reference');
       ensure(r.driving && typeof r.driving === 'object' && (r.driving.vehicleId === null || expectedVehicleIds.has(r.driving.vehicleId) && r.driving.vehicleId === p.vehicleId), 'driving vehicle'); number(r.driving.throttle, -1, 1, 'driving throttle'); number(r.driving.turn, -1, 1, 'driving turn'); ensure(typeof r.driving.brake === 'boolean', 'driving brake'); number(r.driving.speed, 0, 200, 'driving speed');
       ensure(r.dispatches && typeof r.dispatches === 'object' && !Array.isArray(r.dispatches), 'dispatches'); for (const [id, dispatch] of Object.entries(r.dispatches) as [string, any][]) ensure(expectedCitizenIds.has(id) && crimes.some(c => c.id === dispatch.crimeId) && typeof dispatch.arrived === 'boolean', 'dispatch references');
+      validatePoliceSupplies(s as SimState, r, this.world);
       for (const [id, at] of Object.entries(r.hostileAt)) { ensure(expectedCitizenIds.has(id), 'hostile timer identity'); number(at, 0, 1e12, 'hostile timer'); }
       if (r.peopleElapsed !== undefined) {
         ensure(r.peopleElapsed && typeof r.peopleElapsed === 'object' && !Array.isArray(r.peopleElapsed), 'deferred people minutes');

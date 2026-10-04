@@ -1,0 +1,60 @@
+{
+  "phase": "captures",
+  "startedAt": "2026-10-04T01:43:59.827193+00:00",
+  "endedAt": "2026-10-04T01:44:08.296933+00:00",
+  "status": "FAIL",
+  "command": [
+    "node",
+    "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs",
+    "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/capture-originals",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization.json"
+  ],
+  "timeoutSeconds": 900,
+  "wrapperExitCode": 1,
+  "ownedProcessReceipt": {
+    "startedAt": "2026-10-04T01:44:00.018378+00:00",
+    "endedAt": "2026-10-04T01:44:07.839606+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs",
+      "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/capture-originals",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization.json"
+    ],
+    "exitCode": 1,
+    "timedOut": false,
+    "status": "FAIL",
+    "inputCount": 241,
+    "inputsStable": true,
+    "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ownedPid": 22652,
+    "finalOwnedSessionMembers": [
+      {
+        "pid": 22672,
+        "state": "Z",
+        "parent": 1,
+        "group": 22652,
+        "session": 22652,
+        "startTicks": 906667
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "sourcePath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+  "inputCount": 241,
+  "inputsStable": true,
+  "authorizationSHA256": "3be01d9595af42f2c3f2aac8e2593d6c1597e73d978bd025e9e628b892347224",
+  "originalWrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+  "phaseDriverSHA256": "73e07e20452ceae5a7bf8eef0389f9eed43c01e0545ef4126ecdab038d60a3c1",
+  "expectedChecks": null,
+  "observedChecks": null,
+  "actualResultFile": null,
+  "actualResult": null,
+  "distStable": true,
+  "scope": "ROOT07 actual isolated run; Linux software WebGL is functional evidence only",
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "Library": "ROOT_WILL_DELIVER_UNIFIED_ORIGINALS"
+}

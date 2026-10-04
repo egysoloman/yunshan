@@ -66,15 +66,32 @@ export function buildLandscape(world: WorldDefinition): {
   earth.onBeforeCompile = shader => {
     shader.vertexShader = 'varying vec3 vLandPosition; varying vec3 vLandNormal;\n' + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvLandPosition = position; vLandNormal = normal;');
-    shader.fragmentShader = 'varying vec3 vLandPosition; varying vec3 vLandNormal;\n' + shader.fragmentShader;
+    shader.fragmentShader = `varying vec3 vLandPosition; varying vec3 vLandNormal;
+      float landPatch(vec2 p){
+        vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);
+        vec4 n=fract(sin(vec4(dot(i,vec2(12.9898,78.233)),dot(i+vec2(1,0),vec2(12.9898,78.233)),dot(i+vec2(0,1),vec2(12.9898,78.233)),dot(i+vec2(1,1),vec2(12.9898,78.233))))*43758.5453);
+        return mix(mix(n.x,n.y,f.x),mix(n.z,n.w,f.x),f.y);
+      }\n` + shader.fragmentShader;
     shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
       vec3 cell=floor(vLandPosition*5.0);
       float grain=fract(sin(dot(cell,vec3(12.9898,78.233,39.425)))*43758.5453);
       float cliff=1.0-smoothstep(.25,.75,abs(vLandNormal.y));
-      diffuseColor.rgb*=.94+grain*.12;
+      float landMicro=1.0-smoothstep(.2,1.2,length(fwidth(vLandPosition)));
+      diffuseColor.rgb*=mix(1.0,.94+grain*.12,landMicro);
       vec3 weatherCell=floor(vLandPosition*.18);
       float weather=fract(sin(dot(weatherCell,vec3(31.13,17.71,53.29)))*15731.743);
-      diffuseColor.rgb*=mix(1.0,.89+weather*.13,cliff);`);
+      diffuseColor.rgb*=mix(1.0,.89+weather*.13,cliff);
+      // Pigment follows the unchanged physical shell. Grey courses and moss
+      // break the flat green slope; no decorative cliff or new walkable surface
+      // is substituted for terrainHeight, and no instances are added.
+      float sediment=.5+.5*sin(vLandPosition.y*.9+sin(vLandPosition.x*.045+vLandPosition.z*.034)*1.2);
+      float crag=.5+.5*sin(vLandPosition.x*.22+sin(vLandPosition.z*.19)*1.7);
+      diffuseColor.rgb*=mix(1.0,.9+sediment*.15+crag*.035,cliff);
+      float moss=step(.67,weather)*cliff*(.35+.35*sediment);
+      diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.15,.235,.11),moss*.22);
+      float meadow=1.0-cliff;
+      float grassPatch=landPatch(vLandPosition.xz*.043);
+      diffuseColor.rgb*=mix(1.0,.93+grassPatch*.12,meadow);`);
   };
   const transform = new THREE.Object3D();
   function batch(name: string, blocks: Block[], material: THREE.Material, parent = group, geometry: THREE.BufferGeometry = cube) {
@@ -109,7 +126,7 @@ export function buildLandscape(world: WorldDefinition): {
     const y = terrainHeight(world, x, z, includeBasements);
     const result = quantize(y); heightCache.set(key, result); return result;
   }
-  const palette = { rock: new THREE.Color('#5b6863'), cliff: new THREE.Color('#737d73'), soil: new THREE.Color('#887457'), grass: new THREE.Color('#43673b'), gravel: new THREE.Color('#abae9b'), wet: new THREE.Color('#5d817b') };
+  const palette = { rock: new THREE.Color('#63746e'), cliff: new THREE.Color('#8b9487'), soil: new THREE.Color('#8b7859'), grass: new THREE.Color('#5a7542'), gravel: new THREE.Color('#b3b5a0'), wet: new THREE.Color('#608981') };
   function groundColor(x: number, z: number, y: number, slope: number, side = false) {
     const r = riverAt(x, z), field = Math.sin(x / 43) * Math.cos(z / 58), broad = Math.sin(x / 240 + z / 180);
     let color: THREE.Color;

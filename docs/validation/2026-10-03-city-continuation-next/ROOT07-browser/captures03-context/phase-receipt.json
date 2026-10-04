@@ -1,0 +1,62 @@
+{
+  "phase": "captures",
+  "startedAt": "2026-10-04T02:43:43.077931+00:00",
+  "endedAt": "2026-10-04T02:46:16.560140+00:00",
+  "status": "PASS",
+  "command": [
+    "node",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-context-v3/capture-root07-context-v3.mjs",
+    "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/capture-originals",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization-family-and-context.json",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/capture-results.json"
+  ],
+  "timeoutSeconds": 300,
+  "wrapperExitCode": 0,
+  "ownedProcessReceipt": {
+    "startedAt": "2026-10-04T02:43:43.151583+00:00",
+    "endedAt": "2026-10-04T02:46:15.707260+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-context-v3/capture-root07-context-v3.mjs",
+      "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/capture-originals",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization-family-and-context.json",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/capture-results.json"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 241,
+    "inputsStable": true,
+    "rawSHA256": "d5c85a8f87173784673b699f0b7b7eb42b5e315356f6d71ecfab5ff3899f971d",
+    "ownedPid": 27186,
+    "finalOwnedSessionMembers": [
+      {
+        "pid": 27206,
+        "state": "Z",
+        "parent": 1,
+        "group": 27186,
+        "session": 27186,
+        "startTicks": 1264893
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "sourcePath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+  "inputCount": 241,
+  "inputsStable": true,
+  "authorizationSHA256": "09e539f4f7c5885145a87d79fbc7d896396f0ec6901c919bd06eb743f40b82b8",
+  "originalWrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+  "phaseDriverSHA256": "2926f764792a17305df7dcb15739030cf2d5f56a3714e32328b021113035992d",
+  "expectedChecks": null,
+  "observedChecks": null,
+  "actualResultFile": null,
+  "actualResult": null,
+  "distStable": true,
+  "scope": "ROOT07 actual isolated run; Linux software WebGL is functional evidence only",
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "Library": "ROOT_WILL_DELIVER_UNIFIED_ORIGINALS"
+}

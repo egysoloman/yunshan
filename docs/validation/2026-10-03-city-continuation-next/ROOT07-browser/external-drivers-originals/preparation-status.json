@@ -1,0 +1,63 @@
+{
+  "status": "PREPARED_NOT_RUN",
+  "preparedAt": "2026-10-04T00:34:29.188386+00:00",
+  "staticPythonAST": {
+    "status": "PASS",
+    "files": [
+      "run-phase-v2-original.py",
+      "run-root07.py"
+    ]
+  },
+  "staticNodeSyntax": {
+    "status": "PASS",
+    "command": "node --check capture-root07.mjs",
+    "scope": "Parse only; no imports, app, browser, GPU or tests started"
+  },
+  "applicationBuild": "NOT_RUN",
+  "DOM35": "NOT_RUN",
+  "WebGL11": "NOT_RUN",
+  "controlledPNG9": "NOT_RUN",
+  "ROOT07Source": "NOT_SUPPLIED",
+  "ROOT07ExecutionPermission": "NOT_SUPPLIED",
+  "ROOT06": "IMMUTABLE_DRAFT_NOT_TOUCHED",
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "Library": "ROOT_WILL_DELIVER_UNIFIED_ORIGINALS",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4230,
+      "sha256": "6388715ed4c33fd42354446d19ae7ba8a5e780ee8e8282d7a23c68d7c1ac362a"
+    },
+    {
+      "path": "authorization-template.json",
+      "bytes": 347,
+      "sha256": "f967e6099729e506f0d9fb55e85f7f0a8c4f00b85cec6042e6b7feff4928b009"
+    },
+    {
+      "path": "capture-root07.mjs",
+      "bytes": 17797,
+      "sha256": "87e2f7e5c52c6a85fcd6517f2a50ad0db395ea2ca580043cedc277708e2183d5"
+    },
+    {
+      "path": "run-phase-v2-original.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    {
+      "path": "run-root07.py",
+      "bytes": 9378,
+      "sha256": "73e07e20452ceae5a7bf8eef0389f9eed43c01e0545ef4126ecdab038d60a3c1"
+    },
+    {
+      "path": "source-contract-observations.json",
+      "bytes": 1572,
+      "sha256": "7ff7b33f034ab615ae8f243452060b3f8542eea13aa4b6346a138e1ada4d60ef"
+    },
+    {
+      "path": "候选开发备忘录.md",
+      "bytes": 2274,
+      "sha256": "68e2cab381ccc6df75f6f8c0050875ca494d65b0f81a39dd83704c82a05ed18d"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "namespace": "/workspace/yunshan-work/ROOT07-economy-plots-v5-20261004-01",
+  "memberCount": 49,
+  "bytes": 2472739,
+  "excludedSelfAndClosureCompanion": [
+    "ALL_FILES_SHA256.json",
+    "closed-receipt.json"
+  ],
+  "files": [
+    {
+      "path": "HANDOFF.json",
+      "bytes": 8312,
+      "sha256": "def44ef6f061dc002207d50e5bde33afd1a2550997390aefff835ab40d9db6bf"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 2180,
+      "sha256": "012035a7ed7d232e1308a0e71bd9a4f815257bfa995fde4b5d4165df90bc8531"
+    },
+    {
+      "path": "command.json",
+      "bytes": 674,
+      "sha256": "317b1da81722e941c99ee1f7ec5eb1ab65408bbbb71c28b7bad38ed0902fb539"
+    },
+    {
+      "path": "evidence/inputs-after.json",
+      "bytes": 69253,
+      "sha256": "18a3b19dc16b45a6e676b891476926a2964b48044f20a8cbcbd186f3ecc38579"
+    },
+    {
+      "path": "evidence/inputs-before.json",
+      "bytes": 69253,
+      "sha256": "18a3b19dc16b45a6e676b891476926a2964b48044f20a8cbcbd186f3ecc38579"
+    },
+    {
+      "path": "evidence/original-audit-run-receipt.json",
+      "bytes": 770,
+      "sha256": "d33b35a2b22375a3b6d2266c8fe5c875d4c6f5121cfebc56b63958c5eb79f5a0"
+    },
+    {
+      "path": "evidence/original-frozen-inputs.json",
+      "bytes": 27166,
+      "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40"
+    },
+    {
+      "path": "evidence/pdffonts.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/pdffonts.stdout.log",
+      "bytes": 376,
+      "sha256": "caa14a73515a527fe55ad5ec572c0409756cf4ad428905be3c03e9a513d41fb6"
+    },
+    {
+      "path": "evidence/pdfinfo.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/pdfinfo.stdout.log",
+      "bytes": 460,
+      "sha256": "5f2be6215a32b5c32dd9b3ea5cf113549a614136216f79bdb8e871a089552852"
+    },
+    {
+      "path": "generated-originals/plot-receipt.json",
+      "bytes": 998,
+      "sha256": "b2c8ff5ed7b0bd937466dc4cf3587f507a911130b5679ac5d9be2a235f062963"
+    },
+    {
+      "path": "generated-originals/云山巨城-ROOT07-14日审计.pdf",
+      "bytes": 83349,
+      "sha256": "71ca9658d33372a8ee66de05af3a6ba4a094ab9f14099f1a2c1fe7579aac1635"
+    },
+    {
+      "path": "generated-originals/云山巨城-ROOT07-14日审计.png",
+      "bytes": 365889,
+      "sha256": "86ea153667873bf1f659973330367376c6cf48582857490003168e746b1b5fa3"
+    },
+    {
+      "path": "generated-originals/云山巨城-ROOT07-14日审计.svg",
+      "bytes": 245214,
+      "sha256": "7e94347f3d1f728f75827f6ed95df47d0f7bc7431cc71e2314fb947c3bd8d618"
+    },
+    {
+      "path": "original-v4/ALL_FILES_SHA256.json",
+      "bytes": 4552,
+      "sha256": "ea4cec32c7cb0e6fffa2432404ad5549069faa39a0c869f40f27fa9783cd15da"
+    },
+    {
+      "path": "original-v4/HANDOFF.json",
+      "bytes": 3001,
+      "sha256": "238a564c6b690a8b30e91b0cfd053975abfa323fe0d45a161db334b136dee864"
+    },
+    {
+      "path": "original-v4/HANDOFF.md",
+      "bytes": 2015,
+      "sha256": "9f68fb0967f59bec944daa0980f60a02e30c9b420755cc185b48d27a7db9aa47"
+    },
+    {
+      "path": "original-v4/closed-receipt.json",
+      "bytes": 674,
+      "sha256": "f1028825e29cc780f737337c03c001128ab7bb80ee48e5d026c4523237f32797"
+    },
+    {
+      "path": "original-v4/command.json",
+      "bytes": 674,
+      "sha256": "a15717d75e00c35c67f4a4357aa40a6981c679b32782f9215dbcd2ce254bbece"
+    },
+    {
+      "path": "original-v4/evidence/inputs-after.json",
+      "bytes": 56918,
+      "sha256": "405fc87b990a2b23b85bac43eaf04633babdc67872e8979cc872cbc8bdbe9ac4"
+    },
+    {
+      "path": "original-v4/evidence/inputs-before.json",
+      "bytes": 56918,
+      "sha256": "405fc87b990a2b23b85bac43eaf04633babdc67872e8979cc872cbc8bdbe9ac4"
+    },
+    {
+      "path": "original-v4/evidence/original-audit-run-receipt.json",
+      "bytes": 770,
+      "sha256": "d33b35a2b22375a3b6d2266c8fe5c875d4c6f5121cfebc56b63958c5eb79f5a0"
+    },
+    {
+      "path": "original-v4/evidence/original-frozen-inputs.json",
+      "bytes": 27166,
+      "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40"
+    },
+    {
+      "path": "original-v4/evidence/pdffonts.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-v4/evidence/pdffonts.stdout.log",
+      "bytes": 376,
+      "sha256": "caa14a73515a527fe55ad5ec572c0409756cf4ad428905be3c03e9a513d41fb6"
+    },
+    {
+      "path": "original-v4/evidence/pdfinfo.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-v4/evidence/pdfinfo.stdout.log",
+      "bytes": 460,
+      "sha256": "904c9b8ef66424574ba17acc62f85aa31b3da75a7c8efbcd19aace74a49bdde7"
+    },
+    {
+      "path": "original-v4/generated-originals/plot-receipt.json",
+      "bytes": 998,
+      "sha256": "58538ede3d22bf14d61be65de7c106ec50b28e076f7ff5ee60c77dd303c45a77"
+    },
+    {
+      "path": "original-v4/generated-originals/云山巨城-ROOT07-14日审计.pdf",
+      "bytes": 85516,
+      "sha256": "e32d5a33a18c1b29d81f499375cded0a33beacb2eb1be119eed830f06af081c1"
+    },
+    {
+      "path": "original-v4/generated-originals/云山巨城-ROOT07-14日审计.png",
+      "bytes": 366174,
+      "sha256": "45f959763d99adfaaf5e5a424c91c8ff4dd15a987e2f4a65f4caa470adeb607a"
+    },
+    {
+      "path": "original-v4/generated-originals/云山巨城-ROOT07-14日审计.svg",
+      "bytes": 249396,
+      "sha256": "0dbf30cf213eae036dacd9b0f49bf571f9abd686d8dfbac0f019d03793f6c296"
+    },
+    {
+      "path": "original-v4/original-v3/plot-receipt.json",
+      "bytes": 998,
+      "sha256": "abeafe846da0179647d14a25d2e030fa497b2e5bf008d29c3895cecb2affd1fe"
+    },
+    {
+      "path": "original-v4/original-v3/plot-root07-audit-v3-20261004.py",
+      "bytes": 7056,
+      "sha256": "6381ce0eeebd6d374a49d0756aa1ed636d996e5e39390f6172a3859f50ce396c"
+    },
+    {
+      "path": "original-v4/original-v3/云山巨城-ROOT07-14日审计.pdf",
+      "bytes": 87151,
+      "sha256": "8dcde88cb5e368e4d5b95438000c0ddbea8136e6b0a637f5ea8d9d626d94cdb0"
+    },
+    {
+      "path": "original-v4/original-v3/云山巨城-ROOT07-14日审计.png",
+      "bytes": 363788,
+      "sha256": "5514d191d462970943517a062f2b39f4373d53cc8b7e30a43252035b2cd51955"
+    },
+    {
+      "path": "original-v4/original-v3/云山巨城-ROOT07-14日审计.svg",
+      "bytes": 250850,
+      "sha256": "7e9794a7b072b3808e87ba9d2c419426dac1df9c7cb0a6fe33087678fa3a181d"
+    },
+    {
+      "path": "original-v4/plot-root07-audit-v4-20261004.py",
+      "bytes": 7077,
+      "sha256": "c2f823f362125daa6caa66a28171c2036eba28382843e7fd5fc6c3485e9c5439"
+    },
+    {
+      "path": "original-v4/raw.log",
+      "bytes": 468,
+      "sha256": "af46cfc7a893b31ac7b062b9cb2b0a8fdd87d92108afeb59791cd8c5c1ed82a0"
+    },
+    {
+      "path": "original-v4/run-plot-v4.py",
+      "bytes": 4145,
+      "sha256": "136d815554066686c533a4c6b608aed786103c2a753c4a39781eec40eea280f0"
+    },
+    {
+      "path": "original-v4/run-receipt.json",
+      "bytes": 1368,
+      "sha256": "2389ba6542f4f3f307515bbe10e79897cf653a1ea04fd78be3525f7e2874dceb"
+    },
+    {
+      "path": "original-v4/v3-to-v4.patch",
+      "bytes": 828,
+      "sha256": "eac418b59fcf4ff50051d8e5b4c6a2d42a129e0d96c83d64235353d879bb9758"
+    },
+    {
+      "path": "original-v4/visual-and-vector-validation.json",
+      "bytes": 1909,
+      "sha256": "75b31afd6ea9bac768a413d439c2aa7983d5d403b0c90b7577a4f7907d2bdd3b"
+    },
+    {
+      "path": "plot-root07-audit-v5-20261004.py",
+      "bytes": 7062,
+      "sha256": "e3a25d8da2c9ca6da90c55bc228813bf8b67a2a27ea734c535f4f2d65557393f"
+    },
+    {
+      "path": "raw.log",
+      "bytes": 468,
+      "sha256": "c48a55308460516940b4c30e89ba4764fa12b19da5fddc0e15ead05caf63c347"
+    },
+    {
+      "path": "run-plot-v5.py",
+      "bytes": 4407,
+      "sha256": "490de2e0521b3ada45df2a632dc63c885549f3b18dda3015a82d1dc3d397f3d5"
+    },
+    {
+      "path": "run-receipt.json",
+      "bytes": 1387,
+      "sha256": "f1bb685a674d62458aeb61dcf3bfa5b44c0595a0d43e8605770d6ef6c6a1afaa"
+    },
+    {
+      "path": "v4-to-v5.patch",
+      "bytes": 2248,
+      "sha256": "0d6bab919fd8fe1043210170c3d5b81549c688758ea5db03b7626e21e5f7237a"
+    },
+    {
+      "path": "visual-and-vector-validation.json",
+      "bytes": 2027,
+      "sha256": "385ce6eab3a57332566a418a72a16540fe499b042ace46ecc73dd891fe9d31cc"
+    }
+  ]
+}

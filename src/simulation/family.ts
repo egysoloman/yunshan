@@ -1,5 +1,5 @@
 import type { Simulation } from '../simulation';
-import { shopLifecycleAssetOwnerId, shopLifecycleCanDispose } from './shop_lifecycle';
+import { shopLifecycleAssetOwnerId, shopLifecycleCanDispose, shopLifecyclePendingEstateAssets } from './shop_lifecycle';
 import { settleDeceasedAccount } from './banking';
 import { publicFloor } from './culture';
 import { quoteSupply } from './trade';
@@ -31,6 +31,23 @@ export interface FamilyChild {
   schoolDay: number;
   graduatedAt: number | null;
   schoolVisitId?: string | null;
+  /** Personal study is useful, but is not a credential or funded teaching. */
+  selfStudyMinutes?: number;
+}
+export interface FormalLearningReceipt {
+  orderId: string; siteId: string; teacherId: string; completedAt: number;
+  minutes: 60; minutesPerLevel: 60 | 480; educationGain: number;
+}
+export interface FamilyTuitionLearningReceipt {
+  courseId: string; siteId: string; teacherId: string; completedAt: number;
+  minutes: 60; minutesPerLevel: 480; educationGain: number;
+}
+export interface FormalLearningRecord {
+  baselineEducation: number; baselineAttendanceMinutes: number;
+  earnedMinutes: number; receipts: FormalLearningReceipt[]; tuitionPages?: FamilyTuitionLearningReceipt[][];
+  /** Higher qualifications already admitted by the old v1 reader, retained
+   * when this resident completes its first real tuition course. */
+  legacyEducationCarry?: number;
 }
 export interface FamilyEstate {
   settledAt: number;
@@ -67,12 +84,27 @@ export interface FamilyState {
   careGuardians: Record<string, string[]>;
   estateSales: EstateAssetSale[];
   nextEstateSaleId: number;
+  formalLearningVersion?: 1 | 2;
+  formalLearning?: Record<string, FormalLearningRecord>;
 }
 type FamilySimState = SimState & { family?: FamilyState };
 type ProvisionedCitizen = Citizen & { food?: number };
 const clamp = (value: number, min = 0, max = 100) => Math.max(min, Math.min(max, value));
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
 const object = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object' && !Array.isArray(value);
+/** Core supplies only the portion of its people interval actually spent at
+ * the destination. The rest of a journey never becomes personal school time. */
+export function recordSchoolSelfStudy(simulation: Simulation, citizen: Citizen, site: WorldDefinition['buildings'][number], arrivedMinutes: number): void {
+  const state = simulation.state, child = state.family?.children[citizen.id], profile = state.extension?.actorProfiles[citizen.id];
+  if (!child || child.schoolId !== site.id || site.kind !== 'school' || !profile?.alive || profile.age < 6 || profile.age >= 18
+    || state.hour < 7.5 || state.hour >= 17.5 || citizen.needs.hunger < 40 || citizen.needs.fatigue < 40 || profile.health < 45
+    || !simulation.isNearBuilding(site, citizen.position, 1) || !finite(arrivedMinutes) || arrivedMinutes <= 0) return;
+  const day = Math.floor(state.extension!.lastUpdate / GAME_DAY);
+  if (child.schoolDay !== day) { child.schoolDay = day; child.studyToday = 0; }
+  const elapsed = Math.max(0, Math.min(arrivedMinutes, 240 - child.studyToday));
+  child.studyToday += elapsed; child.selfStudyMinutes = (child.selfStudyMinutes ?? 0) + elapsed;
+  if (citizen.skills) citizen.skills.learning = clamp((citizen.skills.learning ?? 0) + elapsed * .003);
+}
 const distance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 
 /** Only the recorded biological genealogy determines kinship; foster guardians do not. */
@@ -276,7 +308,7 @@ export function installFamily(simulation: Simulation): void {
       family().estateSales.push({ id: `estate-sale-${family().nextEstateSaleId++}`, deceasedId: id, kind, assetId, unitPrice: price, quantity, soldQuantity: 0, proceeds: 0, createdAt: now(), state: 'offered', receipts: [] });
     };
     for (const company of state().extension!.companies) if ((company.shareholders[id] ?? 0) > 0) add('shares', company.id, company.sharePrice, company.shareholders[id]);
-    for (const shop of state().shops) if (shopLifecycleAssetOwnerId(state(), shop) === id && shopLifecycleCanDispose(state(), shop.id) && !state().extension!.companies.some(company => company.buildingId === shop.buildingId)) {
+    for (const shop of state().shops) if (shopLifecycleAssetOwnerId(state(), shop) === id && shopLifecycleCanDispose(state(), shop.id) && !state().extension!.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)) {
       const consigned = (state().trade?.lots[shop.id] ?? []).reduce((sum, lot) => sum + lot.quantity, 0);
       const ownedStockValue = buildings.get(shop.buildingId)!.kind === 'market' ? (state().trade?.ownedLots?.[shop.id] ?? []).reduce((sum, lot) => sum + lot.quantity * lot.unitPrice, 0) : Math.max(0, shop.inventory - consigned) * quoteSupply(simulation, shop.id, shop.inventory).unitPrice;
       add('business', shop.id, Math.max(1, simulation.shopFunds(shop) + ownedStockValue - simulation.shopPayrollDebt(shop)), 1);
@@ -342,7 +374,7 @@ export function installFamily(simulation: Simulation): void {
       estate.status = settlement.closed ? 'settled' : 'awaitingExecutor';
       if (!settlement.closed) continue;
       for (const sale of f.estateSales) if (sale.deceasedId === id && sale.state === 'offered') sale.state = 'withdrawn';
-      if (!heirs.length) { if (deceased.money > 0 || s.extension!.companies.some(company => (company.shareholders[id] ?? 0) > 0) || s.shops.some(shop => shop.ownerId === id)) estate.status = 'awaitingExecutor'; continue; }
+      if (!heirs.length) { if (deceased.money > 0 || s.extension!.companies.some(company => (company.shareholders[id] ?? 0) > 0) || s.shops.some(shop => shop.ownerId === id) || shopLifecyclePendingEstateAssets(s, id)) estate.status = 'awaitingExecutor'; continue; }
       // Later receipts cannot strand money in the deceased actor's inactive wallet.
       const cash = deceased.money;
       if (heirs.some(heir => actor(heir)!.money + cash / heirs.length > 1e9)) { estate.status = 'awaitingExecutor'; continue; }
@@ -358,10 +390,11 @@ export function installFamily(simulation: Simulation): void {
         const holders = Object.entries(company.shareholders).filter(([holder, amount]) => holder !== 'exchange' && amount > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
         if (holders.length) company.ownerId = holders[0][0];
       }
-      for (const shop of s.shops) if (shopLifecycleAssetOwnerId(s, shop) === id && shopLifecycleCanDispose(s, shop.id) && !s.extension!.companies.some(company => company.buildingId === shop.buildingId)) {
+      for (const shop of s.shops) if (shopLifecycleAssetOwnerId(s, shop) === id && shopLifecycleCanDispose(s, shop.id) && !s.extension!.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)) {
         const heir = [...heirs].sort((a, b) => Number(profile(b).age >= 18) - Number(profile(a).age >= 18) || a.localeCompare(b))[0];
         if (simulation.transferBusinessOwnership(shop.id, heir)) { estate.businesses ??= {}; estate.businesses[shop.id] = heir; }
       }
+      if (shopLifecyclePendingEstateAssets(s, id)) estate.status = 'awaitingExecutor';
     }
   };
 
@@ -418,13 +451,8 @@ export function installFamily(simulation: Simulation): void {
       }
       const school = child.schoolId ? buildings.get(child.schoolId) : null;
       const day = Math.floor(now() / GAME_DAY); if (child.schoolDay !== day) { child.schoolDay = day; child.studyToday = 0; }
-      if (school && citizen.state === 'studying' && simulation.isNearBuilding(school, citizen.position, 1) && s.hour >= 7.5 && s.hour < 17.5
-        && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 40 && p.health >= 45) {
-        const elapsed = Math.max(0, Math.min(minutes, 240 - child.studyToday));
-        child.studyToday += elapsed; child.attendanceMinutes += elapsed;
-        citizen.education = Math.min(20, Math.floor(child.attendanceMinutes / SCHOOL_MINUTES_PER_LEVEL));
-        citizen.skills!.learning = clamp((citizen.skills!.learning ?? 0) + elapsed * .003);
-      }
+      // Actual personal study is credited by core's arrived interval. Formal
+      // school minutes and credentials require resource-backed tuition.
       if (p.age >= 18 && child.graduatedAt === null && child.attendanceMinutes >= 3 * SCHOOL_MINUTES_PER_LEVEL && (citizen.education ?? 0) >= 3) {
         const workplace = world.buildings.filter(site => ['workshop', 'farm', 'market'].includes(site.kind) && !site.facility && simulation.buildingTravelDistance(citizen.homeId, site.id) <= 500)
           .sort((a, b) => simulation.buildingTravelDistance(citizen.homeId, a.id) - simulation.buildingTravelDistance(citizen.homeId, b.id))[0];
@@ -589,6 +617,7 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     ensure(child.schoolId === null || sites.get(child.schoolId)?.kind === 'school', '学堂');
     ensure(child.schoolVisitId === undefined || child.schoolVisitId === null || sites.get(child.schoolVisitId)?.kind === 'school' && child.schoolId === null, '待现场入学学堂');
     num(child.attendanceMinutes, 0, 1e10, '实际学习分钟'); num(child.studyToday, 0, 240, '本日学时'); num(child.schoolDay, 0, Math.floor(f.lastUpdate / GAME_DAY), '学校日', true);
+    if (child.selfStudyMinutes !== undefined) { ensure(f.version === 2, '旧家庭版本不能夹带新自习字段'); num(child.selfStudyMinutes, 0, 1e10, '个人实际自习分钟'); }
     ensure(child.graduatedAt === null || finite(child.graduatedAt) && child.graduatedAt >= child.bornAt && child.graduatedAt <= f.lastUpdate, '毕业时间');
     if (child.graduatedAt !== null) ensure(child.graduatedAt + 1e-7 >= child.bornAt + 18 * GAME_YEAR && child.attendanceMinutes >= 3 * SCHOOL_MINUTES_PER_LEVEL, '成年并实际学成后毕业');
     ensure(child.schoolId !== null || child.attendanceMinutes === 0, '未入学不得积累教育');
@@ -618,7 +647,51 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     if (estate.bankSettlement !== undefined) { ensure(object(estate.bankSettlement) && typeof estate.bankSettlement.closed === 'boolean', '银行清算回执'); for (const key of ['debtPaid', 'depositClaimsTransferred', 'unpaidLoss']) num(estate.bankSettlement[key], 0, 1e12, '真实债务与存款权益清算'); ensure(['settled', 'awaitingExecutor'].includes(estate.status) && (estate.bankSettlement.closed || estate.status === 'awaitingExecutor'), '银行未结清前保留执行人待办'); }
     if (estate.businesses !== undefined) for (const [shopId, heirId] of Object.entries(dict(estate.businesses, candidate.shops.length, '经营权继承回执'))) ensure(candidate.shops.some(shop => shop.id === shopId) && heirs.includes(heirId), '实际经营权与法定继承人');
   }
-  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
+  if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
+  ensure(f.formalLearningVersion === undefined ? f.formalLearning === undefined : [1, 2].includes(f.formalLearningVersion) && object(f.formalLearning), '正式授课版本与收据正文必须同时存在');
+  if (f.formalLearningVersion === 2) ensure(!!candidate.familyEducation && Object.values(f.formalLearning!).some(record => record.tuitionPages?.flat().length), '正式家庭版本二须至少一份真实学费资格及原托管模块');
+  if (f.formalLearning !== undefined) ensure(Object.keys(f.formalLearning).length > 0, '正式授课正文保留至少一份真实资格来源');
+  if (f.formalLearning !== undefined) for (const [id, record] of Object.entries(dict(f.formalLearning, 1024, '正式授课学员'))) {
+    ensure(id !== 'player' && ids.has(id) && object(record), '正式授课真实居民');
+    num(record.baselineEducation, 0, 20, '保留原学历'); num(record.baselineAttendanceMinutes, 0, 1e10, '保留原学校学时'); num(record.earnedMinutes, 0, f.formalLearningVersion === 2 ? 10560 : 960, '真实新授课学时');
+    const publicReceipts = array(record.receipts, 16, '正式公共授课收据'), tuitionPages = record.tuitionPages === undefined ? [] : array(record.tuitionPages, 20, '家庭学期资格页');
+    ensure(record.tuitionPages === undefined || f.formalLearningVersion === 2 && tuitionPages.length > 0 && !!candidate.familyEducation, '新家庭正式来源须版本二及真实课程模块');
+    ensure(record.legacyEducationCarry === undefined || f.formalLearningVersion === 2 && tuitionPages.length > 0, '保有旧学历差额须首次真实家庭课程来源');
+    const legacyEducationCarry = record.legacyEducationCarry ?? 0;
+    num(legacyEducationCarry, 0, 20, '保有旧学历差额');
+    tuitionPages.forEach((page, index) => ensure(Array.isArray(page) && page.length > 0 && page.length <= 8 && (index === tuitionPages.length - 1 || page.length === 8), '每页八份课程权利全部保留'));
+    const tuitionReceipts = tuitionPages.flat(), receipts = [...publicReceipts, ...tuitionReceipts].sort((a,b) => a.completedAt - b.completedAt), seen = new Set<string>(); let earned = 0, awarded = 0, schoolMinutes = 0, previousAt = 0, legacyActivated = false;
+    const child = f.children[id], person = candidate.citizens.find(person => person.id === id)!;
+    for (const receipt of receipts) {
+      const tuition = 'courseId' in receipt, sourceId = tuition ? receipt.courseId : receipt.orderId;
+      ensure(object(receipt) && !seen.has(sourceId) && receipt.minutes === 60 && [60, 480].includes(receipt.minutesPerLevel), '具名课程不重复且实际六十分钟'); seen.add(sourceId);
+      let earliest = 0;
+      if (tuition) {
+        const course = [...(candidate.familyEducation?.pages.flat() ?? []), ...(candidate.familyEducation?.active ?? [])].find(course => course.id === sourceId);
+        ensure(!!course && course.status === 'completed' && course.actorId === id && course.siteId === receipt.siteId && sites.get(receipt.siteId)?.kind === 'school' && course.completedAt === receipt.completedAt && course.workedMinutes === 60 && course.consumedUnits === 1 && course.receivedUnits + course.reusedUnits === 1 && (course.staffMinutes[receipt.teacherId] ?? 0) > 0, '家庭正式课对应真实实付教材、教学与完成合同');
+        ensure(receipt.minutesPerLevel === 480, '家庭儿童仍须四百八十分钟一级'); earliest = Math.max(course!.startedAt, course!.receipt?.purchasedAt ?? course!.startedAt);
+      } else {
+        const order = candidate.culture?.orders.find(order => order.id === sourceId);
+        ensure(!!order && order.topic === 'education' && order.siteId === receipt.siteId && sites.get(receipt.siteId)?.kind === 'school' && order.servedIds.includes(id) && (order.serviceMinutes[id] ?? 0) >= 60
+          && order.consumedUnits >= 1 && order.receivedUnits >= order.consumedUnits && order.receipts.reduce((sum, purchase) => sum + purchase.quantity, 0) >= order.consumedUnits - 1e-7
+          && ids.has(receipt.teacherId) && receipt.teacherId !== id && order.staffIds.includes(receipt.teacherId), '正式公共课对应已耗教材与实际教师服务');
+        earliest = Math.max(order!.scheduledAt, order!.approvedAt ?? order!.scheduledAt, order!.receipts[0]?.purchasedAt ?? order!.scheduledAt);
+      }
+      num(receipt.completedAt, Math.max(previousAt, earliest), f.lastUpdate, '正式课程实际完成时点'); ensure(receipt.completedAt >= earliest + 60 - 1e-7, '正式课程不早于真实材料和六十分钟');
+      const life = candidate.extension!.actorProfiles[id], lifeClock = life.alive === false ? f.estates[id]?.settledAt ?? f.lastUpdate : f.lastUpdate, ageAt = life.age - (lifeClock - receipt.completedAt) / GAME_YEAR;
+      ensure(ageAt >= 6 - 1e-7 && receipt.minutesPerLevel === (child || ageAt < 18 - 1e-7 ? 480 : 60), '学校课程和成人资格保留真实年龄规则');
+      const levels = receipt.minutesPerLevel === 60 ? 1 : Math.floor((schoolMinutes + 60) / SCHOOL_MINUTES_PER_LEVEL) - Math.floor(schoolMinutes / SCHOOL_MINUTES_PER_LEVEL);
+      // The retained v1 qualification existed by its first tuition completion;
+      // it constrains later gains, without rewriting earlier public receipts.
+      legacyActivated ||= tuition;
+      const expectedGain = Math.min(levels, Math.max(0, 20 - record.baselineEducation - awarded - (legacyActivated ? legacyEducationCarry : 0)));
+      num(receipt.educationGain, 0, 1, '真实课程学历增量'); ensure(Math.abs(receipt.educationGain - expectedGain) < 1e-7, '学历只由全部完整正式课程合计增加');
+      if (receipt.minutesPerLevel === 480) schoolMinutes += 60;
+      earned += 60; awarded += receipt.educationGain; previousAt = receipt.completedAt;
+    }
+    ensure(receipts.length > 0 && earned === record.earnedMinutes && (tuitionPages.length > 0 ? Math.abs((person.education ?? 0) - record.baselineEducation - awarded - legacyEducationCarry) < 1e-7 : (person.education ?? 0) >= record.baselineEducation + awarded - 1e-7), '正式授课时数学历与历史基线一致');
+    ensure(child ? Math.abs(child.attendanceMinutes - record.baselineAttendanceMinutes - earned) < 1e-7 : record.baselineAttendanceMinutes === 0, '学校新学时只能来自真实正式课');
+  }
   num(f.nextHouseholdId, 1, 1e9, '共同账户序号', true); num(f.nextCeremonyId, 1, 1e9, '仪式序号', true); num(f.nextBondAt, 0, 1e12, '自主结识时钟');
   num(f.nextEstateSaleId, 1, 1e9, '遗产变卖序号', true);
   const pair = (value: unknown, label: string): string[] => { const result = array(value, 2, label); ensure(result.length === 2 && result[0] !== result[1] && result.every(id => ids.has(id)), label); return result; };
@@ -657,7 +730,7 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
   const saleIds = new Set<string>();
   for (const sale of array(f.estateSales, 256, '遗产执行变卖')) {
     ensure(object(sale) && /^estate-sale-[1-9][0-9]*$/.test(sale.id) && Number(sale.id.slice(12)) < f.nextEstateSaleId && !saleIds.has(sale.id) && !!f.estates[sale.deceasedId] && ['shares', 'business'].includes(sale.kind) && ['offered', 'sold', 'withdrawn'].includes(sale.state), '真实遗产执行标识'); saleIds.add(sale.id);
-    ensure(sale.kind === 'shares' ? companyIds.has(sale.assetId) : shopIds.has(sale.assetId) && !candidate.extension!.companies.some(company => company.buildingId === candidate.shops.find(shop => shop.id === sale.assetId)!.buildingId), '可变卖产权');
+    ensure(sale.kind === 'shares' ? companyIds.has(sale.assetId) : shopIds.has(sale.assetId) && !candidate.extension!.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === candidate.shops.find(shop => shop.id === sale.assetId)!.buildingId), '可变卖产权');
     num(sale.unitPrice, 1e-7, 1e12, '真实变卖报价'); num(sale.quantity, 1, sale.kind === 'business' ? 1 : 1e8, '真实产权数量', true); num(sale.soldQuantity, 0, sale.quantity, '实卖数量', true); num(sale.proceeds, 0, 1e12, '真实买方款项'); num(sale.createdAt, f.estates[sale.deceasedId].settledAt, f.lastUpdate, '遗产执行排入时钟');
     let paid = 0, quantity = 0;
     for (const receipt of array(sale.receipts, 256, '真实买方付款回执')) { ensure(object(receipt) && ids.has(receipt.buyerId) && receipt.buyerId !== sale.deceasedId, '实际买方'); num(receipt.at, sale.createdAt, f.lastUpdate, '实际产权交易时间'); num(receipt.quantity, 1, sale.quantity, '实际购买整数份额', true); num(receipt.paid, 1e-7, 1e12, '实际买款'); ensure(Math.abs(receipt.paid - receipt.quantity * sale.unitPrice) < 1e-6, '报价不是现金，须有实际买方付款'); paid += receipt.paid; quantity += receipt.quantity; }

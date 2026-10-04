@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-03T23:46:40.942013+00:00",
+  "kind": "guarded-opt-in-commercial-v6",
+  "files": [
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "originalSha256": "16fefbb69fe8608188169f33eeedd20d35edbf5e088ae5a35fc3d7be7fa1c00f",
+      "candidateSha256": "6c679dba54ca6db6d0a6d1d46245616f1289e3c1a14a6d0a101811fadb3c9ab4",
+      "bytes": 48989
+    },
+    {
+      "path": "src/commercial-district.ts",
+      "originalSha256": null,
+      "candidateSha256": "d85786d0e2db6971d728bfe29b2bb4c525d2728bac877d2051ef23f6a58e79b9",
+      "bytes": 5685
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "originalSha256": "e8dea7510b621ebf97579675c4ebf1cbb24807052daba61e7048543af595e6ee",
+      "candidateSha256": "4362d318021b48a295a806613d1cd17518e49dac79438157e97dea091478e886",
+      "bytes": 5091
+    },
+    {
+      "path": "src/renderer.ts",
+      "originalSha256": "817f1a7462d51222ff7b98932e8046045b4e4f41a3c53d43c7056d13458e2426",
+      "candidateSha256": "2ab8f672202a1269e4b0428935bf427fb2cad5ea33a0cfa2bc7970563e0b225f",
+      "bytes": 85386
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "originalSha256": "9a0a21580e1ace1e9df21ae91d4187933ce53e95b82e92639e00ae6b0ea75e86",
+      "candidateSha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c",
+      "bytes": 13231
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "originalSha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea",
+      "candidateSha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+      "bytes": 15041
+    },
+    {
+      "path": "src/types.ts",
+      "originalSha256": "c0e9692a066cb59d897a5b34b1fa2d000d81c5beeac05ef83dd09c235e41406b",
+      "candidateSha256": "e24a3e572c86aa759bb74f5d239283ebf0ebddc5fc50b0f003c0aa9286f44408",
+      "bytes": 14051
+    },
+    {
+      "path": "src/world.ts",
+      "originalSha256": "d838863b7c4ea2efb43f4cf8f68950ac082f502f4d701bf6951e27975ce497b8",
+      "candidateSha256": "0179c079b4a2af3fb364881bfd381ee5b4fe94368a13f23ce2e32bb9c04cdad2",
+      "bytes": 54482
+    },
+    {
+      "path": "tests/fixtures/world-layout/commercial-parent-v5-3ca.json",
+      "originalSha256": null,
+      "candidateSha256": "9128685c0f29d0d20ec4f6acf63a28ad3a88cae374771dd0f90ed928dbfbc14f",
+      "bytes": 3418
+    },
+    {
+      "path": "tests/world-v6-commercial.test.ts",
+      "originalSha256": null,
+      "candidateSha256": "2a063ca32f1533117c3a62ae97d8c45cb9ce4059a3ee414977ba0671e005a778",
+      "bytes": 10826
+    },
+    {
+      "path": "tests/world-v6-office.test.ts",
+      "originalSha256": null,
+      "candidateSha256": "c53b821fb1d74eaaaff69c2c0a443ca6ec904988948470b5366e928e71c59a82",
+      "bytes": 4345
+    }
+  ],
+  "rendererMerge": "add only metal palette property and exact material statement; retain all city color/light/shader changes",
+  "rendererBeforeSHA256": "e1112d8271151803c898ff8ffd7d6db545907843e1a7210d30d1c1ae6101068d",
+  "rendererCompositeSHA256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03",
+  "priorGuardStop": "old palette statement disagreed with installed visual palette; preflight stopped before commercial writes",
+  "currentDefault": "current-v5",
+  "scope": "18 old-world exact + prior geometry/W/2office API PASS; latest full geometry running",
+  "integrationValidation": "pending"
+}

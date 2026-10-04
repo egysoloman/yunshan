@@ -1,0 +1,25 @@
+{
+  "pid": 31700,
+  "group": 31700,
+  "argv": [
+    "env",
+    "YUNSHAN_COMMERCIAL_ROUTE_EVIDENCE=/workspace/yunshan-work/ROOT08-stair-escape-20261004-01/related02/evidence",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/stair-continuity.test.ts",
+    "tests/world-v6-commercial-routes.test.ts"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 31700,
+      "state": "R",
+      "parent": 31692,
+      "group": 31700,
+      "session": 31700,
+      "startTicks": 1664679
+    }
+  ]
+}

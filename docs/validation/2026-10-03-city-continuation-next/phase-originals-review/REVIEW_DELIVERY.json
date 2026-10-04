@@ -1,0 +1,134 @@
+{
+  "status": "READ_ONLY_REVIEW_AND_DRYRUN_COMPLETE_NO_ZIP",
+  "atUTC": "2026-10-04T02:10:46.481315+00:00",
+  "reviewer": "/root/subsystem_gap_audit",
+  "namespace": "/workspace/yunshan-work/phase-originals-review-20261004-01",
+  "repoWrites": false,
+  "rootCollectorModified": false,
+  "ZIPsProduced": 0,
+  "LibraryUploads": 0,
+  "LibraryID": null,
+  "ownedNewExecutions": "Only root collector without --pack, read-only archive decoder and bounded deflate estimate. All ended exit0; no Node rule/economy/browser run started.",
+  "ready26": {
+    "fileCount": 14143,
+    "payloadBytes": 2190267987,
+    "shaSizeChangesAgainstRootInventory": 0,
+    "excludedStable": true,
+    "outerSecretPatternMatches": 0
+  },
+  "decodedArchiveCounts": {
+    "secretPatternMatches": 0,
+    "decodedZIPs": 9,
+    "decodedGzips": 18,
+    "decodedBytes": 485760779,
+    "decodedRegularMembers": 4962,
+    "duplicateEncodedArchivesSkipped": 909,
+    "decodeErrors": 0,
+    "oversizedNestedMembersNotScanned": 0,
+    "depthLimitedArchivesNotScanned": 0,
+    "symlinkModeZIPMembers": 0,
+    "sourceSHAChanges": 0,
+    "sourceSymlinkRejections": 0
+  },
+  "futureCompletePlan": {
+    "file": "complete31-plan-await-freeze.json",
+    "groups": 31,
+    "waitGroups": 5,
+    "packAllowed": false,
+    "reviewGroupCanBeAdditional32AfterAgentEnds": true
+  },
+  "note": "No live group packed. Checkpoint tallies/estimated compressed sizes are not final production quantities. Original collector ignores declarative packAllowed until suggested freeze patch is applied; root must do producer/owned run ended verification. All duplicate original paths/archives preserved.",
+  "producer": "root will produce ZIPs/parts and perform Library uploads after finalization",
+  "files": [
+    {
+      "file": "REVIEW_HANDOFF.md",
+      "bytes": 8309,
+      "sha256": "cc008a3720563600315155e41c6e8f7fd965686b263d731f1e14afd53a53794c"
+    },
+    {
+      "file": "ROOT05-existing-Git-archives-separate.json",
+      "bytes": 1229,
+      "sha256": "dc34794f68a215473cbce829c0aa1a6fa2a8c971b15e513044ea016bb0a07ce0"
+    },
+    {
+      "file": "collector-plan-freeze-guard.inputs.json",
+      "bytes": 597,
+      "sha256": "468bc8a732bcbaad71ad0a32c274aca9611822f0ecd33594e001f8572ababb60"
+    },
+    {
+      "file": "collector-plan-freeze-guard.suggested.patch",
+      "bytes": 621,
+      "sha256": "cba6f560497c071a65065f999760dd785f9f185e6d1f27d70849acbc605e78eb"
+    },
+    {
+      "file": "complete31-plan-await-freeze.json",
+      "bytes": 3666,
+      "sha256": "2a90b6143d56b07a7ae8f54a06670a4d9b9530d85033bb920cbf2e9c447bd22b"
+    },
+    {
+      "file": "compression-time-estimate.json",
+      "bytes": 7239,
+      "sha256": "ab0ed0927e1106ad28de38e779e6040d8768a7f5703102f9b8b67a9198ed1bbc"
+    },
+    {
+      "file": "decode-archive-secret-count.py",
+      "bytes": 5532,
+      "sha256": "fe0820854e1fc3d64b920aff04662848b5b62e26a4d71715db44338e58a7f1d5"
+    },
+    {
+      "file": "decoded-archive-secret-count.json",
+      "bytes": 963,
+      "sha256": "03820e9a14170f850790752b84d02645a4f8528f7c471ecef177192ca30a1813"
+    },
+    {
+      "file": "dry-ready26-01/source-files-before.json",
+      "bytes": 2899369,
+      "sha256": "6bbb9b5fbfc718bb7ad232c838ea23d774773588c859547589350adaa4c0a9a1"
+    },
+    {
+      "file": "group-coverage-checkpoint.json",
+      "bytes": 17105,
+      "sha256": "1f69f32709c3d801f2952d67ec8408209abfcb8da30474c98dbf5242a3785847"
+    },
+    {
+      "file": "inputs-original/package-phase-originals-20261004.py",
+      "bytes": 6839,
+      "sha256": "cdea1f78f270cee32eb5be393d3e74da8a6a1033a482534048eda1a709523666"
+    },
+    {
+      "file": "inputs-original/phase-delivery-plan-20261004.json",
+      "bytes": 1828,
+      "sha256": "4732093e4115278201cb31978a3599bcfa7dca720ab7f145ba1ee316c9cf65f6"
+    },
+    {
+      "file": "inputs-original/phase-delivery-stable-groups-20261004.json",
+      "bytes": 1804,
+      "sha256": "bc7a5fd0c7792ff49b889a87bdc034fa4f911c721f9039bdedd9fafe5cdf6b23"
+    },
+    {
+      "file": "inputs-original/run-phase-v2.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    {
+      "file": "inventory-only.py",
+      "bytes": 653,
+      "sha256": "39a2b78036ad3e097371b508829bf7bc92ae6d69b56e355d52c436cbcc8d91e7"
+    },
+    {
+      "file": "ready26-plan.json",
+      "bytes": 1937,
+      "sha256": "85f4e06bb0a7eabf1d892bcf8cfb7ea8478c44a8a4c982fc159716bbd6b85240"
+    },
+    {
+      "file": "ready26-repeat-dryrun-receipt.json",
+      "bytes": 714,
+      "sha256": "70b20c2c04f90cd5e44e23992cf09701f84a8f2ce5ce84936634f8ff0df68cd5"
+    },
+    {
+      "file": "review-inputs-original.json",
+      "bytes": 752,
+      "sha256": "61fccfa2a4a6d9e1ae3b40cfaa13c772653dbfd20123e70481b173b34b2ee5d8"
+    }
+  ]
+}

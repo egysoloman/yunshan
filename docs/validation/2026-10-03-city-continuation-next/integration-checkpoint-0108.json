@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-04T01:07:58.881755+00:00",
+  "stage": "PRE_ROOT07_WAITING_MARKET_RETURN_AND_CANONICAL_REGRESSIONS",
+  "inputs": {
+    "src/simulation.ts": "2df2c6da30a4875373c19970d523f64da34f16564170df94b571576650e17098",
+    "src/ui.ts": "139a44e58d12e8d0bad86d1c286b4d04360230fe95c457ba374e90ea07da2ae6",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "src/simulation/culture.ts": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa",
+    "src/simulation/supplemental-budget.ts": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0",
+    "src/simulation/family.ts": "229b11ac4581b9532f5a53d42dea5c1c39aaa589c879213de4de7c3c7e399a7d",
+    "src/simulation/education.ts": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856",
+    "src/simulation/family-education.ts": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+    "src/types.ts": "9d0effb02cca50a4904a4d3a00ab3d10e1d60d54244ba210562b0cbf74a9c0ef",
+    "scripts/economy-audit.ts": "b7ebfe610330a7c1f6e990a1d65b8b3ee56ca58542514084b599093c538b1cf5",
+    "tests/family-fee-education.test.ts": "1579243d5dd7691f905142454ec9bd8bd3fa19d19bbf61ed74263db3563851e0"
+  },
+  "typeCheckPriorPartialSource": {
+    "startedAt": "2026-10-04T01:00:54.028374+00:00",
+    "endedAt": "2026-10-04T01:01:05.359802+00:00",
+    "argv": [
+      "npx",
+      "tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 228,
+    "inputsStable": true,
+    "rawSHA256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+    "ownedPid": 16435,
+    "finalOwnedSessionMembers": [],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "newLongAuditStarted": false,
+  "fullGoalComplete": false
+}

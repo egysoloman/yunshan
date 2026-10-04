@@ -1,0 +1,32 @@
+{
+  "startedAt": "2026-10-04T01:31:40.813127+00:00",
+  "endedAt": "2026-10-04T01:31:48.603841+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=lawful parent admission|sixty real paid-teacher minutes",
+    "tests/family-fee-education.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "0e30f6aa9fd892939483e0655cc0eab19f4eb04d1236cf09f738344d4c839579",
+  "ownedPid": 21174,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 21182,
+      "state": "Z",
+      "parent": 1,
+      "group": 21174,
+      "session": 21174,
+      "startTicks": 832564
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

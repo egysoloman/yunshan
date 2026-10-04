@@ -176,7 +176,7 @@ export function settleDeceasedAccount(simulation: Simulation, actorId: string, h
   const cashPayment = Math.min(actor.money, account.loanPrincipal + account.loanInterest);
   if (cashPayment > 0) { repay(s, actorId, cashPayment); result.debtPaid += cashPayment; }
   const hasUnsoldEstateAssets = shopLifecyclePendingEstateAssets(s, actorId) || s.extension!.companies.some(company => (company.shareholders[actorId] ?? 0) > 0)
-    || s.shops.some(shop => shop.ownerId === actorId && !s.extension!.companies.some(company => company.buildingId === shop.buildingId))
+    || s.shops.some(shop => shop.ownerId === actorId && !s.extension!.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId))
     || s.family?.households.some(household => household.actorIds.includes(actorId) && household.closedAt === null && household.balance > 0)
     || s.family?.pregnancies.some(pregnancy => pregnancy.parentIds.includes(actorId) && pregnancy.escrow > 0)
     || s.clinical?.orders.some(order => order.payerId === actorId && order.escrow > 0)

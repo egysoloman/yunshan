@@ -1,5 +1,5 @@
 import type { Simulation } from '../simulation';
-import type { Building, Citizen, Command, CommandResult, Player, Role, Shop, SimState, WorldDefinition } from '../types';
+import type { Building, Citizen, Company, Command, CommandResult, Player, Role, Shop, SimState, WorldDefinition } from '../types';
 import { homeRestPointBlockedByVoxels } from './home-rest';
 
 const EPS = 1e-7, CASH_CAP = 1e9, REGISTER_FEE = 50, CAPITAL = 200, RESERVE = 100;
@@ -24,7 +24,16 @@ export interface ShopReopenJob {
   materialUnits: 1; consumedUnits: 0 | 1; purchases: StockPurchase[];
   labor: { citizenId: string; minutes: number; earned: number; lastAt: number }[];
 }
+export interface ShopCompanyBinding {
+  release?: { at: number; inventory: number; materials: number; employees: number; capital: number; wageDebt: 0; committedPayroll: 0 };
+  companyId: string; founderId: string; registeredAt: number; leaseId: string | null;
+  openingCash: number; capitalFunding: number;
+  // A tenant cannot convert the landlord's pre-existing cash into shareholder equity.
+  ownerCashReserved: number; ownerCashEscrow: number; ownerCashReturned: number;
+}
 export interface ShopOperatingTitle {
+  corporationHistory?: ShopCompanyBinding[];
+  corporation?: ShopCompanyBinding;
   shopId: string; buildingId: string;
   /** An existing operating asset and its pre-existing site permission, never building/land ownership. */
   scope: 'existing-business-and-site-use'; legacyOwnerId: string; assetOwnerId: string;
@@ -33,8 +42,9 @@ export interface ShopOperatingTitle {
   listingId: string | null; leaseId: string | null; materialsHeld: number; reopen: ShopReopenJob | null; reopenHistory: ShopReopenJob[];
 }
 export interface ShopLifecycleReceipt {
+  siteReturn?: NonNullable<ShopCompanyBinding['release']> & { companyId: string };
   id: number; at: number; shopId: string; actorId: string; payeeId: string;
-  kind: 'sale' | 'lease-start' | 'capital' | 'rent' | 'deposit-offset' | 'deposit-refund' | 'advance-refund' | 'reopen';
+  kind: 'sale' | 'lease-start' | 'capital' | 'rent' | 'deposit-offset' | 'deposit-refund' | 'advance-refund' | 'reopen' | 'incorporation' | 'corporate-owner-cash-return' | 'corporate-site-return';
   amount: number; listingId: string | null; leaseId: string | null;
 }
 export interface ShopLifecycleState {
@@ -74,7 +84,8 @@ const onsite = (simulation: Simulation, shop: Shop, id: string) => {
 };
 const privateMarket = (state: SimState, world: WorldDefinition, shop: Shop) => {
   const site = world.buildings.find(site => site.id === shop.buildingId);
-  return site?.kind === 'market' && !site.facility && !state.extension?.companies.some(company => company.buildingId === shop.buildingId);
+  const company = state.extension?.companies.find(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId);
+  return site?.kind === 'market' && !site.facility && (!company || company.shopBindingId === shop.id && titleOf(state, shop.id)?.corporation?.companyId === company.id);
 };
 const empty = (): ShopLifecycleState => ({ version: 1, nextListingId: 1, nextLeaseId: 1, nextReceiptId: 1, titles: {}, listings: [], leases: [], receipts: [] });
 function moduleOf(simulation: Simulation): ShopLifecycleState { return stateOf(simulation).shopLifecycle ??= empty(); }
@@ -84,37 +95,54 @@ function ensureTitle(simulation: Simulation, shop: Shop): ShopOperatingTitle | u
   shop.lifecycleVersion = 1;
   return lifecycle.titles[shop.id] ??= { shopId: shop.id, buildingId: shop.buildingId, scope: 'existing-business-and-site-use', legacyOwnerId: shop.ownerId, assetOwnerId: shop.ownerId, state: 'operating', suspendedAt: null, reason: '', listingId: null, leaseId: null, materialsHeld: 0, reopen: null, reopenHistory: [] };
 }
-export function shopLifecycleAssetOwnerId(state: SimState, shop: Shop): string | undefined { return titleOf(state, shop.id)?.assetOwnerId ?? shop.ownerId; }
+const boundCompany = (state: SimState, shopId: string) => {
+  const binding = titleOf(state, shopId)?.corporation;
+  return binding && state.extension?.companies.find(company => company.id === binding.companyId && company.shopBindingId === shopId);
+};
+const operatorId = (state: SimState, shop: Shop) => boundCompany(state, shop.id)?.ownerId ?? shop.ownerId;
+const bindingLeaseAllowsUse = (state: SimState, shopId: string) => {
+  const binding = titleOf(state, shopId)?.corporation;
+  if (!binding?.leaseId) return true;
+  const lease = leasesFor(state, shopId).find(lease => lease.id === binding.leaseId), company = boundCompany(state, shopId);
+  return !!lease && !!company && lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId)
+    && (company.shareholders[lease.tenantId] ?? 0) > company.shares / 2;
+};
+export function shopLifecycleAssetOwnerId(state: SimState, shop: Shop): string | undefined {
+  const title = titleOf(state, shop.id);
+  return title?.corporation && !title.corporation.leaseId ? title.corporation.companyId : title?.assetOwnerId ?? shop.ownerId;
+}
 export function shopLifecycleAllowsOperation(state: SimState, shopId: string): boolean {
   const title = titleOf(state, shopId), lease = activeLease(state, shopId);
-  return (!title || title.state === 'operating') && (!lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId));
+  return bindingLeaseAllowsUse(state, shopId) && (!title || title.state === 'operating') && (!lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId));
 }
 export function shopLifecycleAllowsNewPayroll(state: SimState, shopId: string): boolean {
   const title = titleOf(state, shopId), lease = activeLease(state, shopId);
-  return (!title || title.state !== 'suspended') && (!lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId));
+  return bindingLeaseAllowsUse(state, shopId) && (!title || title.state !== 'suspended') && (!lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId));
 }
 export function shopLifecycleAllowsSpaceUse(state: SimState, shopId: string): boolean {
   const lease = activeLease(state, shopId);
-  return !lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId);
+  return bindingLeaseAllowsUse(state, shopId) && (!lease || lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.tenantId) && live(state, lease.lessorId));
 }
 export function shopLifecycleReservedFunds(state: SimState, shopId: string): number {
   return leasesFor(state, shopId).reduce((total, lease) => total + lease.arrears
     + (lease.state !== 'ended' && lease.nextDueAt < lease.endsAt ? lease.rent : 0)
     + (lease.state === 'ended' ? Math.max(0, lease.advanceInitial - lease.advanceRefunded) : 0), 0);
 }
-export function shopLifecycleHeldCash(state: SimState): number { return (state as LifecycleState).shopLifecycle?.leases.reduce((sum, lease) => sum + lease.depositEscrow, 0) ?? 0; }
+export function shopLifecycleHeldCash(state: SimState): number { const lifecycle = (state as LifecycleState).shopLifecycle; return (lifecycle?.leases.reduce((sum, lease) => sum + lease.depositEscrow, 0) ?? 0) + Object.values(lifecycle?.titles ?? {}).reduce((sum, title) => sum + (title.corporation?.ownerCashEscrow ?? 0), 0); }
 export function shopLifecyclePendingEstateAssets(state: SimState, actorId: string): boolean {
-  return !!(state as LifecycleState).shopLifecycle?.leases.some(lease => lease.tenantId === actorId && (lease.depositEscrow > EPS || lease.advanceInitial - lease.advanceRefunded > EPS)
+  return Object.values((state as LifecycleState).shopLifecycle?.titles ?? {}).some(title => title.assetOwnerId === actorId && (!title.corporation || title.corporation.leaseId !== null))
+    || !!(state as LifecycleState).shopLifecycle?.leases.some(lease => lease.tenantId === actorId && (lease.depositEscrow > EPS || lease.advanceInitial - lease.advanceRefunded > EPS)
     || lease.lessorId === actorId && (lease.state !== 'ended' || lease.arrears > EPS));
 }
 /** The family executor must not sell a tenant's landlord-owned assets, or end a live contract by overwriting ownerId. */
 export function shopLifecycleCanDispose(state: SimState, shopId: string): boolean {
-  return !leasesFor(state, shopId).some(lease => lease.state !== 'ended' || lease.arrears > EPS || lease.depositEscrow > EPS || lease.advanceInitial - lease.advanceRefunded > EPS);
+  return !titleOf(state, shopId)?.corporation && !leasesFor(state, shopId).some(lease => lease.state !== 'ended' || lease.arrears > EPS || lease.depositEscrow > EPS || lease.advanceInitial - lease.advanceRefunded > EPS);
 }
 /** Called only by the core authority-changing method; lawful executor transfers retain the same shop and debts. */
 export function shopLifecycleBeforeBusinessTransfer(simulation: Simulation, shop: Shop, newOwnerId: string): boolean {
   const title = titleOf(simulation.state, shop.id); if (!title) return true;
   const lease = activeLease(simulation.state, shop.id);
+  if (title.corporation) return lease ? newOwnerId === lease.tenantId : newOwnerId === (title.corporation.leaseId ? title.assetOwnerId : boundCompany(simulation.state, shop.id)?.ownerId);
   if (lease) return newOwnerId === lease.tenantId;
   if (newOwnerId === title.assetOwnerId) return true;
   const oldOwner = title.assetOwnerId, estate = simulation.state.family?.estates[oldOwner];
@@ -127,7 +155,41 @@ export function shopLifecycleBeforeBusinessTransfer(simulation: Simulation, shop
   return false;
 }
 export function shopLifecycleMayIncorporate(state: SimState, shop: Shop, actorId: string): boolean {
-  return shop.ownerId === actorId && shopLifecycleCanDispose(state, shop.id) && !titleOf(state, shop.id);
+  const title = titleOf(state, shop.id), lease = activeLease(state, shop.id);
+  if (title?.corporation || shop.ownerId !== actorId || title?.listingId || title?.state === 'reopening') return false;
+  if (!title) return shopLifecycleCanDispose(state, shop.id);
+  return lease ? lease.tenantId === actorId && lease.state === 'active' && clock(state) < lease.endsAt && live(state, lease.lessorId) && live(state, lease.tenantId)
+    : title.assetOwnerId === actorId && shopLifecycleCanDispose(state, shop.id);
+}
+/** No title means the original legacy registration remains unchanged. */
+export function shopLifecycleCanFundIncorporation(simulation: Simulation, shop: Shop, actorId: string, capital: number): boolean {
+  const state = simulation.state, title = titleOf(state, shop.id); if (!title) return true;
+  const lease = activeLease(state, shop.id), opening = shop.cash ?? 0;
+  const reserved = lease ? Math.max(0, opening - (lease.advanceInitial - lease.advanceRefunded)) : 0;
+  return shopLifecycleMayIncorporate(state, shop, actorId) && finite(opening) && opening >= 0 && capital + opening - reserved <= CASH_CAP && capital + opening - reserved + EPS >= simulation.shopProtectedFunds(shop)
+    && state.treasury + REGISTER_FEE <= 1e12 && (state as LifecycleState).shopLifecycle!.receipts.length < 4096;
+}
+/** Called after preflight and the actual founder debit, before adding this one company. */
+export function shopLifecycleBindCompany(simulation: Simulation, shop: Shop, company: Company): number | null {
+  const title = titleOf(simulation.state, shop.id); if (!title) return null;
+  const lease = activeLease(simulation.state, shop.id), opening = shop.cash ?? 0, funding = company.capital;
+  const reserved = lease ? Math.max(0, opening - (lease.advanceInitial - lease.advanceRefunded)) : 0;
+  title.corporation = { companyId: company.id, founderId: company.ownerId, registeredAt: clock(simulation.state), leaseId: lease?.id ?? null,
+    openingCash: opening, capitalFunding: funding, ownerCashReserved: reserved, ownerCashEscrow: reserved, ownerCashReturned: 0 };
+  company.shopBindingId = shop.id; shop.cash = 0;
+  receipt(simulation, shop.id, company.ownerId, company.id, 'incorporation', funding + opening - reserved, null, lease?.id ?? null);
+  simulation.emitEvent({ type: 'company-incorporated', citizenId: company.ownerId, shopId: shop.id, amount: funding, districtId: shop.districtId });
+  return opening - reserved;
+}
+/** A personal lease is not transferable by silently changing the company shell. */
+export function shopLifecycleAllowsShareholding(state: SimState, company: Company, holdings: Record<string, number>, shares = company.shares): boolean {
+  if (!company.shopBindingId || company.shopBindingReleasedAt !== undefined) return true;
+  const binding = titleOf(state, company.shopBindingId)?.corporation;
+  if (!binding?.leaseId) return true;
+  const lease = leasesFor(state, company.shopBindingId).find(lease => lease.id === binding.leaseId);
+  // Death and an ended permit do not prevent a lawful estate/share transfer, but never restore site use.
+  return !lease || lease.state === 'ended' || !live(state, lease.tenantId) || !live(state, lease.lessorId)
+    || (holdings[lease.tenantId] ?? 0) > shares / 2;
 }
 
 function receipt(simulation: Simulation, shopId: string, actorId: string, payeeId: string, kind: ShopLifecycleReceipt['kind'], amount: number, listingId: string | null = null, leaseId: string | null = null): void {
@@ -137,7 +199,7 @@ function receipt(simulation: Simulation, shopId: string, actorId: string, payeeI
 const fail = (message: string): CommandResult => ({ ok: false, message });
 const success = (message: string): CommandResult => ({ ok: true, message });
 function suspend(simulation: Simulation, shop: Shop, actorId: string, reason: ShopOperatingTitle['reason']): CommandResult {
-  if (!privateMarket(simulation.state, simulation.worldDefinition, shop) || shop.ownerId !== actorId || !live(simulation.state, actorId) || (simulation.state.extension?.actorProfiles[actorId]?.age ?? 0) < 18 || !onsite(simulation, shop, actorId)) return fail('只有现经营者能在原市集工作点办理停业，公司须走股权与清算程序。');
+  if (!privateMarket(simulation.state, simulation.worldDefinition, shop) || operatorId(simulation.state, shop) !== actorId || !live(simulation.state, actorId) || (simulation.state.extension?.actorProfiles[actorId]?.age ?? 0) < 18 || !onsite(simulation, shop, actorId)) return fail('只有现经营者能在原市集工作点办理停业，公司须走股权与清算程序。');
   const title = ensureTitle(simulation, shop)!;
   if (title.state === 'reopening') return fail('修缮合同尚未完成，不能抹去已购物料与真实工资。');
   title.state = 'suspended'; title.suspendedAt ??= clock(simulation.state); title.reason = reason; shop.open = false;
@@ -145,8 +207,8 @@ function suspend(simulation: Simulation, shop: Shop, actorId: string, reason: Sh
 }
 function list(simulation: Simulation, shop: Shop, actorId: string, kind: ShopListing['kind'], price: number): CommandResult {
   if (!finite(price) || price < 1 || price > 100000 || !privateMarket(simulation.state, simulation.worldDefinition, shop)
-    || shop.ownerId !== actorId || !live(simulation.state, actorId) || (simulation.state.extension?.actorProfiles[actorId]?.age ?? 0) < 18 || !onsite(simulation, shop, actorId)
-    || !shopLifecycleCanDispose(simulation.state, shop.id)) return fail('挂牌需要原经营资产持有人的现场同意，金额1–100000文，且原租约及垫款先结清。');
+    || operatorId(simulation.state, shop) !== actorId || !live(simulation.state, actorId) || (simulation.state.extension?.actorProfiles[actorId]?.age ?? 0) < 18 || !onsite(simulation, shop, actorId)
+    || titleOf(simulation.state, shop.id)?.corporation || !shopLifecycleCanDispose(simulation.state, shop.id)) return fail('挂牌需要原经营资产持有人的现场同意，金额1–100000文，且原租约及垫款先结清。');
   const existingTitle = titleOf(simulation.state, shop.id);
   if (!existingTitle || existingTitle.assetOwnerId !== actorId || existingTitle.state !== 'suspended') return fail('请先由原经营者实际停业；夜间或断电关门不能代替停业授权。');
   if ((stateOf(simulation).shopLifecycle?.listings.length ?? 0) >= 256 || (stateOf(simulation).shopLifecycle?.receipts.length ?? 0) >= 4000) return fail('经营登记档案已满，请保留现有权利等待处理。');
@@ -185,10 +247,10 @@ function acquire(simulation: Simulation, listing: ShopListing, buyerId: string, 
   simulation.emitEvent({ type: 'shop-contract-accepted', citizenId: buyerId, shopId: shop.id, amount: listing.price, districtId: shop.districtId });
   return success(`真实${listing.kind === 'sale' ? '买价已付卖方' : '首期租金已付出租人，押金独立托管'}，${capital}文另入原经营账户；仍须真实采购、工资授权与60分钟员工修缮后重开。`);
 }
-function restart(simulation: Simulation, shop: Shop, operatorId: string, fundFromWallet = false): CommandResult {
+function restart(simulation: Simulation, shop: Shop, operatorActorId: string, fundFromWallet = false): CommandResult {
   const state = simulation.state, title = titleOf(state, shop.id), lease = activeLease(state, shop.id), at = clock(state);
-  if (!title || !privateMarket(state, simulation.worldDefinition, shop) || title.state !== 'suspended' || title.listingId || shop.ownerId !== operatorId
-    || !eligibleOperator(state, operatorId) || !onsite(simulation, shop, operatorId) || lease?.state === 'defaulted' || !shopLifecycleAllowsSpaceUse(state, shop.id)) return fail('请由合资格现经营者在原工作点申请重开；挂牌与违约租约须先处理。');
+  if (!title || !privateMarket(state, simulation.worldDefinition, shop) || title.state !== 'suspended' || title.listingId || operatorId(state, shop) !== operatorActorId
+    || !eligibleOperator(state, operatorActorId) || !onsite(simulation, shop, operatorActorId) || lease?.state === 'defaulted' || !shopLifecycleAllowsSpaceUse(state, shop.id)) return fail('请由合资格现经营者在原工作点申请重开；挂牌与违约租约须先处理。');
   if (title.reopenHistory.length >= 32) return fail('修缮历史档案已满，保留原物料和劳动记录等待处理。');
   const roster = state.citizens.filter(citizen => citizen.workId === shop.buildingId && citizen.role !== '学生' && live(state, citizen.id) && (state.extension!.actorProfiles[citizen.id].age >= 18));
   if (!roster.length || shop.employees < 1) return fail('没有实际在册成年员工；先取得合法员工合同，不能凭空生成劳工。');
@@ -217,9 +279,9 @@ function restart(simulation: Simulation, shop: Shop, operatorId: string, fundFro
     const cents = Math.ceil((required - (funds - protectedFunds)) * 100);
     let contribution = cents / 100;
     if (funds + contribution - protectedFunds < required || funds + contribution - gross - protectedFunds < 20 * 8 / 24) contribution = (cents + 1) / 100;
-    const operator = actor(state, operatorId)!;
+    const operator = actor(state, operatorActorId)!;
     if (operator.money - contribution < RESERVE) return fail('本人钱包补足真实采购和原受保护余额后仍须保留100文生活储备。');
-    const funded = applyShopLifecycleCommand(simulation, { type: 'fundShop', targetId: shop.id, value: contribution }, operatorId)!;
+    const funded = applyShopLifecycleCommand(simulation, { type: 'fundShop', targetId: shop.id, value: contribution }, operatorActorId)!;
     if (!funded.ok) return funded;
     // fundShop has no event callback. It preserves this active lease's reserve;
     // no further rejecting preflight follows the successful wallet transfer.
@@ -235,7 +297,7 @@ function restart(simulation: Simulation, shop: Shop, operatorId: string, fundFro
   if (title.reopen) title.reopenHistory.push(title.reopen);
   const reusedMaterial = title.materialsHeld >= 1;
   title.materialsHeld += purchases.filter(row => row.commodity === 'materials').reduce((sum, row) => sum + row.quantity, 0);
-  title.reopen = { operatorId, startedAt: at, completedAt: null, cancelledAt: null, workedMinutes: 0, materialFromExistingStock: reusedMaterial, materialUnits: 1, consumedUnits: 0, purchases, labor: [] };
+  title.reopen = { operatorId: operatorActorId, startedAt: at, completedAt: null, cancelledAt: null, workedMinutes: 0, materialFromExistingStock: reusedMaterial, materialUnits: 1, consumedUnits: 0, purchases, labor: [] };
   title.state = 'reopening'; shop.open = false;
   return success('真实物料已购入独立修缮库存、食品按原货权入账；等待已授权员工实际工作60分钟。');
 }
@@ -249,16 +311,40 @@ function settleRent(simulation: Simulation, lease: ShopLease): boolean {
   receipt(simulation, shop.id, lease.tenantId, lease.lessorId, 'rent', amount, lease.listingId, lease.id);
   return true;
 }
+/** Return only the rented operating asset. Corporate capital and shares are
+ * retained; the inventory was always the same landlord-owned shop's stock,
+ * and a company's inventory/employees were mirrors, never another asset pool.
+ * Old employer claims are shop-addressed, so they must actually clear before
+ * switching that shop's operating account to its returned owner's account. */
+function returnCorporateSite(simulation: Simulation, lease: ShopLease): void {
+  const state = simulation.state, shop = state.shops.find(shop => shop.id === lease.shopId)!, title = titleOf(state, shop.id)!, binding = title.corporation;
+  if (!binding || binding.leaseId !== lease.id || lease.state !== 'ended' || lease.arrears > EPS || lease.depositEscrow > EPS || lease.advanceInitial - lease.advanceRefunded > EPS || binding.ownerCashEscrow > EPS
+    || simulation.shopPayrollDebt(shop) > EPS || simulation.shopCommittedPayroll(shop) > EPS || state.playerLabor?.job?.employer.shopId === shop.id || (title.corporationHistory?.length ?? 0) >= 128 || stateOf(simulation).shopLifecycle!.receipts.length >= 4096) return;
+  const company = boundCompany(state, shop.id)!, construction = Reflect.get(state.extension!, 'runtime').constructionJobs?.[company.id];
+  if (construction && construction.completedAt === null) return;
+  binding.release = { at: clock(state), inventory: shop.inventory, materials: title.materialsHeld, employees: shop.employees, capital: company.capital, wageDebt: 0, committedPayroll: 0 };
+  company.shopBindingReleasedAt = binding.release.at; company.inventory = 0; company.employees = 0;
+  (title.corporationHistory ??= []).push(binding); delete title.corporation;
+  // Original goods, costs, histories and names remain on the returned shop.
+  // No money is transferred from this separate company's retained capital.
+  simulation.transferBusinessOwnership(shop.id, title.assetOwnerId);
+  receipt(simulation, shop.id, lease.tenantId, lease.lessorId, 'corporate-site-return', 0, null, lease.id);
+  stateOf(simulation).shopLifecycle!.receipts.at(-1)!.siteReturn = { companyId: company.id, ...binding.release };
+  simulation.emitEvent({ type: 'corporate-site-returned', shopId: shop.id, citizenId: title.assetOwnerId, districtId: shop.districtId, quantity: shop.inventory });
+}
 function endLease(simulation: Simulation, lease: ShopLease): CommandResult {
   const state = simulation.state, shop = state.shops.find(shop => shop.id === lease.shopId)!, title = titleOf(state, shop.id)!, lessor = actor(state, lease.lessorId)!, tenant = actor(state, lease.tenantId)!;
   if (lease.state === 'ended') return fail('租约已解除，押金与垫款不能重复退款。');
   const offset = Math.min(lease.depositEscrow, lease.arrears), refund = lease.depositEscrow - offset;
-  if (lessor.money + offset > CASH_CAP || tenant.money + refund > CASH_CAP || stateOf(simulation).shopLifecycle!.receipts.length + 2 > 4096) return fail('押金的任一实际收款账户容量不足，解除及全部退款原子拒绝。');
-  lessor.money += offset; tenant.money += refund; lease.depositEscrow = 0; lease.depositToLessor += offset; lease.depositRefunded += refund; lease.arrears -= offset; lease.paidRent += offset;
+  const binding = title.corporation, ownerRefund = binding?.ownerCashEscrow ?? 0;
+  if (lessor.money + offset + ownerRefund > CASH_CAP || tenant.money + refund > CASH_CAP || stateOf(simulation).shopLifecycle!.receipts.length + 3 > 4096) return fail('押金的任一实际收款账户容量不足，解除及全部退款原子拒绝。');
+  lessor.money += offset + ownerRefund; tenant.money += refund;
+  if (binding) { binding.ownerCashEscrow = 0; binding.ownerCashReturned += ownerRefund; }; lease.depositEscrow = 0; lease.depositToLessor += offset; lease.depositRefunded += refund; lease.arrears -= offset; lease.paidRent += offset;
   if (title.reopen?.completedAt === null && title.reopen.cancelledAt === null) title.reopen.cancelledAt = clock(state);
   lease.state = 'ended'; lease.endedAt = clock(state); title.leaseId = null; title.state = 'suspended'; title.reason = 'lease-ended'; title.suspendedAt = clock(state); shop.open = false;
   // Tenant advances are retained as a real subordinate claim, never silently gifted to the owner.
   simulation.transferBusinessOwnership(shop.id, title.assetOwnerId);
+  if (ownerRefund > EPS) receipt(simulation, shop.id, lease.tenantId, lease.lessorId, 'corporate-owner-cash-return', ownerRefund, null, lease.id);
   if (offset > EPS) receipt(simulation, shop.id, lease.tenantId, lease.lessorId, 'deposit-offset', offset, lease.listingId, lease.id);
   if (refund > EPS) receipt(simulation, shop.id, lease.tenantId, lease.tenantId, 'deposit-refund', refund, lease.listingId, lease.id);
   return success('租约已解除，押金按合同抵欠租并退余额；店内原货权及全部工资债保留，未返营运垫款继续记债。');
@@ -291,6 +377,7 @@ function observeFinance(simulation: Simulation): void {
       const otherProtected = simulation.shopProtectedFunds(shop) - claim;
       const amount = Math.min(claim, Math.max(0, simulation.shopFunds(shop) - otherProtected));
       if (amount > EPS && tenant.money + amount <= CASH_CAP && lifecycle.receipts.length < 4096) { simulation.transferShopFunds(shop, -amount); tenant.money += amount; lease.advanceRefunded += amount; receipt(simulation, shop.id, lease.tenantId, lease.tenantId, 'advance-refund', amount, lease.listingId, lease.id); }
+      returnCorporateSite(simulation, lease);
     }
   }
 }
@@ -302,8 +389,8 @@ export function shopLifecycleOpportunities(simulation: Simulation, citizen: Citi
   for (const shop of state.shops) {
     if (!privateMarket(state, simulation.worldDefinition, shop)) continue;
     const title = titleOf(state, shop.id), site = simulation.worldDefinition.buildings.find(site => site.id === shop.buildingId)!;
-    if (shop.ownerId === citizen.id && (title?.state === 'suspended' || title?.state === 'reopening')) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
-    if (shop.ownerId === citizen.id && !title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
+    if (operatorId(state, shop) === citizen.id && (title?.state === 'suspended' || title?.state === 'reopening')) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
+    if (operatorId(state, shop) === citizen.id && !title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
     if (!eligible(state, citizen.id) || state.shops.some(other => other.ownerId === citizen.id && other.id !== shop.id)) continue;
     for (const listing of stateOf(simulation).shopLifecycle?.listings ?? []) if (listing.shopId === shop.id && listing.state === 'offered' && listing.expiresAt > at && listing.sellerId !== citizen.id
       && citizen.money >= listing.price + listing.deposit + REGISTER_FEE + CAPITAL + RESERVE && simulation.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500) result.push({ destination: site, activity: 'shopLifecycle', score: 74 + Math.min(12, profile.skill / 10) - listing.price / 100 });
@@ -333,9 +420,9 @@ export function installShopLifecycle(simulation: Simulation): void {
   });
   simulation.onEvent('shop-lifecycle-arrived', event => {
     const citizen = simulation.state.citizens.find(citizen => citizen.id === event.citizenId), shop = simulation.state.shops.find(shop => shop.id === event.shopId);
-    if (!citizen || !shop || !onsite(simulation, shop, citizen.id) || shop.ownerId !== citizen.id && !eligible(simulation.state, citizen.id)) return;
+    if (!citizen || !shop || !onsite(simulation, shop, citizen.id) || operatorId(simulation.state, shop) !== citizen.id && !eligible(simulation.state, citizen.id)) return;
     const title = titleOf(simulation.state, shop.id);
-    if (shop.ownerId === citizen.id) {
+    if (operatorId(simulation.state, shop) === citizen.id) {
       if (!title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) suspend(simulation, shop, citizen.id, 'economic-distress');
       const current = titleOf(simulation.state, shop.id);
       if (current?.state === 'suspended' && !current.listingId) {
@@ -366,7 +453,7 @@ export function applyShopLifecycleCommand(simulation: Simulation, command: Comma
     if (command.type === 'withdrawShopListing') { const title = titleOf(state, shop.id), listing = lifecycle?.listings.find(listing => listing.id === title?.listingId); if (!listing || listing.sellerId !== actorId || !onsite(simulation, shop, actorId) || listing.state !== 'offered') return fail('只有原挂牌授权者能在现场撤回未成交报价。'); listing.state = 'withdrawn'; title!.listingId = null; return success('原报价已撤回，没有款项或货权变化。'); }
     if (command.type === 'fundShop') {
       const value = command.value ?? CAPITAL, lease = activeLease(state, shop.id);
-      if (!privateMarket(state, simulation.worldDefinition, shop) || !finite(value) || value <= 0 || value > 100000 || shop.ownerId !== actorId || (lease && (clock(state) >= lease.endsAt || !live(state, lease.tenantId) || !live(state, lease.lessorId))) || !eligibleOperator(state, actorId) || !onsite(simulation, shop, actorId) || person.money < value + RESERVE || simulation.shopFunds(shop) + value > CASH_CAP || (lease?.advanceInitial ?? 0) + value > CASH_CAP || (lifecycle?.receipts.length ?? 0) >= 4096) return fail('营运注资须本人现场、保留生活储备及所有账户/债权容量，不能造钱。');
+      if (!privateMarket(state, simulation.worldDefinition, shop) || !finite(value) || value <= 0 || value > 100000 || operatorId(simulation.state, shop) !== actorId || (lease && (clock(state) >= lease.endsAt || !live(state, lease.tenantId) || !live(state, lease.lessorId))) || !eligibleOperator(state, actorId) || !onsite(simulation, shop, actorId) || person.money < value + RESERVE || simulation.shopFunds(shop) + value > CASH_CAP || (lease?.advanceInitial ?? 0) + value > CASH_CAP || (lifecycle?.receipts.length ?? 0) >= 4096) return fail('营运注资须本人现场、保留生活储备及所有账户/债权容量，不能造钱。');
       ensureTitle(simulation, shop);
       person.money -= value; simulation.transferShopFunds(shop, value); if (lease) lease.advanceInitial += value;
       receipt(simulation, shop.id, actorId, shop.id, 'capital', value, null, lease?.id ?? null); return success('实际钱包注资进入原经营账户；承租时记为可追回营运垫款。');
@@ -380,7 +467,7 @@ export function applyShopLifecycleCommand(simulation: Simulation, command: Comma
 export function validateShopLifecycle(candidate: SimState, world: WorldDefinition): void {
   const lifecycle = (candidate as LifecycleState).shopLifecycle;
   if (lifecycle === undefined) {
-    if (candidate.shops.some(shop => shop.lifecycleVersion !== undefined)) throw new Error('店铺经营资产或租约托管模块缺失，不能退回旧经营权。');
+    if (candidate.shops.some(shop => shop.lifecycleVersion !== undefined) || candidate.extension?.companies.some(company => company.shopBindingId !== undefined)) throw new Error('店铺经营资产或租约托管模块缺失，不能退回旧经营权。');
     return;
   }
   const ensure: (condition: unknown, label: string) => asserts condition = (condition, label) => { if (!condition) throw new Error(`店铺生命周期存档无效：${label}。`); };
@@ -390,6 +477,7 @@ export function validateShopLifecycle(candidate: SimState, world: WorldDefinitio
   ensure(dictionary(lifecycle) && lifecycle.version === 1 && dictionary(lifecycle.titles), '版本与权利登记');
   num(lifecycle.nextListingId, 1, 1e12, '挂牌编号', true); num(lifecycle.nextLeaseId, 1, 1e12, '租约编号', true); num(lifecycle.nextReceiptId, 1, 1e12, '回执编号', true);
   const listings = rows<ShopListing>(lifecycle.listings, 256, '挂牌'), leases = rows<ShopLease>(lifecycle.leases, 128, '租约'), receipts = rows<ShopLifecycleReceipt>(lifecycle.receipts, 4096, '回执');
+  const companyIds = new Set(candidate.extension?.companies.map(company => company.id) ?? []);
   const listingIds = new Set<string>(), leaseIds = new Set<string>();
   for (const listing of listings) {
     ensure(dictionary(listing) && /^shop-listing-[1-9][0-9]*$/.test(listing.id) && Number(listing.id.slice(13)) < lifecycle.nextListingId && !listingIds.has(listing.id) && shops.has(listing.shopId) && ids.has(listing.sellerId), '授权挂牌身份'); listingIds.add(listing.id);
@@ -410,11 +498,12 @@ export function validateShopLifecycle(candidate: SimState, world: WorldDefinitio
   }
   let lastReceiptId = 0, lastReceiptAt = 0;
   for (const row of receipts) {
-    ensure(dictionary(row) && shops.has(row.shopId) && ids.has(row.actorId) && (ids.has(row.payeeId) || shops.has(row.payeeId) || row.payeeId === 'public') && ['sale', 'lease-start', 'capital', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'reopen'].includes(row.kind), '付款回执引用');
+    ensure(dictionary(row) && shops.has(row.shopId) && ids.has(row.actorId) && (ids.has(row.payeeId) || shops.has(row.payeeId) || row.kind === 'incorporation' && companyIds.has(row.payeeId) || row.payeeId === 'public') && ['sale', 'lease-start', 'capital', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'reopen', 'incorporation', 'corporate-owner-cash-return', 'corporate-site-return'].includes(row.kind), '付款回执引用');
+    ensure(row.siteReturn === undefined || row.kind === 'corporate-site-return', '返场见证只属于真实返场回执');
     num(row.id, lastReceiptId + 1, lastReceiptId + 1, '连续单调回执', true); num(row.at, lastReceiptAt, at, '回执时间'); num(row.amount, 0, CASH_CAP, '实际款项'); lastReceiptId = row.id; lastReceiptAt = row.at;
     ensure(row.listingId === null || listingIds.has(row.listingId), '回执挂牌'); ensure(row.leaseId === null || leaseIds.has(row.leaseId), '回执租约');
     const contract = leases.find(lease => lease.id === row.leaseId);
-    if (['lease-start', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund'].includes(row.kind)) ensure(!!contract && row.shopId === contract.shopId && row.actorId === contract.tenantId && row.payeeId === (['deposit-refund', 'advance-refund'].includes(row.kind) ? contract.tenantId : contract.lessorId), '租约资金回执不能脱离真实双方');
+    if (['lease-start', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'corporate-owner-cash-return', 'corporate-site-return'].includes(row.kind)) ensure(!!contract && row.shopId === contract.shopId && row.actorId === contract.tenantId && row.payeeId === (['deposit-refund', 'advance-refund'].includes(row.kind) ? contract.tenantId : contract.lessorId), '租约资金回执不能脱离真实双方');
     if (contract) ensure(row.shopId === contract.shopId && row.actorId === contract.tenantId && (row.listingId === null || row.listingId === contract.listingId), '租赁托管回执合同绑定');
   }
   ensure(lastReceiptId + 1 === lifecycle.nextReceiptId, '回执连续编号');
@@ -429,7 +518,7 @@ export function validateShopLifecycle(candidate: SimState, world: WorldDefinitio
   for (const [shopId, title] of Object.entries(lifecycle.titles)) {
     const shop = shops.get(shopId), lease = leases.find(lease => lease.shopId === shopId && lease.state !== 'ended');
     ensure(dictionary(title) && !!shop && shop.lifecycleVersion === 1 && privateMarket(candidate, world, shop) && title.shopId === shopId && title.buildingId === shop.buildingId && title.scope === 'existing-business-and-site-use' && ids.has(title.legacyOwnerId) && ids.has(title.assetOwnerId) && ['operating', 'suspended', 'reopening'].includes(title.state), '经营资产范围与主体');
-    ensure(shop!.ownerId === (lease?.tenantId ?? title.assetOwnerId) && (!lease || title.assetOwnerId === lease.lessorId), '经营者与资产权/租约分离');
+    ensure((title.corporation && !title.corporation.leaseId ? [title.corporation.founderId, boundCompany(candidate, shopId)?.ownerId].includes(shop!.ownerId) : shop!.ownerId === (lease?.tenantId ?? title.assetOwnerId)) && (!lease || title.assetOwnerId === lease.lessorId), '经营者与资产权/租约分离');
     ensure(leases.filter(lease => lease.shopId === shopId && lease.state !== 'ended').length <= 1 && title.leaseId === (lease?.id ?? null), '唯一真实租约');
     ensure(title.listingId === null || listings.some(listing => listing.id === title.listingId && listing.shopId === shopId && listing.sellerId === title.assetOwnerId && listing.state === 'offered'), '权利持有人挂牌');
     ensure(listings.filter(listing => listing.shopId === shopId && listing.state === 'offered').length <= 1, '唯一报价');
@@ -438,6 +527,36 @@ export function validateShopLifecycle(candidate: SimState, world: WorldDefinitio
     if (title.assetOwnerId !== title.legacyOwnerId) ensure(listings.some(listing => listing.shopId === shopId && listing.kind === 'sale' && listing.state === 'accepted' && listing.acceptedBy === title.assetOwnerId)
       || Object.values(candidate.family?.estates ?? {}).some(estate => estate.businesses?.[shopId] === title.assetOwnerId)
       || candidate.family?.estateSales.some(sale => sale.kind === 'business' && sale.assetId === shopId && sale.receipts.some(row => row.buyerId === title.assetOwnerId)), '产权接续须真实买价或合法遗产回执');
+    const company = candidate.extension?.companies.find(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop!.buildingId);
+    if (!title.corporation) ensure(!company, '不能删除公司绑定而伪装旧资产');
+    const oldBindings = title.corporationHistory === undefined ? [] : rows<ShopCompanyBinding>(title.corporationHistory, 128, '原租赁公司的返场历史');
+    const bindingIds = new Set<string>();
+    for (const binding of [...oldBindings, ...(title.corporation ? [title.corporation] : [])]) {
+      const company = candidate.extension?.companies.find(company => company.id === binding.companyId);
+      ensure(dictionary(binding) && Object.keys(binding).sort().join(',') === ['companyId','founderId','registeredAt','leaseId','openingCash','capitalFunding','ownerCashReserved','ownerCashEscrow','ownerCashReturned', ...(binding.release ? ['release'] : [])].sort().join(',') && !!company && company.shopBindingId === shopId && binding.companyId === company.id && ids.has(binding.founderId), '公司权利双向绑定'); ensure(!bindingIds.has(binding.companyId), '同一公司不能重复返场'); bindingIds.add(binding.companyId);
+      num(binding.registeredAt, 0, at, '公司登记时间'); ensure(same(company!.foundedAt, binding.registeredAt), '登记与原公司时间');
+      num(binding.openingCash, 0, CASH_CAP, '原经营现金'); num(binding.capitalFunding, binding.founderId === 'player' ? 300 : 200, 100000, '真实新增注册资本');
+      num(binding.ownerCashReserved, 0, binding.openingCash, '出租人原现金'); num(binding.ownerCashEscrow, 0, binding.ownerCashReserved, '出租人现金托管'); num(binding.ownerCashReturned, 0, binding.ownerCashReserved, '出租人原现金实退');
+      ensure(same(binding.ownerCashEscrow + binding.ownerCashReturned, binding.ownerCashReserved) && (binding.release || shop!.cash === 0 && title.listingId === null), '公司单账户及独立出租人托管');
+      const boundLease = leases.find(row => row.id === binding.leaseId);
+      ensure(binding.leaseId === null ? binding.founderId === title.assetOwnerId && binding.ownerCashReserved === 0 : !!boundLease && boundLease.shopId === shopId && boundLease.tenantId === binding.founderId && (binding.release || boundLease.lessorId === title.assetOwnerId) && boundLease.startedAt <= binding.registeredAt && binding.registeredAt < boundLease.endsAt, '真实原产权或租赁许可');
+      if (boundLease) ensure(boundLease.state === 'ended' ? binding.ownerCashEscrow === 0 : binding.ownerCashReturned === 0, '解除前保原出租人现金，解除后实际返还');
+      const registered = receipts.filter(row => row.shopId === shopId && row.kind === 'incorporation' && row.payeeId === company!.id);
+      ensure(registered.length === 1 && registered[0].actorId === binding.founderId && registered[0].payeeId === company!.id && registered[0].leaseId === binding.leaseId && same(registered[0].at, binding.registeredAt) && same(registered[0].amount, binding.capitalFunding + binding.openingCash - binding.ownerCashReserved), '资本转换回执保持原资金');
+      const originalAdvance = boundLease ? receipts.filter(row => row.leaseId === boundLease.id && row.kind === 'capital' && row.payeeId === shopId && row.id < registered[0].id).reduce((sum, row) => sum + row.amount, 0) : 0;
+      ensure(same(binding.ownerCashReserved, boundLease ? Math.max(0, binding.openingCash - originalAdvance) : 0), '原现金与登记前真实垫款不能混为股本');
+      if (!binding.release) ensure(shopLifecycleAllowsShareholding(candidate, company!, company!.shareholders), '不得篡改活租约的承租控制权');
+      ensure(same(receipts.filter(row => row.shopId === shopId && row.kind === 'corporate-owner-cash-return' && row.leaseId === binding.leaseId).reduce((sum, row) => sum + row.amount, 0), binding.ownerCashReturned), '出租人托管返款回执');
+      if (binding.release) {
+        const release = binding.release; ensure(oldBindings.includes(binding) && !!boundLease && boundLease.state === 'ended' && boundLease.arrears <= EPS && boundLease.depositEscrow === 0 && same(boundLease.advanceInitial, boundLease.advanceRefunded) && binding.ownerCashEscrow === 0, '只归还真实已清租赁资产');
+        ensure(dictionary(release) && Object.keys(release).sort().join(',') === ['at','inventory','materials','employees','capital','wageDebt','committedPayroll'].sort().join(','), '返场见证字段');
+        num(release.at, Math.max(binding.registeredAt, boundLease!.endedAt!), at, '真实归还时刻'); ensure(company!.shopBindingReleasedAt === release.at && company!.inventory === 0 && company!.employees === 0, '历史公司不再镜像已归还商铺');
+        num(release.inventory, 0, 10000, '归还原店实物'); num(release.materials, 0, 33, '归还原店修缮用品'); num(release.employees, 0, 100, '原在册名额'); num(release.capital, 0, CASH_CAP, '公司独立资本'); ensure(release.wageDebt === 0 && release.committedPayroll === 0, '原雇主工资义务未清不得切换账户');
+        const returned = receipts.filter(row => row.shopId === shopId && row.leaseId === binding.leaseId && row.kind === 'corporate-site-return'); ensure(returned.length === 1 && returned[0].amount === 0 && returned[0].at === release.at && returned[0].actorId === boundLease!.tenantId && returned[0].payeeId === boundLease!.lessorId, '归还不向自己付钱且回执完整');
+        const witness = returned[0].siteReturn; ensure(dictionary(witness) && Object.keys(witness).sort().join(',') === [...Object.keys(release), 'companyId'].sort().join(',') && witness.companyId === company!.id && Object.entries(release).every(([key, value]) => Reflect.get(witness, key) === value), '返场实物与独立公司资本见证不许篡改');
+        ensure(receipts.filter(row => row.leaseId === binding.leaseId && ['advance-refund','deposit-refund','deposit-offset','corporate-owner-cash-return'].includes(row.kind)).every(row => row.at <= release.at), '归还前先结清原退款');
+      } else ensure(binding === title.corporation && company!.shopBindingReleasedAt === undefined, '未归还公司仍有当前绑定');
+    }
     const jobs = [...rows<ShopReopenJob>(title.reopenHistory, 32, '原修缮工料历史'), ...(title.reopen ? [title.reopen] : [])];
     let lastJobEnd = 0;
     for (const job of jobs) {
@@ -455,6 +574,8 @@ export function validateShopLifecycle(candidate: SimState, world: WorldDefinitio
     num(title.materialsHeld, 0, 33, '独立修缮材料保管'); ensure(same(title.materialsHeld, jobs.reduce((sum, job) => sum + job.purchases.filter(row => row.commodity === 'materials').reduce((sum, row) => sum + row.quantity, 0) - job.consumedUnits, 0)), '修缮实购物料减真实消耗');
     if (!title.reopen) ensure(title.state !== 'reopening', '重开有真实合同');
   }
+  for (const company of candidate.extension?.companies ?? []) if (company.shopBindingId !== undefined) { const title = lifecycle.titles[company.shopBindingId], bindings = [...(title?.corporationHistory ?? []), ...(title?.corporation ? [title.corporation] : [])]; ensure(typeof company.shopBindingId === 'string' && bindings.filter(binding => binding.companyId === company.id && (binding.release?.at === company.shopBindingReleasedAt)).length === 1, '公司不能删除原权利绑定及归还见证'); }
+  for (const row of receipts) if (['incorporation','corporate-owner-cash-return', 'corporate-site-return'].includes(row.kind)) ensure(!!lifecycle.titles[row.shopId]?.corporation || !!lifecycle.titles[row.shopId]?.corporationHistory?.length, '转换回执不可删除权利');
   for (const listing of listings) ensure(!!lifecycle.titles[listing.shopId], '报价保留权利主体');
   for (const lease of leases) ensure(!!lifecycle.titles[lease.shopId], '租约保留稳定店铺债务主体');
   for (const listing of listings.filter(listing => listing.state === 'accepted')) {

@@ -1,0 +1,133 @@
+{
+  "status": "PASS_TWO_ADDITIONAL_CONTEXT_ORIGINALS",
+  "at": "2026-10-04T02:48:55.165042+00:00",
+  "scope": "Supplemental 2 only; original9 remain separate and unchanged. Same supported bank/office station and hour/eye/identity/cash, camera looks horizontally. No natural walk/climb/transaction/work/FPS/ART acceptance.",
+  "sourceCount": 241,
+  "sourceStable": true,
+  "distStable": true,
+  "captureResultSHA256": "7e215300063f8ccca57e02104c174bf62c386e726deb131c051c102ecac7d177",
+  "rawSHA256": "d5c85a8f87173784673b699f0b7b7eb42b5e315356f6d71ecfab5ff3899f971d",
+  "originalNineRemainByteSame": true,
+  "shots": [
+    {
+      "name": "commercial-ground-bank-reception-context",
+      "pngPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/capture-originals/commercial-ground-bank-reception-context.png",
+      "pngSHA256": "f2d9503c4b19dc9a602eb47515ba879dab499ea9f44a6c68aa7ef3aca2d430f9",
+      "pngBytes": 418167,
+      "actuallyViewed": true,
+      "originalPNGSHA256": "e4f94ab573218b5d8cf4bf8b316eabe685a1ce200eefa3879ee27ea7a18744ef",
+      "sameRoomFloorFunctionpointEyeHourCashIdentityPermission": true,
+      "eye": [
+        -287.8,
+        40.32,
+        522.8
+      ],
+      "target": [
+        -287.8,
+        40.32,
+        521.3
+      ],
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "originalQuaternion": [
+        -0.2941712918781087,
+        0,
+        0,
+        0.9557527143747826
+      ],
+      "buildingId": "market-b35",
+      "controllerFloor": 0,
+      "point": {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -287.8,
+          "y": 38.6,
+          "z": 522.8
+        }
+      },
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      },
+      "visualFinding": "同公开服务点水平向前可见接待厅窗格、柱墙与下部铺装，原柜台不再遮滿画面。空间仍偏亮，柜台低于此次水平视锥，未完整展示银行桌椅/接待关系。"
+    },
+    {
+      "name": "commercial-first-office-floor-context",
+      "pngPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/capture-originals/commercial-first-office-floor-context.png",
+      "pngSHA256": "83703b81531876876d3fd075d30e92f0d94a75bfde5dedf77fee81d8b925de58",
+      "pngBytes": 696498,
+      "actuallyViewed": true,
+      "originalPNGSHA256": "986fc507e965c3b25ed433892714a0522b936349036fb9ddad15546f04f8085c",
+      "sameRoomFloorFunctionpointEyeHourCashIdentityPermission": true,
+      "eye": [
+        -278.40000000000003,
+        49.120000000000005,
+        538.1999999999999
+      ],
+      "target": [
+        -278.40000000000003,
+        49.120000000000005,
+        536.6999999999999
+      ],
+      "quaternion": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "originalQuaternion": [
+        -0.2941712918781087,
+        0,
+        0,
+        0.9557527143747826
+      ],
+      "buildingId": "market-b35",
+      "controllerFloor": 2,
+      "point": {
+        "id": "2:office-east:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -278.40000000000003,
+          "y": 47.400000000000006,
+          "z": 538.1999999999999
+        }
+      },
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      },
+      "visualFinding": "同真实office-east工作点水平向前可见铺装、窗格及墙面；上沿仍可见外部楼体/桥段的切顶视图，桌面低于此次水平视锥。室内家具布局与封闭顶面的美术表达仍不足；原supported station断言已过，图片本身不证明碰撞错误。"
+    }
+  ],
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "readOnlyPhysicalCalibration": {
+    "source": "src/architecture-floor-plan.ts:97-109",
+    "facts": "createFloorFixtures places table point.z-2..point.z-.8, top.8; excludes use points by.8m clearance; canStand/support collide shared fixtures. Horizontal eye point.y+1.72/FOV48 can put nearby tabletop below visible frustum. Original camera downward target selected table rather than proving actor stands inside it. No collision bug inferred or geometry/point/scene changes made.",
+    "roofCeiling": {
+      "source": "src/renderer.ts:1003-1008",
+      "sha256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03",
+      "facts": "Original applyInteriorRefs zero-scales refs above retained currentFloor and roof refs at/above currentFloor; setInterior uses unchanged original cutaway. Exterior upper roof/bridge visibility and incomplete enclosing ceiling appearance remain actual visual limitations, not a change by new pose driver."
+    },
+    "fixtureRenderer": {
+      "source": "src/rendering/architecture-bodies.ts:126-145",
+      "sha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c",
+      "facts": "Shared actual bank fixture.kind=table is rendered with tabletop/legs/rails within authoritative solid; only market.kind uses counter box/drawers. No asset was removed for context views. Caption service reception is original floor use, not a claim of newly modeled bank counters."
+    }
+  }
+}

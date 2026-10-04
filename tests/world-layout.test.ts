@@ -20,7 +20,7 @@ before(()=>{initialHashes=sourceHashes();});
 after(()=>{const finalHashes=sourceHashes(),dir=new URL('../artifacts/',import.meta.url);mkdirSync(dir,{recursive:true});writeFileSync(new URL(process.env.YUNSHAN_WORLD_LAYOUT_EVIDENCE??'world-layout-results.json',dir),JSON.stringify({at:new Date().toISOString(),environment:'Node trusted world regeneration, independent frozen Git-source JSON/height samples and real Simulation save/24-tick continuation; no WebGL or r5 browser-profile access',initialHashes,finalHashes,evidence},null,2));assert.deepEqual(finalHashes,initialHashes,'world/save evidence must belong to one unchanged source and fixture snapshot');});
 
 test('new journeys use the current layout and its fingerprint matches the simulation save contract', () => {
-  const selected = selectSavedWorld(); assert.equal(selected.layout, 'current-v4');
+  const selected = selectSavedWorld(); assert.equal(selected.layout, 'current-v6');
   const sim = new Simulation(selected.world);
   assert.equal(savedWorldFingerprint(selected.world), JSON.parse(sim.exportSave()).worldFingerprint);
 });

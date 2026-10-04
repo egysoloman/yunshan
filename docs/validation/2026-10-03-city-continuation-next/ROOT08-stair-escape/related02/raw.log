@@ -1,0 +1,22 @@
+{"scope":"CPU controlled existing actor employment/work intent; actual destination writer and normal24 .25-minute simulation ticks; no native hiring/arrival/14-day claim","fingerprint":"b85fa6ec","workerId":"citizen-562","routePoints":482,"goal":{"x":-216.8,"y":243.4,"z":366.80000000000007},"ticks":24,"completeAndPartitionExact":true,"generic1025Rejected":true,"genericNegative":{"ok":false,"message":"读档失败：无效存档字段：route。"},"priorDraftRejected":true}
+{"scope":"CPU single controlled original citizen start; unchanged real NPC destination/motion methods, not normalURL or earned native assignment","workerId":"citizen-562","fromFloor":36,"goal":{"x":-216.8,"y":243.4,"z":366.80000000000007},"steps":760,"maxRise":0.018782971011006566,"maxDistance":0.042000000000018634,"completeFootSupport":true,"fullHeadroom":true,"bothDirectionRecovery":true}
+✔ exact terminal east-b42 same-height lower-link recovers to door and both bed floors (347.180423ms)
+✔ exact terminal west-b34 full disk is supported across up8 to the real half-turn (176.420731ms)
+✔ lower floor slab cannot hold an upper body disk over a real hole or stair side (28.504234ms)
+✔ real east-b42 continuous W traverses every floor up then down without reset (1494.428679ms)
+✔ real west-b34 continuous W traverses every floor up then down without reset (1610.7076ms)
+✔ continuous stairs retain upper ACL and the original .35m body and 1.72m head clearance (46.101458ms)
+✔ legacy stair descriptor and current-v4 fingerprint remain exactly trusted old geometry (1308.006311ms)
+✔ exact east lower-link also recovers on the preserved v4 descriptor and actual W reaches its door (296.889995ms)
+✔ same-height recovery reaches the actual legal bedside by normal W without replacing its starting pose (135.552848ms)
+✔ continuous stair opt-in can be removed without polluting an existing v4 body cache (22.680308ms)
+✔ real existing actor destination writer stays under1024, roundtrips complete/partition saves and24ordinary future ticks without raising generic bounds (115623.331922ms)
+✔ commercial compact upper-flight NPC motion and mid-flight recovery retain actual .35 support and1.72 headroom in both directions (3972.940253ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132542.223869

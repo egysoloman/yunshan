@@ -1,8 +1,9 @@
 import type { Simulation } from '../simulation';
+import { closeServiceSupplementalBudgets, proposeSupplementalBudget, reviewSupplementalBudgets, reviewSupplementalByMayor, serviceTotalSpent, supplementalFor, supplementalPurpose, validateSupplementalBudgetState, type SupplementalBudgetState } from './supplemental-budget';
 import { canAccessFloor } from '../access';
-import { getBuildingBody } from '../architecture-floor-plan';
+import { FLOOR_PLAN_PROFILE, getBuildingBody, getBuildingUsePoints, floorPlanSupport, blocksFloorPlanMovement } from '../architecture-floor-plan';
 import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
-import { educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
+import { applyPublicEducationCredential, educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
@@ -18,7 +19,8 @@ export interface CityReport {
   status: 'unchecked' | 'verified' | 'false' | 'corrected'; publishedAt: number; verifiedAt: number | null; correctedAt: number | null;
   readIds: string[]; reachedIds: string[]; readingMinutes: Record<string, number>; correctionReadIds: string[]; correctionMinutes: Record<string, number>; falseNotifiedIds: string[]; nextSpreadAt: number;
 }
-export interface CivicPetition { id: string; authorId: string; topic: PetitionTopic; title: string; text: string; siteId: string; filedAt: number; replyAt: number; status: 'open' | 'answered'; signerIds: string[]; reply: string | null; answeredAt: number | null; executionId?: string | null }
+export interface ResidentPetitionOrigin { version: 1; ageAtFiling: number; educationAtFiling: number; healthAtFiling: number; feePaid: 10; moneyBefore: number; moneyAfter: number; floor: number; pointId: string | null; position: Vec3 }
+export interface CivicPetition { residentOrigin?: ResidentPetitionOrigin; id: string; authorId: string; topic: PetitionTopic; title: string; text: string; siteId: string; filedAt: number; replyAt: number; status: 'open' | 'answered'; signerIds: string[]; reply: string | null; answeredAt: number | null; executionId?: string | null }
 export interface SupplyReceipt { procurementId: string; budgetId: string; purchasedAt: number; paid: number; quantity: number; tax: number; reason?: 'budget' | 'supply' | 'authorization'; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
 /** One actually consumed public-care unit. Old consumption is never backfilled. */
 export interface PublicHealthConsumptionReceipt {
@@ -35,7 +37,7 @@ export interface ServiceOrder {
   servedIds: string[]; serviceMinutes: Record<string, number>; staffIds: string[]; receipts: SupplyReceipt[];
   retryAt: number; completedAt: number | null; lastReason: string;
 }
-export interface CultureState { version: 1 | 2; lastUpdate: number; nextWorkId: number; nextReportId: number; nextPetitionId: number; project: CultureProject | null; works: CulturalWork[]; reports: CityReport[]; petitions: CivicPetition[]; nextOrderId: number; orders: ServiceOrder[]; playerServiceId: string | null; transportMaintenance: Record<string, { maintainedUntil: number; orderId: string; units: number }> }
+export interface CultureState { supplementalBudgets?: SupplementalBudgetState; version: 1 | 2; lastUpdate: number; nextWorkId: number; nextReportId: number; nextPetitionId: number; project: CultureProject | null; works: CulturalWork[]; reports: CityReport[]; petitions: CivicPetition[]; nextOrderId: number; orders: ServiceOrder[]; playerServiceId: string | null; transportMaintenance: Record<string, { maintainedUntil: number; orderId: string; units: number }> }
 const DAY = 1440;
 const WORK_LIMIT = 32, REPORT_LIMIT = 32, PETITION_LIMIT = 16;
 const REQUIRED: Record<WorkGenre, number> = { literature: 120, art: 180 };
@@ -103,6 +105,32 @@ export function installCulture(simulation: Simulation): void {
     return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)
       && (!getBuildingBody(site) || simulation.isAtBuildingFunctionPoint(site, citizen.position, undefined, identity));
   });
+  const residentPetitions = () => {
+    const s = state(), c = culture();
+    if (c.version !== 2 || s.hour < 8 || s.hour >= 17 || c.petitions.length >= PETITION_LIMIT || s.treasury > 1e9 - 10) return;
+    for (const site of world.buildings.filter(civicSite)) {
+      for (const person of readersAt(site).sort((a, b) => a.id.localeCompare(b.id))) {
+        if (c.petitions.length >= PETITION_LIMIT) return;
+        const profile = s.extension!.actorProfiles[person.id];
+        if (profile.age < 18 || profile.mood < 65 || profile.stress > 50 || person.needs.hunger < 40 || person.needs.fatigue < 35 || person.needs.social < 30 || person.money < 110 || person.money > 1e9) continue;
+        const topic: PetitionTopic | null = profile.health < 65 && world.buildings.some(b => b.districtId === site.districtId && b.kind === 'clinic' && !b.facility) ? 'health'
+          : (person.education ?? 0) < 1 && world.buildings.some(b => b.districtId === site.districtId && b.kind === 'school' && !b.facility) ? 'education' : null;
+        if (!topic || c.petitions.some(p => p.topic === topic && p.status === 'open') || c.orders.some(o => o.topic === topic && !['fulfilled', 'rejected'].includes(o.state))
+          || c.petitions.some(p => p.authorId === person.id && p.topic === topic && now() - p.filedAt < 7 * DAY)) continue;
+        const level = floor(site, person.position), point = site.floorPlanProfile === FLOOR_PLAN_PROFILE ? getBuildingUsePoints(site, level).find(p => distance(p.position, person.position) <= 2) : null;
+        if (site.floorPlanProfile === FLOOR_PLAN_PROFILE && (!point || !floorPlanSupport(site, level, person.position, .35) || blocksFloorPlanMovement(site, level, person.position, person.position, .35, 1.72))) continue;
+        const origin: ResidentPetitionOrigin = { version: 1, ageAtFiling: profile.age, educationAtFiling: person.education ?? 0, healthAtFiling: profile.health, feePaid: 10, moneyBefore: person.money, moneyAfter: person.money - 10, floor: level, pointId: point?.id ?? null, position: { ...person.position } };
+        person.money -= 10; s.treasury += 10;
+        const extensionRuntime = Reflect.get(s.extension!, 'runtime'); if (extensionRuntime) extensionRuntime.lastTreasury += 10;
+        s.extension!.publicLedger.push({ tick: s.tick, actorId: person.id, amount: 10, purpose: '居民公共请愿备案费', account: 'public', districtId: site.districtId });
+        if (s.extension!.publicLedger.length > 512) s.extension!.publicLedger.splice(0, s.extension!.publicLedger.length - 512);
+        const label = topic === 'health' ? '医疗照护' : '公共课堂';
+        const petition: CivicPetition = { residentOrigin: origin, id: `petition-${c.nextPetitionId++}`, authorId: person.id, topic, title: `${label}居民联署`, text: `${person.name}在公共大厅提出${label}需求，请同街坊居民现场了解并联署，由主管部门按真实预算和人员物料条件安排服务。`, siteId: site.id, filedAt: now(), replyAt: now() + DAY, status: 'open', signerIds: [person.id], reply: null, answeredAt: null, executionId: null };
+        c.petitions.push(petition);
+        notice('petition', `${person.name}已支付10文备案，提出${label}联署；仍需现场居民和法定审批。`, site.districtId);
+      }
+    }
+  };
   const staffAt = (order: ServiceOrder, minutes: number) => state().citizens.filter(person => SERVICE[order.topic].roles.includes(person.role) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && state().extension!.actorProfiles[person.id].health >= 45 && (order.topic === 'education' ? educationStaffMinutes(simulation, person, order.siteId, minutes) > 0 : order.topic === 'health' ? clinicalDoctorMinutes(simulation, person, order.siteId, minutes) > 0 : simulation.isOnDuty(person.id, order.siteId)));
   const makeOrder = (petition: CivicPetition): ServiceOrder | null => {
     const hearing = sites.get(petition.siteId)!, rule = SERVICE[petition.topic];
@@ -118,12 +146,12 @@ export function installCulture(simulation: Simulation): void {
   };
   const finishService = (order: ServiceOrder) => {
     order.state = 'fulfilled'; order.completedAt = now(); order.lastReason = '采购的材料已由实际在岗人员与现场参与者完成服务。';
-    simulation.closePublicBudget(order.id);
+    simulation.closePublicBudget(order.id); closeServiceSupplementalBudgets(simulation, order);
     const institutions = state().extension!.institutions;
     if (order.topic === 'education') institutions.education = clamp(institutions.education + order.servedIds.length * .1);
     if (order.topic === 'health') institutions.medical = clamp(institutions.medical + order.servedIds.length * .1);
     state().support = clamp(state().support + Math.min(.6, order.consumedUnits * .1));
-    notice('public-service', `${sites.get(order.siteId)!.name}完成服务，实际支出${order.spent.toFixed(1)}文，耗用${order.consumedUnits}份材料。`, sites.get(order.siteId)!.districtId);
+    notice('public-service', `${sites.get(order.siteId)!.name}完成服务，实际支出${serviceTotalSpent(culture(), order).toFixed(1)}文，耗用${order.consumedUnits}份材料。`, sites.get(order.siteId)!.districtId);
   };
   const serve = (order: ServiceOrder, minutes: number) => {
     const site = sites.get(order.siteId)!, staff = staffAt(order, minutes), rule = SERVICE[order.topic];
@@ -178,7 +206,7 @@ export function installCulture(simulation: Simulation): void {
         const event: PublicHealthEvent = { type: 'public-health-consumed', citizenId: id, siteId: site.id, procurementId: order.id, budgetId: receipt.id, quantity: 1, minutes: 20, occurredAt: now() };
         publicHealthEvents.set(event, { state: state(), receipt }); simulation.emitEvent(event);
       }
-      else { profile.skill = clamp(profile.skill + 1); if (id === 'player') { state().player.education++; state().player.experience++; } else { const person = state().citizens.find(person => person.id === id)!; person.skills ??= {}; person.skills.learning = clamp((person.skills.learning ?? 0) + 2); if (profile.age >= 18) person.education = (person.education ?? 0) + 1; } }
+      else { profile.skill = clamp(profile.skill + 1); if (id === 'player') { state().player.education++; state().player.experience++; } else { const person = state().citizens.find(person => person.id === id)!; person.skills ??= {}; person.skills.learning = clamp((person.skills.learning ?? 0) + 2); applyPublicEducationCredential(simulation, order, id); } }
       simulation.emitEvent({ type: 'civic-service', citizenId: id, districtId: site.districtId, quantity: 1, minutes: rule.minutes });
       if (id === 'player') culture().playerServiceId = null;
       if (order.consumedUnits >= rule.units - 1e-7) { finishService(order); break; }
@@ -193,6 +221,7 @@ export function installCulture(simulation: Simulation): void {
   simulation.onPhase('time', () => { culture().lastUpdate = now(); });
   simulation.onPhase('people', (_s, minutes) => {
     const c = culture(), project = c.project, player = state().player;
+    residentPetitions();
     if (project && alive('player') && atSite(sites.get(project.siteId)!) && player.needs.hunger >= 40 && player.needs.fatigue >= 40 && state().hour >= 7 && state().hour < 22) {
       const work = Math.min(minutes, project.requiredMinutes - project.workedMinutes);
       project.workedMinutes += work; player.needs.fatigue = clamp(player.needs.fatigue - work * .03); player.needs.fun = clamp(player.needs.fun + work * .02);
@@ -267,13 +296,26 @@ export function installCulture(simulation: Simulation): void {
       if (!['awaitingBudget', 'awaitingSupply', 'active'].includes(order.state) || order.approvedAt === null || order.receivedUnits >= order.targetUnits - 1e-7 || now() < order.retryAt - 1e-7) continue;
       order.retryAt = now() + 60;
       const receipt = simulation.purchasePublicSupplyReceipt({ requestedGross: Math.max(0, order.authorizedCap - order.spent), requestedQuantity: Math.max(0, order.targetUnits - order.receivedUnits), districtId: sites.get(order.siteId)!.districtId, siteId: order.siteId, purpose: order.topic, procurementId: `${order.id}:receipt-${order.receipts.length + 1}`, budgetId: order.id });
+      let procurementReason = receipt.reason;
       if (receipt.paid > 1e-7) {
         order.receipts.push({ ...receipt, procurementId: `${order.id}:receipt-${order.receipts.length + 1}`, budgetId: order.id, purchasedAt: now() });
         order.spent += receipt.paid; order.receivedUnits += receipt.quantity;
       }
+      for (const extra of supplementalFor(culture(), order.id)) {
+        if (extra.approvedAt === null || extra.closedAt !== null || extra.spent >= extra.cap - 1e-7 || order.receivedUnits >= order.targetUnits - 1e-7) continue;
+        const supplied = simulation.purchasePublicSupplyReceipt({ requestedGross: extra.cap - extra.spent, requestedQuantity: order.targetUnits - order.receivedUnits, districtId: sites.get(order.siteId)!.districtId, siteId: order.siteId, purpose: supplementalPurpose(order), procurementId: `${order.id}:receipt-${order.receipts.length + 1}`, budgetId: extra.id });
+        procurementReason = supplied.reason;
+        if (supplied.paid > 1e-7) {
+          const procurementId = `${order.id}:receipt-${order.receipts.length + 1}`;
+          order.receipts.push({ ...supplied, procurementId, budgetId: extra.id, purchasedAt: now() });
+          extra.spent += supplied.paid; extra.receiptIds.push(procurementId); order.receivedUnits += supplied.quantity;
+        }
+      }
+      proposeSupplementalBudget(simulation, order);
       const sufficient = order.receivedUnits - order.consumedUnits >= (order.topic === 'transport' ? 4 : 1) - 1e-7;
-      order.state = sufficient ? 'active' : receipt.reason === 'budget' || order.spent >= order.authorizedCap - 1e-7 ? 'awaitingBudget' : 'awaitingSupply';
-      order.lastReason = sufficient ? `材料已实际入库${order.receivedUnits.toFixed(2)}份；尚缺${Math.max(0, order.targetUnits - order.receivedUnits).toFixed(2)}份，服务仍须人员和参与者现场投入时间。` : order.state === 'awaitingBudget' ? order.spent >= order.authorizedCap - 1e-7 ? '法定授权额度已经耗尽；已有实际履约保留，缺料需经新的合法预算程序，不能免费补足。' : '必要公共工资和运维优先；本议题等待可支配财政现金。' : '有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。';
+      const extraRemaining = supplementalFor(culture(), order.id).filter(r => r.approvedAt !== null && r.closedAt === null).reduce((sum, r) => sum + Math.max(0, r.cap - r.spent), 0);
+      order.state = sufficient ? 'active' : procurementReason === 'budget' || order.spent >= order.authorizedCap - 1e-7 && extraRemaining <= 1e-7 ? 'awaitingBudget' : 'awaitingSupply';
+      order.lastReason = sufficient ? `材料已实际入库${order.receivedUnits.toFixed(2)}份；尚缺${Math.max(0, order.targetUnits - order.receivedUnits).toFixed(2)}份，服务仍须人员和参与者现场投入时间。` : order.state === 'awaitingBudget' ? order.spent >= order.authorizedCap - 1e-7 && extraRemaining <= 1e-7 ? '法定授权额度已经耗尽；已有实际履约保留，缺料需经新的合法预算程序，不能免费补足。' : '必要公共工资和运维优先；本议题等待可支配财政现金。' : '有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。';
     }
   });
   simulation.onPhase('politics', () => {
@@ -294,6 +336,7 @@ export function installCulture(simulation: Simulation): void {
       order.state = 'awaitingReview'; order.lastReason = signers.length === 2 && simulation.publicBudgetSnapshot().available < 40 ? '现场联审人员已具备；扣除必要工资、运维和已有授权后，无40文可分配额度，保留议程待财政恢复。' : '等候两名合资格官员实际在岗联审，或当选市长到合法决策层审批。';
     }
   });
+  simulation.onPhase('politics', () => reviewSupplementalBudgets(simulation));
   const handled = new Set(['createWork', 'publishWork', 'publishReport', 'verifyReport', 'correctReport', 'filePetition', 'reviewPetition', 'attendService']);
   simulation.registerCommandHandler((command: Command): CommandResult | null => {
     if (!handled.has(command.type)) return null;
@@ -303,6 +346,9 @@ export function installCulture(simulation: Simulation): void {
     if (command.targetId !== undefined && typeof command.targetId !== 'string') return fail('文化目标须为有效标识。');
     const content = command.text, title = command.title;
     if (content !== undefined && (typeof content !== 'string' || content.length > 1200) || title !== undefined && (typeof title !== 'string' || title.length > 40)) return fail('标题最多40字，正文最多1200字。');
+    if (command.type === 'reviewPetition' && c.supplementalBudgets?.requests.some(r => r.id === command.targetId)) {
+      return reviewSupplementalByMayor(simulation, command.targetId!) ? { ok: true, message: '当选市长已批准独立追加额度，原授权保持，实际采购仍需有限现金与库存。' } : fail('追加额度须由当选市长在合法决策层审批，且公共现金足够保护已签工资与其他授权。');
+    }
     if (command.type === 'reviewPetition') {
       const petition = c.petitions.find(item => item.id === command.targetId), order = c.orders.find(item => item.id === petition?.executionId);
       const decisionSite = world.buildings.find(site => simulation.isNearBuilding(site) && canReviewPetition(site, floor(site, p.position), p));
@@ -423,11 +469,31 @@ export function validateCultureState(candidate: SimState, world: WorldDefinition
   for (const petition of array(c.petitions, PETITION_LIMIT, '请愿')) {
     ensure(object(petition) && /^petition-[1-9][0-9]*$/.test(petition.id) && Number(petition.id.slice(9)) < c.nextPetitionId && !petitionIds.has(petition.id) && ids.has(petition.authorId) && ['education', 'health', 'transport'].includes(petition.topic) && !!sites.get(petition.siteId) && civicSite(sites.get(petition.siteId)!), '请愿标识'); petitionIds.add(petition.id);
     str(petition.title, 1, 40, '请愿标题'); str(petition.text, 20, 400, '请愿正文'); num(petition.filedAt, 0, c.lastUpdate, '备案时间'); num(petition.replyAt, petition.filedAt + DAY, petition.filedAt + DAY, '一天程序期限'); memberList(petition.signerIds, '现场联署');
+    if (petition.residentOrigin !== undefined) {
+      const r = petition.residentOrigin, site = sites.get(petition.siteId)!;
+      ensure(object(r) && r.version === 1 && petition.authorId !== 'player' && candidate.citizens.some(person => person.id === petition.authorId) && r.feePaid === 10, '居民真实备案主体');
+      num(r.ageAtFiling, 18, 130, '备案时成年'); ensure(candidate.extension!.actorProfiles[petition.authorId]?.age >= r.ageAtFiling, '居民年龄不倒退');
+      num(r.educationAtFiling, 0, 100, '原学历需求'); num(r.healthAtFiling, 0, 100, '原健康需求');
+      ensure(petition.topic === 'health' ? r.healthAtFiling < 65 : petition.topic === 'education' && r.educationAtFiling < 1, '真实个人服务缺口');
+      num(r.moneyBefore, 110, 1e9, '备案前真实钱包'); num(r.moneyAfter, 100, 1e9, '备案后生活储备'); ensure(Math.abs(r.moneyBefore - r.moneyAfter - r.feePaid) < 1e-7, '原10文实付备案不生成资金');
+      num(r.floor, 0, site.floors - 1, '原公共楼层', true); ensure(publicFloor(site, r.floor) && canAccessFloor(site, r.floor, { role: 'traveler', identities: ['traveler'] }) && object(r.position) && [r.position.x, r.position.y, r.position.z].every(finite), '原公共备案点');
+      const level = Math.floor((r.position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors)));
+      ensure(level === r.floor, '原备案高度');
+      if (site.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+        ensure(typeof r.pointId === 'string' && getBuildingUsePoints(site, r.floor).some(point => point.id === r.pointId && distance(point.position, r.position) <= 2)
+          && floorPlanSupport(site, r.floor, r.position, .35) && !blocksFloorPlanMovement(site, r.floor, r.position, r.position, .35, 1.72), '原实体大厅功能点');
+      } else {
+        const dx = r.position.x - site.position.x, dz = r.position.z - site.position.z, x = dx * Math.cos(site.rotation) + dz * Math.sin(site.rotation), z = -dx * Math.sin(site.rotation) + dz * Math.cos(site.rotation);
+        const dimensions = site.floorFootprints?.[r.floor] ?? site;
+        ensure(r.pointId === null && (r.floor === 0 && distance(r.position, site.door) <= 2 || Math.abs(x) <= dimensions.width / 2 && Math.abs(z) <= dimensions.depth / 2), '旧设施原公共位置');
+      }
+    }
     ensure(['open', 'answered'].includes(petition.status), '办理状态');
     if (petition.status === 'open') ensure(petition.reply === null && petition.answeredAt === null, '办理中不编造答复');
     else { str(petition.reply, 1, 1000, '公开答复'); num(petition.answeredAt, petition.replyAt, c.lastUpdate, '实际答复时间'); }
   }
-  if (c.version === 1) { ensure(c.orders === undefined && c.nextOrderId === undefined && c.playerServiceId === undefined && c.transportMaintenance === undefined, '旧版本不能夹带未校验履约数据'); return; }
+  if (c.version === 1) { ensure(c.supplementalBudgets === undefined && c.orders === undefined && c.nextOrderId === undefined && c.playerServiceId === undefined && c.transportMaintenance === undefined, '旧版本不能夹带未校验履约数据'); return; }
+  validateSupplementalBudgetState(candidate, world);
   num(c.nextOrderId, 1, 1e9, '服务议程序号', true);
   const orderIds = new Set<string>(), shopIds = new Set(candidate.shops.map(shop => shop.id));
   for (const order of array(c.orders, PETITION_LIMIT, '服务议程')) {
@@ -441,11 +507,11 @@ export function validateCultureState(candidate: SimState, world: WorldDefinition
     num(order.authorizedCap, 0, 160, '已批准额度', true); num(order.spent, 0, order.authorizedCap, '实际采购支出'); num(order.receivedUnits, 0, rule.units + 1e-7, '实际采购材料'); num(order.consumedUnits, 0, order.receivedUnits + 1e-7, '服务耗用材料', true);
     const receipts = array(order.receipts, 64, '采购凭证'); let paid = 0, received = 0;
     for (let index = 0; index < receipts.length; index++) {
-      const receipt = receipts[index]; ensure(object(receipt) && receipt.budgetId === order.id && receipt.procurementId === `${order.id}:receipt-${index + 1}`, '采购唯一关联'); num(receipt.purchasedAt, order.approvedAt, c.lastUpdate, '采购真实时间'); num(receipt.paid, 1e-7, 160, '采购实付'); num(receipt.quantity, 1e-7, rule.units, '采购数量'); num(receipt.tax, 0, receipt.paid, '采购税收');
+      const receipt = receipts[index]; ensure(object(receipt) && (receipt.budgetId === order.id || supplementalFor(c, order.id).some(r => r.id === receipt.budgetId && r.approvedAt !== null && receipt.purchasedAt >= r.approvedAt)) && receipt.procurementId === `${order.id}:receipt-${index + 1}`, '采购唯一关联'); num(receipt.purchasedAt, order.approvedAt, c.lastUpdate, '采购真实时间'); num(receipt.paid, 1e-7, 160, '采购实付'); num(receipt.quantity, 1e-7, rule.units, '采购数量'); num(receipt.tax, 0, receipt.paid, '采购税收');
       ensure(receipt.reason === undefined || ['budget', 'supply', 'authorization'].includes(receipt.reason), '真实采购缺口原因');
       const lots = array(receipt.lots, candidate.shops.length, '实际供应商批次'); let gross = 0, quantity = 0, net = 0;
       for (const lot of lots) { ensure(object(lot) && shopIds.has(lot.shopId), '实际供应商引用'); num(lot.unitPrice, 1e-7, 1e6, '实际报价'); num(lot.quantity, 1e-7, rule.units, '供货库存数量'); num(lot.gross, 1e-7, receipt.paid, '供应商销售总款'); num(lot.net, 0, lot.gross, '供应商实际到账'); ensure(Math.abs(lot.gross - lot.quantity * lot.unitPrice) < 1e-6, '真实报价与供货相符'); gross += lot.gross; quantity += lot.quantity; net += lot.net; }
-      ensure(Math.abs(gross - receipt.paid) < 1e-6 && Math.abs(quantity - receipt.quantity) < 1e-6 && Math.abs(gross - net - receipt.tax) < 1e-6, '采购凭证收款及税守恒'); paid += receipt.paid; received += receipt.quantity;
+      ensure(Math.abs(gross - receipt.paid) < 1e-6 && Math.abs(quantity - receipt.quantity) < 1e-6 && Math.abs(gross - net - receipt.tax) < 1e-6, '采购凭证收款及税守恒'); if (receipt.budgetId === order.id) paid += receipt.paid; received += receipt.quantity;
     }
     ensure(Math.abs(paid - order.spent) < 1e-6 && Math.abs(received - order.receivedUnits) < 1e-6, '采购支出库存必须来自凭证');
     const served = array(order.servedIds, rule.units, '实际受益人'), staff = memberList(order.staffIds, '实际服务工作人员'); ensure(new Set(served).size === served.length && served.every(id => ids.has(id)), '受益主体引用');

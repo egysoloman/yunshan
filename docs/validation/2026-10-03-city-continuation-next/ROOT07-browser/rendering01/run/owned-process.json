@@ -1,0 +1,24 @@
+{
+  "pid": 20790,
+  "group": 20790,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/rendering.test.ts",
+    "tests/architecture-bodies.test.ts",
+    "tests/chunk-residency.test.ts"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 20790,
+      "state": "R",
+      "parent": 20789,
+      "group": 20790,
+      "session": 20790,
+      "startTicks": 818880
+    }
+  ]
+}

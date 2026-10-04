@@ -1,0 +1,24 @@
+{
+  "pid": 31698,
+  "group": 31698,
+  "argv": [
+    "env",
+    "YUNSHAN_STAIR_ESCAPE_EVIDENCE=/workspace/yunshan-work/ROOT08-stair-escape-20261004-01/targeted03/evidence",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/stair-escape-origin.test.ts"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 31698,
+      "state": "R",
+      "parent": 31679,
+      "group": 31698,
+      "session": 31698,
+      "startTicks": 1664678
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import type { Simulation } from '../simulation';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Role, SimState, Vec3, WorldDefinition } from '../types';
 import { roadClosure, roadClosureById, completeRoadRepair } from '../roads';
-import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from '../architecture-floor-plan';
+import { FLOOR_PLAN_PROFILE, getBuildingUsePoints, buildingLocalPosition } from '../architecture-floor-plan';
 import { canAccessFloor } from '../access';
 import { getWalkHeight } from '../world';
 import { homeRestPointBlockedByVoxels } from './home-rest';
@@ -12,7 +12,7 @@ import { validateJointActorActivityCapacity, type ActorActivityClaim } from './a
 const EPS = 1e-7, REQUIRED_MINUTES = 60, MATERIALS = 1, PLAYER_FUNDS = 100, MAX_JOBS = 128, MAX_LABOR_RECEIPTS = 256, MAX_MODULE_BYTES = 768 * 1024, NEW_ORDER_BYTES = 512 * 1024;
 export interface RoadBudgetEscrowRequest { budgetId: string; siteId: string; purpose: 'road-repair'; amount: number }
 export interface RoadworksAccounting {
-  activate(): void;
+  activate(version?: 1 | 2): void;
   isCanonicalRoadworkPresence(event: object): boolean;
   travelCost(citizenId: string, nodeId: string, point: Vec3): number;
   takePublicEscrow(request: RoadBudgetEscrowRequest): boolean;
@@ -29,7 +29,15 @@ export interface RoadMaterialLot {
 }
 export interface RoadWorkerContract { actorId: string; at: number; role: string; craft: number; age: number; health: number; hunger: number; fatigue: number; districtId: string; prosperity: number; ratePerMinute: number }
 export interface RoadContribution { startedAt: number; endedAt: number; workedMinutes: number; gross: number; net: number; tax: number }
+export interface RoadRetainedMaterial { kind: 'ground' | 'worksite'; point: Vec3; nodeId: string }
+export interface RoadReplacementCrew {
+  version: 1; activeActorId: string | null;
+  contracts: { contract: RoadWorkerContract; releasedAt: number | null; releaseReason: '' | 'dead' | 'incapable'; releasePosition: Vec3 | null; retainedMaterial: RoadRetainedMaterial | null }[];
+  pendingPickup: { fromContractIndex: number; point: Vec3; nodeId: string } | null;
+  pickups: { fromContractIndex: number; toContractIndex: number; at: number; point: Vec3; nodeId: string }[];
+}
 export interface RoadRepairJob {
+  replacement?: RoadReplacementCrew;
   id: string; closureId: string; edgeId: string; requestedBy: string; payerId: 'player' | 'public';
   worksiteNodeId: string; worksite: Vec3; startedAt: number; lastObservedAt: number;
   status: 'awaitingBudget' | 'awaitingSupply' | 'awaitingWorker' | 'carrying' | 'working' | 'paused' | 'refundPending' | 'completed' | 'cancelled'; reason: string;
@@ -41,7 +49,7 @@ export interface RoadRepairJob {
   budgetId: string | null; approvalSiteId: string | null; approvedAt: number | null; approvedBy: string[]; authorizedCap: number;
   completedAt: number | null; cancelledAt: number | null;
 }
-export interface RoadworksState { version: 1; activatedAt: number; nextId: number; jobs: RoadRepairJob[]; stock: RoadMaterialLot[]; capacityHistory: ActorActivityClaim[] }
+export interface RoadworksState { replacementVersion?: 1; replacementActivatedAt?: number; replacementFirstJobId?: string; version: 1; activatedAt: number; nextId: number; jobs: RoadRepairJob[]; stock: RoadMaterialLot[]; capacityHistory: ActorActivityClaim[] }
 type State = SimState & { roadworks?: RoadworksState };
 interface Presence { citizenId?: string; laborJobId?: string; nodeId?: string; activityWindowStartAt?: number; activityWindowEndAt?: number; activityObservedTick?: number; activityObservedClock?: number; activityPosition?: Vec3 }
 const body = (state: SimState) => (state as State).roadworks;
@@ -50,6 +58,8 @@ const finite = (x: unknown): x is number => typeof x === 'number' && Number.isFi
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const copy = (p: Vec3): Vec3 => ({ ...p });
 const ended = (job: RoadRepairJob) => job.status === 'completed' || job.status === 'cancelled';
+export const roadworkActorId = (job: RoadRepairJob) => job.replacement ? job.replacement.activeActorId : job.workerId;
+const currentContract = (job: RoadRepairJob) => job.replacement ? (job.replacement.activeActorId ? job.replacement.contracts.at(-1)?.contract ?? null : null) : job.contract;
 const identity = (actor: Citizen): { role: Role; identities: Role[] } => { const role: Role = actor.role === '工程师' ? 'scientist' : 'traveler'; return { role, identities: [role] }; };
 function capable(state: SimState, actor: Citizen): boolean {
   const profile = state.extension!.actorProfiles[actor.id];
@@ -103,7 +113,7 @@ function authorize(sim: Simulation, job: RoadRepairJob, ids: string[], cap: numb
 function acceptWorker(sim: Simulation, job: RoadRepairJob, accounting: RoadworksAccounting): void {
   if (job.workerId || !(job.escrow > 0) || job.cancelledAt !== null || ended(job)) return;
   const candidates = sim.state.citizens.filter(actor => capable(sim.state, actor) && actor.money < 450 && sim.state.extension!.actorProfiles[actor.id].stress < 75
-    && !body(sim.state)!.jobs.some(other => !ended(other) && other.workerId === actor.id));
+    && !body(sim.state)!.jobs.some(other => !ended(other) && roadworkActorId(other) === actor.id));
   let best: { actor: Citizen; shopId: string; nodeId: string; point: Vec3; cost: number; rate: number } | undefined;
   for (const actor of candidates) {
     const district = sim.state.districts.find(d => d.id === actor.districtId)!;
@@ -128,20 +138,92 @@ function acceptWorker(sim: Simulation, job: RoadRepairJob, accounting: Roadworks
   const p = sim.state.extension!.actorProfiles[best.actor.id], district = sim.state.districts.find(d => d.id === best.actor.districtId)!;
   job.contract = { actorId: best.actor.id, at: job.acceptedAt, role: best.actor.role, craft: best.actor.skills!.craft, age: p.age, health: p.health, hunger: best.actor.needs.hunger, fatigue: best.actor.needs.fatigue, districtId: best.actor.districtId, prosperity: district.prosperity, ratePerMinute: best.rate };
   job.supplierShopId = best.shopId; job.supplierNodeId = best.nodeId; job.supplierPoint = best.point;
+  if (job.replacement) { job.replacement.activeActorId = best.actor.id; job.replacement.contracts.push({ contract: structuredClone(job.contract!), releasedAt: null, releaseReason: '', releasePosition: null, retainedMaterial: null }); }
   job.status = 'awaitingSupply'; job.reason = '具名工人接受真实工资合同，须先沿路到供应商合法售点领取原库存。';
   sim.emitEvent({ type: 'roadwork-accepted', citizenId: best.actor.id, laborJobId: job.id, amount: REQUIRED_MINUTES * best.rate, minutes: REQUIRED_MINUTES, ratePerMinute: best.rate });
+}
+function nearestMaterialNode(sim: Simulation, point: Vec3) {
+  return [...sim.worldDefinition.nodes].sort((a, b) => distance(a.position, point) - distance(b.position, point) || a.id.localeCompare(b.id))[0];
+}
+function releaseReplacement(sim: Simulation, job: RoadRepairJob, actor: Citizen): void {
+  const crew = job.replacement!, row = crew.contracts.at(-1)!;
+  if (row.releasedAt !== null || crew.activeActorId !== actor.id) return;
+  row.releasedAt = clock(sim.state);
+  row.releaseReason = sim.state.extension!.actorProfiles[actor.id].alive ? 'incapable' : 'dead';
+  row.releasePosition = copy(actor.position);
+  const material = lot(sim.state, job);
+  // A replacement who has not reached the retained lot cannot claim to drop it.
+  // Its previous physical custodian and pickup obligation remain unchanged.
+  if (material && material.quantity > 0 && !material.retained) {
+    dropMaterial(sim, job);
+    if (material.location.kind === 'ground' || material.location.kind === 'worksite') {
+      const point = material.location.point, node = nearestMaterialNode(sim, point);
+      if (node) {
+        row.retainedMaterial = { kind: material.location.kind, point: copy(point), nodeId: node.id };
+        crew.pendingPickup = { fromContractIndex: crew.contracts.length - 1, point: copy(point), nodeId: node.id };
+      }
+    }
+  }
+  crew.activeActorId = null; job.status = 'awaitingWorker';
+  job.reason = '原工人死亡或失能，原工资、有限托管、原采购与物料落点保留；等待合资格居民实际接续，不退款或返造库存。';
+}
+function retainedPointReachableWithoutInteriorShortcut(sim: Simulation, point: Vec3): boolean {
+  // Generic roadwork routes have no arbitrary room destination/door contract.
+  // A marked building's material is therefore retained until a future explicit
+  // interior recovery implementation; it cannot be collected through a wall.
+  return !sim.worldDefinition.buildings.some(site => {
+    if (site.floorPlanProfile !== FLOOR_PLAN_PROFILE) return false;
+    const local = buildingLocalPosition(site, point);
+    return Math.abs(local.x) <= site.width / 2 + .35 && Math.abs(local.z) <= site.depth / 2 + .35;
+  });
+}
+function acceptReplacement(sim: Simulation, job: RoadRepairJob, accounting: RoadworksAccounting): void {
+  const crew = job.replacement!;
+  if (crew.activeActorId || crew.contracts.length >= 16 || job.escrow <= EPS || job.cancelledAt !== null || ended(job)) return;
+  const material = lot(sim.state, job), pending = crew.pendingPickup;
+  const target = pending ?? (job.supplierNodeId && job.supplierPoint ? { nodeId: job.supplierNodeId, point: job.supplierPoint } : null);
+  if (!target || !footClear(sim, target.point) || pending && !retainedPointReachableWithoutInteriorShortcut(sim, target.point)
+    || material && (!pending || !material.retained || material.quantity !== MATERIALS)) return;
+  const candidates = sim.state.citizens.filter(actor => capable(sim.state, actor) && actor.money < 450 && sim.state.extension!.actorProfiles[actor.id].stress < 75
+    && !body(sim.state)!.jobs.some(other => !ended(other) && roadworkActorId(other) === actor.id));
+  let best: { actor: Citizen; cost: number; contract: RoadWorkerContract } | undefined;
+  for (const actor of candidates) {
+    const district = sim.state.districts.find(district => district.id === actor.districtId)!, profile = sim.state.extension!.actorProfiles[actor.id];
+    const rate = 32 * (.7 + district.prosperity / 100) / 480, cost = accounting.travelCost(actor.id, target.nodeId, target.point);
+    if (!finite(cost) || !finite(accounting.travelCost(actor.id, job.worksiteNodeId, job.worksite)) || !(rate > 0)
+      || rate * (REQUIRED_MINUTES - job.workedMinutes) > job.escrow + EPS) continue;
+    if (!material) {
+      const source = sim.state.shops.find(shop => shop.id === job.supplierShopId);
+      if (!source) continue;
+      const quote = sim.quoteSupply(source.id, MATERIALS);
+      if (quote.quantity < MATERIALS || quote.unitPrice + rate * (REQUIRED_MINUTES - job.workedMinutes) > job.escrow + EPS) continue;
+    }
+    const contract = { actorId: actor.id, at: clock(sim.state), role: actor.role, craft: actor.skills!.craft, age: profile.age, health: profile.health,
+      hunger: actor.needs.hunger, fatigue: actor.needs.fatigue, districtId: actor.districtId, prosperity: district.prosperity, ratePerMinute: rate };
+    if (!best || cost < best.cost) best = { actor, cost, contract };
+  }
+  if (!best) {
+    job.status = 'awaitingWorker'; job.reason = '没有自愿合资格、能真实到原物料及工地且原托管足付剩余分钟的替补；钱物历史保留等待。'; return;
+  }
+  crew.activeActorId = best.actor.id;
+  crew.contracts.push({ contract: best.contract, releasedAt: null, releaseReason: '', releasePosition: null, retainedMaterial: null });
+  job.status = pending ? 'carrying' : 'awaitingSupply';
+  job.reason = '具名替补接受原未完工段有限工资；旧合同/采购不改，必须真实领取搬运原物料。';
 }
 export function roadworkTask(sim: Simulation, citizenId: string): RoadworkTask | null {
   const actor = sim.state.citizens.find(actor => actor.id === citizenId);
   if (!actor || !capable(sim.state, actor)) return null;
-  const job = body(sim.state)?.jobs.find(job => !ended(job) && job.cancelledAt === null && job.workerId === citizenId && job.workedMinutes < REQUIRED_MINUTES);
+  const job = body(sim.state)?.jobs.find(job => !ended(job) && job.cancelledAt === null && roadworkActorId(job) === citizenId && job.workedMinutes < REQUIRED_MINUTES);
   if (!job || job.status === 'refundPending' || job.escrow <= 0) return null;
   const material = lot(sim.state, job);
+  const pending = job.replacement?.pendingPickup;
+  if (pending && !retainedPointReachableWithoutInteriorShortcut(sim,pending.point)) return null;
+  if (pending && material?.retained && material.quantity === MATERIALS) return { jobId: job.id, nodeId: pending.nodeId, point: copy(pending.point), stage: 'pickup', acceptedAt: currentContract(job)!.at };
   if (!material) {
     const shop = sim.state.shops.find(shop => shop.id === job.supplierShopId);
-    return shop && job.supplierNodeId && job.supplierPoint ? { jobId: job.id, nodeId: job.supplierNodeId, point: copy(job.supplierPoint), stage: 'pickup', acceptedAt: job.acceptedAt!, buildingId: shop.buildingId } : null;
+    return shop && job.supplierNodeId && job.supplierPoint ? { jobId: job.id, nodeId: job.supplierNodeId, point: copy(job.supplierPoint), stage: 'pickup', acceptedAt: currentContract(job)!.at, buildingId: shop.buildingId } : null;
   }
-  return material.quantity >= MATERIALS && !material.retained ? { jobId: job.id, nodeId: job.worksiteNodeId, point: copy(job.worksite), stage: 'worksite', acceptedAt: job.acceptedAt! } : null;
+  return material.quantity >= MATERIALS && !material.retained ? { jobId: job.id, nodeId: job.worksiteNodeId, point: copy(job.worksite), stage: 'worksite', acceptedAt: currentContract(job)!.at } : null;
 }
 function dropMaterial(sim: Simulation, job: RoadRepairJob): void {
   const material = lot(sim.state, job); if (!material || material.quantity === 0 || material.retained) return;
@@ -187,7 +269,7 @@ function purchase(sim: Simulation, job: RoadRepairJob, actor: Citizen, accountin
   if (lot(sim.state, job) || !atSupplier(sim, job, actor)) return;
   const supplier = sim.state.shops.find(shop => shop.id === job.supplierShopId)!;
   const quote = sim.quoteSupply(supplier.id, MATERIALS), gross = quote.unitPrice, taxRate = sim.state.taxRate, tax = gross * taxRate, net = gross - tax;
-  if (finite(gross) && gross + (REQUIRED_MINUTES - job.workedMinutes) * job.ratePerMinute > job.escrow + EPS) {
+  if (finite(gross) && gross + (REQUIRED_MINUTES - job.workedMinutes) * currentContract(job)!.ratePerMinute > job.escrow + EPS) {
     job.status = 'awaitingBudget'; job.reason = '真实报价加已冻结施工工资超过实际托管；只能依法取消退款后重新批准，不能免费扩额。'; return;
   }
   if (sim.shopCommodity(supplier) !== 'materials' || supplier.inventory < MATERIALS || quote.quantity < MATERIALS || !finite(gross) || gross <= 0 || sim.shopFunds(supplier) + net > 1e9) {
@@ -227,6 +309,11 @@ function create(sim: Simulation, edgeId: string | undefined, payerId: 'player' |
     receipts: [], receivedUnits: 0, reservedUnits: 0, consumedUnits: 0, budgetId: null, approvalSiteId: null, approvedAt: null, approvedBy: [], authorizedCap: 0, completedAt: null, cancelledAt: null,
   };
   if (payerId === 'player') { state.player.money -= PLAYER_FUNDS; ledger(sim, 'player', -PLAYER_FUNDS, '道路维修真实托管划入', closure.districtId); }
+  if (demand) {
+    works.replacementVersion ??= 1; works.replacementActivatedAt ??= now; works.replacementFirstJobId ??= job.id;
+    accounting.activate(2);
+    job.replacement = { version: 1, activeActorId: null, contracts: [], pendingPickup: null, pickups: [] };
+  }
   works.jobs.push(job); acceptWorker(sim, job, accounting);
   return { ok: true, message: payerId === 'player' ? '100文进入原道路维修托管；材料、搬运、60真实工时尚待履约。' : '公共订单等待原合法身份实际审批，没有预扣或循环100文。' };
 }
@@ -269,23 +356,31 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
       || row.activityObservedTick !== phaseTick || row.activityObservedClock !== phaseClock || !finite(row.activityWindowStartAt) || !finite(row.activityWindowEndAt)
       || row.activityWindowEndAt > phaseClock + EPS || row.activityWindowStartAt < phaseClock - phaseMinutes - EPS || row.activityWindowEndAt <= row.activityWindowStartAt || !row.activityPosition) return;
     seen.add(event);
-    const job = body(state)?.jobs.find(job => !ended(job) && job.cancelledAt === null && job.id === row.laborJobId && job.workerId === row.citizenId);
+    const job = body(state)?.jobs.find(job => !ended(job) && job.cancelledAt === null && job.id === row.laborJobId && roadworkActorId(job) === row.citizenId);
     const actor = state.citizens.find(actor => actor.id === row.citizenId);
     if (!job || !actor || !capable(state, actor) || distance(actor.position, row.activityPosition) > EPS || !footClear(sim, actor.position)) return;
     if (!lot(state, job)) { if (row.nodeId === job.supplierNodeId) purchase(sim, job, actor, accounting); return; }
     const material = lot(state, job)!;
+    const pending = job.replacement?.pendingPickup;
+    if (pending && material.retained) {
+      if (row.nodeId !== pending.nodeId || distance(actor.position, pending.point) > .05 || !footClear(sim, pending.point) || !retainedPointReachableWithoutInteriorShortcut(sim,pending.point) || material.quantity !== MATERIALS || material.location.kind !== 'ground' && material.location.kind !== 'worksite' || distance(material.location.point, pending.point) > EPS) return;
+      job.replacement!.pickups.push({ ...pending, point: copy(pending.point), toContractIndex: job.replacement!.contracts.length - 1, at: clock(state) });
+      job.replacement!.pendingPickup = null; material.retained = false; material.location = { kind: 'carried', actorId: actor.id }; job.reservedUnits = MATERIALS;
+      job.status = 'carrying'; job.reason = '替补居民已经真实到原留置落点领取同一物料，下一段须沿开放路搬至原工地。'; return;
+    }
+    const contract = currentContract(job); if (!contract) return; const rate = contract.ratePerMinute;
     if (row.nodeId !== job.worksiteNodeId || distance(actor.position, job.worksite) > 2 || material.retained || material.quantity < MATERIALS || !footClear(sim, job.worksite)) return;
     material.location = { kind: 'worksite', nodeId: job.worksiteNodeId, point: copy(job.worksite) };
-    const startAt = Math.max(row.activityWindowStartAt, job.acceptedAt!, job.startedAt, job.receipts[0].at), endAt = row.activityWindowEndAt;
+    const startAt = Math.max(row.activityWindowStartAt, contract.at, job.startedAt, job.receipts[0].at), endAt = row.activityWindowEndAt;
     const previous = job.laborReceipts.at(-1);
-    const merge = canCoalesce(previous, actor.id, job.ratePerMinute, state.taxRate, job.worksiteNodeId, job.worksite, startAt);
+    const merge = canCoalesce(previous, actor.id, rate, state.taxRate, job.worksiteNodeId, job.worksite, startAt);
     if (!merge && (job.laborReceipts.length >= MAX_LABOR_RECEIPTS || moduleBytes(state) > MAX_MODULE_BYTES - 2048)) {
       job.status = 'paused'; job.reason = '保存额度已满，原凭据和钱料不删除；暂停新劳动并保留未赚款。'; return;
     }
-    const requested = Math.min(endAt - startAt, REQUIRED_MINUTES - job.workedMinutes, job.escrow / job.ratePerMinute, (1e9 - actor.money) / (job.ratePerMinute * (1 - state.taxRate)));
+    const requested = Math.min(endAt - startAt, REQUIRED_MINUTES - job.workedMinutes, job.escrow / rate, (1e9 - actor.money) / (rate * (1 - state.taxRate)));
     if (!(requested > EPS)) { job.status = 'paused'; job.reason = '没有真实剩余现场分钟、可付工资或收款余额容量。'; return; }
     const minutes = claimActorActivityMinutes(sim, actor.id, job.id, requested, phaseMinutes); if (!(minutes > 0)) return;
-    const gross = minutes * job.ratePerMinute, taxRate = state.taxRate, tax = gross * taxRate, net = gross - tax;
+    const gross = minutes * rate, taxRate = state.taxRate, tax = gross * taxRate, net = gross - tax;
     job.escrow -= gross; actor.money += net; accounting.accrueTax(tax);
     job.workedMinutes += minutes; job.paidGross += gross; job.paidNet += net; job.paidTax += tax;
     const contribution = job.contributions[actor.id] ??= { startedAt: startAt, endedAt: startAt, workedMinutes: 0, gross: 0, net: 0, tax: 0 };
@@ -293,9 +388,9 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
     if (merge) {
       previous!.at = clock(state); previous!.lastTick = state.tick; previous!.paymentCount++;
       previous!.endAt = startAt + minutes; previous!.minutes += minutes; previous!.gross += gross; previous!.net += net; previous!.tax += tax;
-    } else job.laborReceipts.push({ at: clock(state), firstTick: state.tick, lastTick: state.tick, paymentCount: 1, actorId: actor.id, startAt, endAt: startAt + minutes, minutes, ratePerMinute: job.ratePerMinute, taxRate, gross, net, tax, nodeId: job.worksiteNodeId, point: copy(job.worksite) });
+    } else job.laborReceipts.push({ at: clock(state), firstTick: state.tick, lastTick: state.tick, paymentCount: 1, actorId: actor.id, startAt, endAt: startAt + minutes, minutes, ratePerMinute: rate, taxRate, gross, net, tax, nodeId: job.worksiteNodeId, point: copy(job.worksite) });
     ledger(sim, actor.id, net, '道路工地真实已赚工资；原办公室工资未复用', roadClosureById(state, job.closureId)!.districtId);
-    sim.emitEvent({ type: 'roadwork-wage-paid', citizenId: actor.id, laborJobId: job.id, amount: gross, minutes, ratePerMinute: job.ratePerMinute, nodeId: job.worksiteNodeId, creditedWorkStartAt: startAt, creditedWorkEndAt: startAt + minutes, activityObservedTick: state.tick, activityObservedClock: clock(state), activityPosition: copy(actor.position) });
+    sim.emitEvent({ type: 'roadwork-wage-paid', citizenId: actor.id, laborJobId: job.id, amount: gross, minutes, ratePerMinute: rate, nodeId: job.worksiteNodeId, creditedWorkStartAt: startAt, creditedWorkEndAt: startAt + minutes, activityObservedTick: state.tick, activityObservedClock: clock(state), activityPosition: copy(actor.position) });
     job.status = 'working'; job.reason = '原居民在真实工地按冻结合同逐分钟获得净工资与税，未重复领取办公室工资。';
     if (job.workedMinutes >= REQUIRED_MINUTES - EPS) { job.workedMinutes = REQUIRED_MINUTES; job.reservedUnits = 0; job.consumedUnits = MATERIALS; material.quantity = 0; material.location = { kind: 'consumed', nodeId: job.worksiteNodeId, point: copy(job.worksite) }; settle(sim, job, accounting); }
   });
@@ -303,8 +398,9 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
     for (const job of body(state)?.jobs ?? []) {
       if (ended(job)) continue;
       job.lastObservedAt = clock(state);
-      const actor = state.citizens.find(actor => actor.id === job.workerId);
+      const actor = state.citizens.find(actor => actor.id === roadworkActorId(job));
       if (job.status === 'refundPending') { settle(sim, job, accounting); continue; }
+      if (job.replacement && actor && !capable(state, actor)) { releaseReplacement(sim, job, actor); continue; }
       if (!state.extension!.actorProfiles.player.alive && job.payerId === 'player' || actor && !state.extension!.actorProfiles[actor.id].alive) { cancel(sim, job, accounting); continue; }
       if (actor && !capable(state, actor)) { job.status = 'paused'; job.reason = '居民需要进食、休息或医疗，自愿任务暂停；没有追赶分钟。'; }
     }
@@ -322,13 +418,88 @@ export function installRoadworks(sim: Simulation, accounting: RoadworksAccountin
         for (const ids of groups.values()) if (ids.length >= 2 && authorize(sim, job, ids.slice(0, 2), 40, accounting)) break;
       }
       if (job.budgetId && job.funded === 0 && job.approvalSiteId && accounting.takePublicEscrow({ budgetId: job.budgetId, siteId: job.approvalSiteId, purpose: 'road-repair', amount: job.authorizedCap })) { job.funded = job.authorizedCap; job.escrow = job.authorizedCap; }
-      acceptWorker(sim, job, accounting);
+      if (job.replacement && job.workerId && !job.replacement.activeActorId) acceptReplacement(sim, job, accounting);
+      else acceptWorker(sim, job, accounting);
     }
   });
   sim.registerSaveValidator(state => validateRoadworksState(state, sim.worldDefinition));
   return { requestResidentDemand: demandId => requestResidentRoadRepair(sim,demandId,accounting) };
 }
 
+function validateReplacement(job: RoadRepairJob, state: SimState, world: WorldDefinition): void {
+  const crew = job.replacement!, stop = job.completedAt ?? job.cancelledAt ?? clock(state);
+  const ensure = (value: unknown, field: string): void => { if (!value) throw new Error('道路替补存档无效：' + field); };
+  const keys = (value: unknown, expected: string[]): boolean => !!value && typeof value === 'object' && !Array.isArray(value)
+    && Object.keys(value).length === expected.length && expected.every(key => Object.hasOwn(value, key));
+  const vector = (point: Vec3): boolean => keys(point, ['x', 'y', 'z']) && Object.values(point).every(value => finite(value) && Math.abs(value) <= 1e5);
+  const near = (a: Vec3, b: Vec3) => distance(a, b) < EPS;
+  ensure(keys(crew, ['version','activeActorId','contracts','pendingPickup','pickups']) && crew.version === 1 && job.payerId === 'public' && job.requestedBy !== 'player', '具名公共原工单结构');
+  ensure(Array.isArray(crew.contracts) && crew.contracts.length <= 16 && Array.isArray(crew.pickups) && crew.pickups.length <= 15, '有限真实交接');
+  let previous = job.startedAt, active = 0;
+  for (const [index, row] of crew.contracts.entries()) {
+    ensure(keys(row, ['contract','releasedAt','releaseReason','releasePosition','retainedMaterial']), '合同结构');
+    const contract = row.contract, profile = state.extension!.actorProfiles[contract?.actorId];
+    ensure(keys(contract, ['actorId','at','role','craft','age','health','hunger','fatigue','districtId','prosperity','ratePerMinute']) && !!profile && state.citizens.some(actor => actor.id === contract.actorId)
+      && ['工人','工程师'].includes(contract.role) && world.districts.some(district => district.id === contract.districtId), '原角色合同');
+    ensure([contract.at,contract.craft,contract.age,contract.health,contract.hunger,contract.fatigue,contract.prosperity,contract.ratePerMinute].every(finite)
+      && contract.at >= previous && contract.at <= stop && contract.craft >= 20 && contract.craft <= 100 && contract.age >= 18 && contract.age <= profile.age
+      && contract.health >= 45 && contract.health <= 100 && contract.hunger >= 40 && contract.hunger <= 100 && contract.fatigue >= 35 && contract.fatigue <= 100
+      && contract.prosperity >= 0 && contract.prosperity <= 100 && Math.abs(contract.ratePerMinute - 32 * (.7 + contract.prosperity / 100) / 480) < EPS, '真实成年资格与冻结工资');
+    if (index === 0) ensure(JSON.stringify(contract) === JSON.stringify(job.contract) && contract.actorId === job.workerId && contract.at === job.acceptedAt, '首任合同不得覆盖');
+    if (row.releasedAt === null) {
+      active++;
+      ensure(index === crew.contracts.length - 1 && crew.activeActorId === contract.actorId && row.releaseReason === '' && row.releasePosition === null && row.retainedMaterial === null, '唯一当前人员');
+      previous = contract.at;
+    } else {
+      ensure(finite(row.releasedAt) && row.releasedAt >= contract.at && row.releasedAt <= stop && ['dead','incapable'].includes(row.releaseReason) && row.releasePosition && vector(row.releasePosition), '实际释放见证');
+      if (row.releaseReason === 'dead') ensure(!profile.alive, '死亡不复活');
+      previous = row.releasedAt;
+      if (row.retainedMaterial !== null) {
+        const retained = row.retainedMaterial;
+        ensure(keys(retained, ['kind','point','nodeId']) && ['ground','worksite'].includes(retained.kind) && vector(retained.point) && job.receipts.length === 1 && job.receipts[0].at <= row.releasedAt, '真实原购材料释放');
+        ensure(retained.kind === 'ground' ? near(retained.point, row.releasePosition!) : near(retained.point, job.worksite), '实际死亡落点或已交付工地');
+        const nearest = [...world.nodes].sort((a, b) => distance(a.position, retained.point) - distance(b.position, retained.point) || a.id.localeCompare(b.id))[0];
+        ensure(nearest && retained.nodeId === nearest.id, '原实际落点最近节点');
+      }
+    }
+  }
+  ensure(active === Number(crew.activeActorId !== null) && (job.workerId === null ? crew.contracts.length === 0 : crew.contracts.length > 0), '当前工人完整历史');
+  const source = (row: { fromContractIndex: number; point: Vec3; nodeId: string }) => {
+    ensure(Number.isInteger(row.fromContractIndex) && row.fromContractIndex >= 0 && row.fromContractIndex < crew.contracts.length && vector(row.point), '原释放索引');
+    const contract = crew.contracts[row.fromContractIndex], retained = contract.retainedMaterial;
+    ensure(contract.releasedAt !== null && retained && row.nodeId === retained.nodeId && near(row.point, retained.point), '原物料来源与落点不得改写');
+    return contract;
+  };
+  if (crew.pendingPickup !== null) {
+    ensure(keys(crew.pendingPickup, ['fromContractIndex','point','nodeId']), '留置结构');
+    source(crew.pendingPickup);
+  }
+  const picked = new Set<number>();
+  let lastAt = -1;
+  for (const pickup of crew.pickups) {
+    ensure(keys(pickup, ['fromContractIndex','toContractIndex','at','point','nodeId']), '领取结构');
+    const origin = source(pickup), target = crew.contracts[pickup.toContractIndex];
+    ensure(Number.isInteger(pickup.toContractIndex) && pickup.toContractIndex > pickup.fromContractIndex && target && finite(pickup.at)
+      && pickup.at >= origin.releasedAt! && pickup.at >= target.contract.at && pickup.at <= (target.releasedAt ?? stop)
+      && pickup.at > lastAt && !picked.has(pickup.fromContractIndex), '实际具名领取人与非重放时刻');
+    picked.add(pickup.fromContractIndex); lastAt = pickup.at;
+  }
+  if (crew.pendingPickup) ensure(!picked.has(crew.pendingPickup.fromContractIndex) && crew.contracts[crew.pendingPickup.fromContractIndex].releasedAt! >= lastAt, '同一物料不得同时待领和已领');
+  for (const [index, row] of crew.contracts.entries()) if (row.retainedMaterial) {
+    ensure(picked.has(index) || crew.pendingPickup?.fromContractIndex === index, '留置原物料不得无故丢弃');
+    if (index > 0) ensure(job.receipts[0].workerId === row.contract.actorId && job.receipts[0].at >= row.contract.at
+      || crew.pickups.some(pickup => pickup.toContractIndex === index && pickup.at <= row.releasedAt!), '未领原料的替补不得伪造释放');
+  }
+  const material = body(state)?.stock.find(item => item.jobId === job.id);
+  if (crew.pendingPickup) ensure(material && material.retained && material.quantity === MATERIALS && (material.location.kind === 'ground' || material.location.kind === 'worksite')
+    && near(material.location.point, crew.pendingPickup.point) && job.reservedUnits === 0, '原材料保权落点');
+  for (const receipt of job.laborReceipts) {
+    const index = crew.contracts.findIndex(row => row.contract.actorId === receipt.actorId && row.contract.at <= receipt.startAt && (row.releasedAt === null || row.releasedAt >= receipt.endAt));
+    ensure(index >= 0, '具名劳动区间');
+    if (index > 0) ensure(job.receipts[0]?.workerId === receipt.actorId && job.receipts[0].at >= crew.contracts[index].contract.at
+      || crew.pickups.some(pickup => pickup.toContractIndex === index && pickup.at <= receipt.startAt), '替补实际领取后才工地劳动');
+  }
+}
 export function validateRoadworksState(candidate: SimState, world: WorldDefinition): void {
   const state = candidate as State, works = state.roadworks;
   if (works === undefined) return;
@@ -339,12 +510,15 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
   const vector = (p: Vec3, field: string): void => { object(p, ['x','y','z'], field); for (const n of [p.x,p.y,p.z]) num(n,-1e5,1e5,field); };
   const array = <T>(a: T[], max: number, field: string): T[] => { ensure(Array.isArray(a) && a.length <= max, field); return a; };
   const now = clock(state), actors = new Map(state.citizens.map(actor => [actor.id, actor]));
-  object(works, ['version','activatedAt','nextId','jobs','stock','capacityHistory'], '模块结构');
+  object(works, ['version','activatedAt','nextId','jobs','stock','capacityHistory', ...(works.replacementVersion === undefined ? [] : ['replacementVersion','replacementActivatedAt','replacementFirstJobId'])], '模块结构');
+  if(works.replacementVersion!==undefined){ensure(works.replacementVersion===1,'替补版本');num(works.replacementActivatedAt,works.activatedAt,now,'替补真实激活');}
   ensure(works.version === 1, '版本'); ensure(moduleBytes(state) <= MAX_MODULE_BYTES, '道路模块保存容量'); num(works.activatedAt,0,now,'激活时间'); num(works.nextId,1,MAX_JOBS+1,'下个身份',true);
   const jobs = array(works.jobs, MAX_JOBS, '任务数量'), seen = new Set<string>();
+  const replacementFirst = works.replacementVersion === undefined ? -1 : jobs.findIndex(job => job.id === works.replacementFirstJobId);
+  if (works.replacementVersion !== undefined) ensure(replacementFirst >= 0 && !!jobs[replacementFirst].replacement && jobs[replacementFirst].startedAt === works.replacementActivatedAt, '替补原激活任务');
   for (let i=0; i<jobs.length; i++) {
     const job = jobs[i];
-    object(job, ['id','closureId','edgeId','requestedBy','payerId','worksiteNodeId','worksite','startedAt','lastObservedAt','status','reason','workerId','acceptedAt','ratePerMinute','contract','supplierShopId','supplierNodeId','supplierPoint','requiredMinutes','workedMinutes','contributions','laborReceipts','funded','escrow','purchasePaid','paidGross','paidNet','paidTax','refunded','serviceFees','receipts','receivedUnits','reservedUnits','consumedUnits','budgetId','approvalSiteId','approvedAt','approvedBy','authorizedCap','completedAt','cancelledAt'], '任务结构');
+    object(job, ['id','closureId','edgeId','requestedBy','payerId','worksiteNodeId','worksite','startedAt','lastObservedAt','status','reason','workerId','acceptedAt','ratePerMinute','contract','supplierShopId','supplierNodeId','supplierPoint','requiredMinutes','workedMinutes','contributions','laborReceipts','funded','escrow','purchasePaid','paidGross','paidNet','paidTax','refunded','serviceFees','receipts','receivedUnits','reservedUnits','consumedUnits','budgetId','approvalSiteId','approvedAt','approvedBy','authorizedCap','completedAt','cancelledAt', ...(job.replacement === undefined ? [] : ['replacement'])], '任务结构');
     ensure(job.id === 'road-repair-'+(i+1) && !seen.has(job.id), '顺序身份'); seen.add(job.id);
     const closure = roadClosureById(state,job.closureId), edge = world.edges.find(edge=>edge.id===job.edgeId);
     ensure(closure && edge && closure.edgeId===edge.id && ['road','bridge'].includes(edge.mode), '真实关闭与现有道路引用');
@@ -355,6 +529,8 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
     const stop = job.completedAt ?? job.cancelledAt ?? now;
     if (job.completedAt!==null) num(job.completedAt,job.startedAt+REQUIRED_MINUTES-EPS,now,'完成实际期限');
     if (job.cancelledAt!==null) num(job.cancelledAt,job.startedAt,now,'取消时间');
+    if(job.replacement) validateReplacement(job,state,world);
+    ensure(works.replacementVersion===undefined ? job.replacement===undefined : job.requestedBy==='player' || i<replacementFirst || !!job.replacement,'新具名需求保替补合同');
     ensure(job.requiredMinutes===REQUIRED_MINUTES && job.serviceFees===0, '实际60分钟且无循环服务费'); num(job.workedMinutes,0,REQUIRED_MINUTES,'已赚分钟');
     for(const key of ['funded','escrow','purchasePaid','paidGross','paidNet','paidTax','refunded','authorizedCap'] as const) num(job[key],0,1e6,'资金'+key);
     close(job.funded,job.escrow+job.purchasePaid+job.paidGross+job.refunded,'托管资金守恒'); close(job.paidGross,job.paidNet+job.paidTax,'工资净款与税');
@@ -380,7 +556,7 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
     let materialGross=0;
     for(const receipt of array(job.receipts,1,'一份原材料收据')) {
       object(receipt,['at','shopId','workerId','nodeId','point','quantity','unitPrice','gross','net','tax','taxRate'],'真实采购收据');
-      ensure(receipt.quantity===MATERIALS&&receipt.shopId===job.supplierShopId&&receipt.workerId===job.workerId&&receipt.nodeId===job.supplierNodeId&&job.supplierPoint&&distance(receipt.point,job.supplierPoint)<EPS,'原供给者与实际领取点');
+      ensure(receipt.quantity===MATERIALS&&receipt.shopId===job.supplierShopId&&(job.replacement ? job.replacement.contracts.some(row=>row.contract.actorId===receipt.workerId&&row.contract.at<=receipt.at&&(row.releasedAt===null||row.releasedAt>=receipt.at)) : receipt.workerId===job.workerId)&&receipt.nodeId===job.supplierNodeId&&job.supplierPoint&&distance(receipt.point,job.supplierPoint)<EPS,'原供给者与实际领取点');
       num(receipt.at,job.acceptedAt!,stop,'采购不得晚于结清');num(receipt.unitPrice,4,1e6,'真实动态材料价');num(receipt.taxRate,0,.5,'成交税率');
       close(receipt.gross,receipt.unitPrice,'一份成交额');close(receipt.tax,receipt.gross*receipt.taxRate,'采购税');close(receipt.net+receipt.tax,receipt.gross,'货主净款税守恒');materialGross+=receipt.gross;
     }
@@ -390,9 +566,10 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
     let lastEnd=job.acceptedAt??job.startedAt, lastTick=-1;
     for(const receipt of array(job.laborReceipts,MAX_LABOR_RECEIPTS,'真实现场工资凭据')) {
       object(receipt,['at','firstTick','lastTick','paymentCount','actorId','startAt','endAt','minutes','ratePerMinute','taxRate','gross','net','tax','nodeId','point'],'工资凭据结构');
-      ensure(receipt.actorId===job.workerId&&receipt.nodeId===job.worksiteNodeId&&distance(receipt.point,job.worksite)<EPS&&job.receipts.length===1,'原具名工地，不引用office工资');
+      const crewContract=job.replacement?.contracts.find(row=>row.contract.actorId===receipt.actorId&&row.contract.at<=receipt.startAt&&(row.releasedAt===null||row.releasedAt>=receipt.endAt))?.contract;
+      ensure((job.replacement ? !!crewContract : receipt.actorId===job.workerId)&&receipt.nodeId===job.worksiteNodeId&&distance(receipt.point,job.worksite)<EPS&&job.receipts.length===1,'原具名工地，不引用office工资');
       num(receipt.startAt,Math.max(lastEnd,job.receipts[0].at),stop,'到货后劳动起点');num(receipt.endAt,receipt.startAt,stop,'当次劳动终点');num(receipt.at,receipt.endAt,stop,'观察不得早于劳动');num(receipt.firstTick,lastTick+1,state.tick,'首付款tick',true);num(receipt.lastTick,receipt.firstTick,state.tick,'末付款tick',true);num(receipt.paymentCount,1,receipt.lastTick-receipt.firstTick+1,'真实合并付款次数',true);num(receipt.minutes,EPS,REQUIRED_MINUTES,'分钟');
-      close(receipt.endAt-receipt.startAt,receipt.minutes,'实际连续区间');close(receipt.ratePerMinute,job.ratePerMinute,'约定时薪');num(receipt.taxRate,0,.5,'工资实际税率');close(receipt.gross,receipt.minutes*receipt.ratePerMinute,'已赚工资');close(receipt.tax,receipt.gross*receipt.taxRate,'实际工资税');close(receipt.net+receipt.tax,receipt.gross,'工资净款与税');
+      close(receipt.endAt-receipt.startAt,receipt.minutes,'实际连续区间');close(receipt.ratePerMinute,crewContract?.ratePerMinute??job.ratePerMinute,'约定时薪');num(receipt.taxRate,0,.5,'工资实际税率');close(receipt.gross,receipt.minutes*receipt.ratePerMinute,'已赚工资');close(receipt.tax,receipt.gross*receipt.taxRate,'实际工资税');close(receipt.net+receipt.tax,receipt.gross,'工资净款与税');
       lastEnd=receipt.endAt;lastTick=receipt.lastTick;minutes+=receipt.minutes;gross+=receipt.gross;net+=receipt.net;tax+=receipt.tax;
       const row=perActor.get(receipt.actorId)??{minutes:0,gross:0,net:0,tax:0,start:receipt.startAt,end:receipt.endAt};row.minutes+=receipt.minutes;row.gross+=receipt.gross;row.net+=receipt.net;row.tax+=receipt.tax;row.end=receipt.endAt;perActor.set(receipt.actorId,row);
     }
@@ -410,9 +587,9 @@ export function validateRoadworksState(candidate: SimState, world: WorldDefiniti
   for(const material of lots) {
     object(material,['id','jobId','ownerId','quantity','retained','location'],'物料批次');
     const job=jobs.find(job=>job.id===material.jobId);ensure(job&&material.id===job.id+'-material'&&!lotIds.has(material.id)&&material.ownerId===job.payerId,'真实物料货权');lotIds.add(material.id);
-    ensure(job!.receivedUnits===MATERIALS,'物料必须真实采购');close(material.quantity+job!.consumedUnits,MATERIALS,'实物一份守恒');ensure(material.retained===(job!.cancelledAt!==null&&material.quantity>0),'取消物料保权');
+    ensure(job!.receivedUnits===MATERIALS,'物料必须真实采购');close(material.quantity+job!.consumedUnits,MATERIALS,'实物一份守恒');ensure(material.retained===((job!.cancelledAt!==null||!!job!.replacement?.pendingPickup)&&material.quantity>0),'取消或真实替补留置物料保权');
     const location=material.location;
-    if(location.kind==='carried'){object(location,['kind','actorId'],'携带状态');ensure(location.actorId===job!.workerId&&actors.has(location.actorId)&&job!.cancelledAt===null,'原工人真实携带');}
+    if(location.kind==='carried'){object(location,['kind','actorId'],'携带状态');ensure(location.actorId===roadworkActorId(job!)&&actors.has(location.actorId)&&job!.cancelledAt===null,'原工人真实携带');}
     else if(location.kind==='ground'){object(location,['kind','point'],'实际落点');vector(location.point,'物料落点');ensure(material.retained,'落点须保留物权');}
     else {object(location,['kind','nodeId','point'],'工地物料');ensure(['worksite','consumed'].includes(location.kind)&&location.nodeId===job!.worksiteNodeId&&distance(location.point,job!.worksite)<EPS,'原真实安全端');ensure(location.kind==='consumed'?material.quantity===0:material.quantity===MATERIALS,'实际材料状态');}
   }

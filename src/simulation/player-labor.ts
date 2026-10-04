@@ -36,6 +36,10 @@ const FACILITY_ROLES: Record<string, Role[]> = {
   embassy: ['official', 'council', 'mayor'], archives: ['teacher', 'scientist', 'official', 'mayor'], treasury: ['official', 'mayor'],
 };
 function permittedRole(site: Building, role: Role): boolean {
+  // New trusted commercial offices reuse the existing qualified public
+  // employee role, real budget/escrow and60-minute attendance contract.
+  // No historical bank, player identity or NPC wage rule changes.
+  if (site.commercialGeometryRevision === 1 && site.kind === 'bank' && role === 'official') return true;
   return (ROLE_KINDS[role].includes(site.kind) || !!site.facility && ROLE_KINDS[role].includes(site.facility))
     && (!site.facility || (FACILITY_ROLES[site.facility] ?? []).includes(role));
 }

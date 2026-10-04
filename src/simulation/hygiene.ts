@@ -1,4 +1,5 @@
 import type { Simulation } from '../simulation';
+import { installPublicDisinfection, certifiedHygieneDoctorWorkWindows, type PublicDisinfectionDemand } from './hygiene-public';
 import { blocksFloorPlanMovement, getBuildingBody } from '../architecture-floor-plan';
 import { clinicalAtSite, clinicalDoctorWorkWindows, clinicalDoctorUsedWorkWindows, clinicalServiceStationsAtPosition } from './clinical';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
@@ -28,9 +29,9 @@ export interface WasteBatch {
   containedUnits: number; archivedProcessedUnits: number; sourceReceipts: WasteSourceReceipt[]; sourceArchive: WasteSourceArchive; firstAt: number; lastAt: number;
 }
 export interface HygieneReceipt { shopId: string; purchasedAt: number; quantity: 1; unitPrice: number; gross: number; net: number; tax: number }
-export interface HygieneStaffWindow { startedAt: number; endedAt: number; workedMinutes: number; siteId: string; role: '医生' | 'doctor'; ageAtStart: number }
+export interface HygieneStaffWindow { startedAt: number; endedAt: number; workedMinutes: number; siteId: string; role: '医生' | 'doctor'; ageAtStart: number; paidWindows?: { start: number; end: number }[] }
 export interface DisinfectionJob {
-  id: string; batchId: string; siteId: string; payerId: 'player'; startedAt: number; lastObservedAt: number;
+  id: string; batchId: string; siteId: string; payerId: 'player' | 'public'; publicDemandId?: string; wageProofVersion?: 1; startedAt: number; lastObservedAt: number;
   state: 'awaitingSupply' | 'waiting' | 'processing' | 'refundPending' | 'completed' | 'cancelled'; reason: string;
   funded: number; escrow: number; purchasePaid: number; refunded: number; receipt: HygieneReceipt | null;
   receivedUnits: number; reusedUnits: number; reservedUnits: number; consumedUnits: number;
@@ -40,6 +41,7 @@ export interface DisinfectionJob {
 export interface HygieneStock { receivedUnits: number; availableUnits: number; consumedUnits: number; archivedReceived: number; archivedConsumed: number }
 export interface HygieneTotals { funded: number; purchasePaid: number; refunded: number; workedMinutes: number; completed: number; cancelled: number }
 export interface HygieneState {
+  publicVersion?: 1; nextDemandId?: number; publicDemands?: PublicDisinfectionDemand[];
   version: 1; rulesetId: typeof HYGIENE_RULESET; nextBatchId: number; nextJobId: number; activatedAt: number; lastObservedAt: number;
   clinicalBaseline: Record<string, number>; batches: WasteBatch[]; jobs: DisinfectionJob[]; stock: Record<string, HygieneStock>;
   stats: HygieneTotals; archived: HygieneTotals & { count: number }; capacityHistory: ActorActivityClaim[];
@@ -111,7 +113,7 @@ function finishRefund(simulation: Simulation, job: DisinfectionJob): void { refu
 function archive(state: SimState): void {
   const h = state.hygiene!;
   while (h.jobs.length > HISTORY) {
-    const index = h.jobs.findIndex(job => terminal(job) && job.escrow === 0); if (index < 0) break;
+    const index = h.jobs.findIndex(job => job.payerId === 'player' && terminal(job) && job.escrow === 0); if (index < 0) break;
     const [job] = h.jobs.splice(index, 1), s = stock(state, job.siteId); h.archived.count++;
     for (const [actorId, period] of Object.entries(job.staffWindows)) h.capacityHistory.push({ id: `hygiene:${job.id}:${actorId}`, actorId, startedAt: period.startedAt, endedAt: period.endedAt, workedMinutes: period.workedMinutes });
     if (job.completedAt !== null) h.batches.find(batch => batch.id === job.batchId)!.archivedProcessedUnits++;
@@ -187,7 +189,7 @@ export function installHygiene(simulation: Simulation): void {
     if (command.type === 'disinfectWaste') return beginDisinfection(simulation, command.targetId ?? '', command.value ?? 20);
     if (command.type !== 'cancelDisinfection') return null;
     const job = simulation.state.hygiene?.jobs.find(job => job.id === command.targetId);
-    if (!job || terminal(job) || job.completedAt !== null || job.cancelledAt !== null) return { ok: false, message: '没有可取消的原处理任务。' };
+    if (!job || job.payerId !== 'player' || terminal(job) || job.completedAt !== null || job.cancelledAt !== null) return { ok: false, message: '没有可取消的原处理任务。' };
     stop(simulation, job); return { ok: true, message: job.reason };
   });
   const working = new WeakMap<SimState, { tick: number; ranges: Map<string, { start: number; end: number }[]> }>();
@@ -195,12 +197,12 @@ export function installHygiene(simulation: Simulation): void {
     const h = state.hygiene; if (!h) return; h.lastObservedAt = clock(state);
     let occupiedWork = working.get(state); if (!occupiedWork || occupiedWork.tick !== state.tick) { occupiedWork = { tick: state.tick, ranges: new Map() }; working.set(state, occupiedWork); }
     const phaseContacts = { tick: state.tick, at: clock(state), records: new Map<string, { actorId: string; batchId: string; ranges: { start: number; end: number }[] }>() }; contacts.set(state, phaseContacts);
-    const freeWindows = (person: Citizen, siteId: string, elapsed: number, startedAt: number) => subtractWindows(clinicalDoctorWorkWindows(simulation, person, siteId, elapsed, startedAt), [...clinicalDoctorUsedWorkWindows(simulation, person.id), ...(occupiedWork!.ranges.get(person.id) ?? [])]);
+    const freeWindows = (person: Citizen, siteId: string, elapsed: number, startedAt: number) => subtractWindows(certifiedHygieneDoctorWorkWindows(simulation, person, siteId, elapsed, startedAt), [...clinicalDoctorUsedWorkWindows(simulation, person.id), ...(occupiedWork!.ranges.get(person.id) ?? [])]);
     for (const job of h.jobs) {
       if (terminal(job)) continue;
       const elapsed = Math.min(minutes, Math.max(0, clock(state) - job.lastObservedAt)); job.lastObservedAt = clock(state);
       if (job.completedAt !== null || job.cancelledAt !== null) { finishRefund(simulation, job); continue; }
-      if (!state.extension!.actorProfiles.player.alive) { stop(simulation, job); continue; }
+      if (job.payerId === 'player' && !state.extension!.actorProfiles.player.alive) { stop(simulation, job); continue; }
       const batch = h.batches.find(batch => batch.id === job.batchId)!, site = simulation.worldDefinition.buildings.find(site => site.id === job.siteId)!;
       const district = state.districts.find(district => district.id === site.districtId);
       if (!job.reservedUnits || elapsed <= 0 || !powerSupplyAt(state, site.id) || !district || district.energy <= 0) { job.state = job.reservedUnits ? 'waiting' : 'awaitingSupply'; job.reason = '材料与废物仍保管；等候真实供能、材料和到场劳动。'; continue; }
@@ -212,6 +214,7 @@ export function installHygiene(simulation: Simulation): void {
       occupiedWork.ranges.set(worker.id, [...(occupiedWork.ranges.get(worker.id) ?? []), ...selected]);
       job.workedMinutes = Math.min(MINUTES, job.workedMinutes + worked); job.staffMinutes[worker.id] = (job.staffMinutes[worker.id] ?? 0) + worked; h.stats.workedMinutes += worked; job.state = 'processing';
       const period = job.staffWindows[worker.id] ??= { startedAt: selected[0].start, endedAt: selected[selected.length - 1].end, workedMinutes: 0, siteId: site.id, role: worker.role as '医生' | 'doctor', ageAtStart: state.extension!.actorProfiles[worker.id].age }; period.startedAt = Math.min(period.startedAt, selected[0].start); period.endedAt = Math.max(period.endedAt, selected[selected.length - 1].end); period.workedMinutes += worked;
+      if (job.payerId === 'public') { period.paidWindows ??= []; period.paidWindows.push(...selected.map(range => ({ ...range }))); }
       phaseContacts.records.set(job.id, { actorId: worker.id, batchId: batch.id, ranges: selected });
       // Processing has a purchased barrier-practice material, not a fabricated
       // glove commodity or claimed real-world sterilisation efficacy.
@@ -226,10 +229,19 @@ export function installHygiene(simulation: Simulation): void {
   });
   simulation.onPhase('finance', state => {
     if (!state.hygiene) return;
-    for (const job of state.hygiene.jobs) { if (terminal(job)) continue; if (job.completedAt !== null || job.cancelledAt !== null) finishRefund(simulation, job); else if (!state.extension!.actorProfiles.player.alive) stop(simulation, job); else procure(simulation, job); }
+    for (const job of state.hygiene.jobs) { if (terminal(job)) continue; if (job.completedAt !== null || job.cancelledAt !== null) finishRefund(simulation, job); else if (job.payerId === 'player' && !state.extension!.actorProfiles.player.alive) stop(simulation, job); else if (job.payerId === 'player') procure(simulation, job); }
     archive(state);
     const current = [...collectActorActivityClaims(state), ...hygieneActivityClaims(state)];
     state.hygiene.capacityHistory = state.hygiene.capacityHistory.filter(witness => current.some(claim => claim.id !== witness.id && claim.actorId === witness.actorId && claim.startedAt < witness.endedAt - EPS && claim.endedAt > witness.startedAt + EPS));
+  });
+  installPublicDisinfection(simulation, {
+    workWindows: (person, siteId, minutes, earliestAt) => certifiedHygieneDoctorWorkWindows(simulation, person, siteId, minutes, earliestAt),
+    atBatch: (batch, person) => batchStation(simulation, batch, person.position, person),
+    createJob: (demand, receipt) => {
+      const state = simulation.state, h = state.hygiene!, batch = h.batches.find(b => b.id === demand.batchId)!, material = stock(state, demand.siteId);
+      const job: DisinfectionJob = { id: `disinfection-${h.nextJobId++}`, batchId: batch.id, siteId: demand.siteId, payerId: 'public', publicDemandId: demand.id, wageProofVersion: 1, startedAt: clock(state), lastObservedAt: clock(state), state: 'waiting', reason: '原公共预算已实付工业材料，等待原医生10个实际计薪剩余劳动分钟。', funded: receipt.gross, escrow: 0, purchasePaid: receipt.gross, refunded: 0, receipt, receivedUnits: 1, reusedUnits: 0, reservedUnits: 1, consumedUnits: 0, requiredMinutes: MINUTES, workedMinutes: 0, staffMinutes: {}, staffWindows: {}, retryAt: clock(state), completedAt: null, cancelledAt: null };
+      batch.reservedUnits++; material.receivedUnits++; h.jobs.push(job); h.stats.funded += receipt.gross; h.stats.purchasePaid += receipt.gross; return job;
+    },
   });
   simulation.registerSaveValidator(state => validateHygieneState(state, simulation.worldDefinition));
 }
@@ -282,7 +294,7 @@ export function validateHygieneState(state: SimState, world: WorldDefinition): v
   ensure(object(h.stats) && object(h.archived), '累计账'); for (const totals of [h.stats, h.archived]) for (const key of ['funded', 'purchasePaid', 'refunded', 'workedMinutes', 'completed', 'cancelled'] as const) number(totals[key], 0, 1e12, `累计${key}`, key === 'completed' || key === 'cancelled'); number(h.archived.count, 0, 1e9, '已结归档数', true); close(h.archived.count, h.archived.completed + h.archived.cancelled, '归档状态'); close(h.archived.funded, h.archived.purchasePaid + h.archived.refunded, '归档托管守恒');
   const totals = { ...h.archived }, jobIds = new Set<string>(), batchesPending = new Set<string>(), inputs = new Map<string, { received: number; consumed: number; reserved: number }>(); let completedJobs = h.archived.completed;
   for (const j of h.jobs) {
-    ensure(object(j) && /^disinfection-[1-9]\d*$/.test(j.id) && !jobIds.has(j.id) && Number(j.id.slice(13)) < h.nextJobId && j.payerId === 'player' && batchIds.has(j.batchId) && h.batches.find(b => b.id === j.batchId)!.siteId === j.siteId, '真实处理订单'); jobIds.add(j.id);
+    ensure(object(j) && /^disinfection-[1-9]\d*$/.test(j.id) && !jobIds.has(j.id) && Number(j.id.slice(13)) < h.nextJobId && ['player', 'public'].includes(j.payerId) && (j.payerId === 'public' ? typeof j.publicDemandId === 'string' : j.publicDemandId === undefined) && batchIds.has(j.batchId) && h.batches.find(b => b.id === j.batchId)!.siteId === j.siteId, '真实处理订单'); jobIds.add(j.id);
     ensure(['awaitingSupply', 'waiting', 'processing', 'refundPending', 'completed', 'cancelled'].includes(j.state) && typeof j.reason === 'string' && j.reason.length <= 240 && j.requiredMinutes === MINUTES, '固定处理合同'); number(j.startedAt, h.activatedAt, now, '开始'); number(j.lastObservedAt, j.startedAt, now, '已观察任务'); number(j.retryAt, j.startedAt, now + 60, '采购重试'); number(j.funded, 0, 1e6, '实际预算'); ensure(j.funded > 0, '正额实付预算'); for (const key of ['escrow', 'purchasePaid', 'refunded'] as const) number(j[key], 0, j.funded, key); ensure(Math.abs(j.funded - j.escrow - j.purchasePaid - j.refunded) <= 1e-8, '资金不生成');
     for (const key of ['receivedUnits', 'reusedUnits', 'reservedUnits', 'consumedUnits'] as const) number(j[key], 0, 1, key, true); ensure(j.receivedUnits + j.reusedUnits <= 1 && j.reservedUnits + j.consumedUnits <= j.receivedUnits + j.reusedUnits, '原料分配'); number(j.workedMinutes, 0, MINUTES, '真实分钟'); ensure(j.workedMinutes <= j.lastObservedAt - j.startedAt + EPS && object(j.staffMinutes) && object(j.staffWindows) && Object.keys(j.staffMinutes).length <= MAX_STAFF && Object.keys(j.staffMinutes).length === Object.keys(j.staffWindows).length, '处理时间因果');
     let staffed = 0; for (const [id, minutes] of Object.entries(j.staffMinutes)) { const person = state.citizens.find(person => person.id === id), period = j.staffWindows[id]; ensure(person && object(period) && period.siteId === j.siteId && ['医生', 'doctor'].includes(period.role), '真实劳动当时任职记录'); number(period.ageAtStart, 18, 130, '当时成年年龄'); ensure(state.extension!.actorProfiles[id]?.age >= period.ageAtStart, '人员年龄不倒退'); number(minutes, EPS, MINUTES, '操作人分钟'); number(period.startedAt, j.startedAt, j.lastObservedAt, '实际劳动起点'); number(period.endedAt, period.startedAt, j.lastObservedAt, '实际劳动末点'); number(period.workedMinutes, EPS, period.endedAt - period.startedAt + EPS, '劳动必要容量'); close(minutes as number, period.workedMinutes, '已记录窗口时数'); staffed += minutes as number; } close(staffed, j.workedMinutes, '已计薪操作人时数');

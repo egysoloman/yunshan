@@ -1,0 +1,399 @@
+{
+  "at": "2026-10-04T01:11:51.682116+00:00",
+  "producerNamespace": "/workspace/yunshan-work/city-map-v6-20261004-01",
+  "worldFingerprint": "b85fa6ec",
+  "seed": 20261001,
+  "recipe": "current-v6",
+  "commercialRouteRevision": 1,
+  "sourceCount": 60,
+  "collectionSourceUnchanged": true,
+  "sourceBoundCopiesMatch": true,
+  "nativeWorldSHA256": "ae802b350febe1ed74b72de1422de0b1b8b99d280db86255b915f42722b62444",
+  "PNGOriginalResolution": [
+    5760,
+    4080
+  ],
+  "buildings": 612,
+  "districts": 11,
+  "transportEdges": 691,
+  "seedNPCs": 616,
+  "nativeSeedNPCCensus": "seed-npc-census.json, actual constructor tick0",
+  "checks": {
+    "PNGDecode": "PASS",
+    "SVGXMLParse": "PASS",
+    "CSVRowCounts": "PASS",
+    "TerrainBinarySize": "PASS",
+    "SourceWindowSHAEquality": "PASS",
+    "FrozenSourceCopiesSHAEquality": "PASS",
+    "WorldExportSHAEquality": "PASS"
+  },
+  "files": {
+    "README.md": {
+      "bytes": 4262,
+      "sha256": "2674f19f2013ce1831f2b7d8fcf1935f5889eda2899b6716dd25d3f25403a8a8"
+    },
+    "building-footprints.json": {
+      "bytes": 4237922,
+      "sha256": "1a7092e395b24d99fe0ec31e3345fa78323dc8594406e1a74a9674c102b7bc8a"
+    },
+    "building-map-footprints.json": {
+      "bytes": 3997673,
+      "sha256": "ad3d7d59a48b9648a5edacf0c30a9dcfd760e021f1ecadb92a98e92b9f41204b"
+    },
+    "buildings.csv": {
+      "bytes": 232996,
+      "sha256": "e5187f7c83ce4e8f492781bc4b3a8b975348c75d1475bc3bd0c636593961508e"
+    },
+    "city-census.json": {
+      "bytes": 59415,
+      "sha256": "f8a70ac6a3e3dc1b55bbf278ddce541e50064ac077096a1cf9a01c72ce1f856e"
+    },
+    "city-map-census.json": {
+      "bytes": 19098,
+      "sha256": "eb5f35ec8278ae23fe6f524f52c130b079bc137e3edf9eb81d1806cc32bc4f44"
+    },
+    "city-map-preview.png": {
+      "bytes": 1045067,
+      "sha256": "ad0cda2b9b6ca03cfa04b672395f54aebb7c9a3e2c631db32ef853901380135d"
+    },
+    "collect-city-map.mjs": {
+      "bytes": 11037,
+      "sha256": "b3534ee33b5ffceea132e9c8b2c5252f8a8f4e7fc99d794ce381045101972653"
+    },
+    "collect.log": {
+      "bytes": 42416,
+      "sha256": "c2168aa2a09180084d2476b94d7d7f45bc45cacb54df1e551d712ba90d565336"
+    },
+    "collection-manifest.json": {
+      "bytes": 860,
+      "sha256": "2640b892d69c6301d4e953a33a10ac21966724fbcbc42fc7fb8ad768f6a5609e"
+    },
+    "districts.csv": {
+      "bytes": 1143,
+      "sha256": "80ff84a4def5c6edd92f1de2c2f8fcd2b6bf83d6aba75c70883ad725f5b11c1b"
+    },
+    "footprint-projection-receipt.json": {
+      "bytes": 107741,
+      "sha256": "ea7800066021ad7520dcef03b5642a6cebb70d7780d5b0853b34162425a2be57"
+    },
+    "package-city-map.py": {
+      "bytes": 3902,
+      "sha256": "7c59c886e99054b7910500d13a0313fec3e409fd6bd266ac161940ff3a0b1771"
+    },
+    "plot-city-map.py": {
+      "bytes": 14326,
+      "sha256": "cee4020f4a1b64d1f1723b7ceb83db0eac6c8665623e3f0756570f5973fe4978"
+    },
+    "plot-manifest.json": {
+      "bytes": 601,
+      "sha256": "5319e2b309c1e389818a792afd59356eeeef37677b979fab62190a22a97a1131"
+    },
+    "plot.log": {
+      "bytes": 601,
+      "sha256": "5319e2b309c1e389818a792afd59356eeeef37677b979fab62190a22a97a1131"
+    },
+    "project-footprints.log": {
+      "bytes": 90,
+      "sha256": "372c8eac7a764b66fc76f7bfd6484feca1c9d727a788bd071219daa5f9dc6ae5"
+    },
+    "project-footprints.mjs": {
+      "bytes": 2830,
+      "sha256": "1c2127877fbabd744a0eb727c4f088780b4a211c28bee5f46267716556960676"
+    },
+    "run-record.json": {
+      "bytes": 1097,
+      "sha256": "faba679c5068bb7c29751e3a5c817e79b595a2f833d63ab3f87db3f5862c2aeb"
+    },
+    "seed-npc-census.json": {
+      "bytes": 645,
+      "sha256": "d4c488212ae5e061f6d220eeb0badccedd87b76194127286b8b582d813ff8f7a"
+    },
+    "source-before.json": {
+      "bytes": 8885,
+      "sha256": "168f8b0afbeffef8607c1ae94010be94ab35f8630ce98bba6da1681f9bc5a6ff"
+    },
+    "source-bound/index.html": {
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4"
+    },
+    "source-bound/package-lock.json": {
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5"
+    },
+    "source-bound/package.json": {
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb"
+    },
+    "source-bound/src/access.ts": {
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    "source-bound/src/architecture-floor-plan.ts": {
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    },
+    "source-bound/src/aviation-renderer.ts": {
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    "source-bound/src/aviation.ts": {
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    "source-bound/src/commercial-district.ts": {
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    "source-bound/src/controller.ts": {
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    "source-bound/src/hygiene-ui.ts": {
+      "bytes": 4049,
+      "sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611"
+    },
+    "source-bound/src/journey.ts": {
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    "source-bound/src/main.ts": {
+      "bytes": 24422,
+      "sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+    },
+    "source-bound/src/persistence/partition.ts": {
+      "bytes": 16813,
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc"
+    },
+    "source-bound/src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    "source-bound/src/persistence/session.ts": {
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    "source-bound/src/persistence/world-layout.ts": {
+      "bytes": 5191,
+      "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+    },
+    "source-bound/src/persistence.ts": {
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    "source-bound/src/renderer.ts": {
+      "bytes": 93024,
+      "sha256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03"
+    },
+    "source-bound/src/rendering/architecture-bodies.ts": {
+      "bytes": 13231,
+      "sha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c"
+    },
+    "source-bound/src/rendering/architecture-detail.ts": {
+      "bytes": 39811,
+      "sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd"
+    },
+    "source-bound/src/rendering/architecture-layout.ts": {
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    "source-bound/src/rendering/chunk-residency.ts": {
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    "source-bound/src/rendering/citizen-appearance.ts": {
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    "source-bound/src/rendering/market-goods.ts": {
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a"
+    },
+    "source-bound/src/rendering/road-closures.ts": {
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    "source-bound/src/rendering/terrain.ts": {
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    "source-bound/src/roads.ts": {
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    "source-bound/src/simulation/activity-capacity.ts": {
+      "bytes": 5009,
+      "sha256": "c8bc8a9cf18ed761790ac99ad43e5702e4c8db676a8a3129317ec6f35c0fdd42"
+    },
+    "source-bound/src/simulation/activity-minutes.ts": {
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    "source-bound/src/simulation/banking.ts": {
+      "bytes": 22254,
+      "sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38"
+    },
+    "source-bound/src/simulation/clinical.ts": {
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    "source-bound/src/simulation/culture.ts": {
+      "bytes": 66849,
+      "sha256": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa"
+    },
+    "source-bound/src/simulation/education.ts": {
+      "bytes": 46386,
+      "sha256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856"
+    },
+    "source-bound/src/simulation/extensions.ts": {
+      "bytes": 89778,
+      "sha256": "e79f65943c983c19677777ce4c2dc104ea19cb01bd088143623e7d40784f26e1"
+    },
+    "source-bound/src/simulation/family-education.ts": {
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    "source-bound/src/simulation/family.ts": {
+      "bytes": 79615,
+      "sha256": "229b11ac4581b9532f5a53d42dea5c1c39aaa589c879213de4de7c3c7e399a7d"
+    },
+    "source-bound/src/simulation/funded-work.ts": {
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    "source-bound/src/simulation/governance.ts": {
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    "source-bound/src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    "source-bound/src/simulation/hygiene-public.ts": {
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    "source-bound/src/simulation/hygiene.ts": {
+      "bytes": 50182,
+      "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+    },
+    "source-bound/src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    "source-bound/src/simulation/pathology.ts": {
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    "source-bound/src/simulation/player-labor.ts": {
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    "source-bound/src/simulation/police-supplies.ts": {
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    "source-bound/src/simulation/power.ts": {
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    "source-bound/src/simulation/road-demands.ts": {
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    "source-bound/src/simulation/roadworks.ts": {
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    "source-bound/src/simulation/shop_lifecycle.ts": {
+      "bytes": 53950,
+      "sha256": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff"
+    },
+    "source-bound/src/simulation/supplemental-budget.ts": {
+      "bytes": 15871,
+      "sha256": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0"
+    },
+    "source-bound/src/simulation/trade.ts": {
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    "source-bound/src/simulation.ts": {
+      "bytes": 259721,
+      "sha256": "2df2c6da30a4875373c19970d523f64da34f16564170df94b571576650e17098"
+    },
+    "source-bound/src/site-fixtures.ts": {
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    "source-bound/src/style.css": {
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    "source-bound/src/transport-geometry.ts": {
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    "source-bound/src/types.ts": {
+      "bytes": 14264,
+      "sha256": "9d0effb02cca50a4904a4d3a00ab3d10e1d60d54244ba210562b0cbf74a9c0ef"
+    },
+    "source-bound/src/ui.ts": {
+      "bytes": 189630,
+      "sha256": "139a44e58d12e8d0bad86d1c286b4d04360230fe95c457ba374e90ea07da2ae6"
+    },
+    "source-bound/src/world.ts": {
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    "source-bound/tsconfig.json": {
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+    },
+    "source-bound/vite.config.ts": {
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f"
+    },
+    "source-change-check.json": {
+      "bytes": 47,
+      "sha256": "158efbae99b0a1a32533a3756520e4bc98290d1545595827265bcf0cd8e46974"
+    },
+    "source-end.json": {
+      "bytes": 8841,
+      "sha256": "3cce29115be575776c4e393d0e5404ceeddcabf8fcac86097caec0dde2fa7e15"
+    },
+    "source-start.json": {
+      "bytes": 8841,
+      "sha256": "03fc8defc1ca8a96960acb1ec9f528596d1ce46dd7ea60f8074ef29ed2ac41db"
+    },
+    "terrain-grid.json": {
+      "bytes": 464,
+      "sha256": "2869aee577f15b69a949303d7387cc86c63f3b4adfe62197c791dccd44a1aa52"
+    },
+    "terrain-height-f64.bin": {
+      "bytes": 107648,
+      "sha256": "5e0e85d485fd03a935dbaf278c91f44867c496a972eea2dc0ab62b571341a785"
+    },
+    "transport-edges.csv": {
+      "bytes": 78535,
+      "sha256": "4bffa044d90f74ea79909fc4d7b2a83b37241f02c4da14c18780cef63efd019c"
+    },
+    "world-native.json": {
+      "bytes": 1832309,
+      "sha256": "ae802b350febe1ed74b72de1422de0b1b8b99d280db86255b915f42722b62444"
+    },
+    "云山巨城-v6-当前城市设计图.pdf": {
+      "bytes": 658005,
+      "sha256": "b62541590f7407ab65cf5541c20fed4a58573e0f6fe2f9e32b245e9604f07d06"
+    },
+    "云山巨城-v6-当前城市设计图.png": {
+      "bytes": 3441937,
+      "sha256": "efb5451895009f2a88ce239c98dbb2e9c6f1a1b015f33fba91030c2f22289e89"
+    },
+    "云山巨城-v6-当前城市设计图.svg": {
+      "bytes": 2547921,
+      "sha256": "6fac8564be7d64ebb7aef93b4e50c2420bafe1f4f3780b86a77a7f941dced907"
+    }
+  },
+  "LibraryProducerCalls": 0,
+  "externalFileIDs": 0,
+  "deliveryOwner": "Root batches original PNG and ZIP; this file is not an upload receipt."
+}

@@ -171,7 +171,7 @@ test('infants consume transferred real food and personal child support never cre
   restoredFrom(sim);
 });
 
-test('enrollment needs a real child at the school; only healthy attended lessons accumulate education and adulthood enables work', () => {
+test('enrollment needs a real child at the school; healthy self-study grants no qualification and adulthood still enables work', () => {
   const { sim, spouse, child } = birthFixture(), school = sim.worldDefinition.buildings.find(site => site.kind === 'school')!, data = sim.state.family!.children[child.id];
   reject(sim, { type: 'enrollChild', targetId: child.id });
   ageFixture(sim, child, 6); spouse.money = 100; // Child at the age boundary; no NPC fee available.
@@ -187,7 +187,7 @@ test('enrollment needs a real child at the school; only healthy attended lessons
   ok(sim, { type: 'setTime', value: 8 });
   sim.onPhase('traffic', () => { child.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 }; });
   for (let index = 0; index < 130; index++) sim.step(.25);
-  assert.ok(data.attendanceMinutes > 0); assert.ok(data.attendanceMinutes <= 240, 'one day cannot manufacture unlimited completed lessons');
+  assert.ok((data.selfStudyMinutes ?? 0) > 0, 'healthy actual school presence earns only self-study minutes'); assert.equal(data.attendanceMinutes, 0, 'without a funded public textbook lesson there is no formal attendance');
   assert.equal(child.education, 0); assert.equal(child.role, '学生', 'children must never become autonomous adult researchers');
   const attendance = data.attendanceMinutes;
   sim.onPhase('traffic', () => { child.position.x = school.door.x + 100; child.needs.hunger = 0; });
@@ -226,7 +226,7 @@ test('death transfers exact cash and integer shares to the living spouse and chi
   sameSave(restored, sim); assert.equal(estate.cash, cash, 'the estate principal cannot be distributed twice');
 });
 
-test('six actual school days complete lessons without commands or fabricated education increments', () => {
+test('six actual school days of self-study cannot replace paid teaching and real textbooks', () => {
   const { sim, spouse, child } = birthFixture(), school = sim.worldDefinition.buildings.find(site => site.kind === 'school')!;
   ageFixture(sim, child, 6); spouse.money = 100;
   sim.state.player.position = { ...school.door }; child.position = { ...school.door };
@@ -236,8 +236,9 @@ test('six actual school days complete lessons without commands or fabricated edu
   for (let index = 0; index < 6 * GAME_DAY / 4; index++) sim.step(.25);
   assert.ok(sim.state.family!.lastUpdate - start >= 6 * GAME_DAY);
   const schooling = sim.state.family!.children[child.id];
-  assert.ok(schooling.attendanceMinutes >= 3 * SCHOOL_MINUTES_PER_LEVEL, `${schooling.attendanceMinutes} minutes of actual attended lessons`);
-  assert.ok((child.education ?? 0) >= 3); assert.equal(child.role, '学生'); assert.equal(schooling.graduatedAt, null);
+  assert.ok((schooling.selfStudyMinutes ?? 0) >= 3 * SCHOOL_MINUTES_PER_LEVEL, 'actual healthy school presence remains recorded as self-study');
+  assert.equal(schooling.attendanceMinutes, 0, 'no public course has paid a teacher or consumed its real textbook');
+  assert.equal(child.education, 0); assert.equal(child.role, '学生'); assert.equal(schooling.graduatedAt, null);
   assert.ok(sim.state.extension!.actorProfiles[child.id].age < 7, 'attending six days must not jump the child to adulthood');
   restoredFrom(sim);
 });

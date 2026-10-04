@@ -1,0 +1,6 @@
+- ROOT07原四公司case实际01:26:47–01:39:18为3 PASS/1 FAIL/0 SKIP，非TIMEOUT；唯一FAIL为新合法资产前提假设银行能借121文，实际bank.cash0/无存款，原准备金守卫正确拒绝。原资格241tick/60分钟/1实购教材/学历1/merchant实考480已真通过；原raw及exact failing save保留。
+- 最终仅test-only融资helper改为原玩家真实有薪劳动：三个原merchant工班各62税前托管/60真实分钟，共180分钟、净171.12/税14.88，480→651.12→实买251/创350→50.12、贷款0。独立受控存款到场也实测可借，但不采用；不冒原生自筹。原教师/玩家CPU点位、一次卖家站位及金融level2/等额2000+700转款仍明示受控前提。
+- 修后仅founding原整案01:50:39–01:57:49实际1 PASS/0 FAIL/0 SKIP，课程与工资共961tick；rawSHA e9fd56b443c26d6012c991d0b5e17389281326fe4e8760d45017477953727125。241输入与2762外部/私有依赖全首尾同，active0/1Z。最终2824000B原生档SHA a1f95040da01794d3add9d81d819eeb01f40a3087c205a2dcc45ff768d13395e，和真实工资原档reader继续实际购/创的终局全字节一致。Typecheck25秒PASS。不同scope的3old＋1corrected不称单轮4/4。
+- before12d137106c0d0ae0d9f6ccd438b6bde3f1a6e77098e375c5645c24dbea39dff1→after0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea，只v4 helper/说明；四原body/34assert/qualify/fundedMerchant保，其余240运行输入、全部55src同ROOT07。root02:01仅守卫接共享test，ROOT07冻结源/14日runtime不改。
+- 原首轮2772全依赖guard false如实保：8变化全部node_modules/.vite/deps浏览器生成缓存；其外2764安装包/driver/Node稳定，未对原进程采live解析trace。后续私有安装依赖全部稳定。两新probe FAIL也保：错误要求bank始终0（自然入款500），错误严格比较累计gross186（实际185.99999999999773）；只新v2 driver按原close1e-7验真实原档，不改源码/工资/资格/现金/时间，不重三班。原ROOT05 FAIL与180/120秒TIMEOUT不覆盖。
+- 全部原件索引及HANDOFF在old-company-regression-20261004-01/delivery；本代理无Library/Git写，最终根统一实际打包保存。完整城市目标仍未完成。

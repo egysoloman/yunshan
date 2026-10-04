@@ -156,10 +156,11 @@ test('old-schema pending research is migrated once and retains its historical ti
   const wire = JSON.parse(sim.exportSave()) as { state: { extension: ReturnType<typeof extension> } }, runtime = wire.state.extension.runtime, job = runtime.researchJobs.medicine!;
   runtime.researchJobs.medicine = { startedAt: job.startedAt, finishAt: job.finishAt, budget: job.budget }; delete runtime.researchLaborVersion; delete runtime.legacyResearchSectors;
   const legacyBytes = JSON.stringify(wire), restored = new Simulation(world); assert(restored.importSave(legacyBytes).ok);
-  assert.notEqual(restored.exportSave(), legacyBytes, 'explicit migration adds only module metadata; old bytes are not advertised exact');
+  assert.equal(restored.exportSave(), legacyBytes, 'loading preserves the entire historical save until actual progress');
   assert.deepEqual(extension(restored).runtime.researchJobs.medicine, runtime.researchJobs.medicine);
-  assert.deepEqual(extension(restored).runtime.legacyResearchSectors, ['medicine']); assert.equal(researchProgressInfo(restored.state, 'medicine')!.legacy, true);
-  restored.setFocus(world.spawn, 'walk'); ticks(restored, 30); assert.equal(extension(restored).technologies.find(t => t.sector === 'medicine')!.level, 1);
+  assert.equal(extension(restored).runtime.legacyResearchSectors, undefined); assert.equal(researchProgressInfo(restored.state, 'medicine')!.legacy, true);
+  restored.step(.25); assert.deepEqual(extension(restored).runtime.legacyResearchSectors, ['medicine']);
+  restored.setFocus(world.spawn, 'walk'); ticks(restored, 29); assert.equal(extension(restored).technologies.find(t => t.sector === 'medicine')!.level, 1);
   assert.equal(extension(restored).publicLedger.filter(row => row.actorId === 'player' && row.purpose.includes('科研投入')).length, 1);
 });
 
@@ -170,7 +171,7 @@ test('actual old14 command save imports with grandfather120 and one-time metadat
   assert.equal(createHash('sha256').update(raw).digest('hex'), proof.saveSHA256);
   const world = researchWorld(), sim = new Simulation(world), result = sim.importSave(raw); assert(result.ok, result.message);
   assert.equal(sim.state.player.money, proof.playerCashAfter); assert.equal(sim.state.treasury, proof.treasuryAfter);
-  assert.deepEqual(extension(sim).runtime.researchJobs.medicine, proof.job); assert.deepEqual(extension(sim).runtime.legacyResearchSectors, ['medicine']);
+  assert.equal(sim.exportSave(), raw); assert.deepEqual(extension(sim).runtime.researchJobs.medicine, proof.job); assert.equal(extension(sim).runtime.legacyResearchSectors, undefined);
   const migrated = sim.exportSave(), again = new Simulation(world); assert(again.importSave(migrated).ok); assert.equal(again.exportSave(), migrated, 'already migrated save is not mutated again');
   sim.setFocus(world.spawn, 'walk'); again.setFocus(world.spawn, 'walk');
   for (let i = 0; i < 24; i++) { sim.step(.25); again.step(.25); assert.equal(again.exportSave(), sim.exportSave()); }
@@ -182,7 +183,7 @@ test('actual old14 command legacy+new mixed research preserves original investme
   const dir = process.env.YUNSHAN_RESEARCH_OLD_PENDING_DIR!, raw = readFileSync(join(dir, 'pending-save.json'), 'utf8'), proof = JSON.parse(readFileSync(join(dir, 'pending-provenance.json'), 'utf8')) as { saveSHA256: string; playerCashAfter: number; job: { startedAt: number; finishAt: number; budget: number } };
   assert.equal(createHash('sha256').update(raw).digest('hex'), proof.saveSHA256);
   const world = researchWorld(), sim = new Simulation(world), loaded = sim.importSave(raw); assert(loaded.ok, loaded.message);
-  assert.equal(sim.state.player.money, proof.playerCashAfter); assert.deepEqual(extension(sim).runtime.researchJobs.medicine, proof.job); assert.deepEqual(extension(sim).runtime.legacyResearchSectors, ['medicine']);
+  assert.equal(sim.exportSave(), raw); assert.equal(sim.state.player.money, proof.playerCashAfter); assert.deepEqual(extension(sim).runtime.researchJobs.medicine, proof.job); assert.equal(extension(sim).runtime.legacyResearchSectors, undefined);
   ok(sim, { type: 'research', targetId: 'traffic', value: 100 }); assert.equal(sim.state.player.money, proof.playerCashAfter - 100); assert.equal(marked(sim, 'traffic').workedMinutes, 0);
   assert.deepEqual(extension(sim).runtime.researchJobs.medicine, proof.job); assert.deepEqual(extension(sim).runtime.legacyResearchSectors, ['medicine']);
   assert.equal(extension(sim).publicLedger.filter(row => row.actorId === 'player' && row.purpose.includes('科研投入')).reduce((sum, row) => sum + row.amount, 0), 300);

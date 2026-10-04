@@ -101,12 +101,27 @@ test('public request waits for two real paid original-office signatures and draw
   const result=sim.command({type:'requestRoadRepair',targetId:closure.edgeId,value:1});assert.equal(result.ok,true,result.message);
   const job=roadworksStatus(sim.state,closure.edgeId).job!;assert.equal(job.funded,0);assert.equal(job.escrow,0);assert.equal(sim.state.player.money,wallet);assert.equal(cash(sim),before);
   let genuineWages=0;sim.onEvent('wage-earned',e=>{if(staff.some(c=>c.id===e.citizenId)&&e.siteId===context.site.id)genuineWages++;});
+  const startTick=sim.state.tick,flow={publicWages:0,procurement:0,directIncome:0,remittedTaxes:0};
+  let queuedTax=0,financeTax=0;
+  // Observe the actual source transactions. A lawful new resident filing fee
+  // is income, so treasury's net delta need not equal this one protected40.
+  sim.onEvent('wage-paid',e=>{const gross=e.amount??0;if(!e.shopId)flow.publicWages+=gross;if(sim.state.lastSystemOrder.at(-1)==='finance')financeTax+=gross*sim.state.taxRate;});
+  for(const type of ['public-procurement','security-procurement','medical-procurement','emergency-procurement','civic-procurement'])sim.onEvent(type,e=>{flow.procurement+=e.amount??0;if(sim.state.lastSystemOrder.at(-1)==='finance')financeTax+=(e.amount??0)*sim.state.taxRate;});
+  for(const type of ['business-expense','transit-fare'])sim.onEvent(type,e=>{flow.directIncome+=e.amount??0;});
+  sim.onPhase('commerce',()=>{queuedTax=core(sim).taxes;financeTax=0;});
+  sim.onPhase('finance',()=>{flow.remittedTaxes+=queuedTax+financeTax-core(sim).taxes;});
   until(sim,()=>job.approvedAt!==null,20);
   assert.ok(genuineWages>=2,'the original people phase produces real office duty, not seeded payroll');
   assert.deepEqual([...job.approvedBy].sort(),staff.map(c=>c.id).sort());assert.equal(job.authorizedCap,40);assert.equal(job.funded,40);assert.equal(job.escrow,40);
   const budget=core(sim).publicBudgets.find((b:any)=>b.id===job.id);assert.equal(budget.spent,40);assert.equal(budget.closedAt,null);
   assert.ok(sim.state.extension!.publicLedger.some(row=>row.account==='public'&&row.amount===-40&&row.purpose.includes('道路')));
-  assert.ok(Math.abs(cash(sim)-before)<1e-6);assert.ok(sim.state.treasury<=treasury-40,'original mandatory finance can add other real expenses; no circular100');
+  const entries=sim.state.extension!.publicLedger.filter(row=>row.account==='public'&&row.tick>startTick);
+  const roadTransfers=entries.filter(row=>row.purpose==='道路修复授权资金真实划入工地托管');assert.equal(roadTransfers.length,1);assert.equal(roadTransfers[0].amount,-40);
+  const income=entries.filter(row=>row.amount>0).reduce((sum,row)=>sum+row.amount,0),ledgerNet=entries.reduce((sum,row)=>sum+row.amount,0);
+  for(const fee of entries.filter(row=>row.purpose==='居民公共请愿备案费')){const petition=sim.state.culture!.petitions.find(p=>p.authorId===fee.actorId&&p.residentOrigin&&p.filedAt>context.closure.occurredAt);assert(petition?.residentOrigin);assert.equal(fee.amount,10);assert.equal(petition.residentOrigin.feePaid,10);assert.equal(petition.residentOrigin.moneyBefore-petition.residentOrigin.moneyAfter,10);}
+  const expectedTreasury=treasury+ledgerNet+flow.directIncome+flow.remittedTaxes-flow.procurement-flow.publicWages;
+  assert.ok(Math.abs(sim.state.treasury-expectedTreasury)<1e-6,'every actual public income, tax, wage, procurement and protected40 reconciles');
+  assert.ok(Math.abs(cash(sim)-before)<1e-6);assert.ok(sim.state.treasury<=treasury+income+flow.directIncome+flow.remittedTaxes-40+1e-7,'protected40 cannot be skipped or invented when a real filing fee enters treasury');
   const legal=sim.exportSave();
   for(const change of [(s:any)=>{delete s.state.roadworks;},(s:any)=>{s.runtime.publicBudgets.find((b:any)=>b.id===job.id).spent=0;},(s:any)=>{s.runtime.publicBudgets=s.runtime.publicBudgets.filter((b:any)=>b.id!==job.id);},(s:any)=>{s.state.roadworks.jobs[0].approvedBy=['player'];}]) { const broken=JSON.parse(legal);change(broken);assert.equal(sim.importSave(JSON.stringify(broken)).ok,false);assert.equal(sim.exportSave(),legal); }
   exact24(sim);const escrow=job.escrow,spent=budget.spent,oldCash=cash(sim),oldTreasury=sim.state.treasury;

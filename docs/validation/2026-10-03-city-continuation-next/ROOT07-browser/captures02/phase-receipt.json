@@ -1,0 +1,60 @@
+{
+  "phase": "captures",
+  "startedAt": "2026-10-04T02:22:08.001911+00:00",
+  "endedAt": "2026-10-04T02:26:14.075142+00:00",
+  "status": "PASS",
+  "command": [
+    "node",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/capture-root07-v2.mjs",
+    "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals",
+    "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization-exclusive-rerun.json"
+  ],
+  "timeoutSeconds": 900,
+  "wrapperExitCode": 0,
+  "ownedProcessReceipt": {
+    "startedAt": "2026-10-04T02:22:08.084068+00:00",
+    "endedAt": "2026-10-04T02:26:13.390362+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/capture-root07-v2.mjs",
+      "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals",
+      "/workspace/yunshan-work/ROOT07-browser-20261004-01/execution-authorization-exclusive-rerun.json"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 241,
+    "inputsStable": true,
+    "rawSHA256": "c9b6a70de780ea17151b804a6d27693b9ff261777328a6c1b451f1cc7edfa802",
+    "ownedPid": 25277,
+    "finalOwnedSessionMembers": [
+      {
+        "pid": 25297,
+        "state": "Z",
+        "parent": 1,
+        "group": 25277,
+        "session": 25277,
+        "startTicks": 1135402
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "sourcePath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+  "inputCount": 241,
+  "inputsStable": true,
+  "authorizationSHA256": "bbd0299d7304b7a4a0871a103a8589e9ceadfd9d78bc27bab1f973157f9cbc9f",
+  "originalWrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+  "phaseDriverSHA256": "6196906319a795a3e96a321b5a691f8f5e38c1a88fa9847544cc84ede1066dea",
+  "expectedChecks": null,
+  "observedChecks": null,
+  "actualResultFile": null,
+  "actualResult": null,
+  "distStable": true,
+  "scope": "ROOT07 actual isolated run; Linux software WebGL is functional evidence only",
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "Library": "ROOT_WILL_DELIVER_UNIFIED_ORIGINALS"
+}

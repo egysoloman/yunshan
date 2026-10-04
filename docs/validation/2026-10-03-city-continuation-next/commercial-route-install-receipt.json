@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-04T00:09:07.243113+00:00",
+  "patchSHA256": "1296aa00b5fe43dd29adc8aae08f158c11ff5dd46a3f52e1e7e0c8e1099d2c61",
+  "before": {
+    "src/architecture-floor-plan.ts": "6c679dba54ca6db6d0a6d1d46245616f1289e3c1a14a6d0a101811fadb3c9ab4",
+    "src/commercial-district.ts": "d85786d0e2db6971d728bfe29b2bb4c525d2728bac877d2051ef23f6a58e79b9",
+    "src/persistence/world-layout.ts": "4362d318021b48a295a806613d1cd17518e49dac79438157e97dea091478e886",
+    "src/types.ts": "e24a3e572c86aa759bb74f5d239283ebf0ebddc5fc50b0f003c0aa9286f44408",
+    "tests/world-v6-commercial.test.ts": "2a063ca32f1533117c3a62ae97d8c45cb9ce4059a3ee414977ba0671e005a778",
+    "tests/world-v6-commercial-routes.test.ts": null
+  },
+  "after": {
+    "src/architecture-floor-plan.ts": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1",
+    "src/commercial-district.ts": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+    "src/persistence/world-layout.ts": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661",
+    "src/types.ts": "e32c18f7be3315a0f4847fb8461e6859b9abf432f29b7f41b3646619765c3c06",
+    "tests/world-v6-commercial.test.ts": "ceb9706bd82a041c7542bf91e27f4b51f975af9c22e3e7243659be9a855c72b1",
+    "tests/world-v6-commercial-routes.test.ts": "a1735100a3c972faff7c1dbb987f31f9c99f85246fffe56a61c2298179e5a24f"
+  },
+  "freshDefault": "current-v6",
+  "historicalRecipesUnchanged": true,
+  "root06FrozenUntouched": true,
+  "geometryCandidateScope": "5/5 PASS 98.9s",
+  "routeCandidateScope": "2/2 PASS 95s;1148->482;generic1025 rejected",
+  "candidateBuild": "exit0",
+  "newDefaultIntegratedValidation": "NOT_RUN",
+  "fullGoalComplete": false
+}

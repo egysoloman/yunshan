@@ -1,0 +1,27 @@
+{
+  "pid": 21600,
+  "group": 21600,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/family-fee-education.test.ts",
+    "tests/family-fee-legacy-qualification.test.ts",
+    "tests/education-course.test.ts",
+    "tests/education-saved-time.test.ts",
+    "tests/education-legacy-regression.test.ts",
+    "tests/education-boundary.test.ts"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 21600,
+      "state": "R",
+      "parent": 21591,
+      "group": 21600,
+      "session": 21600,
+      "startTicks": 872913
+    }
+  ]
+}

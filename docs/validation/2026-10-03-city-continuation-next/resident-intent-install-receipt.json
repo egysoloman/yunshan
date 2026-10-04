@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-03T23:37:37.382792+00:00",
+  "files": [
+    {
+      "path": "src/simulation/culture.ts",
+      "beforeSHA256": "08cc2f50a188cd137796d50c7704d28c647c602fca997f7ed701c11a41ace76f",
+      "afterSHA256": "a0cd164d4fca402da63dfeb006fb006f8e3ddf485c6711ce412c786c94666750"
+    },
+    {
+      "path": "tests/resident-petitions.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "56fa27ad2dcfb26845fe014618c5a8c8ec3ef9d8c35f8317d0d07abde68fef8e"
+    }
+  ],
+  "scope": "11/11 actual targeted; related25/27 with2 explicit skips; build pass (earlier test revision)",
+  "limitations": "one-day public process shortage is a deliberate failing-supply result; completed default full-loop not yet verified; no funded credential created",
+  "priorFailuresRetained": [
+    "healthOracle",
+    "initialPublicQualificationFixture",
+    "oneFactoryRealSupplyShortage"
+  ]
+}

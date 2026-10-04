@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-04T01:50:44.257663+00:00",
+  "status": "READ_ONLY_STATIC_CALIBRATION_INCOMPLETE_CAUSE",
+  "diagnosticSource": "webgl01/artifacts-after-originals/artifacts/aviation-failure.json",
+  "diagnosticSHA256": "01870a927f5da81d28dc93f255274552d5fe50c0825254f6f94451658ff355db",
+  "actualFailureState": {
+    "tick": 122,
+    "paused": false,
+    "speed": 1,
+    "hour": 10.316666666666666,
+    "craft": {
+      "id": "aircraft-air-pad-military",
+      "name": "青隼垂直起降战机",
+      "kind": "jet",
+      "homePadId": "air-pad-military",
+      "padId": null,
+      "position": {
+        "x": 1160,
+        "y": 78.6000000000015,
+        "z": 834.2
+      },
+      "yaw": -3.141592653589793,
+      "pitch": 0,
+      "speed": 11.999999999999886,
+      "battery": 98.902514013903,
+      "status": "landing",
+      "reserved": true,
+      "charging": false,
+      "landingPadId": "air-pad-military"
+    },
+    "controllerPosition": {
+      "x": 1160,
+      "y": 78.9000000000015,
+      "z": 834.2
+    },
+    "errors": []
+  },
+  "sourceHashes": {
+    "src/main.ts": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+    "src/simulation.ts": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "scripts/browser-test.mjs": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+    "tests/persistence.test.ts": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1"
+  },
+  "catchLimits": {
+    "terminalNativeFullSave": "NOT_CAPTURED_BY_ORIGINAL_CATCH",
+    "fullWorldJSON": "NOT_CAPTURED_BY_ORIGINAL_CATCH",
+    "returnEntryPositionAndTimestamp": "NOT_CAPTURED",
+    "frameRawDeltaAndAcceptedSimulationSeconds": "NOT_CAPTURED",
+    "exactTerminalHeadlessReplay": "NOT_POSSIBLE_FROM_PARTIAL_DIAGNOSTIC_WITHOUT_INVENTING_STATE"
+  },
+  "sourceFacts": [
+    {
+      "path": "src/main.ts",
+      "line": 188,
+      "fact": "rAF computes rawDelta and accepts min(rawDelta,1), then calls simulation.step(delta). Large rendering stalls can lose wall-clock catch-up."
+    },
+    {
+      "path": "src/simulation.ts",
+      "line": 688,
+      "fact": "Accepted seconds accumulate into quarter-second fixed ticks; paused state returns without stepping."
+    },
+    {
+      "path": "src/aviation.ts",
+      "line": 171,
+      "fact": "Landing follows the registered pad; horizontal distance<=6 descends directly to pad altitude at up to12m/accepted-second. Landing does not snap to parked before actual proximity."
+    },
+    {
+      "path": "scripts/browser-test.mjs",
+      "line": 333,
+      "fact": "Original native return waits60000 wall-clock milliseconds for actual parked status."
+    },
+    {
+      "path": "scripts/browser-test.mjs",
+      "line": 386,
+      "fact": "Catch writes partial aviation/player/controller diagnostic and browser result; it does not export a terminal native save."
+    }
+  ],
+  "inference": "Resource contention plus the existing one-second frame cap is a plausible scheduling mechanism, not validated causality. The partial terminal state and no time series cannot identify how much real or accepted simulation time the return actually received. No evidence presently proves that v6 banks physically blocked this approach.",
+  "nextEvidence": "After root GPU release and actual active0, run original WebGL harness once in a new scope, retaining original60-second window, all11 checks, source hashes and failure diagnostics. Do not teleport, clear buildings, alter speed or fabricate saved state."
+}

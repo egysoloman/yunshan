@@ -126,9 +126,12 @@ export function publicEducation(context: ReturnType<typeof setup>) {
   const { sim, controls, site, teacher } = context, hall = sim.worldDefinition.buildings.find(building => building.kind === 'hall')!;
   assert.equal(education(sim), undefined, 'controlled public deadline jump occurs before a paid course exists');
   sim.setFocus(hall.door, 'walk');
+  const previousPetitionIds = new Set(sim.state.culture!.petitions.map(petition => petition.id));
   const filed = sim.command({ type: 'filePetition', targetId: 'education', title: '真实同站课堂', text: '居民请求在学校安排教材有限、教师真实出勤且学员共同到达课堂的公共教学。' });
   assert.equal(filed.ok, true, filed.message);
-  const petition = sim.state.culture!.petitions.at(-1)!;
+  const created = sim.state.culture!.petitions.filter(petition => !previousPetitionIds.has(petition.id) && petition.authorId === 'player' && petition.topic === 'education');
+  assert.equal(created.length, 1, 'this exact player command creates one identifiable education petition');
+  const petition = created[0];
   const signers = sim.state.citizens.filter(person => person.id !== teacher.id && sim.state.extension!.actorProfiles[person.id].age >= 18).slice(0, 3);
   for (const person of signers) pin(sim, controls, person.id, hall, station(hall));
   advance(sim, 4); assert.ok(petition.signerIds.length >= 3);

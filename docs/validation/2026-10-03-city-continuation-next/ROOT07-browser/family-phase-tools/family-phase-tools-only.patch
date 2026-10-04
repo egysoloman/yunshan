@@ -1,0 +1,65 @@
+--- original/run-root07.py
++++ external-family/run-family-root07.py
+@@ -89,10 +89,11 @@
+ 
+ 
+ parser = argparse.ArgumentParser()
+-parser.add_argument('phase', choices=(*PHASES, 'captures'))
++parser.add_argument('phase', choices=(*PHASES, 'captures', 'family'))
+ parser.add_argument('source')
+ parser.add_argument('new_scope')
+ parser.add_argument('authorization')
++parser.add_argument('--family-driver')
+ args = parser.parse_args()
+ source = Path(args.source).resolve()
+ scope = Path(args.new_scope).resolve()
+@@ -119,7 +120,12 @@
+ write_json(scope / 'dist-before.json', dist_before)
+ if dist_before:
+     freeze(source, scope / 'dist-before-originals', dist_before)
+-if args.phase == 'captures':
++if args.phase == 'family':
++    family_driver = Path(args.family_driver).resolve()
++    assert family_driver.is_file() and str(family_driver).startswith('/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/')
++    command = ['node', str(family_driver), str(source), str(scope / 'family-ui-originals')]
++    limit = 300
++elif args.phase == 'captures':
+     command = ['node', str(HERE / 'capture-root07.mjs'), str(source), str(scope / 'capture-originals'), str(authorization_path)]
+     limit = 900
+ else:
+@@ -150,11 +156,13 @@
+ write_json(scope / 'artifact-provenance.json', {'newOrChanged': produced, 'rewrittenSameSHA256': rewritten_same,
+     'preexistingUntouched': untouched, 'beforeMtimeNS': artifact_times_before, 'afterMtimeNS': artifact_times_after,
+     'note': 'All originals retained. Untouched preexisting files are not attributed to this run. Identical rewritten result bytes remain explicit.'})
+-result_file = {'dom': 'ui-results.json', 'webgl': 'browser-results.json'}.get(args.phase)
++result_file = {'dom': 'ui-results.json', 'webgl': 'browser-results.json', 'family': 'family-fee-ui-results.json'}.get(args.phase)
+ actual_result = None
+ if result_file and (scope / 'artifacts-after-originals' / 'artifacts' / result_file).is_file():
+     actual_result = json.loads((scope / 'artifacts-after-originals' / 'artifacts' / result_file).read_text())
+-expected_checks = {'dom': 35, 'webgl': 11}.get(args.phase)
++if args.phase == 'family' and (scope / 'family-ui-originals' / result_file).is_file():
++    actual_result = json.loads((scope / 'family-ui-originals' / result_file).read_text())
++expected_checks = {'dom': 35, 'webgl': 11, 'family': 7}.get(args.phase)
+ observed_checks = actual_result.get('checks') if actual_result else None
+ if isinstance(observed_checks, list):
+     observed_checks = len(observed_checks)
+@@ -170,7 +178,9 @@
+         status = 'FAIL'
+     if args.phase == 'dom' and actual_result and actual_result.get('status') != 'passed':
+         status = 'FAIL'
+-    if 'artifacts/' + result_file not in produced and 'artifacts/' + result_file not in rewritten_same:
++    if args.phase == 'family' and (not actual_result or actual_result.get('status') != 'PASS' or actual_result.get('passed') != 7):
++        status = 'FAIL'
++    if args.phase != 'family' and 'artifacts/' + result_file not in produced and 'artifacts/' + result_file not in rewritten_same:
+         status = 'FAIL'
+ if owned_receipt.get('timedOut'):
+     status = 'TIMEOUT_PARTIAL'
+@@ -180,7 +190,7 @@
+     'authorizationSHA256': digest(authorization_path), 'originalWrapperSHA256': digest(HERE / 'run-phase-v2-original.py'),
+     'phaseDriverSHA256': digest(Path(__file__)), 'expectedChecks': expected_checks, 'observedChecks': observed_checks,
+     'actualResultFile': result_file, 'actualResult': actual_result,
+-    'distStable': dist_before == dist_after, 'scope': 'ROOT07 actual isolated run; Linux software WebGL is functional evidence only',
++    'distStable': dist_before == dist_after, 'scope': 'ROOT07 guarded isolated external family native DOM integration; original 7 checks, controlled physical fixture, no WebGL or natural city life claim',
+     'ART': 'FAIL_REFERENCE_GAPS_REMAIN', 'Mac': 'NOT_RUN', 'Library': 'ROOT_WILL_DELIVER_UNIFIED_ORIGINALS'}
+ write_json(scope / 'phase-receipt.json', receipt)
+ print(json.dumps(receipt, ensure_ascii=False))

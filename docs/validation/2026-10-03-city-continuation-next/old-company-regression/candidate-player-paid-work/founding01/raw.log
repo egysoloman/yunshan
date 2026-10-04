@@ -1,0 +1,35 @@
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-exam","ok":true,"message":"40文已进入课程托管；真实教师、教材和60有效分钟共同完成才提高学历。","ticks":0,"courseStatus":"awaitingSupply","workedMinutes":0}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-1","ticks":1,"clock":480.25,"courseStatus":"waiting","workedMinutes":0,"reason":"等候教材、营业时间、身体条件及同课堂教师的真实出勤；当前不累积分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-2","ticks":2,"clock":480.5,"courseStatus":"studying","workedMinutes":0.25,"reason":"真实教师共同授课0.3/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"wall-progress","ticks":22,"clock":485.5,"courseStatus":"studying","workedMinutes":5.25,"reason":"真实教师共同授课5.3/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-40","ticks":40,"clock":490,"courseStatus":"studying","workedMinutes":9.75,"reason":"真实教师共同授课9.8/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"wall-progress","ticks":117,"clock":509.25,"courseStatus":"studying","workedMinutes":29,"reason":"真实教师共同授课29.0/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-120","ticks":120,"clock":510,"courseStatus":"studying","workedMinutes":29.75,"reason":"真实教师共同授课29.8/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"wall-progress","ticks":202,"clock":530.5,"courseStatus":"studying","workedMinutes":50.25,"reason":"真实教师共同授课50.3/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-240","ticks":240,"clock":540,"courseStatus":"studying","workedMinutes":59.75,"reason":"真实教师共同授课59.8/60分钟。"}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"step-241","ticks":241,"clock":540.25}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-exam","ok":true,"message":"通过merchant职业考试，身份职责与权限已改变。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-foundCompany","ok":false,"message":"请到商业设施现场登记公司。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-foundCompany","ok":false,"message":"请到商业设施现场登记公司。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-foundCompany","ok":false,"message":"请到商业设施现场登记公司。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-foundCompany","ok":false,"message":"需先依法取得原经营资产或有效租赁经营权；登记保留原租约、工资债与修缮义务。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":true,"message":"已开始千灯市集·百味街·商肆3的60分钟现场工班，62文工资由真实现金托管；离场暂停，按实际劳动结算。","ticks":241}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"wall-progress","ticks":466,"clock":596.5}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":false,"message":"雇主没有可支持本班的现金；既有工资债务、已承诺班次与必要运营资金继续保留。","ticks":481}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":true,"message":"已开始南岫空港·南坡院·商肆4的60分钟现场工班，62文工资由真实现金托管；离场暂停，按实际劳动结算。","ticks":481}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":false,"message":"雇主没有可支持本班的现金；既有工资债务、已承诺班次与必要运营资金继续保留。","ticks":721}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":false,"message":"雇主没有可支持本班的现金；既有工资债务、已承诺班次与必要运营资金继续保留。","ticks":721}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":false,"message":"雇主没有可支持本班的现金；既有工资债务、已承诺班次与必要运营资金继续保留。","ticks":721}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-work","ok":true,"message":"已开始松风里·水月坊·商肆5的60分钟现场工班，62文工资由真实现金托管；离场暂停，按实际劳动结算。","ticks":721}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"wall-progress","ticks":780,"clock":675}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-buyShop","ok":true,"message":"真实买价已付卖方，200文另入原经营账户；仍须真实采购、工资授权与60分钟员工修缮后重开。","ticks":961}
+OLD_COMPANY_OBSERVATION {"sim":1,"label":"command-foundCompany","ok":true,"message":"已创办清溪水岸·西溪院·商肆1商社，投入300文资本、50文登记费，持有全部1000股。","ticks":961}
+✔ v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash (420739.522632ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 429478.471298

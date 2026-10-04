@@ -1,0 +1,24 @@
+{
+  "before": {
+    "src/simulation/roadworks.ts": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105",
+    "src/simulation.ts": "be7ef7f43e132c90a1fad2b9d94ed706dfc104bc88f1cb7220d112a6c0cd14de",
+    "tests/roadwork-replacement.test.ts": null
+  },
+  "after": {
+    "src/simulation/roadworks.ts": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105",
+    "src/simulation.ts": "be7ef7f43e132c90a1fad2b9d94ed706dfc104bc88f1cb7220d112a6c0cd14de",
+    "tests/roadwork-replacement.test.ts": null
+  },
+  "checks": [
+    {
+      "patch": "roadworks.patch",
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "patch": "runtime-core-incremental.patch",
+      "exit": 1,
+      "stderr": "error: patch failed: src/simulation.ts:69\nerror: src/simulation.ts: patch does not apply\n"
+    }
+  ]
+}

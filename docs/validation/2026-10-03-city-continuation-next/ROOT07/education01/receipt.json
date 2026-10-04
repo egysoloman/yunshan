@@ -1,0 +1,36 @@
+{
+  "startedAt": "2026-10-04T01:38:24.516723+00:00",
+  "endedAt": "2026-10-04T02:06:06.244076+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/family-fee-education.test.ts",
+    "tests/family-fee-legacy-qualification.test.ts",
+    "tests/education-course.test.ts",
+    "tests/education-saved-time.test.ts",
+    "tests/education-legacy-regression.test.ts",
+    "tests/education-boundary.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "502f93d6ca63ad6519f82866eb7f291f05fd12ae6af2532596a3d8d3acb6903e",
+  "ownedPid": 21600,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 21623,
+      "state": "Z",
+      "parent": 1,
+      "group": 21600,
+      "session": 21600,
+      "startTicks": 872944
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

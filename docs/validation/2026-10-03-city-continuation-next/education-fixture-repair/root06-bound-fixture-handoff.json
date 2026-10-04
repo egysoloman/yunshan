@@ -1,0 +1,57 @@
+{
+  "status": "READY_FOR_ROOT_REVIEW",
+  "supersedes": "root06-resident-formal-fixture.patch (position-only intermediate)",
+  "patch": "root06-player-order-bound-fixture.patch",
+  "assertionsRemoved": 0,
+  "skipsAdded": 0,
+  "sourceChanges": 0,
+  "positions": "one-time hearing signers return to original homes; original industrial workers, public reviewers and classroom attendees preserved",
+  "orderBinding": "new unique player-authored education petition ID and exact executionId/petitionId, no .at(-1) inference",
+  "isolatedOriginal": {
+    "exitCode": 1,
+    "pass": 0,
+    "fail": 1,
+    "raw": "root06-partial-repro.tap"
+  },
+  "narrowFinal": {
+    "exitCode": 0,
+    "pass": 1,
+    "fail": 0,
+    "raw": "root06-partial-bound.tap",
+    "metrics": "root06-partial-bound.metrics.json",
+    "preservedPartialReceived": 4.069175991861648,
+    "spent": 40,
+    "textbooksRequired": 6,
+    "partitionAnd1x24": true
+  },
+  "inputSource": {
+    "education-fixture.ts": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856",
+    "resident-formal-education.test.ts": "a3cac4042fbdfb9481bae992910efc870afbf4b08e8e2b5086fe81770ef667fe"
+  },
+  "files": {
+    "root06-partial-repro.tap": "810aea69862f457239a7ebb55a0f98ac2bdaf1fce9037801ba638e9e16e31074",
+    "root06-fixture-handoff.json": "e5977d67a92fc36522122696cc276b1d1cf215a3e08569022743f020fd948528",
+    "root06-partial-bound.tap": "afae856911e98bd2108062e0f00c8fd960872bf83f4e026fde23f60e64547b1d",
+    "root06-fixed-underfunded.save.json": "ef7a11535a56836d99827b3567616f98feeb00a2df9a7cd6ce47303e0ab41833",
+    "root06-partial-bound.test.ts": "5e9b914cef2ab26ec6baecc47b962eddb1e3b501dfbaa0275c0744133190c24a",
+    "root06-partial-fixed.test.ts": "476bbd30ef5f2b6d3244df38036abcf41fb9fee26c73bcc03a1e1482b891c00d",
+    "root06-resident-formal-fixture.patch": "06bde58c18e0cb669fa763ec87d3f1249641c45a533f9ad52b48172b74ad06c0",
+    "root06-resident-formal-test-fixture.CODEPREP.ts": "4d942548b7d0924a2e7100ab277ecca380e9ccdf2b61139fb096aa5dd57ab718",
+    "root06-bound-underfunded.save.json": "ef7a11535a56836d99827b3567616f98feeb00a2df9a7cd6ce47303e0ab41833",
+    "root06-player-order-bound-fixture.patch": "7545604361c3af7bb75d590f1ec61f269fda95db516495c70b4e5794b0c9ff5f",
+    "root06-education-fixture-bound.ts": "44c7847ef7bb2c9881ea131bbddeee1514f3c9f34ab7997f69d481775e79ec0c",
+    "root06-bound-e1-scoped.tap": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root06-partial-bound.metrics.json": "b4509ab6f1af01c20cb3837eab445be36802d079e140eadc0137578205d31e10",
+    "root06-bound-underfunded.metrics.json": "41908193627bdc837bfea861ad916af4c297282238c5a4d6dfd64acaa83114ed",
+    "root06-partial-repro.test.ts": "28d88bc4ac2d35cc0e286e5db196b846ffabea8899b38795e00ad5460462ff30",
+    "root06-partial-fixed.tap": "a05fd6b19844ab849da0e7dd10c40a2b9821c94b8c86cbf18736bd425138f5ec",
+    "root06-resident-formal-test-bound.CODEPREP.ts": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe",
+    "root06-partial-fixed.metrics.json": "b4509ab6f1af01c20cb3837eab445be36802d079e140eadc0137578205d31e10",
+    "root06-fixture-handoff.md": "aa156c4693fbbc490b17100d729f1c053f771982cc04c310c0c4549b72558de4",
+    "root06-fixed-underfunded.metrics.json": "41908193627bdc837bfea861ad916af4c297282238c5a4d6dfd64acaa83114ed",
+    "root06-education-fixture-bound.CODEPREP.ts": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a",
+    "root06-bound-education-course.test.ts": "4242cb2786151afdef7afcd9238c5b49ff59f86346c445f25dc3024b9cd628f2",
+    "root06-partial-repro.metrics.json": "e70f353c6e903057d4ad3816da038dfc53cecd8fd94a92f33b44c7f0234d2a23",
+    "root06-bound-resident-formal-education.test.ts": "7b690239786a882a154baa232c137ffc2068b1e1f9072414fc85c65a3feae5d9"
+  }
+}

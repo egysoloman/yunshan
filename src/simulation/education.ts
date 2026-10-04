@@ -6,6 +6,9 @@ import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody, getBuilding
 import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
+import type { ServiceOrder } from './culture';
+import type { FamilyEducationCourse } from './family-education';
+import { SCHOOL_MINUTES_PER_LEVEL } from './family';
 
 export interface EducationReceipt { purchasedAt: number; shopId: string; quantity: 1; unitPrice: number; gross: number; net: number; tax: number }
 export interface EducationCourse {
@@ -57,11 +60,11 @@ export function educationPairAtStation(simulation: Simulation, site: Building, t
   return staff.some(a => student.some(b => a.floor === b.floor && a.id === b.id && distance(a.position, b.position) < 1e-8));
 }
 interface WorkInterval { start: number; end: number; siteId?: string }
-interface TeachingPhase { state: SimState; tick: number; clock: number; wages: Map<string, WorkInterval[]>; teachers: Map<string, number>; students: Set<string>; blockedPlayer: boolean }
+interface TeachingPhase { state: SimState; tick: number; clock: number; wages: Map<string, WorkInterval[]>; teachers: Map<string, number>; students: Set<string>; studentTeachers: Map<string, string>; blockedPlayer: boolean }
 const teaching = new WeakMap<Simulation, TeachingPhase>();
 function phase(simulation: Simulation): TeachingPhase {
   let item = teaching.get(simulation);
-  if (!item || item.state !== simulation.state || item.tick !== simulation.state.tick) { item = { state: simulation.state, tick: simulation.state.tick, clock: clock(simulation.state), wages: new Map(), teachers: new Map(), students: new Set(), blockedPlayer: false }; teaching.set(simulation, item); }
+  if (!item || item.state !== simulation.state || item.tick !== simulation.state.tick) { item = { state: simulation.state, tick: simulation.state.tick, clock: clock(simulation.state), wages: new Map(), teachers: new Map(), students: new Set(), studentTeachers: new Map(), blockedPlayer: false }; teaching.set(simulation, item); }
   return item;
 }
 function classroomInterval(state: SimState, minutes: number, startedAt = 0): WorkInterval {
@@ -82,7 +85,60 @@ export function educationStaffMinutes(simulation: Simulation, teacher: Citizen, 
 export function educationSlotAvailable(simulation: Simulation, teacherId: string, actorId: string): boolean { const p = phase(simulation); return !p.students.has(actorId) && (p.teachers.get(teacherId) ?? 0) < 4 && teacherId !== actorId; }
 export function takeEducationSlot(simulation: Simulation, teacherId: string, actorId: string): boolean {
   if (!educationSlotAvailable(simulation, teacherId, actorId)) return false;
-  const p = phase(simulation); p.teachers.set(teacherId, (p.teachers.get(teacherId) ?? 0) + 1); p.students.add(actorId); return true;
+  const p = phase(simulation); p.teachers.set(teacherId, (p.teachers.get(teacherId) ?? 0) + 1); p.students.add(actorId); p.studentTeachers.set(actorId, teacherId); return true;
+}
+/** Public tuition earns credentials only after the actual allocator consumed
+ * this order's textbook and the current funded, same-station teacher slot.
+ * A plain emitted event, attendance tick or saved timer cannot award a degree.
+ * Legacy qualifications and attended minutes remain the admission baseline. */
+export function applyPublicEducationCredential(simulation: Simulation, order: ServiceOrder, actorId: string): boolean {
+  const state = simulation.state, family = state.family, person = state.citizens.find(person => person.id === actorId), profile = state.extension?.actorProfiles[actorId];
+  const site = simulation.worldDefinition.buildings.find(site => site.id === order.siteId), teacherId = phase(simulation).studentTeachers.get(actorId), teacher = state.citizens.find(person => person.id === teacherId);
+  if (!family || !person || !profile?.alive || profile.age < 6 || !site || !teacher || order.topic !== 'education' || order.state !== 'active'
+    || !state.culture?.orders.includes(order) || !order.servedIds.includes(actorId) || (order.serviceMinutes[actorId] ?? 0) < MINUTES - EPS
+    || order.consumedUnits < 1 || order.receivedUnits < order.consumedUnits || order.receipts.reduce((sum, receipt) => sum + receipt.quantity, 0) < order.consumedUnits - EPS
+    || !order.staffIds.includes(teacher.id) || !educationPairAtStation(simulation, site, teacher, actorId)
+    || educationStaffMinutes(simulation, teacher, site.id, .25 * state.speed) <= 0) return false;
+  const child = family.children[actorId];
+  if (child && child.schoolId !== site.id) return false;
+  const existing = family.formalLearning?.[actorId];
+  if (existing?.receipts.some(receipt => receipt.orderId === order.id)) return false;
+  const record = existing ?? { baselineEducation: person.education ?? 0, baselineAttendanceMinutes: child?.attendanceMinutes ?? 0, earnedMinutes: 0, receipts: [] };
+  const minutesPerLevel = child || profile.age < 18 ? SCHOOL_MINUTES_PER_LEVEL : MINUTES;
+  const priorSchoolMinutes = (record.receipts.filter(receipt => receipt.minutesPerLevel === SCHOOL_MINUTES_PER_LEVEL).length + (record.tuitionPages?.flat().length ?? 0)) * MINUTES;
+  const levels = minutesPerLevel === MINUTES ? 1 : Math.floor((priorSchoolMinutes + MINUTES) / SCHOOL_MINUTES_PER_LEVEL) - Math.floor(priorSchoolMinutes / SCHOOL_MINUTES_PER_LEVEL);
+  const educationGain = Math.min(levels, Math.max(0, 20 - (person.education ?? 0)));
+  family.formalLearningVersion ??= 1; family.formalLearning ??= {}; family.formalLearning[actorId] = record;
+  record.earnedMinutes += MINUTES;
+  record.receipts.push({ orderId: order.id, siteId: site.id, teacherId: teacher.id, completedAt: clock(state), minutes: MINUTES, minutesPerLevel, educationGain });
+  person.education = (person.education ?? 0) + educationGain;
+  if (child) child.attendanceMinutes += MINUTES;
+  return true;
+}
+/** Only the real tuition allocator's terminal course and current teacher
+ * slot can create a school certificate. All prior public/private sources share
+ * the original 480-minute level boundary; neither route double-awards it. */
+export function applyFamilyEducationCredential(simulation: Simulation, course: FamilyEducationCourse): boolean {
+  const state = simulation.state, family = state.family, person = state.citizens.find(p => p.id === course.actorId), profile = state.extension?.actorProfiles[course.actorId];
+  const teacherId = phase(simulation).studentTeachers.get(course.actorId), teacher = state.citizens.find(p => p.id === teacherId), site = simulation.worldDefinition.buildings.find(b => b.id === course.siteId);
+  if (!family || !person || !profile?.alive || profile.age < 6 || profile.age >= 18 || !teacher || !site || !state.familyEducation?.active.includes(course) || course.status !== 'completed' || course.workedMinutes !== MINUTES || course.consumedUnits !== 1 || course.receivedUnits + course.reusedUnits !== 1 || (course.staffMinutes[teacher.id] ?? 0) <= 0 || !educationPairAtStation(simulation, site, teacher, course.actorId) || educationStaffMinutes(simulation, teacher, site.id, .25 * state.speed) <= 0) return false;
+  const child = family.children[course.actorId], existing = family.formalLearning?.[course.actorId];
+  if (existing?.tuitionPages?.flat().some(receipt => receipt.courseId === course.id)) return false;
+  const record = existing ?? { baselineEducation: person.education ?? 0, baselineAttendanceMinutes: child?.attendanceMinutes ?? 0, earnedMinutes: 0, receipts: [] };
+  const prior = (record.receipts.filter(receipt => receipt.minutesPerLevel === SCHOOL_MINUTES_PER_LEVEL).length + (record.tuitionPages?.flat().length ?? 0)) * MINUTES;
+  const gain = Math.min(Math.floor((prior + MINUTES) / SCHOOL_MINUTES_PER_LEVEL) - Math.floor(prior / SCHOOL_MINUTES_PER_LEVEL), Math.max(0, 20 - (person.education ?? 0)));
+  // v1 explicitly accepts an already-held higher legacy qualification. Keep
+  // its original baseline and public receipts; activation cannot revoke it or
+  // label it as newly earned tuition. Later private records remain exact.
+  if (!record.tuitionPages) {
+    const carry = (person.education ?? 0) - record.baselineEducation - record.receipts.reduce((sum, receipt) => sum + receipt.educationGain, 0);
+    if (carry > EPS) record.legacyEducationCarry = carry;
+  }
+  family.formalLearningVersion = 2; family.formalLearning ??= {}; family.formalLearning[course.actorId] = record; record.tuitionPages ??= [];
+  if (!record.tuitionPages.length || record.tuitionPages[record.tuitionPages.length - 1].length === 8) record.tuitionPages.push([]);
+  record.tuitionPages[record.tuitionPages.length - 1].push({ courseId: course.id, siteId: course.siteId, teacherId: teacher.id, completedAt: course.completedAt!, minutes: MINUTES, minutesPerLevel: SCHOOL_MINUTES_PER_LEVEL, educationGain: gain });
+  record.earnedMinutes += MINUTES; person.education = (person.education ?? 0) + gain; if (child) child.attendanceMinutes += MINUTES;
+  return true;
 }
 /** Teachers attached to an actual paid/public classroom need fine task
  * processing. Tier labels and all physical speeds remain unchanged. */
@@ -90,7 +146,8 @@ export function educationNeedsContinuousPeople(state: SimState, person: Citizen)
   const course = state.education?.course, profile = state.extension?.actorProfiles[person.id];
   if (!roles.includes(person.role) || !profile?.alive || profile.age < 18) return false;
   return !!course && !ended(course) && course.status !== 'refundPending' && person.workId === course.siteId
-    || !!state.culture?.orders.some(order => order.topic === 'education' && order.state === 'active' && order.siteId === person.workId);
+    || !!state.culture?.orders.some(order => order.topic === 'education' && order.state === 'active' && order.siteId === person.workId)
+    || !!state.familyEducation?.active.some(course => course.cancelledAt === null && course.siteId === person.workId);
 }
 export function educationOpenMinutes(state: SimState, minutes: number): number { const window = classroomInterval(state, minutes); return Math.max(0, window.end - window.start); }
 function courseAt(simulation: Simulation, course: EducationCourse): boolean {

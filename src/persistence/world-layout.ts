@@ -1,5 +1,6 @@
 import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, createWorld } from '../world';
 import { getBuildingBody, getFloorPlanRoofRegions } from '../architecture-floor-plan';
+import { COMMERCIAL_RECIPE_VERSION, COMMERCIAL_ROUTE_REVISION } from '../commercial-district';
 import type { CityLayoutVersion } from '../world';
 import type { WorldDefinition } from '../types';
 
@@ -16,7 +17,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // selectSavedWorld only calls this with regenerated trusted candidates. An
   // imported file's layout/terrain/geometry labels are never used as inputs.
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  const terrain = layout === 'current-v3' || layout === 'current-v4' ? {
+  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' ? {
     algorithm: GEOLOGICAL_GEOMETRY_VERSION,
     voxelSize: world.voxelSize, size: world.size, mountains: world.mountains,
     districts: world.districts.map(district => [district.id, district.center, district.radius]),
@@ -26,13 +27,16 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // A v4 identity includes the generated physical rooms, voids, openings and
   // support planes. A marker alone cannot describe their usable geometry.
   // This extra descriptor is deliberately absent from all four old recipes.
-  const architecture = layout === 'current-v4' ? {
-    algorithm: ARCHITECTURAL_GEOMETRY_VERSION,
+  const architecture = layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' ? {
+    algorithm: layout === 'current-v6' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${COMMERCIAL_RECIPE_VERSION}:flight-routes-${COMMERCIAL_ROUTE_REVISION}` : layout === 'current-v5' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2` : ARCHITECTURAL_GEOMETRY_VERSION,
     buildings: world.buildings.map(site => {
       const body = getBuildingBody(site);
-      return [site.id, site.seed, site.floorPlanProfile, site.functionPoints,
+      const inputs = [site.id, site.seed, site.floorPlanProfile, site.functionPoints,
         site.floorUses, site.floorPermissions, site.publicFloors, site.requiredPermission,
         body ? [body.family, body.roofRhythm, body.floorPlans, getFloorPlanRoofRegions(body)] : null];
+      // The descriptor is absent from old recipes, preserving their complete
+      // original fingerprint text while binding every v5 stair revision.
+      return layout === 'current-v6' ? [...inputs, site.stairGeometryRevision, site.commercialGeometryRevision, site.commercialRouteRevision] : layout === 'current-v5' ? [...inputs, site.stairGeometryRevision] : inputs;
     }),
   } : undefined;
   const text = JSON.stringify(architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry);

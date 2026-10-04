@@ -1,4 +1,5 @@
 import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
+import { familyEducationHeldCash } from '../src/simulation/family-education';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -193,10 +194,14 @@ function snapshot() {
   const mean = (list: Citizen[], value: (citizen: Citizen) => number) => list.length ? list.reduce((n, c) => n + value(c), 0) / list.length : 0;
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
+    policeSupplies: sim.policeSupplyCoverage(),
+    civicRequests: s.culture ? { residentPetitions: s.culture.petitions.filter(p => p.residentOrigin !== undefined).length, openPetitions: s.culture.petitions.filter(p => p.status === 'open').length, orders: s.culture.orders.map(o => ({ id: o.id, topic: o.topic, state: o.state, authorizedCap: o.authorizedCap, spent: o.spent, receivedUnits: o.receivedUnits, consumedUnits: o.consumedUnits, served: o.servedIds.length })) } : null,
+    formalLearning: s.family?.formalLearning ? Object.values(s.family.formalLearning).map(record => ({ earnedMinutes: record.earnedMinutes, receipts: record.receipts.length, familyReceipts: record.tuitionPages?.reduce((sum, page) => sum + page.length, 0) ?? 0 })) : [],
+    familyEducation: s.familyEducation ? { heldCash: familyEducationHeldCash(s), active: s.familyEducation.active.map(course => ({ id: course.id, actorId: course.actorId, payerId: course.payerId, status: course.status, workedMinutes: course.workedMinutes, escrow: course.escrow })), retainedPages: s.familyEducation.pages.length, totals: { ...s.familyEducation.totals } } : null,
     playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
     roadworks: s.roadworks ? { escrow: s.roadworks.jobs.reduce((sum, job) => sum + job.escrow, 0), jobs: s.roadworks.jobs.map(job => ({ id: job.id, payerId: job.payerId, status: job.status, workedMinutes: job.workedMinutes, funded: job.funded, purchasePaid: job.purchasePaid, paidGross: job.paidGross, paidTax: job.paidTax, refunded: job.refunded, escrow: job.escrow })) } : null,
     power: s.power ? structuredClone(s.power) : null,
-    hygiene: s.hygiene ? { escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock) } : null,
+    hygiene: s.hygiene ? { escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock), publicDemands: s.hygiene.publicDemands?.map(d => ({ id: d.id, state: d.state, authorizedCap: d.authorizedCap, spent: d.spent, jobId: d.jobId })) ?? [] } : null,
     education: s.education ? { course: s.education.course ? { ...s.education.course, staffMinutes: { ...s.education.course.staffMinutes } } : null, stats: { ...s.education.stats }, stock: structuredClone(s.education.stock) } : null,
     policy: { taxRate: s.taxRate, policeBudget: s.policeBudget }, publicBudget: sim.publicBudgetSnapshot(), publicService: sim.publicServiceCoverage(), privateLabor: sim.privateLaborCoverage(),
     banking: s.banking ? { balanceSheet: bankingBalanceSheet(s.banking), cash: s.banking.cash, deposits: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.deposits, 0), loans: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.loanPrincipal + account.loanInterest, 0), legacyInvestmentCash: s.banking.legacyInvestmentCash } : null,
@@ -209,7 +214,7 @@ function snapshot() {
       belowClosureThreshold: s.shops.filter(shop => shop.profit < -600).length,
       zeroEmployees: s.shops.filter(shop => shop.employees === 0).length,
       employees: s.shops.reduce((n, shop) => n + shop.employees, 0),
-      cash: s.shops.filter(shop => !e.companies.some(c => c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + sim.shopFunds(shop), 0),
+      cash: s.shops.filter(shop => !e.companies.some(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + sim.shopFunds(shop), 0),
       averageProfit: meanShops(s.shops.map(shop => shop.profit)) },
     npc: { alive: alive.length, total: actors.length, meanHealth: mean(actors, c => e.actorProfiles[c.id].health),
       meanHunger: mean(actors, c => c.needs.hunger), meanFatigue: mean(actors, c => c.needs.fatigue),
@@ -220,17 +225,18 @@ function snapshot() {
       storedFood: actors.reduce((sum, c) => sum + (c.food ?? 0), 0),
       byRole: Object.fromEntries([...new Set(actors.map(c => c.role))].map(role => { const group = actors.filter(c => c.role === role); return [role, { count: group.length, money: mean(group, c => c.money), hunger: mean(group, c => c.needs.hunger), health: mean(group, c => e.actorProfiles[c.id].health) }]; })) },
     technologies: e.technologies.map(t => ({ sector: t.sector, level: t.level })),
-    companies: e.companies.map(c => { const shop = s.shops.find(shop => shop.buildingId === c.buildingId)!; return { id: c.id, capital: c.capital, profit: c.profit, employees: c.employees, inventory: shop.inventory, wageLiability: sim.shopPayrollDebt(shop), revenue: c.revenue, workId: c.buildingId }; }) };
+    companies: e.companies.map(c => { const shop = s.shops.find(shop => shop.buildingId === c.buildingId)!; return { id: c.id, capital: c.capital, profit: c.profit, employees: c.employees, inventory: c.shopBindingReleasedAt === undefined ? shop.inventory : c.inventory, wageLiability: c.shopBindingReleasedAt === undefined ? sim.shopPayrollDebt(shop) : 0, revenue: c.revenue, workId: c.buildingId }; }) };
 }
 function meanShops(profits: number[]) { return profits.length ? profits.reduce((sum, p) => sum + p, 0) / profits.length : 0; }
 function moneySupply() {
   const s = sim.state, e = extension();
   return s.treasury + core().taxes + s.player.money + (s.banking ? s.banking.cash + s.banking.legacyInvestmentCash : s.bankBalance + (Reflect.get(sim, 'runtime').investment ?? 0)) + s.citizens.reduce((sum, c) => sum + c.money, 0)
-    + s.shops.filter(shop => !e.companies.some(c => c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
+    + s.shops.filter(shop => !e.companies.some(c => c.shopBindingReleasedAt === undefined && c.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0)
     + e.companies.reduce((sum, c) => sum + c.capital, 0) + e.organizations.reduce((sum, org) => sum + org.funds, 0)
     + (s.playerLabor?.job?.escrow ?? 0)
     + (s.roadworks?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.education?.course?.escrow ?? 0)
+    + familyEducationHeldCash(s)
     + (s.power?.repairs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + shopLifecycleHeldCash(s)
@@ -244,6 +250,9 @@ try {
   for (let tick = 0; tick < ticks; tick++) {
     sim.step(.25);
     if (tick % 1000 === 0) sim.setFocus(world.districts[Math.floor(tick / 1000) % world.districts.length].center, tick % 2000 === 0 ? 'walk' : 'drone');
+    // Read-only progress for long real runs; it changes no simulation state,
+    // original guards, sample schedule, terminal save or continuation checks.
+    if ((tick + 1) % 100 === 0) console.log(JSON.stringify({ kind: 'progress', tick: sim.state.tick, requestedTicks: ticks, elapsedGameMinutes: extension().lastUpdate - initialMinute, alive: sim.state.citizens.filter(person => extension().actorProfiles[person.id].alive).length, treasury: sim.state.treasury }));
     const dayTicks = 1440 / (.25 * speed);
     if ([1000, 3000, 5000, 7000, ticks].includes(sim.state.tick) || sim.state.tick % dayTicks === 0) {
       const sample = snapshot(); snapshots.push(sample);

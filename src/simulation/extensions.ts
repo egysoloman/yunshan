@@ -1,7 +1,7 @@
 import { claimFundedActorWork } from './funded-work';
 import { powerHasCapacityRoom, powerSupplyAt } from './power';
 import type { Simulation } from '../simulation';
-import { shopLifecycleMayIncorporate, shopLifecycleAllowsOperation } from './shop_lifecycle';
+import { shopLifecycleMayIncorporate, shopLifecycleCanFundIncorporation, shopLifecycleBindCompany, shopLifecycleAllowsShareholding, shopLifecycleAllowsSpaceUse, shopLifecycleAllowsOperation } from './shop_lifecycle';
 import { canAccessFloor, getFloorDimensions } from '../access';
 import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody } from '../architecture-floor-plan';
 import { getWalkHeight } from '../world';
@@ -138,7 +138,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
   const tech = (sector: Sector) => ext().technologies.find(t => t.sector === sector)!;
   const refreshOwner = (company: Company) => { const holders = Object.entries(company.shareholders).filter(([id, n]) => id !== 'exchange' && n > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])); if (holders[0]) company.ownerId = holders[0][0]; };
   const payActor = (id: string, amount: number) => { if (id === 'player') state().player.money = clamp(state().player.money + amount, 0, 1e9); else { const c = citizens().get(id); if (c) c.money = clamp(c.money + amount, 0, 1e9); } };
-  const incorporate = (shop: typeof simulation.state.shops[number], owner: string) => { const retained = Math.min(shop.cash ?? 0, simulation.shopProtectedFunds(shop)); const returned = (shop.cash ?? 0) - retained; if (shop.ownerId && returned > 0) payActor(shop.ownerId, returned); shop.cash = 0; shop.ownerId = owner; return retained; };
+  const incorporate = (shop: typeof simulation.state.shops[number], owner: string, company: Company) => { const bound = shopLifecycleBindCompany(simulation, shop, company); if (bound !== null) return bound; const retained = Math.min(shop.cash ?? 0, simulation.shopProtectedFunds(shop)); const returned = (shop.cash ?? 0) - retained; if (shop.ownerId && returned > 0) payActor(shop.ownerId, returned); shop.cash = 0; shop.ownerId = owner; return retained; };
   const createCase = (npcId: string, amount: number, evidence: number): AuditCase | null => {
     const e = ext(), existing = e.audits.find(a => a.npcId === npcId && ['suspected', 'reported', 'investigating'].includes(a.status));
     if (existing) { existing.evidence = clamp(existing.evidence + evidence); existing.diverted = Math.max(existing.diverted, amount); return existing; }
@@ -232,7 +232,14 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     if (!TECHNOLOGY_SECTORS.some(sector => { const job = ext().runtime.researchJobs[sector]; return job?.laborVersion === 1 && job.actorId === worker.id && job.siteId === worker.workId; })) return;
     const windows = researchWorkWindows.get(worker.id) ?? []; windows.push({ startAt: event.creditedWorkStartAt, endAt: event.creditedWorkEndAt, siteId: worker.workId }); researchWorkWindows.set(worker.id, windows);
   });
+  // Loading observes historical bytes. Activate labor metadata only on real
+  // progress or after accepting a new research investment.
+  const activateResearchLabor = () => {
+    const runtime = ext().runtime;
+    if (runtime.researchLaborVersion === undefined) { runtime.researchLaborVersion = 1; runtime.legacyResearchSectors = Object.keys(runtime.researchJobs) as Sector[]; }
+  };
   simulation.onPhase('time', (_s, minutes) => {
+    if (minutes > 0) activateResearchLabor();
     ext().lastUpdate += minutes; researchWorkWindows.clear(); researchPhaseMinutes = finite(minutes) ? Math.max(0, minutes) : 0; researchPhaseClock = ext().lastUpdate; researchPhaseTick = state().tick;
     // A real active activity may complete and clear its pointer later this same
     // phase. It still used this actor; terminal history does not latch next tick.
@@ -309,6 +316,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     const e = ext();
     if (e.lastUpdate + 1e-7 >= e.runtime.nextLedgerAt) { const delta = s.treasury - e.runtime.lastTreasury; if (Math.abs(delta) > .000001) record('player', delta, delta > 0 ? '城市税收与公共收入' : '城市公共运转支出', world.districts[0].id); e.runtime.lastTreasury = s.treasury; e.runtime.nextLedgerAt = e.lastUpdate + 60; }
     for (const company of e.companies) {
+      if (company.shopBindingReleasedAt !== undefined) continue;
       const shop = s.shops.find(shop => shop.buildingId === company.buildingId)!; const cursor = e.runtime.companyCursors[company.id];
       const revenue = shop.revenue - cursor.revenue, profit = shop.profit - cursor.profit;
       company.revenue = clamp(company.revenue + revenue, 0, 1e12); company.profit = clamp(company.profit + profit, -1e12, 1e12);
@@ -319,18 +327,18 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     for (const company of e.companies) company.marketShare = totalRevenue > 0 ? company.revenue / totalRevenue : 0;
     if (e.lastUpdate + 1e-7 >= e.runtime.nextCompanyAt) {
       e.runtime.nextCompanyAt = e.lastUpdate + 60;
-      for (const company of e.companies) if (company.profit > 0 && company.capital > 100 && simulation.shopPayrollDebt(s.shops.find(shop => shop.buildingId === company.buildingId)!) <= 1e-8) { const dividend = Math.min(Math.max(0, company.capital - simulation.shopProtectedFunds(s.shops.find(shop => shop.buildingId === company.buildingId)!)), company.capital * .01, company.profit * .003); for (const [actorId, shares] of Object.entries(company.shareholders)) if (actorId !== 'exchange') { const payout = dividend * shares / company.shares; company.capital -= payout; payActor(actorId, payout); if (payout > 0) simulation.emitEvent({ type: 'business-dividend', citizenId: actorId, shopId: s.shops.find(shop => shop.buildingId === company.buildingId)!.id, districtId: company.districtId, amount: payout }); } }
+      for (const company of e.companies) if (company.shopBindingReleasedAt === undefined && company.profit > 0 && company.capital > 100 && simulation.shopPayrollDebt(s.shops.find(shop => shop.buildingId === company.buildingId)!) <= 1e-8) { const dividend = Math.min(Math.max(0, company.capital - simulation.shopProtectedFunds(s.shops.find(shop => shop.buildingId === company.buildingId)!)), company.capital * .01, company.profit * .003); for (const [actorId, shares] of Object.entries(company.shareholders)) if (actorId !== 'exchange') { const payout = dividend * shares / company.shares; company.capital -= payout; payActor(actorId, payout); if (payout > 0) simulation.emitEvent({ type: 'business-dividend', citizenId: actorId, shopId: s.shops.find(shop => shop.buildingId === company.buildingId)!.id, districtId: company.districtId, amount: payout }); } }
       for (const org of e.organizations) if (org.kind === 'charity' && org.funds >= 10) { const needy = s.citizens.filter(c => e.actorProfiles[c.id].alive && c.money < 80).sort((a, b) => a.money - b.money).slice(0, 8); const spending = Math.min(org.funds, needy.length * 10); if (needy.length) { org.funds -= spending; for (const c of needy) { c.money += spending / needy.length; e.actorProfiles[c.id].stress = clamp(e.actorProfiles[c.id].stress - 3); } e.institutions.welfare = clamp(e.institutions.welfare + spending * .002); record('player', -spending, '互助社实际救济', world.districts[0].id, 'household'); } }
       // Skills and accumulated resources open actual opportunities to residents,
       // rather than permanently reserving enterprise and science for the player.
       for (const c of s.citizens) {
         const profile = e.actorProfiles[c.id], workplace = buildings.get(c.workId)!;
         if (!profile.alive) continue;
-        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: ['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler', identities: [['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler'] }) && (workplace.kind !== 'market' || shopLifecycleMayIncorporate(s, s.shops.find(shop => shop.buildingId === workplace.id)!, c.id)) && !e.companies.some(company => company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
+        if (['工人', '农民', 'merchant', '商人'].includes(c.role) && c.money >= 750 && profile.skill >= 45 && (c.education ?? 0) >= 1 && ['market', 'workshop', 'farm', 'dock'].includes(workplace.kind) && !workplace.facility && simulation.isNearBuilding(workplace, c.position) && atFunctionPoint(workplace, 'work', c.position, { role: ['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler', identities: [['merchant', '商人'].includes(c.role) ? 'merchant' : 'traveler'] }) && (workplace.kind !== 'market' || shopLifecycleMayIncorporate(s, s.shops.find(shop => shop.buildingId === workplace.id)!, c.id)) && shopLifecycleCanFundIncorporation(simulation, s.shops.find(shop => shop.buildingId === workplace.id)!, c.id, 200) && !e.companies.some(company => company.shopBindingReleasedAt === undefined && company.buildingId === workplace.id || company.ownerId === c.id) && e.companies.length < 128) {
           c.money -= 250; publicFunds(c.id, 50, '居民创业登记费', workplace.districtId);
           const shop = s.shops.find(shop => shop.buildingId === workplace.id)!;
           const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${c.name}百工商社`, ownerId: c.id, buildingId: workplace.id, districtId: workplace.districtId, capital: 200, shares: 1000, sharePrice: .5, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { [c.id]: 1000 }, foundedAt: e.lastUpdate, parentId: null };
-          company.capital += incorporate(shop, c.id); e.companies.push(company); simulation.transferBusinessOwnership(shop.id, c.id); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit }; c.role = 'merchant'; if (!profile.historyTags.includes('自主创业')) profile.historyTags.push('自主创业'); notice('company', `${c.name}凭技能与积蓄创办${company.name}，登记和资本均由本人实际支付。`, c.districtId);
+          company.capital += incorporate(shop, c.id, company); e.companies.push(company); simulation.transferBusinessOwnership(shop.id, c.id); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit }; c.role = 'merchant'; if (!profile.historyTags.includes('自主创业')) profile.historyTags.push('自主创业'); notice('company', `${c.name}凭技能与积蓄创办${company.name}，登记和资本均由本人实际支付。`, c.districtId);
         }
         // A personally funded project costs 200; retain 100 for food and care.
         // Residents first meet their current hunger/rest needs before investing.
@@ -386,7 +394,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
   });
   simulation.onEvent('wage-earned', event => {
     if (!event.shopId || !(event.minutes && event.minutes > 0)) return;
-    const shop = state().shops.find(shop => shop.id === event.shopId), company = shop && ext().companies.find(company => company.buildingId === shop.buildingId), job = company && ext().runtime.constructionJobs?.[company.id];
+    const shop = state().shops.find(shop => shop.id === event.shopId), company = shop && ext().companies.find(company => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId), job = company && ext().runtime.constructionJobs?.[company.id];
     if (!shop || !company || !job || job.completedAt !== null) return;
     const worker = state().citizens.find(worker => worker.id === event.citizenId), site = buildings.get(shop.buildingId)!;
     if (!worker || worker.workId !== site.id || worker.state !== 'working' || !simulation.isNearBuilding(site, worker.position, 2)) return;
@@ -407,14 +415,15 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       if (!role('merchant')) return fail('需要商人经营资格。');
       if (!b) return fail('请到商业设施现场登记公司。');
       if (capital === null) return fail('初始资本须为300至100000的整数。');
-      if (e.companies.some(c => c.buildingId === b.id) || e.companies.length >= 128) return fail('此处已有公司或公司数量达到上限。');
+      if (e.companies.some(c => c.shopBindingReleasedAt === undefined && c.buildingId === b.id) || e.companies.length >= 128) return fail('此处已有公司或公司数量达到上限。');
       if (p.money < capital + 50) return fail('现金不足：资本之外另需50文登记费。');
       const shop = s.shops.find(shop => shop.buildingId === b.id);
       if (!shop || b.facility) return fail('公共科研与政务设施不能登记为私营公司。');
-      if (b.kind === 'market' && !shopLifecycleMayIncorporate(s, shop, 'player')) return fail('需先依法取得原经营资产；在租经营或已有生命周期合同不得改公司壳绕过义务。');
+      if (b.kind === 'market' && !shopLifecycleMayIncorporate(s, shop, 'player')) return fail('需先依法取得原经营资产或有效租赁经营权；登记保留原租约、工资债与修缮义务。');
+      if (!shopLifecycleCanFundIncorporation(simulation, shop, 'player', capital)) return fail('原权利、资本或登记回执容量不足，登记全部拒绝。');
       p.money -= capital + 50; publicFunds('player', 50, '公司登记费', b.districtId);
       const company: Company = { id: `company-${e.nextCompanyId++}`, name: `${b.name}商社`, ownerId: 'player', buildingId: b.id, districtId: b.districtId, capital, shares: 1000, sharePrice: (capital + 300) / 1000, listed: false, employees: shop.employees, inventory: shop.inventory, revenue: 0, profit: 0, level: 1, marketShare: 0, shareholders: { player: 1000 }, foundedAt: e.lastUpdate, parentId: null };
-      company.capital += incorporate(shop, 'player'); e.companies.push(company); simulation.transferBusinessOwnership(shop.id, 'player'); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit };
+      company.capital += incorporate(shop, 'player', company); e.companies.push(company); simulation.transferBusinessOwnership(shop.id, 'player'); e.runtime.companyCursors[company.id] = { revenue: shop.revenue, profit: shop.profit };
       return success(`已创办${company.name}，投入${capital}文资本、50文登记费，持有全部1000股。`);
     }
     if (['expandCompany', 'hire', 'listCompany', 'buyShares', 'sellShares', 'acquireCompany'].includes(command.type)) {
@@ -424,6 +433,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       if (['expandCompany', 'hire', 'listCompany', 'acquireCompany'].includes(command.type) && !role('merchant')) return fail('需要商人经营资格。');
       if (['expandCompany', 'hire', 'listCompany'].includes(command.type) && !controlled(company)) return fail('需要持有公司过半股权。');
       if (['expandCompany', 'hire', 'acquireCompany'].includes(command.type) && !nearby(['market', 'workshop', 'farm', 'dock'], company.buildingId, [], 'work')) return fail('请到目标公司的经营场所。');
+      if (['expandCompany', 'hire'].includes(command.type) && (company.shopBindingReleasedAt !== undefined || !shopLifecycleAllowsSpaceUse(s, shop.id))) return fail('公司仍保有资本和债务，但原租赁经营场地许可已终止，不能在此扩建或雇用。');
       if (['listCompany', 'buyShares', 'sellShares'].includes(command.type) && !nearby(['bank'], undefined, [], 'service')) return fail('请到钱庄办理上市与股权交易。');
       if (command.type === 'expandCompany') {
         const investment = amount(300, 100, 50000);
@@ -455,6 +465,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       }
       if (command.type === 'listCompany') {
         if (company.listed || company.level < 2 || company.capital < 600 || p.money < 200) return fail('上市要求2级、600文公司资本和200文登记费，且不能重复上市。');
+        if (!shopLifecycleAllowsShareholding(s, company, company.shareholders, company.shares + Math.floor(company.shares / 4))) return fail('增发不能未经出租人同意转移原承租人控制权。');
         p.money -= 200; publicFunds('player', 200, '公司上市登记费', company.districtId);
         const issued = Math.floor(company.shares / 4); company.shares += issued; company.shareholders.exchange = issued; company.listed = true; company.sharePrice = clamp((company.capital + company.level * 300) / company.shares, .05, 1e6);
         return success(`${company.name}公开增发${issued}股，交易库存由交易所托管。`);
@@ -467,7 +478,8 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
           if ((company.shareholders.exchange ?? 0) < count || p.money < cost || company.capital + cost > 1e9) return fail('交易所股数、现金或资本额度不足。');
           p.money -= cost; company.capital += cost; company.shareholders.exchange -= count; company.shareholders.player = (company.shareholders.player ?? 0) + count;
         } else {
-          if ((company.shareholders.player ?? 0) < count || company.capital - simulation.shopProtectedFunds(shop) < cost || p.money + cost > 1e9) return fail('持股或公司回购现金不足。');
+          if (!shopLifecycleAllowsShareholding(s, company, { ...company.shareholders, player: company.shareholders.player - count })) return fail('原个人租约仍须承租人保有过半控制权；转租需先另行取得出租人同意。');
+          if ((company.shareholders.player ?? 0) < count || company.capital - (company.shopBindingReleasedAt === undefined ? simulation.shopProtectedFunds(shop) : 0) < cost || p.money + cost > 1e9) return fail('持股或公司回购现金不足。');
           if (count === company.shareholders.player && !Object.entries(company.shareholders).some(([id, holding]) => id !== 'player' && id !== 'exchange' && holding > 0)) return fail('公司需要真实持股经营负责人，出售最后一股前须将管理股权转给其他居民。');
           company.shareholders.player -= count; company.shareholders.exchange = (company.shareholders.exchange ?? 0) + count; company.capital -= cost; p.money += cost;
         }
@@ -480,6 +492,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       while (ancestor?.parentId) { if (ancestor.parentId === company.id) return fail('集团不能形成循环控股。'); ancestor = e.companies.find(c => c.id === ancestor!.parentId); }
       const shares = company.shares - (company.shareholders.player ?? 0), cost = shares * company.sharePrice * 1.2;
       if (p.money < cost) return fail(`收购需要${cost.toFixed(1)}文现金。`);
+      if (!shopLifecycleAllowsShareholding(s, company, { player: company.shares })) return fail('收购不能绕过原承租人及出租人的现场租约许可。');
       p.money -= cost;
       for (const [id, quantity] of Object.entries(company.shareholders)) if (id !== 'player' && quantity) { const proceeds = quantity * company.sharePrice * 1.2; if (id === 'exchange') company.capital = clamp(company.capital + proceeds, 0, 1e9); else payActor(id, proceeds); }
       company.shareholders = { player: company.shares }; company.ownerId = 'player'; company.parentId = parent.id; record('player', cost, '公司并购股权支付', company.districtId, 'company');
@@ -494,6 +507,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       const t = tech(sector);
       if (e.runtime.researchJobs[sector] || t.level >= 20 || p.money < budget) return fail('研究正在运行、等级达到上限或预算现金不足。');
       const job = beginResearchJob('player', b, budget), reason = researchLaborReason(sector, job); if (reason) return fail(reason);
+      activateResearchLabor();
       p.money -= budget; publicFunds('player', budget, `${sectorNames[sector]}科研投入`, b.districtId); t.funding = budget; t.progress = 0; e.runtime.researchJobs[sector] = job;
       return success(`${sectorNames[sector]}研究已投入${budget}文，需在原实验室累计120分钟有效劳动，离场暂停；收益与副作用将影响城市。`);
     }
@@ -616,7 +630,9 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
     const companies = array(value.companies, 128, 'companies'), companyIds = new Set<string>(), companyBuildings = new Set<string>();
     for (const c of companies) {
       ensure(dictionary(c), 'company'); str(c.id, 'company id', 80); ensure(/^company-[1-9][0-9]*$/.test(c.id) && !companyIds.has(c.id) && Number(c.id.slice(8)) < value.nextCompanyId, 'company identity/counter'); companyIds.add(c.id);
-      const b = buildings.get(c.buildingId); ensure(b && ['market', 'workshop', 'farm', 'dock'].includes(b.kind) && c.districtId === b.districtId && !companyBuildings.has(c.buildingId), 'company facility'); companyBuildings.add(c.buildingId);
+      const b = buildings.get(c.buildingId); ensure(b && ['market', 'workshop', 'farm', 'dock'].includes(b.kind) && c.districtId === b.districtId && (c.shopBindingReleasedAt !== undefined || !companyBuildings.has(c.buildingId)), 'company facility'); if (c.shopBindingReleasedAt === undefined) companyBuildings.add(c.buildingId);
+      if (c.shopBindingReleasedAt !== undefined) { num(c.shopBindingReleasedAt, c.foundedAt, value.lastUpdate, 'company site release'); ensure(typeof c.shopBindingId === 'string' && c.inventory === 0 && c.employees === 0, 'released company keeps capital and shares but no shop stock or staff mirrors'); }
+      if (c.shopBindingId !== undefined) ensure(typeof c.shopBindingId === 'string' && candidate.shops.some(shop => shop.id === c.shopBindingId && shop.buildingId === c.buildingId), 'company shop binding');
       str(c.name, 'company name'); ensure(actorIds.has(c.ownerId), 'company owner'); ensure(typeof c.listed === 'boolean', 'listing');
       num(c.capital, 0, 1e9, 'capital'); num(c.shares, 1, 1e8, 'shares', true); num(c.sharePrice, .05, 1e6, 'share price'); num(c.employees, 0, 100, 'employees', true); num(c.inventory, 0, 10000, 'company inventory'); num(c.revenue, 0, 1e12, 'revenue'); num(c.profit, -1e12, 1e12, 'profit'); num(c.level, 1, 20, 'company level', true); num(c.marketShare, 0, 1, 'market share'); num(c.foundedAt, 0, value.lastUpdate, 'company founded');
       const holders = object(c.shareholders, actorIds.size + 1, 'shareholders'); let shares = 0;
@@ -685,8 +701,6 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
   });
   simulation.onLoad(() => {
     citizens(); if (!state().extension) state().extension = initialize();
-    const runtime = ext().runtime;
-    if (runtime.researchLaborVersion === undefined) { runtime.researchLaborVersion = 1; runtime.legacyResearchSectors = Object.keys(runtime.researchJobs) as Sector[]; }
     researchWorkWindows.clear(); researchPhaseMinutes = 0; researchPhaseClock = -1; researchPhaseTick = -1; researchPlayerPhaseConflict = '';
   });
   return observeResearchLabor;

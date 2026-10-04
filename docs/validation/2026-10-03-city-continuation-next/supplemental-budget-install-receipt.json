@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-04T00:53:13.607665+00:00",
+  "before": {
+    "src/simulation/supplemental-budget.ts": null,
+    "src/simulation/culture.ts": "9f7a4f3f9973a8dbb9b472247de406921389489b0a4c51d638d5885feab4e925",
+    "src/simulation.ts": "9d06a11295fee68170530f2fc0a810a57c7f1f13f228eab0d087f8fb4dc139c2",
+    "src/ui.ts": "35680210df04603300de63e422930259fdff72e8719cdd8baf13238ea9bb1bbf",
+    "tests/supplemental-budget.test.ts": null
+  },
+  "after": {
+    "src/simulation/supplemental-budget.ts": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0",
+    "src/simulation/culture.ts": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa",
+    "src/simulation.ts": "be7ef7f43e132c90a1fad2b9d94ed706dfc104bc88f1cb7220d112a6c0cd14de",
+    "src/ui.ts": "505a9aea29dbfe1b2feb74b30c9befd2b68c3a92013eecba875a7484b1937aab",
+    "tests/supplemental-budget.test.ts": "19beeacb81cbab243278a0985bf1ffe3c9c45134c45f6c54150d3a1bd85f54ec"
+  },
+  "patches": {
+    "runtime.patch": "2260bd8bd737f8f2acdd74469cc835bd5b79586c5f1befd9137bf94e69d80881",
+    "core-two-hunks.patch": "b3312d943f604c177d2865d36b8c5c127d70007984a9f4487f6be03592823970",
+    "municipal-ui.patch": "6fb88bb8319eaaf4b3d26d74714f6a93c3b538d1538e08e532ce0d707090de28",
+    "new-tests.patch": "492b81fba115bd9c5b3a211db1079933298344a2f36de6bd00be4b64ca5029b4"
+  },
+  "checksBeforeMutation": true,
+  "note": "Narrow hunks retain family fee, commercial v6, police and certified hygiene interfaces. Prior multi-patch attempt installed only family bornAt and final family UI then failed market UI context; no market mutation detected."
+}

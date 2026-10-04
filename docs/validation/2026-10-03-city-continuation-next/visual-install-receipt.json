@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-03T23:39:28.823165+00:00",
+  "files": [
+    {
+      "path": "src/renderer.ts",
+      "baselineSHA256": "817f1a7462d51222ff7b98932e8046045b4e4f41a3c53d43c7056d13458e2426",
+      "candidateSHA256": "e1112d8271151803c898ff8ffd7d6db545907843e1a7210d30d1c1ae6101068d",
+      "baselineBytes": 85213,
+      "candidateBytes": 92851,
+      "baselineSourcePath": "/workspace/yunshan-work/visual-environment-recovery-20261003-01/baseline-files/src/renderer.ts",
+      "candidateSourcePath": "/workspace/yunshan-work/visual-environment-recovery-20261003-01/source/src/renderer.ts"
+    },
+    {
+      "path": "src/rendering/terrain.ts",
+      "baselineSHA256": "dc38bb8db71aba80bcd5d227731873abb906a9d12dbd5d546ea259594402ae85",
+      "candidateSHA256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+      "baselineBytes": 36690,
+      "candidateBytes": 37882,
+      "baselineSourcePath": "/workspace/yunshan-work/visual-environment-recovery-20261003-01/baseline-files/src/rendering/terrain.ts",
+      "candidateSourcePath": "/workspace/yunshan-work/visual-environment-recovery-20261003-01/source/src/rendering/terrain.ts"
+    }
+  ],
+  "sourceRecovery": "exact SHA match to formerly observed source; previous PNG/raw lost, newly rerun originals preserved in workspace",
+  "newValidation": "build+21 rules and same6 before/after views PASS; original11-browser still running in candidate",
+  "referenceArt": "FAIL",
+  "integrationValidation": "pending"
+}

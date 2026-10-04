@@ -22,6 +22,8 @@ export function collectActorActivityClaims(state: SimState): ActorActivityClaim[
   };
   for (const course of [...(state.education?.history ?? []), ...(state.education?.course ? [state.education.course] : [])])
     add({ id: 'education:' + course.id, actorId: course.actorId, startedAt: course.startedAt, endedAt: course.completedAt ?? course.cancelledAt ?? now, workedMinutes: course.workedMinutes });
+  for (const course of [...(state.familyEducation?.pages.flat() ?? []), ...(state.familyEducation?.active ?? [])])
+    add({ id: 'family-education:' + course.id, actorId: course.actorId, startedAt: course.startedAt, endedAt: course.completedAt ?? course.cancelledAt ?? now, workedMinutes: course.workedMinutes });
   const jobs = state.extension && Reflect.get(state.extension, 'runtime')?.researchJobs;
   for (const [sector, job] of Object.entries(jobs ?? {}) as [string, { laborVersion?: number; actorId: string; startedAt: number; workedMinutes: number }][])
     if (job.laborVersion === 1) add({ id: 'research:' + sector + ':' + job.startedAt, actorId: job.actorId, startedAt: job.startedAt, endedAt: now, workedMinutes: job.workedMinutes });

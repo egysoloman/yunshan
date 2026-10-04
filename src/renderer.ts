@@ -14,7 +14,7 @@ import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
-const PALETTE = { wall: '#d2c6aa', stone: '#8a948d', wood: '#564739', roof: '#355b58', glass: '#5c9399', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40' };
+const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
@@ -30,7 +30,7 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 class BoxBatch {
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
-  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building: string; floor?: number; roof?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
+  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
     if (sx <= 0 || sy <= 0 || sz <= 0) return;
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), rotation), new THREE.Vector3(sx, sy, sz));
     const list = this.parts.get(key) ?? [];
@@ -68,6 +68,9 @@ class BoxBatch {
       // authoritative roof tag enables tile relief; the scalar shares the
       // resident geometry's lifetime and introduces no per-tile instances.
       if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? 1 : 0)), 1));
+      // Only existing building panes receive lattice/illumination. Transport
+      // windscreens share the glass material but carry a zero surface flag.
+      if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -109,6 +112,7 @@ export class CityRenderer implements CityRendererAPI {
   private sun = new THREE.DirectionalLight('#ffeac4', 2.3);
   private moon = new THREE.DirectionalLight('#a5c6e7', .16);
   private fill = new THREE.HemisphereLight('#a3d5dc', '#475747', 1.7);
+  private groundBounce = new THREE.DirectionalLight('#d3d5b2', .35);
   private interiorLights = [new THREE.PointLight('#ffe5b5', 1900, 160, 2), new THREE.PointLight('#ffe5b5', 1900, 160, 2)];
   private sunOrb: THREE.Mesh;
   private moonOrb: THREE.Mesh;
@@ -140,7 +144,7 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.setClearColor('#a9ccd1');
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.15;
+    this.renderer.toneMappingExposure = 1.02;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
@@ -151,21 +155,55 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
-    this.materials = Object.fromEntries(Object.keys(PALETTE).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : .83, metalness: key === 'glass' ? .32 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
-    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v${key === 'wood' ? 4 : 3}`; this.materials[key].onBeforeCompile = shader => {
-      shader.vertexShader = 'varying vec3 vArchitecture;\n' + shader.vertexShader;
+    this.materials = Object.fromEntries(Object.keys(PALETTE).filter(key => key !== 'metal' || this.world.buildings.some(site => site.commercialGeometryRevision === 1)).map(key => [key, new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: key === 'glass' ? .25 : key === 'metal' ? .42 : .83, metalness: key === 'glass' ? .32 : key === 'metal' ? .72 : .05, emissive: key === 'cyan' ? '#66dccf' : key === 'amber' ? '#ffb05a' : '#000000', emissiveIntensity: key === 'cyan' ? .4 : key === 'amber' ? .7 : 0 })])) as Record<MaterialKey, THREE.MeshStandardMaterial>;
+    for (const key of ['wall', 'wood', 'stone'] as const) { this.materials[key].customProgramCacheKey = () => `yunshan-architecture-${key}-v5`; this.materials[key].onBeforeCompile = shader => {
+      shader.vertexShader = 'varying vec3 vArchitecture;varying vec3 vArchitectureNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
         vec4 architecture=vec4(transformed,1.0);
         #ifdef USE_INSTANCING
         architecture=instanceMatrix*architecture;
         #endif
-        vArchitecture=(modelMatrix*architecture).xyz;`);
-      shader.fragmentShader = 'varying vec3 vArchitecture;\n' + shader.fragmentShader;
+        vArchitecture=(modelMatrix*architecture).xyz;
+        vec3 architectureNormal=normal;
+        #ifdef USE_INSTANCING
+        architectureNormal=mat3(instanceMatrix)*architectureNormal;
+        #endif
+        vArchitectureNormal=normalize(mat3(modelMatrix)*architectureNormal);`);
+      shader.fragmentShader = 'varying vec3 vArchitecture;varying vec3 vArchitectureNormal;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
         vec3 grainCell=floor(vArchitecture*5.0);
         float pigment=fract(sin(dot(grainCell,vec3(12.9898,78.233,39.425)))*43758.5453);
-        diffuseColor.rgb*=.97+pigment*.06;
-        ${key === 'stone' ? 'float joint=step(.97,fract(vArchitecture.y*2.5));diffuseColor.rgb*=1.0-joint*.09;' : key === 'wood' ? 'diffuseColor.rgb*=.98+sin(vArchitecture.y*36.0+vArchitecture.x*3.0)*.025;' : ''}`);
+        float pigmentDetail=1.0-smoothstep(.2,1.0,length(fwidth(vArchitecture)));
+        diffuseColor.rgb*=mix(1.0,.96+pigment*.08,pigmentDetail);
+        ${key === 'wood' ? `
+          float timberGrain=sin(vArchitecture.y*31.0+sin(vArchitecture.x*2.7)*1.4);
+          diffuseColor.rgb*=mix(1.0,.96+timberGrain*.045,pigmentDetail);
+          if(vArchitectureNormal.y<-.5)diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.26,.155,.085),.3);` : ''}`);
+      if (key === 'stone') {
+        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
+          // The existing stone solids retain their dimensions. Metric joints
+          // supply human-scale .8/.6m paving and 1.2/.4m masonry, with derivative
+          // filtering; this is surface relief, not another floor or collision.
+          bool paving=vArchitectureNormal.y>.55;
+          vec2 stoneMetric=paving?vArchitecture.xz:abs(vArchitectureNormal.z)>.5?vArchitecture.xy:vArchitecture.zy;
+          vec2 stoneSize=paving?vec2(.8,.6):vec2(1.2,.4);
+          float course=floor(stoneMetric.y/stoneSize.y);
+          vec2 stoneUv=vec2(stoneMetric.x+mod(course,2.0)*stoneSize.x*.5,stoneMetric.y)/stoneSize;
+          vec2 stonePixel=max(fwidth(stoneUv),vec2(.001));
+          vec2 stoneEdge=min(fract(stoneUv),1.0-fract(stoneUv))*stoneSize;
+          float stoneDetail=1.0-smoothstep(.28,.85,max(stonePixel.x,stonePixel.y));
+          float joint=(1.0-smoothstep(.009,.021+max(stonePixel.x*stoneSize.x,stonePixel.y*stoneSize.y),min(stoneEdge.x,stoneEdge.y)))*stoneDetail;
+          float blockTone=fract(sin(dot(floor(stoneUv),vec2(23.13,91.7)))*18317.4);
+          diffuseColor.rgb*=mix(1.0,.92+blockTone*.14,stoneDetail);
+          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.16,.19,.17),joint*.34);
+          float stoneRelief=-joint*.004;`);
+        shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+          vec3 stoneDx=dFdx(-vViewPosition),stoneDy=dFdy(-vViewPosition);
+          vec3 stoneR1=cross(stoneDy,normal),stoneR2=cross(normal,stoneDx);
+          float stoneDet=dot(stoneDx,stoneR1)*faceDirection;
+          vec3 stoneGrad=dFdx(stoneRelief)*stoneR1+dFdy(stoneRelief)*stoneR2;
+          if(abs(stoneDet)>1e-10)normal=normalize(abs(stoneDet)*normal-sign(stoneDet)*stoneGrad);`);
+      }
       if (key === 'wood') {
         shader.vertexShader = 'attribute vec4 instanceFacade;varying vec4 vCabinet;varying vec3 vCabinetPosition;varying vec3 vCabinetNormal;\n' + shader.vertexShader;
         shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvCabinet=instanceFacade;vCabinetPosition=position;vCabinetNormal=normal;');
@@ -230,7 +268,45 @@ export class CityRenderer implements CityRendererAPI {
         shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=proxyWindow*facadeNight*vec3(.40,.27,.13);');
       }
     }; }
-    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v2';
+    this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
+    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v1';
+    this.materials.glass.onBeforeCompile = shader => {
+      shader.uniforms.facadeNight = this.facadeNight;
+      shader.vertexShader = 'attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+        vec3 windowScale=vec3(1.0);vec3 windowOrigin=vec3(0.0);
+        #ifdef USE_INSTANCING
+        windowScale=vec3(length(instanceMatrix[0].xyz),length(instanceMatrix[1].xyz),length(instanceMatrix[2].xyz));
+        windowOrigin=instanceMatrix[3].xyz;
+        #endif
+        vWindowMetric=(position+.5)*windowScale;vWindowExtent=windowScale;vWindowNormal=normal;vWindowSurface=instanceWindowSurface;
+        vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);`);
+      shader.fragmentShader = 'uniform float facadeNight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
+      shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
+        float windowPane=0.0,windowWarmth=0.0;
+        if(vWindowSurface>.5 && abs(vWindowNormal.y)<.5 && min(vWindowExtent.x,vWindowExtent.z)<.5){
+          bool windowFront=abs(vWindowNormal.z)>.5;
+          vec2 paneMetric=windowFront?vWindowMetric.xy:vWindowMetric.zy;
+          vec2 paneExtent=windowFront?vWindowExtent.xy:vWindowExtent.zy;
+          vec2 panePixel=max(fwidth(paneMetric),vec2(.002));
+          float paneDetail=1.0-smoothstep(.09,.32,max(panePixel.x,panePixel.y));
+          vec2 paneEdge=min(paneMetric,paneExtent-paneMetric);
+          float frame=1.0-smoothstep(.045,.07+max(panePixel.x,panePixel.y),min(paneEdge.x,paneEdge.y));
+          vec2 latticeCell=paneMetric/vec2(.4,.6);
+          vec2 latticeEdge=min(fract(latticeCell),1.0-fract(latticeCell))*vec2(.4,.6);
+          float lattice=1.0-smoothstep(.015,.033+max(panePixel.x,panePixel.y),min(latticeEdge.x,latticeEdge.y));
+          float timber=max(frame,lattice)*paneDetail;
+          windowPane=1.0-timber;
+          windowWarmth=mix(.24,1.0,step(.34,vWindowSeed));
+          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.18,.115,.063),timber*.92);
+          diffuseColor.rgb*=1.0-(1.0-paneMetric.y/max(.2,paneExtent.y))*.18*windowPane;
+          // Illumination follows existing night/energy state. Its static per
+          // pane variation is decorative; it does not invent room occupancy.
+          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.46,.30,.13),facadeNight*windowWarmth*windowPane*.34);
+        }`);
+      shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(.48,.27,.095);');
+    };
+    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v3';
     this.materials.roof.onBeforeCompile = shader => {
       shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
@@ -242,7 +318,18 @@ export class CityRenderer implements CityRendererAPI {
       shader.fragmentShader = 'varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
         float roofRelief=0.0;
-        if(vRoofSurface>.5 && abs(vRoofNormal.y)>.18){
+        if(vRoofSurface>.5 && vRoofNormal.y<-.18){
+          // Roof undersides remain opaque and keep the same solid silhouette.
+          // Timber albedo and shallow beam joints receive the real hemisphere
+          // bounce instead of turning a near eave into a black screen block.
+          vec2 soffitMetric=vRoofMetric.xz;
+          vec2 soffitPixel=max(fwidth(soffitMetric),vec2(.002));
+          vec2 soffitEdge=min(fract(soffitMetric/vec2(.6,1.2)),1.0-fract(soffitMetric/vec2(.6,1.2)))*vec2(.6,1.2);
+          float soffitDetail=1.0-smoothstep(.12,.45,max(soffitPixel.x,soffitPixel.y));
+          float beam=(1.0-smoothstep(.035,.06+max(soffitPixel.x,soffitPixel.y),min(soffitEdge.x,soffitEdge.y)))*soffitDetail;
+          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.29,.18,.10),.9)*(1.0-beam*.28);
+          roofRelief=beam*.006;
+        }else if(vRoofSurface>.5 && abs(vRoofNormal.y)>.18){
           // .4m tile barrels run down the actual slope, with .6m laps. The
           // opposite gable axis uses the other horizontal coordinate; metric
           // scaling retains the same pattern through instancing and rotation.
@@ -267,7 +354,7 @@ export class CityRenderer implements CityRendererAPI {
         vec3 roofGrad=dFdx(roofRelief)*roofR1+dFdy(roofRelief)*roofR2;
         if(abs(roofDet)>1e-10)normal=normalize(abs(roofDet)*normal-sign(roofDet)*roofGrad);`);
     };
-    this.scene.add(this.sun, this.sun.target, this.moon, this.fill);
+    this.scene.add(this.sun, this.sun.target, this.moon, this.fill, this.groundBounce, this.groundBounce.target);
     for (const light of this.interiorLights) { light.visible = false; this.scene.add(light); }
     this.sun.position.set(-1100, 2200, 500); this.moon.position.set(1300, 1300, -900);
     this.scene.fog = new THREE.FogExp2('#a9ccd1', .00016);
@@ -685,7 +772,7 @@ export class CityRenderer implements CityRendererAPI {
     }
     for (const node of this.world.nodes) {
       const p = node.position;
-      if (node.station) { batch.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); batch.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { batch.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); batch.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } batch.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11); batch.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); batch.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
+      if (node.station) { batch.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); batch.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { batch.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); batch.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } batch.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); batch.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); batch.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
       else if (node.id.includes('junction') || node.id.includes('road')) { batch.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); }
     }
     const group = batch.build(undefined, 384);
@@ -813,6 +900,7 @@ export class CityRenderer implements CityRendererAPI {
     const body = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), bodyMat, capacity), head = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), headMat, capacity), trim = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), trimMat, capacity);
     for (const mesh of [body, head, trim]) {
       if (mesh.material === this.materials.roof) mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
+      if (mesh.material === this.materials.glass) mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(capacity), 1));
       mesh.count = 0; mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); mesh.frustumCulled = false; this.scene.add(mesh);
     }
     return { body, head, trim, capacity };
@@ -835,8 +923,15 @@ export class CityRenderer implements CityRendererAPI {
     const angle = (state.hour - 6) / 24 * Math.PI * 2, altitude = Math.sin(angle), daylight = THREE.MathUtils.smoothstep(altitude, -.12, .28), twilight = Math.max(0, 1 - Math.abs(altitude) * 4);
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
     this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, altitude * 1400); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
-    this.sun.intensity = daylight * 3.6; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .58 + daylight * .22;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#b9d3dd'), daylight); this.fill.groundColor.set('#344d4b').lerp(new THREE.Color('#4c5955'), daylight);
+    this.sun.intensity = daylight * 2.9; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .68 + daylight * .45;
+    this.fill.color.set('#89aec3').lerp(new THREE.Color('#bed5dd'), daylight); this.fill.groundColor.set('#405953').lerp(new THREE.Color('#7e8c7b'), daylight);
+    // A shadow-free low-angle bounce approximation lights actual opaque soffits
+    // and bridge undersides. It follows daylight, adds no hidden geometry, and
+    // leaves sun shadows and the original road/roof solids intact.
+    this.groundBounce.intensity = .035 + daylight * .35;
+    this.groundBounce.color.set('#8296a0').lerp(new THREE.Color('#d3d5b2'), daylight);
+    this.groundBounce.position.set(this.camera.position.x - 700, this.camera.position.y - 700, this.camera.position.z + 300);
+    this.groundBounce.target.position.copy(this.camera.position);
     const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#bdd7dd'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
     const top = new THREE.Color('#071822').lerp(new THREE.Color('#418daf'), daylight);
     this.skyMaterial.uniforms.top.value.copy(top); this.skyMaterial.uniforms.horizon.value.copy(horizon);
@@ -872,11 +967,11 @@ export class CityRenderer implements CityRendererAPI {
           const position = buildingWorldPosition(room, { x: point.x, y: plan.y + floorHeight * .68, z: point.z });
           light.position.set(position.x, position.y, position.z);
         } else light.position.set(room.position.x + (i ? 1 : -1) * dimension.width * .22, room.position.y + .6 + this.insideFloor * floorHeight + floorHeight * .68, room.position.z);
-        light.intensity = Math.max(90, dimension.width * 13) * energy; light.distance = Math.max(dimension.width, dimension.depth) * 1.25;
+        light.intensity = Math.max(90, dimension.width * 13) * energy * (1 - daylight * .3); light.distance = Math.max(dimension.width, dimension.depth) * 1.25;
       }
     }
-    this.materials.glass.transparent = true; this.materials.glass.opacity = .72; this.materials.glass.depthWrite = false;
-    this.materials.glass.emissive.set('#b49d6c'); this.materials.glass.emissiveIntensity = (1 - daylight) * .42;
+    this.materials.glass.transparent = true; this.materials.glass.opacity = .88; this.materials.glass.depthWrite = false;
+    this.materials.glass.emissive.set('#b49d6c'); this.materials.glass.emissiveIntensity = (1 - daylight) * .18;
     let signalIndex = 0;
     for (const node of this.world.nodes) if (node.station) {
       const p = node.position, phase = state.signals?.[node.id];

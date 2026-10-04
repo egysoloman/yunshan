@@ -52,7 +52,7 @@ test('v4 is a deterministic physical building opt-in while inheriting the comple
 });
 
 test('the six v4 building families join their real ground use points to the city entrance through shared walls', () => {
-  const world=createWorld(),ids=['west-b0','market-b0','workshop-b0','academy-b0','market-b3','river-b0'];
+  const world=createWorld(20261001,'current-v4'),ids=['west-b0','market-b0','workshop-b0','academy-b0','market-b3','river-b0'];
   for(const id of ids){const building=world.buildings.find(b=>b.id===id)!;assert(building.floorPlanProfile);const entrance=getBuildingEntrance(building);
     for(const point of building.functionPoints!.filter(p=>p.floor===0)){
       const route=findFloorPlanRoute(building,0,entrance,point.position,.35);assert(route&&route.length>=2,`${id}:${point.id} must be reachable through actual rooms`);
@@ -79,7 +79,7 @@ test('v4 upper courtyards and wings remove actual walking support instead of kee
 });
 
 test('an absent v4 upper wing exposes its real lower roof or open ground courtyard slab', () => {
-  const world=createWorld(),building=world.buildings.find(b=>b.id==='west-b0')!,floor=building.floors-1;
+  const world=createWorld(20261001,'current-v4'),building=world.buildings.find(b=>b.id==='west-b0')!,floor=building.floors-1;
   assert(floor>=2);const y=floor*building.height/building.floors;
   let room:Vec3|null=null,court:Vec3|null=null;
   for(let z=-building.depth/2+1;z<building.depth/2-1;z+=1)for(let x=-building.width/2+1;x<building.width/2-1;x+=1){
@@ -99,7 +99,7 @@ test('an absent v4 upper wing exposes its real lower roof or open ground courtya
 });
 
 test('v4 support uses the real yaw footprint and cannot pull feet up to a higher storey', () => {
-  const world=createWorld(),building=world.buildings.find(b=>b.id==='airport-b0')!;
+  const world=createWorld(20261001,'current-v4'),building=world.buildings.find(b=>b.id==='airport-b0')!;
   const upper=building.functionPoints!.find(p=>p.floor===2&&floorPlanSupport(building,1,p.position,0)?.kind==='room')!;assert(upper);
   const reference=upper.position.y-.4*building.height/building.floors,lower=floorPlanSupport(building,1,{...upper.position,y:reference},0)!;assert(lower);
   near(getWalkHeight(world,upper.position.x,upper.position.z,reference),lower.y,'the upper slab is above the actual feet and is not an attractive surface');
@@ -111,7 +111,7 @@ test('v4 support uses the real yaw footprint and cannot pull feet up to a higher
 });
 
 test('v4 fingerprints include generated rooms, permissions and functional points while imported descriptors stay untrusted', () => {
-  const world=createWorld(),original=savedWorldFingerprint(world),first=world.buildings.find(b=>b.floorPlanProfile)!;
+  const world=createWorld(20261001,'current-v4'),original=savedWorldFingerprint(world),first=world.buildings.find(b=>b.floorPlanProfile)!;
   const mutate=(site:typeof first)=>({...world,buildings:world.buildings.map(b=>b.id===site.id?site:b)});
   for(const site of [
     {...first,floorPlanProfile:undefined},
@@ -134,7 +134,7 @@ test('v4 fingerprints include generated rooms, permissions and functional points
 });
 
 test('a complete v4 occupied-floor save reassembles byte-exact and continues every module for 24 ticks', () => {
-  const world=createWorld(),sim=new Simulation(world),building=world.buildings.find(b=>b.id==='west-b0')!;
+  const world=createWorld(20261001,'current-v4'),sim=new Simulation(world),building=world.buildings.find(b=>b.id==='west-b0')!;
   const point=building.functionPoints!.find(p=>p.floor===building.floors-1)!;assert(canAccessFloor(building,point.floor,sim.state.player));sim.setFocus(point.position,'walk');
   for(let tick=0;tick<24;tick++)sim.step(.25);
   sim.state.voxels.push({id:'v4-occupied-floor-edit',position:{x:point.position.x+.2,y:point.position.y+.2,z:point.position.z},color:'#665544'});

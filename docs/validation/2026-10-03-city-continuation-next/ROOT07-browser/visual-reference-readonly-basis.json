@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-04T01:52:00.689786+00:00",
+  "status": "REFERENCE_ART_REVIEW_BASIS_READ_ONLY",
+  "references": [
+    {
+      "path": "/workspace/yunshan/参考图/参考图1.png",
+      "sha256": "5f36a4d0c513e368a3e124df250fc4a0bd4ff822a961f0e0e2ed134bac10e3b8",
+      "bytes": 2656640,
+      "actualViewCompleted": true
+    },
+    {
+      "path": "/workspace/yunshan/参考图/参考图2.png",
+      "sha256": "074aa791d8cede78c2d99e8da3f32b50066f20b6e5b21381f5102bd29e5bcca9",
+      "bytes": 2712178,
+      "actualViewCompleted": true
+    },
+    {
+      "path": "/workspace/yunshan/参考图/参考图3.png",
+      "sha256": "11e05cbe94b32f69f506b49a88063b8e9fb6e005f504decc47181054f3489f7d",
+      "bytes": 2677513,
+      "actualViewCompleted": true
+    },
+    {
+      "path": "/workspace/yunshan/参考图/参考图4.png",
+      "sha256": "f8b76e7b7f6a2977cb32f7b0e581bdefdd7327432dec77991c22fdd169e0b3b3",
+      "bytes": 2803503,
+      "actualViewCompleted": true
+    },
+    {
+      "path": "/workspace/yunshan/参考图/参考图5.png",
+      "sha256": "4e33ab1733fb6b4aeb18c387f41183fcf7bbae448194f0c3a9c33a99f916f3a5",
+      "bytes": 2990016,
+      "actualViewCompleted": true
+    }
+  ],
+  "referenceImages": "Supplied appearance targets; not actual ROOT07 browser output. ROOT07 actual originals will be independently reviewed.",
+  "sourceCriteria": [
+    {
+      "path": "/workspace/yunshan/提示词.md",
+      "scope": "multi-ridge city, Chinese future voxel details, first-person complete city life, usable interiors and continuous day/night"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-v4-root-coherent-04/root-visual-review.md",
+      "scope": "retain historical gap and obstruction review"
+    },
+    {
+      "path": "/workspace/yunshan-work/visual-environment-recovery-20261003-01/LOST-INCIDENT.json",
+      "scope": "old /tmp PNG/raw/receipts remain LOST; fresh workspace captures do not recreate their provenance"
+    }
+  ],
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "newFamilySchoolDOM": "NOT_VERIFIED_IN_THIS_ROOT07_BROWSER_SCOPE",
+  "newElectedMayorSupplementalDOM": "NOT_VERIFIED_IN_THIS_ROOT07_BROWSER_SCOPE",
+  "newRoadCurrentCrewDOM": "NOT_VERIFIED_IN_THIS_ROOT07_BROWSER_SCOPE",
+  "newCompanyReturnDOM": "NOT_VERIFIED_IN_THIS_ROOT07_BROWSER_SCOPE",
+  "Library": "ROOT_UNIFIED_ORIGINALS_DELIVERY_ONLY"
+}

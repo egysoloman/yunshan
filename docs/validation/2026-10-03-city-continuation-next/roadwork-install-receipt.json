@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-04T00:57:59.621493+00:00",
+  "rebasedCoreBeforeSHA256": "be7ef7f43e132c90a1fad2b9d94ed706dfc104bc88f1cb7220d112a6c0cd14de",
+  "rebasedUIBeforeSHA256": "505a9aea29dbfe1b2feb74b30c9befd2b68c3a92013eecba875a7484b1937aab",
+  "patches": {
+    "roadworks.patch": "ccf64532f36d68d18b416c91bd619a1582a5c1bde1579e3f5af777035a227bdc",
+    "roadwork-core-ui-rebased.patch": "ef2f9996f20ee91f7dcafadbb3e55fb7531f424de120263d890cf66f5c8e6cf8",
+    "test-and-fixtures.patch": "733aa7ef5e923a7bc974c38ee2188cf5690adf14194ded45d74792a98cc7b050"
+  },
+  "after": {
+    "src/simulation.ts": "2df2c6da30a4875373c19970d523f64da34f16564170df94b571576650e17098",
+    "src/ui.ts": "139a44e58d12e8d0bad86d1c286b4d04360230fe95c457ba374e90ea07da2ae6",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "tests/roadwork-replacement.test.ts": "4700d1ef728d157f539c28311c84717c3db20cca67fe26919b02e4f22014423c"
+  },
+  "note": "Original five hunk semantics rebased around familyEducation fields without overwriting whole core. UI now displays current worker and retained first contract. New integrated tests and UI not yet run; original patch context failure retained."
+}

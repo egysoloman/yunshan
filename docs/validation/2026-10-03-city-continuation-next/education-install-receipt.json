@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-03T23:38:20.956461+00:00",
+  "sourcePatchSHA256": "388d748f39d5c522f1535fcc00001805dc7c41b577d8f664ba88f5c5ebb8761b",
+  "cultureMergedByExactStatements": [
+    {
+      "beforeSHA256": "31ffedd107e250a27ed8ee4ea1b84e300d0f011ba9be92de973d240522b21f51",
+      "afterSHA256": "642ff91a1aa467661f3af81a5fa85a1e2afdb0950b8419da07cfea778ecb09e5"
+    },
+    {
+      "beforeSHA256": "09dea56cca2db61767e61f1921fcbf5a249e64398ecd7882ab72c67d4b46bd9e",
+      "afterSHA256": "444e7d7a1fc8d0fcec31ba7b78cc7b9f0b12dd607b63c7128c7b4da1a9154965"
+    }
+  ],
+  "scope": "43-case frozen candidate42 PASS/1 actual multi-day infrastructure failure; final shortage negative PASS,8-course positive NOT_VERIFIED; strict/build pass",
+  "integrationValidation": "pending",
+  "sourceHashes": {
+    "src/simulation.ts": "96c6158ad81ea8fa99d254a2c458bbd62fce1333bcad002d3ce0c734e3b65cba",
+    "src/simulation/education.ts": "f8a6b92304bfc37825f7263a0a180219a07e8033cf065d669179c61feafe2bdb",
+    "src/simulation/family.ts": "ecdb1f6978e3963c4f3caa744e500f40b17d7253a8a32e82040432d0766a2e25",
+    "src/simulation/culture.ts": "9f7a4f3f9973a8dbb9b472247de406921389489b0a4c51d638d5885feab4e925"
+  }
+}

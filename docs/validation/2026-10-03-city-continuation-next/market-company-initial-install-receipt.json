@@ -1,0 +1,71 @@
+{
+  "at": "2026-10-04T01:18:47.918444+00:00",
+  "method": "Guarded three-way current + original bytes + candidate final; all no-conflict merges prepared before mutation, exact patch applied and every resulting file checked. Family, supplemental and current road crew interfaces retained. Original JSON absent newline retained exactly.",
+  "patchSHA256": "ed80e5e10c4670323b646fea9f91954b6b7ee96323aace23196cc9126f4257a4",
+  "files": [
+    {
+      "file": "src/types.ts",
+      "sharedBeforeSHA256": "9d0effb02cca50a4904a4d3a00ab3d10e1d60d54244ba210562b0cbf74a9c0ef",
+      "candidateBaselineSHA256": "c0e9692a066cb59d897a5b34b1fa2d000d81c5beeac05ef83dd09c235e41406b",
+      "candidateFinalSHA256": "f2eaf7db0bce3b02b0ade4c287127cc3512ac86d6b368ab4091cd2e4068307bf",
+      "mergedAfterSHA256": "fc846ba9d79d6279f3e06bbe585da502ff9c18840d2c1cca297e3b75e8ede38f"
+    },
+    {
+      "file": "src/simulation/shop_lifecycle.ts",
+      "sharedBeforeSHA256": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff",
+      "candidateBaselineSHA256": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff",
+      "candidateFinalSHA256": "67f56d748ef3b2d09bafded353e7275252d68ccecdadf3844d9cf7c8645871e1",
+      "mergedAfterSHA256": "67f56d748ef3b2d09bafded353e7275252d68ccecdadf3844d9cf7c8645871e1"
+    },
+    {
+      "file": "src/simulation/extensions.ts",
+      "sharedBeforeSHA256": "e79f65943c983c19677777ce4c2dc104ea19cb01bd088143623e7d40784f26e1",
+      "candidateBaselineSHA256": "e79f65943c983c19677777ce4c2dc104ea19cb01bd088143623e7d40784f26e1",
+      "candidateFinalSHA256": "09cdbfca1dc3479b366d5ff4d817470c717b8b08de0de98257421b1742bea281",
+      "mergedAfterSHA256": "09cdbfca1dc3479b366d5ff4d817470c717b8b08de0de98257421b1742bea281"
+    },
+    {
+      "file": "src/simulation.ts",
+      "sharedBeforeSHA256": "2df2c6da30a4875373c19970d523f64da34f16564170df94b571576650e17098",
+      "candidateBaselineSHA256": "92730b626b4d07b514800e169de8f3c6c79910094bfb5ce30a8817846cedac2a",
+      "candidateFinalSHA256": "8bdd3894332df67402002d5b04dd28267bdefbfb434b33400e5076db013cc821",
+      "mergedAfterSHA256": "c283c5bf1ea0c0e911d4aa62a2d6c0b65cff10cffc66a86755ac6e241c9b6838"
+    },
+    {
+      "file": "src/ui.ts",
+      "sharedBeforeSHA256": "139a44e58d12e8d0bad86d1c286b4d04360230fe95c457ba374e90ea07da2ae6",
+      "candidateBaselineSHA256": "0fdecfd1ebe87df4455c5c5f8df6c559fbde6c741213f7530284101039dd2cac",
+      "candidateFinalSHA256": "edfa14d93505bad2e8b6bc8159b70ecd1cf624eb91a82bf8d7e1ff4a6de9f149",
+      "mergedAfterSHA256": "c034dbf5b97d83b3f3219541f83ebb00cc9b93fe2a38414ead515d58ec6c80c5"
+    },
+    {
+      "file": "tests/v4-extensions.test.ts",
+      "sharedBeforeSHA256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1",
+      "candidateBaselineSHA256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1",
+      "candidateFinalSHA256": "12d137106c0d0ae0d9f6ccd438b6bde3f1a6e77098e375c5645c24dbea39dff1",
+      "mergedAfterSHA256": "12d137106c0d0ae0d9f6ccd438b6bde3f1a6e77098e375c5645c24dbea39dff1"
+    },
+    {
+      "file": "tests/market-company-rights.test.ts",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "e183bc10f59e2e8e3ec0c069135458e89cb816356ff922b26492dc393f6012ec",
+      "mergedAfterSHA256": "e183bc10f59e2e8e3ec0c069135458e89cb816356ff922b26492dc393f6012ec"
+    },
+    {
+      "file": "tests/fixtures/market-company-old-sale.json",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "8341af92cb3f88c39934c7f02a10cf4d9aa93e72862dc99efbcdee4891846be3",
+      "mergedAfterSHA256": "8341af92cb3f88c39934c7f02a10cf4d9aa93e72862dc99efbcdee4891846be3"
+    },
+    {
+      "file": "tests/fixtures/market-company-old-lease.json",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "f768bb8b8b8ede1f54d6adffba08c7602c358646ca269e576c9b7e452be1f54d",
+      "mergedAfterSHA256": "f768bb8b8b8ede1f54d6adffba08c7602c358646ca269e576c9b7e452be1f54d"
+    }
+  ],
+  "status": "INITIAL_COMPANY_PATCH_INSTALLED_RETURN_FIX_PENDING"
+}

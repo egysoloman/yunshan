@@ -1,11 +1,12 @@
+import { applyCommercialDistrict } from './commercial-district';
 import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
 import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
-export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v4';
+export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
 export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
 
@@ -50,7 +51,7 @@ function indexFor(world: WorldDefinition) {
   if (!index) {
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' ? 70 : 14;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' ? 70 : 14;
     for (const b of world.buildings) {
       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
       if (b.floorPlanProfile) {
@@ -204,7 +205,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  if (layout === 'current-v3' || layout === 'current-v4') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -429,6 +430,14 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v6') {
+    const base = createWorld(seed, 'current-v5');
+    applyCommercialDistrict(base);
+    base.layoutVersion = 'current-v6';
+    // Ground, graph and every unselected site retain the actual v5 recipe.
+    indices.delete(base);
+    return base;
+  }
   const currentLayout = layoutVersion !== 'legacy-ee3e7a1', historicR5 = layoutVersion === 'current-v2-r5', rng = random(seed);
   const districts: District[] = plans.map(p => ({ id: p.id, name: p.name, kind: p.kind, center: { x: p.x, y: p.y, z: p.z }, radius: p.radius, color: p.color, population: p.count * 38 }));
   const world: WorldDefinition & { layoutVersion: CityLayoutVersion } = {
@@ -545,7 +554,10 @@ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = 
         const tiers = [[144, 112], [126, 98], [108, 84], [90, 70], [72, 56]];
         Object.assign(building, { floorFootprints: Array.from({ length: floors }, (_, floor) => ({ width: tiers[Math.floor(floor / 6)][0], depth: tiers[Math.floor(floor / 6)][1] })) });
       }
-      if (layoutVersion === 'current-v4' && kind !== 'core' && kind !== 'pavilion') {
+      // Select the corrected physical stair recipe before any body/use-point
+      // generation. Every older recipe deliberately retains its original grid.
+      if (layoutVersion === 'current-v5') building.stairGeometryRevision = 2;
+      if ((layoutVersion === 'current-v4' || layoutVersion === 'current-v5') && kind !== 'core' && kind !== 'pavilion') {
         building.floorPlanProfile = 'v4-program-bodies-02';
         const entrance = getBuildingEntrance(building);
         building.door = { x: q(entrance.x), y: q(entrance.y), z: q(entrance.z) };

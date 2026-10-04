@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-04T00:29:40.485035+00:00",
+  "before": {
+    "src/types.ts": "e32c18f7be3315a0f4847fb8461e6859b9abf432f29b7f41b3646619765c3c06",
+    "src/simulation.ts": "96c6158ad81ea8fa99d254a2c458bbd62fce1333bcad002d3ce0c734e3b65cba",
+    "src/simulation/education.ts": "f8a6b92304bfc37825f7263a0a180219a07e8033cf065d669179c61feafe2bdb",
+    "src/simulation/family.ts": "ecdb1f6978e3963c4f3caa744e500f40b17d7253a8a32e82040432d0766a2e25",
+    "src/simulation/activity-capacity.ts": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337",
+    "src/persistence/partition.ts": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0",
+    "src/simulation/family-education.ts": null,
+    "scripts/economy-audit.ts": "1c3ac83400c1e0493eaa3106cee39f1dd4fdf2030d520f3be12c05290837fe8b"
+  },
+  "after": {
+    "src/types.ts": "9d0effb02cca50a4904a4d3a00ab3d10e1d60d54244ba210562b0cbf74a9c0ef",
+    "src/simulation.ts": "9d06a11295fee68170530f2fc0a810a57c7f1f13f228eab0d087f8fb4dc139c2",
+    "src/simulation/education.ts": "f6f1863514f6ab339ed794c99a140c8282f2c3fd435a8c52563a81647cb241fc",
+    "src/simulation/family.ts": "79fa371d7d31df5b78f5f5009c6574efd23aae4e0efbbb4a73f49d305a81b7c0",
+    "src/simulation/activity-capacity.ts": "c8bc8a9cf18ed761790ac99ad43e5702e4c8db676a8a3129317ec6f35c0fdd42",
+    "src/persistence/partition.ts": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc",
+    "src/simulation/family-education.ts": "87d9e2fa95e886f7c19de556220d007a6cca22a54155b1da875c2740406c7bf5",
+    "scripts/economy-audit.ts": "0db5289946f2bf929731c7fb0746cfc20c91e52f0e72f28a5677653340381434"
+  },
+  "patches": {
+    "family-fee-core.patch": "4cddec5e36cb5d65f71dc2ab11ed4eb3cc04cd641fd5de55de297c1b86bb4515",
+    "family-fee-money-oracle.patch": "6d69a9b5e9f73fd8b37ea463ae7b42a5de6ae3fa55560a2a852de5564c04f081"
+  },
+  "UI": "not installed; former guardian visibility revision pending",
+  "tests": "final fee tests pending; core positive1/8 and save/partition observed independently, 24 actual funding FAIL retained",
+  "familyFeeEscrowReadOnlyCounted": true,
+  "fullGoalComplete": false,
+  "root06FrozenUntouched": true
+}

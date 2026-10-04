@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-03T23:33:32.684771+00:00",
+  "baselineCommit": "3ca77b861bc8a2c33820b49396ad788e7d94e137",
+  "kind": "guarded-police-and-hygiene-integration",
+  "policePatchSHA256": "fc53f16805002c1f7146de0279f00c895abb08afc404bcda23abbdabe113d547",
+  "coreAfterPoliceSHA256": "31cf97f783e7b448f7d53b9215958d70700a896a141e1a64b3c002dc882c48dc",
+  "coreCompositeSHA256": "92730b626b4d07b514800e169de8f3c6c79910094bfb5ce30a8817846cedac2a",
+  "hygieneCoreHunksChecked": [
+    "simulation-wage-auth.patch",
+    "simulation-hygiene-save-hook.patch"
+  ],
+  "hygieneFiles": [
+    {
+      "path": "src/simulation/hygiene.ts",
+      "beforeSha256": "0bce38b7a7e4205d0970dbbac80b449c66ed1a75cad8a862a9bddd637498eb64",
+      "afterSha256": "a8890efb418d04c67bc50a6f1726a63baac1e723af30d30ff5557f00741b92ef",
+      "bytes": 49957
+    },
+    {
+      "path": "src/simulation/hygiene-public.ts",
+      "beforeSha256": null,
+      "afterSha256": "803798f668131cc87023c4a66678354eacf54d84eeba662542f4a9140680508e",
+      "bytes": 20058
+    },
+    {
+      "path": "tests/public-disinfection.test.ts",
+      "beforeSha256": null,
+      "afterSha256": "af5e9c7418f3ca095ae4d26ed333ec38ab5d71c6de469ccc3129140a6552de00",
+      "bytes": 24376
+    },
+    {
+      "path": "tests/public-health-hygiene.test.ts",
+      "beforeSha256": "17a3506e02eb6de0eaaaa2c2dd1d28e05eb9505d7be9890eb84e4c7d60a6cd1e",
+      "afterSha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8",
+      "bytes": 21032
+    },
+    {
+      "path": "tests/fixtures/public-disinfection-old-public-care-a1.json.gz",
+      "beforeSha256": null,
+      "afterSha256": "07fbe3390daa4470cfadb2a660d56f5c70a179e40ea79ecbba3a16af479e1de3",
+      "bytes": 31538
+    }
+  ],
+  "assemblyValidation": "pending"
+}

@@ -1,0 +1,30 @@
+✖ a real partially purchased public order cannot turn its spent forty budget into a complete child qualification (4191.234304ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5060.619224
+
+✖ failing tests:
+
+test at output/family-fee-education/root06-partial-repro.test.ts:1:5149
+✖ a real partially purchased public order cannot turn its spent forty budget into a complete child qualification (4191.234304ms)
+  AssertionError [ERR_ASSERTION]: the untouched E1 fixture correctly rejects its unfulfilled full-material precondition
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/yunshan-work/education-family-fee-20261004/output/family-fee-education/root06-partial-repro.test.ts:95:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

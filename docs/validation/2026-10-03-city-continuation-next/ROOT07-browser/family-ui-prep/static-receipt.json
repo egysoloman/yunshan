@@ -1,0 +1,85 @@
+{
+  "status": "STATIC_CHECK_PASS",
+  "recordedAtUTC": "2026-10-04T02:44:56.494329+00:00",
+  "runtimeStatusByThisAgent": "NOT_RUN",
+  "scope": "Only artifact SHA/text/syntax inspection and archive writes in family-ui-prep. No browser, GPU, application import, build or rule tests.",
+  "v1StaticCheck": {
+    "status": "STATIC_CHECK_PASS",
+    "runtimeStatus": "NOT_RUN",
+    "scope": "Artifact/SHA/text equality only; no application import, browser, build or test execution",
+    "driverVersionChecked": "v1; separate v2 evidence must retain its own diff and checks",
+    "source": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+    "preparationManifest": "/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/preparation-manifest.json",
+    "preparationExplicitFileRecordsChecked": 322,
+    "producerFilesChecked": 219,
+    "producerRuntimeFilesChecked": 53,
+    "nativeArchiveMembersChecked": 43,
+    "authorizedSourceFilesChecked": 241,
+    "root07RuntimeFilesChecked": 55,
+    "original7BlockByteExact": true,
+    "original7Count": 7,
+    "originalHtmlByteExact": true,
+    "cancelSaveCheckPrecedesControlledDeath": true,
+    "labelsStaticOnly": [
+      "原保有资格 / 旧到校记录",
+      "新增正式学时只来自真实教材与实际教师完成的课程。",
+      "你不是该居民当前已登记的法定监护人，不能新代签；原付款权利继续保留。",
+      "新的签约仍核验当前法定监护关系。",
+      "我原先实付的子女课程",
+      "active.payerId !== 'player'"
+    ],
+    "labelsAddedToOriginal7Evidence": false,
+    "oldreaderFixturesChecked": 3,
+    "producerPatchSHA256": "32f3c26b2af6b57ab817fba533d76f8375161b5108d03ae5c3c625be16cdba6d"
+  },
+  "v2OriginalSevenBlockByteExact": true,
+  "v2OriginalHTMLByteExact": true,
+  "originalSevenBlockSHA256": "2e7cf67eb83bff4a7489fcc7d447625e632d10238e428eb5d8c40e3d648fe251",
+  "v1DriverSHA256": "5ed1329018313a420a71ddbdbdd68ba02860f089d0345c3ecdf39c562b8c0478",
+  "v2DriverSHA256": "2881919d55d86df58508257e9b0c265964d6fb24afd5532c347bd4ae14f41768",
+  "preparationManifestSHA256": "063af22b7e9f9c04e8ebed592a60d4bf39244cddde306e58f8cf63f490678279",
+  "evidenceV2ManifestSHA256": "450b295c4de471bfe30b48c860a440dec82fc627fec7aeb768a8f45b671b002e",
+  "evidenceV2DiffSHA256": "56ddf3e91a130f742416b2604256704e7d00f569932c3e09d987a65851bc97b5",
+  "nodeSyntaxChecks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/family-fee-ui-root07.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "mode": "Syntax only; file is not evaluated or imported"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/family-fee-ui-root07-v2.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "mode": "Syntax only; file is not evaluated or imported"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/original-inline-module-staticcheck.mjs"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "mode": "Syntax only; file is not evaluated or imported"
+    }
+  ],
+  "readOnlyStagesExpected": [
+    "school-partial-course",
+    "household-cancelled-before-death",
+    "after-death"
+  ],
+  "nativeStagesActuallyRunByThisAgent": 0,
+  "legacyUILabelEvidence": "STATIC_ONLY_NOT_ADDED_TO_ORIGINAL7"
+}
