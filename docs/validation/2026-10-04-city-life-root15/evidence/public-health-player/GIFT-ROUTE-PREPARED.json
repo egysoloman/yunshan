@@ -1,0 +1,295 @@
+{
+  "status": "PASS",
+  "scope": "Zero Simulation imports/construction/commands/steps. Static actual-terminal CPU Controller W/mouse and two native physical F stair actions only. No future availability, gift, production or care claim.",
+  "worldSHA256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+  "sourceTerminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "zeroSimulationSteps": 0,
+  "meters": 1074.7406721930392,
+  "frames": 237,
+  "heldSeconds": 223.90430670688468,
+  "originalSpeed": 16,
+  "projectedGameMinutesAtSpeed16": 3582.468907310155,
+  "projectedQuarterFramesForSameWalkingTime": 896,
+  "legacyStairACL": {
+    "publicFloors": null,
+    "floorPermissions": null,
+    "accessibleFloors": [
+      0,
+      1
+    ],
+    "rentalRequiredByCurrentACL": false
+  },
+  "giftCommandGuardLimitation": "gift itself checks 3D distance <=24 but lacks same-floor/ACL/body support guards. Proposed proof must independently enforce real legal same-floor <=2m presence.",
+  "terminalOwners": [
+    {
+      "id": "citizen-11",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "hunger": 0,
+      "food": 0
+    },
+    {
+      "id": "citizen-55",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "hunger": 0,
+      "food": 0
+    }
+  ],
+  "nativeStairs": [
+    {
+      "nativeKey": "KeyF",
+      "buildingId": "civic-0-home",
+      "from": 0,
+      "to": 1,
+      "actualBefore": {
+        "x": -3.84,
+        "y": 0.6,
+        "z": -3
+      },
+      "actualAfter": {
+        "x": -3.84,
+        "y": 6.6,
+        "z": -3
+      },
+      "clockUnchanged": 10048,
+      "scope": "Original legacy F stair changes floor height discretely; this is not continuous W vertical movement."
+    },
+    {
+      "nativeKey": "KeyF",
+      "buildingId": "civic-0-home",
+      "from": 1,
+      "to": 0,
+      "actualBefore": {
+        "x": -3.8400000000000003,
+        "y": 6.6,
+        "z": -3.0000000000000013
+      },
+      "actualAfter": {
+        "x": -3.8400000000000003,
+        "y": 0.6,
+        "z": -3.0000000000000013
+      },
+      "clockUnchanged": 10048,
+      "scope": "Original legacy F stair changes floor height discretely; this is not continuous W vertical movement."
+    }
+  ],
+  "routes": [
+    {
+      "name": "clinic-to-remote-market1",
+      "start": {
+        "x": -135.99999999999994,
+        "y": 0.6,
+        "z": -59.99999999999993
+      },
+      "targets": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 6
+        }
+      ],
+      "terminal": {
+        "x": 282,
+        "y": 0.6,
+        "z": 5.9999999999999964
+      },
+      "meters": 511.9999999999977,
+      "frames": 111
+    },
+    {
+      "name": "remote-market1-to-real-home0-ground-stair",
+      "start": {
+        "x": 282,
+        "y": 0.6,
+        "z": 5.9999999999999964
+      },
+      "targets": [
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        }
+      ],
+      "terminal": {
+        "x": -3.84,
+        "y": 0.6,
+        "z": -3
+      },
+      "meters": 319.7849680633102,
+      "frames": 71
+    },
+    {
+      "name": "legal-home-floor1-to-actual-owner-bodies",
+      "start": {
+        "x": -3.84,
+        "y": 6.6,
+        "z": -3
+      },
+      "targets": [
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "terminal": {
+        "x": -1.9999999999999976,
+        "y": 6.6,
+        "z": 1.2000000000000013
+      },
+      "meters": 4.585368033211731,
+      "frames": 1
+    },
+    {
+      "name": "owner-bodies-to-home-floor1-stair",
+      "start": {
+        "x": -1.9999999999999976,
+        "y": 6.6,
+        "z": 1.2000000000000013
+      },
+      "targets": [
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        }
+      ],
+      "terminal": {
+        "x": -3.8400000000000003,
+        "y": 6.6,
+        "z": -3.0000000000000013
+      },
+      "meters": 4.585368033211733,
+      "frames": 1
+    },
+    {
+      "name": "home0-to-clinic",
+      "start": {
+        "x": -3.8400000000000003,
+        "y": 0.6,
+        "z": -3.0000000000000013
+      },
+      "targets": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 9
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        }
+      ],
+      "terminal": {
+        "x": -135.99999999999994,
+        "y": 0.6,
+        "z": -59.99999999999988
+      },
+      "meters": 233.78496806330782,
+      "frames": 53
+    }
+  ]
+}

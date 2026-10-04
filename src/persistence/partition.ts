@@ -3,6 +3,8 @@ import { decodeCitizenRoutes, encodeCitizenRoutes } from './route-encoding';
 import { parseSaveWithinResources, validateSaveResources } from './save-resource';
 import { decodeCivicHistory } from '../simulation/civic-history';
 import { hasCityRulesetDeclaration, validateCityRulesetEnvelope } from '../simulation/city-ruleset';
+import { validateReferenceCollisionPolicy } from '../simulation/reference-collision';
+import { validateMealRoutePolicy } from '../simulation/meal-route';
 
 export const SAVE_CHUNK_SIZE = 256;
 export type SaveWorld = Pick<WorldDefinition, 'buildings' | 'districts' | 'nodes'>;
@@ -186,13 +188,26 @@ export function assembleSave(parts: SavePart[]): string {
   // compare the reconstructed version-one export byte for byte.
   const reorder = (value: any, path: string): any => {
     if (!object(value)) return value;
+    const keys = Object.keys(value), expected = layout.order[path] ?? keys;
+    // Ordering metadata may change byte order, never remove a retained field.
+    // Check every visited object, including unknown extensions and service
+    // books, rather than a growing allowlist of individual policy markers.
+    if (!Array.isArray(expected) || new Set(expected).size !== expected.length
+      || expected.length !== keys.length || expected.some(key => typeof key !== 'string' || !Object.hasOwn(value, key))) throw new Error('存档字段顺序缺失、重复或包含未知字段。');
     const ordered: Document = Object.create(null);
-    for (const key of layout.order[path] ?? Object.keys(value)) if (Object.hasOwn(value, key)) ordered[key] = reorder(value[key], path ? `${path}.${key}` : key);
+    for (const key of expected) ordered[key] = reorder(value[key], path ? `${path}.${key}` : key);
     return ordered;
   };
   if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
   if (document.version === 4) decodeCivicHistory(document.state.civicHistory, document.state.civicStaffing.enablement.id, document.state.extension?.lastUpdate ?? document.state.day * 1440 + document.state.hour * 60, document.state.tick);
-  const assembled = JSON.stringify(reorder(document, ''));
+  for (const policyKey of ['referenceCollisionPolicyId', 'mealRoutePolicyId']) if (Object.hasOwn(document, policyKey)) {
+    for (const path of ['', 'runtime']) {
+      if (!Array.isArray(layout.order[path]) || layout.order[path].filter(key => key === policyKey).length !== 1) throw new Error('行程规则不能在存档字段顺序中缺失或重复。');
+    }
+  }
+  const reordered = reorder(document, '');
+  if (hasCityRulesetDeclaration(reordered)) validateCityRulesetEnvelope(reordered);
+  const assembled = JSON.stringify(reordered);
   validateSaveResources(document, assembled);
   return assembled;
 }

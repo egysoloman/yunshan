@@ -1,0 +1,439 @@
+--- /dev/null
++++ b/src/host/upgrade-shop-continuity.ts
+@@ -0,0 +1,21 @@
++import type { Simulation } from '../simulation';
++import type { CommandResult } from '../types';
++import { TENANT_SHOP_CONTINUITY_POLICY } from '../simulation/shop-continuity';
++
++/** Host-only exact-current cutover. No money, goods, lease, debt, body, route,
++ * need, clock, RNG or history changes; ordinary load never selects this rule. */
++export async function upgradeShopContinuity(simulation: Simulation, expectedCurrentV4SHA256: string): Promise<CommandResult> {
++  if (typeof expectedCurrentV4SHA256 !== 'string' || !/^[0-9a-f]{64}$/.test(expectedCurrentV4SHA256)) return { ok: false, message: '租户续营规则升级需要当前 v4 原件的精确 SHA256。' };
++  try {
++    if (simulation.saveVersion !== 4 || simulation.motionVersion !== 2 || simulation.shopContinuityPolicyId !== 'legacy') return { ok: false, message: '只有尚未声明租户续营规则的 v4/motion2/history1 城市可升级。' };
++    const snapshot = simulation.exportSave(), validated = simulation.validateSave(snapshot);
++    if (!validated.ok) return { ok: false, message: `原件未通过完整生产读取校验：${validated.message}` };
++    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(snapshot));
++    const actual = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
++    if (actual !== expectedCurrentV4SHA256 || simulation.exportSave() !== snapshot) return { ok: false, message: '原件 SHA 不匹配或等待期间城市已继续；原城市未改变。' };
++    const candidate = JSON.parse(snapshot);
++    candidate.shopContinuityPolicyId = TENANT_SHOP_CONTINUITY_POLICY;
++    candidate.runtime.shopContinuityPolicyId = TENANT_SHOP_CONTINUITY_POLICY;
++    return simulation.importSave(JSON.stringify(candidate));
++  } catch (error) { return { ok: false, message: `租户续营规则升级被拒绝：${error instanceof Error ? error.message : '格式错误'}；原城市未改变。` }; }
++}
+--- a/src/persistence/partition.ts
++++ b/src/persistence/partition.ts
+@@ -3,6 +3,7 @@
+ import { parseSaveWithinResources, validateSaveResources } from './save-resource';
+ import { decodeCivicHistory } from '../simulation/civic-history';
+ import { hasCityRulesetDeclaration, validateCityRulesetEnvelope } from '../simulation/city-ruleset';
++import { hasShopContinuityDeclaration, validateShopContinuityPolicy } from '../simulation/shop-continuity';
+ 
+ export const SAVE_CHUNK_SIZE = 256;
+ export type SaveWorld = Pick<WorldDefinition, 'buildings' | 'districts' | 'nodes'>;
+@@ -192,7 +193,10 @@
+   };
+   if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
+   if (document.version === 4) decodeCivicHistory(document.state.civicHistory, document.state.civicStaffing.enablement.id, document.state.extension?.lastUpdate ?? document.state.day * 1440 + document.state.hour * 60, document.state.tick);
+-  const assembled = JSON.stringify(reorder(document, ''));
++  if (hasShopContinuityDeclaration(document) && (!layout.order['']?.includes('shopContinuityPolicyId') || !layout.order.runtime?.includes('shopContinuityPolicyId'))) throw new Error('分块顺序表不能删除租户续营声明。');
++  const ordered = reorder(document, '');
++  validateShopContinuityPolicy(ordered);
++  const assembled = JSON.stringify(ordered);
+   validateSaveResources(document, assembled);
+   return assembled;
+ }
+--- a/src/product-city.ts
++++ b/src/product-city.ts
+@@ -19,7 +19,12 @@
+   return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1' });
+ }
+ 
++/** Explicit new-city recipe; imported old cities retain their own declarations. */
++export function createTenantContinuityProductCity(world: WorldDefinition): Simulation {
++  return new Simulation(world, { rulesetId: 'civic-local-v1', historyPolicyId: 'civic-history-pages-v1', shopContinuityPolicyId: 'tenant-distress-v1' });
++}
++
+ /** New cities use complete history; importSave retains each existing envelope. */
+ export function createCurrentProductCity(world: WorldDefinition): Simulation {
+-  return createArchivedProductCity(world);
++  return createTenantContinuityProductCity(world);
+ }
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -32,6 +32,7 @@
+ import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
+ import { installPathology } from './simulation/pathology';
+ import { savedWorldFingerprint } from './persistence/world-layout';
++import { TENANT_SHOP_CONTINUITY_POLICY, type ShopContinuityPolicy } from './simulation/shop-continuity';
+ import { decodeCitizenRoutes, encodeCitizenRoutes } from './persistence/route-encoding';
+ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relationship, Role, Shop, SimState, SimulationAPI, Vec3, Vehicle, ViewMode, WorldDefinition, Building, BuildingFunctionPoint } from './types';
+ 
+@@ -75,6 +76,7 @@
+ interface PrivateLabor { version: 1; nextReviewAt: number; shifts: Record<string, PrivateShift>; stats: { approvedMinutes: number; workedMinutes: number; restrictedReviews: number } }
+ export interface WageAccrual { citizenId: string; shopId: string | null; workId: string; districtId: string; minutes: number; ratePerMinute: number; amount: number }
+ interface Runtime {
++  shopContinuityPolicyId?: ShopContinuityPolicy;
+   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
+   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
+   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
+@@ -143,7 +145,8 @@
+   private foodHiringDemandTick = -1;
+   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
+   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
+-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1')) throw new Error('不支持的显式城市规则版本。');
++    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'shopContinuityPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
++      || Object.hasOwn(options, 'shopContinuityPolicyId') && (options.shopContinuityPolicyId !== TENANT_SHOP_CONTINUITY_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
+     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
+     this.edges = new Map(world.edges.map(e => [e.id, e]));
+@@ -206,6 +209,7 @@
+       }
+     }
+     installCivicStaffing(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1', isCanonicalPresence: isCanonicalCivicPresence });
++    if (options?.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY) this.runtime.shopContinuityPolicyId = TENANT_SHOP_CONTINUITY_POLICY;
+     installCulture(this);
+     if (this.state.civicStaffing) { this.state.budgetAuthority = createBudgetAuthorityState(this.state.civicStaffing.enablement, this.runtime.publicBudgets ?? [], this.state.culture); this.runtime.budgetAuthorityVersion = 1; }
+     installBudgetAuthority(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1' }, () => this.runtime);
+@@ -2365,13 +2369,16 @@
+     return fail('暂不支持此项操作。');
+   }
+   get effectiveRuleset(): EffectiveRuleset { return effectiveCityRuleset(this.state, this.runtime); }
++  get shopContinuityPolicyId(): ShopContinuityPolicy | 'legacy' {
++    return this.saveVersion === 4 && this.motionVersion === 2 && this.runtime.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY ? TENANT_SHOP_CONTINUITY_POLICY : 'legacy';
++  }
+   get rulesetEnablement() { return readonlyCityEnablement(this.state, this.runtime); }
+   get motionVersion(): 1 | 2 { return this.runtime.npcMotionVersion === 2 ? 2 : 1; }
+   get saveVersion(): 1 | 2 | 3 | 4 { return this.effectiveRuleset === 'civic-local-v1' ? this.state.civicStaffing?.version === 2 ? 4 : 3 : this.motionVersion; }
+   exportSave(): string {
+     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
+     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
+-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
++    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.shopContinuityPolicyId !== 'legacy' ? { shopContinuityPolicyId: this.shopContinuityPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+   }
+   /** Read-only production validation for trusted host format transactions. */
+   validateSave(json: string): CommandResult { return this.readSave(json, true); }
+--- a/src/simulation/city-ruleset.ts
++++ b/src/simulation/city-ruleset.ts
+@@ -1,11 +1,12 @@
+ import { publicEmploymentRevision, publicEmploymentRole, publicEmploymentSite, type PublicLabor } from './public-employment';
+ import type { CivicEnablement, CivicOriginalOfficial } from './civic-staffing';
+ import type { Citizen, SimState, WorldDefinition } from '../types';
++import { hasShopContinuityDeclaration, validateShopContinuityPolicy, type ShopContinuityPolicy } from './shop-continuity';
+ 
+ export const PRODUCT_RULESET = 'civic-local-v1' as const;
+ export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
+ export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
+-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY }
++export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; shopContinuityPolicyId?: ShopContinuityPolicy }
+ type Document = Record<string, any>;
+ export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
+ const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
+@@ -17,6 +18,7 @@
+ /** This is structural format validation, not authorization to upgrade an old city. */
+ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
+   need(object(data) && object(data.state) && object(data.runtime) && [1, 2, 3, 4].includes(data.version), 'envelope');
++  validateShopContinuityPolicy(data);
+   const state = data.state, runtime = data.runtime;
+   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');
+   const budgetListed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('budgetAuthority');
+@@ -62,9 +64,9 @@
+ 
+ /** Generic partition tooling keeps its historical partial-document contract. */
+ export function hasCityRulesetDeclaration(data: Document): boolean {
+-  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId')
++  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId') || hasShopContinuityDeclaration(data)
+     || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority') || own(data.state, 'civicHistory'))
+-    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion')
++    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion') || own(data.runtime, 'shopContinuityPolicyId')
+       || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority' || name === 'civicHistory'));
+ }
+ 
+--- /dev/null
++++ b/src/simulation/shop-continuity.ts
+@@ -0,0 +1,22 @@
++export const TENANT_SHOP_CONTINUITY_POLICY = 'tenant-distress-v1' as const;
++export type ShopContinuityPolicy = typeof TENANT_SHOP_CONTINUITY_POLICY;
++
++export function hasShopContinuityDeclaration(data: Record<string, any>): boolean {
++  return Object.hasOwn(data, 'shopContinuityPolicyId') || !!data.runtime && Object.hasOwn(data.runtime, 'shopContinuityPolicyId')
++    || Array.isArray(data.state?.shopLifecycle?.receipts) && data.state.shopLifecycle.receipts.some((row: unknown) =>
++      !!row && typeof row === 'object' && (Reflect.get(row, 'kind') === 'tenant-distress' || Object.hasOwn(row, 'tenantDecision')));
++}
++
++/** Only this explicit current-city policy extends ordinary tenant choice.
++ * An old save lacking both declarations keeps the original owner-only rule. */
++export function validateShopContinuityPolicy(data: Record<string, any>): void {
++  const envelope = Object.hasOwn(data, 'shopContinuityPolicyId');
++  const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'shopContinuityPolicyId');
++  if (!hasShopContinuityDeclaration(data)) return;
++  if (!envelope || !runtime || data.shopContinuityPolicyId !== TENANT_SHOP_CONTINUITY_POLICY
++    || data.runtime.shopContinuityPolicyId !== TENANT_SHOP_CONTINUITY_POLICY
++    || data.version !== 4 || data.rulesetId !== 'civic-local-v1' || data.motionVersion !== 2
++    || data.historyPolicyId !== 'civic-history-pages-v1' || data.runtime.npcMotionVersion !== 2
++    || data.runtime.civicHistoryVersion !== 1 || data.state?.civicHistory?.version !== 1
++    || data.state.civicHistory.policyId !== 'civic-history-pages-v1') throw new Error('无效存档字段：shop continuity policy pair。');
++}
+--- a/src/simulation/shop_lifecycle.ts
++++ b/src/simulation/shop_lifecycle.ts
+@@ -1,6 +1,9 @@
+ import type { Simulation } from '../simulation';
+ import type { Building, Citizen, Company, Command, CommandResult, Player, Role, Shop, SimState, WorldDefinition } from '../types';
+ import { homeRestPointBlockedByVoxels } from './home-rest';
++import { TENANT_SHOP_CONTINUITY_POLICY } from './shop-continuity';
++import { canAccessFloor, getFloorDimensions } from '../access';
++import { FLOOR_PLAN_PROFILE, floorPlanSupport, getBuildingUsePoints } from '../architecture-floor-plan';
+ 
+ const EPS = 1e-7, CASH_CAP = 1e9, REGISTER_FEE = 50, CAPITAL = 200, RESERVE = 100;
+ export const SHOP_REOPEN_MINUTES = 60;
+@@ -42,9 +45,12 @@
+   listingId: string | null; leaseId: string | null; materialsHeld: number; reopen: ShopReopenJob | null; reopenHistory: ShopReopenJob[];
+ }
+ export interface ShopLifecycleReceipt {
++  tenantDecision?: { version: 1; policyId: typeof TENANT_SHOP_CONTINUITY_POLICY; tick: number; position: { x: number; y: number; z: number }; profit: number; inventory: number; freeCash: number;
++    state: 'waiting' | 'reopening' | 'reopened' | 'endPending' | 'ended' | 'cancelled'; updatedAt: number; finishedAt: number | null;
++    requiredContribution: number | null; walletAtDecision: number | null };
+   siteReturn?: NonNullable<ShopCompanyBinding['release']> & { companyId: string };
+   id: number; at: number; shopId: string; actorId: string; payeeId: string;
+-  kind: 'sale' | 'lease-start' | 'capital' | 'rent' | 'deposit-offset' | 'deposit-refund' | 'advance-refund' | 'reopen' | 'incorporation' | 'corporate-owner-cash-return' | 'corporate-site-return';
++  kind: 'sale' | 'lease-start' | 'capital' | 'rent' | 'deposit-offset' | 'deposit-refund' | 'advance-refund' | 'reopen' | 'incorporation' | 'corporate-owner-cash-return' | 'corporate-site-return' | 'tenant-distress';
+   amount: number; listingId: string | null; leaseId: string | null;
+ }
+ export interface ShopLifecycleState {
+@@ -177,6 +183,8 @@
+   title.corporation = { companyId: company.id, founderId: company.ownerId, registeredAt: clock(simulation.state), leaseId: lease?.id ?? null,
+     openingCash: opening, capitalFunding: funding, ownerCashReserved: reserved, ownerCashEscrow: reserved, ownerCashReturned: 0 };
+   company.shopBindingId = shop.id; shop.cash = 0;
++  const choice = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY && lease && tenantDistressDecision(simulation.state, lease)?.tenantDecision;
++  if (choice && ['waiting','endPending'].includes(choice.state)) { choice.state = 'cancelled'; choice.updatedAt = clock(simulation.state); choice.finishedAt = clock(simulation.state); }
+   receipt(simulation, shop.id, company.ownerId, company.id, 'incorporation', funding + opening - reserved, null, lease?.id ?? null);
+   simulation.emitEvent({ type: 'company-incorporated', citizenId: company.ownerId, shopId: shop.id, amount: funding, districtId: shop.districtId });
+   return opening - reserved;
+@@ -202,6 +210,8 @@
+   if (!privateMarket(simulation.state, simulation.worldDefinition, shop) || operatorId(simulation.state, shop) !== actorId || !live(simulation.state, actorId) || (simulation.state.extension?.actorProfiles[actorId]?.age ?? 0) < 18 || !onsite(simulation, shop, actorId)) return fail('只有现经营者能在原市集工作点办理停业，公司须走股权与清算程序。');
+   const title = ensureTitle(simulation, shop)!;
+   if (title.state === 'reopening') return fail('修缮合同尚未完成，不能抹去已购物料与真实工资。');
++  const lease = activeLease(simulation.state, shop.id), choice = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY && lease && tenantDistressDecision(simulation.state, lease)?.tenantDecision;
++  if (reason === 'voluntary' && choice && ['waiting','endPending'].includes(choice.state)) { choice.state = 'cancelled'; choice.updatedAt = clock(simulation.state); choice.finishedAt = clock(simulation.state); }
+   title.state = 'suspended'; title.suspendedAt ??= clock(simulation.state); title.reason = reason; shop.open = false;
+   return success('已暂停新经营；原库存货权、员工合同、欠薪、历史收支仍由这间店保留。');
+ }
+@@ -247,7 +257,7 @@
+   simulation.emitEvent({ type: 'shop-contract-accepted', citizenId: buyerId, shopId: shop.id, amount: listing.price, districtId: shop.districtId });
+   return success(`真实${listing.kind === 'sale' ? '买价已付卖方' : '首期租金已付出租人，押金独立托管'}，${capital}文另入原经营账户；仍须真实采购、工资授权与60分钟员工修缮后重开。`);
+ }
+-function restart(simulation: Simulation, shop: Shop, operatorActorId: string, fundFromWallet = false): CommandResult {
++function restart(simulation: Simulation, shop: Shop, operatorActorId: string, fundFromWallet = false, insufficientWallet?: (contribution: number, wallet: number) => void): CommandResult {
+   const state = simulation.state, title = titleOf(state, shop.id), lease = activeLease(state, shop.id), at = clock(state);
+   if (!title || !privateMarket(state, simulation.worldDefinition, shop) || title.state !== 'suspended' || title.listingId || operatorId(state, shop) !== operatorActorId
+     || !eligibleOperator(state, operatorActorId) || !onsite(simulation, shop, operatorActorId) || lease?.state === 'defaulted' || !shopLifecycleAllowsSpaceUse(state, shop.id)) return fail('请由合资格现经营者在原工作点申请重开；挂牌与违约租约须先处理。');
+@@ -280,7 +290,7 @@
+     let contribution = cents / 100;
+     if (funds + contribution - protectedFunds < required || funds + contribution - gross - protectedFunds < 20 * 8 / 24) contribution = (cents + 1) / 100;
+     const operator = actor(state, operatorActorId)!;
+-    if (operator.money - contribution < RESERVE) return fail('本人钱包补足真实采购和原受保护余额后仍须保留100文生活储备。');
++    if (operator.money - contribution < RESERVE) { insufficientWallet?.(contribution, operator.money); return fail('本人钱包补足真实采购和原受保护余额后仍须保留100文生活储备。'); }
+     const funded = applyShopLifecycleCommand(simulation, { type: 'fundShop', targetId: shop.id, value: contribution }, operatorActorId)!;
+     if (!funded.ok) return funded;
+     // fundShop has no event callback. It preserves this active lease's reserve;
+@@ -299,6 +309,8 @@
+   title.materialsHeld += purchases.filter(row => row.commodity === 'materials').reduce((sum, row) => sum + row.quantity, 0);
+   title.reopen = { operatorId: operatorActorId, startedAt: at, completedAt: null, cancelledAt: null, workedMinutes: 0, materialFromExistingStock: reusedMaterial, materialUnits: 1, consumedUnits: 0, purchases, labor: [] };
+   title.state = 'reopening'; shop.open = false;
++  const choice = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY && lease && tenantDistressDecision(state, lease)?.tenantDecision;
++  if (choice && ['waiting', 'endPending'].includes(choice.state)) { choice.state = 'reopening'; choice.updatedAt = at; choice.requiredContribution = null; choice.walletAtDecision = null; }
+   return success('真实物料已购入独立修缮库存、食品按原货权入账；等待已授权员工实际工作60分钟。');
+ }
+ 
+@@ -342,6 +354,8 @@
+   if (binding) { binding.ownerCashEscrow = 0; binding.ownerCashReturned += ownerRefund; }; lease.depositEscrow = 0; lease.depositToLessor += offset; lease.depositRefunded += refund; lease.arrears -= offset; lease.paidRent += offset;
+   if (title.reopen?.completedAt === null && title.reopen.cancelledAt === null) title.reopen.cancelledAt = clock(state);
+   lease.state = 'ended'; lease.endedAt = clock(state); title.leaseId = null; title.state = 'suspended'; title.reason = 'lease-ended'; title.suspendedAt = clock(state); shop.open = false;
++  const choice = tenantDistressDecision(state, lease)?.tenantDecision;
++  if (choice && !['ended', 'reopened', 'cancelled'].includes(choice.state)) { choice.state = 'cancelled'; choice.updatedAt = clock(state); choice.finishedAt = clock(state); }
+   // Tenant advances are retained as a real subordinate claim, never silently gifted to the owner.
+   simulation.transferBusinessOwnership(shop.id, title.assetOwnerId);
+   if (ownerRefund > EPS) receipt(simulation, shop.id, lease.tenantId, lease.lessorId, 'corporate-owner-cash-return', ownerRefund, null, lease.id);
+@@ -368,8 +382,27 @@
+         if (!endLease(simulation, lease).ok) {
+           lease.state = 'defaulted'; title.state = 'suspended'; title.reason = 'lease-ended'; title.suspendedAt ??= at; shop.open = false;
+           if (title.reopen?.completedAt === null && title.reopen.cancelledAt === null) title.reopen.cancelledAt = at;
++          const cancelled = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY ? tenantDistressDecision(state, lease)?.tenantDecision : undefined;
++          if (cancelled && !['ended', 'reopened', 'cancelled'].includes(cancelled.state)) { cancelled.state = 'cancelled'; cancelled.updatedAt = at; cancelled.finishedAt = at; }
+         }
+       }
++    }
++    // A new tenant's actual people-phase decision waits until this lease's
++    // original finance accrual above. Ending before it would erase rent due
++    // at this exact tick. Temporary supplier/cash-cap failures never opt out.
++    const decision = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY ? tenantDistressDecision(state, lease) : undefined;
++    if (decision?.tenantDecision?.state === 'endPending' && lease.state !== 'ended'
++      && simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY
++      && !title.corporation && title.state === 'suspended' && ['economic-distress','lease-default'].includes(title.reason)
++      && title.leaseId === lease.id && operatorId(state, shop) === lease.tenantId && title.assetOwnerId === lease.lessorId
++      && tenantWilling(state, lease.tenantId)
++      && eligibleOperator(state, lease.tenantId) && onsite(simulation, shop, lease.tenantId)) {
++      if (endLease(simulation, lease).ok) {
++        decision.tenantDecision.state = 'ended'; decision.tenantDecision.updatedAt = at; decision.tenantDecision.finishedAt = at;
++      }
++    }
++    if (decision?.tenantDecision && lease.state === 'ended' && !['ended', 'reopened', 'cancelled'].includes(decision.tenantDecision.state)) {
++      decision.tenantDecision.state = 'cancelled'; decision.tenantDecision.updatedAt = at; decision.tenantDecision.finishedAt = at;
+     }
+     if (lease.state === 'ended') {
+       settleRent(simulation, lease);
+@@ -395,6 +428,59 @@
+     && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24;
+ }
+ 
++const tenantWilling = (state: SimState, id: string): boolean => {
++  const person = actor(state, id), profile = state.extension?.actorProfiles[id];
++  return !!person && !!profile && profile.alive && profile.age >= 18 && profile.health >= 45 && profile.mood >= 55 && profile.stress <= 55
++    && person.needs.hunger >= 50 && person.needs.fatigue >= 45 && state.hour >= 7 && state.hour < 17;
++};
++function tenantDistressDecision(state: SimState, lease: ShopLease): ShopLifecycleReceipt | undefined {
++  const rows = state.shopLifecycle?.receipts ?? [];
++  for (let index = rows.length - 1; index >= 0; index--) { const row = rows[index]; if (row.kind === 'tenant-distress' && row.shopId === lease.shopId && row.leaseId === lease.id && row.actorId === lease.tenantId) return row; }
++  return undefined;
++}
++/** Historical witness uses immutable building geometry and the merchant ACL;
++ * later player voxels cannot retroactively invalidate a lawful old attendance. */
++function tenantDecisionPoint(site: Building, position: { x: number; y: number; z: number }): boolean {
++  const distance = (point: { x: number; y: number; z: number }) => Math.hypot(position.x-point.x, position.y-point.y, position.z-point.z);
++  if (site.floorPlanProfile === FLOOR_PLAN_PROFILE) {
++    const floor = Math.round((position.y-site.position.y-.6)/(site.height/site.floors));
++    return [floor,floor-1,floor+1].some(index => { const support = floorPlanSupport(site,index,position); return !!support && Math.abs(support.y-position.y)<=.26
++      && (support.kind==='room'||support.kind==='stairs') && (site.functionPoints ?? Array.from({length:site.floors},(_,f)=>getBuildingUsePoints(site,f)).flat())
++        .some(point=>point.floor===support.floor && point.purpose==='work' && canAccessFloor(site,point.floor,{role:'merchant',identities:['merchant']}) && distance(point.position)<=2); });
++  }
++  const height = site.height/Math.max(1,site.floors), floor = Math.floor((position.y-site.position.y+.01)/height);
++  if (floor===0 && distance(site.door)<=2) return true;
++  if (floor<-(site.basements??0)||floor>=site.floors) return false;
++  const dx=position.x-site.position.x,dz=position.z-site.position.z, dimensions=getFloorDimensions(site,floor);
++  return Math.abs(dx*Math.cos(site.rotation)+dz*Math.sin(site.rotation))<=dimensions.width/2
++    && Math.abs(-dx*Math.sin(site.rotation)+dz*Math.cos(site.rotation))<=dimensions.depth/2
++    && position.y>=site.position.y-height*(site.basements??0)-.5 && position.y<=site.position.y+site.height+.5;
++}
++function canChooseTenantSuspension(simulation: Simulation, shop: Shop, citizenId: string): boolean {
++  const state = simulation.state, title = titleOf(state, shop.id), lease = activeLease(state, shop.id);
++  return simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY && privateMarket(state, simulation.worldDefinition, shop)
++    && !!title && !title.corporation && title.state === 'operating' && title.listingId === null
++    && !!lease && lease.state === 'active' && clock(state) < lease.endsAt && title.leaseId === lease.id
++    && lease.tenantId === citizenId && operatorId(state, shop) === citizenId && shop.ownerId === citizenId
++    && title.assetOwnerId === lease.lessorId && live(state, lease.lessorId) && live(state, citizenId)
++    && eligibleOperator(state, citizenId) && tenantWilling(state, citizenId)
++    && (state.shopLifecycle?.receipts.length ?? 4096) < 4096
++    && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24;
++}
++function continueTenantSuspension(simulation: Simulation, shop: Shop, lease: ShopLease, row: ShopLifecycleReceipt): void {
++  const state = simulation.state, title = titleOf(state, shop.id), decision = row.tenantDecision;
++  if (simulation.shopContinuityPolicyId !== TENANT_SHOP_CONTINUITY_POLICY || !decision || decision.state !== 'waiting'
++    || !title || title.corporation || title.state !== 'suspended' || !['economic-distress', 'lease-default'].includes(title.reason)
++    || title.leaseId !== lease.id || lease.state !== 'active' || clock(state) >= lease.endsAt
++    || operatorId(state, shop) !== lease.tenantId || title.assetOwnerId !== lease.lessorId
++    || !live(state, lease.lessorId) || !tenantWilling(state, lease.tenantId) || !eligibleOperator(state, lease.tenantId) || !onsite(simulation, shop, lease.tenantId)) return;
++  let funding: { contribution: number; wallet: number } | undefined;
++  const result = restart(simulation, shop, lease.tenantId, true, (contribution, wallet) => { funding = { contribution, wallet }; });
++  decision.updatedAt = clock(state);
++  if (result.ok) { decision.state = 'reopening'; decision.requiredContribution = null; decision.walletAtDecision = null; }
++  else if (funding) { decision.state = 'endPending'; decision.requiredContribution = funding.contribution; decision.walletAtDecision = funding.wallet; }
++}
++
+ /** Ordinary people choice uses the same route/need/identity scoring as every other facility. This function is read-only. */
+ export function shopLifecycleOpportunities(simulation: Simulation, citizen: Citizen): { destination: Building; activity: 'shopLifecycle'; score: number }[] {
+   const state = simulation.state, profile = state.extension?.actorProfiles[citizen.id], at = clock(state), result: { destination: Building; activity: 'shopLifecycle'; score: number }[] = [];
+@@ -403,7 +489,7 @@
+     if (!privateMarket(state, simulation.worldDefinition, shop)) continue;
+     const title = titleOf(state, shop.id), site = simulation.worldDefinition.buildings.find(site => site.id === shop.buildingId)!;
+     if (operatorId(state, shop) === citizen.id && (title?.state === 'suspended' || title?.state === 'reopening')) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
+-    if (canChooseEconomicSuspension(simulation, shop, citizen.id)) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
++    if (canChooseEconomicSuspension(simulation, shop, citizen.id) || canChooseTenantSuspension(simulation, shop, citizen.id)) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
+     if (!eligible(state, citizen.id) || state.shops.some(other => other.ownerId === citizen.id && other.id !== shop.id)) continue;
+     for (const listing of stateOf(simulation).shopLifecycle?.listings ?? []) if (listing.shopId === shop.id && listing.state === 'offered' && listing.expiresAt > at && listing.sellerId !== citizen.id
+       && citizen.money >= listing.price + listing.deposit + REGISTER_FEE + CAPITAL + RESERVE && simulation.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500) result.push({ destination: site, activity: 'shopLifecycle', score: 74 + Math.min(12, profile.skill / 10) - listing.price / 100 });
+@@ -429,12 +515,25 @@
+     const row = existing ?? { citizenId: citizen.id, minutes: 0, earned: 0, lastAt: lower }; if (!existing) job.labor.push(row);
+     row.minutes += credited; row.earned += earned; row.lastAt = upper; job.workedMinutes += credited;
+     simulation.consumeShopLabor(event.shopId, credited);
+-    if (job.workedMinutes >= SHOP_REOPEN_MINUTES - EPS) { job.workedMinutes = SHOP_REOPEN_MINUTES; job.completedAt = at; job.consumedUnits = 1; title.materialsHeld = Math.max(0, title.materialsHeld - 1); title.state = 'operating'; title.reason = ''; title.suspendedAt = null; if (stateOf(simulation).shopLifecycle!.receipts.length < 4096) receipt(simulation, event.shopId, job.operatorId, event.shopId, 'reopen', 0); simulation.appendNotice('shop-reopened', '原市集用真实物料、食品库存、已资助员工修缮完成重开；历史利润、欠薪和寄售货权继续保留。'); }
++    if (job.workedMinutes >= SHOP_REOPEN_MINUTES - EPS) { job.workedMinutes = SHOP_REOPEN_MINUTES; job.completedAt = at; job.consumedUnits = 1; title.materialsHeld = Math.max(0, title.materialsHeld - 1); title.state = 'operating'; title.reason = ''; title.suspendedAt = null; if (stateOf(simulation).shopLifecycle!.receipts.length < 4096) receipt(simulation, event.shopId, job.operatorId, event.shopId, 'reopen', 0); const choice = lease && tenantDistressDecision(simulation.state, lease)?.tenantDecision; if (choice?.state === 'reopening') { choice.state = 'reopened'; choice.updatedAt = at; choice.finishedAt = at; } simulation.appendNotice('shop-reopened', '原市集用真实物料、食品库存、已资助员工修缮完成重开；历史利润、欠薪和寄售货权继续保留。'); }
+   });
+   simulation.onEvent('shop-lifecycle-arrived', event => {
+     const citizen = simulation.state.citizens.find(citizen => citizen.id === event.citizenId), shop = simulation.state.shops.find(shop => shop.id === event.shopId);
+     if (!citizen || !shop || !onsite(simulation, shop, citizen.id) || operatorId(simulation.state, shop) !== citizen.id && !eligible(simulation.state, citizen.id)) return;
+     if (operatorId(simulation.state, shop) === citizen.id) {
++      const lease = activeLease(simulation.state, shop.id);
++      if (canChooseTenantSuspension(simulation, shop, citizen.id) && lease) {
++        const freeCash = simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop);
++        if (!suspend(simulation, shop, citizen.id, 'economic-distress').ok) return;
++        receipt(simulation, shop.id, citizen.id, citizen.id, 'tenant-distress', 0, lease.listingId, lease.id);
++        const row = stateOf(simulation).shopLifecycle!.receipts.at(-1)!;
++        row.tenantDecision = { version: 1, policyId: TENANT_SHOP_CONTINUITY_POLICY, tick: simulation.state.tick, position: { ...citizen.position }, profit: shop.profit,
++          inventory: shop.inventory, freeCash, state: 'waiting', updatedAt: clock(simulation.state), finishedAt: null, requiredContribution: null, walletAtDecision: null };
++        continueTenantSuspension(simulation, shop, lease, row); return;
++      }
++      const row = lease && tenantDistressDecision(simulation.state, lease);
++      if (row?.tenantDecision && ['waiting', 'endPending'].includes(row.tenantDecision.state)
++        && simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY) { continueTenantSuspension(simulation, shop, lease!, row); return; }
+       if (canChooseEconomicSuspension(simulation, shop, citizen.id)) suspend(simulation, shop, citizen.id, 'economic-distress');
+       const current = titleOf(simulation.state, shop.id);
+       if (current?.state === 'suspended' && !current.listingId) {
+@@ -468,6 +567,8 @@
+       if (!privateMarket(state, simulation.worldDefinition, shop) || !finite(value) || value <= 0 || value > 100000 || operatorId(simulation.state, shop) !== actorId || (lease && (clock(state) >= lease.endsAt || !live(state, lease.tenantId) || !live(state, lease.lessorId))) || !eligibleOperator(state, actorId) || !onsite(simulation, shop, actorId) || person.money < value + RESERVE || simulation.shopFunds(shop) + value > CASH_CAP || (lease?.advanceInitial ?? 0) + value > CASH_CAP || (lifecycle?.receipts.length ?? 0) >= 4096) return fail('营运注资须本人现场、保留生活储备及所有账户/债权容量，不能造钱。');
+       ensureTitle(simulation, shop);
+       person.money -= value; simulation.transferShopFunds(shop, value); if (lease) lease.advanceInitial += value;
++      const choice = simulation.shopContinuityPolicyId === TENANT_SHOP_CONTINUITY_POLICY && lease ? tenantDistressDecision(state, lease)?.tenantDecision : undefined;
++      if (choice?.state === 'endPending') { choice.state = 'waiting'; choice.updatedAt = clock(state); choice.requiredContribution = null; choice.walletAtDecision = null; }
+       receipt(simulation, shop.id, actorId, shop.id, 'capital', value, null, lease?.id ?? null); return success('实际钱包注资进入原经营账户；承租时记为可追回营运垫款。');
+     }
+     const lease = activeLease(state, shop.id);
+@@ -510,16 +611,47 @@
+   }
+   let lastReceiptId = 0, lastReceiptAt = 0;
+   for (const row of receipts) {
+-    ensure(dictionary(row) && shops.has(row.shopId) && ids.has(row.actorId) && (ids.has(row.payeeId) || shops.has(row.payeeId) || row.kind === 'incorporation' && companyIds.has(row.payeeId) || row.payeeId === 'public') && ['sale', 'lease-start', 'capital', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'reopen', 'incorporation', 'corporate-owner-cash-return', 'corporate-site-return'].includes(row.kind), '付款回执引用');
++    ensure(dictionary(row) && shops.has(row.shopId) && ids.has(row.actorId) && (ids.has(row.payeeId) || shops.has(row.payeeId) || row.kind === 'incorporation' && companyIds.has(row.payeeId) || row.payeeId === 'public') && ['sale', 'lease-start', 'capital', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'reopen', 'incorporation', 'corporate-owner-cash-return', 'corporate-site-return', 'tenant-distress'].includes(row.kind), '付款回执引用');
+     ensure(row.siteReturn === undefined || row.kind === 'corporate-site-return', '返场见证只属于真实返场回执');
+     num(row.id, lastReceiptId + 1, lastReceiptId + 1, '连续单调回执', true); num(row.at, lastReceiptAt, at, '回执时间'); num(row.amount, 0, CASH_CAP, '实际款项'); lastReceiptId = row.id; lastReceiptAt = row.at;
+     ensure(row.listingId === null || listingIds.has(row.listingId), '回执挂牌'); ensure(row.leaseId === null || leaseIds.has(row.leaseId), '回执租约');
+     const contract = leases.find(lease => lease.id === row.leaseId);
++    if (row.kind === 'tenant-distress') {
++      const choice = row.tenantDecision;
++      ensure(!!contract && row.shopId === contract.shopId && row.actorId === contract.tenantId && row.payeeId === contract.tenantId
++        && row.listingId === contract.listingId && row.amount === 0 && row.at >= contract.startedAt && row.at < contract.endsAt, '本人同址本轮租约意愿');
++      ensure(dictionary(choice) && Object.keys(choice).sort().join(',') === ['version','policyId','tick','position','profit','inventory','freeCash','state','updatedAt','finishedAt','requiredContribution','walletAtDecision'].sort().join(',')
++        && choice.version === 1 && choice.policyId === TENANT_SHOP_CONTINUITY_POLICY, '显式租户意愿合同');
++      num(choice.tick, 0, candidate.tick, '实际意愿tick', true); num(choice.profit, -1e12, -600, '既存历史亏损'); num(choice.inventory, 0, EPS, '真实空货'); ensure(choice.inventory < EPS, '原空货严格阈值');
++      num(choice.freeCash, -1e12, 1e12, '扣保护款后的实际余额'); ensure(choice.freeCash < 20 * 8 / 24, '原困难现金阈值');
++      ensure(dictionary(choice.position) && Object.keys(choice.position).sort().join(',') === 'x,y,z', '现场身体位置'); for (const key of ['x','y','z'] as const) num(choice.position[key], -100000, 100000, '实际现场坐标');
++      const site = world.buildings.find(site=>site.id===shops.get(row.shopId)!.buildingId); ensure(!!site && tenantDecisionPoint(site,choice.position), '原实际工作点与商人楼层权限');
++      num(choice.updatedAt, row.at, at, '意愿观察时间'); ensure(['waiting','reopening','reopened','endPending','ended','cancelled'].includes(choice.state), '意愿状态');
++      if (['reopened','ended','cancelled'].includes(choice.state)) num(choice.finishedAt, row.at, choice.updatedAt, '真实意愿终点'); else ensure(choice.finishedAt === null, '未完成意愿不伪造终点');
++      if (choice.state === 'endPending' || choice.state === 'ended' || choice.requiredContribution !== null || choice.walletAtDecision !== null) {
++        num(choice.requiredContribution, EPS, 1e12, '真实续营缺款'); num(choice.walletAtDecision, 0, 1e12, '作决定时本人钱包'); ensure(choice.walletAtDecision! - choice.requiredContribution! < RESERVE, '不能维持生活储备才自愿返约');
++      } else ensure(choice.requiredContribution === null && choice.walletAtDecision === null, '供货等待或实际续营不伪造无力付款');
++      if (choice.state === 'ended') ensure(contract.state === 'ended' && choice.finishedAt === contract.endedAt, '意愿退租与真实租约终点一致');
++      if (choice.state === 'reopening' || choice.state === 'reopened') {
++        const title = lifecycle.titles[row.shopId], job = [...(title?.reopenHistory ?? []), ...(title?.reopen ? [title.reopen] : [])].find(job => job.operatorId === contract.tenantId && job.startedAt === choice.updatedAt || job.operatorId === contract.tenantId && job.completedAt === choice.finishedAt && choice.state === 'reopened');
++        ensure(!!job && job.startedAt >= row.at && (choice.state === 'reopening' ? job.completedAt === null && job.cancelledAt === null : job.completedAt === choice.finishedAt), '本人有限修缮工单意愿来源');
++      }
++    } else ensure(!Object.hasOwn(row, 'tenantDecision'), '租户意愿不得挂到其他付款');
+     if (['lease-start', 'rent', 'deposit-offset', 'deposit-refund', 'advance-refund', 'corporate-owner-cash-return', 'corporate-site-return'].includes(row.kind)) ensure(!!contract && row.shopId === contract.shopId && row.actorId === contract.tenantId && row.payeeId === (['deposit-refund', 'advance-refund'].includes(row.kind) ? contract.tenantId : contract.lessorId), '租约资金回执不能脱离真实双方');
+     if (contract) ensure(row.shopId === contract.shopId && row.actorId === contract.tenantId && (row.listingId === null || row.listingId === contract.listingId), '租赁托管回执合同绑定');
+   }
+   ensure(lastReceiptId + 1 === lifecycle.nextReceiptId, '回执连续编号');
+   const total = (leaseId: string, kind: ShopLifecycleReceipt['kind']) => receipts.filter(row => row.leaseId === leaseId && row.kind === kind).reduce((sum, row) => sum + row.amount, 0);
++  for (const lease of leases) {
++    const choices = receipts.filter(row=>row.kind==='tenant-distress' && row.leaseId===lease.id), pending = choices.filter(row=>['waiting','endPending','reopening'].includes(row.tenantDecision!.state));
++    ensure(pending.length<=1 && (!pending.length || pending[0]===choices.at(-1)), '同租约仅最后一份当前居民意愿');
++    const row=pending[0], title=lifecycle.titles[lease.shopId];
++    if (row) {
++      ensure(lease.state!=='ended' && !!title && title.leaseId===lease.id && !title.corporation, '当前意愿仍有本人个人租约');
++      if (row.tenantDecision!.state==='reopening') ensure(title.state==='reopening', '真实续营意愿与在建状态');
++      else ensure(title.state==='suspended' && ['economic-distress','lease-default'].includes(title.reason), '真实困难等待不覆盖自愿或旧经营者状态');
++    }
++  }
+   for (const lease of leases) {
+     ensure(same(total(lease.id, 'lease-start'), lease.rent) && same(total(lease.id, 'rent') + total(lease.id, 'deposit-offset') + lease.rent, lease.paidRent)
+       && same(total(lease.id, 'deposit-offset'), lease.depositToLessor) && same(total(lease.id, 'deposit-refund'), lease.depositRefunded) && same(total(lease.id, 'advance-refund'), lease.advanceRefunded)

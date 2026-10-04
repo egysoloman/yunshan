@@ -1,0 +1,153 @@
+{
+  "status": "READ_ONLY_CAUSAL_DECOMPOSITION",
+  "at": "2026-10-04T20:24:13.398923+00:00",
+  "inputResultSHA256": "737582461d635255baabf4916f9a1840052ea77ad85fb976f70c917d5f30dbbf",
+  "cash": {
+    "cashDelta": 82.0946191245074,
+    "retailGross": 107.53038310634878,
+    "actualSaleCount": 4,
+    "actualQuantity": 6,
+    "saleRows": [
+      {
+        "type": "sale",
+        "amount": 35.84346103544959,
+        "citizenId": "citizen-0",
+        "shopId": "shop-market",
+        "districtId": "district",
+        "quantity": 2
+      },
+      {
+        "type": "sale",
+        "amount": 17.921730517724797,
+        "citizenId": "citizen-0",
+        "shopId": "shop-market",
+        "districtId": "district",
+        "quantity": 1
+      },
+      {
+        "type": "sale",
+        "amount": 35.84346103544959,
+        "citizenId": "citizen-236",
+        "shopId": "shop-market",
+        "districtId": "district",
+        "quantity": 2
+      },
+      {
+        "type": "sale",
+        "amount": 17.921730517724797,
+        "citizenId": "citizen-231",
+        "shopId": "shop-market",
+        "districtId": "district",
+        "quantity": 1
+      }
+    ],
+    "taxRate": 0.08,
+    "retailTax": 8.602430648507903,
+    "retailNetBeforeSupplier": 98.92795245784089,
+    "utilitiesActual": 0.8333333333333334,
+    "supplierGrossReconciled": 16.000000000000156,
+    "supplierGrossCaveat": "Reconciled from original sale/utility and cash totals; owned food costs are profit costs, not paid twice. See unchanged original trade lots/cost ledger for supplier rights.",
+    "cashReconciliationResidual": 0.0
+  },
+  "wages": {
+    "earnedInitial": 32.514188688881404,
+    "earnedFinal": 313.78754425187435,
+    "earnedDelta": 281.27335556299295,
+    "canonicalWageAmount": 281.2733555629915,
+    "wageEvents": 11974,
+    "committedInitial": 349.18414124871276,
+    "committedFinal": 149.79371401905453,
+    "committedDelta": -199.39042722965823,
+    "newAuthorizations": [
+      {
+        "at": 2040.25,
+        "ownerId": "citizen-117",
+        "ownerPosition": {
+          "x": 29.166666666666668,
+          "y": 20.6,
+          "z": 1
+        },
+        "cash": 447.4316246457634,
+        "earnedDebt": 146.1679928513073,
+        "priorCommitment": 235.53033708628712,
+        "operatingReserve": 31.666666666666668,
+        "addedCommitment": 32.753171333333334
+      },
+      {
+        "at": 2050.25,
+        "ownerId": "citizen-117",
+        "ownerPosition": {
+          "x": 29.166666666666668,
+          "y": 20.6,
+          "z": 1
+        },
+        "cash": 497.24470406210173,
+        "earnedDebt": 199.21288615137308,
+        "priorCommitment": 215.23861511955508,
+        "operatingReserve": 31.666666666666668,
+        "addedCommitment": 49.12975699999999
+      }
+    ],
+    "protectedFundsDelta": 81.88292833333463,
+    "advanceReserveActive": 0,
+    "advanceClaimPreserved": 200,
+    "nextRentReserve": 25,
+    "earnedWageCashPaidDuringWindow": 0,
+    "paidWageCaveat": "Window remains day1 09:27..10:31 before original 17:00 payroll; actual wage debt increased rather than cash payout. Original receipts/lease show no rent/advance/deposit movement."
+  },
+  "leaseInitial": {
+    "id": "shop-lease-1",
+    "listingId": "shop-listing-2",
+    "shopId": "shop-market",
+    "lessorId": "citizen-283",
+    "tenantId": "citizen-117",
+    "rent": 25,
+    "periods": 7,
+    "startedAt": 1927.25,
+    "endsAt": 12007.25,
+    "nextDueAt": 3367.25,
+    "accruedPeriods": 1,
+    "accruedRent": 25,
+    "paidRent": 25,
+    "arrears": 0,
+    "depositInitial": 50,
+    "depositEscrow": 50,
+    "depositToLessor": 0,
+    "depositRefunded": 0,
+    "advanceInitial": 200,
+    "advanceRefunded": 0,
+    "state": "active",
+    "endedAt": null
+  },
+  "leaseFinal": {
+    "id": "shop-lease-1",
+    "listingId": "shop-listing-2",
+    "shopId": "shop-market",
+    "lessorId": "citizen-283",
+    "tenantId": "citizen-117",
+    "rent": 25,
+    "periods": 7,
+    "startedAt": 1927.25,
+    "endsAt": 12007.25,
+    "nextDueAt": 3367.25,
+    "accruedPeriods": 1,
+    "accruedRent": 25,
+    "paidRent": 25,
+    "arrears": 0,
+    "depositInitial": 50,
+    "depositEscrow": 50,
+    "depositToLessor": 0,
+    "depositRefunded": 0,
+    "advanceInitial": 200,
+    "advanceRefunded": 0,
+    "state": "active",
+    "endedAt": null
+  },
+  "freeFundsInitial": 8.173977222222277,
+  "freeFundsFinal": 8.385668013395048,
+  "freeFundsDelta": 0.2116907911727708,
+  "freeFundsEquationResidual": 0.0,
+  "profitDelta": -207.1787364385484,
+  "interpretation": "Actual sale six meals supplied operating cash; owner onsite authorized +81.88292833333332 real wage commitment from incoming cash while earned labor converts existing commitment into wage debt. Active lease reserves next rent25 only; deposit50 remains separate escrow and advance200 is preserved claim but only becomes protected refundable cash after ended. Current free funds remain above original6.6667. No absent consumption explanation or production bug is needed.",
+  "noProductionThresholdChange": true
+}

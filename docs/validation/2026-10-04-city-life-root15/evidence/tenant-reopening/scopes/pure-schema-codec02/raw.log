@@ -1,0 +1,48 @@
+✔ native writer inputs retain their exact provenance and contain no continuity declaration (67.574544ms)
+✔ both explicit current4 declarations validate without changing any original city fact (239.445275ms)
+✔ half, unknown, null, old-motion and missing-history declarations reject in the pure validators (2027.345237ms)
+✔ either policy declaration reaches the generic partition gate even on otherwise unmarked documents (1.268179ms)
+✔ unmarked actual native1/2/3/4 documents preserve the original partition codec bytes (757.578663ms)
+✔ partition and assembly preserve both declarations and every other native4 field exactly (541.355305ms)
+✖ partition, assembly and world selection reject malformed declarations rather than choosing a fresh city (5080.019236ms)
+✔ a valid declaration keeps the actual native4 selected world and original physical fingerprint (31063.614431ms)
+✔ new receipt kind or own tenantDecision cannot orphan its city policy in actual native1/2/3/4 inputs (1122.053708ms)
+✔ own undefined tenantDecision is a declaration before JSON transport, and new kind survives its omitted value (327.456812ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41632.057668
+
+✖ failing tests:
+
+test at tests/shop-continuity-policy.test.ts:1:7812
+✖ partition, assembly and world selection reject malformed declarations rather than choosing a fresh city (5080.019236ms)
+  AssertionError [ERR_ASSERTION]: missing history body
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/tests/shop-continuity-policy.test.ts:149:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: 历史存档缺失完整档案。
+        at validateSaveResources (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/src/persistence/save-resource.ts:17:100)
+        at parseSaveWithinResources (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/src/persistence/save-resource.ts:9:3)
+        at partitionSave (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/src/persistence/partition.ts:31:30)
+        at <anonymous> (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/tests/shop-continuity-policy.test.ts:149:25)
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/tests/shop-continuity-policy.test.ts:149:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:960:18),
+    expected: /shop continuity policy pair/,
+    operator: 'throws',
+    diff: 'simple'
+  }

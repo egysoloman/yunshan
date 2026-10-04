@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-04T19:43:04.310390+00:00",
+  "endedAt": "2026-10-04T19:44:53.736763+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/budget-services-actual.ts",
+    "/workspace/yunshan-work/ROOT15-game-integration-20261004-01/integrated-education-actual01/original-artifacts",
+    "1100"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 318,
+  "inputsStable": true,
+  "rawSHA256": "75e64f9db6a6e24884a0c626cd4bf16817fd1fc86b7dc31b6a1120a23388b189",
+  "ownedPid": 107977,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 107985,
+      "state": "Z",
+      "parent": 1,
+      "group": 107977,
+      "session": 107977,
+      "startTicks": 7380913
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

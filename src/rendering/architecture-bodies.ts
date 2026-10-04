@@ -60,7 +60,7 @@ export function programRoofPart(region: RoofRegion, timberFinish = false): Progr
   return { material: region.kind === 'gallery-flat' ? 'wood' : 'roof',
     position: { x: (rect.x0 + rect.x1) / 2, y: (bottom + top) / 2, z: (rect.z0 + rect.z1) / 2 },
     size: { x: rect.x1 - rect.x0, y: top - bottom, z: rect.z1 - rect.z0 },
-    color: region.kind === 'gallery-flat' ? timberFinish ? '#75583e' : '#887155' : timberFinish ? '#52645f' : '#456760', floor: region.floor, roof: true, purpose: 'roof',
+    color: region.kind === 'gallery-flat' ? timberFinish ? '#795039' : '#806548' : timberFinish ? '#355b53' : '#3e5a55', floor: region.floor, roof: true, purpose: 'roof',
     ...(region.kind === 'gable' ? { template: programRoofTemplate(region.gableAxis!) } : {}) };
 }
 
@@ -72,8 +72,11 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   const parts: ProgramArchitecturePart[] = [];
   const commercial = building.commercialGeometryRevision === 1;
   const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0;
-  const wallColor = commercial ? '#b1bcc4' : timberFinish ? building.kind === 'market' ? '#d1cdbd' : ['#d7d5c9', '#c9d0c3', '#e1dcca', '#c4c9c5'][building.seed % 4]
-    : building.kind === 'clinic' ? '#dad9c5' : building.kind === 'bank' ? '#b5beb2' : building.kind === 'workshop' ? '#b5a58c' : building.kind === 'school' ? '#d9ceb0' : ['#d6c6a7', '#c3bea3', '#ddcfb0', '#ccba9c'][building.seed % 4];
+  // A shared material hierarchy follows actual uses: warm lime plaster and
+  // timber, neutral mineral plinths, dark jade tiles and cool modern alloy.
+  // Seed variation stays within a use's family; it creates no new city identity.
+  const wallColor = commercial ? '#adb5b3' : timberFinish ? building.kind === 'market' ? '#d2c3a4' : ['#dbd1b9', '#cfc5ab', '#e0d6bf', '#d3ccb9'][building.seed % 4]
+    : building.kind === 'clinic' ? '#d8d7c4' : building.kind === 'bank' ? '#c3b9a3' : building.kind === 'workshop' ? '#b4a086' : building.kind === 'school' ? '#d8c9a7' : ['#d3c09d', '#c1b498', '#d8c6a6', '#c8b18e'][building.seed % 4];
   const box = (material: ProgramArchitecturePart['material'], x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string, floor: number, purpose: ProgramArchitecturePart['purpose'], roof = false, facade?: ProgramArchitecturePart['facade']) => {
     if (Math.min(sx, sy, sz) <= 1e-7) return;
     parts.push({ material, position: { x, y, z }, size: { x: sx, y: sy, z: sz }, color, floor, purpose, roof, ...(facade ? { facade } : {}) });
@@ -100,15 +103,15 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   } else {
     for (const plan of body.floorPlans) {
       regions(plan.floor <= 0 || commercial ? 'stone' : 'wood', getFloorPlanSlabRegions(plan), plan.y - .2, plan.y,
-        commercial ? '#9ea6ac' : plan.floor <= 0 ? '#aaa38b' : '#937354', plan.floor, 'floor');
+        commercial ? '#a3a6a0' : plan.floor <= 0 ? '#aaa38b' : '#98704d', plan.floor, 'floor');
       for (const panel of wallPanels(plan)) {
         const r = panel.rect;
         const add = (material: ProgramArchitecturePart['material'], low: number, high: number, color: string, purpose: ProgramArchitecturePart['purpose']) => box(material,
           (r.x0 + r.x1) / 2, plan.y + (low + high) / 2, (r.z0 + r.z1) / 2, r.x1 - r.x0, high - low, r.z1 - r.z0, color, plan.floor, purpose);
-        if (panel.kind === 'glass') add('glass', panel.bottom, panel.top, commercial ? '#7b9cac' : '#738c7e', 'window');
+        if (panel.kind === 'glass') add('glass', panel.bottom, panel.top, commercial ? '#648c94' : '#648880', 'window');
         else {
           const skirt = Math.min(.8, panel.top);
-          if (panel.bottom < skirt) add('stone', panel.bottom, skirt, timberFinish && plan.floor >= 0 ? '#87938c' : '#939487', 'wall');
+          if (panel.bottom < skirt) add('stone', panel.bottom, skirt, timberFinish && plan.floor >= 0 ? '#8f9287' : '#939487', 'wall');
           const low = Math.max(panel.bottom, skirt);
           if (panel.top > low) {
             const finish = timberFinish && plan.floor >= 0 && finishedPanels < PROGRAM_WALL_FINISH_PANEL_BUDGET ? partitionProgramWallFinish(panel, low, panel.top) : null;
@@ -117,7 +120,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
               for (const piece of finish) {
                 const q = piece.rect;
                 box(piece.material, (q.x0 + q.x1) / 2, plan.y + (piece.bottom + piece.top) / 2, (q.z0 + q.z1) / 2,
-                  q.x1 - q.x0, piece.top - piece.bottom, q.z1 - q.z0, piece.material === 'wood' ? '#70533a' : wallColor, plan.floor, 'wall');
+                  q.x1 - q.x0, piece.top - piece.bottom, q.z1 - q.z0, piece.material === 'wood' ? '#76482f' : wallColor, plan.floor, 'wall');
               }
             } else add(plan.floor < 0 ? 'stone' : commercial ? 'metal' : 'wall', low, panel.top, wallColor, 'wall');
           }
@@ -166,7 +169,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   }
   for (const roof of getFloorPlanRoofRegions(body)) {
     const part = programRoofPart(roof, timberFinish);
-    if (commercial) { part.material = roof.kind === 'gable' ? 'roof' : 'metal'; part.color = roof.kind === 'gable' ? '#476569' : '#a2b0b9'; }
+    if (commercial) { part.material = roof.kind === 'gable' ? 'roof' : 'metal'; part.color = roof.kind === 'gable' ? '#344f51' : '#84938f'; }
     parts.push(part);
   }
   return parts;

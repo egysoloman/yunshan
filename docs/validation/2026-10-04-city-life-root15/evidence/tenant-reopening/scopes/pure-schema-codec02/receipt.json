@@ -1,0 +1,64 @@
+{
+  "scope": "pure-schema-codec02",
+  "status": "FAIL",
+  "command": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=^(?!a valid declaration)",
+    "tests/shop-continuity-policy.test.ts"
+  ],
+  "cwd": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source",
+  "timeLimitSeconds": 60.0,
+  "startedAt": "2026-10-04T20:06:43.389801+00:00",
+  "endedAt": "2026-10-04T20:07:25.461518+00:00",
+  "exitCode": 1,
+  "rootAncestry": [
+    {
+      "pid": 110348,
+      "ppid": 110347,
+      "startTicks": 7522761,
+      "cmdline": "python3 tooling/run-scope.py pure-schema-codec02 60 node --import tsx --test --test-isolation=none --test-name-pattern=^(?!a valid declaration) tests/shop-continuity-policy.test.ts"
+    },
+    {
+      "pid": 110347,
+      "ppid": 110346,
+      "startTicks": 7522759,
+      "cmdline": "codex-linux-sandbox --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py pure-schema-codec02 60 node --import tsx --test --test-isolation=none '--test-name-pattern=^(?!a valid declaration)' tests/shop-continuity-policy.test.ts"
+    },
+    {
+      "pid": 110346,
+      "ppid": 110344,
+      "startTicks": 7522759,
+      "cmdline": "bwrap --new-session --die-with-parent --ro-bind / / --dev /dev --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --bind /workspace /workspace --perms 555 --tmpfs /workspace/.git --remount-ro /workspace/.git --perms 555 --tmpfs /workspace/.agents --remount-ro /workspace/.agents --perms 555 --tmpfs /workspace/.codex --remount-ro /workspace/.codex --perms 555 --tmpfs /workspace/.aws --remount-ro /workspace/.aws --bind /tmp /tmp --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --perms 555 --tmpfs /tmp/.git --remount-ro /tmp/.git --perms 555 --tmpfs /tmp/.agents --remount-ro /tmp/.agents --perms 555 --tmpfs /tmp/.codex --remount-ro /tmp/.codex --perms 555 --tmpfs /tmp/.aws --remount-ro /tmp/.aws --ro-bind /tmp/codex-bwrap-synthetic-mount-targets-1000 /tmp/codex-bwrap-synthetic-mount-targets-1000 --unshare-user --unshare-ipc --cap-drop ALL --argv0 codex-linux-sandbox -- /opt/codex/bin/codex --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py pure-schema-codec02 60 node --import tsx --test --test-isolation=none '--test-name-pattern=^(?!a valid declaration)' tests/shop-continuity-policy.test.ts"
+    },
+    {
+      "pid": 110344,
+      "ppid": 447,
+      "startTicks": 7522755,
+      "cmdline": "/run/codex-environment/codex-home/tmp/arg0/codex-arg0JTLgNI/codex-linux-sandbox --inherit-pid-namespace --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} -- /bin/bash -lc python3 tooling/run-scope.py pure-schema-codec02 60 node --import tsx --test --test-isolation=none '--test-name-pattern=^(?!a valid declaration)' tests/shop-continuity-policy.test.ts"
+    },
+    {
+      "pid": 447,
+      "ppid": 0,
+      "startTicks": 954,
+      "cmdline": "/opt/codex/bin/codex exec-server --remote https://codex-cloud-environments.chatgpt.com/api --environment-id ccarenv_b64_Y2NhcmVudl9kM2Y0MzMzNmY2N2M4MTkxODZhNjgyZjNhYzY3ZjRiYQ --linux-sandbox-pid-namespace=inherit"
+    }
+  ],
+  "childIdentity": {
+    "pid": 110351,
+    "ppid": 110348,
+    "startTicks": 7522800,
+    "cmdline": ""
+  },
+  "ownedActiveAtEnd": [],
+  "inputsExact": true,
+  "inputCount": 310,
+  "productionSourceCount": 73,
+  "rawLogSHA256": "bb2a6f83b71e5c7504d4edc65e0374788977b86125c3159391aaacd512e69458",
+  "auxiliaryInputCount": 314,
+  "auxiliaryInputsExact": true,
+  "wrapperSHA256": "a50506c67d4e17572a69e2c9c92dbb9344b0d20fe2bac53995373aefe3b30cbe"
+}

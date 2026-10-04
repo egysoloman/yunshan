@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-10-04T20:33:19.446694+00:00",
+  "endedAt": "2026-10-04T20:45:19.759837+00:00",
+  "argv": [
+    "npm",
+    "test"
+  ],
+  "exitCode": 134,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 318,
+  "inputsStable": true,
+  "rawSHA256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a",
+  "ownedPid": 113765,
+  "observedDescendants": 11,
+  "finalOwnedMembers": [
+    {
+      "pid": 113786,
+      "state": "Z",
+      "parent": 1,
+      "group": 113765,
+      "session": 113765,
+      "startTicks": 7682501
+    },
+    {
+      "pid": 113920,
+      "state": "Z",
+      "parent": 1,
+      "group": 113920,
+      "session": 113920,
+      "startTicks": 7695391
+    },
+    {
+      "pid": 113931,
+      "state": "Z",
+      "parent": 1,
+      "group": 113765,
+      "session": 113765,
+      "startTicks": 7695395
+    },
+    {
+      "pid": 113946,
+      "state": "Z",
+      "parent": 1,
+      "group": 113920,
+      "session": 113920,
+      "startTicks": 7695441
+    },
+    {
+      "pid": 113947,
+      "state": "Z",
+      "parent": 1,
+      "group": 113920,
+      "session": 113920,
+      "startTicks": 7695441
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

@@ -1,0 +1,33 @@
+{
+  "createdAt": "2026-10-04T19:28:43.744524+00:00",
+  "status": "FAILED_BEFORE_TOOLS_LIST_NO_UPLOAD_RECEIPT",
+  "route": "current_library_skill_prepared_upload_helper",
+  "stderr": "library upload failed: hosted apps tools/list request failed: network",
+  "stdoutBytes": 0,
+  "exitCode": 1,
+  "libraryItemsCreatedConfirmed": 0,
+  "memoExpectedVersion": 7,
+  "memoReplacementConfirmed": false,
+  "newLibraryIDs": [],
+  "noFallbackReason": "Current skill: Never switch a started helper write to a direct action.",
+  "batch": [
+    {
+      "local_path": "/workspace/yunshan-work/ROOT15-door-milestone-delivery-20261004-01/云山-ROOT15-门口通行阶段报告.md",
+      "purpose": "create_library_file"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT15-door-milestone-delivery-20261004-01/云山-ROOT15-312输入源码候选.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT15-door-milestone-delivery-20261004-01/云山-ROOT15-通行与旧档原始证据.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "local_path": "/workspace/yunshan/开发备忘录.md",
+      "purpose": "replace_library_file",
+      "library_file_id": "libfile_7571a326de848191aec330d605a63845",
+      "expected_current_version": 7
+    }
+  ]
+}

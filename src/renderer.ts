@@ -67,11 +67,12 @@ class BoxBatch {
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
-      if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
+      if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
-      // authoritative roof tag enables tile relief; the scalar shares the
-      // resident geometry's lifetime and introduces no per-tile instances.
-      if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? 1 : 0)), 1));
+      // authoritative roof tag enables tile relief. 2 denotes architecture,
+      // 1 retains the existing station-canopy response, and 0 is transport.
+      // The same scalar lifetime introduces no extra attribute or tile instances.
+      if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? part.building ? 2 : 1 : 0)), 1));
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
       if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
@@ -274,7 +275,7 @@ export class CityRenderer implements CityRendererAPI {
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
-    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v1';
+    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v2';
     this.materials.glass.onBeforeCompile = shader => {
       shader.uniforms.facadeNight = this.facadeNight;
       shader.vertexShader = 'attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
@@ -288,7 +289,7 @@ export class CityRenderer implements CityRendererAPI {
         vWindowSeed=fract(sin(dot(windowOrigin,vec3(12.9898,78.233,39.425)))*43758.5453);`);
       shader.fragmentShader = 'uniform float facadeNight;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
-        float windowPane=0.0,windowWarmth=0.0;
+        float windowPane=0.0,windowWarmth=0.0,windowRoughness=roughness;
         if(vWindowSurface>.5 && abs(vWindowNormal.y)<.5 && min(vWindowExtent.x,vWindowExtent.z)<.5){
           bool windowFront=abs(vWindowNormal.z)>.5;
           vec2 paneMetric=windowFront?vWindowMetric.xy:vWindowMetric.zy;
@@ -302,6 +303,7 @@ export class CityRenderer implements CityRendererAPI {
           float lattice=1.0-smoothstep(.015,.033+max(panePixel.x,panePixel.y),min(latticeEdge.x,latticeEdge.y));
           float timber=max(frame,lattice)*paneDetail;
           windowPane=1.0-timber;
+          windowRoughness=mix(.68,.22,windowPane);
           windowWarmth=mix(.24,1.0,step(.34,vWindowSeed));
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.18,.115,.063),timber*.92);
           diffuseColor.rgb*=1.0-(1.0-paneMetric.y/max(.2,paneExtent.y))*.18*windowPane;
@@ -310,8 +312,9 @@ export class CityRenderer implements CityRendererAPI {
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.46,.30,.13),facadeNight*windowWarmth*windowPane*.34);
         }`);
       shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(.48,.27,.095);');
+      shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nif(vWindowSurface>.5)roughnessFactor=windowRoughness;');
     };
-    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v3';
+    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v4';
     this.materials.roof.onBeforeCompile = shader => {
       shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
@@ -322,7 +325,7 @@ export class CityRenderer implements CityRendererAPI {
         vRoofMetric=position*roofScale;vRoofNormal=normalize(normal/max(roofScale,vec3(.001)));vRoofSurface=instanceRoofSurface;`);
       shader.fragmentShader = 'varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.fragmentShader;
       shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
-        float roofRelief=0.0;
+        float roofRelief=0.0,roofRoughness=roughness;
         if(vRoofSurface>.5 && vRoofNormal.y<-.18){
           // Roof undersides remain opaque and keep the same solid silhouette.
           // Timber albedo and shallow beam joints receive the real hemisphere
@@ -334,6 +337,7 @@ export class CityRenderer implements CityRendererAPI {
           float beam=(1.0-smoothstep(.035,.06+max(soffitPixel.x,soffitPixel.y),min(soffitEdge.x,soffitEdge.y)))*soffitDetail;
           diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.29,.18,.10),.9)*(1.0-beam*.28);
           roofRelief=beam*.006;
+          roofRoughness=.76;
         }else if(vRoofSurface>.5 && abs(vRoofNormal.y)>.18){
           // .4m tile barrels run down the actual slope, with .6m laps. The
           // opposite gable axis uses the other horizontal coordinate; metric
@@ -349,9 +353,17 @@ export class CityRenderer implements CityRendererAPI {
           float across=1.0-smoothstep(.035,.035+width.x*1.2,edge.x);
           float lap=1.0-smoothstep(.035,.035+width.y*1.2,edge.y);
           float glaze=.92+barrel*.1-across*.16-lap*.10;
+          if(vRoofSurface>1.5){
+            float tileTone=fract(sin(dot(floor(tile),vec2(37.13,79.71)))*15731.3);
+            glaze=.86+tileTone*.13+barrel*.12-across*.20-lap*.14;
+            // Glazed crowns catch the real sun while laps remain rough.
+            // Derivative filtering converges to a stable distant response.
+            roofRoughness=mix(.64,.36+tileTone*.12+(across+lap)*.10,detail);
+          }
           diffuseColor.rgb*=mix(1.0,glaze,detail);
           roofRelief=(barrel*.012-lap*.004)*detail;
         }`);
+      shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nif(vRoofSurface>1.5)roughnessFactor=clamp(roofRoughness,.3,.9);');
       shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
         vec3 roofDx=dFdx(-vViewPosition),roofDy=dFdy(-vViewPosition);
         vec3 roofR1=cross(roofDy,normal),roofR2=cross(normal,roofDx);

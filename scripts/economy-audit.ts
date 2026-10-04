@@ -5,8 +5,9 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { createWorld } from '../src/world';
-import { createCurrentProductCity, createProductWorld, PRODUCT_CITY_LAYOUT } from '../src/product-city';
+import { createArchivedProductCity, createCityLifeProductCity, createProductWorld, PRODUCT_CITY_LAYOUT } from '../src/product-city';
 import { Simulation, isCanonicalNpcWage } from '../src/simulation';
+import { assembleSave, partitionSave } from '../src/persistence/partition';
 import { bankingBalanceSheet } from '../src/simulation/banking';
 import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/types';
 
@@ -15,7 +16,7 @@ import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/type
 const argumentsByName = new Map<string, string>();
 for (let index = 2; index < process.argv.length; index += 2) {
   const name = process.argv[index], value = process.argv[index + 1];
-  assert.ok(['--days', '--tax-rate', '--police-budget', '--seed', '--out', '--ruleset'].includes(name) && value !== undefined && !argumentsByName.has(name), `invalid audit argument ${name}`);
+  assert.ok(['--days', '--tax-rate', '--police-budget', '--seed', '--out', '--ruleset', '--product-recipe'].includes(name) && value !== undefined && !argumentsByName.has(name), `invalid audit argument ${name}`);
   argumentsByName.set(name, value);
 }
 const numeric = (name: string, fallback: number, min: number, max: number) => { const value = argumentsByName.has(name) ? Number(argumentsByName.get(name)) : fallback; assert.ok(Number.isFinite(value) && value >= min && value <= max, `invalid ${name}`); return value; };
@@ -49,8 +50,13 @@ async function auditSourceHashes(): Promise<Record<string, string>> {
 const sourceHash = await auditSourceHashes();
 const requestedRuleset = argumentsByName.get('--ruleset') ?? 'civic-local-v1';
 assert.ok(requestedRuleset === 'legacy' || requestedRuleset === 'civic-local-v1', 'audit ruleset must be explicitly recognized');
+const productRecipe = argumentsByName.get('--product-recipe') ?? 'city-life-v1';
+assert.ok(['city-life-v1', 'archive-v4'].includes(productRecipe), 'audit product recipe must be explicitly recognized');
+assert.ok(requestedRuleset !== 'legacy' || !argumentsByName.has('--product-recipe'), 'legacy constructor cannot select a product recipe');
 const world = requestedRuleset === 'civic-local-v1' ? createProductWorld(seed) : createWorld(seed);
-const sim = requestedRuleset === 'civic-local-v1' ? createCurrentProductCity(world) : new Simulation(world);
+const sim = requestedRuleset === 'civic-local-v1'
+  ? productRecipe === 'city-life-v1' ? await createCityLifeProductCity(world) : createArchivedProductCity(world)
+  : new Simulation(world);
 assert.equal(sim.effectiveRuleset, requestedRuleset, 'requested audit ruleset must match the actual city');
 const initialProductEnvelope = JSON.parse(sim.exportSave());
 const actualWorldFingerprint = initialProductEnvelope.worldFingerprint;
@@ -58,6 +64,10 @@ const rulesetContext = () => ({
   requestedRuleset, requestSource: argumentsByName.has('--ruleset') ? 'explicit-cli' : 'product-default',
   effectiveRuleset: sim.effectiveRuleset, saveEnvelopeVersion: sim.saveVersion, motionVersion: sim.motionVersion,
   historyPolicyId: initialProductEnvelope.historyPolicyId ?? null,
+  productRecipe: requestedRuleset === 'civic-local-v1' ? productRecipe : 'legacy-constructor',
+  referenceCollisionPolicyId: sim.referenceCollisionPolicyId,
+  mealRoutePolicyId: sim.mealRoutePolicyId,
+  serviceMaterialSchedulingPolicyId: sim.state.serviceMaterialScheduling?.policyId ?? null,
   civicHistory: sim.state.civicHistory ? { version: sim.state.civicHistory.version, pages: sim.state.civicHistory.pages.length,
     bytes: Buffer.byteLength(JSON.stringify(sim.state.civicHistory), 'utf8'), totals: { ...sim.state.civicHistory.totals } } : null,
   enablement: sim.rulesetEnablement, requestedNewCityLayout: requestedRuleset === 'civic-local-v1' ? PRODUCT_CITY_LAYOUT : 'legacy-createWorld-default',
@@ -73,6 +83,15 @@ if (requestedRuleset === 'civic-local-v1') {
   assert.equal(sim.motionVersion, 2, 'new product cities use native physical motion');
   assert.equal(sim.rulesetEnablement?.origin, 'new-city', 'this audit did not restore or upgrade an old city');
   assert.equal(world.layoutVersion, PRODUCT_CITY_LAYOUT, 'new product audit must use its declared layout');
+  if (productRecipe === 'city-life-v1') {
+    assert.equal(sim.referenceCollisionPolicyId, 'continuous-upright-v1', 'audit must run the actual city-life collision policy');
+    assert.equal(sim.mealRoutePolicyId, 'nearby-food-v1', 'audit must run the actual city-life meal policy');
+    assert.equal(sim.state.serviceMaterialScheduling?.policyId, 'authorized-service-materials-v1', 'audit must run the actual city-life service policy');
+  } else {
+    assert.equal(sim.referenceCollisionPolicyId, 'legacy', 'archived product audit must retain its original collision contract');
+    assert.equal(sim.mealRoutePolicyId, 'legacy', 'archived product audit must retain its original meal contract');
+    assert.equal(sim.state.serviceMaterialScheduling, undefined, 'archived product audit must not acquire service scheduling');
+  }
 }
 sim.state.taxRate = initialPolicy.taxRate; sim.state.policeBudget = initialPolicy.policeBudget;
 assert.equal(sim.command({ type: 'speed', value: speed }).ok, true);
@@ -343,13 +362,27 @@ try {
   assert.equal(restored.motionVersion, sim.motionVersion, 'terminal reader must retain its separate motion version');
   assert.deepEqual(restored.rulesetEnablement, sim.rulesetEnablement, 'terminal reader must retain exact original enablement provenance');
   assert.equal(restored.exportSave(), finalSaveText, 'terminal save must reproduce the actual terminal city');
+  const parts = partitionSave(originalBytes, world);
+  const partitionPath = artifact.slice(0, -5) + '-final.parts.json';
+  const partitionText = JSON.stringify(parts);
+  await writeFile(new URL(`../${partitionPath}`, import.meta.url), partitionText);
+  assert.equal(await readFile(new URL(`../${partitionPath}`, import.meta.url), 'utf8'), partitionText,
+    'written partitions must retain the actual generated parts');
+  const assembled = assembleSave(parts);
+  assert.equal(assembled, originalBytes, 'terminal partitions must preserve every original field and byte order');
+  const partitioned = new Simulation(world), partitionResult = partitioned.importSave(assembled);
+  assert.ok(partitionResult.ok, partitionResult.message);
+  assert.equal(partitioned.exportSave(), finalSaveText, 'partition reader must reproduce the actual terminal city');
   for (let tick = 0; tick < 24; tick++) {
-    sim.step(.25); restored.step(.25);
+    sim.step(.25); restored.step(.25); partitioned.step(.25);
     assert.equal(restored.exportSave(), sim.exportSave(), `terminal reader diverged at future tick ${tick + 1}`);
+    assert.equal(partitioned.exportSave(), sim.exportSave(), `terminal partition reader diverged at future tick ${tick + 1}`);
   }
   const futureSave = sim.exportSave();
   saveValidation = { status: 'passed', immediateEqual: true, futureTicks: 24, futureEqual: true, effectiveRuleset: restored.effectiveRuleset,
     saveEnvelopeVersion: restored.saveVersion, motionVersion: restored.motionVersion, originalEnablement: restored.rulesetEnablement,
+    partition: { path: partitionPath, parts: parts.length, sha256: createHash('sha256').update(partitionText).digest('hex'),
+      immediateEqual: true, futureTicks: 24, futureEqual: true },
     futureSaveSha256: createHash('sha256').update(futureSave).digest('hex') };
 } catch (error) {
   const saveFailure = error instanceof Error ? error.stack ?? error.message : String(error);

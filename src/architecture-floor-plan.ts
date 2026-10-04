@@ -1,4 +1,5 @@
 import type { Building, BuildingFunctionPoint, Vec3 } from './types';
+import { blocksSweptUprightCylinder } from './geometry/upright-cylinder-sweep';
 
 
 export const FLOOR_PLAN_GEOMETRY_VERSION = 'architecture-v4-program-bodies-02-stairs-v1';
@@ -444,6 +445,24 @@ export function blocksFloorPlanMovement(b:Building,floor:number,from:Vec3,to:Vec
     for(const point of [[w.rect.x0,w.rect.z0],[w.rect.x0,w.rect.z1],[w.rect.x1,w.rect.z0],[w.rect.x1,w.rect.z1]])distance=Math.min(distance,segmentDistanceSquared(point[0],point[1],[a.x,a.z],[z.x,z.z]));
     if(distance<radius*radius-eps)return true;
   }return blocksRoofMovement(b,from,to,radius,eyeHeight);
+}
+/** Explicit policy for ordinary NPC reference legs. A sloping route's head
+ * height is tested where it actually reaches each solid, rather than at the
+ * highest endpoint of the whole leg. Stair phases, support, route planning and
+ * the existing roof contract remain independently enforced. */
+export function blocksFloorPlanReferenceMovement(b:Building,floor:number,from:Vec3,to:Vec3,radius=.35,eyeHeight=1.72):boolean {
+  const p=getBuildingFloorPlan(b,floor);if(!p)return false;
+  const a=buildingLocalPosition(b,from),z=buildingLocalPosition(b,to);
+  const reach=radius+eps,x0=Math.min(a.x,z.x)-reach,x1=Math.max(a.x,z.x)+reach,z0=Math.min(a.z,z.z)-reach,z1=Math.max(a.z,z.z)+reach;
+  for(const solid of localSolids(b,p)) {
+    const r=solid.rect;
+    // This horizontal rejection contains the entire moving circle. Do not
+    // make a height rejection from either endpoint of a sloping leg.
+    if([r.x0,r.x1,r.z0,r.z1,solid.bottom,solid.top].every(Number.isFinite)&&r.x0<=r.x1&&r.z0<=r.z1&&solid.bottom<solid.top
+      &&(r.x1<x0||r.x0>x1||r.z1<z0||r.z0>z1))continue;
+    if(blocksSweptUprightCylinder(a,z,{...solid.rect,bottom:solid.bottom,top:solid.top},radius,eyeHeight,solid.steppable ? .22 : .01))return true;
+  }
+  return blocksRoofMovement(b,from,to,radius,eyeHeight);
 }
 const roofCache=new WeakMap<BuildingBody,RoofRegion[]>();
 export function getFloorPlanRoofRegions(body:BuildingBody):RoofRegion[] {

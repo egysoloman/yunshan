@@ -1,3 +1,4 @@
+import { installServiceMaterialScheduling, serviceMaterialOfferAvailable, serviceMaterialSchedulingEnabled } from './service-material-scheduling';
 import type { Simulation } from '../simulation';
 import { closeServiceSupplementalBudgets, proposeSupplementalBudget, reviewSupplementalBudgets, reviewSupplementalByMayor, serviceTotalSpent, supplementalFor, supplementalPurpose, validateSupplementalBudgetState, type SupplementalBudgetState } from './supplemental-budget';
 import { canAccessFloor } from '../access';
@@ -293,9 +294,12 @@ export function installCulture(simulation: Simulation): void {
     }
     for (const order of c.orders) if (order.state === 'active') serve(order, minutes);
   });
-  simulation.onPhase('finance', () => {
+  const procureServices = (early = false) => {
     for (const order of culture().orders) {
-      if (!['awaitingBudget', 'awaitingSupply', 'active'].includes(order.state) || order.approvedAt === null || order.receivedUnits >= order.targetUnits - 1e-7 || now() < order.retryAt - 1e-7) continue;
+      const eligible = order.topic === 'education' || order.topic === 'health';
+      if (early ? !eligible : eligible && serviceMaterialSchedulingEnabled(state())) continue;
+      if (!['awaitingBudget', 'awaitingSupply', 'active'].includes(order.state) || order.approvedAt === null || order.receivedUnits >= order.targetUnits - 1e-7
+        || now() < order.retryAt - 1e-7 && !(early && serviceMaterialOfferAvailable(simulation, order))) continue;
       order.retryAt = now() + 60;
       const receipt = simulation.purchasePublicSupplyReceipt({ requestedGross: Math.max(0, order.authorizedCap - order.spent), requestedQuantity: Math.max(0, order.targetUnits - order.receivedUnits), districtId: sites.get(order.siteId)!.districtId, siteId: order.siteId, purpose: order.topic, procurementId: `${order.id}:receipt-${order.receipts.length + 1}`, budgetId: order.id });
       let procurementReason = receipt.reason;
@@ -319,7 +323,9 @@ export function installCulture(simulation: Simulation): void {
       order.state = sufficient ? 'active' : procurementReason === 'budget' || order.spent >= order.authorizedCap - 1e-7 && extraRemaining <= 1e-7 ? 'awaitingBudget' : 'awaitingSupply';
       order.lastReason = sufficient ? `材料已实际入库${order.receivedUnits.toFixed(2)}份；尚缺${Math.max(0, order.targetUnits - order.receivedUnits).toFixed(2)}份，服务仍须人员和参与者现场投入时间。` : order.state === 'awaitingBudget' ? order.spent >= order.authorizedCap - 1e-7 && extraRemaining <= 1e-7 ? '法定授权额度已经耗尽；已有实际履约保留，缺料需经新的合法预算程序，不能免费补足。' : '必要公共工资和运维优先；本议题等待可支配财政现金。' : '有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。';
     }
-  });
+  };
+  installServiceMaterialScheduling(simulation, () => procureServices(true));
+  simulation.onPhase('finance', () => procureServices());
   simulation.onPhase('politics', () => {
     for (const petition of culture().petitions) {
       if (petition.status !== 'open' || now() + 1e-7 < petition.replyAt) continue;

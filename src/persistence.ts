@@ -1,5 +1,7 @@
 import { assembleSave, partitionSave, type SavePart, type SaveWorld } from './persistence/partition';
 import { SaveSession, SaveSessionError, type SaveSessionOptions } from './persistence/session';
+import { validateReferenceCollisionPolicy } from './simulation/reference-collision';
+import { validateMealRoutePolicy } from './simulation/meal-route';
 export { SaveSession, SaveSessionError } from './persistence/session';
 export type { SaveSessionOptions, SaveSessionHeader, SaveSessionStats } from './persistence/session';
 
@@ -222,6 +224,8 @@ async function readPart(transaction: IDBTransaction, reference: PartReference): 
   const value = JSON.parse(record.json);
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new SaveSessionError('Invalid save part');
   if (reference.id === 'global' && (value.document?.format !== 'yunshan-save' || !value.layout?.arrays || !value.layout?.maps)) throw new SaveSessionError('Invalid save header');
+  if (reference.id === 'global') validateReferenceCollisionPolicy(value.document);
+  if (reference.id === 'global') validateMealRoutePolicy(value.document);
   if (reference.id === 'player' && (!value.values || !value.maps)) throw new SaveSessionError('Invalid player part');
   if (reference.id.startsWith('chunk:') && (!value.arrays || !value.maps)) throw new SaveSessionError('Invalid geographic part');
   return { id: reference.id, json: record.json };

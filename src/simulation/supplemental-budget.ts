@@ -6,15 +6,23 @@ import type { SimState, Vec3, WorldDefinition } from '../types';
 import { canAccessFloor } from '../access';
 import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
 import { homeRestPointBlockedByVoxels } from './home-rest';
+import { SERVICE_MATERIAL_POLICY, serviceMaterialSchedulingEnabled } from './service-material-scheduling';
 
 const EPS = 1e-7, LIMIT = 64, PER_ORDER = 4, CAP = 160;
 export interface LegacySupplementalSignature { actorId: string; role: 'council' | 'mayor'; siteId: string; floor: number; position: Vec3 }
 export type SupplementalSignature = LegacySupplementalSignature | BudgetSignatureV2;
+/** A request estimate for the whole remaining need at an observed offer price.
+ * quoteLots still describe only the actual stock available at request time;
+ * this estimate reserves no goods and never changes a purchase price. */
+export interface RemainingNeedQuote {
+  version: 1; policyId: typeof SERVICE_MATERIAL_POLICY; requiredUnits: number; unitPrice: number; gross: number;
+}
 export interface SupplementalBudget {
   signatureVersion?: 2; id: string; orderId: string; requestedAt: number; missingUnits: number; receivedAtRequest: number;
   baseSpentAtRequest: number; quoteLots: { shopId: string; quantity: number; unitPrice: number }[];
   quotedGross: number; cap: number; approvedAt: number | null; signatures: SupplementalSignature[];
   spent: number; receiptIds: string[]; closedAt: number | null;
+  remainingNeedQuote?: RemainingNeedQuote;
 }
 export interface SupplementalBudgetState { version: 1 | 2; requests: SupplementalBudget[] }
 export const supplementalPurpose = (order: ServiceOrder) => `civic-${order.topic}-supplement`;
@@ -25,7 +33,8 @@ export function supplementalFor(culture: CultureState, orderId: string): Supplem
 export function serviceTotalSpent(culture: CultureState, order: ServiceOrder): number {
   return order.spent + supplementalFor(culture, order.id).reduce((total, request) => total + request.spent, 0);
 }
-/** A quote is a finite request for existing stock, never a procurement receipt. */
+/** Observed stock backs each quote. An explicitly enabled policy may estimate
+ * the whole remaining need at its highest observed price, never a receipt. */
 export function proposeSupplementalBudget(sim: Simulation, order: ServiceOrder): void {
   const culture = sim.state.culture!, previous = supplementalFor(culture, order.id), natural = sim.effectiveRuleset === 'civic-local-v1';
   if (natural && !budgetAuthorityEnabled(sim)) return;
@@ -45,14 +54,22 @@ export function proposeSupplementalBudget(sim: Simulation, order: ServiceOrder):
   }
   const quotedGross = quoteLots.reduce((sum, lot) => sum + lot.quantity * lot.unitPrice, 0);
   if (!Number.isFinite(quotedGross) || quotedGross <= EPS) return;
+  const requiredUnits = order.targetUnits - order.receivedUnits;
+  const unitPrice = Math.max(...quoteLots.map(lot => lot.unitPrice));
+  const remainingNeedQuote: RemainingNeedQuote | undefined = natural && serviceMaterialSchedulingEnabled(sim.state)
+    ? { version: 1, policyId: SERVICE_MATERIAL_POLICY, requiredUnits, unitPrice, gross: requiredUnits * unitPrice } : undefined;
+  const cap = Math.min(CAP, Math.ceil(remainingNeedQuote?.gross ?? quotedGross));
   const id = `${order.id}-supplement-${previous.length + 1}`;
   if (natural && !recordSupplementalBudgetRequest(sim, id)) return;
   const requests = (culture.supplementalBudgets ??= { version: natural ? 2 : 1, requests: [] }).requests;
   requests.push({ ...(natural ? { signatureVersion: 2 as const } : {}), id, orderId: order.id, requestedAt: now(sim), missingUnits: order.targetUnits - order.receivedUnits,
-    receivedAtRequest: order.receivedUnits, baseSpentAtRequest: order.spent, quoteLots, quotedGross, cap: Math.min(CAP, Math.ceil(quotedGross)), approvedAt: null, signatures: [], spent: 0, receiptIds: [], closedAt: null });
-  order.lastReason = '原授权不变；剩余材料已按现有工业库存和真实报价提请议会追加审议，尚未拨款或采购。';
+    receivedAtRequest: order.receivedUnits, baseSpentAtRequest: order.spent, quoteLots, quotedGross, cap, approvedAt: null, signatures: [], spent: 0, receiptIds: [], closedAt: null,
+    ...(remainingNeedQuote ? { remainingNeedQuote } : {}) });
+  order.lastReason = remainingNeedQuote
+    ? '原授权不变；按现有工业实货报价估算全部剩余需求的追加上限，未来库存和价格不作保证，尚未拨款或采购。'
+    : '原授权不变；剩余材料已按现有工业库存和真实报价提请议会追加审议，尚未拨款或采购。';
   const review = sim.effectiveRuleset === 'civic-local-v1' ? '仍需同厅两名在任地方议员实际在岗联审。' : '仍需议会或当选市长实际审批。';
-  sim.appendNotice('supplemental-budget', `${site.name}缺${(order.targetUnits - order.receivedUnits).toFixed(2)}份材料，申请独立最高${Math.min(CAP, Math.ceil(quotedGross))}文追加额度；${review}`, site.districtId);
+  sim.appendNotice('supplemental-budget', `${site.name}缺${requiredUnits.toFixed(2)}份材料，申请独立最高${cap}文追加额度；${review}`, site.districtId);
 }
 function supported(world: WorldDefinition, siteId: string, position: Vec3, level: number, role: 'council' | 'mayor'): boolean {
   const site = world.buildings.find(b => b.id === siteId);
@@ -156,7 +173,10 @@ export function validateSupplementalBudgetState(candidate: SimState, world: Worl
   for (const r of body.requests) {
     if (body.version === 1) ensure(r.signatureVersion === undefined && r.signatures.every(s => !('signatureVersion' in s)));
     else ensure(r.signatureVersion === 2 || r.signatureVersion === undefined && r.approvedAt !== null);
-    if (r.signatureVersion === 2) ensure(JSON.stringify(Object.keys(r).sort()) === JSON.stringify(['signatureVersion','id','orderId','requestedAt','missingUnits','receivedAtRequest','baseSpentAtRequest','quoteLots','quotedGross','cap','approvedAt','signatures','spent','receiptIds','closedAt'].sort()));
+    const hasNeedQuote = Object.hasOwn(r, 'remainingNeedQuote');
+    if (r.signatureVersion === 2) ensure(JSON.stringify(Object.keys(r).sort()) === JSON.stringify(['signatureVersion','id','orderId','requestedAt','missingUnits','receivedAtRequest','baseSpentAtRequest','quoteLots','quotedGross','cap','approvedAt','signatures','spent','receiptIds','closedAt', ...(hasNeedQuote ? ['remainingNeedQuote'] : [])].sort()));
+    if (hasNeedQuote) ensure(body.version === 2 && r.signatureVersion === 2 && serviceMaterialSchedulingEnabled(candidate)
+      && r.requestedAt >= candidate.serviceMaterialScheduling!.enabledAt);
     const order = candidate.culture!.orders.find(o => o.id === r.orderId), round = (perOrder.get(r.orderId) ?? 0) + 1; perOrder.set(r.orderId, round);
     ensure(order && ['education', 'health'].includes(order.topic) && order.approvedAt !== null && round <= PER_ORDER && r.id === `${r.orderId}-supplement-${round}` && !ids.has(r.id)); ids.add(r.id);
     num(r.requestedAt, order!.approvedAt!, time); num(r.receivedAtRequest, 0, order!.receivedUnits); num(r.missingUnits, EPS, order!.targetUnits);
@@ -171,7 +191,19 @@ export function validateSupplementalBudgetState(candidate: SimState, world: Worl
       ensure(shop && building?.kind === 'workshop' && !suppliers.has(lot.shopId)); suppliers.add(lot.shopId);
       num(lot.quantity, EPS, r.missingUnits); num(lot.unitPrice, EPS, 1e6); quantity += lot.quantity; gross += lot.quantity * lot.unitPrice;
     }
-    ensure(quantity <= r.missingUnits + EPS && Math.abs(gross - r.quotedGross) < 1e-6 && r.cap === Math.min(CAP, Math.ceil(r.quotedGross)));
+    ensure(quantity <= r.missingUnits + EPS && Math.abs(gross - r.quotedGross) < 1e-6);
+    let requestedGross = r.quotedGross;
+    if (hasNeedQuote) {
+      const basis = r.remainingNeedQuote;
+      ensure(basis && typeof basis === 'object' && !Array.isArray(basis)
+        && JSON.stringify(Object.keys(basis).sort()) === JSON.stringify(['version','policyId','requiredUnits','unitPrice','gross'].sort()));
+      ensure(basis!.version === 1 && basis!.policyId === SERVICE_MATERIAL_POLICY);
+      num(basis!.requiredUnits, EPS, r.missingUnits); num(basis!.unitPrice, EPS, 1e6); num(basis!.gross, EPS, r.missingUnits * 1e6);
+      ensure(basis!.requiredUnits === r.missingUnits && basis!.unitPrice === Math.max(...r.quoteLots.map(lot => lot.unitPrice))
+        && basis!.gross === basis!.requiredUnits * basis!.unitPrice);
+      requestedGross = basis!.gross;
+    }
+    ensure(r.cap === Math.min(CAP, Math.ceil(requestedGross)));
     num(r.spent, 0, r.cap); ensure(Array.isArray(r.receiptIds) && new Set(r.receiptIds).size === r.receiptIds.length && r.receiptIds.length <= 64 && Array.isArray(r.signatures));
     const receipts = order!.receipts.filter(receipt => receipt.budgetId === r.id);
     ensure(receipts.length === r.receiptIds.length && receipts.every((receipt, index) => receipt.procurementId === r.receiptIds[index] && receipt.purchasedAt >= (r.approvedAt ?? Infinity) - EPS));

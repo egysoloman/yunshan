@@ -1,0 +1,33 @@
+{
+  "output": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source/artifacts/tenant-continuity-diagnostic",
+  "thirdRound": "NOT_OBSERVED",
+  "steps": 256,
+  "finalTick": 6364,
+  "finalClock": 2071,
+  "inputSHA256": "ae0dfd1571c960d8a150fc720f3ae3eb31e16534a98d04e3941b1123ae666bc7",
+  "resultSHA256": "737582461d635255baabf4916f9a1840052ea77ad85fb976f70c917d5f30dbbf",
+  "finalSHA256": "3181c1794046654e3543bcf50db426aff24baa254c927f681755316bbb4d0a2c",
+  "tenantArrivalCount": 101,
+  "newTenantDecisionCount": 0,
+  "newReopeningCount": 0,
+  "completedNewReopeningCount": 0,
+  "checks": {
+    "originalUnchanged": true,
+    "sourceStable": true,
+    "scriptStable": true,
+    "policyOnlyTwoFields": true,
+    "controlsStable": true,
+    "phaseOrderValid": true,
+    "moneyConservedWithinTolerance": true,
+    "moneyTolerance": 0.000001,
+    "finalValidation": {
+      "ok": true,
+      "message": "完整存档已通过生产读取校验；原城市未改变。"
+    },
+    "finalPartition": {
+      "byteExact": true,
+      "count": 4,
+      "sha256": "3181c1794046654e3543bcf50db426aff24baa254c927f681755316bbb4d0a2c"
+    }
+  }
+}

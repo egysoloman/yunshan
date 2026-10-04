@@ -1,0 +1,1653 @@
+{
+  "scope": "Pure JSON read of genuine actual03 terminal; zero Simulation construction/steps. Static road distances do not prove future physical walkability; no future price, food, contract or supply assumed.",
+  "terminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "tick": 2392,
+  "clock": 10048,
+  "day": 6,
+  "hour": 23.466666666666665,
+  "sourceSpeed": 16,
+  "sourcePolicies": {
+    "referenceCollisionPolicyId": null,
+    "mealRoutePolicyId": null
+  },
+  "factory": {
+    "shop": {
+      "id": "shop-civic-0-workshop",
+      "buildingId": "civic-0-workshop",
+      "districtId": "civic-0",
+      "inventory": 0,
+      "price": 17.99999886201164,
+      "revenue": 1840.291754714957,
+      "profit": 365.01053036157305,
+      "customers": 0,
+      "open": false,
+      "employees": 8,
+      "ownerId": "citizen-55",
+      "cash": 367.2975655990686
+    },
+    "company": null,
+    "accountKind": "shop.cash",
+    "actualPrivateCash": 367.2975655990686,
+    "currentPrivatePlan": {
+      "day": 4,
+      "shopId": "shop-civic-0-workshop",
+      "assignments": [
+        {
+          "citizenId": "citizen-55",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 232
+        },
+        {
+          "citizenId": "citizen-187",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 339.7670453522291
+        },
+        {
+          "citizenId": "citizen-253",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 360.7689675960662
+        },
+        {
+          "citizenId": "citizen-319",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 383.9448699495886
+        },
+        {
+          "citizenId": "citizen-385",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 320.0246968996135
+        },
+        {
+          "citizenId": "citizen-451",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 320.38801521511385
+        },
+        {
+          "citizenId": "citizen-517",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 375.9448699495886
+        },
+        {
+          "citizenId": "citizen-583",
+          "ratePerMinute": 0.09224933333333334,
+          "minutesCap": 480,
+          "workedMinutes": 360.3433101511373
+        }
+      ],
+      "reviews": [
+        {
+          "at": 6316,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -201.9109437647201,
+            "y": 0.6,
+            "z": -58.58626503532819
+          },
+          "cash": 459.74080269365334,
+          "earnedDebt": 20.663850666666665,
+          "priorCommitment": 0,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 354.23743999999994
+        }
+      ]
+    },
+    "currentDay": 6,
+    "planIsCurrent": false,
+    "ownerId": "citizen-55",
+    "ownerNeeds": {
+      "hunger": 0,
+      "fatigue": 100,
+      "social": 74.01646796371426,
+      "fun": 99.37034724943376
+    },
+    "ownerPosition": {
+      "x": -2,
+      "y": 6.6,
+      "z": 1.2
+    }
+  },
+  "workers": [
+    {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "money": 455.4243792275117,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 74.01646796371426,
+        "fun": 99.37034724943376
+      },
+      "state": "sleeping",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 30.018203957378375,
+        "health": 91.00299147066839,
+        "mood": 62.26489894762073,
+        "stress": 8.998103554726455,
+        "alive": true,
+        "skill": 43.38200000000169,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10060.429691094672,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 34.857423886454946,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 66.44576735955421,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-187",
+      "name": "顾舟1",
+      "money": 452.27999435329417,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 78.91277246054912,
+        "fun": 100
+      },
+      "state": "sleeping",
+      "position": {
+        "x": 2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 27.018203957378375,
+        "health": 96.46949783211414,
+        "mood": 65.00609262576987,
+        "stress": 8.680693226951725,
+        "alive": true,
+        "skill": 34.38000000000169,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10067.5909862197,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": 2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 30.968370961353457,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 62.47431472213201,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-253",
+      "name": "云月1",
+      "money": 401.5385571528267,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 92.33438492840916,
+        "fun": 100
+      },
+      "state": "sleeping",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 48.018203957378375,
+        "health": 95.41494943416099,
+        "mood": 73.08300917514859,
+        "stress": 5.527037994914416,
+        "alive": true,
+        "skill": 51.912000000001115,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10068.881972999545,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 34.857423886454946,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 66.44576735955421,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-319",
+      "name": "顾青2",
+      "money": 244.80971410010642,
+      "needs": {
+        "hunger": 48.79999999999853,
+        "fatigue": 100,
+        "social": 91.53999999999968,
+        "fun": 100
+      },
+      "state": "sleeping",
+      "position": {
+        "x": 2,
+        "y": 0.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 14,
+      "profile": {
+        "age": 24.018203957378375,
+        "health": 100,
+        "mood": 86.87866367501186,
+        "stress": 7.632092251038706e-17,
+        "alive": true,
+        "skill": 24.895999999999503,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10069.378161098342,
+      "routeLength": 14,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": -13
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 18
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 19
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 19
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 19
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 70,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 64,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 64,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 32,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 32,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2,
+          "y": 0.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 30.38157336281319,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 62.185528863233124,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-385",
+      "name": "云川2",
+      "money": 246.8472785038559,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 100,
+        "fun": 94.56918551848628
+      },
+      "state": "sleeping",
+      "position": {
+        "x": 1,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 45.018203957378375,
+        "health": 90.24614943416069,
+        "mood": 67.37513440179339,
+        "stress": 8.86449761013589,
+        "alive": true,
+        "skill": 43.632000000001995,
+        "family": [
+          "citizen-384"
+        ],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10053.313605647301,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": 1,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 31.938065063494374,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 63.46684173645322,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-451",
+      "name": "顾岚3",
+      "money": 301.81412147568176,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 67.29625153619958,
+        "fun": 93.01034724943383
+      },
+      "state": "sleeping",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 21.018203957378375,
+        "health": 98.22590905977923,
+        "mood": 59.68670691692391,
+        "stress": 7.342194685878342,
+        "alive": true,
+        "skill": 16.63599999999998,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10061.634963607416,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 34.857423886454946,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 66.44576735955421,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-517",
+      "name": "云澄3",
+      "money": 274.40478079046994,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 82.45619047618916,
+        "fun": 100
+      },
+      "state": "sleeping",
+      "position": {
+        "x": -2,
+        "y": 0.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 10,
+      "profile": {
+        "age": 42.018203957378375,
+        "health": 90.84454943416084,
+        "mood": 66.78437639376847,
+        "stress": 8.530007830959203,
+        "alive": true,
+        "skill": 34.248000000001525,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10055.824252828024,
+      "routeLength": 10,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -2,
+          "y": 0.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 34.337151891209615,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 66.17431525901874,
+          "canPayOne": true
+        }
+      ]
+    },
+    {
+      "id": "citizen-583",
+      "name": "顾溪4",
+      "money": 395.10611758988193,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 81.36164268049208,
+        "fun": 99.83940238814695
+      },
+      "state": "sleeping",
+      "position": {
+        "x": -1,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "food": 0,
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "destinationId": "civic-0-home",
+      "routeIndex": 12,
+      "profile": {
+        "age": 63.018203957378375,
+        "health": 98.3692889143811,
+        "mood": 66.4101281946552,
+        "stress": 7.103610957022838,
+        "alive": true,
+        "skill": 52.16000000000142,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10082.144065533299,
+      "routeLength": 12,
+      "remainingRoutePoints": [],
+      "fullExistingRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -1,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "currentStairCursor": null,
+      "currentAttendance": null,
+      "pendingPeopleMinutes": null,
+      "localFoodOffers": [
+        {
+          "id": "shop-civic-0-market",
+          "buildingId": "civic-0-market",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.999993867675727,
+          "node": "civic-0-market-door",
+          "roadDistanceFromHomeDoor": 32,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 32.0,
+          "euclideanDistance": 33.8827389683892,
+          "canPayOne": true
+        },
+        {
+          "id": "shop-civic-0-farm",
+          "buildingId": "civic-0-farm",
+          "district": "civic-0",
+          "actualOpen": false,
+          "actualInventory": 0.6963545465176235,
+          "wholeUnitsAvailable": 0,
+          "unitRetailPrice": 17.940500093565205,
+          "node": "civic-0-farm-door",
+          "roadDistanceFromHomeDoor": 64,
+          "roadReachableFromHomeDoor": true,
+          "euclideanFromHomeDoor": 64.0,
+          "euclideanDistance": 65.4525782532667,
+          "canPayOne": true
+        }
+      ]
+    }
+  ],
+  "foodShops": [
+    {
+      "id": "shop-civic-0-market",
+      "buildingId": "civic-0-market",
+      "district": "civic-0",
+      "actualOpen": false,
+      "actualInventory": 0,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 17.999993867675727,
+      "node": "civic-0-market-door",
+      "roadDistanceFromHomeDoor": 32,
+      "roadReachableFromHomeDoor": true,
+      "euclideanFromHomeDoor": 32.0
+    },
+    {
+      "id": "shop-civic-0-farm",
+      "buildingId": "civic-0-farm",
+      "district": "civic-0",
+      "actualOpen": false,
+      "actualInventory": 0.6963545465176235,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 17.940500093565205,
+      "node": "civic-0-farm-door",
+      "roadDistanceFromHomeDoor": 64,
+      "roadReachableFromHomeDoor": true,
+      "euclideanFromHomeDoor": 64.0
+    },
+    {
+      "id": "shop-civic-1-market",
+      "buildingId": "civic-1-market",
+      "district": "civic-1",
+      "actualOpen": false,
+      "actualInventory": 27,
+      "wholeUnitsAvailable": 27,
+      "unitRetailPrice": 16.466839896428187,
+      "node": "civic-1-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 282.0
+    },
+    {
+      "id": "shop-civic-1-farm",
+      "buildingId": "civic-1-farm",
+      "district": "civic-1",
+      "actualOpen": false,
+      "actualInventory": 0.07645105647749517,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 16.0408604415288,
+      "node": "civic-1-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 314.0
+    },
+    {
+      "id": "shop-civic-2-market",
+      "buildingId": "civic-2-market",
+      "district": "civic-2",
+      "actualOpen": false,
+      "actualInventory": 31,
+      "wholeUnitsAvailable": 31,
+      "unitRetailPrice": 16.15756340208952,
+      "node": "civic-2-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 532.0
+    },
+    {
+      "id": "shop-civic-2-farm",
+      "buildingId": "civic-2-farm",
+      "district": "civic-2",
+      "actualOpen": false,
+      "actualInventory": 0.6481583156851229,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 16.070282651337784,
+      "node": "civic-2-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 564.0
+    },
+    {
+      "id": "shop-civic-3-market",
+      "buildingId": "civic-3-market",
+      "district": "civic-3",
+      "actualOpen": false,
+      "actualInventory": 34,
+      "wholeUnitsAvailable": 34,
+      "unitRetailPrice": 16.29747447660316,
+      "node": "civic-3-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 782.0
+    },
+    {
+      "id": "shop-civic-3-farm",
+      "buildingId": "civic-3-farm",
+      "district": "civic-3",
+      "actualOpen": false,
+      "actualInventory": 4.299247090732905,
+      "wholeUnitsAvailable": 4,
+      "unitRetailPrice": 15.402952323091592,
+      "node": "civic-3-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 814.0
+    },
+    {
+      "id": "shop-civic-4-market",
+      "buildingId": "civic-4-market",
+      "district": "civic-4",
+      "actualOpen": false,
+      "actualInventory": 18,
+      "wholeUnitsAvailable": 18,
+      "unitRetailPrice": 16.659507844701075,
+      "node": "civic-4-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1032.0
+    },
+    {
+      "id": "shop-civic-4-farm",
+      "buildingId": "civic-4-farm",
+      "district": "civic-4",
+      "actualOpen": false,
+      "actualInventory": 0.25956546670786906,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 16.3270714531578,
+      "node": "civic-4-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1064.0
+    },
+    {
+      "id": "shop-civic-5-market",
+      "buildingId": "civic-5-market",
+      "district": "civic-5",
+      "actualOpen": false,
+      "actualInventory": 32,
+      "wholeUnitsAvailable": 32,
+      "unitRetailPrice": 16.5529863642925,
+      "node": "civic-5-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1282.0
+    },
+    {
+      "id": "shop-civic-5-farm",
+      "buildingId": "civic-5-farm",
+      "district": "civic-5",
+      "actualOpen": false,
+      "actualInventory": 1.9002618496602963,
+      "wholeUnitsAvailable": 1,
+      "unitRetailPrice": 15.55608713910407,
+      "node": "civic-5-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1314.0
+    },
+    {
+      "id": "shop-civic-6-market",
+      "buildingId": "civic-6-market",
+      "district": "civic-6",
+      "actualOpen": false,
+      "actualInventory": 16,
+      "wholeUnitsAvailable": 16,
+      "unitRetailPrice": 17.042264957115854,
+      "node": "civic-6-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1532.0
+    },
+    {
+      "id": "shop-civic-6-farm",
+      "buildingId": "civic-6-farm",
+      "district": "civic-6",
+      "actualOpen": false,
+      "actualInventory": 0.9938965883242474,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 15.872892517779484,
+      "node": "civic-6-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1564.0
+    },
+    {
+      "id": "shop-civic-7-market",
+      "buildingId": "civic-7-market",
+      "district": "civic-7",
+      "actualOpen": false,
+      "actualInventory": 37,
+      "wholeUnitsAvailable": 37,
+      "unitRetailPrice": 16.23753026722153,
+      "node": "civic-7-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1782.0
+    },
+    {
+      "id": "shop-civic-7-farm",
+      "buildingId": "civic-7-farm",
+      "district": "civic-7",
+      "actualOpen": false,
+      "actualInventory": 0.1292034212936528,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 15.622474855589129,
+      "node": "civic-7-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 1814.0
+    },
+    {
+      "id": "shop-civic-8-market",
+      "buildingId": "civic-8-market",
+      "district": "civic-8",
+      "actualOpen": false,
+      "actualInventory": 26,
+      "wholeUnitsAvailable": 26,
+      "unitRetailPrice": 16.77164159851445,
+      "node": "civic-8-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2032.0
+    },
+    {
+      "id": "shop-civic-8-farm",
+      "buildingId": "civic-8-farm",
+      "district": "civic-8",
+      "actualOpen": false,
+      "actualInventory": 14.43296976948642,
+      "wholeUnitsAvailable": 14,
+      "unitRetailPrice": 14.951313244990207,
+      "node": "civic-8-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2064.0
+    },
+    {
+      "id": "shop-civic-9-market",
+      "buildingId": "civic-9-market",
+      "district": "civic-9",
+      "actualOpen": false,
+      "actualInventory": 32,
+      "wholeUnitsAvailable": 32,
+      "unitRetailPrice": 16.38677423490653,
+      "node": "civic-9-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2282.0
+    },
+    {
+      "id": "shop-civic-9-farm",
+      "buildingId": "civic-9-farm",
+      "district": "civic-9",
+      "actualOpen": false,
+      "actualInventory": 0.8992837785950343,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 15.2959636935981,
+      "node": "civic-9-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2314.0
+    },
+    {
+      "id": "shop-civic-10-market",
+      "buildingId": "civic-10-market",
+      "district": "civic-10",
+      "actualOpen": false,
+      "actualInventory": 35,
+      "wholeUnitsAvailable": 35,
+      "unitRetailPrice": 16.332406775665106,
+      "node": "civic-10-market-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2532.0
+    },
+    {
+      "id": "shop-civic-10-farm",
+      "buildingId": "civic-10-farm",
+      "district": "civic-10",
+      "actualOpen": false,
+      "actualInventory": 0.08569873841476294,
+      "wholeUnitsAvailable": 0,
+      "unitRetailPrice": 15.085807323557848,
+      "node": "civic-10-farm-door",
+      "roadDistanceFromHomeDoor": null,
+      "roadReachableFromHomeDoor": false,
+      "euclideanFromHomeDoor": 2564.0
+    }
+  ],
+  "roadComponents": [
+    [
+      "civic-0-clinic-door",
+      "civic-0-farm-door",
+      "civic-0-hall-door",
+      "civic-0-home-door",
+      "civic-0-market-door",
+      "civic-0-school-door",
+      "civic-0-workshop-door"
+    ],
+    [
+      "civic-1-farm-door",
+      "civic-1-hall-door",
+      "civic-1-home-door",
+      "civic-1-market-door"
+    ],
+    [
+      "civic-10-farm-door",
+      "civic-10-hall-door",
+      "civic-10-home-door",
+      "civic-10-market-door"
+    ],
+    [
+      "civic-2-farm-door",
+      "civic-2-hall-door",
+      "civic-2-home-door",
+      "civic-2-market-door"
+    ],
+    [
+      "civic-3-farm-door",
+      "civic-3-hall-door",
+      "civic-3-home-door",
+      "civic-3-market-door"
+    ],
+    [
+      "civic-4-farm-door",
+      "civic-4-hall-door",
+      "civic-4-home-door",
+      "civic-4-market-door"
+    ],
+    [
+      "civic-5-farm-door",
+      "civic-5-hall-door",
+      "civic-5-home-door",
+      "civic-5-market-door"
+    ],
+    [
+      "civic-6-farm-door",
+      "civic-6-hall-door",
+      "civic-6-home-door",
+      "civic-6-market-door"
+    ],
+    [
+      "civic-7-farm-door",
+      "civic-7-hall-door",
+      "civic-7-home-door",
+      "civic-7-market-door"
+    ],
+    [
+      "civic-8-farm-door",
+      "civic-8-hall-door",
+      "civic-8-home-door",
+      "civic-8-market-door"
+    ],
+    [
+      "civic-9-farm-door",
+      "civic-9-hall-door",
+      "civic-9-home-door",
+      "civic-9-market-door"
+    ]
+  ],
+  "oldCollisionEvidence": {
+    "currentPhysicalWaitingIds": [],
+    "currentEatActivities": [],
+    "explanation": "All eight saved actors currently sleep/rest at their actual home points and have completed routes; no live physicalWaiting is in this snapshot. Ref/meal cannot be asserted to repair a presently proven door block here. Old W route01/02/03 separately preserve genuine facade/counter blocks."
+  },
+  "attributedMaterials": {
+    "openingStock": 0,
+    "productionEvents": 39,
+    "produced": 35.05152434949928,
+    "lastProduction": {
+      "tick": 1582,
+      "clock": 6808,
+      "event": {
+        "type": "production",
+        "shopId": "shop-civic-0-workshop",
+        "districtId": "civic-0",
+        "amount": 1.1115650171481302,
+        "minutes": 84
+      }
+    },
+    "educationPurchased": 6.0,
+    "educationGross": 50.040937057435336,
+    "upkeepPurchased": 29.05152434949928,
+    "upkeepGross": 229.00674100976528,
+    "closingFactoryStock": 0,
+    "residual": 0.0
+  },
+  "healthOrder": {
+    "clinicalTimingVersion": 2,
+    "id": "service-2",
+    "petitionId": "petition-2",
+    "topic": "health",
+    "siteId": "civic-0-clinic",
+    "state": "awaitingSupply",
+    "scheduledAt": 7788,
+    "approvedAt": 7788,
+    "approvedBy": [
+      "citizen-22",
+      "citizen-88"
+    ],
+    "authorizedCap": 40,
+    "spent": 0,
+    "receivedUnits": 0,
+    "consumedUnits": 0,
+    "targetUnits": 6,
+    "requiredMinutes": 20,
+    "servedIds": [],
+    "serviceMinutes": {},
+    "staffIds": [],
+    "receipts": [],
+    "retryAt": 10072,
+    "completedAt": null,
+    "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+  },
+  "player": {
+    "position": {
+      "x": -135.99999999999994,
+      "y": 0.6,
+      "z": -59.99999999999993
+    },
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "money": 416.02821428458134,
+    "reputation": 0,
+    "needs": {
+      "hunger": 91.51999999999953,
+      "fatigue": 69.4959999999983,
+      "social": 0,
+      "fun": 43.8879999999972
+    },
+    "inventory": {
+      "block": 32,
+      "food": 1
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "playerProfile": {
+    "age": 24.018203957378375,
+    "health": 76.68774009276821,
+    "mood": 51.152008549631766,
+    "stress": 0.00031632803139048277,
+    "alive": true,
+    "skill": 0,
+    "family": [],
+    "historyTags": [
+      "星际来客"
+    ]
+  }
+}

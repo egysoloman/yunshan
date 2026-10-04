@@ -1,0 +1,594 @@
+{
+  "kind": "selected original evidence copy receipt; no test or simulation outcome inferred",
+  "createdUtc": "2026-10-04T21:26:37.508689+00:00",
+  "scope": "Only docs/validation/2026-10-04-city-life-root15 public documentation; source SEALED/CLOSED groups unchanged",
+  "files": [
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/REPORT.md",
+      "publicPath": "evidence/public-health-player/REPORT.md",
+      "bytes": 8677,
+      "sha256": "c24d2414bd3b1a22f23220275309a696eefd5f6f52abbdf4fb0051c347be2321",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/HANDOFF.md",
+      "publicPath": "evidence/public-health-player/HANDOFF.md",
+      "bytes": 3262,
+      "sha256": "188cceece98b2c1320b1538092493d90b6d8d97b1e37d54d051ef83b1f7c883e",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/PRODUCER-RECEIPT.json",
+      "publicPath": "evidence/public-health-player/PRODUCER-RECEIPT.json",
+      "bytes": 1021,
+      "sha256": "45c17e0cac928c1d903fec2fcc56f77819934b7e588df57030fd756b055e15b6",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/RUN-INDEX.json",
+      "publicPath": "evidence/public-health-player/RUN-INDEX.json",
+      "bytes": 21519,
+      "sha256": "31c871f9743f63e3fb728c879f50c6d7151097c7b1d7bd86d2aa743503f555e1",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/NEXT-SCOPE-STATUS.json",
+      "publicPath": "evidence/public-health-player/NEXT-SCOPE-STATUS.json",
+      "bytes": 1539,
+      "sha256": "494b8dace0db19cb2e18ab9299039758d7a2f287d91484d1f4568b2aabf2fabc",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/CLOSURE-RECEIPT.json",
+      "publicPath": "evidence/public-health-player/CLOSURE-RECEIPT.json",
+      "bytes": 1167,
+      "sha256": "b527c4217572d02de549c26baec6e64810edfe73de2f59bef5f0da422e66443f",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/SOURCE-INPUTS-318.json",
+      "publicPath": "evidence/public-health-player/SOURCE-INPUTS-318.json",
+      "bytes": 34762,
+      "sha256": "2f7a15c0756a051c81211823a4dedd1e51809835f755a966c003d654f2845589",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/ACTUAL03-STAGE-BINDING.json",
+      "publicPath": "evidence/public-health-player/ACTUAL03-STAGE-BINDING.json",
+      "bytes": 37445,
+      "sha256": "e7c52bab73e223ecef36e6b202cbd377826f029a67481d930557dbd7f6b88d93",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/TERMINAL-WORKER-FOOD-DIAGNOSTIC.json",
+      "publicPath": "evidence/public-health-player/TERMINAL-WORKER-FOOD-DIAGNOSTIC.json",
+      "bytes": 41363,
+      "sha256": "3d0f3e5d0c5910883120707781d108c55f447859eeba4fb3c0b9d732612a2158",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/TERMINAL-GIFT-SUPPLY-DIAGNOSTIC.json",
+      "publicPath": "evidence/public-health-player/TERMINAL-GIFT-SUPPLY-DIAGNOSTIC.json",
+      "bytes": 42432,
+      "sha256": "5255b7c63e269bc85a838117b9b055ad952421d5de10759b744ecdb0901d2d08",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/GIFT-LIFE-SUPPLY-PLAN.md",
+      "publicPath": "evidence/public-health-player/GIFT-LIFE-SUPPLY-PLAN.md",
+      "bytes": 7266,
+      "sha256": "ef8954ac7b39ccf38d9e82fe84fbac2f33499a6f7a91d34caa973c04784b23fa",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/GIFT-ROUTE-PREPARED.json",
+      "publicPath": "evidence/public-health-player/GIFT-ROUTE-PREPARED.json",
+      "bytes": 6032,
+      "sha256": "b8210fbdb03b2969bf9d4b25fc107cd10b2a2e58667b100bf5c34e2dba33a16c",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/POLICY-CONTINUATION-PREPARED.json",
+      "publicPath": "evidence/public-health-player/POLICY-CONTINUATION-PREPARED.json",
+      "bytes": 36721,
+      "sha256": "79dc73811cad4bb3a88b05e4efc07eba6ad53d05f8d6716904065c289a74bdfe",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01-driver-as-run.mts",
+      "publicPath": "evidence/public-health-player/actual01-driver-as-run.mts",
+      "bytes": 23136,
+      "sha256": "337bd336e36fe8beda8e5887aef9be5151585be1ec805529e3cc692993f5bc30",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02-driver-as-run.mts",
+      "publicPath": "evidence/public-health-player/actual02-driver-as-run.mts",
+      "bytes": 23607,
+      "sha256": "27840d57fcd1cb6d340a3fafccbd07e01008db8421ca11aa30b3cb6728ab17d8",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03-driver-as-run.mts",
+      "publicPath": "evidence/public-health-player/actual03-driver-as-run.mts",
+      "bytes": 25738,
+      "sha256": "9c8156afb1cea80d6cd8bd81ae220b023f761fa3c94a8e8b20346d3cada29e84",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/public-health-policy-continuation.mts",
+      "publicPath": "evidence/public-health-player/public-health-policy-continuation.mts",
+      "bytes": 25382,
+      "sha256": "29825435f94675ed9cda392abf437647a7f7f9bb6f28e39d1158330300c35794",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01/raw.log",
+      "publicPath": "evidence/public-health-player/actual01/raw.log",
+      "bytes": 848,
+      "sha256": "9723917d72971343c5606a5a8fa3ed1c7dbe743e544b545d18a3c52eeeb48fca",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01/receipt.json",
+      "publicPath": "evidence/public-health-player/actual01/receipt.json",
+      "bytes": 945,
+      "sha256": "aa78fdb61c160646ea03e446ddac528dc2abb1b6628d5f20fedeb86edd8283cc",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01/artifacts/FAIL-summary.json",
+      "publicPath": "evidence/public-health-player/actual01/artifacts/FAIL-summary.json",
+      "bytes": 6450,
+      "sha256": "cc23d953400b22d780cda7d20b0df8c6a7bdb25a7f36158a0310413b8789e157",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01/artifacts/frontier.summary.json",
+      "publicPath": "evidence/public-health-player/actual01/artifacts/frontier.summary.json",
+      "bytes": 4966,
+      "sha256": "070e82e7111b03ec3b253f07817371e78da1b0131bfb01fa7600b2ce28e00715",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual01/artifacts/trace-care.json",
+      "publicPath": "evidence/public-health-player/actual01/artifacts/trace-care.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02/raw.log",
+      "publicPath": "evidence/public-health-player/actual02/raw.log",
+      "bytes": 901,
+      "sha256": "e06936633e7697e10e68eabbaec7c459a0853a336e7d8ddb69a1f7ad54b8992a",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02/receipt.json",
+      "publicPath": "evidence/public-health-player/actual02/receipt.json",
+      "bytes": 945,
+      "sha256": "51f3b2e9992eef73fdf724e9e9d6bca5d565d0437974043a254c2339fd3a6e3f",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02/artifacts/FAIL-summary.json",
+      "publicPath": "evidence/public-health-player/actual02/artifacts/FAIL-summary.json",
+      "bytes": 6280,
+      "sha256": "557daae5d4bf1739d18b95164e1980669f3193323be0b094ad1e84e19d9ff9d6",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02/artifacts/frontier.summary.json",
+      "publicPath": "evidence/public-health-player/actual02/artifacts/frontier.summary.json",
+      "bytes": 5038,
+      "sha256": "0730d01fff04096a307427f0c123256916736cb0cf5bf57a0fa0b0a840bc9bd7",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual02/artifacts/trace-care.json",
+      "publicPath": "evidence/public-health-player/actual02/artifacts/trace-care.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/raw.log",
+      "publicPath": "evidence/public-health-player/actual03/raw.log",
+      "bytes": 9456,
+      "sha256": "d961c9af3c8d9175bafba95bb8b2ff502200b3cbc119ca64a3c9ec37fce9be1c",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/receipt.json",
+      "publicPath": "evidence/public-health-player/actual03/receipt.json",
+      "bytes": 945,
+      "sha256": "83e564c98ad70a4267a550ba209a75786bc32f1812cad7c4e452eca46821dbd3",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/FAIL-summary.json",
+      "publicPath": "evidence/public-health-player/actual03/artifacts/FAIL-summary.json",
+      "bytes": 7731,
+      "sha256": "db2f0f6dfa80112110b2bf481dc00ad2a58bb9a22835932245d4fb522b6353cb",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/frontier.summary.json",
+      "publicPath": "evidence/public-health-player/actual03/artifacts/frontier.summary.json",
+      "bytes": 6287,
+      "sha256": "dc9f5ad89882206c23eaa17abcfa67a22efa2895dda417ec6307aafa26069e75",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/trace-care.json",
+      "publicPath": "evidence/public-health-player/actual03/artifacts/trace-care.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/inputs-before.json",
+      "publicPath": "evidence/public-health-player/actual03/inputs-before.json",
+      "bytes": 34762,
+      "sha256": "2f7a15c0756a051c81211823a4dedd1e51809835f755a966c003d654f2845589",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/inputs-after.json",
+      "publicPath": "evidence/public-health-player/actual03/inputs-after.json",
+      "bytes": 34762,
+      "sha256": "2f7a15c0756a051c81211823a4dedd1e51809835f755a966c003d654f2845589",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/inherited-prefix-bindings.json",
+      "publicPath": "evidence/public-health-player/actual03/artifacts/inherited-prefix-bindings.json",
+      "bytes": 826,
+      "sha256": "4804a1de81ab80c78e22ae28e96cea0282bc8170b5f41f2e48224a8c7912bc01",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/terminal-worker-read01/raw.log",
+      "publicPath": "evidence/public-health-player/terminal-worker-read01/raw.log",
+      "bytes": 1072,
+      "sha256": "dc2b033ab4f70586bc0e2f92088e15b581139b534803187ac61be43156685049",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/terminal-worker-read01/receipt.json",
+      "publicPath": "evidence/public-health-player/terminal-worker-read01/receipt.json",
+      "bytes": 733,
+      "sha256": "15b324fe0aa697f5d957556d28e3be45e6dbfbee219675d382a8a13f391e8df1",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/terminal-gift-read01/raw.log",
+      "publicPath": "evidence/public-health-player/terminal-gift-read01/raw.log",
+      "bytes": 504,
+      "sha256": "b7923190c847bc3f84a418cb1a953689eebc504f393d7faf3cd2df925ded5350",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/terminal-gift-read01/receipt.json",
+      "publicPath": "evidence/public-health-player/terminal-gift-read01/receipt.json",
+      "bytes": 792,
+      "sha256": "f903a8551aef1a1bd487a46f504b117586b984e06837fa5c4f907e9ff4351278",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/REPORT.md",
+      "publicPath": "evidence/tenant-reopening/REPORT.md",
+      "bytes": 6254,
+      "sha256": "cfdf823f9ec8d385c8f01086da220279a57d590c1451332f89982f927f1993b8",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/HANDOFF.json",
+      "publicPath": "evidence/tenant-reopening/HANDOFF.json",
+      "bytes": 15099,
+      "sha256": "ffa7926af32d12f7e3162c5a5898dc90e218492898264d9dddfef9ef8184c460",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/SEAL.json",
+      "publicPath": "evidence/tenant-reopening/SEAL.json",
+      "bytes": 48128,
+      "sha256": "24616db18fe1a19a0a3c5ed4346d19760d85280a83c2baae115cca24b3e9eb61",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/CURRENT-EXECUTION-STATUS.json",
+      "publicPath": "evidence/tenant-reopening/CURRENT-EXECUTION-STATUS.json",
+      "bytes": 10268,
+      "sha256": "1d42e36a59c9a74d87495f23f8bdbec53e81a9550cde1280592ca59a0bbabb2a",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/DEFAULT-SCOPE-FRONTIER.json",
+      "publicPath": "evidence/tenant-reopening/DEFAULT-SCOPE-FRONTIER.json",
+      "bytes": 8880,
+      "sha256": "0ffd78f357828141902722fa6af533e4f9a3dd687b2a0f5ec1bcb2f87bab016b",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/GUARD-DIAGNOSTIC.json",
+      "publicPath": "evidence/tenant-reopening/GUARD-DIAGNOSTIC.json",
+      "bytes": 27177,
+      "sha256": "6d0800c32143214a53c5dd177e42894eb24d1cc3a19ee9e2a10a1bfafc058253",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/CASH-PROTECTED-FUNDS-DECOMPOSITION.json",
+      "publicPath": "evidence/tenant-reopening/CASH-PROTECTED-FUNDS-DECOMPOSITION.json",
+      "bytes": 5025,
+      "sha256": "7610e50e3e90cefabfef38289e326b4bf2472aa21bf8228756b089bd07268e82",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/FOLLOWUP-GUARD-DIAGNOSTIC.json",
+      "publicPath": "evidence/tenant-reopening/FOLLOWUP-GUARD-DIAGNOSTIC.json",
+      "bytes": 3871,
+      "sha256": "dd897befe12917ee52df0e70217181dc54b9046aca6bc00a27537448fa8e10ab",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/diagnostic01/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/diagnostic01/receipt.json",
+      "bytes": 6135,
+      "sha256": "4e5e039dd3b5fa402a46a74c2bbaa0df0e57f33ac226e7ea9d3f44082af8e782",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/diagnostic01/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/diagnostic01/raw.log",
+      "bytes": 1148,
+      "sha256": "c3e95a82e45a4bb90851f9ce497a4d9dc6d121e77fa7263752225357ea66e381",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/followup256-01/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/followup256-01/receipt.json",
+      "bytes": 6133,
+      "sha256": "a9ac0577cfb5440657bbcd1f97443aa62e3c6710df8b94eadd26e01d1a33dac2",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/followup256-01/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/followup256-01/raw.log",
+      "bytes": 662,
+      "sha256": "4dc1011b8f21721ea05f604b722a7e95ec72e1ab24b4303c9b69900c72ee04ec",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-policy03/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-policy03/receipt.json",
+      "bytes": 6299,
+      "sha256": "013cd223309bf2c73ec9c36b3936ab1d56db3042eb49d900229f37303cc70856",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-policy03/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-policy03/raw.log",
+      "bytes": 1257,
+      "sha256": "765fbfb43a2df68ce5a203a10bdf1f841b56506340878a30cf55247078b65290",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-schema-codec02/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-schema-codec02/receipt.json",
+      "bytes": 6484,
+      "sha256": "a1e284ccf7fb10a886c180c1e221b8e49449f7c8935ab8b1bd54cb06730ab974",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-schema-codec02/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-schema-codec02/raw.log",
+      "bytes": 3236,
+      "sha256": "bb2a6f83b71e5c7504d4edc65e0374788977b86125c3159391aaacd512e69458",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/runtime-compact01/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/runtime-compact01/receipt.json",
+      "bytes": 6590,
+      "sha256": "b834d323219533d2579578daf68293b8653527078acfb187c1d9cec0da2f9f8c",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/runtime-compact01/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/runtime-compact01/raw.log",
+      "bytes": 714,
+      "sha256": "61da141b355319dab259b6dd6541b7cbc16e870a10c03509b552e8f77f761ae8",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/runtime-default01/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/runtime-default01/receipt.json",
+      "bytes": 6603,
+      "sha256": "b3bd57dfc89cbd09850b050bd52028ca827299f5f0f596c565be046c689ec023",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/runtime-default01/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/runtime-default01/raw.log",
+      "bytes": 734,
+      "sha256": "deb7f52847154d0269055bd0981092e16f1c136023f09868e85de974fe25bfce",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/REPORT.md",
+      "publicPath": "evidence/test-isolation-review/REPORT.md",
+      "bytes": 7689,
+      "sha256": "434a2940fca9688f82d00d33401fad19d8bbca7c8908b0365cf76ff754b31fb3",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/EVIDENCE-INDEX.json",
+      "publicPath": "evidence/test-isolation-review/EVIDENCE-INDEX.json",
+      "bytes": 76094,
+      "sha256": "4075891e980bc09e642ea5667b577d4f219f5ea27bfa787ad5b0c0e094870272",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/root-evidence/package-cli-and-original-failure-evidence.json",
+      "publicPath": "evidence/test-isolation-review/root-evidence/package-cli-and-original-failure-evidence.json",
+      "bytes": 2120,
+      "sha256": "c7678121ce6c97b3deb52cb9b9cadf098beca7426835c4722da87c382c582b62",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/root-evidence/package-only-shared-input-observation.json",
+      "publicPath": "evidence/test-isolation-review/root-evidence/package-only-shared-input-observation.json",
+      "bytes": 490,
+      "sha256": "0c0ed9eafd538dbec4d5440df91b0056cb33e78385914103ff075b0ec49c48e2",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/root-evidence/package-none-original.json",
+      "publicPath": "evidence/test-isolation-review/root-evidence/package-none-original.json",
+      "bytes": 855,
+      "sha256": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/root-evidence/package-process-as-read.json",
+      "publicPath": "evidence/test-isolation-review/root-evidence/package-process-as-read.json",
+      "bytes": 879,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01/root-evidence/proposed-flags-help-receipt.json",
+      "publicPath": "evidence/test-isolation-review/root-evidence/proposed-flags-help-receipt.json",
+      "bytes": 355,
+      "sha256": "22ff0c60b81bcf3c1149f7ef21dab350b80adf8fcb95b5b5caeae459301c75d2",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/ALL-FILES-SHA256.json",
+      "publicPath": "evidence/public-health-player/ALL-FILES-SHA256.json",
+      "bytes": 100531,
+      "sha256": "34982c7965ddbca87cde12fc7a63905439307c2a95e6d4a279080ff3bb713284",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/types07/inputs-before.json",
+      "publicPath": "evidence/tenant-reopening/scopes/types07/inputs-before.json",
+      "bytes": 33954,
+      "sha256": "64ea33cf49e371eb5235b1c35fcc9ac7323a5175b9286b3035431fd33d875118",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/types07/auxiliary-inputs-before.json",
+      "publicPath": "evidence/tenant-reopening/scopes/types07/auxiliary-inputs-before.json",
+      "bytes": 38148,
+      "sha256": "e22112d6a62f1118ca2ccace67460ad520ebf38f76580ce839e553afcd146a95",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-policy03/inputs-before.json",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-policy03/inputs-before.json",
+      "bytes": 33842,
+      "sha256": "6ed3def224564bbd6ff4dacc80d5e9c449e5c84b979fb3898110cb9da801239a",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/pure-policy03/auxiliary-inputs-before.json",
+      "publicPath": "evidence/tenant-reopening/scopes/pure-policy03/auxiliary-inputs-before.json",
+      "bytes": 38036,
+      "sha256": "0a2fbef2f17c2a4eb6504034d5b4822ff4f2ddd14d4bbf56cf8007d5a2063b79",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/types07/receipt.json",
+      "publicPath": "evidence/tenant-reopening/scopes/types07/receipt.json",
+      "bytes": 6135,
+      "sha256": "2ca42b86ffcf512acb3de27423390a5252055640dd927dc090d2240a5b347312",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/scopes/types07/raw.log",
+      "publicPath": "evidence/tenant-reopening/scopes/types07/raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-gift-contact-review-20261004-01/REPORT.md",
+      "publicPath": "evidence/gift-contact-review/REPORT.md",
+      "bytes": 9665,
+      "sha256": "04e08d1b308dd1be3d5c4d26cde09981753dfcd59b97657d020783a1bf7c8cc3",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-gift-contact-review-20261004-01/EVIDENCE-INDEX.json",
+      "publicPath": "evidence/gift-contact-review/EVIDENCE-INDEX.json",
+      "bytes": 28912,
+      "sha256": "38ae88e68e7aa2dc460ba89ab2a33ceba6514eaac57bb0742f6037f88d4b0268",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-gift-contact-review-20261004-01/root-evidence/pure-geometry-results.json",
+      "publicPath": "evidence/gift-contact-review/root-evidence/pure-geometry-results.json",
+      "bytes": 3965,
+      "sha256": "a9775696b981154f5a621dd410ccf859aa72605bd9cf961e2e9729ee40277efd",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/PRODUCTION.patch",
+      "publicPath": "evidence/tenant-reopening/NOT-INSTALLED/PRODUCTION.patch",
+      "bytes": 45149,
+      "sha256": "d04fe9b6fc5d0a72dfa2d50ff1b9bc8383c5ea4c0a594e9404ed0df3e7f73928",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/BASELINE304-SNAPSHOT.json",
+      "publicPath": "evidence/tenant-reopening/BASELINE304-SNAPSHOT.json",
+      "bytes": 79665,
+      "sha256": "59d7b659049bbd3339ef430de5267fab142edf75ac92e71f709e6963d857a553",
+      "copiedOriginalBytes": true
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/STATIC-CANDIDATE-CURRENT.json",
+      "publicPath": "evidence/tenant-reopening/STATIC-CANDIDATE-CURRENT.json",
+      "bytes": 37821,
+      "sha256": "33c0d1e2d4b9d1e84063731bfb068c1bad670a1b79baede377406f86a6987bc6",
+      "copiedOriginalBytes": true
+    }
+  ],
+  "copiedFiles": 79,
+  "copiedBytes": 1180323,
+  "originalResultsPreserved": true,
+  "testsRunByThisEditor": 0,
+  "simulationStepsRunByThisEditor": 0,
+  "gpuRunsByThisEditor": 0,
+  "excludedLargeProducer": {
+    "source": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/producer/public-health-player-evidence.zip",
+    "bytes": 29159931,
+    "sha256": "66d3689583330945030771be94a2b3149c4e0efae9b4ef34da38358484b4cf6a",
+    "payloadFiles": 840,
+    "copiedIntoGit": false,
+    "publicProducerReceipt": "evidence/public-health-player/PRODUCER-RECEIPT.json"
+  },
+  "readWorkspaceInstructions": [
+    {
+      "source": "/workspace/yunshan/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "source": "/workspace/yunshan/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "source": "/workspace/yunshan/开发备忘录.md",
+      "bytes": 434954,
+      "sha256": "79ccfedc29b98abf02f6877bd52a5c833175ae9c7a235dc4e2005c92e8c60016"
+    }
+  ],
+  "fullSuiteResult": "No final process-isolation result claimed; parent owns live full-rules01 scope and final manifest update.",
+  "giftReviewScope": "Read-only source review and pure original-building geometry; no Simulation, actual command or patient success. Parent private candidate not installed or run.",
+  "tenantPatch": "Original 7-production-file PRODUCTION.patch copied unchanged under NOT-INSTALLED. Baseline304/71, private candidate311/73, not current shared318/78; no patch applied."
+}
