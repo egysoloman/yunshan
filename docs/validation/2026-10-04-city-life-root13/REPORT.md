@@ -60,3 +60,7 @@ ROOT14两个新隔离实施组已开始：civic history4/body2归档解决真实
 ## 保存结果追加（15:28 UTC）
 
 Library唯一新16项批在保存开始前连接失败，新ID0、原memo版本5未替换；实际安全回执为delivery/LIBRARY-DELIVERY-RECEIPT.json。当前交付是仓库原文件，不是Library附件。源码ZIP18,172,052B/ccba2b…、集成原件ZIP37,456,057B/9ac217…及完整26418文件CASZIP68,695,513B/7f094f…已Git目录本地准备；sourcecut中的文档为保存/发布前快照，最终实回执单独追加，不改CLOSED或source-as-run。工作分支commit/push结果另附publication receipt。
+
+## 已发布结果追加（远端实际读回）
+
+实现提交 `17ad11d94029355207b52bce642e01f8f3747f1d` 已正常推送到 `takeover-city-life`，远端读回一致；main仍为 `6955d374a7d5bd928d2dadf4d0fdda74d416ca57`。本次再次逐字核对三个交付ZIP与提交Git blob，当前295运行输入仍与冻结图一致。实际回执见 `delivery/PUBLICATION-RECEIPT.json`；源码ZIP保留保存/发布前快照，不倒改CLOSED原件。Library新ID仍为0，原memo版本5没有替换。ROOT14仍隔离开发，未混入本提交，完整目标未完成。

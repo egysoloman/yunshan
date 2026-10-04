@@ -1,0 +1,45 @@
+{
+  "status": "PASS_REMOTE_READBACK",
+  "observedAt": "2026-10-04T15:45:31.048874+00:00",
+  "implementationCommit": "17ad11d94029355207b52bce642e01f8f3747f1d",
+  "workBranch": "takeover-city-life",
+  "remoteRefs": {
+    "refs/heads/main": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "refs/heads/takeover-city-life": "17ad11d94029355207b52bce642e01f8f3747f1d"
+  },
+  "mainUnchanged": true,
+  "workingTreeCleanBeforeDocumentationAppend": true,
+  "all295CurrentInputsMatchFrozenRun": true,
+  "all295GitBlobsMatchRunGraph": true,
+  "archives": {
+    "yunshan-root13-source.zip": {
+      "bytes": 18172052,
+      "sha256": "ccba2b5639557ed708a0c3fd23c90c4b8ff9f7da93b01075b1fd568ce8dbd30d",
+      "committedBytesMatch": true
+    },
+    "yunshan-root13-integrated-originals.zip": {
+      "bytes": 37456057,
+      "sha256": "9ac217f73a3d45a3ddc6068b2b463010341037c467afb6ded810da225981c699",
+      "committedBytesMatch": true
+    },
+    "yunshan-root13-complete-original-tree-cas.zip": {
+      "bytes": 68695513,
+      "sha256": "7f094f7bdd643b077eceaf823900fff94e6893c454e12841e36981694b29281d",
+      "committedBytesMatch": true
+    }
+  },
+  "pushResult": "Original git push completed with exit 0; exact remote refs read back after completion.",
+  "originalPushLogStoredInThisReceipt": false,
+  "noMainMergePRDeploymentOrPaidOperation": true,
+  "library": {
+    "status": "FAILED_BEFORE_LIBRARY_SAVE",
+    "newLibraryIDs": [],
+    "memoReplacementStarted": false
+  },
+  "completeGoal": false,
+  "next": [
+    "ROOT14 civic history compatibility and independent review before integration",
+    "ROOT14 v9 physical carrier and station continuity verification",
+    "Default hungry resident route and food-choice causal audit"
+  ]
+}
