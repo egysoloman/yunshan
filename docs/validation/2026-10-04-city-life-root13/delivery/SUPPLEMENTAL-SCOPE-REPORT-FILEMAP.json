@@ -1,0 +1,857 @@
+{
+  "schemaVersion": 1,
+  "kind": "supplemental-frozen-originals",
+  "group": "ROOT13-system-scope-report-20261004-01",
+  "originalProducerManifest": {
+    "path": "ROOT13-system-scope-report-20261004-01/FILEMAP.json",
+    "bytes": 34651,
+    "sha256": "3f149f8a904dbb86f52d20db570659e2966746dbe6b057224c30d71f362bd46d"
+  },
+  "producerClosed": {
+    "path": "ROOT13-system-scope-report-20261004-01/CLOSED.json",
+    "bytes": 776,
+    "sha256": "273f94e18be29869485c7e450687ccb60919ac117fba6995937a5849a8763595"
+  },
+  "originalProducerManifestCount": 207,
+  "regularFileCount": 209,
+  "files": {
+    "ROOT13-system-scope-report-20261004-01/AUDIT-RECEIPT.json": {
+      "bytes": 63796,
+      "sha256": "43acb72db5474984abdf15fd1b9ee63811cc7e73ce42c53553492e6e094cf2e6"
+    },
+    "ROOT13-system-scope-report-20261004-01/CLOSED.json": {
+      "bytes": 776,
+      "sha256": "273f94e18be29869485c7e450687ccb60919ac117fba6995937a5849a8763595"
+    },
+    "ROOT13-system-scope-report-20261004-01/COMBINED-295-VERIFICATION.json": {
+      "bytes": 10538,
+      "sha256": "ffa67648ef17492e6d82f247e0d7d66ddd732976e449790c2f48f98b7ed832fe"
+    },
+    "ROOT13-system-scope-report-20261004-01/FILEMAP.json": {
+      "bytes": 34651,
+      "sha256": "3f149f8a904dbb86f52d20db570659e2966746dbe6b057224c30d71f362bd46d"
+    },
+    "ROOT13-system-scope-report-20261004-01/MATRIX-METADATA.json": {
+      "bytes": 968,
+      "sha256": "a20c50d8e874a834be6c5afc086f3a5bff88a6b3dfcd02625f5c78ae0ae728d3"
+    },
+    "ROOT13-system-scope-report-20261004-01/REPORT.md": {
+      "bytes": 11987,
+      "sha256": "fcfeeee5a2abd38d0515d864b58fc931e0817825d191ba7aa8da760d240b09b7"
+    },
+    "ROOT13-system-scope-report-20261004-01/REQUIREMENT-IMPLEMENTATION-VALIDATION-MATRIX.csv": {
+      "bytes": 39499,
+      "sha256": "eb4dbd934e5ded2574d3aabbbfb65990df5c9e2796531213f38e59177bab81a8"
+    },
+    "ROOT13-system-scope-report-20261004-01/SOURCE-REFERENCES.json": {
+      "bytes": 56917,
+      "sha256": "758d736ca6374b5bbba92b578cb35817fda852bda5342d6e8b8cf6d3c87a61ea"
+    },
+    "ROOT13-system-scope-report-20261004-01/STATIC-CORE-DEPENDENCIES.json": {
+      "bytes": 1926,
+      "sha256": "39df9f733350f14f0d43b6bbd5a6bf6f4f85ca72b0ada89ec5c623fd565fca42"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/FROZEN-INPUTS-295.json": {
+      "bytes": 33184,
+      "sha256": "8428e7c32744b411633aa6f2d5c091e3fa87b53abbb795eb1908876a0293adae"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/INHERITED-READ-COVERAGE.md": {
+      "bytes": 2869,
+      "sha256": "d826aa218f0ab517abeb9f613a169933935a4a6663786d2b7286978735f17fbc"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/PREPARED-INPUTS-267.json": {
+      "bytes": 29009,
+      "sha256": "fb0b2c7c502e86667c3d32fe70244f3354909b4c45edd1eb024c2f5ac2628246"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/budget-food-light-freight01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/budget-food-light-freight01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/budget-food-light-freight01/owned-descendants.json": {
+      "bytes": 267,
+      "sha256": "5e2277984fbce9ceedc3650db5b74bf0d76977154af7fc614af4068f1a2ce1fc"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/budget-food-light-freight01/raw.log": {
+      "bytes": 3578,
+      "sha256": "778a2643952e8854d3714e4bb8e90ed32c4a8fcad33f3e02da2fe57bfe8b6944"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/budget-food-light-freight01/receipt.json": {
+      "bytes": 1204,
+      "sha256": "2d914a36136a84f092bdbdbbc94e7fb38f7c0c9e7d3686db664aae0be07523f4"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/build01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/build01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/build01/owned-descendants.json": {
+      "bytes": 669,
+      "sha256": "f1bba83a0ab5ba1884cfe5ee075c78308efe1fe99b3f90cf120ceb3402d1cf3a"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/build01/raw.log": {
+      "bytes": 1061,
+      "sha256": "be604921a7b6130e67c7cfc6f62ad444d92a117ea25736ccc9396b0bcac28b47"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/build01/receipt.json": {
+      "bytes": 866,
+      "sha256": "88922e16cb6638ac972bb90ee83a74326a57c7e92384fc566535928a0164aa0e"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/business01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/business01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/business01/owned-descendants.json": {
+      "bytes": 267,
+      "sha256": "45c04c57b4df42a6371b54b7a9ea6fa68e70f2cf4d450e84e19cf57513c06944"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/business01/raw.log": {
+      "bytes": 5275,
+      "sha256": "41229bda0e9136b6d5032b4f906c0c1786d9fdad75bafe4e3c27b20a85a78965"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/business01/receipt.json": {
+      "bytes": 1114,
+      "sha256": "104b23c5415d21336fd05f23c9aca6cfe734553c1407787363dd614672fa1917"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/civic01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/civic01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/civic01/owned-descendants.json": {
+      "bytes": 267,
+      "sha256": "1dc7e52950a634fa8f1ca9e479b2c17d95f3eb7bfb8e9dce279847e0e62a5464"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/civic01/raw.log": {
+      "bytes": 4558,
+      "sha256": "02a755d7e806d732611f840fd333c9076c3e39c310066ba04cae49c9cba6bea4"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/civic01/receipt.json": {
+      "bytes": 995,
+      "sha256": "e929d14ef05cf04aaf287c006b47e3f5a7fafe1d70397388f1c416f24c7f1708"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/core01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/core01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/core01/owned-descendants.json": {
+      "bytes": 267,
+      "sha256": "3705d3edc3221542e2347f8b0851d05528925d14850f9d97eeed56dd21fe9eb9"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/core01/raw.log": {
+      "bytes": 1038,
+      "sha256": "296d8e5eda000a5d3bd8b8dd0d99df8dc96c414cc5284bd31760112c38afca5b"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/core01/receipt.json": {
+      "bytes": 1124,
+      "sha256": "4491224a86d1113b61260a41f78404d14d65a2928f370b0d238e56a64ac507ac"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/missing-company-return01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/missing-company-return01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/missing-company-return01/owned-descendants.json": {
+      "bytes": 401,
+      "sha256": "fea056fc0f2c93e05ab498e7f168a3302e0a151a80905c70ce6597506f2b39ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/missing-company-return01/raw.log": {
+      "bytes": 1220,
+      "sha256": "365fe94448393ba91f92acf3a77af4a38486b6e921cc1b22bc47e0b4f053b60e"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/missing-company-return01/receipt.json": {
+      "bytes": 955,
+      "sha256": "9c6003694a7fd74f22f3842f35150f31f823094e714a95972546b166dd87807c"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/native-v3-motion01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/native-v3-motion01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/native-v3-motion01/owned-descendants.json": {
+      "bytes": 267,
+      "sha256": "247bd7edb33c9e32fa13cc650bd07209343d6b55c37b9319d7e95529c202bdfd"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/native-v3-motion01/raw.log": {
+      "bytes": 6027,
+      "sha256": "dc47e2b9de5745d7fe5e4eaa173c5fe95a276b99c9f84a3c056cb5f9d1f6db31"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/native-v3-motion01/receipt.json": {
+      "bytes": 978,
+      "sha256": "bb47cb550b38c2155c5e8513c0977c968bffecc041a671ec03550223929c0f07"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/inputs-after.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/inputs-before.json": {
+      "bytes": 32149,
+      "sha256": "6b5328890ea523c623ae81821b46156f0d8f8def96a57a50f06e95735147d6ce"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/original-artifacts/ui-results.json": {
+      "bytes": 3746,
+      "sha256": "78d709399ee9759de5dfb86cbad051dbf289d12bacf87692a3e4e01b0ada9f74"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/owned-descendants.json": {
+      "bytes": 1733,
+      "sha256": "fe94b7a1f199c25ac0d28b614a8d618d099b477c62bc498b9aff72830ea81ce9"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/raw.log": {
+      "bytes": 1353,
+      "sha256": "7a05f35d32429d86ab7456eee8586fddb43f1e173f10700e732665a59fc54869"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/ui01/receipt.json": {
+      "bytes": 1161,
+      "sha256": "dad8faaf3b39fc01aa1dbffa148c999b3d14eb21e124444678726525a051b8ab"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/combined295/verify-native-v3-motion13.mts": {
+      "bytes": 4313,
+      "sha256": "8429626c573f4dc85c58b4fc2bcf7d666798ddc1bde00357d40dcc1f7ea36600"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT12-dynamic-city-scope-20261004-01/REPORT.md": {
+      "bytes": 2718,
+      "sha256": "485ea3633240f5b501a13772ca507c7b8554b614aed9ffc7ef8fcf36d7a4f782"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-budget-authority-20261004-01/HANDOFF.md": {
+      "bytes": 10071,
+      "sha256": "58f9ea0fd657091af80640161b5fa827a5256971e0842617fb4ea70353884e10"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-food-supply-20261004-01/REPORT.md": {
+      "bytes": 11066,
+      "sha256": "66517755118b0b528c81cadb70f46546e8f743f35422c8b2a22446872cf21a17"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-integration-review-20261004-01/REPORT.md": {
+      "bytes": 11765,
+      "sha256": "880a9eea3d67ddccdaa57e529b742e77b7850157127561fe9d0cfa5d5763292d"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-interior-gpu-capture-20261004-01/REPORT.md": {
+      "bytes": 2425,
+      "sha256": "e73d6ff9bac90e88ae8d568b1de383b376b83b9a921e5c0b5ff249cf46592831"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-interior-light-20261004-01/REPORT.md": {
+      "bytes": 4665,
+      "sha256": "5127ab6a3ffad00c63308f67075748f1a3615a334cc2f13c7ac97c527b0d7319"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-natural-civic-staffing-20261004-01/HANDOFF.md": {
+      "bytes": 6458,
+      "sha256": "36e1e44d4431f5e0f59a361992414c42b85c64d2786217563c4e9e9e11a78912"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-road-owner-match-20261004-01/REPORT.md": {
+      "bytes": 7410,
+      "sha256": "e532c96c743490f0d0db4ffddd4109a52ad7c9a979b8e6bee2e8d66f25e16de2"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-ruleset-core-20261004-01/HANDOFF.md": {
+      "bytes": 12614,
+      "sha256": "b1c8d5072781b5232b9d1b40178e011aa0193932acc2e012c0633cc1d4b0139c"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-shop-repeat-20261004-01/REPORT.md": {
+      "bytes": 7947,
+      "sha256": "390641a38691bb3f00bf8051ce09d6398906ea004c516b6c0b3cc11e1caf1ac6"
+    },
+    "ROOT13-system-scope-report-20261004-01/evidence/reports/ROOT13-street-authority-v7-20261004-01/REPORT.md": {
+      "bytes": 9788,
+      "sha256": "f417654c6b8b8f284389ec3d305283fdbf809489ed8f97249f05ed49629da73f"
+    },
+    "ROOT13-system-scope-report-20261004-01/produce_audit.py": {
+      "bytes": 64039,
+      "sha256": "220b25bccefa6c963a4e6687608e620dbaf752855023b6ddc71321accf7fddd7"
+    },
+    "ROOT13-system-scope-report-20261004-01/requirements-originals/AGENTS.md": {
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    "ROOT13-system-scope-report-20261004-01/requirements-originals/ROOT13-new-memo-prefix.md": {
+      "bytes": 18293,
+      "sha256": "136daa118838a7de773772f7d5fa1ed8d67a2f673caaced72708a686cf3a538e"
+    },
+    "ROOT13-system-scope-report-20261004-01/requirements-originals/inherited-complete-memo-1272-lines.md": {
+      "bytes": 381778,
+      "sha256": "6d35986d11de1a814e5c1cc0ee3cd964b7d8135fb07118d60f739c15d422e51f"
+    },
+    "ROOT13-system-scope-report-20261004-01/requirements-originals/开发备忘录.md": {
+      "bytes": 400071,
+      "sha256": "8daadb9387eb7800e5c7c058435988394e5ebdadaddc5162a7200740ac3affb7"
+    },
+    "ROOT13-system-scope-report-20261004-01/requirements-originals/提示词.md": {
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/adapters/rpg-maker/README.md": {
+      "bytes": 10002,
+      "sha256": "c66fc77ed322285bc6ee935a0419911ea1b1db264202717b7297707dc1720575"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/adapters/rpg-maker/WORKER-README.md": {
+      "bytes": 9055,
+      "sha256": "b63d503aef27c2780c370f252911c09f8062cb9441766ec0ed44699180b730c7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/adapters/rpg-maker/bridge.ts": {
+      "bytes": 15380,
+      "sha256": "9947193bd06f692c9782d54e21c872a7def1fd11669adc6fc7eee3d6c80f7527"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/adapters/rpg-maker/headless-walker.ts": {
+      "bytes": 18809,
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/scripts/economy-audit.ts": {
+      "bytes": 28120,
+      "sha256": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/access.ts": {
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/architecture-floor-plan.ts": {
+      "bytes": 52757,
+      "sha256": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/aviation-renderer.ts": {
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/aviation.ts": {
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/commercial-district.ts": {
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/controller.ts": {
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/hygiene-ui.ts": {
+      "bytes": 8278,
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/journey.ts": {
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/main.ts": {
+      "bytes": 24513,
+      "sha256": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/persistence.ts": {
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/persistence/partition.ts": {
+      "bytes": 16813,
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/persistence/session.ts": {
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/persistence/world-layout.ts": {
+      "bytes": 5215,
+      "sha256": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/renderer.ts": {
+      "bytes": 94859,
+      "sha256": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/architectural-finishes.ts": {
+      "bytes": 5818,
+      "sha256": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/architecture-bodies.ts": {
+      "bytes": 13271,
+      "sha256": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/architecture-detail.ts": {
+      "bytes": 41206,
+      "sha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/architecture-layout.ts": {
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/chunk-residency.ts": {
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/citizen-appearance.ts": {
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/market-goods.ts": {
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/market-shopfront.ts": {
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/road-closures.ts": {
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/rendering/terrain.ts": {
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/roads.ts": {
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation.ts": {
+      "bytes": 286677,
+      "sha256": "39b445dc1554bfe3fa1f77c03adb99817d876e84fa042f2286697438c51df60d"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/activity-capacity.ts": {
+      "bytes": 5135,
+      "sha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/activity-minutes.ts": {
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/banking.ts": {
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/clinical.ts": {
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/culture.ts": {
+      "bytes": 67049,
+      "sha256": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/education.ts": {
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/extensions.ts": {
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/family-education.ts": {
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/family.ts": {
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/funded-work.ts": {
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/governance.ts": {
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/hygiene-public.ts": {
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/hygiene-transfer.ts": {
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/hygiene.ts": {
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/npc-stair-motion.ts": {
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/pathology.ts": {
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/player-labor.ts": {
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/police-supplies.ts": {
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/power.ts": {
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/public-employment.ts": {
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/road-demands.ts": {
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/roadworks.ts": {
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/shop_lifecycle.ts": {
+      "bytes": 70212,
+      "sha256": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/supplemental-budget.ts": {
+      "bytes": 15871,
+      "sha256": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/simulation/trade.ts": {
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/site-fixtures.ts": {
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/style.css": {
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/transport-geometry.ts": {
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/types.ts": {
+      "bytes": 14605,
+      "sha256": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/ui.ts": {
+      "bytes": 191489,
+      "sha256": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/core267/src/world.ts": {
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/adapters/rpg-maker/README.md": {
+      "bytes": 10002,
+      "sha256": "c66fc77ed322285bc6ee935a0419911ea1b1db264202717b7297707dc1720575"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/adapters/rpg-maker/WORKER-README.md": {
+      "bytes": 9055,
+      "sha256": "b63d503aef27c2780c370f252911c09f8062cb9441766ec0ed44699180b730c7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/adapters/rpg-maker/bridge.ts": {
+      "bytes": 15380,
+      "sha256": "9947193bd06f692c9782d54e21c872a7def1fd11669adc6fc7eee3d6c80f7527"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/adapters/rpg-maker/headless-walker.ts": {
+      "bytes": 18809,
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/scripts/economy-audit.ts": {
+      "bytes": 30604,
+      "sha256": "64c956148b66be1b6a1e321304372de239bf6fec6d289c3848500a0bb5d43584"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/access.ts": {
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/architecture-floor-plan.ts": {
+      "bytes": 52757,
+      "sha256": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/aviation-renderer.ts": {
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/aviation.ts": {
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/commercial-district.ts": {
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/controller.ts": {
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/host/upgrade-city-ruleset.ts": {
+      "bytes": 2808,
+      "sha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/hygiene-ui.ts": {
+      "bytes": 8278,
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/journey.ts": {
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/main.ts": {
+      "bytes": 24640,
+      "sha256": "909102a7a1f88a36f7bece4132aae64942763912b44ea152e14e858633e02948"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/market-station-apron.ts": {
+      "bytes": 5802,
+      "sha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/persistence.ts": {
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/persistence/partition.ts": {
+      "bytes": 17078,
+      "sha256": "cd823d659998eae22da96c78194da242b3214269f3b4b97d621034dda3b6a240"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/persistence/session.ts": {
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/persistence/world-layout.ts": {
+      "bytes": 6190,
+      "sha256": "7755e6b19a7a7e64c2aaf6ba936fe28314807fa4c9379b76fc975d7e05413569"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/product-city.ts": {
+      "bytes": 636,
+      "sha256": "fa1fee918eddf7172160cf877a4e4423472b82cb700084a8b06923fff664cfbd"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/renderer.ts": {
+      "bytes": 94624,
+      "sha256": "4648cb168cfe907907f16e0607f319c11e1936353cac491164d99a1bccb9425a"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/architectural-finishes.ts": {
+      "bytes": 5818,
+      "sha256": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/architecture-bodies.ts": {
+      "bytes": 13271,
+      "sha256": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/architecture-detail.ts": {
+      "bytes": 41206,
+      "sha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/architecture-layout.ts": {
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/chunk-residency.ts": {
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/citizen-appearance.ts": {
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/interior-lighting.ts": {
+      "bytes": 5980,
+      "sha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/market-goods.ts": {
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/market-shopfront.ts": {
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/road-closures.ts": {
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/rendering/terrain.ts": {
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/roads.ts": {
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation.ts": {
+      "bytes": 291239,
+      "sha256": "46f0016cc88b60798648b1ac7a8dfbefb92ce151fac15ad4a61bbebf977eb822"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/activity-capacity.ts": {
+      "bytes": 5135,
+      "sha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/activity-minutes.ts": {
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/banking.ts": {
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/budget-authority.ts": {
+      "bytes": 23599,
+      "sha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/city-ruleset.ts": {
+      "bytes": 9642,
+      "sha256": "a6c9feee0733a7d05d4f50543ae5a4599f70b6216828d15caf2a225a83726a05"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/civic-staffing.ts": {
+      "bytes": 67162,
+      "sha256": "30a64c6f6c76c5104030b582427fb5e1766daed89edd03ddefcf5996b335f47e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/clinical.ts": {
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/culture.ts": {
+      "bytes": 67182,
+      "sha256": "4383c4b98420f63fd3ff63fdbdf0eac76316fc4ffc609de3ec829a1f9caf14b9"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/education.ts": {
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/extensions.ts": {
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/family-education.ts": {
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/family.ts": {
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/freight-access.ts": {
+      "bytes": 4567,
+      "sha256": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/funded-work.ts": {
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/governance.ts": {
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/hygiene-public.ts": {
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/hygiene-transfer.ts": {
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/hygiene.ts": {
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/npc-stair-motion.ts": {
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/pathology.ts": {
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/player-labor.ts": {
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/police-supplies.ts": {
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/power.ts": {
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/public-employment.ts": {
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/road-demands.ts": {
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/roadworks.ts": {
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/shop_lifecycle.ts": {
+      "bytes": 70854,
+      "sha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/supplemental-budget.ts": {
+      "bytes": 19517,
+      "sha256": "64b12d7fee1441811b1de0651ba340453168d0491ddc338d6fabc45015ee6329"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/simulation/trade.ts": {
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/site-fixtures.ts": {
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/style.css": {
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/transport-geometry.ts": {
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/types.ts": {
+      "bytes": 14827,
+      "sha256": "dd8c937107fa82d69fb7f12ff0eb0df5ff31732c261912469aa3e04d5b62a01b"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/ui.ts": {
+      "bytes": 194014,
+      "sha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541"
+    },
+    "ROOT13-system-scope-report-20261004-01/sources/frozen295/src/world.ts": {
+      "bytes": 54827,
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    }
+  },
+  "excludedLinksAndPrivateNamespaces": [],
+  "scope": "actual regular tree equals producer manifest plus its manifest and CLOSED bytes"
+}

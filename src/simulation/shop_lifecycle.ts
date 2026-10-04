@@ -382,6 +382,19 @@ function observeFinance(simulation: Simulation): void {
   }
 }
 
+/** Repeated distress is a new product rule, not a side effect of title registration.
+ * The original proprietor's first distress and its original AND thresholds stay
+ * unchanged. Registered businesses can repeat only after all other site-use
+ * claims have cleared; company and tenant authority are never converted here. */
+function canChooseEconomicSuspension(simulation: Simulation, shop: Shop, citizenId: string): boolean {
+  const state = simulation.state, title = titleOf(state, shop.id);
+  if (operatorId(state, shop) !== citizenId) return false;
+  if (title && !(simulation.effectiveRuleset === 'civic-local-v1' && title.state === 'operating'
+    && title.assetOwnerId === citizenId && shopLifecycleCanDispose(state, shop.id))) return false;
+  return shop.profit <= -600 && shop.inventory < EPS
+    && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24;
+}
+
 /** Ordinary people choice uses the same route/need/identity scoring as every other facility. This function is read-only. */
 export function shopLifecycleOpportunities(simulation: Simulation, citizen: Citizen): { destination: Building; activity: 'shopLifecycle'; score: number }[] {
   const state = simulation.state, profile = state.extension?.actorProfiles[citizen.id], at = clock(state), result: { destination: Building; activity: 'shopLifecycle'; score: number }[] = [];
@@ -390,7 +403,7 @@ export function shopLifecycleOpportunities(simulation: Simulation, citizen: Citi
     if (!privateMarket(state, simulation.worldDefinition, shop)) continue;
     const title = titleOf(state, shop.id), site = simulation.worldDefinition.buildings.find(site => site.id === shop.buildingId)!;
     if (operatorId(state, shop) === citizen.id && (title?.state === 'suspended' || title?.state === 'reopening')) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
-    if (operatorId(state, shop) === citizen.id && !title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
+    if (canChooseEconomicSuspension(simulation, shop, citizen.id)) result.push({ destination: site, activity: 'shopLifecycle', score: 82 });
     if (!eligible(state, citizen.id) || state.shops.some(other => other.ownerId === citizen.id && other.id !== shop.id)) continue;
     for (const listing of stateOf(simulation).shopLifecycle?.listings ?? []) if (listing.shopId === shop.id && listing.state === 'offered' && listing.expiresAt > at && listing.sellerId !== citizen.id
       && citizen.money >= listing.price + listing.deposit + REGISTER_FEE + CAPITAL + RESERVE && simulation.buildingTravelDistance(citizen.homeId, shop.buildingId) <= 500) result.push({ destination: site, activity: 'shopLifecycle', score: 74 + Math.min(12, profile.skill / 10) - listing.price / 100 });
@@ -421,9 +434,8 @@ export function installShopLifecycle(simulation: Simulation): void {
   simulation.onEvent('shop-lifecycle-arrived', event => {
     const citizen = simulation.state.citizens.find(citizen => citizen.id === event.citizenId), shop = simulation.state.shops.find(shop => shop.id === event.shopId);
     if (!citizen || !shop || !onsite(simulation, shop, citizen.id) || operatorId(simulation.state, shop) !== citizen.id && !eligible(simulation.state, citizen.id)) return;
-    const title = titleOf(simulation.state, shop.id);
     if (operatorId(simulation.state, shop) === citizen.id) {
-      if (!title && shop.profit <= -600 && shop.inventory < EPS && simulation.shopFunds(shop) - simulation.shopProtectedFunds(shop) < 20 * 8 / 24) suspend(simulation, shop, citizen.id, 'economic-distress');
+      if (canChooseEconomicSuspension(simulation, shop, citizen.id)) suspend(simulation, shop, citizen.id, 'economic-distress');
       const current = titleOf(simulation.state, shop.id);
       if (current?.state === 'suspended' && !current.listingId) {
         const begun = eligibleOperator(simulation.state, citizen.id) && restart(simulation, shop, citizen.id, true).ok;

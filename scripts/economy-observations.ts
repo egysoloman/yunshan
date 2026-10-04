@@ -1,12 +1,17 @@
 import type { Building, SimState } from '../src/types';
 
 type Commodity = 'food' | 'materials' | 'unknown';
-interface ObservedEvent { shopId?: string; citizenId?: string; amount?: number; quantity?: number; minutes?: number }
+interface ObservedEvent { shopId?: string; citizenId?: string; siteId?: string; amount?: number; quantity?: number; minutes?: number; ratePerMinute?: number; creditedWorkStartAt?: number; creditedWorkEndAt?: number }
 const emptyFlow = () => ({ producedUnits: 0, productionMinutes: 0, retailUnits: 0, retailGross: 0, counterMeals: 0, unattributedRetailUnits: 0 });
+type AttendanceKind = 'farm' | 'dock' | 'workshop' | 'market' | 'other' | 'unknown';
+const emptyAttendance = () => ({ fundedAttendanceMinutes: 0, earnedGross: 0, namedEvents: 0, eventsWithActualWindow: 0 });
 
 /** Event observations never infer meals from money or count industrial stock as food. */
-export function commodityObserver(buildings: ReadonlyMap<string, Pick<Building, 'kind'>>, shopBuildings: ReadonlyMap<string, string>) {
+export function commodityObserver(buildings: ReadonlyMap<string, Pick<Building, 'kind'>>, shopBuildings: ReadonlyMap<string, string>, isActualNpcWage: (event: object) => boolean = () => false) {
   const flows = { food: emptyFlow(), materials: emptyFlow(), unknown: emptyFlow() };
+  const attendance = { farm: emptyAttendance(), dock: emptyAttendance(), workshop: emptyAttendance(), market: emptyAttendance(), other: emptyAttendance(), unknown: emptyAttendance() };
+  const namedAttendance = new Map<string, { citizenId: string; shopId: string; siteId: string | null; siteKind: AttendanceKind; fundedAttendanceMinutes: number; earnedGross: number; namedEvents: number; eventsWithActualWindow: number }>();
+  let unclassifiedWageEvents = 0;
   let storedMeals = 0, playerConsumedMeals = 0;
   const commodity = (shopId: string | undefined): Commodity => {
     const id = shopId && shopBuildings.get(shopId), building = id && buildings.get(id);
@@ -14,6 +19,23 @@ export function commodityObserver(buildings: ReadonlyMap<string, Pick<Building, 
     return building.kind === 'workshop' ? 'materials' : ['market', 'farm', 'dock'].includes(building.kind) ? 'food' : 'unknown';
   };
   return {
+    /** Canonical wage-earned minutes are funded onsite attendance, including
+     * legal work while stock is already above the production target. They are
+     * earned claims, not cash payments or consumed production-batch minutes. */
+    wageEarned(event: ObservedEvent) {
+      const minutes = event.minutes, gross = event.amount;
+      if (!isActualNpcWage(event) || !event.shopId || !event.citizenId || !Number.isFinite(minutes) || !(minutes! > 0) || !Number.isFinite(gross) || !(gross! > 0)) { unclassifiedWageEvents++; return; }
+      const siteId = shopBuildings.get(event.shopId), kind = siteId && buildings.get(siteId)?.kind;
+      const siteKind: AttendanceKind = !kind ? 'unknown' : ['farm', 'dock', 'workshop', 'market'].includes(kind) ? kind as AttendanceKind : 'other';
+      const actualWindow = event.siteId === siteId && Number.isFinite(event.creditedWorkStartAt) && Number.isFinite(event.creditedWorkEndAt)
+        && event.creditedWorkEndAt! > event.creditedWorkStartAt!
+        && Math.abs(event.creditedWorkEndAt! - event.creditedWorkStartAt! - minutes!) <= 1e-7;
+      const flow = attendance[siteKind]; flow.fundedAttendanceMinutes += minutes!; flow.earnedGross += gross!; flow.namedEvents++; if (actualWindow) flow.eventsWithActualWindow++;
+      const key = JSON.stringify([event.citizenId, event.shopId, siteId ?? null]);
+      const named = namedAttendance.get(key) ?? { citizenId: event.citizenId, shopId: event.shopId, siteId: siteId ?? null, siteKind, ...emptyAttendance() };
+      named.fundedAttendanceMinutes += minutes!; named.earnedGross += gross!; named.namedEvents++; if (actualWindow) named.eventsWithActualWindow++;
+      namedAttendance.set(key, named);
+    },
     production(event: ObservedEvent) { const flow = flows[commodity(event.shopId)]; flow.producedUnits += event.amount ?? 0; flow.productionMinutes += event.minutes ?? 0; },
     sale(event: ObservedEvent) {
       const kind = commodity(event.shopId), flow = flows[kind];
@@ -25,8 +47,11 @@ export function commodityObserver(buildings: ReadonlyMap<string, Pick<Building, 
     },
     storedMeal(event: ObservedEvent) { storedMeals += event.amount ?? 0; },
     foodConsumed(event: ObservedEvent) { if (event.citizenId === 'player') playerConsumedMeals += event.amount ?? 0; },
-    snapshot() { return { flows: structuredClone(flows), storedMeals, playerConsumedMeals, observedNpcMeals: flows.food.counterMeals + storedMeals,
-      scope: 'Observed production and retail events by actual site kind; counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance.' }; },
+    snapshot() { return { flows: structuredClone(flows), attendanceBySiteKind: structuredClone(attendance), namedAttendance: structuredClone([...namedAttendance.values()]), unclassifiedWageEvents,
+      storedMeals, playerConsumedMeals, observedNpcMeals: flows.food.counterMeals + storedMeals,
+      attendanceScope: 'Native core-certified named NPC wage-earned events with positive finite minutes and gross, classified by actual shop building kind. These are funded onsite earned minutes, not paid cash, production labor consumed, or a classification of every zero-output batch. Uncertified events, legacy amount-only and public wage events are excluded from private-site attendance; player employment is a separate contract.',
+      zeroOutputBatchDisposition: 'NOT_OBSERVED',
+      scope: 'Observed positive production and retail events by actual site kind; productionMinutes remain minutes attached to positive output batches, not all attendance. Counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance.' }; },
   };
 }
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { commodityObserver, foodSnapshot } from '../scripts/economy-observations';
 import { createWorld } from '../src/world';
-import { Simulation } from '../src/simulation';
+import { Simulation, isCanonicalNpcWage } from '../src/simulation';
 
 test('food evidence separates workshop output, named counter meals, carried meals and unknown sales without editing events', () => {
   const sites = new Map([['a', { kind: 'farm' as const }], ['b', { kind: 'workshop' as const }]]);
@@ -41,8 +41,9 @@ test('headless food diagnosis is read only and leaves legal reachability unknown
 test('event-only economic observations preserve every actual tick of the default headless city', () => {
   const world = createWorld(20261001), observed = new Simulation(world), control = new Simulation(world);
   const buildings = new Map(world.buildings.map(site => [site.id, site]));
-  const observer = commodityObserver(buildings, new Map(observed.state.shops.map(shop => [shop.id, shop.buildingId])));
+  const observer = commodityObserver(buildings, new Map(observed.state.shops.map(shop => [shop.id, shop.buildingId])), isCanonicalNpcWage);
   observed.onEvent('production', event => observer.production(event));
+  observed.onEvent('wage-earned', event => observer.wageEarned(event));
   observed.onEvent('sale', event => observer.sale(event));
   observed.onEvent('stored-meal', event => observer.storedMeal(event));
   observed.onEvent('food-consumed', event => observer.foodConsumed(event));
@@ -52,4 +53,38 @@ test('event-only economic observations preserve every actual tick of the default
     assert.equal(observed.exportSave(), control.exportSave(), `observer changed tick ${tick + 1}`);
   }
   assert.deepEqual(Object.keys(observer.snapshot().flows), ['food', 'materials', 'unknown']);
+});
+
+test('certified attendance classification stays separate from positive production, counterfeit, amount-only and public wage events', () => {
+  const sites = new Map([['farm-a', { kind: 'farm' as const }], ['dock-b', { kind: 'dock' as const }], ['workshop-c', { kind: 'workshop' as const }]]);
+  // Unit classifier inputs have an explicit test certification predicate. The
+  // separate actual-city equivalence and farm tests use the native WeakSet.
+  const certified = new WeakSet<object>();
+  const observer = commodityObserver(sites, new Map([['a', 'farm-a'], ['b', 'dock-b'], ['c', 'workshop-c']]), event => certified.has(event));
+  const observeCertified = (event: Parameters<typeof observer.wageEarned>[0]) => { certified.add(event); observer.wageEarned(event); };
+  const farmEvent = Object.freeze({ citizenId: 'farmer', shopId: 'a', siteId: 'farm-a', minutes: 10, amount: 1, ratePerMinute: .1, creditedWorkStartAt: 480, creditedWorkEndAt: 490 });
+  const before = JSON.stringify(farmEvent);
+  observeCertified(farmEvent);
+  observeCertified({ citizenId: 'dock-worker', shopId: 'b', minutes: 3, amount: .3 });
+  observeCertified({ citizenId: 'craft-worker', shopId: 'c', minutes: 8, amount: .8 });
+  observeCertified({ citizenId: 'farmer', shopId: 'a', amount: 20 });
+  observeCertified({ citizenId: 'teacher', minutes: 4, amount: .4 });
+  observeCertified({ citizenId: 'farmer', shopId: 'a', minutes: NaN, amount: 1 });
+  observer.wageEarned({ ...farmEvent }); // Similar JSON is not actual attendance.
+  observer.production({ shopId: 'b', amount: .1, minutes: 3 });
+  const result = observer.snapshot();
+  assert.equal(JSON.stringify(farmEvent), before);
+  assert.equal(result.attendanceBySiteKind.farm.fundedAttendanceMinutes, 10);
+  assert.equal(result.attendanceBySiteKind.farm.earnedGross, 1);
+  assert.equal(result.attendanceBySiteKind.farm.eventsWithActualWindow, 1);
+  assert.equal(result.attendanceBySiteKind.dock.fundedAttendanceMinutes, 3);
+  assert.equal(result.attendanceBySiteKind.workshop.fundedAttendanceMinutes, 8);
+  assert.equal(result.flows.food.productionMinutes, 3);
+  assert.equal(result.unclassifiedWageEvents, 4);
+  assert.equal(result.zeroOutputBatchDisposition, 'NOT_OBSERVED');
+  assert.deepEqual(result.namedAttendance.map(row => [row.citizenId, row.shopId, row.siteId, row.fundedAttendanceMinutes]), [['farmer', 'a', 'farm-a', 10], ['dock-worker', 'b', 'dock-b', 3], ['craft-worker', 'c', 'workshop-c', 8]]);
+  result.namedAttendance[0].fundedAttendanceMinutes = 900;
+  result.attendanceBySiteKind.farm.fundedAttendanceMinutes = 900;
+  assert.equal(observer.snapshot().namedAttendance[0].fundedAttendanceMinutes, 10);
+  assert.equal(observer.snapshot().attendanceBySiteKind.farm.fundedAttendanceMinutes, 10);
 });

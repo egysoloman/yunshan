@@ -1,0 +1,117 @@
+{
+  "at": "2026-10-04T15:27:29.741321+00:00",
+  "status": "FAILED_BEFORE_LIBRARY_SAVE",
+  "operation": "ROOT13 final unique ordered16 (15new files then existing memo version5 replacement)",
+  "orderedItems": 16,
+  "exitCode": 1,
+  "stdoutBytes": 0,
+  "stderrBytes": 70,
+  "stage": "connection before discovery/prepare",
+  "publicMessage": "Library保存连接失败，文件保存尚未开始。",
+  "newLibraryIDs": [],
+  "memoReplacementStarted": false,
+  "memoLibraryID": "libfile_7571a326de848191aec330d605a63845",
+  "retainedMemoVersionBeforeAttempt": 5,
+  "helperSourceSHA256": "5bc473dadefe1f68ee8797baaed19d6662642d0ea4bcba128fa12938faa0d767",
+  "noRetryOrRouteSwitch": true,
+  "privateRawErrorSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "rawErrorPublished": false,
+  "files": [
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/yunshan-root13-source.zip",
+      "purpose": "create_library_file",
+      "bytes": 18172052,
+      "sha256": "ccba2b5639557ed708a0c3fd23c90c4b8ff9f7da93b01075b1fd568ce8dbd30d"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/yunshan-root13-integrated-originals.zip",
+      "purpose": "create_library_file",
+      "bytes": 37456057,
+      "sha256": "9ac217f73a3d45a3ddc6068b2b463010341037c467afb6ded810da225981c699"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/yunshan-root13-complete-original-tree-cas.zip",
+      "purpose": "create_library_file",
+      "bytes": 68695513,
+      "sha256": "7f094f7bdd643b077eceaf823900fff94e6893c454e12841e36981694b29281d"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/RESTORE.py",
+      "purpose": "create_library_file",
+      "bytes": 15691,
+      "sha256": "7af91fe966f901cbc0fce7edc96ee2302c5560245711765d019578e7adf0fc1a"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/DELIVERY-MANIFEST.json",
+      "purpose": "create_library_file",
+      "bytes": 3599,
+      "sha256": "924730d85d01963f12043c8ea9ea5e562857d36d3ae344a868818f1e5773988d"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/DELIVERY.md",
+      "purpose": "create_library_file",
+      "bytes": 4055,
+      "sha256": "3bad49f13948e340ccf55dda0469d0abe99d7b8d4bfddf308ac5ffa9dfa77731"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT13-final-delivery-20261004-01/云山-ROOT13-集成报告.md",
+      "purpose": "create_library_file",
+      "bytes": 7415,
+      "sha256": "ea3e251c087c52b04fce09ff192947e6aac5977c32b3db2fd23d888198d69f24"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT13-final-delivery-20261004-01/云山-ROOT13-系统矩阵.csv",
+      "purpose": "create_library_file",
+      "bytes": 39499,
+      "sha256": "eb4dbd934e5ded2574d3aabbbfb65990df5c9e2796531213f38e59177bab81a8"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT13-final-delivery-20261004-01/云山-ROOT13-昼间浏览器截图.png",
+      "purpose": "create_library_file",
+      "bytes": 633642,
+      "sha256": "c2c55953a8d787bd0d2b0297d6bcab034536c2cce7ce0e7b25458abd05ea4150"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT13-final-delivery-20261004-01/云山-ROOT13-夜间浏览器截图.png",
+      "purpose": "create_library_file",
+      "bytes": 544446,
+      "sha256": "dbe2164f1a06b1453569e69e6ef1ce119acd8335c86deb799328c39a0aca3fd4"
+    },
+    {
+      "local_path": "/workspace/yunshan-work/ROOT13-final-delivery-20261004-01/云山-ROOT13-室内浏览器截图.png",
+      "purpose": "create_library_file",
+      "bytes": 531696,
+      "sha256": "661ac52f7ac154a7f4f1d99fae3ce967d39aed38879eeff6fef7ee9ded69fdc6"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/product-day01/original-artifacts/root13-product-default-day.json",
+      "purpose": "create_library_file",
+      "bytes": 127619,
+      "sha256": "19c9db7b5ec54c0878a96665f70b798e282c935be6012cb22fa6549bd332d881"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/product-day01/original-artifacts/root13-product-default-day-final.save.json",
+      "purpose": "create_library_file",
+      "bytes": 3292022,
+      "sha256": "72ce8b457cc689ec030459aad63f8e44f00a22175e4be614b2a75d16545dfb67"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/DELIVERY-VERIFICATION.json",
+      "purpose": "create_library_file",
+      "bytes": 1149,
+      "sha256": "397fee6dc993ebd28a0c7545917cf2be77e38cac15a5148b681239d4050cafef"
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/delivery/RESTORE-VERIFICATION.json",
+      "purpose": "create_library_file",
+      "bytes": 1970,
+      "sha256": "4bd1a41d71ce0760fc61c058c882408be27e1c2f0022059670c3cd1f795dc4ab"
+    },
+    {
+      "local_path": "/workspace/yunshan/开发备忘录.md",
+      "purpose": "replace_library_file",
+      "bytes": 402605,
+      "sha256": "071b6eb8116ec863df470ebbe99bb7b7847986b922df32b2b36a33cc97992b7b"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "status": "PACKAGED_PENDING_INDEPENDENT_FILE_TREE_RESTORE",
+  "startedAt": "2026-10-04T15:04:14.097965+00:00",
+  "endedAt": "2026-10-04T15:04:51.010827+00:00",
+  "contentZIP": {
+    "name": "yunshan-root13-complete-original-tree-cas.zip",
+    "bytes": 68695513,
+    "sha256": "7f094f7bdd643b077eceaf823900fff94e6893c454e12841e36981694b29281d"
+  },
+  "index": {
+    "name": "INDEX.json",
+    "bytes": 6084929,
+    "sha256": "7a975f090c0693f787488dd2257a52dda2c7614d6aa65b44c8bf71520600d2d6"
+  },
+  "sourceMaps": [
+    {
+      "name": "ORIGINAL-13-FILEMAP.json",
+      "bytes": 5203412,
+      "sha256": "e106332f18161b7f1aca7afc7f55f745b9ca07d2e7206961641ae17c5c18bd07",
+      "originalRegularFiles": 24030,
+      "groupNames": [
+        "ROOT13-budget-authority-20261004-01",
+        "ROOT13-civic-feedback-ui-20261004-01",
+        "ROOT13-food-supply-20261004-01",
+        "ROOT13-integration-review-20261004-01",
+        "ROOT13-interior-gpu-capture-20261004-01",
+        "ROOT13-interior-light-20261004-01",
+        "ROOT13-natural-civic-staffing-20261004-01",
+        "ROOT13-road-owner-match-20261004-01",
+        "ROOT13-ruleset-core-20261004-01",
+        "ROOT13-scene-ray-owner-20261004-01",
+        "ROOT13-shop-repeat-20261004-01",
+        "ROOT13-street-authority-v7-20261004-01",
+        "ROOT14-civic-history-design-20261004-01"
+      ]
+    },
+    {
+      "name": "ORIGINAL-V8-FILEMAP.json",
+      "bytes": 477570,
+      "sha256": "b62c87d8712cb55bf6d10b30b0e4f899c547ff3bbb31256c0296e0b6e81bac6b",
+      "originalRegularFiles": 2159,
+      "groupNames": [
+        "ROOT13-street-solid-authority-20261004-01"
+      ]
+    },
+    {
+      "name": "SUPPLEMENTAL-SCOPE-REPORT-FILEMAP.json",
+      "bytes": 43643,
+      "sha256": "307c14d8e86730502c1ae8f151fc381c6bce0bff93a4c56b2f25c599cc314b94",
+      "originalRegularFiles": 209,
+      "groupNames": [
+        "ROOT13-system-scope-report-20261004-01"
+      ]
+    },
+    {
+      "name": "SUPPLEMENTAL-BOARDING-DESIGN-FILEMAP.json",
+      "bytes": 4531,
+      "sha256": "b2fe7b0cb1c6a91a6d1647cf1853e122be7c0316df49f71c2a3cea3f74bdde66",
+      "originalRegularFiles": 20,
+      "groupNames": [
+        "ROOT14-v8-boarding-design-20261004-01"
+      ]
+    }
+  ],
+  "publicVerifier": {
+    "name": "RESTORE.py",
+    "bytes": 15691,
+    "sha256": "7af91fe966f901cbc0fce7edc96ee2302c5560245711765d019578e7adf0fc1a"
+  },
+  "partBytes": 67108864,
+  "parts": [
+    {
+      "name": "yunshan-root13-complete-original-tree-cas.zip.part001",
+      "bytes": 67108864,
+      "sha256": "b6b1761ae58aa6459ef8f0f614397a37db26786b4de49b45262c9c38b043fbb2"
+    },
+    {
+      "name": "yunshan-root13-complete-original-tree-cas.zip.part002",
+      "bytes": 1586649,
+      "sha256": "b66fb270e4939f6328923d1bd94265aafc2a0ac038ed6a7b53028660ed54876b"
+    }
+  ],
+  "fileCount": 26418,
+  "objectCount": 1331,
+  "rawFileBytes": 3043874458,
+  "uniqueObjectBytes": 301212136,
+  "beforeAfterEveryOriginalFileSHAEqual": true,
+  "safetyFindingCount": 0,
+  "ownedProcessGuard": {
+    "at": "2026-10-04T15:04:44.288939+00:00",
+    "recognizedPIDStartTimeRecords": 395,
+    "recognizedActiveOwners": [],
+    "limitation": "unrecognized historical schemas and global unrelated processes are not certified"
+  },
+  "originalFullZIPArchivesAndReceiptsModified": false,
+  "restorationContract": "original file paths and complete file bytes; not historical ZIP compression bytes",
+  "Library": {
+    "status": "NOT_ATTEMPTED",
+    "newLibraryIDs": []
+  },
+  "Git": {
+    "status": "NOT_ATTEMPTED"
+  },
+  "noProjectSimulationTestsBuildGPUExecuted": true
+}

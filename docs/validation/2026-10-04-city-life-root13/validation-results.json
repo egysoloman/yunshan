@@ -1,0 +1,506 @@
+{
+  "scope": "ROOT13 integrated final295, directed original and new checks; not all npm tests/full game acceptance",
+  "baseCommit": "184f8915a85bd85be064c525f17c6696907f4daa",
+  "inputs": 295,
+  "productionSourceFiles": 68,
+  "inputManifestSHA256": "8428e7c32744b411633aa6f2d5c091e3fa87b53abbb795eb1908876a0293adae",
+  "countsBySeparateScope": {
+    "business01": 40,
+    "missing-company-return01": 9,
+    "civic01": 10,
+    "budget-food-light-freight01": 26,
+    "core01": 7,
+    "ui01": 35,
+    "browser01": 11
+  },
+  "nativeV3Motion": {
+    "invalidAtomicRejections": 15,
+    "fullAndPartitionFutureTicks": 24,
+    "driverSHA256": "8429626c573f4dc85c58b4fc2bcf7d666798ddc1bde00357d40dcc1f7ea36600"
+  },
+  "receipts": {
+    "build01": {
+      "startedAt": "2026-10-04T14:16:34.740630+00:00",
+      "endedAt": "2026-10-04T14:17:47.063292+00:00",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "be604921a7b6130e67c7cfc6f62ad444d92a117ea25736ccc9396b0bcac28b47",
+      "ownedPid": 84718,
+      "observedDescendants": 5,
+      "finalOwnedMembers": [
+        {
+          "pid": 84856,
+          "state": "Z",
+          "parent": 1,
+          "group": 84718,
+          "session": 84718,
+          "startTicks": 5427632
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "business01": {
+      "startedAt": "2026-10-04T14:16:33.577726+00:00",
+      "endedAt": "2026-10-04T14:19:02.220026+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/shop-repeat-distress.test.ts",
+        "tests/shop-lifecycle.test.ts",
+        "tests/shop-self-funding.test.ts",
+        "tests/market-company-rights.test.ts",
+        "tests/company-shop-return.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "41229bda0e9136b6d5032b4f906c0c1786d9fdad75bafe4e3c27b20a85a78965",
+      "ownedPid": 84659,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 84681,
+          "state": "Z",
+          "parent": 1,
+          "group": 84659,
+          "session": 84659,
+          "startTicks": 5421844
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "missing-company-return01": {
+      "startedAt": "2026-10-04T14:27:36.249078+00:00",
+      "endedAt": "2026-10-04T14:27:44.615772+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-concurrency=1",
+        "tests/market-company-return.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "365fe94448393ba91f92acf3a77af4a38486b6e921cc1b22bc47e0b4f053b60e",
+      "ownedPid": 85304,
+      "observedDescendants": 3,
+      "finalOwnedMembers": [
+        {
+          "pid": 85318,
+          "state": "Z",
+          "parent": 1,
+          "group": 85304,
+          "session": 85304,
+          "startTicks": 5488134
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "civic01": {
+      "startedAt": "2026-10-04T14:16:33.578713+00:00",
+      "endedAt": "2026-10-04T14:28:00.516363+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/civic-staffing.test.ts",
+        "tests/civic-staffing-two-terms.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "02a755d7e806d732611f840fd333c9076c3e39c310066ba04cae49c9cba6bea4",
+      "ownedPid": 84660,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 84727,
+          "state": "Z",
+          "parent": 1,
+          "group": 84660,
+          "session": 84660,
+          "startTicks": 5421955
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "budget-food-light-freight01": {
+      "startedAt": "2026-10-04T14:16:33.967218+00:00",
+      "endedAt": "2026-10-04T14:20:34.133370+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/budget-authority-hash.test.ts",
+        "tests/budget-authority-contract.test.ts",
+        "tests/budget-authority-source.test.ts",
+        "tests/economy-observations.test.ts",
+        "tests/farm-stock-buffer.test.ts",
+        "tests/interior-lighting.test.ts",
+        "tests/freight-access.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "778a2643952e8854d3714e4bb8e90ed32c4a8fcad33f3e02da2fe57bfe8b6944",
+      "ownedPid": 84699,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 84708,
+          "state": "Z",
+          "parent": 1,
+          "group": 84699,
+          "session": 84699,
+          "startTicks": 5421920
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "core01": {
+      "startedAt": "2026-10-04T14:29:12.738091+00:00",
+      "endedAt": "2026-10-04T14:29:20.781840+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "--test-name-pattern",
+        "synchronous immutable|explicit product city saves|loading original native2|new v3 custom city|half contract|trusted host upgrade|display clock",
+        "tests/city-ruleset.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "296d8e5eda000a5d3bd8b8dd0d99df8dc96c414cc5284bd31760112c38afca5b",
+      "ownedPid": 85481,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 85500,
+          "state": "Z",
+          "parent": 1,
+          "group": 85481,
+          "session": 85481,
+          "startTicks": 5497759
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "native-v3-motion01": {
+      "startedAt": "2026-10-04T14:32:28.656879+00:00",
+      "endedAt": "2026-10-04T14:32:35.889976+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT13-integrated-civic-shop-light-20261004-01/verify-native-v3-motion13.mts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "dc47e2b9de5745d7fe5e4eaa173c5fe95a276b99c9f84a3c056cb5f9d1f6db31",
+      "ownedPid": 86084,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 86092,
+          "state": "Z",
+          "parent": 1,
+          "group": 86084,
+          "session": 86084,
+          "startTicks": 5517360
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "ui01": {
+      "startedAt": "2026-10-04T14:29:12.803777+00:00",
+      "endedAt": "2026-10-04T14:35:08.826803+00:00",
+      "argv": [
+        "npm",
+        "run",
+        "test:ui"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "7a05f35d32429d86ab7456eee8586fddb43f1e173f10700e732665a59fc54869",
+      "ownedPid": 85488,
+      "observedDescendants": 13,
+      "finalOwnedMembers": [
+        {
+          "pid": 85527,
+          "state": "Z",
+          "parent": 1,
+          "group": 85488,
+          "session": 85488,
+          "startTicks": 5497867
+        },
+        {
+          "pid": 85563,
+          "state": "Z",
+          "parent": 1,
+          "group": 85539,
+          "session": 85539,
+          "startTicks": 5497931
+        },
+        {
+          "pid": 85564,
+          "state": "Z",
+          "parent": 1,
+          "group": 85539,
+          "session": 85539,
+          "startTicks": 5497931
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "browser01": {
+      "startedAt": "2026-10-04T14:35:22.808862+00:00",
+      "endedAt": "2026-10-04T14:45:03.345690+00:00",
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "581b8402168d44e814be4276575d7f80943761ad6287cbcbdd1be3e865c8d879",
+      "ownedPid": 86298,
+      "observedDescendants": 14,
+      "finalOwnedMembers": [
+        {
+          "pid": 86331,
+          "state": "Z",
+          "parent": 1,
+          "group": 86298,
+          "session": 86298,
+          "startTicks": 5534869
+        },
+        {
+          "pid": 86368,
+          "state": "Z",
+          "parent": 1,
+          "group": 86350,
+          "session": 86350,
+          "startTicks": 5534908
+        },
+        {
+          "pid": 86367,
+          "state": "Z",
+          "parent": 1,
+          "group": 86350,
+          "session": 86350,
+          "startTicks": 5534908
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "product-day01": {
+      "startedAt": "2026-10-04T14:46:21.167012+00:00",
+      "endedAt": "2026-10-04T15:01:40.433533+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/economy-audit.ts",
+        "--days",
+        "1",
+        "--out",
+        "artifacts/root13-product-default-day.json"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 295,
+      "inputsStable": true,
+      "rawSHA256": "d9cdf42de41dac45e2d93fe3e14d00e947b4cf95b1ff958232aa84d9ba644c45",
+      "ownedPid": 87028,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 87036,
+          "state": "Z",
+          "parent": 1,
+          "group": 87028,
+          "session": 87028,
+          "startTicks": 5600596
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    }
+  },
+  "defaultDay": {
+    "requestedRuleset": {
+      "requestedRuleset": "civic-local-v1",
+      "requestSource": "product-default",
+      "effectiveRuleset": "civic-local-v1",
+      "saveEnvelopeVersion": 3,
+      "motionVersion": 2,
+      "enablement": {
+        "id": "civic-new-20261001-b85fa6ec",
+        "ruleVersion": 1,
+        "origin": "new-city",
+        "enabledAt": 480,
+        "enabledTick": 0
+      },
+      "requestedNewCityLayout": "current-v6",
+      "actualLayoutVersion": "current-v6",
+      "actualWorldFingerprint": "b85fa6ec",
+      "cityStateSource": "new-city"
+    },
+    "ticks": 720,
+    "gameMinutes": 1440,
+    "speed": 8,
+    "alive": 616,
+    "playerAlive": true,
+    "treasury": 72688.81129934225,
+    "treasuryChangePercent": -9.138985875822181,
+    "npcCashChangePercent": 1.4640536147268124,
+    "companies": 12,
+    "zeroCapitalCompanies": 0,
+    "researchCompleted": 1,
+    "researchFunding": 200,
+    "foodProduced": 125.94804408968746,
+    "materialsProduced": 521.3577894863674,
+    "retailFood": 915,
+    "observedMeals": 595,
+    "food": {
+      "aliveResidents": 616,
+      "nominalResidentMealsPerDay": 852.9230769230769,
+      "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+      "shopFoodUnits": 15420.948044089688,
+      "residentCarriedFoodUnits": 320,
+      "playerCarriedFoodUnits": 0,
+      "bySiteKind": {
+        "farm": {
+          "sites": 31,
+          "open": 31,
+          "inventoryUnits": 4801,
+          "employees": 28
+        },
+        "dock": {
+          "sites": 16,
+          "open": 16,
+          "inventoryUnits": 1522.9480440896873,
+          "employees": 17
+        },
+        "market": {
+          "sites": 109,
+          "open": 109,
+          "inventoryUnits": 9097,
+          "employees": 145
+        },
+        "workshop": {
+          "sites": 54,
+          "open": 54,
+          "inventoryUnits": 4736.957789486369,
+          "employees": 75
+        }
+      },
+      "hungryWithoutCarriedFood": 240,
+      "hungryCanAffordAnyStockedOpenFoodOffer": 240,
+      "routeReachability": "NOT_OBSERVED",
+      "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+    },
+    "civic": {
+      "originalOfficials": 83,
+      "applications": 17,
+      "polls": 4,
+      "terms": 0,
+      "paidRegistrationFees": 480
+    },
+    "steadyStateEstablished": false,
+    "saveValidation": {
+      "status": "passed",
+      "immediateEqual": true,
+      "futureTicks": 24,
+      "futureEqual": true,
+      "effectiveRuleset": "civic-local-v1",
+      "saveEnvelopeVersion": 3,
+      "motionVersion": 2,
+      "originalEnablement": {
+        "id": "civic-new-20261001-b85fa6ec",
+        "ruleVersion": 1,
+        "origin": "new-city",
+        "enabledAt": 480,
+        "enabledTick": 0
+      },
+      "futureSaveSha256": "3e930723d5b55f399f6dd9d3c1c00e3b62905eba4a4fa7bb300a88804efa7a59"
+    },
+    "terminalSave": {
+      "path": "artifacts/root13-product-default-day-final.save.json",
+      "bytes": 3292022,
+      "sha256": "72ce8b457cc689ec030459aad63f8e44f00a22175e4be614b2a75d16545dfb67"
+    }
+  },
+  "limitations": [
+    "full latest npm test NOT_RUN; historic school byte failure/skip and old policy case11 failure retained",
+    "latest295 14days NOT_RUN",
+    "funded V2 request/procurement/service NOT_EXERCISED",
+    "freight pure access module unhooked",
+    "v7 full body FAIL; v8 station egress BLOCKED, neither default",
+    "ART FAIL; macOS hardware/FPS NOT_RUN",
+    "complete custom-map import/diagnostics, physical grids, hygiene terminal/natural epidemic, fire/quakes/demolition-resettlement/new roads, lifecycle/culture/statistical streaming incomplete"
+  ],
+  "activeNextWork": [
+    "ROOT14-civic-history-implementation-20261004-01 isolated, not installed",
+    "ROOT14-station-solid-implementation-20261004-01 isolated v9, not installed"
+  ]
+}

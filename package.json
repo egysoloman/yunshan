@@ -11,7 +11,7 @@
     "test:browser": "node scripts/browser-test.mjs",
     "benchmark": "node --expose-gc --import tsx scripts/benchmark.ts",
     "test:ui": "node scripts/ui-test.mjs",
-    "audit:economy": "node --import tsx scripts/economy-audit.ts"
+    "audit:economy": "node --import tsx scripts/economy-audit.ts --ruleset civic-local-v1"
   },
   "dependencies": {
     "three": "0.180.0"

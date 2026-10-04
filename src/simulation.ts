@@ -1,3 +1,6 @@
+import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
+import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, validateCityRulesetEnvelope, validateCivicOriginalOfficials, type CivicInitialProfession, type EffectiveRuleset, type SimulationOptions } from './simulation/city-ruleset';
+import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences } from './simulation/supplemental-budget';
 import { NpcStairMotion, type NpcStairCursor } from './simulation/npc-stair-motion';
 import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
@@ -32,7 +35,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -44,6 +47,9 @@ const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.
 const canonicalNpcWages = new WeakSet<object>();
 /** Only immutable actual native attendance notifications certify paid work. */
 export const isCanonicalNpcWage = (event: object): boolean => canonicalNpcWages.has(event);
+const canonicalCivicPresence = new WeakSet<object>();
+/** Only core arrival observations certify unpaid local civic activity. */
+export const isCanonicalCivicPresence = (event: object): boolean => canonicalCivicPresence.has(event);
 const canonicalRoadworkPresence = new WeakSet<object>();
 const canonicalRoadBlock = new WeakSet<object>();
 export const isCanonicalRoadBlock = (event: object): boolean => canonicalRoadBlock.has(event);
@@ -59,7 +65,6 @@ class EventBus {
 export interface PublicPurchaseRequest { supplierShopIds?: string[]; requestedGross: number; requestedQuantity?: number; districtId?: string; siteId?: string; purpose?: string; procurementId?: string; budgetId?: string; reserveCash?: number; eventType?: string }
 export interface PublicPurchaseReceipt { reason?: 'budget' | 'supply' | 'authorization'; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; gross: number; net: number; unitPrice: number }[] }
 export interface PublicBudgetAuthorization { id: string; siteId: string; purpose: string; cap: number; approvedAt: number; approvedBy: string[] }
-interface BudgetAuthorization extends PublicBudgetAuthorization { spent: number; closedAt: number | null; signatures: { actorId: string; role: string; siteId: string; signedAt: number }[] }
 interface PrivateShift {
   day: number; shopId: string;
   assignments: { citizenId: string; ratePerMinute: number; minutesCap: number; workedMinutes: number }[];
@@ -71,7 +76,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; civicStaffingVersion?: 1; budgetAuthorityVersion?: 1; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -121,6 +126,7 @@ export class Simulation implements SimulationAPI {
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
+  private readonly initialCivicProfessions: CivicInitialProfession[] = [];
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
   private readonly npcStairMotion: NpcStairMotion;
@@ -134,7 +140,8 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandState?: SimState;
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
-  constructor(private readonly world: WorldDefinition) {
+  constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).join(',') !== 'rulesetId' || options.rulesetId !== 'civic-local-v1')) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
     this.edges = new Map(world.edges.map(e => [e.id, e]));
@@ -146,6 +153,7 @@ export class Simulation implements SimulationAPI {
     this.runtime = { rng: (world.seed >>> 0) || 1, accumulator: 0, weatherAt: 9 * 60, crimeAt: 8 * 60 + 40, payrollAt: 17 * 60, commerceAt: 8 * 60, financeAt: 8 * 60, socialAt: 8 * 60, eventId: 0, crimeId: 0, focus: copy(world.spawn), mode: 'drone', detail: 1, workAt: -10000, studyAt: -10000, wages: [], accountingVersion: 2, wageAccruals: [], wageArrears: [], taxes: 0, freight: {}, playerBusinesses: [], investment: 0, campaign: null, signalOverrides: {}, constructionId: 0, energyBoostUntil: 0, operatingCost: 0, restAt: -10000, relationshipAt: {}, lastInvestmentAt: -10000, riders: {}, links: [], impressions: {}, districtRelationMeans: {}, decisionAt: {}, activities: {}, attendance: {}, customers: {}, driving: { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 }, dispatches: {}, relationshipClock: 480, hostileAt: {} };
     this.state = { version: 1, seed: world.seed, tick: 0, day: 0, hour: 8, paused: false, speed: 1, weather: '晴', visibility: 1, energy: 98, treasury: 80000, taxRate: .08, policeBudget: .3, support: 58, bankBalance: 0, loan: 0, gdp: 0, lastSystemOrder: [], districts: world.districts.map(d => ({ id: d.id, energy: 98, safety: 84, employment: .94, prosperity: 68, pollution: 8, tier: 'statistical', residents: d.population, crimeCount: 0 })), citizens: [], vehicles: [], shops: [], player: { position: copy(world.spawn), role: 'traveler', identities: ['traveler'], money: 600, reputation: 0, needs: { hunger: 85, fatigue: 90, social: 70, fun: 70 }, inventory: { block: 32 }, homeId: null, education: 0, experience: 0, partnerId: null, vehicleId: null }, relationships: [], crimes: [], events: [], metrics: { trades: 0, commutes: 0, crimesResolved: 0, freight: 0, flights: 0 }, voxels: [] };
     this.initializeCitizens();
+    for (const actor of this.state.citizens) this.initialCivicProfessions.push({ id: actor.id, role: actor.role, workId: actor.workId, districtId: actor.districtId, education: actor.education });
     // Fresh journeys explicitly opt into physical stair travel. A loaded v1
     // runtime replaces these fields and retains its original movement contract.
     this.runtime.npcMotionVersion = 2; this.runtime.npcStairCursors = {};
@@ -186,7 +194,14 @@ export class Simulation implements SimulationAPI {
     installJourneys(this);
     installTrade(this);
     installFamily(this);
+    if (options?.rulesetId === 'civic-local-v1') {
+      this.state.civicStaffing = createCivicStaffingState({ id: `civic-new-${world.seed}-${this.fingerprint}`, ruleVersion: 1, origin: 'new-city', enabledAt: 480, enabledTick: 0 }, initialCivicOfficials(this.initialCivicProfessions, world));
+      this.runtime.civicStaffingVersion = 1;
+    }
+    installCivicStaffing(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1', isCanonicalPresence: isCanonicalCivicPresence });
     installCulture(this);
+    if (this.state.civicStaffing) { this.state.budgetAuthority = createBudgetAuthorityState(this.state.civicStaffing.enablement, this.runtime.publicBudgets ?? [], this.state.culture); this.runtime.budgetAuthorityVersion = 1; }
+    installBudgetAuthority(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1' }, () => this.runtime);
     installFamilyEducation(this);
     installHomeRest(this);
     installPower(this, { activate: () => { this.runtime.powerVersion = 1; }, legacy: () => this.legacyEnergyContract(), publicSupply: () => this.runtime.publicSupply ?? 1, isCanonicalDisaster, isCanonicalResearchCompletion });
@@ -590,12 +605,14 @@ export class Simulation implements SimulationAPI {
     const authorizedRemaining = (this.runtime.publicBudgets ?? []).filter(budget => budget.closedAt === null).reduce((sum, budget) => sum + budget.cap - budget.spent, 0);
     return { cash, publicWagesDue, publicWagesEarned, forecastPayroll, reservedPayroll, essentialOperations, reserve, authorizedRemaining, available: Math.max(0, cash - reserve - authorizedRemaining) };
   }
+  authorizeCivicSupplementalBudget(request: PublicBudgetAuthorization): boolean { return authorizeNaturalSupplementalBudget(this, request, this.runtime); }
   authorizePublicBudget(request: PublicBudgetAuthorization): boolean {
+    if (this.effectiveRuleset === 'civic-local-v1' && isSupplementalPurpose(request.purpose)) return false;
     const time = this.state.extension?.lastUpdate ?? this.now, site = this.buildings.get(request.siteId), budgets = this.runtime.publicBudgets ??= [];
     if (!site || !finite(request.cap) || request.cap <= 0 || request.cap > 1e6 || !finite(request.approvedAt) || Math.abs(request.approvedAt - time) > 1e-6
       || typeof request.id !== 'string' || !/^[a-zA-Z0-9-]{1,100}$/.test(request.id) || typeof request.purpose !== 'string' || !request.purpose.length || request.purpose.length > 100
       || !Array.isArray(request.approvedBy) || new Set(request.approvedBy).size !== request.approvedBy.length || budgets.some(budget => budget.id === request.id) || budgets.length >= 256 || request.cap > this.publicBudgetSnapshot().available) return false;
-    const signatures: BudgetAuthorization['signatures'] = [];
+    const signatures: LegacyBudgetAuthorization['signatures'] = [];
     for (const actorId of request.approvedBy) {
       if (actorId === 'player') {
         const chamber = this.buildingNear(undefined, ['hall', 'core']);
@@ -1361,6 +1378,7 @@ export class Simulation implements SimulationAPI {
     // liquidity, memories and travel cost. A work shift is a preference, not a lock.
     for (const opportunity of shopLifecycleOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     for (const opportunity of familyEducationOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
+    for (const opportunity of civicStaffingOpportunities(this, citizen)) add(opportunity.destination, opportunity.activity, opportunity.score);
     if (homeBedAvailable) add(home, 'rest', (100 - citizen.needs.fatigue) * .8 + (night ? 140 : !shift ? 18 : 0) + (citizen.needs.fatigue < 25 ? 110 : 0));
     if (shift && citizen.needs.hunger >= 40 && citizen.needs.fatigue >= 35) {
       for (const shop of this.state.shops) if (this.shopOwnerId(shop) === citizen.id && this.privateWorkAllowance(citizen, shop) <= 0) add(this.buildings.get(shop.buildingId)!, 'businessReview', 70);
@@ -1591,7 +1609,7 @@ export class Simulation implements SimulationAPI {
       // At most seven persisted new research jobs request fine task processing.
       // Preserve tier, ordinary actors' frequency, pending needs and real wages.
       const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1659,9 +1677,10 @@ export class Simulation implements SimulationAPI {
       const treatment = this.state.clinical?.orders.find(order => order.patientId === citizen.id && ['awaitingSupply', 'awaitingDoctor', 'inTreatment'].includes(order.state));
       const committedTreatment = treatment && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25;
       if (committedTreatment) this.runtime.activities[citizen.id] = 'heal';
-      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
+      const reconsiderCivic = this.effectiveRuleset === 'civic-local-v1' && previousActivity === 'work' && civicStaffingOpportunities(this, citizen).length > 0;
+      const committedNeed = !!citizen.destinationId && (citizen.state === 'roadWaiting' || previousActivity === 'eat' && citizen.needs.hunger < 55 && previousShop?.open && previousShop.inventory >= 1 && citizen.money >= previousShop.price || previousActivity === 'rest' && citizen.needs.fatigue < 55 && citizen.needs.hunger >= 30 || (previousActivity === 'heal' || !!treatment) && (this.state.extension?.actorProfiles[citizen.id]?.health ?? 100) < 60 && citizen.needs.hunger >= 35 && citizen.needs.fatigue >= 25 || !reconsiderCivic && previousActivity === 'work' && shift && this.isEmployed(citizen) && citizen.needs.hunger >= 30 && citizen.needs.fatigue >= 25);
       if (committedTreatment) destination = this.buildings.get(treatment.siteId)!;
-      else if (!committedNeed && (!citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
+      else if (!committedNeed && (reconsiderCivic || !citizen.destinationId || this.now + 1e-7 >= (this.runtime.decisionAt[citizen.id] ?? 0) || sleeping && previousActivity !== 'rest')) {
         const choice = this.chooseFacility(citizen); destination = choice.destination; this.runtime.activities[citizen.id] = choice.activity; this.runtime.decisionAt[citizen.id] = this.now + 25 + this.random() * 35;
       } else destination = this.buildings.get(citizen.destinationId!)!;
       this.setDestination(citizen, destination);
@@ -1703,6 +1722,13 @@ export class Simulation implements SimulationAPI {
       } else if (activity === 'work') {
         if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
         if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
+      } else if (activity === 'civicRegister' || activity === 'civicVote') {
+        citizen.state = 'attendingCivic';
+        if (this.effectiveRuleset === 'civic-local-v1' && arrivedElapsed > 0) {
+          const observedClock = this.state.extension!.lastUpdate;
+          const event: Event = Object.freeze({ type: 'civic-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: activity, minutes: this.minutes, activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+          canonicalCivicPresence.add(event); this.bus.emit(event);
+        }
       } else if (activity === 'shopLifecycle') {
         citizen.state = 'reviewingBusiness';
         this.bus.emit({ type: 'shop-lifecycle-arrived', citizenId: citizen.id, shopId: this.state.shops.find(shop => shop.buildingId === destination.id)?.id });
@@ -2313,11 +2339,14 @@ export class Simulation implements SimulationAPI {
     }
     return fail('暂不支持此项操作。');
   }
-  get saveVersion(): 1 | 2 { return this.runtime.npcMotionVersion === 2 ? 2 : 1; }
+  get effectiveRuleset(): EffectiveRuleset { return effectiveCityRuleset(this.state, this.runtime); }
+  get rulesetEnablement() { return readonlyCityEnablement(this.state, this.runtime); }
+  get motionVersion(): 1 | 2 { return this.runtime.npcMotionVersion === 2 ? 2 : 1; }
+  get saveVersion(): 1 | 2 | 3 { return this.effectiveRuleset === 'civic-local-v1' ? 3 : this.motionVersion; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion === 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   importSave(json: string): CommandResult {
     try {
@@ -2334,10 +2363,11 @@ export class Simulation implements SimulationAPI {
       const unique = (values: any[], label: string) => ensure(new Set(values.map(v => v.id)).size === values.length, label);
       const needs = (n: any, label: string) => { ensure(n && typeof n === 'object', label); for (const key of ['hunger', 'fatigue', 'social', 'fun']) number(n[key], 0, 100, `${label}.${key}`); };
       const money = (n: unknown, label: string) => number(n, 0, 1e12, label);
-      ensure(data && data.format === 'yunshan-save' && (data.version === 1 || data.version === 2) && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
+      ensure(data && data.format === 'yunshan-save' && (data.version === 1 || data.version === 2 || data.version === 3) && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
       const s = data.state, r = data.runtime;
       ensure(s && r && typeof s === 'object' && typeof r === 'object', '状态或运行数据'); ensure(s.version === 1 && s.seed === this.world.seed, '状态版本');
-      if (data.version === 2) ensure(r.npcMotionVersion === 2 && r.npcStairCursors && typeof r.npcStairCursors === 'object' && !Array.isArray(r.npcStairCursors) && Object.keys(r.npcStairCursors).length <= 1024, 'native motion body and version');
+      const motionVersion = validateCityRulesetEnvelope(data);
+      if (motionVersion === 2) ensure(r.npcMotionVersion === 2 && r.npcStairCursors && typeof r.npcStairCursors === 'object' && !Array.isArray(r.npcStairCursors) && Object.keys(r.npcStairCursors).length <= 1024, 'native motion body and version');
       else ensure(r.npcMotionVersion === undefined && r.npcStairCursors === undefined, 'legacy motion body and version');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
@@ -2503,9 +2533,10 @@ export class Simulation implements SimulationAPI {
           string(budget.purpose, 'budget purpose', 100); number(budget.cap, 0, 1e6, 'authorized cap'); number(budget.spent, 0, budget.cap, 'authorized spent'); number(budget.approvedAt, 0, s.extension?.lastUpdate ?? 1e12, 'budget approved time');
           ensure(budget.closedAt === null || finite(budget.closedAt) && budget.closedAt >= budget.approvedAt && budget.closedAt <= (s.extension?.lastUpdate ?? 1e12), 'budget close time');
           const approvers = array(budget.approvedBy, 16, 'budget approvers'), signatures = array(budget.signatures, 16, 'budget signatures'); ensure(approvers.length > 0 && new Set(approvers).size === approvers.length && signatures.length === approvers.length, 'budget approval signatures');
-          for (const signature of signatures) ensure((signature.actorId === 'player' || expectedCitizenIds.has(signature.actorId)) && approvers.includes(signature.actorId) && ['official', 'council', 'mayor'].includes(signature.role) && ['hall', 'core', 'bank'].includes(this.buildings.get(signature.siteId)?.kind ?? '') && signature.signedAt === budget.approvedAt, 'budget signature authority');
+          ensure(budget.signatureVersion === undefined || data.version === 3 && budget.signatureVersion === 2, 'budget signature version');
+          if (budget.signatureVersion === undefined) for (const signature of signatures) ensure((signature.actorId === 'player' || expectedCitizenIds.has(signature.actorId)) && approvers.includes(signature.actorId) && ['official', 'council', 'mayor'].includes(signature.role) && ['hall', 'core', 'bank'].includes(this.buildings.get(signature.siteId)?.kind ?? '') && signature.signedAt === budget.approvedAt, 'budget signature authority');
           ensure(new Set(signatures.map(signature => signature.actorId)).size === signatures.length, 'unique budget signatures');
-          ensure(signatures.some(signature => signature.role === 'mayor') || signatures.filter(signature => signature.role === 'council').length >= 2 || budget.cap <= 40 && signatures.length >= 2 && new Set(signatures.map(signature => signature.siteId)).size === 1, 'budget approval quorum');
+          if (budget.signatureVersion === undefined) ensure(signatures.some(signature => signature.role === 'mayor') || signatures.filter(signature => signature.role === 'council').length >= 2 || budget.cap <= 40 && signatures.length >= 2 && new Set(signatures.map(signature => signature.siteId)).size === 1, 'budget approval quorum');
         }
       }
       ensure(!(r.publicBudgets ?? []).some((budget: BudgetAuthorization) => ['education', 'health', 'transport'].includes(budget.purpose)) || s.culture?.version === 2, 'civic budgets require their service lifecycle');
@@ -2549,7 +2580,7 @@ export class Simulation implements SimulationAPI {
       ensure(r.impressions && typeof r.impressions === 'object' && !Array.isArray(r.impressions), 'social impressions'); for (const [id, impression] of Object.entries(r.impressions) as [string, any][]) { ensure(expectedCitizenIds.has(id), 'impression identity'); number(impression.affection, -100, 100, 'impression affection'); number(impression.trust, -100, 100, 'impression trust'); }
       ensure(r.districtRelationMeans && typeof r.districtRelationMeans === 'object', 'district relationship means'); for (const [id, mean] of Object.entries(r.districtRelationMeans)) { ensure(districtIds.has(id), 'district relationship identity'); number(mean, -100, 100, 'district relationship mean'); }
       ensure(r.decisionAt && typeof r.decisionAt === 'object' && !Array.isArray(r.decisionAt), 'decision timers'); for (const [id, at] of Object.entries(r.decisionAt)) { ensure(expectedCitizenIds.has(id), 'decision citizen'); number(at, 0, 1e12, 'decision time'); }
-      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle'].includes(activity as string), 'activity');
+      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle', ...(data.version === 3 ? ['civicRegister', 'civicVote'] : [])].includes(activity as string), 'activity');
       ensure(r.attendance && typeof r.attendance === 'object' && !Array.isArray(r.attendance), 'attendance'); for (const [id, minutes] of Object.entries(r.attendance)) { ensure(expectedCitizenIds.has(id), 'attendance citizen'); number(minutes, 0, 100000, 'attendance minutes'); }
       ensure(r.customers && typeof r.customers === 'object' && !Array.isArray(r.customers), 'customers'); for (const [id, shopId] of Object.entries(r.customers)) ensure(expectedCitizenIds.has(id) && shopIds.has(shopId as string), 'customer reference');
       ensure(r.driving && typeof r.driving === 'object' && (r.driving.vehicleId === null || expectedVehicleIds.has(r.driving.vehicleId) && r.driving.vehicleId === p.vehicleId), 'driving vehicle'); number(r.driving.throttle, -1, 1, 'driving throttle'); number(r.driving.turn, -1, 1, 'driving turn'); ensure(typeof r.driving.brake === 'boolean', 'driving brake'); number(r.driving.speed, 0, 200, 'driving speed');
@@ -2561,8 +2592,10 @@ export class Simulation implements SimulationAPI {
         for (const [id, minutes] of Object.entries(r.peopleElapsed)) { ensure(expectedCitizenIds.has(id), 'deferred actor identity'); number(minutes, 0, 60 + 1e-7, 'deferred actor minutes'); }
       }
       // Validation finishes before either live object is replaced: rejected saves are atomic.
+      if (data.version === 3) validateCivicOriginalOfficials(s as SimState, r.publicLabor, this.world, this.initialCivicProfessions);
       for (const validator of this.saveValidators) validator(s as SimState);
-      if (data.version === 2) {
+      validateBudgetAuthority(s as SimState, this.world, r);
+      if (motionVersion === 2) {
         const cursorCitizens = new Map<string, Citizen>(s.citizens.map((c: Citizen) => [c.id, c]));
         for (const [id, cursor] of Object.entries(r.npcStairCursors)) {
           const citizen = cursorCitizens.get(id);

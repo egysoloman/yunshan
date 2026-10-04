@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-10-04T14:29:12.738091+00:00",
+  "endedAt": "2026-10-04T14:29:20.781840+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern",
+    "synchronous immutable|explicit product city saves|loading original native2|new v3 custom city|half contract|trusted host upgrade|display clock",
+    "tests/city-ruleset.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 295,
+  "inputsStable": true,
+  "rawSHA256": "296d8e5eda000a5d3bd8b8dd0d99df8dc96c414cc5284bd31760112c38afca5b",
+  "ownedPid": 85481,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 85500,
+      "state": "Z",
+      "parent": 1,
+      "group": 85481,
+      "session": 85481,
+      "startTicks": 5497759
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

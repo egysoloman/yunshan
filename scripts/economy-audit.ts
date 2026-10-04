@@ -5,7 +5,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { createWorld } from '../src/world';
-import { Simulation } from '../src/simulation';
+import { createProductCity, createProductWorld, PRODUCT_CITY_LAYOUT } from '../src/product-city';
+import { Simulation, isCanonicalNpcWage } from '../src/simulation';
 import { bankingBalanceSheet } from '../src/simulation/banking';
 import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/types';
 
@@ -14,7 +15,7 @@ import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/type
 const argumentsByName = new Map<string, string>();
 for (let index = 2; index < process.argv.length; index += 2) {
   const name = process.argv[index], value = process.argv[index + 1];
-  assert.ok(['--days', '--tax-rate', '--police-budget', '--seed', '--out'].includes(name) && value !== undefined && !argumentsByName.has(name), `invalid audit argument ${name}`);
+  assert.ok(['--days', '--tax-rate', '--police-budget', '--seed', '--out', '--ruleset'].includes(name) && value !== undefined && !argumentsByName.has(name), `invalid audit argument ${name}`);
   argumentsByName.set(name, value);
 }
 const numeric = (name: string, fallback: number, min: number, max: number) => { const value = argumentsByName.has(name) ? Number(argumentsByName.get(name)) : fallback; assert.ok(Number.isFinite(value) && value >= min && value <= max, `invalid ${name}`); return value; };
@@ -46,8 +47,25 @@ async function auditSourceHashes(): Promise<Record<string, string>> {
     [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
 }
 const sourceHash = await auditSourceHashes();
-const world = createWorld(seed);
-const sim = new Simulation(world);
+const requestedRuleset = argumentsByName.get('--ruleset') ?? 'civic-local-v1';
+assert.ok(requestedRuleset === 'legacy' || requestedRuleset === 'civic-local-v1', 'audit ruleset must be explicitly recognized');
+const world = requestedRuleset === 'civic-local-v1' ? createProductWorld(seed) : createWorld(seed);
+const sim = requestedRuleset === 'civic-local-v1' ? createProductCity(world) : new Simulation(world);
+assert.equal(sim.effectiveRuleset, requestedRuleset, 'requested audit ruleset must match the actual city');
+const actualWorldFingerprint = JSON.parse(sim.exportSave()).worldFingerprint;
+const rulesetContext = () => ({
+  requestedRuleset, requestSource: argumentsByName.has('--ruleset') ? 'explicit-cli' : 'product-default',
+  effectiveRuleset: sim.effectiveRuleset, saveEnvelopeVersion: sim.saveVersion, motionVersion: sim.motionVersion,
+  enablement: sim.rulesetEnablement, requestedNewCityLayout: requestedRuleset === 'civic-local-v1' ? PRODUCT_CITY_LAYOUT : 'legacy-createWorld-default',
+  actualLayoutVersion: world.layoutVersion ?? 'unversioned', actualWorldFingerprint,
+  cityStateSource: 'new-city',
+});
+if (requestedRuleset === 'civic-local-v1') {
+  assert.equal(sim.saveVersion, 3, 'new product rules need an explicit v3 envelope');
+  assert.equal(sim.motionVersion, 2, 'new product cities use native physical motion');
+  assert.equal(sim.rulesetEnablement?.origin, 'new-city', 'this audit did not restore or upgrade an old city');
+  assert.equal(world.layoutVersion, PRODUCT_CITY_LAYOUT, 'new product audit must use its declared layout');
+}
 sim.state.taxRate = initialPolicy.taxRate; sim.state.policeBudget = initialPolicy.policeBudget;
 assert.equal(sim.command({ type: 'speed', value: speed }).ok, true);
 const extension = () => sim.state.extension! as CityExtensionState & {
@@ -61,7 +79,7 @@ interface Bookkeeping { taxes: number; operatingCost: number; wages: { citizenId
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[]; wageAccruals?: { citizenId: string; shopId: string | null; amount: number }[] }
 const core = () => Reflect.get(sim, 'runtime') as Bookkeeping;
 const buildings = new Map(world.buildings.map(building => [building.id, building]));
-const commodities = commodityObserver(buildings, new Map(sim.state.shops.map(shop => [shop.id, shop.buildingId])));
+const commodities = commodityObserver(buildings, new Map(sim.state.shops.map(shop => [shop.id, shop.buildingId])), isCanonicalNpcWage);
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const totals = { sales: 0, saleCount: 0, saleTax: 0, fares: 0, payrollPublicRequested: 0,
   payrollPublicPaid: 0, payrollPrivateRequested: 0, payrollPrivate: 0, wageTax: 0, wholesale: 0, wholesaleTax: 0,
@@ -97,8 +115,8 @@ sim.onEvent('wholesale', event => { totals.wholesale += event.amount ?? 0; total
 sim.onEvent('business-expense', event => { totals.businessExpenses += event.amount ?? 0; });
 sim.onEvent('stored-meal', event => { totals.storedMeals += event.amount ?? 0; commodities.storedMeal(event); });
 sim.onEvent('food-consumed', event => { commodities.foodConsumed(event); });
-sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; commodities.production(event); assert.ok((event.minutes ?? 0) > 0); });
-sim.onEvent('wage-earned', event => { if (event.shopId) totals.payrollPrivateRequested += event.amount ?? 0; else totals.payrollPublicRequested += event.amount ?? 0; });
+sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; commodities.production(event); assert.ok((event.minutes ?? 0) > 0 && (event.amount ?? 0) > 0, 'production evidence requires positive actual labor and output'); });
+sim.onEvent('wage-earned', event => { commodities.wageEarned(event); if (event.shopId) totals.payrollPrivateRequested += event.amount ?? 0; else totals.payrollPublicRequested += event.amount ?? 0; });
 sim.onEvent('wage-paid', event => {
   const paid = event.amount ?? 0;
   if (event.shopId) totals.payrollPrivate += paid;
@@ -198,7 +216,7 @@ function snapshot() {
   const mean = (list: Citizen[], value: (citizen: Citizen) => number) => list.length ? list.reduce((n, c) => n + value(c), 0) / list.length : 0;
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
-    commodityObservations: commodities.snapshot(), food: foodSnapshot(s, buildings),
+    ruleset: rulesetContext(), commodityObservations: commodities.snapshot(), food: foodSnapshot(s, buildings),
     policeSupplies: sim.policeSupplyCoverage(),
     civicRequests: s.culture ? { residentPetitions: s.culture.petitions.filter(p => p.residentOrigin !== undefined).length, openPetitions: s.culture.petitions.filter(p => p.status === 'open').length, orders: s.culture.orders.map(o => ({ id: o.id, topic: o.topic, state: o.state, authorizedCap: o.authorizedCap, spent: o.spent, receivedUnits: o.receivedUnits, consumedUnits: o.consumedUnits, served: o.servedIds.length })) } : null,
     formalLearning: s.family?.formalLearning ? Object.values(s.family.formalLearning).map(record => ({ earnedMinutes: record.earnedMinutes, receipts: record.receipts.length, familyReceipts: record.tuitionPages?.reduce((sum, page) => sum + page.length, 0) ?? 0 })) : [],
@@ -295,7 +313,7 @@ const finalSave = { path: finalSavePath, bytes: Buffer.byteLength(finalSaveText)
 // Capture the baseline before exercising the real terminal state and its reader.
 // Audit event observers continue to run below; they must not rewrite these totals.
 const baselineResult = JSON.parse(JSON.stringify({
-  status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, seed, requestedDays, initialPolicy, ticks: sim.state.tick,
+  status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, seed, requestedDays, initialPolicy, ruleset: rulesetContext(), ticks: sim.state.tick,
   finalSave, terminalTreasury: sim.state.treasury,
   sourceHashScope: 'All regular src files, this audit driver and its read-only commodity observer; both ends recursively rescan the same source tree.',
   scope: 'One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.',
@@ -312,13 +330,18 @@ try {
   assert.equal(originalBytes, finalSaveText, 'written terminal save must retain the original bytes');
   const restored = new Simulation(world), result = restored.importSave(originalBytes);
   assert.ok(result.ok, result.message);
+  assert.equal(restored.effectiveRuleset, requestedRuleset, 'terminal reader must retain the actually audited rules');
+  assert.equal(restored.saveVersion, sim.saveVersion, 'terminal reader must retain its envelope version');
+  assert.equal(restored.motionVersion, sim.motionVersion, 'terminal reader must retain its separate motion version');
+  assert.deepEqual(restored.rulesetEnablement, sim.rulesetEnablement, 'terminal reader must retain exact original enablement provenance');
   assert.equal(restored.exportSave(), finalSaveText, 'terminal save must reproduce the actual terminal city');
   for (let tick = 0; tick < 24; tick++) {
     sim.step(.25); restored.step(.25);
     assert.equal(restored.exportSave(), sim.exportSave(), `terminal reader diverged at future tick ${tick + 1}`);
   }
   const futureSave = sim.exportSave();
-  saveValidation = { status: 'passed', immediateEqual: true, futureTicks: 24, futureEqual: true,
+  saveValidation = { status: 'passed', immediateEqual: true, futureTicks: 24, futureEqual: true, effectiveRuleset: restored.effectiveRuleset,
+    saveEnvelopeVersion: restored.saveVersion, motionVersion: restored.motionVersion, originalEnablement: restored.rulesetEnablement,
     futureSaveSha256: createHash('sha256').update(futureSave).digest('hex') };
 } catch (error) {
   const saveFailure = error instanceof Error ? error.stack ?? error.message : String(error);

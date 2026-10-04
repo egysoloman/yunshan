@@ -1,4 +1,6 @@
 import type { Simulation } from '../simulation';
+import { budgetAuthorityEnabled, currentCivicBudgetSignature, recordSupplementalBudgetRequest, type BudgetSignatureV2 } from './budget-authority';
+import { validateCivicCouncilSourceProof } from './civic-staffing';
 import type { CultureState, ServiceOrder } from './culture';
 import type { SimState, Vec3, WorldDefinition } from '../types';
 import { canAccessFloor } from '../access';
@@ -6,14 +8,15 @@ import { blocksFloorPlanMovement, floorPlanSupport, getBuildingBody, getBuilding
 import { homeRestPointBlockedByVoxels } from './home-rest';
 
 const EPS = 1e-7, LIMIT = 64, PER_ORDER = 4, CAP = 160;
-export interface SupplementalSignature { actorId: string; role: 'council' | 'mayor'; siteId: string; floor: number; position: Vec3 }
+export interface LegacySupplementalSignature { actorId: string; role: 'council' | 'mayor'; siteId: string; floor: number; position: Vec3 }
+export type SupplementalSignature = LegacySupplementalSignature | BudgetSignatureV2;
 export interface SupplementalBudget {
-  id: string; orderId: string; requestedAt: number; missingUnits: number; receivedAtRequest: number;
+  signatureVersion?: 2; id: string; orderId: string; requestedAt: number; missingUnits: number; receivedAtRequest: number;
   baseSpentAtRequest: number; quoteLots: { shopId: string; quantity: number; unitPrice: number }[];
   quotedGross: number; cap: number; approvedAt: number | null; signatures: SupplementalSignature[];
   spent: number; receiptIds: string[]; closedAt: number | null;
 }
-export interface SupplementalBudgetState { version: 1; requests: SupplementalBudget[] }
+export interface SupplementalBudgetState { version: 1 | 2; requests: SupplementalBudget[] }
 export const supplementalPurpose = (order: ServiceOrder) => `civic-${order.topic}-supplement`;
 const now = (sim: Simulation) => sim.state.extension!.lastUpdate;
 export function supplementalFor(culture: CultureState, orderId: string): SupplementalBudget[] {
@@ -24,7 +27,8 @@ export function serviceTotalSpent(culture: CultureState, order: ServiceOrder): n
 }
 /** A quote is a finite request for existing stock, never a procurement receipt. */
 export function proposeSupplementalBudget(sim: Simulation, order: ServiceOrder): void {
-  const culture = sim.state.culture!, previous = supplementalFor(culture, order.id);
+  const culture = sim.state.culture!, previous = supplementalFor(culture, order.id), natural = sim.effectiveRuleset === 'civic-local-v1';
+  if (natural && !budgetAuthorityEnabled(sim)) return;
   if (!['education', 'health'].includes(order.topic) || order.approvedAt === null || ['fulfilled', 'rejected'].includes(order.state)
     || order.spent < order.authorizedCap - EPS || order.receivedUnits >= order.targetUnits - EPS
     || previous.length >= PER_ORDER || previous.some(r => r.closedAt === null && (r.approvedAt === null || r.spent < r.cap - EPS))
@@ -41,11 +45,14 @@ export function proposeSupplementalBudget(sim: Simulation, order: ServiceOrder):
   }
   const quotedGross = quoteLots.reduce((sum, lot) => sum + lot.quantity * lot.unitPrice, 0);
   if (!Number.isFinite(quotedGross) || quotedGross <= EPS) return;
-  const requests = (culture.supplementalBudgets ??= { version: 1, requests: [] }).requests;
-  requests.push({ id: `${order.id}-supplement-${previous.length + 1}`, orderId: order.id, requestedAt: now(sim), missingUnits: order.targetUnits - order.receivedUnits,
+  const id = `${order.id}-supplement-${previous.length + 1}`;
+  if (natural && !recordSupplementalBudgetRequest(sim, id)) return;
+  const requests = (culture.supplementalBudgets ??= { version: natural ? 2 : 1, requests: [] }).requests;
+  requests.push({ ...(natural ? { signatureVersion: 2 as const } : {}), id, orderId: order.id, requestedAt: now(sim), missingUnits: order.targetUnits - order.receivedUnits,
     receivedAtRequest: order.receivedUnits, baseSpentAtRequest: order.spent, quoteLots, quotedGross, cap: Math.min(CAP, Math.ceil(quotedGross)), approvedAt: null, signatures: [], spent: 0, receiptIds: [], closedAt: null });
   order.lastReason = '原授权不变；剩余材料已按现有工业库存和真实报价提请议会追加审议，尚未拨款或采购。';
-  sim.appendNotice('supplemental-budget', `${site.name}缺${(order.targetUnits - order.receivedUnits).toFixed(2)}份材料，申请独立最高${Math.min(CAP, Math.ceil(quotedGross))}文追加额度；仍需议会或当选市长实际审批。`, site.districtId);
+  const review = sim.effectiveRuleset === 'civic-local-v1' ? '仍需同厅两名在任地方议员实际在岗联审。' : '仍需议会或当选市长实际审批。';
+  sim.appendNotice('supplemental-budget', `${site.name}缺${(order.targetUnits - order.receivedUnits).toFixed(2)}份材料，申请独立最高${Math.min(CAP, Math.ceil(quotedGross))}文追加额度；${review}`, site.districtId);
 }
 function supported(world: WorldDefinition, siteId: string, position: Vec3, level: number, role: 'council' | 'mayor'): boolean {
   const site = world.buildings.find(b => b.id === siteId);
@@ -65,9 +72,14 @@ function supported(world: WorldDefinition, siteId: string, position: Vec3, level
 }
 function approve(sim: Simulation, request: SupplementalBudget, signatures: SupplementalSignature[]): boolean {
   const order = sim.state.culture!.orders.find(o => o.id === request.orderId)!;
-  if (request.approvedAt !== null || request.closedAt !== null || ['fulfilled', 'rejected'].includes(order.state)
-    || !sim.authorizePublicBudget({ id: request.id, siteId: order.siteId, purpose: supplementalPurpose(order), cap: request.cap, approvedAt: now(sim), approvedBy: signatures.map(s => s.actorId) })) return false;
-  request.approvedAt = now(sim); request.signatures = signatures; order.retryAt = now(sim);
+  if (request.approvedAt !== null || request.closedAt !== null || ['fulfilled', 'rejected'].includes(order.state)) return false;
+  const authorization = { id: request.id, siteId: order.siteId, purpose: supplementalPurpose(order), cap: request.cap, approvedAt: now(sim), approvedBy: signatures.map(s => s.actorId) };
+  if (sim.effectiveRuleset === 'civic-local-v1') {
+    if (request.signatureVersion !== 2 || !sim.authorizeCivicSupplementalBudget(authorization)) return false;
+  } else {
+    if (request.signatureVersion !== undefined || !sim.authorizePublicBudget(authorization)) return false;
+    request.approvedAt = now(sim); request.signatures = signatures; order.retryAt = now(sim);
+  }
   sim.appendNotice('supplemental-budget', `${order.id}独立追加${request.cap}文额度已审议；原${order.authorizedCap}文授权和采购历史保持，后续仍按真实库存逐笔采购。`);
   return true;
 }
@@ -75,6 +87,21 @@ function approve(sim: Simulation, request: SupplementalBudget, signatures: Suppl
 export function reviewSupplementalBudgets(sim: Simulation): void {
   const pending = sim.state.culture?.supplementalBudgets?.requests.filter(r => r.approvedAt === null && r.closedAt === null) ?? [];
   if (!pending.length || sim.state.hour < 8 || sim.state.hour >= 17) return;
+  if (sim.effectiveRuleset === 'civic-local-v1') {
+    if (!budgetAuthorityEnabled(sim)) return;
+    const groups = new Map<string, BudgetSignatureV2[]>();
+    for (const actor of [...sim.state.citizens].sort((a,b) => a.id.localeCompare(b.id))) {
+      const signature = currentCivicBudgetSignature(sim, actor.id); if (!signature) continue;
+      const group = groups.get(signature.siteId) ?? []; group.push(signature); groups.set(signature.siteId, group);
+    }
+    for (const request of pending) {
+      const order = sim.state.culture!.orders.find(o => o.id === request.orderId)!;
+      const district = sim.worldDefinition.buildings.find(b => b.id === order.siteId)!.districtId;
+      const reviewers = [...groups.entries()].sort((a,b) => a[0].localeCompare(b[0])).find(([id,actors]) => actors.length >= 2 && sim.worldDefinition.buildings.find(b => b.id === id)?.districtId === district);
+      if (reviewers) approve(sim, request, reviewers[1].slice(0,2));
+    }
+    return;
+  }
   const signatures = sim.state.citizens.filter(c => ['议员', 'council'].includes(c.role) && (sim.state.extension!.actorProfiles[c.id]?.age ?? 0) >= 18
     && sim.state.extension!.actorProfiles[c.id]?.alive === true && c.needs.hunger >= 40 && c.needs.fatigue >= 35 && sim.isOnDuty(c.id, c.workId)
     && !homeRestPointBlockedByVoxels(c.position, sim.state.voxels)).sort((a, b) => a.id.localeCompare(b.id)).flatMap(c => {
@@ -86,6 +113,8 @@ export function reviewSupplementalBudgets(sim: Simulation): void {
 }
 /** A legacy mayor label is not an elected term. No time or cash is advanced. */
 export function reviewSupplementalByMayor(sim: Simulation, id: string): boolean {
+  // The new two-official consumer never falls back to the legacy mayor role.
+  if (sim.effectiveRuleset === 'civic-local-v1') return false;
   const s = sim.state, term = s.governance?.term, election = s.governance?.elections.find(e => e.id === term?.electionId), player = s.player;
   if (!term || term.endedAt !== null || now(sim) < term.startsAt || now(sim) >= term.endsAt || election?.result !== 'elected' || !sim.hasIdentity('mayor')
     || !s.extension!.actorProfiles.player.alive || player.vehicleId || homeRestPointBlockedByVoxels(player.position, s.voxels)) return false;
@@ -102,12 +131,14 @@ export function closeServiceSupplementalBudgets(sim: Simulation, order: ServiceO
     request.closedAt = now(sim);
   }
 }
-interface BudgetProof { id: string; siteId: string; purpose: string; cap: number; spent: number; approvedAt: number; approvedBy: string[]; closedAt: number | null; signatures: { actorId: string; role: string; siteId: string; signedAt: number }[] }
+interface BudgetProof { signatureVersion?: 2; id: string; siteId: string; purpose: string; cap: number; spent: number; approvedAt: number; approvedBy: string[]; closedAt: number | null; signatures: { actorId: string; role: string; siteId: string; signedAt: number }[] }
 export function validateSupplementalBudgetCrossReferences(s: SimState, budgets: readonly BudgetProof[]): void {
   const requests = s.culture?.supplementalBudgets?.requests ?? [];
   const ensure = (condition: unknown) => { if (!condition) throw new Error('追加预算授权与原议程交叉引用无效'); };
   for (const r of requests.filter(r => r.approvedAt !== null)) {
     const order = s.culture!.orders.find(o => o.id === r.orderId)!, budget = budgets.find(b => b.id === r.id);
+    if (r.signatureVersion === 2) ensure(budget?.signatureVersion === 2 && JSON.stringify(budget.signatures) === JSON.stringify(r.signatures));
+    else ensure(budget?.signatureVersion === undefined);
     ensure(budget && budget.siteId === order.siteId && budget.purpose === supplementalPurpose(order) && budget.cap === r.cap && Math.abs(budget.spent - r.spent) < 1e-6
       && budget.approvedAt === r.approvedAt && budget.closedAt === r.closedAt && budget.approvedBy.length === r.signatures.length
       && budget.signatures.length === r.signatures.length && r.signatures.every(signature => budget.signatures.some(b => b.actorId === signature.actorId && b.role === signature.role && b.siteId === signature.siteId && b.signedAt === r.approvedAt)));
@@ -118,9 +149,14 @@ export function validateSupplementalBudgetState(candidate: SimState, world: Worl
   const body = candidate.culture?.supplementalBudgets; if (body === undefined) return;
   const ensure = (condition: unknown) => { if (!condition) throw new Error('追加预算保存合同无效'); };
   const num = (n: unknown, lo: number, hi: number) => ensure(typeof n === 'number' && Number.isFinite(n) && n >= lo - EPS && n <= hi + EPS);
-  ensure(body && body.version === 1 && Array.isArray(body.requests) && body.requests.length > 0 && body.requests.length <= LIMIT && candidate.culture!.version === 2);
+  ensure(body && (body.version === 1 || body.version === 2) && Array.isArray(body.requests) && body.requests.length > 0 && body.requests.length <= LIMIT && candidate.culture!.version === 2);
+  ensure(JSON.stringify(Object.keys(body).sort()) === JSON.stringify(['requests','version']));
+  if (body.version === 2) ensure((candidate as SimState & { budgetAuthority?: { version: number } }).budgetAuthority?.version === 1);
   const ids = new Set<string>(), time = candidate.culture!.lastUpdate, perOrder = new Map<string, number>();
   for (const r of body.requests) {
+    if (body.version === 1) ensure(r.signatureVersion === undefined && r.signatures.every(s => !('signatureVersion' in s)));
+    else ensure(r.signatureVersion === 2 || r.signatureVersion === undefined && r.approvedAt !== null);
+    if (r.signatureVersion === 2) ensure(JSON.stringify(Object.keys(r).sort()) === JSON.stringify(['signatureVersion','id','orderId','requestedAt','missingUnits','receivedAtRequest','baseSpentAtRequest','quoteLots','quotedGross','cap','approvedAt','signatures','spent','receiptIds','closedAt'].sort()));
     const order = candidate.culture!.orders.find(o => o.id === r.orderId), round = (perOrder.get(r.orderId) ?? 0) + 1; perOrder.set(r.orderId, round);
     ensure(order && ['education', 'health'].includes(order.topic) && order.approvedAt !== null && round <= PER_ORDER && r.id === `${r.orderId}-supplement-${round}` && !ids.has(r.id)); ids.add(r.id);
     num(r.requestedAt, order!.approvedAt!, time); num(r.receivedAtRequest, 0, order!.receivedUnits); num(r.missingUnits, EPS, order!.targetUnits);
@@ -142,8 +178,15 @@ export function validateSupplementalBudgetState(candidate: SimState, world: Worl
     ensure(Math.abs(receipts.reduce((sum, receipt) => sum + receipt.paid, 0) - r.spent) < 1e-6 && receipts.reduce((sum, receipt) => sum + receipt.quantity, 0) <= r.missingUnits + EPS);
     if (r.approvedAt === null) ensure(r.signatures.length === 0 && r.spent === 0 && !r.receiptIds.length);
     else {
-      num(r.approvedAt, r.requestedAt, time); ensure(r.signatures.length === 1 && r.signatures[0].actorId === 'player' && r.signatures[0].role === 'mayor' || r.signatures.length === 2 && r.signatures.every(s => s.role === 'council' && candidate.citizens.some(c => c.id === s.actorId)) && new Set(r.signatures.map(s => s.actorId)).size === 2);
-      for (const signature of r.signatures) ensure(signature.position && Number.isInteger(signature.floor) && supported(world, signature.siteId, signature.position, signature.floor, signature.role));
+      num(r.approvedAt, r.requestedAt, time);
+      if (r.signatureVersion === 2) {
+        ensure(r.signatures.length === 2 && new Set(r.signatures.map(s => s.actorId)).size === 2 && r.signatures.every(s => 'signatureVersion' in s && s.signatureVersion === 2 && s.role === 'council' && s.signedAt === r.approvedAt && validateCivicCouncilSourceProof(candidate, s.authority)));
+        // The core independently checks exact v2 geometry/profession/paid
+        // source; cross references require both copies to be identical.
+      } else {
+        ensure(r.signatures.length === 1 && r.signatures[0].actorId === 'player' && r.signatures[0].role === 'mayor' || r.signatures.length === 2 && r.signatures.every(s => s.role === 'council' && candidate.citizens.some(c => c.id === s.actorId)) && new Set(r.signatures.map(s => s.actorId)).size === 2);
+        for (const signature of r.signatures) ensure(signature.position && Number.isInteger(signature.floor) && supported(world, signature.siteId, signature.position, signature.floor, signature.role));
+      }
     }
     ensure(r.closedAt === null || Number.isFinite(r.closedAt) && r.closedAt >= (r.approvedAt ?? r.requestedAt) - EPS && r.closedAt <= time + EPS);
     ensure(['fulfilled', 'rejected'].includes(order!.state) ? r.closedAt === order!.completedAt : r.closedAt === null);

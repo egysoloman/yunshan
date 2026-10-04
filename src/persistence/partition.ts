@@ -1,5 +1,6 @@
 import type { WorldDefinition } from '../types';
 import { decodeCitizenRoutes, encodeCitizenRoutes } from './route-encoding';
+import { hasCityRulesetDeclaration, validateCityRulesetEnvelope } from '../simulation/city-ruleset';
 
 export const SAVE_CHUNK_SIZE = 256;
 export type SaveWorld = Pick<WorldDefinition, 'buildings' | 'districts' | 'nodes'>;
@@ -33,6 +34,7 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
     if (value && typeof value === 'object') for (const [key, child] of Object.entries(value)) { if (['__proto__', 'constructor', 'prototype'].includes(key)) throw new Error('存档包含不安全字段。'); inspect(child, depth + 1); }
   };
   inspect(document);
+  if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
   const order: Record<string, string[]> = { '': Object.keys(document), state: Object.keys(document.state), runtime: Object.keys(document.runtime) };
   if (object(document.state.extension)) order['state.extension'] = Object.keys(document.state.extension);
   if (object(document.state.extension?.runtime)) order['state.extension.runtime'] = Object.keys(document.state.extension.runtime);
@@ -158,5 +160,6 @@ export function assembleSave(parts: SavePart[]): string {
     for (const key of layout.order[path] ?? Object.keys(value)) if (Object.hasOwn(value, key)) ordered[key] = reorder(value[key], path ? `${path}.${key}` : key);
     return ordered;
   };
+  if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
   return JSON.stringify(reorder(document, ''));
 }

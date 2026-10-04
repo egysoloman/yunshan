@@ -1,0 +1,25 @@
+{
+  "pid": 84699,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/budget-authority-hash.test.ts",
+    "tests/budget-authority-contract.test.ts",
+    "tests/budget-authority-source.test.ts",
+    "tests/economy-observations.test.ts",
+    "tests/farm-stock-buffer.test.ts",
+    "tests/interior-lighting.test.ts",
+    "tests/freight-access.test.ts"
+  ],
+  "identity": {
+    "pid": 84699,
+    "state": "R",
+    "parent": 84686,
+    "group": 84699,
+    "session": 84699,
+    "startTicks": 5421858
+  }
+}

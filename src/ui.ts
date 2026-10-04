@@ -14,6 +14,7 @@ import { clinicalAtPosition, clinicalVisitDeadline } from './simulation/clinical
 import { powerBinding } from './simulation/power';
 import { educationAtPosition, educationServiceStationsAtPosition } from './simulation/education';
 import { electionCounts, governanceSupported } from './simulation/governance';
+import { civicCouncilSourceProof } from './simulation/civic-staffing';
 import { hygieneContent, hygieneSignature } from './hygiene-ui';
 import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simulation/home-rest';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
@@ -241,6 +242,10 @@ export class CityUI {
     governance.append(element('h3', '', '选举与议会'));
     const record = element('div'); record.dataset.ref = 'governance-record'; governance.append(record);
     this.root.querySelector('#pane-city')!.append(governance);
+    const civic = element('div', 'panel-section');
+    civic.dataset.ref = 'civic-council';
+    civic.hidden = true;
+    this.root.querySelector('#pane-city')!.append(civic);
     const services = element('div', 'panel-section');
     services.innerHTML = '<h3>议程与实际公共服务</h3><div data-ref="service-orders"></div>';
     this.root.querySelector('#pane-city')!.append(services);
@@ -621,6 +626,31 @@ export class CityUI {
     reconcileContent(this.ref('power-state'), this.powerContent());
     this.renderPublicSystems();
     this.renderGovernance();
+    this.renderCivicCouncil();
+  }
+  private renderCivicCouncil(): void {
+    const state = this.state!, civic = state.civicStaffing, host = this.ref('civic-council');
+    host.hidden = !civic;
+    if (!civic) { host.replaceChildren(); return; }
+    const at = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60;
+    const content = element('div');
+    content.append(element('h3', '', '居民补选与地方议会'), element('p', 'note', '公务员完成现场工作后，可到公共议事厅登记；居民在两天内现场投票。当选任期十四天，可参与公共服务追加预算联审。'));
+    const live = civic.terms.flatMap(term => {
+      const source = civicCouncilSourceProof(state, term.actorId, at);
+      return source?.termId === term.id ? [{ term, source }] : [];
+    });
+    for (const { term, source } of live) {
+      const actor = state.citizens.find(person => person.id === term.actorId);
+      const office = this.world.buildings.find(site => site.id === term.officeId);
+      content.append(field(actor?.name ?? '居民', `${office?.name ?? '公共议事厅'} · 议员任期尚余 ${Math.max(0, (source.endsAt - at) / 1440).toFixed(1)} 天`));
+    }
+    if (!live.length) content.append(element('p', 'note', '尚无在任地方议员。'));
+    for (const poll of civic.polls.filter(poll => poll.countedAt === null).slice(-3)) {
+      const actor = state.citizens.find(person => person.id === poll.candidateId);
+      const votes = poll.ballots.filter(ballot => ballot.completedAt !== null);
+      content.append(field(`${actor?.name ?? '居民'}的补选`, `${votes.length} / ${poll.eligible.length} 人已投票 · 尚余 ${Math.max(0, (poll.closesAt - at) / 60).toFixed(1)} 小时`));
+    }
+    reconcileContent(host, content);
   }
   private roadContent(): HTMLElement {
     const content = element('div'), state = this.state!;
@@ -904,7 +934,9 @@ export class CityUI {
         for (const lot of extra.quoteLots) supplement.append(element('p', 'note', `${lot.shopId}：现有供货申请 ${lot.quantity.toFixed(3)} 份 × ${money(lot.unitPrice)}；报价不是实物或支出，采购仍按成交时有限报价。`));
         if (extra.approvedAt !== null) supplement.append(element('p', 'note', `独立署名：${extra.signatures.map(s => s.actorId === 'player' ? '当选市长（本人）' : state.citizens.find(c => c.id === s.actorId)?.name ?? s.actorId).join('、')} · ${extra.closedAt === null ? '实际采购中' : '已关账，原回执保留'}`));
         else if (extra.closedAt !== null) supplement.append(element('p', 'note', '订单已结束，未批准的申请关闭；没有发生追加开支。'));
-        else {
+        else if (extra.signatureVersion === 2) {
+          supplement.append(element('p', 'note', '等待同一议事厅的两名在任地方议员实际在岗联审；获批后仍需留足公共工资、运维资金并购买有限材料。'));
+        } else {
           const term = state.governance?.term, election = state.governance?.elections.find(e => e.id === term?.electionId);
           const elected = !!term && term.endedAt === null && culture!.lastUpdate >= term.startsAt && culture!.lastUpdate < term.endsAt && election?.result === 'elected';
           supplement.append(commandButton(`当选市长现场审议 · 追加 ${money(extra.cap)}`, 'reviewPetition', extra.id, undefined, !this.canAct() || !decisionSite || !elected), element('p', 'note', elected ? decisionSite ? '审批仍须留足既有工资、运维和其他授权；无可支配现金或实物则继续等待。' : '请到实际市长决策层审议。两名真正议员在合法工作点联审也可批准，普通官员无追加权限。' : '追加款须由当选市长或两名真正议员审议。普通官员的原40文部门上限保持，身份标签不等于当选任期。'));
@@ -1124,6 +1156,8 @@ export class CityUI {
     const work = this.world.buildings.find(b => b.id === citizen.workId);
     const role = roleNames[citizen.role as Role] ?? citizen.role;
     details.append(field('身份 / 状态', `${role} · ${activity(citizen.state)}`), field('住处', home?.name ?? '无固定住所'), field('工作地', work?.name ?? '暂无岗位'), field('随身资产', money(citizen.money)));
+    const civic = this.state && civicCouncilSourceProof(this.state, citizen.id);
+    if (civic) details.append(field('社区职务', `地方议员 · ${this.world.districts.find(district => district.id === civic.districtId)?.name ?? '本城区'}`));
     if (citizen.education !== undefined) details.append(field('教育程度', String(citizen.education)));
     const socialLabels: Record<string, string> = { familyMember: '家庭成员', guildMember: '百工会成员', communityMember: '社区成员' };
     const skillLabels: Record<string, string> = { craft: '工艺', learning: '学习', social: '社交' };

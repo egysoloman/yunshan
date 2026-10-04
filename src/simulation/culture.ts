@@ -5,6 +5,7 @@ import { FLOOR_PLAN_PROFILE, getBuildingBody, getBuildingUsePoints, floorPlanSup
 import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
 import { applyPublicEducationCredential, educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, publicEducationMinutes, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
+import { civicStaffingActorReservedThisTick } from './civic-staffing';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export type WorkGenre = 'literature' | 'art';
@@ -99,7 +100,7 @@ export function installCulture(simulation: Simulation): void {
     simulation.emitEvent({ type: 'relationship-change', citizenId: citizen.id, amount: affection });
   };
   const readersAt = (site: Building) => state().citizens.filter(citizen => {
-    if (!alive(citizen.id) || state().extension!.actorProfiles[citizen.id].age < 6 || !simulation.isNearBuilding(site, citizen.position, 2)) return false;
+    if (!alive(citizen.id) || state().extension!.actorProfiles[citizen.id].age < 6 || civicStaffingActorReservedThisTick(simulation, citizen.id) || !simulation.isNearBuilding(site, citizen.position, 2)) return false;
     const role = (['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'].includes(citizen.role) ? citizen.role : 'traveler') as Role;
     const identity = { role, identities: [role] };
     return publicFloor(site, floor(site, citizen.position)) && canAccessFloor(site, floor(site, citizen.position), identity)

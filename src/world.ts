@@ -1,10 +1,11 @@
 import { applyCommercialDistrict } from './commercial-district';
+import { applyMarketStationApron } from './market-station-apron';
 import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
 import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
 export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
@@ -51,7 +52,7 @@ function indexFor(world: WorldDefinition) {
   if (!index) {
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' ? 70 : 14;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' ? 70 : 14;
     for (const b of world.buildings) {
       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
       if (b.floorPlanProfile) {
@@ -205,7 +206,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -430,6 +431,13 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v7') {
+    const base = createWorld(seed, 'current-v6');
+    applyMarketStationApron(base);
+    base.layoutVersion = 'current-v7';
+    indices.delete(base);
+    return base;
+  }
   if (layoutVersion === 'current-v6') {
     const base = createWorld(seed, 'current-v5');
     applyCommercialDistrict(base);

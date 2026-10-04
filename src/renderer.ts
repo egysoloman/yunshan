@@ -12,6 +12,7 @@ import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
+import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
@@ -116,7 +117,7 @@ export class CityRenderer implements CityRendererAPI {
   private moon = new THREE.DirectionalLight('#a5c6e7', .16);
   private fill = new THREE.HemisphereLight('#a3d5dc', '#475747', 1.7);
   private groundBounce = new THREE.DirectionalLight('#d3d5b2', .35);
-  private interiorLights = [new THREE.PointLight('#ffe5b5', 1900, 160, 2), new THREE.PointLight('#ffe5b5', 1900, 160, 2)];
+  private interiorLights = Array.from({ length: INTERIOR_LIGHT_SLOTS }, () => new THREE.PointLight('#fff0d9', 0, 14, 2));
   private sunOrb: THREE.Mesh;
   private moonOrb: THREE.Mesh;
   private stars: THREE.Points;
@@ -964,18 +965,14 @@ export class CityRenderer implements CityRendererAPI {
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
     this.architectureDetail.setLighting(daylight, state.energy / 100);
     const room = this.insideId ? this.world.buildings.find(b => b.id === this.insideId) : undefined;
+    const roomLights = room ? getInteriorLightConfigurations(room, this.insideFloor, this.camera.position, daylight, state.energy / 100) : [];
     for (let i = 0; i < this.interiorLights.length; i++) {
-      const light = this.interiorLights[i]; light.visible = !!room;
-      if (room) {
-        const dimension = getFloorDimensions(room, this.insideFloor), floorHeight = room.height / room.floors;
-        const plan = getBuildingFloorPlan(room, this.insideFloor), point = plan?.usePoints[i % plan.usePoints.length];
-        if (plan) light.visible = i < plan.usePoints.length;
-        if (plan && point) {
-          const position = buildingWorldPosition(room, { x: point.x, y: plan.y + floorHeight * .68, z: point.z });
-          light.position.set(position.x, position.y, position.z);
-        } else light.position.set(room.position.x + (i ? 1 : -1) * dimension.width * .22, room.position.y + .6 + this.insideFloor * floorHeight + floorHeight * .68, room.position.z);
-        light.intensity = Math.max(90, dimension.width * 13) * energy * (1 - daylight * .3); light.distance = Math.max(dimension.width, dimension.depth) * 1.25;
-      }
+      const light = this.interiorLights[i], configuration = roomLights[i];
+      light.visible = !!configuration && configuration.intensity > 0;
+      light.intensity = configuration?.intensity ?? 0;
+      if (!configuration) continue;
+      light.position.set(configuration.position.x, configuration.position.y, configuration.position.z);
+      light.distance = configuration.distance; light.decay = configuration.decay; light.color.set(configuration.color);
     }
     this.materials.glass.transparent = true; this.materials.glass.opacity = .88; this.materials.glass.depthWrite = false;
     this.materials.glass.emissive.set('#b49d6c'); this.materials.glass.emissiveIntensity = (1 - daylight) * .18;

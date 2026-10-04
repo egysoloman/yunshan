@@ -1,0 +1,225 @@
+{
+  "installedAt": "2026-10-04T15:06:04.332405+00:00",
+  "inputCount": 295,
+  "productionSourceCount": 68,
+  "sourceMapSHA256": "8428e7c32744b411633aa6f2d5c091e3fa87b53abbb795eb1908876a0293adae",
+  "baseMapSHA256": "fb0b2c7c502e86667c3d32fe70244f3354909b4c45edd1eb024c2f5ac2628246",
+  "changes": [
+    {
+      "path": "package.json",
+      "before": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "after": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03"
+    },
+    {
+      "path": "scripts/economy-audit.ts",
+      "before": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae",
+      "after": "64c956148b66be1b6a1e321304372de239bf6fec6d289c3848500a0bb5d43584"
+    },
+    {
+      "path": "scripts/economy-observations.ts",
+      "before": "71df4886390e427a654abe406f9e086ce04cc81129d6a629ea65761512cbf0c7",
+      "after": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026"
+    },
+    {
+      "path": "src/host/upgrade-city-ruleset.ts",
+      "before": null,
+      "after": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d"
+    },
+    {
+      "path": "src/main.ts",
+      "before": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330",
+      "after": "909102a7a1f88a36f7bece4132aae64942763912b44ea152e14e858633e02948"
+    },
+    {
+      "path": "src/market-station-apron.ts",
+      "before": null,
+      "after": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046"
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "before": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc",
+      "after": "cd823d659998eae22da96c78194da242b3214269f3b4b97d621034dda3b6a240"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "before": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165",
+      "after": "7755e6b19a7a7e64c2aaf6ba936fe28314807fa4c9379b76fc975d7e05413569"
+    },
+    {
+      "path": "src/product-city.ts",
+      "before": null,
+      "after": "fa1fee918eddf7172160cf877a4e4423472b82cb700084a8b06923fff664cfbd"
+    },
+    {
+      "path": "src/renderer.ts",
+      "before": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e",
+      "after": "4648cb168cfe907907f16e0607f319c11e1936353cac491164d99a1bccb9425a"
+    },
+    {
+      "path": "src/rendering/interior-lighting.ts",
+      "before": null,
+      "after": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f"
+    },
+    {
+      "path": "src/simulation/budget-authority.ts",
+      "before": null,
+      "after": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef"
+    },
+    {
+      "path": "src/simulation/city-ruleset.ts",
+      "before": null,
+      "after": "a6c9feee0733a7d05d4f50543ae5a4599f70b6216828d15caf2a225a83726a05"
+    },
+    {
+      "path": "src/simulation/civic-staffing.ts",
+      "before": null,
+      "after": "30a64c6f6c76c5104030b582427fb5e1766daed89edd03ddefcf5996b335f47e"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "before": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8",
+      "after": "4383c4b98420f63fd3ff63fdbdf0eac76316fc4ffc609de3ec829a1f9caf14b9"
+    },
+    {
+      "path": "src/simulation/freight-access.ts",
+      "before": null,
+      "after": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381"
+    },
+    {
+      "path": "src/simulation/shop_lifecycle.ts",
+      "before": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066",
+      "after": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    {
+      "path": "src/simulation/supplemental-budget.ts",
+      "before": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0",
+      "after": "64b12d7fee1441811b1de0651ba340453168d0491ddc338d6fabc45015ee6329"
+    },
+    {
+      "path": "src/simulation.ts",
+      "before": "39b445dc1554bfe3fa1f77c03adb99817d876e84fa042f2286697438c51df60d",
+      "after": "46f0016cc88b60798648b1ac7a8dfbefb92ce151fac15ad4a61bbebf977eb822"
+    },
+    {
+      "path": "src/types.ts",
+      "before": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b",
+      "after": "dd8c937107fa82d69fb7f12ff0eb0df5ff31732c261912469aa3e04d5b62a01b"
+    },
+    {
+      "path": "src/ui.ts",
+      "before": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d",
+      "after": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541"
+    },
+    {
+      "path": "src/world.ts",
+      "before": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001",
+      "after": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    },
+    {
+      "path": "tests/budget-authority-contract.test.ts",
+      "before": null,
+      "after": "a502a78421ea416cdb6269c9ce374707d3a04c7a05870daab111256fa7a89e42"
+    },
+    {
+      "path": "tests/budget-authority-fixture.ts",
+      "before": null,
+      "after": "d0bac2f99e2718ac1159aca3396e4fed3f269a694b3cf71d2c6cafbfecd607e0"
+    },
+    {
+      "path": "tests/budget-authority-hash.test.ts",
+      "before": null,
+      "after": "4ed378aa546751038d6d617c3510111ef9e1cadc406fc2a00423f040b6ff207a"
+    },
+    {
+      "path": "tests/budget-authority-source.test.ts",
+      "before": null,
+      "after": "f89b7a2e0e63c227306de3470d96602bf1171740919b35179bc70883150d4919"
+    },
+    {
+      "path": "tests/city-ruleset.test.ts",
+      "before": null,
+      "after": "4dd577f55a598bbeab22f25764acadf196c17b4c2d8a0a13d35c09e1e1244ad5"
+    },
+    {
+      "path": "tests/civic-staffing-fixture.ts",
+      "before": null,
+      "after": "f072f6e97645abf4423d50dab4b4891b4a2de41b51fb23b7a8815eca24ebb6fd"
+    },
+    {
+      "path": "tests/civic-staffing-two-terms.test.ts",
+      "before": null,
+      "after": "2182fefe3265ed11eb6bb876d92fefccb7f03b9e4adcbb4a233fb69a13242d16"
+    },
+    {
+      "path": "tests/civic-staffing.test.ts",
+      "before": null,
+      "after": "f2b441073c37eb6798dd45d3179edf6e4e20955995f7a993e197765f7fa6e420"
+    },
+    {
+      "path": "tests/economy-observations.test.ts",
+      "before": "7167a3aedab97fdca48188cae3b3040b950662e5c7353046329f5bc49b1aa4b5",
+      "after": "d2dcadb6509ad13192d49895c2409dc0776d2682ccd7bb4519d43730c3283df0"
+    },
+    {
+      "path": "tests/farm-stock-buffer.test.ts",
+      "before": null,
+      "after": "3c66a1131dceb418b42a8234bda8dcbc821154cbb09dbcfd746ac88b4461ac42"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/canonical-pair.save.json.gz",
+      "before": null,
+      "after": "7687e37e5d2959be90e97912482a5f13f909bd94b7bf22682f2459f884318752"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/original-authorizer-provenance.json",
+      "before": null,
+      "after": "63d4bf415c3c97807bf1189017dbf28cb5f0b881742cf50ee7cfec1e8c48212f"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/original-authorizer.ts",
+      "before": null,
+      "after": "fb2123e81aaac21232fbe4acdf35c2073a2b2d4607be6d68f445b95ef8cac9b1"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/paid-signatures.json",
+      "before": null,
+      "after": "7e09ab552a48fe6f36699e1c3420c70674645f4b471fad1d5af7fe74cee675cc"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/provenance.json",
+      "before": null,
+      "after": "07656752e235983ab0f5499d49da9c01e4edee7735146830a02582deee0a6a57"
+    },
+    {
+      "path": "tests/fixtures/budget-authority/world.json",
+      "before": null,
+      "after": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1"
+    },
+    {
+      "path": "tests/fixtures/ruleset-core/compat-native-cold.save.json.gz",
+      "before": null,
+      "after": "432497dea2b6b0a7c1bf4d5fc716d98d79659630f59a0948316799e48e2e35bc"
+    },
+    {
+      "path": "tests/fixtures/ruleset-core/compat-native-provenance.json",
+      "before": null,
+      "after": "0d3459799ff7aaaa9bf62809e77b4e3b306253ba6bb6c589aeee9666b2d51862"
+    },
+    {
+      "path": "tests/freight-access.test.ts",
+      "before": null,
+      "after": "57a9e68536352d3a2ebedfb8a9c544fc5c31996c9f48027b216ed51378c7df4d"
+    },
+    {
+      "path": "tests/interior-lighting.test.ts",
+      "before": null,
+      "after": "87515bf8087044e3149ce3a71167baf2577e9b34aba753ab3c15e95e9bb255de"
+    },
+    {
+      "path": "tests/shop-repeat-distress.test.ts",
+      "before": null,
+      "after": "61fc3ccd19ce5ba8e46b12c0e70e346299cc3b4149834956ae468a9c4ca8b840"
+    }
+  ],
+  "status": "EXACT_GUARDED_INSTALL_PASS"
+}
