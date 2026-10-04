@@ -1,5 +1,5 @@
 {
-  "status": "PASS_NEW_19_FILES_ORIGINAL_MEMO6_FINAL_REPORT1",
+  "status": "PASS_NEW_19_FILES_LATEST_MEMO7_REPORT2_MATRIX1",
   "at": "2026-10-04T17:39:28.767722+00:00",
   "route": "Current callable Library app / Codex host-upload",
   "oldRoot13NetworkFailureUnchanged": true,
@@ -321,48 +321,69 @@
     "operation": "replace_library_file",
     "status": "succeeded",
     "library_file_id": "libfile_7571a326de848191aec330d605a63845",
-    "file_id": "file_00000000f7b48207b27a81e63fce99fa",
+    "file_id": "file_0000000098b08207a2a9ae2bb81424bd",
     "file_name": "开发备忘录.md",
-    "current_version_number": 6,
-    "file_size_bytes": 416962,
+    "current_version_number": 7,
+    "file_size_bytes": 418060,
     "xattrs": [
       {
         "name": "user.library-file-version",
-        "value": "6"
+        "value": "7"
       }
     ],
     "localPath": "/workspace/yunshan/开发备忘录.md",
-    "expectedCurrentVersion": 5,
+    "expectedCurrentVersion": 6,
     "allOriginalNative878LinesPreservedInOrder": true,
-    "downloadURL": "https://chatgpt.com/api/library/files/libfile_7571a326de848191aec330d605a63845/download",
     "sourceCommit": "42f259c031fcc4313b50b8ad9c1bad7561f9501d",
-    "actualOriginalLocalSHA256": "969d85b170c7e59770641b0fd3f56a7441a8267d24c466e1c32859523f626733",
+    "scopeCalibrationOnlyNoCodeChange": true,
+    "actualOriginalLocalSHA256": "82900d7a7d055237953b571dc7539d31826e687b7bd62e117dca53cf525b2ef4",
     "returnedXattrsAppliedAndVerified": true
   },
-  "memoVersion": 6,
+  "memoVersion": 7,
   "reportFinalReplacement": {
     "operation": "replace_library_file",
     "status": "succeeded",
     "library_file_id": "libfile_51b93d0a855c8191b6a3732fc4e3d0d5",
-    "file_id": "file_00000000752082078f0de82e3539e256",
+    "file_id": "file_00000000d71482078857ef3335f74d72",
     "file_name": "云山-ROOT14-集成报告.md",
+    "current_version_number": 2,
+    "file_size_bytes": 21318,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "2"
+      }
+    ],
+    "localPath": "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/delivery/云山-ROOT14-集成报告.md",
+    "expectedFinalVersion": 2,
+    "sourceCodeChanged": false,
+    "actualLocalSHA256": "605a37efbba0d538fb5833adab778d8bfa9c72baa737a26d9d93208c5fd00807",
+    "xattrsAppliedAndVerified": true
+  },
+  "sourceImplementationCommit": "42f259c031fcc4313b50b8ad9c1bad7561f9501d",
+  "latestVersions": {
+    "libfile_7571a326de848191aec330d605a63845": 7,
+    "libfile_51b93d0a855c8191b6a3732fc4e3d0d5": 2,
+    "libfile_209c0dff402c8191b33d30e36d53a783": 1
+  },
+  "matrixFinalReplacement": {
+    "operation": "replace_library_file",
+    "status": "succeeded",
+    "library_file_id": "libfile_209c0dff402c8191b33d30e36d53a783",
+    "file_id": "file_0000000095a0820787e26209231e6605",
+    "file_name": "云山-ROOT14-完整需求矩阵.md",
     "current_version_number": 1,
-    "file_size_bytes": 20664,
+    "file_size_bytes": 22581,
     "xattrs": [
       {
         "name": "user.library-file-version",
         "value": "1"
       }
     ],
-    "localPath": "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/delivery/云山-ROOT14-集成报告.md",
-    "expectedCurrentVersion": 0,
-    "sourceCommit": "42f259c031fcc4313b50b8ad9c1bad7561f9501d",
-    "actualLocalSHA256": "b91931405878c9a2c45906b5ec9a1d978947e38088b89f8fbadab1b6f50903d3",
+    "localPath": "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/delivery/云山-ROOT14-完整需求矩阵.md",
+    "expectedFinalVersion": 1,
+    "sourceCodeChanged": false,
+    "actualLocalSHA256": "90293e077813fda194a4afe72a682402761f77edc3d6fe89a81bbb699b65e822",
     "xattrsAppliedAndVerified": true
-  },
-  "sourceImplementationCommit": "42f259c031fcc4313b50b8ad9c1bad7561f9501d",
-  "latestVersions": {
-    "libfile_51b93d0a855c8191b6a3732fc4e3d0d5": 1,
-    "libfile_7571a326de848191aec330d605a63845": 6
   }
 }

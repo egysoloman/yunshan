@@ -1,4 +1,4 @@
-# ROOT14：完整议政历史归档接入默认新城市
+# ROOT14：议政办理记录归档接入默认新城市
 
 本阶段完成完整议政历史的有限归档，并将明确的新城市工厂接入第一人称产品与默认经济审计。真实构建、原 UI 35 项、原浏览器 11 项、默认一天审计、完整及分块存档的未来 24 tick 已分别通过。17:08:55 UTC 已按源码 SHA 守卫安装到当前工作分支：304 个输入、71 个生产源，10 路径修改、9 路径新增、0 删除，7 个本次构建产物逐字一致。完整游戏目标仍未完成；美术仍 FAIL，经济稳态未建立，最新完整 npm test、默认新城十四日和 macOS 实机均 NOT_RUN。
 
@@ -21,6 +21,8 @@
 只有受信宿主 `exact-current-v3-SHA` 迁移可将既有 3 升为 4；普通命令和事件没有迁移权限。迁移先只读校验原档并核 SHA，准备完整事务，再一次提交；原非 history 投影、RNG、钱、职业、motion 和原法律规则保持。运行中归档在写 civic/history 前校验追加请求及两份预算来源；拒绝不半写，有限存储拒绝只追加一次本阻塞期间 notice，并保留 live 来源和原 cap。
 
 每页 ≤256 KiB；完整历史含索引/元数据 ≤16 MiB、≤256 页、≤100,000 条记录；每记录 ≤256 fragments。非历史投影仍受原 8M 字符上限。事务追加封页可先耗尽页数，完整解析仍需 materialize 全历史。这是有界冷存容量，不是无限流式历史、全城统计卸载或真实数据库故障恢复已完成。codec 大 Unicode/超配额原子拒绝使用明确 `transportOnly` 非业务字段，只证明存储行为；自然 Simulation 填满配额及 live notice 分支未运行。
+
+归档范围明确为完整议政办理记录及其全部引用来源。原时间阶段仍退休没有关联申请/投票/任期的旧日proof，仅保留retiredProofCount；不保存其每条原文，也不复造旧存档已退休的证明。这是既有资格过期契约，未因app64归档更改。默认一日nextProofId=46：曾创建45条proof，28条旧日未引用proof退休，保留的hot4+cold13共17条；17不是全部曾创建数。完整办理/费用/选票/任期和所引用工资资格不丢，但不能称所有居民工作和无申请资格草稿的永久完整历史。
 
 ## 原四日、付款与资格来源
 
@@ -60,7 +62,7 @@ provider 原 13 个 scope 全部保留：typecheck01(301)/02(302) FAIL；03(302)
 
 实际 food 125.94804409/material 521.35778949；零售 food915，counter539 + carried56 = 595 observed meals；终店 food15420.94804409、居民携粮320。farm 有 9611.8597556 certified funded minutes，但库存高于 target120，0 farm 正产粮；dock 有 5608.8234 分钟和正食物产出。混合 production647.3 不能当全食物；理论每日需求约852.923不能当实际消费。
 
-当前归档 **cold-only** 为 1 页/25,165 UTF-8 字节、13 proofs/13 applications、0 polls/0 terms；13申请receipt=null、cancelled expired-proof1440。hot为4 proofs/4 applications/4 polls/0 terms，4 hot receipt真实paid480；完整hot+cold才是17 proofs/17 applications/4已付poll/0term。两天投票条件还未到。cold totals 不能当全部 live 计数，也不能借 provider compact 的17terms声称默认城已选出议员。
+当前归档 **cold-only** 为 1 页/25,165 UTF-8 字节、13 proofs/13 applications、0 polls/0 terms；13申请receipt=null、cancelled expired-proof1440。hot为4 proofs/4 applications/4 polls/0 terms，4 hot receipt真实paid480；全部保留的hot+cold为17 proofs/17 applications/4已付poll/0term。两天投票条件还未到。cold totals 不能当全部 live 计数，也不能借 provider compact 的17terms声称默认城已选出议员。
 
 原终档 [root14-product-default-day-final.save.json](root/product-day01/original-artifacts/root14-product-default-day-final.save.json) 为3,304,414字节，SHA `852dc8fc41e2ad5c2addb14fd07fba08f70828af71ea31997336e82142fa8feb`。原审计立即读回相等，未来24 SHA `cd1c8da379a4667dba6d3d9317c6a21547cb3fc354b9fff7c4267f14ed17bab4`；独立 full/partition scope 用相同终档、124parts其中1historypage，逐 tick 相等且终 SHA 与原 day driver 同。原 [审计 JSON](root/product-day01/original-artifacts/root14-product-default-day.json) 与 [分块摘要](root/default-full-partition24-01/original-artifacts/summary.json) 是可核原件。
 
@@ -80,7 +82,7 @@ provider 原 13 个 scope 全部保留：typecheck01(301)/02(302) FAIL；03(302)
 
 已完成守卫安装及正常推送，当前工作分支 `takeover-city-life`；实现提交 [42f259c031fcc4313b50b8ad9c1bad7561f9501d](https://github.com/egysoloman/yunshan/commit/42f259c031fcc4313b50b8ad9c1bad7561f9501d)，17:37:44 UTC 实际远端读回一致，main仍 `6955d374a7d5bd928d2dadf4d0fdda74d416ca57`。304源码Git blob和六个原包Git blob分别逐SHA/size相同。实际回执见 [PUBLICATION-RECEIPT.json](delivery/PUBLICATION-RECEIPT.json) 与 [GIT-BLOB-VERIFICATION.json](delivery/GIT-BLOB-VERIFICATION.json)。没有force、PR、merge、部署、付费、凭据或安全共享变更；后续文档回执提交不改变已验证源码。
 
-ROOT13 Library旧ordered16批tools/list保存前网络FAIL、新ID0保持原事实。ROOT14本轮使用当前明确可调用的Library app / Codex host-upload：3实际PNG和16其他原件全部status=succeeded/warnings[]，共19新原生LibraryID；每次返回xattrs已写回实际上传local path，原源字节SHA保持。完整ID、实际版本及大小见 [LIBRARY-DELIVERY-RECEIPT.json](delivery/LIBRARY-DELIVERY-RECEIPT.json)。原Memo全878行canonical app读取后和当前项目正文比较，仅插入、无原行删除或替换；expected5保护替换实际成功为6，416962B，原ID libfile_7571a326de848191aec330d605a63845保持。签名下载尝试网络URLError后，canonical全文读取成功；不将文本比较冒签名原始下载byte回读。Memo真实回执见 [LIBRARY-MEMO-RECEIPT.json](delivery/LIBRARY-MEMO-RECEIPT.json)。这些是实际保存的原文件，未做共享权限变更；原包及CLOSED不倒改发布或上传结果。
+ROOT13 Library旧ordered16批tools/list保存前网络FAIL、新ID0保持原事实。ROOT14本轮使用当前明确可调用的Library app / Codex host-upload：3实际PNG和16其他原件全部status=succeeded/warnings[]，共19新原生LibraryID；每次返回xattrs已写回实际上传local path，原源字节SHA保持。完整ID、实际版本及大小见 [LIBRARY-DELIVERY-RECEIPT.json](delivery/LIBRARY-DELIVERY-RECEIPT.json)。原Memo全878行canonical app读取后和当前项目正文比较，仅插入、无原行删除或替换；expected5原保护替换成功为6；归档范围校准层以expected6保护实际升级到7，418060B，原ID libfile_7571a326de848191aec330d605a63845保持。签名下载尝试网络URLError后，canonical全文读取成功；不将文本比较冒签名原始下载byte回读。Memo真实回执见 [LIBRARY-MEMO-RECEIPT.json](delivery/LIBRARY-MEMO-RECEIPT.json)。这些是实际保存的原文件，未做共享权限变更；原包及CLOSED不倒改发布或上传结果。
 
 关键Library原件：[集成报告](https://chatgpt.com/api/library/files/libfile_51b93d0a855c8191b6a3732fc4e3d0d5/download)、[完整38领域矩阵](https://chatgpt.com/api/library/files/libfile_209c0dff402c8191b33d30e36d53a783/download)、[当前默认源码ZIP](https://chatgpt.com/api/library/files/libfile_c99eb0339aa881919acf333e398e9af0/download)、[选择原证据ZIP](https://chatgpt.com/api/library/files/libfile_f0c34ade3ae48191b44ea200358435b5/download)、[当前Memo](https://chatgpt.com/api/library/files/libfile_7571a326de848191aec330d605a63845/download)。三真实PNG和四个producer TAR等ID在完整回执。报告随后受expected0版本保护更新；其最终实际版本以独立LIBRARY-REPORT-RECEIPT.json为准，不重复创建新ID。
 
@@ -96,4 +98,4 @@ ROOT13 Library旧ordered16批tools/list保存前网络FAIL、新ID0保持原事�
 
 源代码ZIP已由根独立验证：316原文件+1filemap、13,658,167B，SHA `f086c8686d3a70b14a2006d225a60257db5a2d12e421b5691c9eddcd5bee6242`。根已复制289个选择原件到公开ROOT14文件目录，历史/道路两个完整原件包另保；不能合计为测试数。literal credential-shape扫描616文件及展开tar/zip为0命中，只是字面模式检查，不是语义安全审计；报告/矩阵最终文件需根交付阶段追加扫描。
 
-实际实现已发布，19个新Library原件已保存，原Memo版本6已更新。本阶段可交付；交通候选、美术、长期经济/十四日、全子系统及Mac仍按完整矩阵接续，不宣称全部目标完成。
+实际实现已发布，19个新Library原件已保存，原Memo版本7已更新。本阶段可交付；交通候选、美术、长期经济/十四日、全子系统及Mac仍按完整矩阵接续，不宣称全部目标完成。
