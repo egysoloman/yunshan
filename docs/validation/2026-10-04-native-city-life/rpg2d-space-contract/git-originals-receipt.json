@@ -1,0 +1,65 @@
+{
+  "copiedAt": "2026-10-04T08:38:35.748680+00:00",
+  "files": [
+    {
+      "path": "SOURCE-READONLY-BEFORE.json",
+      "bytes": 10611,
+      "sha256": "444455165cbb864825f545ec22956c59cdc31e39a232d2e71c350dcfff6ce3e3"
+    },
+    {
+      "path": "CLOSED.json",
+      "bytes": 393,
+      "sha256": "40ad313428b09dafea5670777dfb9e75a97dc8e230d807df2237dd43c61a2051"
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "bytes": 5011,
+      "sha256": "86d722a5e1e3a58bd93a2482a95ae422594a854d46216e7a11199c1425f00ba8"
+    },
+    {
+      "path": "SPACE-CONTEXT-CONTRACT.md",
+      "bytes": 18957,
+      "sha256": "ebcfd0da8f6f64f895221f1ff4944d5e943e1441a357aa7a0d3a334d2b18913f"
+    },
+    {
+      "path": "MANIFEST.json",
+      "bytes": 2317,
+      "sha256": "4b12385e60f17c2cfb32937d23b73e06b701e0a30d66a09ff95f05cb62844f69"
+    },
+    {
+      "path": "SOURCE-READONLY-AFTER.json",
+      "bytes": 10649,
+      "sha256": "548b22550c171223eb9309faad8f871497119798f0f65e42761a3c5560643a06"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1556,
+      "sha256": "c106c2f4b53a9f17eede8a2510c42cbd76948a4fb48194fb0960f21e5635efd3"
+    },
+    {
+      "path": "review-own/OUTPUTS.json",
+      "bytes": 695,
+      "sha256": "af8a2fe96262a328b233ac100edb23fea2d8edb2a4d9197c2b4d608428b9a792"
+    },
+    {
+      "path": "review-own/REPORT.md",
+      "bytes": 12324,
+      "sha256": "805f701587220422346438f655a461d975f7f379db10b9c663f3a18ad6dd46ce"
+    },
+    {
+      "path": "review-own/SOURCE-CONTRACT.json",
+      "bytes": 6019,
+      "sha256": "ac963ebc1833dd8cfdbf9a56b997a1dcbb27b64e15d67aa361ec149f3516313a"
+    }
+  ],
+  "allByteExact": true,
+  "sourceObservedFiles": 64,
+  "sourceChanged": false,
+  "proposalsImplemented": false,
+  "portableDocument": {
+    "originalSHA256": "ebcfd0da8f6f64f895221f1ff4944d5e943e1441a357aa7a0d3a334d2b18913f",
+    "derivedSHA256": "6d03bbb53d3a46805aa6860d331d1534d0fa9115ea0d6ea1108a7922b27ab594",
+    "change": "Only source hyperlink paths/line anchors translated to repository-relative Git links; exact original retained."
+  },
+  "outsideOriginal29Archive": true
+}

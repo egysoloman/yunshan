@@ -1,0 +1,74 @@
+{
+  "schema": "root09-rpg2d-space-contract-readonly/v1",
+  "status": "PLANNED_NOT_IMPLEMENTED",
+  "createdAtUtc": "2026-10-04T08:36:45.663984+00:00",
+  "sourceRoot": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source",
+  "sourceFileCountObserved": 64,
+  "sourceUnchanged": true,
+  "reviewerSourceHashesVerified": 12,
+  "explicitSourceLineAnchorsVerified": 30,
+  "authority": "parent approved independent MZ rpg2d-v1; documents only",
+  "runs": {
+    "tests": 0,
+    "builds": 0,
+    "simulations": 0,
+    "browsers": 0,
+    "mzUpgrades": 0,
+    "sourceWrites": 0,
+    "gitActions": 0,
+    "libraryUploads": 0
+  },
+  "includedInPrior29GroupWholeOriginals": false,
+  "limitations": [
+    "No private MZ ZIP/plugin reviewed",
+    "Proposed interface/save labels have no production implementation",
+    "No runtime or GUI acceptance evidence produced",
+    "No LibraryID; internal producer documents only, parent may independently collect"
+  ],
+  "manifestExcludes": [
+    "MANIFEST.json",
+    "CLOSED.json"
+  ],
+  "files": [
+    {
+      "path": "DEPENDENCIES.json",
+      "bytes": 5011,
+      "sha256": "86d722a5e1e3a58bd93a2482a95ae422594a854d46216e7a11199c1425f00ba8"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1556,
+      "sha256": "c106c2f4b53a9f17eede8a2510c42cbd76948a4fb48194fb0960f21e5635efd3"
+    },
+    {
+      "path": "SOURCE-READONLY-AFTER.json",
+      "bytes": 10649,
+      "sha256": "548b22550c171223eb9309faad8f871497119798f0f65e42761a3c5560643a06"
+    },
+    {
+      "path": "SOURCE-READONLY-BEFORE.json",
+      "bytes": 10611,
+      "sha256": "444455165cbb864825f545ec22956c59cdc31e39a232d2e71c350dcfff6ce3e3"
+    },
+    {
+      "path": "SPACE-CONTEXT-CONTRACT.md",
+      "bytes": 18957,
+      "sha256": "ebcfd0da8f6f64f895221f1ff4944d5e943e1441a357aa7a0d3a334d2b18913f"
+    },
+    {
+      "path": "review-own/OUTPUTS.json",
+      "bytes": 695,
+      "sha256": "af8a2fe96262a328b233ac100edb23fea2d8edb2a4d9197c2b4d608428b9a792"
+    },
+    {
+      "path": "review-own/REPORT.md",
+      "bytes": 12324,
+      "sha256": "805f701587220422346438f655a461d975f7f379db10b9c663f3a18ad6dd46ce"
+    },
+    {
+      "path": "review-own/SOURCE-CONTRACT.json",
+      "bytes": 6019,
+      "sha256": "ac963ebc1833dd8cfdbf9a56b997a1dcbb27b64e15d67aa361ec149f3516313a"
+    }
+  ]
+}
