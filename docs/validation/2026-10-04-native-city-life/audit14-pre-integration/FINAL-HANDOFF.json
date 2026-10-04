@@ -1,0 +1,87 @@
+{
+  "status": "CLOSED",
+  "baseCommit": "c7f300e21cea6c8badfc6f190a28f9d08bbb1a03",
+  "audit": {
+    "ticks": 10080,
+    "elapsedGameMinutes": 20160,
+    "speed": 8,
+    "seed": 20261001,
+    "auditStatus": "passed",
+    "npcAlive": 616,
+    "npcTotal": 616,
+    "npcDeaths": 0,
+    "playerAlive": false,
+    "treasury": 20519.89905836199,
+    "economicTrend": {
+      "cashChangePercent": 16.239845958623466,
+      "unpaidPrivateWages": 370.0018192319694,
+      "steadyStateEstablished": false
+    },
+    "reconciliationResidual": -4.052708391100168e-08,
+    "moneyConservationResidual": -3.707828000187874e-08,
+    "saveValidation": {
+      "status": "passed",
+      "immediateEqual": true,
+      "futureTicks": 24,
+      "futureEqual": true,
+      "futureSaveSha256": "4cfa442a296ae0eece4c161d4658d27e3ac720c584b864556e80daf1acc3d0e2"
+    }
+  },
+  "receipt": {
+    "startedAt": "2026-10-04T04:31:17.160775+00:00",
+    "endedAt": "2026-10-04T05:44:21.075931+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "scripts/economy-audit.ts",
+      "--days",
+      "14",
+      "--out",
+      "artifacts/root09-post-stair-economy-14d.json"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 244,
+    "inputsStable": true,
+    "rawSHA256": "bab3e31f7deddb3d8d540959304efe24befb6b0ebf2d38069d1c26e2c61b9aed",
+    "ownedPid": 33295,
+    "finalOwnedSessionMembers": [
+      {
+        "pid": 33303,
+        "state": "Z",
+        "parent": 1,
+        "group": 33295,
+        "session": 33295,
+        "startTicks": 1910194
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "limits": [
+    "Player inactivity is not handled by the NPC mortality assertion; final player remains dead.",
+    "No player pre-death observer exists; do not fabricate death tick or exact prior continuation.",
+    "CPU audit coexecuted with other verification; not a performance benchmark.",
+    "This audit uses the exact immutable 244-input pre-integration source; no new ROOT09 candidates are covered."
+  ],
+  "originals": {
+    "economy14d01/raw.log": {
+      "bytes": 45911,
+      "sha256": "bab3e31f7deddb3d8d540959304efe24befb6b0ebf2d38069d1c26e2c61b9aed"
+    },
+    "economy14d01/receipt.json": {
+      "bytes": 782,
+      "sha256": "5e1b6de43603da7d79ef4e99dd7c7f72649915eb3ab495f2bbdfd74f7df06ebb"
+    },
+    "source/artifacts/root09-post-stair-economy-14d.json": {
+      "bytes": 253995,
+      "sha256": "ae255725725af65a10892d9b8d8c4311c2df96e8f546cd639f7b6fed70682a59"
+    },
+    "source/artifacts/root09-post-stair-economy-14d-final.save.json": {
+      "bytes": 3650985,
+      "sha256": "2cdc7f0990d502086e221243fd876350cb0ee37211389b6a6cceab10418b78ca"
+    }
+  }
+}
