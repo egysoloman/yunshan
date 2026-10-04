@@ -15,7 +15,7 @@ import { installFamily, isCloseKin, recordSchoolSelfStudy } from './simulation/f
 import { installCulture, type ServiceOrder } from './simulation/culture';
 import { installFamilyEducation, familyEducationOpportunities, familyEducationTaskActorIds, observeFamilyEducationArrival } from './simulation/family-education';
 import { clinicalServiceStationsAtPosition, clinicalTaskActorIds } from './simulation/clinical';
-import { educationNeedsContinuousPeople, educationServiceStationsAtPosition } from './simulation/education';
+import { educationNeedsContinuousPeople, educationServiceStationsAtPosition, observePublicEducationArrival } from './simulation/education';
 import { installGovernance } from './simulation/governance';
 import { canRecordPublicTransfer, recordPublicTransfer, publicEmploymentJobs, publicEmploymentSite, publicEmploymentRevision, publicEmploymentTransfer, publicTransferAssignment, publicTransferReserved, validatePublicEmployment, TRANSFER_CONTRACT_LIMIT, type EmploymentTransfer, type PublicShift, type PublicLabor } from './simulation/public-employment';
 import { installBanking } from './simulation/banking';
@@ -1026,6 +1026,30 @@ export class Simulation implements SimulationAPI {
   private roadPrefixAllowed(citizen: Citizen, points: Vec3[]): boolean {
     return points.every((p, i) => !i || roadMovementAllowed(this.world, this.state, citizen.id, points[i - 1], p));
   }
+  private walkingPrefixAllowed(citizen: Citizen, points: Vec3[]): boolean {
+    if (!this.roadPrefixAllowed(citizen, points)) return false;
+    if (this.runtime.npcMotionVersion !== 2) return true;
+    // An old route is only an anchor candidate. Check its actual body path
+    // before reusing a doorway shortcut; planning never changes the actor.
+    let position = copy(citizen.position);
+    for (let index = 1; index < points.length; index++) {
+      const description = this.npcStairMotion.describe(points, index);
+      if (description.kind === 'blocked') return false;
+      if (description.kind === 'legacy') {
+        if (!this.citizenReferenceSegmentAllowed(citizen, position, points[index], description.bodies ?? [])) return false;
+        position = copy(points[index]); continue;
+      }
+      const cursor = this.npcStairMotion.opening(points, index)!;
+      try {
+        this.npcStairMotion.validate(points, cursor, position);
+        const advanced = this.npcStairMotion.advance(points, cursor, description.leg.length, (from, to, building, floor) =>
+          roadMovementAllowed(this.world, this.state, citizen.id, from, to) && this.citizenPhysicalSegmentAllowed(citizen, from, to, building, floor));
+        if (advanced.blocked || !advanced.finishedLeg) return false;
+        position = advanced.position;
+      } catch { return false; }
+    }
+    return true;
+  }
   private cacheRoute(key: string, points: Vec3[]): void { if (this.routeCache.size >= 2048) this.routeCache.delete(this.routeCache.keys().next().value!); this.routeCache.set(key, points); }
   private walkingTree(start: string) {
     this.ensureRoadRouting();
@@ -1068,10 +1092,33 @@ export class Simulation implements SimulationAPI {
     // Reuse the street segment the citizen actually occupies. Replanning must
     // not send an actor back to an unrelated nearby building's entire route.
     const anchors: { node: string; cost: number; points: Vec3[] }[] = [], route = citizen.route ?? [], index = citizen.routeIndex ?? 0;
-    for (const direction of [-1, 1]) { const points = [copy(citizen.position)]; let cost = 0; for (let i = direction < 0 ? index - 1 : index; i >= 0 && i < route.length; i += direction) { if (!roadMovementAllowed(this.world, this.state, citizen.id, points.at(-1)!, route[i])) break; cost += distance(points.at(-1)!, route[i]); points.push(copy(route[i])); const node = this.nodeAt.get(this.pointKey(route[i])); if (node) { anchors.push({ node, cost, points }); break; } } }
+    for (const direction of [-1, 1]) { const points = [copy(citizen.position)]; let cost = 0; for (let i = direction < 0 ? index - 1 : index; i >= 0 && i < route.length; i += direction) { if (!roadMovementAllowed(this.world, this.state, citizen.id, points.at(-1)!, route[i])) break; cost += distance(points.at(-1)!, route[i]); points.push(copy(route[i])); const node = this.nodeAt.get(this.pointKey(route[i])); if (node) { if (this.walkingPrefixAllowed(citizen, points)) anchors.push({ node, cost, points }); break; } } }
     if (anchors.length) return anchors;
+    if (this.runtime.npcMotionVersion === 2) {
+      // A discarded doorway prefix may have hidden the actor's occupied street
+      // segment. Match the actual 3D layer, then keep each real polyline tail.
+      // No body projection, nearest-door guess or straight endpoint shortcut.
+      for (const edge of this.world.edges) {
+        if (!['road', 'bridge'].includes(edge.mode) || !isRoadOpen(this.state, edge.id)) continue;
+        for (let i = 1; i < edge.points.length; i++) {
+          const a = edge.points[i - 1], b = edge.points[i], dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
+          const squared = dx * dx + dy * dy + dz * dz;
+          const t = squared ? Math.max(0, Math.min(1, ((citizen.position.x - a.x) * dx + (citizen.position.y - a.y) * dy + (citizen.position.z - a.z) * dz) / squared)) : 0;
+          const point = { x: a.x + dx * t, y: a.y + dy * t, z: a.z + dz * t };
+          if (distance(citizen.position, point) > 1e-7) continue;
+          for (const forward of [false, true]) {
+            const node = forward ? edge.to : edge.from, target = this.world.nodes.find(n => n.id === node)!;
+            const tail = forward ? edge.points.slice(i) : edge.points.slice(0, i).reverse();
+            const points = [copy(citizen.position), ...tail.map(copy)];
+            if (distance(points.at(-1)!, target.position) > 0) points.push(copy(target.position));
+            if (this.walkingPrefixAllowed(citizen, points)) anchors.push({ node, points, cost: points.slice(1).reduce((sum, p, index) => sum + distance(points[index], p), 0) });
+          }
+        }
+      }
+      if (anchors.length) return anchors;
+    }
     const node = this.nearestNode(citizen.position), points = [copy(citizen.position), copy(node.position)];
-    return this.roadPrefixAllowed(citizen, points) ? [{ node: node.id, cost: distance(citizen.position, node.position), points }] : [];
+    return this.walkingPrefixAllowed(citizen, points) ? [{ node: node.id, cost: distance(citizen.position, node.position), points }] : [];
   }
   private routeFromCitizen(citizen: Citizen, destination: Building, anchors = this.walkingAnchors(citizen)): Vec3[] {
     const target = this.buildingNode(destination);
@@ -1110,6 +1157,10 @@ export class Simulation implements SimulationAPI {
       && !homeRestBedOccupied(this.state, point.bedId) && !occupiedBeds.has(point.bedId));
   }
   private setDestination(citizen: Citizen, destination: Building, rebuild = false) {
+    // Old native saves can contain a never-started, blocked exterior intent.
+    // A real planning phase may replace it, while import itself stays exact.
+    if (this.runtime.npcMotionVersion === 2 && citizen.state === 'physicalWaiting' && !this.runtime.npcStairCursors?.[citizen.id]
+      && this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route ?? [], citizen.routeIndex ?? 0, citizen.position)) rebuild = true;
     this.citizenRoadRevisions.set(citizen, this.ensureRoadRouting());
     if (!rebuild && citizen.destinationId === destination.id && destination.floorPlanProfile !== FLOOR_PLAN_PROFILE) return;
     if (destination.floorPlanProfile === FLOOR_PLAN_PROFILE) {
@@ -1460,7 +1511,7 @@ export class Simulation implements SimulationAPI {
     for (const { building, floors } of bodies) {
       const height = building.height / building.floors;
       const low = Math.floor((Math.min(from.y, to.y) - building.position.y - .6) / height + 1e-7);
-      const high = Math.floor((Math.max(from.y, to.y) - building.position.y - .6) / height + 1e-7);
+      const high = Math.floor((Math.max(from.y, to.y) + 1.72 - building.position.y - .6) / height + 1e-7);
       for (const floor of floors.filter(floor => floor >= low && floor <= high)) {
         if (blocksFloorPlanMovement(building, floor, from, to, .35, 1.72)) return false;
         const support = floorPlanSupport(building, floor, to, .35);
@@ -1671,6 +1722,7 @@ export class Simulation implements SimulationAPI {
         citizen.state = 'shopping';
         this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
       }
+      if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
     }
     const player = this.state.player; player.needs.hunger = clamp(player.needs.hunger - this.minutes * .035); player.needs.fatigue = clamp(player.needs.fatigue - this.minutes * .018); player.needs.social = clamp(player.needs.social - this.minutes * .012); player.needs.fun = clamp(player.needs.fun - this.minutes * .009);
     if (this.now + 1e-7 >= this.runtime.payrollAt) {
@@ -2018,9 +2070,13 @@ export class Simulation implements SimulationAPI {
     this.ensureRoadRouting();
     const key = `floor:${building.id}:${fromFloor}>${toFloor}:${this.pointKey(from)}>${this.pointKey(to)}`;
     const cached = this.state.voxels.length === 0 ? this.routeCache.get(key) : undefined;
-    if (cached) return cached.map(copy);
+    if (cached && (this.runtime.npcMotionVersion !== 2 || cached[0]?.x === from.x && cached[0]?.y === from.y && cached[0]?.z === from.z)) return cached.map(copy);
     const counters = marketCounters(this.world, building);
     const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, counters.length ? (a, b) => blocksMarketCounter(counters, a, b, .35, 1.72) : undefined);
+    // Native opening phases bind to the actual body's exact origin. A local
+    // coordinate round trip can lose one ULP without changing the geometry;
+    // keep the original bits instead of adding a free connector or moving it.
+    if (route?.length && this.runtime.npcMotionVersion === 2) route[0] = copy(from);
     if (route && this.state.voxels.length === 0) this.cacheRoute(key, route.map(copy));
     return route;
   }

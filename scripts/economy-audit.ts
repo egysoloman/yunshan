@@ -1,5 +1,6 @@
 import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
 import { familyEducationHeldCash } from '../src/simulation/family-education';
+import { commodityObserver, foodSnapshot } from './economy-observations';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -40,7 +41,7 @@ async function sourceFiles(directory = 'src'): Promise<string[]> {
   return files;
 }
 async function auditSourceHashes(): Promise<Record<string, string>> {
-  const files = [...await sourceFiles(), 'scripts/economy-audit.ts'].sort();
+  const files = [...await sourceFiles(), 'scripts/economy-audit.ts', 'scripts/economy-observations.ts'].sort();
   return Object.fromEntries(await Promise.all(files.map(async file =>
     [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
 }
@@ -60,6 +61,7 @@ interface Bookkeeping { taxes: number; operatingCost: number; wages: { citizenId
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[]; wageAccruals?: { citizenId: string; shopId: string | null; amount: number }[] }
 const core = () => Reflect.get(sim, 'runtime') as Bookkeeping;
 const buildings = new Map(world.buildings.map(building => [building.id, building]));
+const commodities = commodityObserver(buildings, new Map(sim.state.shops.map(shop => [shop.id, shop.buildingId])));
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const totals = { sales: 0, saleCount: 0, saleTax: 0, fares: 0, payrollPublicRequested: 0,
   payrollPublicPaid: 0, payrollPrivateRequested: 0, payrollPrivate: 0, wageTax: 0, wholesale: 0, wholesaleTax: 0,
@@ -85,6 +87,7 @@ let moneyConservationResidual = 0;
 const initialMoneySupply = moneySupply();
 
 sim.onEvent('sale', event => {
+  commodities.sale(event);
   totals.sales += event.amount ?? 0;
   totals.saleCount++;
   totals.saleTax += (event.amount ?? 0) * sim.state.taxRate;
@@ -92,8 +95,9 @@ sim.onEvent('sale', event => {
 sim.onEvent('transit-fare', event => { totals.fares += event.amount ?? 0; });
 sim.onEvent('wholesale', event => { totals.wholesale += event.amount ?? 0; totals.wholesaleTax += (event.amount ?? 0) * sim.state.taxRate; });
 sim.onEvent('business-expense', event => { totals.businessExpenses += event.amount ?? 0; });
-sim.onEvent('stored-meal', event => { totals.storedMeals += event.amount ?? 0; });
-sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; assert.ok((event.minutes ?? 0) > 0); });
+sim.onEvent('stored-meal', event => { totals.storedMeals += event.amount ?? 0; commodities.storedMeal(event); });
+sim.onEvent('food-consumed', event => { commodities.foodConsumed(event); });
+sim.onEvent('production', event => { totals.production += event.amount ?? 0; totals.productionMinutes += event.minutes ?? 0; commodities.production(event); assert.ok((event.minutes ?? 0) > 0); });
 sim.onEvent('wage-earned', event => { if (event.shopId) totals.payrollPrivateRequested += event.amount ?? 0; else totals.payrollPublicRequested += event.amount ?? 0; });
 sim.onEvent('wage-paid', event => {
   const paid = event.amount ?? 0;
@@ -194,6 +198,7 @@ function snapshot() {
   const mean = (list: Citizen[], value: (citizen: Citizen) => number) => list.length ? list.reduce((n, c) => n + value(c), 0) / list.length : 0;
   return { tick: s.tick, day: s.day, hour: s.hour, treasury: s.treasury, gdp: s.gdp,
     npcMoney: actors.reduce((n, c) => n + c.money, 0), moneySupply: moneySupply(), wages: { ...totals },
+    commodityObservations: commodities.snapshot(), food: foodSnapshot(s, buildings),
     policeSupplies: sim.policeSupplyCoverage(),
     civicRequests: s.culture ? { residentPetitions: s.culture.petitions.filter(p => p.residentOrigin !== undefined).length, openPetitions: s.culture.petitions.filter(p => p.status === 'open').length, orders: s.culture.orders.map(o => ({ id: o.id, topic: o.topic, state: o.state, authorizedCap: o.authorizedCap, spent: o.spent, receivedUnits: o.receivedUnits, consumedUnits: o.consumedUnits, served: o.servedIds.length })) } : null,
     formalLearning: s.family?.formalLearning ? Object.values(s.family.formalLearning).map(record => ({ earnedMinutes: record.earnedMinutes, receipts: record.receipts.length, familyReceipts: record.tuitionPages?.reduce((sum, page) => sum + page.length, 0) ?? 0 })) : [],
@@ -292,7 +297,7 @@ const finalSave = { path: finalSavePath, bytes: Buffer.byteLength(finalSaveText)
 const baselineResult = JSON.parse(JSON.stringify({
   status: failure ? 'failed' : 'passed', sourceHash, endSourceHash, speed, seed, requestedDays, initialPolicy, ticks: sim.state.tick,
   finalSave, terminalTreasury: sim.state.treasury,
-  sourceHashScope: 'All regular src files and this audit driver; both ends recursively rescan the same source tree.',
+  sourceHashScope: 'All regular src files, this audit driver and its read-only commodity observer; both ends recursively rescan the same source tree.',
   scope: 'One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.',
   elapsedGameMinutes: extension().lastUpdate - initialMinute, totals, ledger, snapshots, deaths, starts,
   researchFunding, exactResearchDebits, researchCompleted: extension().stats.researchCompleted,

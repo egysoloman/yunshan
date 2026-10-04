@@ -11,11 +11,12 @@ import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
+import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
-const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb' };
+const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
 type MaterialKey = keyof typeof PALETTE;
 interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
@@ -65,6 +66,7 @@ class BoxBatch {
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
+      if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
       // authoritative roof tag enables tile relief; the scalar shares the
       // resident geometry's lifetime and introduces no per-tile instances.
@@ -212,7 +214,7 @@ export class CityRenderer implements CityRendererAPI {
         shader.fragmentShader = 'varying vec4 vCabinet;varying vec3 vCabinetPosition;varying vec3 vCabinetNormal;\n' + shader.fragmentShader;
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>
           float cabinetRelief=0.0;
-          if(vCabinet.w>.5 && vCabinetNormal.z>.5 && vCabinet.y>.2){
+          if(vCabinet.w>.5 && vCabinet.w<1.5 && vCabinetNormal.z>.5 && vCabinet.y>.2){
             vec2 panel=(vCabinetPosition.xy+.5)*vCabinet.xy;
             vec2 pixel=max(fwidth(panel),vec2(.001));
             float rowHeight=(vCabinet.y-.2)/3.0;
@@ -356,6 +358,8 @@ export class CityRenderer implements CityRendererAPI {
         vec3 roofGrad=dFdx(roofRelief)*roofR1+dFdy(roofRelief)*roofR2;
         if(abs(roofDet)>1e-10)normal=normalize(abs(roofDet)*normal-sign(roofDet)*roofGrad);`);
     };
+    this.materials.fabric.roughness = .96; this.materials.fabric.metalness = 0;
+    installArchitecturalFinishes(this.materials);
     this.scene.add(this.sun, this.sun.target, this.moon, this.fill, this.groundBounce, this.groundBounce.target);
     for (const light of this.interiorLights) { light.visible = false; this.scene.add(light); }
     this.sun.position.set(-1100, 2200, 500); this.moon.position.set(1300, 1300, -900);
@@ -1039,7 +1043,12 @@ export class CityRenderer implements CityRendererAPI {
     this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
-    this.scene.traverse(object => { if (object instanceof THREE.Mesh || object instanceof THREE.Points) { geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : [object.material]) { if ('map' in material && material.map instanceof THREE.Texture) material.map.dispose(); materials.add(material); } if (object instanceof THREE.InstancedMesh) object.dispose(); } else if (object instanceof THREE.Sprite) { object.material.map?.dispose(); materials.add(object.material); } });
+    // Palette materials are renderer-owned even after every near chunk using
+    // one of them has been evicted. Dispose them once with attached materials.
+    Object.values(this.materials).forEach(material => materials.add(material));
+    // App-owned navigation Lines join the scene just like placed blocks. Sprite
+    // geometry is Three.js module-shared; only its per-sprite material is owned.
+    this.scene.traverse(object => { if (object instanceof THREE.Mesh || object instanceof THREE.Points || object instanceof THREE.Line) { geometries.add(object.geometry); for (const material of Array.isArray(object.material) ? object.material : [object.material]) { if ('map' in material && material.map instanceof THREE.Texture) material.map.dispose(); materials.add(material); } if (object instanceof THREE.InstancedMesh) object.dispose(); } else if (object instanceof THREE.Sprite) { object.material.map?.dispose(); materials.add(object.material); } });
     geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); this.scene.clear(); this.renderer.dispose(); this.renderer.domElement.remove();
   }
 }

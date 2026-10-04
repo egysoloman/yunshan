@@ -1,0 +1,30 @@
+{
+  "status": "CLOSED_READ_ONLY_DYNAMIC_CITY_SCOPE_AND_NARROW_SLICE_PLAN",
+  "utc": "2026-10-04T11:58:27.681181+00:00",
+  "baseline": "source-as-read root264,60productionSrc,264inputs",
+  "totalFiles": 122,
+  "payloadFiles": 119,
+  "referenceCopies": 107,
+  "filemapSHA256": "d1b644cf775d0e81c5e0851002553ebd347a6bc119b9139cd55e1dea4697eba0",
+  "filesSHA256ListSHA256": "9949861a335934570cd30b714ceeba3435197863654c3ea9f5f8dcff380965a6",
+  "handoffSHA256": "f2221a1f0cd7949d144835de9de0cc34ce2b1b9b71937a5dd73b9a33f180b1a0",
+  "reportSHA256": "485ea3633240f5b501a13772ca507c7b8554b614aed9ffc7ef8fcf36d7a4f782",
+  "matrixSHA256": "247309d2ecb92360f27e96a11f332118aecb754dd8d1700db162e02f2625e96d",
+  "contractSHA256": "f6d03b118899abe19ae3604e53332ac1ee7fd049ffca1ce2df84a70d02083786",
+  "sourceUnchanged": true,
+  "original264OneDayOverall": "FAIL",
+  "scope": {
+    "newSimulationOrWorldConstructors": 0,
+    "ticks": 0,
+    "tests": 0,
+    "builds": 0,
+    "GPU": 0,
+    "productionEdits": 0,
+    "sharedDocEdits": 0,
+    "ZIP": 0,
+    "Library": 0,
+    "GitWrites": 0
+  },
+  "ruleImplementation": "PLAN_NOT_IMPLEMENTED",
+  "delivery": "Parent owns unified original-artifact delivery; no ZIP or Library upload by this group."
+}

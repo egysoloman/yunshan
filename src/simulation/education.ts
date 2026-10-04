@@ -60,11 +60,11 @@ export function educationPairAtStation(simulation: Simulation, site: Building, t
   return staff.some(a => student.some(b => a.floor === b.floor && a.id === b.id && distance(a.position, b.position) < 1e-8));
 }
 interface WorkInterval { start: number; end: number; siteId?: string }
-interface TeachingPhase { state: SimState; tick: number; clock: number; wages: Map<string, WorkInterval[]>; teachers: Map<string, number>; students: Set<string>; studentTeachers: Map<string, string>; blockedPlayer: boolean }
+interface TeachingPhase { state: SimState; tick: number; clock: number; wages: Map<string, WorkInterval[]>; arrivals: Map<string, WorkInterval>; teachers: Map<string, number>; students: Set<string>; studentTeachers: Map<string, string>; blockedPlayer: boolean }
 const teaching = new WeakMap<Simulation, TeachingPhase>();
 function phase(simulation: Simulation): TeachingPhase {
   let item = teaching.get(simulation);
-  if (!item || item.state !== simulation.state || item.tick !== simulation.state.tick) { item = { state: simulation.state, tick: simulation.state.tick, clock: clock(simulation.state), wages: new Map(), teachers: new Map(), students: new Set(), studentTeachers: new Map(), blockedPlayer: false }; teaching.set(simulation, item); }
+  if (!item || item.state !== simulation.state || item.tick !== simulation.state.tick) { item = { state: simulation.state, tick: simulation.state.tick, clock: clock(simulation.state), wages: new Map(), arrivals: new Map(), teachers: new Map(), students: new Set(), studentTeachers: new Map(), blockedPlayer: false }; teaching.set(simulation, item); }
   return item;
 }
 function classroomInterval(state: SimState, minutes: number, startedAt = 0): WorkInterval {
@@ -81,6 +81,26 @@ export function educationStaffMinutes(simulation: Simulation, teacher: Citizen, 
   let actual = 0, lastEnd = window.start;
   for (const item of ranges) { actual += Math.max(0, item.end - Math.max(lastEnd, item.start)); lastEnd = Math.max(lastEnd, item.end); }
   return Math.min(phaseMinutes, actual);
+}
+/** Core records this only after the real walking leg and activity-point checks.
+ * Endpoint presence alone cannot turn the learner's travel into classroom time.
+ * These observations expire each tick/state replacement and are never saved. */
+export function observePublicEducationArrival(simulation: Simulation, person: Citizen, site: Building, minutes: number): void {
+  const state = simulation.state;
+  if (site.kind !== 'school' || !Number.isFinite(minutes) || minutes <= 0
+    || !['studying', 'attendingService', 'socializing'].includes(person.state)
+    || !state.extension?.actorProfiles[person.id]?.alive
+    || !state.culture?.orders.some(order => order.topic === 'education' && order.state === 'active' && order.siteId === site.id && !order.servedIds.includes(person.id))
+    || !educationAtPosition(site, person.position, identity(person), state.voxels)) return;
+  phase(simulation).arrivals.set(person.id, { siteId: site.id, start: clock(state) - minutes, end: clock(state) });
+}
+/** Intersect a learner's current post-arrival tail with the teacher's actual
+ * funded interval and school hours. A paid prefix before arrival earns zero. */
+export function publicEducationMinutes(simulation: Simulation, teacher: Citizen, siteId: string, actorId: string, phaseMinutes: number, startedAt = 0): number {
+  if (actorId === 'player') return educationStaffMinutes(simulation, teacher, siteId, phaseMinutes, false, startedAt);
+  const arrival = phase(simulation).arrivals.get(actorId), end = clock(simulation.state);
+  if (!arrival || arrival.siteId !== siteId || arrival.end !== end) return 0;
+  return educationStaffMinutes(simulation, teacher, siteId, phaseMinutes, false, Math.max(startedAt, arrival.start));
 }
 export function educationSlotAvailable(simulation: Simulation, teacherId: string, actorId: string): boolean { const p = phase(simulation); return !p.students.has(actorId) && (p.teachers.get(teacherId) ?? 0) < 4 && teacherId !== actorId; }
 export function takeEducationSlot(simulation: Simulation, teacherId: string, actorId: string): boolean {
@@ -140,11 +160,13 @@ export function applyFamilyEducationCredential(simulation: Simulation, course: F
   record.earnedMinutes += MINUTES; person.education = (person.education ?? 0) + gain; if (child) child.attendanceMinutes += MINUTES;
   return true;
 }
-/** Teachers attached to an actual paid/public classroom need fine task
- * processing. Tier labels and all physical speeds remain unchanged. */
+/** Teachers and existing public learners need fine classroom processing.
+ * Tier labels and all physical speeds remain unchanged. */
 export function educationNeedsContinuousPeople(state: SimState, person: Citizen): boolean {
   const course = state.education?.course, profile = state.extension?.actorProfiles[person.id];
-  if (!roles.includes(person.role) || !profile?.alive || profile.age < 18) return false;
+  if (!profile?.alive || profile.age < 6) return false;
+  if (!roles.includes(person.role)) return !!person.destinationId && !!state.culture?.orders.some(order => order.topic === 'education' && order.state === 'active' && order.siteId === person.destinationId && !order.servedIds.includes(person.id));
+  if (profile.age < 18) return false;
   return !!course && !ended(course) && course.status !== 'refundPending' && person.workId === course.siteId
     || !!state.culture?.orders.some(order => order.topic === 'education' && order.state === 'active' && order.siteId === person.workId)
     || !!state.familyEducation?.active.some(course => course.cancelledAt === null && course.siteId === person.workId);

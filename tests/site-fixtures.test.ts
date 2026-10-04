@@ -112,7 +112,12 @@ test('market food samples follow real finite stock and residency without changin
     const two = { ...view, shops: view.shops.map(s => s.id === shop.id ? { ...s, inventory: 2, open: true } : s) };
     pool.update(two, camera, resident); assert.equal(pool.mesh.count, 2); assert.equal(pool.mesh.userData.budget.drawCalls, 1);
     const matrix = new THREE.Matrix4(); pool.mesh.getMatrixAt(0, matrix);
-    assert(matrix.elements[13] + .1 < building.door.y + 1.72); assert.equal(pool.mesh.userData.budget.triangles, 24);
+    assert(matrix.elements[13] + .1 < building.door.y + 1.72);
+    const sampleTriangles = pool.mesh.geometry.getAttribute('position').count / 3;
+    assert.equal(sampleTriangles, 48); assert.ok(sampleTriangles <= 48, 'the reusable wrapped sample has a finite geometry budget');
+    assert.equal(pool.mesh.userData.budget.triangles, 2 * sampleTriangles); assert.equal(pool.mesh.userData.budget.triangles, 96);
+    pool.mesh.geometry.computeBoundingBox();
+    for (const axis of ['x', 'y', 'z'] as const) { assert.ok(pool.mesh.geometry.boundingBox!.min[axis] >= -.5 - 1e-7); assert.ok(pool.mesh.geometry.boundingBox!.max[axis] <= .5 + 1e-7); }
     assert.equal(simulation.exportSave(), original);
   } finally { pool.dispose(); }
   assert.equal(scene.children.length, 0); pool.dispose();

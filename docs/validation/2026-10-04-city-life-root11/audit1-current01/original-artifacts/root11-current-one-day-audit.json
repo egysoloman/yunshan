@@ -1,0 +1,1135 @@
+{
+  "status": "failed",
+  "sourceHash": {
+    "scripts/economy-audit.ts": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae",
+    "scripts/economy-observations.ts": "71df4886390e427a654abe406f9e086ce04cc81129d6a629ea65761512cbf0c7",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/commercial-district.ts": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+    "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+    "src/hygiene-ui.ts": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+    "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+    "src/main.ts": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165",
+    "src/renderer.ts": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e",
+    "src/rendering/architectural-finishes.ts": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937",
+    "src/rendering/architecture-bodies.ts": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230",
+    "src/rendering/architecture-detail.ts": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+    "src/rendering/market-shopfront.ts": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+    "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+    "src/rendering/terrain.ts": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+    "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+    "src/simulation.ts": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a",
+    "src/simulation/activity-capacity.ts": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+    "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+    "src/simulation/banking.ts": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+    "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+    "src/simulation/culture.ts": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8",
+    "src/simulation/education.ts": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+    "src/simulation/extensions.ts": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+    "src/simulation/family-education.ts": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+    "src/simulation/family.ts": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+    "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+    "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+    "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+    "src/simulation/hygiene-public.ts": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+    "src/simulation/hygiene-transfer.ts": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+    "src/simulation/hygiene.ts": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/npc-stair-motion.ts": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+    "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+    "src/simulation/player-labor.ts": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+    "src/simulation/police-supplies.ts": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+    "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+    "src/simulation/public-employment.ts": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+    "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "src/simulation/shop_lifecycle.ts": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066",
+    "src/simulation/supplemental-budget.ts": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b",
+    "src/ui.ts": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d",
+    "src/world.ts": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+  },
+  "endSourceHash": {
+    "scripts/economy-audit.ts": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae",
+    "scripts/economy-observations.ts": "71df4886390e427a654abe406f9e086ce04cc81129d6a629ea65761512cbf0c7",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/commercial-district.ts": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+    "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+    "src/hygiene-ui.ts": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+    "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+    "src/main.ts": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165",
+    "src/renderer.ts": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e",
+    "src/rendering/architectural-finishes.ts": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937",
+    "src/rendering/architecture-bodies.ts": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230",
+    "src/rendering/architecture-detail.ts": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/market-goods.ts": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+    "src/rendering/market-shopfront.ts": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+    "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+    "src/rendering/terrain.ts": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+    "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+    "src/simulation.ts": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a",
+    "src/simulation/activity-capacity.ts": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+    "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+    "src/simulation/banking.ts": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+    "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+    "src/simulation/culture.ts": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8",
+    "src/simulation/education.ts": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+    "src/simulation/extensions.ts": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+    "src/simulation/family-education.ts": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+    "src/simulation/family.ts": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+    "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+    "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+    "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+    "src/simulation/hygiene-public.ts": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+    "src/simulation/hygiene-transfer.ts": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+    "src/simulation/hygiene.ts": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/npc-stair-motion.ts": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+    "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+    "src/simulation/player-labor.ts": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+    "src/simulation/police-supplies.ts": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+    "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+    "src/simulation/public-employment.ts": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+    "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "src/simulation/shop_lifecycle.ts": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066",
+    "src/simulation/supplemental-budget.ts": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b",
+    "src/ui.ts": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d",
+    "src/world.ts": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+  },
+  "speed": 8,
+  "seed": 20261001,
+  "requestedDays": 1,
+  "initialPolicy": {
+    "taxRate": 0.08,
+    "policeBudget": 0.3
+  },
+  "ticks": 720,
+  "finalSave": {
+    "path": "artifacts/root11-current-one-day-audit-final.save.json",
+    "bytes": 2974315,
+    "sha256": "b0af5576bc587ed474d2a09f36e10f54a91666c5fef60ed6aa8929529dc20972"
+  },
+  "terminalTreasury": 71855.56256507209,
+  "sourceHashScope": "All regular src files, this audit driver and its read-only commodity observer; both ends recursively rescan the same source tree.",
+  "scope": "One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.",
+  "elapsedGameMinutes": 1440,
+  "totals": {
+    "sales": 9176.322523376117,
+    "saleCount": 490,
+    "saleTax": 734.1058018700888,
+    "fares": 496,
+    "payrollPublicRequested": 10017.01442555988,
+    "payrollPublicPaid": 8673.339530685984,
+    "payrollPrivateRequested": 6978.432857132955,
+    "payrollPrivate": 6573.074111412535,
+    "wageTax": 1219.7130913678818,
+    "wholesale": 0,
+    "wholesaleTax": 0,
+    "businessExpenses": 564.616194518677,
+    "storedMeals": 53,
+    "production": 652.2440404320964,
+    "productionMinutes": 29043.591473708042,
+    "operationsRequested": 2073.600000000038,
+    "operations": 2275.07760000004,
+    "publicSupplies": 668.4000000000124,
+    "procurementTax": 233.52460800000125,
+    "civicProcurement": 0,
+    "security": 643.9799999999959,
+    "financeDelta": -7996.457434927914,
+    "roadworkPayroll": 0,
+    "roadworkMinutes": 0
+  },
+  "ledger": {
+    "城市公共运转支出": {
+      "count": 19,
+      "amount": -8615.684230988467,
+      "eventObserved": 0
+    },
+    "交通居民科研投入": {
+      "count": 1,
+      "amount": 200,
+      "eventObserved": 0
+    },
+    "城市税收与公共收入": {
+      "count": 5,
+      "amount": 271.24679606055724,
+      "eventObserved": 0
+    }
+  },
+  "snapshots": [
+    {
+      "tick": 0,
+      "day": 0,
+      "hour": 8,
+      "treasury": 80000,
+      "gdp": 0,
+      "npcMoney": 191794.17330026394,
+      "moneySupply": 280736.15793671925,
+      "wages": {
+        "sales": 0,
+        "saleCount": 0,
+        "saleTax": 0,
+        "fares": 0,
+        "payrollPublicRequested": 0,
+        "payrollPublicPaid": 0,
+        "payrollPrivateRequested": 0,
+        "payrollPrivate": 0,
+        "wageTax": 0,
+        "wholesale": 0,
+        "wholesaleTax": 0,
+        "businessExpenses": 0,
+        "storedMeals": 0,
+        "production": 0,
+        "productionMinutes": 0,
+        "operationsRequested": 0,
+        "operations": 0,
+        "publicSupplies": 0,
+        "procurementTax": 0,
+        "civicProcurement": 0,
+        "security": 0,
+        "financeDelta": 0,
+        "roadworkPayroll": 0,
+        "roadworkMinutes": 0
+      },
+      "commodityObservations": {
+        "flows": {
+          "food": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "materials": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "unknown": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          }
+        },
+        "storedMeals": 0,
+        "playerConsumedMeals": 0,
+        "observedNpcMeals": 0,
+        "scope": "Observed production and retail events by actual site kind; counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance."
+      },
+      "food": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+        "shopFoodUnits": 16210,
+        "residentCarriedFoodUnits": 0,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4960,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1440,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 9810,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4860,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 0,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 0,
+        "routeReachability": "NOT_OBSERVED",
+        "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+      },
+      "policeSupplies": null,
+      "civicRequests": {
+        "residentPetitions": 0,
+        "openPetitions": 0,
+        "orders": []
+      },
+      "formalLearning": [],
+      "familyEducation": null,
+      "playerLabor": {
+        "escrow": 0,
+        "stats": {
+          "reservedGross": 0,
+          "paidGross": 0,
+          "refundedGross": 0,
+          "workedMinutes": 0,
+          "completed": 0
+        }
+      },
+      "roadworks": null,
+      "power": null,
+      "hygiene": null,
+      "education": null,
+      "policy": {
+        "taxRate": 0.08,
+        "policeBudget": 0.3
+      },
+      "publicBudget": {
+        "cash": 80000,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 0,
+        "forecastPayroll": 12585.599999999968,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14659.199999999968,
+        "authorizedRemaining": 0,
+        "available": 65340.80000000003
+      },
+      "publicService": {
+        "fundedMinutes": null,
+        "actualMinutes": null,
+        "plannedFullMinutes": null,
+        "reservedCash": 0,
+        "statistics": null,
+        "shifts": []
+      },
+      "privateLabor": {
+        "rosterJobs": 265,
+        "plannedMinutes": 0,
+        "actualMinutes": 0,
+        "reservedCash": 0,
+        "restrictedShops": 0,
+        "statistics": null
+      },
+      "banking": {
+        "balanceSheet": {
+          "cash": 0,
+          "loanPrincipal": 0,
+          "loanInterestReceivable": 0,
+          "deposits": 0,
+          "interestPayable": 0,
+          "assets": 0,
+          "liabilities": 0,
+          "equity": 0,
+          "legacyEscrowAssets": 0,
+          "legacyEscrowClaims": 0
+        },
+        "cash": 0,
+        "deposits": 0,
+        "loans": 0,
+        "legacyInvestmentCash": 0
+      },
+      "npcBankDeposits": 0,
+      "wageArrears": {
+        "public": 0,
+        "private": 0,
+        "publicEarnedNotDue": 0,
+        "privateEarnedNotDue": 0
+      },
+      "ledger": {},
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 76,
+        "employees": 265,
+        "cash": 7665.385099751875,
+        "averageProfit": 0
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 90.92857142857143,
+        "meanHunger": 77.18245901117122,
+        "meanFatigue": 82.51174210165945,
+        "livingMeanHealth": 90.92857142857143,
+        "livingMeanHunger": 77.18245901117122,
+        "livingMeanFatigue": 82.51174210165945,
+        "researchCompleted": 0,
+        "companies": 12,
+        "zeroCapitalCompanies": 0,
+        "playerAlive": true,
+        "poor": 0,
+        "storedFood": 0,
+        "byRole": {
+          "学生": {
+            "count": 66,
+            "money": 322.0801002842332,
+            "hunger": 76.6042780318248,
+            "health": 90.68181818181819
+          },
+          "农民": {
+            "count": 28,
+            "money": 302.55868196146497,
+            "hunger": 80.40392419003183,
+            "health": 91.42857142857143
+          },
+          "钱庄职员": {
+            "count": 41,
+            "money": 328.37429188174855,
+            "hunger": 78.74576414830233,
+            "health": 90.8048780487805
+          },
+          "商人": {
+            "count": 145,
+            "money": 303.16734857441344,
+            "hunger": 77.68870069289676,
+            "health": 90.99310344827586
+          },
+          "医生": {
+            "count": 51,
+            "money": 321.2594487183892,
+            "hunger": 77.45566278728018,
+            "health": 91.09803921568627
+          },
+          "官员": {
+            "count": 83,
+            "money": 322.529633804533,
+            "hunger": 76.84369517602475,
+            "health": 90.34939759036145
+          },
+          "驾驶员": {
+            "count": 47,
+            "money": 327.1160023138323,
+            "hunger": 74.66004831661925,
+            "health": 91.34042553191489
+          },
+          "老师": {
+            "count": 34,
+            "money": 343.0062098942204,
+            "hunger": 77.79584333776523,
+            "health": 90.94117647058823
+          },
+          "警察": {
+            "count": 22,
+            "money": 322.53020152301445,
+            "hunger": 74.46211827987678,
+            "health": 91.04545454545455
+          },
+          "工人": {
+            "count": 75,
+            "money": 274.6578999888152,
+            "hunger": 76.12210816017662,
+            "health": 90.96
+          },
+          "搬运工": {
+            "count": 17,
+            "money": 274.8113897696192,
+            "hunger": 81.66278052397126,
+            "health": 92.29411764705883
+          },
+          "科研员": {
+            "count": 7,
+            "money": 297.8538259747438,
+            "hunger": 75.11802338645793,
+            "health": 89.42857142857143
+          }
+        }
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 0
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 41.03204213315621,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 160,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b9"
+        },
+        {
+          "id": "company-2",
+          "capital": 44.11607737420127,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b17"
+        },
+        {
+          "id": "company-3",
+          "capital": 55.45723848743364,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b27"
+        },
+        {
+          "id": "company-4",
+          "capital": 43.591306309681386,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b36"
+        },
+        {
+          "id": "company-5",
+          "capital": 65.1449271151796,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b45"
+        },
+        {
+          "id": "company-6",
+          "capital": 71.7595917894505,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b55"
+        },
+        {
+          "id": "company-7",
+          "capital": 30.356147065758705,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b7"
+        },
+        {
+          "id": "company-8",
+          "capital": 61.390983301680535,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b20"
+        },
+        {
+          "id": "company-9",
+          "capital": 33.79047064576298,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b33"
+        },
+        {
+          "id": "company-10",
+          "capital": 80,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b48"
+        },
+        {
+          "id": "company-11",
+          "capital": 80,
+          "profit": 0,
+          "employees": 0,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b62"
+        },
+        {
+          "id": "company-12",
+          "capital": 69.96075248112902,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "workshop-b0"
+        }
+      ]
+    },
+    {
+      "tick": 720,
+      "day": 1,
+      "hour": 8,
+      "treasury": 71855.56256507209,
+      "gdp": 9672.322523376119,
+      "npcMoney": 195976.11146093791,
+      "moneySupply": 280736.15793672076,
+      "wages": {
+        "sales": 9176.322523376117,
+        "saleCount": 490,
+        "saleTax": 734.1058018700888,
+        "fares": 496,
+        "payrollPublicRequested": 10017.01442555988,
+        "payrollPublicPaid": 8673.339530685984,
+        "payrollPrivateRequested": 6978.432857132955,
+        "payrollPrivate": 6573.074111412535,
+        "wageTax": 1219.7130913678818,
+        "wholesale": 0,
+        "wholesaleTax": 0,
+        "businessExpenses": 564.616194518677,
+        "storedMeals": 53,
+        "production": 652.2440404320964,
+        "productionMinutes": 29043.591473708042,
+        "operationsRequested": 2073.600000000038,
+        "operations": 2275.07760000004,
+        "publicSupplies": 668.4000000000124,
+        "procurementTax": 233.52460800000125,
+        "civicProcurement": 0,
+        "security": 643.9799999999959,
+        "financeDelta": -7996.457434927914,
+        "roadworkPayroll": 0,
+        "roadworkMinutes": 0
+      },
+      "commodityObservations": {
+        "flows": {
+          "food": {
+            "producedUnits": 125.0728692888142,
+            "productionMinutes": 5570.823412700992,
+            "retailUnits": 857,
+            "retailGross": 9176.322523376117,
+            "counterMeals": 490,
+            "unattributedRetailUnits": 0
+          },
+          "materials": {
+            "producedUnits": 527.171171143282,
+            "productionMinutes": 23472.76806100705,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "unknown": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          }
+        },
+        "storedMeals": 53,
+        "playerConsumedMeals": 0,
+        "observedNpcMeals": 543,
+        "scope": "Observed production and retail events by actual site kind; counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance."
+      },
+      "food": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+        "shopFoodUnits": 15478.072869288815,
+        "residentCarriedFoodUnits": 314,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4814,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1522.0728692888142,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 9142,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4718.771171143285,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 249,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 249,
+        "routeReachability": "NOT_OBSERVED",
+        "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+      },
+      "policeSupplies": {
+        "receivedUnits": 150,
+        "consumedUnits": 45,
+        "heldUnits": 105,
+        "gross": 643.98,
+        "tax": 51.51839999999996
+      },
+      "civicRequests": {
+        "residentPetitions": 0,
+        "openPetitions": 0,
+        "orders": []
+      },
+      "formalLearning": [],
+      "familyEducation": null,
+      "playerLabor": {
+        "escrow": 0,
+        "stats": {
+          "reservedGross": 0,
+          "paidGross": 0,
+          "refundedGross": 0,
+          "workedMinutes": 0,
+          "completed": 0
+        }
+      },
+      "roadworks": null,
+      "power": null,
+      "hygiene": null,
+      "education": null,
+      "policy": {
+        "taxRate": 0.08,
+        "policeBudget": 0.3
+      },
+      "publicBudget": {
+        "cash": 71855.56256507209,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1343.6748948737181,
+        "forecastPayroll": 12601.551277192906,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 16018.826172066625,
+        "authorizedRemaining": 0,
+        "available": 55836.73639300546
+      },
+      "publicService": {
+        "fundedMinutes": null,
+        "actualMinutes": null,
+        "plannedFullMinutes": null,
+        "reservedCash": 0,
+        "statistics": null,
+        "shifts": []
+      },
+      "privateLabor": {
+        "rosterJobs": 265,
+        "plannedMinutes": 3861,
+        "actualMinutes": 32.10200581758279,
+        "reservedCash": 351.77118746309145,
+        "restrictedShops": 0,
+        "statistics": {
+          "approvedMinutes": 92197,
+          "workedMinutes": 75900.52487016782,
+          "restrictedReviews": 0
+        }
+      },
+      "banking": {
+        "balanceSheet": {
+          "cash": 400,
+          "loanPrincipal": 0,
+          "loanInterestReceivable": 0,
+          "deposits": 400,
+          "interestPayable": 0,
+          "assets": 400,
+          "liabilities": 400,
+          "equity": 0,
+          "legacyEscrowAssets": 0,
+          "legacyEscrowClaims": 0
+        },
+        "cash": 400,
+        "deposits": 400,
+        "loans": 0,
+        "legacyInvestmentCash": 0
+      },
+      "npcBankDeposits": 400,
+      "wageArrears": {
+        "public": 0,
+        "private": 0,
+        "publicEarnedNotDue": 1343.6748948737181,
+        "privateEarnedNotDue": 405.35874571980673
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 19,
+          "amount": -8615.684230988467,
+          "eventObserved": 0
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200,
+          "eventObserved": 0
+        },
+        "城市税收与公共收入": {
+          "count": 5,
+          "amount": 271.24679606055724,
+          "eventObserved": 0
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 76,
+        "employees": 265,
+        "cash": 11211.766445799634,
+        "averageProfit": 4.346193627881046
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 91.87479438738215,
+        "meanHunger": 43.99652427662077,
+        "meanFatigue": 94.97268971348419,
+        "livingMeanHealth": 91.87479438738215,
+        "livingMeanHunger": 43.99652427662077,
+        "livingMeanFatigue": 94.97268971348419,
+        "researchCompleted": 1,
+        "companies": 12,
+        "zeroCapitalCompanies": 0,
+        "playerAlive": true,
+        "poor": 0,
+        "storedFood": 314,
+        "byRole": {
+          "学生": {
+            "count": 65,
+            "money": 303.04846570584067,
+            "hunger": 47.629741977171086,
+            "health": 91.64144327649264
+          },
+          "农民": {
+            "count": 28,
+            "money": 310.7317608050674,
+            "hunger": 63.77834561599968,
+            "health": 92.67831783991315
+          },
+          "钱庄职员": {
+            "count": 41,
+            "money": 324.77586811715736,
+            "hunger": 34.36347065517778,
+            "health": 91.86904151776581
+          },
+          "商人": {
+            "count": 145,
+            "money": 300.7026744177201,
+            "hunger": 63.01729165291977,
+            "health": 92.20655668643586
+          },
+          "医生": {
+            "count": 51,
+            "money": 338.2454937363624,
+            "hunger": 28.553859739879393,
+            "health": 91.95302458363818
+          },
+          "官员": {
+            "count": 83,
+            "money": 344.32879127456414,
+            "hunger": 36.98029382933687,
+            "health": 91.08425643852016
+          },
+          "驾驶员": {
+            "count": 47,
+            "money": 347.0462409713834,
+            "hunger": 28.995056514379577,
+            "health": 92.00957394248121
+          },
+          "老师": {
+            "count": 34,
+            "money": 367.2595855051935,
+            "hunger": 11.664267747953264,
+            "health": 91.5191724579844
+          },
+          "警察": {
+            "count": 22,
+            "money": 356.12983979325975,
+            "hunger": 8.96665450751318,
+            "health": 91.36270151128345
+          },
+          "工人": {
+            "count": 75,
+            "money": 283.34246405287826,
+            "hunger": 51.376871330608765,
+            "health": 92.00400197215507
+          },
+          "搬运工": {
+            "count": 17,
+            "money": 276.01147623758834,
+            "hunger": 75.84102633211012,
+            "health": 93.4209592793609
+          },
+          "科研员": {
+            "count": 7,
+            "money": 297.8538259747438,
+            "hunger": 6.9898959023944665,
+            "health": 89.7795577322697
+          },
+          "scientist": {
+            "count": 1,
+            "money": 169.25125768876163,
+            "hunger": 0,
+            "health": 94.01303831060139
+          }
+        }
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 23.807857486889667,
+          "profit": -18.143686868488892,
+          "employees": 2,
+          "inventory": 156,
+          "wageLiability": 0.919502222222222,
+          "revenue": 37.60067928980979,
+          "workId": "river-b9"
+        },
+        {
+          "id": "company-2",
+          "capital": 20.2712699570528,
+          "profit": -31.84480741714863,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.906065206803017,
+          "workId": "river-b17"
+        },
+        {
+          "id": "company-3",
+          "capital": 34.316869326492935,
+          "profit": -31.714286790570316,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 2.5739176296296282,
+          "revenue": 20.92000839994362,
+          "workId": "river-b27"
+        },
+        {
+          "id": "company-4",
+          "capital": 20.341536679899974,
+          "profit": -31.249769629781525,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.855651046533836,
+          "workId": "river-b36"
+        },
+        {
+          "id": "company-5",
+          "capital": 37.79812904014725,
+          "profit": -29.92140429725477,
+          "employees": 1,
+          "inventory": 98.12026766091486,
+          "wageLiability": 2.574606222222221,
+          "revenue": 19.245864894288403,
+          "workId": "river-b45"
+        },
+        {
+          "id": "company-6",
+          "capital": 43.063256555680084,
+          "profit": -31.270439530066795,
+          "employees": 2,
+          "inventory": 100.97395702906078,
+          "wageLiability": 2.5741042962962957,
+          "revenue": 38.48267952571369,
+          "workId": "river-b55"
+        },
+        {
+          "id": "company-7",
+          "capital": 44.354916435528985,
+          "profit": -10.001230630229768,
+          "employees": 2,
+          "inventory": 84,
+          "wageLiability": 0,
+          "revenue": 63.552895666353365,
+          "workId": "market-b7"
+        },
+        {
+          "id": "company-8",
+          "capital": 232.1756322806824,
+          "profit": 84.57809403163351,
+          "employees": 1,
+          "inventory": 69,
+          "wageLiability": 2.2065549473684203,
+          "revenue": 235.5849525515467,
+          "workId": "market-b20"
+        },
+        {
+          "id": "company-9",
+          "capital": 22.34154282494837,
+          "profit": -19.44892782081459,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.855651046533836,
+          "workId": "market-b33"
+        },
+        {
+          "id": "company-10",
+          "capital": 59.92081563938151,
+          "profit": -30.28531825535528,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 2.206133894736841,
+          "revenue": 20.906065206803017,
+          "workId": "market-b48"
+        },
+        {
+          "id": "company-11",
+          "capital": 80,
+          "profit": 0,
+          "employees": 0,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b62"
+        },
+        {
+          "id": "company-12",
+          "capital": 74.32563868443867,
+          "profit": 2.1584889267139515,
+          "employees": 1,
+          "inventory": 87.17040078455226,
+          "wageLiability": 2.2063972765957436,
+          "revenue": 46.56000000000001,
+          "workId": "workshop-b0"
+        }
+      ]
+    }
+  ],
+  "deaths": [],
+  "starts": [
+    {
+      "tick": 60,
+      "day": 0,
+      "hour": 10,
+      "id": "citizen-488",
+      "role": "scientist",
+      "sector": "traffic",
+      "moneyBefore": 339.00097431614995,
+      "moneyAfter": 139.00097431614995,
+      "grossWage": 0,
+      "debit": 200,
+      "exactDebitVerified": true,
+      "ledgerCredit": 200,
+      "hunger": 54.4138734249864,
+      "fatigue": 76.16514442530459,
+      "education": 3,
+      "skill": 36.01699999999996,
+      "workKind": "school"
+    }
+  ],
+  "researchFunding": 200,
+  "exactResearchDebits": 1,
+  "researchCompleted": 1,
+  "reconciliationResidual": -1.4551915228366852e-9,
+  "moneyConservationResidual": -1.5133991837501526e-9,
+  "initialMoneySupply": 280736.15793671925,
+  "finalMoneySupply": 280736.15793672076,
+  "economicTrend": {
+    "cashChangePercent": 2.180430243898468,
+    "unpaidPrivateWages": 405.3587457204203,
+    "steadyStateEstablished": false
+  },
+  "auditStatus": "passed",
+  "saveValidation": {
+    "status": "failed",
+    "failure": "AssertionError [ERR_ASSERTION]: 读档失败：invalid physical stair body or phase\n    at <anonymous> (/workspace/yunshan-work/ROOT11-integration-20261004-01/source/scripts/economy-audit.ts:314:10)"
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: 读档失败：invalid physical stair body or phase\n    at <anonymous> (/workspace/yunshan-work/ROOT11-integration-20261004-01/source/scripts/economy-audit.ts:314:10)"
+}

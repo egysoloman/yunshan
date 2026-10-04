@@ -1,0 +1,20 @@
+{
+  "pid": 66878,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/clinical-arrival-doctor.test.ts",
+    "tests/clinical-arrival-patient.test.ts"
+  ],
+  "identity": {
+    "pid": 66878,
+    "state": "R",
+    "parent": 66875,
+    "group": 66878,
+    "session": 66878,
+    "startTicks": 4018488
+  }
+}

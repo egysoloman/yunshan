@@ -9,7 +9,7 @@ export interface ArchitectureTemplate {
   key: string; positions: number[]; normals: number[]; uvs: number[]; indices: number[];
 }
 export interface ProgramArchitecturePart {
-  material: 'wall' | 'stone' | 'wood' | 'roof' | 'glass' | 'amber' | 'cyan' | 'red' | 'metal';
+  material: 'wall' | 'stone' | 'wood' | 'roof' | 'glass' | 'amber' | 'cyan' | 'red' | 'metal' | 'fabric';
   position: Vec3; size: Vec3; color: string; floor: number; roof: boolean;
   purpose: 'floor' | 'wall' | 'window' | 'body' | 'roof' | 'furniture' | 'stairs';
   template?: ArchitectureTemplate; facade?: readonly [number, number, number, number];
@@ -72,7 +72,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   const parts: ProgramArchitecturePart[] = [];
   const commercial = building.commercialGeometryRevision === 1;
   const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0;
-  const wallColor = commercial ? '#b1bcc4' : timberFinish ? building.kind === 'market' ? '#d4c8b2' : ['#d9d3c4', '#cbc9bc', '#ded8ca', '#cfccbe'][building.seed % 4]
+  const wallColor = commercial ? '#b1bcc4' : timberFinish ? building.kind === 'market' ? '#d1cdbd' : ['#d7d5c9', '#c9d0c3', '#e1dcca', '#c4c9c5'][building.seed % 4]
     : building.kind === 'clinic' ? '#dad9c5' : building.kind === 'bank' ? '#b5beb2' : building.kind === 'workshop' ? '#b5a58c' : building.kind === 'school' ? '#d9ceb0' : ['#d6c6a7', '#c3bea3', '#ddcfb0', '#ccba9c'][building.seed % 4];
   const box = (material: ProgramArchitecturePart['material'], x: number, y: number, z: number, sx: number, sy: number, sz: number, color: string, floor: number, purpose: ProgramArchitecturePart['purpose'], roof = false, facade?: ProgramArchitecturePart['facade']) => {
     if (Math.min(sx, sy, sz) <= 1e-7) return;
@@ -136,7 +136,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
           box(material, (x0 + x1) / 2, plan.y + (low + high) / 2, (z0 + z1) / 2, x1 - x0, high - low, z1 - z0, color, plan.floor, 'furniture', false, facade);
         };
         if (fixture.kind === 'table' && height >= .4 && Math.min(width, depth) >= .4) {
-          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#a17c55');
+          furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#956f4f', [width, .2, depth, 2]);
           for (const xx of [r.x0, r.x1 - .2]) for (const zz of [r.z0, r.z1 - .2]) furniture('wood', xx, xx + .2, bottom, top - .2, zz, zz + .2, '#69523f');
           for (const zz of [r.z0, r.z1 - .2]) furniture('wood', r.x0, r.x1, top - .4, top - .2, zz, zz + .2, '#856246');
         } else if (fixture.kind === 'counter') {
@@ -147,12 +147,12 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
           furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#ab8a62');
         } else if (fixture.kind === 'bed' && height >= .6 - 1e-7 && width >= 1.2 && depth >= .8) {
           furniture('wood', r.x0, r.x1, bottom, top - .4, r.z0, r.z1, '#6c513d');
-          furniture('wall', r.x0 + .2, r.x1 - .2, top - .4, top - .2, r.z0 + .2, r.z1 - .2, '#d7d0b9');
+          furniture('fabric', r.x0 + .2, r.x1 - .2, top - .4, top - .2, r.z0 + .2, r.z1 - .2, '#d7d0b9');
           for (const zz of [r.z0, r.z1 - .2]) furniture('wood', r.x0, r.x1, top - .4, top - .2, zz, zz + .2, '#8b6848');
           for (const xx of [r.x0, r.x1 - .2]) furniture('wood', xx, xx + .2, top - .4, top, r.z0, r.z1, '#8b6848');
           const quilt = ['#566c76', '#687962', '#97745d', '#666b86'][building.seed % 4];
-          furniture('wall', r.x0 + .8, r.x1 - .2, top - .2, top, r.z0 + .2, r.z1 - .2, quilt);
-          furniture('wall', r.x0 + .2, r.x0 + .6, top - .2, top, r.z0 + .2, r.z1 - .2, '#ebe3cb');
+          furniture('fabric', r.x0 + .8, r.x1 - .2, top - .2, top, r.z0 + .2, r.z1 - .2, quilt);
+          furniture('fabric', r.x0 + .2, r.x0 + .6, top - .2, top, r.z0 + .2, r.z1 - .2, '#ebe3cb');
         } else {
           furniture('wood', r.x0, r.x1, bottom, top, r.z0, r.z1, '#846346');
         }

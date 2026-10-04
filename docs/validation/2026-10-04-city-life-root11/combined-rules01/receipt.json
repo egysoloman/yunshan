@@ -1,0 +1,38 @@
+{
+  "startedAt": "2026-10-04T10:09:48.352690+00:00",
+  "endedAt": "2026-10-04T10:15:23.144768+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/native-door-routes.test.ts",
+    "tests/native-live-reader.test.ts",
+    "tests/public-school-arrival.test.ts",
+    "tests/economy-observations.test.ts",
+    "tests/rendering-street-life.test.ts",
+    "tests/site-fixtures.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 264,
+  "inputsStable": true,
+  "rawSHA256": "8e733dc0b4aadc6b704a713592cb6c6cb259a79f6ed9c68d12226b902aa65292",
+  "ownedPid": 66424,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 66432,
+      "state": "Z",
+      "parent": 1,
+      "group": 66424,
+      "session": 66424,
+      "startTicks": 3941356
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

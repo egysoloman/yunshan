@@ -1,0 +1,36 @@
+{
+  "startedAt": "2026-10-04T11:22:21.418759+00:00",
+  "endedAt": "2026-10-04T11:22:42.400465+00:00",
+  "argv": [
+    "env",
+    "YUNSHAN_DAY_WRITER_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-writer-origin03/evidence",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=actual one-day|native production planning",
+    "tests/native-day-writer.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 267,
+  "inputsStable": true,
+  "rawSHA256": "3ee11ddb6e936e4da13a7fa6a7f3dc7fe254a883a24b1d3ad7db914c04f63274",
+  "ownedPid": 70079,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 70095,
+      "state": "Z",
+      "parent": 1,
+      "group": 70079,
+      "session": 70079,
+      "startTicks": 4376636
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

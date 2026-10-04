@@ -1,0 +1,114 @@
+{
+  "status": "FAILED_BEFORE_SAVING_STARTED",
+  "attemptStartedAt": "2026-10-04T12:05:29.047675+00:00",
+  "attemptEndedAt": "2026-10-04T12:05:29.222319+00:00",
+  "requestedFiles": 15,
+  "requestedNewFiles": 14,
+  "existingMemoUpdates": 1,
+  "savedLibraryIDs": [],
+  "createdLibraryIDCount": 0,
+  "existingMemo": {
+    "library_file_id": "libfile_7571a326de848191aec330d605a63845",
+    "versionBefore": 5,
+    "versionAfterRead": 5,
+    "sizeBytesAfterRead": 286307,
+    "replacementStarted": false,
+    "replaced": false
+  },
+  "error": "Library连接失败，保存尚未开始。",
+  "writeRetried": false,
+  "otherLibraryWriteRoutesUsed": false,
+  "files": [
+    {
+      "name": "Yunshan_ROOT12_Source_20261004.zip",
+      "bytes": 29785295,
+      "sha256": "37bb4917c0c984652874f5a13988ab145024e1c0a0cf7a5a11604b8844889194",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip",
+      "bytes": 353283217,
+      "sha256": "19c1d6593d8f77e94157a8f68c0a429e11123e378eadcb82079c2193700b2416",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_Report_20261004.md",
+      "bytes": 10372,
+      "sha256": "be9066ec86f9105d7491416dcea5df39cfd0898cbf090e11fb4cf0bae36c764a",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_267_Day_Original.png",
+      "bytes": 633641,
+      "sha256": "1b670726a4312dd465d97afef7ff7579881bc66dfed45fe868ded242b52a036a",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_267_Night_Original.png",
+      "bytes": 544445,
+      "sha256": "17064b74d7cb8ce790adb0e9345cfde605d82e9daa84d9ce02617a1a91142e39",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_267_Interior_Controlled_Original.png",
+      "bytes": 734242,
+      "sha256": "fdee81de1b2d5b4a15d90f5c768543942a723148e1cee797b67010bdbf4cf6be",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT11_260_Native_Opening_Original.png",
+      "bytes": 713657,
+      "sha256": "494805bbf38e0cddd3c1d2e68434ab1c1eeb17d7704ada91d675f0b927f64d86",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT11_260_Native_Walk_Original.png",
+      "bytes": 376405,
+      "sha256": "5190a77b53e5827a30482733b5ec0f518b75df4c9172ed736b656b2b9bbb238c",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_Requirements_Matrix_20261004.md",
+      "bytes": 112499,
+      "sha256": "44006cd77eb57e116dfeb8680894f77926cd3000c6fe4bcd7ee14c0fe4c63c86",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_Enable_Policy_PLAN.md",
+      "bytes": 12220,
+      "sha256": "bac6c0e1db56998fff7ff78c731a8d7f394b1af8ffdc56fdbccbc7c0d18000f6",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_Food_Cause_264_Review.md",
+      "bytes": 8554,
+      "sha256": "cd37bcebcffe4bed2b541934f0a9c530ae56b7d8cb785678186ffe192ccb318c",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_Dynamic_City_264_Review.md",
+      "bytes": 2718,
+      "sha256": "485ea3633240f5b501a13772ca507c7b8554b614aed9ffc7ef8fcf36d7a4f782",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_267_One_Day_Audit_Original.json",
+      "bytes": 41672,
+      "sha256": "a2b70224c706afd7f6f49e20c4a6dec8bd52ed434a5e0cb8707baab09eee70b7",
+      "intent": "new_file"
+    },
+    {
+      "name": "Yunshan_ROOT12_267_One_Day_Terminal_Original.save.json",
+      "bytes": 2994874,
+      "sha256": "7cff50b17dfa41e3ec937761588d2254c4eec9f30db869ad0f03d1f89e8d5e5b",
+      "intent": "new_file"
+    },
+    {
+      "name": "开发备忘录.md",
+      "bytes": 386302,
+      "sha256": "eb2da47daf7df433c59fc697e8c562ff93f8995d0397f0408eb91ab0d28e9e29",
+      "intent": "update_existing_memo"
+    }
+  ],
+  "fallback": "Verified source ZIP, original screenshot/report/save copies and six original-ZIP parts are preserved in this Git delivery directory; these are not Library attachments."
+}

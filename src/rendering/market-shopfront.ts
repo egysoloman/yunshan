@@ -110,17 +110,30 @@ export class MarketShopfrontPool {
   private paint(canvas: HTMLCanvasElement, view: MarketShopfrontDescription, style: MarketShopfrontBoard['style']): void {
     const context = canvas.getContext('2d'); if (!context) return;
     const { width, height } = canvas;
-    context.fillStyle = style === 'name' ? '#493529' : '#dfd0a7'; context.fillRect(0, 0, width, height);
-    context.strokeStyle = style === 'name' ? '#c1a66c' : '#6b5038'; context.lineWidth = 6; context.strokeRect(10, 10, width - 20, height - 20);
+    context.fillStyle = style === 'name' ? '#293c36' : '#e6ddc4'; context.fillRect(0, 0, width, height);
+    // Original painted wood/paper artwork. The boards retain the same real
+    // host, .003m surface offset and two reusable textures per market.
+    for (let line = 0; line < height; line += 7) {
+      context.fillStyle = line % 3 ? 'rgba(67,49,28,.025)' : 'rgba(244,228,190,.035)';
+      context.fillRect(0, line, width, 1);
+    }
+    context.strokeStyle = style === 'name' ? '#b79b65' : '#6b725f'; context.lineWidth = 4; context.strokeRect(10, 10, width - 20, height - 20);
+    context.lineWidth = 1; context.strokeRect(17, 17, width - 34, height - 34);
     context.textAlign = 'center'; context.textBaseline = 'middle';
     if (style === 'name') {
-      context.fillStyle = '#e8d9ac'; context.font = '600 54px "Noto Serif CJK SC", serif'; context.fillText(view.name, width / 2, height / 2, width - 72); return;
+      context.fillStyle = '#eee0bd'; context.font = '600 54px "Noto Serif CJK SC", serif'; context.fillText(view.name, width / 2, height / 2, width - 140);
+      context.strokeStyle = '#b79b65';
+      for (const side of [42, width - 42]) { context.strokeRect(side - 10, height / 2 - 10, 20, 20); context.strokeRect(side - 6, height / 2 - 6, 12, 12); }
+      return;
     }
-    context.fillStyle = '#523b2b'; context.font = '600 60px "Noto Serif CJK SC", serif'; context.fillText(view.name, width / 2, 64, width - 72);
-    context.fillStyle = view.status === '营业中' ? '#4d6652' : '#8b4637'; context.font = '600 56px "Noto Serif CJK SC", serif'; context.fillText(view.status, width / 2, 140, width - 72);
-    context.fillStyle = '#493b2d'; context.font = '500 40px "Noto Sans CJK SC", sans-serif'; context.fillText(view.stock, width / 2, 218, width - 72);
-    context.font = '500 38px "Noto Sans CJK SC", sans-serif'; context.fillText(view.operator, width / 2, 290, width - 72);
-    context.fillStyle = '#8b4637'; context.font = '500 38px "Noto Serif CJK SC", serif'; context.fillText(view.listing || '食材买卖 · 市井生活', width / 2, 374, width - 72);
+    context.fillStyle = '#33483d'; context.fillRect(24, 24, width - 48, 86);
+    context.fillStyle = '#eee3c7'; context.font = '600 52px "Noto Serif CJK SC", serif'; context.fillText(view.name, width / 2, 66, width - 90);
+    context.fillStyle = view.status === '营业中' ? '#43634d' : '#914e3e'; context.fillRect(width / 2 - 138, 124, 276, 64);
+    context.fillStyle = '#f4ead0'; context.font = '600 43px "Noto Serif CJK SC", serif'; context.fillText(view.status, width / 2, 156, 244);
+    context.fillStyle = '#493f30'; context.font = '600 41px "Noto Sans CJK SC", sans-serif'; context.fillText(view.stock, width / 2, 230, width - 88);
+    context.fillStyle = '#a69d7d'; context.fillRect(50, 267, width - 100, 1);
+    context.font = '500 36px "Noto Sans CJK SC", sans-serif'; context.fillText(view.operator, width / 2, 306, width - 88);
+    context.fillStyle = '#865040'; context.font = '600 37px "Noto Serif CJK SC", serif'; context.fillText(view.listing || '食材买卖 · 市井生活', width / 2, 385, width - 88);
   }
   private release(id: string): void {
     const entry = this.entries.get(id); if (!entry) return;

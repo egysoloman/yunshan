@@ -1,0 +1,16 @@
+{
+  "status": "SOURCE_AND_BUILD_COPIED_CLEANUP_GUARD_STOPPED",
+  "reason": "An assumption that dist contained only the previous seven-file build was false. Six older generated files were already present. Cleanup assertion stopped before deleting any file.",
+  "runtime264Verified": true,
+  "servedBuild7Verified": true,
+  "deletedFiles": [],
+  "retainedFiles": [
+    "assets/three-DfYROjRC.js",
+    "assets/index-Dm4eMIi9.js",
+    "assets/index-BH8mDJfZ.js.map",
+    "assets/index-Dm4eMIi9.js.map",
+    "assets/index-BH8mDJfZ.js",
+    "assets/three-DfYROjRC.js.map"
+  ],
+  "correctiveAction": "Preserve older files; validate the exact seven files served by the new index separately."
+}

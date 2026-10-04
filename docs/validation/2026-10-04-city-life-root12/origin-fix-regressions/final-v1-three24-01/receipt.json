@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-04T11:12:04.348529+00:00",
+  "endedAt": "2026-10-04T11:17:54.702967+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "../verify-v1-compat.mts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 267,
+  "inputsStable": true,
+  "rawSHA256": "da3f2fe5504e94791c991a35ff073a90eaaa1d627bcfb03140ce96b69872bab5",
+  "ownedPid": 69742,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 69750,
+      "state": "Z",
+      "parent": 1,
+      "group": 69742,
+      "session": 69742,
+      "startTicks": 4314925
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

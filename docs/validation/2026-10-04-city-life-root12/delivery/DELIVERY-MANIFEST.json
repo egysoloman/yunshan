@@ -1,0 +1,930 @@
+{
+  "schemaVersion": 1,
+  "status": "ARCHIVES_VERIFIED_LIBRARY_NOT_ATTEMPTED",
+  "createdAt": "2026-10-04T12:01:12.331629+00:00",
+  "inputCount": 267,
+  "productionSourceCount": 60,
+  "groups": [
+    "ROOT11-integration-20261004-01",
+    "ROOT11-real-door-routes-20261004-01",
+    "ROOT11-street-life-art-20261004-01",
+    "ROOT11-natural-public-school-20261004-01",
+    "ROOT11-food-fiscal-cause-20261004-01",
+    "ROOT12-natural-public-contract-20261004-01",
+    "ROOT12-enable-policy-review-20261004-01",
+    "ROOT12-spawn-occlusion-plan-20261004-01",
+    "ROOT12-food-production-cause-20261004-01",
+    "ROOT12-day-save-body-20261004-01",
+    "ROOT12-integrated-save-origin-20261004-01",
+    "ROOT12-dynamic-city-scope-20261004-01"
+  ],
+  "rootClosureManifest": {
+    "bytes": 6172,
+    "sha256": "1dd1459a77a07bd52362973111e8d6ae6c470890a0e665d399381341dc5aab6c"
+  },
+  "namespaceClosures": [
+    {
+      "namespace": "ROOT11-integration-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "58428dafafece889415aed5604868c960288e1bd4013fb5746985fadee9c5ada",
+        "bytes": 1862
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT11-real-door-routes-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "cbe3120db5a0dde35ec7214bfbf726a42d8d6e06d3bce0a9d32fc2e64331059b",
+        "bytes": 1099
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT11-street-life-art-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "0d30eb75e344240bce3460d48c4b824e321d8f132d5d3b2b1f96831cab979330",
+        "bytes": 1543
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT11-natural-public-school-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "4710f09ad199ec3aa4d0178d2efed4d19629696d9c32b4462066d1ff273ba59c",
+        "bytes": 849
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT11-food-fiscal-cause-20261004-01",
+      "closureEvidence": {
+        "path": "HANDOFF.md",
+        "sha256": "00df126cbb919167cf9b3ce1640356e8fab3e1f06a904d3020ae0b2f1aa7968b",
+        "bytes": 2065
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-natural-public-contract-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "bb44cc2a19c57d9802eb3ea6c1c7f1a62990743583d11b0670e486f2fbf12b15",
+        "bytes": 544
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-enable-policy-review-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "07933a5b97e0624eebd923dde479f098819d3506866007dbb4c5811227bf2a79",
+        "bytes": 607
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-spawn-occlusion-plan-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "aef7b530d897e93b7223c1c1ec78c89ff9810eefba8d2f306160dba35e235ffb",
+        "bytes": 984
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-food-production-cause-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "95e0058939e25e057f309ec947e330e5966f37e1283a5c8f840b62f640c8483f",
+        "bytes": 876
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-day-save-body-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "16896cdc0e26744700e495e39bb8f951e717377a4e5bbb9d05ee12d8b50aae54",
+        "bytes": 952
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-integrated-save-origin-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "eeff179befef1411ed04540260cad37d1e83d71429675d86c5d536500f50c709",
+        "bytes": 1984
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    },
+    {
+      "namespace": "ROOT12-dynamic-city-scope-20261004-01",
+      "closureEvidence": {
+        "path": "CLOSED.json",
+        "sha256": "d1da8dedff7a4ebf0658acfeedc9b0b04661f0f923dba7e337aebd9a66f506e8",
+        "bytes": 1230
+      },
+      "rootExplicitlyClosed": true,
+      "rootDeclaredStatus": "CLOSED_ORIGINAL_RESULTS_PRESERVED"
+    }
+  ],
+  "closedOriginalOwnedScopes": [
+    {
+      "scope": "ROOT11-food-fiscal-cause-20261004-01/rules01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-food-fiscal-cause-20261004-01/rules02",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-food-fiscal-cause-20261004-01/static-c7-read01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-food-fiscal-cause-20261004-01/typecheck01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 1,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-integration-20261004-01/audit1-current01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-integration-20261004-01/build01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-integration-20261004-01/clinical-arrival01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-integration-20261004-01/combined-rules01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-integration-20261004-01/original-browser11-01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/arrival-fix01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/arrival-rules01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/arrival-rules02",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/base-legacy-byte-failure01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/baseline-arrival01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/build01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/default-supply-audit01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/legacy-cause01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-natural-public-school-20261004-01/original-school-rules01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/baseline-head01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 1,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/baseline-head02",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/baseline-replan01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-build05",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-door-reader05",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-legacy-v1-24-05",
+      "historicalReceiptStatus": "TIMEOUT_PARTIAL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-legacy-v1-remaining06",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-native11-remaining06",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/final-native17-05",
+      "historicalReceiptStatus": "TIMEOUT_PARTIAL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/head03",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 1,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/motion03",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/motion04",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/original-reader04",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/replan02",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-real-door-routes-20261004-01/upstream-head04",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/after-gpu01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/after-owned-gpu02",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/before-gpu01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-build01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-build02",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-build03",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-build04",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-build05",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/candidate-cpu01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/final-tests04",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/geometry-equality01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/native-walk-gpu01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/original-food-budget01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/owner-cleanup-tests06",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/palette-tests05",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT11-street-life-art-20261004-01/resource-owner-gpu01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/candidate-first-leg01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/candidate-writer02",
+      "historicalReceiptStatus": "TIMEOUT_PARTIAL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/diagnostic-first-leg03",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/diagnostic01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/diagnostic02",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/final-build01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 3,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/final-native17-01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/final-v1-three24-01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/final-writer-native24-04",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/final-writer-origin03",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/original-writer-fail01",
+      "historicalReceiptStatus": "FAIL",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-day-save-body-20261004-01/reused-root-build01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-integrated-save-origin-20261004-01/audit1-origin-fixed01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 2,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-integrated-save-origin-20261004-01/build-origin-fixed01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 5,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    },
+    {
+      "scope": "ROOT12-integrated-save-origin-20261004-01/original-browser11-01",
+      "historicalReceiptStatus": "PASS",
+      "historicalInputsStable": true,
+      "identifiedOwnerPIDStartTimeRecord": true,
+      "identifiedDescendantPIDStartTimeRecords": 12,
+      "identifiedActiveOwnersAtRead": 0,
+      "unrecognizedHistoricalSchema": false
+    }
+  ],
+  "ownershipCheckScope": "Only recognizable PID/startTicks records are checked against current Linux /proc. Historical receipt schemas are preserved without normalization. The explicit root twelve-namespace closure is the writer gate; no unidentified historical-process claim.",
+  "finalExact267Scopes": [
+    {
+      "role": "build",
+      "path": "ROOT12-integrated-save-origin-20261004-01/build-origin-fixed01/receipt.json",
+      "receiptSHA256": "6f449623bb17b317f13bf242bef4462cd1df05039ab33098eb729786393f8087",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:18:27.384673+00:00",
+      "endedAt": "2026-10-04T11:18:58.820023+00:00",
+      "rawSHA256": "f2d81422d31cbaa6ad1853416d29e93ce7a4d74fa47f7b96633f559e88b2e497",
+      "inputCount": 267,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "role": "natural_one_day",
+      "path": "ROOT12-integrated-save-origin-20261004-01/audit1-origin-fixed01/receipt.json",
+      "receiptSHA256": "d73116cda28dfc47e8ca99998f5f5fcf471e03424ef28a304c4b076859e7476d",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:18:27.394048+00:00",
+      "endedAt": "2026-10-04T11:37:24.352517+00:00",
+      "rawSHA256": "270711edf73015e7bbabf96197c36bffba2d5700d3c35842f398a6c44885a826",
+      "inputCount": 267,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "role": "original_browser_11",
+      "path": "ROOT12-integrated-save-origin-20261004-01/original-browser11-01/receipt.json",
+      "receiptSHA256": "a15b3e94bf3863963f0d27300dc79eb8968559f49c660d750a272b0f0dc39d9d",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:38:13.568325+00:00",
+      "endedAt": "2026-10-04T11:47:08.167964+00:00",
+      "rawSHA256": "dab4b08b0179b78cb82f2fd51580dbc524af2335bfea4e3451b48c065df137c1",
+      "inputCount": 267,
+      "inputsStable": true,
+      "activeDescendants": []
+    }
+  ],
+  "excludedOriginalSymlinks": [
+    {
+      "path": "ROOT11-integration-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-real-door-routes-20261004-01/baseline-source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-real-door-routes-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-real-door-routes-20261004-01/source-v1-as-run/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-real-door-routes-20261004-01/source-v2-as-run/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-street-life-art-20261004-01/baseline-source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-street-life-art-20261004-01/original-food-budget01-source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-street-life-art-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-natural-public-school-20261004-01/baseline-arrival01/source-as-run/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-natural-public-school-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT11-food-fiscal-cause-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT12-day-save-body-20261004-01/baseline/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT12-day-save-body-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT12-day-save-body-20261004-01/source-final/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    },
+    {
+      "path": "ROOT12-integrated-save-origin-20261004-01/source/node_modules",
+      "kind": "symlink",
+      "reason": "node_modules dependency link; not project or evidence bytes"
+    }
+  ],
+  "sourceExcludedEntries": [],
+  "sourceZIP": {
+    "name": "Yunshan_ROOT12_Source_20261004.zip",
+    "bytes": 29785295,
+    "sha256": "37bb4917c0c984652874f5a13988ab145024e1c0a0cf7a5a11604b8844889194",
+    "scope": "267 exact installed inputs plus current project instructions, memo, requirement matrix, reference originals, ROOT11 and ROOT12 proof documents/screenshots; no dependency links or previous delivery ZIP/parts.",
+    "memberCount": 401,
+    "originalFileCount": 400,
+    "payloadBytes": 52127624,
+    "allMemberSHA256AndCRCVerified": true,
+    "credentialPatternMatches": 0,
+    "credentialScanScope": "Tripo-style tsk, GitHub token, and AWS access-ID patterns over literal uncompressed ZIP payload members. Nested ZIP/gzip contents are not recursively decompressed. This is not a general security audit."
+  },
+  "originalZIP": {
+    "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip",
+    "bytes": 353283217,
+    "sha256": "19c1d6593d8f77e94157a8f68c0a429e11123e378eadcb82079c2193700b2416",
+    "scope": "Twelve named ROOT11/ROOT12 namespaces as literal regular-file originals at this root-closed publication cut; includes all FAIL/TIMEOUT records, original drivers, source-as-run, dist, saves, and raw PNGs. Does not recover unrelated historical missing source bytes or claim complete game delivery.",
+    "memberCount": 8617,
+    "originalFileCount": 8616,
+    "payloadBytes": 1030932313,
+    "allMemberSHA256AndCRCVerified": true,
+    "credentialPatternMatches": 0,
+    "credentialScanScope": "Tripo-style tsk, GitHub token, and AWS access-ID patterns over literal uncompressed ZIP payload members. Nested ZIP/gzip contents are not recursively decompressed. This is not a general security audit."
+  },
+  "parts": [
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part01",
+      "bytes": 67108864,
+      "sha256": "a3abcff640442ca67febfac435c5d6be17ee48a3903f40db8d6c68ce7d86661f"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part02",
+      "bytes": 67108864,
+      "sha256": "c1f4edd5bab1c1d4aa8a991f413002289aa592c6d4ec6822fa2177375e5d232c"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part03",
+      "bytes": 67108864,
+      "sha256": "20c908f737f5553ea98941b9f4f987a35340e92fc066794321b0ee0eb8943631"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part04",
+      "bytes": 67108864,
+      "sha256": "b26f9c6d80438241b43b0642abcdc5829b1be0644a5873958c6efaa123b6bea9"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part05",
+      "bytes": 67108864,
+      "sha256": "eec91f58d4e19b008bc8d148cfd51cd1499aac4f66f42e5d4bba3da268b503c2"
+    },
+    {
+      "name": "Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip.part06",
+      "bytes": 17738897,
+      "sha256": "cf7dd73b221cee1fd1201089772c92836a68fd9879a4c9ba9c3ed0ecbbbf0fb5"
+    }
+  ],
+  "partBytes": 67108864,
+  "concatenatedPartsSHA256Verified": true,
+  "allSourceAndOriginalFileSetsAndIdentitiesStable": true,
+  "sourceFilemap": {
+    "name": "SOURCE-FILEMAP.json",
+    "bytes": 72280,
+    "sha256": "720620bb857a5b1e108cae184263048bbfd71fe6edb057e39f79b554d05e5a43"
+  },
+  "originalFilemap": {
+    "name": "ORIGINALS-FILEMAP.json",
+    "bytes": 1824670,
+    "sha256": "b017bbdcf14708036e235a61c0185a4086796ab1713ec2622faad39767b8a9ad"
+  },
+  "publicVerifier": {
+    "name": "restore-and-verify.py",
+    "bytes": 12771,
+    "sha256": "6b8bb976f152132f6b3e47cf64bb576ff3469fa930757009a50fd511c56a8cda"
+  },
+  "historicalMissingSources": {
+    "scopeCount": 34,
+    "uniquePathAndSHACount": 25,
+    "status": "NOT_RECOVERED_BY_THIS_BATCH"
+  },
+  "nestedArchiveContents": "Preserved as literal bytes; no recursive nested ZIP/gzip verification claim.",
+  "completeGoal": false,
+  "library": {
+    "status": "NOT_ATTEMPTED",
+    "createdLibraryIDs": []
+  },
+  "git": {
+    "status": "NOT_ATTEMPTED"
+  }
+}

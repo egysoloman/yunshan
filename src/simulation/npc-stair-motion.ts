@@ -157,7 +157,7 @@ export class NpcStairMotion {
       if (Math.min(a.x, z.x) > margin || Math.max(a.x, z.x) < -margin || Math.min(a.z, z.z) > margin || Math.max(a.z, z.z) < -margin) continue;
       const height = b.height / b.floors;
       if (!(height > 0) || !Number.isFinite(height)) continue;
-      if (Math.min(a.y, z.y) > b.height + .5 || Math.max(a.y, z.y) < -(b.basements ?? 0) * height - .5) continue;
+      if (Math.min(a.y, z.y) > b.height + .5 || Math.max(a.y, z.y) + EYE_HEIGHT < -(b.basements ?? 0) * height - .5) continue;
       const low = Math.round(Math.min(a.y, z.y) / height) - 1, high = Math.round(Math.max(a.y, z.y) / height) + 1;
       const floors = Array.from({ length: Math.min(7, Math.max(0, high - low + 1)) }, (_, i) => low + i);
       // A cached legacy leg near an unmarked body must notice that this body

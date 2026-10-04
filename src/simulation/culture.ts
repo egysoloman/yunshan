@@ -3,7 +3,7 @@ import { closeServiceSupplementalBudgets, proposeSupplementalBudget, reviewSuppl
 import { canAccessFloor } from '../access';
 import { FLOOR_PLAN_PROFILE, getBuildingBody, getBuildingUsePoints, floorPlanSupport, blocksFloorPlanMovement } from '../architecture-floor-plan';
 import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
-import { applyPublicEducationCredential, educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, takeEducationSlot } from './education';
+import { applyPublicEducationCredential, educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, publicEducationMinutes, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
@@ -183,9 +183,10 @@ export function installCulture(simulation: Simulation): void {
       }
       if (order.topic === 'education') {
         const teachers = staff.filter(teacher => educationPairAtStation(simulation, site, teacher, id) && educationSlotAvailable(simulation, teacher.id, id));
-        credit = Math.min(rule.minutes - (order.serviceMinutes[id] ?? 0), actorActivityAvailable(simulation, id, minutes), Math.max(0, ...teachers.map(teacher => educationStaffMinutes(simulation, teacher, site.id, minutes))));
+        const earliest = Math.max(order.scheduledAt, order.approvedAt ?? order.scheduledAt, order.receipts[0]?.purchasedAt ?? order.scheduledAt);
+        credit = Math.min(rule.minutes - (order.serviceMinutes[id] ?? 0), actorActivityAvailable(simulation, id, minutes), Math.max(0, ...teachers.map(teacher => publicEducationMinutes(simulation, teacher, site.id, id, minutes, earliest))));
         if (credit <= 0) continue;
-        const teacher = teachers.find(teacher => educationStaffMinutes(simulation, teacher, site.id, minutes) >= credit - 1e-7)!;
+        const teacher = teachers.find(teacher => publicEducationMinutes(simulation, teacher, site.id, id, minutes, earliest) >= credit - 1e-7)!;
         const claimed = claimActorActivityMinutes(simulation, id, `public-education:${order.id}`, credit, minutes);
         if (claimed !== credit || !takeEducationSlot(simulation, teacher.id, id)) continue;
       }

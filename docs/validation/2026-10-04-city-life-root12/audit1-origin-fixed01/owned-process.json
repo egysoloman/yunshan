@@ -1,0 +1,21 @@
+{
+  "pid": 69957,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "1",
+    "--out",
+    "artifacts/root12-current-one-day-origin-fixed.json"
+  ],
+  "identity": {
+    "pid": 69957,
+    "state": "R",
+    "parent": 69951,
+    "group": 69957,
+    "session": 69957,
+    "startTicks": 4353201
+  }
+}

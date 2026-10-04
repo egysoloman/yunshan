@@ -1,0 +1,40 @@
+{
+  "startedAt": "2026-10-04T11:12:02.902299+00:00",
+  "endedAt": "2026-10-04T11:21:19.422069+00:00",
+  "argv": [
+    "env",
+    "YUNSHAN_NPC_OLD_READER=/workspace/yunshan-work/ROOT09-npc-tread-motion-20261004-01/baseline/src/simulation.ts",
+    "YUNSHAN_NPC_NATIVE_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/native",
+    "YUNSHAN_NPC_ACTIVITY_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/activity",
+    "YUNSHAN_STAIR_ORIGIN_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/origin",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/npc-stair-native.test.ts",
+    "tests/npc-stair-native-activity.test.ts",
+    "tests/stair-escape-origin.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 267,
+  "inputsStable": true,
+  "rawSHA256": "d18258569e841a241c7b157dc7ee375352f39d69c8d87a19c74007d223162a80",
+  "ownedPid": 69715,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 69723,
+      "state": "Z",
+      "parent": 1,
+      "group": 69715,
+      "session": 69715,
+      "startTicks": 4314772
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

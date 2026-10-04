@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-10-04T11:18:27.394048+00:00",
+  "endedAt": "2026-10-04T11:37:24.352517+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "1",
+    "--out",
+    "artifacts/root12-current-one-day-origin-fixed.json"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 267,
+  "inputsStable": true,
+  "rawSHA256": "270711edf73015e7bbabf96197c36bffba2d5700d3c35842f398a6c44885a826",
+  "ownedPid": 69957,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 69984,
+      "state": "Z",
+      "parent": 1,
+      "group": 69957,
+      "session": 69957,
+      "startTicks": 4353447
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}
