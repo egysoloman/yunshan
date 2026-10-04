@@ -1,7 +1,7 @@
 {
-  "at": "2026-10-04T04:11:19.135832+00:00",
+  "at": "2026-10-04T04:20:52.912549+00:00",
   "producer": "/root",
-  "status": "VERIFIED_LOCAL_AND_GIT_FILES_READY_LIBRARY_FAILED",
+  "status": "CONTENT_COMMIT_PUSH_VERIFIED_LIBRARY_FAILED",
   "currentSource": "ROOT08/244 inputs/55 src",
   "currentSourceValidation": {
     "newStairCases": 7,
@@ -179,13 +179,29 @@
   },
   "git": {
     "branch": "takeover-city-life",
-    "status": "PENDING_COMMIT_PUSH",
+    "status": "CONTENT_COMMIT_PUSH_VERIFIED",
     "mainBefore": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
     "lastRemoteWorkBranchBefore": "3ca77b861bc8a2c33820b49396ad788e7d94e137",
     "forcePush": false,
     "PR": false,
     "mergeMain": false,
-    "deploy": false
+    "deploy": false,
+    "contentCommit": "9f1d9dc451ac31b64d31a312c6067fa41b79ecbf",
+    "pushExitCode": 0,
+    "remoteReadbackEqual": true,
+    "mainUnchanged": true,
+    "verifiedMain": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "receiptOnlySupplement": "Next commit adds48 already-archived selected originals and actual publication receipts; runtime unchanged"
   },
-  "completeGoal": false
+  "completeGoal": false,
+  "gitBlobVerification": {
+    "at": "2026-10-04T04:18:32.139725+00:00",
+    "status": "GIT_INDEX_BLOBS_BYTE_EXACT",
+    "files": 315,
+    "bytesChecked": 1238998167,
+    "shaMismatches": [],
+    "covers": "Current244 inputs, all copied original PNG/SVG/PDF/ZIP and18 original archive parts, true terminal save",
+    "initialCommitVerificationFailure": "The first query included48 intended metadata/PNG copies ignored by nested artifacts/ rule; preserve full collection, force-stage only selected validation originals then independently reverify",
+    "runtimeChanges": false
+  }
 }

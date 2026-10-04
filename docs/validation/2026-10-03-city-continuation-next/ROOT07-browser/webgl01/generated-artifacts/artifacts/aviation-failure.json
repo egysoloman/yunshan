@@ -1,0 +1,271 @@
+{
+  "stage": "military original sixty-second native return and exit",
+  "tick": 122,
+  "paused": false,
+  "speed": 1,
+  "hour": 10.316666666666666,
+  "energy": 65.4185826098525,
+  "weather": "晴",
+  "visibility": 1,
+  "player": {
+    "position": {
+      "x": 1160,
+      "y": 78.9000000000015,
+      "z": 834.2
+    },
+    "role": "driver",
+    "identities": [
+      "traveler",
+      "driver",
+      "soldier"
+    ],
+    "money": 588.0685714285714,
+    "reputation": 0,
+    "needs": {
+      "hunger": 98.80999999999935,
+      "fatigue": 89.31600000000083,
+      "social": 69.54399999999998,
+      "fun": 69.65799999999956
+    },
+    "inventory": {
+      "block": 32,
+      "food": 0,
+      "driving": 0
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "mode": "jet",
+  "controllerPosition": {
+    "x": 1160,
+    "y": 78.9000000000015,
+    "z": 834.2
+  },
+  "floor": 0,
+  "aviation": {
+    "version": 1,
+    "activeAircraftId": "aircraft-air-pad-military",
+    "controls": {
+      "forward": 0,
+      "strafe": 0,
+      "climb": 0,
+      "yaw": -3.141592653589793,
+      "pitch": 0,
+      "speed": 145,
+      "boost": false
+    },
+    "stats": {
+      "rentals": 0,
+      "flights": 1,
+      "landings": 0,
+      "fees": 0
+    },
+    "aircraft": [
+      {
+        "id": "aircraft-air-pad-river",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-river",
+        "padId": "air-pad-river",
+        "position": {
+          "x": -730,
+          "y": 19.200000000000003,
+          "z": 980
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-market",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-market",
+        "padId": "air-pad-market",
+        "position": {
+          "x": -330,
+          "y": 52.775000000000006,
+          "z": 470
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-workshop",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-workshop",
+        "padId": "air-pad-workshop",
+        "position": {
+          "x": -1180,
+          "y": 143.74098360655736,
+          "z": 210
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-west",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-west",
+        "padId": "air-pad-west",
+        "position": {
+          "x": -1072.9289321881345,
+          "y": 268.6819815999854,
+          "z": -542.9289321881346
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-academy",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-academy",
+        "padId": "air-pad-academy",
+        "position": {
+          "x": -370,
+          "y": 206.58823529411765,
+          "z": -400
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-government",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-government",
+        "padId": "air-pad-government",
+        "position": {
+          "x": 507.0710678118655,
+          "y": 323.6928932188135,
+          "z": -702.9289321881346
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-core",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-core",
+        "padId": "air-pad-core",
+        "position": {
+          "x": 407.0710678118655,
+          "y": 254.14119890927873,
+          "z": -152.92893218813452
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-summit",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-summit",
+        "padId": "air-pad-summit",
+        "position": {
+          "x": -50,
+          "y": 526.2495412844038,
+          "z": -1250
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-east",
+        "name": "云游载人无人机",
+        "kind": "drone",
+        "homePadId": "air-pad-east",
+        "padId": "air-pad-east",
+        "position": {
+          "x": 1120,
+          "y": 190.3111111111111,
+          "z": -280
+        },
+        "yaw": 0,
+        "pitch": 0,
+        "speed": 0,
+        "battery": 100,
+        "status": "parked",
+        "reserved": false,
+        "charging": false,
+        "landingPadId": null
+      },
+      {
+        "id": "aircraft-air-pad-military",
+        "name": "青隼垂直起降战机",
+        "kind": "jet",
+        "homePadId": "air-pad-military",
+        "padId": null,
+        "position": {
+          "x": 1160,
+          "y": 78.6000000000015,
+          "z": 834.2
+        },
+        "yaw": -3.141592653589793,
+        "pitch": 0,
+        "speed": 11.999999999999886,
+        "battery": 98.902514013903,
+        "status": "landing",
+        "reserved": true,
+        "charging": false,
+        "landingPadId": "air-pad-military"
+      }
+    ]
+  },
+  "notice": "自动返航至南岫机场飞行勤务机坪。请等待真实进近与落地。",
+  "fps": 0
+}
