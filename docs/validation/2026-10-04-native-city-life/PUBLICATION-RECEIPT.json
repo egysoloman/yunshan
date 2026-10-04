@@ -1,0 +1,35 @@
+{
+  "observedAt": "2026-10-04T09:04:11.036055+00:00",
+  "status": "VERIFIED_WORK_BRANCH_PUBLICATION",
+  "implementationCommit": "ceb8efe3fc693fd1619eed0e6a526eebb9dc146a",
+  "remoteRef": "refs/heads/takeover-city-life",
+  "remoteReadBack": "ceb8efe3fc693fd1619eed0e6a526eebb9dc146a",
+  "mainReadBack": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+  "mainChanged": false,
+  "previousMZPlanDocsCommit": "8c76579b30ffd90b8c18ca3493683f3d9723ccda",
+  "runtimeInputs": 258,
+  "productionSourceFiles": 59,
+  "originalInputChanges": 32,
+  "workingTreeAtImplementationCommit": "CLEAN",
+  "originalArchive": {
+    "bytes": 504545705,
+    "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+    "gitParts": 8,
+    "members": 11562,
+    "independentVerification": "PASS"
+  },
+  "sourceZip": {
+    "bytes": 20949354,
+    "sha256": "8e1df9dfac9938a0c5082994158a426748e5ec2334253d56ac51ac4e4a283f73"
+  },
+  "serverLargeFileAdvice": "Accepted all8 parts;7 parts64MiB exceed recommended50MB but below hard100MB. No LFS/security change made.",
+  "library": {
+    "status": "FAILED_BEFORE_PREPARE_CONNECTION",
+    "newIDs": [],
+    "memoReplaced": false,
+    "retryOrAlternativeRoute": false
+  },
+  "prMergeDeployment": false,
+  "completeGoal": false,
+  "receiptScope": "Records exact implementation publication; a later documentation-only commit may record this receipt without altering frozen runtime."
+}
