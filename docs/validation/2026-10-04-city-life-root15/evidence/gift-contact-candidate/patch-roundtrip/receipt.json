@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "patch",
+    "--batch",
+    "-p1",
+    "--input",
+    "/workspace/yunshan-work/ROOT15-gift-contact-candidate-20261004-01/gift-contact-candidate.patch"
+  ],
+  "exitCode": 0,
+  "inputs": 322,
+  "exactFinalSource": true,
+  "productionFiles": 3,
+  "testFiles": 2,
+  "sharedTouched": false,
+  "gitMutations": false,
+  "patchSHA256": "e61c158fa634253ed422891274bbbed03885404e6632f9e1533b628d58a51e50",
+  "productionPatchSHA256": "ab1d2a8c89dc95c65569d2a484a6dd372ef7719d9752e09d2d81d5b942d82fe8",
+  "graph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+}

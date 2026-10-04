@@ -1,0 +1,95 @@
+[
+  {
+    "tick": 1534,
+    "clock": 6616,
+    "requestId": "service-1-supplement-1",
+    "actualCurrentPaid": [
+      {
+        "signatureVersion": 2,
+        "actorId": "citizen-22",
+        "role": "council",
+        "siteId": "civic-0-hall",
+        "floor": 0,
+        "pointId": "0:program:work",
+        "position": {
+          "x": 96,
+          "y": 0.6,
+          "z": -13
+        },
+        "signedAt": 6616,
+        "profession": {
+          "baseRole": "官员",
+          "workId": "civic-0-hall",
+          "employmentRevision": 0
+        },
+        "authority": {
+          "version": 1,
+          "kind": "local-council-term",
+          "ruleId": "civic-local-v1",
+          "enablementId": "civic-new-20261004-6de6b060",
+          "actorId": "citizen-22",
+          "officeId": "civic-0-hall",
+          "districtId": "civic-0",
+          "baseRole": "官员",
+          "electionId": "civic-poll-1",
+          "termId": "civic-term-1",
+          "proofId": "civic-proof-1",
+          "signedAt": 6616,
+          "startsAt": 3460,
+          "endsAt": 23620
+        },
+        "paid": {
+          "tick": 1534,
+          "startAt": 6612,
+          "endAt": 6616,
+          "minutes": 4,
+          "ratePerMinute": 0.0966546666666666,
+          "earned": 0.3866186666666664
+        }
+      },
+      {
+        "signatureVersion": 2,
+        "actorId": "citizen-418",
+        "role": "council",
+        "siteId": "civic-0-hall",
+        "floor": 2,
+        "pointId": "2:program:work",
+        "position": {
+          "x": 96,
+          "y": 8.2,
+          "z": -13
+        },
+        "signedAt": 6616,
+        "profession": {
+          "baseRole": "官员",
+          "workId": "civic-0-hall",
+          "employmentRevision": 0
+        },
+        "authority": {
+          "version": 1,
+          "kind": "local-council-term",
+          "ruleId": "civic-local-v1",
+          "enablementId": "civic-new-20261004-6de6b060",
+          "actorId": "citizen-418",
+          "officeId": "civic-0-hall",
+          "districtId": "civic-0",
+          "baseRole": "官员",
+          "electionId": "civic-poll-12",
+          "termId": "civic-term-12",
+          "proofId": "civic-proof-224",
+          "signedAt": 6616,
+          "startsAt": 6344,
+          "endsAt": 26504
+        },
+        "paid": {
+          "tick": 1534,
+          "startAt": 6612,
+          "endAt": 6616,
+          "minutes": 4,
+          "ratePerMinute": 0.0966546666666666,
+          "earned": 0.3866186666666664
+        }
+      }
+    ]
+  }
+]

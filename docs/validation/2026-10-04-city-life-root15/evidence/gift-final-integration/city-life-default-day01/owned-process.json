@@ -1,0 +1,23 @@
+{
+  "pid": 125456,
+  "argv": [
+    "npm",
+    "run",
+    "audit:economy",
+    "--",
+    "--days",
+    "1",
+    "--product-recipe",
+    "city-life-v1",
+    "--out",
+    "artifacts/root15-current-default-day.json"
+  ],
+  "identity": {
+    "pid": 125456,
+    "state": "R",
+    "parent": 125453,
+    "group": 125456,
+    "session": 125456,
+    "startTicks": 8304944
+  }
+}

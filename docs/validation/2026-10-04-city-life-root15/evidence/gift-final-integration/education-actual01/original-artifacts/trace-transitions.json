@@ -1,0 +1,4620 @@
+[
+  {
+    "tick": 1468,
+    "clock": 6352,
+    "treasury": 60065.08931367756,
+    "budget": {
+      "cash": 60065.08931367756,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 2636.69014487592,
+      "forecastPayroll": 10117.324800000004,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 17559.582944875925,
+      "authorizedRemaining": 38.614739506818196,
+      "available": 42466.89162929482
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 1.3852604931818038,
+      "receivedUnits": 0.14943478890850095,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        }
+      ],
+      "retryAt": 6412,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.27,
+          "costWindowUnits": 0.2490226443121728,
+          "earnedLaborCost": 1.8449866666666668,
+          "actualUtilities": 0.2777777777777778
+        },
+        "cash": 461.5867896356275,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1471,
+    "clock": 6364,
+    "treasury": 60068.917557104054,
+    "budget": {
+      "cash": 60068.917557104054,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 2840.4090195425865,
+      "forecastPayroll": 10116.756480000005,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 17762.73349954259,
+      "authorizedRemaining": 37.228594888876096,
+      "available": 42268.95546267259
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 2.771405111123906,
+      "receivedUnits": 0.2989649526563006,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        }
+      ],
+      "retryAt": 6424,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.27,
+          "costWindowUnits": 0.3985528080599724,
+          "earnedLaborCost": 2.9519786666666668,
+          "actualUtilities": 0.4444444444444444
+        },
+        "cash": 462.69537601746754,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1474,
+    "clock": 6376,
+    "treasury": 60077.29225391655,
+    "budget": {
+      "cash": 60077.29225391655,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 3068.44384087592,
+      "forecastPayroll": 10116.61824000001,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 17990.63008087593,
+      "authorizedRemaining": 35.842660122078414,
+      "available": 42050.81951291854
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 4.157339877921589,
+      "receivedUnits": 0.44863393395194673,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        }
+      ],
+      "retryAt": 6436,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.26,
+          "costWindowUnits": 0.5482217893556185,
+          "earnedLaborCost": 4.058970666666666,
+          "actualUtilities": 0.611111111111111
+        },
+        "cash": 463.80376933625473,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1477,
+    "clock": 6388,
+    "treasury": 60081.93345204677,
+    "budget": {
+      "cash": 60081.93345204677,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 3296.693702209255,
+      "forecastPayroll": 10116.049920000009,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 18218.311622209265,
+      "authorizedRemaining": 34.45504992814204,
+      "available": 41829.16677990936
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 5.544950071857959,
+      "receivedUnits": 0.5984838469040386,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        }
+      ],
+      "retryAt": 6448,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.26,
+          "costWindowUnits": 0.6980717023077103,
+          "earnedLaborCost": 5.165962666666666,
+          "actualUtilities": 0.7777777777777777
+        },
+        "cash": 464.9137040480095,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1480,
+    "clock": 6400,
+    "treasury": 60085.131015625084,
+    "budget": {
+      "cash": 60085.131015625084,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 3532.837238209256,
+      "forecastPayroll": 10115.266559999998,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 18453.671798209252,
+      "authorizedRemaining": 33.06689439738131,
+      "available": 41598.39232301845
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 6.933105602618687,
+      "receivedUnits": 0.7485547150943875,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        }
+      ],
+      "retryAt": 6460,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.25,
+          "costWindowUnits": 0.8481425704980593,
+          "earnedLaborCost": 6.272954666666666,
+          "actualUtilities": 0.9444444444444443
+        },
+        "cash": 466.0241404696427,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1483,
+    "clock": 6412,
+    "treasury": 60091.07962297901,
+    "budget": {
+      "cash": 60091.07962297901,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 3756.4916008759214,
+      "forecastPayroll": 10114.913280000008,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 18676.97288087593,
+      "authorizedRemaining": 31.676343184075535,
+      "available": 41382.430398919
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 8.323656815924467,
+      "receivedUnits": 0.8988845759923096,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        }
+      ],
+      "retryAt": 6472,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.25,
+          "costWindowUnits": 0.9984724313959814,
+          "earnedLaborCost": 7.379946666666666,
+          "actualUtilities": 1.111111111111111
+        },
+        "cash": 467.13678091921736,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1486,
+    "clock": 6424,
+    "treasury": 60094.7220771799,
+    "budget": {
+      "cash": 60094.7220771799,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 3953.5687688759213,
+      "forecastPayroll": 10114.129920000016,
+      "reservedPayroll": 0,
+      "essentialOperations": 4805.567999999999,
+      "reserve": 18873.266688875934,
+      "authorizedRemaining": 30.28457862639348,
+      "available": 41191.17080967757
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 9.715421373606521,
+      "receivedUnits": 1.0495084458713198,
+      "consumedUnits": 0,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [],
+      "serviceMinutes": {},
+      "staffIds": [],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        }
+      ],
+      "retryAt": 6484,
+      "completedAt": null,
+      "lastReason": "材料已实际入库1.05份；尚缺4.95份，服务仍须人员和参与者现场投入时间。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 9.24,
+          "costWindowUnits": 1.1490963012749915,
+          "earnedLaborCost": 8.486938666666665,
+          "actualUtilities": 1.2777777777777777
+        },
+        "cash": 468.2505376456182,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1501,
+    "clock": 6484,
+    "treasury": 60091.668173899656,
+    "budget": {
+      "cash": 60091.668173899656,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 5035.62025687592,
+      "forecastPayroll": 10110.643199999999,
+      "reservedPayroll": 0,
+      "essentialOperations": 4442.688,
+      "reserve": 19588.95145687592,
+      "authorizedRemaining": 22.533002637455038,
+      "available": 40480.18371438628
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "awaitingSupply",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 17.466997362544962,
+      "receivedUnits": 1.9646886098546066,
+      "consumedUnits": 1,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 56,
+        "citizen-440": 56
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        }
+      ],
+      "retryAt": 6544,
+      "completedAt": null,
+      "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.47,
+          "costWindowUnits": 4.449790252038515,
+          "earnedLaborCost": 32.542710882246425,
+          "actualUtilities": 2.111111111111111
+        },
+        "cash": 493.7398824755723,
+        "protectedCash": 374.9012906666667
+      }
+    ]
+  },
+  {
+    "tick": 1504,
+    "clock": 6496,
+    "treasury": 60086.974633001584,
+    "budget": {
+      "cash": 60086.974633001584,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 5241.692310209251,
+      "forecastPayroll": 10109.859840000006,
+      "reservedPayroll": 0,
+      "essentialOperations": 4442.688,
+      "reserve": 19794.240150209258,
+      "authorizedRemaining": 13.088170360541781,
+      "available": 40279.64631243178
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 26.91182963945822,
+      "receivedUnits": 3.091756900655711,
+      "consumedUnits": 1,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 56,
+        "citizen-440": 56
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        }
+      ],
+      "retryAt": 6556,
+      "completedAt": null,
+      "lastReason": "材料已实际入库3.09份；尚缺2.91份，服务仍须人员和参与者现场投入时间。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.38,
+          "costWindowUnits": 5.576858542839619,
+          "earnedLaborCost": 40.69872463302195,
+          "actualUtilities": 2.2777777777777777
+        },
+        "cash": 502.2624615036658,
+        "protectedCash": 374.9012906666667
+      }
+    ]
+  },
+  {
+    "tick": 1505,
+    "clock": 6500,
+    "treasury": 60086.974633001584,
+    "budget": {
+      "cash": 60086.974633001584,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 5317.538800875918,
+      "forecastPayroll": 10109.859840000006,
+      "reservedPayroll": 0,
+      "essentialOperations": 4442.688,
+      "reserve": 19870.086640875925,
+      "authorizedRemaining": 13.088170360541781,
+      "available": 40203.79982176512
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 26.91182963945822,
+      "receivedUnits": 3.091756900655711,
+      "consumedUnits": 2,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 56
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        }
+      ],
+      "retryAt": 6556,
+      "completedAt": null,
+      "lastReason": "现场履约中；2人完成，余1.1份材料。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.96,
+          "costWindowUnits": 5.576858542839619,
+          "earnedLaborCost": 43.65070329968862,
+          "actualUtilities": 2.2777777777777777
+        },
+        "cash": 502.2624615036658,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1519,
+    "clock": 6556,
+    "treasury": 60078.48170353656,
+    "budget": {
+      "cash": 60078.48170353656,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 6264.76882585807,
+      "forecastPayroll": 10108.738559999996,
+      "reservedPayroll": 0,
+      "essentialOperations": 4209.407999999999,
+      "reserve": 20582.915385858065,
+      "authorizedRemaining": 3.049034972579676,
+      "available": 39492.51728270592
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 36.950965027420324,
+      "receivedUnits": 4.33422415164112,
+      "consumedUnits": 2,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 56
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        }
+      ],
+      "retryAt": 6616,
+      "completedAt": null,
+      "lastReason": "材料已实际入库4.33份；尚缺1.67份，服务仍须人员和参与者现场投入时间。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.08,
+          "costWindowUnits": 11.353064090424418,
+          "earnedLaborCost": 81.65742863302196,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 547.8278191647224,
+        "protectedCash": 374.9012906666666
+      }
+    ]
+  },
+  {
+    "tick": 1526,
+    "clock": 6584,
+    "treasury": 60095.751096497006,
+    "budget": {
+      "cash": 60095.751096497006,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 6755.4512791914,
+      "forecastPayroll": 10110.63935999999,
+      "reservedPayroll": 0,
+      "essentialOperations": 4142.0160000000005,
+      "reserve": 21008.10663919139,
+      "authorizedRemaining": 3.049034972579676,
+      "available": 39084.59542233304
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 36.950965027420324,
+      "receivedUnits": 4.33422415164112,
+      "consumedUnits": 3,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 15.261176126463397
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        }
+      ],
+      "retryAt": 6616,
+      "completedAt": null,
+      "lastReason": "现场履约中；3人完成，余1.3份材料。"
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.2,
+          "costWindowUnits": 13.341339638260143,
+          "earnedLaborCost": 97.89331129968865,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 564.4104882528903,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1534,
+    "clock": 6616,
+    "treasury": 60158.21366492649,
+    "budget": {
+      "cash": 60158.21366492649,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 7286.368911191407,
+      "forecastPayroll": 10123.718400000003,
+      "reservedPayroll": 0,
+      "essentialOperations": 4105.728,
+      "reserve": 21515.81531119141,
+      "authorizedRemaining": 11,
+      "available": 38631.39835373507
+    },
+    "publicSupply": 0.4981404806608039,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 4.7192033148456245,
+      "consumedUnits": 3,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 47.2611761264634,
+        "citizen-561": 31.261176126463397,
+        "citizen-297": 27.190476190476147,
+        "citizen-231": 19.190476190476147,
+        "citizen-308": 15.190476190476147,
+        "citizen-484": 15.190476190476147,
+        "citizen-572": 7.261176126463397
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        }
+      ],
+      "retryAt": 6616,
+      "completedAt": null,
+      "lastReason": "材料已实际入库4.72份；尚缺1.28份，服务仍须人员和参与者现场投入时间。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 0,
+          "receiptIds": [],
+          "closedAt": null,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 7.92,
+          "costWindowUnits": 16.18877426102899,
+          "earnedLaborCost": 115.24127167675242,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 588.0353159204489,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1538,
+    "clock": 6632,
+    "treasury": 60173.51569403676,
+    "budget": {
+      "cash": 60173.51569403676,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 7572.645640469552,
+      "forecastPayroll": 10126.321919999998,
+      "reservedPayroll": 0,
+      "essentialOperations": 4121.28,
+      "reserve": 21820.24756046955,
+      "authorizedRemaining": 11,
+      "available": 38342.26813356721
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 4.7192033148456245,
+      "consumedUnits": 4,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440",
+        "citizen-165"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 60,
+        "citizen-561": 43.2611761264634,
+        "citizen-297": 39.19047619047615,
+        "citizen-231": 31.190476190476147,
+        "citizen-308": 27.190476190476147,
+        "citizen-484": 27.190476190476147,
+        "citizen-572": 19.261176126463397,
+        "citizen-506": 3.190476190476147
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        }
+      ],
+      "retryAt": 6680,
+      "completedAt": null,
+      "lastReason": "现场履约中；4人完成，余0.7份材料。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 0,
+          "receiptIds": [],
+          "closedAt": null,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.11,
+          "costWindowUnits": 16.47486524811523,
+          "earnedLaborCost": 120.30971317315516,
+          "actualUtilities": 2.4999999999999996
+        },
+        "cash": 595.9497125974316,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1540,
+    "clock": 6640,
+    "treasury": 60173.35022351714,
+    "budget": {
+      "cash": 60173.35022351714,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 7698.908641761785,
+      "forecastPayroll": 10126.26432000001,
+      "reservedPayroll": 0,
+      "essentialOperations": 4121.28,
+      "reserve": 21946.45296176179,
+      "authorizedRemaining": 2.4741452162914435,
+      "available": 38224.42311653906
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 5.8264571828597225,
+      "consumedUnits": 4,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440",
+        "citizen-165"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 60,
+        "citizen-561": 43.2611761264634,
+        "citizen-297": 39.19047619047615,
+        "citizen-231": 31.190476190476147,
+        "citizen-308": 27.190476190476147,
+        "citizen-484": 27.190476190476147,
+        "citizen-572": 19.261176126463397,
+        "citizen-506": 3.190476190476147
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        },
+        {
+          "paid": 8.525854783708557,
+          "quantity": 1.1072538680140982,
+          "tax": 0.6820683826966842,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1072538680140982,
+              "gross": 8.525854783708557,
+              "net": 7.843786401011872,
+              "unitPrice": 7.7
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-12",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6640
+        }
+      ],
+      "retryAt": 6700,
+      "completedAt": null,
+      "lastReason": "材料已实际入库5.83份；尚缺0.17份，服务仍须人员和参与者现场投入时间。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 8.525854783708557,
+          "receiptIds": [
+            "service-1:receipt-12"
+          ],
+          "closedAt": null,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 7.7,
+          "costWindowUnits": 17.582119116129327,
+          "earnedLaborCost": 121.78570250648849,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 603.6268323317769,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1545,
+    "clock": 6660,
+    "treasury": 60214.00135516422,
+    "budget": {
+      "cash": 60214.00135516422,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 8011.292884692247,
+      "forecastPayroll": 10131.260160000002,
+      "reservedPayroll": 0,
+      "essentialOperations": 3981.3120000000004,
+      "reserve": 22123.86504469225,
+      "authorizedRemaining": 2.4741452162914435,
+      "available": 38087.66216525567
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 5.8264571828597225,
+      "consumedUnits": 5,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440",
+        "citizen-165",
+        "citizen-561"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 60,
+        "citizen-561": 60,
+        "citizen-297": 59.19047619047615,
+        "citizen-231": 51.19047619047615,
+        "citizen-308": 47.19047619047615,
+        "citizen-484": 47.19047619047615,
+        "citizen-572": 35.2611761264634,
+        "citizen-506": 23.190476190476147,
+        "citizen-110": 11.642128507415691
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        },
+        {
+          "paid": 8.525854783708557,
+          "quantity": 1.1072538680140982,
+          "tax": 0.6820683826966842,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1072538680140982,
+              "gross": 8.525854783708557,
+              "net": 7.843786401011872,
+              "unitPrice": 7.7
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-12",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6640
+        }
+      ],
+      "retryAt": 6700,
+      "completedAt": null,
+      "lastReason": "现场履约中；5人完成，余0.8份材料。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 8.525854783708557,
+          "receiptIds": [
+            "service-1:receipt-12"
+          ],
+          "closedAt": null,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 8.08,
+          "costWindowUnits": 17.124794682603174,
+          "earnedLaborCost": 124.75917108410894,
+          "actualUtilities": 2.4999999999999996
+        },
+        "cash": 611.298772702067,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1546,
+    "clock": 6664,
+    "treasury": 60224.166822150095,
+    "budget": {
+      "cash": 60224.166822150095,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 8083.593662261471,
+      "forecastPayroll": 10133.863680000004,
+      "reservedPayroll": 0,
+      "essentialOperations": 4017.6,
+      "reserve": 22235.057342261473,
+      "authorizedRemaining": 1.1291883834542933,
+      "available": 37987.98029150516
+    },
+    "publicSupply": 0.6512299130586953,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "active",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 6,
+      "consumedUnits": 5,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440",
+        "citizen-165",
+        "citizen-561"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 60,
+        "citizen-561": 60,
+        "citizen-297": 59.19047619047615,
+        "citizen-231": 51.19047619047615,
+        "citizen-308": 47.19047619047615,
+        "citizen-484": 47.19047619047615,
+        "citizen-572": 35.2611761264634,
+        "citizen-506": 23.190476190476147,
+        "citizen-110": 11.642128507415691
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        },
+        {
+          "paid": 8.525854783708557,
+          "quantity": 1.1072538680140982,
+          "tax": 0.6820683826966842,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1072538680140982,
+              "gross": 8.525854783708557,
+              "net": 7.843786401011872,
+              "unitPrice": 7.7
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-12",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6640
+        },
+        {
+          "paid": 1.3449568328371508,
+          "quantity": 0.17354281714027753,
+          "tax": 0.10759654662697193,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.17354281714027753,
+              "gross": 1.3449568328371508,
+              "net": 1.237360286210179,
+              "unitPrice": 7.75
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-13",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6664
+        }
+      ],
+      "retryAt": 6724,
+      "completedAt": null,
+      "lastReason": "材料已实际入库6.00份；尚缺0.00份，服务仍须人员和参与者现场投入时间。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 9.870811616545707,
+          "receiptIds": [
+            "service-1:receipt-12",
+            "service-1:receipt-13"
+          ],
+          "closedAt": null,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 7.75,
+          "costWindowUnits": 18.236108574547973,
+          "earnedLaborCost": 127.34215241744228,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 619.0557740849669,
+        "protectedCash": 374.90129066666657
+      }
+    ]
+  },
+  {
+    "tick": 1547,
+    "clock": 6668,
+    "treasury": 60250.276420792725,
+    "budget": {
+      "cash": 60250.276420792725,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 8157.165526193991,
+      "forecastPayroll": 10133.863680000004,
+      "reservedPayroll": 0,
+      "essentialOperations": 4017.6,
+      "reserve": 22308.629206193993,
+      "authorizedRemaining": 0,
+      "available": 37941.647214598735
+    },
+    "publicSupply": 0,
+    "order": {
+      "id": "service-1",
+      "petitionId": "petition-1",
+      "topic": "education",
+      "siteId": "civic-0-school",
+      "state": "fulfilled",
+      "scheduledAt": 1920,
+      "approvedAt": 1920,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-418"
+      ],
+      "authorizedCap": 40,
+      "spent": 40,
+      "receivedUnits": 6,
+      "consumedUnits": 6,
+      "targetUnits": 6,
+      "requiredMinutes": 60,
+      "servedIds": [
+        "citizen-0",
+        "citizen-121",
+        "citizen-440",
+        "citizen-165",
+        "citizen-561",
+        "citizen-297"
+      ],
+      "serviceMinutes": {
+        "citizen-0": 60,
+        "citizen-121": 60,
+        "citizen-440": 60,
+        "citizen-165": 60,
+        "citizen-561": 60,
+        "citizen-297": 60,
+        "citizen-231": 55.19047619047615,
+        "citizen-308": 47.19047619047615,
+        "citizen-484": 47.19047619047615,
+        "citizen-572": 35.2611761264634,
+        "citizen-506": 23.190476190476147,
+        "citizen-110": 15.642128507415691
+      },
+      "staffIds": [
+        "citizen-33",
+        "citizen-99",
+        "citizen-495"
+      ],
+      "receipts": [
+        {
+          "paid": 1.3852604931818038,
+          "quantity": 0.14943478890850095,
+          "tax": 0.11082083945454424,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14943478890850095,
+              "gross": 1.3852604931818038,
+              "net": 1.2744396537272595,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-1",
+          "budgetId": "service-1",
+          "purchasedAt": 6352
+        },
+        {
+          "paid": 1.3861446179421024,
+          "quantity": 0.14953016374779962,
+          "tax": 0.11089156943536804,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14953016374779962,
+              "gross": 1.3861446179421024,
+              "net": 1.2752530485067344,
+              "unitPrice": 9.27
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-2",
+          "budgetId": "service-1",
+          "purchasedAt": 6364
+        },
+        {
+          "paid": 1.3859347667976831,
+          "quantity": 0.14966898129564613,
+          "tax": 0.11087478134381468,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14966898129564613,
+              "gross": 1.3859347667976831,
+              "net": 1.2750599854538684,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-3",
+          "budgetId": "service-1",
+          "purchasedAt": 6376
+        },
+        {
+          "paid": 1.3876101939363696,
+          "quantity": 0.14984991295209177,
+          "tax": 0.1110088155149096,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.14984991295209177,
+              "gross": 1.3876101939363696,
+              "net": 1.27660137842146,
+              "unitPrice": 9.26
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-4",
+          "budgetId": "service-1",
+          "purchasedAt": 6388
+        },
+        {
+          "paid": 1.3881555307607278,
+          "quantity": 0.15007086819034895,
+          "tax": 0.1110524424608581,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15007086819034895,
+              "gross": 1.3881555307607278,
+              "net": 1.2771030882998697,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-5",
+          "budgetId": "service-1",
+          "purchasedAt": 6400
+        },
+        {
+          "paid": 1.39055121330578,
+          "quantity": 0.15032986089792216,
+          "tax": 0.11124409706446237,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15032986089792216,
+              "gross": 1.39055121330578,
+              "net": 1.2793071162413177,
+              "unitPrice": 9.25
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-6",
+          "budgetId": "service-1",
+          "purchasedAt": 6412
+        },
+        {
+          "paid": 1.391764557682053,
+          "quantity": 0.15062386987901005,
+          "tax": 0.11134116461456411,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.15062386987901005,
+              "gross": 1.391764557682053,
+              "net": 1.2804233930674889,
+              "unitPrice": 9.24
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-7",
+          "budgetId": "service-1",
+          "purchasedAt": 6424
+        },
+        {
+          "paid": 7.751575988938441,
+          "quantity": 0.9151801639832869,
+          "tax": 0.6201260791150753,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.9151801639832869,
+              "gross": 7.751575988938441,
+              "net": 7.131449909823366,
+              "unitPrice": 8.47
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-8",
+          "budgetId": "service-1",
+          "purchasedAt": 6484
+        },
+        {
+          "paid": 9.444832276913257,
+          "quantity": 1.1270682908011045,
+          "tax": 0.755586582153061,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1270682908011045,
+              "gross": 9.444832276913257,
+              "net": 8.689245694760196,
+              "unitPrice": 8.38
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-9",
+          "budgetId": "service-1",
+          "purchasedAt": 6496
+        },
+        {
+          "paid": 10.039135387962105,
+          "quantity": 1.242467250985409,
+          "tax": 0.8031308310369685,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.242467250985409,
+              "gross": 10.039135387962105,
+              "net": 9.236004556925137,
+              "unitPrice": 8.08
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-10",
+          "budgetId": "service-1",
+          "purchasedAt": 6556
+        },
+        {
+          "paid": 3.049034972579676,
+          "quantity": 0.3849791632045046,
+          "tax": 0.24392279780637383,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.3849791632045046,
+              "gross": 3.049034972579676,
+              "net": 2.8051121747733023,
+              "unitPrice": 7.92
+            }
+          ],
+          "reason": "budget",
+          "procurementId": "service-1:receipt-11",
+          "budgetId": "service-1",
+          "purchasedAt": 6616
+        },
+        {
+          "paid": 8.525854783708557,
+          "quantity": 1.1072538680140982,
+          "tax": 0.6820683826966842,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 1.1072538680140982,
+              "gross": 8.525854783708557,
+              "net": 7.843786401011872,
+              "unitPrice": 7.7
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-12",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6640
+        },
+        {
+          "paid": 1.3449568328371508,
+          "quantity": 0.17354281714027753,
+          "tax": 0.10759654662697193,
+          "lots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.17354281714027753,
+              "gross": 1.3449568328371508,
+              "net": 1.237360286210179,
+              "unitPrice": 7.75
+            }
+          ],
+          "reason": "supply",
+          "procurementId": "service-1:receipt-13",
+          "budgetId": "service-1-supplement-1",
+          "purchasedAt": 6664
+        }
+      ],
+      "retryAt": 6724,
+      "completedAt": 6668,
+      "lastReason": "采购的材料已由实际在岗人员与现场参与者完成服务。"
+    },
+    "requests": {
+      "version": 2,
+      "requests": [
+        {
+          "signatureVersion": 2,
+          "id": "service-1-supplement-1",
+          "orderId": "service-1",
+          "requestedAt": 6616,
+          "missingUnits": 1.2807966851543755,
+          "receivedAtRequest": 4.7192033148456245,
+          "baseSpentAtRequest": 40,
+          "quoteLots": [
+            {
+              "shopId": "shop-civic-0-workshop",
+              "quantity": 0.7173222921515576,
+              "unitPrice": 7.92
+            }
+          ],
+          "quotedGross": 5.6811925538403365,
+          "cap": 11,
+          "approvedAt": 6616,
+          "signatures": [
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-22",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 0,
+              "pointId": "0:program:work",
+              "position": {
+                "x": 96,
+                "y": 0.6,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-22",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-1",
+                "termId": "civic-term-1",
+                "proofId": "civic-proof-1",
+                "signedAt": 6616,
+                "startsAt": 3460,
+                "endsAt": 23620
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            },
+            {
+              "signatureVersion": 2,
+              "actorId": "citizen-418",
+              "role": "council",
+              "siteId": "civic-0-hall",
+              "floor": 2,
+              "pointId": "2:program:work",
+              "position": {
+                "x": 96,
+                "y": 8.2,
+                "z": -13
+              },
+              "signedAt": 6616,
+              "profession": {
+                "baseRole": "官员",
+                "workId": "civic-0-hall",
+                "employmentRevision": 0
+              },
+              "authority": {
+                "version": 1,
+                "kind": "local-council-term",
+                "ruleId": "civic-local-v1",
+                "enablementId": "civic-new-20261004-6de6b060",
+                "actorId": "citizen-418",
+                "officeId": "civic-0-hall",
+                "districtId": "civic-0",
+                "baseRole": "官员",
+                "electionId": "civic-poll-12",
+                "termId": "civic-term-12",
+                "proofId": "civic-proof-224",
+                "signedAt": 6616,
+                "startsAt": 6344,
+                "endsAt": 26504
+              },
+              "paid": {
+                "tick": 1534,
+                "startAt": 6612,
+                "endAt": 6616,
+                "minutes": 4,
+                "ratePerMinute": 0.0966546666666666,
+                "earned": 0.3866186666666664
+              }
+            }
+          ],
+          "spent": 9.870811616545707,
+          "receiptIds": [
+            "service-1:receipt-12",
+            "service-1:receipt-13"
+          ],
+          "closedAt": 6668,
+          "remainingNeedQuote": {
+            "version": 1,
+            "policyId": "authorized-service-materials-v1",
+            "requiredUnits": 1.2807966851543755,
+            "unitPrice": 7.92,
+            "gross": 10.143909746422654
+          }
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "shop-civic-0-workshop",
+        "inventory": 0,
+        "quote": {
+          "quantity": 0,
+          "unitPrice": 7.91,
+          "costWindowUnits": 18.236108574547973,
+          "earnedLaborCost": 129.92513375077561,
+          "actualUtilities": 2.666666666666666
+        },
+        "cash": 619.0557740849669,
+        "protectedCash": 374.9012906666665
+      }
+    ]
+  }
+]

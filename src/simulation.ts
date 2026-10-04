@@ -1,4 +1,5 @@
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
+import { giftContactReason } from './simulation/gift-contact';
 import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
 import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, validateCityRulesetEnvelope, validateCivicOriginalOfficials, type CivicInitialProfession, type EffectiveRuleset, type SimulationOptions } from './simulation/city-ruleset';
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
@@ -2290,6 +2291,11 @@ export class Simulation implements SimulationAPI {
     if (['socialize', 'gift', 'court', 'propose', 'divorce', 'conflict', 'reconcile'].includes(command.type)) {
       const citizen = this.state.citizens.find(c => c.id === command.targetId); if (!citizen || distance(p.position, citizen.position) > 24) return fail('请走到对方身边交谈。');
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) return fail('对方已经离世，无法交谈。');
+      if (command.type === 'gift') {
+        const role = this.citizenIdentity(citizen);
+        const reason = giftContactReason(this.world, p, { position: citizen.position, role, identities: [role] }, this.state.voxels);
+        if (reason) return fail(reason);
+      }
       const existing = this.state.relationships.find(r => r.npcId === citizen.id);
       const currentRomance = existing ? this.romanceStage(existing) : 'single';
       const hostileRank = existing ? this.hostilityRank(existing) : 0;

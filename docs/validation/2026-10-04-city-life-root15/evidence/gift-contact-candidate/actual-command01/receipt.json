@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-04T22:03:26.653812+00:00",
+  "endedAt": "2026-10-04T22:03:56.723453+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/gift-contact-command.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 322,
+  "inputsStable": true,
+  "rawSHA256": "8704abb0984c8491d2d45cc2a7848d9c70554998e7cb1b4165c5e20e178c679d",
+  "ownedPid": 123427,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 123441,
+      "state": "Z",
+      "parent": 1,
+      "group": 123427,
+      "session": 123427,
+      "startTicks": 8223150
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

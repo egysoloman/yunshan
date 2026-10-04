@@ -1,0 +1,341 @@
+{
+  "startedAt": "2026-10-04T20:51:09.686700+00:00",
+  "endedAt": "2026-10-04T21:51:10.132658+00:00",
+  "argv": [
+    "npm",
+    "test"
+  ],
+  "exitCode": -15,
+  "timedOut": true,
+  "status": "TIMEOUT_PARTIAL",
+  "inputCount": 318,
+  "inputsStable": true,
+  "rawSHA256": "da45819587d5569cf5a0014fcead7367eaf22afb676fbeedabe970c90e8bbb79",
+  "ownedPid": 115765,
+  "observedDescendants": 80,
+  "finalOwnedMembers": [
+    {
+      "pid": 115778,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7789463
+    },
+    {
+      "pid": 115792,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7789491
+    },
+    {
+      "pid": 115812,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7789527
+    },
+    {
+      "pid": 116002,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7796133
+    },
+    {
+      "pid": 116022,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7797228
+    },
+    {
+      "pid": 116049,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7798070
+    },
+    {
+      "pid": 116112,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7798346
+    },
+    {
+      "pid": 116147,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7799847
+    },
+    {
+      "pid": 116211,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7800523
+    },
+    {
+      "pid": 116588,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7822710
+    },
+    {
+      "pid": 116614,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7822960
+    },
+    {
+      "pid": 116701,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7824624
+    },
+    {
+      "pid": 116719,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7824671
+    },
+    {
+      "pid": 116768,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7825237
+    },
+    {
+      "pid": 116815,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7825694
+    },
+    {
+      "pid": 116834,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7825765
+    },
+    {
+      "pid": 116899,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7828020
+    },
+    {
+      "pid": 117105,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7846822
+    },
+    {
+      "pid": 117124,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7847207
+    },
+    {
+      "pid": 117160,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7854434
+    },
+    {
+      "pid": 117182,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7862016
+    },
+    {
+      "pid": 117263,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7893080
+    },
+    {
+      "pid": 117364,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7920914
+    },
+    {
+      "pid": 117384,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7921722
+    },
+    {
+      "pid": 117420,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7921812
+    },
+    {
+      "pid": 117441,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7921873
+    },
+    {
+      "pid": 117460,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7922673
+    },
+    {
+      "pid": 117478,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7923257
+    },
+    {
+      "pid": 117500,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7923953
+    },
+    {
+      "pid": 117519,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7924004
+    },
+    {
+      "pid": 117538,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7924136
+    },
+    {
+      "pid": 117557,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7924552
+    },
+    {
+      "pid": 117585,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7925346
+    },
+    {
+      "pid": 118032,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7933391
+    },
+    {
+      "pid": 118236,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7936762
+    },
+    {
+      "pid": 118264,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7938279
+    },
+    {
+      "pid": 118540,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7957354
+    },
+    {
+      "pid": 118559,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7957494
+    },
+    {
+      "pid": 118633,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7965448
+    },
+    {
+      "pid": 118641,
+      "state": "Z",
+      "parent": 1,
+      "group": 115765,
+      "session": 115765,
+      "startTicks": 7965470
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

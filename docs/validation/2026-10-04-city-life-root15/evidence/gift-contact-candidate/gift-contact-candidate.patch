@@ -1,0 +1,1080 @@
+--- /dev/null
++++ b/src/simulation/gift-contact-legacy.ts
+@@ -0,0 +1,131 @@
++import { canAccessFloor, getFloorDimensions } from '../access';
++import { blocksSweptUprightCylinder } from '../geometry/upright-cylinder-sweep';
++import type { Building, Player, Vec3, WorldDefinition } from '../types';
++import { getWalkHeight } from '../world';
++
++const BODY_RADIUS = .35;
++const BODY_HEIGHT = 1.72;
++const SUPPORT_TOLERANCE = .26;
++const EPS = 1e-7;
++const finitePoint = (point: Vec3): boolean => [point.x, point.y, point.z].every(Number.isFinite);
++
++function validBuilding(building: Building): boolean {
++  return finitePoint(building.position) && finitePoint(building.door)
++    && [building.width, building.depth, building.height].every(value => Number.isFinite(value) && value > 0)
++    && Number.isSafeInteger(building.floors) && building.floors > 0
++    && Number.isSafeInteger(building.basements ?? 0) && (building.basements ?? 0) >= 0
++    && Number.isFinite(building.height / building.floors) && building.height / building.floors > 0;
++}
++
++function dimensions(building: Building, floor: number): { width: number; depth: number } | null {
++  const size = getFloorDimensions(building, floor);
++  return [size.width, size.depth].every(value => Number.isFinite(value) && value > 0) ? size : null;
++}
++
++function insideFootprint(building: Building, point: Vec3, floor: number): boolean {
++  const size = dimensions(building, floor);
++  // Legacy walking uses axis-aligned footprints even when rotation is present.
++  return !!size && Math.abs(point.x - building.position.x) < size.width / 2 - BODY_RADIUS
++    && Math.abs(point.z - building.position.z) < size.depth / 2 - BODY_RADIUS;
++}
++
++/** Geometric centre ownership without ACL/body admission. A denied interior
++ * must not become outdoor terrain merely because full presence returns null. */
++export function legacyGiftFloorAt(building: Building, point: Vec3): number | null {
++  if (!finitePoint(point) || !validBuilding(building)) return null;
++  const storey = building.height / building.floors, base = building.position.y + .6;
++  const floor = Math.round((point.y - base) / storey), y = base + floor * storey;
++  if (!Number.isSafeInteger(floor) || floor < -(building.basements ?? 0) || floor >= building.floors
++    || !Number.isFinite(y) || Math.abs(point.y - y) > SUPPORT_TOLERANCE) return null;
++  const size = dimensions(building, floor);
++  return size && Math.abs(point.x - building.position.x) <= size.width / 2 + EPS
++    && Math.abs(point.z - building.position.z) <= size.depth / 2 + EPS ? floor : null;
++}
++
++/** A bodyless building keeps its original axis-aligned walking floor and ACL.
++ * This is an interior standing pose, not an exterior door-radius admission. */
++export function legacyGiftPresence(building: Building, point: Vec3, person: Pick<Player, 'role' | 'identities'>): { floor: number; y: number } | null {
++  if (!finitePoint(point) || !validBuilding(building)) return null;
++  const storey = building.height / building.floors, base = building.position.y + .6;
++  const floor = legacyGiftFloorAt(building, point); if (floor === null) return null;
++  const y = base + floor * storey;
++  if (!canAccessFloor(building, floor, person)
++    || point.y + BODY_HEIGHT > y + storey + EPS || !insideFootprint(building, point, floor)
++    || blocksLegacyGiftSegment(building, point, point)) return null;
++  return { floor, y };
++}
++
++/** The original open south ground door may share the complete foot disk with
++ * the existing exterior walking plane; it does not open any other wall/layer. */
++export function legacyGiftDoorPresence(world: WorldDefinition, building: Building, point: Vec3, person: Pick<Player, 'role' | 'identities'>): { floor: 0; y: number } | null {
++  if (!finitePoint(point) || !validBuilding(building) || building.kind === 'pavilion' || !canAccessFloor(building, 0, person)) return null;
++  const size = dimensions(building, 0); if (!size) return null;
++  const y = building.position.y + .6, south = building.position.z + size.depth / 2;
++  const halfDoor = Math.max(1.5, Math.min(2.7, building.width * .1));
++  if (Math.abs(building.door.y - y) > EPS || Math.abs(building.door.z - south) > EPS
++    || building.door.x - halfDoor <= building.position.x - size.width / 2 || building.door.x + halfDoor >= building.position.x + size.width / 2
++    || Math.abs(point.y - y) > SUPPORT_TOLERANCE || Math.abs(point.z - south) > BODY_RADIUS + EPS
++    || Math.abs(point.x - building.door.x) >= halfDoor || Math.abs(point.x - building.position.x) >= size.width / 2 - BODY_RADIUS
++    || point.y + BODY_HEIGHT > y + building.height / building.floors + EPS) return null;
++  if (point.z > south + EPS) {
++    const centerHeight = getWalkHeight(world, point.x, point.z, point.y);
++    if (!Number.isFinite(centerHeight) || Math.abs(centerHeight - point.y) > SUPPORT_TOLERANCE) return null;
++  }
++  const inside = { x: point.x, y, z: south - BODY_RADIUS }, outside = { x: point.x, y, z: south + BODY_RADIUS };
++  if (blocksLegacyGiftSegment(building, point, point) || blocksLegacyGiftSegment(building, inside, point) || blocksLegacyGiftSegment(building, point, outside)) return null;
++  // The interior portion is the original solid legacy ground rectangle.
++  // Audit every .2m exterior terrain column touched by the remaining disk.
++  for (let ix = Math.floor((point.x - BODY_RADIUS) / .2); ix <= Math.floor((point.x + BODY_RADIUS) / .2); ix++) for (let iz = Math.floor((point.z - BODY_RADIUS) / .2); iz <= Math.floor((point.z + BODY_RADIUS) / .2); iz++) {
++    const x = ix * .2, z = iz * .2;
++    if (Math.max(x - point.x, 0, point.x - x - .2) ** 2 + Math.max(z - point.z, 0, point.z - z - .2) ** 2 > BODY_RADIUS ** 2 + EPS) continue;
++    for (const [sx, sz] of [[x, z], [x + .2, z], [x, z + .2], [x + .2, z + .2], [x + .1, z + .1]]) if (sz > south + EPS) {
++      const height = getWalkHeight(world, sx, sz, y);
++      if (!Number.isFinite(height) || Math.abs(height - y) > 2.6 + EPS) return null;
++    }
++  }
++  return { floor: 0, y };
++}
++
++/** Complete contact barrier for the old axis walls. Only the original south
++ * ground entrance is open. Pavilions have no enclosing wall contract. */
++export function blocksLegacyGiftSegment(building: Building, from: Vec3, to: Vec3): boolean {
++  if (!finitePoint(from) || !finitePoint(to) || !validBuilding(building)) return true;
++  if (!Number.isFinite((to.x - from.x) ** 2 + (to.z - from.z) ** 2) || !Number.isFinite(to.y - from.y)) return true;
++  if (building.kind === 'pavilion') return false;
++  const storey = building.height / building.floors, base = building.position.y + .6;
++  const fromFloor = Math.round((from.y - base) / storey), toFloor = Math.round((to.y - base) / storey);
++  if (!Number.isFinite(base) || !Number.isSafeInteger(fromFloor) || !Number.isSafeInteger(toFloor)) return true;
++  // Legacy floor changes use the existing stair action, not an open vertical
++  // segment through overlapping storeys. Do not invent a gift-only shaft.
++  if (fromFloor !== toFloor && insideFootprint(building, from, fromFloor) && insideFootprint(building, to, toFloor)) return true;
++  const low = Math.max(-(building.basements ?? 0), Math.floor((Math.min(from.y, to.y) - base) / storey));
++  const high = Math.min(building.floors - 1, Math.floor((Math.max(from.y, to.y) + BODY_HEIGHT - base) / storey));
++  for (let floor = low; floor <= high; floor++) {
++    const size = dimensions(building, floor); if (!size) return true;
++    const x0 = building.position.x - size.width / 2, x1 = building.position.x + size.width / 2;
++    const z0 = building.position.z - size.depth / 2, z1 = building.position.z + size.depth / 2;
++    const bottom = base + floor * storey, top = bottom + storey;
++    if (![x0, x1, z0, z1, bottom, top].every(Number.isFinite)) return true;
++    // .7 / 1 are the controller's forbidden centre bands. Subtract the same
++    // body's radius from each box so a sweep does not widen those bands again.
++    const sideHalf = .7 - BODY_RADIUS, southHalf = 1 - BODY_RADIUS;
++    const blocked = (left: number, right: number, near: number, far: number): boolean =>
++      left < right && near < far && blocksSweptUprightCylinder(from, to, { x0: left, x1: right, z0: near, z1: far, bottom, top }, BODY_RADIUS, BODY_HEIGHT, .01);
++    if (blocked(x0 - sideHalf, x0 + sideHalf, z0, z1)
++      || blocked(x1 - sideHalf, x1 + sideHalf, z0, z1)
++      || blocked(x0, x1, z0 - sideHalf, z0 + sideHalf)) return true;
++    const halfDoor = Math.max(1.5, Math.min(2.7, building.width * .1));
++    const realGroundDoor = floor === 0 && Math.abs(building.door.y - base) <= EPS
++      && Math.abs(building.door.z - z1) <= EPS && building.door.x - halfDoor > x0 && building.door.x + halfDoor < x1;
++    if (!realGroundDoor) {
++      if (blocked(x0, x1, z1 - southHalf, z1 + southHalf)) return true;
++    } else {
++      // Opening is an old centre-path width; expand the empty box interval by
++      // radius to preserve it when the continuous full-body test is applied.
++      const left = building.door.x - halfDoor - BODY_RADIUS, right = building.door.x + halfDoor + BODY_RADIUS;
++      if (blocked(x0, left, z1 - southHalf, z1 + southHalf)
++        || blocked(right, x1, z1 - southHalf, z1 + southHalf)) return true;
++    }
++  }
++  return false;
++}
+--- /dev/null
++++ b/src/simulation/gift-contact.ts
+@@ -0,0 +1,166 @@
++import { canAccessFloor } from '../access';
++import { boundaryLoops, blocksFloorPlanReferenceMovement, buildingLocalPosition, buildingWorldPosition, containsUnion, floorPlanSupport, getBuildingBody, getBuildingEntrance, getBuildingFloorPlan, getFloorPlanRoofRegions, getFloorPlanRoofSupport, getFloorPlanSlabRegions, type FloorPlan, type FloorSupport } from '../architecture-floor-plan';
++import { blocksSweptUprightCylinder } from '../geometry/upright-cylinder-sweep';
++import { marketCounters } from '../site-fixtures';
++import type { Building, Player, Vec3, WorldDefinition } from '../types';
++import { getWalkHeight } from '../world';
++import { blocksLegacyGiftSegment, legacyGiftDoorPresence, legacyGiftFloorAt, legacyGiftPresence } from './gift-contact-legacy';
++
++type ContactActor = Pick<Player, 'position' | 'role' | 'identities'>;
++interface Presence { building?: Building; floor: number; indoor: boolean }
++const RADIUS = .35, HEIGHT = 1.72, EPS = 1e-7, FEET_TOLERANCE = .26;
++export const GIFT_CONTACT_METRES = 2;
++const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
++const finitePosition = (world: WorldDefinition, p: Vec3) => {
++  const limit = Math.max(10000, world.size * 3);
++  return !!p && [p.x, p.y, p.z].every(Number.isFinite) && Math.abs(p.x) <= limit && Math.abs(p.z) <= limit && p.y >= -1000 && p.y <= limit;
++};
++const nearby = (b: Building, p: Vec3) => {
++  const local = buildingLocalPosition(b, p);
++  return Math.abs(local.x) <= b.width / 2 + 2 && Math.abs(local.z) <= b.depth / 2 + 2;
++};
++
++/** Same open ground slab/terrain union used by Controller.groundEdgeSupport.
++ * The audited exterior columns never supply an interior shaft or upper void. */
++function groundEdgeSupport(world: WorldDefinition, b: Building, plan: FloorPlan, point: Vec3, center: FloorSupport | null): FloorSupport | null {
++  if (plan.floor !== 0 || !center) return null;
++  const local = buildingLocalPosition(b, point), stone = getFloorPlanSlabRegions(plan);
++  const entrance = buildingLocalPosition(b, getBuildingEntrance(b)), opening = plan.walls.find(wall => wall.opening?.use === 'entrance')?.opening;
++  const doorEdge = !!opening && Math.abs(local.z - entrance.z) <= RADIUS + .21 && Math.abs(local.x - entrance.x) < (opening.to - opening.from) / 2 - RADIUS;
++  if (!['courtyard', 'gallery'].includes(center.kind) && !(center.kind === 'room' && doorEdge)) return null;
++  const x0 = Math.min(...stone.map(r => r.x0)), x1 = Math.max(...stone.map(r => r.x1)), z0 = Math.min(...stone.map(r => r.z0)), z1 = Math.max(...stone.map(r => r.z1));
++  if (Math.min(local.x - x0, x1 - local.x, local.z - z0, z1 - local.z) >= RADIUS) return null;
++  const outside = (x: number, z: number) => x < x0 - EPS || x > x1 + EPS || z < z0 - EPS || z > z1 + EPS;
++  for (let ix = Math.floor((local.x - RADIUS) / .2); ix <= Math.floor((local.x + RADIUS) / .2); ix++) for (let iz = Math.floor((local.z - RADIUS) / .2); iz <= Math.floor((local.z + RADIUS) / .2); iz++) {
++    const cx = ix * .2, cz = iz * .2;
++    if (Math.max(cx - local.x, 0, local.x - cx - .2) ** 2 + Math.max(cz - local.z, 0, local.z - cz - .2) ** 2 > RADIUS ** 2 + EPS) continue;
++    for (const [x, z] of [[cx, cz], [cx + .2, cz], [cx, cz + .2], [cx + .2, cz + .2], [cx + .1, cz + .1]]) if (outside(x, z)) {
++      const at = buildingWorldPosition(b, { x, y: plan.y, z }), height = getWalkHeight(world, at.x, at.z, center.y);
++      if (!Number.isFinite(height) || Math.abs(height - center.y) > 2.6 + EPS) return null;
++    }
++  }
++  const range = .6, loX = local.x - range, hiX = local.x + range, loZ = local.z - range, hiZ = local.z + range;
++  const terrain = [{ x0: loX, x1: x0, z0: loZ, z1: hiZ }, { x0: x1, x1: hiX, z0: loZ, z1: hiZ }, { x0: loX, x1: hiX, z0: loZ, z1: z0 }, { x0: loX, x1: hiX, z0: z1, z1: hiZ }].filter(r => r.x1 > r.x0 && r.z1 > r.z0);
++  for (const loop of boundaryLoops([...stone, ...terrain])) for (let i = 0; i < loop.length; i++) {
++    const a = loop[i], to = loop[(i + 1) % loop.length], dx = to[0] - a[0], dz = to[1] - a[1], t = Math.max(0, Math.min(1, ((local.x - a[0]) * dx + (local.z - a[1]) * dz) / (dx * dx + dz * dz)));
++    if ((local.x - a[0] - t * dx) ** 2 + (local.z - a[1] - t * dz) ** 2 < RADIUS ** 2 - EPS) return null;
++  }
++  return center;
++}
++
++/** Outdoor feet stay on the existing walking surface. Audit the complete .2m
++ * terrain columns touched by the disk, using the controller's 2.6m cliff bound. */
++function outdoorSupported(world: WorldDefinition, point: Vec3): boolean {
++  const center = getWalkHeight(world, point.x, point.z, point.y);
++  if (!Number.isFinite(center) || Math.abs(center - point.y) > FEET_TOLERANCE) return false;
++  for (let ix = Math.floor((point.x - RADIUS) / .2); ix <= Math.floor((point.x + RADIUS) / .2); ix++) for (let iz = Math.floor((point.z - RADIUS) / .2); iz <= Math.floor((point.z + RADIUS) / .2); iz++) {
++    const x = ix * .2, z = iz * .2;
++    if (Math.max(x - point.x, 0, point.x - x - .2) ** 2 + Math.max(z - point.z, 0, point.z - z - .2) ** 2 > RADIUS ** 2 + EPS) continue;
++    for (const [sx, sz] of [[x, z], [x + .2, z], [x, z + .2], [x + .2, z + .2], [x + .1, z + .1]]) {
++      const height = getWalkHeight(world, sx, sz, point.y);
++      if (!Number.isFinite(height) || Math.abs(height - center) > 2.6 + EPS) return false;
++    }
++  }
++  return true;
++}
++
++function roofDiskSupported(b: Building, point: Vec3, support: FloorSupport): boolean {
++  const local = buildingLocalPosition(b, point);
++  const regions = getFloorPlanRoofRegions(getBuildingBody(b)!).filter(roof => roof.floor === support.floor && roof.bottom <= local.y + EPS && roof.top >= local.y - .42 - EPS).map(roof => roof.rect);
++  if (!containsUnion(regions, local.x, local.z)) return false;
++  for (const loop of boundaryLoops(regions)) for (let i = 0; i < loop.length; i++) {
++    const a = loop[i], z = loop[(i + 1) % loop.length], dx = z[0] - a[0], dz = z[1] - a[1];
++    const t = Math.max(0, Math.min(1, ((local.x - a[0]) * dx + (local.z - a[1]) * dz) / (dx * dx + dz * dz)));
++    if ((local.x - a[0] - t * dx) ** 2 + (local.z - a[1] - t * dz) ** 2 < RADIUS ** 2 - EPS) return false;
++  }
++  return true;
++}
++
++function actorPresence(world: WorldDefinition, actor: ContactActor): Presence | null {
++  const point = actor.position;
++  let found: Presence | null = null;
++  for (const b of world.buildings) {
++    if (getBuildingBody(b)) {
++      if (!nearby(b, point)) continue;
++      const nominal = Math.round((point.y - b.position.y - .6) / (b.height / b.floors));
++      let supportedHere = false;
++      for (const floor of [nominal, nominal - 1, nominal + 1]) {
++        const plan = getBuildingFloorPlan(b, floor);
++        if (!plan) continue;
++        const center = floorPlanSupport(b, floor, point, 0);
++        const support = floorPlanSupport(b, floor, point, RADIUS) ?? groundEdgeSupport(world, b, plan, point, center);
++        if (support && Math.abs(support.y - point.y) <= FEET_TOLERANCE) {
++          const indoor = support.kind === 'room' || support.kind === 'stairs';
++          if (indoor && (!canAccessFloor(b, support.floor, actor) || support.link && support.y > b.position.y + .6 + getBuildingFloorPlan(b, support.link.fromFloor)!.y + .01 && !canAccessFloor(b, support.link.toFloor, actor))) return null;
++          if (!found || indoor && !found.indoor) found = { building: b, floor: support.floor, indoor };
++          supportedHere = true;
++          break;
++        }
++        // Radius-zero walking height cannot turn a clipped disk over a wall,
++        // shaft, courtyard edge or upper slab into full-body support.
++        if (center && Math.abs(center.y - point.y) <= FEET_TOLERANCE) return null;
++      }
++      if (supportedHere) continue;
++      const roof = getFloorPlanRoofSupport(b, point, RADIUS);
++      if (roof && Math.abs(roof.y - point.y) <= FEET_TOLERANCE) { if (!roofDiskSupported(b, point, roof)) return null; if (!found) found = { building: b, floor: roof.floor, indoor: false }; continue; }
++      const centerRoof = getFloorPlanRoofSupport(b, point, 0);
++      if (centerRoof && Math.abs(centerRoof.y - point.y) <= FEET_TOLERANCE) return null;
++    } else {
++      const presence = legacyGiftPresence(b, point, actor) ?? legacyGiftDoorPresence(world, b, point, actor);
++      if (presence) { const indoor = b.kind !== 'pavilion' && legacyGiftFloorAt(b, point) !== null; if (!found || indoor && !found.indoor) found = { building: b, floor: presence.floor, indoor }; continue; }
++      if (b.kind !== 'pavilion' && legacyGiftFloorAt(b, point) !== null) return null;
++    }
++  }
++  // Do not let an earlier courtyard support hide another matching room ACL.
++  return found ?? (outdoorSupported(world, point) ? { floor: 0, indoor: false } : null);
++}
++
++function segmentBlocked(world: WorldDefinition, from: Vec3, to: Vec3, voxels: readonly { position: Vec3 }[]): boolean {
++  // Saved voxel y is the bottom: Controller collision and the .2m renderer
++  // translated by y + .1 share this actual placed-block box.
++  for (const v of voxels) {
++    const p = v.position;
++    if (blocksSweptUprightCylinder(from, to, { x0: p.x - .1, x1: p.x + .1, z0: p.z - .1, z1: p.z + .1, bottom: p.y, top: p.y + .2 }, RADIUS, HEIGHT, .01)) return true;
++  }
++  for (const b of world.buildings) {
++    const body = getBuildingBody(b);
++    if (body) {
++      const a = buildingLocalPosition(b, from), z = buildingLocalPosition(b, to);
++      if (Math.min(a.x, z.x) > b.width / 2 + 2 || Math.max(a.x, z.x) < -b.width / 2 - 2 || Math.min(a.z, z.z) > b.depth / 2 + 2 || Math.max(a.z, z.z) < -b.depth / 2 - 2) continue;
++      let checked = false;
++      for (const plan of body.floorPlans) if (plan.y <= Math.max(a.y, z.y) + HEIGHT && plan.ceilingY >= Math.min(a.y, z.y)) {
++        checked = true;
++        if (blocksFloorPlanReferenceMovement(b, plan.floor, from, to, RADIUS, HEIGHT)) return true;
++      }
++      // Roof support can be above every storey ceiling. Retain the existing
++      // roof barrier contract even when the floor-height filter has no match.
++      if (!checked && body.floorPlans.length && blocksFloorPlanReferenceMovement(b, body.floorPlans[0].floor, from, to, RADIUS, HEIGHT)) return true;
++    } else {
++      if (blocksLegacyGiftSegment(b, from, to)) return true;
++      for (const counter of marketCounters(world, b)) {
++        const local = (p: Vec3) => {
++          const x = p.x - counter.position.x, z = p.z - counter.position.z;
++          return { x: x * Math.cos(counter.rotation) - z * Math.sin(counter.rotation), y: p.y, z: z * Math.cos(counter.rotation) + x * Math.sin(counter.rotation) };
++        };
++        if (blocksSweptUprightCylinder(local(from), local(to), { x0: -counter.size.x / 2, x1: counter.size.x / 2, z0: -counter.size.z / 2, z1: counter.size.z / 2, bottom: counter.position.y - counter.size.y / 2, top: counter.position.y + counter.size.y / 2 }, RADIUS, HEIGHT, .01)) return true;
++      }
++    }
++  }
++  return false;
++}
++
++/** Read-only admission for manual food handover; no relationship is created. */
++export function giftContactReason(world: WorldDefinition, from: ContactActor, to: ContactActor, voxels: readonly { position: Vec3 }[]): string | null {
++  if (!finitePosition(world, from.position) || !finitePosition(world, to.position)) return '双方须在城市中的真实落脚点递交食物。';
++  if (voxels.some(v => !finitePosition(world, v.position))) return '现场体素位置无效，无法确认食物交接空间。';
++  if (distance(from.position, to.position) > GIFT_CONTACT_METRES + EPS) return '请走到对方两米以内，亲手递交食物。';
++  const a = actorPresence(world, from), b = actorPresence(world, to);
++  if (!a || !b) return '双方须站在可访问楼层或实际室外落脚点递交食物。';
++  if (a.indoor && b.indoor && (a.building !== b.building || a.floor !== b.floor)) return '请到对方所在的同一实际楼层递交食物。';
++  if (a.indoor !== b.indoor) {
++    const inside = a.indoor ? a : b;
++    if (inside.floor !== 0 || !canAccessFloor(inside.building!, inside.floor, from) || !canAccessFloor(inside.building!, inside.floor, to)) return '请通过有权限的地面门口，与对方实际会面后递交食物。';
++  }
++  if (segmentBlocked(world, from.position, from.position, voxels) || segmentBlocked(world, to.position, to.position, voxels) || segmentBlocked(world, from.position, to.position, voxels)) return '食物不能隔着墙体、玻璃、家具或放置体素递交；请沿实际门口会面。';
++  return null;
++}
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -1,4 +1,5 @@
+ import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
++import { giftContactReason } from './simulation/gift-contact';
+ import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
+ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, validateCityRulesetEnvelope, validateCivicOriginalOfficials, type CivicInitialProfession, type EffectiveRuleset, type SimulationOptions } from './simulation/city-ruleset';
+ import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
+@@ -2290,6 +2291,11 @@
+     if (['socialize', 'gift', 'court', 'propose', 'divorce', 'conflict', 'reconcile'].includes(command.type)) {
+       const citizen = this.state.citizens.find(c => c.id === command.targetId); if (!citizen || distance(p.position, citizen.position) > 24) return fail('请走到对方身边交谈。');
+       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) return fail('对方已经离世，无法交谈。');
++      if (command.type === 'gift') {
++        const role = this.citizenIdentity(citizen);
++        const reason = giftContactReason(this.world, p, { position: citizen.position, role, identities: [role] }, this.state.voxels);
++        if (reason) return fail(reason);
++      }
+       const existing = this.state.relationships.find(r => r.npcId === citizen.id);
+       const currentRomance = existing ? this.romanceStage(existing) : 'single';
+       const hostileRank = existing ? this.hostilityRank(existing) : 0;
+--- /dev/null
++++ b/tests/gift-contact-command.test.ts
+@@ -0,0 +1,413 @@
++/** Candidate regression suite, NOT_RUN when authored on 2026-10-04.
++ * Every command below calls the actual Simulation.command implementation.
++ * World bytes are an existing saved descriptor; no world/fixture factory runs.
++ * Position assignments are CONTROLLED test inputs on checked original support
++ * points. They do not demonstrate natural arrival, a natural gift or a consumer.
++ * No food, needs, wallet, identity, ACL, relationship or runtime clock is granted.
++ */
++import assert from 'node:assert/strict';
++import { createHash } from 'node:crypto';
++import { readFileSync } from 'node:fs';
++import test from 'node:test';
++import { Simulation } from '../src/simulation.ts';
++import { canAccessFloor } from '../src/access.ts';
++import { blocksFloorPlanReferenceMovement, floorPlanSupport, getBuildingFloorPlan, wallPanels } from '../src/architecture-floor-plan.ts';
++import { getWalkHeight } from '../src/world.ts';
++import { assembleSave, partitionSave } from '../src/persistence/partition.ts';
++import { giftContactReason } from '../src/simulation/gift-contact.ts';
++import { legacyGiftDoorPresence } from '../src/simulation/gift-contact-legacy.ts';
++import type { SimulationOptions } from '../src/simulation/city-ruleset.ts';
++import type { Building, Citizen, Command, Role, Vec3, WorldDefinition } from '../src/types.ts';
++
++const WORLD_SHA256 = '78a9b469fb18e4f377151fd679045fdb25b9160d456f25ba8a0027b2b15a0bbe';
++const OLD_SAVE_SHA256 = '3640274b3e2234b793925a574f825615a89d9c168539d10960510f39f1e1c2c3';
++const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
++const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
++const publicPlayerPoint: Vec3 = { x: 72, y: .6, z: -18 };
++const publicNpcPoint: Vec3 = { x: 73, y: .6, z: -18 };
++const runtime = (sim: Simulation) => Reflect.get(sim, 'runtime');
++
++function readOriginalWorld(): WorldDefinition {
++  const bytes = readFileSync(new URL('./fixtures/civic-history/root13-four-day.world.json', import.meta.url));
++  assert.equal(hash(bytes), WORLD_SHA256, 'retain the original descriptor without changing geometry or ACL');
++  return JSON.parse(bytes.toString('utf8')) as WorldDefinition;
++}
++
++function supportAt(site: Building, floor: number, point: Vec3, kind: 'room' | 'courtyard') {
++  const support = floorPlanSupport(site, floor, point, .35);
++  assert.ok(support, 'the complete original .35-radius body has actual support');
++  assert.equal(support.floor, floor);
++  assert.equal(support.kind, kind);
++  assert.ok(Math.abs(support.y - point.y) < 1e-8);
++  assert.equal(blocksFloorPlanReferenceMovement(site, floor, point, point, .35, 1.72), false,
++    'the stationary original full body does not penetrate walls or furniture');
++}
++
++function controlledPublicPositions(sim: Simulation, hall: Building, citizen: Citizen, target = publicNpcPoint) {
++  // CONTROLLED positions, not a claim that either actor arrived naturally.
++  supportAt(hall, 0, publicPlayerPoint, 'room');
++  supportAt(hall, 0, target, 'room');
++  assert.equal(canAccessFloor(hall, 0, sim.state.player), true);
++  assert.equal(blocksFloorPlanReferenceMovement(hall, 0, publicPlayerPoint, target, .35, 1.72), false);
++  sim.state.player.position = { ...publicPlayerPoint };
++  citizen.position = { ...target };
++}
++
++function fixture(carryFood = 1) {
++  const world = readOriginalWorld(), originalWorld = JSON.stringify(world), sim = new Simulation(world);
++  assert.equal(JSON.stringify(world), originalWorld, 'constructor cannot rewrite the saved world descriptor');
++  assert.equal(sim.state.player.role, 'traveler');
++  assert.deepEqual(sim.state.player.identities, ['traveler']);
++  assert.equal(sim.state.player.money, 600);
++  assert.deepEqual({ ...sim.state.player.inventory }, { block: 32 });
++  assert.equal(sim.state.relationships.length, 0);
++  const hall = world.buildings.find(site => site.id === 'civic-0-hall');
++  const market = world.buildings.find(site => site.id === 'civic-0-market');
++  assert.ok(hall && market);
++  const citizen = sim.state.citizens.find(actor => sim.state.extension!.actorProfiles[actor.id].alive
++    && Number.isFinite(actor.needs.hunger) && actor.needs.hunger <= 80);
++  assert.ok(citizen, 'choose an actual original resident whose unmodified hunger admits the original +20');
++
++  if (carryFood > 0) {
++    // CONTROLLED original door point, independently checked against the saved
++    // road node and original walking surface before the real purchase command.
++    assert.ok(world.nodes.some(node => node.id === `${market.id}-door` && distance(node.position, market.door) === 0));
++    assert.equal(getWalkHeight(world, market.door.x, market.door.z, market.door.y), market.door.y);
++    assert.equal(canAccessFloor(market, 0, sim.state.player), true);
++    sim.state.player.position = { ...market.door };
++    const shop = sim.state.shops.find(item => item.buildingId === market.id);
++    assert.ok(shop);
++    const beforeCash = sim.state.player.money, beforeStock = shop.inventory, price = shop.price;
++    const purchased = sim.command({ type: 'purchase', targetId: market.id, value: carryFood + 1 });
++    assert.equal(purchased.ok, true, purchased.message);
++    assert.equal(sim.state.player.inventory.food, carryFood, 'purchase eats one and carries only the paid remainder');
++    assert.equal(sim.state.player.money, beforeCash - price * (carryFood + 1));
++    assert.equal(shop.inventory, beforeStock - carryFood - 1);
++  }
++  controlledPublicPositions(sim, hall, citizen);
++  return { world, sim, hall, citizen };
++}
++
++function rejectAtomically(sim: Simulation, command: Command, message?: RegExp) {
++  const beforeSave = sim.exportSave(), beforeState = structuredClone(sim.state), beforeRuntime = structuredClone(runtime(sim));
++  const beforeRelationships = structuredClone(sim.state.relationships);
++  const result = sim.command(command);
++  assert.equal(result.ok, false, result.message);
++  if (message) assert.match(result.message, message);
++  assert.deepEqual(sim.state, beforeState, 'rejection leaves the complete authoritative state unchanged');
++  assert.deepEqual(runtime(sim), beforeRuntime, 'rejection leaves every runtime field and clock unchanged');
++  assert.deepEqual(sim.state.relationships, beforeRelationships, 'rejection cannot create or initialise a relationship');
++  assert.equal(sim.exportSave(), beforeSave, 'rejection retains exact complete save bytes');
++  assert.deepEqual(sim.state, beforeState);
++  assert.deepEqual(runtime(sim), beforeRuntime);
++  return result;
++}
++
++function future24Exact(source: Simulation, world: WorldDefinition, options?: SimulationOptions) {
++  const saved = source.exportSave(), assembled = assembleSave(partitionSave(saved, world));
++  assert.equal(assembled, saved, 'partition transport keeps the exact writer bytes and original schema');
++  const full = new Simulation(world, options), partition = new Simulation(world, options);
++  for (const [reader, bytes] of [[full, saved], [partition, assembled]] as const) {
++    const loaded = reader.importSave(bytes);
++    assert.equal(loaded.ok, true, loaded.message);
++    assert.equal(reader.exportSave(), saved, 'full and partition readers preserve the exact original opening');
++  }
++  const initialTick = source.state.tick;
++  assert.equal(source.state.paused, false);
++  // Future execution only: original .25-second steps, original saved speed,
++  // no clock edits, no accelerations, no injected events or actor/need changes.
++  for (let index = 0; index < 24; index++) {
++    source.step(.25); full.step(.25); partition.step(.25);
++    assert.equal(source.state.tick, initialTick + index + 1);
++    assert.equal(full.exportSave(), source.exportSave(), `complete reader future original tick ${index + 1}`);
++    assert.equal(partition.exportSave(), source.exportSave(), `partition reader future original tick ${index + 1}`);
++  }
++}
++
++test('controlled actual gift consumes one purchased food and retains original +20, relationship and identity feedback', () => {
++  const { world, sim, citizen } = fixture();
++  const beforePlayer = structuredClone(sim.state.player), beforeCitizen = structuredClone(citizen);
++  const beforeProfiles = structuredClone(sim.state.extension!.actorProfiles);
++  const beforeClock = runtime(sim).relationshipClock;
++  assert.equal(distance(sim.state.player.position, citizen.position), 1);
++  const result = sim.command({ type: 'gift', targetId: citizen.id });
++  assert.equal(result.ok, true, result.message);
++  assert.equal(sim.state.player.inventory.food, beforePlayer.inventory.food! - 1);
++  assert.equal(citizen.needs.hunger, beforeCitizen.needs.hunger + 20);
++  assert.deepEqual(citizen, { ...beforeCitizen, needs: { ...beforeCitizen.needs, hunger: beforeCitizen.needs.hunger + 20 } },
++    'only original resident hunger changes; identity and every other resident field remain intact');
++  assert.deepEqual(sim.state.player, { ...beforePlayer, reputation: beforePlayer.reputation + .5,
++    inventory: { ...beforePlayer.inventory, food: beforePlayer.inventory.food! - 1 } },
++  'only the one paid food and original reputation feedback change in the complete player');
++  assert.deepEqual(sim.state.extension!.actorProfiles, beforeProfiles, 'no life profile or identity is granted');
++  assert.deepEqual(sim.state.player.needs, beforePlayer.needs);
++  assert.equal(sim.state.player.money, beforePlayer.money);
++  assert.equal(sim.state.player.reputation, beforePlayer.reputation + .5);
++  assert.equal(sim.state.player.role, beforePlayer.role);
++  assert.deepEqual(sim.state.player.identities, beforePlayer.identities);
++  assert.equal(sim.state.player.partnerId, beforePlayer.partnerId);
++  assert.equal(sim.state.relationships.length, 1);
++  const relation = sim.state.relationships[0];
++  assert.equal(relation.npcId, citizen.id);
++  assert.equal(relation.affection, 12); assert.equal(relation.trust, 8); assert.equal(relation.encounters, 1);
++  assert.equal(relation.type, 'acquaintance');
++  assert.deepEqual(relation.memories, [{ tick: sim.state.tick, text: '赠送食物', impact: 12 }]);
++  assert.equal(runtime(sim).relationshipAt[citizen.id], beforeClock);
++  assert.equal(runtime(sim).relationshipClock, beforeClock);
++  assert.equal(sim.state.events.at(-1)?.type, 'gift');
++  assert.ok(Number.isFinite(sim.state.player.inventory.food) && Number.isFinite(citizen.needs.hunger));
++  future24Exact(sim, world);
++});
++
++test('controlled actual gift rejects the original same-floor 1.6m opaque wall atomically before creating a relation', () => {
++  const { sim, hall, citizen } = fixture();
++  const from = { x: 119.3, y: .6, z: 9 }, to = { x: 119.3, y: .6, z: 10.6 };
++  supportAt(hall, 0, from, 'room'); supportAt(hall, 0, to, 'courtyard');
++  assert.equal(canAccessFloor(hall, 0, sim.state.player), true);
++  const plan = getBuildingFloorPlan(hall, 0); assert.ok(plan);
++  assert.ok(wallPanels(plan).some(panel => panel.kind === 'solid' && panel.rect.x0 === 21.6
++    && panel.rect.x1 === 25 && panel.rect.z0 === 9.6 && panel.rect.z1 === 10 && panel.top === 2.8));
++  assert.ok(Math.abs(distance(from, to) - 1.6) < 1e-8);
++  assert.equal(blocksFloorPlanReferenceMovement(hall, 0, from, to, .35, 1.72), true);
++  // CONTROLLED supported room/courtyard positions; no natural encounter claim.
++  sim.state.player.position = from; citizen.position = to;
++  rejectAtomically(sim, { type: 'gift', targetId: citizen.id });
++  assert.equal(sim.state.relationships.length, 0);
++});
++
++test('controlled actual gift rejects the original 3.8m cross-floor case without granting a private-floor identity', () => {
++  const { sim, hall } = fixture();
++  const citizen = sim.state.citizens.find(actor => actor.role === '官员' || actor.role === 'official');
++  assert.ok(citizen, 'choose an original constructor official instead of assigning a role');
++  const identity = Reflect.get(sim, 'citizenIdentity').call(sim, citizen) as Role;
++  assert.equal(identity, 'official', 'derive the existing canonical identity without changing the resident');
++  const from = { ...publicPlayerPoint }, to = { ...publicPlayerPoint, y: hall.position.y + .6 + hall.height / hall.floors };
++  supportAt(hall, 0, from, 'room'); supportAt(hall, 1, to, 'room');
++  assert.equal(canAccessFloor(hall, 0, sim.state.player), true);
++  assert.equal(canAccessFloor(hall, 1, sim.state.player), false);
++  assert.equal(canAccessFloor(hall, 1, { role: identity, identities: [identity] }), true);
++  assert.ok(Math.abs(distance(from, to) - 3.8) < 1e-8);
++  // CONTROLLED original support points; no invented official or natural arrival.
++  sim.state.player.position = from; citizen.position = to;
++  rejectAtomically(sim, { type: 'gift', targetId: citizen.id });
++  assert.equal(sim.state.relationships.length, 0);
++});
++
++test('controlled legal contact with original zero food still rejects without adding a food key or a relation', () => {
++  const { sim, citizen } = fixture(0);
++  assert.equal(Object.hasOwn(sim.state.player.inventory, 'food'), false);
++  rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /食物/);
++  assert.equal(Object.hasOwn(sim.state.player.inventory, 'food'), false);
++  assert.equal(sim.state.relationships.length, 0);
++});
++
++test('controlled legal gift retains the original ten-minute cooldown even while another paid food remains', () => {
++  const { sim, citizen } = fixture(2);
++  const first = sim.command({ type: 'gift', targetId: citizen.id });
++  assert.equal(first.ok, true, first.message);
++  assert.equal(sim.state.player.inventory.food, 1, 'the repeat must reach the cooldown rather than fail for lack of food');
++  assert.equal(runtime(sim).relationshipAt[citizen.id], runtime(sim).relationshipClock);
++  rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /刚刚已交流过/);
++  assert.equal(sim.state.relationships[0].encounters, 1);
++});
++
++test('controlled 3m contact keeps original socialize behavior while the new actual gift refuses atomically', () => {
++  const { sim, hall, citizen } = fixture();
++  controlledPublicPositions(sim, hall, citizen, { x: 75, y: .6, z: -18 });
++  assert.equal(distance(sim.state.player.position, citizen.position), 3);
++  rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /两米/);
++  assert.equal(sim.state.relationships.length, 0);
++  const beforeHunger = citizen.needs.hunger, beforeFood = sim.state.player.inventory.food;
++  const social = sim.command({ type: 'socialize', targetId: citizen.id });
++  assert.equal(social.ok, true, social.message);
++  const relation = sim.state.relationships[0];
++  assert.equal(relation.npcId, citizen.id); assert.equal(relation.affection, 6); assert.equal(relation.trust, 5);
++  assert.deepEqual(relation.memories, [{ tick: sim.state.tick, text: '街巷相谈', impact: 6 }]);
++  assert.equal(sim.state.player.inventory.food, beforeFood);
++  assert.equal(citizen.needs.hunger, beforeHunger);
++});
++
++test('the actual original v3 save keeps exact full and partition opening bytes and 24 original future ticks', () => {
++  const world = readOriginalWorld();
++  const bytes = readFileSync(new URL('./fixtures/civic-history/root13-four-day.save.json', import.meta.url));
++  assert.equal(hash(bytes), OLD_SAVE_SHA256, 'retain the genuine immutable original source save');
++  const saved = bytes.toString('utf8'), options: SimulationOptions = { rulesetId: 'civic-local-v1' };
++  const original = new Simulation(world, options), loaded = original.importSave(saved);
++  assert.equal(loaded.ok, true, loaded.message);
++  assert.equal(original.exportSave(), saved, 'the manual contact gate cannot silently add a policy or rewrite old saves');
++  future24Exact(original, world, options);
++});
++
++test('controlled actual legacy gifts admit only the original south ground door disk, including exact and +/- .1/.3 feet', () => {
++  // NOT_RUN when authored. Five separate original constructor/paid-food
++  // scenarios keep their real inventory and cooldown independent.
++  const cases = [
++    { label: 'both exact original door', playerOffset: 0, npcOffset: 0 },
++    { label: 'inside -.1 to outside +.1', playerOffset: -.1, npcOffset: .1 },
++    { label: 'outside +.1 to inside -.1', playerOffset: .1, npcOffset: -.1 },
++    { label: 'inside -.3 to outside +.3', playerOffset: -.3, npcOffset: .3 },
++    { label: 'outside +.3 to inside -.3', playerOffset: .3, npcOffset: -.3 },
++  ];
++  for (const scenario of cases) {
++    const world = readOriginalWorld(), originalWorld = JSON.stringify(world), sim = new Simulation(world);
++    assert.equal(JSON.stringify(world), originalWorld);
++    assert.equal(sim.state.player.role, 'traveler');
++    assert.deepEqual(sim.state.player.identities, ['traveler']);
++    assert.equal(sim.state.player.money, 600);
++    assert.deepEqual({ ...sim.state.player.inventory }, { block: 32 });
++    assert.equal(sim.state.relationships.length, 0);
++    const market = world.buildings.find(site => site.id === 'civic-0-market');
++    assert.ok(market);
++    assert.equal(market.floorPlanProfile, undefined);
++    assert.equal(getBuildingFloorPlan(market, 0), null, 'this is the unchanged bodyless legacy building');
++    assert.equal(market.door.z, market.position.z + market.depth / 2);
++    assert.equal(market.door.y, market.position.y + .6);
++    assert.ok(world.nodes.some(node => node.id === `${market.id}-door` && distance(node.position, market.door) === 0));
++    const citizen = sim.state.citizens.find(actor => sim.state.extension!.actorProfiles[actor.id].alive
++      && Number.isFinite(actor.needs.hunger) && actor.needs.hunger <= 80);
++    assert.ok(citizen, 'select an actual original resident without changing hunger, life or identity');
++    const role = Reflect.get(sim, 'citizenIdentity').call(sim, citizen) as Role;
++    const identity = { role, identities: [role] };
++    assert.equal(canAccessFloor(market, 0, sim.state.player), true);
++    assert.equal(canAccessFloor(market, 0, identity), true);
++
++    // No floorPlanSupport proxy: explicit original legacy door-disk support,
++    // original walking height and main contact admission own these feet.
++    assert.deepEqual(legacyGiftDoorPresence(world, market, market.door, sim.state.player), { floor: 0, y: market.door.y });
++    assert.equal(getWalkHeight(world, market.door.x, market.door.z, market.door.y), market.door.y);
++    sim.state.player.position = { ...market.door }; // CONTROLLED original door, not natural arrival.
++    const shop = sim.state.shops.find(item => item.buildingId === market.id); assert.ok(shop);
++    const beforeCash = sim.state.player.money, beforeStock = shop.inventory, price = shop.price;
++    const purchased = sim.command({ type: 'purchase', targetId: market.id, value: 3 });
++    assert.equal(purchased.ok, true, `${scenario.label}: ${purchased.message}`);
++    assert.equal(sim.state.player.inventory.food, 2);
++    assert.equal(sim.state.player.money, beforeCash - price * 3);
++    assert.equal(shop.inventory, beforeStock - 3);
++
++    const from = { ...market.door, z: market.door.z + scenario.playerOffset };
++    const to = { ...market.door, z: market.door.z + scenario.npcOffset };
++    for (const [point, person] of [[from, sim.state.player], [to, identity]] as const) {
++      assert.equal(getWalkHeight(world, point.x, point.z, point.y), point.y, scenario.label);
++      assert.deepEqual(legacyGiftDoorPresence(world, market, point, person), { floor: 0, y: market.door.y },
++        `${scenario.label}: the original full disk straddles this real open ground door`);
++    }
++    // CONTROLLED, pure-certified original feet only. No ACL/body/needs/food grant.
++    sim.state.player.position = from; citizen.position = to;
++    const canonicalRecipient = { position: citizen.position, ...identity };
++    assert.equal(giftContactReason(world, sim.state.player, canonicalRecipient, sim.state.voxels), null,
++      `${scenario.label}: main contact guard must use the explicit legal legacy door admission`);
++    const beforePlayer = structuredClone(sim.state.player), beforeCitizen = structuredClone(citizen);
++    const beforeProfiles = structuredClone(sim.state.extension!.actorProfiles), clock = runtime(sim).relationshipClock;
++    const delivered = sim.command({ type: 'gift', targetId: citizen.id });
++    assert.equal(delivered.ok, true, `${scenario.label}: ${delivered.message}`);
++    assert.deepEqual(sim.state.player, { ...beforePlayer, reputation: beforePlayer.reputation + .5,
++      inventory: { ...beforePlayer.inventory, food: beforePlayer.inventory.food! - 1 } }, scenario.label);
++    assert.deepEqual(citizen, { ...beforeCitizen, needs: { ...beforeCitizen.needs, hunger: beforeCitizen.needs.hunger + 20 } },
++      `${scenario.label}: only the original hunger feedback changes in the complete original resident`);
++    assert.deepEqual(sim.state.extension!.actorProfiles, beforeProfiles);
++    assert.equal(sim.state.player.inventory.food, 1);
++    assert.equal(sim.state.relationships.length, 1);
++    const relation = sim.state.relationships[0];
++    assert.equal(relation.npcId, citizen.id); assert.equal(relation.affection, 12);
++    assert.equal(relation.trust, 8); assert.equal(relation.encounters, 1);
++    assert.equal(relation.type, 'acquaintance');
++    assert.deepEqual(relation.memories, [{ tick: sim.state.tick, text: '赠送食物', impact: 12 }]);
++    assert.equal(runtime(sim).relationshipAt[citizen.id], clock);
++    assert.equal(runtime(sim).relationshipClock, clock);
++    assert.equal(sim.state.events.at(-1)?.type, 'gift');
++    // Another paid food remains, so this checks the actual original cooldown.
++    rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /刚刚已交流过/);
++    assert.equal(sim.state.relationships[0].encounters, 1);
++  }
++});
++
++test('controlled actual saved-voxel bottom boundaries admit a head-clear gift and reject feet overlap atomically', () => {
++  // NOT_RUN when authored. These are two independent finite saved-voxel
++  // geometry fixtures, not blocks claimed to come from a build command.
++  // Actual build rounds to .2m and needs owned space: neither exact boundary
++  // below is a grid position in this unchanged public hall. No block material
++  // or construction counter is fabricated; only this explicit voxel fixture
++  // is added, while the original food comes from a real paid purchase.
++  const scenarios = [
++    { label: 'actual bottom .05 above original head is clear', headClear: true },
++    { label: 'actual bottom .15 below feet puts the .2 cube top .05 above feet', headClear: false },
++  ];
++  for (const scenario of scenarios) {
++    const { world, sim, citizen } = fixture(2);
++    assert.equal(world.voxelSize, .2);
++    assert.equal(sim.state.voxels.length, 0);
++    assert.equal(sim.state.relationships.length, 0);
++    assert.equal(sim.state.player.inventory.food, 2, 'only the real purchase provides food');
++    const feet = sim.state.player.position.y, head = feet + 1.72;
++    const bottom = scenario.headClear ? head + .05 : feet - .15;
++    const controlledVoxel = {
++      id: scenario.headClear ? 'gift-contact-controlled-saved-voxel-head-clear' : 'gift-contact-controlled-saved-voxel-feet-overlap',
++      position: { x: sim.state.player.position.x, y: bottom, z: sim.state.player.position.z },
++      color: '#8fcdc9',
++    };
++    assert.ok(Object.values(controlledVoxel.position).every(Number.isFinite));
++    assert.ok(controlledVoxel.id.length <= 80 && /^#[0-9a-fA-F]{6}$/.test(controlledVoxel.color));
++    const actualTop = bottom + .2, oldCentreBottom = bottom - .1, oldCentreTop = bottom + .1;
++    if (scenario.headClear) {
++      assert.ok(Math.abs(bottom - head - .05) < 1e-8);
++      assert.ok(bottom > head, 'rendered/controller .2 cube begins above the complete actual body');
++      assert.ok(oldCentreBottom < head && oldCentreTop > feet + .01,
++        'the former center interpretation falsely intersects this original standing body');
++    } else {
++      assert.ok(Math.abs(bottom - feet + .15) < 1e-8);
++      assert.ok(Math.abs(actualTop - feet - .05) < 1e-8);
++      assert.ok(bottom < feet && actualTop > feet + .01,
++        'the actual cube overlaps the original supported feet by more than the .01 allowance');
++      assert.ok(oldCentreTop < feet, 'the former center interpretation missed the actual feet overlap');
++    }
++    const beforeGeometryState = structuredClone(sim.state), beforeGeometryRuntime = structuredClone(runtime(sim));
++    // CONTROLLED existing saved-voxel geometry, not natural construction,
++    // ownership, arrival or consumption. No inventory/runtime source is granted.
++    sim.state.voxels.push(controlledVoxel);
++    assert.deepEqual(sim.state, { ...beforeGeometryState, voxels: [controlledVoxel] },
++      'the controlled geometry input changes only the finite saved voxel array');
++    assert.deepEqual(runtime(sim), beforeGeometryRuntime);
++    const geometrySave = sim.exportSave(), openingReader = new Simulation(world);
++    const opened = openingReader.importSave(geometrySave);
++    assert.equal(opened.ok, true, `${scenario.label}: the real reader accepts the finite original-schema voxel`);
++    assert.equal(openingReader.exportSave(), geometrySave, 'the geometry fixture keeps exact original full-save opening bytes');
++    assert.deepEqual(openingReader.state.voxels, [controlledVoxel]);
++    const role = Reflect.get(sim, 'citizenIdentity').call(sim, citizen) as Role;
++    const recipient = { position: citizen.position, role, identities: [role] };
++    const reason = giftContactReason(world, sim.state.player, recipient, sim.state.voxels);
++    if (!scenario.headClear) {
++      assert.ok(reason, 'actual stationary voxel overlap must fail contact before a relationship exists');
++      assert.match(reason, /体素/);
++      rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /体素/);
++      assert.equal(sim.state.relationships.length, 0);
++      assert.deepEqual(sim.state.voxels, [controlledVoxel]);
++      assert.equal(sim.state.player.inventory.food, 2);
++      continue;
++    }
++    assert.equal(reason, null, 'a cube above the original head cannot make legal contact fail');
++    const beforePlayer = structuredClone(sim.state.player), beforeCitizen = structuredClone(citizen);
++    const beforeProfiles = structuredClone(sim.state.extension!.actorProfiles), beforeVoxels = structuredClone(sim.state.voxels);
++    const clock = runtime(sim).relationshipClock;
++    const delivered = sim.command({ type: 'gift', targetId: citizen.id });
++    assert.equal(delivered.ok, true, `${scenario.label}: ${delivered.message}`);
++    assert.deepEqual(sim.state.player, { ...beforePlayer, reputation: beforePlayer.reputation + .5,
++      inventory: { ...beforePlayer.inventory, food: beforePlayer.inventory.food! - 1 } },
++      'complete original player retains funds, identity and needs while consuming exactly one paid food');
++    assert.deepEqual(citizen, { ...beforeCitizen, needs: { ...beforeCitizen.needs, hunger: beforeCitizen.needs.hunger + 20 } });
++    assert.deepEqual(sim.state.extension!.actorProfiles, beforeProfiles);
++    assert.deepEqual(sim.state.voxels, beforeVoxels, 'legal gift cannot remove or rewrite the fixture geometry');
++    assert.equal(sim.state.player.inventory.food, 1);
++    assert.equal(sim.state.relationships.length, 1);
++    const relation = sim.state.relationships[0];
++    assert.equal(relation.npcId, citizen.id); assert.equal(relation.affection, 12);
++    assert.equal(relation.trust, 8); assert.equal(relation.encounters, 1);
++    assert.equal(relation.type, 'acquaintance');
++    assert.deepEqual(relation.memories, [{ tick: sim.state.tick, text: '赠送食物', impact: 12 }]);
++    assert.equal(runtime(sim).relationshipAt[citizen.id], clock);
++    assert.equal(runtime(sim).relationshipClock, clock);
++    assert.equal(sim.state.events.at(-1)?.type, 'gift');
++    rejectAtomically(sim, { type: 'gift', targetId: citizen.id }, /刚刚已交流过/);
++    assert.equal(sim.state.relationships[0].encounters, 1);
++    assert.deepEqual(sim.state.voxels, beforeVoxels);
++  }
++});
+--- /dev/null
++++ b/tests/gift-contact-geometry.test.ts
+@@ -0,0 +1,338 @@
++import assert from 'node:assert/strict';
++import { readFileSync } from 'node:fs';
++import { gunzipSync } from 'node:zlib';
++import test from 'node:test';
++import { giftContactReason } from '../src/simulation/gift-contact.ts';
++import { buildingWorldPosition, blocksFloorPlanMovement, floorPlanSupport, getBuildingBody, getBuildingEntrance, getBuildingFloorPlan, getFloorPlanRoofRegions, getFloorPlanRoofSupport, type RoofRegion } from '../src/architecture-floor-plan.ts';
++import { canAccessFloor } from '../src/access.ts';
++import { getWalkHeight } from '../src/world.ts';
++import type { Building, Role, Vec3, WorldDefinition } from '../src/types.ts';
++
++// Frozen descriptor, not a world factory or a live Simulation. These subjects
++// have only geometry/identity fields; no consumer, inventory or needs is made.
++const world = JSON.parse(readFileSync(new URL('./fixtures/civic-history/root13-four-day.world.json', import.meta.url), 'utf8')) as WorldDefinition;
++const hall = world.buildings.find(building => building.id === 'civic-0-hall')!;
++const home = world.buildings.find(building => building.id === 'civic-0-home')!;
++const market = world.buildings.find(building => building.id === 'civic-0-market')!;
++const actor = (position: Vec3, role: Role = 'traveler', identities: Role[] = []) => ({ position: { ...position }, role, identities });
++type Subject = ReturnType<typeof actor>;
++type Voxels = readonly { position: Vec3 }[];
++const local = (building: Building, x: number, y: number, z: number) => buildingWorldPosition(building, { x, y, z });
++const near = (a: number, b: number, label: string) => assert.ok(Math.abs(a - b) < 1e-7, `${label}: ${a} != ${b}`);
++function supported(building: Building, floor: number, position: Vec3) {
++  const support = floorPlanSupport(building, floor, position, .35);
++  assert.ok(support, 'each controlled foot point supports the complete .35m body');
++  near(support.y, position.y, 'feet match the actual support height');
++  return support;
++}
++function legal(a: Subject, b: Subject, fixtureWorld = world, voxels: Voxels = []) {
++  assert.equal(giftContactReason(fixtureWorld, a, b, voxels), null);
++  assert.equal(giftContactReason(fixtureWorld, b, a, voxels), null, 'contact is valid in both directions');
++}
++function denied(a: Subject, b: Subject, fixtureWorld = world, voxels: Voxels = []) {
++  assert.equal(typeof giftContactReason(fixtureWorld, a, b, voxels), 'string');
++  assert.equal(typeof giftContactReason(fixtureWorld, b, a, voxels), 'string', 'both participants must obey the same geometry');
++}
++
++test('the frozen native hall permits close contact on its public ground programme plane', () => {
++  const a = { ...hall.functionPoints!.find(point => point.floor === 0 && point.purpose === 'work')!.position };
++  const b = { ...a, x: a.x + .8 };
++  assert.equal(supported(hall, 0, a).kind, 'room'); supported(hall, 0, b);
++  assert.equal(canAccessFloor(hall, 0, actor(a)), true);
++  assert.equal(blocksFloorPlanMovement(hall, 0, a, b, .35, 1.72), false);
++  legal(actor(a), actor(b));
++});
++
++test('the original hall storeys 3.8m apart cannot exchange a gift through the slab', () => {
++  const a = { ...hall.functionPoints!.find(point => point.floor === 0 && point.purpose === 'work')!.position };
++  const b = { ...hall.functionPoints!.find(point => point.floor === 1 && point.purpose === 'work')!.position };
++  near(b.y - a.y, 3.8, 'original saved storey separation');
++  supported(hall, 0, a); supported(hall, 1, b);
++  assert.equal(canAccessFloor(hall, 1, actor(b, 'official')), true);
++  denied(actor(a, 'official'), actor(b, 'official'));
++});
++
++test('two supported points 1.6m apart cannot exchange through an opaque same-floor hall wall', () => {
++  const a = local(hall, 5.5, 0, -10.6), b = local(hall, 5.5, 0, -9);
++  near(Math.hypot(a.x - b.x, a.z - b.z), 1.6, 'short same-floor segment');
++  assert.equal(supported(hall, 0, a).kind, 'room');
++  assert.equal(supported(hall, 0, b).kind, 'courtyard');
++  assert.equal(blocksFloorPlanMovement(hall, 0, a, b, .35, 1.72), true);
++  denied(actor(a), actor(b));
++});
++
++test('a legal open courtyard pair is retained', () => {
++  const a = local(hall, 8, 0, 4), b = local(hall, 9, 0, 4);
++  assert.equal(supported(hall, 0, a).kind, 'courtyard');
++  assert.equal(supported(hall, 0, b).kind, 'courtyard');
++  assert.equal(blocksFloorPlanMovement(hall, 0, a, b, .35, 1.72), false);
++  legal(actor(a), actor(b));
++});
++
++test('the actual hall door permits inside/outside contact, including the full-radius opening edge', () => {
++  assert.equal(hall.rotation, 0, 'the frozen doorway axes are used without changing its descriptor');
++  const door = getBuildingEntrance(hall), plan = getBuildingFloorPlan(hall, 0)!;
++  const opening = plan.walls.find(wall => wall.opening?.use === 'entrance')!.opening!;
++  near(door.x, hall.door.x, 'actual saved door x'); near(door.z, hall.door.z, 'actual saved door z');
++  const halfWidth = (opening.to - opening.from) / 2;
++  assert.ok(halfWidth > .36);
++  for (const offset of [0, halfWidth - .36, -halfWidth + .36]) {
++    const inside = { x: door.x + offset, y: door.y, z: door.z - .55 };
++    const outside = { x: inside.x, y: getWalkHeight(world, inside.x, door.z + .55, door.y), z: door.z + .55 };
++    supported(hall, 0, inside);
++    assert.equal(floorPlanSupport(hall, 0, outside, .35), null, 'outside is supported by the actual road, not a fake hall slab');
++    near(outside.y, inside.y, 'saved approach road meets the original doorway');
++    assert.equal(blocksFloorPlanMovement(hall, 0, inside, outside, .35, 1.72), false);
++    legal(actor(inside), actor(outside));
++  }
++});
++
++test('the real ground door shares full-body edge support with the original approach road', () => {
++  const door = getBuildingEntrance(hall);
++  const inside = { ...door, z: door.z - .1 };
++  const outside = { x: door.x, y: getWalkHeight(world, door.x, door.z + .55, door.y), z: door.z + .55 };
++  const center = floorPlanSupport(hall, 0, inside, 0);
++  assert.equal(center?.kind, 'room');
++  near(center!.y, inside.y, 'the door center is on the real ground slab');
++  assert.equal(floorPlanSupport(hall, 0, inside, .35), null, 'the foot disk crosses the actual open slab/road edge');
++  near(outside.y, inside.y, 'the original approach road supports the exterior feet');
++  assert.equal(blocksFloorPlanMovement(hall, 0, inside, outside, .35, 1.72), false);
++  legal(actor(inside), actor(outside));
++});
++
++function hallTurn() {
++  const plan = getBuildingFloorPlan(hall, 0)!;
++  const turn = plan.stairLandings.find(landing => landing.id === 'half-turn')!;
++  const x = (turn.rect.x0 + turn.rect.x1) / 2, z = (turn.rect.z0 + turn.rect.z1) / 2;
++  const a = local(hall, x - .4, turn.top, z), b = local(hall, x + .4, turn.top, z);
++  for (const point of [a, b]) {
++    const support = supported(hall, 0, point);
++    assert.equal(support.kind, 'stairs'); assert.deepEqual(support.link, { fromFloor: 0, toFloor: 1 });
++  }
++  assert.equal(blocksFloorPlanMovement(hall, 0, a, b, .35, 1.72), false);
++  return { a, b };
++}
++
++test('actual stair landing contact remains legal for identities allowed on both linked floors', () => {
++  const { a, b } = hallTurn(), sender = actor(a, 'traveler', ['official']), recipient = actor(b, 'official');
++  for (const subject of [sender, recipient]) for (const floor of [0, 1]) assert.equal(canAccessFloor(hall, floor, subject), true);
++  legal(sender, recipient);
++});
++
++test('a real stair link cannot bypass either participant\'s original upper-floor permission', () => {
++  const { a, b } = hallTurn(), traveler = actor(a), official = actor(b, 'official');
++  assert.equal(canAccessFloor(hall, 0, traveler), true);
++  assert.equal(canAccessFloor(hall, 1, traveler), false);
++  denied(traveler, official);
++});
++
++test('a solid voxel anywhere along contact rejects the exchange even when both endpoints are free', () => {
++  const a = local(hall, 0, 0, -13), b = local(hall, 2, 0, -13);
++  supported(hall, 0, a); supported(hall, 0, b); legal(actor(a), actor(b));
++  const voxels = [{ position: { x: (a.x + b.x) / 2, y: a.y + .2, z: a.z } }];
++  legal(actor(a), actor(a), world, voxels); legal(actor(b), actor(b), world, voxels);
++  denied(actor(a), actor(b), world, voxels);
++});
++
++for (const building of [home, market]) {
++  test(`unmarked legacy ${building.kind} retains permitted close contact and rejects storey/wall shortcuts`, () => {
++    assert.equal(getBuildingBody(building), null);
++    const a = { x: building.position.x, y: building.position.y + .6, z: building.position.z };
++    const b = { ...a, x: a.x + .8 };
++    near(getWalkHeight(world, a.x, a.z, a.y), a.y, 'legacy ground plane');
++    legal(actor(a), actor(b));
++    const upper = { ...a, y: a.y + building.height / building.floors };
++    assert.equal(canAccessFloor(building, 1, actor(upper)), true);
++    near(getWalkHeight(world, upper.x, upper.z, upper.y), upper.y, 'legacy upper plane');
++    legal(actor(upper), actor({ ...upper, x: upper.x + .8 }));
++    denied(actor(a), actor(upper));
++    const inside = { x: building.position.x + building.width / 2 - .8, y: a.y, z: building.position.z + 5 };
++    const outside = { x: building.position.x + building.width / 2 + .8, y: getWalkHeight(world, building.position.x + building.width / 2 + .8, inside.z, a.y), z: inside.z };
++    near(outside.y, inside.y, 'original road beside the legacy wall supplies the exterior feet');
++    denied(actor(inside), actor(outside));
++  });
++}
++
++test('a controlled bodyless core-main unit descriptor keeps the original middle-floor ACL and public top deck', () => {
++  // This copy is a geometry/ACL unit fixture, not an actual product core or a
++  // claim that a live citizen occupied it. No saved descriptor is mutated.
++  const core: Building = { ...structuredClone(home), id: 'core-main', name: 'controlled core geometry unit fixture', kind: 'core', floors: 3, height: 11.4, publicFloors: 1, requiredPermission: 'official', floorPermissions: ['public', 'official', 'official'] };
++  const coreWorld: WorldDefinition = { ...world, buildings: [core] };
++  assert.equal(getBuildingBody(core), null);
++  const ground = { ...core.position, y: core.position.y + .6 }, middle = { ...ground, y: ground.y + 3.8 }, top = { ...ground, y: ground.y + 7.6 };
++  legal(actor(ground), actor({ ...ground, x: ground.x + .8 }), coreWorld);
++  const allowed = actor(middle, 'traveler', ['official']), neighbor = actor({ ...middle, x: middle.x + .8 }, 'official');
++  assert.equal(canAccessFloor(core, 1, allowed), true); legal(allowed, neighbor, coreWorld);
++  assert.equal(canAccessFloor(core, 1, actor(middle)), false); denied(actor(middle), neighbor, coreWorld);
++  assert.equal(canAccessFloor(core, 2, actor(top)), true); legal(actor(top), actor({ ...top, x: top.x + .8 }), coreWorld);
++  denied(actor(ground, 'official'), allowed, coreWorld);
++  const inside = { x: core.position.x + core.width / 2 - .8, y: ground.y, z: core.position.z + 5 };
++  const outside = { x: core.position.x + core.width / 2 + .8, y: getWalkHeight(coreWorld, core.position.x + core.width / 2 + .8, inside.z, ground.y), z: inside.z };
++  near(outside.y, inside.y, 'unit fixture retains the original approach road'); denied(actor(inside), actor(outside), coreWorld);
++});
++
++test('non-finite contact coordinates and voxel coordinates fail closed', () => {
++  const a = actor(local(hall, 0, 0, -13)), b = actor(local(hall, .8, 0, -13));
++  for (const component of ['x', 'y', 'z'] as const) for (const value of [NaN, Infinity, -Infinity]) {
++    const bad = actor({ ...a.position, [component]: value });
++    denied(bad, b);
++    assert.equal(typeof giftContactReason(world, a, b, [{ position: { ...a.position, [component]: value } }]), 'string');
++  }
++});
++
++for (const building of [home, market]) {
++  test(`the original bodyless ${building.kind} ground door retains exact and near-edge feet in both roles`, () => {
++    assert.equal(getBuildingBody(building), null);
++    const peer = { x: building.door.x, y: getWalkHeight(world, building.door.x, building.door.z - .8, building.door.y), z: building.door.z - .8 };
++    near(peer.y, building.position.y + .6, 'the original interior walking plane');
++    for (const offset of [-.3, -.1, 0, .1, .3]) {
++      const point = { x: building.door.x, y: getWalkHeight(world, building.door.x, building.door.z + offset, building.door.y), z: building.door.z + offset };
++      near(point.y, building.position.y + .6, 'the actual saved slab/approach-road union');
++      assert.equal(canAccessFloor(building, 0, actor(point)), true);
++      legal(actor(point), actor(peer));
++    }
++  });
++}
++
++test('the original archived core descriptor keeps its ground door, private floor ACL and public top deck', () => {
++  // Read the existing archived world for its unchanged core/terrain/roads. This
++  // is an archive-geometry contract, not a current native gift reproduction.
++  const archive = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/world-layout/current-v3-20261001.json.gz', import.meta.url))).toString('utf8')) as { layout: string; world: WorldDefinition };
++  assert.equal(archive.layout, 'current-v3');
++  const core = archive.world.buildings.find(building => building.id === 'core-main')!;
++  assert.equal(core.kind, 'core'); assert.equal(getBuildingBody(core), null);
++  const archivedCoreWorld: WorldDefinition = { ...archive.world, buildings: [core] };
++  const peer = { x: core.door.x, y: getWalkHeight(archivedCoreWorld, core.door.x, core.door.z - .8, core.door.y), z: core.door.z - .8 };
++  for (const offset of [-.3, -.1, 0, .1, .3]) {
++    const point = { x: core.door.x, y: getWalkHeight(archivedCoreWorld, core.door.x, core.door.z + offset, core.door.y), z: core.door.z + offset };
++    near(point.y, core.position.y + .6, 'the original archive core slab and approach road');
++    near(peer.y, point.y, 'both archived door participants have actual feet');
++    assert.equal(canAccessFloor(core, 0, actor(point)), true);
++    legal(actor(point), actor(peer), archivedCoreWorld);
++  }
++  const at = (floor: number) => ({ x: core.position.x, y: core.position.y + .6 + floor * core.height / core.floors, z: core.position.z });
++  const middle = at(3), privatePeer = { ...middle, x: middle.x + .8 };
++  assert.equal(core.floorPermissions![3], 'official');
++  assert.equal(canAccessFloor(core, 3, actor(middle)), false);
++  assert.equal(canAccessFloor(core, 3, actor(middle, 'official')), true);
++  legal(actor(middle, 'official'), actor(privatePeer, 'official'), archivedCoreWorld);
++  denied(actor(middle), actor(privatePeer, 'official'), archivedCoreWorld);
++  const deck = at(core.floors - 1);
++  assert.equal(canAccessFloor(core, core.floors - 1, actor(deck)), true);
++  legal(actor(deck), actor({ ...deck, x: deck.x + .8 }), archivedCoreWorld);
++});
++
++function hallGable() {
++  const body = getBuildingBody(hall)!;
++  const roof = getFloorPlanRoofRegions(body).find(region => {
++    const crossSpan = region.gableAxis === 'x' ? region.rect.x1 - region.rect.x0 : region.rect.z1 - region.rect.z0;
++    const alongSpan = region.gableAxis === 'x' ? region.rect.z1 - region.rect.z0 : region.rect.x1 - region.rect.x0;
++    return region.kind === 'gable' && region.floor === hall.floors - 1 && crossSpan >= 2.4 && alongSpan >= 2.4;
++  });
++  assert.ok(roof, 'the unchanged original hall has a real top-storey gable patch');
++  const crossMin = roof.gableAxis === 'x' ? roof.rect.x0 : roof.rect.z0;
++  const crossMax = roof.gableAxis === 'x' ? roof.rect.x1 : roof.rect.z1;
++  const alongMin = roof.gableAxis === 'x' ? roof.rect.z0 : roof.rect.x0;
++  const alongMax = roof.gableAxis === 'x' ? roof.rect.z1 : roof.rect.x1;
++  return { roof, crossMin, crossMax, alongMin, alongMax };
++}
++
++function roofFoot(roof: RoofRegion, cross: number, along: number) {
++  const x = roof.gableAxis === 'x' ? cross : along, z = roof.gableAxis === 'x' ? along : cross;
++  assert.ok(x - roof.rect.x0 > .35 && roof.rect.x1 - x > .35 && z - roof.rect.z0 > .35 && roof.rect.z1 - z > .35, 'the complete foot disk lies within the actual roof patch');
++  const reference = local(hall, x, roof.top, z), support = getFloorPlanRoofSupport(hall, reference, .35);
++  assert.ok(support); assert.equal(support.kind, 'roof'); assert.equal(support.floor, roof.floor);
++  const point = { ...reference, y: support.y }, rechecked = getFloorPlanRoofSupport(hall, point, .35);
++  assert.ok(rechecked); near(rechecked.y, point.y, 'complete-radius roof feet');
++  assert.equal(canAccessFloor(hall, roof.floor, actor(point, 'official')), true);
++  return point;
++}
++
++test('supported close contact parallel to one side of the original hall gable remains legal', () => {
++  const { roof, crossMin, crossMax, alongMin, alongMax } = hallGable();
++  const cross = crossMin + (crossMax - crossMin) / 4, along = (alongMin + alongMax) / 2;
++  const a = roofFoot(roof, cross, along - .4), b = roofFoot(roof, cross, along + .4);
++  near(a.y, b.y, 'parallel same-side feet follow the original roof height');
++  assert.equal(blocksFloorPlanMovement(hall, roof.floor, a, b, .35, 1.72), false);
++  legal(actor(a, 'official'), actor(b, 'official'));
++});
++
++test('two fully supported roof endpoints cannot pass food through the original raised gable ridge', () => {
++  const { roof, crossMin, crossMax, alongMin, alongMax } = hallGable();
++  const cross = (crossMin + crossMax) / 2, along = (alongMin + alongMax) / 2;
++  const a = roofFoot(roof, cross - .7, along), b = roofFoot(roof, cross + .7, along);
++  near(a.y, b.y, 'symmetric full-radius endpoints have equal actual roof heights');
++  assert.ok(Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z) < 2, 'the pair is within the gift distance');
++  const midpoint = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, z: (a.z + b.z) / 2 };
++  const ridge = getFloorPlanRoofSupport(hall, midpoint, .35);
++  assert.ok(ridge && ridge.y > midpoint.y + .01, 'the straight feet line crosses below the real ridge, not above it');
++  assert.equal(blocksFloorPlanMovement(hall, roof.floor, a, b, .35, 1.72), true);
++  denied(actor(a, 'official'), actor(b, 'official'));
++});
++
++test('overlapping original hall shapes cannot hide a private floor ACL by descriptor order', () => {
++  // Controlled geometry unit overlap only: translate one original descriptor,
++  // retaining every wall and both original permission arrays. No live citizen.
++  const privateHall: Building = { ...structuredClone(hall), id: 'controlled-original-private-hall' };
++  const shift = hall.height / hall.floors;
++  const publicHall: Building = { ...structuredClone(hall), id: 'controlled-translated-ground-hall', position: { ...hall.position, y: hall.position.y + shift }, door: { ...hall.door, y: hall.door.y + shift }, functionPoints: hall.functionPoints!.map(point => ({ ...point, position: { ...point.position, y: point.position.y + shift } })) };
++  assert.deepEqual(privateHall.floorPermissions, hall.floorPermissions);
++  assert.deepEqual(publicHall.floorPermissions, hall.floorPermissions);
++  const a = local(privateHall, 0, shift, -13), b = local(privateHall, .8, shift, -13);
++  for (const point of [a, b]) { supported(privateHall, 1, point); supported(publicHall, 0, point); }
++  assert.equal(canAccessFloor(publicHall, 0, actor(a)), true);
++  assert.equal(canAccessFloor(privateHall, 1, actor(a)), false);
++  assert.equal(blocksFloorPlanMovement(privateHall, 1, a, b, .35, 1.72), false);
++  assert.equal(blocksFloorPlanMovement(publicHall, 0, a, b, .35, 1.72), false);
++  for (const buildings of [[publicHall, privateHall], [privateHall, publicHall]]) {
++    const overlapWorld: WorldDefinition = { ...world, buildings };
++    legal(actor(a, 'official'), actor(b, 'official'), overlapWorld);
++    denied(actor(a), actor(b), overlapWorld);
++  }
++});
++
++test('an original hall roof edge cannot turn center-only height support into a full standing disk', () => {
++  // Pure descriptor boundary case only, not an observed native NPC position.
++  const regions = getFloorPlanRoofRegions(getBuildingBody(hall)!);
++  const roof = regions.find(region => region.kind === 'gable' && region.floor === hall.floors - 1 && Math.abs(region.rect.x0 + hall.width / 2) < 1e-7 && region.rect.x1 - region.rect.x0 > 1.4 && region.rect.z1 - region.rect.z0 > 1);
++  assert.ok(roof, 'the original top-storey gable reaches the real exterior west edge');
++  assert.ok(regions.every(region => region.rect.x0 >= roof.rect.x0 - 1e-7), 'no actual roof patch supplies the missing exterior portion');
++  const z = (roof.rect.z0 + roof.rect.z1) / 2;
++  const reference = local(hall, roof.rect.x0 + .1, roof.top, z);
++  const support = getFloorPlanRoofSupport(hall, reference, .35);
++  assert.ok(support, 'the old roof-height API still reports an intersecting disk height');
++  const edge = { ...reference, y: support.y };
++  near(getFloorPlanRoofSupport(hall, edge, .35)!.y, edge.y, 'reported height matches the controlled edge feet');
++  assert.ok(roof.rect.x0 + .1 - .35 < roof.rect.x0, 'the complete .35m disk overhangs the real roof union');
++  assert.equal(getFloorPlanRoofSupport(hall, local(hall, roof.rect.x0 - .1, roof.top, z), 0), null, 'the overhanging exterior center has no original roof patch');
++  const peerReference = local(hall, roof.rect.x0 + 1, roof.top, z);
++  const peerSupport = getFloorPlanRoofSupport(hall, peerReference, .35); assert.ok(peerSupport);
++  const peer = { ...peerReference, y: peerSupport.y };
++  assert.ok(Math.hypot(edge.x - peer.x, edge.y - peer.y, edge.z - peer.z) < 2);
++  legal(actor(peer, 'official'), actor(peer, 'official'));
++  denied(actor(edge, 'official'), actor(peer, 'official'));
++});
++
++test('a real bottom-anchored .2m voxel above the body head leaves native hall contact clear', () => {
++  const a = local(hall, 0, 0, -13), b = local(hall, .8, 0, -13);
++  supported(hall, 0, a); supported(hall, 0, b); legal(actor(a), actor(b));
++  // main.ts renders the .2m cube at p.y + .1; Controller treats its solid as
++  // [p.y, p.y + .2]. This supplied geometry boundary is not a build command.
++  const head = a.y + 1.72, block = { position: { x: a.x, y: head + .05, z: a.z } };
++  near(block.position.y - head, .05, 'actual cube bottom clears the full body head');
++  assert.ok(block.position.y > head && block.position.y + .2 > head);
++  legal(actor(a), actor(a), world, [block]);
++  legal(actor(a), actor(b), world, [block]);
++});
++
++test('a real voxel top above the feet blocks native hall contact despite the former centered-box gap', () => {
++  const a = local(hall, 0, 0, -13), b = local(hall, .8, 0, -13);
++  supported(hall, 0, a); supported(hall, 0, b); legal(actor(a), actor(b));
++  const block = { position: { x: a.x, y: a.y - .15, z: a.z } };
++  const actualTop = block.position.y + .2;
++  near(actualTop - a.y, .05, 'authoritative bottom-anchored cube enters above the feet');
++  assert.ok(block.position.y < a.y && actualTop > a.y + .01);
++  assert.ok(block.position.y + .1 < a.y, 'the former helper-centered top would miss this real solid');
++  denied(actor(a), actor(a), world, [block]);
++  denied(actor(a), actor(b), world, [block]);
++});

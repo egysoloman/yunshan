@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-04T21:52:07.285321+00:00",
+  "sourceGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+  "fullStatus": "TIMEOUT_PARTIAL",
+  "limitSeconds": 3600,
+  "completedFilesNotClaimedFromCounts": true,
+  "partialObservedFile": "tests/extensions.test.ts",
+  "inputCount": 318,
+  "inputsStable": true,
+  "activeDescendants": [],
+  "publicMedicalArtifactFilesForcedTracked": 10,
+  "note": "Original .gitignore artifacts/ also matched selected evidence subdirectories. Explicitly tracking only these ten small original medical receipts preserves Git-viewable report links without changing global build-output ignores.",
+  "visibleTopLevelPassLines": 275,
+  "runnerSummary": {
+    "tests": 359,
+    "suites": 0,
+    "pass": 280,
+    "fail": 0,
+    "cancelled": 79,
+    "skipped": 0,
+    "todo": 0
+  },
+  "rawSHA256": "da45819587d5569cf5a0014fcead7367eaf22afb676fbeedabe970c90e8bbb79",
+  "terminationNote": "After the original cap, Node reports 79 file-level cancellations. The 159 visible x-marked lines include duplicate cancellation listings and the failing-tests header; they are not 159 assertion failures. Final authoritative summary has fail0; the whole run is TIMEOUT_PARTIAL."
+}

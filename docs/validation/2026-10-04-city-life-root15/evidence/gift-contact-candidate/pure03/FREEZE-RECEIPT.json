@@ -1,0 +1,23 @@
+{
+  "frozenAt": "2026-10-04T22:02:35.775317+00:00",
+  "source": "/workspace/yunshan-work/ROOT15-gift-contact-candidate-20261004-01/pure03/source",
+  "inputs": 322,
+  "src": 80,
+  "testModules": 119,
+  "graph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "baselineGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+  "changed": {
+    "src/simulation.ts": {
+      "before": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9",
+      "after": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c"
+    }
+  },
+  "added": {
+    "src/simulation/gift-contact-legacy.ts": "6badb6b9cc24194e50ac56ff8dafe58c0939ea9dc33ea19e2b0fee70aefcd7bb",
+    "src/simulation/gift-contact.ts": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e",
+    "tests/gift-contact-command.test.ts": "0817b69a5b99429dda70b9a9c366f7fac0e8fa79de86ea8900a61af954ee4e45",
+    "tests/gift-contact-geometry.test.ts": "91eb78a1054b6193d0c7e974718019ab1245fbf089843669f70797bd12a8cdbc"
+  },
+  "allOriginal117TestFilesUnchanged": true,
+  "historicalReceiptsRetained": true
+}

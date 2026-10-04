@@ -1,0 +1,225 @@
+{
+  "status": "READ_ONLY_STATIC_COMPLETED; NO_SIMULATION_TEST_BUILD_BROWSER_GPU_EXECUTED",
+  "writtenAtUTC": "2026-10-04T22:18:18.112920+00:00",
+  "immutableSourceGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+  "inputMapsBeforeAfterEqual": true,
+  "inputCount": 318,
+  "selectedSourceHashesMatchRunInputs": {
+    "tests/extensions.test.ts": true,
+    "package.json": true,
+    "src/simulation.ts": true,
+    "src/world.ts": true,
+    "src/simulation/extensions.ts": true,
+    "scripts/economy-audit.ts": true,
+    "src/commercial-district.ts": true
+  },
+  "onlyInputDifferenceFromEarlierNoneOOM": [
+    "package.json"
+  ],
+  "currentSharedTestAndPackageMatchFrozen": true,
+  "rulesRead": {
+    "AGENTS": "complete",
+    "prompt": "complete",
+    "memo": "complete original initial read snapshot at 439743 bytes; parent later updated shared memo during concurrent work, so no SHA of that original snapshot is claimed"
+  },
+  "files": [
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/FREEZE-RECEIPT.json",
+      "bytes": 686,
+      "lines": 12,
+      "sha256": "4cf4996aaacc77230aaafe48a6f83593b5dacc0487e867999f60df97544320b1"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/INPUTS-318.json",
+      "bytes": 34762,
+      "lines": 320,
+      "sha256": "854b9f5cee23b6356c5e69b1a448178746ebdd6b0c23ff4ca858bd05986e1ab0"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/run-phase.py",
+      "bytes": 3933,
+      "lines": 59,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/raw.log",
+      "bytes": 56477,
+      "lines": 709,
+      "sha256": "da45819587d5569cf5a0014fcead7367eaf22afb676fbeedabe970c90e8bbb79"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/receipt.json",
+      "bytes": 6682,
+      "lines": 341,
+      "sha256": "37ee7bcb2e41eb182b5a58d6c6698192a3d4d4cb124c8236078814c004fe8705"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/inputs-before.json",
+      "bytes": 34762,
+      "lines": 320,
+      "sha256": "854b9f5cee23b6356c5e69b1a448178746ebdd6b0c23ff4ca858bd05986e1ab0"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/inputs-after.json",
+      "bytes": 34762,
+      "lines": 320,
+      "sha256": "854b9f5cee23b6356c5e69b1a448178746ebdd6b0c23ff4ca858bd05986e1ab0"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/owned-descendants.json",
+      "bytes": 10843,
+      "lines": 642,
+      "sha256": "957bda85b856107049fab378b95271007c4bf3af8a7e4aa784b4245e30be7b86"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/full-rules01/owned-process.json",
+      "bytes": 209,
+      "lines": 15,
+      "sha256": "9bb9c5776aa830fc28c25df720eabd3eeb690cc7ef1e84966fbd8cfb672dd8c5"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/tests/extensions.test.ts",
+      "bytes": 108044,
+      "lines": 1701,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/package.json",
+      "bytes": 879,
+      "lines": 30,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/src/simulation.ts",
+      "bytes": 296089,
+      "lines": 2662,
+      "sha256": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/src/world.ts",
+      "bytes": 54827,
+      "lines": 685,
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/src/simulation/extensions.ts",
+      "bytes": 92823,
+      "lines": 712,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "/workspace/yunshan/tests/extensions.test.ts",
+      "bytes": 108044,
+      "lines": 1701,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "/workspace/yunshan/package.json",
+      "bytes": 879,
+      "lines": 30,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    },
+    {
+      "path": "/workspace/yunshan/AGENTS.md",
+      "bytes": 1726,
+      "lines": 11,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "/workspace/yunshan/提示词.md",
+      "bytes": 25038,
+      "lines": 185,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-final-integration-20261004-01/FREEZE-RECEIPT.json",
+      "bytes": 840,
+      "lines": 20,
+      "sha256": "bffed72dce275da339e9470bc02ceec30eddae9ed60f59f2e5d6dc10c80e0945"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-final-integration-20261004-01/source/package.json",
+      "bytes": 855,
+      "lines": 30,
+      "sha256": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-final-integration-20261004-01/full-rules01/raw.log",
+      "bytes": 12850,
+      "lines": 131,
+      "sha256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-final-integration-20261004-01/full-rules01/receipt.json",
+      "bytes": 1457,
+      "lines": 61,
+      "sha256": "f170684d3424f9af92fe252320bd031a748a5de67ee4153c0c86870197035b31"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-final-integration-20261004-01/full-rules01/inputs-before.json",
+      "bytes": 34762,
+      "lines": 320,
+      "sha256": "f40b076bc8f1b0ecc28f999c8368d6e15bee928a854d1abbd997e78cea362aa1"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/runtime-info.json",
+      "bytes": 964,
+      "lines": 27,
+      "sha256": "773356c1501968f887389ef3f7ec2eb61204d06ac63c67a98ca33fcd682beb2d"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--runner.js",
+      "bytes": 35690,
+      "lines": 1127,
+      "sha256": "e04e397be4e579f1fb08ecf239fb2914035f7ffe26be5bc629f45aa4313a0b68"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--utils.js",
+      "bytes": 23288,
+      "lines": 744,
+      "sha256": "aa047506eac62cc394eab0add5cca72796d1ea7d36273ac7a0fd9d47dd76fd32"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--tests_stream.js",
+      "bytes": 4015,
+      "lines": 200,
+      "sha256": "49946df9b229df7193f2f3e7a612d17b62f9b62667094c14c8f6cff20cb697bd"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--test.js",
+      "bytes": 54900,
+      "lines": 1912,
+      "sha256": "21570a32454209d42032d73e87676f6d9ff178827740b8a770ff314c510bb476"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--reporter--spec.js",
+      "bytes": 4743,
+      "lines": 142,
+      "sha256": "2077200dd9130524d888fb002f96a4e2da50f1c57ab2895b1c22a34959020242"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-full-suite-import-review-20261004-01/runner-timeout/internal--test_runner--harness.js",
+      "bytes": 13823,
+      "lines": 455,
+      "sha256": "61038f76fac819889060054aff83e10e9087104716270ab8f816a12ff019176b"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/scripts/economy-audit.ts",
+      "bytes": 34330,
+      "lines": 399,
+      "sha256": "6b15e62718064d1da2d981bb65723e61fee486dec73435910b7cfef068ff4e28"
+    },
+    {
+      "path": "/workspace/yunshan/scripts/economy-audit.ts",
+      "bytes": 34330,
+      "lines": 399,
+      "sha256": "6b15e62718064d1da2d981bb65723e61fee486dec73435910b7cfef068ff4e28"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source/src/commercial-district.ts",
+      "bytes": 5800,
+      "lines": 89,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    }
+  ]
+}
