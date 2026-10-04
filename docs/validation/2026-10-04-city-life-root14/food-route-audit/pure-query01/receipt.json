@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-04T15:52:31.745878+00:00",
+  "endedAt": "2026-10-04T15:52:44.157594+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT14-default-food-route-audit-20261004-01/query.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 295,
+  "inputsStable": true,
+  "rawSHA256": "885f4e9ac07f030c07ed982b0ac84f62ba485225546e5cd9c894bbda1ec48993",
+  "ownedPid": 92647,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 92655,
+      "state": "Z",
+      "parent": 1,
+      "group": 92647,
+      "session": 92647,
+      "startTicks": 5997654
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

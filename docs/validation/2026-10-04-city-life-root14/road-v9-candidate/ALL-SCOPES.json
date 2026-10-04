@@ -1,0 +1,305 @@
+{
+  "scopes": [
+    {
+      "name": "carrier-descriptor-rules01",
+      "startedAt": "2026-10-04T15:42:25.150087+00:00",
+      "endedAt": "2026-10-04T15:42:26.586344+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/carrier-station-solids.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 307,
+      "inputsStable": true,
+      "rawSHA256": "ab08cf11c0cab99f87c749a0f66124b86a51d07e7933af3bab447ad1bce8d891",
+      "ownedPid": 90692,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 90706,
+          "state": "Z",
+          "parent": 1,
+          "group": 90692,
+          "session": 90692,
+          "startTicks": 5937018
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "carrier-types01",
+      "startedAt": "2026-10-04T15:42:25.149498+00:00",
+      "endedAt": "2026-10-04T15:42:39.937643+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 2,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 307,
+      "inputsStable": true,
+      "rawSHA256": "cc8854432da65075263aaec4d120a6dfd6312b692ef3a6930f743cf468f32c74",
+      "ownedPid": 90691,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "carrier-types02",
+      "startedAt": "2026-10-04T15:44:40.763731+00:00",
+      "endedAt": "2026-10-04T15:45:00.686502+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 311,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 91033,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-berth01",
+      "startedAt": "2026-10-04T16:49:28.402626+00:00",
+      "endedAt": "2026-10-04T16:49:30.008131+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/station-berth-proposal.ts",
+        "artifacts/v9-berth01"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 319,
+      "inputsStable": true,
+      "rawSHA256": "f98087f6c6e9e0e431ea9b6e55bdd794e12aff64acebbd1afde3034624462059",
+      "ownedPid": 95809,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 95817,
+          "state": "Z",
+          "parent": 1,
+          "group": 95809,
+          "session": 95809,
+          "startTicks": 6339335
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-factory01",
+      "startedAt": "2026-10-04T15:50:02.975065+00:00",
+      "endedAt": "2026-10-04T15:50:21.467779+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/world-v9-station.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 313,
+      "inputsStable": true,
+      "rawSHA256": "3d32d573e822769398d0b78decd5f89ac78394f23114e59b577d853e436e4ee7",
+      "ownedPid": 92462,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 92470,
+          "state": "Z",
+          "parent": 1,
+          "group": 92462,
+          "session": 92462,
+          "startTicks": 5982788
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-foot02",
+      "startedAt": "2026-10-04T16:28:53.765415+00:00",
+      "endedAt": "2026-10-04T16:29:08.207217+00:00",
+      "argv": [
+        "python",
+        "-c",
+        "import subprocess; subprocess.run([\"node\",\"--import\",\"tsx\",\"--test\",\"--test-isolation=none\",\"tests/street-foot-corridor.test.ts\"],check=True); subprocess.run([\"node\",\"node_modules/typescript/bin/tsc\",\"--noEmit\"],check=True)"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 317,
+      "inputsStable": true,
+      "rawSHA256": "2d72b27bdb39cc2d93176630ed5b525cd10efb8ab5b83deb6d67df4bc5e87b59",
+      "ownedPid": 95266,
+      "observedDescendants": 4,
+      "finalOwnedMembers": [
+        {
+          "pid": 95275,
+          "state": "Z",
+          "parent": 1,
+          "group": 95266,
+          "session": 95266,
+          "startTicks": 6215875
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-foot03",
+      "startedAt": "2026-10-04T16:35:46.481124+00:00",
+      "endedAt": "2026-10-04T16:35:47.096539+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/street-foot-corridor.test.ts"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 317,
+      "inputsStable": true,
+      "rawSHA256": "e58633b2b85272e8c1cdd3b23cc254b92b36d27166da6717c92225dcbe1abec8",
+      "ownedPid": 95501,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 95509,
+          "state": "Z",
+          "parent": 1,
+          "group": 95501,
+          "session": 95501,
+          "startTicks": 6257127
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-foot04",
+      "startedAt": "2026-10-04T16:44:37.554556+00:00",
+      "endedAt": "2026-10-04T16:44:56.197201+00:00",
+      "argv": [
+        "python",
+        "-c",
+        "import subprocess; subprocess.run([\"node\",\"--import\",\"tsx\",\"--test\",\"--test-isolation=none\",\"tests/street-foot-corridor.test.ts\"],check=True); subprocess.run([\"node\",\"node_modules/typescript/bin/tsc\",\"--noEmit\"],check=True)"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 318,
+      "inputsStable": true,
+      "rawSHA256": "47d0d0dde7c6a89a0db6aae2fa7476206ab2927ff084885b1792a3f40c9860d8",
+      "ownedPid": 95703,
+      "observedDescendants": 4,
+      "finalOwnedMembers": [
+        {
+          "pid": 95712,
+          "state": "Z",
+          "parent": 1,
+          "group": 95703,
+          "session": 95703,
+          "startTicks": 6310266
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-transfer01",
+      "startedAt": "2026-10-04T16:11:26.804681+00:00",
+      "endedAt": "2026-10-04T16:11:45.824067+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/carrier-transfer-v9.test.ts"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 315,
+      "inputsStable": true,
+      "rawSHA256": "fce61879833c51de0a161e4e9e8c5a0d3ebe8c4f9bb1d1757743febe54e97c57",
+      "ownedPid": 94049,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 94057,
+          "state": "Z",
+          "parent": 1,
+          "group": 94049,
+          "session": 94049,
+          "startTicks": 6111173
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    {
+      "name": "v9-types-final01",
+      "startedAt": "2026-10-04T16:55:20.993918+00:00",
+      "endedAt": "2026-10-04T16:55:34.669670+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 319,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 95912,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    }
+  ],
+  "count": 10,
+  "allInputsStable": true,
+  "allClosingActiveDescendantsEmpty": true,
+  "claim": "Each scope owned closure is recorded at its actual end, not a global parent-process or future-performance assertion."
+}

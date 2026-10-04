@@ -1,0 +1,1010 @@
+[
+  {
+    "actorId": "citizen-151",
+    "state": "physicalWaiting",
+    "hunger": 22.812315817037657,
+    "wallet": 309.22707326710224,
+    "destinationId": "east-b37",
+    "routeIndex": 99,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b27",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 1181.6000000000001,
+          "y": 167.8,
+          "z": -163
+        },
+        "to": {
+          "x": 1181.6000000000001,
+          "y": 169,
+          "z": -152
+        },
+        "door": {
+          "x": 1181.6000000000001,
+          "y": 167.8,
+          "z": -163
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 13.0,
+          "z1": 13.4,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 1179.4,
+          "x1": 1183.8000000000002,
+          "z0": -163.20000000000002,
+          "z1": -162.8,
+          "bottom": 170.60000000000002,
+          "top": 170.8
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.04999999999999845
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7800000000000022,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.060000000000002274
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0199999999999976,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-181",
+    "state": "physicalWaiting",
+    "hunger": 16.219725315691946,
+    "wallet": 241.39455715194345,
+    "destinationId": "market-b42",
+    "routeIndex": 6,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "government-b19",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 796.2,
+          "y": 268.6,
+          "z": -532.6
+        },
+        "to": {
+          "x": 796.2,
+          "y": 270,
+          "z": -520
+        },
+        "door": {
+          "x": 796.2,
+          "y": 268.6,
+          "z": -532.6
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 13.2,
+          "z1": 13.6,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 794.0,
+          "x1": 798.4000000000001,
+          "z0": -532.8,
+          "z1": -532.4,
+          "bottom": 271.40000000000003,
+          "top": 271.6
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.043650793650798984
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7811111111111313,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.06111111111113132
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0188888888888685,
+        "wholeLegMaxFootAboveDoor": 1.3999999999999773,
+        "sourceGuardWholeLegHeadAboveDoor": 3.119999999999977,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-195",
+    "state": "physicalWaiting",
+    "hunger": 20.17444858369423,
+    "wallet": 249.7402752749622,
+    "destinationId": "east-b37",
+    "routeIndex": 53,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b33",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 975.2,
+          "y": 172.20000000000002,
+          "z": -253.4
+        },
+        "to": {
+          "x": 975.2,
+          "y": 173.4,
+          "z": -240
+        },
+        "door": {
+          "x": 975.2,
+          "y": 172.20000000000002,
+          "z": -253.4
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.0,
+          "x1": 2.0,
+          "z0": 13.0,
+          "z1": 13.4,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 973.2,
+          "x1": 977.2,
+          "z0": -253.60000000000002,
+          "z1": -253.20000000000002,
+          "bottom": 175.00000000000003,
+          "top": 175.20000000000002
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.041044776119401695
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7692537313432706,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.0492537313432706
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0307462686567292,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-247",
+    "state": "physicalWaiting",
+    "hunger": 0,
+    "wallet": 434.92393244523555,
+    "destinationId": "summit-b2",
+    "routeIndex": 53,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "government-b41",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 489.20000000000005,
+          "y": 306.6,
+          "z": -587.6
+        },
+        "to": {
+          "x": 489.20000000000005,
+          "y": 307.8,
+          "z": -576
+        },
+        "door": {
+          "x": 489.20000000000005,
+          "y": 306.6,
+          "z": -587.6
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.0,
+          "x1": 2.0,
+          "z0": 13.4,
+          "z1": 13.8,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 487.20000000000005,
+          "x1": 491.20000000000005,
+          "z0": -587.8000000000001,
+          "z1": -587.4000000000001,
+          "bottom": 309.40000000000003,
+          "top": 309.6
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.04741379310344426
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7768965517241508,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.05689655172415087
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.023103448275849,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-261",
+    "state": "physicalWaiting",
+    "hunger": 6.30947065330111,
+    "wallet": 428.74540833297124,
+    "destinationId": "east-b37",
+    "routeIndex": 146,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b37",
+        "siteKind": "market",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 1051,
+          "y": 173.8,
+          "z": -176
+        },
+        "to": {
+          "x": 1051,
+          "y": 172.60000000000002,
+          "z": -187.8
+        },
+        "door": {
+          "x": 1051,
+          "y": 172.60000000000002,
+          "z": -187.8
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.2,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 14.0,
+          "z1": 14.4,
+          "bottom": 2.8,
+          "top": 3.2
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 1048.8,
+          "x1": 1053.2,
+          "z0": -188.0,
+          "z1": -187.6,
+          "bottom": 175.40000000000003,
+          "top": 175.8
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0.9533898305084737,
+          1
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7759322033898297,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.05593220338982974,
+          0.0
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0240677966101701,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-267",
+    "state": "physicalWaiting",
+    "hunger": 22.893964964570543,
+    "wallet": 485.8999456744641,
+    "destinationId": "west-b12",
+    "routeIndex": 30,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "west-b32",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": -1437.8000000000002,
+          "y": 288.8,
+          "z": -667.8000000000001
+        },
+        "to": {
+          "x": -1437.8000000000002,
+          "y": 290,
+          "z": -656
+        },
+        "door": {
+          "x": -1437.8000000000002,
+          "y": 288.8,
+          "z": -667.8000000000001
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.4,
+          "x1": 2.4,
+          "z0": 16.2,
+          "z1": 16.6,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": -1440.2000000000003,
+          "x1": -1435.4,
+          "z0": -668.0,
+          "z1": -667.6,
+          "bottom": 291.6,
+          "top": 291.8
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.046610169491530934
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7759322033898297,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.05593220338982974
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0240677966101701,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-278",
+    "state": "physicalWaiting",
+    "hunger": 19.621340467268652,
+    "wallet": 185.25571662466973,
+    "destinationId": "west-b9",
+    "routeIndex": 168,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "west-b33",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": -1472,
+          "y": 266.6,
+          "z": -429.20000000000005
+        },
+        "to": {
+          "x": -1472,
+          "y": 268.2,
+          "z": -416
+        },
+        "door": {
+          "x": -1472,
+          "y": 266.6,
+          "z": -429.20000000000005
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.0,
+          "x1": 2.0,
+          "z0": 12.6,
+          "z1": 13.0,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": -1474.0,
+          "x1": -1470.0,
+          "z0": -429.4,
+          "z1": -429.0,
+          "bottom": 269.40000000000003,
+          "top": 269.6
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.04166666666667169
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7866666666666629,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.06666666666666288
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.013333333333337,
+        "wholeLegMaxFootAboveDoor": 1.599999999999966,
+        "sourceGuardWholeLegHeadAboveDoor": 3.3199999999999656,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-301",
+    "state": "physicalWaiting",
+    "hunger": 22.827945011155748,
+    "wallet": 336.90521474927664,
+    "destinationId": "market-b0",
+    "routeIndex": 145,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "academy-b54",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": -295,
+          "y": 184.20000000000002,
+          "z": -723.4000000000001
+        },
+        "to": {
+          "x": -295,
+          "y": 185.4,
+          "z": -712
+        },
+        "door": {
+          "x": -295,
+          "y": 184.20000000000002,
+          "z": -723.4000000000001
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.4,
+          "x1": 2.4,
+          "z0": 15.4,
+          "z1": 15.8,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": -297.4,
+          "x1": -292.6,
+          "z0": -723.6,
+          "z1": -723.2,
+          "bottom": 187.00000000000003,
+          "top": 187.20000000000002
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.048245614035093316
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7778947368421154,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.057894736842115435
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0221052631578844,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-327",
+    "state": "physicalWaiting",
+    "hunger": 0,
+    "wallet": 316.45093815168366,
+    "destinationId": "east-b37",
+    "routeIndex": 145,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b59",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 1509.2,
+          "y": 107.4,
+          "z": -33
+        },
+        "to": {
+          "x": 1509.2,
+          "y": 108.60000000000001,
+          "z": -24
+        },
+        "door": {
+          "x": 1509.2,
+          "y": 107.4,
+          "z": -33
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.0,
+          "x1": 2.0,
+          "z0": 13.6,
+          "z1": 14.0,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 1507.2,
+          "x1": 1511.2,
+          "z0": -33.2,
+          "z1": -32.800000000000004,
+          "bottom": 110.2,
+          "top": 110.4
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.0611111111111108
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7933333333333377,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.07333333333333769
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0066666666666622,
+        "wholeLegMaxFootAboveDoor": 1.2000000000000028,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9200000000000026,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-393",
+    "state": "physicalWaiting",
+    "hunger": 7.131441705720501,
+    "wallet": 299.56586093283425,
+    "destinationId": "east-b37",
+    "routeIndex": 54,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b37",
+        "siteKind": "market",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 1051,
+          "y": 173.8,
+          "z": -176
+        },
+        "to": {
+          "x": 1051,
+          "y": 172.60000000000002,
+          "z": -187.8
+        },
+        "door": {
+          "x": 1051,
+          "y": 172.60000000000002,
+          "z": -187.8
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.2,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 14.0,
+          "z1": 14.4,
+          "bottom": 2.8,
+          "top": 3.2
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 1048.8,
+          "x1": 1053.2,
+          "z0": -188.0,
+          "z1": -187.6,
+          "bottom": 175.40000000000003,
+          "top": 175.8
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0.9533898305084737,
+          1
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7759322033898297,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.05593220338982974,
+          0.0
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0240677966101701,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-445",
+    "state": "physicalWaiting",
+    "hunger": 2.327767043095073,
+    "wallet": 224.5897164568305,
+    "destinationId": "market-b42",
+    "routeIndex": 76,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "government-b19",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 796.2,
+          "y": 268.6,
+          "z": -532.6
+        },
+        "to": {
+          "x": 796.2,
+          "y": 270,
+          "z": -520
+        },
+        "door": {
+          "x": 796.2,
+          "y": 268.6,
+          "z": -532.6
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 13.2,
+          "z1": 13.6,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 794.0,
+          "x1": 798.4000000000001,
+          "z0": -532.8,
+          "z1": -532.4,
+          "bottom": 271.40000000000003,
+          "top": 271.6
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.043650793650798984
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7811111111111313,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.06111111111113132
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0188888888888685,
+        "wholeLegMaxFootAboveDoor": 1.3999999999999773,
+        "sourceGuardWholeLegHeadAboveDoor": 3.119999999999977,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-569",
+    "state": "physicalWaiting",
+    "hunger": 9.451624725339942,
+    "wallet": 446.28177252598107,
+    "destinationId": "east-b37",
+    "routeIndex": 6,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b27",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 1181.6000000000001,
+          "y": 167.8,
+          "z": -163
+        },
+        "to": {
+          "x": 1181.6000000000001,
+          "y": 169,
+          "z": -152
+        },
+        "door": {
+          "x": 1181.6000000000001,
+          "y": 167.8,
+          "z": -163
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.2,
+          "x1": 2.2,
+          "z0": 13.0,
+          "z1": 13.4,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 1179.4,
+          "x1": 1183.8000000000002,
+          "z0": -163.20000000000002,
+          "z1": -162.8,
+          "bottom": 170.60000000000002,
+          "top": 170.8
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.04999999999999845
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7800000000000022,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.060000000000002274
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0199999999999976,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-609",
+    "state": "physicalWaiting",
+    "hunger": 9.008511572051804,
+    "wallet": 225.68287843605503,
+    "destinationId": "market-b0",
+    "routeIndex": 53,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "academy-b54",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": -295,
+          "y": 184.20000000000002,
+          "z": -723.4000000000001
+        },
+        "to": {
+          "x": -295,
+          "y": 185.4,
+          "z": -712
+        },
+        "door": {
+          "x": -295,
+          "y": 184.20000000000002,
+          "z": -723.4000000000001
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.4,
+          "x1": 2.4,
+          "z0": 15.4,
+          "z1": 15.8,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": -297.4,
+          "x1": -292.6,
+          "z0": -723.6,
+          "z1": -723.2,
+          "bottom": 187.00000000000003,
+          "top": 187.20000000000002
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.048245614035093316
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7778947368421154,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.057894736842115435
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0221052631578844,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  },
+  {
+    "actorId": "citizen-613",
+    "state": "physicalWaiting",
+    "hunger": 1.9408323245588628,
+    "wallet": 290.25570783996955,
+    "destinationId": "east-b37",
+    "routeIndex": 30,
+    "actualWholeReferenceGuardFalse": true,
+    "actualRoadGuardTrue": true,
+    "witnesses": [
+      {
+        "siteId": "east-b33",
+        "siteKind": "home",
+        "source": "architecture-floor-plan.ts:174–178,267–277,432–446",
+        "from": {
+          "x": 975.2,
+          "y": 172.20000000000002,
+          "z": -253.4
+        },
+        "to": {
+          "x": 975.2,
+          "y": 173.4,
+          "z": -240
+        },
+        "door": {
+          "x": 975.2,
+          "y": 172.20000000000002,
+          "z": -253.4
+        },
+        "unchangedBodyRadius": 0.35,
+        "unchangedBodyHeight": 1.72,
+        "entranceWallThickness": 0.4,
+        "lintelBottomAboveDoor": 2.8,
+        "lintelTopAboveDoor": 3.0,
+        "originalGeneratedFloor": 0,
+        "originalFloorY": 0,
+        "sourceReconstructedLocalHeaderBox": {
+          "x0": -2.0,
+          "x1": 2.0,
+          "z0": 13.0,
+          "z1": 13.4,
+          "bottom": 2.8,
+          "top": 3.0
+        },
+        "sourceReconstructedWorldHeaderBox": {
+          "x0": 973.2,
+          "x1": 977.2,
+          "z0": -253.60000000000002,
+          "z1": -253.20000000000002,
+          "bottom": 175.00000000000003,
+          "top": 175.20000000000002
+        },
+        "headerBoxEvidence": "Derived exactly from original makeBody front spine/entrance and wallPanels source, original World dimensions/rotation0. This is source-reconstructed geometry, not an exported live Box dump.",
+        "bodyXZLintelContactInterval": [
+          0,
+          0.041044776119401695
+        ],
+        "maxActualHeadAboveDoorWithinLintelXZContact": 1.7692537313432706,
+        "bodyFootHeightAboveDoorDuringXZContact": [
+          0.0,
+          0.0492537313432706
+        ],
+        "minimumDoorHeadClearanceDuringXZContact": 1.0307462686567292,
+        "wholeLegMaxFootAboveDoor": 1.1999999999999886,
+        "sourceGuardWholeLegHeadAboveDoor": 2.9199999999999884,
+        "sourceGuardLintelHeightFilter": true,
+        "interpolatedBodyActuallyHitsThisLintel": false,
+        "classification": "SOURCE_ARITHMETIC_FALSE_POSITIVE_LINTEL",
+        "scope": "Original TS query proves only whole-reference guard false. This arithmetic isolates a sufficient entrance-header false positive for the same straight segment; it does not certify all other obstacles, an actual movement attempt, a new fix or purchase."
+      }
+    ]
+  }
+]

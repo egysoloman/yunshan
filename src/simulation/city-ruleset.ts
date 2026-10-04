@@ -4,7 +4,8 @@ import type { Citizen, SimState, WorldDefinition } from '../types';
 
 export const PRODUCT_RULESET = 'civic-local-v1' as const;
 export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET }
+export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
+export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY }
 type Document = Record<string, any>;
 export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
 const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -15,20 +16,28 @@ const official = (role: string): role is CivicOriginalOfficial['baseRole'] => ro
 
 /** This is structural format validation, not authorization to upgrade an old city. */
 export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
-  need(object(data) && object(data.state) && object(data.runtime) && [1, 2, 3].includes(data.version), 'envelope');
+  need(object(data) && object(data.state) && object(data.runtime) && [1, 2, 3, 4].includes(data.version), 'envelope');
   const state = data.state, runtime = data.runtime;
   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');
   const budgetListed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('budgetAuthority');
-  if (data.version !== 3) {
+  const historyListed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicHistory');
+  const noHistory = !own(data, 'historyPolicyId') && !own(state, 'civicHistory') && !own(runtime, 'civicHistoryVersion') && !historyListed;
+  if (data.version !== 3 && data.version !== 4) {
     need(!own(data, 'rulesetId') && !own(data, 'motionVersion') && !own(state, 'civicStaffing') && !own(runtime, 'civicStaffingVersion') && !listed
-      && !own(state, 'budgetAuthority') && !own(runtime, 'budgetAuthorityVersion') && !budgetListed, 'legacy cannot declare product rules');
+      && !own(state, 'budgetAuthority') && !own(runtime, 'budgetAuthorityVersion') && !budgetListed && noHistory, 'legacy cannot declare product rules');
     return data.version;
   }
   need(data.rulesetId === PRODUCT_RULESET && (data.motionVersion === 1 || data.motionVersion === 2), 'product and motion versions');
-  need(object(state.civicStaffing) && state.civicStaffing.version === 1 && runtime.civicStaffingVersion === 1 && listed
+  need(object(state.civicStaffing) && state.civicStaffing.version === (data.version === 4 ? 2 : 1) && runtime.civicStaffingVersion === (data.version === 4 ? 2 : 1) && listed
     && runtime.persistedModules.filter((name: unknown) => name === 'civicStaffing').length === 1, 'body marker manifest pair');
   need(object(state.budgetAuthority) && state.budgetAuthority.version === 1 && runtime.budgetAuthorityVersion === 1 && budgetListed
     && runtime.persistedModules.filter((name: unknown) => name === 'budgetAuthority').length === 1, 'budget body marker manifest pair');
+  if (data.version === 3) need(noHistory && !own(state.civicStaffing, 'historyId'), 'v3 cannot silently activate history');
+  else need(data.historyPolicyId === CIVIC_HISTORY_POLICY && object(state.civicHistory) && state.civicHistory.version === 1
+    && state.civicHistory.policyId === CIVIC_HISTORY_POLICY && runtime.civicHistoryVersion === 1 && historyListed
+    && runtime.persistedModules.filter((name: unknown) => name === 'civicHistory').length === 1
+    && state.civicStaffing.historyId === state.civicHistory.id && state.civicHistory.enablementId === state.civicStaffing.enablement?.id
+    && state.civicHistory.origin?.motionVersion === data.motionVersion, 'history body marker manifest policy pair');
   if (data.motionVersion === 2) need(runtime.npcMotionVersion === 2 && object(runtime.npcStairCursors) && Object.keys(runtime.npcStairCursors).length <= 1024, 'native motion body and version');
   else need(!own(runtime, 'npcMotionVersion') && !own(runtime, 'npcStairCursors'), 'legacy motion body and version');
   const enablement = state.civicStaffing.enablement;
@@ -53,16 +62,19 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
 
 /** Generic partition tooling keeps its historical partial-document contract. */
 export function hasCityRulesetDeclaration(data: Document): boolean {
-  return data.version === 3 || own(data, 'rulesetId') || own(data, 'motionVersion')
-    || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority'))
-    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion')
-      || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority'));
+  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId')
+    || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority') || own(data.state, 'civicHistory'))
+    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion')
+      || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority' || name === 'civicHistory'));
 }
 
-export function effectiveCityRuleset(state: SimState, runtime: { civicStaffingVersion?: 1 }): EffectiveRuleset {
-  return runtime.civicStaffingVersion === 1 && state.civicStaffing?.version === 1 && state.civicStaffing.enablement.ruleVersion === 1 ? PRODUCT_RULESET : 'legacy';
+export function effectiveCityRuleset(state: SimState, runtime: { civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1 }): EffectiveRuleset {
+  const civic = state.civicStaffing;
+  const matchingBody = runtime.civicStaffingVersion === 1 && civic?.version === 1 || runtime.civicStaffingVersion === 2 && civic?.version === 2
+    && runtime.civicHistoryVersion === 1 && state.civicHistory?.version === 1 && civic.historyId === state.civicHistory.id;
+  return matchingBody && civic?.enablement.ruleVersion === 1 ? PRODUCT_RULESET : 'legacy';
 }
-export function readonlyCityEnablement(state: SimState, runtime: { civicStaffingVersion?: 1 }): Readonly<CivicEnablement> | null {
+export function readonlyCityEnablement(state: SimState, runtime: { civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1 }): Readonly<CivicEnablement> | null {
   if (effectiveCityRuleset(state, runtime) === 'legacy') return null;
   const source = state.civicStaffing!.enablement;
   return Object.freeze({ ...source, ...(source.sourceSave ? { sourceSave: Object.freeze({ ...source.sourceSave }) } : {}) });

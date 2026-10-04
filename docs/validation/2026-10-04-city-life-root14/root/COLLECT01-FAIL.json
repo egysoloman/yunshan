@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "at": "2026-10-04T17:11:31.860131+00:00",
+  "reason": "Whole stat equality included read-updated atime. Collection stopped before sixth source copy; five prior copies remained exact. Retry initial empty-directory guard then rejected those existing five copies; guarded byte-identical reuse completed the original collection.",
+  "copiedFiles": 5,
+  "originalsModified": false
+}

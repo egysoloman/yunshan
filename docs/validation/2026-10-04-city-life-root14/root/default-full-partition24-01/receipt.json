@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-04T17:04:39.712311+00:00",
+  "endedAt": "2026-10-04T17:06:41.750424+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/default-full-partition24-as-used.mts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 304,
+  "inputsStable": true,
+  "rawSHA256": "cfec2b091b8c3ab46301568fd4558355f25476ecc07a1201d948c4b126d678a1",
+  "ownedPid": 96000,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 96008,
+      "state": "Z",
+      "parent": 1,
+      "group": 96000,
+      "session": 96000,
+      "startTicks": 6430453
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

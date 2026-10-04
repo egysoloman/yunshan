@@ -1,0 +1,33 @@
+✔ actual terminal citizen-151 continuous same-time geometry against original floor boxes (27.731906ms)
+✔ actual terminal citizen-181 continuous same-time geometry against original floor boxes (8.217651ms)
+✔ actual terminal citizen-195 continuous same-time geometry against original floor boxes (5.902073ms)
+✔ actual terminal citizen-247 continuous same-time geometry against original floor boxes (7.639175ms)
+✔ actual terminal citizen-261 continuous same-time geometry against original floor boxes (4.606356ms)
+✔ actual terminal citizen-267 continuous same-time geometry against original floor boxes (8.508999ms)
+✔ actual terminal citizen-278 continuous same-time geometry against original floor boxes (7.918274ms)
+✔ actual terminal citizen-301 continuous same-time geometry against original floor boxes (11.103627ms)
+✔ actual terminal citizen-327 continuous same-time geometry against original floor boxes (5.903615ms)
+✔ actual terminal citizen-393 continuous same-time geometry against original floor boxes (2.799235ms)
+✔ actual terminal citizen-445 continuous same-time geometry against original floor boxes (4.638432ms)
+✔ actual terminal citizen-569 continuous same-time geometry against original floor boxes (3.283326ms)
+✔ actual terminal citizen-609 continuous same-time geometry against original floor boxes (6.952847ms)
+✔ actual terminal citizen-613 continuous same-time geometry against original floor boxes (7.942237ms)
+✔ real wall crossings cannot tunnel, including a thin wall between endpoints (0.304861ms)
+✔ stationary bodies and zero horizontal distance handle true overlap and floor/ceiling touching (0.465325ms)
+✔ vertical lift meets a real overhead box while a separated shaft is clear (0.180416ms)
+✔ rounded corners keep a diagonal clear while a closer body really intersects (0.13677ms)
+✔ strict vertical endpoint contact and arbitrarily small nonzero travel (0.117677ms)
+✔ explicit foot allowance preserves its policy without becoming a time epsilon (0.157716ms)
+✔ pure yaw-local transformation preserves original14 clearance and a real low door (3.483434ms)
+✔ invalid and unsupported tiny or overflowing bodies fail explicitly (0.907335ms)
+✔ export originalBox evidence after all14 actual source fixtures are present (23.015289ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 444.812657
+{'argv': ['node', '--import', 'tsx', '--test', '--test-isolation=none', 'tests/upright-cylinder-sweep.test.ts'], 'exitCode': 0}
+{'argv': ['node', 'node_modules/typescript/bin/tsc', '--noEmit'], 'exitCode': 0}

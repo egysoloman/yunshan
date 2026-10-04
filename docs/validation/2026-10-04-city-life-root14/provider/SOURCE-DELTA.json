@@ -1,0 +1,51 @@
+{
+  "baseSource": "/workspace/yunshan-work/ROOT13-integrated-civic-shop-light-20261004-01/assembly",
+  "baseInputCount": 295,
+  "finalGraphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+  "new": {
+    "src/host/upgrade-civic-history-format.ts": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+    "src/persistence/save-resource.ts": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+    "src/simulation/civic-history.ts": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+    "tests/civic-history-codec.test.ts": "738e0364919ac8cffd8fb3f66f7d8e0e0691cb0c785c31c8299a0d34d05cdd6c",
+    "tests/civic-history-contract.test.ts": "ef38ec359dd1c7aa8ddf395abb15e20f1f7eb4c9fc4e6dbf15773537c147ca7c",
+    "tests/civic-history-paid-source.test.ts": "e11dcae7ed50af1fa3cf70ad22c583f4f69cca15160305bc3c9c813179380fce",
+    "tests/fixtures/civic-history/root13-four-day-after-24.save.json": "7d7197eb461109d20e63461ec84314f6a7d8efb83e141c8b43a8811bbb741297",
+    "tests/fixtures/civic-history/root13-four-day.save.json": "3640274b3e2234b793925a574f825615a89d9c168539d10960510f39f1e1c2c3",
+    "tests/fixtures/civic-history/root13-four-day.world.json": "78a9b469fb18e4f377151fd679045fdb25b9160d456f25ba8a0027b2b15a0bbe"
+  },
+  "modified": {
+    "adapters/rpg-maker/bridge.ts": {
+      "before": "9947193bd06f692c9782d54e21c872a7def1fd11669adc6fc7eee3d6c80f7527",
+      "after": "3e6bae1f73509014660c4d7edb593c954fa7d46ea8e79b60ec9ffe148b2d1ff8"
+    },
+    "src/persistence/partition.ts": {
+      "before": "cd823d659998eae22da96c78194da242b3214269f3b4b97d621034dda3b6a240",
+      "after": "62d0d63159809af0f2c64a5146e6bd90e682a03b99af30b6d04aa8e6f0918bd8"
+    },
+    "src/persistence/world-layout.ts": {
+      "before": "7755e6b19a7a7e64c2aaf6ba936fe28314807fa4c9379b76fc975d7e05413569",
+      "after": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7"
+    },
+    "src/product-city.ts": {
+      "before": "fa1fee918eddf7172160cf877a4e4423472b82cb700084a8b06923fff664cfbd",
+      "after": "46ae626a1e04bb009e87b94f290cc9adf56431ce6bb7ba8e6d60776c1ab7433e"
+    },
+    "src/simulation/city-ruleset.ts": {
+      "before": "a6c9feee0733a7d05d4f50543ae5a4599f70b6216828d15caf2a225a83726a05",
+      "after": "b28fd94d5b4dec109e4654f47eacab63394cbe79bc6117cdc9abf3c98d3f642f"
+    },
+    "src/simulation/civic-staffing.ts": {
+      "before": "30a64c6f6c76c5104030b582427fb5e1766daed89edd03ddefcf5996b335f47e",
+      "after": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5"
+    },
+    "src/simulation.ts": {
+      "before": "46f0016cc88b60798648b1ac7a8dfbefb92ce151fac15ad4a61bbebf977eb822",
+      "after": "1da2602858baceca45e2e4b5f8122cac1b75453051c3bf4ffbddd94cfcd53569"
+    },
+    "src/types.ts": {
+      "before": "dd8c937107fa82d69fb7f12ff0eb0df5ff31732c261912469aa3e04d5b62a01b",
+      "after": "f23de57fb7f8b6ab15b3adff3b09670ff13e44e150d2bcb333ebe1b2cd7373aa"
+    }
+  },
+  "removed": []
+}

@@ -1,0 +1,112 @@
+{
+  "status": "PURE_HELPER_AND_TYPES_VERIFIED_NOT_PRODUCT_INTEGRATED",
+  "source": "/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/candidate02/source",
+  "inputs": 297,
+  "productionSourceInputs": 69,
+  "original295AllExact": true,
+  "shared295AllStillExact": true,
+  "model": "GPT-6.1-Sol / ultra per user instruction",
+  "apiVersion": "upright-cylinder-sweep-v1",
+  "api": "blocksSweptUprightCylinder(from,to,box,radius=.35,height=1.72,footAllowance=0)",
+  "actualPureTests": "23/23 PASS",
+  "typeCheck": "strict tsc --noEmit PASS",
+  "scopeReceipt": {
+    "startedAt": "2026-10-04T16:17:23.301907+00:00",
+    "endedAt": "2026-10-04T16:17:36.564259+00:00",
+    "argv": [
+      "python",
+      "/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/candidate02/run-validation.py"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 297,
+    "inputsStable": true,
+    "rawSHA256": "1d4397244247ca8c88e479843100e69789627dc31676746d35223f60bdf9b4a3",
+    "ownedPid": 94799,
+    "observedDescendants": 4,
+    "finalOwnedMembers": [
+      {
+        "pid": 94808,
+        "state": "Z",
+        "parent": 1,
+        "group": 94799,
+        "session": 94799,
+        "startTicks": 6146813
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "newSim": 0,
+  "newWorld": 0,
+  "ticks": 0,
+  "commands": 0,
+  "gpu": 0,
+  "library": 0,
+  "git": 0,
+  "integration": "NOT_RUN_NOT_APPLIED",
+  "items": [
+    {
+      "path": "candidate02/source/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "candidate02/source/tests/upright-cylinder-sweep.test.ts",
+      "bytes": 8442,
+      "sha256": "5286952d49c14a8273581383f502aa174c2c6ba87c4f41753d8c2fcf40fee645"
+    },
+    {
+      "path": "FIXTURE-14-ORIGINAL-LEGS.json",
+      "bytes": 68197,
+      "sha256": "6e5956b5f907f95c0e2f016f2909fe14885527206192dfd3ac711e4842034413"
+    },
+    {
+      "path": "ORIGINAL-14-BOX-EVIDENCE.json",
+      "bytes": 1477675,
+      "sha256": "42a79dbacb07e9051301e21847205d3168648ca67d889f51fa24d92263af97b1"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5530,
+      "sha256": "c7cc7d492734e7f1f9109f014f93da5243cfed371935c6b9daf6147f45540592"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1108,
+      "sha256": "21d02be0caed944f7529599d96de46bc361d131676fafc1b6af4b579d4caef85"
+    },
+    {
+      "path": "DESIGN-REVIEW.md",
+      "bytes": 6968,
+      "sha256": "486b392ab9bcaeaac8c90944a517b85be604baf57fb56fd2ffbd13f91e5bdb76"
+    },
+    {
+      "path": "pure-rules-types02/receipt.json",
+      "bytes": 955,
+      "sha256": "3f270466f5d327a3197483f1d7a5b557d35e082fa1bf06909f24f8d259baacf2"
+    },
+    {
+      "path": "pure-rules-types02/raw.log",
+      "bytes": 2625,
+      "sha256": "1d4397244247ca8c88e479843100e69789627dc31676746d35223f60bdf9b4a3"
+    },
+    {
+      "path": "pure-rules-types01/receipt.json",
+      "bytes": 943,
+      "sha256": "62f7baa52e8b5ad392236f5700c2761035898ef409d8404d0edd152a945eea26"
+    },
+    {
+      "path": "pure-rules-types01/raw.log",
+      "bytes": 16519,
+      "sha256": "b88b0437d2073c30a7c1f92c0411cad37a711ffd860855da4712035cbb222140"
+    },
+    {
+      "path": "FAIL01-FROZEN-SOURCE.json",
+      "bytes": 51099,
+      "sha256": "614d3a0032343033732a205535e9764f25a7818dfae3907205b6609568386740"
+    }
+  ]
+}

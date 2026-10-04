@@ -1,0 +1,23 @@
+
+> yunshan-city@0.1.0 test:browser
+> node scripts/browser-test.mjs
+
+PASS world boots in first person with real city aircraft and live simulation
+PASS native button keyboard activation remains accessible
+PASS manual time and paused simulation with day/night rendering
+PASS actual keyboard first-person movement
+PASS enter actual building and transact against real stock and balance
+PASS browser save/load restores state
+PASS municipal permissions, genuine basement and upper-floor save restoration
+PASS actual keyboard driving advances the vehicle and carries the player
+AIRCRAFT_GROUND_RESTORE {"vehicleId":"vehicle-road-river-b0-door-river-quarter-0-0","driving":true,"vehicle":{"id":"vehicle-road-river-b0-door-river-quarter-0-0","kind":"road","position":{"x":-931.2906661630218,"y":24.6,"z":869.8444980526474},"edgeId":"road-river-b0-door-river-quarter-0","progress":1,"direction":1,"speed":18,"state":"redLight","passengers":1,"cargo":0,"nextDeparture":728},"position":{"x":-931.2906661630218,"y":24.6,"z":869.8444980526474},"paused":true}
+AIRCRAFT_CITY_BUTTON_PROBE {"before":{"mode":"walk","position":{"x":1164,"y":64.00000000000001,"z":834.2},"controllerPosition":{"x":1164,"y":64.00000000000001,"z":834.2},"vehicleId":null,"active":null,"identities":["traveler","driver","soldier"],"driver":true,"soldier":true,"alive":true,"status":"parked","charging":false,"battery":100,"energy":66.26075845497724,"visibility":1,"weather":"晴","metres":4.044749683231336},"after":{"mode":"jet","active":"aircraft-air-pad-military","notice":"已进入青隼垂直起降战机。R / Q 升降，WASD 操控，拖动环顾；战机离地后持续前进。返航会实际飞回机坪，落地后可退出。"}}
+PASS military identity, actual keyboard VTOL flight, passenger position, safe return and exit
+PASS city drone rental transfers cash, boards on foot, flies, lands, exits and ends the lease
+PASS quality changes and compact viewport remain usable
+11 browser checks passed, no uncaught browser or console errors.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

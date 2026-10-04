@@ -1,7 +1,9 @@
 import { createBudgetAuthorityState, installBudgetAuthority, isSupplementalPurpose, authorizeCivicSupplementalBudget as authorizeNaturalSupplementalBudget, validateBudgetAuthority, type BudgetAuthorization, type LegacyBudgetAuthorization } from './simulation/budget-authority';
 import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, validateCityRulesetEnvelope, validateCivicOriginalOfficials, type CivicInitialProfession, type EffectiveRuleset, type SimulationOptions } from './simulation/city-ruleset';
-import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople } from './simulation/civic-staffing';
-import { validateSupplementalBudgetCrossReferences } from './simulation/supplemental-budget';
+import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
+import { parseSaveWithinResources } from './persistence/save-resource';
+import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
+import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
 import { NpcStairMotion, type NpcStairCursor } from './simulation/npc-stair-motion';
 import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
@@ -35,7 +37,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -76,7 +78,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; civicStaffingVersion?: 1; budgetAuthorityVersion?: 1; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1; budgetAuthorityVersion?: 1; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -141,7 +143,7 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).join(',') !== 'rulesetId' || options.rulesetId !== 'civic-local-v1')) throw new Error('不支持的显式城市规则版本。');
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1')) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
     this.edges = new Map(world.edges.map(e => [e.id, e]));
@@ -197,6 +199,11 @@ export class Simulation implements SimulationAPI {
     if (options?.rulesetId === 'civic-local-v1') {
       this.state.civicStaffing = createCivicStaffingState({ id: `civic-new-${world.seed}-${this.fingerprint}`, ruleVersion: 1, origin: 'new-city', enabledAt: 480, enabledTick: 0 }, initialCivicOfficials(this.initialCivicProfessions, world));
       this.runtime.civicStaffingVersion = 1;
+      if (options.historyPolicyId === 'civic-history-pages-v1') {
+        this.state.civicHistory = createCivicHistory(this.state.civicStaffing.enablement.id, this.motionVersion, 480, 0);
+        this.state.civicStaffing = { ...this.state.civicStaffing, version: 2, historyId: this.state.civicHistory.id };
+        this.runtime.civicStaffingVersion = 2; this.runtime.civicHistoryVersion = 1;
+      }
     }
     installCivicStaffing(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1', isCanonicalPresence: isCanonicalCivicPresence });
     installCulture(this);
@@ -218,6 +225,24 @@ export class Simulation implements SimulationAPI {
     this.resetRoadRouting();
     // Actual public education claims this actor first; research uses only remaining minutes.
     this.onPhase('people', (_state, minutes) => researchLaborPhase(minutes));
+    // Last feedback consumer: no earlier tick consumer observes a half archive.
+    let archiveBlocked = false;
+    this.onLoad(() => { archiveBlocked = false; });
+    this.onPhase('feedback', () => {
+      if (this.state.civicStaffing?.version !== 2) return;
+      try {
+        const transaction = prepareCivicHistoryArchive(this.state, this.world);
+        if (!transaction) return;
+        const candidate = { ...this.state, ...transaction };
+        validateSupplementalBudgetState(candidate, this.world);
+        validateSupplementalBudgetCrossReferences(candidate, this.runtime.publicBudgets ?? []);
+        validateBudgetAuthority(candidate, this.world, this.runtime);
+        this.state.civicStaffing = transaction.civicStaffing; this.state.civicHistory = transaction.civicHistory; archiveBlocked = false;
+      } catch (error) {
+        if (!archiveBlocked) this.appendNotice('civic-history-storage', `公民完整历史尚未封存，原来源仍保留：${error instanceof Error ? error.message : '历史存储不足'}`);
+        archiveBlocked = true;
+      }
+    });
     this.notice('arrival', '来自星海的旅行者抵达云山。城市正在独立运行，欢迎步行探索。');
   }
   private addNeighbor(from: string, node: string, edge: NetworkEdge) { const list = this.neighbors.get(from) ?? []; list.push({ node, edge }); this.neighbors.set(from, list); }
@@ -2342,16 +2367,18 @@ export class Simulation implements SimulationAPI {
   get effectiveRuleset(): EffectiveRuleset { return effectiveCityRuleset(this.state, this.runtime); }
   get rulesetEnablement() { return readonlyCityEnablement(this.state, this.runtime); }
   get motionVersion(): 1 | 2 { return this.runtime.npcMotionVersion === 2 ? 2 : 1; }
-  get saveVersion(): 1 | 2 | 3 { return this.effectiveRuleset === 'civic-local-v1' ? 3 : this.motionVersion; }
+  get saveVersion(): 1 | 2 | 3 | 4 { return this.effectiveRuleset === 'civic-local-v1' ? this.state.civicStaffing?.version === 2 ? 4 : 3 : this.motionVersion; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion === 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
-  importSave(json: string): CommandResult {
+  /** Read-only production validation for trusted host format transactions. */
+  validateSave(json: string): CommandResult { return this.readSave(json, true); }
+  importSave(json: string): CommandResult { return this.readSave(json, false); }
+  private readSave(json: string, validateOnly: boolean): CommandResult {
     try {
-      if (typeof json !== 'string' || json.length > 8_000_000) throw new Error('存档大小超过8MB限制。');
-      const data = JSON.parse(json) as Record<string, any>;
+      const data = parseSaveWithinResources(json);
       let visited = 0;
       const safeTree = (value: unknown, depth = 0): void => { if (++visited > 2_000_000 || depth > 24) throw new Error('存档结构过于复杂。'); if (value && typeof value === 'object') { for (const [key, item] of Object.entries(value)) { if (['__proto__', 'constructor', 'prototype'].includes(key)) throw new Error('存档包含不安全字段。'); safeTree(item, depth + 1); } } };
       safeTree(data);
@@ -2363,10 +2390,11 @@ export class Simulation implements SimulationAPI {
       const unique = (values: any[], label: string) => ensure(new Set(values.map(v => v.id)).size === values.length, label);
       const needs = (n: any, label: string) => { ensure(n && typeof n === 'object', label); for (const key of ['hunger', 'fatigue', 'social', 'fun']) number(n[key], 0, 100, `${label}.${key}`); };
       const money = (n: unknown, label: string) => number(n, 0, 1e12, label);
-      ensure(data && data.format === 'yunshan-save' && (data.version === 1 || data.version === 2 || data.version === 3) && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
+      ensure(data && data.format === 'yunshan-save' && (data.version === 1 || data.version === 2 || data.version === 3 || data.version === 4) && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
       const s = data.state, r = data.runtime;
       ensure(s && r && typeof s === 'object' && typeof r === 'object', '状态或运行数据'); ensure(s.version === 1 && s.seed === this.world.seed, '状态版本');
       const motionVersion = validateCityRulesetEnvelope(data);
+      if (data.version === 4) freezeCivicHistory(s.civicHistory, s.civicStaffing.enablement.id, s.extension?.lastUpdate ?? s.day * 1440 + s.hour * 60, s.tick);
       if (motionVersion === 2) ensure(r.npcMotionVersion === 2 && r.npcStairCursors && typeof r.npcStairCursors === 'object' && !Array.isArray(r.npcStairCursors) && Object.keys(r.npcStairCursors).length <= 1024, 'native motion body and version');
       else ensure(r.npcMotionVersion === undefined && r.npcStairCursors === undefined, 'legacy motion body and version');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
@@ -2533,7 +2561,7 @@ export class Simulation implements SimulationAPI {
           string(budget.purpose, 'budget purpose', 100); number(budget.cap, 0, 1e6, 'authorized cap'); number(budget.spent, 0, budget.cap, 'authorized spent'); number(budget.approvedAt, 0, s.extension?.lastUpdate ?? 1e12, 'budget approved time');
           ensure(budget.closedAt === null || finite(budget.closedAt) && budget.closedAt >= budget.approvedAt && budget.closedAt <= (s.extension?.lastUpdate ?? 1e12), 'budget close time');
           const approvers = array(budget.approvedBy, 16, 'budget approvers'), signatures = array(budget.signatures, 16, 'budget signatures'); ensure(approvers.length > 0 && new Set(approvers).size === approvers.length && signatures.length === approvers.length, 'budget approval signatures');
-          ensure(budget.signatureVersion === undefined || data.version === 3 && budget.signatureVersion === 2, 'budget signature version');
+          ensure(budget.signatureVersion === undefined || (data.version === 3 || data.version === 4) && budget.signatureVersion === 2, 'budget signature version');
           if (budget.signatureVersion === undefined) for (const signature of signatures) ensure((signature.actorId === 'player' || expectedCitizenIds.has(signature.actorId)) && approvers.includes(signature.actorId) && ['official', 'council', 'mayor'].includes(signature.role) && ['hall', 'core', 'bank'].includes(this.buildings.get(signature.siteId)?.kind ?? '') && signature.signedAt === budget.approvedAt, 'budget signature authority');
           ensure(new Set(signatures.map(signature => signature.actorId)).size === signatures.length, 'unique budget signatures');
           if (budget.signatureVersion === undefined) ensure(signatures.some(signature => signature.role === 'mayor') || signatures.filter(signature => signature.role === 'council').length >= 2 || budget.cap <= 40 && signatures.length >= 2 && new Set(signatures.map(signature => signature.siteId)).size === 1, 'budget approval quorum');
@@ -2580,7 +2608,7 @@ export class Simulation implements SimulationAPI {
       ensure(r.impressions && typeof r.impressions === 'object' && !Array.isArray(r.impressions), 'social impressions'); for (const [id, impression] of Object.entries(r.impressions) as [string, any][]) { ensure(expectedCitizenIds.has(id), 'impression identity'); number(impression.affection, -100, 100, 'impression affection'); number(impression.trust, -100, 100, 'impression trust'); }
       ensure(r.districtRelationMeans && typeof r.districtRelationMeans === 'object', 'district relationship means'); for (const [id, mean] of Object.entries(r.districtRelationMeans)) { ensure(districtIds.has(id), 'district relationship identity'); number(mean, -100, 100, 'district relationship mean'); }
       ensure(r.decisionAt && typeof r.decisionAt === 'object' && !Array.isArray(r.decisionAt), 'decision timers'); for (const [id, at] of Object.entries(r.decisionAt)) { ensure(expectedCitizenIds.has(id), 'decision citizen'); number(at, 0, 1e12, 'decision time'); }
-      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle', ...(data.version === 3 ? ['civicRegister', 'civicVote'] : [])].includes(activity as string), 'activity');
+      ensure(r.activities && typeof r.activities === 'object' && !Array.isArray(r.activities), 'activities'); for (const [id, activity] of Object.entries(r.activities)) ensure(expectedCitizenIds.has(id) && ['rest', 'work', 'study', 'social', 'eat', 'heal', 'service', 'budgetReview', 'businessReview', 'shopLifecycle', ...(data.version === 3 || data.version === 4 ? ['civicRegister', 'civicVote'] : [])].includes(activity as string), 'activity');
       ensure(r.attendance && typeof r.attendance === 'object' && !Array.isArray(r.attendance), 'attendance'); for (const [id, minutes] of Object.entries(r.attendance)) { ensure(expectedCitizenIds.has(id), 'attendance citizen'); number(minutes, 0, 100000, 'attendance minutes'); }
       ensure(r.customers && typeof r.customers === 'object' && !Array.isArray(r.customers), 'customers'); for (const [id, shopId] of Object.entries(r.customers)) ensure(expectedCitizenIds.has(id) && shopIds.has(shopId as string), 'customer reference');
       ensure(r.driving && typeof r.driving === 'object' && (r.driving.vehicleId === null || expectedVehicleIds.has(r.driving.vehicleId) && r.driving.vehicleId === p.vehicleId), 'driving vehicle'); number(r.driving.throttle, -1, 1, 'driving throttle'); number(r.driving.turn, -1, 1, 'driving turn'); ensure(typeof r.driving.brake === 'boolean', 'driving brake'); number(r.driving.speed, 0, 200, 'driving speed');
@@ -2592,7 +2620,7 @@ export class Simulation implements SimulationAPI {
         for (const [id, minutes] of Object.entries(r.peopleElapsed)) { ensure(expectedCitizenIds.has(id), 'deferred actor identity'); number(minutes, 0, 60 + 1e-7, 'deferred actor minutes'); }
       }
       // Validation finishes before either live object is replaced: rejected saves are atomic.
-      if (data.version === 3) validateCivicOriginalOfficials(s as SimState, r.publicLabor, this.world, this.initialCivicProfessions);
+      if (data.version === 3 || data.version === 4) validateCivicOriginalOfficials(s as SimState, r.publicLabor, this.world, this.initialCivicProfessions);
       for (const validator of this.saveValidators) validator(s as SimState);
       validateBudgetAuthority(s as SimState, this.world, r);
       if (motionVersion === 2) {
@@ -2609,6 +2637,7 @@ export class Simulation implements SimulationAPI {
           if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
         }
       }
+      if (validateOnly) return { ok: true, message: '完整存档已通过生产读取校验；原城市未改变。' };
       const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
     } catch (error) { return { ok: false, message: `读档失败：${error instanceof Error ? error.message : '存档格式错误'}` }; }
   }

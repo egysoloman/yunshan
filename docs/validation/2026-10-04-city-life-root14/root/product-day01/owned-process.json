@@ -1,0 +1,21 @@
+{
+  "pid": 95527,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "1",
+    "--out",
+    "artifacts/root14-product-default-day.json"
+  ],
+  "identity": {
+    "pid": 95527,
+    "state": "R",
+    "parent": 95524,
+    "group": 95527,
+    "session": 95527,
+    "startTicks": 6265766
+  }
+}

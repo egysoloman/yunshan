@@ -1,0 +1,320 @@
+{
+  "status": "PASS",
+  "scope": "Current v4 new-city factory explicitly loads actual old1/2 without changing their envelopes or enabling rules; not natural default day or full suite",
+  "cases": [
+    {
+      "label": "actual-native1",
+      "sourceSHA256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+      "sourceVersion": 1,
+      "newFactoryInitially4": true,
+      "fullImmediateExact": true,
+      "partitionImmediateExact": true,
+      "partitionLoadedFuture24AgainstLegacyControlExact": true,
+      "independentOriginalOracle": "original source-byte import; unchanged legacy constructor control, not an independently captured native1 future oracle",
+      "newHistoryDisabledEveryFutureTick": true,
+      "rows": [
+        {
+          "futureTick": 1,
+          "tick": 1,
+          "clock": 480.25,
+          "sha256": "f52d8467ae10d78cf4db4a7c4cc118eb601b6998764a04342045ba395bdfdc71"
+        },
+        {
+          "futureTick": 2,
+          "tick": 2,
+          "clock": 480.5,
+          "sha256": "0b065f5d190f92133d748437063f18e3209902df6ad8cbd973ddae338391b840"
+        },
+        {
+          "futureTick": 3,
+          "tick": 3,
+          "clock": 480.75,
+          "sha256": "a8ff06d6c47c32a4606a0f96f2fe79e23ef4f53908528dfacf5443b09b7b72bc"
+        },
+        {
+          "futureTick": 4,
+          "tick": 4,
+          "clock": 481,
+          "sha256": "b32f042f06371b7a35cc0bed057c92af37984275541e509782da7f3a92ede8fa"
+        },
+        {
+          "futureTick": 5,
+          "tick": 5,
+          "clock": 481.25,
+          "sha256": "19c5472e473190cbe416acb0c2eaaa288ce042b6389ffed68925bd04fc547454"
+        },
+        {
+          "futureTick": 6,
+          "tick": 6,
+          "clock": 481.5,
+          "sha256": "f483e636b63bf27f56540b40d7ef18ff324a2f2614434980b637391c17437430"
+        },
+        {
+          "futureTick": 7,
+          "tick": 7,
+          "clock": 481.75,
+          "sha256": "43b5c1d0e2b826460750b833b48afc31282c69cc042f0aa8327992997a34889a"
+        },
+        {
+          "futureTick": 8,
+          "tick": 8,
+          "clock": 482,
+          "sha256": "5bf0bbb2d8061b1bbe0a004f67698eff3b2557b098f60651826f29f5a4807378"
+        },
+        {
+          "futureTick": 9,
+          "tick": 9,
+          "clock": 482.25,
+          "sha256": "6fcdac525e8fd2f39929b9a7644d8415d2fabfafd4ea6de483a410ba868ef5ef"
+        },
+        {
+          "futureTick": 10,
+          "tick": 10,
+          "clock": 482.5,
+          "sha256": "d01f3eb19b5847b090fb692fbbca906eb2e1f418fb96aab77b7dc3a63077471d"
+        },
+        {
+          "futureTick": 11,
+          "tick": 11,
+          "clock": 482.75,
+          "sha256": "7f0155c3c278d058f5f903a458e0d8c441a7d56d27d4e54ee416bdea35f5c10f"
+        },
+        {
+          "futureTick": 12,
+          "tick": 12,
+          "clock": 483,
+          "sha256": "fbf570968c50c3ac8cfec1d9b83406c6a1c4aa54ec9385a77982187a8700a46e"
+        },
+        {
+          "futureTick": 13,
+          "tick": 13,
+          "clock": 483.25,
+          "sha256": "421bd92632892b6830ae410723d31e18876ec3128b864e148aa6bedc1e715279"
+        },
+        {
+          "futureTick": 14,
+          "tick": 14,
+          "clock": 483.5,
+          "sha256": "1972ee5064803bc9fc24173f5f0eb03c468a33e37364f6e9a233530878547904"
+        },
+        {
+          "futureTick": 15,
+          "tick": 15,
+          "clock": 483.75,
+          "sha256": "6e80edace10ee6a36acd9f0460fe7c024bca39a93870db01b290ee23a4a86bc3"
+        },
+        {
+          "futureTick": 16,
+          "tick": 16,
+          "clock": 484,
+          "sha256": "09f4c92a40d03fa4ad41a6ecea566169d4e4423c7605576f4d04a27d8eb95326"
+        },
+        {
+          "futureTick": 17,
+          "tick": 17,
+          "clock": 484.25,
+          "sha256": "2cdc0fced12277764a631e307b90c41f5f76ce3324bfdf33cd26f0fde15471e7"
+        },
+        {
+          "futureTick": 18,
+          "tick": 18,
+          "clock": 484.5,
+          "sha256": "a17716423b3f44f2b863a38b4725c3687633d682dbd03f7770cebfc773024070"
+        },
+        {
+          "futureTick": 19,
+          "tick": 19,
+          "clock": 484.75,
+          "sha256": "52e2c0176cf4797c08dafe3e5acce1f43b4601cb1a91d2dda33a06982832a9f9"
+        },
+        {
+          "futureTick": 20,
+          "tick": 20,
+          "clock": 485,
+          "sha256": "a17179efe7788d7d69c763af2ed2432b6a4725d1cad9b86de66f4fd4f8b50801"
+        },
+        {
+          "futureTick": 21,
+          "tick": 21,
+          "clock": 485.25,
+          "sha256": "9f9f066c6f6e5b5bae933392a23f3a1c7822c538d3d40fcb05dba58073affeed"
+        },
+        {
+          "futureTick": 22,
+          "tick": 22,
+          "clock": 485.5,
+          "sha256": "7c7f3420a22c605bf5cfd2eac471d51a4c089b7dfa20165c87f16ba77907e856"
+        },
+        {
+          "futureTick": 23,
+          "tick": 23,
+          "clock": 485.75,
+          "sha256": "6d55a65815f855ed3cdf0e83f0f79119d3d067a6fde18f25538d3f329393fdf4"
+        },
+        {
+          "futureTick": 24,
+          "tick": 24,
+          "clock": 486,
+          "sha256": "b2f920b5505ddbbd277da02bde824363a2e4712ca6ab3d016362cf66246d2361"
+        }
+      ]
+    },
+    {
+      "label": "actual-native2",
+      "sourceSHA256": "c7e203ce45dda006dcfd8cf553ddaae7933508bd22d0c43a0a5c99f6051a6277",
+      "sourceVersion": 2,
+      "newFactoryInitially4": true,
+      "fullImmediateExact": true,
+      "partitionImmediateExact": true,
+      "partitionLoadedFuture24AgainstLegacyControlExact": true,
+      "independentOriginalOracle": "original native2 every tick24 SHA",
+      "newHistoryDisabledEveryFutureTick": true,
+      "rows": [
+        {
+          "futureTick": 1,
+          "tick": 1,
+          "clock": 480.25,
+          "sha256": "624eef7b99bc7f9cf8bc6a915edfde2662f2c01269476ab900c2ce7124518720"
+        },
+        {
+          "futureTick": 2,
+          "tick": 2,
+          "clock": 480.5,
+          "sha256": "52a032273d7a43a7f0c71602afc01af0390e4671b6df944520344e1ca1c02e66"
+        },
+        {
+          "futureTick": 3,
+          "tick": 3,
+          "clock": 480.75,
+          "sha256": "3feae799035d187796d67e3a0a6c342572fe7bea2155a1a9e6ae802393b5183d"
+        },
+        {
+          "futureTick": 4,
+          "tick": 4,
+          "clock": 481,
+          "sha256": "3b661f782f6c8e8679cb711c9718d0a700df8b7b16239e56b303a41be0b9d453"
+        },
+        {
+          "futureTick": 5,
+          "tick": 5,
+          "clock": 481.25,
+          "sha256": "a14062347cdb5dc978cb08135db63b420761e035b56085d310e98418ba0136de"
+        },
+        {
+          "futureTick": 6,
+          "tick": 6,
+          "clock": 481.5,
+          "sha256": "cd224d3ba32ff4588b59698d21a52301b38b79df6a3754f2aae26450f4743fe9"
+        },
+        {
+          "futureTick": 7,
+          "tick": 7,
+          "clock": 481.75,
+          "sha256": "b57e29e51034f191ad58a0980909c8c31f578716290e9444204e82f2a37dcc2e"
+        },
+        {
+          "futureTick": 8,
+          "tick": 8,
+          "clock": 482,
+          "sha256": "0a57724321830248bd134277823c20dcc97c0c715d99745cff7b0aa768ce8233"
+        },
+        {
+          "futureTick": 9,
+          "tick": 9,
+          "clock": 482.25,
+          "sha256": "56a3cd9bae08e369b23285c5c26b8f6c439f193459f90d478c26f5d6458da4dc"
+        },
+        {
+          "futureTick": 10,
+          "tick": 10,
+          "clock": 482.5,
+          "sha256": "d40e1760157e70cab8c42f1d5d3b7899530ed653567bb889652044cef6603831"
+        },
+        {
+          "futureTick": 11,
+          "tick": 11,
+          "clock": 482.75,
+          "sha256": "0e3ef39e8ca6ec01ba9acba20cf5ba0043ded035a47d8f493bbc95a8bc39bcb6"
+        },
+        {
+          "futureTick": 12,
+          "tick": 12,
+          "clock": 483,
+          "sha256": "940174b60b25ddba6633d29b9822552f6d81c3accdf93037edeaedfd9227a54f"
+        },
+        {
+          "futureTick": 13,
+          "tick": 13,
+          "clock": 483.25,
+          "sha256": "8b60309188d274bc586a5133da1d3af3a514fed779dd58681d50b65099a1d393"
+        },
+        {
+          "futureTick": 14,
+          "tick": 14,
+          "clock": 483.5,
+          "sha256": "6beaf1491f9543eac93d2d75642032f35f521a611fd90679f633776c109025c4"
+        },
+        {
+          "futureTick": 15,
+          "tick": 15,
+          "clock": 483.75,
+          "sha256": "425c9e53e724c55177657d2181974b9f714d3325accc311e57701cbc4c1be13c"
+        },
+        {
+          "futureTick": 16,
+          "tick": 16,
+          "clock": 484,
+          "sha256": "7cc80bba5056a338e4fc8448394f3c99a66864c048d208c99128299a4400c9ed"
+        },
+        {
+          "futureTick": 17,
+          "tick": 17,
+          "clock": 484.25,
+          "sha256": "59804f9bb6d97c99cb58bf081853ac3b5f6da6e35298784b7974dd7dee2c6db9"
+        },
+        {
+          "futureTick": 18,
+          "tick": 18,
+          "clock": 484.5,
+          "sha256": "18be910c302b50564162852208a701acbe34fbd28a35ea12e8f6ff7aa895b663"
+        },
+        {
+          "futureTick": 19,
+          "tick": 19,
+          "clock": 484.75,
+          "sha256": "f69df33b8dfd0efe3c1282802d6ac6460566b7fa8b376ce554dde57eb3b172d5"
+        },
+        {
+          "futureTick": 20,
+          "tick": 20,
+          "clock": 485,
+          "sha256": "b7beb18e5889ec35a501f6e8fd68b7d1ce61b47b267c255bf3f88945360ad8fa"
+        },
+        {
+          "futureTick": 21,
+          "tick": 21,
+          "clock": 485.25,
+          "sha256": "ec95347df423d15cc5b050b45bc7cecf74bc353fceef189b085c169074bb2364"
+        },
+        {
+          "futureTick": 22,
+          "tick": 22,
+          "clock": 485.5,
+          "sha256": "dd71286f6ce6a7648b618b9b0a5ac47ce32bb8df8550f7d8671fb491da7dfb91"
+        },
+        {
+          "futureTick": 23,
+          "tick": 23,
+          "clock": 485.75,
+          "sha256": "9743f76bc8e9ebb15ecf7edf0aa730fe06812176fdd55e1ae5a67b467243434a"
+        },
+        {
+          "futureTick": 24,
+          "tick": 24,
+          "clock": 486,
+          "sha256": "4463cf06e1033d1842f02b7f8f04db4a86bad4456ab82b84f256d5a469f706fa"
+        }
+      ]
+    }
+  ]
+}

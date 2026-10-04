@@ -1,5 +1,7 @@
 import type { WorldDefinition } from '../types';
 import { decodeCitizenRoutes, encodeCitizenRoutes } from './route-encoding';
+import { parseSaveWithinResources, validateSaveResources } from './save-resource';
+import { decodeCivicHistory } from '../simulation/civic-history';
 import { hasCityRulesetDeclaration, validateCityRulesetEnvelope } from '../simulation/city-ruleset';
 
 export const SAVE_CHUNK_SIZE = 256;
@@ -7,7 +9,7 @@ export type SaveWorld = Pick<WorldDefinition, 'buildings' | 'districts' | 'nodes
 export interface SavePart { id: string; json: string }
 type Document = Record<string, any>;
 interface Chunk { arrays: Record<string, { index: number; value: unknown }[]>; maps: Record<string, Document> }
-interface Layout { arrays: Record<string, number>; maps: string[]; order: Record<string, string[]>; playerValues?: string[]; playerArrays?: Record<string, number[]> }
+interface Layout { arrays: Record<string, number>; maps: string[]; order: Record<string, string[]>; playerValues?: string[]; playerArrays?: Record<string, number[]>; civicHistory?: { id: string; pageParts: string[] } }
 
 function object(value: unknown): value is Document { return !!value && typeof value === 'object' && !Array.isArray(value); }
 function ownerAt(document: Document, path: string): { owner: Document; key: string } | null {
@@ -25,8 +27,7 @@ function emptyChunk(): Chunk { return { arrays: Object.create(null), maps: Objec
 
 /** Pure decomposition: unknown extension fields stay losslessly in global state. */
 export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
-  if (typeof json !== 'string' || json.length > 8_000_000) throw new Error('存档大小超过8MB限制。');
-  const document: Document = JSON.parse(json);
+  const document: Document = parseSaveWithinResources(json);
   if (!object(document) || document.format !== 'yunshan-save' || !object(document.state) || !object(document.runtime)) throw new Error('无效云山存档。');
   let visited = 0;
   const inspect = (value: unknown, depth = 0): void => {
@@ -49,6 +50,11 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
   if (object(document.state.pathology)) order['state.pathology'] = Object.keys(document.state.pathology);
   if (object(document.state.power)) order['state.power'] = Object.keys(document.state.power);
   if (object(document.state.shopLifecycle)) order['state.shopLifecycle'] = Object.keys(document.state.shopLifecycle);
+  if (document.version === 4) {
+    const history = document.state.civicHistory;
+    decodeCivicHistory(history, document.state.civicStaffing.enablement.id, document.state.extension?.lastUpdate ?? document.state.day * 1440 + document.state.hour * 60, document.state.tick);
+    order['state.civicHistory'] = Object.keys(history);
+  }
   if (document.routeEncoding !== undefined) {
     decodeCitizenRoutes(document.routeEncoding, document.routePool, document.state.citizens);
     delete document.routePool;
@@ -97,7 +103,15 @@ export function partitionSave(json: string, world?: SaveWorld): SavePart[] {
     }
     delete at.owner[at.key];
   }
-  return [{ id: 'global', json: JSON.stringify({ document, layout }) }, { id: 'player', json: JSON.stringify(player) }, ...[...chunks].sort(([a], [b]) => a.localeCompare(b)).map(([id, chunk]) => ({ id, json: JSON.stringify(chunk) }))];
+  const historyParts: SavePart[] = [];
+  if (document.version === 4) {
+    const history = document.state.civicHistory;
+    historyParts.push(...history.pages.map((page: Document) => ({ id: `chunk:civic-history:${history.id}:${page.id}`,
+      json: JSON.stringify({ arrays: {}, maps: {}, historyPage: { historyId: history.id, page } }) })));
+    layout.civicHistory = { id: history.id, pageParts: historyParts.map(part => part.id) };
+    delete history.pages;
+  }
+  return [{ id: 'global', json: JSON.stringify({ document, layout }) }, { id: 'player', json: JSON.stringify(player) }, ...[...chunks].sort(([a], [b]) => a.localeCompare(b)).map(([id, chunk]) => ({ id, json: JSON.stringify(chunk) })), ...historyParts];
 }
 
 /** Reassemble one complete generation; reject missing/duplicate array members. */
@@ -105,6 +119,22 @@ export function assembleSave(parts: SavePart[]): string {
   const byId = new Map(parts.map(part => [part.id, part.json]));
   if (byId.size !== parts.length || !byId.has('global') || !byId.has('player')) throw new Error('存档分区不完整。');
   const { document, layout }: { document: Document; layout: Layout } = JSON.parse(byId.get('global')!);
+  const historyPartIds = new Set<string>();
+  if (document?.version === 4) {
+    const history = document.state?.civicHistory, declared = layout.civicHistory;
+    if (!object(history) || !object(declared) || Object.keys(declared).sort().join(',') !== 'id,pageParts' || declared.id !== history.id
+      || !Array.isArray(declared.pageParts) || declared.pageParts.length !== history.pageDescriptors?.length || Object.hasOwn(history, 'pages')) throw new Error('历史存档页面布局不完整。');
+    history.pages = declared.pageParts.map((id, index) => {
+      if (id !== `chunk:civic-history:${history.id}:${history.pageDescriptors[index].id}` || historyPartIds.has(id) || !byId.has(id)) throw new Error('缺失或重复历史存档页面。');
+      historyPartIds.add(id);
+      const chunk = JSON.parse(byId.get(id)!);
+      if (!object(chunk) || Object.keys(chunk).sort().join(',') !== 'arrays,historyPage,maps' || !object(chunk.arrays) || Object.keys(chunk.arrays).length
+        || !object(chunk.maps) || Object.keys(chunk.maps).length || !object(chunk.historyPage) || Object.keys(chunk.historyPage).sort().join(',') !== 'historyId,page'
+        || chunk.historyPage.historyId !== history.id) throw new Error('历史存档页面载体无效。');
+      return chunk.historyPage.page;
+    });
+  } else if (layout.civicHistory !== undefined || parts.some(part => part.id.startsWith('chunk:civic-history:'))) throw new Error('旧存档不能声明历史页面。');
+  for (const part of parts) if (part.id.startsWith('chunk:civic-history:') && !historyPartIds.has(part.id)) throw new Error('孤立或混合代际历史页面。');
   const player = JSON.parse(byId.get('player')!);
   if (!object(player) || !object(player.values) || !object(player.maps)) throw new Error('玩家存档分区不完整。');
   if (layout.playerValues && (!Array.isArray(layout.playerValues) || new Set(layout.playerValues).size !== layout.playerValues.length || layout.playerValues.length !== Object.keys(player.values).length || layout.playerValues.some(path => !Object.hasOwn(player.values, path)))) throw new Error('缺失或重复玩家存档字段。');
@@ -133,7 +163,7 @@ export function assembleSave(parts: SavePart[]): string {
     for (const [path, entries] of Object.entries(maps)) { if (!layout.maps.includes(path)) throw new Error('未知存档映射。'); const target = valueAt(document, path); for (const [key, value] of Object.entries(entries)) { if (Object.hasOwn(target, key)) throw new Error('重复存档映射。'); target[key] = value; } }
   };
   mergeMaps(player.maps);
-  for (const part of parts) if (part.id.startsWith('chunk:')) {
+  for (const part of parts) if (part.id.startsWith('chunk:') && !historyPartIds.has(part.id)) {
     const chunk: Chunk = JSON.parse(part.json);
     mergeArrays(chunk.arrays);
     mergeMaps(chunk.maps);
@@ -161,5 +191,8 @@ export function assembleSave(parts: SavePart[]): string {
     return ordered;
   };
   if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
-  return JSON.stringify(reorder(document, ''));
+  if (document.version === 4) decodeCivicHistory(document.state.civicHistory, document.state.civicStaffing.enablement.id, document.state.extension?.lastUpdate ?? document.state.day * 1440 + document.state.hour * 60, document.state.tick);
+  const assembled = JSON.stringify(reorder(document, ''));
+  validateSaveResources(document, assembled);
+  return assembled;
 }

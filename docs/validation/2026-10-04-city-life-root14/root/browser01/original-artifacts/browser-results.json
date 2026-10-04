@@ -1,0 +1,126 @@
+{
+  "browser": "Chromium with SwiftShader on Linux",
+  "buildEntry": "/assets/index-kEBeq3AA.js",
+  "sourceHashes": {
+    "src/simulation.ts": "1da2602858baceca45e2e4b5f8122cac1b75453051c3bf4ffbddd94cfcd53569",
+    "src/simulation/extensions.ts": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+    "src/main.ts": "eb68cbdde501d8d24324e57a07e579ef255d1850e3c2d24366ba99cd3483080f",
+    "src/world.ts": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07",
+    "src/renderer.ts": "4648cb168cfe907907f16e0607f319c11e1936353cac491164d99a1bccb9425a",
+    "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+    "src/ui.ts": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/simulation/family.ts": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+    "src/simulation/culture.ts": "4383c4b98420f63fd3ff63fdbdf0eac76316fc4ffc609de3ec829a1f9caf14b9",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+  },
+  "harnessSHA256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+  "note": "Functional rendering verification with controlled ground and identity fixtures; aircraft rental, boarding, flight and exit use actual rules and native inputs. These FPS do not represent macOS hardware performance.",
+  "results": [
+    {
+      "name": "world boots in first person with real city aircraft and live simulation",
+      "districts": 11,
+      "buildings": 612,
+      "citizens": 616,
+      "vehicles": 344,
+      "tick": 8,
+      "drawCalls": 723,
+      "triangles": 1277884,
+      "fps": 0
+    },
+    {
+      "name": "native button keyboard activation remains accessible",
+      "key": "Space"
+    },
+    {
+      "name": "manual time and paused simulation with day/night rendering",
+      "dayHour": 15.5,
+      "nightHour": 22
+    },
+    {
+      "name": "actual keyboard first-person movement",
+      "metres": 4.799999999999028
+    },
+    {
+      "name": "enter actual building and transact against real stock and balance",
+      "ok": true,
+      "message": "在清溪水岸·西溪院·商肆1购买1份食物，花费11.9云币。",
+      "before": 600,
+      "after": 588.0685714285714,
+      "controlledSalePlacement": {
+        "scope": "Controlled actual v4 sale-point setup; not ordinary W traversal evidence",
+        "beforePosition": {
+          "x": -846.4000000000001,
+          "y": 18.6,
+          "z": 1134.2
+        },
+        "point": {
+          "id": "0:sale-center:sale",
+          "purpose": "sale",
+          "floor": 0,
+          "position": {
+            "x": -846.4000000000001,
+            "y": 18.6,
+            "z": 1127.4
+          }
+        },
+        "actual": {
+          "x": -846.4000000000001,
+          "y": 18.6,
+          "z": 1127.4
+        },
+        "floor": 0,
+        "insideId": "river-b1",
+        "range": 0
+      }
+    },
+    {
+      "name": "browser save/load restores state",
+      "before": 588.0685714285714,
+      "after": 588.0685714285714,
+      "saved": 771731
+    },
+    {
+      "name": "municipal permissions, genuine basement and upper-floor save restoration",
+      "publicNext": 19,
+      "denied": true,
+      "basement": -2,
+      "restoredFloor": 17,
+      "footprintWidths": [
+        144,
+        126,
+        108,
+        90,
+        72
+      ],
+      "position": {
+        "x": 406.96,
+        "y": 387.2,
+        "z": -264
+      }
+    },
+    {
+      "name": "actual keyboard driving advances the vehicle and carries the player",
+      "metres": 21.963558835387623,
+      "controlling": true,
+      "passengerDistance": 0,
+      "mode": "walk"
+    },
+    {
+      "name": "military identity, actual keyboard VTOL flight, passenger position, safe return and exit",
+      "metres": 255,
+      "battery": 99.64354273631533
+    },
+    {
+      "name": "city drone rental transfers cash, boards on foot, flies, lands, exits and ends the lease",
+      "fee": 24
+    },
+    {
+      "name": "quality changes and compact viewport remain usable",
+      "horizontalOverflow": false
+    }
+  ],
+  "errors": []
+}

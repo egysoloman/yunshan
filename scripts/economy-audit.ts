@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { createWorld } from '../src/world';
-import { createProductCity, createProductWorld, PRODUCT_CITY_LAYOUT } from '../src/product-city';
+import { createCurrentProductCity, createProductWorld, PRODUCT_CITY_LAYOUT } from '../src/product-city';
 import { Simulation, isCanonicalNpcWage } from '../src/simulation';
 import { bankingBalanceSheet } from '../src/simulation/banking';
 import type { CityExtensionState, Citizen, LedgerEntry, Vec3 } from '../src/types';
@@ -50,18 +50,26 @@ const sourceHash = await auditSourceHashes();
 const requestedRuleset = argumentsByName.get('--ruleset') ?? 'civic-local-v1';
 assert.ok(requestedRuleset === 'legacy' || requestedRuleset === 'civic-local-v1', 'audit ruleset must be explicitly recognized');
 const world = requestedRuleset === 'civic-local-v1' ? createProductWorld(seed) : createWorld(seed);
-const sim = requestedRuleset === 'civic-local-v1' ? createProductCity(world) : new Simulation(world);
+const sim = requestedRuleset === 'civic-local-v1' ? createCurrentProductCity(world) : new Simulation(world);
 assert.equal(sim.effectiveRuleset, requestedRuleset, 'requested audit ruleset must match the actual city');
-const actualWorldFingerprint = JSON.parse(sim.exportSave()).worldFingerprint;
+const initialProductEnvelope = JSON.parse(sim.exportSave());
+const actualWorldFingerprint = initialProductEnvelope.worldFingerprint;
 const rulesetContext = () => ({
   requestedRuleset, requestSource: argumentsByName.has('--ruleset') ? 'explicit-cli' : 'product-default',
   effectiveRuleset: sim.effectiveRuleset, saveEnvelopeVersion: sim.saveVersion, motionVersion: sim.motionVersion,
+  historyPolicyId: initialProductEnvelope.historyPolicyId ?? null,
+  civicHistory: sim.state.civicHistory ? { version: sim.state.civicHistory.version, pages: sim.state.civicHistory.pages.length,
+    bytes: Buffer.byteLength(JSON.stringify(sim.state.civicHistory), 'utf8'), totals: { ...sim.state.civicHistory.totals } } : null,
   enablement: sim.rulesetEnablement, requestedNewCityLayout: requestedRuleset === 'civic-local-v1' ? PRODUCT_CITY_LAYOUT : 'legacy-createWorld-default',
   actualLayoutVersion: world.layoutVersion ?? 'unversioned', actualWorldFingerprint,
   cityStateSource: 'new-city',
 });
 if (requestedRuleset === 'civic-local-v1') {
-  assert.equal(sim.saveVersion, 3, 'new product rules need an explicit v3 envelope');
+  assert.equal(sim.saveVersion, 4, 'new product rules need the explicit complete-history v4 envelope');
+  assert.equal(initialProductEnvelope.historyPolicyId, 'civic-history-pages-v1', 'new product must declare its complete-history policy');
+  assert.equal(sim.state.civicStaffing?.version, 2, 'new product needs the hot/cold civic body contract');
+  assert.equal(sim.state.civicHistory?.version, 1, 'new product needs its complete bounded history');
+  assert.equal(sim.state.civicHistory?.pages.length, 0, 'new city must not borrow previous civic history');
   assert.equal(sim.motionVersion, 2, 'new product cities use native physical motion');
   assert.equal(sim.rulesetEnablement?.origin, 'new-city', 'this audit did not restore or upgrade an old city');
   assert.equal(world.layoutVersion, PRODUCT_CITY_LAYOUT, 'new product audit must use its declared layout');

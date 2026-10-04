@@ -1,3 +1,4 @@
+import { FULL_SAVE_CHARACTER_LIMIT } from '../../src/persistence/save-resource';
 import { Simulation } from '../../src/simulation';
 import { createWorld, CURRENT_CITY_LAYOUT, CITY_LAYOUT_VERSIONS, getWalkHeight, type CityLayoutVersion } from '../../src/world';
 import { selectSavedWorld, savedWorldFingerprint } from '../../src/persistence/world-layout';
@@ -49,7 +50,7 @@ export class CitySession {
 
   #newWalker(): HeadlessWalker { return new HeadlessWalker(this.#world, () => this.#simulation.state); }
   #clock(): number { return this.#simulation.state.extension?.lastUpdate ?? this.#simulation.state.day * 1440 + this.#simulation.state.hour * 60; }
-  get metadata() { return { bridgeVersion: BRIDGE_VERSION, coreCommit: CORE_COMMIT, layout: this.#world.layoutVersion, worldSeed: this.#world.seed, worldFingerprint: savedWorldFingerprint(this.#world), saveFormat: 'yunshan-save', saveVersion: this.#simulation.saveVersion, fixedStepSeconds: FIXED_STEP_SECONDS, simulationTickSeconds: .25, coordinates: clone(COORDINATES) }; }
+  get metadata() { return { bridgeVersion: BRIDGE_VERSION, coreCommit: CORE_COMMIT, layout: this.#world.layoutVersion, worldSeed: this.#world.seed, worldFingerprint: savedWorldFingerprint(this.#world), saveFormat: 'yunshan-save', saveVersion: this.#simulation.saveVersion, supportedSaveVersions: [1, 2, 3, 4], ...(this.#simulation.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}), fixedStepSeconds: FIXED_STEP_SECONDS, simulationTickSeconds: .25, coordinates: clone(COORDINATES) }; }
   worldSnapshot() { return clone(this.#world); }
   snapshot(): SimState { return clone(this.#simulation.state); }
 
@@ -163,8 +164,10 @@ export class CitySession {
   exportSave(): string { return JSON.stringify({ format: 'yunshan-mz-save', version: 1, coreCommit: CORE_COMMIT, coreSave: this.exportCoreSave(), realAccumulator: this.#realAccumulator, commands: this.#commands, results: this.#results, nextRequestId: this.#nextRequestId } satisfies BridgeSave); }
 
   #parseSave(save: string) {
-    if (typeof save !== 'string' || save.length > 10_000_000) throw new Error('Invalid save size.');
+    if (typeof save !== 'string' || save.length > FULL_SAVE_CHARACTER_LIMIT * 2 + 2_000_000) throw new Error('Invalid save size.');
     const value = JSON.parse(save);
+    const coreEnvelope = value?.format === 'yunshan-mz-save' ? JSON.parse(value.coreSave) : value;
+    if (coreEnvelope?.version !== 4 && save.length > 10_000_000) throw new Error('Invalid legacy save size.');
     const bridge: BridgeSave | null = value?.format === 'yunshan-mz-save' ? value : null;
     if (bridge && (bridge.version !== BRIDGE_VERSION || bridge.coreCommit !== CORE_COMMIT || !finite(bridge.realAccumulator) || bridge.realAccumulator < 0 || bridge.realAccumulator >= FIXED_STEP_SECONDS || !Array.isArray(bridge.commands) || bridge.commands.length > 256 || !Array.isArray(bridge.results) || bridge.results.length > 256 || !Number.isSafeInteger(bridge.nextRequestId) || bridge.nextRequestId < 1)) throw new Error('Incompatible bridge save.');
     if (bridge) {

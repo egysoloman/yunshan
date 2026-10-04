@@ -6,6 +6,7 @@ import { FLOOR_PLAN_PROFILE, blocksFloorPlanMovement, floorPlanSupport, getBuild
 import { homeRestPointBlockedByVoxels } from './home-rest';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import { collectActorActivityClaims } from './activity-capacity';
+import { appendCivicHistory, civicHistoryView, decodeCivicHistory } from './civic-history';
 
 export const CIVIC_RULESET = 'civic-local-v1' as const;
 export const CIVIC_REGISTRATION_FEE = 120;
@@ -71,7 +72,7 @@ export interface CivicTerm {
   endedAt: number | null; endedTick: number | null; endedReason: '' | 'expired' | 'death' | 'profession-changed' | 'residency-changed';
 }
 export interface CivicStaffingState {
-  version: 1; enablement: CivicEnablement; originalOfficials: CivicOriginalOfficial[];
+  version: 1 | 2; historyId?: string; enablement: CivicEnablement; originalOfficials: CivicOriginalOfficial[];
   nextProofId: number; retiredProofCount: number; nextApplicationId: number; nextPollId: number; nextTermId: number;
   proofs: CivicWorkProof[]; applications: CivicApplication[]; polls: CivicPoll[]; terms: CivicTerm[];
 }
@@ -138,7 +139,7 @@ function hasLiveTerm(state: SimState, actorId: string, at: number): boolean {
   return !!body(state)?.terms.some(term => term.actorId === actorId && term.startsAt <= at && at < term.endsAt && (term.endedAt === null || at < term.endedAt));
 }
 function districtSeats(state: SimState, districtId: string, at: number): number {
-  return body(state)?.terms.filter(term => term.districtId === districtId && term.startsAt <= at && at < term.endsAt && (term.endedAt === null || at < term.endedAt)).length ?? 0;
+  return civicHistoryView(state).terms.filter(term => term.districtId === districtId && term.startsAt <= at && at < term.endsAt && (term.endedAt === null || at < term.endedAt)).length ?? 0;
 }
 export function civicCouncilSourceProof(state: SimState, actorId: string, at = clock(state)): CivicCouncilSourceProof | null {
   const civic = body(state), person = state.citizens.find(person => person.id === actorId);
@@ -152,7 +153,7 @@ export function civicCouncilSourceProof(state: SimState, actorId: string, at = c
 export function validateCivicCouncilSourceProof(state: SimState, source: CivicCouncilSourceProof): boolean {
   if (!source || typeof source !== 'object' || Array.isArray(source)
     || Object.keys(source).sort().join(',') !== ['version', 'kind', 'ruleId', 'enablementId', 'actorId', 'officeId', 'districtId', 'baseRole', 'electionId', 'termId', 'proofId', 'signedAt', 'startsAt', 'endsAt'].sort().join(',')) return false;
-  const civic = body(state), term = civic?.terms.find(term => term.id === source.termId);
+  const civic = body(state), term = civicHistoryView(state).terms.find(term => term.id === source.termId);
   return !!civic && !!term && source.version === 1 && source.kind === 'local-council-term' && source.ruleId === CIVIC_RULESET && source.enablementId === civic.enablement.id
     && source.actorId === term.actorId && source.officeId === term.officeId && source.districtId === term.districtId && source.baseRole === term.baseRole
     && source.electionId === term.pollId && source.proofId === term.proofId && source.startsAt === term.startsAt && source.endsAt === term.endsAt
@@ -171,8 +172,9 @@ function uncastPoll(state: SimState, person: Citizen): CivicPoll | undefined {
 }
 function readyProof(state: SimState, person: Citizen): CivicWorkProof | undefined {
   const day = Math.floor(clock(state) / 1440);
-  return body(state)?.proofs.find(proof => proof.actorId === person.id && proof.day === day && proof.completedAt !== null
-    && !body(state)!.applications.some(application => application.proofId === proof.id));
+  const view = civicHistoryView(state);
+  return view.proofs.find(proof => proof.actorId === person.id && proof.day === day && proof.completedAt !== null
+    && !view.applications.some(application => application.proofId === proof.id));
 }
 export function civicStaffingOpportunities(sim: Simulation, person: Citizen): { destination: Building; activity: 'civicRegister' | 'civicVote'; score: number }[] {
   const state = sim.state, civic = body(state), profile = state.extension?.actorProfiles[person.id];
@@ -224,7 +226,7 @@ function observePaid(sim: Simulation, event: Parameters<Parameters<Simulation['o
   const day = Math.floor(frame.clock / 1440), lower = Math.max(civic.enablement.enabledAt, day * 1440, paid.startAt);
   const upper = Math.min(frame.clock, paid.endAt);
   if (upper <= lower + EPS) return;
-  let proof = civic.proofs.find(proof => proof.actorId === person.id && proof.day === day);
+  let proof = civicHistoryView(state).proofs.find(proof => proof.actorId === person.id && proof.day === day);
   if (!proof) {
     if (civic.proofs.length >= PROOF_LIMIT) return;
     proof = { id: `civic-proof-${civic.nextProofId++}`, actorId: person.id, officeId: source.workId, districtId: source.districtId,
@@ -376,7 +378,7 @@ function closeUnavailable(state: SimState): void {
     const reason: CivicApplication['cancellationReason'] = !state.extension!.actorProfiles[person.id]?.alive ? 'death'
       : person.role !== source.baseRole || person.workId !== source.workId ? 'profession-changed'
       : person.districtId !== source.districtId ? 'residency-changed'
-      : Math.floor(at / 1440) !== civic.proofs.find(proof => proof.id === application.proofId)!.day ? 'expired-proof' : '';
+      : Math.floor(at / 1440) !== civicHistoryView(state).proofs.find(proof => proof.id === application.proofId)!.day ? 'expired-proof' : '';
     if (reason) { application.cancelledAt = at; application.cancellationReason = reason; }
   }
   for (const term of civic.terms) {
@@ -428,7 +430,8 @@ export function installCivicStaffing(sim: Simulation, hooks: CivicStaffingHooks)
   sim.onPhase('time', (_state, minutes) => {
     if (!hooks.enabled() || !body(sim.state)) { frames.delete(sim); return; }
     const civic = body(sim.state)!, day = Math.floor(clock(sim.state) / 1440);
-    const pinned = new Set([...civic.applications.map(row => row.proofId), ...civic.polls.map(row => row.proofId), ...civic.terms.map(row => row.proofId)]);
+    const view = civicHistoryView(sim.state);
+    const pinned = new Set([...view.applications.map(row => row.proofId), ...view.polls.map(row => row.proofId), ...view.terms.map(row => row.proofId)]);
     const remaining = civic.proofs.filter(proof => proof.day >= day || pinned.has(proof.id));
     if (remaining.length !== civic.proofs.length) { civic.retiredProofCount += civic.proofs.length - remaining.length; civic.proofs = remaining; }
     frames.set(sim, { state: sim.state, tick: sim.state.tick, clock: clock(sim.state), minutes, paid: new Map(), arrivals: [], reserved: new Set() });
@@ -476,8 +479,10 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
     } else need(value.pointId === `legacy:${value.floor}:${purpose}` && Math.abs(value.position.y - site!.position.y - .6 - value.floor * site!.height / site!.floors) <= .26
       && Math.abs(value.position.x - site!.position.x) <= site!.width / 2 + 2 && Math.abs(value.position.z - site!.position.z) <= site!.depth / 2 + 2, 'saved legacy original point');
   };
-  shape(civic, ['version', 'enablement', 'originalOfficials', 'nextProofId', 'retiredProofCount', 'nextApplicationId', 'nextPollId', 'nextTermId', 'proofs', 'applications', 'polls', 'terms'], 'exact business body');
-  need(civic.version === 1, 'business version');
+  shape(civic, ['version', 'enablement', 'originalOfficials', 'nextProofId', 'retiredProofCount', 'nextApplicationId', 'nextPollId', 'nextTermId', 'proofs', 'applications', 'polls', 'terms', ...(civic.version === 2 ? ['historyId'] : [])], 'exact business body');
+  need(civic.version === 1 || civic.version === 2, 'business version');
+  if (civic.version === 1) need(state.civicHistory === undefined, 'legacy body cannot silently archive');
+  else need(state.civicHistory && civic.historyId === state.civicHistory.id, 'history body paired identity');
   const enabled = civic.enablement;
   shape(enabled, ['id', 'ruleVersion', 'origin', 'enabledAt', 'enabledTick', ...(enabled?.sourceSave === undefined ? [] : ['sourceSave'])], 'enablement shape');
   string(enabled.id, 'enablement id'); need(enabled.ruleVersion === 1 && ['new-city', 'host-upgrade'].includes(enabled.origin), 'enablement rule');
@@ -496,9 +501,43 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
     if (source.source?.kind === 'initial-profession') { shape(source.source, ['kind'], 'initial source shape'); need(enabled.origin === 'new-city', 'upgrade cannot invent initial source'); }
     else { shape(source.source, ['kind', 'revision'], 'employment source shape'); need(source.source.kind === 'public-employment', 'known official source'); number(source.source.revision, 0, 1024, 'employment revision', true); }
   }
-  const proofRows = rows<CivicWorkProof>(civic.proofs, PROOF_LIMIT, 'bounded work proofs');
-  const applications = rows<CivicApplication>(civic.applications, APPLICATION_LIMIT, 'bounded applications');
-  const polls = rows<CivicPoll>(civic.polls, POLL_LIMIT, 'bounded polls'), terms = rows<CivicTerm>(civic.terms, TERM_LIMIT, 'bounded terms');
+  rows<CivicWorkProof>(civic.proofs, PROOF_LIMIT, 'bounded live work proofs');
+  rows<CivicApplication>(civic.applications, APPLICATION_LIMIT, 'bounded live applications');
+  rows<CivicPoll>(civic.polls, POLL_LIMIT, 'bounded live polls'); rows<CivicTerm>(civic.terms, TERM_LIMIT, 'bounded live terms');
+  const cold = civic.version === 2 ? decodeCivicHistory(state.civicHistory!, enabled.id, now, state.tick) : { proofs: [], applications: [], polls: [], terms: [] };
+  const { proofs: proofRows, applications, polls, terms } = civicHistoryView(state);
+  if (civic.version === 2) {
+    need(cold.proofs.every(proof => proof.completedAt !== null), 'immutable archived paid proof');
+    need(cold.applications.every(application => application.cancelledAt !== null && application.receipt === null
+      || application.receipt !== null && cold.polls.some(poll => poll.id === application.pollId && poll.result !== 'open' && poll.countedAt !== null)), 'immutable archived application');
+    need(cold.polls.every(poll => poll.result !== 'open' && poll.countedAt !== null
+      && cold.applications.some(application => application.id === poll.applicationId && application.receipt !== null)), 'immutable archived counted poll and paid application');
+    need(cold.terms.every(term => term.endedAt !== null && term.endedTick !== null), 'immutable archived ended term');
+    const history = state.civicHistory!, pages = new Map(history.pages.map(page => [page.id, page]));
+    const sealed = (kind: 'proofs' | 'applications' | 'polls' | 'terms', id: string, endAt: number, endTick: number) => {
+      const entry = history.index[kind].find(entry => entry.id === id), page = entry && pages.get(entry.parts[0].pageId);
+      need(page && endAt <= page.sealedAt + EPS && endTick <= page.sealedTick, 'original record final before immutable sealing');
+    };
+    for (const proof of cold.proofs) {
+      const closedAt = cold.applications.filter(application => application.proofId === proof.id).map(application => application.cancelledAt
+        ?? cold.polls.find(poll => poll.id === application.pollId)?.countedAt ?? Number.POSITIVE_INFINITY);
+      need(closedAt.length > 0 && closedAt.some(at => Number.isFinite(at)), 'archived proof belongs to a retained actually closed application');
+      sealed('proofs', proof.id, Math.max(proof.completedAt!, Math.min(...closedAt)), proof.windows.at(-1)!.lastTick);
+    }
+    for (const application of cold.applications) sealed('applications', application.id, application.cancelledAt ?? cold.polls.find(poll => poll.id === application.pollId)!.countedAt!,
+      application.receipt?.tick ?? application.windows.at(-1)?.tick ?? enabled.enabledTick);
+    for (const poll of cold.polls) sealed('polls', poll.id, poll.countedAt!, Math.max(enabled.enabledTick,
+      ...poll.withdrawals.map(row => row.tick), ...poll.ballots.flatMap(ballot => ballot.windows.map(window => window.tick))));
+    for (const term of cold.terms) sealed('terms', term.id, term.endedAt!, term.endedTick!);
+    const origin = state.civicHistory!.origin;
+    need(origin.createdAt >= enabled.enabledAt && origin.createdTick >= enabled.enabledTick, 'history cannot precede enablement');
+    if (origin.kind === 'new-city') need(enabled.origin === 'new-city' && origin.createdAt === enabled.enabledAt && origin.createdTick === enabled.enabledTick, 'history new-city origin');
+    else {
+      const counts = origin.sourceCounts;
+      need(counts.nextProofId <= civic.nextProofId && counts.nextApplicationId <= civic.nextApplicationId && counts.nextPollId <= civic.nextPollId
+        && counts.nextTermId <= civic.nextTermId && counts.retiredProofCount <= civic.retiredProofCount, 'immutable format cutover counters');
+    }
+  }
   const ids = <T extends { id: string }>(values: T[], prefix: string, next: number) => {
     number(next, values.length + 1, values.length + 1, `${prefix} contiguous counter`, true);
     for (const [index, value] of values.entries()) need(value.id === `${prefix}${index + 1}`, `${prefix} ordered identity`);
@@ -588,6 +627,18 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
     need(Math.max(...witnesses.map(witness => witness.paid.startAt)) < Math.min(...witnesses.map(witness => witness.paid.endAt)), 'two simultaneous real paid witnesses');
     need(polls.some(poll => poll.id === application.pollId && poll.applicationId === application.id && same(poll.openedAt, receipt.paidAt)), 'fee has exactly its original poll');
   }
+  if (civic.version === 2) {
+    // The rolling ledger may retire old rows. Every retained fee row still has
+    // its complete original receipt, and a nonfull ledger cannot hide a fee.
+    const ledger = state.extension!.publicLedger, fees = ledger.filter(row => row.purpose === '本区居民补选本人登记费');
+    for (const row of fees) need(row.account === 'public' && row.amount === CIVIC_REGISTRATION_FEE
+      && applications.some(application => application.receipt?.tick === row.tick && application.actorId === row.actorId && application.districtId === row.districtId), 'retained public fee ledger actual receipt');
+    const oldest = ledger.length ? Math.min(...ledger.map(row => row.tick)) : state.tick + 1;
+    for (const application of applications.filter(application => application.receipt)) {
+      const matching = fees.filter(row => row.tick === application.receipt!.tick && row.actorId === application.actorId && row.districtId === application.districtId);
+      need(matching.length <= 1 && (ledger.length >= 512 && application.receipt!.tick <= oldest || matching.length === 1), 'exact retained public fee ledger custody');
+    }
+  }
   let ballotCount = 0;
   for (const poll of polls) {
     shape(poll, ['id', 'applicationId', 'candidateId', 'officeId', 'districtId', 'proofId', 'openedAt', 'closesAt', 'openingCensus', 'eligible', 'withdrawals', 'ballots', 'countedAt', 'result', 'count', 'termId'], 'poll shape');
@@ -639,7 +690,7 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
       else { need(poll.termId === null && !terms.some(term => term.pollId === poll.id), 'failed poll creates no identity'); if (poll.result === 'no-quorum') need(poll.count.turnout < poll.count.quorum, 'true no quorum'); if (poll.result === 'defeated') need(poll.count.turnout >= poll.count.quorum && poll.count.support <= poll.count.retain, 'true retain or tie'); }
     }
   }
-  need(ballotCount <= BALLOT_LIMIT, 'global bounded ballot custody');
+  need((civic.version === 1 ? ballotCount : civic.polls.reduce((sum, poll) => sum + poll.ballots.length, 0)) <= BALLOT_LIMIT, 'bounded live ballot custody');
   for (const term of terms) {
     shape(term, ['id', 'actorId', 'officeId', 'districtId', 'baseRole', 'enablementId', 'pollId', 'proofId', 'startsAt', 'endsAt', 'endedAt', 'endedTick', 'endedReason'], 'finite term shape');
     const poll = polls.find(poll => poll.id === term.pollId), source = originals.find(source => source.actorId === term.actorId);
@@ -678,4 +729,26 @@ export function validateCivicStaffing(state: SimState, world: WorldDefinition): 
       let used = 0; for (const claim of deadlines) if (claim.startedAt >= start) { used += claim.workedMinutes; need(used <= claim.endedAt - start + EPS, 'unpaid civic plus existing activities exceed real actor time'); }
     }
   }
+}
+
+/** Prepare a complete archive transaction; the caller validates budget pins and
+ * commits both fields only after all consumers of the current tick have run. */
+export function prepareCivicHistoryArchive(state: SimState, world: WorldDefinition): Pick<SimState, 'civicStaffing' | 'civicHistory'> | null {
+  const civic = body(state); if (civic?.version !== 2 || !state.civicHistory) return null;
+  const polls = civic.polls.filter(poll => poll.result !== 'open' && poll.countedAt !== null);
+  const pollIds = new Set(polls.map(poll => poll.id));
+  const applications = civic.applications.filter(application => application.cancelledAt !== null && !application.receipt
+    || application.receipt !== null && application.pollId !== null && pollIds.has(application.pollId));
+  const terms = civic.terms.filter(term => term.endedAt !== null && term.endedTick !== null);
+  if (!polls.length && !applications.length && !terms.length) return null;
+  validateCivicStaffing(state, world);
+  const proofIds = new Set([...applications, ...polls, ...terms].map(row => row.proofId));
+  const proofs = civic.proofs.filter(proof => proofIds.has(proof.id));
+  const history = appendCivicHistory(state.civicHistory, { proofs, applications, polls, terms }, clock(state), state.tick);
+  const applicationIds = new Set(applications.map(row => row.id)), termIds = new Set(terms.map(row => row.id));
+  const next = { ...civic, proofs: civic.proofs.filter(row => !proofIds.has(row.id)), applications: civic.applications.filter(row => !applicationIds.has(row.id)),
+    polls: civic.polls.filter(row => !pollIds.has(row.id)), terms: civic.terms.filter(row => !termIds.has(row.id)) };
+  const candidate = { ...state, civicStaffing: next, civicHistory: history };
+  validateCivicStaffing(candidate, world);
+  return { civicStaffing: next, civicHistory: history };
 }

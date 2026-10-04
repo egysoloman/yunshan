@@ -1,5 +1,6 @@
 import { CITY_LAYOUT_VERSIONS, CURRENT_CITY_LAYOUT, GEOLOGICAL_GEOMETRY_VERSION, ARCHITECTURAL_GEOMETRY_VERSION, createWorld } from '../world';
 import { MARKET_STATION_APRON_VERSION, MARKET_STATION_APRON_MAX_GRADE, MARKET_STATION_APRON_OFFSETS } from '../market-station-apron';
+import { parseSaveWithinResources } from './save-resource';
 import { validateCityRulesetEnvelope } from '../simulation/city-ruleset';
 import { getBuildingBody, getFloorPlanRoofRegions } from '../architecture-floor-plan';
 import { COMMERCIAL_RECIPE_VERSION, COMMERCIAL_ROUTE_REVISION } from '../commercial-district';
@@ -56,10 +57,9 @@ export function selectSavedWorld(json?: string | null, newCityLayout: CityLayout
     if (!CITY_LAYOUT_VERSIONS.includes(newCityLayout)) throw new Error('不支持的新城市配方。');
     return { world: createWorld(20261001, newCityLayout), layout: newCityLayout };
   }
-  if (typeof json !== 'string' || json.length > 8_000_000) throw new Error('保存的旅程超过可读取范围；原存档已保留。');
   let data: Record<string, any>;
-  try { data = JSON.parse(json); } catch { throw new Error('保存的旅程格式损坏；原存档已保留。'); }
-  if (!data || data.format !== 'yunshan-save' || (data.version !== 1 && data.version !== 2 && data.version !== 3) || !Number.isSafeInteger(data.worldSeed)
+  try { data = parseSaveWithinResources(json); } catch { throw new Error('保存的旅程格式损坏；原存档已保留。'); }
+  if (!data || data.format !== 'yunshan-save' || (data.version !== 1 && data.version !== 2 && data.version !== 3 && data.version !== 4) || !Number.isSafeInteger(data.worldSeed)
     || data.worldSeed < 0 || data.worldSeed > 0xffffffff || data.state?.seed !== data.worldSeed
     || typeof data.worldFingerprint !== 'string' || !/^[0-9a-f]{1,8}$/.test(data.worldFingerprint)) {
     throw new Error('保存的世界标识无效；原存档已保留。');

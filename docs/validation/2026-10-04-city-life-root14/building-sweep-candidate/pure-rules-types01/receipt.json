@@ -1,0 +1,29 @@
+{
+  "startedAt": "2026-10-04T16:13:08.083231+00:00",
+  "endedAt": "2026-10-04T16:13:08.814942+00:00",
+  "argv": [
+    "python",
+    "/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/run-validation.py"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 297,
+  "inputsStable": true,
+  "rawSHA256": "b88b0437d2073c30a7c1f92c0411cad37a711ffd860855da4712035cbb222140",
+  "ownedPid": 94246,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 94255,
+      "state": "Z",
+      "parent": 1,
+      "group": 94246,
+      "session": 94246,
+      "startTicks": 6121294
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

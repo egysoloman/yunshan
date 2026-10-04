@@ -1,0 +1,80 @@
+{
+  "status": "GUARDED_INSTALLED",
+  "at": "2026-10-04T17:08:55.796815+00:00",
+  "baseCommit": "d95cf99b006bba4f31a9ab2a1980ac588fff9f64",
+  "branch": "takeover-city-life",
+  "oldInputCount": 295,
+  "inputCount": 304,
+  "productionSourceCount": 71,
+  "graphSHA256": "5603eaaf84575d2d59a2886b186096a6916b84c4924cd1840bd10631e4daf129",
+  "changedPaths": [
+    "adapters/rpg-maker/bridge.ts",
+    "scripts/economy-audit.ts",
+    "src/main.ts",
+    "src/persistence/partition.ts",
+    "src/persistence/world-layout.ts",
+    "src/product-city.ts",
+    "src/simulation.ts",
+    "src/simulation/city-ruleset.ts",
+    "src/simulation/civic-staffing.ts",
+    "src/types.ts"
+  ],
+  "newPaths": [
+    "src/host/upgrade-civic-history-format.ts",
+    "src/persistence/save-resource.ts",
+    "src/simulation/civic-history.ts",
+    "tests/civic-history-codec.test.ts",
+    "tests/civic-history-contract.test.ts",
+    "tests/civic-history-paid-source.test.ts",
+    "tests/fixtures/civic-history/root13-four-day-after-24.save.json",
+    "tests/fixtures/civic-history/root13-four-day.save.json",
+    "tests/fixtures/civic-history/root13-four-day.world.json"
+  ],
+  "removedPaths": [],
+  "shared304AllSHAMatch": true,
+  "assembly304AllSHAMatch": true,
+  "rootOwnedMemoPreservedSHA256": "4580202f46ff9e38ef6e73be96f23cd968822f66c549383c5d823b3f7bffcca5",
+  "freshBuildArtifactCount": 7,
+  "freshBuildArtifacts": {
+    "assets/index-DcKlDqDV.css": {
+      "bytes": 31135,
+      "sha256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd"
+    },
+    "assets/index-kEBeq3AA.js": {
+      "bytes": 1201108,
+      "sha256": "5946888520aca0e55eae78147a1a93645f74fe42860b1366cdeef2324a36a9bf"
+    },
+    "assets/index-kEBeq3AA.js.map": {
+      "bytes": 3632977,
+      "sha256": "358617bcd131bcf155dad93faf35857d46bcd9aaf02b480bd65d91ac3af58b88"
+    },
+    "assets/three-vwNga81B.js": {
+      "bytes": 502468,
+      "sha256": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe"
+    },
+    "assets/three-vwNga81B.js.map": {
+      "bytes": 2719376,
+      "sha256": "612b8aba285d7c525c87cb5b5c6dc6b5ba220deb6d65288a8f028da4f5df1055"
+    },
+    "favicon.svg": {
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6"
+    },
+    "index.html": {
+      "bytes": 736,
+      "sha256": "ab5ba584d2e1418c65dd577cb10ad0277bfc20741c3adf2c5764e5af9cb63336"
+    }
+  },
+  "entry": "/assets/index-kEBeq3AA.js",
+  "acceptedPhases": [
+    "build01",
+    "legacy1-exact24-01",
+    "ui01",
+    "browser01",
+    "old-current-factory01",
+    "product-day01",
+    "default-full-partition24-01"
+  ],
+  "completeGoal": false,
+  "otherCandidatesInstalled": false
+}
