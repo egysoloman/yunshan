@@ -78,9 +78,13 @@ provider 原 13 个 scope 全部保留：typecheck01(301)/02(302) FAIL；03(302)
 
 ## 交付和可直接接续工作
 
-已完成本地守卫安装，当前工作分支 `takeover-city-life`；最新提交、push 与远端读回 **待根线程依据真实 publication receipt 补充**。根授权仅本地实现和当前工作分支 commit/push；main/PR/merge/部署/付费/安全共享无新增授权。本报告作者未做发布操作。
+已完成守卫安装及正常推送，当前工作分支 `takeover-city-life`；实现提交 [42f259c031fcc4313b50b8ad9c1bad7561f9501d](https://github.com/egysoloman/yunshan/commit/42f259c031fcc4313b50b8ad9c1bad7561f9501d)，17:37:44 UTC 实际远端读回一致，main仍 `6955d374a7d5bd928d2dadf4d0fdda74d416ca57`。304源码Git blob和六个原包Git blob分别逐SHA/size相同。实际回执见 [PUBLICATION-RECEIPT.json](delivery/PUBLICATION-RECEIPT.json) 与 [GIT-BLOB-VERIFICATION.json](delivery/GIT-BLOB-VERIFICATION.json)。没有force、PR、merge、部署、付费、凭据或安全共享变更；后续文档回执提交不改变已验证源码。
 
-ROOT13 Library 唯一 ordered16 批的旧事实是 tools/list 保存前网络失败、新ID0、memo version5未替换。ROOT14 三张真实 PNG 已实际保存到 Library，返回三个新原生 ID；其余文件和 Memo 替换仍待实际结果。云skill catalog不可用与直接Library app能力是两项事实：根线程已实际完成harmless library_list及native memo读回（原memo version_id字符串5/286307B），当前host-upload create/replace路径已可调用，后续其他原件及最后memo expected5 replacement，最终成功ID/替换结果由根真实回执补充。ROOT13旧CLI tools/list网络FAIL保留，不转称本次ROOT14上传失败；本草稿不假附件。可本地核验原件及Git fallback已经准备，后续成功上传/推送单独安全回执，源码cut和CLOSED不倒改后续结果。交付辅助检查的失败事实也保留：首provider成员检查把virtual source-overlay误作同相对路径文件而FAIL，后16:50的明确映射恢复校验PASS，13原scope图逐SHA重建；根collect首以whole stat比较包含读更新atime而停在第六文件前，5已复制原件仍exact，空目录重试守卫再次拒既有5文件，后仅逐字相同复用完成原收集。失败回执仍为FAIL，原件未改；这些打包结果不算业务运行或测试PASS。
+ROOT13 Library旧ordered16批tools/list保存前网络FAIL、新ID0保持原事实。ROOT14本轮使用当前明确可调用的Library app / Codex host-upload：3实际PNG和16其他原件全部status=succeeded/warnings[]，共19新原生LibraryID；每次返回xattrs已写回实际上传local path，原源字节SHA保持。完整ID、实际版本及大小见 [LIBRARY-DELIVERY-RECEIPT.json](delivery/LIBRARY-DELIVERY-RECEIPT.json)。原Memo全878行canonical app读取后和当前项目正文比较，仅插入、无原行删除或替换；expected5保护替换实际成功为6，416962B，原ID libfile_7571a326de848191aec330d605a63845保持。签名下载尝试网络URLError后，canonical全文读取成功；不将文本比较冒签名原始下载byte回读。Memo真实回执见 [LIBRARY-MEMO-RECEIPT.json](delivery/LIBRARY-MEMO-RECEIPT.json)。这些是实际保存的原文件，未做共享权限变更；原包及CLOSED不倒改发布或上传结果。
+
+关键Library原件：[集成报告](https://chatgpt.com/api/library/files/libfile_51b93d0a855c8191b6a3732fc4e3d0d5/download)、[完整38领域矩阵](https://chatgpt.com/api/library/files/libfile_209c0dff402c8191b33d30e36d53a783/download)、[当前默认源码ZIP](https://chatgpt.com/api/library/files/libfile_c99eb0339aa881919acf333e398e9af0/download)、[选择原证据ZIP](https://chatgpt.com/api/library/files/libfile_f0c34ade3ae48191b44ea200358435b5/download)、[当前Memo](https://chatgpt.com/api/library/files/libfile_7571a326de848191aec330d605a63845/download)。三真实PNG和四个producer TAR等ID在完整回执。报告随后受expected0版本保护更新；其最终实际版本以独立LIBRARY-REPORT-RECEIPT.json为准，不重复创建新ID。
+
+交付辅助检查的失败事实也保留：首provider成员检查把virtual source-overlay误作同相对路径文件而FAIL，后16:50的明确映射恢复校验PASS，13原scope图逐SHA重建；根collect首以whole stat比较包含读更新atime而停在第六文件前，5已复制原件仍exact，空目录重试守卫再次拒既有5文件，后仅逐字相同复用完成原收集。失败回执仍为FAIL，原件未改；这些打包结果不算业务运行或测试PASS。
 
 接续不是固定四优先阶段，按来源依赖和真实失败选择并行窄切片：
 
@@ -92,4 +96,4 @@ ROOT13 Library 唯一 ordered16 批的旧事实是 tools/list 保存前网络失
 
 源代码ZIP已由根独立验证：316原文件+1filemap、13,658,167B，SHA `f086c8686d3a70b14a2006d225a60257db5a2d12e421b5691c9eddcd5bee6242`。根已复制289个选择原件到公开ROOT14文件目录，历史/道路两个完整原件包另保；不能合计为测试数。literal credential-shape扫描616文件及展开tar/zip为0命中，只是字面模式检查，不是语义安全审计；报告/矩阵最终文件需根交付阶段追加扫描。
 
-最终发布补充位：`ROOT14_COMMIT_PENDING_ROOT_RECEIPT` / `ROOT14_PUSH_PENDING_ROOT_RECEIPT` / `ROOT14_LIBRARY_PARTIAL_IMAGES_REAL_OTHER_FILES_PENDING`。本阶段实现与相关运行可交付，不宣称全部目标完成。
+实际实现已发布，19个新Library原件已保存，原Memo版本6已更新。本阶段可交付；交通候选、美术、长期经济/十四日、全子系统及Mac仍按完整矩阵接续，不宣称全部目标完成。
