@@ -49,7 +49,7 @@ export class CitySession {
 
   #newWalker(): HeadlessWalker { return new HeadlessWalker(this.#world, () => this.#simulation.state); }
   #clock(): number { return this.#simulation.state.extension?.lastUpdate ?? this.#simulation.state.day * 1440 + this.#simulation.state.hour * 60; }
-  get metadata() { return { bridgeVersion: BRIDGE_VERSION, coreCommit: CORE_COMMIT, layout: this.#world.layoutVersion, worldSeed: this.#world.seed, worldFingerprint: savedWorldFingerprint(this.#world), saveFormat: 'yunshan-save', saveVersion: 1, fixedStepSeconds: FIXED_STEP_SECONDS, simulationTickSeconds: .25, coordinates: clone(COORDINATES) }; }
+  get metadata() { return { bridgeVersion: BRIDGE_VERSION, coreCommit: CORE_COMMIT, layout: this.#world.layoutVersion, worldSeed: this.#world.seed, worldFingerprint: savedWorldFingerprint(this.#world), saveFormat: 'yunshan-save', saveVersion: this.#simulation.saveVersion, fixedStepSeconds: FIXED_STEP_SECONDS, simulationTickSeconds: .25, coordinates: clone(COORDINATES) }; }
   worldSnapshot() { return clone(this.#world); }
   snapshot(): SimState { return clone(this.#simulation.state); }
 

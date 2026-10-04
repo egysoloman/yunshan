@@ -1,0 +1,200 @@
+{
+  "status": "PACKAGED_AND_INDEPENDENTLY_VERIFIED",
+  "at": "2026-10-04T08:55:24.370335+00:00",
+  "executor": "/root/root09_archive_inventory",
+  "delegatedBy": "/root",
+  "executionPlan": {
+    "path": "/workspace/yunshan-work/ROOT09-final-execution-plan-20261004-01.json",
+    "bytes": 22711,
+    "sha256": "3347586e1caee3110b2156233c45773714b1b2ca221f4d18b53084378c7af5d6"
+  },
+  "groups": 29,
+  "fileCount": 11561,
+  "payloadBytes": 1619221273,
+  "zipMembers": 11562,
+  "archive": {
+    "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+    "bytes": 504545705,
+    "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88"
+  },
+  "parts": [
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part001",
+      "bytes": 67108864,
+      "sha256": "c6ef7187149814c9cd7559d5bf2cdc3ad597828b8333c8b27dd7b4dca2067c12"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part002",
+      "bytes": 67108864,
+      "sha256": "956872781dcfd6a1a68380b77c6e862c1ad65ffe0afaa8b52141d6350208fad1"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part003",
+      "bytes": 67108864,
+      "sha256": "39a78f8585e7b7af0f9ae3740530f11c71d81dd7ebf80915bbd0987f6856c020"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part004",
+      "bytes": 67108864,
+      "sha256": "6f5f66856e3c5e1bae835154a4156d3b758be8b5e6076f8482b7f739c396c359"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part005",
+      "bytes": 67108864,
+      "sha256": "c283d3fd03c07beaf3ff8cda3d6b74f9c3b151f9b90c8e324280d8f855d13c67"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part006",
+      "bytes": 67108864,
+      "sha256": "fb399fb288fa5df84057ea0aefe4c81f569caeffd9ae8d4dfbcf0d3cad9cb951"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part007",
+      "bytes": 67108864,
+      "sha256": "e0d17258babdf3b2acb3a300c18017046dabe63c813095be94381635ac00d568"
+    },
+    {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part008",
+      "bytes": 34783657,
+      "sha256": "3f675fd8990d24c796a08cc9295eea14521ab2c0ed1e613ffb4c83fc74ab28ba"
+    }
+  ],
+  "partConcatenationSHA256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+  "packer": {
+    "status": "VERIFIED_ORIGINALS",
+    "sessionID": 72829,
+    "exitCode": 0,
+    "originalFilesStable": true,
+    "changed": [],
+    "crcError": null,
+    "memberSHAErrors": [],
+    "credentialPatternMatches": 0
+  },
+  "independentVerification": {
+    "status": "PASS",
+    "sessionID": 75404,
+    "exitCode": 0,
+    "archives": [
+      {
+        "label": "restored_parts",
+        "bytes": 504545705,
+        "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+        "credentialPatternMatches": 0,
+        "credentialPatternCounts": {
+          "tripo": 0,
+          "github": 0,
+          "openai": 0,
+          "aws": 0,
+          "slack": 0,
+          "google_oauth": 0,
+          "private_key": 0
+        },
+        "memberCount": 11562,
+        "CRCFailure": null,
+        "allMemberMatchCount": 11562,
+        "allMemberCRCValidatedCount": 11562
+      },
+      {
+        "label": "original_or_downloaded",
+        "bytes": 504545705,
+        "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+        "credentialPatternMatches": 0,
+        "credentialPatternCounts": {
+          "tripo": 0,
+          "github": 0,
+          "openai": 0,
+          "aws": 0,
+          "slack": 0,
+          "google_oauth": 0,
+          "private_key": 0
+        },
+        "memberCount": 11562,
+        "CRCFailure": null,
+        "allMemberMatchCount": 11562,
+        "allMemberCRCValidatedCount": 11562
+      }
+    ],
+    "failures": [],
+    "credentialPatternMatches": 0,
+    "credentialPatternCounts": {
+      "tripo": 0,
+      "github": 0,
+      "openai": 0,
+      "aws": 0,
+      "slack": 0,
+      "google_oauth": 0,
+      "private_key": 0
+    },
+    "redactedNameOrLocationPatternMatchCount": 0,
+    "nestedZIPScanRecords": 2,
+    "nestedZIPMembersSHARecordedAndCRCValidated": 632,
+    "gzipScanRecords": 1342,
+    "gzipCRCValidatedRecords": 1342,
+    "expandedBytesScanned": 9171033454,
+    "scanLimits": {
+      "depth": 8,
+      "expandedBytes": 17179869184
+    },
+    "nestedRecordCountsAcrossBothTopArchives": true,
+    "nestedMemberExpectedStatus": "READ_AND_HASHED: independently recorded SHA and validated CRC; outer source payload digest provides immutable file identity."
+  },
+  "controlMetadataReview": {
+    "status": "PASS_METADATA_ONLY",
+    "priorControlsMatched": 16,
+    "closureReferencesMatched": 24,
+    "priorInventoryRowsMatched": 5386,
+    "reportedDriftOrMissing": 0,
+    "constraintFailures": 0,
+    "copies": [
+      {
+        "source": "/workspace/yunshan-work/ROOT09-delivery-receipt-independent-review-20261004-01/REPORT.md",
+        "copy": "/workspace/yunshan-work/ROOT09-delivery-independent-restored-20261004-01/control-review/REPORT.md",
+        "bytes": 5861,
+        "sha256": "b7b6e4177bb98dbec6640e4a8098a9829690cfd1faa23a9a97daa313fba13bdd"
+      },
+      {
+        "source": "/workspace/yunshan-work/ROOT09-delivery-receipt-independent-review-20261004-01/metadata-crosscheck.json",
+        "copy": "/workspace/yunshan-work/ROOT09-delivery-independent-restored-20261004-01/control-review/metadata-crosscheck.json",
+        "bytes": 85604,
+        "sha256": "129ff521bf803fdd1e2689dbf69dfb1371359f7dda0f6293be4358f6183dfd33"
+      }
+    ],
+    "root07OriginalGeometryRetained": {
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1",
+      "manifestPath": "ROOT09-delivery-producer-20261004-01/original-dependencies/root07-architecture-floor-plan.ts"
+    },
+    "reviewOriginal40AndSelfManifestRetained": true,
+    "finalPlanBackupAll5Retained": true
+  },
+  "exclusions": {
+    "count": 37,
+    "scope": "All37 are node_modules dependency/symlink namespaces; excluded subtree files are absent from manifest."
+  },
+  "immutableTools": {
+    "run_guarded_collection.py": {
+      "bytes": 4678,
+      "sha256": "aad429035b99a6c5a01290ea93cad246bf552a4c3175fd43d45f8b1f62c599c5"
+    },
+    "package-root09-root10-originals-v3.py": {
+      "bytes": 7111,
+      "sha256": "e6b9a9fccd0a9d5719197ad6be75bac98dfaefd200e159156e750963271be288"
+    },
+    "verify_restored_delivery.py": {
+      "bytes": 21647,
+      "sha256": "3c37f299fe7d1686360e20fc36a5aabb88e790988d9674ac3ba4f70998ec6282"
+    }
+  },
+  "historicalLimit": {
+    "historicalRunsWithMissingVersions": 34,
+    "distinctMissingPathSHAVersions": 25,
+    "fixedByThisArchive": false,
+    "allHistoricalReplayCompleteClaim": false
+  },
+  "originalFailureStatusesRewritten": false,
+  "sourceRepoOrGitModifiedByThisAgent": false,
+  "LibraryCallsByThisAgent": 0,
+  "uploadStatus": "NOT_ATTEMPTED_BY_THIS_AGENT",
+  "officialLibraryAuthority": "/root",
+  "completeGoal": false
+}

@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-04T07:42:18.490260+00:00",
+  "status": "BYTE_EXACT_NEW_OBSERVER_FAILURE_ORIGINALS",
+  "files": [
+    {
+      "path": "docs/validation/2026-10-04-native-city-life/native-reader-original-failure/011-exportSave-original.json",
+      "source": "/workspace/yunshan-work/ROOT09-native-save-observer-20261004-01/captured-save01/011-exportSave-original.json",
+      "bytes": 1732618,
+      "sha256": "74467d2f3102c0ca8885ba1a4c006b5dea164e90b3cab56dd31466856d09b592"
+    },
+    {
+      "path": "docs/validation/2026-10-04-native-city-life/native-reader-original-failure/011-metadata.json",
+      "source": "/workspace/yunshan-work/ROOT09-native-save-observer-20261004-01/captured-save01/011-metadata.json",
+      "bytes": 666,
+      "sha256": "94dfc4449c712cd5da9b5d1a1014b69af98cb1129fe9d1b562a1695c35b3fc73"
+    },
+    {
+      "path": "docs/validation/2026-10-04-native-city-life/native-reader-original-failure/012-importSave-original.json",
+      "source": "/workspace/yunshan-work/ROOT09-native-save-observer-20261004-01/captured-save01/012-importSave-original.json",
+      "bytes": 1732618,
+      "sha256": "74467d2f3102c0ca8885ba1a4c006b5dea164e90b3cab56dd31466856d09b592"
+    },
+    {
+      "path": "docs/validation/2026-10-04-native-city-life/native-reader-original-failure/012-metadata.json",
+      "source": "/workspace/yunshan-work/ROOT09-native-save-observer-20261004-01/captured-save01/012-metadata.json",
+      "bytes": 749,
+      "sha256": "9e4d99ec5364d7d6ce88899d7ca853a7c81e95d79782a69a8f309a4f50a09f25"
+    }
+  ],
+  "originalHarness": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+  "observedWorld": "current-v6/b85fa6ec",
+  "observedTick": 97,
+  "legacyFirstFailureFullsaveWasNotCaptured": true,
+  "repairStatus": "IN_PROGRESS_AT_COPY_CREATION",
+  "newLibraryIDs": [],
+  "completeGoal": false
+}

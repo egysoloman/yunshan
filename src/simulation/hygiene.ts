@@ -1,4 +1,5 @@
 import type { Simulation } from '../simulation';
+import { installHygieneTransfers, transferStationOccupied, type HygieneTransfers } from './hygiene-transfer';
 import { installPublicDisinfection, certifiedHygieneDoctorWorkWindows, type PublicDisinfectionDemand } from './hygiene-public';
 import { blocksFloorPlanMovement, getBuildingBody } from '../architecture-floor-plan';
 import { clinicalAtSite, clinicalDoctorWorkWindows, clinicalDoctorUsedWorkWindows, clinicalServiceStationsAtPosition } from './clinical';
@@ -41,8 +42,9 @@ export interface DisinfectionJob {
 export interface HygieneStock { receivedUnits: number; availableUnits: number; consumedUnits: number; archivedReceived: number; archivedConsumed: number }
 export interface HygieneTotals { funded: number; purchasePaid: number; refunded: number; workedMinutes: number; completed: number; cancelled: number }
 export interface HygieneState {
+  transfers?: HygieneTransfers;
   publicVersion?: 1; nextDemandId?: number; publicDemands?: PublicDisinfectionDemand[];
-  version: 1; rulesetId: typeof HYGIENE_RULESET; nextBatchId: number; nextJobId: number; activatedAt: number; lastObservedAt: number;
+  version: 1 | 2; rulesetId: typeof HYGIENE_RULESET; nextBatchId: number; nextJobId: number; activatedAt: number; lastObservedAt: number;
   clinicalBaseline: Record<string, number>; batches: WasteBatch[]; jobs: DisinfectionJob[]; stock: Record<string, HygieneStock>;
   stats: HygieneTotals; archived: HygieneTotals & { count: number }; capacityHistory: ActorActivityClaim[];
 }
@@ -86,9 +88,9 @@ function batchStation(simulation: Simulation, batch: WasteBatch, position: Vec3,
 /** Fine processing affects only qualified existing staff attached to real jobs. */
 export function hygieneNeedsContinuousPeople(state: SimState, person: Citizen): boolean {
   const profile = state.extension?.actorProfiles[person.id];
-  return ['医生', 'doctor'].includes(person.role) && !!profile?.alive && profile.age >= 18 && !!state.hygiene?.jobs.some(job => !terminal(job) && job.cancelledAt === null && job.siteId === person.workId);
+  return ['医生', 'doctor'].includes(person.role) && !!profile?.alive && profile.age >= 18 && (!!state.hygiene?.jobs.some(job => !terminal(job) && job.cancelledAt === null && job.siteId === person.workId) || !!state.hygiene?.transfers?.tasks.some(task => task.state === 'awaitingCollection' && state.hygiene!.batches.find(batch => batch.id === task.batchId)?.siteId === person.workId || task.state === 'awaitingIntake' && task.destinationSiteId === person.workId));
 }
-function occupied(state: SimState, batch: WasteBatch): number { return state.hygiene!.batches.filter(other => other.siteId === batch.siteId && other.pointId === batch.pointId && other.floor === batch.floor).reduce((sum, other) => sum + other.containedUnits, 0); }
+function occupied(state: SimState, batch: WasteBatch): number { return state.hygiene!.batches.filter(other => other.siteId === batch.siteId && other.pointId === batch.pointId && other.floor === batch.floor).reduce((sum, other) => sum + other.containedUnits, 0) + transferStationOccupied(state, batch.siteId, batch.floor, batch.pointId); }
 function collectNewUnits(state: SimState, batch: WasteBatch, units: number): void { batch.containedUnits += Math.min(units, Math.max(0, CAPACITY - occupied(state, batch))); }
 function ledger(simulation: Simulation, job: DisinfectionJob, amount: number, purpose: string): void {
   const state = simulation.state, districtId = simulation.worldDefinition.buildings.find(site => site.id === job.siteId)!.districtId;
@@ -243,6 +245,7 @@ export function installHygiene(simulation: Simulation): void {
       batch.reservedUnits++; material.receivedUnits++; h.jobs.push(job); h.stats.funded += receipt.gross; h.stats.purchasePaid += receipt.gross; return job;
     },
   });
+  installHygieneTransfers(simulation);
   simulation.registerSaveValidator(state => validateHygieneState(state, simulation.worldDefinition));
 }
 
@@ -254,7 +257,7 @@ export function validateHygieneState(state: SimState, world: WorldDefinition): v
   const number = (value: unknown, min: number, max: number, label: string, integer = false): void => ensure(typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max && (!integer || Number.isInteger(value)), label);
   const close = (a: number, b: number, label: string) => ensure(Math.abs(a - b) <= EPS * Math.max(1, Math.abs(a), Math.abs(b)), label);
   const now = clock(state), sites = new Map(world.buildings.map(site => [site.id, site])), actorIds = new Set(['player', ...state.citizens.map(person => person.id)]), workshops = new Set(state.shops.filter(shop => sites.get(shop.buildingId)?.kind === 'workshop').map(shop => shop.id));
-  ensure(object(h) && h.version === 1 && h.rulesetId === HYGIENE_RULESET, '版本和游戏规则'); number(h.nextBatchId, 1, 1e9, '批次序号', true); number(h.nextJobId, 1, 1e9, '任务序号', true); number(h.activatedAt, 0, now, '激活时间'); number(h.lastObservedAt, h.activatedAt, now, '已观察时钟');
+  ensure(object(h) && (h.version === 1 || h.version === 2) && (h.version === 2) === (h.transfers !== undefined) && h.rulesetId === HYGIENE_RULESET, '版本和游戏规则'); number(h.nextBatchId, 1, 1e9, '批次序号', true); number(h.nextJobId, 1, 1e9, '任务序号', true); number(h.activatedAt, 0, now, '激活时间'); number(h.lastObservedAt, h.activatedAt, now, '已观察时钟');
   ensure(object(h.clinicalBaseline) && object(h.stock) && Array.isArray(h.batches) && h.batches.length <= 100000 && Array.isArray(h.jobs) && h.jobs.length <= HISTORY * 2 && Array.isArray(h.capacityHistory) && h.capacityHistory.length <= MAX_WITNESSES, '容器');
   const batchIds = new Set<string>(), sourceIds = new Set<string>(), generated = new Map<string, number>(), capacities = new Map<string, number>(), completed = new Map<string, number>(), reserved = new Map<string, number>();
   for (const b of h.batches) {

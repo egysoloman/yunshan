@@ -1,0 +1,281 @@
+{
+  "observedAt": "2026-10-04T08:57:51.514148+00:00",
+  "status": "FAILED_BEFORE_PREPARE_CONNECTION",
+  "officialHelper": "library_upload.py",
+  "helperSHA256": "f362d45d5e4a17a690e5aff1c795eb62e645cf5db5771a52a84fb1850ea06fb1",
+  "invocations": 1,
+  "requestItems": 42,
+  "createItems": 41,
+  "memoReplaceExpectedVersion": 5,
+  "exitCode": 1,
+  "stdoutBytes": 0,
+  "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderrBytes": 70,
+  "stderrSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "safeError": "hosted apps tools/list request failed: network",
+  "newLibraryIDs": [],
+  "memoReplacement": "NOT_EXECUTED",
+  "alternativeRouteOrRetry": false,
+  "attachmentDelivered": false,
+  "attemptInputSnapshot": {
+    "createdAt": "2026-10-04T08:55:13.453098+00:00",
+    "uploads": [
+      {
+        "name": "after-commercial-office-horizontal.png",
+        "purpose": "create_library_file",
+        "bytes": 594822,
+        "sha256": "08fd433ec2ef717d8a27b0fedd0d5b3e77e85788fc2a9978c66eed2bd712142d"
+      },
+      {
+        "name": "after-market-porch-life.png",
+        "purpose": "create_library_file",
+        "bytes": 439227,
+        "sha256": "50143428133e4062be7582ee64e473602151da7dd429b3fce90a166317d81ff1"
+      },
+      {
+        "name": "after-market-sale-point.png",
+        "purpose": "create_library_file",
+        "bytes": 583116,
+        "sha256": "9a648e1da3f96cb5935a59d9ac168a0cb3edbf0d5092fed32127bc6274bdfdad"
+      },
+      {
+        "name": "after-market-street.png",
+        "purpose": "create_library_file",
+        "bytes": 774796,
+        "sha256": "faf0a6d6be3d0a60d267f6571f91ebfa93d4ae03e837c3dae19d77bd2041c7a0"
+      },
+      {
+        "name": "after-residential-first-person.png",
+        "purpose": "create_library_file",
+        "bytes": 563967,
+        "sha256": "7eee3fbfcfd4c9aead001308833c31931868acc069f487b435b44c516e69d9ea"
+      },
+      {
+        "name": "before-commercial-office-horizontal.png",
+        "purpose": "create_library_file",
+        "bytes": 657831,
+        "sha256": "be4880960a44b6e77f69193e16019626bc0cb9be49391cf39ae5a5227019e390"
+      },
+      {
+        "name": "before-market-porch-life.png",
+        "purpose": "create_library_file",
+        "bytes": 472736,
+        "sha256": "9d903866855e5fa160594dc74d2c551c03a1b7aea091dcc58349528949f526e5"
+      },
+      {
+        "name": "before-market-sale-point.png",
+        "purpose": "create_library_file",
+        "bytes": 607530,
+        "sha256": "735abf6174e3a34a1819630474148c4ad3f2651d20726270a9bd2003e42a8d67"
+      },
+      {
+        "name": "before-market-street.png",
+        "purpose": "create_library_file",
+        "bytes": 788978,
+        "sha256": "ce1f2de218a16a22a59ae413fad1ebb06c00e38705334b9de689e6dfef2aac1b"
+      },
+      {
+        "name": "before-residential-first-person.png",
+        "purpose": "create_library_file",
+        "bytes": 605909,
+        "sha256": "c0cc3e218957fdc8960142d880d8c4a25f4813f461ffad75ffab2829973ae7c4"
+      },
+      {
+        "name": "final-browser-day.png",
+        "purpose": "create_library_file",
+        "bytes": 632987,
+        "sha256": "871122313d3097cd9410716cfec7958238ad665a8f0589e09af455965fdc45f9"
+      },
+      {
+        "name": "final-browser-interior.png",
+        "purpose": "create_library_file",
+        "bytes": 690445,
+        "sha256": "0ba123dfa8dd7f8e09c242ead36e1188960fbb549570a135b88d232329ec4d3e"
+      },
+      {
+        "name": "final-browser-night.png",
+        "purpose": "create_library_file",
+        "bytes": 558701,
+        "sha256": "00d4f7af6fd449e1a65b8ca8c5dda616673a758b0a7ea5b70f3a277d74f82610"
+      },
+      {
+        "name": "hygiene-received-custody-narrow-ui.png",
+        "purpose": "create_library_file",
+        "bytes": 92194,
+        "sha256": "2565460d6e0f33b615f5e4585eac06150b13ce2df575c3d3b0b39761e34de310"
+      },
+      {
+        "name": "hygiene-received-custody-ui.png",
+        "purpose": "create_library_file",
+        "bytes": 163156,
+        "sha256": "12700f446b6e61f4d9fa64c057327fc4be9a36c2f23d3eea427d68703d3e935f"
+      },
+      {
+        "name": "hygiene-source-custody-ui.png",
+        "purpose": "create_library_file",
+        "bytes": 163777,
+        "sha256": "7112b738e74eb9541ffef0e4dc3cfc1b5c4eb4e8028348ab470cf82fd937ee25"
+      },
+      {
+        "name": "natural-first-person-boot.png",
+        "purpose": "create_library_file",
+        "bytes": 713108,
+        "sha256": "1e2c30ab6351764d7dac6b67f03d6fb3f21cf857f8eccace7c54c65e87531c38"
+      },
+      {
+        "name": "public-appointed.png",
+        "purpose": "create_library_file",
+        "bytes": 25308,
+        "sha256": "9faa160c90a968509d4d1ca5b060c133ac940c5eff52138c12c9eb37008b5acf"
+      },
+      {
+        "name": "public-reviewed.png",
+        "purpose": "create_library_file",
+        "bytes": 26881,
+        "sha256": "ceac535210dcbefcd8e50cd9ff489ebe29fa26ec410291bd55bea3f80558d41e"
+      },
+      {
+        "name": "root09-audit-14d.png",
+        "purpose": "create_library_file",
+        "bytes": 259904,
+        "sha256": "50502e72a845872b9ef5f708be7d8b2798473435e117f38e74a5cf94a25ecd5f"
+      },
+      {
+        "name": "REPORT.md",
+        "purpose": "create_library_file",
+        "bytes": 9606,
+        "sha256": "a5f2faced94f4a901297e56108c2e4269348316dbf9aa6059cad8fde9bf065cc"
+      },
+      {
+        "name": "需求实现验证矩阵.md",
+        "purpose": "create_library_file",
+        "bytes": 108401,
+        "sha256": "67cb528b4e145556d99a19fc2507ae5fd921cc1d4d35dad81cff1e25a6f06383"
+      },
+      {
+        "name": "SPACE-CONTEXT-CONTRACT.md",
+        "purpose": "create_library_file",
+        "bytes": 18957,
+        "sha256": "ebcfd0da8f6f64f895221f1ff4944d5e943e1441a357aa7a0d3a334d2b18913f"
+      },
+      {
+        "name": "REPORT.md",
+        "purpose": "create_library_file",
+        "bytes": 12324,
+        "sha256": "805f701587220422346438f655a461d975f7f379db10b9c663f3a18ad6dd46ce"
+      },
+      {
+        "name": "root09-audit-14d.pdf",
+        "purpose": "create_library_file",
+        "bytes": 56971,
+        "sha256": "b2add6c74dddd1f24e69d9451a9d45b5db4881580cfe73a99485e9955a6dbd72"
+      },
+      {
+        "name": "root09-audit-14d-data.csv",
+        "purpose": "create_library_file",
+        "bytes": 2448,
+        "sha256": "b075da5678cef5b0d93425319e73d12447a4ae0f0b3e186ad3a1e975bbbc2390"
+      },
+      {
+        "name": "root09-14d.json",
+        "purpose": "create_library_file",
+        "bytes": 253995,
+        "sha256": "ae255725725af65a10892d9b8d8c4311c2df96e8f546cd639f7b6fed70682a59"
+      },
+      {
+        "name": "root09-14d-final.save.json",
+        "purpose": "create_library_file",
+        "bytes": 3650985,
+        "sha256": "2cdc7f0990d502086e221243fd876350cb0ee37211389b6a6cceab10418b78ca"
+      },
+      {
+        "name": "raw.log",
+        "purpose": "create_library_file",
+        "bytes": 45911,
+        "sha256": "bab3e31f7deddb3d8d540959304efe24befb6b0ebf2d38069d1c26e2c61b9aed"
+      },
+      {
+        "name": "011-exportSave-original.json",
+        "purpose": "create_library_file",
+        "bytes": 1732618,
+        "sha256": "74467d2f3102c0ca8885ba1a4c006b5dea164e90b3cab56dd31466856d09b592"
+      },
+      {
+        "name": "012-importSave-original.json",
+        "purpose": "create_library_file",
+        "bytes": 1732618,
+        "sha256": "74467d2f3102c0ca8885ba1a4c006b5dea164e90b3cab56dd31466856d09b592"
+      },
+      {
+        "name": "Yunshan_Native_City_Life_Source_20261004.zip",
+        "purpose": "create_library_file",
+        "bytes": 20949354,
+        "sha256": "8e1df9dfac9938a0c5082994158a426748e5ec2334253d56ac51ac4e4a283f73"
+      },
+      {
+        "name": "source-bundle-receipt.json",
+        "purpose": "create_library_file",
+        "bytes": 462,
+        "sha256": "d08b9473f9c0d109ef0a3e3d3955976238f08aa4f98bebe80186de3ba1a8f1c2"
+      },
+      {
+        "name": "current-frozen-inputs.json",
+        "purpose": "create_library_file",
+        "bytes": 29023,
+        "sha256": "589179ef0b15032a68ad41ecbffb591c7fba8409b5f2f5173e06218e4004a796"
+      },
+      {
+        "name": "validation-results.json",
+        "purpose": "create_library_file",
+        "bytes": 1144651,
+        "sha256": "2a9c6964c64a73fba2349264dbdefab7acf6297e8336fc0af000ee77679859ef"
+      },
+      {
+        "name": "collection-receipt.json",
+        "purpose": "create_library_file",
+        "bytes": 2245,
+        "sha256": "0f0977ec150e9e9c9728d1cb28b3877ab95ef975e02e8fac3195a42e0690a1be"
+      },
+      {
+        "name": "INDEPENDENT-VERIFICATION.json",
+        "purpose": "create_library_file",
+        "bytes": 14444759,
+        "sha256": "22ff7b0036f7639bf3091899b0a8d0d73cc36c962f7f9031d385f3b471d92243"
+      },
+      {
+        "name": "source-files-before.json",
+        "purpose": "create_library_file",
+        "bytes": 2425528,
+        "sha256": "7913f87446b6995ab0d8c32ae491859c773642a7ed789a0f551ffddef453ab07"
+      },
+      {
+        "name": "restore-originals.py",
+        "purpose": "create_library_file",
+        "bytes": 3237,
+        "sha256": "528bbd86765b6702cf3c69f8cfe2d4b1402bfecad45544b80855f41ace5f24ef"
+      },
+      {
+        "name": "receipt.json",
+        "purpose": "create_library_file",
+        "bytes": 750,
+        "sha256": "ab4858422f3a783762c53f77823edb56a514a7ae2b3b43f3ea3851f2b94af96b"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+        "purpose": "create_library_file",
+        "bytes": 504545705,
+        "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88"
+      },
+      {
+        "name": "开发备忘录.md",
+        "purpose": "replace_library_file",
+        "bytes": 370261,
+        "sha256": "75b85adb4904adc6af1b382271605d477524ad3a73f7ea6a1c16c7b0b18d9729"
+      }
+    ],
+    "sameMemoExpectedVersion": 5,
+    "singleOfficialHelperInvocation": true
+  },
+  "gitDeliveryStatus": "PENDING_AT_RECEIPT_FREEZE",
+  "completeGoal": false
+}

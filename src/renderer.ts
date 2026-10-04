@@ -10,14 +10,15 @@ import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floo
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
+import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
 
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb' };
 type MaterialKey = keyof typeof PALETTE;
-interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
-interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
+interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
+interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
 type LocalBox = { (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string): void; profile?: (profile: RoofProfile) => void };
 
 function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
@@ -30,7 +31,7 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 class BoxBatch {
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
-  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
+  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
     if (sx <= 0 || sy <= 0 || sz <= 0) return;
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), rotation), new THREE.Vector3(sx, sy, sz));
     const list = this.parts.get(key) ?? [];
@@ -74,7 +75,7 @@ class BoxBatch {
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
-        if (part.building && refs) { const list = refs.get(part.building) ?? []; list.push({ mesh, index, matrix: part.matrix, floor: part.floor ?? -1, roof: part.roof ?? false }); refs.set(part.building, list); }
+        if (part.building && refs) { const list = refs.get(part.building) ?? []; list.push({ mesh, index, matrix: part.matrix, floor: part.floor ?? -1, roof: part.roof ?? false, ...(part.ceiling ? { ceiling: true } : {}) }); refs.set(part.building, list); }
       });
       mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
       mesh.computeBoundingSphere(); mesh.receiveShadow = true; mesh.userData.distanceDetail = !!parts[0].distanceDetail; group.add(mesh);
@@ -126,6 +127,7 @@ export class CityRenderer implements CityRendererAPI {
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
   private marketGoods: MarketGoodsPool;
+  private marketShopfront: MarketShopfrontPool;
   private roadClosures: RoadClosureOverlay;
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
@@ -382,6 +384,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
     this.marketGoods = new MarketGoodsPool(this.scene, world);
+    this.marketShopfront = new MarketShopfrontPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
@@ -425,7 +428,7 @@ export class CityRenderer implements CityRendererAPI {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);
         batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
-          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof }, undefined, part.facade, part.template);
+          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof' }, undefined, part.facade, part.template);
       }
       return;
     }
@@ -983,6 +986,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
+    this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     const counts = new Map<string, number>();
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
@@ -998,9 +1002,16 @@ export class CityRenderer implements CityRendererAPI {
     for (const [kind, pool] of this.vehiclePools) for (const mesh of [pool.body, pool.head, pool.trim]) { mesh.count = counts.get(kind) ?? 0; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
   }
 
-  /** Hide the current room's roof and upper floors; all other buildings retain their silhouette. */
+  /** Program rooms retain their real overhead slab/roof. The shared holes and
+   * exposed wings still determine the ceiling; no second room box is drawn. */
   private applyInteriorRefs(buildingId: string, currentFloor: number | null) {
-    for (const ref of this.interiors.get(buildingId) ?? []) { const retainedCeiling = currentFloor !== null && currentFloor < 0 ? currentFloor + 1 : currentFloor; if (currentFloor !== null && (ref.floor > retainedCeiling! || ref.roof && ref.floor >= currentFloor)) ref.mesh.setMatrixAt(ref.index, new THREE.Matrix4().makeScale(0, 0, 0)); else ref.mesh.setMatrixAt(ref.index, ref.matrix); ref.mesh.instanceMatrix.needsUpdate = true; }
+    const building = this.world.buildings.find(site => site.id === buildingId), program = currentFloor !== null && building && getBuildingFloorPlan(building, currentFloor);
+    for (const ref of this.interiors.get(buildingId) ?? []) {
+      const retainedCeiling = currentFloor !== null && currentFloor < 0 ? currentFloor + 1 : currentFloor;
+      const overhead = program && ref.ceiling && (ref.roof ? ref.floor === currentFloor : ref.floor === currentFloor! + 1);
+      const hidden = currentFloor !== null && !overhead && (ref.floor > retainedCeiling! || ref.roof && ref.floor >= currentFloor);
+      ref.mesh.setMatrixAt(ref.index, hidden ? new THREE.Matrix4().makeScale(0, 0, 0) : ref.matrix); ref.mesh.instanceMatrix.needsUpdate = true;
+    }
   }
 
   setInterior(id: string | null, floor = 0) {
@@ -1023,6 +1034,7 @@ export class CityRenderer implements CityRendererAPI {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
     this.marketGoods.dispose();
+    this.marketShopfront.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();

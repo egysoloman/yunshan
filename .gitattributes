@@ -17,3 +17,8 @@ docs/validation/2026-10-03-city-continuation-next/economy-plots/*.svg binary
 docs/validation/2026-10-03-city-continuation-next/**/*.tap -whitespace
 docs/validation/2026-10-03-city-continuation-next/*.patch.first-failed -whitespace
 docs/validation/2026-10-03-city-continuation-next/market-return-ui-three-way-conflict.original.txt binary
+
+# Preserve native validation archives, split archives and actual compressed save fixture.
+docs/validation/2026-10-04-native-city-life/**/*.zip binary
+docs/validation/2026-10-04-native-city-life/**/*.zip.part* binary
+tests/fixtures/native-live-reader/*.gz binary

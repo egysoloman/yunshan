@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { marketCounters, marketDisplayUnits, type MarketCounter } from '../site-fixtures';
 import type { SimState, Vec3, WorldDefinition } from '../types';
+import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 
 /** One reusable draw displays a small sample of food that the existing market
  * actually owns. Empty/closed markets and unloaded neighbourhoods display none. */
@@ -24,7 +25,7 @@ export class MarketGoodsPool {
     let count = 0;
     for (const [buildingId, counters] of this.counters) {
       const shop = shops.get(buildingId);
-      if (!residentBuildingIds.has(buildingId) || !shop?.open || !counters.length) continue;
+      if (!residentBuildingIds.has(buildingId) || !shop?.open || !shopLifecycleAllowsOperation(state, shop.id) || !counters.length) continue;
       const units = marketDisplayUnits(shop.inventory);
       for (let unit = 0; unit < units; unit++) {
         const counter = counters[unit % counters.length];

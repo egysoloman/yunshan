@@ -286,7 +286,14 @@ export function getFloorPlanSlabRegions(p: FloorPlan): Rect[] {
   const base=[...p.interior,...p.circulation,...p.courtyard],regions=p.stairHole?[...rectangleCover(base,[p.stairHole]),p.stairLanding]:base;
   cached={regions,boundaries:boundaryLoops(regions)};supportCache.set(p,cached);return regions;
 }
-function segmentDistanceSquared(x:number,z:number,a:readonly number[],b:readonly number[]) {const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)));return (x-a[0]-dx*t)**2+(z-a[1]-dz*t)**2;}
+function segmentDistanceSquared(x:number,z:number,a:readonly number[],b:readonly number[]) {
+  const dx=b[0]-a[0],dz=b[1]-a[1],lengthSquared=dx*dx+dz*dz;
+  // A stationary body has a point segment; dividing its projection by zero
+  // would make the corner distance NaN and hide an existing radius overlap.
+  if(lengthSquared===0)return (x-a[0])**2+(z-a[1])**2;
+  const t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/lengthSquared));
+  return (x-a[0]-dx*t)**2+(z-a[1]-dz*t)**2;
+}
 function circleRectDistanceSquared(x:number,z:number,r:Rect) {return Math.max(r.x0-x,0,x-r.x1)**2+Math.max(r.z0-z,0,z-r.z1)**2;}
 export function canStandInFloorPlan(p:FloorPlan,x:number,z:number,radius=.35):boolean {
   if(!containsUnion(getFloorPlanSlabRegions(p),x,z))return false;
@@ -424,8 +431,14 @@ function segmentIntersectsRect(a:Vec3,b:Vec3,r:Rect):boolean {
 }
 export function blocksFloorPlanMovement(b:Building,floor:number,from:Vec3,to:Vec3,radius=.35,eyeHeight=1.72):boolean {
   const p=getBuildingFloorPlan(b,floor);if(!p)return false;const a=buildingLocalPosition(b,from),z=buildingLocalPosition(b,to);
+  // A solid outside the full swept body's XZ bounds cannot intersect it.
+  // This is only a conservative rejection; retain the original exact segment,
+  // endpoint/corner distance, height, roof and mutable-derived-view checks.
+  const reach=Number.isFinite(radius)&&Number.isFinite(a.x)&&Number.isFinite(a.z)&&Number.isFinite(z.x)&&Number.isFinite(z.z)?Math.abs(radius)+eps:Infinity,x0=Math.min(a.x,z.x)-reach,x1=Math.max(a.x,z.x)+reach,z0=Math.min(a.z,z.z)-reach,z1=Math.max(a.z,z.z)+reach;
   for(const w of localSolids(b,p)) {
     if(w.top<=Math.max(a.y,z.y)+(w.steppable ? .22 : .01) || w.bottom>=Math.max(a.y,z.y)+eyeHeight)continue;
+    const r=w.rect;
+    if(Number.isFinite(r.x0)&&Number.isFinite(r.x1)&&Number.isFinite(r.z0)&&Number.isFinite(r.z1)&&(Math.max(r.x0,r.x1)<x0 || Math.min(r.x0,r.x1)>x1 || Math.max(r.z0,r.z1)<z0 || Math.min(r.z0,r.z1)>z1))continue;
     if(segmentIntersectsRect(a,z,w.rect))return true;
     let distance=Math.min(circleRectDistanceSquared(a.x,a.z,w.rect),circleRectDistanceSquared(z.x,z.z,w.rect));
     for(const point of [[w.rect.x0,w.rect.z0],[w.rect.x0,w.rect.z1],[w.rect.x1,w.rect.z0],[w.rect.x1,w.rect.z1]])distance=Math.min(distance,segmentDistanceSquared(point[0],point[1],[a.x,a.z],[z.x,z.z]));

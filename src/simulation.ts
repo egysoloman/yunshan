@@ -1,4 +1,5 @@
 import { validateSupplementalBudgetCrossReferences } from './simulation/supplemental-budget';
+import { NpcStairMotion, type NpcStairCursor } from './simulation/npc-stair-motion';
 import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
 import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
@@ -16,6 +17,7 @@ import { installFamilyEducation, familyEducationOpportunities, familyEducationTa
 import { clinicalServiceStationsAtPosition, clinicalTaskActorIds } from './simulation/clinical';
 import { educationNeedsContinuousPeople, educationServiceStationsAtPosition } from './simulation/education';
 import { installGovernance } from './simulation/governance';
+import { canRecordPublicTransfer, recordPublicTransfer, publicEmploymentJobs, publicEmploymentSite, publicEmploymentRevision, publicEmploymentTransfer, publicTransferAssignment, publicTransferReserved, validatePublicEmployment, TRANSFER_CONTRACT_LIMIT, type EmploymentTransfer, type PublicShift, type PublicLabor } from './simulation/public-employment';
 import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
@@ -58,8 +60,6 @@ export interface PublicPurchaseRequest { supplierShopIds?: string[]; requestedGr
 export interface PublicPurchaseReceipt { reason?: 'budget' | 'supply' | 'authorization'; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; gross: number; net: number; unitPrice: number }[] }
 export interface PublicBudgetAuthorization { id: string; siteId: string; purpose: string; cap: number; approvedAt: number; approvedBy: string[] }
 interface BudgetAuthorization extends PublicBudgetAuthorization { spent: number; closedAt: number | null; signatures: { actorId: string; role: string; siteId: string; signedAt: number }[] }
-interface PublicShift { id: string; day: number; approvedAt: number; siteId: string; approvedBy: string[]; cap: number; assignments: { citizenId: string; workId: string; ratePerMinute: number; minutesCap: number; workedMinutes: number }[] }
-interface PublicLabor { version: 1; standingUntilDay: number; nextReviewAt: number; jobs: Record<string, string>; shifts: PublicShift[]; stats: { approvedMinutes: number; unfundedMinutes: number; workedMinutes: number; privateMoves: number } }
 interface PrivateShift {
   day: number; shopId: string;
   assignments: { citizenId: string; ratePerMinute: number; minutesCap: number; workedMinutes: number }[];
@@ -71,7 +71,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -85,6 +85,8 @@ interface Runtime {
   impressions: Record<string, { affection: number; trust: number }>; districtRelationMeans: Record<string, number>;
   decisionAt: Record<string, number>; activities: Record<string, string>;
   peopleElapsed?: Record<string, number>;
+  npcMotionVersion?: 2;
+  npcStairCursors?: Record<string, NpcStairCursor>;
   attendance: Record<string, number>;
   shopLabor?: Record<string, number>;
   // Actual between-batch retail units; absent on untouched older saves.
@@ -121,6 +123,9 @@ export class Simulation implements SimulationAPI {
   private readonly baselineCitizenIds = new Set<string>();
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
   private readonly citizenRoadMovementRejected = new WeakSet<Citizen>();
+  private readonly npcStairMotion: NpcStairMotion;
+  private readonly npcCursorRoutes = new WeakMap<NpcStairCursor, Vec3[]>();
+  private readonly citizenArrivalMinutes = new WeakMap<Citizen, number>();
   private minutes = .25;
   private employment = new Set<string>();
   private accrualIndexSource?: WageAccrual[];
@@ -133,6 +138,7 @@ export class Simulation implements SimulationAPI {
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
     this.edges = new Map(world.edges.map(e => [e.id, e]));
+    this.npcStairMotion = new NpcStairMotion(world);
     for (const node of world.nodes) this.nodeAt.set(this.pointKey(node.position), node.id);
     for (const building of world.buildings) this.doorNodes.set(building.id, this.nearestNode(building.door));
     this.fingerprint = savedWorldFingerprint(world);
@@ -140,6 +146,9 @@ export class Simulation implements SimulationAPI {
     this.runtime = { rng: (world.seed >>> 0) || 1, accumulator: 0, weatherAt: 9 * 60, crimeAt: 8 * 60 + 40, payrollAt: 17 * 60, commerceAt: 8 * 60, financeAt: 8 * 60, socialAt: 8 * 60, eventId: 0, crimeId: 0, focus: copy(world.spawn), mode: 'drone', detail: 1, workAt: -10000, studyAt: -10000, wages: [], accountingVersion: 2, wageAccruals: [], wageArrears: [], taxes: 0, freight: {}, playerBusinesses: [], investment: 0, campaign: null, signalOverrides: {}, constructionId: 0, energyBoostUntil: 0, operatingCost: 0, restAt: -10000, relationshipAt: {}, lastInvestmentAt: -10000, riders: {}, links: [], impressions: {}, districtRelationMeans: {}, decisionAt: {}, activities: {}, attendance: {}, customers: {}, driving: { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 }, dispatches: {}, relationshipClock: 480, hostileAt: {} };
     this.state = { version: 1, seed: world.seed, tick: 0, day: 0, hour: 8, paused: false, speed: 1, weather: '晴', visibility: 1, energy: 98, treasury: 80000, taxRate: .08, policeBudget: .3, support: 58, bankBalance: 0, loan: 0, gdp: 0, lastSystemOrder: [], districts: world.districts.map(d => ({ id: d.id, energy: 98, safety: 84, employment: .94, prosperity: 68, pollution: 8, tier: 'statistical', residents: d.population, crimeCount: 0 })), citizens: [], vehicles: [], shops: [], player: { position: copy(world.spawn), role: 'traveler', identities: ['traveler'], money: 600, reputation: 0, needs: { hunger: 85, fatigue: 90, social: 70, fun: 70 }, inventory: { block: 32 }, homeId: null, education: 0, experience: 0, partnerId: null, vehicleId: null }, relationships: [], crimes: [], events: [], metrics: { trades: 0, commutes: 0, crimesResolved: 0, freight: 0, flights: 0 }, voxels: [] };
     this.initializeCitizens();
+    // Fresh journeys explicitly opt into physical stair travel. A loaded v1
+    // runtime replaces these fields and retains its original movement contract.
+    this.runtime.npcMotionVersion = 2; this.runtime.npcStairCursors = {};
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
@@ -403,7 +412,9 @@ export class Simulation implements SimulationAPI {
   }
   private publicShiftAssignment(citizen: Citizen) {
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440);
-    return this.runtime.publicLabor?.shifts.find(shift => shift.day === day)?.assignments.find(assignment => assignment.citizenId === citizen.id && assignment.workId === citizen.workId);
+    const labor = this.runtime.publicLabor;
+    if (!labor) return undefined;
+    return publicTransferAssignment(labor, citizen, day) ?? labor.shifts.find(shift => shift.day === day)?.assignments.find(assignment => assignment.citizenId === citizen.id && assignment.workId === citizen.workId);
   }
   private publicWorkAllowance(citizen: Citizen): number {
     const labor = this.runtime.publicLabor, day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440);
@@ -412,10 +423,100 @@ export class Simulation implements SimulationAPI {
   }
   private reservedPublicShifts(): number {
     const day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440);
-    return (this.runtime.publicLabor?.shifts ?? []).filter(shift => shift.day >= day).reduce((sum, shift) => sum + shift.assignments.reduce((total, assignment) => total + Math.max(0, assignment.minutesCap - assignment.workedMinutes) * assignment.ratePerMinute, 0), 0);
+    return (this.runtime.publicLabor?.shifts ?? []).filter(shift => shift.day >= day).reduce((sum, shift) => sum + shift.assignments.reduce((total, assignment) => total + Math.max(0, assignment.minutesCap - assignment.workedMinutes) * assignment.ratePerMinute, 0), 0) + publicTransferReserved(this.runtime.publicLabor, day);
+  }
+  /** Appointment writes the new contract only after its actual fee transaction.
+   * Notification events alone never authorize a public employment transition. */
+  canRecordPublicAppointment(citizen: Citizen, site: Building): boolean {
+    return canRecordPublicTransfer(this.runtime.publicLabor, citizen, site, new Set(this.state.shops.map(shop => shop.buildingId)));
+  }
+  recordPublicAppointment(receipt: Omit<EmploymentTransfer, 'revision' | 'priorPublicWorkId'>): void {
+    const labor = this.runtime.publicLabor;
+    const baseRoles=Object.fromEntries(Object.keys(labor?.jobs ?? {}).map(id=>[id,id===receipt.actorId ? receipt.fromRole : this.state.citizens.find(actor=>actor.id===id)!.role]));
+    recordPublicTransfer(labor, { priorPublicWorkId: labor ? publicEmploymentSite(labor, receipt.actorId) ?? null : null, ...receipt },baseRoles);
+  }
+  private publicFundedShift(citizen: Citizen) {
+    const assignment=this.publicShiftAssignment(citizen),labor=this.runtime.publicLabor;
+    if(!assignment || !labor || assignment.workedMinutes<=0 || assignment.workedMinutes>=assignment.minutesCap)return undefined;
+    const shift=labor.shifts.find(shift=>shift.assignments.includes(assignment));
+    // This supplemental approval uses an explicit ordinary daily wage shift.
+    // Standing or supplemental-only officers wait for that real next window;
+    // no fictional historical shift is created for a signature.
+    return shift ? {id:shift.id,assignment} : undefined;
+  }
+  private reviewPublicTransferContracts(): void {
+    const labor = this.runtime.publicLabor, employment = labor?.employment;
+    if (!labor || !employment) return;
+    const time = this.state.extension!.lastUpdate, day = Math.floor(time / 1440);
+    // Signatures reference actual work on their approval day. Retire closed
+    // supplements with that day so their source shifts are never dropped first.
+    employment.contracts = employment.contracts.filter(contract => Math.floor(contract.approvedAt/1440) >= day - 14);
+    const groups = new Map<string, Citizen[]>();
+    for (const actor of this.state.citizens) {
+      const site = this.buildings.get(actor.workId), role = this.citizenIdentity(actor);
+      if (!site || !['hall','core','bank'].includes(site.kind) || !['official','council','mayor'].includes(role)
+        || publicEmploymentSite(labor,actor.id) !== actor.workId || !this.isOnDuty(actor.id,site.id)
+        || !this.publicFundedShift(actor)
+        || !this.runtime.wageAccruals?.some(claim=>claim.citizenId===actor.id && claim.workId===site.id && claim.minutes>0)) continue;
+      const group = groups.get(site.id) ?? []; group.push(actor); groups.set(site.id,group);
+    }
+    const reviewers = [...groups.entries()].filter(([,actors])=>actors.length>=2).sort((a,b)=>a[0].localeCompare(b[0]))[0];
+    if (!reviewers || this.state.hour < 8 || this.state.hour >= 17) return;
+    const revision = publicEmploymentRevision(labor);
+    for (const transfer of employment.transfers) {
+      const actor = this.state.citizens.find(c=>c.id===transfer.actorId), profile = this.state.extension!.actorProfiles[transfer.actorId];
+      if (!actor || !profile?.alive || profile.age < 18 || actor.workId !== transfer.toWorkId
+        || this.state.shops.some(shop=>shop.buildingId===actor.workId) || publicEmploymentTransfer(labor,actor.id)?.revision !== transfer.revision) continue;
+      for (const targetDay of [day,day+1]) {
+        if (targetDay < labor.standingUntilDay || employment.contracts.length >= TRANSFER_CONTRACT_LIMIT
+          || publicTransferAssignment(labor,actor,targetDay)
+          || labor.shifts.find(shift=>shift.day===targetDay)?.assignments.some(assignment=>assignment.citizenId===actor.id && assignment.workId===actor.workId)) continue;
+        const budget = this.publicBudgetSnapshot(),funding={publicWagesDue:budget.publicWagesDue,publicWagesEarned:budget.publicWagesEarned,
+          authorizedRemaining:budget.authorizedRemaining,priorPromises:this.reservedPublicShifts(),essentialOperations:budget.essentialOperations,
+          standingForecast:day<labor.standingUntilDay ? budget.forecastPayroll : 0};
+        const protectedCash=Object.values(funding).reduce((sum,value)=>sum+value,0);
+        const available = Math.max(0,this.state.treasury-protectedCash);
+        const rate = this.runtime.wageAccruals?.find(claim=>claim.citizenId===actor.id && claim.workId===actor.workId)?.ratePerMinute
+          ?? 32 * (.7 + this.state.districts.find(d=>d.id===actor.districtId)!.prosperity / 100) / 480;
+        const remainingMinutes = targetDay===day ? Math.max(0,480-(this.runtime.attendance[actor.id]??0)) : 480;
+        const minutesCap = Math.min(Math.floor(remainingMinutes),Math.floor(available/Math.max(1e-9,rate)));
+        if (minutesCap <= 0) continue;
+        const cap = minutesCap*rate;
+        employment.contracts.push({id:`public-transfer-${targetDay}-${actor.id}-${transfer.revision}`,transferRevision:transfer.revision,
+          employmentRevision:revision,day:targetDay,approvedAt:time,siteId:reviewers[0],
+          signatures:reviewers[1].slice(0,2).map(signer=>{const source=this.publicFundedShift(signer)!;return {actorId:signer.id,workId:signer.workId,role:this.citizenIdentity(signer),position:copy(signer.position),
+            actualWageMinutes:this.runtime.attendance[signer.id],fundedShiftId:source.id,fundedWorkedMinutes:source.assignment.workedMinutes};}),funding,
+          cash:this.state.treasury,protectedCash,available,cap,assignment:{citizenId:actor.id,workId:actor.workId,ratePerMinute:rate,minutesCap,workedMinutes:0}});
+        labor.stats.approvedMinutes += minutesCap;
+        this.notice('budget',`两名已实际有薪在岗官员批准${actor.name}第${targetDay+1}日新岗位最多${minutesCap}分钟；旧班、旧债与新工资承诺均继续受真实现金保护。`);
+      }
+    }
   }
   publicServiceCoverage() {
     const labor = this.runtime.publicLabor, day = Math.floor((this.state.extension?.lastUpdate ?? this.now) / 1440), shift = labor?.shifts.find(shift => shift.day === day);
+    if (labor?.version===2 && labor.employment) {
+      const contracts = labor.employment.contracts.filter(contract=>contract.day===day), assignments = [...(shift?.assignments ?? []),...contracts.map(contract=>contract.assignment)];
+      const reviewGroups=new Map<string,number>();
+      for(const actor of this.state.citizens){const site=this.buildings.get(actor.workId);
+        if(site && ['hall','core','bank'].includes(site.kind) && ['official','council','mayor'].includes(this.citizenIdentity(actor))
+          && publicEmploymentSite(labor,actor.id)===actor.workId && this.isOnDuty(actor.id,site.id) && this.publicFundedShift(actor))
+          reviewGroups.set(site.id,(reviewGroups.get(site.id)??0)+1);}
+      const eligibleReviewers=Math.max(0,...reviewGroups.values()),rule='转岗新班须由同地点两名已签当日日班、实际到岗且仍有带薪工时的官员审议。仅有常备拨款或临时新班的官员，要等下一次日班。';
+      const reason=this.state.hour<8 || this.state.hour>=17 ? '等待8–17时的实际审议窗口。' : eligibleReviewers<2 ? '尚缺同地点两名有已签当日日班、已实做正工时且未做满的在岗官员。'
+        : this.state.extension!.lastUpdate<labor.nextReviewAt ? '等待下一次实际日班审议；新工资仍须扣除旧债、旧承诺与必要服务后才可签。' : '在岗审核条件已具备；可签时数仍由真实剩余预算限定。';
+      return {fundedMinutes:assignments.reduce((sum,assignment)=>sum+assignment.minutesCap,0),actualMinutes:assignments.reduce((sum,assignment)=>sum+assignment.workedMinutes,0),
+        plannedFullMinutes:new Set(assignments.map(assignment=>assignment.citizenId)).size*480,reservedCash:this.reservedPublicShifts(),statistics:{...labor.stats},
+        shifts:[...labor.shifts.map(item=>({id:item.id,day:item.day,cap:item.cap,approvedBy:[...item.approvedBy],siteId:item.siteId})),
+          ...labor.employment.contracts.map(contract=>({id:contract.id,day:contract.day,cap:contract.cap,approvedBy:contract.signatures.map(signature=>signature.actorId),siteId:contract.siteId}))],
+        transferContracts:contracts.map(contract=>({id:contract.id,actorId:contract.assignment.citizenId,workId:contract.assignment.workId,minutesCap:contract.assignment.minutesCap,workedMinutes:contract.assignment.workedMinutes,cap:contract.cap})),
+        transferReview:{rule,reason,eligibleReviewers,standingActive:day<labor.standingUntilDay,actors:[...new Set(labor.employment.transfers.map(transfer=>transfer.actorId))].flatMap(id=>{
+          const actor=this.state.citizens.find(actor=>actor.id===id),transfer=publicEmploymentTransfer(labor,id),profile=this.state.extension!.actorProfiles[id];
+          if(!actor || !transfer || actor.workId!==transfer.toWorkId || !profile?.alive || profile.age<18)return [];
+          const assignment=this.publicShiftAssignment(actor);return [{actorId:id,name:actor.name,workId:actor.workId,siteName:this.buildings.get(actor.workId)!.name,
+            fundedMinutes:assignment?.minutesCap??0,actualMinutes:assignment?.workedMinutes??0,remainingMinutes:this.publicWorkAllowance(actor)}];})},
+        originalPromisedMinutes:shift?.assignments.reduce((sum,assignment)=>sum+assignment.minutesCap,0)??0,
+        transferPromisedMinutes:contracts.reduce((sum,contract)=>sum+contract.assignment.minutesCap,0),dailyActualMinuteLimit:480};
+    }
     return { fundedMinutes: shift?.assignments.reduce((sum, assignment) => sum + assignment.minutesCap, 0) ?? null,
       actualMinutes: shift?.assignments.reduce((sum, assignment) => sum + assignment.workedMinutes, 0) ?? null,
       plannedFullMinutes: shift ? shift.assignments.length * 480 : null, reservedCash: this.reservedPublicShifts(),
@@ -448,11 +549,11 @@ export class Simulation implements SimulationAPI {
       if (targetDay < labor.standingUntilDay || labor.shifts.some(shift => shift.day === targetDay)) continue;
       const budget = this.publicBudgetSnapshot();
       const available = Math.max(0, this.state.treasury - budget.publicWagesDue - budget.publicWagesEarned - budget.authorizedRemaining - this.reservedPublicShifts() - budget.essentialOperations - (day < labor.standingUntilDay ? budget.forecastPayroll : 0));
-      const workers = Object.entries(labor.jobs).map(([id, workId]) => ({ citizen: this.state.citizens.find(c => c.id === id), workId })).filter(row => row.citizen && row.citizen.workId === row.workId && !this.state.shops.some(shop => shop.buildingId === row.citizen!.workId) && this.state.extension?.actorProfiles[row.citizen.id]?.alive !== false && (this.state.extension?.actorProfiles[row.citizen.id]?.age ?? 20) >= 18);
+      const workers = Object.entries(publicEmploymentJobs(labor)).map(([id, workId]) => ({ citizen: this.state.citizens.find(c => c.id === id), workId })).filter(row => row.citizen && row.citizen.workId === row.workId && !this.state.shops.some(shop => shop.buildingId === row.citizen!.workId) && this.state.extension?.actorProfiles[row.citizen.id]?.alive !== false && (this.state.extension?.actorProfiles[row.citizen.id]?.age ?? 20) >= 18);
       const full = workers.reduce((sum, row) => sum + 32 * (.7 + this.state.districts.find(d => d.id === row.citizen!.districtId)!.prosperity / 100), 0), minutesCap = Math.floor(480 * Math.min(1, available / Math.max(1e-9, full)));
       const assignments = workers.map(row => ({ citizenId: row.citizen!.id, workId: row.workId, ratePerMinute: 32 * (.7 + this.state.districts.find(d => d.id === row.citizen!.districtId)!.prosperity / 100) / 480, minutesCap, workedMinutes: 0 }));
       const cap = assignments.reduce((sum, assignment) => sum + assignment.ratePerMinute * minutesCap, 0);
-      labor.shifts.push({ id: `public-shift-${targetDay}`, day: targetDay, approvedAt: time, siteId: reviewers[0], approvedBy: reviewers[1].slice(0, 2).map(actor => actor.id), cap, assignments });
+      labor.shifts.push({ id: `public-shift-${targetDay}`, day: targetDay, approvedAt: time, siteId: reviewers[0], approvedBy: reviewers[1].slice(0, 2).map(actor => actor.id), cap, assignments, ...(labor.version===2 ? {employmentRevision:publicEmploymentRevision(labor)} : {}) });
       labor.stats.approvedMinutes += assignments.length * minutesCap; labor.stats.unfundedMinutes += assignments.length * (480 - minutesCap);
       this.bus.emit({ type: 'public-shift-authorized', amount: cap, minutes: assignments.length * minutesCap, siteId: reviewers[0] });
       this.notice('budget', `现场两名任职官员批准第${targetDay + 1}日每人最多${minutesCap}分钟公共劳动，共${cap.toFixed(1)}文真实现金承诺。服务时数不足仍登记等待。`);
@@ -460,6 +561,7 @@ export class Simulation implements SimulationAPI {
     // Closed historical plans retain a bounded review trail; wages and arrears
     // remain independent claims even after these schedule records age out.
     labor.shifts = labor.shifts.filter(shift => shift.day >= day - 14);
+    this.reviewPublicTransferContracts();
   }
   isOnDuty(citizenId: string, siteId: string): boolean {
     const citizen = this.state.citizens.find(c => c.id === citizenId), site = this.buildings.get(siteId);
@@ -693,6 +795,7 @@ export class Simulation implements SimulationAPI {
       this.minutes = .25 * this.state.speed;
       this.state.lastSystemOrder = [];
       for (const phase of ORDER) { this.state.lastSystemOrder.push(phase); this.bus.emit({ type: `system:${phase}`, minutes: this.minutes }); }
+      this.pruneNpcStairCursors();
     }
   }
   setFocus(position: Vec3, mode: ViewMode) {
@@ -1173,7 +1276,7 @@ export class Simulation implements SimulationAPI {
   }
   private considerPrivateOpportunity(citizen: Citizen): void {
     const labor = this.runtime.publicLabor;
-    if (!labor?.jobs[citizen.id] || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (citizen.skills?.craft ?? 0) < 20 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
+    if (!labor || !publicEmploymentSite(labor,citizen.id) || this.state.hour < 8 || this.state.hour >= 17 || citizen.needs.hunger < 45 || citizen.needs.fatigue < 40 || (citizen.skills?.craft ?? 0) < 20 || (this.runtime.decisionAt[citizen.id] ?? 0) > this.now) return;
     const currentShop = this.state.shops.find(shop => shop.buildingId === citizen.workId);
     if (!currentShop && this.publicWorkAllowance(citizen) > 0) return;
     if (currentShop) return;
@@ -1285,7 +1388,7 @@ export class Simulation implements SimulationAPI {
     for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remaining += distance(previous, next); previous = next; }
     citizen.state = 'roadWorkMoving';
     if (!this.moveCitizen(citizen, taskMinutes)) { if (String(citizen.state) === 'roadWaiting') citizen.state = 'roadWorkWaiting'; return; }
-    const arrivedMinutes = Math.min(this.minutes, Math.max(0, taskMinutes - remaining / (this.state.weather === '雨' ? 3.1 : 4.2)));
+    const arrivedMinutes = Math.min(this.minutes, this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, taskMinutes - remaining / (this.state.weather === '雨' ? 3.1 : 4.2)));
     if (distance(citizen.position, task.point) > .05) { citizen.state = 'roadWorkWaiting'; return; }
     citizen.state = task.stage === 'pickup' ? 'roadPickup' : 'roadWorking';
     if (arrivedMinutes <= 0) return;
@@ -1294,6 +1397,7 @@ export class Simulation implements SimulationAPI {
     canonicalRoadworkPresence.add(event); this.bus.emit(event);
   }
   private moveCitizen(citizen: Citizen, minutes: number) {
+    if (this.runtime.npcMotionVersion === 2) return this.moveCitizenPhysical(citizen, minutes);
     // `minutes` includes the tier's skipped ticks. One calendar minute represents
     // one simulated real second at 1×, for every tier, including police routes.
     this.citizenRoadMovementRejected.delete(citizen);
@@ -1318,6 +1422,112 @@ export class Simulation implements SimulationAPI {
     citizen.routeIndex = index;
     releaseRoadExitPermit(this.world, this.state, citizen.id, citizen.position);
     return index >= route.length;
+  }
+  private nativeCursorMatches(citizen: Citizen, cursor: NpcStairCursor): boolean {
+    const route = citizen.route, index = citizen.routeIndex ?? 0;
+    const owned = this.npcCursorRoutes.get(cursor);
+    return !!route && index > 0 && index < route.length && cursor.routeIndex === index && (!owned || owned === route)
+      && !!cursor.from && !!cursor.to && cursor.from.x === route[index - 1].x && cursor.from.y === route[index - 1].y && cursor.from.z === route[index - 1].z
+      && cursor.to.x === route[index].x && cursor.to.y === route[index].y && cursor.to.z === route[index].z;
+  }
+  private savedNpcStairCursors(): Record<string, NpcStairCursor> {
+    const cursors: Record<string, NpcStairCursor> = {};
+    for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors ?? {})) {
+      const citizen = this.state.citizens.find(c => c.id === id);
+      if (citizen && this.state.extension?.actorProfiles[id]?.alive !== false && !this.runtime.riders[id] && this.nativeCursorMatches(citizen, cursor)) cursors[id] = cursor;
+    }
+    return cursors;
+  }
+  private pruneNpcStairCursors(): void {
+    if (this.runtime.npcMotionVersion === 2) this.runtime.npcStairCursors = this.savedNpcStairCursors();
+  }
+  private citizenPhysicalSegmentAllowed(citizen: Citizen, from: Vec3, to: Vec3, building?: Building, floor?: number): boolean {
+    if (homeRestPointBlockedByVoxels(to, this.state.voxels)) return false;
+    if (building && floor !== undefined) {
+      const role = this.citizenIdentity(citizen);
+      const identity = { role, identities: [role] };
+      const support = floorPlanSupport(building, floor, to, .35);
+      if (!canAccessFloor(building, floor, identity) || support?.link && !canAccessFloor(building, support.link.toFloor, identity)) return false;
+      if (blocksMarketCounter(marketCounters(this.world, building), from, to, .35, 1.72)) return false;
+    }
+    return true;
+  }
+  private citizenReferenceSegmentAllowed(citizen: Citizen, from: Vec3, to: Vec3, bodies: { building: Building; floors: number[] }[]): boolean {
+    if (!this.citizenPhysicalSegmentAllowed(citizen, from, to)) return false;
+    // The reference route may include ordinary flat rooms. They keep their
+    // original trajectory, but actual walls, furniture and counters still own
+    // the full swept body; a stair cursor is not required for a flat room.
+    for (const { building, floors } of bodies) {
+      const height = building.height / building.floors;
+      const low = Math.floor((Math.min(from.y, to.y) - building.position.y - .6) / height + 1e-7);
+      const high = Math.floor((Math.max(from.y, to.y) - building.position.y - .6) / height + 1e-7);
+      for (const floor of floors.filter(floor => floor >= low && floor <= high)) {
+        if (blocksFloorPlanMovement(building, floor, from, to, .35, 1.72)) return false;
+        const support = floorPlanSupport(building, floor, to, .35);
+        if (support && Math.abs(support.y - to.y) <= .22000001 && !this.citizenPhysicalSegmentAllowed(citizen, from, to, building, support.floor)) return false;
+      }
+      if (blocksMarketCounter(marketCounters(this.world, building), from, to, .35, 1.72)) return false;
+    }
+    return true;
+  }
+  private moveCitizenPhysical(citizen: Citizen, minutes: number): boolean {
+    this.citizenArrivalMinutes.set(citizen, 0); this.citizenRoadMovementRejected.delete(citizen);
+    if (!finite(minutes) || minutes < 0 || this.state.extension?.actorProfiles[citizen.id]?.alive === false || this.runtime.riders[citizen.id]) return false;
+    this.refreshCitizenRoadRoute(citizen);
+    if (citizen.state === 'roadWaiting' || citizen.state === 'roadWorkWaiting') return false;
+    const speed = this.state.weather === '雨' ? 3.1 : 4.2, route = citizen.route ?? [], cursors = this.runtime.npcStairCursors!;
+    let movement = minutes * speed, index = citizen.routeIndex ?? 0;
+    const wait = (road: boolean): false => {
+      citizen.routeIndex = index;
+      if (!road) { citizen.state = 'physicalWaiting'; return false; }
+      this.citizenRoadMovementRejected.add(citizen);
+      const destination = citizen.destinationId && this.buildings.get(citizen.destinationId), dispatch = this.runtime.dispatches[citizen.id], crime = dispatch && this.state.crimes.find(c => c.id === dispatch.crimeId);
+      if (crime && destination) this.rebuildDispatchRoute(citizen, crime, destination);
+      else { if (!citizen.state.startsWith('roadWork') && destination) this.setDestination(citizen, destination, true); if (citizen.state !== 'moving') this.roadRouteWaiting(citizen); }
+      this.pruneNpcStairCursors(); return false;
+    };
+    while (index < route.length) {
+      citizen.routeIndex = index;
+      const existing = cursors[citizen.id]; if (existing && !this.nativeCursorMatches(citizen, existing)) delete cursors[citizen.id];
+      const description = this.npcStairMotion.describe(route, index);
+      if (description.kind === 'blocked') return wait(false);
+      if (description.kind === 'physical') {
+        let cursor = cursors[citizen.id];
+        if (!cursor) {
+          cursor = this.npcStairMotion.opening(route, index)!;
+          try { this.npcStairMotion.validate(route, cursor, citizen.position); } catch { return wait(false); }
+          cursors[citizen.id] = cursor; this.npcCursorRoutes.set(cursor, route);
+        }
+        let advanced; let roadBlocked = false;
+        try {
+          this.npcStairMotion.validate(route, cursor, citizen.position);
+          advanced = this.npcStairMotion.advance(route, cursor, movement, (from, to, building, floor) => {
+            if (!roadMovementAllowed(this.world, this.state, citizen.id, from, to)) { roadBlocked = true; return false; }
+            return this.citizenPhysicalSegmentAllowed(citizen, from, to, building, floor);
+          });
+        } catch { return wait(false); }
+        citizen.position = advanced.position; movement = Math.max(0, movement - advanced.usedDistance);
+        releaseRoadExitPermit(this.world, this.state, citizen.id, citizen.position);
+        if (advanced.blocked) return wait(roadBlocked);
+        if (!advanced.finishedLeg) break;
+        delete cursors[citizen.id]; index++; continue;
+      }
+      if (cursors[citizen.id]) return wait(false);
+      const next = route[index], d = distance(citizen.position, next);
+      if (d === 0) { index++; continue; }
+      if (movement <= 0) break;
+      // Outdoor and unmarked travel keeps its existing three-dimensional path.
+      // Short body/voxel checks cannot skip a newly placed .2m cube.
+      const amount = Math.min(d, movement, this.state.voxels.length ? .05 : Infinity), t = amount === d ? 1 : amount / d;
+      const proposed = t === 1 ? copy(next) : { x: citizen.position.x + (next.x - citizen.position.x) * t, y: citizen.position.y + (next.y - citizen.position.y) * t, z: citizen.position.z + (next.z - citizen.position.z) * t };
+      if (!roadMovementAllowed(this.world, this.state, citizen.id, citizen.position, proposed)) return wait(true);
+      if (!this.citizenReferenceSegmentAllowed(citizen, citizen.position, proposed, description.bodies ?? [])) return wait(false);
+      citizen.position = proposed; movement = Math.max(0, movement - amount); if (t === 1) index++;
+    }
+    citizen.routeIndex = index; releaseRoadExitPermit(this.world, this.state, citizen.id, citizen.position);
+    const arrived = index >= route.length;
+    if (arrived) { delete cursors[citizen.id]; this.citizenArrivalMinutes.set(citizen, movement / speed); }
+    return arrived;
   }
   private people() {
     this.refreshWorkforce();
@@ -1423,7 +1633,7 @@ export class Simulation implements SimulationAPI {
         let remainingDistance = 0, point = citizen.position;
         for (const next of (citizen.route ?? []).slice(citizen.routeIndex ?? 0)) { remainingDistance += distance(point, next); point = next; }
         if (!this.moveCitizen(citizen, availableMinutes)) continue;
-        arrivedElapsed = Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
+        arrivedElapsed = this.runtime.npcMotionVersion === 2 ? this.citizenArrivalMinutes.get(citizen) ?? 0 : Math.max(0, availableMinutes - remainingDistance / (this.state.weather === '雨' ? 3.1 : 4.2));
       }
       const activity = this.runtime.activities[citizen.id];
       const person = { role: this.citizenIdentity(citizen), identities: [this.citizenIdentity(citizen)] };
@@ -1440,7 +1650,7 @@ export class Simulation implements SimulationAPI {
       if (destination.id === home.id || activity === 'rest') {
         citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);
       } else if (activity === 'work') {
-        if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor?.jobs[citizen.id] || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
+        if (!this.isEmployed(citizen)) { citizen.state = this.runtime.publicLabor && publicEmploymentSite(this.runtime.publicLabor,citizen.id) || this.state.shops.some(shop => shop.buildingId === citizen.workId) ? 'offDuty' : 'unemployed'; citizen.destinationId = null; continue; }
         if (citizen.state !== 'working') this.bus.emit({ type: 'commute', citizenId: citizen.id }); citizen.state = 'working'; citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .035); this.registerAttendance(citizen, arrivedElapsed);
       } else if (activity === 'shopLifecycle') {
         citizen.state = 'reviewingBusiness';
@@ -1712,6 +1922,8 @@ export class Simulation implements SimulationAPI {
         crime.status = 'responding';
         this.bus.emit({ type: 'dispatch', citizenId: officer.id, crimeId: crime.id });
         const route = officer.route ?? []; let remaining = 0; for (let index = officer.routeIndex ?? 0; index < route.length; index++) remaining += distance(index === (officer.routeIndex ?? 0) ? officer.position : route[index - 1], route[index]);
+        if (this.runtime.npcMotionVersion === 2) { const cursor = this.runtime.npcStairCursors?.[officer.id]; remaining = this.npcStairMotion.remaining(route, officer.routeIndex ?? 0, officer.position, cursor && this.nativeCursorMatches(officer, cursor) ? cursor : undefined); }
+        if (!finite(remaining)) { delete this.runtime.dispatches[officer.id]; crime.status = 'open'; crime.responseAt = 0; officer.state = 'physicalWaiting'; continue; }
         crime.responseAt = this.now + 10 + remaining / (this.state.weather === '雨' ? 3.1 : 4.2);
       } else if (crime.status === 'responding') { const assigned = Object.entries(this.runtime.dispatches).find(([, dispatch]) => dispatch.crimeId === crime.id); if (!assigned || this.state.extension?.actorProfiles[assigned[0]]?.alive === false) { if (assigned) delete this.runtime.dispatches[assigned[0]]; crime.status = 'open'; crime.responseAt = 0; } else if (assigned[1].arrived && this.now + 1e-7 >= crime.responseAt) { const officer = this.state.citizens.find(person => person.id === assigned[0]); if (officer && this.policeWorkAllowance(officer) > 0 && officer.needs.hunger >= 20 && officer.needs.fatigue >= 15 && (this.state.extension?.actorProfiles[officer.id]?.health ?? 100) >= 35 && distance(officer.position, crime.position) <= 3) this.finishPoliceResponse(crime); } }
       else district.safety = clamp(district.safety - this.minutes * .001 * crime.severity);
@@ -2045,10 +2257,11 @@ export class Simulation implements SimulationAPI {
     }
     return fail('暂不支持此项操作。');
   }
+  get saveVersion(): 1 | 2 { return this.runtime.npcMotionVersion === 2 ? 2 : 1; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: 1, worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   importSave(json: string): CommandResult {
     try {
@@ -2065,9 +2278,11 @@ export class Simulation implements SimulationAPI {
       const unique = (values: any[], label: string) => ensure(new Set(values.map(v => v.id)).size === values.length, label);
       const needs = (n: any, label: string) => { ensure(n && typeof n === 'object', label); for (const key of ['hunger', 'fatigue', 'social', 'fun']) number(n[key], 0, 100, `${label}.${key}`); };
       const money = (n: unknown, label: string) => number(n, 0, 1e12, label);
-      ensure(data && data.format === 'yunshan-save' && data.version === 1 && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
+      ensure(data && data.format === 'yunshan-save' && (data.version === 1 || data.version === 2) && data.worldSeed === this.world.seed && data.worldFingerprint === this.fingerprint, '世界或格式版本不匹配');
       const s = data.state, r = data.runtime;
       ensure(s && r && typeof s === 'object' && typeof r === 'object', '状态或运行数据'); ensure(s.version === 1 && s.seed === this.world.seed, '状态版本');
+      if (data.version === 2) ensure(r.npcMotionVersion === 2 && r.npcStairCursors && typeof r.npcStairCursors === 'object' && !Array.isArray(r.npcStairCursors) && Object.keys(r.npcStairCursors).length <= 1024, 'native motion body and version');
+      else ensure(r.npcMotionVersion === undefined && r.npcStairCursors === undefined, 'legacy motion body and version');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
       if (s.familyEducation !== undefined || r.familyEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.familyEducation && r.familyEducationVersion === 1, 'family education custody manifest');
@@ -2134,8 +2349,9 @@ export class Simulation implements SimulationAPI {
       if (r.educationVersion !== undefined) ensure(r.educationVersion === 1 && s.education, 'education custody module');
       if (s.education) ensure(r.educationVersion === 1, 'education custody marker');
       ensure(s.familyEducation === undefined && r.familyEducationVersion === undefined || s.familyEducation && r.familyEducationVersion === 1, 'family education body and version');
-      if (r.hygieneVersion !== undefined) ensure(r.hygieneVersion === 1 && s.hygiene, 'hygiene custody module');
-      if (s.hygiene !== undefined) ensure(s.hygiene && r.hygieneVersion === 1, 'hygiene custody marker');
+      if (r.hygieneVersion !== undefined) ensure((r.hygieneVersion === 1 || r.hygieneVersion === 2) && s.hygiene && r.hygieneVersion === s.hygiene.version, 'hygiene custody module');
+      if (r.hygieneTransferVersion !== undefined || s.hygiene?.transfers !== undefined) ensure(r.hygieneTransferVersion === 1 && r.hygieneVersion === 2 && s.hygiene?.version === 2 && s.hygiene.transfers, 'hygiene transfer custody manifest');
+      if (s.hygiene !== undefined) ensure(s.hygiene && r.hygieneVersion === s.hygiene.version && (r.hygieneVersion === 1 || r.hygieneVersion === 2), 'hygiene custody marker');
       if (r.pathologyVersion !== undefined) ensure(r.pathologyVersion === 1 && s.pathology, 'pathology provenance module');
       if (s.pathology !== undefined) ensure(s.pathology && r.pathologyVersion === 1, 'pathology provenance marker');
       if (r.roadNetworkVersion !== undefined) ensure(r.roadNetworkVersion === 1 && s.roadNetwork, 'road network provenance module');
@@ -2196,17 +2412,27 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicLaborReviewAt !== undefined) number(r.publicLaborReviewAt, 0, (s.extension?.lastUpdate ?? 1e12) + 60, 'public labor review time');
       if (r.publicLabor !== undefined) {
-        const labor = r.publicLabor; ensure(labor && labor.version === 1 && labor.jobs && typeof labor.jobs === 'object' && !Array.isArray(labor.jobs), 'public labor registry');
+        const labor = r.publicLabor; ensure(labor && [1,2].includes(labor.version) && labor.jobs && typeof labor.jobs === 'object' && !Array.isArray(labor.jobs), 'public labor registry');
+        validatePublicEmployment(labor,s as SimState,this.world,(site,position,person,workOnly=true)=>this.isAtBuildingFunctionPoint(site,position,workOnly?'work':undefined,person),{
+          identity:role=>this.citizenIdentity({role} as Citizen),budgets:r.publicBudgets ?? [],
+          publicWagesDue:[...(r.wageArrears ?? []),...r.wages].filter((wage:{shopId:string|null})=>wage.shopId===null).reduce((sum:number,wage:{amount:number})=>sum+wage.amount,0),
+          publicWagesEarned:(r.wageAccruals ?? []).filter((wage:{shopId:string|null})=>wage.shopId===null).reduce((sum:number,wage:{amount:number})=>sum+wage.amount,0),
+          essentialOperations:(r.operatingCost+1440*(.9+s.policeBudget*1.8))/4*(r.operationUnitPrice ?? 4),claims:r.wageAccruals ?? []});
         const currentDay = Math.floor((s.extension?.lastUpdate ?? 0) / 1440); number(labor.standingUntilDay, 0, currentDay + 1, 'standing appropriation day', true); number(labor.nextReviewAt, 0, (s.extension?.lastUpdate ?? 1e12) + 60, 'departmental review time');
         for (const [id, siteId] of Object.entries(labor.jobs)) ensure(expectedCitizenIds.has(id) && this.buildings.has(siteId as string) && !shops.some(shop => shop.buildingId === siteId), 'public job registry reference');
         const days = new Set<number>();
         for (const shift of array(labor.shifts, 18, 'public labor shifts')) {
           ensure(shift && shift.id === `public-shift-${shift.day}` && !days.has(shift.day), 'public shift identity'); days.add(shift.day); number(shift.day, 0, currentDay + 1, 'public shift day', true); number(shift.approvedAt, 0, s.extension?.lastUpdate ?? 1e12, 'public shift approval time');
           ensure(Math.floor(shift.approvedAt / 1440) <= shift.day && ['hall', 'core', 'bank'].includes(this.buildings.get(shift.siteId)?.kind ?? ''), 'public shift review venue');
-          const approvers = array(shift.approvedBy, 2, 'public shift approvers'); ensure(approvers.length === 2 && new Set(approvers).size === 2 && approvers.every(id => expectedCitizenIds.has(id) && labor.jobs[id] === shift.siteId), 'public shift department quorum');
+          if (shift.employmentRevision !== undefined) {
+            ensure(labor.version===2,'new public shift requires explicit v2 reader'); number(shift.employmentRevision,1,labor.employment.transfers.length,'public shift employment revision',true);
+            ensure(labor.employment.transfers[shift.employmentRevision-1].at <= shift.approvedAt,'public job must exist before signing');
+          }
+          const jobsAtApproval = publicEmploymentJobs(labor,shift.employmentRevision ?? 0);
+          const approvers = array(shift.approvedBy, 2, 'public shift approvers'); ensure(approvers.length === 2 && new Set(approvers).size === 2 && approvers.every(id => expectedCitizenIds.has(id) && jobsAtApproval[id] === shift.siteId), 'public shift department quorum');
           number(shift.cap, 0, 1e9, 'public shift committed cash'); let total = 0; const workers = new Set<string>();
           for (const assignment of array(shift.assignments, 1024, 'public shift assignments')) {
-            ensure(assignment && expectedCitizenIds.has(assignment.citizenId) && !workers.has(assignment.citizenId) && labor.jobs[assignment.citizenId] === assignment.workId, 'public shift worker'); workers.add(assignment.citizenId);
+            ensure(assignment && expectedCitizenIds.has(assignment.citizenId) && !workers.has(assignment.citizenId) && jobsAtApproval[assignment.citizenId] === assignment.workId, 'public shift worker'); workers.add(assignment.citizenId);
             number(assignment.minutesCap, 0, 480, 'public contract minutes', true); number(assignment.workedMinutes, 0, assignment.minutesCap + 1e-7, 'public actual contract work'); number(assignment.ratePerMinute, 0, 1, 'public promised minute rate'); total += assignment.ratePerMinute * assignment.minutesCap;
             if (shift.day > currentDay) ensure(assignment.workedMinutes === 0, 'future public shifts cannot have attendance');
           }
@@ -2280,7 +2506,21 @@ export class Simulation implements SimulationAPI {
       }
       // Validation finishes before either live object is replaced: rejected saves are atomic.
       for (const validator of this.saveValidators) validator(s as SimState);
-      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
+      if (data.version === 2) {
+        const cursorCitizens = new Map<string, Citizen>(s.citizens.map((c: Citizen) => [c.id, c]));
+        for (const [id, cursor] of Object.entries(r.npcStairCursors)) {
+          const citizen = cursorCitizens.get(id);
+          ensure(citizen && s.extension?.actorProfiles[id]?.alive !== false && !r.riders[id] && this.nativeCursorMatches(citizen, cursor as NpcStairCursor), 'native cursor actor and route');
+          this.npcStairMotion.validate(citizen!.route!, cursor as NpcStairCursor, citizen!.position);
+        }
+        for (const citizen of s.citizens as Citizen[]) {
+          if (s.extension?.actorProfiles[citizen.id]?.alive === false || r.riders[citizen.id] || !citizen.route || !citizen.routeIndex || citizen.routeIndex >= citizen.route.length || r.npcStairCursors[citizen.id]) continue;
+          const description = this.npcStairMotion.describe(citizen.route, citizen.routeIndex);
+          ensure(description.kind !== 'blocked' || this.npcStairMotion.isUnstartedExteriorDoorApproach(citizen.route, citizen.routeIndex, citizen.position), 'native route geometry');
+          if (description.kind === 'physical') this.npcStairMotion.validate(citizen.route, this.npcStairMotion.opening(citizen.route, citizen.routeIndex)!, citizen.position);
+        }
+      }
+      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
     } catch (error) { return { ok: false, message: `读档失败：${error instanceof Error ? error.message : '存档格式错误'}` }; }
   }
 }

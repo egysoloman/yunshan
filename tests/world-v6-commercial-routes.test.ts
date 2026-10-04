@@ -46,31 +46,53 @@ test('real existing actor destination writer stays under1024, roundtrips complet
   record('production-route-receipt.json',receipt);console.log(JSON.stringify(receipt));
 });
 
-test('commercial compact upper-flight NPC motion and mid-flight recovery retain actual .35 support and1.72 headroom in both directions',()=>{
+test('commercial native physical motion and actual riser recovery retain .35 support and1.72 headroom; raw reference collision stays separately observable',()=>{
   const world=createWorld(20261001,'current-v6'),sim=new Simulation(world),bank=world.buildings.find(b=>b.id==='market-b6')!,worker=sim.state.citizens.find(c=>c.id==='citizen-562')!;
   // One controlled legal start position and existing actor reassignment, then
   // only the unchanged destination writer/moveCitizen; no per-segment reset.
   worker.workId=bank.id;worker.position=getFloorPlanStairPosition(bank,36);Reflect.get(sim,'runtime').activities[worker.id]='work';Reflect.get(sim,'setDestination').call(sim,worker,bank,true);
   const goal=worker.route!.at(-1)!;assert.ok(goal.y>bank.position.y+.6+37*4.4-.01);
-  const motion:Vec3[]=[{...worker.position}];let steps=0,maxRise=0,maxDistance=0;
+  const motion:Vec3[]=[{...worker.position}];let steps=0,maxRise=0,maxDistance=0,actualMiddle:Vec3|undefined;
   while((worker.routeIndex??0)<worker.route!.length){
     const before={...worker.position};Reflect.get(sim,'moveCitizen').call(sim,worker,.01);
     assert.ok(distance(before,worker.position)>1e-10,'real NPC mover advances on compact flight');
     const floor=Math.min(39,Math.max(0,Math.floor((worker.position.y-bank.position.y-.6+1e-7)/4.4)));
     assert.ok(floorPlanSupport(bank,floor,worker.position,.35),'full-body footprint supported by actual treads/landings');
     assert.equal(blocksFloorPlanMovement(bank,floor,worker.position,worker.position,.35,1.72),false);
+    const cursor=Reflect.get(sim,'runtime').npcStairCursors[worker.id],description=Reflect.get(sim,'npcStairMotion').describe(worker.route,worker.routeIndex);
+    if(!actualMiddle&&cursor&&description.kind==='physical'&&description.leg.parts[cursor.piece]?.kind==='riser'&&cursor.offset>0)actualMiddle={...worker.position};
     maxRise=Math.max(maxRise,Math.abs(worker.position.y-before.y));maxDistance=Math.max(maxDistance,distance(before,worker.position));motion.push({...worker.position});assert.ok(++steps<4000);
   }
   assert.ok(distance(worker.position,goal)<1e-7);assert.ok(maxRise<=.04200001&&maxDistance<=.04200001);
-  const flight=getFloorPlanStairRoute(bank,36,37)!,a=flight[2],b=flight[3],middle={x:(a.x+b.x)/2,y:(a.y+b.y)/2,z:(a.z+b.z)/2};
-  const up=findBuildingFloorPlanRoute(bank,36,37,middle,getFloorPlanStairPosition(bank,37),.35)!,down=findBuildingFloorPlanRoute(bank,36,36,middle,getFloorPlanStairPosition(bank,36),.35)!;
-  assert.ok(up&&down);assert.ok(up[1].y>=middle.y&&down[1].y<=middle.y,'segment recovery retains requested travel direction');
-  for(const route of [up,down])for(let i=1;i<route.length;i++){
+  assert(actualMiddle,'capture an actual native finite vertical transition, not a projected reference sample');
+  const flight=getFloorPlanStairRoute(bank,36,37)!,a=flight[2],b=flight[3],rawMiddle={x:(a.x+b.x)/2,y:(a.y+b.y)/2,z:(a.z+b.z)/2};
+  const rawUp=findBuildingFloorPlanRoute(bank,36,37,rawMiddle,getFloorPlanStairPosition(bank,37),.35)!,rawDown=findBuildingFloorPlanRoute(bank,36,36,rawMiddle,getFloorPlanStairPosition(bank,36),.35)!;
+  let rawBlockedSamples=0;
+  // The archived original52/53 FAIL sampled these reference lines as bodies.
+  // A reference codec remains bounded and unchanged; the new native sampler
+  // owns the actual flat/riser body path and charges every vertical metre.
+  for(const route of [rawUp,rawDown])for(let i=1;i<route.length;i++){
     const from=route[i-1],to=route[i],n=Math.max(1,Math.ceil(distance(from,to)/.05));
     for(let j=0;j<=n;j++){const t=j/n,p={x:from.x+(to.x-from.x)*t,y:from.y+(to.y-from.y)*t,z:from.z+(to.z-from.z)*t},floor=Math.min(39,Math.max(0,Math.floor((p.y-bank.position.y-.6+1e-7)/4.4)));
-      assert.ok(floorPlanSupport(bank,floor,p,.35));assert.equal(blocksFloorPlanMovement(bank,floor,p,p,.35,1.72),false);
+      if(blocksFloorPlanMovement(bank,floor,p,p,.35,1.72))rawBlockedSamples++;
     }
   }
-  record('upper-floor-real-npc-motion.json',motion);record('mid-flight-recovery-routes.json',{middle,up,down});
-  const receipt={scope:'CPU single controlled original citizen start; unchanged real NPC destination/motion methods, not normalURL or earned native assignment',workerId:worker.id,fromFloor:36,goal,steps,maxRise,maxDistance,completeFootSupport:true,fullHeadroom:true,bothDirectionRecovery:true};record('upper-floor-npc-receipt.json',receipt);console.log(JSON.stringify(receipt));
+  assert(rawBlockedSamples>0,'retain the original reference/body collision observation');
+  const recovery=[];
+  for(const floor of [36,37]){
+    const city=new Simulation(world),actor=city.state.citizens.find(c=>c.id===worker.id)!,target=getFloorPlanStairPosition(bank,floor);
+    actor.position={...actualMiddle};actor.route=findBuildingFloorPlanRoute(bank,36,floor,actualMiddle,target,.35)!;assert(actor.route);actor.routeIndex=1;actor.destinationId=bank.id;actor.state='moving';
+    const sampler=Reflect.get(city,'npcStairMotion'),expected=sampler.remaining(actor.route,1,actor.position);assert(Number.isFinite(expected));let used=0,count=0;
+    while(actor.routeIndex!<actor.route.length){
+      const before={...actor.position},arrived=Reflect.get(city,'moveCitizen').call(city,actor,.01),cursor=Reflect.get(city,'runtime').npcStairCursors[actor.id];
+      if(cursor)sampler.validate(actor.route,cursor,actor.position);
+      assert(distance(before,actor.position)>1e-10||arrived);assert(distance(before,actor.position)<=.04200001);
+      const currentFloor=Math.min(39,Math.max(0,Math.floor((actor.position.y-bank.position.y-.6+1e-7)/4.4)));
+      assert(floorPlanSupport(bank,currentFloor,actor.position,.35));assert.equal(blocksFloorPlanMovement(bank,currentFloor,actor.position,actor.position,.35,1.72),false);
+      used+=.042-(arrived?Reflect.get(city,'citizenArrivalMinutes').get(actor)*4.2:0);assert(++count<4000);
+    }
+    assert.deepEqual(actor.position,target);assert(Math.abs(expected-used)<1e-8);recovery.push({floor,route:actor.route,expected,used,count});
+  }
+  record('upper-floor-real-npc-motion.json',motion);record('mid-flight-recovery-routes.json',{actualMiddle,rawMiddle,rawUp,rawDown,rawBlockedSamples,recovery});
+  const receipt={scope:'CPU single controlled original citizen start; actual destination writer and version2 native motion methods, not normalURL or earned native assignment',workerId:worker.id,fromFloor:36,goal,steps,maxRise,maxDistance,completeFootSupport:true,fullHeadroom:true,bothDirectionRecovery:true};record('upper-floor-npc-receipt.json',receipt);console.log(JSON.stringify(receipt));
 });

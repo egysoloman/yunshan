@@ -1,0 +1,31 @@
+{
+  "status": "OUTPUTS_VERIFIED_BEFORE_OWNER_CLOSURE",
+  "fileCountExcludingSelfAndClosure": 4,
+  "totalBytesExcludingSelfAndClosure": 519081929,
+  "files": [
+    {
+      "path": "INDEPENDENT-VERIFICATION.json",
+      "bytes": 14444759,
+      "sha256": "22ff7b0036f7639bf3091899b0a8d0d73cc36c962f7f9031d385f3b471d92243",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "control-review/REPORT.md",
+      "bytes": 5861,
+      "sha256": "b7b6e4177bb98dbec6640e4a8098a9829690cfd1faa23a9a97daa313fba13bdd",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "control-review/metadata-crosscheck.json",
+      "bytes": 85604,
+      "sha256": "129ff521bf803fdd1e2689dbf69dfb1371359f7dda0f6293be4358f6183dfd33",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "restored.zip",
+      "bytes": 504545705,
+      "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    }
+  ]
+}

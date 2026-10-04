@@ -201,7 +201,7 @@ function snapshot() {
     playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
     roadworks: s.roadworks ? { escrow: s.roadworks.jobs.reduce((sum, job) => sum + job.escrow, 0), jobs: s.roadworks.jobs.map(job => ({ id: job.id, payerId: job.payerId, status: job.status, workedMinutes: job.workedMinutes, funded: job.funded, purchasePaid: job.purchasePaid, paidGross: job.paidGross, paidTax: job.paidTax, refunded: job.refunded, escrow: job.escrow })) } : null,
     power: s.power ? structuredClone(s.power) : null,
-    hygiene: s.hygiene ? { escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock), publicDemands: s.hygiene.publicDemands?.map(d => ({ id: d.id, state: d.state, authorizedCap: d.authorizedCap, spent: d.spent, jobId: d.jobId })) ?? [] } : null,
+    hygiene: s.hygiene ? { transfers: s.hygiene.transfers ? { escrow: s.hygiene.transfers.tasks.reduce((sum, task) => sum + task.escrow, 0), tasks: structuredClone(s.hygiene.transfers.tasks), terminalDisposalImplemented: false } : null, escrow: s.hygiene.jobs.reduce((sum, job) => sum + job.escrow, 0), stats: { ...s.hygiene.stats }, retainedWasteUnits: s.hygiene.batches.reduce((sum, batch) => sum + batch.generatedUnits + batch.cleaningResidualUnits, 0), stock: structuredClone(s.hygiene.stock), publicDemands: s.hygiene.publicDemands?.map(d => ({ id: d.id, state: d.state, authorizedCap: d.authorizedCap, spent: d.spent, jobId: d.jobId })) ?? [] } : null,
     education: s.education ? { course: s.education.course ? { ...s.education.course, staffMinutes: { ...s.education.course.staffMinutes } } : null, stats: { ...s.education.stats }, stock: structuredClone(s.education.stock) } : null,
     policy: { taxRate: s.taxRate, policeBudget: s.policeBudget }, publicBudget: sim.publicBudgetSnapshot(), publicService: sim.publicServiceCoverage(), privateLabor: sim.privateLaborCoverage(),
     banking: s.banking ? { balanceSheet: bankingBalanceSheet(s.banking), cash: s.banking.cash, deposits: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.deposits, 0), loans: Object.values(s.banking.accounts).reduce((sum, account) => sum + account.loanPrincipal + account.loanInterest, 0), legacyInvestmentCash: s.banking.legacyInvestmentCash } : null,
@@ -241,6 +241,7 @@ function moneySupply() {
     + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + shopLifecycleHeldCash(s)
     + (s.hygiene?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
+    + (s.hygiene?.transfers?.tasks.reduce((sum, task) => sum + task.escrow, 0) ?? 0)
     + (s.family?.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) ?? 0) + (s.family?.households?.reduce((sum, household) => sum + household.balance, 0) ?? 0);
 }
 

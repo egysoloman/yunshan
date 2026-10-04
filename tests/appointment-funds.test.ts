@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { Simulation } from '../src/simulation.ts';
-import { createWorld } from '../src/world.ts';
+import { selectSavedWorld } from '../src/persistence/world-layout.ts';
 import { world } from './governance-fixture.ts';
 import { runtime } from './clinical-presence-fixture.ts';
 
@@ -159,7 +159,9 @@ test('real onsite earned public wages stay protected alongside authorized contra
 test('genuine original21 paid appointment save receives no historical backfill', () => {
   const raw = readFileSync(new URL('./fixtures/appointment-old21-after.json', import.meta.url), 'utf8');
   assert.equal(createHash('sha256').update(raw).digest('hex'), 'ccd21438c49f6dd6e76007c9b8f6c0ff4a218492c1082e099b349d3cbc1c91d2');
-  const original = JSON.parse(raw), sim = new Simulation(createWorld()), result = sim.importSave(raw);
+  // Regenerate the trusted historical city; the current default is a later
+  // geometry recipe and cannot receive this unchanged real original21 save.
+  const original = JSON.parse(raw), sim = new Simulation(selectSavedWorld(raw).world), result = sim.importSave(raw);
   assert.equal(result.ok, true, result.message); assert.equal(sim.exportSave(), raw, 'no treasury refund or guild backfill on load');
   assert.equal(sim.state.treasury, original.state.treasury);
   assert.deepEqual(sim.state.extension!.organizations, original.state.extension.organizations);

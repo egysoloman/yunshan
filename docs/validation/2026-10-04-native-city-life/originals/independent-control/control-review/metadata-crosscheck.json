@@ -1,0 +1,2093 @@
+{
+  "schema": "independent-final-collection-metadata-crosscheck/v1",
+  "at": "2026-10-04T08:47:48.732635+00:00",
+  "status": "METADATA_CROSSCHECK_PASS",
+  "classification": "METADATA_ONLY_NO_PAYLOAD_REHASH_OR_ZIP_OPEN",
+  "summary": {
+    "groupCount": 29,
+    "manifestFileCount": 11561,
+    "manifestPayloadBytes": 1619221273,
+    "receiptZIPMembers": 11562,
+    "receiptZIPBytes": 504545705,
+    "receiptPartCount": 8,
+    "receiptPartByteSum": 504545705,
+    "excludedCount": 37,
+    "allExclusionsAreNodeModules": true,
+    "priorGroupCount": 9,
+    "knownControlRows": 16,
+    "knownControlMatches": 16,
+    "knownControlDrift": 0,
+    "priorClosureReferences": 24,
+    "priorClosureReferenceMatches": 24,
+    "priorClosureReferenceDrift": 0,
+    "priorInventoryRows": 5386,
+    "priorInventoryRowsMatched": 5386,
+    "priorInventoryRowsMissingOrChanged": 0,
+    "priorListedIndexCountSum": 2715,
+    "closureEvidencePresent": 29,
+    "reviewListedFiles": 40,
+    "reviewListedBytes": 9074489,
+    "reviewMatches": 40,
+    "reviewCollectedIncludingSelf": 41,
+    "reviewSelfIncluded": true,
+    "finalPlanBackupCount": 5,
+    "finalPlanBackupBytes": 71683,
+    "finalPlanIndexedMatchCount": 4,
+    "fiscalGeometryRetainedCount": 1,
+    "candidateSourcePrefixRows": 268,
+    "root05SourcePrefixRows": 335,
+    "commonSourcePrefixRows": 265,
+    "sourcePrefixDifferences": 2,
+    "candidateDistPrefixRows": 7,
+    "root05DistPrefixRows": 7,
+    "metadataCheckCount": 42,
+    "metadataCheckFailures": 0,
+    "duplicateJSONKeysCount": 0
+  },
+  "controls": [
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "path": "ROOT09-collision-self-20261004-01/CLOSED.json",
+      "priorBytes": 680,
+      "priorSHA256": "dba4f45d622ce160d586d2b39d1cde6ac938cd3e1bc624081f4e5457fadf169f",
+      "currentManifestEntry": {
+        "bytes": 680,
+        "sha256": "dba4f45d622ce160d586d2b39d1cde6ac938cd3e1bc624081f4e5457fadf169f"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "path": "ROOT09-collision-self-20261004-01/FILE_INDEX.json",
+      "priorBytes": 56166,
+      "priorSHA256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa",
+      "currentManifestEntry": {
+        "bytes": 56166,
+        "sha256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-npc-tread-motion-20261004-01",
+      "path": "ROOT09-npc-tread-motion-20261004-01/CLOSED.json",
+      "priorBytes": 211,
+      "priorSHA256": "8d691ee9f905b1fc55fb77d87f9d704a759c244b2f55dce390baf6557290cd26",
+      "currentManifestEntry": {
+        "bytes": 211,
+        "sha256": "8d691ee9f905b1fc55fb77d87f9d704a759c244b2f55dce390baf6557290cd26"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "path": "ROOT09-sanitation-20261004-01/CLOSED.json",
+      "priorBytes": 410,
+      "priorSHA256": "54a98158e4b985bf27ca0c739f368510e664172b055c757aacafba2de22947ca",
+      "currentManifestEntry": {
+        "bytes": 410,
+        "sha256": "54a98158e4b985bf27ca0c739f368510e664172b055c757aacafba2de22947ca"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "path": "ROOT09-sanitation-20261004-01/ALL_FILES_SHA256.json",
+      "priorBytes": 98392,
+      "priorSHA256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab",
+      "currentManifestEntry": {
+        "bytes": 98392,
+        "sha256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-visual-city-life-20261004-01",
+      "path": "ROOT09-visual-city-life-20261004-01/ORIGINAL-ARTIFACT-INDEX-v2.json",
+      "priorBytes": 40458,
+      "priorSHA256": "619db4e1c4b33dad1035ae35174e693ff12c13fcbb74b4dcabd1816c61b3dd70",
+      "currentManifestEntry": {
+        "bytes": 40458,
+        "sha256": "619db4e1c4b33dad1035ae35174e693ff12c13fcbb74b4dcabd1816c61b3dd70"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-visual-city-life-20261004-01",
+      "path": "ROOT09-visual-city-life-20261004-01/FINAL-HANDOFF-v2.md",
+      "priorBytes": 6951,
+      "priorSHA256": "6e973103cfbb362bdb863d4a369ec25c1a297eb5aded41a60a347246771d40f5",
+      "currentManifestEntry": {
+        "bytes": 6951,
+        "sha256": "6e973103cfbb362bdb863d4a369ec25c1a297eb5aded41a60a347246771d40f5"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "path": "ROOT09-public-employment-transfer-20261004-01/originals-index.json",
+      "priorBytes": 167814,
+      "priorSHA256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8",
+      "currentManifestEntry": {
+        "bytes": 167814,
+        "sha256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "path": "ROOT09-public-employment-transfer-20261004-01/CLOSED.json",
+      "priorBytes": 866,
+      "priorSHA256": "3a7b31d6e17d91dd8cf17aa4cab3b2c96a822fa9e12630b12d50c03d2a89235e",
+      "currentManifestEntry": {
+        "bytes": 866,
+        "sha256": "3a7b31d6e17d91dd8cf17aa4cab3b2c96a822fa9e12630b12d50c03d2a89235e"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "path": "ROOT09-fiscal-readonly-20261004-01/originals-index.json",
+      "priorBytes": 2855,
+      "priorSHA256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e",
+      "currentManifestEntry": {
+        "bytes": 2855,
+        "sha256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "path": "ROOT09-fiscal-readonly-20261004-01/CLOSED.json",
+      "priorBytes": 487,
+      "priorSHA256": "1ea5141497b22898b00b7109e25d577b1b14910a2272266fdcb6ae3c244c7308",
+      "currentManifestEntry": {
+        "bytes": 487,
+        "sha256": "1ea5141497b22898b00b7109e25d577b1b14910a2272266fdcb6ae3c244c7308"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/originals-index.json",
+      "priorBytes": 116082,
+      "priorSHA256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56",
+      "currentManifestEntry": {
+        "bytes": 116082,
+        "sha256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/CLOSED.json",
+      "priorBytes": 1056,
+      "priorSHA256": "bce6db6cfa55e687b71a220b59b4e8cccca378ff8a59638beb7dfffe49e467df",
+      "currentManifestEntry": {
+        "bytes": 1056,
+        "sha256": "bce6db6cfa55e687b71a220b59b4e8cccca378ff8a59638beb7dfffe49e467df"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-post-stair-economy14-20261004-01",
+      "path": "ROOT09-post-stair-economy14-20261004-01/FINAL-HANDOFF.json",
+      "priorBytes": 2793,
+      "priorSHA256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe",
+      "currentManifestEntry": {
+        "bytes": 2793,
+        "sha256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/CLOSED.json",
+      "priorBytes": 1208,
+      "priorSHA256": "7b80116cd340537a0a88cefe286059d50c1b8eef0c633b31ef47f99218b8abd7",
+      "currentManifestEntry": {
+        "bytes": 1208,
+        "sha256": "7b80116cd340537a0a88cefe286059d50c1b8eef0c633b31ef47f99218b8abd7"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/ALL_FILES_SHA256.json",
+      "priorBytes": 3656,
+      "priorSHA256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d",
+      "currentManifestEntry": {
+        "bytes": 3656,
+        "sha256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d"
+      },
+      "match": true,
+      "classification": "PRIOR_VERIFIED_DIGEST_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    }
+  ],
+  "closureReferences": [
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "field": "originalIndexSHA256",
+      "path": "ROOT09-collision-self-20261004-01/FILE_INDEX.json",
+      "expectedSHA256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa",
+      "currentManifestEntry": {
+        "bytes": 56166,
+        "sha256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "field": "summarySHA256",
+      "path": "ROOT09-collision-self-20261004-01/SUMMARY.json",
+      "expectedSHA256": "6ef393148d53259c20c19b88ad9d27285879edabf7049db7b1d1b18f49d3d16b",
+      "currentManifestEntry": {
+        "bytes": 11271,
+        "sha256": "6ef393148d53259c20c19b88ad9d27285879edabf7049db7b1d1b18f49d3d16b"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "field": "handoffSHA256",
+      "path": "ROOT09-collision-self-20261004-01/HANDOFF.md",
+      "expectedSHA256": "0479af74c53a86a2f228f6d3441b28d37ede7fab49d20e7354fa6e31cb6d8b0c",
+      "currentManifestEntry": {
+        "bytes": 4703,
+        "sha256": "0479af74c53a86a2f228f6d3441b28d37ede7fab49d20e7354fa6e31cb6d8b0c"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "field": "installContractSHA256",
+      "path": "ROOT09-collision-self-20261004-01/INSTALL_CONTRACT.json",
+      "expectedSHA256": "3811b1d3e006ca62984f3e550d904d558883988fe15d5bf433edeab3d8a66793",
+      "currentManifestEntry": {
+        "bytes": 2236,
+        "sha256": "3811b1d3e006ca62984f3e550d904d558883988fe15d5bf433edeab3d8a66793"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "field": "indexSHA256",
+      "path": "ROOT09-sanitation-20261004-01/ALL_FILES_SHA256.json",
+      "expectedSHA256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab",
+      "currentManifestEntry": {
+        "bytes": 98392,
+        "sha256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "field": "handoffSHA256",
+      "path": "ROOT09-sanitation-20261004-01/HANDOFF.md",
+      "expectedSHA256": "a6562eb1b6466c7a11aac78a73d2b6660511a709989fbb19bfbc6329d3a4df13",
+      "currentManifestEntry": {
+        "bytes": 9026,
+        "sha256": "a6562eb1b6466c7a11aac78a73d2b6660511a709989fbb19bfbc6329d3a4df13"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "field": "originalsIndexSHA256",
+      "path": "ROOT09-public-employment-transfer-20261004-01/originals-index.json",
+      "expectedSHA256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8",
+      "currentManifestEntry": {
+        "bytes": 167814,
+        "sha256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "field": "handoffSHA256",
+      "path": "ROOT09-public-employment-transfer-20261004-01/HANDOFF.md",
+      "expectedSHA256": "35746bd9e26d0fb3fce7994b14d3fc93420890298a15487fcd54d289a5620ba6",
+      "currentManifestEntry": {
+        "bytes": 4782,
+        "sha256": "35746bd9e26d0fb3fce7994b14d3fc93420890298a15487fcd54d289a5620ba6"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "field": "installContractSHA256",
+      "path": "ROOT09-public-employment-transfer-20261004-01/INSTALL_CONTRACT.json",
+      "expectedSHA256": "2943752bc65ef76bdebe1603eb2509b90fad31a7f0891edb3d73b269649bf90d",
+      "currentManifestEntry": {
+        "bytes": 2528,
+        "sha256": "2943752bc65ef76bdebe1603eb2509b90fad31a7f0891edb3d73b269649bf90d"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "field": "patchSHA256",
+      "path": "ROOT09-public-employment-transfer-20261004-01/public-employment-v2.patch",
+      "expectedSHA256": "bffa5ce372db56d5231c4b76905bac33c729dd1988ea7ad8a351a3b52b768b2b",
+      "currentManifestEntry": {
+        "bytes": 70203,
+        "sha256": "bffa5ce372db56d5231c4b76905bac33c729dd1988ea7ad8a351a3b52b768b2b"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "field": "finalRuntimeGuardSHA256",
+      "path": "ROOT09-public-employment-transfer-20261004-01/FINAL_RUNTIME_GUARD.json",
+      "expectedSHA256": "f330a15aec373cc8ce4f7ad1f3235f3d343fddc54d42737668b8cccfe720761b",
+      "currentManifestEntry": {
+        "bytes": 21775,
+        "sha256": "f330a15aec373cc8ce4f7ad1f3235f3d343fddc54d42737668b8cccfe720761b"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "field": "manifestSha256",
+      "path": "ROOT09-fiscal-readonly-20261004-01/originals-index.json",
+      "expectedSHA256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e",
+      "currentManifestEntry": {
+        "bytes": 2855,
+        "sha256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "field": "handoffSha256",
+      "path": "ROOT09-fiscal-readonly-20261004-01/HANDOFF.md",
+      "expectedSHA256": "656191db06e796757ec435675ab1884a8ce3fda6aa7559b7528a2af33032c460",
+      "currentManifestEntry": {
+        "bytes": 7897,
+        "sha256": "656191db06e796757ec435675ab1884a8ce3fda6aa7559b7528a2af33032c460"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "field": "endedReceiptSha256",
+      "path": "ROOT09-fiscal-readonly-20261004-01/ended-receipt.json",
+      "expectedSHA256": "3c7a8db48775dd714a7d2aa6740d5fd2abdf48b6ecb7824f17588e34f83cb925",
+      "currentManifestEntry": {
+        "bytes": 2240,
+        "sha256": "3c7a8db48775dd714a7d2aa6740d5fd2abdf48b6ecb7824f17588e34f83cb925"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "field": "originalsIndexSHA256",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/originals-index.json",
+      "expectedSHA256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56",
+      "currentManifestEntry": {
+        "bytes": 116082,
+        "sha256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "field": "handoffSHA256",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/HANDOFF.md",
+      "expectedSHA256": "7da2e21a9bb614b1eb96188a464a173e93c6b3e31983c71aad3ba39d4ab84d89",
+      "currentManifestEntry": {
+        "bytes": 5056,
+        "sha256": "7da2e21a9bb614b1eb96188a464a173e93c6b3e31983c71aad3ba39d4ab84d89"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "field": "finalPatchSHA256",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/coherent-final-fixture.patch",
+      "expectedSHA256": "ca3ddfbcdc1f4d7c5130a6a5ceed7a836af42df41a4997db5a607b2cfbb273c3",
+      "currentManifestEntry": {
+        "bytes": 3287,
+        "sha256": "ca3ddfbcdc1f4d7c5130a6a5ceed7a836af42df41a4997db5a607b2cfbb273c3"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "field": "endedReceiptSHA256",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/ENDED_RECEIPT.json",
+      "expectedSHA256": "f8c60c46baaaecc872e89b26f61d08853941a3d526ae409448e71bbddac6ad0e",
+      "currentManifestEntry": {
+        "bytes": 14268,
+        "sha256": "f8c60c46baaaecc872e89b26f61d08853941a3d526ae409448e71bbddac6ad0e"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "field": "finalCandidateFixtureSHA256",
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/candidate02-source/tests/public-employment-fixture.ts",
+      "expectedSHA256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7",
+      "currentManifestEntry": {
+        "bytes": 8522,
+        "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "field": "indexSHA256",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/ALL_FILES_SHA256.json",
+      "expectedSHA256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d",
+      "currentManifestEntry": {
+        "bytes": 3656,
+        "sha256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "field": "handoffSHA256",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/HANDOFF.md",
+      "expectedSHA256": "a120de0dfe99d36966740b6924aab80e356326ecb6c3ccffb1eb98b2af414910",
+      "currentManifestEntry": {
+        "bytes": 3851,
+        "sha256": "a120de0dfe99d36966740b6924aab80e356326ecb6c3ccffb1eb98b2af414910"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "field": "reportSHA256",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/REPORT.md",
+      "expectedSHA256": "cf6692b0467cf8adc5a0f936e37b5fd6ec1684de3eef1c727ba82430bd8e5aba",
+      "currentManifestEntry": {
+        "bytes": 13423,
+        "sha256": "cf6692b0467cf8adc5a0f936e37b5fd6ec1684de3eef1c727ba82430bd8e5aba"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "field": "contractPlanSHA256",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/CONTRACT_PLAN.md",
+      "expectedSHA256": "9d29edf5f0ec92d119e779d63738fdbf3f9676be1b8e599cc1217dd6f9d660cd",
+      "currentManifestEntry": {
+        "bytes": 8017,
+        "sha256": "9d29edf5f0ec92d119e779d63738fdbf3f9676be1b8e599cc1217dd6f9d660cd"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "field": "candidatePoolSHA256",
+      "path": "ROOT10-natural-public-staffing-feasibility-20261004-01/candidate-pool.json",
+      "expectedSHA256": "eb8b7b3619aadde8e8204a98a85741868ee7154afd3231eab6c53b48217ef1fb",
+      "currentManifestEntry": {
+        "bytes": 463035,
+        "sha256": "eb8b7b3619aadde8e8204a98a85741868ee7154afd3231eab6c53b48217ef1fb"
+      },
+      "match": true,
+      "classification": "PRIOR_CLOSURE_REFERENCE_VS_CURRENT_MANIFEST_METADATA_ONLY"
+    }
+  ],
+  "priorGroups": [
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-collision-self-20261004-01.verification.json",
+      "priorIndexedCount": 321,
+      "priorCollectionRows": 323,
+      "matchedCurrentManifestRows": 323,
+      "priorDeclaredCollectionBytes": 35657782,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 323,
+      "priorOriginalIndexOmissionCount": 0
+    },
+    {
+      "group": "ROOT09-npc-tread-motion-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-npc-tread-motion-20261004-01.verification.json",
+      "priorIndexedCount": 0,
+      "priorCollectionRows": 1370,
+      "matchedCurrentManifestRows": 1370,
+      "priorDeclaredCollectionBytes": 168738852,
+      "knownControlCount": 1,
+      "knownControlMatches": 1,
+      "currentManifestGroupCount": 1370,
+      "priorOriginalIndexOmissionCount": 1369
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-sanitation-20261004-01.verification.json",
+      "priorIndexedCount": 556,
+      "priorCollectionRows": 558,
+      "matchedCurrentManifestRows": 558,
+      "priorDeclaredCollectionBytes": 75622898,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 558,
+      "priorOriginalIndexOmissionCount": 0
+    },
+    {
+      "group": "ROOT09-visual-city-life-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-visual-city-life-20261004-01.verification.json",
+      "priorIndexedCount": 235,
+      "priorCollectionRows": 1251,
+      "matchedCurrentManifestRows": 1251,
+      "priorDeclaredCollectionBytes": 176393117,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 1251,
+      "priorOriginalIndexOmissionCount": 1015
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-public-employment-transfer-20261004-01.verification.json",
+      "priorIndexedCount": 932,
+      "priorCollectionRows": 941,
+      "matchedCurrentManifestRows": 941,
+      "priorDeclaredCollectionBytes": 112619331,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 941,
+      "priorOriginalIndexOmissionCount": 7
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-fiscal-readonly-20261004-01.verification.json",
+      "priorIndexedCount": 17,
+      "priorCollectionRows": 19,
+      "matchedCurrentManifestRows": 19,
+      "priorDeclaredCollectionBytes": 3977574,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 19,
+      "priorOriginalIndexOmissionCount": 0
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-integrated-fixture-cause-readonly-20261004-01.verification.json",
+      "priorIndexedCount": 628,
+      "priorCollectionRows": 630,
+      "matchedCurrentManifestRows": 630,
+      "priorDeclaredCollectionBytes": 76720648,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 630,
+      "priorOriginalIndexOmissionCount": 0
+    },
+    {
+      "group": "ROOT09-post-stair-economy14-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT09-post-stair-economy14-20261004-01.verification.json",
+      "priorIndexedCount": 4,
+      "priorCollectionRows": 270,
+      "matchedCurrentManifestRows": 270,
+      "priorDeclaredCollectionBytes": 30611918,
+      "knownControlCount": 1,
+      "knownControlMatches": 1,
+      "currentManifestGroupCount": 270,
+      "priorOriginalIndexOmissionCount": 265
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "priorProof": "ROOT09-originals-inventory-review-20261004-01/ROOT10-natural-public-staffing-feasibility-20261004-01.verification.json",
+      "priorIndexedCount": 22,
+      "priorCollectionRows": 24,
+      "matchedCurrentManifestRows": 24,
+      "priorDeclaredCollectionBytes": 795779,
+      "knownControlCount": 2,
+      "knownControlMatches": 2,
+      "currentManifestGroupCount": 24,
+      "priorOriginalIndexOmissionCount": 0
+    }
+  ],
+  "priorInventoryFailures": [],
+  "closureEvidenceManifestPresence": [
+    {
+      "group": "ROOT09-collision-self-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-collision-self-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 680,
+        "sha256": "dba4f45d622ce160d586d2b39d1cde6ac938cd3e1bc624081f4e5457fadf169f"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-npc-tread-motion-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-npc-tread-motion-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 211,
+        "sha256": "8d691ee9f905b1fc55fb77d87f9d704a759c244b2f55dce390baf6557290cd26"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-sanitation-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-sanitation-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 410,
+        "sha256": "54a98158e4b985bf27ca0c739f368510e664172b055c757aacafba2de22947ca"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-visual-city-life-20261004-01",
+      "closureMode": "PRIOR_ROOT_ACCEPTED_FINAL_HANDOFF",
+      "closureEvidence": "ROOT09-visual-city-life-20261004-01/FINAL-HANDOFF-v2.md",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 6951,
+        "sha256": "6e973103cfbb362bdb863d4a369ec25c1a297eb5aded41a60a347246771d40f5"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-public-employment-transfer-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-public-employment-transfer-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 866,
+        "sha256": "3a7b31d6e17d91dd8cf17aa4cab3b2c96a822fa9e12630b12d50c03d2a89235e"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-fiscal-readonly-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-fiscal-readonly-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 487,
+        "sha256": "1ea5141497b22898b00b7109e25d577b1b14910a2272266fdcb6ae3c244c7308"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-integrated-fixture-cause-readonly-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-integrated-fixture-cause-readonly-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 1056,
+        "sha256": "bce6db6cfa55e687b71a220b59b4e8cccca378ff8a59638beb7dfffe49e467df"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-post-stair-economy14-20261004-01",
+      "closureMode": "PRIOR_ROOT_ACCEPTED_FINAL_HANDOFF",
+      "closureEvidence": "ROOT09-post-stair-economy14-20261004-01/FINAL-HANDOFF.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 2793,
+        "sha256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT10-natural-public-staffing-feasibility-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT10-natural-public-staffing-feasibility-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 1208,
+        "sha256": "7b80116cd340537a0a88cefe286059d50c1b8eef0c633b31ef47f99218b8abd7"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-tread-motion-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-native-tread-motion-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 832,
+        "sha256": "a91ecd952c3b41bc7aa1368ee7c39f3eab90d2dd422134055381db24a503cc57"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-roadwork-failure-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-native-roadwork-failure-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 323,
+        "sha256": "03e07107d13808616a76e5b025e92d2d4522f7085bd027ec00747ef47b5a853c"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-roadwork-fixture-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-native-roadwork-fixture-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 320,
+        "sha256": "b8f1effc7594e8f965b87e55c12ca4156a2c0b0818431efcd6266cf50fa4bc95"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-integration-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-integration-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 570,
+        "sha256": "d46543c176f61b5b50beeccc669b05413ac221ae3eb1cad7557076b1fc0803d6"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-integrated-final-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-integrated-final-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 925,
+        "sha256": "5e314881fc109d73a127e9ad6e75a353fdae7c6b63dbb3766b43dab0777f186f"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-root-final-source-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-root-final-source-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 638,
+        "sha256": "7196f1f3de94a8389b1d11b454e806847af7da744e25812f7599fa16e2ddc764"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-root-production-candidate02-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-root-production-candidate02-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 547,
+        "sha256": "8bb303efa1e5c61a5880a4f2eb64719a259c7d1235a818038f3f43aca901259d"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-root-production-candidate03-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-root-production-candidate03-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 543,
+        "sha256": "e502cce06e51eca42226f92f8895e875ce6552d5df24382eb7d8072ef5373259"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-root-production-candidate04-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-root-production-candidate04-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 703,
+        "sha256": "b5e0f2a4bb4b7304c2ba985e7500520145c7d76d475aac54d6c5dd856288a144"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-legacy-premises-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-legacy-premises-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 884,
+        "sha256": "323ff5b788a2613ea654ac4581a1222606ec585e7e6f4b04c0c1351e65b7e271"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-boot-diagnostic-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-boot-diagnostic-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 5398,
+        "sha256": "163ff0aa2ea93a326c682a4fe4db3df120ab4afa25f5055b706cb08e466815b3"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-boot-aabb-candidate-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-boot-aabb-candidate-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 5401,
+        "sha256": "eda184269dd183ece4a5b68105a2d7aa95e3048467a1d14d281adbedcf7bf905"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-live-reader-failure-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-native-live-reader-failure-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 362,
+        "sha256": "067dd577b9193a52ba2cbdc3af9f02fe6fed63f1406927956879041439bd151f"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-save-observer-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-native-save-observer-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 5408,
+        "sha256": "e5199b197253da996f94b27ecc25a72219713c4f8326172ae4903dcddaa9c673"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-delivery-producer-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-delivery-producer-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 450,
+        "sha256": "1162e477f70d7c1c65ba1f8ba395068a3519cf48f980b2f9c6af617ab554cac3"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-originals-inventory-review-20261004-01",
+      "closureMode": "PRIOR_ROOT_ACCEPTED_REVIEW_COMPLETION",
+      "closureEvidence": "ROOT09-originals-inventory-review-20261004-01/REVIEW-OUTPUTS-MANIFEST.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 7797,
+        "sha256": "9eecea581f5b4cddc1236920448f3619919d0f21c41378a60d230fa817d84ea1"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-delivery-plan-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-delivery-plan-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 692,
+        "sha256": "190724c36c69d6dc7719a3b0c51a3e000a5d0ea02bc159c6320de62ab20bf88f"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-native-live-reader-candidate-20261004-01",
+      "closureMode": "PRIOR_ROOT_ACCEPTED_FINAL_HANDOFF",
+      "closureEvidence": "ROOT09-native-live-reader-candidate-20261004-01/HANDOFF.md",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 6278,
+        "sha256": "acf055ba29b7f8a88d10acce65ac2f285e401a4d46e73b56c9a0eee0404984cc"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-root-production-candidate05-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-root-production-candidate05-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 362,
+        "sha256": "4e1a4c6372d03d97731fe4d1f1f2ad4928f3af6e22dbf117eba39e4edef876d0"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    },
+    {
+      "group": "ROOT09-final-native-browser-20261004-01",
+      "closureMode": "CLOSED_JSON",
+      "closureEvidence": "ROOT09-final-native-browser-20261004-01/CLOSED.json",
+      "ownerClosedDeclared": true,
+      "currentManifestEntry": {
+        "bytes": 1817,
+        "sha256": "dba6003b0cf3fe3643c21dc7266df8fcdb183946dd01e55374b2a6eff57b3fed"
+      },
+      "present": true,
+      "classification": "DECLARED_CLOSURE_AND_MANIFEST_PRESENCE_NOT_FRESH_CONTROL_HASH"
+    }
+  ],
+  "checks": [
+    {
+      "check": "plan.groups versus groupStates",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "plan embedded sourcePlan exact JSON equality",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "manifest fileCount versus mapping",
+      "expected": 11561,
+      "observed": 11561,
+      "match": true
+    },
+    {
+      "check": "manifest payloadBytes versus row sum",
+      "expected": 1619221273,
+      "observed": 1619221273,
+      "match": true
+    },
+    {
+      "check": "receipt fileCount versus manifest",
+      "expected": 11561,
+      "observed": 11561,
+      "match": true
+    },
+    {
+      "check": "receipt zipMembers versus files+reserved manifest",
+      "expected": 11562,
+      "observed": 11562,
+      "match": true
+    },
+    {
+      "check": "receipt archive name versus frozen plan",
+      "expected": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+      "observed": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+      "match": true
+    },
+    {
+      "check": "receipt part concatenation SHA versus archive SHA",
+      "expected": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+      "observed": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+      "match": true
+    },
+    {
+      "check": "receipt parts byte sum versus archive bytes",
+      "expected": 504545705,
+      "observed": 504545705,
+      "match": true
+    },
+    {
+      "check": "receipt part names sequential",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "receipt declared originalFilesStable",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "receipt changed list empty",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "receipt memberSHAErrors empty",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "receipt crcError empty",
+      "expected": null,
+      "observed": null,
+      "match": true
+    },
+    {
+      "check": "receipt credentialPatternMatches zero",
+      "expected": 0,
+      "observed": 0,
+      "match": true
+    },
+    {
+      "check": "manifest credentialPatternMatches zero",
+      "expected": 0,
+      "observed": 0,
+      "match": true
+    },
+    {
+      "check": "plan packAllowed",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "plan verificationWindowClear",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "plan finalOriginalScopeReviewedByRoot",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "plan waitingGroups empty",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "receipt uploadStatus",
+      "expected": "NOT_ATTEMPTED",
+      "observed": "NOT_ATTEMPTED",
+      "match": true
+    },
+    {
+      "check": "receipt Library IDs empty",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "manifest/receipt completeGoal false",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "manifest namespace allowlist exact",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "manifest policy-forbidden entries absent",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "declared excluded subtrees absent from manifest",
+      "expected": [],
+      "observed": [],
+      "match": true
+    },
+    {
+      "check": "all29 closure evidence present",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "review40 listed count",
+      "expected": 40,
+      "observed": 40,
+      "match": true
+    },
+    {
+      "check": "review40 listed byte sum",
+      "expected": 9074489,
+      "observed": 9074489,
+      "match": true
+    },
+    {
+      "check": "review40 all manifest matches",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "review40 self manifest included",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "review40 self control byte size only",
+      "expected": 7797,
+      "observed": 7797,
+      "match": true
+    },
+    {
+      "check": "finalplan index listed count",
+      "expected": 4,
+      "observed": 4,
+      "match": true
+    },
+    {
+      "check": "finalplan index listed byte sum",
+      "expected": 70933,
+      "observed": 70933,
+      "match": true
+    },
+    {
+      "check": "finalplan producer backup4 entries match",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "finalplan producer backup5 count",
+      "expected": 5,
+      "observed": 5,
+      "match": true
+    },
+    {
+      "check": "finalplan self control included",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "finalplan self control byte size only",
+      "expected": 750,
+      "observed": 750,
+      "match": true
+    },
+    {
+      "check": "finalplan closed no further writes",
+      "expected": false,
+      "observed": false,
+      "match": true
+    },
+    {
+      "check": "required fiscal ROOT07 geometry retained at least once",
+      "expected": true,
+      "observed": true,
+      "match": true
+    },
+    {
+      "check": "plan does not equate whole native258 and root05",
+      "expected": false,
+      "observed": false,
+      "match": true
+    },
+    {
+      "check": "both stated corrected fixtures differ in current manifest",
+      "expected": true,
+      "observed": true,
+      "match": true
+    }
+  ],
+  "review40Matches": [
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/COLLECTION-PLAN-draft.json",
+      "expectedBytes": 4538,
+      "expectedSHA256": "1153a41dba9558b93be3c526b1783080f3e7cc237f2eed128157cd008007252e",
+      "currentManifestEntry": {
+        "bytes": 4538,
+        "sha256": "1153a41dba9558b93be3c526b1783080f3e7cc237f2eed128157cd008007252e"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/CONTINUATION-SUPPORT.json",
+      "expectedBytes": 206946,
+      "expectedSHA256": "438f16b7a56ed33c9c11e2c81762f4b12927a76e55a25353fd8600ec23d535bf",
+      "currentManifestEntry": {
+        "bytes": 206946,
+        "sha256": "438f16b7a56ed33c9c11e2c81762f4b12927a76e55a25353fd8600ec23d535bf"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/CONTROL-COPIES-MANIFEST.json",
+      "expectedBytes": 9100,
+      "expectedSHA256": "e305d985f2f31e3136fbc78c9ecbe808d8587fea5f2ec1ee4e09291f32b02c20",
+      "currentManifestEntry": {
+        "bytes": 9100,
+        "sha256": "e305d985f2f31e3136fbc78c9ecbe808d8587fea5f2ec1ee4e09291f32b02c20"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/FISCAL-ORIGINAL-SOURCE-DEPENDENCY.json",
+      "expectedBytes": 763,
+      "expectedSHA256": "4e0f17d91f772b97966ee85467c2ff7bf1cef68ec860efd2db7f0d918c8b1d03",
+      "currentManifestEntry": {
+        "bytes": 763,
+        "sha256": "4e0f17d91f772b97966ee85467c2ff7bf1cef68ec860efd2db7f0d918c8b1d03"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ORIGINALS-COLLECTION-MANIFEST.json",
+      "expectedBytes": 3223788,
+      "expectedSHA256": "9361396a6d8e90731cf700ec7910239b61ec5d744d1449288cd8b1227d40b540",
+      "currentManifestEntry": {
+        "bytes": 3223788,
+        "sha256": "9361396a6d8e90731cf700ec7910239b61ec5d744d1449288cd8b1227d40b540"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/REPORT.md",
+      "expectedBytes": 8109,
+      "expectedSHA256": "1dedb8cd66a60ed1785d3015b27dee68ea2b622fc423074ccd070d174eac96cf",
+      "currentManifestEntry": {
+        "bytes": 8109,
+        "sha256": "1dedb8cd66a60ed1785d3015b27dee68ea2b622fc423074ccd070d174eac96cf"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/REUSABLE-CONTENT-MAP.json",
+      "expectedBytes": 533428,
+      "expectedSHA256": "08d05b34f94b6bae393410dcc003154fdf7d9479715de0af7cbad432ca221bfe",
+      "currentManifestEntry": {
+        "bytes": 533428,
+        "sha256": "08d05b34f94b6bae393410dcc003154fdf7d9479715de0af7cbad432ca221bfe"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-collision-self-20261004-01.verification.json",
+      "expectedBytes": 94332,
+      "expectedSHA256": "88def532269be79d28c208f3dc255055ac0a752960427741dbe80ecfd5efea7d",
+      "currentManifestEntry": {
+        "bytes": 94332,
+        "sha256": "88def532269be79d28c208f3dc255055ac0a752960427741dbe80ecfd5efea7d"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-fiscal-readonly-20261004-01.verification.json",
+      "expectedBytes": 7691,
+      "expectedSHA256": "b00e38b3e5e826a30af0240858d6d8c951cf41cf097a87885675852476904b1f",
+      "currentManifestEntry": {
+        "bytes": 7691,
+        "sha256": "b00e38b3e5e826a30af0240858d6d8c951cf41cf097a87885675852476904b1f"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-integrated-fixture-cause-readonly-20261004-01.verification.json",
+      "expectedBytes": 188313,
+      "expectedSHA256": "8051588263668b5ad5be92af23ae7c33751895fafd44c01d7832209b97a8fea4",
+      "currentManifestEntry": {
+        "bytes": 188313,
+        "sha256": "8051588263668b5ad5be92af23ae7c33751895fafd44c01d7832209b97a8fea4"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-npc-tread-motion-20261004-01.verification.json",
+      "expectedBytes": 1058604,
+      "expectedSHA256": "b6d9b972784a557c764994537cec8fbf2528869c1dd980ccb4158ebfefa7bb2e",
+      "currentManifestEntry": {
+        "bytes": 1058604,
+        "sha256": "b6d9b972784a557c764994537cec8fbf2528869c1dd980ccb4158ebfefa7bb2e"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-post-stair-economy14-20261004-01.verification.json",
+      "expectedBytes": 270103,
+      "expectedSHA256": "a1f25c1190a016cfacef25957d064dabe9231a9058a300e27e6ccfbb1ed835f5",
+      "currentManifestEntry": {
+        "bytes": 270103,
+        "sha256": "a1f25c1190a016cfacef25957d064dabe9231a9058a300e27e6ccfbb1ed835f5"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-public-employment-transfer-20261004-01.verification.json",
+      "expectedBytes": 276978,
+      "expectedSHA256": "21e626b732834f4ff4be59b8275a2509b78e9ab51d3129beae9b4b0f5273625f",
+      "currentManifestEntry": {
+        "bytes": 276978,
+        "sha256": "21e626b732834f4ff4be59b8275a2509b78e9ab51d3129beae9b4b0f5273625f"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-sanitation-20261004-01.verification.json",
+      "expectedBytes": 161543,
+      "expectedSHA256": "4f70346c07953453e77d92731c71cbef5b5f8a032cc74cf341301343f70ae306",
+      "currentManifestEntry": {
+        "bytes": 161543,
+        "sha256": "4f70346c07953453e77d92731c71cbef5b5f8a032cc74cf341301343f70ae306"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT09-visual-city-life-20261004-01.verification.json",
+      "expectedBytes": 1132139,
+      "expectedSHA256": "ed2472147db81481a5fe856c6ef04781cc30229076c34ae9c246b5d27d03e49f",
+      "currentManifestEntry": {
+        "bytes": 1132139,
+        "sha256": "ed2472147db81481a5fe856c6ef04781cc30229076c34ae9c246b5d27d03e49f"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/ROOT10-natural-public-staffing-feasibility-20261004-01.verification.json",
+      "expectedBytes": 9632,
+      "expectedSHA256": "e8f1894d0a2b1fa943ccca96eaa90c95f54113615adde3f2b268b0980b6cebdd",
+      "currentManifestEntry": {
+        "bytes": 9632,
+        "sha256": "e8f1894d0a2b1fa943ccca96eaa90c95f54113615adde3f2b268b0980b6cebdd"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/SUMMARY.json",
+      "expectedBytes": 29148,
+      "expectedSHA256": "d51b1f143a882751767ac23ec61a00749164cf045a074748de8d36366e8bee83",
+      "currentManifestEntry": {
+        "bytes": 29148,
+        "sha256": "d51b1f143a882751767ac23ec61a00749164cf045a074748de8d36366e8bee83"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/check_continuation.py",
+      "expectedBytes": 5246,
+      "expectedSHA256": "eb548fe12ee809373062a3eb27e636cebdb69a1e38372913ff39ec9528263b28",
+      "currentManifestEntry": {
+        "bytes": 5246,
+        "sha256": "eb548fe12ee809373062a3eb27e636cebdb69a1e38372913ff39ec9528263b28"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-collision-self-20261004-01/CLOSED.json",
+      "expectedBytes": 680,
+      "expectedSHA256": "dba4f45d622ce160d586d2b39d1cde6ac938cd3e1bc624081f4e5457fadf169f",
+      "currentManifestEntry": {
+        "bytes": 680,
+        "sha256": "dba4f45d622ce160d586d2b39d1cde6ac938cd3e1bc624081f4e5457fadf169f"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-collision-self-20261004-01/FILE_INDEX.json",
+      "expectedBytes": 56166,
+      "expectedSHA256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa",
+      "currentManifestEntry": {
+        "bytes": 56166,
+        "sha256": "906b12f6911372c6548849bfae3c149a078a4048db33dfaccde2c70cbe25a1fa"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-fiscal-readonly-20261004-01/CLOSED.json",
+      "expectedBytes": 487,
+      "expectedSHA256": "1ea5141497b22898b00b7109e25d577b1b14910a2272266fdcb6ae3c244c7308",
+      "currentManifestEntry": {
+        "bytes": 487,
+        "sha256": "1ea5141497b22898b00b7109e25d577b1b14910a2272266fdcb6ae3c244c7308"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-fiscal-readonly-20261004-01/originals-index.json",
+      "expectedBytes": 2855,
+      "expectedSHA256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e",
+      "currentManifestEntry": {
+        "bytes": 2855,
+        "sha256": "f2c464ae971f55a1ca59f772b3e926303079d9d5a5905ac0bcafa28b472ff91e"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-integrated-fixture-cause-readonly-20261004-01/CLOSED.json",
+      "expectedBytes": 1056,
+      "expectedSHA256": "bce6db6cfa55e687b71a220b59b4e8cccca378ff8a59638beb7dfffe49e467df",
+      "currentManifestEntry": {
+        "bytes": 1056,
+        "sha256": "bce6db6cfa55e687b71a220b59b4e8cccca378ff8a59638beb7dfffe49e467df"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-integrated-fixture-cause-readonly-20261004-01/originals-index.json",
+      "expectedBytes": 116082,
+      "expectedSHA256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56",
+      "currentManifestEntry": {
+        "bytes": 116082,
+        "sha256": "434dda833431be7f72e8c1c3eb2c69d523c67d4a812b56bfd743ae25ccd4fa56"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-npc-tread-motion-20261004-01/CLOSED.json",
+      "expectedBytes": 211,
+      "expectedSHA256": "8d691ee9f905b1fc55fb77d87f9d704a759c244b2f55dce390baf6557290cd26",
+      "currentManifestEntry": {
+        "bytes": 211,
+        "sha256": "8d691ee9f905b1fc55fb77d87f9d704a759c244b2f55dce390baf6557290cd26"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-npc-tread-motion-20261004-01/SOURCE_CONTRACT.json",
+      "expectedBytes": 67925,
+      "expectedSHA256": "5f2b2dc8e480a303b25e75298082da1192b156d39b2a85f0a63f004028e448c9",
+      "currentManifestEntry": {
+        "bytes": 67925,
+        "sha256": "5f2b2dc8e480a303b25e75298082da1192b156d39b2a85f0a63f004028e448c9"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-post-stair-economy14-20261004-01/FINAL-HANDOFF.json",
+      "expectedBytes": 2793,
+      "expectedSHA256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe",
+      "currentManifestEntry": {
+        "bytes": 2793,
+        "sha256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-post-stair-economy14-20261004-01/frozen-inputs.json",
+      "expectedBytes": 27475,
+      "expectedSHA256": "9ec96d49f3e0286879a103896a96eba460025ff13f48a1ba29715a74bf139cf3",
+      "currentManifestEntry": {
+        "bytes": 27475,
+        "sha256": "9ec96d49f3e0286879a103896a96eba460025ff13f48a1ba29715a74bf139cf3"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-public-employment-transfer-20261004-01/CLOSED.json",
+      "expectedBytes": 866,
+      "expectedSHA256": "3a7b31d6e17d91dd8cf17aa4cab3b2c96a822fa9e12630b12d50c03d2a89235e",
+      "currentManifestEntry": {
+        "bytes": 866,
+        "sha256": "3a7b31d6e17d91dd8cf17aa4cab3b2c96a822fa9e12630b12d50c03d2a89235e"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-public-employment-transfer-20261004-01/originals-index.json",
+      "expectedBytes": 167814,
+      "expectedSHA256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8",
+      "currentManifestEntry": {
+        "bytes": 167814,
+        "sha256": "66fc83124be1837272c54da10d5c454ea7e3e485a0dea1596c46b139550fada8"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-sanitation-20261004-01/ALL_FILES_SHA256.json",
+      "expectedBytes": 98392,
+      "expectedSHA256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab",
+      "currentManifestEntry": {
+        "bytes": 98392,
+        "sha256": "a2f55336c4399a5013ae41be47614630c1f23c5a198d2e6afc227a3af27808ab"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-sanitation-20261004-01/CLOSED.json",
+      "expectedBytes": 410,
+      "expectedSHA256": "54a98158e4b985bf27ca0c739f368510e664172b055c757aacafba2de22947ca",
+      "currentManifestEntry": {
+        "bytes": 410,
+        "sha256": "54a98158e4b985bf27ca0c739f368510e664172b055c757aacafba2de22947ca"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-visual-city-life-20261004-01/FINAL-HANDOFF-v2.md",
+      "expectedBytes": 6951,
+      "expectedSHA256": "6e973103cfbb362bdb863d4a369ec25c1a297eb5aded41a60a347246771d40f5",
+      "currentManifestEntry": {
+        "bytes": 6951,
+        "sha256": "6e973103cfbb362bdb863d4a369ec25c1a297eb5aded41a60a347246771d40f5"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-visual-city-life-20261004-01/FINAL-RESULTS-v2.json",
+      "expectedBytes": 21320,
+      "expectedSHA256": "9ec5cb410958df4e7f2e3579bc30c0174098553aee8439d57a6f63b54ebce046",
+      "currentManifestEntry": {
+        "bytes": 21320,
+        "sha256": "9ec5cb410958df4e7f2e3579bc30c0174098553aee8439d57a6f63b54ebce046"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT09-visual-city-life-20261004-01/ORIGINAL-ARTIFACT-INDEX-v2.json",
+      "expectedBytes": 40458,
+      "expectedSHA256": "619db4e1c4b33dad1035ae35174e693ff12c13fcbb74b4dcabd1816c61b3dd70",
+      "currentManifestEntry": {
+        "bytes": 40458,
+        "sha256": "619db4e1c4b33dad1035ae35174e693ff12c13fcbb74b4dcabd1816c61b3dd70"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT10-natural-public-staffing-feasibility-20261004-01/ALL_FILES_SHA256.json",
+      "expectedBytes": 3656,
+      "expectedSHA256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d",
+      "currentManifestEntry": {
+        "bytes": 3656,
+        "sha256": "efa3429914b4548f8c3e0bd286058bdfa391889fc12ff2d9185b4cc6f6116f9d"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/controls/ROOT10-natural-public-staffing-feasibility-20261004-01/CLOSED.json",
+      "expectedBytes": 1208,
+      "expectedSHA256": "7b80116cd340537a0a88cefe286059d50c1b8eef0c633b31ef47f99218b8abd7",
+      "currentManifestEntry": {
+        "bytes": 1208,
+        "sha256": "7b80116cd340537a0a88cefe286059d50c1b8eef0c633b31ef47f99218b8abd7"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/independent-closed-check/REPORT.md",
+      "expectedBytes": 4815,
+      "expectedSHA256": "68fbd5bc763f4441b132e100a835d29ed5f126cf18ef355be53c71ebe444dfa9",
+      "currentManifestEntry": {
+        "bytes": 4815,
+        "sha256": "68fbd5bc763f4441b132e100a835d29ed5f126cf18ef355be53c71ebe444dfa9"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/independent-closed-check/manifest.json",
+      "expectedBytes": 1217245,
+      "expectedSHA256": "d122a5bfae8d85d87e4d3c9c164256a92ef2ec3b9960a95eaac2f4984ff72740",
+      "currentManifestEntry": {
+        "bytes": 1217245,
+        "sha256": "d122a5bfae8d85d87e4d3c9c164256a92ef2ec3b9960a95eaac2f4984ff72740"
+      },
+      "match": true
+    },
+    {
+      "path": "ROOT09-originals-inventory-review-20261004-01/inventory_review.py",
+      "expectedBytes": 15223,
+      "expectedSHA256": "6d119ba6919919666282762a16c7d051a4edb060ff4712e0fdc5c3f5dd7186b2",
+      "currentManifestEntry": {
+        "bytes": 15223,
+        "sha256": "6d119ba6919919666282762a16c7d051a4edb060ff4712e0fdc5c3f5dd7186b2"
+      },
+      "match": true
+    }
+  ],
+  "reviewSelfManifestEntry": {
+    "bytes": 7797,
+    "sha256": "9eecea581f5b4cddc1236920448f3619919d0f21c41378a60d230fa817d84ea1"
+  },
+  "finalPlanBackup4Checks": [
+    {
+      "sourceMetadataPath": "ROOT09-delivery-final-plan-20261004-01/CLOSED.json",
+      "producerBackupPath": "ROOT09-delivery-producer-20261004-01/final-plan-preparation/CLOSED.json",
+      "expectedBytes": 370,
+      "expectedSHA256": "c4951c3a641dd87922ecb8a58d50985d8acf55a1bb1f367b723ee13019cc6799",
+      "currentManifestEntry": {
+        "bytes": 370,
+        "sha256": "c4951c3a641dd87922ecb8a58d50985d8acf55a1bb1f367b723ee13019cc6799"
+      },
+      "match": true
+    },
+    {
+      "sourceMetadataPath": "ROOT09-delivery-final-plan-20261004-01/CLOSURE-METADATA.json",
+      "producerBackupPath": "ROOT09-delivery-producer-20261004-01/final-plan-preparation/CLOSURE-METADATA.json",
+      "expectedBytes": 45082,
+      "expectedSHA256": "9205944bc07d83af49066de9846ce9af45b70dff87cdded40ba76ceceec20591",
+      "currentManifestEntry": {
+        "bytes": 45082,
+        "sha256": "9205944bc07d83af49066de9846ce9af45b70dff87cdded40ba76ceceec20591"
+      },
+      "match": true
+    },
+    {
+      "sourceMetadataPath": "ROOT09-delivery-final-plan-20261004-01/COLLECTION-PLAN-draft.json",
+      "producerBackupPath": "ROOT09-delivery-producer-20261004-01/final-plan-preparation/COLLECTION-PLAN-draft.json",
+      "expectedBytes": 22671,
+      "expectedSHA256": "32ffcec0ea786cc310ae0f006457fe05866721bede0117558d92f1e4556faa15",
+      "currentManifestEntry": {
+        "bytes": 22671,
+        "sha256": "32ffcec0ea786cc310ae0f006457fe05866721bede0117558d92f1e4556faa15"
+      },
+      "match": true
+    },
+    {
+      "sourceMetadataPath": "ROOT09-delivery-final-plan-20261004-01/REPORT.md",
+      "producerBackupPath": "ROOT09-delivery-producer-20261004-01/final-plan-preparation/REPORT.md",
+      "expectedBytes": 2810,
+      "expectedSHA256": "d4a8fe355de30e2113e41675a51a86eb2aca26ff0919c5c818e913842af57b68",
+      "currentManifestEntry": {
+        "bytes": 2810,
+        "sha256": "d4a8fe355de30e2113e41675a51a86eb2aca26ff0919c5c818e913842af57b68"
+      },
+      "match": true
+    }
+  ],
+  "finalPlanBackup5Entries": {
+    "ROOT09-delivery-producer-20261004-01/final-plan-preparation/CLOSED.json": {
+      "bytes": 370,
+      "sha256": "c4951c3a641dd87922ecb8a58d50985d8acf55a1bb1f367b723ee13019cc6799"
+    },
+    "ROOT09-delivery-producer-20261004-01/final-plan-preparation/CLOSURE-METADATA.json": {
+      "bytes": 45082,
+      "sha256": "9205944bc07d83af49066de9846ce9af45b70dff87cdded40ba76ceceec20591"
+    },
+    "ROOT09-delivery-producer-20261004-01/final-plan-preparation/COLLECTION-PLAN-draft.json": {
+      "bytes": 22671,
+      "sha256": "32ffcec0ea786cc310ae0f006457fe05866721bede0117558d92f1e4556faa15"
+    },
+    "ROOT09-delivery-producer-20261004-01/final-plan-preparation/FINAL-PLAN-FILES.json": {
+      "bytes": 750,
+      "sha256": "f228b20d88cebb62ef9babd84b9a62533a6308b2a8825326c2a5eefce777ed8f"
+    },
+    "ROOT09-delivery-producer-20261004-01/final-plan-preparation/REPORT.md": {
+      "bytes": 2810,
+      "sha256": "d4a8fe355de30e2113e41675a51a86eb2aca26ff0919c5c818e913842af57b68"
+    }
+  },
+  "fiscalROOT07RetainedManifestEntries": [
+    {
+      "path": "ROOT09-delivery-producer-20261004-01/original-dependencies/root07-architecture-floor-plan.ts",
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    }
+  ],
+  "candidateVersusRoot05SourceMetadata": {
+    "wholeNative258EqualsRoot05Declared": false,
+    "sourcePrefixDifferences": [
+      {
+        "relativePath": "tests/public-employment-fixture.ts",
+        "candidate": {
+          "bytes": 6394,
+          "sha256": "a74b625fdfc1e50c916b202c66a03c14f984c526161a0c59d94e3a02bfb4c37b"
+        },
+        "root05": {
+          "bytes": 8522,
+          "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+        }
+      },
+      {
+        "relativePath": "tests/roadwork-replacement.test.ts",
+        "candidate": {
+          "bytes": 18722,
+          "sha256": "4700d1ef728d157f539c28311c84717c3db20cca67fe26919b02e4f22014423c"
+        },
+        "root05": {
+          "bytes": 23253,
+          "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+        }
+      }
+    ],
+    "candidateOnlyRelativePaths": [
+      "AGENTS.md",
+      "开发备忘录.md",
+      "提示词.md"
+    ],
+    "root05OnlyRelativePaths": [
+      "artifacts/roadwork-lifecycle-JDa3GL/actual-payment-events.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-after-import-clone.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-after-import-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-assembled.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-before-clone-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-parts.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-plus24.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-tick24-clone.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/carried-tick24-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/complete.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/final-observed.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/observed-inputs.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/pickup.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-after-import-clone.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-after-import-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-assembled.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-before-clone-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-before-clone.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-parts.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-plus24.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-tick24-clone.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/reopened-tick24-live.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/request.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/stage-trace.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/work-mid-first-at-least23.json",
+      "artifacts/roadwork-lifecycle-JDa3GL/work-start.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/actual-procurement-events.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/actual-supplier-arrival.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/cancelled-plus24.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/cancelled.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/final-observed.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/material-depleted.json",
+      "artifacts/roadwork-remote-scarcity-6Fw3cv/request.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/actual-results.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-0.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-1.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-10.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-11.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-12.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-13.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-14.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-15.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-16.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-17.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-2.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-3.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-4.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-5.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-6.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-7.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-8.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/bad-9.save.json",
+      "artifacts/roadwork-replacement-bad-saves-HTqnoW/valid-original.save.json",
+      "artifacts/roadwork-replacement-lHY0wl/actual-presence.json",
+      "artifacts/roadwork-replacement-lHY0wl/after-death-before-pickup.json",
+      "artifacts/roadwork-replacement-lHY0wl/after-death-parts.json",
+      "artifacts/roadwork-replacement-lHY0wl/before-death.json",
+      "artifacts/roadwork-replacement-lHY0wl/final-observed.json",
+      "artifacts/roadwork-replacement-lHY0wl/reader24.json",
+      "evidence/transfer/57216/carried.save.json",
+      "evidence/transfer/57216/destination-full.save.json",
+      "evidence/transfer/57216/joint-clinical-transfer.save.json",
+      "evidence/transfer/57216/partial.save.json",
+      "evidence/transfer/57216/ready-before-pickup.save.json",
+      "evidence/transfer/57216/real-W-receipt.json",
+      "evidence/transfer/57216/real-W-received.save.json",
+      "evidence/transfer/57216/received.save.json",
+      "evidence/transfer/57216/sealed-before-start.save.json",
+      "evidence/transfer/57216/source-kit-capacity.save.json",
+      "evidence/transfer/57216/stranded.save.json"
+    ],
+    "fixtureComparisons": [
+      {
+        "relativePath": "tests/public-employment-fixture.ts",
+        "candidate": {
+          "bytes": 6394,
+          "sha256": "a74b625fdfc1e50c916b202c66a03c14f984c526161a0c59d94e3a02bfb4c37b"
+        },
+        "root05": {
+          "bytes": 8522,
+          "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+        },
+        "same": false
+      },
+      {
+        "relativePath": "tests/roadwork-replacement.test.ts",
+        "candidate": {
+          "bytes": 18722,
+          "sha256": "4700d1ef728d157f539c28311c84717c3db20cca67fe26919b02e4f22014423c"
+        },
+        "root05": {
+          "bytes": 23253,
+          "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+        },
+        "same": false
+      }
+    ],
+    "comparisonIsManifestMetadataNotFreshSourceOrInputMapVerification": true
+  },
+  "safeExcludedMetadata": [
+    {
+      "path": "ROOT09-collision-self-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-npc-tread-motion-20261004-01/joint-prototype-v1-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-npc-tread-motion-20261004-01/joint-prototype-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-npc-tread-motion-20261004-01/prototype-v2-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-npc-tread-motion-20261004-01/prototype-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-npc-tread-motion-20261004-01/baseline/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-sanitation-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-visual-city-life-20261004-01/candidate-v3/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-visual-city-life-20261004-01/before-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-visual-city-life-20261004-01/candidate/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-visual-city-life-20261004-01/candidate-v2/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-public-employment-transfer-20261004-01/original02-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-public-employment-transfer-20261004-01/original-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-public-employment-transfer-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/candidate-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-integrated-fixture-cause-readonly-20261004-01/candidate02-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-post-stair-economy14-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-tread-motion-20261004-01/source-v1-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-tread-motion-20261004-01/source-v3-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-tread-motion-20261004-01/source-v2-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-tread-motion-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-roadwork-fixture-20261004-01/source-v1-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-roadwork-fixture-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-integration-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-integrated-final-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-root-final-source-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-root-production-candidate02-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-root-production-candidate03-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-root-production-candidate04-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-legacy-premises-20261004-01/old18-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-boot-aabb-candidate-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-live-reader-failure-20261004-01/baseline-source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-save-observer-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-live-reader-candidate-20261004-01/source-v1-as-run/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-native-live-reader-candidate-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-root-production-candidate05-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    },
+    {
+      "path": "ROOT09-final-native-browser-20261004-01/source/node_modules",
+      "reason": "dependency/private/cache/git or symlink"
+    }
+  ],
+  "receiptDeclaration": {
+    "status": "VERIFIED_ORIGINALS",
+    "archive": {
+      "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+      "bytes": 504545705,
+      "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88"
+    },
+    "parts": [
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part001",
+        "bytes": 67108864,
+        "sha256": "c6ef7187149814c9cd7559d5bf2cdc3ad597828b8333c8b27dd7b4dca2067c12"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part002",
+        "bytes": 67108864,
+        "sha256": "956872781dcfd6a1a68380b77c6e862c1ad65ffe0afaa8b52141d6350208fad1"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part003",
+        "bytes": 67108864,
+        "sha256": "39a78f8585e7b7af0f9ae3740530f11c71d81dd7ebf80915bbd0987f6856c020"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part004",
+        "bytes": 67108864,
+        "sha256": "6f5f66856e3c5e1bae835154a4156d3b758be8b5e6076f8482b7f739c396c359"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part005",
+        "bytes": 67108864,
+        "sha256": "c283d3fd03c07beaf3ff8cda3d6b74f9c3b151f9b90c8e324280d8f855d13c67"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part006",
+        "bytes": 67108864,
+        "sha256": "fb399fb288fa5df84057ea0aefe4c81f569caeffd9ae8d4dfbcf0d3cad9cb951"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part007",
+        "bytes": 67108864,
+        "sha256": "e0d17258babdf3b2acb3a300c18017046dabe63c813095be94381635ac00d568"
+      },
+      {
+        "name": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part008",
+        "bytes": 34783657,
+        "sha256": "3f675fd8990d24c796a08cc9295eea14521ab2c0ed1e613ffb4c83fc74ab28ba"
+      }
+    ],
+    "credentialPatternMatches": 0,
+    "crcError": null,
+    "memberSHAErrorCount": 0,
+    "uploadStatus": "NOT_ATTEMPTED",
+    "newLibraryIDs": [],
+    "completeGoal": false,
+    "independentRestoredVerifierStatus": "RUNNING_PARENT_DECLARED_NOT_READ_BY_THIS_REVIEW"
+  },
+  "stageLimits": [
+    "Only JSON control metadata and prior proof records read; no raw/source file payloads, archive/parts payloads, .git, private/dependency trees or symlink paths opened.",
+    "No hashing/re-hashing, ZIP opening, archive extraction, compile, test, verifier execution, Library or closed-group writes.",
+    "Current manifest/producer receipt SHA and CRC values are producer-reported; independent restored verification result is not inferred or borrowed.",
+    "Prior saved actual SHA/bytes were compared against current manifest declarations. This stage does not freshly re-hash original control bytes.",
+    "Review and finalplan self manifests are present and byte-size-aligned; their current SHA values were not independently rehashed here.",
+    "Manifest status PACKING and plan archiveCreated/partsCreated/uploaded false are frozen pre-pack snapshots; receipt VERIFIED_ORIGINALS records the later producer stage.",
+    "Historical missing originals remain limited: 34 prior historical runs /25 unique path-SHA pairs per frozen plan. No reconstruction or all-historical replay claim.",
+    "Native candidate whole258 differs from root05 corrected fixture versions; runtime/subset agreement does not establish whole-source equality.",
+    "Producer completeGoal=false and upload NOT_ATTEMPTED/newLibraryIDs empty preserved; no all-project/full-upload claim."
+  ],
+  "readMetadataPaths": [
+    "/workspace/yunshan-work/ROOT09-final-execution-plan-20261004-01.json",
+    "/workspace/yunshan-work/ROOT09-delivery-final-originals-20261004-01/source-files-before.json",
+    "/workspace/yunshan-work/ROOT09-delivery-final-originals-20261004-01/collection-receipt.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-collision-self-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-npc-tread-motion-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-sanitation-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-visual-city-life-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-public-employment-transfer-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-fiscal-readonly-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-integrated-fixture-cause-readonly-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT09-post-stair-economy14-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/ROOT10-natural-public-staffing-feasibility-20261004-01.verification.json",
+    "/workspace/yunshan-work/ROOT09-originals-inventory-review-20261004-01/REVIEW-OUTPUTS-MANIFEST.json",
+    "/workspace/yunshan-work/ROOT09-delivery-final-plan-20261004-01/FINAL-PLAN-FILES.json",
+    "/workspace/yunshan-work/ROOT09-delivery-final-plan-20261004-01/CLOSED.json"
+  ]
+}

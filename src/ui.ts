@@ -781,6 +781,12 @@ export class CityUI {
     const environment = extension.environment;
     const institutions = extension.institutions;
     this.ref('public-services').replaceChildren(...[['水质', `${Math.round(environment.waterQuality)}%`], ['生态多样性', `${Math.round(environment.biodiversity)}%`], ['风暴风险', `${Math.round(environment.stormRisk)}%`], ['教育 / 医疗', `${Math.round(institutions.education)} / ${Math.round(institutions.medical)}`], ['福利 / 文化', `${Math.round(institutions.welfare)} / ${Math.round(institutions.culture)}`]].map(([label, value]) => field(label, value)), element('p', 'note', environment.lastDisaster ? `最近灾害：${environment.lastDisaster}` : '最近暂无灾害记录。'));
+    const review=this.actions.publicEmploymentStatus?.();
+    if(review){
+      this.ref('public-services').append(element('p','note',review.rule),element('p','note',review.reason));
+      for(const actor of review.actors.slice(0,12))this.ref('public-services').append(element('p','note',`${actor.name} · ${actor.siteName}：${
+        review.standingActive ? '常备工资规则有效；次日日班待审议' : `本日已签${actor.fundedMinutes}分钟，实做${actor.actualMinutes.toFixed(1)}，可继续${actor.remainingMinutes.toFixed(1)}`}。`));
+    }
     const statuses = { suspected: '待核查', reported: '已举报', investigating: '调查中', prosecuted: '已起诉', cleared: '已澄清' };
     const onSite = this.atKind('hall', 'core', 'police') || this.atFacility('data', 'archives', 'treasury', 'administration');
     const actions = element('div');

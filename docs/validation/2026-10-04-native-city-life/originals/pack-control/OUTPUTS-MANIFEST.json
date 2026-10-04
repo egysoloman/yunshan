@@ -1,0 +1,91 @@
+{
+  "status": "OUTPUTS_VERIFIED_BEFORE_OWNER_CLOSURE",
+  "fileCountExcludingSelfAndClosure": 14,
+  "totalBytesExcludingSelfAndClosure": 1013929934,
+  "files": [
+    {
+      "path": "EXECUTION-SUMMARY.json",
+      "bytes": 7089,
+      "sha256": "e2b0f9eff4e70ffeda222d331c316305a4beef11358f0aa2ed93693ce3eea1db",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1988,
+      "sha256": "ea6fa9f65db6deae9ce65614d7003623483f1eb07f3612ca3a6e91adabef2ea9",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+      "bytes": 504545705,
+      "sha256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part001",
+      "bytes": 67108864,
+      "sha256": "c6ef7187149814c9cd7559d5bf2cdc3ad597828b8333c8b27dd7b4dca2067c12",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part002",
+      "bytes": 67108864,
+      "sha256": "956872781dcfd6a1a68380b77c6e862c1ad65ffe0afaa8b52141d6350208fad1",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part003",
+      "bytes": 67108864,
+      "sha256": "39a78f8585e7b7af0f9ae3740530f11c71d81dd7ebf80915bbd0987f6856c020",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part004",
+      "bytes": 67108864,
+      "sha256": "6f5f66856e3c5e1bae835154a4156d3b758be8b5e6076f8482b7f739c396c359",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part005",
+      "bytes": 67108864,
+      "sha256": "c283d3fd03c07beaf3ff8cda3d6b74f9c3b151f9b90c8e324280d8f855d13c67",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part006",
+      "bytes": 67108864,
+      "sha256": "fb399fb288fa5df84057ea0aefe4c81f569caeffd9ae8d4dfbcf0d3cad9cb951",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part007",
+      "bytes": 67108864,
+      "sha256": "e0d17258babdf3b2acb3a300c18017046dabe63c813095be94381635ac00d568",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip.part008",
+      "bytes": 34783657,
+      "sha256": "3f675fd8990d24c796a08cc9295eea14521ab2c0ed1e613ffb4c83fc74ab28ba",
+      "digestEvidence": "ACTUAL_VERIFIED_PRODUCER_AND_OR_INDEPENDENT_FULL_STREAM"
+    },
+    {
+      "path": "collection-receipt.json",
+      "bytes": 2245,
+      "sha256": "0f0977ec150e9e9c9728d1cb28b3877ab95ef975e02e8fac3195a42e0690a1be",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "source-files-after.json",
+      "bytes": 2401674,
+      "sha256": "52272181768ca868ed17647e38b4eefa0073d0ffefee3b1dbfef964df623e65e",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    },
+    {
+      "path": "source-files-before.json",
+      "bytes": 2425528,
+      "sha256": "7913f87446b6995ab0d8c32ae491859c773642a7ed789a0f551ffddef453ab07",
+      "digestEvidence": "METADATA_DIRECT_SHA256"
+    }
+  ]
+}

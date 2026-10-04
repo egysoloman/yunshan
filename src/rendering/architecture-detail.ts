@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { getFloorDimensions } from '../access';
-import { boundaryLoops, getBuildingBody, getFloorPlanRoofRegions, type BuildingBody, type FloorPlan, type RoofRegion, type Wall } from '../architecture-floor-plan';
+import { boundaryLoops, getBuildingBody, getFloorPlanRoofRegions, wallPanels, type BuildingBody, type FloorPlan, type RoofRegion, type Wall } from '../architecture-floor-plan';
 import type { Building, Quality, Vec3 } from '../types';
 
 export const ARCHITECTURE_DETAIL_DISTANCE = 180;
@@ -192,6 +192,22 @@ function buildProgramArchitectureDetails(building: Building, body: BuildingBody,
       if (floor === 0) for (const [from, to] of wall.opening ? [[0, wall.opening.from], [wall.opening.to, length]] : [[0, length]]) {
         if (to - from < .8) continue;
         mounted('masonry', wall, from + .2, to - .2, plan.y, plan.y + .4, 0, n, STONE, floor);
+      }
+    }
+    // Ground-floor market/residential bays use timber divisions inside the
+    // original opaque panel. The windows and all body/door clearances keep
+    // their authoritative volume; this gives long blank walls a human scale.
+    if (floor === 0 && (building.kind === 'market' || building.kind === 'home')) {
+      const panels = wallPanels(plan).filter(panel => panel.kind === 'solid' && panel.top - panel.bottom >= .8 && Math.max(panel.rect.x1 - panel.rect.x0, panel.rect.z1 - panel.rect.z0) >= 4)
+        .sort((a, b) => Math.hypot((a.rect.x0 + a.rect.x1) / 2 - focus.x, (a.rect.z0 + a.rect.z1) / 2 - focus.z) - Math.hypot((b.rect.x0 + b.rect.x1) / 2 - focus.x, (b.rect.z0 + b.rect.z1) / 2 - focus.z)).slice(0, 10);
+      for (const panel of panels) {
+        const r = panel.rect, alongX = r.x1 - r.x0 > r.z1 - r.z0, lo = alongX ? r.x0 : r.z0, hi = alongX ? r.x1 : r.z1;
+        for (let u = q(lo + 3.2); u < hi - .4; u += 3.2) {
+          put('frame', alongX ? u - .1 : r.x0, alongX ? u + .1 : r.x1, plan.y + panel.bottom, plan.y + panel.top,
+            alongX ? r.z0 : u - .1, alongX ? r.z1 : u + .1, '#90724e', 0);
+        }
+        const bandY = q(plan.y + panel.bottom + .4);
+        put('frame', r.x0, r.x1, bandY, bandY + .2, r.z0, r.z1, '#a88c62', 0);
       }
     }
   }
@@ -402,7 +418,7 @@ export function buildArchitectureDetails(building: Building, nearFloor = 0, limi
 export class ArchitectureDetailManager {
   readonly group = new THREE.Group();
   private readonly cube = new THREE.BoxGeometry(1, 1, 1);
-  private readonly solid = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .82, metalness: .025 });
+  private readonly solid = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .82, metalness: .025, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
   private readonly light = new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#e4a956', emissiveIntensity: .42, roughness: .65 });
   private readonly entries = new Map<string, DetailEntry>();
   private created = 0;
@@ -434,7 +450,7 @@ export class ArchitectureDetailManager {
       if (entry.interiorKey !== key) {
         const ceiling = activeFloor !== null && activeFloor < 0 ? activeFloor + 1 : activeFloor;
         for (const reference of entry.references) {
-          const hidden = activeFloor !== null && (reference.floor > ceiling! || reference.roof && reference.floor >= activeFloor);
+          const hidden = activeFloor !== null && (reference.floor > ceiling! || !getBuildingBody(building) && reference.roof && reference.floor >= activeFloor);
           reference.mesh.setMatrixAt(reference.index, hidden ? new THREE.Matrix4().makeScale(0, 0, 0) : reference.matrix);
           reference.mesh.instanceMatrix.needsUpdate = true;
         }

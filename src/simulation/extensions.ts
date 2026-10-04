@@ -609,7 +609,12 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       if (index === null || (npc.education ?? 0) < (index === 2 ? 3 : 2) || s.treasury < 100 || !cool(`appoint:${npc.id}`)) return fail('资格教育不足、公共资金不足100文或尚在一天任命间隔。');
       const guild = e.organizations.find(organization => organization.id === 'org-guild' && organization.kind === 'guild');
       if (simulation.publicBudgetSnapshot().available < 100 || !guild || !finite(guild.funds) || guild.funds < 0 || guild.funds > 1e9 - 100) return fail('已承诺的公共工资与预算须受保护；百工会培训基金须能接收100文拨款。');
+      if (!simulation.canRecordPublicAppointment(npc,b)) return fail('原历史公职合同尚不能安全衔接本次岗位，或转岗记录已满；任命与100文培训款保持原状等待处理。');
+      const beforeAppointment = { fromWorkId:npc.workId,fromRole:npc.role,treasuryBefore:s.treasury,guildBefore:guild.funds };
       const appointed = (['official', 'council', 'scientist'] as const)[index]; npc.role = appointed; npc.workId = b.id; npc.destinationId = null; npc.route = []; npc.routeIndex = 0; npc.historyTags = [...new Set([...(npc.historyTags ?? []), '公共职务任命'])]; publicFunds('player', -100, '公共岗位任命与培训', b.districtId); guild.funds += 100; cooldown(`appoint:${npc.id}`, 1440);
+      simulation.recordPublicAppointment({ at:e.lastUpdate,tick:s.tick,actorId:npc.id,appointedBy:'player',...beforeAppointment,
+        toWorkId:b.id,toRole:appointed,educationAtAppointment:npc.education??0,playerPosition:{...p.position},actorPosition:{...npc.position},
+        trainingFee:100,guildId:'org-guild',treasuryAfter:s.treasury,guildAfter:guild.funds });
       simulation.emitEvent({ type: 'public-appointment-funded', amount: 100, citizenId: npc.id, siteId: b.id, districtId: b.districtId, purpose: guild.id });
       return success(`已任命${npc.name}为${appointed === 'scientist' ? '科研人员' : appointed === 'council' ? '议员' : '公务员'}，工作场所与权限机会已改变；100文职业培训经费已拨入${guild.name}基金，培训尚待实际开展。`);
     }

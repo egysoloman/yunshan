@@ -1,0 +1,30 @@
+{
+  "index": 12,
+  "pageId": 1,
+  "receivedAt": "2026-10-04T07:34:02.151Z",
+  "method": "importSave",
+  "before": {
+    "invocation": 12,
+    "performanceMs": 409320.30000000075,
+    "tick": 97,
+    "paused": true,
+    "speed": 1,
+    "hour": 10.095833333333333,
+    "mode": "jet",
+    "jetSpeed": 85,
+    "activeAircraftId": "aircraft-air-pad-military",
+    "playerPosition": {
+      "x": 1160,
+      "y": 298.65000000000003,
+      "z": 383.70000000000005
+    }
+  },
+  "afterTick": 97,
+  "outcome": {
+    "ok": false,
+    "message": "读档失败：无效存档字段：native route geometry。"
+  },
+  "filename": "012-importSave-original.json",
+  "bytes": 1732618,
+  "sha256": "74467d2f3102c0ca8885ba1a4c006b5dea164e90b3cab56dd31466856d09b592"
+}

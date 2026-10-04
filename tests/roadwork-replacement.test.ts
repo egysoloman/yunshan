@@ -7,14 +7,26 @@ import { assembleSave, partitionSave } from '../src/persistence/partition.ts';
 import { Simulation } from '../src/simulation.ts';
 import { isRoadOpen } from '../src/roads.ts';
 import { roadworksWorld, cash, exact24, until } from './roadworks-fixture.ts';
-import { FLOOR_PLAN_PROFILE, getBuildingUsePoints } from '../src/architecture-floor-plan.ts';
+import { FLOOR_PLAN_PROFILE, getBuildingUsePoints, blocksFloorPlanMovement } from '../src/architecture-floor-plan.ts';
 import { core, workPoint } from './power-fixture.ts';
+
+/** PRE-constructor map prerequisite for the marked-warehouse case. The old
+ * straight access road enters the rear wall before its actual front door. */
+function declareCoherentWarehouseAccess(world: ReturnType<typeof roadworksWorld>) {
+  const warehouse=world.buildings.find(b=>b.id==='power-11')!,edge=world.edges.find(e=>e.id==='roadworks-original-warehouse-access')!;
+  const from=world.nodes.find(n=>n.id===edge.from)!.position,to=world.nodes.find(n=>n.id===edge.to)!.position;
+  const outsideX=warehouse.position.x+warehouse.width/2+5,outsideZ=to.z+5;
+  edge.points=[{...from},{x:from.x,y:from.y,z:from.z+5},{x:outsideX,y:from.y,z:from.z+5},{x:outsideX,y:to.y,z:outsideZ},{x:to.x,y:to.y,z:outsideZ},{...to}];
+  edge.length=edge.points.slice(1).reduce((sum,point,i)=>sum+Math.hypot(point.x-edge.points[i].x,point.y-edge.points[i].y,point.z-edge.points[i].z),0);
+  assert.deepEqual(edge.points[0],from);assert.deepEqual(edge.points.at(-1),to);
+  for(let i=1;i<edge.points.length;i++)assert.equal(blocksFloorPlanMovement(warehouse,0,edge.points[i-1],edge.points[i],.35,1.72),false,'declared access must follow the actual exterior and front doorway');
+}
 
 function setup(withOfficers = true, markedWarehouse = false) {
   const world = roadworksWorld();
   world.river = [{x:88,y:0,z:-30},{x:88,y:0,z:70}];
   world.edges = world.edges.filter(e => e.id !== 'power-road-10' && !e.id.startsWith('roadworks-detour-'));
-  if(markedWarehouse){const warehouse=world.buildings.find(b=>b.id==='power-11')!;warehouse.floorPlanProfile=FLOOR_PLAN_PROFILE;warehouse.functionPoints=Array.from({length:warehouse.floors},(_,floor)=>getBuildingUsePoints(warehouse,floor)).flat();}
+  if(markedWarehouse){const warehouse=world.buildings.find(b=>b.id==='power-11')!;warehouse.floorPlanProfile=FLOOR_PLAN_PROFILE;warehouse.functionPoints=Array.from({length:warehouse.floors},(_,floor)=>getBuildingUsePoints(warehouse,floor)).flat();declareCoherentWarehouseAccess(world);}
   const sim = new Simulation(world); sim.command({type:'speed',value:8});
   const actor = sim.state.citizens.find(c => c.workId === 'power-9' && sim.state.extension!.actorProfiles[c.id].age >= 18)!;
   assert(actor); actor.position={x:50,y:.6,z:19}; core(sim).activities[actor.id]='work'; core(sim).decisionAt[actor.id]=480+180;
@@ -150,6 +162,26 @@ test('cancelling a pending replacement returns only unearned escrow and never re
   assert.equal(job.status,'cancelled');assert.equal(job.refunded,escrow);assert.equal(job.escrow,0);assert.equal(sim.state.treasury,treasury+escrow);
   assert.equal(job.paidGross,paid);assert.deepEqual(job.receipts,purchase);assert.deepEqual(sim.state.roadworks!.stock[0],material);assert.equal(source.inventory,inventory);
   assert.equal(job.consumedUnits,0);assert(Math.abs(cash(sim)-before)<1e-5);exact24(sim);
+});
+
+test('the marked-warehouse access prerequisite changes only declared road geometry and preserves every zero-step actor and money/stock book',()=>{
+  const original=roadworksWorld();original.river=[{x:88,y:0,z:-30},{x:88,y:0,z:70}];original.edges=original.edges.filter(e=>e.id!=='power-road-10'&&!e.id.startsWith('roadworks-detour-'));
+  const warehouse=original.buildings.find(b=>b.id==='power-11')!;warehouse.floorPlanProfile=FLOOR_PLAN_PROFILE;warehouse.functionPoints=Array.from({length:warehouse.floors},(_,floor)=>getBuildingUsePoints(warehouse,floor)).flat();
+  const corrected=structuredClone(original);declareCoherentWarehouseAccess(corrected);
+  const oldEdge=original.edges.find(e=>e.id==='roadworks-original-warehouse-access')!,newEdge=corrected.edges.find(e=>e.id===oldEdge.id)!;
+  assert.equal(oldEdge.length,80);assert.equal(newEdge.length,150);assert.equal(warehouse.stairGeometryRevision,undefined);assert.deepEqual(corrected.buildings,original.buildings);assert.deepEqual(corrected.nodes,original.nodes);
+  assert.deepEqual({...corrected,edges:corrected.edges.filter(e=>e.id!==oldEdge.id)},{...original,edges:original.edges.filter(e=>e.id!==oldEdge.id)});
+  assert.deepEqual({...newEdge,points:oldEdge.points,length:oldEdge.length},oldEdge);
+  const before=new Simulation(original),after=new Simulation(corrected);
+  assert.equal(before.state.tick,0);assert.equal(after.state.tick,0);assert.deepEqual(after.state.citizens,before.state.citizens);assert.deepEqual(after.state.extension!.actorProfiles,before.state.extension!.actorProfiles);
+  const financialKeys=['player','treasury','bankBalance','loan','banking','shops','extension','playerLabor','roadworks','power','education','clinical','trade','governance','family','familyEducation','shopLifecycle','culture','homeRest','districts'] as const;
+  for(const key of financialKeys)assert.deepEqual(Reflect.get(after.state,key),Reflect.get(before.state,key),'zero-step unchanged '+key);
+  assert.deepEqual(core(after),core(before),'every original runtime book and cursor is unchanged at zero steps');assert.equal(cash(after),cash(before));
+  const evidence=process.env.YUNSHAN_ROADWORK_ACCESS_EVIDENCE;
+  if(evidence){mkdirSync(evidence,{recursive:true});const digest=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)??'undefined').digest('hex');
+    writeFileSync(resolve(evidence,'before.save.json'),before.exportSave());writeFileSync(resolve(evidence,'after.save.json'),after.exportSave());writeFileSync(resolve(evidence,'before.world.json'),JSON.stringify(original));writeFileSync(resolve(evidence,'after.world.json'),JSON.stringify(corrected));
+    writeFileSync(resolve(evidence,'zero-step-access.json'),JSON.stringify({ticks:[before.state.tick,after.state.tick],actors:before.state.citizens.length,actorHashes:[digest(before.state.citizens),digest(after.state.citizens)],profileHashes:[digest(before.state.extension!.actorProfiles),digest(after.state.extension!.actorProfiles)],cash:[cash(before),cash(after)],runtimeHashes:[digest(core(before)),digest(core(after))],books:financialKeys.map(key=>({key,before:digest(Reflect.get(before.state,key)),after:digest(Reflect.get(after.state,key))})),roadBefore:oldEdge,roadAfter:newEdge,stairRevisionUnchanged:warehouse.stairGeometryRevision===undefined},null,2)+'\n');}
+
 });
 
 test('an original lot inside a marked building remains retained until a lawful interior recovery route exists',()=>{
