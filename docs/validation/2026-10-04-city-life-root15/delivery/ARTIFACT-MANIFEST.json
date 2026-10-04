@@ -1,0 +1,73 @@
+{
+  "createdAt": "2026-10-04T22:45:26.110788+00:00",
+  "inputGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "commit": "42a50aa7105ea2df6c3ff32a1ec4cef10482547c",
+  "archives": [
+    {
+      "file": "云山-ROOT15-最新源码.zip",
+      "bytes": 15520353,
+      "sha256": "e18693d3d83c2fe9cc685f1bbf8b70fda73f3c779dacf4654f308bc57e468191",
+      "payloadEntries": 550,
+      "allCRCAndEntrySHA256Readback": true
+    },
+    {
+      "file": "云山-ROOT15-完整原始证据.zip",
+      "bytes": 36992296,
+      "sha256": "bb43caa81f7ce6245852449922464cd2c320564a62dad2210ee071a35ffc676c",
+      "payloadEntries": 461,
+      "allCRCAndEntrySHA256Readback": true
+    }
+  ],
+  "selectedSecretPatternMatches": 0,
+  "files": [
+    {
+      "file": "GIT-PUSH-RECEIPT.json",
+      "bytes": 737,
+      "sha256": "8d92cee2bf579d65534be03e930800b7fec27776156a0649a9eb7af1d3b5d4ca"
+    },
+    {
+      "file": "云山-ROOT15-夜景原图.png",
+      "bytes": 558751,
+      "sha256": "57ff9e525570be9ef3072e7d5d62299ef3dc720f7be321806bd8e66ca6b5824d"
+    },
+    {
+      "file": "云山-ROOT15-完整38领域矩阵.md",
+      "bytes": 30213,
+      "sha256": "9dc0fa70d22a1ef831dd40fb4e33ca7c5d976d4fec24ec0ceb9a3fe7396dedee"
+    },
+    {
+      "file": "云山-ROOT15-完整原始证据.zip",
+      "bytes": 36992296,
+      "sha256": "bb43caa81f7ce6245852449922464cd2c320564a62dad2210ee071a35ffc676c"
+    },
+    {
+      "file": "云山-ROOT15-室内原图.png",
+      "bytes": 534692,
+      "sha256": "1943b4645e67c12b74319ffefa7dadfa0d6531a5ba02c0230ef57e312fab7a00"
+    },
+    {
+      "file": "云山-ROOT15-最新源码.zip",
+      "bytes": 15520353,
+      "sha256": "e18693d3d83c2fe9cc685f1bbf8b70fda73f3c779dacf4654f308bc57e468191"
+    },
+    {
+      "file": "云山-ROOT15-街面原图.png",
+      "bytes": 633406,
+      "sha256": "5712d152d7924845ebd66e0fa7677d32633768cca6f118297cb592083ef21814"
+    },
+    {
+      "file": "云山-ROOT15-阶段报告.md",
+      "bytes": 32136,
+      "sha256": "887d7eb3534ea3ca238fbae9d2af6be53aec05ade07b8f9732f8d09038a5223e"
+    },
+    {
+      "file": "开发备忘录.md",
+      "bytes": 446815,
+      "sha256": "30a48ad9110c2b674e52b43f987d916e7bc93c6984ba2ec9d5e0f417fb0663fb"
+    }
+  ],
+  "LibraryStatus": "FINAL_BATCH_NOT_RUN",
+  "sourceArchiveSHA256": "e18693d3d83c2fe9cc685f1bbf8b70fda73f3c779dacf4654f308bc57e468191",
+  "sourceInputGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "metadataCorrection": "The first outer manifest mislabeled source archive SHA as sourceGraph. Renamed before Library; archive payloads and original inputGraph are unchanged."
+}

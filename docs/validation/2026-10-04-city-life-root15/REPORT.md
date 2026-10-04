@@ -1,3 +1,5 @@
+最终原文件交付：[Git下载目录](delivery/README.md)。实现42a50aa已正常推送；最终Library连接失败/newID0，原ZIP与回执保留，最新后续交付状态见当前备忘录。下文保留阶段冻结时的事实，不将原pending改成当时已发生。
+
 # ROOT15：真实城市生活闭环集成及未完成范围
 
 截至 2026-10-04 22:33 UTC，完整游戏仍未完成。完整隔离套件已在原cap3600结束为TIMEOUT_PARTIAL（359测试/280通过/0断言失败/79取消），不是全套PASS。原14名居民真实购粮与需求恢复、6名公共教育消费者钱料与劳动闭环已通过；公共医疗 actual03 在原240正常main帧界内 FAIL，耗材和治疗均为0；租户第三轮经营 NOT_OBSERVED，候选未安装；最新4f默认新城原一天守恒/存活/科研审计及终档未来24已PASS，财政下降且steadyState=false；美术总体 ART FAIL、macOS 实机 NOT_RUN、长期财政稳态未验证。完整 [38领域矩阵](REQUIREMENTS-MATRIX.md) 保留全部目标，不恢复已排除的固定四阶段排序。
