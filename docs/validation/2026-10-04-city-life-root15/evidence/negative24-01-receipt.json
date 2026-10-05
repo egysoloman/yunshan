@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-04T19:18:25.794692+00:00",
+  "endedAt": "2026-10-04T19:19:18.891167+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT15-door-food-integration-20261004-01/food-driver-as-used04.mts",
+    "--mode",
+    "negative24",
+    "--source",
+    "/workspace/yunshan-work/ROOT15-door-food-integration-20261004-01/source",
+    "--out",
+    "/workspace/yunshan-work/ROOT15-door-food-integration-20261004-01/outputs/negative24-01/original-artifacts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 312,
+  "inputsStable": true,
+  "rawSHA256": "3710d20aff456a1f55ac70b1643f8f60cef70503e5e26fccae23eed223e6df75",
+  "ownedPid": 104196,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 104204,
+      "state": "Z",
+      "parent": 1,
+      "group": 104196,
+      "session": 104196,
+      "startTicks": 7233057
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

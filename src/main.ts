@@ -1,12 +1,18 @@
 import * as THREE from 'three';
 import './style.css';
-import { createWorld, findPath } from './world';
 import { Simulation } from './simulation';
+import { createCityLifeProductCity, PRODUCT_CITY_LAYOUT } from './product-city';
 import { CityRenderer } from './renderer';
 import { CityUI } from './ui';
 import { PlayerController } from './controller';
+import { activeAircraft, AIRCRAFT_COMMANDS, getAviationPads, setAircraftControls } from './aviation';
+import { AviationRenderer } from './aviation-renderer';
 import { canAccessFloor } from './access';
+import { JourneyNavigation } from './journey';
+import type { JourneyNavigationPlan, TransitJourney, WalkingJourney } from './journey';
+import { releaseRoadExitPermit } from './roads';
 import { readSavedGame, writeSavedGame } from './persistence';
+import { savedWorldFingerprint, selectSavedWorld } from './persistence/world-layout';
 import type { Building, Command, Quality, SimState, UIActions, Vec3, ViewMode, ViewState } from './types';
 
 const PREF_KEY = 'yunshan.preferences.v1';
@@ -17,8 +23,15 @@ stage.setAttribute('aria-label', '云山巨城三维世界，拖动鼠标环顾�
 app.append(stage);
 
 const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-const world = createWorld();
-const simulation = new Simulation(world);
+let previousSave: string | null = null;
+let startupReadFailed = false;
+try { previousSave = await readSavedGame(); } catch { startupReadFailed = true; }
+let startupLayoutError = '';
+let selection: ReturnType<typeof selectSavedWorld>;
+try { selection = selectSavedWorld(previousSave, PRODUCT_CITY_LAYOUT); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
+let autosaveAllowed = !startupReadFailed && !startupLayoutError;
+const world = selection.world;
+const simulation = await createCityLifeProductCity(world);
 let city: CityRenderer;
 try {
   city = new CityRenderer(stage, world);
@@ -47,13 +60,15 @@ city.setQuality(settings.quality);
 city.setRenderDistance(settings.renderDistance);
 city.setDynamicResolution(settings.dynamicResolution);
 
+const aviationRenderer = new AviationRenderer(city.scene, world);
+
 let ui: CityUI;
 let targetDistrict: string | null = null;
 let view: ViewState;
 let notice = '';
 let fps = 0;
 let currentInterior: string | null = null;
-const controller = new PlayerController(city.camera, city.renderer.domElement, world, onKey, canAccessBuilding, () => simulation.state.voxels);
+const controller = new PlayerController(city.camera, city.renderer.domElement, world, onKey, canAccessBuilding, () => simulation.state.voxels, () => simulation.state);
 
 const targetMarker = new THREE.Group();
 const targetMaterial = new THREE.MeshBasicMaterial({ color: 0xeabf69, transparent: true, opacity: 0.65 });
@@ -69,6 +84,10 @@ const navigationPath = new THREE.Line(new THREE.BufferGeometry(), new THREE.Line
 navigationPath.renderOrder = 3;
 navigationPath.visible = false;
 city.scene.add(navigationPath);
+let navigationJourney: WalkingJourney | null = null;
+let transitJourney: TransitJourney | null = null;
+const journeyNavigation = new JourneyNavigation(world);
+let navigationPlan: JourneyNavigationPlan | null = null;
 
 const placedBlocks = new THREE.InstancedMesh(new THREE.BoxGeometry(0.2, 0.2, 0.2), new THREE.MeshStandardMaterial({ color: '#d0b784', roughness: 0.9 }), 4096);
 placedBlocks.count = 0;
@@ -78,33 +97,28 @@ let blocksVersion = '';
 const matrix = new THREE.Matrix4();
 
 const actions: UIActions = {
+  inspectBuildingAlteration: buildingId => simulation.inspectBuildingAlteration({ buildingId }),
+  publicEmploymentStatus: () => simulation.publicServiceCoverage().transferReview ?? null,
+  isAtBuildingFunctionPoint(buildingId, purpose) {
+    const building = world.buildings.find(site => site.id === buildingId);
+    return !!building && simulation.isAtBuildingFunctionPoint(building, simulation.state.player.position, purpose);
+  },
   command: execute,
+  navigateTarget(targetId,preference) { actions.travel(targetId,preference); },
+  navigateAircraft(aircraftId) { const craft = simulation.state.aviation?.aircraft.find(a => a.id === aircraftId); if (craft) setMode(craft.kind, craft.id); },
   setMode,
   setQuality(quality) {
     settings.quality = quality;
     city.setQuality(quality);
     persistPreferences();
   },
-  travel(districtId) {
-    const district = world.districts.find(d => d.id === districtId);
-    if (!district) return;
-    targetDistrict = districtId;
-    const station = world.nodes.find(n => n.districtId === districtId && n.station);
-    targetMarker.position.copy(station?.position ?? district.center);
-    targetMarker.visible = true;
-    const origin = world.nodes.filter(n => n.station).sort((a, b) => distance(simulation.state.player.position, a.position) - distance(simulation.state.player.position, b.position))[0];
-    const path = origin && station ? findPath(world, origin.id, station.id) : [];
-    const route: THREE.Vector3[] = [];
-    for (let i = 1; i < path.length; i++) {
-      const edge = world.edges.filter(e => (e.from === path[i - 1].id && e.to === path[i].id) || (e.to === path[i - 1].id && e.from === path[i].id)).sort((a, b) => a.length - b.length)[0];
-      if (!edge) continue;
-      const points = edge.from === path[i - 1].id ? edge.points : [...edge.points].reverse();
-      route.push(...points.map(p => new THREE.Vector3(p.x, p.y + 2, p.z)));
-    }
-    navigationPath.geometry.dispose();
-    navigationPath.geometry = new THREE.BufferGeometry().setFromPoints(route);
-    navigationPath.visible = route.length > 1;
-    showNotice(`导航至${district.name}。金线沿实际交通网络显示路线，光柱标记目的地。`);
+  travel(targetId, preference = 'walk') {
+    const planned = simulation.command({ type: 'planJourney', targetId, value: preference === 'transit' ? 1 : 0 });
+    if (!planned.ok) return showNotice(planned.message, false);
+    syncNavigation();
+    if (navigationPlan?.unavailable) return showNotice(navigationPlan.unavailable, false);
+    const journey = navigationJourney!;
+    showNotice(preference === 'transit' ? `公共交通方案至${navigationPlan!.destination!.name}；请先步行到首段乘车点，现场查看当前班次与票款。` : `步行导航至${journey.destination.name}，道路与桥面路线约 ${Math.round(journey.metres)} 米。${journey.stairsFromFloor !== null ? '请先在楼梯处按 E 回到一层。' : '金线通往实际入口或停靠点；公开班次可在交通手册查看。'}`);
   },
   interact,
   async save() { await save(true); },
@@ -112,7 +126,7 @@ const actions: UIActions = {
     try {
       const data = await readSavedGame();
       if (!data) return showNotice('当前浏览器还没有存档。', false);
-      loadData(data);
+      await loadData(data);
     } catch { showNotice('浏览器存储不可用，请导入下载的 JSON 存档。', false); }
   },
   exportSave() {
@@ -127,7 +141,7 @@ const actions: UIActions = {
   },
   async importSave(file) {
     if (file.size > 8 * 1024 * 1024) return showNotice('存档超过 8 MB，无法读取。', false);
-    try { loadData(await file.text()); } catch { showNotice('无法读取存档文件。', false); }
+    try { await loadData(await file.text()); } catch { showNotice('无法读取存档文件。', false); }
   },
   setSetting(key, value) {
     if (key === 'renderDistance' && typeof value === 'number') {
@@ -140,18 +154,19 @@ const actions: UIActions = {
     } else if (key === 'simulationDetail' && typeof value === 'number') settings.simulationDetail = THREE.MathUtils.clamp(value, 0.5, 2);
     persistPreferences();
   },
-  resetView() { controller.resetView(); currentInterior = null; city.setInterior(null); showNotice('已回到全城视野。步行视角会回到旅人的实际位置。'); },
+  resetView() { controller.resetView(); showNotice('已调整当前人物的视线；可步行登临观景处，或到租赁点登机俯瞰山城。'); },
 };
 ui = new CityUI(app, world, actions);
 
 try {
-  const previous = await readSavedGame();
-  if (previous) {
-    const result = simulation.importSave(previous);
-    if (result.ok) ui.notify('已恢复这个浏览器中的上次旅程。');
-    else ui.notify('上次存档无法恢复：' + result.message, false);
+  if (previousSave && !startupLayoutError) {
+    const result = simulation.importSave(previousSave);
+    if (result.ok) { syncPlayerView(); ui.notify('已恢复这个浏览器中的上次旅程。'); }
+    else { autosaveAllowed = false; ui.notify('上次存档无法恢复，已保留原存档并停止自动覆盖：' + result.message, false); }
   }
-} catch { ui.notify('浏览器存储不可用；旅程仍可通过导出 JSON 保存。', false); }
+} catch { autosaveAllowed = false; ui.notify('浏览器存储不可用；旅程仍可通过导出 JSON 保存。', false); }
+if (startupLayoutError) ui.notify('上次存档的城市布局无法识别，已保留原存档并停止自动覆盖：' + startupLayoutError, false);
+if (startupReadFailed) ui.notify('浏览器存储不可用；旅程仍可通过导出 JSON 保存。', false);
 
 city.renderer.domElement.addEventListener('webglcontextlost', (event) => {
   event.preventDefault();
@@ -177,14 +192,14 @@ function frame(now: number): void {
   last = now;
   if (document.hidden) return;
   elapsed += delta;
-  // Small movement steps retain wall/voxel collision when a frame takes longer.
-  for (let remaining = delta; remaining > 1e-8;) {
-    const movementDelta = Math.min(remaining, 1 / 30);
-    controller.step(movementDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
-    remaining -= movementDelta;
-  }
+  // Preserve real held-key intervals and small collision steps on slow frames.
+  controller.stepWalkingFrame(now, rawDelta, Boolean(simulation.state.player.vehicleId), simulation.state.paused);
   if (controller.blockedAccess) { showNotice(controller.blockedAccess, false); controller.blockedAccess = null; }
-  if (controller.mode === 'walk' && !simulation.state.player.vehicleId) simulation.state.player.position = controller.walkingPosition;
+  if (controller.mode === 'walk' && !simulation.state.player.vehicleId && !activeAircraft(simulation.state)) {
+    simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
+  }
+  if (activeAircraft(simulation.state)) setAircraftControls(simulation.state, controller.aviationControls);
   simulation.setFocus(controller.position, controller.mode);
   const driveAPI = simulation as Simulation & { isDriving?: (id?: string) => boolean; driveInput?: (throttle: number, turn: number, brake: boolean) => void };
   if (driveAPI.isDriving?.()) {
@@ -194,11 +209,17 @@ function frame(now: number): void {
   const detailAPI = simulation as Simulation & { setDetail?: (detail: number) => void };
   detailAPI.setDetail?.(settings.simulationDetail);
   simulation.step(delta);
-  if (simulation.state.player.vehicleId) controller.syncPassenger(simulation.state.player.position);
+  // Rebuild the gold line after canonical closures/reopening and after state
+  // replacement. The original journey remains the authority for its target.
+  syncNavigation(false);
+  const aircraft = activeAircraft(simulation.state);
+  if (aircraft) controller.syncAircraft(aircraft);
+  else if (simulation.state.player.vehicleId) controller.syncPassenger(simulation.state.player.position);
   const interior = controller.inside ? `${controller.inside.id}:${controller.floor}` : null;
   if (interior !== currentInterior) { city.setInterior(controller.inside?.id ?? null, controller.floor); currentInterior = interior; }
   updateBlocks();
   city.update(simulation.state, elapsed);
+  aviationRenderer.update(simulation.state, elapsed);
   if (now - lastRender >= 1000 / settings.fpsCap - 0.5) {
     city.render();
     lastRender = now;
@@ -227,35 +248,79 @@ function getView(): ViewState {
   const building = controller.inside ?? world.buildings.filter(b => distance(position, b.door) < 18).sort((a, b) => distance(position, a.door) - distance(position, b.door))[0] ?? null;
   const citizen = simulation.state.citizens.filter(n => n.tier !== 'statistical' && distance(position, n.position) < 8).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
   const vehicle = simulation.state.vehicles.filter(v => distance(position, v.position) < 24).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
-  return { mode: controller.mode, ...settings, fps, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, position, nearbyBuilding: building, nearbyCitizen: citizen, nearbyVehicle: vehicle, targetDistrict, inside: Boolean(controller.inside), notice };
+  const aircraft = activeAircraft(simulation.state) ?? simulation.state.aviation?.aircraft.filter(a => distance(position, a.position) < 18).sort((a, b) => distance(position, a.position) - distance(position, b.position))[0] ?? null;
+  return { navigationUnavailable: navigationPlan?.unavailable ?? null, transitJourney, journey: navigationJourney, nearbyAircraft: aircraft, mode: controller.mode, ...settings, fps, drawCalls: city.renderer.info.render.calls, triangles: city.renderer.info.render.triangles, position, nearbyBuilding: building, nearbyCitizen: citizen, nearbyVehicle: vehicle, targetDistrict, inside: Boolean(controller.inside), notice };
 }
 
 function execute(command: Command): void {
-  if (!['setTime', 'pause', 'speed'].includes(command.type) && controller.mode !== 'walk') {
-    showNotice('请切换至步行视角，走近人物、建筑或站点后操作。', false);
+  if (!['setTime', 'pause', 'speed'].includes(command.type) && !AIRCRAFT_COMMANDS.has(command.type) && controller.mode !== 'walk') {
+    showNotice('请先安全落地并退出机舱，走近人物、建筑或站点后操作。', false);
     return;
   }
   const result = simulation.command(command);
   showNotice(result.message, result.ok);
+  if (result.ok && ['boardAircraft', 'leaveAircraft'].includes(command.type)) syncPlayerView();
   if (result.ok && ['leaveVehicle', 'ride', 'drive'].includes(command.type)) controller.syncPassenger(simulation.state.player.position);
+  if (result.ok && ['planJourney', 'cancelJourney', 'leaveVehicle'].includes(command.type)) syncNavigation();
   view = getView();
   ui.update(simulation.state, view);
 }
 
-function setMode(mode: ViewMode): void {
-  controller.setMode(mode, simulation.state.player.position);
+function syncPlayerView(): void {
+  const aircraft = activeAircraft(simulation.state);
+  controller.setMode(aircraft?.kind ?? 'walk', simulation.state.player.position, aircraft);
+  if (aircraft) controller.jetSpeed = simulation.state.aviation!.controls.speed;
   currentInterior = null;
-  city.setInterior(null);
-  const labels = { walk: '步行：WASD 移动，拖动环顾，双击锁定鼠标，E 交互。', drone: '无人机：WASD 飞行，R / Q 升降，滚轮前后，Shift 加速。', jet: '战机：持续向前飞行，拖动改变航向，滚轮调速，V 切换视角。' };
-  showNotice(labels[mode]);
+  city.setInterior(controller.inside?.id ?? null, controller.floor);
+  syncNavigation();
+}
+
+function syncNavigation(force = true): void {
+  const next = journeyNavigation.read(simulation.state, force);
+  if (next === navigationPlan) return;
+  navigationPlan = next;
+  transitJourney = next.transit;
+  navigationJourney = next.walking;
+  targetDistrict = next.destination?.districtId ?? null;
+  targetMarker.visible = !!next.destination;
+  navigationPath.visible = !!navigationJourney;
+  if (next.destination) targetMarker.position.copy(next.destination.position);
+  if (navigationJourney) {
+    navigationPath.geometry.dispose();
+    navigationPath.geometry = new THREE.BufferGeometry().setFromPoints(navigationJourney.points.map(p => new THREE.Vector3(p.x,p.y+.3,p.z)));
+  }
+}
+
+function setMode(mode: ViewMode, aircraftId?: string): void {
+  const active = activeAircraft(simulation.state);
+  if (mode === 'walk') {
+    if (active) return execute({ type: 'leaveAircraft', targetId: active.id });
+    controller.setMode('walk', simulation.state.player.position);
+    return showNotice('WASD 步行，拖动环顾，双击锁定鼠标；E 使用建筑、人物与附近载具。');
+  }
+  if (active) return showNotice('已在航空器机舱内。请返航停稳、退出后，再取得另一架航空器。', false);
+  const craft = simulation.state.aviation?.aircraft.filter(a => a.kind === mode && (!aircraftId || a.id === aircraftId)).sort((a, b) => distance(simulation.state.player.position, a.position) - distance(simulation.state.player.position, b.position))[0];
+  if (!craft) return showNotice('此城市尚无该类航空器停机位。', false);
+  if (distance(simulation.state.player.position, craft.position) <= 6) {
+    if (mode === 'drone' && !craft.reserved) return execute({ type: 'rentAircraft', targetId: craft.id });
+    return execute({ type: 'boardAircraft', targetId: craft.id });
+  }
+  const pad = getAviationPads(world).find(p => p.id === craft.homePadId)!;
+  actions.travel(pad.id);
+  if (navigationPlan?.unavailable) return;
+  showNotice(`导航至${pad.name}。需步行走到机舱门旁${mode === 'drone' ? '支付 24 云币租用并登机；载人无人机使用自动驾驶，无远程摄像模式' : '登机；战机需要同时持有卫士与驾驶员资质'}。`);
 }
 
 function interact(): void {
-  if (controller.mode !== 'walk') return showNotice('切换步行视角后，可以进入建筑、交谈和乘车。', false);
+  const aircraft = activeAircraft(simulation.state);
+  if (aircraft) return execute({ type: aircraft.status === 'parked' ? 'leaveAircraft' : 'landAircraft', targetId: aircraft.id });
   if (simulation.state.player.vehicleId) return execute({ type: 'leaveVehicle' });
+  const groundAircraft = getView().nearbyAircraft;
+  if (groundAircraft && distance(controller.position, groundAircraft.position) <= 6) return execute({ type: groundAircraft.kind === 'drone' && !groundAircraft.reserved ? 'rentAircraft' : 'boardAircraft', targetId: groundAircraft.id });
   if (controller.useStairs()) {
     const building = controller.inside!;
     simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
     city.setInterior(building.id, controller.floor);
     const level = controller.floor < 0 ? `地下 ${-controller.floor} 层` : `${controller.floor + 1} 层`;
     const use = controller.floor < 0 ? building.basementUses?.[-controller.floor - 1] : building.floorUses?.[controller.floor];
@@ -267,6 +332,7 @@ function interact(): void {
   const building = nearby.nearbyBuilding;
   if (building && controller.useDoor(building)) {
     simulation.state.player.position = controller.walkingPosition;
+    releaseRoadExitPermit(world, simulation.state, 'player', simulation.state.player.position);
     city.setInterior(controller.inside?.id ?? null);
     showNotice(controller.inside ? `进入${building.name}，可在生活面板使用设施。楼内左后角为楼梯。` : `走出${building.name}。`);
     return;
@@ -286,7 +352,7 @@ function canAccessBuilding(building: Building, floor: number): boolean {
 
 function onKey(key: string): void {
   if (!ui) return;
-  if (key === 'KeyV') setMode(({ drone: 'walk', walk: 'jet', jet: 'drone' } as const)[controller.mode]);
+  if (key === 'KeyV') { const craft = activeAircraft(simulation.state); if (craft) execute({ type: craft.status === 'parked' ? 'leaveAircraft' : 'landAircraft', targetId: craft.id }); else setMode('drone'); }
   else if (key === 'KeyE') interact();
   else if (key === 'KeyF') execute({ type: 'pause', value: simulation.state.paused ? 0 : 1 });
   else if (key === 'KeyT') actions.resetView();
@@ -301,22 +367,36 @@ function onKey(key: string): void {
 function showNotice(message: string, ok = true): void { notice = message; ui?.notify(message, ok); }
 function persistPreferences(): void { try { localStorage.setItem(PREF_KEY, JSON.stringify(settings)); } catch { /* Saving settings is optional. */ } }
 async function save(explicit: boolean): Promise<void> {
-  try { await writeSavedGame(simulation.exportSave()); if (explicit) showNotice('旅程已保存在当前浏览器。'); }
+  if (!explicit && !autosaveAllowed) return;
+  try { await writeSavedGame(simulation.exportSave(), world); autosaveAllowed = true; if (explicit) showNotice('旅程已保存在当前浏览器。'); }
   catch { if (explicit) showNotice('浏览器存储不可用或已满，请下载 JSON 存档。', false); }
 }
-function loadData(data: string): void {
-  const result = simulation.importSave(data);
-  if (result.ok) {
-    controller.setMode('walk', simulation.state.player.position);
-    targetDistrict = null;
-    targetMarker.visible = false;
-    navigationPath.visible = false;
-    currentInterior = null;
-    blocksVersion = '';
-    city.setInterior(null);
-    save(false);
-  }
-  showNotice(result.message, result.ok);
+async function loadData(data: string): Promise<void> {
+  try {
+    const selected = selectSavedWorld(data);
+    if (savedWorldFingerprint(selected.world) !== savedWorldFingerprint(world)) {
+      const candidate = new Simulation(selected.world), checked = candidate.importSave(data);
+      if (!checked.ok) return showNotice(checked.message,false);
+      const priorAutosave = autosaveAllowed, wasPaused = simulation.state.paused;
+      autosaveAllowed = false; simulation.command({type:'pause',value:1});
+      try {
+        await writeSavedGame(candidate.exportSave(),selected.world);
+        showNotice('已验证并保存另一座已知布局城市；正在重新打开以同步地形、碰撞、人物和存档。');
+        window.location.reload();
+      } catch {
+        autosaveAllowed = priorAutosave; simulation.command({type:'pause',value:wasPaused?1:0});
+        showNotice('无法保存新布局存档，当前旅程保持原样。请导出存档后检查浏览器存储。',false);
+      }
+      return;
+    }
+    const result = simulation.importSave(data);
+    if (result.ok) {
+      syncPlayerView(); currentInterior = null; blocksVersion = '';
+      city.setInterior(controller.inside?.id ?? null, controller.floor);
+      autosaveAllowed = true; await save(false);
+    }
+    showNotice(result.message,result.ok);
+  } catch (error) { showNotice('读档失败：'+(error instanceof Error?error.message:'未知城市布局'),false); }
 }
 function updateBlocks(): void {
   const voxels = (simulation.state as SimState & { voxels?: { position: Vec3 }[] }).voxels ?? [];
@@ -335,6 +415,6 @@ function updateBlocks(): void {
 
 // Opt-in diagnostics aid local verification. No network, credentials or remote writes.
 if (new URLSearchParams(location.search).has('debug')) {
-  const diagnostics = { world, simulation, city, controller, actions, getView, canAccessBuilding, storage: { read: readSavedGame, write: writeSavedGame }, dispose() { cancelAnimationFrame(raf); controller.dispose(); ui.dispose(); city.dispose(); } };
+  const diagnostics = { world, simulation, city, controller, actions, getView, canAccessBuilding, storage: { read: readSavedGame, write: (json: string) => writeSavedGame(json, world) }, dispose() { cancelAnimationFrame(raf); controller.dispose(); ui.dispose(); aviationRenderer.dispose(); city.dispose(); } };
   Object.assign(window, { __YUNSHAN__: diagnostics });
 }

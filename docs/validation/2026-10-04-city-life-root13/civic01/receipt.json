@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-04T14:16:33.578713+00:00",
+  "endedAt": "2026-10-04T14:28:00.516363+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/civic-staffing.test.ts",
+    "tests/civic-staffing-two-terms.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 295,
+  "inputsStable": true,
+  "rawSHA256": "02a755d7e806d732611f840fd333c9076c3e39c310066ba04cae49c9cba6bea4",
+  "ownedPid": 84660,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 84727,
+      "state": "Z",
+      "parent": 1,
+      "group": 84660,
+      "session": 84660,
+      "startTicks": 5421955
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-04T03:50:22.166424+00:00",
+  "endedAt": "2026-10-04T03:53:05.109791+00:00",
+  "argv": [
+    "env",
+    "YUNSHAN_STAIR_ESCAPE_EVIDENCE=/workspace/yunshan-work/ROOT08-stair-escape-20261004-01/targeted03/evidence",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/stair-escape-origin.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 246,
+  "inputsStable": true,
+  "rawSHA256": "e539dae72e6b73a794f7a1b71df4c07230a9fe46befbb93deae0603c3f9a167b",
+  "ownedPid": 31698,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 31732,
+      "state": "Z",
+      "parent": 1,
+      "group": 31698,
+      "session": 31698,
+      "startTicks": 1664720
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

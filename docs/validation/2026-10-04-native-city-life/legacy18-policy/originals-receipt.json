@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-04T07:13:22.651534+00:00",
+  "exactCopies": {
+    "old18-comparison.json": {
+      "bytes": 8166,
+      "sha256": "5351537cbdbc9e7a0bdd53c93392ea5be104681a932c7dc16b77a551f341ca5f"
+    },
+    "compare-old18.ts": {
+      "bytes": 2494,
+      "sha256": "bf15d5fd1eb65b9c803c07aaa62b2c28b94344144d7e4a4ce7f876a36ba5dffc"
+    },
+    "original-first-divergence.save.json": {
+      "bytes": 440265,
+      "sha256": "df2cbed72755783e678dc68e0c009ef9589c0ad4a7a63e2fb40e25d3b789b14b"
+    },
+    "current-first-divergence.save.json": {
+      "bytes": 440181,
+      "sha256": "d105d623a0662aa1944e48c09da2e63e46537d79432c454920af3da438bdec03"
+    }
+  },
+  "oldCodeCommit": "aeca2679bd984527273c334def2672ad83fe758f",
+  "currentCodeCommit": "c7f300e21cea6c8badfc6f190a28f9d08bbb1a03",
+  "scope": "Exact original32hash proof and first divergence only; no fabricated historical pre-run input guard/raw stdout file",
+  "legacyCompatibility": "KNOWN_FAIL at11; no formal-source requirement relaxed"
+}

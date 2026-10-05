@@ -1,0 +1,66 @@
+{
+  "capturedAt": "2026-10-02T04:28:43.961222+00:00",
+  "fullRules": "RUNNING",
+  "session": 42667,
+  "nodePID": 109267,
+  "sourceManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "frozenSourceCount": 99,
+  "currentRuntimeAndTestInputsCompared": 94,
+  "currentRuntimeAndTestMismatches": [],
+  "originalSixCases": [
+    {
+      "name": "the generated city autonomously funds and completes research through actual trained residents and laboratories",
+      "currentSameSourceStatus": "PASS",
+      "actualLogLine": "✔ the generated city autonomously funds and completes research through actual trained residents and laboratories (1643145.694478ms)",
+      "originalFailureCauseOrLimit": "Exact importer error: 读档失败：无效存档字段：route pool。 Actual research investment/completion/personal debit succeeded; restore rejected before 24-tick continuation."
+    },
+    {
+      "name": "selling the last privately held company shares cannot produce an unreadable operating company",
+      "currentSameSourceStatus": "PASS",
+      "actualLogLine": "✔ selling the last privately held company shares cannot produce an unreadable operating company (131039.521797ms)",
+      "originalFailureCauseOrLimit": "Construction remained level 1. The old controlled worker coordinate was not the actual work point; listing/disposal/restore were not reached."
+    },
+    {
+      "name": "a real onsite work escrow roundtrips and player damage recovers one complete funded generation",
+      "currentSameSourceStatus": "PASS",
+      "actualLogLine": "✔ a real onsite work escrow roundtrips and player damage recovers one complete funded generation (48516.4741ms)",
+      "originalFailureCauseOrLimit": "Real work command rejected old doorway: 请到该建筑可访问楼层的实际工作点开始工班。 Recovery assertions were not reached."
+    },
+    {
+      "name": "real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation",
+      "currentSameSourceStatus": "PASS",
+      "actualLogLine": "✔ real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation (71773.553335ms)",
+      "originalFailureCauseOrLimit": "Real registration rejected old doorway: 伤患和付款人须共同到达诊所公共诊疗层。"
+    },
+    {
+      "name": "a damaged clinical player custody body recovers the complete prior generation with all original cash and stock",
+      "currentSameSourceStatus": "PASS",
+      "actualLogLine": "✔ a damaged clinical player custody body recovers the complete prior generation with all original cash and stock (18377.627697ms)",
+      "originalFailureCauseOrLimit": "Same registration rejection before damaged-generation recovery."
+    },
+    {
+      "name": "the complete city survives multiple days and restores a large genuine save deterministically",
+      "currentSameSourceStatus": "PENDING_FULL_RUN",
+      "actualLogLine": null,
+      "originalFailureCauseOrLimit": "Actual 1200-tick city save import returned false. The original assertion did not print importer reason; the route-pool cause remains an inference until exact diagnostic is captured."
+    }
+  ],
+  "naturalResearchSave": {
+    "tick": 2160,
+    "realResidentInvestments": 1,
+    "completedExperiments": 1,
+    "exactPersonalDebits": 1,
+    "encoding": "paged-v1",
+    "poolExtents": [
+      32768,
+      3650
+    ],
+    "maxActorRoute": 574,
+    "saveBytes": 3152864,
+    "originalFull24TickContinuation": "PASS"
+  },
+  "GL": "NOT_RUN",
+  "referencePixels": "NEW_REFERENCES_NOT_VIEWED",
+  "visualAcceptance": "BLOCKED",
+  "fullGoal": "NOT_COMPLETE"
+}

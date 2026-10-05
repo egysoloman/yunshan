@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-02T01:38:08.183339+00:00",
+  "cwd": "/tmp/yunshan-v4-legacy-public20-01",
+  "strictExit": 0,
+  "rulesExit": 0,
+  "executedTests": 1,
+  "pass": 1,
+  "fail": 0,
+  "durationMs": 5731.781972,
+  "caseDurationMs": 5000.311918,
+  "sourceInputs": 93,
+  "sourceStartCopyEndExact": true,
+  "sourceAfterRunExact": true,
+  "fullSourceReconstructibleFromFinal19PlusDelta": true,
+  "deltaSha256": {
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "tests/controller-v4.test.ts": "bcb62d43c56da5f447a9e0c2b8a5fe15fe2013be63b91a8814d7e9485aeb739f",
+    "tests/v4-services.test.ts": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+    "tests/world-layout.test.ts": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+    "开发备忘录.md": "ae8d2672a1c9fd224beb2404c67f8e05f6f2df6138db1522bfc2a4f31c548298"
+  },
+  "full20RunClaimed": false,
+  "evidence": {
+    "check": "actual-legacy-public-floor-routes-and-partitioned-continuation",
+    "publicFloor": 29,
+    "chosenRoutes": 616,
+    "originalSha256": "b7f7205d3b54fbd0502ad30627c7393b73ffb844ea3fcc531b4032a7f9c35abe",
+    "continuationSha256": "96fe81680f335643abf3351fb0a7febee7d15bd5c43a737dfa3c9d43484d3b09",
+    "exactRoundTrip": true,
+    "exactPartitionReassembly": true,
+    "continuationTicks": 24,
+    "exactFullContinuation": true,
+    "scope": "CPU fixture at an authorized public floor; not normal browser walking"
+  }
+}

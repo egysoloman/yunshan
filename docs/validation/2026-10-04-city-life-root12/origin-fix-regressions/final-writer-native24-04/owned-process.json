@@ -1,0 +1,22 @@
+{
+  "pid": 70080,
+  "argv": [
+    "env",
+    "YUNSHAN_DAY_WRITER_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-writer-native24-04/evidence",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=new legal whole-city writer",
+    "tests/native-day-writer.test.ts"
+  ],
+  "identity": {
+    "pid": 70080,
+    "state": "R",
+    "parent": 70076,
+    "group": 70080,
+    "session": 70080,
+    "startTicks": 4376603
+  }
+}

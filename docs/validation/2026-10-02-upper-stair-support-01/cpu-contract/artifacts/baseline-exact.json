@@ -1,0 +1,41 @@
+{
+  "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+  "scope": "Existing actual buildings and normal W motor. One-site projection preserves actual terrain/transport, dimensions, floors, fixtures, stairs, roofs and permissions callback; unrelated buildings omitted. No world regeneration, simulation or GL.",
+  "records": [
+    {
+      "case": "original exact browser failure",
+      "buildingId": "market-b24",
+      "from": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "requested": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.863474723644
+      },
+      "preSupport": null,
+      "center": {
+        "kind": "stairs",
+        "floor": 1,
+        "y": 80.19999999999999,
+        "local": {
+          "x": -13.79997341778062,
+          "z": -7.336525276356042
+        },
+        "link": {
+          "fromFloor": 1,
+          "toFloor": 2
+        }
+      },
+      "after": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "floor": 1,
+      "blockedAccess": null
+    }
+  ]
+}

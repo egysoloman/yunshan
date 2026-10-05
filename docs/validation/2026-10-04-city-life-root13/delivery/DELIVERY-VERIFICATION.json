@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-04T15:21:40.449082+00:00",
+  "status": "PASS",
+  "archives": [
+    {
+      "name": "yunshan-root13-source.zip",
+      "bytes": 18172052,
+      "sha256": "ccba2b5639557ed708a0c3fd23c90c4b8ff9f7da93b01075b1fd568ce8dbd30d",
+      "members": 402,
+      "files": 401,
+      "rawBytes": 43179155,
+      "beforeAfterExact": true,
+      "everyMemberSHA256SizeCRCVerified": true,
+      "fullProjectTestsRun": false
+    },
+    {
+      "name": "yunshan-root13-integrated-originals.zip",
+      "bytes": 37456057,
+      "sha256": "9ac217f73a3d45a3ddc6068b2b463010341037c467afb6ded810da225981c699",
+      "members": 789,
+      "files": 788,
+      "rawBytes": 107527044,
+      "beforeAfterExact": true,
+      "everyMemberSHA256SizeCRCVerified": true,
+      "fullProjectTestsRun": false
+    }
+  ],
+  "sourceScope": "frozen295 inputs plus original documentation,current report scopes and exact7 build; document cut before Library/publication",
+  "integratedScope": "all regular files from CLOSED ROOT13 integrated group, no dependency symlink",
+  "credentialLiteralFindings": 0,
+  "safetyReports": [
+    "source",
+    "integrated-originals"
+  ]
+}

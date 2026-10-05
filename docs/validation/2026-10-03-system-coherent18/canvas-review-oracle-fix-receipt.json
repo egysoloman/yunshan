@@ -1,0 +1,12 @@
+{
+  "state": "PREPARED_NOT_RUN",
+  "writtenAtUTC": "2026-10-03T05:50:04.183821+00:00",
+  "sourceProductionUnchanged": true,
+  "originalDriverSHA256": "89d96c57fe03ec6bc2076869cbba6cd42ee5b8abd500f8320fe49bc96d89aa41",
+  "newDriverSHA256": "4b5b1a2a95a6c25526e59688d89325038ec099d1868785d6b2bc17b6abad529d",
+  "patchSHA256": "a77d5e4fedf5baa21497bcdd33e736899b3ca8d2eeb214ca3feb86d5d60fe049",
+  "originalFailure": "DOM01 has5 completed contracts,272 genuine ticks/68 minutes/4 real commands/grade1/textbook1 consumed; final canvas0 assertion failed on actual native2D minimap. Raw/failurePNG/saves retained.",
+  "newAssertion": "Exactly one real painted native 420x270 data-ref map/minimap 2D canvas, no WebGL/WebGL2 or world-stage canvas. All product/course/financial/time/needs/defaultspeed/geometry/command assertions unchanged.",
+  "bindingSHA256": "2dc6deacc5ef7dbffe84954e6f9698faf7c339f81c52cb9bf23b567dc19f25d9",
+  "outRoot": "/tmp/yunshan-system-coherent-18/education-dom-02"
+}

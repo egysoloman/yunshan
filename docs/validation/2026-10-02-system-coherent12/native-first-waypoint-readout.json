@@ -1,0 +1,67 @@
+{
+  "scope": "Read-only original-run analysis; not a new simulation/browser/test",
+  "nativeExitCode": 1,
+  "completedNativeScopes": 0,
+  "nativeEInputs": 0,
+  "pulseCount": 100,
+  "zeroObservedMovementCount": 83,
+  "nonzeroObservedMovementCount": 17,
+  "observedBodyPositions": [
+    [
+      -390.8,
+      76.2377358490566,
+      336.6
+    ],
+    [
+      -390.8,
+      76.6,
+      331.7999999999993
+    ]
+  ],
+  "horizontalMetresPerNonzeroChange": 4.8,
+  "approach": {
+    "x": -390.8,
+    "y": 76.46415094339623,
+    "z": 334.6
+  },
+  "finalBody": {
+    "x": -390.8,
+    "y": 76.6,
+    "z": 331.7999999999993
+  },
+  "inputTemporalEvidence": [
+    "source/main.ts182-193 caps raw frame delta at 1s and applies current controller input to every <=1/30s movement catch-up step",
+    "source/controller.ts37-47 stores current keys without event time boundaries;194-207 integrates current key/yaw at 4.8m/s",
+    "external-preparation12/native-home-rest.mjs108-133 aims at <=.18m waypoint; both observed endpoints request200ms W; overshooting reverses view direction",
+    "Native observers did not record browser accepted keydown/up event.timeStamp or rAF timing;200ms is host requested wait, not proven accepted key duration"
+  ],
+  "supportedConclusion": "The 17 exact4.8m horizontal changes and source path strongly support a slow-frame/current-key input-time attribution problem; the original movement crossed the opening in both directions, not a persistent geometry blockage.",
+  "notProven": [
+    "actual accepted each key duration<=200ms",
+    "unique rendering/GPU causality",
+    "exact approach full support before arrival",
+    "bed occupancy/rest/native IDB completion"
+  ],
+  "recommendedContractNotImplemented": "Preserve input transition time intervals and their overlap with the retained frame window, integrate only held durations with unchanged speed/collision subdivision, including press+release between frames; blur/hidden ends holds. No patch in this artifact.",
+  "eDistanceAlternative": "Initial stage is already3.2m horizontally from entrance within E<=6. It may be tested as separate limited native portal interaction, never as W approach success or bedside navigation proof.",
+  "cleanup": {
+    "checkedAtUTC": "2026-10-02T17:18:30.331918+00:00",
+    "runAtUTC": "2026-10-02T17:13:59.625Z",
+    "ownNode": {
+      "pid": 166756,
+      "expectedStartTicks": "9719660",
+      "current": {
+        "exists": false,
+        "readError": "FileNotFoundError"
+      }
+    },
+    "nativeExactScriptActive": [],
+    "preview4189Active": [],
+    "nonZombieChromiumProcesses": [],
+    "port4189ConnectEx": 111,
+    "browserCloseFromOriginalResult": "resolved",
+    "scope": "Read-only post-exit process/port verification; no signals; /proc cwd/exe readlink unavailable. Chromium identities were not captured during initial live run, therefore does not invent them.",
+    "gpuReleased": true,
+    "signalsSent": []
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "at": "2026-10-04T02:10:24.986370+00:00",
+  "root07OriginalSystems": {
+    "status": "FAIL",
+    "tests": 330,
+    "pass": 324,
+    "fail": 1,
+    "skip": 5,
+    "sourceCoreSHA256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39",
+    "rawSHA256": "f78382e4a21ff7fd4461b9398cf5e3097910c84ac975c63275bd474fe6bd7c3d",
+    "notRewritten": true
+  },
+  "all241Root07FrozenInputsStillMatch": true,
+  "root07FrozenManifestSHA256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40",
+  "root07SourcesAnd14DriverWritten": false,
+  "isolatedChangedExactly": [
+    "tests/power.test.ts"
+  ],
+  "productionSourcesUnchanged": true,
+  "defaultRecipeUnchanged": "current-v6",
+  "fixtureActualWorld": {
+    "scope": "Read-only actual code-owned world reconstruction. No Simulation or step; no fixture rewrite.",
+    "rawBytes": 695260,
+    "rawSHA256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041",
+    "format": "yunshan-save",
+    "version": 1,
+    "worldSeed": 20261001,
+    "worldFingerprint": "80cd31e2",
+    "explicitWorldDescriptorPresent": false,
+    "defaultRecipe": "current-v6",
+    "matches": [
+      {
+        "recipe": "current-v4",
+        "seed": 20261001,
+        "fingerprint": "80cd31e2",
+        "matchesOriginal": true,
+        "buildings": 612
+      }
+    ],
+    "worldRecipes": [
+      {
+        "recipe": "legacy-ee3e7a1",
+        "seed": 20261001,
+        "fingerprint": "c519111b",
+        "matchesOriginal": false,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v2-r5",
+        "seed": 20261001,
+        "fingerprint": "c70ebca5",
+        "matchesOriginal": false,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v2",
+        "seed": 20261001,
+        "fingerprint": "cf899fc3",
+        "matchesOriginal": false,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v3",
+        "seed": 20261001,
+        "fingerprint": "3ae62474",
+        "matchesOriginal": false,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v4",
+        "seed": 20261001,
+        "fingerprint": "80cd31e2",
+        "matchesOriginal": true,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v5",
+        "seed": 20261001,
+        "fingerprint": "7c98a3a3",
+        "matchesOriginal": false,
+        "buildings": 612
+      },
+      {
+        "recipe": "current-v6",
+        "seed": 20261001,
+        "fingerprint": "b85fa6ec",
+        "matchesOriginal": false,
+        "buildings": 612
+      }
+    ]
+  },
+  "originalFixtureSHA256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041",
+  "newCurrentReaderEvidence": {
+    "scope": "Existing actual native paid fixture only; these outputs are ROOT07 current reader results, not newly captured old-writer saves or a historical future oracle.",
+    "sourceRecipe": "current-v4",
+    "originalFingerprint": "80cd31e2",
+    "seed": 20261001,
+    "originalBytes": 695260,
+    "originalSHA256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041",
+    "legacyMigrationExpected": true,
+    "immediateCurrentReaderByteExact": true,
+    "partitionByteExact": true,
+    "playerCashAndTreasuryUnchangedOnOriginalLoad": true,
+    "liveReaderFuture24ByteExact": true,
+    "rows": [
+      {
+        "ordinal": 1,
+        "tick": 1,
+        "clock": 480.25,
+        "bytes": 1084166,
+        "sha256": "dfe2ee4b5945473d8cac122c1711d4010ebfe3c643f0f1f4d19adf1f93ca6cb6"
+      },
+      {
+        "ordinal": 2,
+        "tick": 2,
+        "clock": 480.5,
+        "bytes": 1392022,
+        "sha256": "9feec710faef2d7f2c7858f3ec2f5403ff88d4645d379f1af11c5115f3da40c8"
+      },
+      {
+        "ordinal": 3,
+        "tick": 3,
+        "clock": 480.75,
+        "bytes": 1623821,
+        "sha256": "f0fac92ee61181eb5fccf56cc41b0f52913f4656a66fabed1d5a786d929ad8bd"
+      },
+      {
+        "ordinal": 4,
+        "tick": 4,
+        "clock": 481,
+        "bytes": 1908891,
+        "sha256": "787efe64a04301650e82cb6ebb44f118d362882c1f609b74cc441ca5b1e697d7"
+      },
+      {
+        "ordinal": 5,
+        "tick": 5,
+        "clock": 481.25,
+        "bytes": 1933665,
+        "sha256": "17367ea2e3c90382fc66ad307fe931920159c550e5a90c1e2df6a765eccc742d"
+      },
+      {
+        "ordinal": 6,
+        "tick": 6,
+        "clock": 481.5,
+        "bytes": 1971697,
+        "sha256": "d257cb39abc48591f1251a81add1d3122aabe11e50a5c9a9e008395cb0559981"
+      },
+      {
+        "ordinal": 7,
+        "tick": 7,
+        "clock": 481.75,
+        "bytes": 1999030,
+        "sha256": "834244f604f51a137d910ac673fb7dbcb3a4ada8dc6b2dbeee7dac013e1260cb"
+      },
+      {
+        "ordinal": 8,
+        "tick": 8,
+        "clock": 482,
+        "bytes": 2018113,
+        "sha256": "aa4f7c9f281fff2b57b185b6cfeb1e4a89df138cfb3faa319947dfa318b1852a"
+      },
+      {
+        "ordinal": 9,
+        "tick": 9,
+        "clock": 482.25,
+        "bytes": 2036947,
+        "sha256": "471f86edd16c55656fe82cc0fa7312933e3c12cb8cccd977e5b96492ef53b35a"
+      },
+      {
+        "ordinal": 10,
+        "tick": 10,
+        "clock": 482.5,
+        "bytes": 2056155,
+        "sha256": "588eb54cddff86686162913018e9fe0368f4c815dbf6a784a77c02b3182fe07b"
+      },
+      {
+        "ordinal": 11,
+        "tick": 11,
+        "clock": 482.75,
+        "bytes": 2070417,
+        "sha256": "dd988c778307fcd9e3a99389b146c7ba38f4e6b73acce3a59e7d199e1a2ec32b"
+      },
+      {
+        "ordinal": 12,
+        "tick": 12,
+        "clock": 483,
+        "bytes": 2097312,
+        "sha256": "9215fecc451f9f504fdf82516a2a8b55f146a0992c9db08ddc54b37af40624c3"
+      },
+      {
+        "ordinal": 13,
+        "tick": 13,
+        "clock": 483.25,
+        "bytes": 2108567,
+        "sha256": "8ebd5199113902b5085a5e0ac93c5b4c001ea978c0b0a2277971ca253b15e27f"
+      },
+      {
+        "ordinal": 14,
+        "tick": 14,
+        "clock": 483.5,
+        "bytes": 2116436,
+        "sha256": "979faef5d015037d5da1ebb28054a722604369893cf1e39a8077535e1e218fcc"
+      },
+      {
+        "ordinal": 15,
+        "tick": 15,
+        "clock": 483.75,
+        "bytes": 2151780,
+        "sha256": "d6eb2adaf3dafe629183843c70531824b173314ecb90d36ca6db74d26e530f28"
+      },
+      {
+        "ordinal": 16,
+        "tick": 16,
+        "clock": 484,
+        "bytes": 2165249,
+        "sha256": "6f18fd7f1054447f89fb92ffbaf1661d152af87685386b4b5a53568c3873ebf3"
+      },
+      {
+        "ordinal": 17,
+        "tick": 17,
+        "clock": 484.25,
+        "bytes": 2165446,
+        "sha256": "8acd26025488ca20ab604ab63d9a4be0ec3446031a85a23ad3956b9946680f31"
+      },
+      {
+        "ordinal": 18,
+        "tick": 18,
+        "clock": 484.5,
+        "bytes": 2165114,
+        "sha256": "c68a98ff2bccc867c8761b9e6b23fa6ea2edc0e830abc603a79dcc1244f71e9f"
+      },
+      {
+        "ordinal": 19,
+        "tick": 19,
+        "clock": 484.75,
+        "bytes": 2164995,
+        "sha256": "30a9d27a392c70d6b909adc0f1156ccd4f1c2809fc0bcd934faac674bf6854e2"
+      },
+      {
+        "ordinal": 20,
+        "tick": 20,
+        "clock": 485,
+        "bytes": 2165726,
+        "sha256": "9b53f4d5e82c0d37116d84d359a62b14f1739af1b1c9c2758d8efe226b230d66"
+      },
+      {
+        "ordinal": 21,
+        "tick": 21,
+        "clock": 485.25,
+        "bytes": 2166788,
+        "sha256": "f2b77798d29a6b9b08aa3cd492b3bcbb1614ef63c9160dec2d9f7f6c77e24c8c"
+      },
+      {
+        "ordinal": 22,
+        "tick": 22,
+        "clock": 485.5,
+        "bytes": 2166014,
+        "sha256": "ea79e14f76aa796cbab8f73d064304fb3a062f3aaf0022979b781e0f66320def"
+      },
+      {
+        "ordinal": 23,
+        "tick": 23,
+        "clock": 485.75,
+        "bytes": 2165252,
+        "sha256": "058a1cbe11d069731a0cc72b112f98c202951d67be46ea8055b47323cf537cf7"
+      },
+      {
+        "ordinal": 24,
+        "tick": 24,
+        "clock": 486,
+        "bytes": 2166288,
+        "sha256": "fea15e3317b9035f5640511506e0c986601b4b0c4af30dd86cbd158b5945de44"
+      }
+    ],
+    "migratedBytes": 695425,
+    "migratedSHA256": "eaaf865532f4c32ded9f978698f425c051c79ffed5f612800c93c38c73516a68",
+    "finalBytes": 2166288,
+    "finalSHA256": "fea15e3317b9035f5640511506e0c986601b4b0c4af30dd86cbd158b5945de44"
+  },
+  "runs": [
+    {
+      "scope": "diagnosis01",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/diagnosis01/receipt.json",
+      "receiptSHA256": "559a9f36b9e8f7cd6f1b0a3844dca66aba6483267124941413a5e3912012cea4",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 63,
+      "inputsStable": true,
+      "rawSHA256": "7a229a17c079b8b63560af5590563b90672c5da1cd4aeb7d1bdbf849bc64e761",
+      "runnerSummary": null,
+      "ownedHeadGone": true
+    },
+    {
+      "scope": "baseline-old-case01",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/baseline-old-case01/receipt.json",
+      "receiptSHA256": "a8f5f98fe4cffab7a097aed3b2e197004ffbe10c76ed2e31028f03f3f0c4c896",
+      "status": "FAIL",
+      "exitCode": 1,
+      "timedOut": false,
+      "inputCount": 63,
+      "inputsStable": true,
+      "rawSHA256": "83e8953b830a4e79d418c5cfefdaa03dc36a0c61073b78b915f953dcf4b86bc0",
+      "runnerSummary": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "skipped": 0
+      },
+      "ownedHeadGone": true
+    },
+    {
+      "scope": "corrected-old-case01",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/corrected-old-case01/receipt.json",
+      "receiptSHA256": "7e6e38c4b08d663dc2e595c57e0c0cdce2d7e5f9e0cfafb5200659c93da6e1f1",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 63,
+      "inputsStable": true,
+      "rawSHA256": "899c0526f18052cdcf503b088a5061937522ce54adc745a2e954b468551ee5ff",
+      "runnerSummary": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0
+      },
+      "ownedHeadGone": true
+    },
+    {
+      "scope": "full-power20-01",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/full-power20-01/receipt.json",
+      "receiptSHA256": "bf81306093753ec0e6b08d757c76f5550e3582e3fd47c3f20da758fdbd93abbd",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 63,
+      "inputsStable": true,
+      "rawSHA256": "fad2f5a00158636255cc70ad63ea4c0022327b4c14f99bfe0653bad40ad13291",
+      "runnerSummary": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "skipped": 0
+      },
+      "ownedHeadGone": true
+    },
+    {
+      "scope": "native-reader24-01",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/native-reader24-01/receipt.json",
+      "receiptSHA256": "d9e3544a60354309899e0534afc28324dae5b5be768f2379a73a0e579727cd92",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 63,
+      "inputsStable": true,
+      "rawSHA256": "a77769301502649c730cf9c5da03ca8b82c11cee9972521a1fd48b6e1261fa76",
+      "runnerSummary": null,
+      "ownedHeadGone": true
+    }
+  ],
+  "countsNotAddedAcrossOverlappingScopes": true,
+  "ownedProcesses": [
+    {
+      "pid": 24516,
+      "group": 24508,
+      "state": "Z",
+      "parent": 1,
+      "startTicks": 1005193
+    },
+    {
+      "pid": 24550,
+      "group": 24542,
+      "state": "Z",
+      "parent": 1,
+      "startTicks": 1005345
+    },
+    {
+      "pid": 24695,
+      "group": 24672,
+      "state": "Z",
+      "parent": 1,
+      "startTicks": 1019832
+    },
+    {
+      "pid": 24702,
+      "group": 24679,
+      "state": "Z",
+      "parent": 1,
+      "startTicks": 1019838
+    },
+    {
+      "pid": 24718,
+      "group": 24678,
+      "state": "Z",
+      "parent": 1,
+      "startTicks": 1019854
+    }
+  ],
+  "activeOwnedProcesses": [],
+  "LibraryUploaded": false,
+  "sharedWritten": false,
+  "historicalWriterFutureOracle": "No fixed historical future oracle is referenced by this original power case/fixture. Added future24 is explicitly current-live/current-reader equality, not a replacement historical oracle."
+}

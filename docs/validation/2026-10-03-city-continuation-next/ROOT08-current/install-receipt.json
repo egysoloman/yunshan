@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-04T03:57:32.438592+00:00",
+  "guardedInstall": true,
+  "candidate": "/workspace/yunshan-work/ROOT08-stair-escape-20261004-01",
+  "files": [
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "existsInOriginal": true,
+      "originalSHA256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1",
+      "candidateSHA256": "c95e83f8f61920877f3207dbebe1f62183700f6ec4aa49e1e4403e9ef486f513",
+      "bytes": 51780
+    },
+    {
+      "path": "tests/stair-escape-origin.test.ts",
+      "existsInOriginal": false,
+      "originalSHA256": null,
+      "candidateSHA256": "b9db5baa19c7edd4b4945ecfd0110973fd2c7f9032ccadc97846c31243c4b2ec",
+      "bytes": 18644
+    },
+    {
+      "path": "tests/fixtures/stair-escape-root07.json",
+      "existsInOriginal": false,
+      "originalSHA256": null,
+      "candidateSHA256": "da48eead9c4a1ddfa21073edd0478f53aee784acf3ec1680b92c4b0ea82142fb",
+      "bytes": 6392
+    },
+    {
+      "path": "tests/fixtures/stair-escape-root07-final.save.json.gz",
+      "existsInOriginal": false,
+      "originalSHA256": null,
+      "candidateSHA256": "51f2b62b3544adb1e1124ba7615e73051dca2fe31af1180f2a39dbcb66484547",
+      "bytes": 570848
+    }
+  ],
+  "inputCount": 244,
+  "currentSourceCopiesExact": true,
+  "unrelatedChangesRejected": true,
+  "currentRuntimeMatchesCandidate55ProductionFiles": true,
+  "geometryChanged": false,
+  "new14NotRun": true
+}

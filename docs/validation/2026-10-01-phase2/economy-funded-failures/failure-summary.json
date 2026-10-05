@@ -1,0 +1,193 @@
+{
+  "runs": {
+    "30": {
+      "status": "failed",
+      "ticks": 21600,
+      "deaths": 60,
+      "alive": 556,
+      "residents": 616,
+      "livingMeanHealth": 56.07764490421129,
+      "livingMeanHunger": 2.424460431654686,
+      "treasury": 7606.282958783883,
+      "production": 18176.976151422605,
+      "publicSupplies": 18498.348208381634,
+      "publicProcurementToProduction": 1.017680171568794,
+      "privateWorkMinutes": 1687148.9421836033,
+      "publicWorkMinutes": 506113.15717350034,
+      "zeroCapitalCompanies": 0,
+      "cashResidual": -3.300374373793602e-08,
+      "treasuryResidual": -2.0550032786559314e-08,
+      "sourceUnchanged": true,
+      "failure": "AssertionError [ERR_ASSERTION]: baseline residents must remain alive throughout the audited 30-day path\n\n60 !== 0\n\n    at <anonymous> (/tmp/yunshan-economy-funded-contracts-20261001/scripts/economy-audit.ts:226:10)"
+    },
+    "60": {
+      "status": "failed",
+      "ticks": 43200,
+      "deaths": 372,
+      "alive": 244,
+      "residents": 616,
+      "livingMeanHealth": 38.02075187686861,
+      "livingMeanHunger": 0.6918032786885263,
+      "treasury": 65766.34558786772,
+      "production": 18235.768190363342,
+      "publicSupplies": 18557.14024732237,
+      "publicProcurementToProduction": 1.0176231707709937,
+      "privateWorkMinutes": 1727458.0875542595,
+      "publicWorkMinutes": 506113.15717350034,
+      "zeroCapitalCompanies": 0,
+      "cashResidual": -3.230525180697441e-08,
+      "treasuryResidual": -2.066371962428093e-08,
+      "sourceUnchanged": true,
+      "failure": "AssertionError [ERR_ASSERTION]: baseline residents must remain alive throughout the audited 60-day path\n\n372 !== 0\n\n    at <anonymous> (/tmp/yunshan-economy-funded-contracts-20261001/scripts/economy-audit.ts:226:10)"
+    }
+  },
+  "commonSnapshots": [
+    {
+      "tick": 0,
+      "exact": true
+    },
+    {
+      "tick": 720,
+      "exact": true
+    },
+    {
+      "tick": 1000,
+      "exact": true
+    },
+    {
+      "tick": 1440,
+      "exact": true
+    },
+    {
+      "tick": 2160,
+      "exact": true
+    },
+    {
+      "tick": 2880,
+      "exact": true
+    },
+    {
+      "tick": 3000,
+      "exact": true
+    },
+    {
+      "tick": 3600,
+      "exact": true
+    },
+    {
+      "tick": 4320,
+      "exact": true
+    },
+    {
+      "tick": 5000,
+      "exact": true
+    },
+    {
+      "tick": 5040,
+      "exact": true
+    },
+    {
+      "tick": 5760,
+      "exact": true
+    },
+    {
+      "tick": 6480,
+      "exact": true
+    },
+    {
+      "tick": 7000,
+      "exact": true
+    },
+    {
+      "tick": 7200,
+      "exact": true
+    },
+    {
+      "tick": 7920,
+      "exact": true
+    },
+    {
+      "tick": 8640,
+      "exact": true
+    },
+    {
+      "tick": 9360,
+      "exact": true
+    },
+    {
+      "tick": 10080,
+      "exact": true
+    },
+    {
+      "tick": 10800,
+      "exact": true
+    },
+    {
+      "tick": 11520,
+      "exact": true
+    },
+    {
+      "tick": 12240,
+      "exact": true
+    },
+    {
+      "tick": 12960,
+      "exact": true
+    },
+    {
+      "tick": 13680,
+      "exact": true
+    },
+    {
+      "tick": 14400,
+      "exact": true
+    },
+    {
+      "tick": 15120,
+      "exact": true
+    },
+    {
+      "tick": 15840,
+      "exact": true
+    },
+    {
+      "tick": 16560,
+      "exact": true
+    },
+    {
+      "tick": 17280,
+      "exact": true
+    },
+    {
+      "tick": 18000,
+      "exact": true
+    },
+    {
+      "tick": 18720,
+      "exact": true
+    },
+    {
+      "tick": 19440,
+      "exact": true
+    },
+    {
+      "tick": 20160,
+      "exact": true
+    },
+    {
+      "tick": 20880,
+      "exact": true
+    },
+    {
+      "tick": 21600,
+      "exact": true
+    }
+  ],
+  "allCommonSnapshotsExact": true,
+  "artifactHashes": {
+    "economy-funded-30d.log": "02d843e5de7023fc022377f075c4f539cb2f22a955d8644d1e9675cfab306e02",
+    "economy-funded-60d.log": "04f300200f67c5dbb8021f5e80fc377152618c83e9acf182319b3d825a921445",
+    "economy-funded-30d.json": "f87d0c4da9a0a869dbf771d3a41564e45fe83f7588341456e7ceba7a4faecbc9",
+    "economy-funded-60d.json": "430afa1960c04fc228db96e2feb982e311f98be193055b1a145271f792c39ae4"
+  }
+}

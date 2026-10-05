@@ -1,0 +1,38 @@
+{
+  "status": "PROSPECTIVE_NOT_RUN_PENDING_MEDICAL_OVERLAY_BANKING_NATIVE",
+  "source": "/tmp/ROOT17-integration-20261005-01/source05",
+  "inputs": 344,
+  "advances": [
+    {
+      "advance": "freight01→02",
+      "changes": [
+        {
+          "path": "src/product-city.ts",
+          "before": "b9719bc57a2e403effc90b7ef00d95c8bad63bff0f6b4ab61f693edb634bfe36",
+          "after": "c98f4fc6c320ac5594d45a68c51f3de338b3ebb4eb336fecdec128d51e789a9f"
+        }
+      ]
+    },
+    {
+      "advance": "power10→11",
+      "changes": [
+        {
+          "path": "src/simulation/power-grid.ts",
+          "before": "a722fcd7de8b6acc2025cb752d174593c197133fb9035c62e1722d701e2d8f27",
+          "after": "f2aa556260ef6746251b0b0d72f28ff5ce417a6b522be5e3e014ca34e9fccde1"
+        },
+        {
+          "path": "tests/power-grid.test.ts",
+          "before": "ff55d1282a95454ca202f26f6457fb33e235835adfe822a84109c461c7c619c3",
+          "after": "28a8eefc4ad2d184145466bbd0cab76a729868b96e0adf0b2db5428dbbf56bed"
+        },
+        {
+          "path": "tests/power-grid-integration.test.ts",
+          "before": "9467bab27736b7f2f78aa365b071c807f95f62249f939a261f38026f4cfdac41",
+          "after": "9479aaaa520092cb765003cc99b2a4a48cef473efbb2e3ea4c65ed15c5a20eb4"
+        }
+      ]
+    }
+  ],
+  "sharedEdits": 0
+}

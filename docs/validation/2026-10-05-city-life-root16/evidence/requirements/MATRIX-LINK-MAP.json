@@ -1,0 +1,58 @@
+{
+  "plannedFinalDirectory": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root16",
+  "draftOnly": true,
+  "copyActionPerformed": false,
+  "linkTargets": [
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/outputs/all229-continuation01/SUMMARY.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01/SUMMARY.json",
+      "sourceBytes": 2039,
+      "sourceSHA256": "68b531b4c4e011ce6af273113f956bd7d6602b662226e7248f923832ad72755d",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/outputs/full-partition24-01/SUMMARY.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/full-partition24-01/SUMMARY.json",
+      "sourceBytes": 3899,
+      "sourceSHA256": "7be66050c272c2a7f1eb61679aff02d7ef6d2ea7597e59a04b3ecae16dbbcc54",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/cause/pure-query02/artifacts/QUERY-SUMMARY.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/pure-query02/artifacts/QUERY-SUMMARY.json",
+      "sourceBytes": 3012,
+      "sourceSHA256": "a04726b69054a85d0bd88e1c9ee3868e1b5d4940e62f9e238cede8a6f0d654d9",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/medical/REPORT.md",
+      "source": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/REPORT.md",
+      "sourceBytes": 7495,
+      "sourceSHA256": "b6cfb5f23dd64cb9023fae00cade9317b236f82278d65de08141acac35f325bd",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/baseline-observe01/receipt.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/baseline-observe01/receipt.json",
+      "sourceBytes": 1190,
+      "sourceSHA256": "6f76fae9c48f8226d7f5aef2019cfaae5ce4dd8bd8ed809034b9b4e436da9fca",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/all229-continuation01/receipt.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/all229-continuation01/receipt.json",
+      "sourceBytes": 1475,
+      "sourceSHA256": "83bdaceadce605f018ee7d5edd8d8f7f13e773d66e8f2d634049a27f86fa3b04",
+      "currentlyExistsAtTarget": false
+    },
+    {
+      "targetRelativeToFinalROOT16": "evidence/food/full-partition24-01/receipt.json",
+      "source": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/full-partition24-01/receipt.json",
+      "sourceBytes": 972,
+      "sourceSHA256": "d9fb194f5afc43ff95f19a54835d1011886bec8f613834ba425c91312a6e321d",
+      "currentlyExistsAtTarget": false
+    }
+  ],
+  "reportTarget": "REPORT.md",
+  "reportCurrentlyExists": false
+}

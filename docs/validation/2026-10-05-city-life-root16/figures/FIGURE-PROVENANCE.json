@@ -1,0 +1,38 @@
+{
+  "status": "ACTUAL_RECEIPTS_FIGURE",
+  "sourceTerminalSHA256": "db40c8410ed5cd45f308fb12c12a4ef6678c58add40e3122e595a6bdd99efe16",
+  "inputSourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "residentIds": 229,
+  "exactCounterReceipts": 513,
+  "lastFirstReceiptTick": 1015,
+  "foodProduced": 90.35028973669502,
+  "inputs": [
+    {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/baseline-observe01/counter-receipts.jsonl",
+      "sha256": "675a049b9e73e151340d1f67a290f881a1ee884534effd161c1c6ca6f4d0c46d"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/baseline-observe01/production.jsonl",
+      "sha256": "128ff4053bcc6363db7df84fd8c61c305452ee51b0af91afa52ff54c6d78b893"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01/counter-receipts.jsonl",
+      "sha256": "ea06fa3b0a408f989296046452153706ec3c08b57f39fab999310073888789c9"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01/production.jsonl",
+      "sha256": "3bfe017cd787d733bdf5b0b5e00f6c179d6e4a63fde8723d56e7b4163ee293d5"
+    }
+  ],
+  "outputs": {
+    "229-residents-first-counter-receipt.csv": {
+      "bytes": 27540,
+      "sha256": "4751c1b944d723b4828658cc8f4ec608c33c2e27009a3aed3c86d06d6bd3b2c4"
+    },
+    "229-residents-food-recovery.png": {
+      "bytes": 185512,
+      "sha256": "85918faa573e6170ee5b43d5066e48d17da7d0dbe14bc575b26394abe7a8d997"
+    }
+  },
+  "boundary": "A plot of measured headless receipts, not a new game rendering screenshot."
+}

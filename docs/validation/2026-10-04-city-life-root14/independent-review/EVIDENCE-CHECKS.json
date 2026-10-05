@@ -1,0 +1,370 @@
+{
+  "checkedAtUTC": "2026-10-04T16:04:07.126753+00:00",
+  "reviewMode": "READ_ONLY_SOURCE_AND_EXISTING_DATA_NO_RUNTIME_EXECUTION",
+  "provider": {
+    "inputCount": 304,
+    "graphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+    "allInputsMatch": true
+  },
+  "root13": {
+    "inputCount": 295,
+    "allInputsStillMatch": true
+  },
+  "rootIntegratedStaticAddendum": {
+    "inputCount": 304,
+    "graphSHA256": "5603eaaf84575d2d59a2886b186096a6916b84c4924cd1840bd10631e4daf129",
+    "allInputsMatch": true,
+    "providerCopyExact": true,
+    "changedFiles": [
+      "scripts/economy-audit.ts",
+      "src/main.ts",
+      "src/product-city.ts"
+    ],
+    "runtimeEvidenceNotClaimed": true
+  },
+  "scopes": [
+    {
+      "scope": "codec01",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "ab60ee193bbb262e528568bf89091982a6decc63a17c18b0d3a1794bd3117ce3",
+      "exactProviderGraph": false,
+      "inputCount": 302,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "8560d47d49b66c93b6525b17127a034bbc64e76bfe9f62d2e4ca1e03bc4b0043",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "migration01",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 300.0,
+      "graphSHA256": "acae71875ba3bdb2c59c7a7af421a95dd24ba6eb185d4d6328e2b4ce0c56b5ca",
+      "exactProviderGraph": false,
+      "inputCount": 303,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "8e74d8764bcea30ea1a5cb85d9dc4f14037bdd0fcf2dce1590519b2ad03fd8a3",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "migration02",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 300.0,
+      "graphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+      "exactProviderGraph": true,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "b60dfc74036e26bdc1f0daf42bbc61897c692d0c5c30921b05edcdd1689aef13",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "paid-source01",
+      "status": "FAIL",
+      "exitCode": 1,
+      "capSeconds": 120.0,
+      "graphSHA256": "e0bb8c11149b234c7f46df5c77d8e0896c6e6f12248783d74355b1dddd30afef",
+      "exactProviderGraph": false,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "951009cc9fe38c4aa16a311ac2522dd703f43d1bb90aab7c92b33bbb5fa1f0e3",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "paid-source02",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+      "exactProviderGraph": true,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "7117bbce8a0bb0d60d82ce09095d3a82ee10a3daafcdcd256d11a06f8177233a",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck01",
+      "status": "FAIL",
+      "exitCode": 2,
+      "capSeconds": 120.0,
+      "graphSHA256": "1a964aa12204f4df5ba10afd0f3e5355759ca5185a55bc911de6c341ad9e4d65",
+      "exactProviderGraph": false,
+      "inputCount": 301,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "37c5ae873c6e2855ec6f8d59c6ca5147cfcca9df686c82ba8511b86bee959c1c",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "HASH_MATCHED_POST_RUN_RECOVERY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck02",
+      "status": "FAIL",
+      "exitCode": 2,
+      "capSeconds": 120.0,
+      "graphSHA256": "f6e1741f8dd75eb826e8a5e61167023089bf9ee8c9718b6767e8421479d9ed0b",
+      "exactProviderGraph": false,
+      "inputCount": 302,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "fe1c3f397e431faac630394ac2ae7a3ff5dacecfc9cd9b64b44766e794f1babd",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck03",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "ab60ee193bbb262e528568bf89091982a6decc63a17c18b0d3a1794bd3117ce3",
+      "exactProviderGraph": false,
+      "inputCount": 302,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck04",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "acae71875ba3bdb2c59c7a7af421a95dd24ba6eb185d4d6328e2b4ce0c56b5ca",
+      "exactProviderGraph": false,
+      "inputCount": 303,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck05",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "e0bb8c11149b234c7f46df5c77d8e0896c6e6f12248783d74355b1dddd30afef",
+      "exactProviderGraph": false,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck06",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "a5a549d4e9a7b74e9d168f8ea9e8df910719065ce6f0bb57369efcaf4943b434",
+      "exactProviderGraph": false,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "typecheck07",
+      "status": "PASS",
+      "exitCode": 0,
+      "capSeconds": 120.0,
+      "graphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+      "exactProviderGraph": true,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    },
+    {
+      "scope": "legacy-ruleset01",
+      "status": "TIMED_OUT_PARTIAL",
+      "exitCode": -9,
+      "capSeconds": 120.0,
+      "graphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+      "exactProviderGraph": true,
+      "inputCount": 304,
+      "beforeAfterEqual": true,
+      "retainedFullSourceEqual": true,
+      "rawLogSHA256": "bb28485d971894b0e6e4cd7f912eca0dfe7029471bb34df05b7677aeb0ce7ca6",
+      "rawMatchesReceipt": true,
+      "ownedActiveAtEndAsRecorded": [],
+      "snapshotCaptureAsDocumented": "PRE_RUN_COMPLETE_COPY",
+      "executedByThisReview": false
+    }
+  ],
+  "staticOutputDataChecks": [
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/migration02/outputs/migration-after24.save.json",
+      "SHA256": "4b4d1a0d41563cc2919511191caa608d1e1ba7391a0ac1e67d634b4155a43e1c",
+      "tick": 1491,
+      "clock": 6444,
+      "pages": 9,
+      "coldCounts": {
+        "proofs": 62,
+        "applications": 62,
+        "polls": 17,
+        "terms": 0
+      },
+      "fullCounts": {
+        "proofs": 183,
+        "applications": 83,
+        "polls": 19,
+        "terms": 17
+      },
+      "totalReceiptFees": 2280,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/migration02/outputs/migration.after.save.json",
+      "SHA256": "0bbd3ce11356c2355758fed603bd1bd11a411b8ef95eac0a4100e884f37938a2",
+      "tick": 1467,
+      "clock": 6348,
+      "pages": 7,
+      "coldCounts": {
+        "proofs": 58,
+        "applications": 58,
+        "polls": 13,
+        "terms": 0
+      },
+      "fullCounts": {
+        "proofs": 128,
+        "applications": 64,
+        "polls": 19,
+        "terms": 13
+      },
+      "totalReceiptFees": 2280,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true,
+      "allCompleteDecodedRowsEqualOriginalParsedValues": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/paid-source02/outputs/paid-source-death-after24.save.json",
+      "SHA256": "ef50a3ee1ef97bc3ff2951994d0a12bfc0b3bb624b3d9f5e9d26445fd3ecc4f7",
+      "tick": 1492,
+      "clock": 6448,
+      "pages": 10,
+      "coldCounts": {
+        "proofs": 62,
+        "applications": 62,
+        "polls": 17,
+        "terms": 1
+      },
+      "fullCounts": {
+        "proofs": 176,
+        "applications": 87,
+        "polls": 20,
+        "terms": 17
+      },
+      "totalReceiptFees": 2400,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/paid-source02/outputs/paid-source-death-valid-predecessor.save.json",
+      "SHA256": "6243b248bb8299a012d7797759033cc2a7866791e471a81af8c86a35d9b77c8b",
+      "tick": 1467,
+      "clock": 6348,
+      "pages": 7,
+      "coldCounts": {
+        "proofs": 58,
+        "applications": 58,
+        "polls": 13,
+        "terms": 0
+      },
+      "fullCounts": {
+        "proofs": 128,
+        "applications": 64,
+        "polls": 19,
+        "terms": 13
+      },
+      "totalReceiptFees": 2280,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/paid-source02/outputs/paid-source-employer-after24.save.json",
+      "SHA256": "fafd2d2d3ac8541d779f56385105c5dda11b737c5f5c71279cd3301287b47f70",
+      "tick": 1492,
+      "clock": 6448,
+      "pages": 10,
+      "coldCounts": {
+        "proofs": 62,
+        "applications": 62,
+        "polls": 17,
+        "terms": 1
+      },
+      "fullCounts": {
+        "proofs": 176,
+        "applications": 87,
+        "polls": 20,
+        "terms": 17
+      },
+      "totalReceiptFees": 2400,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/scopes/paid-source02/outputs/paid-source.migrated.save.json",
+      "SHA256": "c461ee83a79913891b3c9b8767aef5cba12306d953dd88208ccdc8136ebf3fa4",
+      "tick": 1467,
+      "clock": 6348,
+      "pages": 7,
+      "coldCounts": {
+        "proofs": 58,
+        "applications": 58,
+        "polls": 13,
+        "terms": 0
+      },
+      "fullCounts": {
+        "proofs": 128,
+        "applications": 64,
+        "polls": 19,
+        "terms": 13
+      },
+      "totalReceiptFees": 2280,
+      "allFragmentDigestsBytesAndPartOrderMatch": true,
+      "dataOnlyNoProductionRuntimeImported": true
+    }
+  ]
+}

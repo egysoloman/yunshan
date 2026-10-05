@@ -1,0 +1,59 @@
+{
+  "source": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source",
+  "inputGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "status": "PLANNED_BEFORE_FIRST_FINAL_INTEGRATED_ACCEPTANCE",
+  "fullSuiteOriginalLimitSeconds": 3600,
+  "phases": [
+    {
+      "name": "build01",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "limitSeconds": 180,
+      "scope": "actual new 322 input80source final integrated build; not GPU/macOS"
+    },
+    {
+      "name": "ui01",
+      "argv": [
+        "npm",
+        "run",
+        "test:ui"
+      ],
+      "limitSeconds": 900,
+      "scope": "original DOM/Simulation fixture; controlled positioning remains explicit, not whole ordinary city journey"
+    },
+    {
+      "name": "education-actual01",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/budget-services-actual.ts",
+        "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/education-actual01/original-artifacts",
+        "1100"
+      ],
+      "limitSeconds": 600,
+      "scope": "same original compact 6 consumer, finite40 plus actual current paid V2 procurement; max1100 original ticks; whole/partition future24"
+    },
+    {
+      "name": "city-life-default-day01",
+      "argv": [
+        "npm",
+        "run",
+        "audit:economy",
+        "--",
+        "--days",
+        "1",
+        "--product-recipe",
+        "city-life-v1",
+        "--out",
+        "artifacts/root15-current-default-day.json"
+      ],
+      "limitSeconds": 1800,
+      "scope": "actual default v6 new three-policy recipe, original speed8/current sample focus harness, money/wage/food/research/alive guards retained; terminal whole and partition future24; not ordinary player path or steady state"
+    }
+  ],
+  "revisionReason": "Read the actual closed ROOT14 304-input default one-day receipt: measured973.041379seconds. The original900second proposed day bound is below its measured prior completion. Before any new day execution, declare1800second owned-process bound; retain the original planned file, one day720steps/speed8, original assertions and terminal+future24."
+}

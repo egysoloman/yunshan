@@ -1,0 +1,16 @@
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (1951.892539ms)
+✔ all three v2 worlds retain their frozen full JSON, fingerprints and authoritative terrain and walking surfaces (9649.171ms)
+✔ legacy worlds retain full main and checkpoint JSON plus their independently captured physical samples (7644.163311ms)
+✔ v3 identifies the changed physical heightfield even when every building, road and station matches v2 (9787.211206ms)
+✔ v3 fingerprints cover physical geology inputs and ignore untrusted extra descriptor fields (1863.828241ms)
+✔ a v2 save stays on its original surface, upper floor, voxel edit and entire financial state after v3 becomes current (12242.117545ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (3199.142903ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (6953.138128ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53888.077597

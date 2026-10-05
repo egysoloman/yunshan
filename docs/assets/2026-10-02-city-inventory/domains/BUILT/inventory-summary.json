@@ -1,0 +1,179 @@
+{
+  "schema": [
+    "asset_id",
+    "中文名称",
+    "类别",
+    "条目类型",
+    "用途关联系统",
+    "状态",
+    "现有证据",
+    "生产方式",
+    "依赖接口",
+    "基础母版ID",
+    "派生规则",
+    "验收要求"
+  ],
+  "scope": "建筑、地标、建筑门窗屋顶楼梯、道路桥轨缆车升降机场、车船飞机本体与附属props；不含人物、室内家具、食物、生活UI、自然环境完整资产",
+  "head": "6c70d27fd96123a68fbd6125a326e065d54df37c",
+  "total_rows": 314,
+  "counts_by_type": {
+    "基础组件": 176,
+    "组合模板": 67,
+    "配色尺寸变体": 28,
+    "材质贴图": 29,
+    "动画特效": 14
+  },
+  "counts_by_status": {
+    "已集成代码生成": 203,
+    "隔离原型未集成": 14,
+    "缺失待制": 96,
+    "待核实": 1
+  },
+  "counts_by_category": {
+    "建筑结构": 18,
+    "建筑组合": 8,
+    "建筑变体": 20,
+    "建筑细部": 12,
+    "建筑旧版构件": 20,
+    "建筑旧版组合": 7,
+    "地标组合": 2,
+    "地标构件": 8,
+    "建筑旧版外立面": 22,
+    "建筑材质": 11,
+    "建筑动画": 2,
+    "交通设施": 30,
+    "交通组合": 7,
+    "交通动画": 1,
+    "载具结构": 4,
+    "载具变体": 7,
+    "载具动画": 1,
+    "航空设施": 2,
+    "航空变体": 1,
+    "航空组合": 2,
+    "航空构件": 10,
+    "航空动画": 2,
+    "航空材质": 6,
+    "隔离交通": 7,
+    "隔离街台": 7,
+    "建筑现代缺项": 14,
+    "建筑街区缺项": 10,
+    "建筑结构缺项": 2,
+    "建筑精细缺项": 7,
+    "建筑外部待核": 1,
+    "材质缺项": 11,
+    "建筑动画缺项": 2,
+    "航空门户缺项": 14,
+    "载具精细缺项": 26,
+    "交通结构缺项": 10
+  },
+  "self_master_rows": 278,
+  "derivative_rows": 36,
+  "test_scope": "仅文件/schema/CSV同列表和引用校验；不运行世界生成、模拟、GPU、npm或外部生成",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "开发备忘录.md",
+      "bytes": 124870,
+      "sha256": "e3f0636479adb712dcdfc838a86578de15fc3a31b272b6d00cc37548f305641f"
+    },
+    {
+      "path": "docs/视觉返工审查与方案.md",
+      "bytes": 16179,
+      "sha256": "9a4b98f2332f7bc62050a1cb8c83dcaf230a150ecffc72a0933b4a1c989932ff"
+    },
+    {
+      "path": "docs/美术资源制作规格.md",
+      "bytes": 23607,
+      "sha256": "8d8c060ef4f227a16c272e263fe1d29c81711f8f42d9e5afd6d5811877a58681"
+    },
+    {
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "bytes": 12657,
+      "sha256": "326d5917ce3b7596c2e9a649557b626887e8e6581b046696ae06303fc9576eb0"
+    },
+    {
+      "path": "docs/体素美术与先图后模型交接.md",
+      "bytes": 8416,
+      "sha256": "ba34edaa32f8496553f0ab032db47c74174afa31775362f99bbd069dffa7427e"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 12048,
+      "sha256": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda"
+    },
+    {
+      "path": "src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f"
+    },
+    {
+      "path": "src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7"
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "bytes": 39817,
+      "sha256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724"
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a"
+    },
+    {
+      "path": "src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee"
+    },
+    {
+      "path": "src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "src/aviation.ts",
+      "bytes": 19659,
+      "sha256": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9"
+    },
+    {
+      "path": "src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    {
+      "path": "src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868"
+    },
+    {
+      "path": "src/simulation.ts",
+      "bytes": 199661,
+      "sha256": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c"
+    }
+  ]
+}

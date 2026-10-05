@@ -1,0 +1,77 @@
+{
+  "result": "FAILED_BEFORE_UPLOAD_PREPARATION",
+  "exitCode": 1,
+  "reason": "Library connection unavailable: network",
+  "newLibraryFileIDs": [],
+  "existingMemoReplacementConfirmed": false,
+  "orderedFiles": [
+    {
+      "filename": "yunshan-root16-report.md",
+      "bytes": 9157,
+      "sha256": "eebf779f9f14188376b034f42664e8679cab378bc14685e44809db3d9917f5f3",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "yunshan-root16-requirements-matrix.md",
+      "bytes": 56455,
+      "sha256": "e5f49484e50a4e705eb9c51458ccaf912e5bbfaa73996c5c594fc2771edb22b1",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "yunshan-root16-source.zip",
+      "bytes": 13824387,
+      "sha256": "18d9c0903649adc9a92a492aba4d57a520f81020a50912727c7c69b63f9f7ab2",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "yunshan-root16-original-evidence.zip",
+      "bytes": 23960903,
+      "sha256": "535c1af6318c627e8db7db3396c8f3ba7b3f12a78e56b7340516d4f1c1d2d9b9",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "229-residents-food-recovery.png",
+      "bytes": 185512,
+      "sha256": "85918faa573e6170ee5b43d5066e48d17da7d0dbe14bc575b26394abe7a8d997",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "229-residents-first-counter-receipt.csv",
+      "bytes": 27540,
+      "sha256": "4751c1b944d723b4828658cc8f4ec608c33c2e27009a3aed3c86d06d6bd3b2c4",
+      "operation": "create_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": null,
+      "expectedVersion": null
+    },
+    {
+      "filename": "开发备忘录.md",
+      "bytes": 456232,
+      "sha256": "908d40e49a7c2e4355b2ecb42f1fa33588f69743b8bae0a950bbb1a565859d0d",
+      "operation": "replace_library_file",
+      "status": "NOT_SAVED",
+      "libraryFileID": "libfile_7571a326de848191aec330d605a63845",
+      "expectedVersion": 7
+    }
+  ],
+  "immutableArchivesUnchanged": true,
+  "fallback": "Git workbranch original files; no attachment delivery claimed",
+  "recordedAt": "2026-10-05T00:51:18.373869+00:00",
+  "resultLogWrittenAt": "2026-10-05T00:48:49.675243+00:00",
+  "fileHashesScope": "local file bytes offered at the single attempted batch, before appending outcome to memo"
+}

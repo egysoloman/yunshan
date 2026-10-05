@@ -1,0 +1,329 @@
+{
+  "name": "bridge-walk-center",
+  "hour": 12,
+  "eye": [
+    -648,
+    20.32,
+    1040
+  ],
+  "target": [
+    -690.6,
+    20.32,
+    1040
+  ],
+  "edgeId": "bridge-river-dock-river-station",
+  "opticalSettings": {
+    "scope": "New fixed pixelRatio1/FOV48/noon/1440x900 diagnostic scope; exact numeric camera poses from coherent05 original JSON; no new v4 door/road recomputation. Prior adaptive-resolution PNGs remain separate evidence.",
+    "pixelRatio": 1,
+    "fov": 48,
+    "aspect": 1.6,
+    "drawingBufferWidth": 1440,
+    "drawingBufferHeight": 900,
+    "worldSeed": 20261001,
+    "worldLayout": "current-v4"
+  },
+  "drawCalls": 200,
+  "triangles": 306316,
+  "shadowSubmission": {
+    "scope": "Explicit colour pass without shadow refresh, then identical fixed-scene render with forced shadow refresh; not a timing benchmark",
+    "shadowStateBeforeColour": {
+      "autoUpdate": false,
+      "needsUpdate": true,
+      "sunCastShadow": true
+    },
+    "colourRefresh": false,
+    "colourPass": {
+      "calls": 200,
+      "triangles": 306316
+    },
+    "totalPass": {
+      "calls": 253,
+      "triangles": 388722
+    },
+    "shadowCalls": 53,
+    "shadowTriangles": 82406,
+    "pixelRatio": 1
+  },
+  "glErrors": [],
+  "residency": {
+    "stats": {
+      "resident": 9,
+      "total": 482,
+      "created": 34,
+      "released": 25,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 9,
+    "actualMeshes": 63,
+    "actualInstances": 6833,
+    "ownedGeometryCount": 63,
+    "interiorBuildingRefs": 13,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [
+      {
+        "id": "-7:10",
+        "buildings": [
+          "river-b50"
+        ]
+      },
+      {
+        "id": "-8:10",
+        "buildings": [
+          "river-b48",
+          "river-b59"
+        ]
+      },
+      {
+        "id": "-8:9",
+        "buildings": [
+          "river-b30"
+        ]
+      },
+      {
+        "id": "-7:9",
+        "buildings": [
+          "river-b6",
+          "river-b26"
+        ]
+      },
+      {
+        "id": "-7:11",
+        "buildings": [
+          "river-b15"
+        ]
+      },
+      {
+        "id": "-6:10",
+        "buildings": [
+          "river-b39"
+        ]
+      },
+      {
+        "id": "-9:10",
+        "buildings": [
+          "river-b28",
+          "river-b45"
+        ]
+      },
+      {
+        "id": "-8:11",
+        "buildings": [
+          "river-b35"
+        ]
+      },
+      {
+        "id": "-7:12",
+        "buildings": [
+          "river-b7",
+          "river-b11"
+        ]
+      }
+    ],
+    "observed": {
+      "creates": 23,
+      "releases": 25,
+      "geometryDisposals": 172,
+      "instanceDisposals": 172,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 723,
+      "textures": 11
+    }
+  },
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "usedTimes": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "usedTimes": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 27,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 28,
+      "usedTimes": 1,
+      "diagnostics": null
+    }
+  ],
+  "architectureDetail": {
+    "activeBuildings": 8,
+    "activeBuildingIds": [
+      "river-b50",
+      "river-b59",
+      "river-b15",
+      "river-b35",
+      "river-b48",
+      "river-b30",
+      "river-b39",
+      "river-b11"
+    ],
+    "instances": 2787,
+    "created": 40,
+    "released": 32,
+    "maxBuildings": 8,
+    "maxInstancesPerBuilding": 640,
+    "loadDistance": 180,
+    "lanternEmission": 0.05315558591507113
+  },
+  "terrainLod": {
+    "water": {
+      "continuous": true,
+      "riverVertices": 18,
+      "plungePoolRadius": 50,
+      "waterfallDrop": 153
+    },
+    "woodland": {
+      "stands": 122,
+      "trees": 5200,
+      "canopyLayers": 4,
+      "farCanopyLayers": 2,
+      "distribution": "continuous district rim belts and mountain shoulders",
+      "floatingRockBodies": 0
+    },
+    "lod": {
+      "visibleFineTiles": 9,
+      "cachedFineTiles": 18,
+      "tileMetres": 96,
+      "surfaceStep": 2,
+      "voxelMetres": 0.2,
+      "lowAltitude": true,
+      "proxyStep": 16,
+      "proxyChunkMetres": 384,
+      "forestDetailChunks": 2
+    }
+  },
+  "waterObjects": [
+    "山腰轻云 · 瀑潭水雾",
+    "瀑潭飞沫 · 落水冲击雾",
+    "瀑潭→清溪→水岸 · 共顶点连续水面",
+    "溪岸 · 灰白水蚀石",
+    "溪岸 · 细茎芦苇",
+    "云瀑 · 153m落差水帘",
+    "瀑下潭 · 可见落水与下游接合",
+    "瀑潭 · 体素泡沫",
+    "细部 · 清溪水岸·东岚院·里居13",
+    "细部 · 清溪水岸·南坡院·商肆15",
+    "细部 · 清溪水岸·南坡院·里居4",
+    "细部 · 清溪水岸·南坡院·梯田农舍9",
+    "细部 · 清溪水岸·北岭院·渡口13",
+    "细部 · 清溪水岸·东岚院·商肆8",
+    "细部 · 清溪水岸·南坡院·渡口10",
+    "细部 · 清溪水岸·南坡院·商肆3"
+  ]
+}

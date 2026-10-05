@@ -1,0 +1,742 @@
+{
+  "frozenAt": "2026-10-04T02:10:25.080724+00:00",
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 3760,
+      "sha256": "c9e53dfd9439de4e4ad7dd6f84323d362063a1b48ffa2db0559d6a8b10b31f81"
+    },
+    {
+      "path": "ROOT07-originals/frozen-inputs.json",
+      "bytes": 27166,
+      "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40"
+    },
+    {
+      "path": "ROOT07-originals/systems01/inputs-after.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "ROOT07-originals/systems01/inputs-before.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "ROOT07-originals/systems01/owned-process.json",
+      "bytes": 1305,
+      "sha256": "c1956ffbe20202f4e1915463c81c7f0d3fd19a0b5c00a45b78119741cbc00821"
+    },
+    {
+      "path": "ROOT07-originals/systems01/raw.log",
+      "bytes": 62115,
+      "sha256": "f78382e4a21ff7fd4461b9398cf5e3097910c84ac975c63275bd474fe6bd7c3d"
+    },
+    {
+      "path": "ROOT07-originals/systems01/receipt.json",
+      "bytes": 1698,
+      "sha256": "acd8c069b0f9096b5ae57613929dc6b7bfdb4c8fa91395fd5d24992e478cdb97"
+    },
+    {
+      "path": "baseline-old-case01/as-run/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "baseline-old-case01/as-run/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "baseline-old-case01/as-run/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "baseline-old-case01/as-run/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "baseline-old-case01/as-run/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "baseline-old-case01/as-run/tests/power.test.ts",
+      "bytes": 20584,
+      "sha256": "d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b"
+    },
+    {
+      "path": "baseline-old-case01/inputs-after.json",
+      "bytes": 9460,
+      "sha256": "f54c1686be2e8489b8126fe3503cf88270cd090c6d6199f5318eea4f86daee90"
+    },
+    {
+      "path": "baseline-old-case01/inputs-before.json",
+      "bytes": 9460,
+      "sha256": "f54c1686be2e8489b8126fe3503cf88270cd090c6d6199f5318eea4f86daee90"
+    },
+    {
+      "path": "baseline-old-case01/owned-process.json",
+      "bytes": 423,
+      "sha256": "66f60b1ad1be930e99eb7e197b1b01a04af5cd737cd9bac5e1283ac71d38f3f6"
+    },
+    {
+      "path": "baseline-old-case01/raw.log",
+      "bytes": 1058,
+      "sha256": "83e8953b830a4e79d418c5cfefdaa03dc36a0c61073b78b915f953dcf4b86bc0"
+    },
+    {
+      "path": "baseline-old-case01/receipt.json",
+      "bytes": 539,
+      "sha256": "a8f5f98fe4cffab7a097aed3b2e197004ffbe10c76ed2e31028f03f3f0c4c896"
+    },
+    {
+      "path": "before/tests/power.test.ts",
+      "bytes": 20584,
+      "sha256": "d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b"
+    },
+    {
+      "path": "change-receipt.json",
+      "bytes": 492,
+      "sha256": "ccb65040b682a882f6c1aa49b48c36132e35187b239820adf7e1a0525974d4c7"
+    },
+    {
+      "path": "copied-original-manifest.json",
+      "bytes": 9460,
+      "sha256": "f54c1686be2e8489b8126fe3503cf88270cd090c6d6199f5318eea4f86daee90"
+    },
+    {
+      "path": "copy-receipt.json",
+      "bytes": 483,
+      "sha256": "37586696b01cd3bead3b60bac1b9ebe8c00887be1598e6d47271057a007b4383"
+    },
+    {
+      "path": "corrected-old-case01/as-run/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "corrected-old-case01/as-run/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "corrected-old-case01/as-run/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "corrected-old-case01/as-run/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "corrected-old-case01/as-run/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "corrected-old-case01/as-run/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "corrected-old-case01/inputs-after.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "corrected-old-case01/inputs-before.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "corrected-old-case01/owned-process.json",
+      "bytes": 525,
+      "sha256": "da1ecb61f922fbcaa657d52ad340bcd8db26243ecded2554dc3efa610cc15440"
+    },
+    {
+      "path": "corrected-old-case01/raw.log",
+      "bytes": 243,
+      "sha256": "899c0526f18052cdcf503b088a5061937522ce54adc745a2e954b468551ee5ff"
+    },
+    {
+      "path": "corrected-old-case01/receipt.json",
+      "bytes": 867,
+      "sha256": "7e6e38c4b08d663dc2e595c57e0c0cdce2d7e5f9e0cfafb5200659c93da6e1f1"
+    },
+    {
+      "path": "diagnose-world.ts",
+      "bytes": 1215,
+      "sha256": "46189675e08028eb65dcaf2836335f92576f3bf510a4d84cf8823ccdbf842141"
+    },
+    {
+      "path": "diagnosis01/as-run/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "diagnosis01/as-run/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "diagnosis01/as-run/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "diagnosis01/as-run/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "diagnosis01/as-run/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "diagnosis01/as-run/tests/power.test.ts",
+      "bytes": 20584,
+      "sha256": "d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b"
+    },
+    {
+      "path": "diagnosis01/inputs-after.json",
+      "bytes": 9460,
+      "sha256": "f54c1686be2e8489b8126fe3503cf88270cd090c6d6199f5318eea4f86daee90"
+    },
+    {
+      "path": "diagnosis01/inputs-before.json",
+      "bytes": 9460,
+      "sha256": "f54c1686be2e8489b8126fe3503cf88270cd090c6d6199f5318eea4f86daee90"
+    },
+    {
+      "path": "diagnosis01/owned-process.json",
+      "bytes": 414,
+      "sha256": "be0ce510d0484d22a5e1160b10ec9b6144d2b34709efb6849561efb83a05614e"
+    },
+    {
+      "path": "diagnosis01/raw.log",
+      "bytes": 1682,
+      "sha256": "7a229a17c079b8b63560af5590563b90672c5da1cd4aeb7d1bdbf849bc64e761"
+    },
+    {
+      "path": "diagnosis01/receipt.json",
+      "bytes": 422,
+      "sha256": "559a9f36b9e8f7cd6f1b0a3844dca66aba6483267124941413a5e3912012cea4"
+    },
+    {
+      "path": "full-power20-01/as-run/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "full-power20-01/as-run/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "full-power20-01/as-run/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "full-power20-01/as-run/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "full-power20-01/as-run/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "full-power20-01/as-run/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "full-power20-01/inputs-after.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "full-power20-01/inputs-before.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "full-power20-01/owned-process.json",
+      "bytes": 458,
+      "sha256": "9fd988d8ba5ce86d49021ae3068783b535825bcb63af0f1bf6a16ecfacd44dda"
+    },
+    {
+      "path": "full-power20-01/raw.log",
+      "bytes": 2436,
+      "sha256": "fad2f5a00158636255cc70ad63ea4c0022327b4c14f99bfe0653bad40ad13291"
+    },
+    {
+      "path": "full-power20-01/receipt.json",
+      "bytes": 795,
+      "sha256": "bf81306093753ec0e6b08d757c76f5550e3582e3fd47c3f20da758fdbd93abbd"
+    },
+    {
+      "path": "memo-fragment.md",
+      "bytes": 595,
+      "sha256": "023ca49fbf0c4e84a627ae9bf66afe9f707b15a398f82edaa24a35342ed82312"
+    },
+    {
+      "path": "native-reader-originals/current-migrated-save.json",
+      "bytes": 695425,
+      "sha256": "eaaf865532f4c32ded9f978698f425c051c79ffed5f612800c93c38c73516a68"
+    },
+    {
+      "path": "native-reader-originals/current-partition-records.json",
+      "bytes": 914635,
+      "sha256": "fa052dc4e5351138eb3f0395793ebab7e5c3423b5049dc81a3283375ca8ad923"
+    },
+    {
+      "path": "native-reader-originals/current-reader-after24.save.json",
+      "bytes": 2166288,
+      "sha256": "fea15e3317b9035f5640511506e0c986601b4b0c4af30dd86cbd158b5945de44"
+    },
+    {
+      "path": "native-reader-originals/original-paid-fixture-copy.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "native-reader-originals/result.json",
+      "bytes": 5148,
+      "sha256": "e65822610214fc336b8f9bd0d4cf56f9a76b15886ff714954b11d7e708fd59a7"
+    },
+    {
+      "path": "native-reader24-01/as-run/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "native-reader24-01/as-run/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "native-reader24-01/as-run/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "native-reader24-01/as-run/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "native-reader24-01/as-run/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "native-reader24-01/as-run/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "native-reader24-01/inputs-after.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "native-reader24-01/inputs-before.json",
+      "bytes": 9460,
+      "sha256": "974520ade05d652b953df16947d151c8ed4f7044c23d2d0540d267b9c935da9d"
+    },
+    {
+      "path": "native-reader24-01/owned-process.json",
+      "bytes": 414,
+      "sha256": "5685591b8450d9260f1507750b2b0494c8b030b8d23370e85e10294adb2b7424"
+    },
+    {
+      "path": "native-reader24-01/raw.log",
+      "bytes": 5149,
+      "sha256": "a77769301502649c730cf9c5da03ca8b82c11cee9972521a1fd48b6e1261fa76"
+    },
+    {
+      "path": "native-reader24-01/receipt.json",
+      "bytes": 757,
+      "sha256": "d9e3544a60354309899e0534afc28324dae5b5be768f2379a73a0e579727cd92"
+    },
+    {
+      "path": "native-reader24.ts",
+      "bytes": 2636,
+      "sha256": "e07416dabbe0f63c8abdb3f6e91136ae54317e1632d19768ea2ccb0123b925bc"
+    },
+    {
+      "path": "patch-apply-check/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "patch-apply-receipt.json",
+      "bytes": 381,
+      "sha256": "b65076fbe0c21bf33d3d653107bdd0dc977b40d3dea02b765bcf44f1778c2866"
+    },
+    {
+      "path": "patch-apply.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "patch-check.raw",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "power-old-reader-only.patch",
+      "bytes": 1901,
+      "sha256": "7199e4d38860b0a3cc7cbc5907121ee1bdab0eb10456d7eaa61dc158d18c8422"
+    },
+    {
+      "path": "run-v1-original.py",
+      "bytes": 2142,
+      "sha256": "73910582cec2064bfa71ad6d1e486d2f36d2886bc25328de9e001367d61de8df"
+    },
+    {
+      "path": "run.py",
+      "bytes": 2335,
+      "sha256": "09343e20f6b11d96945d640f092865896c0b726181e7dedf9735fc0c2ad99772"
+    },
+    {
+      "path": "source/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4"
+    },
+    {
+      "path": "source/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5"
+    },
+    {
+      "path": "source/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb"
+    },
+    {
+      "path": "source/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "source/src/architecture-floor-plan.ts",
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    },
+    {
+      "path": "source/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "source/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "source/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "source/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "source/src/hygiene-ui.ts",
+      "bytes": 4049,
+      "sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611"
+    },
+    {
+      "path": "source/src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "source/src/main.ts",
+      "bytes": 24422,
+      "sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+    },
+    {
+      "path": "source/src/persistence/partition.ts",
+      "bytes": 16813,
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc"
+    },
+    {
+      "path": "source/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "source/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "source/src/persistence/world-layout.ts",
+      "bytes": 5191,
+      "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+    },
+    {
+      "path": "source/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    {
+      "path": "source/src/renderer.ts",
+      "bytes": 93024,
+      "sha256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03"
+    },
+    {
+      "path": "source/src/rendering/architecture-bodies.ts",
+      "bytes": 13231,
+      "sha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c"
+    },
+    {
+      "path": "source/src/rendering/architecture-detail.ts",
+      "bytes": 39811,
+      "sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd"
+    },
+    {
+      "path": "source/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "source/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "source/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "source/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a"
+    },
+    {
+      "path": "source/src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "source/src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "source/src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "source/src/simulation/activity-capacity.ts",
+      "bytes": 5009,
+      "sha256": "c8bc8a9cf18ed761790ac99ad43e5702e4c8db676a8a3129317ec6f35c0fdd42"
+    },
+    {
+      "path": "source/src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "source/src/simulation/banking.ts",
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "path": "source/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "source/src/simulation/culture.ts",
+      "bytes": 66849,
+      "sha256": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa"
+    },
+    {
+      "path": "source/src/simulation/education.ts",
+      "bytes": 46386,
+      "sha256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856"
+    },
+    {
+      "path": "source/src/simulation/extensions.ts",
+      "bytes": 92122,
+      "sha256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552"
+    },
+    {
+      "path": "source/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "source/src/simulation/family.ts",
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "path": "source/src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "source/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "source/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "source/src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "source/src/simulation/hygiene.ts",
+      "bytes": 50182,
+      "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+    },
+    {
+      "path": "source/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "source/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "source/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "source/src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "source/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "source/src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "source/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "source/src/simulation/shop_lifecycle.ts",
+      "bytes": 70212,
+      "sha256": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066"
+    },
+    {
+      "path": "source/src/simulation/supplemental-budget.ts",
+      "bytes": 15871,
+      "sha256": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0"
+    },
+    {
+      "path": "source/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "path": "source/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "source/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    {
+      "path": "source/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "source/src/types.ts",
+      "bytes": 14320,
+      "sha256": "1517b9e21582269de9b7d352d297a71d732771ee8b08501f975222c40303ee1e"
+    },
+    {
+      "path": "source/src/ui.ts",
+      "bytes": 190928,
+      "sha256": "0a5b600ea4be90b4f5aaa0c919a4a999a7bf84245c13bc7dd39dac31493deecf"
+    },
+    {
+      "path": "source/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "source/tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "source/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "source/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "source/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+    },
+    {
+      "path": "source/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f"
+    },
+    {
+      "path": "validation-results.json",
+      "bytes": 12101,
+      "sha256": "a21575f074172333c3a20dc1bc64579f8b900d9264cc5ff536f9deeb9416238c"
+    }
+  ],
+  "count": 145,
+  "bytes": 12914627,
+  "secretHighConfidencePatternMatches": 0,
+  "all241Root07InputsStillMatch": true,
+  "unchangedOriginal330Failure": true,
+  "ownedFiles": [
+    "tests/power.test.ts"
+  ],
+  "noSharedOrRoot07Write": true,
+  "noLibrary": true,
+  "noGitMutation": true,
+  "status": "READY_TEST_ONLY_PATCH_AND_ORIGINAL_EVIDENCE"
+}

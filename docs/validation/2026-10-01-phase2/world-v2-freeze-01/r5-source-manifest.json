@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-01T21:21:18.017Z",
+  "source": {
+    "originalImmutableSnapshot": "/tmp/yunshan-phase2-player-home-r5b",
+    "sourceHashes": {
+      "src/world.ts": "9f52422f599143c6dfd33050a9bc7e13dc536298b6a7a63ae35f208afa163c80",
+      "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+      "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96",
+      "src/persistence/world-layout.ts": "b4483cb936aabe9801a47693b7ca1e3fdae3ec3bc58fb7e6249bf1c836c3aed6",
+      "package.json": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "tsconfig.json": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+    }
+  },
+  "records": [
+    {
+      "seed": 20261001,
+      "fingerprint": "c70ebca5",
+      "worldSha256": "762a1b9f34f01f12190312228494668400e2fb0f49b689ac3c1ed0b0071d482b",
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10596,
+      "jsonSha256": "95491782e97558533f54fc5a0fbf62f071bf0e6766341e8a33a378e207b9f7b8",
+      "gzipSha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "gzipBytes": 324477
+    },
+    {
+      "seed": 7,
+      "fingerprint": "67f0766",
+      "worldSha256": "089414236ae1ba72b9c0580609b0b27461d6e266d256a7b2a489cecaca271827",
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10468,
+      "jsonSha256": "bd1c43b62a6d1e60c6fb4320bc1a589ab78f01d5a136313561ef20a933d73985",
+      "gzipSha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "gzipBytes": 321647
+    },
+    {
+      "seed": 2024,
+      "fingerprint": "f2262884",
+      "worldSha256": "85a1dd9779d477dc714b6d39b4a2310a5fc1dee073c3f2239915a57f0aec6b64",
+      "gridSamples": 841,
+      "doorSamples": 1224,
+      "deckSamples": 10475,
+      "jsonSha256": "c3183eadaf3e21b17aee285325da05aa5fdd956df1c571e5b6c700400966ae68",
+      "gzipSha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "gzipBytes": 321439
+    }
+  ],
+  "limits": [
+    "Trusted old source reconstruction only. No browser profile was opened, read or modified.",
+    "Actual native-UI r5 load/export remains a separate integration validation."
+  ]
+}

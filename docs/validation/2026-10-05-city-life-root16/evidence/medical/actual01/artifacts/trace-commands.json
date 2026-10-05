@@ -1,0 +1,2098 @@
+[
+  {
+    "command": {
+      "type": "rest",
+      "targetId": "civic-0-clinic"
+    },
+    "before": {
+      "tick": 2392,
+      "clock": 10048,
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999993
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 416.02821428458134,
+        "reputation": 0,
+        "needs": {
+          "hunger": 91.51999999999953,
+          "fatigue": 69.4959999999983,
+          "social": 0,
+          "fun": 43.8879999999972
+        },
+        "inventory": {
+          "block": 32,
+          "food": 1
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.018203957378375,
+        "health": 76.68774009276821,
+        "mood": 51.152008549631766,
+        "stress": 0.00031632803139048277,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 42584.00773021205,
+      "ledgerCount": 139
+    },
+    "result": {
+      "ok": true,
+      "message": "在有限补充服务clinic休息，体力恢复。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999993
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 401.02821428458134,
+        "reputation": 0,
+        "needs": {
+          "hunger": 91.51999999999953,
+          "fatigue": 92.4959999999983,
+          "social": 0,
+          "fun": 55.8879999999972
+        },
+        "inventory": {
+          "block": 32,
+          "food": 1
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.018203957378375,
+        "health": 76.68774009276821,
+        "mood": 51.152008549631766,
+        "stress": 0.00031632803139048277,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 42599.00773021205,
+      "ledger": [
+        {
+          "tick": 2392,
+          "actorId": "player",
+          "amount": 15,
+          "purpose": "公共休憩设施服务费",
+          "districtId": "civic-0",
+          "account": "public"
+        }
+      ]
+    }
+  },
+  {
+    "command": {
+      "type": "eat",
+      "targetId": "food"
+    },
+    "before": {
+      "tick": 2703,
+      "clock": 11292,
+      "player": {
+        "position": {
+          "x": 156.79999999999737,
+          "y": 1.577254007652643,
+          "z": 19.999999999999847
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 401.02821428458134,
+        "reputation": 0,
+        "needs": {
+          "hunger": 47.97999999999935,
+          "fatigue": 70.10399999999746,
+          "social": 0,
+          "fun": 44.691999999996774
+        },
+        "inventory": {
+          "block": 32,
+          "food": 1
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.020570776251567,
+        "health": 77.8315539415959,
+        "mood": 42.491719094804346,
+        "stress": 0.0000016985347247744967,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 35839.896191809545,
+      "ledgerCount": 155
+    },
+    "result": {
+      "ok": true,
+      "message": "实际食用一份随身食品，剩余食品留在行囊。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": 156.79999999999737,
+          "y": 1.577254007652643,
+          "z": 19.999999999999847
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 401.02821428458134,
+        "reputation": 0,
+        "needs": {
+          "hunger": 99.97999999999935,
+          "fatigue": 70.10399999999746,
+          "social": 0,
+          "fun": 44.691999999996774
+        },
+        "inventory": {
+          "block": 32,
+          "food": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.020570776251567,
+        "health": 77.8315539415959,
+        "mood": 42.491719094804346,
+        "stress": 0.0000016985347247744967,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 35839.896191809545,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "purchase",
+      "targetId": "shop-civic-1-market",
+      "value": 18
+    },
+    "before": {
+      "tick": 2851,
+      "clock": 11884,
+      "player": {
+        "position": {
+          "x": 282,
+          "y": 0.6,
+          "z": 5.9999999999999964
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 401.02821428458134,
+        "reputation": 0,
+        "needs": {
+          "hunger": 79.25999999999927,
+          "fatigue": 59.44799999999705,
+          "social": 0,
+          "fun": 39.36399999999657
+        },
+        "inventory": {
+          "block": 32,
+          "food": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.021697108062604,
+        "health": 78.37590443456588,
+        "mood": 46.229918257545535,
+        "stress": 1.4118452474707954e-7,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 36170.08809657808,
+      "ledgerCount": 157
+    },
+    "result": {
+      "ok": true,
+      "message": "在现场补选参数街坊1market购买18份食物，花费276.0云币。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": 282,
+          "y": 0.6,
+          "z": 5.9999999999999964
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 0,
+        "needs": {
+          "hunger": 100,
+          "fatigue": 59.44799999999705,
+          "social": 0,
+          "fun": 39.36399999999657
+        },
+        "inventory": {
+          "block": 32,
+          "food": 17
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.021697108062604,
+        "health": 78.37590443456588,
+        "mood": 46.229918257545535,
+        "stress": 1.4118452474707954e-7,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 36170.08809657808,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-11"
+    },
+    "before": {
+      "tick": 3121,
+      "clock": 12964,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 0,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 17,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "许溪记住了这次gift，关系：acquaintance，好感12。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 0.5,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 16,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-55"
+    },
+    "before": {
+      "tick": 3121,
+      "clock": 12964,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 0.5,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 16,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "顾遥记住了这次gift，关系：acquaintance，好感12。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 1,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 15,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-44"
+    },
+    "before": {
+      "tick": 3121,
+      "clock": 12964,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 1,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 15,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "温舟记住了这次gift，关系：acquaintance，好感13。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 1.5,
+        "needs": {
+          "hunger": 62.19999999999985,
+          "fatigue": 40.007999999996315,
+          "social": 0,
+          "fun": 29.643999999996204
+        },
+        "inventory": {
+          "block": 32,
+          "food": 14,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023751902582738,
+        "health": 79.36901954058182,
+        "mood": 34.76044201697987,
+        "stress": 1.5100545492740716e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-11"
+    },
+    "before": {
+      "tick": 3124,
+      "clock": 12976,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 1.5,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 14,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "许溪记住了这次gift，关系：acquaintance，好感24。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 2,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 13,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-55"
+    },
+    "before": {
+      "tick": 3124,
+      "clock": 12976,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 2,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 13,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "顾遥记住了这次gift，关系：acquaintance，好感25。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 2.5,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 12,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-44"
+    },
+    "before": {
+      "tick": 3124,
+      "clock": 12976,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 2.5,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 12,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "温舟记住了这次gift，关系：acquaintance，好感26。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 3,
+        "needs": {
+          "hunger": 61.779999999999845,
+          "fatigue": 39.79199999999631,
+          "social": 0,
+          "fun": 29.5359999999962
+        },
+        "inventory": {
+          "block": 32,
+          "food": 11,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023774733632962,
+        "health": 79.38005420738746,
+        "mood": 34.57449597596905,
+        "stress": 1.4358032096081461e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-11"
+    },
+    "before": {
+      "tick": 3127,
+      "clock": 12988,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 3,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 11,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "许溪记住了这次gift，关系：friend，好感36。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 3.5,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 10,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-55"
+    },
+    "before": {
+      "tick": 3127,
+      "clock": 12988,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 3.5,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 10,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "顾遥记住了这次gift，关系：friend，好感38。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 4,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 9,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-44"
+    },
+    "before": {
+      "tick": 3127,
+      "clock": 12988,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 4,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 9,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "温舟记住了这次gift，关系：friend，好感40。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 4.5,
+        "needs": {
+          "hunger": 61.35999999999984,
+          "fatigue": 39.5759999999963,
+          "social": 0,
+          "fun": 29.427999999996196
+        },
+        "inventory": {
+          "block": 32,
+          "food": 8,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023797564683186,
+        "health": 79.3910888768115,
+        "mood": 34.38854471692586,
+        "stress": 1.3652029045653307e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-11"
+    },
+    "before": {
+      "tick": 3130,
+      "clock": 13000,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 4.5,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 8,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "许溪记住了这次gift，关系：friend，好感48。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 5,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 7,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-55"
+    },
+    "before": {
+      "tick": 3130,
+      "clock": 13000,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 5,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 7,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "顾遥记住了这次gift，关系：friend，好感52。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 5.5,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 6,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-44"
+    },
+    "before": {
+      "tick": 3130,
+      "clock": 13000,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 5.5,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 6,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "温舟记住了这次gift，关系：friend，好感53。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6,
+        "needs": {
+          "hunger": 60.93999999999984,
+          "fatigue": 39.35999999999629,
+          "social": 0,
+          "fun": 29.31999999999619
+        },
+        "inventory": {
+          "block": 32,
+          "food": 5,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02382039573341,
+        "health": 79.40212354899762,
+        "mood": 34.202588744453266,
+        "stress": 1.2980741080403845e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "gift",
+      "targetId": "citizen-44"
+    },
+    "before": {
+      "tick": 3133,
+      "clock": 13012,
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6,
+        "needs": {
+          "hunger": 60.51999999999984,
+          "fatigue": 39.14399999999628,
+          "social": 0,
+          "fun": 29.211999999996188
+        },
+        "inventory": {
+          "block": 32,
+          "food": 5,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023843226783633,
+        "health": 79.4131582240892,
+        "mood": 34.016628514357286,
+        "stress": 1.2342461214593801e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "温舟记住了这次gift，关系：friend，好感65。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -2.0000000000000537,
+          "y": 6.6,
+          "z": 1.1999999999998772
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 60.51999999999984,
+          "fatigue": 39.14399999999628,
+          "social": 0,
+          "fun": 29.211999999996188
+        },
+        "inventory": {
+          "block": 32,
+          "food": 4,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.023843226783633,
+        "health": 79.4131582240892,
+        "mood": 34.016628514357286,
+        "stress": 1.2342461214593801e-9,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 29687.127739939755,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "eat",
+      "targetId": "food"
+    },
+    "before": {
+      "tick": 3223,
+      "clock": 13372,
+      "player": {
+        "position": {
+          "x": -25.60000000000002,
+          "y": 0.6,
+          "z": -39.99999999999998
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 47.91999999999979,
+          "fatigue": 32.66399999999604,
+          "social": 0,
+          "fun": 25.971999999996065
+        },
+        "inventory": {
+          "block": 32,
+          "food": 4,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.024528158290344,
+        "health": 79.74420052504327,
+        "mood": 28.436982426771262,
+        "stress": 2.7193824123512594e-10,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30109.748213832867,
+      "ledgerCount": 174
+    },
+    "result": {
+      "ok": true,
+      "message": "实际食用一份随身食品，剩余食品留在行囊。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -25.60000000000002,
+          "y": 0.6,
+          "z": -39.99999999999998
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 99.91999999999979,
+          "fatigue": 32.66399999999604,
+          "social": 0,
+          "fun": 25.971999999996065
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.024528158290344,
+        "health": 79.74420052504327,
+        "mood": 28.436982426771262,
+        "stress": 2.7193824123512594e-10,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30109.748213832867,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "rest",
+      "targetId": "civic-0-clinic"
+    },
+    "before": {
+      "tick": 3332,
+      "clock": 13808,
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 124.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 84.65999999999973,
+          "fatigue": 24.815999999996095,
+          "social": 0,
+          "fun": 22.047999999995916
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.025357686448473,
+        "health": 80.14497550611588,
+        "mood": 34.35603372201872,
+        "stress": 0.00277342596955844,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30352.924417099202,
+      "ledgerCount": 182
+    },
+    "result": {
+      "ok": true,
+      "message": "在有限补充服务clinic休息，体力恢复。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 109.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 84.65999999999973,
+          "fatigue": 47.815999999996095,
+          "social": 0,
+          "fun": 34.047999999995916
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.025357686448473,
+        "health": 80.14497550611588,
+        "mood": 34.35603372201872,
+        "stress": 0.00277342596955844,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30367.924417099202,
+      "ledger": [
+        {
+          "tick": 3332,
+          "actorId": "player",
+          "amount": 15,
+          "purpose": "公共休憩设施服务费",
+          "districtId": "civic-0",
+          "account": "public"
+        }
+      ]
+    }
+  },
+  {
+    "command": {
+      "type": "attendService",
+      "targetId": "service-2"
+    },
+    "before": {
+      "tick": 3332,
+      "clock": 13808,
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 109.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 84.65999999999973,
+          "fatigue": 47.815999999996095,
+          "social": 0,
+          "fun": 34.047999999995916
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.025357686448473,
+        "health": 80.14497550611588,
+        "mood": 34.35603372201872,
+        "stress": 0.00277342596955844,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30367.924417099202,
+      "ledgerCount": 183
+    },
+    "result": {
+      "ok": true,
+      "message": "已参加现场诊疗；必须等待在岗人员并实际投入20分钟，离场暂停。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 109.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 84.65999999999973,
+          "fatigue": 47.815999999996095,
+          "social": 0,
+          "fun": 34.047999999995916
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.025357686448473,
+        "health": 80.14497550611588,
+        "mood": 34.35603372201872,
+        "stress": 0.00277342596955844,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30367.924417099202,
+      "ledger": []
+    }
+  },
+  {
+    "command": {
+      "type": "rest",
+      "targetId": "civic-0-clinic"
+    },
+    "before": {
+      "tick": 3340,
+      "clock": 13840,
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 109.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 83.53999999999972,
+          "fatigue": 47.23999999999607,
+          "social": 0,
+          "fun": 33.759999999995905
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02541856924907,
+        "health": 100,
+        "mood": 36.015183046226994,
+        "stress": 0,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30421.465734624468,
+      "ledgerCount": 183
+    },
+    "result": {
+      "ok": true,
+      "message": "在有限补充服务clinic休息，体力恢复。"
+    },
+    "after": {
+      "player": {
+        "position": {
+          "x": -135.99999999999994,
+          "y": 0.6,
+          "z": -59.99999999999988
+        },
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 94.99773117645373,
+        "reputation": 6.5,
+        "needs": {
+          "hunger": 83.53999999999972,
+          "fatigue": 70.23999999999607,
+          "social": 0,
+          "fun": 45.759999999995905
+        },
+        "inventory": {
+          "block": 32,
+          "food": 3,
+          "businesses": 0,
+          "business:civic-0-farm": 0
+        },
+        "homeId": null,
+        "education": 0,
+        "experience": 0,
+        "partnerId": null,
+        "vehicleId": null
+      },
+      "profile": {
+        "age": 24.02541856924907,
+        "health": 100,
+        "mood": 36.015183046226994,
+        "stress": 0,
+        "alive": true,
+        "skill": 0,
+        "family": [],
+        "historyTags": [
+          "星际来客"
+        ]
+      },
+      "treasury": 30436.465734624468,
+      "ledger": [
+        {
+          "tick": 3340,
+          "actorId": "player",
+          "amount": 15,
+          "purpose": "公共休憩设施服务费",
+          "districtId": "civic-0",
+          "account": "public"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,1 @@
+两项新室内Library参考的官方prepare成功，官方完整transfer helper各执行一次，均exit1，原错误“library file transfer failed: download failed”。没有原PNG可供实际view，未据两图编造家具映射或新资产数量；未重试。已实际查看的先前两张建筑/立面图与28项映射仍有效。完整transfer对象只留私有临时目录，交付中不含下载签名URL。

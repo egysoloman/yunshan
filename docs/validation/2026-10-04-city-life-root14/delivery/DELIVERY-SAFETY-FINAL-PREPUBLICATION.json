@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "at": "2026-10-04T17:30:43.804521+00:00",
+  "scope": "every regular source freshly SHA-read; identical byte content reuses complete literal scan; recursive gzip/zip recognized by magic; no semantic or antivirus claim",
+  "patternKinds": [
+    "tripo-secret-shape",
+    "github-personal-token-shape",
+    "github-classic-token-shape",
+    "aws-access-key-shape",
+    "openai-secret-shape",
+    "bearer-literal-shape",
+    "private-key-block",
+    "credential-json-literal",
+    "signed-or-tokenized-url"
+  ],
+  "statistics": {
+    "regularFilesCoveredWithFreshSHA256": 632,
+    "uniqueRegularContentsScanned": 608,
+    "regularContentReuseCount": 24,
+    "uniqueByteContentsScannedIncludingNested": 829,
+    "nestedContentReuseCount": 4118,
+    "gzipContainersExpanded": 26,
+    "zipContainersExpanded": 2,
+    "expandedZipMembersCovered": 623,
+    "scannedBytes": 460228933
+  },
+  "findingCount": 0,
+  "findings": [],
+  "sensitiveValuesPrinted": false,
+  "originalFilesModified": false,
+  "tarExtension": "regular members and safe prior in-archive hardlinks expanded recursively; no extraction or external access",
+  "sourceBeforeAfterStable": true,
+  "inputGraphSHA256": "5603eaaf84575d2d59a2886b186096a6916b84c4924cd1840bd10631e4daf129",
+  "meaning": "Literal-shape credential scan only; not semantic security/antivirus audit",
+  "completeGoal": false
+}

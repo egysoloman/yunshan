@@ -1,0 +1,133 @@
+{
+  "status": "MAP_ALLOWLIST_ONLY",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5742,
+      "sha256": "bc3bd53e6c9f9a9fc65fb7ad0a4e3a02da1d436858e23a64bf0908f67f00090a"
+    },
+    {
+      "path": "world-native.json",
+      "bytes": 1730848,
+      "sha256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8"
+    },
+    {
+      "path": "city-census.json",
+      "bytes": 17824,
+      "sha256": "a48c724dcc9da5766e712ecce9345a09010cfc5aaf63c902536a26fa14e1d7e6"
+    },
+    {
+      "path": "buildings.csv",
+      "bytes": 151707,
+      "sha256": "cf1fab8b8cf8ae089313abb2c6df911aceb81f778f157197a8b2be8182dc984c"
+    },
+    {
+      "path": "transport-edges.csv",
+      "bytes": 78532,
+      "sha256": "6da46b6d7cf59da3a8a12dbd2cc4be0cc5f8db628e2d06a57362a2c2d89f41e5"
+    },
+    {
+      "path": "terrain-height-f64.bin",
+      "bytes": 69192,
+      "sha256": "39a7cf801c9befd7a8419fdfb0081e4c2dfa17f4833b0e2bdb1620891400a4f1"
+    },
+    {
+      "path": "terrain-grid.json",
+      "bytes": 426,
+      "sha256": "babca6e0c780ac1c22fab88a8b050f2d79cff1f4d54fedc6b87c490e99482812"
+    },
+    {
+      "path": "source-start.json",
+      "bytes": 10313,
+      "sha256": "5b1960e4b3e8f616ef14af81db3120e2db4d06dae2703c24e42ee4f74f25c935"
+    },
+    {
+      "path": "source-end.json",
+      "bytes": 10313,
+      "sha256": "5b1960e4b3e8f616ef14af81db3120e2db4d06dae2703c24e42ee4f74f25c935"
+    },
+    {
+      "path": "collection-manifest.json",
+      "bytes": 630,
+      "sha256": "a3eac84445560fd61fc7fca135dc3c5c5290a949b7fadafc58ee83318cdf135a"
+    },
+    {
+      "path": "geometry-source-08-to-09-proof.json",
+      "bytes": 1407,
+      "sha256": "b7ec6daed3651cbd65f8cd1d4a6dada589e876306a6ab9c1eb2696914c12528a"
+    },
+    {
+      "path": "collect-city-map.mjs",
+      "bytes": 9898,
+      "sha256": "b50f4c4f12f2ac58307666b1271029209b3c1bf86978695798693908b960111f"
+    },
+    {
+      "path": "collect.log",
+      "bytes": 19526,
+      "sha256": "fdf0066dd44509e3cf40395da1147f94525077a32d5388b9b4cb093b1ef84124"
+    },
+    {
+      "path": "plot-city-map.py",
+      "bytes": 15274,
+      "sha256": "04260c64dc39f3dd6df97828fa120a2a395391b313c96841c2e59d40397008fa"
+    },
+    {
+      "path": "plot-manifest.json",
+      "bytes": 686,
+      "sha256": "c5dc0fbb59b96bbcc44b9ba6f7ea89db5b58c2588dae0e2fcd077455afc03063"
+    },
+    {
+      "path": "plot-warnings.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "plot.log",
+      "bytes": 2094,
+      "sha256": "664133721e219c990ab44fef6ecfdc25834b14d6ca0446cc6c03d214655e352a"
+    },
+    {
+      "path": "city-map-preview.png",
+      "bytes": 1756572,
+      "sha256": "008234e85b1eebcc4fb96b3927a7ec48b3d2c0faa10ad1ac966c4747113a3260"
+    },
+    {
+      "path": "云山巨城-当前城市设计图.png",
+      "bytes": 3871659,
+      "sha256": "6bd2a6e03aca56ad997e8c40a1f88f782767db5193788cb053d2bece9aaec912"
+    },
+    {
+      "path": "云山巨城-当前城市设计图.pdf",
+      "bytes": 1736955,
+      "sha256": "b093bf55ac6bb6c9ab087b33167aef9622913a1c3c651ef018f4af5633174943"
+    },
+    {
+      "path": "云山巨城-市集与主阁局部.png",
+      "bytes": 1449236,
+      "sha256": "d23f191e4191b4d1aac79eede76e0fe1852208367acb4ac486455968434958dc"
+    },
+    {
+      "path": "package-city-map.py",
+      "bytes": 3852,
+      "sha256": "8db54bdcf4a60b3e3a7365d3b276c1788ddf64f333fb996520bcce49f5dc36b0"
+    },
+    {
+      "path": "SHA256SUMS.json",
+      "bytes": 4004,
+      "sha256": "2444fb1c2a0b96d052373fbdaf59f261a9f878733106bf0109c80b3f64b40d04"
+    }
+  ],
+  "excluded": [
+    "private Library helpers/responses",
+    "plot font cache",
+    "building-footprints.json (in ZIP)",
+    "city-layers.geojson (in ZIP)"
+  ],
+  "rawZIP": {
+    "path": "云山巨城-当前城市地图-原始数据.zip",
+    "bytes": 13681457,
+    "sha256": "21a295489184662256239df2310456254bc348c78e9fcfc5cef25f19acf0b2c8",
+    "members": 25,
+    "allMemberSHA256Verified": true
+  }
+}

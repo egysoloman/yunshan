@@ -1,0 +1,3610 @@
+{
+  "seed": 20261004,
+  "voxelSize": 0.2,
+  "size": 4000,
+  "districts": [
+    {
+      "id": "civic-0",
+      "name": "现场补选参数街坊0",
+      "kind": "government",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-1",
+      "name": "现场补选参数街坊1",
+      "kind": "government",
+      "center": {
+        "x": 250,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-2",
+      "name": "现场补选参数街坊2",
+      "kind": "government",
+      "center": {
+        "x": 500,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-3",
+      "name": "现场补选参数街坊3",
+      "kind": "government",
+      "center": {
+        "x": 750,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-4",
+      "name": "现场补选参数街坊4",
+      "kind": "government",
+      "center": {
+        "x": 1000,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-5",
+      "name": "现场补选参数街坊5",
+      "kind": "government",
+      "center": {
+        "x": 1250,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-6",
+      "name": "现场补选参数街坊6",
+      "kind": "government",
+      "center": {
+        "x": 1500,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-7",
+      "name": "现场补选参数街坊7",
+      "kind": "government",
+      "center": {
+        "x": 1750,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-8",
+      "name": "现场补选参数街坊8",
+      "kind": "government",
+      "center": {
+        "x": 2000,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-9",
+      "name": "现场补选参数街坊9",
+      "kind": "government",
+      "center": {
+        "x": 2250,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    },
+    {
+      "id": "civic-10",
+      "name": "现场补选参数街坊10",
+      "kind": "government",
+      "center": {
+        "x": 2500,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 120,
+      "color": "#bbcccc",
+      "population": 56
+    }
+  ],
+  "buildings": [
+    {
+      "id": "civic-0-home",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0home",
+      "kind": "home",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 0,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-0-market",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0market",
+      "kind": "market",
+      "position": {
+        "x": 32,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 32,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-0-farm",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0farm",
+      "kind": "farm",
+      "position": {
+        "x": 64,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 64,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-0-hall",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0hall",
+      "kind": "hall",
+      "position": {
+        "x": 96,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 96,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 96,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 96,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 96,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 96,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 96,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 96,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-1-home",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1home",
+      "kind": "home",
+      "position": {
+        "x": 250,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 250,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-1-market",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1market",
+      "kind": "market",
+      "position": {
+        "x": 282,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 282,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-1-farm",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1farm",
+      "kind": "farm",
+      "position": {
+        "x": 314,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 314,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-1-hall",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1hall",
+      "kind": "hall",
+      "position": {
+        "x": 346,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 346,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 346,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 346,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-2-home",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2home",
+      "kind": "home",
+      "position": {
+        "x": 500,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 500,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-2-market",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2market",
+      "kind": "market",
+      "position": {
+        "x": 532,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 532,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-2-farm",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2farm",
+      "kind": "farm",
+      "position": {
+        "x": 564,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 564,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-2-hall",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2hall",
+      "kind": "hall",
+      "position": {
+        "x": 596,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 596,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 596,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 596,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-3-home",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3home",
+      "kind": "home",
+      "position": {
+        "x": 750,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 750,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-3-market",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3market",
+      "kind": "market",
+      "position": {
+        "x": 782,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 782,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-3-farm",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3farm",
+      "kind": "farm",
+      "position": {
+        "x": 814,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 814,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-3-hall",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3hall",
+      "kind": "hall",
+      "position": {
+        "x": 846,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 846,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 846,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 846,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 846,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 846,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 846,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 846,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-4-home",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4home",
+      "kind": "home",
+      "position": {
+        "x": 1000,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1000,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-4-market",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4market",
+      "kind": "market",
+      "position": {
+        "x": 1032,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1032,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-4-farm",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4farm",
+      "kind": "farm",
+      "position": {
+        "x": 1064,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1064,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-4-hall",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4hall",
+      "kind": "hall",
+      "position": {
+        "x": 1096,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1096,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 1096,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 1096,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 1096,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 1096,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 1096,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 1096,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-5-home",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5home",
+      "kind": "home",
+      "position": {
+        "x": 1250,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1250,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-5-market",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5market",
+      "kind": "market",
+      "position": {
+        "x": 1282,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1282,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-5-farm",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5farm",
+      "kind": "farm",
+      "position": {
+        "x": 1314,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1314,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-5-hall",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5hall",
+      "kind": "hall",
+      "position": {
+        "x": 1346,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1346,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 1346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 1346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 1346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 1346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 1346,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 1346,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-6-home",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6home",
+      "kind": "home",
+      "position": {
+        "x": 1500,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1500,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-6-market",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6market",
+      "kind": "market",
+      "position": {
+        "x": 1532,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1532,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-6-farm",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6farm",
+      "kind": "farm",
+      "position": {
+        "x": 1564,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1564,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-6-hall",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6hall",
+      "kind": "hall",
+      "position": {
+        "x": 1596,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1596,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 1596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 1596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 1596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 1596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 1596,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 1596,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-7-home",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7home",
+      "kind": "home",
+      "position": {
+        "x": 1750,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1750,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-7-market",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7market",
+      "kind": "market",
+      "position": {
+        "x": 1782,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1782,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-7-farm",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7farm",
+      "kind": "farm",
+      "position": {
+        "x": 1814,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1814,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-7-hall",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7hall",
+      "kind": "hall",
+      "position": {
+        "x": 1846,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 1846,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 1846,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 1846,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 1846,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 1846,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 1846,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 1846,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-8-home",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8home",
+      "kind": "home",
+      "position": {
+        "x": 2000,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2000,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-8-market",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8market",
+      "kind": "market",
+      "position": {
+        "x": 2032,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2032,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-8-farm",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8farm",
+      "kind": "farm",
+      "position": {
+        "x": 2064,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2064,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-8-hall",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8hall",
+      "kind": "hall",
+      "position": {
+        "x": 2096,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2096,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 2096,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 2096,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 2096,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 2096,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 2096,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 2096,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-9-home",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9home",
+      "kind": "home",
+      "position": {
+        "x": 2250,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2250,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-9-market",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9market",
+      "kind": "market",
+      "position": {
+        "x": 2282,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2282,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-9-farm",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9farm",
+      "kind": "farm",
+      "position": {
+        "x": 2314,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2314,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-9-hall",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9hall",
+      "kind": "hall",
+      "position": {
+        "x": 2346,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2346,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 2346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 2346,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 2346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 2346,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 2346,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 2346,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-10-home",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10home",
+      "kind": "home",
+      "position": {
+        "x": 2500,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2500,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 100
+    },
+    {
+      "id": "civic-10-market",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10market",
+      "kind": "market",
+      "position": {
+        "x": 2532,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2532,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 101
+    },
+    {
+      "id": "civic-10-farm",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10farm",
+      "kind": "farm",
+      "position": {
+        "x": 2564,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2564,
+        "y": 0.6,
+        "z": 6
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 102
+    },
+    {
+      "id": "civic-10-hall",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10hall",
+      "kind": "hall",
+      "position": {
+        "x": 2596,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 2596,
+        "y": 0.6,
+        "z": 19
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 103,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "requiredPermission": "official",
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "floorUses": [
+        "公共接待",
+        "行政办公",
+        "行政办公"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": 2596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": 2596,
+            "y": 0.6,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": 2596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": 2596,
+            "y": 4.3999999999999995,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": 2596,
+            "y": 8.2,
+            "z": -13
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": 2596,
+            "y": 8.2,
+            "z": -13
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-0-school",
+      "districtId": "civic-0",
+      "name": "有限补充服务school",
+      "kind": "school",
+      "position": {
+        "x": -72,
+        "y": 0,
+        "z": -60
+      },
+      "door": {
+        "x": -72,
+        "y": 0.6,
+        "z": -41
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 300,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": -72,
+            "y": 0.6,
+            "z": -73
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": -72,
+            "y": 0.6,
+            "z": -73
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": -72,
+            "y": 4.3999999999999995,
+            "z": -73
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": -72,
+            "y": 4.3999999999999995,
+            "z": -73
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": -72,
+            "y": 8.2,
+            "z": -73
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": -72,
+            "y": 8.2,
+            "z": -73
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-0-clinic",
+      "districtId": "civic-0",
+      "name": "有限补充服务clinic",
+      "kind": "clinic",
+      "position": {
+        "x": -136,
+        "y": 0,
+        "z": -60
+      },
+      "door": {
+        "x": -136,
+        "y": 0.6,
+        "z": -41
+      },
+      "width": 50,
+      "depth": 38,
+      "height": 11.4,
+      "floors": 3,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 301,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "stairGeometryRevision": 2,
+      "publicFloors": 1,
+      "floorPermissions": [
+        "public",
+        "official",
+        "official"
+      ],
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": -136,
+            "y": 0.6,
+            "z": -60
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": -136,
+            "y": 0.6,
+            "z": -60
+          }
+        },
+        {
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "position": {
+            "x": -136,
+            "y": 4.3999999999999995,
+            "z": -60
+          }
+        },
+        {
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "position": {
+            "x": -136,
+            "y": 4.3999999999999995,
+            "z": -60
+          }
+        },
+        {
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "position": {
+            "x": -136,
+            "y": 8.2,
+            "z": -60
+          }
+        },
+        {
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "position": {
+            "x": -136,
+            "y": 8.2,
+            "z": -60
+          }
+        }
+      ]
+    },
+    {
+      "id": "civic-0-workshop",
+      "districtId": "civic-0",
+      "name": "有限补充服务workshop",
+      "kind": "workshop",
+      "position": {
+        "x": -200,
+        "y": 0,
+        "z": -60
+      },
+      "door": {
+        "x": -200,
+        "y": 0.6,
+        "z": -54
+      },
+      "width": 12,
+      "depth": 12,
+      "height": 12,
+      "floors": 2,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 302
+    }
+  ],
+  "nodes": [
+    {
+      "id": "civic-0-home-door",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0home",
+      "station": false,
+      "position": {
+        "x": 0,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-0-market-door",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0market",
+      "station": false,
+      "position": {
+        "x": 32,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-0-farm-door",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0farm",
+      "station": false,
+      "position": {
+        "x": 64,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-0-hall-door",
+      "districtId": "civic-0",
+      "name": "现场补选参数街坊0hall",
+      "station": false,
+      "position": {
+        "x": 96,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-1-home-door",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1home",
+      "station": false,
+      "position": {
+        "x": 250,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-1-market-door",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1market",
+      "station": false,
+      "position": {
+        "x": 282,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-1-farm-door",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1farm",
+      "station": false,
+      "position": {
+        "x": 314,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-1-hall-door",
+      "districtId": "civic-1",
+      "name": "现场补选参数街坊1hall",
+      "station": false,
+      "position": {
+        "x": 346,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-2-home-door",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2home",
+      "station": false,
+      "position": {
+        "x": 500,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-2-market-door",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2market",
+      "station": false,
+      "position": {
+        "x": 532,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-2-farm-door",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2farm",
+      "station": false,
+      "position": {
+        "x": 564,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-2-hall-door",
+      "districtId": "civic-2",
+      "name": "现场补选参数街坊2hall",
+      "station": false,
+      "position": {
+        "x": 596,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-3-home-door",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3home",
+      "station": false,
+      "position": {
+        "x": 750,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-3-market-door",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3market",
+      "station": false,
+      "position": {
+        "x": 782,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-3-farm-door",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3farm",
+      "station": false,
+      "position": {
+        "x": 814,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-3-hall-door",
+      "districtId": "civic-3",
+      "name": "现场补选参数街坊3hall",
+      "station": false,
+      "position": {
+        "x": 846,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-4-home-door",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4home",
+      "station": false,
+      "position": {
+        "x": 1000,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-4-market-door",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4market",
+      "station": false,
+      "position": {
+        "x": 1032,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-4-farm-door",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4farm",
+      "station": false,
+      "position": {
+        "x": 1064,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-4-hall-door",
+      "districtId": "civic-4",
+      "name": "现场补选参数街坊4hall",
+      "station": false,
+      "position": {
+        "x": 1096,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-5-home-door",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5home",
+      "station": false,
+      "position": {
+        "x": 1250,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-5-market-door",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5market",
+      "station": false,
+      "position": {
+        "x": 1282,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-5-farm-door",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5farm",
+      "station": false,
+      "position": {
+        "x": 1314,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-5-hall-door",
+      "districtId": "civic-5",
+      "name": "现场补选参数街坊5hall",
+      "station": false,
+      "position": {
+        "x": 1346,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-6-home-door",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6home",
+      "station": false,
+      "position": {
+        "x": 1500,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-6-market-door",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6market",
+      "station": false,
+      "position": {
+        "x": 1532,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-6-farm-door",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6farm",
+      "station": false,
+      "position": {
+        "x": 1564,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-6-hall-door",
+      "districtId": "civic-6",
+      "name": "现场补选参数街坊6hall",
+      "station": false,
+      "position": {
+        "x": 1596,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-7-home-door",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7home",
+      "station": false,
+      "position": {
+        "x": 1750,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-7-market-door",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7market",
+      "station": false,
+      "position": {
+        "x": 1782,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-7-farm-door",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7farm",
+      "station": false,
+      "position": {
+        "x": 1814,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-7-hall-door",
+      "districtId": "civic-7",
+      "name": "现场补选参数街坊7hall",
+      "station": false,
+      "position": {
+        "x": 1846,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-8-home-door",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8home",
+      "station": false,
+      "position": {
+        "x": 2000,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-8-market-door",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8market",
+      "station": false,
+      "position": {
+        "x": 2032,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-8-farm-door",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8farm",
+      "station": false,
+      "position": {
+        "x": 2064,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-8-hall-door",
+      "districtId": "civic-8",
+      "name": "现场补选参数街坊8hall",
+      "station": false,
+      "position": {
+        "x": 2096,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-9-home-door",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9home",
+      "station": false,
+      "position": {
+        "x": 2250,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-9-market-door",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9market",
+      "station": false,
+      "position": {
+        "x": 2282,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-9-farm-door",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9farm",
+      "station": false,
+      "position": {
+        "x": 2314,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-9-hall-door",
+      "districtId": "civic-9",
+      "name": "现场补选参数街坊9hall",
+      "station": false,
+      "position": {
+        "x": 2346,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-10-home-door",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10home",
+      "station": false,
+      "position": {
+        "x": 2500,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-10-market-door",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10market",
+      "station": false,
+      "position": {
+        "x": 2532,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-10-farm-door",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10farm",
+      "station": false,
+      "position": {
+        "x": 2564,
+        "y": 0.6,
+        "z": 6
+      }
+    },
+    {
+      "id": "civic-10-hall-door",
+      "districtId": "civic-10",
+      "name": "现场补选参数街坊10hall",
+      "station": false,
+      "position": {
+        "x": 2596,
+        "y": 0.6,
+        "z": 19
+      }
+    },
+    {
+      "id": "civic-0-school-door",
+      "districtId": "civic-0",
+      "name": "有限补充服务school",
+      "station": false,
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -41
+      }
+    },
+    {
+      "id": "civic-0-clinic-door",
+      "districtId": "civic-0",
+      "name": "有限补充服务clinic",
+      "station": false,
+      "position": {
+        "x": -136,
+        "y": 0.6,
+        "z": -41
+      }
+    },
+    {
+      "id": "civic-0-workshop-door",
+      "districtId": "civic-0",
+      "name": "有限补充服务workshop",
+      "station": false,
+      "position": {
+        "x": -200,
+        "y": 0.6,
+        "z": -54
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "civic-0-road-1",
+      "from": "civic-0-home-door",
+      "to": "civic-0-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 32,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-0-road-2",
+      "from": "civic-0-market-door",
+      "to": "civic-0-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 32,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 64,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-0-road-3",
+      "from": "civic-0-farm-door",
+      "to": "civic-0-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 64,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 70,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 96,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-1-road-1",
+      "from": "civic-1-home-door",
+      "to": "civic-1-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 250,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-1-road-2",
+      "from": "civic-1-market-door",
+      "to": "civic-1-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 282,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 314,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-1-road-3",
+      "from": "civic-1-farm-door",
+      "to": "civic-1-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 314,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 320,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 346,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 346,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-2-road-1",
+      "from": "civic-2-home-door",
+      "to": "civic-2-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 500,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 532,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-2-road-2",
+      "from": "civic-2-market-door",
+      "to": "civic-2-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 532,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 564,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-2-road-3",
+      "from": "civic-2-farm-door",
+      "to": "civic-2-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 564,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 570,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 596,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 596,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-3-road-1",
+      "from": "civic-3-home-door",
+      "to": "civic-3-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 750,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 782,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-3-road-2",
+      "from": "civic-3-market-door",
+      "to": "civic-3-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 782,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 814,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-3-road-3",
+      "from": "civic-3-farm-door",
+      "to": "civic-3-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 814,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 820,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 846,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 846,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-4-road-1",
+      "from": "civic-4-home-door",
+      "to": "civic-4-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1000,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1032,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-4-road-2",
+      "from": "civic-4-market-door",
+      "to": "civic-4-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1032,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1064,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-4-road-3",
+      "from": "civic-4-farm-door",
+      "to": "civic-4-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1064,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1070,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1096,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1096,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-5-road-1",
+      "from": "civic-5-home-door",
+      "to": "civic-5-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1250,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1282,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-5-road-2",
+      "from": "civic-5-market-door",
+      "to": "civic-5-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1282,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1314,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-5-road-3",
+      "from": "civic-5-farm-door",
+      "to": "civic-5-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1314,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1320,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1346,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1346,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-6-road-1",
+      "from": "civic-6-home-door",
+      "to": "civic-6-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1500,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1532,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-6-road-2",
+      "from": "civic-6-market-door",
+      "to": "civic-6-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1532,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1564,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-6-road-3",
+      "from": "civic-6-farm-door",
+      "to": "civic-6-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1564,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1570,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1596,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1596,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-7-road-1",
+      "from": "civic-7-home-door",
+      "to": "civic-7-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1750,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1782,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-7-road-2",
+      "from": "civic-7-market-door",
+      "to": "civic-7-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1782,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1814,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-7-road-3",
+      "from": "civic-7-farm-door",
+      "to": "civic-7-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 1814,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 1820,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1846,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 1846,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-8-road-1",
+      "from": "civic-8-home-door",
+      "to": "civic-8-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2000,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2032,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-8-road-2",
+      "from": "civic-8-market-door",
+      "to": "civic-8-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2032,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2064,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-8-road-3",
+      "from": "civic-8-farm-door",
+      "to": "civic-8-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2064,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2070,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2096,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2096,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-9-road-1",
+      "from": "civic-9-home-door",
+      "to": "civic-9-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2250,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2282,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-9-road-2",
+      "from": "civic-9-market-door",
+      "to": "civic-9-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2282,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2314,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-9-road-3",
+      "from": "civic-9-farm-door",
+      "to": "civic-9-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2314,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2320,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2346,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2346,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-10-road-1",
+      "from": "civic-10-home-door",
+      "to": "civic-10-market-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2500,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2532,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-10-road-2",
+      "from": "civic-10-market-door",
+      "to": "civic-10-farm-door",
+      "mode": "road",
+      "length": 32,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2532,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2564,
+          "y": 0.6,
+          "z": 6
+        }
+      ]
+    },
+    {
+      "id": "civic-10-road-3",
+      "from": "civic-10-farm-door",
+      "to": "civic-10-hall-door",
+      "mode": "road",
+      "length": 42.23154621172782,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 2564,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 2570,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2596,
+          "y": 0.6,
+          "z": 20
+        },
+        {
+          "x": 2596,
+          "y": 0.6,
+          "z": 19
+        }
+      ]
+    },
+    {
+      "id": "civic-0-school-road",
+      "from": "civic-0-home-door",
+      "to": "civic-0-school-door",
+      "mode": "road",
+      "length": 119,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        }
+      ]
+    },
+    {
+      "id": "civic-0-clinic-road",
+      "from": "civic-0-home-door",
+      "to": "civic-0-clinic-door",
+      "mode": "road",
+      "length": 183,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        }
+      ]
+    },
+    {
+      "id": "civic-0-workshop-road",
+      "from": "civic-0-home-door",
+      "to": "civic-0-workshop-door",
+      "mode": "road",
+      "length": 260,
+      "capacity": 100,
+      "points": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -200,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -200,
+          "y": 0.6,
+          "z": -54
+        }
+      ]
+    }
+  ],
+  "mountains": [],
+  "river": [],
+  "waterfall": {
+    "top": {
+      "x": 3900,
+      "y": 60,
+      "z": 1000
+    },
+    "bottom": {
+      "x": 3900,
+      "y": 0,
+      "z": 1000
+    },
+    "width": 10
+  },
+  "spawn": {
+    "x": 96,
+    "y": 0.6,
+    "z": -13
+  }
+}

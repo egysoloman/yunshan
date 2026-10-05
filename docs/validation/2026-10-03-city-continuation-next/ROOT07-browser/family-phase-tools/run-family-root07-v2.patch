@@ -1,0 +1,11 @@
+--- prepared/run-family-root07.py
++++ actual/run-family-root07-v2.py
+@@ -123,7 +123,7 @@
+ if args.phase == 'family':
+     family_driver = Path(args.family_driver).resolve()
+     assert family_driver.is_file() and str(family_driver).startswith('/workspace/yunshan-work/ROOT07-browser-20261004-01/family-ui-prep/')
+-    command = ['node', str(family_driver), str(source), str(scope / 'family-ui-originals')]
++    command = ['node', str(family_driver), str(source), str(scope / 'family-ui-originals'), str(authorization_path)]
+     limit = 300
+ elif args.phase == 'captures':
+     command = ['node', str(HERE / 'capture-root07.mjs'), str(source), str(scope / 'capture-originals'), str(authorization_path)]

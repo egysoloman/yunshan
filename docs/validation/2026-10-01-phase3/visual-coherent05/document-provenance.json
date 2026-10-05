@@ -1,0 +1,33 @@
+{
+  "scope": "Read-only execution/document provenance gate. Exact workspace/89 copied files/entry bytes plus actual page DOM script URLs and actual loaded asset response bytes. No game globals, controls or saved data are changed.",
+  "startedAt": "2026-10-01T23:40:12.648Z",
+  "workspace": "/tmp/yunshan-phase3-root-coherent-05",
+  "actualCwd": "/tmp/yunshan-phase3-root-coherent-05",
+  "actualArgv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/tmp/yunshan-coherent04-fixed-optics-capture.mjs",
+    "/workspace/yunshan/artifacts/phase3-visual-coherent05",
+    "core-waterfall,market-street,residential-first-person,bridge-structure,bridge-walk-center,bridge-public-road"
+  ],
+  "expectedEntry": "/assets/index-BH13EXr_.js",
+  "expectedSHA": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+  "sourceFiles": 89,
+  "gateSHA256": "b927360ec6b305e9038801102eebfb07f2868ea29086ebeb0de837631ba58995",
+  "documents": [
+    {
+      "at": "2026-10-01T23:40:34.005Z",
+      "pageURL": "http://127.0.0.1:4198/?debug=1",
+      "requestedURL": "http://127.0.0.1:4198/?debug=1",
+      "moduleURLs": [
+        "http://127.0.0.1:4198/assets/index-BH13EXr_.js"
+      ],
+      "loadedAsset": {
+        "url": "http://127.0.0.1:4198/assets/index-BH13EXr_.js",
+        "status": 200,
+        "bytes": 588447,
+        "sha256": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+        "fromServiceWorker": false
+      }
+    }
+  ]
+}

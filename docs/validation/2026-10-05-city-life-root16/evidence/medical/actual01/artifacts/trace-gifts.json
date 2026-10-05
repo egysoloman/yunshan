@@ -1,0 +1,3980 @@
+[
+  {
+    "id": "citizen-11",
+    "tick": 3121,
+    "clock": 12964,
+    "relationshipClock": 12964,
+    "before": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 75.84064959705061,
+        "fun": 99.6503472494338
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 20,
+        "fatigue": 100,
+        "social": 75.84064959705061,
+        "fun": 99.6503472494338
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "许溪记住了这次gift，关系：acquaintance，好感12。"
+      },
+      "before": {
+        "tick": 3121,
+        "clock": 12964,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 0,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 17,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 0.5,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 16,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-55",
+    "tick": 3121,
+    "clock": 12964,
+    "relationshipClock": 12964,
+    "before": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 70.51164331534191,
+        "fun": 99.05034724943383
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 20,
+        "fatigue": 100,
+        "social": 70.51164331534191,
+        "fun": 99.05034724943383
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "顾遥记住了这次gift，关系：acquaintance，好感12。"
+      },
+      "before": {
+        "tick": 3121,
+        "clock": 12964,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 0.5,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 16,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 1,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 15,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-44",
+    "tick": 3121,
+    "clock": 12964,
+    "relationshipClock": 12964,
+    "before": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 75.66536114712095,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 20,
+        "fatigue": 100,
+        "social": 75.66536114712095,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "温舟记住了这次gift，关系：acquaintance，好感13。"
+      },
+      "before": {
+        "tick": 3121,
+        "clock": 12964,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 1,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 15,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 1.5,
+          "needs": {
+            "hunger": 62.19999999999985,
+            "fatigue": 40.007999999996315,
+            "social": 0,
+            "fun": 29.643999999996204
+          },
+          "inventory": {
+            "block": 32,
+            "food": 14,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023751902582738,
+          "health": 79.36901954058182,
+          "mood": 34.76044201697987,
+          "stress": 1.5100545492740716e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-11",
+    "tick": 3124,
+    "clock": 12976,
+    "relationshipClock": 12976,
+    "before": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 19.400000000000002,
+        "fatigue": 100,
+        "social": 75.66064959705061,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 39.400000000000006,
+        "fatigue": 100,
+        "social": 75.66064959705061,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "许溪记住了这次gift，关系：acquaintance，好感24。"
+      },
+      "before": {
+        "tick": 3124,
+        "clock": 12976,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 1.5,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 14,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 2,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 13,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-55",
+    "tick": 3124,
+    "clock": 12976,
+    "relationshipClock": 12976,
+    "before": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 19.400000000000002,
+        "fatigue": 100,
+        "social": 70.3316433153419,
+        "fun": 99.65034724943384
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 39.400000000000006,
+        "fatigue": 100,
+        "social": 70.3316433153419,
+        "fun": 99.65034724943384
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "顾遥记住了这次gift，关系：acquaintance，好感25。"
+      },
+      "before": {
+        "tick": 3124,
+        "clock": 12976,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 2,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 13,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 2.5,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 12,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-44",
+    "tick": 3124,
+    "clock": 12976,
+    "relationshipClock": 12976,
+    "before": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 19.400000000000002,
+        "fatigue": 100,
+        "social": 75.48536114712094,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 39.400000000000006,
+        "fatigue": 100,
+        "social": 75.48536114712094,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "温舟记住了这次gift，关系：acquaintance，好感26。"
+      },
+      "before": {
+        "tick": 3124,
+        "clock": 12976,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 2.5,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 12,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 3,
+          "needs": {
+            "hunger": 61.779999999999845,
+            "fatigue": 39.79199999999631,
+            "social": 0,
+            "fun": 29.5359999999962
+          },
+          "inventory": {
+            "block": 32,
+            "food": 11,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023774733632962,
+          "health": 79.38005420738746,
+          "mood": 34.57449597596905,
+          "stress": 1.4358032096081461e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-11",
+    "tick": 3127,
+    "clock": 12988,
+    "relationshipClock": 12988,
+    "before": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 38.8,
+        "fatigue": 100,
+        "social": 75.4806495970506,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 58.8,
+        "fatigue": 100,
+        "social": 75.4806495970506,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "许溪记住了这次gift，关系：friend，好感36。"
+      },
+      "before": {
+        "tick": 3127,
+        "clock": 12988,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 3,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 11,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 3.5,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 10,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-55",
+    "tick": 3127,
+    "clock": 12988,
+    "relationshipClock": 12988,
+    "before": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 38.8,
+        "fatigue": 100,
+        "social": 70.1516433153419,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 58.8,
+        "fatigue": 100,
+        "social": 70.1516433153419,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "顾遥记住了这次gift，关系：friend，好感38。"
+      },
+      "before": {
+        "tick": 3127,
+        "clock": 12988,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 3.5,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 10,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 4,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 9,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-44",
+    "tick": 3127,
+    "clock": 12988,
+    "relationshipClock": 12988,
+    "before": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 38.8,
+        "fatigue": 100,
+        "social": 75.30536114712093,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 58.8,
+        "fatigue": 100,
+        "social": 75.30536114712093,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "温舟记住了这次gift，关系：friend，好感40。"
+      },
+      "before": {
+        "tick": 3127,
+        "clock": 12988,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 4,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 9,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 4.5,
+          "needs": {
+            "hunger": 61.35999999999984,
+            "fatigue": 39.5759999999963,
+            "social": 0,
+            "fun": 29.427999999996196
+          },
+          "inventory": {
+            "block": 32,
+            "food": 8,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023797564683186,
+          "health": 79.3910888768115,
+          "mood": 34.38854471692586,
+          "stress": 1.3652029045653307e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-11",
+    "tick": 3130,
+    "clock": 13000,
+    "relationshipClock": 13000,
+    "before": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 58.19999999999999,
+        "fatigue": 100,
+        "social": 75.3006495970506,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-11",
+      "name": "许溪",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-farm",
+      "role": "merchant",
+      "skills": {
+        "craft": 45,
+        "learning": 64.10440469391449,
+        "social": 32
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 1,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 1743.6603202059796,
+      "needs": {
+        "hunger": 78.19999999999999,
+        "fatigue": 100,
+        "social": 75.3006495970506,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "许溪记住了这次gift，关系：friend，好感48。"
+      },
+      "before": {
+        "tick": 3130,
+        "clock": 13000,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 4.5,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 8,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 5,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 7,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-55",
+    "tick": 3130,
+    "clock": 13000,
+    "relationshipClock": 13000,
+    "before": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 58.19999999999999,
+        "fatigue": 100,
+        "social": 69.9716433153419,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-55",
+      "name": "顾遥",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-workshop",
+      "role": "工人",
+      "skills": {
+        "craft": 42,
+        "learning": 48.83397612248595,
+        "social": 26
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 0,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 492.0889949344365,
+      "needs": {
+        "hunger": 78.19999999999999,
+        "fatigue": 100,
+        "social": 69.9716433153419,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "顾遥记住了这次gift，关系：friend，好感52。"
+      },
+      "before": {
+        "tick": 3130,
+        "clock": 13000,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 5,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 7,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 5.5,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 6,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-44",
+    "tick": 3130,
+    "clock": 13000,
+    "relationshipClock": 13000,
+    "before": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 58.19999999999999,
+        "fatigue": 100,
+        "social": 75.12536114712093,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 78.19999999999999,
+        "fatigue": 100,
+        "social": 75.12536114712093,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "温舟记住了这次gift，关系：friend，好感53。"
+      },
+      "before": {
+        "tick": 3130,
+        "clock": 13000,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 5.5,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 6,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 6,
+          "needs": {
+            "hunger": 60.93999999999984,
+            "fatigue": 39.35999999999629,
+            "social": 0,
+            "fun": 29.31999999999619
+          },
+          "inventory": {
+            "block": 32,
+            "food": 5,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.02382039573341,
+          "health": 79.40212354899762,
+          "mood": 34.202588744453266,
+          "stress": 1.2980741080403845e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  },
+  {
+    "id": "citizen-44",
+    "tick": 3133,
+    "clock": 13012,
+    "relationshipClock": 13012,
+    "before": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 77.59999999999998,
+        "fatigue": 100,
+        "social": 74.94536114712092,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "after": {
+      "id": "citizen-44",
+      "name": "温舟",
+      "districtId": "civic-0",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "role": "医生",
+      "skills": {
+        "craft": 54,
+        "learning": 47,
+        "social": 68
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "云山居民"
+      ],
+      "education": 4,
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "destinationId": "civic-0-home",
+      "money": 762.5036295774674,
+      "needs": {
+        "hunger": 97.59999999999998,
+        "fatigue": 100,
+        "social": 74.94536114712092,
+        "fun": 100
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": -3.84,
+          "y": 0.6,
+          "z": -3
+        },
+        {
+          "x": -3.84,
+          "y": 6.6,
+          "z": -3
+        },
+        {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        }
+      ],
+      "routeIndex": 12,
+      "partnerId": null,
+      "food": 0
+    },
+    "command": {
+      "result": {
+        "ok": true,
+        "message": "温舟记住了这次gift，关系：friend，好感65。"
+      },
+      "before": {
+        "tick": 3133,
+        "clock": 13012,
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 6,
+          "needs": {
+            "hunger": 60.51999999999984,
+            "fatigue": 39.14399999999628,
+            "social": 0,
+            "fun": 29.211999999996188
+          },
+          "inventory": {
+            "block": 32,
+            "food": 5,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023843226783633,
+          "health": 79.4131582240892,
+          "mood": 34.016628514357286,
+          "stress": 1.2342461214593801e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledgerCount": 174
+      },
+      "after": {
+        "player": {
+          "position": {
+            "x": -2.0000000000000537,
+            "y": 6.6,
+            "z": 1.1999999999998772
+          },
+          "role": "traveler",
+          "identities": [
+            "traveler"
+          ],
+          "money": 124.99773117645373,
+          "reputation": 6.5,
+          "needs": {
+            "hunger": 60.51999999999984,
+            "fatigue": 39.14399999999628,
+            "social": 0,
+            "fun": 29.211999999996188
+          },
+          "inventory": {
+            "block": 32,
+            "food": 4,
+            "businesses": 0,
+            "business:civic-0-farm": 0
+          },
+          "homeId": null,
+          "education": 0,
+          "experience": 0,
+          "partnerId": null,
+          "vehicleId": null
+        },
+        "profile": {
+          "age": 24.023843226783633,
+          "health": 79.4131582240892,
+          "mood": 34.016628514357286,
+          "stress": 1.2342461214593801e-9,
+          "alive": true,
+          "skill": 0,
+          "family": [],
+          "historyTags": [
+            "星际来客"
+          ]
+        },
+        "treasury": 29687.127739939755,
+        "ledger": []
+      }
+    }
+  }
+]

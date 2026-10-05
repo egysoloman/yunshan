@@ -1,0 +1,65 @@
+{
+  "scope": "Read-only derivation from unchanged actual r10 public DOM observations and same-workspace production planner record; no browser/profile/save access.",
+  "sourceResultsSHA256": "f50d8292f83a77c820acedab6a888820aa99f1182a5b98049a76f4957ff1e2e0",
+  "journeySourceSHA256": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+  "destination": "文澜学苑·西溪院·书院4",
+  "allFourPublicWaypointsExactEqual": true,
+  "checks": [
+    {
+      "publicIndex": 4,
+      "publicPoint": {
+        "x": -352,
+        "y": 50.800000000000004,
+        "z": 504
+      },
+      "productionPoint": {
+        "x": -352,
+        "y": 50.800000000000004,
+        "z": 504
+      },
+      "exactEqual": true
+    },
+    {
+      "publicIndex": 8,
+      "publicPoint": {
+        "x": -336,
+        "y": 51.800000000000004,
+        "z": 480
+      },
+      "productionPoint": {
+        "x": -336,
+        "y": 51.800000000000004,
+        "z": 480
+      },
+      "exactEqual": true
+    },
+    {
+      "publicIndex": 13,
+      "publicPoint": {
+        "x": -312,
+        "y": 55.6,
+        "z": 464
+      },
+      "productionPoint": {
+        "x": -312,
+        "y": 55.6,
+        "z": 464
+      },
+      "exactEqual": true
+    },
+    {
+      "publicIndex": 15,
+      "publicPoint": {
+        "x": -312,
+        "y": 62.6,
+        "z": 416
+      },
+      "productionPoint": {
+        "x": -312,
+        "y": 62.6,
+        "z": 416
+      },
+      "exactEqual": true
+    }
+  ]
+}

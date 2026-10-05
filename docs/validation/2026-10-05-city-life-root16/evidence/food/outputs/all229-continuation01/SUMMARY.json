@@ -1,0 +1,54 @@
+{
+  "status": "PASS_ALL229_COUNTER_RECOVERY",
+  "actualTicks": 256,
+  "maxTicks": 256,
+  "distinctOriginalTargetsWithReceipt": 229,
+  "targetCounterReceipts": 394,
+  "foodProduced": 50.79688454369469,
+  "counterMeals": 688,
+  "carriedMeals": 69,
+  "maxCashResidual": 1.6298145055770874e-9,
+  "maxFoodResidual": 4.263256414560601e-12,
+  "bodyRejections": 0,
+  "terminalSHA256": "edf73ed2aa923b16248f3981092ea78dfe6375e5be1a4d4e3c6914ca84285754",
+  "food": {
+    "aliveResidents": 616,
+    "nominalResidentMealsPerDay": 852.9230769230769,
+    "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+    "shopFoodUnits": 14655.873063820345,
+    "residentCarriedFoodUnits": 524,
+    "playerCarriedFoodUnits": 0,
+    "bySiteKind": {
+      "farm": {
+        "sites": 31,
+        "open": 0,
+        "inventoryUnits": 4678.7061411075265,
+        "employees": 28
+      },
+      "dock": {
+        "sites": 16,
+        "open": 0,
+        "inventoryUnits": 1582.1669227128193,
+        "employees": 17
+      },
+      "market": {
+        "sites": 109,
+        "open": 109,
+        "inventoryUnits": 8395,
+        "employees": 145
+      },
+      "workshop": {
+        "sites": 54,
+        "open": 0,
+        "inventoryUnits": 4870.882013437095,
+        "employees": 75
+      }
+    },
+    "hungryWithoutCarriedFood": 0,
+    "hungryCanAffordAnyStockedOpenFoodOffer": 0,
+    "routeReachability": "NOT_OBSERVED",
+    "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+  },
+  "sourceInputsUnchanged": true,
+  "boundary": "Requires all229 original actual counter recovery across128+256ticks; does not certify new hunger cases or everyone simultaneously fed, long term supply, medical treatment, full suite, art or hardware performance."
+}

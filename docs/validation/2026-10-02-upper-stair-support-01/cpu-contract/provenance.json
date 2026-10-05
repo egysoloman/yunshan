@@ -1,0 +1,291 @@
+{
+  "scope": "Isolated authorized stair support fix; only /tmp outputs. No shared mutation, GPU, simulation, full npm, paid API, credentials, Library or push.",
+  "originalRepositoryHead": "6c70d27fd96123a68fbd6125a326e065d54df37c",
+  "frozenSnapshot": "/tmp/yunshan-v4-root-coherent-04",
+  "frozenSnapshotManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "patch": {
+    "path": "upper-stair-support.patch",
+    "sha256": "ad798b94a68bf2c82276e1f70ee0bac28966f65da56f94eef2f556d33c501ea3",
+    "bytes": 5800,
+    "changedFiles": [
+      "src/architecture-floor-plan.ts",
+      "tests/controller-v4.test.ts"
+    ]
+  },
+  "sourceHashes": {
+    "src/architecture-floor-plan.ts": {
+      "startFrozenSHA256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+      "baselineEndSHA256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+      "candidateEndSHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    "src/controller.ts": {
+      "startFrozenSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "baselineEndSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "candidateEndSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    "tests/controller-v4.test.ts": {
+      "startFrozenSHA256": "bcb62d43c56da5f447a9e0c2b8a5fe15fe2013be63b91a8814d7e9485aeb739f",
+      "baselineEndSHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "candidateEndSHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "baselineEndNote": "New regression copied into baseline; provider/controller stayed original."
+    }
+  },
+  "originalWorldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+  "productionControllerUnchanged": true,
+  "actualBuildingCases": [
+    {
+      "id": "market-b24",
+      "family": "home",
+      "floors": 3,
+      "height": 3.4000000000000004,
+      "motorSamples": 792,
+      "landings": 4
+    },
+    {
+      "id": "river-b2",
+      "family": "home",
+      "floors": 11,
+      "height": 3.4,
+      "motorSamples": 4040,
+      "landings": 20
+    },
+    {
+      "id": "river-b1",
+      "family": "market",
+      "floors": 2,
+      "height": 3.6,
+      "motorSamples": 392,
+      "landings": 2
+    },
+    {
+      "id": "workshop-b0",
+      "family": "workshop",
+      "floors": 3,
+      "height": 4.8,
+      "motorSamples": 936,
+      "landings": 4
+    },
+    {
+      "id": "academy-b0",
+      "family": "civic-academy",
+      "floors": 5,
+      "height": 3.8,
+      "motorSamples": 1680,
+      "landings": 8
+    },
+    {
+      "id": "academy-b2",
+      "family": "finance-health",
+      "floors": 7,
+      "height": 3.8000000000000003,
+      "motorSamples": 2520,
+      "landings": 12
+    },
+    {
+      "id": "core-interchange",
+      "family": "transport-waterfront",
+      "floors": 6,
+      "height": 6,
+      "motorSamples": 2700,
+      "landings": 10
+    },
+    {
+      "id": "starport-b0",
+      "family": "transport-waterfront",
+      "floors": 14,
+      "height": 6.6000000000000005,
+      "motorSamples": 7748,
+      "landings": 26
+    },
+    {
+      "id": "river-b34",
+      "family": "home",
+      "floors": 13,
+      "height": 3.4000000000000004,
+      "motorSamples": 4848,
+      "landings": 24
+    },
+    {
+      "id": "market-b3",
+      "family": "finance-health",
+      "floors": 12,
+      "height": 4.4,
+      "motorSamples": 4884,
+      "landings": 22
+    }
+  ],
+  "actualNormalWSamples": 30540,
+  "commands": [
+    {
+      "directory": "baseline",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/baseline-exact.json node --import tsx --test --test-name-pattern='original exact browser failure' tests/upper-stair-actual.test.ts",
+      "exit": 1,
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "raw": "baseline-exact.log"
+    },
+    {
+      "directory": "baseline",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/baseline-continuous.json node --import tsx --test --test-name-pattern='actual market-b24 W' tests/upper-stair-actual.test.ts",
+      "exit": 1,
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "raw": "baseline-continuous.log"
+    },
+    {
+      "directory": "baseline",
+      "argv": "node --import tsx --test --test-name-pattern='0→1→2|exact market-b24' tests/controller-v4.test.ts",
+      "exit": 1,
+      "tests": 3,
+      "passed": 0,
+      "failed": 3,
+      "raw": "baseline-production-regression.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-exact.json node --import tsx --test --test-name-pattern='original exact browser failure' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "raw": "candidate-exact.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-actual-allfloors-01.json node --import tsx --test tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 15,
+      "passed": 15,
+      "failed": 0,
+      "raw": "candidate-actual-allfloors-01.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-boundaries-02.json node --import tsx --test --test-name-pattern='soffit|rotated actual|basement boundary' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 3,
+      "passed": 3,
+      "failed": 0,
+      "raw": "candidate-boundaries-02.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-final-soffit.json node --import tsx --test --test-name-pattern='soffit' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "raw": "candidate-final-soffit.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "node --import tsx --test tests/controller-v4.test.ts tests/access.test.ts",
+      "exit": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "raw": "candidate-production-regression.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "node --import tsx --test tests/architecture-floor-plan.test.ts tests/controller.test.ts",
+      "exit": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "raw": "candidate-original-floorplan-controller.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "node_modules/.bin/tsc --noEmit",
+      "exit": 0,
+      "raw": "candidate-strict.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "node_modules/.bin/vite build",
+      "exit": 0,
+      "raw": "candidate-vite-build.log"
+    },
+    {
+      "directory": ".",
+      "argv": "node --import /workspace/yunshan/node_modules/tsx/dist/loader.mjs verify-contracts.mts",
+      "exit": 0,
+      "raw": "contract-protection-final.log"
+    },
+    {
+      "directory": "candidate",
+      "argv": "node_modules/.bin/tsc --noEmit",
+      "exit": 0,
+      "raw": "candidate-strict-final.log"
+    },
+    {
+      "directory": "patch-check",
+      "argv": "git apply --check /tmp/yunshan-upper-stair-fix-01/upper-stair-support.patch",
+      "exit": 0,
+      "raw": "patch-dry-run.log"
+    }
+  ],
+  "protectionSummary": {
+    "actualGeometryNearFarDetailUsePointsExact": 10,
+    "legacyRecipes": 4,
+    "legacySeeds": [
+      7,
+      2024,
+      20261001
+    ],
+    "legacyBuildings": 7344,
+    "fourLegacyRecipeFingerprintsUnchanged": true,
+    "v4FingerprintBefore": "80cd31e2",
+    "v4FingerprintAfter": "80cd31e2",
+    "geometryVersionUnchanged": true,
+    "geometryVersion": "architecture-v4-program-bodies-02-stairs-v1",
+    "nativeR5SavedFingerprintUnchanged": {
+      "archive": "/tmp/yunshan-v4-root-coherent-04/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "worldSeed": 20261001,
+      "saveWorldFingerprint": "c70ebca5",
+      "matchingTrustedRecipe": "current-v2",
+      "beforeFingerprint": "c70ebca5",
+      "afterFingerprint": "c70ebca5",
+      "scope": "Geometry identity preserved against archived native save. No restore or tick run."
+    }
+  },
+  "artifactSHA256": {
+    "artifacts/baseline-continuous.json": "95553c2830f0a639e3fb7d0d9257e2b021fbbdfa72ea04f3b5287c75dc0f6023",
+    "artifacts/baseline-continuous.log": "41e95a4b77fe7b3013423b61e5abd4b36ae71ade6d214109780c6042a606ec0f",
+    "artifacts/baseline-exact.json": "4267ad72539b93538e759c4c15edac81ef43080ddfb1832d8fd9acd8ac71c031",
+    "artifacts/baseline-exact.log": "4a74ecb0eb268d2847370f025818dc04fc8ab3f279f39abd730f6a11cbf5a738",
+    "artifacts/baseline-production-regression.log": "5b85767f40df25000122213239ce11979a70e03c48e3767078f63091d0f8a326",
+    "artifacts/candidate-actual-allfloors-01.json": "52b4bd67bdde219ab3d3cbf31498c5965c63387542f60efe465d19df401403f0",
+    "artifacts/candidate-actual-allfloors-01.log": "fc9b335d11b35927a383181d396025dfec54af80ec9a5584fb6170c864d04a1f",
+    "artifacts/candidate-boundaries-02.json": "40a9a793123560f801eb7fd11b9a406237f930cab03021ec50a84a182d8fb96d",
+    "artifacts/candidate-boundaries-02.log": "bc4455bc2975e96283b3949d11c373d22e3897ee104741b73bcfe39cf4163e9d",
+    "artifacts/candidate-exact.json": "23a43d5448a759084044559aba4e3554b5444b7c81cf96eabac5ad029c7d7109",
+    "artifacts/candidate-exact.log": "c6dbc397b6ea93bd005d83b2146e90261ed6ab976e0f0d4141ec68d6da87f6e8",
+    "artifacts/candidate-final-soffit.json": "e321c6a04dd984643663a53a2f9aae98a5865611a2cbf1ee8c0c8e0ecee8764b",
+    "artifacts/candidate-final-soffit.log": "c2af9e2f7c85d32e91d7eaa4202c7cf5c9c32a77f56f352f967e372d59940cbf",
+    "artifacts/candidate-original-floorplan-controller.log": "394387baa6d22448f82bfb7a7722083e5357338f044138636f1f99f1fe2a6da2",
+    "artifacts/candidate-production-regression.log": "89c11c6322f5d8e4c7e73fcc63bfb2ce398f17097bec24133103bac40342e98e",
+    "artifacts/candidate-strict-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/candidate-strict.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/candidate-vite-build.log": "e28e10acd25f5ddb982c18a35f1159a616f89d57292cdf299b899aaf939487a4",
+    "artifacts/contract-protection-final.json": "d6a365d6259d2d41daefdf89e1aec454e2ea0ba5c41de474b6b6cfe878c3b338",
+    "artifacts/contract-protection-final.log": "7f4c648785dad36042a3840f840d65dbef566cb8a5f4a073bd54db5ab35cd5f6",
+    "artifacts/contract-protection.json": "4eceb1d2da9151592b9029c4cd49b9a359d44ab5c499d13c7f512439f93303e1",
+    "artifacts/contract-protection.log": "62e19eec3bb84ab8245736eea01f17edfa29a04341f57b92ac383f4a053327b7",
+    "artifacts/native-save-fingerprint-protection.json": "e490ba5e01aef96d25e46a1a8e64ae59cf91f5f01825b5477803c1d24cce62cf",
+    "artifacts/patch-dry-run.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "remaining": [
+    "Root must independently apply/check the patch and freeze new source/entry.",
+    "One real browser market-b24 continuous 0→1→2→1→0 confirmation not run by this CPU-only task.",
+    "No NPC natural replan/simulation, full npm, full-world W or GL/render approval claimed.",
+    "Actual motor diagnostic uses one-building projections. Original roads/mountains/water are retained, but whole-world terrain fallback is not asserted."
+  ],
+  "readmeSHA256": "2a9b45df89cedb91b39a8eab2ec2de805d7a9b3fa815c37859d01cffac6df868",
+  "providerCandidateSourceEndSHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+  "providerBaselineSourceEndSHA256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724"
+}

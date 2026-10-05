@@ -1,0 +1,50 @@
+{
+  "status": "BLOCKED_NETWORK_BEFORE_PREPARE",
+  "singleNewTaskAttempt": true,
+  "exitCode": 1,
+  "observedFailure": "hosted apps tools/list request failed: network",
+  "stderrWrittenAtUtc": "2026-10-02T12:24:19.919226+00:00",
+  "libraryFilesCreated": 0,
+  "libraryFileIds": [],
+  "preparedItems": 0,
+  "finalizedItems": 0,
+  "retried": false,
+  "directFallback": false,
+  "originalBytesUnchanged": true,
+  "orderedOriginalFiles": [
+    {
+      "name": "云山巨城-当前城市设计图.png",
+      "bytes": 3871659,
+      "sha256": "6bd2a6e03aca56ad997e8c40a1f88f782767db5193788cb053d2bece9aaec912",
+      "sha256After": "6bd2a6e03aca56ad997e8c40a1f88f782767db5193788cb053d2bece9aaec912"
+    },
+    {
+      "name": "云山巨城-当前城市设计图.pdf",
+      "bytes": 1736955,
+      "sha256": "b093bf55ac6bb6c9ab087b33167aef9622913a1c3c651ef018f4af5633174943",
+      "sha256After": "b093bf55ac6bb6c9ab087b33167aef9622913a1c3c651ef018f4af5633174943"
+    },
+    {
+      "name": "云山巨城-市集与主阁局部.png",
+      "bytes": 1449236,
+      "sha256": "d23f191e4191b4d1aac79eede76e0fe1852208367acb4ac486455968434958dc",
+      "sha256After": "d23f191e4191b4d1aac79eede76e0fe1852208367acb4ac486455968434958dc"
+    },
+    {
+      "name": "云山巨城-当前城市地图-原始数据.zip",
+      "bytes": 13681457,
+      "sha256": "21a295489184662256239df2310456254bc348c78e9fcfc5cef25f19acf0b2c8",
+      "sha256After": "21a295489184662256239df2310456254bc348c78e9fcfc5cef25f19acf0b2c8"
+    }
+  ],
+  "privateReceiptSHA256": {
+    "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf"
+  },
+  "publicReceiptContainsCredentialsOrSignedURLs": false,
+  "safeMapCopyManifest": "safe-copy-manifest.json",
+  "privateHelpersAndTransferRepliesExcludedFromMapArchive": true,
+  "newWorldConstructionAfterCollection": false,
+  "simulationTicks": 0,
+  "GPU": false
+}

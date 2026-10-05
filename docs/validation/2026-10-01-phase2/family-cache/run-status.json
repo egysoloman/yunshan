@@ -1,0 +1,9 @@
+{
+  "scope": "Single-change cache snapshot intentionally keeps old18:50 simulation manifest behavior for equivalence comparison",
+  "familyTests": {
+    "pass": 26,
+    "fail": 3,
+    "total": 29,
+    "cause": "Same newly introduced manifest serialization-order defect in unchanged baseline simulation.ts, no value differences; strict save checks retained. Follow-up immutablefinancial03 removes import metadata and tests all44 family/culture again."
+  }
+}

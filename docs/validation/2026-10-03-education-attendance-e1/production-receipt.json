@@ -1,0 +1,32 @@
+{
+  "state": "PRODUCED_AND_CRC_VERIFIED",
+  "writtenAtUTC": "2026-10-03T06:01:08.330702+00:00",
+  "producer": "/root",
+  "archivePath": "/tmp/yunshan-education-e1-original-delivery-20261003-01/yunshan-E1-course-original-evidence-20261003.zip",
+  "archiveBytes": 93836706,
+  "archiveSHA256": "2e39effe9c02fd3a244497367bee44fa76ed7d4f26967681faafa1f92b2e6c5d",
+  "members": 1825,
+  "originalByteCopies": 1822,
+  "originalBytes": 219885964,
+  "originalFilesStableAfterArchive": true,
+  "CRC": "PASS",
+  "credentialPatterns": {
+    "tripo-key": 0,
+    "openai-key": 0,
+    "aws-access-id": 0,
+    "private-key": 0,
+    "bearer-value": 0,
+    "google-oauth": 0,
+    "signed-query": 0
+  },
+  "manifestSHA256": "077e327d6889a610cb907098197c45b91e3cba9c4ea1fb456b2289b51a1a7e18",
+  "excludedSymlinks": [
+    "/tmp/yunshan-education-course-revision04-17-01/candidate/node_modules",
+    "/tmp/yunshan-education-course-revision04-17-01/frozen/source/node_modules",
+    "/tmp/yunshan-education-persistence-artifact-repair-20261003/source/artifacts",
+    "/tmp/yunshan-education-persistence-artifact-repair-20261003/source/node_modules",
+    "/tmp/yunshan-system-coherent-18/source/node_modules"
+  ],
+  "LibraryState": "NOT_UPLOADED",
+  "noLibraryIDInvented": true
+}

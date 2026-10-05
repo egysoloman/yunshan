@@ -1,0 +1,5131 @@
+{
+  "scope": "actual old v1 writer; normal createWorld() initialization and natural .step(.25), only speed16 and legal counter controller APIs; no wallet/stock/roles/jobs/position/needs/deadline/clock assignments",
+  "selected": {
+    "siteId": "starport-b2",
+    "workerId": "citizen-142",
+    "officials": [
+      "citizen-142",
+      "citizen-230"
+    ]
+  },
+  "workerPaid": 43.75666414444905,
+  "requests": [
+    {
+      "time": 584,
+      "type": "register",
+      "siteId": "starport-b2",
+      "workerId": "citizen-142",
+      "signatures": [
+        "citizen-142",
+        "citizen-230"
+      ],
+      "result": {
+        "ok": true,
+        "message": "已登记food-counter-1；40文只作现有材料采购上限，登记不收费。"
+      }
+    },
+    {
+      "time": 584,
+      "type": "procure and accept",
+      "procurement": {
+        "ok": true,
+        "message": "一份真实工业材料已购入，等待原工班现场装配。"
+      },
+      "accepted": {
+        "ok": true,
+        "message": "使用原任职和原日工班；柜台没有新增工资或岗位。"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "time": 484,
+      "hour": 8.066666666666666,
+      "counters": [],
+      "treasury": 79994.7008
+    },
+    {
+      "time": 544,
+      "hour": 9.066666666666666,
+      "counters": [],
+      "treasury": 79904.51581538311
+    },
+    {
+      "time": 604,
+      "hour": 10.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "assembling",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 0,
+          "assemblyMinutes": 0,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 584,
+              "stage": "assembly",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": null,
+              "routeKey": null,
+              "workedMinutes": 0,
+              "earned": 0,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 0,
+                "assembly": 0,
+                "fetchTravel": 0,
+                "deliveryTravel": 0,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 0,
+                "handoff": 0,
+                "counterWait": 0
+              }
+            }
+          ],
+          "stocks": [],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 80046.41293299988
+    },
+    {
+      "time": 664,
+      "hour": 11.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 616,
+              "stage": "fetch",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": null,
+              "routeKey": null,
+              "workedMinutes": 32,
+              "earned": 2.9424213333333333,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 0,
+                "deliveryTravel": 0,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 0,
+                "handoff": 0,
+                "counterWait": 2.6310319644899636
+              }
+            }
+          ],
+          "stocks": [],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79997.67420163237
+    },
+    {
+      "time": 724,
+      "hour": 12.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 680,
+              "stage": "fetch",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": "starport-quarter-2",
+              "routeKey": null,
+              "workedMinutes": 95.99999999999999,
+              "earned": 8.827264,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 25.921036202471427,
+                "deliveryTravel": 0,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 0,
+                "handoff": 0,
+                "counterWait": 40.70999576201852
+              }
+            }
+          ],
+          "stocks": [],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79972.47635440958
+    },
+    {
+      "time": 784,
+      "hour": 13.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 744,
+              "stage": "deliver",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": "starport-quarter-2",
+              "routeKey": null,
+              "workedMinutes": 160,
+              "earned": 14.712106666666667,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 25.921036202471427,
+                "deliveryTravel": 0,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 2,
+                "handoff": 0,
+                "counterWait": 102.70999576201852
+              }
+            }
+          ],
+          "stocks": [
+            {
+              "id": "counter-stock-1",
+              "sourceLotId": "freight-lot-22",
+              "origin": {
+                "location": "node",
+                "districtId": "starport",
+                "shopId": null,
+                "receivedQuantity": 28,
+                "nodeId": "starport-quarter-2",
+                "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+                "fromEdgeId": "road-starport-quarter-2-starport-station",
+                "direction": -1,
+                "arrivedAt": 508,
+                "position": {
+                  "x": 1576.2984709834516,
+                  "y": 402.6,
+                  "z": -1410.0630325720126
+                }
+              },
+              "unitPrice": 4,
+              "received": 8,
+              "remaining": 8,
+              "sold": 0,
+              "returned": 0,
+              "pickedAt": 744,
+              "deliveredAt": null,
+              "carrierId": "citizen-142",
+              "location": "carrier"
+            }
+          ],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79977.20980839983
+    },
+    {
+      "time": 844,
+      "hour": 14.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 808,
+              "stage": "serve",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": null,
+              "routeKey": null,
+              "workedMinutes": 224,
+              "earned": 20.596949333333335,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 25.921036202471427,
+                "deliveryTravel": 25.921036202471413,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 2,
+                "handoff": 2,
+                "counterWait": 138.7889595595471
+              }
+            }
+          ],
+          "stocks": [
+            {
+              "id": "counter-stock-1",
+              "sourceLotId": "freight-lot-22",
+              "origin": {
+                "location": "node",
+                "districtId": "starport",
+                "shopId": null,
+                "receivedQuantity": 28,
+                "nodeId": "starport-quarter-2",
+                "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+                "fromEdgeId": "road-starport-quarter-2-starport-station",
+                "direction": -1,
+                "arrivedAt": 508,
+                "position": {
+                  "x": 1576.2984709834516,
+                  "y": 402.6,
+                  "z": -1410.0630325720126
+                }
+              },
+              "unitPrice": 4,
+              "received": 8,
+              "remaining": 8,
+              "sold": 0,
+              "returned": 0,
+              "pickedAt": 744,
+              "deliveredAt": 808,
+              "carrierId": "citizen-142",
+              "location": "counter"
+            }
+          ],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79947.13302088398
+    },
+    {
+      "time": 904,
+      "hour": 15.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 872,
+              "stage": "serve",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": null,
+              "routeKey": null,
+              "workedMinutes": 288,
+              "earned": 26.481792000000002,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 25.921036202471427,
+                "deliveryTravel": 25.921036202471413,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 2,
+                "handoff": 2,
+                "counterWait": 202.7889595595471
+              }
+            }
+          ],
+          "stocks": [
+            {
+              "id": "counter-stock-1",
+              "sourceLotId": "freight-lot-22",
+              "origin": {
+                "location": "node",
+                "districtId": "starport",
+                "shopId": null,
+                "receivedQuantity": 28,
+                "nodeId": "starport-quarter-2",
+                "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+                "fromEdgeId": "road-starport-quarter-2-starport-station",
+                "direction": -1,
+                "arrivedAt": 508,
+                "position": {
+                  "x": 1576.2984709834516,
+                  "y": 402.6,
+                  "z": -1410.0630325720126
+                }
+              },
+              "unitPrice": 4,
+              "received": 8,
+              "remaining": 8,
+              "sold": 0,
+              "returned": 0,
+              "pickedAt": 744,
+              "deliveredAt": 808,
+              "carrierId": "citizen-142",
+              "location": "counter"
+            }
+          ],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79948.45955056408
+    },
+    {
+      "time": 964,
+      "hour": 16.066666666666666,
+      "counters": [
+        {
+          "id": "food-counter-1",
+          "siteId": "starport-b2",
+          "districtId": "starport",
+          "point": {
+            "x": 1490.2,
+            "y": 400.6,
+            "z": -1413
+          },
+          "approvedAt": 584,
+          "approvedBy": [
+            "citizen-142",
+            "citizen-230"
+          ],
+          "signaturePositions": [
+            {
+              "actorId": "citizen-142",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            },
+            {
+              "actorId": "citizen-230",
+              "position": {
+                "x": 1493.8,
+                "y": 421.6,
+                "z": -1432.2
+              }
+            }
+          ],
+          "budgetId": "food-counter-1",
+          "cap": 40,
+          "price": 12,
+          "batchCap": 8,
+          "batchValueCap": 40,
+          "assemblyMinutesRequired": 10,
+          "serviceMinutesPerUnit": 2,
+          "handlingMinutesPerUnit": 0.25,
+          "opensAt": 8,
+          "closesAt": 17,
+          "state": "open",
+          "receipts": [
+            {
+              "paid": 4,
+              "quantity": 1,
+              "tax": 0.31999999999999984,
+              "lots": [
+                {
+                  "shopId": "shop-starport-b1",
+                  "quantity": 1,
+                  "gross": 4,
+                  "net": 3.68,
+                  "unitPrice": 4
+                }
+              ],
+              "reason": "supply"
+            }
+          ],
+          "spent": 4,
+          "materialReceived": 1,
+          "materialConsumed": 1,
+          "assemblyMinutes": 10,
+          "tasks": [
+            {
+              "id": "food-task-1",
+              "citizenId": "citizen-142",
+              "contract": {
+                "id": "standing-day-0",
+                "day": 0,
+                "workId": "starport-b2",
+                "ratePerMinute": 0.09195066666666667,
+                "availableMinutes": 420.1289081342635
+              },
+              "acceptedAt": 584,
+              "lastObservedAt": 936,
+              "stage": "serve",
+              "resumeStage": "assembly",
+              "reason": "",
+              "nodeId": null,
+              "routeKey": null,
+              "workedMinutes": 352,
+              "earned": 32.36663466666667,
+              "pickup": null,
+              "handoffMinutes": 0,
+              "returnLoadingMinutes": 0,
+              "returnUnloadingMinutes": 0,
+              "allocated": {
+                "assemblyTravel": 19.368968035510036,
+                "assembly": 10,
+                "fetchTravel": 25.921036202471427,
+                "deliveryTravel": 25.921036202471413,
+                "sales": 0,
+                "returnTravel": 0,
+                "loading": 2,
+                "handoff": 2,
+                "counterWait": 266.7889595595471
+              }
+            }
+          ],
+          "stocks": [
+            {
+              "id": "counter-stock-1",
+              "sourceLotId": "freight-lot-22",
+              "origin": {
+                "location": "node",
+                "districtId": "starport",
+                "shopId": null,
+                "receivedQuantity": 28,
+                "nodeId": "starport-quarter-2",
+                "vehicleId": "vehicle-road-starport-quarter-2-starport-station-1",
+                "fromEdgeId": "road-starport-quarter-2-starport-station",
+                "direction": -1,
+                "arrivedAt": 508,
+                "position": {
+                  "x": 1576.2984709834516,
+                  "y": 402.6,
+                  "z": -1410.0630325720126
+                }
+              },
+              "unitPrice": 4,
+              "received": 8,
+              "remaining": 8,
+              "sold": 0,
+              "returned": 0,
+              "pickedAt": 744,
+              "deliveredAt": 808,
+              "carrierId": "citizen-142",
+              "location": "counter"
+            }
+          ],
+          "queue": [],
+          "sales": []
+        }
+      ],
+      "treasury": 79864.26885916197
+    }
+  ],
+  "payments": [
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-315",
+      "districtId": "summit",
+      "amount": 44.15167999999999,
+      "requestedAmount": 44.15167999999999,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-40",
+      "districtId": "summit",
+      "amount": 42.22968245517633,
+      "requestedAmount": 42.22968245517633,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-38",
+      "districtId": "government",
+      "amount": 44.16,
+      "requestedAmount": 44.16,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-502",
+      "districtId": "summit",
+      "amount": 42.22968245517633,
+      "requestedAmount": 42.22968245517633,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-566",
+      "districtId": "government",
+      "amount": 42.507351712807676,
+      "requestedAmount": 42.507351712807676,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-21",
+      "districtId": "starport",
+      "amount": 42.307695146945505,
+      "requestedAmount": 42.307695146945505,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-405",
+      "districtId": "airport",
+      "amount": 42.55866984126984,
+      "requestedAmount": 42.55866984126984,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-436",
+      "districtId": "summit",
+      "amount": 41.2865370731502,
+      "requestedAmount": 41.2865370731502,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-27",
+      "districtId": "government",
+      "amount": 44.16000000000001,
+      "requestedAmount": 44.16000000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-31",
+      "districtId": "airport",
+      "amount": 44.144,
+      "requestedAmount": 44.144,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-71",
+      "districtId": "government",
+      "amount": 44.16000000000001,
+      "requestedAmount": 44.16000000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-291",
+      "districtId": "government",
+      "amount": 44.16000000000002,
+      "requestedAmount": 44.16000000000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-555",
+      "districtId": "government",
+      "amount": 44.16000000000002,
+      "requestedAmount": 44.16000000000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-170",
+      "districtId": "government",
+      "amount": 44.16000000000002,
+      "requestedAmount": 44.16000000000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-174",
+      "shopId": "shop-airport-b8",
+      "districtId": "airport",
+      "amount": 33.29193333333335,
+      "requestedAmount": 33.29193333333335,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-422",
+      "districtId": "academy",
+      "amount": 44.16000000000002,
+      "requestedAmount": 44.16000000000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-570",
+      "districtId": "airport",
+      "amount": 44.1424,
+      "requestedAmount": 44.1424,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-81",
+      "districtId": "academy",
+      "amount": 44.160000000000025,
+      "requestedAmount": 44.160000000000025,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-32",
+      "districtId": "starport",
+      "amount": 41.94945065774743,
+      "requestedAmount": 41.94945065774743,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-204",
+      "districtId": "core",
+      "amount": 42.80199074408965,
+      "requestedAmount": 42.80199074408965,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-416",
+      "districtId": "airport",
+      "amount": 41.470191496295925,
+      "requestedAmount": 41.470191496295925,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-468",
+      "districtId": "core",
+      "amount": 42.80447866103272,
+      "requestedAmount": 42.80447866103272,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-19",
+      "districtId": "east",
+      "amount": 42.679164518937306,
+      "requestedAmount": 42.679164518937306,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-35",
+      "shopId": "shop-workshop-b19",
+      "districtId": "workshop",
+      "amount": 44.14784000000002,
+      "requestedAmount": 44.14784000000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-59",
+      "districtId": "academy",
+      "amount": 43.11598725323205,
+      "requestedAmount": 43.11598725323205,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-95",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-107",
+      "districtId": "east",
+      "amount": 43.00757686186641,
+      "requestedAmount": 43.00757686186641,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-175",
+      "shopId": "shop-starport-b11",
+      "districtId": "starport",
+      "amount": 44.155519999999996,
+      "requestedAmount": 44.155519999999996,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-351",
+      "districtId": "starport",
+      "amount": 43.48940406820789,
+      "requestedAmount": 43.48940406820789,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-411",
+      "districtId": "academy",
+      "amount": 42.81212411148525,
+      "requestedAmount": 42.81212411148525,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-447",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-499",
+      "districtId": "academy",
+      "amount": 43.563448416104514,
+      "requestedAmount": 43.563448416104514,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-527",
+      "districtId": "starport",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-591",
+      "districtId": "east",
+      "amount": 44.141978947368415,
+      "requestedAmount": 44.141978947368415,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-70",
+      "districtId": "academy",
+      "amount": 43.728309370257385,
+      "requestedAmount": 43.728309370257385,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-74",
+      "shopId": "shop-east-b5",
+      "districtId": "east",
+      "amount": 44.14581894736841,
+      "requestedAmount": 44.14581894736841,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-94",
+      "districtId": "core",
+      "amount": 43.72698499521174,
+      "requestedAmount": 43.72698499521174,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-142",
+      "districtId": "starport",
+      "amount": 43.75666414444905,
+      "requestedAmount": 43.75666414444905,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-238",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-270",
+      "districtId": "core",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-302",
+      "districtId": "government",
+      "amount": 43.60680695585449,
+      "requestedAmount": 43.60680695585449,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-414",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-446",
+      "districtId": "core",
+      "amount": 43.92952687005046,
+      "requestedAmount": 43.92952687005046,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-17",
+      "districtId": "core",
+      "amount": 42.75992728135233,
+      "requestedAmount": 42.75992728135233,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-29",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-33",
+      "shopId": "shop-river-b19",
+      "districtId": "river",
+      "amount": 44.140160000000016,
+      "requestedAmount": 44.140160000000016,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-34",
+      "districtId": "market",
+      "amount": 42.75419407313182,
+      "requestedAmount": 42.75419407313182,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-93",
+      "districtId": "government",
+      "amount": 44.16,
+      "requestedAmount": 44.16,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-105",
+      "districtId": "core",
+      "amount": 42.84312074166979,
+      "requestedAmount": 42.84312074166979,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-109",
+      "districtId": "starport",
+      "amount": 41.50864170610458,
+      "requestedAmount": 41.50864170610458,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-141",
+      "districtId": "airport",
+      "amount": 44.13856000000001,
+      "requestedAmount": 44.13856000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-173",
+      "districtId": "east",
+      "amount": 43.398077947108504,
+      "requestedAmount": 43.398077947108504,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-269",
+      "districtId": "government",
+      "amount": 44.15999999999999,
+      "requestedAmount": 44.15999999999999,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-281",
+      "districtId": "core",
+      "amount": 42.94477325093576,
+      "requestedAmount": 42.94477325093576,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-345",
+      "districtId": "academy",
+      "amount": 42.72283234124801,
+      "requestedAmount": 42.72283234124801,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-381",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-457",
+      "districtId": "core",
+      "amount": 42.91182517006991,
+      "requestedAmount": 42.91182517006991,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-545",
+      "districtId": "core",
+      "amount": 43.07821209070483,
+      "requestedAmount": 43.07821209070483,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-557",
+      "districtId": "summit",
+      "amount": 44.13632,
+      "requestedAmount": 44.13632,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-28",
+      "districtId": "core",
+      "amount": 41.91029858407397,
+      "requestedAmount": 41.91029858407397,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-60",
+      "districtId": "government",
+      "amount": 44.15999999999999,
+      "requestedAmount": 44.15999999999999,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-92",
+      "districtId": "academy",
+      "amount": 41.92560841892326,
+      "requestedAmount": 41.92560841892326,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-116",
+      "districtId": "core",
+      "amount": 42.07049334424515,
+      "requestedAmount": 42.07049334424515,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-132",
+      "shopId": "shop-river-b28",
+      "districtId": "river",
+      "amount": 18.115752266666668,
+      "requestedAmount": 18.115752266666668,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-172",
+      "districtId": "summit",
+      "amount": 44.13248,
+      "requestedAmount": 44.13248,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-176",
+      "shopId": "shop-river-b17",
+      "districtId": "river",
+      "amount": 37.42696026666665,
+      "requestedAmount": 37.42696026666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-284",
+      "districtId": "airport",
+      "amount": 44.13472,
+      "requestedAmount": 44.13472,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-292",
+      "districtId": "core",
+      "amount": 41.94492034752513,
+      "requestedAmount": 41.94492034752513,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-348",
+      "districtId": "summit",
+      "amount": 44.13248,
+      "requestedAmount": 44.13248,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-380",
+      "districtId": "core",
+      "amount": 42.102824540520885,
+      "requestedAmount": 42.102824540520885,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-400",
+      "districtId": "academy",
+      "amount": 41.94044920391601,
+      "requestedAmount": 41.94044920391601,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-412",
+      "districtId": "government",
+      "amount": 44.15999999999999,
+      "requestedAmount": 44.15999999999999,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-524",
+      "districtId": "summit",
+      "amount": 42.15767454799884,
+      "requestedAmount": 42.15767454799884,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-528",
+      "shopId": "shop-river-b23",
+      "districtId": "river",
+      "amount": 36.78325333333332,
+      "requestedAmount": 36.78325333333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-556",
+      "districtId": "core",
+      "amount": 42.13342860829803,
+      "requestedAmount": 42.13342860829803,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-588",
+      "districtId": "government",
+      "amount": 44.16,
+      "requestedAmount": 44.16,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-604",
+      "districtId": "starport",
+      "amount": 43.24752975041871,
+      "requestedAmount": 43.24752975041871,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-11",
+      "shopId": "shop-river-b9",
+      "districtId": "river",
+      "amount": 21.5182032,
+      "requestedAmount": 21.5182032,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-15",
+      "districtId": "academy",
+      "amount": 42.51814593123779,
+      "requestedAmount": 42.51814593123779,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-39",
+      "districtId": "core",
+      "amount": 42.10223211470569,
+      "requestedAmount": 42.10223211470569,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-43",
+      "districtId": "starport",
+      "amount": 44.13248000000001,
+      "requestedAmount": 44.13248000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-191",
+      "districtId": "academy",
+      "amount": 41.56425423760758,
+      "requestedAmount": 41.56425423760758,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-215",
+      "districtId": "core",
+      "amount": 41.535753578477504,
+      "requestedAmount": 41.535753578477504,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-255",
+      "shopId": "shop-workshop-b22",
+      "districtId": "workshop",
+      "amount": 42.66621503546099,
+      "requestedAmount": 42.66621503546099,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-303",
+      "districtId": "core",
+      "amount": 42.57085529782957,
+      "requestedAmount": 42.57085529782957,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-391",
+      "districtId": "core",
+      "amount": 41.80061241636891,
+      "requestedAmount": 41.80061241636891,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-423",
+      "districtId": "government",
+      "amount": 41.896068312644296,
+      "requestedAmount": 41.896068312644296,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-431",
+      "shopId": "shop-workshop-b17",
+      "districtId": "workshop",
+      "amount": 36.9651259574468,
+      "requestedAmount": 36.9651259574468,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-471",
+      "districtId": "airport",
+      "amount": 42.5171170213415,
+      "requestedAmount": 42.5171170213415,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-479",
+      "districtId": "core",
+      "amount": 42.001814423459294,
+      "requestedAmount": 42.001814423459294,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-567",
+      "districtId": "core",
+      "amount": 42.60237684785055,
+      "requestedAmount": 42.60237684785055,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-26",
+      "districtId": "academy",
+      "amount": 42.542071083126935,
+      "requestedAmount": 42.542071083126935,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-42",
+      "shopId": "shop-airport-b20",
+      "districtId": "airport",
+      "amount": 42.670986666666664,
+      "requestedAmount": 42.670986666666664,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-46",
+      "shopId": "shop-workshop-b26",
+      "districtId": "workshop",
+      "amount": 31.999661276595734,
+      "requestedAmount": 31.999661276595734,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-56",
+      "shopId": "shop-market-b33",
+      "districtId": "market",
+      "amount": 27.032010526315773,
+      "requestedAmount": 27.032010526315773,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-106",
+      "districtId": "summit",
+      "amount": 44.13248,
+      "requestedAmount": 44.13248,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-155",
+      "shopId": "shop-market-b20",
+      "districtId": "market",
+      "amount": 41.927200000000056,
+      "requestedAmount": 41.927200000000056,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-186",
+      "districtId": "starport",
+      "amount": 43.721204262534826,
+      "requestedAmount": 43.721204262534826,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-262",
+      "districtId": "airport",
+      "amount": 42.10080747943402,
+      "requestedAmount": 42.10080747943402,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-282",
+      "districtId": "summit",
+      "amount": 44.13248000000001,
+      "requestedAmount": 44.13248000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-362",
+      "districtId": "starport",
+      "amount": 41.73163759113578,
+      "requestedAmount": 41.73163759113578,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-426",
+      "districtId": "east",
+      "amount": 43.64157192468183,
+      "requestedAmount": 43.64157192468183,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-522",
+      "districtId": "government",
+      "amount": 42.60271444363021,
+      "requestedAmount": 42.60271444363021,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-530",
+      "shopId": "shop-workshop-b3",
+      "districtId": "workshop",
+      "amount": 42.66882133333335,
+      "requestedAmount": 42.66882133333335,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-554",
+      "districtId": "academy",
+      "amount": 42.39425101187771,
+      "requestedAmount": 42.39425101187771,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-12",
+      "districtId": "market",
+      "amount": 41.246370109214816,
+      "requestedAmount": 41.246370109214816,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-137",
+      "districtId": "government",
+      "amount": 44.16,
+      "requestedAmount": 44.16,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-153",
+      "districtId": "starport",
+      "amount": 44.12864,
+      "requestedAmount": 44.12864,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-193",
+      "districtId": "core",
+      "amount": 42.620874944983456,
+      "requestedAmount": 42.620874944983456,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-389",
+      "districtId": "academy",
+      "amount": 41.76429093719426,
+      "requestedAmount": 41.76429093719426,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-393",
+      "districtId": "east",
+      "amount": 44.13712842105263,
+      "requestedAmount": 44.13712842105263,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-425",
+      "districtId": "summit",
+      "amount": 44.12864,
+      "requestedAmount": 44.12864,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-437",
+      "districtId": "east",
+      "amount": 42.172243277853774,
+      "requestedAmount": 42.172243277853774,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-463",
+      "shopId": "shop-market-b42",
+      "districtId": "market",
+      "amount": 41.56303354385969,
+      "requestedAmount": 41.56303354385969,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-477",
+      "districtId": "academy",
+      "amount": 41.87748021995975,
+      "requestedAmount": 41.87748021995975,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-505",
+      "districtId": "starport",
+      "amount": 44.128640000000004,
+      "requestedAmount": 44.128640000000004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-518",
+      "districtId": "market",
+      "amount": 41.328351450262254,
+      "requestedAmount": 41.328351450262254,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-537",
+      "districtId": "airport",
+      "amount": 44.13312000000001,
+      "requestedAmount": 44.13312000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-569",
+      "districtId": "east",
+      "amount": 44.13712842105264,
+      "requestedAmount": 44.13712842105264,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-24",
+      "shopId": "shop-workshop-b12",
+      "districtId": "workshop",
+      "amount": 41.195652539007085,
+      "requestedAmount": 41.195652539007085,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-152",
+      "districtId": "airport",
+      "amount": 39.587983380820354,
+      "requestedAmount": 39.587983380820354,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-180",
+      "districtId": "academy",
+      "amount": 40.19820899907616,
+      "requestedAmount": 40.19820899907616,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-216",
+      "districtId": "summit",
+      "amount": 39.6196012097932,
+      "requestedAmount": 39.6196012097932,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-280",
+      "districtId": "government",
+      "amount": 39.64405842915537,
+      "requestedAmount": 39.64405842915537,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-287",
+      "districtId": "market",
+      "amount": 40.86822242016247,
+      "requestedAmount": 40.86822242016247,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-296",
+      "districtId": "starport",
+      "amount": 37.81289717623129,
+      "requestedAmount": 37.81289717623129,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-312",
+      "districtId": "academy",
+      "amount": 40.59309229671856,
+      "requestedAmount": 40.59309229671856,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-456",
+      "districtId": "government",
+      "amount": 39.515109909829114,
+      "requestedAmount": 39.515109909829114,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-488",
+      "districtId": "academy",
+      "amount": 41.21080454273856,
+      "requestedAmount": 41.21080454273856,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-536",
+      "districtId": "east",
+      "amount": 37.07049954975129,
+      "requestedAmount": 37.07049954975129,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-568",
+      "districtId": "summit",
+      "amount": 41.08830200020461,
+      "requestedAmount": 41.08830200020461,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-103",
+      "districtId": "academy",
+      "amount": 41.067659086203896,
+      "requestedAmount": 41.067659086203896,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-163",
+      "shopId": "shop-airport-b21",
+      "districtId": "airport",
+      "amount": 26.025623333333343,
+      "requestedAmount": 26.025623333333343,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-179",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 27.499911277425593,
+      "requestedAmount": 27.499911277425593,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-183",
+      "districtId": "summit",
+      "amount": 41.03284193254808,
+      "requestedAmount": 41.03284193254808,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-203",
+      "districtId": "government",
+      "amount": 40.46858898241711,
+      "requestedAmount": 40.46858898241711,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-221",
+      "shopId": "shop-market-b75",
+      "districtId": "market",
+      "amount": 40.823852631578994,
+      "requestedAmount": 40.823852631578994,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-263",
+      "districtId": "starport",
+      "amount": 39.082908491376486,
+      "requestedAmount": 39.082908491376486,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-279",
+      "districtId": "academy",
+      "amount": 40.603552491374415,
+      "requestedAmount": 40.603552491374415,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-323",
+      "districtId": "academy",
+      "amount": 40.57159134107177,
+      "requestedAmount": 40.57159134107177,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-359",
+      "districtId": "summit",
+      "amount": 39.7144913459324,
+      "requestedAmount": 39.7144913459324,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-455",
+      "districtId": "academy",
+      "amount": 40.9748872661291,
+      "requestedAmount": 40.9748872661291,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-587",
+      "districtId": "academy",
+      "amount": 40.598878859801296,
+      "requestedAmount": 40.598878859801296,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-58",
+      "shopId": "shop-west-b3",
+      "districtId": "west",
+      "amount": 36.60105754385966,
+      "requestedAmount": 36.60105754385966,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-78",
+      "districtId": "market",
+      "amount": 40.38436049195023,
+      "requestedAmount": 40.38436049195023,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-82",
+      "districtId": "government",
+      "amount": 39.83129025266394,
+      "requestedAmount": 39.83129025266394,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-114",
+      "districtId": "academy",
+      "amount": 40.76261133518529,
+      "requestedAmount": 40.76261133518529,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-150",
+      "districtId": "summit",
+      "amount": 39.49076144798254,
+      "requestedAmount": 39.49076144798254,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-158",
+      "districtId": "academy",
+      "amount": 41.07356633667288,
+      "requestedAmount": 41.07356633667288,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-182",
+      "districtId": "core",
+      "amount": 40.51677417836082,
+      "requestedAmount": 40.51677417836082,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-198",
+      "shopId": "shop-river-b39",
+      "districtId": "river",
+      "amount": 41.197243733333316,
+      "requestedAmount": 41.197243733333316,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-218",
+      "districtId": "airport",
+      "amount": 41.12981764126445,
+      "requestedAmount": 41.12981764126445,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-230",
+      "districtId": "starport",
+      "amount": 36.9450142682623,
+      "requestedAmount": 36.9450142682623,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-294",
+      "districtId": "east",
+      "amount": 38.454043418535676,
+      "requestedAmount": 38.454043418535676,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-309",
+      "districtId": "market",
+      "amount": 40.32569244496441,
+      "requestedAmount": 40.32569244496441,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-334",
+      "districtId": "academy",
+      "amount": 41.093396297007104,
+      "requestedAmount": 41.093396297007104,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-346",
+      "districtId": "government",
+      "amount": 40.391396228779215,
+      "requestedAmount": 40.391396228779215,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-358",
+      "districtId": "core",
+      "amount": 40.64395849260321,
+      "requestedAmount": 40.64395849260321,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-378",
+      "districtId": "academy",
+      "amount": 40.68329473750757,
+      "requestedAmount": 40.68329473750757,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-390",
+      "districtId": "government",
+      "amount": 37.89369285853626,
+      "requestedAmount": 37.89369285853626,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-406",
+      "shopId": "shop-starport-b4",
+      "districtId": "starport",
+      "amount": 41.20106666666666,
+      "requestedAmount": 41.20106666666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-466",
+      "districtId": "academy",
+      "amount": 40.875936036072325,
+      "requestedAmount": 40.875936036072325,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-534",
+      "districtId": "core",
+      "amount": 38.22516997429316,
+      "requestedAmount": 38.22516997429316,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-574",
+      "shopId": "shop-workshop-b43",
+      "districtId": "workshop",
+      "amount": 41.19527126241134,
+      "requestedAmount": 41.19527126241134,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-23",
+      "districtId": "market",
+      "amount": 40.04638205991391,
+      "requestedAmount": 40.04638205991391,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-25",
+      "shopId": "shop-west-b38",
+      "districtId": "west",
+      "amount": 23.175493894736842,
+      "requestedAmount": 23.175493894736842,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-67",
+      "districtId": "market",
+      "amount": 40.00731283159789,
+      "requestedAmount": 40.00731283159789,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-85",
+      "shopId": "shop-east-b18",
+      "districtId": "east",
+      "amount": 31.824545824561405,
+      "requestedAmount": 31.824545824561405,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-100",
+      "districtId": "market",
+      "amount": 40.07312378929841,
+      "requestedAmount": 40.07312378929841,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-117",
+      "districtId": "summit",
+      "amount": 40.82017608095259,
+      "requestedAmount": 40.82017608095259,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-253",
+      "shopId": "shop-river-b54",
+      "districtId": "river",
+      "amount": 36.59296906666665,
+      "requestedAmount": 36.59296906666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-261",
+      "districtId": "east",
+      "amount": 38.77647717468651,
+      "requestedAmount": 38.77647717468651,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-276",
+      "districtId": "market",
+      "amount": 40.03879635379328,
+      "requestedAmount": 40.03879635379328,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-293",
+      "districtId": "summit",
+      "amount": 39.49287114555853,
+      "requestedAmount": 39.49287114555853,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-357",
+      "districtId": "government",
+      "amount": 38.23413278488943,
+      "requestedAmount": 38.23413278488943,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-453",
+      "shopId": "shop-workshop-b7",
+      "districtId": "workshop",
+      "amount": 39.080335460992906,
+      "requestedAmount": 39.080335460992906,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-469",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-533",
+      "districtId": "government",
+      "amount": 43.66299140152941,
+      "requestedAmount": 43.66299140152941,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-549",
+      "districtId": "starport",
+      "amount": 39.84119696099606,
+      "requestedAmount": 39.84119696099606,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-565",
+      "districtId": "academy",
+      "amount": 41.154975683064954,
+      "requestedAmount": 41.154975683064954,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-573",
+      "districtId": "market",
+      "amount": 39.77854928710224,
+      "requestedAmount": 39.77854928710224,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-48",
+      "districtId": "academy",
+      "amount": 39.02833748846016,
+      "requestedAmount": 39.02833748846016,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-80",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.932678947368423,
+      "requestedAmount": 17.932678947368423,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-84",
+      "districtId": "summit",
+      "amount": 39.37287519191045,
+      "requestedAmount": 39.37287519191045,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-148",
+      "districtId": "government",
+      "amount": 39.86550463063571,
+      "requestedAmount": 39.86550463063571,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-200",
+      "shopId": "shop-workshop-b35",
+      "districtId": "workshop",
+      "amount": 36.597923460992895,
+      "requestedAmount": 36.597923460992895,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-220",
+      "shopId": "shop-river-b33",
+      "districtId": "river",
+      "amount": 36.31714266666665,
+      "requestedAmount": 36.31714266666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-254",
+      "districtId": "market",
+      "amount": 39.39560804801889,
+      "requestedAmount": 39.39560804801889,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-324",
+      "districtId": "government",
+      "amount": 39.429038099052605,
+      "requestedAmount": 39.429038099052605,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-419",
+      "districtId": "market",
+      "amount": 39.47607139675885,
+      "requestedAmount": 39.47607139675885,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-496",
+      "districtId": "market",
+      "amount": 39.61828605159698,
+      "requestedAmount": 39.61828605159698,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-516",
+      "districtId": "starport",
+      "amount": 38.91840782999895,
+      "requestedAmount": 38.91840782999895,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-548",
+      "districtId": "airport",
+      "amount": 39.64578284419728,
+      "requestedAmount": 39.64578284419728,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-45",
+      "shopId": "shop-market-b30",
+      "districtId": "market",
+      "amount": 39.076885964912314,
+      "requestedAmount": 39.076885964912314,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-47",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 26.57714982456141,
+      "requestedAmount": 26.57714982456141,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-51",
+      "districtId": "summit",
+      "amount": 40.74124559221201,
+      "requestedAmount": 40.74124559221201,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-55",
+      "shopId": "shop-river-b29",
+      "districtId": "river",
+      "amount": 23.54128213333333,
+      "requestedAmount": 23.54128213333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-75",
+      "shopId": "shop-airport-b33",
+      "districtId": "airport",
+      "amount": 39.721247999999996,
+      "requestedAmount": 39.721247999999996,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-79",
+      "shopId": "shop-workshop-b39",
+      "districtId": "workshop",
+      "amount": 39.724379234042544,
+      "requestedAmount": 39.724379234042544,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-89",
+      "shopId": "shop-market-b55",
+      "districtId": "market",
+      "amount": 36.58915943859644,
+      "requestedAmount": 36.58915943859644,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-91",
+      "shopId": "shop-west-b51",
+      "districtId": "west",
+      "amount": 36.59854385964914,
+      "requestedAmount": 36.59854385964914,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-115",
+      "districtId": "government",
+      "amount": 36.8,
+      "requestedAmount": 36.8,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-147",
+      "districtId": "academy",
+      "amount": 38.976984223647605,
+      "requestedAmount": 38.976984223647605,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-187",
+      "shopId": "shop-river-b4",
+      "districtId": "river",
+      "amount": 27.77135626666666,
+      "requestedAmount": 27.77135626666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-227",
+      "districtId": "summit",
+      "amount": 39.63175104782991,
+      "requestedAmount": 39.63175104782991,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-283",
+      "districtId": "east",
+      "amount": 39.63211470304752,
+      "requestedAmount": 39.63211470304752,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-307",
+      "districtId": "starport",
+      "amount": 39.18396196118877,
+      "requestedAmount": 39.18396196118877,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-335",
+      "districtId": "government",
+      "amount": 39.502802825522444,
+      "requestedAmount": 39.502802825522444,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-379",
+      "districtId": "government",
+      "amount": 39.33527762833839,
+      "requestedAmount": 39.33527762833839,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-467",
+      "districtId": "government",
+      "amount": 39.713760300799926,
+      "requestedAmount": 39.713760300799926,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-483",
+      "districtId": "starport",
+      "amount": 37.9196090119128,
+      "requestedAmount": 37.9196090119128,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-495",
+      "shopId": "shop-river-b30",
+      "districtId": "river",
+      "amount": 39.7224576,
+      "requestedAmount": 39.7224576,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-511",
+      "districtId": "government",
+      "amount": 39.33527762833839,
+      "requestedAmount": 39.33527762833839,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-547",
+      "districtId": "east",
+      "amount": 39.82766485972287,
+      "requestedAmount": 39.82766485972287,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-579",
+      "districtId": "summit",
+      "amount": 40.864919665685115,
+      "requestedAmount": 40.864919665685115,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-583",
+      "shopId": "shop-river-b36",
+      "districtId": "river",
+      "amount": 36.86558746666665,
+      "requestedAmount": 36.86558746666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-599",
+      "districtId": "government",
+      "amount": 39.66927901599863,
+      "requestedAmount": 39.66927901599863,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-22",
+      "shopId": "shop-river-b12",
+      "districtId": "river",
+      "amount": 19.95491493333333,
+      "requestedAmount": 19.95491493333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-30",
+      "shopId": "shop-east-b24",
+      "districtId": "east",
+      "amount": 27.76719396491227,
+      "requestedAmount": 27.76719396491227,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-86",
+      "shopId": "shop-airport-b4",
+      "districtId": "airport",
+      "amount": 39.172972000000016,
+      "requestedAmount": 39.172972000000016,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-134",
+      "shopId": "shop-workshop-b0",
+      "districtId": "workshop",
+      "amount": 39.720555574468094,
+      "requestedAmount": 39.720555574468094,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-162",
+      "shopId": "shop-east-b21",
+      "districtId": "east",
+      "amount": 39.72341557894737,
+      "requestedAmount": 39.72341557894737,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-190",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 13.978549333333332,
+      "requestedAmount": 13.978549333333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-222",
+      "shopId": "shop-workshop-b49",
+      "districtId": "workshop",
+      "amount": 39.720555574468094,
+      "requestedAmount": 39.720555574468094,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-258",
+      "districtId": "government",
+      "amount": 36.7752884299963,
+      "requestedAmount": 36.7752884299963,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-306",
+      "shopId": "shop-airport-b36",
+      "districtId": "airport",
+      "amount": 39.72470400000002,
+      "requestedAmount": 39.72470400000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-338",
+      "districtId": "east",
+      "amount": 37.82926965877668,
+      "requestedAmount": 37.82926965877668,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-397",
+      "districtId": "market",
+      "amount": 38.63204588748981,
+      "requestedAmount": 38.63204588748981,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-434",
+      "districtId": "government",
+      "amount": 38.869905951409926,
+      "requestedAmount": 38.869905951409926,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-438",
+      "shopId": "shop-airport-b24",
+      "districtId": "airport",
+      "amount": 39.72470400000002,
+      "requestedAmount": 39.72470400000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-478",
+      "districtId": "government",
+      "amount": 39.414089081262574,
+      "requestedAmount": 39.414089081262574,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-507",
+      "shopId": "shop-market-b68",
+      "districtId": "market",
+      "amount": 38.98154835087712,
+      "requestedAmount": 38.98154835087712,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-526",
+      "districtId": "airport",
+      "amount": 39.585272224132304,
+      "requestedAmount": 39.585272224132304,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-546",
+      "districtId": "summit",
+      "amount": 40.66200331770407,
+      "requestedAmount": 40.66200331770407,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-594",
+      "shopId": "shop-river-b13",
+      "districtId": "river",
+      "amount": 39.725913599999984,
+      "requestedAmount": 39.725913599999984,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-37",
+      "districtId": "academy",
+      "amount": 39.321092291482685,
+      "requestedAmount": 39.321092291482685,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-65",
+      "districtId": "starport",
+      "amount": 36.69623968473192,
+      "requestedAmount": 36.69623968473192,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-77",
+      "shopId": "shop-river-b43",
+      "districtId": "river",
+      "amount": 20.960982399999992,
+      "requestedAmount": 20.960982399999992,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-101",
+      "shopId": "shop-workshop-b1",
+      "districtId": "workshop",
+      "amount": 27.218304226950366,
+      "requestedAmount": 27.218304226950366,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-161",
+      "districtId": "summit",
+      "amount": 39.66527570132206,
+      "requestedAmount": 39.66527570132206,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-189",
+      "shopId": "shop-workshop-b52",
+      "districtId": "workshop",
+      "amount": 39.35277265248228,
+      "requestedAmount": 39.35277265248228,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-209",
+      "shopId": "shop-river-b59",
+      "districtId": "river",
+      "amount": 28.77788773333332,
+      "requestedAmount": 28.77788773333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-225",
+      "districtId": "government",
+      "amount": 38.78358952759476,
+      "requestedAmount": 38.78358952759476,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-273",
+      "districtId": "airport",
+      "amount": 38.76482053078919,
+      "requestedAmount": 38.76482053078919,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-277",
+      "shopId": "shop-workshop-b44",
+      "districtId": "workshop",
+      "amount": 39.72401157446808,
+      "requestedAmount": 39.72401157446808,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-401",
+      "districtId": "government",
+      "amount": 40.48868718365962,
+      "requestedAmount": 40.48868718365962,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-417",
+      "districtId": "starport",
+      "amount": 39.55960826051495,
+      "requestedAmount": 39.55960826051495,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-433",
+      "districtId": "academy",
+      "amount": 39.36061422096096,
+      "requestedAmount": 39.36061422096096,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-513",
+      "districtId": "summit",
+      "amount": 40.83320159221201,
+      "requestedAmount": 40.83320159221201,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-593",
+      "districtId": "starport",
+      "amount": 35.60586046932715,
+      "requestedAmount": 35.60586046932715,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-16",
+      "districtId": "government",
+      "amount": 41.11277445667675,
+      "requestedAmount": 41.11277445667675,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-68",
+      "shopId": "shop-workshop-b36",
+      "districtId": "workshop",
+      "amount": 38.25275188652482,
+      "requestedAmount": 38.25275188652482,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-88",
+      "shopId": "shop-river-b0",
+      "districtId": "river",
+      "amount": 20.78073013333333,
+      "requestedAmount": 20.78073013333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-96",
+      "districtId": "east",
+      "amount": 39.53357896978154,
+      "requestedAmount": 39.53357896978154,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-112",
+      "shopId": "shop-workshop-b4",
+      "districtId": "workshop",
+      "amount": 38.25275188652482,
+      "requestedAmount": 38.25275188652482,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-136",
+      "districtId": "academy",
+      "amount": 36.93469369143602,
+      "requestedAmount": 36.93469369143602,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-188",
+      "districtId": "market",
+      "amount": 37.94780328398277,
+      "requestedAmount": 37.94780328398277,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-192",
+      "districtId": "government",
+      "amount": 39.6933745491209,
+      "requestedAmount": 39.6933745491209,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-264",
+      "shopId": "shop-river-b55",
+      "districtId": "river",
+      "amount": 32.54185120000002,
+      "requestedAmount": 32.54185120000002,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-304",
+      "districtId": "summit",
+      "amount": 41.18620905837638,
+      "requestedAmount": 41.18620905837638,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-308",
+      "shopId": "shop-river-b1",
+      "districtId": "river",
+      "amount": 32.823341599999985,
+      "requestedAmount": 32.823341599999985,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-332",
+      "shopId": "shop-workshop-b6",
+      "districtId": "workshop",
+      "amount": 38.253105929078004,
+      "requestedAmount": 38.253105929078004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-356",
+      "districtId": "academy",
+      "amount": 37.808994527834685,
+      "requestedAmount": 37.808994527834685,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-384",
+      "districtId": "starport",
+      "amount": 39.43471546407122,
+      "requestedAmount": 39.43471546407122,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-441",
+      "districtId": "market",
+      "amount": 37.92159193945111,
+      "requestedAmount": 37.92159193945111,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-444",
+      "districtId": "academy",
+      "amount": 36.915409727927525,
+      "requestedAmount": 36.915409727927525,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-452",
+      "shopId": "shop-market-b71",
+      "districtId": "market",
+      "amount": 38.24604743859651,
+      "requestedAmount": 38.24604743859651,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-464",
+      "shopId": "shop-workshop-b16",
+      "districtId": "workshop",
+      "amount": 38.24708720567377,
+      "requestedAmount": 38.24708720567377,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-480",
+      "districtId": "summit",
+      "amount": 39.74980441727951,
+      "requestedAmount": 39.74980441727951,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-544",
+      "districtId": "government",
+      "amount": 41.11277445667675,
+      "requestedAmount": 41.11277445667675,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-580",
+      "districtId": "east",
+      "amount": 37.07778520079489,
+      "requestedAmount": 37.07778520079489,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-63",
+      "shopId": "shop-east-b47",
+      "districtId": "east",
+      "amount": 41.199180350877185,
+      "requestedAmount": 41.199180350877185,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-83",
+      "districtId": "core",
+      "amount": 37.74627716529007,
+      "requestedAmount": 37.74627716529007,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-99",
+      "shopId": "shop-river-b48",
+      "districtId": "river",
+      "amount": 21.69645546666666,
+      "requestedAmount": 21.69645546666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-119",
+      "shopId": "shop-airport-b1",
+      "districtId": "airport",
+      "amount": 38.24731733333334,
+      "requestedAmount": 38.24731733333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-143",
+      "shopId": "shop-river-b41",
+      "districtId": "river",
+      "amount": 38.241271466666674,
+      "requestedAmount": 38.241271466666674,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-166",
+      "shopId": "shop-market-b7",
+      "districtId": "market",
+      "amount": 11.767367859649125,
+      "requestedAmount": 11.767367859649125,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-171",
+      "districtId": "core",
+      "amount": 37.53535152215383,
+      "requestedAmount": 37.53535152215383,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-211",
+      "shopId": "shop-workshop-b58",
+      "districtId": "workshop",
+      "amount": 36.689878042553175,
+      "requestedAmount": 36.689878042553175,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-259",
+      "districtId": "core",
+      "amount": 37.53535152215383,
+      "requestedAmount": 37.53535152215383,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-265",
+      "shopId": "shop-market-b45",
+      "districtId": "market",
+      "amount": 37.87291929824569,
+      "requestedAmount": 37.87291929824569,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-299",
+      "shopId": "shop-workshop-b20",
+      "districtId": "workshop",
+      "amount": 38.24942388652483,
+      "requestedAmount": 38.24942388652483,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-311",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 25.105750526315795,
+      "requestedAmount": 25.105750526315795,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-319",
+      "shopId": "shop-river-b44",
+      "districtId": "river",
+      "amount": 19.49003626666666,
+      "requestedAmount": 19.49003626666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-347",
+      "districtId": "core",
+      "amount": 37.56585377963664,
+      "requestedAmount": 37.56585377963664,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-407",
+      "shopId": "shop-river-b35",
+      "districtId": "river",
+      "amount": 38.244599466666656,
+      "requestedAmount": 38.244599466666656,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-415",
+      "districtId": "east",
+      "amount": 40.83094793223952,
+      "requestedAmount": 40.83094793223952,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-435",
+      "districtId": "core",
+      "amount": 37.77922628811858,
+      "requestedAmount": 37.77922628811858,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-523",
+      "districtId": "core",
+      "amount": 37.378634498623406,
+      "requestedAmount": 37.378634498623406,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-14",
+      "shopId": "shop-west-b25",
+      "districtId": "west",
+      "amount": 22.715142666666658,
+      "requestedAmount": 22.715142666666658,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-62",
+      "districtId": "summit",
+      "amount": 41.03505345717577,
+      "requestedAmount": 41.03505345717577,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-66",
+      "shopId": "shop-river-b45",
+      "districtId": "river",
+      "amount": 38.25458346666665,
+      "requestedAmount": 38.25458346666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-133",
+      "shopId": "shop-market-b23",
+      "districtId": "market",
+      "amount": 24.08423508771932,
+      "requestedAmount": 24.08423508771932,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-214",
+      "districtId": "government",
+      "amount": 37.42302475527944,
+      "requestedAmount": 37.42302475527944,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-330",
+      "shopId": "shop-river-b38",
+      "districtId": "river",
+      "amount": 38.247927466666646,
+      "requestedAmount": 38.247927466666646,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-353",
+      "districtId": "market",
+      "amount": 37.17976672088786,
+      "requestedAmount": 37.17976672088786,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-482",
+      "shopId": "shop-airport-b8",
+      "districtId": "airport",
+      "amount": 33.29193333333335,
+      "requestedAmount": 33.29193333333335,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-558",
+      "shopId": "shop-east-b18",
+      "districtId": "east",
+      "amount": 31.916524280701754,
+      "requestedAmount": 31.916524280701754,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-590",
+      "districtId": "summit",
+      "amount": 40.817684226765216,
+      "requestedAmount": 40.817684226765216,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-13",
+      "shopId": "shop-workshop-b9",
+      "districtId": "workshop",
+      "amount": 38.253105929078004,
+      "requestedAmount": 38.253105929078004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-57",
+      "shopId": "shop-workshop-b29",
+      "districtId": "workshop",
+      "amount": 23.999923659574478,
+      "requestedAmount": 23.999923659574478,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-111",
+      "districtId": "market",
+      "amount": 36.87007631221766,
+      "requestedAmount": 36.87007631221766,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-169",
+      "districtId": "academy",
+      "amount": 38.24470243148599,
+      "requestedAmount": 38.24470243148599,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-232",
+      "shopId": "shop-market-b32",
+      "districtId": "market",
+      "amount": 37.14075480701749,
+      "requestedAmount": 37.14075480701749,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-233",
+      "shopId": "shop-workshop-b32",
+      "districtId": "workshop",
+      "amount": 38.24942388652483,
+      "requestedAmount": 38.24942388652483,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-257",
+      "districtId": "academy",
+      "amount": 37.288826956600595,
+      "requestedAmount": 37.288826956600595,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-285",
+      "shopId": "shop-starport-b20",
+      "districtId": "starport",
+      "amount": 41.190314666666666,
+      "requestedAmount": 41.190314666666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-297",
+      "shopId": "shop-river-b28",
+      "districtId": "river",
+      "amount": 19.8629568,
+      "requestedAmount": 19.8629568,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-313",
+      "districtId": "government",
+      "amount": 37.69441717084905,
+      "requestedAmount": 37.69441717084905,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-317",
+      "shopId": "shop-airport-b11",
+      "districtId": "airport",
+      "amount": 41.19240533333334,
+      "requestedAmount": 41.19240533333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-349",
+      "districtId": "east",
+      "amount": 38.16179630055663,
+      "requestedAmount": 38.16179630055663,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-409",
+      "shopId": "shop-workshop-b23",
+      "districtId": "workshop",
+      "amount": 38.25275188652482,
+      "requestedAmount": 38.25275188652482,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-445",
+      "districtId": "government",
+      "amount": 37.88717907561096,
+      "requestedAmount": 37.88717907561096,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-609",
+      "districtId": "academy",
+      "amount": 37.78181710062656,
+      "requestedAmount": 37.78181710062656,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-44",
+      "shopId": "shop-river-b26",
+      "districtId": "river",
+      "amount": 29.97313546666665,
+      "requestedAmount": 29.97313546666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-108",
+      "shopId": "shop-airport-b2",
+      "districtId": "airport",
+      "amount": 41.19240533333334,
+      "requestedAmount": 41.19240533333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-140",
+      "shopId": "shop-east-b2",
+      "districtId": "east",
+      "amount": 20.04607143859649,
+      "requestedAmount": 20.04607143859649,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-224",
+      "districtId": "academy",
+      "amount": 36.44059777572456,
+      "requestedAmount": 36.44059777572456,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-298",
+      "shopId": "shop-market-b26",
+      "districtId": "market",
+      "amount": 36.77302456140345,
+      "requestedAmount": 36.77302456140345,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-428",
+      "shopId": "shop-starport-b14",
+      "districtId": "starport",
+      "amount": 33.834901333333335,
+      "requestedAmount": 33.834901333333335,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-476",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.93267894736842,
+      "requestedAmount": 17.93267894736842,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-532",
+      "districtId": "academy",
+      "amount": 36.274121585248366,
+      "requestedAmount": 36.274121585248366,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-139",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-320",
+      "shopId": "shop-market-b74",
+      "districtId": "market",
+      "amount": 36.40529431578942,
+      "requestedAmount": 36.40529431578942,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-331",
+      "shopId": "shop-market-b39",
+      "districtId": "market",
+      "amount": 23.716536842105285,
+      "requestedAmount": 23.716536842105285,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-383",
+      "shopId": "shop-airport-b21",
+      "districtId": "airport",
+      "amount": 27.497036666666677,
+      "requestedAmount": 27.497036666666677,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-399",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 27.52304937343359,
+      "requestedAmount": 27.52304937343359,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-459",
+      "shopId": "shop-east-b15",
+      "districtId": "east",
+      "amount": 41.19465319298246,
+      "requestedAmount": 41.19465319298246,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-266",
+      "shopId": "shop-workshop-b33",
+      "districtId": "workshop",
+      "amount": 36.77829219858157,
+      "requestedAmount": 36.77829219858157,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-430",
+      "shopId": "shop-market-b29",
+      "districtId": "market",
+      "amount": 36.037564070175385,
+      "requestedAmount": 36.037564070175385,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-458",
+      "districtId": "summit",
+      "amount": 40.97680298360484,
+      "requestedAmount": 40.97680298360484,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-474",
+      "shopId": "shop-market-b48",
+      "districtId": "market",
+      "amount": 36.03442807017551,
+      "requestedAmount": 36.03442807017551,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-538",
+      "shopId": "shop-starport-b43",
+      "districtId": "starport",
+      "amount": 41.18673066666666,
+      "requestedAmount": 41.18673066666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-602",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 25.192752140350876,
+      "requestedAmount": 25.192752140350876,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-41",
+      "shopId": "shop-east-b31",
+      "districtId": "east",
+      "amount": 30.25232343859649,
+      "requestedAmount": 30.25232343859649,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-73",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 21.512711999999997,
+      "requestedAmount": 21.512711999999997,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-145",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 26.75620757446809,
+      "requestedAmount": 26.75620757446809,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-165",
+      "shopId": "shop-river-b58",
+      "districtId": "river",
+      "amount": 36.77365333333332,
+      "requestedAmount": 36.77365333333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-185",
+      "shopId": "shop-airport-b43",
+      "districtId": "airport",
+      "amount": 41.190912000000004,
+      "requestedAmount": 41.190912000000004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-217",
+      "shopId": "shop-east-b15",
+      "districtId": "east",
+      "amount": 41.19465319298246,
+      "requestedAmount": 41.19465319298246,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-342",
+      "shopId": "shop-market-b43",
+      "districtId": "market",
+      "amount": 25.005656701754365,
+      "requestedAmount": 25.005656701754365,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-361",
+      "shopId": "shop-airport-b31",
+      "districtId": "airport",
+      "amount": 41.190912000000004,
+      "requestedAmount": 41.190912000000004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-577",
+      "districtId": "government",
+      "amount": 35.864719293567106,
+      "requestedAmount": 35.864719293567106,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-601",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 21.512711999999997,
+      "requestedAmount": 21.512711999999997,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-120",
+      "shopId": "shop-starport-b17",
+      "districtId": "starport",
+      "amount": 31.073917333333334,
+      "requestedAmount": 31.073917333333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-168",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 24.093501614035084,
+      "requestedAmount": 24.093501614035084,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-184",
+      "shopId": "shop-east-b40",
+      "districtId": "east",
+      "amount": 22.62027831578947,
+      "requestedAmount": 22.62027831578947,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-199",
+      "shopId": "shop-market-b16",
+      "districtId": "market",
+      "amount": 29.68904933333336,
+      "requestedAmount": 29.68904933333336,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-328",
+      "shopId": "shop-airport-b14",
+      "districtId": "airport",
+      "amount": 35.306496,
+      "requestedAmount": 35.306496,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-360",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 24.549141684210518,
+      "requestedAmount": 24.549141684210518,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-376",
+      "shopId": "shop-workshop-b26",
+      "districtId": "workshop",
+      "amount": 31.99966127659573,
+      "requestedAmount": 31.99966127659573,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-396",
+      "shopId": "shop-river-b14",
+      "districtId": "river",
+      "amount": 35.296563200000016,
+      "requestedAmount": 35.296563200000016,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-408",
+      "shopId": "shop-market-b0",
+      "districtId": "market",
+      "amount": 35.29288757894734,
+      "requestedAmount": 35.29288757894734,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-472",
+      "shopId": "shop-starport-b14",
+      "districtId": "starport",
+      "amount": 30.228454600096427,
+      "requestedAmount": 30.228454600096427,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-504",
+      "shopId": "shop-airport-b2",
+      "districtId": "airport",
+      "amount": 30.958690302582795,
+      "requestedAmount": 30.958690302582795,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-135",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 24.093501614035084,
+      "requestedAmount": 24.093501614035084,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-151",
+      "shopId": "shop-east-b50",
+      "districtId": "east",
+      "amount": 35.3066307368421,
+      "requestedAmount": 35.3066307368421,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-167",
+      "shopId": "shop-workshop-b30",
+      "districtId": "workshop",
+      "amount": 35.307160510638305,
+      "requestedAmount": 35.307160510638305,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-207",
+      "shopId": "shop-airport-b40",
+      "districtId": "airport",
+      "amount": 26.29503066666667,
+      "requestedAmount": 26.29503066666667,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-231",
+      "shopId": "shop-river-b28",
+      "districtId": "river",
+      "amount": 18.115752266666668,
+      "requestedAmount": 18.115752266666668,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-451",
+      "shopId": "shop-river-b27",
+      "districtId": "river",
+      "amount": 35.29963520000001,
+      "requestedAmount": 35.29963520000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-503",
+      "shopId": "shop-east-b2",
+      "districtId": "east",
+      "amount": 19.95411698245614,
+      "requestedAmount": 19.95411698245614,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-535",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-54",
+      "shopId": "shop-starport-b27",
+      "districtId": "starport",
+      "amount": 35.29984,
+      "requestedAmount": 35.29984,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-90",
+      "shopId": "shop-workshop-b46",
+      "districtId": "workshop",
+      "amount": 35.307160510638305,
+      "requestedAmount": 35.307160510638305,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-118",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 24.549141684210525,
+      "requestedAmount": 24.549141684210525,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-286",
+      "shopId": "shop-river-b43",
+      "districtId": "river",
+      "amount": 20.960982399999995,
+      "requestedAmount": 20.960982399999995,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-418",
+      "shopId": "shop-river-b44",
+      "districtId": "river",
+      "amount": 19.49003626666666,
+      "requestedAmount": 19.49003626666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-462",
+      "shopId": "shop-river-b28",
+      "districtId": "river",
+      "amount": 18.115752266666668,
+      "requestedAmount": 18.115752266666668,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-470",
+      "shopId": "shop-east-b18",
+      "districtId": "east",
+      "amount": 31.824545824561405,
+      "requestedAmount": 31.824545824561405,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-53",
+      "shopId": "shop-airport-b27",
+      "districtId": "airport",
+      "amount": 35.305216,
+      "requestedAmount": 35.305216,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-69",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 24.093501614035084,
+      "requestedAmount": 24.093501614035084,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-113",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.932678947368423,
+      "requestedAmount": 17.932678947368423,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-157",
+      "shopId": "shop-west-b38",
+      "districtId": "west",
+      "amount": 24.646953824561404,
+      "requestedAmount": 24.646953824561404,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-181",
+      "districtId": "government",
+      "amount": 34.8481833730047,
+      "requestedAmount": 34.8481833730047,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-229",
+      "shopId": "shop-airport-b15",
+      "districtId": "airport",
+      "amount": 35.305216,
+      "requestedAmount": 35.305216,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-301",
+      "districtId": "academy",
+      "amount": 34.672701307673705,
+      "requestedAmount": 34.672701307673705,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-341",
+      "shopId": "shop-river-b29",
+      "districtId": "river",
+      "amount": 23.54128213333333,
+      "requestedAmount": 23.54128213333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-581",
+      "shopId": "shop-airport-b43",
+      "districtId": "airport",
+      "amount": 31.935670153929664,
+      "requestedAmount": 31.935670153929664,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-36",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 27.22013922807017,
+      "requestedAmount": 27.22013922807017,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-52",
+      "shopId": "shop-east-b66",
+      "districtId": "east",
+      "amount": 35.3035587368421,
+      "requestedAmount": 35.3035587368421,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-164",
+      "districtId": "starport",
+      "amount": 35.08026224360151,
+      "requestedAmount": 35.08026224360151,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-196",
+      "shopId": "shop-airport-b46",
+      "districtId": "airport",
+      "amount": 21.788042000000004,
+      "requestedAmount": 21.788042000000004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-228",
+      "shopId": "shop-east-b2",
+      "districtId": "east",
+      "amount": 19.95411698245614,
+      "requestedAmount": 19.95411698245614,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-260",
+      "districtId": "summit",
+      "amount": 35.26142917632574,
+      "requestedAmount": 35.26142917632574,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-288",
+      "shopId": "shop-workshop-b35",
+      "districtId": "workshop",
+      "amount": 33.41821686022086,
+      "requestedAmount": 33.41821686022086,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-352",
+      "shopId": "shop-river-b0",
+      "districtId": "river",
+      "amount": 20.78073013333333,
+      "requestedAmount": 20.78073013333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-572",
+      "shopId": "shop-river-b23",
+      "districtId": "river",
+      "amount": 32.66829780013685,
+      "requestedAmount": 32.66829780013685,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-195",
+      "shopId": "shop-east-b50",
+      "districtId": "east",
+      "amount": 30.52100893194158,
+      "requestedAmount": 30.52100893194158,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-275",
+      "shopId": "shop-river-b4",
+      "districtId": "river",
+      "amount": 29.242686399999993,
+      "requestedAmount": 29.242686399999993,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-295",
+      "shopId": "shop-airport-b33",
+      "districtId": "airport",
+      "amount": 33.14296929622756,
+      "requestedAmount": 33.14296929622756,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-355",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 13.978549333333332,
+      "requestedAmount": 13.978549333333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-403",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-515",
+      "shopId": "shop-airport-b33",
+      "districtId": "airport",
+      "amount": 33.646361324980056,
+      "requestedAmount": 33.646361324980056,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-603",
+      "shopId": "shop-airport-b21",
+      "districtId": "airport",
+      "amount": 25.65777000000001,
+      "requestedAmount": 25.65777000000001,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-194",
+      "districtId": "summit",
+      "amount": 34.96141498466854,
+      "requestedAmount": 34.96141498466854,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-514",
+      "shopId": "shop-east-b40",
+      "districtId": "east",
+      "amount": 22.62027831578947,
+      "requestedAmount": 22.62027831578947,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-97",
+      "shopId": "shop-airport-b47",
+      "districtId": "airport",
+      "amount": 35.302656,
+      "requestedAmount": 35.302656,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-241",
+      "shopId": "shop-starport-b1",
+      "districtId": "starport",
+      "amount": 33.271661333333334,
+      "requestedAmount": 33.271661333333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-337",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-481",
+      "shopId": "shop-east-b31",
+      "districtId": "east",
+      "amount": 24.36737298245614,
+      "requestedAmount": 24.36737298245614,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-517",
+      "shopId": "shop-river-b54",
+      "districtId": "river",
+      "amount": 33.12562325149132,
+      "requestedAmount": 33.12562325149132,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-561",
+      "shopId": "shop-river-b59",
+      "districtId": "river",
+      "amount": 27.306813599999987,
+      "requestedAmount": 27.306813599999987,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-64",
+      "shopId": "shop-airport-b30",
+      "districtId": "airport",
+      "amount": 27.672134,
+      "requestedAmount": 27.672134,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-240",
+      "shopId": "shop-airport-b18",
+      "districtId": "airport",
+      "amount": 35.302656,
+      "requestedAmount": 35.302656,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-272",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 24.549141684210525,
+      "requestedAmount": 24.549141684210525,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-223",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 12.966943789473683,
+      "requestedAmount": 12.966943789473683,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-239",
+      "shopId": "shop-east-b31",
+      "districtId": "east",
+      "amount": 24.36737298245614,
+      "requestedAmount": 24.36737298245614,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-271",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-519",
+      "shopId": "shop-workshop-b12",
+      "districtId": "workshop",
+      "amount": 31.317186597863028,
+      "requestedAmount": 31.317186597863028,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-146",
+      "shopId": "shop-west-b25",
+      "districtId": "west",
+      "amount": 22.715142666666658,
+      "requestedAmount": 22.715142666666658,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-206",
+      "shopId": "shop-east-b40",
+      "districtId": "east",
+      "amount": 22.62027831578947,
+      "requestedAmount": 22.62027831578947,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-382",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 24.549141684210518,
+      "requestedAmount": 24.549141684210518,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-398",
+      "shopId": "shop-workshop-b20",
+      "districtId": "workshop",
+      "amount": 31.25832697551875,
+      "requestedAmount": 31.25832697551875,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-442",
+      "shopId": "shop-workshop-b20",
+      "districtId": "workshop",
+      "amount": 31.12730333729191,
+      "requestedAmount": 31.12730333729191,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-205",
+      "shopId": "shop-summit-b5",
+      "districtId": "summit",
+      "amount": 20.777234666666665,
+      "requestedAmount": 20.777234666666665,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-429",
+      "shopId": "shop-river-b1",
+      "districtId": "river",
+      "amount": 32.19457841022089,
+      "requestedAmount": 32.19457841022089,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-525",
+      "shopId": "shop-east-b53",
+      "districtId": "east",
+      "amount": 35.29967831578947,
+      "requestedAmount": 35.29967831578947,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-541",
+      "shopId": "shop-workshop-b58",
+      "districtId": "workshop",
+      "amount": 31.546425720872595,
+      "requestedAmount": 31.546425720872595,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-585",
+      "shopId": "shop-workshop-b22",
+      "districtId": "workshop",
+      "amount": 31.29332454539578,
+      "requestedAmount": 31.29332454539578,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-256",
+      "shopId": "shop-west-b51",
+      "districtId": "west",
+      "amount": 29.657702711753057,
+      "requestedAmount": 29.657702711753057,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-344",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.932678947368423,
+      "requestedAmount": 17.932678947368423,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-440",
+      "shopId": "shop-river-b0",
+      "districtId": "river",
+      "amount": 20.780730133333332,
+      "requestedAmount": 20.780730133333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-460",
+      "shopId": "shop-airport-b30",
+      "districtId": "airport",
+      "amount": 27.672134000000007,
+      "requestedAmount": 27.672134000000007,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-529",
+      "shopId": "shop-market-b16",
+      "districtId": "market",
+      "amount": 29.68904933333336,
+      "requestedAmount": 29.68904933333336,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-267",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 27.220139228070167,
+      "requestedAmount": 27.220139228070167,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-387",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 26.75620757446809,
+      "requestedAmount": 26.75620757446809,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-395",
+      "shopId": "shop-starport-b17",
+      "districtId": "starport",
+      "amount": 31.073917333333334,
+      "requestedAmount": 31.073917333333334,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-563",
+      "shopId": "shop-workshop-b16",
+      "districtId": "workshop",
+      "amount": 29.469170108060705,
+      "requestedAmount": 29.469170108060705,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-575",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 25.1057505263158,
+      "requestedAmount": 25.1057505263158,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-102",
+      "shopId": "shop-west-b25",
+      "districtId": "west",
+      "amount": 19.77229017543859,
+      "requestedAmount": 19.77229017543859,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-110",
+      "shopId": "shop-river-b12",
+      "districtId": "river",
+      "amount": 19.95491493333333,
+      "requestedAmount": 19.95491493333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-178",
+      "shopId": "shop-workshop-b29",
+      "districtId": "workshop",
+      "amount": 23.999923659574474,
+      "requestedAmount": 23.999923659574474,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-350",
+      "shopId": "shop-airport-b20",
+      "districtId": "airport",
+      "amount": 30.777351965244986,
+      "requestedAmount": 30.777351965244986,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-374",
+      "shopId": "shop-river-b26",
+      "districtId": "river",
+      "amount": 29.973135466666655,
+      "requestedAmount": 29.973135466666655,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-394",
+      "shopId": "shop-airport-b4",
+      "districtId": "airport",
+      "amount": 30.33514742993853,
+      "requestedAmount": 30.33514742993853,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-201",
+      "shopId": "shop-west-b12",
+      "districtId": "west",
+      "amount": 27.22013922807017,
+      "requestedAmount": 27.22013922807017,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-289",
+      "shopId": "shop-west-b38",
+      "districtId": "west",
+      "amount": 24.646953824561407,
+      "requestedAmount": 24.646953824561407,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-104",
+      "districtId": "government",
+      "amount": 29.047453575167616,
+      "requestedAmount": 29.047453575167616,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-388",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 12.966943789473683,
+      "requestedAmount": 12.966943789473683,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-392",
+      "districtId": "summit",
+      "amount": 28.065151754978288,
+      "requestedAmount": 28.065151754978288,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-508",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 26.75620757446809,
+      "requestedAmount": 26.75620757446809,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-552",
+      "shopId": "shop-workshop-b33",
+      "districtId": "workshop",
+      "amount": 28.938804732885753,
+      "requestedAmount": 28.938804732885753,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-339",
+      "shopId": "shop-airport-b1",
+      "districtId": "airport",
+      "amount": 28.80176436678336,
+      "requestedAmount": 28.80176436678336,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-427",
+      "shopId": "shop-airport-b40",
+      "districtId": "airport",
+      "amount": 26.295030666666666,
+      "requestedAmount": 26.295030666666666,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-539",
+      "shopId": "shop-river-b59",
+      "districtId": "river",
+      "amount": 28.50485416589853,
+      "requestedAmount": 28.50485416589853,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-322",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 12.966943789473682,
+      "requestedAmount": 12.966943789473682,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-550",
+      "shopId": "shop-river-b55",
+      "districtId": "river",
+      "amount": 28.230307157143947,
+      "requestedAmount": 28.230307157143947,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-49",
+      "districtId": "government",
+      "amount": 28.322597060364323,
+      "requestedAmount": 28.322597060364323,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-377",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.932678947368423,
+      "requestedAmount": 17.932678947368423,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-385",
+      "shopId": "shop-river-b48",
+      "districtId": "river",
+      "amount": 23.16740159999999,
+      "requestedAmount": 23.16740159999999,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-473",
+      "shopId": "shop-river-b9",
+      "districtId": "river",
+      "amount": 23.817156533333332,
+      "requestedAmount": 23.817156533333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-212",
+      "shopId": "shop-west-b22",
+      "districtId": "west",
+      "amount": 17.932678947368423,
+      "requestedAmount": 17.932678947368423,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-404",
+      "shopId": "shop-east-b8",
+      "districtId": "east",
+      "amount": 24.549141684210518,
+      "requestedAmount": 24.549141684210518,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-420",
+      "shopId": "shop-workshop-b46",
+      "districtId": "workshop",
+      "amount": 26.60933700341425,
+      "requestedAmount": 26.60933700341425,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-520",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 12.966943789473682,
+      "requestedAmount": 12.966943789473682,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-375",
+      "shopId": "shop-market-b43",
+      "districtId": "market",
+      "amount": 23.1670054736842,
+      "requestedAmount": 23.1670054736842,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-475",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 26.756207574468093,
+      "requestedAmount": 26.756207574468093,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-559",
+      "shopId": "shop-airport-b1",
+      "districtId": "airport",
+      "amount": 27.68095820268287,
+      "requestedAmount": 27.68095820268287,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-274",
+      "shopId": "shop-starport-b1",
+      "districtId": "starport",
+      "amount": 27.573816243634028,
+      "requestedAmount": 27.573816243634028,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-354",
+      "shopId": "shop-workshop-b32",
+      "districtId": "workshop",
+      "amount": 27.90729756296993,
+      "requestedAmount": 27.90729756296993,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-506",
+      "shopId": "shop-river-b33",
+      "districtId": "river",
+      "amount": 27.33253522301688,
+      "requestedAmount": 27.33253522301688,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-542",
+      "shopId": "shop-west-b9",
+      "districtId": "west",
+      "amount": 26.824366092055463,
+      "requestedAmount": 26.824366092055463,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-305",
+      "districtId": "east",
+      "amount": 29.271615144800165,
+      "requestedAmount": 29.271615144800165,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-421",
+      "shopId": "shop-west-b38",
+      "districtId": "west",
+      "amount": 21.704033964912284,
+      "requestedAmount": 21.704033964912284,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-449",
+      "shopId": "shop-airport-b27",
+      "districtId": "airport",
+      "amount": 25.990956822873205,
+      "requestedAmount": 25.990956822873205,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-448",
+      "shopId": "shop-east-b40",
+      "districtId": "east",
+      "amount": 22.620278315789466,
+      "requestedAmount": 22.620278315789466,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-592",
+      "shopId": "shop-airport-b46",
+      "districtId": "airport",
+      "amount": 21.788042000000004,
+      "requestedAmount": 21.788042000000004,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-154",
+      "shopId": "shop-river-b12",
+      "districtId": "river",
+      "amount": 19.95491493333333,
+      "requestedAmount": 19.95491493333333,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-234",
+      "shopId": "shop-west-b25",
+      "districtId": "west",
+      "amount": 18.30086392982456,
+      "requestedAmount": 18.30086392982456,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-278",
+      "shopId": "shop-west-b25",
+      "districtId": "west",
+      "amount": 19.77229017543859,
+      "requestedAmount": 19.77229017543859,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-410",
+      "shopId": "shop-west-b3",
+      "districtId": "west",
+      "amount": 25.593895259831744,
+      "requestedAmount": 25.593895259831744,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-596",
+      "shopId": "shop-workshop-b1",
+      "districtId": "workshop",
+      "amount": 24.87287841282827,
+      "requestedAmount": 24.87287841282827,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-343",
+      "shopId": "shop-workshop-b49",
+      "districtId": "workshop",
+      "amount": 23.82716623129747,
+      "requestedAmount": 23.82716623129747,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-210",
+      "shopId": "shop-market-b55",
+      "districtId": "market",
+      "amount": 23.594740964077825,
+      "requestedAmount": 23.594740964077825,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-540",
+      "shopId": "shop-market-b7",
+      "districtId": "market",
+      "amount": 11.767367859649125,
+      "requestedAmount": 11.767367859649125,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-584",
+      "shopId": "shop-market-b23",
+      "districtId": "market",
+      "amount": 23.436211308868675,
+      "requestedAmount": 23.436211308868675,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-159",
+      "districtId": "government",
+      "amount": 22.412705628860177,
+      "requestedAmount": 22.412705628860177,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-310",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 23.16110767196411,
+      "requestedAmount": 23.16110767196411,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-326",
+      "districtId": "summit",
+      "amount": 22.90996994409339,
+      "requestedAmount": 22.90996994409339,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-497",
+      "shopId": "shop-workshop-b30",
+      "districtId": "workshop",
+      "amount": 22.58837825663876,
+      "requestedAmount": 22.58837825663876,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-318",
+      "shopId": "shop-starport-b33",
+      "districtId": "starport",
+      "amount": 23.506602666666662,
+      "requestedAmount": 23.506602666666662,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-321",
+      "shopId": "shop-workshop-b13",
+      "districtId": "workshop",
+      "amount": 19.225123424855735,
+      "requestedAmount": 19.225123424855735,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-156",
+      "shopId": "shop-workshop-b1",
+      "districtId": "workshop",
+      "amount": 16.731404150857713,
+      "requestedAmount": 16.731404150857713,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-509",
+      "shopId": "shop-west-b35",
+      "districtId": "west",
+      "amount": 13.978549333333332,
+      "requestedAmount": 13.978549333333332,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-202",
+      "districtId": "academy",
+      "amount": 11.101949579609641,
+      "requestedAmount": 11.101949579609641,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-340",
+      "shopId": "shop-starport-b1",
+      "districtId": "starport",
+      "amount": 11.66959271218927,
+      "requestedAmount": 11.66959271218927,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-177",
+      "districtId": "market",
+      "amount": 6.261720161073354,
+      "requestedAmount": 6.261720161073354,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-235",
+      "districtId": "academy",
+      "amount": 2.575907925140272,
+      "requestedAmount": 2.575907925140272,
+      "time": 1020
+    },
+    {
+      "type": "wage-paid",
+      "citizenId": "citizen-531",
+      "shopId": "shop-west-b41",
+      "districtId": "west",
+      "amount": 1.4698700350877185,
+      "requestedAmount": 1.4698700350877185,
+      "time": 1020
+    }
+  ],
+  "finalTime": 1020
+}

@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "scope": "Linux Chromium SwiftShader optical inspection using fixed diagnostic cameras; not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-CAQRD7nv.js",
+  "sourceHashes": {
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/renderer.ts": "10034dec155fac7fb3cc32dc232dd6d9d2066f63a41a280add7b5a10ac15fc62",
+    "src/rendering/terrain.ts": "f6a54344309bfdc0f86e9aba51ea1170a590e94d91d3f7dca48bc9a859b67bd3",
+    "src/main.ts": "c56daf091a18eb1de86a5eb719979b9dd5cb675ef792e82ec752666ac81c0674"
+  },
+  "captures": [
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "drawCalls": 127,
+      "triangles": 1960086,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfall-front",
+      "hour": 12,
+      "eye": [
+        -145,
+        230,
+        290
+      ],
+      "target": [
+        165,
+        210,
+        -35
+      ],
+      "drawCalls": 122,
+      "triangles": 1787448,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfront",
+      "hour": 12,
+      "eye": [
+        -455,
+        112,
+        1190
+      ],
+      "target": [
+        -610,
+        28,
+        910
+      ],
+      "drawCalls": 109,
+      "triangles": 1438028,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    }
+  ],
+  "errors": []
+}

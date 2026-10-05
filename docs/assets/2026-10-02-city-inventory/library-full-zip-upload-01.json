@@ -1,0 +1,30 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/yunshan-city-asset-production-inventory-01.zip",
+    "file_id": "file_00000000317c81f697b30ddedc1aa726",
+    "library_file_id": "libfile_9a833322857c81919dbad830c7fc9993",
+    "file_name": "yunshan-city-asset-production-inventory-01.zip",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+    "mime_type": "application/zip",
+    "library_artifact_type": "other",
+    "file_size_bytes": 667278,
+    "external_connectors_accessed": false
+  },
+  "isError": false
+}

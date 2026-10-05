@@ -1,0 +1,230 @@
+{
+  "at": "2026-10-04T00:50:36.014183+00:00",
+  "scope": "current shared familyFee9d06 copied stable then four narrow company production patches; no shared writes, updated driver includes one separate payroll check; original first probe.log retained",
+  "files": {
+    "candidate/src/access.ts": {
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    "candidate/src/architecture-floor-plan.ts": {
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    },
+    "candidate/src/aviation-renderer.ts": {
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    "candidate/src/aviation.ts": {
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    "candidate/src/commercial-district.ts": {
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    "candidate/src/controller.ts": {
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    "candidate/src/hygiene-ui.ts": {
+      "bytes": 4049,
+      "sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611"
+    },
+    "candidate/src/journey.ts": {
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    "candidate/src/main.ts": {
+      "bytes": 24422,
+      "sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+    },
+    "candidate/src/persistence/partition.ts": {
+      "bytes": 16813,
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc"
+    },
+    "candidate/src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    "candidate/src/persistence/session.ts": {
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    "candidate/src/persistence/world-layout.ts": {
+      "bytes": 5191,
+      "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+    },
+    "candidate/src/persistence.ts": {
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    "candidate/src/renderer.ts": {
+      "bytes": 93024,
+      "sha256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03"
+    },
+    "candidate/src/rendering/architecture-bodies.ts": {
+      "bytes": 13231,
+      "sha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c"
+    },
+    "candidate/src/rendering/architecture-detail.ts": {
+      "bytes": 39811,
+      "sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd"
+    },
+    "candidate/src/rendering/architecture-layout.ts": {
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    "candidate/src/rendering/chunk-residency.ts": {
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    "candidate/src/rendering/citizen-appearance.ts": {
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    "candidate/src/rendering/market-goods.ts": {
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a"
+    },
+    "candidate/src/rendering/road-closures.ts": {
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    "candidate/src/rendering/terrain.ts": {
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    "candidate/src/roads.ts": {
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    "candidate/src/simulation/activity-capacity.ts": {
+      "bytes": 5009,
+      "sha256": "c8bc8a9cf18ed761790ac99ad43e5702e4c8db676a8a3129317ec6f35c0fdd42"
+    },
+    "candidate/src/simulation/activity-minutes.ts": {
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    "candidate/src/simulation/banking.ts": {
+      "bytes": 22254,
+      "sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38"
+    },
+    "candidate/src/simulation/clinical.ts": {
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    "candidate/src/simulation/culture.ts": {
+      "bytes": 64327,
+      "sha256": "9f7a4f3f9973a8dbb9b472247de406921389489b0a4c51d638d5885feab4e925"
+    },
+    "candidate/src/simulation/education.ts": {
+      "bytes": 45918,
+      "sha256": "f6f1863514f6ab339ed794c99a140c8282f2c3fd435a8c52563a81647cb241fc"
+    },
+    "candidate/src/simulation/extensions.ts": {
+      "bytes": 91383,
+      "sha256": "09cdbfca1dc3479b366d5ff4d817470c717b8b08de0de98257421b1742bea281"
+    },
+    "candidate/src/simulation/family-education.ts": {
+      "bytes": 28978,
+      "sha256": "87d9e2fa95e886f7c19de556220d007a6cca22a54155b1da875c2740406c7bf5"
+    },
+    "candidate/src/simulation/family.ts": {
+      "bytes": 78852,
+      "sha256": "79fa371d7d31df5b78f5f5009c6574efd23aae4e0efbbb4a73f49d305a81b7c0"
+    },
+    "candidate/src/simulation/funded-work.ts": {
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    "candidate/src/simulation/governance.ts": {
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    "candidate/src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    "candidate/src/simulation/hygiene-public.ts": {
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    "candidate/src/simulation/hygiene.ts": {
+      "bytes": 50182,
+      "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+    },
+    "candidate/src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    "candidate/src/simulation/pathology.ts": {
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    "candidate/src/simulation/player-labor.ts": {
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    "candidate/src/simulation/police-supplies.ts": {
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    "candidate/src/simulation/power.ts": {
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    "candidate/src/simulation/road-demands.ts": {
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    "candidate/src/simulation/roadworks.ts": {
+      "bytes": 47166,
+      "sha256": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105"
+    },
+    "candidate/src/simulation/shop_lifecycle.ts": {
+      "bytes": 63868,
+      "sha256": "67f56d748ef3b2d09bafded353e7275252d68ccecdadf3844d9cf7c8645871e1"
+    },
+    "candidate/src/simulation/trade.ts": {
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    "candidate/src/simulation.ts": {
+      "bytes": 259439,
+      "sha256": "af08cc478dbd137219b1255ec0f1bf71aa89d1e5fcac109b3ea3f7caaf3fff1e"
+    },
+    "candidate/src/site-fixtures.ts": {
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    "candidate/src/style.css": {
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    "candidate/src/transport-geometry.ts": {
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    "candidate/src/types.ts": {
+      "bytes": 14288,
+      "sha256": "fc846ba9d79d6279f3e06bbe585da502ff9c18840d2c1cca297e3b75e8ede38f"
+    },
+    "candidate/src/ui.ts": {
+      "bytes": 178361,
+      "sha256": "0fdecfd1ebe87df4455c5c5f8df6c559fbde6c741213f7530284101039dd2cac"
+    },
+    "candidate/src/world.ts": {
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    "probe.mts": {
+      "bytes": 6902,
+      "sha256": "ed74806e39b0978a719af7edb6ce8133abb605ad97c25bf375eb077d77d13ae6"
+    },
+    "payroll-probe.mts": {
+      "bytes": 2595,
+      "sha256": "d466466eb6d6bf4951ecd7fcb4fea8ee9b11d6db34faaa5662dc406ea23aac4a"
+    }
+  }
+}

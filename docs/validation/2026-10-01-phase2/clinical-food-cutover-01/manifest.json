@@ -1,0 +1,67 @@
+{
+  "archivedAt": "2026-10-01T20:53:18.692258+00:00",
+  "sourceSnapshot": "/tmp/yunshan-phase2-agent-trade-storage-01",
+  "sourceImmutableBeforeCopyAfterAndTests": true,
+  "runs": {
+    "persistence-clinical-cutover": {
+      "passed": 26,
+      "failed": 0,
+      "at": "2026-10-01T20:51:54.643Z",
+      "initialEqualsFinal": true,
+      "evidenceChecks": 21
+    },
+    "trade-food-cutover": {
+      "passed": 22,
+      "failed": 0,
+      "at": "2026-10-01T20:50:53.917Z",
+      "initialEqualsFinal": true,
+      "evidenceChecks": 6
+    }
+  },
+  "strictTypeScript": {
+    "command": "npx tsc --noEmit",
+    "cwd": "/tmp/yunshan-phase2-agent-trade-storage-01",
+    "exitCode": 0
+  },
+  "ownedLiveMatchesSnapshot": {
+    "src/persistence.ts": true,
+    "src/persistence/partition.ts": true,
+    "src/persistence/session.ts": true,
+    "src/simulation/trade.ts": true,
+    "tests/persistence.test.ts": true,
+    "tests/trade.test.ts": true,
+    "tests/fixtures/trade-industrial-v1.json": true
+  },
+  "limits": [
+    "Simulation still materializes a complete state before import; readChunk is real storage demand loading, not partial Simulation restore.",
+    "All remote citizens still run full individual simulation; no distant statistical simulation or altered time rate was introduced.",
+    "Only storage/trade suites are reported here. Renderer GPU and whole-rule regressions have independent snapshots owned by root/review.",
+    "Industrial consignment is accepted only as validated v1 archive custody or its explicit v2 grandfathered IDs; no new industrial-to-food supply."
+  ],
+  "files": {
+    "persistence-clinical-cutover-results.json": {
+      "sha256": "ee83e036ccc20764d3c479eb7ff84e30112291d9d93c73f63ee9d1c4414f3d6a",
+      "bytes": 11483
+    },
+    "persistence-clinical-cutover-tests.log": {
+      "sha256": "5e262a64a3ff69dd2e68d65a11ec3eef04403cf647b330a6a4333c161e3fe0a7",
+      "bytes": 3158
+    },
+    "snapshot-manifest.json": {
+      "sha256": "4d9567dfbd28a61f093d42ff99199ac978f7d989bc3a48e46641434b6f8b30c6",
+      "bytes": 6184
+    },
+    "trade-food-cutover-results.json": {
+      "sha256": "16aeed3b109a69ce241f8e1b5fb4cb52521d98c417f9eec2993cedde0cd716b6",
+      "bytes": 4812
+    },
+    "trade-food-cutover-tests.log": {
+      "sha256": "46ad31692fb1f2892310c1f31a15addf6cf58f831a19a12ab0ccc2590972adfa",
+      "bytes": 2646
+    },
+    "trade-industrial-v1.json": {
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "bytes": 396554
+    }
+  }
+}

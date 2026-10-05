@@ -1,0 +1,1249 @@
+{
+  "status": "paused-at-checkpoint",
+  "scope": "Normal-URL player actions with keyboard/mouse and public DOM only; static map planning is recorded separately; software GPU does not establish macOS performance",
+  "workspace": "/tmp/yunshan-phase2-root-coherent-02",
+  "harnessPath": "/workspace/yunshan/scripts/player-journey.mjs",
+  "harnessHash": "a97a6686738877c136ec2c7a36cbf43b09aebc1cb170d36345e448c6e156f1e7",
+  "viewport": {
+    "width": 800,
+    "height": 600
+  },
+  "url": "http://127.0.0.1:4193/",
+  "resume": {
+    "after": "home",
+    "results": "/workspace/yunshan/artifacts/phase2-player-journey-r6/results.json",
+    "resultsHash": "0d123a086b7db18fcc994a18600b9662171eba29fef9f1bd223d2e119fd13d6b",
+    "checkpoint": "walking-saved"
+  },
+  "plannedLayout": "current-v2-r5",
+  "plannedFingerprint": "c70ebca5",
+  "publicGraphics": {
+    "quality": "low",
+    "renderDistance": "900"
+  },
+  "stopAfter": "school",
+  "stage": "school",
+  "completedStage": "home",
+  "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile",
+  "buildEntry": "/assets/index-BZMcZl-r.js",
+  "buildHash": "d4f43364e7f5bb52bdb18b7c9e1445714361e858cfb18be0b2f2c2387d9309ba",
+  "sourceHashes": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/journey.ts": "09a5b2ae5f49b821b958b3790a94be6467f7f4891b585dd09bd2cbc23fafc1f0",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "092e6af0321fe6b23dff67afbb70613f30027abb72647bacc114273627593075",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "7bd2e10e0680ecf1f8a79f1d43f6dde2cde17b216179a534f7ff85a6952acdd3",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "sourceHashesAfter": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/journey.ts": "09a5b2ae5f49b821b958b3790a94be6467f7f4891b585dd09bd2cbc23fafc1f0",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/renderer.ts": "092e6af0321fe6b23dff67afbb70613f30027abb72647bacc114273627593075",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "src/simulation.ts": "7bd2e10e0680ecf1f8a79f1d43f6dde2cde17b216179a534f7ff85a6952acdd3",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a",
+    "src/ui.ts": "58288d41943778c508e963403fe68eec67cfb4c6b74947b6c4644ce815f70672",
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874"
+  },
+  "records": [
+    {
+      "name": "resume",
+      "at": "2026-10-01T22:15:02.573Z",
+      "stage": "resume",
+      "coordinates": {
+        "x": -348,
+        "y": 50,
+        "z": 512
+      },
+      "district": "千灯市集",
+      "clock": "19:04",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "夜色入山，万家灯火沿谷而生。",
+      "context": "道路 · 行进中附近道路载具0 位乘客 · 货物 0 · 18 m/s购票乘坐驾驶载具候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。",
+      "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 550 draw",
+      "needs": "饱腹87精力95社交62娱乐76",
+      "petitions": "",
+      "resumeAfter": "home",
+      "priorResults": "/workspace/yunshan/artifacts/phase2-player-journey-r6/results.json",
+      "priorResultsHash": "0d123a086b7db18fcc994a18600b9662171eba29fef9f1bd223d2e119fd13d6b",
+      "priorCheckpoint": {
+        "name": "walking-saved",
+        "at": "2026-10-01T22:02:35.215Z",
+        "stage": "school",
+        "coordinates": {
+          "x": -348,
+          "y": 50,
+          "z": 512
+        },
+        "district": "千灯市集",
+        "clock": "19:04",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "夜色入山，万家灯火沿谷而生。",
+        "context": "道路 · 行进中附近道路载具0 位乘客 · 货物 0 · 18 m/s购票乘坐驾驶载具候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。",
+        "toast": "旅程已保存在当前浏览器。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 234 draw",
+        "needs": "饱腹87精力95社交62娱乐76",
+        "petitions": "",
+        "completedStage": "home",
+        "incompleteStage": "school",
+        "target": {
+          "x": -352,
+          "y": 50.6,
+          "z": 512
+        },
+        "scope": "Actual paused UI save during ground travel. The destination facility and its action have not been reached or passed.",
+        "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+      },
+      "restored": {
+        "at": "2026-10-01T22:15:02.235Z",
+        "stage": "resume",
+        "coordinates": {
+          "x": -348,
+          "y": 50,
+          "z": 512
+        },
+        "district": "千灯市集",
+        "clock": "19:04",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "夜色入山，万家灯火沿谷而生。",
+        "context": "道路 · 行进中附近道路载具0 位乘客 · 货物 0 · 18 m/s购票乘坐驾驶载具候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。",
+        "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 550 draw",
+        "needs": "饱腹87精力95社交62娱乐76",
+        "petitions": ""
+      },
+      "plannedLayout": "current-v2-r5"
+    },
+    {
+      "name": "walking-saved",
+      "at": "2026-10-01T22:19:56.474Z",
+      "stage": "school",
+      "coordinates": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "district": "千灯市集",
+      "clock": "20:57",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "夜色入山，万家灯火沿谷而生。",
+      "context": "钱庄 · 附近场所千灯市集·灯市街·钱庄1114 层 · 658 人容量进入 / 使用建筑 · E钱庄存款0 云币借贷余额0 云币银行实际资金池800 云币存款债权 / 贷款本金债权800 云币 / 0 云币准备金 / 当前可贷款现金80 云币 / 720 云币我的贷款本金 / 贷款利息0 云币 / 0 云币我的待付存款利息0 云币实收贷款息可分配余额0 云币实际资产 / 负债 / 净值800 云币 / 800 云币 / 0 云币贷款利息应收 / 存息应付0 云币 / 0 云币银行资金池来自实际现场存款。准备金保留后才能放贷；存息由实收贷款利息利润支付，债权金额不会自动成为现金。我的最近银行回执业务金额100 云币300 云币1,000 云币存入取出申请贷款偿还借贷代购上市股票走近门口按 E 进入，楼梯处按 E 换层。",
+      "toast": "旅程已保存在当前浏览器。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 162 draw",
+      "needs": "饱腹83精力93社交61娱乐75",
+      "petitions": "",
+      "completedStage": "home",
+      "incompleteStage": "school",
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      },
+      "scope": "Actual paused UI save during ground travel. The destination facility and its action have not been reached or passed.",
+      "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+    }
+  ],
+  "inputs": [
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"quality\"]')",
+      "value": "low"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-range",
+      "target": "render-distance",
+      "value": 900
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('load')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "school"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"academy-b13\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "public-navigation",
+      "destination": "文澜学苑·西溪院·书院4",
+      "waypoints": [
+        {
+          "index": 2,
+          "x": -380.40000000000003,
+          "y": 45.400000000000006,
+          "z": 520,
+          "text": "沿金线继续 · 约 34 米"
+        },
+        {
+          "index": 5,
+          "x": -346.6,
+          "y": 47.800000000000004,
+          "z": 520,
+          "text": "沿金线继续 · 约 9 米"
+        },
+        {
+          "index": 8,
+          "x": -328,
+          "y": 51.2,
+          "z": 482.6,
+          "text": "沿金线继续 · 约 35 米"
+        },
+        {
+          "index": 12,
+          "x": -312,
+          "y": 55.6,
+          "z": 464,
+          "text": "沿金线继续 · 约 60 米"
+        }
+      ]
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -318.23951260088455,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -348,
+        "y": 50,
+        "z": 512
+      },
+      "after": {
+        "x": -378,
+        "y": 50,
+        "z": 508
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 44.6,
+        "z": 506.6
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -192.84981478654635,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -378,
+        "y": 50,
+        "z": 508
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -131.597039899918,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885198,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -379,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 211.34090655447358,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -379,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -211.3409065544735,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885168,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -109.98236404885178,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -381,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "checkpoint-request",
+      "at": "2026-10-01T22:19:50.253Z"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 109.98236404885182,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "after": {
+        "x": -380,
+        "y": 50,
+        "z": 517
+      },
+      "target": {
+        "x": -380.40000000000003,
+        "y": 45.400000000000006,
+        "z": 520
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('save')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    }
+  ],
+  "errors": []
+}

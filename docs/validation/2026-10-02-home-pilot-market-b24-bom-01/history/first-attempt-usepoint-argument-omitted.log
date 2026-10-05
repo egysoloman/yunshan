@@ -1,0 +1,2054 @@
+{
+  "summary": {
+    "nearPartCount": 617,
+    "nearUniquePartCount": 617,
+    "nearByPurpose": {
+      "floor": 15,
+      "furniture": 15,
+      "roof": 13,
+      "stairs": 38,
+      "wall": 483,
+      "window": 53
+    },
+    "nearByMaterial": {
+      "glass": 53,
+      "roof": 10,
+      "stone": 210,
+      "wall": 315,
+      "wood": 29
+    },
+    "detailViewCounts": [
+      {
+        "nearFloor": 0,
+        "count": 346,
+        "byPurpose": {
+          "bracket": 16,
+          "door": 32,
+          "frame": 18,
+          "lantern": 4,
+          "masonry": 19,
+          "sign": 5,
+          "tile": 63,
+          "window": 189
+        }
+      },
+      {
+        "nearFloor": 1,
+        "count": 432,
+        "byPurpose": {
+          "bracket": 18,
+          "door": 32,
+          "frame": 24,
+          "lantern": 4,
+          "masonry": 11,
+          "sign": 5,
+          "tile": 86,
+          "window": 252
+        }
+      },
+      {
+        "nearFloor": 2,
+        "count": 331,
+        "byPurpose": {
+          "bracket": 12,
+          "door": 32,
+          "frame": 14,
+          "lantern": 4,
+          "sign": 5,
+          "tile": 75,
+          "window": 189
+        }
+      }
+    ],
+    "detailRawAcrossViews": 1109,
+    "detailUniqueCount": 680,
+    "detailUniqueByPurpose": {
+      "bracket": 36,
+      "door": 32,
+      "frame": 32,
+      "lantern": 4,
+      "masonry": 19,
+      "sign": 5,
+      "tile": 174,
+      "window": 378
+    },
+    "wallDescriptors": 48,
+    "wallPanelCount": 502,
+    "doorOpenings": 15,
+    "entranceOpenings": 1,
+    "courtyardOpenings": 14,
+    "windowOpenings": 54,
+    "slabRegionCount": 37,
+    "stairFlights": 4,
+    "stairTreads": 34,
+    "stairLandings": 4,
+    "stairBaseLandings": 3,
+    "fixturesByKind": {
+      "bed": 3,
+      "table": 3
+    },
+    "roofRegionsByKind": {
+      "gable": 9,
+      "gallery-flat": 3,
+      "weather-strip": 1
+    },
+    "roofRegionCount": 13,
+    "roofEdgeCount": 46,
+    "logicalUseAliasCount": 0,
+    "spatialUsePositionCount": 0,
+    "nearLocalBounds": {
+      "x": [
+        -20.2,
+        20
+      ],
+      "y": [
+        -0.2,
+        11.4
+      ],
+      "z": [
+        -17.4,
+        17.4
+      ]
+    },
+    "nearWorldYBounds": [
+      76.39999999999999,
+      88
+    ],
+    "existingBracketAnchorCount": 36,
+    "existingDoorHeadAnchorCount": 8,
+    "existingLongEdgeWindowTrimCount": 42
+  },
+  "byFloor": [
+    {
+      "floor": 0,
+      "wallDescriptors": 24,
+      "panels": 240,
+      "doors": 15,
+      "windows": 19,
+      "slabNearParts": 1,
+      "fixtures": [
+        {
+          "id": "program:table",
+          "sourceId": "program:table",
+          "kind": "table",
+          "rect": {
+            "x0": -9.2,
+            "x1": -6.8,
+            "z0": -11,
+            "z1": -9.8
+          },
+          "bottom": 0,
+          "top": 0.8
+        },
+        {
+          "id": "home-bed",
+          "sourceId": "home-bed",
+          "kind": "bed",
+          "rect": {
+            "x0": -19.2,
+            "x1": -16.8,
+            "z0": -16.4,
+            "z1": -15.2
+          },
+          "bottom": 0,
+          "top": 0.6
+        }
+      ],
+      "flights": 2,
+      "treads": 17,
+      "landings": 2
+    },
+    {
+      "floor": 1,
+      "wallDescriptors": 16,
+      "panels": 154,
+      "doors": 0,
+      "windows": 20,
+      "slabNearParts": 8,
+      "fixtures": [
+        {
+          "id": "program:table",
+          "sourceId": "program:table",
+          "kind": "table",
+          "rect": {
+            "x0": -9.2,
+            "x1": -6.8,
+            "z0": -11,
+            "z1": -9.8
+          },
+          "bottom": 0,
+          "top": 0.8
+        },
+        {
+          "id": "home-bed",
+          "sourceId": "home-bed",
+          "kind": "bed",
+          "rect": {
+            "x0": -19.2,
+            "x1": -16.8,
+            "z0": -16.4,
+            "z1": -15.2
+          },
+          "bottom": 0,
+          "top": 0.6
+        }
+      ],
+      "flights": 2,
+      "treads": 17,
+      "landings": 2
+    },
+    {
+      "floor": 2,
+      "wallDescriptors": 8,
+      "panels": 108,
+      "doors": 0,
+      "windows": 15,
+      "slabNearParts": 6,
+      "fixtures": [
+        {
+          "id": "program:table",
+          "sourceId": "program:table",
+          "kind": "table",
+          "rect": {
+            "x0": -9.2,
+            "x1": -6.8,
+            "z0": -11,
+            "z1": -9.8
+          },
+          "bottom": 0,
+          "top": 0.8
+        },
+        {
+          "id": "home-bed",
+          "sourceId": "home-bed",
+          "kind": "bed",
+          "rect": {
+            "x0": -19.2,
+            "x1": -16.8,
+            "z0": -16.4,
+            "z1": -15.2
+          },
+          "bottom": 0,
+          "top": 0.6
+        }
+      ],
+      "flights": 0,
+      "treads": 0,
+      "landings": 0
+    }
+  ],
+  "mountCandidates": {
+    "dougong": [
+      {
+        "source": "detail:271",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 16.6
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000213
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            16.4,
+            16.8
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 332.80000000000007
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:272",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 15.8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            15.6,
+            16
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 332.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:277",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 15.8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            15.6,
+            16
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 332.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:278",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 16.6
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000213
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            16.4,
+            16.8
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 332.80000000000007
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:292",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 14
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            13.8,
+            14.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 330.20000000000005
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:293",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.39999999999999947
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            7.8,
+            8.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 324.20000000000005
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:307",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.39999999999999947
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            7.8,
+            8.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 324.20000000000005
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:308",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 14
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            13.8,
+            14.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 330.20000000000005
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:311",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 6.2
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6,
+            6.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 322.40000000000003
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:312",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 6.8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6.6,
+            7
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 323.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:315",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 6.8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6.6,
+            7
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 323.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:316",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 3.2,
+            "z": 6.2
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6,
+            6.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 79.6,
+          "z": 322.40000000000003
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:325",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 5.6
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.39999999999999947
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            5.4,
+            5.8
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 321.80000000000007
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:326",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -3.2,
+            "y": 3.2,
+            "z": 2.4000000000000004
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999999,
+            "z": 0.3999999999999999
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            2.2,
+            2.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -394,
+          "y": 79.6,
+          "z": 318.6
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:344",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -8,
+            "y": 3.2,
+            "z": 6.8
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -8.2,
+            -7.8
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6.6,
+            7
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -398.8,
+          "y": 79.6,
+          "z": 323.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:345",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -8,
+            "y": 3.2,
+            "z": 6.2
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.3999999999999999,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -8.2,
+            -7.8
+          ],
+          "y": [
+            3,
+            3.4
+          ],
+          "z": [
+            6,
+            6.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -398.8,
+          "y": 79.6,
+          "z": 322.40000000000003
+        },
+        "verticalSlotHeight": 0.3999999999999999,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:492",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 5.6,
+            "y": 6.6,
+            "z": 1.4
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            5.4,
+            5.8
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            1.2,
+            1.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -385.2,
+          "y": 83,
+          "z": 317.6
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:493",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 5.6,
+            "y": 6.6,
+            "z": -1.4
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            5.4,
+            5.8
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -1.6,
+            -1.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -385.2,
+          "y": 83,
+          "z": 314.80000000000007
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:512",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 5.6,
+            "y": 6.6,
+            "z": -6.8
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            5.4,
+            5.8
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -7,
+            -6.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -385.2,
+          "y": 83,
+          "z": 309.40000000000003
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:513",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 5.6,
+            "y": 6.6,
+            "z": -11
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.39999999999999947,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            5.4,
+            5.8
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -11.2,
+            -10.8
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -385.2,
+          "y": 83,
+          "z": 305.20000000000005
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:522",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": -1.4
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -1.6,
+            -1.2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 314.80000000000007
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:523",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": 1.4
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            1.2,
+            1.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 317.6
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:532",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": -5.6
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.39999999999999947
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -5.8,
+            -5.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 310.6
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:533",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": -2.5999999999999996
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.3999999999999999
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -2.8,
+            -2.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 313.6
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:544",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": -11
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -11.2,
+            -10.8
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 305.20000000000005
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:545",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 18.4,
+            "y": 6.6,
+            "z": -6.8
+          },
+          "size": {
+            "x": 0.40000000000000213,
+            "y": 0.39999999999999947,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 1,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            18.2,
+            18.6
+          ],
+          "y": [
+            6.4,
+            6.8
+          ],
+          "z": [
+            -7,
+            -6.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -372.40000000000003,
+          "y": 83,
+          "z": 309.40000000000003
+        },
+        "verticalSlotHeight": 0.39999999999999947,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:619",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 0.2,
+            "y": 10,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.4,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999999
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            0,
+            0.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            1.6,
+            2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -390.6,
+          "y": 86.39999999999999,
+          "z": 318.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:620",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -2.5999999999999996,
+            "y": 10,
+            "z": 1.8
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999999
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -2.8,
+            -2.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            1.6,
+            2
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -393.40000000000003,
+          "y": 86.39999999999999,
+          "z": 318.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:636",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -8.600000000000001,
+            "y": 10,
+            "z": 1.4
+          },
+          "size": {
+            "x": 0.40000000000000036,
+            "y": 0.3999999999999986,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -8.8,
+            -8.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            1.2,
+            1.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -399.40000000000003,
+          "y": 86.39999999999999,
+          "z": 317.6
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:637",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -14.600000000000001,
+            "y": 10,
+            "z": 1.4
+          },
+          "size": {
+            "x": 0.40000000000000036,
+            "y": 0.3999999999999986,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -14.8,
+            -14.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            1.2,
+            1.6
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -405.40000000000003,
+          "y": 86.39999999999999,
+          "z": 317.6
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:653",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 10,
+            "z": -9.600000000000001
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999986,
+            "z": 0.40000000000000036
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -9.8,
+            -9.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 86.39999999999999,
+          "z": 306.6
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:654",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 3.2,
+            "y": 10,
+            "z": -3.5999999999999996
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999999
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -3.8,
+            -3.4
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -387.6,
+          "y": 86.39999999999999,
+          "z": 312.6
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:663",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -2.5999999999999996,
+            "y": 10,
+            "z": -17.2
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -2.8,
+            -2.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -17.4,
+            -17
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -393.40000000000003,
+          "y": 86.39999999999999,
+          "z": 299.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:664",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": 0.2,
+            "y": 10,
+            "z": -17.2
+          },
+          "size": {
+            "x": 0.4,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            0,
+            0.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -17.4,
+            -17
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -390.6,
+          "y": 86.39999999999999,
+          "z": 299.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:678",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -14.600000000000001,
+            "y": 10,
+            "z": -17.2
+          },
+          "size": {
+            "x": 0.40000000000000036,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -14.8,
+            -14.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -17.4,
+            -17
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -405.40000000000003,
+          "y": 86.39999999999999,
+          "z": 299.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      },
+      {
+        "source": "detail:679",
+        "part": {
+          "purpose": "bracket",
+          "position": {
+            "x": -8.600000000000001,
+            "y": 10,
+            "z": -17.2
+          },
+          "size": {
+            "x": 0.40000000000000036,
+            "y": 0.3999999999999986,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 2,
+          "roof": true
+        },
+        "bounds": {
+          "x": [
+            -8.8,
+            -8.4
+          ],
+          "y": [
+            9.8,
+            10.2
+          ],
+          "z": [
+            -17.4,
+            -17
+          ]
+        },
+        "supportBottomWorld": {
+          "x": -399.40000000000003,
+          "y": 86.39999999999999,
+          "z": 299.00000000000006
+        },
+        "verticalSlotHeight": 0.3999999999999986,
+        "fullSizePrototypeFitsVerticalSlot": false,
+        "uniformScaleHalfFitsVerticalSlot": true
+      }
+    ],
+    "lintel": [
+      {
+        "source": "detail:2",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": 0,
+            "y": 2.9,
+            "z": 17.2
+          },
+          "size": {
+            "x": 5.2,
+            "y": 0.20000000000000018,
+            "z": 0.3999999999999986
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            -2.6,
+            2.6
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            17,
+            17.4
+          ]
+        },
+        "worldCenter": {
+          "x": -390.8,
+          "y": 79.5,
+          "z": 333.40000000000003
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:10",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": 3.2,
+            "y": 2.9,
+            "z": 7.6
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.20000000000000018,
+            "z": 3.6000000000000005
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            3,
+            3.4
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            5.8,
+            9.4
+          ]
+        },
+        "worldCenter": {
+          "x": -387.6,
+          "y": 79.5,
+          "z": 323.80000000000007
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:14",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": -3.2,
+            "y": 2.9,
+            "z": 9.3
+          },
+          "size": {
+            "x": 0.3999999999999999,
+            "y": 0.20000000000000018,
+            "z": 3.799999999999999
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            -3.4,
+            -3
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            7.4,
+            11.2
+          ]
+        },
+        "worldCenter": {
+          "x": -394,
+          "y": 79.5,
+          "z": 325.50000000000006
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:18",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": -8.8,
+            "y": 2.9,
+            "z": 11
+          },
+          "size": {
+            "x": 0.40000000000000036,
+            "y": 0.20000000000000018,
+            "z": 3.6000000000000014
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            -9,
+            -8.6
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            9.2,
+            12.8
+          ]
+        },
+        "worldCenter": {
+          "x": -399.6,
+          "y": 79.5,
+          "z": 327.20000000000005
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:22",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": -8,
+            "y": 2.9,
+            "z": 4.2
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.20000000000000018,
+            "z": 3.6
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            -8.2,
+            -7.8
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            2.4,
+            6
+          ]
+        },
+        "worldCenter": {
+          "x": -398.8,
+          "y": 79.5,
+          "z": 320.40000000000003
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:26",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": -5.6,
+            "y": 2.9,
+            "z": 1.4
+          },
+          "size": {
+            "x": 3.6000000000000005,
+            "y": 0.20000000000000018,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            -7.4,
+            -3.8
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            1.2,
+            1.6
+          ]
+        },
+        "worldCenter": {
+          "x": -396.40000000000003,
+          "y": 79.5,
+          "z": 317.6
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:30",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": 12,
+            "y": 2.9,
+            "z": 2
+          },
+          "size": {
+            "x": 3.6000000000000014,
+            "y": 0.20000000000000018,
+            "z": 0.40000000000000013
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            10.2,
+            13.8
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            1.8,
+            2.2
+          ]
+        },
+        "worldCenter": {
+          "x": -378.8,
+          "y": 79.5,
+          "z": 318.20000000000005
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      },
+      {
+        "source": "detail:34",
+        "part": {
+          "purpose": "door",
+          "position": {
+            "x": 5.6,
+            "y": 2.9,
+            "z": 0
+          },
+          "size": {
+            "x": 0.39999999999999947,
+            "y": 0.20000000000000018,
+            "z": 3.6
+          },
+          "color": "#b89763",
+          "floor": 0,
+          "roof": false
+        },
+        "bounds": {
+          "x": [
+            5.4,
+            5.8
+          ],
+          "y": [
+            2.8,
+            3
+          ],
+          "z": [
+            -1.8,
+            1.8
+          ]
+        },
+        "worldCenter": {
+          "x": -385.2,
+          "y": 79.5,
+          "z": 316.20000000000005
+        },
+        "fullSizePrototypeHeight": 0.4,
+        "existingHeadHeight": 0.20000000000000018,
+        "modelReady": false
+      }
+    ],
+    "approvedMeshMounts": 0,
+    "reason": "No real mesh, triangle protection validation or assembly adapter exists. Existing anchors are counted; they are not approved mounts."
+  },
+  "elapsedMilliseconds": 180.06716999999992,
+  "sourceHashesUnchanged": true
+}

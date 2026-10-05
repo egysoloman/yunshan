@@ -1,0 +1,126 @@
+{
+  "preDoor": {
+    "tick": 72,
+    "at": 498,
+    "day": 0,
+    "hour": 8.3,
+    "paused": false,
+    "speed": 1,
+    "body": {
+      "x": -390.8,
+      "y": 76.44574792452671,
+      "z": 334.7625600000141
+    },
+    "player": {
+      "position": {
+        "x": -390.8,
+        "y": 76.44574792452671,
+        "z": 334.7625600000141
+      },
+      "role": "traveler",
+      "identities": [
+        "traveler"
+      ],
+      "money": 600,
+      "reputation": 0,
+      "needs": {
+        "hunger": 84.36999999999955,
+        "fatigue": 89.6760000000005,
+        "social": 69.78399999999999,
+        "fun": 69.83799999999974
+      },
+      "inventory": {
+        "block": 32
+      },
+      "homeId": null,
+      "education": 0,
+      "experience": 0,
+      "partnerId": null,
+      "vehicleId": null
+    },
+    "eye": {
+      "x": -390.8,
+      "y": 78.16574792452671,
+      "z": 334.7625600000141
+    },
+    "mode": "walk",
+    "insideId": null,
+    "floor": 0,
+    "supportingSiteId": null,
+    "voxels": [],
+    "session": null,
+    "history": [],
+    "npcCount": 616,
+    "aliveCount": 616,
+    "nearbyBuildingId": "market-b24",
+    "notice": "",
+    "quality": "balanced",
+    "renderDistance": 5700,
+    "fps": 0,
+    "activeAircraftId": null,
+    "commands": []
+  },
+  "postDoor": {
+    "tick": 80,
+    "at": 500,
+    "day": 0,
+    "hour": 8.333333333333334,
+    "paused": false,
+    "speed": 1,
+    "body": {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 331.40000000000003
+    },
+    "player": {
+      "position": {
+        "x": -390.8,
+        "y": 76.6,
+        "z": 331.40000000000003
+      },
+      "role": "traveler",
+      "identities": [
+        "traveler"
+      ],
+      "money": 600,
+      "reputation": 0,
+      "needs": {
+        "hunger": 84.2999999999995,
+        "fatigue": 89.64000000000055,
+        "social": 69.75999999999999,
+        "fun": 69.81999999999971
+      },
+      "inventory": {
+        "block": 32
+      },
+      "homeId": null,
+      "education": 0,
+      "experience": 0,
+      "partnerId": null,
+      "vehicleId": null
+    },
+    "eye": {
+      "x": -390.8,
+      "y": 78.32,
+      "z": 331.40000000000003
+    },
+    "mode": "walk",
+    "insideId": "market-b24",
+    "floor": 0,
+    "supportingSiteId": "market-b24",
+    "voxels": [],
+    "session": null,
+    "history": [],
+    "npcCount": 616,
+    "aliveCount": 616,
+    "nearbyBuildingId": "market-b24",
+    "notice": "进入千灯市集·钱庄街·里居7，可在生活面板使用设施。楼内左后角为楼梯。",
+    "quality": "balanced",
+    "renderDistance": 5700,
+    "fps": 0,
+    "activeAircraftId": null,
+    "commands": []
+  },
+  "input": "native E",
+  "controlledPositionWrite": false
+}

@@ -1,0 +1,36 @@
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (4.380034ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.707987ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.074827ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.776322ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.657413ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (1.509523ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (3.440854ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (4.972414ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.863706ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (2650.759168ms)
+✔ walking guidance follows real roads and bridges rather than a shorter aircraft route (3.192032ms)
+✔ starting midway along a bent road retains its remaining vertices before graph routing (0.942185ms)
+✔ overlapping road levels join the actual walking surface rather than a nearby lower node (10.933749ms)
+✔ a counter-side origin rejects the direct street connector that the actual walking body cannot cross (4.358957ms)
+✔ actual r7 native body rejoins its upper street and reaches the endpoint using the unchanged controller (4255.879778ms)
+✔ bridge access stays on the genuine dry deck and does not offer a riverbed shortcut (0.967657ms)
+✔ every generated district has a walking route and explicit building guidance reaches its real door (1465.654069ms)
+✔ upper-floor guidance includes the shared stair shaft and entrance before joining the street (1062.604765ms)
+✔ public timetable uses the actual direction, departure clock and current energy (0.514689ms)
+✔ a departing vehicle publishes its genuine next stop without inventing a new departure (0.140534ms)
+✔ public route connects real services and transfer stops without booking or changing any actor (0.835196ms)
+✔ journey intentions persist exact actual targets and malformed references reject atomically (1500.154386ms)
+✔ a current save declaring journey rejects a missing intent without replacing state (1274.14655ms)
+✔ riding records the actual reached node before a vehicle turns and no navigation command pays fares (1434.811173ms)
+✔ counter geometry rests on actual ground and leaves a body-height public doorway clear (1282.680939ms)
+✔ actual controller stops at a market cabinet while the original central entrance stays usable (1.611963ms)
+✔ a legacy saved body inside a newly solid counter can walk out without teleporting or reentering (0.309986ms)
+✔ market food samples follow real finite stock and residency without changing any saved state (1277.11692ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17094.557152

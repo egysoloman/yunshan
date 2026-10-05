@@ -1,0 +1,69 @@
+{
+  "createdAt": "2026-10-01T21:17:39.706150+00:00",
+  "sourceSha256": {
+    "src/world.ts": "f6c5231371f1b6e59d481045a9025ca95788af72d4fdf5408ca69d447ed86874",
+    "src/renderer.ts": "092e6af0321fe6b23dff67afbb70613f30027abb72647bacc114273627593075",
+    "src/rendering/terrain.ts": "0680f5da4fd55bb66831f9d1167d8f46dc84edcfa3c9386cd2723e24d8848066",
+    "src/rendering/architecture-detail.ts": "4e0f43b085602cd5e05023307c30e061ab860e10193136e2c608975ab5e1e258",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "tests/rendering.test.ts": "cf19fbea38e30834b7a0ab300563496cb26f5b1aa5064298cff290b515d7705b",
+    "tests/citizen-appearance.test.ts": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68"
+  },
+  "checks": {
+    "initialVisual": {
+      "passed": 12,
+      "log": "yunshan-visual5-tests.log"
+    },
+    "geometryAndController": {
+      "passed": 49,
+      "log": "yunshan-visual5-geometry-tests.log"
+    },
+    "sewnResolutionProxy": {
+      "passed": 6,
+      "log": "yunshan-visual5-shared-proxy-tests.log"
+    },
+    "finalProductionLandscape": {
+      "passed": 6,
+      "log": "yunshan-visual5-final-rendering-tests.log"
+    },
+    "strictBuild": {
+      "exit": 0,
+      "entry": "index-D6981z4w.js",
+      "log": "yunshan-visual5-strict.log"
+    },
+    "strictBuildWithHistoricalRecipe": {
+      "exit": 0,
+      "entry": "index-9RmW2nKM.js",
+      "log": "yunshan-visual5-strict-historical.log"
+    }
+  },
+  "baseline": "macro4 DMFvvo-u actual 6 scenes + adult and elder still did not meet references",
+  "implementation": {
+    "geometry": "current-v3 authoritative 24m jointed cell ledges and 8m geological terraces; old v2 and legacy retained; all solid relief goes through terrainHeight",
+    "physicalGeometryVersion": "yunshan-geology-v3-terraced-cellular-1",
+    "proxy": "fixed 120 steep tiles at 8m, 10 at 4m, other tiles16m; shared neighbouring edge samples; <=200000 static proxy triangles tested",
+    "forest": "5200 real roots in 122 stands, 9 district rim belts plus mountain shoulders;4 near and2 far canopy tiers",
+    "material": "removed failed repetitive ridge normal and diagonal colour stripes",
+    "near": "wall-attached hanging vines on actual rock side faces, <=360 per visible fine tile; removed detached near decorative rock ledges; thinner facade head beam; household planters and drying clothes,market produce within640detailinstances",
+    "faces": "front elder gray temples extend to mid-face; independent marked hair ink remains free of instance skin multiply",
+    "sky": "3D angular cloud noise instead of projected radial streaks"
+  },
+  "limitations": [
+    "No new candidate5 GL or pixels reviewed yet; CPU and build passes are not visual acceptance.",
+    "Immutable complete source and compatibility validation are coordinated by integration/root.",
+    "macOS Metal/WebKit physical hardware performance is unverified.",
+    "Original bridge-structure camera remains a failed obstructed composition; no normal building was moved or removed."
+  ],
+  "historicalR5Compatibility": {
+    "updatedAt": "2026-10-01T21:21:57.915083+00:00",
+    "recipe": "current-v2-r5",
+    "outputWorldLabel": "current-v2",
+    "changes": [
+      "Skip newer station apron transition insertion",
+      "Keep the original generation index cache"
+    ],
+    "reason": "Actual r5 old immutable world has a different complete fingerprint from later v2 despite identical buildings and nodes. No save fingerprint or saved geometry was changed.",
+    "verification": "Compatibility owner is verifying against three seeds from the real old immutable source. Prior 49+6 checks cover unchanged current-v3 production paths; complete final snapshot checks pending.",
+    "strictBuild": "TypeScript and Vite passed with historical recipe; independent compatibility sampling remains owned by compatibility agent."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-04T01:02:50.448842+00:00",
+  "before": {
+    "src/simulation/family.ts": "79fa371d7d31df5b78f5f5009c6574efd23aae4e0efbbb4a73f49d305a81b7c0",
+    "src/simulation/education.ts": "f6f1863514f6ab339ed794c99a140c8282f2c3fd435a8c52563a81647cb241fc"
+  },
+  "after": {
+    "src/simulation/family.ts": "229b11ac4581b9532f5a53d42dea5c1c39aaa589c879213de4de7c3c7e399a7d",
+    "src/simulation/education.ts": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856"
+  },
+  "patchSHA256": "855782ed2d4c1776ec7b5a2fc1c05216b3d32c78a1d974dae599cd2b4c0c3b58",
+  "note": "Old valid V1 higher qualifications retained only through immutable original baseline/receipt plus optional first real tuition legacy carry. Future new earned grade remains strict with cap; actual before FAIL retained. Final canonical regression still in progress; integrated ROOT07 NOT_RUN."
+}

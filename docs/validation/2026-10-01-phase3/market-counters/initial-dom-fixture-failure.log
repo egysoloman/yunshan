@@ -1,0 +1,37 @@
+✔ counter geometry rests on actual ground and leaves a body-height public doorway clear (1486.237797ms)
+✖ actual controller stops at a market cabinet while the original central entrance stays usable (10.4401ms)
+✔ a legacy saved body inside a newly solid counter can walk out without teleporting or reentering (0.427526ms)
+✔ market food samples follow real finite stock and residency without changing any saved state (1406.001362ms)
+ℹ Error: Test "actual controller stops at a market cabinet while the original central entrance stays usable" at tests/site-fixtures.test.ts:1:1786 generated asynchronous activity after the test ended. This activity created the error "TypeError: e.target?.closest is not a function" and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ Error: Test "actual controller stops at a market cabinet while the original central entrance stays usable" at tests/site-fixtures.test.ts:1:1786 generated asynchronous activity after the test ended. This activity created the error "TypeError: e.target?.closest is not a function" and would have caused the test to fail, but instead triggered an uncaughtException event.
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3149.641074
+
+✖ failing tests:
+
+test at tests/site-fixtures.test.ts:1:1786
+✖ actual controller stops at a market cabinet while the original central entrance stays usable (10.4401ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(controller.position.z < market.door.z)
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/site-fixtures.test.ts:42:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

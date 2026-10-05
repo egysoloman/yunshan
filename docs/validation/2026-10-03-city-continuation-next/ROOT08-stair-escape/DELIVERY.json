@@ -1,0 +1,280 @@
+{
+  "closedAt": "2026-10-04T03:58:23.289471+00:00",
+  "status": "CLOSED_FINAL_VALIDATED_CANDIDATE_NOT_INSTALLED",
+  "completeGoal": false,
+  "groupPath": "/workspace/yunshan-work/ROOT08-stair-escape-20261004-01",
+  "additionalReviewGroups": [],
+  "reviewAgentCreatedNoFiles": true,
+  "runtimeSHA256": "c95e83f8f61920877f3207dbebe1f62183700f6ec4aa49e1e4403e9ef486f513",
+  "originalRuntimeSHA256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1",
+  "finalFrozenInputs": 246,
+  "finalSourceStable": true,
+  "originalROOT07All241StillStable": true,
+  "finalValidation": {
+    "build03": {
+      "startedAt": "2026-10-04T03:50:22.178132+00:00",
+      "endedAt": "2026-10-04T03:50:53.543464+00:00",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 246,
+      "inputsStable": true,
+      "rawSHA256": "174407d75d3973b9515add48fd42b56a4337e256332285024166868e5163c3c2",
+      "ownedPid": 31699,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 31795,
+          "state": "Z",
+          "parent": 1,
+          "group": 31699,
+          "session": 31699,
+          "startTicks": 1667132
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "related02": {
+      "startedAt": "2026-10-04T03:50:22.180380+00:00",
+      "endedAt": "2026-10-04T03:52:35.434510+00:00",
+      "argv": [
+        "env",
+        "YUNSHAN_COMMERCIAL_ROUTE_EVIDENCE=/workspace/yunshan-work/ROOT08-stair-escape-20261004-01/related02/evidence",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/stair-continuity.test.ts",
+        "tests/world-v6-commercial-routes.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 246,
+      "inputsStable": true,
+      "rawSHA256": "6a90836cb25528dffb57edb9f9dc7605f823a66e099933a6c2752da6a20909d7",
+      "ownedPid": 31700,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 31756,
+          "state": "Z",
+          "parent": 1,
+          "group": 31700,
+          "session": 31700,
+          "startTicks": 1664744
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "six-recipes02": {
+      "startedAt": "2026-10-04T03:50:22.191991+00:00",
+      "endedAt": "2026-10-04T03:51:20.757695+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "--test-name-pattern=all six inherited recipes preserve",
+        "tests/world-v6-commercial.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 246,
+      "inputsStable": true,
+      "rawSHA256": "b3ddd90fa2dc0138be5078aa62d50fb7610adb5d66eb2f586e89e374f9797386",
+      "ownedPid": 31706,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 31751,
+          "state": "Z",
+          "parent": 1,
+          "group": 31706,
+          "session": 31706,
+          "startTicks": 1664743
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "targeted03": {
+      "startedAt": "2026-10-04T03:50:22.166424+00:00",
+      "endedAt": "2026-10-04T03:53:05.109791+00:00",
+      "argv": [
+        "env",
+        "YUNSHAN_STAIR_ESCAPE_EVIDENCE=/workspace/yunshan-work/ROOT08-stair-escape-20261004-01/targeted03/evidence",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/stair-escape-origin.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 246,
+      "inputsStable": true,
+      "rawSHA256": "e539dae72e6b73a794f7a1b71df4c07230a9fe46befbb93deae0603c3f9a167b",
+      "ownedPid": 31698,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 31732,
+          "state": "Z",
+          "parent": 1,
+          "group": 31698,
+          "session": 31698,
+          "startTicks": 1664720
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    }
+  },
+  "allClosedScopes": [
+    {
+      "name": "build01",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "build02",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "build03",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "candidate-query01",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "geometry02",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "geometry03",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "original-query01",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "original-query02",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "original-regression01",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "outside-tail-v5-negative01",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "related01",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "related02",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "segment-diagnosis01",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "six-recipes01",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "six-recipes02",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "targeted01",
+      "status": "FAIL",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "targeted02",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "name": "targeted03",
+      "status": "PASS",
+      "timedOut": false,
+      "inputsStable": true,
+      "activeDescendants": []
+    }
+  ],
+  "handoffSHA256": "a869275e5b15473e0024bc15e8b704e0beb1a92c30ac3d223bd491cc0e98c800",
+  "installContractSHA256": "bddc20bbb24dd2fe810b4918ddde8abec58c7728bce15aa18e02ecf3b84dad81",
+  "indexSHA256": "54d20e353dba290f38311aa17576c7929095cc9e66113c43eb7ad4734d878e2d",
+  "indexedFiles": 900,
+  "indexedBytes": 114074434,
+  "newLibraryIDs": [],
+  "uploadedByThisProducer": false,
+  "sharedGitMZUntouchedByThisProducer": true,
+  "new14DayRun": "NOT_RUN",
+  "noWritesAfterClosurePromised": true
+}

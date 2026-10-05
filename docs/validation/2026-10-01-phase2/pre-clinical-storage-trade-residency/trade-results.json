@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-01T18:54:02.064Z",
+  "environment": "Node real Simulation commands, attendance accounting, onsite employer review and commerce stage; no WebGL",
+  "initialHashes": {
+    "src/simulation/trade.ts": "d092910e2bb183efd12626f3a653c5d925f8de5842757e40ff6f99f1212cd888",
+    "src/simulation.ts": "4ff719725332d3d5a93497c35be5e34f3199c211f2764cff912deb328eff441d",
+    "src/simulation/extensions.ts": "6a8ec0a8a0029668c33b249068869819a112676b278c699020f7f6800de4e225",
+    "src/simulation/family.ts": "854d79c38f857251c8213140176e89f12e4c90f9e37c5a96e85922459ed03e83",
+    "src/simulation/banking.ts": "74bca7291c41c7f891d887e463bdca2643d2aaf15844041db26e8f4cce723fcc",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/types.ts": "9f344c8f8ceab976fefe951e8c162e4f3ae948e2cf9326e40656975cb93e54d3",
+    "tests/trade.test.ts": "8f5a9b3fbc4263945153ee7b8db2f9f6e24cdbfedfc780a1d6b5324f62c0b99d"
+  },
+  "finalHashes": {
+    "src/simulation/trade.ts": "d092910e2bb183efd12626f3a653c5d925f8de5842757e40ff6f99f1212cd888",
+    "src/simulation.ts": "4ff719725332d3d5a93497c35be5e34f3199c211f2764cff912deb328eff441d",
+    "src/simulation/extensions.ts": "6a8ec0a8a0029668c33b249068869819a112676b278c699020f7f6800de4e225",
+    "src/simulation/family.ts": "854d79c38f857251c8213140176e89f12e4c90f9e37c5a96e85922459ed03e83",
+    "src/simulation/banking.ts": "74bca7291c41c7f891d887e463bdca2643d2aaf15844041db26e8f4cce723fcc",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/types.ts": "9f344c8f8ceab976fefe951e8c162e4f3ae948e2cf9326e40656975cb93e54d3",
+    "tests/trade.test.ts": "8f5a9b3fbc4263945153ee7b8db2f9f6e24cdbfedfc780a1d6b5324f62c0b99d"
+  },
+  "evidence": [
+    {
+      "check": "actual-food-and-ingredient-commands",
+      "buyerSpent": 28,
+      "retailReceived": 13.759999999999998,
+      "supplierReceived": 11.040000000000006,
+      "taxesQueued": 3.2,
+      "cashResidual": 0,
+      "physicalStock": 1,
+      "soldUnits": 3
+    },
+    {
+      "check": "onsite-funded-shift-production-cost-quote",
+      "laborMinutes": 480,
+      "energy": 56,
+      "quantity": 8.96,
+      "unitPrice": 6.17,
+      "costWindowUnits": 8.96,
+      "earnedLaborCost": 44.16,
+      "actualUtilities": 6.666666666666666,
+      "quoteUnchangedSave": true
+    },
+    {
+      "check": "real-dynamic-wholesale-then-purchase",
+      "purchasedUnits": 8,
+      "purchaseUnitPrice": 6.17,
+      "purchaseGross": 49.36,
+      "soldUnits": 3,
+      "consumerGross": 37.32891428571429,
+      "inventoryCost": 18.509999999999998,
+      "retailProfitChange": 15.83260114285715,
+      "supplierSecondReceipt": 0,
+      "cashResidual": -2.9103830456733704e-11,
+      "remainingStock": 5
+    },
+    {
+      "check": "real-sixty-minute-market-service-work",
+      "startedEscrow": 35,
+      "workedMinutes": 60,
+      "paidGross": 35,
+      "paidNet": 32.199999999999996,
+      "paidTax": 2.799999999999998,
+      "producedUnits": 0,
+      "actualPayments": 240,
+      "actualExpense": 34.99999999999781,
+      "stockChangesAtPayment": 0,
+      "basisUnchangedAtAllPayments": true,
+      "cashResidual": 1.2223608791828156e-9
+    }
+  ]
+}

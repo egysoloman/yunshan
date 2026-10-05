@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-10-04T02:00:40.345632+00:00",
+  "activeCount": 0,
+  "ownedGroups": [
+    {
+      "receipt": "run01/receipt.json",
+      "group": 20252,
+      "currentMembers": [
+        {
+          "pid": 20260,
+          "state": "Z",
+          "parent": 1,
+          "group": 20252,
+          "session": 20252,
+          "startTicks": 803188
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-loan-native-deposits/probe01/receipt.json",
+      "group": 22465,
+      "currentMembers": [
+        {
+          "pid": 22473,
+          "state": "Z",
+          "parent": 1,
+          "group": 22465,
+          "session": 22465,
+          "startTicks": 898930
+        },
+        {
+          "pid": 22485,
+          "state": "Z",
+          "parent": 1,
+          "group": 22465,
+          "session": 22465,
+          "startTicks": 898955
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-player-paid-work/probe01/receipt.json",
+      "group": 22920,
+      "currentMembers": [
+        {
+          "pid": 22928,
+          "state": "Z",
+          "parent": 1,
+          "group": 22920,
+          "session": 22920,
+          "startTicks": 911332
+        },
+        {
+          "pid": 22940,
+          "state": "Z",
+          "parent": 1,
+          "group": 22920,
+          "session": 22920,
+          "startTicks": 911346
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-player-paid-work/asset-continuation01/receipt.json",
+      "group": 23758,
+      "currentMembers": [
+        {
+          "pid": 23766,
+          "state": "Z",
+          "parent": 1,
+          "group": 23758,
+          "session": 23758,
+          "startTicks": 945433
+        },
+        {
+          "pid": 23778,
+          "state": "Z",
+          "parent": 1,
+          "group": 23758,
+          "session": 23758,
+          "startTicks": 945454
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-player-paid-work/asset-continuation02/receipt.json",
+      "group": 23979,
+      "currentMembers": [
+        {
+          "pid": 23987,
+          "state": "Z",
+          "parent": 1,
+          "group": 23979,
+          "session": 23979,
+          "startTicks": 952152
+        },
+        {
+          "pid": 23998,
+          "state": "Z",
+          "parent": 1,
+          "group": 23979,
+          "session": 23979,
+          "startTicks": 952173
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-player-paid-work/founding01/receipt.json",
+      "group": 23788,
+      "currentMembers": [
+        {
+          "pid": 23796,
+          "state": "Z",
+          "parent": 1,
+          "group": 23788,
+          "session": 23788,
+          "startTicks": 946423
+        }
+      ],
+      "activeDescendants": []
+    },
+    {
+      "receipt": "candidate-player-paid-work/typecheck01/receipt.json",
+      "group": 24301,
+      "currentMembers": [],
+      "activeDescendants": []
+    }
+  ],
+  "zombiesRetainedAndNotKilled": true,
+  "otherSessionsNotTouched": true
+}

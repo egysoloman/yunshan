@@ -1,0 +1,5850 @@
+{
+  "status": "STATIC_PROPOSED_MODULE_GEOMETRY_CALCULATED",
+  "plannedModuleFamilies": 4,
+  "computedCandidates": 4,
+  "approvedInstalls": 0,
+  "returnedQualifiedMeshes": 0,
+  "GL": "NOT_RUN",
+  "normalW": "NOT_RUN",
+  "fullSuite": "NOT_RUN",
+  "assetSplitReport": "Parent reported technical15-fragment split/reassemblyPASS and module artFAIL; root/this auditor has not received GLB. No asset integration justified.",
+  "sourceStart": {
+    "src/architecture-floor-plan.ts": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c"
+  },
+  "sourceEnd": {
+    "src/architecture-floor-plan.ts": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c"
+  },
+  "sourceUnchanged": true,
+  "rawBOMSHA256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c",
+  "building": {
+    "id": "market-b24",
+    "districtId": "market",
+    "name": "千灯市集·钱庄街·里居7",
+    "kind": "home",
+    "position": {
+      "x": -390.8,
+      "y": 76,
+      "z": 316.2
+    },
+    "width": 40,
+    "depth": 34.4,
+    "height": 10.2,
+    "floors": 3,
+    "rotation": 0,
+    "door": {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 333.4
+    },
+    "capacity": 129,
+    "seed": 668619109,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.2
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.2
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.2
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.2
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.4,
+          "z": 307.2
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.4,
+          "z": 307.2
+        }
+      }
+    ]
+  },
+  "sharedBodyMatchesRawBOM": true,
+  "currentNearPartsMatchRawBOM": true,
+  "modules": [
+    {
+      "moduleId": "WALL-1400-3000-400",
+      "houseIds": [
+        "A03",
+        "A04",
+        "A05"
+      ],
+      "source": {
+        "path": "/workspace/yunshan/src/architecture-floor-plan.ts",
+        "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+        "buildingInputPath": "/tmp/yunshan-home-pilot-bom-01/raw-counts.json",
+        "buildingInputSHA256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+      },
+      "buildingId": "market-b24",
+      "floor": 0,
+      "meshDimensionsM": [
+        1.4,
+        3,
+        0.4
+      ],
+      "originLocalDefinition": "Bottom centre of wall thickness plane; bounds X±.7,Y0..3,Z±.2.",
+      "unit": "metre",
+      "axes": "right handed +X right,+Y up,+Z outward; no negative or nonuniform scale",
+      "approvedInstalls": 0,
+      "qualifiedReturnedMeshes": 0,
+      "providerDescriptorIds": [
+        "floor:0:wall:1"
+      ],
+      "assetBounds": {
+        "min": {
+          "x": -0.7,
+          "y": 0,
+          "z": -0.2
+        },
+        "max": {
+          "x": 0.7,
+          "y": 3,
+          "z": 0.2
+        }
+      },
+      "candidateMounts": [
+        {
+          "localMount": {
+            "x": 0.8,
+            "y": 0,
+            "z": -16.5
+          },
+          "worldMount": {
+            "x": -390,
+            "y": 76.6,
+            "z": 299.7
+          },
+          "yawDeg": 90,
+          "buildingLocalBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "worldBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "matrix4ColumnMajor": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -390,
+            76.6,
+            299.7,
+            1
+          ],
+          "determinant": 1,
+          "outwardNormal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "localMount": {
+            "x": 0.8,
+            "y": 0,
+            "z": -15.1
+          },
+          "worldMount": {
+            "x": -390,
+            "y": 76.6,
+            "z": 301.1
+          },
+          "yawDeg": 90,
+          "buildingLocalBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "worldBasis": {
+            "X": {
+              "x": 0,
+              "y": 0,
+              "z": -1
+            },
+            "Y": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "Z": {
+              "x": 1,
+              "y": 0,
+              "z": 0
+            }
+          },
+          "matrix4ColumnMajor": [
+            0,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            -390,
+            76.6,
+            301.1,
+            1
+          ],
+          "determinant": 1,
+          "outwardNormal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      "connectionPorts": [
+        {
+          "id": "x-minus",
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": -1,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "id": "x-plus",
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": 1,
+            "y": 0,
+            "z": 0
+          }
+        }
+      ],
+      "join": {
+        "buildingLocalPlaneZ": -15.8,
+        "worldPoint": {
+          "x": -390,
+          "y": 76.6,
+          "z": 300.4
+        },
+        "pair": [
+          "mount0:x-minus",
+          "mount1:x-plus"
+        ],
+        "endCaps": "Hide both shared caps; one owner for visible outside wall. Boundary connections to wall0/wall2 keep their original corner authority."
+      },
+      "occupiedSolids": [
+        {
+          "min": {
+            "x": 0.6,
+            "y": 0,
+            "z": -17.2
+          },
+          "max": {
+            "x": 1,
+            "y": 3,
+            "z": -15.8
+          }
+        },
+        {
+          "min": {
+            "x": 0.6,
+            "y": 0,
+            "z": -15.8
+          },
+          "max": {
+            "x": 1,
+            "y": 3,
+            "z": -14.4
+          }
+        }
+      ],
+      "protectedVolumes": [
+        {
+          "kind": "public-approach-path",
+          "id": "entry-public-path-3m",
+          "min": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "max": {
+            "x": 1.5,
+            "y": 1.72,
+            "z": 19.2
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:1:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 3.2,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 5.12,
+            "z": -2.2
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:2:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 6.6,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 8.52,
+            "z": -2.2
+          }
+        }
+      ],
+      "renderReplacement": {
+        "replaceWholeNativeNearPartIds": [
+          "near:28",
+          "near:29"
+        ],
+        "coarsePartBounds": [
+          {
+            "id": "near:28",
+            "bounds": {
+              "min": {
+                "x": 0.6,
+                "y": 0,
+                "z": -17.2
+              },
+              "max": {
+                "x": 1,
+                "y": 0.8,
+                "z": -14.4
+              }
+            }
+          },
+          {
+            "id": "near:29",
+            "bounds": {
+              "min": {
+                "x": 0.6,
+                "y": 0.8,
+                "z": -17.2
+              },
+              "max": {
+                "x": 1,
+                "y": 3,
+                "z": -14.4
+              }
+            }
+          }
+        ],
+        "retainPhysics": "Original wallPanels unchanged.",
+        "adapterPresent": false
+      },
+      "fit": {
+        "status": "CANDIDATE_ONLY",
+        "checks": [
+          "Exact two-piece .2m-grid 2.8m length and 3m authority height",
+          "Each matrix determinant +1",
+          "No real doorway/window cut on wall1",
+          "Union has exact original .4m occupied thickness"
+        ],
+        "failures": [],
+        "staticEnvelope": "CALCULATED_MATCH",
+        "meshFit": "NOT_RUN"
+      },
+      "requiredAuthorityChange": [
+        "Semantic renderer replacement/LOD/cutaway owner adapter absent; no extra physics volume permitted."
+      ]
+    },
+    {
+      "moduleId": "WINDOW-2000-2200-400",
+      "houseIds": [
+        "A09",
+        "A10",
+        "R13",
+        "M05"
+      ],
+      "source": {
+        "path": "/workspace/yunshan/src/architecture-floor-plan.ts",
+        "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+        "buildingInputPath": "/tmp/yunshan-home-pilot-bom-01/raw-counts.json",
+        "buildingInputSHA256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+      },
+      "buildingId": "market-b24",
+      "floor": 0,
+      "meshDimensionsM": [
+        2,
+        2.2,
+        0.4
+      ],
+      "originLocalDefinition": "Full nine-piece window outer-frame bottom centre on wall thickness plane.",
+      "unit": "metre",
+      "axes": "right handed +X right,+Y up,+Z outward; no negative or nonuniform scale",
+      "approvedInstalls": 0,
+      "qualifiedReturnedMeshes": 0,
+      "localMount": {
+        "x": -11.2,
+        "y": 0.4,
+        "z": 15.2
+      },
+      "worldMount": {
+        "x": -402,
+        "y": 77,
+        "z": 331.4
+      },
+      "yawDeg": 0,
+      "buildingLocalBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "worldBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "matrix4ColumnMajor": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -402,
+        77,
+        331.4,
+        1
+      ],
+      "determinant": 1,
+      "outwardNormal": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "providerDescriptorIds": [
+        "floor:0:wall:18:window:0"
+      ],
+      "assetBounds": {
+        "min": {
+          "x": -1,
+          "y": 0,
+          "z": -0.2
+        },
+        "max": {
+          "x": 1,
+          "y": 2.2,
+          "z": 0.2
+        }
+      },
+      "realOpening": {
+        "width": 1.6,
+        "height": 1.4,
+        "assetLocalBounds": {
+          "min": {
+            "x": -0.8,
+            "y": 0.4,
+            "z": 0
+          },
+          "max": {
+            "x": 0.8,
+            "y": 1.8,
+            "z": 0.2
+          }
+        },
+        "wallTrace": {
+          "from": 1.6,
+          "to": 3.2,
+          "bottom": 0.8,
+          "top": 2.2
+        }
+      },
+      "coarseGlass": {
+        "id": "near:192",
+        "buildingLocalBounds": {
+          "min": {
+            "x": -12,
+            "y": 0.8,
+            "z": 15.2
+          },
+          "max": {
+            "x": -10.4,
+            "y": 2.2,
+            "z": 15.4
+          }
+        },
+        "assetNormalDepth": [
+          0,
+          0.2
+        ],
+        "normalOffsetWarning": "Provider .2m quantization gives 0..+.2, not guessed ±.1."
+      },
+      "oldFineParts": [
+        {
+          "id": "detail:59",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -10.3,
+              "y": 1.5,
+              "z": 15.2
+            },
+            "size": {
+              "x": 0.2,
+              "y": 1.8,
+              "z": 0.4
+            },
+            "color": "#75563c",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -10.4,
+              -10.2
+            ],
+            "y": [
+              0.6,
+              2.4
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 59
+            },
+            {
+              "nearFloor": 1,
+              "index": 266
+            }
+          ]
+        },
+        {
+          "id": "detail:60",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -12.1,
+              "y": 1.5,
+              "z": 15.2
+            },
+            "size": {
+              "x": 0.2,
+              "y": 1.8,
+              "z": 0.4
+            },
+            "color": "#75563c",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12.2,
+              -12
+            ],
+            "y": [
+              0.6,
+              2.4
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 60
+            },
+            {
+              "nearFloor": 1,
+              "index": 267
+            }
+          ]
+        },
+        {
+          "id": "detail:61",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.2,
+              "y": 0.7,
+              "z": 15.2
+            },
+            "size": {
+              "x": 2,
+              "y": 0.2,
+              "z": 0.4
+            },
+            "color": "#75563c",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12.2,
+              -10.2
+            ],
+            "y": [
+              0.6,
+              0.8
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 61
+            },
+            {
+              "nearFloor": 1,
+              "index": 268
+            }
+          ]
+        },
+        {
+          "id": "detail:62",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.2,
+              "y": 2.3,
+              "z": 15.2
+            },
+            "size": {
+              "x": 2,
+              "y": 0.2,
+              "z": 0.4
+            },
+            "color": "#75563c",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12.2,
+              -10.2
+            ],
+            "y": [
+              2.2,
+              2.4
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 62
+            },
+            {
+              "nearFloor": 1,
+              "index": 269
+            }
+          ]
+        },
+        {
+          "id": "detail:63",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -10.9,
+              "y": 1.5,
+              "z": 15.3
+            },
+            "size": {
+              "x": 0.2,
+              "y": 1.4,
+              "z": 0.2
+            },
+            "color": "#b89763",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -11,
+              -10.8
+            ],
+            "y": [
+              0.8,
+              2.2
+            ],
+            "z": [
+              15.2,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 63
+            },
+            {
+              "nearFloor": 1,
+              "index": 270
+            }
+          ]
+        },
+        {
+          "id": "detail:64",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.3,
+              "y": 1.5,
+              "z": 15.3
+            },
+            "size": {
+              "x": 0.2,
+              "y": 1.4,
+              "z": 0.2
+            },
+            "color": "#b89763",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -11.4,
+              -11.2
+            ],
+            "y": [
+              0.8,
+              2.2
+            ],
+            "z": [
+              15.2,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 64
+            },
+            {
+              "nearFloor": 1,
+              "index": 271
+            }
+          ]
+        },
+        {
+          "id": "detail:65",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.2,
+              "y": 1.5,
+              "z": 15.3
+            },
+            "size": {
+              "x": 1.6,
+              "y": 0.2,
+              "z": 0.2
+            },
+            "color": "#b89763",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12,
+              -10.4
+            ],
+            "y": [
+              1.4,
+              1.6
+            ],
+            "z": [
+              15.2,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 65
+            },
+            {
+              "nearFloor": 1,
+              "index": 272
+            }
+          ]
+        },
+        {
+          "id": "detail:66",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.2,
+              "y": 0.5,
+              "z": 15.2
+            },
+            "size": {
+              "x": 2,
+              "y": 0.2,
+              "z": 0.4
+            },
+            "color": "#a1a394",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12.2,
+              -10.2
+            ],
+            "y": [
+              0.4,
+              0.6
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 66
+            },
+            {
+              "nearFloor": 1,
+              "index": 273
+            }
+          ]
+        },
+        {
+          "id": "detail:67",
+          "part": {
+            "purpose": "window",
+            "position": {
+              "x": -11.2,
+              "y": 2.5,
+              "z": 15.2
+            },
+            "size": {
+              "x": 2,
+              "y": 0.2,
+              "z": 0.4
+            },
+            "color": "#b89763",
+            "floor": 0,
+            "roof": false
+          },
+          "bounds": {
+            "x": [
+              -12.2,
+              -10.2
+            ],
+            "y": [
+              2.4,
+              2.6
+            ],
+            "z": [
+              15,
+              15.4
+            ]
+          },
+          "references": [
+            {
+              "nearFloor": 0,
+              "index": 67
+            },
+            {
+              "nearFloor": 1,
+              "index": 274
+            }
+          ]
+        }
+      ],
+      "occupiedSolids": [
+        {
+          "min": {
+            "x": -10.4,
+            "y": 0.6,
+            "z": 15
+          },
+          "max": {
+            "x": -10.2,
+            "y": 2.4,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12.2,
+            "y": 0.6,
+            "z": 15
+          },
+          "max": {
+            "x": -12,
+            "y": 2.4,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12.2,
+            "y": 0.6,
+            "z": 15
+          },
+          "max": {
+            "x": -10.2,
+            "y": 0.8,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12.2,
+            "y": 2.2,
+            "z": 15
+          },
+          "max": {
+            "x": -10.2,
+            "y": 2.4,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -11,
+            "y": 0.8,
+            "z": 15.2
+          },
+          "max": {
+            "x": -10.8,
+            "y": 2.2,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -11.4,
+            "y": 0.8,
+            "z": 15.2
+          },
+          "max": {
+            "x": -11.2,
+            "y": 2.2,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12,
+            "y": 1.4,
+            "z": 15.2
+          },
+          "max": {
+            "x": -10.4,
+            "y": 1.6,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12.2,
+            "y": 0.4,
+            "z": 15
+          },
+          "max": {
+            "x": -10.2,
+            "y": 0.6,
+            "z": 15.4
+          }
+        },
+        {
+          "min": {
+            "x": -12.2,
+            "y": 2.4,
+            "z": 15
+          },
+          "max": {
+            "x": -10.2,
+            "y": 2.6,
+            "z": 15.4
+          }
+        }
+      ],
+      "protectedVolumes": [
+        {
+          "kind": "public-approach-path",
+          "id": "entry-public-path-3m",
+          "min": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "max": {
+            "x": 1.5,
+            "y": 1.72,
+            "z": 19.2
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:1:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 3.2,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 5.12,
+            "z": -2.2
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:2:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 6.6,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 8.52,
+            "z": -2.2
+          }
+        }
+      ],
+      "connectionPorts": [
+        {
+          "id": "wall-plane",
+          "local": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": 0,
+            "z": -1
+          }
+        },
+        {
+          "id": "opening-bottom-centre",
+          "local": {
+            "x": 0,
+            "y": 0.4,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        }
+      ],
+      "coplanarAudit": {
+        "planeLocalZ": 15.4,
+        "planeWorldZ": 331.6,
+        "wallFaceConflicts": [
+          {
+            "nativePartId": "near:188",
+            "nativePartBounds": {
+              "min": {
+                "x": -10.4,
+                "y": 0,
+                "z": 15
+              },
+              "max": {
+                "x": -8.8,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:59",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 0.6,
+                  "y1": 0.8
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:61",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 0.6,
+                  "y1": 0.8
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:66",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 0.4,
+                  "y1": 0.6
+                },
+                "areaM2": 0.04
+              }
+            ],
+            "sumPairAreaM2": 0.12,
+            "unionFaceOverlapAreaM2": 0.08,
+            "visualCrop": {
+              "min": {
+                "x": -10.4,
+                "y": 0.4,
+                "z": 15
+              },
+              "max": {
+                "x": -10.2,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:189",
+            "nativePartBounds": {
+              "min": {
+                "x": -10.4,
+                "y": 0.8,
+                "z": 15
+              },
+              "max": {
+                "x": -8.8,
+                "y": 2.2,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:59",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 0.8,
+                  "y1": 2.2
+                },
+                "areaM2": 0.28
+              }
+            ],
+            "sumPairAreaM2": 0.28,
+            "unionFaceOverlapAreaM2": 0.28,
+            "visualCrop": {
+              "min": {
+                "x": -10.4,
+                "y": 0.8,
+                "z": 15
+              },
+              "max": {
+                "x": -10.2,
+                "y": 2.2,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:190",
+            "nativePartBounds": {
+              "min": {
+                "x": -10.4,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -8.8,
+                "y": 3,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:59",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 2.2,
+                  "y1": 2.4
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:62",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 2.2,
+                  "y1": 2.4
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:67",
+                "rect": {
+                  "x0": -10.4,
+                  "x1": -10.2,
+                  "y0": 2.4,
+                  "y1": 2.6
+                },
+                "areaM2": 0.04
+              }
+            ],
+            "sumPairAreaM2": 0.12,
+            "unionFaceOverlapAreaM2": 0.08,
+            "visualCrop": {
+              "min": {
+                "x": -10.4,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -10.2,
+                "y": 2.6,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:191",
+            "nativePartBounds": {
+              "min": {
+                "x": -12,
+                "y": 0,
+                "z": 15
+              },
+              "max": {
+                "x": -10.4,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:61",
+                "rect": {
+                  "x0": -12,
+                  "x1": -10.4,
+                  "y0": 0.6,
+                  "y1": 0.8
+                },
+                "areaM2": 0.32
+              },
+              {
+                "detailId": "detail:66",
+                "rect": {
+                  "x0": -12,
+                  "x1": -10.4,
+                  "y0": 0.4,
+                  "y1": 0.6
+                },
+                "areaM2": 0.32
+              }
+            ],
+            "sumPairAreaM2": 0.64,
+            "unionFaceOverlapAreaM2": 0.64,
+            "visualCrop": {
+              "min": {
+                "x": -12,
+                "y": 0.4,
+                "z": 15
+              },
+              "max": {
+                "x": -10.4,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:193",
+            "nativePartBounds": {
+              "min": {
+                "x": -12,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -10.4,
+                "y": 3,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:62",
+                "rect": {
+                  "x0": -12,
+                  "x1": -10.4,
+                  "y0": 2.2,
+                  "y1": 2.4
+                },
+                "areaM2": 0.32
+              },
+              {
+                "detailId": "detail:67",
+                "rect": {
+                  "x0": -12,
+                  "x1": -10.4,
+                  "y0": 2.4,
+                  "y1": 2.6
+                },
+                "areaM2": 0.32
+              }
+            ],
+            "sumPairAreaM2": 0.64,
+            "unionFaceOverlapAreaM2": 0.64,
+            "visualCrop": {
+              "min": {
+                "x": -12,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -10.4,
+                "y": 2.6,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:194",
+            "nativePartBounds": {
+              "min": {
+                "x": -15.2,
+                "y": 0,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:60",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 0.6,
+                  "y1": 0.8
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:61",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 0.6,
+                  "y1": 0.8
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:66",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 0.4,
+                  "y1": 0.6
+                },
+                "areaM2": 0.04
+              }
+            ],
+            "sumPairAreaM2": 0.12,
+            "unionFaceOverlapAreaM2": 0.08,
+            "visualCrop": {
+              "min": {
+                "x": -12.2,
+                "y": 0.4,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 0.8,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:195",
+            "nativePartBounds": {
+              "min": {
+                "x": -15.2,
+                "y": 0.8,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 2.2,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:60",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 0.8,
+                  "y1": 2.2
+                },
+                "areaM2": 0.28
+              }
+            ],
+            "sumPairAreaM2": 0.28,
+            "unionFaceOverlapAreaM2": 0.28,
+            "visualCrop": {
+              "min": {
+                "x": -12.2,
+                "y": 0.8,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 2.2,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          },
+          {
+            "nativePartId": "near:196",
+            "nativePartBounds": {
+              "min": {
+                "x": -15.2,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 3,
+                "z": 15.4
+              }
+            },
+            "planeBuildingLocal": {
+              "axis": "z",
+              "value": 15.4
+            },
+            "planeWorld": {
+              "axis": "z",
+              "value": 331.6
+            },
+            "pairs": [
+              {
+                "detailId": "detail:60",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 2.2,
+                  "y1": 2.4
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:62",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 2.2,
+                  "y1": 2.4
+                },
+                "areaM2": 0.04
+              },
+              {
+                "detailId": "detail:67",
+                "rect": {
+                  "x0": -12.2,
+                  "x1": -12,
+                  "y0": 2.4,
+                  "y1": 2.6
+                },
+                "areaM2": 0.04
+              }
+            ],
+            "sumPairAreaM2": 0.12,
+            "unionFaceOverlapAreaM2": 0.08,
+            "visualCrop": {
+              "min": {
+                "x": -12.2,
+                "y": 2.2,
+                "z": 15
+              },
+              "max": {
+                "x": -12,
+                "y": 2.6,
+                "z": 15.4
+              }
+            },
+            "policy": "Split this coarse wall part around exact module/cut union; retain remaining wall, never delete whole part."
+          }
+        ],
+        "wallUnionOverlapAreaM2": 2.16,
+        "paneFinePairs": [
+          {
+            "detailId": "detail:63",
+            "rect": {
+              "x0": -11,
+              "x1": -10.8,
+              "y0": 0.8,
+              "y1": 2.2
+            },
+            "areaM2": 0.28
+          },
+          {
+            "detailId": "detail:64",
+            "rect": {
+              "x0": -11.4,
+              "x1": -11.2,
+              "y0": 0.8,
+              "y1": 2.2
+            },
+            "areaM2": 0.28
+          },
+          {
+            "detailId": "detail:65",
+            "rect": {
+              "x0": -12,
+              "x1": -10.4,
+              "y0": 1.4,
+              "y1": 1.6
+            },
+            "areaM2": 0.32
+          }
+        ],
+        "paneFineUnionOverlapAreaM2": 0.8,
+        "scope": "Exact CPU geometric coplanarity, no observed GL z-fighting claim."
+      },
+      "renderReplacement": {
+        "removeWholeNativeNearPartIds": [
+          "near:192"
+        ],
+        "removeOldDetailSourceIds": [
+          "detail:59",
+          "detail:60",
+          "detail:61",
+          "detail:62",
+          "detail:63",
+          "detail:64",
+          "detail:65",
+          "detail:66",
+          "detail:67"
+        ],
+        "oldNearFloorReferences": [
+          {
+            "id": "detail:59",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 59
+              },
+              {
+                "nearFloor": 1,
+                "index": 266
+              }
+            ]
+          },
+          {
+            "id": "detail:60",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 60
+              },
+              {
+                "nearFloor": 1,
+                "index": 267
+              }
+            ]
+          },
+          {
+            "id": "detail:61",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 61
+              },
+              {
+                "nearFloor": 1,
+                "index": 268
+              }
+            ]
+          },
+          {
+            "id": "detail:62",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 62
+              },
+              {
+                "nearFloor": 1,
+                "index": 269
+              }
+            ]
+          },
+          {
+            "id": "detail:63",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 63
+              },
+              {
+                "nearFloor": 1,
+                "index": 270
+              }
+            ]
+          },
+          {
+            "id": "detail:64",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 64
+              },
+              {
+                "nearFloor": 1,
+                "index": 271
+              }
+            ]
+          },
+          {
+            "id": "detail:65",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 65
+              },
+              {
+                "nearFloor": 1,
+                "index": 272
+              }
+            ]
+          },
+          {
+            "id": "detail:66",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 66
+              },
+              {
+                "nearFloor": 1,
+                "index": 273
+              }
+            ]
+          },
+          {
+            "id": "detail:67",
+            "references": [
+              {
+                "nearFloor": 0,
+                "index": 67
+              },
+              {
+                "nearFloor": 1,
+                "index": 274
+              }
+            ]
+          }
+        ],
+        "cropNativeWallIds": [
+          "near:188",
+          "near:189",
+          "near:190",
+          "near:191",
+          "near:193",
+          "near:194",
+          "near:195",
+          "near:196"
+        ],
+        "cropPolicy": "One near-module owner: hide coarse pane+9 fine parts and subtract matching opaque frame-ring volumes from eight coarse wall boxes, keep the rest. Use disjoint box/face partitions with exclusive visible face ownership. No polygonOffset/depthBias/transparent overdraw fix.",
+        "normalPolicy": "New glass/frame visible surfaces must use exclusive ownership; retain original proxy .2m glass collision; actual GLB glass geometry/seams must be inspected before approval.",
+        "cutawayAndLOD": "Native/coarse source masks and asset visibility share floor/distance/cutaway owner; fine enabled XOR old pane/details. Far coarse proxy remains bounded. No runtime semantic replacement adapter exists."
+      },
+      "separateKnownWindowDefect": {
+        "declaredOpenings": 54,
+        "emittedCoarseGlass": 53,
+        "degenerateGlassPanels": [
+          {
+            "floor": 1,
+            "panel": {
+              "rect": {
+                "x0": 5.6,
+                "x1": 5.6,
+                "z0": -9.4,
+                "z1": -7.8
+              },
+              "bottom": 0.8,
+              "top": 2.2,
+              "kind": "glass"
+            }
+          }
+        ],
+        "status": "UNFIXED_NOT_THIS_SAMPLE",
+        "warning": "A normal selected sample does not validate all54 windows; inventory references43/54→53 remain separate."
+      },
+      "fit": {
+        "status": "CANDIDATE_ONLY",
+        "staticEnvelope": "CALCULATED_EXISTING_FRAME_MATCH",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Nondegenerate true opening",
+          "Exact nine existing detail parts and pane source IDs",
+          "Matrix det+1",
+          "Protected door/stair/use zones not occupied"
+        ],
+        "failures": [
+          "No semantic native instance replacement/crop owner API",
+          "Pane+9 parts alone still leaves eight real coplanar coarse-wall overlaps"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Renderer source-ID/partition/LOD-cutaway replacement adapter required; keep wallPanels, door holes and fingerprints unchanged.",
+        "Outward protrusion alternative is not this fit: new envelope would need fresh shared collision/clearance validation."
+      ]
+    },
+    {
+      "moduleId": "DOORFRAME-5600-3200-400",
+      "houseIds": [
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "source": {
+        "path": "/workspace/yunshan/src/architecture-floor-plan.ts",
+        "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+        "buildingInputPath": "/tmp/yunshan-home-pilot-bom-01/raw-counts.json",
+        "buildingInputSHA256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+      },
+      "buildingId": "market-b24",
+      "floor": 0,
+      "meshDimensionsM": [
+        5.6,
+        3.2,
+        0.4
+      ],
+      "originLocalDefinition": "Entry frame bottom centre; leaves have separate hinge nodes, no mirrored scale.",
+      "unit": "metre",
+      "axes": "right handed +X right,+Y up,+Z outward; no negative or nonuniform scale",
+      "approvedInstalls": 0,
+      "qualifiedReturnedMeshes": 0,
+      "localMount": {
+        "x": 0,
+        "y": 0,
+        "z": 17.2
+      },
+      "worldMount": {
+        "x": -390.8,
+        "y": 76.6,
+        "z": 333.4
+      },
+      "yawDeg": 0,
+      "buildingLocalBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "worldBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "matrix4ColumnMajor": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -390.8,
+        76.6,
+        333.4,
+        1
+      ],
+      "determinant": 1,
+      "outwardNormal": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "providerDescriptorIds": [
+        "floor:0:wall:12:opening"
+      ],
+      "assetBounds": {
+        "min": {
+          "x": -2.8,
+          "y": 0,
+          "z": -0.2
+        },
+        "max": {
+          "x": 2.8,
+          "y": 3.2,
+          "z": 0.2
+        }
+      },
+      "realClearance": {
+        "width": 4.8,
+        "height": 2.8,
+        "bodyRadius": 0.35,
+        "bodyDiameter": 0.7,
+        "eyeHeight": 1.72,
+        "centreWalkableWidth": 4.1,
+        "standingHeadMargin": 1.08,
+        "thresholdHeight": 0,
+        "protectedPublicPathWidth": 3
+      },
+      "occupiedSolids": [
+        {
+          "min": {
+            "x": 2.4,
+            "y": 0,
+            "z": 17
+          },
+          "max": {
+            "x": 2.6,
+            "y": 2.8,
+            "z": 17.4
+          }
+        },
+        {
+          "min": {
+            "x": -2.6,
+            "y": 0,
+            "z": 17
+          },
+          "max": {
+            "x": -2.4,
+            "y": 2.8,
+            "z": 17.4
+          }
+        },
+        {
+          "min": {
+            "x": -2.6,
+            "y": 2.8,
+            "z": 17
+          },
+          "max": {
+            "x": 2.6,
+            "y": 3,
+            "z": 17.4
+          }
+        },
+        {
+          "min": {
+            "x": -2.8,
+            "y": 3,
+            "z": 17
+          },
+          "max": {
+            "x": 2.8,
+            "y": 3.2,
+            "z": 17.4
+          }
+        }
+      ],
+      "oldFrameSourceIds": [
+        "detail:0",
+        "detail:1",
+        "detail:2",
+        "detail:3"
+      ],
+      "connectionPorts": [
+        {
+          "id": "hinge-left",
+          "local": {
+            "x": -2.4,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        },
+        {
+          "id": "hinge-right",
+          "local": {
+            "x": 2.4,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        },
+        {
+          "id": "clear-lintel",
+          "local": {
+            "x": 0,
+            "y": 2.8,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": -1,
+            "z": 0
+          }
+        }
+      ],
+      "hypotheticalLeaves": {
+        "presentInAuthority": false,
+        "eachNominalSize": [
+          2.4,
+          2.8,
+          0.2
+        ],
+        "leftHingeLocal": {
+          "x": -2.4,
+          "y": 0,
+          "z": 17.2
+        },
+        "leftHingeWorld": {
+          "x": -393.2,
+          "y": 76.6,
+          "z": 333.4
+        },
+        "rightHingeLocal": {
+          "x": 2.4,
+          "y": 0,
+          "z": 17.2
+        },
+        "rightHingeWorld": {
+          "x": -388.4,
+          "y": 76.6,
+          "z": 333.4
+        },
+        "leftOpenAngleDegrees": -90,
+        "rightOpenAngleDegrees": 90,
+        "hingeAxis": "+Y",
+        "left90Bounds": {
+          "min": {
+            "x": -2.5,
+            "y": 0,
+            "z": 17.2
+          },
+          "max": {
+            "x": -2.3,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "swingConflicts": [
+          {
+            "nativeId": "detail:6",
+            "partBounds": {
+              "min": {
+                "x": -3.2,
+                "y": 1.8,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2,
+                "z": 18.2
+              }
+            },
+            "overlap": {
+              "min": {
+                "x": -2.5,
+                "y": 1.8,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2,
+                "z": 18.2
+              }
+            },
+            "overlapVolumeM3": 0.016
+          },
+          {
+            "nativeId": "detail:7",
+            "partBounds": {
+              "min": {
+                "x": -3.2,
+                "y": 2.6,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2.8,
+                "z": 18.2
+              }
+            },
+            "overlap": {
+              "min": {
+                "x": -2.5,
+                "y": 2.6,
+                "z": 17.4
+              },
+              "max": {
+                "x": -2.4,
+                "y": 2.8,
+                "z": 18.2
+              }
+            },
+            "overlapVolumeM3": 0.016
+          }
+        ],
+        "leftQuarterSweepEnvelope": {
+          "min": {
+            "x": -2.5,
+            "y": 0,
+            "z": 17.1
+          },
+          "max": {
+            "x": 0.1,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "rightQuarterSweepEnvelope": {
+          "min": {
+            "x": -0.1,
+            "y": 0,
+            "z": 17.1
+          },
+          "max": {
+            "x": 2.5,
+            "y": 2.8,
+            "z": 19.6
+          }
+        },
+        "currentAuthority": "No leaves, hinge transform, open/closed state or leaf route obstacle in FloorPlan. useDoor crosses an existing opening."
+      },
+      "protectedVolumes": [
+        {
+          "kind": "public-approach-path",
+          "id": "entry-public-path-3m",
+          "min": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "max": {
+            "x": 1.5,
+            "y": 1.72,
+            "z": 19.2
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:1:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 3.2,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 5.12,
+            "z": -2.2
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:2:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 6.6,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 8.52,
+            "z": -2.2
+          }
+        }
+      ],
+      "staticExistingDoorwaySupportSamples": [
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.5,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -392.3,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.3,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -392.1,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -1.1,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.9,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.9,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.7,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.7,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.5,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.5,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.3,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.3,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -391.1,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": -0.1,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.9,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.1,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.7,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.3,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.5,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.5,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.3,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.7,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -390.1,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 0.9,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.9,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.1,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.7,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.3,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.5,
+            "y": 76.6,
+            "z": 333
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 331.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 15.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 331.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 15.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 331.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 15.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 332
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 16
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 332.2
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 16.2
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 332.4
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 16.4
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 332.6
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 16.6
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 332.8
+          }
+        },
+        {
+          "local": {
+            "x": 1.5,
+            "y": 0,
+            "z": 16.8
+          },
+          "support": "room",
+          "world": {
+            "x": -389.3,
+            "y": 76.6,
+            "z": 333
+          }
+        }
+      ],
+      "supportScope": "Interior X±1.5,Z15.2..16.8 complete .35 circles. NearZ17.2 slab edge needs existing controller door/terrain union; exterior whole-body support not audited here.",
+      "renderReplacement": {
+        "removeOldDetailSourceIds": [
+          "detail:0",
+          "detail:1",
+          "detail:2",
+          "detail:3"
+        ],
+        "partialCoarseWallCrop": "Frame jamb/lintel overlaps need same semantic single-owner clipping; leave real4.8x2.8 hole empty.",
+        "adapterPresent": false
+      },
+      "fit": {
+        "status": "REQUIRES_AUTHORITY_CHANGE",
+        "staticFrameEnvelope": "CALCULATED_EXISTING_MATCH",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Real4.8x2.8 opening and zero raised threshold",
+          "3m interior public path samples all support .35 body",
+          "Frame matrix det+1"
+        ],
+        "failures": [
+          "No shared hinge/open/closed/collision/save authority",
+          "Hypothetical90-degree left leaf intersects existing lantern caps; exact positive-volume witness retained"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Implement code-owned door state, hinges, swept solid/route blocking, permissions and saved lifecycle before functional leaves. Current-v4/native saved authority cannot be silently changed.",
+        "Resolve actual lantern/leaf sweep conflict through shared geometry before approving a swing. No arbitrary relocation/depth bias approved."
+      ]
+    },
+    {
+      "moduleId": "BONSAI-ASSEMBLY-800-1300-800",
+      "houseIds": [
+        "B01",
+        "B02",
+        "R12"
+      ],
+      "source": {
+        "path": "/workspace/yunshan/src/architecture-floor-plan.ts",
+        "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+        "buildingInputPath": "/tmp/yunshan-home-pilot-bom-01/raw-counts.json",
+        "buildingInputSHA256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+      },
+      "buildingId": "market-b24",
+      "floor": 0,
+      "meshDimensionsM": [
+        0.8,
+        1.3,
+        0.8
+      ],
+      "originLocalDefinition": "Assembly pot bottom centre. Plant root node joins pot soil socket at +.3m.",
+      "unit": "metre",
+      "axes": "right handed +X right,+Y up,+Z outward; no negative or nonuniform scale",
+      "approvedInstalls": 0,
+      "qualifiedReturnedMeshes": 0,
+      "localMount": {
+        "x": 12,
+        "y": 0,
+        "z": 10
+      },
+      "worldMount": {
+        "x": -378.8,
+        "y": 76.6,
+        "z": 326.2
+      },
+      "yawDeg": 0,
+      "buildingLocalBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "worldBasis": {
+        "X": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "Y": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "Z": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        }
+      },
+      "matrix4ColumnMajor": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -378.8,
+        76.6,
+        326.2,
+        1
+      ],
+      "determinant": 1,
+      "outwardNormal": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "providerDescriptorIds": [
+        "floor:0:courtyard:7"
+      ],
+      "assetBounds": {
+        "min": {
+          "x": -0.4,
+          "y": 0,
+          "z": -0.4
+        },
+        "max": {
+          "x": 0.4,
+          "y": 1.3,
+          "z": 0.4
+        }
+      },
+      "assembly": {
+        "containerId": "B01",
+        "containerSize": [
+          0.8,
+          0.4,
+          0.8
+        ],
+        "plantId": "B02",
+        "plantSize": [
+          0.8,
+          1,
+          0.8
+        ],
+        "rootMountRelative": {
+          "x": 0,
+          "y": 0.3,
+          "z": 0
+        },
+        "soilSocket": {
+          "x": 0,
+          "y": 0.3,
+          "z": 0
+        },
+        "rimSocket": {
+          "x": 0,
+          "y": 0.4,
+          "z": 0
+        },
+        "potInnerOpeningNominal": [
+          0.6,
+          0.6
+        ],
+        "rootEmbedDepth": "NOT_MEASURED_MODEL_NOT_RECEIVED"
+      },
+      "connectionPorts": [
+        {
+          "id": "bottom-support",
+          "local": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": -1,
+            "z": 0
+          }
+        },
+        {
+          "id": "soil-root",
+          "local": {
+            "x": 0,
+            "y": 0.3,
+            "z": 0
+          },
+          "normal": {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          }
+        }
+      ],
+      "plannedPlacementFootprint": {
+        "min": {
+          "x": 11.6,
+          "z": 9.6
+        },
+        "max": {
+          "x": 12.4,
+          "z": 10.4
+        }
+      },
+      "occupiedSolids": [
+        {
+          "min": {
+            "x": 11.6,
+            "y": 0,
+            "z": 9.6
+          },
+          "max": {
+            "x": 12.4,
+            "y": 1.3,
+            "z": 10.4
+          },
+          "kind": "PROPOSED_CONSERVATIVE_ENVELOPE_NOT_REAL_MESH_OR_ACTIVE_COLLIDER"
+        }
+      ],
+      "realSupportEvidence": {
+        "boundingCircleRadius": 0.56568542,
+        "query": {
+          "kind": "courtyard",
+          "floor": 0,
+          "y": 76.6,
+          "local": {
+            "x": 12,
+            "z": 10
+          }
+        },
+        "slabRegions": [
+          {
+            "x0": -20,
+            "x1": 0.8,
+            "z0": -17.2,
+            "z1": 1.4
+          },
+          {
+            "x0": -3.2,
+            "x1": 3.2,
+            "z0": -14.4,
+            "z1": 17.2
+          },
+          {
+            "x0": 5.6,
+            "x1": 18.4,
+            "z0": -11.6,
+            "z1": 2
+          },
+          {
+            "x0": -2.4,
+            "x1": 7.2,
+            "z0": -6.2,
+            "z1": -2
+          },
+          {
+            "x0": -19.2,
+            "x1": -8.8,
+            "z0": 6.2,
+            "z1": 15.2
+          },
+          {
+            "x0": -12.8,
+            "x1": -8,
+            "z0": 0,
+            "z1": 6.8
+          },
+          {
+            "x0": -15.2,
+            "x1": -10.4,
+            "z0": -9.8,
+            "z1": -2.2
+          },
+          {
+            "x0": 3.2,
+            "x1": 5.6,
+            "z0": 0.6,
+            "z1": 4.8
+          },
+          {
+            "x0": -8,
+            "x1": -3.2,
+            "z0": 1.4,
+            "z1": 4.8
+          },
+          {
+            "x0": 5.6,
+            "x1": 7.2,
+            "z0": 2,
+            "z1": 4.8
+          },
+          {
+            "x0": 0.8,
+            "x1": 20,
+            "z0": -17.2,
+            "z1": -14.4
+          },
+          {
+            "x0": 3.2,
+            "x1": 20,
+            "z0": -14.4,
+            "z1": -11.6
+          },
+          {
+            "x0": 3.2,
+            "x1": 5.6,
+            "z0": -11.6,
+            "z1": -6.2
+          },
+          {
+            "x0": 18.4,
+            "x1": 20,
+            "z0": -11.6,
+            "z1": 17.2
+          },
+          {
+            "x0": 3.2,
+            "x1": 5.6,
+            "z0": -2,
+            "z1": 17.2
+          },
+          {
+            "x0": -20,
+            "x1": -12.8,
+            "z0": 1.4,
+            "z1": 6.2
+          },
+          {
+            "x0": -8,
+            "x1": -3.2,
+            "z0": 1.4,
+            "z1": 17.2
+          },
+          {
+            "x0": 5.6,
+            "x1": 18.4,
+            "z0": 2,
+            "z1": 17.2
+          },
+          {
+            "x0": -20,
+            "x1": -19.2,
+            "z0": 6.2,
+            "z1": 17.2
+          },
+          {
+            "x0": -8.8,
+            "x1": -8,
+            "z0": 6.8,
+            "z1": 17.2
+          },
+          {
+            "x0": -19.2,
+            "x1": -8.8,
+            "z0": 15.2,
+            "z1": 17.2
+          }
+        ],
+        "noHoleOnGround": true
+      },
+      "bodyClearanceEvidence": {
+        "ring": [
+          {
+            "x": 11.2,
+            "y": 0,
+            "z": 9.2
+          },
+          {
+            "x": 12.8,
+            "y": 0,
+            "z": 9.2
+          },
+          {
+            "x": 12.8,
+            "y": 0,
+            "z": 10.8
+          },
+          {
+            "x": 11.2,
+            "y": 0,
+            "z": 10.8
+          },
+          {
+            "x": 11.2,
+            "y": 0,
+            "z": 9.2
+          }
+        ],
+        "ringSamples": [
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.29411765,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.38823529,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.48235294,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.57647059,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.67058824,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.76470588,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.85882353,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.95294118,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.04705882,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.14117647,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.23529412,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.32941176,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.42352941,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.51764706,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.61176471,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.70588235,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.29411765
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.38823529
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.48235294
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.57647059
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.67058824
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.76470588
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.85882353
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 9.95294118
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.04705882
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.14117647
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.23529412
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.32941176
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.42352941
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.51764706
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.61176471
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.70588235
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.8,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.70588235,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.61176471,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.51764706,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.42352941,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.32941176,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.23529412,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.14117647,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 12.04705882,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.95294118,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.85882353,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.76470588,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.67058824,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.57647059,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.48235294,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.38823529,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.29411765,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.8
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.70588235
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.61176471
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.51764706
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.42352941
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.32941176
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.23529412
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.14117647
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 10.04705882
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.95294118
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.85882353
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.76470588
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.67058824
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.4,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.57647059
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.40069144,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.48235294
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.41694224,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.38823529
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.45259727,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.29411765
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.5035514,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          },
+          {
+            "local": {
+              "x": 11.2,
+              "y": 0,
+              "z": 9.2
+            },
+            "support": "courtyard",
+            "distanceToPlannedPotFootprint": 0.56568542,
+            "bodyRadius": 0.35,
+            "eyeHeight": 1.72
+          }
+        ],
+        "sampleSpacingMaximum": 0.1,
+        "minBodyDiskMarginToPlannedEnvelope": 0.05,
+        "bodyHeadVolume": "floor feet0..1.72m checked by blocksFloorPlanMovement; all sides current courtyard, no real walls/fixture/roof intrusion"
+      },
+      "protectedVolumes": [
+        {
+          "kind": "public-approach-path",
+          "id": "entry-public-path-3m",
+          "min": {
+            "x": -1.5,
+            "y": 0,
+            "z": 15.2
+          },
+          "max": {
+            "x": 1.5,
+            "y": 1.72,
+            "z": 19.2
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "min": {
+            "x": -10,
+            "y": 0,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 1.72,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:work",
+          "purpose": "work",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "1:program:service",
+          "purpose": "service",
+          "floor": 1,
+          "min": {
+            "x": -10,
+            "y": 3.4,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 5.12,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:work",
+          "purpose": "work",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "function-use-zone",
+          "id": "2:program:service",
+          "purpose": "service",
+          "floor": 2,
+          "min": {
+            "x": -10,
+            "y": 6.8,
+            "z": -11
+          },
+          "max": {
+            "x": -6,
+            "y": 8.52,
+            "z": -7
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:1:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 3.2,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 5.12,
+            "z": -2.2
+          }
+        },
+        {
+          "kind": "stair-hole",
+          "id": "floor:2:stair-hole",
+          "min": {
+            "x": -14.8,
+            "y": 6.6,
+            "z": -7.8
+          },
+          "max": {
+            "x": -10.8,
+            "y": 8.52,
+            "z": -2.2
+          }
+        }
+      ],
+      "fit": {
+        "status": "CANDIDATE_ONLY",
+        "staticEnvelope": "CALCULATED_SUPPORTED_AND_CIRCULATABLE",
+        "meshFit": "NOT_RUN",
+        "checks": [
+          "Entire .8m square lies inside supported bounding disk",
+          "All four sides have complete .35 body/1.72 head clearance",
+          "Protected3m door path, real stairs/holes/function2m zones untouched",
+          "Matrix det+1"
+        ],
+        "failures": [
+          "No pot/plant GLB received",
+          "No live placement fixture/collision/save authority registered"
+        ]
+      },
+      "requiredAuthorityChange": [
+        "Register actual pot/plant occupied geometry, placement identity/collision and persistence through shared object authority before mounting. Conservative bounds are not an invented hollow-pot mesh or approved collider."
+      ]
+    }
+  ],
+  "separateWindowDefect": {
+    "declaredOpenings": 54,
+    "emittedCoarseGlass": 53,
+    "degenerateGlassPanels": [
+      {
+        "floor": 1,
+        "panel": {
+          "rect": {
+            "x0": 5.6,
+            "x1": 5.6,
+            "z0": -9.4,
+            "z1": -7.8
+          },
+          "bottom": 0.8,
+          "top": 2.2,
+          "kind": "glass"
+        }
+      }
+    ],
+    "status": "UNFIXED_NOT_THIS_SAMPLE",
+    "warning": "A normal selected sample does not validate all54 windows; inventory references43/54→53 remain separate."
+  },
+  "elapsedMilliseconds": 112.470529
+}

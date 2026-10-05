@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-05T00:21:16.643074+00:00",
+  "endedAt": "2026-10-05T00:25:13.239785+00:00",
+  "argv": [
+    "env",
+    "ROOT16_MEDICAL_RUN_COORDINATED=1",
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01-driver-as-run.mts",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 322,
+  "inputsStable": true,
+  "rawSHA256": "abb822e518877cf1fd99b246fe97d9bf571efac2302a36ee55ba152cea567555",
+  "ownedPid": 130638,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 130646,
+      "state": "Z",
+      "parent": 1,
+      "group": 130638,
+      "session": 130638,
+      "startTicks": 9050141
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

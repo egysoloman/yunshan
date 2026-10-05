@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-04T01:02:29.154127+00:00",
+  "source": "/workspace/yunshan-work/company-family-coupling-readonly-20261004-01",
+  "files": [
+    {
+      "file": "REVIEW.md",
+      "bytes": 5898,
+      "sha256": "8ddb05f6aeef697117309f191a47348b8d5e905870e6abe9b3d3d1ed5249c49e",
+      "byteExact": true
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 8023,
+      "sha256": "9156c5e3978f5bc4a89c2d1bae464a33c7fc8c90b41bdd801796c1c803a1705a",
+      "byteExact": true
+    },
+    {
+      "file": "payroll-receipt.json",
+      "bytes": 297,
+      "sha256": "e23790a5a93650d8d71969c6e3098fe7b2ba0cafdc7978e48afcc7b51e6f9f77",
+      "byteExact": true
+    },
+    {
+      "file": "shared-readonly-snapshot.json",
+      "bytes": 5547,
+      "sha256": "9986a0672f79086c6dba494e0fb7a63e2aa70b379dd318d52641af7dd395e8f7",
+      "byteExact": true
+    },
+    {
+      "file": "combined-probe-inputs-before.json",
+      "bytes": 8998,
+      "sha256": "cea0c30c1ee0fa0e0edb9f0399ca6fa8170b438f69360b690d2e4f378f759fef",
+      "byteExact": true
+    },
+    {
+      "file": "combined-probe-inputs-after.json",
+      "bytes": 8815,
+      "sha256": "d463d97dcab9304311827f1c7428897a073fa61e4a098c3ebae6ed95427339a0",
+      "byteExact": true
+    }
+  ],
+  "note": "Full native saves/drivers/FAIL and production old source remain in root originals bundle. Review is ordinary lifecycle correctness; no security skill."
+}

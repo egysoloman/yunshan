@@ -1,0 +1,35 @@
+{
+  "uploadedFile": "/tmp/yunshan-home-pilot-bom-01/market-b24-home-bom-revision02.zip",
+  "sha256": "0224df52f975c19abb7f1db314233296c4faec438079d383ae18c4fc15c96b9b",
+  "scope": "Revision02 original 94 member BOM/evidence ZIP; no asset generation or production changes.",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "operation": "create_library_file",
+      "status": "succeeded",
+      "path": "/market-b24-home-bom-revision02.zip",
+      "file_id": "file_00000000944481f6a2e3ae70b5996223",
+      "library_file_id": "libfile_cc48d9982cfc81919e129988a7a0a4e7",
+      "file_name": "market-b24-home-bom-revision02.zip",
+      "current_version_number": 0,
+      "restored_from_version_number": null,
+      "xattrs": [
+        {
+          "name": "user.library-file-version",
+          "value": "0"
+        }
+      ],
+      "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+      "mime_type": "application/zip",
+      "library_artifact_type": "other",
+      "file_size_bytes": 5818868,
+      "external_connectors_accessed": false
+    },
+    "isError": false
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "checkedAt": "2026-10-02T02:32:47.727182+00:00",
+  "base": "/tmp/yunshan-located-freight-prototype-20261002",
+  "checkDirectory": "/tmp/yunshan-food-counter-patch-apply-check-20261002",
+  "patchSHA256": "17e538053630622e7a4e4495118a1839c7ad0877562b7a44aefa4c043beed78f",
+  "results": [
+    {
+      "args": [
+        "git",
+        "apply",
+        "--check",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "git",
+        "apply",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "git",
+        "apply",
+        "--check",
+        "--reverse",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "appliedFilesMatch": {
+    "src/simulation.ts": true,
+    "src/simulation/food-distribution.ts": true,
+    "tests/food-distribution.test.ts": true,
+    "tests/helpers/food-counter-world.ts": true
+  },
+  "files": {
+    "src/simulation.ts": "a3adf33eebff0fe4658dc0069869b812fdd5a87dc280fcf46ff5dabf8de7b698",
+    "src/simulation/food-distribution.ts": "479ee6eb88a080507b479b64b372cc2daa41172b2265849a3936a23b80f8565a",
+    "tests/food-distribution.test.ts": "baa46b1a1d900cd5c74a56cf5b4d8684c71da0288f72030e77d9058719e24072",
+    "tests/helpers/food-counter-world.ts": "f08d367366423567db2cf76bed1e2fbfbc3fcc537572fce65e32ec9d2c74aaa5"
+  },
+  "whitespaceChecks": [
+    {
+      "args": [
+        "git",
+        "apply",
+        "--reverse",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "git",
+        "apply",
+        "--check",
+        "--whitespace=error",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "git",
+        "apply",
+        "/tmp/yunshan-food-counter-prototype-20261002/artifacts/food-counter.patch"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

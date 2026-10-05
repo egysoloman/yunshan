@@ -1,0 +1,22 @@
+[
+  {
+    "operation": "explicit-original-history-v3-to4",
+    "expectedSHA256": "55aff072ee15acc3afca29a24d906f6d1fed64554554ce423a30fb2a02ff5535",
+    "beforeSHA256": "55aff072ee15acc3afca29a24d906f6d1fed64554554ce423a30fb2a02ff5535",
+    "result": {
+      "ok": true,
+      "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+    },
+    "afterSHA256": "c461ee83a79913891b3c9b8767aef5cba12306d953dd88208ccdc8136ebf3fa4"
+  },
+  {
+    "operation": "explicit-current4-material-policy",
+    "expectedSHA256": "c461ee83a79913891b3c9b8767aef5cba12306d953dd88208ccdc8136ebf3fa4",
+    "beforeSHA256": "c461ee83a79913891b3c9b8767aef5cba12306d953dd88208ccdc8136ebf3fa4",
+    "result": {
+      "ok": true,
+      "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+    },
+    "afterSHA256": "8c5a8ae47daed0b3e4f45225c2a45ee7d5fdb2a83b95eee788cd07cd3e01b7aa"
+  }
+]

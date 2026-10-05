@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-04T21:49:04.711200+00:00",
+  "branch": "takeover-city-life",
+  "commit": "12288e7d5e48df3a108fd473383dfa3e5fe9e961",
+  "argv": [
+    "git",
+    "push",
+    "origin",
+    "HEAD:refs/heads/takeover-city-life"
+  ],
+  "exitCode": 0,
+  "stdout": "",
+  "stderr": "To <remote>\n   f1e26ff..12288e7  HEAD -> takeover-city-life\n",
+  "scope": "authorized normal fast-forward work branch only; no main/PR/merge/deploy",
+  "remoteReadExitCode": 0,
+  "remoteHeads": {
+    "refs/heads/main": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "refs/heads/takeover-city-life": "12288e7d5e48df3a108fd473383dfa3e5fe9e961"
+  },
+  "remoteBranchMatchesCommit": true,
+  "remoteMainUnchanged": true
+}

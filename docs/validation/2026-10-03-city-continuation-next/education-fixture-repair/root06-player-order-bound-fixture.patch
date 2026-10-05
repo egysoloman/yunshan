@@ -1,0 +1,60 @@
+--- a/tests/education-fixture.ts
++++ b/tests/education-fixture.ts
+@@ -126,9 +126,12 @@
+   const { sim, controls, site, teacher } = context, hall = sim.worldDefinition.buildings.find(building => building.kind === 'hall')!;
+   assert.equal(education(sim), undefined, 'controlled public deadline jump occurs before a paid course exists');
+   sim.setFocus(hall.door, 'walk');
++  const previousPetitionIds = new Set(sim.state.culture!.petitions.map(petition => petition.id));
+   const filed = sim.command({ type: 'filePetition', targetId: 'education', title: '真实同站课堂', text: '居民请求在学校安排教材有限、教师真实出勤且学员共同到达课堂的公共教学。' });
+   assert.equal(filed.ok, true, filed.message);
+-  const petition = sim.state.culture!.petitions.at(-1)!;
++  const created = sim.state.culture!.petitions.filter(petition => !previousPetitionIds.has(petition.id) && petition.authorId === 'player' && petition.topic === 'education');
++  assert.equal(created.length, 1, 'this exact player command creates one identifiable education petition');
++  const petition = created[0];
+   const signers = sim.state.citizens.filter(person => person.id !== teacher.id && sim.state.extension!.actorProfiles[person.id].age >= 18).slice(0, 3);
+   for (const person of signers) pin(sim, controls, person.id, hall, station(hall));
+   advance(sim, 4); assert.ok(petition.signerIds.length >= 3);
+--- a/tests/resident-formal-education.test.ts
++++ b/tests/resident-formal-education.test.ts
+@@ -224,19 +224,39 @@
+   assert.equal(sim.command({ type: 'speed', value: 8 }).ok, true);
+   for (const worker of producers) { const workplace = workshops.find(workshop => workshop.id === worker.workId)!; pin(sim, controls, worker.id, workplace, workplace.door, 'work'); }
+   const first = publicEducation(context); syncControlledBornClock(context);
++  // The one-time hearing signers return to their own homes once this hearing
++  // has ended. An adult student left pinned at the hall could now genuinely
++  // file another NPC petition, changing this controlled two-order scenario.
++  // Original industrial participants, payroll reviewers and class attendees
++  // keep their actual roles, work and intended positions; no demand is erased.
++  const heard = sim.state.culture!.petitions.find(petition => petition.executionId === first.id)!;
++  for (const id of heard.signerIds) {
++    if (id === 'player' || producerIds.has(id) || reviewers.some(person => person.id === id) || classmates.some(person => person.id === id)) continue;
++    const person = sim.state.citizens.find(person => person.id === id)!;
++    const home = sim.worldDefinition.buildings.find(building => building.id === person.homeId)!;
++    pin(sim, controls, person.id, home, home.door);
++  }
+   for (const learner of [child, ...classmates]) pin(sim, controls, learner.id, site, station(site));
+   const deadline = at(sim) + 480; for (let ticks = 0; first.state !== 'fulfilled' && at(sim) < deadline - 1e-7 && ticks < 10000; ticks++) sim.step(.25);
+   assert.equal(first.state, 'fulfilled'); assert.equal(first.consumedUnits, 6); assert.equal(sim.state.family!.children[child.id].attendanceMinutes, 60); assert.equal(child.education, 0);
+   for (const worker of producers) { const workplace = workshops.find(workshop => workshop.id === worker.workId)!; pin(sim, controls, worker.id, workplace, workplace.door, 'work'); }
+   advance(sim, (24 - sim.state.hour + 8) * 60);
++  const priorPlayerPetitions = new Set(sim.state.culture!.petitions.filter(petition => petition.authorId === 'player').map(petition => petition.id));
++  const exactPlayerOrder = () => {
++    const added = sim.state.culture!.petitions.filter(petition => petition.authorId === 'player' && petition.topic === 'education' && !priorPlayerPetitions.has(petition.id));
++    assert.equal(added.length, 1, 'the second actual player command owns one exact petition');
++    const order = sim.state.culture!.orders.find(order => order.id === added[0].executionId && order.petitionId === added[0].id);
++    assert.ok(order, 'follow this exact player petition execution, independent of unrelated NPC order positions');
++    return order;
++  };
+   let originalHelperRejectedPartial = false;
+   try { publicEducation(context); } catch (error) {
+-    const partial = sim.state.culture!.orders.at(-1)!;
++    const partial = exactPlayerOrder();
+     if (!(error instanceof assert.AssertionError) || partial.state !== 'active' || partial.receivedUnits <= 0 || partial.receivedUnits >= 6) throw error;
+     originalHelperRejectedPartial = true;
+   }
+   assert.equal(originalHelperRejectedPartial, true, 'the untouched E1 fixture correctly rejects its unfulfilled full-material precondition'); syncControlledBornClock(context);
+-  const partial = sim.state.culture!.orders.at(-1)!;
++  const partial = exactPlayerOrder();
+   assert.equal(partial.authorizedCap, 40); close(partial.spent, 40); assert.ok(partial.receivedUnits > 0 && partial.receivedUnits < 6);
+   close(partial.receipts.reduce((sum, receipt) => sum + receipt.paid, 0), 40); close(partial.receipts.reduce((sum, receipt) => sum + receipt.quantity, 0), partial.receivedUnits);
+   for (const receipt of partial.receipts) { close(receipt.lots.reduce((sum, lot) => sum + lot.quantity, 0), receipt.quantity); close(receipt.lots.reduce((sum, lot) => sum + lot.gross, 0), receipt.paid); }

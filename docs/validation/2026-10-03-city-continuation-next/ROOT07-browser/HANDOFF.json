@@ -1,0 +1,223 @@
+{
+  "status": "FROZEN_HANDOFF_NO_FURTHER_BROWSER_SCOPES_OR_NAMESPACE_WRITES",
+  "at": "2026-10-04T02:56:34.636922+00:00",
+  "namespace": "/workspace/yunshan-work/ROOT07-browser-20261004-01",
+  "sourcePath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source",
+  "sourceManifest": "HANDOFF_SOURCE_MANIFEST.json",
+  "distManifest": "HANDOFF_DIST_MANIFEST.json",
+  "processEvidence": "handoff-final-process-observation.json",
+  "memberIndex": "ALL_FILES_SHA256.json",
+  "minimalGitOriginalsIndex": "MINIMAL_GIT_ORIGINALS.json",
+  "buildReferencedOnly": {
+    "status": "PASS",
+    "rawSHA256": "0a2841d664707bbfaa0fbfacae9690232be67b3bb4077e1ac092f8a078cd2899",
+    "startedAt": "2026-10-04T01:25:50.885680+00:00",
+    "endedAt": "2026-10-04T01:26:03.960205+00:00",
+    "rebuilt": false
+  },
+  "scopes": [
+    {
+      "name": "rendering01",
+      "status": "PASS",
+      "checks": 21,
+      "startedAt": "2026-10-04T01:29:24.094820+00:00",
+      "endedAt": "2026-10-04T01:29:57.397312+00:00",
+      "timeoutSeconds": 600,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/rendering01/run/raw.log",
+      "rawSHA256": "f267059e2c6fadff3b156b3bec76fd083609ef507141d437be420999b1c3ebae",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/rendering01/phase-receipt.json",
+      "receiptSHA256": "a287dbe6f64a26bbe410497ca0882213b5c1325594c9792384468c7fda536219",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    },
+    {
+      "name": "dom01",
+      "status": "PASS",
+      "checks": 35,
+      "startedAt": "2026-10-04T01:30:14.704053+00:00",
+      "endedAt": "2026-10-04T01:32:59.205812+00:00",
+      "timeoutSeconds": 600,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/dom01/run/raw.log",
+      "rawSHA256": "c2018b9318afd15b1925c8c9c8760654a644941e5fa40fc13a880562a4383747",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/dom01/phase-receipt.json",
+      "receiptSHA256": "c60cd56e182f30e15fe523656dcbf2eb22992292b51619efddc494c40b897e5a",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    },
+    {
+      "name": "webgl01",
+      "status": "FAIL",
+      "checks": 8,
+      "startedAt": "2026-10-04T01:33:14.535966+00:00",
+      "endedAt": "2026-10-04T01:43:12.058878+00:00",
+      "timeoutSeconds": 900,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/run/raw.log",
+      "rawSHA256": "3680816c89632e3c233a74b9bb2def0d8cbcdd5b69e614c4f7f5d5a9749a8cf7",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/phase-receipt.json",
+      "receiptSHA256": "61cdceefd9ebeee00a5c5bc8e1064e5f373db9302fde8c02a385d6bfa636560b",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0,
+      "gpuExclusive": false,
+      "concurrentBrowser": "Root world01 persistence Chromium21663 overlapped; original raw FAIL8completed/3notcompleted preserved",
+      "returnTimeoutCause": "NOT_PROVEN; no terminal full native save/time-series in original catch"
+    },
+    {
+      "name": "captures01",
+      "status": "FAIL",
+      "checks": 0,
+      "startedAt": "2026-10-04T01:43:59.827193+00:00",
+      "endedAt": "2026-10-04T01:44:08.296933+00:00",
+      "timeoutSeconds": 900,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/run/raw.log",
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/phase-receipt.json",
+      "receiptSHA256": "2bdf6d40ec1b8b6d10b2d151c26900ea8aad0e0755d990c8cf682f3e1359a2ca",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0,
+      "reason": "Official playwright-core CJS import exposes chromium under default, not named; original failed before browser launch",
+      "factualCorrection": "captures01/factual-correction.json"
+    },
+    {
+      "name": "webgl02",
+      "status": "PASS",
+      "checks": 11,
+      "startedAt": "2026-10-04T02:13:09.331418+00:00",
+      "endedAt": "2026-10-04T02:21:17.250682+00:00",
+      "timeoutSeconds": 900,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/run/raw.log",
+      "rawSHA256": "a12fd4c99e72d7ce62e4801a122244eaeb6575211263874094890ed3e956562b",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/phase-receipt.json",
+      "receiptSHA256": "41e0a76d86157e8d4cb376ff8045656f00d4d77653e432957781b3f66e54958e",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    },
+    {
+      "name": "captures02",
+      "status": "PASS",
+      "checks": 9,
+      "startedAt": "2026-10-04T02:22:08.001911+00:00",
+      "endedAt": "2026-10-04T02:26:14.075142+00:00",
+      "timeoutSeconds": 900,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/run/raw.log",
+      "rawSHA256": "c9b6a70de780ea17151b804a6d27693b9ff261777328a6c1b451f1cc7edfa802",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/phase-receipt.json",
+      "receiptSHA256": "1d16c628613ad5b5b8de66748f0a95adaa3d54d06e89288e7fe3a0da30f903c6",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    },
+    {
+      "name": "family01",
+      "status": "PASS",
+      "checks": 7,
+      "startedAt": "2026-10-04T02:42:09.789830+00:00",
+      "endedAt": "2026-10-04T02:42:19.846108+00:00",
+      "timeoutSeconds": 300,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/family01/run/raw.log",
+      "rawSHA256": "5ce03091aeeaaf94f7938a5ecebc812cbc8fe9be3019a37e1046cda8f97b8ce9",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/family01/phase-receipt.json",
+      "receiptSHA256": "cb1cf27344b05db7f2ecfcf0ce1e3a60ee7435c0fca809d23678c557b71f5ab3",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    },
+    {
+      "name": "captures03-context",
+      "status": "PASS",
+      "checks": 2,
+      "startedAt": "2026-10-04T02:43:43.077931+00:00",
+      "endedAt": "2026-10-04T02:46:16.560140+00:00",
+      "timeoutSeconds": 300,
+      "rawPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/run/raw.log",
+      "rawSHA256": "d5c85a8f87173784673b699f0b7b7eb42b5e315356f6d71ecfab5ff3899f971d",
+      "receiptPath": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures03-context/phase-receipt.json",
+      "receiptSHA256": "387d7628aae1111811c0c538908f30f934438f1df1a4737633749d926231c14c",
+      "inputCount": 241,
+      "inputsStable": true,
+      "distStable": true,
+      "ownedActiveAtEnd": 0
+    }
+  ],
+  "functionalResults": {
+    "renderingOriginal3files": {
+      "passed": 21,
+      "failed": 0
+    },
+    "originalDOM35": {
+      "passed": 35,
+      "failed": 0
+    },
+    "isolatedOriginalWebGL11": {
+      "passed": 11,
+      "failed": 0,
+      "original60secondWaitUnchanged": true
+    },
+    "familyOriginal7ControlledDOM": {
+      "passed": 7,
+      "failed": 0,
+      "readonlyNativeSaveStages": 3,
+      "independentByteExactReaders": 3
+    },
+    "opticalOriginal9PlusSupplement2": {
+      "originalScope": 9,
+      "supplementalScope": 2,
+      "total": 11,
+      "actuallyViewed": 11,
+      "originalNineUntouched": true
+    }
+  },
+  "processAtHandoff": {
+    "activeBrowserCount": 0,
+    "zombieBrowserCount": 43,
+    "ports": {
+      "4173": "FREE",
+      "4187": "FREE",
+      "4197": "FREE",
+      "4318": "FREE"
+    },
+    "remainingConcurrentCPU": {
+      "pid": 21540,
+      "name": "MainThread",
+      "state": "R",
+      "parent": 21537,
+      "group": 21540,
+      "session": 21540,
+      "startTicks": 869225
+    },
+    "note": "Root headless14 audit continues independently; not restarted/stopped/claimed complete/counted in browser evidence."
+  },
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "additionalBrowserBranches": {
+    "currentGuardianChange": "NOT_VERIFIED_STATIC_LABEL_ONLY",
+    "legacyQualifiedLabel": "NOT_VERIFIED_STATIC_LABEL_ONLY",
+    "mayorSupplementalBudget": "NOT_VERIFIED",
+    "currentRoadCrew": "NOT_VERIFIED",
+    "companyReturnFeedback": "NOT_VERIFIED"
+  },
+  "originalFailurePreservation": {
+    "webgl01": "FAIL8/3notcompleted; nonexclusive co-run retained; same original harness isolatedwebgl02PASS11 does not rewrite historical failure",
+    "captures01": "FAIL0PNG/CJS; original driver/results/raw/original cleanup-receipt/factual-correction preserved"
+  },
+  "oldFilesystemIncident": "Original /tmp PNG/raw remain LOST; recovery and fresh ROOT07 evidence are separate, never replacements.",
+  "delivery": "Parent root collects complete original namespace and publishes unified ZIP through official Library batch with actual returned IDs. This agent did not upload/helper IDs/push Git/edit production or frozen runtime/rebuild/change source controls.",
+  "scopeLimits": [
+    "Optics controlled paused production scene and same declared functionpoints; no native W/climb/transaction/work claim",
+    "Family7 imports original actual producer nine-building World/opening save/control fixtures; no regenerated24classes/artificial money/qualifications; declared controlled positions/needs/age/death boundaries remain explicit",
+    "Family seventh exactsave before death; separate three readonly exactreader stages preserve actual after-death save",
+    "Linux SwiftShader and family fixtureview60FPS are not Mac hardware/FPS evidence",
+    "Original ceiling/roof cutaway/bright interiors/sparse scene relationship remain ARTFAIL; supplementary angles do not prove interior completion"
+  ]
+}

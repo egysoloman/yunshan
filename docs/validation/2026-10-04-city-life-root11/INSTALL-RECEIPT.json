@@ -1,0 +1,107 @@
+{
+  "status": "GUARDED_INSTALLED",
+  "installedAt": "2026-10-04T10:37:13.174254+00:00",
+  "baseInputCount": 258,
+  "finalInputCount": 264,
+  "productionSourceCount": 60,
+  "changes": [
+    {
+      "path": "scripts/economy-audit.ts",
+      "beforeSHA256": "9a60a1499c865cd5d12cbd4ce4af354a5beaa0bf45d4b21adc07c51ac15fa466",
+      "afterSHA256": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae"
+    },
+    {
+      "path": "scripts/economy-observations.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "71df4886390e427a654abe406f9e086ce04cc81129d6a629ea65761512cbf0c7"
+    },
+    {
+      "path": "src/renderer.ts",
+      "beforeSHA256": "4b39d83c25501ff03bbff237974aea4f792eae50a130dae1c5cb94e463167606",
+      "afterSHA256": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e"
+    },
+    {
+      "path": "src/rendering/architectural-finishes.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937"
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "beforeSHA256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c",
+      "afterSHA256": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230"
+    },
+    {
+      "path": "src/rendering/market-goods.ts",
+      "beforeSHA256": "678be7e8020e237f39c85133fd2d9a60f58653aad29bb5376a4cbcacf045a67c",
+      "afterSHA256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    {
+      "path": "src/rendering/market-shopfront.ts",
+      "beforeSHA256": "bb5f056b77dcf8c1c05447e06eb42c95ce32dc4adad16720c834135b00b47f23",
+      "afterSHA256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    {
+      "path": "src/simulation.ts",
+      "beforeSHA256": "9ab2fb0d8aa2dbc48a172d891724ab598cd19e733775e3d600541bd24808ad44",
+      "afterSHA256": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "beforeSHA256": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa",
+      "afterSHA256": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8"
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "beforeSHA256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856",
+      "afterSHA256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "src/simulation/npc-stair-motion.ts",
+      "beforeSHA256": "d15db069009834e47d153b3de0b0f6aebb87ab5a2e19d98e09bf6dcb4cb117e1",
+      "afterSHA256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "tests/economy-observations.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "7167a3aedab97fdca48188cae3b3040b950662e5c7353046329f5bc49b1aa4b5"
+    },
+    {
+      "path": "tests/native-door-routes.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "d3e5fbdb0559d067286580fe0f54db1f3f3746ad33c2c89fb787800f514610dd"
+    },
+    {
+      "path": "tests/native-live-reader.test.ts",
+      "beforeSHA256": "4f8d6a0a1d40700a3d3434ede8c37e7195e37b0a62fa2920e478da2932ee584e",
+      "afterSHA256": "02a7a1262510dc8974f84f0f1fdcd2a98ad6de03a0beda51d8cf2d3fd4586f9f"
+    },
+    {
+      "path": "tests/public-school-arrival.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "82c24b4996c797696db7608bce02870e194adaae1d955fc3beebf8644f1eb95c"
+    },
+    {
+      "path": "tests/rendering-street-life.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "3c506ae34ebec8aa11485f0ff3f2edd4aa3225a892279d8f588f4d417621265d"
+    },
+    {
+      "path": "tests/site-fixtures.test.ts",
+      "beforeSHA256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "afterSHA256": "c1dde7e3d7c1286d07eeac4f7492ca48ed7852acc266708dd55045746cf0f5be"
+    }
+  ],
+  "completeGoal": false,
+  "sharedAfterEqualsValidatedCandidate": true,
+  "servedDist7MatchesBuild01": true,
+  "retainedOlderUnservedDistFiles": [
+    "assets/three-DfYROjRC.js",
+    "assets/index-Dm4eMIi9.js",
+    "assets/index-BH8mDJfZ.js.map",
+    "assets/index-Dm4eMIi9.js.map",
+    "assets/index-BH8mDJfZ.js",
+    "assets/three-DfYROjRC.js.map"
+  ],
+  "audit1Current": "RUNNING",
+  "originalBrowser11": "PASS"
+}

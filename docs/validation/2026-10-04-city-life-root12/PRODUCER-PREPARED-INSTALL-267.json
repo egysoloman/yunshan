@@ -1,0 +1,45 @@
+{
+  "status": "PREPARED_NOT_FINAL_VALIDATED",
+  "createdAtUtc": "2026-10-04T11:16:51.503313+00:00",
+  "source": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final",
+  "inputCount": 267,
+  "runtimeCount": 60,
+  "changes": [
+    {
+      "path": "src/simulation.ts",
+      "beforeSHA256": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a",
+      "finalPreparedSHA256": "39b445dc1554bfe3fa1f77c03adb99817d876e84fa042f2286697438c51df60d",
+      "bytes": 286677,
+      "operation": "modify"
+    },
+    {
+      "path": "tests/fixtures/native-day-writer/actual-day-writer.save.json.gz",
+      "beforeSHA256": null,
+      "finalPreparedSHA256": "4f7b9a5143af2fc110582fa310bb941a73116418dab8236ff873bf50898a4239",
+      "bytes": 494996,
+      "operation": "add"
+    },
+    {
+      "path": "tests/fixtures/native-day-writer/provenance.json",
+      "beforeSHA256": null,
+      "finalPreparedSHA256": "4310dfbf2f90fa309284d915c6db943bbb9614ce50c27a6b247ac3ecbcf55b76",
+      "bytes": 566,
+      "operation": "add"
+    },
+    {
+      "path": "tests/native-day-writer.test.ts",
+      "beforeSHA256": null,
+      "finalPreparedSHA256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1",
+      "bytes": 11597,
+      "operation": "add"
+    }
+  ],
+  "inputsPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/FINAL-PREPARED-INPUTS-267.json",
+  "inputsSHA256": "fb0b2c7c502e86667c3d32fe70244f3354909b4c45edd1eb024c2f5ac2628246",
+  "runtime60MatchesRunningCopy": true,
+  "onlyDifferenceToRunning267": "tests/native-day-writer.test.ts: pure TypeScript cursor typings, exact esbuild emitted JS proven equal",
+  "typeEquivalenceSHA256": "02683194d89ae730b636d57865e28852c1246abd09016e6d4393bf2526077a9f",
+  "sourceRunningUnmodified": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source",
+  "buildOriginalFailPreserved": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-build01",
+  "pending": "root NEW full267 natural720day/build/browser11; my original running267 writer24/native17/v1three24 closure"
+}

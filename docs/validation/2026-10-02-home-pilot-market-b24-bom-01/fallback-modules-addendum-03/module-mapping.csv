@@ -1,0 +1,9 @@
+module,house_ids,new_physical_ids,current_rough,interface,repeat_count,installs,global_ids,related_city_candidates,city_mapping
+可重复墙/墙角,"[""A03"", ""A04"", ""A05""]",[],本栋A03 483墙子件/48墙段,shared wall端点/厚.4与真门窗洞；提案标准段1.6×3.4×.4仅概念，实际按wallPanels截段,TBD,0,,,
+独立窗/玻璃金属立面,"[""A09"", ""A10"", ""R13"", ""M05""]",[],54窗洞/53玻璃；42装饰窗×9=378细件,共享窗洞尺寸/outer normal+玻璃退界；新精细mesh不改变wallPanels authority,TBD,0,,,
+大门/可换门套,"[""A06"", ""A07"", ""A08""]",[],4.8×2.8真实入口，现门框32子件/8洞组；无门扇,门底中心；frame正边接wall；门扇按铰轴正转，双叶方案≤2.4m叶宽/净高≤2.8/提案厚.2，数量TBD,TBD,0,,,
+可搬独立盆景,"[""B01"", ""B02"", ""R12""]","[""B01"", ""B02""]",本栋0；全城这两母版缺制,盆底接真实支撑；树根接土面；正端口不镜像,TBD,0,"[""ENV-097"", ""ENV-134"", ""ENV-135""]",,
+种植长槽,"[""B03"", ""R16""]","[""B03""]",旧recipe粗source可复用，新v4本栋0,实际墙架/底面/土面，不能冒认为独立罐或只复制旧坐标,TBD,0,"[""LIFE-227"", ""ENV-072"", ""ENV-073""]",,
+科技能源灯带,"[""D05""]","[""D05""]",,独立条形安装/供电state/光预算，形体不是灯笼,TBD,0,"[""BUILT-315""]","[""BUILT-117""]",PLANNED_REQUIREMENT_MAPPING_ONLY; actualgeometry/interface/notapproved
+空中连桥/悬挑廊,"[""A02"", ""A13"", ""A23"", ""R15""]","[""A23""]",,板/栏/梁/支座与新trusted profile route/access/support同数据；图不能授权通路,TBD,0,"[""BUILT-316"", ""BUILT-317""]","[""BUILT-152"", ""BUILT-206"", ""BUILT-308""]",PLANNED_REQUIREMENT_MAPPING_ONLY; actualgeometry/interface/notapproved
+真实住宅服务面板,"[""F18"", ""F19"", ""R14"", ""G01""]",[],原F18/F19本栋0；租住/rest已有真实G01桌前服务点,wallmount视觉壳参数+实际service点2m/楼层权限/余额/时数；不能另建虚假操作点,TBD,0,"[""LIFE-030""]",,

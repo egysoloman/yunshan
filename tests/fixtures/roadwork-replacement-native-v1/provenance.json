@@ -1,0 +1,54 @@
+{
+  "scope": "actual prior-candidate isolated snapshot version1 native resident roadworks producer; not a historical Git archive",
+  "producerDriver": "drivers/create-legacy-native-originals.ts",
+  "producerDriverSHA256": "ee241420d590733793dcf4dbf110d94e917d6048ce5797cfc3228bb3139b40ef",
+  "producerReceipt": {
+    "startedAt": "2026-10-04T00:35:25.472418+00:00",
+    "endedAt": "2026-10-04T00:35:30.740152+00:00",
+    "exitCode": 0,
+    "timeout": false,
+    "inputsStable": true,
+    "rawSHA256": "0394ae1cfe028440715b7cdb9dae031816fd90ce52c1257a8f8cbc181d50d8e6",
+    "ownedHeadGone": true,
+    "scope": "legacy-native-producer01",
+    "command": [
+      "node",
+      "--import",
+      "tsx",
+      "../drivers/create-legacy-native-originals.ts"
+    ]
+  },
+  "inputManifestSHA256": "80502289c1d7335aad660277683d907cefdfe858648e6e02e04f75101503499e",
+  "files": [
+    {
+      "path": "actual-continuation.json",
+      "bytes": 7844,
+      "sha256": "e8f2bfef914cb217622d921159f89461538cd8cbc7a33952f72261011fe9f4e3"
+    },
+    {
+      "path": "carry-after24.save.json",
+      "bytes": 441296,
+      "sha256": "1cb4606faf1efa1a7c3f47e531b5ad2b1110b272d9ee49f1bed61517a2331dc2"
+    },
+    {
+      "path": "carry.save.json",
+      "bytes": 418637,
+      "sha256": "9cdfc34fc36410e683b76870979fea63e6597cd0db86716e2ae4905be47866f1"
+    },
+    {
+      "path": "death-cancelled-after24.save.json",
+      "bytes": 439317,
+      "sha256": "d8571cff849cff10b78cb34926abd98907b5356259494275f66c88102b4ac78d"
+    },
+    {
+      "path": "death-cancelled.save.json",
+      "bytes": 419778,
+      "sha256": "465b92861b758222fe0925c15282004182be4c603040879333c746dc3df4b523"
+    },
+    {
+      "path": "world.json",
+      "bytes": 6923,
+      "sha256": "ee1fc84bb3cb503cc295749bd828ec63983080477e967a6070319ffb7c6e23b1"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-04T18:00:31.176598+00:00",
+  "sourceCodeChanged": false,
+  "daySourceSaveSHA256": "852dc8fc41e2ad5c2addb14fd07fba08f70828af71ea31997336e82142fa8feb",
+  "nextProofId": 46,
+  "everCreatedProofs": 45,
+  "retiredUnreferencedProofCount": 28,
+  "retainedHotProofs": 4,
+  "retainedColdProofs": 13,
+  "calibration": "归档范围明确为完整议政办理记录及其全部引用来源。原时间阶段仍退休没有关联申请/投票/任期的旧日proof，仅保留retiredProofCount；不保存其每条原文，也不复造旧存档已退休的证明。这是既有资格过期契约，未因app64归档更改。默认一日nextProofId=46：曾创建45条proof，28条旧日未引用proof退休，保留的hot4+cold13共17条；17不是全部曾创建数。完整办理/费用/选票/任期和所引用工资资格不丢，但不能称所有居民工作和无申请资格草稿的永久完整历史。",
+  "reportBeforeSHA256": "b91931405878c9a2c45906b5ec9a1d978947e38088b89f8fbadab1b6f50903d3",
+  "reportAfterSHA256": "93950385cad896f2958de0c7d73624d2faf1deb1d69a427a8ab35c8398b965d3",
+  "matrixBeforeSHA256": "4d3bd266e9432e59946a6b5c3d0e72df2a781aa5206b21baa33d801eab3c2af4",
+  "matrixAfterSHA256": "90293e077813fda194a4afe72a682402761f77edc3d6fe89a81bbb699b65e822",
+  "memoBeforeSHA256": "969d85b170c7e59770641b0fd3f56a7441a8267d24c466e1c32859523f626733",
+  "memoAfterSHA256": "82900d7a7d055237953b571dc7539d31826e687b7bd62e117dca53cf525b2ef4",
+  "memoOriginalBytesPreservedAsSuffix": true,
+  "authoritativeSourcePaths": [
+    "src/simulation/civic-staffing.ts:435",
+    "src/simulation/civic-staffing.ts:741"
+  ]
+}

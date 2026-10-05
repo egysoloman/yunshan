@@ -1,0 +1,658 @@
+[
+  {
+    "label": "elapsed-0",
+    "atUTC": "2026-10-02T15:29:39.398Z",
+    "value": {
+      "at": 257.20000000298023,
+      "url": "http://127.0.0.1:4187/?debug=1",
+      "readyState": "interactive",
+      "hidden": false,
+      "debugQueryPresent": true,
+      "debugPresent": false,
+      "debugKeys": [],
+      "worldStage": false,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "bodyTextPrefix": "",
+      "simulation": null,
+      "renderer": null,
+      "observation": {
+        "initializedAt": 73.5,
+        "rafCount": 0,
+        "intervalCount": 0,
+        "lastRAFAt": null,
+        "timeline": [
+          {
+            "label": "init-script",
+            "at": 74.6000000089407,
+            "readyState": "loading",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "DOM-stage-change",
+            "at": 77.1000000089407,
+            "readyState": "loading",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "readystatechange",
+            "at": 78.30000001192093,
+            "readyState": "interactive",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          }
+        ],
+        "longTasks": []
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4187/assets/index-DcKlDqDV.css",
+          "initiatorType": "link",
+          "duration": 106.5,
+          "transferSize": 7976
+        }
+      ],
+      "navigation": [
+        {
+          "responseEnd": 32.1000000089407,
+          "domContentLoadedEventEnd": 0,
+          "loadEventEnd": 0
+        }
+      ]
+    }
+  },
+  {
+    "label": "elapsed-1000",
+    "atUTC": "2026-10-02T15:29:47.448Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-5000",
+    "atUTC": "2026-10-02T15:29:50.465Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-15000",
+    "atUTC": "2026-10-02T15:29:57.052Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-30000",
+    "atUTC": "2026-10-02T15:30:12.059Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-60000",
+    "atUTC": "2026-10-02T15:30:42.047Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-80000",
+    "atUTC": "2026-10-02T15:31:02.052Z",
+    "error": "Error: read-only page snapshot: observer deadline 3000ms"
+  },
+  {
+    "label": "elapsed-88000",
+    "atUTC": "2026-10-02T15:31:07.086Z",
+    "value": {
+      "at": 88012.20000000298,
+      "url": "http://127.0.0.1:4187/?debug=1",
+      "readyState": "complete",
+      "hidden": false,
+      "debugQueryPresent": true,
+      "debugPresent": true,
+      "debugKeys": [
+        "world",
+        "simulation",
+        "city",
+        "controller",
+        "actions",
+        "getView",
+        "canAccessBuilding",
+        "storage",
+        "dispose"
+      ],
+      "worldStage": true,
+      "canvasCount": 2,
+      "panel": true,
+      "startupError": null,
+      "bodyTextPrefix": "云\n云山巨城\n\n一座山水之间的未来之城\n\n山河入城\n万家灯火\nLIVE\n第 1 日\n08:01\n晴\n?\n☷\n城市手册\n初抵云山，天地皆可游。\n你已抵达城中 · WASD 步行，E 使用设施 · 航空器需在停机位取得\n×\n航空器\n云游载人无人机\n\n停机坪已停稳 · 电量 100% · 0 m/s\n\n千灯市集观景机租赁点\n\n沿路导航 · 17 m\n\n这是可载人的自动驾驶观景无人机。旅行者现场租用、登机，身体随航空器移动；空中不能退出，返航落地后继续生活。\n\n◇ 商贸与生活\n千灯市集\n\n晨雾渐散，街巷间的一天正在开始。\n\n星际旅行者\n-330 / 52 / 487 m\n山城舆图\n导航 ↗\n旅人\n交通\n近区活跃\n◇\n找无人机\n人\n步行\n↗\n去机场\nⅡ\n昼夜流转\n08:01\n子夜\n晨\n午\n暮\n夜\n1×\n3×\n10×\n16×\n0 FPS · 709 draw",
+      "simulation": {
+        "tick": 8,
+        "day": 0,
+        "hour": 8.033333333333333,
+        "paused": false,
+        "speed": 1,
+        "accumulator": 0,
+        "lastSystemOrder": [
+          "time",
+          "environment",
+          "energy",
+          "traffic",
+          "people",
+          "commerce",
+          "finance",
+          "security",
+          "politics",
+          "feedback"
+        ],
+        "weather": "晴",
+        "visibility": 1,
+        "citizenCount": 616
+      },
+      "renderer": {
+        "render": {
+          "frame": 3,
+          "calls": 709,
+          "triangles": 902140,
+          "points": 804,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 507,
+          "textures": 10
+        },
+        "residency": {
+          "resident": 11,
+          "total": 482,
+          "created": 11,
+          "released": 0,
+          "maximumResident": 11,
+          "failures": 0,
+          "lastError": "",
+          "disposed": false
+        }
+      },
+      "observation": {
+        "initializedAt": 73.5,
+        "rafCount": 4,
+        "intervalCount": 9,
+        "lastRAFAt": 79704.6,
+        "timeline": [
+          {
+            "label": "init-script",
+            "at": 74.6000000089407,
+            "readyState": "loading",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "DOM-stage-change",
+            "at": 77.1000000089407,
+            "readyState": "loading",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "readystatechange",
+            "at": 78.30000001192093,
+            "readyState": "interactive",
+            "hidden": false,
+            "stage": false,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "DOM-stage-change",
+            "at": 408.30000001192093,
+            "readyState": "interactive",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "DOMContentLoaded",
+            "at": 424.70000000298023,
+            "readyState": "interactive",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "readystatechange",
+            "at": 425.30000001192093,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "load",
+            "at": 425.40000000596046,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "probe-raf",
+            "at": 661.3000000119209,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "interval",
+            "at": 674.6000000089407,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 0,
+            "panel": false,
+            "startupError": null,
+            "debugPresent": false,
+            "tick": null,
+            "paused": null,
+            "order": null
+          },
+          {
+            "label": "DOM-stage-change",
+            "at": 29544.5,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 0,
+            "paused": false,
+            "order": []
+          },
+          {
+            "label": "probe-raf",
+            "at": 29558.40000000596,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 0,
+            "paused": false,
+            "order": []
+          },
+          {
+            "label": "probe-raf",
+            "at": 44722.60000000894,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 0,
+            "paused": false,
+            "order": []
+          },
+          {
+            "label": "interval",
+            "at": 79720.10000000894,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 4,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "probe-raf",
+            "at": 79730,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 4,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 84593.90000000596,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 85074.60000000894,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 85574.80000001192,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 86074.70000000298,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 86574.70000000298,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 87074.60000000894,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          },
+          {
+            "label": "interval",
+            "at": 87574.60000000894,
+            "readyState": "complete",
+            "hidden": false,
+            "stage": true,
+            "canvasCount": 2,
+            "panel": true,
+            "startupError": null,
+            "debugPresent": true,
+            "tick": 8,
+            "paused": false,
+            "order": [
+              "time",
+              "environment",
+              "energy",
+              "traffic",
+              "people",
+              "commerce",
+              "finance",
+              "security",
+              "politics",
+              "feedback"
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startTime": 375.20000000298023,
+            "duration": 50,
+            "name": "self"
+          },
+          {
+            "startTime": 547.3000000119209,
+            "duration": 111,
+            "name": "self"
+          },
+          {
+            "startTime": 687,
+            "duration": 28857,
+            "name": "self"
+          },
+          {
+            "startTime": 29544.80000001192,
+            "duration": 5446,
+            "name": "self"
+          },
+          {
+            "startTime": 44720.60000000894,
+            "duration": 34999,
+            "name": "self"
+          },
+          {
+            "startTime": 79729.90000000596,
+            "duration": 4552,
+            "name": "self"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "http://127.0.0.1:4187/assets/index-IZpNJKPR.js",
+          "initiatorType": "script",
+          "duration": 181.59999999403954,
+          "transferSize": 229774
+        },
+        {
+          "name": "http://127.0.0.1:4187/assets/three-DfYROjRC.js",
+          "initiatorType": "other",
+          "duration": 157.59999999403954,
+          "transferSize": 127177
+        },
+        {
+          "name": "http://127.0.0.1:4187/assets/index-DcKlDqDV.css",
+          "initiatorType": "link",
+          "duration": 106.5,
+          "transferSize": 7976
+        },
+        {
+          "name": "http://127.0.0.1:4187/favicon.svg",
+          "initiatorType": "other",
+          "duration": 6,
+          "transferSize": 579
+        }
+      ],
+      "navigation": [
+        {
+          "responseEnd": 32.1000000089407,
+          "domContentLoadedEventEnd": 424.90000000596046,
+          "loadEventEnd": 425.5
+        }
+      ]
+    }
+  }
+]

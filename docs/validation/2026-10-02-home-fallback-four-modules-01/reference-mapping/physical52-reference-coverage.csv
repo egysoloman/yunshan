@@ -1,0 +1,53 @@
+﻿bom_physical_id,bom_name,original_bom_dictionary_preserved,linked_reference_ids,reference_coverage,furniture_requirement_preserved,optional,coverage_note,actual_new_installs,approved_new_mounts
+A01,地基台基/与地形接合体,True,"[""REF-A12""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A02,楼板/地层院落铺装板,True,"[""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A08"", ""REF-A10"", ""REF-A11"", ""REF-A12"", ""REF-B07"", ""REF-B14"", ""REF-B15"", ""REF-B16""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A03,承围墙/实体墙板,True,"[""REF-A02"", ""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A08""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A04,墙角收口/转角构件,True,"[""REF-A06"", ""REF-A07"", ""REF-A08""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A05,室内隔断板/隔断开口,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+A06,门套/门框构件,True,"[""REF-A05"", ""REF-A09"", ""REF-B02""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A07,可开合门扇,True,"[""REF-A05"", ""REF-B02""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A08,门/柜五金把手与合页,True,"[""REF-A05"", ""REF-B02""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A09,窗玻璃板,True,"[""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-B01""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A10,窗框/窗棂/窗楣饰带套件,True,"[""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A08"", ""REF-B01"", ""REF-B12""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A11,楼梯踏步板,True,"[""REF-B13""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A12,楼梯换向/下连接平台,True,"[""REF-B13""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A13,楼梯/洞口安全扶手栏杆,True,"[""REF-A06"", ""REF-A10"", ""REF-A11"", ""REF-B05"", ""REF-B06"", ""REF-B16""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A14,坡屋面双坡壳,True,"[""REF-A01"", ""REF-A02"", ""REF-A04""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A15,院廊平屋面,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+A16,屋面量化补缝条,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+A17,檐缘封板/檐口木条,True,"[""REF-A01"", ""REF-A02"", ""REF-A03"", ""REF-A04"", ""REF-B08""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A18,檐瓦小件,True,"[""REF-A01"", ""REF-A02"", ""REF-A03"", ""REF-A04"", ""REF-B08""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A19,屋脊封脊构件,True,"[""REF-A01"", ""REF-A02"", ""REF-A04"", ""REF-B08""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A20,檐沟/雨落管,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+A21,檐下承托/斗拱视觉母版（可选）,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,True,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+A22,门/窗楣浮雕条视觉母版（可选）,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,True,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F01,床架/床基,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F02,床垫,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F03,枕头,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F04,被褥/床罩,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F05,桌面板母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F06,桌架/侧支撑母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F07,沙发框架,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F08,沙发软垫母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F09,餐椅/工作椅母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F10,储物柜体母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F11,厨房台面/柜基,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F12,水槽/洗面盆母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F13,灶台/炉具,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F14,水龙头母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F15,坐便器,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F16,淋浴底盘/排水盘,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F17,淋浴管/花洒组件,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F18,显示器机壳/支座,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F19,显示器显示面,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+F20,室内灯具母版,True,"[""REF-A03"", ""REF-A04"", ""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A08"", ""REF-A09"", ""REF-A10"", ""REF-A11"", ""REF-B02"", ""REF-B04"", ""REF-B07"", ""REF-B09"", ""REF-B13"", ""REF-B16""]",CONDITIONAL_STYLE_LINK_ONLY,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+F21,窗帘/布帘母版,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,True,False,全部F01..F21家具/厨卫/生活设备需求继续保留；两图不是完整室内。两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+D01,入口灯笼组件,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+D02,住宅门牌框,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,两张图未提供此独立母版的可确认参考；需求原样保留，不删除、不以整图自动补齐。,0,0
+D03,墙顶木构封边/横梁,True,"[""REF-A03"", ""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A08"", ""REF-A09"", ""REF-B04"", ""REF-B07""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+D04,地层石裙饰条,True,"[""REF-A08"", ""REF-A12"", ""REF-B13""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+B01,独立盆景容器/花盆,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,保留独立盆器/盆景原需求；REF-B11只为长槽，不能充当这件精确参考。,0,0
+B02,盆景矮干/剪裁体素树冠,True,[],NOT_IN_TWO_SHEETS_REQUIREMENT_PRESERVED,False,False,保留独立盆器/盆景原需求；REF-B11只为长槽，不能充当这件精确参考。,0,0
+B03,住宅壁边长种植槽模块,True,"[""REF-A06"", ""REF-A07"", ""REF-B11""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+D05,模块能源灯带/科技光条,True,"[""REF-A01"", ""REF-A02"", ""REF-A04"", ""REF-A05"", ""REF-A06"", ""REF-A07"", ""REF-A09"", ""REF-A10"", ""REF-A11"", ""REF-B01"", ""REF-B02"", ""REF-B07"", ""REF-B08"", ""REF-B10"", ""REF-B15"", ""REF-B16""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0
+A23,空中连桥/悬挑廊承力梁母版,True,"[""REF-A10"", ""REF-A11"", ""REF-B04"", ""REF-B16""]",CONDITIONAL_STYLE_LINK_ONLY,False,False,参考联系仅风格/参数或装配依赖；无精确fit/安装证明。,0,0

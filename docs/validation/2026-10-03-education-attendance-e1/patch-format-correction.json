@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "atUTC": "2026-10-03T05:52:36.204301+00:00",
+  "kind": "Patch serialization format correction only. No source/runtime/test input edits or reruns.",
+  "sourceRoot": "/tmp/yunshan-education-course-revision04-17-01/frozen/source",
+  "sourceManifestSHA": "b8d5209b0629a0342aaf507b9ca008689557f3cb7570260e6fa769d0ce0be6f9",
+  "originalFullPatch": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/frozen/education-course-from17.patch",
+    "sha256": "19b7d93b81db646035d28f76cc79c754b7fa037ac2e80783ec0fa34fcc818d78",
+    "retainedUntouched": true,
+    "defect": "Two original genuine JSON fixtures have no terminal newline; difflib output lacked standard no-newline markers and concatenated the next diff header."
+  },
+  "canonicalFullPatch": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/reviewable-final/education-course-from17.patch",
+    "sha256": "118c7f49c4ec8cf8bb25104abb7aa9724f00afc3f2929e13a6b97d49fcedab1a"
+  },
+  "noNewlineMarkersForOriginalBytes": [
+    "tests/fixtures/education-different-start.save.json",
+    "tests/fixtures/education-same-start.save.json"
+  ],
+  "runtimeEducationSHA": "23fcd8245af65bba92d00a04ab8653b8c30c3d21caa03610692c177a3ea9bafa",
+  "executedSource125Unchanged": true,
+  "root18GuardCopiedSourcesDirectly": "Parent reports source125/shared120exec exact; patch formatting did not feed those copies.",
+  "runtimeEvidenceIndex": {
+    "path": "/tmp/yunshan-education-course-revision04-17-01/run/evidence-index-final.json",
+    "sha256": "6cf30a1ed8ea201a32f513b0add2ad73cfe3045455288da92684daae73863cb6"
+  }
+}

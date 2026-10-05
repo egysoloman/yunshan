@@ -1,0 +1,265 @@
+{
+  "at": "2026-10-04T02:30:15.663548+00:00",
+  "status": "PASS_ORIGINALS_VALIDATED",
+  "captureResultSHA256": "ae5667a45ed6337b3c7ce7623f70173fef4b9f36f55ed6629c581694034930bb",
+  "phaseReceiptSHA256": "1d16c628613ad5b5b8de66748f0a95adaa3d54d06e89288e7fe3a0da30f903c6",
+  "servedBundleSHA256": "409236890d3388d0338532a78061913fd22867672fb26a7efb719210fe211063",
+  "inputCount": 241,
+  "exactFrozenInputs": true,
+  "captures": [
+    {
+      "name": "spawn-day",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/spawn-day.png",
+      "pngSHA256": "944b5995abfe6a731d68efc047890d5868307711e5e790073e77688e023f1930",
+      "pngBytes": 626434,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "da5622ffe16f7545f57a1790092d77c9bc4157e3d5517817cd476791291d4ad8",
+      "actuallyViewed": true,
+      "visualFinding": "桥面和深色檐底遮住上部大面积天空；道路/砖铺装可见，墙体和标识仍偏块状，生活尺度细节不足。",
+      "preCanvasResolution": [
+        1440,
+        900
+      ],
+      "preResolutionScale": 1,
+      "postResolutionScale": 1,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "spawn-night",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/spawn-night.png",
+      "pngSHA256": "188ba7ec4b0fcc9d5a4e4c396b6db22f74a4e8f67454edd1762ee4fec83a9464",
+      "pngBytes": 553185,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "5274acdeec19e50f66a7435b15a82b0406b08aba6bf9668b718ba1672c118662",
+      "actuallyViewed": true,
+      "visualFinding": "固定同机位夜景明显转暗，路面和右侧墙体落入蓝黑区域，仅少数灯块可辨；未达到参考图细密灯火与可读街景。",
+      "preCanvasResolution": [
+        1324,
+        828
+      ],
+      "preResolutionScale": 0.92,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "overview-day",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/overview-day.png",
+      "pngSHA256": "8fef56ae2068349d047db869a569b99719ca98daa6e47eb37ad1b3b6258be0b4",
+      "pngBytes": 935855,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "51432bafbe573058bf6bd756894897a896f1e69a601af4fac2bc3daf8152fd8b",
+      "actuallyViewed": true,
+      "visualFinding": "可见多峰、多台地、溪流与架空路线，建筑密度已形成；大片裸台地/绿坡、重复浅色塔体、软糊的远景和缺少城市主次层级仍明显。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "core-waterfall",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/core-waterfall.png",
+      "pngSHA256": "95a4bcef17dd46e7d7af98be1f5d8a7abfe1472a10536bf82de13c6f61eeaa0d",
+      "pngBytes": 1066004,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "d7b1b06285acdf4d5e9f1ce744d0da17186455274cb6026b73cc925abe679366",
+      "actuallyViewed": true,
+      "visualFinding": "中心分层地标、白色落瀑及下游蓝色水道可见；瀑布单薄，山体台阶/裸坡和方块树冠突出，仍缺参考图深谷与丰富崖壁/水景关系。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "market-street",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/market-street.png",
+      "pngSHA256": "aab07af49d2d14f73460eaf99d8d54da58df34280f328d01c553616915aa3f2a",
+      "pngBytes": 804943,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "6b434a3b9a6836a52bf5f992a4bc388454c95684748d25a401b176ddca4ae5fb",
+      "actuallyViewed": true,
+      "visualFinding": "实际街区门廊、木柱、瓦檐、窗格和铺装可见；空白墙/空地较多，连续商铺招牌、货架陈列和街面生活密度不足。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "residential-first-person",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/residential-first-person.png",
+      "pngSHA256": "d334e4ebeada23d91e1b4f0f6c077edd028f60269106354958d45c7131dce637",
+      "pngBytes": 623332,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "275d6c573ebbb42a9d8cd8f81f2536983afef4edac62e3b8a73abe6471f12ceb",
+      "actuallyViewed": true,
+      "visualFinding": "实际住宅庭院、门廊、两层窗格/屋顶可辨；材质和细部重复，庭院空、绿化少，近处下沿桥/边沿遮挡。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "commercial-skyline",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/commercial-skyline.png",
+      "pngSHA256": "e6016967831ac52b24b84bf6fa96d3f310ec926181ed4df2856f4fcc19adf887",
+      "pngBytes": 1291094,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "cd179127d636bf0cad2804c9670755e77762836d7b5b03ea390ab783cab1f967",
+      "actuallyViewed": true,
+      "visualFinding": "实际高楼群在山谷与河道上形成不同高度；外观仍主要重复浅色直筒塔体，近距离商业门面与中式金属玻璃细节未由此远景证明。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": null,
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "commercial-ground-bank-reception",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/commercial-ground-bank-reception.png",
+      "pngSHA256": "e4f94ab573218b5d8cf4bf8b316eabe685a1ce200eefa3879ee27ea7a18744ef",
+      "pngBytes": 307044,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "a44ae5ae6e7d316ccc0698568ab89f240d14bc798e0bbb78f2a31b5029bf7c58",
+      "actuallyViewed": true,
+      "visualFinding": "真实一层接待用途与银行账本界面可读；相机向下贴近浅色柜台，柜台占画面主体且室内过亮，空间/家具整体关系未能清晰展示。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": "market-b35",
+      "controllerFloor": 0,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    },
+    {
+      "name": "commercial-first-office-floor",
+      "originalPNG": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/capture-originals/commercial-first-office-floor.png",
+      "pngSHA256": "986fc507e965c3b25ed433892714a0522b936349036fb9ddad15546f04f8085c",
+      "pngBytes": 304192,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "metadataSHA256": "79f2366657c70e1e1d3af14f3bab24477cc3293b58a2d803ac662cdaceabd96b",
+      "actuallyViewed": true,
+      "visualFinding": "真实中文三层记账结算办公室及当前位置匹配工作点；棕色工作台占主体，室内布局/桌椅关系不清，仍偏亮。",
+      "preCanvasResolution": [
+        936,
+        585
+      ],
+      "preResolutionScale": 0.65,
+      "postResolutionScale": 0.65,
+      "controllerInsideId": "market-b35",
+      "controllerFloor": 2,
+      "qualifications": {
+        "role": "traveler",
+        "identities": [
+          "traveler"
+        ],
+        "money": 600,
+        "bankBalance": 0
+      }
+    }
+  ],
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "scope": "Controlled optical inspection of the actual ROOT07 production scene, Linux Chromium SwiftShader. Six fixed poses retain the earlier recovery coordinates. Three additional views derive from actual commercial buildings. Simulation is paused and controller frame stepping is pinned only in this isolated diagnostic page. Bank/office entry invokes the unchanged production interaction from a declared controlled door station; floor station is a declared actual accessible service/work point. No native walk from spawn, climb, banking transaction, paid work, occupancy, Mac hardware, FPS, or ART acceptance is inferred.",
+  "dynamicResolution": "PNG remains1440x900 but production internal canvas scales adaptively1→.65; preserve actual metadata. Not all scenes rendered internally1440x900.",
+  "bankOfficeScope": "Original interaction at declared controlled door station; then actual service/work-point station. No natural W/climb, no transaction, no work, no money/role/identity fabrication. All scene setup fields remain in original metadata.",
+  "untestedAdditionalUI": [
+    "mayor supplemental budget branch",
+    "current crew/replacement branch",
+    "company return feedback branch"
+  ],
+  "oldLoss": "Lost /tmp artifacts remain LOST; these nine originals are new ROOT07 capture02 evidence."
+}

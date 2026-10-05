@@ -1,0 +1,43 @@
+{
+  "scope": "One new original revision03 ZIP create; not replacing or reuploading revision02.",
+  "localFile": "/tmp/yunshan-home-pilot-bom-01/market-b24-home-bom-revision03.zip",
+  "bytes": 8442241,
+  "sha256": "d0b6ea46ae156343518bc46f40d733de48941e9b7e3c1c5407c9c141b1e55ebf",
+  "upload": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "operation": "create_library_file",
+      "status": "succeeded",
+      "path": "/market-b24-home-bom-revision03.zip",
+      "file_id": "file_000000007f5c81f6a5da3e69891a1483",
+      "library_file_id": "libfile_c09c6cd169a481918d809c2f4210c1b6",
+      "file_name": "market-b24-home-bom-revision03.zip",
+      "current_version_number": 0,
+      "restored_from_version_number": null,
+      "xattrs": [
+        {
+          "name": "user.library-file-version",
+          "value": "0"
+        }
+      ],
+      "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+      "mime_type": "application/zip",
+      "library_artifact_type": "other",
+      "file_size_bytes": 8442241,
+      "external_connectors_accessed": false
+    },
+    "isError": false
+  },
+  "helper": {
+    "chunk_id": "eeba1e",
+    "wall_time_seconds": 0.159872625,
+    "exit_code": 0,
+    "original_token_count": 17,
+    "output": "/tmp/yunshan-home-pilot-bom-01/market-b24-home-bom-revision03.zip\n"
+  }
+}

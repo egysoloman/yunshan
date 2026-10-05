@@ -1,0 +1,54 @@
+✔ onsite120 actual minutes finish once; partial new saves resume byte-exact for24 ticks (4132.087828ms)
+✔ leave/return pauses without historical catchup; displaytime and repeated people phase do not add labour (2288.143953ms)
+✔ real paid-work final phase cannot also research; terminal history releases the next phase (1197.101918ms)
+✔ newresearch admission after real work completion ignores spent phase latch and has zero instant labor (1010.253678ms)
+✔ one player phase is shared across sectors rather than credited once per job (530.952133ms)
+✔ real different-start player jobs remain feasible and resume24 completed ticks byte-exact (3141.00784ms)
+▶ death, leaving boundfloor, lost role and urgent needs cannot advance a funded job
+  ✔ dead (518.133663ms)
+  ✔ other valid lab floor (572.586179ms)
+  ✔ lost scientific identity (604.668858ms)
+  ✔ hunger (546.187053ms)
+✔ death, leaving boundfloor, lost role and urgent needs cannot advance a funded job (2243.042132ms)
+▶ actual lab body and ACL guards reject without money or save mutation
+  ✔ feet (32.025617ms)
+  ✔ voxel (22.644417ms)
+  ✔ permission (22.085834ms)
+✔ actual lab body and ACL guards reject without money or save mutation (77.463857ms)
+✔ NPC finance start spends its own200 and grants none of the already elapsed finance tick (1160.81589ms)
+✔ schema-valid existing zero-rate accrual emits positive real minutes and research uses minutes, not amount (1124.742979ms)
+✔ ACTIVE actual work conflicts, while paused offsite/terminal history and stale service pointers do not permanently block (19.409674ms)
+▶ bad markers/actor/lab/floor/progress/future cursor are rejected atomically; leaving valid pending saves is allowed
+  ✔ partial runtime (31.504606ms)
+  ✔ partial job (32.872413ms)
+  ✔ unknown actor (39.212818ms)
+  ✔ unknown lab (35.99834ms)
+  ✔ outside floor (40.470456ms)
+  ✔ progress mismatch (28.200531ms)
+  ✔ future cursor (31.226395ms)
+  ✔ historical cursor (28.121958ms)
+✔ bad markers/actor/lab/floor/progress/future cursor are rejected atomically; leaving valid pending saves is allowed (898.888489ms)
+✔ old-schema pending research is migrated once and retains its historical timer/account contract (2080.24963ms)
+﹣ actual old14 command save imports with grandfather120 and one-time metadata migration (0.06674ms) # SKIP
+﹣ actual old14 command legacy+new mixed research preserves original investment and24 exact continuation (0.148246ms) # SKIP
+✔ a provider-supported clear table top is not newly banned as an occupied fixture (606.177335ms)
+✔ support alone cannot grant raised feet whose real1.72m head intersects an upper slab (28.034539ms)
+✔ funded research cannot finish merely by leaving for its 120-minute deadline (2238.20748ms)
+▶ all visual tiers complete the same120 real research minutes and keep their original tier
+  ✔ active (2594.122896ms)
+  ✔ regional (1691.531013ms)
+  ✔ statistical (1466.206211ms)
+✔ all visual tiers complete the same120 real research minutes and keep their original tier (5752.996468ms)
+✔ statistical pending task new save resumes24 completed ticks byte-exact (2516.773382ms)
+✔ first statistical task flush retains pending needs/wages but clips research before its actual start (583.51053ms)
+✔ first flush daily-cap front segment cannot borrow old wages as newest research minutes (677.540421ms)
+✔ same/different start pending actor capacity must reject coordinated excess minutes atomically (1238.788818ms)
+✔ actual public education attendance and funded research cannot spend the same NPC minute twice (1124.221351ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 35057.678552

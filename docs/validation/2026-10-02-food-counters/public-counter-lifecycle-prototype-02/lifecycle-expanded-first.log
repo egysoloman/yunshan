@@ -1,0 +1,59 @@
+✔ paid original attendance can be saved after setting the visible clock back before 17:00 (846.357862ms)
+✖ real two-official cash reservation creates day1 original assignments; next day continues new segment without erasing paid day0 (502.528714ms)
+✔ handover requires actual same-site two original workers; each spends one minute and keeps goods, jobs, pay rate (214.434287ms)
+✔ leaving a pending handover pauses actual transfer and cancellation retains every already earned minute (197.579783ms)
+✔ new handover cannot borrow absent staff, fake emit payouts or consumed original daily minutes (262.484875ms)
+✖ closed period, day cap, future-plan and handover mutations reject without changing the destination (252.786207ms)
+✔ real old v1 paid snapshot migrates restricted old evidence without guessing paid history and renews only on the next original day (234.295232ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 5
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2940.870701
+
+✖ failing tests:
+
+test at tests/food-distribution-lifecycle.test.ts:1:5572
+✖ real two-official cash reservation creates day1 original assignments; next day continues new segment without erasing paid day0 (502.528714ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-lifecycle-prototype-20261002/tests/food-distribution-lifecycle.test.ts:60:69)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/food-distribution-lifecycle.test.ts:1:11903
+✖ closed period, day cap, future-plan and handover mutations reject without changing the destination (252.786207ms)
+  AssertionError [ERR_ASSERTION]: erased formal plan
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-lifecycle-prototype-20261002/tests/food-distribution-lifecycle.test.ts:98:84)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

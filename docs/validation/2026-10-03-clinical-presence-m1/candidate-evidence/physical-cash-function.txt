@@ -1,0 +1,10 @@
+export function cash(sim: Simulation): number {
+  const s = sim.state, e = s.extension!;
+  return s.treasury + runtime(sim).taxes + s.player.money + s.banking!.cash + s.banking!.legacyInvestmentCash +
+    s.citizens.reduce((sum, person) => sum + person.money, 0) +
+    s.shops.filter(shop => !e.companies.some(company => company.buildingId === shop.buildingId)).reduce((sum, shop) => sum + (shop.cash ?? 0), 0) +
+    e.companies.reduce((sum, company) => sum + company.capital, 0) + e.organizations.reduce((sum, organization) => sum + organization.funds, 0) +
+    s.family!.pregnancies.reduce((sum, pregnancy) => sum + pregnancy.escrow, 0) +
+    s.family!.households.reduce((sum, account) => sum + account.balance, 0) +
+    (s.playerLabor?.job?.escrow ?? 0) + s.clinical!.orders.reduce((sum, order) => sum + order.escrow, 0);
+}

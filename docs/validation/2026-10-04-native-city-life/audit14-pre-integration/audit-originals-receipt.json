@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-04T07:11:11.425326+00:00",
+  "producer": "/root",
+  "status": "EXACT_ORIGINALS_COPIED",
+  "immutableRuntimeCommit": "c7f300e21cea6c8badfc6f190a28f9d08bbb1a03",
+  "runtimeInputs": 244,
+  "new255InputIntegrationCovered": false,
+  "files": {
+    "root09-14d.json": {
+      "origin": "source/artifacts/root09-post-stair-economy-14d.json",
+      "bytes": 253995,
+      "sha256": "ae255725725af65a10892d9b8d8c4311c2df96e8f546cd639f7b6fed70682a59"
+    },
+    "root09-14d-final.save.json": {
+      "origin": "source/artifacts/root09-post-stair-economy-14d-final.save.json",
+      "bytes": 3650985,
+      "sha256": "2cdc7f0990d502086e221243fd876350cb0ee37211389b6a6cceab10418b78ca"
+    },
+    "raw.log": {
+      "origin": "economy14d01/raw.log",
+      "bytes": 45911,
+      "sha256": "bab3e31f7deddb3d8d540959304efe24befb6b0ebf2d38069d1c26e2c61b9aed"
+    },
+    "receipt.json": {
+      "origin": "economy14d01/receipt.json",
+      "bytes": 782,
+      "sha256": "5e1b6de43603da7d79ef4e99dd7c7f72649915eb3ab495f2bbdfd74f7df06ebb"
+    },
+    "FINAL-HANDOFF.json": {
+      "origin": "FINAL-HANDOFF.json",
+      "bytes": 2793,
+      "sha256": "22a5bc0821d46b60aa38e6b7aeac3a73641c6c043bdb754fe651698e834fbcfe"
+    },
+    "frozen-inputs.json": {
+      "origin": "frozen-inputs.json",
+      "bytes": 27475,
+      "sha256": "9ec96d49f3e0286879a103896a96eba460025ff13f48a1ba29715a74bf139cf3"
+    },
+    "root09-audit-14d.png": {
+      "origin": "figures02/root09-audit-14d.png",
+      "bytes": 259904,
+      "sha256": "50502e72a845872b9ef5f708be7d8b2798473435e117f38e74a5cf94a25ecd5f"
+    },
+    "root09-audit-14d.pdf": {
+      "origin": "figures02/root09-audit-14d.pdf",
+      "bytes": 56971,
+      "sha256": "b2add6c74dddd1f24e69d9451a9d45b5db4881580cfe73a99485e9955a6dbd72"
+    },
+    "root09-audit-14d-data.csv": {
+      "origin": "figures02/root09-audit-14d-data.csv",
+      "bytes": 2448,
+      "sha256": "b075da5678cef5b0d93425319e73d12447a4ae0f0b3e186ad3a1e975bbbc2390"
+    },
+    "figure-receipt.json": {
+      "origin": "figures02/figure-receipt.json",
+      "bytes": 804,
+      "sha256": "aafc51777bc20bd64e6af8ed6cecc1a28edbad4a2d39a27140419b64ec07aefc"
+    }
+  },
+  "conclusions": {
+    "npcSurvival": "616/616;0deaths;original NPC assertion PASS",
+    "idlePlayer": "dead;no pre-death observer;not covered by NPC assertion",
+    "treasuryInitial": 80000,
+    "treasuryFinal": 20519.89905836199,
+    "treasuryChangePercent": -74.35012617704751,
+    "financialConservation": "original cash/fiscal/wage/research guards PASS",
+    "economicSustainability": "NOT_ESTABLISHED;steadyStateEstablished=false",
+    "save": "true complete terminal immediate+24 actual ticks byte exact"
+  },
+  "libraryUploaded": false,
+  "completeGoal": false
+}

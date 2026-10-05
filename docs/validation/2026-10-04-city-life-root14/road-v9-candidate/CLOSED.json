@@ -1,0 +1,39 @@
+{
+  "status": "CLOSED_GEOMETRY_EVIDENCE_PASS_TRANSPORT_PRODUCT_BLOCKED",
+  "closedAt": "2026-10-04T17:09:46.506655+00:00",
+  "inputCount": 319,
+  "sourceCount": 77,
+  "fileCountExcludingSelfAndManifest": 3275,
+  "regularBytesExcludingSelfAndManifest": 407611759,
+  "manifestSHA256": "5e49bf2b0fc67161990dd7ba69683d7548c295ddd5e000bcf7ae756c463f125e",
+  "reportSHA256": "46abbd8f00ab0f1ba2366c61c8cd70cb6d58faca90c9855eac226a301baa0068",
+  "handoffSHA256": "b50127b28c065f3d756076efe2e02c47f6fdf2d3a4b26c60d30c423fe53c9756",
+  "sourceCheckpointSHA256": "c4a293871d90f1dd43a40bcfc9dc04d07a6d44fc5c2699b844ade5f2e4bb8661",
+  "archives": [
+    {
+      "path": "/workspace/yunshan-work/ROOT14-station-solid-implementation-20261004-01/delivery/ROOT14-v9-final-source.tar.gz",
+      "sha256": "40f00405fa6e18d4121ab10138c0d05cfe18285b0f6a85c55a4be28b68ef4a74",
+      "bytes": 11203324,
+      "members": 319,
+      "duplicateByteExactInternalHardlinks": 1,
+      "verification": "Stream-read all regular member bytes, resolve earlier internal hardlinks, every member SHA matched exact original. No external links or symlinks."
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT14-station-solid-implementation-20261004-01/delivery/ROOT14-v9-full-original-evidence.tar.gz",
+      "sha256": "12493d2ecc8dfdd04531d349091f726181cce59dff90d3b90a239be009b18ec1",
+      "bytes": 13035088,
+      "members": 2945,
+      "duplicateByteExactInternalHardlinks": 2525,
+      "verification": "Stream-read all regular member bytes, resolve earlier internal hardlinks, every member SHA matched exact original. No external links or symlinks."
+    }
+  ],
+  "all10ScopesStableAndOwnedClosed": true,
+  "sharedRootOrPriorClosedEdited": false,
+  "productDefaultChanged": false,
+  "newBerthsInstalled": false,
+  "transportStateOrV9FingerprintImplemented": false,
+  "buildSimGPUExecuted": false,
+  "libraryUploaded": false,
+  "libraryId": null,
+  "next": "NEW independent engineering namespace on root next exact accepted304 native4/default6 baseline; do not overwrite this CLOSED graph or failures."
+}

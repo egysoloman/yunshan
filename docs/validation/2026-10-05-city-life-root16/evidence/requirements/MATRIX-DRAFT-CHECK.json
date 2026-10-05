@@ -1,0 +1,85 @@
+{
+  "idCount": 38,
+  "sameOrderAndIdsAsROOT15": true,
+  "everyROOT13OriginalRequirementPreserved": true,
+  "everyROOT15CompleteRequirementPreserved": true,
+  "everyROOT15RemainingVerbatimPreservedAsHistoricalRecord": true,
+  "everyROOT13MissingVerbatimPreservedAsHistoricalRecord": true,
+  "medicalAtDraftFreeze": "NEW512_NOT_RUN",
+  "newSimulationRunsByThisTask": 0,
+  "sharedWritesByThisTask": 0,
+  "publicationByThisTask": 0,
+  "legacyLinksResolvedAtPlannedFinalLocation": [
+    {
+      "target": "../2026-10-04-city-life-root13/SYSTEM-MATRIX-asof1439.csv",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root14/REPORT.md",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root14/REQUIREMENTS-MATRIX.md",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/REPORT.md",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/REQUIREMENTS-MATRIX.md",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/evidence/gift-final-integration/build01/receipt.json",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/evidence/gift-final-integration/city-life-default-day01/receipt.json",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/evidence/gift-final-integration/education-actual01/original-artifacts/PASS-summary.json",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/evidence/gift-final-integration/ui01/original-artifacts/ui-results.json",
+      "exists": true
+    },
+    {
+      "target": "../2026-10-04-city-life-root15/evidence/suite-extension-diagnosis/REPORT.md",
+      "exists": true
+    }
+  ],
+  "files": [
+    {
+      "path": "/workspace/yunshan-work/ROOT16-requirements-20261005-01/REQUIREMENTS-MATRIX.md",
+      "bytes": 51681,
+      "lines": 112,
+      "sha256": "6310a29e90aa828d6f540906bfe20ab49574baad252c80f147c7212ef5ffdca2"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-requirements-20261005-01/ROOT16-MATRIX-38-DRAFT.csv",
+      "bytes": 49435,
+      "lines": 39,
+      "sha256": "0530eef37b18d7ffb05b5fe3e8f23c13eae8b8ed3f4d96c701fabfcad334b7f3"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-requirements-20261005-01/MATRIX-LINK-MAP.json",
+      "bytes": 2822,
+      "lines": 58,
+      "sha256": "1d961e601be3da283d248ef57c84c0197968c54fa7ea42710b2e064cc03f9696"
+    }
+  ],
+  "mainTableColumnsEach": [
+    7
+  ],
+  "independentReview": {
+    "reviewerTask": "memo_early_read",
+    "reviewedMainBeforeAppendixSHA256": "f7318ea541c25b3aec385859ff15ed2a790d482499423aab37ea7a9fc40923f3",
+    "mainUnchangedAfterAppendix": true,
+    "findings": [],
+    "scope": "38 IDs/order, original+ROOT15 requirements/remaining, FOOD/medical boundaries, old links and three artifact SHA"
+  },
+  "historicalROOT13AppendixRows": 38
+}

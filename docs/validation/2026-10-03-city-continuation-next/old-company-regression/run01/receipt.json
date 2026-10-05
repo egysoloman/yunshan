@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-04T01:26:47.110079+00:00",
+  "endedAt": "2026-10-04T01:39:18.241203+00:00",
+  "argv": [
+    "env",
+    "OLD_COMPANY_SOURCE=/workspace/yunshan-work/old-company-regression-20261004-01/source",
+    "OLD_COMPANY_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/run01/artifacts",
+    "node",
+    "--import",
+    "tsx",
+    "--import",
+    "/workspace/yunshan-work/old-company-regression-20261004-01/observe.mjs",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=^(?:v4\\ founding\\ denies\\ a\\ supported\\ far\\ room\\ and\\ its\\ exterior\\ entrance\\ before\\ spending\\ qualified\\ personal\\ cash|v4\\ expansion\\ and\\ hiring\\ use\\ the\\ real\\ company\\ work\\ point\\ without\\ free\\ materials,\\ payroll\\ or\\ completion|v4\\ financial\\ fixture\\ uses\\ a\\ real\\ bank\\ service\\ point\\ for\\ listing\\ and\\ finite\\ issued\\ share\\ exchange|v4\\ acquisition\\ denies\\ another\\ room\\ and\\ settles\\ actual\\ shareholders\\ at\\ the\\ target\\ work\\ point)$",
+    "tests/v4-extensions.test.ts"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "1ed7bb00f34277399175b12d46ab2bb746665bff20c94857a6180994ea083a93",
+  "ownedPid": 20252,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 20260,
+      "state": "Z",
+      "parent": 1,
+      "group": 20252,
+      "session": 20252,
+      "startTicks": 803188
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

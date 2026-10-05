@@ -1,0 +1,743 @@
+{
+  "frozenAtUTC": "2026-10-04T03:01:54.642726+00:00",
+  "scope": "READ_ONLY_SOURCE_AND_ENDED_ORIGINAL_RECEIPTS_NEW_NAMESPACE_ONLY",
+  "sharedWrites": false,
+  "gitWrites": false,
+  "projectRunsStarted": 0,
+  "browserRunsStarted": 0,
+  "performanceRunsStarted": 0,
+  "archiveProduced": false,
+  "uploads": 0,
+  "LibraryID": null,
+  "sourceFiles": [
+    {
+      "relativePath": "src/types.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/types.ts",
+        "bytes": 14320,
+        "sha256": "1517b9e21582269de9b7d352d297a71d732771ee8b08501f975222c40303ee1e"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/types.ts",
+        "bytes": 14320,
+        "sha256": "1517b9e21582269de9b7d352d297a71d732771ee8b08501f975222c40303ee1e"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/types.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation.ts",
+        "bytes": 260349,
+        "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation.ts",
+        "bytes": 260349,
+        "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/world.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/world.ts",
+        "bytes": 54482,
+        "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/world.ts",
+        "bytes": 54482,
+        "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/world.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/roads.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/roads.ts",
+        "bytes": 27340,
+        "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/roads.ts",
+        "bytes": 27340,
+        "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/roads.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/persistence/world-layout.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/persistence/world-layout.ts",
+        "bytes": 5191,
+        "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/persistence/world-layout.ts",
+        "bytes": 5191,
+        "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/persistence/world-layout.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/shop_lifecycle.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/shop_lifecycle.ts",
+        "bytes": 70212,
+        "sha256": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/shop_lifecycle.ts",
+        "bytes": 70212,
+        "sha256": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/shop_lifecycle.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/family.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/family.ts",
+        "bytes": 79920,
+        "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/family.ts",
+        "bytes": 79920,
+        "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/family.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/family-education.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/family-education.ts",
+        "bytes": 29399,
+        "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/family-education.ts",
+        "bytes": 29399,
+        "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/family-education.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/education.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/education.ts",
+        "bytes": 46386,
+        "sha256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/education.ts",
+        "bytes": 46386,
+        "sha256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/education.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/roadworks.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/roadworks.ts",
+        "bytes": 64090,
+        "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/roadworks.ts",
+        "bytes": 64090,
+        "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/roadworks.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/road-demands.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/road-demands.ts",
+        "bytes": 12686,
+        "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/road-demands.ts",
+        "bytes": 12686,
+        "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/road-demands.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/power.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/power.ts",
+        "bytes": 59025,
+        "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/power.ts",
+        "bytes": 59025,
+        "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/power.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/pathology.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/pathology.ts",
+        "bytes": 31665,
+        "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/pathology.ts",
+        "bytes": 31665,
+        "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/pathology.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/hygiene.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/hygiene.ts",
+        "bytes": 50182,
+        "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/hygiene.ts",
+        "bytes": 50182,
+        "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/hygiene.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/hygiene-public.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/hygiene-public.ts",
+        "bytes": 20880,
+        "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/hygiene-public.ts",
+        "bytes": 20880,
+        "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/hygiene-public.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/clinical.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/clinical.ts",
+        "bytes": 44993,
+        "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/clinical.ts",
+        "bytes": 44993,
+        "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/clinical.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/extensions.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/extensions.ts",
+        "bytes": 92122,
+        "sha256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/extensions.ts",
+        "bytes": 92122,
+        "sha256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/extensions.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/governance.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/governance.ts",
+        "bytes": 28875,
+        "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/governance.ts",
+        "bytes": 28875,
+        "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/governance.ts",
+      "readStable": true
+    },
+    {
+      "relativePath": "src/simulation/culture.ts",
+      "role": "STATIC_REVIEW_ONLY_NOT_NEW_AS_RUN",
+      "origin": {
+        "path": "/workspace/yunshan/src/simulation/culture.ts",
+        "bytes": 66849,
+        "sha256": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa"
+      },
+      "frozenRoot07": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/source/src/simulation/culture.ts",
+        "bytes": 66849,
+        "sha256": "76d70e9b788c9e22eb5f1137a057c17078afa991b7a1193908dff3109c9569fa"
+      },
+      "matchesFrozenRoot07": true,
+      "copiedRelativePath": "source-at-read/src/simulation/culture.ts",
+      "readStable": true
+    }
+  ],
+  "endedOriginalRuns": [
+    {
+      "name": "build01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/build01/receipt.json",
+        "bytes": 656,
+        "sha256": "d55ef87475f8635fb961600cc78102a117498c8a1c8789158cbb62ad3d772b32"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/build01/raw.log",
+        "bytes": 1060,
+        "sha256": "0a2841d664707bbfaa0fbfacae9690232be67b3bb4077e1ac092f8a078cd2899"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/build01.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T01:25:50.885680+00:00",
+      "endedAt": "2026-10-04T01:26:03.960205+00:00",
+      "inputsStable": true,
+      "observedCounts": {},
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "systems01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/systems01/receipt.json",
+        "bytes": 1698,
+        "sha256": "acd8c069b0f9096b5ae57613929dc6b7bfdb4c8fa91395fd5d24992e478cdb97"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/systems01/raw.log",
+        "bytes": 62115,
+        "sha256": "f78382e4a21ff7fd4461b9398cf5e3097910c84ac975c63275bd474fe6bd7c3d"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/systems01.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "startedAt": "2026-10-04T01:38:24.558093+00:00",
+      "endedAt": "2026-10-04T01:54:01.142303+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 330,
+        "pass": 324,
+        "fail": 1,
+        "skipped": 5
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "education01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/education01/receipt.json",
+        "bytes": 967,
+        "sha256": "8f66206e1721f8d3bb81b5a04506b58510c29a2b195576a7276546b2d3fbc7ca"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/education01/raw.log",
+        "bytes": 10350,
+        "sha256": "502f93d6ca63ad6519f82866eb7f291f05fd12ae6af2532596a3d8d3acb6903e"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/education01.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T01:38:24.516723+00:00",
+      "endedAt": "2026-10-04T02:06:06.244076+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 86,
+        "pass": 86,
+        "fail": 0,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "world01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/world01/receipt.json",
+        "bytes": 1303,
+        "sha256": "01c79fc164c02ad24b7acfc6f10b049c19307855710a19abdd2108188fd834e2"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/world01/raw.log",
+        "bytes": 13357,
+        "sha256": "e75e49ef7a0e32a0e08428ddf54385426816d3af1e9e9e167f779d65a0699064"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/world01.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T01:38:24.558793+00:00",
+      "endedAt": "2026-10-04T02:10:24.982203+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 110,
+        "pass": 110,
+        "fail": 0,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "rendering01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/rendering01/run/receipt.json",
+        "bytes": 812,
+        "sha256": "139beeae40756529009837b1862b209f6828fd1c1cce182de16788f83e19a613"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/rendering01/run/raw.log",
+        "bytes": 2351,
+        "sha256": "f267059e2c6fadff3b156b3bec76fd083609ef507141d437be420999b1c3ebae"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/rendering01.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T01:29:24.189893+00:00",
+      "endedAt": "2026-10-04T01:29:57.192925+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "dom01",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/dom01/run/receipt.json",
+        "bytes": 658,
+        "sha256": "30ccfe612f57636840e0142dc08a7dd6291c07fcc8b63d480c402ee2b2c5de9e"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/dom01/run/raw.log",
+        "bytes": 1353,
+        "sha256": "c2018b9318afd15b1925c8c9c8760654a644941e5fa40fc13a880562a4383747"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/dom01.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T01:30:14.799736+00:00",
+      "endedAt": "2026-10-04T01:32:58.380505+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "checks": 35
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "webgl01-original-fail",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/run/receipt.json",
+        "bytes": 663,
+        "sha256": "7091f503f26a7ba8809febc3ad538a3d5743f1646b6bf80d50ffb7d6cd2e8886"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/run/raw.log",
+        "bytes": 2190,
+        "sha256": "3680816c89632e3c233a74b9bb2def0d8cbcdd5b69e614c4f7f5d5a9749a8cf7"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/webgl01-original-fail.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "startedAt": "2026-10-04T01:33:14.610852+00:00",
+      "endedAt": "2026-10-04T01:43:11.692801+00:00",
+      "inputsStable": true,
+      "observedCounts": {},
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "webgl02-exclusive",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/run/receipt.json",
+        "bytes": 664,
+        "sha256": "2f35fd529e3dd639db8fd6efce72e32de6292694fe64b417f09d6541dbe34a36"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl02/run/raw.log",
+        "bytes": 2266,
+        "sha256": "a12fd4c99e72d7ce62e4801a122244eaeb6575211263874094890ed3e956562b"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/webgl02-exclusive.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:13:09.434466+00:00",
+      "endedAt": "2026-10-04T02:21:16.597685+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "checks": 11
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "captures01-original-fail",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/run/receipt.json",
+        "bytes": 973,
+        "sha256": "19312b2a5ad34e1ffcef6a9e956206fac54f3c86932618703e362d1e02be8219"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures01/run/raw.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/captures01-original-fail.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "startedAt": "2026-10-04T01:44:00.018378+00:00",
+      "endedAt": "2026-10-04T01:44:07.839606+00:00",
+      "inputsStable": true,
+      "observedCounts": {},
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "captures02-mechanical-only",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/run/receipt.json",
+        "bytes": 997,
+        "sha256": "5352ab8f1a3b2d6e72b432736ef79953095964829920fe50576d5bf9ee73e1a7"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/captures02/run/raw.log",
+        "bytes": 459,
+        "sha256": "c9b6a70de780ea17151b804a6d27693b9ff261777328a6c1b451f1cc7edfa802"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/captures02-mechanical-only.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:22:08.084068+00:00",
+      "endedAt": "2026-10-04T02:26:13.390362+00:00",
+      "inputsStable": true,
+      "observedCounts": {},
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "family01-native-nine-building",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/family01/run/receipt.json",
+        "bytes": 1003,
+        "sha256": "bd7d6dab23bbfba3b464b3317645f0a55045ea24820ffed342830d24e7d35f30"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/family01/run/raw.log",
+        "bytes": 136867,
+        "sha256": "5ce03091aeeaaf94f7938a5ecebc812cbc8fe9be3019a37e1046cda8f97b8ce9"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/family01-native-nine-building.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:42:09.917400+00:00",
+      "endedAt": "2026-10-04T02:42:19.343589+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "checks": 7
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "energy-old-baseline-fail",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/baseline-old-case01/receipt.json",
+        "bytes": 539,
+        "sha256": "a8f5f98fe4cffab7a097aed3b2e197004ffbe10c76ed2e31028f03f3f0c4c896"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/baseline-old-case01/raw.log",
+        "bytes": 1058,
+        "sha256": "83e8953b830a4e79d418c5cfefdaa03dc36a0c61073b78b915f953dcf4b86bc0"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/energy-old-baseline-fail.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "startedAt": "2026-10-04T02:00:28.549476+00:00",
+      "endedAt": "2026-10-04T02:00:42.166024+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "energy-old-v4-binding-corrected",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/corrected-old-case01/receipt.json",
+        "bytes": 867,
+        "sha256": "7e6e38c4b08d663dc2e595c57e0c0cdce2d7e5f9e0cfafb5200659c93da6e1f1"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/corrected-old-case01/raw.log",
+        "bytes": 243,
+        "sha256": "899c0526f18052cdcf503b088a5061937522ce54adc745a2e954b468551ee5ff"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/energy-old-v4-binding-corrected.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:02:53.237755+00:00",
+      "endedAt": "2026-10-04T02:06:30.908082+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "energy-full20",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/full-power20-01/receipt.json",
+        "bytes": 795,
+        "sha256": "bf81306093753ec0e6b08d757c76f5550e3582e3fd47c3f20da758fdbd93abbd"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/full-power20-01/raw.log",
+        "bytes": 2436,
+        "sha256": "fad2f5a00158636255cc70ad63ea4c0022327b4c14f99bfe0653bad40ad13291"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/energy-full20.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:02:53.401971+00:00",
+      "endedAt": "2026-10-04T02:07:29.170107+00:00",
+      "inputsStable": true,
+      "observedCounts": {
+        "tests": 20,
+        "pass": 20,
+        "fail": 0,
+        "skipped": 0
+      },
+      "rawHashMatchesReceipt": true
+    },
+    {
+      "name": "energy-old-reader-plus24",
+      "role": "REFERENCE_TO_ENDED_ORIGINAL_RUN_NOT_NEW_EXECUTION",
+      "receipt": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/native-reader24-01/receipt.json",
+        "bytes": 757,
+        "sha256": "d9e3544a60354309899e0534afc28324dae5b5be768f2379a73a0e579727cd92"
+      },
+      "raw": {
+        "path": "/workspace/yunshan-work/ROOT07-power-old-reader-fixture-20261004-01/native-reader24-01/raw.log",
+        "bytes": 5149,
+        "sha256": "a77769301502649c730cf9c5da03ca8b82c11cee9972521a1fd48b6e1261fa76"
+      },
+      "receiptCopiedRelativePath": "original-receipt-copies/energy-old-reader-plus24.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "startedAt": "2026-10-04T02:02:53.397387+00:00",
+      "endedAt": "2026-10-04T02:05:27.778338+00:00",
+      "inputsStable": true,
+      "observedCounts": {},
+      "rawHashMatchesReceipt": true
+    }
+  ],
+  "root07FrozenInputs": {
+    "path": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/frozen-inputs.json",
+    "bytes": 27166,
+    "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40"
+  },
+  "parentReportedPendingCheckpoint": {
+    "run": "ROOT07 original14d",
+    "tick": 7400,
+    "day": 10,
+    "aliveNPCs": 616,
+    "terminalStatus": "RUNNING_NOT_TERMINAL",
+    "source": "Parent message; no new run/poll or terminal raw read by this subtask",
+    "noSteadyStateClaim": true
+  },
+  "parentReportedArt": {
+    "originalCityPNGs": 9,
+    "quality": "ART_FAIL",
+    "extraIndoorContexts": "PENDING_ORIGINAL_PRODUCER_TERMINAL"
+  },
+  "notRun": [
+    "macOS real hardware",
+    "independent performance"
+  ],
+  "scopeCaveats": [
+    "Static correspondence is not a runtime pass matrix",
+    "Original systems330 failure and skips retained",
+    "Isolated energy20 is test fixture binding repair, not replay of systems330",
+    "GPU-exclusive11 does not erase original co-run WebGL01 failure",
+    "Capture mechanical success does not imply reference art passed",
+    "Private fee8/24 do not establish public8/24 or natural18year life",
+    "Headless World parameters do not establish arbitrary real-city adaptation"
+  ],
+  "finalState": "CLOSED_READ_ONLY_HANDOFF_READY_FOR_PARENT_COLLECTION"
+}

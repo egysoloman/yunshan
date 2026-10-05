@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "scope": "Linux Chromium SwiftShader optical inspection using fixed diagnostic cameras; not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-C-rbdlOs.js",
+  "sourceHashes": {
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/renderer.ts": "62c678fc189daafcebb0eeec8a248188d6b4d986c635790dbe6131927154ef74",
+    "src/rendering/terrain.ts": "faff0a1e480db27974576ddda9552ab38d3caaa2f9fea0cfb4fbde341581f2b0",
+    "src/main.ts": "f625fa6d0433232907b44f170565418b8e9738dbd73b85a1b57c26e599dbb558"
+  },
+  "captures": [
+    {
+      "name": "road-first-person",
+      "hour": 12,
+      "eye": [
+        -712,
+        93.92,
+        341.4
+      ],
+      "target": [
+        -760,
+        97.72,
+        344
+      ],
+      "edgeId": "road-market-station-workshop-station",
+      "drawCalls": 79,
+      "triangles": 1510472,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "bridge-structure",
+      "hour": 12,
+      "eye": [
+        -632,
+        38.6,
+        958
+      ],
+      "target": [
+        -632,
+        16.6,
+        1016
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "drawCalls": 63,
+      "triangles": 965952,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "bridge-first-person",
+      "hour": 12,
+      "eye": [
+        -632,
+        18.32,
+        1013.4
+      ],
+      "target": [
+        -680,
+        18.919999999999998,
+        1016
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "drawCalls": 71,
+      "triangles": 900812,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    }
+  ],
+  "errors": []
+}

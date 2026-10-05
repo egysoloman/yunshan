@@ -1,0 +1,61 @@
+{
+  "status": "CLOSED_SHORT_PHASE_SOURCE_MIGRATION_PAID_SOURCE_ONLY",
+  "closedAt": "2026-10-04T15:54:28.270815+00:00",
+  "candidateSource": "/workspace/yunshan-work/ROOT14-civic-history-implementation-20261004-01/candidate",
+  "finalGraphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+  "inputCount": 304,
+  "productionSourceCount": 71,
+  "scopeCount": 13,
+  "finalExactPassScopes": [
+    "typecheck07",
+    "migration02",
+    "paid-source02"
+  ],
+  "retainedFinalPartialScope": "legacy-ruleset01",
+  "legacyPartial": "first7completedPASS; test8actuallegacy1 unfinished; test9notreached; cap120unchanged",
+  "earlierCodecScope": "codec01 PASS4 unchanged codec SHA, different complete graph",
+  "originalFailScopes": [
+    "typecheck01",
+    "typecheck02",
+    "paid-source01"
+  ],
+  "originalChildStartIdentitiesStillActive": [],
+  "allScopeOwnedActiveAtEnd": [],
+  "rootAssembly295StillExact": true,
+  "noGitLibraryDeploySharedOrClosedEdits": true,
+  "documents": {
+    "REPORT.md": "7076ae9e237182db6dc714cd2bb0749c3a92171b2384a7aff47975f852b8d8e9",
+    "HANDOFF.md": "9130b579c8b1e9330908b6013f033b895a79e7daf702831a1b476e86f50a1687",
+    "PLAN-AND-OWNERS.md": "949ce654ca91f6975b8a63cb9de34870a3d35376a6ac9dc038a1fd071e036140",
+    "MEMO-ENTRY.md": "e5bf12f5b315054847ae855b2d1277476c608768e73e081f4c0126f557237ac2",
+    "NATURAL-BUDGET-PILOT-PLAN.md": "273caa465a8e9d117ac0adeecfd2d8c1619f7d60c3d300fc1009837b3eb81733",
+    "FINAL-INPUTS.json": "db5e5f22e757ffc94fe413e2925fae05e5e4a61ea77209a0e1ec7c483d3afbe2",
+    "SOURCE-DELTA.json": "22a06db2cc863d8b1d2fc53d83affbb3752e98860a2325ed91127f438b5b24fc",
+    "FINAL-VERIFICATION.json": "f276c5bc58b75601cd1a4ae1977e9296d2bb3450c5b070230eae858d580eee2a",
+    "ROOT13-READONLY-CHECK.json": "bc2b7ed7d9faf66bfd0afe2f5ae1748f8080846fc4cb04dc47af05e936d98453",
+    "DELIVERY-MANIFEST.json": "49fab5b7584c37ed016751748e06ff3713c3c08b0d73fd5e03dea4d1b1d36477"
+  },
+  "artifacts": {
+    "delivery/ROOT14-civic-history-final-source.tar.gz": {
+      "bytes": 12160367,
+      "sha256": "76d8f5e4e18bca8061bce0f91a9ec6443b650f73f5c6dfb2124e2dc8fdfb6cb3"
+    },
+    "delivery/ROOT14-civic-history-short-evidence.tar.gz": {
+      "bytes": 6700315,
+      "sha256": "19087f9ce14c9395125ae7b9541ab499e999d94333d3ba7ecf74f369f2dcb5aa"
+    }
+  },
+  "notExercised": [
+    "actual funded V2 runtime/culture two-copy positive request-procurement-service closure",
+    "14-day expiry and natural renewal",
+    "default v4 new product city long execution",
+    "old frozen v3 reader direct rejection of v4",
+    "build and generated bridge bundle v4",
+    "UI/browser/GPU/macOS/performance",
+    "complete economic steady state / complete game",
+    "final graph legacy1 unchanged suite test8 future24 (TIMED_OUT_PARTIAL)",
+    "archive4 factory old1/2 import-specific cases"
+  ],
+  "parentOwnsIntegrationAndUpload": true,
+  "futureWork": "Use a separate successor group; do not modify this closed graph or its evidence."
+}

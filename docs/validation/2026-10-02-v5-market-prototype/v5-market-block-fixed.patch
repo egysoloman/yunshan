@@ -1,0 +1,935 @@
+--- a/src/controller.ts
++++ b/src/controller.ts
+@@ -1,3 +1,4 @@
++import { blocksMarketBlockMovement, marketBlockStepBlocked } from './market-block';
+ import * as THREE from 'three';
+ import { getWalkHeight } from './world';
+ import { getFloorDimensions, getStairPosition } from './access';
+@@ -212,6 +213,7 @@
+   dispose(): void { this.listeners.forEach(remove => remove()); document.exitPointerLock?.(); }
+ 
+   private walkTo(x:number,z:number):void {
++    if(blocksMarketBlockMovement(this.world,this.feet,{x,y:getWalkHeight(this.world,x,z,this.feet.y),z},BODY_RADIUS,EYE_HEIGHT)||marketBlockStepBlocked(this.world,this.feet,{x,y:getWalkHeight(this.world,x,z,this.feet.y),z}))return;
+     const near=this.world.buildings.some(b=>{if(!getBuildingBody(b))return false;const p=buildingLocalPosition(b,{x,y:this.feet.y,z}),a=buildingLocalPosition(b,this.feet);return Math.abs(p.x)<=b.width/2+2&&Math.abs(p.z)<=b.depth/2+2||Math.abs(a.x)<=b.width/2+2&&Math.abs(a.z)<=b.depth/2+2;});
+     if(!near){this.walkToLegacy(x,z);return;}
+     const from={...this.feet},steps=Math.max(1,Math.ceil(Math.hypot(x-from.x,z-from.z)/.1));
+--- a/src/journey.ts
++++ b/src/journey.ts
+@@ -1,3 +1,4 @@
++import { blocksMarketBlockMovement, marketBlockStepBlocked } from './market-block';
+ import { getFloorDimensions, getStairPosition } from './access';
+ import { getAviationPads } from './aviation';
+ import { getWalkHeight } from './world';
+@@ -37,7 +38,7 @@
+   const contains=(b:WorldDefinition['buildings'][number],p:Vec3)=>{const size=getFloorDimensions(b,0);return Math.abs(p.x-b.position.x)<size.width/2-.35&&Math.abs(p.z-b.position.z)<size.depth/2-.35;};
+   const move=(x:number,z:number):boolean=>{
+     const candidate={x,y:feet.y,z};
+-    if(blocksMarketCounter(counters,feet,candidate,.35,1.72)||blocksTransportBarrier(world,feet,candidate,.35))return false;
++    if(blocksMarketBlockMovement(world,feet,{...candidate,y:getWalkHeight(world,x,z,feet.y)},.35,1.72)||marketBlockStepBlocked(world,feet,{...candidate,y:getWalkHeight(world,x,z,feet.y)})||blocksMarketCounter(counters,feet,candidate,.35,1.72)||blocksTransportBarrier(world,feet,candidate,.35))return false;
+     for(const b of world.buildings){
+       if(b.floorPlanProfile===FLOOR_PLAN_PROFILE){
+         if(Math.hypot(x-b.position.x,z-b.position.z)<=Math.hypot(b.width,b.depth)/2+1&&blocksFloorPlanMovement(b,0,feet,candidate,.35,1.72))return false;
+--- /dev/null
++++ b/src/market-block.ts
+@@ -0,0 +1,173 @@
++import type { NetworkEdge, Vec3, WorldDefinition } from './types';
++import { blocksFloorPlanMovement, buildingWorldPosition, getBuildingBody } from './architecture-floor-plan';
++
++/** Physical data for one opt-in street block. Art and GPU state are not saved geometry. */
++export const MARKET_BLOCK_VERSION = 'market-block-01-sampled-local-foundations-1';
++export interface MarketSurface { id: string; kind: 'paving' | 'ramp' | 'soil' | 'drain-cover'; vertices: Vec3[]; bottom: Vec3[] }
++export interface MarketSolid { id: string; kind: 'kerb' | 'trunk' | 'retaining'; position: Vec3; width: number; height: number; depth: number }
++export interface MarketTree { id: string; position: Vec3; height: number; crownRadius: number; crownBase: number }
++export interface MarketBlockDefinition {
++  version: typeof MARKET_BLOCK_VERSION; anchorId: string; surfaces: MarketSurface[]; solids: MarketSolid[]; trees: MarketTree[];
++  pedestrianEdgeIds: string[]; bankEdgeId: string; bankWidth: number; bankJoinIndex:number; replacedBankPoints: Vec3[];
++  sampling: { spacing: number; maxFillCut: number; maxFoundationCut:number; sampledPoints: number; area: number };
++}
++const bases = new WeakMap<WorldDefinition, WorldDefinition>();
++export function registerMarketBlockBase(world: WorldDefinition, base: WorldDefinition): void { bases.set(world, base); }
++export function marketBlockLegacyWorld(world: WorldDefinition): WorldDefinition { return bases.get(world) ?? world; }
++export function getMarketBlock(world: WorldDefinition): MarketBlockDefinition | undefined { return world.marketBlock; }
++type XZ = { x: number; z: number };
++const cross = (a: XZ, b: XZ, p: XZ) => (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x);
++export function marketSurfaceHeight(surface: MarketSurface, p: XZ): number | null {
++  const v = surface.vertices;
++  for (let i = 1; i < v.length - 1; i++) {
++    const a = v[0], b = v[i], c = v[i + 1], det = cross(a, b, c);
++    if (Math.abs(det) < 1e-10) continue;
++    const u = cross(p, b, c) / det, t = cross(a, p, c) / det, w = 1 - u - t;
++    if (u >= -1e-8 && t >= -1e-8 && w >= -1e-8) return u * a.y + t * b.y + w * c.y;
++  }
++  return null;
++}
++export function marketBlockHeight(world: WorldDefinition, x: number, z: number): number | null {
++  const block = getMarketBlock(world); if (!block) return null;
++  for (const surface of block.surfaces) { const y = marketSurfaceHeight(surface, { x, z }); if (y !== null) return y; }
++  return null;
++}
++function clipHalfPlane(poly: XZ[], a: XZ, b: XZ, inside: boolean): XZ[] {
++  const result: XZ[] = []; if (!poly.length) return result;
++  const value = (p: XZ) => cross(a, b, p) * (inside ? -1 : 1);
++  for (let i = 0; i < poly.length; i++) {
++    const p = poly[i], q = poly[(i + 1) % poly.length], vp = value(p), vq = value(q), ip = vp >= -1e-9, iq = vq >= -1e-9;
++    if (ip) result.push(p);
++    if (ip !== iq) { const t = vp / (vp - vq); result.push({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t }); }
++  }
++  return result;
++}
++/** Difference against the actual convex surface union, for near/far terrain and roads. */
++function subtractSurfaces(polygon:XZ[], surfaces:MarketSurface[]):XZ[][] {
++  let pieces = [polygon];
++  for (const surface of surfaces) {
++    const cut = surface.vertices, next: XZ[][] = [];
++    for (const piece of pieces) {
++      let inside = piece;
++      for (let i = 0; i < cut.length && inside.length; i++) {
++        const outside = clipHalfPlane(inside, cut[i], cut[(i + 1) % cut.length], false);
++        if (outside.length >= 3 && polygonArea(outside) > 1e-8) next.push(outside);
++        inside = clipHalfPlane(inside, cut[i], cut[(i + 1) % cut.length], true);
++      }
++    }
++    pieces = next;
++  }
++  return pieces;
++}
++export function marketBlockTerrainCuts(world:WorldDefinition,polygon:XZ[]):XZ[][] { return subtractSurfaces(polygon,getMarketBlock(world)?.surfaces??[]); }
++export function marketBlockSurfacePieces(world:WorldDefinition,index:number):XZ[][] { const surfaces=getMarketBlock(world)?.surfaces??[]; return surfaces[index]?subtractSurfaces(surfaces[index].vertices,surfaces.slice(0,index)):[]; }
++export function polygonArea(poly: XZ[]): number { return Math.abs(poly.reduce((sum, p, i) => sum + p.x * poly[(i + 1) % poly.length].z - p.z * poly[(i + 1) % poly.length].x, 0)) / 2; }
++function segmentBox(a: Vec3, b: Vec3, solid: MarketSolid, radius: number, eye: number): boolean {
++  if (Math.min(a.y, b.y) + eye <= solid.position.y - solid.height / 2 + 1e-8 || Math.max(a.y, b.y) >= solid.position.y + solid.height / 2 - 1e-8) return false;
++  let lo = 0, hi = 1;
++  for (const axis of ['x', 'z'] as const) {
++    const half = (axis === 'x' ? solid.width : solid.depth) / 2 + radius, min = solid.position[axis] - half, max = solid.position[axis] + half;
++    const delta = b[axis] - a[axis];
++    if (Math.abs(delta) < 1e-12) { if (a[axis] < min || a[axis] > max) return false; }
++    else { const u = (min - a[axis]) / delta, v = (max - a[axis]) / delta; lo = Math.max(lo, Math.min(u, v)); hi = Math.min(hi, Math.max(u, v)); if (lo > hi) return false; }
++  }
++  return lo <= hi;
++}
++export function blocksMarketBlockMovement(world: WorldDefinition, a: Vec3, b: Vec3, radius = .35, eye = 1.72): boolean {
++  return getMarketBlock(world)?.solids.some(solid => segmentBox(a, b, solid, radius, eye)) ?? false;
++}
++/** This is a physical .2m step rule on new paving, not the old terrain motor's 2.6m tolerance. */
++export function marketBlockStepBlocked(world: WorldDefinition, a: Vec3, b: Vec3): boolean {
++  return !!getMarketBlock(world) && (marketBlockHeight(world, a.x, a.z) !== null || marketBlockHeight(world, b.x, b.z) !== null) && Math.abs(b.y - a.y) > .200001;
++}
++export function marketBlockAllowsVehicle(world: WorldDefinition, edgeId: string): boolean { return !getMarketBlock(world)?.pedestrianEdgeIds.includes(edgeId); }
++export function marketBlockExcludesTree(world: WorldDefinition, x: number, z: number, height: number, crownRadius: number): boolean {
++  const block = getMarketBlock(world); if (!block) return false;
++  for (const surface of block.surfaces) {
++    const minX = Math.min(...surface.vertices.map(p => p.x)), maxX = Math.max(...surface.vertices.map(p => p.x)), minZ = Math.min(...surface.vertices.map(p => p.z)), maxZ = Math.max(...surface.vertices.map(p => p.z));
++    if (Math.hypot(Math.max(minX - x, 0, x - maxX), Math.max(minZ - z, 0, z - maxZ)) <= crownRadius && height > 2.4) return true;
++  }
++  return block.trees.some(tree => Math.hypot(x - tree.position.x, z - tree.position.z) < crownRadius + tree.crownRadius);
++}
++
++/** Retain graph identity and endpoints; sample every new square metre before committing any world. */
++export function deriveMarketBlock(base: WorldDefinition, ground: (x: number, z: number) => number): { block: MarketBlockDefinition; bankEdge: NetworkEdge; walkingLink:NetworkEdge } {
++  const site = base.buildings.find(b => b.id === 'market-b0'), bank = base.edges.find(e => e.id === 'road-market-b44-door-market-quarter-0'), old = base.edges.find(e => e.id === 'road-market-b0-door-market-quarter-0');
++  if (!site || !bank || !old || !getBuildingBody(site) || site.rotation !== 0 || Math.abs(site.width - 41.6) > 1e-8 || Math.abs(site.depth - 33.2) > 1e-8) throw new Error('v5 样段需要受信的 b0 原型尺寸；拒绝未经 sitefit 的 seed。');
++  const y = site.position.y + .6, surfaces: MarketSurface[] = [], solids: MarketSolid[] = [], trees: MarketTree[] = [];
++  let maxFillCut = 0, maxFoundationCut=0, sampledPoints = 0;
++  function surface(id: string, kind: MarketSurface['kind'], vertices: Vec3[]): void {
++    const minX = Math.min(...vertices.map(p => p.x)), maxX = Math.max(...vertices.map(p => p.x)), minZ = Math.min(...vertices.map(p => p.z)), maxZ = Math.max(...vertices.map(p => p.z));
++    let low = Infinity, high=-Infinity;
++    for (let ix = 0; ix <= Math.ceil(maxX - minX); ix++) for (let iz = 0; iz <= Math.ceil(maxZ - minZ); iz++) {
++      const x = Math.min(maxX, minX + ix), z = Math.min(maxZ, minZ + iz), top = marketSurfaceHeight({ id, kind, vertices, bottom: [] }, { x, z }); if (top === null) continue;
++      const terrain = ground(x, z), delta = Math.abs(top - terrain); sampledPoints++; low = Math.min(low, terrain, top);high=Math.max(high,terrain); maxFillCut = Math.max(maxFillCut, delta);
++      if (delta > 4 + 1e-8) throw new Error(`v5 拒绝超过4m填挖：${id} ${x},${z} top=${top} terrain=${terrain}`);
++      for (const building of base.buildings) {
++        if (building === site && Math.abs(z - site.door.z) < .01 && Math.abs(x - site.door.x) < 2.05) continue;
++        if (Math.hypot(x - building.position.x, z - building.position.z) > Math.hypot(building.width, building.depth) / 2 + 1) continue;
++        if (blocksFloorPlanMovement(building, 0, { x, y: top, z }, { x, y: top, z }, .35, 2.4)) throw new Error(`v5 街面与真实墙/柜冲突：${id} ${building.id} ${x},${z}`);
++      }
++    }
++    if(high-(low-.2)>4+1e-8)throw new Error(`v5真实台基底板需要超过4m切土：${id}`);
++    maxFoundationCut=Math.max(maxFoundationCut,high-(low-.2));
++    surfaces.push({ id, kind, vertices, bottom: vertices.map(p => ({ ...p, y: low - .2 })) });
++  }
++  const local = (x: number, z: number, yy = y) => buildingWorldPosition(site, { x, y: yy - site.position.y - .6, z });
++  const rect = (id: string, kind: MarketSurface['kind'], x0: number, x1: number, z0: number, z1: number, yy = y) => surface(id, kind, [local(x0, z0, yy), local(x0, z1, yy), local(x1, z1, yy), local(x1, z0, yy)]);
++  rect('street-main', 'paving', -26, 26, 26.8, 31.6); rect('street-near', 'paving', -26, 26, 23.6, 26.8); rect('street-outer', 'paving', -26, 26, 31.6, 35.2);
++  rect('entrance-axis', 'paving', -2, 2, 16.6, 23.6); rect('approach-west', 'paving', -16.2, -13, 16.6, 23.6); rect('approach-east', 'paving', 13, 16.2, 16.6, 23.6);
++  for (const [i, x, z] of [[0, -9, 20.6], [1, 9, 20.6], [2, -10, 40], [3, 20, 39.2]]) {
++    const soil = y - .4; rect(`bed-${i}`, 'soil', x - 1.2, x + 1.2, z - 1.2, z + 1.2, soil);
++    const foot = local(x, z, soil); trees.push({ id: `street-tree-${i}`, position: foot, height: 5.6, crownRadius: 1.8, crownBase: 2.8 });
++    solids.push({ id: `trunk-${i}`, kind: 'trunk', position: { ...foot, y: soil + 2.8 }, width: .4, height: 5.6, depth: .4 });
++    for (const [j, dx, dz, w, d] of [[0, -1.15, 0, .1, 2.4], [1, 1.15, 0, .1, 2.4], [2, 0, -1.15, 2.2, .1], [3, 0, 1.15, 2.2, .1]]) solids.push({ id: `bed-${i}-rim-${j}`, kind: 'kerb', position: local(x + dx, z + dz, y), width: w, height: .4, depth: d });
++  }
++  // A covered dry drain: no invented water/outlet. Its physical cover is the walking top.
++  rect('dry-drain-cover', 'drain-cover', -26, 26, 35.2, 35.6);
++  const start = bank.points[6];
++  // The short bank drop uses ten real .2m risers/.4m treads. A centreline
++  // 5% label is insufficient at mitred turns, whose actual plane can be steeper.
++  const newTail:Vec3[]=[start,{x:start.x-2,y:start.y,z:start.z}];
++  for(let step=1;step<=10;step++){const x=start.x-2-step*.4;newTail.push({x,y:start.y-(step-1)*.2,z:start.z},{x,y:start.y-step*.2,z:start.z});}
++  newTail.push({x:-512,y,z:304},{x:-512,y,z:320},{...old.points[2]});
++  const points = [...bank.points.slice(0, 6).map(p => ({ ...p })), ...newTail.map(p => ({ ...p })), ...old.points.slice(3).map(p => ({ ...p }))];
++  const width = 3.2;
++  const normals=newTail.slice(1).map((b,i)=>{const a=newTail[i],len=Math.hypot(b.x-a.x,b.z-a.z);return len>1e-8?{x:-(b.z-a.z)/len,z:(b.x-a.x)/len}:null;});
++  const previous=bank.points[5],prefixLength=Math.hypot(start.x-previous.x,start.z-previous.z),prefixNormal={x:-(start.z-previous.z)/prefixLength,z:(start.x-previous.x)/prefixLength};
++  const offsets=newTail.map((_p,i)=>{let a=prefixNormal;for(let j=i-1;j>=0;j--)if(normals[j]){a=normals[j]!;break;}let b=normals.filter(Boolean).at(-1)!;for(let j=i;j<normals.length;j++)if(normals[j]){b=normals[j]!;break;}const den=1+a.x*b.x+a.z*b.z;if(den<.25)throw new Error('v5拒绝过尖步行转角');return {x:(a.x+b.x)*width/2/den,z:(a.z+b.z)*width/2/den};});
++  const streetCount=surfaces.length;
++  for(let i=1;i<newTail.length;i++){
++    const a=newTail[i-1],b=newTail[i],length=Math.hypot(b.x-a.x,b.z-a.z);
++    if(length<1e-8){if(Math.abs(a.y-b.y)>.200001)throw new Error('v5钱庄台阶超过.2m');continue;}
++    if(Math.abs(a.y-b.y)>.000001)throw new Error('v5新钱庄平面必须接真实台阶，不用斜盒伪造过陡转角。');
++    const na=offsets[i-1],nb=offsets[i];
++    surface(`bank-tread-${i}`,'paving',[{x:a.x+na.x,y:a.y,z:a.z+na.z},{x:b.x+nb.x,y:b.y,z:b.z+nb.z},{x:b.x-nb.x,y:b.y,z:b.z-nb.z},{x:a.x-na.x,y:a.y,z:a.z-na.z}]);
++  }
++  surfaces.unshift(...surfaces.splice(streetCount));
++  const bankEdge = { ...bank, points, length: points.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - points[i].x, p.y - points[i].y, p.z - points[i].z), 0), physicalWidth: width };
++  const linkPoints=[...bank.points.slice(0,6).map(p=>({...p})),...newTail.map(p=>({...p})),...old.points.slice(0,2).reverse().map(p=>({...p}))];
++  const walkingLink:NetworkEdge={id:'walk-market-b44-market-b0',from:bank.from,to:old.from,mode:'road',capacity:0,physicalWidth:width,points:linkPoints,length:linkPoints.slice(1).reduce((sum,p,i)=>sum+Math.hypot(p.x-linkPoints[i].x,p.y-linkPoints[i].y,p.z-linkPoints[i].z),0)};
++  const block: MarketBlockDefinition = { version: MARKET_BLOCK_VERSION, anchorId: site.id, surfaces, solids, trees, bankEdgeId: bank.id, bankWidth: width, bankJoinIndex:6+newTail.length-1, replacedBankPoints: bank.points.map(p => ({ ...p })), pedestrianEdgeIds: [old.id, bank.id, walkingLink.id], sampling: { spacing: 1, maxFillCut, maxFoundationCut, sampledPoints, area: surfaces.reduce((sum, s) => sum + polygonArea(s.vertices), 0) } };
++  return { block, bankEdge, walkingLink };
++}
++
++/** New pedestrian branch decks consume the graph's exact points and width. The bank
++ * suffix is already the market branch; it is emitted once, not as coplanar twins. */
++export function marketBlockRoadDecks(world:WorldDefinition):MarketSurface[] {
++  const block=getMarketBlock(world);if(!block)return [];
++  const result:MarketSurface[]=[];
++  for(const edge of world.edges.filter(edge=>edge.id===block.bankEdgeId||edge.id==='road-market-b0-door-market-quarter-0')){
++    const pts=edge.id===block.bankEdgeId?edge.points.slice(0,7):edge.points,width=edge.physicalWidth!;
++    const normals=pts.slice(1).map((b,i)=>{const a=pts[i],len=Math.hypot(b.x-a.x,b.z-a.z);return {x:-(b.z-a.z)/len,z:(b.x-a.x)/len};});
++    const offset=pts.map((_p,i)=>{const a=normals[Math.max(0,i-1)],b=normals[Math.min(normals.length-1,i)],den=1+a.x*b.x+a.z*b.z;return {x:(a.x+b.x)*width/2/den,z:(a.z+b.z)*width/2/den};});
++    if(edge.id===block.bankEdgeId){const a=pts.at(-1)!,b=edge.points[7],n={x:-(b.z-a.z)/Math.hypot(b.x-a.x,b.z-a.z),z:(b.x-a.x)/Math.hypot(b.x-a.x,b.z-a.z)},old=normals.at(-1)!,den=1+n.x*old.x+n.z*old.z;offset[offset.length-1]={x:(n.x+old.x)*width/2/den,z:(n.z+old.z)*width/2/den};}
++    for(let i=1;i<pts.length;i++){
++      const a=pts[i-1],b=pts[i],na=offset[i-1],nb=offset[i],original:MarketSurface={id:`${edge.id}:${i}`,kind:'paving',vertices:[{x:a.x+na.x,y:a.y,z:a.z+na.z},{x:b.x+nb.x,y:b.y,z:b.z+nb.z},{x:b.x-nb.x,y:b.y,z:b.z-nb.z},{x:a.x-na.x,y:a.y,z:a.z-na.z}],bottom:[]};
++      for(const piece of marketBlockTerrainCuts(world,original.vertices)){
++        const vertices=piece.map(p=>({...p,y:marketSurfaceHeight(original,p)!}));result.push({...original,vertices,bottom:vertices.map(p=>({...p,y:p.y-.5}))});
++      }
++    }
++  }
++  return result;
++}
+--- a/src/persistence/world-layout.ts
++++ b/src/persistence/world-layout.ts
+@@ -16,7 +16,7 @@
+   // selectSavedWorld only calls this with regenerated trusted candidates. An
+   // imported file's layout/terrain/geometry labels are never used as inputs.
+   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+-  const terrain = layout === 'current-v3' || layout === 'current-v4' ? {
++  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5-market-block-01' ? {
+     algorithm: GEOLOGICAL_GEOMETRY_VERSION,
+     voxelSize: world.voxelSize, size: world.size, mountains: world.mountains,
+     districts: world.districts.map(district => [district.id, district.center, district.radius]),
+@@ -26,7 +26,7 @@
+   // A v4 identity includes the generated physical rooms, voids, openings and
+   // support planes. A marker alone cannot describe their usable geometry.
+   // This extra descriptor is deliberately absent from all four old recipes.
+-  const architecture = layout === 'current-v4' ? {
++  const architecture = layout === 'current-v4' || layout === 'current-v5-market-block-01' ? {
+     algorithm: ARCHITECTURAL_GEOMETRY_VERSION,
+     buildings: world.buildings.map(site => {
+       const body = getBuildingBody(site);
+@@ -35,7 +35,8 @@
+         body ? [body.family, body.roofRhythm, body.floorPlans, getFloorPlanRoofRegions(body)] : null];
+     }),
+   } : undefined;
+-  const text = JSON.stringify(architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry);
++  const legacyText = architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
++  const text = JSON.stringify(world.marketBlock ? { ...legacyText, marketBlock:world.marketBlock, edgePhysics:world.edges.filter(edge=>edge.physicalWidth!==undefined).map(edge=>[edge.id,edge.physicalWidth]) } : legacyText);
+   let hash = 2166136261;
+   for (let index = 0; index < text.length; index++) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
+   return (hash >>> 0).toString(16);
+--- a/src/renderer.ts
++++ b/src/renderer.ts
+@@ -1,3 +1,5 @@
++import { buildMarketBlock } from './rendering/market-block';
++import { marketBlockAllowsVehicle } from './market-block';
+ import * as THREE from 'three';
+ import type { Building, CityRendererAPI, NetworkEdge, Quality, SimState, Vec3, WorldDefinition } from './types';
+ import { samplePolyline, terrainHeight } from './world';
+@@ -231,7 +233,7 @@
+     this.mist = this.buildMist(); this.scene.add(this.mist);
+     this.spray = this.buildSpray(); this.scene.add(this.spray);
+     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
+-    this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
++    this.scene.add(buildMarketBlock(this.world)); this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
+     this.architectureDetail = new ArchitectureDetailManager(world.buildings); this.scene.add(this.architectureDetail.group);
+     const signalCount = this.world.nodes.filter(node => node.station).length;
+     this.signalRed = new THREE.InstancedMesh(new THREE.BoxGeometry(.7, .55, .35), new THREE.MeshBasicMaterial({ color: '#ffffff' }), signalCount);
+@@ -592,6 +594,7 @@
+   private buildNetwork() {
+     const batch = new BoxBatch(this.materials);
+     for (const edge of this.world.edges) {
++      if(!marketBlockAllowsVehicle(this.world,edge.id))continue;
+       this.edges.set(edge.id, edge); if (edge.mode === 'flight') continue;
+       let supportRemainder = 0;
+       for (let i = 1; i < edge.points.length; i++) {
+--- /dev/null
++++ b/src/rendering/market-block.ts
+@@ -0,0 +1,150 @@
++import * as THREE from 'three';
++import type { Vec3, WorldDefinition } from '../types';
++import { getMarketBlock, marketBlockSurfacePieces, marketBlockRoadDecks, marketSurfaceHeight } from '../market-block';
++
++interface ColoredBox { position: Vec3; width: number; height: number; depth: number; color: THREE.Color }
++const finite = (point: Vec3) => [point.x, point.y, point.z].every(Number.isFinite);
++
++/** Physical top, bottom and side faces use the shared descriptor verbatim.
++ * There is one resident representation at every distance; no camera-dependent
++ * mask, support plane, tree position or courtyard cap is introduced here. */
++export function buildMarketBlock(world: WorldDefinition): THREE.Group {
++  const group = new THREE.Group();
++  group.name = '千灯市集 · 共享街台与街树';
++  const block = getMarketBlock(world);
++  if (!block) return group;
++  const positions: number[] = [], colors: number[] = [], indices: number[] = [];
++  const topColors = { paving: '#aaa18b', ramp: '#a39b86', soil: '#81734f', 'drain-cover': '#8c9487' };
++  function face(vertices: Vec3[], triangles: number[][], color: THREE.Color) {
++    const start = positions.length / 3;
++    for (const point of vertices) {
++      if (!finite(point)) throw new Error('Market block surface has nonfinite coordinates');
++      positions.push(point.x, point.y, point.z); colors.push(color.r, color.g, color.b);
++    }
++    for (const triangle of triangles) indices.push(...triangle.map(index => start + index));
++  }
++  let surfaceTriangles = 0;
++  const clockwiseTriangles = (vertices: Vec3[], triangles: number[][]) => triangles.map(([a, b, c]) => {
++    const pa = vertices[a], pb = vertices[b], pc = vertices[c];
++    const cross = (pb.x - pa.x) * (pc.z - pa.z) - (pb.z - pa.z) * (pc.x - pa.x);
++    return cross <= 0 ? [a, b, c] : [a, c, b];
++  });
++  const triangulate = (vertices: Vec3[]) => clockwiseTriangles(vertices,
++    THREE.ShapeUtils.triangulateShape(vertices.map(point => new THREE.Vector2(point.x, point.z)), []));
++  function intersection(polygon: { x: number; z: number }[], triangle: Vec3[]) {
++    let result = polygon;
++    for (let edge = 0; edge < triangle.length; edge++) {
++      const a = triangle[edge], b = triangle[(edge + 1) % triangle.length], previous = result; result = [];
++      const cross = (p: { x: number; z: number }) => (b.x - a.x) * (p.z - a.z) - (b.z - a.z) * (p.x - a.x);
++      for (let i = 0; i < previous.length; i++) {
++        const p = previous[i], q = previous[(i + 1) % previous.length], cp = cross(p), cq = cross(q);
++        const ip = cp <= 1e-9, iq = cq <= 1e-9;
++        if (ip) result.push(p);
++        if (ip !== iq) { const t = cp / (cp - cq); result.push({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t }); }
++      }
++      if (result.length < 3) return [];
++    }
++    return result.filter((point, i) => Math.hypot(point.x - result[(i + 1) % result.length].x, point.z - result[(i + 1) % result.length].z) > 1e-9);
++  }
++  const roadDecks = marketBlockRoadDecks(world);
++  const surfaces = [...block.surfaces.map((surface, index) => ({ surface, pieces: marketBlockSurfacePieces(world, index) })),
++    ...roadDecks.map(surface => ({ surface, pieces: [surface.vertices.map(point => ({ x: point.x, z: point.z }))] }))];
++  for (const { surface, pieces } of surfaces) {
++    const { vertices, bottom } = surface;
++    if (vertices.length < 3 || bottom.length !== vertices.length) throw new Error('Market block surface has unmatched top/bottom vertices');
++    const triangles = Array.from({ length: vertices.length - 2 }, (_, index) => [0, index + 1, index + 2]);
++    // XZ clockwise faces have a +Y normal. ShapeUtils' output may have either
++    // order, so use each triangle's actual cross product rather than a label.
++    const upward = clockwiseTriangles(vertices, triangles);
++    const color = new THREE.Color(topColors[surface.kind]);
++    for (const piece of pieces) {
++      const topPoints = piece.map(point => {
++        const y = marketSurfaceHeight(surface, point); if (y === null) throw new Error('Market block piece lies outside its shared top');
++        return { ...point, y };
++      });
++      const bottomPoints = piece.map(point => {
++        const y = marketSurfaceHeight({ ...surface, vertices: bottom }, point); if (y === null) throw new Error('Market block piece lies outside its shared bottom');
++        return { ...point, y };
++      });
++      // Preserve the authoritative original diagonal even for a clipped ramp.
++      // A fragment crossing that diagonal cannot become a different plane.
++      for (const triangle of upward) {
++        const clipped = intersection(piece, triangle.map(index => vertices[index]));
++        if (clipped.length < 3) continue;
++        const top = clipped.map(point => ({ ...point, y: marketSurfaceHeight(surface, point)! }));
++        const faces = triangulate(top); face(top, faces, color); surfaceTriangles += faces.length;
++      }
++      const lowerFaces = triangulate(bottomPoints).map(([a, b, c]) => [a, c, b]);
++      face(bottomPoints, lowerFaces, color.clone().multiplyScalar(.76)); surfaceTriangles += lowerFaces.length;
++      for (let i = 0; i < topPoints.length; i++) {
++        const next = (i + 1) % topPoints.length;
++        face([topPoints[i], bottomPoints[i], bottomPoints[next], topPoints[next]], [[0, 1, 2], [0, 2, 3]], color.clone().multiplyScalar(.84));
++        surfaceTriangles += 2;
++      }
++    }
++  }
++  if (indices.length) {
++    const geometry = new THREE.BufferGeometry();
++    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
++    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
++    geometry.setIndex(indices); geometry.computeVertexNormals(); geometry.computeBoundingSphere();
++    const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: .96, vertexColors: true });
++    const mesh = new THREE.Mesh(geometry, material); mesh.name = '真实铺面 · 坡面 · 土床 · 沟盖与实体底侧';
++    mesh.receiveShadow = true; mesh.castShadow = true; group.add(mesh);
++  }
++  const structure: ColoredBox[] = block.solids.map(solid => ({
++    position: solid.position, width: solid.width, height: solid.height, depth: solid.depth,
++    color: new THREE.Color(solid.kind === 'trunk' ? '#70523c' : solid.kind === 'kerb' ? '#aaa28b' : '#827e6a'),
++  }));
++  const crowns: ColoredBox[] = [];
++  for (const tree of block.trees) {
++    if (!finite(tree.position) || ![tree.height, tree.crownRadius, tree.crownBase].every(Number.isFinite)
++      || tree.height <= tree.crownBase || tree.crownRadius <= 0) throw new Error('Invalid market block tree dimensions');
++    const crownHeight = tree.height - tree.crownBase;
++    for (let layer = 0; layer < 3; layer++) for (let side = 0; side < 4; side++) {
++      const angle = side * Math.PI / 2 + layer * .61;
++      const radius = tree.crownRadius * (layer === 2 ? .23 : .42);
++      const width = tree.crownRadius * (layer === 2 ? .48 : .62);
++      const height = crownHeight * .34;
++      crowns.push({ position: {
++        x: tree.position.x + Math.cos(angle) * radius,
++        y: tree.position.y + tree.crownBase + height / 2 + layer * (crownHeight - height) / 2,
++        z: tree.position.z + Math.sin(angle) * radius,
++      }, width, height, depth: width * (.86 + side * .03),
++      color: new THREE.Color(['#527142', '#789052', '#637e46', '#8d9b62'][(side + layer) % 4]) });
++    }
++    // The descriptor owns the trunk. These short voxel branches stay inside
++    // its declared crown envelope and above the public crown-base clearance.
++    for (let side = 0; side < 4; side++) {
++      const alongX = side % 2 === 0, sign = side < 2 ? 1 : -1;
++      const length = tree.crownRadius * .66;
++      structure.push({ position: {
++        x: tree.position.x + (alongX ? sign * length / 2 : 0),
++        y: tree.position.y + tree.crownBase + .2 + side * .2,
++        z: tree.position.z + (alongX ? 0 : sign * length / 2),
++      }, width: alongX ? length : .2, height: .2, depth: alongX ? .2 : length, color: new THREE.Color('#73583e') });
++    }
++  }
++  const cube = new THREE.BoxGeometry(1, 1, 1);
++  function batch(name: string, boxes: ColoredBox[], roughness: number) {
++    if (!boxes.length) return;
++    const material = new THREE.MeshStandardMaterial({ color: '#ffffff', roughness });
++    const mesh = new THREE.InstancedMesh(cube, material, boxes.length), transform = new THREE.Object3D();
++    mesh.name = name;
++    boxes.forEach((box, index) => {
++      if (!finite(box.position) || ![box.width, box.height, box.depth].every(value => Number.isFinite(value) && value > 0)) throw new Error('Invalid market block solid dimensions');
++      transform.position.set(box.position.x, box.position.y, box.position.z);
++      transform.scale.set(box.width, box.height, box.depth); transform.updateMatrix();
++      mesh.setMatrixAt(index, transform.matrix); mesh.setColorAt(index, box.color);
++    });
++    mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
++    mesh.computeBoundingSphere(); mesh.castShadow = true; mesh.receiveShadow = true; group.add(mesh);
++  }
++  batch('实际挡土 · 台缘 · 树干与小分枝', structure, .97);
++  batch('四株街树 · 每株十二个体素冠团', crowns, 1);
++  if (!structure.length && !crowns.length) cube.dispose();
++  group.userData.marketBlock = { surfaces: block.surfaces.length, roadDecks: roadDecks.length, surfaceTriangles, solids: block.solids.length,
++    trees: block.trees.length, crownClusters: crowns.length, colorBatches: group.children.length,
++    geometrySource: 'code-owned shared top/bottom/solid/tree descriptor', lod: 'same physical surface and tree silhouette at every distance' };
++  return group;
++}
+--- a/src/rendering/terrain.ts
++++ b/src/rendering/terrain.ts
+@@ -2,6 +2,7 @@
+ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+ import type { Quality, Vec3, WorldDefinition } from '../types';
+ import { getWaterfallPath, terrainHeight } from '../world';
++import { getMarketBlock, marketBlockTerrainCuts, marketBlockExcludesTree, marketBlockLegacyWorld } from '../market-block';
+ 
+ interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color }
+ interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
+@@ -17,6 +18,12 @@
+   update(camera: Vec3, quality: Quality): void; dispose(): void;
+ } {
+   const group = new THREE.Group(), vegetation = new THREE.Group();
++  const marketBlock = getMarketBlock(world), forestWorld = marketBlock ? marketBlockLegacyWorld(world) : world;
++  const marketPolygons = marketBlock?.surfaces.map(surface => surface.vertices.map(point => ({ x: point.x, z: point.z }))) ?? [];
++  const marketBounds = marketPolygons.length ? {
++    minX: Math.min(...marketPolygons.flat().map(point => point.x)), maxX: Math.max(...marketPolygons.flat().map(point => point.x)),
++    minZ: Math.min(...marketPolygons.flat().map(point => point.z)), maxZ: Math.max(...marketPolygons.flat().map(point => point.z)),
++  } : undefined;
+   group.name = '山水 · 分层岩壳与连续水系'; vegetation.name = '山林 · 松柏竹木'; group.add(vegetation);
+   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
+   const cube = new THREE.BoxGeometry(1, 1, 1), canopy = cube; geometries.add(cube);
+@@ -69,7 +76,10 @@
+   const heightCache = new Map<string, number>();
+   function surfaceHeight(x: number, z: number, includeBasements = true) {
+     const key = `${x}:${z}:${includeBasements}`, cached = heightCache.get(key); if (cached !== undefined) return cached;
+-    const y = terrainHeight(world, x, z, includeBasements);
++    // Sample the original shell before subtraction. Sampling a new street at
++    // a coarse vertex/cell centre would carry its height outside its exact
++    // footprint and could even reorder the global proxy-resolution budget.
++    const y = terrainHeight(marketBlock ? forestWorld : world, x, z, includeBasements);
+     const result = quantize(y); heightCache.set(key, result); return result;
+   }
+   const palette = { rock: new THREE.Color('#5b6863'), cliff: new THREE.Color('#737d73'), soil: new THREE.Color('#887457'), grass: new THREE.Color('#43673b'), gravel: new THREE.Color('#abae9b'), wet: new THREE.Color('#5d817b') };
+@@ -88,7 +98,107 @@
+     const result = new THREE.Mesh(geometry, earth); result.name = name; result.receiveShadow = true; parent.add(result); return result;
+   }
+   function quad(data: Surface, vertices: number[], color: THREE.Color) {
++    if (marketBounds && marketOverlaps(vertices) && cutMarketQuad(data, vertices, color)) return;
+     const start = data.positions.length / 3; data.positions.push(...vertices); for (let i = 0; i < 4; i++) data.colors.push(color.r, color.g, color.b); data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
++  }
++  function marketOverlaps(vertices: number[]) {
++    if (!marketBounds) return false;
++    let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
++    for (let i = 0; i < vertices.length; i += 3) { minX = Math.min(minX, vertices[i]); maxX = Math.max(maxX, vertices[i]); minZ = Math.min(minZ, vertices[i + 2]); maxZ = Math.max(maxZ, vertices[i + 2]); }
++    return minX <= marketBounds.maxX && maxX >= marketBounds.minX && minZ <= marketBounds.maxZ && maxZ >= marketBounds.minZ;
++  }
++  function triangleCuts(vertices: number[]) {
++    const polygon = [0, 3, 6].map(i => ({ x: vertices[i], z: vertices[i + 2] }));
++    const retained = marketBlockTerrainCuts(world, polygon);
++    const unchanged = retained.length === 1 && retained[0].length === 3
++      && retained[0].every((point, i) => point.x === polygon[i].x && point.z === polygon[i].z);
++    return { retained, unchanged };
++  }
++  function emitClippedTriangle(data: Surface, vertices: number[], color: THREE.Color, retained: { x: number; z: number }[][]) {
++    const a = { x: vertices[0], y: vertices[1], z: vertices[2] }, b = { x: vertices[3], y: vertices[4], z: vertices[5] }, c = { x: vertices[6], y: vertices[7], z: vertices[8] };
++    const denominator = (b.z - c.z) * (a.x - c.x) + (c.x - b.x) * (a.z - c.z);
++    if (Math.abs(denominator) < 1e-10) return;
++    const orientation = (b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x);
++    for (const polygon of retained) {
++      if (polygon.length < 3) continue;
++      const faces = THREE.ShapeUtils.triangulateShape(polygon.map(point => new THREE.Vector2(point.x, point.z)), []);
++      const start = data.positions.length / 3;
++      for (const point of polygon) {
++        const wa = ((b.z - c.z) * (point.x - c.x) + (c.x - b.x) * (point.z - c.z)) / denominator;
++        const wb = ((c.z - a.z) * (point.x - c.x) + (a.x - c.x) * (point.z - c.z)) / denominator;
++        data.positions.push(point.x, a.y * wa + b.y * wb + c.y * (1 - wa - wb), point.z);
++        data.colors.push(color.r, color.g, color.b);
++      }
++      for (const [ia, ib, ic] of faces) {
++        const pa = polygon[ia], pb = polygon[ib], pc = polygon[ic];
++        const cross = (pb.x - pa.x) * (pc.z - pa.z) - (pb.z - pa.z) * (pc.x - pa.x);
++        if (Math.abs(cross) < 1e-10) continue;
++        data.indices.push(start + ia, start + (cross * orientation >= 0 ? ib : ic), start + (cross * orientation >= 0 ? ic : ib));
++      }
++    }
++  }
++  function marketContains(x: number, z: number) {
++    return marketPolygons.some(polygon => {
++      let inside = false;
++      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
++        const a = polygon[j], b = polygon[i], cross = (x - a.x) * (b.z - a.z) - (z - a.z) * (b.x - a.x);
++        if (Math.abs(cross) < 1e-8 && x >= Math.min(a.x, b.x) - 1e-8 && x <= Math.max(a.x, b.x) + 1e-8 && z >= Math.min(a.z, b.z) - 1e-8 && z <= Math.max(a.z, b.z) + 1e-8) return true;
++        if ((a.z > z) !== (b.z > z) && x < (b.x - a.x) * (z - a.z) / (b.z - a.z) + a.x) inside = !inside;
++      }
++      return inside;
++    });
++  }
++  function cutMarketWall(data: Surface, vertices: number[], color: THREE.Color) {
++    const ax = vertices[0], az = vertices[2], bx = vertices[9], bz = vertices[11], dx = bx - ax, dz = bz - az;
++    if (Math.hypot(dx, dz) < 1e-10) return false;
++    const breaks = [0, 1];
++    for (const polygon of marketPolygons) for (let i = 0; i < polygon.length; i++) {
++      const a = polygon[i], b = polygon[(i + 1) % polygon.length], ex = b.x - a.x, ez = b.z - a.z;
++      const cross = dx * ez - dz * ex;
++      if (Math.abs(cross) > 1e-10) {
++        const px = a.x - ax, pz = a.z - az, t = (px * ez - pz * ex) / cross, u = (px * dz - pz * dx) / cross;
++        if (t > 0 && t < 1 && u >= -1e-8 && u <= 1 + 1e-8) breaks.push(t);
++      } else if (Math.abs((a.x - ax) * dz - (a.z - az) * dx) < 1e-8) {
++        for (const p of [a, b]) { const t = Math.abs(dx) >= Math.abs(dz) ? (p.x - ax) / dx : (p.z - az) / dz; if (t > 0 && t < 1) breaks.push(t); }
++      }
++    }
++    const cuts = [...new Set(breaks)].sort((a, b) => a - b), kept: [number, number][] = [];
++    let removed = false;
++    for (let i = 1; i < cuts.length; i++) {
++      const lo = cuts[i - 1], hi = cuts[i]; if (hi - lo < 1e-10) continue;
++      if (marketContains(ax + dx * (lo + hi) / 2, az + dz * (lo + hi) / 2)) removed = true;
++      else kept.push([lo, hi]);
++    }
++    if (!removed) return false;
++    const point = (from: number, to: number, t: number) => [vertices[from] + (vertices[to] - vertices[from]) * t, vertices[from + 1] + (vertices[to + 1] - vertices[from + 1]) * t, vertices[from + 2] + (vertices[to + 2] - vertices[from + 2]) * t];
++    for (const [lo, hi] of kept) {
++      const start = data.positions.length / 3;
++      data.positions.push(...point(0, 9, lo), ...point(3, 6, lo), ...point(3, 6, hi), ...point(0, 9, hi));
++      for (let i = 0; i < 4; i++) data.colors.push(color.r, color.g, color.b);
++      data.indices.push(start, start + 1, start + 2, start, start + 2, start + 3);
++    }
++    return true;
++  }
++  function cutMarketQuad(data: Surface, vertices: number[], color: THREE.Color) {
++    const first = vertices.slice(0, 9), second = [...vertices.slice(0, 3), ...vertices.slice(6, 12)];
++    const area = (first[3] - first[0]) * (first[8] - first[2]) - (first[5] - first[2]) * (first[6] - first[0]);
++    if (Math.abs(area) < 1e-10) return cutMarketWall(data, vertices, color);
++    const a = triangleCuts(first), b = triangleCuts(second);
++    if (a.unchanged && b.unchanged) return false;
++    emitClippedTriangle(data, first, color, a.retained); emitClippedTriangle(data, second, color, b.retained);
++    return true;
++  }
++  function keepMarketDecoration(block: Block) {
++    if (!marketBlock) return true;
++    const footprint = [
++      { x: block.x - block.w / 2, z: block.z - block.d / 2 },
++      { x: block.x - block.w / 2, z: block.z + block.d / 2 },
++      { x: block.x + block.w / 2, z: block.z + block.d / 2 },
++      { x: block.x + block.w / 2, z: block.z - block.d / 2 },
++    ];
++    if (!marketOverlaps(footprint.flatMap(point => [point.x, 0, point.z]))) return true;
++    const area = (polygon: { x: number; z: number }[]) => Math.abs(polygon.reduce((sum, p, i) => sum + p.x * polygon[(i + 1) % polygon.length].z - p.z * polygon[(i + 1) % polygon.length].x, 0)) / 2;
++    return marketBlockTerrainCuts(world, footprint).reduce((sum, piece) => sum + area(piece), 0) >= block.w * block.d - 1e-8;
+   }
+   const proxySteps = new Map<string, number>();
+   function shell(tx: number, tz: number, step: number, stepped: boolean, parent: THREE.Group) {
+@@ -151,16 +261,24 @@
+             // Only the common border receives its neighbour's samples. A
+             // centre fan joins those samples without splitting the opposite
+             // interior edge and creating another unmatched T-junction.
+-            const start = data.positions.length / 3;
+-            data.positions.push(mx, height(mx, mz), mz, ...ring.flat());
+-            for (let i = 0; i <= ring.length; i++) data.colors.push(color.r, color.g, color.b);
+-            for (let i = 0; i < ring.length; i++) data.indices.push(start, start + 1 + i, start + 1 + (i + 1) % ring.length);
++            const centre = [mx, height(mx, mz), mz];
++            const cuts = marketBounds && marketOverlaps(ring.flat()) ? ring.map((point, i) => {
++              const vertices = [...centre, ...point, ...ring[(i + 1) % ring.length]];
++              return { vertices, ...triangleCuts(vertices) };
++            }) : undefined;
++            if (cuts?.some(cut => !cut.unchanged)) for (const cut of cuts) emitClippedTriangle(data, cut.vertices, color, cut.retained);
++            else {
++              const start = data.positions.length / 3;
++              data.positions.push(...centre, ...ring.flat());
++              for (let i = 0; i <= ring.length; i++) data.colors.push(color.r, color.g, color.b);
++              for (let i = 0; i < ring.length; i++) data.indices.push(start, start + 1 + i, start + 1 + (i + 1) % ring.length);
++            }
+           }
+         }
+       }
+     }
+     const result = mesh(stepped ? `近景岩土壳 ${tx}:${tz}` : `山形表面代理 ${tx}:${tz}`, data, parent);
+-    if (stepped) batch('真实岩壁 · 附壁垂藤', hangingLeaves, leaf, parent);
++    if (stepped) batch('真实岩壁 · 附壁垂藤', marketBlock ? hangingLeaves.filter(keepMarketDecoration) : hangingLeaves, leaf, parent);
+     return result;
+   }
+   const tiles: TerrainTile[] = [];
+@@ -210,27 +328,71 @@
+     if (fallProfile.slice(1).some((point, i) => distanceToSegment(x, z, fallProfile[i], point) < 46 + margin)) return false;
+     const r = riverAt(x, z); return r.distance > r.width + margin && Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z) > 56;
+   }
++  // v5's finite street/road replacement must not alter which original trees
++  // reach the accepted-tree cap. Generate against the trusted inherited v4,
++  // then remove complete groups; never refill a newly rejected candidate.
++  const forestBuildings = marketBlock ? new Map<string, typeof world.buildings>() : buildings;
++  const forestRoads = marketBlock ? new Map<string, Segment[]>() : roads;
++  const forestHeightCache = new Map<string, number>();
++  const forestFall = marketBlock ? getWaterfallPath(forestWorld) : fallProfile;
++  const forestRiver: Segment[] = marketBlock ? forestWorld.river.slice(1).map((point, i) => ({ a: forestWorld.river[i], b: point, width: 12 + Math.min(i + 1, 5) * .6 })) : river;
++  if (marketBlock) {
++    for (const b of forestWorld.buildings) indexItem(forestBuildings, b, b.position.x - b.width / 2, b.position.z - b.depth / 2, b.position.x + b.width / 2, b.position.z + b.depth / 2, 12);
++    for (const edge of forestWorld.edges) if (['road', 'bridge', 'lightRail'].includes(edge.mode)) for (let i = 1; i < edge.points.length; i++) {
++      const segment = { a: edge.points[i - 1], b: edge.points[i], width: edge.id.includes('airport-runway-strip') ? 22 : 5, cutting: edge.mode === 'road' || edge.mode === 'bridge' && edge.from !== 'core-lift-top', bridge: edge.mode === 'bridge' };
++      indexItem(forestRoads, segment, segment.a.x, segment.a.z, segment.b.x, segment.b.z, segment.width + 14);
++    }
++  }
++  const forestHeight = marketBlock ? (x: number, z: number) => {
++    const key = `${x}:${z}`, cached = forestHeightCache.get(key); if (cached !== undefined) return cached;
++    const y = quantize(terrainHeight(forestWorld, x, z)); forestHeightCache.set(key, y); return y;
++  } : surfaceHeight;
++  const forestClear = marketBlock ? (x: number, z: number, margin: number) => {
++    if ((forestBuildings.get(bucket(x, z)) ?? []).some(b => Math.abs(x - b.position.x) < b.width / 2 + margin && Math.abs(z - b.position.z) < b.depth / 2 + margin)) return false;
++    if ((forestRoads.get(bucket(x, z)) ?? []).some(s => distanceToSegment(x, z, s.a, s.b) < s.width + margin)) return false;
++    if (forestFall.slice(1).some((point, i) => distanceToSegment(x, z, forestFall[i], point) < 46 + margin)) return false;
++    let r = { distance: Infinity, width: 14 };
++    for (const s of forestRiver) { const distance = distanceToSegment(x, z, s.a, s.b); if (distance < r.distance) r = { distance, width: s.width }; }
++    return r.distance > r.width + margin && Math.hypot(x - forestWorld.waterfall.bottom.x, z - forestWorld.waterfall.bottom.z) > 56;
++  } : clearGround;
+   const trunks: Block[] = [], crowns: Block[] = [], bushes: Block[] = [];
++  const forestOwners = new WeakMap<Block, number>();
++  const acceptedForest: { x: number; y: number; z: number; height: number; trunk: Block; crowns: Block[]; bush?: Block }[] = [];
++  const excludedForest = new Set<number>();
+   // Woodland grows in overlapping stands along the actual neighbourhood edge
+   // and the mountain shoulder. Each stand retains its canopy mass in far LOD.
+-  const stands = world.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {
++  const stands = forestWorld.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {
+     const angle = side / 8 * Math.PI * 2 + index * .21, distance = district.radius * .86;
+     return { x: district.center.x + Math.cos(angle) * distance, z: district.center.z + Math.sin(angle) * distance, radius: 100 };
+   }));
+-  for (const mountain of world.mountains) for (let side = 0; side < 5; side++) { const angle = side / 5 * Math.PI * 2; stands.push({ x: mountain.x + Math.cos(angle) * mountain.radius * .54, z: mountain.z + Math.sin(angle) * mountain.radius * .54, radius: 65 }); }
++  for (const mountain of forestWorld.mountains) for (let side = 0; side < 5; side++) { const angle = side / 5 * Math.PI * 2; stands.push({ x: mountain.x + Math.cos(angle) * mountain.radius * .54, z: mountain.z + Math.sin(angle) * mountain.radius * .54, radius: 65 }); }
+   if (!stands.length) stands.push({ x: 0, z: 0, radius: world.size * .35 });
+   for (let i = 0; i < 70000 && trunks.length < 5200; i++) {
+     const stand = stands[i % stands.length], angle = hash(i, 38, world.seed) * Math.PI * 2, radius = Math.sqrt(hash(i, 73, world.seed)) * stand.radius;
+-    const x = quantize(stand.x + Math.cos(angle) * radius), z = quantize(stand.z + Math.sin(angle) * radius), y = surfaceHeight(x, z);
+-    if (y < 8 || y > 630 || !clearGround(x, z, 3)) continue;
+-    if (Math.abs(surfaceHeight(x + 2, z) - y) > 8 || Math.abs(surfaceHeight(x, z + 2) - y) > 8) continue;
++    const x = quantize(stand.x + Math.cos(angle) * radius), z = quantize(stand.z + Math.sin(angle) * radius), y = forestHeight(x, z);
++    if (y < 8 || y > 630 || !forestClear(x, z, 3)) continue;
++    if (Math.abs(forestHeight(x + 2, z) - y) > 8 || Math.abs(forestHeight(x, z + 2) - y) > 8) continue;
+     const height = quantize(16 + hash(i, 92, world.seed) * 15), species = Math.floor(i / stands.length) % 9;
+     const color = new THREE.Color(species === 0 ? '#ad6b3a' : species === 1 ? '#a79541' : species === 2 ? '#6b854c' : '#365d40').lerp(new THREE.Color('#83986c'), hash(i, 91, world.seed) * .35);
+     trunks.push({ x, y: y + height * .35, z, w: .8, h: height * .7, d: .8, color: new THREE.Color('#6b5c45') });
+     // Each tier has projecting voxel branches, leaving light between crowns.
+     for (let tier = 0; tier < 4; tier++) { const width = quantize(height * (.84 - tier * .13)); crowns.push({ x: x + (tier % 2 ? 1 : -1) * height * .11, y: y + height * (.49 + tier * .12), z: z + height * .075 * (tier - 1), w: width, h: quantize(height * .23), d: width * .8, color: color.clone().multiplyScalar(.85 + tier * .06) }); }
+     if (i % 2 === 0) bushes.push({ x: x + 3.2, y: y + .9, z: z + 2, w: 2.8, h: 1.8, d: 2.2, color: color.clone().lerp(new THREE.Color('#819169'), .2) });
+-  }
++    if (marketBlock) {
++      const id = acceptedForest.length, trunk = trunks[trunks.length - 1], treeCrowns = crowns.slice(crowns.length - 4), bush = i % 2 === 0 ? bushes[bushes.length - 1] : undefined;
++      for (const part of [trunk, ...treeCrowns, ...(bush ? [bush] : [])]) forestOwners.set(part, id);
++      acceptedForest.push({ x, y, z, height, trunk, crowns: treeCrowns, bush });
++      // Both existing LODs belong to one accepted tree. The enclosing radius
++      // uses every actual near/far box corner, including shifted crown tiers.
++      const proxy = [0, 1].map(tier => ({ ...trunk, x: trunk.x + (tier ? 1 : -1) * trunk.h * .15, y: trunk.y + trunk.h * (.42 + tier * .35), z: trunk.z + tier * trunk.h * .1, w: quantize(trunk.h * (tier ? .9 : 1.25)), h: quantize(trunk.h * .55), d: quantize(trunk.h * (tier ? .75 : 1.08)) }));
++      const parts = [trunk, ...treeCrowns, ...proxy, ...(bush ? [bush] : [])];
++      const radius = Math.max(...parts.map(part => Math.hypot(Math.abs(part.x - x) + part.w / 2, Math.abs(part.z - z) + part.d / 2)));
++      const top = Math.max(...parts.map(part => part.y + part.h / 2 - y));
++      if (marketBlockExcludesTree(world, x, z, top, radius)) excludedForest.add(id);
++    }
++  }
++  forestHeightCache.clear();
++  const keepForest = (part: Block) => !excludedForest.has(forestOwners.get(part) ?? -1);
+   const forestChunks: { x: number; z: number; detail: THREE.Group; proxy: THREE.Group }[] = [];
+   const forest = new Map<string, { trunks: Block[]; crowns: Block[]; bushes: Block[] }>();
+   for (const [key, blocks] of [['trunks', trunks], ['crowns', crowns], ['bushes', bushes]] as const) for (const block of blocks) {
+@@ -240,12 +402,15 @@
+   for (const [key, lists] of forest) {
+     const [x, z] = key.split(':').map(Number), detail = new THREE.Group(), proxy = new THREE.Group();
+     detail.name = `林木近景 ${key}`; proxy.name = `远林冠影 ${key}`; vegetation.add(detail, proxy);
+-    batch('山林树干', lists.trunks, rock, detail); batch('错层乔木冠', lists.crowns, leaf, detail, canopy); batch('山林灌木', lists.bushes, leaf, detail, canopy);
+     const distantCrowns = lists.trunks.flatMap((t, i) => {
+       const color = lists.crowns[i * 4]?.color ?? new THREE.Color('#527151');
+-      return [0, 1].map(tier => ({ ...t, x: t.x + (tier ? 1 : -1) * t.h * .15, y: t.y + t.h * (.42 + tier * .35), z: t.z + tier * t.h * .1, w: quantize(t.h * (tier ? .9 : 1.25)), h: quantize(t.h * .55), d: quantize(t.h * (tier ? .75 : 1.08)), color: color.clone().multiplyScalar(tier ? 1.08 : .92) }));
++      return [0, 1].map(tier => {
++        const part = { ...t, x: t.x + (tier ? 1 : -1) * t.h * .15, y: t.y + t.h * (.42 + tier * .35), z: t.z + tier * t.h * .1, w: quantize(t.h * (tier ? .9 : 1.25)), h: quantize(t.h * .55), d: quantize(t.h * (tier ? .75 : 1.08)), color: color.clone().multiplyScalar(tier ? 1.08 : .92) };
++        if (marketBlock) forestOwners.set(part, forestOwners.get(t)!); return part;
++      });
+     });
+-    batch('远林树干代理', lists.trunks, rock, proxy); batch('远林错层树冠代理', distantCrowns, leaf, proxy, canopy);
++    batch('山林树干', marketBlock ? lists.trunks.filter(keepForest) : lists.trunks, rock, detail); batch('错层乔木冠', marketBlock ? lists.crowns.filter(keepForest) : lists.crowns, leaf, detail, canopy); batch('山林灌木', marketBlock ? lists.bushes.filter(keepForest) : lists.bushes, leaf, detail, canopy);
++    batch('远林树干代理', marketBlock ? lists.trunks.filter(keepForest) : lists.trunks, rock, proxy); batch('远林错层树冠代理', marketBlock ? distantCrowns.filter(keepForest) : distantCrowns, leaf, proxy, canopy);
+     detail.visible = false; forestChunks.push({ x: (x + .5) * 384, z: (z + .5) * 384, detail, proxy });
+   }
+ 
+@@ -291,7 +456,7 @@
+   let epoch = 0, lastCell = '', lastQuality: Quality | undefined;
+   function destroyFine(tile: TerrainTile) { if (!tile.fine) return; tile.fine.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); if (object instanceof THREE.Mesh && object.geometry !== cube) { geometries.delete(object.geometry); object.geometry.dispose(); } }); group.remove(tile.fine); tile.fine = undefined; tile.fineStep = undefined; }
+   function update(camera: Vec3, quality: Quality) {
+-    const ground = surfaceHeight(camera.x, camera.z), close = camera.y - ground < 100 && camera.y - ground > -80;
++    const ground = marketBlock ? terrainHeight(world, camera.x, camera.z) : surfaceHeight(camera.x, camera.z), close = camera.y - ground < 100 && camera.y - ground > -80;
+     const centreX = Math.floor(camera.x / TILE), centreZ = Math.floor(camera.z / TILE), cell = `${centreX}:${centreZ}:${close}`;
+     if (cell === lastCell && quality === lastQuality) return;
+     heightCache.clear();
+@@ -316,7 +481,7 @@
+             if (i % 12 === 0) smallRocks.push({ x, y: y + .2, z, w: .4 + .2 * (i % 4), h: .4, d: .4 + .2 * (i % 3), color: new THREE.Color(i % 2 ? '#a7ab9a' : '#878c7d') });
+             else for (let stem = 0; stem < 3; stem++) grass.push({ x: x + stem * .2, y: y + .3, z: z + (stem % 2) * .2, w: .2, h: .4 + (stem % 2) * .2, d: .2, color: new THREE.Color(i % 2 ? '#869a71' : '#5e7958') });
+           }
+-          batch('近景 · 0.2m碎石', smallRocks, rock, tile.fine); batch('近景 · 0.2m草叶', grass, leaf, tile.fine);
++          batch('近景 · 0.2m碎石', marketBlock ? smallRocks.filter(keepMarketDecoration) : smallRocks, rock, tile.fine); batch('近景 · 0.2m草叶', marketBlock ? grass.filter(keepMarketDecoration) : grass, leaf, tile.fine);
+         }
+         tile.used = epoch; tile.fine.visible = true; selected.push(tile);
+       } else if (tile.fine) tile.fine.visible = false;
+@@ -327,7 +492,8 @@
+     heightCache.clear();
+   }
+   group.userData.water = { continuous: true, riverVertices: world.river.length * 2, plungePoolRadius: 50, waterfallDrop: top.y - bottom.y };
+-  group.userData.woodland = { stands: stands.length, trees: trunks.length, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0 };
++  group.userData.woodland = { stands: stands.length, trees: trunks.length - excludedForest.size, canopyLayers: 4, farCanopyLayers: 2, distribution: 'continuous district rim belts and mountain shoulders', floatingRockBodies: 0,
++    ...(marketBlock ? { originalAcceptedTrees: trunks.length, excludedByMarketBlock: excludedForest.size, exclusion: 'whole original accepted trees including near/far crowns; no replacement candidates' } : {}) };
+   return { group, water, vegetation, update, dispose() { group.traverse(object => { if (object instanceof THREE.InstancedMesh) object.dispose(); }); geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); group.clear(); } };
+ }
+ 
+--- a/src/simulation.ts
++++ b/src/simulation.ts
+@@ -1,3 +1,4 @@
++import { marketBlockAllowsVehicle } from './market-block';
+ import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
+ import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
+ import { blocksMarketCounter, marketCounters } from './site-fixtures';
+@@ -117,6 +118,7 @@
+     // payroll and research resources must not become a fictitious retail shop.
+     for (const b of world.buildings.filter(b => !b.facility && ['market', 'workshop', 'farm', 'dock'].includes(b.kind))) this.state.shops.push({ id: `shop-${b.id}`, buildingId: b.id, districtId: b.districtId, inventory: b.kind === 'farm' ? 160 : 90, price: b.kind === 'market' ? 12 : 8, revenue: 0, profit: 0, customers: 0, open: true, employees: this.workforce.get(b.id)?.length ?? 0 });
+     for (const e of world.edges) {
++      if (!marketBlockAllowsVehicle(world,e.id)) continue;
+       if (e.mode === 'bridge' || e.mode === 'road' && e.length < 80) continue;
+       const stationRoad = e.mode === 'road' && world.nodes.find(n => n.id === e.from)?.station && world.nodes.find(n => n.id === e.to)?.station;
+       if (e.mode === 'road' && !stationRoad) { const destination = world.buildings.find(b => `${b.id}-door` === e.from || `${b.id}-door` === e.to); if (!destination || !['market', 'workshop', 'farm', 'dock'].includes(destination.kind)) continue; }
+@@ -690,7 +692,7 @@
+         }
+         if (vehicle.kind === 'flight') this.bus.emit({ type: 'flight' });
+         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
+-        let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id);
++        let candidates = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id && marketBlockAllowsVehicle(this.world,n.edge.id));
+         if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
+         if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
+         else vehicle.direction *= -1;
+@@ -1521,7 +1523,7 @@
+       const citizens = array(s.citizens, 1024, 'citizens'); ensure(citizens.length === expectedCitizenIds.size, 'citizen count'); unique(citizens, 'duplicate citizens');
+       for (const c of citizens) { ensure(expectedCitizenIds.has(c.id) && districtIds.has(c.districtId), 'citizen identity'); ensure(this.buildings.has(c.homeId) && this.buildings.has(c.workId), 'citizen building'); vec(c.position, 'citizen position'); string(c.name, 'citizen name', 80); string(c.role, 'citizen role', 60); string(c.state, 'citizen state', 40); if (c.skills !== undefined) { ensure(c.skills && typeof c.skills === 'object' && Object.keys(c.skills).length <= 32, 'citizen skills'); for (const value of Object.values(c.skills)) number(value, 0, 100, 'citizen skill'); } if (c.education !== undefined) number(c.education, 0, 10000, 'citizen education'); for (const tag of array(c.socialIdentities ?? [], 32, 'social identities')) string(tag, 'social identity', 100); for (const tag of array(c.historyTags ?? [], 32, 'history tags')) string(tag, 'history tag', 100); ensure(c.destinationId === null || this.buildings.has(c.destinationId), 'destination'); money(c.money, 'citizen money'); needs(c.needs, 'citizen needs'); ensure(['active', 'regional', 'statistical'].includes(c.tier), 'citizen tier'); if (c.route !== undefined) for (const point of array(c.route, 1024, 'route')) vec(point, 'route position'); if (c.routeIndex !== undefined) number(c.routeIndex, 0, c.route?.length ?? 0, 'routeIndex', true); ensure(c.partnerId == null || c.partnerId === 'player' || expectedCitizenIds.has(c.partnerId), 'citizen partner'); }
+       const expectedVehicleIds = new Set(this.state.vehicles.map(v => v.id)); const vehicles = array(s.vehicles, 2048, 'vehicles'); ensure(vehicles.length === expectedVehicleIds.size, 'vehicle count'); unique(vehicles, 'duplicate vehicles');
+-      for (const v of vehicles) { ensure(expectedVehicleIds.has(v.id), 'vehicle identity'); const edge = this.edges.get(v.edgeId); ensure(edge && edge.mode === v.kind, 'vehicle edge'); vec(v.position, 'vehicle position'); number(v.progress, 0, 1, 'progress'); ensure(v.direction === 1 || v.direction === -1, 'direction'); number(v.speed, 0, 2000, 'vehicle speed'); string(v.state, 'vehicle state', 40); number(v.passengers, 0, 5000, 'passengers', true); number(v.cargo, 0, 10000, 'cargo'); number(v.nextDeparture, -10000, 1e12, 'departure'); }
++      for (const v of vehicles) { ensure(expectedVehicleIds.has(v.id), 'vehicle identity'); const edge = this.edges.get(v.edgeId); ensure(edge && edge.mode === v.kind && marketBlockAllowsVehicle(this.world,v.edgeId), 'vehicle edge'); vec(v.position, 'vehicle position'); number(v.progress, 0, 1, 'progress'); ensure(v.direction === 1 || v.direction === -1, 'direction'); number(v.speed, 0, 2000, 'vehicle speed'); string(v.state, 'vehicle state', 40); number(v.passengers, 0, 5000, 'passengers', true); number(v.cargo, 0, 10000, 'cargo'); number(v.nextDeparture, -10000, 1e12, 'departure'); }
+       const shops = array(s.shops, 512, 'shops'); ensure(shops.length === this.state.shops.length, 'shop count'); unique(shops, 'duplicate shops');
+       const shopIds = new Set(this.state.shops.map(shop => shop.id)); for (const shop of shops) { ensure(shopIds.has(shop.id) && this.buildings.has(shop.buildingId) && districtIds.has(shop.districtId), 'shop identity'); number(shop.inventory, 0, 10000, 'inventory'); number(shop.price, 0, 1e5, 'price'); money(shop.revenue, 'revenue'); number(shop.profit, -1e12, 1e12, 'profit'); number(shop.customers, 0, 100000, 'customers'); number(shop.employees, 0, 10000, 'employees', true); ensure(typeof shop.open === 'boolean', 'shop open'); }
+       for (const citizen of citizens) if (citizen.food !== undefined) number(citizen.food, 0, 6, 'stored food', true);
+--- a/src/transport-geometry.ts
++++ b/src/transport-geometry.ts
+@@ -2,6 +2,7 @@
+ import type { NetworkEdge, Vec3, WorldDefinition } from './types';
+ 
+ export function deckWidth(edge: NetworkEdge): number {
++  if(edge.physicalWidth !== undefined) return edge.physicalWidth;
+   if (edge.id.includes('airport-runway-strip')) return 44;
+   if (edge.mode === 'bridge') return 9;
+   if (['maglev', 'lightRail'].includes(edge.mode)) return 6;
+@@ -10,7 +11,7 @@
+ export function guardrailOffset(edge: NetworkEdge): number {
+   if (edge.mode === 'bridge') return 4.1;
+   if (['maglev', 'lightRail'].includes(edge.mode)) return 2.75;
+-  return edge.id.includes('airport-runway-strip') ? 21.75 : 4.75;
++  return edge.physicalWidth !== undefined ? edge.physicalWidth/2-.25 : edge.id.includes('airport-runway-strip') ? 21.75 : 4.75;
+ }
+ export const GUARDRAIL_THICKNESS = .2;
+ export const BRIDGE_OPEN_END = 6;
+--- a/src/types.ts
++++ b/src/types.ts
+@@ -1,3 +1,4 @@
++import type { MarketBlockDefinition } from './market-block';
+ import type { FamilyState } from './simulation/family';
+ import type { CultureState } from './simulation/culture';
+ import type { ClinicalState } from './simulation/clinical';
+@@ -17,9 +18,9 @@
+ export interface BuildingFunctionPoint { id: string; purpose: 'work' | 'service' | 'sale'; floor: number; position: Vec3 }
+ export interface Building { floorPlanProfile?: 'v4-program-bodies-02'; functionPoints?: BuildingFunctionPoint[]; floorFootprints?: { width: number; depth: number }[]; basements?: number; basementUses?: string[]; floorUses?: string[]; floorPermissions?: string[]; facility?: 'mayor' | 'council' | 'administration' | 'data' | 'energy' | 'emergency' | 'embassy' | 'archives' | 'treasury'; publicFloors?: number; requiredPermission?: string; id: string; districtId: string; name: string; kind: BuildingKind; position: Vec3; width: number; depth: number; height: number; floors: number; rotation: number; door: Vec3; capacity: number; seed: number }
+ export interface NetworkNode { id: string; districtId: string; name: string; position: Vec3; station: boolean }
+-export interface NetworkEdge { id: string; from: string; to: string; mode: TransportMode; length: number; capacity: number; points: Vec3[] }
++export interface NetworkEdge { physicalWidth?: number; id: string; from: string; to: string; mode: TransportMode; length: number; capacity: number; points: Vec3[] }
+ export interface Mountain { x: number; z: number; height: number; radius: number }
+-export interface WorldDefinition { seed: number; voxelSize: number; size: number; districts: District[]; buildings: Building[]; nodes: NetworkNode[]; edges: NetworkEdge[]; mountains: Mountain[]; spawn: Vec3; waterfall: { top: Vec3; bottom: Vec3; width: number }; river: Vec3[] }
++export interface WorldDefinition { marketBlock?: MarketBlockDefinition; seed: number; voxelSize: number; size: number; districts: District[]; buildings: Building[]; nodes: NetworkNode[]; edges: NetworkEdge[]; mountains: Mountain[]; spawn: Vec3; waterfall: { top: Vec3; bottom: Vec3; width: number }; river: Vec3[] }
+ export interface Needs { hunger: number; fatigue: number; social: number; fun: number }
+ export interface Citizen { food?: number; skills?: Record<string, number>; socialIdentities?: string[]; historyTags?: string[]; education?: number; id: string; name: string; districtId: string; homeId: string; workId: string; role: string; position: Vec3; state: string; destinationId: string | null; money: number; needs: Needs; tier: 'active' | 'regional' | 'statistical'; route?: Vec3[]; routeIndex?: number; partnerId?: string | null }
+ export interface Vehicle { id: string; kind: TransportMode; position: Vec3; edgeId: string; progress: number; direction: number; speed: number; state: string; passengers: number; cargo: number; nextDeparture: number }
+--- a/src/world.ts
++++ b/src/world.ts
+@@ -1,8 +1,9 @@
++import { deriveMarketBlock, marketBlockHeight, marketBlockLegacyWorld, registerMarketBlockBase } from './market-block';
+ import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, TransportMode, Vec3, WorldDefinition } from './types';
+ import { getFloorDimensions } from './access';
+ import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
+ 
+-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4'] as const;
++export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5-market-block-01'] as const;
+ export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
+ export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v4';
+ export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
+@@ -49,7 +50,7 @@
+   if (!index) {
+     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
+     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' ? 70 : 14;
++    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5-market-block-01' ? 70 : 14;
+     for (const b of world.buildings) {
+       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
+       if (b.floorPlanProfile) {
+@@ -183,6 +184,7 @@
+ /** Authoritative ground after the generated roads are fixed. Carving preserves
+  * every station, road sample, building footprint and floor access contract. */
+ export function terrainHeight(world: WorldDefinition, x: number, z: number, includeBasements = true): number {
++  if (world.marketBlock) return marketBlockHeight(world, x, z) ?? terrainHeight(marketBlockLegacyWorld(world), x, z, includeBasements);
+   let y = planningGroundHeight(world, x, z, includeBasements);
+   if ((world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'legacy-ee3e7a1') return y;
+   const index = indexFor(world), nearby = index.buildings.get(key(x, z)) ?? [];
+@@ -268,11 +270,13 @@
+     const footprint = getFloorDimensions(b, floor);
+     if (Math.abs(x - b.position.x) <= footprint.width / 2 && Math.abs(z - b.position.z) <= footprint.depth / 2) return b.position.y + .6 + floor * b.height / b.floors;
+   }
++  const street = marketBlockHeight(world, x, z);
++  if (street !== null && (referenceHeight === undefined || Math.abs(street-referenceHeight) < 2.6)) return street;
+   let nearest = Infinity, y = terrainHeight(world, x, z);
+   for (const edge of index.roads.get(key(x, z)) ?? []) {
+     const point = nearestSegment(edge.points, x, z);
+     const score = referenceHeight === undefined ? point.distance : point.distance + Math.abs(point.y - referenceHeight) * 2;
+-    if (point.distance <= (edge.id.includes('airport-runway-strip') ? 22 : edge.mode === 'bridge' ? 4 : 5) && score < nearest) { nearest = score; y = point.y; }
++    if (point.distance <= (edge.id.includes('airport-runway-strip') ? 22 : edge.mode === 'bridge' ? 4 : edge.physicalWidth !== undefined ? edge.physicalWidth / 2 : 5) && score < nearest) { nearest = score; y = point.y; }
+   }
+   return y;
+ }
+@@ -426,6 +430,12 @@
+ }
+ 
+ export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
++  if (layoutVersion === 'current-v5-market-block-01') {
++    const base = createWorld(seed, 'current-v4');
++    const {block, bankEdge, walkingLink} = deriveMarketBlock(base, (x,z) => terrainHeight(base,x,z));
++    const world = {...base, layoutVersion, marketBlock:block, edges:[...base.edges.map(edge=>edge.id===bankEdge.id?bankEdge:block.pedestrianEdgeIds.includes(edge.id)?{...edge,physicalWidth:3.2}:edge),walkingLink]};
++    registerMarketBlockBase(world,base); return world;
++  }
+   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+   const currentLayout = layoutVersion !== 'legacy-ee3e7a1', historicR5 = layoutVersion === 'current-v2-r5', rng = random(seed);
+   const districts: District[] = plans.map(p => ({ id: p.id, name: p.name, kind: p.kind, center: { x: p.x, y: p.y, z: p.z }, radius: p.radius, color: p.color, population: p.count * 38 }));
+--- /dev/null
++++ b/tests/market-block.test.ts
+@@ -0,0 +1,90 @@
++import assert from 'node:assert/strict';
++import test from 'node:test';
++import { PerspectiveCamera, Raycaster, Vector3, Mesh } from 'three';
++import { createWorld, CURRENT_CITY_LAYOUT, getWalkHeight, terrainHeight } from '../src/world';
++import { canAccessFloor } from '../src/access';
++import { planWalkingJourney } from '../src/journey';
++import { PlayerController } from '../src/controller';
++import { Simulation } from '../src/simulation';
++import { savedWorldFingerprint, selectSavedWorld } from '../src/persistence/world-layout';
++import { buildMarketBlock } from '../src/rendering/market-block';
++import { findFloorPlanRoute, findBuildingFloorPlanRoute, getBuildingUsePoints, getBuildingBody, floorPlanSupport } from '../src/architecture-floor-plan';
++import { blocksMarketBlockMovement, marketBlockAllowsVehicle, marketBlockHeight, marketBlockLegacyWorld, marketBlockSurfacePieces, marketSurfaceHeight, polygonArea } from '../src/market-block';
++import type { Vec3, WorldDefinition } from '../src/types';
++
++const world=createWorld(20261001,'current-v5-market-block-01');
++const base=marketBlockLegacyWorld(world),b0=world.buildings.find(b=>b.id==='market-b0')!;
++function controlledMotor(run:(controller:PlayerController,keys:EventTarget)=>void){
++  const keys=Object.assign(new EventTarget(),{closest:()=>null}),doc=Object.assign(new EventTarget(),{pointerLockElement:null});
++  const oldWindow=Object.getOwnPropertyDescriptor(globalThis,'window'),oldDocument=Object.getOwnPropertyDescriptor(globalThis,'document');
++  Object.defineProperty(globalThis,'window',{value:keys,configurable:true});Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
++  const c=new PlayerController(new PerspectiveCamera(),new EventTarget() as HTMLCanvasElement,world,()=>{},(b,f)=>canAccessFloor(b,f,{role:'traveler',identities:['traveler']}));
++  try{run(c,keys);}finally{c.dispose();if(oldWindow)Object.defineProperty(globalThis,'window',oldWindow);else Reflect.deleteProperty(globalThis,'window');if(oldDocument)Object.defineProperty(globalThis,'document',oldDocument);else Reflect.deleteProperty(globalThis,'document');}
++}
++function key(keys:EventTarget,down:boolean){const event=new Event(down?'keydown':'keyup');Object.assign(event,{code:'KeyW',repeat:false});keys.dispatchEvent(event);}
++function walk(c:PlayerController,keys:EventTarget,points:Vec3[]){
++  key(keys,true);try{for(const target of points){let iterations=0;while(Math.hypot(c.position.x-target.x,c.position.z-target.z)>.02){const before=c.position,dx=target.x-before.x,dz=target.z-before.z,d=Math.hypot(dx,dz);c.yaw=Math.atan2(-dx,-dz);c.step(Math.min(.02,d/4.8),false);assert(Math.hypot(c.position.x-before.x,c.position.z-before.z)>.000001,`W blocked ${JSON.stringify({before,target,inside:c.inside?.id,floor:c.floor})}`);assert(Math.hypot(c.position.x-before.x,c.position.z-before.z)<=.0960001);assert(++iterations<4000);}}}finally{key(keys,false);}
++}
++
++test('v5 is opt-in and its sampled surfaces have real limited foundations; inherited body/water stay exact',()=>{
++  assert.equal(CURRENT_CITY_LAYOUT,'current-v4');assert.equal(createWorld().layoutVersion,'current-v4');
++  assert.equal(world.marketBlock!.version,'market-block-01-sampled-local-foundations-1');
++  assert(world.marketBlock!.sampling.maxFillCut<=4);assert(world.marketBlock!.sampling.maxFoundationCut<=4);assert(world.marketBlock!.sampling.sampledPoints>1000);assert(world.marketBlock!.sampling.area<1500);
++  assert.equal(JSON.stringify(world.buildings),JSON.stringify(base.buildings));assert.equal(JSON.stringify(world.river),JSON.stringify(base.river));assert.equal(JSON.stringify(world.waterfall),JSON.stringify(base.waterfall));assert.equal(JSON.stringify(getBuildingBody(b0)),JSON.stringify(getBuildingBody(base.buildings.find(b=>b.id===b0.id)!)));
++  for(const surface of world.marketBlock!.surfaces){assert.equal(surface.bottom.length,surface.vertices.length);for(const [i,p]of surface.vertices.entries()){assert(Number.isFinite(p.y));assert(surface.bottom[i].y<p.y);assert(Math.abs(marketSurfaceHeight(surface,p)!-terrainHeight(base,p.x,p.z))<=4);}}
++  for(const [x,z]of [[0,0],[400,-900],[1200,1000],[-740,980]])assert.equal(terrainHeight(world,x,z),terrainHeight(base,x,z));
++});
++
++test('ordinary fixed-speed W reaches all three actual sale points and the upper work floor; room/stock are real',()=>{
++  const sim=new Simulation(world),shop=sim.state.shops.find(s=>s.buildingId===b0.id)!;
++  controlledMotor((c,keys)=>{
++    c.setMode('walk',{x:b0.position.x+5,y:b0.position.y+.6,z:b0.position.z+34.6});
++    walk(c,keys,[{x:b0.door.x,y:b0.door.y,z:b0.position.z+34.6},{x:b0.door.x,y:b0.door.y,z:b0.door.z+3.9}]);
++    const sales=getBuildingUsePoints(b0,0).filter(p=>p.purpose==='sale');assert.equal(sales.length,3);
++    for(const sale of sales){const route=findFloorPlanRoute(b0,0,c.position,sale.position);assert(route);walk(c,keys,route);sim.state.player.position={...c.position};assert.equal(c.inside?.id,b0.id);assert(sim.isAtBuildingFunctionPoint(b0,sim.state.player.position,'sale'));const cash=sim.state.player.money,inventory=shop.inventory,revenue=shop.revenue,publicCash=sim.state.treasury;
++      assert(sim.command({type:'purchase',targetId:shop.id,value:1}).ok);assert.equal(cash-sim.state.player.money,shop.price);assert.equal(shop.inventory,inventory-1);assert.equal(shop.revenue-revenue,shop.price);assert.equal(sim.state.treasury,publicCash,'retail payment is not invented public revenue');
++    }
++    const upstairs=getBuildingUsePoints(b0,1).find(p=>p.purpose==='work')!;
++    const up=findBuildingFloorPlanRoute(b0,0,1,c.position,upstairs.position);assert(up);walk(c,keys,up);assert.equal(c.floor,1);assert.equal(c.inside?.id,b0.id);
++  });
++});
++
++
++test('the new bank connection is a real 3.2m pedestrian road with same-height joins and normal W both ways',()=>{
++  const edge=world.edges.find(e=>e.id===world.marketBlock!.bankEdgeId)!;
++  assert.equal(edge.physicalWidth,3.2);assert.equal(edge.from,base.edges.find(e=>e.id===edge.id)!.from);assert.equal(edge.to,base.edges.find(e=>e.id===edge.id)!.to);
++  assert.equal(edge.length,edge.points.slice(1).reduce((s,p,i)=>s+Math.hypot(p.x-edge.points[i].x,p.y-edge.points[i].y,p.z-edge.points[i].z),0));
++  controlledMotor((c,keys)=>{const route=edge.points.slice(6,world.marketBlock!.bankJoinIndex+1);c.setMode('walk',route[0]);walk(c,keys,route);walk(c,keys,[...route].reverse());assert(Math.hypot(c.position.x-route[0].x,c.position.z-route[0].z)<.03);});
++  const sim=new Simulation(world);assert(sim.state.vehicles.every(v=>marketBlockAllowsVehicle(world,v.edgeId)));for(const id of world.marketBlock!.pedestrianEdgeIds)assert(!marketBlockAllowsVehicle(world,id));
++});
++
++test('flower-bed rims and trunks are actual body blockers while the sales approach stays open',()=>{
++  for(const tree of world.marketBlock!.trees){const y=b0.position.y+.6;assert(blocksMarketBlockMovement(world,{x:tree.position.x-2,y,z:tree.position.z},{x:tree.position.x+2,y,z:tree.position.z}));assert(!blocksMarketBlockMovement(world,{x:tree.position.x-2,y,z:tree.position.z+2},{x:tree.position.x+2,y,z:tree.position.z+2}));}
++  assert(!blocksMarketBlockMovement(world,{x:b0.door.x,y:b0.door.y,z:b0.door.z+3},{x:b0.door.x,y:b0.door.y,z:b0.door.z}));
++});
++
++test('actual emitted near/far resident mesh tops match shared support; physical geometry changes identity',()=>{
++  const group=buildMarketBlock(world);group.updateMatrixWorld(true);const ray=new Raycaster(),samples=[] as Vec3[];
++  for(let i=0;i<world.marketBlock!.surfaces.length;i++)for(const piece of marketBlockSurfacePieces(world,i)){if(polygonArea(piece)<.5)continue;const p={x:piece.reduce((s,p)=>s+p.x,0)/piece.length,z:piece.reduce((s,p)=>s+p.z,0)/piece.length};samples.push({...p,y:marketSurfaceHeight(world.marketBlock!.surfaces[i],p)!});}
++  for(const p of samples){ray.set(new Vector3(p.x,p.y+1,p.z),new Vector3(0,-1,0));const hits=ray.intersectObject(group,true).filter(h=>h.object.name.startsWith('真实铺面'));assert(hits.length,JSON.stringify(p));assert(Math.abs(hits[0].point.y-p.y)<.00005);assert(Math.abs(getWalkHeight(world,p.x,p.z,p.y)-p.y)<.00005);}
++  const fp=savedWorldFingerprint(world),altered={...world,marketBlock:structuredClone(world.marketBlock)};altered.marketBlock!.solids[0].width+=.2;assert.notEqual(savedWorldFingerprint(altered),fp);
++  const artGroup=buildMarketBlock(world);artGroup.traverse(o=>{if(o instanceof Mesh)o.material=Array.isArray(o.material)?o.material:o.material.clone();});assert.equal(savedWorldFingerprint(world),fp,'GPU/art state is outside the physical world');
++});
++
++test('native save matches the regenerated v5 fingerprint; unknown identity and wrong layout reject atomically',()=>{
++  const sim=new Simulation(world),json=sim.exportSave(),restored=new Simulation(world);assert(restored.importSave(json).ok);assert.equal(restored.exportSave(),json);
++  assert.equal(selectSavedWorld(json).layout,'current-v5-market-block-01');
++  const wrong=new Simulation(base),before=wrong.exportSave();assert(!wrong.importSave(json).ok);assert.equal(wrong.exportSave(),before);
++  const illegalCar=JSON.parse(json),car=illegalCar.state.vehicles.find((v:{kind:string})=>v.kind==='road');assert(car);car.edgeId='walk-market-b44-market-b0';car.position={...world.edges.find(e=>e.id===car.edgeId)!.points[0]};assert(!restored.importSave(JSON.stringify(illegalCar)).ok);assert.equal(restored.exportSave(),json);
++  const damaged=JSON.parse(json);damaged.worldFingerprint='deadbeef';assert.throws(()=>selectSavedWorld(JSON.stringify(damaged)));assert.equal(restored.exportSave(),json);
++  assert.equal(floorPlanSupport(b0,0,getBuildingUsePoints(b0,0).find(p=>p.purpose==='sale')!.position)?.kind,'room');
++});
++
++
++test('52m public street is physically continuous and the public planner consumes the real bank-to-market link',()=>{
++  const link=world.edges.find(edge=>edge.id==='walk-market-b44-market-b0')!;assert.equal(link.capacity,0);assert.equal(link.physicalWidth,3.2);assert(!marketBlockAllowsVehicle(world,link.id));
++  controlledMotor((c,keys)=>{c.setMode('walk',{x:b0.position.x-25.5,y:b0.door.y,z:b0.position.z+29.2});walk(c,keys,[{x:b0.position.x+25.5,y:b0.door.y,z:b0.position.z+29.2}]);assert(Math.abs(c.position.x-b0.position.x-25.5)<.03);});
++  const bank=world.buildings.find(b=>b.id==='market-b44')!;
++  const route=planWalkingJourney(world,bank.door,b0.id);assert(route);assert(route.edgeIds.includes(link.id),JSON.stringify(route.edgeIds));assert(route.metres>=link.length-1);assert(route.metres<link.length+10,'planner must use the actual local join rather than loop through the quarter');
++  controlledMotor((c,keys)=>{c.setMode('walk',link.points[0]);walk(c,keys,link.points.slice(1));assert(Math.hypot(c.position.x-b0.door.x,c.position.z-b0.door.z)<.03);});
++});

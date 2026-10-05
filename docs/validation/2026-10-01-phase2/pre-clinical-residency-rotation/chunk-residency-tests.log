@@ -1,0 +1,17 @@
+✔ building metadata partitions the unchanged authority without allocating any near geometry (30.987463ms)
+✔ actual near resources remain bounded while travel unloads geometry, interior refs and instance buffers (72.936451ms)
+✔ inside priority and every recreated resource preserve the current high-floor room cutaway (4.841976ms)
+✔ shell distance includes real upper and underground floors instead of the ground-center height (0.517921ms)
+✔ real residential door exit keeps its near geometry and every rotated city entrance is covered at low quality (43.448606ms)
+✔ a rotated wide building bounding circle cannot outrank the actual nearby body (0.551901ms)
+✔ a finite exit margin prevents boundary churn and still releases or rebuilds real resources (0.644738ms)
+✔ quality reduction and a new inside chunk evict before allocating, with a strict live capacity (10.54507ms)
+✔ failed creation/publication retains the far silhouette and rolls back owned resources and indices (1.293513ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2306.612726

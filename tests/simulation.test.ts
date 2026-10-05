@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Simulation } from '../src/simulation.ts';
+import { completePaidCourse } from './education-fixture.ts';
 import type { BuildingKind, Relationship, SimState, Vec3, WorldDefinition } from '../src/types.ts';
 
 /** Two connected neighbourhoods isolate simulation rules from procedural world generation. */
@@ -140,16 +141,22 @@ test('bank operations preserve account balances and reject unaffordable or inval
 test('work pays for an actual local shift and cannot be repeated immediately for unlimited income', () => {
   const { sim, world } = create();
   const workshop = world.buildings.find(building => building.kind === 'workshop')!;
+  // Fund both shifts from a real wallet; the employer cannot pay an unfunded wage.
+  const employer = sim.state.shops.find(shop => shop.buildingId === workshop.id)!;
+  employer.employees = 0; // Isolate the player's funded contract from autonomous NPC commitments.
+  sim.state.player.money -= 100; sim.transferShopFunds(employer, 100);
   walkTo(sim, workshop.door);
   const before = { money: sim.state.player.money, experience: sim.state.player.experience };
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, true);
-  assert.ok(sim.state.player.money > before.money);
-  assert.ok(sim.state.player.experience > before.experience);
+  assert.equal(sim.state.player.money, before.money, 'starting a shift reserves real cash without paying unperformed work');
+  assert.equal(sim.state.player.experience, before.experience);
   const earned = sim.state.player.money;
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, false);
   assert.equal(sim.state.player.money, earned);
   const tick = sim.state.tick;
   advanceUntil(sim, () => sim.state.tick >= tick + 30);
+  assert.ok(sim.state.player.money > before.money); assert.equal(sim.state.player.experience, before.experience + 1);
+  assert.equal(sim.state.playerLabor!.history.at(-1)!.workedMinutes, 60);
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, true);
 });
 
@@ -163,7 +170,7 @@ test('education and a local professional exam unlock police permissions', () => 
   assert.equal(sim.state.player.role, 'traveler');
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, false);
   walkTo(sim, school.door);
-  assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true);
+  completePaidCourse(sim, school);
   assert.ok(sim.state.player.education >= 1);
   walkTo(sim, { x: police.door.x + 100, y: police.door.y, z: police.door.z });
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, false);
@@ -255,6 +262,10 @@ test('an eligible local campaign takes time to win an election, including across
 test('saving preserves a paid work shift cooldown instead of allowing immediate duplicate payment', () => {
   const { sim, world } = create();
   const workshop = world.buildings.find(building => building.kind === 'workshop')!;
+  // Fund both shifts from a real wallet; the employer cannot pay an unfunded wage.
+  const employer = sim.state.shops.find(shop => shop.buildingId === workshop.id)!;
+  employer.employees = 0; // Isolate the player's funded contract from autonomous NPC commitments.
+  sim.state.player.money -= 100; sim.transferShopFunds(employer, 100);
   walkTo(sim, workshop.door);
   assert.equal(sim.command({ type: 'work', targetId: workshop.id }).ok, true);
   const restored = new Simulation(fixture());
@@ -383,8 +394,7 @@ test('save validation rejects corrupt numbers, foreign references, duplicate ent
 
 test('professional certificates accumulate and retain enforcement permissions after a new career', () => {
   const { sim, world } = create();
-  walkTo(sim, world.buildings.find(b => b.kind === 'school')!.door);
-  assert.equal(sim.command({ type: 'exam', targetId: 'study' }).ok, true);
+  completePaidCourse(sim, world.buildings.find(b => b.kind === 'school')!);
   walkTo(sim, world.buildings.find(b => b.kind === 'police')!.door);
   assert.equal(sim.command({ type: 'exam', targetId: 'police' }).ok, true);
   walkTo(sim, world.buildings.find(b => b.kind === 'market')!.door);
@@ -458,7 +468,7 @@ test('traffic lights expose the same signal state used by vehicle rules and perm
   assert.ok(sim.state.signals?.[node.id] === 0 || sim.state.signals?.[node.id] === 1);
 });
 
-test('the complete city survives multiple days and restores a large genuine save deterministically', async () => {
+test('the complete city survives multiple days and restores a large genuine save deterministically', async t => {
   const { createWorld } = await import('../src/world.ts');
   const world = createWorld(), sim = new Simulation(world);
   sim.command({ type: 'speed', value: 8 });
@@ -470,6 +480,16 @@ test('the complete city survives multiple days and restores a large genuine save
   assert.ok(sim.state.metrics.flights > 0);
   const saved = sim.exportSave(), restored = new Simulation(world);
   assert.ok(saved.length < 8_000_000);
+  const routeDocument = JSON.parse(saved);
+  t.diagnostic(JSON.stringify({ completeCitySave: true, tick: sim.state.tick, encoding: routeDocument.routeEncoding,
+    poolExtents: routeDocument.routeEncoding === 'paged-v1' ? routeDocument.routePool.map((page: unknown[]) => page.length) : [routeDocument.routePool.length],
+    maxActorRoute: Math.max(...routeDocument.state.citizens.map((citizen: any) => citizen.route?.length ?? 0)), saveBytes: Buffer.byteLength(saved) }));
+  if (routeDocument.routeEncoding === 'paged-v1') {
+    const originalEncoding = { ...routeDocument, routeEncoding: 'pooled-v1', routePool: routeDocument.routePool.flat() }, oldReader = new Simulation(world), before = oldReader.exportSave();
+    const result = oldReader.importSave(JSON.stringify(originalEncoding));
+    t.diagnostic(JSON.stringify({ exactOldPoolRejection: result, originalPointCount: originalEncoding.routePool.length }));
+    assert.equal(result.ok, false); assert.match(result.message, /route pool/); assert.equal(oldReader.exportSave(), before);
+  }
   assert.equal(restored.importSave(saved).ok, true);
   for (let i = 0; i < 24; i++) { sim.step(.25); restored.step(.25); }
   assert.deepEqual(restored.state, sim.state);
@@ -755,11 +775,13 @@ test('actual private wages are expensed once and initial staff counts refer to r
   const worker = sim.state.citizens.find(c => c.workId === shop.buildingId && c.role !== '学生')!;
   assert.ok(worker);
   const moneyBefore = worker.money, profitBefore = shop.profit;
-  const runtime = Reflect.get(sim, 'runtime'), elapsed = 12;
+  const runtime = Reflect.get(sim, 'runtime'), fundsBefore = sim.shopFunds(shop);
+  let facilitiesPaid = 0; sim.onEvent('business-expense', event => { if (event.shopId === shop.id) facilitiesPaid += event.amount ?? 0; });
   sim.emitEvent({ type: 'wage', citizenId: worker.id, districtId: worker.districtId, amount: 32 });
   sim.step(.25);
   assert.ok(Math.abs(worker.money - moneyBefore - 32 * (1 - sim.state.taxRate)) < 1e-8);
-  assert.ok(Math.abs(shop.profit - profitBefore + 32 + elapsed / 1440 * 20) < 1e-8, 'only the real salary and separate premises expense should reduce profit');
+  assert.ok(Math.abs(shop.profit - profitBefore + 32 + facilitiesPaid) < 1e-8, 'only the real salary and actual occupied facilities expense should reduce profit');
+  assert.ok(Math.abs(sim.shopFunds(shop) - fundsBefore + 32 + facilitiesPaid) < 1e-8, 'private payroll and premises expense must come from its real operating account');
   assert.equal(runtime.wages.length, 0, 'settled salary cannot remain queued for a second payment');
 });
 
@@ -771,10 +793,11 @@ test('public laboratory staff use the city budget and public wings cannot be bou
   const worker = sim.state.citizens.find(c => c.workId === wing.id && c.role !== '学生')!;
   assert.ok(worker); assert.equal(worker.role, '科研员');
   const moneyBefore = worker.money, treasuryBefore = sim.state.treasury;
+  let operationNet = 0; sim.onEvent('public-procurement', event => { operationNet += (event.amount ?? 0) * (1 - sim.state.taxRate); });
   sim.emitEvent({ type: 'wage', citizenId: worker.id, districtId: worker.districtId, amount: 40 });
   sim.step(.25);
   assert.ok(Math.abs(worker.money - moneyBefore - 40 * .92) < 1e-8);
-  assert.ok(Math.abs(sim.state.treasury - treasuryBefore + 40 * .92 + .25 * 1.44) < 1e-8, 'city wages, their actual tax and operating expense must settle the public account');
+  assert.ok(Math.abs(sim.state.treasury - treasuryBefore + 40 * .92 + operationNet) < 1e-8, 'city wages, their actual tax and supplied public operations must settle the public account');
   walkTo(sim, wing.door); sim.state.player.identities = ['traveler', 'merchant', 'scientist'];
   const cash = sim.state.player.money;
   assert.equal(sim.command({ type: 'purchase', targetId: wing.id }).ok, false);
@@ -782,7 +805,9 @@ test('public laboratory staff use the city budget and public wings cannot be bou
   assert.equal(sim.state.player.money, cash);
   const treasury = sim.state.treasury;
   assert.equal(sim.command({ type: 'work', targetId: wing.id }).ok, true);
-  assert.equal(sim.state.treasury, treasury - 62, 'a player public salary must have the same real employer source');
+  assert.equal(sim.state.treasury, treasury - 62, 'public payroll reserves the full shift from the same real employer source');
+  assert.equal(sim.state.playerLabor!.job!.escrow, 62); assert.equal(sim.state.player.money, cash, 'unperformed public work does not pay immediately');
+  assert.equal(sim.command({ type: 'cancelWork' }).ok, true); assert.equal(sim.state.treasury, treasury);
   sim.state.treasury = 0; sim.command({ type: 'setTime', value: 12 });
   const unpaid = sim.state.player.money;
   assert.equal(sim.command({ type: 'work', targetId: wing.id }).ok, false);
@@ -832,16 +857,18 @@ test('citizens pay a real fare before boarding and keep walking when they cannot
   for (const cash of [5, 3]) {
     const sim = new Simulation(fixture()), citizen = sim.state.citizens[0], vehicle = sim.state.vehicles.find(v => v.kind === 'road' && v.direction === 1)!;
     const dock = sim.worldDefinition.buildings.find(b => b.kind === 'dock' && b.districtId === citizen.districtId)!;
-    const runtime = Reflect.get(sim, 'runtime'); vehicle.nextDeparture = 10000;
+    const runtime = Reflect.get(sim, 'runtime'); vehicle.nextDeparture = 481; // a real imminent boarding window
     citizen.position = { ...vehicle.position }; citizen.role = '工人'; citizen.workId = dock.id; citizen.destinationId = dock.id;
     citizen.money = cash; citizen.needs = { hunger: 100, fatigue: 100, social: 100, fun: 100 };
     citizen.route = [{ ...citizen.position }, { ...dock.door }]; citizen.routeIndex = 1;
+    sim.state.shops.find(shop => shop.buildingId === dock.id)!.employees++;
     runtime.activities[citizen.id] = 'work'; runtime.decisionAt[citizen.id] = 10000;
-    let paid = 0, ownFare = 0; sim.onEvent('transit-fare', e => { paid += e.amount ?? 0; if (e.citizenId === citizen.id) ownFare += e.amount ?? 0; });
+    let paid = 0, ownFare = 0, operationNet = 0; sim.onEvent('transit-fare', e => { paid += e.amount ?? 0; if (e.citizenId === citizen.id) ownFare += e.amount ?? 0; });
+    sim.onEvent('public-procurement', event => { operationNet += (event.amount ?? 0) * (1 - sim.state.taxRate); });
     const funds = sim.state.treasury; sim.setFocus(citizen.position, 'drone'); sim.step(.25);
     if (cash >= 4) { assert.equal(citizen.state, 'riding'); assert.equal(citizen.money, 1); assert.equal(ownFare, 4); }
     else { assert.notEqual(citizen.state, 'riding'); assert.equal(citizen.money, 3); assert.equal(ownFare, 0); }
-    assert.ok(Math.abs(sim.state.treasury - funds - paid + .25 * 1.44) < 1e-8, 'only actual tickets fund transit, apart from the stated operating expense');
+    assert.ok(Math.abs(sim.state.treasury - funds - paid + operationNet) < 1e-8, 'actual tickets fund transit and actual supplied operations settle the public account');
   }
 });
 
@@ -905,7 +932,12 @@ test('arriving passengers keep a still feasible meal destination and replan only
     vehicle.progress = .9999; vehicle.position = { x: 199.98, y: 0, z: 20 }; vehicle.nextDeparture = 0; vehicle.passengers = 1;
     citizen.position = { ...vehicle.position }; citizen.state = 'riding'; citizen.destinationId = market.buildingId;
     citizen.needs = { hunger: 10, fatigue: 100, social: 100, fun: 100 }; citizen.money = 100;
-    market.open = available; if (!available) { market.inventory = 0; market.profit = -700; }
+    market.open = available; if (!available) {
+      market.inventory = 0; market.profit = -700;
+      delete sim.state.trade!.ownedLots![market.id];
+      const owner = sim.state.citizens.find(c => c.id === sim.shopOwnerId(market))!;
+      owner.money += sim.shopFunds(market); sim.transferShopFunds(market, -sim.shopFunds(market));
+    }
     runtime.riders[citizen.id] = { vehicleId: vehicle.id, stopNodeId: stop.id };
     runtime.activities[citizen.id] = 'eat'; runtime.decisionAt[citizen.id] = 0;
     sim.setFocus(vehicle.position, 'drone'); sim.step(.25);
@@ -926,14 +958,15 @@ test('a real police response records duty attendance and transfers its earned pa
   const crime = { id: 'crime-1', districtId: officer.districtId, position: { x: 1100, y: 0, z: 100 }, severity: 1, status: 'open' as 'open' | 'responding' | 'resolved', responseAt: 0 };
   sim.state.crimes.push(crime); const runtime = Reflect.get(sim, 'runtime') as { crimeId: number; dispatches: Record<string, unknown>; wages: { citizenId: string; amount: number }[]; taxes: number; operatingCost: number; attendance: Record<string, number> }; runtime.crimeId = 1;
   sim.step(.25); assert.ok(runtime.dispatches[officer.id]);
-  let payment = 0, cashBefore = 0, treasuryBefore = 0, expectedPublicCost = 0, taxes = 0, operations = 0;
+  let payment = 0, earned = 0, attended = 0, cashBefore = 0, treasuryBefore = 0, expectedPublicCost = 0, taxes = 0, operations = 0, payrollObserved = false;
+  sim.onEvent('wage-earned', event => { if (event.citizenId === officer.id) { earned += event.amount ?? 0; attended += event.minutes ?? 0; assert.ok(Math.abs((event.amount ?? 0) - (event.minutes ?? 0) * (event.ratePerMinute ?? 0)) < 1e-8); } });
   sim.onEvent('wage', event => { if (event.citizenId === officer.id) payment += event.amount ?? 0; });
   sim.onPhase('commerce', state => {
     if (!runtime.wages.some(wage => wage.citizenId === officer.id)) return;
-    cashBefore = officer.money; treasuryBefore = state.treasury; taxes = runtime.taxes; operations = runtime.operatingCost;
-    expectedPublicCost = runtime.wages.filter(wage => !state.shops.some(shop => shop.buildingId === state.citizens.find(c => c.id === wage.citizenId)!.workId)).reduce((sum, wage) => sum + wage.amount, 0);
-    taxes += runtime.wages.reduce((sum, wage) => sum + wage.amount * state.taxRate, 0);
+    cashBefore = officer.money; treasuryBefore = state.treasury; taxes = runtime.taxes; operations = 0; expectedPublicCost = 0; payrollObserved = true;
   });
+  sim.onEvent('public-procurement', event => { if (payrollObserved) { operations += event.amount ?? 0; taxes += (event.amount ?? 0) * sim.state.taxRate; } });
+  sim.onEvent('wage-paid', event => { if (payrollObserved) { if (!event.shopId) expectedPublicCost += event.amount ?? 0; taxes += (event.amount ?? 0) * sim.state.taxRate; } });
   sim.onPhase('finance', state => {
     if (!payment) return;
     assert.ok(Math.abs(officer.money - cashBefore - payment * (1 - state.taxRate)) < 1e-8);
@@ -941,8 +974,8 @@ test('a real police response records duty attendance and transfers its earned pa
   });
   advanceUntil(sim, () => payment > 0, 300);
   assert.equal(officer.state, 'responding', 'the officer must still be doing the actual long response, not an idle workplace fixture');
-  const prosperity = sim.state.districts.find(d => d.id === officer.districtId)!.prosperity;
-  assert.ok(Math.abs(payment - 32 * (.7 + prosperity / 100) * (59.75 / 480)) < .01, 'the same salary formula pays only the actual attended fraction');
+  assert.ok(Math.abs(attended - 59.75) < 1e-8, 'response credits only its actual attended fraction');
+  assert.ok(Math.abs(payment - earned) < 1e-8, 'payroll settles the wage earned at the immutable contract rate');
   assert.equal(runtime.attendance[officer.id], undefined, 'settled attendance resets at payroll');
 });
 
@@ -966,7 +999,12 @@ test('equal proportions of idle viable shops have equal commercial feedback rega
 
 test('real insolvent businesses still close and reduce district prosperity through the normalized feedback', () => {
   const { sim } = create(); sim.command({ type: 'setTime', value: 12 });
-  for (const shop of sim.state.shops) shop.profit = -700;
+  for (const shop of sim.state.shops) {
+    shop.profit = -700; shop.inventory = 0;
+    delete sim.state.trade!.ownedLots![shop.id];
+    const owner = sim.state.citizens.find(c => c.id === sim.shopOwnerId(shop))!;
+    owner.money += sim.shopFunds(shop); sim.transferShopFunds(shop, -sim.shopFunds(shop));
+  }
   const before = sim.state.districts.map(d => d.prosperity);
   sim.step(12.5); // one hundred game minutes
   assert.ok(sim.state.shops.every(shop => !shop.open));

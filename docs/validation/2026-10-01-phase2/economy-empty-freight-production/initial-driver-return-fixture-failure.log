@@ -1,0 +1,50 @@
+✔ generated neighbours are assigned jobs by the walkable graph, including mountain detours (1566.636807ms)
+✔ an underfunded private employer pays its real cash proportionally and settles each wage once (86.982854ms)
+✔ production requires actual attendance and technology improves that labour instead of producing unattended stock (29.766419ms)
+✔ public operations consume existing goods and credit their real supplier without creating money (19.63334ms)
+✔ native meals consume one portion, carry only the remainder, and workshop purchases stay material (52.615956ms)
+✔ food freight leaves industrial material with its real producer (16.145826ms)
+✔ a stored meal is consumed after closing time and does not credit money or create food (18.350662ms)
+✔ legacy accounts migrate from real proprietor savings and new ownership and cash survive exact continuation (252.471621ms)
+✔ funded clinical care consumes one real material and cannot heal from an empty supplier (599.372201ms)
+✔ actual attendance retains its employer and promised wage rate across mid-shift changes and save/load (51.284997ms)
+✔ wage contracts reject changed amounts and employers atomically, while legacy unpaid expense migrates once (130.151428ms)
+✔ share repurchases reserve both unpaid and not-yet-due actual wages (20.668632ms)
+✔ native housing, education, qualifications and police rewards have actual public counterparties (6.698792ms)
+✔ future public shifts require actual departmental witnesses and reserve past promises before authorizing cash (120.085885ms)
+✔ construction purchases finite material and completes only after attended work, without saleable stock creation (51.092058ms)
+✔ private employers approve only onsite cash-backed minutes and preserve losses, old claims and future cash protection (70.989633ms)
+✔ a capped worker wallet retains its wage claim until a real receiving capacity is available (13.121654ms)
+✔ an empty existing freight carrier loads at the real farm, delivers owner custody, and loads again after exact restoration (217.963879ms)
+✔ a passenger bus cannot load nearby farm stock and freight cannot load a remote same-district farm (190.424114ms)
+✔ both loaded and empty generated freight carriers resume the exact same 24 ticks (579.542563ms)
+✖ real ten-seat passengers and their driver keep their places when a freight pickup would require two seats (186.729645ms)
+✔ a saved passenger bus carrying existing stock never gains a generated freight role (49.35236ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 21
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4694.44475
+
+✖ failing tests:
+
+test at tests/economy.test.ts:1:39754
+✖ real ten-seat passengers and their driver keep their places when a freight pickup would require two seats (186.729645ms)
+  AssertionError [ERR_ASSERTION]: after the actual paid passengers finish their round trip, the driver can collect the existing stock
+      at TestContext.<anonymous> (/workspace/yunshan/tests/economy.test.ts:429:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

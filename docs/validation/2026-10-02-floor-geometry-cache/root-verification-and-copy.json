@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-10-02T16:57:00.392976+00:00",
+  "status": "VERIFIED_PENDING_NEW_SOURCE12_CHECKPOINT",
+  "archiveSHA256": "492c206a77247b4da9b603cb4a52a4e9f6734878e1642909fd732a90ba4e15b8",
+  "zipMembers": 274,
+  "indexedOriginals": 273,
+  "allIndexedMembersMatchOriginalBytes": true,
+  "secretPatternCountsIncludingGzip": {
+    "tripo": 0,
+    "openai": 0,
+    "github": 0,
+    "aws": 0,
+    "privateKey": 0,
+    "bearer": 0,
+    "signed": 0
+  },
+  "libraryID": "libfile_3006245f42f08191863ddc1035dcb2dc",
+  "copied": [
+    {
+      "name": "archive-independent-verification.json",
+      "bytes": 524,
+      "sha256": "23b1fcf5ee3380c41f6dbb4c11ed53e2e1ecf6ac5acf936dd6a9a9a387f68036"
+    },
+    {
+      "name": "archive-integrity-status.json",
+      "bytes": 839,
+      "sha256": "3ff60ed7ec24f671e763298c4b4b6a995c49de8df4eebe382bf494587a8e9fd6"
+    },
+    {
+      "name": "archive-manifest.json",
+      "bytes": 77299,
+      "sha256": "368b025fe3a35744bb207826998ea1a65ae25423765c74f9d46c66afdd4dc000"
+    },
+    {
+      "name": "library-delivery-result.json",
+      "bytes": 1017,
+      "sha256": "d23011faf48338dfd3f33d65197b02917db8b1b3d2c9020073029dbf1eee4e80"
+    },
+    {
+      "name": "yunshan-freeze11-floor-geometry-cache-candidate-evidence.zip",
+      "bytes": 15443129,
+      "sha256": "492c206a77247b4da9b603cb4a52a4e9f6734878e1642909fd732a90ba4e15b8"
+    },
+    {
+      "name": "README-final.md",
+      "bytes": 4184,
+      "sha256": "4ec2ab443d9975a13418e3e961180ab3f7d4556d1d94927b0fbaf216110adb60"
+    },
+    {
+      "name": "candidate.patch",
+      "bytes": 16576,
+      "sha256": "b6b28a748e3c3bc4b0d5f8623fb018a7ebd1c70db5040698bf8a79152936197a"
+    }
+  ],
+  "sourceScope": "candidate runtime/test exact bytes integrated; new combined source12 build/browser results separate"
+}

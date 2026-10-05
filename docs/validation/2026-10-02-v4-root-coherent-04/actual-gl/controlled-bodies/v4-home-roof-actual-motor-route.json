@@ -1,0 +1,162 @@
+{
+  "label": "v4-home-roof-actual-motor",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -596.2,
+      "y": 37.2,
+      "z": 810.3000000000001
+    },
+    {
+      "x": -596.2,
+      "y": 37.2,
+      "z": 810.7
+    }
+  ],
+  "start": {
+    "x": -596.2,
+    "y": 37.2,
+    "z": 810.3000000000001
+  },
+  "steps": 6,
+  "motorSeconds": 0.08333333333332575,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.3000000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.3720000000001
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.3720000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.4440000000001
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.4440000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.5160000000001
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.5160000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.5880000000001
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.5880000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.6600000000001
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.07200000000000273,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.008333333333325754,
+      "before": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.6600000000001
+      },
+      "after": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.7
+      },
+      "floor": 0,
+      "inside": null,
+      "metres": 0.03999999999996362,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 86523.89999999851,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 86552.79999999702,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -596.2,
+    "y": 37.2,
+    "z": 810.7
+  },
+  "floor": 0,
+  "inside": null,
+  "protectedStateUnchanged": true
+}

@@ -1,0 +1,31 @@
+{
+  "status": "PREPARED_NOT_RUN",
+  "syntaxCheck": "NOT_RUN_DEFERRED_BY_ROOT_CPU_PROFILE_EXCLUSION",
+  "simulationImports": 0,
+  "simulationConstructions": 0,
+  "ticks": 0,
+  "commands": 0,
+  "GPU": 0,
+  "compression": 0,
+  "LibraryAttempts": 0,
+  "reason": "Root requires sole natural first-night CPU profile; this task authorizes only external file preparation and reading original static JSON until new GO.",
+  "independentStaticReview": {
+    "agent": "/root/final_home_rest_review/voxel_fixture_review",
+    "result": "NO_BLOCKING_WRITE_ERROR_FOUND_STATIC_ONLY",
+    "runtimeOrSyntaxValidation": "NOT_RUN",
+    "remainingPrecondition": "Player a-to-service strict <=2m has about 8e-14m margin; preserve exact input floats and retain any actual gate failure without adjusting a.",
+    "wholeNPCBuildMutationAssertion": "Added after the second setFocus(a), before actual build; every NPC record must remain byte-identical across command."
+  },
+  "plannedCostPerVersion": {
+    "nativeCitizens": 384,
+    "buildings": 5,
+    "simulationConstructions": 2,
+    "mainTicks": 26,
+    "continuationCopyTicks": 24,
+    "totalStepCalls": 50
+  },
+  "old09Expected": "Behavioral FAIL only if actual native rent/build and all body/support/save preconditions succeed; currently unexecuted.",
+  "after10Expected": "PASS under the same immutable fixture; currently unexecuted.",
+  "sharedOrFrozenFilesEdited": [],
+  "sealedPackagesEdited": []
+}

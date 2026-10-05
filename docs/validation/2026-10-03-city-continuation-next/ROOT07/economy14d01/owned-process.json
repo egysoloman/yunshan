@@ -1,0 +1,24 @@
+{
+  "pid": 21540,
+  "group": 21540,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "14",
+    "--out",
+    "artifacts/root07-economy-14d.json"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 21540,
+      "state": "R",
+      "parent": 21537,
+      "group": 21540,
+      "session": 21540,
+      "startTicks": 869225
+    }
+  ]
+}

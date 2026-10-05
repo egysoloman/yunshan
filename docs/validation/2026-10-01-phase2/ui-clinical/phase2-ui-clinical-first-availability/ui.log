@@ -1,0 +1,30 @@
+
+> yunshan-city@0.1.0 test:ui
+> node scripts/ui-test.mjs
+
+9:08:09 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('[data-ref="context-body"] [data-command="purchase"]')[22m
+[2m    - locator resolved to <button disabled type="button" data-value="1" class="action-button" data-command="purchase" data-target="workshop-b0">购买工业物料 · 10.97 云币</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    57 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is not enabled[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+
+    at /tmp/yunshan-ui-clinical-native-1790888861606/scripts/ui-test.mjs:217:76
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,83 @@
+{
+  "status": "PASS_EXACT_INITIAL_AND_32_TICKS_NOT_FPS",
+  "baseCommit": "6785ca7dcca09e8e97afd610cfd52176c7a1cfb1",
+  "beforeSha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+  "afterSha256": "27431000d8f47ad5c5ece0e8c9319362c0610efda53559854a317995f1fc5f08",
+  "citizens": 616,
+  "speed": 1,
+  "seed": 20261001,
+  "layout": "current-v4",
+  "phaseOrder": [
+    "time",
+    "environment",
+    "energy",
+    "traffic",
+    "people",
+    "commerce",
+    "finance",
+    "security",
+    "politics",
+    "feedback"
+  ],
+  "fullSaveExact": true,
+  "worldUnchanged": true,
+  "timingMethod": "One serial Node process; alternate before/after order each tick; complete export/hash outside step timing; one controlled trial, not MZ/NW/FPS/Mac",
+  "ranges": {
+    "1-4": {
+      "before": {
+        "sumMs": 27473.986428999993,
+        "medianMs": 6782.941317499997,
+        "p95LinearMs": 8289.8219032,
+        "maxMs": 8427.996769000001
+      },
+      "after": {
+        "sumMs": 25744.015627999997,
+        "medianMs": 6570.934202,
+        "p95LinearMs": 7643.8821951,
+        "maxMs": 7810.818291
+      }
+    },
+    "5-8": {
+      "before": {
+        "sumMs": 3971.2708140000104,
+        "medianMs": 841.0190275000023,
+        "p95LinearMs": 1532.3159073500028,
+        "maxMs": 1624.8220310000033
+      },
+      "after": {
+        "sumMs": 3435.652559000002,
+        "medianMs": 738.3710345,
+        "p95LinearMs": 1363.9090193499994,
+        "maxMs": 1445.6321769999995
+      }
+    },
+    "9-32": {
+      "before": {
+        "sumMs": 13800.727106999984,
+        "medianMs": 234.37180849999277,
+        "p95LinearMs": 1602.5959317500015,
+        "maxMs": 3046.9820000000036
+      },
+      "after": {
+        "sumMs": 11109.103855999987,
+        "medianMs": 142.08092549999856,
+        "p95LinearMs": 1524.955872349995,
+        "maxMs": 2555.2716840000066
+      }
+    },
+    "17-32": {
+      "before": {
+        "sumMs": 3595.946692999976,
+        "medianMs": 218.74398649999785,
+        "p95LinearMs": 263.42840649999926,
+        "maxMs": 290.42536599999585
+      },
+      "after": {
+        "sumMs": 2198.3849859999755,
+        "medianMs": 134.37696349999896,
+        "p95LinearMs": 160.3430614999961,
+        "maxMs": 167.69875700000557
+      }
+    }
+  }
+}

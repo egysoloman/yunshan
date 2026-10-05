@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-01T22:08:04.072Z",
+  "scope": "Actual native UI download from resumed original r5 game, independent coherent02 source CPU proof; no browser profile read/write or gameplay override.",
+  "sourceSnapshot": "/tmp/yunshan-phase2-root-coherent-02",
+  "independentCopy": "/tmp/yunshan-r5-native-proof-01",
+  "sourceFileCount": 81,
+  "sourceHashesStableBeforeCopyAfterRun": true,
+  "coherent01To02ProductionDifference": [
+    "src/rendering/terrain.ts"
+  ],
+  "coherent01To02AllDifferenceCount": 7,
+  "nativeFixture": {
+    "path": "tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+    "gzipBytes": 273576,
+    "gzipSHA256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+    "decompressedBytes": 1798521,
+    "decompressedSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+    "nativeOriginalUnchanged": true
+  },
+  "trustedActualWorld": {
+    "selectedRecipe": "current-v2-r5",
+    "worldOutputLayout": "current-v2",
+    "fingerprint": "c70ebca5",
+    "worldSHA256": "762a1b9f34f01f12190312228494668400e2fb0f49b689ac3c1ed0b0071d482b",
+    "homeId": "market-b21",
+    "homeName": "千灯市集·灯市街·里居6"
+  },
+  "actualWorldMatchesFrozenR5FullJSONSHA": true,
+  "restoreByteExact": true,
+  "partitionByteExact": true,
+  "fullExportPerTickMatches": 24,
+  "actualTicks": 24,
+  "actualGameMinutes": 6,
+  "negativeCases": 5,
+  "finalExportSHA256": "14ec4e8d1084803e280bb04d5a6e3f3b7cea3160bc86187dbf4157977e82530f",
+  "files": {
+    "README.md": {
+      "bytes": 2584,
+      "sha256": "8264c43a64a5d8bc6e78e8c8a8ed293bf1463bdc6cb32906647444a6e62f79a9"
+    },
+    "browser-download-provenance.json": {
+      "bytes": 2480,
+      "sha256": "906718f8a23540f6717f6022af71dbc47c169da6e08d315b85173e428c056e73"
+    },
+    "native-proof.log": {
+      "bytes": 387,
+      "sha256": "811f2e51274cdd6749550fa1d9631babab4b651ec82a2d84c459d75cc7501a7a"
+    },
+    "native-proof.mts": {
+      "bytes": 12626,
+      "sha256": "57609d690ff6b3ab5087352a1ce24cb79cf6006266ea0b04a74ae0b19628ecae"
+    },
+    "native-r5-results.json": {
+      "bytes": 21145,
+      "sha256": "19a33beb35797f960d5de4b912edfd84a0251814732ea821c4cc12400253e305"
+    },
+    "source-manifest.json": {
+      "bytes": 18749,
+      "sha256": "1385393f3596b4cb14b4ade27e25547e053b7185a5f669a78981d9be7fb0a086"
+    }
+  },
+  "limits": [
+    "UI checkpoint has rounded coordinates and truncated wallet; exact fractional original values come from the real native export.",
+    "The actual saved clinical and player job escrow are empty; funded-clinical cases remain covered by separately archived 26 storage tests.",
+    "CPU deterministic continuation does not count as completing the normal browser school/clinic/flight journey.",
+    "Partition proof uses pure split/reassembly APIs, not new browser IndexedDB writes or a partial Simulation restore.",
+    "Far city actors remain full individual simulation; statistical simulation is not implemented."
+  ],
+  "browserEntry": "/assets/index-BZMcZl-r.js",
+  "browserEntrySHA256": "d4f43364e7f5bb52bdb18b7c9e1445714361e858cfb18be0b2f2c2387d9309ba",
+  "browserSource81Matches": true
+}

@@ -1,0 +1,34 @@
+{
+  "scope": "CPU shared FloorPlan/provider + actual keyboard/controller motor; not GL or normal player journey",
+  "snapshot": "/tmp/yunshan-v4-controller-release-01",
+  "threeWayCaptureEqual": true,
+  "sourceAfterEqual": true,
+  "ownedCurrentStillEqual": true,
+  "inputFiles": 82,
+  "rules": {
+    "command": "node --import tsx --test tests/access.test.ts tests/controller.test.ts tests/controller-v4.test.ts tests/architecture-floor-plan.test.ts",
+    "passed": 24,
+    "failed": 0,
+    "exitCode": 0,
+    "milliseconds": 12021.689419
+  },
+  "strict": {
+    "command": "npx tsc --noEmit",
+    "exitCode": 0
+  },
+  "actualWorldMotor": {
+    "command": "node --import tsx actual-sites-motor.mts",
+    "passed": 7,
+    "failed": 0,
+    "exitCode": 0,
+    "ticks": 3240
+  },
+  "ownedSources": {
+    "src/architecture-floor-plan.ts": "ec3fd0fdc4e9f0b4614a905a58be7ee6bbf0d85d3c92c978c0b80967ca6f895e",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/controller.ts": "3457288a1477aca02b3a0b2cf9b98b7d37e5d1c06eb27266f96f6f7e81539afc",
+    "tests/controller-v4.test.ts": "a392c4f9ac122d380317fd3ba15aa59f815bbbaf9b5b1362c22879d058313c01",
+    "tests/architecture-floor-plan.test.ts": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6"
+  },
+  "archiveSHA256": "6e45e30d0315d1ef20c2c34e70d64326ea8e9a13748be6ebf741596d7cd47954"
+}

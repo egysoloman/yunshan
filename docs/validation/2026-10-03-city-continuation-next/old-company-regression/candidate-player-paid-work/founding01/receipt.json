@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-04T01:50:39.220630+00:00",
+  "endedAt": "2026-10-04T01:57:49.586181+00:00",
+  "argv": [
+    "env",
+    "OLD_COMPANY_SOURCE=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/source",
+    "OLD_COMPANY_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/founding01/artifacts",
+    "node",
+    "--import",
+    "tsx",
+    "--import",
+    "/workspace/yunshan-work/old-company-regression-20261004-01/observe-paid-work.mjs",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=^v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash$",
+    "tests/v4-extensions.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "e9fd56b443c26d6012c991d0b5e17389281326fe4e8760d45017477953727125",
+  "ownedPid": 23788,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 23796,
+      "state": "Z",
+      "parent": 1,
+      "group": 23788,
+      "session": 23788,
+      "startTicks": 946423
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

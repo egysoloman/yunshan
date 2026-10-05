@@ -1,0 +1,525 @@
+{
+  "scope": "One actual default game day on the isolated reload prototype; neither a long-term audit nor an equivalent baseline trajectory.",
+  "ticks": 720,
+  "loaded": 51,
+  "unitsLoaded": 1406,
+  "arrivalUnits": 3122,
+  "loadEvents": [
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "nodeId": "river-b26-door",
+      "shopId": "shop-river-b26",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 33
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-b57-door",
+      "shopId": "shop-river-b57",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 40
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-core-lift-bottom-east-station-1",
+      "nodeId": "core-dock-building-door",
+      "shopId": "shop-core-dock-building",
+      "districtId": "core",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 66
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-2-river-station-1",
+      "nodeId": "river-b16-door",
+      "shopId": "shop-river-b16",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 91
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "river-b6-door",
+      "shopId": "shop-river-b6",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 93
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-b44-door",
+      "shopId": "shop-workshop-b44",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 104
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-b29-door",
+      "shopId": "shop-river-b29",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 114
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b39-door",
+      "shopId": "shop-river-b39",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 141
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "nodeId": "river-b6-door",
+      "shopId": "shop-river-b6",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 147
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "river-b44-door",
+      "shopId": "shop-river-b44",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 153
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-b19-door",
+      "shopId": "shop-river-b19",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 154
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "workshop-b6-door",
+      "shopId": "shop-workshop-b6",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 156
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-east-quarter-2-east-station-1",
+      "nodeId": "core-dock-building-door",
+      "shopId": "shop-core-dock-building",
+      "districtId": "core",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 162
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b23-door",
+      "shopId": "shop-river-b23",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 163
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-b38-door",
+      "shopId": "shop-workshop-b38",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 171
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-core-station-government-station-1",
+      "nodeId": "core-dock-building-door",
+      "shopId": "shop-core-dock-building",
+      "districtId": "core",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 176
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-b26-door",
+      "shopId": "shop-river-b26",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 191
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-east-station-airport-station-1",
+      "nodeId": "core-dock-building-door",
+      "shopId": "shop-core-dock-building",
+      "districtId": "core",
+      "amount": 6,
+      "quantity": 6,
+      "tick": 206
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-3-market-station-1",
+      "nodeId": "river-b3-door",
+      "shopId": "shop-river-b3",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 210
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-b38-door",
+      "shopId": "shop-river-b38",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 218
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b54-door",
+      "shopId": "shop-river-b54",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 228
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "workshop-b3-door",
+      "shopId": "shop-workshop-b3",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 231
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-b29-door",
+      "shopId": "shop-river-b29",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 246
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-1-market-station-1",
+      "nodeId": "workshop-b60-door",
+      "shopId": "shop-workshop-b60",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 264
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-b44-door",
+      "shopId": "shop-river-b44",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 280
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b38-door",
+      "shopId": "shop-river-b38",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 300
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-1-river-station-1",
+      "nodeId": "river-b12-door",
+      "shopId": "shop-river-b12",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 312
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-b10-door",
+      "shopId": "shop-river-b10",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 324
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "river-b22-door",
+      "shopId": "shop-river-b22",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 345
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b19-door",
+      "shopId": "shop-river-b19",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 369
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "workshop-b12-door",
+      "shopId": "shop-workshop-b12",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 387
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-station-west-station-1",
+      "nodeId": "workshop-b22-door",
+      "shopId": "shop-workshop-b22",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 390
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "river-b44-door",
+      "shopId": "shop-river-b44",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 423
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-station-academy-station-1",
+      "nodeId": "river-b32-door",
+      "shopId": "shop-river-b32",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 432
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-0-workshop-station-1",
+      "nodeId": "workshop-b9-door",
+      "shopId": "shop-workshop-b9",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 435
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "workshop-b41-door",
+      "shopId": "shop-workshop-b41",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 435
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "workshop-b22-door",
+      "shopId": "shop-workshop-b22",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 458
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-b45-door",
+      "shopId": "shop-river-b45",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 474
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-b44-door",
+      "shopId": "shop-workshop-b44",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 480
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-b3-door",
+      "shopId": "shop-workshop-b3",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 549
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-2-market-station-1",
+      "nodeId": "river-b26-door",
+      "shopId": "shop-river-b26",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 551
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-0-river-station-1",
+      "nodeId": "river-b10-door",
+      "shopId": "shop-river-b10",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 589
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "nodeId": "workshop-b38-door",
+      "shopId": "shop-workshop-b38",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 592
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-core-quarter-2-core-station-1",
+      "nodeId": "workshop-b6-door",
+      "shopId": "shop-workshop-b6",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 613
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "workshop-b12-door",
+      "shopId": "shop-workshop-b12",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 615
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-quarter-3-river-station-1",
+      "nodeId": "workshop-b6-door",
+      "shopId": "shop-workshop-b6",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 618
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-3-academy-station-1",
+      "nodeId": "workshop-b6-door",
+      "shopId": "shop-workshop-b6",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 630
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-academy-quarter-0-academy-station-1",
+      "nodeId": "river-b39-door",
+      "shopId": "shop-river-b39",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 635
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-workshop-quarter-3-workshop-station-1",
+      "nodeId": "river-b55-door",
+      "shopId": "shop-river-b55",
+      "districtId": "river",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 681
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-market-quarter-0-market-station-1",
+      "nodeId": "workshop-b3-door",
+      "shopId": "shop-workshop-b3",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 687
+    },
+    {
+      "type": "cargo-loaded",
+      "vehicleId": "vehicle-road-river-station-market-station-1",
+      "nodeId": "workshop-b60-door",
+      "shopId": "shop-workshop-b60",
+      "districtId": "workshop",
+      "amount": 28,
+      "quantity": 28,
+      "tick": 715
+    }
+  ],
+  "treasury": 71327.54277614571,
+  "meanHunger": 51.30010242096255,
+  "alive": 616,
+  "foodShopStock": 13943.805088405115,
+  "freightPool": 3122,
+  "cargo": 28
+}

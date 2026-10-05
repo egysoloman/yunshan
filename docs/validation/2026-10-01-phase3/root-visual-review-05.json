@@ -1,0 +1,18 @@
+{
+  "reviewer": "root",
+  "reviewMethod": "Actual view_image of all six original coherent05 PNGs, with original reference images already acquired and viewed; no redraw or crop.",
+  "runtimeSnapshot": "/tmp/yunshan-phase3-root-coherent-05",
+  "entry": "/assets/index-BH13EXr_.js",
+  "entrySHA256": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e",
+  "technicalCapturePassed": true,
+  "referenceArtPassed": false,
+  "views": {
+    "core-waterfall": "FAIL: bare oversized slope, square canopies and homogeneous towers; visible water strip does not satisfy reference composition.",
+    "market-street": "FAIL overall; right counter lower and finite food samples visible after emitter correction; black eave, bare walls and empty forecourt remain. Left orange object was not identified.",
+    "residential-first-person": "FAIL: empty slab, oversized bare wall and abrupt straight terrain cut remain.",
+    "bridge-structure": "FAIL composition retained: original camera is obstructed by the real building body.",
+    "bridge-walk-center": "FAIL reference: deck and supports visible, with bare giant wall, box canopies and weak water context.",
+    "bridge-public-road": "FAIL reference: structural beams are visible but box towers, bare walls and empty ground dominate."
+  },
+  "limitations": "Diagnostic fixed cameras, no normal travel or macOS performance claim. Architecture/floorPlan and forest prototypes were not integrated into this build."
+}

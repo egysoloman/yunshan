@@ -1,0 +1,44 @@
+diff --git a/src/architecture-floor-plan.ts b/src/architecture-floor-plan.ts
+index e5f2271..162f396 100644
+--- a/src/architecture-floor-plan.ts
++++ b/src/architecture-floor-plan.ts
+@@ -206,13 +206,20 @@ function makeBody(b: Building): BuildingBody {
+ export interface WallPanel { rect: Rect; bottom: number; top: number; kind: 'solid' | 'glass' }
+ export interface FloorSupport { kind: 'room' | 'courtyard' | 'gallery' | 'stairs' | 'roof'; floor: number; y: number; local: { x: number; z: number }; link?: {fromFloor:number;toFloor:number} }
+ export interface RoofRegion { rect: Rect; bottom: number; top: number; floor: number; kind: 'gallery-flat' | 'weather-strip' | 'gable'; gableAxis?: 'x' | 'z'; anchor: 'minimum' }
+-const bodies = new WeakMap<Building, { key: string; footprints: Building['floorFootprints']; uses: Building['floorUses']; permissions: Building['floorPermissions']; body: BuildingBody }>();
++interface BodyCache {
++  width: number; depth: number; height: number; floors: number; basements: number; rotation: number;
++  x: number; y: number; z: number; kind: Building['kind']; publicFloors: Building['publicFloors'];
++  requiredPermission: Building['requiredPermission']; facility: Building['facility'];
++  footprints: Building['floorFootprints']; uses: Building['floorUses']; permissions: Building['floorPermissions']; body: BuildingBody;
++}
++const bodies = new WeakMap<Building, BodyCache>();
+ export function getBuildingBody(b: Building): BuildingBody | null {
+   if (b.floorPlanProfile !== FLOOR_PLAN_PROFILE || b.id === 'core-main' || b.kind === 'pavilion') return null;
+-  const key = [b.width,b.depth,b.height,b.floors,b.basements??0,b.rotation,b.position.x,b.position.y,b.position.z,b.kind,b.publicFloors,b.requiredPermission,b.facility].join('|');
+   const cached=bodies.get(b);
+-  if(cached && cached.key===key && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
+-  const body=makeBody(b); bodies.set(b,{key,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body}); return body;
++  if(cached && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
++  const body=makeBody(b);
++  bodies.set(b,{width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
++  return body;
+ }
+ export function getBuildingFloorPlan(b: Building,floor: number): FloorPlan | null { return getBuildingBody(b)?.floorPlans.find(p=>p.floor===floor) ?? null; }
+ /** Local y=0 is the ground floor's authoritative +.6m walking plane. */
+@@ -294,7 +301,13 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
+   // A restored actor on a real fixture top is supported; it is not lifted there.
+   for(const f of p.fixtures)if(contains(f.rect,local.x,local.z)&&Math.abs(local.y-(p.y+f.top))<.01)choices.push({top:p.y+f.top,kind:'room',floor});
+   choices.sort((a,z)=>Math.abs(a.top-local.y)-Math.abs(z.top-local.y)||z.top-a.top);
+-  const solids=localSolids(b,p);
++  const solids=radius>0?localSolids(b,p):[];
++  // Keep the existing lazy descriptor-cache priming without allocating solids.
++  // FloorPlan arrays remain public and mutable; this preserves their existing
++  // cache lifetime even when a radius-zero query precedes a later body query.
++  if(!(radius>0))for(const f of nearPlans(b,p)) {
++    wallPanels(f);if(f.floor>p.floor)getFloorPlanSlabRegions(f);
++  }
+   for(const choice of choices) {
+     if(radius>0&&solids.some(s=>s.top>choice.top+(s.steppable ? .22 : .01)&&s.bottom<choice.top+1.72-eps&&circleRectDistanceSquared(local.x,local.z,s.rect)<radius*radius-eps))continue;
+     return {kind:choice.kind,floor:choice.floor,y:b.position.y+.6+choice.top,local:{x:local.x,z:local.z},...(choice.link?{link:choice.link}:{})};

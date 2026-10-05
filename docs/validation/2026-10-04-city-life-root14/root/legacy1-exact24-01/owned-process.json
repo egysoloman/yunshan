@@ -1,0 +1,22 @@
+{
+  "pid": 93119,
+  "argv": [
+    "env",
+    "YUNSHAN_RULESET_EVIDENCE=/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/legacy1-exact24-01/original-artifacts",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=explicit upgrade of an actual legacy1 city keeps its original motion contract and exact restored future tick24",
+    "tests/city-ruleset.test.ts"
+  ],
+  "identity": {
+    "pid": 93119,
+    "state": "R",
+    "parent": 93113,
+    "group": 93119,
+    "session": 93119,
+    "startTicks": 6047021
+  }
+}

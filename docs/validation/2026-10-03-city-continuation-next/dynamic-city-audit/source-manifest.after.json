@@ -1,0 +1,488 @@
+{
+  "observedAt": "2026-10-04T00:11:36.322807+00:00",
+  "HEAD": "3ca77b861bc8a2c33820b49396ad788e7d94e137",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "开发备忘录.md",
+      "bytes": 322804,
+      "sha256": "965faf3f614ee5ea374530f93f3bc652c0884fdc0f3b1c8e1cd0f615dac5c1c2"
+    },
+    {
+      "path": "docs/需求实现验证矩阵.md",
+      "bytes": 93811,
+      "sha256": "a3531f625d683c0a36426ebe54c474b3a9205c31831883fad8ad86235d5fd80f"
+    },
+    {
+      "path": "src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    },
+    {
+      "path": "src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "src/hygiene-ui.ts",
+      "bytes": 4049,
+      "sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611"
+    },
+    {
+      "path": "src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "src/main.ts",
+      "bytes": 24422,
+      "sha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "bytes": 16493,
+      "sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0"
+    },
+    {
+      "path": "src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "bytes": 5191,
+      "sha256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+    },
+    {
+      "path": "src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    {
+      "path": "src/renderer.ts",
+      "bytes": 93024,
+      "sha256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03"
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "bytes": 13231,
+      "sha256": "a26aed37323fe593d83bed7141d0befe331586f3dc6f9d48df0275a8c182874c"
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "bytes": 39811,
+      "sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd"
+    },
+    {
+      "path": "src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a"
+    },
+    {
+      "path": "src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "bytes": 4695,
+      "sha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337"
+    },
+    {
+      "path": "src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "bytes": 22254,
+      "sha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38"
+    },
+    {
+      "path": "src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "bytes": 64327,
+      "sha256": "9f7a4f3f9973a8dbb9b472247de406921389489b0a4c51d638d5885feab4e925"
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "bytes": 43061,
+      "sha256": "f8a6b92304bfc37825f7263a0a180219a07e8033cf065d669179c61feafe2bdb"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "bytes": 89778,
+      "sha256": "e79f65943c983c19677777ce4c2dc104ea19cb01bd088143623e7d40784f26e1"
+    },
+    {
+      "path": "src/simulation/family.ts",
+      "bytes": 76650,
+      "sha256": "ecdb1f6978e3963c4f3caa744e500f40b17d7253a8a32e82040432d0766a2e25"
+    },
+    {
+      "path": "src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "bytes": 50182,
+      "sha256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30"
+    },
+    {
+      "path": "src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "src/simulation/roadworks.ts",
+      "bytes": 47166,
+      "sha256": "b91fac08ff02935116bbcee822b8cd95c279308c53136041b196d79c5e3b5105"
+    },
+    {
+      "path": "src/simulation/shop_lifecycle.ts",
+      "bytes": 53950,
+      "sha256": "15c91221ae145a548248409551144bdf1cb4201c01351c62984ebf9b5bebeaff"
+    },
+    {
+      "path": "src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "src/simulation.ts",
+      "bytes": 258122,
+      "sha256": "96c6158ad81ea8fa99d254a2c458bbd62fce1333bcad002d3ce0c734e3b65cba"
+    },
+    {
+      "path": "src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    {
+      "path": "src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 14080,
+      "sha256": "e32c18f7be3315a0f4847fb8461e6859b9abf432f29b7f41b3646619765c3c06"
+    },
+    {
+      "path": "src/ui.ts",
+      "bytes": 178361,
+      "sha256": "0fdecfd1ebe87df4455c5c5f8df6c559fbde6c741213f7530284101039dd2cac"
+    },
+    {
+      "path": "src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "tests/clinical-arrival-contract.test.ts",
+      "bytes": 9351,
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65"
+    },
+    {
+      "path": "tests/clinical-arrival-doctor.test.ts",
+      "bytes": 2806,
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de"
+    },
+    {
+      "path": "tests/clinical-arrival-fixture.ts",
+      "bytes": 8448,
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b"
+    },
+    {
+      "path": "tests/clinical-arrival-front-contract.test.ts",
+      "bytes": 643,
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603"
+    },
+    {
+      "path": "tests/clinical-arrival-patient.test.ts",
+      "bytes": 2962,
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6"
+    },
+    {
+      "path": "tests/clinical-arrival-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3"
+    },
+    {
+      "path": "tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "sha256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1"
+    },
+    {
+      "path": "tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "sha256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526"
+    },
+    {
+      "path": "tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "sha256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717"
+    },
+    {
+      "path": "tests/clinical.test.ts",
+      "bytes": 30100,
+      "sha256": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc"
+    },
+    {
+      "path": "tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3"
+    },
+    {
+      "path": "tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "tests/power.test.ts",
+      "bytes": 20584,
+      "sha256": "d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b"
+    },
+    {
+      "path": "tests/public-budget-standing.test.ts",
+      "bytes": 16239,
+      "sha256": "ff8345699ced1312449d58e2b836369f10ad772c2f16d4928e0c3b76a60ddf73"
+    },
+    {
+      "path": "tests/public-disinfection.test.ts",
+      "bytes": 24791,
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555"
+    },
+    {
+      "path": "tests/public-health-hygiene.test.ts",
+      "bytes": 21032,
+      "sha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8"
+    },
+    {
+      "path": "tests/retail-period.test.ts",
+      "bytes": 15295,
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+    },
+    {
+      "path": "tests/road-capacity.test.ts",
+      "bytes": 6396,
+      "sha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+    },
+    {
+      "path": "tests/road-demands.test.ts",
+      "bytes": 15281,
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6"
+    },
+    {
+      "path": "tests/road-estate.test.ts",
+      "bytes": 5344,
+      "sha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+    },
+    {
+      "path": "tests/road-navigation.test.ts",
+      "bytes": 14556,
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "tests/road-routing.test.ts",
+      "bytes": 28264,
+      "sha256": "501fd7c0d63ba6a963c9a833c5558929bc57f6267902277b6fe630b81ebe0d6f"
+    },
+    {
+      "path": "tests/roads-old22.test.ts",
+      "bytes": 1194,
+      "sha256": "253c5dd289d4d862c5ee105e89e886b7d706c62878cbbc86b9a7252727edcf7a"
+    },
+    {
+      "path": "tests/roads.test.ts",
+      "bytes": 18457,
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "tests/roadworks.test.ts",
+      "bytes": 18544,
+      "sha256": "87286746f4379056ff9c824535edbd6e05987ad11d393a76d2c446ff55b640cf"
+    },
+    {
+      "path": "tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "tests/shop-self-funding.test.ts",
+      "bytes": 18454,
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97"
+    },
+    {
+      "path": "tests/v4-extensions.test.ts",
+      "bytes": 13315,
+      "sha256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1"
+    },
+    {
+      "path": "tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683"
+    },
+    {
+      "path": "tests/v4-simulation.test.ts",
+      "bytes": 16108,
+      "sha256": "b7088b4ad34c9452dafc9736ac0e018092f22006eb26aba20e37ff80fc79e059"
+    },
+    {
+      "path": "package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9"
+    }
+  ],
+  "changesSinceCapture": [
+    {
+      "path": "开发备忘录.md",
+      "capturedSHA256": "6ac39c19f4ec0cadba19dc6c7f8c1dd92572de3097f17080987347595f4bba1a",
+      "currentSHA256": "965faf3f614ee5ea374530f93f3bc652c0884fdc0f3b1c8e1cd0f615dac5c1c2"
+    },
+    {
+      "path": "docs/需求实现验证矩阵.md",
+      "capturedSHA256": "f065e5601d21ad0c18a49abf20382d198a2030fa46b91f6fd28233ea5660f752",
+      "currentSHA256": "a3531f625d683c0a36426ebe54c474b3a9205c31831883fad8ad86235d5fd80f"
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "capturedSHA256": "6c679dba54ca6db6d0a6d1d46245616f1289e3c1a14a6d0a101811fadb3c9ab4",
+      "currentSHA256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1"
+    },
+    {
+      "path": "src/commercial-district.ts",
+      "capturedSHA256": "d85786d0e2db6971d728bfe29b2bb4c525d2728bac877d2051ef23f6a58e79b9",
+      "currentSHA256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "capturedSHA256": "4362d318021b48a295a806613d1cd17518e49dac79438157e97dea091478e886",
+      "currentSHA256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661"
+    },
+    {
+      "path": "src/types.ts",
+      "capturedSHA256": "e24a3e572c86aa759bb74f5d239283ebf0ebddc5fc50b0f003c0aa9286f44408",
+      "currentSHA256": "e32c18f7be3315a0f4847fb8461e6859b9abf432f29b7f41b3646619765c3c06"
+    }
+  ]
+}

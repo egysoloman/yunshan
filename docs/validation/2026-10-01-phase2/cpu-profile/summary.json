@@ -1,0 +1,315 @@
+{
+  "scope": "One game day/720 actual ticks, immutable18:50 source, concurrent CPU diagnostics; sampled timing is not isolated benchmark",
+  "run": {
+    "scope": "Immutable 18:50 financial snapshot diagnostic, concurrent CPU jobs; not an isolated hardware benchmark",
+    "ticks": 720,
+    "minutes": 1920,
+    "wallMs": 71065.923244,
+    "alive": 616
+  },
+  "self": [
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 28010.297
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 13435.344
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 12797.264
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 1437.479
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 861.465
+    },
+    {
+      "function": "routeGround",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 795.291
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 775.069
+    },
+    {
+      "function": "chooseFacility",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 671.165
+    },
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "sampleMs": 643.579
+    },
+    {
+      "function": "traffic",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 599.187
+    },
+    {
+      "function": "people",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 544.664
+    },
+    {
+      "function": "walkingTree",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 517.24
+    },
+    {
+      "function": "commerce",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 407.388
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 406.44
+    },
+    {
+      "function": "pointOn",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 404.369
+    },
+    {
+      "function": "isNearBuilding",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 403.61
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/extensions.ts",
+      "line": 1,
+      "sampleMs": 395.828
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 393.034
+    },
+    {
+      "function": "naturalHeight",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 366.668
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/banking.ts",
+      "line": 1,
+      "sampleMs": 307.78
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 271.884
+    },
+    {
+      "function": "buildingTravelDistance",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 257.558
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 249.074
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 198.183
+    },
+    {
+      "function": "routeGround",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 185.834
+    }
+  ],
+  "inclusive": [
+    {
+      "function": "step",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 70636.905
+    },
+    {
+      "function": "emit",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 70629.128
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 62903.363
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 60297.086
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 60134.091
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 43692.921
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 43591.102
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 40992.285
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 28056.185
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 15301.19
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 14324.329
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 14284.754
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 13509.685
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 7695.054
+    },
+    {
+      "function": "people",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 3758.737
+    },
+    {
+      "function": "createWorld",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 2508.315
+    },
+    {
+      "function": "traffic",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 2322.202
+    },
+    {
+      "function": "chooseFacility",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 1916.195
+    },
+    {
+      "function": "routeGround",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/world.ts",
+      "line": 1,
+      "sampleMs": 1658.641
+    },
+    {
+      "function": "pointOn",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 1265.834
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/banking.ts",
+      "line": 1,
+      "sampleMs": 941.117
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 861.465
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 835.293
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation/family.ts",
+      "line": 1,
+      "sampleMs": 732.749
+    },
+    {
+      "function": "",
+      "url": "file:///tmp/yunshan-phase2-root-financial-02/src/simulation.ts",
+      "line": 1,
+      "sampleMs": 700.063
+    }
+  ],
+  "sampledMs": 74742.188
+}

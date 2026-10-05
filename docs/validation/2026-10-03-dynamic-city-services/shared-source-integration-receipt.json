@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-03T10:28:46.422640+00:00",
+  "sharedHeadBefore": "aeca2679bd984527273c334def2672ad83fe758f",
+  "changedFiles": [
+    "src/simulation/extensions.ts",
+    "tests/appointment-funds.test.ts",
+    "tests/fixtures/appointment-old21-after.json"
+  ],
+  "newFiles": [
+    "tests/appointment-funds.test.ts",
+    "tests/fixtures/appointment-old21-after.json"
+  ],
+  "sharedAllInputsExactFinal22": true,
+  "inputCount": 150,
+  "userProsePreserved": true,
+  "checks": {
+    "build": "PASS actual fresh22",
+    "appointmentGovernance": "20/20 PASS actual22",
+    "nativePolicy": "actual two100 guild, ordinary153ticks paid arrival, two fresh ballots,119.75/120,24 exact PASS",
+    "softwareGPU": "75/75 PASS actual22 /14PNG; ARTFAIL; no Mac/FPS"
+  },
+  "sourceManifestSha256": "daf32d2cf72a235a99afa4d7c74425475e39e12a1a3fbe8a217ff7dafb6cf691"
+}

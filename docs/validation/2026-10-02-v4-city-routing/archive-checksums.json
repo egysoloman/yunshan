@@ -1,0 +1,137 @@
+{
+  "scope": "Raw CPU validation copies only. No browser profile, credentials, node_modules or edited screenshots.",
+  "originalFiles": [
+    {
+      "file": "source-snapshot.json",
+      "source": "/tmp/yunshan-v4-city-core-final-01/source-snapshot.json",
+      "bytes": 29705,
+      "sha256": "4d5393cc7b9fd04486e4a82aa8a0cdb7bb842824905bc8cc8ab8ef8675abefea"
+    },
+    {
+      "file": "journey.log",
+      "source": "/tmp/yunshan-v4-city-core-final-01/artifacts/journey.log",
+      "bytes": 1640,
+      "sha256": "0c4399cb29ca7f3ee417d5165143369524d0317d35ddd44116db335b042322e7"
+    },
+    {
+      "file": "legacy-core.log",
+      "source": "/tmp/yunshan-v4-city-core-final-01/artifacts/legacy-core.log",
+      "bytes": 572,
+      "sha256": "93877d2d789d45c0e6e6f1856be43d41d720015677bf157f0f5af1c974f0e619"
+    },
+    {
+      "file": "run-status.json",
+      "source": "/tmp/yunshan-v4-city-core-final-01/artifacts/run-status.json",
+      "bytes": 31916,
+      "sha256": "89c72f2a697041ef310769fb2dde145eb581301f8c3851bb2156326c36e54b57"
+    },
+    {
+      "file": "strict.log",
+      "source": "/tmp/yunshan-v4-city-core-final-01/artifacts/strict.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "file": "v4.log",
+      "source": "/tmp/yunshan-v4-city-core-final-01/artifacts/v4.log",
+      "bytes": 1029,
+      "sha256": "2c720ee13d4edd99b7db2e475618e6835864d6ddaf4b64365393d9e88cd5e32a"
+    },
+    {
+      "file": "initial/baseline.ts",
+      "source": "/tmp/yunshan-v4-city-core-baseline/baseline.ts",
+      "bytes": 2161,
+      "sha256": "b0ac8929e4df7f15a21e2e4e7367412fbed26206f6c376893bd0fa9456e8a86d"
+    },
+    {
+      "file": "initial/baseline.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/baseline.log",
+      "bytes": 73,
+      "sha256": "75e42ef602785c53395ee71e16715fe0c293c4fc99743b5426c247dcef37f9e4"
+    },
+    {
+      "file": "initial/result.json",
+      "source": "/tmp/yunshan-v4-city-core-baseline/result.json",
+      "bytes": 3421,
+      "sha256": "e2cfcac0ae2687901776bcdb08849b1e01a04cb897470a968c2bf3a9eea4348c"
+    },
+    {
+      "file": "initial/baseline-module-pending.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/baseline-module-pending.log",
+      "bytes": 1364,
+      "sha256": "2c71f1b868904a7c46d1ec69df805371ffc5deae9beb6a979f9d978159297e22"
+    },
+    {
+      "file": "initial/test-plan.md",
+      "source": "/tmp/yunshan-v4-city-core-baseline/test-plan.md",
+      "bytes": 973,
+      "sha256": "4681c04c8392dc188e3c72f983b313e351d05f0767e27121ea871e6bb59d1b3a"
+    },
+    {
+      "file": "initial/v4-first.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-first.log",
+      "bytes": 1494,
+      "sha256": "2d67f850fa0808b33532c312524b435cf70e1130e9c93e9b73c3958f0ffb2ed6"
+    },
+    {
+      "file": "initial/v4-work-repaired.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-work-repaired.log",
+      "bytes": 238,
+      "sha256": "654e91b2860c271361add680e05ade4bfb103892e9bb814a12d324f28c237c97"
+    },
+    {
+      "file": "initial/strict-first.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/strict-first.log",
+      "bytes": 957,
+      "sha256": "d3076ac53a7517fb65f32012531429e94d16749a29b4a83c69ffcc84933aede0"
+    },
+    {
+      "file": "initial/strict-latest.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/strict-latest.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "file": "initial/v4-labor.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-labor.log",
+      "bytes": 226,
+      "sha256": "7fcc4216c1237ce763241ae86faa975c44be0b1639ac7ab29921781dcad61da9"
+    },
+    {
+      "file": "initial/v4-stair-first.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-stair-first.log",
+      "bytes": 232,
+      "sha256": "4affdcb6df7c43c25000c37cc90256ac7349133e309895eda21ee62e4b83582a"
+    },
+    {
+      "file": "initial/v4-stair-both-flights.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-stair-both-flights.log",
+      "bytes": 233,
+      "sha256": "523d2727f9e9d8b4df8d0606213b072c24ec7936c1dcf7a2317e8e5d9bfd59f2"
+    },
+    {
+      "file": "initial/v4-upper-permissions.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-upper-permissions.log",
+      "bytes": 210,
+      "sha256": "9780bf7b19e4783e0b35618ff86867b61cbf865884aa51cdbd197ed68a294d4c"
+    },
+    {
+      "file": "initial/v4-stair-npc-replan.log",
+      "source": "/tmp/yunshan-v4-city-core-baseline/v4-stair-npc-replan.log",
+      "bytes": 249,
+      "sha256": "662be802d8fe5664dfbd7b014c9b4a1333c923cadc7b821f91bb135cfc7ad646"
+    },
+    {
+      "file": "initial/snapshot.py",
+      "source": "/tmp/yunshan-v4-city-core-baseline/snapshot.py",
+      "bytes": 1655,
+      "sha256": "5004544eb0f623ca8f06a47dcade2599a77d998f2062a58cba7c2e2ad71d1bd0"
+    },
+    {
+      "file": "initial/run_final.py",
+      "source": "/tmp/yunshan-v4-city-core-baseline/run_final.py",
+      "bytes": 2416,
+      "sha256": "b8032af948fa813cde604fba6e0c031e9849f351f4594cbc565cf6101a42cd0d"
+    }
+  ]
+}

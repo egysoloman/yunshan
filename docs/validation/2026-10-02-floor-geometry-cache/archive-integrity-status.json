@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "archive": "/tmp/yunshan-floor-geometry-cache-candidate-01/deliverables/yunshan-freeze11-floor-geometry-cache-candidate-evidence.zip",
+  "bytes": 15443129,
+  "sha256": "492c206a77247b4da9b603cb4a52a4e9f6734878e1642909fd732a90ba4e15b8",
+  "memberCount": 274,
+  "payloadCount": 273,
+  "payloadBytes": 31102361,
+  "crcAllMembersPass": true,
+  "everyMemberDirectOriginalBytesEqual": true,
+  "beforeSourceCount": 105,
+  "candidateSourceCount": 106,
+  "sensitivePatternCounts": {
+    "private-key": 0,
+    "openai-secret": 0,
+    "aws-access-key": 0,
+    "bearer-secret": 0,
+    "github-token": 0,
+    "signed-aws-url": 0,
+    "signed-provider-url": 0
+  },
+  "createdAfterBenchmarkExited": true,
+  "libraryStatus": "NOT_ATTEMPTED",
+  "manifestSha256": "368b025fe3a35744bb207826998ea1a65ae25423765c74f9d46c66afdd4dc000"
+}

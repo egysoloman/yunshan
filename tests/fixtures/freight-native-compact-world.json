@@ -1,0 +1,253 @@
+{
+  "layoutVersion": "current-v6",
+  "seed": 20261001,
+  "voxelSize": 0.2,
+  "size": 4400,
+  "districts": [
+    {
+      "id": "river",
+      "name": "\u6e05\u6eaa\u6c34\u5cb8",
+      "kind": "waterfront",
+      "center": {
+        "x": -740,
+        "y": 18,
+        "z": 980
+      },
+      "radius": 410,
+      "color": "#69b7b0",
+      "population": 12
+    }
+  ],
+  "buildings": [
+    {
+      "id": "river-b3",
+      "districtId": "river",
+      "name": "\u6e05\u6eaa\u6c34\u5cb8\u00b7\u5357\u5761\u9662\u00b7\u68af\u7530\u519c\u820d1",
+      "kind": "farm",
+      "position": {
+        "x": -564.6,
+        "y": 20,
+        "z": 1257.8000000000002
+      },
+      "width": 36,
+      "depth": 25.200000000000003,
+      "height": 3.6,
+      "floors": 1,
+      "rotation": 0,
+      "door": {
+        "x": -564.6,
+        "y": 20.6,
+        "z": 1270.4
+      },
+      "capacity": 28,
+      "seed": 753088625,
+      "stairGeometryRevision": 2,
+      "floorPlanProfile": "v4-program-bodies-02",
+      "functionPoints": [
+        {
+          "id": "0:program:work",
+          "purpose": "work",
+          "floor": 0,
+          "position": {
+            "x": -571.8000000000001,
+            "y": 20.6,
+            "z": 1251.2000000000003
+          }
+        },
+        {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": -571.8000000000001,
+            "y": 20.6,
+            "z": 1251.2000000000003
+          }
+        },
+        {
+          "id": "0:program:sale",
+          "purpose": "sale",
+          "floor": 0,
+          "position": {
+            "x": -571.8000000000001,
+            "y": 20.6,
+            "z": 1251.2000000000003
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "river-b3-door",
+      "districtId": "river",
+      "name": "\u6e05\u6eaa\u6c34\u5cb8\u00b7\u5357\u5761\u9662\u00b7\u68af\u7530\u519c\u820d1",
+      "station": true,
+      "position": {
+        "x": -564.6,
+        "y": 20.6,
+        "z": 1270.4
+      }
+    },
+    {
+      "id": "fixture-hub",
+      "districtId": "river",
+      "name": "fixture-hub",
+      "station": true,
+      "position": {
+        "x": -564.6,
+        "y": 20.6,
+        "z": 1470.4
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "actual-food-road",
+      "from": "river-b3-door",
+      "to": "fixture-hub",
+      "mode": "road",
+      "length": 200,
+      "capacity": 20,
+      "points": [
+        {
+          "x": -564.6,
+          "y": 20.6,
+          "z": 1270.4
+        },
+        {
+          "x": -564.6,
+          "y": 20.6,
+          "z": 1470.4
+        }
+      ]
+    }
+  ],
+  "mountains": [
+    {
+      "x": -60,
+      "z": -1300,
+      "height": 505,
+      "radius": 650
+    },
+    {
+      "x": -1170,
+      "z": -540,
+      "height": 300,
+      "radius": 600
+    },
+    {
+      "x": 590,
+      "z": -760,
+      "height": 290,
+      "radius": 590
+    },
+    {
+      "x": 1360,
+      "z": -1250,
+      "height": 345,
+      "radius": 560
+    },
+    {
+      "x": -1400,
+      "z": 260,
+      "height": 180,
+      "radius": 540
+    },
+    {
+      "x": 1140,
+      "z": -180,
+      "height": 175,
+      "radius": 560
+    },
+    {
+      "x": -1690,
+      "z": -1730,
+      "height": 510,
+      "radius": 570
+    },
+    {
+      "x": 700,
+      "z": -2040,
+      "height": 590,
+      "radius": 520
+    },
+    {
+      "x": 1930,
+      "z": -560,
+      "height": 400,
+      "radius": 420
+    },
+    {
+      "x": -2010,
+      "z": 690,
+      "height": 270,
+      "radius": 460
+    }
+  ],
+  "spawn": {
+    "x": -559.6,
+    "y": 20.6,
+    "z": 1475.4
+  },
+  "waterfall": {
+    "top": {
+      "x": 110,
+      "y": 256,
+      "z": -105
+    },
+    "bottom": {
+      "x": 110,
+      "y": 103,
+      "z": 35
+    },
+    "width": 24
+  },
+  "river": [
+    {
+      "x": 110,
+      "y": 103,
+      "z": 35
+    },
+    {
+      "x": 75,
+      "y": 94,
+      "z": 140
+    },
+    {
+      "x": -65,
+      "y": 75,
+      "z": 260
+    },
+    {
+      "x": -110,
+      "y": 56,
+      "z": 460
+    },
+    {
+      "x": -410,
+      "y": 30,
+      "z": 720
+    },
+    {
+      "x": -580,
+      "y": 15,
+      "z": 1010
+    },
+    {
+      "x": -480,
+      "y": 10,
+      "z": 1300
+    },
+    {
+      "x": -850,
+      "y": 8,
+      "z": 1900
+    },
+    {
+      "x": -750,
+      "y": 6,
+      "z": 2200
+    }
+  ]
+}

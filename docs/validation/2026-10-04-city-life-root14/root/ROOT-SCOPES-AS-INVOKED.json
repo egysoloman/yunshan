@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-04T17:17:47.627201+00:00",
+  "capAuthority": "Root original tool invocation arguments; original phase receipt/raw files untouched",
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "browserInnerHarnessUnchanged": true,
+  "phases": [
+    {
+      "phase": "build01",
+      "outerCapSecondsAsInvoked": 300,
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:00:45.638455+00:00",
+      "endedAt": "2026-10-04T16:01:14.461434+00:00",
+      "rawSHA256": "2e24564967ca83f79eaf6a08c57fa67eab3ea39dae5f20bdc1ddfb57c8946fed",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "legacy1-exact24-01",
+      "outerCapSecondsAsInvoked": 120,
+      "argv": [
+        "env",
+        "YUNSHAN_RULESET_EVIDENCE=/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/legacy1-exact24-01/original-artifacts",
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "--test-name-pattern=explicit upgrade of an actual legacy1 city keeps its original motion contract and exact restored future tick24",
+        "tests/city-ruleset.test.ts"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:00:45.600591+00:00",
+      "endedAt": "2026-10-04T16:02:35.727686+00:00",
+      "rawSHA256": "67458ba113b7c71c22e351100fef987fdaf9aecece228c07daff8141576d200a",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "ui01",
+      "outerCapSecondsAsInvoked": 1200,
+      "argv": [
+        "npm",
+        "run",
+        "test:ui"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:05:54.504188+00:00",
+      "endedAt": "2026-10-04T16:11:28.719088+00:00",
+      "rawSHA256": "e484dbb17133d2d3cf7f8eb72ed323e133c0a6c3629bba55c41dca14e433880e",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "browser01",
+      "outerCapSecondsAsInvoked": 1200,
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:17:41.614119+00:00",
+      "endedAt": "2026-10-04T16:27:46.326474+00:00",
+      "rawSHA256": "581b8402168d44e814be4276575d7f80943761ad6287cbcbdd1be3e865c8d879",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "old-current-factory01",
+      "outerCapSecondsAsInvoked": 120,
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/old-current-factory-as-used.mts"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:30:37.246726+00:00",
+      "endedAt": "2026-10-04T16:31:41.162115+00:00",
+      "rawSHA256": "31a61d44934502354756e8b5dfc46ba74730f3939da7193f46806552f2509d96",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "product-day01",
+      "outerCapSecondsAsInvoked": 1800,
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/economy-audit.ts",
+        "--days",
+        "1",
+        "--out",
+        "artifacts/root14-product-default-day.json"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T16:37:13.044099+00:00",
+      "endedAt": "2026-10-04T16:53:26.085478+00:00",
+      "rawSHA256": "4cd708f42cffb63cbafb737a8864c82e79e8593bcadf75f04bb07e5ca30b6153",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    },
+    {
+      "phase": "default-full-partition24-01",
+      "outerCapSecondsAsInvoked": 300,
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/default-full-partition24-as-used.mts"
+      ],
+      "status": "PASS",
+      "startedAt": "2026-10-04T17:04:39.712311+00:00",
+      "endedAt": "2026-10-04T17:06:41.750424+00:00",
+      "rawSHA256": "cfec2b091b8c3ab46301568fd4558355f25476ecc07a1201d948c4b126d678a1",
+      "inputCount": 304,
+      "inputsStable": true,
+      "activeDescendants": []
+    }
+  ]
+}

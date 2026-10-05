@@ -1,0 +1,10 @@
+import {writeFileSync} from 'node:fs';
+import {createWorld} from './src/world.ts';
+import {familyOf,getBuildingBody,getBuildingFloorPlan,getBuildingUsePoints,getFloorPlanStairPosition,getFloorPlanStairRoute,getFloorPlanRoofRegions,buildingWorldPosition,getFloorPlanRoofSupport} from './src/architecture-floor-plan.ts';
+const world=createWorld(20261001,'current-v4');
+const kinds=['home','market','workshop','school','clinic','station'];
+const sites=kinds.map(kind=>world.buildings.find(b=>b.kind===kind&&getBuildingBody(b))!);
+const tall=world.buildings.find(b=>getBuildingBody(b)&&b.floors>1&&Math.abs(b.height/b.floors-6.6)<1e-7);
+const result={seed:world.seed,layoutVersion:world.layoutVersion,geometryScope:'CPU authoritative provider; not GL/normal journey',sites:sites.map(b=>({id:b.id,kind:b.kind,family:familyOf(b),dimensions:{width:b.width,depth:b.depth,floors:b.floors,height:b.height,storey:b.height/b.floors},door:b.door,points:getBuildingUsePoints(b,0),stairs:getFloorPlanStairRoute(b,0,1),roof:getFloorPlanRoofRegions(getBuildingBody(b)!).filter(r=>r.floor===0)})),tall:tall?{id:tall.id,storey:tall.height/tall.floors,door:tall.door,platform:getFloorPlanStairPosition(tall,0),stairs:getFloorPlanStairRoute(tall,0,1)}:null};
+writeFileSync('/tmp/yunshan-v4-controller-release-01/sample-sites.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({sites:result.sites.map(s=>({id:s.id,kind:s.kind,storey:s.dimensions.storey})),tall:result.tall?.id}));

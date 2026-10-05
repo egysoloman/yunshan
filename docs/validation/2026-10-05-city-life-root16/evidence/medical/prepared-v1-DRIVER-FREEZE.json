@@ -1,0 +1,28 @@
+{
+  "frozenAt": "2026-10-05T00:16:19.432683+00:00",
+  "status": "PREPARED_NOT_RUN",
+  "driver": "finite-food-medical-candidate.mts",
+  "driverSHA256": "7f60844de23dfb2f7282c8ebd84fc8f2f55540e553d18a2970ca6130413feece",
+  "planSHA256": "fb3e9027a916baa32836826682671649ffc9a1a2262ee97d1999109fd8179190",
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "bounds": {
+    "mainFrames": 512,
+    "normalRawMainDeltaClamp": 1,
+    "walkingDelta": "min(1,remainingDistance/4.8), unchanged ROOT15actual walk",
+    "cooldownAndOpeningWaitDelta": 0.25,
+    "clinicWaitingDelta": 1,
+    "speed": 16,
+    "tickSeconds": 0.25,
+    "maxInternalMainTicks": 2048,
+    "maxMainGameMinutes": 8192,
+    "wallCapSeconds": 900,
+    "futureReaders": 3,
+    "futureStepsEach": 24,
+    "futureDelta": 0.25,
+    "futureGameMinutesPerReader": 96,
+    "maxTotalInstanceInternalTicksIncludingSuccessFuture": 2120,
+    "oldHOST512quarterScopePreservedNotRun": true
+  },
+  "nodeSyntaxCheck": "PASS",
+  "rootCoordinationRequiredBeforeSimulation": true
+}

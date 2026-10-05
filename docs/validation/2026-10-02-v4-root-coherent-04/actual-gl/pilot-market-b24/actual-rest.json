@@ -1,0 +1,48 @@
+{
+  "type": "rest",
+  "before": {
+    "money": 520,
+    "homeId": "market-b24",
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "needs": {
+      "hunger": 84.05499999999932,
+      "fatigue": 89.51400000000075,
+      "social": 69.67599999999999,
+      "fun": 69.7569999999996
+    },
+    "position": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    },
+    "hour": 8.45,
+    "speed": 1
+  },
+  "after": {
+    "money": 520,
+    "homeId": "market-b24",
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "needs": {
+      "hunger": 84.05499999999932,
+      "fatigue": 100,
+      "social": 69.67599999999999,
+      "fun": 81.7569999999996
+    },
+    "position": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    },
+    "hour": 8.45,
+    "speed": 1
+  },
+  "returned": null,
+  "toast": "在千灯市集·钱庄街·里居7休息，体力恢复。",
+  "scope": "Actual production UI action command at reached service point; no direct economic, identity, clock or body state assignment"
+}

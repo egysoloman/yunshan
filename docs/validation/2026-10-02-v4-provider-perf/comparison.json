@@ -1,0 +1,135 @@
+{
+  "createdAt": "2026-10-02T01:38:00.193360+00:00",
+  "baselineProviderSHA": "ec3fd0fdc4e9f0b4614a905a58be7ee6bbf0d85d3c92c978c0b80967ca6f895e",
+  "candidateProviderSHA": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+  "patchSHA": "8f13a493eb4ce2806cb30da727ea209e5910494c9c29b37671c872adb043d2c7",
+  "harnessSHA": "d33e4d87726cfe86753e13e1012fdee7a08e3ec222e7096cef998c1ee07ee9b3",
+  "inputCount": 80,
+  "baselineAndPrototypeInputsUnchanged": true,
+  "prototypeOnlyChanged": [
+    "src/architecture-floor-plan.ts"
+  ],
+  "sharedChangesSinceCopy": [
+    "tests/world-layout.test.ts"
+  ],
+  "allRuntimeSourcesUnchanged": true,
+  "strictExit": 0,
+  "nodeCheckExit": 0,
+  "baselineRunExit": 0,
+  "prototypeRunExit": 0,
+  "targeted": {
+    "pass": 30,
+    "fail": 0,
+    "exit": 0,
+    "durationMs": 15231.6773,
+    "scope": "original architecture-floor-plan 3 + banking/culture 27, no full npm, no GL"
+  },
+  "coldCache": {
+    "candidateExit": 0,
+    "naiveSkipExit": 1,
+    "scope": "same publicly replaced FloorPlan, radius-zero query then source wall append; existing panel-cache lifetime preserved, returned panel mutation remains live"
+  },
+  "exact": {
+    "worldSHA": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "fingerprint": "80cd31e2",
+    "markedBuildings": 605,
+    "bodyRoofSHA": "f6e05a0d67449f52eb464d2d3f5033f8373c84bb72ffa90ef3aae8204d7897c3",
+    "sixFamilyGeometrySHA": "95b88735b7db4e5780d34313ce2457d73a7f427dbfb73726ff9a41313bfd48ad",
+    "cacheMutationSHA": "84ec6c9994b20c14bc470679d99b66ee45851e948a4c0ff13dec44b195f5b0c5",
+    "outputJSONFiles": 16,
+    "everyTickSaveExact": true,
+    "fixtures": [
+      {
+        "id": "river-b2",
+        "family": "home",
+        "floors": 11,
+        "routesFound": 11,
+        "supportCollisionSamples": 108
+      },
+      {
+        "id": "river-b1",
+        "family": "market",
+        "floors": 2,
+        "routesFound": 2,
+        "supportCollisionSamples": 38
+      },
+      {
+        "id": "workshop-b0",
+        "family": "workshop",
+        "floors": 3,
+        "routesFound": 3,
+        "supportCollisionSamples": 23
+      },
+      {
+        "id": "academy-b0",
+        "family": "civic-academy",
+        "floors": 5,
+        "routesFound": 5,
+        "supportCollisionSamples": 49
+      },
+      {
+        "id": "market-b3",
+        "family": "finance-health",
+        "floors": 12,
+        "routesFound": 12,
+        "supportCollisionSamples": 82
+      },
+      {
+        "id": "river-b0",
+        "family": "transport-waterfront",
+        "floors": 2,
+        "routesFound": 2,
+        "supportCollisionSamples": 23
+      }
+    ]
+  },
+  "services": {
+    "ticks": 12,
+    "speed": 1,
+    "stepMinutes": 0.25,
+    "baselineElapsedMs": 67497.038264,
+    "candidateElapsedMs": 59653.413947,
+    "elapsedReductionPercent": 11.620694061154758,
+    "baselineCPU": {
+      "cpuUserMs": 65430.447,
+      "cpuSystemMs": 5767.668
+    },
+    "candidateCPU": {
+      "cpuUserMs": 59259.688,
+      "cpuSystemMs": 4086.744
+    },
+    "projectMinutes": [
+      0.25,
+      0.5,
+      0.75,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1.25,
+      1.5,
+      1.75,
+      2
+    ],
+    "wallet": 520,
+    "bankCash": 20,
+    "playerDeposits": 20,
+    "treasuryExact": true
+  },
+  "micro": {
+    "bodyMedianBaselineMs": 881.0545920000004,
+    "bodyMedianCandidateMs": 353.6223740000005,
+    "bodyCallsPerTrial": 2000000,
+    "radiusZeroMedianBaselineMs": 285.58745699999963,
+    "radiusZeroMedianCandidateMs": 38.37498400000004,
+    "radiusZeroCallsPerTrial": 12000
+  },
+  "limitations": [
+    "Single sequential actual service pair after identical geometry/cache warm-up, not repeat-run benchmark confidence.",
+    "Inspector sampled self/inclusive time; absolute process CPU and elapsed reported separately.",
+    "No new descriptor cache, support/path algorithm changes, NPC speed or clock changes.",
+    "Shared production provider was not edited; root must review/promote separately.",
+    "No GL, full suite or macOS hardware verification."
+  ]
+}

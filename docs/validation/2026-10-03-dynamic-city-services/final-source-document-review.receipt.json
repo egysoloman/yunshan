@@ -1,0 +1,130 @@
+{
+  "status": "PASS_SCOPED_SOURCE_AND_ACCEPTANCE_CLAIMS_WITH_NONBLOCKING_REFERENCE_NOTE",
+  "atUTC": "2026-10-03T10:45:24.168319+00:00",
+  "checks": {
+    "sourceAll150ExactFrozenAndExpected": true,
+    "validationRawReceiptsBytesAndShaMatch": true,
+    "stateFullGameIncomplete": true,
+    "fullNpm22NotRun": true,
+    "longEconomicNotRunOldFailureRetained": true,
+    "artFail": true,
+    "qualifiedNewExternalAssetsZero": true,
+    "commercialSkyscrapersZero": true,
+    "GPUIdentifiedSoftwareNoMacFPS": true,
+    "old20FailuresRetained": true,
+    "reportAndMatrixAndMemoLimitPlatformAndArt": true
+  },
+  "blockingProblems": [],
+  "notes": [
+    {
+      "severity": "NON_BLOCKING_DOC_REFERENCE",
+      "reportText": "完整SHA记录在本目录receipt.json",
+      "repoReferencedFileExists": false,
+      "producerOriginalReceiptExists": true,
+      "suggestion": "Reference validation-results.json plus original producer receipt, or retain receipt.json beside copied REPORT; no acceptance-count issue."
+    }
+  ],
+  "evidenceReceipts": [
+    {
+      "name": "build22",
+      "path": "/tmp/yunshan-system-coherent-22/build01/receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "rules22",
+      "path": "/tmp/yunshan-system-coherent-22/appointment-governance01/receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "native22",
+      "path": "/tmp/yunshan-system-coherent-22/native-dom-08-governance-policy-staffing/result.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "native22Resources",
+      "path": "/tmp/yunshan-system-coherent-22/native-dom-08-governance-policy-staffing/resource-receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "gpu22",
+      "path": "/tmp/yunshan-system-coherent-22/visual-gpu01/result.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "gpu22Closure",
+      "path": "/tmp/yunshan-system-coherent-22/visual-gpu-launch01/cleanup-independent02.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "shared22",
+      "path": "/tmp/yunshan-system-coherent-22/shared-source-integration-receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "visualReview",
+      "path": "/tmp/yunshan-system-coherent-22/root-visual-review.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "rules21",
+      "path": "/tmp/yunshan-system-coherent-21/rulesnew01/receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "contracts20",
+      "path": "/tmp/yunshan-system-coherent-20/contracts01/receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    },
+    {
+      "name": "appointmentOld21TrueFailure",
+      "path": "/tmp/yunshan-appoint-cash-causal-root21-20261003-02/receipt.json",
+      "bytesMatch": true,
+      "shaMatch": true
+    }
+  ],
+  "documents": [
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/REPORT.md",
+      "bytes": 20120,
+      "sha256": "9919e1dca97d52ad20dd8e0c578073301d6bbf0071dcc6c0c30370ffff57daa1"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/validation-results.json",
+      "bytes": 4209,
+      "sha256": "10db744f2203d87f5a44a411261e64c4fdac495cd46dca9a5d405f6b6ef35d77"
+    },
+    {
+      "path": "/workspace/yunshan/docs/需求实现验证矩阵.md",
+      "bytes": 61742,
+      "sha256": "8203ec238d57871189a7a1657938889c5de664067ba052135c7199a0e1db560e"
+    },
+    {
+      "path": "/workspace/yunshan/开发备忘录.md",
+      "bytes": 259869,
+      "sha256": "55f6272e8ff81eee272864acc851a92ba4893be827435ca732b643736b10894b"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-03-dynamic-city-services/source-manifest.json",
+      "bytes": 16309,
+      "sha256": "daf32d2cf72a235a99afa4d7c74425475e39e12a1a3fbe8a217ff7dafb6cf691"
+    }
+  ],
+  "source150Review": {
+    "path": "/tmp/yunshan-final22-readonly-review-20261003-01/source150-review.json",
+    "bytes": 79385,
+    "sha256": "3bed14adb55df2ff88f128a61be919584965877f129e496ceb5d6f805714d02b"
+  },
+  "noNodeSimulationTestsBuildBrowserGpuZipLibrary": true,
+  "noSharedWrites": true,
+  "receiptOutsideOriginalZip": true
+}

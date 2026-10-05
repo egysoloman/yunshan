@@ -1,0 +1,332 @@
+{
+  "status": "passed",
+  "scope": "Linux Chromium SwiftShader optical inspection using fixed diagnostic cameras; not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-C-rbdlOs.js",
+  "sourceHashes": {
+    "src/world.ts": "b1cd76c3c8678af709512ee180395dfdf3c96586826cb3ef5ffb2a6bbe794390",
+    "src/renderer.ts": "62c678fc189daafcebb0eeec8a248188d6b4d986c635790dbe6131927154ef74",
+    "src/rendering/terrain.ts": "faff0a1e480db27974576ddda9552ab38d3caaa2f9fea0cfb4fbde341581f2b0",
+    "src/main.ts": "f625fa6d0433232907b44f170565418b8e9738dbd73b85a1b57c26e599dbb558"
+  },
+  "captures": [
+    {
+      "name": "overview-day",
+      "hour": 15.5,
+      "eye": [
+        1780,
+        1040,
+        2040
+      ],
+      "target": [
+        0,
+        180,
+        0
+      ],
+      "drawCalls": 161,
+      "triangles": 1351968,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "drawCalls": 127,
+      "triangles": 1960086,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfront",
+      "hour": 12,
+      "eye": [
+        -455,
+        112,
+        1190
+      ],
+      "target": [
+        -610,
+        28,
+        910
+      ],
+      "drawCalls": 109,
+      "triangles": 1438028,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "river-continuity",
+      "hour": 12,
+      "eye": [
+        -510,
+        540,
+        1120
+      ],
+      "target": [
+        -80,
+        115,
+        340
+      ],
+      "drawCalls": 135,
+      "triangles": 1617466,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "market-street",
+      "hour": 12,
+      "eye": [
+        -464.40000000000003,
+        72.32000000000001,
+        327
+      ],
+      "target": [
+        -469.40000000000003,
+        74,
+        292.40000000000003
+      ],
+      "buildingId": "market-b0",
+      "drawCalls": 114,
+      "triangles": 2193378,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "residential",
+      "hour": 12,
+      "eye": [
+        -1143.68,
+        341.12,
+        -665.0400000000001
+      ],
+      "target": [
+        -1202,
+        320.72,
+        -721.8000000000001
+      ],
+      "buildingId": "west-b0",
+      "drawCalls": 55,
+      "triangles": 840314,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "workshop",
+      "hour": 12,
+      "eye": [
+        -1250.5200000000002,
+        199.12,
+        103.72
+      ],
+      "target": [
+        -1321.8000000000002,
+        178.72,
+        36.4
+      ],
+      "buildingId": "workshop-b0",
+      "drawCalls": 67,
+      "triangles": 1073262,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "civic-finance",
+      "hour": 12,
+      "eye": [
+        717.64,
+        388.42,
+        -728.1800000000001
+      ],
+      "target": [
+        655,
+        357.52000000000004,
+        -785.6
+      ],
+      "buildingId": "government-b2",
+      "drawCalls": 106,
+      "triangles": 1957130,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "airport",
+      "hour": 12,
+      "eye": [
+        1319.56,
+        112.72,
+        901.16
+      ],
+      "target": [
+        1150,
+        80.32000000000001,
+        785
+      ],
+      "buildingId": "airport-b0",
+      "drawCalls": 141,
+      "triangles": 1372468,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "summit",
+      "hour": 16,
+      "eye": [
+        -28.679999999999993,
+        562.8,
+        -1317.38
+      ],
+      "target": [
+        -60,
+        544.8,
+        -1355
+      ],
+      "buildingId": "summit-b0",
+      "drawCalls": 60,
+      "triangles": 576116,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "overview-night",
+      "hour": 22,
+      "eye": [
+        1780,
+        1040,
+        2040
+      ],
+      "target": [
+        0,
+        180,
+        0
+      ],
+      "drawCalls": 161,
+      "triangles": 1351968,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "core-night",
+      "hour": 22,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "drawCalls": 127,
+      "triangles": 1960086,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "下游溪流 · 连续水面",
+        "云瀑 · 流动水帘",
+        "瀑下碧潭",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    }
+  ],
+  "errors": []
+}

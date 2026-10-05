@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-10-02T03:28:38.312683+00:00",
+  "originalWhole": {
+    "total": 434,
+    "passed": 428,
+    "failed": 6,
+    "exitCode": 1,
+    "sourceFiles": 96,
+    "sourceUnchanged": true,
+    "sourceManifestSHA256": "fb7861e6bad3b85d585537c51f4b22648ec2e11c65fea9fb7fdf99258d35a8b9"
+  },
+  "cases": [
+    {
+      "name": "the generated city autonomously funds and completes research through actual trained residents and laboratories",
+      "failureLocation": "tests/extensions.test.ts:1489",
+      "actualCauseOrLimit": "Exact importer error: 读档失败：无效存档字段：route pool。 Actual research investment/completion/personal debit succeeded; restore rejected before 24-tick continuation.",
+      "repairStatus": "Lossless bounded route paging implemented; same-source build passed; regression is running."
+    },
+    {
+      "name": "selling the last privately held company shares cannot produce an unreadable operating company",
+      "failureLocation": "tests/integration.test.ts:71",
+      "actualCauseOrLimit": "Construction remained level 1. The old controlled worker coordinate was not the actual work point; listing/disposal/restore were not reached.",
+      "repairStatus": "Fixture moved to the shared accessible work point, keeping funding, roles, 64-tick cap and original level assertion. Rerun running."
+    },
+    {
+      "name": "a real onsite work escrow roundtrips and player damage recovers one complete funded generation",
+      "failureLocation": "tests/persistence.test.ts:197",
+      "actualCauseOrLimit": "Real work command rejected old doorway: 请到该建筑可访问楼层的实际工作点开始工班。 Recovery assertions were not reached.",
+      "repairStatus": "Fixture moved to the actual work point. Funding/40 ticks/whole-generation damage recovery assertions retained. Rerun running."
+    },
+    {
+      "name": "real clinical procurement, payer custody and reused medicine roundtrip through on-demand storage with identical continuation",
+      "failureLocation": "tests/persistence.test.ts:78 shared fixture",
+      "actualCauseOrLimit": "Real registration rejected old doorway: 伤患和付款人须共同到达诊所公共诊疗层。",
+      "repairStatus": "Patient and payer now use actual accessible service points. Original fees/procurement/reuse/stock/continuation assertions retained. Rerun running."
+    },
+    {
+      "name": "a damaged clinical player custody body recovers the complete prior generation with all original cash and stock",
+      "failureLocation": "tests/persistence.test.ts:78 shared fixture",
+      "actualCauseOrLimit": "Same registration rejection before damaged-generation recovery.",
+      "repairStatus": "Same real service-point fixture migration. Original full cash/stock recovery assertions retained. Rerun running."
+    },
+    {
+      "name": "the complete city survives multiple days and restores a large genuine save deterministically",
+      "failureLocation": "tests/simulation.test.ts:483",
+      "actualCauseOrLimit": "Actual 1200-tick city save import returned false. The original assertion did not print importer reason; the route-pool cause remains an inference until exact diagnostic is captured.",
+      "repairStatus": "Same lossless codec fix under test. Original alive/trade/freight/flights/8MB and full 24-tick continuation assertions retained. Full rerun still NOT_RUN."
+    }
+  ],
+  "referenceConsumer": {
+    "prepared": 8,
+    "unavailable": 0,
+    "initialHelperTransfers": 8,
+    "oneRetryHelperTransfers": 8,
+    "allExitCode": 1,
+    "errorVerbatim": "library file transfer failed: download failed",
+    "httpStatus": "NOT_EXPOSED",
+    "permissionRejection": "NOT_REPORTED",
+    "localFiles": 0,
+    "pixelsViewed": false,
+    "visualAcceptance": "BLOCKED",
+    "minimumRecovery": "Authorized normal transfer of all eight original image bytes into this execution environment; preserve private references and do not change sharing or publish them."
+  }
+}

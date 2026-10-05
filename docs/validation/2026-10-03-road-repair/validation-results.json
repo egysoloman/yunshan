@@ -1,0 +1,489 @@
+{
+  "at": "2026-10-03T14:02:57.623908+00:00",
+  "status": "ROAD_STAGE_FUNCTIONAL_PASS_SHARED_164_BYTES_EQUAL_INHERITED_OFFICIAL_DOM_FAIL_OPEN",
+  "actualScopes": {
+    "root24/build01": {
+      "phase": "build01",
+      "start": "2026-10-03T12:33:01.370681+00:00",
+      "end": "2026-10-03T12:33:14.116388+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "1326d2912f86789c92cd028d986e5f415dcdfc328ee5f404c876c7db02855795",
+      "distHashes": {
+        "assets/index-BKfLtV22.js": "9c58b0aa023404c4f656cd807f7a6f6dc0df53bb0f9208e7444b63dd44c1d9b7",
+        "assets/index-BKfLtV22.js.map": "0ba9256f3692919dd9d9980a8105fade61f147f4cc9d9d90a015d3d99c588cae",
+        "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+        "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+        "assets/three-vwNga81B.js.map": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+        "favicon.svg": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+        "index.html": "69f5afc808b250928e1021cda905fa506fa9009fb57fc4e6b3edad124bad66a1"
+      },
+      "receiptSha256": "897f2d2298c2db209f6387168e97583449df5d985b85e10a7a17d58777f74cfe",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/build01/receipt.json"
+    },
+    "root24/road-authority-routing01": {
+      "phase": "road-authority-routing01",
+      "start": "2026-10-03T12:39:32.649888+00:00",
+      "end": "2026-10-03T12:40:35.777364+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "7f9246308dd3ec1d020956b6570f619204b2743b4343551aa0c28f2db16fa7c7",
+      "receiptSha256": "a31b08982151ad669db0dd23064f40467df89fd1af7a8449fcd8b0f32bc74e90",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/road-authority-routing01/receipt.json"
+    },
+    "root24/roadworks-estate01": {
+      "phase": "roadworks-estate01",
+      "start": "2026-10-03T12:39:32.647388+00:00",
+      "end": "2026-10-03T12:40:26.150012+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "0dc75529c6aff1738c2e9ad0a8e1a81e90ab04432a29239e3adca069887271e8",
+      "receiptSha256": "b2d5f92dde7a430ccf1f1dd0596a82c4d7f0664cb8b920845a70209da3b9e94d",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/roadworks-estate01/receipt.json"
+    },
+    "root24/old-core-mobility-bank01": {
+      "phase": "old-core-mobility-bank01",
+      "start": "2026-10-03T12:42:20.067374+00:00",
+      "end": "2026-10-03T12:55:18.104225+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "1118f5a62bef5f9908693c2d6adfb71c8778dbcb54914df779511e33fe661598",
+      "receiptSha256": "3a875e2f3d2086ae7c6b7ec5e3271d2ef9ad72a1bd2cea57204d6d22e1c6d4a5",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/old-core-mobility-bank01/receipt.json"
+    },
+    "root24/old-services-capacity01": {
+      "phase": "old-services-capacity01",
+      "start": "2026-10-03T12:42:21.524492+00:00",
+      "end": "2026-10-03T12:50:52.149772+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "4da7f1b4998f07f329c48151510c76d3b6643b0d232e4579ca7230177d1fe40b",
+      "receiptSha256": "a680a39abff192ed7997bc11b016f6cc7ad2bde8913237dd363f7df3bd6e40dd",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/old-services-capacity01/receipt.json"
+    },
+    "root24/stationary-native-before01": {
+      "phase": "stationary-native-before01",
+      "start": "2026-10-03T12:51:07.785008+00:00",
+      "end": "2026-10-03T12:51:08.639343+00:00",
+      "exit": 1,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "c933146f3c6982674dc1a65ddda92b8b1a9c0b0a896aa0b4aeb0707d15c84bac",
+      "receiptSha256": "6bcec4f390f35d89660cbcf986cf3f33a27d636e94f3593f09e1cd12c55f6d2b",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root24-20261003-01/stationary-native-before01/receipt.json"
+    },
+    "root25/build01": {
+      "phase": "build01",
+      "start": "2026-10-03T12:51:25.358636+00:00",
+      "end": "2026-10-03T12:51:38.588690+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "016b43b3c9ccb4188382cb72b3066351574a596c9ba039160ddf9de83affd143",
+      "distHashes": {
+        "assets/index-D48JLzje.js": "ef234f18ad071a09e8d9942b810fcc28e10d63b8e8cbf58a82cf0916853ee20a",
+        "assets/index-D48JLzje.js.map": "778b0380f2e987fe6238644131d045f3e23552aa8337c6e28f2a724c3e535c65",
+        "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+        "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+        "assets/three-vwNga81B.js.map": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+        "favicon.svg": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+        "index.html": "cde13f2137b32876f0baecac72d77946bc59807124f6d17ad19deb07a362337b"
+      },
+      "receiptSha256": "3f101307f06448669c116ef5a1594e6180b6af4b5c1b20c06715069d870118e1",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/build01/receipt.json"
+    },
+    "root25/stationary-native-after01": {
+      "phase": "stationary-native-after01",
+      "start": "2026-10-03T12:53:06.880775+00:00",
+      "end": "2026-10-03T12:53:09.581069+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "8d19ec7013299777b8cb744147b0e99ffc036239682c88f44b9883f4d4635052",
+      "receiptSha256": "0eac95ed0362e7aab34ab6b7c8dd0af719e6e06f466020c512c6baa829e6376a",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/stationary-native-after01/receipt.json"
+    },
+    "root25/road-services-regression01": {
+      "phase": "road-services-regression01",
+      "start": "2026-10-03T12:53:31.455081+00:00",
+      "end": "2026-10-03T12:59:10.508048+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "932cbe440c79ef6f96ad9090565a825517eb75447d0f9b2562006a85bfa0eb46",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/road-services-regression01/receipt.json",
+      "receiptSha256": "9e582ac497cb073c212ec305a945fd42c67f6ecb658cee0d5eac4e972d98cbae"
+    },
+    "root25/road-gpu01": {
+      "startUTC": "2026-10-03T12:59:44.526464+00:00",
+      "endUTC": "2026-10-03T13:01:12.810304+00:00",
+      "status": "ACTUAL_FAIL",
+      "driverExit": 1,
+      "browserStatus": "ACTUAL_FAIL",
+      "timedOut": false,
+      "stopRequested": null,
+      "inputCount": 164,
+      "sourceDistDriverWrapperAndReceiptsStable": true,
+      "ownedCleanupSucceeded": true,
+      "rawSHA256": "a1adcf89f5f63548ff398d1975e32bf739395248a3a8482bcc798ac2b6076b3f",
+      "inputFirstSHA256": "9df97e589b4d91e888df2a521e639dc31c308b9da98e8d27fd119032865a672f",
+      "inputLastSHA256": "9df97e589b4d91e888df2a521e639dc31c308b9da98e8d27fd119032865a672f",
+      "cleanupReceiptSHA256": "88020ec62d80d3aac5bc2444a9728550853a1343015bff84a36607d8a5706477",
+      "ownedSamplesSHA256": "d878f11b6c13a400942ad5331b9bfbde8e5b24bc59dcffea9ee7bd618b548dc9",
+      "outcomeErrors": [],
+      "artifacts": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu01/artifacts",
+      "browserResultsSHA256": "45eef39c271b519bc863b5951c9e1dcaa3aff5e272d31394976f13ae5a3d5ced",
+      "claim": "Actual road UI/Renderer/player software-GPU functionality only; art/Mac/FPS remain unverified",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu01/receipt.json",
+      "receiptSha256": "5f4d02bbe637a5857fa031296e9152515fec46b8994ba439bda0454db7d522f0"
+    },
+    "root25/road-gpu02": {
+      "startUTC": "2026-10-03T13:09:56.633538+00:00",
+      "endUTC": "2026-10-03T13:11:58.156755+00:00",
+      "status": "ACTUAL_FAIL",
+      "driverExit": 1,
+      "browserStatus": "ACTUAL_FAIL",
+      "timedOut": false,
+      "stopRequested": null,
+      "inputCount": 164,
+      "sourceDistDriverWrapperAndReceiptsStable": true,
+      "ownedCleanupSucceeded": true,
+      "rawSHA256": "fe5c3f184d7dad80644d9af13fd1c4ca66c464cdaf895aa72a6851bd1e171678",
+      "inputFirstSHA256": "73c0059f164642fb9926ead0270f03cf95e88ec4d26118d8f3d5b3af082d182e",
+      "inputLastSHA256": "73c0059f164642fb9926ead0270f03cf95e88ec4d26118d8f3d5b3af082d182e",
+      "cleanupReceiptSHA256": "1d5879684660ccd525011c97fee47b176b2756f453bdf0e76dd0555947570650",
+      "ownedSamplesSHA256": "8fa2b4b0d20cc36820b397c2cdcf425b93734375d013e760515fae266ec37634",
+      "outcomeErrors": [],
+      "artifacts": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu02/artifacts",
+      "browserResultsSHA256": "6d11d842d152d34789b8fb75238311d3694424a8d9fb430a2188d25b74c62aca",
+      "claim": "Actual road UI/Renderer/player software-GPU functionality only; art/Mac/FPS remain unverified",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu02/receipt.json",
+      "receiptSha256": "f965aadf5f0c1728f1eda48b79a0b6cf9f41f9511b226514383a394cf3a3dbd7"
+    },
+    "root25/road-gpu03": {
+      "startUTC": "2026-10-03T13:13:53.853282+00:00",
+      "endUTC": "2026-10-03T13:16:20.422273+00:00",
+      "status": "ACTUAL_FAIL",
+      "driverExit": 1,
+      "browserStatus": "ACTUAL_FAIL",
+      "timedOut": false,
+      "stopRequested": null,
+      "inputCount": 164,
+      "sourceDistDriverWrapperAndReceiptsStable": true,
+      "ownedCleanupSucceeded": true,
+      "rawSHA256": "ed5e73c2e07ec6604228ec3f86f55797a14ba7804a0ac344406cb97e5e73accd",
+      "inputFirstSHA256": "5dc45e924027cfe5ac56964565fff4028b942328c5a15e59c39915f8eb01fd31",
+      "inputLastSHA256": "5dc45e924027cfe5ac56964565fff4028b942328c5a15e59c39915f8eb01fd31",
+      "cleanupReceiptSHA256": "e62196dafd6b4ed5381c0690ac7383f3c15d8b9d49282e329d37e78abd287366",
+      "ownedSamplesSHA256": "9c6257a2fef605e566888d6ca861bf21d03e313694fb81f65475460f8b77096e",
+      "outcomeErrors": [],
+      "artifacts": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu03/artifacts",
+      "browserResultsSHA256": "7507dce4d124232cd22e75d31995e6ea0f696ee8efdfe23e8ce9775640c033ad",
+      "claim": "Actual road UI/Renderer/player software-GPU functionality only; art/Mac/FPS remain unverified",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu03/receipt.json",
+      "receiptSha256": "fb527fedc9ee02f29ac52acfd161cae3e1bd978352672ad332c2d318381bfacb"
+    },
+    "root25/controller-bridge-diagnose01": {
+      "phase": "controller-bridge-diagnose01",
+      "start": "2026-10-03T13:27:15.716526+00:00",
+      "end": "2026-10-03T13:27:20.220368+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "93592db6a2b3a661f2057cbf960231ec90c24a0954f798c9ff6e724761cbe467",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/controller-bridge-diagnose01/receipt.json",
+      "receiptSha256": "e2ed12cc4bebc3f9b8540cbda1bb9c868121e74329a393756a7a253fc0b28a37"
+    },
+    "root25/road-gpu04": {
+      "startUTC": "2026-10-03T13:31:18.221837+00:00",
+      "endUTC": "2026-10-03T13:37:03.033304+00:00",
+      "status": "ACTUAL_FAIL",
+      "driverExit": 1,
+      "browserStatus": "ACTUAL_FAIL",
+      "timedOut": false,
+      "stopRequested": null,
+      "inputCount": 164,
+      "sourceDistDriverWrapperAndReceiptsStable": true,
+      "ownedCleanupSucceeded": true,
+      "rawSHA256": "e1a9750e43e40ed54d1f988b553f46e97642dc9e95e5f1473f1a31d1f302594a",
+      "inputFirstSHA256": "9f34cca6dfbed588ff6a18edd6068adb72ff406607f199f6a6f0aa22f1e6146b",
+      "inputLastSHA256": "9f34cca6dfbed588ff6a18edd6068adb72ff406607f199f6a6f0aa22f1e6146b",
+      "cleanupReceiptSHA256": "95fad7ffd2e623bd5d2ca26c8f8dbe89581e837fe23738be7e138895a9df2222",
+      "ownedSamplesSHA256": "e824fe07b0248534e529d9e800daa7260912f37ae7b59fb50f3f3baaac0a8f5b",
+      "outcomeErrors": [],
+      "artifacts": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu04/artifacts",
+      "browserResultsSHA256": "2a1171f75e85e3be177f503eb9a47f3d7817af2096f488d28883598cc8fd5047",
+      "claim": "Actual road UI/Renderer/player software-GPU functionality only; art/Mac/FPS remain unverified",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root25-20261003-01/road-gpu04/receipt.json",
+      "receiptSha256": "efc82c5e1db39004d077ef81aebdf27d2ffe2f36b332ded98c2403c132cce0a9"
+    },
+    "root26/build01": {
+      "phase": "build01",
+      "start": "2026-10-03T13:39:35.874780+00:00",
+      "end": "2026-10-03T13:39:49.554243+00:00",
+      "exit": 0,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "1d33cde6187eb50bcb404e002ae3ff498cf5ec5b4e824b3e0fd82b9715e6d23a",
+      "distHashes": {
+        "assets/index-BiOgWv-f.js": "7df3982426f2b436d6f4de1e716590e877dfd381631a60ecc52f7dfedd5e9e02",
+        "assets/index-BiOgWv-f.js.map": "6c890aadcaf5980e66bf8cf4dc43290f1c9ed761c61c65908001c63c86ff9649",
+        "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+        "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+        "assets/three-vwNga81B.js.map": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+        "favicon.svg": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+        "index.html": "0aa2825693b449d08c44108068dcda65770eb5a96f149c5a53d48650df76aa71"
+      },
+      "receiptSha256": "d7332b3104f5b2d9dd8c9828d484a0f218247ef9b41d58b92b91fbb18b8e9222",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root26-20261003-01/build01/receipt.json"
+    },
+    "root26/ui-dom01": {
+      "phase": "ui-dom01",
+      "start": "2026-10-03T13:41:05.103823+00:00",
+      "end": "2026-10-03T13:42:48.459574+00:00",
+      "exit": 1,
+      "inputCount": 164,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "cf2da0d7dd7a9214b691c1b26014e3df24e0b5a1f7b77c1d940469b935b49723",
+      "receiptSha256": "4b65468f47ba59d73bf01e52c55671f955da52ebbddc61d438845efdea822073",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root26-20261003-01/ui-dom01/receipt.json"
+    },
+    "b1/ui-dom01": {
+      "phase": "ui-dom01",
+      "start": "2026-10-03T13:53:17.074318+00:00",
+      "end": "2026-10-03T13:54:58.629714+00:00",
+      "exit": 1,
+      "inputCount": 150,
+      "sourceStable": true,
+      "ownedPidGone": true,
+      "rawSha256": "bd1da32da031f1195bc79101ba2ed77b4d4d66f115db3564730efe553f82d2b4",
+      "receiptSha256": "250810c30eff56fbe3633522e5a735aebc5c544d745b696ee9c8c68881a8bd5c",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-b1-ui-before-20261003-01/ui-dom01/receipt.json"
+    },
+    "root26/road-gpu05": {
+      "startUTC": "2026-10-03T13:55:10.409751+00:00",
+      "endUTC": "2026-10-03T13:59:58.372828+00:00",
+      "status": "ACTUAL_PASS",
+      "driverExit": 0,
+      "browserStatus": "ACTUAL_PASS",
+      "timedOut": false,
+      "stopRequested": null,
+      "inputCount": 164,
+      "sourceDistDriverWrapperAndReceiptsStable": true,
+      "ownedCleanupSucceeded": true,
+      "rawSHA256": "f2d419811bdea5aebb4bba9b56b9804bf5ffbb8e2fe39b258d3adc43a4691dfc",
+      "inputFirstSHA256": "08616452952bfae83d7665c48b77ac65c54cbb1b474a7d1d61c0da54566d40d0",
+      "inputLastSHA256": "08616452952bfae83d7665c48b77ac65c54cbb1b474a7d1d61c0da54566d40d0",
+      "cleanupReceiptSHA256": "1a5e93f6eeb3f1f32e7dab0db94fdb4abfff9d32fc0f9a71e4a992d985dcb7d7",
+      "ownedSamplesSHA256": "8edbc3b1970b09ba7eed672475289e6b401a6987e142629bddff8a10ebc5e29b",
+      "outcomeErrors": [],
+      "artifacts": "/tmp/yunshan-road-runtime-root26-20261003-01/road-gpu05/artifacts",
+      "browserResultsSHA256": "18263d54ff8a64f974e50cead99e0eea8a5d77aff5a9142318761c25da7ed591",
+      "claim": "Actual road UI/Renderer/player software-GPU functionality only; art/Mac/FPS remain unverified",
+      "receiptSha256": "e2a3783e723bc6267f8df1c0a0e7b211b91b3caa0093eec1c5816bd7b4f58661",
+      "receiptOriginalPath": "/tmp/yunshan-road-runtime-root26-20261003-01/road-gpu05/receipt.json"
+    }
+  },
+  "runCounts": {
+    "root24/road-authority-routing01": 48,
+    "root24/roadworks-estate01": 12,
+    "root24/old-core-mobility-bank01": 113,
+    "root24/old-services-capacity01": 83,
+    "root25/road-services-regression01": 84,
+    "root25/road-gpu04": 6
+  },
+  "uniqueCountClaimed": false,
+  "limits": [
+    "Controlled map/weather/initial-position/death/cap fixtures are not natural city evidence",
+    "All old failures retained",
+    "Not full npm test or long steady state, Mac performance or art pass"
+  ],
+  "artAssessment": "Root viewed original 00 opening PNG: blocky structures/simple materials remain ART_FAIL, no new qualified 3D asset or Mac evidence.",
+  "inheritedDomFailure": {
+    "baselineCommit": "b1b440d25625309744b176f0ca0a795ee4041b82",
+    "baselineAll150GitBlobByteEqual": true,
+    "beforeChecks": 16,
+    "afterChecks": 16,
+    "line": 291,
+    "assertion": "found-company enabled at arbitrary existing market",
+    "cause": "player does not own the existing market shop; current fixture has no title or lease; UI correctly rejects before company command or deduction",
+    "assertionUnchanged": true,
+    "allOfficialDomPassed": false,
+    "actualShopOwner": "citizen-308",
+    "actualLifecycleBodyPresent": false
+  },
+  "browserCheckCount": 9,
+  "originalScreenshotCount": 9,
+  "sourceIntegration": {
+    "status": "ACTUAL_SHARED_SOURCE_BYTE_EQUAL_PASS",
+    "at": "2026-10-03T14:00:39.889127+00:00",
+    "baseCommit": "b1b440d25625309744b176f0ca0a795ee4041b82",
+    "inputCount": 164,
+    "allInputHashesEqual": true,
+    "sourceManifestSha256": "85ff59a49fd981c34a78e64d8ffe2c633fd1df045ed5ca9f2320516bc7007b4a",
+    "changes": [
+      {
+        "path": "src/controller.ts",
+        "operation": "modify",
+        "beforeSha256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+        "afterSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+      },
+      {
+        "path": "src/journey.ts",
+        "operation": "modify",
+        "beforeSha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+        "afterSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+      },
+      {
+        "path": "src/main.ts",
+        "operation": "modify",
+        "beforeSha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+        "afterSha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+      },
+      {
+        "path": "src/renderer.ts",
+        "operation": "modify",
+        "beforeSha256": "1ee53694fa585bcdf0ff1179bf17e0f451ef4672a5140a6565e3ff1e9e2ff9a1",
+        "afterSha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b"
+      },
+      {
+        "path": "src/rendering/road-closures.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+      },
+      {
+        "path": "src/roads.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+      },
+      {
+        "path": "src/simulation/activity-capacity.ts",
+        "operation": "modify",
+        "beforeSha256": "7cfdcf1548d8eb328a13cc9037905dafde13fe841813c4b6f2e300ce3af285c6",
+        "afterSha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337"
+      },
+      {
+        "path": "src/simulation/banking.ts",
+        "operation": "modify",
+        "beforeSha256": "e9a8a1b49847d266672094996c2c8a841e4506f0acafc389db6ebed067ab83ac",
+        "afterSha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38"
+      },
+      {
+        "path": "src/simulation/roadworks.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3"
+      },
+      {
+        "path": "src/simulation.ts",
+        "operation": "modify",
+        "beforeSha256": "b6562fdd4d3e6e6a5135a7ecb68f29bafd5d2335546b52566a51015847845418",
+        "afterSha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb"
+      },
+      {
+        "path": "src/types.ts",
+        "operation": "modify",
+        "beforeSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+        "afterSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2"
+      },
+      {
+        "path": "src/ui.ts",
+        "operation": "modify",
+        "beforeSha256": "3a3926ae387bda67e6591a42d87672c8a3bb38e4e0698719eb6325f41d6b9f3d",
+        "afterSha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf"
+      },
+      {
+        "path": "src/world.ts",
+        "operation": "modify",
+        "beforeSha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+        "afterSha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843"
+      },
+      {
+        "path": "tests/fixtures/roads-old22/cold.json",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b"
+      },
+      {
+        "path": "tests/fixtures/roads-old22/continuation-sha.json",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "bbd7b1d564cde8ecc5e02e7ecbb635cb0490547082294d08bfc7b4e652e7eb49"
+      },
+      {
+        "path": "tests/fixtures/roads-old22/provenance.json",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "002f64a92c9ec5b6a85dc7f93e77f8422b34cb66f05a7ac7d23325c5e24ba3ff"
+      },
+      {
+        "path": "tests/road-capacity.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+      },
+      {
+        "path": "tests/road-estate.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+      },
+      {
+        "path": "tests/road-navigation.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+      },
+      {
+        "path": "tests/road-routing.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "501fd7c0d63ba6a963c9a833c5558929bc57f6267902277b6fe630b81ebe0d6f"
+      },
+      {
+        "path": "tests/roads-old22.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "253c5dd289d4d862c5ee105e89e886b7d706c62878cbbc86b9a7252727edcf7a"
+      },
+      {
+        "path": "tests/roads.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+      },
+      {
+        "path": "tests/roadworks-fixture.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+      },
+      {
+        "path": "tests/roadworks.test.ts",
+        "operation": "new",
+        "beforeSha256": null,
+        "afterSha256": "87286746f4379056ff9c824535edbd6e05987ad11d393a76d2c446ff55b640cf"
+      }
+    ],
+    "scope": "Only guarded final tested execution inputs copied; user documents and other paths retained; no reset or main mutation"
+  }
+}

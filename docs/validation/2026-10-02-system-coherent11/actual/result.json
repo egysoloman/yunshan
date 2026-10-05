@@ -1,0 +1,122 @@
+{
+  "status": "ACTUAL_PUBLIC_SERVICE_RECOVERY_AND_24_EXACT_PASS",
+  "startedAt": "2026-10-02T15:41:53.786Z",
+  "endedAt": "2026-10-02T15:47:18.575Z",
+  "source11InputCount": 105,
+  "source11ManifestSHA256": "72dd109f5ba725ed8f02646f87d99d1d6046d8f18a9bf91a34c43710c6f780c6",
+  "source11SimulationSHA256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+  "defaultNativeSnapshot": true,
+  "primaryFareChanges": [
+    {
+      "i": 17,
+      "clock": 1508,
+      "delta": -4,
+      "money": 250.42506785153802,
+      "rider": {
+        "vehicleId": "vehicle-road-core-quarter-0-core-station-0",
+        "stopNodeId": "workshop-station"
+      }
+    },
+    {
+      "i": 33,
+      "clock": 1572,
+      "delta": -4,
+      "money": 246.42506785153802,
+      "rider": {
+        "vehicleId": "vehicle-road-west-quarter-1-west-station-1",
+        "stopNodeId": "market-station"
+      }
+    },
+    {
+      "i": 86,
+      "clock": 1784,
+      "delta": -4,
+      "money": 242.42506785153802,
+      "rider": {
+        "vehicleId": "vehicle-road-workshop-quarter-0-workshop-station-1",
+        "stopNodeId": "core-b16-door"
+      }
+    }
+  ],
+  "homeBuildingSHA256": "d6e2aafd484ae831bcc30a3aa28d479c5a5c088df542d125054f9b3bd9ad7b35",
+  "homeGeometryUnchanged": true,
+  "noManualReservationChanges": true,
+  "reservationsConstantClaim": false,
+  "inputSaveSHA256": "8fcd65704caa3978b3864001b067ad707d9ae559ae4597ab0a71676e235f4d23",
+  "sourceHashes": {
+    "old": "607d7e55a7bf8042b7abed1e2cfa03cc22216b2429f0f8261c4356ecb5f31213",
+    "coherent11": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49"
+  },
+  "initialClock": 1440,
+  "primaryActualTicks": 105,
+  "primaryEndClock": 1860,
+  "firstRecovery": {
+    "i": 105,
+    "clock": 1860,
+    "tick": 345,
+    "state": "atHome",
+    "action": "rest",
+    "position": {
+      "x": 143.00000000000003,
+      "y": 83.2,
+      "z": 205.60000000000002
+    },
+    "destinationId": "core-b16",
+    "routeIndex": 63,
+    "routeLength": 63,
+    "routeTarget": {
+      "x": 143.00000000000003,
+      "y": 83.2,
+      "z": 205.60000000000002
+    },
+    "rider": null,
+    "needs": {
+      "hunger": 57.59038260974932,
+      "fatigue": 50.693816203633965,
+      "social": 43.5977821370703,
+      "fun": 55.67808720286562
+    },
+    "money": 242.42506785153802,
+    "health": 95.26469940674481,
+    "beforePeople": {
+      "position": {
+        "x": 145.288,
+        "y": 75.3295109725605,
+        "z": 202.05902194512103
+      },
+      "fatigue": 50.43874933661492,
+      "action": "rest",
+      "state": "moving",
+      "pendingMinutes": 12,
+      "rider": null
+    },
+    "observedFatigueDelta": 0.25506686701904613,
+    "atLegalPublicService": true,
+    "floor": 2,
+    "support": {
+      "kind": "room",
+      "floor": 2,
+      "y": 83.2,
+      "local": {
+        "x": -16.599999999999994,
+        "z": -2.5999999999999943
+      }
+    },
+    "staticBodyBlocked": false,
+    "floorAllowed": true
+  },
+  "continuationTicks": 24,
+  "all24Exact": true,
+  "continuationEndClock": 1956,
+  "noStateInjection": true,
+  "noClockMoneyNeedsHomeGeometryInjection": true,
+  "onlyActualStepPoint25": true,
+  "sourceClockSpeed": 16,
+  "bedCountUnchanged": true,
+  "noActorRouteInjection": true,
+  "worldUnchanged": true,
+  "originalNaturalFAILRetained": true,
+  "cashResidual": 8.149072527885437e-10,
+  "saveBeforeContinuationSHA256": "03e7155cdaddce72a3e09fdb8dda49017f6b4d03771976d7356781fbf38f79f6",
+  "scope": "Coherent11 single controlled continuation of actual default 00:00 save; not a second natural first-night run/profile/long-term steady-state/GPU"
+}

@@ -1,0 +1,583 @@
+{
+  "status": "PARTIAL_FUNCTIONAL_PASS_WITH_STAIRS_AND_ART_FAILURE",
+  "scope": "Single existing three-floor home controlled-body functional/GL evidence; no ordinary-player or art-completion claim",
+  "controlledRouteScope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "sourceManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "sourceInputCount": 99,
+  "entry": "/assets/index-DV9HXMzR.js",
+  "entrySHA256": "fee4c40b14b4ac44f0e1ea475b469df689470a1f3446f8d67fab1a2b7a0c1711",
+  "allInputsUnchanged": true,
+  "allProvenanceUnchanged": true,
+  "exitCode": 1,
+  "startedAt": "2026-10-02T06:13:05.486194+00:00",
+  "completedAt": "2026-10-02T06:17:39.816028+00:00",
+  "rent": {
+    "walletBefore": 600,
+    "walletAfter": 520,
+    "homeId": "market-b24"
+  },
+  "rest": {
+    "fatigueBefore": 89.51400000000075,
+    "fatigueAfter": 100,
+    "walletBefore": 520,
+    "walletAfter": 520,
+    "servicePosition": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    }
+  },
+  "routes": [
+    {
+      "label": "door-crossing",
+      "status": "passed",
+      "steps": 56,
+      "end": {
+        "x": -390.8,
+        "y": 76.6,
+        "z": 331.40000000000003
+      },
+      "failure": null
+    },
+    {
+      "label": "service-point",
+      "status": "passed",
+      "steps": 359,
+      "end": {
+        "x": -398.8,
+        "y": 76.6,
+        "z": 307.20000000000005
+      },
+      "failure": null
+    },
+    {
+      "label": "to-real-bed",
+      "status": "passed",
+      "steps": 179,
+      "end": {
+        "x": -406.40103427937584,
+        "y": 76.6,
+        "z": 300.4124142009159
+      },
+      "failure": null
+    },
+    {
+      "label": "return-from-bed",
+      "status": "passed",
+      "steps": 179,
+      "end": {
+        "x": -398.8163793475834,
+        "y": 76.6,
+        "z": 307.1954956794146
+      },
+      "failure": null
+    },
+    {
+      "label": "return-to-inside",
+      "status": "passed",
+      "steps": 359,
+      "end": {
+        "x": -390.8,
+        "y": 76.6,
+        "z": 331.40000000000003
+      },
+      "failure": null
+    },
+    {
+      "label": "to-courtyard",
+      "status": "passed",
+      "steps": 488,
+      "end": {
+        "x": -380.40000000000003,
+        "y": 76.6,
+        "z": 300.40000000000003
+      },
+      "failure": null
+    },
+    {
+      "label": "return-from-courtyard",
+      "status": "passed",
+      "steps": 488,
+      "end": {
+        "x": -390.7996283423572,
+        "y": 76.6,
+        "z": 331.396159537691
+      },
+      "failure": null
+    },
+    {
+      "label": "stairs-approach",
+      "status": "passed",
+      "steps": 392,
+      "end": {
+        "x": -403.6,
+        "y": 76.6,
+        "z": 307.6
+      },
+      "failure": null
+    },
+    {
+      "label": "stairs-01-first-flight",
+      "status": "passed",
+      "steps": 71,
+      "end": {
+        "x": -404.6,
+        "y": 78.19999999999999,
+        "z": 311.80000000000007
+      },
+      "failure": null
+    },
+    {
+      "label": "stairs-01-second-flight",
+      "status": "passed",
+      "steps": 127,
+      "end": {
+        "x": -403.59431496746754,
+        "y": 80,
+        "z": 307.6024104537938
+      },
+      "failure": null
+    },
+    {
+      "label": "upper1-to-next-stairs",
+      "status": "passed",
+      "steps": 0,
+      "end": {
+        "x": -403.59431496746754,
+        "y": 80,
+        "z": 307.6024104537938
+      },
+      "failure": null
+    },
+    {
+      "label": "stairs-12-up",
+      "status": "failed",
+      "steps": 27,
+      "end": {
+        "x": -404.59998259613934,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "failure": "Error: Actual motor blocked at waypoint 3"
+    }
+  ],
+  "pngCount": 12,
+  "actualCurrentV4Residents": [
+    {
+      "id": "citizen-67",
+      "homeId": "market-b24",
+      "workId": "market-b22",
+      "state": "moving",
+      "tier": "active",
+      "position": {
+        "x": -389.2039018149976,
+        "y": 60.46028713640159,
+        "z": 464
+      },
+      "destinationId": "market-b22",
+      "routeIndex": 9,
+      "routeLength": 56,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -184.20000000000002,
+        "y": 83,
+        "z": 425.40000000000003
+      }
+    },
+    {
+      "id": "citizen-276",
+      "homeId": "market-b24",
+      "workId": "market-b35",
+      "state": "moving",
+      "tier": "active",
+      "position": {
+        "x": -389.2039018149976,
+        "y": 60.46028713640159,
+        "z": 464
+      },
+      "destinationId": "market-b35",
+      "routeIndex": 9,
+      "routeLength": 297,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -287.8,
+        "y": 82.6,
+        "z": 522.8
+      }
+    },
+    {
+      "id": "citizen-485",
+      "homeId": "market-b24",
+      "workId": "academy-b55",
+      "state": "atHome",
+      "tier": "active",
+      "position": {
+        "x": -398.8,
+        "y": 80,
+        "z": 307.20000000000005
+      },
+      "destinationId": "market-b24",
+      "routeIndex": 32,
+      "routeLength": 32,
+      "routeFirst": {
+        "x": -390.8,
+        "y": 76.60000000000001,
+        "z": 333.40000000000003
+      },
+      "routeLast": {
+        "x": -398.8,
+        "y": 80,
+        "z": 307.20000000000005
+      }
+    }
+  ],
+  "npcSnapshotScope": "Read-only actual current-v4 fresh runtime citizen homeId/state/position/routes. No NPC placement, home assignment, clock steps or saved-profile claim.",
+  "naturalNPCDoorEntry": "NOT_VERIFIED",
+  "naturalNPCBedUse": "NOT_RUN",
+  "kitchenBathUse": "NOT_IMPLEMENTED_IN_THIS_BODY",
+  "bedServiceDistanceMetres": 12.092973166264784,
+  "missingFixtureKinds": [
+    "kitchen",
+    "bathroom",
+    "toilet"
+  ],
+  "errors": [],
+  "warnings": [],
+  "artReview": "FAIL: original bed remains orange/white block; interior window detail not discernible.",
+  "reviewScope": "Parent reviewed pilot images; producer additionally viewed original home-bed-close.png and home-window-by-bed.png. No new render or GPU run.",
+  "notRun": [
+    "complete 1→2 ascent",
+    "complete descent",
+    "additional natural20s NPC observation",
+    "bed-target rest",
+    "ordinary elapsed-frame home journey"
+  ],
+  "originalFiles": [
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/actual-disposal.json",
+      "relative": "evidence/pilot/actual-disposal.json",
+      "bytes": 1246,
+      "sha256": "2be628c76346da69be6752c1eb77928e01b6017a2f4936feb6eedfcdfebbdd78"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/actual-rent.json",
+      "relative": "evidence/pilot/actual-rent.json",
+      "bytes": 1115,
+      "sha256": "5a8c6ab032089a7316c913297d2cb5892221fea260d2012b1a18b964a7877b50"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/actual-rest.json",
+      "relative": "evidence/pilot/actual-rest.json",
+      "bytes": 1066,
+      "sha256": "8671bd19eda26109500427dceef4b4d39b676b922b91bd108fc6abb39f087c81"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/document-provenance.json",
+      "relative": "evidence/pilot/document-provenance.json",
+      "bytes": 24287,
+      "sha256": "91a659e6c7d6d91db27cf0f78be5d12f7621bf194bc91973e9433422805da3db"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/door-crossing-route.json",
+      "relative": "evidence/pilot/door-crossing-route.json",
+      "bytes": 23233,
+      "sha256": "3cb78842667dc11962060e60e6d5f91aaae2366b3639616347331c9a76d96537"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/executed-document-gate.mjs",
+      "relative": "evidence/pilot/executed-document-gate.mjs",
+      "bytes": 4533,
+      "sha256": "ee7fa0709fc6ae952c3b53e5c32416569c4cb5e23d22c00870909159ee30cfee"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/executed-source-gate.mjs",
+      "relative": "evidence/pilot/executed-source-gate.mjs",
+      "bytes": 3130,
+      "sha256": "1a5b36576449d9e4a893fbecdffe78502be9c1d006eb1e26a36938e4e84c57a1"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/executed-wrapper.mjs",
+      "relative": "evidence/pilot/executed-wrapper.mjs",
+      "bytes": 10727,
+      "sha256": "a0f168c6a1ce68e4447ae49d8c80436a0e0c594ab8511b4e615864bc6aaea5a0"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/execution-config.json",
+      "relative": "evidence/pilot/execution-config.json",
+      "bytes": 940,
+      "sha256": "7b4c3dfe9e60a8ef518d18db6667b337b0be9cc4e588b56033934c332f18fcc2"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/execution.log",
+      "relative": "evidence/pilot/execution.log",
+      "bytes": 3343,
+      "sha256": "d53cbc544bbc0624c8b2c64a20ca14c6455b48a9e2f9f327d0fb009818fa463a"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-after-legal-rent-rest.json",
+      "relative": "evidence/pilot/home-after-legal-rent-rest.json",
+      "bytes": 4152,
+      "sha256": "70623af4b01342b5c98db76d0f2e8460184e3662c259f8002f4a429b222e5463"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-after-legal-rent-rest.png",
+      "relative": "evidence/pilot/home-after-legal-rent-rest.png",
+      "bytes": 132252,
+      "sha256": "9cba682e2618d82f95026271937c994b412bb1981f7d2a1a736d8d1053ee8308"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-bed-close.json",
+      "relative": "evidence/pilot/home-bed-close.json",
+      "bytes": 4772,
+      "sha256": "1047a2c2a8883d8b242993d3cc042fa4a930765cacc6c4b03d405861d54054f0"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-bed-close.png",
+      "relative": "evidence/pilot/home-bed-close.png",
+      "bytes": 323466,
+      "sha256": "90ffb027f5442cd5c48a8364d969de4aafc9f715631b598e8e080f501d7c1b4e"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-courtyard-toward-house.json",
+      "relative": "evidence/pilot/home-courtyard-toward-house.json",
+      "bytes": 4221,
+      "sha256": "30f89cb4e0f11b303a3324f53b71c60ad73f2aca06c372b2bb7237004c19bf40"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-courtyard-toward-house.png",
+      "relative": "evidence/pilot/home-courtyard-toward-house.png",
+      "bytes": 414107,
+      "sha256": "719c632fcd414dc009e95c3a90b9d457dc59e79caea3936870a88884436eb310"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-door.json",
+      "relative": "evidence/pilot/home-door.json",
+      "bytes": 3260,
+      "sha256": "8bf11fe0e0e299f9c9a1b1d3ef07df014275e5c8f795efff8414946ef9c78e5d"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-door.png",
+      "relative": "evidence/pilot/home-door.png",
+      "bytes": 368069,
+      "sha256": "5b0757d7bb6b84f8f89788f0bbf838fa780d0a0d3b3804ced0ff39398dd730e6"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-eave-from-outside.json",
+      "relative": "evidence/pilot/home-eave-from-outside.json",
+      "bytes": 3258,
+      "sha256": "f9be5f7d5ddca8f1cbfd5de4b835fe97517254fd616e7319613985a6a1171447"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-eave-from-outside.png",
+      "relative": "evidence/pilot/home-eave-from-outside.png",
+      "bytes": 250940,
+      "sha256": "ee51761a276b7c9b464ab8069bfc8c402123c43493a20efe837805b584fa4ca7"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-inside.json",
+      "relative": "evidence/pilot/home-inside.json",
+      "bytes": 4200,
+      "sha256": "db02987da2140cdda97a8e4248ab9272065d1d494e7c9a9d5b1964bba8a69ac4"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-inside.png",
+      "relative": "evidence/pilot/home-inside.png",
+      "bytes": 747626,
+      "sha256": "7444e5380c5934490369edd0f8ea12af2af305816efb4320be0e54c81ac817dc"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-service-table.json",
+      "relative": "evidence/pilot/home-service-table.json",
+      "bytes": 4218,
+      "sha256": "7fc0adae05c991cb7a496a30a0e87fd3bdc0a571a401861e996bdb7220ece759"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-service-table.png",
+      "relative": "evidence/pilot/home-service-table.png",
+      "bytes": 129664,
+      "sha256": "22c60d830713e4e0ddf19591fd5749991c893421c7a3f151429113269576490f"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-stair-half-turn.json",
+      "relative": "evidence/pilot/home-stair-half-turn.json",
+      "bytes": 4221,
+      "sha256": "5ea6513727ab8f5fa53ebfb80d07bc6ea47e069d6d2671ebdc6cbfee743858f0"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-stair-half-turn.png",
+      "relative": "evidence/pilot/home-stair-half-turn.png",
+      "bytes": 449863,
+      "sha256": "41e86720fc18ff2b414ecae61df887b83038b2aebae1902052cb4b2e11f1e336"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-stair-upper1.json",
+      "relative": "evidence/pilot/home-stair-upper1.json",
+      "bytes": 4239,
+      "sha256": "370390ec7434c22aa6ab2406ef946da8c7324f8498dce05f5339182c048af98a"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-stair-upper1.png",
+      "relative": "evidence/pilot/home-stair-upper1.png",
+      "bytes": 597733,
+      "sha256": "0849c92b8045221d6fabf757e4ca753a730128692b3f9be5de23c83541c6f961"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-upper-hole.json",
+      "relative": "evidence/pilot/home-upper-hole.json",
+      "bytes": 4560,
+      "sha256": "f59e642f29038dc3fe8ea854ffcfd90e3936b763fd49c39790c1beb1a8ed8e35"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-upper-hole.png",
+      "relative": "evidence/pilot/home-upper-hole.png",
+      "bytes": 636130,
+      "sha256": "fb593596b3a227df5621d26fdbbc9801944a7caccf420c1813a8a7599fbe2091"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-window-by-bed.json",
+      "relative": "evidence/pilot/home-window-by-bed.json",
+      "bytes": 4243,
+      "sha256": "2097fb97e742ae5425337f578a190f42e3a1bfae51ea74269f311a529b8fde06"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/home-window-by-bed.png",
+      "relative": "evidence/pilot/home-window-by-bed.png",
+      "bytes": 552305,
+      "sha256": "50489b53b835a0a135bfc4e4e83357cf39a4d558ad2c2d9ed93083cb79d117ba"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/initial-declared-fixture.json",
+      "relative": "evidence/pilot/initial-declared-fixture.json",
+      "bytes": 2155,
+      "sha256": "e3e32a8e1a734c619037c46d7fbbeba35ac235f5f640f9700f92fa9ea6c790f2"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/npc-after-rent-rest.json",
+      "relative": "evidence/pilot/npc-after-rent-rest.json",
+      "bytes": 2028,
+      "sha256": "5aefaa0fba614314cb1d91550e0aa972fa9b93a883e4a507f7e2b339a4059b24"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/npc-outside-start.json",
+      "relative": "evidence/pilot/npc-outside-start.json",
+      "bytes": 2055,
+      "sha256": "458c718fa997a54e4c1011964e8a333f1ad81e5acc751ada4f0bf923e03c48be"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/observer.py",
+      "relative": "evidence/pilot/observer.py",
+      "bytes": 6678,
+      "sha256": "e3cdaa7efdb405b7632c8e340dbc5e5318e6d96405f5dbe1c3dc884ae689f9ea"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/pilot-failure.json",
+      "relative": "evidence/pilot/pilot-failure.json",
+      "bytes": 4146,
+      "sha256": "54f93aa85df2308f5511e27069cd156df5277025188a656c99364d83f45ad860"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/pilot-failure.png",
+      "relative": "evidence/pilot/pilot-failure.png",
+      "bytes": 520382,
+      "sha256": "410561b3a0ff84b240fcca98f4fa720959d0065bebd4000ed596403ebd396330"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/pilot-results.json",
+      "relative": "evidence/pilot/pilot-results.json",
+      "bytes": 1452606,
+      "sha256": "987edb13d77bce2b3ef1d13eb52498103408787c23d2a0acd71735e880ec16ad"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/return-from-bed-route.json",
+      "relative": "evidence/pilot/return-from-bed-route.json",
+      "bytes": 76205,
+      "sha256": "51fe003f166f0c16df947490a7e13a9003c411afa8b896d547bb95ea4b478181"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/return-from-courtyard-route.json",
+      "relative": "evidence/pilot/return-from-courtyard-route.json",
+      "bytes": 204867,
+      "sha256": "67e37e0196e96d2056266349efeb4a4dc0fa960427b43d13ca8babd34da7c141"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/return-to-inside-route.json",
+      "relative": "evidence/pilot/return-to-inside-route.json",
+      "bytes": 150717,
+      "sha256": "39cab89e943ec10be3e9be655ef0851092493d334fa388d4034459d56323032a"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/run-manifest.json",
+      "relative": "evidence/pilot/run-manifest.json",
+      "bytes": 24969,
+      "sha256": "28bf183708d3cfef8224534677f589ee3c672f90325f869a2c07d6c4c359f047"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/service-point-route.json",
+      "relative": "evidence/pilot/service-point-route.json",
+      "bytes": 150724,
+      "sha256": "94559195692cfbba9069c352b4e91c508c38868c3d8f2b1ffb1bacbd858126a7"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/source-snapshot.json",
+      "relative": "evidence/pilot/source-snapshot.json",
+      "bytes": 31214,
+      "sha256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/stairs-01-first-flight-route.json",
+      "relative": "evidence/pilot/stairs-01-first-flight-route.json",
+      "bytes": 30281,
+      "sha256": "7c1d62acb8690075011371afd8d100d7defd4be64fd40c4149a948fef9d7fc8f"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/stairs-01-second-flight-route.json",
+      "relative": "evidence/pilot/stairs-01-second-flight-route.json",
+      "bytes": 54321,
+      "sha256": "e46dc6087b295d18ef0bf074ea5db0342af8540005f9705668fb85e573f1e67d"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/stairs-12-cpu-cause.json",
+      "relative": "evidence/pilot/stairs-12-cpu-cause.json",
+      "bytes": 6844,
+      "sha256": "97a30c250c939ceebe273aaffb99a61288d81b982f15508835a8927f53b3ea3f"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/stairs-12-up-route.json",
+      "relative": "evidence/pilot/stairs-12-up-route.json",
+      "bytes": 14044,
+      "sha256": "d29a2bb3506bfcdfa4b9188b7d586ce6e6a1704379ca2faad575adb9446d0c55"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/stairs-approach-route.json",
+      "relative": "evidence/pilot/stairs-approach-route.json",
+      "bytes": 162037,
+      "sha256": "355080e3e9bd12ab5847052f5188992b0691ae2abb2b58967676bbc804ef6e0f"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/to-courtyard-route.json",
+      "relative": "evidence/pilot/to-courtyard-route.json",
+      "bytes": 204817,
+      "sha256": "2087ff026e1cc0c7a7f9de912e048589a93f79fa4675d3e1c2223018b67a6c02"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/to-real-bed-route.json",
+      "relative": "evidence/pilot/to-real-bed-route.json",
+      "bytes": 76131,
+      "sha256": "66060c64ae6e9b1a4908694dc95c7b3b630062f06d66bba9e52dfe55df6800c3"
+    },
+    {
+      "path": "/workspace/yunshan/artifacts/v4-coherent04-pilot-market-b24/upper1-to-next-stairs-route.json",
+      "relative": "evidence/pilot/upper1-to-next-stairs-route.json",
+      "bytes": 986,
+      "sha256": "d293e30882e830bce8100441ea2a182e89c2f5c5e46ad511de6b84cca8a97e70"
+    }
+  ]
+}

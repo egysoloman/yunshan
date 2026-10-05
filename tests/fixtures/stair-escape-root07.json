@@ -1,0 +1,287 @@
+{
+  "provenance": {
+    "scope": "Actual immutable World and recorded before-death position; no pre-death full save or route was recorded",
+    "worldSHA256": "ae802b350febe1ed74b72de1422de0b1b8b99d280db86255b915f42722b62444",
+    "auditSHA256": "2e81c0efc71a0f059028529286400397fec0a49b40afd47695e6cd3aaf43ac32",
+    "terminalSaveSHA256": "79ec2e152163525fd8dbabcf3f6090b23c106460409175fed147a2729dacc547",
+    "worldFingerprint": "b85fa6ec",
+    "worldSeed": 20261001,
+    "deathId": "citizen-45",
+    "deathTick": 9559,
+    "deathBeforePosition": {
+      "x": -171.73600000000002,
+      "y": 80,
+      "z": 190.9869782779261
+    },
+    "homeId": "market-b18",
+    "floor": 1
+  },
+  "building": {
+    "id": "market-b18",
+    "districtId": "market",
+    "name": "千灯市集·云锦街·里居5",
+    "kind": "home",
+    "position": {
+      "x": -161.60000000000002,
+      "y": 76,
+      "z": 197.4
+    },
+    "width": 34.800000000000004,
+    "depth": 28.8,
+    "height": 40.800000000000004,
+    "floors": 12,
+    "rotation": 0,
+    "door": {
+      "x": -161.60000000000002,
+      "y": 76.60000000000001,
+      "z": 211.8
+    },
+    "capacity": 372,
+    "seed": 133174488,
+    "stairGeometryRevision": 2,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 76.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 76.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 80,
+          "z": 190
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 80,
+          "z": 190
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 83.39999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 83.39999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 86.8,
+          "z": 190
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 86.8,
+          "z": 190
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 90.19999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 90.19999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "5:program:work",
+        "purpose": "work",
+        "floor": 5,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 93.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "5:program:service",
+        "purpose": "service",
+        "floor": 5,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 93.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "6:program:work",
+        "purpose": "work",
+        "floor": 6,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 97,
+          "z": 190
+        }
+      },
+      {
+        "id": "6:program:service",
+        "purpose": "service",
+        "floor": 6,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 97,
+          "z": 190
+        }
+      },
+      {
+        "id": "7:program:work",
+        "purpose": "work",
+        "floor": 7,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 100.39999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "7:program:service",
+        "purpose": "service",
+        "floor": 7,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 100.39999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "8:program:work",
+        "purpose": "work",
+        "floor": 8,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 103.8,
+          "z": 190
+        }
+      },
+      {
+        "id": "8:program:service",
+        "purpose": "service",
+        "floor": 8,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 103.8,
+          "z": 190
+        }
+      },
+      {
+        "id": "9:program:work",
+        "purpose": "work",
+        "floor": 9,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 107.19999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "9:program:service",
+        "purpose": "service",
+        "floor": 9,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 107.19999999999999,
+          "z": 190
+        }
+      },
+      {
+        "id": "10:program:work",
+        "purpose": "work",
+        "floor": 10,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 110.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "10:program:service",
+        "purpose": "service",
+        "floor": 10,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 110.6,
+          "z": 190
+        }
+      },
+      {
+        "id": "11:program:work",
+        "purpose": "work",
+        "floor": 11,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 114,
+          "z": 190
+        }
+      },
+      {
+        "id": "11:program:service",
+        "purpose": "service",
+        "floor": 11,
+        "position": {
+          "x": -168.60000000000002,
+          "y": 114,
+          "z": 190
+        }
+      }
+    ]
+  },
+  "terminalVoxels": []
+}

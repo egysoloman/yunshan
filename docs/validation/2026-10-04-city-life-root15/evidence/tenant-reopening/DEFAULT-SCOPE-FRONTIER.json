@@ -1,0 +1,113 @@
+{
+  "status": "TIMED_OUT_PARTIAL_NOT_ACCEPTED",
+  "at": "2026-10-04T20:35:47.432861+00:00",
+  "scope": "runtime-default01",
+  "capSeconds": 120,
+  "wrapperReceipt": {
+    "scope": "runtime-default01",
+    "status": "TIMED_OUT_PARTIAL",
+    "command": [
+      "env",
+      "YUNSHAN_TENANT_RUNTIME_SCOPE=default",
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/shop-continuity-runtime.test.ts"
+    ],
+    "cwd": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source",
+    "timeLimitSeconds": 120.0,
+    "startedAt": "2026-10-04T20:29:08.235301+00:00",
+    "endedAt": "2026-10-04T20:31:10.643233+00:00",
+    "exitCode": 0,
+    "rootAncestry": [
+      {
+        "pid": 113398,
+        "ppid": 113397,
+        "startTicks": 7657236,
+        "cmdline": "python3 tooling/run-scope.py runtime-default01 120 env YUNSHAN_TENANT_RUNTIME_SCOPE=default node --import tsx --test --test-isolation=none tests/shop-continuity-runtime.test.ts"
+      },
+      {
+        "pid": 113397,
+        "ppid": 113396,
+        "startTicks": 7657235,
+        "cmdline": "codex-linux-sandbox --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py runtime-default01 120 env YUNSHAN_TENANT_RUNTIME_SCOPE=default node --import tsx --test --test-isolation=none tests/shop-continuity-runtime.test.ts"
+      },
+      {
+        "pid": 113396,
+        "ppid": 113394,
+        "startTicks": 7657234,
+        "cmdline": "bwrap --new-session --die-with-parent --ro-bind / / --dev /dev --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --bind /workspace /workspace --perms 555 --tmpfs /workspace/.git --remount-ro /workspace/.git --perms 555 --tmpfs /workspace/.agents --remount-ro /workspace/.agents --perms 555 --tmpfs /workspace/.codex --remount-ro /workspace/.codex --perms 555 --tmpfs /workspace/.aws --remount-ro /workspace/.aws --bind /tmp /tmp --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --perms 555 --tmpfs /tmp/.git --remount-ro /tmp/.git --perms 555 --tmpfs /tmp/.agents --remount-ro /tmp/.agents --perms 555 --tmpfs /tmp/.codex --remount-ro /tmp/.codex --perms 555 --tmpfs /tmp/.aws --remount-ro /tmp/.aws --ro-bind /tmp/codex-bwrap-synthetic-mount-targets-1000 /tmp/codex-bwrap-synthetic-mount-targets-1000 --unshare-user --unshare-ipc --cap-drop ALL --argv0 codex-linux-sandbox -- /opt/codex/bin/codex --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py runtime-default01 120 env YUNSHAN_TENANT_RUNTIME_SCOPE=default node --import tsx --test --test-isolation=none tests/shop-continuity-runtime.test.ts"
+      },
+      {
+        "pid": 113394,
+        "ppid": 447,
+        "startTicks": 7657231,
+        "cmdline": "/run/codex-environment/codex-home/tmp/arg0/codex-arg0JTLgNI/codex-linux-sandbox --inherit-pid-namespace --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} -- /bin/bash -lc python3 tooling/run-scope.py runtime-default01 120 env YUNSHAN_TENANT_RUNTIME_SCOPE=default node --import tsx --test --test-isolation=none tests/shop-continuity-runtime.test.ts"
+      },
+      {
+        "pid": 447,
+        "ppid": 0,
+        "startTicks": 954,
+        "cmdline": "/opt/codex/bin/codex exec-server --remote https://codex-cloud-environments.chatgpt.com/api --environment-id ccarenv_b64_Y2NhcmVudl9kM2Y0MzMzNmY2N2M4MTkxODZhNjgyZjNhYzY3ZjRiYQ --linux-sandbox-pid-namespace=inherit"
+      }
+    ],
+    "childIdentity": {
+      "pid": 113401,
+      "ppid": 113398,
+      "startTicks": 7657285,
+      "cmdline": "env YUNSHAN_TENANT_RUNTIME_SCOPE=default node --import tsx --test --test-isolation=none tests/shop-continuity-runtime.test.ts"
+    },
+    "ownedActiveAtEnd": [],
+    "inputsExact": true,
+    "inputCount": 311,
+    "productionSourceCount": 73,
+    "rawLogSHA256": "deb7f52847154d0269055bd0981092e16f1c136023f09868e85de974fe25bfce",
+    "auxiliaryInputCount": 315,
+    "auxiliaryInputsExact": true,
+    "wrapperSHA256": "a50506c67d4e17572a69e2c9c92dbb9344b0d20fe2bac53995373aefe3b30cbe"
+  },
+  "rawAssertionFacts": "Node raw reports one default test PASS in121495.776675ms and process exit0; timeout120 already triggered, final output arrived during termination grace. Scope remains TIMED_OUT_PARTIAL regardless of exit0/assertion line.",
+  "actualLatestFrontier": {
+    "step": 24,
+    "tick": 24,
+    "clock": 486,
+    "sha256": "0944c4e474c18f9f1e665f830e3da37ce17a863e00c712ed817d37299195963f"
+  },
+  "world": {
+    "layout": "current-v6",
+    "people": 616,
+    "buildings": 612,
+    "edges": 691
+  },
+  "artifacts": {
+    "new-default-enabled-before.save.json": {
+      "bytes": 709387,
+      "sha256": "191ce03d7970b00a19724a1bde0ff43908b0a7451990ddeafff6db0698391515",
+      "mtimeUTC": "2026-10-04T20:31:10.054002+00:00"
+    },
+    "new-default-enabled-after24.save.json": {
+      "bytes": 2167777,
+      "sha256": "0944c4e474c18f9f1e665f830e3da37ce17a863e00c712ed817d37299195963f",
+      "mtimeUTC": "2026-10-04T20:31:10.121999+00:00"
+    },
+    "new-default-whole-partition-future24.json": {
+      "bytes": 3864,
+      "sha256": "fa70a71f5d63b387835034c434032ab0a930a978beb8235fe9beef6e53f28324",
+      "mtimeUTC": "2026-10-04T20:31:10.125999+00:00"
+    }
+  },
+  "knownStagesInOrder": [
+    "createProductWorld current-v6 trusted recipe",
+    "construct3 distinct city/archive/legacy Simulation on that same world",
+    "export initial then full import and partition/assemble import byteexact",
+    "24 iterations, each3 ordinary steps, complete full+part export equality, whole partition/assemble equality",
+    "write actual initial/final saves and24 tick SHA rows"
+  ],
+  "phaseTimingAvailable": false,
+  "stageLimit": "No wall timestamps were recorded between construction/load/future stages. Cannot retroactively attribute121.5seconds to any one stage or fabricate clock/profiling result. Actual finaltick24 proves all checks completed by process end, not by120 deadline.",
+  "runsRepeated": false,
+  "deadlineIncreased": false,
+  "defaultInstalled": false
+}

@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-04T14:32:28.656879+00:00",
+  "endedAt": "2026-10-04T14:32:35.889976+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT13-integrated-civic-shop-light-20261004-01/verify-native-v3-motion13.mts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 295,
+  "inputsStable": true,
+  "rawSHA256": "dc47e2b9de5745d7fe5e4eaa173c5fe95a276b99c9f84a3c056cb5f9d1f6db31",
+  "ownedPid": 86084,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 86092,
+      "state": "Z",
+      "parent": 1,
+      "group": 86084,
+      "session": 86084,
+      "startTicks": 5517360
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

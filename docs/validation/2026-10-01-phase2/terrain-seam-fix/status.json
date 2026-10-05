@@ -1,0 +1,326 @@
+{
+  "at": "2026-10-01T21:42:21.803876+00:00",
+  "sourceSha256": {
+    "src/rendering/terrain.ts": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+    "tests/rendering.test.ts": "5522d07bb23ab6c380ac9c835368e543f4affa46e8c92b0bdf929ba719d064b4"
+  },
+  "failedPixelBaseline": "artifacts/phase2-visual-macro5/core-waterfall.png, immutable root-coherent-01 entry9RmW2nKM",
+  "realCause": "Only border cells inherited smaller neighbour samples, producing unmatched edges against their own next cells. Actual opaque proxy topology had holes.",
+  "excludedCauses": "Exact failed pixels miss both FrontSide and DoubleSide geometry while authoritative solid terrain intersects their rays; material callback has no discard.",
+  "before": {
+    "staticProxyTriangles": 192744,
+    "unpairedInteriorEdges": 5904,
+    "rays": [
+      {
+        "pixel": [
+          960,
+          832
+        ],
+        "front": null,
+        "double": null,
+        "ground": {
+          "distance": 493,
+          "point": [
+            408.05610305921084,
+            88.87610375800818,
+            208.40517487840827
+          ],
+          "height": 89.7670778105441
+        }
+      },
+      {
+        "pixel": [
+          927,
+          836
+        ],
+        "front": null,
+        "double": null,
+        "ground": {
+          "distance": 493,
+          "point": [
+            393.99045371027455,
+            85.97081947347726,
+            211.28427541431068
+          ],
+          "height": 87.66581592564636
+        }
+      },
+      {
+        "pixel": [
+          1193,
+          491
+        ],
+        "front": null,
+        "double": null,
+        "ground": {
+          "distance": 567,
+          "point": [
+            507.4220237160206,
+            226.9527258348901,
+            85.62647723143539
+          ],
+          "height": 228.8060584448271
+        }
+      },
+      {
+        "pixel": [
+          1004,
+          863
+        ],
+        "front": null,
+        "double": null,
+        "ground": {
+          "distance": 499,
+          "point": [
+            427.38058848130794,
+            76.9767292776699,
+            207.188022770719
+          ],
+          "height": 80.50401353385924
+        }
+      },
+      {
+        "pixel": [
+          1076,
+          893
+        ],
+        "front": null,
+        "double": null,
+        "ground": {
+          "distance": 501,
+          "point": [
+            457.7759124188295,
+            69.91405021384313,
+            209.16804301517692
+          ],
+          "height": 72.10179666062965
+        }
+      }
+    ]
+  },
+  "after": {
+    "staticProxyTriangles": 194020,
+    "unpairedInteriorEdges": 0,
+    "rays": [
+      {
+        "pixel": [
+          960,
+          832
+        ],
+        "front": {
+          "distance": 495.70629623386196,
+          "point": [
+            407.8807488036617,
+            87.57991468879013,
+            206.0359589559319
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 410
+        },
+        "double": {
+          "distance": 495.70629623386196,
+          "point": [
+            407.8807488036617,
+            87.57991468879013,
+            206.0359589559319
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 410
+        },
+        "ground": {
+          "distance": 493,
+          "point": [
+            408.05610305921084,
+            88.87610375800818,
+            208.40517487840827
+          ],
+          "height": 89.7670778105441
+        }
+      },
+      {
+        "pixel": [
+          927,
+          836
+        ],
+        "front": {
+          "distance": 499.938697280351,
+          "point": [
+            393.3428952646139,
+            82.60661840888514,
+            205.25034309742136
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 380
+        },
+        "double": {
+          "distance": 499.938697280351,
+          "point": [
+            393.3428952646139,
+            82.60661840888514,
+            205.25034309742136
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 380
+        },
+        "ground": {
+          "distance": 493,
+          "point": [
+            393.99045371027455,
+            85.97081947347726,
+            211.28427541431068
+          ],
+          "height": 87.66581592564636
+        }
+      },
+      {
+        "pixel": [
+          1193,
+          491
+        ],
+        "front": {
+          "distance": 568.9313610040017,
+          "point": [
+            507.65168203597824,
+            226.61874932365347,
+            83.73812554973131
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 585
+        },
+        "double": {
+          "distance": 568.9313610040017,
+          "point": [
+            507.65168203597824,
+            226.61874932365347,
+            83.73812554973131
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 585
+        },
+        "ground": {
+          "distance": 567,
+          "point": [
+            507.4220237160206,
+            226.9527258348901,
+            85.62647723143539
+          ],
+          "height": 228.8060584448271
+        }
+      },
+      {
+        "pixel": [
+          1004,
+          863
+        ],
+        "front": {
+          "distance": 499.12972375314035,
+          "point": [
+            427.37730784518646,
+            76.91225130263135,
+            207.07550574849398
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 425
+        },
+        "double": {
+          "distance": 499.12972375314035,
+          "point": [
+            427.37730784518646,
+            76.91225130263135,
+            207.07550574849398
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 425
+        },
+        "ground": {
+          "distance": 499,
+          "point": [
+            427.38058848130794,
+            76.9767292776699,
+            207.188022770719
+          ],
+          "height": 80.50401353385924
+        }
+      },
+      {
+        "pixel": [
+          1076,
+          893
+        ],
+        "front": {
+          "distance": 502.96643138450054,
+          "point": [
+            457.84568310160097,
+            68.91283461024113,
+            207.4770220936985
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 455
+        },
+        "double": {
+          "distance": 502.96643138450054,
+          "point": [
+            457.84568310160097,
+            68.91283461024113,
+            207.4770220936985
+          ],
+          "mesh": "山形合批代理 1:0",
+          "face": 455
+        },
+        "ground": {
+          "distance": 501,
+          "point": [
+            457.7759124188295,
+            69.91405021384313,
+            209.16804301517692
+          ],
+          "height": 72.10179666062965
+        }
+      }
+    ]
+  },
+  "minimalFix": "Sample only the actual shared edge polygon and connect it to an authoritative centre vertex; retain the opposite interior edge and all existing heights, materials, masks and triangle budget.",
+  "tests": {
+    "targetPassed": 6,
+    "durationMs": 21954.275259,
+    "log": "yunshan-terrain-seam-final-tests.log",
+    "regression": "Full true geometry edge pairing over every proxy plus the five independently located failed PNG rays, both face culling modes"
+  },
+  "strict": {
+    "exit": 0,
+    "entry": "index-BZMcZl-r.js",
+    "log": "yunshan-terrain-seam-strict.log",
+    "scope": "Shared mutable build is compile evidence, not the upcoming complete immutable GPU entry."
+  },
+  "worldAndOtherVisualSourceChanged": false,
+  "actualNewGLPixels": {
+    "reviewedOriginal": "artifacts/phase2-visual-macro6/core-waterfall.png",
+    "sha256": "611705937814577f2fdb9cdab0c3d6344619cef3e20ed5f7c1f0c806cf70e5be",
+    "observedEntry": "index-BZMcZl-r.js",
+    "sameCamera": {
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "fov": 48,
+      "pixels": [
+        1440,
+        900
+      ]
+    },
+    "pixelEvidence": "artifacts/phase2-visual-macro6/core-whitehole-pixels.json",
+    "exactSkyPixelsClosed": 10,
+    "glErrors": [],
+    "visibleColourTriangles": 575388,
+    "visibleColourTrianglesDelta": 1048,
+    "entireProxyTriangleDelta": 1276,
+    "scope": "Visual owner actually viewed original core PNG and exact pixel evidence. The specific white terrain seam regression is closed. Other macro6 capture remains integration-owned; reference art quality still fails."
+  },
+  "visualQuality": "Candidate5 still fails original art references; seam repair does not imply forest, geology, courtyard or architecture visual acceptance."
+}

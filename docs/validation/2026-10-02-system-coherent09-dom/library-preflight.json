@@ -1,0 +1,48 @@
+{
+  "createdAt": "2026-10-02T13:06:39.801927+00:00",
+  "scope": "New frozen-09 DOM ZIP and a separate immutable current memo copy; create only, no existing Library entity touched",
+  "zip": {
+    "path": "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip",
+    "bytes": 7188882,
+    "sha256": "1b1c74c3774cf48a361d3e0f75715679c0d365e718c9453a8909f0ff0eb8de53",
+    "entryCount": 120,
+    "whitelistExact": true,
+    "crcValid": true,
+    "sensitivePatternCounts": {
+      "privateKey": 0,
+      "awsAccessKey": 0,
+      "openaiLikeKey": 0,
+      "githubToken": 0,
+      "googleKey": 0,
+      "slackToken": 0,
+      "bearerCredential": 0,
+      "credentialInURL": 0,
+      "signedQuery": 0,
+      "assignedSecret": 0
+    }
+  },
+  "memo": {
+    "originalPath": "/workspace/yunshan/开发备忘录.md",
+    "originalMtimeUtc": "2026-10-02T13:04:35.017748+00:00",
+    "path": "/tmp/yunshan-system-coherent-09/library-delivery-01/开发备忘录-2026-10-02-1304原件.md",
+    "bytes": 161408,
+    "sha256": "65c96028e2f8082101d45d40624aea38f112aa209bf1ccfc9e2985ec0dbcdafb",
+    "copyExact": true,
+    "readOnly": true,
+    "sensitivePatternCounts": {
+      "privateKey": 0,
+      "awsAccessKey": 0,
+      "openaiLikeKey": 0,
+      "githubToken": 0,
+      "googleKey": 0,
+      "slackToken": 0,
+      "bearerCredential": 0,
+      "credentialInURL": 0,
+      "signedQuery": 0,
+      "assignedSecret": 0
+    }
+  },
+  "secretMatches": 0,
+  "helperDirectory": "/tmp/yunshan-system-coherent-09/library-delivery-01/helpers",
+  "uploads": []
+}

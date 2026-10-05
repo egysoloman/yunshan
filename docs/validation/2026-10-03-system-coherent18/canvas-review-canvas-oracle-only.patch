@@ -1,0 +1,21 @@
+--- a/education-ui.mjs
++++ b/education-ui.mjs
+@@ -340,7 +340,17 @@
+   const logged = await page.evaluate(() => fixture.report());
+   assert.equal(logged.commands.length, 4); assert(logged.commands.every(command => command.result.ok));
+   assert(logged.steps.every(row => row.before.speed === 1 && row.after.speed === 1));
+-  assert.equal(await page.locator('canvas').count(), 0);
++  const canvasInventory = await page.locator('canvas').evaluateAll(canvases => canvases.map(canvas => {
++    const context = canvas.getContext('2d');
++    return { ref: canvas.dataset.ref, className: canvas.className, width: canvas.width, height: canvas.height,
++      has2D: context instanceof CanvasRenderingContext2D,
++      paintedPixels: !!context && context.getImageData(0, 0, canvas.width, canvas.height).data.some(value => value !== 0),
++      hasWebGL: canvas.getContext('webgl') !== null, hasWebGL2: canvas.getContext('webgl2') !== null,
++      inWorldStage: !!canvas.closest('.world-stage') };
++  }));
++  result.canvasInventory = canvasInventory;
++  assert.deepEqual(canvasInventory, [{ ref: 'map', className: 'minimap', width: 420, height: 270,
++    has2D: true, paintedPixels: true, hasWebGL: false, hasWebGL2: false, inWorldStage: false }]);
+   assert.deepEqual(result.errors, []);
+   result.results.push('24 additional real ticks preserve one reward, one consumption and original cancelled partial history; all commands and wage/step observations are retained.');
+   result.state = 'PASS_CONTROLLED_EDUCATION_DOM6';

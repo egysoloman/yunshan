@@ -1,0 +1,831 @@
+{
+  "kind": "ROOT15 gift contact authority static review",
+  "createdUtc": "2026-10-04T21:23:22.618965+00:00",
+  "reviewRoot": "/workspace/yunshan-work/ROOT15-gift-contact-review-20261004-01",
+  "scope": {
+    "findings": [
+      {
+        "id": "GIFT-CONTACT-01",
+        "severity": "P2",
+        "status": "static path confirmed; actual saved geometry confirmed; no gift command executed",
+        "productionInstalled": false
+      }
+    ],
+    "sourceFilesSnapshotted": 78,
+    "parentCurrentFrozenGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+    "giftCommandsExecuted": 0,
+    "simulationConstructions": 0,
+    "worldFactoryCalls": 0,
+    "stepCalls": 0,
+    "gpuRuns": 0,
+    "builds": 0,
+    "applicationTestSuiteExecutions": 0,
+    "pureGeometryExecutions": 1,
+    "pureGeometryExitCode": 0,
+    "sharedWrites": 0,
+    "environmentValuesRead": false,
+    "credentialsRead": false,
+    "currentSuiteOutcomeClaimed": false,
+    "actualPatientConsumptionClaimed": false,
+    "oldSealedReportsUnchanged": true
+  },
+  "fileCount": 159,
+  "totalBytes": 5715832,
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 9665,
+      "sha256": "04e08d1b308dd1be3d5c4d26cde09981753dfcd59b97657d020783a1bf7c8cc3"
+    },
+    {
+      "path": "command-entry/ALL-SRC-SEARCH.json",
+      "bytes": 24435,
+      "sha256": "06ce14931176d48b35ed99d5841dc49006e905d8f8474cf5168c0e14cf8c1e51"
+    },
+    {
+      "path": "command-entry/AST-INVENTORY.json",
+      "bytes": 118776,
+      "sha256": "aec82259285794d5ddf4dcb409421cadee9da5dfc7959659c1cca76f03078dc4"
+    },
+    {
+      "path": "command-entry/EVIDENCE-INDEX.json",
+      "bytes": 6321,
+      "sha256": "3bcd098f96ab28ac85f222700defad4d4cc14f0cc44c860ad3a2e2c1c90b9c01"
+    },
+    {
+      "path": "command-entry/REPORT.md",
+      "bytes": 7587,
+      "sha256": "5a5afa9cafece4232903ffaadfd44d1bcf0e140417b412e6a00c9f2427ccc4de"
+    },
+    {
+      "path": "command-entry/REVIEW-BOUNDARY.json",
+      "bytes": 655,
+      "sha256": "c3072e8e9b5747135316e5cc0b9901abee38e3ef35724560ba6b530c1279a998"
+    },
+    {
+      "path": "command-entry/SHARED-READBACK.json",
+      "bytes": 6759,
+      "sha256": "cd3d53eb72af35ed0029cac0574dfff4c7d12046de730ecea1078b893e36512e"
+    },
+    {
+      "path": "command-entry/SOURCE-AS-READ.json",
+      "bytes": 4178,
+      "sha256": "05655d57428538abb176570691b041d471aeb4057d3381d565328ae1aa0bd754"
+    },
+    {
+      "path": "command-entry/required-document-read-ledger-reused.json",
+      "bytes": 4576,
+      "sha256": "b7f989289011b6248447b00b31f5121d540e3a1d8820b56247a2bb37337f1c96"
+    },
+    {
+      "path": "command-entry/source-as-read/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "command-entry/source-as-read/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "command-entry/source-as-read/src/architecture-floor-plan.ts",
+      "bytes": 54125,
+      "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+    },
+    {
+      "path": "command-entry/source-as-read/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "command-entry/source-as-read/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "command-entry/source-as-read/src/main.ts",
+      "bytes": 24662,
+      "sha256": "768fa6b6f4465925306da87e89835e98ccf02788161eb4ef0429d6e04ef1e98f"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/banking.ts",
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/culture.ts",
+      "bytes": 67717,
+      "sha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/education.ts",
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/extensions.ts",
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/family.ts",
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/hygiene-transfer.ts",
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/hygiene.ts",
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation/shop_lifecycle.ts",
+      "bytes": 70854,
+      "sha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    {
+      "path": "command-entry/source-as-read/src/simulation.ts",
+      "bytes": 296089,
+      "sha256": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9"
+    },
+    {
+      "path": "command-entry/source-as-read/src/types.ts",
+      "bytes": 15086,
+      "sha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a"
+    },
+    {
+      "path": "command-entry/source-as-read/src/ui.ts",
+      "bytes": 194014,
+      "sha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541"
+    },
+    {
+      "path": "command-entry/static-ast-inventory.cjs",
+      "bytes": 2512,
+      "sha256": "4b7208920f6c25eaebe0a9c809d070ccedf3d79f2e2418e01b050022d18a00aa"
+    },
+    {
+      "path": "contact-rules/EVIDENCE-INDEX.json",
+      "bytes": 3858,
+      "sha256": "53e94650a80aaac1bb163447b66cd9f94773a679708f1560ec519b2cb23322cd"
+    },
+    {
+      "path": "contact-rules/REPORT.md",
+      "bytes": 10089,
+      "sha256": "98f9ca68b6e108e06518f49ba334a756e4557587c470fa76a9219502a7f2e2e3"
+    },
+    {
+      "path": "contact-rules/SOURCE-MANIFEST.json",
+      "bytes": 5691,
+      "sha256": "bd3be6ef4324be2b41dab1b4e5315ac5aeb37f6e12b5f2c2f9a598aed4588a45"
+    },
+    {
+      "path": "contact-rules/STATIC-REVIEW-FACTS.json",
+      "bytes": 5071,
+      "sha256": "0ebb72edf378f61b40ca903cf7b39cd0a40bbcbb447e7c123776013bd4b1d14a"
+    },
+    {
+      "path": "contact-rules/source/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "contact-rules/source/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "contact-rules/source/src/architecture-floor-plan.ts",
+      "bytes": 54125,
+      "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+    },
+    {
+      "path": "contact-rules/source/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "contact-rules/source/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "contact-rules/source/src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/education.ts",
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/npc-stair-motion.ts",
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "contact-rules/source/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "contact-rules/source/src/simulation.ts",
+      "bytes": 296089,
+      "sha256": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9"
+    },
+    {
+      "path": "contact-rules/source/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "contact-rules/source/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "contact-rules/source/src/ui.ts",
+      "bytes": 194014,
+      "sha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541"
+    },
+    {
+      "path": "inputs/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "inputs/package.json",
+      "bytes": 879,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    },
+    {
+      "path": "inputs/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "inputs/src/architecture-floor-plan.ts",
+      "bytes": 54125,
+      "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+    },
+    {
+      "path": "inputs/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "inputs/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "inputs/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "inputs/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "inputs/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "inputs/src/host/upgrade-city-ruleset.ts",
+      "bytes": 2808,
+      "sha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d"
+    },
+    {
+      "path": "inputs/src/host/upgrade-civic-history-format.ts",
+      "bytes": 3204,
+      "sha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e"
+    },
+    {
+      "path": "inputs/src/host/upgrade-meal-route.ts",
+      "bytes": 1946,
+      "sha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9"
+    },
+    {
+      "path": "inputs/src/host/upgrade-reference-collision.ts",
+      "bytes": 2042,
+      "sha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e"
+    },
+    {
+      "path": "inputs/src/host/upgrade-service-material-scheduling.ts",
+      "bytes": 2192,
+      "sha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153"
+    },
+    {
+      "path": "inputs/src/hygiene-ui.ts",
+      "bytes": 8278,
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    {
+      "path": "inputs/src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "inputs/src/main.ts",
+      "bytes": 24662,
+      "sha256": "768fa6b6f4465925306da87e89835e98ccf02788161eb4ef0429d6e04ef1e98f"
+    },
+    {
+      "path": "inputs/src/market-station-apron.ts",
+      "bytes": 5802,
+      "sha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046"
+    },
+    {
+      "path": "inputs/src/persistence/partition.ts",
+      "bytes": 21142,
+      "sha256": "fe1b6cfe12ff5edc543d6d3303de5d32545da4c7fac3ce47512584a3c3ea2eea"
+    },
+    {
+      "path": "inputs/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "inputs/src/persistence/save-resource.ts",
+      "bytes": 1490,
+      "sha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18"
+    },
+    {
+      "path": "inputs/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "inputs/src/persistence/world-layout.ts",
+      "bytes": 6146,
+      "sha256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7"
+    },
+    {
+      "path": "inputs/src/persistence.ts",
+      "bytes": 24112,
+      "sha256": "09cb7f5f89bf087efee1be3376f59e516ddce36cf2ce2a8786d9ebc215a96202"
+    },
+    {
+      "path": "inputs/src/product-city.ts",
+      "bytes": 2378,
+      "sha256": "b2c78e24aba7845596b19b5c2e6d00e20d276c62ea87102ff37bad302931b1d7"
+    },
+    {
+      "path": "inputs/src/renderer.ts",
+      "bytes": 95684,
+      "sha256": "6a595c58c77a37ad846f3e14d8ae705c3cbc7d005072dda19b9428d8170121d6"
+    },
+    {
+      "path": "inputs/src/rendering/architectural-finishes.ts",
+      "bytes": 8297,
+      "sha256": "db3f10878d07e01b61507031efcbdba47e8778b26c25aad37f171dc2974c53fe"
+    },
+    {
+      "path": "inputs/src/rendering/architecture-bodies.ts",
+      "bytes": 13506,
+      "sha256": "76d43ef3935a372a5d6e6df5550011fdf45638a6b87db291ed817384a89922cd"
+    },
+    {
+      "path": "inputs/src/rendering/architecture-detail.ts",
+      "bytes": 41206,
+      "sha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    {
+      "path": "inputs/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "inputs/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "inputs/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "inputs/src/rendering/interior-lighting.ts",
+      "bytes": 5980,
+      "sha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f"
+    },
+    {
+      "path": "inputs/src/rendering/market-goods.ts",
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    {
+      "path": "inputs/src/rendering/market-shopfront.ts",
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    {
+      "path": "inputs/src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "inputs/src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "inputs/src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "inputs/src/simulation/activity-capacity.ts",
+      "bytes": 5135,
+      "sha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    {
+      "path": "inputs/src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "inputs/src/simulation/banking.ts",
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "path": "inputs/src/simulation/budget-authority.ts",
+      "bytes": 23599,
+      "sha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef"
+    },
+    {
+      "path": "inputs/src/simulation/city-ruleset.ts",
+      "bytes": 12163,
+      "sha256": "4fe1727a04ec167f1fe7044b067fa5678d6a6030ecb68dd8ccf7867090452049"
+    },
+    {
+      "path": "inputs/src/simulation/civic-history.ts",
+      "bytes": 32374,
+      "sha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d"
+    },
+    {
+      "path": "inputs/src/simulation/civic-staffing.ts",
+      "bytes": 74161,
+      "sha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5"
+    },
+    {
+      "path": "inputs/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "inputs/src/simulation/culture.ts",
+      "bytes": 67717,
+      "sha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea"
+    },
+    {
+      "path": "inputs/src/simulation/education.ts",
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "inputs/src/simulation/extensions.ts",
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "inputs/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "inputs/src/simulation/family.ts",
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "path": "inputs/src/simulation/freight-access.ts",
+      "bytes": 4567,
+      "sha256": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381"
+    },
+    {
+      "path": "inputs/src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "inputs/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "inputs/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "inputs/src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "inputs/src/simulation/hygiene-transfer.ts",
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "inputs/src/simulation/hygiene.ts",
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "inputs/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "inputs/src/simulation/meal-route.ts",
+      "bytes": 1391,
+      "sha256": "03f42f53bc1a50b4ba164623537b9658c655285a1cfde3781ecbb00facb6b314"
+    },
+    {
+      "path": "inputs/src/simulation/npc-stair-motion.ts",
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "inputs/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "inputs/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "inputs/src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "inputs/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "inputs/src/simulation/public-employment.ts",
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    {
+      "path": "inputs/src/simulation/reference-collision.ts",
+      "bytes": 1062,
+      "sha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa"
+    },
+    {
+      "path": "inputs/src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "inputs/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "inputs/src/simulation/service-material-scheduling.ts",
+      "bytes": 6889,
+      "sha256": "2b874514406c89bcfa80d7206eb321f3e0a3e72cea5196e865b84fd35c0d868f"
+    },
+    {
+      "path": "inputs/src/simulation/shop_lifecycle.ts",
+      "bytes": 70854,
+      "sha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    {
+      "path": "inputs/src/simulation/supplemental-budget.ts",
+      "bytes": 21826,
+      "sha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb"
+    },
+    {
+      "path": "inputs/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "inputs/src/simulation.ts",
+      "bytes": 296089,
+      "sha256": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9"
+    },
+    {
+      "path": "inputs/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "inputs/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    {
+      "path": "inputs/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "inputs/src/types.ts",
+      "bytes": 15086,
+      "sha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a"
+    },
+    {
+      "path": "inputs/src/ui.ts",
+      "bytes": 194014,
+      "sha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541"
+    },
+    {
+      "path": "inputs/src/world.ts",
+      "bytes": 54827,
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    },
+    {
+      "path": "inputs/tests/fixtures/civic-history/root13-four-day.world.json",
+      "bytes": 64700,
+      "sha256": "78a9b469fb18e4f377151fd679045fdb25b9160d456f25ba8a0027b2b15a0bbe"
+    },
+    {
+      "path": "inputs/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "pure-gift-geometry.mjs",
+      "bytes": 4323,
+      "sha256": "cd5d1e937152b555acb4695c56e92b67efce45ac47f90599ce620aba0c74c20d"
+    },
+    {
+      "path": "root-evidence/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "root-evidence/FINAL-INPUTS-318.json",
+      "bytes": 34762,
+      "sha256": "f40b076bc8f1b0ecc28f999c8368d6e15bee928a854d1abbd997e78cea362aa1"
+    },
+    {
+      "path": "root-evidence/ROOT15-full-suite-import-review-20261004-01-sealed-readback.json",
+      "bytes": 179,
+      "sha256": "f0c8d7d0e3aeae8b8e95e6ac937b65263f09916a5b9417dd4be38cb4511654e8"
+    },
+    {
+      "path": "root-evidence/ROOT15-independent-review-20261004-01-sealed-readback.json",
+      "bytes": 179,
+      "sha256": "0ab3ffe9ace04c6e69730d1be9d6275ff429d5b61a18fcec8aabb1c084ce6d89"
+    },
+    {
+      "path": "root-evidence/ROOT15-test-isolation-review-20261004-01-sealed-readback.json",
+      "bytes": 179,
+      "sha256": "4a1aef1a6f07dff14f637d5f052175c8bdb5eb5e0787b673adb5945e024a416c"
+    },
+    {
+      "path": "root-evidence/current318-observation.json",
+      "bytes": 504,
+      "sha256": "3fcd15ca7a8d9ceb27f9973e68c31562feee6458aa3bb861341ce134bd6eded3"
+    },
+    {
+      "path": "root-evidence/current318-shas.json",
+      "bytes": 34762,
+      "sha256": "c07be5fd3cd089c03594462afca9f6161926306500174e7bab67665a1f03b98f"
+    },
+    {
+      "path": "root-evidence/memo-current-full.md",
+      "bytes": 434954,
+      "sha256": "79ccfedc29b98abf02f6877bd52a5c833175ae9c7a235dc4e2005c92e8c60016"
+    },
+    {
+      "path": "root-evidence/memo-next-prefix.md",
+      "bytes": 3600,
+      "sha256": "aa52aef94738c2ff70d1f13dd13e9c080c4edb0cfb481916137d9a414d68396f"
+    },
+    {
+      "path": "root-evidence/memo-review-supplement-current.md",
+      "bytes": 431354,
+      "sha256": "bb74b8a3d4aa8f77166bce1a6ca1130919ab94afe2d7ac7396fc7d2619c07dda"
+    },
+    {
+      "path": "root-evidence/memo-review-supplement.json",
+      "bytes": 525,
+      "sha256": "fb867b23979f0ca81399f0f7b51d44ca04833bc1ff02ea3b5b4b9744a4b01946"
+    },
+    {
+      "path": "root-evidence/parent-suite-isolation-FREEZE-RECEIPT.json",
+      "bytes": 686,
+      "sha256": "4cf4996aaacc77230aaafe48a6f83593b5dacc0487e867999f60df97544320b1"
+    },
+    {
+      "path": "root-evidence/parent-suite-isolation-INPUTS-318.json",
+      "bytes": 34762,
+      "sha256": "854b9f5cee23b6356c5e69b1a448178746ebdd6b0c23ff4ca858bd05986e1ab0"
+    },
+    {
+      "path": "root-evidence/producer-paths-shas.json",
+      "bytes": 2100,
+      "sha256": "08ebc26b9e2f59c9b50b4f6ccbceda3e15a428467865af21514d57fa0f2affd4"
+    },
+    {
+      "path": "root-evidence/pure-geometry-receipt.json",
+      "bytes": 608,
+      "sha256": "310d69ec96e8c167ed526db503234174841d61c27b0e1b6f2f44ccdd578e60c9"
+    },
+    {
+      "path": "root-evidence/pure-geometry-results.json",
+      "bytes": 3965,
+      "sha256": "a9775696b981154f5a621dd410ccf859aa72605bd9cf961e2e9729ee40277efd"
+    },
+    {
+      "path": "root-evidence/required-document-next-prefix-ledger.json",
+      "bytes": 363,
+      "sha256": "2affaf59b36131884579fba4249728bad410509230c052965b5a367aeeb0ee9a"
+    },
+    {
+      "path": "root-evidence/required-document-read-ledger.json",
+      "bytes": 4576,
+      "sha256": "b7f989289011b6248447b00b31f5121d540e3a1d8820b56247a2bb37337f1c96"
+    },
+    {
+      "path": "root-evidence/requirements-read-reuse.json",
+      "bytes": 364,
+      "sha256": "ec064502a1955f8fbdada6551ca6bc4ca2f30d936ab01dddb62e7f3816aba28d"
+    },
+    {
+      "path": "root-evidence/reviewed-inputs.json",
+      "bytes": 13431,
+      "sha256": "b3dcee12e9f7b9dafc0ba4039f5c185549287cad7e092586cb28410473ec903e"
+    },
+    {
+      "path": "root-evidence/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    }
+  ]
+}

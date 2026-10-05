@@ -1,5 +1,15 @@
-import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, TransportMode, Vec3, WorldDefinition } from './types';
+import { applyCommercialDistrict } from './commercial-district';
+import { applyMarketStationApron } from './market-station-apron';
+import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
+import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
+import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
+
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7'] as const;
+export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
+export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
+export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
+export const ARCHITECTURAL_GEOMETRY_VERSION = FLOOR_PLAN_GEOMETRY_VERSION;
 
 const UNIT = .2;
 const q = (n: number) => Math.round(n / UNIT) * UNIT;
@@ -27,7 +37,8 @@ function random(seed: number) {
   return () => { value += 0x6D2B79F5; let t = value; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 
-interface SpatialIndex { buildings: Map<string, Building[]>; roads: Map<string, NetworkEdge[]>; indexedEdges: number; quarters: NetworkNode[]; landHeights: Map<string, number> }
+interface RoadSegment { edge: NetworkEdge; a: Vec3; b: Vec3 }
+interface SpatialIndex { segments: Map<string, RoadSegment[]>; elevated: Map<string, RoadSegment[]>; buildings: Map<string, Building[]>; roads: Map<string, NetworkEdge[]>; indexedEdges: number; quarters: NetworkNode[]; landHeights: Map<string, number> }
 const indices = new WeakMap<WorldDefinition, SpatialIndex>();
 const CELL = 80;
 const key = (x: number, z: number) => `${Math.floor(x / CELL)},${Math.floor(z / CELL)}`;
@@ -39,17 +50,30 @@ function buckets<T>(map: Map<string, T[]>, item: T, minX: number, maxX: number, 
 function indexFor(world: WorldDefinition) {
   let index = indices.get(world);
   if (!index) {
-    index = { buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
-    for (const b of world.buildings) buckets(index.buildings, b, b.position.x - b.width / 2 - 14, b.position.x + b.width / 2 + 14, b.position.z - b.depth / 2 - 14, b.position.z + b.depth / 2 + 14);
+    index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
+    const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' ? 70 : 14;
+    for (const b of world.buildings) {
+      let halfWidth = b.width / 2, halfDepth = b.depth / 2;
+      if (b.floorPlanProfile) {
+        const c = Math.abs(Math.cos(b.rotation)), s = Math.abs(Math.sin(b.rotation));
+        halfWidth = (b.width * c + b.depth * s) / 2; halfDepth = (b.width * s + b.depth * c) / 2;
+      }
+      buckets(index.buildings, b, b.position.x - halfWidth - margin, b.position.x + halfWidth + margin, b.position.z - halfDepth - margin, b.position.z + halfDepth + margin);
+    }
     indices.set(world, index);
   }
   while (index.indexedEdges < world.edges.length) {
     const edge = world.edges[index.indexedEdges++];
-    if (edge.mode !== 'road' && edge.mode !== 'bridge') continue;
+    if (edge.mode !== 'road' && edge.mode !== 'bridge') {
+      if (['maglev', 'lightRail', 'cable'].includes(edge.mode)) for (let i = 1; i < edge.points.length; i++) { const a = edge.points[i - 1], b = edge.points[i]; buckets(index.elevated, { edge, a, b }, Math.min(a.x, b.x) - 9, Math.max(a.x, b.x) + 9, Math.min(a.z, b.z) - 9, Math.max(a.z, b.z) + 9); }
+      continue;
+    }
     const margin = edge.id.includes('airport-runway-strip') ? 38 : 14;
     for (let i = 1; i < edge.points.length; i++) {
       const a = edge.points[i - 1], b = edge.points[i];
       buckets(index.roads, edge, Math.min(a.x, b.x) - margin, Math.max(a.x, b.x) + margin, Math.min(a.z, b.z) - margin, Math.max(a.z, b.z) + margin);
+      buckets(index.segments, { edge, a, b }, Math.min(a.x, b.x) - margin, Math.max(a.x, b.x) + margin, Math.min(a.z, b.z) - margin, Math.max(a.z, b.z) + margin);
     }
   }
   return index;
@@ -94,21 +118,27 @@ function naturalHeight(world: WorldDefinition, x: number, z: number) {
   return Math.max(2, y);
 }
 
+/** Read-only mountain sample for the render shell's segment-indexed cuttings.
+ * It does not change generation, movement surfaces or the city's layout. */
+export function naturalTerrainHeight(world: WorldDefinition, x: number, z: number): number {
+  return naturalHeight(world, x, z);
+}
+
 /** Ground beneath the city: foundations and road cuttings are part of the terrain. */
-export function terrainHeight(world: WorldDefinition, x: number, z: number): number {
+function planningGroundHeight(world: WorldDefinition, x: number, z: number, includeBasements: boolean, includeRoads = true): number {
   const index = indexFor(world);
   const buildings = index.buildings.get(key(x, z)) ?? [];
   for (const b of buildings) if (Math.abs(x - b.position.x) <= b.width / 2 + 2 && Math.abs(z - b.position.z) <= b.depth / 2 + 2) {
-    if (b.basements && Math.abs(x - b.position.x) < b.width / 2 - .8 && Math.abs(z - b.position.z) < b.depth / 2 - .8) return b.position.y - b.basements * b.height / b.floors - .6;
+    if (includeBasements && b.basements && Math.abs(x - b.position.x) < b.width / 2 - .8 && Math.abs(z - b.position.z) < b.depth / 2 - .8) return b.position.y - b.basements * b.height / b.floors - .6;
     return b.position.y;
   }
   let y = naturalHeight(world, x, z);
   let roadDistance = Infinity, roadY = y, roadWidth = 5;
-  for (const edge of index.roads.get(key(x, z)) ?? []) {
+  for (const { edge, a, b } of includeRoads ? index.segments.get(key(x, z)) ?? [] : []) {
     if (edge.mode === 'bridge' && edge.from === 'core-lift-top') continue;
     // Bridge decks cross the river without filling the channel beneath them.
     if (edge.mode === 'bridge' && nearestSegment(world.river, x, z).distance < 25) continue;
-    const near = nearestSegment(edge.points, x, z);
+    const near = nearestSegment([a, b], x, z);
     if (near.distance < roadDistance - 1e-7) { roadDistance = near.distance; roadY = near.y - .6; roadWidth = edge.id.includes('airport-runway-strip') ? 22 : 5; }
   }
   // Elevated carriageways are real supported decks, not tall walls of filled
@@ -123,11 +153,121 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number): num
   return y;
 }
 
+/** The hydraulic path is shared by the visible sheet and solid world terrain. */
+export function getWaterfallPath(world: WorldDefinition): Vec3[] {
+  const { top, bottom } = world.waterfall;
+  return [top, { x: top.x, y: top.y, z: top.z + 34 }, { x: bottom.x, y: bottom.y, z: top.z + 44 }, bottom];
+}
+
+/** Solid jointed rock, sampled by walking, collision and the render shell.
+ * The cell tops are broad ledges, their narrow weathered joins are clefts;
+ * this is physical relief, never a second decorative surface. */
+function geologicalRelief(x: number, z: number, y: number, seed: number): number {
+  const gx = (x * .81 + z * .5864) / 24, gz = (z * .81 - x * .5864) / 24;
+  const ix = Math.floor(gx), iz = Math.floor(gz);
+  const cellNoise = (a: number, b: number, salt: number) => {
+    let value = Math.imul(a ^ seed, 374761393) ^ Math.imul(b ^ salt, 668265263);
+    value = Math.imul(value ^ value >>> 13, 1274126177);
+    return ((value ^ value >>> 16) >>> 0) / 4294967296;
+  };
+  let first = Infinity, second = Infinity, height = 0, phase = 0;
+  for (let a = ix - 1; a <= ix + 1; a++) for (let b = iz - 1; b <= iz + 1; b++) {
+    const dx = gx - a - .25 - cellNoise(a, b, 37) * .5, dz = gz - b - .25 - cellNoise(a, b, 71) * .5;
+    const distance = dx * dx + dz * dz;
+    if (distance < first) { second = first; first = distance; height = 6 + cellNoise(a, b, 97) * 18; phase = cellNoise(a, b, 113) * 8; }
+    else if (distance < second) second = distance;
+  }
+  const jointWidth = (Math.sqrt(second) - Math.sqrt(first)) * 12;
+  const cleft = 1 - smooth(jointWidth / 2.6);
+  const terrace = Math.floor((y + phase) / 8) * 8 - phase - y;
+  return height - (height + 10) * cleft + terrace * .75;
+}
+
+/** Authoritative ground after the generated roads are fixed. Carving preserves
+ * every station, road sample, building footprint and floor access contract. */
+export function terrainHeight(world: WorldDefinition, x: number, z: number, includeBasements = true): number {
+  let y = planningGroundHeight(world, x, z, includeBasements);
+  if ((world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'legacy-ee3e7a1') return y;
+  const index = indexFor(world), nearby = index.buildings.get(key(x, z)) ?? [];
+  if (nearby.some(b => Math.abs(x - b.position.x) <= b.width / 2 + 2 && Math.abs(z - b.position.z) <= b.depth / 2 + 2)) return y;
+  let roadGap = Infinity, foundationGap = Infinity, foundationY = y;
+  for (const { a, b } of index.segments.get(key(x, z)) ?? []) roadGap = Math.min(roadGap, nearestSegment([a, b], x, z).distance);
+  for (const { a, b } of index.elevated.get(key(x, z)) ?? []) roadGap = Math.min(roadGap, nearestSegment([a, b], x, z).distance);
+  for (const b of nearby) {
+    const dx = Math.max(0, Math.abs(x - b.position.x) - b.width / 2 - 2), dz = Math.max(0, Math.abs(z - b.position.z) - b.depth / 2 - 2), gap = Math.hypot(dx, dz);
+    if (gap < foundationGap) { foundationGap = gap; foundationY = b.position.y; }
+  }
+  // Adjacent houses sit on joined shoulders instead of isolated pointed
+  // mounds. The wider shoulder ends before the untouched road centreline.
+  if (roadGap > 9 && foundationGap < 54) y += (foundationY - y) * (1 - smooth(foundationGap / 54)) * .82;
+  const reliefWeight = world.buildings.length ? smooth((foundationGap - 10) / 38) * smooth((roadGap - 12) / 20) * smooth((y - 14) / 22) : 0;
+  // Long fault ridges and smaller fractures share the collision height. This
+  // breaks evenly spaced proxy facets without shifting houses or rail stops.
+  const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
+  y += fracture * reliefWeight;
+  const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
+    const near = nearestSegment([a, b], x, z);
+    if (near.distance > 7) continue;
+    let valley = planningGroundHeight(world, x, z, includeBasements, false);
+    if (foundationGap < 54) valley += (foundationY - valley) * (1 - smooth(foundationGap / 54)) * .82;
+    valley += fracture * smooth((foundationGap - 10) / 38) * smooth((valley - 14) / 22);
+    if (near.y - valley > 12) y = Math.min(y, valley);
+  }
+  const water = nearestSegment(world.river, x, z), width = 15;
+  if (water.distance < width + 2) y = Math.min(y, water.y - 2.2 + Math.max(0, water.distance - width) * .5);
+  const { top, bottom } = world.waterfall, profile = getWaterfallPath(world);
+  const poolDistance = Math.hypot(x - bottom.x, z - bottom.z);
+  if (poolDistance < 50) y = Math.min(y, bottom.y - 2.4 + Math.max(0, poolDistance - 42) * .25);
+  // The cliff is behind the sheet. A broad opening at its foot removes the
+  // foreground bank that previously hid the fall from both inhabited shores.
+  for (let i = 1; i < profile.length; i++) {
+    const a = profile[i - 1], b = profile[i], dx = b.x - a.x, dz = b.z - a.z;
+    const projection = ((x - a.x) * dx + (z - a.z) * dz) / (dx * dx + dz * dz || 1);
+    if (projection < 0 || projection > 1) continue;
+    const near = nearestSegment([a, b], x, z);
+    const halfWidth = i === 1 ? world.waterfall.width / 2 + 2 : 92;
+    if (near.distance < halfWidth) y = Math.min(y, near.y - 3);
+  }
+  if (z > top.z + 44 && z < 155 && Math.abs(x - top.x) < 135) {
+    const bank = smooth((Math.abs(x - top.x) - 92) / 43);
+    y = Math.min(y, bottom.y - 3 + bank * Math.max(0, y - bottom.y + 3));
+  }
+  for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'bridge') {
+    const near = nearestSegment([a, b], x, z);
+    // Clear all sampled cells beneath the deck, including low bridges that
+    // were previously embedded in a natural riverbank above the player's head.
+    if (near.distance < 6.6) y = Math.min(y, near.y - .8);
+  }
+  return y;
+}
+
 /** The floor/road surface is returned without a camera-eye offset. */
 export function getWalkHeight(world: WorldDefinition, x: number, z: number, referenceHeight?: number): number {
   const index = indexFor(world);
-  for (const b of index.buildings.get(key(x, z)) ?? []) if (Math.abs(x - b.position.x) <= b.width / 2 && Math.abs(z - b.position.z) <= b.depth / 2) {
+  for (const b of index.buildings.get(key(x, z)) ?? []) {
+    let halfWidth = b.width / 2, halfDepth = b.depth / 2;
+    if (b.floorPlanProfile) {
+      const c = Math.abs(Math.cos(b.rotation)), s = Math.abs(Math.sin(b.rotation));
+      halfWidth = (b.width * c + b.depth * s) / 2; halfDepth = (b.width * s + b.depth * c) / 2;
+    }
+    if (!(Math.abs(x - b.position.x) <= halfWidth && Math.abs(z - b.position.z) <= halfDepth)) continue;
     const floor = referenceHeight === undefined ? 0 : clamp(Math.round((referenceHeight - b.position.y - .6) / (b.height / b.floors)), -(b.basements ?? 0), b.floors - 1);
+    if (b.floorPlanProfile) {
+      // An absent upper wing exposes the actual slab below it. Never replace
+      // that slab with the original rectangular envelope or fall through it.
+      const reference = { x, y: referenceHeight ?? b.position.y + .6, z };
+      let highest = getFloorPlanRoofSupport(b, reference, 0)?.y;
+      for (let candidate = floor; candidate >= -(b.basements ?? 0); candidate--) {
+        const support = floorPlanSupport(b, candidate, reference, 0);
+        // Ground foundations have a real .6m plinth. A higher storey must not
+        // attract feet from the air between floors; stairs select real treads.
+        if (support && (referenceHeight === undefined || support.y <= referenceHeight + .6 + 1e-8)) highest = Math.max(highest ?? -Infinity, support.y);
+      }
+      if (highest !== undefined) return highest;
+      continue;
+    }
     const footprint = getFloorDimensions(b, floor);
     if (Math.abs(x - b.position.x) <= footprint.width / 2 && Math.abs(z - b.position.z) <= footprint.depth / 2) return b.position.y + .6 + floor * b.height / b.floors;
   }
@@ -158,12 +298,13 @@ export function samplePolyline(points: Vec3[], progress: number): Vec3 {
 }
 
 /** Bidirectional Dijkstra; an optional mode restricts the network being used. */
-export function findPath(world: WorldDefinition, fromNodeId: string, toNodeId: string, mode?: TransportMode): NetworkNode[] {
+export function findPath(world: WorldDefinition, fromNodeId: string, toNodeId: string, mode?: TransportMode, roadState?: Pick<SimState, 'roadNetwork'>): NetworkNode[] {
   const nodeMap = new Map(world.nodes.map(n => [n.id, n]));
   if (!nodeMap.has(fromNodeId) || !nodeMap.has(toNodeId)) return [];
   const adjacency = new Map<string, { to: string; length: number }[]>();
   for (const edge of world.edges) {
     if (mode && edge.mode !== mode) continue;
+    if (roadState && !isRoadOpen(roadState, edge.id)) continue;
     for (const [from, to] of [[edge.from, edge.to], [edge.to, edge.from]]) {
       const list = adjacency.get(from) ?? []; list.push({ to, length: edge.length }); adjacency.set(from, list);
     }
@@ -205,7 +346,7 @@ const civicPlan = [
 ];
 
 /** Orthogonal obstacle routing keeps every connector outside all building walls. */
-function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building): Vec3[] {
+function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuilding?: Building, clearance = 5): Vec3[] {
   const GRID = 8;
   const first = startBuilding ? { ...start, z: q(start.z + 10) } : start;
   const sx = Math.round(first.x / GRID), sz = Math.round(first.z / GRID);
@@ -243,7 +384,17 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
       const projection = clamp(((x * GRID - start.x) * vx + (z * GRID - start.z) * vz) / projectedLength, 0, 1);
       const plannedGrade = start.y + (end.y - start.y) * projection;
       const terrainCost = Math.min(200, Math.abs(originalGround + .6 - plannedGrade)) * .35;
-      const g = current.g + GRID + terrainCost;
+      // Wider bridges prefer open water. Keep the ordinary five-metre exit
+      // corridors usable where a station is enclosed by the old town fabric.
+      let enclosureCost = 0;
+      if (clearance > 5) {
+        const px = x * GRID, pz = z * GRID;
+        for (const b of indexFor(world).buildings.get(key(px, pz)) ?? []) {
+          const gap = Math.max(Math.abs(px - b.position.x) - b.width / 2, Math.abs(pz - b.position.z) - b.depth / 2);
+          enclosureCost = Math.max(enclosureCost, Math.max(0, clearance - gap) * 8);
+        }
+      }
+      const g = current.g + GRID + terrainCost + enclosureCost;
       if (g >= (cost.get(next) ?? Infinity)) continue;
       cost.set(next, g); previous.set(next, id); push({ x, z, g, f: g + (Math.abs(x - tx) + Math.abs(z - tz)) * GRID });
     }
@@ -278,11 +429,27 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
   return dense;
 }
 
-export function createWorld(seed = 20261001): WorldDefinition {
-  const rng = random(seed);
+export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
+  if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v7') {
+    const base = createWorld(seed, 'current-v6');
+    applyMarketStationApron(base);
+    base.layoutVersion = 'current-v7';
+    indices.delete(base);
+    return base;
+  }
+  if (layoutVersion === 'current-v6') {
+    const base = createWorld(seed, 'current-v5');
+    applyCommercialDistrict(base);
+    base.layoutVersion = 'current-v6';
+    // Ground, graph and every unselected site retain the actual v5 recipe.
+    indices.delete(base);
+    return base;
+  }
+  const currentLayout = layoutVersion !== 'legacy-ee3e7a1', historicR5 = layoutVersion === 'current-v2-r5', rng = random(seed);
   const districts: District[] = plans.map(p => ({ id: p.id, name: p.name, kind: p.kind, center: { x: p.x, y: p.y, z: p.z }, radius: p.radius, color: p.color, population: p.count * 38 }));
-  const world: WorldDefinition = {
-    seed, voxelSize: UNIT, size: 4400, districts, buildings: [], nodes: [], edges: [],
+  const world: WorldDefinition & { layoutVersion: CityLayoutVersion } = {
+    layoutVersion: historicR5 ? 'current-v2' : layoutVersion, seed, voxelSize: UNIT, size: 4400, districts, buildings: [], nodes: [], edges: [],
     mountains: [
       { x: -60, z: -1300, height: 505, radius: 650 }, { x: -1170, z: -540, height: 300, radius: 600 },
       { x: 590, z: -760, height: 290, radius: 590 }, { x: 1360, z: -1250, height: 345, radius: 560 },
@@ -322,6 +489,7 @@ export function createWorld(seed = 20261001): WorldDefinition {
     if (Math.abs(x) + width / 2 > 2120 || Math.abs(z) + depth / 2 > 2120) return false;
     if (z + depth / 2 > 1435 && z - depth / 2 < 1545 && x + width / 2 > 650 && x - width / 2 < 1730) return false;
     if (nearestSegment(world.river, x, z).distance < Math.hypot(width, depth) / 2 + 30) return false;
+    if (currentLayout && Math.abs(x - world.waterfall.top.x) < width / 2 + 135 && z + depth / 2 > world.waterfall.top.z - 20 && z - depth / 2 < 155) return false;
     if (world.nodes.some(n => intersects(x, z, width, depth, n.position.x, n.position.z, 42, 42, 4))) return false;
     if (civicPlan.some(c => intersects(x, z, width, depth, c.x, c.z, 'width' in c ? c.width! : 36, 'depth' in c ? c.depth! : 24))) return false;
     return !world.buildings.some(b => intersects(x, z, width, depth, b.position.x, b.position.z, b.width, b.depth)
@@ -376,7 +544,8 @@ export function createWorld(seed = 20261001): WorldDefinition {
       const ground = naturalHeight(world, x, z);
       const terraceTarget = anchor.position.y - .6 + (p.id === 'airport' ? 0 : terrace);
       const y = q(civic?.y ?? clamp(terraceTarget, ground - 8, ground + 14));
-      const targetHeight = civic && 'height' in civic ? civic.height! : floors * (kind === 'bank' ? 4.8 : kind === 'hall' ? 5.2 : kind === 'airport' ? 6 : kind === 'starport' ? 6.6 : 4) + (kind === 'pavilion' ? 8 : 4.8 + within % 3 * 1.6);
+      const storeyHeight: Record<BuildingKind, number> = { home: 3.4, market: 3.6, workshop: 4.8, bank: 4.4, hall: 4.2, police: 3.8, school: 3.8, clinic: 3.8, station: 4.2, core: 7.8, pavilion: 12.8, airport: 6, starport: 6.6, farm: 3.6, dock: 3.8 };
+      const targetHeight = civic && 'height' in civic ? civic.height! : currentLayout ? floors * storeyHeight[kind] : floors * (kind === 'bank' ? 4.8 : kind === 'hall' ? 5.2 : kind === 'airport' ? 6 : kind === 'starport' ? 6.6 : 4) + (kind === 'pavilion' ? 8 : 4.8 + within % 3 * 1.6);
       // Floors, including upper rooms and basement slabs, share the voxel lattice.
       const height = q(Math.round(targetHeight / floors / UNIT) * UNIT * floors);
       const building: Building = { id: civic?.id ?? `${p.id}-b${i}`, districtId: p.id, name: civic?.name ?? `${p.name}·${anchor.name.split('·')[1].replace('驿', '')}·${kindName[kind]}${within + 1}`, kind, position: { x, y, z }, width, depth, height, floors, rotation: 0, door: { x, y: q(y + .6), z: q(z + depth / 2) }, capacity: floors * Math.floor(width * depth / 32), seed: Math.floor(rng() * 0x7FFFFFFF) };
@@ -392,6 +561,15 @@ export function createWorld(seed = 20261001): WorldDefinition {
         building.floorPermissions = ['public', 'public', 'public', 'official', 'official', 'driver', 'driver', 'scientist', 'teacher', 'official', 'scientist', 'scientist', 'scientist', 'official', 'official', 'official', 'police', 'police', 'police', 'public', 'council', 'council', 'official', 'official', 'official', 'mayor', 'mayor', 'mayor', 'public', 'public'];
         const tiers = [[144, 112], [126, 98], [108, 84], [90, 70], [72, 56]];
         Object.assign(building, { floorFootprints: Array.from({ length: floors }, (_, floor) => ({ width: tiers[Math.floor(floor / 6)][0], depth: tiers[Math.floor(floor / 6)][1] })) });
+      }
+      // Select the corrected physical stair recipe before any body/use-point
+      // generation. Every older recipe deliberately retains its original grid.
+      if (layoutVersion === 'current-v5') building.stairGeometryRevision = 2;
+      if ((layoutVersion === 'current-v4' || layoutVersion === 'current-v5') && kind !== 'core' && kind !== 'pavilion') {
+        building.floorPlanProfile = 'v4-program-bodies-02';
+        const entrance = getBuildingEntrance(building);
+        building.door = { x: q(entrance.x), y: q(entrance.y), z: q(entrance.z) };
+        building.functionPoints = Array.from({ length: floors }, (_, floor) => getBuildingUsePoints(building, floor)).flat();
       }
       world.buildings.push(building);
       if (!civic) {
@@ -418,6 +596,25 @@ export function createWorld(seed = 20261001): WorldDefinition {
     const destination = b.id === 'core-dock-building' ? liftBottom : buildingAnchors.get(b.id) ?? station(b.districtId);
     addEdge(node.id, destination.id, 'road', routeGround(world, node.position, destination.position, b), 30);
   }
+  const stationApronGrade = (points: Vec3[], atStart: boolean, desiredFlat: number) => {
+    const cumulative = [0]; for (let i = 1; i < points.length; i++) cumulative.push(cumulative[i - 1] + Math.hypot(points[i].x - points[i - 1].x, points[i].z - points[i - 1].z));
+    const total = cumulative[cumulative.length - 1], apron = atStart ? points[0].y : points[points.length - 1].y, outer = atStart ? points[points.length - 1].y : points[0].y;
+    const flat = Math.min(desiredFlat, Math.max(0, total - Math.abs(outer - apron) / .2 - 6));
+    // A grade break must be an actual vertex. Merely grading old route vertices
+    // leaves a sloping segment over the supposedly level station junction.
+    const transition = atStart ? flat : total - flat;
+    for (let i = 1; !historicR5 && i < points.length; i++) if (transition > cumulative[i - 1] + .5 && transition < cumulative[i] - .5) {
+      const a = points[i - 1], b = points[i], t = (transition - cumulative[i - 1]) / (cumulative[i] - cumulative[i - 1]);
+      points.splice(i, 0, { x: q(a.x + (b.x - a.x) * t), y: apron, z: q(a.z + (b.z - a.z) * t) });
+      cumulative.splice(i, 0, transition); break;
+    }
+    points.forEach((point, i) => { const fromApron = atStart ? cumulative[i] : total - cumulative[i]; point.y = q(apron + (outer - apron) * clamp((fromApron - flat) / Math.max(.01, total - flat), 0, 1)); });
+  };
+  if (currentLayout) for (const edge of world.edges) if (edge.mode === 'road' && (edge.from === 'river-station' || edge.to === 'river-station')) {
+    stationApronGrade(edge.points, edge.from === 'river-station', 64);
+    edge.length = edge.points.slice(1).reduce((sum, p, i) => sum + distance(edge.points[i], p), 0);
+  }
+  if (currentLayout && !historicR5) indices.delete(world);
   const elevated = (a: string, b: string, mode: TransportMode, lift: number) => {
     const from = station(a), to = station(b), start = from.position, end = to.position;
     const routed = mode === 'cable' ? [{ ...start }, { ...end }] : routeGround(world, start, end);
@@ -431,7 +628,7 @@ export function createWorld(seed = 20261001): WorldDefinition {
     const total = cumulative[cumulative.length - 1];
     const points = ground.map((p, i) => {
       const t = cumulative[i] / total, stationBlend = Math.min(1, cumulative[i] / 32, (total - cumulative[i]) / 32);
-      let minimum = terrainHeight(world, p.x, p.z) + 14 * stationBlend;
+      let minimum = planningGroundHeight(world, p.x, p.z, true) + 14 * stationBlend;
       if (mode === 'cable') for (const building of indexFor(world).buildings.get(key(p.x, p.z)) ?? []) if (Math.abs(p.x - building.position.x) < building.width / 2 + 6 && Math.abs(p.z - building.position.z) < building.depth / 2 + 6) minimum = Math.max(minimum, building.position.y + building.height + 12);
       return { x: p.x, y: q(Math.max(start.y + (end.y - start.y) * t + Math.sin(Math.PI * t) * lift, minimum)), z: p.z };
     });
@@ -442,7 +639,7 @@ export function createWorld(seed = 20261001): WorldDefinition {
       let ceiling = -Infinity;
       for (let j = 0; j <= samples; j++) {
         const x = a.x + (b.x - a.x) * j / samples, z = a.z + (b.z - a.z) * j / samples;
-        ceiling = Math.max(ceiling, terrainHeight(world, x, z) + 8);
+        ceiling = Math.max(ceiling, planningGroundHeight(world, x, z, true) + 8);
       }
       if (i > 1) a.y = q(Math.max(a.y, ceiling));
       if (i < points.length - 1) b.y = q(Math.max(b.y, ceiling));
@@ -461,7 +658,12 @@ export function createWorld(seed = 20261001): WorldDefinition {
   const dockA: NetworkNode = { id: 'river-dock', districtId: 'river', name: '清溪渡船码头', position: { x: -580, y: 15.6, z: 1010 }, station: true };
   const dockB: NetworkNode = { id: 'market-dock', districtId: 'market', name: '千灯水运码头', position: { x: -110, y: 56.6, z: 460 }, station: true };
   world.nodes.push(dockA, dockB);
-  addEdge(dockA.id, station('river').id, 'bridge', routeGround(world, dockA.position, station('river').position), 60);
+  const riverBridge = routeGround(world, dockA.position, station('river').position, undefined, currentLayout ? 25 : 5);
+  if (currentLayout) {
+    const span = riverBridge.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - riverBridge[i].x, p.z - riverBridge[i].z), 0);
+    stationApronGrade(riverBridge, false, Math.max(0, span - 64));
+  }
+  addEdge(dockA.id, station('river').id, 'bridge', riverBridge, 60);
   addEdge(dockB.id, station('market').id, 'bridge', routeGround(world, dockB.position, station('market').position), 60);
   addEdge(dockA.id, dockB.id, 'ferry', [dockA.position, { x: -410, y: 30.6, z: 720 }, dockB.position], 45);
   const coreDock: NetworkNode = { id: 'core-dock', districtId: 'core', name: '瀑云潭水运站', position: { x: 75, y: 94.6, z: 140 }, station: true };

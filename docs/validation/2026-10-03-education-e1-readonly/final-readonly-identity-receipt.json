@@ -1,0 +1,26 @@
+{
+  "kind": "READONLY_STATIC_FINAL_IDENTITY_NOT_EXECUTION",
+  "endedAtUTC": "2026-10-03T03:55:01.487150+00:00",
+  "frozenPatchSHA256": "5e8268cee8ef32555e5901713da64041662f6c3c16b307e8b0aba7dc92878471",
+  "declaredSourceCount": 120,
+  "declaredSourceMismatches": [],
+  "allTreeFirstLastMismatches": [],
+  "metadataFirstLastMismatches": [],
+  "baseDeclaredCount": 116,
+  "baseSnapshotMismatches": [],
+  "baseSnapshotFirstLastSHA256Unchanged": true,
+  "report": {
+    "path": "/tmp/yunshan-education-e1-final16-readonly-review-20261003/e1-final16-frozen-static-review.md",
+    "sha256": "eb85c4c6e15f6b74443c6ca66819418055adc770c66e8613ccee4fc8511dc55e",
+    "bytes": 19444
+  },
+  "support": {
+    "/tmp/yunshan-education-e1-final16-readonly-review-20261003/first-readonly-binding-receipt.json": "8d49649ee7c71ac066642380fb9ba4f106361f2783a5a2652857399da8ee7776",
+    "/tmp/yunshan-education-e1-final16-readonly-review-20261003/static-patch-binding-addendum.json": "66351fe0a90a08c3e5208116ec73a50108e85e09bf1ea2ee0d9aaadb4850e250",
+    "/tmp/yunshan-controller-static-review-20261003/e1-from16-frozen-save-static-review.md": "88b9945597adb3f76ffc641d99600b62502febe358ba0092f72fd101dd175763"
+  },
+  "findingCount": 1,
+  "finding": "B1: absent combined player education/marked-research saved minute capacity",
+  "runtimeStatus": "NOT_RUN",
+  "forbiddenActionsPerformed": []
+}

@@ -1,0 +1,220 @@
+{
+  "status": "ISOLATED_FIX_VALIDATED_PARENT_NATURAL_AUDIT_AND_BROWSER_PENDING",
+  "createdAtUtc": "2026-10-04T11:37:20.816929+00:00",
+  "base": "ROOT11 integration one-day audit264; exact shared prepatch inputs HEAD a2e9cb1ab9e2455fe9a543bba23e31486bc21c16",
+  "inputCount": 267,
+  "runtimeCount": 60,
+  "source": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final",
+  "inputMap": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/CURRENT-FROZEN-INPUTS.json",
+  "inputMapSHA256": "fb0b2c7c502e86667c3d32fe70244f3354909b4c45edd1eb024c2f5ac2628246",
+  "changes": [
+    {
+      "path": "src/simulation.ts",
+      "beforeSHA256": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a",
+      "finalSHA256": "39b445dc1554bfe3fa1f77c03adb99817d876e84fa042f2286697438c51df60d",
+      "bytes": 286677,
+      "installFrom": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final/src/simulation.ts",
+      "operation": "modify"
+    },
+    {
+      "path": "tests/fixtures/native-day-writer/actual-day-writer.save.json.gz",
+      "beforeSHA256": null,
+      "finalSHA256": "4f7b9a5143af2fc110582fa310bb941a73116418dab8236ff873bf50898a4239",
+      "bytes": 494996,
+      "installFrom": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final/tests/fixtures/native-day-writer/actual-day-writer.save.json.gz",
+      "operation": "add"
+    },
+    {
+      "path": "tests/fixtures/native-day-writer/provenance.json",
+      "beforeSHA256": null,
+      "finalSHA256": "4310dfbf2f90fa309284d915c6db943bbb9614ce50c27a6b247ac3ecbcf55b76",
+      "bytes": 566,
+      "installFrom": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final/tests/fixtures/native-day-writer/provenance.json",
+      "operation": "add"
+    },
+    {
+      "path": "tests/native-day-writer.test.ts",
+      "beforeSHA256": null,
+      "finalSHA256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1",
+      "bytes": 11597,
+      "installFrom": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/source-final/tests/native-day-writer.test.ts",
+      "operation": "add"
+    }
+  ],
+  "runtimePatch": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/runtime-origin-fix.patch",
+  "runtimePatchSHA256": "a6bdc6f0d90cd88a7c8dc610ce62aefe43d95aebdaab0dd34a0f41682a719aa8",
+  "installGuard": "Check every original264 target against BASE-CONTRACT inputs before installation. Add three new files only when absent. Do not overwrite unrelated parent edits; source-final is authoritative final typed267. This child installed nothing in shared tree.",
+  "productionChanges": "Only native2 floorPlanRoute preserves copy(actual from) before caching. Native2 cached routes are reused only with exact origin; different origin recomputes. No geometry, cursor, reader, route codec/cap, speed, cash, identity, death or phase tolerance changes. Native1 retains old origin generation/cache branch.",
+  "testEvidence": {
+    "new3DistinctCases": "final-writer-origin03 2/2 + final-writer-native24-04 1/1, both final typed267 stable; not one 3-case run",
+    "original17": "17/17 single final-native17-01, running267 stable, all60runtime and original targeted files exactly match final267; only untargeted new test differs by pure type annotations, emitted JS equal. Includes15badcursor/true244reject2/actualclinicalteacherresearchwage/trueROOT07death",
+    "legacy3x24": "single final-v1-three24-01 PASS; all three original fixtures exact per-step compared with true244 and partition, no revival/versionupgrade",
+    "build": "reused-root-build01 actual parent final267 build PASS, exact all267 map match proven ROOT-BUILD-REUSE-PROOF. Original final-build01 testTS unknown FAIL retained.",
+    "actualFirstLeg": {
+      "metres": 19.47796896946847,
+      "chargedMetres": 19.47796896946847,
+      "calls": 629,
+      "minutesPerCall": 0.01,
+      "rainSpeedMetresPerCityMinute": 3.1,
+      "perCallBudget": 0.031,
+      "finalCallRemainderMovesNextLeg": true,
+      "bodyRadius": 0.35,
+      "headHeight": 1.72
+    },
+    "newWholeCity24": {
+      "initialTick": 720,
+      "finalTick": 744,
+      "actualMinutes": 48,
+      "finalBytes": 2916309,
+      "finalSHA256": "e517fa84d24c26a23f0e39b1e5381fe8b62c1490027669abed7a260105cc6fd8",
+      "full3SimExact": true,
+      "eachPartitionAndNewWriterStrictReader": true,
+      "selectorAndSourceBridgeReopen": true
+    }
+  },
+  "originalFailure": "Actual original b0af5576… remains strictly/atomically rejected: citizen563 planned route[0].z=-2.45 while actual body.z=-2.4499999999999997. All38 prior cursor phases valid. Controlled prestate cancels only563 never-started route intent/index; not a naturally captured previous tick.",
+  "phases": [
+    {
+      "scope": "diagnostic01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/diagnostic01/receipt.json",
+      "receiptSHA256": "35dfccc21dd8ef97d8b4bab59a3a1adc5984e514092aa859894000ddd51599d9",
+      "rawSHA256": "6bae1943bbbfaa764d7086a2de3b21bd260b77636d8836645b68ef0d3f3c9590",
+      "status": "PASS",
+      "startedAt": "2026-10-04T10:54:00.675689+00:00",
+      "endedAt": "2026-10-04T10:54:06.661510+00:00",
+      "inputs": 264,
+      "owner": 68518,
+      "activeOwned": 0
+    },
+    {
+      "scope": "diagnostic02",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/diagnostic02/receipt.json",
+      "receiptSHA256": "2377a0effc6d6a5b0fa0fd121c6bf2a6ac6ff11e9aab09ec9e3cf8e687e7a2ed",
+      "rawSHA256": "416fc3c076d4643a5655dbefc49f734d3edbdd33840fcb8374efe4e8132b7ca1",
+      "status": "PASS",
+      "startedAt": "2026-10-04T10:55:24.863767+00:00",
+      "endedAt": "2026-10-04T10:55:29.564679+00:00",
+      "inputs": 264,
+      "owner": 68781,
+      "activeOwned": 0
+    },
+    {
+      "scope": "original-writer-fail01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/original-writer-fail01/receipt.json",
+      "receiptSHA256": "83692b4cf68e29bd95f65caa0c7666ab9feb01ec9046a8581eeda89b147925d5",
+      "rawSHA256": "1196586f221f903f39640475351fd2049e404f2f1d15d3bdc9a591aa05e4a81d",
+      "status": "FAIL",
+      "startedAt": "2026-10-04T11:07:29.940055+00:00",
+      "endedAt": "2026-10-04T11:07:40.121397+00:00",
+      "inputs": 267,
+      "owner": 69327,
+      "activeOwned": 0
+    },
+    {
+      "scope": "candidate-first-leg01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/candidate-first-leg01/receipt.json",
+      "receiptSHA256": "ba4754dc86be45db40f7b27cebea5b3ef03b4d2b4ec0abfd6618f592d6bc17a1",
+      "rawSHA256": "45b57f77ac005d5d84d91f5dfe89ead72a2ea95821e613ca8ff3a521003fc520",
+      "status": "FAIL",
+      "startedAt": "2026-10-04T11:08:58.769846+00:00",
+      "endedAt": "2026-10-04T11:09:12.425829+00:00",
+      "inputs": 267,
+      "owner": 69397,
+      "activeOwned": 0
+    },
+    {
+      "scope": "diagnostic-first-leg03",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/diagnostic-first-leg03/receipt.json",
+      "receiptSHA256": "1ef59b5d4aa92c7233ea06d9888195102b5630b6f5b702ec297fc2b25dfa34c9",
+      "rawSHA256": "93de84c65e4b2adc10f255e81af8d62b84182d0ad2897b1b495c699579d22ca2",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:09:52.876926+00:00",
+      "endedAt": "2026-10-04T11:09:58.765278+00:00",
+      "inputs": 267,
+      "owner": 69532,
+      "activeOwned": 0
+    },
+    {
+      "scope": "candidate-writer02",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/candidate-writer02/receipt.json",
+      "receiptSHA256": "25bb542187faff6b672800e52975027b56d4f9e5d7a6334fbb797e8c48c3c1ac",
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "TIMEOUT_PARTIAL",
+      "startedAt": "2026-10-04T11:10:57.169038+00:00",
+      "endedAt": "2026-10-04T11:21:00.274498+00:00",
+      "inputs": 267,
+      "owner": 69636,
+      "activeOwned": 0
+    },
+    {
+      "scope": "final-build01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-build01/receipt.json",
+      "receiptSHA256": "7083a495f031ab5eac71a1d6f7f29e523dce2e3a0f305d3484b73adfcae60473",
+      "rawSHA256": "ee546a7ffc2c9efaea5609d8cfedd7dfae1e562b674f46bc3221cef90413ed23",
+      "status": "FAIL",
+      "startedAt": "2026-10-04T11:12:05.988078+00:00",
+      "endedAt": "2026-10-04T11:12:31.600816+00:00",
+      "inputs": 267,
+      "owner": 69767,
+      "activeOwned": 0
+    },
+    {
+      "scope": "final-native17-01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/receipt.json",
+      "receiptSHA256": "b1c85f45edbce70e9d94472cabc4bb23e2fa926f4f9879131ccf4570ec131519",
+      "rawSHA256": "d18258569e841a241c7b157dc7ee375352f39d69c8d87a19c74007d223162a80",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:12:02.902299+00:00",
+      "endedAt": "2026-10-04T11:21:19.422069+00:00",
+      "inputs": 267,
+      "owner": 69715,
+      "activeOwned": 0
+    },
+    {
+      "scope": "final-v1-three24-01",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-v1-three24-01/receipt.json",
+      "receiptSHA256": "6a92837bcc23e60c0524083bd3f66008fd3fecd1b1b9f5639e4f13967cd08c5d",
+      "rawSHA256": "da3f2fe5504e94791c991a35ff073a90eaaa1d627bcfb03140ce96b69872bab5",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:12:04.348529+00:00",
+      "endedAt": "2026-10-04T11:17:54.702967+00:00",
+      "inputs": 267,
+      "owner": 69742,
+      "activeOwned": 0
+    },
+    {
+      "scope": "final-writer-origin03",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-writer-origin03/receipt.json",
+      "receiptSHA256": "9efa9685ef4aec48c8db9dd285ef4089f26e9d3e451c0306732e0f83cdd7ade2",
+      "rawSHA256": "3ee11ddb6e936e4da13a7fa6a7f3dc7fe254a883a24b1d3ad7db914c04f63274",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:22:21.418759+00:00",
+      "endedAt": "2026-10-04T11:22:42.400465+00:00",
+      "inputs": 267,
+      "owner": 70079,
+      "activeOwned": 0
+    },
+    {
+      "scope": "final-writer-native24-04",
+      "receiptPath": "/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-writer-native24-04/receipt.json",
+      "receiptSHA256": "03865530c827f359680e98ef3fbd01865ff1f8f36087d293ec0d03b11feccc28",
+      "rawSHA256": "76753323cf0a5959def97e9d26ccd30349a94530243103087ba7613b8b106b4b",
+      "status": "PASS",
+      "startedAt": "2026-10-04T11:22:21.418801+00:00",
+      "endedAt": "2026-10-04T11:34:59.000742+00:00",
+      "inputs": 267,
+      "owner": 70080,
+      "activeOwned": 0
+    }
+  ],
+  "preservedFailures": [
+    "original one-day720 overallFAIL",
+    "original-writer-fail01 1PASS/1FAIL",
+    "candidate-first-leg01 1PASS/1FAIL from invalid100call newtest premise",
+    "final-build01 TS-only newtest unknown FAIL",
+    "candidate-writer02 TIMEOUT_PARTIAL 720→734(14/24), empty raw because reporter buffered"
+  ],
+  "ownership": "All this group phase receipts activeOwned0; no GPU or browser launched by this group. Functional phases coexecuted with root CPU natural audit, no performance/exclusive claims.",
+  "delivery": "No child Library upload or ZIP. Parent produces unified original-file delivery and supplies real LibraryIDs.",
+  "remaining": "Parent exact new267 natural default720 audit then original browser11 with original assertion/time limits, both independent new scopes. Original264 PASS elsewhere not inherited. ART quality FAIL/macOS NOT_RUN/full original game objective ongoing."
+}

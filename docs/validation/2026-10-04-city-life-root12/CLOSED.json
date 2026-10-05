@@ -1,0 +1,54 @@
+{
+  "status": "CLOSED_VALIDATED_INSTALLED_267_GOAL_OPEN",
+  "closedAt": "2026-10-04T12:00:16.044119+00:00",
+  "inputCount": 267,
+  "productionSourceCount": 60,
+  "source": "/workspace/yunshan-work/ROOT12-integrated-save-origin-20261004-01/source",
+  "preparedInputMap": {
+    "bytes": 29009,
+    "sha256": "fb0b2c7c502e86667c3d32fe70244f3354909b4c45edd1eb024c2f5ac2628246"
+  },
+  "report": {
+    "bytes": 10372,
+    "sha256": "be9066ec86f9105d7491416dcea5df39cfd0898cbf090e11fb4cf0bae36c764a"
+  },
+  "installReceipt": {
+    "bytes": 5022,
+    "sha256": "6c5db455466cb2596a1fea8841852062077d9cb49db89daf63dcdaf05da4b003"
+  },
+  "scopes": {
+    "build-origin-fixed01": {
+      "receipt": {
+        "bytes": 866,
+        "sha256": "6f449623bb17b317f13bf242bef4462cd1df05039ab33098eb729786393f8087"
+      },
+      "rawSHA256": "f2d81422d31cbaa6ad1853416d29e93ce7a4d74fa47f7b96633f559e88b2e497",
+      "ownedPid": 69956,
+      "activeDescendants": []
+    },
+    "audit1-origin-fixed01": {
+      "receipt": {
+        "bytes": 996,
+        "sha256": "d73116cda28dfc47e8ca99998f5f5fcf471e03424ef28a304c4b076859e7476d"
+      },
+      "rawSHA256": "270711edf73015e7bbabf96197c36bffba2d5700d3c35842f398a6c44885a826",
+      "ownedPid": 69957,
+      "activeDescendants": []
+    },
+    "original-browser11-01": {
+      "receipt": {
+        "bytes": 1168,
+        "sha256": "a15b3e94bf3863963f0d27300dc79eb8968559f49c660d750a272b0f0dc39d9d"
+      },
+      "rawSHA256": "dab4b08b0179b78cb82f2fd51580dbc524af2335bfea4e3451b48c065df137c1",
+      "ownedPid": 71490,
+      "activeDescendants": []
+    }
+  },
+  "activeOwned": 0,
+  "completeGoal": false,
+  "allFailuresPreserved": true,
+  "library": "NOT_ATTEMPTED_AT_THIS_CUT",
+  "git": "NOT_ATTEMPTED_AT_THIS_CUT",
+  "lastRootWrite": "ROOT-CLOSED-FOR-ARCHIVE.json is the final root authorization record written next; then this namespace receives no additional writes. Archive output, Library and Git receipts stay outside the twelve input namespaces."
+}

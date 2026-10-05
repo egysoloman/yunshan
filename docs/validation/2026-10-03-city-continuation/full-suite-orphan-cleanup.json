@@ -1,0 +1,26 @@
+{
+  "cleanedAt": "2026-10-03T21:49:02.552977+00:00",
+  "reason": "Original full-suite bound elapsed; npm parent exited after group TERM while its verified Node test child remained active. Only that owned child was killed.",
+  "pid": 262013,
+  "verifiedStartTicks": "19455712",
+  "verifiedOriginalProcessGroup": 261989,
+  "signal": "SIGKILL",
+  "remainingGroupMembers": [
+    {
+      "pid": 262013,
+      "state": "Z",
+      "startTicks": "19455712"
+    },
+    {
+      "pid": 262308,
+      "state": "Z",
+      "startTicks": "19461139"
+    }
+  ],
+  "activeRemaining": [],
+  "rawSha256Before": "c826fc38ce1636638dc5b943e0e72b5cb54374f52bb4539f850850a4e9b15dc8",
+  "rawSha256After": "c826fc38ce1636638dc5b943e0e72b5cb54374f52bb4539f850850a4e9b15dc8",
+  "rawUnchanged": true,
+  "originalReceiptPreserved": true,
+  "runRestarted": false
+}

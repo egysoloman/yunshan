@@ -1,0 +1,12 @@
+src/rendering/architecture-detail.ts(481,25): error TS18046: 'placement.rotation' is of type 'unknown'.
+src/rendering/architecture-detail.ts(482,29): error TS2556: A spread argument must either have a tuple type or be passed to a rest parameter.
+src/rendering/architecture-detail.ts(482,32): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+tests/world-v4.test.ts(89,65): error TS2322: Type 'Vec3' is not assignable to type 'null'.
+tests/world-v4.test.ts(94,34): error TS2339: Property 'x' does not exist on type 'never'.
+tests/world-v4.test.ts(94,42): error TS2339: Property 'z' does not exist on type 'never'.
+tests/world-v4.test.ts(94,50): error TS2339: Property 'y' does not exist on type 'never'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

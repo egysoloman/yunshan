@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "scope": "Linux Chromium SwiftShader optical inspection using fixed diagnostic cameras; not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-CAQRD7nv.js",
+  "sourceHashes": {
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553",
+    "src/renderer.ts": "19037918394cc2a0a8277d79847bb4fe4807e226fb3b8ac116070d0ba2f00b07",
+    "src/rendering/terrain.ts": "3366f1913994dbdaeedbe31b9494fbe67a22bcd9a5e3aec8f9783bdfc38976b5",
+    "src/main.ts": "c56daf091a18eb1de86a5eb719979b9dd5cb675ef792e82ec752666ac81c0674"
+  },
+  "captures": [
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "drawCalls": 226,
+      "triangles": 5505740,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfall-front",
+      "hour": 12,
+      "eye": [
+        -145,
+        230,
+        290
+      ],
+      "target": [
+        165,
+        210,
+        -35
+      ],
+      "drawCalls": 183,
+      "triangles": 5135212,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfront",
+      "hour": 12,
+      "eye": [
+        -455,
+        112,
+        1190
+      ],
+      "target": [
+        -610,
+        28,
+        910
+      ],
+      "drawCalls": 189,
+      "triangles": 4160112,
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    }
+  ],
+  "errors": []
+}

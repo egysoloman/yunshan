@@ -1,0 +1,1512 @@
+{
+  "scope": "Native build command + narrow NPC bed terminal guard, controlled five-building/native384",
+  "createdAtUTC": "2026-10-02T14:52:49.177819+00:00",
+  "memberCountExcludingManifest": 248,
+  "originalProbeFiles": 40,
+  "sourceInputs": {
+    "09": 102,
+    "10": 103
+  },
+  "members": [
+    {
+      "path": "PACKAGE-README.txt",
+      "bytes": 1874,
+      "sha256": "4fd8cc1571450bb055b3953caf4d934679f10579c9d3cc1d72147c576d60f4fe",
+      "original": "generated package scope note"
+    },
+    {
+      "path": "probe-originals/README.md",
+      "bytes": 4319,
+      "sha256": "217eddb2cd35b82c3316b9d654c3566621245930ae38c9c34e50e2a130cb0cac",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/README.md"
+    },
+    {
+      "path": "probe-originals/execution-status.json",
+      "bytes": 5530,
+      "sha256": "ebb59183e1e2cd3825cf3e6ed65f3e00e7487d8a2a2f5a593ecc365c36366d6f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/execution-status.json"
+    },
+    {
+      "path": "probe-originals/geometry-original.json",
+      "bytes": 5135,
+      "sha256": "c0ce313693c181fa2761a9960350c0d1477f5068d6fa7a319ce4c46424220287",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/geometry-original.json"
+    },
+    {
+      "path": "probe-originals/preparation-status.json",
+      "bytes": 1434,
+      "sha256": "03237442003ce48e5d4f6253dd16f20bc2735d1a7580f27a6659ebd803b0dcfe",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/preparation-status.json"
+    },
+    {
+      "path": "probe-originals/probe.mjs",
+      "bytes": 17862,
+      "sha256": "798674d0618c59e05b08e5ac45cf18d5d87dd6f3b9d42eeeb57a450e03fdf8df",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/probe.mjs"
+    },
+    {
+      "path": "probe-originals/run-once.py",
+      "bytes": 4461,
+      "sha256": "0233ae9065a3bb0da65df75e2e42ca3db4373a41fa48aa847cc646a8635c7f6d",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/run-once.py"
+    },
+    {
+      "path": "probe-originals/runs/after10-launch.json",
+      "bytes": 438,
+      "sha256": "0db723a491d91fc5a41ae0ff41083359b3fade31ac02a4b7810ab27c7f4d8474",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10-launch.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/after-build.json",
+      "bytes": 420422,
+      "sha256": "2d624718a97acb24716c5ca320e4a3bc96052ade27a3ee6676c426ef1b9d4303",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/after-build.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/after-rent.json",
+      "bytes": 346005,
+      "sha256": "05405ba99e5e02ede22780bf9dfa16ea3f99884bfe66913f58896cc7c17d2992",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/after-rent.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/before-build.json",
+      "bytes": 420266,
+      "sha256": "4e9c8c8e6c40c02c254216f367b15282e21a6c9956f2390a8ccb36c611eb740f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/before-build.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/before-rent.json",
+      "bytes": 345769,
+      "sha256": "d9d806a5925ce4e5be18c0f7e9a2a886a655f5e893b51468e4542b8ffdf02fcb",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/before-rent.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/before.json",
+      "bytes": 24036,
+      "sha256": "b7703cb20dd5b101d3ebd3c5a911a633159be40d91b0d73b1c9d260b46c5bc3a",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/before.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/blocked-after-actual-tick.json",
+      "bytes": 416685,
+      "sha256": "85c75dcb96adb72574a7e6307bf6cee2ee991a90c2bc7f7385b50d18d10f62bd",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/blocked-after-actual-tick.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/clear-after-tick-before-build.json",
+      "bytes": 420266,
+      "sha256": "4e9c8c8e6c40c02c254216f367b15282e21a6c9956f2390a8ccb36c611eb740f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/clear-after-tick-before-build.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/continuation-start.json",
+      "bytes": 416685,
+      "sha256": "85c75dcb96adb72574a7e6307bf6cee2ee991a90c2bc7f7385b50d18d10f62bd",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/continuation-start.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/continued24.json",
+      "bytes": 422039,
+      "sha256": "5d4efd9d4bd701867aaf135e91385ff1d1d1197ed82cddcf306c9a6204424aba",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/continued24.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/controlled-clear-before-tick.json",
+      "bytes": 346211,
+      "sha256": "87e7dd0cf3f0b66f84419bf4bd797bdad9e8b9e67d4db9d8effbafbe8b20153c",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/controlled-clear-before-tick.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/result.json",
+      "bytes": 4880,
+      "sha256": "b22a434b67976a12dde21a2a0571f7187933917180fe9088e4c3d055c18729a9",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/result.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/run-status.json",
+      "bytes": 48155,
+      "sha256": "50d92258630c3290269ba5ca3db4da2d224c3ea51c4bdf10b1b440e1564523b3",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/run-status.json"
+    },
+    {
+      "path": "probe-originals/runs/after10/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/stderr.log"
+    },
+    {
+      "path": "probe-originals/runs/after10/stdout.log",
+      "bytes": 3862,
+      "sha256": "fb57d775d02fb8dad8c6467b55d75fa64b6349af9c09313f19f5a9130358eb65",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/stdout.log"
+    },
+    {
+      "path": "probe-originals/runs/before09-launch.json",
+      "bytes": 440,
+      "sha256": "d29f59ced7550989eae3a564cad9eec02c57192f942d594e9f47693aa0c565bf",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09-launch.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/after-build.json",
+      "bytes": 420422,
+      "sha256": "2d624718a97acb24716c5ca320e4a3bc96052ade27a3ee6676c426ef1b9d4303",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/after-build.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/after-rent.json",
+      "bytes": 346005,
+      "sha256": "05405ba99e5e02ede22780bf9dfa16ea3f99884bfe66913f58896cc7c17d2992",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/after-rent.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/before-build.json",
+      "bytes": 420266,
+      "sha256": "4e9c8c8e6c40c02c254216f367b15282e21a6c9956f2390a8ccb36c611eb740f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/before-build.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/before-rent.json",
+      "bytes": 345769,
+      "sha256": "d9d806a5925ce4e5be18c0f7e9a2a886a655f5e893b51468e4542b8ffdf02fcb",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/before-rent.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/before.json",
+      "bytes": 24038,
+      "sha256": "eb355d135a58fa4aabb578bd48d1f6894ffd79e97437931a952a2e07ff179fc3",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/before.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/blocked-after-actual-tick.json",
+      "bytes": 416687,
+      "sha256": "c510c4e818a471f4bf12d1c5eda8fd2e3d225fee78a917cfefda4f7b2e2243ed",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/blocked-after-actual-tick.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/clear-after-tick-before-build.json",
+      "bytes": 420266,
+      "sha256": "4e9c8c8e6c40c02c254216f367b15282e21a6c9956f2390a8ccb36c611eb740f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/clear-after-tick-before-build.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/continuation-start.json",
+      "bytes": 416687,
+      "sha256": "c510c4e818a471f4bf12d1c5eda8fd2e3d225fee78a917cfefda4f7b2e2243ed",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/continuation-start.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/continued24.json",
+      "bytes": 421887,
+      "sha256": "083e390090fc65f075c7007134bcaf574245e4cb50714d1d35c497834b0f185f",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/continued24.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/controlled-clear-before-tick.json",
+      "bytes": 346211,
+      "sha256": "87e7dd0cf3f0b66f84419bf4bd797bdad9e8b9e67d4db9d8effbafbe8b20153c",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/controlled-clear-before-tick.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/result.json",
+      "bytes": 5554,
+      "sha256": "8d748f296b82d00c5b25e0354fa88a0b32f5d26b0f93107cb000b10c775219b7",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/result.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/run-status.json",
+      "bytes": 48168,
+      "sha256": "954f1176af1659e4ce4479c6cc4103aaa5406b5bd508f228b2f77c00bafdd984",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/run-status.json"
+    },
+    {
+      "path": "probe-originals/runs/before09/stderr.log",
+      "bytes": 516,
+      "sha256": "b0cd0e4a49886d791ab5c1f48c7e8d40674ef253ce22251dd1be0e7a5e981e8c",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/stderr.log"
+    },
+    {
+      "path": "probe-originals/runs/before09/stdout.log",
+      "bytes": 4429,
+      "sha256": "f9c64b84824d5aecee090b4965889a1a87a8f54013ad310a2f4cf0c23551fff2",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/stdout.log"
+    },
+    {
+      "path": "probe-originals/runs/syntax/run-status.json",
+      "bytes": 47246,
+      "sha256": "4ddbd1f5c107fe9e499e87816dfbede45ada48f76225f81db41a9ff51e0b1136",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/syntax/run-status.json"
+    },
+    {
+      "path": "probe-originals/runs/syntax/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/syntax/stderr.log"
+    },
+    {
+      "path": "probe-originals/runs/syntax/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/runs/syntax/stdout.log"
+    },
+    {
+      "path": "probe-originals/west-b13-native.json",
+      "bytes": 3002,
+      "sha256": "baeed4f5e8d2d15b005ec25cb9925d68af11127c1421253c4b4f4b0b4e78fbee",
+      "original": "/tmp/yunshan-bedside-native-build-probe-01/west-b13-native.json"
+    },
+    {
+      "path": "source-baselines/freeze09-source-snapshot.json",
+      "bytes": 21900,
+      "sha256": "46840299e7fa38d822797048eebbd361cb33e238404f5c0d20aaa04af459dc5d",
+      "original": "/tmp/yunshan-system-coherent-09/source-snapshot.json"
+    },
+    {
+      "path": "source-baselines/freeze10-source-snapshot.json",
+      "bytes": 21936,
+      "sha256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926",
+      "original": "/tmp/yunshan-system-coherent-10/source-snapshot.json"
+    },
+    {
+      "path": "source09/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "original": "/tmp/yunshan-system-coherent-09/source/.gitattributes"
+    },
+    {
+      "path": "source09/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "original": "/tmp/yunshan-system-coherent-09/source/.gitignore"
+    },
+    {
+      "path": "source09/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "original": "/tmp/yunshan-system-coherent-09/source/AGENTS.md"
+    },
+    {
+      "path": "source09/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "original": "/tmp/yunshan-system-coherent-09/source/index.html"
+    },
+    {
+      "path": "source09/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "original": "/tmp/yunshan-system-coherent-09/source/package-lock.json"
+    },
+    {
+      "path": "source09/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "original": "/tmp/yunshan-system-coherent-09/source/package.json"
+    },
+    {
+      "path": "source09/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "original": "/tmp/yunshan-system-coherent-09/source/public/favicon.svg"
+    },
+    {
+      "path": "source09/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/benchmark.ts"
+    },
+    {
+      "path": "source09/scripts/browser-test.mjs",
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/browser-test.mjs"
+    },
+    {
+      "path": "source09/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/economy-audit.ts"
+    },
+    {
+      "path": "source09/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/layout-browser-test.mjs"
+    },
+    {
+      "path": "source09/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/player-journey.mjs"
+    },
+    {
+      "path": "source09/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/space-browser-test.mjs"
+    },
+    {
+      "path": "source09/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/ui-test.mjs"
+    },
+    {
+      "path": "source09/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "original": "/tmp/yunshan-system-coherent-09/source/scripts/visual-review.mjs"
+    },
+    {
+      "path": "source09/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/access.ts"
+    },
+    {
+      "path": "source09/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "source09/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/aviation-renderer.ts"
+    },
+    {
+      "path": "source09/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/aviation.ts"
+    },
+    {
+      "path": "source09/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/controller.ts"
+    },
+    {
+      "path": "source09/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/journey.ts"
+    },
+    {
+      "path": "source09/src/main.ts",
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/main.ts"
+    },
+    {
+      "path": "source09/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/persistence.ts"
+    },
+    {
+      "path": "source09/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/persistence/partition.ts"
+    },
+    {
+      "path": "source09/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "source09/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/persistence/session.ts"
+    },
+    {
+      "path": "source09/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "source09/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/renderer.ts"
+    },
+    {
+      "path": "source09/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "source09/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "source09/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "source09/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "source09/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "source09/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "source09/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/rendering/terrain.ts"
+    },
+    {
+      "path": "source09/src/simulation.ts",
+      "bytes": 204296,
+      "sha256": "64a2e4cec4402d1c6ca0764d600d1d5e71bc6f1c299447af8d66e129b2c23c11",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation.ts"
+    },
+    {
+      "path": "source09/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/banking.ts"
+    },
+    {
+      "path": "source09/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/clinical.ts"
+    },
+    {
+      "path": "source09/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/culture.ts"
+    },
+    {
+      "path": "source09/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/extensions.ts"
+    },
+    {
+      "path": "source09/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/family.ts"
+    },
+    {
+      "path": "source09/src/simulation/home-rest.ts",
+      "bytes": 16697,
+      "sha256": "ec68d9ff523519f69c97006b2dea3801107e44fd3522ce7095f7b7b75af58ede",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "source09/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/journeys.ts"
+    },
+    {
+      "path": "source09/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "source09/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/simulation/trade.ts"
+    },
+    {
+      "path": "source09/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/site-fixtures.ts"
+    },
+    {
+      "path": "source09/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/style.css"
+    },
+    {
+      "path": "source09/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/transport-geometry.ts"
+    },
+    {
+      "path": "source09/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/types.ts"
+    },
+    {
+      "path": "source09/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/ui.ts"
+    },
+    {
+      "path": "source09/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "original": "/tmp/yunshan-system-coherent-09/source/src/world.ts"
+    },
+    {
+      "path": "source09/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/access.test.ts"
+    },
+    {
+      "path": "source09/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/architecture-bodies.test.ts"
+    },
+    {
+      "path": "source09/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "path": "source09/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/architecture-detail.test.ts"
+    },
+    {
+      "path": "source09/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "path": "source09/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/aviation.test.ts"
+    },
+    {
+      "path": "source09/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/banking.test.ts"
+    },
+    {
+      "path": "source09/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/chunk-residency.test.ts"
+    },
+    {
+      "path": "source09/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/citizen-appearance.test.ts"
+    },
+    {
+      "path": "source09/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/clinical.test.ts"
+    },
+    {
+      "path": "source09/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/controller-v4.test.ts"
+    },
+    {
+      "path": "source09/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/controller.test.ts"
+    },
+    {
+      "path": "source09/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/culture.test.ts"
+    },
+    {
+      "path": "source09/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/economy.test.ts"
+    },
+    {
+      "path": "source09/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/extensions.test.ts"
+    },
+    {
+      "path": "source09/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/family.test.ts"
+    },
+    {
+      "path": "source09/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "path": "source09/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "path": "source09/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "source09/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/home-rest.test.ts"
+    },
+    {
+      "path": "source09/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/integration.test.ts"
+    },
+    {
+      "path": "source09/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/journey.test.ts"
+    },
+    {
+      "path": "source09/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/npc-clock.test.ts"
+    },
+    {
+      "path": "source09/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/persistence.test.ts"
+    },
+    {
+      "path": "source09/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/player-labor.test.ts"
+    },
+    {
+      "path": "source09/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/rendering.test.ts"
+    },
+    {
+      "path": "source09/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/route-encoding.test.ts"
+    },
+    {
+      "path": "source09/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/simulation.test.ts"
+    },
+    {
+      "path": "source09/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/site-fixtures.test.ts"
+    },
+    {
+      "path": "source09/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/trade.test.ts"
+    },
+    {
+      "path": "source09/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/v4-extensions.test.ts"
+    },
+    {
+      "path": "source09/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/v4-services.test.ts"
+    },
+    {
+      "path": "source09/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/v4-simulation.test.ts"
+    },
+    {
+      "path": "source09/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/world-layout.test.ts"
+    },
+    {
+      "path": "source09/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/world-v4.test.ts"
+    },
+    {
+      "path": "source09/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "original": "/tmp/yunshan-system-coherent-09/source/tests/world.test.ts"
+    },
+    {
+      "path": "source09/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "original": "/tmp/yunshan-system-coherent-09/source/tsconfig.json"
+    },
+    {
+      "path": "source09/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "original": "/tmp/yunshan-system-coherent-09/source/vite.config.ts"
+    },
+    {
+      "path": "source09/开发备忘录.md",
+      "bytes": 156022,
+      "sha256": "88effd5f5db5c439d061ec120ed5cb944262d913ae5d7034d93bbce82007fb56",
+      "original": "/tmp/yunshan-system-coherent-09/source/开发备忘录.md"
+    },
+    {
+      "path": "source09/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "original": "/tmp/yunshan-system-coherent-09/source/提示词.md"
+    },
+    {
+      "path": "source10/.gitattributes",
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "original": "/tmp/yunshan-system-coherent-10/source/.gitattributes"
+    },
+    {
+      "path": "source10/.gitignore",
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "original": "/tmp/yunshan-system-coherent-10/source/.gitignore"
+    },
+    {
+      "path": "source10/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "original": "/tmp/yunshan-system-coherent-10/source/AGENTS.md"
+    },
+    {
+      "path": "source10/index.html",
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "original": "/tmp/yunshan-system-coherent-10/source/index.html"
+    },
+    {
+      "path": "source10/package-lock.json",
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "original": "/tmp/yunshan-system-coherent-10/source/package-lock.json"
+    },
+    {
+      "path": "source10/package.json",
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "original": "/tmp/yunshan-system-coherent-10/source/package.json"
+    },
+    {
+      "path": "source10/public/favicon.svg",
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "original": "/tmp/yunshan-system-coherent-10/source/public/favicon.svg"
+    },
+    {
+      "path": "source10/scripts/benchmark.ts",
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/benchmark.ts"
+    },
+    {
+      "path": "source10/scripts/browser-test.mjs",
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/browser-test.mjs"
+    },
+    {
+      "path": "source10/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/economy-audit.ts"
+    },
+    {
+      "path": "source10/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/layout-browser-test.mjs"
+    },
+    {
+      "path": "source10/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/player-journey.mjs"
+    },
+    {
+      "path": "source10/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/space-browser-test.mjs"
+    },
+    {
+      "path": "source10/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/ui-test.mjs"
+    },
+    {
+      "path": "source10/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "original": "/tmp/yunshan-system-coherent-10/source/scripts/visual-review.mjs"
+    },
+    {
+      "path": "source10/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/access.ts"
+    },
+    {
+      "path": "source10/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "source10/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/aviation-renderer.ts"
+    },
+    {
+      "path": "source10/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/aviation.ts"
+    },
+    {
+      "path": "source10/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/controller.ts"
+    },
+    {
+      "path": "source10/src/journey.ts",
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/journey.ts"
+    },
+    {
+      "path": "source10/src/main.ts",
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/main.ts"
+    },
+    {
+      "path": "source10/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/persistence.ts"
+    },
+    {
+      "path": "source10/src/persistence/partition.ts",
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/persistence/partition.ts"
+    },
+    {
+      "path": "source10/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "source10/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/persistence/session.ts"
+    },
+    {
+      "path": "source10/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "source10/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/renderer.ts"
+    },
+    {
+      "path": "source10/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "source10/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "source10/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "source10/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "source10/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "source10/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "source10/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/rendering/terrain.ts"
+    },
+    {
+      "path": "source10/src/simulation.ts",
+      "bytes": 204470,
+      "sha256": "607d7e55a7bf8042b7abed1e2cfa03cc22216b2429f0f8261c4356ecb5f31213",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation.ts"
+    },
+    {
+      "path": "source10/src/simulation/banking.ts",
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/banking.ts"
+    },
+    {
+      "path": "source10/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/clinical.ts"
+    },
+    {
+      "path": "source10/src/simulation/culture.ts",
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/culture.ts"
+    },
+    {
+      "path": "source10/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/extensions.ts"
+    },
+    {
+      "path": "source10/src/simulation/family.ts",
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/family.ts"
+    },
+    {
+      "path": "source10/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "source10/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/journeys.ts"
+    },
+    {
+      "path": "source10/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "source10/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/simulation/trade.ts"
+    },
+    {
+      "path": "source10/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/site-fixtures.ts"
+    },
+    {
+      "path": "source10/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/style.css"
+    },
+    {
+      "path": "source10/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/transport-geometry.ts"
+    },
+    {
+      "path": "source10/src/types.ts",
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/types.ts"
+    },
+    {
+      "path": "source10/src/ui.ts",
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/ui.ts"
+    },
+    {
+      "path": "source10/src/world.ts",
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "original": "/tmp/yunshan-system-coherent-10/source/src/world.ts"
+    },
+    {
+      "path": "source10/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/access.test.ts"
+    },
+    {
+      "path": "source10/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/architecture-bodies.test.ts"
+    },
+    {
+      "path": "source10/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "path": "source10/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/architecture-detail.test.ts"
+    },
+    {
+      "path": "source10/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "path": "source10/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/aviation.test.ts"
+    },
+    {
+      "path": "source10/tests/banking.test.ts",
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/banking.test.ts"
+    },
+    {
+      "path": "source10/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/chunk-residency.test.ts"
+    },
+    {
+      "path": "source10/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/citizen-appearance.test.ts"
+    },
+    {
+      "path": "source10/tests/clinical.test.ts",
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/clinical.test.ts"
+    },
+    {
+      "path": "source10/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/controller-v4.test.ts"
+    },
+    {
+      "path": "source10/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/controller.test.ts"
+    },
+    {
+      "path": "source10/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/culture.test.ts"
+    },
+    {
+      "path": "source10/tests/economy.test.ts",
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/economy.test.ts"
+    },
+    {
+      "path": "source10/tests/extensions.test.ts",
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/extensions.test.ts"
+    },
+    {
+      "path": "source10/tests/family.test.ts",
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/family.test.ts"
+    },
+    {
+      "path": "source10/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "path": "source10/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "path": "source10/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "source10/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/home-rest.test.ts"
+    },
+    {
+      "path": "source10/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/integration.test.ts"
+    },
+    {
+      "path": "source10/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/journey.test.ts"
+    },
+    {
+      "path": "source10/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/npc-clock.test.ts"
+    },
+    {
+      "path": "source10/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/npc-home-rest-voxels.test.ts"
+    },
+    {
+      "path": "source10/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/persistence.test.ts"
+    },
+    {
+      "path": "source10/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/player-labor.test.ts"
+    },
+    {
+      "path": "source10/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/rendering.test.ts"
+    },
+    {
+      "path": "source10/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/route-encoding.test.ts"
+    },
+    {
+      "path": "source10/tests/simulation.test.ts",
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/simulation.test.ts"
+    },
+    {
+      "path": "source10/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/site-fixtures.test.ts"
+    },
+    {
+      "path": "source10/tests/trade.test.ts",
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/trade.test.ts"
+    },
+    {
+      "path": "source10/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/v4-extensions.test.ts"
+    },
+    {
+      "path": "source10/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/v4-services.test.ts"
+    },
+    {
+      "path": "source10/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/v4-simulation.test.ts"
+    },
+    {
+      "path": "source10/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/world-layout.test.ts"
+    },
+    {
+      "path": "source10/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/world-v4.test.ts"
+    },
+    {
+      "path": "source10/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "original": "/tmp/yunshan-system-coherent-10/source/tests/world.test.ts"
+    },
+    {
+      "path": "source10/tsconfig.json",
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "original": "/tmp/yunshan-system-coherent-10/source/tsconfig.json"
+    },
+    {
+      "path": "source10/vite.config.ts",
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "original": "/tmp/yunshan-system-coherent-10/source/vite.config.ts"
+    },
+    {
+      "path": "source10/开发备忘录.md",
+      "bytes": 165468,
+      "sha256": "ca6c634713a6be5e45d864c8de6bc13494ddd490f7c8aa3f745ba9abf5649e57",
+      "original": "/tmp/yunshan-system-coherent-10/source/开发备忘录.md"
+    },
+    {
+      "path": "source10/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "original": "/tmp/yunshan-system-coherent-10/source/提示词.md"
+    }
+  ],
+  "sensitivePatternCounts": {
+    "private-key": 0,
+    "aws-access-key": 0,
+    "github-token": 0,
+    "slack-token": 0,
+    "google-api-key": 0,
+    "openai-key": 0,
+    "jwt": 0,
+    "url-credential": 0,
+    "signed-url": 0,
+    "credential-assignment": 0
+  }
+}

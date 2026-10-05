@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-04T00:21:33.663426+00:00",
+  "kind": "incremental-from-installed-position-fix",
+  "files": [
+    {
+      "path": "tests/education-fixture.ts",
+      "before": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856",
+      "after": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a"
+    },
+    {
+      "path": "tests/resident-formal-education.test.ts",
+      "before": "4d942548b7d0924a2e7100ab277ecca380e9ccdf2b61139fb096aa5dd57ab718",
+      "after": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe"
+    }
+  ],
+  "sourceChanges": 0,
+  "skipsAdded": 0,
+  "assertionsRemoved": 0,
+  "moneyStockRolesAdded": false,
+  "playerPetitionAndExactExecutionBinding": true,
+  "isolatedFixed": {
+    "pass": 1,
+    "fail": 0
+  },
+  "integratedGroup": "NOT_RUN"
+}

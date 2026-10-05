@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "at": "2026-10-04T16:50:28.895691+00:00",
+  "originalClosedProviderModified": false,
+  "archives": [
+    {
+      "name": "ROOT14-civic-history-final-source.tar.gz",
+      "members": 307,
+      "bytes": 12160367,
+      "sha256": "76d8f5e4e18bca8061bce0f91a9ec6443b650f73f5c6dfb2124e2dc8fdfb6cb3",
+      "everyOriginalOrExplicitVirtualMemberVerified": true,
+      "all304FinalInputsExact": true
+    },
+    {
+      "name": "ROOT14-civic-history-short-evidence.tar.gz",
+      "members": 119,
+      "bytes": 6700315,
+      "sha256": "19087f9ce14c9395125ae7b9541ab499e999d94333d3ba7ecf74f369f2dcb5aa",
+      "everyOriginalOrExplicitVirtualMemberVerified": true,
+      "all304FinalInputsExact": false
+    }
+  ],
+  "reconstructedSourceGraphs": [
+    {
+      "scope": "scopes/codec01",
+      "inputs": 302,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/legacy-ruleset01",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/migration01",
+      "inputs": 303,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/migration02",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/paid-source01",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/paid-source02",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck01",
+      "inputs": 301,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": "post-run hash-matched source recovery"
+    },
+    {
+      "scope": "scopes/typecheck02",
+      "inputs": 302,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck03",
+      "inputs": 302,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck04",
+      "inputs": 303,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck05",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck06",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    },
+    {
+      "scope": "scopes/typecheck07",
+      "inputs": 304,
+      "everySHAReconstructedExact": true,
+      "typecheck01Exception": null
+    }
+  ],
+  "earlierMappingAssumptionFailureRetained": true,
+  "fullGameNotClaimed": true
+}

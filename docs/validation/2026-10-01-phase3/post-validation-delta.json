@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-10-01T23:54:22.201018+00:00",
+  "frozenSnapshot": "/tmp/yunshan-phase3-root-coherent-05",
+  "scope": "Latest memo/matrix and exactly tested r9/r10 browser-context setup promoted after all89 observers completed. Subsequent Git-only archive attributes preserve immutable raw patches. Every production src and test file still matches actual05. Original seven-deliverable evidence ZIP contains the earlier three-change record as of its creation; not a new full rule run.",
+  "changes": [
+    {
+      "path": "docs/需求实现验证矩阵.md",
+      "frozenSHA256": "292ee21217edbb14e27b71b37385f236c82d29d4e4fd31749e2c34455068da65",
+      "afterSHA256": "9c0346ef26435041d08ce38079a61346fd08384ca5d2d766c8cbbef3af41afda"
+    },
+    {
+      "path": "scripts/player-journey.mjs",
+      "frozenSHA256": "9945c52abeb466471c9b4f39972190ad18313bf1bd6afa56fa450b769bc307fd",
+      "afterSHA256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c"
+    },
+    {
+      "path": "开发备忘录.md",
+      "frozenSHA256": "66343682860b90b5d24c7ddf2f03dc4ce72efdb54cfcbf48eba46034a939900c",
+      "afterSHA256": "b96e4301f8b14892b6fcd28b7fcfd519b75b4ec9dbf4f352d04063f85ce82a3c"
+    },
+    {
+      "path": ".gitattributes",
+      "frozenSHA256": "0422c447497ac3288bee24e0d1e8193a6148bfbd2e4ddd81e2753f0f20bb4f00",
+      "afterSHA256": "27aa89dab6a229a75a970b4f20b8d11d9e10fd685345d47fe1af5cf24f4b2950",
+      "scope": "After the seven deliverables were frozen, preserve original archived patch/diff blank context lines under -whitespace; no raw artifacts edited."
+    }
+  ],
+  "allProductionSourcesAndTestsMatch05": true,
+  "scriptSyntaxCheck": {
+    "command": "node --check scripts/player-journey.mjs",
+    "exitCode": 0
+  },
+  "scriptEvidence": [
+    "player-journey-r9",
+    "player-journey-r10"
+  ],
+  "scriptDelta": "11 lines record public existing tab URLs, close own restored context pages, then open/assert one normal page; no game globals, saved body, money, clock or profile-file edits.",
+  "recordedAfterDeliverablesAt": "2026-10-02T00:05:00.760604+00:00",
+  "latestRepositoryDocsPublicationUpdateAt": "2026-10-02T00:07:21.627997+00:00",
+  "originalStandaloneMemoAndMatrixAsOf": "2026-10-01 23:52 UTC; kept byte-exact after single failed Library attempt, independent from subsequent repository publication update."
+}

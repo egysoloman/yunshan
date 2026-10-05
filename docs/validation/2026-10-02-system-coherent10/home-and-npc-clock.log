@@ -1,0 +1,44 @@
+✔ real market-b24 beds derive connected .35-floor points through all three floors without touching geometry or fingerprint (46.660707ms)
+✔ starting and repeating rest cannot instantly credit needs, minutes or money; exact onsite completion credits once (41.98012ms)
+✔ leaving pauses without backfilling time; return requires an explicit legal resume with original progress (10.90341ms)
+✔ display time, pause and missed callbacks grant no elapsed recovery or load catchup (5.985338ms)
+✔ start rejects wrong ownership, feet height, permission, work, treatment and vehicles without mutating a save (42.392697ms)
+✔ a rented v4 home does not intercept untargeted public rest, and cached points remain private (4.785212ms)
+✔ loss of permissions or boarding interrupts actual active time; death or home change cancels without payout (19.503039ms)
+✔ cancel is explicit, releases the physical bed, and keeps only a bounded completed tail (51.094035ms)
+✔ active and paused save roundtrips resume byte-exactly for identical future people ticks (33.773978ms)
+✔ old module absence migrates to empty session; malformed clocks, bed ids, feet and progress are rejected atomically (25.419683ms)
+✔ real standing head obstruction cannot use a bed-side point even though the bed itself still exists (4.016021ms)
+✔ a live NPC actually resting on the same bed blocks entry; a route, another floor or a dead NPC does not (7.257033ms)
+✔ actual night NPC chooses a real reachable bed side; a player occupying that bed makes it choose another physical bed (1265.612272ms)
+✔ actual oversubscribed home at night reserves each bed once and sends overflow to public rest without travelling recovery (2950.553028ms)
+✔ actual Simulation home rest starts without instant credit and completes only after twenty real minutes (11567.799684ms)
+✔ actual Simulation rejects the old desk point and preserves untargeted public station fees (2147.968462ms)
+✔ actual Simulation active rest saves exactly, continues identically and rejects bad bed/manifest atomically (14697.934618ms)
+✔ a final home walk consumes its part of the tick before sleep restores fatigue and fun (40.645693ms)
+✔ a social arrival restores social and fun only for the remaining onsite interval (23.170621ms)
+✔ a healing arrival does not credit the approach as onsite recovery (21.174901ms)
+✔ tier and speed changes conserve actual elapsed needs and walking minutes, including deferred ticks (77.428015ms)
+✔ real deferred minutes survive save/load and identical tier/speed continuation exactly (247.485633ms)
+✔ unknown actor IDs, negative or excessive deferred minutes reject the complete save atomically (132.360997ms)
+✔ a native rail arrival has zero post-arrival movement in its discrete traffic tick (51.504926ms)
+✔ sixteen real deferred ticks cannot reuse ride time after an endpoint observed on the final tick (111.296527ms)
+✔ a stopped vehicle within forty metres cannot teleport an unarrived passenger to the stop (16.765434ms)
+✔ a deferred observed arrival survives tier and speed changes without backfilling its ride interval (39.782138ms)
+✔ an observed deferred arrival saves exactly and continues identically for twenty-four ticks (587.254236ms)
+✔ legacy arrived records migrate at the imported clock and malformed arrival clocks reject atomically (902.256931ms)
+✔ a placed voxel excludes an NPC blocked bed side after the same native bedside start (531.652931ms)
+✔ an NPC standing volume cannot recover inside a voxel while its canonical bed side stays clear (1437.496526ms)
+✔ the shared voxel predicate preserves the original player radial EPS and vertical contact boundaries (151.238907ms)
+✔ a voxel on another floor leaves the same actual NPC bedside available for recovery (612.25929ms)
+✔ a deferred existing blocked-side reservation still owns its bed until its real update (1607.355002ms)
+✔ blocking every home bed side keeps the existing public rest fallback without deleting cubes (666.703735ms)
+✔ unmarked home presence keeps its historical recovery and single-minute budget with placed cubes (33.162586ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 40818.679465

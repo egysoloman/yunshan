@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-01T18:50:35.061Z",
+  "environment": "Node Three.js actual geometry/instance disposal and far matrices; no WebGL or renderer integration claim",
+  "initialHashes": {
+    "src/rendering/chunk-residency.ts": "a04cf060292d5267519b7afa251dc6c42915fd187433ce85711ab7070678d4e4",
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015",
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/types.ts": "9f344c8f8ceab976fefe951e8c162e4f3ae948e2cf9326e40656975cb93e54d3",
+    "tests/chunk-residency.test.ts": "458e547858a9dc0206b267cd30b14b679a35745737f6f0855a01285e435a2699"
+  },
+  "finalHashes": {
+    "src/rendering/chunk-residency.ts": "a04cf060292d5267519b7afa251dc6c42915fd187433ce85711ab7070678d4e4",
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015",
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/types.ts": "9f344c8f8ceab976fefe951e8c162e4f3ae948e2cf9326e40656975cb93e54d3",
+    "tests/chunk-residency.test.ts": "458e547858a9dc0206b267cd30b14b679a35745737f6f0855a01285e435a2699"
+  },
+  "evidence": [
+    {
+      "check": "metadata-only-startup",
+      "buildings": 612,
+      "chunks": 482,
+      "nearGroups": 0,
+      "interiorRefs": 0
+    },
+    {
+      "check": "real-resource-travel-release",
+      "resident": 0,
+      "total": 482,
+      "created": 307,
+      "released": 307,
+      "maximumResident": 18,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false,
+      "live": 0,
+      "maxLive": 18,
+      "geometryDisposals": 307,
+      "instanceDisposals": 410,
+      "materialDisposals": 0,
+      "materialDisposalsBeforePaletteShutdown": 0
+    },
+    {
+      "check": "inside-priority-and-recreated-floor25-cutaway",
+      "resident": 1,
+      "total": 482,
+      "created": 2,
+      "released": 1,
+      "maximumResident": 1,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    {
+      "check": "actual-residential-exit-and-all-rotated-entrances",
+      "siteId": "market-b21",
+      "door": {
+        "x": -445.20000000000005,
+        "y": 42.6,
+        "z": 547.8000000000001
+      },
+      "exit": {
+        "x": -445,
+        "y": 43,
+        "z": 550
+      },
+      "resourceReused": true,
+      "testedEntrances": 612,
+      "missingEntranceChunks": 0
+    },
+    {
+      "check": "quality-and-inside-capacity",
+      "highCapacity": 18,
+      "lowCapacity": 8,
+      "maximumAllocated": 18,
+      "resident": 8,
+      "total": 22,
+      "created": 20,
+      "released": 12,
+      "maximumResident": 18,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    {
+      "check": "failed-build-publication-recovery",
+      "resident": 0,
+      "total": 1,
+      "created": 2,
+      "released": 2,
+      "maximumResident": 1,
+      "failures": 2,
+      "lastError": "publication failed after scene/ref changes",
+      "disposed": true,
+      "live": 0,
+      "maxLive": 1,
+      "geometryDisposals": 2,
+      "instanceDisposals": 2,
+      "materialDisposals": 0
+    }
+  ]
+}

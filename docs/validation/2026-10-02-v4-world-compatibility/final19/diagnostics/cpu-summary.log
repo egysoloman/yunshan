@@ -1,0 +1,54 @@
+whole_run 389.643 sampled seconds
+self
+13.53 routeGround world.ts 1
+11.33 (anonymous) world.ts 1
+9.72 naturalHeight world.ts 1
+8.52 (anonymous) architecture-floor-plan.ts 1
+6.36 getBuildingBody architecture-floor-plan.ts 1
+5.86 blocksFloorPlanMovement architecture-floor-plan.ts 1
+5.37 (garbage collector)  0
+5.37 localSolids architecture-floor-plan.ts 1
+3.13 savedWorldFingerprint world-layout.ts 1
+3.06 createWorld world.ts 1
+2.67 boundaryLoops architecture-floor-plan.ts 1
+2.5 canStandInFloorPlan architecture-floor-plan.ts 1
+inclusive
+100.0 (root)  0
+94.37 runInAsyncScope node:async_hooks 220
+94.37 run test 1288
+52.6 (anonymous) world-v4.test.ts 1
+45.77 createWorld world.ts 1
+41.81 (anonymous) world-layout.test.ts 1
+34.77 (anonymous) simulation.ts 1
+34.18 step simulation.ts 1
+34.18 emit simulation.ts 1
+30.13 routeGround world.ts 1
+23.65 people simulation.ts 1
+19.79 (anonymous) world.ts 1
+last_150s_approx 150.0 sampled seconds
+self
+15.99 (anonymous) architecture-floor-plan.ts 1
+15.92 getBuildingBody architecture-floor-plan.ts 1
+15.08 blocksFloorPlanMovement architecture-floor-plan.ts 1
+13.12 localSolids architecture-floor-plan.ts 1
+5.74 canStandInFloorPlan architecture-floor-plan.ts 1
+4.89 (garbage collector)  0
+3.59 floorPlanSupport architecture-floor-plan.ts 1
+2.91 segmentIntersectsRect architecture-floor-plan.ts 1
+2.83 stairSurfaces architecture-floor-plan.ts 1
+2.42 routeGround world.ts 1
+2.02 (anonymous) world.ts 1
+1.46 naturalHeight world.ts 1
+inclusive
+100.0 (root)  0
+94.99 runInAsyncScope node:async_hooks 220
+94.99 run test 1288
+94.96 (anonymous) world-v4.test.ts 1
+85.0 (anonymous) simulation.ts 1
+84.66 step simulation.ts 1
+84.65 emit simulation.ts 1
+60.44 people simulation.ts 1
+45.83 setDestination simulation.ts 1
+41.82 floorPlanRoute simulation.ts 1
+41.8 findBuildingFloorPlanRoute architecture-floor-plan.ts 1
+41.68 findFloorPlanRoute architecture-floor-plan.ts 1

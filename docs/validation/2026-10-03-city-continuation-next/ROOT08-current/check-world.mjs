@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {createWorld} from './source/src/world.ts';
+import {savedWorldFingerprint} from './source/src/persistence/world-layout.ts';
+const file='/workspace/yunshan-work/city-map-v6-20261004-01/world-native.json';
+const bytes=fs.readFileSync(file);
+const previous=JSON.parse(bytes.toString('utf8'));
+const current=createWorld(previous.seed,'current-v6');
+assert.equal(JSON.stringify(current),JSON.stringify(previous));
+assert.equal(savedWorldFingerprint(current),'b85fa6ec');
+console.log(JSON.stringify({status:'PASS',scope:'Whole normalized JSON serialization of actual current-v6 is unchanged; original file bytes preserved',oldWorldFileSHA256:createHash('sha256').update(bytes).digest('hex'),wholeWorldJSONSHA256:createHash('sha256').update(JSON.stringify(current)).digest('hex'),worldFingerprint:savedWorldFingerprint(current),buildings:current.buildings.length,nodes:current.nodes.length,edges:current.edges.length,geometryChanged:false}));

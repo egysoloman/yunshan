@@ -1,0 +1,458 @@
+{
+  "status": "CANDIDATES_ONLY_BOM_PENDING_PARENT_ID",
+  "scope": "One existing world JSON; one pure current-v4 provider/world import 89.4ms work / .160s process; no createWorld, no Simulation, no GPU, no long simulation. Height samples and support are metadata/authority samples, not native traversal proof.",
+  "sourceSnapshot": "/tmp/yunshan-v4-root-coherent-04",
+  "sourceManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "providerSHA256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+  "worldSourceSHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+  "worldJSON": {
+    "path": "/tmp/yunshan-v5-market-block-01/prototype-01/diagnostics/legacy-worlds/baseline/current-v4-20261001.world.json",
+    "sha256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "seed": 20261001,
+    "layout": "current-v4",
+    "spawn": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    }
+  },
+  "homeFloorHistogram": {
+    "11": 22,
+    "8": 20,
+    "5": 38,
+    "12": 17,
+    "9": 16,
+    "3": 18,
+    "6": 16,
+    "13": 16,
+    "7": 38,
+    "4": 20
+  },
+  "existingResidentEvidence": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-02-food-counters/public-counter-natural-and-archive-docscope-03/normal-v1-writer-capture/initial-city-save.json",
+    "sha256": "d8dc0f86fa650f5c10e10b4c2da69f07d6269950f5434e344a65d1989f218bae",
+    "fingerprint": "3ae62474",
+    "actualLayout": "current-v3",
+    "limitation": "Existing real homeId bindings only; not evidence that these residents completed v4 entry/home routes."
+  },
+  "candidates": [
+    {
+      "building": {
+        "id": "market-b24",
+        "districtId": "market",
+        "name": "千灯市集·钱庄街·里居7",
+        "kind": "home",
+        "position": {
+          "x": -390.8,
+          "y": 76,
+          "z": 316.20000000000005
+        },
+        "width": 40,
+        "depth": 34.4,
+        "height": 10.200000000000001,
+        "floors": 3,
+        "rotation": 0,
+        "door": {
+          "x": -390.8,
+          "y": 76.60000000000001,
+          "z": 333.40000000000003
+        },
+        "capacity": 129,
+        "seed": 668619109,
+        "floorPlanProfile": "v4-program-bodies-02",
+        "functionPoints": [
+          {
+            "id": "0:program:work",
+            "purpose": "work",
+            "floor": 0,
+            "position": {
+              "x": -398.8,
+              "y": 76.6,
+              "z": 307.20000000000005
+            }
+          },
+          {
+            "id": "0:program:service",
+            "purpose": "service",
+            "floor": 0,
+            "position": {
+              "x": -398.8,
+              "y": 76.6,
+              "z": 307.20000000000005
+            }
+          },
+          {
+            "id": "1:program:work",
+            "purpose": "work",
+            "floor": 1,
+            "position": {
+              "x": -398.8,
+              "y": 80,
+              "z": 307.20000000000005
+            }
+          },
+          {
+            "id": "1:program:service",
+            "purpose": "service",
+            "floor": 1,
+            "position": {
+              "x": -398.8,
+              "y": 80,
+              "z": 307.20000000000005
+            }
+          },
+          {
+            "id": "2:program:work",
+            "purpose": "work",
+            "floor": 2,
+            "position": {
+              "x": -398.8,
+              "y": 83.39999999999999,
+              "z": 307.20000000000005
+            }
+          },
+          {
+            "id": "2:program:service",
+            "purpose": "service",
+            "floor": 2,
+            "position": {
+              "x": -398.8,
+              "y": 83.39999999999999,
+              "z": 307.20000000000005
+            }
+          }
+        ]
+      },
+      "spawnDistanceHorizontal": 165.1956415889959,
+      "authoritySamples": {
+        "outside2mWalkHeight": 76.37358490566038,
+        "doorWalkHeight": 76.6,
+        "inside2mWalkHeight": 76.6,
+        "insideSupport": "room",
+        "bodyRadius": 0.35
+      },
+      "entranceWidth": 4.8,
+      "entranceHeight": 2.8,
+      "floor0InteriorRectangles": 7,
+      "floor0CourtyardRectangles": 11,
+      "initialV3Residents": [
+        {
+          "id": "citizen-67",
+          "name": "顾宁",
+          "homeId": "market-b24",
+          "position": {
+            "x": -390.8,
+            "y": 76.60000000000001,
+            "z": 333.40000000000003
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-276",
+          "name": "沈禾1",
+          "homeId": "market-b24",
+          "position": {
+            "x": -390.8,
+            "y": 76.60000000000001,
+            "z": 333.40000000000003
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-485",
+          "name": "陆遥3",
+          "homeId": "market-b24",
+          "position": {
+            "x": -390.8,
+            "y": 76.60000000000001,
+            "z": 333.40000000000003
+          },
+          "state": "atHome"
+        }
+      ]
+    },
+    {
+      "building": {
+        "id": "market-b72",
+        "districtId": "market",
+        "name": "千灯市集·钱庄街·里居19",
+        "kind": "home",
+        "position": {
+          "x": -781.4000000000001,
+          "y": 42.2,
+          "z": 487
+        },
+        "width": 41.2,
+        "depth": 35.2,
+        "height": 10.200000000000001,
+        "floors": 3,
+        "rotation": 0,
+        "door": {
+          "x": -781.4000000000001,
+          "y": 42.800000000000004,
+          "z": 504.6
+        },
+        "capacity": 135,
+        "seed": 720302558,
+        "floorPlanProfile": "v4-program-bodies-02",
+        "functionPoints": [
+          {
+            "id": "0:program:work",
+            "purpose": "work",
+            "floor": 0,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 42.800000000000004,
+              "z": 477.8
+            }
+          },
+          {
+            "id": "0:program:service",
+            "purpose": "service",
+            "floor": 0,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 42.800000000000004,
+              "z": 477.8
+            }
+          },
+          {
+            "id": "1:program:work",
+            "purpose": "work",
+            "floor": 1,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 46.2,
+              "z": 477.8
+            }
+          },
+          {
+            "id": "1:program:service",
+            "purpose": "service",
+            "floor": 1,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 46.2,
+              "z": 477.8
+            }
+          },
+          {
+            "id": "2:program:work",
+            "purpose": "work",
+            "floor": 2,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 49.6,
+              "z": 477.8
+            }
+          },
+          {
+            "id": "2:program:service",
+            "purpose": "service",
+            "floor": 2,
+            "position": {
+              "x": -789.6000000000001,
+              "y": 49.6,
+              "z": 477.8
+            }
+          }
+        ]
+      },
+      "spawnDistanceHorizontal": 451.74298002293307,
+      "authoritySamples": {
+        "outside2mWalkHeight": 42.90810810810811,
+        "doorWalkHeight": 42.800000000000004,
+        "inside2mWalkHeight": 42.800000000000004,
+        "insideSupport": "room",
+        "bodyRadius": 0.35
+      },
+      "entranceWidth": 4.8,
+      "entranceHeight": 2.8,
+      "floor0InteriorRectangles": 7,
+      "floor0CourtyardRectangles": 11,
+      "initialV3Residents": [
+        {
+          "id": "citizen-199",
+          "name": "顾遥1",
+          "homeId": "market-b72",
+          "position": {
+            "x": -781.4000000000001,
+            "y": 42.800000000000004,
+            "z": 504.6
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-408",
+          "name": "沈星2",
+          "homeId": "market-b72",
+          "position": {
+            "x": -781.4000000000001,
+            "y": 42.800000000000004,
+            "z": 504.6
+          },
+          "state": "atHome"
+        }
+      ]
+    },
+    {
+      "building": {
+        "id": "river-b24",
+        "districtId": "river",
+        "name": "清溪水岸·北岭院·里居7",
+        "kind": "home",
+        "position": {
+          "x": -783.2,
+          "y": 28,
+          "z": 909
+        },
+        "width": 39.6,
+        "depth": 35.2,
+        "height": 10.200000000000001,
+        "floors": 3,
+        "rotation": 0,
+        "door": {
+          "x": -783.2,
+          "y": 28.6,
+          "z": 926.6
+        },
+        "capacity": 129,
+        "seed": 2080156530,
+        "floorPlanProfile": "v4-program-bodies-02",
+        "functionPoints": [
+          {
+            "id": "0:program:work",
+            "purpose": "work",
+            "floor": 0,
+            "position": {
+              "x": -791.2,
+              "y": 28.6,
+              "z": 899.8
+            }
+          },
+          {
+            "id": "0:program:service",
+            "purpose": "service",
+            "floor": 0,
+            "position": {
+              "x": -791.2,
+              "y": 28.6,
+              "z": 899.8
+            }
+          },
+          {
+            "id": "1:program:work",
+            "purpose": "work",
+            "floor": 1,
+            "position": {
+              "x": -791.2,
+              "y": 32,
+              "z": 899.8
+            }
+          },
+          {
+            "id": "1:program:service",
+            "purpose": "service",
+            "floor": 1,
+            "position": {
+              "x": -791.2,
+              "y": 32,
+              "z": 899.8
+            }
+          },
+          {
+            "id": "2:program:work",
+            "purpose": "work",
+            "floor": 2,
+            "position": {
+              "x": -791.2,
+              "y": 35.4,
+              "z": 899.8
+            }
+          },
+          {
+            "id": "2:program:service",
+            "purpose": "service",
+            "floor": 2,
+            "position": {
+              "x": -791.2,
+              "y": 35.4,
+              "z": 899.8
+            }
+          }
+        ]
+      },
+      "spawnDistanceHorizontal": 631.3781751058552,
+      "authoritySamples": {
+        "outside2mWalkHeight": 28.259574468085106,
+        "doorWalkHeight": 28.6,
+        "inside2mWalkHeight": 28.6,
+        "insideSupport": "room",
+        "bodyRadius": 0.35
+      },
+      "entranceWidth": 4.8,
+      "entranceHeight": 2.8,
+      "floor0InteriorRectangles": 7,
+      "floor0CourtyardRectangles": 11,
+      "initialV3Residents": [
+        {
+          "id": "citizen-66",
+          "name": "江宁",
+          "homeId": "river-b24",
+          "position": {
+            "x": -783.2,
+            "y": 28.6,
+            "z": 926.6
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-231",
+          "name": "白澄1",
+          "homeId": "river-b24",
+          "position": {
+            "x": -783.2,
+            "y": 28.6,
+            "z": 926.6
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-396",
+          "name": "沈月2",
+          "homeId": "river-b24",
+          "position": {
+            "x": -783.2,
+            "y": 28.6,
+            "z": 926.6
+          },
+          "state": "atHome"
+        },
+        {
+          "id": "citizen-561",
+          "name": "叶星3",
+          "homeId": "river-b24",
+          "position": {
+            "x": -783.2,
+            "y": 28.6,
+            "z": 926.6
+          },
+          "state": "atHome"
+        }
+      ]
+    }
+  ],
+  "recommendation": "market-b24 is the closest existing 3-floor home. It is a 40m wide courtyard building; no claim of a small-area detached house. Do not shrink saved immutable dimensions.",
+  "stoppedKit": {
+    "implementationWritten": false,
+    "testsRun": false,
+    "uploaded": false
+  },
+  "notRun": [
+    "Native/elapsed-frame entry or living test for these candidate IDs",
+    "Complete site-fit/terrain/foundation envelope test",
+    "Per-pilot BOM until parent selects ID",
+    "Tripo generation/paid API",
+    "Library upload"
+  ]
+}

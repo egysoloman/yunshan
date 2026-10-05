@@ -1,0 +1,46 @@
+{
+  "sourceFiles": 32,
+  "productionSourceStableAcrossValidation": true,
+  "newRegressionInputsStable": true,
+  "sourceComparedWithOriginal": {
+    "src/access.ts": true,
+    "src/aviation-renderer.ts": true,
+    "src/aviation.ts": true,
+    "src/controller.ts": true,
+    "src/journey.ts": true,
+    "src/main.ts": true,
+    "src/persistence/partition.ts": true,
+    "src/persistence/session.ts": true,
+    "src/persistence/world-layout.ts": true,
+    "src/persistence.ts": true,
+    "src/renderer.ts": true,
+    "src/rendering/architecture-detail.ts": true,
+    "src/rendering/architecture-layout.ts": true,
+    "src/rendering/chunk-residency.ts": true,
+    "src/rendering/citizen-appearance.ts": true,
+    "src/rendering/market-goods.ts": true,
+    "src/rendering/terrain.ts": true,
+    "src/simulation/banking.ts": true,
+    "src/simulation/clinical.ts": true,
+    "src/simulation/culture.ts": true,
+    "src/simulation/extensions.ts": true,
+    "src/simulation/family.ts": true,
+    "src/simulation/journeys.ts": true,
+    "src/simulation/player-labor.ts": true,
+    "src/simulation/trade.ts": true,
+    "src/simulation.ts": true,
+    "src/site-fixtures.ts": true,
+    "src/style.css": true,
+    "src/transport-geometry.ts": true,
+    "src/types.ts": true,
+    "src/ui.ts": true,
+    "src/world.ts": true
+  },
+  "changedSourceFiles": [
+    "src/simulation.ts"
+  ],
+  "changedDiagnosticFiles": [
+    "scripts/located-freight-city-check.ts"
+  ],
+  "scope": "The isolated diagnostic import gained .ts after an initial ESM load failure, then its event arrays were frozen and 80/104 counters separated after discovering mutable-array accumulation. It also gained actual old-city private/public ownership migration assertions. All 32 production files and the new test/helper/captured fixture remained unchanged throughout the 131-test run and subsequent observations. Each final city observation records its own 32-file start/end/continuation hashes."
+}

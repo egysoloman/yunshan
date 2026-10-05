@@ -1,0 +1,25 @@
+# ROOT07旧能源读档：仅测试构造前提窄修
+
+## 结论与原因
+
+原ROOT07 systems01真实330 tests=324PASS/1FAIL/5SKIP，非timeout/241稳定，raw f78382e4a21ff7fd4461b9398cf5e3097910c84ac975c63275bd474fe6bd7c3d；唯一失败为旧paid boost用默认新v6构造后导入v4原档，原结果不改写。
+
+原fixture power-native-old-energy-paid-v1.json 为695260bytes、SHA c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041；yunshan-save/version1/seed20261001/fingerprint80cd31e2/pooled-v1，tick0/clock480/energyBoostUntil720，没有WorldDescriptor或layout标签。此实际旧writer原件不改、不重造。隔离重构全部七种code-owned recipe，唯一current-v4匹配80cd31e2；当前全局默认v6实际b85fa6ec。独立原case实际0PASS/1FAIL复现同world/version拒读，原raw83e8953b830a4e79d418c5cfefdaa03dc36a0c61073b78b915f953dcf4b86bc0保留。
+
+## 唯一改动
+
+只把tests/power.test.ts该旧case中的 createWorld() 改为 createWorld(JSON.parse(raw).worldSeed, 'current-v4')。全球默认仍current-v6；其余19项原powerWorld受控前提原样，不将它们误称自然默认v6城市覆盖。不改decoder、迁移算法、fixture、现金、计时、几何或任何断言，不修改shared、ROOT07/frozen/14driver。
+
+原test SHA d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b → 新9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911。power-old-reader-only.patch 为1901bytes/SHA7199e4d38860b0a3cc7cbc5907121ee1bdab0eb10456d7eaa61dc158d18c8422；独立git apply --check与apply实际0，所得文件逐字同成品。所有旧case240分钟、显示回拨不续期、时间上限/坏合同原子拒绝、迁移后完整即时恢复和最终恢复断言逐字保留。
+
+## 实际复验，分scope报告
+
+- corrected-old-case01：1PASS/0FAIL，exit0，02:02:53→02:06:30，raw899c0526f18052cdcf503b088a5061937522ce54adc745a2e954b468551ee5ff。
+- full-power20-01：正式20PASS/0FAIL/0SKIP，exit0，02:02:53→02:07:29，275.4秒低于原300秒上限，rawfad2f5a00158636255cc70ad63ea4c0022327b4c14f99bfe0653bad40ad13291。
+- native-reader24-01：原c313旧档导入原钱包与国库不变；合法旧boost一次迁移后当前reader立即完整字节一致、原分块assemble一致、原live与reader未来24tick逐步完整save一致；exit0/rawa77769301502649c730cf9c5da03ca8b82c11cee9972521a1fd48b6e1261fa76。原档→当前迁移后695425B/eaaf865532f4c32ded9f978698f425c051c79ffed5f612800c93c38c73516a68；第24步2166288B/fea15e3317b9035f5640511506e0c986601b4b0c4af30dd86cbd158b5945de44。native-reader-originals是实际当前reader输出，不冒新旧writer存档。原powercase/所引用fixture没有固定历史future24 oracle；这个补充只证明当前live/reader一致。
+
+每scope63隔离输入首尾相同，实际as-run关键源码/test/helper/原fixture均保。诊断及原case由原wrapper-v1运行，之后只改记录包装与300秒上限；原wrapper-v1另保run-v1-original.py，不回写旧receipt。外部只读driver原文件保留，新三scope receipt记录其SHA；早先diagnosis不伪称开始时另捕external manifest。
+
+结束再次逐SHA核ROOT07全部241原输入仍同（含corec3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39、auditdriverbe116d5a13aeedaafae7a2a41856892f96c4de370bb53a13741916fd0c16edeb）；隔离63中仅授权test一件变化。无自有active后代，记录PID1子Z，不声称全部物理消失。
+
+不把旧330的324或新20/单case/reader子步相加为新全套。未重跑330、14日、GPU或build；原ROOT07长程继续由根管理。本代理不上传Library、提交或推送，根按test preSHA守卫接合并统一收本namespace原件。完整城市目标仍未完成。

@@ -1,0 +1,80 @@
+✖ license reserves actual cap; actual material payment and ten old-contract assembly minutes precede opening (84.147345ms)
+✔ staff actually walks to the native node, loads finite food and returns before any shelf or checkout exists (244.951928ms)
+✖ readonly quote and two-minute-per-unit public-food checkout split actual wallet without paying the public owner twice (160.608741ms)
+✔ pause releases ordinary service and retains carried ownership; closing returns unsold stock to original FIFO without teleport (213.128439ms)
+✔ active carrying and open shelf save exactly and continue 24 real ticks (340.943164ms)
+✔ new custody/budget/assembly and module presence tampering reject atomically (341.586952ms)
+✔ without a requested counter no new body exists and old save is byte exact (41.104161ms)
+✖ private food remains the actual supplier property until checkout, then real gross splits at frozen H4 (129.409084ms)
+✔ remaining original minutes and expiry bound the task; no second daily payroll or next-day automatic renewal (348.818727ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 6
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2355.224115
+
+✖ failing tests:
+
+test at tests/food-distribution.test.ts:1:3888
+✖ license reserves actual cap; actual material payment and ten old-contract assembly minutes precede opening (84.147345ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  84.68 !== 88.28
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-prototype-20261002/tests/food-distribution.test.ts:60:130)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 84.68,
+    expected: 88.28,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/food-distribution.test.ts:1:6789
+✖ readonly quote and two-minute-per-unit public-food checkout split actual wallet without paying the public owner twice (160.608741ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(Math.abs(sim.state.treasury - beforeTreasury - 22.08) < 1e-8)
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-prototype-20261002/tests/food-distribution.test.ts:84:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/food-distribution.test.ts:1:11847
+✖ private food remains the actual supplier property until checkout, then real gross splits at frozen H4 (129.409084ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(Math.abs(sim.state.treasury - before.treasury - 14.08) < 1e-8)
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-prototype-20261002/tests/food-distribution.test.ts:133:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

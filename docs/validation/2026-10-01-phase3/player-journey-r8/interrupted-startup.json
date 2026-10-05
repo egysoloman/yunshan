@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-01T23:06:49.844436+00:00",
+  "scope": "Owner stops only its stalled r8 harness before any resume/progress/actual input record. Original immutable source/harness untouched, stored game fields never edited. Initial restored-page count not yet observable; renderer process counts alone are not GL-context proof. This interrupted run cannot establish native restoration or school completion.",
+  "pid": 75541,
+  "command": "node --import tsx /workspace/yunshan/scripts/player-journey.mjs --workspace=/tmp/yunshan-phase3-root-coherent-04 --output=/workspace/yunshan/artifacts/phase3-player-journey-r8 --layout=current-v2-r5 --resume-after=home --resume-checkpoint=walking-saved --resume-from=/workspace/yunshan/artifacts/phase2-player-journey-r7/results.json --profile=/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile --port=4193 --viewport=800x600 --quality=low --render-distance=900 --stop-after=school --timeout-ms=7200000 ",
+  "directChildren": [
+    {
+      "pid": 75553,
+      "cmdline": "/workspace/yunshan/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.28.2 --ping "
+    },
+    {
+      "pid": 75562,
+      "cmdline": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node /tmp/yunshan-phase3-root-coherent-04/node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4193 --strictPort "
+    },
+    {
+      "pid": 75579,
+      "cmdline": "/usr/lib/chromium/chromium --show-component-extension-options --enable-gpu-rasterization --no-default-browser-check --disable-pings --media-router=0 --enable-remote-extensions --load-extension= about:blank --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --use-angle=swiftshader --enable-unsafe-swiftshader --user-data-dir=/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile --remote-debugging-pipe "
+    }
+  ],
+  "progressExists": true,
+  "logBytes": 12,
+  "signal": "SIGTERM to validated own Node"
+}

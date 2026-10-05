@@ -1,0 +1,202 @@
+{
+  "actualBody": {
+    "position": {
+      "x": -596.2,
+      "y": 37.2,
+      "z": 810.3000000000001
+    },
+    "floor": 0,
+    "inside": null,
+    "blockedAccess": null,
+    "eye": [
+      -596.2,
+      38.92,
+      810.3000000000001
+    ],
+    "yaw": 0,
+    "pitch": -0.05
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 12,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": true,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 609,
+      "triangles": 840438
+    },
+    "total": {
+      "calls": 666,
+      "triangles": 918896
+    },
+    "shadowCalls": 57,
+    "shadowTriangles": 78458
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 7,
+      "total": 482,
+      "created": 18,
+      "released": 11,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 7,
+    "actualMeshes": 49,
+    "actualInstances": 6830,
+    "ownedGeometryCount": 49,
+    "interiorBuildingRefs": 9,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 7,
+      "releases": 11,
+      "geometryDisposals": 75,
+      "instanceDisposals": 75,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 647,
+      "textures": 11
+    }
+  },
+  "verticalHits": [
+    {
+      "probe": {
+        "x": -596.2,
+        "y": 37.2,
+        "z": 810.3000000000001,
+        "minY": 36.800000000000004,
+        "maxY": 37.6
+      },
+      "nearest": {
+        "y": 37.199994059042396,
+        "floor": 0,
+        "roof": true,
+        "meshName": "batch-roof-all:template:program-gable-x-1",
+        "geometryId": 3174,
+        "triangle": 11
+      },
+      "testedProjectedTriangles": 6452,
+      "scope": "Actual visible resident building refs; vertical hits, not authoritative physical support replacement"
+    }
+  ],
+  "name": "v4-home-roof-restoration",
+  "buildingId": "river-b2",
+  "declaredDiagnosticCameraAim": null,
+  "scope": "Actual WebGL fixed-source controlled body capture; not a normal player journey or Mac performance/reference-art pass."
+}

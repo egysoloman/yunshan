@@ -1,0 +1,157 @@
+{
+  "status": "READ_ONLY_NOT_OBSERVED",
+  "at": "2026-10-04T20:34:57.724289+00:00",
+  "scope": "followup256-01",
+  "resultSHA256": "69fa530524278ee2861bd5647c703a983a2d8484cd9350921ad9fb3116b8e952",
+  "steps": 256,
+  "allFinancialANDCount": 0,
+  "guardTrueCounts": {
+    "loss": 256,
+    "emptyStock": 203,
+    "freeCash": 20,
+    "allFinancialAND": 0
+  },
+  "lowCashStockRange": [
+    6,
+    6
+  ],
+  "emptyStockFreeRange": [
+    8.107890235616196,
+    85.83828825874377
+  ],
+  "lowCashSteps": [
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    122,
+    123,
+    124
+  ],
+  "arrivalCount": 0,
+  "opportunitySteps": [],
+  "stockTransitions": [
+    {
+      "step": 82,
+      "clock": 2091.5,
+      "beforeStock": 0,
+      "stock": 6,
+      "cash": 488.58125827092977,
+      "protected": 488.58125827092977,
+      "free": 0,
+      "activity": "businessReview"
+    },
+    {
+      "step": 99,
+      "clock": 2095.75,
+      "beforeStock": 6,
+      "stock": 5,
+      "cash": 505.0689476713838,
+      "protected": 488.5812582709299,
+      "free": 16.487689400453917,
+      "activity": "businessReview"
+    },
+    {
+      "step": 106,
+      "clock": 2097.5,
+      "beforeStock": 5,
+      "stock": 4,
+      "cash": 521.5566370718378,
+      "protected": 488.58125827093,
+      "free": 32.97537880090783,
+      "activity": "businessReview"
+    },
+    {
+      "step": 122,
+      "clock": 2101.5,
+      "beforeStock": 4,
+      "stock": 6,
+      "cash": 513.4177481829489,
+      "protected": 510.4167058264856,
+      "free": 3.0010423564633015,
+      "activity": "businessReview"
+    },
+    {
+      "step": 125,
+      "clock": 2102.25,
+      "beforeStock": 6,
+      "stock": 4,
+      "cash": 546.3634968170423,
+      "protected": 510.4167058264855,
+      "free": 35.94679099055685,
+      "activity": "businessReview"
+    },
+    {
+      "step": 130,
+      "clock": 2103.5,
+      "beforeStock": 4,
+      "stock": 2,
+      "cash": 571.3092454511358,
+      "protected": 510.4167058264856,
+      "free": 60.89253962465017,
+      "activity": "businessReview"
+    },
+    {
+      "step": 135,
+      "clock": 2104.75,
+      "beforeStock": 2,
+      "stock": 0,
+      "cash": 596.2549940852292,
+      "protected": 510.41670582648555,
+      "free": 85.83828825874366,
+      "activity": "businessReview"
+    }
+  ],
+  "actualMarketEvents": {
+    "wage-earned": {
+      "count": 7837,
+      "amount": 183.81096485957247,
+      "quantity": 0,
+      "minutes": 1950.86677799777
+    },
+    "business-expense": {
+      "count": 7,
+      "amount": 0.9412235689496431,
+      "quantity": 0,
+      "minutes": 0
+    },
+    "sale": {
+      "count": 5,
+      "amount": 143.27459206868298,
+      "quantity": 8,
+      "minutes": 0
+    },
+    "private-shift-authorized": {
+      "count": 2,
+      "amount": 98.25951399999991,
+      "quantity": 0,
+      "minutes": 1044
+    }
+  },
+  "initialClock": 2071,
+  "finalClock": 2135,
+  "initialFree": 8.385668013395048,
+  "finalFree": 8.997555147632625,
+  "cashDelta": 98.87140113423857,
+  "protectedDelta": 98.25951400000099,
+  "freeDelta": 0.6118871342375769,
+  "leaseUnchanged": true,
+  "titleOperatingAll": true,
+  "intentActivity": "businessReview throughout, no new shopLifecycle opportunity because financial AND never true",
+  "reason": "Cash low for20 steps only while stock6 exists after ordinary replenishment; empty203 steps always have free funds>=8.107890235616196. Neither financial condition coincides. No wish/route bug has been established and no threshold or source repair is proposed.",
+  "sourceRepairProposed": false,
+  "nextWork": "Keep candidate uninstalled. No unbounded extension or weakened threshold. Future actual third-cycle witness requires separately authorized natural scenario plus real endpoint and witness-state whole/partition continuation."
+}

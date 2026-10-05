@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-04T01:50:44.256558+00:00",
+  "status": "WEBGL01_FAIL_RESOURCE_CO_RUN_NOT_EXCLUSIVE",
+  "rootConfirmedOtherScope": "world01 persistence.test.ts IndexedDB browser",
+  "otherChromiumIdentity": {
+    "pid": 21663,
+    "name": "chromium",
+    "state": "S",
+    "parent": 21607,
+    "group": 21663,
+    "session": 21663,
+    "startTicks": 874804
+  },
+  "otherNodeIdentity": {
+    "pid": 21607,
+    "name": "MainThread",
+    "state": "R",
+    "parent": 21593,
+    "group": 21607,
+    "session": 21607,
+    "startTicks": 872917
+  },
+  "otherNodePublicTestCommand": "node --import tsx --test --test-isolation=none tests/world-v4.test.ts tests/world-v5.test.ts tests/world-v6-commercial.test.ts tests/world-v6-commercial-routes.test.ts tests/world-v6-office.test.ts tests/world-layout.test.ts tests/stair-continuity.test.ts tests/architecture-floor-plan.test.ts tests/floor-plan-derived-cache.test.ts tests/route-encoding.test.ts tests/chunk-residency.test.ts tests/persistence.test.ts",
+  "ourOriginalOwnedBrowserAncestry": "webgl01-owned-ancestry-running.json",
+  "originalPhaseReceipt": "webgl01/phase-receipt.json",
+  "originalRawSHA256": "3680816c89632e3c233a74b9bb2def0d8cbcdd5b69e614c4f7f5d5a9749a8cf7",
+  "originalObservedChecks": 8,
+  "expectedChecks": 11,
+  "failureStage": "military original sixty-second native return and exit",
+  "failure": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.",
+  "interpretation": "Original FAIL remains. Other active Chromium overlapped its late flight stage, so this run cannot establish exclusive GPU or prove a production flight bug. No assertion, timeout or runtime changed. Root authorized one isolated original WebGL02 after release."
+}

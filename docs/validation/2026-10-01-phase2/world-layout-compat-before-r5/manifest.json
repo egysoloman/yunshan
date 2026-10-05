@@ -1,0 +1,14 @@
+{
+  "scope": "Immutable v2/latest-v3/legacy only, before real r5 cohort was identified",
+  "passed": 8,
+  "failed": 0,
+  "strictTypeScriptExitCode": 0,
+  "sourceHashesUnchanged": true,
+  "limitation": "This run does not prove the actual r5 browser profile can restore; its c70ebca5 cohort required the later historical generator gates.",
+  "files": {
+    "world-layout-v3-compat-results.json": "aa775f9114647819efaa897250b6f52fe66651ca4a0d31740fc0e96ae300d8f3",
+    "world-layout-v3-compat-tsc.log": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+    "snapshot-manifest.json": "479e6ab370989c6721e0a4a2d85c47a60a864ef35644522190f5d37573cb8de4",
+    "world-layout-v3-compat-tests.log": "04f99432c47352915974005a516226e50b7f3639adfdcbb8d2003eb45f5865be"
+  }
+}

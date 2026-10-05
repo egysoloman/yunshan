@@ -1,0 +1,19 @@
+{
+  "pid": 85304,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-concurrency=1",
+    "tests/market-company-return.test.ts"
+  ],
+  "identity": {
+    "pid": 85304,
+    "state": "R",
+    "parent": 85301,
+    "group": 85304,
+    "session": 85304,
+    "startTicks": 5488086
+  }
+}

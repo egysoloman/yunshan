@@ -1,0 +1,13 @@
+
+> yunshan-city@0.1.0 test:ui
+> node scripts/ui-test.mjs
+
+9:11:18 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+CEREMONY_PURCHASES {"last":[{"command":{"type":"purchase","targetId":"river-b1","value":2},"result":{"ok":true,"message":"在清溪水岸·西溪院·商肆1购买2份食物，花费22.9云币。"}},{"command":{"type":"purchase","targetId":"river-b1","value":2},"result":{"ok":true,"message":"在清溪水岸·西溪院·商肆1购买2份食物，花费22.9云币。"}}],"food":2,"quote":{"supplierGross":0,"inventoryCost":4}}
+CEREMONY_PRECONDITIONS {"food":2,"money":2239.2414439249014,"mode":"walk","aircraft":null,"alive":true,"building":{"id":"summit-b0","districtId":"summit","name":"九霄观云·北岭院·观云亭1","kind":"pavilion","position":{"x":-60,"y":540,"z":-1355},"width":23.200000000000003,"depth":22.8,"height":12.8,"floors":1,"rotation":0,"door":{"x":-60,"y":540.6,"z":-1343.6000000000001},"capacity":16,"seed":2017846157},"position":{"x":-60,"y":540.6,"z":-1343.6000000000001},"partner":"citizen-2"}
+30 UI integration checks passed, no browser errors.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

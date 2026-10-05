@@ -1,0 +1,190 @@
+{
+  "scope": "Pure geometry; existing saved descriptor. No command invocation, natural encounter or consumer claim.",
+  "sourceFixture": "tests/fixtures/civic-history/root13-four-day.world.json",
+  "siteId": "civic-0-hall",
+  "siteDescriptor": {
+    "id": "civic-0-hall",
+    "districtId": "civic-0",
+    "name": "现场补选参数街坊0hall",
+    "kind": "hall",
+    "position": {
+      "x": 96,
+      "y": 0,
+      "z": 0
+    },
+    "door": {
+      "x": 96,
+      "y": 0.6,
+      "z": 19
+    },
+    "width": 50,
+    "depth": 38,
+    "height": 11.4,
+    "floors": 3,
+    "rotation": 0,
+    "capacity": 120,
+    "seed": 103,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "stairGeometryRevision": 2,
+    "publicFloors": 1,
+    "requiredPermission": "official",
+    "floorPermissions": [
+      "public",
+      "official",
+      "official"
+    ],
+    "floorUses": [
+      "公共接待",
+      "行政办公",
+      "行政办公"
+    ],
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": 96,
+          "y": 0.6,
+          "z": -13
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": 96,
+          "y": 0.6,
+          "z": -13
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": 96,
+          "y": 4.3999999999999995,
+          "z": -13
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": 96,
+          "y": 4.3999999999999995,
+          "z": -13
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": 96,
+          "y": 8.2,
+          "z": -13
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": 96,
+          "y": 8.2,
+          "z": -13
+        }
+      }
+    ]
+  },
+  "originalAuthoritativeSpatialPredicate": "!citizen || Math.hypot(player.x-citizen.x, player.y-citizen.y, player.z-citizen.z) > 24",
+  "crossFloor": {
+    "playerPoint": {
+      "x": 72,
+      "y": 0.6,
+      "z": -18
+    },
+    "npcPoint": {
+      "x": 72,
+      "y": 4.3999999999999995,
+      "z": -18
+    },
+    "playerSupport": {
+      "kind": "room",
+      "floor": 0,
+      "y": 0.6,
+      "local": {
+        "x": -24,
+        "z": -18
+      }
+    },
+    "npcSupport": {
+      "kind": "room",
+      "floor": 1,
+      "y": 4.3999999999999995,
+      "local": {
+        "x": -24,
+        "z": -18
+      }
+    },
+    "distance": 3.7999999999999994,
+    "playerMayAccessOwnFloor": true,
+    "playerMayAccessTargetFloor": false,
+    "officialMayAccessTargetFloor": true,
+    "originalGiftSpatialPredicateRejects": false,
+    "uiDistancePredicateRejects": false
+  },
+  "sameFloorOpaqueWall": {
+    "playerPoint": {
+      "x": 119.3,
+      "y": 0.6,
+      "z": 9
+    },
+    "npcPoint": {
+      "x": 119.3,
+      "y": 0.6,
+      "z": 10.6
+    },
+    "playerSupport": {
+      "kind": "room",
+      "floor": 0,
+      "y": 0.6,
+      "local": {
+        "x": 23.299999999999997,
+        "z": 9
+      }
+    },
+    "npcSupport": {
+      "kind": "courtyard",
+      "floor": 0,
+      "y": 0.6,
+      "local": {
+        "x": 23.299999999999997,
+        "z": 10.6
+      }
+    },
+    "opaquePanel": {
+      "rect": {
+        "x0": 21.6,
+        "x1": 25,
+        "z0": 9.6,
+        "z1": 10
+      },
+      "bottom": 0,
+      "top": 2.8,
+      "kind": "solid"
+    },
+    "distance": 1.5999999999999996,
+    "continuousBodySegmentBlocked": true,
+    "originalGiftSpatialPredicateRejects": false,
+    "uiDistancePredicateRejects": false
+  },
+  "simulationConstructions": 0,
+  "worldFactoryCalls": 0,
+  "stepCalls": 0,
+  "giftCommands": 0
+}

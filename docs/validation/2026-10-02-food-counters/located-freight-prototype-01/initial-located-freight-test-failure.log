@@ -1,0 +1,36 @@
+✖ actual two-node unloads keep separate same-owner FIFO lots and conserve original goods and cash (65.693289ms)
+✔ a real farm pickup and subsequent native delivery retain private ownership and do not charge transport twice (202.979469ms)
+✔ captured genuine old freight remains byte-exact until new traffic activates tracking without guessing old nodes (65.651848ms)
+✔ ordinary FIFO retail acquisition exhausts receipt IDs without forgetting activation or creating stock (86.222667ms)
+✔ tracking identity, provenance and declaration corruptions all reject before changing the loaded city (413.467ms)
+✔ public fabricated or replayed arrival events cannot credit any goods or freight metric (47.001475ms)
+✔ located and genuine unlocated saves restore byte-exact and execute the same subsequent 24 ticks (700.338689ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1978.671791
+
+✖ failing tests:
+
+test at tests/located-freight.test.ts:1:3101
+✖ actual two-node unloads keep separate same-owner FIFO lots and conserve original goods and cash (65.693289ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 0
+  
+      at TestContext.<anonymous> (/tmp/yunshan-located-freight-prototype-20261002/tests/located-freight.test.ts:76:46)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

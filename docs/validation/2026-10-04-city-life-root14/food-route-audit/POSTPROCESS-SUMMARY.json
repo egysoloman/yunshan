@@ -1,0 +1,34 @@
+{
+  "categories": {
+    "CURRENTLY_RIDING": 37,
+    "CURRENTLY_MOVING_NO_NEXT_LEG_BLOCK_FOUND": 189,
+    "BODY_GUARD_WAITING": 14
+  },
+  "zeroHunger": 70,
+  "movingZeroHunger": 61,
+  "waitingLintelFalsePositiveWitnesses": 14,
+  "waitingActors": 14,
+  "waitingSites": [
+    "academy-b54",
+    "east-b27",
+    "east-b33",
+    "east-b37",
+    "east-b59",
+    "government-b19",
+    "government-b41",
+    "west-b32",
+    "west-b33"
+  ],
+  "futurePendingLintelActors": 39,
+  "futurePendingLintelActorsByCurrentState": {
+    "moving": 16,
+    "riding": 9,
+    "physicalWaiting": 14
+  },
+  "allAffordableOfferPairs": 37440,
+  "changedHypotheticalChoice": 99,
+  "movingReferenceRemainingMinMeters": 33.014082965024016,
+  "movingReferenceRemainingMaxMeters": 3886.980784183625,
+  "movingReferenceETAAboveHungerZeroMinutes": 156,
+  "scope": "CSV/JSON arithmetic over original parsed artifacts plus successful pure-query outputs; no TS execution, factory, Simulation, ticks, test, GPU or business edit."
+}

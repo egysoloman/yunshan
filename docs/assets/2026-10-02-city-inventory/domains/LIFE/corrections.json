@@ -1,0 +1,1059 @@
+{
+  "authorized_scope": "仅确证6旧行修订与无ENV同shape的2新增；既有ID、其余220旧行字节字段值稳定；其余审查建议未强制执行。",
+  "applied_changes": [
+    {
+      "asset_id": "LIFE-002",
+      "reason": "床垫实际发射在107，原112–118为楼梯与屋顶；只修证据并补真实床锚依赖，不改母版/类型/状态",
+      "changed_fields": {
+        "现有证据": {
+          "before": "src/rendering/architecture-bodies.ts:112–118",
+          "after": "src/rendering/architecture-bodies.ts:105–107（107发浅色.2m床垫顶块）；src/architecture-floor-plan.ts:106–109；src/renderer.ts:413（原profile浅色床垫块）"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空",
+          "after": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；依附LIFE-001的home-bed真实fixture上表面，current床垫渲染位于fixture.top-.1；不因此新增床上rest/use点"
+        }
+      }
+    },
+    {
+      "asset_id": "LIFE-028",
+      "reason": "原profile可见吊灯和current保留主阁路径已接；普通v4楼体灯体仍缺",
+      "changed_fields": {
+        "状态": {
+          "before": "缺失待制",
+          "after": "已集成代码生成"
+        },
+        "现有证据": {
+          "before": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "after": "src/renderer.ts:455（原near每层两灯面与吊杆）；src/world.ts:330、541；src/world.ts:7、546–550；src/architecture-floor-plan.ts:216–217；src/renderer.ts:279–287；src/rendering/architecture-detail.ts:220–222（current-v4 core-main保原发射器，普通楼提前return不消费）；src/renderer.ts:107、804–815（独立室内PointLight不是灯具模型）"
+        },
+        "生产方式": {
+          "before": "程序精细体素+材质，复杂视觉件可选Tripo",
+          "after": "原near程序体素amber灯面+wood吊杆；current core-main与正式历史profile可消费，普通v4灯体迁移/细化待制"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；按真实室内布局生成占用；沙发/床软垫可选Tripo视觉母版，不能替代共享碰撞/使用点",
+          "after": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；绑定原floor/层高/室内切层与灯位；current普通home走新body无此吊灯mesh，已有PointLight光源不得冒认灯具；供电/局部灯光适配另验"
+        },
+        "派生规则": {
+          "before": "尺寸/配色按同母版参数派生，不重复计算独立模型",
+          "after": "原每层两灯实例复用同一粗灯体；不按楼层/灯面配色计新模型；current普通楼需按真实usePoint和天花净空适配"
+        },
+        "验收要求": {
+          "before": "真实WebGL近/远可辨；细体素与PBR、光照和轮廓验收；资源按所有权释放；代码存在不等于美术合格",
+          "after": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格"
+        }
+      }
+    },
+    {
+      "asset_id": "LIFE-118",
+      "reason": "保留主阁的数据/信息网络/科学研究层确有机柜粗几何，不是只有系统数值",
+      "changed_fields": {
+        "状态": {
+          "before": "缺失待制",
+          "after": "已集成代码生成"
+        },
+        "现有证据": {
+          "before": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "after": "src/renderer.ts:424–425（3×4木柜体+cyan前板）；src/world.ts:330、541（core-main及数据楼层用途）；src/world.ts:7、546–550；src/architecture-floor-plan.ts:216–217；src/renderer.ts:279–287；src/rendering/architecture-detail.ts:220–222（current-v4 core-main仍走原路径，数据西翼新body不消费专用机柜）"
+        },
+        "生产方式": {
+          "before": "程序精细体素+材质，复杂视觉件可选Tripo",
+          "after": "原near数据用途分支程序体素机柜/面板；current主阁可消费，专用v4翼楼设备挂接与详模待制"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；教师/科研/医生实际用途点与到岗分钟/材料/钱契约；不得堵病人和付款人位置",
+          "after": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；消费实际楼层program/facility/原层高；current core-main数据层保粗机柜，current普通/数据西翼仅通用fixture；真实科研/通讯用途点及运行状态绑定另制"
+        },
+        "派生规则": {
+          "before": "尺寸/配色按同母版参数派生，不重复计算独立模型",
+          "after": "每命中层3行×4列为12实例，共同粗机柜母版；不按每柜/每数据层计独立模型，不推定设备实际运行"
+        },
+        "验收要求": {
+          "before": "真实WebGL近/远可辨；细体素与PBR、光照和轮廓验收；资源按所有权释放；代码存在不等于美术合格",
+          "after": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格"
+        }
+      }
+    },
+    {
+      "asset_id": "LIFE-141",
+      "reason": "主阁议会层已发长台与席位阵列；本次只修状态/范围，类型重分类建议保留未强改",
+      "changed_fields": {
+        "状态": {
+          "before": "缺失待制",
+          "after": "已集成代码生成"
+        },
+        "现有证据": {
+          "before": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "after": "src/renderer.ts:426–429（议事长台+座面/靠背阵列）；src/world.ts:330、541（core-main议会/听证楼层）；src/world.ts:7、546–550；src/architecture-floor-plan.ts:216–217；src/renderer.ts:279–287；src/rendering/architecture-detail.ts:220–222（current主阁保原路径，current附属council新body不消费该阵列）"
+        },
+        "生产方式": {
+          "before": "程序精细体素+材质，复杂视觉件可选Tripo",
+          "after": "原near程序议事长台与议席阵列粗形；current主阁有该配置，附属v4议事堂专用布局与精细家具待制"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；只读真实政策/预算/案件/档案/身份；保权限与隐私，不能装饰屏伪造系统反馈",
+          "after": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；读议会/听证program与实际楼层权限；原席阵列由width/depth计算并留中轴，真实可坐/议席权利/发言交互不得由视觉阵列推定"
+        },
+        "派生规则": {
+          "before": "尺寸/配色按同母版参数派生，不重复计算独立模型",
+          "after": "原长台与多rows/columns议席复用一次粗配置；每席/每行不算新模型；类型/桌椅共享母版合并建议保留corrections未强改"
+        },
+        "验收要求": {
+          "before": "真实WebGL近/远可辨；细体素与PBR、光照和轮廓验收；资源按所有权释放；代码存在不等于美术合格",
+          "after": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格"
+        }
+      }
+    },
+    {
+      "asset_id": "LIFE-146",
+      "reason": "主阁地下柜架真实消费原near路径；专有卷宗详模和新馆配置仍缺",
+      "changed_fields": {
+        "状态": {
+          "before": "缺失待制",
+          "after": "已集成代码生成"
+        },
+        "现有证据": {
+          "before": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "after": "src/renderer.ts:414–423（地下柜架/四层薄板）；src/renderer.ts:436–437（历史archives设施柜）；src/world.ts:330、540；src/world.ts:7、546–550；src/architecture-floor-plan.ts:216–217；src/renderer.ts:279–287；src/rendering/architecture-detail.ts:220–222（current-v4 core-main两地下层保原路径，附属档案馆新body不消费专用档案柜）"
+        },
+        "生产方式": {
+          "before": "程序精细体素+材质，复杂视觉件可选Tripo",
+          "after": "原near程序档案柜/地下层架体粗形；current主阁可消费，档案卷宗详模/真实查询内容与新馆专用资产待制"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；只读真实政策/预算/案件/档案/身份；保权限与隐私，不能装饰屏伪造系统反馈",
+          "after": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；绑定实际basementUses/floorUses与权限；柜/薄层条只作粗几何，不冒认具体书册/卷宗；真实档案查询与新profile柜占用合同另验"
+        },
+        "派生规则": {
+          "before": "尺寸/配色按同母版参数派生，不重复计算独立模型",
+          "after": "柜架按原地下行列/层板参数复用；每柜/每板/每卷宗不各计新母版；不重复LIFE-106书册、LIFE-108书柜语义"
+        },
+        "验收要求": {
+          "before": "真实WebGL近/远可辨；细体素与PBR、光照和轮廓验收；资源按所有权释放；代码存在不等于美术合格",
+          "after": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格"
+        }
+      }
+    },
+    {
+      "asset_id": "LIFE-197",
+      "reason": "正式旧home详情已有晾杆/三衣片，current-v4普通home提前return未消费；不能把历史生产组件当隔离原型",
+      "changed_fields": {
+        "状态": {
+          "before": "缺失待制",
+          "after": "已集成代码生成"
+        },
+        "现有证据": {
+          "before": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "after": "src/rendering/architecture-detail.ts:292–307（home、side<0且seed偶数发晾杆/三衣片）；src/rendering/architecture-detail.ts:443–455（实际InstancedMesh接入）；src/rendering/architecture-detail.ts:220–222、139–215（current-v4普通home新详情提前return无晾衣）；src/world.ts:546–547；src/architecture-floor-plan.ts:217（core-main虽保原路径但kind不是home，不生成该晾架）"
+        },
+        "生产方式": {
+          "before": "程序精细体素+材质，复杂视觉件可选Tripo",
+          "after": "正式历史profile住宅近景程序体素晾杆/衣片；current-v4普通home迁移与实际晾晒家务绑定待制"
+        },
+        "依赖接口": {
+          "before": "米单位/+Y向上；物理占用与安装接口0.2m网格；共享FloorPlan/真实支撑；保留门洞、楼梯孔、.35m身体/1.72m眼高和功能点净空；读取真实文化作品/库存/到场/仪式时数；涉及动物角色母版见CHAR域，不从数值反推已渲染",
+          "after": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；原住宅侧墙/阳台安装锚、near驻留和实例上限；仅原home且seed偶数左侧分支；current普通home不消费该件，core-main不为home不能冒称有晾架；家务分钟/衣物库存未因此实现"
+        },
+        "派生规则": {
+          "before": "尺寸/配色按同母版参数派生，不重复计算独立模型",
+          "after": "2.8m杆和三衣片共粗组件组合；三个衣色/各住宅实例不另计模型；current挂接必须使用新body真实壁段并保门窗净空"
+        },
+        "验收要求": {
+          "before": "真实WebGL近/远可辨；细体素与PBR、光照和轮廓验收；资源按所有权释放；代码存在不等于美术合格",
+          "after": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格"
+        }
+      }
+    }
+  ],
+  "appended_rows": [
+    {
+      "asset_id": "LIFE-227",
+      "中文名称": "住宅壁边种植长槽粗组件",
+      "类别": "文化生活",
+      "条目类型": "基础组件",
+      "用途关联系统": "住宅生活装饰/墙边绿化",
+      "状态": "已集成代码生成",
+      "现有证据": "src/rendering/architecture-detail.ts:292–297（原home两侧长槽体1.2×.6×.4与槽沿1.4×.2×.6）；src/rendering/architecture-detail.ts:443–455（实际实例接入）；src/rendering/architecture-detail.ts:220–222（current普通home提前走新详情）；src/world.ts:546–547；src/architecture-floor-plan.ts:217（core-main保原路径但非home，不生成该槽）",
+      "生产方式": "原profile近景程序体素槽体/槽沿；尚无外部GLB，current普通home适配/细化待制",
+      "依赖接口": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；原home侧墙/阳台安装锚，floor0/近景驻留/实例预算；current普通home必须另接新body真实壁段；跨域ENV-096独立花槽/树池、ENV-097独立花盆不同形体与安装接口，不重复生成同件",
+      "基础母版ID": "LIFE-227",
+      "派生规则": "两侧长槽实例复用；原seed%2槽色为参数，不每色算母版；ENV-072绿化组合可引用本组件，ENV不再另计同一壁边槽",
+      "验收要求": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格；这里是长槽粗组件，不把它冒认具有真实口壁的独立罐/花盆"
+    },
+    {
+      "asset_id": "LIFE-228",
+      "中文名称": "住宅长槽内三株茎花粗组合",
+      "类别": "文化生活",
+      "条目类型": "组合模板",
+      "用途关联系统": "住宅盆栽装饰/长槽内种植组合",
+      "状态": "已集成代码生成",
+      "现有证据": "src/rendering/architecture-detail.ts:298–301（长槽内3茎与茎端花叶盒）；src/rendering/architecture-detail.ts:292–297（依附长槽）；src/rendering/architecture-detail.ts:443–455（实例接入）；src/rendering/architecture-detail.ts:220–222、139–215（current普通home新详情无该分支）；src/world.ts:546–547；src/architecture-floor-plan.ts:217（core-main非home，不生成该组合）",
+      "生产方式": "原profile近景程序三茎/花叶附长槽；粗花叶块未证明具体植物物种/真实花盆，current普通home缺挂接",
+      "依赖接口": "米单位/+Y向上；保0.2m物理/编辑格、共享层高/权限/门孔/楼梯孔、.35m身体与1.72m眼高净空；原代码粗几何不等于新功能点已实现；依附LIFE-227槽内安装点；与ENV-072街院绿化组合跨域复用、ENV-061花灌木为另一待制形体；不新增三个独立植物模型/库存；current新body需真挂点，未有生长/浇水家务合同",
+      "基础母版ID": "LIFE-227",
+      "派生规则": "stem[-.4,0,.4]与seed%3花色共一组合；槽体计在227，此行只计种植组合规则，不重复算长槽模型",
+      "验收要求": "已有程序粗件不是外部GLB/高细度PBR成品；新profile适配、真实几何/用途点一致、近远与昼夜WebGL和普通第一人称验收仍待，不据代码存在宣称美术合格；未知茎端盒只记粗花叶，不认定具体物种/罐/书"
+    }
+  ],
+  "cross_domain_mapping": [
+    {
+      "life_asset_id": "LIFE-227",
+      "environment_asset_id": "ENV-096",
+      "relationship": "Different installation/shape scope: wall-side small legacy trough versus future free-standing trough/tree-pit border. ENV-096 explicitly excludes facade/window trough; no shared exact 296–297 model existed in ENV. Keep only LIFE-227 as owner of the exact legacy facade trough."
+    },
+    {
+      "life_asset_id": "LIFE-227",
+      "environment_asset_id": "ENV-097",
+      "relationship": "Different shape: actual long trough with rim versus proposed free-standing pot/container. Do not claim legacy trough is a finished freestanding pot."
+    },
+    {
+      "life_asset_id": "LIFE-228",
+      "environment_asset_id": "ENV-072",
+      "relationship": "Placement/greening template references LIFE-227/228 exact legacy trough/plant assembly, no duplicate component or standalone plant model count."
+    },
+    {
+      "life_asset_id": "LIFE-228",
+      "environment_asset_id": "ENV-061",
+      "relationship": "Existing three crude stem/tip boxes are not the distinct proposed branching shrub master or identified species; keep ENV-061 pending."
+    }
+  ],
+  "all_review_records_retained": [
+    {
+      "review_id": "LR-01",
+      "life_ids": [
+        "LIFE-002"
+      ],
+      "names": {
+        "LIFE-002": "床垫基础块"
+      },
+      "issue_kind": "确切证据错误",
+      "original_fields": {
+        "LIFE-002": {
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-001",
+          "现有证据": "src/rendering/architecture-bodies.ts:112–118"
+        }
+      },
+      "title": "床垫证据行号实际指向楼梯与屋顶",
+      "source_evidence": [
+        "src/rendering/architecture-bodies.ts:105–107",
+        "src/rendering/architecture-bodies.ts:110–118",
+        "src/renderer.ts:413"
+      ],
+      "legacy_profile": "原near住宅床架/浅色床垫块在 renderer.ts:413。",
+      "current_production_profile": "v4床底框在106，浅色.2m顶块在107；112–118是楼梯/屋顶，不是床垫。",
+      "recommended_change": "保已集成状态；把证据112–118改95–108尤其107。床垫作为独立基础组件可自指LIFE-002，依赖接口指LIFE-001；若母版ID指床组合，明确这是组成而非尺寸派生，不新增模型计数。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-02",
+      "life_ids": [
+        "LIFE-197"
+      ],
+      "names": {
+        "LIFE-197": "晾晒架"
+      },
+      "issue_kind": "状态范围漏报",
+      "original_fields": {
+        "LIFE-197": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-197",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "晾晒杆和三衣片已在原详情路径发出",
+      "source_evidence": [
+        "src/rendering/architecture-detail.ts:292–307",
+        "src/rendering/architecture-detail.ts:220–222",
+        "src/rendering/architecture-detail.ts:443–455"
+      ],
+      "legacy_profile": "住宅、side<0且seed偶数时发2.8m杆和3片衣物及挂点；详情管理器已建InstancedMesh，但受驻留与实例预算。",
+      "current_production_profile": "v4普通住宅在222提前return；新详情139–215没有晾衣分支。core-main不为home，所以当前默认普通住宅没有这一生活装饰。",
+      "recommended_change": "状态写已有旧profile代码生成，现有证据列准确门槛；验收要求列current普通住宅挂接/细化待制。若按current-only统计仍保缺失，但必须写既有legacy母版可复用，不说完全无mesh。晾杆+衣片是一套，不每衣色再计新模型。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-03",
+      "life_ids": [
+        "LIFE-118"
+      ],
+      "names": {
+        "LIFE-118": "数据/通信机柜"
+      },
+      "issue_kind": "生产粗几何误写缺失",
+      "original_fields": {
+        "LIFE-118": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-118",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        }
+      },
+      "title": "数据通信机柜不是只有系统数值",
+      "source_evidence": [
+        "src/renderer.ts:424–425",
+        "src/world.ts:330",
+        "src/world.ts:541",
+        "src/architecture-floor-plan.ts:216–217",
+        "src/renderer.ts:279–287"
+      ],
+      "legacy_profile": "原core城区数据设施/名称/楼层用途命中时有3×4木箱+cyan前板机柜。",
+      "current_production_profile": "core-main明确排除新body，floorUses的数据中心/信息网络/科学研究层仍触发该分支；新profile数据西翼仅通用table fixture。",
+      "recommended_change": "改已集成代码生成并注明current core-main粗机柜/旧profile已接、current专用翼楼专业设备待制；不得称已验高细度/PBR或真正可操作通信设备。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-04",
+      "life_ids": [
+        "LIFE-141"
+      ],
+      "names": {
+        "LIFE-141": "会议桌及席位"
+      },
+      "issue_kind": "生产粗几何/类型",
+      "original_fields": {
+        "LIFE-141": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-141",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "议事桌和排状议席已渲染，条目为布局组合",
+      "source_evidence": [
+        "src/renderer.ts:426–429",
+        "src/world.ts:541",
+        "src/architecture-floor-plan.ts:217"
+      ],
+      "legacy_profile": "原council设施/名称/用途分支有会议长台+行列座面/靠背。",
+      "current_production_profile": "current core-main第19/20等议会用途命中；current council附属hall走新body，无专用议席阵列。",
+      "recommended_change": "可改已集成代码生成；类型建议组合模板，桌架复用LIFE-032，议席可定义一次通用座椅母版；记录按rows/columns实例排布，不每席/会议厅算模型。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-05",
+      "life_ids": [
+        "LIFE-146"
+      ],
+      "names": {
+        "LIFE-146": "档案卷宗柜"
+      },
+      "issue_kind": "生产粗几何误写缺失",
+      "original_fields": {
+        "LIFE-146": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-146",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "档案柜粗架在保留主阁地下路径存在",
+      "source_evidence": [
+        "src/renderer.ts:414–423",
+        "src/renderer.ts:436–437",
+        "src/world.ts:540",
+        "src/architecture-floor-plan.ts:217"
+      ],
+      "legacy_profile": "原地下两层有7×12柜架/四层薄板；原archives设施另有六柜。",
+      "current_production_profile": "current core-main地下继续用旧near emitter并保档案/金库用途；current附属档案馆已走新body，只有通用桌。",
+      "recommended_change": "改集成粗档案柜/架体状态，注明卷宗文件/书册详模、真实档案交互与附属馆适配待制；不要把薄板识别成具体卷宗模型。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-06",
+      "life_ids": [
+        "LIFE-028"
+      ],
+      "names": {
+        "LIFE-028": "室内顶灯"
+      },
+      "issue_kind": "生产粗几何误写缺失",
+      "original_fields": {
+        "LIFE-028": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-028",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "吊顶灯具粗杆与发光面在主阁仍接入",
+      "source_evidence": [
+        "src/renderer.ts:455",
+        "src/renderer.ts:107",
+        "src/renderer.ts:804–815",
+        "src/renderer.ts:279–287"
+      ],
+      "legacy_profile": "原near每层生成两块amber灯面与吊杆。",
+      "current_production_profile": "current core-main保留该灯具路径；普通新body无吊顶灯mesh，但室内PointLight仍按真实usePoint安置。",
+      "recommended_change": "记录已有原profile/主阁吊灯代码生成，current普通楼灯体待挂接；区分可见灯体与已存在的室内PointLight，不能把光源存在当灯模型完成。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-07",
+      "life_ids": [
+        "LIFE-066",
+        "LIFE-108"
+      ],
+      "names": {
+        "LIFE-066": "商铺货架框架",
+        "LIFE-108": "书架书柜"
+      },
+      "issue_kind": "可复用母版漏报",
+      "original_fields": {
+        "LIFE-066": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-066",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-108": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-108",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        }
+      },
+      "title": "通用粗柜/架体已有，但商业货架和书柜语义需分清",
+      "source_evidence": [
+        "src/renderer.ts:407–411",
+        "src/renderer.ts:419–420",
+        "src/rendering/architecture-detail.ts:315–317",
+        "src/renderer.ts:279–287"
+      ],
+      "legacy_profile": "原每near楼层发2.4m高柜块；原工坊/农场/码头详情发两立柱+三层搁板及小货块。",
+      "current_production_profile": "current core-main室内粗柜/地下架仍存在；current普通商铺/书院/工坊新body没有该架体。",
+      "recommended_change": "至少在066/108现有证据写原程序粗柜/架体及current主阁可复用；若改集成要把名称限定为粗架体，专门商店货架/书柜功能仍待制。066与108共享架母版，书柜作为用途/尺寸派生或组合，避免同一粗柜重复算独立母版。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-08",
+      "life_ids": [
+        "LIFE-071",
+        "LIFE-072"
+      ],
+      "names": {
+        "LIFE-071": "杂货包装箱",
+        "LIFE-072": "仓储货箱"
+      },
+      "issue_kind": "状态范围与计数",
+      "original_fields": {
+        "LIFE-071": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-071",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-072": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-072",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "四件工坊货箱粗模型已有，杂货/仓储不应重复母版",
+      "source_evidence": [
+        "src/renderer.ts:553–556",
+        "src/renderer.ts:523",
+        "src/renderer.ts:279–287"
+      ],
+      "legacy_profile": "非core工坊near exterior发4个1.2×1.6×1.2mwood crate。",
+      "current_production_profile": "v4普通工坊在buildHouse287提前返回，不调用原programExterior；core-main不是workshop，所以这批crate仅历史profile现有。",
+      "recommended_change": "选072或071为通用货箱母版，记历史程序粗件已集成/current迁移待制；另一行按包装/用途派生。箱封条、货主FIFO与真实数量显示仍缺，不由四静态箱推现库存。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-09",
+      "life_ids": [
+        "LIFE-077"
+      ],
+      "names": {
+        "LIFE-077": "仓储货架梁柱"
+      },
+      "issue_kind": "证据补充/母版重叠",
+      "original_fields": {
+        "LIFE-077": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-077",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "已有两柱三板架，梁柱可复用但非完整仓储系统",
+      "source_evidence": [
+        "src/rendering/architecture-detail.ts:315–317",
+        "src/rendering/architecture-detail.ts:220–222"
+      ],
+      "legacy_profile": "原workshop/farm/dock有2柱×3层水平板；小块放在板上。",
+      "current_production_profile": "新profile无这一program分支。",
+      "recommended_change": "077证据写已有旧profile三层架骨架；与066货架框架通过同一个通用框架母版协调。仓储承重、货位合同和current使用点仍缺，不能改成完整仓库已集成。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-10",
+      "life_ids": [
+        "LIFE-083"
+      ],
+      "names": {
+        "LIFE-083": "工坊工具架"
+      },
+      "issue_kind": "保留缺失/澄清",
+      "original_fields": {
+        "LIFE-083": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-083",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "工具架不应把板上未命名货块当工具",
+      "source_evidence": [
+        "src/rendering/architecture-detail.ts:315–317"
+      ],
+      "legacy_profile": "有旧粗架和小货块，但代码没有工具命名/几何/挂点。",
+      "current_production_profile": "新profile更无专门工具视觉。",
+      "recommended_change": "保缺失待制；现有证据加可复用旧架骨架/066或077依赖；工具本体与挂接另外核，不将小盒命名为具体工具。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-11",
+      "life_ids": [
+        "LIFE-106"
+      ],
+      "names": {
+        "LIFE-106": "书册母版"
+      },
+      "issue_kind": "未发现所疑误标",
+      "original_fields": {
+        "LIFE-106": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-106",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        }
+      },
+      "title": "书册母版未找到确切可识别几何",
+      "source_evidence": [
+        "src/renderer.ts:419–420",
+        "src/rendering/architecture-detail.ts:317",
+        "src/rendering/architecture-detail.ts:139–215"
+      ],
+      "legacy_profile": "地下柜中3.8×.5×.14的长薄条是层板/统一内容条；原货架.4m小盒没有book名称或封面/书脊。",
+      "current_production_profile": "current保留主阁柜条，但无具名书册/逐本书脊；新profile无书册。",
+      "recommended_change": "保缺失待制，不能为了增已集成数把未知盒条认书。可写已有架体但可识别书页/封面/脊母版待制，实际像素未核。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-12",
+      "life_ids": [
+        "LIFE-046",
+        "LIFE-047",
+        "LIFE-049"
+      ],
+      "names": {
+        "LIFE-046": "碗盘通用容器",
+        "LIFE-047": "杯壶器具",
+        "LIFE-049": "茶具壶及杯组合"
+      },
+      "issue_kind": "未发现所疑误标",
+      "original_fields": {
+        "LIFE-046": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-046",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-047": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-047",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-049": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-049",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "罐杯壶不应由未命名盒子推定存在",
+      "source_evidence": [
+        "src/rendering/architecture-detail.ts:296–300",
+        "src/rendering/architecture-detail.ts:317",
+        "src/renderer.ts:412"
+      ],
+      "legacy_profile": "296–300是有茎叶的长花槽；317只有货块；412为桌上扁块，均无jar/cup/pot器具语义和口壁几何。",
+      "current_production_profile": "current新body没有器皿分支，core-main桌面扁块也不能当杯罐。",
+      "recommended_change": "保现有器皿行缺失；若旧图像有罐需另做像素或具名代码定位，不凭尺寸猜。049多壶杯若是摆放套装，建议组合模板，依赖047，避免一套茶具和杯壶重复模型计数。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-13",
+      "life_ids": [
+        "LIFE-197",
+        "LIFE-212"
+      ],
+      "names": {
+        "LIFE-197": "晾晒架",
+        "LIFE-212": "家庭家务动线配置"
+      },
+      "issue_kind": "清单遗漏",
+      "original_fields": {
+        "LIFE-197": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-197",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-212": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-212",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "生活花槽/种植装饰未在LIFE226逐项列出",
+      "source_evidence": [
+        "src/rendering/architecture-detail.ts:292–301",
+        "src/renderer.ts:526–534",
+        "src/rendering/architecture-detail.ts:220–222"
+      ],
+      "legacy_profile": "原home近详情有长槽体、压边、三株茎/花叶；原外立面楼层还发绿色1.6×.8×.6块。",
+      "current_production_profile": "普通v4住宅提前return后不消费上述程序生活装饰；不是current已有完整花盆。",
+      "recommended_change": "没有现成LIFE盆栽ID，不捏造ID。补一次历史长花槽/槽内植物组合，或明确归ENV花槽/绿化且LIFE212引用该真实条目；不要新增重复独立花盆母版来冒称长槽为罐盆。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-14",
+      "life_ids": [
+        "LIFE-117"
+      ],
+      "names": {
+        "LIFE-117": "能源调度控制台"
+      },
+      "issue_kind": "范围限定/部分可复用",
+      "original_fields": {
+        "LIFE-117": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-117",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        }
+      },
+      "title": "能源调度有旧专业粗件及当前主阁通用调度屏",
+      "source_evidence": [
+        "src/renderer.ts:430–435",
+        "src/world.ts:333",
+        "src/world.ts:541",
+        "src/world.ts:546–547"
+      ],
+      "legacy_profile": "原energy南翼分支发stone基座/cyan立件/光带；调度分支另发大蓝屏和两桌。",
+      "current_production_profile": "current南翼是新body，专用energy分支不消费；core-main能源调度用途含调度，命中433–435通用屏桌而非430专用立件。",
+      "recommended_change": "保专业能源控制台待制或拆明已有通用调度屏桌；证据必须写当前主阁部分粗几何存在。专用设备不能被通用cyan块当完成。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-15",
+      "life_ids": [
+        "LIFE-140"
+      ],
+      "names": {
+        "LIFE-140": "公共公告屏/告示板"
+      },
+      "issue_kind": "范围限定/部分可复用",
+      "original_fields": {
+        "LIFE-140": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-140",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "原发光公告板与主阁大屏可复用，政策内容绑定仍未核",
+      "source_evidence": [
+        "src/renderer.ts:433–435",
+        "src/renderer.ts:562–566",
+        "src/rendering/architecture-detail.ts:460–480"
+      ],
+      "legacy_profile": "原hall/school/police exterior有amber板；主阁调度层有大cyan屏；详情有实际建筑名称/功能Canvas门牌。",
+      "current_production_profile": "ordinary v4外观板被提前return绕过；core-main大屏存在，v4真实门牌仍生成，但不是公告内容屏。",
+      "recommended_change": "别笼统写无mesh；保公共公告屏功能资产缺失并注明已有粗板/牌接口。门牌归BUILT，政策公告板不复计同一门牌，内容须真实政策/预算状态。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-16",
+      "life_ids": [
+        "LIFE-147"
+      ],
+      "names": {
+        "LIFE-147": "城市信息查询终端"
+      },
+      "issue_kind": "保留缺失/澄清",
+      "original_fields": {
+        "LIFE-147": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-147",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "城市查询终端不能把数据柜蓝面当交互终端",
+      "source_evidence": [
+        "src/renderer.ts:425",
+        "src/renderer.ts:434",
+        "src/rendering/architecture-detail.ts:480"
+      ],
+      "legacy_profile": "机柜前面/调度大屏/门牌mesh已有，但未见城市查询终端独立形体或world交互点绑定。",
+      "current_production_profile": "core-main这些蓝面仍存在，新profile仅table/usePoint；页面查询不等于世界终端。",
+      "recommended_change": "保缺失，证据写已有屏面可复用但查询终端主体/挂点未核；不要从颜色或UI系统推终端mesh完成。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-17",
+      "life_ids": [
+        "LIFE-169",
+        "LIFE-173"
+      ],
+      "names": {
+        "LIFE-169": "画框及展架",
+        "LIFE-173": "展陈介绍牌"
+      },
+      "issue_kind": "部分现有/保留缺失",
+      "original_fields": {
+        "LIFE-169": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-169",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-173": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-173",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "展台已有、画框与作品介绍牌仍不能互相冒认",
+      "source_evidence": [
+        "src/renderer.ts:438–439",
+        "src/renderer.ts:732–750",
+        "src/rendering/architecture-detail.ts:460–480",
+        "src/world.ts:541"
+      ],
+      "legacy_profile": "博物馆/展览分支生成六组石台+墙/屋顶分层物；另有建筑门牌和楼层名称标签。",
+      "current_production_profile": "core-main博物馆/展览楼层仍用原分支，名称牌随楼层生成；没有画作画框或真实作品介绍内容。",
+      "recommended_change": "169分清画框缺失与展台可复用；可补一次已集成粗展台母版；173保待制并引用已有Canvas牌技术，门牌/楼层标签不等于展陈介绍。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-18",
+      "life_ids": [
+        "LIFE-134",
+        "LIFE-135",
+        "LIFE-160",
+        "LIFE-161",
+        "LIFE-162",
+        "LIFE-163"
+      ],
+      "names": {
+        "LIFE-134": "能源调度室配置",
+        "LIFE-135": "数据机房配置",
+        "LIFE-160": "公开议事大厅配置",
+        "LIFE-161": "市长/公务办公配置",
+        "LIFE-162": "预算金库内室配置",
+        "LIFE-163": "公共档案阅览配置"
+      },
+      "issue_kind": "组合存在但质量/范围不足",
+      "original_fields": {
+        "LIFE-134": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-134",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-135": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-135",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-160": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-160",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-161": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-161",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-162": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-162",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-163": {
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-163",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "主阁专用粗室内配置不应笼统说只有系统数据",
+      "source_evidence": [
+        "src/renderer.ts:414–448",
+        "src/world.ts:330",
+        "src/world.ts:540–541",
+        "src/architecture-floor-plan.ts:217"
+      ],
+      "legacy_profile": "原能源翼/数据设施/议会/市长/地下金库与档案已有程序粗配置。",
+      "current_production_profile": "current core-main保留地下两层架、数据层12柜、议事长台与席列、市长/决策层大桌/蓝屏/边座；能源层是通用调度屏桌。普通专用附属馆新profile没有继承这些专业配置。",
+      "recommended_change": "六行现有证据逐一写已有主阁粗组合，且新profile翼楼/正式功能绑定/精细美术待制。若状态表达资产有没有，可改集成粗模板；若表达目标成熟配置，可保缺失但不得声称完全无生产mesh。需统一全表状态口径，不把一张成熟缺失当整个老模板不存在。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-19",
+      "life_ids": [
+        "LIFE-016",
+        "LIFE-021",
+        "LIFE-081",
+        "LIFE-112",
+        "LIFE-151"
+      ],
+      "names": {
+        "LIFE-016": "办公桌桌架",
+        "LIFE-021": "餐桌桌架",
+        "LIFE-081": "制造工作台",
+        "LIFE-112": "实验台",
+        "LIFE-151": "警务值班桌"
+      },
+      "issue_kind": "母版/计数口径",
+      "original_fields": {
+        "LIFE-016": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-016",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-021": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-021",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-081": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-081",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-112": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-112",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        },
+        "LIFE-151": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-151",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "通用工作桌与用途桌架之间缺复用边界",
+      "source_evidence": [
+        "src/architecture-floor-plan.ts:102–104",
+        "src/rendering/architecture-bodies.ts:99–101",
+        "src/renderer.ts:407–410"
+      ],
+      "legacy_profile": "旧各用途楼near都有通用桌。",
+      "current_production_profile": "v4各非market usePoint可放table；初表032已经正确集成这一骨架。",
+      "recommended_change": "这五行若只是桌架换用途/尺寸，指向032并改尺寸用途派生或组合；若确需不同台面/抽屉/仪器结构，名称和接口明确新增结构，保待制但不可同一两腿桌当五独立模型。不能由现有桌推实验室/制造/警务完整设备已完成。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-20",
+      "life_ids": [
+        "LIFE-111"
+      ],
+      "names": {
+        "LIFE-111": "教室桌椅排布接口"
+      },
+      "issue_kind": "条目类型/模型计数",
+      "original_fields": {
+        "LIFE-111": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-111",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失"
+        }
+      },
+      "title": "桌椅排布接口本身不是基础可视组件",
+      "source_evidence": [
+        "src/architecture-floor-plan.ts:187–188",
+        "src/architecture-floor-plan.ts:102–104"
+      ],
+      "legacy_profile": "无具名教室桌椅布局母版；原near只通用桌架。",
+      "current_production_profile": "v4FloorPlan真实usePoints/fixture合同存在，无教室椅排布局。",
+      "recommended_change": "改组合模板或将接口并入128普通教室配置的依赖接口；若保行，明确程序布局规则，不计独立3D模型。桌/椅母版各只计一次。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-21",
+      "life_ids": [
+        "LIFE-156"
+      ],
+      "names": {
+        "LIFE-156": "监所床位/储物组合"
+      },
+      "issue_kind": "条目类型/母版复用",
+      "original_fields": {
+        "LIFE-156": {
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-156",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "床位加储物是空间组合，监所专有组件尚缺",
+      "source_evidence": [
+        "src/architecture-floor-plan.ts:106–109",
+        "src/rendering/architecture-bodies.ts:105–107"
+      ],
+      "legacy_profile": "现有住宅床与通用柜不能证明监所存在。",
+      "current_production_profile": "v4home-bed仅home生成，无监所新布局/床位。",
+      "recommended_change": "改组合模板，依赖001/002床母版和储物母版；监所限制/安全锚/权限/功能合同待制，不把住宅床额外复制成独立监所床模型。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-22",
+      "life_ids": [
+        "LIFE-001",
+        "LIFE-032",
+        "LIFE-064",
+        "LIFE-065"
+      ],
+      "names": {
+        "LIFE-001": "住宅床架",
+        "LIFE-032": "通用工作桌",
+        "LIFE-064": "商铺公共售货柜台",
+        "LIFE-065": "实际库存食品陈列通用单元"
+      },
+      "issue_kind": "已核正确/少量证据补全",
+      "original_fields": {
+        "LIFE-001": {
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-001",
+          "现有证据": "src/architecture-floor-plan.ts:94–113；src/rendering/architecture-bodies.ts:95–118"
+        },
+        "LIFE-032": {
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-032",
+          "现有证据": "src/architecture-floor-plan.ts:94–113；src/rendering/architecture-bodies.ts:95–118"
+        },
+        "LIFE-064": {
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-064",
+          "现有证据": "src/site-fixtures.ts:17–44；src/architecture-floor-plan.ts:94–113；src/rendering/architecture-bodies.ts:99–111"
+        },
+        "LIFE-065": {
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-065",
+          "现有证据": "src/rendering/market-goods.ts:13–45；src/site-fixtures.ts:67–69"
+        }
+      },
+      "title": "已有共享床桌柜台库存样本状态合理",
+      "source_evidence": [
+        "src/architecture-floor-plan.ts:94–109",
+        "src/rendering/architecture-bodies.ts:95–107",
+        "src/site-fixtures.ts:17–44",
+        "src/rendering/market-goods.ts:13–45"
+      ],
+      "legacy_profile": "旧住宅床/桌，外柜台site-fixture，真库存样本池已接；静态货块不同于实际库存。",
+      "current_production_profile": "v4共享fixtures渲染并对应真实实体；goods池引用真实counter/营业/库存/驻留。",
+      "recommended_change": "保持四行集成状态且不称精细艺术通过。064证据最好追加architecture-bodies:102–104；065销量/真实食品类型不能从两色方块反推。",
+      "confidence": "高"
+    },
+    {
+      "review_id": "LR-23",
+      "life_ids": [
+        "LIFE-215",
+        "LIFE-218",
+        "LIFE-219",
+        "LIFE-221",
+        "LIFE-225",
+        "LIFE-226"
+      ],
+      "names": {
+        "LIFE-215": "木家具PBR材质集",
+        "LIFE-218": "家具金属PBR材质集",
+        "LIFE-219": "陶瓷卫浴PBR材质集",
+        "LIFE-221": "室内玻璃/屏幕材质集",
+        "LIFE-225": "文化纸张/画面展示材质集",
+        "LIFE-226": "家具磨损/边缘细节图集"
+      },
+      "issue_kind": "已核缺失口径合理",
+      "original_fields": {
+        "LIFE-215": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-215",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-218": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-218",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-219": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-219",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-221": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-221",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-225": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-225",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        },
+        "LIFE-226": {
+          "条目类型": "材质贴图",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-226",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在"
+        }
+      },
+      "title": "PBR图包缺失与已有参数/程序纹理不是矛盾",
+      "source_evidence": [
+        "src/renderer.ts:148–162",
+        "src/renderer.ts:818–819",
+        "src/rendering/architecture-detail.ts:392–393",
+        "src/rendering/architecture-detail.ts:479–480"
+      ],
+      "legacy_profile": "MeshStandard有roughness/metalness、程序木石微色纹和Canvas门牌；非外部PBR图包。",
+      "current_production_profile": "current亦共享这些参数，玻璃透明/发光已有，不代表完整室内玻璃/屏幕/PBR纹理集到达。",
+      "recommended_change": "保PBR图包待制；现有证据补已有程序/参数基础，勿把shader/Canvas门牌作为全部文化纸张作品图集。若需精确材料预算，跨域共享材质不重复图包。",
+      "confidence": "高"
+    }
+  ],
+  "unapplied_suggestions": "141类型调整、桌架母版归并、66/71/72/77/108状态、111/156类型、其他专业室内配置、材质与公共屏证据改法均仅保留审核建议，未强改。书册106及罐杯壶046/047/049仍缺失，不从未知盒条推定已集成。",
+  "original_226_files_unchanged": true,
+  "new_rows_are_not_two_extra_external_models": "227是槽体程序组件；228是三茎花叶配置规则，依227，不重复槽体模型；新增2行不是生成了2个外部GLB。"
+}

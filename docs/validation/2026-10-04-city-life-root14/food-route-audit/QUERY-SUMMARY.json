@@ -1,0 +1,102 @@
+{
+  "scope": "Static exact-terminal analysis. No Simulation constructor, createWorld, tick, people/commerce, moveCitizen, command, importSave, RNG, event emission or actual arrival/purchase. Object.create(Simulation.prototype) is an incomplete independent getter object populated only with original decoded state/runtime, read-only world/maps and private geometry/route caches. Native walkingPrefixAllowed may advance an independent hypothetical cursor solely to evaluate a route prefix; original actors/cursors remain byte-identical. All paths and choices are counterfactual current-state queries, not observed future behavior.",
+  "originals": {
+    "saveSHA256": "72ce8b457cc689ec030459aad63f8e44f00a22175e4be614b2a75d16545dfb67",
+    "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "dayAuditSHA256": "19c9db7b5ec54c0878a96665f70b798e282c935be6012cb22fa6549bd332d881",
+    "worldFingerprint": "b85fa6ec"
+  },
+  "actualTerminal": {
+    "tick": 720,
+    "day": 1,
+    "hour": 8,
+    "clock": 1920,
+    "weather": "云"
+  },
+  "source": {
+    "baseInputs": 295,
+    "productionInputs": 68,
+    "daySourcesAllMatch": true,
+    "driverSHA256": "e785dbb8c03bba61b79595fcd6b3d43d0ae184322b39795d3a5ad228e1c30b50"
+  },
+  "summary": {
+    "residents": 240,
+    "states": {
+      "riding": 37,
+      "moving": 189,
+      "physicalWaiting": 14
+    },
+    "activities": {
+      "eat": 240
+    },
+    "currentLegKinds": {
+      "legacy": 240
+    },
+    "currentNextLegBlocks": [],
+    "currentReferenceBodyGuardFailures": [
+      "citizen-151",
+      "citizen-181",
+      "citizen-195",
+      "citizen-247",
+      "citizen-261",
+      "citizen-267",
+      "citizen-278",
+      "citizen-301",
+      "citizen-327",
+      "citizen-393",
+      "citizen-445",
+      "citizen-569",
+      "citizen-609",
+      "citizen-613"
+    ],
+    "anchorless": [
+      "citizen-32",
+      "citizen-83",
+      "citizen-523",
+      "citizen-560"
+    ],
+    "noDecisionEligibleOffer": [],
+    "noGraphReachableOffer": [
+      "citizen-32",
+      "citizen-83",
+      "citizen-523",
+      "citizen-560"
+    ],
+    "noPlannerGroundSaleOffer": [
+      "citizen-32",
+      "citizen-83",
+      "citizen-523",
+      "citizen-560"
+    ],
+    "noMaterializableGroundSaleOffer": [
+      "citizen-32",
+      "citizen-83",
+      "citizen-523",
+      "citizen-560"
+    ],
+    "pureChoiceActivities": {
+      "eat": 236,
+      "rest": 4
+    },
+    "committedEat": 240,
+    "currentEligibleShop": 240,
+    "riders": 37,
+    "graphComponents": {
+      "0": 674
+    },
+    "foodSites": 156,
+    "foodSalePoints": 374,
+    "doorToSaleRoutesWithNativeBlock": [],
+    "stateRuntimeEqual": true,
+    "worldObjectEqual": true,
+    "originalArtifactBytesEqual": true,
+    "helperStats": {
+      "routes": 1588,
+      "materializations": 0,
+      "cacheHits": 0,
+      "geometryChecks": 2271,
+      "staleLegs": 0,
+      "buildingScans": 8462124
+    }
+  }
+}

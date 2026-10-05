@@ -1,0 +1,98 @@
+{
+  "actualAuditWages": {
+    "sales": 9831.680247019103,
+    "saleCount": 539,
+    "saleTax": 786.534419761528,
+    "fares": 556,
+    "payrollPublicRequested": 9874.48001091347,
+    "payrollPublicPaid": 8508.268448057695,
+    "payrollPrivateRequested": 6967.680809913087,
+    "payrollPrivate": 6557.535331945632,
+    "wageTax": 1205.2643024002657,
+    "wholesale": 0,
+    "wholesaleTax": 0,
+    "businessExpenses": 565.0742732367552,
+    "storedMeals": 56,
+    "production": 647.3058335760537,
+    "productionMinutes": 28826.591473708042,
+    "operationsRequested": 2073.600000000038,
+    "operations": 2267.1144000000404,
+    "publicSupplies": 644.400000000012,
+    "procurementTax": 225.7211520000012,
+    "civicProcurement": 0,
+    "security": 554.4000000000087,
+    "financeDelta": -7792.788700657737,
+    "roadworkPayroll": 0,
+    "roadworkMinutes": 0
+  },
+  "actualWageArrears": {
+    "public": 0,
+    "private": 0,
+    "publicEarnedNotDue": 1366.2115628558938,
+    "privateEarnedNotDue": 410.14547796683894
+  },
+  "actualPublicBudget": {
+    "cash": 72688.81129934225,
+    "publicWagesDue": 0,
+    "publicWagesEarned": 1366.2115628558938,
+    "forecastPayroll": 12603.017131228016,
+    "reservedPayroll": 0,
+    "essentialOperations": 2073.6,
+    "reserve": 16042.82869408391,
+    "authorizedRemaining": 0,
+    "available": 56645.982605258345
+  },
+  "privateUnsettledClaims": 410.14547796683894,
+  "publicUnsettledClaims": 1366.2115628558952,
+  "hungryOverduePrivateWageArrears": 0,
+  "hungryUnsettledPrivateClaims": 26.65850524822694,
+  "minHungryWallet": 150.1056442502886,
+  "maxFoodRawQuote": 13.559066918438216,
+  "foodStock": {
+    "aliveResidents": 616,
+    "nominalResidentMealsPerDay": 852.9230769230769,
+    "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+    "shopFoodUnits": 15420.948044089688,
+    "residentCarriedFoodUnits": 320,
+    "playerCarriedFoodUnits": 0,
+    "bySiteKind": {
+      "farm": {
+        "sites": 31,
+        "open": 31,
+        "inventoryUnits": 4801,
+        "employees": 28
+      },
+      "dock": {
+        "sites": 16,
+        "open": 16,
+        "inventoryUnits": 1522.9480440896873,
+        "employees": 17
+      },
+      "market": {
+        "sites": 109,
+        "open": 109,
+        "inventoryUnits": 9097,
+        "employees": 145
+      },
+      "workshop": {
+        "sites": 54,
+        "open": 54,
+        "inventoryUnits": 4736.957789486369,
+        "employees": 75
+      }
+    },
+    "hungryWithoutCarriedFood": 240,
+    "hungryCanAffordAnyStockedOpenFoodOffer": 240,
+    "routeReachability": "NOT_OBSERVED",
+    "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+  },
+  "rawAuditFoodCommodityFlow": {
+    "producedUnits": 125.94804408968746,
+    "productionMinutes": 5608.823412700992,
+    "retailUnits": 915,
+    "retailGross": 9831.680247019103,
+    "counterMeals": 539,
+    "unattributedRetailUnits": 0
+  },
+  "sourceScope": "Actual preserved terminal wages/claims and day observer only. EarnedNotDue is not overdue arrears; public payments debit treasury, private payments debit employer cash/capital. No counterfactual wage/state change or historical exact per-person cash attribution reconstructed."
+}

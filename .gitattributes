@@ -1,0 +1,24 @@
+# Preserve raw test output, including whitespace in Node assertion diffs.
+docs/validation/**/*.log -whitespace
+# Archive patch context lines byte-for-byte, including a lone space for a blank line.
+docs/validation/**/*.patch -whitespace
+docs/validation/**/*.diff -whitespace
+# Generated PDF streams may use ASCII encodings but are binary artifacts.
+*.pdf binary
+# Keep uploaded CSV originals byte-exact while accepting their standard CRLF.
+docs/assets/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/validation/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Matplotlib SVG path streams are generated graphic originals.
+docs/validation/**/engineering-diagrams/*.svg binary
+# Preserve standalone Matplotlib map and audit graphic originals byte-for-byte.
+docs/validation/2026-10-03-city-continuation-next/city-map-v6/*.svg binary
+docs/validation/2026-10-03-city-continuation-next/economy-plots/*.svg binary
+# Keep raw failures as originals; their formatting and conflict text are evidence.
+docs/validation/2026-10-03-city-continuation-next/**/*.tap -whitespace
+docs/validation/2026-10-03-city-continuation-next/*.patch.first-failed -whitespace
+docs/validation/2026-10-03-city-continuation-next/market-return-ui-three-way-conflict.original.txt binary
+
+# Preserve native validation archives, split archives and actual compressed save fixture.
+docs/validation/2026-10-04-native-city-life/**/*.zip binary
+docs/validation/2026-10-04-native-city-life/**/*.zip.part* binary
+tests/fixtures/native-live-reader/*.gz binary

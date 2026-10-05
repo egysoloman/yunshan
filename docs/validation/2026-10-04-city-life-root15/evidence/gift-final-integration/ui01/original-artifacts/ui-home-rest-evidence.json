@@ -1,0 +1,136 @@
+{
+  "scope": "Additional native DOM controls with real generated current-v4 and Simulation; controlled table/bed-side positioning only, no Renderer, no ordinary walk/bed journey or hardware performance claim.",
+  "homeId": "market-b24",
+  "profile": "v4-program-bodies-02",
+  "tablePoint": {
+    "x": -398.8,
+    "y": 76.6,
+    "z": 307.20000000000005
+  },
+  "bedPoint": {
+    "id": "market-b24:floor:0:bed:home-bed:side:z-plus",
+    "bedId": "market-b24:floor:0:bed:home-bed",
+    "buildingId": "market-b24",
+    "floor": 0,
+    "fixtureId": "home-bed",
+    "side": "z-plus",
+    "position": {
+      "x": -408.8,
+      "y": 76.6,
+      "z": 301.6
+    }
+  },
+  "initial": {
+    "cash": 600,
+    "fatigue": 90,
+    "fun": 70,
+    "hunger": 85,
+    "clock": 480,
+    "actors": 616,
+    "speed": 1
+  },
+  "phases": [
+    {
+      "phase": "partial",
+      "session": {
+        "id": "home-rest-1",
+        "buildingId": "market-b24",
+        "bedId": "market-b24:floor:0:bed:home-bed",
+        "floor": 0,
+        "pointId": "market-b24:floor:0:bed:home-bed:side:z-plus",
+        "point": {
+          "x": -408.8,
+          "y": 76.6,
+          "z": 301.6
+        },
+        "startedAt": 480,
+        "lastObservedAt": 482,
+        "progressMinutes": 2,
+        "requiredMinutes": 20,
+        "state": "active",
+        "pauseReason": "",
+        "endedAt": null
+      },
+      "fatigue": 93.76400000000001,
+      "fun": 71.18200000000002,
+      "clock": 482
+    },
+    {
+      "phase": "returned-but-paused",
+      "session": {
+        "id": "home-rest-1",
+        "buildingId": "market-b24",
+        "bedId": "market-b24:floor:0:bed:home-bed",
+        "floor": 0,
+        "pointId": "market-b24:floor:0:bed:home-bed:side:z-plus",
+        "point": {
+          "x": -408.8,
+          "y": 76.6,
+          "z": 301.6
+        },
+        "startedAt": 480,
+        "lastObservedAt": 484,
+        "progressMinutes": 2,
+        "requiredMinutes": 20,
+        "state": "paused",
+        "pauseReason": "已离开原床侧站点，或床位权限与完整身体支撑不再满足。",
+        "endedAt": null
+      },
+      "clock": 484
+    },
+    {
+      "phase": "completed",
+      "history": {
+        "id": "home-rest-1",
+        "buildingId": "market-b24",
+        "bedId": "market-b24:floor:0:bed:home-bed",
+        "floor": 0,
+        "pointId": "market-b24:floor:0:bed:home-bed:side:z-plus",
+        "point": {
+          "x": -408.8,
+          "y": 76.6,
+          "z": 301.6
+        },
+        "startedAt": 480,
+        "lastObservedAt": 502,
+        "progressMinutes": 20,
+        "requiredMinutes": 20,
+        "state": "completed",
+        "pauseReason": "",
+        "endedAt": 502
+      },
+      "fatigue": 100,
+      "fun": 81.80200000000013,
+      "expectedFatigue": 100,
+      "expectedFun": 81.80200000000013,
+      "continuedExact": true,
+      "clock": 502
+    },
+    {
+      "phase": "cancelled",
+      "history": {
+        "id": "home-rest-2",
+        "buildingId": "market-b24",
+        "bedId": "market-b24:floor:0:bed:home-bed",
+        "floor": 0,
+        "pointId": "market-b24:floor:0:bed:home-bed:side:z-plus",
+        "point": {
+          "x": -408.8,
+          "y": 76.6,
+          "z": 301.6
+        },
+        "startedAt": 502,
+        "lastObservedAt": 503,
+        "progressMinutes": 1,
+        "requiredMinutes": 20,
+        "state": "cancelled",
+        "pauseReason": "主动结束休息。",
+        "endedAt": 503
+      },
+      "fatigue": 99.98200000000003,
+      "fun": 82.38400000000013,
+      "funBeforeCancel": 82.39300000000014,
+      "clock": 504
+    }
+  ]
+}

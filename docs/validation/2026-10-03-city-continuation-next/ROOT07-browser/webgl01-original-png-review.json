@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-04T01:56:18.659547+00:00",
+  "status": "ACTUAL_ORIGINAL_WEBGL01_PNG_VIEW_COMPLETED_ART_FAIL",
+  "runStatus": "FAIL_8_PASS_3_NOT_COMPLETED_WITH_OTHER_CHROMIUM_CO_RUN",
+  "images": [
+    {
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/artifacts-after-originals/artifacts/day.png",
+      "sha256": "81ff213ee96efb469205a554c4a4c4ad7e59503d79b09bc1e6a425a7234dc0a0",
+      "bytes": 633046,
+      "actualViewCompleted": true,
+      "review": "Actual original first-person day: broad low dark roof/bridge geometry blocks the upper city/sky, sparse large box lights and pale/flat masonry dominate; distant v6 towers visible, reference city layering and street-life detail not met."
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/artifacts-after-originals/artifacts/night.png",
+      "sha256": "373ae0d58c75efd4304a34fc08bcbbb843b2e4612b88bd145210f9cab6b00fc4",
+      "bytes": 558847,
+      "actualViewCompleted": true,
+      "review": "Actual original night: street remains dim blue-black, broad roof/bridge occlusion remains; a few bright block lights do not yet form the reference multi-layer city-lightscape."
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/webgl01/artifacts-after-originals/artifacts/interior.png",
+      "sha256": "e17ce632b8211cb0d58650bc0228ffc4cb4fd5e8c3396cd858e99db20cdc3b82",
+      "bytes": 592703,
+      "actualViewCompleted": true,
+      "review": "Actual original controlled sale-point interior: counter and tiled surface visible, pale wall/wood panel; open/cutaway roof view exposes outside terrain, ceiling/wall exposure flat and bright, furnishings sparse; this is controlled original sale-point functionality, not a full natural interior journey."
+    }
+  ],
+  "ART": "FAIL_REFERENCE_GAPS_REMAIN",
+  "Mac": "NOT_RUN",
+  "scope": "Direct Playwright original PNG bytes viewed without editing, cropping, compositing, recolor or postprocessing. No macOS hardware/FPS claim. Original renderer diagnostics may contain software FPS; they are not hardware evidence."
+}

@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-04T01:37:47.638370+00:00",
+  "endedAt": "2026-10-04T03:14:44.468136+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "14",
+    "--out",
+    "artifacts/root07-economy-14d.json"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 241,
+  "inputsStable": true,
+  "rawSHA256": "d0d3add3a238177493f53da5f9a26fff163e96d7eef8f5bd31e123c13da30cba",
+  "ownedPid": 21540,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 21548,
+      "state": "Z",
+      "parent": 1,
+      "group": 21540,
+      "session": 21540,
+      "startTicks": 869261
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

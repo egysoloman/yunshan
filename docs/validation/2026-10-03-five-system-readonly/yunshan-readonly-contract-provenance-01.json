@@ -1,0 +1,283 @@
+{
+  "kind": "READ_ONLY_AS_OF_SOURCE_REVIEW",
+  "asOfUTC": "2026-10-03T01:09:10.554366+00:00",
+  "root": "/workspace/yunshan",
+  "HEAD": "15550fd968023c4bd436a2f60022ff45d6c3d5da",
+  "worktreeStatusPorcelain": " M \"docs/\\351\\234\\200\\346\\261\\202\\345\\256\\236\\347\\216\\260\\351\\252\\214\\350\\257\\201\\347\\237\\251\\351\\230\\265.md\"\n M src/controller.ts\n M src/main.ts\n M src/simulation.ts\n M \"\\345\\274\\200\\345\\217\\221\\345\\244\\207\\345\\277\\230\\345\\275\\225.md\"\n?? docs/validation/2026-10-02-system-coherent12/git-delivery-15550fd.json\n?? docs/validation/2026-10-02-system-coherent13/\n?? docs/validation/2026-10-02-walking-input-time/\n?? docs/validation/2026-10-03-retail-immediate/\n?? tests/controller-input-time.test.ts\n?? tests/retail-period.test.ts\n",
+  "scope": {
+    "sharedFilesWritten": 0,
+    "simulationRuns": 0,
+    "testsRun": 0,
+    "buildsRun": 0,
+    "browserOrGPURuns": 0,
+    "zipOrLibraryActions": 0,
+    "spawnedAgents": 0,
+    "worldChanges": 0
+  },
+  "sourceHashesAsOf": {
+    "AGENTS.md": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+    "提示词.md": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+    "开发备忘录.md": "a2191851d61db7a6ad286ec1984d9465abc2cd738224dabdd86eb3a0d4ebd14d",
+    "src/types.ts": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+    "src/simulation.ts": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+    "src/world.ts": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/main.ts": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/world-layout.ts": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+    "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+    "src/simulation/extensions.ts": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+    "src/simulation/clinical.ts": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+    "src/simulation/culture.ts": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/player-labor.ts": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+    "tests/simulation.test.ts": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+    "tests/trade.test.ts": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+    "tests/world-layout.test.ts": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+    "tests/clinical.test.ts": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+    "tests/culture.test.ts": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+    "tests/family.test.ts": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+    "tests/extensions.test.ts": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+    "tests/journey.test.ts": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08"
+  },
+  "currentVersusWhole09": {
+    "AGENTS.md": {
+      "currentSHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "whole09SHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "sameBytes": true
+    },
+    "提示词.md": {
+      "currentSHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "whole09SHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "sameBytes": true
+    },
+    "开发备忘录.md": {
+      "currentSHA256": "a2191851d61db7a6ad286ec1984d9465abc2cd738224dabdd86eb3a0d4ebd14d",
+      "whole09SHA256": "88effd5f5db5c439d061ec120ed5cb944262d913ae5d7034d93bbce82007fb56",
+      "sameBytes": false
+    },
+    "src/types.ts": {
+      "currentSHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "whole09SHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "sameBytes": true
+    },
+    "src/simulation.ts": {
+      "currentSHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+      "whole09SHA256": "64a2e4cec4402d1c6ca0764d600d1d5e71bc6f1c299447af8d66e129b2c23c11",
+      "sameBytes": false
+    },
+    "src/world.ts": {
+      "currentSHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "whole09SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "sameBytes": true
+    },
+    "src/access.ts": {
+      "currentSHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "whole09SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "sameBytes": true
+    },
+    "src/architecture-floor-plan.ts": {
+      "currentSHA256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "whole09SHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "sameBytes": false
+    },
+    "src/site-fixtures.ts": {
+      "currentSHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "whole09SHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "sameBytes": true
+    },
+    "src/transport-geometry.ts": {
+      "currentSHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "whole09SHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "sameBytes": true
+    },
+    "src/aviation.ts": {
+      "currentSHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "whole09SHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "sameBytes": true
+    },
+    "src/main.ts": {
+      "currentSHA256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "whole09SHA256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "sameBytes": false
+    },
+    "src/persistence.ts": {
+      "currentSHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "whole09SHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "sameBytes": true
+    },
+    "src/persistence/world-layout.ts": {
+      "currentSHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "whole09SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "sameBytes": true
+    },
+    "src/simulation/home-rest.ts": {
+      "currentSHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "whole09SHA256": "ec68d9ff523519f69c97006b2dea3801107e44fd3522ce7095f7b7b75af58ede",
+      "sameBytes": false
+    },
+    "src/simulation/extensions.ts": {
+      "currentSHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "whole09SHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "sameBytes": true
+    },
+    "src/simulation/clinical.ts": {
+      "currentSHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "whole09SHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "sameBytes": true
+    },
+    "src/simulation/culture.ts": {
+      "currentSHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "whole09SHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "sameBytes": true
+    },
+    "src/simulation/family.ts": {
+      "currentSHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "whole09SHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "sameBytes": true
+    },
+    "src/simulation/player-labor.ts": {
+      "currentSHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "whole09SHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "sameBytes": true
+    },
+    "tests/simulation.test.ts": {
+      "currentSHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "whole09SHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "sameBytes": true
+    },
+    "tests/trade.test.ts": {
+      "currentSHA256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "whole09SHA256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "sameBytes": true
+    },
+    "tests/world-layout.test.ts": {
+      "currentSHA256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "whole09SHA256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "sameBytes": true
+    },
+    "tests/clinical.test.ts": {
+      "currentSHA256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "whole09SHA256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "sameBytes": true
+    },
+    "tests/culture.test.ts": {
+      "currentSHA256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "whole09SHA256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "sameBytes": true
+    },
+    "tests/family.test.ts": {
+      "currentSHA256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "whole09SHA256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "sameBytes": true
+    },
+    "tests/extensions.test.ts": {
+      "currentSHA256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "whole09SHA256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "sameBytes": true
+    },
+    "tests/journey.test.ts": {
+      "currentSHA256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "whole09SHA256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "sameBytes": true
+    }
+  },
+  "historicalEvidence": {
+    "whole09": {
+      "statusFile": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent09-dom/whole-run-status.json",
+      "statusSHA256": "af6443a70fc09b1fe4067bc1e335583435ea82e972f2b5c7af28c8e909cb3144",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "startedAt": "2026-10-02T12:18:51.351314+00:00",
+      "finishedAt": "2026-10-02T14:10:27.056984+00:00",
+      "exitCode": 0,
+      "summary": [
+        "ℹ tests 496",
+        "ℹ suites 0",
+        "ℹ pass 496",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0",
+        "ℹ todo 0",
+        "ℹ duration_ms 6694727.480092"
+      ],
+      "sourceInputCount": 102,
+      "sourceStable": true,
+      "actualLogSHA256": "6aa60ea63aa6cfaf8608a8d370cf2d7e80f5a5cb5b8d52e1c98b0e863d607ce3",
+      "receiptLogSHA256": "6aa60ea63aa6cfaf8608a8d370cf2d7e80f5a5cb5b8d52e1c98b0e863d607ce3"
+    },
+    "related12": {
+      "statusFile": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/related-run-status.json",
+      "statusSHA256": "083e76830e6a9ad8816ddb665e7e342e3d43de42f71738f6764471db9606e692",
+      "state": "PASS",
+      "startedAtUTC": "2026-10-02T16:54:07.019123+00:00",
+      "endedAtUTC": "2026-10-02T16:58:07.020973+00:00",
+      "runs": [
+        {
+          "label": "build",
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "exitCode": 0,
+          "receiptLogSHA256": "a0f5a5d6960d1c6aa979ec214dcb2be248446ddc8d4ea09f3ba543884dfd8335"
+        },
+        {
+          "label": "renderer-world-and-offer",
+          "command": [
+            "node",
+            "--import",
+            "tsx",
+            "--test",
+            "--test-isolation=none",
+            "tests/architecture-bodies.test.ts",
+            "tests/architecture-detail-v4.test.ts",
+            "tests/world-v4.test.ts",
+            "tests/npc-public-rest.test.ts"
+          ],
+          "exitCode": 0,
+          "receiptLogSHA256": "fe8fd0a0cbebe9be537cf64cf0409fecbbc1c8c53b94c73da76d9f3190edf282"
+        }
+      ],
+      "limitation": "build and renderer/world/public-rest tests only; not current five-domain whole-suite evidence"
+    },
+    "clinicalPhase2DOM": {
+      "resultsFile": "/workspace/yunshan/docs/validation/2026-10-01-phase2/ui-clinical/phase2-ui-clinical/ui-results.json",
+      "resultsSHA256": "2ea85a5f05a193245edfc342200acb938227df3463c4899140f08d4487741838",
+      "resultKeys": [
+        "status",
+        "browser",
+        "scope",
+        "checks",
+        "results",
+        "errors"
+      ],
+      "READMEFile": "docs/validation/2026-10-01-phase2/ui-clinical/README.md",
+      "READMESHA256": "4b0077e5d6394d22650cea793e2af6866a23fc7c0fd3058aafa8ac8004857253",
+      "limitation": "archived controlled CityUI+Simulation with disable-gpu and no CityRenderer; not natural current clinic journey"
+    }
+  },
+  "outputs": {
+    "/tmp/yunshan-city-data-contract-readonly-01.md": {
+      "bytes": 10197,
+      "sha256": "2a7ae50b99139c5bb7615722123528d37776a73749e6465e23393af95e474074"
+    },
+    "/tmp/yunshan-five-system-readonly-matrix-01.md": {
+      "bytes": 8523,
+      "sha256": "a3e7807f1eee8af9a6578b67c2db8343d386f4f98df023f0f475b60e26a9167e"
+    }
+  },
+  "limitations": [
+    "Mutable shared worktree; report is not a coherent freeze or a new test execution.",
+    "simulation.ts changed during the review by its owner; reports use final observed dcf488... source positions.",
+    "Matching module/test bytes do not promote whole09 evidence to current integration or natural city acceptance.",
+    "New-city validator/package/adapter/capability API is a proposal, intentionally not implemented."
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "baseCommit": "3f01707581eef697572ffa58bdb994bef037e98d",
+  "scope": "Only root-owned shared market-counter geometry, physical controller collision and finite-stock display. Concurrent economy/journey/forest changes excluded.",
+  "overrides": {
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/renderer.ts": "ff53f58323c81cff12533fd4870db1e9a0a9b5af114747ec8cb548ace6d91204",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd",
+    "src/rendering/market-goods.ts": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+    "tests/site-fixtures.test.ts": "774578f7d0421acf5ecabe8eafa89753ae2ba3273905dbd5a2bad26f614fc43d"
+  }
+}

@@ -1,0 +1,30 @@
+6:03:50 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+✔ partition reassembly rejects missing entities instead of returning a partial city (1357.094337ms)
+✔ family/service/stock books follow their real owners and sites while preserving original array and object order (3.196432ms)
+✔ a missing map-only geographic chunk rejects a partial custody or service book (0.760578ms)
+✔ real IndexedDB saves the complete generated city in geographic chunks and resumes identically (11629.605651ms)
+✔ unchanged, player-only and global-only saves physically avoid rewriting city chunks (3017.607789ms)
+✔ one changed NPC route writes one chunk despite global route-pool renumbering (2849.292869ms)
+✔ cross-chunk movement and deletion leave no duplicate or missing entities after reload (3500.173899ms)
+✔ an aborted multi-store transaction with unavailable fallback preserves the prior city (3804.637501ms)
+✔ missing or corrupted current data recovers the complete prior generation and bounds retained records (2788.482687ms)
+✔ a checksum-damaged generation is recovered, repaired and retains its valid recovery generation (2291.167956ms)
+✔ overlapping queued saves stay ordered and the final complete city survives a browser reload (3558.25989ms)
+✔ version-one IndexedDB and localStorage saves remain readable through upgrade and new saves (4148.638645ms)
+✔ unavailable IndexedDB uses one atomic fallback envelope and later IDB saves supersede it (3060.807923ms)
+✔ a modern session opens only global/player and reads requested chunks through a bounded LRU (2096.032501ms)
+✔ a pinned session survives four later saves from another page and releases its archived records (4882.685717ms)
+✔ late chunk damage invalidates the whole reader and recovery creates a distinct prior-generation reader (3085.781108ms)
+✔ explicit materialization preserves the full import contract and identical continuation (15290.550713ms)
+✔ expired readers cannot silently re-pin and a new save collects their archived records (2782.215956ms)
+✔ damaged global/player headers select the complete previous generation without reading city chunks (2874.91799ms)
+✔ on-demand readers retain the explicit whole-blob compatibility path for version-one and local saves (2564.629869ms)
+✔ reader heartbeats renew their durable lease and a rejected renewal invalidates cached parts (2089.542021ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79602.900078

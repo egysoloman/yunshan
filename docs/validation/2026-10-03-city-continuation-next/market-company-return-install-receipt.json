@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-04T01:21:32.950779+00:00",
+  "method": "Hash guarded three-way merges; all prepared before mutation; all final bytes checked. One UI compound signature-line conflict resolved by preserving current familyEducationSignature and adding original active-company predicate. Original conflict text retained. Preserves family V1 carry, tuition custody, supplemental authorization and current road crew. Audit assertion lines exactly equal.",
+  "patchSHA256": "3566a2ab509783fa8bdf929543ca2723f882b57799ce8335b9a04d7c9b6eaa71",
+  "files": [
+    {
+      "file": "scripts/economy-audit.ts",
+      "sharedBeforeSHA256": "b7ebfe610330a7c1f6e990a1d65b8b3ee56ca58542514084b599093c538b1cf5",
+      "candidateBaselineSHA256": "6dd0d9e36ba6fca79dbaebb78b49539ccde415aeac22b29fc70a3d894713411f",
+      "candidateFinalSHA256": "7e7f70227ca2f62d07d815f3c5ba3fa513541d890def9f749481bf0bb7c36412",
+      "mergedAfterSHA256": "3567655bcaa96916f030df48c0e43c4fd8b2dd83ef2037ab6f37c635e1be0ad0"
+    },
+    {
+      "file": "src/simulation/banking.ts",
+      "sharedBeforeSHA256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "candidateBaselineSHA256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38",
+      "candidateFinalSHA256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+      "mergedAfterSHA256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "file": "src/simulation/extensions.ts",
+      "sharedBeforeSHA256": "09cdbfca1dc3479b366d5ff4d817470c717b8b08de0de98257421b1742bea281",
+      "candidateBaselineSHA256": "09cdbfca1dc3479b366d5ff4d817470c717b8b08de0de98257421b1742bea281",
+      "candidateFinalSHA256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552",
+      "mergedAfterSHA256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552"
+    },
+    {
+      "file": "src/simulation/family.ts",
+      "sharedBeforeSHA256": "229b11ac4581b9532f5a53d42dea5c1c39aaa589c879213de4de7c3c7e399a7d",
+      "candidateBaselineSHA256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4",
+      "candidateFinalSHA256": "838896f849774c5f12f842898d1991c45925a33626b81527e6175593ddd9d53c",
+      "mergedAfterSHA256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "file": "src/simulation/shop_lifecycle.ts",
+      "sharedBeforeSHA256": "67f56d748ef3b2d09bafded353e7275252d68ccecdadf3844d9cf7c8645871e1",
+      "candidateBaselineSHA256": "67f56d748ef3b2d09bafded353e7275252d68ccecdadf3844d9cf7c8645871e1",
+      "candidateFinalSHA256": "1bd6da94e057780ddd0d92f7ce52a5a8ef3c306c0248055a716efbc4248da0cc",
+      "mergedAfterSHA256": "1bd6da94e057780ddd0d92f7ce52a5a8ef3c306c0248055a716efbc4248da0cc"
+    },
+    {
+      "file": "src/simulation.ts",
+      "sharedBeforeSHA256": "c283c5bf1ea0c0e911d4aa62a2d6c0b65cff10cffc66a86755ac6e241c9b6838",
+      "candidateBaselineSHA256": "8bdd3894332df67402002d5b04dd28267bdefbfb434b33400e5076db013cc821",
+      "candidateFinalSHA256": "97d7c3c5c3a27038b7a6777dc17d3a57ac7b3e2d55541001ad000d5aa226e561",
+      "mergedAfterSHA256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39"
+    },
+    {
+      "file": "src/types.ts",
+      "sharedBeforeSHA256": "fc846ba9d79d6279f3e06bbe585da502ff9c18840d2c1cca297e3b75e8ede38f",
+      "candidateBaselineSHA256": "f2eaf7db0bce3b02b0ade4c287127cc3512ac86d6b368ab4091cd2e4068307bf",
+      "candidateFinalSHA256": "4b7ff03207d7b4d254e67e332841f5240e8c43f67817112e6c845bc00d20b054",
+      "mergedAfterSHA256": "1517b9e21582269de9b7d352d297a71d732771ee8b08501f975222c40303ee1e"
+    },
+    {
+      "file": "src/ui.ts",
+      "sharedBeforeSHA256": "c034dbf5b97d83b3f3219541f83ebb00cc9b93fe2a38414ead515d58ec6c80c5",
+      "candidateBaselineSHA256": "edfa14d93505bad2e8b6bc8159b70ecd1cf624eb91a82bf8d7e1ff4a6de9f149",
+      "candidateFinalSHA256": "89e64791ade32608a8dfc568d3e7234b5ef78c1c6a61947e161282cdba61f63d",
+      "mergedAfterSHA256": "30882baf5c4ef2f0d09a9a75757fe7ff6fa4203ce7b5512c78eb3da022aac3dc"
+    },
+    {
+      "file": "tests/fixtures/market-company-current-lease.json",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "c317858741c6a5d76b43aef99209b48f572da621b6313f4e8906177768125332",
+      "mergedAfterSHA256": "c317858741c6a5d76b43aef99209b48f572da621b6313f4e8906177768125332"
+    },
+    {
+      "file": "tests/fixtures/market-company-current-sale.json",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "10dce6b2323e172d1fe1ea04ebdecf7ea7565ba59f6b3cc637499db1a0081f80",
+      "mergedAfterSHA256": "10dce6b2323e172d1fe1ea04ebdecf7ea7565ba59f6b3cc637499db1a0081f80"
+    },
+    {
+      "file": "tests/market-company-return.test.ts",
+      "sharedBeforeSHA256": null,
+      "candidateBaselineSHA256": null,
+      "candidateFinalSHA256": "43e41b506e06fa93d161b3d77c2355e9bdf8ca02640e41364ec5437eff3da3ad",
+      "mergedAfterSHA256": "43e41b506e06fa93d161b3d77c2355e9bdf8ca02640e41364ec5437eff3da3ad"
+    },
+    {
+      "file": "tests/market-company-rights.test.ts",
+      "sharedBeforeSHA256": "e183bc10f59e2e8e3ec0c069135458e89cb816356ff922b26492dc393f6012ec",
+      "candidateBaselineSHA256": "e183bc10f59e2e8e3ec0c069135458e89cb816356ff922b26492dc393f6012ec",
+      "candidateFinalSHA256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf",
+      "mergedAfterSHA256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf"
+    }
+  ],
+  "status": "COMPANY_RETURN_PATCH_INSTALLED_INTEGRATED_RUN_PENDING"
+}

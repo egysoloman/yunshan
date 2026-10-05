@@ -1,0 +1,112 @@
+--- original/scripts/family-fee-ui-test.mjs
++++ external/family-fee-ui-root07.mjs
+@@ -1,11 +1,64 @@
+ import assert from 'node:assert/strict';
+-import { chromium } from 'playwright-core';
+-import { createServer } from 'vite';
+-import { mkdir, writeFile } from 'node:fs/promises';
+-import { fileURLToPath } from 'node:url';
++import { createRequire } from 'node:module';
++import { createHash } from 'node:crypto';
++import { mkdir, writeFile, readFile, readdir, lstat } from 'node:fs/promises';
++import { fileURLToPath, pathToFileURL } from 'node:url';
++import path from 'node:path';
+ 
+-const projectDir = fileURLToPath(new URL('..', import.meta.url));
+-const out = new URL('../output/family-fee-education/', import.meta.url);
++// External ROOT07 DOM adapter. Original HTML and all seven native assertion
++// groups, classroom controls, 1e-6 cash checks and timing stay unchanged.
++const [sourceArg, outputArg, authorizationArg] = process.argv.slice(2);
++assert(sourceArg && outputArg && authorizationArg, 'Usage: node family-fee-ui-root07.mjs ROOT07_SOURCE NEW_OUTPUT ROOT07_AUTHORIZATION.json');
++const projectDir = path.resolve(sourceArg), outputDir = path.resolve(outputArg);
++const prep = path.dirname(fileURLToPath(import.meta.url));
++const preparation = JSON.parse(await readFile(path.join(prep, 'preparation-manifest.json'), 'utf8'));
++assert.equal(preparation.status, 'PREPARED_NOT_RUN');
++assert.equal(projectDir, preparation.sourcePath);
++assert(!projectDir.split(path.sep).some(part => /root06/i.test(part)), 'ROOT06 remains immutable DRAFT');
++assert(outputDir.startsWith('/workspace/yunshan-work/ROOT07-browser-20261004-01/'));
++assert(!outputDir.startsWith(projectDir + path.sep));
++try { await lstat(outputDir); assert.fail('Output must be a new scope'); }
++catch (error) { if (error.code !== 'ENOENT') throw error; }
++const authorization = JSON.parse(await readFile(path.resolve(authorizationArg), 'utf8'));
++assert.equal(authorization.status, 'ROOT07_BROWSER_EXECUTION_AUTHORIZED');
++assert.equal(authorization.scope, 'ROOT07');
++assert.equal(authorization.exclusiveGPU, true);
++assert.equal(path.resolve(authorization.sourcePath), projectDir);
++assert.deepEqual(authorization.inputs, preparation.root07Inputs);
++const digest = bytes => createHash('sha256').update(bytes).digest('hex');
++async function inputHashes() {
++  const rows = {};
++  async function walk(dir) {
++    for (const name of (await readdir(dir)).sort()) {
++      const full = path.join(dir, name), stat = await lstat(full);
++      assert(!stat.isSymbolicLink(), 'Unexpected frozen input symlink: ' + full);
++      if (stat.isDirectory()) await walk(full);
++      else if (stat.isFile()) rows[path.relative(projectDir, full)] = digest(await readFile(full));
++    }
++  }
++  for (const directory of ['src', 'tests', 'scripts', 'adapters', 'public']) await walk(path.join(projectDir, directory));
++  for (const name of ['package.json', 'package-lock.json', 'tsconfig.json', 'vite.config.ts', 'index.html']) {
++    try { const full = path.join(projectDir, name), stat = await lstat(full); assert(stat.isFile() && !stat.isSymbolicLink()); rows[name] = digest(await readFile(full)); }
++    catch (error) { if (error.code !== 'ENOENT') throw error; }
++  }
++  return Object.fromEntries(Object.entries(rows).sort(([a], [b]) => a.localeCompare(b)));
++}
++const before = await inputHashes();
++assert.deepEqual(before, preparation.root07Inputs, 'Frozen ROOT07 execution inputs differ');
++const fixtureRoutes = new Map();
++for (const row of preparation.domFixtures) {
++  const bytes = await readFile(path.join(prep, row.archivedPath));
++  assert.equal(bytes.length, row.bytes);
++  assert.equal(digest(bytes), row.sha256, 'Original producer fixture changed');
++  fixtureRoutes.set(row.route, { bytes, contentType: row.contentType });
++}
++const require = createRequire(path.join(projectDir, 'package.json'));
++const playwright = await import(require.resolve('playwright-core'));
++const chromium = playwright.chromium ?? playwright.default?.chromium;
++const vite = await import(require.resolve('vite'));
++const createServer = vite.createServer ?? vite.default?.createServer;
++assert(chromium?.launch && createServer, 'Official frozen-source dependencies are required');
++const out = pathToFileURL(outputDir + path.sep);
+ const results = [], errors = [];
+ let browser, server, page, failure;
+ try {
+@@ -37,7 +90,14 @@
+ cash(){const s=sim.state,e=s.extension;return s.treasury+runtime.taxes+s.player.money+s.banking.cash+s.banking.legacyInvestmentCash+s.citizens.reduce((sum,p)=>sum+p.money,0)+s.shops.filter(shop=>!e.companies.some(c=>c.buildingId===shop.buildingId)).reduce((sum,p)=>sum+(p.cash??0),0)+e.companies.reduce((sum,c)=>sum+c.capital,0)+e.organizations.reduce((sum,o)=>sum+o.funds,0)+(s.playerLabor?.job?.escrow??0)+(s.education?.course?.escrow??0)+s.clinical.orders.reduce((sum,o)=>sum+o.escrow,0)+s.family.pregnancies.reduce((sum,p)=>sum+p.escrow,0)+s.family.households.reduce((sum,h)=>sum+h.balance,0)+familyEducationHeldCash(s)}
+ };setInterval(()=>window.fee.refresh(),100);window.ready=true;
+ </script></body></html>`;
+-  server = await createServer({ root: projectDir, server: { host: '127.0.0.1', port: 4187, strictPort: true, watch: null }, plugins: [{ name: 'family-fee-ui-fixture', configureServer(vite) { vite.middlewares.use(async (request, response, next) => { if (request.url !== '/family-fee-ui.html') return next(); try { response.setHeader('Content-Type', 'text/html; charset=utf-8'); response.end(await vite.transformIndexHtml(request.url, html)); } catch (error) { next(error); } }); } }] });
++  await writeFile(new URL('source-inputs-before.json', out), JSON.stringify(before, null, 2));
++  await writeFile(new URL('producer-fixture-inputs.json', out), JSON.stringify(preparation.domFixtures, null, 2));
++  server = await createServer({ root: projectDir, configFile: false, cacheDir: path.join(outputDir, 'vite-cache'), server: { host: '127.0.0.1', port: 4187, strictPort: true, watch: null }, plugins: [{ name: 'family-fee-ui-fixture', configureServer(vite) { vite.middlewares.use(async (request, response, next) => {
++    const requestPath = request.url?.split('?')[0], fixture = fixtureRoutes.get(requestPath);
++    if (fixture) { response.setHeader('Content-Type', fixture.contentType); response.end(fixture.bytes); return; }
++    if (request.url !== '/family-fee-ui.html') return next();
++    try { response.setHeader('Content-Type', 'text/html; charset=utf-8'); response.end(await vite.transformIndexHtml(request.url, html)); } catch (error) { next(error); }
++  }); } }] });
+   await server.listen();
+   browser = await chromium.launch({ executablePath: process.env.YUNSHAN_CHROMIUM ?? '/usr/bin/chromium', headless: true, args: ['--no-sandbox','--disable-dev-shm-usage','--disable-gpu'] });
+   page = await browser.newPage({ viewport: { width: 1440, height: 1050 } });
+@@ -112,7 +172,22 @@
+   if(page)await page.screenshot({path:fileURLToPath(new URL('family-fee-ui-failure.png',out)),fullPage:true}).catch(()=>{});
+ } finally {
+   await browser?.close();await server?.close();
++  const after = await inputHashes();
++  const inputsStable = JSON.stringify(before) === JSON.stringify(after);
++  await writeFile(new URL('source-inputs-after.json', out), JSON.stringify(after, null, 2));
++  if (!inputsStable && !failure) failure = Error('ROOT07 frozen source changed during native DOM run');
++  if (results.length !== 7 && !failure) failure = Error('Original seven native DOM results did not all complete');
+   const report={status:failure?'FAIL':'PASS',passed:results.length,results,errors,scope:'Native DOM with actual saved Simulation and controlled physical classroom fixture. No WebGL/GPU, natural commute, age growth or 14-day claim.',failure:failure?{message:failure.message,stack:failure.stack}:null};
++  report.sourcePath = projectDir; report.inputCount = Object.keys(before).length;
++  report.runtimeSourceCount = Object.keys(before).filter(name => name.startsWith('src/')).length;
++  report.inputsStable = inputsStable; report.uiSHA256 = before['src/ui.ts'];
++  report.preparationManifestSHA256 = digest(await readFile(path.join(prep, 'preparation-manifest.json')));
++  report.originalScriptSHA256 = preparation.originalScriptSHA256;
++  report.externalDriverSHA256 = digest(await readFile(fileURLToPath(import.meta.url)));
++  report.fixtureInputs = preparation.domFixtures;
++  report.fixtureScope = 'Unmodified original producer nine-building World and exact opening save; not fresh current-v6 city or regenerated ROOT07 fixture.';
++  report.legacyAndGuardianScope = 'Frozen UI preserves current-guardian, former-payer/refund and legacy-qualified labels. DOM7 assertions unchanged; separate legacy/care/death Node inputs archived only, no additional DOM cases.';
++
+   await writeFile(new URL('family-fee-ui-results.json',out),JSON.stringify(report,null,2));
+   console.log(JSON.stringify(report,null,2));
+ }

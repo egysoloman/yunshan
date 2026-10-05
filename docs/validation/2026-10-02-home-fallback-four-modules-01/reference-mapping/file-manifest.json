@@ -1,0 +1,68 @@
+{
+  "status": "STATIC_MAPPING_LOCAL_COMPLETE; NO_UPLOAD",
+  "files": [
+    {
+      "name": "README.md",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/README.md",
+      "bytes": 2898,
+      "sha256": "ea0fb6decbf4946101c3e3ef3db99de7f3f052c733e07074ab2722ec9460863f",
+      "stage_sha256": "ea0fb6decbf4946101c3e3ef3db99de7f3f052c733e07074ab2722ec9460863f"
+    },
+    {
+      "name": "reference-to-bom52.json",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/reference-to-bom52.json",
+      "bytes": 57864,
+      "sha256": "4f98b87f80844008ccfd2158582f52f0a69e82b0f9effa6c54a84428a09aa117",
+      "stage_sha256": "4f98b87f80844008ccfd2158582f52f0a69e82b0f9effa6c54a84428a09aa117"
+    },
+    {
+      "name": "reference-to-bom52.csv",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/reference-to-bom52.csv",
+      "bytes": 30109,
+      "sha256": "35cb38c966e36b0f7490bb0ff3aaf87bad963098215fe3fb6dae7056ed7c5a4e",
+      "stage_sha256": "35cb38c966e36b0f7490bb0ff3aaf87bad963098215fe3fb6dae7056ed7c5a4e"
+    },
+    {
+      "name": "physical52-reference-coverage.json",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/physical52-reference-coverage.json",
+      "bytes": 154462,
+      "sha256": "ba975a8dcb2f0ed37817eb79e6ef9f71ea3d87e9d08c24a5207a9dfff93df582",
+      "stage_sha256": "ba975a8dcb2f0ed37817eb79e6ef9f71ea3d87e9d08c24a5207a9dfff93df582"
+    },
+    {
+      "name": "physical52-reference-coverage.csv",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/physical52-reference-coverage.csv",
+      "bytes": 12997,
+      "sha256": "820bdd063696e03e30356d802ae1808cc4eb613aaebb55c3f28d111200a4d5db",
+      "stage_sha256": "820bdd063696e03e30356d802ae1808cc4eb613aaebb55c3f28d111200a4d5db"
+    },
+    {
+      "name": "minimum-joinable-subset.json",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/minimum-joinable-subset.json",
+      "bytes": 4833,
+      "sha256": "cd9ec265578a2ddd78cd973b622020e391cf1be57fbd60bc83686e1355a26a84",
+      "stage_sha256": "cd9ec265578a2ddd78cd973b622020e391cf1be57fbd60bc83686e1355a26a84"
+    },
+    {
+      "name": "consistency.json",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/consistency.json",
+      "bytes": 3326,
+      "sha256": "815b2076c268e6e2e708540461f8c29ca17128a38f28ba1d46f0e8054fdd59c5",
+      "stage_sha256": "815b2076c268e6e2e708540461f8c29ca17128a38f28ba1d46f0e8054fdd59c5"
+    },
+    {
+      "name": "production-spec-cross-review.json",
+      "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping/production-spec-cross-review.json",
+      "bytes": 5538,
+      "sha256": "12038be4a0956790782f15552000b5047725e55d37c5db4f2dc832e9b772ce5c",
+      "stage_sha256": "12038be4a0956790782f15552000b5047725e55d37c5db4f2dc832e9b772ce5c"
+    }
+  ],
+  "input_bytes_unchanged": true,
+  "image_count_actually_viewed": 2,
+  "reference_count": 28,
+  "physical_bom_count_retained": 52,
+  "new_model_jobs_or_paid_calls": 0,
+  "static_cross_review": "initial as-read spec 9f8206d46cc2f985ede2c4644329526d591e1a0246ff1494c8c5a1aadbbc68a2; root clarification separately recorded at 7dc1169ff471b1c966c4f6351be963e7f85956ba545b54a553d2404aa6d3ee6f",
+  "subsequent_root_spec_clarification_read_sha256": "7dc1169ff471b1c966c4f6351be963e7f85956ba545b54a553d2404aa6d3ee6f"
+}

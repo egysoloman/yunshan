@@ -1,0 +1,73 @@
+{
+  "status": "NOT_RUN",
+  "constraint": "No execution while parent owns final gift/UI/education/default-day jobs. All commands below are future proposals; no assertions, inputs, seed, population, speed, fixture or production options edited. A subset cannot establish whole-file or full-suite PASS.",
+  "immutableCwd": "/workspace/yunshan-work/ROOT15-suite-isolation-20261004-01/source",
+  "expectedGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+  "fullSuiteOriginalBudgetSeconds": 3600,
+  "nextOriginalFile": {
+    "scope": "35 original top-level tests plus their original subtests, unchanged single file; separate scope from original full npm test",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=process",
+      "--test-concurrency=1",
+      "tests/extensions.test.ts"
+    ],
+    "proposedDeclaredOuterBudgetSeconds": 3600
+  },
+  "optionalIndependentOriginalCases": [
+    {
+      "scope": "one original top-level callback, untouched; other original tests are filtered by runner, not deleted or modified",
+      "sourceLine": 1479,
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "--test-name-pattern=^the generated city autonomously funds and completes research through actual trained residents and laboratories$",
+        "tests/extensions.test.ts"
+      ],
+      "proposedDeclaredOuterBudgetSeconds": 3600
+    },
+    {
+      "scope": "one original top-level callback, untouched; other original tests are filtered by runner, not deleted or modified",
+      "sourceLine": 1680,
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "--test-name-pattern=^the extension remains finite, bounded, recoverable and deterministic over multiple accelerated game weeks$",
+        "tests/extensions.test.ts"
+      ],
+      "proposedDeclaredOuterBudgetSeconds": 3600
+    }
+  ],
+  "record": [
+    "raw bytes + SHA256",
+    "explicit scope and budget before run",
+    "input map before/after and graph",
+    "receipt exit/signal/timedOut/wall times",
+    "owned PID/startTicks and observed descendant cleanup",
+    "per-original-case durations when available; lack of child messages is not case progress evidence"
+  ],
+  "classification": [
+    "actual whole-file PASS only if file finishes and original assertions pass",
+    "FAIL for assertion failure or OOM with real exit",
+    "TIMEOUT_PARTIAL for an owned deadline interruption",
+    "NOT_RUN until actually executed"
+  ],
+  "unproven": [
+    "which original callback was active at timeout",
+    "per-case runtime/heap peaks",
+    "within-file order sensitivity",
+    "single-file complete result",
+    "full-suite PASS"
+  ]
+}

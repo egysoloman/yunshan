@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T10:50:04.389615+00:00",
+  "scope": "Dynamic city services stage only; complete game remains open",
+  "sharedSourceInputCount": 150,
+  "sourceManifestSha256": "daf32d2cf72a235a99afa4d7c74425475e39e12a1a3fbe8a217ff7dafb6cf691",
+  "archive": {
+    "bytes": 367653712,
+    "sha256": "86462ab6a015309b5d0d897c50a5be979e6001416cee9f868b74e31fcb705255",
+    "allMembers": 7132,
+    "originalMembers": 7127,
+    "buildAndIndependentVerify": "PASS",
+    "crcMemberShaDirectSourceMembership": "PASS",
+    "gitLosslessParts": 4,
+    "partReadbackAndStreamIdentity": "PASS"
+  },
+  "library": {
+    "status": "FAILED_BEFORE_LIBRARY_WRITE_CONNECTION_UNAVAILABLE",
+    "newLibraryIds": 0,
+    "memoLastConfirmedVersion": 4,
+    "memoLatestLocalDelivered": false,
+    "orderedResultReceipt": "library-save-result.json"
+  },
+  "git": {
+    "branch": "takeover-city-life",
+    "headAtReceiptCreation": "aeca2679bd984527273c334def2672ad83fe758f",
+    "remoteMainLastVerified": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "state": "COMMIT_AND_PUSH_PENDING_AT_PRECOMMIT_RECEIPT",
+    "pushUserAuthorized": true,
+    "mainMergePrDeployAuthorized": false,
+    "actualPushedCommitIdentity": "Root final response after exact remote readback; no self-referential commit hash in its own tree"
+  },
+  "finalChecks": {
+    "build": "PASS_FINAL22",
+    "appointmentGovernance": "20/20_PASS_FINAL22",
+    "nativePolicy": "PASS_657_TICKS_AND_24_FULL_SAVE_CONTINUATION",
+    "softwareGpu": "75/75_PASS_14_ACTUAL_PNG",
+    "art": "FAIL",
+    "newQualifiedExternal3DAssets": 0,
+    "new30Or60DayEconomicAudit": "NOT_RUN",
+    "macOSHardware": "NOT_RUN",
+    "fullNpmFinal22": "NOT_RUN"
+  },
+  "remaining": [
+    "roads closure/revision and construction",
+    "demolition title compensation relocation",
+    "fire/earthquake damage evacuation",
+    "physical electrical grid",
+    "natural pathogens/public waste/terminal disposal",
+    "default long-term economic steady state",
+    "commercial skyscrapers and reference-quality art",
+    "full education/research/culture/family depth",
+    "true statistical and simulation streaming",
+    "macOS real-hardware long journey"
+  ]
+}

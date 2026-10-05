@@ -1,0 +1,174 @@
+{
+  "status": "CLOSED",
+  "runs": [
+    {
+      "name": "types01",
+      "receipt": {
+        "startedAt": "2026-10-05T00:15:51.710868+00:00",
+        "endedAt": "2026-10-05T00:15:53.502487+00:00",
+        "argv": [
+          "./node_modules/.bin/tsc",
+          "--noEmit",
+          "-p",
+          "../tsconfig.driver.json"
+        ],
+        "exitCode": 2,
+        "timedOut": false,
+        "status": "FAIL",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "22d754e33e5e414d820e237c9e477c81ec8db495c45ab51f7665351a89a3c783",
+        "ownedPid": 129958,
+        "observedDescendants": 1,
+        "finalOwnedMembers": [],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    },
+    {
+      "name": "types02",
+      "receipt": {
+        "startedAt": "2026-10-05T00:16:56.739446+00:00",
+        "endedAt": "2026-10-05T00:17:03.805052+00:00",
+        "argv": [
+          "./node_modules/.bin/tsc",
+          "--noEmit",
+          "-p",
+          "../tsconfig.driver.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ownedPid": 130107,
+        "observedDescendants": 1,
+        "finalOwnedMembers": [],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    },
+    {
+      "name": "types03",
+      "receipt": {
+        "startedAt": "2026-10-05T00:19:12.398413+00:00",
+        "endedAt": "2026-10-05T00:19:19.363886+00:00",
+        "argv": [
+          "./node_modules/.bin/tsc",
+          "--noEmit",
+          "-p",
+          "../tsconfig.driver.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ownedPid": 130274,
+        "observedDescendants": 1,
+        "finalOwnedMembers": [],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    },
+    {
+      "name": "types04",
+      "receipt": {
+        "startedAt": "2026-10-05T00:19:48.555496+00:00",
+        "endedAt": "2026-10-05T00:19:57.020592+00:00",
+        "argv": [
+          "./node_modules/.bin/tsc",
+          "--noEmit",
+          "-p",
+          "../tsconfig.driver.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ownedPid": 130312,
+        "observedDescendants": 1,
+        "finalOwnedMembers": [],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    },
+    {
+      "name": "types05",
+      "receipt": {
+        "startedAt": "2026-10-05T00:20:49.693240+00:00",
+        "endedAt": "2026-10-05T00:20:59.396658+00:00",
+        "argv": [
+          "./node_modules/.bin/tsc",
+          "--noEmit",
+          "-p",
+          "../tsconfig.driver.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ownedPid": 130531,
+        "observedDescendants": 1,
+        "finalOwnedMembers": [],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    },
+    {
+      "name": "actual01",
+      "receipt": {
+        "startedAt": "2026-10-05T00:21:16.643074+00:00",
+        "endedAt": "2026-10-05T00:25:13.239785+00:00",
+        "argv": [
+          "env",
+          "ROOT16_MEDICAL_RUN_COORDINATED=1",
+          "node",
+          "--import",
+          "tsx",
+          "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01-driver-as-run.mts",
+          "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 322,
+        "inputsStable": true,
+        "rawSHA256": "abb822e518877cf1fd99b246fe97d9bf571efac2302a36ee55ba152cea567555",
+        "ownedPid": 130638,
+        "observedDescendants": 2,
+        "finalOwnedMembers": [
+          {
+            "pid": 130646,
+            "state": "Z",
+            "parent": 1,
+            "group": 130638,
+            "session": 130638,
+            "startTicks": 9050141
+          }
+        ],
+        "activeDescendants": [],
+        "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+        "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+      }
+    }
+  ],
+  "purePartition": "PARTITION-DISK-READBACK.json",
+  "report": "REPORT.md",
+  "inputManifest": "INPUT-MANIFEST.json",
+  "closure": "CLOSURE-RECEIPT.json",
+  "remainingCapacityStatic": "REMAINING-CAPACITY-STATIC.json",
+  "staticWorldAndHostScope": "REPORT.md",
+  "remainingRouteStatic": "remaining-route-static.json"
+}

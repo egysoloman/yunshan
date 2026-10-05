@@ -1,0 +1,35 @@
+{
+  "sourceSnapshot": "/tmp/yunshan-v4-root-coherent-04",
+  "sourceManifestSHA256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f",
+  "entrySHA256": "fee4c40b14b4ac44f0e1ea475b469df689470a1f3446f8d67fab1a2b7a0c1711",
+  "currentCSV": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/bom-full.csv",
+    "bytes": 80043,
+    "sha256": "b38588dd835a64b6d6b93c244d79ee171dc22b65c3c925c774134e627aa2f39a"
+  },
+  "currentReferenceTable": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/reference-interface.csv",
+    "sha256": "a093f1092ba37539923fbf8107ab8459fe20a128458b47f4cc14137b187baa18"
+  },
+  "draftCSVLibraryId": "libfile_3c87ce7ef38c8191b7c19f6cafd527b3",
+  "draftCSVFileId": "file_00000000232481f6ac8431e74b91f480",
+  "zipLibraryId": "libfile_cc48d9982cfc81919e129988a7a0a4e7",
+  "zipFileId": "file_00000000944481f6a2e3ae70b5996223",
+  "zipSHA256": "0224df52f975c19abb7f1db314233296c4faec438079d383ae18c4fc15c96b9b",
+  "zipBytes": 5818868,
+  "zipMemberCount": 94,
+  "productionSourceEdits": 0,
+  "assetGenerationCalls": 0,
+  "modelAssetsReady": 0,
+  "currentC1SkillRead": "skill package is not available",
+  "actualUploadRoute": "Official callable tools.mcp__codex_apps__library_create_library_file; one original draftCSV call and one corrected original ZIP call, both succeeded; no previous root failed batches retried",
+  "blockers": [
+    "Visual art not accepted",
+    "1→2 stairs blocked",
+    "Bed-target rest not implemented",
+    "Full descent and natural20s NPC observation not run",
+    "New furniture positions and quantities TBD",
+    "Independent component segmentation/export support and additional fees unverified",
+    "Tripo generation authorization pending"
+  ]
+}

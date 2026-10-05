@@ -1,0 +1,269 @@
+{
+  "actualBody": {
+    "position": {
+      "x": -403.6056850325325,
+      "y": 80,
+      "z": 307.6024104537938
+    },
+    "floor": 1,
+    "inside": "market-b24",
+    "blockedAccess": null,
+    "eye": [
+      -403.6056850325325,
+      81.72,
+      307.6024104537938
+    ],
+    "yaw": -1.169772993162172,
+    "pitch": 1.5671207839007961
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 8.85,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": false,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 89,
+      "triangles": 289672
+    },
+    "total": {
+      "calls": 154,
+      "triangles": 428824
+    },
+    "shadowCalls": 65,
+    "shadowTriangles": 139152
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 40,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    },
+    {
+      "id": 25,
+      "diagnostics": null
+    },
+    {
+      "id": 26,
+      "diagnostics": null
+    },
+    {
+      "id": 27,
+      "diagnostics": null
+    },
+    {
+      "id": 28,
+      "diagnostics": null
+    },
+    {
+      "id": 29,
+      "diagnostics": null
+    },
+    {
+      "id": 30,
+      "diagnostics": null
+    },
+    {
+      "id": 31,
+      "diagnostics": null
+    },
+    {
+      "id": 32,
+      "diagnostics": null
+    },
+    {
+      "id": 33,
+      "diagnostics": null
+    },
+    {
+      "id": 34,
+      "diagnostics": null
+    },
+    {
+      "id": 35,
+      "diagnostics": null
+    },
+    {
+      "id": 36,
+      "diagnostics": null
+    },
+    {
+      "id": 37,
+      "diagnostics": null
+    },
+    {
+      "id": 38,
+      "diagnostics": null
+    },
+    {
+      "id": 39,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 10,
+      "total": 482,
+      "created": 16,
+      "released": 6,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 10,
+    "actualMeshes": 69,
+    "actualInstances": 20384,
+    "ownedGeometryCount": 69,
+    "interiorBuildingRefs": 16,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 5,
+      "releases": 6,
+      "geometryDisposals": 41,
+      "instanceDisposals": 41,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 782,
+      "textures": 12
+    }
+  },
+  "verticalHits": [
+    {
+      "probe": {
+        "x": -403.6056850325325,
+        "y": 80,
+        "z": 307.6024104537938,
+        "minY": 79.975,
+        "maxY": 80.025
+      },
+      "nearest": {
+        "y": 80.00000152736902,
+        "floor": 1,
+        "roof": false,
+        "meshName": "batch-wood-all:box",
+        "geometryId": 3141,
+        "triangle": 5
+      },
+      "testedProjectedTriangles": 1964,
+      "scope": "Actual visible resident building refs; vertical hits, not authoritative physical support replacement"
+    }
+  ],
+  "name": "home-returned-floor1",
+  "cameraAim": {
+    "x": -403.6,
+    "y": 83.39999999999999,
+    "z": 307.6
+  },
+  "scope": "Single existing home controlled body; actual live natural clock, no clock/speed/identity writes; distinct from native ordinary URL journey and reference art pass"
+}

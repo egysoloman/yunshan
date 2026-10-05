@@ -1,0 +1,180 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { Simulation } from '../src/simulation';
+import { createWorld } from '../src/world';
+import { recordOwnedStockPurchase, supplyConsignment } from '../src/simulation/trade';
+import type { Building, Citizen, WorldDefinition } from '../src/types';
+
+// Explicit controlled unit initial conditions only. These cases are not the
+// original natural late31 proof and cannot establish natural city food success.
+const runtime = (sim: Simulation): any => Reflect.get(sim, 'runtime');
+const commerce = (sim: Simulation) => Reflect.get(sim, 'commerce').call(sim);
+const near = (actual: number, expected: number, message?: string) => assert(Math.abs(actual - expected) <= 1e-6, `${message ?? 'numeric equality'}: ${actual} != ${expected}`);
+const sum = <T>(rows: T[], value: (row: T) => number) => rows.reduce((total, row) => total + value(row), 0);
+function cash(sim: Simulation): number {
+  const s = sim.state, e = s.extension!, r = runtime(sim), companies = new Set(e.companies.map(c => c.buildingId));
+  return s.treasury + r.taxes + s.player.money + sum(s.citizens, c => c.money)
+    + sum(s.shops.filter(shop => !companies.has(shop.buildingId)), shop => shop.cash ?? 0)
+    + sum(e.companies, c => c.capital) + sum(e.organizations, o => o.funds)
+    + (s.banking?.cash ?? s.bankBalance) + (s.banking?.legacyInvestmentCash ?? r.investment)
+    + (s.playerLabor?.job?.escrow ?? 0) + sum(s.clinical?.orders ?? [], o => o.escrow)
+    + sum(s.family?.pregnancies ?? [], p => p.escrow) + sum(s.family?.households ?? [], h => h.balance);
+}
+function legacyWorld(): WorldDefinition {
+  const kinds: Building['kind'][] = ['home', 'market', 'workshop', 'school', 'farm', 'clinic', 'bank'];
+  const buildings = kinds.map((kind, i): Building => ({ id: kind, name: kind, kind, districtId: 'unit',
+    position: { x: i * 30, y: 20, z: 0 }, door: { x: i * 30, y: 20, z: 5 },
+    width: 10, depth: 10, height: 8, floors: 1, rotation: 0, capacity: 100, seed: i }));
+  const nodes = buildings.map(b => ({ id: `${b.id}-door`, name: b.name, districtId: 'unit', position: { ...b.door }, station: true }));
+  return { seed: 20261001, voxelSize: .2, size: 1000, buildings, nodes,
+    edges: nodes.slice(1).map((node, i) => ({ id: `road-${i}`, from: nodes[i].id, to: node.id, mode: 'road', length: 30, capacity: 20, points: [nodes[i].position, node.position] })),
+    districts: [{ id: 'unit', name: 'controlled retail', kind: 'market', center: { x: 90, y: 20, z: 0 }, radius: 500, color: '#abc', population: 96 }],
+    mountains: [], spawn: { x: 0, y: 20, z: 5 }, waterfall: { top: { x: 300, y: 40, z: 100 }, bottom: { x: 300, y: 20, z: 100 }, width: 10 }, river: [] };
+}
+function fixture(owned = 40, v4 = false, restricted = false) {
+  const world = v4 ? createWorld(20261001, 'current-v4') : legacyWorld();
+  const building = world.buildings.find(b => b.kind === 'market' && (!v4 || (b.functionPoints ?? []).some(p => p.purpose === 'sale') && (b.functionPoints ?? []).some(p => p.floor > 0)))!;
+  assert(building, 'v4 fixture has actual ground sale and upper function points');
+  if (restricted) { building.publicFloors = 0; building.floorPermissions = Array.from({ length: building.floors }, () => 'mayor'); }
+  const sim = new Simulation(world), shop = sim.state.shops.find(s => s.buildingId === building.id)!;
+  const supplier = sim.state.shops.find(s => s.districtId === shop.districtId && world.buildings.find(b => b.id === s.buildingId)?.kind === 'farm');
+  shop.inventory = owned; shop.price = 12; shop.customers = 7; shop.employees = 1;
+  delete sim.state.trade!.lots[shop.id]; delete sim.state.trade!.ownedLots![shop.id];
+  if (owned) recordOwnedStockPurchase(sim, shop.id, owned, 4);
+  if (supplier) supplier.inventory = 40;
+  assert(sim.command({ type: 'setTime', value: 21 + 56 / 60 }).ok);
+  const actor = sim.state.citizens.find(c => Reflect.get(sim, 'citizenIdentity').call(sim, c) !== 'mayor')!;
+  actor.position = { ...(v4 ? building.functionPoints!.find(p => p.purpose === 'sale' && p.id.includes('center'))?.position ?? building.functionPoints!.find(p => p.purpose === 'sale')!.position : building.door) };
+  actor.destinationId = building.id; actor.state = 'shopping'; actor.food = 0;
+  actor.needs = { hunger: 20, fatigue: 50, social: 50, fun: 50 };
+  runtime(sim).activities[actor.id] = 'eat'; runtime(sim).decisionAt[actor.id] = 1376;
+  runtime(sim).commerceAt = 1322;
+  return { sim, world, building, shop, supplier, actor };
+}
+function request(f: ReturnType<typeof fixture>, actor: Citizen = f.actor) {
+  assert.equal(actor.destinationId, f.building.id, 'controlled queue is a real target-matching shopping request');
+  assert.equal(actor.state, 'shopping');
+  f.sim.emitEvent({ type: 'customer', citizenId: actor.id, shopId: f.shop.id });
+}
+function initialClock(f: ReturnType<typeof fixture>, hour: number, batchAt: number) {
+  assert(f.sim.command({ type: 'setTime', value: hour }).ok);
+  f.actor.destinationId = f.building.id; f.actor.state = 'shopping'; runtime(f.sim).activities[f.actor.id] = 'eat';
+  runtime(f.sim).decisionAt[f.actor.id] = f.sim.state.hour * 60 + 60; runtime(f.sim).commerceAt = batchAt;
+}
+function atomicRejection(f: ReturnType<typeof fixture>) {
+  request(f); const before = f.sim.exportSave(), currency = cash(f.sim);
+  let sales = 0; f.sim.onEvent('sale', () => sales++); commerce(f.sim);
+  assert.equal(sales, 0); assert.equal(f.sim.exportSave(), before); near(cash(f.sim), currency);
+  assert.equal(runtime(f.sim).customers[f.actor.id], f.shop.id, 'failed between-batch request retains old retry policy');
+}
+
+test('a real queued arrival before close settles without the next batch; one request buys once', () => {
+  const f = fixture(), money = f.actor.money, stock = f.shop.inventory, currency = cash(f.sim), price = f.shop.price;
+  request(f); let sales = 0; f.sim.onEvent('sale', event => { if (event.citizenId === f.actor.id) { sales++; assert.equal(event.quantity, 2); } });
+  commerce(f.sim);
+  assert.equal(sales, 1); near(f.actor.money, money - 24); assert.equal(f.actor.needs.hunger, 72); assert.equal(f.actor.food, 1);
+  assert.equal(f.shop.inventory, stock - 2); assert.equal(f.shop.price, price, 'pricing stays on batch');
+  assert.equal(runtime(f.sim).commerceAt, 1322, 'batch timer stays intact'); assert.equal(f.shop.customers, 7, 'previous batch statistic is not added to current receipts');
+  assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], 2); assert.equal(runtime(f.sim).customers[f.actor.id], undefined);
+  near(cash(f.sim), currency); const settled = f.sim.exportSave(); commerce(f.sim);
+  assert.equal(f.sim.exportSave(), settled, 'second commerce invocation cannot buy from consumed request'); assert.equal(sales, 1);
+});
+
+test('exactly22:00 rejects a queued sale even if its old shop.open flag is still true', () => {
+  const f = fixture(); initialClock(f, 22, 1326);
+  assert.equal(f.shop.open, true, 'deliberately stale genuine initial flag'); atomicRejection(f);
+});
+
+test('closed batch clears failed requests and never debits the buyer or restores needs', () => {
+  const f = fixture(); initialClock(f, 22 + 4 / 60, 1322);
+  request(f); const buyer = { money: f.actor.money, food: f.actor.food, needs: { ...f.actor.needs } }, currency = cash(f.sim);
+  let sales = 0; f.sim.onEvent('sale', event => { if (event.citizenId === f.actor.id) sales++; }); commerce(f.sim);
+  assert.equal(sales, 0); assert.equal(f.actor.money, buyer.money); assert.equal(f.actor.food, buyer.food); assert.deepEqual(f.actor.needs, buyer.needs);
+  assert.equal(runtime(f.sim).customers[f.actor.id], undefined); assert.equal(runtime(f.sim).retailSalesSinceBatch, undefined); near(cash(f.sim), currency);
+});
+
+test('wallet shortage, empty stock, invalid owned basis and capped retailer reject atomically', () => {
+  const poor = fixture(); poor.actor.money = poor.shop.price - 1; atomicRejection(poor);
+  atomicRejection(fixture(0));
+  const badBasis = fixture(); badBasis.sim.state.trade!.ownedLots![badBasis.shop.id][0].quantity -= 1; atomicRejection(badBasis);
+  const capped = fixture(); capped.sim.transferShopFunds(capped.shop, 1e9 - capped.sim.shopFunds(capped.shop)); atomicRejection(capped);
+});
+
+test('consignment net insufficiency and supplier capacity reject before buyer debit', () => {
+  const lowMargin = fixture(0); assert(lowMargin.supplier); assert.equal(supplyConsignment(lowMargin.sim, lowMargin.shop.id, 4), 4);
+  lowMargin.shop.price = 5; lowMargin.sim.state.taxRate = .3; atomicRejection(lowMargin);
+  const capped = fixture(0); assert(capped.supplier); assert.equal(supplyConsignment(capped.sim, capped.shop.id, 4), 4);
+  capped.sim.transferShopFunds(capped.supplier, 1e9 - capped.sim.shopFunds(capped.supplier)); atomicRejection(capped);
+});
+
+test('owned FIFO then consigned supplier split uses only each actual buyer receipt', () => {
+  const f = fixture(2); assert(f.supplier); assert.equal(supplyConsignment(f.sim, f.shop.id, 4), 2, 'four-unit trial limit includes the two owned units');
+  const currency = cash(f.sim), supplierCash = f.sim.shopFunds(f.supplier), retailerCash = f.sim.shopFunds(f.shop), taxes = runtime(f.sim).taxes;
+  request(f); commerce(f.sim); near(f.sim.shopFunds(f.supplier), supplierCash); near(f.sim.shopFunds(f.shop), retailerCash + 22.08);
+  assert.equal(f.sim.state.trade!.lots[f.shop.id][0].quantity, 2, 'owned two units clear first');
+  request(f); commerce(f.sim); near(f.sim.shopFunds(f.supplier), supplierCash + 3.68); near(f.sim.shopFunds(f.shop), retailerCash + 29.12);
+  near(runtime(f.sim).taxes - taxes, 3.20); assert.equal(f.sim.state.trade!.lots[f.shop.id][0].quantity, 1);
+  assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], 3); near(cash(f.sim), currency);
+});
+
+test('v4 clears only the actual legal sale point with the NPC identity', () => {
+  const legal = fixture(40, true), role = Reflect.get(legal.sim, 'citizenIdentity').call(legal.sim, legal.actor);
+  assert(legal.sim.isAtBuildingFunctionPoint(legal.building, legal.actor.position, 'sale', { role, identities: [role] }));
+  request(legal); const money = legal.actor.money; commerce(legal.sim); near(legal.actor.money, money - 24);
+  const upper = fixture(40, true); upper.actor.position = { ...upper.building.functionPoints!.find(p => p.floor > 0)!.position }; atomicRejection(upper);
+  const forbidden = fixture(40, true, true); forbidden.sim.state.player.role = 'mayor';
+  const npcRole = Reflect.get(forbidden.sim, 'citizenIdentity').call(forbidden.sim, forbidden.actor);
+  assert(!forbidden.sim.isAtBuildingFunctionPoint(forbidden.building, forbidden.actor.position, 'sale', { role: npcRole, identities: [npcRole] }));
+  assert(forbidden.sim.isAtBuildingFunctionPoint(forbidden.building, forbidden.actor.position, 'sale', { role: 'mayor', identities: ['mayor'] }));
+  atomicRejection(forbidden);
+  const blocked = fixture(40, true); blocked.sim.state.voxels.push({ id: 'controlled-body-block', position: { ...blocked.actor.position, y: blocked.actor.position.y + .6 }, color: '#abcdef' }); atomicRejection(blocked);
+});
+
+test('actual between-batch volume drives the next batch once and never reuses old customers', () => {
+  const f = fixture(); request(f); commerce(f.sim); assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], 2);
+  const district = f.sim.state.districts.find(d => d.id === f.shop.districtId)!, prosperity = district.prosperity;
+  const districtShops = f.sim.state.shops.filter(s => s.districtId === district.id);
+  assert(district.energy > 25 && districtShops.every(s => !Reflect.get(f.sim, 'shopInsolvent').call(f.sim, s)), 'controlled receipt feedback has no availability failure');
+  initialClock(f, 22 + 4 / 60, 1322); commerce(f.sim); assert.equal(f.shop.customers, 2);
+  assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], undefined);
+  const expected = 12 + (12 * (1 + (70 - 38) / 70 * .5 + 2 * .08) - 12) * .04;
+  near(f.shop.price, expected); assert.equal(f.shop.inventory, 38);
+  near(district.prosperity, prosperity + 2 * .07 / districtShops.length * 12 / 10, 'before-close receipt remains in the after-close batch feedback');
+  // Independent controlled batch clock. Closed counters cannot re-count old2.
+  const afterReceipt = district.prosperity; initialClock(f, 22 + 16 / 60, 1334); commerce(f.sim);
+  assert.equal(f.shop.customers, 0); near(district.prosperity, afterReceipt);
+});
+
+test('optional pending volume saves exactly, rejects malformed imports atomically and restores24 full ticks', () => {
+  const f = fixture(), older = f.sim.exportSave(); assert.equal(JSON.parse(older).runtime.retailSalesSinceBatch, undefined);
+  const untouched = new Simulation(f.world); const oldImport = untouched.importSave(older); assert(oldImport.ok, oldImport.message); assert.equal(untouched.exportSave(), older, 'old save not padded with new field');
+  request(f); commerce(f.sim); const saved = f.sim.exportSave(), restored = new Simulation(f.world), imported = restored.importSave(saved);
+  assert(imported.ok, imported.message); assert.equal(restored.exportSave(), saved);
+  const corruptions = [null, [], { missing: 1 }, { [f.shop.id]: -1 }, { [f.shop.id]: .5 }, { [f.shop.id]: 100001 }, { [f.shop.id]: '2' }];
+  for (const value of corruptions) { const data = JSON.parse(saved); data.runtime.retailSalesSinceBatch = value;
+    assert.equal(restored.importSave(JSON.stringify(data)).ok, false); assert.equal(restored.exportSave(), saved); }
+  const currency = cash(f.sim);
+  for (let i = 0; i < 24; i++) { f.sim.step(.25); restored.step(.25); assert.equal(f.sim.exportSave(), restored.exportSave(), `full save exact at real tick${i + 1}`); near(cash(f.sim), currency); }
+});
+
+test('valid imported volume near its limit stays atomic and exportable in current and batch settlement', () => {
+  const f = fixture();
+  const data = JSON.parse(f.sim.exportSave()); data.runtime.retailSalesSinceBatch = { [f.shop.id]: 99999 };
+  const imported = f.sim.importSave(JSON.stringify(data)); assert(imported.ok, imported.message);
+  // Imports replace the state objects: bind the fixture to the actual restored actors.
+  f.shop = f.sim.state.shops.find(s => s.id === f.shop.id)!;
+  f.actor = f.sim.state.citizens.find(c => c.id === f.actor.id)!;
+  atomicRejection(f); assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], 99999);
+  f.actor.food = 1; commerce(f.sim);
+  assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], 100000);
+  const save = f.sim.exportSave(), restored = new Simulation(f.world), loaded = restored.importSave(save);
+  assert(loaded.ok, loaded.message); assert.equal(restored.exportSave(), save);
+  atomicRejection(f);
+  // The next open batch seeds the persisted volume, then rejects another
+  // customer receipt before exceeding shop.customers' existing save limit.
+  initialClock(f, 21 + 56 / 60, 1316); const money = f.actor.money, stock = f.shop.inventory;
+  commerce(f.sim); assert.equal(f.actor.money, money); assert.equal(f.shop.inventory, stock);
+  assert.equal(f.shop.customers, 100000); assert.equal(runtime(f.sim).retailSalesSinceBatch[f.shop.id], undefined);
+  const batchSave = f.sim.exportSave(), batchLoaded = restored.importSave(batchSave);
+  assert(batchLoaded.ok, batchLoaded.message); assert.equal(restored.exportSave(), batchSave);
+});

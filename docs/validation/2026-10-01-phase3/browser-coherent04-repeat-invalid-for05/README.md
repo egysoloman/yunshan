@@ -1,0 +1,5 @@
+错误scope原件：04重复运行，INVALID-FOR-05
+
+最初以05准备执行时，observer代码仅替换了coherent04文本，漏掉路径中的coherent-04，实际cwd/snapshot仍为04、入口n3tM-54D。05独立预检正确却未约束真正executor，是本代理执行错误；原11项通过只能算04重复，不能计入05。发现最终旧入口后立即报告root并保留整个原目录字节，不修改真实metadata。该原始运行产物迁至独立phase3-browser-coherent04-repeat，早期日志中旧输出路径05字样仍按原件保留。
+
+真正05在独立browser-coherent05重新完整执行，增加literal路径/expected entry/89 manifest硬断言。executor-correction.json记录错误/修正executor各自SHA与真正workspace，原始before/after observer代码分别随两批证据归档。打包或验收必须按run-manifest的实际snapshot/entry，不能凭历史路径标签选本批作05。

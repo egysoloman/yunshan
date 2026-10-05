@@ -1,0 +1,180 @@
+{
+  "atUTC": "2026-10-03T01:26:33.421981+00:00",
+  "state": "ACTUAL14_NATIVE_FULL_SCOPE_PASS7_EXIT0_OWNED_RESOURCES_RELEASED",
+  "rawExit": {
+    "startedAtUTC": "2026-10-03T01:15:03.614868+00:00",
+    "endedAtUTC": "2026-10-03T01:25:05.149424+00:00",
+    "wallSeconds": 601.5347994350013,
+    "nodePID": 177398,
+    "rawNodeExitCode": 0,
+    "wrapper": {
+      "pid": 177394,
+      "ppid": 177393,
+      "state": "R",
+      "startTicks": 12606071
+    },
+    "signalsSentByWrapper": [],
+    "evidenceRoot": "/tmp/yunshan-coherent14-native-frame-barrier-01/native-home-evidence"
+  },
+  "actualResultSummary": {
+    "atUTC": "2026-10-03T01:25:05.113Z",
+    "stage": "completed",
+    "exitCode": 0,
+    "errors": [],
+    "setupCount": 1,
+    "sharedExecutableInputCount": 103,
+    "sourceStable": true,
+    "sharedExecutableStable": true,
+    "externalStable": true,
+    "entryStable": true,
+    "sourceMapsStable": true,
+    "browserClose": "resolved",
+    "serverExitCode": 143,
+    "serverSignalCode": null
+  },
+  "passes": [
+    "native W approach and native E actual home doorway",
+    "native rent80 conserves wallet/public cash and table rest stays disabled",
+    "real W departure pauses with no away progress",
+    "return to original side needs explicit native continuation, no instant credit",
+    "native buttons create real IndexedDB generation and restore exact active rest checkpoint",
+    "actual twenty-minute onsite completion, no additional cash charge",
+    "native cancellation preserves earned partial progress without instant credit"
+  ],
+  "exactOriginalOwnedPIDStates": [
+    {
+      "pid": 177394,
+      "originalStartTicks": 12606071,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177398,
+      "originalStartTicks": 12606075,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177409,
+      "originalStartTicks": 12606089,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177417,
+      "originalStartTicks": 12606103,
+      "currentStartTicks": 12606103,
+      "state": "Z",
+      "sameOriginalProcess": true
+    },
+    {
+      "pid": 177429,
+      "originalStartTicks": 12606150,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177447,
+      "originalStartTicks": 12606171,
+      "currentStartTicks": 12606171,
+      "state": "Z",
+      "sameOriginalProcess": true
+    },
+    {
+      "pid": 177448,
+      "originalStartTicks": 12606171,
+      "currentStartTicks": 12606171,
+      "state": "Z",
+      "sameOriginalProcess": true
+    },
+    {
+      "pid": 177467,
+      "originalStartTicks": 12606181,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177483,
+      "originalStartTicks": 12606233,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177484,
+      "originalStartTicks": 12606238,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177514,
+      "originalStartTicks": 12606252,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177523,
+      "originalStartTicks": 12606257,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    },
+    {
+      "pid": 177526,
+      "originalStartTicks": 12606257,
+      "state": "ABSENT",
+      "sameOriginalProcess": false
+    }
+  ],
+  "remainingOriginalOwnedNonZombie": [],
+  "remainingExactProfileNonZombie": [],
+  "profiles": [
+    {
+      "path": "/tmp/playwright_chromiumdev_profile-R9W555",
+      "exists": false
+    }
+  ],
+  "port4189Listeners": [],
+  "frozen108HashMismatches": [],
+  "shared103HashMismatches": [],
+  "snapshotManifestActualSHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb",
+  "buildReceiptActualSHA256": "7125b5046ff201c57afb174ebd209594e5a262320a344afdde28c8b08456e917",
+  "assetsRehashed": [
+    {
+      "assetPath": "/assets/index-BK5BTGkK.js",
+      "expectedSHA256": "c88765d0527dd33f7c58c862cd26ee03f33324b839022ce55d4e0282df09dbb4",
+      "actualSHA256": "c88765d0527dd33f7c58c862cd26ee03f33324b839022ce55d4e0282df09dbb4"
+    },
+    {
+      "assetPath": "/assets/index-BK5BTGkK.js.map",
+      "expectedSHA256": "34c093226069e46123afba40a314978f7f39b565d726051c96713a05dbb2c6ae",
+      "actualSHA256": "34c093226069e46123afba40a314978f7f39b565d726051c96713a05dbb2c6ae"
+    },
+    {
+      "assetPath": "/assets/three-DfYROjRC.js.map",
+      "expectedSHA256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "actualSHA256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191"
+    }
+  ],
+  "externalHashMismatches": [],
+  "original13RawFilesRehashed": 17,
+  "original13RawHashMismatches": [],
+  "nativeMovementRecords": 79,
+  "WDOMPairs": 79,
+  "zeroMovementRecords": 0,
+  "actualDOMHeldMs": {
+    "min": 34.80000001192093,
+    "median": 200.70000000298023,
+    "max": 222.5,
+    "sum": 13198.199999883771
+  },
+  "consumptionBarrierViolations": [],
+  "scopeNotRun": [
+    "formal browser11 on actual14",
+    "ordinary journey from spawn",
+    "natural NPC bed case",
+    "art acceptance",
+    "Mac hardware or FPS performance",
+    "ZIP"
+  ],
+  "signalsSentByThisAgent": [],
+  "harnessOwnServerCleanup": "Original harness normal SIGTERM to own Vite only; rawserver exit143."
+}

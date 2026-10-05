@@ -1,0 +1,177 @@
+{
+  "startedAt": "2026-10-04T08:24:22.023698+00:00",
+  "endedAt": "2026-10-04T08:24:22.066460+00:00",
+  "status": "INSTALLED_EXACT_VERIFIED_SOURCE",
+  "source": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source",
+  "live": "/workspace/yunshan",
+  "baseInputCount": 244,
+  "finalInputCount": 258,
+  "changedInputs": [
+    {
+      "path": "adapters/rpg-maker/bridge.ts",
+      "beforeSHA256": "87ddfb0ce805f5f3a2643ef4c33d03fd323c9aab408604c5dfa09411a1d03927",
+      "afterSHA256": "9947193bd06f692c9782d54e21c872a7def1fd11669adc6fc7eee3d6c80f7527"
+    },
+    {
+      "path": "scripts/economy-audit.ts",
+      "beforeSHA256": "be116d5a13aeedaafae7a2a41856892f96c4de370bb53a13741916fd0c16edeb",
+      "afterSHA256": "9a60a1499c865cd5d12cbd4ce4af354a5beaa0bf45d4b21adc07c51ac15fa466"
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "beforeSHA256": "c95e83f8f61920877f3207dbebe1f62183700f6ec4aa49e1e4403e9ef486f513",
+      "afterSHA256": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94"
+    },
+    {
+      "path": "src/hygiene-ui.ts",
+      "beforeSHA256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611",
+      "afterSHA256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    {
+      "path": "src/main.ts",
+      "beforeSHA256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529",
+      "afterSHA256": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "beforeSHA256": "d30c88371bb1959219fa54b6db67e2decbe638b117dcbb1d22aeb1a843df1661",
+      "afterSHA256": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165"
+    },
+    {
+      "path": "src/renderer.ts",
+      "beforeSHA256": "a52a27a3316cb4a2fea86fa553f4de8ac3c6008fc0b533259ade4917b73fec03",
+      "afterSHA256": "4b39d83c25501ff03bbff237974aea4f792eae50a130dae1c5cb94e463167606"
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "beforeSHA256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd",
+      "afterSHA256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    {
+      "path": "src/rendering/market-goods.ts",
+      "beforeSHA256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "afterSHA256": "678be7e8020e237f39c85133fd2d9a60f58653aad29bb5376a4cbcacf045a67c"
+    },
+    {
+      "path": "src/rendering/market-shopfront.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "bb5f056b77dcf8c1c05447e06eb42c95ce32dc4adad16720c834135b00b47f23"
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "beforeSHA256": "c8bc8a9cf18ed761790ac99ad43e5702e4c8db676a8a3129317ec6f35c0fdd42",
+      "afterSHA256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "beforeSHA256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552",
+      "afterSHA256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "src/simulation/hygiene-transfer.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "beforeSHA256": "52b3c06a8ffe9d9aa0a79b6493b0ef532ab85a4c0561349a693fb9ef34690e30",
+      "afterSHA256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "src/simulation/npc-stair-motion.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "d15db069009834e47d153b3de0b0f6aebb87ab5a2e19d98e09bf6dcb4cb117e1"
+    },
+    {
+      "path": "src/simulation/public-employment.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    {
+      "path": "src/simulation.ts",
+      "beforeSHA256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39",
+      "afterSHA256": "9ab2fb0d8aa2dbc48a172d891724ab598cd19e733775e3d600541bd24808ad44"
+    },
+    {
+      "path": "src/types.ts",
+      "beforeSHA256": "1517b9e21582269de9b7d352d297a71d732771ee8b08501f975222c40303ee1e",
+      "afterSHA256": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b"
+    },
+    {
+      "path": "src/ui.ts",
+      "beforeSHA256": "0a5b600ea4be90b4f5aaa0c919a4a999a7bf84245c13bc7dd39dac31493deecf",
+      "afterSHA256": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d"
+    },
+    {
+      "path": "tests/appointment-funds.test.ts",
+      "beforeSHA256": "f8afd2248ec63046da8fb7361bbe0fbd0b7ed47bf740fb4910a595e4b27fc5f4",
+      "afterSHA256": "0adfe5c71e3a10782e72d76e783ecb45b6721c2a68dfcd168a6f75a7241973fc"
+    },
+    {
+      "path": "tests/floor-plan-self-collision.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "77b10ed923354af7d57a9ae5c89670345e162893741bedf3dfdaa9400c31a3f1"
+    },
+    {
+      "path": "tests/hygiene-transfer.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2"
+    },
+    {
+      "path": "tests/market-shopfront.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990"
+    },
+    {
+      "path": "tests/npc-stair-native-activity.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "6cd649e1f8c23ba52b5e4e134eeee4f952ef6b3fa86c2796df2d24e5121c42a1"
+    },
+    {
+      "path": "tests/npc-stair-native.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "596f1bda23e0c39bf0bba0383b400770e3463dab75c01708a4b9c231a7adbe7b"
+    },
+    {
+      "path": "tests/public-employment-fixture.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+    },
+    {
+      "path": "tests/public-employment-transfer.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "4c2480a07eda774cd798d42e17f127bbe96fbe1715344b8d5540b6d907e551a1"
+    },
+    {
+      "path": "tests/roadwork-replacement.test.ts",
+      "beforeSHA256": "4700d1ef728d157f539c28311c84717c3db20cca67fe26919b02e4f22014423c",
+      "afterSHA256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+    },
+    {
+      "path": "tests/world-v6-commercial-routes.test.ts",
+      "beforeSHA256": "a1735100a3c972faff7c1dbb987f31f9c99f85246fffe56a61c2298179e5a24f",
+      "afterSHA256": "eccd0446f775759b8f1a733134abec59894013ad2fb50b13e356f759b29c4dae"
+    },
+    {
+      "path": "tests/native-live-reader.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "4f8d6a0a1d40700a3d3434ede8c37e7195e37b0a62fa2920e478da2932ee584e"
+    },
+    {
+      "path": "tests/fixtures/native-live-reader/actual-browser-writer.save.json.gz",
+      "beforeSHA256": null,
+      "afterSHA256": "cbfcc4b27b55073e585f967a2ca4ce607c8263b4781ba9131695242fdb691db2"
+    },
+    {
+      "path": "tests/fixtures/native-live-reader/provenance.json",
+      "beforeSHA256": null,
+      "afterSHA256": "2fc9005a7e2ac69cb350d2d2c224e077b86df3483516049fac019158272cd0a0"
+    }
+  ],
+  "candidateMapSHA256": "1f3f00f88bbc1f3509dcc2bdaae760440c17561e1af0f8754458c0b4cbd8fb60",
+  "baseMapSHA256": "3493a1c4b78129714a924a8b722316a07a084eb052fb552fe90083294c2c19c1",
+  "allFinalInputsExact": true,
+  "documentsOutsideRuntimeMapPreserved": true,
+  "allOriginalInputsRetained": true,
+  "completeGoal": false
+}

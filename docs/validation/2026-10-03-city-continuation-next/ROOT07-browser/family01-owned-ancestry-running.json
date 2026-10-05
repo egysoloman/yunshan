@@ -1,0 +1,650 @@
+{
+  "observedAt": "2026-10-04T02:42:15.819765+00:00",
+  "activeBrowserProcesses": [
+    {
+      "pid": 26906,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26894,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255579
+    },
+    {
+      "pid": 26939,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255648
+    },
+    {
+      "pid": 26940,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255649
+    },
+    {
+      "pid": 26959,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26939,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255673
+    },
+    {
+      "pid": 26975,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255728
+    },
+    {
+      "pid": 26976,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255733
+    },
+    {
+      "pid": 27006,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255751
+    },
+    {
+      "pid": 27013,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255758
+    },
+    {
+      "pid": 27014,
+      "name": "chromium",
+      "state": "R",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255759
+    }
+  ],
+  "zombieBrowserProcesses": [
+    {
+      "pid": 2489,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 2488,
+      "session": 2488,
+      "startTicks": 60289
+    },
+    {
+      "pid": 2491,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 2474,
+      "session": 2474,
+      "startTicks": 60291
+    },
+    {
+      "pid": 2492,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 2474,
+      "session": 2474,
+      "startTicks": 60291
+    },
+    {
+      "pid": 3271,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 3270,
+      "session": 3270,
+      "startTicks": 84006
+    },
+    {
+      "pid": 3273,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 3256,
+      "session": 3256,
+      "startTicks": 84006
+    },
+    {
+      "pid": 3274,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 3256,
+      "session": 3256,
+      "startTicks": 84006
+    },
+    {
+      "pid": 3946,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 3945,
+      "session": 3945,
+      "startTicks": 104038
+    },
+    {
+      "pid": 3948,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 3931,
+      "session": 3931,
+      "startTicks": 104038
+    },
+    {
+      "pid": 3949,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 3931,
+      "session": 3931,
+      "startTicks": 104038
+    },
+    {
+      "pid": 9891,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 9890,
+      "session": 9890,
+      "startTicks": 388056
+    },
+    {
+      "pid": 9893,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 9874,
+      "session": 9874,
+      "startTicks": 388057
+    },
+    {
+      "pid": 9894,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 9874,
+      "session": 9874,
+      "startTicks": 388057
+    },
+    {
+      "pid": 11468,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 11467,
+      "session": 11467,
+      "startTicks": 465903
+    },
+    {
+      "pid": 11470,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 11453,
+      "session": 11453,
+      "startTicks": 465904
+    },
+    {
+      "pid": 11471,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 11453,
+      "session": 11453,
+      "startTicks": 465904
+    },
+    {
+      "pid": 11886,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 11885,
+      "session": 11885,
+      "startTicks": 475291
+    },
+    {
+      "pid": 11888,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 11870,
+      "session": 11870,
+      "startTicks": 475292
+    },
+    {
+      "pid": 11889,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 11870,
+      "session": 11870,
+      "startTicks": 475292
+    },
+    {
+      "pid": 18517,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 18516,
+      "session": 18516,
+      "startTicks": 743216
+    },
+    {
+      "pid": 18519,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 18502,
+      "session": 18502,
+      "startTicks": 743216
+    },
+    {
+      "pid": 18520,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 18502,
+      "session": 18502,
+      "startTicks": 743216
+    },
+    {
+      "pid": 20988,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 20987,
+      "session": 20987,
+      "startTicks": 824060
+    },
+    {
+      "pid": 20990,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 20971,
+      "session": 20971,
+      "startTicks": 824060
+    },
+    {
+      "pid": 20991,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 20971,
+      "session": 20971,
+      "startTicks": 824060
+    },
+    {
+      "pid": 21064,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 20971,
+      "session": 20971,
+      "startTicks": 824169
+    },
+    {
+      "pid": 21318,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 21317,
+      "session": 21317,
+      "startTicks": 842066
+    },
+    {
+      "pid": 21320,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 21303,
+      "session": 21303,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21321,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 21303,
+      "session": 21303,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21686,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 21685,
+      "session": 21685,
+      "startTicks": 874926
+    },
+    {
+      "pid": 21688,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 21663,
+      "session": 21663,
+      "startTicks": 874930
+    },
+    {
+      "pid": 21689,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 21663,
+      "session": 21663,
+      "startTicks": 874930
+    },
+    {
+      "pid": 25017,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 25016,
+      "session": 25016,
+      "startTicks": 1081666
+    },
+    {
+      "pid": 25019,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 25002,
+      "session": 25002,
+      "startTicks": 1081667
+    },
+    {
+      "pid": 25020,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 25002,
+      "session": 25002,
+      "startTicks": 1081667
+    },
+    {
+      "pid": 25323,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 25322,
+      "session": 25322,
+      "startTicks": 1135455
+    },
+    {
+      "pid": 25325,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 25308,
+      "session": 25308,
+      "startTicks": 1135455
+    },
+    {
+      "pid": 25326,
+      "name": "chromium",
+      "state": "Z",
+      "parent": 1,
+      "group": 25308,
+      "session": 25308,
+      "startTicks": 1135455
+    },
+    {
+      "pid": 26937,
+      "name": "chrome_crashpad",
+      "state": "Z",
+      "parent": 1,
+      "group": 26936,
+      "session": 26936,
+      "startTicks": 1255645
+    }
+  ],
+  "ports": {
+    "4173": "FREE",
+    "4187": "OCCUPIED: [Errno 98] Address already in use",
+    "4197": "FREE",
+    "4318": "FREE"
+  },
+  "ownedPid": 26894,
+  "ownedDescendantsAcrossSessions": [
+    {
+      "pid": 26894,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 26893,
+      "group": 26894,
+      "session": 26894,
+      "startTicks": 1255453
+    },
+    {
+      "pid": 26906,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26894,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255579
+    },
+    {
+      "pid": 26909,
+      "name": "esbuild",
+      "state": "S",
+      "parent": 26894,
+      "group": 26894,
+      "session": 26894,
+      "startTicks": 1255580
+    },
+    {
+      "pid": 26939,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255648
+    },
+    {
+      "pid": 26940,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255649
+    },
+    {
+      "pid": 26959,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26939,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255673
+    },
+    {
+      "pid": 26975,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255728
+    },
+    {
+      "pid": 26976,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255733
+    },
+    {
+      "pid": 27006,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255751
+    },
+    {
+      "pid": 27013,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255758
+    },
+    {
+      "pid": 27014,
+      "name": "chromium",
+      "state": "R",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255759
+    }
+  ],
+  "ownedActiveDescendants": [
+    {
+      "pid": 26894,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 26893,
+      "group": 26894,
+      "session": 26894,
+      "startTicks": 1255453
+    },
+    {
+      "pid": 26906,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26894,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255579
+    },
+    {
+      "pid": 26909,
+      "name": "esbuild",
+      "state": "S",
+      "parent": 26894,
+      "group": 26894,
+      "session": 26894,
+      "startTicks": 1255580
+    },
+    {
+      "pid": 26939,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255648
+    },
+    {
+      "pid": 26940,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255649
+    },
+    {
+      "pid": 26959,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26939,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255673
+    },
+    {
+      "pid": 26975,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26906,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255728
+    },
+    {
+      "pid": 26976,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255733
+    },
+    {
+      "pid": 27006,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255751
+    },
+    {
+      "pid": 27013,
+      "name": "chromium",
+      "state": "S",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255758
+    },
+    {
+      "pid": 27014,
+      "name": "chromium",
+      "state": "R",
+      "parent": 26940,
+      "group": 26906,
+      "session": 26906,
+      "startTicks": 1255759
+    }
+  ],
+  "remainingKnownRootCpuAudit": {
+    "pid": 21540,
+    "name": "MainThread",
+    "state": "R",
+    "parent": 21537,
+    "group": 21540,
+    "session": 21540,
+    "startTicks": 869225
+  },
+  "observerSHA256": "5ac9bc7dc5b25f9b135c146b88ceca1012151c96be50eec5fc8efac2f3afce3c",
+  "scope": "Read-only /proc process identities and local port binds. Zombies are recorded separately; a missing parent does not alone prove detached browser cleanup."
+}

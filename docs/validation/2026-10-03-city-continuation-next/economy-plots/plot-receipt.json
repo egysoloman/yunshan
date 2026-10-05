@@ -1,0 +1,31 @@
+{
+  "producer": "/root",
+  "auditSHA256": "2e81c0efc71a0f059028529286400397fec0a49b40afd47695e6cd3aaf43ac32",
+  "originalAuditUnchanged": true,
+  "originalSamples": 19,
+  "interpolatedSamplesAdded": 0,
+  "auditStatus": "failed",
+  "saveValidation": {
+    "status": "passed",
+    "immediateEqual": true,
+    "futureTicks": 24,
+    "futureEqual": true,
+    "futureSaveSha256": "6c23e232b4d71e8ce59d950c7a77ddfca7bfe18ae22457a5ec408e591ff0a389"
+  },
+  "steadyStateEstablished": false,
+  "files": {
+    "云山巨城-ROOT07-14日审计.png": {
+      "bytes": 365889,
+      "sha256": "86ea153667873bf1f659973330367376c6cf48582857490003168e746b1b5fa3"
+    },
+    "云山巨城-ROOT07-14日审计.svg": {
+      "bytes": 245214,
+      "sha256": "7e94347f3d1f728f75827f6ed95df47d0f7bc7431cc71e2314fb947c3bd8d618"
+    },
+    "云山巨城-ROOT07-14日审计.pdf": {
+      "bytes": 83349,
+      "sha256": "71ca9658d33372a8ee66de05af3a6ba4a094ab9f14099f1a2c1fe7579aac1635"
+    }
+  },
+  "completeGoal": false
+}

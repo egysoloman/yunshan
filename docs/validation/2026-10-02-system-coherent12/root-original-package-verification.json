@@ -1,0 +1,57 @@
+{
+  "atUTC": "2026-10-02T17:31:41.397341+00:00",
+  "zip": "yunshan-coherent12-compiled-browser-and-native-home-originals-20261002.zip",
+  "zipBytes": 10975499,
+  "zipSHA256": "fc8fdf67f6c215b01e6d5926b20fa199f78c44d81a7f3a40ae9f1b137827b170",
+  "members": 218,
+  "indexedPayloads": 217,
+  "rawOriginalPayloadsDirectByteCompared": 215,
+  "generatedReportsComparedToActualProducerLocalFiles": [
+    "readout/native-first-waypoint-readout.json",
+    "README.md"
+  ],
+  "payloadIndexComparedToActualProducerLocalFile": true,
+  "fullCRC": "PASS",
+  "decodedGzipMembers": 12,
+  "broadSensitivePatternHitCounts": {
+    "tripo": 0,
+    "privateKey": 0,
+    "aws": 0,
+    "openai": 0,
+    "bearer": 0,
+    "signedURL": 2
+  },
+  "manualClassification": [
+    {
+      "member": "reproduction/package-originals.py",
+      "offset": 9761,
+      "matchLength": 15,
+      "classification": "Literal scanner regex keyword; no query parameter, equals, signature or credential"
+    },
+    {
+      "member": "reproduction/package-originals.py",
+      "offset": 9777,
+      "matchLength": 16,
+      "classification": "Literal scanner regex keyword; no query parameter, equals, signature or credential"
+    }
+  ],
+  "actualCredentialOrSignedURLHits": 0,
+  "rootVerificationHistory": [
+    {
+      "attempt": 1,
+      "exitCode": 1,
+      "cause": "Generated report originalPath is descriptive text, not file path; corrected verifier separates 215 originals and two produced reports."
+    },
+    {
+      "attempt": 2,
+      "exitCode": 1,
+      "cause": "Broad signed-URL token regex also matched its own two literal keywords in archived scanner source. Raw matches retained and individually classified; no source or archive changed."
+    },
+    {
+      "attempt": 3,
+      "exitCode": 0,
+      "cause": "Every payload compared to actual original or producer file; CRC, identity and actual credential checks pass."
+    }
+  ],
+  "scope": "Original freeze12 build0/28 tests, formal11 PASS and native first-W FAIL; no native E/rent/rest/UI-IDB or art/Mac acceptance."
+}

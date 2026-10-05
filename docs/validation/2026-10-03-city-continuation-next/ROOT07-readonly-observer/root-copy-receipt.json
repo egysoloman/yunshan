@@ -1,0 +1,99 @@
+{
+  "at": "2026-10-04T03:28:36.633133+00:00",
+  "source": "/workspace/yunshan-work/root07-economy-readonly-observer-20261004-01",
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 2433,
+      "sha256": "448569409c09feca57176547facaa85eadbedfa15dc2162540db935172db1701",
+      "byteExact": true
+    },
+    {
+      "path": "binding.json",
+      "bytes": 27501,
+      "sha256": "31d693a075290abce7129780850f8ac08ac788f7237163ef09db85f77d18c1bd",
+      "byteExact": true
+    },
+    {
+      "path": "initial-observation.json",
+      "bytes": 3828,
+      "sha256": "c6d478084e69f2c706622de8b4c265c3bd0a5101de9a6f149771182e9f342d95",
+      "byteExact": true
+    },
+    {
+      "path": "terminal-report.json",
+      "bytes": 123928,
+      "sha256": "4c5726c2edbeb009b9e399987e59eed6826ef46b618f49512aaa7377a35d4ce7",
+      "byteExact": true
+    },
+    {
+      "path": "observed-inputs-end.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131",
+      "byteExact": true
+    },
+    {
+      "path": "status.json",
+      "bytes": 3848,
+      "sha256": "c383909dd6c542931cc23724c860d8a9965385c43f9afcb3bc68dd617d5b4465",
+      "byteExact": true
+    },
+    {
+      "path": "observe.py",
+      "bytes": 10122,
+      "sha256": "337a6295e6ba26caf06677959b09f171331ef46a8bfc68e89a581cdc42b20ef2",
+      "byteExact": true
+    },
+    {
+      "path": "observations.jsonl",
+      "bytes": 56908,
+      "sha256": "dcc03195031848db93bf87391d75e28f391c816cf37cd452a61673392731bcff",
+      "byteExact": true
+    },
+    {
+      "path": "observer01/receipt.json",
+      "bytes": 585,
+      "sha256": "45d45091cb77759db2c3f52ed446e1dbbeaa6d22a5c888236f8e51d77893bd32",
+      "byteExact": true
+    },
+    {
+      "path": "observer01/raw.log",
+      "bytes": 51280,
+      "sha256": "9ad0f10a6c0082bb00619309ed97c492b3109ab5821e2d4fde92d751e94f6f9b",
+      "byteExact": true
+    },
+    {
+      "path": "observer01/inputs-before.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131",
+      "byteExact": true
+    },
+    {
+      "path": "observer01/inputs-after.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131",
+      "byteExact": true
+    },
+    {
+      "path": "observer01/owned-process.json",
+      "bytes": 339,
+      "sha256": "84de39446a7e0f56ab15112a6b6084bba27dca1514c8675100740be9f300f765",
+      "byteExact": true
+    },
+    {
+      "path": "launch01/receipt.json",
+      "bytes": 344,
+      "sha256": "ef5fffb97faa1dce06e8481ce06992e51742ca8f216b6cc90d2dedcbab18ab4e",
+      "byteExact": true
+    },
+    {
+      "path": "launch01/observe-as-written.py",
+      "bytes": 10122,
+      "sha256": "e1181bbd8e37f08c353dea9aaaf936fb86e9919380c5ce1b76e9b0ea7123c74a",
+      "byteExact": true
+    }
+  ],
+  "onlyCopies": true,
+  "statusFileIsHistoricalObservation": true,
+  "terminalAuthoritative": "observer01/receipt.json and terminal-report.json"
+}

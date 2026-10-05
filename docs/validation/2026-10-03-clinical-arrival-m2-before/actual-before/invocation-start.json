@@ -1,0 +1,27 @@
+{
+  "status": "RUNNING",
+  "wrapperPid": 207644,
+  "cwd": "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01",
+  "argv": [
+    "/tmp/yunshan-clinical-arrival-prep-final03-20261003-01/execution-prep/run-m2-before-v2.py",
+    "--authorized-m2-causal-before"
+  ],
+  "startedAtUtc": "2026-10-03T06:06:04.268330+00:00",
+  "launcherPid": 207644,
+  "launcherProc": {
+    "pid": 207644,
+    "exists": true,
+    "state": "R",
+    "startTicks": 14352134
+  },
+  "launcherIdentityNote": "bash launcher exec replaces itself with this Python wrapper, preserving actual PID/startTicks",
+  "authorizationScope": "D1+D2 original final03 only; no M2 fix, no D3/contract/test expansion",
+  "sourceCount": 124,
+  "forbiddenExecuted": {
+    "GPU": false,
+    "build": false,
+    "fullSuite": false,
+    "ZIP": false,
+    "Library": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-01T17:31:09.304Z",
+  "environment": "Linux Chromium real IndexedDB, Vite source modules; no WebGL renderer",
+  "initialHashes": {
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "c431cb8e9157a61c60cec91be2a6451fd1ae9db29650372af07c30048d774a09",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/simulation.ts": "93ed3f0dadd52910ba09217081b6a91c5292afff2416e2230e8fdc1f644529a3",
+    "src/world.ts": "4882e14c9ecfefc587386fe2b8943ac7a95df9424170ff191bcec46970d65315",
+    "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96"
+  },
+  "finalHashes": {
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "c431cb8e9157a61c60cec91be2a6451fd1ae9db29650372af07c30048d774a09",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/simulation.ts": "93ed3f0dadd52910ba09217081b6a91c5292afff2416e2230e8fdc1f644529a3",
+    "src/world.ts": "4882e14c9ecfefc587386fe2b8943ac7a95df9424170ff191bcec46970d65315",
+    "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96"
+  },
+  "evidence": [
+    {
+      "check": "actual-heartbeat-renewal-and-missing-lease-invalidation",
+      "initialExpiry": 1790876168965,
+      "renewedExpiry": 1790876229994,
+      "rejected": true,
+      "invalidated": true,
+      "cached": 0
+    }
+  ]
+}

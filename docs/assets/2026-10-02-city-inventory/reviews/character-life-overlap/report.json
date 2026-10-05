@@ -1,0 +1,1521 @@
+{
+  "generated_at_utc": "2026-10-02T06:28:29.494416+00:00",
+  "task": "CHAR364/LIFE226只读跨域去重质量审查",
+  "inputs": [
+    {
+      "domain": "CHAR",
+      "path": "/tmp/yunshan-asset-inventory-character-01/character-assets.json",
+      "rows": 364,
+      "bytes": 386746,
+      "sha256": "a70ff01f717af7d4fa169ad74f6ef1b810aab68bad66a50d4fb909fccc295958"
+    },
+    {
+      "domain": "LIFE",
+      "path": "/tmp/yunshan-asset-inventory-life-01/assets.json",
+      "rows": 226,
+      "bytes": 214996,
+      "sha256": "817ccd105baefa5e8909b5ed33c3226ec84008775ab7fec4abe01b5c8f44f6ce"
+    }
+  ],
+  "summary": {
+    "raw_rows": 590,
+    "confirmed_same_geometry_pairs": 0,
+    "applied_merges": 0,
+    "current_safe_row_reduction": 0,
+    "full_master_planning_candidates": 1,
+    "conditional_subpart_reuse_candidates": 8,
+    "keep_distinct_cases": 10,
+    "animal_species_candidates": 18,
+    "animal_conditional_support_rows": 40
+  },
+  "invariants": [
+    "只共用已证同几何或明确规划为同一母版的子件；不同形状不强合。",
+    "保留角色socket/握持/动作配置与场景摆放配置，不合并库存/物权/行为数据。",
+    "没有原件时只能提出规划或条件映射，不可凭关键词删除原表或宣称已验证GLB。",
+    "本报告不修改两份清单或sharedsrc，不GPU/模拟/收费/Library。"
+  ],
+  "geometry_match_rule": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+  "conditional_id_mappings": [
+    {
+      "review_id": "OV-001",
+      "decision": "同一书册母版规划候选",
+      "character": {
+        "asset_id": "CHAR-189",
+        "中文名称": "教师/学生手持书册母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-189",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-106",
+          "中文名称": "书册母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-106",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-106",
+      "proposed_submesh_key": "book-closed（拟；当前未有子网格原件）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-189",
+        "to_geometry_master_id": "LIFE-106",
+        "submesh_key": "book-closed（拟；当前未有子网格原件）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "双方明确指向书册，可在制作前约定同一书册母版。手持与桌上/架上摆放是变换配置；打开书、卷轴、不同装订形体不自动相等。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-189",
+        "CHAR-175",
+        "CHAR-241",
+        "CHAR-243"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-002",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-182",
+        "中文名称": "角色手持餐碗母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-182",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-046",
+          "中文名称": "碗盘通用容器",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-046",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-046",
+      "proposed_submesh_key": "bowl（拟；碗盘组须明确拆出碗）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-182",
+        "to_geometry_master_id": "LIFE-046",
+        "submesh_key": "bowl（拟；碗盘组须明确拆出碗）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "角色餐碗可能复用碗盘组中的同款碗；盘、碟、带盖器皿不能与碗整组相等。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-182",
+        "CHAR-175",
+        "CHAR-235"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-003",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-184",
+        "中文名称": "角色手持茶杯水杯母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-184",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-047",
+          "中文名称": "杯壶器具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-047",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-049",
+          "中文名称": "茶具壶及杯组合",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-049",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-192",
+          "中文名称": "社区茶室器具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-192",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-047",
+      "proposed_submesh_key": "cup（拟；指定无把茶杯或有把水杯具体形状）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-184",
+        "to_geometry_master_id": "LIFE-047",
+        "submesh_key": "cup（拟；指定无把茶杯或有把水杯具体形状）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "杯可作为杯壶器具、茶具和茶室布局的同款子件；茶杯/水杯、有把/无把、壶嘴/壶盖皆可能不同，不能把整个杯壶/茶室器具组合并。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-184",
+        "CHAR-175",
+        "CHAR-236"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-004",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-180",
+        "中文名称": "角色手提购物袋母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-180",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-074",
+          "中文名称": "可回收袋筐",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-074",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-074",
+      "proposed_submesh_key": "bag（拟；袋筐组明确袋型）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-180",
+        "to_geometry_master_id": "LIFE-074",
+        "submesh_key": "bag（拟；袋筐组明确袋型）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "同款购物袋在地面/柜台/手持可复用；袋与硬筐、不同提手/袋口/褶皱不能强合。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-180",
+        "CHAR-175",
+        "CHAR-231",
+        "CHAR-248",
+        "CHAR-261"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-005",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-202",
+        "中文名称": "农业手提采收篮母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-202",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-086",
+          "中文名称": "农作物采收容器",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-086",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-069",
+          "中文名称": "空展示盘与篮筐",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-069",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-074",
+          "中文名称": "可回收袋筐",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-074",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-086",
+      "proposed_submesh_key": "harvest-basket（拟；采收容器明确带柄篮型）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-202",
+        "to_geometry_master_id": "LIFE-086",
+        "submesh_key": "harvest-basket（拟；采收容器明确带柄篮型）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "农业采收篮最接近采收容器母版；展示篮/回收筐只在同款带柄网格相同才引用该子件，展示盘不属于此映射。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-202",
+        "CHAR-175",
+        "CHAR-247"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-006",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-203",
+        "中文名称": "物流手抱包裹母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-203",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-071",
+          "中文名称": "杂货包装箱",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-071",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-072",
+          "中文名称": "仓储货箱",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-072",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "LIFE-071",
+      "proposed_submesh_key": "carry-parcel-box（拟；确定同款纸包装箱）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-203",
+        "to_geometry_master_id": "LIFE-071",
+        "submesh_key": "carry-parcel-box（拟；确定同款纸包装箱）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "物流手抱包裹只有在实际选用同款杂货包装箱时可共用。软包、木仓储箱、巨型货箱/冷链箱形状和结构不同须保留。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-203",
+        "CHAR-175",
+        "CHAR-230",
+        "CHAR-261"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-007",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-186",
+        "中文名称": "角色手持扫帚母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-186",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-196",
+          "中文名称": "家务清洁工具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-196",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "CHAR-186",
+      "proposed_submesh_key": "broom（拟；家务工具组需明确扫帚）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-186",
+        "to_geometry_master_id": "CHAR-186",
+        "submesh_key": "broom（拟；家务工具组需明确扫帚）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "家务清洁工具是集合，未明确单件；若其中陈列的是同款扫帚，应引用角色扫帚母版并保留收纳摆放。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-186",
+        "CHAR-175",
+        "CHAR-238"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-008",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-187",
+        "中文名称": "角色手持抹布母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-187",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-196",
+          "中文名称": "家务清洁工具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-196",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "CHAR-187",
+      "proposed_submesh_key": "rag-rest（拟；清洁工具组需明确抹布）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-187",
+        "to_geometry_master_id": "CHAR-187",
+        "submesh_key": "rag-rest（拟；清洁工具组需明确抹布）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "同款静止抹布可共用；擦拭时蒙皮/折叠变形与平摊/悬挂形状须由同母版变形规格证明兼容。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-187",
+        "CHAR-175",
+        "CHAR-239"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    },
+    {
+      "review_id": "OV-009",
+      "decision": "组合子件共用候选",
+      "character": {
+        "asset_id": "CHAR-188",
+        "中文名称": "角色提桶母版",
+        "条目类型": "基础组件",
+        "状态": "缺失待制",
+        "基础母版ID": "CHAR-188",
+        "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+        "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+      },
+      "life": [
+        {
+          "asset_id": "LIFE-196",
+          "中文名称": "家务清洁工具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-196",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "proposed_geometry_master_id": "CHAR-188",
+      "proposed_submesh_key": "bucket（拟；工具组明确包含桶后才应用）",
+      "mapping_if_matched": {
+        "from_role_id": "CHAR-188",
+        "to_geometry_master_id": "CHAR-188",
+        "submesh_key": "bucket（拟；工具组明确包含桶后才应用）",
+        "role_id_retained_as": "角色hand/socket/握持姿态装配配置；保持原ID可追溯",
+        "delete_original_inventory_row_now": false
+      },
+      "why": "清洁工具组当前未明确桶。只有组内确实增加并使用同款提桶时共享；洗面盆、水槽或固定排水件都不同。",
+      "geometry_equivalence_verified": false,
+      "apply_only_when": "仅在确认同一精细体素母版revision/submesh后应用；核对米制归一的顶点/法线/UV、轮廓、尺寸、开合状态、拓扑/蒙皮/变形兼容和材质槽。刚体摆放或手部socket偏移独立配置。只有同一母版的明确参数尺寸/配色变体可共用；不能凭同名、同用途、同材质或笼统容器/工具包判同几何。",
+      "preserve_role_recipes": [
+        "CHAR-188",
+        "CHAR-175",
+        "CHAR-229"
+      ],
+      "do_not_collapse": "LIFE组合的其他形状/固定陈列布局与角色socket、动作、物权读取均保留；不把物件母版合并等同游戏物权/行为合并。",
+      "runtime_evidence": "src/rendering/citizen-appearance.ts:19-51（未见手持物/socket消费）；src/simulation/culture.ts:32-36与src/simulation/clinical.ts:104-115提供现场规则而非这些详模；本轮未收到对应网格原件。"
+    }
+  ],
+  "keep_distinct": [
+    {
+      "review_id": "OV-010",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-193",
+          "中文名称": "医生佩戴与手持诊察器母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-193",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-195",
+          "中文名称": "医生手持诊脉/扫描探头母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-195",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-119",
+          "中文名称": "医学诊疗器械盘",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-119",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-122",
+          "中文名称": "检查设备/扫描舱",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-122",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "手持/佩戴诊察器和扫描探头不是盛放器械的盘，也不是固定检查设备/扫描舱。",
+      "preserve_role_recipes": [
+        "CHAR-193",
+        "CHAR-195",
+        "CHAR-253",
+        "CHAR-254"
+      ],
+      "assembly_reuse_if_explicit": "若LIFE-119将来明确列出盘内器械，则盘组合引用CHAR-193/195的同款视觉件；盘体仍是LIFE-119；不能直接令CHAR诊具等于整盘。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-011",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-194",
+          "中文名称": "医护提携急救包母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-194",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-096",
+          "中文名称": "药材及药品包装",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-096",
+          "现有证据": "src/simulation/extensions.ts:9–12；src/simulation/trade.ts；src/simulation/clinical.ts；当前库存数据不是对应详模",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-119",
+          "中文名称": "医学诊疗器械盘",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-119",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "急救包是可提携带具；药品包装与器械盘是其内容/陈列物，不是同几何。",
+      "preserve_role_recipes": [
+        "CHAR-194",
+        "CHAR-254",
+        "CHAR-255"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-012",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-178",
+          "中文名称": "角色手持拐杖母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-178",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-179",
+          "中文名称": "角色手持腋拐母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-179",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-126",
+          "中文名称": "康复扶手",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-126",
+          "现有证据": "src/architecture-floor-plan.ts:94–113仅通用桌；src/simulation/culture.ts、clinical.ts与extensions.ts是系统证据，详模缺失",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "便携拐杖/腋拐与固定康复扶手的支撑、安装结构和手握高度不同。",
+      "preserve_role_recipes": [
+        "CHAR-178",
+        "CHAR-179",
+        "CHAR-233",
+        "CHAR-234"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-013",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-199",
+          "中文名称": "维修手持扳手母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-199",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-200",
+          "中文名称": "工坊手持锤母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-200",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-201",
+          "中文名称": "农业手持锄母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-201",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-083",
+          "中文名称": "工坊工具架",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-083",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-081",
+          "中文名称": "制造工作台",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-081",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "扳手、锤和锄不是工坊工具架或制造工作台；LIFE记录没有明确工具子件。",
+      "preserve_role_recipes": [
+        "CHAR-199",
+        "CHAR-200",
+        "CHAR-201",
+        "CHAR-244",
+        "CHAR-245",
+        "CHAR-246"
+      ],
+      "assembly_reuse_if_explicit": "工具架/工位若陈列同款工具可引用CHAR-199/200；锄只有确实在该架清单时才引用。架、台几何和固定支撑保留。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-014",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-190",
+          "中文名称": "角色手持毛笔母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-190",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-171",
+          "中文名称": "书法纸砚及笔架",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-171",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "手持毛笔不是纸、砚或笔架；LIFE-171的名称未承诺包含毛笔几何。",
+      "preserve_role_recipes": [
+        "CHAR-190",
+        "CHAR-242",
+        "CHAR-243"
+      ],
+      "assembly_reuse_if_explicit": "未来笔架配置可引用CHAR-190毛笔，但纸/砚/架原母版保留；仅同款笔子件才共用。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-015",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-191",
+          "中文名称": "角色手持终端母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-191",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-192",
+          "中文名称": "角色手持记录板母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-192",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-018",
+          "中文名称": "桌面显示器与支座",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-018",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-089",
+          "中文名称": "公司金融终端",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-089",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-090",
+          "中文名称": "银行办理柜台屏",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-090",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-091",
+          "中文名称": "货物取交签收终端",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-091",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-147",
+          "中文名称": "城市信息查询终端",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-147",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "便携手持终端/记录板与桌面显示器支座、金融终端/柜台屏/签收终端不同；同屏幕材质不意味着同机壳几何。",
+      "preserve_role_recipes": [
+        "CHAR-191",
+        "CHAR-192",
+        "CHAR-249"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-016",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-181",
+          "中文名称": "角色手持食品包母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-181",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-065",
+          "中文名称": "实际库存食品陈列通用单元",
+          "条目类型": "基础组件",
+          "状态": "已集成代码生成",
+          "基础母版ID": "LIFE-065",
+          "现有证据": "src/rendering/market-goods.ts:13–45；src/site-fixtures.ts:67–69",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-092",
+          "中文名称": "谷物原料视觉母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-092",
+          "现有证据": "src/simulation/extensions.ts:9–12；src/simulation/trade.ts；src/simulation/clinical.ts；当前库存数据不是对应详模",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-093",
+          "中文名称": "蔬菜原料视觉母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-093",
+          "现有证据": "src/simulation/extensions.ts:9–12；src/simulation/trade.ts；src/simulation/clinical.ts；当前库存数据不是对应详模",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-094",
+          "中文名称": "鱼类食材视觉母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-094",
+          "现有证据": "src/simulation/extensions.ts:9–12；src/simulation/trade.ts；src/simulation/clinical.ts；当前库存数据不是对应详模",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-095",
+          "中文名称": "工业服务材料包装",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-095",
+          "现有证据": "src/simulation/extensions.ts:9–12；src/simulation/trade.ts；src/simulation/clinical.ts；当前库存数据不是对应详模",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "食品包是外包装，现有库存陈列单元、谷蔬鱼原料和工业材料包装不是同几何。不能因同为库存视觉而混食品/物料类型或抬高已集成状态。",
+      "preserve_role_recipes": [
+        "CHAR-181",
+        "CHAR-235",
+        "CHAR-261"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-017",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-204",
+          "中文名称": "婚恋角色手持花束母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-204",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-205",
+          "中文名称": "葬礼角色手持悼念花母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-205",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-200",
+          "中文名称": "婚丧礼品包",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-200",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-187",
+          "中文名称": "婚礼礼仪台",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-187",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-189",
+          "中文名称": "葬仪台与棺具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-189",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "婚恋花束/悼念花与婚丧礼品包、礼仪台、棺具不同；婚丧题材相同不允许强合几何。",
+      "preserve_role_recipes": [
+        "CHAR-204",
+        "CHAR-205",
+        "CHAR-270",
+        "CHAR-271"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-018",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-208",
+          "中文名称": "角色手持宠物喂食包母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-208",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-328",
+          "中文名称": "宠物项圈母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-328",
+          "现有证据": "开发备忘录.md:322；docs/需求实现验证矩阵.md:56；src/types.ts:33,48（有biodiversity数值，无动物实体/外观契约）；src/renderer.ts:829-832（只消费居民、货品、车辆）",
+          "派生规则": "项圈作为独立穿戴件，尺寸参数适配猫犬"
+        },
+        {
+          "asset_id": "CHAR-329",
+          "中文名称": "宠物名牌母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-329",
+          "现有证据": "开发备忘录.md:322；docs/需求实现验证矩阵.md:56；src/types.ts:33,48（有biodiversity数值，无动物实体/外观契约）；src/renderer.ts:829-832（只消费居民、货品、车辆）",
+          "派生规则": "名牌挂点与文字图集复用"
+        },
+        {
+          "asset_id": "CHAR-330",
+          "中文名称": "宠物胸背带母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-330",
+          "现有证据": "开发备忘录.md:322；docs/需求实现验证矩阵.md:56；src/types.ts:33,48（有biodiversity数值，无动物实体/外观契约）；src/renderer.ts:829-832（只消费居民、货品、车辆）",
+          "派生规则": "胸背围尺寸参数；牵引绳由角色手持件复用"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-194",
+          "中文名称": "宠物寝窝",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-194",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-195",
+          "中文名称": "宠物食水盆",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-195",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-214",
+          "中文名称": "宠物家庭空间配置",
+          "条目类型": "组合模板",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-214",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "喂食包、项圈、名牌、胸背带不是宠物寝窝、食水盆或家庭空间配置；宠物类别相同不等于同几何。",
+      "preserve_role_recipes": [
+        "CHAR-208",
+        "CHAR-328",
+        "CHAR-329",
+        "CHAR-330",
+        "CHAR-355",
+        "CHAR-356"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    },
+    {
+      "review_id": "OV-019",
+      "decision": "保留不同形体/仅装配引用",
+      "character": [
+        {
+          "asset_id": "CHAR-185",
+          "中文名称": "角色手持烹饪勺母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-185",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        },
+        {
+          "asset_id": "CHAR-183",
+          "中文名称": "角色手持筷子母版",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "CHAR-183",
+          "现有证据": "提示词.md:57,65,79；开发备忘录.md:322；src/rendering/citizen-appearance.ts:42,49（现只有块手/挎包，无手持socket物）",
+          "派生规则": "仅角色佩戴/持用视觉母版；与总表固定/陈列同物件应共用主母版，不重复计几何"
+        }
+      ],
+      "life": [
+        {
+          "asset_id": "LIFE-044",
+          "中文名称": "炊具锅体",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-044",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-045",
+          "中文名称": "锅盖",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-045",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-048",
+          "中文名称": "砧板与切配工具",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-048",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        },
+        {
+          "asset_id": "LIFE-046",
+          "中文名称": "碗盘通用容器",
+          "条目类型": "基础组件",
+          "状态": "缺失待制",
+          "基础母版ID": "LIFE-046",
+          "现有证据": "目标：提示词.md；对应系统存在不表示实体资产存在",
+          "派生规则": "尺寸/配色按同母版参数派生，不重复计算独立模型"
+        }
+      ],
+      "geometry_alias": null,
+      "why": "烹饪勺和筷子不等于锅、锅盖、切配工具或碗盘；目前LIFE未逐项列这两件。",
+      "preserve_role_recipes": [
+        "CHAR-185",
+        "CHAR-183",
+        "CHAR-237",
+        "CHAR-235"
+      ],
+      "assembly_reuse_if_explicit": "仅共享材质/流程接触点；不声明几何相同，不删行，不扣模型数。",
+      "evidence": "双方中文名称/现有证据/基础母版ID均在上述稳定记录；没有具体共享网格证据。"
+    }
+  ],
+  "material_reuse_only": [
+    {
+      "geometry_ids": [
+        "CHAR-182",
+        "CHAR-184"
+      ],
+      "material_id": "LIFE-220",
+      "action": "同款共享器皿可引用釉面材质；不把材质集作为几何别名。"
+    },
+    {
+      "geometry_ids": [
+        "CHAR-193",
+        "CHAR-194",
+        "CHAR-195"
+      ],
+      "material_id": "LIFE-224",
+      "action": "器械/包具可引用医学标签图集；不因此合并盘/诊具/包几何。"
+    },
+    {
+      "geometry_ids": [
+        "CHAR-189",
+        "CHAR-190"
+      ],
+      "material_id": "LIFE-225",
+      "action": "书纸面可选引用文化纸张材质；毛笔仍保笔杆/笔毛材料。材质内容不同不能强用一张图。"
+    }
+  ],
+  "animal_scope_audit": {
+    "species_count": 18,
+    "all_species_status_is_pending_verification": true,
+    "all_species_text_identifies_candidate": true,
+    "species": [
+      {
+        "asset_id": "CHAR-306",
+        "中文名称": "猫精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-307",
+        "中文名称": "犬精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-308",
+        "中文名称": "兔精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-309",
+        "中文名称": "观赏鱼精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-310",
+        "中文名称": "鸡精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-311",
+        "中文名称": "鸭精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-312",
+        "中文名称": "鹅精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-313",
+        "中文名称": "猪精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-314",
+        "中文名称": "山羊精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-315",
+        "中文名称": "牛精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-316",
+        "中文名称": "山林鹿精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-317",
+        "中文名称": "野猪精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-318",
+        "中文名称": "松鼠精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-319",
+        "中文名称": "山林小鸟精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-320",
+        "中文名称": "水岸鹭鸟精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-321",
+        "中文名称": "溪流鱼精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-322",
+        "中文名称": "蝶精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      },
+      {
+        "asset_id": "CHAR-323",
+        "中文名称": "蜂精细体素视觉母版",
+        "状态": "待核实",
+        "scope_classification": "具体候选，非已锁定硬需求",
+        "why_not_mandatory": "用户目标是宠物/家畜/生态领域，原提示词/当前数据没有锁定该具体物种；biodiversity只为数值。"
+      }
+    ],
+    "conditional_support_count": 40,
+    "conditional_support_rows": [
+      {
+        "asset_id": "CHAR-207",
+        "中文名称": "角色手持牵引绳母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-208",
+        "中文名称": "角色手持宠物喂食包母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-302",
+        "中文名称": "动物毛羽鳞图集母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-324",
+        "中文名称": "四足动物骨骼母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-325",
+        "中文名称": "鸟类骨骼母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-326",
+        "中文名称": "鱼类游动骨骼母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-327",
+        "中文名称": "昆虫局部动作母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-328",
+        "中文名称": "宠物项圈母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-329",
+        "中文名称": "宠物名牌母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-330",
+        "中文名称": "宠物胸背带母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-331",
+        "中文名称": "家畜识别佩牌母版",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-332",
+        "中文名称": "家养宠物佩戴组合",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-333",
+        "中文名称": "家畜与家禽生活组合",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-334",
+        "中文名称": "山林水岸动物组合",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-335",
+        "中文名称": "猫警觉坐卧待机",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-336",
+        "中文名称": "猫行走/转向循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-337",
+        "中文名称": "猫起跳落地动作",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-338",
+        "中文名称": "猫梳理/伸展循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-339",
+        "中文名称": "猫被抚摸响应配对",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-340",
+        "中文名称": "犬坐姿与摆尾待机",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-341",
+        "中文名称": "犬行走/疾行循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-342",
+        "中文名称": "犬取回与交还动作",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-343",
+        "中文名称": "犬被抚摸响应配对",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-344",
+        "中文名称": "四足动物采食喝水循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-345",
+        "中文名称": "四足动物伏卧睡眠循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-346",
+        "中文名称": "牛羊鹿低头采食循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-347",
+        "中文名称": "兔跳行循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-348",
+        "中文名称": "猪类拱地动作",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-349",
+        "中文名称": "松鼠攀枝循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-350",
+        "中文名称": "家禽行走与啄食循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-351",
+        "中文名称": "鸟类起飞飞行降落",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-352",
+        "中文名称": "鸭鹅水面游动循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-353",
+        "中文名称": "鱼类摆尾游动循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-354",
+        "中文名称": "蜂蝶翅动飞行循环",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-355",
+        "中文名称": "角色蹲下抚摸与喂宠配对",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-356",
+        "中文名称": "角色与犬牵引行走配对",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-361",
+        "中文名称": "四足动物LOD族派生",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-362",
+        "中文名称": "鸟类动物LOD族派生",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-363",
+        "中文名称": "鱼类动物LOD族派生",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      },
+      {
+        "asset_id": "CHAR-364",
+        "中文名称": "昆虫动物LOD族派生",
+        "current_status": "缺失待制",
+        "review_scope": "物种/宠物方案确定后才生产的条件资源；待制状态描述实现缺失，不表示每件都是已锁定硬需求"
+      }
+    ],
+    "life_related_rows": [
+      {
+        "asset_id": "LIFE-194",
+        "review_scope": "宠物/家庭空间规划候选，依赖物种与实际行为接口；不把其陈列存在推断实体宠物已完成"
+      },
+      {
+        "asset_id": "LIFE-195",
+        "review_scope": "宠物/家庭空间规划候选，依赖物种与实际行为接口；不把其陈列存在推断实体宠物已完成"
+      },
+      {
+        "asset_id": "LIFE-214",
+        "review_scope": "宠物/家庭空间规划候选，依赖物种与实际行为接口；不把其陈列存在推断实体宠物已完成"
+      }
+    ],
+    "merge_guard": "汇总时保留待核实/条件范围标记；不要把18种动物或其40个支持件纳入必做模型硬总数。物种删选后只保所需共同骨骼/动作/配件。",
+    "source_evidence": [
+      "开发备忘录.md:322",
+      "docs/需求实现验证矩阵.md:56",
+      "src/types.ts:33,48",
+      "src/renderer.ts:829-832"
+    ]
+  },
+  "verification": {
+    "ids_resolved": true,
+    "species_flags_checked": true,
+    "no_mesh_equivalence_test_performed": true,
+    "no_input_inventory_changes": true,
+    "source_of_geometry_claims": "清单语义和代码静态消费边界；没有对应详模原件，0对确证相同。"
+  }
+}

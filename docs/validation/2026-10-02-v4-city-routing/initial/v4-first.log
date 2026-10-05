@@ -1,0 +1,35 @@
+✔ v4 supported courtyard is outside a facility and cannot purchase through the old door radius (102.149534ms)
+✔ v4 actual NPC meal route ends at a real sale point and advances only at the existing walking speed (12976.269526ms)
+✔ v4 public exit guidance uses a wall-free route from both a room and the ground courtyard (105.796991ms)
+✖ v4 work commands require the real accessible work point, while unmarked room proximity remains unchanged (24.619617ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13618.573745
+
+✖ failing tests:
+
+test at tests/v4-simulation.test.ts:1:6254
+✖ v4 work commands require the real accessible work point, while unmarked room proximity remains unchanged (24.619617ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/v4-simulation.test.ts:78:45)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

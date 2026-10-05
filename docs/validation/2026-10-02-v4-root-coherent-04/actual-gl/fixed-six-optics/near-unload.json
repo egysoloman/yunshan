@@ -1,0 +1,122 @@
+{
+  "scope": "After six preserved optical views: actual resident release at original core pose",
+  "before": {
+    "stats": {
+      "resident": 9,
+      "total": 482,
+      "created": 34,
+      "released": 25,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 9,
+    "actualMeshes": 63,
+    "actualInstances": 6833,
+    "ownedGeometryCount": 63,
+    "interiorBuildingRefs": 13,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [
+      {
+        "id": "-7:10",
+        "buildings": [
+          "river-b50"
+        ]
+      },
+      {
+        "id": "-8:10",
+        "buildings": [
+          "river-b48",
+          "river-b59"
+        ]
+      },
+      {
+        "id": "-8:9",
+        "buildings": [
+          "river-b30"
+        ]
+      },
+      {
+        "id": "-7:9",
+        "buildings": [
+          "river-b6",
+          "river-b26"
+        ]
+      },
+      {
+        "id": "-7:11",
+        "buildings": [
+          "river-b15"
+        ]
+      },
+      {
+        "id": "-6:10",
+        "buildings": [
+          "river-b39"
+        ]
+      },
+      {
+        "id": "-9:10",
+        "buildings": [
+          "river-b28",
+          "river-b45"
+        ]
+      },
+      {
+        "id": "-8:11",
+        "buildings": [
+          "river-b35"
+        ]
+      },
+      {
+        "id": "-7:12",
+        "buildings": [
+          "river-b7",
+          "river-b11"
+        ]
+      }
+    ],
+    "observed": {
+      "creates": 23,
+      "releases": 25,
+      "geometryDisposals": 172,
+      "instanceDisposals": 172,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 839,
+      "textures": 11
+    }
+  },
+  "after": {
+    "stats": {
+      "resident": 0,
+      "total": 482,
+      "created": 34,
+      "released": 34,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 0,
+    "actualMeshes": 0,
+    "actualInstances": 0,
+    "ownedGeometryCount": 0,
+    "interiorBuildingRefs": 0,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [],
+    "observed": {
+      "creates": 23,
+      "releases": 34,
+      "geometryDisposals": 235,
+      "instanceDisposals": 235,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 777,
+      "textures": 5
+    }
+  }
+}

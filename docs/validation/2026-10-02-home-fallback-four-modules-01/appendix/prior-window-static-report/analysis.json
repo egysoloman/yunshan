@@ -1,0 +1,470 @@
+{
+  "scope": "READ_ONLY_STATIC_PLUS_ONE_SHORT_PURE_IMPORT; NO_GL; NO_PATCH; NO_WORLD_GENERATION",
+  "sourceSnapshot": "/tmp/yunshan-v4-root-coherent-04",
+  "sourceHashes": {
+    "src/architecture-floor-plan.ts": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724",
+    "src/rendering/architecture-bodies.ts": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+    "src/rendering/architecture-detail.ts": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+    "src/renderer.ts": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7"
+  },
+  "fixtureSourceHashesUnchanged": true,
+  "buildingInput": {
+    "id": "river-b2",
+    "districtId": "river",
+    "name": "清溪水岸·东岚院·里居1",
+    "kind": "home",
+    "position": {
+      "x": -586.2,
+      "y": 32,
+      "z": 806.8000000000001
+    },
+    "width": 38,
+    "depth": 29.200000000000003,
+    "height": 37.4,
+    "floors": 11,
+    "rotation": 0,
+    "door": {
+      "x": -586.2,
+      "y": 32.6,
+      "z": 821.4000000000001
+    },
+    "capacity": 374,
+    "seed": 1772977782,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 32.6,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 32.6,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 36,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 36,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 39.4,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 39.4,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 42.8,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 42.8,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 46.2,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 46.2,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "5:program:work",
+        "purpose": "work",
+        "floor": 5,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 49.6,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "5:program:service",
+        "purpose": "service",
+        "floor": 5,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 49.6,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "6:program:work",
+        "purpose": "work",
+        "floor": 6,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 53,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "6:program:service",
+        "purpose": "service",
+        "floor": 6,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 53,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "7:program:work",
+        "purpose": "work",
+        "floor": 7,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 56.400000000000006,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "7:program:service",
+        "purpose": "service",
+        "floor": 7,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 56.400000000000006,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "8:program:work",
+        "purpose": "work",
+        "floor": 8,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 59.8,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "8:program:service",
+        "purpose": "service",
+        "floor": 8,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 59.8,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "9:program:work",
+        "purpose": "work",
+        "floor": 9,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 63.2,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "9:program:service",
+        "purpose": "service",
+        "floor": 9,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 63.2,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "10:program:work",
+        "purpose": "work",
+        "floor": 10,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 66.6,
+          "z": 799.2
+        }
+      },
+      {
+        "id": "10:program:service",
+        "purpose": "service",
+        "floor": 10,
+        "position": {
+          "x": -593.8000000000001,
+          "y": 66.6,
+          "z": 799.2
+        }
+      }
+    ]
+  },
+  "inputDimensionMatch": true,
+  "positionMatch": true,
+  "inputWorldProvenance": "Previously generated baseline current-v4-20261001.world.json; provider and physical generation match coherent04 hashes/fixture; this task did not regenerate world.",
+  "screenshot": {
+    "path": "/workspace/yunshan/artifacts/v4-coherent04-controlled-bodies/v4-home-river-b2-counter-or-service.png",
+    "sha256": "ecc374f159d4e68d4d10664007d7ef4be85abda01c6d0a0bed33a4029c34828a",
+    "jsonPath": "/workspace/yunshan/artifacts/v4-coherent04-controlled-bodies/v4-home-river-b2-counter-or-service.json",
+    "jsonSHA256": "e249194789027ca9080ed0240c8c1adf5216734c1ec7e46c4399f4e0391bb648",
+    "actualViewed": true
+  },
+  "shortImport": {
+    "wallTimeSeconds": 0.768208476,
+    "moduleWorkMs": 156.709879,
+    "exitCode": 0,
+    "imports": [
+      "getBuildingBody",
+      "buildProgramArchitecture",
+      "buildArchitectureDetails"
+    ],
+    "worldGenerated": false,
+    "stdoutTruncated": true,
+    "scope": "Actual coherent04 emitter, same real building read from existing world JSON."
+  },
+  "window": {
+    "floor": 0,
+    "wallIndex": 0,
+    "windowIndex": 2,
+    "wall": {
+      "a": [
+        -19,
+        -14.6
+      ],
+      "b": [
+        0.8,
+        -14.6
+      ],
+      "thickness": 0.4,
+      "height": 3,
+      "windows": [
+        {
+          "from": 1.6,
+          "to": 3.2,
+          "bottom": 0.8,
+          "top": 2.2
+        },
+        {
+          "from": 6.4,
+          "to": 8,
+          "bottom": 0.8,
+          "top": 2.2
+        },
+        {
+          "from": 11.2,
+          "to": 12.8,
+          "bottom": 0.8,
+          "top": 2.2
+        },
+        {
+          "from": 16,
+          "to": 17.6,
+          "bottom": 0.8,
+          "top": 2.2
+        }
+      ]
+    },
+    "windowTangentialLocalX": [
+      -7.8,
+      -6.2
+    ],
+    "selectedGroundWindowRankZeroBased": 11,
+    "selection": "Actual 576 balanced limit: 14 selected ground windows; deterministic frozen-source candidate order recomputed from stored plan."
+  },
+  "primaryOverlap": {
+    "detail": {
+      "returnedPartIndexZeroBased": 143,
+      "indexEvidence": "Calculated from deterministic emitter order (first selected window begins at41; 9 parts/window; target rank11); same actual emitter was imported, but relevant stdout section was truncated. Bounds calculated directly from frozen mounted/put code and actual plan.",
+      "purpose": "window",
+      "color": "#75563c",
+      "role": "head frame",
+      "localBounds": {
+        "x": [
+          -8,
+          -6
+        ],
+        "y": [
+          2.2,
+          2.4
+        ],
+        "z": [
+          -14.8,
+          -14.4
+        ]
+      }
+    },
+    "body": {
+      "returnedPartIndexZeroBased": 18,
+      "indexEvidence": "Observed in actual near-emitter stdout",
+      "purpose": "wall",
+      "material": "wall",
+      "color": "#ddcfb0",
+      "localBounds": {
+        "x": [
+          -7.8,
+          -6.2
+        ],
+        "y": [
+          2.2,
+          3
+        ],
+        "z": [
+          -14.8,
+          -14.4
+        ]
+      }
+    },
+    "cameraFacingPlane": "Both positive-Z faces; local z=-14.4 (floating epsilon <=2e-15)",
+    "intersectionLocal": {
+      "x": [
+        -7.8,
+        -6.2
+      ],
+      "y": [
+        2.2,
+        2.4
+      ],
+      "z": -14.4
+    },
+    "intersectionWorld": {
+      "x": [
+        -594.0,
+        -592.4000000000001
+      ],
+      "y": [
+        34.800000000000004,
+        35.0
+      ],
+      "z": 792.4000000000001
+    },
+    "overlapWidthMetres": 1.6,
+    "overlapHeightMetres": 0.2,
+    "overlapAreaSquareMetres": 0.32,
+    "status": "Proven positive-area coincident surfaces from actual wall output + deterministic detail construction; raster artifact causation inferred, no GPU ablation."
+  },
+  "secondaryGeometry": {
+    "leftJamb": {
+      "returnedPartIndexZeroBasedCalculated": 140,
+      "localBounds": {
+        "x": [
+          -8,
+          -7.8
+        ],
+        "y": [
+          0.6,
+          2.4
+        ],
+        "z": [
+          -14.8,
+          -14.4
+        ]
+      },
+      "wallPartIndexObserved": 14,
+      "coplanarAreaSquareMetres": 0.28
+    },
+    "glass": {
+      "returnedPartIndexZeroBasedObserved": 17,
+      "localBounds": {
+        "x": [
+          -7.8,
+          -6.2
+        ],
+        "y": [
+          0.8,
+          2.2
+        ],
+        "z": [
+          -14.6,
+          -14.4
+        ]
+      },
+      "thickness": 0.2,
+      "quantization": "wallPanels rect() rounds edges to .2 grid, moving ideal ±.1 to asymmetrical actual faces."
+    },
+    "innerBars": {
+      "returnedPartIndicesZeroBasedCalculated": [
+        144,
+        145,
+        146
+      ],
+      "normalZBounds": [
+        -14.8,
+        -14.6
+      ],
+      "glassCoincidentPlane": -14.6,
+      "planeRelation": "Inner-bar +Z face meets glass -Z face; normals opposite. Current indoor camera is at local z=-7.6, so glass -Z face is normally FrontSide culled; this is not the same two visible coplanar faces as wall/head.",
+      "sameColorBarCrossings": "EDGE/EDGE crossing surfaces can coincide; no different wall color at these crossings."
+    },
+    "outerFrameCornerOverlap": "WOOD jamb/head boxes overlap on corner .2×.2 patches; same color.",
+    "otherWindowTrim": "STONE sill and EDGE top cap also use wall normal ±.2 and overlap actual wall faces; same root condition with differing colors.",
+    "legacyGlassDuplication": "buildHouse returns immediately after programParts; original rectangular glass emitter does not also execute.",
+    "farNearDuplication": "No second explicit glass emitter in far branch; actual recorded hiddenFarMismatch must be read from capture rather than assumed pixel proof.",
+    "materialDepthBias": "ArchitectureDetailManager.solid has no polygonOffset or renderOrder override; default depth test/write. Body wall material likewise no polygonOffset in inspected source."
+  },
+  "recommendation": {
+    "preferredGeometryOption": "V4-only window trim: place outer jamb/head/sill ring wholly within actual closed window opening at .2 grid, avoid positive-area coincidence with adjacent opaque wall; place cap/sill ornaments only with a documented visual layering treatment. Shared glass/door cuts, FloorPlan, support and collision stay untouched.",
+    "narrowMaterialOption": "If preserving over-wall trim proportions, dedicated non-luminous program-window trim material with bounded polygonOffset instead of changing all ArchitectureDetailManager.solid/legacy details. Verify depth bias both sides/angles before acceptance.",
+    "avoid": "Do not blindly push .2 blocks into traversable space; no shader/material policy changes to historical emitters; no provider/physics/money changes.",
+    "notRun": [
+      "No GPU ablation/re-render",
+      "No Mac renderer validation",
+      "No regression tests or full suite",
+      "No patch written"
+    ]
+  }
+}

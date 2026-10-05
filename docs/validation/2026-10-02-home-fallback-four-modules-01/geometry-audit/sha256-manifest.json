@@ -1,0 +1,114 @@
+{
+  "algorithm": "sha256",
+  "selfExcluded": "sha256-manifest.json",
+  "selfHashLocation": "archive receipt printed to caller; no self-referential hash",
+  "members": [
+    {
+      "path": "README.md",
+      "bytes": 8695,
+      "sha256": "90a208aa734784d176855b4db2fe2bfdd4a876386722b3e067e49567c8a4eecd"
+    },
+    {
+      "path": "archive-geometry-audit.py",
+      "bytes": 8730,
+      "sha256": "edb4a260bca329cd71202d88c57b8afbc1980bb3180bb77e5d712a632c878aca"
+    },
+    {
+      "path": "derive-four-modules.mts",
+      "bytes": 21346,
+      "sha256": "7e6ee449ff2d18c21dc82ea5bca81d1d611b79311ac12908343a1e11c3cb7924"
+    },
+    {
+      "path": "derive-supplement.mts",
+      "bytes": 8430,
+      "sha256": "f2bce2ccbceeb27cae1395e3219e43dfd1f88fac993593889fa7168eb9b02afc"
+    },
+    {
+      "path": "four-module-contract.json",
+      "bytes": 130790,
+      "sha256": "f57211bfb88c04cc9af8cec5cce0e0b202e290498c66eede602104a6effcdd40"
+    },
+    {
+      "path": "geometry-audit-supplement.json",
+      "bytes": 25897,
+      "sha256": "c0342a26fd0e6508bfeb6b02f662e4a04a49624d0e456a9d58d4ed2e6eb54660"
+    },
+    {
+      "path": "inputs/raw-counts.json",
+      "bytes": 1648071,
+      "sha256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+    },
+    {
+      "path": "provenance.json",
+      "bytes": 6710,
+      "sha256": "8abae6712a8612410979726aa1e08d0b3dad4ff721ae64a9e1c80ce621724fd6"
+    },
+    {
+      "path": "secret-pattern-scan.json",
+      "bytes": 525,
+      "sha256": "8b2fd8e9c69362f45df827ead0cfb58f24b9a427cf007aad0365bb4bcd49ca69"
+    },
+    {
+      "path": "source-snapshot/src/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    {
+      "path": "source-snapshot/src/controller.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    {
+      "path": "source-snapshot/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c"
+    },
+    {
+      "path": "source-snapshot/src/renderer.ts",
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7"
+    },
+    {
+      "path": "source-snapshot/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a"
+    },
+    {
+      "path": "source-snapshot/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee"
+    },
+    {
+      "path": "source-snapshot/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "static-derivation-final.log",
+      "bytes": 1884,
+      "sha256": "ff4641f61d0418117b42e9a630b37dae26e9f1464d4b64895c0bd6b496cccbf4"
+    },
+    {
+      "path": "static-derivation-first-door-edge-rejection.log",
+      "bytes": 604,
+      "sha256": "654bf8ccdb874f1b851208946501d9b480fe0484f5d0bb2bebe6ab8a095f418b"
+    },
+    {
+      "path": "static-derivation-first-failure-signedzero.log",
+      "bytes": 9759,
+      "sha256": "024a72e80ab890db5231006bf10e9e060e9fc0315a287350eefc75f4c0c7e87d"
+    },
+    {
+      "path": "static-supplement-first-reference-path-failure.log",
+      "bytes": 905,
+      "sha256": "434b82e454cb8a6b82f4163ab14f10cd45a34ce75cf0838d952b651b91983352"
+    },
+    {
+      "path": "static-supplement.log",
+      "bytes": 965,
+      "sha256": "3aa9d75d00181a61b5d51d361408baee5d268a7cd7fdb23996cc37ca2f59c76d"
+    }
+  ],
+  "hashedMemberCount": 21,
+  "hashedTotalBytes": 2073640
+}

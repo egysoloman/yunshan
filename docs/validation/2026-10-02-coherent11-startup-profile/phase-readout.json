@@ -1,0 +1,386 @@
+{
+  "scope": "Read-only observed chronology; not wall-time attribution to functions. Browser performance.now and host afterNavigationMs are distinct clocks.",
+  "hostEvents": [
+    {
+      "seq": 4,
+      "atUTC": "2026-10-02T15:49:51.142Z",
+      "afterNavigationMs": 0,
+      "type": "navigation-start",
+      "url": "http://127.0.0.1:4191/?debug=1",
+      "waitUntil": "commit",
+      "budgetMs": 90000
+    },
+    {
+      "seq": 6,
+      "atUTC": "2026-10-02T15:49:51.362Z",
+      "afterNavigationMs": 220,
+      "type": "snapshot-returned",
+      "label": "elapsed-0",
+      "debugPresent": false,
+      "tick": null,
+      "readyState": "interactive",
+      "rafCount": 0
+    },
+    {
+      "seq": 8,
+      "atUTC": "2026-10-02T15:49:51.631Z",
+      "afterNavigationMs": 489,
+      "type": "DOMContentLoaded"
+    },
+    {
+      "seq": 9,
+      "atUTC": "2026-10-02T15:49:51.639Z",
+      "afterNavigationMs": 497,
+      "type": "load"
+    },
+    {
+      "seq": 10,
+      "atUTC": "2026-10-02T15:49:51.756Z",
+      "afterNavigationMs": 614,
+      "type": "browser-loaded-entry",
+      "status": 200,
+      "bytes": 647107,
+      "sha256": "7ed91565c741671b4f25571118bc07d515d4ff1e42b0e3c55b6044077b2a2da9"
+    },
+    {
+      "seq": 11,
+      "atUTC": "2026-10-02T15:49:56.393Z",
+      "afterNavigationMs": 5251,
+      "type": "screenshot-recorded",
+      "label": "initial",
+      "filename": "observed-page-initial.png"
+    },
+    {
+      "seq": 22,
+      "atUTC": "2026-10-02T15:51:13.373Z",
+      "afterNavigationMs": 82231,
+      "type": "snapshot-returned",
+      "label": "elapsed-80000",
+      "debugPresent": true,
+      "tick": 8,
+      "readyState": "complete",
+      "rafCount": 6
+    },
+    {
+      "seq": 24,
+      "atUTC": "2026-10-02T15:51:21.145Z",
+      "afterNavigationMs": 90003,
+      "type": "profiler-stop-request",
+      "reason": "90s-navigation-deadline"
+    },
+    {
+      "seq": 27,
+      "atUTC": "2026-10-02T15:51:21.150Z",
+      "afterNavigationMs": 90008,
+      "type": "screenshot-unavailable",
+      "label": "final",
+      "error": "90s observation window ended; no extended wait or synthetic image"
+    },
+    {
+      "seq": 28,
+      "atUTC": "2026-10-02T15:51:22.449Z",
+      "afterNavigationMs": 91307,
+      "type": "raw-profiler-saved",
+      "samples": 73462,
+      "negativeTimeDeltas": 9
+    }
+  ],
+  "pageTimeline": [
+    {
+      "label": "init-script",
+      "at": 132.6000000089407,
+      "readyState": "loading",
+      "hidden": false,
+      "stage": false,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "DOM-stage-change",
+      "at": 140.70000000298023,
+      "readyState": "loading",
+      "hidden": false,
+      "stage": false,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "readystatechange",
+      "at": 146.20000000298023,
+      "readyState": "interactive",
+      "hidden": false,
+      "stage": false,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "DOM-stage-change",
+      "at": 470.40000000596046,
+      "readyState": "interactive",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "DOMContentLoaded",
+      "at": 481.70000000298023,
+      "readyState": "interactive",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "readystatechange",
+      "at": 486.6000000089407,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "load",
+      "at": 489,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "probe-raf",
+      "at": 664.5,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "interval",
+      "at": 687.7000000029802,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "probe-raf",
+      "at": 687.7000000029802,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "probe-raf",
+      "at": 695.4000000059605,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 0,
+      "panel": false,
+      "startupError": null,
+      "debugPresent": false,
+      "tick": null,
+      "paused": null,
+      "order": null
+    },
+    {
+      "label": "DOM-stage-change",
+      "at": 15875.10000000894,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 2,
+      "panel": true,
+      "startupError": null,
+      "debugPresent": true,
+      "tick": 0,
+      "paused": false,
+      "order": []
+    },
+    {
+      "label": "probe-raf",
+      "at": 15895.300000011921,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 2,
+      "panel": true,
+      "startupError": null,
+      "debugPresent": true,
+      "tick": 0,
+      "paused": false,
+      "order": []
+    },
+    {
+      "label": "interval",
+      "at": 75258.30000001192,
+      "readyState": "complete",
+      "hidden": false,
+      "stage": true,
+      "canvasCount": 2,
+      "panel": true,
+      "startupError": null,
+      "debugPresent": true,
+      "tick": 4,
+      "paused": false,
+      "order": [
+        "time",
+        "environment",
+        "energy",
+        "traffic",
+        "people",
+        "commerce",
+        "finance",
+        "security",
+        "politics",
+        "feedback"
+      ]
+    }
+  ],
+  "pageLongTasks": [
+    {
+      "startTime": 398.90000000596046,
+      "duration": 95,
+      "name": "self"
+    },
+    {
+      "startTime": 569.9000000059605,
+      "duration": 94,
+      "name": "self"
+    },
+    {
+      "startTime": 696.7000000029802,
+      "duration": 15178,
+      "name": "self"
+    },
+    {
+      "startTime": 15875.40000000596,
+      "duration": 3248,
+      "name": "self"
+    },
+    {
+      "startTime": 25320.20000000298,
+      "duration": 49938,
+      "name": "self"
+    },
+    {
+      "startTime": 75270.70000000298,
+      "duration": 6942,
+      "name": "self"
+    }
+  ],
+  "lastSuccessfulSnapshot": {
+    "hostAfterNavigationMs": 82231,
+    "pagePerformanceNow": 82215.5,
+    "tick": 8,
+    "rendererFrame": 3,
+    "probeRafCount": 6,
+    "completeTenStages": true
+  },
+  "finalImage": "NOT_CAPTURED",
+  "initialImage": "Actual 1440x900 PNG at host +5251 ms. Uniform pale grey-green; no visible city/UI. Independently viewed by root and producer.",
+  "consolePageerrorRequestfailed": {
+    "consoleEvents": 0,
+    "pageerrorEvents": 0,
+    "requestfailedEvents": 0
+  },
+  "profileStopLateMs": 1303,
+  "windowActualMs": 90008,
+  "windowPlannedMs": 90000,
+  "rawNegativeDeltas": [
+    {
+      "index": 6783,
+      "value": -2
+    },
+    {
+      "index": 6918,
+      "value": -1
+    },
+    {
+      "index": 7449,
+      "value": -2
+    },
+    {
+      "index": 8810,
+      "value": -1
+    },
+    {
+      "index": 12595,
+      "value": -24
+    },
+    {
+      "index": 12727,
+      "value": -1
+    },
+    {
+      "index": 12971,
+      "value": -23
+    },
+    {
+      "index": 14432,
+      "value": -1
+    },
+    {
+      "index": 61184,
+      "value": -2
+    }
+  ],
+  "valuesEdited": false
+}

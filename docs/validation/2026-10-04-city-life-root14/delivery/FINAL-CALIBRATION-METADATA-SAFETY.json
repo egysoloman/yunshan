@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "at": "2026-10-04T18:05:26.803834+00:00",
+  "scope": "Only changed/new final scope-calibration metadata; frozen source304 unchanged",
+  "patternKinds": [
+    "tripo-secret-shape",
+    "github-personal-token-shape",
+    "github-classic-token-shape",
+    "aws-access-key-shape",
+    "openai-secret-shape",
+    "bearer-literal-shape",
+    "private-key-block",
+    "credential-json-literal",
+    "signed-or-tokenized-url"
+  ],
+  "statistics": {
+    "regularFilesCoveredWithFreshSHA256": 12,
+    "uniqueRegularContentsScanned": 12,
+    "regularContentReuseCount": 0,
+    "uniqueByteContentsScannedIncludingNested": 12,
+    "nestedContentReuseCount": 0,
+    "gzipContainersExpanded": 0,
+    "zipContainersExpanded": 0,
+    "expandedZipMembersCovered": 0,
+    "scannedBytes": 484687
+  },
+  "findingCount": 0,
+  "findings": [],
+  "sensitiveValuesPrinted": false,
+  "originalFilesModified": false,
+  "files": [
+    "docs/validation/2026-10-04-city-life-root14/REPORT.md",
+    "docs/validation/2026-10-04-city-life-root14/REQUIREMENTS-MATRIX.md",
+    "docs/validation/2026-10-04-city-life-root14/delivery/ARCHIVE-SCOPE-CALIBRATION.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-DELIVERY-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-FINAL-READBACK.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-MATRIX-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-MEMO-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-MEMO-V6-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-REPORT-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-REPORT-V1-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-V6-V1-READBACK.json",
+    "开发备忘录.md"
+  ]
+}

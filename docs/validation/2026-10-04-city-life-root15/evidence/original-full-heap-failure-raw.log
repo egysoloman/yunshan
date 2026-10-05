@@ -1,0 +1,131 @@
+
+> yunshan-city@0.1.0 test
+> node --import tsx --test --test-isolation=none tests/*.test.ts
+
+8:35:29 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+✔ civic halls and observation deck remain public while office and underground access require earned permissions (2058.169104ms)
+✔ identity packages accumulate and preserve access across a change of displayed profession (0.683394ms)
+✔ stepped occupied floors use a shared vertical shaft while underground retains its full footprint (1.075954ms)
+✔ qualified appointment transfers public training funds to the existing guild, with exact continuation (1955.354076ms)
+✔ official and scientist appointments keep the original fee and education thresholds (19.559548ms)
+✔ a missing guild refuses the whole appointment instead of inventing a recipient (23.676028ms)
+✔ guild ID with another kind refuses the whole appointment (31.126999ms)
+▶ invalid or capped receiver funds refuse atomically
+  ✔ -1 (28.669557ms)
+  ✔ NaN (26.938322ms)
+  ✔ Infinity (29.459174ms)
+  ✔ 999999901 (27.958768ms)
+  ✔ 1000000000 (31.722115ms)
+✔ invalid or capped receiver funds refuse atomically (147.146062ms)
+✔ authorized public budget blocks appointment even when treasury has more than 100 (16.701093ms)
+✔ a real native public work escrow and authorized budget take priority over appointment (16.884892ms)
+actual public wage and budget protection {"earned":0.045996583333333334,"beforeAuthorization":{"cash":80000,"publicWagesDue":0,"publicWagesEarned":0.045996583333333334,"forecastPayroll":11613.217360000059,"reservedPayroll":0,"essentialOperations":2073.6,"reserve":13686.863356583392,"authorizedRemaining":0,"available":66313.13664341661},"afterAuthorization":{"cash":80000,"publicWagesDue":0,"publicWagesEarned":0.045996583333333334,"forecastPayroll":11613.217360000059,"reservedPayroll":0,"essentialOperations":2073.6,"reserve":13686.863356583392,"authorizedRemaining":66263.13664341661,"available":50}}
+✔ real onsite earned public wages stay protected alongside authorized contracts (258.770641ms)
+✔ genuine original21 paid appointment save receives no historical backfill (100504.946934ms)
+✔ all six production bodies retain the same actual instanced roofs in both levels of detail (92.899568ms)
+✔ real courts stay open above a standing body in both actual near and far meshes (266.905831ms)
+✔ actual intermediate roof triangles clear every occupied upper wing (55.130044ms)
+✔ four historical recipes and preserved landmarks cannot acquire program geometry (9245.658056ms)
+✔ v4 sale bays draw the same physical cabinets while keeping their real use points clear (5.998703ms)
+✔ clinical UI and care require the actual public service point rather than an empty ward court (15.274164ms)
+✔ v4 near lattice belongs to real glass openings and retains the voxel and instance limits (2938.013586ms)
+✔ v4 all real door openings stay empty at body height and plaques mount on solid wall bays (1711.876852ms)
+✔ v4 eaves follow exposed shared roof boundaries and touch the actual rendered roof surface (6599.738695ms)
+✔ v4 near residency preserves eight-building budgets, cutaways and disposal (28.340665ms)
+✔ v4 actual canvas plaques face the real mounting wall and release all private resources (9.300343ms)
+✔ near architecture generates no city instances at startup, caps its live budget and releases distant buffers (9.112497ms)
+✔ human-scale facade details leave every generated building south doorway and approach clear (326.385487ms)
+✔ eave details touch the real structural roof rather than creating a second floating roof (228.337588ms)
+✔ the open observation floor stays free of invented window walls (0.385277ms)
+✔ narrow physical plaques retain the full building name and release their own GPU resources (2.624602ms)
+✔ lanterns follow continuous daylight and actual power without adding point lights (1.445961ms)
+✔ high core floors attach their front lattice to the shared narrowed footprint (0.483871ms)
+✔ interior cutaways hide tagged upper decorations and restore them on leaving (3.961809ms)
+✔ pavilions stay open and function signs describe actual building uses (0.648601ms)
+✔ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (16261.755591ms)
+✔ glass panes are physical barriers while declared door openings allow a .35m body (5572.868307ms)
+✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (5900.88314ms)
+✔ timber finishes partition the same opaque wall volume without overlap or projection (2.725661ms)
+✔ native home and market walls retain covered solids, real windows and empty doorways (77.525166ms)
+✔ closed wall coverage includes the native material seam and rejects an actual gap (3.275077ms)
+✔ the explicit wall finish cap holds for every native target building (3040.718754ms)
+✔ aircraft stands are actual clear city locations beside stations and the airport (25.327342ms)
+✔ remote mode selection cannot rent or board and a real rental transfers cash to public funds (807.551022ms)
+✔ drone flying moves the passenger, uses energy, and requires an actual landing before exiting (139457.281277ms)
+✔ military aircraft checks both accumulated identities and ground weather permission (42011.902071ms)
+✔ player flight responds in seconds independently of city speed and respects pause (47970.35196ms)
+✔ airborne saves restore identity, passenger and deterministic continuation; bad aircraft references reject atomically (39311.989655ms)
+✔ ground charging consumes real cash and time, and cannot be boarded while charging (22048.237151ms)
+✔ legacy saves gain the deterministic parked fleet without changing player cash or position (475.618972ms)
+✔ a current save declaring aviation rejects a missing fleet without replacing state (410.004266ms)
+✔ small irregular worlds outside the nominal square round-trip their own parked fleet for multiple seeds (128.072515ms)
+✔ rental and ground charging remain visible receipts while event-based treasury reconciliation counts them once (398.960334ms)
+✔ onsite boarding eligibility stays read-only and agrees with refused weather, power, battery and identity commands (2826.553363ms)
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (18.476407ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (24.920106ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (6.762059ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (25.652035ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (54.259766ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (15.66345ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (3.728817ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (9.727293ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (10.388965ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (3342.317747ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (985.91455ms)
+✔ a saved module manifest prevents missing financial custody from being mistaken for a legacy save (208.418528ms)
+✔ BudgetAuthority1 has a complete v3 pair and rejects halves, downgrade, fake history and cutover edits atomically (525.57775ms)
+✔ fresh actual paid officials without elected terms and generic wage copies cannot create natural budget signatures (50.191093ms)
+✔ actual legacy native2 remains disabled until explicit stable host cutover, with whole/partition future24 byte equality (20225.60806ms)
+✔ browser-compatible immutable authorization SHA256 matches independent Node UTF8 oracle at padding and multi-block boundaries (3.14776ms)
+✔ old authorization boundary retains cap, approval and signer provenance while legitimate expenditure and closure remain mutable (10.779675ms)
+✔ actual two natural terms at same hall generate strict profession0 and canonical paid tail signatures without a PublicLabor body (308.008093ms)
+✔ strict V2 historical reader refuses forged term, source, role, profession, remote point and paid interval using real valid signatures (173.088155ms)
+✔ observed death or employer change stops new authority while retaining a past real signed source (2916.528443ms)
+✔ literal original authority primitive rejects two actual paid secondary terms above40 while accepting their same ordinary departmental40 (5772.680488ms)
+✔ building metadata partitions the unchanged authority without allocating any near geometry (35.965548ms)
+✔ actual near resources remain bounded while travel unloads geometry, interior refs and instance buffers (100.225105ms)
+✔ inside priority and every recreated resource preserve the current high-floor room cutaway (5.597389ms)
+✔ shell distance includes real upper and underground floors instead of the ground-center height (0.449169ms)
+✔ real residential door exit keeps its near geometry and every rotated city entrance is covered at low quality (56.858185ms)
+✔ a rotated wide building bounding circle cannot outrank the actual nearby body (0.579133ms)
+✔ a finite exit margin prevents boundary churn and still releases or rebuilds real resources (0.6357ms)
+✔ quality reduction and a new inside chunk evict before allocating, with a strict live capacity (2.029644ms)
+✔ failed creation/publication retains the far silhouette and rolls back owned resources and indices (1.127493ms)
+✔ resident anatomy has real adult stature, quantized solid limbs and stable individual clothing (3.038881ms)
+✔ face ink uses one shared texture instead of eye or mouth boxes on every NPC (1.408381ms)
+✔ actual near heads select age and mood atlas cells while shared clothes keep the crowd budget (11.052479ms)
+✔ elapsed render time and paused simulation never invent walking displacement or advance a step (131.892759ms)
+✔ large crowds stay in two shared draws and far residents omit faces and accessories (48.129271ms)
+✔ actual death renders a low corpse at the same location until the funeral finishes (61.141215ms)
+✔ fresh city-life recipe records its actual original save and preserves all actors, funds, clocks and routes (20047.561373ms)
+✔ loading an existing native-four archive into the city-life recipe keeps its bytes and future without new policies (9601.209957ms)
+✔ synchronous immutable authorization SHA256 matches the native UTF8 digest for empty, multiblock and Unicode descriptors (4.96683ms)
+✔ explicit product city saves an empty v3 contract while the compatibility constructor remains exactly original native2 (57.94853ms)
+✔ loading original native2 into a product constructor clears all new rules and preserves every actual tick24 original byte (5255.158128ms)
+✔ new v3 custom city restores whole and partition generation exactly for every real future tick24 (2090.208124ms)
+✔ half contract, version downgrade and malformed native motion stay atomic in the full reader and partition transport (531.338042ms)
+✔ trusted host upgrade requires exact stable SHA, adds empty cutover only, and preserves every original native fact (4770.135827ms)
+✔ display clock rewind and forward commands retain lawful business cutover and do not create labor proof (164.040355ms)
+
+<--- Last few GCs --->
+
+[113778:0x1c23e000]   716873 ms: Scavenge 4076.0 (4092.7) -> 4067.9 (4092.2) MB, pooled: 0 MB, 2.31 / 0.00 ms  (average mu = 0.286, current mu = 0.252) allocation failure; 
+[113778:0x1c23e000]   719102 ms: Mark-Compact (reduce) 4069.5 (4092.2) -> 4055.7 (4067.2) MB, pooled: 0 MB, 2089.52 / 0.00 ms  (+ 128.0 ms in 26 steps since start of marking, biggest step 5.2 ms, walltime since start of marking 2230 ms) (average mu = 0.29
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x75356c node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0xc52cd0  [node]
+ 3: 0xc52dbf  [node]
+ 4: 0xef6695  [node]
+ 5: 0xef66c2  [node]
+ 6: 0xef69ba  [node]
+ 7: 0xf076ba  [node]
+ 8: 0xf0ba60  [node]
+ 9: 0x199e0d1  [node]
+Aborted
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

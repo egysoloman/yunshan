@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-04T01:48:05.494216+00:00",
+  "status": "PREPARED_NOT_RUN_WAITING_ROOT_GPU_RELEASE",
+  "authorizationBasis": "Root explicitly permitted narrowly fixed v2 capture tool; frozen application 241 inputs unchanged",
+  "reason": "Prepared original dynamic absolute CommonJS import exposes default Chromium API rather than named Chromium export; original captures01 failed before browser launch with TypeError and zero PNG",
+  "originalDriver": {
+    "path": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs",
+    "sha256": "87e2f7e5c52c6a85fcd6517f2a50ad0db395ea2ca580043cedc277708e2183d5"
+  },
+  "v2Driver": {
+    "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/capture-root07-v2.mjs",
+    "sha256": "27b90a995f2376557aa44d9821a3bf2e99884cf914663639c35ee289cc8121da"
+  },
+  "originalPhaseDriver": {
+    "path": "/workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/run-root07.py",
+    "sha256": "73e07e20452ceae5a7bf8eef0389f9eed43c01e0545ef4126ecdab038d60a3c1"
+  },
+  "v2PhaseDriver": {
+    "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/run-root07-v2.py",
+    "sha256": "6196906319a795a3e96a321b5a691f8f5e38c1a88fa9847544cc84ede1066dea"
+  },
+  "processWrapper": {
+    "path": "/workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/run-phase-v2-original.py",
+    "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+    "sameOriginal": true
+  },
+  "scope": "External capture tool fix only. Same original nine shots, camera/frame timing, source/dist checks, permissions, cash/identity assertions and PNG pipeline remain; v2 bytes are explicitly distinct.",
+  "runtimeEdits": 0,
+  "gpuLaunches": 0,
+  "patchSHA256": "a8d1955b2666c52ebe1e096bb02481d48ad298bbf42f655c0161d2dccc9817a8"
+}

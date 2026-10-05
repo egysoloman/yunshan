@@ -1,0 +1,1545 @@
+{
+  "status": "PASS",
+  "scope": "Pure terminal/route JSON read. Zero Simulation imports, construction, commands or steps. Snapshot estimates are not binding future quotes or reservations.",
+  "terminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "terminalTick": 2392,
+  "terminalClock": 10048,
+  "terminalDay": 6,
+  "terminalHour": 23.466666666666665,
+  "sourceSpeed": 16,
+  "sourceGraph": "5a519d7ad1a6dc02d4179830862d5f8859e4cb3c42d55deac19482acb9577f43",
+  "player": {
+    "position": {
+      "x": -135.99999999999994,
+      "y": 0.6,
+      "z": -59.99999999999993
+    },
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "money": 416.02821428458134,
+    "reputation": 0,
+    "needs": {
+      "hunger": 91.51999999999953,
+      "fatigue": 69.4959999999983,
+      "social": 0,
+      "fun": 43.8879999999972
+    },
+    "inventory": {
+      "block": 32,
+      "food": 1
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "playerProfile": {
+    "age": 24.018203957378375,
+    "health": 76.68774009276821,
+    "mood": 51.152008549631766,
+    "stress": 0.00031632803139048277,
+    "alive": true,
+    "skill": 0,
+    "family": [],
+    "historyTags": [
+      "星际来客"
+    ]
+  },
+  "industries": [
+    {
+      "shop": {
+        "id": "shop-civic-0-farm",
+        "buildingId": "civic-0-farm",
+        "districtId": "civic-0",
+        "inventory": 0.6963545465176235,
+        "price": 17.940500093565205,
+        "revenue": 3962.0046114504735,
+        "profit": 1486.3477024591948,
+        "customers": 0,
+        "open": false,
+        "employees": 9,
+        "ownerId": "citizen-11",
+        "cash": 1333.1721111864604
+      },
+      "company": null,
+      "accountKind": "shop.cash",
+      "actualBusinessCash": 1333.1721111864604,
+      "owner": {
+        "id": "citizen-11",
+        "name": "许溪",
+        "workId": "civic-0-farm",
+        "position": {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        },
+        "state": "sleeping",
+        "food": 0,
+        "money": 660.4882090195193,
+        "needs": {
+          "hunger": 0,
+          "fatigue": 100,
+          "social": 77.90547424542288,
+          "fun": 98.05034724943378
+        },
+        "profile": {
+          "age": 31.018203957378375,
+          "health": 97.56277621350877,
+          "mood": 63.139734870608926,
+          "stress": 8.109853078915291,
+          "alive": true,
+          "skill": 46.50800000000184,
+          "family": [
+            "citizen-0"
+          ],
+          "historyTags": [
+            "云山居民"
+          ]
+        },
+        "activity": "rest",
+        "decisionAt": 10081.276152868522,
+        "relationshipAt": null,
+        "relationship": null,
+        "remainingRoute": []
+      },
+      "workers": [
+        {
+          "id": "citizen-11",
+          "name": "许溪",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 660.4882090195193,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 77.90547424542288,
+            "fun": 98.05034724943378
+          },
+          "profile": {
+            "age": 31.018203957378375,
+            "health": 97.56277621350877,
+            "mood": 63.139734870608926,
+            "stress": 8.109853078915291,
+            "alive": true,
+            "skill": 46.50800000000184,
+            "family": [
+              "citizen-0"
+            ],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10081.276152868522,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-77",
+          "name": "陆竹",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 324.8063695664046,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 70.89483399162216,
+            "fun": 100
+          },
+          "profile": {
+            "age": 52.018203957378375,
+            "health": 89.896549434161,
+            "mood": 64.24420895678401,
+            "stress": 6.67983803898434,
+            "alive": true,
+            "skill": 19.559999999999135,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10066.04588182806,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-143",
+          "name": "许禾",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 394.4142165433424,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 93.03438492840918,
+            "fun": 100
+          },
+          "profile": {
+            "age": 28.018203957378375,
+            "health": 98.60228104077929,
+            "mood": 71.80497598644858,
+            "stress": 6.640513259984219,
+            "alive": true,
+            "skill": 37.3900000000017,
+            "family": [
+              "citizen-363"
+            ],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10056.135731647024,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-209",
+          "name": "陆宁1",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -1,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 450.21115215734994,
+          "needs": {
+            "hunger": 45.19999999999848,
+            "fatigue": 100,
+            "social": 100,
+            "fun": 100
+          },
+          "profile": {
+            "age": 49.018203957378375,
+            "health": 90.78654943416109,
+            "mood": 87.7488334682971,
+            "stress": 1.1101225092419877e-16,
+            "alive": true,
+            "skill": 55.35800000000166,
+            "family": [
+              "citizen-208"
+            ],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10086.363983107265,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-275",
+          "name": "许星1",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": 1,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 391.12185125662205,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 68.33843230393646,
+            "fun": 94.1291855184863
+          },
+          "profile": {
+            "age": 25.018203957378375,
+            "health": 92.02134943416108,
+            "mood": 59.49182087763416,
+            "stress": 8.976004745276356,
+            "alive": true,
+            "skill": 28.73399999999904,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10056.571656566346,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-341",
+          "name": "陆遥2",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": 1,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 306.1986111825487,
+          "needs": {
+            "hunger": 56.599999999998644,
+            "fatigue": 100,
+            "social": 83.57137403684634,
+            "fun": 97.8091855184862
+          },
+          "profile": {
+            "age": 46.018203957378375,
+            "health": 100,
+            "mood": 81.4367080346991,
+            "stress": 1.0060485240005549e-16,
+            "alive": true,
+            "skill": 46.584000000001936,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10091.327227892587,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-407",
+          "name": "许月2",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": 2,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 322.8836544472494,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 78.17087201283958,
+            "fun": 95.0729032258069
+          },
+          "profile": {
+            "age": 22.018203957378375,
+            "health": 96.9181494341609,
+            "mood": 63.900980005460724,
+            "stress": 6.640513259984219,
+            "alive": true,
+            "skill": 19.6239999999991,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10069.65929089929,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-473",
+          "name": "陆舟3",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -1,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 310.44843083075307,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 100,
+            "fun": 100
+          },
+          "profile": {
+            "age": 43.018203957378375,
+            "health": 96.55911112769205,
+            "mood": 70.16751619788732,
+            "stress": 8.652700366920486,
+            "alive": true,
+            "skill": 37.53000000000187,
+            "family": [
+              "citizen-472"
+            ],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10053.31389190373,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-539",
+          "name": "许川3",
+          "workId": "civic-0-farm",
+          "position": {
+            "x": -1,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 515.6507797855312,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 92.95417380471669,
+            "fun": 100
+          },
+          "profile": {
+            "age": 64.01820395739537,
+            "health": 93.39094943416082,
+            "mood": 71.01221894897742,
+            "stress": 8.669777540082237,
+            "alive": true,
+            "skill": 55.32800000000162,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10056.194887553109,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        }
+      ],
+      "hungerZeroCount": 7,
+      "plan": {
+        "day": 5,
+        "shopId": "shop-civic-0-farm",
+        "assignments": [
+          {
+            "citizenId": "citizen-11",
+            "ratePerMinute": 0.09770533333333323,
+            "minutesCap": 480,
+            "workedMinutes": 432
+          },
+          {
+            "citizenId": "citizen-77",
+            "ratePerMinute": 0.09693199999999995,
+            "minutesCap": 480,
+            "workedMinutes": 410.376920576862
+          },
+          {
+            "citizenId": "citizen-143",
+            "ratePerMinute": 0.09228133333333334,
+            "minutesCap": 480,
+            "workedMinutes": 438.376920576862
+          },
+          {
+            "citizenId": "citizen-209",
+            "ratePerMinute": 0.09228133333333334,
+            "minutesCap": 480,
+            "workedMinutes": 427.0457750434764
+          },
+          {
+            "citizenId": "citizen-275",
+            "ratePerMinute": 0.09693199999999995,
+            "minutesCap": 480,
+            "workedMinutes": 421.06352894553146
+          },
+          {
+            "citizenId": "citizen-341",
+            "ratePerMinute": 0.09228133333333334,
+            "minutesCap": 480,
+            "workedMinutes": 361.06352894553146
+          },
+          {
+            "citizenId": "citizen-407",
+            "ratePerMinute": 0.09693199999999995,
+            "minutesCap": 480,
+            "workedMinutes": 432.641949763753
+          },
+          {
+            "citizenId": "citizen-473",
+            "ratePerMinute": 0.09770533333333323,
+            "minutesCap": 480,
+            "workedMinutes": 396
+          },
+          {
+            "citizenId": "citizen-539",
+            "ratePerMinute": 0.09740133333333326,
+            "minutesCap": 480,
+            "workedMinutes": 437.3269086102908
+          }
+        ],
+        "reviews": [
+          {
+            "at": 7744,
+            "ownerId": "citizen-11",
+            "ownerPosition": {
+              "x": 62,
+              "y": 0.6,
+              "z": 1.2
+            },
+            "cash": 1242.9487745664253,
+            "earnedDebt": 15.766063459709626,
+            "priorCommitment": 0,
+            "operatingReserve": 6.666666666666667,
+            "addedCommitment": 413.01695999999976
+          }
+        ]
+      },
+      "planIsCurrent": false,
+      "lastProduction": {
+        "tick": 1945,
+        "clock": 8260,
+        "event": {
+          "type": "production",
+          "shopId": "shop-civic-0-farm",
+          "districtId": "civic-0",
+          "amount": 0.0510894688775159,
+          "minutes": 4
+        }
+      },
+      "actualProduction": 97.81189085527771,
+      "productionEvents": 82
+    },
+    {
+      "shop": {
+        "id": "shop-civic-0-workshop",
+        "buildingId": "civic-0-workshop",
+        "districtId": "civic-0",
+        "inventory": 0,
+        "price": 17.99999886201164,
+        "revenue": 1840.291754714957,
+        "profit": 365.01053036157305,
+        "customers": 0,
+        "open": false,
+        "employees": 8,
+        "ownerId": "citizen-55",
+        "cash": 367.2975655990686
+      },
+      "company": null,
+      "accountKind": "shop.cash",
+      "actualBusinessCash": 367.2975655990686,
+      "owner": {
+        "id": "citizen-55",
+        "name": "顾遥",
+        "workId": "civic-0-workshop",
+        "position": {
+          "x": -2,
+          "y": 6.6,
+          "z": 1.2
+        },
+        "state": "sleeping",
+        "food": 0,
+        "money": 455.4243792275117,
+        "needs": {
+          "hunger": 0,
+          "fatigue": 100,
+          "social": 74.01646796371426,
+          "fun": 99.37034724943376
+        },
+        "profile": {
+          "age": 30.018203957378375,
+          "health": 91.00299147066839,
+          "mood": 62.26489894762073,
+          "stress": 8.998103554726455,
+          "alive": true,
+          "skill": 43.38200000000169,
+          "family": [],
+          "historyTags": [
+            "云山居民"
+          ]
+        },
+        "activity": "rest",
+        "decisionAt": 10060.429691094672,
+        "relationshipAt": null,
+        "relationship": null,
+        "remainingRoute": []
+      },
+      "workers": [
+        {
+          "id": "citizen-55",
+          "name": "顾遥",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 455.4243792275117,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 74.01646796371426,
+            "fun": 99.37034724943376
+          },
+          "profile": {
+            "age": 30.018203957378375,
+            "health": 91.00299147066839,
+            "mood": 62.26489894762073,
+            "stress": 8.998103554726455,
+            "alive": true,
+            "skill": 43.38200000000169,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10060.429691094672,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-187",
+          "name": "顾舟1",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": 2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 452.27999435329417,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 78.91277246054912,
+            "fun": 100
+          },
+          "profile": {
+            "age": 27.018203957378375,
+            "health": 96.46949783211414,
+            "mood": 65.00609262576987,
+            "stress": 8.680693226951725,
+            "alive": true,
+            "skill": 34.38000000000169,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10067.5909862197,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-253",
+          "name": "云月1",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 401.5385571528267,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 92.33438492840916,
+            "fun": 100
+          },
+          "profile": {
+            "age": 48.018203957378375,
+            "health": 95.41494943416099,
+            "mood": 73.08300917514859,
+            "stress": 5.527037994914416,
+            "alive": true,
+            "skill": 51.912000000001115,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10068.881972999545,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-319",
+          "name": "顾青2",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": 2,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 244.80971410010642,
+          "needs": {
+            "hunger": 48.79999999999853,
+            "fatigue": 100,
+            "social": 91.53999999999968,
+            "fun": 100
+          },
+          "profile": {
+            "age": 24.018203957378375,
+            "health": 100,
+            "mood": 86.87866367501186,
+            "stress": 7.632092251038706e-17,
+            "alive": true,
+            "skill": 24.895999999999503,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10069.378161098342,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-385",
+          "name": "云川2",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": 1,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 246.8472785038559,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 100,
+            "fun": 94.56918551848628
+          },
+          "profile": {
+            "age": 45.018203957378375,
+            "health": 90.24614943416069,
+            "mood": 67.37513440179339,
+            "stress": 8.86449761013589,
+            "alive": true,
+            "skill": 43.632000000001995,
+            "family": [
+              "citizen-384"
+            ],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10053.313605647301,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-451",
+          "name": "顾岚3",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": -2,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 301.81412147568176,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 67.29625153619958,
+            "fun": 93.01034724943383
+          },
+          "profile": {
+            "age": 21.018203957378375,
+            "health": 98.22590905977923,
+            "mood": 59.68670691692391,
+            "stress": 7.342194685878342,
+            "alive": true,
+            "skill": 16.63599999999998,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10061.634963607416,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-517",
+          "name": "云澄3",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": -2,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 274.40478079046994,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 82.45619047618916,
+            "fun": 100
+          },
+          "profile": {
+            "age": 42.018203957378375,
+            "health": 90.84454943416084,
+            "mood": 66.78437639376847,
+            "stress": 8.530007830959203,
+            "alive": true,
+            "skill": 34.248000000001525,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10055.824252828024,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        },
+        {
+          "id": "citizen-583",
+          "name": "顾溪4",
+          "workId": "civic-0-workshop",
+          "position": {
+            "x": -1,
+            "y": 6.6,
+            "z": 1.2
+          },
+          "state": "sleeping",
+          "food": 0,
+          "money": 395.10611758988193,
+          "needs": {
+            "hunger": 0,
+            "fatigue": 100,
+            "social": 81.36164268049208,
+            "fun": 99.83940238814695
+          },
+          "profile": {
+            "age": 63.018203957378375,
+            "health": 98.3692889143811,
+            "mood": 66.4101281946552,
+            "stress": 7.103610957022838,
+            "alive": true,
+            "skill": 52.16000000000142,
+            "family": [],
+            "historyTags": [
+              "云山居民"
+            ]
+          },
+          "activity": "rest",
+          "decisionAt": 10082.144065533299,
+          "relationshipAt": null,
+          "relationship": null,
+          "remainingRoute": []
+        }
+      ],
+      "hungerZeroCount": 7,
+      "plan": {
+        "day": 4,
+        "shopId": "shop-civic-0-workshop",
+        "assignments": [
+          {
+            "citizenId": "citizen-55",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 232
+          },
+          {
+            "citizenId": "citizen-187",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 339.7670453522291
+          },
+          {
+            "citizenId": "citizen-253",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 360.7689675960662
+          },
+          {
+            "citizenId": "citizen-319",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 383.9448699495886
+          },
+          {
+            "citizenId": "citizen-385",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 320.0246968996135
+          },
+          {
+            "citizenId": "citizen-451",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 320.38801521511385
+          },
+          {
+            "citizenId": "citizen-517",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 375.9448699495886
+          },
+          {
+            "citizenId": "citizen-583",
+            "ratePerMinute": 0.09224933333333334,
+            "minutesCap": 480,
+            "workedMinutes": 360.3433101511373
+          }
+        ],
+        "reviews": [
+          {
+            "at": 6316,
+            "ownerId": "citizen-55",
+            "ownerPosition": {
+              "x": -201.9109437647201,
+              "y": 0.6,
+              "z": -58.58626503532819
+            },
+            "cash": 459.74080269365334,
+            "earnedDebt": 20.663850666666665,
+            "priorCommitment": 0,
+            "operatingReserve": 6.666666666666667,
+            "addedCommitment": 354.23743999999994
+          }
+        ]
+      },
+      "planIsCurrent": false,
+      "lastProduction": {
+        "tick": 1582,
+        "clock": 6808,
+        "event": {
+          "type": "production",
+          "shopId": "shop-civic-0-workshop",
+          "districtId": "civic-0",
+          "amount": 1.1115650171481302,
+          "minutes": 84
+        }
+      },
+      "actualProduction": 35.05152434949928,
+      "productionEvents": 39
+    }
+  ],
+  "clinicalDoctors": [
+    {
+      "id": "citizen-44",
+      "name": "温舟",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 676.276210038616,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 72.75885162064641,
+        "fun": 100
+      },
+      "profile": {
+        "age": 64.01820395739537,
+        "health": 88.17894943416101,
+        "mood": 63.53552226836405,
+        "stress": 8.987541807026826,
+        "alive": true,
+        "skill": 55.788000000002185,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10079.48724437016,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-110",
+      "name": "林月",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": 1,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 522.1559696060291,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 72.1986409782377,
+        "fun": 100
+      },
+      "profile": {
+        "age": 40.018203957378375,
+        "health": 97.38355076788096,
+        "mood": 63.42955710242945,
+        "stress": 8.247564449477665,
+        "alive": true,
+        "skill": 28.653999999999083,
+        "family": [
+          "citizen-121"
+        ],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10075.903276321711,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-176",
+      "name": "温青1",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 430.01294568629964,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 100,
+        "fun": 98.13873434620804
+      },
+      "profile": {
+        "age": 61.018203957378375,
+        "health": 87.17894943416101,
+        "mood": 68.84575751289869,
+        "stress": 8.987541807026826,
+        "alive": true,
+        "skill": 46.80600000000221,
+        "family": [
+          "citizen-177"
+        ],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10062.891167152673,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-308",
+      "name": "温岚2",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": -2,
+        "y": 0.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 489.4884970795524,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 72.58890894100327,
+        "fun": 100
+      },
+      "profile": {
+        "age": 58.018203957378375,
+        "health": 92.72374943416087,
+        "mood": 65.10094787868225,
+        "stress": 6.971736420415096,
+        "alive": true,
+        "skill": 37.65200000000202,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10057.021882158006,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-374",
+      "name": "林澄2",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 563.7197340376264,
+      "needs": {
+        "hunger": 24.999999999997215,
+        "fatigue": 100,
+        "social": 66.30030064691503,
+        "fun": 100
+      },
+      "profile": {
+        "age": 34.018203957378375,
+        "health": 100,
+        "mood": 71.85943918456418,
+        "stress": 0.0006048599396945762,
+        "alive": true,
+        "skill": 55.664000000002034,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10081.499177206773,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-440",
+      "name": "温溪3",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": 2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 451.9296662819812,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 100,
+        "fun": 97.99984236566351
+      },
+      "profile": {
+        "age": 55.018203957378375,
+        "health": 90.12534943416092,
+        "mood": 69.02603157280902,
+        "stress": 8.415235868995419,
+        "alive": true,
+        "skill": 29.915999999998938,
+        "family": [
+          "citizen-441"
+        ],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10098.656196838245,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-506",
+      "name": "林竹3",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": 2,
+        "y": 0.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 654.5930478509904,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 63.93003739199338,
+        "fun": 100
+      },
+      "profile": {
+        "age": 31.018203957378375,
+        "health": 90.80583543456554,
+        "mood": 60.644172395293744,
+        "stress": 8.99842366438303,
+        "alive": true,
+        "skill": 46.54000000000188,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10059.109842380276,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    },
+    {
+      "id": "citizen-572",
+      "name": "温禾3",
+      "workId": "civic-0-clinic",
+      "position": {
+        "x": -1,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "state": "sleeping",
+      "food": 0,
+      "money": 539.1529515183292,
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 67.54922741398126,
+        "fun": 100
+      },
+      "profile": {
+        "age": 52.018203957378375,
+        "health": 90.76694943416088,
+        "mood": 62.92717488748786,
+        "stress": 6.902399055873123,
+        "alive": true,
+        "skill": 19.681999999999068,
+        "family": [],
+        "historyTags": [
+          "云山居民"
+        ]
+      },
+      "activity": "rest",
+      "decisionAt": 10054.574185230536,
+      "relationshipAt": null,
+      "relationship": null,
+      "remainingRoute": []
+    }
+  ],
+  "publicLaborStandingUntilDay": 7,
+  "currentAndFutureClinicAssignments": [
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-44",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-110",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-176",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-308",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-374",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-440",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-506",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    },
+    {
+      "shiftId": "public-shift-7",
+      "day": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "assignment": {
+        "citizenId": "citizen-572",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09780933333333322,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      }
+    }
+  ],
+  "existingHealthOrder": {
+    "clinicalTimingVersion": 2,
+    "id": "service-2",
+    "petitionId": "petition-2",
+    "topic": "health",
+    "siteId": "civic-0-clinic",
+    "state": "awaitingSupply",
+    "scheduledAt": 7788,
+    "approvedAt": 7788,
+    "approvedBy": [
+      "citizen-22",
+      "citizen-88"
+    ],
+    "authorizedCap": 40,
+    "spent": 0,
+    "receivedUnits": 0,
+    "consumedUnits": 0,
+    "targetUnits": 6,
+    "requiredMinutes": 20,
+    "servedIds": [],
+    "serviceMinutes": {},
+    "staffIds": [],
+    "receipts": [],
+    "retryAt": 10072,
+    "completedAt": null,
+    "lastReason": "有限供应商供货或实际报价未满足完整服务材料，下一次采购将继续核对财政与实物。"
+  },
+  "remoteMarketSnapshot": {
+    "id": "shop-civic-1-market",
+    "buildingId": "civic-1-market",
+    "districtId": "civic-1",
+    "inventory": 27,
+    "price": 16.466839896428187,
+    "revenue": 7912.551465335745,
+    "profit": -197.56672194909044,
+    "customers": 0,
+    "open": false,
+    "employees": 19,
+    "ownerId": "citizen-1",
+    "cash": 137.63730778098022
+  },
+  "purchaseEstimates": [
+    {
+      "quantity": 10,
+      "snapshotUnitPrice": 16.466839896428187,
+      "snapshotGross": 164.66839896428186,
+      "cashAfterGross": 251.35981532029948,
+      "carryAddedAfterOriginalImmediateMeal": 9,
+      "rentedHomeAndTwoClinicRestsExample": 141.35981532029948,
+      "noRentalThreeClinicRestsExample": 206.35981532029948
+    },
+    {
+      "quantity": 13,
+      "snapshotUnitPrice": 16.466839896428187,
+      "snapshotGross": 214.06891865356644,
+      "cashAfterGross": 201.9592956310149,
+      "carryAddedAfterOriginalImmediateMeal": 12,
+      "rentedHomeAndTwoClinicRestsExample": 91.9592956310149,
+      "noRentalThreeClinicRestsExample": 156.9592956310149
+    },
+    {
+      "quantity": 15,
+      "snapshotUnitPrice": 16.466839896428187,
+      "snapshotGross": 247.0025984464228,
+      "cashAfterGross": 169.02561583815853,
+      "carryAddedAfterOriginalImmediateMeal": 14,
+      "rentedHomeAndTwoClinicRestsExample": 59.02561583815853,
+      "noRentalThreeClinicRestsExample": 124.02561583815853
+    },
+    {
+      "quantity": 18,
+      "snapshotUnitPrice": 16.466839896428187,
+      "snapshotGross": 296.40311813570736,
+      "cashAfterGross": 119.62509614887398,
+      "carryAddedAfterOriginalImmediateMeal": 17,
+      "rentedHomeAndTwoClinicRestsExample": 9.625096148873979,
+      "noRentalThreeClinicRestsExample": 74.62509614887398
+    },
+    {
+      "quantity": 20,
+      "snapshotUnitPrice": 16.466839896428187,
+      "snapshotGross": 329.3367979285637,
+      "cashAfterGross": 86.69141635601761,
+      "carryAddedAfterOriginalImmediateMeal": 19,
+      "rentedHomeAndTwoClinicRestsExample": -23.308583643982388,
+      "noRentalThreeClinicRestsExample": 41.69141635601761
+    }
+  ],
+  "originalHome": {
+    "id": "civic-0-home",
+    "districtId": "civic-0",
+    "name": "现场补选参数街坊0home",
+    "kind": "home",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "door": {
+      "x": 0,
+      "y": 0.6,
+      "z": 6
+    },
+    "width": 12,
+    "depth": 12,
+    "height": 12,
+    "floors": 2,
+    "rotation": 0,
+    "capacity": 120,
+    "seed": 100
+  },
+  "originalGift": {
+    "source": "src/simulation.ts:2203-2204,2291-2330",
+    "realFiniteFoodPerSuccess": 1,
+    "hungerChangeAtCommandReturn": "clamp(before +20)",
+    "perNpcCooldownGameMinutes": 10,
+    "quarterFrameMinimumCooldownTicksAtSpeed16": 3,
+    "quarterFrameActualMinimumCooldownMinutes": 12,
+    "guardIncludesSameFloorOrACL": false,
+    "guardSpatialCondition": "Euclidean 3D distance <=24",
+    "proofMustAdditionallyRequire": "normal persisted-origin W movement, actual door and native F shaft, valid original ACL, same floor/body, <=2m instantaneous distance",
+    "observer": "No food-consumed/stored-meal event. relationship-change is emitted after food decrement but before hunger +20. Record all values after command return; do not synthesize an economic event."
+  },
+  "foodPlanMinimum": {
+    "farmOwnerGifts": 3,
+    "workshopOwnerGifts": 3,
+    "oneEligibleDoctorGiftsUpTo": 3,
+    "ownerStartingHunger": 0,
+    "ownerThreeGiftExampleWithTwo12MinuteWaits": 58.8,
+    "ownerTwoGiftExampleWithOne12MinuteWait": 39.4,
+    "patientCarryAndImmediatePurchaseMealMustBeSeparatelyAccounted": true,
+    "doctorOrCouncilFundingMustBeCurrentRealDayNotStandingDay7Reused": true
+  },
+  "timingEstimates": {
+    "walkingOnlyGameMinutes": 3582.468907310155,
+    "walkingOnlyQuarterFrames": 896,
+    "projectedMarketArrivalClockIgnoringOtherActions": 11754.666666666659,
+    "projectedMarketArrivalDay": 8,
+    "projectedMarketArrivalHour": 3.9111111111109795,
+    "projectedOwnerArrivalClockIgnoringOtherActionsAndOpeningWait": 12835.901120321732,
+    "noFutureStockOpenPriceOrOwnerLocationGuaranteed": true,
+    "alreadyPreparedHostOnly512QuarterFrameScopeIsInsufficientForThisWalking": true
+  },
+  "remainingRealPrerequisites": [
+    "Actual remote market open, enough finite stock and original settlement may fail at arrival.",
+    "Same-floor owner presence may move before arrival; follow original body rather than target saved coordinates.",
+    "Gifts create neither jobs nor wages; current-day onsite review/cash-backed assignment and actual work must occur.",
+    "Doctor needs and current-day public funded core assignment may fail after real elapsed walking; no old standing permission reuse.",
+    "Existing health target6/cap40/material request bounds and all prior civic/upkeep commitments remain literal.",
+    "Care needs actual material procurement, player/doctor minutes and wage receipt; hygiene batch and full/partition24 only after actual care."
+  ]
+}

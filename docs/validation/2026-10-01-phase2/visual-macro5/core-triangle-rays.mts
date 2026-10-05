@@ -1,0 +1,11 @@
+import * as THREE from '/workspace/yunshan/node_modules/three/build/three.module.js';
+import { createWorld } from '/tmp/yunshan-phase2-root-coherent-01/src/world.ts';
+import { buildLandscape } from '/tmp/yunshan-phase2-root-coherent-01/src/rendering/terrain.ts';
+import { writeFile } from 'node:fs/promises';
+const world=createWorld(),land=buildLandscape(world),camera=new THREE.PerspectiveCamera(48,1440/900,.12,18000);
+camera.position.set(440,325,640);camera.lookAt(210,215,-45);camera.updateMatrixWorld();land.update(camera.position,'balanced');land.group.updateMatrixWorld(true);
+const pick=(x:number,y:number)=>{const ray=new THREE.Raycaster();ray.setFromCamera(new THREE.Vector2((x+.5)/1440*2-1,1-(y+.5)/900*2),camera);return {direction:ray.ray.direction.toArray(),hits:ray.intersectObject(land.group,true).filter(hit=>{for(let o=hit.object;o;o=o.parent)if(!o.visible)return false;return true;}).slice(0,3).map(hit=>({name:hit.object.name,type:hit.object.type,face:hit.faceIndex,distance:hit.distance,point:hit.point.toArray(),normal:hit.face?.normal.toArray()}))};};
+const coordinates=[[929,843],[960,875],[901,467],[1265,198],[909,840],[967,856]],records=coordinates.map(([x,y])=>({pixel:[x,y],front:pick(x,y),double:null}));
+land.group.traverse(o=>{if(o instanceof THREE.Mesh){const materials=Array.isArray(o.material)?o.material:[o.material];for(const m of materials)m.side=THREE.DoubleSide;}});
+for(const record of records)record.double=pick(record.pixel[0],record.pixel[1]);
+const result={scope:'Independent CPU ray diagnostic against actual immutable landscape geometry and exact fixed core perspective. Not a new screenshot, altered camera, normal-player route or GPU fix.',snapshot:'/tmp/yunshan-phase2-root-coherent-01',layout:world.layoutVersion,eye:camera.position.toArray(),target:[210,215,-45],fov:48,viewport:[1440,900],records};await writeFile('/workspace/yunshan/artifacts/phase2-visual-macro5/core-triangle-rays.json',JSON.stringify(result,null,2));console.log(JSON.stringify(records));land.dispose();

@@ -1,0 +1,39 @@
+{
+  "scope": "single-field adversarial edits of actual fully-paid source records; unpaid paidGross-to-full forgery NOT_RUN without real unpaid fixture; no archive implemented",
+  "originalClaim": {
+    "citizenId": "citizen-3",
+    "shopId": null,
+    "workId": "school",
+    "districtId": "customers",
+    "minutes": 146.93107157941364,
+    "ratePerMinute": 0.092,
+    "amount": 13.51765858530606,
+    "paidGross": 13.51765858530606
+  },
+  "cases": [
+    {
+      "name": "false unsettled receipt",
+      "result": {
+        "ok": false,
+        "message": "读档失败：食品柜台存档字段：未付工资保留真实原债权"
+      },
+      "atomic": true
+    },
+    {
+      "name": "overpaid receipt",
+      "result": {
+        "ok": false,
+        "message": "读档失败：食品柜台存档字段：数值"
+      },
+      "atomic": true
+    },
+    {
+      "name": "rewritten contractual gross",
+      "result": {
+        "ok": false,
+        "message": "读档失败：食品柜台存档字段：真实已赚合同恒等"
+      },
+      "atomic": true
+    }
+  ]
+}

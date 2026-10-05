@@ -1,0 +1,34 @@
+# Shared FloorPlan / Controller CPU release 01
+
+This is a fixed-source CPU validation of the new marked `current-v4` building path. It is not a GPU image, a normal player journey, a hardware performance benchmark, or a claim that the reference architecture has been achieved. The render/world/persistence owners run their own integration and compatibility scopes.
+
+`result.json` records commands, exits and owned source hashes. `source-manifest.json` captures 82 inputs: the workspace before capture, copied inputs, and workspace after capture were identical. `frozen-inputs.zip` contains those exact input bytes. After the runs, every copied input still matched its recorded SHA, and all five owned workspace source/test files still matched the copy.
+
+## Implementation
+
+`src/architecture-floor-plan.ts` is a pure provider: it does not import Three, world, access or Controller. Only `Building.floorPlanProfile === 'v4-program-bodies-02'` selects the six programme bodies; `core-main`, pavilions and all unmarked buildings return null. It supplies actual occupied room unions, open circulation, stone courtyard slabs, real holes/platforms, wall solids and glass, door openings, purpose-specific world use points, furniture solids, physical two-flight stair treads/landings, exposed roof regions/support and internal/cross-floor routes. Renderer, world and Controller consume these descriptors rather than using a rectangular body around a drawn courtyard.
+
+The stair anchor remains at the original shared shaft coordinate. Outgoing stairs have 0.2 m rises and 0.4 m goings, thin 0.2 m surfaces, a full half-turn landing and a larger service hull within the original envelope. Their real hole is subtracted from upper floor slabs; the original anchor has a true platform. Continuous movement uses the original 0.35 m body, 1.72 m eye height and 4.8 m/s ordinary walking speed. It subdivides a near-body movement into at most 0.1 m pieces, checks the same walls/glass/fixtures, and follows actual tread support with a 0.22 m shin step allowance. Outdoor terrain keeps the original 2.6 m height threshold. Floors and permissions remain governed by existing access rules.
+
+The E trigger and legal-floor cycle remain unchanged. For a new marked body, explicit E lands on the target's actual platform, because keeping arbitrary source X/Z would put the player in a hole or halfway through a flight. Unmarked E retains the exact original X/Z and only changes Y. Restoring/view changes preserve the saved feet, including real courtyards/roof positions. Courtyard/gallery/roof support is separate from indoor room/stair identification.
+
+Exposed roof support uses the actual region and gable cross-section (.4 m eave + .8 m rise), including a body's horizontal radius. Ray support uses radius zero. Its solid volume blocks a body's head/feet overlap; a body already above the roof does not collide with the supporting roof. The roof descriptors are cached by the exact `BuildingBody` object. Gable rendering uses minimum-corner anchors; it must not use a centered Box transform.
+
+## Actual checks
+
+- `rules.log`: **24 / 24**, exit 0, 12,021.689419 ms. This is 11 new provider/Controller tests plus the 13 existing access/Controller tests.
+- `strict.log`: complete `npx tsc --noEmit`, exit 0.
+- The generated v4 world test visits every marked building and floor. It checks door geometry, unique floor/point/purpose IDs, every use point's real room support, thin grid-aligned stairs inside the original envelope, absence of fake shaft slab, platform support, standing height and all three real counters at each marked market. It also generates a v3 world and asserts every building returns null from the provider.
+- Actual keyboard W/normal Controller motor tests cross the physical door, reach all three market use points by shared routes, move room ↔ courtyard without falsely treating the courtyard as indoor, and walk both flights up and down at 3.4 m and 6.6 m storey heights. They test permission denial before climbing, legitimate E platform selection, rotated door geometry, original unmarked E X/Z, actual cabinet blockage, whole-body prevention at the top-floor hole, and supported roof movement/restoration.
+- `actual-sites-motor.mts` / `.json` / `.log`: a second CPU probe uses the **complete generated world**, with seven actual buildings: `river-b2`, `river-b1`, `workshop-b0`, `academy-b0`, `academy-b2`, `core-interchange`, `starport-b0`. All seven walk both flights 0 → 1 → 0 using real KeyW events and the normal motor, for **3,240 actual ticks**. Every tick verifies actual support and unchanged 0.072 m maximum horizontal movement at .015 s. Each building has one explicitly declared initial platform placement and headings from authority waypoints. It never uses E or relocates feet between waypoints. This remains a CPU guided probe, not a user's unaided normal-world journey.
+- `sample-sites.json` contains those actual doors, programme points, stairs and roof regions for later GL review. It is geometry data, not a screenshot.
+
+## Preserved failures and repairs
+
+`counter-first-diagnosis.json` / `counter-diagnosis.ts` preserve the earlier zero-counter diagnosis: an exact .8 m clear gap compared as .7999999999999999. The corrected geometry comparison retains the same .8 m clearance with equality tolerance; it does not shrink the body or furniture.
+
+`first.log` preserves the first 7/10 run: the full W up/down motors actually reached their destinations, but the final floor was negative zero; the door exact-object assertion also detected a 1e-13 difference between provider arithmetic and the world's .2 m quantization. `second.log` preserves the incomplete negative-zero repair (6/10). The final provider initializes canonical floor zero and returns the authoritative plan floor. Door identity is checked as the same physical point within 1e-7 m rather than requiring identical floating expression bytes. `first-strict.log` preserves test-only TypeScript narrowing/import mistakes. `third.log` preserves the successful 11/11 run before the final fixed-input release.
+
+## Remaining scope
+
+The W probes validate specific routes and first-storey stair flights, not continuous normal Controller traversal of all floors of all 605 marked buildings. The existing access tests cover permissions/legacy basements and high floors; complete new-world save, 24-tick resume and four-recipe byte equality belong to the world/persistence owner's separate frozen checks. The source provider's static descriptors are trusted generation data, not arbitrary save-supplied geometry. GL inspection, exterior road-to-door journeys at multiple elevations, normal in-game building use and final visual acceptance are still required by the parent integration run. Utilities remain planning only; this release adds no utility billing or financial behaviour.

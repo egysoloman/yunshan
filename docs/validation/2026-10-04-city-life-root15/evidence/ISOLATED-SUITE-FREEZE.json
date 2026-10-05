@@ -1,0 +1,12 @@
+{
+  "inputs": 318,
+  "src": 78,
+  "graph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+  "relativeToFinal318": {
+    "package.json": {
+      "before": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03",
+      "after": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    }
+  },
+  "originalFullSuite": "FAIL heap OOM exit134, raw2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a. Original saved in distinct immutable source/scope. No test assertion, input, seed, deadline, or production runtime is changed. New test harness isolates process per file and runs one file at a time to release modules/world caches."
+}

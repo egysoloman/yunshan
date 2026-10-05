@@ -1,0 +1,103 @@
+--- a/src/simulation/clinical.ts
++++ b/src/simulation/clinical.ts
+@@ -1,7 +1,8 @@
+ import type { Simulation } from '../simulation';
+ import { canAccessFloor, getFloorDimensions } from '../access';
+ import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
+-import type { Building, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
++import { homeRestPointBlockedByVoxels } from './home-rest';
++import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
+ 
+ export interface ClinicalReceipt { commodity: 'materials'; procurementId: string; purchasedAt: number; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
+ export interface ClinicalOrder {
+@@ -45,6 +46,22 @@
+ export function clinicalPublicFloor(site: Building, level: number, person: Pick<Player, 'role' | 'identities'>): boolean {
+   return site.kind === 'clinic' && level >= 0 && level < site.floors && (site.floorPermissions?.[level] ? site.floorPermissions[level] === 'public' : site.publicFloors === undefined || level < site.publicFloors) && canAccessFloor(site, level, person);
+ }
++const servicePoints = (site: Building, floor: number) => (site.functionPoints ?? getBuildingUsePoints(site, floor)).filter(point => point.floor === floor && point.purpose === 'service');
++/** Live marked-clinic station eligibility is shared by routing and treatment.
++ * Both the actor's standing body and the real public station must be supported
++ * and free of placed cubes. The two-metre station radius is unchanged. */
++export function clinicalServiceStationsAtPosition(site: Building, position: Vec3, person: Pick<Player, 'role' | 'identities'>, voxels: readonly { position: Vec3 }[]): BuildingFunctionPoint[] {
++  if (!getBuildingBody(site) || ![position.x, position.y, position.z].every(Number.isFinite)) return [];
++  const level = Math.floor((position.y - site.position.y + .01) / (site.height / Math.max(1, site.floors)));
++  if (!clinicalPublicFloor(site, level, person) || homeRestPointBlockedByVoxels(position, voxels)) return [];
++  const support = floorPlanSupport(site, level, position, .35);
++  if (!support || support.floor !== level || !['room', 'stairs'].includes(support.kind)) return [];
++  return servicePoints(site, level).filter(point => {
++    const stationSupport = floorPlanSupport(site, level, point.position, .35);
++    return clinicalPublicFloor(site, point.floor, person) && !!stationSupport && stationSupport.floor === level && ['room', 'stairs'].includes(stationSupport.kind) &&
++      !homeRestPointBlockedByVoxels(point.position, voxels) && Math.hypot(point.position.x - position.x, point.position.y - position.y, point.position.z - position.z) <= 2;
++  });
++}
+ /** UI and rules share the same rotated floor footprint and two-metre doorway. */
+ export function clinicalAtPosition(site: Building, position: Vec3, person: Pick<Player, 'role' | 'identities'>): boolean {
+   if (![position.x, position.y, position.z].every(Number.isFinite)) return false;
+@@ -53,7 +70,7 @@
+   if (getBuildingBody(site)) {
+     const support = floorPlanSupport(site, level, position);
+     return !!support && (support.kind === 'room' || support.kind === 'stairs') &&
+-      getBuildingUsePoints(site, level).some(point => point.purpose === 'service' && Math.hypot(point.position.x - position.x, point.position.y - position.y, point.position.z - position.z) <= 2);
++      servicePoints(site, level).some(point => Math.hypot(point.position.x - position.x, point.position.y - position.y, point.position.z - position.z) <= 2);
+   }
+   if (level === 0 && Math.hypot(position.x - site.door.x, position.y - site.door.y, position.z - site.door.z) <= 2) return true;
+   const dx = position.x - site.position.x, dz = position.z - site.position.z, x = dx * Math.cos(site.rotation) + dz * Math.sin(site.rotation), z = -dx * Math.sin(site.rotation) + dz * Math.cos(site.rotation), size = getFloorDimensions(site, level);
+@@ -63,6 +80,20 @@
+ export function clinicalAtSite(simulation: Simulation, site: Building, actorId = 'player'): boolean {
+   const person = actor(simulation.state, actorId); if (!person || site.kind !== 'clinic' || !simulation.isNearBuilding(site, person.position, 2)) return false;
+   return clinicalAtPosition(site, person.position, actorId === 'player' ? simulation.state.player : { role: roleOf(person), identities: [roleOf(person)] });
++}
++/** Marked clinics treat at one real, supported public service station. This
++ * adds no doctor-patient distance limit: each uses the existing two-metre
++ * station admission. Callers still prove funded duty, needs and capacity.
++ * Unmarked worlds retain their saved treatment contract. */
++export function clinicalPairAtServiceStation(simulation: Simulation, site: Building, doctorId: string, patientId: string): boolean {
++  const doctor = actor(simulation.state, doctorId), patient = actor(simulation.state, patientId);
++  if (site.kind !== 'clinic' || !doctor || !patient || doctorId === patientId) return false;
++  if (!getBuildingBody(site)) return true;
++  const identity = (person: Citizen | Player, id: string) => id === 'player' ? simulation.state.player : { role: roleOf(person), identities: [roleOf(person)] };
++  const doctorStations = clinicalServiceStationsAtPosition(site, doctor.position, identity(doctor, doctorId), simulation.state.voxels);
++  const patientStations = clinicalServiceStationsAtPosition(site, patient.position, identity(patient, patientId), simulation.state.voxels);
++  return doctorStations.some(point => patientStations.some(other => point.id === other.id && point.floor === other.floor &&
++    Math.hypot(point.position.x - other.position.x, point.position.y - other.position.y, point.position.z - other.position.z) < 1e-8));
+ }
+ function doctors(simulation: Simulation, site: Building, onDuty: boolean): Citizen[] {
+   const s = simulation.state;
+@@ -150,8 +181,8 @@
+       if (clinicalVisitDeadline(s, order.patientId) > clock(s)) { order.state = 'awaitingDoctor'; order.lastReason = '既有公共或付费诊疗复诊间隔尚未结束；物料与托管款保留。'; continue; }
+       if (clock(s) <= order.startedAt + EPS || s.hour < 8 || s.hour >= 17 || !clinicalAtSite(simulation, site, order.patientId) || patient.needs.hunger < 20 || patient.needs.fatigue < 15) { order.state = 'awaitingDoctor'; order.lastReason = '已购材料保留；等候开放时间、患者在场和体力恢复。'; continue; }
+       if (!availableDoctors.has(site.id)) availableDoctors.set(site.id, doctors(simulation, site, true));
+-      const doctor = availableDoctors.get(site.id)!.find(person => takeClinicalDoctorSlot(simulation, person.id, order.patientId));
+-      if (!doctor) { order.state = 'awaitingDoctor'; order.lastReason = '材料保留；没有合资格医生实际出勤或当下诊疗容量已满。'; continue; }
++      const doctor = availableDoctors.get(site.id)!.find(person => clinicalPairAtServiceStation(simulation, site, person.id, order.patientId) && takeClinicalDoctorSlot(simulation, person.id, order.patientId));
++      if (!doctor) { order.state = 'awaitingDoctor'; order.lastReason = '材料保留；没有合资格医生在同一诊疗服务站实际出勤，或当下诊疗容量已满。'; continue; }
+       // A completed treatment can settle only into the finite real public cash account.
+       if (s.treasury + order.escrow > MONEY_LIMIT) { order.state = 'awaitingDoctor'; order.lastReason = '公库收款容量已满；未赚服务费保留托管。'; continue; }
+       const worked = Math.min(minutes, MINUTES - order.workedMinutes); order.workedMinutes += worked; order.staffMinutes[doctor.id] = (order.staffMinutes[doctor.id] ?? 0) + worked; order.state = 'inTreatment'; order.lastReason = `医生与患者共同诊疗${order.workedMinutes.toFixed(1)}/20分钟；离場暂停。`;
+--- a/src/simulation/culture.ts
++++ b/src/simulation/culture.ts
+@@ -1,7 +1,7 @@
+ import type { Simulation } from '../simulation';
+ import { canAccessFloor } from '../access';
+ import { getBuildingBody } from '../architecture-floor-plan';
+-import { clinicalHealthGain, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
++import { clinicalHealthGain, clinicalPairAtServiceStation, clinicalVisitDeadline, installClinical, takeClinicalDoctorSlot } from './clinical';
+ import type { Building, Citizen, Command, CommandResult, Player, Role, SimState, WorldDefinition } from '../types';
+ 
+ export type WorkGenre = 'literature' | 'art';
+@@ -117,10 +117,13 @@
+     }
+     const present = readersAt(site).filter(person => !staff.some(worker => worker.id === person.id) && person.needs.hunger >= 40 && person.needs.fatigue >= 35 && !order.servedIds.includes(person.id) && (order.topic !== 'health' || state().extension!.actorProfiles[person.id].health < 95 && clinicalVisitDeadline(state(), person.id) <= now()));
+     const playerPresent = culture().playerServiceId === order.id && alive('player') && atSite(site) && state().player.needs.hunger >= 40 && state().player.needs.fatigue >= 35 && !order.servedIds.includes('player') && (order.topic !== 'health' || state().extension!.actorProfiles.player.health < 95 && clinicalVisitDeadline(state(), 'player') <= now());
+-    const ids = [...(playerPresent ? ['player'] : []), ...present.map(person => person.id)].slice(0, staff.length * (order.topic === 'health' ? 2 : 4));
++    const candidates = [...(playerPresent ? ['player'] : []), ...present.map(person => person.id)];
++    // An unmatched patient must not occupy the candidate prefix forever. Real
++    // health capacity is bounded by the shared per-doctor slot allocator below.
++    const ids = order.topic === 'health' ? candidates : candidates.slice(0, staff.length * 4);
+     for (const id of ids) {
+       if (order.receivedUnits - order.consumedUnits < 1 - 1e-7) break;
+-      if (order.topic === 'health' && !staff.some(doctor => takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
++      if (order.topic === 'health' && !staff.some(doctor => clinicalPairAtServiceStation(simulation, site, doctor.id, id) && takeClinicalDoctorSlot(simulation, doctor.id, id))) continue;
+       order.serviceMinutes[id] = Math.min(rule.minutes, (order.serviceMinutes[id] ?? 0) + minutes);
+       if (order.serviceMinutes[id] < rule.minutes - 1e-7) continue;
+       order.consumedUnits++; order.servedIds.push(id);

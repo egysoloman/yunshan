@@ -1,0 +1,19 @@
+{
+  "confirmedAt": "2026-10-01T22:40:02.776088+00:00",
+  "publicationCommit": "0d3d827701ddf3d3d1b8982d6e27f5878150ec8c",
+  "remoteBranch": "takeover-city-life",
+  "remoteSHAReadBackMatches": true,
+  "originalPDF": {
+    "bytes": 31247583,
+    "sha256": "fa283322a360cc6e95e6405da0b643ccd02effd9eb8ac0391078909757f3ca19",
+    "url": "https://github.com/egysoloman/yunshan/blob/0d3d827701ddf3d3d1b8982d6e27f5878150ec8c/docs/validation/2026-10-01-phase2/coherent02-review.pdf"
+  },
+  "libraryOutcome": {
+    "fileIdCount": 0,
+    "delivered": false,
+    "error": "hosted apps tools/list request failed: network"
+  },
+  "originalLibraryRecord": "library-delivery-coherent02.json",
+  "scope": "GitHub original-PDF fallback is now actually pushed. Earlier pending fields remain an immutable as-of upload record; no Library attachment was delivered. This PDF describes coherent02 and r6, not later r7 or uncommitted phase3 changes.",
+  "gitPDFAttribute": "PDF file uses ASCII85 streams and xref trailing spaces; preserve bytes and declare PDF binary. Initial diff check had treated it as text, corrected in following checkpoint; no file regeneration."
+}

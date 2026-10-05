@@ -1,0 +1,113 @@
+{
+  "status": "EXECUTED_OLD09_BEHAVIOR_FAIL_NEW10_PASS",
+  "writtenAtUTC": "2026-10-02T14:47:16.995437+00:00",
+  "syntaxReceipt": "/tmp/yunshan-bedside-native-build-probe-01/runs/syntax/run-status.json",
+  "syntaxReceiptSHA256": "4ddbd1f5c107fe9e499e87816dfbede45ada48f76225f81db41a9ff51e0b1136",
+  "syntax": "Node --check exit0 and Python AST parsed without executing runner",
+  "records": {
+    "before09": {
+      "startUTC": "2026-10-02T14:44:17.097747+00:00",
+      "endUTC": "2026-10-02T14:44:19.566421+00:00",
+      "exitCode": 1,
+      "actualResult": "BEHAVIOR_FAIL",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/tmp/yunshan-bedside-native-build-probe-01/probe.mjs",
+        "before09"
+      ],
+      "cwd": "/tmp/yunshan-system-coherent-09/source",
+      "runReceipt": "/tmp/yunshan-bedside-native-build-probe-01/runs/before09/run-status.json",
+      "runReceiptSHA256": "954f1176af1659e4ce4479c6cc4103aaa5406b5bd508f228b2f77c00bafdd984",
+      "resultSHA256": "8d748f296b82d00c5b25e0354fa88a0b32f5d26b0f93107cb000b10c775219b7",
+      "stdoutSHA256": "f9c64b84824d5aecee090b4965889a1a87a8f54013ad310a2f4cf0c23551fff2",
+      "stderrSHA256": "b0cd0e4a49886d791ab5c1f48c7e8d40674ef253ce22251dd1be0e7a5e981e8c",
+      "source102and103Unchanged": true,
+      "sealed3Unchanged": true,
+      "preparedUnchanged": true,
+      "save24Exact": true,
+      "rawSaveHashesVerified": true
+    },
+    "after10": {
+      "startUTC": "2026-10-02T14:45:14.300106+00:00",
+      "endUTC": "2026-10-02T14:45:16.694790+00:00",
+      "exitCode": 0,
+      "actualResult": "PASS",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "/tmp/yunshan-bedside-native-build-probe-01/probe.mjs",
+        "after10"
+      ],
+      "cwd": "/tmp/yunshan-system-coherent-10/source",
+      "runReceipt": "/tmp/yunshan-bedside-native-build-probe-01/runs/after10/run-status.json",
+      "runReceiptSHA256": "50d92258630c3290269ba5ca3db4da2d224c3ea51c4bdf10b1b440e1564523b3",
+      "resultSHA256": "b22a434b67976a12dde21a2a0571f7187933917180fe9088e4c3d055c18729a9",
+      "stdoutSHA256": "fb57d775d02fb8dad8c6467b55d75fa64b6349af9c09313f19f5a9130358eb65",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source102and103Unchanged": true,
+      "sealed3Unchanged": true,
+      "preparedUnchanged": true,
+      "save24Exact": true,
+      "rawSaveHashesVerified": true
+    }
+  },
+  "samePreBuildSavesByteExact": {
+    "before-rent.json": true,
+    "after-rent.json": true,
+    "controlled-clear-before-tick.json": true,
+    "clear-after-tick-before-build.json": true,
+    "before-build.json": true,
+    "after-build.json": true
+  },
+  "differenceFirstObserved": "actual people tick after real build",
+  "preparedInputHashes": {
+    "geometry-original.json": "c0ce313693c181fa2761a9960350c0d1477f5068d6fa7a319ce4c46424220287",
+    "west-b13-native.json": "baeed4f5e8d2d15b005ec25cb9925d68af11127c1421253c4b4f4b0b4e78fbee",
+    "preparation-status.json": "03237442003ce48e5d4f6253dd16f20bc2735d1a7580f27a6659ebd803b0dcfe",
+    "README.md": "217eddb2cd35b82c3316b9d654c3566621245930ae38c9c34e50e2a130cb0cac",
+    "run-once.py": "0233ae9065a3bb0da65df75e2e42ca3db4373a41fa48aa847cc646a8635c7f6d",
+    "probe.mjs": "798674d0618c59e05b08e5ac45cf18d5d87dd6f3b9d42eeeb57a450e03fdf8df"
+  },
+  "sourceBaselines": {
+    "before09": {
+      "count": 102,
+      "manifestSHA256": "46840299e7fa38d822797048eebbd361cb33e238404f5c0d20aaa04af459dc5d"
+    },
+    "after10": {
+      "count": 103,
+      "manifestSHA256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926"
+    }
+  },
+  "sealedOriginalHashes": {
+    "/tmp/yunshan-system-coherent-09/dom09-original-evidence.zip": "1b1c74c3774cf48a361d3e0f75715679c0d365e718c9453a8909f0ff0eb8de53",
+    "/tmp/yunshan-system-coherent-10/dom10-original-evidence.zip": "eb205f44b17c252b1532404b4d8809470e636e69d2513e7ff6ef5c5d7a60cfe6",
+    "/tmp/yunshan-npc-bed-voxel-candidate-01/npc-bed-voxel-evidence.zip": "f789c0ce5c58f636d58c256214f0e8535d95bc0f66f5d250df4afdc9b60db3d2"
+  },
+  "actualCommands": {
+    "rent": "Native 600->520, paid80",
+    "build": "Native block32->31, constructionId0->1, real command v=(-1402.2,286.8,-500.6)"
+  },
+  "oldBehavior": "After actual .25m tick inside real built cube, fatigue includes extra .0875 and fun extra .0175; actor remains sleeping at west-b13. Four body guard assertions fail, while independent save+24 remains exact.",
+  "newBehavior": "Same actual q and canonical p preserved; only need decay, unreachable and destination null; zero behavioral failures and save+24 exact.",
+  "fixtureControls": "Five-building world with complete native default west-b13 recipe and native384. One native adult controlled at legal q with completed route p; setTime23 and setFocus at service/a. Native roles/needs/money/health/roster retained. This is not an ordinary Controller journey or natural default-city simulation.",
+  "narrowScope": "Native build access and terminal bed recovery guard only, no general route obstacle/sweep or tunnelling proof",
+  "resources": {
+    "knownOwnedPIDs": [
+      158058,
+      158082,
+      158120
+    ],
+    "stillPresent": [],
+    "runtimePTYs": {
+      "27761": 1,
+      "36010": 0
+    },
+    "newCPUorGPUJobsStartedAfterRuns": 0
+  },
+  "modifications": "New external notes only; probe/runner/input JSON and old receipts unchanged; no shared/frozen src/tests or sealed packages edited",
+  "newCompression": 0,
+  "newLibraryAttempts": 0
+}

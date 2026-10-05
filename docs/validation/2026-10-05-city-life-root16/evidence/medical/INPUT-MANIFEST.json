@@ -1,0 +1,89 @@
+{
+  "frozenAt": "2026-10-05T00:08:41.912854+00:00",
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "sourceInputs": 322,
+  "srcFiles": 80,
+  "sharedSourcesExactlyMatchRoot15Current322": true,
+  "workingTree": "takeover-city-life",
+  "status": "READ_ONLY_CAUSE_AND_PREPARED_DRIVER_NOT_RUN",
+  "immutableOldStatus": "FAIL_ACTUAL03_240",
+  "sourceInputsManifest": "INPUTS-322.json",
+  "originals": {
+    "CLOSURE-RECEIPT.json": {
+      "bytes": 1167,
+      "sha256": "b527c4217572d02de549c26baec6e64810edfe73de2f59bef5f0da422e66443f",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/CLOSURE-RECEIPT.json"
+    },
+    "GIFT-LIFE-SUPPLY-PLAN.md": {
+      "bytes": 7266,
+      "sha256": "ef8954ac7b39ccf38d9e82fe84fbac2f33499a6f7a91d34caa973c04784b23fa",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/GIFT-LIFE-SUPPLY-PLAN.md"
+    },
+    "GIFT-ROUTE-PREPARED.json": {
+      "bytes": 6032,
+      "sha256": "b8210fbdb03b2969bf9d4b25fc107cd10b2a2e58667b100bf5c34e2dba33a16c",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/GIFT-ROUTE-PREPARED.json"
+    },
+    "HANDOFF.md": {
+      "bytes": 3262,
+      "sha256": "188cceece98b2c1320b1538092493d90b6d8d97b1e37d54d051ef83b1f7c883e",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/HANDOFF.md"
+    },
+    "NEXT-SCOPE-STATUS.json": {
+      "bytes": 1539,
+      "sha256": "494b8dace0db19cb2e18ab9299039758d7a2f287d91484d1f4568b2aabf2fabc",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/NEXT-SCOPE-STATUS.json"
+    },
+    "REPORT.md": {
+      "bytes": 8677,
+      "sha256": "c24d2414bd3b1a22f23220275309a696eefd5f6f52abbdf4fb0051c347be2321",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/REPORT.md"
+    },
+    "ROUTE-PREP04.json": {
+      "bytes": 2411,
+      "sha256": "71ab9b3f02c62caabeb92801926f3b43b0684d76b4732638a7671b286f481a45",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/ROUTE-PREP04.json"
+    },
+    "actual03/artifacts/FAIL-summary.json": {
+      "bytes": 7731,
+      "sha256": "db2f0f6dfa80112110b2bf481dc00ad2a58bb9a22835932245d4fb522b6353cb",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/FAIL-summary.json"
+    },
+    "actual03/artifacts/frontier.save.json": {
+      "bytes": 3523162,
+      "sha256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/frontier.save.json"
+    },
+    "actual03/artifacts/trace-events.json": {
+      "bytes": 1124948,
+      "sha256": "6a4a73b35469106a40cdc97b8d33f94ad76eb4fb95dd8eb4b6a2d96337537e3b",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/trace-events.json"
+    },
+    "actual03/artifacts/trace-frames.json": {
+      "bytes": 106003,
+      "sha256": "297effee2e8320f763734dfd7851e49e364ae8c395a3b230b140d17a316c0cc9",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/artifacts/trace-frames.json"
+    },
+    "actual03/receipt.json": {
+      "bytes": 945,
+      "sha256": "83e564c98ad70a4267a550ba209a75786bc32f1812cad7c4e452eca46821dbd3",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/actual03/receipt.json"
+    },
+    "origins/opening-policy-v4.save.json": {
+      "bytes": 3231045,
+      "sha256": "8c5a8ae47daed0b3e4f45225c2a45ee7d5fdb2a83b95eee788cd07cd3e01b7aa",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/origins/opening-policy-v4.save.json"
+    },
+    "origins/world.json": {
+      "bytes": 71349,
+      "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+      "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/origins/world.json"
+    }
+  },
+  "requirements": {
+    "AGENTS.md": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+    "提示词.md": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+    "开发备忘录.md": "f895f00d4441abfb6f7394a0bf187b14741fd1a9dff479a1309f142c36510964"
+  },
+  "simulationStepsExecuted": 0
+}

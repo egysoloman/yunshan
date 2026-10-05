@@ -1,0 +1,208 @@
+✖ actual terminal citizen-151 continuous same-time geometry against original floor boxes (19.611466ms)
+✖ actual terminal citizen-181 continuous same-time geometry against original floor boxes (7.035401ms)
+✔ actual terminal citizen-195 continuous same-time geometry against original floor boxes (8.097317ms)
+✔ actual terminal citizen-247 continuous same-time geometry against original floor boxes (5.8743ms)
+✖ actual terminal citizen-261 continuous same-time geometry against original floor boxes (1.778923ms)
+✖ actual terminal citizen-267 continuous same-time geometry against original floor boxes (6.254389ms)
+✖ actual terminal citizen-278 continuous same-time geometry against original floor boxes (6.720749ms)
+✖ actual terminal citizen-301 continuous same-time geometry against original floor boxes (8.647991ms)
+✖ actual terminal citizen-327 continuous same-time geometry against original floor boxes (9.113483ms)
+✖ actual terminal citizen-393 continuous same-time geometry against original floor boxes (1.70735ms)
+✖ actual terminal citizen-445 continuous same-time geometry against original floor boxes (4.189507ms)
+✖ actual terminal citizen-569 continuous same-time geometry against original floor boxes (2.688297ms)
+✖ actual terminal citizen-609 continuous same-time geometry against original floor boxes (7.726027ms)
+✔ actual terminal citizen-613 continuous same-time geometry against original floor boxes (7.599295ms)
+✔ real wall crossings cannot tunnel, including a thin wall between endpoints (0.342369ms)
+✔ stationary bodies and zero horizontal distance handle true overlap and floor/ceiling touching (1.16309ms)
+✔ vertical lift meets a real overhead box while a separated shaft is clear (0.259963ms)
+✔ rounded corners keep a diagonal clear while a closer body really intersects (0.169134ms)
+✔ strict vertical endpoint contact and arbitrarily small nonzero travel (0.248165ms)
+✔ explicit foot allowance preserves its policy without becoming a time epsilon (0.20276ms)
+✔ pure yaw-local transformation preserves original14 clearance and a real low door (4.181815ms)
+✔ invalid and unsupported tiny or overflowing bodies fail explicitly (1.720465ms)
+✖ export originalBox evidence after all14 actual source fixtures are present (6.132553ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 11
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 409.585549
+
+✖ failing tests:
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-151 continuous same-time geometry against original floor boxes (19.611466ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-181 continuous same-time geometry against original floor boxes (7.035401ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-261 continuous same-time geometry against original floor boxes (1.778923ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-267 continuous same-time geometry against original floor boxes (6.254389ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-278 continuous same-time geometry against original floor boxes (6.720749ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-301 continuous same-time geometry against original floor boxes (8.647991ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-327 continuous same-time geometry against original floor boxes (9.113483ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-393 continuous same-time geometry against original floor boxes (1.70735ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-445 continuous same-time geometry against original floor boxes (4.189507ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-569 continuous same-time geometry against original floor boxes (2.688297ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:1893
+✖ actual terminal citizen-609 continuous same-time geometry against original floor boxes (7.726027ms)
+  RangeError: Invalid upright cylinder or box geometry.
+      at sweptUprightCylinderBoxEvidence (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:50:11)
+      at blocksSweptUprightCylinder (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/src/geometry/upright-cylinder-sweep.ts:76:10)
+      at <anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:32)
+      at Array.filter (<anonymous>)
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:37:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+
+test at tests/upright-cylinder-sweep.test.ts:1:6949
+✖ export originalBox evidence after all14 actual source fixtures are present (6.132553ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 14
+  
+      at TestContext.<anonymous> (/workspace/yunshan-work/ROOT14-building-sweep-implementation-20261004-01/base/tests/upright-cylinder-sweep.test.ts:101:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 14,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+{'argv': ['node', '--import', 'tsx', '--test', '--test-isolation=none', 'tests/upright-cylinder-sweep.test.ts'], 'exitCode': 1}

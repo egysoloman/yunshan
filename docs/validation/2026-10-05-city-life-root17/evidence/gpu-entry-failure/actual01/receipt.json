@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-10-05T03:44:33.371885+00:00",
+  "endedAt": "2026-10-05T03:46:13.703307+00:00",
+  "argv": [
+    "node",
+    "/tmp/ROOT17-integrated-gpu-20261005-01/capture.mjs",
+    "/tmp/ROOT17-integrated-gpu-20261005-01/actual01/artifacts"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 351,
+  "inputsStable": true,
+  "rawSHA256": "344b965fabd55974f84d7bd73a65b94cc73143ac1220b64b2d71e7f1e99a5084",
+  "ownedPid": 149890,
+  "observedDescendants": 12,
+  "finalOwnedMembers": [
+    {
+      "pid": 149909,
+      "state": "Z",
+      "parent": 1,
+      "group": 149890,
+      "session": 149890,
+      "startTicks": 10269822
+    },
+    {
+      "pid": 149937,
+      "state": "Z",
+      "parent": 1,
+      "group": 149920,
+      "session": 149920,
+      "startTicks": 10269908
+    },
+    {
+      "pid": 149938,
+      "state": "Z",
+      "parent": 1,
+      "group": 149920,
+      "session": 149920,
+      "startTicks": 10269908
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

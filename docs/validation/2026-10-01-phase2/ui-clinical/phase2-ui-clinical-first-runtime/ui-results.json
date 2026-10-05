@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "browser": "Chromium",
+  "scope": "DOM with the real generated world and Simulation; no renderer or macOS performance claim.",
+  "checks": 10,
+  "results": [
+    "Native Space activation opens panel",
+    "District navigation uses real district IDs",
+    "Dynamic refresh preserves keyboard focus",
+    "Specific real-door navigation keeps native button identity and exposes walk waypoints without moving or paying",
+    "Public journey choice records a route and actual transfer stops without buying tickets",
+    "Closing panel returns focus to toggle",
+    "Bank state cache refreshes independently of player cash",
+    "Bank native deposit transfers wallet cash into the real pool and displays separate assets, claims and equity",
+    "Native place tabs keep the same DOM nodes across nearby actor updates and live selection changes",
+    "Native work and purchase controls stay connected while actual wages accrue; leaving pauses work and cancel returns unearned escrow"
+  ],
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /工班已完成/. Input:\n\n'现场劳动中\\n' +\n  '清溪水岸·西溪院·商肆1\\n' +\n  '实际现场劳动\\n' +\n  '55.2 / 60 分钟\\n' +\n  '已结算税前工资 / 未赚取托管工资\\n' +\n  '32.22 云币 / 2.77 云币\\n' +\n  '已实际到手净薪 / 已实际缴税\\n' +\n  '29.65 云币 / 2.57 云币\\n' +\n  '结束工班并退回未赚取工资\\n' +\n  '\\n' +\n  '托管余额尚未赚取，不能当作随身资产。税费按实际工资结算；改变显示时刻不会完成劳动。'\n\n    at file:///tmp/yunshan-ui-clinical-final-1790887996118/scripts/ui-test.mjs:137:9"
+}

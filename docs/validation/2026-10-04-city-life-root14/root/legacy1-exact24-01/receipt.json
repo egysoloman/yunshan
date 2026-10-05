@@ -1,0 +1,36 @@
+{
+  "startedAt": "2026-10-04T16:00:45.600591+00:00",
+  "endedAt": "2026-10-04T16:02:35.727686+00:00",
+  "argv": [
+    "env",
+    "YUNSHAN_RULESET_EVIDENCE=/workspace/yunshan-work/ROOT14-integrated-history-default-20261004-01/legacy1-exact24-01/original-artifacts",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=explicit upgrade of an actual legacy1 city keeps its original motion contract and exact restored future tick24",
+    "tests/city-ruleset.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 304,
+  "inputsStable": true,
+  "rawSHA256": "67458ba113b7c71c22e351100fef987fdaf9aecece228c07daff8141576d200a",
+  "ownedPid": 93119,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 93138,
+      "state": "Z",
+      "parent": 1,
+      "group": 93119,
+      "session": 93119,
+      "startTicks": 6047072
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

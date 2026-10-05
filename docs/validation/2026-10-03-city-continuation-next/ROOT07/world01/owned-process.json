@@ -1,0 +1,33 @@
+{
+  "pid": 21607,
+  "group": 21607,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/world-v4.test.ts",
+    "tests/world-v5.test.ts",
+    "tests/world-v6-commercial.test.ts",
+    "tests/world-v6-commercial-routes.test.ts",
+    "tests/world-v6-office.test.ts",
+    "tests/world-layout.test.ts",
+    "tests/stair-continuity.test.ts",
+    "tests/architecture-floor-plan.test.ts",
+    "tests/floor-plan-derived-cache.test.ts",
+    "tests/route-encoding.test.ts",
+    "tests/chunk-residency.test.ts",
+    "tests/persistence.test.ts"
+  ],
+  "membersAtStart": [
+    {
+      "pid": 21607,
+      "state": "R",
+      "parent": 21593,
+      "group": 21607,
+      "session": 21607,
+      "startTicks": 872917
+    }
+  ]
+}

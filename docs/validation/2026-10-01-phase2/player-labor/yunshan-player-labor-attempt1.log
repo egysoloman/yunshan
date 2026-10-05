@@ -1,0 +1,37 @@
+✔ starting work holds funded cash; only sixty actual onsite minutes finish and release wages (2553.876453ms)
+✔ leaving and display-time changes pause work; cancellation returns only unearned escrow once (1505.362499ms)
+✖ tax changes preserve actual net-pay receipts and the original gross wage (6491.720869ms)
+✔ public work uses protected real treasury escrow, releases earnings and refunds the unused remainder (397.464708ms)
+✔ death preserves earned pay and returns unearned employer funds without inventing inheritance (394.135338ms)
+✔ a half-completed funded job saves and resumes exactly; malformed payroll rejects atomically (3760.96677ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16122.094284
+
+✖ failing tests:
+
+test at tests/player-labor.test.ts:1:4962
+✖ tax changes preserve actual net-pay receipts and the original gross wage (6491.720869ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0.08 !== 0.2
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/player-labor.test.ts:70:57)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0.08,
+    expected: 0.2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

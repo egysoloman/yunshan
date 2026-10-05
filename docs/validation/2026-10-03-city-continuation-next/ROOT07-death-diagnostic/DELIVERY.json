@@ -1,0 +1,269 @@
+{
+  "status": "CLOSED_READ_ONLY_HANDOFF",
+  "frozenAtUTC": "2026-10-04T03:24:07.710650+00:00",
+  "filesExcludingReceipt": [
+    {
+      "path": "ACTUAL_PRODUCER_RECEIPT_BINDING.json",
+      "bytes": 2029,
+      "sha256": "09a869dd1e8f3c2c0c3e1fcb90654670129a7e04c34692269c586f5bb23d9a9c",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "ACTUAL_TERMINAL_READ.json",
+      "bytes": 448006,
+      "sha256": "8c431f77c27467b2fb3ec648fdfaafea27315117d16a8e9c7ff053f4b4432677",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 8697,
+      "sha256": "255523d8ec8669e93c1992bb41db1513f558efc111aa78685acf54870b435217",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "MEMO_TERMINAL_UPDATE.md",
+      "bytes": 2241,
+      "sha256": "e2c485b108fa556b57bfaab97e7be8dc696e54e9d8bf9215bcf0e940b5fe3797",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "ORIGINAL_SOURCE_READ.json",
+      "bytes": 2834,
+      "sha256": "e74fd5a41e9465bc70aa90d2730131e604e64863a5824dee919487d1eeeb87be",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "inspect_actual_geometry.ts",
+      "bytes": 6309,
+      "sha256": "d024c10778b6040eb96e20a267d11349bf3cba61ec5b275167ad979267409277",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "inspect_route_endpoint.ts",
+      "bytes": 2367,
+      "sha256": "fbdacfb86325a3b95e4a2157833897d5fcf8dba4f792a7f28e5c90a093e388c9",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/scripts/economy-audit.ts",
+      "bytes": 27315,
+      "sha256": "be116d5a13aeedaafae7a2a41856892f96c4de370bb53a13741916fd0c16edeb",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/architecture-floor-plan.ts",
+      "bytes": 50032,
+      "sha256": "510accde2f5d6363bf8b754facfb3e4f0d3cbcc322ec585d5f66c2f9850d84e1",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/simulation/extensions.ts",
+      "bytes": 92122,
+      "sha256": "ef005c8191efa366c8ab944c06f9d8fac9f7dd282fde10cab39f6272d405c552",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/simulation.ts",
+      "bytes": 260349,
+      "sha256": "c3014847d1afabb1e1c54c7857bbd8403d2f81fa4137450bc5f14b86ebbb5f39",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "original-source-at-read/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "package.json",
+      "bytes": 112,
+      "sha256": "db1826bc5b2c9e45315fc15fc7b901dff4429f992382e56b47a168121f1b5338",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/audit-inputs-after.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/audit-inputs-before.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/frozen-inputs.json",
+      "bytes": 27166,
+      "sha256": "bb1e653b9e1d22737183084806c38ac157a873c27a391800a5b27c0019af7b40",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/raw.log",
+      "bytes": 46124,
+      "sha256": "d0d3add3a238177493f53da5f9a26fff163e96d7eef8f5bd31e123c13da30cba",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/receipt.json",
+      "bytes": 770,
+      "sha256": "d33b35a2b22375a3b6d2266c8fe5c875d4c6f5121cfebc56b63958c5eb79f5a0",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/root07-economy-14d-final.save.json",
+      "bytes": 3603827,
+      "sha256": "79ec2e152163525fd8dbabcf3f6090b23c106460409175fed147a2729dacc547",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/root07-economy-14d.json",
+      "bytes": 256533,
+      "sha256": "2e81c0efc71a0f059028529286400397fec0a49b40afd47695e6cd3aaf43ac32",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "producer-originals/world-native.json",
+      "bytes": 1832309,
+      "sha256": "ae802b350febe1ed74b72de1422de0b1b8b99d280db86255b915f42722b62444",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "read_actual_terminal.py",
+      "bytes": 7529,
+      "sha256": "f6efaad9e1b5d24692acdfed98895fbea0c9d7115f72604c48532e345cc0187b",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-endpoint03/inputs-after.json",
+      "bytes": 13559,
+      "sha256": "654f0963c3bc88fb4b3c848cf8b360905e1933df56af56584a220c805719cd18",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-endpoint03/inputs-before.json",
+      "bytes": 13559,
+      "sha256": "654f0963c3bc88fb4b3c848cf8b360905e1933df56af56584a220c805719cd18",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-endpoint03/raw.json",
+      "bytes": 2257,
+      "sha256": "6376c623d13fbd25f6df73211aa248788a98d0643598d6e07ad62323d486310d",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-endpoint03/receipt.json",
+      "bytes": 348,
+      "sha256": "ec8736fa4ab3cf351be39e068e02cd269874820208cb780573d7eaa8888648e7",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-endpoint03/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry01/inputs-after.json",
+      "bytes": 13139,
+      "sha256": "7fb039f0cf971205b4ad3ff36288bd23f0ebe2152be5d3881637fffe41152bab",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry01/inputs-before.json",
+      "bytes": 13139,
+      "sha256": "7fb039f0cf971205b4ad3ff36288bd23f0ebe2152be5d3881637fffe41152bab",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry01/raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry01/tool-failure.json",
+      "bytes": 648,
+      "sha256": "93424355a90726d71be44c50be39c5ce83d4a314a6cde0078028c9b70d5a3f0b",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry02/inputs-after.json",
+      "bytes": 13342,
+      "sha256": "39318c97fa53e13ad8e14616b0f68d5f9662f0b26758bd4b332e38ea29727e61",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry02/inputs-before.json",
+      "bytes": 13342,
+      "sha256": "39318c97fa53e13ad8e14616b0f68d5f9662f0b26758bd4b332e38ea29727e61",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry02/raw.json",
+      "bytes": 47324,
+      "sha256": "60f276de63b487b53f790834eb20a7c9fef044261c0f2992cf2a7392da62e7ed",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry02/receipt.json",
+      "bytes": 461,
+      "sha256": "d5a018acaff977cdd97661d50edcc2fee3a91530aef6dbefb4560004efc81c68",
+      "secretPatternCount": 0
+    },
+    {
+      "path": "static-geometry02/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "secretPatternCount": 0
+    }
+  ],
+  "fileCountExcludingReceipt": 39,
+  "bytesExcludingReceipt": 7008023,
+  "secretPatternCount": 0,
+  "newSimulation": 0,
+  "newProjectTests": 0,
+  "newGPU": 0,
+  "sharedWrites": false,
+  "gitWrites": false,
+  "sourceInputsUnchanged": true,
+  "originalAuditFailPreserved": true,
+  "staticQueryRuns": [
+    {
+      "scope": "static-geometry01",
+      "status": "TOOL_DRIVER_CJS_FAIL_BEFORE_QUERY"
+    },
+    {
+      "scope": "static-geometry02",
+      "status": "PASS_PURE_QUERY",
+      "inputs": 61
+    },
+    {
+      "scope": "static-endpoint03",
+      "status": "PASS_PURE_QUERY",
+      "inputs": 62
+    }
+  ],
+  "zipProduced": false,
+  "uploads": 0,
+  "LibraryID": null
+}

@@ -1,0 +1,44 @@
+{
+  "baselineInputs": 325,
+  "source": "/tmp/ROOT17-integration-20261005-01/source",
+  "prospectiveOnly": true,
+  "sharedSourceEdits": 0,
+  "patches": [
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-medical-continuation-20261005-01/patch/clinical-closing-prefix.patch",
+      "sha256": "f4911027f4215e8c677229d59a15c1f4e15c2c9ea92f3cc943ee0ea6d34e2c96",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-shop-lifecycle-20261005-01/OWNED.patch",
+      "sha256": "43b64fb767d64ecce1bb8393ff06817b26181b5e022e962318fd12868b5e74ed",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-visual-city-20261005-01/candidate02.patch",
+      "sha256": "772e3f56a16f7b61b87a6f61e00792316c83a68b4c42bd059d40d2ea890ab5dc",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-power-network-20261005-01/CANDIDATE06.patch",
+      "sha256": "c8cbb5f4f889bdf0b8164a664fd09c658896f9f2d76053bc17dc98a308fdc11b",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    }
+  ]
+}

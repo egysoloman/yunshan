@@ -1,0 +1,9 @@
+# Separate legacy public-floor regression
+
+The additional legacy public29 case passed **1/1**, exit 0, in 5731.781972 ms (case5000.311918 ms). Strict TypeScript checking also exited 0. The command and exact raw outputs are retained. This scope ran only the new named case, **not all 20 compatibility cases or full npm tests**.
+
+The traveler is placed at an authorized public floor by a CPU fixture. `canAccessFloor` succeeds; 24 actual simulation ticks create616 chosen resident routes before saving. Trusted recipe selection, complete import/export and partition assembly are byte-exact. A second instance then executes another24 actual ticks and matches the complete original state and partition assembly. This is not normal browser walking or proof of reaching that floor through inputs.
+
+The original private floor25 SaveValidator preservation test is unchanged, retains its original assertions and is separately preserved in the final19 archive. This additional case does not replace it. `tests/world-layout.test.ts` now has13 cases, SHA fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6; seven V4 cases remain unchanged. The new case does not retroactively become part of final19.
+
+The93 frozen inputs matched workspace→copy→workspace and matched the copy after execution. `frozen-input-delta.zip` stores the five added/changed inputs relative to `../2026-10-02-v4-world-compatibility/final19/frozen-inputs.zip`; applying the delta reconstructs all93 SHA-exact inputs. That reconstruction and both ZIP CRCs were actually checked. The changed controller and controller tests were recorded, but are not independently validated by this CPU-only save case. The pure provider remains ec3fd0fd; future provider performance changes need another consistent validation scope. No original profile or GL process was opened, and no NPC timing/velocity or save assertion was reduced.

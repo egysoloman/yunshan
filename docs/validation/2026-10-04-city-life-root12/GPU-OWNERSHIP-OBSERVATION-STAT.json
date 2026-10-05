@@ -1,0 +1,93 @@
+{
+  "observedAt": "2026-10-04T11:40:03.128191+00:00",
+  "owner": 71490,
+  "recursiveOwnedMembers": [
+    {
+      "pid": 71490,
+      "parent": 71487,
+      "state": "S",
+      "startTicks": 4471818,
+      "comm": "MainThread"
+    },
+    {
+      "pid": 71498,
+      "parent": 71490,
+      "state": "S",
+      "startTicks": 4471871,
+      "comm": "MainThread"
+    },
+    {
+      "pid": 71510,
+      "parent": 71498,
+      "state": "S",
+      "startTicks": 4471888,
+      "comm": "esbuild"
+    },
+    {
+      "pid": 71521,
+      "parent": 71490,
+      "state": "S",
+      "startTicks": 4471907,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71538,
+      "parent": 71521,
+      "state": "S",
+      "startTicks": 4471930,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71539,
+      "parent": 71521,
+      "state": "S",
+      "startTicks": 4471930,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71559,
+      "parent": 71538,
+      "state": "S",
+      "startTicks": 4471942,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71574,
+      "parent": 71521,
+      "state": "S",
+      "startTicks": 4472003,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71575,
+      "parent": 71539,
+      "state": "S",
+      "startTicks": 4472009,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71602,
+      "parent": 71539,
+      "state": "S",
+      "startTicks": 4472031,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71611,
+      "parent": 71539,
+      "state": "S",
+      "startTicks": 4472038,
+      "comm": "chromium"
+    },
+    {
+      "pid": 71612,
+      "parent": 71539,
+      "state": "S",
+      "startTicks": 4472039,
+      "comm": "chromium"
+    }
+  ],
+  "otherLiveChromiumCommMatches": [],
+  "scope": "live proc-stat ancestry observation, comm-name scan only; excludes executable-symlink permissions and any full-run historical exclusivity claim",
+  "firstObservationErratum": "Previous exe-based scan skipped processes whose exe symlink could not be read; graphics:[] was not evidence of absent browser. Original byte observation retained."
+}

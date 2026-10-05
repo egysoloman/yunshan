@@ -1,0 +1,124 @@
+{
+  "label": "v4-market-river-b1-return-from-upper-void",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -857.9998201338431,
+      "y": 22.200000000000003,
+      "z": 1115.7876816359394
+    },
+    {
+      "x": -857.9200000000001,
+      "y": 22.200000000000003,
+      "z": 1115.5
+    }
+  ],
+  "start": {
+    "x": -857.9998201338431,
+    "y": 22.200000000000003,
+    "z": 1115.7876816359394
+  },
+  "steps": 4,
+  "motorSeconds": 0.06,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -857.9998201338431,
+        "y": 22.200000000000003,
+        "z": 1115.7876816359394
+      },
+      "after": {
+        "x": -857.9805702471607,
+        "y": 22.200000000000003,
+        "z": 1115.7183026631687
+      },
+      "floor": 1,
+      "inside": "river-b1",
+      "metres": 0.07199999999997422,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -857.9805702471607,
+        "y": 22.200000000000003,
+        "z": 1115.7183026631687
+      },
+      "after": {
+        "x": -857.9613203604782,
+        "y": 22.200000000000003,
+        "z": 1115.648923690398
+      },
+      "floor": 1,
+      "inside": "river-b1",
+      "metres": 0.07200000000000462,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -857.9613203604782,
+        "y": 22.200000000000003,
+        "z": 1115.648923690398
+      },
+      "after": {
+        "x": -857.9420704737959,
+        "y": 22.200000000000003,
+        "z": 1115.5795447176274
+      },
+      "floor": 1,
+      "inside": "river-b1",
+      "metres": 0.07199999999997422,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -857.9420704737959,
+        "y": 22.200000000000003,
+        "z": 1115.5795447176274
+      },
+      "after": {
+        "x": -857.9228205871134,
+        "y": 22.200000000000003,
+        "z": 1115.5101657448567
+      },
+      "floor": 1,
+      "inside": "river-b1",
+      "metres": 0.07200000000000462,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 151773.30000000447,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 151783.20000000298,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -857.9228205871134,
+    "y": 22.200000000000003,
+    "z": 1115.5101657448567
+  },
+  "floor": 1,
+  "inside": "river-b1",
+  "protectedStateUnchanged": true
+}

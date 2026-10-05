@@ -1,0 +1,577 @@
+{
+  "status": "failed",
+  "scope": "Linux Chromium SwiftShader optical inspection using fixed diagnostic cameras; not macOS performance or player travel evidence.",
+  "buildEntry": "/assets/index-CEBp_1gn.js",
+  "buildHash": "75d72c8d5202f2ea71e5cccfe71bb7aaaee53b31d260b8cf908a93f745c72773",
+  "sourceHashes": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/main.ts": "c56daf091a18eb1de86a5eb719979b9dd5cb675ef792e82ec752666ac81c0674",
+    "src/persistence.ts": "9598e05a95679128aa135bb6712e99d33888cc2c90d6cfb797b1b89c5e57099e",
+    "src/persistence/partition.ts": "c431cb8e9157a61c60cec91be2a6451fd1ae9db29650372af07c30048d774a09",
+    "src/renderer.ts": "77fdc0722e4ebbe42ff1a725a4f05fcf9508e8f8a73fbc8423e97d74cf463dc6",
+    "src/rendering/architecture-detail.ts": "72768700bd260bdb6b73b36dd35b4d133223efcecb6de7071cf1cb4bf1fff472",
+    "src/rendering/terrain.ts": "338ad800daacab97c74b5e81caf5ec7a5394473acdb07e240ecef374f3f4dd9a",
+    "src/simulation.ts": "b190ac9236f48270c28757e33f732f4224ad1e71b5a4b7b6d23f2287786431bb",
+    "src/simulation/culture.ts": "a40432ca03410050b36111b7693d4c25c2c4a7af9328e6af693c0c4339a74d21",
+    "src/simulation/extensions.ts": "9743cce12cd429d328a862c46e181593fb401a696a802add06edf90a8b40083f",
+    "src/simulation/family.ts": "01fbc1bb2ade9607380d4aca1a94ff390313d42d5c389a4621bd3d1a51137c19",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "32087fb6c1a5576eeed03e69b64fba60117295ee97b24cd0c6bf8681bc92e8b0",
+    "src/types.ts": "19504ee762f09e23cb6fce6f19519b22bf6a3cb1b6c7683ec6076cff4130c7b0",
+    "src/ui.ts": "7298f08c4550538b0da818b7edf18d62cf72bc7e18a43897384fe87fd21a396a",
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553"
+  },
+  "sourceHashesAfter": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/main.ts": "c56daf091a18eb1de86a5eb719979b9dd5cb675ef792e82ec752666ac81c0674",
+    "src/persistence.ts": "9598e05a95679128aa135bb6712e99d33888cc2c90d6cfb797b1b89c5e57099e",
+    "src/persistence/partition.ts": "c431cb8e9157a61c60cec91be2a6451fd1ae9db29650372af07c30048d774a09",
+    "src/renderer.ts": "77fdc0722e4ebbe42ff1a725a4f05fcf9508e8f8a73fbc8423e97d74cf463dc6",
+    "src/rendering/architecture-detail.ts": "72768700bd260bdb6b73b36dd35b4d133223efcecb6de7071cf1cb4bf1fff472",
+    "src/rendering/terrain.ts": "338ad800daacab97c74b5e81caf5ec7a5394473acdb07e240ecef374f3f4dd9a",
+    "src/simulation.ts": "dbd3d7d7386a16f71732a913745b773e98835282bf506b932ed6a69431db84ef",
+    "src/simulation/culture.ts": "a40432ca03410050b36111b7693d4c25c2c4a7af9328e6af693c0c4339a74d21",
+    "src/simulation/extensions.ts": "9f10811d05c7ed2e5a69c47f04782e4b928b7f722a72645122ed218deff97693",
+    "src/simulation/family.ts": "01fbc1bb2ade9607380d4aca1a94ff390313d42d5c389a4621bd3d1a51137c19",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "32087fb6c1a5576eeed03e69b64fba60117295ee97b24cd0c6bf8681bc92e8b0",
+    "src/types.ts": "19504ee762f09e23cb6fce6f19519b22bf6a3cb1b6c7683ec6076cff4130c7b0",
+    "src/ui.ts": "7298f08c4550538b0da818b7edf18d62cf72bc7e18a43897384fe87fd21a396a",
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553"
+  },
+  "captures": [
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "drawCalls": 226,
+      "triangles": 4604700,
+      "architectureDetail": {
+        "activeBuildings": 0,
+        "activeBuildingIds": [],
+        "instances": 0,
+        "created": 0,
+        "released": 0,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 0,
+          "cachedFineTiles": 0,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": false
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfall-front",
+      "hour": 12,
+      "eye": [
+        -145,
+        230,
+        290
+      ],
+      "target": [
+        165,
+        210,
+        -35
+      ],
+      "drawCalls": 183,
+      "triangles": 4374304,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "market-b6",
+          "market-b2",
+          "market-b18",
+          "market-b22",
+          "market-b10",
+          "market-b38",
+          "market-b14",
+          "market-b46"
+        ],
+        "instances": 3308,
+        "created": 8,
+        "released": 0,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 0,
+          "cachedFineTiles": 0,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": false
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "waterfall-side",
+      "hour": 12,
+      "eye": [
+        -200,
+        210,
+        80
+      ],
+      "target": [
+        110,
+        180,
+        -90
+      ],
+      "drawCalls": 179,
+      "triangles": 4474844,
+      "architectureDetail": {
+        "activeBuildings": 7,
+        "activeBuildingIds": [
+          "market-b18",
+          "market-b38",
+          "market-b14",
+          "academy-b47",
+          "market-b62",
+          "market-b42",
+          "market-b68"
+        ],
+        "instances": 2897,
+        "created": 12,
+        "released": 5,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 0,
+          "cachedFineTiles": 0,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": false
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "market-street",
+      "hour": 12,
+      "eye": [
+        -464.40000000000003,
+        72.32000000000001,
+        327
+      ],
+      "target": [
+        -469.40000000000003,
+        74,
+        292.40000000000003
+      ],
+      "buildingId": "market-b0",
+      "drawCalls": 186,
+      "triangles": 4658786,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "market-b0",
+          "market-b4",
+          "market-b24",
+          "market-b20",
+          "market-b8",
+          "market-b54",
+          "market-b44",
+          "market-b28"
+        ],
+        "instances": 3184,
+        "created": 20,
+        "released": 12,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 9,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "core-door",
+      "hour": 12,
+      "eye": [
+        435,
+        256.32000000000005,
+        -176
+      ],
+      "target": [
+        430,
+        258,
+        -250
+      ],
+      "buildingId": "core-main",
+      "drawCalls": 158,
+      "triangles": 3938542,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "core-main",
+          "core-admin-east",
+          "core-data-west",
+          "core-energy-south",
+          "core-council",
+          "core-embassy",
+          "core-security-north",
+          "core-b24"
+        ],
+        "instances": 3134,
+        "created": 28,
+        "released": 20,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far",
+        "细部 · 瀑云天枢·北岭院·里居4"
+      ]
+    },
+    {
+      "name": "workshop-door",
+      "hour": 12,
+      "eye": [
+        -1316.8000000000002,
+        174.32000000000002,
+        74.80000000000001
+      ],
+      "target": [
+        -1321.8000000000002,
+        176,
+        36.4
+      ],
+      "buildingId": "workshop-b0",
+      "drawCalls": 111,
+      "triangles": 2771876,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "workshop-b0",
+          "workshop-b4",
+          "workshop-b24",
+          "workshop-b20",
+          "workshop-b54",
+          "workshop-b8",
+          "workshop-b50",
+          "workshop-b44"
+        ],
+        "instances": 3196,
+        "created": 36,
+        "released": 28,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far"
+      ]
+    },
+    {
+      "name": "bridge-structure",
+      "hour": 12,
+      "eye": [
+        -632,
+        38.6,
+        958
+      ],
+      "target": [
+        -632,
+        16.6,
+        1016
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "drawCalls": 77,
+      "triangles": 2080978,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "river-b50",
+          "river-b59",
+          "river-b26",
+          "river-b30",
+          "river-b6",
+          "river-b39",
+          "river-b48",
+          "river-b15"
+        ],
+        "instances": 3522,
+        "created": 44,
+        "released": 36,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far",
+        "细部 · 清溪水岸·东岚院·里居13",
+        "细部 · 清溪水岸·南坡院·商肆15",
+        "细部 · 清溪水岸·东岚院·渡口7",
+        "细部 · 清溪水岸·东岚院·商肆8",
+        "细部 · 清溪水岸·东岚院·梯田农舍2",
+        "细部 · 清溪水岸·南坡院·渡口10",
+        "细部 · 清溪水岸·北岭院·渡口13",
+        "细部 · 清溪水岸·南坡院·里居4"
+      ]
+    },
+    {
+      "name": "bridge-first-person",
+      "hour": 12,
+      "eye": [
+        -632,
+        18.32,
+        1013.4
+      ],
+      "target": [
+        -680,
+        18.919999999999998,
+        1016
+      ],
+      "edgeId": "bridge-river-dock-river-station",
+      "drawCalls": 108,
+      "triangles": 2011820,
+      "architectureDetail": {
+        "activeBuildings": 8,
+        "activeBuildingIds": [
+          "river-b26",
+          "river-b30",
+          "river-b48",
+          "river-b50",
+          "river-b59",
+          "river-b15",
+          "river-b39",
+          "river-b35"
+        ],
+        "instances": 3116,
+        "created": 49,
+        "released": 41,
+        "maxBuildings": 8,
+        "maxInstancesPerBuilding": 640,
+        "loadDistance": 180
+      },
+      "terrainLod": {
+        "water": {
+          "continuous": true,
+          "riverVertices": 18,
+          "plungePoolRadius": 50,
+          "waterfallDrop": 153
+        },
+        "lod": {
+          "visibleFineTiles": 9,
+          "cachedFineTiles": 18,
+          "tileMetres": 96,
+          "surfaceStep": 2,
+          "voxelMetres": 0.2,
+          "lowAltitude": true
+        }
+      },
+      "waterObjects": [
+        "山腰轻云 · 瀑潭水雾",
+        "瀑潭→清溪→水岸 · 共顶点连续水面",
+        "溪岸 · 灰白水蚀石",
+        "溪岸 · 细茎芦苇",
+        "云瀑 · 153m落差水帘",
+        "瀑下潭 · 可见落水与下游接合",
+        "瀑潭 · 体素泡沫",
+        "清溪水岸-near",
+        "清溪水岸-far",
+        "瀑云天枢-near",
+        "瀑云天枢-far",
+        "细部 · 清溪水岸·东岚院·渡口7",
+        "细部 · 清溪水岸·东岚院·商肆8",
+        "细部 · 清溪水岸·北岭院·渡口13",
+        "细部 · 清溪水岸·东岚院·里居13",
+        "细部 · 清溪水岸·南坡院·商肆15",
+        "细部 · 清溪水岸·南坡院·里居4",
+        "细部 · 清溪水岸·南坡院·渡口10",
+        "细部 · 清溪水岸·南坡院·梯田农舍9"
+      ]
+    }
+  ],
+  "errors": [
+    "Source changed during capture; this run cannot validate the final source state"
+  ]
+}

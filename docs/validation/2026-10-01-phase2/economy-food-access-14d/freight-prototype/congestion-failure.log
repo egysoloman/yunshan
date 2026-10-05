@@ -1,0 +1,29 @@
+{"diagnostic":"true congestion after prototype reload","tick":1252,"vehicles":[{"id":"vehicle-food-road-0","edgeId":"food-road","direction":1,"progress":0,"state":"waiting","cargo":0,"nextDeparture":1000000},{"id":"vehicle-food-road-1","edgeId":"home-road","direction":-1,"progress":0.52,"state":"congested","cargo":0,"nextDeparture":644},{"id":"vehicle-home-road-0","edgeId":"home-road","direction":1,"progress":0,"state":"waiting","cargo":0,"nextDeparture":1000000},{"id":"vehicle-home-road-1","edgeId":"home-road","direction":-1,"progress":0.5,"state":"waiting","cargo":0,"nextDeparture":1000000}],"signals":{"farm-door":1,"market-door":1,"home-door":0}}
+✖ an empty existing freight carrier loads at the real farm, delivers owner custody, and loads again after exact restoration (2585.018109ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2910.243266
+
+✖ failing tests:
+
+test at tests/freight-reload-congestion-diagnostic.test.ts:1:3603
+✖ an empty existing freight carrier loads at the real farm, delivers owner custody, and loads again after exact restoration (2585.018109ms)
+  AssertionError [ERR_ASSERTION]: actual carrier condition unmet after 1200 ticks
+      at until (/tmp/yunshan-food-reload-proof-20261001/tests/freight-reload-congestion-diagnostic.test.ts:7:421)
+      at TestContext.<anonymous> (/tmp/yunshan-food-reload-proof-20261001/tests/freight-reload-congestion-diagnostic.test.ts:10:1)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

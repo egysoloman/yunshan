@@ -1,0 +1,35 @@
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (479.143117ms)
+✔ v4 actual W walks both stair flights up and down at 3.4m storey height without E or reset (249.892934ms)
+✔ v4 actual W walks both stair flights up and down at 6.6m storey height without E or reset (358.388621ms)
+✔ v4 actual W cannot pass the physical market counter or walk off the top-floor stair hole (24.304551ms)
+✖ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (53.115973ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1520.802712
+
+✖ failing tests:
+
+test at tests/controller-v4.test.ts:1:9499
+✖ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (53.115973ms)
+  AssertionError [ERR_ASSERTION]: the exterior must be an actual carved riverbed rather than an unsupported test position
+      at <anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:112:5)
+      at fixture (/workspace/yunshan/tests/controller-v4.test.ts:21:8)
+      at TestContext.<anonymous> (/workspace/yunshan/tests/controller-v4.test.ts:110:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

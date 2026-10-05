@@ -1,0 +1,24 @@
+{
+  "pid": 66424,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/native-door-routes.test.ts",
+    "tests/native-live-reader.test.ts",
+    "tests/public-school-arrival.test.ts",
+    "tests/economy-observations.test.ts",
+    "tests/rendering-street-life.test.ts",
+    "tests/site-fixtures.test.ts"
+  ],
+  "identity": {
+    "pid": 66424,
+    "state": "R",
+    "parent": 66421,
+    "group": 66424,
+    "session": 66424,
+    "startTicks": 3941296
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "createdAtUTC": "2026-10-03T02:27:32.603542+00:00",
+  "reviewedPatchSHA256": "de8428080af2a05878fcea6b69c9f196fd56f91f01214f013b3f8b673bb4fec8",
+  "inputsUnchangedSinceIdentityCapture": true,
+  "inputChanges": [],
+  "sourceOnlyFindings": [
+    "R1 tier-frequency research undercredit",
+    "R2 multi-sector save actor capacity missing",
+    "R3 NPC education-service/research overlap candidate"
+  ],
+  "runtimeResults": "NOT_RUN_BY_THIS_AUDIT",
+  "report": {
+    "path": "/tmp/yunshan-research-candidate-readonly-review-20261003/native-agent-research-readonly-review.md",
+    "bytes": 14511,
+    "sha256": "983dc7304ce0984eeca9169737b6ac2f11a1b231caea4d6ee0a9c34ef18da941"
+  },
+  "actions": "Only read/hash and private /tmp report writes. No Node/Sim/test/build/GPU/ZIP/Library/shared/candidate edits."
+}

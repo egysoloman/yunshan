@@ -1,0 +1,23 @@
+{
+  "status": "failed",
+  "browser": "Chromium",
+  "scope": "DOM with the real generated world and Simulation; no renderer or macOS performance claim.",
+  "checks": 13,
+  "results": [
+    "Native Space activation opens panel",
+    "District navigation uses real district IDs",
+    "Dynamic refresh preserves keyboard focus",
+    "Specific real-door navigation keeps native button identity and exposes walk waypoints without moving or paying",
+    "Public journey choice records a route and actual transfer stops without buying tickets",
+    "Closing panel returns focus to toggle",
+    "Bank state cache refreshes independently of player cash",
+    "Bank native deposit transfers wallet cash into the real pool and displays separate assets, claims and equity",
+    "Native place tabs keep the same DOM nodes across nearby actor updates and live selection changes",
+    "Native work and purchase controls stay connected while actual wages accrue; leaving pauses work and cancel returns unearned escrow",
+    "A native new shift pays only after 60 actual Simulation minutes and displays the completed net-wage receipt",
+    "Native clinical registration escrows real coins without healing; purchased material receipt stays visible and cancellation refunds only unused funds",
+    "Native reused-material care records actual doctor attendance, pauses away, completes after twenty on-site minutes, and retains the same heal DOM control"
+  ],
+  "errors": [],
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-ref=\"context-body\"] [data-command=\"purchase\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" data-value=\"1\" class=\"action-button\" data-command=\"purchase\" data-target=\"workshop-b0\">购买工业物料 · 10.97 云币</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    57 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\n    at /tmp/yunshan-ui-clinical-native-1790888861606/scripts/ui-test.mjs:217:76"
+}

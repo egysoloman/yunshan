@@ -1,0 +1,21 @@
+--- a/tests/resident-formal-education.test.ts
++++ b/tests/resident-formal-education.test.ts
+@@ -224,6 +224,18 @@
+   assert.equal(sim.command({ type: 'speed', value: 8 }).ok, true);
+   for (const worker of producers) { const workplace = workshops.find(workshop => workshop.id === worker.workId)!; pin(sim, controls, worker.id, workplace, workplace.door, 'work'); }
+   const first = publicEducation(context); syncControlledBornClock(context);
++  // The one-time hearing signers return to their own homes once this hearing
++  // has ended. An adult student left pinned at the hall could now genuinely
++  // file another NPC petition, changing this controlled two-order scenario.
++  // Original industrial participants, payroll reviewers and class attendees
++  // keep their actual roles, work and intended positions; no demand is erased.
++  const heard = sim.state.culture!.petitions.find(petition => petition.executionId === first.id)!;
++  for (const id of heard.signerIds) {
++    if (id === 'player' || producerIds.has(id) || reviewers.some(person => person.id === id) || classmates.some(person => person.id === id)) continue;
++    const person = sim.state.citizens.find(person => person.id === id)!;
++    const home = sim.worldDefinition.buildings.find(building => building.id === person.homeId)!;
++    pin(sim, controls, person.id, home, home.door);
++  }
+   for (const learner of [child, ...classmates]) pin(sim, controls, learner.id, site, station(site));
+   const deadline = at(sim) + 480; for (let ticks = 0; first.state !== 'fulfilled' && at(sim) < deadline - 1e-7 && ticks < 10000; ticks++) sim.step(.25);
+   assert.equal(first.state, 'fulfilled'); assert.equal(first.consumedUnits, 6); assert.equal(sim.state.family!.children[child.id].attendanceMinutes, 60); assert.equal(child.education, 0);

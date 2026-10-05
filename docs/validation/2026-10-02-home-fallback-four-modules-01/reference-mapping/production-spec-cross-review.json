@@ -1,0 +1,72 @@
+{
+  "status": "STATIC_SPECIFICATION_CROSS_REVIEW_ONLY; NO_COMPLETION_MISSTATEMENT_FOUND",
+  "reviewed_at": "2026-10-02T08:10:53.113862+00:00",
+  "reviewed_spec": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/four-sample-production-specs.json",
+    "sha256": "9f8206d46cc2f985ede2c4644329526d591e1a0246ff1494c8c5a1aadbbc68a2",
+    "bytes": null,
+    "status": "SPECIFICATION_ONLY; zero actual sample meshes and zero approved installations",
+    "byte_count_recorded": false,
+    "evidence": "First read-only exec printed CURRENT SPEC SHA9f8206... before the root clarification. Byte count was not printed in that first read. The later review-file writer reread current spec7dc116...; both observations are retained separately."
+  },
+  "reviewed_minimum_subset_sha256": "cd9ec265578a2ddd78cd973b622020e391cf1be57fbd60bc83686e1355a26a84",
+  "review_method": "Read-only JSON/spec comparison to the already created minimum subset; no execution of geometry, simulation, GPU, rule tests or model generation.",
+  "checks": [
+    {
+      "module": "SAMPLE-WALL-01",
+      "result": "NO_SCOPE_CONFLICT",
+      "facts": "Two1.4m pieces join the complete actual wall1 length2.8m; each height3.0/depth.4. Static calculated envelope is conditional; meshFit NOT_RUN and semantic near/LOD/cutaway adapter absent.",
+      "coordinate_note": "Minimum subset names the shared wall descriptor a-end/bottom; concrete asset pivot is the segment bottom centre and uses declared transforms. They are different reference frames, not interchangeable origins."
+    },
+    {
+      "module": "SAMPLE-WINDOW-01",
+      "result": "NO_SCOPE_CONFLICT",
+      "facts": "Whole nine-piece outer frame2.0x2.2x.4 has asset-local aperture bottom.4/high1.4. Mount body-local y.4 makes retained aperture body-local bottom.8. Thus it remains a sill window, not REF-B01 floor-to-ceiling fit.",
+      "coordinate_note": "Frame-bottom pivot y.4 in body coordinates plus aperture y.4 in asset coordinates equals body window-bottom y.8; the aperture lower edge is not the whole-frame pivot.",
+      "open_blocker": "Pane+9 parts alone leaves8 coarse-wall coplanar overlaps; bounded crop/exclusive renderer ownership is absent. meshFit NOT_RUN."
+    },
+    {
+      "module": "SAMPLE-GATE-FRAME-01",
+      "result": "NO_SCOPE_CONFLICT",
+      "facts": "Immediate sample is an open static frame; aperture4.8x2.8 stays clear. Minimum subset retains A06/A07/A08 as the full door family, but A07/A08 moving leaves are deferred until shared door authority exists.",
+      "open_blocker": "Actual hypothetical90deg leaf witness intersects lantern detail6/7,0.016m3 each; door state/sweep/route/save authority absent. No approved leaf operation or installed frame."
+    },
+    {
+      "module": "SAMPLE-BONSAI-01",
+      "result": "NO_SCOPE_CONFLICT",
+      "facts": "B01/B02+R12 remain an independent pot/tree planning assembly. .8x1.3x.8 is proposed whole envelope, not a received model. Ground support/body-route envelope calculation is a static candidate; fixture/collision/save registration absent, meshFit NOT_RUN.",
+      "coordinate_note": "B01 independent mesh origin is pot bottom(0,0,0). B02 independent root origin is(0,0,0); subParts B02 pivot[0,.3,0] is the assembled root placement at B01 soil socket, not the independent mesh-root origin.",
+      "reference_note": "REF-B11/REF-A06 can inform foliage/style only; these show a trough or bay assembly, not an exact independent B01/B02 specimen."
+    }
+  ],
+  "no_material_completed_claim_found": true,
+  "all_mounts_and_new_meshes_still_unapproved": true,
+  "minimum_8_id_families_are_not_8_jobs_or_8_immediate_meshes": true,
+  "furniture_F01_to_F21_remains_full_scope": true,
+  "new_installs": 0,
+  "new_approved_mounts": 0,
+  "new_paid_calls": 0,
+  "new_model_generation_calls": 0,
+  "runtime_or_cpu_rule_tests_run": 0,
+  "root_spec_and_readme_edited": false,
+  "clarifications_not_blockers": [
+    "B02 subParts.pivot is an assembly placement, while independent root origin remains zero.",
+    "Whole-frame/window-aperture coordinate frames must remain distinct."
+  ],
+  "subsequent_root_minor_clarification": {
+    "read_at": "2026-10-02T08:11:53.421833+00:00",
+    "original_reviewed_spec_sha256_preserved": "9f8206d46cc2f985ede2c4644329526d591e1a0246ff1494c8c5a1aadbbc68a2",
+    "later_root_spec_sha256": "7dc1169ff471b1c966c4f6351be963e7f85956ba545b54a553d2404aa6d3ee6f",
+    "root_spec_bytes_changed_since_initial_review": true,
+    "geometry_contract_sha256_still": "f57211bfb88c04cc9af8cec5cce0e0b202e290498c66eede602104a6effcdd40",
+    "actual_geometry_contract_sha256_field": "f57211bfb88c04cc9af8cec5cce0e0b202e290498c66eede602104a6effcdd40",
+    "clarifications_actually_read": [
+      "B01/B02 now each declare independent assetOrigin[0,0,0] separately from assemblyMount; B02 assemblyMount[0,.3,0].",
+      "Window prompt now partitions glazing by mullion projection and assigns one visible owner at coplanar mullion/glass regions, avoiding internal sample face overlap."
+    ],
+    "current_spec_status": "SPECIFICATION_ONLY; zero actual sample meshes and zero approved installations",
+    "scope_conclusion": "Clarifications resolve coordinate wording and visible-face ownership. They do not claim received meshes, approved mounts or native replacement; no new completion misstatement found.",
+    "reviewer_did_not_edit_root_spec_or_run_geometry": true
+  },
+  "document_writing_read_spec_sha256": "7dc1169ff471b1c966c4f6351be963e7f85956ba545b54a553d2404aa6d3ee6f"
+}

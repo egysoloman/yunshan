@@ -1,0 +1,403 @@
+{
+  "atUTC": "2026-10-03T10:51:44.336326+00:00",
+  "headBefore": "aeca2679bd984527273c334def2672ad83fe758f",
+  "branch": "takeover-city-life",
+  "sourceInputsExactFinal22": 150,
+  "changedExecutionInputs": 51,
+  "selectedFileCount": 76,
+  "totalSelectedBytes": 379791946,
+  "securityPatternCounts": {
+    "private_key": 0,
+    "aws_access_key": 0,
+    "provider_token": 0,
+    "authorization_value": 0,
+    "credential_assignment": 0,
+    "signed_or_token_url": 0,
+    "credential_url": 0
+  },
+  "unknownDirtyPaths": 0,
+  "indexInitiallyEmpty": true,
+  "records": [
+    {
+      "path": "src/hygiene-ui.ts",
+      "bytes": 4049,
+      "sha256": "0c34ba862d57528ef376f7ecd0c78b156a3fb9bdcb60d39bf7fd9678f70bf611"
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "bytes": 16493,
+      "sha256": "8c9180478e1740c0ca221f3ea411434168b33ceb67523fa61b3bbef23a1401b0"
+    },
+    {
+      "path": "src/renderer.ts",
+      "bytes": 84894,
+      "sha256": "1ee53694fa585bcdf0ff1179bf17e0f451ef4672a5140a6565e3ff1e9e2ff9a1"
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "bytes": 10676,
+      "sha256": "46c65f0c71fc378b3ee52ec5a91b5ec55dd6370cb5f667ed81e26d1902dad643"
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "bytes": 39811,
+      "sha256": "125de26d3c8594d463850631f247187856717f30eb4cc5a67b9caac096af33bd"
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "bytes": 4125,
+      "sha256": "7cfdcf1548d8eb328a13cc9037905dafde13fe841813c4b6f2e300ce3af285c6"
+    },
+    {
+      "path": "src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "bytes": 22149,
+      "sha256": "e9a8a1b49847d266672094996c2c8a841e4506f0acafc389db6ebed067ab83ac"
+    },
+    {
+      "path": "src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "bytes": 52353,
+      "sha256": "425524fb2523339903a8a82d08541b67d42935b60f070e45da3edb7b95095aa6"
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "bytes": 40038,
+      "sha256": "0da2425b6f78ad4dc6d5934464b4d33eb2694cd1f80ab4800b27600dac5f2ff5"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "bytes": 89519,
+      "sha256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732"
+    },
+    {
+      "path": "src/simulation/family.ts",
+      "bytes": 71339,
+      "sha256": "6030be487dbe9489a88eb9627538c03530c10a3f7389d3a046f8bc59bbdeafe4"
+    },
+    {
+      "path": "src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "bytes": 44422,
+      "sha256": "816da5a550c41616e905d599fca71e35574caa6a17707ecb80e12ff325d0f34b"
+    },
+    {
+      "path": "src/simulation/pathology.ts",
+      "bytes": 29488,
+      "sha256": "aef069cf3086f7ab9e288494aa1c69955d9529d4d2385d37889e6810d9244404"
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "bytes": 14724,
+      "sha256": "90c714ac7a6ff6b0677c10ed4b1a7f55c70526310989bc1c9aaeaa3c8a5138ea"
+    },
+    {
+      "path": "src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "src/simulation/shop_lifecycle.ts",
+      "bytes": 52672,
+      "sha256": "09713e53d8d67d6179abbd350fc30fd93f960cb062a514d07abe7c00c9115fd0"
+    },
+    {
+      "path": "src/simulation.ts",
+      "bytes": 220246,
+      "sha256": "b6562fdd4d3e6e6a5135a7ecb68f29bafd5d2335546b52566a51015847845418"
+    },
+    {
+      "path": "src/types.ts",
+      "bytes": 13618,
+      "sha256": "ba774f7ec6866a1a83013dd314c9d27e4020dcaf01a5503ec3ebf532dbd71660"
+    },
+    {
+      "path": "src/ui.ts",
+      "bytes": 173488,
+      "sha256": "3a3926ae387bda67e6591a42d87672c8a3bb38e4e0698719eb6325f41d6b9f3d"
+    },
+    {
+      "path": "tests/appointment-funds.test.ts",
+      "bytes": 12046,
+      "sha256": "f8afd2248ec63046da8fb7361bbe0fbd0b7ed47bf740fb4910a595e4b27fc5f4"
+    },
+    {
+      "path": "tests/banking.test.ts",
+      "bytes": 21022,
+      "sha256": "46ad59024417534be4e2062ac58aef3d7c8cae77155bd1356b758bd72231d4dd"
+    },
+    {
+      "path": "tests/clinical-arrival-contract.test.ts",
+      "bytes": 9351,
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65"
+    },
+    {
+      "path": "tests/clinical-arrival-doctor.test.ts",
+      "bytes": 2806,
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de"
+    },
+    {
+      "path": "tests/clinical-arrival-fixture.ts",
+      "bytes": 8448,
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b"
+    },
+    {
+      "path": "tests/clinical-arrival-front-contract.test.ts",
+      "bytes": 643,
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603"
+    },
+    {
+      "path": "tests/clinical-arrival-patient.test.ts",
+      "bytes": 2962,
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6"
+    },
+    {
+      "path": "tests/clinical-arrival-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3"
+    },
+    {
+      "path": "tests/economy.test.ts",
+      "bytes": 51687,
+      "sha256": "10028da30ea2cb54f0ea5ffba7490d7849235469ec1b1a1616387cf8318877f2"
+    },
+    {
+      "path": "tests/extensions.test.ts",
+      "bytes": 108044,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "tests/family.test.ts",
+      "bytes": 50642,
+      "sha256": "b5cb390cc1089ccce1114f6db387230d6ec2cb10c9362c60ecc070217de0a419"
+    },
+    {
+      "path": "tests/fixtures/appointment-old21-after.json",
+      "bytes": 695441,
+      "sha256": "ccd21438c49f6dd6e76007c9b8f6c0ff4a218492c1082e099b349d3cbc1c91d2"
+    },
+    {
+      "path": "tests/fixtures/clinical-arrival-old-D1-measurement-after-step.json",
+      "bytes": 408224,
+      "sha256": "26ecbed06893a5bffc2f5d73d822b25427dc8f329489dc912a5f093635e7b91e"
+    },
+    {
+      "path": "tests/fixtures/clinical-arrival-old-D1-measurement-before-step.json",
+      "bytes": 406423,
+      "sha256": "67c3934829383b8b8d4910fde4135d0b74aeed650ad8bae12508a6ae7973a11e"
+    },
+    {
+      "path": "tests/fixtures/clinical-arrival-old-D2-measurement-after-step.json",
+      "bytes": 408483,
+      "sha256": "db7a54f6b5daf45141139d60013450f68c029117ec856a8f23daf2c7d7ef52fa"
+    },
+    {
+      "path": "tests/fixtures/clinical-arrival-old-D2-measurement-before-step.json",
+      "bytes": 406853,
+      "sha256": "0353880d31abb82a67d62ba784e36b119bbdc3087852435b32e0a85658011555"
+    },
+    {
+      "path": "tests/fixtures/clinical-arrival-old-provenance.json",
+      "bytes": 2453,
+      "sha256": "f43dd80ad53822ffda51fce2332371fde97aa2701926e5e7460ed58347b11a83"
+    },
+    {
+      "path": "tests/fixtures/governance-old18/campaign.json",
+      "bytes": 398358,
+      "sha256": "ff6b23b4bca1e3ef7d4e5126b4d7968c551fe26b5d9c59f780affdfe0bc430bf"
+    },
+    {
+      "path": "tests/fixtures/governance-old18/cold.json",
+      "bytes": 396696,
+      "sha256": "ad971fea1c44a21d0286a3b3d8feecf37d17185943fe84d4f9f3b2c1cb86637e"
+    },
+    {
+      "path": "tests/fixtures/power-native-old-energy-paid-v1.json",
+      "bytes": 695260,
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041"
+    },
+    {
+      "path": "tests/governance-fixture.ts",
+      "bytes": 754,
+      "sha256": "eb36fbcfdecedc02614417826a67a50053bc91eea994fe75023cfe8e58080463"
+    },
+    {
+      "path": "tests/governance.test.ts",
+      "bytes": 10904,
+      "sha256": "1c5543453c11561e32d5af7bdbeacf1ad676b64abf7ddc736ebd8e412a3c006a"
+    },
+    {
+      "path": "tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "tests/power.test.ts",
+      "bytes": 20584,
+      "sha256": "d86ef6e26f0a970f2f3a84b383e24e480849b5ac37a254048992c943ad83886b"
+    },
+    {
+      "path": "tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "tests/trade.test.ts",
+      "bytes": 46212,
+      "sha256": "5f06ffdd905af5a8b698a0e9a3165a153e65467ef7d51e459a93df3f8e47146b"
+    },
+    {
+      "path": "scripts/economy-audit.ts",
+      "bytes": 21569,
+      "sha256": "f64ed8de7449e6fbd2056eb4d2c67f1fb6ccdd08c43475b50810268a698bdbe3"
+    },
+    {
+      "path": "开发备忘录.md",
+      "bytes": 262140,
+      "sha256": "4fd5f604b3de70381cfbd4b1d247a1d2ce3c7a8af782a7556b520f85271e590e"
+    },
+    {
+      "path": "docs/需求实现验证矩阵.md",
+      "bytes": 61742,
+      "sha256": "8203ec238d57871189a7a1657938889c5de664067ba052135c7199a0e1db560e"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/README.md",
+      "bytes": 2183,
+      "sha256": "a8bb83cd020a225caeb65f2f97d416f61d98e77ecbe66933d441ff70faa32f47"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/REPORT.md",
+      "bytes": 20120,
+      "sha256": "9919e1dca97d52ad20dd8e0c578073301d6bbf0071dcc6c0c30370ffff57daa1"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/delivery-receipt.json",
+      "bytes": 2205,
+      "sha256": "b4dad40e0ff2dc454c388c570917f623824b668f6126d6fab0e977b32c7bb73d"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/documentation-integration-receipt.json",
+      "bytes": 873,
+      "sha256": "aa7ce0419d9b862b1eaa2f00e141753a849f8a00590fcfd1030a61f709b1453e"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/final-source-document-review.receipt.json",
+      "bytes": 4362,
+      "sha256": "e440c56734a5aa41e83bc41d9833c1b6697bec90c452630e679f552330cf9421"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/library-save-result.json",
+      "bytes": 4449,
+      "sha256": "e84457ee18054d41f10d22762e734432157744c4a353dc9bcc26341c9bc020b1"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/original-evidence-archive.manifest.json",
+      "bytes": 3991423,
+      "sha256": "d84c15f819c0eff0c56f9a4dc835b310b199f764e63b5977b376c3c94bd8a6c7"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/original-evidence-build.receipt.json",
+      "bytes": 1849,
+      "sha256": "bbe259001d151b93e3aadae1420e9f3eccdc774d939eb063c9150609e553ddf2"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/original-evidence-parts.json",
+      "bytes": 1359,
+      "sha256": "88a52e8ca553d987504ba15e9c581888ddcd01fbdc1266de09f93759e2a5ef02"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/original-evidence-verify.receipt.json",
+      "bytes": 1627,
+      "sha256": "8515fe89eacd3d3f71bed672360032626c55ed1488195b65d9531deeeb2c30c4"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/receipt.json",
+      "bytes": 11980,
+      "sha256": "9323889758864e44c827b306af6a4bff6b737706b49739662eb2aff916adbd2a"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/reconstruct_originals.py",
+      "bytes": 1874,
+      "sha256": "f4ddf103359ff49da3c2c335875a516b9fb216211b81fd80a441b2c1bcd35d6d"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/shared-source-integration-receipt.json",
+      "bytes": 851,
+      "sha256": "57ae714c7de5b60c2f7e01055d2d0421ab05f2b83a4847c7a5a62e086f3fe7d1"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/source-manifest.json",
+      "bytes": 16309,
+      "sha256": "daf32d2cf72a235a99afa4d7c74425475e39e12a1a3fbe8a217ff7dafb6cf691"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/validation-results.json",
+      "bytes": 4209,
+      "sha256": "10db744f2203d87f5a44a411261e64c4fdac495cd46dca9a5d405f6b6ef35d77"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-22-core-waterfall-20261003.png",
+      "bytes": 1346066,
+      "sha256": "1b43d3607860eb70b945dc842b53df46c099505ac52abdaae0e93cd8372bb1e1"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-22-counter-20261003.png",
+      "bytes": 94947,
+      "sha256": "66477535d21fb1e69f5ef8978ca0cbcc8f1bc231a028b146b8e630a876ea98d5"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-22-home-bed-20261003.png",
+      "bytes": 314557,
+      "sha256": "f75e1528c744cb7c2ff33d9b8ab25a19f7bc78c4d9fc4f8f8a8c14efc12325b7"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-22-market-street-20261003.png",
+      "bytes": 619192,
+      "sha256": "58ce1113a619a50963d4188c1b1898bd314dafc92c4307d542e9eadfaef91873"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-dynamic-city-services-original-evidence-20261003.zip.part001",
+      "bytes": 99614720,
+      "sha256": "2d60fea85731736dffa254f3b80502979329f9d0b4eb2aabbb1529473851459a"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-dynamic-city-services-original-evidence-20261003.zip.part002",
+      "bytes": 99614720,
+      "sha256": "ee82d151e9e7ffc3d7754e32e6d5446208af849287f2b5eb32345700c5088b5e"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-dynamic-city-services-original-evidence-20261003.zip.part003",
+      "bytes": 99614720,
+      "sha256": "04464f75c3330036f42efe43ac06032c1ae903570946ef4f9647b26a720efb5b"
+    },
+    {
+      "path": "docs/validation/2026-10-03-dynamic-city-services/yunshan-dynamic-city-services-original-evidence-20261003.zip.part004",
+      "bytes": 68809552,
+      "sha256": "bdc71aeb75c402a5f6aaeac74e2e63299bb376dcc4eac3c46800cfd7015abd16"
+    }
+  ],
+  "status": "PRESTAGING_LIVE_BYTE_IDENTITY_AND_COUNTS_PASS"
+}

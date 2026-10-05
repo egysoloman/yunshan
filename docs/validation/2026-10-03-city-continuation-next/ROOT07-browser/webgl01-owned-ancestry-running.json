@@ -1,0 +1,290 @@
+{
+  "at": "2026-10-04T01:42:43.197015+00:00",
+  "ownedParentPid": 21259,
+  "scope": "Exact current ancestry from the original owned npm PID across changed Chromium sessions/groups",
+  "descendants": [
+    {
+      "pid": 21259,
+      "name": "npm run test:br",
+      "state": "S",
+      "parent": 21258,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 60,
+      "startTicks": 841922
+    },
+    {
+      "pid": 21271,
+      "name": "sh",
+      "state": "S",
+      "parent": 21259,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 0,
+      "startTicks": 841956
+    },
+    {
+      "pid": 21272,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 21271,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 133,
+      "startTicks": 841956
+    },
+    {
+      "pid": 21280,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 21272,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 73,
+      "startTicks": 841995
+    },
+    {
+      "pid": 21292,
+      "name": "esbuild",
+      "state": "S",
+      "parent": 21280,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 60,
+      "startTicks": 842011
+    },
+    {
+      "pid": 21303,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21272,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 560,
+      "startTicks": 842031
+    },
+    {
+      "pid": 21320,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 10,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21321,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 14,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21343,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21320,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 74041,
+      "startTicks": 842090
+    },
+    {
+      "pid": 21366,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 22,
+      "startTicks": 842188
+    },
+    {
+      "pid": 21367,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 3,
+      "startTicks": 842193
+    },
+    {
+      "pid": 21392,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 122,
+      "startTicks": 842209
+    },
+    {
+      "pid": 21401,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 3,
+      "startTicks": 842225
+    },
+    {
+      "pid": 21402,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 22934,
+      "startTicks": 842226
+    }
+  ],
+  "active": [
+    {
+      "pid": 21259,
+      "name": "npm run test:br",
+      "state": "S",
+      "parent": 21258,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 60,
+      "startTicks": 841922
+    },
+    {
+      "pid": 21271,
+      "name": "sh",
+      "state": "S",
+      "parent": 21259,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 0,
+      "startTicks": 841956
+    },
+    {
+      "pid": 21272,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 21271,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 133,
+      "startTicks": 841956
+    },
+    {
+      "pid": 21280,
+      "name": "MainThread",
+      "state": "S",
+      "parent": 21272,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 73,
+      "startTicks": 841995
+    },
+    {
+      "pid": 21292,
+      "name": "esbuild",
+      "state": "S",
+      "parent": 21280,
+      "group": 21259,
+      "session": 21259,
+      "cpuTicks": 60,
+      "startTicks": 842011
+    },
+    {
+      "pid": 21303,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21272,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 560,
+      "startTicks": 842031
+    },
+    {
+      "pid": 21320,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 10,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21321,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 14,
+      "startTicks": 842067
+    },
+    {
+      "pid": 21343,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21320,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 74041,
+      "startTicks": 842090
+    },
+    {
+      "pid": 21366,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21303,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 22,
+      "startTicks": 842188
+    },
+    {
+      "pid": 21367,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 3,
+      "startTicks": 842193
+    },
+    {
+      "pid": 21392,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 122,
+      "startTicks": 842209
+    },
+    {
+      "pid": 21401,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 3,
+      "startTicks": 842225
+    },
+    {
+      "pid": 21402,
+      "name": "chromium",
+      "state": "S",
+      "parent": 21321,
+      "group": 21303,
+      "session": 21303,
+      "cpuTicks": 22934,
+      "startTicks": 842226
+    }
+  ],
+  "zombies": []
+}

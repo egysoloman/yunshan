@@ -1,0 +1,642 @@
+{
+  "status": "passed-with-unavailable-child-fixture",
+  "scope": "Linux Chromium SwiftShader; diagnostic initial placement only, real W movement and real citizen data; no normal journey or macOS performance claim",
+  "spatial": false,
+  "buildEntry": "/assets/index-DMFvvo-u.js",
+  "buildHash": "0e1b0347e891ab34062998fa4ebae27b3502a02a6bfad498211b3b5227e6b9fd",
+  "sourceHashes": {
+    "src/access.ts": "6fc7caccfe45f3d424e7a41488791a6bb1fd047c3825d0bade4ae43ccf029acd",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/journey.ts": "09a5b2ae5f49b821b958b3790a94be6467f7f4891b585dd09bd2cbc23fafc1f0",
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "b4483cb936aabe9801a47693b7ca1e3fdae3ec3bc58fb7e6249bf1c836c3aed6",
+    "src/renderer.ts": "3b378f7c108f60d88c01d64bc303e7347489462255b195b27c92c36fe644a2de",
+    "src/rendering/architecture-detail.ts": "afa42a0d2f41ddada494e793983ac4b0330956022f19eb75b2fe1721f3d070dd",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "ca911502f3350da2be7535707344d24ec2e182b25a07fcc7ff2111a08ddcd81b",
+    "src/rendering/terrain.ts": "ab8d51d135d9c68f77b71271acf1db6a39fa07250fc6dff27d8341fc17a61e0f",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/clinical.ts": "6c30a61bc410eb299999108b1067e7d30b2eab0b80db64d2f65f65e2896f3d17",
+    "src/simulation/culture.ts": "d1d1ecc2717844f45fc3e19b16c753fac6eac095a4a3259d62acce6d5d728464",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "src/ui.ts": "37764a36889b9a9a69ccfa8f59fa2a199732f0edab126efc27700898c0a9e708",
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015"
+  },
+  "checks": 2,
+  "results": [
+    {
+      "name": "actual adult resident has a near face and clothes, with a stable paused pose in two shared draws",
+      "person": {
+        "id": "citizen-551",
+        "name": "许月3",
+        "age": 31.000003805175027,
+        "role": "商人",
+        "position": {
+          "x": -281.36461610218856,
+          "y": 66,
+          "z": 479.5050721236333
+        },
+        "state": "moving",
+        "player": {
+          "x": -278.36461610218856,
+          "y": 66,
+          "z": 482.0050721236333
+        },
+        "frame": 3
+      },
+      "front": {
+        "heading": {
+          "x": -0.495787644139705,
+          "z": -0.8684437874257616
+        },
+        "player": {
+          "x": -283.55904721463367,
+          "y": 66,
+          "z": 477.07310335476865
+        },
+        "actualHeadMatrix": [
+          -0.17368875443935394,
+          0,
+          0.09915752708911896,
+          0,
+          0,
+          0.20000000298023224,
+          0,
+          0,
+          -0.09915752708911896,
+          0,
+          -0.17368875443935394,
+          0,
+          -281.3646240234375,
+          67.69999694824219,
+          479.50506591796875,
+          1
+        ],
+        "frame": 5
+      },
+      "capture": {
+        "tick": 8,
+        "paused": true,
+        "feet": {
+          "x": -283.55904721463367,
+          "y": 66,
+          "z": 477.07310335476865
+        },
+        "eye": {
+          "x": -283.55904721463367,
+          "y": 67.72,
+          "z": 477.07310335476865
+        },
+        "mode": "walk",
+        "inside": "market-b50",
+        "fps": 0,
+        "drawCalls": 242,
+        "triangles": 399528,
+        "quality": "balanced",
+        "renderDistance": 5700,
+        "npcBudget": {
+          "residents": 392,
+          "corpses": 0,
+          "bodyInstances": 2374,
+          "faceInstances": 3,
+          "drawCalls": 2,
+          "triangles": 28524
+        }
+      },
+      "shaderDiagnostics": {
+        "glErrors": [],
+        "programs": [
+          {
+            "id": 0,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 1,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 2,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 3,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 4,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 5,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 6,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 7,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 8,
+            "usedTimes": 7,
+            "diagnostics": null
+          },
+          {
+            "id": 9,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 10,
+            "usedTimes": 5,
+            "diagnostics": null
+          },
+          {
+            "id": 11,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 12,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 13,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 14,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 15,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 16,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 17,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 18,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 19,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 20,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 21,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 22,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 23,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 24,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 25,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 26,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 27,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 28,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 29,
+            "usedTimes": 7,
+            "diagnostics": null
+          },
+          {
+            "id": 30,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 31,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 32,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 33,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 34,
+            "usedTimes": 5,
+            "diagnostics": null
+          },
+          {
+            "id": 35,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 36,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 37,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 38,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 39,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 40,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 41,
+            "usedTimes": 1,
+            "diagnostics": null
+          }
+        ]
+      },
+      "poseSHA256": "c0c58f82bf6c48b1a44626c47c76f3c6b9c96f1c5492e1cf32f246724ff69c58"
+    },
+    {
+      "name": "actual elder resident has a near face and clothes, with a stable paused pose in two shared draws",
+      "person": {
+        "id": "citizen-133",
+        "name": "云禾",
+        "age": 63.00000380517503,
+        "role": "商人",
+        "position": {
+          "x": -277.2,
+          "y": 64.91355085383074,
+          "z": 495.12944345396437
+        },
+        "state": "moving",
+        "player": {
+          "x": -274.2,
+          "y": 64.91355085383074,
+          "z": 497.62944345396437
+        },
+        "frame": 13
+      },
+      "front": {
+        "heading": {
+          "x": 0,
+          "z": 1
+        },
+        "player": {
+          "x": -276.5,
+          "y": 64.91355085383074,
+          "z": 498.32944345396436
+        },
+        "actualHeadMatrix": [
+          0.20000000298023224,
+          0,
+          0,
+          0,
+          0,
+          0.20000000298023224,
+          0,
+          0,
+          0,
+          0,
+          0.20000000298023224,
+          0,
+          -277.20001220703125,
+          66.6135482788086,
+          495.12945556640625,
+          1
+        ],
+        "frame": 15
+      },
+      "capture": {
+        "tick": 8,
+        "paused": true,
+        "feet": {
+          "x": -276.5,
+          "y": 64.72075471698113,
+          "z": 498.32944345396436
+        },
+        "eye": {
+          "x": -276.5,
+          "y": 66.44075471698113,
+          "z": 498.32944345396436
+        },
+        "mode": "walk",
+        "inside": null,
+        "fps": 0,
+        "drawCalls": 459,
+        "triangles": 712266,
+        "quality": "balanced",
+        "renderDistance": 5700,
+        "npcBudget": {
+          "residents": 387,
+          "corpses": 0,
+          "bodyInstances": 2344,
+          "faceInstances": 3,
+          "drawCalls": 2,
+          "triangles": 28164
+        }
+      },
+      "shaderDiagnostics": {
+        "glErrors": [],
+        "programs": [
+          {
+            "id": 0,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 1,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 2,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 3,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 4,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 5,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 6,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 7,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 8,
+            "usedTimes": 7,
+            "diagnostics": null
+          },
+          {
+            "id": 9,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 10,
+            "usedTimes": 5,
+            "diagnostics": null
+          },
+          {
+            "id": 11,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 12,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 13,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 14,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 15,
+            "usedTimes": 3,
+            "diagnostics": null
+          },
+          {
+            "id": 16,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 17,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 18,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 19,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 20,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 21,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 22,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 23,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 24,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 25,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 26,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 27,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 28,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 29,
+            "usedTimes": 7,
+            "diagnostics": null
+          },
+          {
+            "id": 30,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 31,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 32,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 33,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 34,
+            "usedTimes": 5,
+            "diagnostics": null
+          },
+          {
+            "id": 35,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 36,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 37,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 38,
+            "usedTimes": 2,
+            "diagnostics": null
+          },
+          {
+            "id": 39,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 40,
+            "usedTimes": 1,
+            "diagnostics": null
+          },
+          {
+            "id": 41,
+            "usedTimes": 1,
+            "diagnostics": null
+          }
+        ]
+      },
+      "poseSHA256": "768563a99f095cbcf73f818728ad2cbba290981cb9fe8e990f453b8cc6b2005d"
+    }
+  ],
+  "skipped": [
+    {
+      "check": "actual child near appearance",
+      "reason": "No actual renderable 6–17-year-old resident exists in this city snapshot; no age or citizen state was changed.",
+      "minActualAge": 20.000003805175027
+    }
+  ],
+  "errors": []
+}

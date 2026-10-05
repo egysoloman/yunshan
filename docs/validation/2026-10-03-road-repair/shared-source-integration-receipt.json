@@ -1,0 +1,155 @@
+{
+  "status": "ACTUAL_SHARED_SOURCE_BYTE_EQUAL_PASS",
+  "at": "2026-10-03T14:00:39.889127+00:00",
+  "baseCommit": "b1b440d25625309744b176f0ca0a795ee4041b82",
+  "inputCount": 164,
+  "allInputHashesEqual": true,
+  "sourceManifestSha256": "85ff59a49fd981c34a78e64d8ffe2c633fd1df045ed5ca9f2320516bc7007b4a",
+  "changes": [
+    {
+      "path": "src/controller.ts",
+      "operation": "modify",
+      "beforeSha256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "afterSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "src/journey.ts",
+      "operation": "modify",
+      "beforeSha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "afterSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "src/main.ts",
+      "operation": "modify",
+      "beforeSha256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "afterSha256": "ab09234fbc128ca9c01d2e3117f355a0062dbc40f90c525eecdc48a65d9fe529"
+    },
+    {
+      "path": "src/renderer.ts",
+      "operation": "modify",
+      "beforeSha256": "1ee53694fa585bcdf0ff1179bf17e0f451ef4672a5140a6565e3ff1e9e2ff9a1",
+      "afterSha256": "42f0e2dfd36586c19b4bd68989e05772e7ab78644fbba56377567cf179fd0b1b"
+    },
+    {
+      "path": "src/rendering/road-closures.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "src/roads.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "src/simulation/activity-capacity.ts",
+      "operation": "modify",
+      "beforeSha256": "7cfdcf1548d8eb328a13cc9037905dafde13fe841813c4b6f2e300ce3af285c6",
+      "afterSha256": "53b603d47f9642bd745fb5b22e7e4ba98a5d26ca291fe14f624a9f0942d03337"
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "operation": "modify",
+      "beforeSha256": "e9a8a1b49847d266672094996c2c8a841e4506f0acafc389db6ebed067ab83ac",
+      "afterSha256": "1972c72eb8f27e90a11d6667b8660f8fac7ea32be79d0a5bb5315b8a3586ff38"
+    },
+    {
+      "path": "src/simulation/roadworks.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "0dc3ce8a222a990aa10948a22e84e17976cdf958977534411f6c023a961814b3"
+    },
+    {
+      "path": "src/simulation.ts",
+      "operation": "modify",
+      "beforeSha256": "b6562fdd4d3e6e6a5135a7ecb68f29bafd5d2335546b52566a51015847845418",
+      "afterSha256": "cbfaed0f41338753bcf36d0e99fa7cfd10928d7cf14b8b60adc6387c65bc56cb"
+    },
+    {
+      "path": "src/types.ts",
+      "operation": "modify",
+      "beforeSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2",
+      "afterSha256": "9faa39f799cf00160822b7cfc45918f0c430e070f5d553edccdc21aefa3e61e2"
+    },
+    {
+      "path": "src/ui.ts",
+      "operation": "modify",
+      "beforeSha256": "3a3926ae387bda67e6591a42d87672c8a3bb38e4e0698719eb6325f41d6b9f3d",
+      "afterSha256": "51bce409c7c16122b6c95329d898f2570fa38df543c763e84a822412ccf06ebf"
+    },
+    {
+      "path": "src/world.ts",
+      "operation": "modify",
+      "beforeSha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "afterSha256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843"
+    },
+    {
+      "path": "tests/fixtures/roads-old22/cold.json",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b"
+    },
+    {
+      "path": "tests/fixtures/roads-old22/continuation-sha.json",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "bbd7b1d564cde8ecc5e02e7ecbb635cb0490547082294d08bfc7b4e652e7eb49"
+    },
+    {
+      "path": "tests/fixtures/roads-old22/provenance.json",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "002f64a92c9ec5b6a85dc7f93e77f8422b34cb66f05a7ac7d23325c5e24ba3ff"
+    },
+    {
+      "path": "tests/road-capacity.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+    },
+    {
+      "path": "tests/road-estate.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+    },
+    {
+      "path": "tests/road-navigation.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "tests/road-routing.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "501fd7c0d63ba6a963c9a833c5558929bc57f6267902277b6fe630b81ebe0d6f"
+    },
+    {
+      "path": "tests/roads-old22.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "253c5dd289d4d862c5ee105e89e886b7d706c62878cbbc86b9a7252727edcf7a"
+    },
+    {
+      "path": "tests/roads.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "tests/roadworks-fixture.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+    },
+    {
+      "path": "tests/roadworks.test.ts",
+      "operation": "new",
+      "beforeSha256": null,
+      "afterSha256": "87286746f4379056ff9c824535edbd6e05987ad11d393a76d2c446ff55b640cf"
+    }
+  ],
+  "scope": "Only guarded final tested execution inputs copied; user documents and other paths retained; no reset or main mutation"
+}

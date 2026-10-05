@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-01T23:49:23.431996+00:00",
+  "pid": 82587,
+  "actualArgs": [
+    "node",
+    "--import",
+    "tsx",
+    "--import",
+    "/tmp/yunshan-coherent05-document-gate.mjs",
+    "/tmp/yunshan-player-single-page-harness/player-journey.mjs",
+    "--workspace=/tmp/yunshan-phase3-root-coherent-05",
+    "--output=/workspace/yunshan/artifacts/phase3-player-journey-r10",
+    "--layout=current-v2-r5",
+    "--resume-after=home",
+    "--resume-checkpoint=walking-saved",
+    "--resume-from=/workspace/yunshan/artifacts/phase3-player-journey-r9/results.json",
+    "--profile=/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile",
+    "--port=4193",
+    "--viewport=800x600",
+    "--quality=low",
+    "--render-distance=900",
+    "--stop-after=school",
+    "--timeout-ms=7200000"
+  ],
+  "signal": "SIGUSR2",
+  "scope": "Verified owned r10 process; request native pause/save at next actual walking input boundary, after public HUD reached market-station vicinity [-330,53,462]. No saved state or position changes."
+}

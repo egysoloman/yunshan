@@ -1,0 +1,30 @@
+✖ real two-official cash reservation creates day1 original assignments; next day continues new segment without erasing paid day0 (595.451164ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 895.519903
+
+✖ failing tests:
+
+test at tests/food-distribution-lifecycle.test.ts:1:5572
+✖ real two-official cash reservation creates day1 original assignments; next day continues new segment without erasing paid day0 (595.451164ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(Math.hypot(staff.position.x-c.point.x,staff.position.z-c.point.z)<=.05)
+  
+      at TestContext.<anonymous> (/tmp/yunshan-food-counter-lifecycle-prototype-20261002/tests/food-distribution-lifecycle.test.ts:64:248)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

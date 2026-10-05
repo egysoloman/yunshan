@@ -1,0 +1,15 @@
+✔ pure food access uses exact hungry/alive/carried thresholds and agrees with foodSnapshot on the same state (4.057881ms)
+✔ world and citizen parameters determine district food offers and any-city affordability (0.592332ms)
+✔ remaining path uses 3D current position and routeIndex; walking/opening/deadline are explicit references (0.950958ms)
+✔ riders expose the named stop and arrival flag while walking time and before-closing stay NOT_ESTIMATED (0.51296ms)
+✔ used numeric fields reject NaN without claiming validation of unrelated saved fields (1.494662ms)
+✔ missing building references and mismatched districts are named without certifying affected districts lack food shops (0.736774ms)
+✔ arbitrary state names count as own numeric keys without inheriting constructor or prototype properties (1.4894ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 460.357367

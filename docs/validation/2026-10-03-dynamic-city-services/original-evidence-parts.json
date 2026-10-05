@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "policy": "Lossless byte partition only; no recompression or removed original evidence",
+  "zipName": "yunshan-dynamic-city-services-original-evidence-20261003.zip",
+  "zipBytes": 367653712,
+  "zipSha256": "86462ab6a015309b5d0d897c50a5be979e6001416cee9f868b74e31fcb705255",
+  "originalMembers": 7127,
+  "allMembers": 7132,
+  "partBytesLimit": 99614720,
+  "parts": [
+    {
+      "name": "yunshan-dynamic-city-services-original-evidence-20261003.zip.part001",
+      "bytes": 99614720,
+      "sha256": "2d60fea85731736dffa254f3b80502979329f9d0b4eb2aabbb1529473851459a"
+    },
+    {
+      "name": "yunshan-dynamic-city-services-original-evidence-20261003.zip.part002",
+      "bytes": 99614720,
+      "sha256": "ee82d151e9e7ffc3d7754e32e6d5446208af849287f2b5eb32345700c5088b5e"
+    },
+    {
+      "name": "yunshan-dynamic-city-services-original-evidence-20261003.zip.part003",
+      "bytes": 99614720,
+      "sha256": "04464f75c3330036f42efe43ac06032c1ae903570946ef4f9647b26a720efb5b"
+    },
+    {
+      "name": "yunshan-dynamic-city-services-original-evidence-20261003.zip.part004",
+      "bytes": 68809552,
+      "sha256": "bdc71aeb75c402a5f6aaeac74e2e63299bb376dcc4eac3c46800cfd7015abd16"
+    }
+  ],
+  "independentPartReadback": "PASS",
+  "reassembledStreamByteIdentity": "PASS",
+  "createdAtUTC": "2026-10-03T10:47:59.885569+00:00"
+}

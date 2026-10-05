@@ -1,0 +1,29 @@
+{
+  "startedAt": "2026-10-04T03:58:13.980310+00:00",
+  "endedAt": "2026-10-04T03:58:18.927722+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT08-current-source-20261004-01/check-world.mjs"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 244,
+  "inputsStable": true,
+  "rawSHA256": "012d7f6faa65c5fc889566e757e95ffef67c7f58fc7f6babc925c86861ef8238",
+  "ownedPid": 32043,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 32051,
+      "state": "Z",
+      "parent": 1,
+      "group": 32043,
+      "session": 32043,
+      "startTicks": 1711876
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

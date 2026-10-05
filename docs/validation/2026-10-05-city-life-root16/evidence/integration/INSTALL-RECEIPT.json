@@ -1,0 +1,29 @@
+{
+  "installedAt": "2026-10-05T00:31:37.810622+00:00",
+  "sourceGraph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+  "inputs": 325,
+  "srcCount": 81,
+  "testModules": 120,
+  "addedFiles": [
+    {
+      "path": "src/simulation/food-access-observations.ts",
+      "bytes": 14513,
+      "sha256": "b36ae80a51723eef4620d640dbed332fc2e4c018ab1172cab20241ba38f66f55",
+      "action": "NEW"
+    },
+    {
+      "path": "scripts/food-access-audit.ts",
+      "bytes": 6916,
+      "sha256": "3e4a18a8d3ef4a7c16156509c157e6c45018e9526599f9599ea67c9d1af65a28",
+      "action": "NEW"
+    },
+    {
+      "path": "tests/food-access-observations.test.ts",
+      "bytes": 12709,
+      "sha256": "6983f1df8aa587b33d20ce4472a5ef59f8d589b139bcb98b09605e8e3be6698c",
+      "action": "NEW"
+    }
+  ],
+  "allBaseline322BytesUnchanged": true,
+  "scope": "Three new read-only diagnostic files; existing business, render and original tests unchanged. No main/PR/deploy."
+}

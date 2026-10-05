@@ -1,0 +1,2908 @@
+{
+  "scope": "M1 raw baseline + isolated candidate + integrated coherent15 complete immutable source/evidence",
+  "createdAtUTC": "2026-10-03T02:13:58.445419+00:00",
+  "packagingPID": 183490,
+  "originInputCounts": {
+    "actual14": {
+      "inputCount": 108,
+      "allCapturedInputsStillEqual": true,
+      "snapshotSHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb"
+    },
+    "coherent15": {
+      "inputCount": 111,
+      "allCapturedInputsStillEqual": true,
+      "snapshotSHA256": "81c0c69fe21d54c38aec04de703485799e320f1814fff9ef622eb0f2323dc367"
+    }
+  },
+  "isolatedInputCount": 48,
+  "isolatedFinalFreezeSHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+  "actualBaseline": {
+    "tests": 7,
+    "pass": 2,
+    "behaviorFail": 5
+  },
+  "candidateTests": {
+    "new": 16,
+    "related": 38,
+    "strictExit": 0,
+    "buildExit": 0
+  },
+  "integratedTests": {
+    "tests": 97,
+    "pass": 97,
+    "fail": 0,
+    "strictBuildExit": 0,
+    "sourceInputs": 111,
+    "sharedExecutableInputs": 106
+  },
+  "integratedManifestSHA256": "81c0c69fe21d54c38aec04de703485799e320f1814fff9ef622eb0f2323dc367",
+  "integratedEntry": {
+    "entry": "/assets/index-DE32DbEy.js",
+    "entryBytes": 654112,
+    "entrySHA256": "aa3ff4286f2b0161a1316518aa8ecbeae6d1c8058ac53d46b791faa249443d95",
+    "sourceMaps": {
+      "assets/index-DE32DbEy.js.map": "1cd81797e1192151b5302322e183bf6d689c70704f73d775fa7c72bc7a795524",
+      "assets/three-DfYROjRC.js.map": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191"
+    }
+  },
+  "files": [
+    {
+      "path": "00-origin-coherent14/build-receipt.json",
+      "bytes": 23481,
+      "SHA256": "7125b5046ff201c57afb174ebd209594e5a262320a344afdde28c8b08456e917",
+      "source": "/tmp/yunshan-system-coherent-14/build-receipt.json"
+    },
+    {
+      "path": "00-origin-coherent14/build-related-run-status.json",
+      "bytes": 46155,
+      "SHA256": "51bd93009a2249ca7dca49585db1e9626d676da5116a160e918d2037abf28bd4",
+      "source": "/tmp/yunshan-system-coherent-14/build-related-run-status.json"
+    },
+    {
+      "path": "00-origin-coherent14/build.log",
+      "bytes": 720,
+      "SHA256": "899ba72513182c48bf1f3c98632356a228fc531823a76d0e86bf74684689e7ce",
+      "source": "/tmp/yunshan-system-coherent-14/build.log"
+    },
+    {
+      "path": "00-origin-coherent14/related-controller-retail.log",
+      "bytes": 4852,
+      "SHA256": "22bb3a2f44f9815487fc511e2e1b72fb2258234dfe2e546ca4bcb7872dff51da",
+      "source": "/tmp/yunshan-system-coherent-14/related-controller-retail.log"
+    },
+    {
+      "path": "00-origin-coherent14/root-related-result-verification.json",
+      "bytes": 631,
+      "SHA256": "b1bb83a705605e7edc769bd046aff38a18c31211180deddb346e69eef850f01f",
+      "source": "/tmp/yunshan-system-coherent-14/root-related-result-verification.json"
+    },
+    {
+      "path": "00-origin-coherent14/run-build-related.py",
+      "bytes": 4436,
+      "SHA256": "e7aaa398c52d1d4450149c48afc3de2c323fe640119728644bd7bfebbcd9ca1e",
+      "source": "/tmp/yunshan-system-coherent-14/run-build-related.py"
+    },
+    {
+      "path": "00-origin-coherent14/source/.gitattributes",
+      "bytes": 729,
+      "SHA256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "source": "/tmp/yunshan-system-coherent-14/source/.gitattributes"
+    },
+    {
+      "path": "00-origin-coherent14/source/.gitignore",
+      "bytes": 41,
+      "SHA256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "source": "/tmp/yunshan-system-coherent-14/source/.gitignore"
+    },
+    {
+      "path": "00-origin-coherent14/source/AGENTS.md",
+      "bytes": 1726,
+      "SHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "source": "/tmp/yunshan-system-coherent-14/source/AGENTS.md"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/assets/index-BK5BTGkK.js",
+      "bytes": 652667,
+      "SHA256": "c88765d0527dd33f7c58c862cd26ee03f33324b839022ce55d4e0282df09dbb4",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/assets/index-BK5BTGkK.js"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/assets/index-BK5BTGkK.js.map",
+      "bytes": 1982120,
+      "SHA256": "34c093226069e46123afba40a314978f7f39b565d726051c96713a05dbb2c6ae",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/assets/index-BK5BTGkK.js.map"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/assets/index-DcKlDqDV.css",
+      "bytes": 31135,
+      "SHA256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/assets/index-DcKlDqDV.css"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/assets/three-DfYROjRC.js",
+      "bytes": 502193,
+      "SHA256": "276b9841c4a1a79b75fa5445e3df9182d4dd65ed17b4a5d08d807a6ae75e138b",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/assets/three-DfYROjRC.js"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/assets/three-DfYROjRC.js.map",
+      "bytes": 2719092,
+      "SHA256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/assets/three-DfYROjRC.js.map"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/favicon.svg",
+      "bytes": 279,
+      "SHA256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/favicon.svg"
+    },
+    {
+      "path": "00-origin-coherent14/source/dist/index.html",
+      "bytes": 736,
+      "SHA256": "e65eef2f52e9c5bb7db2871ef4ca3b2c6373e8d40e9012ce05b2b8e979eb38d3",
+      "source": "/tmp/yunshan-system-coherent-14/source/dist/index.html"
+    },
+    {
+      "path": "00-origin-coherent14/source/index.html",
+      "bytes": 561,
+      "SHA256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "source": "/tmp/yunshan-system-coherent-14/source/index.html"
+    },
+    {
+      "path": "00-origin-coherent14/source/package-lock.json",
+      "bytes": 40288,
+      "SHA256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "source": "/tmp/yunshan-system-coherent-14/source/package-lock.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/package.json",
+      "bytes": 830,
+      "SHA256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "source": "/tmp/yunshan-system-coherent-14/source/package.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/public/favicon.svg",
+      "bytes": 279,
+      "SHA256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "source": "/tmp/yunshan-system-coherent-14/source/public/favicon.svg"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/benchmark.ts",
+      "bytes": 5304,
+      "SHA256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/benchmark.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/browser-test.mjs",
+      "bytes": 32618,
+      "SHA256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/browser-test.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "SHA256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/economy-audit.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "SHA256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/layout-browser-test.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "SHA256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/player-journey.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "SHA256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/space-browser-test.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "SHA256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/ui-test.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "SHA256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "source": "/tmp/yunshan-system-coherent-14/source/scripts/visual-review.mjs"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/access.ts",
+      "bytes": 2548,
+      "SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/access.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "SHA256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "SHA256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/aviation-renderer.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/aviation.ts",
+      "bytes": 20244,
+      "SHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/aviation.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/controller.ts",
+      "bytes": 27882,
+      "SHA256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/controller.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/journey.ts",
+      "bytes": 17580,
+      "SHA256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/journey.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/main.ts",
+      "bytes": 23940,
+      "SHA256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/main.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/persistence/partition.ts",
+      "bytes": 14286,
+      "SHA256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/persistence/partition.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "SHA256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/persistence/session.ts",
+      "bytes": 6067,
+      "SHA256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/persistence/session.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/persistence.ts",
+      "bytes": 23803,
+      "SHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/persistence.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/renderer.ts",
+      "bytes": 80466,
+      "SHA256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/renderer.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "SHA256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "SHA256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "SHA256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "SHA256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "SHA256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "SHA256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "SHA256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/rendering/terrain.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/banking.ts",
+      "bytes": 21755,
+      "SHA256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/banking.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "SHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/clinical.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/culture.ts",
+      "bytes": 50241,
+      "SHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/culture.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "SHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/extensions.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/family.ts",
+      "bytes": 71044,
+      "SHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/family.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "SHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "SHA256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/journeys.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "SHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation/trade.ts",
+      "bytes": 25973,
+      "SHA256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation/trade.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/simulation.ts",
+      "bytes": 207445,
+      "SHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/simulation.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/site-fixtures.ts",
+      "bytes": 4366,
+      "SHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/site-fixtures.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/style.css",
+      "bytes": 38657,
+      "SHA256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/style.css"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/transport-geometry.ts",
+      "bytes": 9370,
+      "SHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/transport-geometry.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/types.ts",
+      "bytes": 12150,
+      "SHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/types.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/ui.ts",
+      "bytes": 157674,
+      "SHA256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/ui.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/src/world.ts",
+      "bytes": 53567,
+      "SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "source": "/tmp/yunshan-system-coherent-14/source/src/world.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/access.test.ts",
+      "bytes": 2613,
+      "SHA256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/access.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "SHA256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/architecture-bodies.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "SHA256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "SHA256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/architecture-detail.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "SHA256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/aviation.test.ts",
+      "bytes": 13594,
+      "SHA256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/aviation.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/banking.test.ts",
+      "bytes": 20707,
+      "SHA256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/banking.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "SHA256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/chunk-residency.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "SHA256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/citizen-appearance.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/clinical.test.ts",
+      "bytes": 29723,
+      "SHA256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/clinical.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "SHA256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/controller-input-time.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "SHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/controller-v4.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/controller.test.ts",
+      "bytes": 10701,
+      "SHA256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/controller.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/culture.test.ts",
+      "bytes": 28415,
+      "SHA256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/culture.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/economy.test.ts",
+      "bytes": 50106,
+      "SHA256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/economy.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/extensions.test.ts",
+      "bytes": 102230,
+      "SHA256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/extensions.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/family.test.ts",
+      "bytes": 50313,
+      "SHA256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/family.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "SHA256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "SHA256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "SHA256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/npc-rest-offer-native.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "SHA256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "SHA256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "SHA256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "SHA256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "SHA256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "SHA256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "SHA256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "SHA256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "SHA256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "SHA256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "SHA256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "SHA256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "SHA256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/floor-plan-derived-cache.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "SHA256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/home-rest.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/integration.test.ts",
+      "bytes": 16265,
+      "SHA256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/integration.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/journey.test.ts",
+      "bytes": 18627,
+      "SHA256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/journey.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "SHA256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/npc-clock.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "SHA256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/npc-home-rest-voxels.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "SHA256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/npc-public-rest.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/persistence.test.ts",
+      "bytes": 59947,
+      "SHA256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/persistence.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "SHA256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/player-labor.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/rendering.test.ts",
+      "bytes": 19560,
+      "SHA256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/rendering.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "SHA256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/retail-period.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "SHA256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/route-encoding.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/simulation.test.ts",
+      "bytes": 66909,
+      "SHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/simulation.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "SHA256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/site-fixtures.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/trade.test.ts",
+      "bytes": 46192,
+      "SHA256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/trade.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "SHA256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/v4-extensions.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "SHA256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/v4-services.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "SHA256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/v4-simulation.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "SHA256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/world-layout.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "SHA256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/world-v4.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tests/world.test.ts",
+      "bytes": 26120,
+      "SHA256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "source": "/tmp/yunshan-system-coherent-14/source/tests/world.test.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/tsconfig.json",
+      "bytes": 333,
+      "SHA256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "source": "/tmp/yunshan-system-coherent-14/source/tsconfig.json"
+    },
+    {
+      "path": "00-origin-coherent14/source/vite.config.ts",
+      "bytes": 357,
+      "SHA256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "source": "/tmp/yunshan-system-coherent-14/source/vite.config.ts"
+    },
+    {
+      "path": "00-origin-coherent14/source/开发备忘录.md",
+      "bytes": 199226,
+      "SHA256": "a2191851d61db7a6ad286ec1984d9465abc2cd738224dabdd86eb3a0d4ebd14d",
+      "source": "/tmp/yunshan-system-coherent-14/source/开发备忘录.md"
+    },
+    {
+      "path": "00-origin-coherent14/source/提示词.md",
+      "bytes": 25038,
+      "SHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "source": "/tmp/yunshan-system-coherent-14/source/提示词.md"
+    },
+    {
+      "path": "00-origin-coherent14/source-snapshot.json",
+      "bytes": 11653,
+      "SHA256": "384868f893b09f2d58bef12599c818d1ae0265dae5064b8078749dfd991c17bb",
+      "source": "/tmp/yunshan-system-coherent-14/source-snapshot.json"
+    },
+    {
+      "path": "01-m1-isolated/01-shared-presence.patch",
+      "bytes": 10553,
+      "SHA256": "67c594b45abc11b6db0ea5176669013ccd5b927e222d9deccfc97bb410c2afd6",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/01-shared-presence.patch"
+    },
+    {
+      "path": "01-m1-isolated/02-doctor-ground-routing.patch",
+      "bytes": 3926,
+      "SHA256": "9d5c04e91081b050c6844399d3cf856a95656792266d24eea27a939c53c075e0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/02-doctor-ground-routing.patch"
+    },
+    {
+      "path": "01-m1-isolated/03-proposed-tests.patch",
+      "bytes": 33834,
+      "SHA256": "4564cef19875c452720bb6a18367829f2befc707adad8cbb85c9a7d81f72482f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/03-proposed-tests.patch"
+    },
+    {
+      "path": "01-m1-isolated/README.md",
+      "bytes": 10803,
+      "SHA256": "a2ce6da0caadc3180f3e33bf5325f5002e951fafcda9a28a6927c9eea7b286d8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/README.md"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/assets/index-DE32DbEy.js",
+      "bytes": 654112,
+      "SHA256": "aa3ff4286f2b0161a1316518aa8ecbeae6d1c8058ac53d46b791faa249443d95",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/assets/index-DE32DbEy.js"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/assets/index-DE32DbEy.js.map",
+      "bytes": 1989643,
+      "SHA256": "1cd81797e1192151b5302322e183bf6d689c70704f73d775fa7c72bc7a795524",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/assets/index-DE32DbEy.js.map"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/assets/index-DcKlDqDV.css",
+      "bytes": 31135,
+      "SHA256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/assets/index-DcKlDqDV.css"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/assets/three-DfYROjRC.js",
+      "bytes": 502193,
+      "SHA256": "276b9841c4a1a79b75fa5445e3df9182d4dd65ed17b4a5d08d807a6ae75e138b",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/assets/three-DfYROjRC.js"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/assets/three-DfYROjRC.js.map",
+      "bytes": 2719092,
+      "SHA256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/assets/three-DfYROjRC.js.map"
+    },
+    {
+      "path": "01-m1-isolated/candidate/dist/index.html",
+      "bytes": 736,
+      "SHA256": "4b11a8c190be195704ec85be2e9e9befb501f3129c7c2507d05933696bf2967d",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/dist/index.html"
+    },
+    {
+      "path": "01-m1-isolated/candidate/index.html",
+      "bytes": 561,
+      "SHA256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/index.html"
+    },
+    {
+      "path": "01-m1-isolated/candidate/package-lock.json",
+      "bytes": 40288,
+      "SHA256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/package-lock.json"
+    },
+    {
+      "path": "01-m1-isolated/candidate/package.json",
+      "bytes": 830,
+      "SHA256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/package.json"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/access.ts",
+      "bytes": 2548,
+      "SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/access.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "SHA256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "SHA256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/aviation-renderer.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/aviation.ts",
+      "bytes": 20244,
+      "SHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/aviation.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/controller.ts",
+      "bytes": 27882,
+      "SHA256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/controller.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/journey.ts",
+      "bytes": 17580,
+      "SHA256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/journey.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/main.ts",
+      "bytes": 23940,
+      "SHA256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/main.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/persistence/partition.ts",
+      "bytes": 14286,
+      "SHA256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/persistence/partition.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "SHA256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/persistence/session.ts",
+      "bytes": 6067,
+      "SHA256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/persistence/session.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/persistence.ts",
+      "bytes": 23803,
+      "SHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/persistence.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/renderer.ts",
+      "bytes": 80466,
+      "SHA256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/renderer.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "SHA256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "SHA256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "SHA256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "SHA256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "SHA256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "SHA256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "SHA256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/rendering/terrain.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/banking.ts",
+      "bytes": 21755,
+      "SHA256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/banking.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/clinical.ts",
+      "bytes": 31068,
+      "SHA256": "7c5e112ff7b28ae3bc0e11169f5e918af1760b9c25ec1960bfbbc4e4045dffee",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/clinical.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/culture.ts",
+      "bytes": 50538,
+      "SHA256": "f6280b07d9b6b36de74c7b3320a60f9258c808776303cb88a3af6753372b6381",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/culture.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "SHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/extensions.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/family.ts",
+      "bytes": 71044,
+      "SHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/family.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "SHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "SHA256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/journeys.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "SHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation/trade.ts",
+      "bytes": 25973,
+      "SHA256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation/trade.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/simulation.ts",
+      "bytes": 208809,
+      "SHA256": "bc00e75bb79aa593f00be637a86cb1e25da813bd74f90c241d3177753911d80b",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/simulation.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/site-fixtures.ts",
+      "bytes": 4366,
+      "SHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/site-fixtures.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/style.css",
+      "bytes": 38657,
+      "SHA256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/style.css"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/transport-geometry.ts",
+      "bytes": 9370,
+      "SHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/transport-geometry.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/types.ts",
+      "bytes": 12150,
+      "SHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/types.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/ui.ts",
+      "bytes": 157674,
+      "SHA256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/ui.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/src/world.ts",
+      "bytes": 53567,
+      "SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/src/world.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "SHA256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/clinical-presence-contract.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "SHA256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/clinical-presence-fixture.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "SHA256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/clinical-presence-regression.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/clinical.test.ts",
+      "bytes": 29723,
+      "SHA256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/clinical.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/culture.test.ts",
+      "bytes": 28415,
+      "SHA256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/culture.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "SHA256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "SHA256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tests/v4-services.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/candidate/tsconfig.json",
+      "bytes": 333,
+      "SHA256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/tsconfig.json"
+    },
+    {
+      "path": "01-m1-isolated/candidate/vite.config.ts",
+      "bytes": 357,
+      "SHA256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate/vite.config.ts"
+    },
+    {
+      "path": "01-m1-isolated/evidence/SHA256SUMS",
+      "bytes": 13409,
+      "SHA256": "1dd326de7839a4df94514fffb986d4636b81279fea8630c7229c0aec9987423c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/SHA256SUMS"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/argv.txt",
+      "bytes": 14,
+      "SHA256": "9484fbe90714ff0aeb585068c89619d73d9fe8e10076c4dc548626f6f83dbd74",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/end.utc",
+      "bytes": 36,
+      "SHA256": "ea2bf2715857bff6cfcd095915bad0a828786953b09c979777899446699610a9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/pid.txt",
+      "bytes": 7,
+      "SHA256": "35c4bf82fa7aebe1600544f653c2f40472b25b5229046746eb7e5897f4ab4016",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/raw.log",
+      "bytes": 720,
+      "SHA256": "b6773df59f50fefe1043f5403beb6d722bf71ab49197a74659871591e049f844",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/build-01/start.utc",
+      "bytes": 36,
+      "SHA256": "1e11b6156314533d52ffcea935cd57b474ee4fdbe432db170007d4af8e65a09f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/build-01/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-final-48.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-final-48.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-manifest.json",
+      "bytes": 3409,
+      "SHA256": "c2d6fc8f2b7c78e928cb26e28557c3db8428a0aeb87472af928be31f3e42fcb6",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-manifest.json"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-review-before.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-review-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/argv.txt",
+      "bytes": 131,
+      "SHA256": "5d234e771ae5e45f9033e81b18705a07e3c33b9586ae44f0cd631214805630ce",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/end.utc",
+      "bytes": 36,
+      "SHA256": "773a98d7a9b73f297502e69c7a979be3aacd9099bd7a01ba4032c9c306b40dca",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/pid.txt",
+      "bytes": 7,
+      "SHA256": "2749adbc2065f83b4b272faae594c3a6b11629cc08783a95cc11d3296274a25d",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/raw.log",
+      "bytes": 5458,
+      "SHA256": "48e95a9109a15734695b870a30fc49c6d40eb41483b3834bcf4c9c06ab5178f5",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/candidate-sixteen-01/start.utc",
+      "bytes": 36,
+      "SHA256": "d9206a14e6545b5baab4f9c7300656324bbf7c06a427b36d2ba37d830854d900",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/candidate-sixteen-01/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/controlled-route-function.txt",
+      "bytes": 1325,
+      "SHA256": "449989165ea7a42861def227af9df6722ab17446e8a8a43bd9face2a4beac50e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/controlled-route-function.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/finalize.py",
+      "bytes": 6933,
+      "SHA256": "fe6aebcf7f07509ec8f8b9ba78a49ad4d3f2dfdd484f701709a3f34e6b9f7601",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/finalize.py"
+    },
+    {
+      "path": "01-m1-isolated/evidence/freeze.py",
+      "bytes": 444,
+      "SHA256": "5fc519c6afde0afb761d2b7928611071d45119e5d17761f3ee86f224c8ce40d8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/freeze.py"
+    },
+    {
+      "path": "01-m1-isolated/evidence/origin-verification.json",
+      "bytes": 17345,
+      "SHA256": "d0a4557b2f37bb780b5b752b9f659e0a16f308840b9980f666e1176dea8baf01",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/origin-verification.json"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/argv.txt",
+      "bytes": 90,
+      "SHA256": "0569c7cd6c4810273d25aed1b21ba635329d0271d09639575e07d2a6abb34362",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/cwd.txt",
+      "bytes": 57,
+      "SHA256": "007aca3dbda549df39ee5896d8ae4b651b992ddae9b95f48fcdfe5edb3cb5ae4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/end.utc",
+      "bytes": 36,
+      "SHA256": "bfc6a745fb967e15ea098f5777132a1a7a613b3f4df756829268470d06f246a7",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/pid.txt",
+      "bytes": 7,
+      "SHA256": "2b428a8693cd68e3d4ff20210a0bb8d2870fadfef3fa101b74a0b702100fcd71",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/raw.log",
+      "bytes": 8183,
+      "SHA256": "60f76390761555a700b0c974ac72b10b93ff3a2f310e89faa3895488721091a9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/source-after.sha256",
+      "bytes": 3669,
+      "SHA256": "b701bcf1da7930f828ebb5eb460f2a4f88dfbbf194675201ad28cb5a48d3b300",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/source-before.sha256",
+      "bytes": 3669,
+      "SHA256": "b701bcf1da7930f828ebb5eb460f2a4f88dfbbf194675201ad28cb5a48d3b300",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-01/start.utc",
+      "bytes": 36,
+      "SHA256": "da9b8bf71c67c4d5763eeca29bc8dee2b809ebe657350b7a0ce82718afca71dd",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-01/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/argv.txt",
+      "bytes": 90,
+      "SHA256": "0569c7cd6c4810273d25aed1b21ba635329d0271d09639575e07d2a6abb34362",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/cwd.txt",
+      "bytes": 57,
+      "SHA256": "007aca3dbda549df39ee5896d8ae4b651b992ddae9b95f48fcdfe5edb3cb5ae4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/end.utc",
+      "bytes": 36,
+      "SHA256": "2cc28620335fbf9f9e91a3723f6276c5114b46ac8f975db02df3bc3e3412523b",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/pid.txt",
+      "bytes": 7,
+      "SHA256": "753f993404a7a9fe8be020b77340874538683387a22f3dc38ba0b84bf356ef19",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/raw.log",
+      "bytes": 7288,
+      "SHA256": "b62e9cb974f486bd0cdee37bfa0304372d0fd2c74000297303a1f8929afec04c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/source-after.sha256",
+      "bytes": 3669,
+      "SHA256": "cda7b868c5f63ed4be779d7ddce399c64398350128c0cd4b28b716aa56b92072",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/source-before.sha256",
+      "bytes": 3669,
+      "SHA256": "cda7b868c5f63ed4be779d7ddce399c64398350128c0cd4b28b716aa56b92072",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-02/start.utc",
+      "bytes": 36,
+      "SHA256": "4bebd03fb466d0dcd6e5cc9c21daf9a141fb99372e8cb71c13b13f7cb10234d0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-02/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/argv.txt",
+      "bytes": 90,
+      "SHA256": "0569c7cd6c4810273d25aed1b21ba635329d0271d09639575e07d2a6abb34362",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/cwd.txt",
+      "bytes": 57,
+      "SHA256": "007aca3dbda549df39ee5896d8ae4b651b992ddae9b95f48fcdfe5edb3cb5ae4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/end.utc",
+      "bytes": 36,
+      "SHA256": "83f417088fdc6380597c0a5c3f3851ca5cd1b15d784a5e0c25e4c77d007d8935",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/pid.txt",
+      "bytes": 7,
+      "SHA256": "ddfd34133e9088ba88d5559850ce7bf7fbff6811357f1cb63d8d4ccdf2ef4605",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/raw.log",
+      "bytes": 7933,
+      "SHA256": "856cc93062665a1374e5b1e0954cfaa81601da20562850709037f1964e555cf3",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/source-after.sha256",
+      "bytes": 3669,
+      "SHA256": "c4084fb6bb4a8ef708c0a18abf21c216e93b42dccbb6ac60419c617cc2bbfe52",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/source-before.sha256",
+      "bytes": 3669,
+      "SHA256": "c4084fb6bb4a8ef708c0a18abf21c216e93b42dccbb6ac60419c617cc2bbfe52",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/original-seven-03/start.utc",
+      "bytes": 36,
+      "SHA256": "0e4e1b991ed6a5c4ba47bc38da3e69fb67b6c620cb2af2ceccd641adbfd673b8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/original-seven-03/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/owned-jobs-released.json",
+      "bytes": 1593,
+      "SHA256": "948a3d509b788d55e96e2fca0f7cd1ef0f6dde97e710d2ed897ff35f48154ce2",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/owned-jobs-released.json"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/argv.txt",
+      "bytes": 242,
+      "SHA256": "0d43864c95f04394832ca9b4a11af2f29c611c70d92aaab4a04e8aca965f9b26",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/cwd.txt",
+      "bytes": 39,
+      "SHA256": "fd9220d97b1c28068fe5e9f57266009c4934a6327f1cc6e17ea7439a86554fa0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/end.utc",
+      "bytes": 33,
+      "SHA256": "b0c6db16c80fbea2a4b424d8a1ad98b2f93e9fcb79f234a05c75d6199864661d",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/pid.txt",
+      "bytes": 7,
+      "SHA256": "1a4770e284776d8dc7259ecd9ece51eaf3ca2914dea1b4712115b5c444bea191",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/patch-apply-check-final/start.utc",
+      "bytes": 33,
+      "SHA256": "fea534a58d86f6e2d939157677f172564a3d6a7eefa81922c111acd256db1014",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/patch-apply-check-final/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/physical-cash-function.txt",
+      "bytes": 827,
+      "SHA256": "689a56b0fa6e0dac446663096d8c58e85381fa6717405711b56b2f19e3ff4e96",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/physical-cash-function.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/argv.txt",
+      "bytes": 118,
+      "SHA256": "729f1e23d1185526754b78adca4914b790479699efefc073d4e327ed4f988cc9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/end.utc",
+      "bytes": 36,
+      "SHA256": "885ad6e79723bc6e4dbcc77a1fe08befe3368cb132b1366480dda108002dfa9d",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/pid.txt",
+      "bytes": 7,
+      "SHA256": "42605c0ff4bd719d7771fdb312a71301bf7d81e82c84d235203ee5e0ce62c7e0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/raw.log",
+      "bytes": 4723,
+      "SHA256": "48ea61142f7db2330ce72ff873a23a9be7b5579c9306dfb74a651f2fe1bf9459",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/related-clinical-culture-v4-01/start.utc",
+      "bytes": 36,
+      "SHA256": "6dd094a7841e3ba8b4a30cd5ed2db6cb98689389cefc8ceab2740eadd2f3f3f6",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/related-clinical-culture-v4-01/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/run-functional.sh",
+      "bytes": 1043,
+      "SHA256": "20ffe931d390a263baa20cd01533748baddd42e612c483a108732c4bede7e565",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/run-functional.sh"
+    },
+    {
+      "path": "01-m1-isolated/evidence/run-results.json",
+      "bytes": 8538,
+      "SHA256": "68ea8b3839a5834ad3f0ea7dcfa88144de0d00e074907c10271d6015521a0da8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/run-results.json"
+    },
+    {
+      "path": "01-m1-isolated/evidence/source-origin.sha256",
+      "bytes": 3257,
+      "SHA256": "9cf1a0922e251873a3232459e6f4d6cf3b766501a4153f9b3cc9cc2327cc5446",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/source-origin.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/argv.txt",
+      "bytes": 33,
+      "SHA256": "84149af28430f334b5b9aa86ad678b5e242110e26969d7b488347afef83d04cf",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/end.utc",
+      "bytes": 36,
+      "SHA256": "d46c40b85f61841fb2010e1b1ff9f8fad08d3b8205e04241e304274ac0cf65bb",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/pid.txt",
+      "bytes": 7,
+      "SHA256": "c6acc3fd64be3bab58b432e89cb2cace97e37db9bf324c8254998dbee7c64347",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "fc29f7d865f266704af5148175b84f57483c02721eeb50b94160ca4f089c43c1",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "fc29f7d865f266704af5148175b84f57483c02721eeb50b94160ca4f089c43c1",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-01/start.utc",
+      "bytes": 36,
+      "SHA256": "e4182f0948553b7e91d33624c8714efb3361f2ce0962adc53bae0ac6175b68ad",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-01/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/argv.txt",
+      "bytes": 33,
+      "SHA256": "84149af28430f334b5b9aa86ad678b5e242110e26969d7b488347afef83d04cf",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/end.utc",
+      "bytes": 36,
+      "SHA256": "77a0d36395b16edbd750ecbfebf64af450dee1cd1d2ad61e292efc5a0f58db85",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/pid.txt",
+      "bytes": 7,
+      "SHA256": "5fcff82f16fad2cddf7d4d4608f7ae5c3efc3ac08513a44f6159bf17afd6c589",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "af6597b7c07c80c90395252a1e54b448cbdf325b51d37ef203887c9186c12775",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "af6597b7c07c80c90395252a1e54b448cbdf325b51d37ef203887c9186c12775",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-02/start.utc",
+      "bytes": 36,
+      "SHA256": "cec4fa791e609c9ae37b63fb635221ae3cacef25a24ab3dd4711ebc7332431f9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-02/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/argv.txt",
+      "bytes": 68,
+      "SHA256": "fba57461cdcb41198d17c56878c390644fa1c48e981626419e79e940bcbc7fa6",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/cwd.txt",
+      "bytes": 48,
+      "SHA256": "1ee5635b10bd56f0cd2c256ca2b034d511a2b19ef26b9352f9c3a1ab1842ad7e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/end.utc",
+      "bytes": 36,
+      "SHA256": "212dca248cae95bcb0c8d3287124231b31a07d0c3477fb5a6b4c14106f744544",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/pid.txt",
+      "bytes": 7,
+      "SHA256": "8593cb4cd1775d7675f9ba98ddf1e50d5b5db38bfb77f4d61d771b2283e22df4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/source-after.sha256",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/source-before.sha256",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-03/start.utc",
+      "bytes": 36,
+      "SHA256": "d9d93d7c5d13d267dcdd7d78af902c55abbf8aa3b6c4b004edf993a8765acbae",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-03/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/argv.txt",
+      "bytes": 33,
+      "SHA256": "84149af28430f334b5b9aa86ad678b5e242110e26969d7b488347afef83d04cf",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/end.utc",
+      "bytes": 36,
+      "SHA256": "5d208af4a27210375257621e15dcfe789651defc41bebc28828b92e7b491e483",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/pid.txt",
+      "bytes": 7,
+      "SHA256": "3c3ba631612386ddaa26a023cf2e409c25fbf180885b44fc2f4dd92055f13a49",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "28269c7099d8d528e58c4286855297f919c1bf1bb88d7564380632f9f025344c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "28269c7099d8d528e58c4286855297f919c1bf1bb88d7564380632f9f025344c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-04/start.utc",
+      "bytes": 36,
+      "SHA256": "2f7423d25573b7da6ebf06c9172024dbd9c5dc5a4e00ec684597afb1e21d5ea6",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-04/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/argv.txt",
+      "bytes": 33,
+      "SHA256": "84149af28430f334b5b9aa86ad678b5e242110e26969d7b488347afef83d04cf",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/argv.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/cwd.txt",
+      "bytes": 58,
+      "SHA256": "ea13352fc0fb8a59b4ff10b4d681adbe24f2a228454df863169e94f7689b79f8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/cwd.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/end.utc",
+      "bytes": 36,
+      "SHA256": "5a07e00472e3eec8daec38c9d1b3fd2084f418dd1914d27c25df62bb9d31b65c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/end.utc"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/exit-code.txt",
+      "bytes": 2,
+      "SHA256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/exit-code.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/freeze-status.txt",
+      "bytes": 10,
+      "SHA256": "1cd263f1102656dd6b6cf1d626d1a96f9eba0406af3cb2a52560d473d4801052",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/freeze-status.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/pid.txt",
+      "bytes": 7,
+      "SHA256": "ed9de7197d9432f498dce247abee43cd8adb2f271299a06115149fc21449b5f5",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/pid.txt"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/raw.log"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/source-after.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/source-after.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/source-before.sha256",
+      "bytes": 4311,
+      "SHA256": "9c7ceb37e8557a3653e5e8af212e05455c5187c3b15b52e88c49953f3295fb0f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/source-before.sha256"
+    },
+    {
+      "path": "01-m1-isolated/evidence/strict-05/start.utc",
+      "bytes": 36,
+      "SHA256": "212a7a8cc757bfe707a9dbed222cb77ce9b06870fbdf8fd03550843867c85021",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/evidence/strict-05/start.utc"
+    },
+    {
+      "path": "01-m1-isolated/original/package-lock.json",
+      "bytes": 40288,
+      "SHA256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/package-lock.json"
+    },
+    {
+      "path": "01-m1-isolated/original/package.json",
+      "bytes": 830,
+      "SHA256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/package.json"
+    },
+    {
+      "path": "01-m1-isolated/original/src/access.ts",
+      "bytes": 2548,
+      "SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/access.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "SHA256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "SHA256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/aviation-renderer.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/aviation.ts",
+      "bytes": 20244,
+      "SHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/aviation.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/controller.ts",
+      "bytes": 27882,
+      "SHA256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/controller.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/journey.ts",
+      "bytes": 17580,
+      "SHA256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/journey.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/main.ts",
+      "bytes": 23940,
+      "SHA256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/main.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/persistence/partition.ts",
+      "bytes": 14286,
+      "SHA256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/persistence/partition.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "SHA256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/persistence/session.ts",
+      "bytes": 6067,
+      "SHA256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/persistence/session.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/persistence.ts",
+      "bytes": 23803,
+      "SHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/persistence.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/renderer.ts",
+      "bytes": 80466,
+      "SHA256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/renderer.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "SHA256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "SHA256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "SHA256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "SHA256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "SHA256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "SHA256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "SHA256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/rendering/terrain.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/banking.ts",
+      "bytes": 21755,
+      "SHA256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/banking.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/clinical.ts",
+      "bytes": 27981,
+      "SHA256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/clinical.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/culture.ts",
+      "bytes": 50241,
+      "SHA256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/culture.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "SHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/extensions.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/family.ts",
+      "bytes": 71044,
+      "SHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/family.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "SHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "SHA256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/journeys.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "SHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation/trade.ts",
+      "bytes": 25973,
+      "SHA256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation/trade.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/simulation.ts",
+      "bytes": 207445,
+      "SHA256": "dcf488259dd1b56abdbd55a982aa7687e14f10d4261bb6b915f296d6381e21d4",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/simulation.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/site-fixtures.ts",
+      "bytes": 4366,
+      "SHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/site-fixtures.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/style.css",
+      "bytes": 38657,
+      "SHA256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/style.css"
+    },
+    {
+      "path": "01-m1-isolated/original/src/transport-geometry.ts",
+      "bytes": 9370,
+      "SHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/transport-geometry.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/types.ts",
+      "bytes": 12150,
+      "SHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/types.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/ui.ts",
+      "bytes": 157674,
+      "SHA256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/ui.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/src/world.ts",
+      "bytes": 53567,
+      "SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/src/world.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "SHA256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-fixture.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "SHA256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tests/clinical-presence-regression.test.ts"
+    },
+    {
+      "path": "01-m1-isolated/original/tsconfig.json",
+      "bytes": 333,
+      "SHA256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "source": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original/tsconfig.json"
+    },
+    {
+      "path": "02-integrated-coherent15/build-related-run-status.json",
+      "bytes": 47886,
+      "SHA256": "62f638d88cafaa1bd444efa9c228ba329a58b2cb37df02dbb4d68ab6f4f42486",
+      "source": "/tmp/yunshan-system-coherent-15/build-related-run-status.json"
+    },
+    {
+      "path": "02-integrated-coherent15/build.log",
+      "bytes": 720,
+      "SHA256": "5d00b811a790b8a74e39f00c71d13461c684939c0c06d55c52d7d0e0c12566c6",
+      "source": "/tmp/yunshan-system-coherent-15/build.log"
+    },
+    {
+      "path": "02-integrated-coherent15/related-medical-controller-retail.log",
+      "bytes": 14798,
+      "SHA256": "04ff9d1979fe694515291695b27e29f7a9036fc9a84f12db596c99a3053e231b",
+      "source": "/tmp/yunshan-system-coherent-15/related-medical-controller-retail.log"
+    },
+    {
+      "path": "02-integrated-coherent15/run-build-related.py",
+      "bytes": 4687,
+      "SHA256": "4659ce1acefa60f55c847522972ae59af352e0d625507706b6a2f43e9414b479",
+      "source": "/tmp/yunshan-system-coherent-15/run-build-related.py"
+    },
+    {
+      "path": "02-integrated-coherent15/source/.gitattributes",
+      "bytes": 729,
+      "SHA256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "source": "/tmp/yunshan-system-coherent-15/source/.gitattributes"
+    },
+    {
+      "path": "02-integrated-coherent15/source/.gitignore",
+      "bytes": 41,
+      "SHA256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "source": "/tmp/yunshan-system-coherent-15/source/.gitignore"
+    },
+    {
+      "path": "02-integrated-coherent15/source/AGENTS.md",
+      "bytes": 1726,
+      "SHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "source": "/tmp/yunshan-system-coherent-15/source/AGENTS.md"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/assets/index-DE32DbEy.js",
+      "bytes": 654112,
+      "SHA256": "aa3ff4286f2b0161a1316518aa8ecbeae6d1c8058ac53d46b791faa249443d95",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/assets/index-DE32DbEy.js"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/assets/index-DE32DbEy.js.map",
+      "bytes": 1989643,
+      "SHA256": "1cd81797e1192151b5302322e183bf6d689c70704f73d775fa7c72bc7a795524",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/assets/index-DE32DbEy.js.map"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/assets/index-DcKlDqDV.css",
+      "bytes": 31135,
+      "SHA256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/assets/index-DcKlDqDV.css"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/assets/three-DfYROjRC.js",
+      "bytes": 502193,
+      "SHA256": "276b9841c4a1a79b75fa5445e3df9182d4dd65ed17b4a5d08d807a6ae75e138b",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/assets/three-DfYROjRC.js"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/assets/three-DfYROjRC.js.map",
+      "bytes": 2719092,
+      "SHA256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/assets/three-DfYROjRC.js.map"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/favicon.svg",
+      "bytes": 279,
+      "SHA256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/favicon.svg"
+    },
+    {
+      "path": "02-integrated-coherent15/source/dist/index.html",
+      "bytes": 736,
+      "SHA256": "4b11a8c190be195704ec85be2e9e9befb501f3129c7c2507d05933696bf2967d",
+      "source": "/tmp/yunshan-system-coherent-15/source/dist/index.html"
+    },
+    {
+      "path": "02-integrated-coherent15/source/index.html",
+      "bytes": 561,
+      "SHA256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "source": "/tmp/yunshan-system-coherent-15/source/index.html"
+    },
+    {
+      "path": "02-integrated-coherent15/source/package-lock.json",
+      "bytes": 40288,
+      "SHA256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "source": "/tmp/yunshan-system-coherent-15/source/package-lock.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/package.json",
+      "bytes": 830,
+      "SHA256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "source": "/tmp/yunshan-system-coherent-15/source/package.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/public/favicon.svg",
+      "bytes": 279,
+      "SHA256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "source": "/tmp/yunshan-system-coherent-15/source/public/favicon.svg"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/benchmark.ts",
+      "bytes": 5304,
+      "SHA256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/benchmark.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/browser-test.mjs",
+      "bytes": 32618,
+      "SHA256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/browser-test.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/economy-audit.ts",
+      "bytes": 20432,
+      "SHA256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/economy-audit.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/layout-browser-test.mjs",
+      "bytes": 12628,
+      "SHA256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/layout-browser-test.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/player-journey.mjs",
+      "bytes": 44791,
+      "SHA256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/player-journey.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/space-browser-test.mjs",
+      "bytes": 19455,
+      "SHA256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/space-browser-test.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/ui-test.mjs",
+      "bytes": 67059,
+      "SHA256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/ui-test.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/scripts/visual-review.mjs",
+      "bytes": 9242,
+      "SHA256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "source": "/tmp/yunshan-system-coherent-15/source/scripts/visual-review.mjs"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/access.ts",
+      "bytes": 2548,
+      "SHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/access.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/architecture-floor-plan.ts",
+      "bytes": 44826,
+      "SHA256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/architecture-floor-plan.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "SHA256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/aviation-renderer.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/aviation.ts",
+      "bytes": 20244,
+      "SHA256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/aviation.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/controller.ts",
+      "bytes": 27882,
+      "SHA256": "4b87cee45e7ab1cc143173a2c011b33692c56f72d48922d4abd7e262cfda0f35",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/controller.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/journey.ts",
+      "bytes": 17580,
+      "SHA256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/journey.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/main.ts",
+      "bytes": 23940,
+      "SHA256": "224326cc8d0d1c71f6e7f51ae9c66a42fb305f469dcd834966555ad9f16f6f86",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/main.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/persistence/partition.ts",
+      "bytes": 14286,
+      "SHA256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/persistence/partition.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "SHA256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/persistence/route-encoding.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/persistence/session.ts",
+      "bytes": 6067,
+      "SHA256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/persistence/session.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/persistence/world-layout.ts",
+      "bytes": 4368,
+      "SHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/persistence/world-layout.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/persistence.ts",
+      "bytes": 23803,
+      "SHA256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/persistence.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/renderer.ts",
+      "bytes": 80466,
+      "SHA256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/renderer.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/architecture-bodies.ts",
+      "bytes": 8975,
+      "SHA256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/architecture-bodies.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/architecture-detail.ts",
+      "bytes": 38886,
+      "SHA256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/architecture-detail.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "SHA256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/architecture-layout.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "SHA256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/chunk-residency.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "SHA256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/citizen-appearance.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/market-goods.ts",
+      "bytes": 3400,
+      "SHA256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/market-goods.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/rendering/terrain.ts",
+      "bytes": 34517,
+      "SHA256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/rendering/terrain.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/banking.ts",
+      "bytes": 21755,
+      "SHA256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/banking.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/clinical.ts",
+      "bytes": 31068,
+      "SHA256": "7c5e112ff7b28ae3bc0e11169f5e918af1760b9c25ec1960bfbbc4e4045dffee",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/clinical.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/culture.ts",
+      "bytes": 50538,
+      "SHA256": "f6280b07d9b6b36de74c7b3320a60f9258c808776303cb88a3af6753372b6381",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/culture.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/extensions.ts",
+      "bytes": 68735,
+      "SHA256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/extensions.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/family.ts",
+      "bytes": 71044,
+      "SHA256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/family.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "SHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/home-rest.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "SHA256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/journeys.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/player-labor.ts",
+      "bytes": 14533,
+      "SHA256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/player-labor.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation/trade.ts",
+      "bytes": 25973,
+      "SHA256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation/trade.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/simulation.ts",
+      "bytes": 208809,
+      "SHA256": "bc00e75bb79aa593f00be637a86cb1e25da813bd74f90c241d3177753911d80b",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/simulation.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/site-fixtures.ts",
+      "bytes": 4366,
+      "SHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/site-fixtures.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/style.css",
+      "bytes": 38657,
+      "SHA256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/style.css"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/transport-geometry.ts",
+      "bytes": 9370,
+      "SHA256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/transport-geometry.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/types.ts",
+      "bytes": 12150,
+      "SHA256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/types.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/ui.ts",
+      "bytes": 157674,
+      "SHA256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/ui.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/src/world.ts",
+      "bytes": 53567,
+      "SHA256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "source": "/tmp/yunshan-system-coherent-15/source/src/world.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/access.test.ts",
+      "bytes": 2613,
+      "SHA256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/access.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "SHA256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/architecture-bodies.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "SHA256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/architecture-detail-v4.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "SHA256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/architecture-detail.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "SHA256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/architecture-floor-plan.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/aviation.test.ts",
+      "bytes": 13594,
+      "SHA256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/aviation.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/banking.test.ts",
+      "bytes": 20707,
+      "SHA256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/banking.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "SHA256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/chunk-residency.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "SHA256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/citizen-appearance.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "SHA256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/clinical-presence-contract.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "SHA256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/clinical-presence-fixture.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "SHA256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/clinical-presence-regression.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/clinical.test.ts",
+      "bytes": 29723,
+      "SHA256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/clinical.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "SHA256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/controller-input-time.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "SHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/controller-v4.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/controller.test.ts",
+      "bytes": 10701,
+      "SHA256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/controller.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/culture.test.ts",
+      "bytes": 28415,
+      "SHA256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/culture.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/economy.test.ts",
+      "bytes": 50106,
+      "SHA256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/economy.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/extensions.test.ts",
+      "bytes": 102230,
+      "SHA256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/extensions.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/family.test.ts",
+      "bytes": 50313,
+      "SHA256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/family.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json",
+      "bytes": 344441,
+      "SHA256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz",
+      "bytes": 264772,
+      "SHA256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/npc-rest-offer-native.json",
+      "bytes": 8688,
+      "SHA256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/npc-rest-offer-native.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/trade-industrial-v1.json",
+      "bytes": 396554,
+      "SHA256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/trade-industrial-v1.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-2024.json.gz",
+      "bytes": 375492,
+      "SHA256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-20261001.json.gz",
+      "bytes": 379272,
+      "SHA256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-7.json.gz",
+      "bytes": 375643,
+      "SHA256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz",
+      "bytes": 321439,
+      "SHA256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz",
+      "bytes": 324477,
+      "SHA256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz",
+      "bytes": 321647,
+      "SHA256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v3-2024.json.gz",
+      "bytes": 704136,
+      "SHA256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v3-20261001.json.gz",
+      "bytes": 715079,
+      "SHA256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/current-v3-7.json.gz",
+      "bytes": 704215,
+      "SHA256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz",
+      "bytes": 570032,
+      "SHA256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz",
+      "bytes": 273576,
+      "SHA256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "SHA256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/floor-plan-derived-cache.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "SHA256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/home-rest.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/integration.test.ts",
+      "bytes": 16265,
+      "SHA256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/integration.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/journey.test.ts",
+      "bytes": 18627,
+      "SHA256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/journey.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "SHA256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/npc-clock.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "SHA256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/npc-home-rest-voxels.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/npc-public-rest.test.ts",
+      "bytes": 8804,
+      "SHA256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/npc-public-rest.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/persistence.test.ts",
+      "bytes": 59947,
+      "SHA256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/persistence.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "SHA256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/player-labor.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/rendering.test.ts",
+      "bytes": 19560,
+      "SHA256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/rendering.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "SHA256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/retail-period.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "SHA256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/route-encoding.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/simulation.test.ts",
+      "bytes": 66909,
+      "SHA256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/simulation.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/site-fixtures.test.ts",
+      "bytes": 9594,
+      "SHA256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/site-fixtures.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/trade.test.ts",
+      "bytes": 46192,
+      "SHA256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/trade.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/v4-extensions.test.ts",
+      "bytes": 13260,
+      "SHA256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/v4-extensions.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "SHA256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/v4-services.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/v4-simulation.test.ts",
+      "bytes": 14349,
+      "SHA256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/v4-simulation.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "SHA256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/world-layout.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/world-v4.test.ts",
+      "bytes": 15268,
+      "SHA256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/world-v4.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tests/world.test.ts",
+      "bytes": 26120,
+      "SHA256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "source": "/tmp/yunshan-system-coherent-15/source/tests/world.test.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/tsconfig.json",
+      "bytes": 333,
+      "SHA256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "source": "/tmp/yunshan-system-coherent-15/source/tsconfig.json"
+    },
+    {
+      "path": "02-integrated-coherent15/source/vite.config.ts",
+      "bytes": 357,
+      "SHA256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "source": "/tmp/yunshan-system-coherent-15/source/vite.config.ts"
+    },
+    {
+      "path": "02-integrated-coherent15/source/开发备忘录.md",
+      "bytes": 206501,
+      "SHA256": "a360e14aa5239a38d5a0bfbae9ced45adda7918415f6cdecaa500f0a4f296d34",
+      "source": "/tmp/yunshan-system-coherent-15/source/开发备忘录.md"
+    },
+    {
+      "path": "02-integrated-coherent15/source/提示词.md",
+      "bytes": 25038,
+      "SHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "source": "/tmp/yunshan-system-coherent-15/source/提示词.md"
+    },
+    {
+      "path": "02-integrated-coherent15/source-snapshot.json",
+      "bytes": 11849,
+      "SHA256": "81c0c69fe21d54c38aec04de703485799e320f1814fff9ef622eb0f2323dc367",
+      "source": "/tmp/yunshan-system-coherent-15/source-snapshot.json"
+    }
+  ],
+  "zipExcludes": [
+    "node_modules symlinks",
+    "xattrs",
+    "Library helpers/metadata",
+    "private upload URLs"
+  ],
+  "notClaimed": [
+    "whole project completion",
+    "whole-city medical coverage",
+    "full npm",
+    "UI/GL",
+    "long-run stable economy",
+    "hardware benchmark"
+  ]
+}

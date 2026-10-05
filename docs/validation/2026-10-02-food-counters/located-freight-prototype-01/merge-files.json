@@ -1,0 +1,12 @@
+{
+  "baseDirectory": "/tmp/yunshan-empty-freight-production14-20261001",
+  "prototypeDirectory": "/tmp/yunshan-located-freight-prototype-20261002",
+  "baseSimulationSha256": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+  "files": {
+    "src/simulation.ts": "e60653156acd7d3672d90c002979eff364375e9c760a5d3c8b9f4a599710a4fb",
+    "tests/located-freight.test.ts": "191d9368a8527750704198461daa961ca52d8e1f6239aee588f536129421ba14",
+    "tests/helpers/located-freight-world.ts": "b7138b2353589772c8f2de8512644475ab1119b2bc06d266296161a580550be0",
+    "tests/fixtures/located-freight-legacy.json.gz": "0ed04e5a93cb95d8699d1955ad889aa3324ce08ed9d6334f286184808b45e4ac"
+  },
+  "mergeStatus": "Isolated prototype only; shared v4 sources untouched. Manually coordinate the one core file against current v4; do not replace it wholesale."
+}

@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-01T18:14:54.474Z",
+  "environment": "Node real Simulation commands, attendance accounting, onsite employer review and commerce stage; no WebGL",
+  "initialHashes": {
+    "src/simulation/trade.ts": "d092910e2bb183efd12626f3a653c5d925f8de5842757e40ff6f99f1212cd888",
+    "src/simulation.ts": "8a9282062215566d108468cd2fa10382c38821b678d3e06c40d1ebb0eb7426e7",
+    "src/simulation/extensions.ts": "9d976910f53a50b5ff1675788595eb55371b5c774a680cc59062a778864491d0",
+    "src/simulation/family.ts": "854d79c38f857251c8213140176e89f12e4c90f9e37c5a96e85922459ed03e83",
+    "src/simulation/banking.ts": "74bca7291c41c7f891d887e463bdca2643d2aaf15844041db26e8f4cce723fcc",
+    "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96",
+    "tests/trade.test.ts": "d1cd2b7a255cf501a92ec32f8afea0ca633149f8f968c1f8b6f4c638ef93bfc4"
+  },
+  "finalHashes": {
+    "src/simulation/trade.ts": "d092910e2bb183efd12626f3a653c5d925f8de5842757e40ff6f99f1212cd888",
+    "src/simulation.ts": "8a9282062215566d108468cd2fa10382c38821b678d3e06c40d1ebb0eb7426e7",
+    "src/simulation/extensions.ts": "9d976910f53a50b5ff1675788595eb55371b5c774a680cc59062a778864491d0",
+    "src/simulation/family.ts": "854d79c38f857251c8213140176e89f12e4c90f9e37c5a96e85922459ed03e83",
+    "src/simulation/banking.ts": "74bca7291c41c7f891d887e463bdca2643d2aaf15844041db26e8f4cce723fcc",
+    "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96",
+    "tests/trade.test.ts": "d1cd2b7a255cf501a92ec32f8afea0ca633149f8f968c1f8b6f4c638ef93bfc4"
+  },
+  "evidence": [
+    {
+      "check": "actual-food-and-ingredient-commands",
+      "buyerSpent": 28,
+      "retailReceived": 13.759999999999998,
+      "supplierReceived": 11.040000000000006,
+      "taxesQueued": 3.2,
+      "cashResidual": 0,
+      "physicalStock": 1,
+      "soldUnits": 3
+    },
+    {
+      "check": "onsite-funded-shift-production-cost-quote",
+      "laborMinutes": 480,
+      "energy": 56,
+      "quantity": 8.96,
+      "unitPrice": 6.17,
+      "costWindowUnits": 8.96,
+      "earnedLaborCost": 44.16,
+      "actualUtilities": 6.666666666666666,
+      "quoteUnchangedSave": true
+    },
+    {
+      "check": "real-dynamic-wholesale-then-purchase",
+      "purchasedUnits": 8,
+      "purchaseUnitPrice": 6.17,
+      "purchaseGross": 49.36,
+      "soldUnits": 3,
+      "consumerGross": 37.32891428571429,
+      "inventoryCost": 18.509999999999998,
+      "retailProfitChange": 15.83260114285715,
+      "supplierSecondReceipt": 0,
+      "cashResidual": -2.9103830456733704e-11,
+      "remainingStock": 5
+    }
+  ]
+}

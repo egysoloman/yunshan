@@ -1,0 +1,290 @@
+[
+  {
+    "name": "sale-native-death-player",
+    "scope": "controlled readable original reciprocal spouse and terminal-health premise; original384actors/wallets and genuine purchased/leased registration save; normal Simulation.step drives native death/estate/endLease, no manually inserted estate/share transfer",
+    "deceasedId": "player",
+    "before": {
+      "capital": 2095.9428443570873,
+      "heldCash": 0,
+      "binding": {
+        "companyId": "company-1",
+        "founderId": "player",
+        "registeredAt": 540,
+        "leaseId": null,
+        "openingCash": 1795.9428443570873,
+        "capitalFunding": 300,
+        "ownerCashReserved": 0,
+        "ownerCashEscrow": 0,
+        "ownerCashReturned": 0
+      },
+      "landlordWallet": 361.21117050759494
+    },
+    "alive": false,
+    "estate": {
+      "settledAt": 540.25,
+      "heirIds": [
+        "citizen-6"
+      ],
+      "cash": 47.039999999997235,
+      "shares": {
+        "company-1": 1000
+      },
+      "bankSettlement": {
+        "debtPaid": 0,
+        "depositClaimsTransferred": 0,
+        "unpaidLoss": 0,
+        "closed": true
+      },
+      "status": "settled"
+    },
+    "companyOwner": "citizen-6",
+    "holdings": {
+      "player": 0,
+      "citizen-6": 1000
+    },
+    "shopOwner": "player",
+    "assetOwner": "company-1",
+    "canDispose": false,
+    "allowsSpace": true,
+    "capital": 2095.9428443570873,
+    "lease": null,
+    "binding": {
+      "companyId": "company-1",
+      "founderId": "player",
+      "registeredAt": 540,
+      "leaseId": null,
+      "openingCash": 1795.9428443570873,
+      "capitalFunding": 300,
+      "ownerCashReserved": 0,
+      "ownerCashEscrow": 0,
+      "ownerCashReturned": 0
+    },
+    "playerWallet": 0,
+    "landlordWallet": 408.2511705075922,
+    "roundtrips": 5
+  },
+  {
+    "name": "lease-native-death-player",
+    "scope": "controlled readable original reciprocal spouse and terminal-health premise; original384actors/wallets and genuine purchased/leased registration save; normal Simulation.step drives native death/estate/endLease, no manually inserted estate/share transfer",
+    "deceasedId": "player",
+    "before": {
+      "capital": 500,
+      "heldCash": 86,
+      "binding": {
+        "companyId": "company-1",
+        "founderId": "player",
+        "registeredAt": 515.25,
+        "leaseId": "shop-lease-1",
+        "openingCash": 280,
+        "capitalFunding": 300,
+        "ownerCashReserved": 80,
+        "ownerCashEscrow": 80,
+        "ownerCashReturned": 0
+      },
+      "landlordWallet": 354.21117050759494
+    },
+    "alive": false,
+    "estate": {
+      "settledAt": 515.5,
+      "heirIds": [
+        "citizen-6"
+      ],
+      "cash": 197,
+      "shares": {
+        "company-1": 1000
+      },
+      "bankSettlement": {
+        "debtPaid": 10,
+        "depositClaimsTransferred": 0,
+        "unpaidLoss": 0,
+        "closed": true
+      },
+      "status": "settled"
+    },
+    "companyOwner": "citizen-6",
+    "holdings": {
+      "player": 0,
+      "citizen-6": 1000
+    },
+    "shopOwner": "citizen-6",
+    "assetOwner": "citizen-6",
+    "canDispose": false,
+    "allowsSpace": false,
+    "capital": 300,
+    "lease": {
+      "id": "shop-lease-1",
+      "listingId": "shop-listing-1",
+      "shopId": "shop-market",
+      "lessorId": "citizen-6",
+      "tenantId": "player",
+      "rent": 3,
+      "periods": 7,
+      "startedAt": 480,
+      "endsAt": 10560,
+      "nextDueAt": 1920,
+      "accruedPeriods": 1,
+      "accruedRent": 3,
+      "paidRent": 3,
+      "arrears": 0,
+      "depositInitial": 6,
+      "depositEscrow": 0,
+      "depositToLessor": 0,
+      "depositRefunded": 6,
+      "advanceInitial": 200,
+      "advanceRefunded": 200,
+      "state": "ended",
+      "endedAt": 515.5
+    },
+    "binding": {
+      "companyId": "company-1",
+      "founderId": "player",
+      "registeredAt": 515.25,
+      "leaseId": "shop-lease-1",
+      "openingCash": 280,
+      "capitalFunding": 300,
+      "ownerCashReserved": 80,
+      "ownerCashEscrow": 0,
+      "ownerCashReturned": 80
+    },
+    "playerWallet": 0,
+    "landlordWallet": 631.2111705075949,
+    "roundtrips": 5
+  },
+  {
+    "name": "lease-native-death-citizen-6",
+    "scope": "controlled readable original reciprocal spouse and terminal-health premise; original384actors/wallets and genuine purchased/leased registration save; normal Simulation.step drives native death/estate/endLease, no manually inserted estate/share transfer",
+    "deceasedId": "citizen-6",
+    "before": {
+      "capital": 500,
+      "heldCash": 86,
+      "binding": {
+        "companyId": "company-1",
+        "founderId": "player",
+        "registeredAt": 515.25,
+        "leaseId": "shop-lease-1",
+        "openingCash": 280,
+        "capitalFunding": 300,
+        "ownerCashReserved": 80,
+        "ownerCashEscrow": 80,
+        "ownerCashReturned": 0
+      },
+      "landlordWallet": 354.21117050759494
+    },
+    "alive": false,
+    "estate": {
+      "settledAt": 515.5,
+      "heirIds": [
+        "player"
+      ],
+      "cash": 434.21117050759494,
+      "shares": {},
+      "bankSettlement": {
+        "debtPaid": 0,
+        "depositClaimsTransferred": 0,
+        "unpaidLoss": 0,
+        "closed": true
+      },
+      "status": "settled"
+    },
+    "companyOwner": "player",
+    "holdings": {
+      "player": 1000
+    },
+    "shopOwner": "citizen-6",
+    "assetOwner": "citizen-6",
+    "canDispose": false,
+    "allowsSpace": false,
+    "capital": 300,
+    "lease": {
+      "id": "shop-lease-1",
+      "listingId": "shop-listing-1",
+      "shopId": "shop-market",
+      "lessorId": "citizen-6",
+      "tenantId": "player",
+      "rent": 3,
+      "periods": 7,
+      "startedAt": 480,
+      "endsAt": 10560,
+      "nextDueAt": 1920,
+      "accruedPeriods": 1,
+      "accruedRent": 3,
+      "paidRent": 3,
+      "arrears": 0,
+      "depositInitial": 6,
+      "depositEscrow": 0,
+      "depositToLessor": 0,
+      "depositRefunded": 6,
+      "advanceInitial": 200,
+      "advanceRefunded": 200,
+      "state": "ended",
+      "endedAt": 515.5
+    },
+    "binding": {
+      "companyId": "company-1",
+      "founderId": "player",
+      "registeredAt": 515.25,
+      "leaseId": "shop-lease-1",
+      "openingCash": 280,
+      "capitalFunding": 300,
+      "ownerCashReserved": 80,
+      "ownerCashEscrow": 0,
+      "ownerCashReturned": 80
+    },
+    "playerWallet": 641.2111705075949,
+    "landlordWallet": 0,
+    "roundtrips": 5
+  },
+  {
+    "name": "live-landlord-after-lease-end",
+    "endedResult": {
+      "ok": true,
+      "message": "租约已解除，押金按合同抵欠租并退余额；店内原货权及全部工资债保留，未返营运垫款继续记债。"
+    },
+    "lease": {
+      "id": "shop-lease-1",
+      "listingId": "shop-listing-1",
+      "shopId": "shop-market",
+      "lessorId": "citizen-6",
+      "tenantId": "player",
+      "rent": 3,
+      "periods": 7,
+      "startedAt": 480,
+      "endsAt": 10560,
+      "nextDueAt": 1920,
+      "accruedPeriods": 1,
+      "accruedRent": 3,
+      "paidRent": 3,
+      "arrears": 0,
+      "depositInitial": 6,
+      "depositEscrow": 0,
+      "depositToLessor": 0,
+      "depositRefunded": 6,
+      "advanceInitial": 200,
+      "advanceRefunded": 200,
+      "state": "ended",
+      "endedAt": 515.25
+    },
+    "owner": "citizen-6",
+    "assetOwner": "citizen-6",
+    "corporateOwner": "player",
+    "landlordRestart": {
+      "ok": false,
+      "message": "请由合资格现经营者在原工作点申请重开；挂牌与违约租约须先处理。"
+    },
+    "landlordList": {
+      "ok": false,
+      "message": "挂牌需要原经营资产持有人的现场同意，金额1–100000文，且原租约及垫款先结清。"
+    },
+    "canDispose": false
+  },
+  {
+    "name": "real-original-funded-lease-rejection",
+    "oldProtected": 1587.674289,
+    "oldDebt": 73.57789711103706,
+    "registration": {
+      "ok": false,
+      "message": "原权利、资本或登记回执容量不足，登记全部拒绝。"
+    },
+    "fullSaveUnchanged": true
+  }
+]

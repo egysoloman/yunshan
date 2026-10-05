@@ -1,0 +1,22 @@
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (3.509579ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.666774ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.073519ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.44007ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.411859ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (1.215829ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (2.37248ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (4.833862ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.586376ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (1588.716444ms)
+✔ counter geometry rests on actual ground and leaves a body-height public doorway clear (1149.269804ms)
+✔ actual controller stops at a market cabinet while the original central entrance stays usable (1.72574ms)
+✔ a legacy saved body inside a newly solid counter can walk out without teleporting or reentering (0.291483ms)
+✔ market food samples follow real finite stock and residency without changing any saved state (1354.146789ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4462.524615

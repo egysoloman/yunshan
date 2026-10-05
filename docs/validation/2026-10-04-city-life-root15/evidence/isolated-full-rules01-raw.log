@@ -1,0 +1,709 @@
+
+> yunshan-city@0.1.0 test
+> node --import tsx --test --test-isolation=process --test-concurrency=1 tests/*.test.ts
+
+✔ civic halls and observation deck remain public while office and underground access require earned permissions (1.802069ms)
+✔ identity packages accumulate and preserve access across a change of displayed profession (0.565192ms)
+✔ stepped occupied floors use a shared vertical shaft while underground retains its full footprint (2.101641ms)
+actual public wage and budget protection {"earned":0.045996583333333334,"beforeAuthorization":{"cash":80000,"publicWagesDue":0,"publicWagesEarned":0.045996583333333334,"forecastPayroll":11613.217360000059,"reservedPayroll":0,"essentialOperations":2073.6,"reserve":13686.863356583392,"authorizedRemaining":0,"available":66313.13664341661},"afterAuthorization":{"cash":80000,"publicWagesDue":0,"publicWagesEarned":0.045996583333333334,"forecastPayroll":11613.217360000059,"reservedPayroll":0,"essentialOperations":2073.6,"reserve":13686.863356583392,"authorizedRemaining":66263.13664341661,"available":50}}
+✔ qualified appointment transfers public training funds to the existing guild, with exact continuation (1796.622037ms)
+✔ official and scientist appointments keep the original fee and education thresholds (35.131182ms)
+✔ a missing guild refuses the whole appointment instead of inventing a recipient (24.954917ms)
+✔ guild ID with another kind refuses the whole appointment (21.870096ms)
+▶ invalid or capped receiver funds refuse atomically
+  ✔ -1 (18.694104ms)
+  ✔ NaN (25.971245ms)
+  ✔ Infinity (20.911702ms)
+  ✔ 999999901 (18.329261ms)
+  ✔ 1000000000 (27.208316ms)
+✔ invalid or capped receiver funds refuse atomically (112.950071ms)
+✔ authorized public budget blocks appointment even when treasury has more than 100 (25.080241ms)
+✔ a real native public work escrow and authorized budget take priority over appointment (23.109424ms)
+✔ real onsite earned public wages stay protected alongside authorized contracts (427.361028ms)
+✔ genuine original21 paid appointment save receives no historical backfill (62538.727901ms)
+✔ all six production bodies retain the same actual instanced roofs in both levels of detail (90.054474ms)
+✔ real courts stay open above a standing body in both actual near and far meshes (130.135734ms)
+✔ actual intermediate roof triangles clear every occupied upper wing (41.529157ms)
+✔ four historical recipes and preserved landmarks cannot acquire program geometry (5856.873668ms)
+✔ v4 sale bays draw the same physical cabinets while keeping their real use points clear (3.753124ms)
+✔ clinical UI and care require the actual public service point rather than an empty ward court (10.180818ms)
+✔ v4 near lattice belongs to real glass openings and retains the voxel and instance limits (1941.120151ms)
+✔ v4 all real door openings stay empty at body height and plaques mount on solid wall bays (1414.978082ms)
+✔ v4 eaves follow exposed shared roof boundaries and touch the actual rendered roof surface (1368.040821ms)
+✔ v4 near residency preserves eight-building budgets, cutaways and disposal (33.284494ms)
+✔ v4 actual canvas plaques face the real mounting wall and release all private resources (4.107924ms)
+✔ near architecture generates no city instances at startup, caps its live budget and releases distant buffers (26.320042ms)
+✔ human-scale facade details leave every generated building south doorway and approach clear (248.248282ms)
+✔ eave details touch the real structural roof rather than creating a second floating roof (254.619866ms)
+✔ the open observation floor stays free of invented window walls (0.369827ms)
+✔ narrow physical plaques retain the full building name and release their own GPU resources (3.295185ms)
+✔ lanterns follow continuous daylight and actual power without adding point lights (1.552353ms)
+✔ high core floors attach their front lattice to the shared narrowed footprint (0.695959ms)
+✔ interior cutaways hide tagged upper decorations and restore them on leaving (5.856644ms)
+✔ pavilions stay open and function signs describe actual building uses (0.770419ms)
+✔ new v4 body alone declares actual shared doors, unique programme aliases, holes, thin treads and usable fixtures (6217.867847ms)
+✔ glass panes are physical barriers while declared door openings allow a .35m body (3687.771456ms)
+✔ exposed gables share precise ray and body roof support and cannot collide with a body already standing above them (4226.259688ms)
+✔ timber finishes partition the same opaque wall volume without overlap or projection (3.733642ms)
+✔ native home and market walls retain covered solids, real windows and empty doorways (54.153743ms)
+✔ closed wall coverage includes the native material seam and rejects an actual gap (2.68653ms)
+✔ the explicit wall finish cap holds for every native target building (450.78632ms)
+✔ aircraft stands are actual clear city locations beside stations and the airport (23.56752ms)
+✔ remote mode selection cannot rent or board and a real rental transfers cash to public funds (714.368702ms)
+✔ drone flying moves the passenger, uses energy, and requires an actual landing before exiting (110296.186502ms)
+✔ military aircraft checks both accumulated identities and ground weather permission (25715.645009ms)
+✔ player flight responds in seconds independently of city speed and respects pause (38789.254805ms)
+✔ airborne saves restore identity, passenger and deterministic continuation; bad aircraft references reject atomically (21210.963339ms)
+✔ ground charging consumes real cash and time, and cannot be boarded while charging (16074.465218ms)
+✔ legacy saves gain the deterministic parked fleet without changing player cash or position (392.327238ms)
+✔ a current save declaring aviation rejects a missing fleet without replacing state (369.349308ms)
+✔ small irregular worlds outside the nominal square round-trip their own parked fleet for multiple seeds (130.186794ms)
+✔ rental and ground charging remain visible receipts while event-based treasury reconciliation counts them once (384.410586ms)
+✔ onsite boarding eligibility stays read-only and agrees with refused weather, power, battery and identity commands (3263.769768ms)
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (43.649666ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (69.303701ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (16.55263ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (40.657782ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (49.622207ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (18.471137ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (3.553832ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (10.886449ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (15.272569ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (716.389329ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (784.012498ms)
+✔ a saved module manifest prevents missing financial custody from being mistaken for a legacy save (267.490317ms)
+✔ BudgetAuthority1 has a complete v3 pair and rejects halves, downgrade, fake history and cutover edits atomically (656.328645ms)
+✔ fresh actual paid officials without elected terms and generic wage copies cannot create natural budget signatures (56.358606ms)
+✔ actual legacy native2 remains disabled until explicit stable host cutover, with whole/partition future24 byte equality (15442.857994ms)
+✔ browser-compatible immutable authorization SHA256 matches independent Node UTF8 oracle at padding and multi-block boundaries (2.387235ms)
+✔ old authorization boundary retains cap, approval and signer provenance while legitimate expenditure and closure remain mutable (4.105113ms)
+✔ actual two natural terms at same hall generate strict profession0 and canonical paid tail signatures without a PublicLabor body (448.076151ms)
+✔ strict V2 historical reader refuses forged term, source, role, profession, remote point and paid interval using real valid signatures (250.37299ms)
+✔ observed death or employer change stops new authority while retaining a past real signed source (2337.921863ms)
+✔ literal original authority primitive rejects two actual paid secondary terms above40 while accepting their same ordinary departmental40 (2162.242214ms)
+✔ building metadata partitions the unchanged authority without allocating any near geometry (85.275212ms)
+✔ actual near resources remain bounded while travel unloads geometry, interior refs and instance buffers (102.277014ms)
+✔ inside priority and every recreated resource preserve the current high-floor room cutaway (6.840096ms)
+✔ shell distance includes real upper and underground floors instead of the ground-center height (0.405181ms)
+✔ real residential door exit keeps its near geometry and every rotated city entrance is covered at low quality (49.342348ms)
+✔ a rotated wide building bounding circle cannot outrank the actual nearby body (0.782394ms)
+✔ a finite exit margin prevents boundary churn and still releases or rebuilds real resources (0.633583ms)
+✔ quality reduction and a new inside chunk evict before allocating, with a strict live capacity (9.737492ms)
+✔ failed creation/publication retains the far silhouette and rolls back owned resources and indices (1.268768ms)
+✔ resident anatomy has real adult stature, quantized solid limbs and stable individual clothing (3.889983ms)
+✔ face ink uses one shared texture instead of eye or mouth boxes on every NPC (1.043101ms)
+✔ actual near heads select age and mood atlas cells while shared clothes keep the crowd budget (8.614369ms)
+✔ elapsed render time and paused simulation never invent walking displacement or advance a step (127.479531ms)
+✔ large crowds stay in two shared draws and far residents omit faces and accessories (53.134957ms)
+✔ actual death renders a low corpse at the same location until the funeral finishes (37.865235ms)
+✔ fresh city-life recipe records its actual original save and preserves all actors, funds, clocks and routes (13416.563866ms)
+✔ loading an existing native-four archive into the city-life recipe keeps its bytes and future without new policies (8660.650893ms)
+✔ synchronous immutable authorization SHA256 matches the native UTF8 digest for empty, multiblock and Unicode descriptors (19.854578ms)
+✔ explicit product city saves an empty v3 contract while the compatibility constructor remains exactly original native2 (87.516738ms)
+✔ loading original native2 into a product constructor clears all new rules and preserves every actual tick24 original byte (1014.282542ms)
+✔ new v3 custom city restores whole and partition generation exactly for every real future tick24 (1971.423021ms)
+✔ half contract, version downgrade and malformed native motion stay atomic in the full reader and partition transport (439.963068ms)
+✔ trusted host upgrade requires exact stable SHA, adds empty cutover only, and preserves every original native fact (1687.209121ms)
+✔ display clock rewind and forward commands retain lawful business cutover and do not create labor proof (98.878427ms)
+✔ explicit upgrade of an actual legacy1 city keeps its original motion contract and exact restored future tick24 (110183.157878ms)
+✔ explicit product world keeps validated v6 default and optional v7 restores known v6 cities and restores known v6 v3 through selector and source bridge unchanged (71607.448528ms)
+✔ history UTF8 digest matches native SHA for multiblock Unicode without runtime module imports (4.71612ms)
+✔ actual four-day raw58/58/13 retains every fee/census/window byte in bounded immutable pages (1105.707671ms)
+✔ transport splits large Unicode raw records losslessly and rejects absent/duplicate/changed parts and indexes (1286.016781ms)
+✔ finite archive quota rejects a complete oversized record atomically rather than truncating paid history (1045.834557ms)
+✔ trusted exact-SHA upgrade of actual app64 four-day snapshot retains all money/labor/professions/RNG and raw58 closed sources (3077.420945ms)
+✔ explicit archive factory starts empty while importing old native3 disables new history and preserves original future24 (11116.369911ms)
+✔ complete, stable partition, and leased session v4 each restore every original byte then future24 exactly (40821.241001ms)
+✔ history envelope, raw fee/time/census, live ledger and hot/cold duplicate tampering are atomically rejected even after valid re-sealing (14259.512915ms)
+✔ partition rejects absent, duplicate, orphan and changed-page sources from a complete generation (2377.038511ms)
+✔ actual captured canonical paid two-signature sources validate with hot terms and full cold election/proof chains; no funded budget is claimed (2556.723414ms)
+✔ declared death/job adverse input ends current authority after one real tick while immutable cold term sources validate and full/partition future24 stays exact (72620.253597ms)
+CIVIC same-hall source {"input":"declared pre-constructor compact parameter city","tick":1467,"clock":6348,"pair":[{"id":"civic-term-1","actorId":"citizen-22","officeId":"civic-0-hall","districtId":"civic-0","baseRole":"官员","enablementId":"civic-new-20261004-75f6316a","pollId":"civic-poll-1","proofId":"civic-proof-1","startsAt":3460,"endsAt":23620,"endedAt":null,"endedTick":null,"endedReason":""},{"id":"civic-term-12","actorId":"citizen-418","officeId":"civic-0-hall","districtId":"civic-0","baseRole":"官员","enablementId":"civic-new-20261004-75f6316a","pollId":"civic-poll-12","proofId":"civic-proof-222","startsAt":6344,"endsAt":26504,"endedAt":null,"endedTick":null,"endedReason":""}],"sources":[{"version":1,"kind":"local-council-term","ruleId":"civic-local-v1","enablementId":"civic-new-20261004-75f6316a","actorId":"citizen-22","officeId":"civic-0-hall","districtId":"civic-0","baseRole":"官员","electionId":"civic-poll-1","termId":"civic-term-1","proofId":"civic-proof-1","signedAt":6348,"startsAt":3460,"endsAt":23620},{"version":1,"kind":"local-council-term","ruleId":"civic-local-v1","enablementId":"civic-new-20261004-75f6316a","actorId":"citizen-418","officeId":"civic-0-hall","districtId":"civic-0","baseRole":"官员","electionId":"civic-poll-12","termId":"civic-term-12","proofId":"civic-proof-222","signedAt":6348,"startsAt":6344,"endsAt":26504}],"actualPaid":{"citizen-22":{"tick":1467,"startAt":6344,"endAt":6348,"minutes":4,"amount":0.4095306666666668},"citizen-418":{"tick":1467,"startAt":6344,"endAt":6348,"minutes":4,"amount":0.4095306666666668}},"counts":[{"eligible":56,"quorum":28,"turnout":56,"support":56,"retain":0},{"eligible":56,"quorum":28,"turnout":56,"support":56,"retain":0}],"finiteHistory":{"proofs":128,"retiredProofCount":289,"applications":64,"polls":19,"terms":13}}
+✔ two separate natural two-day polls create two actual same-hall secondary terms and simultaneous native paid authority (309821.260888ms)
+CIVIC natural small-parameter-city source {"scope":"PRE-constructor compact map, no runtime cash/role/needs/position/ballot grants","tick":745,"businessClock":3460,"term":{"id":"civic-term-1","actorId":"citizen-22","officeId":"civic-0-hall","districtId":"civic-0","baseRole":"官员","enablementId":"civic-new-20261004-75f6316a","pollId":"civic-poll-1","proofId":"civic-proof-1","startsAt":3460,"endsAt":23620,"endedAt":null,"endedTick":null,"endedReason":""},"proofMinutes":60,"fee":{"paidAt":580,"tick":25,"displayHour":9.666666666666666,"amount":120,"moneyBefore":377.76315519586205,"moneyAfter":257.76315519586205,"treasuryBefore":80237.034829473,"treasuryAfter":80357.034829473,"candidateAge":42.000190258751864,"candidateEducation":2,"witnesses":[{"floor":1,"pointId":"1:program:work","position":{"x":96,"y":4.3999999999999995,"z":-13},"actorId":"citizen-154","officeId":"civic-0-hall","baseRole":"官员","signedAt":580,"paid":{"startAt":576,"endAt":580,"ratePerMinute":0.09269466666666668,"earned":0.3707786666666667,"tick":25}},{"floor":2,"pointId":"2:program:work","position":{"x":96,"y":8.2,"z":-13},"actorId":"citizen-121","officeId":"civic-0-hall","baseRole":"官员","signedAt":580,"paid":{"startAt":576,"endAt":580,"ratePerMinute":0.09269466666666668,"earned":0.3707786666666667,"tick":25}}]},"count":{"eligible":56,"quorum":28,"turnout":56,"support":56,"retain":0},"originalRolesPreserved":true}
+✔ product civic rules start empty; generic wage and arrival events create no official proof or ballot (143.061274ms)
+✔ ordinary native source → paid proof → finite resident fee/two paid witnesses → real two-day ballots → secondary term (165180.580345ms)
+✔ single hall slots and real unpaid voter intervals never overlap paid work or another civic actor (164.423991ms)
+✔ natural term body and global/partition export restore byte-exact and continue 24 actual ticks (8848.030845ms)
+✔ cash/proof/individual ballots/quorum/term/official registry corruption rejects atomically (1576.580689ms)
+✔ original employer change ends new authority while retaining the historical source and every wage debt (487.396968ms)
+✔ real life terminal branch ends civic authority, retains past source and cannot revive or grant a new job (443.693088ms)
+✔ legacy city loaded into new product clears civic mode and keeps immediate plus 24-tick full bytes (65575.176031ms)
+✔ display-clock edits neither add paid proof nor skip the two-day civic deadline (35105.472855ms)
+✔ genuine unmarked old D1 pending order keeps load bytes and future late care uses one minute (1493.972353ms)
+✔ genuine unmarked old D2 pending order keeps load bytes and future late care uses one minute (950.361555ms)
+✔ genuine old already credited progress is preserved, then only new current work is added (1055.01467ms)
+✔ new marked timing version is validated atomically without granting future or duplicate care (1626.713491ms)
+✔ two genuine paid patients share one doctor clock while a third retains material and escrow (1688.119858ms)
+✔ statistical medical commitments complete twenty actual minutes without changing tier or erasing pending elapsed (765.68002ms)
+{"label":"M2_DOCTOR_LATE","status":"ACTUAL_ONLY_IF_THIS_DRIVER_EXECUTED","record":{"doctor":"citizen-4","patient":"citizen-1","source":"original core route + original wage-earned attestation","meters":12.6,"speed":4.2,"routeUpperBoundMinutes":1,"phase":{"start":484,"end":488},"earned":{"start":487,"end":488,"minutes":1.0000000000000002},"actualTreatmentDeltaMinutes":1,"before":{"clock":484,"worked":0,"health":83.00366401344,"money":570,"reserved":1,"consumed":0},"after":{"clock":488,"worked":1,"patientHealth":83.00732804030376,"money":570,"reserved":1,"consumed":0}}}
+✔ M2 doctor genuine arrival: treatment cannot exceed actual current earned onsite window (230.878178ms)
+✔ supplied historical credited front cannot become a current-phase suffix (0.793352ms)
+{"label":"M2_NPC_PATIENT_LATE","status":"ACTUAL_ONLY_IF_THIS_DRIVER_EXECUTED","record":{"doctor":"citizen-4","patient":"citizen-1","meters":12.6,"speed":4.2,"patientWindowSource":"derivedUpperBound: original real route distance / unchanged core speed","derivedPatientWindow":{"start":487,"end":488},"earned":{"start":484,"end":488,"minutes":4},"actualTreatmentDeltaMinutes":1,"before":{"clock":484,"worked":0,"health":83.00366401344,"money":570,"reserved":1,"consumed":0},"after":{"clock":488,"worked":1,"patientHealth":83.00732804030376,"money":570,"reserved":1,"consumed":0}}}
+✔ M2 NPC patient genuine arrival: treatment cannot reuse the walking portion of the patient budget (211.68226ms)
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+✔ same-floor distinct real stations do not pair or spend a doctor slot; two-metre station admission stays intact (112.409971ms)
+✔ marked station pairing requires public ACL and an actual supported .35m body (37.501045ms)
+✔ moving from a legitimate station preserves already earned partial treatment and exact save/24-tick continuation (711.28368ms)
+✔ default generated clinic has physically supported co-located points and only real doctors prefer its ground station (866.173708ms)
+✔ a failed preferred interior route still tries the original legal upper-floor fallback (568.184295ms)
+✔ no declared ground service station keeps the original legal work-point selection (116.738001ms)
+✔ a real default upper-floor doctor keeps the old legal target when a saved placed cube blocks ground (907.589282ms)
+✔ a ground route selected earlier is replanned without rebuild when a saved placed cube blocks its station (505.449871ms)
+✔ a clear work body within two metres does not prefer an obstructed or unsupported service centre (228.965086ms)
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+M1 fixture real-native-work precondition {"doctor":{"id":"citizen-4","homeId":"pair-home","workId":"pair-clinic","role":"医生","roadDistance":301.3921819126833},"reviewers":[{"id":"citizen-6","homeId":"pair-home","roadDistance":422.78436382536665},{"id":"citizen-14","homeId":"pair-home","roadDistance":422.78436382536665}],"initialPlayerMoney":600}
+✔ paid care does not credit a funded doctor on another real public floor (854.567269ms)
+✔ paid care resumes at the shared ground station for twenty new actual minutes, retaining its one purchase (637.459235ms)
+✔ a material-backed public order does not count a doctor on a different supported public floor (891.140003ms)
+✔ one matching doctor still has only two slots shared by public and paid patients (806.939614ms)
+✔ unmarked paid care keeps the old cross-floor contract and exact continuation (435.691574ms)
+✔ a saved placed cube blocks the live station volume without erasing six already earned treatment minutes (1007.177869ms)
+✔ earlier unmatched public patients do not starve later same-station patients or widen two real doctor slots (729.133635ms)
+✔ paid care starts with real adult funding and public clinic presence, without instant health (253.398895ms)
+✔ shared clinical geometry respects rotated floor sizes, protected floors and the two-metre entrance (9.379693ms)
+✔ children may receive sponsored care, but their own wallets cannot approve adult treatment funding (275.356209ms)
+✔ available food cannot substitute for exhausted industrial clinical materials (76.222746ms)
+✔ one observed-price material and twenty actual doctor-patient minutes settle conserved cash and health (170.031603ms)
+✔ leaving the clinic pauses attended minutes and a resumed save continues byte-identically (810.261868ms)
+✔ a departed, hungry or deceased physician cannot supply attended work (161.914296ms)
+✔ missing or genuinely unaffordable material waits with escrow and creates no health or stock (190.574342ms)
+✔ cancellation refunds only unused money, retaining purchased stock for exactly one later treatment (171.95096ms)
+✔ unused pre-purchase cancellation transfers the same thirty real coins back exactly once (81.824808ms)
+✔ payer and patient deaths both stop care; sunk material costs remain physical clinic stock (205.755891ms)
+✔ a capped refund stays an auditable escrow obligation until the actual payer can receive it (113.723481ms)
+✔ doctor capacity is shared across public and paid care and each patient gets one simultaneous slot (207.081577ms)
+✔ a genuinely authorized public service and paid care share one real doctor rather than doubling attended capacity (269.734226ms)
+✔ actual simultaneous paid patients occupy only two slots of one attended doctor (237.963844ms)
+✔ finite receipt, escrow, identity, timing and physical inventory corruption rejects atomically (652.984071ms)
+✔ a real heal command delegates into the same clinical lifecycle and module deletion cannot erase escrow (91.280167ms)
+✔ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (84.491162ms)
+✔ saved pre-clinical healing deadlines bind patient and NPC repeat visits until actual elapsed time (1537.441672ms)
+✔ an actual ee3e7a1 paid-heal export migrates its sixty-minute deadline and never charges a repeat fee early (354.386263ms)
+✔ actually funded and elapsed medicine research improves only completed material-backed clinical treatment (544.783215ms)
+✔ late W in a slow frame receives only its real held interval, with unchanged eye and speed (6.842413ms)
+✔ a completed 200ms pulse survives early idle time in a five-second frame and delayed keyup delivery (1.780267ms)
+✔ continuous W pays each interval once and a long held stall remains capped at one second (8.032319ms)
+✔ active budget keeps the latest active second in chronological order and ignores idle gaps (8.890399ms)
+✔ sprint, opposite keys and normalized diagonal arrows retain their original speed contracts (3.689716ms)
+✔ epoch timestamps normalize, invalid clocks fall back, and dispatch order clamps backward timestamps (1.987648ms)
+✔ an accepted event later than the supplied rAF timestamp waits for the next frame (1.672892ms)
+✔ a late event before an already consumed frame changes only unconsumed time and cannot roll the body back (2.216164ms)
+✔ blur, visibility and successful setMode discard pending movement while a rejected mode keeps it (2.759888ms)
+✔ paused walking retains the original motor while passenger frames consume without later replay (1.939049ms)
+✔ pre-reset queued presses cannot revive walking through later snapshots or pose changes; old keyup releases held state (3.598186ms)
+✔ native-failure home geometry permits exact timed W to the original exterior approach and E enters from outside (19.919317ms)
+✔ successful pose changes cut old walking budget while retaining held keys; failed doors leave it intact (4.145605ms)
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (170.267944ms)
+✔ v4 courtyard is genuinely supported outdoor ground and continuous W returns through an actual opening (165.157001ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 3.4m storey height without E or reset (150.900221ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 6.6m storey height without E or reset (109.520681ms)
+✔ v4 exact market-b24 upper first-tread pose advances a .35m body by normal W (3.974411ms)
+✔ v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing (20.36804ms)
+✔ v4 rotated entrance has the same physical local door and legacy E preserves arbitrary shaft x/z exactly (70.327573ms)
+✔ v4 exposed roof supports restored feet, blocks its actual volume and remains outside a room (8.207534ms)
+✔ v4 actual W cannot pass the physical market counter or walk off the top-floor stair hole (18.854707ms)
+✔ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (33.021323ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (8.142792ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.804275ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.356845ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.546073ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.463992ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (1.245088ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (2.956505ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (3.747575ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.605112ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (3679.207753ms)
+✔ creation requires a real public studio, money and text; leaving pauses actual work and save/load resumes it (1230.482745ms)
+✔ publication spends actual funds and only completed on-site reading improves residents and author relationships (753.348037ms)
+✔ published works naturally get real readers in the generated schedules, with no reader teleport or supplied skill (1194.042829ms)
+✔ public reports preserve observed evidence and spread through actual nearby residents; truthful verification gives no cash reward (152.941233ms)
+✔ a claim contradicting real evidence is publicly marked false and an actual correction restores only part of reader trust (115.089075ms)
+✔ ordinary public petitions collect real on-site signatures, wait a full monotonic day and receive saved public replies (527.482846ms)
+✔ the actual civic core public floor admits ordinary petitions while protected floors reject even a mayor publication (37.948641ms)
+✔ corrupted source conclusions, reader identities, completed work time and petition deadlines reject atomically (611.085823ms)
+✔ an actual petition produces a distinct authorized service order and conserved finite procurement receipts (110.135702ms)
+✔ public education needs staff, material and real attendance; leaving pauses and restored instances continue identically (609.563989ms)
+✔ actual public clinical treatment consumes a funded unit after doctor attendance and twenty minutes (173.67579ms)
+✔ zero discretionary cash or supplier stock waits without free service and retries after a genuine donor payment (464.017315ms)
+✔ dynamic supply quotes buy only actual material within the approved cap and preserve an unfinished partial service (767.432098ms)
+✔ station upkeep consumes actual parts and attended work before any future dispatch maintenance exists (432.648732ms)
+✔ forged service receipts, materials, authorizations, actor references and completed timings reject atomically (336.375477ms)
+✔ food evidence separates workshop output, named counter meals, carried meals and unknown sales without editing events (2.305423ms)
+✔ headless food diagnosis is read only and leaves legal reachability unknown, even when a remote food offer is affordable (4300.957968ms)
+✔ event-only economic observations preserve every actual tick of the default headless city (75597.516198ms)
+✔ certified attendance classification stays separate from positive production, counterfeit, amount-only and public wage events (0.927008ms)
+✔ generated neighbours are assigned jobs by the walkable graph, including mountain detours (25973.385186ms)
+✔ an underfunded private employer pays its real cash proportionally and settles each wage once (158.476186ms)
+✔ production requires actual attendance and technology improves that labour instead of producing unattended stock (55.366387ms)
+✔ public operations consume existing goods and credit their real supplier without creating money (81.671397ms)
+✔ native meals consume one portion, carry only the remainder, and workshop purchases stay material (51.685306ms)
+✔ food freight leaves industrial material with its real producer (46.055237ms)
+✔ a stored meal is consumed after closing time and does not credit money or create food (48.456218ms)
+✔ legacy accounts migrate from real proprietor savings and new ownership and cash survive exact continuation (634.803469ms)
+✔ funded clinical care consumes one real material and cannot heal from an empty supplier (1688.626189ms)
+✔ actual attendance retains its employer and promised wage rate across mid-shift changes and save/load (96.977335ms)
+✔ wage contracts reject changed amounts and employers atomically, while legacy unpaid expense migrates once (172.888067ms)
+✔ share repurchases reserve both unpaid and not-yet-due actual wages (43.213213ms)
+✔ native housing, education, qualifications and police rewards have actual public counterparties (1485.803412ms)
+✔ future public shifts require actual departmental witnesses and reserve past promises before authorizing cash (170.532763ms)
+✔ construction purchases finite material and completes only after attended work, without saleable stock creation (92.924162ms)
+✔ private employers approve only onsite cash-backed minutes and preserve losses, old claims and future cash protection (73.220364ms)
+✔ a capped worker wallet retains its wage claim until a real receiving capacity is available (36.512594ms)
+✔ an empty existing freight carrier loads at the real farm, delivers owner custody, and loads again after exact restoration (416.290983ms)
+✔ a passenger bus cannot load nearby farm stock and freight cannot load a remote same-district farm (360.102143ms)
+✔ both loaded and empty generated freight carriers resume the exact same 24 ticks (933.820246ms)
+✔ real ten-seat passengers and their driver keep their places when a freight pickup would require two seats (386.065309ms)
+✔ a saved passenger bus carrying existing stock never gains a generated freight role (102.13678ms)
+✔ real partial education with its active purchase partitions exactly and resumes 24 ticks (4700.161655ms)
+✔ real partial education with retained purchase and reused material partitions exactly and resumes 24 ticks (4436.323147ms)
+✔ assembly rejects missing player education fields and missing real school stock without deleting other chunk entities (1415.481596ms)
+✔ assembly preserves present stock keys while import rejects an invalid stock body atomically (729.43631ms)
+✔ declared cash-backed capacity opening uses actual withdrawals, preserves refundPending through partition and 24 ticks, then refunds once (1949.343283ms)
+✔ native depositor cash funds a real loan; death keeps its claim pending until actual course refund and estate reconciliation (1446.47495ms)
+✔ unmarked paid class earns exactly sixty actual minutes, one textbook and one reward (1885.959928ms)
+✔ marked paid class earns exactly sixty actual minutes, one textbook and one reward (13931.550862ms)
+✔ finite empty real suppliers preserve forty escrow and earn neither minutes nor material (132.048129ms)
+✔ an onsite course with zero textbooks cannot lock a genuinely qualified hundred-coin research admission (39523.91414ms)
+✔ public and paid waiting intentions leave research four actual minutes, then one real public class claims them (43198.387617ms)
+✔ an actual paid class owns this phase through its final archive, then research earns the next phase (52070.959528ms)
+✔ leaving the original point preserves minutes and fees until explicit continue without a second charge (5075.150005ms)
+✔ cancellation keeps paid work in history, refunds only unearned escrow and reuses a real unconsumed textbook (15016.369998ms)
+✔ bounded history archives only cleared terminal ledgers without losing forty-coin refunds (513.503958ms)
+✔ an absent teacher and an actual working teacher upstairs cannot teach the paid ground classroom (2666.360217ms)
+✔ same floor requires the same station and keeps each actor within two metres of its station (945.043252ms)
+✔ marked education rejects partial .35m support, wrong height and non-public classroom ACL (90.702709ms)
+✔ a genuinely saved placed cube blocks the course station without spending or earning more (875.49491ms)
+✔ active partially taught saves roundtrip exactly and reject forged financial, material and time references atomically (3561.237213ms)
+✔ one actual teacher shares four per-phase slots between public education and the paid course (3375.448127ms)
+✔ shared slots and actor minutes reject duplicate claims and reset when actual tick or imported state changes (77.98819ms)
+✔ after a real forty commitment the native marked teacher route prefers a supported ground station without creating attendance (22.930819ms)
+✔ controlled existing finite public shift credits the old deferred prefix, never inventing a paid current tail (381.780536ms)
+✔ two current funded minutes teach even when their public allowance becomes zero in the same four-minute phase (363.301803ms)
+✔ public-only teaching takes the same sixty actual minutes at active, regional and statistical camera tiers (5783.514081ms)
+✔ public-only initial sixty-minute backlog with two funded prefix minutes teaches zero current minutes (250.462629ms)
+✔ public-only current four-minute phase with two remaining funded minutes teaches exactly those two (269.281206ms)
+✔ public-only observers without a current work attestation cannot borrow historical duty (162.288124ms)
+✔ original successful study entry charges a real forty but cannot reward education at admission (58.670438ms)
+✔ a course-free simulation keeps education and its persistence marker absent across exact roundtrip (914.234561ms)
+✔ genuine same-start course/research bytes continue exactly and reject the two-field coordinated forge (3656.776633ms)
+✔ genuine different-start course/research bytes continue exactly and reject the two-field coordinated forge (3880.857786ms)
+✔ a real completed sixty-minute course retained in history cannot be spent again by its same-start pending research (3875.793389ms)
+✔ a genuinely earlier sixty-minute completed course leaves the later four-minute research suffix available (65249.483045ms)
+✔ a later present clock cannot legalize overlapping retained course windows before the previous actual clearing (2540.65935ms)
+
+Interrupted while running:
+
+⚠ tests/extensions.test.ts (tests/extensions.test.ts:1:1)
+✖ tests/extensions.test.ts (1839894.004504ms)
+✖ tests/family-fee-education.test.ts
+✖ tests/family-fee-legacy-qualification.test.ts
+✖ tests/family.test.ts
+✖ tests/farm-stock-buffer.test.ts
+✖ tests/floor-plan-derived-cache.test.ts
+✖ tests/floor-plan-empty-support.test.ts
+✖ tests/floor-plan-self-collision.test.ts
+✖ tests/food-hiring.test.ts
+✖ tests/freight-access.test.ts
+✖ tests/governance.test.ts
+✖ tests/home-rest.test.ts
+✖ tests/hygiene-transfer.test.ts
+✖ tests/hygiene.test.ts
+✖ tests/integration.test.ts
+✖ tests/interior-lighting.test.ts
+✖ tests/journey.test.ts
+✖ tests/market-company-return.test.ts
+✖ tests/market-company-rights.test.ts
+✖ tests/market-shopfront.test.ts
+✖ tests/meal-route-policy.test.ts
+✖ tests/native-day-writer.test.ts
+✖ tests/native-door-routes.test.ts
+✖ tests/native-live-reader.test.ts
+✖ tests/npc-clock.test.ts
+✖ tests/npc-home-rest-voxels.test.ts
+✖ tests/npc-public-rest.test.ts
+✖ tests/npc-stair-native-activity.test.ts
+✖ tests/npc-stair-native.test.ts
+✖ tests/partition-field-order.test.ts
+✖ tests/persistence.test.ts
+✖ tests/player-labor.test.ts
+✖ tests/police-fulfillment.test.ts
+✖ tests/power.test.ts
+✖ tests/public-budget-standing.test.ts
+✖ tests/public-disinfection.test.ts
+✖ tests/public-employment-transfer.test.ts
+✖ tests/public-health-hygiene.test.ts
+✖ tests/public-school-arrival.test.ts
+✖ tests/reference-collision.test.ts
+✖ tests/rendering-street-life.test.ts
+✖ tests/rendering.test.ts
+✖ tests/research-labor.test.ts
+✖ tests/research-offsite-causal.test.ts
+✖ tests/research-task-budget.test.ts
+✖ tests/resident-formal-education.test.ts
+✖ tests/resident-petitions.test.ts
+✖ tests/retail-period.test.ts
+✖ tests/road-capacity.test.ts
+✖ tests/road-demands.test.ts
+✖ tests/road-estate.test.ts
+✖ tests/road-navigation.test.ts
+✖ tests/road-routing.test.ts
+✖ tests/roads-old22.test.ts
+✖ tests/roads.test.ts
+✖ tests/roadwork-replacement.test.ts
+✖ tests/roadworks.test.ts
+✖ tests/route-encoding.test.ts
+✖ tests/service-material-scheduling.test.ts
+✖ tests/shop-lifecycle.test.ts
+✖ tests/shop-repeat-distress.test.ts
+✖ tests/shop-self-funding.test.ts
+✖ tests/simulation.test.ts
+✖ tests/site-fixtures.test.ts
+✖ tests/stair-continuity.test.ts
+✖ tests/stair-escape-origin.test.ts
+✖ tests/supplemental-budget.test.ts
+✖ tests/trade.test.ts
+✖ tests/tree-crowns.test.ts
+✖ tests/v4-extensions.test.ts
+✖ tests/v4-services.test.ts
+✖ tests/v4-simulation.test.ts
+✖ tests/world-layout.test.ts
+✖ tests/world-v4.test.ts
+✖ tests/world-v5.test.ts
+✖ tests/world-v6-commercial-routes.test.ts
+✖ tests/world-v6-commercial.test.ts
+✖ tests/world-v6-office.test.ts
+✖ tests/world.test.ts
+ℹ tests 359
+ℹ suites 0
+ℹ pass 280
+ℹ fail 0
+ℹ cancelled 79
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3599685.073591
+
+✖ failing tests:
+
+test at tests/extensions.test.ts:1:1
+✖ tests/extensions.test.ts (1839894.004504ms)
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/family-fee-education.test.ts:1:1
+✖ tests/family-fee-education.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/family-fee-legacy-qualification.test.ts:1:1
+✖ tests/family-fee-legacy-qualification.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/family.test.ts:1:1
+✖ tests/family.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/farm-stock-buffer.test.ts:1:1
+✖ tests/farm-stock-buffer.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/floor-plan-derived-cache.test.ts:1:1
+✖ tests/floor-plan-derived-cache.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/floor-plan-empty-support.test.ts:1:1
+✖ tests/floor-plan-empty-support.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/floor-plan-self-collision.test.ts:1:1
+✖ tests/floor-plan-self-collision.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/food-hiring.test.ts:1:1
+✖ tests/food-hiring.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/freight-access.test.ts:1:1
+✖ tests/freight-access.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/governance.test.ts:1:1
+✖ tests/governance.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/home-rest.test.ts:1:1
+✖ tests/home-rest.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/hygiene-transfer.test.ts:1:1
+✖ tests/hygiene-transfer.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/hygiene.test.ts:1:1
+✖ tests/hygiene.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/integration.test.ts:1:1
+✖ tests/integration.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/interior-lighting.test.ts:1:1
+✖ tests/interior-lighting.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/journey.test.ts:1:1
+✖ tests/journey.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/market-company-return.test.ts:1:1
+✖ tests/market-company-return.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/market-company-rights.test.ts:1:1
+✖ tests/market-company-rights.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/market-shopfront.test.ts:1:1
+✖ tests/market-shopfront.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/meal-route-policy.test.ts:1:1
+✖ tests/meal-route-policy.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/native-day-writer.test.ts:1:1
+✖ tests/native-day-writer.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/native-door-routes.test.ts:1:1
+✖ tests/native-door-routes.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/native-live-reader.test.ts:1:1
+✖ tests/native-live-reader.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/npc-clock.test.ts:1:1
+✖ tests/npc-clock.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/npc-home-rest-voxels.test.ts:1:1
+✖ tests/npc-home-rest-voxels.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/npc-public-rest.test.ts:1:1
+✖ tests/npc-public-rest.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/npc-stair-native-activity.test.ts:1:1
+✖ tests/npc-stair-native-activity.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/npc-stair-native.test.ts:1:1
+✖ tests/npc-stair-native.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/partition-field-order.test.ts:1:1
+✖ tests/partition-field-order.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/persistence.test.ts:1:1
+✖ tests/persistence.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/player-labor.test.ts:1:1
+✖ tests/player-labor.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/police-fulfillment.test.ts:1:1
+✖ tests/police-fulfillment.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/power.test.ts:1:1
+✖ tests/power.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/public-budget-standing.test.ts:1:1
+✖ tests/public-budget-standing.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/public-disinfection.test.ts:1:1
+✖ tests/public-disinfection.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/public-employment-transfer.test.ts:1:1
+✖ tests/public-employment-transfer.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/public-health-hygiene.test.ts:1:1
+✖ tests/public-health-hygiene.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/public-school-arrival.test.ts:1:1
+✖ tests/public-school-arrival.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/reference-collision.test.ts:1:1
+✖ tests/reference-collision.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/rendering-street-life.test.ts:1:1
+✖ tests/rendering-street-life.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/rendering.test.ts:1:1
+✖ tests/rendering.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/research-labor.test.ts:1:1
+✖ tests/research-labor.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/research-offsite-causal.test.ts:1:1
+✖ tests/research-offsite-causal.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/research-task-budget.test.ts:1:1
+✖ tests/research-task-budget.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/resident-formal-education.test.ts:1:1
+✖ tests/resident-formal-education.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/resident-petitions.test.ts:1:1
+✖ tests/resident-petitions.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/retail-period.test.ts:1:1
+✖ tests/retail-period.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/road-capacity.test.ts:1:1
+✖ tests/road-capacity.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/road-demands.test.ts:1:1
+✖ tests/road-demands.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/road-estate.test.ts:1:1
+✖ tests/road-estate.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/road-navigation.test.ts:1:1
+✖ tests/road-navigation.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/road-routing.test.ts:1:1
+✖ tests/road-routing.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/roads-old22.test.ts:1:1
+✖ tests/roads-old22.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/roads.test.ts:1:1
+✖ tests/roads.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/roadwork-replacement.test.ts:1:1
+✖ tests/roadwork-replacement.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/roadworks.test.ts:1:1
+✖ tests/roadworks.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/route-encoding.test.ts:1:1
+✖ tests/route-encoding.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/service-material-scheduling.test.ts:1:1
+✖ tests/service-material-scheduling.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/shop-lifecycle.test.ts:1:1
+✖ tests/shop-lifecycle.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/shop-repeat-distress.test.ts:1:1
+✖ tests/shop-repeat-distress.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/shop-self-funding.test.ts:1:1
+✖ tests/shop-self-funding.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/simulation.test.ts:1:1
+✖ tests/simulation.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/site-fixtures.test.ts:1:1
+✖ tests/site-fixtures.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/stair-continuity.test.ts:1:1
+✖ tests/stair-continuity.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/stair-escape-origin.test.ts:1:1
+✖ tests/stair-escape-origin.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/supplemental-budget.test.ts:1:1
+✖ tests/supplemental-budget.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/trade.test.ts:1:1
+✖ tests/trade.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/tree-crowns.test.ts:1:1
+✖ tests/tree-crowns.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/v4-extensions.test.ts:1:1
+✖ tests/v4-extensions.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/v4-services.test.ts:1:1
+✖ tests/v4-services.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/v4-simulation.test.ts:1:1
+✖ tests/v4-simulation.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-layout.test.ts:1:1
+✖ tests/world-layout.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-v4.test.ts:1:1
+✖ tests/world-v4.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-v5.test.ts:1:1
+✖ tests/world-v5.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-v6-commercial-routes.test.ts:1:1
+✖ tests/world-v6-commercial-routes.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-v6-commercial.test.ts:1:1
+✖ tests/world-v6-commercial.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world-v6-office.test.ts:1:1
+✖ tests/world-v6-office.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'
+
+test at tests/world.test.ts:1:1
+✖ tests/world.test.ts
+  'Promise resolution is still pending but the event loop has already resolved'

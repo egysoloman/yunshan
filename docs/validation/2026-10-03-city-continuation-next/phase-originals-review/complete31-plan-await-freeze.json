@@ -1,0 +1,87 @@
+{
+  "status": "FUTURE31_GROUPS_WAIT_FOR_ALL_PRODUCERS_AND_OWNED_RUNS_ENDED",
+  "groups": [
+    "ROOT06-city-continuation-20261003-01",
+    "civic-resident-intent-3ca77b8-20261003-01",
+    "commercial-v6-3ca-20261003-01",
+    "company-failures-readonly-3ca77b8-20261003-01",
+    "company-family-coupling-readonly-20261004-01",
+    "dynamic-city-readonly-20261004-01",
+    "education-family-fee-20261004",
+    "education-family-fee-fresh-output-20261004-01",
+    "education-legacy-reader-prior-20261004",
+    "education-formal-20261003",
+    "hygiene-baseline-20261003-01",
+    "hygiene-candidate-20261003-01",
+    "hygiene-forged-cap-before-20261003-01",
+    "market-company-rights-20261003-01",
+    "market-company-return-20261004-01",
+    "police-fulfillment-3ca77b8-20261003-01",
+    "roadwork-replacement-20261004-01",
+    "stair-continuity-3ca77b8-20261003-01",
+    "supplemental-budget-20261003-01",
+    "visual-environment-recovery-20261003-01",
+    "world-v5-3ca77b8-20261003-01",
+    "world-v5-file-copy-failure-original-20261003-01",
+    "ROOT07-preflight-20261004-01",
+    "city-map-v6-20261004-01",
+    "root07-browser-delivery-prep-20261004-01",
+    "old-company-regression-20261004-01",
+    "ROOT07-city-continuation-20261004-01",
+    "roadwork-replacement-delivery-20261004-01",
+    "ROOT07-browser-20261004-01",
+    "ROOT07-report-draft-20261004-01",
+    "root07-economy-readonly-observer-20261004-01"
+  ],
+  "excludedNames": [
+    "node_modules",
+    ".git",
+    "__pycache__",
+    ".cache",
+    ".private",
+    "private-library"
+  ],
+  "policy": "All regular actual candidate inputs, driver and as-run snapshots, raw failures, receipts, full saves, unedited PNG and existing original producer archives are included. No symlink traversal, secret helper/provider or upload requests/responses. Future live outputs only archived after owned run is ended, input guard checked, and source/output inventory stable. ROOT05 existing Git original ZIPs preserved separately; no duplicates of repository-wide docs/history/private MZ.",
+  "packAllowed": false,
+  "waitingGroups": [
+    "old-company-regression-20261004-01",
+    "ROOT07-city-continuation-20261004-01",
+    "ROOT07-browser-20261004-01",
+    "ROOT07-report-draft-20261004-01",
+    "root07-economy-readonly-observer-20261004-01"
+  ],
+  "additionalReviewGroupAfterReviewerEnds": "phase-originals-review-20261004-01",
+  "reviewerInputs": [
+    {
+      "file": "package-phase-originals-20261004.py",
+      "bytes": 6839,
+      "sha256": "cdea1f78f270cee32eb5be393d3e74da8a6a1033a482534048eda1a709523666",
+      "originalStillSame": true
+    },
+    {
+      "file": "phase-delivery-plan-20261004.json",
+      "bytes": 1828,
+      "sha256": "4732093e4115278201cb31978a3599bcfa7dca720ab7f145ba1ee316c9cf65f6",
+      "originalStillSame": true
+    },
+    {
+      "file": "phase-delivery-stable-groups-20261004.json",
+      "bytes": 1804,
+      "sha256": "bc7a5fd0c7792ff49b889a87bdc034fa4f911c721f9039bdedd9fafe5cdf6b23",
+      "originalStillSame": true
+    },
+    {
+      "file": "run-phase-v2.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+      "originalStillSame": true
+    }
+  ],
+  "freezeRequirements": [
+    "All owned run receipts ended, input guard preserved, no owned child live",
+    "Each producer explicitly finalizes its mutable source/output namespace",
+    "Before and after full gather SHA stable; failed collector retained but not uploaded",
+    "Decoded archive credential count as well as outer regular-byte count equals zero",
+    "Keep every original path and producer archive; no provenance loss from deduplication"
+  ]
+}

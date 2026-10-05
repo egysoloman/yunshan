@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-05T04:21:22.547609+00:00",
+  "status": "FINAL03_ALL_BYTES_VERIFIED",
+  "zipCount": 13,
+  "rootZip03Payloads": 288,
+  "originalPNGs": 34,
+  "CRCAndEveryPayloadByte": "PASS",
+  "sourceInputFiles": 351,
+  "originalTestsHelpersFixturesByteUnchanged": 207,
+  "credentialShapeFilesChecked": 254,
+  "credentialShapeSuspects": [],
+  "sourceInputGraph": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "matrixSHA256": "1ba0021920a81d171f1d74d7d3d1a8fb9831a32d5e5b38cb2445a5debc7b5f05",
+  "rootZip03": {
+    "file": "artifacts/Yunshan_ROOT17_Integration_Originals_20261005_Final03.zip",
+    "bytes": 38235072,
+    "sha256": "43e54ce60e9fbb6c345937d9c66c06a5288f08e1074cf2ad59733b624a844c79",
+    "origin": "/tmp/ROOT17-delivery-20261005-01/Yunshan_ROOT17_Integration_Originals_20261005_Final03.zip",
+    "zipCRCAndEveryPayloadSHA": "PASS",
+    "scope": "Final root document cut with all34 actual PNGs/checkpoint saves and corrected matrix/source serialization description. Component source/original/model ZIPs separately indexed."
+  },
+  "documentCut": "Final03 immutable; subsequent Library/Git outcomes separate. Earlier ZIP01/02 and producer matrices preserved."
+}

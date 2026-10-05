@@ -1,0 +1,162 @@
+{
+  "label": "v4-finance-health-academy-b2-return-from-upper-void",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -214.00017102255993,
+      "y": 244.4,
+      "z": -466.3658832116138
+    },
+    {
+      "x": -214.07200000000003,
+      "y": 244.4,
+      "z": -466.8
+    }
+  ],
+  "start": {
+    "x": -214.00017102255993,
+    "y": 244.4,
+    "z": -466.3658832116138
+  },
+  "steps": 6,
+  "motorSeconds": 0.09,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.00017102255993,
+        "y": 244.4,
+        "z": -466.3658832116138
+      },
+      "after": {
+        "x": -214.01192434565027,
+        "y": 244.4,
+        "z": -466.43691742447163
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.07200000000000595,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.01192434565027,
+        "y": 244.4,
+        "z": -466.43691742447163
+      },
+      "after": {
+        "x": -214.02367766874062,
+        "y": 244.4,
+        "z": -466.5079516373295
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.07200000000000595,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.02367766874062,
+        "y": 244.4,
+        "z": -466.5079516373295
+      },
+      "after": {
+        "x": -214.03543099183094,
+        "y": 244.4,
+        "z": -466.57898585018734
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.0720000000000013,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.03543099183094,
+        "y": 244.4,
+        "z": -466.57898585018734
+      },
+      "after": {
+        "x": -214.04718431492128,
+        "y": 244.4,
+        "z": -466.6500200630452
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.07200000000000595,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.04718431492128,
+        "y": 244.4,
+        "z": -466.6500200630452
+      },
+      "after": {
+        "x": -214.0589376380116,
+        "y": 244.4,
+        "z": -466.72105427590304
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.0720000000000013,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -214.0589376380116,
+        "y": 244.4,
+        "z": -466.72105427590304
+      },
+      "after": {
+        "x": -214.07069096110195,
+        "y": 244.4,
+        "z": -466.7920884887609
+      },
+      "floor": 1,
+      "inside": "academy-b2",
+      "metres": 0.07200000000000595,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 160686.1000000015,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 160714.29999999702,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -214.07069096110195,
+    "y": 244.4,
+    "z": -466.7920884887609
+  },
+  "floor": 1,
+  "inside": "academy-b2",
+  "protectedStateUnchanged": true
+}

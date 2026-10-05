@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-04T16:49:14.339805+00:00",
+  "status": "FAIL_INPUT_MAPPING_ASSUMPTION",
+  "actualToolExitCode": 1,
+  "actualAssertion": "scopes/codec01/source-overlay/src/simulation.ts",
+  "sourceArchiveAll307MembersMatched": true,
+  "failedAssumption": "Every evidence tar member is a same-relative-path producer file. Overlay members are virtual package paths and must map to their retained source-as-run graph.",
+  "originalTarOrClosedProviderModified": false,
+  "rawTrace": "Traceback: AssertionError: scopes/codec01/source-overlay/src/simulation.ts",
+  "scriptOriginallyExecuted": "inline Python in tool transcript; not a pre-run script file",
+  "correctedVerification": "NOT_RUN"
+}

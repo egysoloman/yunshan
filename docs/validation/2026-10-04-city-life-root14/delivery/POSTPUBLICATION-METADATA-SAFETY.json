@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "at": "2026-10-04T17:53:37.701192+00:00",
+  "scope": "every regular source freshly SHA-read; identical byte content reuses complete literal scan; recursive gzip/zip recognized by magic; no semantic or antivirus claim",
+  "patternKinds": [
+    "tripo-secret-shape",
+    "github-personal-token-shape",
+    "github-classic-token-shape",
+    "aws-access-key-shape",
+    "openai-secret-shape",
+    "bearer-literal-shape",
+    "private-key-block",
+    "credential-json-literal",
+    "signed-or-tokenized-url"
+  ],
+  "statistics": {
+    "regularFilesCoveredWithFreshSHA256": 12,
+    "uniqueRegularContentsScanned": 12,
+    "regularContentReuseCount": 0,
+    "uniqueByteContentsScannedIncludingNested": 12,
+    "nestedContentReuseCount": 0,
+    "gzipContainersExpanded": 0,
+    "zipContainersExpanded": 0,
+    "expandedZipMembersCovered": 0,
+    "scannedBytes": 532075
+  },
+  "findingCount": 0,
+  "findings": [],
+  "sensitiveValuesPrinted": false,
+  "originalFilesModified": false,
+  "metadataOnlyChangedAfterImplementationCommit": true,
+  "fileNames": [
+    "docs/validation/2026-10-04-city-life-root14/REPORT.md",
+    "docs/validation/2026-10-04-city-life-root14/delivery/FINAL-REPORT-DERIVATION.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/GIT-BLOB-VERIFICATION.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/INDEX-GUARD-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-DELIVERY-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-FINAL-READBACK.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-MEMO-ORIGINAL-VERIFICATION.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-MEMO-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/LIBRARY-REPORT-RECEIPT.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/MEMO-PUBLICATION-ENTRY.json",
+    "docs/validation/2026-10-04-city-life-root14/delivery/PUBLICATION-RECEIPT.json",
+    "开发备忘录.md"
+  ],
+  "originalSourceGraphUnchanged": true
+}

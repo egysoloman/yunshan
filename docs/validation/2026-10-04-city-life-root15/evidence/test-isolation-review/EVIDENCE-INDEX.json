@@ -1,0 +1,1945 @@
+{
+  "kind": "ROOT15 npm-test process-isolation static review evidence index",
+  "createdUtc": "2026-10-04T20:59:53.445370+00:00",
+  "reviewRoot": "/workspace/yunshan-work/ROOT15-test-isolation-review-20261004-01",
+  "scope": {
+    "testFiles": 117,
+    "testSideHelperFiles": 14,
+    "staticParsedModules": 131,
+    "testsExecuted": 0,
+    "worldFactoryCalls": 0,
+    "simulationConstructed": 0,
+    "stepCalls": 0,
+    "gpuRuns": 0,
+    "builds": 0,
+    "originalFrozenGraph": "7e3e32e4e01d99da59954950caaea87d4c2ed9c8a6a43e0437d8d295fbc64989",
+    "sharedObservationGraph": "b5b126b81c81726c85e6c6d7ac1ff486c2ede464aa5deb2825ba405ff861eff3",
+    "sharedObservationOnlyChangedInput": "package.json",
+    "sharedObservationIsNotParentNewFreezeOrRunReceipt": true,
+    "originalFullRulesRawSha256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a",
+    "oldReportsRemainSealed": true,
+    "newFullSuiteOutcomeNotClaimed": true,
+    "environmentValuesRead": false,
+    "credentialsRead": false,
+    "sharedWrites": false
+  },
+  "fileCount": 383,
+  "totalBytes": 7725793,
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 7689,
+      "sha256": "434a2940fca9688f82d00d33401fad19d8bbca7c8908b0365cf76ff754b31fb3"
+    },
+    {
+      "path": "cross-file/EVIDENCE-INDEX.json",
+      "bytes": 66957,
+      "sha256": "7505a1a45e013661ab4c359c757094c2a14cb45e442cd1c96378bfc8818aebb2"
+    },
+    {
+      "path": "cross-file/FINAL-INPUTS-318.json",
+      "bytes": 34762,
+      "sha256": "f40b076bc8f1b0ecc28f999c8368d6e15bee928a854d1abbd997e78cea362aa1"
+    },
+    {
+      "path": "cross-file/FREEZE-RECEIPT.json",
+      "bytes": 840,
+      "sha256": "bffed72dce275da339e9470bc02ceec30eddae9ed60f59f2e5d6dc10c80e0945"
+    },
+    {
+      "path": "cross-file/REPORT.md",
+      "bytes": 6284,
+      "sha256": "6a93f0bfec978eb7c4598985d8102dadf3ddaf817a526c3468fab0d956366e08"
+    },
+    {
+      "path": "cross-file/artifact-child/EVIDENCE-INDEX.json",
+      "bytes": 39373,
+      "sha256": "0fd7358b29bcdc1cd31825a809cc494753c389ce710c1d2cea1e5d37bae3af1e"
+    },
+    {
+      "path": "cross-file/artifact-child/REPORT.md",
+      "bytes": 6732,
+      "sha256": "50e0e5d0750ae656edc0de75709153d37da7e8ea150e641e26ea7ba130d5bf2a"
+    },
+    {
+      "path": "cross-file/artifact-child/filesystem-hits.json",
+      "bytes": 49107,
+      "sha256": "845b4d7004c1909f66179ef3b1e2e9ccb46f78ba4419be3ea7047a7a2aace977"
+    },
+    {
+      "path": "cross-file/artifact-child/filesystem-hits.txt",
+      "bytes": 38220,
+      "sha256": "582dbac27c274c67c1b43b53b523715228f7ca759d5643f9c7d3ca99b07cff97"
+    },
+    {
+      "path": "cross-file/artifact-child/finalize-evidence.py",
+      "bytes": 2483,
+      "sha256": "07d82c3e181fe25543bf17146af2d2ce3183e7a4add897f1cb173fce1a26e157"
+    },
+    {
+      "path": "cross-file/artifact-child/import-closure.json",
+      "bytes": 181653,
+      "sha256": "1082f1fcedb35459203c40cfa615f89e2d0135fa63a143be42d09c218b380c49"
+    },
+    {
+      "path": "cross-file/artifact-child/input-copy-manifest.json",
+      "bytes": 60085,
+      "sha256": "d8925fc8a731af273f1c08a5ea379249d7a9c0b24c5d7bf960b9c80e7a950161"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/adapters/rpg-maker/bridge.test.ts",
+      "bytes": 20342,
+      "sha256": "08e8f1300930f5ec988312b59404c56d0e7b871ea846dfce3bc63d5ed29bcef0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/adapters/rpg-maker/bridge.ts",
+      "bytes": 15833,
+      "sha256": "3e6bae1f73509014660c4d7edb593c954fa7d46ea8e79b60ec9ffe148b2d1ff8"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/adapters/rpg-maker/headless-walker.ts",
+      "bytes": 18809,
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/adapters/rpg-maker/walker.test.ts",
+      "bytes": 24008,
+      "sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/scripts/economy-observations.ts",
+      "bytes": 7652,
+      "sha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/architecture-floor-plan.ts",
+      "bytes": 54125,
+      "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/host/upgrade-city-ruleset.ts",
+      "bytes": 2808,
+      "sha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/host/upgrade-civic-history-format.ts",
+      "bytes": 3204,
+      "sha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/host/upgrade-meal-route.ts",
+      "bytes": 1946,
+      "sha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/host/upgrade-reference-collision.ts",
+      "bytes": 2042,
+      "sha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/host/upgrade-service-material-scheduling.ts",
+      "bytes": 2192,
+      "sha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/market-station-apron.ts",
+      "bytes": 5802,
+      "sha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/persistence/partition.ts",
+      "bytes": 21142,
+      "sha256": "fe1b6cfe12ff5edc543d6d3303de5d32545da4c7fac3ce47512584a3c3ea2eea"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/persistence/save-resource.ts",
+      "bytes": 1490,
+      "sha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/persistence/world-layout.ts",
+      "bytes": 6146,
+      "sha256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/product-city.ts",
+      "bytes": 2378,
+      "sha256": "b2c78e24aba7845596b19b5c2e6d00e20d276c62ea87102ff37bad302931b1d7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/renderer.ts",
+      "bytes": 95684,
+      "sha256": "6a595c58c77a37ad846f3e14d8ae705c3cbc7d005072dda19b9428d8170121d6"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/architectural-finishes.ts",
+      "bytes": 8297,
+      "sha256": "db3f10878d07e01b61507031efcbdba47e8778b26c25aad37f171dc2974c53fe"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/architecture-bodies.ts",
+      "bytes": 13506,
+      "sha256": "76d43ef3935a372a5d6e6df5550011fdf45638a6b87db291ed817384a89922cd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/architecture-detail.ts",
+      "bytes": 41206,
+      "sha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/interior-lighting.ts",
+      "bytes": 5980,
+      "sha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/market-goods.ts",
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/market-shopfront.ts",
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/activity-capacity.ts",
+      "bytes": 5135,
+      "sha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/banking.ts",
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/budget-authority.ts",
+      "bytes": 23599,
+      "sha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/city-ruleset.ts",
+      "bytes": 12163,
+      "sha256": "4fe1727a04ec167f1fe7044b067fa5678d6a6030ecb68dd8ccf7867090452049"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/civic-history.ts",
+      "bytes": 32374,
+      "sha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/civic-staffing.ts",
+      "bytes": 74161,
+      "sha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/culture.ts",
+      "bytes": 67717,
+      "sha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/education.ts",
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/extensions.ts",
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/family.ts",
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/freight-access.ts",
+      "bytes": 4567,
+      "sha256": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/hygiene-transfer.ts",
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/hygiene.ts",
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/meal-route.ts",
+      "bytes": 1391,
+      "sha256": "03f42f53bc1a50b4ba164623537b9658c655285a1cfde3781ecbb00facb6b314"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/npc-stair-motion.ts",
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/public-employment.ts",
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/reference-collision.ts",
+      "bytes": 1062,
+      "sha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/service-material-scheduling.ts",
+      "bytes": 6889,
+      "sha256": "2b874514406c89bcfa80d7206eb321f3e0a3e72cea5196e865b84fd35c0d868f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/shop_lifecycle.ts",
+      "bytes": 70854,
+      "sha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/supplemental-budget.ts",
+      "bytes": 21826,
+      "sha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/simulation.ts",
+      "bytes": 296089,
+      "sha256": "6fde8f6382c61ff37531d26e72ff7c25d5d4a728093e54ea326b6f6538f2bfa9"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/types.ts",
+      "bytes": 15086,
+      "sha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/src/world.ts",
+      "bytes": 54827,
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/appointment-funds.test.ts",
+      "bytes": 12237,
+      "sha256": "0adfe5c71e3a10782e72d76e783ecb45b6721c2a68dfcd168a6f75a7241973fc"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/architecture-wall-finish.test.ts",
+      "bytes": 8037,
+      "sha256": "c79de8740057ff13f9ed2947c2bc110e1a81ac7ae9a718ae1a8dcb1e8abd7fc2"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/banking.test.ts",
+      "bytes": 21022,
+      "sha256": "46ad59024417534be4e2062ac58aef3d7c8cae77155bd1356b758bd72231d4dd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/budget-authority-contract.test.ts",
+      "bytes": 6462,
+      "sha256": "a502a78421ea416cdb6269c9ce374707d3a04c7a05870daab111256fa7a89e42"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/budget-authority-hash.test.ts",
+      "bytes": 2229,
+      "sha256": "4ed378aa546751038d6d617c3510111ef9e1cadc406fc2a00423f040b6ff207a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/budget-authority-source.test.ts",
+      "bytes": 6753,
+      "sha256": "f89b7a2e0e63c227306de3470d96602bf1171740919b35179bc70883150d4919"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/city-life-product.test.ts",
+      "bytes": 2717,
+      "sha256": "9e8cceaac2c65c7dcc8a28148ad496ac7ef87c97de22bec84b328ad8cf4f22b7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/city-ruleset.test.ts",
+      "bytes": 16147,
+      "sha256": "4dd577f55a598bbeab22f25764acadf196c17b4c2d8a0a13d35c09e1e1244ad5"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-history-codec.test.ts",
+      "bytes": 4848,
+      "sha256": "738e0364919ac8cffd8fb3f66f7d8e0e0691cb0c785c31c8299a0d34d05cdd6c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-history-contract.test.ts",
+      "bytes": 13337,
+      "sha256": "ef38ec359dd1c7aa8ddf395abb15e20f1f7eb4c9fc4e6dbf15773537c147ca7c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-history-paid-source.test.ts",
+      "bytes": 7609,
+      "sha256": "e11dcae7ed50af1fa3cf70ad22c583f4f69cca15160305bc3c9c813179380fce"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-staffing-fixture.ts",
+      "bytes": 6347,
+      "sha256": "f072f6e97645abf4423d50dab4b4891b4a2de41b51fb23b7a8815eca24ebb6fd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-staffing-two-terms.test.ts",
+      "bytes": 4586,
+      "sha256": "2182fefe3265ed11eb6bb876d92fefccb7f03b9e4adcbb4a233fb69a13242d16"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/civic-staffing.test.ts",
+      "bytes": 14623,
+      "sha256": "f2b441073c37eb6798dd45d3179edf6e4e20955995f7a993e197765f7fa6e420"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-contract.test.ts",
+      "bytes": 9351,
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-doctor.test.ts",
+      "bytes": 2806,
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-fixture.ts",
+      "bytes": 8448,
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-front-contract.test.ts",
+      "bytes": 643,
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-patient.test.ts",
+      "bytes": 2962,
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-arrival-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "sha256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "sha256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "sha256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/clinical.test.ts",
+      "bytes": 30100,
+      "sha256": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "sha256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/economy-observations.test.ts",
+      "bytes": 6786,
+      "sha256": "d2dcadb6509ad13192d49895c2409dc0776d2682ccd7bb4519d43730c3283df0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/economy.test.ts",
+      "bytes": 51687,
+      "sha256": "10028da30ea2cb54f0ea5ffba7490d7849235469ec1b1a1616387cf8318877f2"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/education-boundary.test.ts",
+      "bytes": 25936,
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/education-course.test.ts",
+      "bytes": 37708,
+      "sha256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/education-fixture.ts",
+      "bytes": 18591,
+      "sha256": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/education-legacy-regression.test.ts",
+      "bytes": 4572,
+      "sha256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/education-saved-time.test.ts",
+      "bytes": 9383,
+      "sha256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/extensions.test.ts",
+      "bytes": 108044,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/family-fee-education-fixture.ts",
+      "bytes": 12332,
+      "sha256": "9fd74ef3ece793d6f9e42b82eff44848b3a2b29eef2095e5eb3073d22aeeb6b4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/family-fee-education.test.ts",
+      "bytes": 39537,
+      "sha256": "1579243d5dd7691f905142454ec9bd8bd3fa19d19bbf61ed74263db3563851e0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/family-fee-legacy-qualification.test.ts",
+      "bytes": 6956,
+      "sha256": "1efe71ae0c959e120b4635104fe6b760c62ccb4b4ab9261a797aa637044be179"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/family.test.ts",
+      "bytes": 50830,
+      "sha256": "6abb29d7454e36933781c9052bdacf2d0b19a1f3c23bed32435d82ded3f7590e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/farm-stock-buffer.test.ts",
+      "bytes": 11641,
+      "sha256": "3c66a1131dceb418b42a8234bda8dcbc821154cbb09dbcfd746ac88b4461ac42"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/fixtures/budget-authority/original-authorizer.ts",
+      "bytes": 3254,
+      "sha256": "fb2123e81aaac21232fbe4acdf35c2073a2b2d4607be6d68f445b95ef8cac9b1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/fixtures/research-city.ts",
+      "bytes": 6833,
+      "sha256": "1abfa5ee6e7c1665cf79d974991c0ad7fba0ca1c4f7a9e8def5d070202f6ed1c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/floor-plan-empty-support.test.ts",
+      "bytes": 4848,
+      "sha256": "73014d9041182bffbedd094db03a9713db3a8a6818a36e0a1907a4492448ecc8"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/floor-plan-self-collision.test.ts",
+      "bytes": 8493,
+      "sha256": "77b10ed923354af7d57a9ae5c89670345e162893741bedf3dfdaa9400c31a3f1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/food-hiring-fixture.ts",
+      "bytes": 8276,
+      "sha256": "d84727664580caa90d40835890c123ed624a46f3033d66ddc41e07fa984b45ac"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/food-hiring.test.ts",
+      "bytes": 20295,
+      "sha256": "2222298dc0a03954ba082038ebedb2b93e672037b9be31c943e1d97c524bf95a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/freight-access.test.ts",
+      "bytes": 11999,
+      "sha256": "57a9e68536352d3a2ebedfb8a9c544fc5c31996c9f48027b216ed51378c7df4d"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/governance-fixture.ts",
+      "bytes": 754,
+      "sha256": "eb36fbcfdecedc02614417826a67a50053bc91eea994fe75023cfe8e58080463"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/governance.test.ts",
+      "bytes": 10904,
+      "sha256": "1c5543453c11561e32d5af7bdbeacf1ad676b64abf7ddc736ebd8e412a3c006a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/hygiene-transfer.test.ts",
+      "bytes": 24931,
+      "sha256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/interior-lighting.test.ts",
+      "bytes": 6728,
+      "sha256": "87515bf8087044e3149ce3a71167baf2577e9b34aba753ab3c15e95e9bb255de"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/market-company-return.test.ts",
+      "bytes": 18387,
+      "sha256": "8bf389b17e1c4642af483ff1d5417d7c7b33d328d808baa048aa0531e4f9bd22"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/market-company-rights.test.ts",
+      "bytes": 20501,
+      "sha256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/market-shopfront.test.ts",
+      "bytes": 13469,
+      "sha256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/meal-route-policy.test.ts",
+      "bytes": 3482,
+      "sha256": "7990743b4b39eaf24021a4dd2e172a0ec01483687fbf1ab054ad30c88dee3973"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/native-day-writer.test.ts",
+      "bytes": 11597,
+      "sha256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/native-door-routes.test.ts",
+      "bytes": 10208,
+      "sha256": "d3e5fbdb0559d067286580fe0f54db1f3f3746ad33c2c89fb787800f514610dd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/native-live-reader.test.ts",
+      "bytes": 11917,
+      "sha256": "02a7a1262510dc8974f84f0f1fdcd2a98ad6de03a0beda51d8cf2d3fd4586f9f"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/npc-public-rest.test.ts",
+      "bytes": 9310,
+      "sha256": "0f2d1e4d86a479846cd9b759ec8b48af1315b491556255a255d083197167a516"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/npc-stair-native-activity.test.ts",
+      "bytes": 13379,
+      "sha256": "6cd649e1f8c23ba52b5e4e134eeee4f952ef6b3fa86c2796df2d24e5121c42a1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/npc-stair-native.test.ts",
+      "bytes": 11171,
+      "sha256": "596f1bda23e0c39bf0bba0383b400770e3463dab75c01708a4b9c231a7adbe7b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/partition-field-order.test.ts",
+      "bytes": 2183,
+      "sha256": "36d40e1dc6a363396adc43c55b5b39a07183d97b8d679558ce4d5c8c88f04b95"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/police-fulfillment.test.ts",
+      "bytes": 27808,
+      "sha256": "8c4ccae0bccca5359f447756cfc3b5e0ac2d34929b50fb1d104ddc09b9db91f3"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-budget-standing.test.ts",
+      "bytes": 16239,
+      "sha256": "ff8345699ced1312449d58e2b836369f10ad772c2f16d4928e0c3b76a60ddf73"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-disinfection.test.ts",
+      "bytes": 24791,
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-employment-fixture.ts",
+      "bytes": 8522,
+      "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-employment-transfer.test.ts",
+      "bytes": 12892,
+      "sha256": "4c2480a07eda774cd798d42e17f127bbe96fbe1715344b8d5540b6d907e551a1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-health-hygiene.test.ts",
+      "bytes": 21032,
+      "sha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/public-school-arrival.test.ts",
+      "bytes": 9536,
+      "sha256": "82c24b4996c797696db7608bce02870e194adaae1d955fc3beebf8644f1eb95c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/reference-collision.test.ts",
+      "bytes": 5866,
+      "sha256": "f24e71e31533e52e2d7b7b1286ee1e760692cf40979efc13aa68dd451211413b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/rendering-street-life.test.ts",
+      "bytes": 10853,
+      "sha256": "3c506ae34ebec8aa11485f0ff3f2edd4aa3225a892279d8f588f4d417621265d"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/research-labor.test.ts",
+      "bytes": 21683,
+      "sha256": "f26b7a4624f0fb110959c0f5609927dab5fedd383ecc94da87f483f75f9a69da"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/research-offsite-causal.test.ts",
+      "bytes": 2595,
+      "sha256": "2a0249874330e2bafde7aef5339b0e23ed3fef8a2ed2548517fdabf2ad8df9fc"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/research-task-budget.test.ts",
+      "bytes": 9543,
+      "sha256": "41efa257baaa5ad72cc0c82cb935ea48c78c7ae934237e54e2f810ff14b8518c"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/resident-formal-education.test.ts",
+      "bytes": 34493,
+      "sha256": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/resident-formal-fixture.ts",
+      "bytes": 3171,
+      "sha256": "b4b76fd2e3c75d1d22baea5e4a3b82e1885adfdcda21e5d9adcf2dccdd6c68b0"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/resident-petitions.test.ts",
+      "bytes": 12798,
+      "sha256": "56fa27ad2dcfb26845fe014618c5a8c8ec3ef9d8c35f8317d0d07abde68fef8e"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/road-capacity.test.ts",
+      "bytes": 6396,
+      "sha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/road-demands.test.ts",
+      "bytes": 15281,
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/road-estate.test.ts",
+      "bytes": 5344,
+      "sha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/road-navigation.test.ts",
+      "bytes": 14556,
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/road-routing.test.ts",
+      "bytes": 28802,
+      "sha256": "41e84afeec4e02d8f078327da6df1cb8a399929be360c824e43509cac872c232"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/roads-old22.test.ts",
+      "bytes": 1237,
+      "sha256": "3194671218396291fd21f0f463dc048eb511a18aa141cb6bf3e87b4fea2fe1a4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/roads.test.ts",
+      "bytes": 18457,
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/roadwork-replacement.test.ts",
+      "bytes": 23253,
+      "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/roadworks-fixture.ts",
+      "bytes": 9543,
+      "sha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/roadworks.test.ts",
+      "bytes": 20738,
+      "sha256": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/service-material-scheduling.test.ts",
+      "bytes": 16195,
+      "sha256": "4529fdc41ac71e65e9e3bed6e361aee6d7b526634634b0278287460dc8a930de"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/shop-repeat-distress.test.ts",
+      "bytes": 41647,
+      "sha256": "61fc3ccd19ce5ba8e46b12c0e70e346299cc3b4149834956ae468a9c4ca8b840"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/shop-self-funding.test.ts",
+      "bytes": 18454,
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/simulation.test.ts",
+      "bytes": 66862,
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/site-fixtures.test.ts",
+      "bytes": 10119,
+      "sha256": "c1dde7e3d7c1286d07eeac4f7492ca48ed7852acc266708dd55045746cf0f5be"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/stair-continuity.test.ts",
+      "bytes": 10300,
+      "sha256": "3136a1cecc48b81dd0368f5e81935790455fa362ba9b4ff50ccb077dd7643a44"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/stair-escape-origin.test.ts",
+      "bytes": 18644,
+      "sha256": "b9db5baa19c7edd4b4945ecfd0110973fd2c7f9032ccadc97846c31243c4b2ec"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/supplemental-budget.test.ts",
+      "bytes": 17170,
+      "sha256": "9ce07e587e7f02fe89ca8a31f6ef191b4d5644ddf38cd62970e1f39d0d09ceea"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/trade.test.ts",
+      "bytes": 46212,
+      "sha256": "5f06ffdd905af5a8b698a0e9a3165a153e65467ef7d51e459a93df3f8e47146b"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/tree-crowns.test.ts",
+      "bytes": 2175,
+      "sha256": "4af33874de1d8df12cd4e4a3d8593a0988d30afd6683e72a2bfa5121d4f0f6f1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/v4-extensions.test.ts",
+      "bytes": 16985,
+      "sha256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/v4-simulation.test.ts",
+      "bytes": 16108,
+      "sha256": "b7088b4ad34c9452dafc9736ac0e018092f22006eb26aba20e37ff80fc79e059"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "8bd848ddfd1866d03078a311f1de3a34df671146a1fccf3241cb53b30f179e67"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-v4.test.ts",
+      "bytes": 15373,
+      "sha256": "d7e54d399322213b1a2fd429b8f27f42fcff114679ad1dc631a4b7ff704dfbe7"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-v5.test.ts",
+      "bytes": 4455,
+      "sha256": "af70461ff3dc804138ed8fa70fda78bce90d39d302acbf1fbab431aa683f5d61"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-v6-commercial-routes.test.ts",
+      "bytes": 9788,
+      "sha256": "eccd0446f775759b8f1a733134abec59894013ad2fb50b13e356f759b29c4dae"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-v6-commercial.test.ts",
+      "bytes": 11801,
+      "sha256": "ceb9706bd82a041c7542bf91e27f4b51f975af9c22e3e7243659be9a855c72b1"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world-v6-office.test.ts",
+      "bytes": 4345,
+      "sha256": "c53b821fb1d74eaaaff69c2c0a443ca6ec904988948470b5366e928e71c59a82"
+    },
+    {
+      "path": "cross-file/artifact-child/inputs-as-read/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6"
+    },
+    {
+      "path": "cross-file/artifact-child/read-inputs-and-optional-config.json",
+      "bytes": 30291,
+      "sha256": "79871d592792b3f76fca0617874ee3e397be475544d563457d3d10ae09be74e2"
+    },
+    {
+      "path": "cross-file/artifact-child/static-scan.py",
+      "bytes": 2751,
+      "sha256": "e47327b74319f3c4be0ed86ed577e47ecf27ee186dc4dbb13c98446016e0ff95"
+    },
+    {
+      "path": "cross-file/inputs/package.json",
+      "bytes": 855,
+      "sha256": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03"
+    },
+    {
+      "path": "cross-file/inputs/tests/access.test.ts",
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5"
+    },
+    {
+      "path": "cross-file/inputs/tests/appointment-funds.test.ts",
+      "bytes": 12237,
+      "sha256": "0adfe5c71e3a10782e72d76e783ecb45b6721c2a68dfcd168a6f75a7241973fc"
+    },
+    {
+      "path": "cross-file/inputs/tests/architecture-bodies.test.ts",
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d"
+    },
+    {
+      "path": "cross-file/inputs/tests/architecture-detail-v4.test.ts",
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c"
+    },
+    {
+      "path": "cross-file/inputs/tests/architecture-detail.test.ts",
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a"
+    },
+    {
+      "path": "cross-file/inputs/tests/architecture-floor-plan.test.ts",
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6"
+    },
+    {
+      "path": "cross-file/inputs/tests/architecture-wall-finish.test.ts",
+      "bytes": 8037,
+      "sha256": "c79de8740057ff13f9ed2947c2bc110e1a81ac7ae9a718ae1a8dcb1e8abd7fc2"
+    },
+    {
+      "path": "cross-file/inputs/tests/aviation.test.ts",
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b"
+    },
+    {
+      "path": "cross-file/inputs/tests/banking.test.ts",
+      "bytes": 21022,
+      "sha256": "46ad59024417534be4e2062ac58aef3d7c8cae77155bd1356b758bd72231d4dd"
+    },
+    {
+      "path": "cross-file/inputs/tests/budget-authority-contract.test.ts",
+      "bytes": 6462,
+      "sha256": "a502a78421ea416cdb6269c9ce374707d3a04c7a05870daab111256fa7a89e42"
+    },
+    {
+      "path": "cross-file/inputs/tests/budget-authority-hash.test.ts",
+      "bytes": 2229,
+      "sha256": "4ed378aa546751038d6d617c3510111ef9e1cadc406fc2a00423f040b6ff207a"
+    },
+    {
+      "path": "cross-file/inputs/tests/budget-authority-source.test.ts",
+      "bytes": 6753,
+      "sha256": "f89b7a2e0e63c227306de3470d96602bf1171740919b35179bc70883150d4919"
+    },
+    {
+      "path": "cross-file/inputs/tests/chunk-residency.test.ts",
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0"
+    },
+    {
+      "path": "cross-file/inputs/tests/citizen-appearance.test.ts",
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68"
+    },
+    {
+      "path": "cross-file/inputs/tests/city-life-product.test.ts",
+      "bytes": 2717,
+      "sha256": "9e8cceaac2c65c7dcc8a28148ad496ac7ef87c97de22bec84b328ad8cf4f22b7"
+    },
+    {
+      "path": "cross-file/inputs/tests/city-ruleset.test.ts",
+      "bytes": 16147,
+      "sha256": "4dd577f55a598bbeab22f25764acadf196c17b4c2d8a0a13d35c09e1e1244ad5"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-history-codec.test.ts",
+      "bytes": 4848,
+      "sha256": "738e0364919ac8cffd8fb3f66f7d8e0e0691cb0c785c31c8299a0d34d05cdd6c"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-history-contract.test.ts",
+      "bytes": 13337,
+      "sha256": "ef38ec359dd1c7aa8ddf395abb15e20f1f7eb4c9fc4e6dbf15773537c147ca7c"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-history-paid-source.test.ts",
+      "bytes": 7609,
+      "sha256": "e11dcae7ed50af1fa3cf70ad22c583f4f69cca15160305bc3c9c813179380fce"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-staffing-fixture.ts",
+      "bytes": 6347,
+      "sha256": "f072f6e97645abf4423d50dab4b4891b4a2de41b51fb23b7a8815eca24ebb6fd"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-staffing-two-terms.test.ts",
+      "bytes": 4586,
+      "sha256": "2182fefe3265ed11eb6bb876d92fefccb7f03b9e4adcbb4a233fb69a13242d16"
+    },
+    {
+      "path": "cross-file/inputs/tests/civic-staffing.test.ts",
+      "bytes": 14623,
+      "sha256": "f2b441073c37eb6798dd45d3179edf6e4e20955995f7a993e197765f7fa6e420"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-contract.test.ts",
+      "bytes": 9351,
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-doctor.test.ts",
+      "bytes": 2806,
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-fixture.ts",
+      "bytes": 8448,
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-front-contract.test.ts",
+      "bytes": 643,
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-patient.test.ts",
+      "bytes": 2962,
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-arrival-window-contract.ts",
+      "bytes": 317,
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-presence-contract.test.ts",
+      "bytes": 13936,
+      "sha256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-presence-fixture.ts",
+      "bytes": 11041,
+      "sha256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical-presence-regression.test.ts",
+      "bytes": 8248,
+      "sha256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717"
+    },
+    {
+      "path": "cross-file/inputs/tests/clinical.test.ts",
+      "bytes": 30100,
+      "sha256": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc"
+    },
+    {
+      "path": "cross-file/inputs/tests/controller-input-time.test.ts",
+      "bytes": 15536,
+      "sha256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f"
+    },
+    {
+      "path": "cross-file/inputs/tests/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    {
+      "path": "cross-file/inputs/tests/controller.test.ts",
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45"
+    },
+    {
+      "path": "cross-file/inputs/tests/culture.test.ts",
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3"
+    },
+    {
+      "path": "cross-file/inputs/tests/economy-observations.test.ts",
+      "bytes": 6786,
+      "sha256": "d2dcadb6509ad13192d49895c2409dc0776d2682ccd7bb4519d43730c3283df0"
+    },
+    {
+      "path": "cross-file/inputs/tests/economy.test.ts",
+      "bytes": 51687,
+      "sha256": "10028da30ea2cb54f0ea5ffba7490d7849235469ec1b1a1616387cf8318877f2"
+    },
+    {
+      "path": "cross-file/inputs/tests/education-boundary.test.ts",
+      "bytes": 25936,
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd"
+    },
+    {
+      "path": "cross-file/inputs/tests/education-course.test.ts",
+      "bytes": 37708,
+      "sha256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967"
+    },
+    {
+      "path": "cross-file/inputs/tests/education-fixture.ts",
+      "bytes": 18591,
+      "sha256": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a"
+    },
+    {
+      "path": "cross-file/inputs/tests/education-legacy-regression.test.ts",
+      "bytes": 4572,
+      "sha256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3"
+    },
+    {
+      "path": "cross-file/inputs/tests/education-saved-time.test.ts",
+      "bytes": 9383,
+      "sha256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e"
+    },
+    {
+      "path": "cross-file/inputs/tests/extensions.test.ts",
+      "bytes": 108044,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "cross-file/inputs/tests/family-fee-education-fixture.ts",
+      "bytes": 12332,
+      "sha256": "9fd74ef3ece793d6f9e42b82eff44848b3a2b29eef2095e5eb3073d22aeeb6b4"
+    },
+    {
+      "path": "cross-file/inputs/tests/family-fee-education.test.ts",
+      "bytes": 39537,
+      "sha256": "1579243d5dd7691f905142454ec9bd8bd3fa19d19bbf61ed74263db3563851e0"
+    },
+    {
+      "path": "cross-file/inputs/tests/family-fee-legacy-qualification.test.ts",
+      "bytes": 6956,
+      "sha256": "1efe71ae0c959e120b4635104fe6b760c62ccb4b4ab9261a797aa637044be179"
+    },
+    {
+      "path": "cross-file/inputs/tests/family.test.ts",
+      "bytes": 50830,
+      "sha256": "6abb29d7454e36933781c9052bdacf2d0b19a1f3c23bed32435d82ded3f7590e"
+    },
+    {
+      "path": "cross-file/inputs/tests/farm-stock-buffer.test.ts",
+      "bytes": 11641,
+      "sha256": "3c66a1131dceb418b42a8234bda8dcbc821154cbb09dbcfd746ac88b4461ac42"
+    },
+    {
+      "path": "cross-file/inputs/tests/fixtures/budget-authority/original-authorizer.ts",
+      "bytes": 3254,
+      "sha256": "fb2123e81aaac21232fbe4acdf35c2073a2b2d4607be6d68f445b95ef8cac9b1"
+    },
+    {
+      "path": "cross-file/inputs/tests/fixtures/research-city.ts",
+      "bytes": 6833,
+      "sha256": "1abfa5ee6e7c1665cf79d974991c0ad7fba0ca1c4f7a9e8def5d070202f6ed1c"
+    },
+    {
+      "path": "cross-file/inputs/tests/floor-plan-derived-cache.test.ts",
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963"
+    },
+    {
+      "path": "cross-file/inputs/tests/floor-plan-empty-support.test.ts",
+      "bytes": 4848,
+      "sha256": "73014d9041182bffbedd094db03a9713db3a8a6818a36e0a1907a4492448ecc8"
+    },
+    {
+      "path": "cross-file/inputs/tests/floor-plan-self-collision.test.ts",
+      "bytes": 8493,
+      "sha256": "77b10ed923354af7d57a9ae5c89670345e162893741bedf3dfdaa9400c31a3f1"
+    },
+    {
+      "path": "cross-file/inputs/tests/food-hiring-fixture.ts",
+      "bytes": 8276,
+      "sha256": "d84727664580caa90d40835890c123ed624a46f3033d66ddc41e07fa984b45ac"
+    },
+    {
+      "path": "cross-file/inputs/tests/food-hiring.test.ts",
+      "bytes": 20295,
+      "sha256": "2222298dc0a03954ba082038ebedb2b93e672037b9be31c943e1d97c524bf95a"
+    },
+    {
+      "path": "cross-file/inputs/tests/freight-access.test.ts",
+      "bytes": 11999,
+      "sha256": "57a9e68536352d3a2ebedfb8a9c544fc5c31996c9f48027b216ed51378c7df4d"
+    },
+    {
+      "path": "cross-file/inputs/tests/governance-fixture.ts",
+      "bytes": 754,
+      "sha256": "eb36fbcfdecedc02614417826a67a50053bc91eea994fe75023cfe8e58080463"
+    },
+    {
+      "path": "cross-file/inputs/tests/governance.test.ts",
+      "bytes": 10904,
+      "sha256": "1c5543453c11561e32d5af7bdbeacf1ad676b64abf7ddc736ebd8e412a3c006a"
+    },
+    {
+      "path": "cross-file/inputs/tests/home-rest.test.ts",
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92"
+    },
+    {
+      "path": "cross-file/inputs/tests/hygiene-transfer.test.ts",
+      "bytes": 24931,
+      "sha256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2"
+    },
+    {
+      "path": "cross-file/inputs/tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "cross-file/inputs/tests/integration.test.ts",
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9"
+    },
+    {
+      "path": "cross-file/inputs/tests/interior-lighting.test.ts",
+      "bytes": 6728,
+      "sha256": "87515bf8087044e3149ce3a71167baf2577e9b34aba753ab3c15e95e9bb255de"
+    },
+    {
+      "path": "cross-file/inputs/tests/journey.test.ts",
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08"
+    },
+    {
+      "path": "cross-file/inputs/tests/market-company-return.test.ts",
+      "bytes": 18387,
+      "sha256": "8bf389b17e1c4642af483ff1d5417d7c7b33d328d808baa048aa0531e4f9bd22"
+    },
+    {
+      "path": "cross-file/inputs/tests/market-company-rights.test.ts",
+      "bytes": 20501,
+      "sha256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf"
+    },
+    {
+      "path": "cross-file/inputs/tests/market-shopfront.test.ts",
+      "bytes": 13469,
+      "sha256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990"
+    },
+    {
+      "path": "cross-file/inputs/tests/meal-route-policy.test.ts",
+      "bytes": 3482,
+      "sha256": "7990743b4b39eaf24021a4dd2e172a0ec01483687fbf1ab054ad30c88dee3973"
+    },
+    {
+      "path": "cross-file/inputs/tests/native-day-writer.test.ts",
+      "bytes": 11597,
+      "sha256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1"
+    },
+    {
+      "path": "cross-file/inputs/tests/native-door-routes.test.ts",
+      "bytes": 10208,
+      "sha256": "d3e5fbdb0559d067286580fe0f54db1f3f3746ad33c2c89fb787800f514610dd"
+    },
+    {
+      "path": "cross-file/inputs/tests/native-live-reader.test.ts",
+      "bytes": 11917,
+      "sha256": "02a7a1262510dc8974f84f0f1fdcd2a98ad6de03a0beda51d8cf2d3fd4586f9f"
+    },
+    {
+      "path": "cross-file/inputs/tests/npc-clock.test.ts",
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec"
+    },
+    {
+      "path": "cross-file/inputs/tests/npc-home-rest-voxels.test.ts",
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479"
+    },
+    {
+      "path": "cross-file/inputs/tests/npc-public-rest.test.ts",
+      "bytes": 9310,
+      "sha256": "0f2d1e4d86a479846cd9b759ec8b48af1315b491556255a255d083197167a516"
+    },
+    {
+      "path": "cross-file/inputs/tests/npc-stair-native-activity.test.ts",
+      "bytes": 13379,
+      "sha256": "6cd649e1f8c23ba52b5e4e134eeee4f952ef6b3fa86c2796df2d24e5121c42a1"
+    },
+    {
+      "path": "cross-file/inputs/tests/npc-stair-native.test.ts",
+      "bytes": 11171,
+      "sha256": "596f1bda23e0c39bf0bba0383b400770e3463dab75c01708a4b9c231a7adbe7b"
+    },
+    {
+      "path": "cross-file/inputs/tests/partition-field-order.test.ts",
+      "bytes": 2183,
+      "sha256": "36d40e1dc6a363396adc43c55b5b39a07183d97b8d679558ce4d5c8c88f04b95"
+    },
+    {
+      "path": "cross-file/inputs/tests/persistence.test.ts",
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1"
+    },
+    {
+      "path": "cross-file/inputs/tests/player-labor.test.ts",
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c"
+    },
+    {
+      "path": "cross-file/inputs/tests/police-fulfillment.test.ts",
+      "bytes": 27808,
+      "sha256": "8c4ccae0bccca5359f447756cfc3b5e0ac2d34929b50fb1d104ddc09b9db91f3"
+    },
+    {
+      "path": "cross-file/inputs/tests/power-fixture.ts",
+      "bytes": 7041,
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0"
+    },
+    {
+      "path": "cross-file/inputs/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-budget-standing.test.ts",
+      "bytes": 16239,
+      "sha256": "ff8345699ced1312449d58e2b836369f10ad772c2f16d4928e0c3b76a60ddf73"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-disinfection.test.ts",
+      "bytes": 24791,
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-employment-fixture.ts",
+      "bytes": 8522,
+      "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-employment-transfer.test.ts",
+      "bytes": 12892,
+      "sha256": "4c2480a07eda774cd798d42e17f127bbe96fbe1715344b8d5540b6d907e551a1"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-health-hygiene.test.ts",
+      "bytes": 21032,
+      "sha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8"
+    },
+    {
+      "path": "cross-file/inputs/tests/public-school-arrival.test.ts",
+      "bytes": 9536,
+      "sha256": "82c24b4996c797696db7608bce02870e194adaae1d955fc3beebf8644f1eb95c"
+    },
+    {
+      "path": "cross-file/inputs/tests/reference-collision.test.ts",
+      "bytes": 5866,
+      "sha256": "f24e71e31533e52e2d7b7b1286ee1e760692cf40979efc13aa68dd451211413b"
+    },
+    {
+      "path": "cross-file/inputs/tests/rendering-street-life.test.ts",
+      "bytes": 10853,
+      "sha256": "3c506ae34ebec8aa11485f0ff3f2edd4aa3225a892279d8f588f4d417621265d"
+    },
+    {
+      "path": "cross-file/inputs/tests/rendering.test.ts",
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566"
+    },
+    {
+      "path": "cross-file/inputs/tests/research-labor.test.ts",
+      "bytes": 21683,
+      "sha256": "f26b7a4624f0fb110959c0f5609927dab5fedd383ecc94da87f483f75f9a69da"
+    },
+    {
+      "path": "cross-file/inputs/tests/research-offsite-causal.test.ts",
+      "bytes": 2595,
+      "sha256": "2a0249874330e2bafde7aef5339b0e23ed3fef8a2ed2548517fdabf2ad8df9fc"
+    },
+    {
+      "path": "cross-file/inputs/tests/research-task-budget.test.ts",
+      "bytes": 9543,
+      "sha256": "41efa257baaa5ad72cc0c82cb935ea48c78c7ae934237e54e2f810ff14b8518c"
+    },
+    {
+      "path": "cross-file/inputs/tests/resident-formal-education.test.ts",
+      "bytes": 34493,
+      "sha256": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe"
+    },
+    {
+      "path": "cross-file/inputs/tests/resident-formal-fixture.ts",
+      "bytes": 3171,
+      "sha256": "b4b76fd2e3c75d1d22baea5e4a3b82e1885adfdcda21e5d9adcf2dccdd6c68b0"
+    },
+    {
+      "path": "cross-file/inputs/tests/resident-petitions.test.ts",
+      "bytes": 12798,
+      "sha256": "56fa27ad2dcfb26845fe014618c5a8c8ec3ef9d8c35f8317d0d07abde68fef8e"
+    },
+    {
+      "path": "cross-file/inputs/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+    },
+    {
+      "path": "cross-file/inputs/tests/road-capacity.test.ts",
+      "bytes": 6396,
+      "sha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b"
+    },
+    {
+      "path": "cross-file/inputs/tests/road-demands.test.ts",
+      "bytes": 15281,
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6"
+    },
+    {
+      "path": "cross-file/inputs/tests/road-estate.test.ts",
+      "bytes": 5344,
+      "sha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf"
+    },
+    {
+      "path": "cross-file/inputs/tests/road-navigation.test.ts",
+      "bytes": 14556,
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "cross-file/inputs/tests/road-routing.test.ts",
+      "bytes": 28802,
+      "sha256": "41e84afeec4e02d8f078327da6df1cb8a399929be360c824e43509cac872c232"
+    },
+    {
+      "path": "cross-file/inputs/tests/roads-old22.test.ts",
+      "bytes": 1237,
+      "sha256": "3194671218396291fd21f0f463dc048eb511a18aa141cb6bf3e87b4fea2fe1a4"
+    },
+    {
+      "path": "cross-file/inputs/tests/roads.test.ts",
+      "bytes": 18457,
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "cross-file/inputs/tests/roadwork-replacement.test.ts",
+      "bytes": 23253,
+      "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+    },
+    {
+      "path": "cross-file/inputs/tests/roadworks-fixture.ts",
+      "bytes": 9543,
+      "sha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+    },
+    {
+      "path": "cross-file/inputs/tests/roadworks.test.ts",
+      "bytes": 20738,
+      "sha256": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd"
+    },
+    {
+      "path": "cross-file/inputs/tests/route-encoding.test.ts",
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4"
+    },
+    {
+      "path": "cross-file/inputs/tests/service-material-scheduling.test.ts",
+      "bytes": 16195,
+      "sha256": "4529fdc41ac71e65e9e3bed6e361aee6d7b526634634b0278287460dc8a930de"
+    },
+    {
+      "path": "cross-file/inputs/tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "cross-file/inputs/tests/shop-repeat-distress.test.ts",
+      "bytes": 41647,
+      "sha256": "61fc3ccd19ce5ba8e46b12c0e70e346299cc3b4149834956ae468a9c4ca8b840"
+    },
+    {
+      "path": "cross-file/inputs/tests/shop-self-funding.test.ts",
+      "bytes": 18454,
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97"
+    },
+    {
+      "path": "cross-file/inputs/tests/simulation.test.ts",
+      "bytes": 66862,
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5"
+    },
+    {
+      "path": "cross-file/inputs/tests/site-fixtures.test.ts",
+      "bytes": 10119,
+      "sha256": "c1dde7e3d7c1286d07eeac4f7492ca48ed7852acc266708dd55045746cf0f5be"
+    },
+    {
+      "path": "cross-file/inputs/tests/stair-continuity.test.ts",
+      "bytes": 10300,
+      "sha256": "3136a1cecc48b81dd0368f5e81935790455fa362ba9b4ff50ccb077dd7643a44"
+    },
+    {
+      "path": "cross-file/inputs/tests/stair-escape-origin.test.ts",
+      "bytes": 18644,
+      "sha256": "b9db5baa19c7edd4b4945ecfd0110973fd2c7f9032ccadc97846c31243c4b2ec"
+    },
+    {
+      "path": "cross-file/inputs/tests/supplemental-budget.test.ts",
+      "bytes": 17170,
+      "sha256": "9ce07e587e7f02fe89ca8a31f6ef191b4d5644ddf38cd62970e1f39d0d09ceea"
+    },
+    {
+      "path": "cross-file/inputs/tests/trade.test.ts",
+      "bytes": 46212,
+      "sha256": "5f06ffdd905af5a8b698a0e9a3165a153e65467ef7d51e459a93df3f8e47146b"
+    },
+    {
+      "path": "cross-file/inputs/tests/tree-crowns.test.ts",
+      "bytes": 2175,
+      "sha256": "4af33874de1d8df12cd4e4a3d8593a0988d30afd6683e72a2bfa5121d4f0f6f1"
+    },
+    {
+      "path": "cross-file/inputs/tests/v4-extensions.test.ts",
+      "bytes": 16985,
+      "sha256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea"
+    },
+    {
+      "path": "cross-file/inputs/tests/v4-services.test.ts",
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683"
+    },
+    {
+      "path": "cross-file/inputs/tests/v4-simulation.test.ts",
+      "bytes": 16108,
+      "sha256": "b7088b4ad34c9452dafc9736ac0e018092f22006eb26aba20e37ff80fc79e059"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-layout.test.ts",
+      "bytes": 27934,
+      "sha256": "8bd848ddfd1866d03078a311f1de3a34df671146a1fccf3241cb53b30f179e67"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-v4.test.ts",
+      "bytes": 15373,
+      "sha256": "d7e54d399322213b1a2fd429b8f27f42fcff114679ad1dc631a4b7ff704dfbe7"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-v5.test.ts",
+      "bytes": 4455,
+      "sha256": "af70461ff3dc804138ed8fa70fda78bce90d39d302acbf1fbab431aa683f5d61"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-v6-commercial-routes.test.ts",
+      "bytes": 9788,
+      "sha256": "eccd0446f775759b8f1a733134abec59894013ad2fb50b13e356f759b29c4dae"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-v6-commercial.test.ts",
+      "bytes": 11801,
+      "sha256": "ceb9706bd82a041c7542bf91e27f4b51f975af9c22e3e7243659be9a855c72b1"
+    },
+    {
+      "path": "cross-file/inputs/tests/world-v6-office.test.ts",
+      "bytes": 4345,
+      "sha256": "c53b821fb1d74eaaaff69c2c0a443ca6ec904988948470b5366e928e71c59a82"
+    },
+    {
+      "path": "cross-file/inputs/tests/world.test.ts",
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6"
+    },
+    {
+      "path": "cross-file/local-node-runner-excerpts.json",
+      "bytes": 11827,
+      "sha256": "00035bbc2c191a2387cbfb3923aed1463acbf9f3531cb6e49f89f6c029eab943"
+    },
+    {
+      "path": "cross-file/reviewed-input-hashes.json",
+      "bytes": 20487,
+      "sha256": "614aff2b9f5e98cabcd41ea4eeeba134e35d8169e05ec0b5bc640622792c24b4"
+    },
+    {
+      "path": "cross-file/static-import-inventory.json",
+      "bytes": 327195,
+      "sha256": "44cc8a6d0048cac61a53b3277e08f520cd8710e74b77446d9be5049814aedaa0"
+    },
+    {
+      "path": "cross-file/static-import-scan.cjs",
+      "bytes": 4864,
+      "sha256": "fcdac64829badf510534274938c7022c6efa7fa872a3087c519fae67eac67048"
+    },
+    {
+      "path": "cross-file/static-input-verification.json",
+      "bytes": 27669,
+      "sha256": "a5e888dd3df0a3a7b59fce18a0c1345f788d2c0a2725298f3c985909cc56db1e"
+    },
+    {
+      "path": "root-evidence/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "root-evidence/ROOT15-full-suite-import-review-20261004-01-sealed-sha-readback.json",
+      "bytes": 179,
+      "sha256": "f0c8d7d0e3aeae8b8e95e6ac937b65263f09916a5b9417dd4be38cb4511654e8"
+    },
+    {
+      "path": "root-evidence/ROOT15-independent-review-20261004-01-sealed-sha-readback.json",
+      "bytes": 179,
+      "sha256": "0ab3ffe9ace04c6e69730d1be9d6275ff429d5b61a18fcec8aabb1c084ce6d89"
+    },
+    {
+      "path": "root-evidence/full-rules01-original-oom.raw.log",
+      "bytes": 12850,
+      "sha256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a"
+    },
+    {
+      "path": "root-evidence/full-rules01-original-receipt.json",
+      "bytes": 1457,
+      "sha256": "f170684d3424f9af92fe252320bd031a748a5de67ee4153c0c86870197035b31"
+    },
+    {
+      "path": "root-evidence/internal--modules--esm--module_map.js",
+      "bytes": 4026,
+      "sha256": "916c981417ddaee7843b50c0ad802857c03cf6bf95b109188365e376dbce07ea"
+    },
+    {
+      "path": "root-evidence/internal--test_runner--harness.js",
+      "bytes": 13823,
+      "sha256": "61038f76fac819889060054aff83e10e9087104716270ab8f816a12ff019176b"
+    },
+    {
+      "path": "root-evidence/internal--test_runner--runner.js",
+      "bytes": 35690,
+      "sha256": "e04e397be4e579f1fb08ecf239fb2914035f7ffe26be5bc629f45aa4313a0b68"
+    },
+    {
+      "path": "root-evidence/internal--test_runner--test.js",
+      "bytes": 54900,
+      "sha256": "21570a32454209d42032d73e87676f6d9ff178827740b8a770ff314c510bb476"
+    },
+    {
+      "path": "root-evidence/internal--test_runner--utils.js",
+      "bytes": 23288,
+      "sha256": "aa047506eac62cc394eab0add5cca72796d1ea7d36273ac7a0fd9d47dd76fd32"
+    },
+    {
+      "path": "root-evidence/memo-review-supplement-current.md",
+      "bytes": 431354,
+      "sha256": "bb74b8a3d4aa8f77166bce1a6ca1130919ab94afe2d7ac7396fc7d2619c07dda"
+    },
+    {
+      "path": "root-evidence/memo-review-supplement.json",
+      "bytes": 525,
+      "sha256": "fb867b23979f0ca81399f0f7b51d44ca04833bc1ff02ea3b5b4b9744a4b01946"
+    },
+    {
+      "path": "root-evidence/node24-help.txt",
+      "bytes": 24861,
+      "sha256": "76fc84018dc903bda57d1a87006343b9c260016b2bf007b9c14206eea55e781c"
+    },
+    {
+      "path": "root-evidence/node24-proposed-flags-help.txt",
+      "bytes": 24861,
+      "sha256": "76fc84018dc903bda57d1a87006343b9c260016b2bf007b9c14206eea55e781c"
+    },
+    {
+      "path": "root-evidence/package-cli-and-original-failure-evidence.json",
+      "bytes": 2120,
+      "sha256": "c7678121ce6c97b3deb52cb9b9cadf098beca7426835c4722da87c382c582b62"
+    },
+    {
+      "path": "root-evidence/package-none-original.json",
+      "bytes": 855,
+      "sha256": "078a94b045a55653aee7f6ff131ed6a58a70e50c0c5ea839a2c81ed6c0f51a03"
+    },
+    {
+      "path": "root-evidence/package-only-shared-input-observation-manifest.json",
+      "bytes": 34762,
+      "sha256": "854b9f5cee23b6356c5e69b1a448178746ebdd6b0c23ff4ca858bd05986e1ab0"
+    },
+    {
+      "path": "root-evidence/package-only-shared-input-observation.json",
+      "bytes": 490,
+      "sha256": "0c0ed9eafd538dbec4d5440df91b0056cb33e78385914103ff075b0ec49c48e2"
+    },
+    {
+      "path": "root-evidence/package-process-as-read.json",
+      "bytes": 879,
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57"
+    },
+    {
+      "path": "root-evidence/proposed-flags-help-receipt.json",
+      "bytes": 355,
+      "sha256": "22ff0c60b81bcf3c1149f7ef21dab350b80adf8fcb95b5b5caeae459301c75d2"
+    },
+    {
+      "path": "root-evidence/required-document-read-ledger.json",
+      "bytes": 4576,
+      "sha256": "b7f989289011b6248447b00b31f5121d540e3a1d8820b56247a2bb37337f1c96"
+    },
+    {
+      "path": "root-evidence/requirements-read-reuse.json",
+      "bytes": 364,
+      "sha256": "ec064502a1955f8fbdada6551ca6bc4ca2f30d936ab01dddb62e7f3816aba28d"
+    },
+    {
+      "path": "root-evidence/runtime-info.json",
+      "bytes": 964,
+      "sha256": "773356c1501968f887389ef3f7ec2eb61204d06ac63c67a98ca33fcd682beb2d"
+    },
+    {
+      "path": "root-evidence/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    }
+  ]
+}

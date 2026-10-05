@@ -1,0 +1,60 @@
+{
+  "before": {
+    "stats": {
+      "resident": 10,
+      "total": 482,
+      "created": 22,
+      "released": 12,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 10,
+    "actualMeshes": 70,
+    "actualInstances": 20916,
+    "ownedGeometryCount": 70,
+    "interiorBuildingRefs": 14,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 11,
+      "releases": 12,
+      "geometryDisposals": 82,
+      "instanceDisposals": 82,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 765,
+      "textures": 10
+    }
+  },
+  "after": {
+    "stats": {
+      "resident": 0,
+      "total": 482,
+      "created": 22,
+      "released": 22,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": true
+    },
+    "actualSceneGroups": 0,
+    "actualMeshes": 0,
+    "actualInstances": 0,
+    "ownedGeometryCount": 0,
+    "interiorBuildingRefs": 0,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 11,
+      "releases": 22,
+      "geometryDisposals": 152,
+      "instanceDisposals": 152,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 0,
+      "textures": 1
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-04T01:53:45.494038+00:00",
+  "status": "STATIC_ONLY_PASS",
+  "reviewer": "Independent visual_criteria_readonly subagent",
+  "scope": "Read-only complete text diff and hashes; no browser/GPU/build/test execution",
+  "changes": [
+    "Capture import reads official namespace Chromium or default Chromium export",
+    "Phase capture command selects explicitly versioned v2 filename"
+  ],
+  "preserved": [
+    "All original nine scenes",
+    "All original assertions",
+    "Permission/cash/identity guards",
+    "Camera and timing",
+    "Direct PNG pipeline",
+    "Source and dist checks",
+    "Timeout and cleanup",
+    "Original WebGL harness and60-second return window"
+  ],
+  "hashes": {
+    "capture-root07-v2.mjs": "27b90a995f2376557aa44d9821a3bf2e99884cf914663639c35ee289cc8121da",
+    "run-root07-v2.py": "6196906319a795a3e96a321b5a691f8f5e38c1a88fa9847544cc84ede1066dea",
+    "run-phase-v2-original.py": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+  },
+  "processWrapperSameOriginal": true,
+  "doesNotClaim": "Runtime, GPU or screenshot PASS"
+}

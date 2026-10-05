@@ -1,0 +1,29 @@
+{
+  "scope": "READ_ONLY_STATIC_NO_SIMULATION",
+  "commit": "6a614c5d74ecb53ce9a495dc48c12add7216d4f0",
+  "commands": [
+    "fileUtilityProposal",
+    "reviewUtilityProposal",
+    "payUtilityBill",
+    "fundUtilityRelief"
+  ],
+  "source": {
+    "src/types.ts": {
+      "bytes": 15086,
+      "sha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a",
+      "commit": "6a614c5d74ecb53ce9a495dc48c12add7216d4f0"
+    },
+    "src/simulation.ts": {
+      "bytes": 296424,
+      "sha256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c",
+      "commit": "6a614c5d74ecb53ce9a495dc48c12add7216d4f0"
+    },
+    "adapters/rpg-maker/browser/contract.json": {
+      "bytes": 3869,
+      "sha256": "8a2f04942d8deda00eb2a2f5bdf185ed035d94825aeedabd93e9e449da478310",
+      "commit": "6a614c5d74ecb53ce9a495dc48c12add7216d4f0"
+    }
+  },
+  "MZChanged": false,
+  "fundsPermissionsPersistenceRun": "NOT_RUN_NO_HANDLER"
+}

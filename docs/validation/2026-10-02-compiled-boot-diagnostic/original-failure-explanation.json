@@ -1,0 +1,75 @@
+{
+  "state": "ORIGINAL_FAIL_PRESERVED",
+  "formalBrowser11": {
+    "completedChecks": 0,
+    "plannedChecks": 11,
+    "exitCode": 1,
+    "session": 70156,
+    "childPID": 158890,
+    "startedAt": "2026-10-02T15:09:49.628Z",
+    "endedAt": "2026-10-02T15:11:24.671Z",
+    "failure": "page.waitForFunction tick>=1 timeout90000ms at original browser-test.mjs45",
+    "errors": [],
+    "screenshots": 0
+  },
+  "sourceContracts": {
+    "frozenInputs": 103,
+    "sharedExecutableInputs": 98,
+    "exclusions": [
+      ".gitattributes",
+      ".gitignore",
+      "AGENTS.md",
+      "开发备忘录.md",
+      "提示词.md"
+    ],
+    "manifestSHA256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926",
+    "entry": "/assets/index-IZpNJKPR.js",
+    "entrySHA256": "fe863519166c8abc0c7db84fc53517089532434948903fb777e1e28f0afd247b",
+    "originalHarnessSHA256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+    "allStartEndStable": true
+  },
+  "proseCorrection": {
+    "originalField": "run-manifest.json.scope",
+    "originalProse": "Frozen102 and shared executable97",
+    "correctCounts": "frozen103/sharedExecutable98",
+    "numericFieldsAndHashDictionariesWereCorrect": true,
+    "originalArtifactEdited": false
+  },
+  "limits": [
+    "No cause established by existing evidence",
+    "errors[] does not prove initialization completed",
+    "HTML entry matched before failed wait, but independent JS HTTP probe was never triggered",
+    "Native scope not run",
+    "Owned preview and original child released"
+  ],
+  "preservedFiles": [
+    {
+      "path": "original-failure/browser.log",
+      "original": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/browser.log",
+      "bytes": 203,
+      "sha256": "c108b138f56641e6ed3dd32353192990d63a37ffc0635c9b92e8c21466017f4a",
+      "originalSHA256": "c108b138f56641e6ed3dd32353192990d63a37ffc0635c9b92e8c21466017f4a"
+    },
+    {
+      "path": "original-failure/browser-results.json",
+      "original": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/browser-results.json",
+      "bytes": 1522,
+      "sha256": "79c6a5b3a9b50e8491b06616e208e035272fa6b3d3100d46838319d8d029ae58",
+      "originalSHA256": "79c6a5b3a9b50e8491b06616e208e035272fa6b3d3100d46838319d8d029ae58"
+    },
+    {
+      "path": "original-failure/run-start.json",
+      "original": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/run-start.json",
+      "bytes": 22216,
+      "sha256": "6f6fb80a9dabed259c5d002c619bd32b5939f5f09287dc40f79cc371c414feb7",
+      "originalSHA256": "6f6fb80a9dabed259c5d002c619bd32b5939f5f09287dc40f79cc371c414feb7"
+    },
+    {
+      "path": "original-failure/run-manifest.json",
+      "original": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/run-manifest.json",
+      "bytes": 44305,
+      "sha256": "d386be16dcbff4c26572b1b8d0600e9aa59cf4688ee4cd170108db746f1aa902",
+      "originalSHA256": "d386be16dcbff4c26572b1b8d0600e9aa59cf4688ee4cd170108db746f1aa902"
+    }
+  ]
+}

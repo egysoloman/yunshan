@@ -1,0 +1,26 @@
+{
+  "pid": 69715,
+  "argv": [
+    "env",
+    "YUNSHAN_NPC_OLD_READER=/workspace/yunshan-work/ROOT09-npc-tread-motion-20261004-01/baseline/src/simulation.ts",
+    "YUNSHAN_NPC_NATIVE_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/native",
+    "YUNSHAN_NPC_ACTIVITY_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/activity",
+    "YUNSHAN_STAIR_ORIGIN_EVIDENCE=/workspace/yunshan-work/ROOT12-day-save-body-20261004-01/final-native17-01/evidence/origin",
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/npc-stair-native.test.ts",
+    "tests/npc-stair-native-activity.test.ts",
+    "tests/stair-escape-origin.test.ts"
+  ],
+  "identity": {
+    "pid": 69715,
+    "state": "R",
+    "parent": 69712,
+    "group": 69715,
+    "session": 69715,
+    "startTicks": 4314751
+  }
+}

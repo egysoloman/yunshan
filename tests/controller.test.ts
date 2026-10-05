@@ -3,6 +3,8 @@ import test from 'node:test';
 import { PerspectiveCamera } from 'three';
 import { PlayerController } from '../src/controller.ts';
 import { canAccessFloor, getStairPosition } from '../src/access.ts';
+import { blocksTransportBarrier, guardrailSpans, hasGuardrailAt } from '../src/transport-geometry.ts';
+import { createWorld } from '../src/world.ts';
 import type { Building, VoxelModification, WorldDefinition } from '../src/types.ts';
 
 function fixture(run: (controller: PlayerController, building: Building, keyboard: EventTarget) => void, mayor = false, blocks: VoxelModification[] = []) {
@@ -94,4 +96,67 @@ test('a floor-level voxel is a usable step while a taller stack cannot be walked
     controller.step(0.1, false);
     assert(controller.position.x < 0.9);
   }, true, blocks);
+});
+
+test('a new traveler starts on foot and camera modes require an actual acquired aircraft', () => {
+  fixture(controller => {
+    assert.equal(controller.mode, 'walk');
+    assert.deepEqual(controller.walkingPosition, controller.world.spawn);
+    const before = controller.position;
+    assert.equal(controller.setMode('jet', before), false);
+    assert.equal(controller.mode, 'walk'); assert.deepEqual(controller.position, before);
+    assert.equal(controller.setMode('drone', before), false);
+    controller.resetView(); assert.deepEqual(controller.position, before);
+  });
+});
+
+test('bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable', () => {
+  fixture((controller, _building, keyboard) => {
+    controller.world.edges.push({ id: 'real-bridge', from: 'a', to: 'b', mode: 'bridge', length: 80, capacity: 20, points: [{ x: 300, y: 254.6, z: -40 }, { x: 300, y: 254.6, z: 40 }] });
+    const press = (code: string, type = 'keydown') => { const event = new Event(type); Object.assign(event, { code, repeat: false }); keyboard.dispatchEvent(event); };
+    controller.setMode('walk', { x: 303.4, y: 254.6, z: 0 }); controller.yaw = 0;
+    press('KeyD'); controller.step(.1, false); assert.equal(controller.position.x, 303.4);
+    press('KeyD', 'keyup'); press('KeyW'); controller.step(.1, false);
+    assert(controller.position.z < -.4); assert.equal(controller.position.y, 254.6);
+    press('KeyW', 'keyup');
+    controller.setMode('walk', { x: 303.4, y: 254.6, z: 38 }); controller.yaw = 0;
+    press('KeyD'); controller.step(.1, false);
+    assert(controller.position.x > 303.8, 'last six metres must keep access at the bridge join');
+  });
+});
+
+test('same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere', () => {
+  fixture((controller, _building, keyboard) => {
+    const bridge = { id: 'joined-bridge', from: 'a', to: 'b', mode: 'bridge' as const, length: 80, capacity: 20, points: [{ x: 300, y: 254.6, z: -40 }, { x: 300, y: 254.6, z: 40 }] };
+    const road = { id: 'joining-street', from: 'c', to: 'd', mode: 'road' as const, length: 80, capacity: 20, points: [{ x: 260, y: 254.6, z: 0 }, { x: 340, y: 254.6, z: 0 }] };
+    controller.world.edges.push(bridge, road);
+    const spans = guardrailSpans(controller.world, bridge, 1);
+    assert.equal(spans.length, 2); assert(spans[0].b.z <= -5.35); assert(spans[1].a.z >= 5.35);
+    assert.equal(hasGuardrailAt(controller.world, bridge, 40), false);
+    assert.equal(hasGuardrailAt(controller.world, bridge, 60), true);
+    assert.equal(blocksTransportBarrier(controller.world, { x: 293.8, y: 254.6, z: 0 }, { x: 294.3, y: 254.6, z: 0 }), false);
+    const press = new Event('keydown'); Object.assign(press, { code: 'KeyW', repeat: false });
+    controller.setMode('walk', { x: 293.8, y: 254.6, z: 0 }); controller.yaw = -Math.PI / 2; keyboard.dispatchEvent(press);
+    for (let step = 0; step < 40; step++) controller.step(.1, false);
+    assert(controller.walkingPosition.x > 312, 'actual controller crosses both bridge-side joins along the street'); assert.equal(controller.walkingPosition.y, 254.6);
+    const release = new Event('keyup'); Object.assign(release, { code: 'KeyW', repeat: false }); keyboard.dispatchEvent(release);
+    controller.setMode('walk', { x: 303.4, y: 254.6, z: 15 }); controller.yaw = 0;
+    const lateral = new Event('keydown'); Object.assign(lateral, { code: 'KeyD', repeat: false }); keyboard.dispatchEvent(lateral); controller.step(.1, false);
+    assert.equal(controller.walkingPosition.x, 303.4, 'unjoined side still has a real handrail');
+  });
+});
+
+test('a crossing at another level keeps the existing bridge rail and does not invent a junction', () => {
+  fixture(controller => {
+    const bridge = { id: 'lower-bridge', from: 'a', to: 'b', mode: 'bridge' as const, length: 80, capacity: 20, points: [{ x: 300, y: 254.6, z: -40 }, { x: 300, y: 254.6, z: 40 }] };
+    controller.world.edges.push(bridge, { id: 'upper-road', from: 'c', to: 'd', mode: 'road', length: 80, capacity: 20, points: [{ x: 260, y: 257.6, z: 0 }, { x: 340, y: 257.6, z: 0 }] });
+    assert.equal(guardrailSpans(controller.world, bridge, 1).length, 1); assert.equal(hasGuardrailAt(controller.world, bridge, 40), true);
+    assert.equal(blocksTransportBarrier(controller.world, { x: 303.4, y: 254.6, z: 0 }, { x: 303.9, y: 254.6, z: 0 }), true);
+  });
+});
+
+test('the actual repaired river station street can enter and exit its same-level bridge', () => {
+  const world = createWorld();
+  assert.equal(blocksTransportBarrier(world, { x: -664, y: 18.6, z: 1035.4 }, { x: -664, y: 18.6, z: 1036 }), false);
+  assert.equal(blocksTransportBarrier(world, { x: -664, y: 18.6, z: 1040 }, { x: -664, y: 18.6, z: 1044 }), false);
 });

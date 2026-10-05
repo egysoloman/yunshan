@@ -1,0 +1,30 @@
+{
+  "status": "CLOSED_STATIC_REVIEW",
+  "closedAt": "2026-10-04T03:43:43.191848+00:00",
+  "producer": "/root/continuation_evidence",
+  "finalIndexSHA256": "2593f81760dd0db82ccd1b9e08b74e6bb3477185a5fefac734a59c10b8912060",
+  "indexedFiles": 53,
+  "indexedBytes": 1750099,
+  "secretPatternMatches": 0,
+  "planSnapshotGroups": 43,
+  "actualReportScopeRecords": 14,
+  "GitCopiesByteExact": true,
+  "ROOT07Audit": "FAIL",
+  "ROOT07ActualSave24": "PASSED",
+  "sourceV3SHA256": "a6d9deb409a9fbe62566fb466699e3b738bbf12573586161b73baa9b85b7fff2",
+  "sharedAndPriorClosedModified": false,
+  "collectorExecuted": false,
+  "archiveCreated": false,
+  "activeGroupsArchived": false,
+  "newTestsExecuted": false,
+  "GPUOr14Executed": false,
+  "LibraryUploaded": false,
+  "GitActions": false,
+  "ownedLongLivedProcesses": [],
+  "remainingBlockers": [
+    "ROOT08 and producer actual completion",
+    "New source manifest and current runtime delivery summary",
+    "Actual full inventory/CRC/memberSHA/decoded guard/part re-read checks",
+    "Actual Library save or verified authorized Git fallback"
+  ]
+}

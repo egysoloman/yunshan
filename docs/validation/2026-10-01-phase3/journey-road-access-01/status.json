@@ -1,0 +1,302 @@
+{
+  "sourceFrozen": true,
+  "sourceHashesStable": true,
+  "sourceCount": 89,
+  "sourceHashes": {
+    "src/journey.ts": "3e47f6ae7a4c1c0bbca80bd612305912639d13efb1e1430446c5a812fe45193d",
+    "tests/journey.test.ts": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+    "src/controller.ts": "95ff1e5065ec44fef5b95edad83c31592722808221fc5a6299789a62c248a733",
+    "src/site-fixtures.ts": "817764b124e0a898a628c71bbd546568e8308f4e35e57c827637a72dbffd72bd"
+  },
+  "targetedTests": {
+    "journey": 14,
+    "controller": 10,
+    "siteFixtures": 4,
+    "total": 28,
+    "pass": 28,
+    "fail": 0,
+    "exitCode": 0
+  },
+  "strict": {
+    "command": "npx tsc --noEmit",
+    "exitCode": 0
+  },
+  "cpuActualNativePrefix": {
+    "status": "PASS",
+    "nativeBytes": 1537646,
+    "nativeSHA256": "669e7bc4ed83c970ee942ab34f557ed92669d8b2d34c5eb108478efca305a76b",
+    "actualFrom": {
+      "x": -379.7179431004984,
+      "y": 49.707051422487545,
+      "z": 516.9469250512725
+    },
+    "endpoint": {
+      "endpointId": "market-station",
+      "endpoint": {
+        "x": -330,
+        "y": 52.6,
+        "z": 460
+      },
+      "actualFinal": {
+        "x": -330,
+        "y": 52.6,
+        "z": 460
+      },
+      "controllerStepCount": 232,
+      "waypoints": [
+        {
+          "target": {
+            "x": -379.7179431004984,
+            "y": 49.707051422487545,
+            "z": 512
+          },
+          "before": {
+            "x": -379.7179431004984,
+            "y": 49.707051422487545,
+            "z": 516.9469250512725
+          },
+          "after": {
+            "x": -379.7179431004984,
+            "y": 49.707051422487545,
+            "z": 512
+          },
+          "actualWalkHeight": 49.707051422487545,
+          "ground": 44.99762466537239,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -376,
+            "y": 49.800000000000004,
+            "z": 512
+          },
+          "before": {
+            "x": -379.7179431004984,
+            "y": 49.707051422487545,
+            "z": 512
+          },
+          "after": {
+            "x": -376,
+            "y": 49.800000000000004,
+            "z": 512
+          },
+          "actualWalkHeight": 49.800000000000004,
+          "ground": 45.01578148148147,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -352,
+            "y": 50.6,
+            "z": 512
+          },
+          "before": {
+            "x": -376,
+            "y": 49.800000000000004,
+            "z": 512
+          },
+          "after": {
+            "x": -352,
+            "y": 50.6,
+            "z": 512
+          },
+          "actualWalkHeight": 50.6,
+          "ground": 47.28553209511695,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -352,
+            "y": 50.800000000000004,
+            "z": 504
+          },
+          "before": {
+            "x": -352,
+            "y": 50.6,
+            "z": 512
+          },
+          "after": {
+            "x": -352,
+            "y": 50.800000000000004,
+            "z": 504
+          },
+          "actualWalkHeight": 50.800000000000004,
+          "ground": 46.63655000000003,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -344,
+            "y": 51,
+            "z": 504
+          },
+          "before": {
+            "x": -352,
+            "y": 50.800000000000004,
+            "z": 504
+          },
+          "after": {
+            "x": -344,
+            "y": 51,
+            "z": 504
+          },
+          "actualWalkHeight": 51,
+          "ground": 50.4,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -344,
+            "y": 51.2,
+            "z": 496
+          },
+          "before": {
+            "x": -344,
+            "y": 51,
+            "z": 504
+          },
+          "after": {
+            "x": -344,
+            "y": 51.2,
+            "z": 496
+          },
+          "actualWalkHeight": 51.2,
+          "ground": 50.6,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -336,
+            "y": 51.400000000000006,
+            "z": 496
+          },
+          "before": {
+            "x": -344,
+            "y": 51.2,
+            "z": 496
+          },
+          "after": {
+            "x": -336,
+            "y": 51.400000000000006,
+            "z": 496
+          },
+          "actualWalkHeight": 51.400000000000006,
+          "ground": 50.2,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -336,
+            "y": 51.800000000000004,
+            "z": 480
+          },
+          "before": {
+            "x": -336,
+            "y": 51.400000000000006,
+            "z": 496
+          },
+          "after": {
+            "x": -336,
+            "y": 51.800000000000004,
+            "z": 480
+          },
+          "actualWalkHeight": 51.800000000000004,
+          "ground": 51.2,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -328,
+            "y": 52,
+            "z": 480
+          },
+          "before": {
+            "x": -336,
+            "y": 51.800000000000004,
+            "z": 480
+          },
+          "after": {
+            "x": -328,
+            "y": 52,
+            "z": 480
+          },
+          "actualWalkHeight": 52,
+          "ground": 51.2,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -328,
+            "y": 52.400000000000006,
+            "z": 464
+          },
+          "before": {
+            "x": -328,
+            "y": 52,
+            "z": 480
+          },
+          "after": {
+            "x": -328,
+            "y": 52.400000000000006,
+            "z": 464
+          },
+          "actualWalkHeight": 52.400000000000006,
+          "ground": 51.800000000000004,
+          "inside": null,
+          "floor": 0
+        },
+        {
+          "target": {
+            "x": -330,
+            "y": 52.6,
+            "z": 460
+          },
+          "before": {
+            "x": -328,
+            "y": 52.400000000000006,
+            "z": 464
+          },
+          "after": {
+            "x": -330,
+            "y": 52.6,
+            "z": 460
+          },
+          "actualWalkHeight": 52.6,
+          "ground": 51.800000000000004,
+          "inside": null,
+          "floor": 0
+        }
+      ]
+    },
+    "originalStateUnchanged": true
+  },
+  "counterReproduction": {
+    "old": "OLD_COUNTER_ROUTE_FAILURE_REPRODUCED",
+    "newWalking": null,
+    "newTransit": null,
+    "controllerActualFinal": {
+      "x": -11.76,
+      "y": 0,
+      "z": 13.200000000000001
+    }
+  },
+  "pending": [
+    "Root coherent04 strict/full rules run",
+    "Normal browser keyboard/mouse journey from frozen actual r7 profile and full school route"
+  ],
+  "limits": [
+    "Only the first road access and its endpoint were physically walked in the CPU controller fixture.",
+    "The remainder of the school route and normal keyboard/mouse browser journey require the next coherent-build GL check.",
+    "Planner connector checks static world road/bridge layers, buildings, river and shared counter/transport barriers; player-built voxel changes are not supplied to this API.",
+    "Off-road joining tests a direct short connector; it does not run a free-terrain obstacle-detour pathfinder."
+  ]
+}

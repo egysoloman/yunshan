@@ -1,0 +1,18 @@
+{
+  "checks": 24,
+  "status": "passed",
+  "scope": "DOM fixture; real generated world and Simulation; no CityRenderer and no production bundle",
+  "raw": "artifacts/phase2-ui.log",
+  "results": "artifacts/ui-results.json",
+  "sourceHashes": {
+    "src/main.ts": "edf3cd1626847ae1984733ceacc7084b2096b89e436d57ad35705e6231f11dee",
+    "src/ui.ts": "95bb032a6a482b94b23ddbe063dc52888368e0f004bc2296f72489a42ebe3fd1",
+    "src/types.ts": "ba9b1e30ad7fd85db8fb7c472c5cbbc08a08ff54c7e71b195d0d37a5b7feed96",
+    "src/controller.ts": "89e6235ff0c6dcd3f159befec97d5b6aa9a4b74c2aa22450647ad1d2e697f8a8",
+    "src/aviation.ts": "342cdecf7f84bee60c92f01d583815b50672476510092761040589540c7172d9",
+    "src/journey.ts": "09a5b2ae5f49b821b958b3790a94be6467f7f4891b585dd09bd2cbc23fafc1f0",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/rendering/citizen-appearance.ts": "c6c04b3517631a7a5d383b0c32517c658924a21fb0a2db09d2c229a6edf10770",
+    "scripts/ui-test.mjs": "70bc7b8eb4585d64ec7d934d378e2885d282f37925df3f20c08960c1f582b3fc"
+  }
+}

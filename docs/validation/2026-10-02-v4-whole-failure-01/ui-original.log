@@ -1,0 +1,15 @@
+
+> yunshan-city@0.1.0 test:ui
+> node scripts/ui-test.mjs
+
+2:47:37 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+600 !== 500
+
+    at file:///tmp/yunshan-v4-root-coherent-01/scripts/ui-test.mjs:91:9
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

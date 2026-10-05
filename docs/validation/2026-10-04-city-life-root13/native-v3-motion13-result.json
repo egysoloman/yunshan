@@ -1,0 +1,279 @@
+{
+  "status": "PASS",
+  "scope": "declared coherent native small-city actor supported stair start; actual production mover creates riser cursor; no fabricated canonical wages or time; full/partition/reopen24 actual .25 ticks",
+  "actorId": "citizen-6",
+  "controlledPremise": {
+    "siteId": "pair-hall",
+    "floor": 0,
+    "routeIntent": "existing canonical stair0->1"
+  },
+  "openingSHA256": "e8187c1f12027de6db4a0bf246212e3fa33efc4120bceb10e907f0190917ac1d",
+  "bad": [
+    {
+      "label": "deleted",
+      "sha256": "b9e912d830fec2481734550d6f5dcd5e1526cb15ec653e016d37574077c333a1",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair body or phase"
+      }
+    },
+    {
+      "label": "mapDeleted",
+      "sha256": "1685b27592f1e2f5dea7aff476ff0b1573c273990e421d0fe6cfc6b2d3697028",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：city ruleset native motion body and version。"
+      }
+    },
+    {
+      "label": "versionDeleted",
+      "sha256": "34f4d7790932bdc5e84276bac93ce4d34d8da43dcc001a1ef6892581cf405d09",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：city ruleset native motion body and version。"
+      }
+    },
+    {
+      "label": "wrongNativeVersion",
+      "sha256": "704c03a43fb5de26e927e614bfee6c9ccad090c360880311102d8011c12c8ea5",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：city ruleset native motion body and version。"
+      }
+    },
+    {
+      "label": "wrongEnvelope",
+      "sha256": "4a6746a6ad057610665de867534ffbb33600c80f2e530a7922c9570320a688d7",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：city ruleset legacy cannot declare product rules。"
+      }
+    },
+    {
+      "label": "unknownActor",
+      "sha256": "d30340f498423d0b8371c8113eedb71d181b8ec044db5dbef9a66c830aa77e03",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：native cursor actor and route。"
+      }
+    },
+    {
+      "label": "unknownKey",
+      "sha256": "e6ad3e8af979bc85655fa2cf8bc1183066a8ba6f1259eb66c0c8f76e9c4ace53",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair cursor shape"
+      }
+    },
+    {
+      "label": "wrongCursorVersion",
+      "sha256": "ba62e1d4934ad6b6c5cec45ce3e444e7c27b17055788b374e23328ef75c43169",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair cursor identity"
+      }
+    },
+    {
+      "label": "NaN",
+      "sha256": "5de08b2dfd2620e6dc5716eec7b22905b81e077e89e4ffc471d7e82868d18b5a",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair cursor identity"
+      }
+    },
+    {
+      "label": "negative",
+      "sha256": "a05a3ee39871d39c527e4412b1edac29430d967e89e4901bd469cec894aed9ea",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair cursor identity"
+      }
+    },
+    {
+      "label": "pieceOverflow",
+      "sha256": "ccf92cb916fd20dccf9da998e8c1874e1042e411a4c83ceb7f08f4a462093977",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair cursor identity"
+      }
+    },
+    {
+      "label": "routeMismatch",
+      "sha256": "6f9cf66f8440665dbaa89038800c658cd55f74aab5caf93d83e4961377a20acd",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：native cursor actor and route。"
+      }
+    },
+    {
+      "label": "bodyMismatch",
+      "sha256": "ae40d8198c44e0e653d673e9a061ef1baeca5b9879753f7f190c228b766951e5",
+      "result": {
+        "ok": false,
+        "message": "读档失败：invalid physical stair body or phase"
+      }
+    },
+    {
+      "label": "bodyString",
+      "sha256": "6a226369cfb7f9a93f14ba58dec3f2ec473bfd2408f8bb203b1896892c613a04",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：citizen position。"
+      }
+    },
+    {
+      "label": "indexMismatch",
+      "sha256": "8241f412571c59b7e6b1a3b5b5650914876a2756263e66e4888d4fe38502ffaa",
+      "result": {
+        "ok": false,
+        "message": "读档失败：无效存档字段：native cursor actor and route。"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "tick": 1,
+      "clock": 480.25,
+      "sha256": "a798087f44f7d7c131c3279298f299f5e050e83093f320a56190c3fb00cad4ab"
+    },
+    {
+      "n": 2,
+      "tick": 2,
+      "clock": 480.5,
+      "sha256": "947b63f529e1f4ac0d5a5e71388dd71dfcfb392ffc4257d8d6dac4c1cd2263da"
+    },
+    {
+      "n": 3,
+      "tick": 3,
+      "clock": 480.75,
+      "sha256": "1847c31afc35ec7e5d67bc0e685d0e01b83190f6860f1277c8a77fc3d0ddad5d"
+    },
+    {
+      "n": 4,
+      "tick": 4,
+      "clock": 481,
+      "sha256": "888f1a8771756a0818f8deb0b9827a8ef40fcc0826bf8fe210fea089c2a8fa25"
+    },
+    {
+      "n": 5,
+      "tick": 5,
+      "clock": 481.25,
+      "sha256": "ad0e86edeed5f6d3349c3b857fde0a98f7933ca79b1d1db9c505dcd2e3bf0f6d"
+    },
+    {
+      "n": 6,
+      "tick": 6,
+      "clock": 481.5,
+      "sha256": "802bab770d867e11cd18f06a8418069239c880cea08b60c6fd6eb8aaf5e8ee3f"
+    },
+    {
+      "n": 7,
+      "tick": 7,
+      "clock": 481.75,
+      "sha256": "2e3f8e5af0315140fc3daebc936d4a044c7808c95dd264914d4d2e9af26fd913"
+    },
+    {
+      "n": 8,
+      "tick": 8,
+      "clock": 482,
+      "sha256": "425246e1a7ec2de2f2d9e233e9ade7c18ec18c4e0b7d024016c24ac85a00d42e"
+    },
+    {
+      "n": 9,
+      "tick": 9,
+      "clock": 482.25,
+      "sha256": "d81ce70ef26d95b1ae6e5ff231ac7eae926b986a8c301d5b70d583480a1bfd0e"
+    },
+    {
+      "n": 10,
+      "tick": 10,
+      "clock": 482.5,
+      "sha256": "d897256de9e457a43260f8246716145ab3c93924ba858f3e9b5198879048a670"
+    },
+    {
+      "n": 11,
+      "tick": 11,
+      "clock": 482.75,
+      "sha256": "a8942dfa3dcbc24d5f4dd7ec6f8ada5b7e4085b682b77e716b2f6729a674fcff"
+    },
+    {
+      "n": 12,
+      "tick": 12,
+      "clock": 483,
+      "sha256": "fd08b7754e1c85e1702e725b59afd5208b43c9752df28a95686d90daa834670a"
+    },
+    {
+      "n": 13,
+      "tick": 13,
+      "clock": 483.25,
+      "sha256": "7f7ce647cb63dfe63effebc49fb7410f7593accf573d2f5873970d211edc0fef"
+    },
+    {
+      "n": 14,
+      "tick": 14,
+      "clock": 483.5,
+      "sha256": "8c2598a3ff94bba59c0997fee5014fb613da6090178b9f485461388d4d2527bd"
+    },
+    {
+      "n": 15,
+      "tick": 15,
+      "clock": 483.75,
+      "sha256": "a860ef2a099aca0dea1c93a9d995fb8f0144b5b45c5fb21562480efd40d58d52"
+    },
+    {
+      "n": 16,
+      "tick": 16,
+      "clock": 484,
+      "sha256": "e993ff84634ac94da3df8d31aee3f57c4ef6180d98f9faaa44417a02c3a2c2e5"
+    },
+    {
+      "n": 17,
+      "tick": 17,
+      "clock": 484.25,
+      "sha256": "ec74aca620e2b9cf2a6ecceef8f4b7732044b6a12331e0b6cbbcc5c60e412490"
+    },
+    {
+      "n": 18,
+      "tick": 18,
+      "clock": 484.5,
+      "sha256": "0c6818b9505540826cfea40417f32566b521c386d5473bb02b750eea5c117280"
+    },
+    {
+      "n": 19,
+      "tick": 19,
+      "clock": 484.75,
+      "sha256": "0c2beb5b846f16a606ff3bee10748ccfdd0ebe7d5598e47cdf51a892b6c4095f"
+    },
+    {
+      "n": 20,
+      "tick": 20,
+      "clock": 485,
+      "sha256": "cd450511ac0bf69b327d3f3a72dffee42b07e1feee0021c3528bbfe37b0ce946"
+    },
+    {
+      "n": 21,
+      "tick": 21,
+      "clock": 485.25,
+      "sha256": "5856be88248adcbce8fd95357c4b34b06502e396000acb9fe5fd6c085419995d"
+    },
+    {
+      "n": 22,
+      "tick": 22,
+      "clock": 485.5,
+      "sha256": "ad1d661d1db062d85fa5ae3bcb770b05a28dc2c069a45c9ddadd5289fb09a757"
+    },
+    {
+      "n": 23,
+      "tick": 23,
+      "clock": 485.75,
+      "sha256": "becd9f5df0b9de0460f692850b371cdca94276312a1c7a3fb5e4dbdcaa00af7f"
+    },
+    {
+      "n": 24,
+      "tick": 24,
+      "clock": 486,
+      "sha256": "ac3370544e33cc6999adae61f092baf750890b3756d05f6893191c6085433fd2"
+    }
+  ]
+}

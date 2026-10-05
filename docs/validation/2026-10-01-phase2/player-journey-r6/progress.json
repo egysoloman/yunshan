@@ -1,0 +1,1622 @@
+{
+  "scope": "Normal-URL keyboard/mouse journey with public DOM observations",
+  "records": [
+    {
+      "name": "resume",
+      "at": "2026-10-01T21:53:47.512Z",
+      "stage": "resume",
+      "coordinates": {
+        "x": -445,
+        "y": 43,
+        "z": 550
+      },
+      "district": "千灯市集",
+      "clock": "14:45",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "重峦之间，街巷与轨道连接一城生息。",
+      "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+      "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 572 draw",
+      "needs": "饱腹96精力100社交65娱乐78",
+      "petitions": "",
+      "resumeAfter": "home",
+      "priorResults": "/workspace/yunshan/artifacts/phase2-player-journey-r5/results.json",
+      "priorResultsHash": "be00d4852f31502583e0251d88643539a81ad68d70cfd7d04568e6150cfcdcd0",
+      "priorCheckpoint": {
+        "name": "home-saved",
+        "at": "2026-10-01T18:38:31.886Z",
+        "stage": "home",
+        "coordinates": {
+          "x": -445,
+          "y": 43,
+          "z": 550
+        },
+        "district": "千灯市集",
+        "clock": "14:45",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "重峦之间，街巷与轨道连接一城生息。",
+        "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+        "toast": "旅程已保存在当前浏览器。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 149 draw",
+        "petitions": "",
+        "scope": "Actual UI save with the simulation paused; later journey stages have not run",
+        "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+      },
+      "restored": {
+        "at": "2026-10-01T21:53:47.225Z",
+        "stage": "resume",
+        "coordinates": {
+          "x": -445,
+          "y": 43,
+          "z": 550
+        },
+        "district": "千灯市集",
+        "clock": "14:45",
+        "day": "第 1 日",
+        "mode": "星际旅行者",
+        "location": "重峦之间，街巷与轨道连接一城生息。",
+        "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+        "toast": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。",
+        "wallet": "509.16 云币",
+        "identities": "星际旅行者",
+        "home": "居于 千灯市集·灯市街·里居6",
+        "growth": "教育0工作经验0",
+        "render": "0 FPS · 572 draw",
+        "needs": "饱腹96精力100社交65娱乐78",
+        "petitions": ""
+      },
+      "plannedLayout": "current-v2-r5"
+    },
+    {
+      "name": "resume-export",
+      "at": "2026-10-01T21:54:06.081Z",
+      "stage": "resume",
+      "coordinates": {
+        "x": -445,
+        "y": 43,
+        "z": 550
+      },
+      "district": "千灯市集",
+      "clock": "14:45",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "重峦之间，街巷与轨道连接一城生息。",
+      "context": "住宅 · 附近场所千灯市集·灯市街·里居69 层 · 216 人容量进入 / 使用建筑 · E租住 · 80 云币休息放置体素 · B回收附近体素 · X走近门口按 E 进入，楼梯处按 E 换层。",
+      "toast": "存档已导出，保留该文件即可跨浏览器恢复。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 572 draw",
+      "needs": "饱腹96精力100社交65娱乐78",
+      "petitions": "",
+      "exportedPath": "/workspace/yunshan/artifacts/phase2-player-journey-r6/resume-ui-export.json",
+      "exportBytes": 1798521,
+      "exportSHA256": "7ba76f550f9f5413cd712022b751599340cc24e9e48327674f88b2c122af6fe9",
+      "suggestedFilename": "yunshan-day-0.json",
+      "scope": "Actual native UI export preserved for independent read-only world/continuation review; this harness does not edit or import the downloaded JSON."
+    },
+    {
+      "name": "walking-saved",
+      "at": "2026-10-01T22:02:35.215Z",
+      "stage": "school",
+      "coordinates": {
+        "x": -348,
+        "y": 50,
+        "z": 512
+      },
+      "district": "千灯市集",
+      "clock": "19:04",
+      "day": "第 1 日",
+      "mode": "星际旅行者",
+      "location": "夜色入山，万家灯火沿谷而生。",
+      "context": "道路 · 行进中附近道路载具0 位乘客 · 货物 0 · 18 m/s购票乘坐驾驶载具候车停稳后可登乘；驾驶资格允许道路驾驶，驾驶员也可执飞航班。",
+      "toast": "旅程已保存在当前浏览器。",
+      "wallet": "509.16 云币",
+      "identities": "星际旅行者",
+      "home": "居于 千灯市集·灯市街·里居6",
+      "growth": "教育0工作经验0",
+      "render": "0 FPS · 234 draw",
+      "needs": "饱腹87精力95社交62娱乐76",
+      "petitions": "",
+      "completedStage": "home",
+      "incompleteStage": "school",
+      "target": {
+        "x": -352,
+        "y": 50.6,
+        "z": 512
+      },
+      "scope": "Actual paused UI save during ground travel. The destination facility and its action have not been reached or passed.",
+      "persistentProfile": "/workspace/yunshan/artifacts/phase2-player-journey-r5/browser-profile"
+    }
+  ],
+  "inputs": [
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"quality\"]')",
+      "value": "low"
+    },
+    {
+      "stage": "startup",
+      "type": "keyboard-range",
+      "target": "render-distance",
+      "value": 900
+    },
+    {
+      "stage": "startup",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('load')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "locator('[data-action=\"export\"]')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "resume",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"transit\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "keyboard-select",
+      "target": "locator('[data-ref=\"destination-kind\"]')",
+      "value": "school"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-navigation=\"academy-b13\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "public-navigation",
+      "destination": "文澜学苑·西溪院·书院4",
+      "waypoints": [
+        {
+          "index": 4,
+          "x": -472,
+          "y": 42.6,
+          "z": 568,
+          "text": "沿金线继续 · 约 32 米"
+        },
+        {
+          "index": 7,
+          "x": -480,
+          "y": 42.6,
+          "z": 608,
+          "text": "沿金线继续 · 约 68 米"
+        },
+        {
+          "index": 9,
+          "x": -496,
+          "y": 42.6,
+          "z": 632,
+          "text": "沿金线继续 · 约 97 米"
+        },
+        {
+          "index": 12,
+          "x": -492,
+          "y": 43,
+          "z": 648,
+          "text": "沿金线继续 · 约 109 米"
+        }
+      ]
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 244.17303304685515,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -445,
+        "y": 43,
+        "z": 550
+      },
+      "after": {
+        "x": -445,
+        "y": 43,
+        "z": 559
+      },
+      "target": {
+        "x": -445.20000000000005,
+        "y": 42.6,
+        "z": 560
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 100.58440680782913,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -445,
+        "y": 43,
+        "z": 559
+      },
+      "after": {
+        "x": -448,
+        "y": 43,
+        "z": 569
+      },
+      "target": {
+        "x": -448,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 110.22945049894732,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -448,
+        "y": 43,
+        "z": 569
+      },
+      "after": {
+        "x": -480,
+        "y": 40,
+        "z": 567
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -59.62674604720656,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -480,
+        "y": 40,
+        "z": 567
+      },
+      "after": {
+        "x": -471,
+        "y": 43,
+        "z": 568
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 568
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 176.02797044890775,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -471,
+        "y": 43,
+        "z": 568
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 598
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 73.3166914970685,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 598
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 593
+      },
+      "target": {
+        "x": -472,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -162.14711074937821,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 593
+      },
+      "after": {
+        "x": -482,
+        "y": 43,
+        "z": 592
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 592
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -286.5021052961399,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -482,
+        "y": 43,
+        "z": 592
+      },
+      "after": {
+        "x": -480,
+        "y": 43,
+        "z": 606
+      },
+      "target": {
+        "x": -480,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 203.598775598299,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -480,
+        "y": 43,
+        "z": 606
+      },
+      "after": {
+        "x": -493,
+        "y": 43,
+        "z": 608
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 608
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -120.69544590045766,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -493,
+        "y": 43,
+        "z": 608
+      },
+      "after": {
+        "x": -497,
+        "y": 42,
+        "z": 638
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 632
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -73.59965690730934,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -497,
+        "y": 42,
+        "z": 638
+      },
+      "after": {
+        "x": -496,
+        "y": 42,
+        "z": 633
+      },
+      "target": {
+        "x": -496,
+        "y": 42.6,
+        "z": 632
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -237.8420647378554,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -496,
+        "y": 42,
+        "z": 633
+      },
+      "after": {
+        "x": -511,
+        "y": 43,
+        "z": 633
+      },
+      "target": {
+        "x": -512,
+        "y": 42.6,
+        "z": 632
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -243.9903198355257,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -511,
+        "y": 43,
+        "z": 633
+      },
+      "after": {
+        "x": -509,
+        "y": 43,
+        "z": 647
+      },
+      "target": {
+        "x": -510,
+        "y": 42.6,
+        "z": 650
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 126.83545903745497,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -509,
+        "y": 43,
+        "z": 647
+      },
+      "after": {
+        "x": -511,
+        "y": 43,
+        "z": 651
+      },
+      "target": {
+        "x": -510,
+        "y": 42.6,
+        "z": 650
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -43.04958605785147,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -511,
+        "y": 43,
+        "z": 651
+      },
+      "after": {
+        "x": -492,
+        "y": 43,
+        "z": 648
+      },
+      "target": {
+        "x": -492,
+        "y": 43,
+        "z": 648
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 52.20062566067195,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -492,
+        "y": 43,
+        "z": 648
+      },
+      "after": {
+        "x": -473,
+        "y": 44,
+        "z": 648
+      },
+      "target": {
+        "x": -472,
+        "y": 43.6,
+        "z": 648
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -188.85912746641458,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -473,
+        "y": 44,
+        "z": 648
+      },
+      "after": {
+        "x": -472,
+        "y": 44,
+        "z": 628
+      },
+      "target": {
+        "x": -472,
+        "y": 44.2,
+        "z": 625.4000000000001
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -14.739648131884445,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 44,
+        "z": 628
+      },
+      "after": {
+        "x": -473,
+        "y": 45,
+        "z": 598
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 15.8439900086574,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -473,
+        "y": 45,
+        "z": 598
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 602
+      },
+      "target": {
+        "x": -472,
+        "y": 44.800000000000004,
+        "z": 602.6
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "world canvas",
+      "purpose": "keyboard movement focus"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -15.84399000865755,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 602
+      },
+      "after": {
+        "x": -472,
+        "y": 45,
+        "z": 583
+      },
+      "target": {
+        "x": -472,
+        "y": 45.400000000000006,
+        "z": 580
+      }
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 45,
+        "z": 583
+      },
+      "after": {
+        "x": -473,
+        "y": 46,
+        "z": 553
+      },
+      "target": {
+        "x": -472,
+        "y": 46,
+        "z": 557.4
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 12.70535081638687,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -473,
+        "y": 46,
+        "z": 553
+      },
+      "after": {
+        "x": -472,
+        "y": 46,
+        "z": 558
+      },
+      "target": {
+        "x": -472,
+        "y": 46,
+        "z": 557.4
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -12.705350816386721,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 46,
+        "z": 558
+      },
+      "after": {
+        "x": -473,
+        "y": 47,
+        "z": 528
+      },
+      "target": {
+        "x": -472,
+        "y": 46.6,
+        "z": 534.6
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 37.07374186088641,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -473,
+        "y": 47,
+        "z": 528
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 533
+      },
+      "target": {
+        "x": -472,
+        "y": 46.6,
+        "z": 534.6
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -37.07374186088656,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 533
+      },
+      "after": {
+        "x": -472,
+        "y": 47,
+        "z": 514
+      },
+      "target": {
+        "x": -472,
+        "y": 47.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 175.88503163548535,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -472,
+        "y": 47,
+        "z": 514
+      },
+      "after": {
+        "x": -442,
+        "y": 48,
+        "z": 511
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 59.86173602120252,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -442,
+        "y": 48,
+        "z": 511
+      },
+      "after": {
+        "x": -447,
+        "y": 48,
+        "z": 512
+      },
+      "target": {
+        "x": -448,
+        "y": 48,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -32.147992058388915,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -447,
+        "y": 48,
+        "z": 512
+      },
+      "after": {
+        "x": -427,
+        "y": 49,
+        "z": 511
+      },
+      "target": {
+        "x": -424,
+        "y": 48.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 107.25018479888064,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -427,
+        "y": 49,
+        "z": 511
+      },
+      "after": {
+        "x": -423,
+        "y": 49,
+        "z": 512
+      },
+      "target": {
+        "x": -424,
+        "y": 48.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -107.25018479888078,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -423,
+        "y": 49,
+        "z": 512
+      },
+      "after": {
+        "x": -403,
+        "y": 49,
+        "z": 512
+      },
+      "target": {
+        "x": -400,
+        "y": 49.2,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -403,
+        "y": 49,
+        "z": 512
+      },
+      "after": {
+        "x": -373,
+        "y": 50,
+        "z": 510
+      },
+      "target": {
+        "x": -376,
+        "y": 49.800000000000004,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 211.19668334740845,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -373,
+        "y": 50,
+        "z": 510
+      },
+      "after": {
+        "x": -376,
+        "y": 50,
+        "z": 513
+      },
+      "target": {
+        "x": -376,
+        "y": 49.800000000000004,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": -225.07754304693782,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW",
+        "ShiftLeft"
+      ],
+      "before": {
+        "x": -376,
+        "y": 50,
+        "z": 513
+      },
+      "after": {
+        "x": -337,
+        "y": 50,
+        "z": 510
+      },
+      "target": {
+        "x": -352,
+        "y": 50.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 320,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "mouse-drag",
+      "dx": 56.89456679723574,
+      "dy": 0
+    },
+    {
+      "stage": "school",
+      "type": "checkpoint-request",
+      "at": "2026-10-01T22:02:33.104Z"
+    },
+    {
+      "stage": "school",
+      "type": "walk",
+      "keys": [
+        "KeyW"
+      ],
+      "before": {
+        "x": -337,
+        "y": 50,
+        "z": 510
+      },
+      "after": {
+        "x": -348,
+        "y": 50,
+        "z": 512
+      },
+      "target": {
+        "x": -352,
+        "y": 50.6,
+        "z": 512
+      }
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('pause-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"settings\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('save')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "locator('[data-pane=\"life\"]')"
+    },
+    {
+      "stage": "school",
+      "type": "mouse-click",
+      "target": "getByTestId('panel-toggle')"
+    }
+  ],
+  "errors": []
+}

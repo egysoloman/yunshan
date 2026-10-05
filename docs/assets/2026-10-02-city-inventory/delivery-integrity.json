@@ -1,0 +1,626 @@
+{
+  "at": "2026-10-02T07:28:04.447949+00:00",
+  "producer": "root",
+  "rows": 1068,
+  "types": {
+    "基础组件": 552,
+    "组合模板": 209,
+    "配色尺寸变体": 91,
+    "材质贴图": 77,
+    "动画特效": 139
+  },
+  "states": {
+    "已集成代码生成": 337,
+    "隔离原型未集成": 16,
+    "缺失待制": 692,
+    "待核实": 23
+  },
+  "csvJsonExact": true,
+  "fixedColumns": [
+    "asset_id",
+    "中文名称",
+    "类别",
+    "条目类型",
+    "用途关联系统",
+    "状态",
+    "现有证据",
+    "生产方式",
+    "依赖接口",
+    "基础母版ID",
+    "派生规则",
+    "验收要求"
+  ],
+  "uniqueIDs": 1068,
+  "existingCSVVersion": {
+    "at": "2026-10-02T07:14:34.126268+00:00",
+    "file": "city-assets.csv",
+    "rows": 1068,
+    "bytes": 725558,
+    "sha256": "4b594548f38cfcba4b620dc6f13f812ddd747c6df20025f4815cacd0302ebbfc",
+    "libraryID": "libfile_da11a584abfc819183f69ea95de8f88e",
+    "fileID": "file_000000001a2c81f6b0fea2faeb1a04f9",
+    "version": 1,
+    "status": "SUCCEEDED_VERSIONED_REPLACEMENT_ONCE",
+    "xattrsApplied": 1,
+    "originalBytesUnchangedAfterXattr": true,
+    "originalVersion0Preserved": "history/csv-version0/",
+    "correction": "Three BUILT315-317 category/evidence/origin/acceptance fields previously inherited bonsai boilerplate; now have LED backplate and structural corridor interfaces. All stable IDs and counts unchanged."
+  },
+  "source94CurrentExact": true,
+  "currentRuntimeChangesAgainstFrozen04": 2,
+  "receivedTripoGLB": 0,
+  "approvedNewModelMounts": 0,
+  "newFineArtAcceptance": 0,
+  "fullGame": "NOT_COMPLETE",
+  "home03IndependentCRCAndSHA": {
+    "libraryID": "libfile_c09c6cd169a481918d809c2f4210c1b6",
+    "fileID": "file_000000007f5c81f6a5da3e69891a1483",
+    "bytes": 8442241,
+    "sha256": "d0b6ea46ae156343518bc46f40d733de48941e9b7e3c1c5407c9c141b1e55ebf",
+    "members": [
+      {
+        "path": "market-b24-home-bom-revision03/README.md",
+        "bytes": 5315,
+        "sha256": "d59fcd7fe4fb81c1fe2b8e75f99f42ade0fa11976b698119e935c6cb1648de6f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/additions-only.csv",
+        "bytes": 16756,
+        "sha256": "2cb7182f377e78febb15ba22090e9a249c21c815a310aa7f515ae9f87666b7e8"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/assemblies-revision03.csv",
+        "bytes": 20076,
+        "sha256": "b08468af18d9ad74b8ee3dddb76003e6d0e753163d8117585270e458bf4b2980"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/bom-full-revision03.csv",
+        "bytes": 126706,
+        "sha256": "afa9a55ca4a06962f1872615f792d2f7e2c67f13967a2da5070a3e1656bbafdb"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/bom-full-revision03.json",
+        "bytes": 360710,
+        "sha256": "8fedd18c1d2fb126a852efcf75ee5629d280d9ba32b0f6cb91b0b8306fa0cd12"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/consistency.json",
+        "bytes": 1449,
+        "sha256": "bf783fd8f963b2287e64525d0a6b73b824f6b3c5b41cef949dabf1455d97e779"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/fallback-modules-addendum03.json",
+        "bytes": 42678,
+        "sha256": "9691fbea1c24deef1fa72e91a69c545ec8fdbd0196bb6a1d5c3e973cd5efd657"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/README.md",
+        "bytes": 7198,
+        "sha256": "cf44eda2d90b29d0cc9dac86f0ffe3bdd9ee42e077d0713bafd91db2d2a21ca1"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/appendix/river-b2-window-coface/analysis.json",
+        "bytes": 12698,
+        "sha256": "0f3bce0f83db7dc5a1d1e600dbe1acc35f72331a909fb8463c3eb40d5b8a5409"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/appendix/river-b2-window-coface/analysis.md",
+        "bytes": 2877,
+        "sha256": "e990834f36453ecddbd3c019e0fd91066d8078614d3a8cebfeb76814ecb902f7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/assemblies.csv",
+        "bytes": 9904,
+        "sha256": "0653adda1fda400cec6c3e53c52671368dd5badf43b7b0d41e5d26b88a0a5d37"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/bom-consistency.json",
+        "bytes": 448,
+        "sha256": "88ecdbd697b7f69afa5201b11dce991eb6d8f54d2aaae09fbfe836df04a88a8f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/bom-full.csv",
+        "bytes": 80043,
+        "sha256": "b38588dd835a64b6d6b93c244d79ee171dc22b65c3c925c774134e627aa2f39a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/bom.json",
+        "bytes": 164966,
+        "sha256": "55ed2cb6f768b251eb8c2ef5549d671f73de8fc586412a0db8d8465a2277dcb0"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/component-list.md",
+        "bytes": 4287,
+        "sha256": "fdf7a5c987ed893793f2a4c0a807cc6bec9dccdd001d515bbf5f15cb8bef7ffa"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/component-masters.csv",
+        "bytes": 63179,
+        "sha256": "78cf640e65d22879c29349840016035da87926d659db3c132df794b56dc4cc51"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/actual-disposal.json",
+        "bytes": 1246,
+        "sha256": "2be628c76346da69be6752c1eb77928e01b6017a2f4936feb6eedfcdfebbdd78"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/actual-rent.json",
+        "bytes": 1115,
+        "sha256": "5a8c6ab032089a7316c913297d2cb5892221fea260d2012b1a18b964a7877b50"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/actual-rest.json",
+        "bytes": 1066,
+        "sha256": "8671bd19eda26109500427dceef4b4d39b676b922b91bd108fc6abb39f087c81"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/document-provenance.json",
+        "bytes": 24287,
+        "sha256": "91a659e6c7d6d91db27cf0f78be5d12f7621bf194bc91973e9433422805da3db"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/door-crossing-route.json",
+        "bytes": 23233,
+        "sha256": "3cb78842667dc11962060e60e6d5f91aaae2366b3639616347331c9a76d96537"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/executed-document-gate.mjs",
+        "bytes": 4533,
+        "sha256": "ee7fa0709fc6ae952c3b53e5c32416569c4cb5e23d22c00870909159ee30cfee"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/executed-source-gate.mjs",
+        "bytes": 3130,
+        "sha256": "1a5b36576449d9e4a893fbecdffe78502be9c1d006eb1e26a36938e4e84c57a1"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/executed-wrapper.mjs",
+        "bytes": 10727,
+        "sha256": "a0f168c6a1ce68e4447ae49d8c80436a0e0c594ab8511b4e615864bc6aaea5a0"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/execution-config.json",
+        "bytes": 940,
+        "sha256": "7b4c3dfe9e60a8ef518d18db6667b337b0be9cc4e588b56033934c332f18fcc2"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/execution.log",
+        "bytes": 3343,
+        "sha256": "d53cbc544bbc0624c8b2c64a20ca14c6455b48a9e2f9f327d0fb009818fa463a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-after-legal-rent-rest.json",
+        "bytes": 4152,
+        "sha256": "70623af4b01342b5c98db76d0f2e8460184e3662c259f8002f4a429b222e5463"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-after-legal-rent-rest.png",
+        "bytes": 132252,
+        "sha256": "9cba682e2618d82f95026271937c994b412bb1981f7d2a1a736d8d1053ee8308"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-bed-close.json",
+        "bytes": 4772,
+        "sha256": "1047a2c2a8883d8b242993d3cc042fa4a930765cacc6c4b03d405861d54054f0"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-bed-close.png",
+        "bytes": 323466,
+        "sha256": "90ffb027f5442cd5c48a8364d969de4aafc9f715631b598e8e080f501d7c1b4e"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-courtyard-toward-house.json",
+        "bytes": 4221,
+        "sha256": "30f89cb4e0f11b303a3324f53b71c60ad73f2aca06c372b2bb7237004c19bf40"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-courtyard-toward-house.png",
+        "bytes": 414107,
+        "sha256": "719c632fcd414dc009e95c3a90b9d457dc59e79caea3936870a88884436eb310"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-door.json",
+        "bytes": 3260,
+        "sha256": "8bf11fe0e0e299f9c9a1b1d3ef07df014275e5c8f795efff8414946ef9c78e5d"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-door.png",
+        "bytes": 368069,
+        "sha256": "5b0757d7bb6b84f8f89788f0bbf838fa780d0a0d3b3804ced0ff39398dd730e6"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-eave-from-outside.json",
+        "bytes": 3258,
+        "sha256": "f9be5f7d5ddca8f1cbfd5de4b835fe97517254fd616e7319613985a6a1171447"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-eave-from-outside.png",
+        "bytes": 250940,
+        "sha256": "ee51761a276b7c9b464ab8069bfc8c402123c43493a20efe837805b584fa4ca7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-inside.json",
+        "bytes": 4200,
+        "sha256": "db02987da2140cdda97a8e4248ab9272065d1d494e7c9a9d5b1964bba8a69ac4"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-inside.png",
+        "bytes": 747626,
+        "sha256": "7444e5380c5934490369edd0f8ea12af2af305816efb4320be0e54c81ac817dc"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-service-table.json",
+        "bytes": 4218,
+        "sha256": "7fc0adae05c991cb7a496a30a0e87fd3bdc0a571a401861e996bdb7220ece759"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-service-table.png",
+        "bytes": 129664,
+        "sha256": "22c60d830713e4e0ddf19591fd5749991c893421c7a3f151429113269576490f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-stair-half-turn.json",
+        "bytes": 4221,
+        "sha256": "5ea6513727ab8f5fa53ebfb80d07bc6ea47e069d6d2671ebdc6cbfee743858f0"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-stair-half-turn.png",
+        "bytes": 449863,
+        "sha256": "41e86720fc18ff2b414ecae61df887b83038b2aebae1902052cb4b2e11f1e336"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-stair-upper1.json",
+        "bytes": 4239,
+        "sha256": "370390ec7434c22aa6ab2406ef946da8c7324f8498dce05f5339182c048af98a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-stair-upper1.png",
+        "bytes": 597733,
+        "sha256": "0849c92b8045221d6fabf757e4ca753a730128692b3f9be5de23c83541c6f961"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-upper-hole.json",
+        "bytes": 4560,
+        "sha256": "f59e642f29038dc3fe8ea854ffcfd90e3936b763fd49c39790c1beb1a8ed8e35"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-upper-hole.png",
+        "bytes": 636130,
+        "sha256": "fb593596b3a227df5621d26fdbbc9801944a7caccf420c1813a8a7599fbe2091"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-window-by-bed.json",
+        "bytes": 4243,
+        "sha256": "2097fb97e742ae5425337f578a190f42e3a1bfae51ea74269f311a529b8fde06"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/home-window-by-bed.png",
+        "bytes": 552305,
+        "sha256": "50489b53b835a0a135bfc4e4e83357cf39a4d558ad2c2d9ed93083cb79d117ba"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/initial-declared-fixture.json",
+        "bytes": 2155,
+        "sha256": "e3e32a8e1a734c619037c46d7fbbeba35ac235f5f640f9700f92fa9ea6c790f2"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/npc-after-rent-rest.json",
+        "bytes": 2028,
+        "sha256": "5aefaa0fba614314cb1d91550e0aa972fa9b93a883e4a507f7e2b339a4059b24"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/npc-outside-start.json",
+        "bytes": 2055,
+        "sha256": "458c718fa997a54e4c1011964e8a333f1ad81e5acc751ada4f0bf923e03c48be"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/observer.py",
+        "bytes": 6678,
+        "sha256": "e3cdaa7efdb405b7632c8e340dbc5e5318e6d96405f5dbe1c3dc884ae689f9ea"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/pilot-failure.json",
+        "bytes": 4146,
+        "sha256": "54f93aa85df2308f5511e27069cd156df5277025188a656c99364d83f45ad860"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/pilot-failure.png",
+        "bytes": 520382,
+        "sha256": "410561b3a0ff84b240fcca98f4fa720959d0065bebd4000ed596403ebd396330"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/pilot-results.json",
+        "bytes": 1452606,
+        "sha256": "987edb13d77bce2b3ef1d13eb52498103408787c23d2a0acd71735e880ec16ad"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/return-from-bed-route.json",
+        "bytes": 76205,
+        "sha256": "51fe003f166f0c16df947490a7e13a9003c411afa8b896d547bb95ea4b478181"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/return-from-courtyard-route.json",
+        "bytes": 204867,
+        "sha256": "67e37e0196e96d2056266349efeb4a4dc0fa960427b43d13ca8babd34da7c141"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/return-to-inside-route.json",
+        "bytes": 150717,
+        "sha256": "39cab89e943ec10be3e9be655ef0851092493d334fa388d4034459d56323032a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/run-manifest.json",
+        "bytes": 24969,
+        "sha256": "28bf183708d3cfef8224534677f589ee3c672f90325f869a2c07d6c4c359f047"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/service-point-route.json",
+        "bytes": 150724,
+        "sha256": "94559195692cfbba9069c352b4e91c508c38868c3d8f2b1ffb1bacbd858126a7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/source-snapshot.json",
+        "bytes": 31214,
+        "sha256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/stairs-01-first-flight-route.json",
+        "bytes": 30281,
+        "sha256": "7c1d62acb8690075011371afd8d100d7defd4be64fd40c4149a948fef9d7fc8f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/stairs-01-second-flight-route.json",
+        "bytes": 54321,
+        "sha256": "e46dc6087b295d18ef0bf074ea5db0342af8540005f9705668fb85e573f1e67d"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/stairs-12-cpu-cause.json",
+        "bytes": 6844,
+        "sha256": "97a30c250c939ceebe273aaffb99a61288d81b982f15508835a8927f53b3ea3f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/stairs-12-up-route.json",
+        "bytes": 14044,
+        "sha256": "d29a2bb3506bfcdfa4b9188b7d586ce6e6a1704379ca2faad575adb9446d0c55"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/stairs-approach-route.json",
+        "bytes": 162037,
+        "sha256": "355080e3e9bd12ab5847052f5188992b0691ae2abb2b58967676bbc804ef6e0f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/to-courtyard-route.json",
+        "bytes": 204817,
+        "sha256": "2087ff026e1cc0c7a7f9de912e048589a93f79fa4675d3e1c2223018b67a6c02"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/to-real-bed-route.json",
+        "bytes": 76131,
+        "sha256": "66060c64ae6e9b1a4908694dc95c7b3b630062f06d66bba9e52dfe55df6800c3"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/evidence/pilot/upper1-to-next-stairs-route.json",
+        "bytes": 986,
+        "sha256": "d293e30882e830bce8100441ea2a182e89c2f5c5e46ad511de6b84cca8a97e70"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/first-attempt-usepoint-argument-omitted.json",
+        "bytes": 1640930,
+        "sha256": "948d8d5282871ddd895290726b5fb3753992f2b71525a3f0868f94922a6bdab0"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/first-attempt-usepoint-argument-omitted.log",
+        "bytes": 45646,
+        "sha256": "88f3ad5bcb71efb27e41a4b21dab742f41d37477107a3f62f13b38453fcf1105"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/bom-consistency.json",
+        "bytes": 385,
+        "sha256": "f1ae88e068e512e855f914f50cb8aada71a7b73ed896b697eb538e6528442ff3"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/bom-full.csv",
+        "bytes": 69471,
+        "sha256": "8bb5e81a9a1dead50d0730fdf4f6d931380181994fb4e72337920e2a91da7d3f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/bom.json",
+        "bytes": 128033,
+        "sha256": "5699d6eb6acc3c53de38107358ae6118376add7855e3e67148848a3cd847d692"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/build-bom.py",
+        "bytes": 22681,
+        "sha256": "3fbfc1b246f5129eb99b66498c0b92084053553b36483dd956207a84d975e4d5"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/component-list.md",
+        "bytes": 3534,
+        "sha256": "776da59eba8855cc0074baa2b698f0c4ddc096dcfada04c9a840a75d435b86a3"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/library-csv-draft-upload.json",
+        "bytes": 1104,
+        "sha256": "e3189c627525c37b40ea467282c23f87453c3d0d04fc8999699ea45879ed87a1"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/reference-interface.csv",
+        "bytes": 27017,
+        "sha256": "2415f7f6df8b9dd1ad4cb1eca9a9ba27ba97f3e6744c72394477b422fc4df15c"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/history/uploaded-draft-v1/reference-interface.json",
+        "bytes": 44232,
+        "sha256": "859acf34b18ef4f954fff1e13630819dceded071a8fc14bd1d28c63c28bc750f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/index.json",
+        "bytes": 18368,
+        "sha256": "cbe11357703a25cce9804b98a7d863cdc01357b0edfa207453226e90e2e7be0c"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/materials-and-semantics.csv",
+        "bytes": 7598,
+        "sha256": "00c4ddb139886d18369b551e4c57287eb406b1f5716ac1471cc4e43466abb085"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/pilot-evidence-summary.json",
+        "bytes": 21272,
+        "sha256": "0ffc041ca254cd0803b2f772b3be4be8dcbace55aab39129acf9435477dbd74a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/producer/package-bom.py",
+        "bytes": 12208,
+        "sha256": "350103fe1956201a172be52e36ba8924398eb20b89875ff12fd6a93cf05e9371"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/producer/revise-bom.py",
+        "bytes": 15526,
+        "sha256": "fe26a31d382e10527989e5ae99c85abb347b1342aefdf34b9fb7d8c0806f9255"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/raw/candidate-facts.json",
+        "bytes": 12350,
+        "sha256": "a50b6eb72c43c5e486475aea20131d1ebf1a8b19514e62d92fdccb23eaf36c7c"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/raw/collect-bom.mjs",
+        "bytes": 10848,
+        "sha256": "dd5f331de93336cd4566308edae120b341d4634b39bd3f22962df7a2fabb79aa"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/raw/raw-counts.json",
+        "bytes": 1648071,
+        "sha256": "620241666b852ba8de11c0cbe2c1dc52d89f807383518481e63a5a0f7be5942c"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/raw/raw-counts.log",
+        "bytes": 51379,
+        "sha256": "3b7a23f64e52a7129ab312df176489ea2635cc77f641c3a69f067fa2869322ec"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/reference-interface.csv",
+        "bytes": 32750,
+        "sha256": "a093f1092ba37539923fbf8107ab8459fe20a128458b47f4cc14137b187baa18"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/reference-interface.json",
+        "bytes": 50373,
+        "sha256": "864612036b73f00e7b0257fa19dc959e1a26c862d0f2305f5a2f8d7f7ddc10fc"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/AGENTS.md",
+        "bytes": 1726,
+        "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/source-snapshot.json",
+        "bytes": 31214,
+        "sha256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/architecture-floor-plan.ts",
+        "bytes": 39817,
+        "sha256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/renderer.ts",
+        "bytes": 80466,
+        "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/rendering/architecture-bodies.ts",
+        "bytes": 8975,
+        "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/rendering/architecture-detail.ts",
+        "bytes": 38886,
+        "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/simulation.ts",
+        "bytes": 199661,
+        "sha256": "fea9a9370b8be221ecb5eb681477c11420369c34ed1d5cb69cc84358ce696047"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/site-fixtures.ts",
+        "bytes": 4366,
+        "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/types.ts",
+        "bytes": 12048,
+        "sha256": "69f7ef548fc89f1a877e91ffbc77a4a4c956fa61f43ee7208d20449df0052cda"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/ui.ts",
+        "bytes": 154119,
+        "sha256": "abe5bddf0924ff625caa9f116461ef4815374a26c3170c5e7d0c995acc3c67bd"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/history/original-revision02/source-excerpts/src/world.ts",
+        "bytes": 53567,
+        "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/index-revision03.json",
+        "bytes": 22443,
+        "sha256": "3d3effd0d3a90fdf5da34db15bcb229088a882e9d411c42405cbf92780a6b1c7"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/library-v3-read-metadata-only.json",
+        "bytes": 2206,
+        "sha256": "a0b6144969b7fa48b650edfe4290d7cd39f542aa9ef8ffaaec80eaf659b2b5a5"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/module-mapping.csv",
+        "bytes": 2030,
+        "sha256": "d3f3dee6b56019abea8250dc608c81f370db07257ac91bc74870777a24875711"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/physical-masters-revision03.csv",
+        "bytes": 97629,
+        "sha256": "1432b1c682aae16c1c6207e519ca2ec959e57e3440bf1bcfd1e6dd0388dbcc1b"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/producer/addendum03-first-attempt.log",
+        "bytes": 548,
+        "sha256": "e8fe5c888bdd7e5dfa98f7212b504e361611b4ac63ca4b7291c885fa4e84b45a"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/producer/build-addendum03.py",
+        "bytes": 26672,
+        "sha256": "a1d92f4e033417d238e7fe13c04b33f67a5e4e75aaa89739fb9c37ecaa9a48b4"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/producer/package-addendum03.py",
+        "bytes": 5132,
+        "sha256": "6f594546099d9df9ff5bbde63d951883158d2257a1de532060a8d0eaa3d120ca"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/reference-interface-revision03.csv",
+        "bytes": 46363,
+        "sha256": "c4f494c5819b800fa08b9c9d6e174570ccf9bb474a13286680d89d53f837d710"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/reference-interface-revision03.json",
+        "bytes": 67847,
+        "sha256": "35b9b3497723c45550180f50ba132b336fd75df8fb059e6beb9b844357ebfb2f"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/reference-original.json",
+        "bytes": 464,
+        "sha256": "a2bd98e384b98914d99246aa20fca95f903bd4edfc2b555cafbc55da7b82a401"
+      },
+      {
+        "path": "market-b24-home-bom-revision03/references/market-b24-reference-v3-voxel-future.png",
+        "bytes": 2547717,
+        "sha256": "572209fcd7d260debbc624c42949cf887c27862c75f57ed8ae71ad1dcbe90574"
+      }
+    ],
+    "physicalMasters": 52,
+    "assemblies": 16,
+    "allRows": 77
+  }
+}

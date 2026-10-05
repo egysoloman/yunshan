@@ -1,0 +1,40 @@
+{"at":"2026-10-02T01:09:13.833Z","event":"run-start","pid":91403,"cwd":"/tmp/yunshan-v4-world-final-01","command":["--cpu-prof","--cpu-prof-dir=diagnostics","--cpu-prof-name=world-save-final.cpuprofile","--import","tsx","--import","./diagnostics/progress-hook.mjs","--test","--test-isolation=none"]}
+{"at":"2026-10-02T01:09:14.476Z","event":"case-start","name":"new journeys use the current layout and its fingerprint matches the simulation save contract"}
+{"at":"2026-10-02T01:09:19.033Z","event":"case-finished","name":"new journeys use the current layout and its fingerprint matches the simulation save contract","durationMs":4556.274498999999}
+{"at":"2026-10-02T01:09:19.035Z","event":"case-start","name":"all three v2 worlds retain their frozen full JSON, fingerprints and authoritative terrain and walking surfaces"}
+{"at":"2026-10-02T01:09:32.265Z","event":"case-finished","name":"all three v2 worlds retain their frozen full JSON, fingerprints and authoritative terrain and walking surfaces","durationMs":13229.802370000001}
+{"at":"2026-10-02T01:09:32.265Z","event":"case-start","name":"legacy worlds retain full main and checkpoint JSON plus their independently captured physical samples"}
+{"at":"2026-10-02T01:09:39.323Z","event":"case-finished","name":"legacy worlds retain full main and checkpoint JSON plus their independently captured physical samples","durationMs":7057.926518}
+{"at":"2026-10-02T01:09:39.325Z","event":"case-start","name":"the historical r5 recipe reproduces every old world byte, fingerprint and sampled physical surface across three seeds"}
+{"at":"2026-10-02T01:09:56.483Z","event":"case-finished","name":"the historical r5 recipe reproduces every old world byte, fingerprint and sampled physical surface across three seeds","durationMs":17158.486448999996}
+{"at":"2026-10-02T01:09:56.484Z","event":"case-start","name":"v3 identifies the changed physical heightfield even when every building, road and station matches v2"}
+{"at":"2026-10-02T01:10:09.007Z","event":"case-finished","name":"v3 identifies the changed physical heightfield even when every building, road and station matches v2","durationMs":12522.791337999995}
+{"at":"2026-10-02T01:10:09.008Z","event":"case-start","name":"v3 fingerprints cover physical geology inputs and ignore untrusted extra descriptor fields"}
+{"at":"2026-10-02T01:10:11.273Z","event":"case-finished","name":"v3 fingerprints cover physical geology inputs and ignore untrusted extra descriptor fields","durationMs":2265.4857859999975}
+{"at":"2026-10-02T01:10:11.274Z","event":"case-start","name":"all three v3 worlds keep their full frozen JSON and every captured physical sample after v4 is introduced"}
+{"at":"2026-10-02T01:10:30.330Z","event":"case-finished","name":"all three v3 worlds keep their full frozen JSON and every captured physical sample after v4 is introduced","durationMs":19055.82675300001}
+{"at":"2026-10-02T01:10:30.330Z","event":"case-start","name":"a complete v3 save retains its actual upper floor, voxel edits, finances and routes instead of acquiring the v4 rooms"}
+{"at":"2026-10-02T01:11:02.356Z","event":"case-finished","name":"a complete v3 save retains its actual upper floor, voxel edits, finances and routes instead of acquiring the v4 rooms","durationMs":32025.144661}
+{"at":"2026-10-02T01:11:02.356Z","event":"case-start","name":"v2 and historical r5 saves keep their surface, upper floor, voxel edit and entire financial state after v4"}
+{"at":"2026-10-02T01:11:33.632Z","event":"case-finished","name":"v2 and historical r5 saves keep their surface, upper floor, voxel edit and entire financial state after v4","durationMs":31275.269971999995}
+{"at":"2026-10-02T01:11:33.633Z","event":"case-start","name":"a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks"}
+{"at":"2026-10-02T01:11:43.138Z","event":"case-finished","name":"a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks","durationMs":9504.958832000004}
+{"at":"2026-10-02T01:11:43.138Z","event":"case-start","name":"the original native r5 export selects its historical recipe and continues 24 actual ticks after v4"}
+{"at":"2026-10-02T01:11:55.147Z","event":"case-finished","name":"the original native r5 export selects its historical recipe and continues 24 actual ticks after v4","durationMs":12008.49304999999}
+{"at":"2026-10-02T01:11:55.147Z","event":"case-start","name":"an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection"}
+{"at":"2026-10-02T01:12:06.255Z","event":"case-finished","name":"an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection","durationMs":11108.431495999976}
+{"at":"2026-10-02T01:12:06.256Z","event":"case-start","name":"v4 is a deterministic physical building opt-in while inheriting the complete v3 landscape and graph"}
+{"at":"2026-10-02T01:12:37.158Z","event":"case-finished","name":"v4 is a deterministic physical building opt-in while inheriting the complete v3 landscape and graph","durationMs":30901.703949999996}
+{"at":"2026-10-02T01:12:37.159Z","event":"case-start","name":"the six v4 building families join their real ground use points to the city entrance through shared walls"}
+{"at":"2026-10-02T01:12:39.891Z","event":"case-finished","name":"the six v4 building families join their real ground use points to the city entrance through shared walls","durationMs":2731.8612810000195}
+{"at":"2026-10-02T01:12:39.891Z","event":"case-start","name":"v4 upper courtyards and wings remove actual walking support instead of keeping rectangular ghost rooms"}
+{"at":"2026-10-02T01:12:43.991Z","event":"case-finished","name":"v4 upper courtyards and wings remove actual walking support instead of keeping rectangular ghost rooms","durationMs":4099.645614999987}
+{"at":"2026-10-02T01:12:43.993Z","event":"case-start","name":"an absent v4 upper wing exposes its real lower roof or open ground courtyard slab"}
+{"at":"2026-10-02T01:12:46.556Z","event":"case-finished","name":"an absent v4 upper wing exposes its real lower roof or open ground courtyard slab","durationMs":2562.743622000009}
+{"at":"2026-10-02T01:12:46.556Z","event":"case-start","name":"v4 support uses the real yaw footprint and cannot pull feet up to a higher storey"}
+{"at":"2026-10-02T01:12:48.738Z","event":"case-finished","name":"v4 support uses the real yaw footprint and cannot pull feet up to a higher storey","durationMs":2181.7839870000025}
+{"at":"2026-10-02T01:12:48.738Z","event":"case-start","name":"v4 fingerprints include generated rooms, permissions and functional points while imported descriptors stay untrusted"}
+{"at":"2026-10-02T01:13:12.041Z","event":"case-finished","name":"v4 fingerprints include generated rooms, permissions and functional points while imported descriptors stay untrusted","durationMs":23302.401718999987}
+{"at":"2026-10-02T01:13:12.041Z","event":"case-start","name":"a complete v4 occupied-floor save reassembles byte-exact and continues every module for 24 ticks"}
+{"at":"2026-10-02T01:15:43.244Z","event":"case-finished","name":"a complete v4 occupied-floor save reassembles byte-exact and continues every module for 24 ticks","durationMs":151202.895386}
+{"at":"2026-10-02T01:15:43.245Z","event":"run-finished"}

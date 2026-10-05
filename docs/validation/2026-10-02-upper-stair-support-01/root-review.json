@@ -1,0 +1,353 @@
+{
+  "at": "2026-10-02T07:33:45.721932+00:00",
+  "reviewer": "root",
+  "runExitCode": 0,
+  "originalRawFiles": 58,
+  "PNG": 8,
+  "routes": 19,
+  "positiveRoutes": 17,
+  "expectedBlockedHoles": 2,
+  "source99MatchesActualFrozenFiles": true,
+  "source99Stable": true,
+  "httpLoadedNewEntry": {
+    "url": "http://127.0.0.1:4201/assets/index-BwWZW0hZ.js",
+    "status": 200,
+    "bytes": 634784,
+    "sha256": "fb95a40c52a9a18c86510d004398d89128ee473994c3c53359c964c4d736581c",
+    "fromServiceWorker": false
+  },
+  "ownedDisposalScope": {
+    "assertedZero": [
+      "actualSceneGroups",
+      "actualMeshes",
+      "actualInstances",
+      "ownedGeometryCount",
+      "interiorBuildingRefs",
+      "hiddenFarMismatch"
+    ],
+    "globalGPUTexturesAfter": 1,
+    "notGlobalResourceZeroClaim": true
+  },
+  "archive": {
+    "members": 183,
+    "bytes": 11921198,
+    "sha256": "0e652f6a442c5f74261a8a82d7dc9e3a1a9eb24038fedd1a1a8a78b2657d8751",
+    "CRC": "PASS",
+    "perMemberSHA": "PASS",
+    "raw58EveryMemberByteExact": true,
+    "xattrVersion": "0",
+    "streamsScanned": 182,
+    "gzipDecompressed": 12,
+    "credentialPatternHits": 0,
+    "libraryID": "libfile_fa2204f82bd081918b575a8962f18927",
+    "fileID": "file_0000000078d081f6bb52a16d8ab79dfc"
+  },
+  "rootRelatedChecks": 26,
+  "rootRelatedExit": 0,
+  "strictBuildExit": 0,
+  "fullNewSourceRules": "NOT_RUN",
+  "original465": "Frozen04 only",
+  "rootActualPixelInspections": [
+    "home-door.png",
+    "home-stair-upper2.png",
+    "floor-2-hole.png",
+    "home-returned-ground.png"
+  ],
+  "art": "FAIL_REMAINS",
+  "nativeJourney": "NOT_RUN_THIS_BATCH",
+  "NPCNaturalDoorBed": "NOT_RUN_THIS_BATCH",
+  "macOS": "NOT_VALIDATED",
+  "fullGame": "NOT_COMPLETE",
+  "originals": [
+    {
+      "path": "actual-disposal.json",
+      "bytes": 1246,
+      "sha256": "a7c862bae406a38cef2c576cdbeaf57da24bac075756a1a5bbd820bb99ad2b56"
+    },
+    {
+      "path": "actual-rent.json",
+      "bytes": 1091,
+      "sha256": "a7956a8116340b3aacf1ea5472336412a5afed4af28fba67059a1c39a133d626"
+    },
+    {
+      "path": "actual-rest.json",
+      "bytes": 1042,
+      "sha256": "b4cb0534e13699ab76a76a4d06b1b6b7f0979d657b441e2ba0057b883f0caf0a"
+    },
+    {
+      "path": "document-provenance.json",
+      "bytes": 24397,
+      "sha256": "aaa03c84558bc80da624b391a0523ec71c244e6caac9b1f84504af6b2b7e7af4"
+    },
+    {
+      "path": "door-crossing-route.json",
+      "bytes": 23233,
+      "sha256": "c20928ad840053358114c0664c3909b08614e3774606a6b2e2beb4129e3dff17"
+    },
+    {
+      "path": "executed-document-gate.mjs",
+      "bytes": 4591,
+      "sha256": "7ee270f4156fb147d3ddfef6f1a18266373cb20af88b8895c66bf741f984e023"
+    },
+    {
+      "path": "executed-source-gate.mjs",
+      "bytes": 4258,
+      "sha256": "4d9ff4edcf399ccc5c25243780fad92fa946028f1d99531e66fe03681cda5094"
+    },
+    {
+      "path": "executed-wrapper.mjs",
+      "bytes": 13240,
+      "sha256": "89dd0a8fbb47810572ed609d55a7c310dbd2f7da7820154d9d8243d04b0600e2"
+    },
+    {
+      "path": "execution-config.json",
+      "bytes": 790,
+      "sha256": "9e1b076d20605a1d32fc236bcd27af827f6859246707ecbd6ccced8514b4a33e"
+    },
+    {
+      "path": "execution.log",
+      "bytes": 2448,
+      "sha256": "5177dcd408e8635210a955bfdf4f0b9096f732dddcf92732cb120acef62a6569"
+    },
+    {
+      "path": "final-actual-state.json",
+      "bytes": 265,
+      "sha256": "b8d38343392fbaabcba13e87ea7b3033444d251e5c1a6bfa5dbdd3a88cf41af4"
+    },
+    {
+      "path": "floor-1-hole-negative.json",
+      "bytes": 53263,
+      "sha256": "726cc85b1f613b9d2492a4bb24568b5b27977f326013a7b0a906183edcec9648"
+    },
+    {
+      "path": "floor-1-hole.json",
+      "bytes": 5013,
+      "sha256": "40039386d1e5d1b9da66bcba41c561a2b0847b3ca8a8f444daa32fdbc126702c"
+    },
+    {
+      "path": "floor-1-hole.png",
+      "bytes": 587924,
+      "sha256": "3db091b27f7b47c2f06a9950d90dbbad85468fdb1d6b76f3f3b474f4ef5cb01f"
+    },
+    {
+      "path": "floor-1-return-from-hole-route.json",
+      "bytes": 3534,
+      "sha256": "8154b98ce4d9942e74d34ed383b7816134dcffb431f6f49bf6b6217001b96bc2"
+    },
+    {
+      "path": "floor-2-hole-negative.json",
+      "bytes": 56751,
+      "sha256": "507908c7a16c74fd53a951a0cf4f1f451c2d0d111a4a70c878b90cd2621d08b0"
+    },
+    {
+      "path": "floor-2-hole.json",
+      "bytes": 5107,
+      "sha256": "5f2def6ab53acef6d7dbd34443920f6b012c7d5af02f3adeaf3c551de72b660e"
+    },
+    {
+      "path": "floor-2-hole.png",
+      "bytes": 655590,
+      "sha256": "4af465a8c3d6a56445ad3bdddc87395c73b2d3d88cf13c5c2eb85e009dd11707"
+    },
+    {
+      "path": "floor-2-return-from-hole-route.json",
+      "bytes": 3763,
+      "sha256": "5db87c211cd533d04b2ce831c6dffd08f0f2cb3c566d63b4f674238b5c208c73"
+    },
+    {
+      "path": "home-door.json",
+      "bytes": 3260,
+      "sha256": "8bf11fe0e0e299f9c9a1b1d3ef07df014275e5c8f795efff8414946ef9c78e5d"
+    },
+    {
+      "path": "home-door.png",
+      "bytes": 365459,
+      "sha256": "ab6f7f884a137e4d7cc92dda27fe8c387cf627212d4b0763ffafd2448a871608"
+    },
+    {
+      "path": "home-returned-floor1.json",
+      "bytes": 4680,
+      "sha256": "32c3c8e78d33ed6c777e95ef66aa490a614abf90e206230f0f465351f0314812"
+    },
+    {
+      "path": "home-returned-floor1.png",
+      "bytes": 438758,
+      "sha256": "190eadf304efa9c707e29706a3bbda78636e949ce6dd4aed6d65ab20db55423b"
+    },
+    {
+      "path": "home-returned-ground.json",
+      "bytes": 4694,
+      "sha256": "96d3b42c1b3ae256b960b2c88f9b297e97237912aca494892987f5deabefbc80"
+    },
+    {
+      "path": "home-returned-ground.png",
+      "bytes": 445801,
+      "sha256": "29bfb587ed4a8045e68f2dbedfdc474c10184d214b93573be3a621c994787e43"
+    },
+    {
+      "path": "home-stair-upper2.json",
+      "bytes": 4735,
+      "sha256": "7e4de999ee143ee51ff367a2010a4fac6e025815acdd047e1d7488628c218040"
+    },
+    {
+      "path": "home-stair-upper2.png",
+      "bytes": 631512,
+      "sha256": "d14a95231eb465c9e2c4474bfcf2af9908465bb8286d499a4dc91cc069c025b9"
+    },
+    {
+      "path": "initial-declared-fixture.json",
+      "bytes": 2212,
+      "sha256": "e00fd9ee9738dade5ce919c763875d96851786acda7be6c01820eb3646757557"
+    },
+    {
+      "path": "observer.py",
+      "bytes": 7427,
+      "sha256": "fa4299811c8d735702ff5564c0fe46effab4a5f2285e869c28eeb8df0bb74c2d"
+    },
+    {
+      "path": "old-failure-first-tread-passed.json",
+      "bytes": 4712,
+      "sha256": "7a1751c7431b2843db2f29a06ebb020024bda4929dd98327bc671386b4f39c99"
+    },
+    {
+      "path": "old-failure-first-tread-passed.png",
+      "bytes": 427277,
+      "sha256": "ff6c6e8e114c4eb7bac1f1663c29e7e95f79f740a39af69aa7aae77e422e4c47"
+    },
+    {
+      "path": "permissions-before-hole-1.json",
+      "bytes": 515,
+      "sha256": "f40b98951c4701a28b65cec613f25d23056269743624663fca61af32763baad3"
+    },
+    {
+      "path": "permissions-before-hole-2.json",
+      "bytes": 530,
+      "sha256": "e2a8649b776fb3a394d4b2b430e429074c9124465c35691bc7a323f6ca3f1f36"
+    },
+    {
+      "path": "permissions-legal-rent-rest.json",
+      "bytes": 507,
+      "sha256": "c61802498ed3a2b3a06292e3e909a6f1703c91c622a62b80b316502ab5483d46"
+    },
+    {
+      "path": "permissions-reached-floor1.json",
+      "bytes": 516,
+      "sha256": "8ffc4a04d442a92d568ade6b27ef0196a1f53d44e57932e3ef771fe40eaaa71f"
+    },
+    {
+      "path": "permissions-reached-floor2.json",
+      "bytes": 531,
+      "sha256": "cf31fc6f7b603f66d10f31dbeae0f5b7c3aea7044c36e129ea001161eeb2be8d"
+    },
+    {
+      "path": "permissions-returned-floor0.json",
+      "bytes": 518,
+      "sha256": "abada0cc71c15d172e99cb30c8b8c14c0837f688607ebe925ea1aee3a6a94b5e"
+    },
+    {
+      "path": "permissions-returned-floor1.json",
+      "bytes": 503,
+      "sha256": "168818087d9c3ecbf2c009aa9677b4bee50492c1b3a539f35e2de690e67e197e"
+    },
+    {
+      "path": "post-run-review.json",
+      "bytes": 4953,
+      "sha256": "45f587c542cf9b8a29d5668b8dcbc32c77734ca5e9a895a707b6de01c7caff36"
+    },
+    {
+      "path": "return-to-inside-route.json",
+      "bytes": 150684,
+      "sha256": "6f731912fdbde74c1ad38c68abcaa8908fd9bfae034b5008b03b0c6229a51819"
+    },
+    {
+      "path": "roundtrip-results.json",
+      "bytes": 1186650,
+      "sha256": "e8a4b5d1a834688ac2a8c48a07cf899abbfd753d9e3c9a765228671346bd3575"
+    },
+    {
+      "path": "run-manifest.json",
+      "bytes": 25038,
+      "sha256": "f8383a117e8d9a1345023f7b1b1ba879410961f62db69d59e790bb96cfbda405"
+    },
+    {
+      "path": "service-point-route.json",
+      "bytes": 150722,
+      "sha256": "09c2f7172d9daaeb47121350a13a8a5a49a1e07b419355cda2a140a9414300a8"
+    },
+    {
+      "path": "source-snapshot.json",
+      "bytes": 31133,
+      "sha256": "e570d80062e24c9d56555cbd9c5cd87f92c2e28b26d7aaa1bd2e64ce3feb9fc8"
+    },
+    {
+      "path": "stairs-01-first-flight-route.json",
+      "bytes": 30281,
+      "sha256": "bdd7433d4c49826bc7193cb1c4cb40673c73d4ddeda78430808877e3df209b7c"
+    },
+    {
+      "path": "stairs-01-second-flight-route.json",
+      "bytes": 54331,
+      "sha256": "a5c8ad6769df0e172a698aeac0cec8ef15e69eb9df282b40ccc5a1f9fec7d95a"
+    },
+    {
+      "path": "stairs-10-first-flight-route.json",
+      "bytes": 36819,
+      "sha256": "d1048d871d7e778bf40254041a55e020510b9ac7b5e58c01798f7780ccdba165"
+    },
+    {
+      "path": "stairs-10-second-flight-route.json",
+      "bytes": 48753,
+      "sha256": "1a9d756d069262c3bc8b3c3c1ba659111fc89f6382daa7815356e2c78bbed8c8"
+    },
+    {
+      "path": "stairs-12-first-flight-rest-route.json",
+      "bytes": 18718,
+      "sha256": "291a247b497ccf1e7e129d17fe6f7f3692049a6315917df68076af0353f5b7c2"
+    },
+    {
+      "path": "stairs-12-half-turn.json",
+      "bytes": 4650,
+      "sha256": "8bfbbb7c1b30518f5c61cc52b33950f8e15c13bed2a530c605303099d6f33b28"
+    },
+    {
+      "path": "stairs-12-half-turn.png",
+      "bytes": 592019,
+      "sha256": "e557973e75e00b70401bd491c5286cc5834cfafb1b5ee414b01b5443137f80ff"
+    },
+    {
+      "path": "stairs-12-old-failure-first-tread-route.json",
+      "bytes": 13288,
+      "sha256": "27d0767beb452b0fda701ae902e4f9236f4485377bb1d1480a685e3c9ee20614"
+    },
+    {
+      "path": "stairs-12-second-flight-route.json",
+      "bytes": 53742,
+      "sha256": "8db073d14372cdb7941e45760597b6e66c122e82904612e87d511522262e0091"
+    },
+    {
+      "path": "stairs-21-first-flight-route.json",
+      "bytes": 36752,
+      "sha256": "04cf240fa4efa75cc3acd30d083cf59b3ce990919646d448d0fd2e393e693d62"
+    },
+    {
+      "path": "stairs-21-second-flight-route.json",
+      "bytes": 47794,
+      "sha256": "4c24031b9a0dc0cf773ed7ccb670517f201baf88d6c8934c666a4c311485e35b"
+    },
+    {
+      "path": "stairs-approach-route.json",
+      "bytes": 162034,
+      "sha256": "513c7e275bf0578a0f37eb023d8a70e0766e9a74c9d08b8140e35a451e82cf98"
+    },
+    {
+      "path": "upper1-return-route.json",
+      "bytes": 978,
+      "sha256": "f6ca4ed779e701cc3886d8b168a927aeed8d222ae8e81c5aa983dbb5fc3bae4f"
+    },
+    {
+      "path": "upper1-to-next-stairs-route.json",
+      "bytes": 986,
+      "sha256": "2614567c1aaa8c897b6827cc675812ef9f830619b2b923473564f4e591ba3154"
+    }
+  ]
+}

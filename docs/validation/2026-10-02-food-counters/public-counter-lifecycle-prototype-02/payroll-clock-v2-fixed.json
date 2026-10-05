@@ -1,0 +1,53 @@
+{
+  "source": "actual .step to 17:00; no money/attendance/payroll deadline writes",
+  "paidGross": 44.160000000000025,
+  "taskEarned": 43.79200000000002,
+  "attendance": null,
+  "monotonicTime": 1020,
+  "visibleHour": 10,
+  "importResult": {
+    "ok": true,
+    "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+  },
+  "cashResidual": 3.4924596548080444e-10,
+  "task": {
+    "id": "food-task-1",
+    "citizenId": "citizen-3",
+    "contract": {
+      "id": "standing-day-0",
+      "day": 0,
+      "workId": "school",
+      "ratePerMinute": 0.092,
+      "availableMinutes": 476,
+      "payrollEpoch": 0
+    },
+    "continuationOf": null,
+    "acceptedAt": 484,
+    "lastObservedAt": 1020,
+    "endedAt": 1020,
+    "endReason": "payroll-period-ended",
+    "stage": "finished",
+    "resumeStage": "serve",
+    "reason": "原工班时间、开放时段或身体条件不足",
+    "nodeId": null,
+    "routeKey": null,
+    "workedMinutes": 476,
+    "earned": 43.79200000000002,
+    "pickup": null,
+    "handoffMinutes": 0,
+    "returnLoadingMinutes": 0,
+    "returnUnloadingMinutes": 0,
+    "allocated": {
+      "assemblyTravel": 0,
+      "assembly": 10,
+      "fetchTravel": 78.57142857142861,
+      "deliveryTravel": 78.57142857142861,
+      "sales": 0,
+      "returnTravel": 0,
+      "loading": 2,
+      "handoff": 2,
+      "counterWait": 304.8571428571428,
+      "staffHandover": 0
+    }
+  }
+}

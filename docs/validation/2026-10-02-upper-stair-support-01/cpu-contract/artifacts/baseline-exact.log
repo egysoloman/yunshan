@@ -1,0 +1,29 @@
+✖ original exact browser failure advances .072m onto the first 0.2m upper tread with normal W (37.641069ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 483.753797
+
+✖ failing tests:
+
+test at tests/upper-stair-actual.test.ts:1:3806
+✖ original exact browser failure advances .072m onto the first 0.2m upper tread with normal W (37.641069ms)
+  AssertionError [ERR_ASSERTION]: {"case":"original exact browser failure","buildingId":"market-b24","from":{"x":-404.59997341778063,"y":80,"z":308.791474723644},"requested":{"x":-404.59997341778063,"y":80,"z":308.863474723644},"preSupport":null,"center":{"kind":"stairs","floor":1,"y":80.19999999999999,"local":{"x":-13.79997341778062,"z":-7.336525276356042},"link":{"fromFloor":1,"toFloor":2}},"after":{"x":-404.59997341778063,"y":80,"z":308.791474723644},"floor":1,"blockedAccess":null}
+      at <anonymous> (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:56:5)
+      at fixture (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:24:88)
+      at TestContext.<anonymous> (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:51:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

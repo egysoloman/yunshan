@@ -1,0 +1,10 @@
+ACTUAL_DOCUMENT_GATE {"at":"2026-10-02T05:11:44.326Z","requestedURL":"http://127.0.0.1:4173/?debug=1","actualPageURL":"http://127.0.0.1:4173/?debug=1","moduleURLs":["http://127.0.0.1:4173/assets/index-DV9HXMzR.js"],"loadedAsset":{"url":"http://127.0.0.1:4173/assets/index-DV9HXMzR.js","status":200,"bytes":634694,"sha256":"fee4c40b14b4ac44f0e1ea475b469df689470a1f3446f8d67fab1a2b7a0c1711","fromServiceWorker":false}}
+PASS world boots in first person with real city aircraft and live simulation
+PASS native button keyboard activation remains accessible
+PASS manual time and paused simulation with day/night rendering
+PASS actual keyboard first-person movement
+Error: Actual native W sale setup did not reach {"x":-848.8000000000001,"y":18.6,"z":1131.2}
+    at walkMarketSaleSetup (file:///tmp/yunshan-v4-browser-visual-prepared-04/market-sale-browser.mjs:49:25)
+    at async file:///tmp/yunshan-v4-browser-visual-prepared-04/market-sale-browser.mjs:154:3
+  ➜  Local:   http://127.0.0.1:4173/
+

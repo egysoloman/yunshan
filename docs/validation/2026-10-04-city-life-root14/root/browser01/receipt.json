@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-10-04T16:17:41.614119+00:00",
+  "endedAt": "2026-10-04T16:27:46.326474+00:00",
+  "argv": [
+    "npm",
+    "run",
+    "test:browser"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 304,
+  "inputsStable": true,
+  "rawSHA256": "581b8402168d44e814be4276575d7f80943761ad6287cbcbdd1be3e865c8d879",
+  "ownedPid": 94857,
+  "observedDescendants": 14,
+  "finalOwnedMembers": [
+    {
+      "pid": 94890,
+      "state": "Z",
+      "parent": 1,
+      "group": 94857,
+      "session": 94857,
+      "startTicks": 6148712
+    },
+    {
+      "pid": 94917,
+      "state": "Z",
+      "parent": 1,
+      "group": 94900,
+      "session": 94900,
+      "startTicks": 6148745
+    },
+    {
+      "pid": 94918,
+      "state": "Z",
+      "parent": 1,
+      "group": 94900,
+      "session": 94900,
+      "startTicks": 6148745
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

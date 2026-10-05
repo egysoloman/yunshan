@@ -1,0 +1,121 @@
+{
+  "kind": "READONLY_STATIC_PATCH_BINDING_NOT_EXECUTION",
+  "createdAtUTC": "2026-10-03T03:50:00.620223+00:00",
+  "declaredSourceCount": 120,
+  "allDeclaredSourceHashesMatch": true,
+  "baseDeclaredCount": 116,
+  "allBaseDeclaredSourceHashesMatch": true,
+  "nonSourceExtras": [
+    "dist/assets/index-DcKlDqDV.css",
+    "dist/assets/index-Q3RG9Gju.js",
+    "dist/assets/index-Q3RG9Gju.js.map",
+    "dist/assets/three-DfYROjRC.js",
+    "dist/assets/three-DfYROjRC.js.map",
+    "dist/favicon.svg",
+    "dist/index.html"
+  ],
+  "nonSourceExtrasInheritedByteExactFromBase": true,
+  "patchFileCount": 16,
+  "allPatchReconstructionsEqual": true,
+  "patchReconstructions": [
+    {
+      "path": "src/simulation.ts",
+      "patchReconstructedSHA256": "f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+      "candidateSHA256": "f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+      "equal": true
+    },
+    {
+      "path": "src/types.ts",
+      "patchReconstructedSHA256": "8c3131b5cba4ff0a91610800922970be1c2d26c0e0f0364f86bd483bc93752a5",
+      "candidateSHA256": "8c3131b5cba4ff0a91610800922970be1c2d26c0e0f0364f86bd483bc93752a5",
+      "equal": true
+    },
+    {
+      "path": "src/ui.ts",
+      "patchReconstructedSHA256": "23da0cbecc2a7101913181def00aa16959d401432b32aa39f68a7b812f7c511a",
+      "candidateSHA256": "23da0cbecc2a7101913181def00aa16959d401432b32aa39f68a7b812f7c511a",
+      "equal": true
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "patchReconstructedSHA256": "a949559ef0a1a92c8679567ebefb6a7f82c0ac672e31d4a9437bb81386a33d9f",
+      "candidateSHA256": "a949559ef0a1a92c8679567ebefb6a7f82c0ac672e31d4a9437bb81386a33d9f",
+      "equal": true
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "patchReconstructedSHA256": "b9aebe594f59a6a6bb94b4a58dd3035a2d676532f351c42cd00f811b56229a22",
+      "candidateSHA256": "b9aebe594f59a6a6bb94b4a58dd3035a2d676532f351c42cd00f811b56229a22",
+      "equal": true
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "patchReconstructedSHA256": "5119b97033b2f638b3a628293bfdecd9b61aec1f24acf47a5c66fd668119513e",
+      "candidateSHA256": "5119b97033b2f638b3a628293bfdecd9b61aec1f24acf47a5c66fd668119513e",
+      "equal": true
+    },
+    {
+      "path": "src/persistence/partition.ts",
+      "patchReconstructedSHA256": "51b3b0f71c1cc0fc0bd6e85df7025cf02e5f2c3662dbed1998ee185791c32eb5",
+      "candidateSHA256": "51b3b0f71c1cc0fc0bd6e85df7025cf02e5f2c3662dbed1998ee185791c32eb5",
+      "equal": true
+    },
+    {
+      "path": "scripts/economy-audit.ts",
+      "patchReconstructedSHA256": "61c05b8ee39feedfe951094bd2973a4bb3e5f22f92637539c4de3af6c8767b1f",
+      "candidateSHA256": "61c05b8ee39feedfe951094bd2973a4bb3e5f22f92637539c4de3af6c8767b1f",
+      "equal": true
+    },
+    {
+      "path": "scripts/player-journey.mjs",
+      "patchReconstructedSHA256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861",
+      "candidateSHA256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861",
+      "equal": true
+    },
+    {
+      "path": "tests/education-fixture.ts",
+      "patchReconstructedSHA256": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856",
+      "candidateSHA256": "a937674c34947c0b1b4ad8fa527980b81241a0d4d696974772b92149b821a856",
+      "equal": true
+    },
+    {
+      "path": "tests/education-course.test.ts",
+      "patchReconstructedSHA256": "e18cdceb55b38b268dc796bc898aa349874a18c247a7ca1e744296f4aad0d07b",
+      "candidateSHA256": "e18cdceb55b38b268dc796bc898aa349874a18c247a7ca1e744296f4aad0d07b",
+      "equal": true
+    },
+    {
+      "path": "tests/education-legacy-regression.test.ts",
+      "patchReconstructedSHA256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3",
+      "candidateSHA256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3",
+      "equal": true
+    },
+    {
+      "path": "tests/simulation.test.ts",
+      "patchReconstructedSHA256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5",
+      "candidateSHA256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5",
+      "equal": true
+    },
+    {
+      "path": "tests/economy.test.ts",
+      "patchReconstructedSHA256": "f9a45eb31e4d8591f7e278497effaed919a266181e24026d1e898296b7e627bb",
+      "candidateSHA256": "f9a45eb31e4d8591f7e278497effaed919a266181e24026d1e898296b7e627bb",
+      "equal": true
+    },
+    {
+      "path": "tests/v4-extensions.test.ts",
+      "patchReconstructedSHA256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1",
+      "candidateSHA256": "827d7996557a9b4cd55927252a9c2d44cded38652a8323a7c9346c86563b27b1",
+      "equal": true
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "patchReconstructedSHA256": "f3597888ee10984683e2171337212c0f8d8c172d64edd1c875a5ce91c402728b",
+      "candidateSHA256": "f3597888ee10984683e2171337212c0f8d8c172d64edd1c875a5ce91c402728b",
+      "equal": true
+    }
+  ],
+  "clarifiesFirstReceipt": "Filesystem tree contains inherited dist7 beyond source manifest. Declared source120/base116 match, changed16 exactly. Inherited base dist is not an E1 build or execution receipt. First receipt preserved unchanged.",
+  "root17ClinicalFixtureInstruction": "E1 patch does not modify tests/clinical.test.ts; preserve parent actual17 .6 fixture on eventual integration.",
+  "runtimeStatus": "NOT_RUN"
+}

@@ -1,0 +1,42 @@
+{
+  "pid": 147438,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/clinical-closing-functional.test.ts",
+    "tests/clinical-grid-native-start-functional.test.ts",
+    "tests/clinical-grid-power-pure.test.ts",
+    "tests/clinical-open-minutes.test.ts",
+    "tests/clinical-procurement-power-reason.test.ts",
+    "tests/family-estate-escrow.test.ts",
+    "tests/floor-plan-selection.test.ts",
+    "tests/floor-plan-support-broadphase.test.ts",
+    "tests/freight-native-pickup.test.ts",
+    "tests/freight-pickup-policy-pure.test.ts",
+    "tests/power-grid-integration.test.ts",
+    "tests/power-grid.test.ts",
+    "tests/rendering-city-readability.test.ts",
+    "tests/shop-native-repair.test.ts",
+    "tests/architecture-floor-plan.test.ts",
+    "tests/floor-plan-derived-cache.test.ts",
+    "tests/floor-plan-empty-support.test.ts",
+    "tests/floor-plan-self-collision.test.ts",
+    "tests/clinical-presence-contract.test.ts",
+    "tests/shop-lifecycle.test.ts",
+    "tests/banking.test.ts",
+    "tests/power.test.ts",
+    "tests/city-life-product.test.ts"
+  ],
+  "identity": {
+    "pid": 147438,
+    "state": "R",
+    "parent": 147437,
+    "group": 147438,
+    "session": 147438,
+    "startTicks": 10162774
+  }
+}

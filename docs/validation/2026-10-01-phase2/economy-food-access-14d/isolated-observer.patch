@@ -1,0 +1,22 @@
+--- a/scripts/economy-audit.ts
++++ b/scripts/economy-audit.ts
+@@ -1,3 +1,4 @@
++import { observeFoodMaterial } from './food-material-observer';
+ import assert from 'node:assert/strict';
+ import { createHash } from 'node:crypto';
+ import { mkdir, readFile, writeFile } from 'node:fs/promises';
+@@ -27,6 +28,7 @@
+ ].map(async file => [file, createHash('sha256').update(await readFile(new URL(`../${file}`, import.meta.url))).digest('hex')])));
+ const world = createWorld(seed);
+ const sim = new Simulation(world);
++const foodMaterialObserver = observeFoodMaterial(sim);
+ sim.state.taxRate = initialPolicy.taxRate; sim.state.policeBudget = initialPolicy.policeBudget;
+ assert.equal(sim.command({ type: 'speed', value: speed }).ok, true);
+ const extension = () => sim.state.extension! as CityExtensionState & {
+@@ -248,3 +250,6 @@
+   treasury: sim.state.treasury, researchCompleted: extension().stats.researchCompleted,
+   researchFunding, reconciliationResidual, moneyConservationResidual, artifact }));
+ if (failure) console.error(failure);
++
++await foodMaterialObserver.write('artifacts/food-material-causality-14d.json');
++await writeFile('artifacts/food-material-final.save.json',sim.exportSave());

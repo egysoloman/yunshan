@@ -1,0 +1,54 @@
+{
+  "baselineInputs": 325,
+  "prospectiveInputs": 336,
+  "source": "/tmp/ROOT17-integration-20261005-01/source02",
+  "prospectiveOnly": true,
+  "actualIntegratedChecks": "NOT_RUN",
+  "allOldTestsAndMZBytesRetained": true,
+  "sharedEdits": 0,
+  "patches": [
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-medical-continuation-20261005-01/patch/clinical-closing-prefix.patch",
+      "sha256": "f4911027f4215e8c677229d59a15c1f4e15c2c9ea92f3cc943ee0ea6d34e2c96",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-shop-lifecycle-20261005-01/OWNED.patch",
+      "sha256": "43b64fb767d64ecce1bb8393ff06817b26181b5e022e962318fd12868b5e74ed",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-visual-city-20261005-01/candidate02.patch",
+      "sha256": "772e3f56a16f7b61b87a6f61e00792316c83a68b4c42bd059d40d2ea890ab5dc",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/tmp/ROOT17-power-network-20261005-01/CANDIDATE10.patch",
+      "sha256": "9ea26d039a4a98559654506892d2ccbc0d18193a6cd4ebd6c1f9521e641cfb66",
+      "checkExit": 0,
+      "checkOutput": "",
+      "applyExit": 0,
+      "applyOutput": "",
+      "status": "APPLIED"
+    },
+    {
+      "patch": "/workspace/yunshan-work/ROOT17-freight-pickup-20261005-01/OWNED-02.patch",
+      "sha256": "62413caf3d06a8a5d541d1a634ef8568ee125ee6aedd56913545a6d32a723331",
+      "checkExit": 1,
+      "checkOutput": "error: patch failed: src/simulation.ts:150\nerror: src/simulation.ts: patch does not apply\n",
+      "status": "CHECK_FAILED_UNAPPLIED"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+diff --git a/tests/power.test.ts b/tests/power.test.ts
+--- a/tests/power.test.ts
++++ b/tests/power.test.ts
+@@ -87,7 +87,7 @@
+ test('actual old paid boost is converted once for original remaining minutes; display rewind cannot renew it',()=>{
+  // Required first input: drivers/capture-native-old-energy.ts on immutable
+  // before/. Missing raw fixture is an explicit NOT_CAPTURED failure, not skip.
+- const raw=readFileSync(new URL('./fixtures/power-native-old-energy-paid-v1.json',import.meta.url),'utf8'),sim=new Simulation(createWorld());const result=sim.importSave(raw);assert(result.ok,result.message);const contract={...core(sim).legacyEnergyContract};assert.equal(contract.duration,240);assert.equal(sim.state.power,undefined);assert.equal(core(sim).powerVersion,undefined);
++ const raw=readFileSync(new URL('./fixtures/power-native-old-energy-paid-v1.json',import.meta.url),'utf8'),sim=new Simulation(createWorld(JSON.parse(raw).worldSeed, 'current-v4'));const result=sim.importSave(raw);assert(result.ok,result.message);const contract={...core(sim).legacyEnergyContract};assert.equal(contract.duration,240);assert.equal(sim.state.power,undefined);assert.equal(core(sim).powerVersion,undefined);
+  const migrated=sim.exportSave(),next=restore(sim);assert.equal(next.exportSave(),migrated);sim.command({type:'setTime',value:0});assert.equal(core(sim).legacyEnergyContract.endsAt,contract.endsAt);assert.equal(core(sim).legacyEnergyContract.duration,240);assert.equal(at(sim),contract.capturedAt);bad(sim,s=>{delete s.runtime.legacyEnergyContract;});bad(sim,s=>{delete s.runtime.legacyEnergyContractVersion;});bad(sim,s=>{s.runtime.legacyEnergyContract.endsAt+=240;});
+  sim.command({type:'speed',value:16});for(let n=0;at(sim)<contract.endsAt+1&&n<1000;n++)sim.step(.25);assert.ok(at(sim)>contract.endsAt);assert.equal(core(sim).legacyEnergyContract.endsAt,contract.endsAt);restore(sim);
+ });

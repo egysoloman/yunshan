@@ -1,0 +1,42 @@
+{
+  "createdAtUTC": "2026-10-03T14:03:23.753269+00:00",
+  "status": "ACTUAL_CRC_MEMBER_SHA_AND_ORIGINAL_BYTES_PASS",
+  "archiveName": "yunshan-road-repair-originals-20261003.zip",
+  "archiveBytes": 101962314,
+  "archiveSha256": "a4915938630ff1e8e7943cfe552f7bee4c691586061b498b203430401224b10a",
+  "memberCount": 2304,
+  "payloadCount": 2303,
+  "payloadBytes": 266954704,
+  "secretPatternCounts": {
+    "tripo_key": 0,
+    "service_token": 0,
+    "private_key": 0,
+    "bearer_header": 0,
+    "aws_signed_url": 0,
+    "other_signed_url": 0,
+    "named_secret": 0
+  },
+  "originalSourceBytesUnchanged": true,
+  "files": [
+    {
+      "name": "yunshan-road-repair-originals-20261003.zip.part001",
+      "bytes": 29360128,
+      "sha256": "e98c8504c4095ea21e4e86f8facfe636ab52e3111f2675f9fc0c74067962f964"
+    },
+    {
+      "name": "yunshan-road-repair-originals-20261003.zip.part002",
+      "bytes": 29360128,
+      "sha256": "8fef90759f114a23c8ea9d50704c07d52548028d30dac51b0867d065f854e798"
+    },
+    {
+      "name": "yunshan-road-repair-originals-20261003.zip.part003",
+      "bytes": 29360128,
+      "sha256": "8d63786955162767ba7caab746412f61281750f922557606ea862540a1baee62"
+    },
+    {
+      "name": "yunshan-road-repair-originals-20261003.zip.part004",
+      "bytes": 13881930,
+      "sha256": "8fb363efa7de9fcdcfbb8c5166fbcbc88b5303195ba9c10a88805cf443375fca"
+    }
+  ]
+}

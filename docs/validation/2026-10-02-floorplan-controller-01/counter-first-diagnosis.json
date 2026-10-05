@@ -1,0 +1,150 @@
+{
+  "b": {
+    "id": "river-b1",
+    "kind": "market",
+    "width": 36,
+    "depth": 27.6
+  },
+  "fixtures": [],
+  "points": [
+    {
+      "id": "sale-west",
+      "x": -12.6,
+      "z": 5
+    },
+    {
+      "id": "sale-center",
+      "x": 0,
+      "z": 5
+    },
+    {
+      "id": "sale-east",
+      "x": 12.6,
+      "z": 5
+    }
+  ],
+  "checks": [
+    {
+      "r": {
+        "x0": -14.2,
+        "x1": -11,
+        "z0": 3,
+        "z1": 4.2
+      },
+      "clearances": [
+        0.6399999999999997,
+        121.64,
+        557.6
+      ],
+      "corners": [
+        {
+          "x": -14.2,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": -14.2,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": -11,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": -11,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        }
+      ]
+    },
+    {
+      "r": {
+        "x0": -1.6,
+        "x1": 1.6,
+        "z0": 3,
+        "z1": 4.2
+      },
+      "clearances": [
+        121.64,
+        0.6399999999999997,
+        121.64
+      ],
+      "corners": [
+        {
+          "x": -1.6,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": -1.6,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": 1.6,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": 1.6,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        }
+      ]
+    },
+    {
+      "r": {
+        "x0": 11,
+        "x1": 14.2,
+        "z0": 3,
+        "z1": 4.2
+      },
+      "clearances": [
+        557.6,
+        121.64,
+        0.6399999999999997
+      ],
+      "corners": [
+        {
+          "x": 11,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": 11,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": 14.2,
+          "z": 3,
+          "inside": true,
+          "stand": true
+        },
+        {
+          "x": 14.2,
+          "z": 4.2,
+          "inside": true,
+          "stand": true
+        }
+      ]
+    }
+  ]
+}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

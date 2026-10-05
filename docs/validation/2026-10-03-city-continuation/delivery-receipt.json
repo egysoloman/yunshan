@@ -1,0 +1,98 @@
+{
+  "recordedAt": "2026-10-03T22:21:45.353328+00:00",
+  "status": "ORIGINALS_VERIFIED_AND_LIBRARY_ATTEMPT_RECORDED",
+  "library": {
+    "status": "FAILED_BEFORE_PREPARATION",
+    "savedCount": 0,
+    "returnedLibraryIDs": [],
+    "unknownCommitStatus": false,
+    "reason": "official upload helper hosted apps tools/list request failed: network",
+    "requestedCount": 12,
+    "memoReplacement": {
+      "library_file_id": "libfile_7571a326de848191aec330d605a63845",
+      "expectedCurrentVersion": 5,
+      "observedVersionBefore": 5,
+      "observedVersionAfter": 5,
+      "replacementOccurred": false
+    },
+    "attemptCountThisFinalBatch": 1,
+    "directFallbackOrWriteRetry": false,
+    "helperSHA256": "f362d45d5e4a17a690e5aff1c795eb62e645cf5db5771a52a84fb1850ea06fb1"
+  },
+  "archives": [
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/Yunshan_City_Continuation_ROOT05_Runtime_20261003.zip",
+      "bytes": 19820137,
+      "sha256": "5478cd05781c43795d498745b326df891e212d8c6d21833178f286fb9b8d4bc9",
+      "memberCount": 444,
+      "CRC": "PASS",
+      "memberSHA256": "PASS"
+    },
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/Yunshan_City_Continuation_History_Evidence_20261003.zip",
+      "bytes": 19709812,
+      "sha256": "7487a493cc01231de058a99d1f8b459afab4ae095fcec827a1b9024282af97f0",
+      "memberCount": 865,
+      "CRC": "PASS",
+      "memberSHA256": "PASS"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/day.png",
+      "bytes": 460744,
+      "sha256": "da2f993c76db4dc248e48ca70040e2a6ae3588c39196690108d984ca26c2afa3",
+      "kind": "original-production-WebGL"
+    },
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/night.png",
+      "bytes": 405831,
+      "sha256": "437a68d40941dee2616500a79caa6c4f1b901505184a86eebfba4aa59ddebe7f",
+      "kind": "original-production-WebGL"
+    },
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/interior.png",
+      "bytes": 536383,
+      "sha256": "87dd0bf1158b78efb020b291d4f95bfb5135573855e849de03deedd09dacac01",
+      "kind": "original-production-WebGL"
+    },
+    {
+      "path": "docs/validation/2026-10-03-city-continuation/ui-clinical-completed.png",
+      "bytes": 203381,
+      "sha256": "2aaa21bbe361a1fcc62195a8bfab9e800b18478cbb92f95924e85748c157a37f",
+      "kind": "original-DOM-without-Renderer"
+    }
+  ],
+  "archiveEvidence": {
+    "path": "docs/validation/2026-10-03-city-continuation/archive-verification-original.json",
+    "scope": "immutable original preupload archive verification; original false publication fields remain historical",
+    "membersPath": "docs/validation/2026-10-03-city-continuation/archive-members.json",
+    "bundleManifestPath": "docs/validation/2026-10-03-city-continuation/BUNDLE-MANIFEST.json",
+    "all1309MembersExactlyOnce": true,
+    "secretScanMatches": 0
+  },
+  "documents": {
+    "REPORT.md": "4ae6917377cb3e4ae2381f9376c47a8c9fda3b9a67dcb4ad610cac91e1d1bdd3",
+    "开发备忘录.md": "18ecb3c3fc446d486c1741d58e520d8b25f6345f050cba4709919128a1f67b4a",
+    "docs/需求实现验证矩阵.md": "f065e5601d21ad0c18a49abf20382d198a2030fa46b91f6fd28233ea5660f752"
+  },
+  "actualValidation": {
+    "build": "PASS",
+    "DOM": "35/35 errors[]",
+    "productionWebGL": "11/11 errors[]; software GPU, not macOS performance",
+    "fullSuite": "TIMEOUT_PARTIAL; observed top-level 702 pass/6 fail/4 skip; no final runner summary",
+    "economy14": "FAIL; resident deaths2; player dead; steadyStateEstablished=false",
+    "terminalSaveRead": "PASS; immediate byte equality and future24 complete saves equal",
+    "publicRestFixture": "original tests10/10 after test-only dependency correction; original FAIL records retained"
+  },
+  "git": {
+    "branch": "takeover-city-life",
+    "baseCommit": "a1e7f05849590da2e108d05ee69f2ba46ee9ff2d",
+    "mainLastObserved": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "authorization": "user explicit commit and push work branch; no main/PR/merge/deployment",
+    "phaseAtRecord": "Before the authorized work-branch commit and push; actual publication is verified afterwards and reported with final commit SHA."
+  },
+  "wholeGoalComplete": false,
+  "nextEntry": "docs/validation/2026-10-03-city-continuation/NEXT-ENTRY.md",
+  "archivesExtraction": "Two complete standard ZIPs sharing one payload folder; extract both into the same directory. Not byte fragments."
+}

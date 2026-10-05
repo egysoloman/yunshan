@@ -1,0 +1,32 @@
+{
+  "startedAt": "2026-10-04T20:17:29.367088+00:00",
+  "endedAt": "2026-10-04T20:18:03.826340+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "../public-health-player-actual.mts",
+    "../actual02/artifacts"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 318,
+  "inputsStable": true,
+  "rawSHA256": "e06936633e7697e10e68eabbaec7c459a0853a336e7d8ddb69a1f7ad54b8992a",
+  "ownedPid": 112080,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 112106,
+      "state": "Z",
+      "parent": 1,
+      "group": 112080,
+      "session": 112080,
+      "startTicks": 7587413
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

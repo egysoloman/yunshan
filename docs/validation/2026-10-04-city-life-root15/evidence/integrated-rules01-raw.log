@@ -1,0 +1,46 @@
+✔ timber finishes partition the same opaque wall volume without overlap or projection (5.691475ms)
+✔ native home and market walls retain covered solids, real windows and empty doorways (67.307056ms)
+✔ closed wall coverage includes the native material seam and rejects an actual gap (10.558247ms)
+✔ the explicit wall finish cap holds for every native target building (779.539178ms)
+✔ fresh city-life recipe records its actual original save and preserves all actors, funds, clocks and routes (13945.40703ms)
+✔ loading an existing native-four archive into the city-life recipe keeps its bytes and future without new policies (9223.265848ms)
+✔ equal meal scores use real travel without changing a higher-score activity or a non-food winner (0.419878ms)
+✔ meal policy preserves source actors at cutover and cannot disappear in full or partitioned imports (595.618266ms)
+✔ partition order metadata cannot silently discard existing service books or opaque extension fields (3.303048ms)
+✔ genuine old-one bytes roundtrip with original key order; dropping an existing legacy runtime field is rejected (38.763417ms)
+✔ reference policy clears original sloping doorway citizen-151 (16.072898ms)
+✔ reference policy clears original sloping doorway citizen-181 (8.50328ms)
+✔ reference policy clears original sloping doorway citizen-195 (7.391717ms)
+✔ reference policy clears original sloping doorway citizen-247 (5.568574ms)
+✔ reference policy clears original sloping doorway citizen-261 (2.31274ms)
+✔ reference policy clears original sloping doorway citizen-267 (4.482607ms)
+✔ reference policy clears original sloping doorway citizen-278 (13.876548ms)
+✔ reference policy clears original sloping doorway citizen-301 (11.761221ms)
+✔ reference policy clears original sloping doorway citizen-327 (9.938494ms)
+✔ reference policy clears original sloping doorway citizen-393 (4.61181ms)
+✔ reference policy clears original sloping doorway citizen-445 (10.162365ms)
+✔ reference policy clears original sloping doorway citizen-569 (8.333682ms)
+✔ reference policy clears original sloping doorway citizen-609 (7.688825ms)
+✔ reference policy clears original sloping doorway citizen-613 (6.219466ms)
+✔ same-time overlap keeps walls, descent, vertical motion and closed zero-width faces blocking (0.248388ms)
+✔ new factory selects a paired policy; older imports and malformed pairs cannot silently change it (631.470548ms)
+{"scope":"current-world-only","buildings":612,"furnitureParts":38307,"linenParts":4932,"unchangedWorld":true}
+✔ all current furniture finishes stay within real fixture volumes and linen belongs only to beds (818.016024ms)
+✔ wrapped food geometry retains the original sample bounds and has one finite reusable template (4.144434ms)
+✔ food pool uploads only changed filtered slots and removes stock on closure, eviction, distance and expired lease (19.957707ms)
+✔ procedural finishes retain inherited hooks and add no textures or vertex displacement (0.906297ms)
+✔ renderer disposes unused palette and app navigation, preserving engine-shared sprite geometry (1.515964ms)
+✔ explicit exact current4 host scheduling cutover changes only declaration, never money, stock, authority or history (14335.224659ms)
+✔ strict whole and partition policy declarations reject halves, unknown versions and borrowed sources without mutation (748.256757ms)
+✔ default and old2 or3 imports never activate policy, and loaded current4 stays exact without it (26124.874704ms)
+✔ a genuine frozen old1 held-qualification source keeps literal full/partition import and future24; nested new estimates cannot hide in old documents (911.772603ms)
+✔ current4 host cutover rejects a source that genuinely advances while its exact digest is pending (298.673793ms)
+✔ explicit remaining-need estimate handles a small real offer without inventing stock, cash or approval; old requests keep their cap (5.289579ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78878.133559

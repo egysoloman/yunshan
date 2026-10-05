@@ -1,0 +1,23 @@
+--- /workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/capture-root07.mjs
++++ /workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/capture-root07-v2.mjs
+@@ -42,7 +42,8 @@
+ assert.deepEqual(before, authorization.inputs, 'ROOT07 execution inputs must equal the authorized frozen manifest');
+ await mkdir(out, { recursive: false });
+ const require = createRequire(path.join(source, 'package.json'));
+-const { chromium } = await import(require.resolve('playwright-core'));
++const playwright = await import(require.resolve('playwright-core'));
++const chromium = playwright.chromium ?? playwright.default?.chromium;
+ const html = await readFile(path.join(source, 'dist/index.html'), 'utf8');
+ const entry = html.match(/src="([^"]+\.js)"/)?.[1]; assert(entry);
+ const buildSHA256 = sha(await readFile(path.join(source, 'dist', entry.replace(/^\//, ''))));
+--- /workspace/yunshan-work/root07-browser-delivery-prep-20261004-01/run-root07.py
++++ /workspace/yunshan-work/ROOT07-browser-20261004-01/capture-driver-v2/run-root07-v2.py
+@@ -120,7 +120,7 @@
+ if dist_before:
+     freeze(source, scope / 'dist-before-originals', dist_before)
+ if args.phase == 'captures':
+-    command = ['node', str(HERE / 'capture-root07.mjs'), str(source), str(scope / 'capture-originals'), str(authorization_path)]
++    command = ['node', str(HERE / 'capture-root07-v2.mjs'), str(source), str(scope / 'capture-originals'), str(authorization_path)]
+     limit = 900
+ else:
+     command, limit = PHASES[args.phase]

@@ -1,0 +1,163 @@
+{
+  "checkedAt": "2026-10-03T21:21:41.450587+00:00",
+  "executionEnvironmentAvailable": true,
+  "workspace": "/workspace/yunshan",
+  "originalRunsRestarted": false,
+  "uncommittedWorkReset": false,
+  "head": "a1e7f05849590da2e108d05ee69f2ba46ee9ff2d",
+  "memoSha256": "df8e0f819492bda3a939e36c75ef93c60d35af89c48f290675861973f9ace077",
+  "runs": {
+    "full-suite01": {
+      "ownedProcess": {
+        "pid": 261989,
+        "parentPid": 261981,
+        "startTicks": "19455675",
+        "start": "2026-10-03T20:16:39.615283+00:00",
+        "argv": [
+          "npm",
+          "test"
+        ],
+        "timeoutSeconds": 5400
+      },
+      "receiptPresent": false,
+      "rawBytes": 107883,
+      "rawSha256AtCheckpoint": "957565f4153aac09a635e1aa87bf5d441bf27bdee991094c0657222670420a1d",
+      "state": "RUNNING_AT_CHECKPOINT",
+      "rawMayGrow": true
+    },
+    "economy14-01": {
+      "ownedProcess": {
+        "pid": 261988,
+        "parentPid": 261985,
+        "startTicks": "19455675",
+        "start": "2026-10-03T20:16:39.614380+00:00",
+        "argv": [
+          "npm",
+          "run",
+          "audit:economy",
+          "--",
+          "--days",
+          "14",
+          "--out",
+          "artifacts/economy-root05-14.json"
+        ],
+        "timeoutSeconds": 7200
+      },
+      "receiptPresent": false,
+      "rawBytes": 27601,
+      "rawSha256AtCheckpoint": "dd06e3f75a060243856fd8d5767725f2532fedac513aef649fcb940b076568a9",
+      "state": "RUNNING_AT_CHECKPOINT",
+      "rawMayGrow": true
+    }
+  },
+  "lastLoggedEconomySample": {
+    "tick": 7920,
+    "day": 11,
+    "treasury": 31159.89128160941,
+    "npc": {
+      "alive": 616,
+      "total": 616,
+      "meanHealth": 93.40281490182093,
+      "meanHunger": 43.06704545454532,
+      "meanFatigue": 89.34556526644845,
+      "livingMeanHealth": 93.40281490182093,
+      "livingMeanHunger": 43.06704545454532,
+      "livingMeanFatigue": 89.34556526644845,
+      "researchCompleted": 1,
+      "companies": 17,
+      "zeroCapitalCompanies": 0,
+      "playerAlive": true,
+      "poor": 77,
+      "storedFood": 225,
+      "byRole": {
+        "学生": {
+          "count": 62,
+          "money": 97.61764127071292,
+          "hunger": 43.57419354838699,
+          "health": 95.45244111290543
+        },
+        "农民": {
+          "count": 27,
+          "money": 410.38759568561176,
+          "hunger": 79.39259259259266,
+          "health": 99.74015687401969
+        },
+        "钱庄职员": {
+          "count": 41,
+          "money": 421.58052608422474,
+          "hunger": 42.28292682926816,
+          "health": 92.70238009834242
+        },
+        "merchant": {
+          "count": 5,
+          "money": 2157.9996902991197,
+          "hunger": 31.119999999999898,
+          "health": 99.35358841089257
+        },
+        "医生": {
+          "count": 51,
+          "money": 438.0126841493066,
+          "hunger": 31.325490196078167,
+          "health": 95.90421046693457
+        },
+        "官员": {
+          "count": 83,
+          "money": 353.69987814381955,
+          "hunger": 18.82650602409648,
+          "health": 84.24537389234409
+        },
+        "驾驶员": {
+          "count": 47,
+          "money": 354.33130494415593,
+          "hunger": 31.021276595744574,
+          "health": 88.93191993423267
+        },
+        "商人": {
+          "count": 141,
+          "money": 328.42764782959523,
+          "hunger": 50.9751773049645,
+          "health": 96.93339857759685
+        },
+        "老师": {
+          "count": 34,
+          "money": 276.5814754708959,
+          "hunger": 46.64705882352888,
+          "health": 96.75068545542229
+        },
+        "警察": {
+          "count": 22,
+          "money": 381.0193736178744,
+          "hunger": 34.03636363636354,
+          "health": 75.11115784203109
+        },
+        "工人": {
+          "count": 75,
+          "money": 341.42469659394504,
+          "hunger": 49.57866666666673,
+          "health": 96.14598699129358
+        },
+        "搬运工": {
+          "count": 17,
+          "money": 168.7370530547582,
+          "hunger": 83.1529411764706,
+          "health": 99.87270091569705
+        },
+        "科研员": {
+          "count": 7,
+          "money": 69.33055581291723,
+          "hunger": 56.91428571428501,
+          "health": 94.93793338478841
+        },
+        "scientist": {
+          "count": 4,
+          "money": 161.43174887472594,
+          "hunger": 30.999999999999613,
+          "health": 95.33085349795657
+        }
+      }
+    }
+  },
+  "lastLoggedSampleIsTerminalState": false,
+  "terminalJsonPresent": false,
+  "terminalSavePresent": false
+}

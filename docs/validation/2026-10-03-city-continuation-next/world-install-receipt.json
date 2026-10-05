@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-03T23:27:47.309808+00:00",
+  "baselineCommit": "3ca77b861bc8a2c33820b49396ad788e7d94e137",
+  "kind": "guarded-world-v5-and-lazy-research-integration",
+  "guard": "git-original-bytes all preflight before any file write",
+  "previousGuardFailure": "candidate before namespace contains added test fixture, not tracked baseline; stopped before mutations",
+  "relatedReceipt": "/workspace/yunshan-work/world-v5-3ca77b8-20261003-01/v5-related02/receipt.json",
+  "scope": "60 PASS / 2 explicit SKIP; new-v5 target previously4 PASS, final assembly validation pending",
+  "files": [
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "beforeSHA256": "27431000d8f47ad5c5ece0e8c9319362c0610efda53559854a317995f1fc5f08",
+      "afterSHA256": "16fefbb69fe8608188169f33eeedd20d35edbf5e088ae5a35fc3d7be7fa1c00f"
+    },
+    {
+      "path": "src/world.ts",
+      "beforeSHA256": "8fd12c086d9953486b24bb14a287cc72c232d520d80a9fc845f68cd17367e843",
+      "afterSHA256": "d838863b7c4ea2efb43f4cf8f68950ac082f502f4d701bf6951e27975ce497b8"
+    },
+    {
+      "path": "src/types.ts",
+      "beforeSHA256": "93c6529d09a634ee6d661d4dd17dfacb12323c4a122b08c9ac8407c56aa63ec6",
+      "afterSHA256": "c0e9692a066cb59d897a5b34b1fa2d000d81c5beeac05ef83dd09c235e41406b"
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "beforeSHA256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "afterSHA256": "e8dea7510b621ebf97579675c4ebf1cbb24807052daba61e7048543af595e6ee"
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "beforeSHA256": "49812f9c9c731be6adee2bbcd0fa38e7c1da2f812d5135cc5b63508ae4212732",
+      "afterSHA256": "e79f65943c983c19677777ce4c2dc104ea19cb01bd088143623e7d40784f26e1"
+    },
+    {
+      "path": "tests/world-layout.test.ts",
+      "beforeSHA256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "afterSHA256": "c46b5a3353ff79c379f5fcea6d0d63e635a7eb837788afb0ff958b9d0e71c479"
+    },
+    {
+      "path": "tests/world-v4.test.ts",
+      "beforeSHA256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "afterSHA256": "d7e54d399322213b1a2fd429b8f27f42fcff114679ad1dc631a4b7ff704dfbe7"
+    },
+    {
+      "path": "tests/research-labor.test.ts",
+      "beforeSHA256": "ced3048e42c8081717e72dcc14a6a63806e7ddbd82be2fcb79447aed220c4a24",
+      "afterSHA256": "f26b7a4624f0fb110959c0f5609927dab5fedd383ecc94da87f483f75f9a69da"
+    },
+    {
+      "path": "tests/stair-continuity.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "3136a1cecc48b81dd0368f5e81935790455fa362ba9b4ff50ccb077dd7643a44"
+    },
+    {
+      "path": "tests/world-v5.test.ts",
+      "beforeSHA256": null,
+      "afterSHA256": "97e2db95e631b8ea3ff51a7f312bc5f2538dae9d9eafc85bca8f4b9b4982544b"
+    },
+    {
+      "path": "tests/fixtures/world-layout/continuous-stairs-parent-3ca77b8.json",
+      "beforeSHA256": null,
+      "afterSHA256": "4757c9df5bf3f498639156f37e9a8323316ad5cf7e737a3c29e8b74b64ba8673"
+    }
+  ]
+}

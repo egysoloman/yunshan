@@ -1,0 +1,595 @@
+{
+  "mode": "STATIC_JSON_AND_PURE_GEOMETRY_ONLY",
+  "recordedAtUtc": "2026-10-05T00:10:49.900769+00:00",
+  "queryCommand": "node --import tsx /workspace/yunshan-work/ROOT16-food-cause-20261005-01/production-static/query-static.ts",
+  "queryExitCode": 0,
+  "SimulationInstancesCreated": 0,
+  "SimSteps": 0,
+  "GPU": 0,
+  "Builds": 0,
+  "commits": 0,
+  "pushes": 0,
+  "sourceGuardCount": 82,
+  "sourceGuardMismatchCount": 0,
+  "sourceGuard": [
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/scripts/economy-audit.ts",
+      "expectedAuditSourceSha256": "6b15e62718064d1da2d981bb65723e61fee486dec73435910b7cfef068ff4e28",
+      "actualSha256": "6b15e62718064d1da2d981bb65723e61fee486dec73435910b7cfef068ff4e28",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/scripts/economy-observations.ts",
+      "expectedAuditSourceSha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026",
+      "actualSha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/access.ts",
+      "expectedAuditSourceSha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "actualSha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/architecture-floor-plan.ts",
+      "expectedAuditSourceSha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac",
+      "actualSha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/aviation-renderer.ts",
+      "expectedAuditSourceSha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "actualSha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/aviation.ts",
+      "expectedAuditSourceSha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "actualSha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/commercial-district.ts",
+      "expectedAuditSourceSha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+      "actualSha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/controller.ts",
+      "expectedAuditSourceSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "actualSha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/geometry/upright-cylinder-sweep.ts",
+      "expectedAuditSourceSha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f",
+      "actualSha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/host/upgrade-city-ruleset.ts",
+      "expectedAuditSourceSha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d",
+      "actualSha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/host/upgrade-civic-history-format.ts",
+      "expectedAuditSourceSha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+      "actualSha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/host/upgrade-meal-route.ts",
+      "expectedAuditSourceSha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9",
+      "actualSha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/host/upgrade-reference-collision.ts",
+      "expectedAuditSourceSha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e",
+      "actualSha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/host/upgrade-service-material-scheduling.ts",
+      "expectedAuditSourceSha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153",
+      "actualSha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/hygiene-ui.ts",
+      "expectedAuditSourceSha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+      "actualSha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/journey.ts",
+      "expectedAuditSourceSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "actualSha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/main.ts",
+      "expectedAuditSourceSha256": "768fa6b6f4465925306da87e89835e98ccf02788161eb4ef0429d6e04ef1e98f",
+      "actualSha256": "768fa6b6f4465925306da87e89835e98ccf02788161eb4ef0429d6e04ef1e98f",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/market-station-apron.ts",
+      "expectedAuditSourceSha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046",
+      "actualSha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence.ts",
+      "expectedAuditSourceSha256": "09cb7f5f89bf087efee1be3376f59e516ddce36cf2ce2a8786d9ebc215a96202",
+      "actualSha256": "09cb7f5f89bf087efee1be3376f59e516ddce36cf2ce2a8786d9ebc215a96202",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence/partition.ts",
+      "expectedAuditSourceSha256": "fe1b6cfe12ff5edc543d6d3303de5d32545da4c7fac3ce47512584a3c3ea2eea",
+      "actualSha256": "fe1b6cfe12ff5edc543d6d3303de5d32545da4c7fac3ce47512584a3c3ea2eea",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence/route-encoding.ts",
+      "expectedAuditSourceSha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "actualSha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence/save-resource.ts",
+      "expectedAuditSourceSha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+      "actualSha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence/session.ts",
+      "expectedAuditSourceSha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "actualSha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/persistence/world-layout.ts",
+      "expectedAuditSourceSha256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7",
+      "actualSha256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/product-city.ts",
+      "expectedAuditSourceSha256": "b2c78e24aba7845596b19b5c2e6d00e20d276c62ea87102ff37bad302931b1d7",
+      "actualSha256": "b2c78e24aba7845596b19b5c2e6d00e20d276c62ea87102ff37bad302931b1d7",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/renderer.ts",
+      "expectedAuditSourceSha256": "6a595c58c77a37ad846f3e14d8ae705c3cbc7d005072dda19b9428d8170121d6",
+      "actualSha256": "6a595c58c77a37ad846f3e14d8ae705c3cbc7d005072dda19b9428d8170121d6",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/architectural-finishes.ts",
+      "expectedAuditSourceSha256": "db3f10878d07e01b61507031efcbdba47e8778b26c25aad37f171dc2974c53fe",
+      "actualSha256": "db3f10878d07e01b61507031efcbdba47e8778b26c25aad37f171dc2974c53fe",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/architecture-bodies.ts",
+      "expectedAuditSourceSha256": "76d43ef3935a372a5d6e6df5550011fdf45638a6b87db291ed817384a89922cd",
+      "actualSha256": "76d43ef3935a372a5d6e6df5550011fdf45638a6b87db291ed817384a89922cd",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/architecture-detail.ts",
+      "expectedAuditSourceSha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+      "actualSha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/architecture-layout.ts",
+      "expectedAuditSourceSha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "actualSha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/chunk-residency.ts",
+      "expectedAuditSourceSha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "actualSha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/citizen-appearance.ts",
+      "expectedAuditSourceSha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "actualSha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/interior-lighting.ts",
+      "expectedAuditSourceSha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+      "actualSha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/market-goods.ts",
+      "expectedAuditSourceSha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+      "actualSha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/market-shopfront.ts",
+      "expectedAuditSourceSha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+      "actualSha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/road-closures.ts",
+      "expectedAuditSourceSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "actualSha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/rendering/terrain.ts",
+      "expectedAuditSourceSha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+      "actualSha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/roads.ts",
+      "expectedAuditSourceSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "actualSha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation.ts",
+      "expectedAuditSourceSha256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c",
+      "actualSha256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/activity-capacity.ts",
+      "expectedAuditSourceSha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+      "actualSha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/activity-minutes.ts",
+      "expectedAuditSourceSha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "actualSha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/banking.ts",
+      "expectedAuditSourceSha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+      "actualSha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/budget-authority.ts",
+      "expectedAuditSourceSha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef",
+      "actualSha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/city-ruleset.ts",
+      "expectedAuditSourceSha256": "4fe1727a04ec167f1fe7044b067fa5678d6a6030ecb68dd8ccf7867090452049",
+      "actualSha256": "4fe1727a04ec167f1fe7044b067fa5678d6a6030ecb68dd8ccf7867090452049",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/civic-history.ts",
+      "expectedAuditSourceSha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+      "actualSha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/civic-staffing.ts",
+      "expectedAuditSourceSha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5",
+      "actualSha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/clinical.ts",
+      "expectedAuditSourceSha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "actualSha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/culture.ts",
+      "expectedAuditSourceSha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea",
+      "actualSha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/education.ts",
+      "expectedAuditSourceSha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+      "actualSha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/extensions.ts",
+      "expectedAuditSourceSha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+      "actualSha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/family-education.ts",
+      "expectedAuditSourceSha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+      "actualSha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/family.ts",
+      "expectedAuditSourceSha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+      "actualSha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/freight-access.ts",
+      "expectedAuditSourceSha256": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381",
+      "actualSha256": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/funded-work.ts",
+      "expectedAuditSourceSha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "actualSha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/gift-contact-legacy.ts",
+      "expectedAuditSourceSha256": "6badb6b9cc24194e50ac56ff8dafe58c0939ea9dc33ea19e2b0fee70aefcd7bb",
+      "actualSha256": "6badb6b9cc24194e50ac56ff8dafe58c0939ea9dc33ea19e2b0fee70aefcd7bb",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/gift-contact.ts",
+      "expectedAuditSourceSha256": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e",
+      "actualSha256": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/governance.ts",
+      "expectedAuditSourceSha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "actualSha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/home-rest.ts",
+      "expectedAuditSourceSha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "actualSha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/hygiene-public.ts",
+      "expectedAuditSourceSha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+      "actualSha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/hygiene-transfer.ts",
+      "expectedAuditSourceSha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+      "actualSha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/hygiene.ts",
+      "expectedAuditSourceSha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+      "actualSha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/journeys.ts",
+      "expectedAuditSourceSha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "actualSha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/meal-route.ts",
+      "expectedAuditSourceSha256": "03f42f53bc1a50b4ba164623537b9658c655285a1cfde3781ecbb00facb6b314",
+      "actualSha256": "03f42f53bc1a50b4ba164623537b9658c655285a1cfde3781ecbb00facb6b314",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/npc-stair-motion.ts",
+      "expectedAuditSourceSha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+      "actualSha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/pathology.ts",
+      "expectedAuditSourceSha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "actualSha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/player-labor.ts",
+      "expectedAuditSourceSha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+      "actualSha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/police-supplies.ts",
+      "expectedAuditSourceSha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+      "actualSha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/power.ts",
+      "expectedAuditSourceSha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "actualSha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/public-employment.ts",
+      "expectedAuditSourceSha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+      "actualSha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/reference-collision.ts",
+      "expectedAuditSourceSha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa",
+      "actualSha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/road-demands.ts",
+      "expectedAuditSourceSha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+      "actualSha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/roadworks.ts",
+      "expectedAuditSourceSha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+      "actualSha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/service-material-scheduling.ts",
+      "expectedAuditSourceSha256": "2b874514406c89bcfa80d7206eb321f3e0a3e72cea5196e865b84fd35c0d868f",
+      "actualSha256": "2b874514406c89bcfa80d7206eb321f3e0a3e72cea5196e865b84fd35c0d868f",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/shop_lifecycle.ts",
+      "expectedAuditSourceSha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1",
+      "actualSha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/supplemental-budget.ts",
+      "expectedAuditSourceSha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb",
+      "actualSha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/simulation/trade.ts",
+      "expectedAuditSourceSha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "actualSha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/site-fixtures.ts",
+      "expectedAuditSourceSha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "actualSha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/style.css",
+      "expectedAuditSourceSha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "actualSha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/transport-geometry.ts",
+      "expectedAuditSourceSha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "actualSha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/types.ts",
+      "expectedAuditSourceSha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a",
+      "actualSha256": "9f4feaa01d93e371fa92f33ce9629b0cda1c90e47a8557b3a04afdbe7649985a",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/ui.ts",
+      "expectedAuditSourceSha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541",
+      "actualSha256": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541",
+      "matches": true
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/src/world.ts",
+      "expectedAuditSourceSha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07",
+      "actualSha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07",
+      "matches": true
+    }
+  ],
+  "originalManifest": [
+    {
+      "path": "originals/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "originals/WORLD-ORIGINAL.json",
+      "bytes": 1832308,
+      "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "path": "originals/root15-current-default-day-final.save.json",
+      "bytes": 3242191,
+      "sha256": "db40c8410ed5cd45f308fb12c12a4ef6678c58add40e3122e595a6bdd99efe16"
+    },
+    {
+      "path": "originals/root15-current-default-day.json",
+      "bytes": 133575,
+      "sha256": "96d9a58d78c291876c4de0c68b1466584c9e02ff10d57938d94aabe48008d114"
+    },
+    {
+      "path": "originals/source/scripts/economy-audit.ts",
+      "bytes": 34330,
+      "sha256": "6b15e62718064d1da2d981bb65723e61fee486dec73435910b7cfef068ff4e28"
+    },
+    {
+      "path": "originals/source/scripts/economy-observations.ts",
+      "bytes": 7652,
+      "sha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026"
+    },
+    {
+      "path": "originals/source/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "originals/source/src/architecture-floor-plan.ts",
+      "bytes": 54125,
+      "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+    },
+    {
+      "path": "originals/source/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "originals/source/src/geometry/upright-cylinder-sweep.ts",
+      "bytes": 4527,
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f"
+    },
+    {
+      "path": "originals/source/src/persistence/world-layout.ts",
+      "bytes": 6146,
+      "sha256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7"
+    },
+    {
+      "path": "originals/source/src/simulation/shop_lifecycle.ts",
+      "bytes": 70854,
+      "sha256": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1"
+    },
+    {
+      "path": "originals/source/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "originals/source/src/simulation.ts",
+      "bytes": 296424,
+      "sha256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c"
+    },
+    {
+      "path": "originals/source/src/world.ts",
+      "bytes": 54827,
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+    },
+    {
+      "path": "originals/开发备忘录-as-read.md",
+      "bytes": 448219,
+      "sha256": "f895f00d4441abfb6f7394a0bf187b14741fd1a9dff479a1309f142c36510964"
+    },
+    {
+      "path": "originals/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    }
+  ]
+}

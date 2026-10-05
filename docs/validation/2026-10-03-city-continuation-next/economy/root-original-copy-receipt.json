@@ -1,0 +1,37 @@
+{
+  "producer": "/root",
+  "actualAudit": "FAIL",
+  "actualFullSaveAnd24": "PASS",
+  "originalBytesUnchanged": true,
+  "files": [
+    {
+      "path": "ROOT07/economy14d01/inputs-before.json",
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "ROOT07/economy14d01/owned-process.json",
+      "sha256": "6617b380be9def349ef8d7ca3b97cacb4cc48ed21483ad54854f32402c4ae6a4"
+    },
+    {
+      "path": "ROOT07/economy14d01/receipt.json",
+      "sha256": "d33b35a2b22375a3b6d2266c8fe5c875d4c6f5121cfebc56b63958c5eb79f5a0"
+    },
+    {
+      "path": "ROOT07/economy14d01/raw.log",
+      "sha256": "d0d3add3a238177493f53da5f9a26fff163e96d7eef8f5bd31e123c13da30cba"
+    },
+    {
+      "path": "ROOT07/economy14d01/inputs-after.json",
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "economy/root07-economy-14d.json",
+      "sha256": "2e81c0efc71a0f059028529286400397fec0a49b40afd47695e6cd3aaf43ac32"
+    },
+    {
+      "path": "economy/root07-economy-14d-final.save.json",
+      "sha256": "79ec2e152163525fd8dbabcf3f6090b23c106460409175fed147a2729dacc547"
+    }
+  ],
+  "completeGoal": false
+}

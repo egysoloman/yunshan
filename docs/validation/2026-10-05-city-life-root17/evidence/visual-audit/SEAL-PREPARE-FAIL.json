@@ -1,0 +1,6 @@
+{
+  "status": "FAILED_SEAL_PREPARATION_NO_ORIGINAL_MODIFICATION",
+  "reason": "The first source-binding list incorrectly assumed src/architecture.ts exists. FileNotFoundError occurred before any SOURCE-CAUSE-BINDING or CLOSURE write.",
+  "missingPath": "/workspace/yunshan-work/ROOT17-visual-city-20261005-01/candidate02-source/src/architecture.ts",
+  "correction": "Read actual rendering modules; bind src/rendering/architecture-bodies.ts and src/rendering/architecture-detail.ts instead. This does not change the completed read-only audit or either sealed GPU FAIL."
+}

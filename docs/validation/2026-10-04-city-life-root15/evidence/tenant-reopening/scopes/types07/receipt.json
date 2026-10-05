@@ -1,0 +1,61 @@
+{
+  "scope": "types07",
+  "status": "PASS",
+  "command": [
+    "node_modules/.bin/tsc",
+    "--noEmit",
+    "--project",
+    "tsconfig-tools.json"
+  ],
+  "cwd": "/workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01/source",
+  "timeLimitSeconds": 60.0,
+  "startedAt": "2026-10-04T20:25:46.658520+00:00",
+  "endedAt": "2026-10-04T20:26:01.923478+00:00",
+  "exitCode": 0,
+  "rootAncestry": [
+    {
+      "pid": 113207,
+      "ppid": 113206,
+      "startTicks": 7637050,
+      "cmdline": "python3 tooling/run-scope.py types07 60 node_modules/.bin/tsc --noEmit --project tsconfig-tools.json"
+    },
+    {
+      "pid": 113206,
+      "ppid": 113205,
+      "startTicks": 7637048,
+      "cmdline": "codex-linux-sandbox --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py types07 60 node_modules/.bin/tsc --noEmit --project tsconfig-tools.json"
+    },
+    {
+      "pid": 113205,
+      "ppid": 113203,
+      "startTicks": 7637047,
+      "cmdline": "bwrap --new-session --die-with-parent --ro-bind / / --dev /dev --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --bind /workspace /workspace --perms 555 --tmpfs /workspace/.git --remount-ro /workspace/.git --perms 555 --tmpfs /workspace/.agents --remount-ro /workspace/.agents --perms 555 --tmpfs /workspace/.codex --remount-ro /workspace/.codex --perms 555 --tmpfs /workspace/.aws --remount-ro /workspace/.aws --bind /tmp /tmp --perms 000 --tmpfs /tmp/codex-daemon-1000 --remount-ro /tmp/codex-daemon-1000 --perms 555 --tmpfs /tmp/.git --remount-ro /tmp/.git --perms 555 --tmpfs /tmp/.agents --remount-ro /tmp/.agents --perms 555 --tmpfs /tmp/.codex --remount-ro /tmp/.codex --perms 555 --tmpfs /tmp/.aws --remount-ro /tmp/.aws --ro-bind /tmp/codex-bwrap-synthetic-mount-targets-1000 /tmp/codex-bwrap-synthetic-mount-targets-1000 --unshare-user --unshare-ipc --cap-drop ALL --argv0 codex-linux-sandbox -- /opt/codex/bin/codex --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} --apply-seccomp-then-exec -- /bin/bash -lc python3 tooling/run-scope.py types07 60 node_modules/.bin/tsc --noEmit --project tsconfig-tools.json"
+    },
+    {
+      "pid": 113203,
+      "ppid": 447,
+      "startTicks": 7637042,
+      "cmdline": "/run/codex-environment/codex-home/tmp/arg0/codex-arg0JTLgNI/codex-linux-sandbox --inherit-pid-namespace --sandbox-policy-cwd /workspace --command-cwd /workspace/yunshan-work/ROOT15-tenant-reopening-20261004-01 --permission-profile {\"type\":\"managed\",\"file_system\":{\"type\":\"restricted\",\"entries\":[{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"root\"}},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"slash_tmp\"}},\"access\":\"write\"},{\"path\":{\"type\":\"special\",\"value\":{\"kind\":\"tmpdir\"}},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace\"},\"access\":\"write\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.git\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.agents\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.codex\"},\"access\":\"read\"},{\"path\":{\"type\":\"path\",\"path\":\"/workspace/.aws\"},\"access\":\"read\"}]},\"network\":\"enabled\"} -- /bin/bash -lc python3 tooling/run-scope.py types07 60 node_modules/.bin/tsc --noEmit --project tsconfig-tools.json"
+    },
+    {
+      "pid": 447,
+      "ppid": 0,
+      "startTicks": 954,
+      "cmdline": "/opt/codex/bin/codex exec-server --remote https://codex-cloud-environments.chatgpt.com/api --environment-id ccarenv_b64_Y2NhcmVudl9kM2Y0MzMzNmY2N2M4MTkxODZhNjgyZjNhYzY3ZjRiYQ --linux-sandbox-pid-namespace=inherit"
+    }
+  ],
+  "childIdentity": {
+    "pid": 113210,
+    "ppid": 113207,
+    "startTicks": 7637127,
+    "cmdline": "/usr/bin/env node node_modules/.bin/tsc --noEmit --project tsconfig-tools.json"
+  },
+  "ownedActiveAtEnd": [],
+  "inputsExact": true,
+  "inputCount": 311,
+  "productionSourceCount": 73,
+  "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "auxiliaryInputCount": 315,
+  "auxiliaryInputsExact": true,
+  "wrapperSHA256": "a50506c67d4e17572a69e2c9c92dbb9344b0d20fe2bac53995373aefe3b30cbe"
+}

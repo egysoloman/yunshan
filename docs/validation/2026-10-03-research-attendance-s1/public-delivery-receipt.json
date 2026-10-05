@@ -1,0 +1,45 @@
+{
+  "createdAtUTC": "2026-10-03T03:50:42Z",
+  "status": "ARCHIVE_VERIFIED_LIBRARY_BLOCKED_NETWORK",
+  "zipPath": "/tmp/yunshan-research-s1-original-delivery-20261003-01/yunshan-S1-research-original-evidence-20261003.zip",
+  "zipFileName": "yunshan-S1-research-original-evidence-20261003.zip",
+  "zipSizeBytes": 55575429,
+  "zipSHA256": "0f663aca3f025cc0ae0a5c9ba97e22e8e048d7d20d8e94ab7653a12568c493a6",
+  "originalPayloadCount": 1057,
+  "zipMemberCount": 1061,
+  "allOriginalBytesMatchBeforeAfter": true,
+  "allZIPMembersMatchSHAAndBytes": true,
+  "crc": "PASS",
+  "privacyScan": "PASS",
+  "archiveManifestPath": "/tmp/yunshan-research-s1-original-delivery-20261003-01/archive-manifest.json",
+  "archiveManifestSHA256": "efb9e6df741bff8543b818b2e02013ea4588b731a1edbd1f23ef70a477ac76f5",
+  "library": {
+    "attempts": 1,
+    "status": "FAILED_BEFORE_UPLOAD_PREPARATION",
+    "reason": "Network failure before upload preparation; no Library file created.",
+    "successfulFiles": 0,
+    "libraryFileIDs": [],
+    "fileID": null,
+    "version": null,
+    "identityPersisted": false,
+    "retryOrAlternateUpload": false,
+    "exitCode": 1,
+    "startedAtUTC": "2026-10-03T03:48:34Z",
+    "endedAtUTC": "2026-10-03T03:48:34Z"
+  },
+  "zipUnchangedAfterLibraryAttempt": true,
+  "allOwnedJobsExited": true,
+  "ownedPIDStates": {
+    "191206": {
+      "present": false
+    },
+    "191455": {
+      "present": false
+    },
+    "191456": {
+      "present": false
+    }
+  },
+  "noNewSimulationTestsBuildBrowserGPU": true,
+  "remainingScope": "Research materials procurement/consumption chain, full suite, natural-city stability, WebGL, Mac hardware and art not validated by this package."
+}

@@ -1,0 +1,117 @@
+{
+  "at": "2026-10-04T02:14:28.514576+00:00",
+  "status": "READ_ONLY_CONCURRENT_CPU_SCOPE_RECORD",
+  "browserScope": "webgl02",
+  "rootReleaseNotice": "Only economy14d01 remains active. World01/education01/system01 original scopes ended; no other browser scope authorized while our exclusive GPU run continues.",
+  "scopes": [
+    {
+      "scope": "world01",
+      "originalOwnershipPath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/world01/owned-process.json",
+      "publicArgv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/world-v4.test.ts",
+        "tests/world-v5.test.ts",
+        "tests/world-v6-commercial.test.ts",
+        "tests/world-v6-commercial-routes.test.ts",
+        "tests/world-v6-office.test.ts",
+        "tests/world-layout.test.ts",
+        "tests/stair-continuity.test.ts",
+        "tests/architecture-floor-plan.test.ts",
+        "tests/floor-plan-derived-cache.test.ts",
+        "tests/route-encoding.test.ts",
+        "tests/chunk-residency.test.ts",
+        "tests/persistence.test.ts"
+      ],
+      "currentIdentity": null,
+      "endedReceiptExists": true
+    },
+    {
+      "scope": "education01",
+      "originalOwnershipPath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/education01/owned-process.json",
+      "publicArgv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/family-fee-education.test.ts",
+        "tests/family-fee-legacy-qualification.test.ts",
+        "tests/education-course.test.ts",
+        "tests/education-saved-time.test.ts",
+        "tests/education-legacy-regression.test.ts",
+        "tests/education-boundary.test.ts"
+      ],
+      "currentIdentity": null,
+      "endedReceiptExists": true
+    },
+    {
+      "scope": "systems01",
+      "originalOwnershipPath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/systems01/owned-process.json",
+      "publicArgv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=none",
+        "tests/resident-petitions.test.ts",
+        "tests/police-fulfillment.test.ts",
+        "tests/public-disinfection.test.ts",
+        "tests/family.test.ts",
+        "tests/resident-formal-education.test.ts",
+        "tests/culture.test.ts",
+        "tests/public-health-hygiene.test.ts",
+        "tests/hygiene.test.ts",
+        "tests/market-company-rights.test.ts",
+        "tests/market-company-return.test.ts",
+        "tests/supplemental-budget.test.ts",
+        "tests/roadwork-replacement.test.ts",
+        "tests/roadworks.test.ts",
+        "tests/road-routing.test.ts",
+        "tests/roads-old22.test.ts",
+        "tests/road-estate.test.ts",
+        "tests/road-demands.test.ts",
+        "tests/road-capacity.test.ts",
+        "tests/power.test.ts",
+        "tests/banking.test.ts",
+        "tests/player-labor.test.ts",
+        "tests/food-hiring.test.ts",
+        "tests/public-budget-standing.test.ts",
+        "tests/research-labor.test.ts",
+        "tests/research-task-budget.test.ts",
+        "tests/research-offsite-causal.test.ts",
+        "tests/shop-self-funding.test.ts"
+      ],
+      "currentIdentity": null,
+      "endedReceiptExists": true
+    },
+    {
+      "scope": "economy14d01",
+      "originalOwnershipPath": "/workspace/yunshan-work/ROOT07-city-continuation-20261004-01/economy14d01/owned-process.json",
+      "publicArgv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/economy-audit.ts",
+        "--days",
+        "14",
+        "--out",
+        "artifacts/root07-economy-14d.json"
+      ],
+      "currentIdentity": {
+        "pid": 21540,
+        "name": "MainThread",
+        "state": "R",
+        "parent": 21537,
+        "group": 21540,
+        "session": 21540,
+        "startTicks": 869225
+      },
+      "endedReceiptExists": false
+    }
+  ],
+  "doesNotClaim": "CPU timings or software FPS represent macOS hardware performance"
+}

@@ -1,0 +1,48 @@
+{
+  "startedAt": "2026-10-05T01:59:13.932317+00:00",
+  "endedAt": "2026-10-05T02:13:38.603597+00:00",
+  "argv": [
+    "node",
+    "/tmp/ROOT17-visual-gpu-20261005-01/capture.mjs",
+    "candidate327",
+    "/tmp/ROOT17-visual-gpu-20261005-01/candidate-gpu01/artifacts",
+    "4397"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 327,
+  "inputsStable": true,
+  "rawSHA256": "0dab1ba64163e4ef323c87d9cfc250bfb853bf2ae0d320b8424139b6e3c4a2d3",
+  "ownedPid": 143042,
+  "observedDescendants": 12,
+  "finalOwnedMembers": [
+    {
+      "pid": 143061,
+      "state": "Z",
+      "parent": 1,
+      "group": 143042,
+      "session": 143042,
+      "startTicks": 9637895
+    },
+    {
+      "pid": 143089,
+      "state": "Z",
+      "parent": 1,
+      "group": 143072,
+      "session": 143072,
+      "startTicks": 9637973
+    },
+    {
+      "pid": 143090,
+      "state": "Z",
+      "parent": 1,
+      "group": 143072,
+      "session": 143072,
+      "startTicks": 9637974
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

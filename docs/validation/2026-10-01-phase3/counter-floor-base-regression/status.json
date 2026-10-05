@@ -1,0 +1,10 @@
+{
+  "oldSnapshot": "coherent04",
+  "oldBuild": "index-n3tM-54D.js",
+  "failure": "Actual buildHouse adds building.position.y+.6 but site-fixture local coordinates are relative to building.position.y; cabinet and tabletop lifted .6m above collision/live food",
+  "baselineExit": 1,
+  "fixedRelatedExit": 0,
+  "fixedRelatedTests": 15,
+  "test": "actual near and far building emitters align the cabinet and tabletop with the shared physical counter",
+  "scope": "Production near/far emitters exercised without WebGL; world geometry and saved state unchanged. Final full rules and actual GL pending coherent05."
+}

@@ -1,0 +1,27 @@
+{
+  "scope": "corrected-old-case01",
+  "startedAt": "2026-10-04T02:02:53.237755+00:00",
+  "endedAt": "2026-10-04T02:06:30.908082+00:00",
+  "status": "PASS",
+  "exitCode": 0,
+  "timedOut": false,
+  "inputCount": 63,
+  "inputsStable": true,
+  "rawSHA256": "899c0526f18052cdcf503b088a5061937522ce54adc745a2e954b468551ee5ff",
+  "ownedHeadGone": true,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "--test-name-pattern=actual old paid boost is converted once",
+    "tests/power.test.ts"
+  ],
+  "maxSeconds": 300,
+  "wrapperSHA256": "09343e20f6b11d96945d640f092865896c0b726181e7dedf9735fc0c2ad99772",
+  "externalDriverSHA256": {
+    "diagnose-world.ts": "46189675e08028eb65dcaf2836335f92576f3bf510a4d84cf8823ccdbf842141",
+    "native-reader24.ts": "e07416dabbe0f63c8abdb3f6e91136ae54317e1632d19768ea2ccb0123b925bc"
+  }
+}

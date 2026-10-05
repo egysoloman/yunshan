@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-01T21:22:32.378240+00:00",
+  "scope": "Historical C3 five-page review and original source/evidence/reference ZIPs; latest candidate5 images not included.",
+  "producer": "root",
+  "manifest": {
+    "producedAt": "2026-10-01T21:22:04.345834+00:00",
+    "scope": "Original C3 source/production bundle and historically scoped review. Candidate5 is implemented but not pictured here. Later evidence scopes remain separate.",
+    "sourceCount": 69,
+    "originalEvidenceCount": 159,
+    "files": {
+      "yunshan-phase2-C3-source.zip": {
+        "bytes": 1883289,
+        "sha256": "39930bc14a51776adc3780626031222fea18f8c27ba6e8e05e212b324670d02b"
+      },
+      "yunshan-phase2-C3-evidence.zip": {
+        "bytes": 16879148,
+        "sha256": "ba564a24333544ca02581eb712e37047b2513a5b1fb85b0e645e803352bdae0c"
+      },
+      "yunshan-phase2-C3-review.pdf": {
+        "bytes": 9507173,
+        "sha256": "dede88b26e3d0e0f5195c023233e691ef3451ef7606bf6381a29ded7489bc121"
+      },
+      "yunshan-phase2-C3-review.html": {
+        "bytes": 9646562,
+        "sha256": "c45aa84795b332e0a58504ea149801b7dcc6261ac1eeb3b886dd416d76360886"
+      },
+      "yunshan-phase2-C3-memo.md": {
+        "bytes": 77047,
+        "sha256": "a1938b7f2d5057bf6a20c91f45a28973500b4ce1220c4f8ca8f6aea8c3537dc1"
+      },
+      "yunshan-phase2-C3-requirements.md": {
+        "bytes": 15300,
+        "sha256": "18eefc523af60c72b5f716ea81add443c2409b97bd5a5d31f033261b22e41fd8"
+      },
+      "yunshan-original-references.zip": {
+        "bytes": 13780264,
+        "sha256": "0680297188d5ce8d0e1a126a342fe69a3a6c09b91e9a3e7c619e92592ef7132f"
+      }
+    },
+    "libraryIDs": []
+  },
+  "method": "unchanged official Library batch helper, 7 originals",
+  "status": "failed",
+  "exitCode": 1,
+  "libraryIDs": [],
+  "resultsEmpty": true,
+  "error": "library upload failed: hosted apps tools/list request failed: network",
+  "manualFallbackUsed": false,
+  "pdfReviewedPages": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

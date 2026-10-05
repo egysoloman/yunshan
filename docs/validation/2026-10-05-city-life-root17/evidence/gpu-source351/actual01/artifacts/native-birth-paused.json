@@ -1,0 +1,415 @@
+{
+  "name": "native-birth-paused",
+  "scope": "Untouched production spawn and full UI. Only native pause command; checkpoint follows the real main loop.",
+  "checkpoint": {
+    "observedFramePairs": 1,
+    "saveSHA256": "79b61b11fc42762e83539fce83dba570bd396a1a21d711b332b8504e1252897f"
+  },
+  "graph": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "buildEntry": "/assets/index-B3i_vPqT.js",
+  "buildSHA256": "ef0d384749cfa360cadea1866ca21096560880dcfab2606cd7936cd1c5540b32",
+  "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "saveSHA256": "79b61b11fc42762e83539fce83dba570bd396a1a21d711b332b8504e1252897f",
+  "pngSHA256": "9b74fbc74f72b9e7ba234b460161bcb0e2290ab62945b5181ec7bf2926091171",
+  "pngBytes": 763426,
+  "before": {
+    "tick": 16,
+    "day": 0,
+    "hour": 8.066666666666666,
+    "paused": true,
+    "body": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    },
+    "player": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    },
+    "insideId": null,
+    "floor": 0,
+    "mode": "walk",
+    "camera": {
+      "position": [
+        -330,
+        53.2575,
+        487
+      ],
+      "quaternion": [
+        -0.024191989150678845,
+        -0.25171716574181724,
+        -0.006294240498289998,
+        0.9674779577170685
+      ],
+      "fov": 48
+    },
+    "drawCalls": 725,
+    "triangles": 1279172,
+    "glErrors": [],
+    "programs": [
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      }
+    ]
+  },
+  "after": {
+    "tick": 16,
+    "day": 0,
+    "hour": 8.066666666666666,
+    "paused": true,
+    "body": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    },
+    "player": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    },
+    "insideId": null,
+    "floor": 0,
+    "mode": "walk",
+    "camera": {
+      "position": [
+        -330,
+        53.2575,
+        487
+      ],
+      "quaternion": [
+        -0.024191989150678845,
+        -0.25171716574181724,
+        -0.006294240498289998,
+        0.9674779577170685
+      ],
+      "fov": 48
+    },
+    "drawCalls": 725,
+    "triangles": 1279172,
+    "glErrors": [],
+    "programs": [
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      },
+      {
+        "name": "",
+        "linked": true,
+        "log": "",
+        "runnable": null
+      }
+    ]
+  }
+}

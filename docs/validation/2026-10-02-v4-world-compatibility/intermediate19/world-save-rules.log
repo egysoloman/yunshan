@@ -1,0 +1,27 @@
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (3368.730838ms)
+✔ all three v2 worlds retain their frozen full JSON, fingerprints and authoritative terrain and walking surfaces (6875.106025ms)
+✔ legacy worlds retain full main and checkpoint JSON plus their independently captured physical samples (4052.667796ms)
+✔ the historical r5 recipe reproduces every old world byte, fingerprint and sampled physical surface across three seeds (9997.597886ms)
+✔ v3 identifies the changed physical heightfield even when every building, road and station matches v2 (7495.149773ms)
+✔ v3 fingerprints cover physical geology inputs and ignore untrusted extra descriptor fields (1197.743148ms)
+✔ all three v3 worlds keep their full frozen JSON and every captured physical sample after v4 is introduced (11035.827606ms)
+✔ a complete v3 save retains its actual upper floor, voxel edits, finances and routes instead of acquiring the v4 rooms (19522.516066ms)
+✔ v2 and historical r5 saves keep their surface, upper floor, voxel edit and entire financial state after v4 (30637.452206ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (10473.767915ms)
+✔ the original native r5 export selects its historical recipe and continues 24 actual ticks after v4 (12318.564184ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (10320.83891ms)
+✔ v4 is a deterministic physical building opt-in while inheriting the complete v3 landscape and graph (26987.017355ms)
+✔ the six v4 building families join their real ground use points to the city entrance through shared walls (2575.968672ms)
+✔ v4 upper courtyards and wings remove actual walking support instead of keeping rectangular ghost rooms (5655.748514ms)
+✔ an absent v4 upper wing exposes its real lower roof or open ground courtyard slab (3476.198668ms)
+✔ v4 support uses the real yaw footprint and cannot pull feet up to a higher storey (2074.316281ms)
+✔ v4 fingerprints include generated rooms, permissions and functional points while imported descriptors stay untrusted (24721.546915ms)
+✔ a complete v4 occupied-floor save reassembles byte-exact and continues every module for 24 ticks (107749.858054ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 301365.69328

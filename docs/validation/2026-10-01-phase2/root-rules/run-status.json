@@ -1,0 +1,16 @@
+{
+  "scope": "18:40 immutable rules01 source, build passed; full rule run interrupted and is not a completed suite",
+  "buildExitCode": 0,
+  "testExitCode": null,
+  "testInterruption": "Economy subagent incorrectly matched root full-suite PID45591 while trying to terminate its own stale duplicate targeted suite; sent SIGTERM. Original log retained. No complete full-suite pass/fail count may be inferred.",
+  "recordedAt": "2026-10-01T18:53:07.139985+00:00",
+  "testExitStatus": "SIGTERM reached runner while entering actual IndexedDB test; retained runner reports192 pass/14fail/122cancelled. Exec result expired before root observed an exit code; these counts are interrupted source01, not a complete suite.",
+  "observedPartialRunnerSummary": {
+    "tests": 328,
+    "pass": 192,
+    "fail": 14,
+    "cancelled": 122,
+    "skipped": 0,
+    "durationMs": 1492433.337687
+  }
+}

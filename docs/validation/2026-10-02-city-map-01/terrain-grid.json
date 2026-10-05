@@ -1,0 +1,16 @@
+{
+  "xMin": -2300,
+  "xMax": 2300,
+  "zMin": -2300,
+  "zMax": 2300,
+  "stepM": 50,
+  "nx": 93,
+  "nz": 93,
+  "sourceFunction": "terrainHeight(world,x,z) default includeBasements=true",
+  "orientation": "row0 zMin; columns increasing +X; plotting uses -Z at top, +Z at bottom",
+  "storage": "Float64 little endian",
+  "noBelow50mResolutionClaim": true,
+  "samples": 8649,
+  "minHeightM": 2,
+  "maxHeightM": 614.8376858389422
+}

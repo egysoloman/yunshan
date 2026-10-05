@@ -1,0 +1,171 @@
+{
+  "scope": "Inspector sampled self/inclusive wall time during identical ordinary 12-tick service sequence; world generation and microbench excluded; single sequential baseline/candidate pair in parent-authorized sole-CPU window. Not macOS or FPS.",
+  "baseline": {
+    "sampledMs": 67889.651,
+    "samples": 57087,
+    "functions": {
+      "getBuildingBody": {
+        "selfMs": 7357.03,
+        "inclusiveMs": 7357.03
+      },
+      "floorPlanSupport": {
+        "selfMs": 1903.696,
+        "inclusiveMs": 14063.991
+      },
+      "localSolids": {
+        "selfMs": 9137.783,
+        "inclusiveMs": 22899.955
+      },
+      "blocksFloorPlanMovement": {
+        "selfMs": 18034.087,
+        "inclusiveMs": 39368.189
+      },
+      "nearPlans": {
+        "selfMs": 274.691,
+        "inclusiveMs": 2745.774
+      },
+      "stairSurfaces": {
+        "selfMs": 1457.225,
+        "inclusiveMs": 2886.705
+      },
+      "boundaryLoops": {
+        "selfMs": 313.38,
+        "inclusiveMs": 550.584
+      }
+    },
+    "topSelf": [
+      {
+        "function": "blocksFloorPlanMovement",
+        "ms": 18034.087
+      },
+      {
+        "function": "",
+        "ms": 11256.316
+      },
+      {
+        "function": "localSolids",
+        "ms": 9137.783
+      },
+      {
+        "function": "getBuildingBody",
+        "ms": 7357.03
+      },
+      {
+        "function": "canStandInFloorPlan",
+        "ms": 6520.944
+      },
+      {
+        "function": "segmentIntersectsRect",
+        "ms": 3159.984
+      },
+      {
+        "function": "(garbage collector)",
+        "ms": 2756.737
+      },
+      {
+        "function": "floorPlanSupport",
+        "ms": 1903.696
+      },
+      {
+        "function": "localSegmentClear",
+        "ms": 1680.975
+      },
+      {
+        "function": "stairSurfaces",
+        "ms": 1457.225
+      },
+      {
+        "function": "blocksRoofMovement",
+        "ms": 1055.744
+      },
+      {
+        "function": "routeGrid",
+        "ms": 421.695
+      }
+    ]
+  },
+  "prototype": {
+    "sampledMs": 60038.465,
+    "samples": 52216,
+    "functions": {
+      "getBuildingBody": {
+        "selfMs": 1176.121,
+        "inclusiveMs": 1176.121
+      },
+      "floorPlanSupport": {
+        "selfMs": 1506.337,
+        "inclusiveMs": 10188.625
+      },
+      "localSolids": {
+        "selfMs": 8638.305,
+        "inclusiveMs": 20415.333
+      },
+      "blocksFloorPlanMovement": {
+        "selfMs": 17215.409,
+        "inclusiveMs": 35938.025
+      },
+      "nearPlans": {
+        "selfMs": 488.734,
+        "inclusiveMs": 830.098
+      },
+      "stairSurfaces": {
+        "selfMs": 1294.544,
+        "inclusiveMs": 1871.22
+      },
+      "boundaryLoops": {
+        "selfMs": 280.648,
+        "inclusiveMs": 532.404
+      }
+    },
+    "topSelf": [
+      {
+        "function": "blocksFloorPlanMovement",
+        "ms": 17215.409
+      },
+      {
+        "function": "",
+        "ms": 11142.774
+      },
+      {
+        "function": "localSolids",
+        "ms": 8638.305
+      },
+      {
+        "function": "canStandInFloorPlan",
+        "ms": 6363.961
+      },
+      {
+        "function": "segmentIntersectsRect",
+        "ms": 3175.152
+      },
+      {
+        "function": "(garbage collector)",
+        "ms": 2553.602
+      },
+      {
+        "function": "localSegmentClear",
+        "ms": 1703.629
+      },
+      {
+        "function": "floorPlanSupport",
+        "ms": 1506.337
+      },
+      {
+        "function": "stairSurfaces",
+        "ms": 1294.544
+      },
+      {
+        "function": "getBuildingBody",
+        "ms": 1176.121
+      },
+      {
+        "function": "blocksRoofMovement",
+        "ms": 1134.301
+      },
+      {
+        "function": "getBuildingFloorPlan",
+        "ms": 600.572
+      }
+    ]
+  }
+}

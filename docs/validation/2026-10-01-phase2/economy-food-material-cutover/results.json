@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-10-01T21:19:00.754056+00:00",
+  "result": {
+    "economy": {
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "durationMs": 3830.224519
+    },
+    "targetedPriorFailures": {
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "durationMs": 6970.294288
+    },
+    "strictExit": 0
+  },
+  "sourceHashAfterVerification": {
+    "src/simulation.ts": "7bd2e10e0680ecf1f8a79f1d43f6dde2cde17b216179a534f7ff85a6952acdd3",
+    "src/simulation/extensions.ts": "054a2ae41b93631c5d1e774f0d3ae0c788e8bb458a75aa18161fdf929bb3c630",
+    "scripts/economy-audit.ts": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+    "tests/economy.test.ts": "10b7721f64c81e6cfc360978ce25df301cefb2d7b4888b69a4403b03563cd216",
+    "tests/extensions.test.ts": "726c3f0c1a9339c1dd9af7d271376dd9efedf9ed880c2f2147c1cff6ac1a2eed",
+    "tests/simulation.test.ts": "a591dcd073d9395860a3b332fbb190695a8199e4b97ff7738b8f898117cc19e0",
+    "src/persistence/world-layout.ts": "c5571789367b11b5c0bc654865551dfd903b448056f3e6af75ebddf86ccb48c8",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/simulation/clinical.ts": "dd85e9cc6bf08c82d0b72d3d4c5fc6506f59e9533f097c2ffcb00e8d5f204b37",
+    "src/simulation/culture.ts": "325f72309bed34c77b8cd5dfe3f30329a172b722fba23f9ebbff868d11973f49",
+    "src/types.ts": "e464bb54070a582b5deb56567f2356c4bef4600c406b2828fdc03041b6760a1a"
+  },
+  "limitations": [
+    "These are targeted rules, not a completed fresh full suite.",
+    "Hashes were recorded after these targeted runs, not immutable start/end hashes.",
+    "The earlier funded 30/60-day audits failed with 60/372 deaths and are retained separately.",
+    "No new long-term audit has run against the food/material cutover.",
+    "Existing in-flight cargo and old consignment ownership remain; new food carriers load only farm/fishing food."
+  ]
+}

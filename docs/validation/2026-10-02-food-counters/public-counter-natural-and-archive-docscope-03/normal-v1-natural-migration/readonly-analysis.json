@@ -1,0 +1,126 @@
+{
+  "scope": "read-only authoritative geometry and real custody/physical cash, no additional simulation ticks; whole-city production/consumption event window was not subscribed so food global flow residual NOT_CALCULATED",
+  "initial": {
+    "time": 1020,
+    "hour": 17,
+    "physicalCash": 280736.1579367346,
+    "actors": [
+      {
+        "id": "citizen-142",
+        "homeId": "starport-b6",
+        "workId": "starport-b2",
+        "role": "官员",
+        "hunger": 39.93020247207021,
+        "food": 0,
+        "money": 473.22422167376317,
+        "destination": "starport-b2",
+        "targetCommodity": null,
+        "homeToChosenTargetRoadDistance": 204.79174841476447,
+        "homeToJobRoadDistance": 204.79174841476447,
+        "onDuty": false
+      },
+      {
+        "id": "citizen-230",
+        "homeId": "starport-b38",
+        "workId": "starport-b2",
+        "role": "官员",
+        "hunger": 50.42660910924894,
+        "food": 0,
+        "money": 443.39835607443115,
+        "destination": "starport-b2",
+        "targetCommodity": null,
+        "homeToChosenTargetRoadDistance": 381.08463775326925,
+        "homeToJobRoadDistance": 381.08463775326925,
+        "onDuty": false
+      }
+    ],
+    "localFoodRetailers": [],
+    "counter": {
+      "siteId": "starport-b2",
+      "state": "open",
+      "stockRemaining": 8,
+      "sales": 0,
+      "materialReceived": 1,
+      "materialConsumed": 1,
+      "assemblyMinutes": 10,
+      "spent": 4
+    },
+    "sourceBalances": [
+      {
+        "sourceLotId": "freight-lot-22",
+        "nodeId": "starport-quarter-2",
+        "owner": null,
+        "originalReceived": 28,
+        "currentOriginalFreight": 20,
+        "held": 8,
+        "sold": 0,
+        "returned": 0
+      }
+    ],
+    "publicArrears": 0,
+    "privateArrears": 0,
+    "readonlyQueriesPreservedSave": true
+  },
+  "final": {
+    "time": 2496,
+    "hour": 17.6,
+    "physicalCash": 280736.15793675097,
+    "actors": [
+      {
+        "id": "citizen-142",
+        "homeId": "starport-b6",
+        "workId": "starport-b2",
+        "role": "官员",
+        "hunger": 87.19999999999999,
+        "food": 1,
+        "money": 430.4786592711514,
+        "destination": "east-b8",
+        "targetCommodity": "food",
+        "homeToChosenTargetRoadDistance": 2198.626261841945,
+        "homeToJobRoadDistance": 204.79174841476447,
+        "onDuty": false
+      },
+      {
+        "id": "citizen-230",
+        "homeId": "starport-b38",
+        "workId": "starport-b2",
+        "role": "官员",
+        "hunger": 52,
+        "food": 1,
+        "money": 419.05716179467476,
+        "destination": "east-b2",
+        "targetCommodity": "food",
+        "homeToChosenTargetRoadDistance": 2392.891413401469,
+        "homeToJobRoadDistance": 381.08463775326925,
+        "onDuty": false
+      }
+    ],
+    "localFoodRetailers": [],
+    "counter": {
+      "siteId": "starport-b2",
+      "state": "open",
+      "stockRemaining": 8,
+      "sales": 0,
+      "materialReceived": 1,
+      "materialConsumed": 1,
+      "assemblyMinutes": 10,
+      "spent": 4
+    },
+    "sourceBalances": [
+      {
+        "sourceLotId": "freight-lot-22",
+        "nodeId": "starport-quarter-2",
+        "owner": null,
+        "originalReceived": 28,
+        "currentOriginalFreight": 20,
+        "held": 8,
+        "sold": 0,
+        "returned": 0
+      }
+    ],
+    "publicArrears": 0,
+    "privateArrears": 0,
+    "readonlyQueriesPreservedSave": true
+  },
+  "cashResidual": 1.635635271668434e-8
+}

@@ -1,0 +1,37 @@
+{
+  "startedAt": "2026-10-04T14:16:33.577726+00:00",
+  "endedAt": "2026-10-04T14:19:02.220026+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/shop-repeat-distress.test.ts",
+    "tests/shop-lifecycle.test.ts",
+    "tests/shop-self-funding.test.ts",
+    "tests/market-company-rights.test.ts",
+    "tests/company-shop-return.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 295,
+  "inputsStable": true,
+  "rawSHA256": "41229bda0e9136b6d5032b4f906c0c1786d9fdad75bafe4e3c27b20a85a78965",
+  "ownedPid": 84659,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 84681,
+      "state": "Z",
+      "parent": 1,
+      "group": 84659,
+      "session": 84659,
+      "startTicks": 5421844
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

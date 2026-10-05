@@ -1,0 +1,3657 @@
+{
+  "status": "passed",
+  "sourceHash": {
+    "scripts/economy-audit.ts": "bb5f175cb63bb9b4421aea1565f12996d20872d715f48dfcf4fcd5b423f17e96",
+    "scripts/economy-observations.ts": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/commercial-district.ts": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+    "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+    "src/host/upgrade-city-ruleset.ts": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d",
+    "src/host/upgrade-civic-history-format.ts": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+    "src/hygiene-ui.ts": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+    "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+    "src/main.ts": "eb68cbdde501d8d24324e57a07e579ef255d1850e3c2d24366ba99cd3483080f",
+    "src/market-station-apron.ts": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "62d0d63159809af0f2c64a5146e6bd90e682a03b99af30b6d04aa8e6f0918bd8",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/save-resource.ts": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7",
+    "src/product-city.ts": "c31680479acd4a30e4be217a52929e326785ab203104c6e4e5e1a0cdc33e5f34",
+    "src/renderer.ts": "4648cb168cfe907907f16e0607f319c11e1936353cac491164d99a1bccb9425a",
+    "src/rendering/architectural-finishes.ts": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937",
+    "src/rendering/architecture-bodies.ts": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230",
+    "src/rendering/architecture-detail.ts": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/interior-lighting.ts": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+    "src/rendering/market-goods.ts": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+    "src/rendering/market-shopfront.ts": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+    "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+    "src/rendering/terrain.ts": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+    "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+    "src/simulation.ts": "1da2602858baceca45e2e4b5f8122cac1b75453051c3bf4ffbddd94cfcd53569",
+    "src/simulation/activity-capacity.ts": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+    "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+    "src/simulation/banking.ts": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+    "src/simulation/budget-authority.ts": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef",
+    "src/simulation/city-ruleset.ts": "b28fd94d5b4dec109e4654f47eacab63394cbe79bc6117cdc9abf3c98d3f642f",
+    "src/simulation/civic-history.ts": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+    "src/simulation/civic-staffing.ts": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5",
+    "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+    "src/simulation/culture.ts": "4383c4b98420f63fd3ff63fdbdf0eac76316fc4ffc609de3ec829a1f9caf14b9",
+    "src/simulation/education.ts": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+    "src/simulation/extensions.ts": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+    "src/simulation/family-education.ts": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+    "src/simulation/family.ts": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+    "src/simulation/freight-access.ts": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381",
+    "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+    "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+    "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+    "src/simulation/hygiene-public.ts": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+    "src/simulation/hygiene-transfer.ts": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+    "src/simulation/hygiene.ts": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/npc-stair-motion.ts": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+    "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+    "src/simulation/player-labor.ts": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+    "src/simulation/police-supplies.ts": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+    "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+    "src/simulation/public-employment.ts": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+    "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "src/simulation/shop_lifecycle.ts": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1",
+    "src/simulation/supplemental-budget.ts": "64b12d7fee1441811b1de0651ba340453168d0491ddc338d6fabc45015ee6329",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "f23de57fb7f8b6ab15b3adff3b09670ff13e44e150d2bcb333ebe1b2cd7373aa",
+    "src/ui.ts": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541",
+    "src/world.ts": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+  },
+  "endSourceHash": {
+    "scripts/economy-audit.ts": "bb5f175cb63bb9b4421aea1565f12996d20872d715f48dfcf4fcd5b423f17e96",
+    "scripts/economy-observations.ts": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/architecture-floor-plan.ts": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94",
+    "src/aviation-renderer.ts": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+    "src/aviation.ts": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+    "src/commercial-district.ts": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+    "src/controller.ts": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+    "src/host/upgrade-city-ruleset.ts": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d",
+    "src/host/upgrade-civic-history-format.ts": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+    "src/hygiene-ui.ts": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+    "src/journey.ts": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+    "src/main.ts": "eb68cbdde501d8d24324e57a07e579ef255d1850e3c2d24366ba99cd3483080f",
+    "src/market-station-apron.ts": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046",
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "62d0d63159809af0f2c64a5146e6bd90e682a03b99af30b6d04aa8e6f0918bd8",
+    "src/persistence/route-encoding.ts": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+    "src/persistence/save-resource.ts": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/persistence/world-layout.ts": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7",
+    "src/product-city.ts": "c31680479acd4a30e4be217a52929e326785ab203104c6e4e5e1a0cdc33e5f34",
+    "src/renderer.ts": "4648cb168cfe907907f16e0607f319c11e1936353cac491164d99a1bccb9425a",
+    "src/rendering/architectural-finishes.ts": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937",
+    "src/rendering/architecture-bodies.ts": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230",
+    "src/rendering/architecture-detail.ts": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+    "src/rendering/architecture-layout.ts": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+    "src/rendering/chunk-residency.ts": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+    "src/rendering/citizen-appearance.ts": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+    "src/rendering/interior-lighting.ts": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+    "src/rendering/market-goods.ts": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+    "src/rendering/market-shopfront.ts": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+    "src/rendering/road-closures.ts": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+    "src/rendering/terrain.ts": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+    "src/roads.ts": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+    "src/simulation.ts": "1da2602858baceca45e2e4b5f8122cac1b75453051c3bf4ffbddd94cfcd53569",
+    "src/simulation/activity-capacity.ts": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0",
+    "src/simulation/activity-minutes.ts": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+    "src/simulation/banking.ts": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+    "src/simulation/budget-authority.ts": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef",
+    "src/simulation/city-ruleset.ts": "b28fd94d5b4dec109e4654f47eacab63394cbe79bc6117cdc9abf3c98d3f642f",
+    "src/simulation/civic-history.ts": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+    "src/simulation/civic-staffing.ts": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5",
+    "src/simulation/clinical.ts": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+    "src/simulation/culture.ts": "4383c4b98420f63fd3ff63fdbdf0eac76316fc4ffc609de3ec829a1f9caf14b9",
+    "src/simulation/education.ts": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+    "src/simulation/extensions.ts": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+    "src/simulation/family-education.ts": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+    "src/simulation/family.ts": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6",
+    "src/simulation/freight-access.ts": "0c39576041a8ca307d646adbc63e3b59d991b8da498a259ad6566d970c563381",
+    "src/simulation/funded-work.ts": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+    "src/simulation/governance.ts": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+    "src/simulation/home-rest.ts": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+    "src/simulation/hygiene-public.ts": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+    "src/simulation/hygiene-transfer.ts": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+    "src/simulation/hygiene.ts": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+    "src/simulation/journeys.ts": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+    "src/simulation/npc-stair-motion.ts": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+    "src/simulation/pathology.ts": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+    "src/simulation/player-labor.ts": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+    "src/simulation/police-supplies.ts": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+    "src/simulation/power.ts": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+    "src/simulation/public-employment.ts": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+    "src/simulation/road-demands.ts": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+    "src/simulation/roadworks.ts": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+    "src/simulation/shop_lifecycle.ts": "0275cd69535f8b6e5924d137dc592286cc9af1d38d6194d4aeac97a3316152b1",
+    "src/simulation/supplemental-budget.ts": "64b12d7fee1441811b1de0651ba340453168d0491ddc338d6fabc45015ee6329",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/site-fixtures.ts": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+    "src/style.css": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+    "src/transport-geometry.ts": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+    "src/types.ts": "f23de57fb7f8b6ab15b3adff3b09670ff13e44e150d2bcb333ebe1b2cd7373aa",
+    "src/ui.ts": "92bdd34d6bd96bf8ddbbcc08e36fb4fd27773ba24c7356300bec765bdd7c8541",
+    "src/world.ts": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07"
+  },
+  "speed": 8,
+  "seed": 20261001,
+  "requestedDays": 1,
+  "initialPolicy": {
+    "taxRate": 0.08,
+    "policeBudget": 0.3
+  },
+  "ruleset": {
+    "requestedRuleset": "civic-local-v1",
+    "requestSource": "product-default",
+    "effectiveRuleset": "civic-local-v1",
+    "saveEnvelopeVersion": 4,
+    "motionVersion": 2,
+    "historyPolicyId": "civic-history-pages-v1",
+    "civicHistory": {
+      "version": 1,
+      "pages": 1,
+      "bytes": 25165,
+      "totals": {
+        "proofs": 13,
+        "applications": 13,
+        "polls": 0,
+        "terms": 0,
+        "utf8Bytes": 25165
+      }
+    },
+    "enablement": {
+      "id": "civic-new-20261001-b85fa6ec",
+      "ruleVersion": 1,
+      "origin": "new-city",
+      "enabledAt": 480,
+      "enabledTick": 0
+    },
+    "requestedNewCityLayout": "current-v6",
+    "actualLayoutVersion": "current-v6",
+    "actualWorldFingerprint": "b85fa6ec",
+    "cityStateSource": "new-city"
+  },
+  "ticks": 720,
+  "finalSave": {
+    "path": "artifacts/root14-product-default-day-final.save.json",
+    "bytes": 3304414,
+    "sha256": "852dc8fc41e2ad5c2addb14fd07fba08f70828af71ea31997336e82142fa8feb"
+  },
+  "terminalTreasury": 72688.81129934225,
+  "sourceHashScope": "All regular src files, this audit driver and its read-only commodity observer; both ends recursively rescan the same source tree.",
+  "scope": "One actual generated city at explicit 8x fast-forward; named initial policy scenarios change no cash or physical assets; no renderer or default-speed performance claim.",
+  "elapsedGameMinutes": 1440,
+  "totals": {
+    "sales": 9831.680247019103,
+    "saleCount": 539,
+    "saleTax": 786.534419761528,
+    "fares": 556,
+    "payrollPublicRequested": 9874.48001091347,
+    "payrollPublicPaid": 8508.268448057695,
+    "payrollPrivateRequested": 6967.680809913087,
+    "payrollPrivate": 6557.535331945632,
+    "wageTax": 1205.2643024002657,
+    "wholesale": 0,
+    "wholesaleTax": 0,
+    "businessExpenses": 565.0742732367552,
+    "storedMeals": 56,
+    "production": 647.3058335760537,
+    "productionMinutes": 28826.591473708042,
+    "operationsRequested": 2073.600000000038,
+    "operations": 2267.1144000000404,
+    "publicSupplies": 644.400000000012,
+    "procurementTax": 225.7211520000012,
+    "civicProcurement": 0,
+    "security": 554.4000000000087,
+    "financeDelta": -7792.788700657737,
+    "roadworkPayroll": 0,
+    "roadworkMinutes": 0
+  },
+  "ledger": {
+    "城市公共运转支出": {
+      "count": 18,
+      "amount": -8328.729647997476,
+      "eventObserved": 0
+    },
+    "交通居民科研投入": {
+      "count": 1,
+      "amount": 200,
+      "eventObserved": 0
+    },
+    "本区居民补选本人登记费": {
+      "count": 4,
+      "amount": 480,
+      "eventObserved": 0
+    },
+    "城市税收与公共收入": {
+      "count": 6,
+      "amount": 337.54094733973034,
+      "eventObserved": 0
+    }
+  },
+  "snapshots": [
+    {
+      "tick": 0,
+      "day": 0,
+      "hour": 8,
+      "treasury": 80000,
+      "gdp": 0,
+      "npcMoney": 191794.17330026394,
+      "moneySupply": 280736.15793671925,
+      "wages": {
+        "sales": 0,
+        "saleCount": 0,
+        "saleTax": 0,
+        "fares": 0,
+        "payrollPublicRequested": 0,
+        "payrollPublicPaid": 0,
+        "payrollPrivateRequested": 0,
+        "payrollPrivate": 0,
+        "wageTax": 0,
+        "wholesale": 0,
+        "wholesaleTax": 0,
+        "businessExpenses": 0,
+        "storedMeals": 0,
+        "production": 0,
+        "productionMinutes": 0,
+        "operationsRequested": 0,
+        "operations": 0,
+        "publicSupplies": 0,
+        "procurementTax": 0,
+        "civicProcurement": 0,
+        "security": 0,
+        "financeDelta": 0,
+        "roadworkPayroll": 0,
+        "roadworkMinutes": 0
+      },
+      "ruleset": {
+        "requestedRuleset": "civic-local-v1",
+        "requestSource": "product-default",
+        "effectiveRuleset": "civic-local-v1",
+        "saveEnvelopeVersion": 4,
+        "motionVersion": 2,
+        "historyPolicyId": "civic-history-pages-v1",
+        "civicHistory": {
+          "version": 1,
+          "pages": 0,
+          "bytes": 406,
+          "totals": {
+            "proofs": 0,
+            "applications": 0,
+            "polls": 0,
+            "terms": 0,
+            "utf8Bytes": 406
+          }
+        },
+        "enablement": {
+          "id": "civic-new-20261001-b85fa6ec",
+          "ruleVersion": 1,
+          "origin": "new-city",
+          "enabledAt": 480,
+          "enabledTick": 0
+        },
+        "requestedNewCityLayout": "current-v6",
+        "actualLayoutVersion": "current-v6",
+        "actualWorldFingerprint": "b85fa6ec",
+        "cityStateSource": "new-city"
+      },
+      "commodityObservations": {
+        "flows": {
+          "food": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "materials": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "unknown": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          }
+        },
+        "attendanceBySiteKind": {
+          "farm": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "dock": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "workshop": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "market": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "other": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "unknown": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          }
+        },
+        "namedAttendance": [],
+        "unclassifiedWageEvents": 0,
+        "storedMeals": 0,
+        "playerConsumedMeals": 0,
+        "observedNpcMeals": 0,
+        "attendanceScope": "Native core-certified named NPC wage-earned events with positive finite minutes and gross, classified by actual shop building kind. These are funded onsite earned minutes, not paid cash, production labor consumed, or a classification of every zero-output batch. Uncertified events, legacy amount-only and public wage events are excluded from private-site attendance; player employment is a separate contract.",
+        "zeroOutputBatchDisposition": "NOT_OBSERVED",
+        "scope": "Observed positive production and retail events by actual site kind; productionMinutes remain minutes attached to positive output batches, not all attendance. Counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance."
+      },
+      "food": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+        "shopFoodUnits": 16210,
+        "residentCarriedFoodUnits": 0,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4960,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1440,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 9810,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4860,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 0,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 0,
+        "routeReachability": "NOT_OBSERVED",
+        "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+      },
+      "policeSupplies": null,
+      "civicRequests": {
+        "residentPetitions": 0,
+        "openPetitions": 0,
+        "orders": []
+      },
+      "formalLearning": [],
+      "familyEducation": null,
+      "playerLabor": {
+        "escrow": 0,
+        "stats": {
+          "reservedGross": 0,
+          "paidGross": 0,
+          "refundedGross": 0,
+          "workedMinutes": 0,
+          "completed": 0
+        }
+      },
+      "roadworks": null,
+      "power": null,
+      "hygiene": null,
+      "education": null,
+      "policy": {
+        "taxRate": 0.08,
+        "policeBudget": 0.3
+      },
+      "publicBudget": {
+        "cash": 80000,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 0,
+        "forecastPayroll": 12585.599999999968,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 14659.199999999968,
+        "authorizedRemaining": 0,
+        "available": 65340.80000000003
+      },
+      "publicService": {
+        "fundedMinutes": null,
+        "actualMinutes": null,
+        "plannedFullMinutes": null,
+        "reservedCash": 0,
+        "statistics": null,
+        "shifts": []
+      },
+      "privateLabor": {
+        "rosterJobs": 265,
+        "plannedMinutes": 0,
+        "actualMinutes": 0,
+        "reservedCash": 0,
+        "restrictedShops": 0,
+        "statistics": null
+      },
+      "banking": {
+        "balanceSheet": {
+          "cash": 0,
+          "loanPrincipal": 0,
+          "loanInterestReceivable": 0,
+          "deposits": 0,
+          "interestPayable": 0,
+          "assets": 0,
+          "liabilities": 0,
+          "equity": 0,
+          "legacyEscrowAssets": 0,
+          "legacyEscrowClaims": 0
+        },
+        "cash": 0,
+        "deposits": 0,
+        "loans": 0,
+        "legacyInvestmentCash": 0
+      },
+      "npcBankDeposits": 0,
+      "wageArrears": {
+        "public": 0,
+        "private": 0,
+        "publicEarnedNotDue": 0,
+        "privateEarnedNotDue": 0
+      },
+      "ledger": {},
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 76,
+        "employees": 265,
+        "cash": 7665.385099751875,
+        "averageProfit": 0
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 90.92857142857143,
+        "meanHunger": 77.18245901117122,
+        "meanFatigue": 82.51174210165945,
+        "livingMeanHealth": 90.92857142857143,
+        "livingMeanHunger": 77.18245901117122,
+        "livingMeanFatigue": 82.51174210165945,
+        "researchCompleted": 0,
+        "companies": 12,
+        "zeroCapitalCompanies": 0,
+        "playerAlive": true,
+        "poor": 0,
+        "storedFood": 0,
+        "byRole": {
+          "学生": {
+            "count": 66,
+            "money": 322.0801002842332,
+            "hunger": 76.6042780318248,
+            "health": 90.68181818181819
+          },
+          "农民": {
+            "count": 28,
+            "money": 302.55868196146497,
+            "hunger": 80.40392419003183,
+            "health": 91.42857142857143
+          },
+          "钱庄职员": {
+            "count": 41,
+            "money": 328.37429188174855,
+            "hunger": 78.74576414830233,
+            "health": 90.8048780487805
+          },
+          "商人": {
+            "count": 145,
+            "money": 303.16734857441344,
+            "hunger": 77.68870069289676,
+            "health": 90.99310344827586
+          },
+          "医生": {
+            "count": 51,
+            "money": 321.2594487183892,
+            "hunger": 77.45566278728018,
+            "health": 91.09803921568627
+          },
+          "官员": {
+            "count": 83,
+            "money": 322.529633804533,
+            "hunger": 76.84369517602475,
+            "health": 90.34939759036145
+          },
+          "驾驶员": {
+            "count": 47,
+            "money": 327.1160023138323,
+            "hunger": 74.66004831661925,
+            "health": 91.34042553191489
+          },
+          "老师": {
+            "count": 34,
+            "money": 343.0062098942204,
+            "hunger": 77.79584333776523,
+            "health": 90.94117647058823
+          },
+          "警察": {
+            "count": 22,
+            "money": 322.53020152301445,
+            "hunger": 74.46211827987678,
+            "health": 91.04545454545455
+          },
+          "工人": {
+            "count": 75,
+            "money": 274.6578999888152,
+            "hunger": 76.12210816017662,
+            "health": 90.96
+          },
+          "搬运工": {
+            "count": 17,
+            "money": 274.8113897696192,
+            "hunger": 81.66278052397126,
+            "health": 92.29411764705883
+          },
+          "科研员": {
+            "count": 7,
+            "money": 297.8538259747438,
+            "hunger": 75.11802338645793,
+            "health": 89.42857142857143
+          }
+        }
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 0
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 41.03204213315621,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 160,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b9"
+        },
+        {
+          "id": "company-2",
+          "capital": 44.11607737420127,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b17"
+        },
+        {
+          "id": "company-3",
+          "capital": 55.45723848743364,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b27"
+        },
+        {
+          "id": "company-4",
+          "capital": 43.591306309681386,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b36"
+        },
+        {
+          "id": "company-5",
+          "capital": 65.1449271151796,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b45"
+        },
+        {
+          "id": "company-6",
+          "capital": 71.7595917894505,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "river-b55"
+        },
+        {
+          "id": "company-7",
+          "capital": 30.356147065758705,
+          "profit": 0,
+          "employees": 2,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b7"
+        },
+        {
+          "id": "company-8",
+          "capital": 61.390983301680535,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b20"
+        },
+        {
+          "id": "company-9",
+          "capital": 33.79047064576298,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b33"
+        },
+        {
+          "id": "company-10",
+          "capital": 80,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b48"
+        },
+        {
+          "id": "company-11",
+          "capital": 80,
+          "profit": 0,
+          "employees": 0,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b62"
+        },
+        {
+          "id": "company-12",
+          "capital": 69.96075248112902,
+          "profit": 0,
+          "employees": 1,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "workshop-b0"
+        }
+      ]
+    },
+    {
+      "tick": 720,
+      "day": 1,
+      "hour": 8,
+      "treasury": 72688.81129934225,
+      "gdp": 10387.680247019103,
+      "npcMoney": 194602.14282730187,
+      "moneySupply": 280736.1579367207,
+      "wages": {
+        "sales": 9831.680247019103,
+        "saleCount": 539,
+        "saleTax": 786.534419761528,
+        "fares": 556,
+        "payrollPublicRequested": 9874.48001091347,
+        "payrollPublicPaid": 8508.268448057695,
+        "payrollPrivateRequested": 6967.680809913087,
+        "payrollPrivate": 6557.535331945632,
+        "wageTax": 1205.2643024002657,
+        "wholesale": 0,
+        "wholesaleTax": 0,
+        "businessExpenses": 565.0742732367552,
+        "storedMeals": 56,
+        "production": 647.3058335760537,
+        "productionMinutes": 28826.591473708042,
+        "operationsRequested": 2073.600000000038,
+        "operations": 2267.1144000000404,
+        "publicSupplies": 644.400000000012,
+        "procurementTax": 225.7211520000012,
+        "civicProcurement": 0,
+        "security": 554.4000000000087,
+        "financeDelta": -7792.788700657737,
+        "roadworkPayroll": 0,
+        "roadworkMinutes": 0
+      },
+      "ruleset": {
+        "requestedRuleset": "civic-local-v1",
+        "requestSource": "product-default",
+        "effectiveRuleset": "civic-local-v1",
+        "saveEnvelopeVersion": 4,
+        "motionVersion": 2,
+        "historyPolicyId": "civic-history-pages-v1",
+        "civicHistory": {
+          "version": 1,
+          "pages": 1,
+          "bytes": 25165,
+          "totals": {
+            "proofs": 13,
+            "applications": 13,
+            "polls": 0,
+            "terms": 0,
+            "utf8Bytes": 25165
+          }
+        },
+        "enablement": {
+          "id": "civic-new-20261001-b85fa6ec",
+          "ruleVersion": 1,
+          "origin": "new-city",
+          "enabledAt": 480,
+          "enabledTick": 0
+        },
+        "requestedNewCityLayout": "current-v6",
+        "actualLayoutVersion": "current-v6",
+        "actualWorldFingerprint": "b85fa6ec",
+        "cityStateSource": "new-city"
+      },
+      "commodityObservations": {
+        "flows": {
+          "food": {
+            "producedUnits": 125.94804408968746,
+            "productionMinutes": 5608.823412700992,
+            "retailUnits": 915,
+            "retailGross": 9831.680247019103,
+            "counterMeals": 539,
+            "unattributedRetailUnits": 0
+          },
+          "materials": {
+            "producedUnits": 521.3577894863674,
+            "productionMinutes": 23217.76806100705,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          },
+          "unknown": {
+            "producedUnits": 0,
+            "productionMinutes": 0,
+            "retailUnits": 0,
+            "retailGross": 0,
+            "counterMeals": 0,
+            "unattributedRetailUnits": 0
+          }
+        },
+        "attendanceBySiteKind": {
+          "farm": {
+            "fundedAttendanceMinutes": 9611.859755617268,
+            "earnedGross": 883.7683004215239,
+            "namedEvents": 3067,
+            "eventsWithActualWindow": 3067
+          },
+          "dock": {
+            "fundedAttendanceMinutes": 5608.823412700992,
+            "earnedGross": 515.7009395654688,
+            "namedEvents": 2814,
+            "eventsWithActualWindow": 2814
+          },
+          "workshop": {
+            "fundedAttendanceMinutes": 23217.76806100705,
+            "earnedGross": 2134.5826185330943,
+            "namedEvents": 1826,
+            "eventsWithActualWindow": 1826
+          },
+          "market": {
+            "fundedAttendanceMinutes": 37345.28025567119,
+            "earnedGross": 3433.6289513925226,
+            "namedEvents": 5381,
+            "eventsWithActualWindow": 5381
+          },
+          "other": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          },
+          "unknown": {
+            "fundedAttendanceMinutes": 0,
+            "earnedGross": 0,
+            "namedEvents": 0,
+            "eventsWithActualWindow": 0
+          }
+        },
+        "namedAttendance": [
+          {
+            "citizenId": "citizen-35",
+            "shopId": "shop-workshop-b19",
+            "siteId": "workshop-b19",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 488,
+            "earnedGross": 44.875233134751745,
+            "namedEvents": 61,
+            "eventsWithActualWindow": 61
+          },
+          {
+            "citizenId": "citizen-528",
+            "shopId": "shop-river-b23",
+            "siteId": "river-b23",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 404,
+            "earnedGross": 37.14974518518515,
+            "namedEvents": 202,
+            "eventsWithActualWindow": 202
+          },
+          {
+            "citizenId": "citizen-198",
+            "shopId": "shop-river-b39",
+            "siteId": "river-b39",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 480,
+            "earnedGross": 44.13610666666677,
+            "namedEvents": 240,
+            "eventsWithActualWindow": 240
+          },
+          {
+            "citizenId": "citizen-88",
+            "shopId": "shop-river-b0",
+            "siteId": "river-b0",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 226,
+            "earnedGross": 20.781788148148124,
+            "namedEvents": 114,
+            "eventsWithActualWindow": 114
+          },
+          {
+            "citizenId": "citizen-11",
+            "shopId": "shop-river-b9",
+            "siteId": "river-b9",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 254,
+            "earnedGross": 23.355356444444432,
+            "namedEvents": 127,
+            "eventsWithActualWindow": 127
+          },
+          {
+            "citizenId": "citizen-495",
+            "shopId": "shop-river-b30",
+            "siteId": "river-b30",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 478,
+            "earnedGross": 43.95001096296305,
+            "namedEvents": 239,
+            "eventsWithActualWindow": 239
+          },
+          {
+            "citizenId": "citizen-187",
+            "shopId": "shop-river-b4",
+            "siteId": "river-b4",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 302,
+            "earnedGross": 27.768967111111074,
+            "namedEvents": 151,
+            "eventsWithActualWindow": 151
+          },
+          {
+            "citizenId": "citizen-221",
+            "shopId": "shop-market-b75",
+            "siteId": "market-b75",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 476,
+            "earnedGross": 43.76651312280708,
+            "namedEvents": 238,
+            "eventsWithActualWindow": 238
+          },
+          {
+            "citizenId": "citizen-33",
+            "shopId": "shop-river-b19",
+            "siteId": "river-b19",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 474,
+            "earnedGross": 43.5887591111111,
+            "namedEvents": 237,
+            "eventsWithActualWindow": 237
+          },
+          {
+            "citizenId": "citizen-132",
+            "shopId": "shop-river-b28",
+            "siteId": "river-b28",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 217,
+            "earnedGross": 19.954194814814795,
+            "namedEvents": 109,
+            "eventsWithActualWindow": 109
+          },
+          {
+            "citizenId": "citizen-200",
+            "shopId": "shop-workshop-b35",
+            "siteId": "workshop-b35",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.5960830638298,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-209",
+            "shopId": "shop-river-b59",
+            "siteId": "river-b59",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 331,
+            "earnedGross": 30.43400340740732,
+            "namedEvents": 166,
+            "eventsWithActualWindow": 166
+          },
+          {
+            "citizenId": "citizen-220",
+            "shopId": "shop-river-b33",
+            "siteId": "river-b33",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 395,
+            "earnedGross": 36.31852370370367,
+            "namedEvents": 195,
+            "eventsWithActualWindow": 195
+          },
+          {
+            "citizenId": "citizen-255",
+            "shopId": "shop-workshop-b22",
+            "siteId": "workshop-b22",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 472,
+            "earnedGross": 43.400045163120566,
+            "namedEvents": 59,
+            "eventsWithActualWindow": 59
+          },
+          {
+            "citizenId": "citizen-44",
+            "shopId": "shop-river-b26",
+            "siteId": "river-b26",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 326,
+            "earnedGross": 29.974275259259173,
+            "namedEvents": 163,
+            "eventsWithActualWindow": 163
+          },
+          {
+            "citizenId": "citizen-155",
+            "shopId": "shop-market-b20",
+            "siteId": "market-b20",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 464,
+            "earnedGross": 42.66006231578941,
+            "namedEvents": 58,
+            "eventsWithActualWindow": 58
+          },
+          {
+            "citizenId": "citizen-176",
+            "shopId": "shop-river-b17",
+            "siteId": "river-b17",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 407,
+            "earnedGross": 37.42560962962959,
+            "namedEvents": 204,
+            "eventsWithActualWindow": 204
+          },
+          {
+            "citizenId": "citizen-431",
+            "shopId": "shop-workshop-b17",
+            "siteId": "workshop-b17",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 403,
+            "earnedGross": 37.055547035460975,
+            "namedEvents": 51,
+            "eventsWithActualWindow": 51
+          },
+          {
+            "citizenId": "citizen-22",
+            "shopId": "shop-river-b12",
+            "siteId": "river-b12",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.860255999999954,
+            "namedEvents": 109,
+            "eventsWithActualWindow": 109
+          },
+          {
+            "citizenId": "citizen-46",
+            "shopId": "shop-workshop-b26",
+            "siteId": "workshop-b26",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 396,
+            "earnedGross": 36.41083506382974,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-190",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982452,
+            "namedEvents": 21,
+            "eventsWithActualWindow": 21
+          },
+          {
+            "citizenId": "citizen-530",
+            "shopId": "shop-workshop-b3",
+            "siteId": "workshop-b3",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 464,
+            "earnedGross": 42.66603075177302,
+            "namedEvents": 58,
+            "eventsWithActualWindow": 58
+          },
+          {
+            "citizenId": "citizen-574",
+            "shopId": "shop-workshop-b43",
+            "siteId": "workshop-b43",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 464,
+            "earnedGross": 42.663200680851,
+            "namedEvents": 58,
+            "eventsWithActualWindow": 58
+          },
+          {
+            "citizenId": "citizen-602",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543856,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-45",
+            "shopId": "shop-market-b30",
+            "siteId": "market-b30",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 426,
+            "earnedGross": 39.16635031578943,
+            "namedEvents": 54,
+            "eventsWithActualWindow": 54
+          },
+          {
+            "citizenId": "citizen-55",
+            "shopId": "shop-river-b29",
+            "siteId": "river-b29",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 256,
+            "earnedGross": 23.539256888888875,
+            "namedEvents": 128,
+            "eventsWithActualWindow": 128
+          },
+          {
+            "citizenId": "citizen-535",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 234.48584883785813,
+            "earnedGross": 21.559566885548026,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-58",
+            "shopId": "shop-west-b3",
+            "siteId": "west-b3",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.59566708771928,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-166",
+            "shopId": "shop-market-b7",
+            "siteId": "market-b7",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 218,
+            "earnedGross": 20.040502877192974,
+            "namedEvents": 28,
+            "eventsWithActualWindow": 28
+          },
+          {
+            "citizenId": "citizen-13",
+            "shopId": "shop-workshop-b9",
+            "siteId": "workshop-b9",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 456,
+            "earnedGross": 41.92885719148936,
+            "namedEvents": 57,
+            "eventsWithActualWindow": 57
+          },
+          {
+            "citizenId": "citizen-57",
+            "shopId": "shop-workshop-b29",
+            "siteId": "workshop-b29",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 239,
+            "earnedGross": 21.973632879432632,
+            "namedEvents": 30,
+            "eventsWithActualWindow": 30
+          },
+          {
+            "citizenId": "citizen-101",
+            "shopId": "shop-workshop-b1",
+            "siteId": "workshop-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 249,
+            "earnedGross": 22.89303174468086,
+            "namedEvents": 32,
+            "eventsWithActualWindow": 32
+          },
+          {
+            "citizenId": "citizen-409",
+            "shopId": "shop-workshop-b23",
+            "siteId": "workshop-b23",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 456,
+            "earnedGross": 41.927628255319085,
+            "namedEvents": 57,
+            "eventsWithActualWindow": 57
+          },
+          {
+            "citizenId": "citizen-469",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 281,
+            "earnedGross": 25.836263999999993,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-583",
+            "shopId": "shop-river-b36",
+            "siteId": "river-b36",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 401,
+            "earnedGross": 36.86752414814822,
+            "namedEvents": 201,
+            "eventsWithActualWindow": 201
+          },
+          {
+            "citizenId": "citizen-66",
+            "shopId": "shop-river-b45",
+            "siteId": "river-b45",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 450,
+            "earnedGross": 41.377600000000065,
+            "namedEvents": 225,
+            "eventsWithActualWindow": 225
+          },
+          {
+            "citizenId": "citizen-68",
+            "shopId": "shop-workshop-b36",
+            "siteId": "workshop-b36",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 456,
+            "earnedGross": 41.92458825531915,
+            "namedEvents": 57,
+            "eventsWithActualWindow": 57
+          },
+          {
+            "citizenId": "citizen-452",
+            "shopId": "shop-market-b71",
+            "siteId": "market-b71",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 456,
+            "earnedGross": 41.92758399999996,
+            "namedEvents": 57,
+            "eventsWithActualWindow": 57
+          },
+          {
+            "citizenId": "citizen-594",
+            "shopId": "shop-river-b13",
+            "siteId": "river-b13",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 450,
+            "earnedGross": 41.377600000000065,
+            "namedEvents": 225,
+            "eventsWithActualWindow": 225
+          },
+          {
+            "citizenId": "citizen-79",
+            "shopId": "shop-workshop-b39",
+            "siteId": "workshop-b39",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18906916312057,
+            "namedEvents": 56,
+            "eventsWithActualWindow": 56
+          },
+          {
+            "citizenId": "citizen-163",
+            "shopId": "shop-airport-b21",
+            "siteId": "airport-b21",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 214,
+            "earnedGross": 19.677085999999996,
+            "namedEvents": 7,
+            "eventsWithActualWindow": 7
+          },
+          {
+            "citizenId": "citizen-167",
+            "shopId": "shop-workshop-b30",
+            "siteId": "workshop-b30",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.186082496453885,
+            "namedEvents": 56,
+            "eventsWithActualWindow": 56
+          },
+          {
+            "citizenId": "citizen-299",
+            "shopId": "shop-workshop-b20",
+            "siteId": "workshop-b20",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.186082496453885,
+            "namedEvents": 56,
+            "eventsWithActualWindow": 56
+          },
+          {
+            "citizenId": "citizen-14",
+            "shopId": "shop-west-b25",
+            "siteId": "west-b25",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 205,
+            "earnedGross": 18.851828771929814,
+            "namedEvents": 26,
+            "eventsWithActualWindow": 26
+          },
+          {
+            "citizenId": "citizen-306",
+            "shopId": "shop-airport-b36",
+            "siteId": "airport-b36",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.19364977777777,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-330",
+            "shopId": "shop-river-b38",
+            "siteId": "river-b38",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 446,
+            "earnedGross": 41.004777481481575,
+            "namedEvents": 223,
+            "eventsWithActualWindow": 223
+          },
+          {
+            "citizenId": "citizen-24",
+            "shopId": "shop-workshop-b12",
+            "siteId": "workshop-b12",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.19326320567375,
+            "namedEvents": 56,
+            "eventsWithActualWindow": 56
+          },
+          {
+            "citizenId": "citizen-56",
+            "shopId": "shop-market-b33",
+            "siteId": "market-b33",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 295,
+            "earnedGross": 27.122237894736834,
+            "namedEvents": 37,
+            "eventsWithActualWindow": 37
+          },
+          {
+            "citizenId": "citizen-80",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 222,
+            "earnedGross": 20.415151157894734,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-112",
+            "shopId": "shop-workshop-b4",
+            "siteId": "workshop-b4",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.19205582978717,
+            "namedEvents": 56,
+            "eventsWithActualWindow": 56
+          },
+          {
+            "citizenId": "citizen-240",
+            "shopId": "shop-airport-b18",
+            "siteId": "airport-b18",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 447.8000360591276,
+            "earnedGross": 41.17526307119634,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-308",
+            "shopId": "shop-river-b1",
+            "siteId": "river-b1",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 356,
+            "earnedGross": 32.730270814814865,
+            "namedEvents": 178,
+            "eventsWithActualWindow": 178
+          },
+          {
+            "citizenId": "citizen-47",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 274,
+            "earnedGross": 25.197078456140346,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-175",
+            "shopId": "shop-starport-b11",
+            "siteId": "starport-b11",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.184938666666646,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-463",
+            "shopId": "shop-market-b42",
+            "siteId": "market-b42",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.45644070175435,
+            "namedEvents": 55,
+            "eventsWithActualWindow": 55
+          },
+          {
+            "citizenId": "citizen-507",
+            "shopId": "shop-market-b68",
+            "siteId": "market-b68",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.451654736842144,
+            "namedEvents": 55,
+            "eventsWithActualWindow": 55
+          },
+          {
+            "citizenId": "citizen-174",
+            "shopId": "shop-airport-b8",
+            "siteId": "airport-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 404.80213497551574,
+            "earnedGross": 37.21239861285368,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-222",
+            "shopId": "shop-workshop-b49",
+            "siteId": "workshop-b49",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.45061673758864,
+            "namedEvents": 55,
+            "eventsWithActualWindow": 55
+          },
+          {
+            "citizenId": "citizen-253",
+            "shopId": "shop-river-b54",
+            "siteId": "river-b54",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.58905392592579,
+            "namedEvents": 199,
+            "eventsWithActualWindow": 199
+          },
+          {
+            "citizenId": "citizen-298",
+            "shopId": "shop-market-b26",
+            "siteId": "market-b26",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.44872140350879,
+            "namedEvents": 55,
+            "eventsWithActualWindow": 55
+          },
+          {
+            "citizenId": "citizen-342",
+            "shopId": "shop-market-b43",
+            "siteId": "market-b43",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 330,
+            "earnedGross": 30.336541052631585,
+            "namedEvents": 42,
+            "eventsWithActualWindow": 42
+          },
+          {
+            "citizenId": "citizen-89",
+            "shopId": "shop-market-b55",
+            "siteId": "market-b55",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.58505375438597,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-143",
+            "shopId": "shop-river-b41",
+            "siteId": "river-b41",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 436,
+            "earnedGross": 40.0795745185185,
+            "namedEvents": 218,
+            "eventsWithActualWindow": 218
+          },
+          {
+            "citizenId": "citizen-285",
+            "shopId": "shop-starport-b20",
+            "siteId": "starport-b20",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18195199999998,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-108",
+            "shopId": "shop-airport-b2",
+            "siteId": "airport-b2",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.192405333333326,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-320",
+            "shopId": "shop-market-b74",
+            "siteId": "market-b74",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.445788070175446,
+            "namedEvents": 55,
+            "eventsWithActualWindow": 55
+          },
+          {
+            "citizenId": "citizen-75",
+            "shopId": "shop-airport-b33",
+            "siteId": "airport-b33",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 428,
+            "earnedGross": 39.353458666666654,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-459",
+            "shopId": "shop-east-b15",
+            "siteId": "east-b15",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18855410526313,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-42",
+            "shopId": "shop-airport-b20",
+            "siteId": "airport-b20",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 358,
+            "earnedGross": 32.917344222222226,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-74",
+            "shopId": "shop-east-b5",
+            "siteId": "east-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.19311270175439,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-90",
+            "shopId": "shop-workshop-b46",
+            "siteId": "workshop-b46",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 432,
+            "earnedGross": 39.71803097872341,
+            "namedEvents": 54,
+            "eventsWithActualWindow": 54
+          },
+          {
+            "citizenId": "citizen-407",
+            "shopId": "shop-river-b35",
+            "siteId": "river-b35",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 430,
+            "earnedGross": 39.530887407407256,
+            "namedEvents": 215,
+            "eventsWithActualWindow": 215
+          },
+          {
+            "citizenId": "citizen-25",
+            "shopId": "shop-west-b38",
+            "siteId": "west-b38",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 228,
+            "earnedGross": 20.966511999999994,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-41",
+            "shopId": "shop-east-b31",
+            "siteId": "east-b31",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 334,
+            "earnedGross": 30.71093670175438,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-73",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 312.6059322878412,
+            "earnedGross": 28.74223983827327,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-145",
+            "shopId": "shop-workshop-b13",
+            "siteId": "workshop-b13",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 174,
+            "earnedGross": 15.996380255319137,
+            "namedEvents": 22,
+            "eventsWithActualWindow": 22
+          },
+          {
+            "citizenId": "citizen-185",
+            "shopId": "shop-airport-b43",
+            "siteId": "airport-b43",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 395,
+            "earnedGross": 36.319196666666656,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-189",
+            "shopId": "shop-workshop-b52",
+            "siteId": "workshop-b52",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 432,
+            "earnedGross": 39.71312885106383,
+            "namedEvents": 54,
+            "eventsWithActualWindow": 54
+          },
+          {
+            "citizenId": "citizen-361",
+            "shopId": "shop-airport-b31",
+            "siteId": "airport-b31",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.192405333333326,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-601",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 313,
+            "earnedGross": 28.778471999999997,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-120",
+            "shopId": "shop-starport-b17",
+            "siteId": "starport-b17",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 370,
+            "earnedGross": 34.00941333333332,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-168",
+            "shopId": "shop-west-b12",
+            "siteId": "west-b12",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 323,
+            "earnedGross": 29.702105333333332,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-184",
+            "shopId": "shop-east-b40",
+            "siteId": "east-b40",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 247,
+            "earnedGross": 22.707221333333326,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-328",
+            "shopId": "shop-airport-b14",
+            "siteId": "airport-b14",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.19265422222223,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-119",
+            "shopId": "shop-airport-b1",
+            "siteId": "airport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18941866666666,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-135",
+            "shopId": "shop-west-b12",
+            "siteId": "west-b12",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 259,
+            "earnedGross": 23.81685845614035,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-211",
+            "shopId": "shop-workshop-b58",
+            "siteId": "workshop-b58",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 342,
+            "earnedGross": 31.443441191489388,
+            "namedEvents": 43,
+            "eventsWithActualWindow": 43
+          },
+          {
+            "citizenId": "citizen-54",
+            "shopId": "shop-starport-b27",
+            "siteId": "starport-b27",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18792533333332,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-86",
+            "shopId": "shop-airport-b4",
+            "siteId": "airport-b4",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 407,
+            "earnedGross": 37.41985133333333,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-118",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543856,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-406",
+            "shopId": "shop-starport-b4",
+            "siteId": "starport-b4",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.18792533333332,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-430",
+            "shopId": "shop-market-b29",
+            "siteId": "market-b29",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 422,
+            "earnedGross": 38.794000982456055,
+            "namedEvents": 211,
+            "eventsWithActualWindow": 211
+          },
+          {
+            "citizenId": "citizen-438",
+            "shopId": "shop-airport-b24",
+            "siteId": "airport-b24",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 448,
+            "earnedGross": 41.193152,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-69",
+            "shopId": "shop-west-b12",
+            "siteId": "west-b12",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 323,
+            "earnedGross": 29.702105333333332,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-77",
+            "shopId": "shop-river-b43",
+            "siteId": "river-b43",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 225,
+            "earnedGross": 20.683266666666714,
+            "namedEvents": 113,
+            "eventsWithActualWindow": 113
+          },
+          {
+            "citizenId": "citizen-85",
+            "shopId": "shop-east-b18",
+            "siteId": "east-b18",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 346,
+            "earnedGross": 31.815416280701747,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-133",
+            "shopId": "shop-market-b23",
+            "siteId": "market-b23",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 326,
+            "earnedGross": 29.966652070175435,
+            "namedEvents": 41,
+            "eventsWithActualWindow": 41
+          },
+          {
+            "citizenId": "citizen-297",
+            "shopId": "shop-river-b28",
+            "siteId": "river-b28",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 197,
+            "earnedGross": 18.115098518518515,
+            "namedEvents": 99,
+            "eventsWithActualWindow": 99
+          },
+          {
+            "citizenId": "citizen-453",
+            "shopId": "shop-workshop-b7",
+            "siteId": "workshop-b7",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 382,
+            "earnedGross": 35.12103665248229,
+            "namedEvents": 48,
+            "eventsWithActualWindow": 48
+          },
+          {
+            "citizenId": "citizen-36",
+            "shopId": "shop-west-b12",
+            "siteId": "west-b12",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 323,
+            "earnedGross": 29.702105333333332,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-52",
+            "shopId": "shop-east-b66",
+            "siteId": "east-b66",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 440,
+            "earnedGross": 40.45011087719297,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-196",
+            "shopId": "shop-airport-b46",
+            "siteId": "airport-b46",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 296,
+            "earnedGross": 27.214437333333333,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-232",
+            "shopId": "shop-market-b32",
+            "siteId": "market-b32",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 424,
+            "earnedGross": 38.97503214035088,
+            "namedEvents": 53,
+            "eventsWithActualWindow": 53
+          },
+          {
+            "citizenId": "citizen-332",
+            "shopId": "shop-workshop-b6",
+            "siteId": "workshop-b6",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 424,
+            "earnedGross": 38.98648124822694,
+            "namedEvents": 53,
+            "eventsWithActualWindow": 53
+          },
+          {
+            "citizenId": "citizen-464",
+            "shopId": "shop-workshop-b16",
+            "siteId": "workshop-b16",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 268,
+            "earnedGross": 24.638102921985816,
+            "namedEvents": 34,
+            "eventsWithActualWindow": 34
+          },
+          {
+            "citizenId": "citizen-179",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 274,
+            "earnedGross": 25.197078456140346,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-264",
+            "shopId": "shop-river-b55",
+            "siteId": "river-b55",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 354,
+            "earnedGross": 32.54403288888877,
+            "namedEvents": 177,
+            "eventsWithActualWindow": 177
+          },
+          {
+            "citizenId": "citizen-162",
+            "shopId": "shop-east-b21",
+            "siteId": "east-b21",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.249287859649115,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-266",
+            "shopId": "shop-workshop-b33",
+            "siteId": "workshop-b33",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.2442194609929,
+            "namedEvents": 52,
+            "eventsWithActualWindow": 52
+          },
+          {
+            "citizenId": "citizen-97",
+            "shopId": "shop-airport-b47",
+            "siteId": "airport-b47",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.251246222222214,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-99",
+            "shopId": "shop-river-b48",
+            "siteId": "river-b48",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 277,
+            "earnedGross": 25.463399407407476,
+            "namedEvents": 139,
+            "eventsWithActualWindow": 139
+          },
+          {
+            "citizenId": "citizen-233",
+            "shopId": "shop-workshop-b32",
+            "siteId": "workshop-b32",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.24227222695035,
+            "namedEvents": 52,
+            "eventsWithActualWindow": 52
+          },
+          {
+            "citizenId": "citizen-241",
+            "shopId": "shop-starport-b1",
+            "siteId": "starport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 386,
+            "earnedGross": 35.47751733333332,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-396",
+            "shopId": "shop-river-b14",
+            "siteId": "river-b14",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 480,
+            "earnedGross": 44.12430222222214,
+            "namedEvents": 240,
+            "eventsWithActualWindow": 240
+          },
+          {
+            "citizenId": "citizen-64",
+            "shopId": "shop-airport-b30",
+            "siteId": "airport-b30",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 345,
+            "earnedGross": 31.722788333333323,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-265",
+            "shopId": "shop-market-b45",
+            "siteId": "market-b45",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 410,
+            "earnedGross": 37.69085403508765,
+            "namedEvents": 205,
+            "eventsWithActualWindow": 205
+          },
+          {
+            "citizenId": "citizen-63",
+            "shopId": "shop-east-b47",
+            "siteId": "east-b47",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.249287859649115,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-271",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 257,
+            "earnedGross": 23.629607999999994,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-331",
+            "shopId": "shop-market-b39",
+            "siteId": "market-b39",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 258,
+            "earnedGross": 23.715939368421044,
+            "namedEvents": 33,
+            "eventsWithActualWindow": 33
+          },
+          {
+            "citizenId": "citizen-451",
+            "shopId": "shop-river-b27",
+            "siteId": "river-b27",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 406,
+            "earnedGross": 37.32180562962965,
+            "namedEvents": 203,
+            "eventsWithActualWindow": 203
+          },
+          {
+            "citizenId": "citizen-317",
+            "shopId": "shop-airport-b11",
+            "siteId": "airport-b11",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.25009066666666,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-525",
+            "shopId": "shop-east-b53",
+            "siteId": "east-b53",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 414,
+            "earnedGross": 38.054357052631566,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-140",
+            "shopId": "shop-east-b2",
+            "siteId": "east-b2",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.85876715789473,
+            "namedEvents": 7,
+            "eventsWithActualWindow": 7
+          },
+          {
+            "citizenId": "citizen-408",
+            "shopId": "shop-market-b0",
+            "siteId": "market-b0",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 408,
+            "earnedGross": 37.498836210526306,
+            "namedEvents": 51,
+            "eventsWithActualWindow": 51
+          },
+          {
+            "citizenId": "citizen-428",
+            "shopId": "shop-starport-b14",
+            "siteId": "starport-b14",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 331,
+            "earnedGross": 30.426843999999992,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-460",
+            "shopId": "shop-airport-b30",
+            "siteId": "airport-b30",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 345,
+            "earnedGross": 31.72278833333332,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-91",
+            "shopId": "shop-west-b51",
+            "siteId": "west-b51",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.599437614035125,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-199",
+            "shopId": "shop-market-b16",
+            "siteId": "market-b16",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 323,
+            "earnedGross": 29.686578666666662,
+            "namedEvents": 41,
+            "eventsWithActualWindow": 41
+          },
+          {
+            "citizenId": "citizen-165",
+            "shopId": "shop-river-b58",
+            "siteId": "river-b58",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 398,
+            "earnedGross": 36.586400592592625,
+            "namedEvents": 199,
+            "eventsWithActualWindow": 199
+          },
+          {
+            "citizenId": "citizen-474",
+            "shopId": "shop-market-b48",
+            "siteId": "market-b48",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 400,
+            "earnedGross": 36.76889824561404,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-538",
+            "shopId": "shop-starport-b43",
+            "siteId": "starport-b43",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.240383999999985,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-217",
+            "shopId": "shop-east-b15",
+            "siteId": "east-b15",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.246514526315764,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-277",
+            "shopId": "shop-workshop-b44",
+            "siteId": "workshop-b44",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 400,
+            "earnedGross": 36.775954609929094,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-429",
+            "shopId": "shop-river-b1",
+            "siteId": "river-b1",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 356,
+            "earnedGross": 32.73027081481487,
+            "namedEvents": 179,
+            "eventsWithActualWindow": 179
+          },
+          {
+            "citizenId": "citizen-288",
+            "shopId": "shop-workshop-b35",
+            "siteId": "workshop-b35",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 395.1252240819718,
+            "earnedGross": 36.33174754049799,
+            "namedEvents": 50,
+            "eventsWithActualWindow": 50
+          },
+          {
+            "citizenId": "citizen-319",
+            "shopId": "shop-river-b44",
+            "siteId": "river-b44",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 213,
+            "earnedGross": 19.580159111111154,
+            "namedEvents": 107,
+            "eventsWithActualWindow": 107
+          },
+          {
+            "citizenId": "citizen-360",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543856,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-134",
+            "shopId": "shop-workshop-b0",
+            "siteId": "workshop-b0",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 392,
+            "earnedGross": 36.037822184397164,
+            "namedEvents": 49,
+            "eventsWithActualWindow": 49
+          },
+          {
+            "citizenId": "citizen-352",
+            "shopId": "shop-river-b0",
+            "siteId": "river-b0",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 226,
+            "earnedGross": 20.781788148148127,
+            "namedEvents": 115,
+            "eventsWithActualWindow": 115
+          },
+          {
+            "citizenId": "citizen-462",
+            "shopId": "shop-river-b28",
+            "siteId": "river-b28",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 217,
+            "earnedGross": 19.954194814814798,
+            "namedEvents": 110,
+            "eventsWithActualWindow": 110
+          },
+          {
+            "citizenId": "citizen-470",
+            "shopId": "shop-east-b18",
+            "siteId": "east-b18",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 346,
+            "earnedGross": 31.81541628070175,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-53",
+            "shopId": "shop-airport-b27",
+            "siteId": "airport-b27",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.24731733333333,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-229",
+            "shopId": "shop-airport-b15",
+            "siteId": "airport-b15",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 416,
+            "earnedGross": 38.24731733333333,
+            "namedEvents": 13,
+            "eventsWithActualWindow": 13
+          },
+          {
+            "citizenId": "citizen-403",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 281,
+            "earnedGross": 25.836263999999996,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-337",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 281,
+            "earnedGross": 25.836263999999993,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-481",
+            "shopId": "shop-east-b31",
+            "siteId": "east-b31",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 297,
+            "earnedGross": 27.308826947368416,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-374",
+            "shopId": "shop-river-b26",
+            "siteId": "river-b26",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 326,
+            "earnedGross": 29.974275259259173,
+            "namedEvents": 164,
+            "eventsWithActualWindow": 164
+          },
+          {
+            "citizenId": "citizen-207",
+            "shopId": "shop-airport-b40",
+            "siteId": "airport-b40",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 287,
+            "earnedGross": 26.385057999999994,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-239",
+            "shopId": "shop-east-b31",
+            "siteId": "east-b31",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 297,
+            "earnedGross": 27.308826947368416,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-399",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 274,
+            "earnedGross": 25.197078456140346,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-30",
+            "shopId": "shop-east-b24",
+            "siteId": "east-b24",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 302,
+            "earnedGross": 27.75945852631578,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-341",
+            "shopId": "shop-river-b29",
+            "siteId": "river-b29",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 256,
+            "earnedGross": 23.539256888888875,
+            "namedEvents": 129,
+            "eventsWithActualWindow": 129
+          },
+          {
+            "citizenId": "citizen-205",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 257,
+            "earnedGross": 23.629607999999994,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-440",
+            "shopId": "shop-river-b0",
+            "siteId": "river-b0",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 226,
+            "earnedGross": 20.781788148148127,
+            "namedEvents": 114,
+            "eventsWithActualWindow": 114
+          },
+          {
+            "citizenId": "citizen-585",
+            "shopId": "shop-workshop-b22",
+            "siteId": "workshop-b22",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 375.8470533003417,
+            "earnedGross": 34.55885399928094,
+            "namedEvents": 47,
+            "eventsWithActualWindow": 47
+          },
+          {
+            "citizenId": "citizen-561",
+            "shopId": "shop-river-b59",
+            "siteId": "river-b59",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 321,
+            "earnedGross": 29.51454711111103,
+            "namedEvents": 161,
+            "eventsWithActualWindow": 161
+          },
+          {
+            "citizenId": "citizen-572",
+            "shopId": "shop-river-b23",
+            "siteId": "river-b23",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 368.41499510118933,
+            "earnedGross": 33.877532649530686,
+            "namedEvents": 185,
+            "eventsWithActualWindow": 185
+          },
+          {
+            "citizenId": "citizen-139",
+            "shopId": "shop-summit-b5",
+            "siteId": "summit-b5",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 287.3783828336986,
+            "earnedGross": 26.42271803126158,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-395",
+            "shopId": "shop-starport-b17",
+            "siteId": "starport-b17",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 355.10766456844146,
+            "earnedGross": 32.64054957335894,
+            "namedEvents": 12,
+            "eventsWithActualWindow": 12
+          },
+          {
+            "citizenId": "citizen-322",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982452,
+            "namedEvents": 21,
+            "eventsWithActualWindow": 21
+          },
+          {
+            "citizenId": "citizen-231",
+            "shopId": "shop-river-b28",
+            "siteId": "river-b28",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 197,
+            "earnedGross": 18.115098518518515,
+            "namedEvents": 99,
+            "eventsWithActualWindow": 99
+          },
+          {
+            "citizenId": "citizen-286",
+            "shopId": "shop-river-b43",
+            "siteId": "river-b43",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 225,
+            "earnedGross": 20.683266666666714,
+            "namedEvents": 113,
+            "eventsWithActualWindow": 113
+          },
+          {
+            "citizenId": "citizen-376",
+            "shopId": "shop-workshop-b26",
+            "siteId": "workshop-b26",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 366.702489027023,
+            "earnedGross": 33.71702991277467,
+            "namedEvents": 46,
+            "eventsWithActualWindow": 46
+          },
+          {
+            "citizenId": "citizen-311",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 274,
+            "earnedGross": 25.197078456140346,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-503",
+            "shopId": "shop-east-b2",
+            "siteId": "east-b2",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.85876715789473,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-418",
+            "shopId": "shop-river-b44",
+            "siteId": "river-b44",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 213,
+            "earnedGross": 19.580159111111154,
+            "namedEvents": 107,
+            "eventsWithActualWindow": 107
+          },
+          {
+            "citizenId": "citizen-212",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 222,
+            "earnedGross": 20.415151157894734,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-517",
+            "shopId": "shop-river-b54",
+            "siteId": "river-b54",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 352.02077478185345,
+            "earnedGross": 32.36207816969702,
+            "namedEvents": 177,
+            "eventsWithActualWindow": 177
+          },
+          {
+            "citizenId": "citizen-519",
+            "shopId": "shop-workshop-b12",
+            "siteId": "workshop-b12",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 344.86670345310046,
+            "earnedGross": 31.710234121019184,
+            "namedEvents": 44,
+            "eventsWithActualWindow": 44
+          },
+          {
+            "citizenId": "citizen-102",
+            "shopId": "shop-west-b25",
+            "siteId": "west-b25",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 205,
+            "earnedGross": 18.851828771929814,
+            "namedEvents": 27,
+            "eventsWithActualWindow": 27
+          },
+          {
+            "citizenId": "citizen-146",
+            "shopId": "shop-west-b25",
+            "siteId": "west-b25",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 205,
+            "earnedGross": 18.851828771929814,
+            "namedEvents": 27,
+            "eventsWithActualWindow": 27
+          },
+          {
+            "citizenId": "citizen-274",
+            "shopId": "shop-starport-b1",
+            "siteId": "starport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 324.13401945387784,
+            "earnedGross": 29.7913738173522,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-442",
+            "shopId": "shop-workshop-b20",
+            "siteId": "workshop-b20",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 351.82922599708695,
+            "earnedGross": 32.344793586115074,
+            "namedEvents": 44,
+            "eventsWithActualWindow": 44
+          },
+          {
+            "citizenId": "citizen-272",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543852,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-592",
+            "shopId": "shop-airport-b46",
+            "siteId": "airport-b46",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 296,
+            "earnedGross": 27.214437333333333,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-223",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982454,
+            "namedEvents": 22,
+            "eventsWithActualWindow": 22
+          },
+          {
+            "citizenId": "citizen-559",
+            "shopId": "shop-airport-b1",
+            "siteId": "airport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 351.8183825028647,
+            "earnedGross": 32.346416632901715,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-206",
+            "shopId": "shop-east-b40",
+            "siteId": "east-b40",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 247,
+            "earnedGross": 22.707221333333322,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-382",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543856,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-157",
+            "shopId": "shop-west-b38",
+            "siteId": "west-b38",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 228,
+            "earnedGross": 20.966511999999994,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-529",
+            "shopId": "shop-market-b16",
+            "siteId": "market-b16",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 323,
+            "earnedGross": 29.686578666666662,
+            "namedEvents": 42,
+            "eventsWithActualWindow": 42
+          },
+          {
+            "citizenId": "citizen-355",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982454,
+            "namedEvents": 22,
+            "eventsWithActualWindow": 22
+          },
+          {
+            "citizenId": "citizen-603",
+            "shopId": "shop-airport-b21",
+            "siteId": "airport-b21",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 247,
+            "earnedGross": 22.711402999999994,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-394",
+            "shopId": "shop-airport-b4",
+            "siteId": "airport-b4",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 337.23142148950427,
+            "earnedGross": 31.005281712692682,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-398",
+            "shopId": "shop-workshop-b20",
+            "siteId": "workshop-b20",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 335.4928703717621,
+            "earnedGross": 30.842939812731053,
+            "namedEvents": 42,
+            "eventsWithActualWindow": 42
+          },
+          {
+            "citizenId": "citizen-201",
+            "shopId": "shop-west-b12",
+            "siteId": "west-b12",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 259,
+            "earnedGross": 23.816858456140345,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-110",
+            "shopId": "shop-river-b12",
+            "siteId": "river-b12",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.860255999999957,
+            "namedEvents": 109,
+            "eventsWithActualWindow": 109
+          },
+          {
+            "citizenId": "citizen-256",
+            "shopId": "shop-west-b51",
+            "siteId": "west-b51",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 329.19726609546495,
+            "earnedGross": 30.27244925420072,
+            "namedEvents": 42,
+            "eventsWithActualWindow": 42
+          },
+          {
+            "citizenId": "citizen-506",
+            "shopId": "shop-river-b33",
+            "siteId": "river-b33",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 328.2649106613835,
+            "earnedGross": 30.18252389607494,
+            "namedEvents": 165,
+            "eventsWithActualWindow": 165
+          },
+          {
+            "citizenId": "citizen-295",
+            "shopId": "shop-airport-b33",
+            "siteId": "airport-b33",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 343.5913490802336,
+            "earnedGross": 31.59230830432992,
+            "namedEvents": 11,
+            "eventsWithActualWindow": 11
+          },
+          {
+            "citizenId": "citizen-421",
+            "shopId": "shop-west-b38",
+            "siteId": "west-b38",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 228,
+            "earnedGross": 20.966511999999994,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-473",
+            "shopId": "shop-river-b9",
+            "siteId": "river-b9",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 254,
+            "earnedGross": 23.355356444444432,
+            "namedEvents": 128,
+            "eventsWithActualWindow": 128
+          },
+          {
+            "citizenId": "citizen-581",
+            "shopId": "shop-airport-b43",
+            "siteId": "airport-b43",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 395,
+            "earnedGross": 36.31919666666666,
+            "namedEvents": 14,
+            "eventsWithActualWindow": 14
+          },
+          {
+            "citizenId": "citizen-520",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982452,
+            "namedEvents": 22,
+            "eventsWithActualWindow": 22
+          },
+          {
+            "citizenId": "citizen-584",
+            "shopId": "shop-market-b23",
+            "siteId": "market-b23",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 326,
+            "earnedGross": 29.966652070175435,
+            "namedEvents": 42,
+            "eventsWithActualWindow": 42
+          },
+          {
+            "citizenId": "citizen-339",
+            "shopId": "shop-airport-b1",
+            "siteId": "airport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 307.16697253651535,
+            "earnedGross": 28.24113623298891,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-515",
+            "shopId": "shop-airport-b33",
+            "siteId": "airport-b33",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 308.4274979618757,
+            "earnedGross": 28.359085964266562,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-113",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 222,
+            "earnedGross": 20.415151157894734,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-449",
+            "shopId": "shop-airport-b27",
+            "siteId": "airport-b27",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 310.87007958222165,
+            "earnedGross": 28.581602363509177,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-388",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982454,
+            "namedEvents": 22,
+            "eventsWithActualWindow": 22
+          },
+          {
+            "citizenId": "citizen-552",
+            "shopId": "shop-workshop-b33",
+            "siteId": "workshop-b33",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 316.7179881847255,
+            "earnedGross": 29.116904440819244,
+            "namedEvents": 40,
+            "eventsWithActualWindow": 40
+          },
+          {
+            "citizenId": "citizen-383",
+            "shopId": "shop-airport-b21",
+            "siteId": "airport-b21",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 278,
+            "earnedGross": 25.561821999999996,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-385",
+            "shopId": "shop-river-b48",
+            "siteId": "river-b48",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 277,
+            "earnedGross": 25.463399407407472,
+            "namedEvents": 140,
+            "eventsWithActualWindow": 140
+          },
+          {
+            "citizenId": "citizen-550",
+            "shopId": "shop-river-b55",
+            "siteId": "river-b55",
+            "siteKind": "dock",
+            "fundedAttendanceMinutes": 308.40841759980276,
+            "earnedGross": 28.352694027056845,
+            "namedEvents": 155,
+            "eventsWithActualWindow": 155
+          },
+          {
+            "citizenId": "citizen-154",
+            "shopId": "shop-river-b12",
+            "siteId": "river-b12",
+            "siteKind": "farm",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.860255999999957,
+            "namedEvents": 109,
+            "eventsWithActualWindow": 109
+          },
+          {
+            "citizenId": "citizen-420",
+            "shopId": "shop-workshop-b46",
+            "siteId": "workshop-b46",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 309.3170207231354,
+            "earnedGross": 28.438571785481315,
+            "namedEvents": 39,
+            "eventsWithActualWindow": 39
+          },
+          {
+            "citizenId": "citizen-476",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 222,
+            "earnedGross": 20.415151157894734,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-540",
+            "shopId": "shop-market-b7",
+            "siteId": "market-b7",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 218,
+            "earnedGross": 20.040502877192974,
+            "namedEvents": 29,
+            "eventsWithActualWindow": 29
+          },
+          {
+            "citizenId": "citizen-234",
+            "shopId": "shop-west-b25",
+            "siteId": "west-b25",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 205,
+            "earnedGross": 18.851828771929814,
+            "namedEvents": 26,
+            "eventsWithActualWindow": 26
+          },
+          {
+            "citizenId": "citizen-344",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 222,
+            "earnedGross": 20.415151157894734,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-472",
+            "shopId": "shop-starport-b14",
+            "siteId": "starport-b14",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 292.413079922155,
+            "earnedGross": 26.87977995876417,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-504",
+            "shopId": "shop-airport-b2",
+            "siteId": "airport-b2",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 305.98821110013535,
+            "earnedGross": 28.1348000420945,
+            "namedEvents": 10,
+            "eventsWithActualWindow": 10
+          },
+          {
+            "citizenId": "citizen-375",
+            "shopId": "shop-market-b43",
+            "siteId": "market-b43",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 252,
+            "earnedGross": 23.166085894736838,
+            "namedEvents": 32,
+            "eventsWithActualWindow": 32
+          },
+          {
+            "citizenId": "citizen-354",
+            "shopId": "shop-workshop-b32",
+            "siteId": "workshop-b32",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 295.6899455966152,
+            "earnedGross": 27.182344697783385,
+            "namedEvents": 37,
+            "eventsWithActualWindow": 37
+          },
+          {
+            "citizenId": "citizen-228",
+            "shopId": "shop-east-b2",
+            "siteId": "east-b2",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 216,
+            "earnedGross": 19.85876715789473,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-404",
+            "shopId": "shop-east-b8",
+            "siteId": "east-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 271,
+            "earnedGross": 24.919011017543856,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-343",
+            "shopId": "shop-workshop-b49",
+            "siteId": "workshop-b49",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 421.2548688459224,
+            "earnedGross": 38.72731647393085,
+            "namedEvents": 53,
+            "eventsWithActualWindow": 53
+          },
+          {
+            "citizenId": "citizen-410",
+            "shopId": "shop-west-b3",
+            "siteId": "west-b3",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 282.36245251885464,
+            "earnedGross": 25.962920378019962,
+            "namedEvents": 36,
+            "eventsWithActualWindow": 36
+          },
+          {
+            "citizenId": "citizen-289",
+            "shopId": "shop-west-b38",
+            "siteId": "west-b38",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 228,
+            "earnedGross": 20.96651199999999,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-575",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 264.642362928921,
+            "earnedGross": 24.336548837731353,
+            "namedEvents": 9,
+            "eventsWithActualWindow": 9
+          },
+          {
+            "citizenId": "citizen-497",
+            "shopId": "shop-workshop-b30",
+            "siteId": "workshop-b30",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 279.96459683088847,
+            "earnedGross": 25.738046832954083,
+            "namedEvents": 35,
+            "eventsWithActualWindow": 35
+          },
+          {
+            "citizenId": "citizen-377",
+            "shopId": "shop-west-b22",
+            "siteId": "west-b22",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 195,
+            "earnedGross": 17.93222736842105,
+            "namedEvents": 7,
+            "eventsWithActualWindow": 7
+          },
+          {
+            "citizenId": "citizen-541",
+            "shopId": "shop-workshop-b58",
+            "siteId": "workshop-b58",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 262.023906594069,
+            "earnedGross": 24.090448239049454,
+            "namedEvents": 33,
+            "eventsWithActualWindow": 33
+          },
+          {
+            "citizenId": "citizen-539",
+            "shopId": "shop-river-b59",
+            "siteId": "river-b59",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 251.49017849679845,
+            "earnedGross": 23.123422807556018,
+            "namedEvents": 126,
+            "eventsWithActualWindow": 126
+          },
+          {
+            "citizenId": "citizen-542",
+            "shopId": "shop-west-b9",
+            "siteId": "west-b9",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 235.26253887558806,
+            "earnedGross": 21.634776094302776,
+            "namedEvents": 8,
+            "eventsWithActualWindow": 8
+          },
+          {
+            "citizenId": "citizen-156",
+            "shopId": "shop-workshop-b1",
+            "siteId": "workshop-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 220.43035509635226,
+            "earnedGross": 20.266341834185,
+            "namedEvents": 28,
+            "eventsWithActualWindow": 28
+          },
+          {
+            "citizenId": "citizen-321",
+            "shopId": "shop-workshop-b13",
+            "siteId": "workshop-b13",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 174,
+            "earnedGross": 15.996380255319139,
+            "namedEvents": 23,
+            "eventsWithActualWindow": 23
+          },
+          {
+            "citizenId": "citizen-509",
+            "shopId": "shop-west-b35",
+            "siteId": "west-b35",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 151,
+            "earnedGross": 13.885981192982456,
+            "namedEvents": 20,
+            "eventsWithActualWindow": 20
+          },
+          {
+            "citizenId": "citizen-340",
+            "shopId": "shop-starport-b1",
+            "siteId": "starport-b1",
+            "siteKind": "workshop",
+            "fundedAttendanceMinutes": 68.58432664178092,
+            "earnedGross": 6.303631184530509,
+            "namedEvents": 3,
+            "eventsWithActualWindow": 3
+          },
+          {
+            "citizenId": "citizen-482",
+            "shopId": "shop-airport-b8",
+            "siteId": "airport-b8",
+            "siteKind": "market",
+            "fundedAttendanceMinutes": 32,
+            "earnedGross": 2.9329351111111075,
+            "namedEvents": 1,
+            "eventsWithActualWindow": 1
+          }
+        ],
+        "unclassifiedWageEvents": 7582,
+        "storedMeals": 56,
+        "playerConsumedMeals": 0,
+        "observedNpcMeals": 595,
+        "attendanceScope": "Native core-certified named NPC wage-earned events with positive finite minutes and gross, classified by actual shop building kind. These are funded onsite earned minutes, not paid cash, production labor consumed, or a classification of every zero-output batch. Uncertified events, legacy amount-only and public wage events are excluded from private-site attendance; player employment is a separate contract.",
+        "zeroOutputBatchDisposition": "NOT_OBSERVED",
+        "scope": "Observed positive production and retail events by actual site kind; productionMinutes remain minutes attached to positive output batches, not all attendance. Counter meals require named NPC sale events. Unattributed sales are not assumed eaten; this is not a complete inventory mass balance."
+      },
+      "food": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+        "shopFoodUnits": 15420.948044089688,
+        "residentCarriedFoodUnits": 320,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4801,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1522.9480440896873,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 9097,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4736.957789486369,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 240,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 240,
+        "routeReachability": "NOT_OBSERVED",
+        "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+      },
+      "policeSupplies": {
+        "receivedUnits": 126,
+        "consumedUnits": 30,
+        "heldUnits": 96,
+        "gross": 554.3999999999999,
+        "tax": 44.351999999999954
+      },
+      "civicRequests": {
+        "residentPetitions": 0,
+        "openPetitions": 0,
+        "orders": []
+      },
+      "formalLearning": [],
+      "familyEducation": null,
+      "playerLabor": {
+        "escrow": 0,
+        "stats": {
+          "reservedGross": 0,
+          "paidGross": 0,
+          "refundedGross": 0,
+          "workedMinutes": 0,
+          "completed": 0
+        }
+      },
+      "roadworks": null,
+      "power": null,
+      "hygiene": null,
+      "education": null,
+      "policy": {
+        "taxRate": 0.08,
+        "policeBudget": 0.3
+      },
+      "publicBudget": {
+        "cash": 72688.81129934225,
+        "publicWagesDue": 0,
+        "publicWagesEarned": 1366.2115628558938,
+        "forecastPayroll": 12603.017131228016,
+        "reservedPayroll": 0,
+        "essentialOperations": 2073.6,
+        "reserve": 16042.82869408391,
+        "authorizedRemaining": 0,
+        "available": 56645.982605258345
+      },
+      "publicService": {
+        "fundedMinutes": null,
+        "actualMinutes": null,
+        "plannedFullMinutes": null,
+        "reservedCash": 0,
+        "statistics": null,
+        "shifts": []
+      },
+      "privateLabor": {
+        "rosterJobs": 265,
+        "plannedMinutes": 6348,
+        "actualMinutes": 141.78645009705556,
+        "reservedCash": 570.4433176024684,
+        "restrictedShops": 0,
+        "statistics": {
+          "approvedMinutes": 94197,
+          "workedMinutes": 75783.7314849965,
+          "restrictedReviews": 0
+        }
+      },
+      "banking": {
+        "balanceSheet": {
+          "cash": 400,
+          "loanPrincipal": 0,
+          "loanInterestReceivable": 0,
+          "deposits": 400,
+          "interestPayable": 0,
+          "assets": 400,
+          "liabilities": 400,
+          "equity": 0,
+          "legacyEscrowAssets": 0,
+          "legacyEscrowClaims": 0
+        },
+        "cash": 400,
+        "deposits": 400,
+        "loans": 0,
+        "legacyInvestmentCash": 0
+      },
+      "npcBankDeposits": 400,
+      "wageArrears": {
+        "public": 0,
+        "private": 0,
+        "publicEarnedNotDue": 1366.2115628558938,
+        "privateEarnedNotDue": 410.14547796683894
+      },
+      "ledger": {
+        "城市公共运转支出": {
+          "count": 18,
+          "amount": -8328.729647997476,
+          "eventObserved": 0
+        },
+        "交通居民科研投入": {
+          "count": 1,
+          "amount": 200,
+          "eventObserved": 0
+        },
+        "本区居民补选本人登记费": {
+          "count": 4,
+          "amount": 480,
+          "eventObserved": 0
+        },
+        "城市税收与公共收入": {
+          "count": 6,
+          "amount": 337.54094733973034,
+          "eventObserved": 0
+        }
+      },
+      "shops": {
+        "total": 210,
+        "open": 210,
+        "belowClosureThreshold": 0,
+        "zeroEmployees": 76,
+        "employees": 265,
+        "cash": 11753.34102406392,
+        "averageProfit": 5.981828533849373
+      },
+      "npc": {
+        "alive": 616,
+        "total": 616,
+        "meanHealth": 91.87695378142993,
+        "meanHunger": 48.1366016355149,
+        "meanFatigue": 95.05707513274899,
+        "livingMeanHealth": 91.87695378142993,
+        "livingMeanHunger": 48.1366016355149,
+        "livingMeanFatigue": 95.05707513274899,
+        "researchCompleted": 1,
+        "companies": 12,
+        "zeroCapitalCompanies": 0,
+        "playerAlive": true,
+        "poor": 0,
+        "storedFood": 320,
+        "byRole": {
+          "学生": {
+            "count": 65,
+            "money": 302.18957312998475,
+            "hunger": 52.452818900248026,
+            "health": 91.64136761408143
+          },
+          "农民": {
+            "count": 28,
+            "money": 307.54083862533844,
+            "hunger": 77.85986403924748,
+            "health": 92.67831858858582
+          },
+          "钱庄职员": {
+            "count": 41,
+            "money": 323.18290059361055,
+            "hunger": 34.74870409911915,
+            "health": 91.86903765086592
+          },
+          "商人": {
+            "count": 145,
+            "money": 299.5379738107062,
+            "hunger": 67.70381232500502,
+            "health": 92.20655745555543
+          },
+          "医生": {
+            "count": 51,
+            "money": 337.9253726521711,
+            "hunger": 30.60034694237108,
+            "health": 91.92384587657
+          },
+          "官员": {
+            "count": 83,
+            "money": 334.63134762665396,
+            "hunger": 42.27818028236445,
+            "health": 91.08683488373715
+          },
+          "驾驶员": {
+            "count": 47,
+            "money": 346.59076875875354,
+            "hunger": 30.00472631435447,
+            "health": 92.00973864649679
+          },
+          "老师": {
+            "count": 34,
+            "money": 369.0640997494161,
+            "hunger": 11.570150100894438,
+            "health": 91.51968261308122
+          },
+          "警察": {
+            "count": 22,
+            "money": 354.2148059531694,
+            "hunger": 10.550764440254072,
+            "health": 91.3375269392529
+          },
+          "工人": {
+            "count": 75,
+            "money": 281.6416801368468,
+            "hunger": 55.32284894057221,
+            "health": 92.0150726643435
+          },
+          "搬运工": {
+            "count": 17,
+            "money": 275.2612224042126,
+            "hunger": 83.8176470588245,
+            "health": 93.42095992057705
+          },
+          "科研员": {
+            "count": 7,
+            "money": 297.28239740331526,
+            "hunger": 6.9898959023944665,
+            "health": 89.7797299270293
+          },
+          "scientist": {
+            "count": 1,
+            "money": 142.3612801103214,
+            "hunger": 92.41387342498635,
+            "health": 96.3195083108656
+          }
+        }
+      },
+      "technologies": [
+        {
+          "sector": "traffic",
+          "level": 1
+        },
+        {
+          "sector": "energy",
+          "level": 0
+        },
+        {
+          "sector": "information",
+          "level": 0
+        },
+        {
+          "sector": "security",
+          "level": 0
+        },
+        {
+          "sector": "medicine",
+          "level": 0
+        },
+        {
+          "sector": "agriculture",
+          "level": 0
+        },
+        {
+          "sector": "manufacturing",
+          "level": 0
+        }
+      ],
+      "companies": [
+        {
+          "id": "company-1",
+          "capital": 25.19754644982523,
+          "profit": -17.857400572219984,
+          "employees": 2,
+          "inventory": 156,
+          "wageLiability": 2.0229048888888883,
+          "revenue": 37.57973444275909,
+          "workId": "river-b9"
+        },
+        {
+          "id": "company-2",
+          "capital": 20.2712699570528,
+          "profit": -31.84480741714863,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.906065206803017,
+          "workId": "river-b17"
+        },
+        {
+          "id": "company-3",
+          "capital": 34.316869326492935,
+          "profit": -31.714286790570316,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 2.5739176296296282,
+          "revenue": 20.92000839994362,
+          "workId": "river-b27"
+        },
+        {
+          "id": "company-4",
+          "capital": 20.363781036111334,
+          "profit": -31.227525273570166,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.879829694589663,
+          "workId": "river-b36"
+        },
+        {
+          "id": "company-5",
+          "capital": 37.79482105299601,
+          "profit": -29.924712284406016,
+          "employees": 1,
+          "inventory": 98.12024800914497,
+          "wageLiability": 2.574606222222221,
+          "revenue": 19.242269256080526,
+          "workId": "river-b45"
+        },
+        {
+          "id": "company-6",
+          "capital": 42.99576286422247,
+          "profit": -31.33793322152441,
+          "employees": 2,
+          "inventory": 100.97393094833014,
+          "wageLiability": 2.5741042962962957,
+          "revenue": 38.40931681760759,
+          "workId": "river-b55"
+        },
+        {
+          "id": "company-7",
+          "capital": 44.51571217680663,
+          "profit": -10.024292713513514,
+          "employees": 2,
+          "inventory": 84,
+          "wageLiability": 0.18385782456140343,
+          "revenue": 63.5278281845232,
+          "workId": "market-b7"
+        },
+        {
+          "id": "company-8",
+          "capital": 232.44638164416543,
+          "profit": 84.8488433951165,
+          "employees": 1,
+          "inventory": 69,
+          "wageLiability": 2.2065549473684203,
+          "revenue": 235.87924533794126,
+          "workId": "market-b20"
+        },
+        {
+          "id": "company-9",
+          "capital": 22.36378718115973,
+          "profit": -19.42668346460323,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 0,
+          "revenue": 20.879829694589663,
+          "workId": "market-b33"
+        },
+        {
+          "id": "company-10",
+          "capital": 59.92081563938151,
+          "profit": -30.28531825535528,
+          "employees": 1,
+          "inventory": 88,
+          "wageLiability": 2.206133894736841,
+          "revenue": 20.906065206803017,
+          "workId": "market-b48"
+        },
+        {
+          "id": "company-11",
+          "capital": 80,
+          "profit": 0,
+          "employees": 0,
+          "inventory": 90,
+          "wageLiability": 0,
+          "revenue": 0,
+          "workId": "market-b62"
+        },
+        {
+          "id": "company-12",
+          "capital": 71.67603868443867,
+          "profit": -0.4911110732860484,
+          "employees": 1,
+          "inventory": 87.89042517711361,
+          "wageLiability": 2.2063972765957436,
+          "revenue": 43.68000000000001,
+          "workId": "workshop-b0"
+        }
+      ]
+    }
+  ],
+  "deaths": [],
+  "starts": [
+    {
+      "tick": 60,
+      "day": 0,
+      "hour": 10,
+      "id": "citizen-488",
+      "role": "scientist",
+      "sector": "traffic",
+      "moneyBefore": 339.00097431614995,
+      "moneyAfter": 139.00097431614995,
+      "grossWage": 0,
+      "debit": 200,
+      "exactDebitVerified": true,
+      "ledgerCredit": 200,
+      "hunger": 54.4138734249864,
+      "fatigue": 76.16514442530459,
+      "education": 3,
+      "skill": 36.01699999999996,
+      "workKind": "school"
+    }
+  ],
+  "researchFunding": 200,
+  "exactResearchDebits": 1,
+  "researchCompleted": 1,
+  "reconciliationResidual": -1.4551915228366852e-9,
+  "moneyConservationResidual": -1.4551915228366852e-9,
+  "initialMoneySupply": 280736.15793671925,
+  "finalMoneySupply": 280736.1579367207,
+  "economicTrend": {
+    "cashChangePercent": 1.4640536147268124,
+    "unpaidPrivateWages": 410.145477967455,
+    "steadyStateEstablished": false
+  },
+  "auditStatus": "passed",
+  "saveValidation": {
+    "status": "passed",
+    "immediateEqual": true,
+    "futureTicks": 24,
+    "futureEqual": true,
+    "effectiveRuleset": "civic-local-v1",
+    "saveEnvelopeVersion": 4,
+    "motionVersion": 2,
+    "originalEnablement": {
+      "id": "civic-new-20261001-b85fa6ec",
+      "ruleVersion": 1,
+      "origin": "new-city",
+      "enabledAt": 480,
+      "enabledTick": 0
+    },
+    "futureSaveSha256": "cd1c8da379a4667dba6d3d9317c6a21547cb3fc354b9fff7c4267f14ed17bab4"
+  }
+}

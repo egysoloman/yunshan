@@ -1,0 +1,173 @@
+{
+  "scope": "Actual pixel review of immutable17:45 snapshot, fixed diagnostic cameras; not player travel or hardware performance. Shadow totals are one forced-refresh render; normal Three counters exclude shadow pass. Dynamic resolution yielded differing recorded pixel ratios, so these images do not support a fixed-resolution frame-rate comparison.",
+  "snapshot": "/tmp/yunshan-phase2-visual-macro",
+  "buildEntry": "/assets/index-Brtmqf1J.js",
+  "hash": "8e6d7d2c0fb3b4270cd71599381f6db8cd8d1f98c262448ced69d6349d8cf31c",
+  "images": [
+    "/workspace/yunshan/artifacts/phase2-visual-macro/core-waterfall.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/waterfall-front.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/waterfall-side.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/market-street.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/core-door.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/residential-first-person.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/workshop-door.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/bridge-structure.png",
+    "/workspace/yunshan/artifacts/phase2-visual-macro/bridge-first-person.png"
+  ],
+  "reviewedAll9": true,
+  "specificObservations": [
+    "market-street: entrance center is clearer after side counters; visible roof profile and timber lattice.",
+    "core-door: large dark underside occupies upper roughly one-third and door lighting is dim.",
+    "waterfall-front/side: full white fall and cyan basin visible; dark large cliff and hard-edged white ribbon still dominate.",
+    "core-waterfall: repeated hard box silhouettes/thin eaves, narrow municipal tower and grey sky remain different from layered low broad timber halls and atmosphere of references.",
+    "home/market/workshop: largely repeated facade language and sparse outdoor purposes/plants; workshop has a dark interior center post visible through door (collision not established).",
+    "bridge-first-person: deck above landscape is visible at eye[-648,18.52,1037.4]; transverse beam in view needs authoritative shape/foot-path review. No collision result asserted.",
+    "bridge-structure: lateral diagnostic eye[-648,38.8,982] is in/behind a building; image does not show the requested bridge structure. Diagnostic camera limitation."
+  ],
+  "counts": [
+    {
+      "name": "core-waterfall",
+      "previousColourCalls": 482,
+      "previousColourTriangles": 428288,
+      "newColourCalls": 532,
+      "newColourTriangles": 490396,
+      "newTotalIncludingForcedShadow": {
+        "calls": 532,
+        "triangles": 490396
+      },
+      "shadow": {
+        "calls": 0,
+        "triangles": 0
+      },
+      "pixelRatio": 1
+    },
+    {
+      "name": "waterfall-front",
+      "previousColourCalls": 450,
+      "previousColourTriangles": 468488,
+      "newColourCalls": 500,
+      "newColourTriangles": 533764,
+      "newTotalIncludingForcedShadow": {
+        "calls": 539,
+        "triangles": 637312
+      },
+      "shadow": {
+        "calls": 39,
+        "triangles": 103548
+      },
+      "pixelRatio": 0.92
+    },
+    {
+      "name": "waterfall-side",
+      "previousColourCalls": 427,
+      "previousColourTriangles": 429304,
+      "newColourCalls": 470,
+      "newColourTriangles": 491020,
+      "newTotalIncludingForcedShadow": {
+        "calls": 502,
+        "triangles": 549470
+      },
+      "shadow": {
+        "calls": 32,
+        "triangles": 58450
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "market-street",
+      "previousColourCalls": 381,
+      "previousColourTriangles": 450866,
+      "newColourCalls": 413,
+      "newColourTriangles": 524716,
+      "newTotalIncludingForcedShadow": {
+        "calls": 474,
+        "triangles": 673026
+      },
+      "shadow": {
+        "calls": 61,
+        "triangles": 148310
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "core-door",
+      "previousColourCalls": 317,
+      "previousColourTriangles": 424504,
+      "newColourCalls": 346,
+      "newColourTriangles": 497164,
+      "newTotalIncludingForcedShadow": {
+        "calls": 363,
+        "triangles": 585330
+      },
+      "shadow": {
+        "calls": 17,
+        "triangles": 88166
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "residential-first-person",
+      "previousColourCalls": 137,
+      "previousColourTriangles": 254402,
+      "newColourCalls": 145,
+      "newColourTriangles": 289334,
+      "newTotalIncludingForcedShadow": {
+        "calls": 221,
+        "triangles": 427626
+      },
+      "shadow": {
+        "calls": 76,
+        "triangles": 138292
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "workshop-door",
+      "previousColourCalls": 228,
+      "previousColourTriangles": 309402,
+      "newColourCalls": 241,
+      "newColourTriangles": 356724,
+      "newTotalIncludingForcedShadow": {
+        "calls": 310,
+        "triangles": 463520
+      },
+      "shadow": {
+        "calls": 69,
+        "triangles": 106796
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "bridge-structure",
+      "previousColourCalls": 127,
+      "previousColourTriangles": 226622,
+      "newColourCalls": 145,
+      "newColourTriangles": 291644,
+      "newTotalIncludingForcedShadow": {
+        "calls": 208,
+        "triangles": 385946
+      },
+      "shadow": {
+        "calls": 63,
+        "triangles": 94302
+      },
+      "pixelRatio": 0.65
+    },
+    {
+      "name": "bridge-first-person",
+      "previousColourCalls": 186,
+      "previousColourTriangles": 259380,
+      "newColourCalls": 170,
+      "newColourTriangles": 290682,
+      "newTotalIncludingForcedShadow": {
+        "calls": 235,
+        "triangles": 377344
+      },
+      "shadow": {
+        "calls": 65,
+        "triangles": 86662
+      },
+      "pixelRatio": 0.65
+    }
+  ]
+}

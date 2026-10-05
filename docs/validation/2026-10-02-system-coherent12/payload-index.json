@@ -1,0 +1,1092 @@
+{
+  "createdAtUTC": "2026-10-02T17:25:08.109736+00:00",
+  "payloadCount": 217,
+  "payloadBytes": 20536906,
+  "files": {
+    "source/.gitattributes": {
+      "bytes": 729,
+      "sha256": "46f4e749c348cb5ad9da680f62979f53d126416c4b9254f189c84e0cdb3c9d39",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/.gitattributes"
+    },
+    "source/.gitignore": {
+      "bytes": 41,
+      "sha256": "fd27510f099fddfc9d765ad896bbcb800a976849aecd89ef77a094edebea27bb",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/.gitignore"
+    },
+    "source/AGENTS.md": {
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/AGENTS.md"
+    },
+    "source/index.html": {
+      "bytes": 561,
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/index.html"
+    },
+    "source/package-lock.json": {
+      "bytes": 40288,
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/package-lock.json"
+    },
+    "source/package.json": {
+      "bytes": 830,
+      "sha256": "73b400c0750d849b9ea2df0afcd107faa08928daeb5c97da86eae062783912bb",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/package.json"
+    },
+    "source/public/favicon.svg": {
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/public/favicon.svg"
+    },
+    "source/scripts/benchmark.ts": {
+      "bytes": 5304,
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/benchmark.ts"
+    },
+    "source/scripts/browser-test.mjs": {
+      "bytes": 32618,
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/browser-test.mjs"
+    },
+    "source/scripts/economy-audit.ts": {
+      "bytes": 20432,
+      "sha256": "b708a4ab61d66849821920aa50a4617cea29abe954e46d87dfdd24fc84e19cf2",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/economy-audit.ts"
+    },
+    "source/scripts/layout-browser-test.mjs": {
+      "bytes": 12628,
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/layout-browser-test.mjs"
+    },
+    "source/scripts/player-journey.mjs": {
+      "bytes": 44791,
+      "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/player-journey.mjs"
+    },
+    "source/scripts/space-browser-test.mjs": {
+      "bytes": 19455,
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/space-browser-test.mjs"
+    },
+    "source/scripts/ui-test.mjs": {
+      "bytes": 67059,
+      "sha256": "eb118daf486b9668d45379b763c116ecbfa554e64fb7503c4ccf138a4e927663",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/ui-test.mjs"
+    },
+    "source/scripts/visual-review.mjs": {
+      "bytes": 9242,
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/scripts/visual-review.mjs"
+    },
+    "source/src/access.ts": {
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/access.ts"
+    },
+    "source/src/architecture-floor-plan.ts": {
+      "bytes": 44826,
+      "sha256": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/architecture-floor-plan.ts"
+    },
+    "source/src/aviation-renderer.ts": {
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/aviation-renderer.ts"
+    },
+    "source/src/aviation.ts": {
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/aviation.ts"
+    },
+    "source/src/controller.ts": {
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/controller.ts"
+    },
+    "source/src/journey.ts": {
+      "bytes": 17580,
+      "sha256": "be77792563a195c673798d9f8244217320677ab739ee44361eeca1ed83909868",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/journey.ts"
+    },
+    "source/src/main.ts": {
+      "bytes": 24073,
+      "sha256": "ef04d5331778c6bc4728f4d37355f32a32e8dfeb512390cec28501ad80708dff",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/main.ts"
+    },
+    "source/src/persistence.ts": {
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/persistence.ts"
+    },
+    "source/src/persistence/partition.ts": {
+      "bytes": 14286,
+      "sha256": "9ae6f60ecaa65a77e852b826c29d7c5f8eaa329b02a1578e962cad0470228088",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/persistence/partition.ts"
+    },
+    "source/src/persistence/route-encoding.ts": {
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/persistence/route-encoding.ts"
+    },
+    "source/src/persistence/session.ts": {
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/persistence/session.ts"
+    },
+    "source/src/persistence/world-layout.ts": {
+      "bytes": 4368,
+      "sha256": "90a6126cabd6f37f1873d554130893fe62310ac9d5de139525c662ed54c9e40c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/persistence/world-layout.ts"
+    },
+    "source/src/renderer.ts": {
+      "bytes": 80466,
+      "sha256": "8791b95627f59c81d602435c92b5462ca5817e9de87aa755cc4d1656981edbd7",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/renderer.ts"
+    },
+    "source/src/rendering/architecture-bodies.ts": {
+      "bytes": 8975,
+      "sha256": "62aab7d1978ad99cab899b9ff35f4f006a31c835ff29fc4c00d9de69d4c25c5a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/architecture-bodies.ts"
+    },
+    "source/src/rendering/architecture-detail.ts": {
+      "bytes": 38886,
+      "sha256": "5168e69d9d5390feaa2ec8e1980bdd9d77113b49a809db4a619befe6a375b4ee",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/architecture-detail.ts"
+    },
+    "source/src/rendering/architecture-layout.ts": {
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/architecture-layout.ts"
+    },
+    "source/src/rendering/chunk-residency.ts": {
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/chunk-residency.ts"
+    },
+    "source/src/rendering/citizen-appearance.ts": {
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/citizen-appearance.ts"
+    },
+    "source/src/rendering/market-goods.ts": {
+      "bytes": 3400,
+      "sha256": "8aa047f282047aec91662c784a6205123139deee7b870d19291e34b4f030270a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/market-goods.ts"
+    },
+    "source/src/rendering/terrain.ts": {
+      "bytes": 34517,
+      "sha256": "fb67a6ac6a9d3939f181f9d2e80bf0e4078d758aaa0f382e3990d114954eb290",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/rendering/terrain.ts"
+    },
+    "source/src/simulation.ts": {
+      "bytes": 204660,
+      "sha256": "ba289751a2990ae405538801561d6032c982148f15887c1c8745da2264a06f49",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation.ts"
+    },
+    "source/src/simulation/banking.ts": {
+      "bytes": 21755,
+      "sha256": "ee1db05560b08f8927eb17137a0431ad8cd24a1a9ad23181770daac7b93c8514",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/banking.ts"
+    },
+    "source/src/simulation/clinical.ts": {
+      "bytes": 27981,
+      "sha256": "7faaa1cc24827fd62a86a904a86149f129560cb7d3c7e9889e379b03c378cf59",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/clinical.ts"
+    },
+    "source/src/simulation/culture.ts": {
+      "bytes": 50241,
+      "sha256": "fc23b9eb14e84121e6b5d24eb61b8957faa2a9384759a165f28441dd5d0e14b4",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/culture.ts"
+    },
+    "source/src/simulation/extensions.ts": {
+      "bytes": 68735,
+      "sha256": "e317b0a0660faaef0aecd0928c71386c0e9a0c1d0654608d62b229ae8187a378",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/extensions.ts"
+    },
+    "source/src/simulation/family.ts": {
+      "bytes": 71044,
+      "sha256": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/family.ts"
+    },
+    "source/src/simulation/home-rest.ts": {
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/home-rest.ts"
+    },
+    "source/src/simulation/journeys.ts": {
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/journeys.ts"
+    },
+    "source/src/simulation/player-labor.ts": {
+      "bytes": 14533,
+      "sha256": "ff3923f875bf68ebdba6ea203612f58b1710ffdaad5e4cd6b7c00f7469a85541",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/player-labor.ts"
+    },
+    "source/src/simulation/trade.ts": {
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/simulation/trade.ts"
+    },
+    "source/src/site-fixtures.ts": {
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/site-fixtures.ts"
+    },
+    "source/src/style.css": {
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/style.css"
+    },
+    "source/src/transport-geometry.ts": {
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/transport-geometry.ts"
+    },
+    "source/src/types.ts": {
+      "bytes": 12150,
+      "sha256": "80be6ef93942d171cee9294fd7461aebc02230070473f31d49ec21f86781068b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/types.ts"
+    },
+    "source/src/ui.ts": {
+      "bytes": 157674,
+      "sha256": "d9d0765c028ea1b4cd874bf4db311be6ae2b0f358bfc16a30dadd53b601c9194",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/ui.ts"
+    },
+    "source/src/world.ts": {
+      "bytes": 53567,
+      "sha256": "2c9703f864b0f8c349e1428e4858adc2f28baa703cb5887d936f1a747d68ab4f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/src/world.ts"
+    },
+    "source/tests/access.test.ts": {
+      "bytes": 2613,
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/access.test.ts"
+    },
+    "source/tests/architecture-bodies.test.ts": {
+      "bytes": 11804,
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/architecture-bodies.test.ts"
+    },
+    "source/tests/architecture-detail-v4.test.ts": {
+      "bytes": 9726,
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/architecture-detail-v4.test.ts"
+    },
+    "source/tests/architecture-detail.test.ts": {
+      "bytes": 12491,
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/architecture-detail.test.ts"
+    },
+    "source/tests/architecture-floor-plan.test.ts": {
+      "bytes": 4446,
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/architecture-floor-plan.test.ts"
+    },
+    "source/tests/aviation.test.ts": {
+      "bytes": 13594,
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/aviation.test.ts"
+    },
+    "source/tests/banking.test.ts": {
+      "bytes": 20707,
+      "sha256": "8bfa376c0fc45aa91606857225ca441a7b82d137897754e64655496f0f09e464",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/banking.test.ts"
+    },
+    "source/tests/chunk-residency.test.ts": {
+      "bytes": 17203,
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/chunk-residency.test.ts"
+    },
+    "source/tests/citizen-appearance.test.ts": {
+      "bytes": 7172,
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/citizen-appearance.test.ts"
+    },
+    "source/tests/clinical.test.ts": {
+      "bytes": 29723,
+      "sha256": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/clinical.test.ts"
+    },
+    "source/tests/controller-v4.test.ts": {
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/controller-v4.test.ts"
+    },
+    "source/tests/controller.test.ts": {
+      "bytes": 10701,
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/controller.test.ts"
+    },
+    "source/tests/culture.test.ts": {
+      "bytes": 28415,
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/culture.test.ts"
+    },
+    "source/tests/economy.test.ts": {
+      "bytes": 50106,
+      "sha256": "bcd5d28674aadcc742ed68afb1f02b281ee69472272764e605880ab258a8121d",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/economy.test.ts"
+    },
+    "source/tests/extensions.test.ts": {
+      "bytes": 102230,
+      "sha256": "62a40f12cc5e08809352a93efd474a77c0b9f73fb2c98425e184421b7a8d207e",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/extensions.test.ts"
+    },
+    "source/tests/family.test.ts": {
+      "bytes": 50313,
+      "sha256": "f450be64dbec1c496a64e3593fd11d3801c43ce3817184e020277dfeecc1ccee",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/family.test.ts"
+    },
+    "source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json": {
+      "bytes": 344441,
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/clinical-legacy-heal-ee3e7a1.json"
+    },
+    "source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz": {
+      "bytes": 264772,
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz"
+    },
+    "source/tests/fixtures/npc-rest-offer-native.json": {
+      "bytes": 8688,
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/npc-rest-offer-native.json"
+    },
+    "source/tests/fixtures/trade-industrial-v1.json": {
+      "bytes": 396554,
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/trade-industrial-v1.json"
+    },
+    "source/tests/fixtures/world-layout/current-v2-2024.json.gz": {
+      "bytes": 375492,
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-2024.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v2-20261001.json.gz": {
+      "bytes": 379272,
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-20261001.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v2-7.json.gz": {
+      "bytes": 375643,
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-7.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz": {
+      "bytes": 321439,
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-r5-2024.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz": {
+      "bytes": 324477,
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v2-r5-7.json.gz": {
+      "bytes": 321647,
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v2-r5-7.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v3-2024.json.gz": {
+      "bytes": 704136,
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v3-2024.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v3-20261001.json.gz": {
+      "bytes": 715079,
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v3-20261001.json.gz"
+    },
+    "source/tests/fixtures/world-layout/current-v3-7.json.gz": {
+      "bytes": 704215,
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/current-v3-7.json.gz"
+    },
+    "source/tests/fixtures/world-layout/legacy-main-proofs.json.gz": {
+      "bytes": 570032,
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/legacy-main-proofs.json.gz"
+    },
+    "source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz": {
+      "bytes": 273576,
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz"
+    },
+    "source/tests/floor-plan-derived-cache.test.ts": {
+      "bytes": 7161,
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/floor-plan-derived-cache.test.ts"
+    },
+    "source/tests/home-rest.test.ts": {
+      "bytes": 30316,
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/home-rest.test.ts"
+    },
+    "source/tests/integration.test.ts": {
+      "bytes": 16265,
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/integration.test.ts"
+    },
+    "source/tests/journey.test.ts": {
+      "bytes": 18627,
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/journey.test.ts"
+    },
+    "source/tests/npc-clock.test.ts": {
+      "bytes": 24182,
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/npc-clock.test.ts"
+    },
+    "source/tests/npc-home-rest-voxels.test.ts": {
+      "bytes": 20925,
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/npc-home-rest-voxels.test.ts"
+    },
+    "source/tests/npc-public-rest.test.ts": {
+      "bytes": 8804,
+      "sha256": "140eaa42f5841da991e2b9e197b0478b86458dd7f8dad877ea9e4164b161e3cb",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/npc-public-rest.test.ts"
+    },
+    "source/tests/persistence.test.ts": {
+      "bytes": 59947,
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/persistence.test.ts"
+    },
+    "source/tests/player-labor.test.ts": {
+      "bytes": 10006,
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/player-labor.test.ts"
+    },
+    "source/tests/rendering.test.ts": {
+      "bytes": 19560,
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/rendering.test.ts"
+    },
+    "source/tests/route-encoding.test.ts": {
+      "bytes": 10705,
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/route-encoding.test.ts"
+    },
+    "source/tests/simulation.test.ts": {
+      "bytes": 66909,
+      "sha256": "564a5094fa64651357b074024189cbe3507e71687e89f5abc7b2ab80aee6aa37",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/simulation.test.ts"
+    },
+    "source/tests/site-fixtures.test.ts": {
+      "bytes": 9594,
+      "sha256": "cecf65a1a37a1b6d6167eab9d5c9ad1f5708a1a64420b9009ecc536ae622105b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/site-fixtures.test.ts"
+    },
+    "source/tests/trade.test.ts": {
+      "bytes": 46192,
+      "sha256": "40da9c8ce45e841e217383e2b620a6300714efbedaaa2b2eefa2f71bd3faa9a9",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/trade.test.ts"
+    },
+    "source/tests/v4-extensions.test.ts": {
+      "bytes": 13260,
+      "sha256": "a8eeeb9e403667611b82413dc925a946a348a4978ab77072af8f23775203dd8a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/v4-extensions.test.ts"
+    },
+    "source/tests/v4-services.test.ts": {
+      "bytes": 7284,
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/v4-services.test.ts"
+    },
+    "source/tests/v4-simulation.test.ts": {
+      "bytes": 14349,
+      "sha256": "5e0456b4b740edf454a21068dc25d63b24d87f97427ddc6fab563656ff80d609",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/v4-simulation.test.ts"
+    },
+    "source/tests/world-layout.test.ts": {
+      "bytes": 27934,
+      "sha256": "fffef47f0f048fafa0e5b9e4e8b45dbc5c3e27773a43274cd49bb3c3b9060cb6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/world-layout.test.ts"
+    },
+    "source/tests/world-v4.test.ts": {
+      "bytes": 15268,
+      "sha256": "6ccd96fb632d0e6e5e66b094004e372d051835e046c412c9a17cd3d4b4786b9c",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/world-v4.test.ts"
+    },
+    "source/tests/world.test.ts": {
+      "bytes": 26120,
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tests/world.test.ts"
+    },
+    "source/tsconfig.json": {
+      "bytes": 333,
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/tsconfig.json"
+    },
+    "source/vite.config.ts": {
+      "bytes": 357,
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/vite.config.ts"
+    },
+    "source/开发备忘录.md": {
+      "bytes": 184241,
+      "sha256": "61be403e544441e4dde55d3208618f3525ea5b36490f49a2b28be8112fe3bdc0",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/开发备忘录.md"
+    },
+    "source/提示词.md": {
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/提示词.md"
+    },
+    "dist/assets/index-DWmMW8H6.js": {
+      "bytes": 649278,
+      "sha256": "e2767355343e047b2ec4428616bf3e2d1d2781727f667cc655069e5699cb6b51",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/assets/index-DWmMW8H6.js"
+    },
+    "dist/assets/index-DWmMW8H6.js.map": {
+      "bytes": 1970348,
+      "sha256": "0c45dcb9f2e4f2b8c4f7de6e3f43e71e7dde3c422ee1f19507f67c2ee20262ed",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/assets/index-DWmMW8H6.js.map"
+    },
+    "dist/assets/index-DcKlDqDV.css": {
+      "bytes": 31135,
+      "sha256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/assets/index-DcKlDqDV.css"
+    },
+    "dist/assets/three-DfYROjRC.js": {
+      "bytes": 502193,
+      "sha256": "276b9841c4a1a79b75fa5445e3df9182d4dd65ed17b4a5d08d807a6ae75e138b",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/assets/three-DfYROjRC.js"
+    },
+    "dist/assets/three-DfYROjRC.js.map": {
+      "bytes": 2719092,
+      "sha256": "d3cd43b65a0fbd53c0ceb9b9e8caf3afd7fcfbdc5ae8d421069b05100cb25191",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/assets/three-DfYROjRC.js.map"
+    },
+    "dist/favicon.svg": {
+      "bytes": 279,
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/favicon.svg"
+    },
+    "dist/index.html": {
+      "bytes": 736,
+      "sha256": "aba5996537de59f37da66933e25f75d5f6eacf8fd60c983fbce8f1a2f91d6e3a",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source/dist/index.html"
+    },
+    "provenance/source-snapshot.json": {
+      "bytes": 11498,
+      "sha256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+      "originalPath": "/tmp/yunshan-system-coherent-12/source-snapshot.json"
+    },
+    "root-coherent12/README.md": {
+      "bytes": 2545,
+      "sha256": "649297470982d3e475ed28a395f31e32e11323e54c6de486a29781027c709fb2",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/README.md"
+    },
+    "root-coherent12/build.log": {
+      "bytes": 720,
+      "sha256": "a0f5a5d6960d1c6aa979ec214dcb2be248446ddc8d4ea09f3ba543884dfd8335",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/build.log"
+    },
+    "root-coherent12/candidate-source-equivalence.json": {
+      "bytes": 4398,
+      "sha256": "9347538cd4e656ad7b46b1bb5ef3d81b7d56d9fe8fd5201020244f0bc71e9c4c",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/candidate-source-equivalence.json"
+    },
+    "root-coherent12/native12-first-stage-summary.json": {
+      "bytes": 1063,
+      "sha256": "71d7451b9ee46b314b0bba580af7f78020d0cfef0fb77f0c069a81cdb2d7260f",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/native12-first-stage-summary.json"
+    },
+    "root-coherent12/related-run-status.json": {
+      "bytes": 33811,
+      "sha256": "083e76830e6a9ad8816ddb665e7e342e3d43de42f71738f6764471db9606e692",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/related-run-status.json"
+    },
+    "root-coherent12/renderer-world-and-offer.log": {
+      "bytes": 3088,
+      "sha256": "fe8fd0a0cbebe9be537cf64cf0409fecbbc1c8c53b94c73da76d9f3190edf282",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/renderer-world-and-offer.log"
+    },
+    "root-coherent12/root-copy-receipt.json": {
+      "bytes": 843,
+      "sha256": "071f8bcca92709efafd699649794a7da48077d99964c9dd450a0382dd4263fbd",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/root-copy-receipt.json"
+    },
+    "root-coherent12/source-snapshot.json": {
+      "bytes": 11498,
+      "sha256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+      "originalPath": "/workspace/yunshan/docs/validation/2026-10-02-system-coherent12/source-snapshot.json"
+    },
+    "external-preparation12/README.md": {
+      "bytes": 3436,
+      "sha256": "5a1c5b3c6f5c98b080b0d4ce6c588e94328dc53ebfe5a0d35447184386ff6d88",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/README.md"
+    },
+    "external-preparation12/browser-test-frozen12-original.mjs": {
+      "bytes": 32618,
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser-test-frozen12-original.mjs"
+    },
+    "external-preparation12/browser-test.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser-test.node-check.stderr"
+    },
+    "external-preparation12/browser-test.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser-test.node-check.stdout"
+    },
+    "external-preparation12/home-plan-readonly.mjs": {
+      "bytes": 3980,
+      "sha256": "4cc610aecb1de600382b137872b649e66a5bf0fcf4306cc18224877a56d1a748",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/home-plan-readonly.mjs"
+    },
+    "external-preparation12/home-plan.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/home-plan.node-check.stderr"
+    },
+    "external-preparation12/home-plan.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/home-plan.node-check.stdout"
+    },
+    "external-preparation12/native-home-rest.mjs": {
+      "bytes": 33957,
+      "sha256": "6be4c3e04fe0eb3b75beb98542ee5f127a0efefeab05a4aeb32d5df2d1b84f87",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-rest.mjs"
+    },
+    "external-preparation12/native-home-rest.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-rest.node-check.stderr"
+    },
+    "external-preparation12/native-home-rest.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-rest.node-check.stdout"
+    },
+    "external-preparation12/pending-source-contract.json": {
+      "bytes": 12415,
+      "sha256": "e457bd662524e5f80975506e233d402348d18c9cf32cf0154919c801423868b6",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/pending-source-contract.json"
+    },
+    "external-preparation12/preparation-index.json": {
+      "bytes": 3549,
+      "sha256": "f1bcc116590e0b3d22cc3c46bfe1c16c8d52719a5e705813b4fe131f8f85c2c5",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/preparation-index.json"
+    },
+    "external-preparation12/run-browser11.mjs": {
+      "bytes": 9939,
+      "sha256": "3aecb82db4eb26eb3cbda45712bfc9ae20be452dda8dfbf9416c8a1717bf3802",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/run-browser11.mjs"
+    },
+    "external-preparation12/run-browser11.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/run-browser11.node-check.stderr"
+    },
+    "external-preparation12/run-browser11.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/run-browser11.node-check.stdout"
+    },
+    "external-preparation12/source-contract.json": {
+      "bytes": 12415,
+      "sha256": "e457bd662524e5f80975506e233d402348d18c9cf32cf0154919c801423868b6",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/source-contract.json"
+    },
+    "external-preparation12/source-snapshot-original.json": {
+      "bytes": 11498,
+      "sha256": "4bf2a896201c52b80da241115283fbe590270e41194234574973ff6585254458",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/source-snapshot-original.json"
+    },
+    "external-preparation12/static-rebind-comparison.json": {
+      "bytes": 1494,
+      "sha256": "8bbacdb9c63d2dc7dfa5ef8a794130306374bf7fbd00e5d552bb3eb687955281",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/static-rebind-comparison.json"
+    },
+    "browser11-evidence/aircraft-city-button-probe.json": {
+      "bytes": 1505,
+      "sha256": "299198e9fa961ba0f8347c7334ec94b5cf94b2011a69c5b974268445355e2684",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/aircraft-city-button-probe.json"
+    },
+    "browser11-evidence/browser-results.json": {
+      "bytes": 4425,
+      "sha256": "3f3d1d897e3c3ce2e1742a6cae56247a9acd74091525d7d5976e47d79782181d",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/browser-results.json"
+    },
+    "browser11-evidence/browser.log": {
+      "bytes": 1942,
+      "sha256": "2a0dca18b222bceff091e3614e7f7396a58ba73bc29aba7e5faec7d9fa7623c1",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/browser.log"
+    },
+    "browser11-evidence/day.png": {
+      "bytes": 494930,
+      "sha256": "8684ad61d889f85b65fff633451a73f7c2b14d48047fd195c70aaaaae4aa00c4",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/day.png"
+    },
+    "browser11-evidence/interior.png": {
+      "bytes": 484008,
+      "sha256": "0536ce4901262c7a17806bef8e9cc640b1b7b351447eb586e48f7199e68df1b7",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/interior.png"
+    },
+    "browser11-evidence/night.png": {
+      "bytes": 404284,
+      "sha256": "7bb663c6c002e88f55de8e5f513c599d537deeb85662d4c363bac53c5849027b",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/night.png"
+    },
+    "browser11-evidence/owned-cleanup-receipt.json": {
+      "bytes": 1858,
+      "sha256": "4a2ba3244bbe907a6a68e4bee857e56e4eb4cc4597efeed970812fffd828baa0",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-cleanup-receipt.json"
+    },
+    "browser11-evidence/owned-identities-selected.json": {
+      "bytes": 5735,
+      "sha256": "e7f3a31e71767e9fe5dfd4a054d14c3f58d8ddb3d8696f3ceb7713a07b4e9a7e",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-identities-selected.json"
+    },
+    "browser11-evidence/owned-process-fields.json": {
+      "bytes": 418,
+      "sha256": "96156a8f43d83f3603f5c08dfc383f995538565829283cdfcb4ac5ef253ef393",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-process-fields.json"
+    },
+    "browser11-evidence/owned-process-start.json": {
+      "bytes": 230,
+      "sha256": "1377e3667cf190c10903cf41875fa9a17f1f206a850f9bb5d1a86c5168dc6226",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-process-start.json"
+    },
+    "browser11-evidence/owned-process-tree-start.json": {
+      "bytes": 608,
+      "sha256": "bf17316b9869f89e6887505bc0b2be1a6bd52a98d2f8ef4649c2ee7947d99d49",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-process-tree-start.json"
+    },
+    "browser11-evidence/owned-process-tree-verified.json": {
+      "bytes": 13168,
+      "sha256": "6919338ba603f119523b7c4e5db38cd037057db73547846569fddd3e2aa4a1cf",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/owned-process-tree-verified.json"
+    },
+    "browser11-evidence/run-manifest.json": {
+      "bytes": 46471,
+      "sha256": "22f7bf3d626bf87440aacb5d83c41fcd3af4795efabb3e66bceae87aa6fe6b03",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/run-manifest.json"
+    },
+    "browser11-evidence/run-start.json": {
+      "bytes": 22889,
+      "sha256": "95e740d95a18f39514a2bf7ddd2b6909275de6777cb56aaf468c8739b3a7501c",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/browser11-evidence/run-start.json"
+    },
+    "native-home-evidence/01-controlled-home-exterior.png": {
+      "bytes": 640116,
+      "sha256": "eb4c583eb299cd0b7329435b0a2813d560e98481f134af32a253b72856efcacd",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/01-controlled-home-exterior.png"
+    },
+    "native-home-evidence/FAIL-actual-model-save.json": {
+      "bytes": 2305344,
+      "sha256": "3246652e20d03dc0b3c71973c18f76abfe1d474a9e18f1d370243bcfdae92234",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/FAIL-actual-model-save.json"
+    },
+    "native-home-evidence/FAIL-actual-native-home.png": {
+      "bytes": 698655,
+      "sha256": "21136a282e5a8a5626f592e419ce796f693268d48e646730e48f89359120e03c",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/FAIL-actual-native-home.png"
+    },
+    "native-home-evidence/actual-home-plan.json": {
+      "bytes": 4135,
+      "sha256": "8241f70faa2e754d8794a74b19216dfd4c817324c2cb36b47152ef458adacd72",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/actual-home-plan.json"
+    },
+    "native-home-evidence/controlled-start.json": {
+      "bytes": 1597,
+      "sha256": "de5026d3e55218e281fb4a3acf1e13cd3013519c942e69d077ad64e9da5c64a5",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/controlled-start.json"
+    },
+    "native-home-evidence/loaded-document.json": {
+      "bytes": 340,
+      "sha256": "3aae3d10f31cc345ad124f850e9c82adb7a09c57424396fac8426190b29afe05",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/loaded-document.json"
+    },
+    "native-home-evidence/native-home-results.json": {
+      "bytes": 81685,
+      "sha256": "96c268e5552829d318a48c282106424c3a7d9512f08d9c35cadc297e3ffd1175",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/native-home-results.json"
+    },
+    "native-home-evidence/native-movement.json": {
+      "bytes": 293700,
+      "sha256": "4c7e342e08a4d94ca947174ae9acc9853c7018764b96e18b0e1bb1289e7b3898",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/native-movement.json"
+    },
+    "native-home-evidence/owned-cleanup-browser.json": {
+      "bytes": 157,
+      "sha256": "848531e0e42e9b0e778b6a227100efa6b14651bbbe1f496728d06f5227a3fa9f",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/owned-cleanup-browser.json"
+    },
+    "native-home-evidence/owned-cleanup-receipt.json": {
+      "bytes": 680,
+      "sha256": "6e3553bf2baf686e781a56579f45f9314a6e0b8b78ea45ed16c80684a17e10f1",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/owned-cleanup-receipt.json"
+    },
+    "native-home-evidence/run-start.json": {
+      "bytes": 22565,
+      "sha256": "31c7d92cbc3126a93af5519b33e89659ac646bfb552ad305bc2695835ba2a234",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/run-start.json"
+    },
+    "native-home-evidence/screenshots.json": {
+      "bytes": 5461,
+      "sha256": "ce6323fea8b9341dca27e2b9593c56b1f4c68a6ecdbdec026a018a0472a87f16",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/native-home-evidence/screenshots.json"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/README.md": {
+      "bytes": 4106,
+      "sha256": "932bcffb5274d71c93e8bfe54f4787c810a4936522354e2afcab243f75e1586d",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/README.md"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs": {
+      "bytes": 3980,
+      "sha256": "4cc610aecb1de600382b137872b649e66a5bf0fcf4306cc18224877a56d1a748",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/home-plan-readonly.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs": {
+      "bytes": 28350,
+      "sha256": "509af593a6f27e6528d80bfb65019199f7a811205dbd3856a5ac64258b96ecfd",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/native-home-rest.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent08-native-home-rest-01/readiness.json": {
+      "bytes": 2226,
+      "sha256": "a52e49a3e56970c9690f2223ef4a7ad60a30002ea1a6eb13230333b1832601b8",
+      "originalPath": "/tmp/yunshan-coherent08-native-home-rest-01/readiness.json"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/README.md": {
+      "bytes": 6160,
+      "sha256": "4aa07204485b119d76358900b4c72ff992cfc7500a29b2ac12922b030823eba6",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/README.md"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs": {
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/browser-test-original.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs": {
+      "bytes": 3980,
+      "sha256": "4cc610aecb1de600382b137872b649e66a5bf0fcf4306cc18224877a56d1a748",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs": {
+      "bytes": 29989,
+      "sha256": "f5a98e1a050868876d6bff641aff352f01e0d6f3b17e770dfbfab56c8bfac5ba",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/native-home-rest.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/preparation-index.json": {
+      "bytes": 3165,
+      "sha256": "1f36c9d75408b100aea4dfdd4957ddfd8fdf70cf6e0ebfc1ac52972dc8463150",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/preparation-index.json"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/readiness.json": {
+      "bytes": 3387,
+      "sha256": "8275695babd9802606b71c5314934788baf3894938022ecc62294bdea183ddd7",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/readiness.json"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs": {
+      "bytes": 9254,
+      "sha256": "607b9559007534f354d90b77b93914ccf3574759b543056a563ee8d67af6578f",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/run-browser11.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/source-contract.json": {
+      "bytes": 12365,
+      "sha256": "611ed74709f96e41b778048f32fb278f7f41604173731f547b6a533992348f31",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/source-contract.json"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/source-snapshot-original.json": {
+      "bytes": 21900,
+      "sha256": "46840299e7fa38d822797048eebbd361cb33e238404f5c0d20aaa04af459dc5d",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/source-snapshot-original.json"
+    },
+    "historical-preparation/yunshan-coherent09-compiled-validation-ready-01/static-rebind-comparison.json": {
+      "bytes": 2464,
+      "sha256": "d575d4a4e58cc63fbf1003b2f191e98f3321d23adeb19f73f93044e29783fcfe",
+      "originalPath": "/tmp/yunshan-coherent09-compiled-validation-ready-01/static-rebind-comparison.json"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/README.md": {
+      "bytes": 5080,
+      "sha256": "c2c100e58eb548a409e9446596d4b6a7c5db5b3c928b5f2ca6db318c4604a2f1",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/README.md"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs": {
+      "bytes": 30653,
+      "sha256": "cd7c4d616753d2c74233ca7afdc761760cfc0b4fba4096f758d22ea5cc0c95d5",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser-test-original.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs": {
+      "bytes": 3980,
+      "sha256": "4cc610aecb1de600382b137872b649e66a5bf0fcf4306cc18224877a56d1a748",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/home-plan-readonly.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs": {
+      "bytes": 29989,
+      "sha256": "e9c734eefbfe335fbf492d09d4bc30806354407cddb7cdd61a574bca235b07e2",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/native-home-rest.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/preparation-index.json": {
+      "bytes": 3255,
+      "sha256": "7fdfdaf2ad67e0bd5a3be69be4f1fb0d223a43d7fcf17dc7fa63a6b2901c43c6",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/preparation-index.json"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/readiness.json": {
+      "bytes": 3815,
+      "sha256": "1340c9e0c95d3c016539b20c05c33c3c97e749ec66df3644ddb3039ce7266948",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/readiness.json"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs": {
+      "bytes": 9254,
+      "sha256": "38bac14bfa5185b707220170908be5dc1afb8b196ab940f6b619467bebd402d2",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs.node-check.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs.node-check.stderr"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs.node-check.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/run-browser11.mjs.node-check.stdout"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/source-contract.json": {
+      "bytes": 24558,
+      "sha256": "00cb54f6ec6294a1f9eb8caaf6fe184873acfd4e481e8f918df64699a6d1b948",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/source-contract.json"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/source-snapshot-original.json": {
+      "bytes": 21936,
+      "sha256": "5991bab08a2e09ba96b15e991849c6ae22e8a043556eb67d93bf43224991f926",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/source-snapshot-original.json"
+    },
+    "historical-preparation/yunshan-coherent10-compiled-validation-ready-01/static-rebind-comparison.json": {
+      "bytes": 841,
+      "sha256": "090ca7dd2755aadb0c8acb0feb195a67abac0b38e4e2b68d0cce5b27277adf63",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/static-rebind-comparison.json"
+    },
+    "historical-coherent10-browser-first-failure/browser-results.json": {
+      "bytes": 1522,
+      "sha256": "79c6a5b3a9b50e8491b06616e208e035272fa6b3d3100d46838319d8d029ae58",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/browser-results.json"
+    },
+    "historical-coherent10-browser-first-failure/browser.log": {
+      "bytes": 203,
+      "sha256": "c108b138f56641e6ed3dd32353192990d63a37ffc0635c9b92e8c21466017f4a",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/browser.log"
+    },
+    "historical-coherent10-browser-first-failure/run-manifest.json": {
+      "bytes": 44305,
+      "sha256": "d386be16dcbff4c26572b1b8d0600e9aa59cf4688ee4cd170108db746f1aa902",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/run-manifest.json"
+    },
+    "historical-coherent10-browser-first-failure/run-start.json": {
+      "bytes": 22216,
+      "sha256": "6f6fb80a9dabed259c5d002c619bd32b5939f5f09287dc40f79cc371c414feb7",
+      "originalPath": "/tmp/yunshan-coherent10-compiled-validation-ready-01/browser11-evidence/run-start.json"
+    },
+    "readout/native-first-waypoint-readout.json": {
+      "bytes": 2937,
+      "sha256": "9463da521af0d2e9224e6f15becce0e2c7a1daf6facaa841da9dea1ea1054d32",
+      "originalPath": "Generated solely from preserved original run and frozen source; no rerun"
+    },
+    "README.md": {
+      "bytes": 3105,
+      "sha256": "db0b05149b5bb0f6debd1cb531fd7fdc8c226bb61599b03ee831c350baf0c36e",
+      "originalPath": "New delivery scope report"
+    },
+    "reproduction/package-originals.py": {
+      "bytes": 12183,
+      "sha256": "0dda6cfb29d2122fc0439adf8ca228f1caa4004cd94936e69ff885748d9bf72e",
+      "originalPath": "/tmp/yunshan-coherent12-compiled-validation-ready-01/package-originals.py"
+    }
+  }
+}

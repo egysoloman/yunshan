@@ -1,0 +1,21 @@
+{
+  "status": "PASS_STATIC_SEAL_VERIFICATION",
+  "utc": "2026-10-04T11:58:27.658971+00:00",
+  "sourceInputCount": 264,
+  "productionSourceCount": 60,
+  "all264SourceInputHashesStillMatchAsRead": true,
+  "originalReferences": 107,
+  "allPreservedReferenceCopiesMatchAsReadHashes": true,
+  "currentExternalDocumentDrift": [
+    {
+      "path": "/workspace/yunshan/开发备忘录.md",
+      "asReadSHA256": "6d35986d11de1a814e5c1cc0ee3cd964b7d8135fb07118d60f739c15d422e51f",
+      "currentSHA256": "eb2da47daf7df433c59fc697e8c562ff93f8995d0397f0408eb91ab0d28e9e29"
+    }
+  ],
+  "externalDocumentDriftExplanation": "Parent may update shared memorandum after complete read. This closed group preserves the earlier exact as-read memorandum; it is not overwritten or relabeled. No production input drift.",
+  "newRuntimeTestBuildGPUScope": 0,
+  "productionOrSharedDocumentEdits": 0,
+  "original264AuditOverall": "FAIL",
+  "future267EvidenceUsed": false
+}

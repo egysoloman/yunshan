@@ -1,0 +1,210 @@
+{
+  "status": "NOT_RUN_IN_CHILD; parent owns serial GPU execution",
+  "comparison": {
+    "baseline_source": "/workspace/yunshan-work/ROOT17-visual-city-20261005-01/baseline-source",
+    "baseline_source_inputs": 325,
+    "baseline_graph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+    "candidate_source": "/workspace/yunshan-work/ROOT17-visual-city-20261005-01/candidate02-source",
+    "candidate_source_inputs": 327,
+    "candidate_graph": "20b3d603c2a71e36cf0c29a5196e672b10a43b4bd9b2a7fd5c6249e04cc96306",
+    "world_seed": 20261001,
+    "expected_exact_world_sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "viewport": [
+      1440,
+      900
+    ],
+    "pixelRatio": 1,
+    "cameraFov": 48,
+    "quality": "balanced",
+    "birth_body": {
+      "x": -330,
+      "y": 51.5375,
+      "z": 487
+    },
+    "must_not_reframe_birth": true
+  },
+  "required_shots": [
+    {
+      "name": "native-birth-original",
+      "scope": "New ordinary session at exact existing spawn/yaw. Capture full UI. No body/focus/yaw injection. Own F/key pause or same setTime fixture must be separately declared."
+    },
+    {
+      "name": "native-birth-old-day15.5",
+      "scope": "Original ROOT15 day camera at spawn; manual setTime15.5/pause is a disclosed temporal fixture, not new natural elapsed journey. Do not remove canopy, pylon or bridge."
+    },
+    {
+      "name": "native-walk-leave-station",
+      "scope": "Use actual mouse drag and W/key pulses, record keydown/up timestamps and continuous controller walkingPosition; never direct body placement or accumulated motor dt. Capture failed/blocked exit, too."
+    },
+    {
+      "name": "controlled-original-interior",
+      "scope": "Retain ROOT15 first market river-b1, setTime12, disclosed door+2m controlled fixture and actual E. Same camera; not spawn-to-store journey."
+    }
+  ],
+  "unchanged_fixed_optics": [
+    {
+      "name": "overview-day",
+      "hour": 15.5,
+      "eye": [
+        1780,
+        1040,
+        2040
+      ],
+      "target": [
+        0,
+        180,
+        0
+      ]
+    },
+    {
+      "name": "core-waterfall",
+      "hour": 12,
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ]
+    },
+    {
+      "name": "market-street",
+      "hour": 12,
+      "district": "market",
+      "kind": "market",
+      "street": true
+    },
+    {
+      "name": "residential-first-person",
+      "hour": 12,
+      "district": "west",
+      "kind": "home",
+      "street": true
+    },
+    {
+      "name": "bridge-structure",
+      "hour": 12,
+      "network": "bridge",
+      "preserve_old_obstructed_camera": true
+    },
+    {
+      "name": "bridge-public-road",
+      "hour": 12,
+      "eye": [
+        -664,
+        20.32,
+        1052
+      ],
+      "target": [
+        -638,
+        23,
+        1040
+      ]
+    }
+  ],
+  "additional_semantic_inspection": [
+    {
+      "name": "commercial-window",
+      "buildingId": "market-b6",
+      "scope": "Disclosed supported public-ground optical fixture; actual original40-floor tower, no traveller upper-floor ACL grant."
+    },
+    {
+      "name": "home-bed-linen",
+      "scope": "At actual bed/bed-side supported public or rented room; validate original lease/ACL first or explicitly controlled optical fixture; no new sofa/monitor claim."
+    },
+    {
+      "name": "station-name-board",
+      "nodeId": "market-station",
+      "scope": "Original actual post faces, four boards; inspect scene group budget and actual signal/connections."
+    }
+  ],
+  "assertions": [
+    "Loaded entry SHA matches frozen dist; source327 unchanged before/after",
+    "World bytes match exact baseline SHA, no paid assets or external requests",
+    "shader/page/GL errors include all compilation/link logs; any error FAIL",
+    "Original existing canopy/pylon/bridge remain visible in failing birth screenshot",
+    "Render-only before/after exportSave equal for the explicitly paused inspection, excluding separately disclosed temporal fixture changes",
+    "Controller on-foot native path input/position trace retained, not replaced with fixed optics",
+    "StationWayfinding group budgets <=8stations/8textures/32boards; current exact IDs and visible labels logged",
+    "Resident/draw triangles and textures reported as diagnostic counts, not macOS FPS",
+    "Old HUD/aircraft use remains city-first; no independent mode added"
+  ],
+  "overall_art_boundary": "Until root sees final birth/street/interior images versus all five references, ART remains FAIL; shader correctness and six pretty cameras alone do not reach reference quality.",
+  "driver_execution": {
+    "baseline_build_cap_seconds": 180,
+    "each_gpu_cap_seconds": 900,
+    "ports": {
+      "baseline325": 4395,
+      "candidate327": 4397
+    },
+    "estimated_wall_seconds_each": [
+      180,
+      480
+    ],
+    "estimated_artifact_bytes_each": [
+      30000000,
+      150000000
+    ],
+    "fresh_browser_context": true,
+    "no_native_birth_body_yaw_focus_injection": true,
+    "native_walk": {
+      "edgeId": "road-river-station-market-station",
+      "waypoints": [
+        [
+          -328,
+          51.2,
+          496
+        ],
+        [
+          -336,
+          50.8,
+          496
+        ],
+        [
+          -336,
+          50.2,
+          512
+        ],
+        [
+          -344,
+          50,
+          512
+        ],
+        [
+          -344,
+          49.6,
+          520
+        ]
+      ],
+      "arrival_metres": 1.8,
+      "maximum_real_w_seconds_each_waypoint": 12,
+      "exit_criterion": "All frozen original public-road waypoints reached by actual mouse drag/W; final z>=518.2 and displacement>=25m. Record blocked/native FAIL without moving body."
+    },
+    "candidate_entry": "/assets/index-BXxxqB-J.js",
+    "candidate_entry_sha256": "deb5c1b61f460c840efba51306c7db53d453f8b1bf0d9e17446e86be3819f944",
+    "ui_hidden_only_controlled_optics": true,
+    "controller_override_only_controlled_optics": "stepWalkingFrame temporarily no-op to keep explicitly controlled render-only cameras stable; restored in cleanup. Native birth/W unchanged. Focus remains original walking body; never optical eye.",
+    "baseline_build_receipt": "/tmp/ROOT17-visual-baseline-build-20261005-01/receipt.json",
+    "baseline_dist_sha256": {
+      "assets/index-CDI-dshj.js": "7578a56edf196390bd823bf90e71a57fb435824a6079ff17f2817c609fb9f2c1",
+      "assets/index-CDI-dshj.js.map": "a4a41eaaf17bba3ce30a4bc8cbcee5ef29f827ba6b4916afad9b967d4d64dbcc",
+      "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+      "assets/three-vwNga81B.js.map": "612b8aba285d7c525c87cb5b5c6dc6b5ba220deb6d65288a8f028da4f5df1055",
+      "favicon.svg": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "index.html": "6a7f3b39cdd46ac8d270c3f583f70309f3c673777c4bd698d1518257c28030e7"
+    }
+  },
+  "extra_shot_names": [
+    "native-birth-old-night22",
+    "commercial-window",
+    "home-bed-linen",
+    "home-window-curtain-gap",
+    "station-name-board",
+    "station-name-board-near"
+  ],
+  "curtain_scope": "Existing window inspection only. No curtain model presently exists; report missing, never claim functioning curtains."
+}

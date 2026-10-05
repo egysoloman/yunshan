@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "at": "2026-10-04T15:21:37.045908+00:00",
+  "scope": "every regular source freshly SHA-read; identical byte content reuses complete literal scan; recursive gzip/zip recognized by magic; no semantic or antivirus claim",
+  "patternKinds": [
+    "tripo-secret-shape",
+    "github-personal-token-shape",
+    "github-classic-token-shape",
+    "aws-access-key-shape",
+    "openai-secret-shape",
+    "bearer-literal-shape",
+    "private-key-block",
+    "credential-json-literal",
+    "signed-or-tokenized-url"
+  ],
+  "statistics": {
+    "regularFilesCoveredWithFreshSHA256": 788,
+    "uniqueRegularContentsScanned": 435,
+    "regularContentReuseCount": 353,
+    "uniqueByteContentsScannedIncludingNested": 457,
+    "nestedContentReuseCount": 0,
+    "gzipContainersExpanded": 22,
+    "zipContainersExpanded": 0,
+    "expandedZipMembersCovered": 0,
+    "scannedBytes": 108710768
+  },
+  "findingCount": 0,
+  "findings": [],
+  "sensitiveValuesPrinted": false,
+  "originalFilesModified": false
+}

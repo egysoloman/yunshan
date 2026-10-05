@@ -1,0 +1,985 @@
+{
+  "status": "READ_ONLY_REMAINING_FIVE_NOT_SERVED",
+  "generatedAt": "2026-10-05T00:40:43.627006+00:00",
+  "simulationConstructionCount": 0,
+  "simulationStepCount": 0,
+  "input": {
+    "savePath": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts/complete-one-patient.after24.save.json",
+    "saveSHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+    "worldPath": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/inherited-originals/origins/world.json",
+    "worldSHA256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+    "clock": 14080,
+    "dayIndex": 9,
+    "hour": 18.666666666666668,
+    "tick": 3400
+  },
+  "worldScope": {
+    "kind": "original customized civic world inherited byteexact from ROOT15",
+    "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/origins/world.json",
+    "buildings": 47,
+    "nodes": 47,
+    "edges": 36,
+    "npcCount": 616,
+    "roadComponents": 11,
+    "clinicComponent": 0,
+    "localHomeComponentNpcCount": 56
+  },
+  "healthOrder": {
+    "id": "service-2",
+    "state": "active",
+    "targetUnits": 6,
+    "servedIds": [
+      "player"
+    ],
+    "notServedCapacity": 5,
+    "requiredMinutes": 20,
+    "spent": 40,
+    "received": 4.421864795686247,
+    "consumed": 1,
+    "held": 3.421864795686247,
+    "missingForAllFive": 1.578135204313753,
+    "currentlyWholeAdditionalPatientsMaterialAllows": 3
+  },
+  "gates": {
+    "naturalOffer": "chooseFacility health<65, alive age>=6; hunger>=35/fatigue>=25, unserved active service, finite walkingTree; score competes with work, education, food, rest. Passing is only an offer, not actual choice/arrival.",
+    "actualPatient": "readersAt alive age>=6, real public supported/use point and no current civic reservation, hunger>=40/fatigue>=35, health<95/cooldown, not concurrent doctor. Actual doctor/patient same supported public service point plus current funded clinical minutes.",
+    "serviceTime": "[08:00,17:00); terminal18:40 is closed; actual future patient+doctor overlapping20minutes required.",
+    "V2Approval": "two active local council terms, actual same hall supported work point, hunger>=40/fatigue>=35/adult/alive/health>=45 and positive same-frame canonical core wage windows; current money or yesterday paid source is insufficient."
+  },
+  "patientCounts": {
+    "globalHealthBelow65": 3,
+    "localHealthBelow65": 3,
+    "localNaturalOfferNeedsEligible": 2,
+    "localBelow65ActualNeedsEligible": 1,
+    "localBelow95ActualNeedsEligibleBeforePresenceAndStaffExclusion": 19,
+    "localNeeds35Fatigue25": 23
+  },
+  "allHealthBelow65Npc": [
+    {
+      "id": "citizen-0",
+      "role": "学生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-school",
+      "homeRoadComponent": 0,
+      "state": "attendingService",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "destinationId": "civic-0-school",
+      "activity": "service",
+      "decisionAt": 14113.117294597905,
+      "money": 47.260288329079685,
+      "carryFood": 0,
+      "alive": true,
+      "age": 20.025875190253544,
+      "health": 63.91927090579553,
+      "hunger": 96.39999999999995,
+      "fatigue": 76.1999999999999,
+      "naturalHealthOfferNeeds": true,
+      "actualPatientNeedsAndCooldown": true,
+      "currentAtClinic": false,
+      "actualFutureClinicArrival": "NOT_OBSERVED",
+      "pendingNeeds": []
+    },
+    {
+      "id": "citizen-418",
+      "role": "官员",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-hall",
+      "homeRoadComponent": 0,
+      "state": "moving",
+      "position": {
+        "x": -51.94159381795458,
+        "y": 0.6,
+        "z": -40
+      },
+      "destinationId": "civic-0-school",
+      "activity": "service",
+      "decisionAt": 14090.249149259878,
+      "money": 614.2439409304776,
+      "carryFood": 0,
+      "alive": true,
+      "age": 33.025875190253544,
+      "health": 64.41607090579556,
+      "hunger": 38.199999999999804,
+      "fatigue": 78.15999999999991,
+      "naturalHealthOfferNeeds": true,
+      "actualPatientNeedsAndCooldown": false,
+      "currentAtClinic": false,
+      "actualFutureClinicArrival": "NOT_OBSERVED",
+      "pendingNeeds": [
+        "actual finite food/meal required before h40 care gate"
+      ]
+    },
+    {
+      "id": "citizen-495",
+      "role": "老师",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-school",
+      "homeRoadComponent": 0,
+      "state": "studying",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "destinationId": "civic-0-school",
+      "activity": "study",
+      "decisionAt": 14081.203293622704,
+      "money": 467.0191672444354,
+      "carryFood": 0,
+      "alive": true,
+      "age": 20.025875190253544,
+      "health": 64.24967090579563,
+      "hunger": 0,
+      "fatigue": 76.4799999999999,
+      "naturalHealthOfferNeeds": false,
+      "actualPatientNeedsAndCooldown": false,
+      "currentAtClinic": false,
+      "actualFutureClinicArrival": "NOT_OBSERVED",
+      "pendingNeeds": [
+        "actual finite food/meal required before h40 care gate"
+      ]
+    }
+  ],
+  "doctors": [
+    {
+      "id": "citizen-44",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14117.113067087252,
+      "money": 805.5254791774674,
+      "carryFood": 0,
+      "alive": true,
+      "age": 64.0258751902777,
+      "health": 76.13877490579559,
+      "hunger": 44.19999999999922,
+      "fatigue": 79.49513325438501,
+      "currentDayAssignment": {
+        "citizenId": "citizen-44",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 478.99248899720766
+      },
+      "currentDayRemainingMinutes": 1.0075110027923415,
+      "nextDayAssignment": {
+        "citizenId": "citizen-44",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": true,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 4.199999999999221,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-110",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "moving",
+      "position": {
+        "x": 0,
+        "y": 0.6,
+        "z": 5.599999999999984
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14112.1727438136,
+      "money": 603.7104263773996,
+      "carryFood": 0,
+      "alive": true,
+      "age": 40.025875190253544,
+      "health": 79.31827223951558,
+      "hunger": 0,
+      "fatigue": 73.39999999999989,
+      "currentDayAssignment": {
+        "citizenId": "citizen-110",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 438.99248899720766
+      },
+      "currentDayRemainingMinutes": 41.00751100279234,
+      "nextDayAssignment": {
+        "citizenId": "citizen-110",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-176",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "moving",
+      "position": {
+        "x": -21.60000000000002,
+        "y": 0.6,
+        "z": -40
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14112.774221596774,
+      "money": 545.2765195960644,
+      "carryFood": 0,
+      "alive": true,
+      "age": 61.025875190253544,
+      "health": 69.11367090579563,
+      "hunger": 0,
+      "fatigue": 76.3399999999999,
+      "currentDayAssignment": {
+        "citizenId": "citizen-176",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 303.32934269579243
+      },
+      "currentDayRemainingMinutes": 176.67065730420757,
+      "nextDayAssignment": {
+        "citizenId": "citizen-176",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-308",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": -2,
+        "y": 0.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14088.720355082303,
+      "money": 609.6017640903178,
+      "carryFood": 0,
+      "alive": true,
+      "age": 58.025875190253544,
+      "health": 74.65847090579548,
+      "hunger": 0,
+      "fatigue": 75.1542857142856,
+      "currentDayAssignment": {
+        "citizenId": "citizen-308",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 345.0570051262399
+      },
+      "currentDayRemainingMinutes": 134.94299487376009,
+      "nextDayAssignment": {
+        "citizenId": "citizen-308",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-374",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14116.392721867654,
+      "money": 671.5070668400741,
+      "carryFood": 0,
+      "alive": true,
+      "age": 34.025875190253544,
+      "health": 83.42250705043422,
+      "hunger": 0,
+      "fatigue": 82.58941896867076,
+      "currentDayAssignment": {
+        "citizenId": "citizen-374",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 211.57081091403856
+      },
+      "currentDayRemainingMinutes": 268.4291890859614,
+      "nextDayAssignment": {
+        "citizenId": "citizen-374",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-440",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": 2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14102.801667087013,
+      "money": 500.70157966864787,
+      "carryFood": 0,
+      "alive": true,
+      "age": 55.025875190253544,
+      "health": 72.06007090579554,
+      "hunger": 0,
+      "fatigue": 82.03204544226745,
+      "currentDayAssignment": {
+        "citizenId": "citizen-440",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDayRemainingMinutes": 480,
+      "nextDayAssignment": {
+        "citizenId": "citizen-440",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-506",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "moving",
+      "position": {
+        "x": -38.40000000000002,
+        "y": 0.6,
+        "z": -40
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14107.798613172723,
+      "money": 774.8797900617558,
+      "carryFood": 0,
+      "alive": true,
+      "age": 31.025875190253544,
+      "health": 72.74055690620015,
+      "hunger": 0,
+      "fatigue": 73.53999999999989,
+      "currentDayAssignment": {
+        "citizenId": "citizen-506",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 363.37344137816007
+      },
+      "currentDayRemainingMinutes": 116.62655862183993,
+      "nextDayAssignment": {
+        "citizenId": "citizen-506",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    },
+    {
+      "id": "citizen-572",
+      "role": "医生",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-clinic",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": -1,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14111.844565499341,
+      "money": 657.6300444998883,
+      "carryFood": 0,
+      "alive": true,
+      "age": 52.025875190253544,
+      "health": 72.7016709057955,
+      "hunger": 0,
+      "fatigue": 78.51548293242213,
+      "currentDayAssignment": {
+        "citizenId": "citizen-572",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 318.80201280673145
+      },
+      "currentDayRemainingMinutes": 161.19798719326855,
+      "nextDayAssignment": {
+        "citizenId": "citizen-572",
+        "workId": "civic-0-clinic",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentDoctorBodyNeeds": false,
+      "currentWorkingAtClinic": false,
+      "currentCanonicalWageFrame": "NOT_PRESENT_IN_NATIVE_SAVE; never inferred from cumulative pay",
+      "nextOpenHungerWithoutNewMealProjection": 0,
+      "projectionScope": "Pure no-new-meal constant-decay calculation, not simulated forecast; future meals, labor, decisions and station arrival unobserved"
+    }
+  ],
+  "nextClinicOpenClock": 14880,
+  "publicBudgetSnapshot": {
+    "source": "Literal reproduction of source/src/simulation.ts publicBudgetSnapshot/reservedPublicShifts + public-employment.ts publicTransferReserved; zeroSim",
+    "cash": 22866.702652186297,
+    "publicWagesDue": 0,
+    "publicWagesEarned": 337.8369453615317,
+    "forecastPayroll": 10906.237439999997,
+    "reservedPayroll": 11329.673229156917,
+    "essentialOperations": 4224.96,
+    "reserve": 15892.47017451845,
+    "authorizedRemaining": 20,
+    "available": 6954.232477667847,
+    "currentOpenBudgets": [
+      {
+        "id": "service-2",
+        "siteId": "civic-0-clinic",
+        "purpose": "health",
+        "cap": 40,
+        "approvedAt": 7788,
+        "approvedBy": [
+          "citizen-22",
+          "citizen-88"
+        ],
+        "spent": 40,
+        "closedAt": null,
+        "signatures": [
+          {
+            "actorId": "citizen-22",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 7788
+          },
+          {
+            "actorId": "citizen-88",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 7788
+          }
+        ]
+      },
+      {
+        "id": "service-3",
+        "siteId": "civic-0-school",
+        "purpose": "education",
+        "cap": 40,
+        "approvedAt": 8196,
+        "approvedBy": [
+          "citizen-22",
+          "citizen-88"
+        ],
+        "spent": 40,
+        "closedAt": null,
+        "signatures": [
+          {
+            "actorId": "citizen-22",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 8196
+          },
+          {
+            "actorId": "citizen-88",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 8196
+          }
+        ]
+      },
+      {
+        "id": "hygiene-demand-1",
+        "siteId": "civic-0-clinic",
+        "purpose": "hygiene-disinfection",
+        "cap": 20,
+        "approvedAt": 13832,
+        "approvedBy": [
+          "citizen-22",
+          "citizen-88"
+        ],
+        "spent": 0,
+        "closedAt": null,
+        "signatures": [
+          {
+            "actorId": "citizen-22",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 13832
+          },
+          {
+            "actorId": "citizen-88",
+            "role": "official",
+            "siteId": "civic-0-hall",
+            "signedAt": 13832
+          }
+        ]
+      }
+    ],
+    "meaning": "Cash can back the pending 14+13 caps at this snapshot; money alone creates neither current paid council source nor finite materials."
+  },
+  "currentLocalCouncil": [
+    {
+      "id": "citizen-22",
+      "role": "官员",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-hall",
+      "homeRoadComponent": 0,
+      "state": "atHome",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "destinationId": "civic-0-home",
+      "activity": "rest",
+      "decisionAt": 14111.589109270135,
+      "money": 539.2048983421366,
+      "carryFood": 0,
+      "alive": true,
+      "age": 42.025875190253544,
+      "health": 75.04087090579544,
+      "hunger": 29.19999999999973,
+      "fatigue": 80.33708907690709,
+      "term": {
+        "id": "civic-term-1",
+        "actorId": "citizen-22",
+        "officeId": "civic-0-hall",
+        "districtId": "civic-0",
+        "baseRole": "官员",
+        "enablementId": "civic-new-20261004-6de6b060",
+        "pollId": "civic-poll-1",
+        "proofId": "civic-proof-1",
+        "startsAt": 3460,
+        "endsAt": 23620,
+        "endedAt": null,
+        "endedTick": null,
+        "endedReason": ""
+      },
+      "currentDayAssignment": {
+        "citizenId": "citizen-22",
+        "workId": "civic-0-hall",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 468
+      },
+      "nextDayAssignment": {
+        "citizenId": "citizen-22",
+        "workId": "civic-0-hall",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentSignatureEligibility": false,
+      "currentBlockers": [
+        "hunger<40",
+        "not working at hall",
+        "no current same-frame canonical paid source"
+      ]
+    },
+    {
+      "id": "citizen-418",
+      "role": "官员",
+      "homeId": "civic-0-home",
+      "workId": "civic-0-hall",
+      "homeRoadComponent": 0,
+      "state": "moving",
+      "position": {
+        "x": -51.94159381795458,
+        "y": 0.6,
+        "z": -40
+      },
+      "destinationId": "civic-0-school",
+      "activity": "service",
+      "decisionAt": 14090.249149259878,
+      "money": 614.2439409304776,
+      "carryFood": 0,
+      "alive": true,
+      "age": 33.025875190253544,
+      "health": 64.41607090579556,
+      "hunger": 38.199999999999804,
+      "fatigue": 78.15999999999991,
+      "term": {
+        "id": "civic-term-12",
+        "actorId": "citizen-418",
+        "officeId": "civic-0-hall",
+        "districtId": "civic-0",
+        "baseRole": "官员",
+        "enablementId": "civic-new-20261004-6de6b060",
+        "pollId": "civic-poll-12",
+        "proofId": "civic-proof-224",
+        "startsAt": 6344,
+        "endsAt": 26504,
+        "endedAt": null,
+        "endedTick": null,
+        "endedReason": ""
+      },
+      "currentDayAssignment": {
+        "citizenId": "citizen-418",
+        "workId": "civic-0-hall",
+        "ratePerMinute": 0.09683599999999978,
+        "minutesCap": 480,
+        "workedMinutes": 411.3935810377461
+      },
+      "nextDayAssignment": {
+        "citizenId": "citizen-418",
+        "workId": "civic-0-hall",
+        "ratePerMinute": 0.09624933333333306,
+        "minutesCap": 480,
+        "workedMinutes": 0
+      },
+      "currentSignatureEligibility": false,
+      "currentBlockers": [
+        "hunger<40",
+        "not working at hall",
+        "no current same-frame canonical paid source"
+      ]
+    }
+  ],
+  "pendingSupplementalRequests": [
+    {
+      "signatureVersion": 2,
+      "id": "service-2-supplement-1",
+      "orderId": "service-2",
+      "requestedAt": 13864,
+      "missingUnits": 1.578135204313753,
+      "receivedAtRequest": 4.421864795686247,
+      "baseSpentAtRequest": 40,
+      "quoteLots": [
+        {
+          "shopId": "shop-civic-0-workshop",
+          "quantity": 0.23230179391362382,
+          "unitPrice": 8.51
+        }
+      ],
+      "quotedGross": 1.9768882662049387,
+      "cap": 14,
+      "approvedAt": null,
+      "signatures": [],
+      "spent": 0,
+      "receiptIds": [],
+      "closedAt": null,
+      "remainingNeedQuote": {
+        "version": 1,
+        "policyId": "authorized-service-materials-v1",
+        "requiredUnits": 1.578135204313753,
+        "unitPrice": 8.51,
+        "gross": 13.429930588710038
+      }
+    },
+    {
+      "signatureVersion": 2,
+      "id": "service-3-supplement-1",
+      "orderId": "service-3",
+      "requestedAt": 13912,
+      "missingUnits": 1.514226465294187,
+      "receivedAtRequest": 4.485773534705813,
+      "baseSpentAtRequest": 40,
+      "quoteLots": [
+        {
+          "shopId": "shop-civic-0-workshop",
+          "quantity": 0.6608055478480536,
+          "unitPrice": 8.16
+        }
+      ],
+      "quotedGross": 5.392173270440117,
+      "cap": 13,
+      "approvedAt": null,
+      "signatures": [],
+      "spent": 0,
+      "receiptIds": [],
+      "closedAt": null,
+      "remainingNeedQuote": {
+        "version": 1,
+        "policyId": "authorized-service-materials-v1",
+        "requiredUnits": 1.514226465294187,
+        "unitPrice": 8.16,
+        "gross": 12.356087956800566
+      }
+    }
+  ],
+  "finiteMaterialSuppliers": [
+    {
+      "shop": {
+        "id": "shop-civic-0-workshop",
+        "buildingId": "civic-0-workshop",
+        "districtId": "civic-0",
+        "inventory": 0,
+        "price": 17.962038491099175,
+        "revenue": 2066.4071657858394,
+        "profit": 365.91162227448774,
+        "customers": 0,
+        "open": true,
+        "employees": 8,
+        "ownerId": "citizen-55",
+        "cash": 344.00239866603016
+      },
+      "actualOperatingFunds": 344.00239866603016,
+      "fundSource": "shop.cash",
+      "earnedPayrollDebt": 15.017807999999961,
+      "currentDayCommittedPayroll": 169.37736706102598,
+      "lifecycleProtectedFunds": 0,
+      "owner": {
+        "id": "citizen-55",
+        "role": "工人",
+        "homeId": "civic-0-home",
+        "workId": "civic-0-workshop",
+        "homeRoadComponent": 0,
+        "state": "moving",
+        "position": {
+          "x": -1.5999999999999872,
+          "y": 0.6,
+          "z": -40
+        },
+        "destinationId": "civic-0-home",
+        "activity": "rest",
+        "decisionAt": 14113.212550744647,
+        "money": 532.1906675134547,
+        "carryFood": 0,
+        "alive": true,
+        "age": 30.025875190253544,
+        "health": 78.96281694230296,
+        "hunger": 24.199999999999363,
+        "fatigue": 74.0999999999999
+      },
+      "currentPlanDay": 9,
+      "remainingAssignments": [
+        {
+          "citizenId": "citizen-55",
+          "remaining": 56,
+          "hunger": 24.199999999999363,
+          "fatigue": 74.0999999999999,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-187",
+          "remaining": 328.3604508075251,
+          "hunger": 0,
+          "fatigue": 85.19428571428568,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-253",
+          "remaining": 179.66711483529753,
+          "hunger": 0,
+          "fatigue": 77.31999999999991,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-319",
+          "remaining": 187.6190476190476,
+          "hunger": 28.59999999999973,
+          "fatigue": 78.26285714285706,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-385",
+          "remaining": 195.1412411316121,
+          "hunger": 0,
+          "fatigue": 76.7599999999999,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-451",
+          "remaining": 210.70722288012428,
+          "hunger": 0,
+          "fatigue": 80.00084754009931,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-517",
+          "remaining": 298.5453149001536,
+          "hunger": 0,
+          "fatigue": 76.7599999999999,
+          "carryFood": 0
+        },
+        {
+          "citizenId": "citizen-583",
+          "remaining": 303.395423061068,
+          "hunger": 0,
+          "fatigue": 80.41685502306446,
+          "carryFood": 0
+        }
+      ],
+      "nextDayPlan": "ABSENT; original owner onsite cash-backed review needed",
+      "currentFiniteMaterialQuoteUnits": 0,
+      "earnedShopLaborBankMinutes": 0,
+      "districtEnergy": 38.74981445312884
+    }
+  ],
+  "localFoodShops": [
+    {
+      "id": "shop-civic-0-market",
+      "buildingId": "civic-0-market",
+      "districtId": "civic-0",
+      "inventory": 0,
+      "price": 17.995426013297944,
+      "revenue": 5397.569478838209,
+      "profit": -228.8515375359998,
+      "customers": 0,
+      "open": true,
+      "employees": 9,
+      "ownerId": "citizen-66",
+      "cash": 203.23668203163655
+    },
+    {
+      "id": "shop-civic-0-farm",
+      "buildingId": "civic-0-farm",
+      "districtId": "civic-0",
+      "inventory": 0.29309153357644635,
+      "price": 18.010454977770316,
+      "revenue": 4798.224806881959,
+      "profit": 1872.1854051043692,
+      "customers": 0,
+      "open": true,
+      "employees": 9,
+      "ownerId": "citizen-11",
+      "cash": 0
+    }
+  ],
+  "currentLocalNpcCarryFood": 4,
+  "currentLocalNpcCarryFoodHolders": [
+    {
+      "id": "citizen-209",
+      "food": 1,
+      "hunger": 83.19999999999976
+    },
+    {
+      "id": "citizen-220",
+      "food": 1,
+      "hunger": 93.3999999999999
+    },
+    {
+      "id": "citizen-275",
+      "food": 1,
+      "hunger": 79.59999999999971
+    },
+    {
+      "id": "citizen-473",
+      "food": 1,
+      "hunger": 74.19999999999963
+    }
+  ],
+  "currentPlayerCarryFood": 3,
+  "educationCompetingOriginalOrder": {
+    "id": "service-3",
+    "state": "active",
+    "targetUnits": 6,
+    "servedIds": [],
+    "serviceMinutes": {},
+    "staffIds": [],
+    "requiredMinutes": 60,
+    "receivedUnits": 4.485773534705813
+  },
+  "hygieneOutstanding": [
+    {
+      "id": "hygiene-demand-1",
+      "batchId": "waste-1",
+      "siteId": "civic-0-clinic",
+      "reporterId": "citizen-44",
+      "reporterRole": "医生",
+      "reporterAge": 64.02540334857264,
+      "reportedAt": 13832,
+      "observedGeneratedUnits": 1,
+      "observedContaminatedUnits": 1,
+      "observedReservedUnits": 0,
+      "reportWorkWindows": [
+        {
+          "start": 13828,
+          "end": 13832
+        }
+      ],
+      "state": "awaitingSupply",
+      "approvedAt": 13832,
+      "approvedBy": [
+        "citizen-22",
+        "citizen-88"
+      ],
+      "authorizedCap": 20,
+      "spent": 0,
+      "receipt": null,
+      "jobId": null,
+      "retryAt": 14136,
+      "closedAt": null,
+      "reason": "等候一整份真实工业库存与受保护的公共现金；没有免费或部分拼造材料。"
+    }
+  ],
+  "nextActualMissingEvidence": [
+    "True finite food and lawful contact/eat for doctors, two local council members and workshop/farm owner; original13gift intervention does not certify tomorrow supply.",
+    "Actual current-day onsite private payroll approval and finite material production; workshopstock0 and local food .293 units are presently insufficient.",
+    "True current same-frame paid V2 council approval cap14, then at least1.578135204313753 additional finite materials without changing originalcap40/target6.",
+    "Actual eligible NPC future decision, legal route and clinic service station arrival; only citizen0 passes both low-health/needs today, not five observed patients.",
+    "Nextday actual funded doctor arrival and patient overlap20min each; signed future480 alone is not attendance or food.",
+    "Outstanding contaminated batch requires separate actual20cash/one whole cleaning material/10doctor minutes to sanitize; no completed sanitation here."
+  ],
+  "conclusion": "One player closed. Do not claim zero local low-health eligible candidates: citizen0 exists. Do not claim five patients or six fulfilled. No future Simulation, patient fabrication, source patch, fixture edit, additional budget or resources performed."
+}

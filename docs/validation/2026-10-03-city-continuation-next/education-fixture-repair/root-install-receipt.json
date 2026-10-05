@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-04T00:16:21.788610+00:00",
+  "testBeforeSHA256": "a3cac4042fbdfb9481bae992910efc870afbf4b08e8e2b5086fe81770ef667fe",
+  "testAfterSHA256": "4d942548b7d0924a2e7100ab277ecca380e9ccdf2b61139fb096aa5dd57ab718",
+  "patchSHA256": "06bde58c18e0cb669fa763ec87d3f1249641c45a533f9ad52b48172b74ad06c0",
+  "actualCause": "after original hearing a signer pinned at hall legitimately files NPC order2, player subsequently makes order3; 40-spent partial remains true",
+  "change": "only hearing-only signer controls return to original home; all original assertions and NPC filing production unchanged",
+  "noSkipOrFreeResources": true,
+  "root06FrozenUntouched": true,
+  "isolatedOriginal": "FAIL1",
+  "isolatedFixed": "PASS1",
+  "integratedGroup": "NOT_RUN"
+}

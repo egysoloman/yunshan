@@ -1,0 +1,606 @@
+{
+  "status": "CLOSED_FILE_MAP",
+  "manifestEnvelopeExclusions": [
+    "CLOSED.json",
+    "FILEMAP.json",
+    "FILES-SHA256.txt"
+  ],
+  "payloadFileCount": 119,
+  "files": [
+    {
+      "path": "DEFAULT-DISTRICT-SHOP-KINDS.json",
+      "bytes": 1474,
+      "sha256": "c9cf355945ca4a90c910fc557b4c397ba17564f170ea18f8883645b27fdb8801"
+    },
+    {
+      "path": "DEFAULT-MARKET-RESTART-SUPPLIERS.json",
+      "bytes": 137337,
+      "sha256": "7fa8a8928e563bb8284081b9a7cbb6a78b6a8406334ea3946b6654345f88f94e"
+    },
+    {
+      "path": "FACTS.json",
+      "bytes": 2417,
+      "sha256": "8e95c75103a962f750b3e066117bd97e79c74a95d94eeee8c827dca596ceef15"
+    },
+    {
+      "path": "FINAL-READ-ONLY-VERIFICATION.json",
+      "bytes": 949,
+      "sha256": "be5f4bc1eca6d41d9142db224dca65c3cf5219235d2157af8b6c6d0b93bd44f4"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 2125,
+      "sha256": "f2221a1f0cd7949d144835de9de0cc34ce2b1b9b71937a5dd73b9a33f180b1a0"
+    },
+    {
+      "path": "NARROW-SLICE-CONTRACT-PLAN.md",
+      "bytes": 9608,
+      "sha256": "f6d03b118899abe19ae3604e53332ac1ee7fd049ffca1ce2df84a70d02083786"
+    },
+    {
+      "path": "READ-ONLY-VERIFICATION.json",
+      "bytes": 58738,
+      "sha256": "13e2280d9fc94802db3a65dae821701993a7d40b75538bf212c2efecb38c2516"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 2718,
+      "sha256": "485ea3633240f5b501a13772ca507c7b8554b614aed9ffc7ef8fcf36d7a4f782"
+    },
+    {
+      "path": "REQUIREMENT-IMPLEMENTATION-VALIDATION-MATRIX.md",
+      "bytes": 12600,
+      "sha256": "247309d2ecb92360f27e96a11f332118aecb754dd8d1700db162e02f2625e96d"
+    },
+    {
+      "path": "SOURCE-REFERENCES.json",
+      "bytes": 60987,
+      "sha256": "bffd7f8a59021e0905b5f722672177f446cfdaafb3380438ec7a35ff5a4da400"
+    },
+    {
+      "path": "USER-REQUIREMENTS-AND-READ-COVERAGE.md",
+      "bytes": 2869,
+      "sha256": "d826aa218f0ab517abeb9f613a169933935a4a6663786d2b7286978735f17fbc"
+    },
+    {
+      "path": "collect-readonly.py",
+      "bytes": 8248,
+      "sha256": "79ce5a9ffe62d52a3dcdfa9dd8aedaafd2204b4ced621160378b88d573218ed6"
+    },
+    {
+      "path": "historical-reports/2026-10-03-city-continuation-next/REPORT.md",
+      "bytes": 13782,
+      "sha256": "51e463b15afabedf8c28761df9146af88a8f6dbda818216a0b38606e879dc024"
+    },
+    {
+      "path": "historical-reports/2026-10-03-dynamic-city-services/REPORT.md",
+      "bytes": 20120,
+      "sha256": "9919e1dca97d52ad20dd8e0c578073301d6bbf0071dcc6c0c30370ffff57daa1"
+    },
+    {
+      "path": "historical-reports/2026-10-03-road-repair/REPORT.md",
+      "bytes": 9671,
+      "sha256": "959db44c100c96b93bfd62dff091aa9f825eea952ec09abe47fb96a07f34cf37"
+    },
+    {
+      "path": "historical-reports/2026-10-04-city-life-root11/REPORT.md",
+      "bytes": 7874,
+      "sha256": "44dfd11d9dec292566a09037a69dcb2d78f72e35593e449d21461781b429db84"
+    },
+    {
+      "path": "historical-reports/2026-10-04-native-city-life/REPORT.md",
+      "bytes": 10181,
+      "sha256": "22d9d83889332da942ae6b2907e35e30c5cf0a7603eeac1fa5647267a11ad1da"
+    },
+    {
+      "path": "originals/CURRENT-FROZEN-INPUTS.json",
+      "bytes": 29666,
+      "sha256": "07e1a12191b51081a877216a892e4fb7136bc8a8d2e64859360c873df9baf94b"
+    },
+    {
+      "path": "originals/audit1-current01-raw.log",
+      "bytes": 3471,
+      "sha256": "2eb7316c50bcc0391034d013ed113c1ca310c5b5ff119b48b429ed0c7b5aeeab"
+    },
+    {
+      "path": "originals/audit1-current01-receipt.json",
+      "bytes": 989,
+      "sha256": "8bb9f4cba6fdae0ee206ee09e3faf025c83461c5652caf632d53fa289f0cf255"
+    },
+    {
+      "path": "originals/build01-receipt.json",
+      "bytes": 866,
+      "sha256": "cfb762376b5ed46325e838e9e3977bb0ef7b5ad2deadf2086899804f16b995ff"
+    },
+    {
+      "path": "originals/clinical-arrival01-receipt.json",
+      "bytes": 1004,
+      "sha256": "b895fbd9cc76e5bc97787ce6147a68fe879697e9d29a226d427f6c43465477f8"
+    },
+    {
+      "path": "originals/combined-rules01-receipt.json",
+      "bytes": 1156,
+      "sha256": "8f74b405d7bbed8b93747d81796a4dca2870f01fe23b3d009abb07820d337844"
+    },
+    {
+      "path": "originals/original-browser11-01-receipt.json",
+      "bytes": 1168,
+      "sha256": "496ad32060c2af76c19015d47b1f31c5a68874eafb0ba50e25cf22f7ecec932b"
+    },
+    {
+      "path": "originals/root11-current-one-day-audit-final.save.json",
+      "bytes": 2974315,
+      "sha256": "b0af5576bc587ed474d2a09f36e10f54a91666c5fef60ed6aa8929529dc20972"
+    },
+    {
+      "path": "originals/root11-current-one-day-audit.json",
+      "bytes": 41933,
+      "sha256": "5d146dcc9ead9f1f3dcc615c189a33e826d789aad86c5e155f414265cf63cccb"
+    },
+    {
+      "path": "originals/world-city-map-census.json",
+      "bytes": 19098,
+      "sha256": "eb5f35ec8278ae23fe6f524f52c130b079bc137e3edf9eb81d1806cc32bc4f44"
+    },
+    {
+      "path": "originals/world-collection-manifest.json",
+      "bytes": 860,
+      "sha256": "2640b892d69c6301d4e953a33a10ac21966724fbcbc42fc7fb8ad768f6a5609e"
+    },
+    {
+      "path": "originals/world-source-start.json",
+      "bytes": 8841,
+      "sha256": "03fc8defc1ca8a96960acb1ec9f528596d1ce46dd7ea60f8074ef29ed2ac41db"
+    },
+    {
+      "path": "originals/world-world-native.json",
+      "bytes": 1832309,
+      "sha256": "ae802b350febe1ed74b72de1422de0b1b8b99d280db86255b915f42722b62444"
+    },
+    {
+      "path": "requirements-originals/AGENTS.md",
+      "bytes": 1726,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "requirements-originals/开发备忘录.md",
+      "bytes": 381778,
+      "sha256": "6d35986d11de1a814e5c1cc0ee3cd964b7d8135fb07118d60f739c15d422e51f"
+    },
+    {
+      "path": "requirements-originals/提示词.md",
+      "bytes": 25038,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "source-reference/scripts/economy-audit.ts",
+      "bytes": 28120,
+      "sha256": "40fa60591e3c942efdb74170d974012b348801cf7e938e323d8d8b5f12d091ae"
+    },
+    {
+      "path": "source-reference/scripts/economy-observations.ts",
+      "bytes": 4393,
+      "sha256": "71df4886390e427a654abe406f9e086ce04cc81129d6a629ea65761512cbf0c7"
+    },
+    {
+      "path": "source-reference/src/access.ts",
+      "bytes": 2548,
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+    },
+    {
+      "path": "source-reference/src/architecture-floor-plan.ts",
+      "bytes": 52757,
+      "sha256": "1bf4aa1399b376114316d4a4ff92f64f24cbe8f22f2a9c8123c28ea6a85b3b94"
+    },
+    {
+      "path": "source-reference/src/aviation-renderer.ts",
+      "bytes": 4075,
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576"
+    },
+    {
+      "path": "source-reference/src/aviation.ts",
+      "bytes": 20244,
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936"
+    },
+    {
+      "path": "source-reference/src/commercial-district.ts",
+      "bytes": 5800,
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa"
+    },
+    {
+      "path": "source-reference/src/controller.ts",
+      "bytes": 28528,
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab"
+    },
+    {
+      "path": "source-reference/src/hygiene-ui.ts",
+      "bytes": 8278,
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047"
+    },
+    {
+      "path": "source-reference/src/journey.ts",
+      "bytes": 21182,
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474"
+    },
+    {
+      "path": "source-reference/src/main.ts",
+      "bytes": 24513,
+      "sha256": "472fd41d2cc071fe86caac12ddd9a35d2bffebadf60c3696dc84707d12a12330"
+    },
+    {
+      "path": "source-reference/src/persistence/partition.ts",
+      "bytes": 16813,
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc"
+    },
+    {
+      "path": "source-reference/src/persistence/route-encoding.ts",
+      "bytes": 4619,
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+    },
+    {
+      "path": "source-reference/src/persistence/session.ts",
+      "bytes": 6067,
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f"
+    },
+    {
+      "path": "source-reference/src/persistence/world-layout.ts",
+      "bytes": 5215,
+      "sha256": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165"
+    },
+    {
+      "path": "source-reference/src/persistence.ts",
+      "bytes": 23803,
+      "sha256": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767"
+    },
+    {
+      "path": "source-reference/src/renderer.ts",
+      "bytes": 94859,
+      "sha256": "7067ce92cc8ecbc73a07e7a1794eec2646ef75b3a8c00ca2380149b099bd5d6e"
+    },
+    {
+      "path": "source-reference/src/rendering/architectural-finishes.ts",
+      "bytes": 5818,
+      "sha256": "3a40a021317749db883ed097f341f3bca110181897edc47b5f4f5eaf480d0937"
+    },
+    {
+      "path": "source-reference/src/rendering/architecture-bodies.ts",
+      "bytes": 13271,
+      "sha256": "03dffdd600a933c5120dbc1b3553633884197e2e9dff411a85f8f3686243b230"
+    },
+    {
+      "path": "source-reference/src/rendering/architecture-detail.ts",
+      "bytes": 41206,
+      "sha256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10"
+    },
+    {
+      "path": "source-reference/src/rendering/architecture-layout.ts",
+      "bytes": 3055,
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0"
+    },
+    {
+      "path": "source-reference/src/rendering/chunk-residency.ts",
+      "bytes": 10495,
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4"
+    },
+    {
+      "path": "source-reference/src/rendering/citizen-appearance.ts",
+      "bytes": 14638,
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393"
+    },
+    {
+      "path": "source-reference/src/rendering/market-goods.ts",
+      "bytes": 5825,
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768"
+    },
+    {
+      "path": "source-reference/src/rendering/market-shopfront.ts",
+      "bytes": 11900,
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454"
+    },
+    {
+      "path": "source-reference/src/rendering/road-closures.ts",
+      "bytes": 3159,
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944"
+    },
+    {
+      "path": "source-reference/src/rendering/terrain.ts",
+      "bytes": 37882,
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5"
+    },
+    {
+      "path": "source-reference/src/roads.ts",
+      "bytes": 27340,
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+    },
+    {
+      "path": "source-reference/src/simulation/activity-capacity.ts",
+      "bytes": 5135,
+      "sha256": "835599458a3080f6d199717684684c06b532cc34ff299943550b548a76661bd0"
+    },
+    {
+      "path": "source-reference/src/simulation/activity-minutes.ts",
+      "bytes": 2211,
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534"
+    },
+    {
+      "path": "source-reference/src/simulation/banking.ts",
+      "bytes": 22301,
+      "sha256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e"
+    },
+    {
+      "path": "source-reference/src/simulation/clinical.ts",
+      "bytes": 44993,
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0"
+    },
+    {
+      "path": "source-reference/src/simulation/culture.ts",
+      "bytes": 67049,
+      "sha256": "57b0bb191569005d6acca8959a2ce33c29a4c76abc986a35875262c1fe9e77d8"
+    },
+    {
+      "path": "source-reference/src/simulation/education.ts",
+      "bytes": 48406,
+      "sha256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7"
+    },
+    {
+      "path": "source-reference/src/simulation/extensions.ts",
+      "bytes": 92823,
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868"
+    },
+    {
+      "path": "source-reference/src/simulation/family-education.ts",
+      "bytes": 29399,
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557"
+    },
+    {
+      "path": "source-reference/src/simulation/family.ts",
+      "bytes": 79920,
+      "sha256": "1d082159676985ff710d9cbe8c2bb20d7fbe73bd81e98f862e5aa686c8ef89c6"
+    },
+    {
+      "path": "source-reference/src/simulation/funded-work.ts",
+      "bytes": 2589,
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4"
+    },
+    {
+      "path": "source-reference/src/simulation/governance.ts",
+      "bytes": 28875,
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1"
+    },
+    {
+      "path": "source-reference/src/simulation/home-rest.ts",
+      "bytes": 16924,
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006"
+    },
+    {
+      "path": "source-reference/src/simulation/hygiene-public.ts",
+      "bytes": 20880,
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350"
+    },
+    {
+      "path": "source-reference/src/simulation/hygiene-transfer.ts",
+      "bytes": 28130,
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a"
+    },
+    {
+      "path": "source-reference/src/simulation/hygiene.ts",
+      "bytes": 50777,
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106"
+    },
+    {
+      "path": "source-reference/src/simulation/journeys.ts",
+      "bytes": 5505,
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e"
+    },
+    {
+      "path": "source-reference/src/simulation/npc-stair-motion.ts",
+      "bytes": 26937,
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+    },
+    {
+      "path": "source-reference/src/simulation/pathology.ts",
+      "bytes": 31665,
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005"
+    },
+    {
+      "path": "source-reference/src/simulation/player-labor.ts",
+      "bytes": 15041,
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b"
+    },
+    {
+      "path": "source-reference/src/simulation/police-supplies.ts",
+      "bytes": 10224,
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e"
+    },
+    {
+      "path": "source-reference/src/simulation/power.ts",
+      "bytes": 59025,
+      "sha256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10"
+    },
+    {
+      "path": "source-reference/src/simulation/public-employment.ts",
+      "bytes": 19062,
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef"
+    },
+    {
+      "path": "source-reference/src/simulation/road-demands.ts",
+      "bytes": 12686,
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307"
+    },
+    {
+      "path": "source-reference/src/simulation/roadworks.ts",
+      "bytes": 64090,
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b"
+    },
+    {
+      "path": "source-reference/src/simulation/shop_lifecycle.ts",
+      "bytes": 70212,
+      "sha256": "8f8e7bd2602a7a136207f25a4000cc4dfc303992de12600358baf22b71d7d066"
+    },
+    {
+      "path": "source-reference/src/simulation/supplemental-budget.ts",
+      "bytes": 15871,
+      "sha256": "ca2702241628d9ec0a9e943ba5a33ad4a5a8d4d652f5a579fec6c3535efe34a0"
+    },
+    {
+      "path": "source-reference/src/simulation/trade.ts",
+      "bytes": 25973,
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7"
+    },
+    {
+      "path": "source-reference/src/simulation.ts",
+      "bytes": 286237,
+      "sha256": "5b3ad672f89cea1066f5aead05e00e3193a59ab3a181e3405bd286a8d9f82a9a"
+    },
+    {
+      "path": "source-reference/src/site-fixtures.ts",
+      "bytes": 4366,
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670"
+    },
+    {
+      "path": "source-reference/src/style.css",
+      "bytes": 38657,
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd"
+    },
+    {
+      "path": "source-reference/src/transport-geometry.ts",
+      "bytes": 9370,
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8"
+    },
+    {
+      "path": "source-reference/src/types.ts",
+      "bytes": 14605,
+      "sha256": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b"
+    },
+    {
+      "path": "source-reference/src/ui.ts",
+      "bytes": 191489,
+      "sha256": "360f6b3f6034423b652e3885542e324e2041b8d5d935639a1ea5744f5b32301d"
+    },
+    {
+      "path": "source-reference/src/world.ts",
+      "bytes": 54482,
+      "sha256": "5f8672e98cdc50d341726ee84fd247fc89a36673cc799d023c68352a7597e001"
+    },
+    {
+      "path": "source-reference/tests/economy-observations.test.ts",
+      "bytes": 3923,
+      "sha256": "7167a3aedab97fdca48188cae3b3040b950662e5c7353046329f5bc49b1aa4b5"
+    },
+    {
+      "path": "source-reference/tests/extensions.test.ts",
+      "bytes": 108044,
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f"
+    },
+    {
+      "path": "source-reference/tests/fixtures/market-company-current-lease.json",
+      "bytes": 456997,
+      "sha256": "c317858741c6a5d76b43aef99209b48f572da621b6313f4e8906177768125332"
+    },
+    {
+      "path": "source-reference/tests/fixtures/market-company-current-sale.json",
+      "bytes": 531322,
+      "sha256": "10dce6b2323e172d1fe1ea04ebdecf7ea7565ba59f6b3cc637499db1a0081f80"
+    },
+    {
+      "path": "source-reference/tests/fixtures/market-company-old-lease.json",
+      "bytes": 530776,
+      "sha256": "f768bb8b8b8ede1f54d6adffba08c7602c358646ca269e576c9b7e452be1f54d"
+    },
+    {
+      "path": "source-reference/tests/fixtures/market-company-old-sale.json",
+      "bytes": 530302,
+      "sha256": "8341af92cb3f88c39934c7f02a10cf4d9aa93e72862dc99efbcdee4891846be3"
+    },
+    {
+      "path": "source-reference/tests/fixtures/public-disinfection-old-public-care-a1.json.gz",
+      "bytes": 31538,
+      "sha256": "07fbe3390daa4470cfadb2a660d56f5c70a179e40ea79ecbba3a16af479e1de3"
+    },
+    {
+      "path": "source-reference/tests/hygiene-transfer.test.ts",
+      "bytes": 24931,
+      "sha256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2"
+    },
+    {
+      "path": "source-reference/tests/hygiene.test.ts",
+      "bytes": 33023,
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352"
+    },
+    {
+      "path": "source-reference/tests/market-company-return.test.ts",
+      "bytes": 18387,
+      "sha256": "8bf389b17e1c4642af483ff1d5417d7c7b33d328d808baa048aa0531e4f9bd22"
+    },
+    {
+      "path": "source-reference/tests/market-company-rights.test.ts",
+      "bytes": 20501,
+      "sha256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf"
+    },
+    {
+      "path": "source-reference/tests/market-shopfront.test.ts",
+      "bytes": 13469,
+      "sha256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990"
+    },
+    {
+      "path": "source-reference/tests/power.test.ts",
+      "bytes": 20623,
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911"
+    },
+    {
+      "path": "source-reference/tests/public-disinfection.test.ts",
+      "bytes": 24791,
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555"
+    },
+    {
+      "path": "source-reference/tests/retail-period.test.ts",
+      "bytes": 15295,
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57"
+    },
+    {
+      "path": "source-reference/tests/road-demands.test.ts",
+      "bytes": 15281,
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6"
+    },
+    {
+      "path": "source-reference/tests/road-navigation.test.ts",
+      "bytes": 14556,
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a"
+    },
+    {
+      "path": "source-reference/tests/roads.test.ts",
+      "bytes": 18457,
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd"
+    },
+    {
+      "path": "source-reference/tests/roadwork-replacement.test.ts",
+      "bytes": 23253,
+      "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44"
+    },
+    {
+      "path": "source-reference/tests/roadworks-fixture.ts",
+      "bytes": 9543,
+      "sha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3"
+    },
+    {
+      "path": "source-reference/tests/roadworks.test.ts",
+      "bytes": 20738,
+      "sha256": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd"
+    },
+    {
+      "path": "source-reference/tests/shop-lifecycle.test.ts",
+      "bytes": 25874,
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33"
+    },
+    {
+      "path": "source-reference/tests/shop-self-funding.test.ts",
+      "bytes": 18454,
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97"
+    },
+    {
+      "path": "source-reference/tests/simulation.test.ts",
+      "bytes": 66862,
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5"
+    }
+  ]
+}

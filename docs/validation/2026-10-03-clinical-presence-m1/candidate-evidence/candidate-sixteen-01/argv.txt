@@ -1,0 +1,7 @@
+node
+--import
+tsx
+--test
+--test-isolation=none
+tests/clinical-presence-regression.test.ts
+tests/clinical-presence-contract.test.ts

@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-01T22:48:06.042546+00:00",
+  "scope": "Isolated market-only candidate based on actual3f01707 source, overridden five root-owned counter source/test files. Concurrent freight and journey changes excluded from this build and14 tests.",
+  "candidate": "/tmp/yunshan-phase3-market-counter-candidate-01",
+  "baseCommit": "3f01707581eef697572ffa58bdb994bef037e98d",
+  "strictBuildExitCode": 0,
+  "actualEntry": "/assets/index-DdLNn8og.js",
+  "entrySHA256": "b57b47a3a6d5a55f1f06096ad7d4a76cfacb0840a1c32f015f3f47a2b1754efd",
+  "rules": {
+    "passed": 14,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "exitCode": 0
+  },
+  "actualOldControllerSameInput": {
+    "baseCommit": "3f01707581eef697572ffa58bdb994bef037e98d",
+    "testPassed": 0,
+    "testFailed": 1,
+    "exitCode": 1,
+    "reason": "The actual old controller physically walks into the visible counter volume."
+  },
+  "initialDOMFixtureFailure": {
+    "passed": 3,
+    "failed": 1,
+    "exitCode": 1,
+    "reason": "Fake EventTarget lacked HTMLElement.closest, so keys were not accepted. The cabinet assertion alone was meaningless before the event target was corrected. Corrected fixture then preserves actual positive movement through the clear door and negative cabinet movement."
+  },
+  "source5HashesStillMatchRootAndCandidate": true,
+  "gpuPixelsVerified": false,
+  "referenceVisualPassed": false,
+  "sameWorldAndSaveBody": true,
+  "createsCashOrStockOrShop": false
+}

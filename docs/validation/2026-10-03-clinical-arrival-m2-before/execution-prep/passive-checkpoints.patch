@@ -1,0 +1,120 @@
+--- approved-original/drivers/m2-doctor-late.test.ts
++++ as-run-mirror/drivers/m2-doctor-late.test.ts
+@@ -1,11 +1,15 @@
++import { captureM2Checkpoint } from './m2-checkpoints.ts';
+ import assert from 'node:assert/strict';
+ import test from 'node:test';
+ import { EPS, assertActualLateRoute, assertActualPair, assertSupplied, beginNativeNpcOrder, captureWages, clock, currentWageWindow, initialIntent, intervalMinutes, lateStart, nativeContext, trace } from './m2-fixture.ts';
+ 
+ test('M2 doctor genuine arrival: treatment cannot exceed actual current earned onsite window', () => {
+   const context = nativeContext(), { sim, site, point, doctor, patient } = context;
++  captureM2Checkpoint(sim, 'constructed-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: 'not-created', wages: [] });
+   const order = beginNativeNpcOrder(context);
++  captureM2Checkpoint(sim, 'bootstrap-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages: [] });
+   sim.step(.25); // Original people followed by actual procurement in finance.
++  captureM2Checkpoint(sim, 'bootstrap-after-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages: [] });
+   assertSupplied(order);
+   initialIntent(sim, doctor, site, lateStart(site), 'work');
+   const originalTier = doctor.tier, role = doctor.role, workId = doctor.workId;
+@@ -13,7 +17,9 @@
+   const speed = sim.state.weather === '雨' ? 3.1 : 4.2;
+   const before = { clock: clock(sim), worked: order.workedMinutes, health: sim.state.extension!.actorProfiles[patient.id].health, money: sim.state.player.money, reserved: order.reservedUnits, consumed: order.consumedUnits };
+   const wages = captureWages(sim, doctor.id);
++  captureM2Checkpoint(sim, 'measurement-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages, meters, speed });
+   sim.step(.25); // No phase hook, pin, needs reset, or method replacement.
++  captureM2Checkpoint(sim, 'measurement-after-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages, meters, speed });
+   assert.ok(Math.abs(clock(sim) - before.clock - 4) < EPS);
+   assertActualPair(context); assert.equal(sim.isOnDuty(doctor.id, site.id), true);
+   assert.equal(doctor.tier, originalTier); assert.equal(doctor.role, role); assert.equal(doctor.workId, workId);
+--- approved-original/drivers/m2-npc-patient-late.test.ts
++++ as-run-mirror/drivers/m2-npc-patient-late.test.ts
+@@ -1,12 +1,16 @@
++import { captureM2Checkpoint } from './m2-checkpoints.ts';
+ import assert from 'node:assert/strict';
+ import test from 'node:test';
+ import { EPS, assertActualLateRoute, assertActualPair, assertSupplied, beginNativeNpcOrder, captureWages, clock, currentWageWindow, initialIntent, intervalMinutes, lateStart, nativeContext, trace } from './m2-fixture.ts';
+ 
+ test('M2 NPC patient genuine arrival: treatment cannot reuse the walking portion of the patient budget', () => {
+   const context = nativeContext(), { sim, site, point, doctor, patient } = context;
++  captureM2Checkpoint(sim, 'constructed-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: 'not-created', wages: [] });
+   initialIntent(sim, doctor, site, point.position, 'work');
+   const order = beginNativeNpcOrder(context);
++  captureM2Checkpoint(sim, 'bootstrap-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages: [] });
+   sim.step(.25); // Actual funded attendance and procurement; no supplied-material injection.
++  captureM2Checkpoint(sim, 'bootstrap-after-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages: [] });
+   assertSupplied(order); assert.equal(sim.isOnDuty(doctor.id, site.id), true);
+   initialIntent(sim, patient, site, lateStart(site), 'heal');
+   const originalTier = patient.tier, role = patient.role, workId = patient.workId;
+@@ -14,7 +18,9 @@
+   const speed = sim.state.weather === '雨' ? 3.1 : 4.2;
+   const before = { clock: clock(sim), worked: order.workedMinutes, health: sim.state.extension!.actorProfiles[patient.id].health, money: sim.state.player.money, reserved: order.reservedUnits, consumed: order.consumedUnits };
+   const wages = captureWages(sim, doctor.id);
++  captureM2Checkpoint(sim, 'measurement-before-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages, meters, speed });
+   sim.step(.25);
++  captureM2Checkpoint(sim, 'measurement-after-step', { doctorId: doctor.id, patientId: patient.id, orderId: order.id, wages, meters, speed });
+   assert.ok(Math.abs(clock(sim) - before.clock - 4) < EPS);
+   assertActualPair(context); assert.equal(sim.isOnDuty(doctor.id, site.id), true);
+   assert.equal(patient.tier, originalTier); assert.equal(patient.role, role); assert.equal(patient.workId, workId);
+--- approved-original/drivers/m2-fixture.ts
++++ as-run-mirror/drivers/m2-fixture.ts
+@@ -1,10 +1,10 @@
+ import assert from 'node:assert/strict';
+-import { blocksFloorPlanMovement, findFloorPlanRoute, floorPlanSupport } from '../source/src/architecture-floor-plan.ts';
+-import { canAccessFloor } from '../source/src/access.ts';
+-import { Simulation } from '../source/src/simulation.ts';
+-import { beginClinicalTreatment, clinicalPairAtServiceStation, clinicalServiceStationsAtPosition } from '../source/src/simulation/clinical.ts';
+-import { fixture } from '../source/tests/clinical-presence-fixture.ts';
+-import type { Building, Citizen, Role, Vec3 } from '../source/src/types.ts';
++import { blocksFloorPlanMovement, findFloorPlanRoute, floorPlanSupport } from '../../source/src/architecture-floor-plan.ts';
++import { canAccessFloor } from '../../source/src/access.ts';
++import { Simulation } from '../../source/src/simulation.ts';
++import { beginClinicalTreatment, clinicalPairAtServiceStation, clinicalServiceStationsAtPosition } from '../../source/src/simulation/clinical.ts';
++import { fixture } from '../../source/tests/clinical-presence-fixture.ts';
++import type { Building, Citizen, Role, Vec3 } from '../../source/src/types.ts';
+ export { intervalMinutes } from './m2-window-contract.ts';
+ 
+ // Import only the declared nine-building World fixture. Do not call its setup,
+--- /dev/null
++++ as-run-mirror/drivers/m2-checkpoints.ts
+@@ -0,0 +1,41 @@
++import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
++import { resolve, join } from 'node:path';
++import type { Simulation } from '../../source/src/simulation.ts';
++
++// Passive completed-tick snapshots only. Never register a phase hook, perform
++// a command/step, assert product state, or edit the Simulation. The caller uses
++// this immediately after the real step returns, before its first assertion.
++interface SnapshotContext {
++  doctorId: string; patientId: string; orderId: string;
++  wages: readonly unknown[]; meters?: number; speed?: number;
++}
++export function captureM2Checkpoint(sim: Simulation, label: string, context: SnapshotContext): void {
++  const configured = process.env.YUNSHAN_M2_CAPTURE_DIR;
++  if (!configured) return;
++  if (!/^[a-z0-9-]+$/.test(label)) throw new Error('invalid checkpoint label');
++  const output = resolve(configured); mkdirSync(output, { recursive: true });
++  const worldFile = join(output, 'world.json');
++  if (!existsSync(worldFile)) writeFileSync(worldFile, JSON.stringify(sim.worldDefinition), { flag: 'wx' });
++  writeFileSync(join(output, `${label}.save.json`), sim.exportSave(), { flag: 'wx' });
++  const runtime = Reflect.get(sim, 'runtime') as {
++    attendance: Record<string, number>; activities: Record<string, string>;
++    peopleElapsed?: Record<string, number>; publicLabor?: unknown;
++    wageAccruals?: unknown; wageArrears?: unknown;
++  };
++  const actors = [context.doctorId, context.patientId].map(id => ({
++    citizen: sim.state.citizens.find(person => person.id === id),
++    profile: sim.state.extension!.actorProfiles[id],
++    activity: runtime.activities[id], attendance: runtime.attendance[id],
++    peopleElapsed: runtime.peopleElapsed?.[id] ?? 0,
++  }));
++  writeFileSync(join(output, `${label}.facts.json`), JSON.stringify({
++    schemaVersion: 1, label, timing: label.endsWith('after-step') ? 'outside phase callbacks; actual step completed' : 'outside phase callbacks; before next actual step, including disclosed controlled initial setup',
++    tick: sim.state.tick, clock: sim.state.extension!.lastUpdate,
++    day: sim.state.day, hour: sim.state.hour, speed: sim.state.speed,
++    weather: sim.state.weather, actors, ...context,
++    order: sim.state.clinical!.orders.find(order => order.id === context.orderId),
++    clinicalStock: sim.state.clinical!.stock,
++    playerMoney: sim.state.player.money, publicLabor: runtime.publicLabor ?? null,
++    wageAccruals: runtime.wageAccruals ?? [], wageArrears: runtime.wageArrears ?? [],
++  }, null, 2) + '\n', { flag: 'wx' });
++}

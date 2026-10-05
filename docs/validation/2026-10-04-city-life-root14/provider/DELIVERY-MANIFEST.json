@@ -1,0 +1,21 @@
+{
+  "status": "LOCAL_SAFE_HANDOFF_ONLY_NO_UPLOAD",
+  "createdAt": "2026-10-04T15:53:50.582869+00:00",
+  "finalGraphSHA256": "b46bd775acae960939b3f9db63efd1f01b8d6f1948928c82b97966c59ef95b03",
+  "artifacts": {
+    "delivery/ROOT14-civic-history-final-source.tar.gz": {
+      "bytes": 12160367,
+      "sha256": "76d8f5e4e18bca8061bce0f91a9ec6443b650f73f5c6dfb2124e2dc8fdfb6cb3"
+    },
+    "delivery/ROOT14-civic-history-short-evidence.tar.gz": {
+      "bytes": 6700315,
+      "sha256": "19087f9ce14c9395125ae7b9541ab499e999d94333d3ba7ecf74f369f2dcb5aa"
+    }
+  },
+  "sourcePackageVerified304Files": true,
+  "evidencePackageVerifiedAllEntries": true,
+  "eachDistinctSourceGraphReconstructsExactly": true,
+  "originalCompleteSourcesRetainedLocally": "scopes/*/source-as-run/",
+  "scope01SnapshotException": "typecheck01 is hash-matched post-run recovery; see REPORT",
+  "uploadOwner": "parent only; no Git/Library/deploy action by this group"
+}

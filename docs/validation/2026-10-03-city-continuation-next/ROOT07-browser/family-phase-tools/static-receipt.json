@@ -1,0 +1,8 @@
+{
+  "status": "STATIC_PREPARED_NOT_EXECUTED",
+  "originalGuardSHA256": "73e07e20452ceae5a7bf8eef0389f9eed43c01e0545ef4126ecdab038d60a3c1",
+  "familyGuardSHA256": "5edfaa815ace47c26bf43dcf31a12b685c4e2daf5722fd145c6adc4f6d50cd11",
+  "originalWrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965",
+  "patchSHA256": "ecc452d42732e2c9a733951e4d20152d48116e76669173998055a98acb2a85eb",
+  "reason": "Add externally located family driver phase300s and external result count7 to the existing original snapshots/dist/artifacts guard. Original frozen runtime is not modified. All source before/after and dist/artifacts original preservation functions remain identical."
+}

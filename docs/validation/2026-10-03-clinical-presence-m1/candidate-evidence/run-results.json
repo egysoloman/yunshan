@@ -1,0 +1,276 @@
+[
+  {
+    "label": "strict-01",
+    "pid": 180165,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:41:17,822993694+00:00",
+    "endUTC": "2026-10-03T01:41:24,799464168+00:00",
+    "argv": [
+      "./node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests": {},
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "original-seven-01",
+    "pid": 180199,
+    "exitCode": 1,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original",
+    "startUTC": "2026-10-03T01:41:31,146334430+00:00",
+    "endUTC": "2026-10-03T01:41:31,873070954+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/clinical-presence-regression.test.ts"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 41,
+    "filesAfter": 41,
+    "rawLogSHA256": "60f76390761555a700b0c974ac72b10b93ff3a2f310e89faa3895488721091a9",
+    "tests": {
+      "tests": 7,
+      "pass": 0,
+      "fail": 7,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark",
+    "interpretation": "0/7 fixture precondition failures: initial 100m building spacing left no native employed doctor within the real hiring route limit. Not M1 behavior evidence."
+  },
+  {
+    "label": "strict-02",
+    "pid": 180307,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:42:25,162314443+00:00",
+    "endUTC": "2026-10-03T01:42:36,334879613+00:00",
+    "argv": [
+      "./node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests": {},
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "original-seven-02",
+    "pid": 180372,
+    "exitCode": 1,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original",
+    "startUTC": "2026-10-03T01:42:48,268022470+00:00",
+    "endUTC": "2026-10-03T01:42:50,690315748+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/clinical-presence-regression.test.ts"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 41,
+    "filesAfter": 41,
+    "rawLogSHA256": "b62e9cb974f486bd0cdee37bfa0304372d0fd2c74000297303a1f8929afec04c",
+    "tests": {
+      "tests": 7,
+      "pass": 1,
+      "fail": 6,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark",
+    "interpretation": "1/7 pass (unmarked contract), 6 fixture funded-duty precondition failures caused by clearing routes before marked core re-planning. Not M1 behavior evidence."
+  },
+  {
+    "label": "strict-03",
+    "pid": 181213,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003",
+    "startUTC": "2026-10-03T01:46:39,185857969+00:00",
+    "endUTC": "2026-10-03T01:46:43,406571461+00:00",
+    "argv": [
+      "candidate/node_modules/.bin/tsc",
+      "--noEmit",
+      "-p",
+      "candidate/tsconfig.json"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 0,
+    "filesAfter": 0,
+    "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests": {},
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark",
+    "interpretation": "tsc exit0, but wrapper cwd at prototype root produced zero freeze inputs. Excluded from source stability evidence."
+  },
+  {
+    "label": "strict-04",
+    "pid": 181439,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:48:25,912213676+00:00",
+    "endUTC": "2026-10-03T01:48:29,620936011+00:00",
+    "argv": [
+      "./node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests": {},
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "original-seven-03",
+    "pid": 182016,
+    "exitCode": 1,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/original",
+    "startUTC": "2026-10-03T01:52:41,714483810+00:00",
+    "endUTC": "2026-10-03T01:52:44,042201872+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/clinical-presence-regression.test.ts"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 41,
+    "filesAfter": 41,
+    "rawLogSHA256": "856cc93062665a1374e5b1e0954cfaa81601da20562850709037f1964e555cf3",
+    "tests": {
+      "tests": 7,
+      "pass": 2,
+      "fail": 5,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "validFinalSourceEvidence": false,
+    "scope": "functional only; duration is not a benchmark",
+    "interpretation": "Valid same-byte 7 regression cases: 2 pass, 5 actual treatment/pairing failures. Original production source unchanged."
+  },
+  {
+    "label": "strict-05",
+    "pid": 182275,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:55:20,868191291+00:00",
+    "endUTC": "2026-10-03T01:55:25,444033809+00:00",
+    "argv": [
+      "./node_modules/.bin/tsc",
+      "--noEmit"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests": {},
+    "validFinalSourceEvidence": true,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "candidate-sixteen-01",
+    "pid": 182334,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:56:22,258768902+00:00",
+    "endUTC": "2026-10-03T01:56:33,751886806+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/clinical-presence-regression.test.ts",
+      "tests/clinical-presence-contract.test.ts"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "48e95a9109a15734695b870a30fc49c6d40eb41483b3834bcf4c9c06ab5178f5",
+    "tests": {
+      "tests": 16,
+      "pass": 16,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "validFinalSourceEvidence": true,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "related-clinical-culture-v4-01",
+    "pid": 182455,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:57:50,048773908+00:00",
+    "endUTC": "2026-10-03T01:58:54,747254344+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=none",
+      "tests/clinical.test.ts",
+      "tests/culture.test.ts",
+      "tests/v4-services.test.ts"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "48ea61142f7db2330ce72ff873a23a9be7b5579c9306dfb74a651f2fe1bf9459",
+    "tests": {
+      "tests": 38,
+      "pass": 38,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "validFinalSourceEvidence": true,
+    "scope": "functional only; duration is not a benchmark"
+  },
+  {
+    "label": "build-01",
+    "pid": 182508,
+    "exitCode": 0,
+    "cwd": "/tmp/yunshan-clinical-presence-m1-prep-20261003/candidate",
+    "startUTC": "2026-10-03T01:59:30,336862373+00:00",
+    "endUTC": "2026-10-03T01:59:37,321620501+00:00",
+    "argv": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "freezeStatus": "unchanged",
+    "filesBefore": 48,
+    "filesAfter": 48,
+    "rawLogSHA256": "b6773df59f50fefe1043f5403beb6d722bf71ab49197a74659871591e049f844",
+    "tests": {},
+    "validFinalSourceEvidence": true,
+    "scope": "functional only; duration is not a benchmark"
+  }
+]

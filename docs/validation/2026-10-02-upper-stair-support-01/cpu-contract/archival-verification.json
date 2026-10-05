@@ -1,0 +1,587 @@
+{
+  "status": "ARCHIVED_AND_HASH_VERIFIED_NO_NEW_TEST_RUN",
+  "commandsVerified": 14,
+  "commands": [
+    {
+      "index": 1,
+      "directory": "baseline",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/baseline-exact.json node --import tsx --test --test-name-pattern='original exact browser failure' tests/upper-stair-actual.test.ts",
+      "exit": 1,
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "raw": "baseline-exact.log",
+      "logSHA256": "4a74ecb0eb268d2847370f025818dc04fc8ab3f279f39abd730f6a11cbf5a738",
+      "archiveLog": "artifacts/baseline-exact.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 2,
+      "directory": "baseline",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/baseline-continuous.json node --import tsx --test --test-name-pattern='actual market-b24 W' tests/upper-stair-actual.test.ts",
+      "exit": 1,
+      "tests": 1,
+      "passed": 0,
+      "failed": 1,
+      "raw": "baseline-continuous.log",
+      "logSHA256": "41e95a4b77fe7b3013423b61e5abd4b36ae71ade6d214109780c6042a606ec0f",
+      "archiveLog": "artifacts/baseline-continuous.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 3,
+      "directory": "baseline",
+      "argv": "node --import tsx --test --test-name-pattern='0→1→2|exact market-b24' tests/controller-v4.test.ts",
+      "exit": 1,
+      "tests": 3,
+      "passed": 0,
+      "failed": 3,
+      "raw": "baseline-production-regression.log",
+      "logSHA256": "5b85767f40df25000122213239ce11979a70e03c48e3767078f63091d0f8a326",
+      "archiveLog": "artifacts/baseline-production-regression.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 4,
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-exact.json node --import tsx --test --test-name-pattern='original exact browser failure' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "raw": "candidate-exact.log",
+      "logSHA256": "c6dbc397b6ea93bd005d83b2146e90261ed6ab976e0f0d4141ec68d6da87f6e8",
+      "archiveLog": "artifacts/candidate-exact.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 5,
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-actual-allfloors-01.json node --import tsx --test tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 15,
+      "passed": 15,
+      "failed": 0,
+      "raw": "candidate-actual-allfloors-01.log",
+      "logSHA256": "fc9b335d11b35927a383181d396025dfec54af80ec9a5584fb6170c864d04a1f",
+      "archiveLog": "artifacts/candidate-actual-allfloors-01.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 6,
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-boundaries-02.json node --import tsx --test --test-name-pattern='soffit|rotated actual|basement boundary' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 3,
+      "passed": 3,
+      "failed": 0,
+      "raw": "candidate-boundaries-02.log",
+      "logSHA256": "bc4455bc2975e96283b3949d11c373d22e3897ee104741b73bcfe39cf4163e9d",
+      "archiveLog": "artifacts/candidate-boundaries-02.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 7,
+      "directory": "candidate",
+      "argv": "STAIR_REPORT=/tmp/yunshan-upper-stair-fix-01/artifacts/candidate-final-soffit.json node --import tsx --test --test-name-pattern='soffit' tests/upper-stair-actual.test.ts",
+      "exit": 0,
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "raw": "candidate-final-soffit.log",
+      "logSHA256": "c2af9e2f7c85d32e91d7eaa4202c7cf5c9c32a77f56f352f967e372d59940cbf",
+      "archiveLog": "artifacts/candidate-final-soffit.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 8,
+      "directory": "candidate",
+      "argv": "node --import tsx --test tests/controller-v4.test.ts tests/access.test.ts",
+      "exit": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "raw": "candidate-production-regression.log",
+      "logSHA256": "89c11c6322f5d8e4c7e73fcc63bfb2ce398f17097bec24133103bac40342e98e",
+      "archiveLog": "artifacts/candidate-production-regression.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 9,
+      "directory": "candidate",
+      "argv": "node --import tsx --test tests/architecture-floor-plan.test.ts tests/controller.test.ts",
+      "exit": 0,
+      "tests": 13,
+      "passed": 13,
+      "failed": 0,
+      "raw": "candidate-original-floorplan-controller.log",
+      "logSHA256": "394387baa6d22448f82bfb7a7722083e5357338f044138636f1f99f1fe2a6da2",
+      "archiveLog": "artifacts/candidate-original-floorplan-controller.log",
+      "verification": "Log test/pass/fail counts and recorded exit agree."
+    },
+    {
+      "index": 10,
+      "directory": "candidate",
+      "argv": "node_modules/.bin/tsc --noEmit",
+      "exit": 0,
+      "raw": "candidate-strict.log",
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archiveLog": "artifacts/candidate-strict.log",
+      "verification": "Historical provenance exit retained; empty log alone does not prove execution."
+    },
+    {
+      "index": 11,
+      "directory": "candidate",
+      "argv": "node_modules/.bin/vite build",
+      "exit": 0,
+      "raw": "candidate-vite-build.log",
+      "logSHA256": "e28e10acd25f5ddb982c18a35f1159a616f89d57292cdf299b899aaf939487a4",
+      "archiveLog": "artifacts/candidate-vite-build.log",
+      "verification": "Build completion and recorded exit agree."
+    },
+    {
+      "index": 12,
+      "directory": ".",
+      "argv": "node --import /workspace/yunshan/node_modules/tsx/dist/loader.mjs verify-contracts.mts",
+      "exit": 0,
+      "raw": "contract-protection-final.log",
+      "logSHA256": "7f4c648785dad36042a3840f840d65dbef566cb8a5f4a073bd54db5ab35cd5f6",
+      "archiveLog": "artifacts/contract-protection-final.log",
+      "verification": "Contract JSON and recorded exit agree."
+    },
+    {
+      "index": 13,
+      "directory": "candidate",
+      "argv": "node_modules/.bin/tsc --noEmit",
+      "exit": 0,
+      "raw": "candidate-strict-final.log",
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archiveLog": "artifacts/candidate-strict-final.log",
+      "verification": "Historical provenance exit retained; empty log alone does not prove execution."
+    },
+    {
+      "index": 14,
+      "directory": "patch-check",
+      "argv": "git apply --check /tmp/yunshan-upper-stair-fix-01/upper-stair-support.patch",
+      "exit": 0,
+      "raw": "patch-dry-run.log",
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "archiveLog": "artifacts/patch-dry-run.log",
+      "verification": "Historical provenance exit retained; empty log alone does not prove execution."
+    }
+  ],
+  "originalArtifactHashesVerified": 24,
+  "patchSHA256": "ad798b94a68bf2c82276e1f70ee0bac28966f65da56f94eef2f556d33c501ea3",
+  "currentRootSources": {
+    "src/architecture-floor-plan.ts": {
+      "currentSHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "rootRecordedStartSHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78",
+      "rootRecordedEndSHA256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    "tests/controller-v4.test.ts": {
+      "currentSHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "rootRecordedStartSHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "rootRecordedEndSHA256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    "src/controller.ts": {
+      "currentSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "rootRecordedStartSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+      "rootRecordedEndSHA256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    }
+  },
+  "rootRelated": {
+    "status": "PASS",
+    "tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "records": [
+      {
+        "name": "related",
+        "argv": [
+          "node",
+          "--import",
+          "tsx",
+          "--test",
+          "--test-concurrency=1",
+          "tests/access.test.ts",
+          "tests/architecture-floor-plan.test.ts",
+          "tests/controller.test.ts",
+          "tests/controller-v4.test.ts"
+        ],
+        "start": "2026-10-02T06:58:46.930272+00:00",
+        "end": "2026-10-02T06:59:05.461545+00:00",
+        "seconds": 18.531314653002482,
+        "exitCode": 0,
+        "log": "related.log",
+        "logSHA256": "1ce9bebf497b47b2051fe6311e63a6f9df41c3791f0972f0383a26f58ac00652"
+      },
+      {
+        "name": "build",
+        "argv": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "start": "2026-10-02T06:59:05.461994+00:00",
+        "end": "2026-10-02T06:59:15.136643+00:00",
+        "seconds": 9.674675948001095,
+        "exitCode": 0,
+        "log": "build.log",
+        "logSHA256": "7a3eb5b60e154a9b70bebfd6cccf7d950915110632a63249c1f39b3ef7a81025"
+      }
+    ]
+  },
+  "rootBuild": {
+    "status": "PASS",
+    "exitCode": 0,
+    "strictIncluded": true
+  },
+  "newFullSuite": "NOT_RUN",
+  "newGL": "NOT_RUN_BY_ARCHIVER",
+  "isolatedHistoricalCases": {
+    "uniqueCases": 18,
+    "initialActualAndNegatives": 15,
+    "additionalBoundaryCases": 3,
+    "finalSoffitRecheck": 1,
+    "actualBuildings": 10,
+    "actualNormalWSamples": 30540,
+    "caseIDs": [
+      {
+        "id": "market-b24",
+        "family": "home",
+        "floors": 3,
+        "height": 3.4000000000000004,
+        "motorSamples": 792,
+        "landings": 4
+      },
+      {
+        "id": "river-b2",
+        "family": "home",
+        "floors": 11,
+        "height": 3.4,
+        "motorSamples": 4040,
+        "landings": 20
+      },
+      {
+        "id": "river-b1",
+        "family": "market",
+        "floors": 2,
+        "height": 3.6,
+        "motorSamples": 392,
+        "landings": 2
+      },
+      {
+        "id": "workshop-b0",
+        "family": "workshop",
+        "floors": 3,
+        "height": 4.8,
+        "motorSamples": 936,
+        "landings": 4
+      },
+      {
+        "id": "academy-b0",
+        "family": "civic-academy",
+        "floors": 5,
+        "height": 3.8,
+        "motorSamples": 1680,
+        "landings": 8
+      },
+      {
+        "id": "academy-b2",
+        "family": "finance-health",
+        "floors": 7,
+        "height": 3.8000000000000003,
+        "motorSamples": 2520,
+        "landings": 12
+      },
+      {
+        "id": "core-interchange",
+        "family": "transport-waterfront",
+        "floors": 6,
+        "height": 6,
+        "motorSamples": 2700,
+        "landings": 10
+      },
+      {
+        "id": "starport-b0",
+        "family": "transport-waterfront",
+        "floors": 14,
+        "height": 6.6000000000000005,
+        "motorSamples": 7748,
+        "landings": 26
+      },
+      {
+        "id": "river-b34",
+        "family": "home",
+        "floors": 13,
+        "height": 3.4000000000000004,
+        "motorSamples": 4848,
+        "landings": 24
+      },
+      {
+        "id": "market-b3",
+        "family": "finance-health",
+        "floors": 12,
+        "height": 4.4,
+        "motorSamples": 4884,
+        "landings": 22
+      }
+    ],
+    "scopeCorrection": "One-building physical motor projection; original mountain/water/road/transport data retained but other-building removal affects terrain fallback. Original raw wording is not a whole-world terrain/W proof. Rechecks are not extra unique cases."
+  },
+  "baselineFailurePreserved": {
+    "exactMotorCase": "baseline-exact.log/json",
+    "continuousWCase": "baseline-continuous.log/json",
+    "failedContinuousStep": {
+      "waypoint": 3,
+      "before": {
+        "x": -404.59997341778063,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "after": {
+        "x": -404.59998259613934,
+        "y": 80,
+        "z": 308.791474723644
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "blockedAccess": null
+    },
+    "sub10MicrometreLateralAdjustmentIsNotProgress": true,
+    "mergeableRegression": "baseline-production-regression.log"
+  },
+  "copyCount": 41,
+  "copies": [
+    {
+      "archive": "artifacts/baseline-continuous.json",
+      "bytes": 87175,
+      "sha256": "95553c2830f0a639e3fb7d0d9257e2b021fbbdfa72ea04f3b5287c75dc0f6023"
+    },
+    {
+      "archive": "artifacts/baseline-continuous.log",
+      "bytes": 1395,
+      "sha256": "41e95a4b77fe7b3013423b61e5abd4b36ae71ade6d214109780c6042a606ec0f"
+    },
+    {
+      "archive": "artifacts/baseline-exact.json",
+      "bytes": 1135,
+      "sha256": "4267ad72539b93538e759c4c15edac81ef43080ddfb1832d8fd9acd8ac71c031"
+    },
+    {
+      "archive": "artifacts/baseline-exact.log",
+      "bytes": 1605,
+      "sha256": "4a74ecb0eb268d2847370f025818dc04fc8ab3f279f39abd730f6a11cbf5a738"
+    },
+    {
+      "archive": "artifacts/baseline-production-regression.log",
+      "bytes": 4044,
+      "sha256": "5b85767f40df25000122213239ce11979a70e03c48e3767078f63091d0f8a326"
+    },
+    {
+      "archive": "artifacts/candidate-actual-allfloors-01.json",
+      "bytes": 11678970,
+      "sha256": "52b4bd67bdde219ab3d3cbf31498c5965c63387542f60efe465d19df401403f0"
+    },
+    {
+      "archive": "artifacts/candidate-actual-allfloors-01.log",
+      "bytes": 1528,
+      "sha256": "fc9b335d11b35927a383181d396025dfec54af80ec9a5584fb6170c864d04a1f"
+    },
+    {
+      "archive": "artifacts/candidate-boundaries-02.json",
+      "bytes": 950931,
+      "sha256": "40a9a793123560f801eb7fd11b9a406237f930cab03021ec50a84a182d8fb96d"
+    },
+    {
+      "archive": "artifacts/candidate-boundaries-02.log",
+      "bytes": 400,
+      "sha256": "bc4455bc2975e96283b3949d11c373d22e3897ee104741b73bcfe39cf4163e9d"
+    },
+    {
+      "archive": "artifacts/candidate-exact.json",
+      "bytes": 1409,
+      "sha256": "23a43d5448a759084044559aba4e3554b5444b7c81cf96eabac5ad029c7d7109"
+    },
+    {
+      "archive": "artifacts/candidate-exact.log",
+      "bytes": 224,
+      "sha256": "c6dbc397b6ea93bd005d83b2146e90261ed6ab976e0f0d4141ec68d6da87f6e8"
+    },
+    {
+      "archive": "artifacts/candidate-final-soffit.json",
+      "bytes": 1265,
+      "sha256": "e321c6a04dd984643663a53a2f9aae98a5865611a2cbf1ee8c0c8e0ecee8764b"
+    },
+    {
+      "archive": "artifacts/candidate-final-soffit.log",
+      "bytes": 209,
+      "sha256": "c2af9e2f7c85d32e91d7eaa4202c7cf5c9c32a77f56f352f967e372d59940cbf"
+    },
+    {
+      "archive": "artifacts/candidate-original-floorplan-controller.log",
+      "bytes": 1560,
+      "sha256": "394387baa6d22448f82bfb7a7722083e5357338f044138636f1f99f1fe2a6da2"
+    },
+    {
+      "archive": "artifacts/candidate-production-regression.log",
+      "bytes": 1623,
+      "sha256": "89c11c6322f5d8e4c7e73fcc63bfb2ce398f17097bec24133103bac40342e98e"
+    },
+    {
+      "archive": "artifacts/candidate-strict-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "artifacts/candidate-strict.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "artifacts/candidate-vite-build.log",
+      "bytes": 454,
+      "sha256": "e28e10acd25f5ddb982c18a35f1159a616f89d57292cdf299b899aaf939487a4"
+    },
+    {
+      "archive": "artifacts/contract-protection-final.json",
+      "bytes": 15706,
+      "sha256": "d6a365d6259d2d41daefdf89e1aec454e2ea0ba5c41de474b6b6cfe878c3b338"
+    },
+    {
+      "archive": "artifacts/contract-protection-final.log",
+      "bytes": 490,
+      "sha256": "7f4c648785dad36042a3840f840d65dbef566cb8a5f4a073bd54db5ab35cd5f6"
+    },
+    {
+      "archive": "artifacts/contract-protection.json",
+      "bytes": 13593,
+      "sha256": "4eceb1d2da9151592b9029c4cd49b9a359d44ab5c499d13c7f512439f93303e1"
+    },
+    {
+      "archive": "artifacts/contract-protection.log",
+      "bytes": 388,
+      "sha256": "62e19eec3bb84ab8245736eea01f17edfa29a04341f57b92ac383f4a053327b7"
+    },
+    {
+      "archive": "artifacts/native-save-fingerprint-protection.json",
+      "bytes": 468,
+      "sha256": "e490ba5e01aef96d25e46a1a8e64ae59cf91f5f01825b5477803c1d24cce62cf"
+    },
+    {
+      "archive": "artifacts/patch-dry-run.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "diagnostic-code/upper-stair-actual.test.ts",
+      "bytes": 12497,
+      "sha256": "b01fc1b9a4076712af3896e8bd4f88c9ae14c52a89782b03f35e9712f68b3b5f"
+    },
+    {
+      "archive": "diagnostic-code/verify-contracts.mts",
+      "bytes": 6123,
+      "sha256": "2b0e4225aa5a229318ac4b7169a6e7888fb7f4720f6f07173daf7248474b4801"
+    },
+    {
+      "archive": "inputs/current-v4-20261001.world.json",
+      "bytes": 1730847,
+      "sha256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2"
+    },
+    {
+      "archive": "inputs/frozen04-source-snapshot.original.json",
+      "bytes": 31214,
+      "sha256": "119abf544cc7cbbf1d321c670cc04e79ed84dfab6bc2ace7a6cc8ebe068bc11f"
+    },
+    {
+      "archive": "inputs/original-exact-support-diagnostic.json",
+      "bytes": 24926,
+      "sha256": "304212db7bcdeba1b29e9db2e2f962002b9b9cd61ee4d5b4f24ad19db32a1626"
+    },
+    {
+      "archive": "isolation-README.original.md",
+      "bytes": 4557,
+      "sha256": "2a9b45df89cedb91b39a8eab2ec2de805d7a9b3fa815c37859d01cffac6df868"
+    },
+    {
+      "archive": "provenance.json",
+      "bytes": 11895,
+      "sha256": "6c104b60d9570aa72d4924d4017c0e85c0ea24847fb91f76fcf8c3e8925c17c9"
+    },
+    {
+      "archive": "root-related/build.log",
+      "bytes": 720,
+      "sha256": "7a3eb5b60e154a9b70bebfd6cccf7d950915110632a63249c1f39b3ef7a81025"
+    },
+    {
+      "archive": "root-related/related.log",
+      "bytes": 3066,
+      "sha256": "1ce9bebf497b47b2051fe6311e63a6f9df41c3791f0972f0383a26f58ac00652"
+    },
+    {
+      "archive": "root-related/root-verification.json",
+      "bytes": 21051,
+      "sha256": "e3934512ee5cd87bfc65dba0e8140ea34ce02ce4dc6a09951bb7eb8bb404a920"
+    },
+    {
+      "archive": "source-variants/baseline/architecture-floor-plan.ts",
+      "bytes": 39817,
+      "sha256": "9e3b35a9e3b667466e0360c287bd5b828b35e1fd2f1cd2a00228f2bb5f74a724"
+    },
+    {
+      "archive": "source-variants/baseline/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    {
+      "archive": "source-variants/candidate/architecture-floor-plan.ts",
+      "bytes": 40266,
+      "sha256": "0a7d728e2714b2465002f509ff7ce8f389c4505cd3ff05070961336bd3a9ba78"
+    },
+    {
+      "archive": "source-variants/candidate/controller-v4.test.ts",
+      "bytes": 13238,
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09"
+    },
+    {
+      "archive": "source-variants/controller.unchanged.ts",
+      "bytes": 23002,
+      "sha256": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6"
+    },
+    {
+      "archive": "source-variants/frozen04-original/controller-v4.test.ts",
+      "bytes": 11570,
+      "sha256": "bcb62d43c56da5f447a9e0c2b8a5fe15fe2013be63b91a8814d7e9485aeb739f"
+    },
+    {
+      "archive": "upper-stair-support.patch",
+      "bytes": 5800,
+      "sha256": "ad798b94a68bf2c82276e1f70ee0bac28966f65da56f94eef2f556d33c501ea3"
+    }
+  ],
+  "limitations": [
+    "No command was re-executed; argv/exit are historical records validated against logs/hashes.",
+    "Empty strict/dry-run logs alone do not prove execution; historical provenance and independent root npm build are retained.",
+    "Archived source variants are not a standalone runnable package. Mergeable production regression has no temp-file dependency.",
+    "New-source fullsuite NOT_RUN; Frozen04 465/465 stays with its own source/entry.",
+    "No whole-world W, natural NPC simulation, GL, art approval, hardware performance or release conclusion."
+  ],
+  "archiveVerificationCorrection": "First archive assertion wrongly assumed bitwise zero lateral drift in continuous failed motor step. Raw has <=10 micrometre X adjustment and zero forward/vertical progress. Original raw unchanged; corrected verification records exact before/after instead.",
+  "sourceVariantExecutionMapping": {
+    "source-variants/baseline/architecture-floor-plan.ts": "Original frozen04 provider9e3 used for baseline FAIL.",
+    "source-variants/baseline/controller-v4.test.ts": "Executed new regression test5be paired with original provider for baseline FAIL; same bytes as candidate test.",
+    "source-variants/frozen04-original/controller-v4.test.ts": "Old pre-fix testbcb retained as historical source, not the executed baseline FAIL regression."
+  },
+  "independentReadOnlyReview": {
+    "status": "PASS_AFTER_SOURCE_VARIANT_MAPPING_CLARIFIED",
+    "commands": 14,
+    "originalArtifactHashes": 24,
+    "rootSourceInputs": 94,
+    "uniqueCases": 18,
+    "actualNormalWSamples": 30540,
+    "sourceStartEqualsSourceEnd": true,
+    "rootRelatedPassed": 26,
+    "rootBuildExit": 0,
+    "scope": "Original evidence/hash review; no tests/GL rerun."
+  }
+}

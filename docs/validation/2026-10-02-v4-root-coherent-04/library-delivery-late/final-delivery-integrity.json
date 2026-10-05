@@ -1,0 +1,34 @@
+{
+  "scope": "Post-upload read-only CRC/hash and credential/signed/private-reference scan; original ZIP bytes unchanged, no new upload",
+  "at": "2026-10-02T06:43:18.427293+00:00",
+  "reports": [
+    {
+      "archive": "/workspace/yunshan/artifacts/yunshan-v4-controlled-bodies-originals-01.zip",
+      "sha256": "cc63a2416552452f1c9ea0658a00428246fd08ddc06f9c26c2554deb370311b5",
+      "bytes": 31672972,
+      "zipMembers": 340,
+      "CRC": "PASS",
+      "everyMemberHash": "PASS",
+      "secretScan": "PASS",
+      "streamsScanned": 340,
+      "nestedZIPEntries": 0,
+      "decompressedGZEntries": 12,
+      "matches": 0,
+      "uploadCountForThisArchive": 1
+    },
+    {
+      "archive": "/workspace/yunshan/artifacts/yunshan-v4-home-pilot-and-native-journey-originals-01.zip",
+      "sha256": "bfca3e6546b976e0e33e97b47a59848e8fc5545ad51991b310449b4e170f7909",
+      "bytes": 14190862,
+      "zipMembers": 192,
+      "CRC": "PASS",
+      "everyMemberHash": "PASS",
+      "secretScan": "PASS",
+      "streamsScanned": 197,
+      "nestedZIPEntries": 6,
+      "decompressedGZEntries": 12,
+      "matches": 0,
+      "uploadCountForThisArchive": 1
+    }
+  ]
+}

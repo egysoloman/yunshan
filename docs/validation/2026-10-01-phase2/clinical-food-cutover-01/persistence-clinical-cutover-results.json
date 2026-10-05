@@ -1,0 +1,398 @@
+{
+  "at": "2026-10-01T20:51:54.643Z",
+  "environment": "Linux Chromium real IndexedDB, Vite source modules; no WebGL renderer",
+  "initialHashes": {
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "src/simulation/clinical.ts": "6c30a61bc410eb299999108b1067e7d30b2eab0b80db64d2f65f65e2896f3d17",
+    "src/simulation/culture.ts": "d1d1ecc2717844f45fc3e19b16c753fac6eac095a4a3259d62acce6d5d728464",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97"
+  },
+  "finalHashes": {
+    "src/persistence.ts": "0b6bf0220bd3be3b80666d61371d8290590da19e986d5c036a5466cfce627767",
+    "src/persistence/partition.ts": "6fd0fa6cc3ab4ea4afd6b0fdee46e838c56d5d1ff087f80b6687ebd15a8a08b5",
+    "src/persistence/session.ts": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+    "src/simulation.ts": "d0efe2451ab16e06e62b4f4f1bb953a85d68dcc093d640a375948e2157a8fe6c",
+    "src/world.ts": "d1403345df1bd6e8b00afdcd705647c57ee2c4f3311c7ebe68094296864c6015",
+    "src/types.ts": "d06c6249123eafabe93f2e80dc94d35ae5a50ff18126d50efb5ea0a6da655332",
+    "src/simulation/clinical.ts": "6c30a61bc410eb299999108b1067e7d30b2eab0b80db64d2f65f65e2896f3d17",
+    "src/simulation/culture.ts": "d1d1ecc2717844f45fc3e19b16c753fac6eac095a4a3259d62acce6d5d728464",
+    "src/simulation/family.ts": "41f4fc92a0a9628509f692e77c1cc9ca3a182835dc19e9bda961d4ff6fd7fd5e",
+    "src/simulation/trade.ts": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+    "src/simulation/banking.ts": "6fed5327a2dd53154eda8664e97a0faa53d83e4611e5ba5663491384fc3b2e92",
+    "src/simulation/player-labor.ts": "22d7ec91aaf9fb37d195938e0c2b2f5812f874df5a9a2b395a9bc9000bd73fef",
+    "src/simulation/extensions.ts": "e9f3bf5adf6cc6adab2dfe2ecdcb36a9dede73bab3cf8d6ec98f1ad5beee1a97"
+  },
+  "evidence": [
+    {
+      "check": "complete-city-roundtrip-continuation",
+      "exactStored": true,
+      "imported": {
+        "ok": true,
+        "message": "云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。"
+      },
+      "exactRestore": true,
+      "continuation": true,
+      "citizenCount": 616,
+      "expected": 616,
+      "stores": [
+        "journeys",
+        "save-chunks",
+        "save-global",
+        "save-manifests",
+        "save-player"
+      ],
+      "chunkCount": 120,
+      "legacyWrites": 0
+    },
+    {
+      "check": "actual-player-work-escrow-and-whole-generation-recovery",
+      "exactBefore": true,
+      "playerOnly": true,
+      "progressedMinutes": 10,
+      "progressedEscrow": 29.166666666666664,
+      "recoveredExact": true,
+      "imported": true,
+      "restoredEscrow": 35,
+      "restoredWallet": 600,
+      "originalWallet": 600,
+      "recoveredPrevious": true
+    },
+    {
+      "check": "actual-clinical-procurement-reuse-on-demand-continuation",
+      "exact": true,
+      "imported": true,
+      "continuation": true,
+      "playerIndices": [
+        0,
+        2
+      ],
+      "requiredIndices": [
+        0,
+        2
+      ],
+      "playerEscrow": 30,
+      "globalHasOrders": false,
+      "globalHasStock": false,
+      "globalFunded": 90,
+      "orders": [
+        {
+          "id": "clinical-1",
+          "payerId": "player",
+          "escrow": 0,
+          "purchasePaid": 4,
+          "refunded": 26,
+          "reusedUnits": 0,
+          "receivedUnits": 1,
+          "state": "cancelled"
+        },
+        {
+          "id": "clinical-2",
+          "payerId": "citizen-0",
+          "escrow": 26,
+          "purchasePaid": 4,
+          "refunded": 0,
+          "reusedUnits": 0,
+          "receivedUnits": 1,
+          "state": "awaitingDoctor"
+        },
+        {
+          "id": "clinical-3",
+          "payerId": "player",
+          "escrow": 30,
+          "purchasePaid": 0,
+          "refunded": 0,
+          "reusedUnits": 1,
+          "receivedUnits": 0,
+          "state": "awaitingDoctor"
+        }
+      ],
+      "received": 2,
+      "consumed": 0,
+      "initialChunkGets": 0,
+      "initialPlayerGets": 1,
+      "cache": 1
+    },
+    {
+      "check": "clinical-player-custody-whole-generation-recovery",
+      "recoveredPrevious": true,
+      "initialChunkGets": 0,
+      "exact": true,
+      "imported": true,
+      "exactRestore": true,
+      "orderCount": 2,
+      "escrow": 60,
+      "purchasePaid": 0,
+      "stockReceived": 0,
+      "originalWallet": 570,
+      "restoredWallet": 570,
+      "completeShops": true
+    },
+    {
+      "check": "independent-incremental-writes",
+      "unchanged": [
+        {
+          "store": "save-manifests",
+          "id": "autosave"
+        }
+      ],
+      "unchangedStatus": {
+        "backend": "indexeddb",
+        "recoveredPrevious": false,
+        "lastWrite": {
+          "savedAt": 1790887871699,
+          "generation": 2,
+          "chunksWritten": 0,
+          "totalChunks": 118,
+          "globalWritten": false,
+          "playerWritten": false,
+          "bytesWritten": 0,
+          "removedRecords": 0
+        }
+      },
+      "player": [
+        {
+          "store": "save-player",
+          "id": "3:player"
+        },
+        {
+          "store": "save-manifests",
+          "id": "autosave"
+        }
+      ],
+      "global": [
+        {
+          "store": "save-global",
+          "id": "4:global"
+        },
+        {
+          "store": "save-manifests",
+          "id": "autosave"
+        }
+      ],
+      "exact": true
+    },
+    {
+      "check": "single-npc-route-write",
+      "puts": [
+        {
+          "store": "save-chunks",
+          "id": "2:chunk:-3:3"
+        },
+        {
+          "store": "save-manifests",
+          "id": "autosave"
+        }
+      ],
+      "status": {
+        "backend": "indexeddb",
+        "recoveredPrevious": false,
+        "lastWrite": {
+          "savedAt": 1790887874358,
+          "generation": 2,
+          "chunksWritten": 1,
+          "totalChunks": 118,
+          "globalWritten": false,
+          "playerWritten": false,
+          "bytesWritten": 13994,
+          "removedRecords": 0
+        }
+      },
+      "exact": true
+    },
+    {
+      "check": "cross-chunk-movement-and-deletion",
+      "exact": true,
+      "count": 1,
+      "vehicleCount": 1,
+      "voxels": 0,
+      "oldVoxelReference": false
+    },
+    {
+      "check": "transaction-abort-and-quota",
+      "rejected": true,
+      "unchangedStores": true,
+      "exact": true
+    },
+    {
+      "check": "complete-prior-generation-and-gc",
+      "allRetained": true,
+      "bounded": true,
+      "recovered": true,
+      "status": {
+        "backend": "indexeddb",
+        "recoveredPrevious": true,
+        "lastWrite": {
+          "savedAt": 1790887881432,
+          "generation": 6,
+          "chunksWritten": 0,
+          "totalChunks": 118,
+          "globalWritten": false,
+          "playerWritten": true,
+          "bytesWritten": 1248,
+          "removedRecords": 1
+        }
+      }
+    },
+    {
+      "check": "checksum-repair-and-second-recovery",
+      "first": true,
+      "repaired": true,
+      "second": true,
+      "recoveredStatus": true
+    },
+    {
+      "check": "overlapping-write-queue-and-page-reload",
+      "exact": true
+    },
+    {
+      "check": "v1-upgrade-and-compatibility",
+      "legacyIDB": true,
+      "legacyLocal": true,
+      "latest": true,
+      "oldIDBIntact": true,
+      "oldLocalIntact": true,
+      "stores": [
+        "journeys",
+        "save-chunks",
+        "save-global",
+        "save-manifests",
+        "save-player"
+      ]
+    },
+    {
+      "check": "atomic-storage-fallback-and-recovery",
+      "writtenKeys": [
+        "yunshan.save.fallback.v2"
+      ],
+      "fallback": true,
+      "latest": true,
+      "backend": "indexeddb",
+      "envelope": {
+        "version": 2,
+        "savedAt": 1790887892864
+      }
+    },
+    {
+      "check": "on-demand-physical-get-and-lru",
+      "opened": [
+        {
+          "store": "save-manifests",
+          "id": "autosave"
+        },
+        {
+          "store": "save-global",
+          "id": "1:global"
+        },
+        {
+          "store": "save-player",
+          "id": "1:player"
+        }
+      ],
+      "unknown": null,
+      "concurrentEqual": true,
+      "reads": 4,
+      "fullCache": {
+        "chunkReads": 3,
+        "cacheHits": 1,
+        "bytesRead": 15310,
+        "cachedChunks": 2,
+        "cachedBytes": 11581,
+        "closed": false,
+        "invalidated": false
+      },
+      "tiny": {
+        "chunkReads": 2,
+        "cacheHits": 0,
+        "bytesRead": 7458,
+        "cachedChunks": 0,
+        "cachedBytes": 0,
+        "closed": false,
+        "invalidated": false
+      },
+      "closedRejected": true,
+      "closed": {
+        "chunkReads": 4,
+        "cacheHits": 1,
+        "bytesRead": 19039,
+        "cachedChunks": 0,
+        "cachedBytes": 0,
+        "closed": true,
+        "invalidated": false
+      },
+      "readers": 0
+    },
+    {
+      "check": "cross-page-pinned-generation-and-release-gc",
+      "exact": true,
+      "pinnedGeneration": 1,
+      "latestGeneration": 5,
+      "before": 126,
+      "after": 123,
+      "retained": 123,
+      "readerRemoved": true,
+      "newestDiffers": true
+    },
+    {
+      "check": "late-corruption-whole-generation-restart",
+      "damageRejected": true,
+      "cachedRejected": true,
+      "invalidated": true,
+      "distinct": true,
+      "generation": 1,
+      "recoveredPrevious": true,
+      "exact": true,
+      "playerDifferent": true,
+      "globalDifferent": true
+    },
+    {
+      "check": "explicit-full-materialization-and-24-tick-continuation",
+      "exactJSON": true,
+      "imported": true,
+      "exact": true,
+      "continuation": true,
+      "reads": 120,
+      "chunks": 120,
+      "cached": 1
+    },
+    {
+      "check": "expired-lease-refusal-and-gc",
+      "expired": true,
+      "invalidated": true,
+      "noLeases": true,
+      "exactlyRetained": true
+    },
+    {
+      "check": "header-damage-whole-prior-generation-without-prefetch",
+      "generation": 1,
+      "recovered": true,
+      "chunksAtOpen": 0,
+      "exact": true
+    },
+    {
+      "check": "session-legacy-and-atomic-fallback-compatibility",
+      "legacyExact": true,
+      "legacyGeneration": 0,
+      "localExact": true,
+      "localBackend": "localStorage",
+      "localGeneration": 0,
+      "geographicGets": 0
+    },
+    {
+      "check": "actual-heartbeat-renewal-and-missing-lease-invalidation",
+      "initialExpiry": 1790888214472,
+      "renewedExpiry": 1790888275478,
+      "rejected": true,
+      "invalidated": true,
+      "cached": 0
+    }
+  ]
+}

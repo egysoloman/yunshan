@@ -1,0 +1,20 @@
+# v4 authoritative facility routing — CPU validation
+
+This record covers `src/simulation.ts`, `src/journey.ts` and the eight new controlled CPU cases in `tests/v4-simulation.test.ts`. It is an intermediate integration result, not a full-suite, WebGL, normal-player journey, visual-reference, macOS or performance acceptance.
+
+The immutable test copy is `/tmp/yunshan-v4-city-core-final-01`. All 95 files had identical source-before, copied and source-after hashes. The complete copied set remained unchanged throughout validation. The shared working tree changed only `src/simulation/banking.ts` and `src/simulation/culture.ts` during the run; this record does not cover those later changes. Full commands, exit codes, raw-log SHA256 and all start/end hashes are in `run-status.json` and `source-snapshot.json`.
+
+Actual results:
+
+- `tsc --noEmit`: exit 0.
+- All eight new v4 tests: 8/8, exit 0; raw duration 28,908.004327 ms.
+- Existing complete journey test file: 14/14, exit 0; raw duration 48,051.050139 ms. Includes the original r7 body, its actual unchanged-controller road join, route persistence and missing-module rejection.
+- Four existing unmarked/civic tests: 4/4, exit 0. They retain large public/basement rooms, restricted floors, stepped-floor empty-air rejection, the original narrow civic stair shaft and Chinese/earned scientific identities.
+
+The v4 cases check actual shared room versus supported courtyard, atomic remote purchase denial, real sale-point arrival and the existing 4.2 m/game-minute walking rate, wall/fixture-free room and courtyard exits, both stair flights during replanning, a same-building urgent needs change from an upper workplace to ground retail, qualified teaching work that pauses in another legal room and resumes at its real point, and independent upper-floor permission. Controlled fixture identities/positions are explicitly test inputs; they are not a claim that a normal player earned those identities or walked there. Clock advancement uses ordinary `Simulation.step` at 1×; no wages, work minutes or hunger recovery are injected to satisfy assertions.
+
+Production adaptation is gated by `v4-program-bodies-02`. Real function points and shared room/slab/stair/fixture routes replace random rectangle endpoints for marked bodies. Courtyard/gallery support permits real traversal but does not make a facility interior. Target and every entered floor must be accessible; arrival must match the intended purpose. Indoor paths reuse the existing bounded route cache only when there are no player voxels and return independent point copies. The four unmarked world recipes retain the original proximity, room, stair and destination branches. Separate complete old-recipe/save continuation verification belongs to the world/layout owner.
+
+Initial evidence is preserved under `initial/`. `baseline.log` and `result.json` show an unchanged coherent05 core accepting a genuine supported courtyard as a facility and an NPC route crossing one candidate shared wall. This was a controlled v3 building with candidate02 geometry, not a browser journey. The first shared-module import attempt failed while the module was incomplete; `baseline-module-pending.log` is integration readiness evidence, not a geometry failure. The first new four-test run was 3/4: its work fixture incorrectly expected an unqualified traveller to start clinical work. The repaired fixture keeps the negative qualification assertion and starts only a qualified teacher at a real school work point; both original failure and repaired result remain. The initial strict failure was in other live owner files; the immutable strict result above is the final result for this copied set.
+
+Shared provider/controller work is still being finalized by its owner. This CPU record cannot establish actual rendered doors/counters, motor stair traversal, every facility module, all world save compatibility, long-term economy or reference appearance. No browser, Chrome or GPU process was started by this validation.

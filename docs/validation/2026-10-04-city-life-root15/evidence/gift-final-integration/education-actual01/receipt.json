@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-04T22:14:48.073488+00:00",
+  "endedAt": "2026-10-04T22:16:36.141446+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/budget-services-actual.ts",
+    "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/education-actual01/original-artifacts",
+    "1100"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 322,
+  "inputsStable": true,
+  "rawSHA256": "032e82bc4a13d3127f66626cd116ddd6179a8279756b4c3698538b5572cbe5a6",
+  "ownedPid": 125165,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 125173,
+      "state": "Z",
+      "parent": 1,
+      "group": 125165,
+      "session": 125165,
+      "startTicks": 8291296
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

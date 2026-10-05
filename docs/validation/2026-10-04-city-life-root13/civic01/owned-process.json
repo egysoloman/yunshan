@@ -1,0 +1,20 @@
+{
+  "pid": 84660,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=none",
+    "tests/civic-staffing.test.ts",
+    "tests/civic-staffing-two-terms.test.ts"
+  ],
+  "identity": {
+    "pid": 84660,
+    "state": "R",
+    "parent": 84653,
+    "group": 84660,
+    "session": 84660,
+    "startTicks": 5421819
+  }
+}

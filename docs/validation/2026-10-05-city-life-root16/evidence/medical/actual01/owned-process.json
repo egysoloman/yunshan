@@ -1,0 +1,20 @@
+{
+  "pid": 130638,
+  "argv": [
+    "env",
+    "ROOT16_MEDICAL_RUN_COORDINATED=1",
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01-driver-as-run.mts",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts"
+  ],
+  "identity": {
+    "pid": 130638,
+    "state": "R",
+    "parent": 130634,
+    "group": 130638,
+    "session": 130638,
+    "startTicks": 9050125
+  }
+}

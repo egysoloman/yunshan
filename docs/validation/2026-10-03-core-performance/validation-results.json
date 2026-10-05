@@ -1,0 +1,764 @@
+{
+  "reportAsOfUTC": "2026-10-03T17:44:55.333488+00:00",
+  "kind": "READ_ONLY_DELIVERY_REPORT",
+  "newRuntimeExecutedByThisReport": false,
+  "sourceCommit": "6785ca7dcca09e8e97afd610cfd52176c7a1cfb1",
+  "sourceHashes": {
+    "originalArchitecture": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+    "candidateArchitecture": "27431000d8f47ad5c5ece0e8c9319362c0610efda53559854a317995f1fc5f08",
+    "sharedArchitectureAsRead": "b4d0c35fb868deedfb10e14128c2f3255a1f3a5f3b54f2f853afb0d2656a4d42",
+    "workerBundle": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+    "browserBundle": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db"
+  },
+  "evidenceRoots": {
+    "original": "/tmp/yunshan-core-performance-6785-20261003-01",
+    "compare32": "/tmp/yunshan-core-empty-support-root01-20261003-01",
+    "geometry": "/tmp/yunshan-geometry-performance-verified02-20261003-01",
+    "worker": "/tmp/yunshan-mz-worker-root01-20261003-01",
+    "browser": "/tmp/yunshan-mz-worker-browser-root02-20261003-01"
+  },
+  "scopes": {
+    "original": {
+      "receipt": {
+        "argv": [
+          "node",
+          "--import",
+          "tsx",
+          "/tmp/yunshan-core-performance-6785-20261003-01/original-12tick.mts",
+          "/tmp/yunshan-core-performance-6785-20261003-01/run01"
+        ],
+        "cwd": "/tmp/yunshan-core-performance-6785-20261003-01",
+        "startedAt": "2026-10-03T17:13:45.962833+00:00",
+        "launcher": {
+          "exists": true,
+          "pid": 250569,
+          "state": "R",
+          "startTicks": 18358303
+        },
+        "owned": {
+          "exists": true,
+          "pid": 250572,
+          "state": "R",
+          "startTicks": 18358310
+        },
+        "environmentOverrides": {},
+        "timeoutSeconds": 120,
+        "sourceCount": 164,
+        "cpuProfile": false,
+        "endedAt": "2026-10-03T17:15:03.631259+00:00",
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "EXIT_ZERO",
+        "inputsUnchanged": true,
+        "afterWait": {
+          "exists": false,
+          "pid": 250572
+        },
+        "sameStartAfterWait": null,
+        "rawSHA256": "03ac7e59cf441f8cdf8f648eeeda8602a76dd6b87ae10990a7d640258a895239",
+        "lastCompletedCheckpointExists": true
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "exists": true,
+        "pid": 250572,
+        "state": "R",
+        "startTicks": 18358310
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "compare32": {
+      "receipt": {
+        "phase": "compare32-01",
+        "start": "2026-10-03T17:21:29.647059+00:00",
+        "end": "2026-10-03T17:23:07.473852+00:00",
+        "exit": 0,
+        "inputCount": 328,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "94075e21171306cb6716c7ccb0d6940e8cba75fa992de0ca1da71e01b921771d"
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 250886,
+        "parentPid": 250883,
+        "startTicks": "18404678",
+        "start": "2026-10-03T17:21:29.647059+00:00",
+        "argv": [
+          "node",
+          "--import",
+          "tsx",
+          "scripts/equivalence.mts",
+          "/tmp/yunshan-core-empty-support-root01-20261003-01/compare32-01"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "geometryBuild": {
+      "receipt": {
+        "phase": "build01",
+        "start": "2026-10-03T17:25:10.904077+00:00",
+        "end": "2026-10-03T17:25:23.631236+00:00",
+        "exit": 0,
+        "inputCount": 171,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "fd15b66d055872c30d74808c57084507dd811d2fd3882522de27ea8f2591116e",
+        "distHashes": {
+          "assets/index-DcKlDqDV.css": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+          "assets/index-WWiVUA22.js": "0b269b145c16a1db9e56be76eabb103f455eb234fcd320027af1d337979af1d4",
+          "assets/index-WWiVUA22.js.map": "a17165c7f576deee57b4600bac7ec8e513a92f3a026124089a1eb9b47776b114",
+          "assets/three-vwNga81B.js": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+          "assets/three-vwNga81B.js.map": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+          "index.html": "dcf93b4b708d1be6481caa9e316963de1ed45b5207ca6fc7f50c17b7562d6c3f"
+        }
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 251077,
+        "parentPid": 251074,
+        "startTicks": "18426804",
+        "start": "2026-10-03T17:25:10.904077+00:00",
+        "argv": [
+          "npm",
+          "run",
+          "build"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "geometryRegression": {
+      "receipt": {
+        "phase": "geometry01",
+        "start": "2026-10-03T17:25:12.369467+00:00",
+        "end": "2026-10-03T17:26:08.280510+00:00",
+        "exit": 0,
+        "inputCount": 171,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "d3c3678bc0df674efa4f4e048aac49332b16d43130f2dc0b453666e38e764ea2"
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 251104,
+        "parentPid": 251101,
+        "startTicks": "18426951",
+        "start": "2026-10-03T17:25:12.369467+00:00",
+        "argv": [
+          "node",
+          "--import",
+          "tsx",
+          "--test",
+          "--test-isolation=none",
+          "tests/floor-plan-empty-support.test.ts",
+          "tests/floor-plan-derived-cache.test.ts",
+          "tests/architecture-floor-plan.test.ts",
+          "evidence/geometry-equivalence.test.ts"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "workerProtocol": {
+      "receipt": {
+        "phase": "protocol01",
+        "start": "2026-10-03T17:31:21.856721+00:00",
+        "end": "2026-10-03T17:31:49.151039+00:00",
+        "exit": 0,
+        "inputCount": 7,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "8ccdeba4b20fc4979262dfebdaed9181812e5a6a527360e3a2a380c7af565cf9"
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 251243,
+        "parentPid": 251240,
+        "startTicks": "18463899",
+        "start": "2026-10-03T17:31:21.856721+00:00",
+        "argv": [
+          "node",
+          "adapters/rpg-maker/worker-protocol.test.mjs",
+          "--scope",
+          "protocol",
+          "--bundle",
+          "frozen/YunshanCore.js",
+          "--out",
+          "/tmp/yunshan-mz-worker-root01-20261003-01/protocol01/evidence"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "workerCapacity": {
+      "receipt": {
+        "phase": "capacity01",
+        "start": "2026-10-03T17:31:23.302920+00:00",
+        "end": "2026-10-03T17:31:28.762820+00:00",
+        "exit": 0,
+        "inputCount": 7,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "92a4d76c2d237fa3122a08881e93b8824d890c8ab4d550b4d6acc428032570b5"
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 251258,
+        "parentPid": 251255,
+        "startTicks": "18464044",
+        "start": "2026-10-03T17:31:23.302920+00:00",
+        "argv": [
+          "node",
+          "adapters/rpg-maker/worker-protocol.test.mjs",
+          "--scope",
+          "capacity",
+          "--bundle",
+          "frozen/YunshanCore.js",
+          "--out",
+          "/tmp/yunshan-mz-worker-root01-20261003-01/capacity01/evidence"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    },
+    "browserWorker": {
+      "receipt": {
+        "phase": "browser01",
+        "start": "2026-10-03T17:34:49.740687+00:00",
+        "end": "2026-10-03T17:35:45.099793+00:00",
+        "exit": 0,
+        "inputCount": 9,
+        "sourceStable": true,
+        "ownedPidGone": true,
+        "rawSha256": "93924ab53c89ec34bef455fe47ec7a3bc25631705d459179ef605bd6da2ba6f1"
+      },
+      "sourceFirstLastEqualReadOnly": true,
+      "ownedProcess": {
+        "pid": 251292,
+        "parentPid": 251289,
+        "startTicks": "18484688",
+        "start": "2026-10-03T17:34:49.740687+00:00",
+        "argv": [
+          "node",
+          "scripts/worker-browser.mjs",
+          "/tmp/yunshan-mz-worker-browser-root02-20261003-01/browser01"
+        ]
+      },
+      "ownedPidAbsentAtReport": true
+    }
+  },
+  "original12": {
+    "status": "COMPLETE",
+    "behavioralAssertions": "PASS",
+    "measuredTicks": 12,
+    "measuredPhases": 120,
+    "defaultCitizens": 616,
+    "defaultBuildings": 612,
+    "clockRange": [
+      480,
+      483
+    ],
+    "speed": 1,
+    "worldGenerationMs": 3204.4891319999997,
+    "constructorMs": 848.5420179999996,
+    "phaseTotalsMs": {
+      "time": 8.178228999998282,
+      "environment": 1.2661829999897236,
+      "energy": 2.0096789999879547,
+      "traffic": 59.404216999997516,
+      "people": 46973.350472000006,
+      "commerce": 8.105785999989166,
+      "finance": 27.354925999989064,
+      "security": 1.073341999994227,
+      "politics": 2.67987699999685,
+      "feedback": 4.794569000001502
+    },
+    "phaseTotalMs": 47088.21727999995,
+    "stepWallTotalMs": 54596.160736000005,
+    "observerInsideStepTotalMs": 7504.863280000075,
+    "peoplePhaseShare": 0.9975606040186886,
+    "after12Cache": {
+      "routeEntries": 885,
+      "routePoints": 32765,
+      "floorRouteEntries": 473,
+      "nodeRouteEntries": 412,
+      "walkingTrees": 245,
+      "walkingTreeNodes": 165130
+    },
+    "continuation": [
+      {
+        "index": 1,
+        "fullBytesEqual": true,
+        "sha256": "421bd92632892b6830ae410723d31e18876ec3128b864e148aa6bedc1e715279"
+      },
+      {
+        "index": 2,
+        "fullBytesEqual": true,
+        "sha256": "1972ee5064803bc9fc24173f5f0eb03c468a33e37364f6e9a233530878547904"
+      },
+      {
+        "index": 3,
+        "fullBytesEqual": true,
+        "sha256": "6e80edace10ee6a36acd9f0460fe7c024bca39a93870db01b290ee23a4a86bc3"
+      },
+      {
+        "index": 4,
+        "fullBytesEqual": true,
+        "sha256": "09f4c92a40d03fa4ad41a6ecea566169d4e4423c7605576f4d04a27d8eb95326"
+      }
+    ],
+    "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+    "initialSaveSHA256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+    "tick12SaveSHA256": "fbf570968c50c3ac8cfec1d9b83406c6a1c4aa54ec9385a77982187a8700a46e",
+    "finalTick16SaveSHA256": "09f4c92a40d03fa4ad41a6ecea566169d4e4423c7605576f4d04a27d8eb95326",
+    "runtimeMode": "original constructor drone; no setFocus"
+  },
+  "comparison32": {
+    "status": "PASS_EXACT_32_TICKS_NOT_FPS",
+    "stepsPerInstance": 32,
+    "initialPlusCompletedCheckpoints": [
+      {
+        "tick": 0,
+        "fullBytesEqual": true,
+        "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+        "sizeBytes": 695178
+      },
+      {
+        "tick": 1,
+        "fullBytesEqual": true,
+        "sha256": "f52d8467ae10d78cf4db4a7c4cc118eb601b6998764a04342045ba395bdfdc71",
+        "sizeBytes": 1127802
+      },
+      {
+        "tick": 2,
+        "fullBytesEqual": true,
+        "sha256": "0b065f5d190f92133d748437063f18e3209902df6ad8cbd973ddae338391b840",
+        "sizeBytes": 1398427
+      },
+      {
+        "tick": 3,
+        "fullBytesEqual": true,
+        "sha256": "a8ff06d6c47c32a4606a0f96f2fe79e23ef4f53908528dfacf5443b09b7b72bc",
+        "sizeBytes": 1613916
+      },
+      {
+        "tick": 4,
+        "fullBytesEqual": true,
+        "sha256": "b32f042f06371b7a35cc0bed057c92af37984275541e509782da7f3a92ede8fa",
+        "sizeBytes": 1800868
+      },
+      {
+        "tick": 5,
+        "fullBytesEqual": true,
+        "sha256": "19c5472e473190cbe416acb0c2eaaa288ce042b6389ffed68925bd04fc547454",
+        "sizeBytes": 1828692
+      },
+      {
+        "tick": 6,
+        "fullBytesEqual": true,
+        "sha256": "f483e636b63bf27f56540b40d7ef18ff324a2f2614434980b637391c17437430",
+        "sizeBytes": 1859888
+      },
+      {
+        "tick": 7,
+        "fullBytesEqual": true,
+        "sha256": "43b5c1d0e2b826460750b833b48afc31282c69cc042f0aa8327992997a34889a",
+        "sizeBytes": 1878793
+      },
+      {
+        "tick": 8,
+        "fullBytesEqual": true,
+        "sha256": "5bf0bbb2d8061b1bbe0a004f67698eff3b2557b098f60651826f29f5a4807378",
+        "sizeBytes": 1940297
+      },
+      {
+        "tick": 9,
+        "fullBytesEqual": true,
+        "sha256": "6fcdac525e8fd2f39929b9a7644d8415d2fabfafd4ea6de483a410ba868ef5ef",
+        "sizeBytes": 1954778
+      },
+      {
+        "tick": 10,
+        "fullBytesEqual": true,
+        "sha256": "d01f3eb19b5847b090fb692fbbca906eb2e1f418fb96aab77b7dc3a63077471d",
+        "sizeBytes": 1977488
+      },
+      {
+        "tick": 11,
+        "fullBytesEqual": true,
+        "sha256": "7f0155c3c278d058f5f903a458e0d8c441a7d56d27d4e54ee416bdea35f5c10f",
+        "sizeBytes": 2001288
+      },
+      {
+        "tick": 12,
+        "fullBytesEqual": true,
+        "sha256": "fbf570968c50c3ac8cfec1d9b83406c6a1c4aa54ec9385a77982187a8700a46e",
+        "sizeBytes": 2053407
+      },
+      {
+        "tick": 13,
+        "fullBytesEqual": true,
+        "sha256": "421bd92632892b6830ae410723d31e18876ec3128b864e148aa6bedc1e715279",
+        "sizeBytes": 2070125
+      },
+      {
+        "tick": 14,
+        "fullBytesEqual": true,
+        "sha256": "1972ee5064803bc9fc24173f5f0eb03c468a33e37364f6e9a233530878547904",
+        "sizeBytes": 2084305
+      },
+      {
+        "tick": 15,
+        "fullBytesEqual": true,
+        "sha256": "6e80edace10ee6a36acd9f0460fe7c024bca39a93870db01b290ee23a4a86bc3",
+        "sizeBytes": 2117589
+      },
+      {
+        "tick": 16,
+        "fullBytesEqual": true,
+        "sha256": "09f4c92a40d03fa4ad41a6ecea566169d4e4423c7605576f4d04a27d8eb95326",
+        "sizeBytes": 2154532
+      },
+      {
+        "tick": 17,
+        "fullBytesEqual": true,
+        "sha256": "2cdc0fced12277764a631e307b90c41f5f76ce3324bfdf33cd26f0fde15471e7",
+        "sizeBytes": 2154134
+      },
+      {
+        "tick": 18,
+        "fullBytesEqual": true,
+        "sha256": "a17716423b3f44f2b863a38b4725c3687633d682dbd03f7770cebfc773024070",
+        "sizeBytes": 2154176
+      },
+      {
+        "tick": 19,
+        "fullBytesEqual": true,
+        "sha256": "52e2c0176cf4797c08dafe3e5acce1f43b4601cb1a91d2dda33a06982832a9f9",
+        "sizeBytes": 2153913
+      },
+      {
+        "tick": 20,
+        "fullBytesEqual": true,
+        "sha256": "a17179efe7788d7d69c763af2ed2432b6a4725d1cad9b86de66f4fd4f8b50801",
+        "sizeBytes": 2154850
+      },
+      {
+        "tick": 21,
+        "fullBytesEqual": true,
+        "sha256": "9f9f066c6f6e5b5bae933392a23f3a1c7822c538d3d40fcb05dba58073affeed",
+        "sizeBytes": 2155090
+      },
+      {
+        "tick": 22,
+        "fullBytesEqual": true,
+        "sha256": "7c7f3420a22c605bf5cfd2eac471d51a4c089b7dfa20165c87f16ba77907e856",
+        "sizeBytes": 2154923
+      },
+      {
+        "tick": 23,
+        "fullBytesEqual": true,
+        "sha256": "6d55a65815f855ed3cdf0e83f0f79119d3d067a6fde18f25538d3f329393fdf4",
+        "sizeBytes": 2154078
+      },
+      {
+        "tick": 24,
+        "fullBytesEqual": true,
+        "sha256": "b2f920b5505ddbbd277da02bde824363a2e4712ca6ab3d016362cf66246d2361",
+        "sizeBytes": 2155181
+      },
+      {
+        "tick": 25,
+        "fullBytesEqual": true,
+        "sha256": "b787b4bbe497e27e93d6bcd97ea8e1efa6c1cb0f2aa4bbc6edb0d2191b7fd641",
+        "sizeBytes": 2155243
+      },
+      {
+        "tick": 26,
+        "fullBytesEqual": true,
+        "sha256": "62b093eed0ef44e596b04e55413283f1242745bdd828783795c57822c409dbd4",
+        "sizeBytes": 2155817
+      },
+      {
+        "tick": 27,
+        "fullBytesEqual": true,
+        "sha256": "b548b1501fc3a3c5b27c488473511118ceb0f1ed1b2f1e4b840ba524f2704abc",
+        "sizeBytes": 2156795
+      },
+      {
+        "tick": 28,
+        "fullBytesEqual": true,
+        "sha256": "c32e44201eb4c6e989dee0a5915883672b23820d5e8b14da20e88b95869416a2",
+        "sizeBytes": 2156488
+      },
+      {
+        "tick": 29,
+        "fullBytesEqual": true,
+        "sha256": "93b096528207cdc249e13d86b4c360df33d3d0f8498a263e76c0d30306914b41",
+        "sizeBytes": 2155175
+      },
+      {
+        "tick": 30,
+        "fullBytesEqual": true,
+        "sha256": "ccc64803f561fb32b15d05aeb75f3ab3e0b0fca94215e8fce226b685807b2897",
+        "sizeBytes": 2156051
+      },
+      {
+        "tick": 31,
+        "fullBytesEqual": true,
+        "sha256": "3348858492ae231af07c2851d6b099f023a903205dcab82b9267bfe5da326c33",
+        "sizeBytes": 2156138
+      },
+      {
+        "tick": 32,
+        "fullBytesEqual": true,
+        "sha256": "4a0e4c8079c986ffda28c86839bc8b7ee3731e2152e698d701fb1809dbd87f0c",
+        "sizeBytes": 2156564
+      }
+    ],
+    "metricsMs": {
+      "before": {
+        "ticks17To32": {
+          "n": 16,
+          "p50Ms": 218.74398649999785,
+          "p95LinearMs": 263.42840649999926,
+          "maxMs": 290.42536599999585
+        },
+        "first4SumMs": 27473.986428999993,
+        "ticks9To32MaxMs": 3046.9820000000036
+      },
+      "after": {
+        "ticks17To32": {
+          "n": 16,
+          "p50Ms": 134.37696349999896,
+          "p95LinearMs": 160.3430614999961,
+          "maxMs": 167.69875700000557
+        },
+        "first4SumMs": 25744.015627999997,
+        "ticks9To32MaxMs": 2555.2716840000066
+      }
+    },
+    "percentileMethod": "linear interpolation at (n-1)*p; 16 samples for ticks17..32",
+    "worldUnchanged": true,
+    "wholeSaveIdentical": true,
+    "executionOrder": "odd before/after; even after/before",
+    "exportOutsideTimedStep": true,
+    "phaseTimingOnly": true
+  },
+  "geometryGuard": {
+    "status": "PASS_SCOPED",
+    "buildExit": 0,
+    "cases": 15,
+    "pass": 15,
+    "fail": 0,
+    "skip": 0,
+    "supportQueries": 1017,
+    "routeQueries": 339,
+    "numericCounts": {
+      "supported": 456,
+      "empty": 561,
+      "routed": 204
+    },
+    "actualDistOutputs": [
+      {
+        "relative": "assets/index-DcKlDqDV.css",
+        "sha256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+        "sizeBytes": 31135
+      },
+      {
+        "relative": "assets/index-WWiVUA22.js",
+        "sha256": "0b269b145c16a1db9e56be76eabb103f455eb234fcd320027af1d337979af1d4",
+        "sizeBytes": 906822
+      },
+      {
+        "relative": "assets/index-WWiVUA22.js.map",
+        "sha256": "a17165c7f576deee57b4600bac7ec8e513a92f3a026124089a1eb9b47776b114",
+        "sizeBytes": 2739282
+      },
+      {
+        "relative": "assets/three-vwNga81B.js",
+        "sha256": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+        "sizeBytes": 502468
+      },
+      {
+        "relative": "assets/three-vwNga81B.js.map",
+        "sha256": "c52562da84968c815f5bfeed635efcda2676082a9a2706a4b5ae6ba94b0d145b",
+        "sizeBytes": 2719396
+      },
+      {
+        "relative": "index.html",
+        "sha256": "dcf93b4b708d1be6481caa9e316963de1ed45b5207ca6fc7f50c17b7562d6c3f",
+        "sizeBytes": 736
+      }
+    ],
+    "emptyAbsencePermanentlyCached": false,
+    "publicPrimingPreserved": true,
+    "malformedFallbackPreserved": true,
+    "olderPrimingOnlyVariant": "known malformed throw-to-null difference; not final executable candidate"
+  },
+  "workerProtocol": {
+    "scope": "protocol",
+    "startedAt": "2026-10-03T17:31:21.956Z",
+    "endedAt": "2026-10-03T17:31:49.045Z",
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "bounded queue rejects new work; only unsent work can cancel",
+        "status": "PASS"
+      },
+      {
+        "name": "world copied once; snapshots detached; samples can become stale",
+        "status": "PASS"
+      },
+      {
+        "name": "FIFO queue acknowledgements differ from original business results",
+        "status": "PASS"
+      },
+      {
+        "name": "ready public calls copy input before their first await",
+        "status": "PASS"
+      },
+      {
+        "name": "no arbitrary step or position API; remote purchase returns real refusal",
+        "status": "PASS"
+      },
+      {
+        "name": "bad loads preserve whole save, pending command and fractional time",
+        "status": "PASS"
+      }
+    ],
+    "failure": null,
+    "sourceStable": true,
+    "bundleSha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+    "host": "Node worker_threads + actual browser IIFE in VM; not native browser/MZ execution",
+    "noProductionSourceMutation": true,
+    "noCoreRateOrFPSPromise": true
+  },
+  "workerCapacity": {
+    "scope": "capacity",
+    "startedAt": "2026-10-03T17:31:23.361Z",
+    "endedAt": "2026-10-03T17:31:28.719Z",
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "256 command capacity retains every accepted result without implicit drain",
+        "status": "PASS"
+      }
+    ],
+    "failure": null,
+    "sourceStable": true,
+    "bundleSha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+    "host": "Node worker_threads + actual browser IIFE in VM; not native browser/MZ execution",
+    "noProductionSourceMutation": true,
+    "noCoreRateOrFPSPromise": true
+  },
+  "browserWorker": {
+    "status": "PASS_BROWSER_DEDICATED_WORKER_NOT_MZ_FPS",
+    "browserVersion": "151.0.7922.173",
+    "bundleSha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+    "checks": [
+      {
+        "name": "actual DOM clicks respond while only DedicatedWorker runs the core",
+        "during": [
+          {
+            "clicks": 1,
+            "finished": false,
+            "coreOnMain": "undefined"
+          },
+          {
+            "clicks": 2,
+            "finished": false,
+            "coreOnMain": "undefined"
+          },
+          {
+            "clicks": 3,
+            "finished": false,
+            "coreOnMain": "undefined"
+          },
+          {
+            "clicks": 4,
+            "finished": false,
+            "coreOnMain": "undefined"
+          },
+          {
+            "clicks": 5,
+            "finished": false,
+            "coreOnMain": "undefined"
+          }
+        ]
+      },
+      {
+        "name": "real browser Worker preserves 616 actors, original time, ten phases and full shutdown save",
+        "beats": 973,
+        "largestGapMs": 45.89999997615814,
+        "workerElapsedMs": 19771.70000001788,
+        "ticks": 8
+      },
+      {
+        "name": "eight Worker steps equal the original complete facade saves in the same browser",
+        "oracle": [
+          {
+            "tick": 1,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 2,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 3,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 4,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 5,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 6,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 7,
+            "fullSaveExact": true
+          },
+          {
+            "tick": 8,
+            "fullSaveExact": true
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "limitations": [
+      "HTTP Chromium DedicatedWorker, not NW/file/MZ editor/Mac",
+      "Worker isolates UI blocking; does not guarantee core real-time throughput",
+      "Oracle is run only after worker shutdown and heartbeat measurement"
+    ]
+  },
+  "browserCleanup": {
+    "browserClosed": true,
+    "serverClosed": true,
+    "port": 4317
+  },
+  "integration": {
+    "workerAdapter": "IMPLEMENTED_AND_SCOPED_TESTED_IN_FROZEN_ARTIFACT",
+    "productionGeometryOptimization": "NOT_APPLIED_AS_OF_READ_SHARED_SHA_EQUALS_BEFORE",
+    "facade": "ORIGINAL_6785_B376_UNOPTIMIZED",
+    "existingCityUI": "SYNCHRONOUS_NOT_DROP_IN_WORKER",
+    "parentPrivateMZAdoption": "NOT_EVIDENCED_NOT_ADOPTED_PER_PARENT",
+    "asyncMZInputUIAndSave": "HOST_INTEGRATION_REMAINS",
+    "libraryDelivery": "PARENT_PRODUCER_PENDING_SEPARATE_RECEIPT"
+  },
+  "notEstablished": [
+    "FPS",
+    "macOS hardware performance",
+    "MZ editor/NW.js/file execution",
+    "real-time simulation throughput",
+    "all project goals complete",
+    "new whole suite",
+    "new 14-day or 30/60-day economic steady state",
+    "new art acceptance"
+  ],
+  "noNewRuns": "Only Python file reads, hashing, byte comparison and report generation; no Node/Simulation/test/build/GPU/Git/ZIP/upload by this report."
+}

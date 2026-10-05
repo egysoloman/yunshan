@@ -1,0 +1,23 @@
+{
+  "status": "PREPARED_NOT_YET_RUN",
+  "maximumSeconds": 120,
+  "wrapper": "/workspace/yunshan-work/run-phase-v3.py",
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "driver": "/workspace/yunshan-work/ROOT14-default-food-route-audit-20261004-01/query.ts",
+  "driverSHA256": "e785dbb8c03bba61b79595fcd6b3d43d0ae184322b39795d3a5ad228e1c30b50",
+  "source": "/workspace/yunshan-work/ROOT14-default-food-route-audit-20261004-01/base",
+  "runDirectory": "/workspace/yunshan-work/ROOT14-default-food-route-audit-20261004-01/pure-query01",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT14-default-food-route-audit-20261004-01/query.ts"
+  ],
+  "baseInputs": 295,
+  "constructSimulation": false,
+  "createWorld": false,
+  "ticks": 0,
+  "commands": 0,
+  "businessMutations": 0,
+  "onlyGetterQueries": "SavedWorldFingerprint, route decoding on parsed clone, walkingAnchors, floorPlanRoute, NpcStairMotion.describe/validate/opening, chooseFacility, readonly wage/stock maps; refreshWorkforce fills only independent object roster cache."
+}

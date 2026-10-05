@@ -1,0 +1,202 @@
+{
+  "building": {
+    "id": "market-b24",
+    "districtId": "market",
+    "name": "千灯市集·钱庄街·里居7",
+    "kind": "home",
+    "position": {
+      "x": -390.8,
+      "y": 76,
+      "z": 316.20000000000005
+    },
+    "width": 40,
+    "depth": 34.4,
+    "height": 10.200000000000001,
+    "floors": 3,
+    "rotation": 0,
+    "door": {
+      "x": -390.8,
+      "y": 76.60000000000001,
+      "z": 333.40000000000003
+    },
+    "capacity": 129,
+    "seed": 668619109,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": -398.8,
+          "y": 76.6,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": -398.8,
+          "y": 80,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.39999999999999,
+          "z": 307.20000000000005
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": -398.8,
+          "y": 83.39999999999999,
+          "z": 307.20000000000005
+        }
+      }
+    ]
+  },
+  "floor": 0,
+  "stage": {
+    "x": -390.8,
+    "y": 76.2377358490566,
+    "z": 336.6
+  },
+  "approach": {
+    "x": -390.8,
+    "y": 76.46415094339623,
+    "z": 334.6
+  },
+  "stageSupport": null,
+  "expectedDoorExit": {
+    "x": -390.8,
+    "y": 76.6,
+    "z": 331.40000000000003
+  },
+  "entrance": {
+    "x": -390.8,
+    "y": 76.6,
+    "z": 333.40000000000003
+  },
+  "service": {
+    "id": "0:program:service",
+    "purpose": "service",
+    "floor": 0,
+    "position": {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    }
+  },
+  "bed": {
+    "id": "market-b24:floor:0:bed:home-bed:side:z-plus",
+    "bedId": "market-b24:floor:0:bed:home-bed",
+    "buildingId": "market-b24",
+    "floor": 0,
+    "fixtureId": "home-bed",
+    "side": "z-plus",
+    "position": {
+      "x": -408.8,
+      "y": 76.6,
+      "z": 301.6
+    }
+  },
+  "allGroundRestPoints": [
+    {
+      "id": "market-b24:floor:0:bed:home-bed:side:z-plus",
+      "bedId": "market-b24:floor:0:bed:home-bed",
+      "buildingId": "market-b24",
+      "floor": 0,
+      "fixtureId": "home-bed",
+      "side": "z-plus",
+      "position": {
+        "x": -408.8,
+        "y": 76.6,
+        "z": 301.6
+      }
+    },
+    {
+      "id": "market-b24:floor:0:bed:home-bed:side:x-plus",
+      "bedId": "market-b24:floor:0:bed:home-bed",
+      "buildingId": "market-b24",
+      "floor": 0,
+      "fixtureId": "home-bed",
+      "side": "x-plus",
+      "position": {
+        "x": -407,
+        "y": 76.6,
+        "z": 300.40000000000003
+      }
+    }
+  ],
+  "plannedRouteToService": [
+    {
+      "x": -390.8,
+      "y": 76.6,
+      "z": 331.40000000000003
+    },
+    {
+      "x": -397.2,
+      "y": 76.6,
+      "z": 318.6
+    },
+    {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    }
+  ],
+  "plannedRouteToBed": [
+    {
+      "x": -398.8,
+      "y": 76.6,
+      "z": 307.20000000000005
+    },
+    {
+      "x": -408.40000000000003,
+      "y": 76.6,
+      "z": 304.20000000000005
+    },
+    {
+      "x": -408.8,
+      "y": 76.6,
+      "z": 301.6
+    }
+  ],
+  "staticPlannedMetres": 38.51099025706251,
+  "bodyRadius": 0.35,
+  "eyeHeight": 1.72,
+  "restPointRadius": 0.4,
+  "restFootHeightTolerance": 1e-7,
+  "note": "Static actual source provider planning only; no Simulation, position writes or traversal claim",
+  "immutableWorldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2"
+}

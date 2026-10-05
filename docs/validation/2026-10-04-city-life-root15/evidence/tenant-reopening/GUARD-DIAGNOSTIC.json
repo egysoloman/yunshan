@@ -1,0 +1,984 @@
+{
+  "at": "2026-10-04T20:15:07.469922+00:00",
+  "classification": "NOT_OBSERVED_NO_THRESHOLD_CHANGE",
+  "scope": "diagnostic01 / 256 actual ordinary steps / one sim",
+  "resultSHA256": "737582461d635255baabf4916f9a1840052ea77ad85fb976f70c917d5f30dbbf",
+  "sourceShopLifecycleSHA256": "4a23354d03ae49eca86a43cd70cc0eed215a4e7bb57530e29443881729c1f0b4",
+  "guardLine": 468,
+  "andContract": "profit <= -600 && inventory < 1e-7 && funds - protectedFunds < 20*8/24; retained unchanged",
+  "operatingReserve": 6.666666666666667,
+  "guardCounts": {
+    "currentPolicy": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "privateOriginalMarket": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "titleOperatingNoCorporationNoListing": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "activeCurrentUnexpiredLease": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "selfOperatorAndDistinctAssetOwner": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "bothPartiesLive": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "eligibleOperator": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "tenantWilling": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "receiptCapacity": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "profitBelowMinus600": {
+      "trueSteps": 256,
+      "falseSteps": 0
+    },
+    "inventoryBelowEPS": {
+      "trueSteps": 158,
+      "falseSteps": 98
+    },
+    "freeFundsBelowOperatingReserve": {
+      "trueSteps": 0,
+      "falseSteps": 256
+    }
+  },
+  "ranges": {
+    "inventory": [
+      0,
+      2
+    ],
+    "profit": [
+      -841.8206179676138,
+      -634.9002979873987
+    ],
+    "cash": [
+      414.45564049314976,
+      497.24470406210173
+    ],
+    "open": [
+      false,
+      true
+    ]
+  },
+  "freeFundsRange": [
+    7.757310555555591,
+    57.79320279117394
+  ],
+  "emptyStockSteps": 158,
+  "firstEmptyStockStep": 99,
+  "allBusinessGuardTrueSteps": 0,
+  "initial": {
+    "clock": 2007,
+    "market": {
+      "raw": {
+        "id": "shop-market",
+        "buildingId": "market",
+        "districtId": "district",
+        "inventory": 2,
+        "price": 17.933867346397047,
+        "revenue": 2701.657649193504,
+        "profit": -634.6418815290654,
+        "customers": 0,
+        "open": false,
+        "employees": 58,
+        "ownerId": "citizen-117",
+        "cash": 414.8723071598165,
+        "lifecycleVersion": 1
+      },
+      "commodity": "food",
+      "funds": 414.8723071598165,
+      "protectedFunds": 406.6983299375942,
+      "freeFunds": 8.173977222222277
+    },
+    "tenant": {
+      "id": "citizen-117",
+      "name": "\u53f6\u6708",
+      "districtId": "district",
+      "homeId": "home",
+      "workId": "market",
+      "role": "merchant",
+      "skills": {
+        "craft": 48,
+        "learning": 51.26275106176111,
+        "social": 20
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "\u4e91\u5c71\u5c45\u6c11"
+      ],
+      "education": 2,
+      "position": {
+        "x": 29.166666666666668,
+        "y": 20.6,
+        "z": 1
+      },
+      "state": "reviewingBusiness",
+      "destinationId": "market",
+      "money": 145.32516491096675,
+      "needs": {
+        "hunger": 90.54999999998603,
+        "fatigue": 94.85499999999632,
+        "social": 46.15288289883721,
+        "fun": 97.06000000000267
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": 89.16666666666667,
+          "y": 20.6,
+          "z": 1
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 60,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 60,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 30,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 30,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 29.166666666666668,
+          "y": 20.6,
+          "z": 1
+        }
+      ],
+      "routeIndex": 9,
+      "partnerId": null,
+      "food": 0
+    },
+    "profile": {
+      "age": 47.00290525113283,
+      "health": 86.80368075234897,
+      "mood": 82.4775700202944,
+      "stress": 0.051580131790006284,
+      "alive": true,
+      "skill": 48.25537499999396,
+      "family": [
+        "citizen-198"
+      ],
+      "historyTags": [
+        "\u4e91\u5c71\u5c45\u6c11"
+      ]
+    },
+    "lease": [
+      {
+        "raw": {
+          "id": "shop-lease-1",
+          "listingId": "shop-listing-2",
+          "shopId": "shop-market",
+          "lessorId": "citizen-283",
+          "tenantId": "citizen-117",
+          "rent": 25,
+          "periods": 7,
+          "startedAt": 1927.25,
+          "endsAt": 12007.25,
+          "nextDueAt": 3367.25,
+          "accruedPeriods": 1,
+          "accruedRent": 25,
+          "paidRent": 25,
+          "arrears": 0,
+          "depositInitial": 50,
+          "depositEscrow": 50,
+          "depositToLessor": 0,
+          "depositRefunded": 0,
+          "advanceInitial": 200,
+          "advanceRefunded": 0,
+          "state": "active",
+          "endedAt": null
+        },
+        "tenantAlive": true,
+        "lessorAlive": true,
+        "withinTerm": true,
+        "active": true,
+        "live": true,
+        "titleLeaseMatches": true
+      }
+    ],
+    "title": {
+      "shopId": "shop-market",
+      "buildingId": "market",
+      "scope": "existing-business-and-site-use",
+      "legacyOwnerId": "citizen-6",
+      "assetOwnerId": "citizen-283",
+      "state": "operating",
+      "suspendedAt": null,
+      "reason": "",
+      "listingId": null,
+      "leaseId": "shop-lease-1",
+      "materialsHeld": 0,
+      "reopen": {
+        "operatorId": "citizen-117",
+        "startedAt": 1971.75,
+        "completedAt": 2007,
+        "cancelledAt": null,
+        "workedMinutes": 60,
+        "materialFromExistingStock": false,
+        "materialUnits": 1,
+        "consumedUnits": 1,
+        "purchases": [
+          {
+            "supplierId": "shop-workshop",
+            "quantity": 1,
+            "unitPrice": 4,
+            "gross": 4,
+            "net": 3.68,
+            "taxRate": 0.08,
+            "commodity": "materials"
+          },
+          {
+            "supplierId": "shop-farm",
+            "quantity": 2,
+            "unitPrice": 4,
+            "gross": 8,
+            "net": 7.36,
+            "taxRate": 0.08,
+            "commodity": "food"
+          }
+        ],
+        "labor": [
+          {
+            "citizenId": "citizen-186",
+            "minutes": 9.497760615930929,
+            "earned": 0.8735992725730186,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-288",
+            "minutes": 9.131107337584352,
+            "earned": 0.8398746873573397,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-102",
+            "minutes": 8.631107337584352,
+            "earned": 0.7938849373573398,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-342",
+            "minutes": 7.555695990594364,
+            "earned": 0.7501038925320176,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-126",
+            "minutes": 5.997760615930929,
+            "earned": 0.551671022573019,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-216",
+            "minutes": 5.538214436556467,
+            "earned": 0.5094021947672459,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-96",
+            "minutes": 4.497760615930929,
+            "earned": 0.41370177257301904,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-378",
+            "minutes": 3.881107337584352,
+            "earned": 0.35698231235734,
+            "lastAt": 2006.75
+          },
+          {
+            "citizenId": "citizen-24",
+            "minutes": 2.8906177587880393,
+            "earned": 0.2869707351100714,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-30",
+            "minutes": 2.247760615930929,
+            "earned": 0.2231500565386461,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-108",
+            "minutes": 0.13110733758435208,
+            "earned": 0.012059187357339914,
+            "lastAt": 2007
+          }
+        ]
+      },
+      "reopenHistory": [
+        {
+          "operatorId": "citizen-6",
+          "startedAt": 488.25,
+          "completedAt": 534,
+          "cancelledAt": null,
+          "workedMinutes": 60,
+          "materialFromExistingStock": false,
+          "materialUnits": 1,
+          "consumedUnits": 1,
+          "purchases": [
+            {
+              "supplierId": "shop-workshop",
+              "quantity": 1,
+              "unitPrice": 4,
+              "gross": 4,
+              "net": 3.68,
+              "taxRate": 0.08,
+              "commodity": "materials"
+            },
+            {
+              "supplierId": "shop-farm",
+              "quantity": 2,
+              "unitPrice": 4,
+              "gross": 8,
+              "net": 7.36,
+              "taxRate": 0.08,
+              "commodity": "food"
+            }
+          ],
+          "labor": [
+            {
+              "citizenId": "citizen-72",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 517.7260355195584
+            },
+            {
+              "citizenId": "citizen-222",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 519.4760355195584
+            },
+            {
+              "citizenId": "citizen-162",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 522.4760355195584
+            },
+            {
+              "citizenId": "citizen-174",
+              "minutes": 2.9999999999999827,
+              "earned": 0.2759384999999984,
+              "lastAt": 522.6093822412118
+            },
+            {
+              "citizenId": "citizen-120",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 524.8688926624156
+            },
+            {
+              "citizenId": "citizen-210",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 524.8688926624156
+            },
+            {
+              "citizenId": "citizen-156",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 527.8688926624156
+            },
+            {
+              "citizenId": "citizen-60",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 528.3688926624156
+            },
+            {
+              "citizenId": "citizen-306",
+              "minutes": 2.999999999999979,
+              "earned": 0.2759384999999981,
+              "lastAt": 528.3404054063202
+            },
+            {
+              "citizenId": "citizen-36",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 529.4760355195584
+            },
+            {
+              "citizenId": "citizen-18",
+              "minutes": 2.9999999999999547,
+              "earned": 0.27593849999999587,
+              "lastAt": 529.5689284205863
+            },
+            {
+              "citizenId": "citizen-186",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 530.0022393840691
+            },
+            {
+              "citizenId": "citizen-84",
+              "minutes": 2.9999999999999827,
+              "earned": 0.2759384999999984,
+              "lastAt": 531.6093822412118
+            },
+            {
+              "citizenId": "citizen-252",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 532.3688926624156
+            },
+            {
+              "citizenId": "citizen-30",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 532.5022393840691
+            },
+            {
+              "citizenId": "citizen-150",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 532.5022393840691
+            },
+            {
+              "citizenId": "citizen-192",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 532.8688926624156
+            },
+            {
+              "citizenId": "citizen-294",
+              "minutes": 2.786964361135233,
+              "earned": 0.2563435884550382,
+              "lastAt": 533.75
+            },
+            {
+              "citizenId": "citizen-258",
+              "minutes": 2.4435499265616967,
+              "earned": 0.22475650047018159,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-126",
+              "minutes": 2.497760615930929,
+              "earned": 0.22974277257301887,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-180",
+              "minutes": 0.8811073375843521,
+              "earned": 0.08104381235733991,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-24",
+              "minutes": 0.3906177587881356,
+              "earned": 0.03592882614445332,
+              "lastAt": 534
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "final": {
+    "clock": 2071,
+    "market": {
+      "raw": {
+        "id": "shop-market",
+        "buildingId": "market",
+        "districtId": "district",
+        "inventory": 0,
+        "price": 17.934413147881493,
+        "revenue": 2809.188032299853,
+        "profit": -841.8206179676138,
+        "customers": 0,
+        "open": true,
+        "employees": 58,
+        "ownerId": "citizen-117",
+        "cash": 496.9669262843239,
+        "lifecycleVersion": 1
+      },
+      "commodity": "food",
+      "funds": 496.9669262843239,
+      "protectedFunds": 488.58125827092886,
+      "freeFunds": 8.385668013395048
+    },
+    "tenant": {
+      "id": "citizen-117",
+      "name": "\u53f6\u6708",
+      "districtId": "district",
+      "homeId": "home",
+      "workId": "market",
+      "role": "merchant",
+      "skills": {
+        "craft": 48,
+        "learning": 51.26275106176111,
+        "social": 20
+      },
+      "socialIdentities": [
+        "communityMember"
+      ],
+      "historyTags": [
+        "\u4e91\u5c71\u5c45\u6c11"
+      ],
+      "education": 2,
+      "position": {
+        "x": 29.166666666666668,
+        "y": 20.6,
+        "z": 1
+      },
+      "state": "reviewingBusiness",
+      "destinationId": "market",
+      "money": 145.32516491096675,
+      "needs": {
+        "hunger": 87.3499999999853,
+        "fatigue": 92.61499999999472,
+        "social": 45.192882898838086,
+        "fun": 95.78000000000384
+      },
+      "tier": "active",
+      "route": [
+        {
+          "x": 89.16666666666667,
+          "y": 20.6,
+          "z": 1
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 90,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 60,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 60,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 30,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 30,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "x": 29.166666666666668,
+          "y": 20.6,
+          "z": 1
+        }
+      ],
+      "routeIndex": 9,
+      "partnerId": null,
+      "food": 0
+    },
+    "profile": {
+      "age": 47.00302701673368,
+      "health": 86.88156154029905,
+      "mood": 81.90543134732307,
+      "stress": 0.03950119416314955,
+      "alive": true,
+      "skill": 48.25537499999396,
+      "family": [
+        "citizen-198"
+      ],
+      "historyTags": [
+        "\u4e91\u5c71\u5c45\u6c11"
+      ]
+    },
+    "lease": [
+      {
+        "raw": {
+          "id": "shop-lease-1",
+          "listingId": "shop-listing-2",
+          "shopId": "shop-market",
+          "lessorId": "citizen-283",
+          "tenantId": "citizen-117",
+          "rent": 25,
+          "periods": 7,
+          "startedAt": 1927.25,
+          "endsAt": 12007.25,
+          "nextDueAt": 3367.25,
+          "accruedPeriods": 1,
+          "accruedRent": 25,
+          "paidRent": 25,
+          "arrears": 0,
+          "depositInitial": 50,
+          "depositEscrow": 50,
+          "depositToLessor": 0,
+          "depositRefunded": 0,
+          "advanceInitial": 200,
+          "advanceRefunded": 0,
+          "state": "active",
+          "endedAt": null
+        },
+        "tenantAlive": true,
+        "lessorAlive": true,
+        "withinTerm": true,
+        "active": true,
+        "live": true,
+        "titleLeaseMatches": true
+      }
+    ],
+    "title": {
+      "shopId": "shop-market",
+      "buildingId": "market",
+      "scope": "existing-business-and-site-use",
+      "legacyOwnerId": "citizen-6",
+      "assetOwnerId": "citizen-283",
+      "state": "operating",
+      "suspendedAt": null,
+      "reason": "",
+      "listingId": null,
+      "leaseId": "shop-lease-1",
+      "materialsHeld": 0,
+      "reopen": {
+        "operatorId": "citizen-117",
+        "startedAt": 1971.75,
+        "completedAt": 2007,
+        "cancelledAt": null,
+        "workedMinutes": 60,
+        "materialFromExistingStock": false,
+        "materialUnits": 1,
+        "consumedUnits": 1,
+        "purchases": [
+          {
+            "supplierId": "shop-workshop",
+            "quantity": 1,
+            "unitPrice": 4,
+            "gross": 4,
+            "net": 3.68,
+            "taxRate": 0.08,
+            "commodity": "materials"
+          },
+          {
+            "supplierId": "shop-farm",
+            "quantity": 2,
+            "unitPrice": 4,
+            "gross": 8,
+            "net": 7.36,
+            "taxRate": 0.08,
+            "commodity": "food"
+          }
+        ],
+        "labor": [
+          {
+            "citizenId": "citizen-186",
+            "minutes": 9.497760615930929,
+            "earned": 0.8735992725730186,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-288",
+            "minutes": 9.131107337584352,
+            "earned": 0.8398746873573397,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-102",
+            "minutes": 8.631107337584352,
+            "earned": 0.7938849373573398,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-342",
+            "minutes": 7.555695990594364,
+            "earned": 0.7501038925320176,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-126",
+            "minutes": 5.997760615930929,
+            "earned": 0.551671022573019,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-216",
+            "minutes": 5.538214436556467,
+            "earned": 0.5094021947672459,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-96",
+            "minutes": 4.497760615930929,
+            "earned": 0.41370177257301904,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-378",
+            "minutes": 3.881107337584352,
+            "earned": 0.35698231235734,
+            "lastAt": 2006.75
+          },
+          {
+            "citizenId": "citizen-24",
+            "minutes": 2.8906177587880393,
+            "earned": 0.2869707351100714,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-30",
+            "minutes": 2.247760615930929,
+            "earned": 0.2231500565386461,
+            "lastAt": 2007
+          },
+          {
+            "citizenId": "citizen-108",
+            "minutes": 0.13110733758435208,
+            "earned": 0.012059187357339914,
+            "lastAt": 2007
+          }
+        ]
+      },
+      "reopenHistory": [
+        {
+          "operatorId": "citizen-6",
+          "startedAt": 488.25,
+          "completedAt": 534,
+          "cancelledAt": null,
+          "workedMinutes": 60,
+          "materialFromExistingStock": false,
+          "materialUnits": 1,
+          "consumedUnits": 1,
+          "purchases": [
+            {
+              "supplierId": "shop-workshop",
+              "quantity": 1,
+              "unitPrice": 4,
+              "gross": 4,
+              "net": 3.68,
+              "taxRate": 0.08,
+              "commodity": "materials"
+            },
+            {
+              "supplierId": "shop-farm",
+              "quantity": 2,
+              "unitPrice": 4,
+              "gross": 8,
+              "net": 7.36,
+              "taxRate": 0.08,
+              "commodity": "food"
+            }
+          ],
+          "labor": [
+            {
+              "citizenId": "citizen-72",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 517.7260355195584
+            },
+            {
+              "citizenId": "citizen-222",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 519.4760355195584
+            },
+            {
+              "citizenId": "citizen-162",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 522.4760355195584
+            },
+            {
+              "citizenId": "citizen-174",
+              "minutes": 2.9999999999999827,
+              "earned": 0.2759384999999984,
+              "lastAt": 522.6093822412118
+            },
+            {
+              "citizenId": "citizen-120",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 524.8688926624156
+            },
+            {
+              "citizenId": "citizen-210",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 524.8688926624156
+            },
+            {
+              "citizenId": "citizen-156",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 527.8688926624156
+            },
+            {
+              "citizenId": "citizen-60",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 528.3688926624156
+            },
+            {
+              "citizenId": "citizen-306",
+              "minutes": 2.999999999999979,
+              "earned": 0.2759384999999981,
+              "lastAt": 528.3404054063202
+            },
+            {
+              "citizenId": "citizen-36",
+              "minutes": 2.99999999999996,
+              "earned": 0.27593849999999637,
+              "lastAt": 529.4760355195584
+            },
+            {
+              "citizenId": "citizen-18",
+              "minutes": 2.9999999999999547,
+              "earned": 0.27593849999999587,
+              "lastAt": 529.5689284205863
+            },
+            {
+              "citizenId": "citizen-186",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 530.0022393840691
+            },
+            {
+              "citizenId": "citizen-84",
+              "minutes": 2.9999999999999827,
+              "earned": 0.2759384999999984,
+              "lastAt": 531.6093822412118
+            },
+            {
+              "citizenId": "citizen-252",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 532.3688926624156
+            },
+            {
+              "citizenId": "citizen-30",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 532.5022393840691
+            },
+            {
+              "citizenId": "citizen-150",
+              "minutes": 2.9999999999999742,
+              "earned": 0.27593849999999764,
+              "lastAt": 532.5022393840691
+            },
+            {
+              "citizenId": "citizen-192",
+              "minutes": 2.9999999999999987,
+              "earned": 0.27593849999999986,
+              "lastAt": 532.8688926624156
+            },
+            {
+              "citizenId": "citizen-294",
+              "minutes": 2.786964361135233,
+              "earned": 0.2563435884550382,
+              "lastAt": 533.75
+            },
+            {
+              "citizenId": "citizen-258",
+              "minutes": 2.4435499265616967,
+              "earned": 0.22475650047018159,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-126",
+              "minutes": 2.497760615930929,
+              "earned": 0.22974277257301887,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-180",
+              "minutes": 0.8811073375843521,
+              "earned": 0.08104381235733991,
+              "lastAt": 534
+            },
+            {
+              "citizenId": "citizen-24",
+              "minutes": 0.3906177587881356,
+              "earned": 0.03592882614445332,
+              "lastAt": 534
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "actualArrivals": {
+    "count": 101,
+    "firstStep": 1,
+    "lastStep": 101,
+    "source": "people event raw, existing handlers execute before recorded callback; checkpoint begins already onsite, do not claim a new physical trip",
+    "fixedPoint": {
+      "x": 29.166666666666668,
+      "y": 20.6,
+      "z": 1
+    },
+    "eventPhaseGuardCounts": {
+      "profitBelowMinus600": 101,
+      "inventoryBelowEPS": 2,
+      "freeFundsBelowOperatingReserve": 0,
+      "allFinancialAND": 0
+    },
+    "eventPhaseFreeFundsRange": [
+      7.757310555555591,
+      40.733294708169126
+    ]
+  },
+  "originalVoxelsCount": 0,
+  "money": {
+    "initial": 206530.69958846172,
+    "final": 206530.69958846143,
+    "finalResidual": -2.9103830456733704e-10,
+    "maxAbsoluteResidual": 3.2014213502407074e-10
+  },
+  "reason": "Inventory becomes zero but freeFunds never falls below the retained operating reserve in this window, so all three financial conditions never coincide. No tenant choice is expected here; arrival itself is insufficient.",
+  "productionRepairSuggested": false,
+  "nextStep": "Keep original AND. A further separately authorized bounded ordinary continuation from this unedited final save can check for a later genuine coincidence; do not install until runtime and default whole/part proof, and do not call third round completed without actual tenant choice plus real lease/reopen endpoint."
+}

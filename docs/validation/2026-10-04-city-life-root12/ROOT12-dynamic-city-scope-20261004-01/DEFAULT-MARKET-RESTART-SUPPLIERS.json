@@ -1,0 +1,5010 @@
+[
+  {
+    "shopId": "shop-river-b1",
+    "siteId": "river-b1",
+    "districtId": "river",
+    "inventory": 79,
+    "profit": -4.823112046891318,
+    "cash": 90.1261547481778,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b4",
+    "siteId": "river-b4",
+    "districtId": "river",
+    "inventory": 86,
+    "profit": -9.425293060362598,
+    "cash": 68.83430726512505,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b11",
+    "siteId": "river-b11",
+    "districtId": "river",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b14",
+    "siteId": "river-b14",
+    "districtId": "river",
+    "inventory": 75,
+    "profit": 43.63648360278557,
+    "cash": 156.2255123134371,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b17",
+    "siteId": "river-b17",
+    "districtId": "river",
+    "inventory": 88,
+    "profit": -31.84480741714863,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b20",
+    "siteId": "river-b20",
+    "districtId": "river",
+    "inventory": 88,
+    "profit": 12.21061081469098,
+    "cash": 20.21061081469098,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b27",
+    "siteId": "river-b27",
+    "districtId": "river",
+    "inventory": 88,
+    "profit": -31.714286790570316,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b30",
+    "siteId": "river-b30",
+    "districtId": "river",
+    "inventory": 88,
+    "profit": -39.342492123903845,
+    "cash": 51.23198550572598,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b33",
+    "siteId": "river-b33",
+    "districtId": "river",
+    "inventory": 86,
+    "profit": -50.52112007204816,
+    "cash": 47.38032039553124,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b36",
+    "siteId": "river-b36",
+    "districtId": "river",
+    "inventory": 88,
+    "profit": -31.249769629781525,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b43",
+    "siteId": "river-b43",
+    "districtId": "river",
+    "inventory": 86,
+    "profit": -22.247322185561785,
+    "cash": 24.90504510361633,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b46",
+    "siteId": "river-b46",
+    "districtId": "river",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b49",
+    "siteId": "river-b49",
+    "districtId": "river",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b52",
+    "siteId": "river-b52",
+    "districtId": "river",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-river-b59",
+    "siteId": "river-b59",
+    "districtId": "river",
+    "inventory": 81,
+    "profit": -36.8206575740091,
+    "cash": 70.69341919425452,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [
+      {
+        "shopId": "shop-river-b3",
+        "siteId": "river-b3",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b6",
+        "siteId": "river-b6",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b9",
+        "siteId": "river-b9",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b12",
+        "siteId": "river-b12",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b19",
+        "siteId": "river-b19",
+        "inventory": 154,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b22",
+        "siteId": "river-b22",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b25",
+        "siteId": "river-b25",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b28",
+        "siteId": "river-b28",
+        "inventory": 153,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b35",
+        "siteId": "river-b35",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b38",
+        "siteId": "river-b38",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b41",
+        "siteId": "river-b41",
+        "inventory": 158,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b44",
+        "siteId": "river-b44",
+        "inventory": 156,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b51",
+        "siteId": "river-b51",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b54",
+        "siteId": "river-b54",
+        "inventory": 157,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b57",
+        "siteId": "river-b57",
+        "inventory": 160,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b0",
+        "siteId": "river-b0",
+        "inventory": 99.17278477874801,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b7",
+        "siteId": "river-b7",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b10",
+        "siteId": "river-b10",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b13",
+        "siteId": "river-b13",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b16",
+        "siteId": "river-b16",
+        "inventory": 84,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b23",
+        "siteId": "river-b23",
+        "inventory": 98.34801513212167,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b26",
+        "siteId": "river-b26",
+        "inventory": 101.57988513093233,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b29",
+        "siteId": "river-b29",
+        "inventory": 98.3775280946093,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b32",
+        "siteId": "river-b32",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b39",
+        "siteId": "river-b39",
+        "inventory": 98.76636466395392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b42",
+        "siteId": "river-b42",
+        "inventory": 90,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b45",
+        "siteId": "river-b45",
+        "inventory": 98.12026766091486,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b48",
+        "siteId": "river-b48",
+        "inventory": 97.62329763819392,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b55",
+        "siteId": "river-b55",
+        "inventory": 100.97395702906078,
+        "open": true
+      },
+      {
+        "shopId": "shop-river-b58",
+        "siteId": "river-b58",
+        "inventory": 96.99050149936473,
+        "open": true
+      }
+    ],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b0",
+    "siteId": "market-b0",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -31.070811775823096,
+    "cash": 55.40174661187393,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b1",
+    "siteId": "market-b1",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b4",
+    "siteId": "market-b4",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b7",
+    "siteId": "market-b7",
+    "districtId": "market",
+    "inventory": 84,
+    "profit": -10.001230630229768,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b10",
+    "siteId": "market-b10",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b11",
+    "siteId": "market-b11",
+    "districtId": "market",
+    "inventory": 57,
+    "profit": 211.8549074897007,
+    "cash": 337.05257713948754,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b13",
+    "siteId": "market-b13",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": 11.166698564126737,
+    "cash": 19.166698564126737,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b14",
+    "siteId": "market-b14",
+    "districtId": "market",
+    "inventory": 84,
+    "profit": 34.87252387928936,
+    "cash": 58.87252387928937,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b16",
+    "siteId": "market-b16",
+    "districtId": "market",
+    "inventory": 87,
+    "profit": -47.634078923836206,
+    "cash": 32.05422442815698,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b17",
+    "siteId": "market-b17",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b20",
+    "siteId": "market-b20",
+    "districtId": "market",
+    "inventory": 69,
+    "profit": 84.57809403163351,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b23",
+    "siteId": "market-b23",
+    "districtId": "market",
+    "inventory": 86,
+    "profit": -37.572757946939056,
+    "cash": 40.03586546258264,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b26",
+    "siteId": "market-b26",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -34.43736363547226,
+    "cash": 28.249295699979644,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b27",
+    "siteId": "market-b27",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b29",
+    "siteId": "market-b29",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -33.40870436561893,
+    "cash": 56.12830250207407,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b30",
+    "siteId": "market-b30",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -32.92043915265126,
+    "cash": 20.914639029047585,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b32",
+    "siteId": "market-b32",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -32.769229927869894,
+    "cash": 46.74230743681156,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b33",
+    "siteId": "market-b33",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -19.44892782081459,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b36",
+    "siteId": "market-b36",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b39",
+    "siteId": "market-b39",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -15.552864973806244,
+    "cash": 22.86867254795467,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b42",
+    "siteId": "market-b42",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -34.46003297380622,
+    "cash": 55.33042710669385,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b43",
+    "siteId": "market-b43",
+    "districtId": "market",
+    "inventory": 86,
+    "profit": -36.70138616558687,
+    "cash": 38.03954654109912,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b45",
+    "siteId": "market-b45",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -32.138890751583865,
+    "cash": 58.43511879227574,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b46",
+    "siteId": "market-b46",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b48",
+    "siteId": "market-b48",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -30.28531825535528,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b49",
+    "siteId": "market-b49",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b52",
+    "siteId": "market-b52",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b55",
+    "siteId": "market-b55",
+    "districtId": "market",
+    "inventory": 85,
+    "profit": -12.961229308754259,
+    "cash": 87.03877069124567,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b58",
+    "siteId": "market-b58",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b59",
+    "siteId": "market-b59",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b61",
+    "siteId": "market-b61",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b62",
+    "siteId": "market-b62",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": true,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b64",
+    "siteId": "market-b64",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b65",
+    "siteId": "market-b65",
+    "districtId": "market",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b68",
+    "siteId": "market-b68",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -34.45524700889403,
+    "cash": 55.75120688584275,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b71",
+    "siteId": "market-b71",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -36.08289289863007,
+    "cash": 29.118039640761406,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b74",
+    "siteId": "market-b74",
+    "districtId": "market",
+    "inventory": 87,
+    "profit": -28.732092503258563,
+    "cash": 40.221065623417175,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-market-b75",
+    "siteId": "market-b75",
+    "districtId": "market",
+    "inventory": 88,
+    "profit": -39.13121650597011,
+    "cash": 51.443284265959925,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b3",
+    "siteId": "west-b3",
+    "districtId": "west",
+    "inventory": 86,
+    "profit": -45.95253859633284,
+    "cash": 52.25423529840407,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b6",
+    "siteId": "west-b6",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b9",
+    "siteId": "west-b9",
+    "districtId": "west",
+    "inventory": 71,
+    "profit": -36.394238279307906,
+    "cash": 129.26157645753415,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b12",
+    "siteId": "west-b12",
+    "districtId": "west",
+    "inventory": 71,
+    "profit": -24.61603767995775,
+    "cash": 139.08206787099658,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b19",
+    "siteId": "west-b19",
+    "districtId": "west",
+    "inventory": 76,
+    "profit": 88.66751365897053,
+    "cash": 192.18072534057754,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b22",
+    "siteId": "west-b22",
+    "districtId": "west",
+    "inventory": 70,
+    "profit": 0.9452341728294016,
+    "cash": 122.96302901961928,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b25",
+    "siteId": "west-b25",
+    "districtId": "west",
+    "inventory": 81,
+    "profit": -27.34843593260224,
+    "cash": 54.488460160494284,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b28",
+    "siteId": "west-b28",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b35",
+    "siteId": "west-b35",
+    "districtId": "west",
+    "inventory": 74,
+    "profit": -5.3080576629142175,
+    "cash": 103.93408208530514,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b38",
+    "siteId": "west-b38",
+    "districtId": "west",
+    "inventory": 84,
+    "profit": -49.98747562187013,
+    "cash": 53.466364953061344,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b41",
+    "siteId": "west-b41",
+    "districtId": "west",
+    "inventory": 75,
+    "profit": 93.28717211771054,
+    "cash": 167.1971705918083,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b44",
+    "siteId": "west-b44",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b51",
+    "siteId": "west-b51",
+    "districtId": "west",
+    "inventory": 87,
+    "profit": -55.45590349172225,
+    "cash": 41.50984935038301,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b54",
+    "siteId": "west-b54",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 77.24838089663535,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b57",
+    "siteId": "west-b57",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b60",
+    "siteId": "west-b60",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b67",
+    "siteId": "west-b67",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b70",
+    "siteId": "west-b70",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-west-b73",
+    "siteId": "west-b73",
+    "districtId": "west",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 80,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b2",
+    "siteId": "summit-b2",
+    "districtId": "summit",
+    "inventory": 82,
+    "profit": 48.66806745880716,
+    "cash": 76.14284907007503,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b5",
+    "siteId": "summit-b5",
+    "districtId": "summit",
+    "inventory": 47,
+    "profit": 51.86080886776445,
+    "cash": 281.50906264770913,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b8",
+    "siteId": "summit-b8",
+    "districtId": "summit",
+    "inventory": 51,
+    "profit": 254.55936664833348,
+    "cash": 310.42968062320324,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b15",
+    "siteId": "summit-b15",
+    "districtId": "summit",
+    "inventory": 70,
+    "profit": 120.93015484153062,
+    "cash": 165.66425059457566,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b18",
+    "siteId": "summit-b18",
+    "districtId": "summit",
+    "inventory": 74,
+    "profit": 95.04257153265553,
+    "cash": 129.64246855584713,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-summit-b21",
+    "siteId": "summit-b21",
+    "districtId": "summit",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b2",
+    "siteId": "east-b2",
+    "districtId": "east",
+    "inventory": 86,
+    "profit": -39.51526785214303,
+    "cash": 34.112869228655,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b5",
+    "siteId": "east-b5",
+    "districtId": "east",
+    "inventory": 64,
+    "profit": 121.59346612897315,
+    "cash": 267.1209207845273,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b8",
+    "siteId": "east-b8",
+    "districtId": "east",
+    "inventory": 62,
+    "profit": 20.68408463334303,
+    "cash": 215.81045501930782,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b15",
+    "siteId": "east-b15",
+    "districtId": "east",
+    "inventory": 67,
+    "profit": 60.27985836172514,
+    "cash": 224.31117687452465,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b18",
+    "siteId": "east-b18",
+    "districtId": "east",
+    "inventory": 76,
+    "profit": 18.86287623827758,
+    "cash": 137.9660405083794,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b21",
+    "siteId": "east-b21",
+    "districtId": "east",
+    "inventory": 88,
+    "profit": -28.84904120272367,
+    "cash": 37.92190137350593,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b24",
+    "siteId": "east-b24",
+    "districtId": "east",
+    "inventory": 88,
+    "profit": -17.91476742494589,
+    "cash": 24.553620815838546,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b31",
+    "siteId": "east-b31",
+    "districtId": "east",
+    "inventory": 84,
+    "profit": -57.1754071061941,
+    "cash": 35.39030153459152,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b34",
+    "siteId": "east-b34",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b37",
+    "siteId": "east-b37",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b40",
+    "siteId": "east-b40",
+    "districtId": "east",
+    "inventory": 82,
+    "profit": -2.214117353526877,
+    "cash": 109.78588264647315,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b47",
+    "siteId": "east-b47",
+    "districtId": "east",
+    "inventory": 88,
+    "profit": -28.82126342494589,
+    "cash": 37.53433723311474,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b50",
+    "siteId": "east-b50",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 77.30676831677556,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b53",
+    "siteId": "east-b53",
+    "districtId": "east",
+    "inventory": 88,
+    "profit": -28.666425023887882,
+    "cash": 26.83240914856078,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b56",
+    "siteId": "east-b56",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b63",
+    "siteId": "east-b63",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b66",
+    "siteId": "east-b66",
+    "districtId": "east",
+    "inventory": 88,
+    "profit": -31.240667558170465,
+    "cash": 26.083118214043754,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b69",
+    "siteId": "east-b69",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-east-b72",
+    "siteId": "east-b72",
+    "districtId": "east",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b2",
+    "siteId": "airport-b2",
+    "districtId": "airport",
+    "inventory": 63,
+    "profit": 101.17530897058333,
+    "cash": 257.69190002118705,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b5",
+    "siteId": "airport-b5",
+    "districtId": "airport",
+    "inventory": 68,
+    "profit": 138.35628364985624,
+    "cash": 187.97277189621565,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b8",
+    "siteId": "airport-b8",
+    "districtId": "airport",
+    "inventory": 56,
+    "profit": 181.70217093260823,
+    "cash": 304.5514205478311,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b15",
+    "siteId": "airport-b15",
+    "districtId": "airport",
+    "inventory": 65,
+    "profit": 123.33678057763306,
+    "cash": 291.4904652568462,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b18",
+    "siteId": "airport-b18",
+    "districtId": "airport",
+    "inventory": 88,
+    "profit": -31.88612752538201,
+    "cash": 59.05627603017359,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b21",
+    "siteId": "airport-b21",
+    "districtId": "airport",
+    "inventory": 84,
+    "profit": -27.628186474380605,
+    "cash": 44.9586439362601,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b24",
+    "siteId": "airport-b24",
+    "districtId": "airport",
+    "inventory": 88,
+    "profit": -31.9837086809775,
+    "cash": 58.95865931902252,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b31",
+    "siteId": "airport-b31",
+    "districtId": "airport",
+    "inventory": 88,
+    "profit": -31.943362193478542,
+    "cash": 56.2249907317109,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b34",
+    "siteId": "airport-b34",
+    "districtId": "airport",
+    "inventory": 88,
+    "profit": 11.20944331902249,
+    "cash": 19.20944331902249,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b37",
+    "siteId": "airport-b37",
+    "districtId": "airport",
+    "inventory": 90,
+    "profit": 0,
+    "cash": 0,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b40",
+    "siteId": "airport-b40",
+    "districtId": "airport",
+    "inventory": 86,
+    "profit": -5.123139120232835,
+    "cash": 70.31671295215885,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  },
+  {
+    "shopId": "shop-airport-b47",
+    "siteId": "airport-b47",
+    "districtId": "airport",
+    "inventory": 88,
+    "profit": -28.823221787518996,
+    "cash": 35.54692914197143,
+    "companyBound": false,
+    "existingSameDistrictMaterialCandidates": [
+      {
+        "shopId": "shop-airport-b1",
+        "siteId": "airport-b1",
+        "inventory": 87.49376429615761,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b4",
+        "siteId": "airport-b4",
+        "inventory": 87.52906993280747,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b11",
+        "siteId": "airport-b11",
+        "inventory": 87.83119674060801,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b14",
+        "siteId": "airport-b14",
+        "inventory": 87.45913090407811,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b17",
+        "siteId": "airport-b17",
+        "inventory": 87.84,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b20",
+        "siteId": "airport-b20",
+        "inventory": 87.17687681796338,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b27",
+        "siteId": "airport-b27",
+        "inventory": 87.70138973729475,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b30",
+        "siteId": "airport-b30",
+        "inventory": 87.51566632765561,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b33",
+        "siteId": "airport-b33",
+        "inventory": 87.82894559467245,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b36",
+        "siteId": "airport-b36",
+        "inventory": 87.79155133545386,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b43",
+        "siteId": "airport-b43",
+        "inventory": 87.50613551600674,
+        "open": true
+      },
+      {
+        "shopId": "shop-airport-b46",
+        "siteId": "airport-b46",
+        "inventory": 87.36666863481206,
+        "open": true
+      }
+    ],
+    "existingSameDistrictFoodCandidates": [],
+    "hasBothLocalStockKindsForEmptyShopRestart": false,
+    "candidateScope": "Actual shops/kinds and terminal finite inventory only; not quote, owner authorization, legal route, delivery or future availability."
+  }
+]

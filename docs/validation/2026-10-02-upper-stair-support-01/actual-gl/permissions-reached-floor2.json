@@ -1,0 +1,33 @@
+{
+  "stage": "reached-floor2",
+  "position": {
+    "x": -403.59431496746754,
+    "y": 83.39999999999999,
+    "z": 307.6024104537938
+  },
+  "actualFloor": 2,
+  "inside": "market-b24",
+  "blockedAccess": null,
+  "role": "traveler",
+  "identities": [
+    "traveler"
+  ],
+  "homeId": "market-b24",
+  "money": 520,
+  "hour": 8.633333333333333,
+  "speed": 1,
+  "allowed": [
+    {
+      "floor": 0,
+      "allowed": true
+    },
+    {
+      "floor": 1,
+      "allowed": true
+    },
+    {
+      "floor": 2,
+      "allowed": true
+    }
+  ]
+}

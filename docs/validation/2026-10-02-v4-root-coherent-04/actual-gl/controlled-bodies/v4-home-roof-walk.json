@@ -1,0 +1,182 @@
+{
+  "actualBody": {
+    "position": {
+      "x": -596.2,
+      "y": 37.2,
+      "z": 810.7
+    },
+    "floor": 0,
+    "inside": null,
+    "blockedAccess": null,
+    "eye": [
+      -596.2,
+      38.92,
+      810.7
+    ],
+    "yaw": -3.141592653589793,
+    "pitch": -0.05
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 12,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": false,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 149,
+      "triangles": 321626
+    },
+    "total": {
+      "calls": 206,
+      "triangles": 400084
+    },
+    "shadowCalls": 57,
+    "shadowTriangles": 78458
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 7,
+      "total": 482,
+      "created": 18,
+      "released": 11,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 7,
+    "actualMeshes": 49,
+    "actualInstances": 6830,
+    "ownedGeometryCount": 49,
+    "interiorBuildingRefs": 9,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 7,
+      "releases": 11,
+      "geometryDisposals": 75,
+      "instanceDisposals": 75,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 694,
+      "textures": 11
+    }
+  },
+  "verticalHits": [],
+  "name": "v4-home-roof-walk",
+  "buildingId": "river-b2",
+  "declaredDiagnosticCameraAim": null,
+  "scope": "Actual WebGL fixed-source controlled body capture; not a normal player journey or Mac performance/reference-art pass."
+}

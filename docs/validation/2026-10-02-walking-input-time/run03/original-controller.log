@@ -1,0 +1,28 @@
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (217.180281ms)
+✔ v4 courtyard is genuinely supported outdoor ground and continuous W returns through an actual opening (226.333534ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 3.4m storey height without E or reset (173.040847ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 6.6m storey height without E or reset (156.520633ms)
+✔ v4 exact market-b24 upper first-tread pose advances a .35m body by normal W (4.67866ms)
+✔ v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing (20.057681ms)
+✔ v4 rotated entrance has the same physical local door and legacy E preserves arbitrary shaft x/z exactly (92.763363ms)
+✔ v4 exposed roof supports restored feet, blocks its actual volume and remains outside a room (10.352928ms)
+✔ v4 actual W cannot pass the physical market counter or walk off the top-floor stair hole (17.223373ms)
+✔ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (37.6171ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (1.314332ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.537725ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.401535ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.42732ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.349932ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (0.409932ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (3.720712ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (4.456092ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (0.826048ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (2937.751256ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4268.098897

@@ -1,0 +1,258 @@
+{
+  "schema": "root09-rpg2d-readonly-contract/v1",
+  "createdAtUtc": "2026-10-04T08:31:58.996444+00:00",
+  "status": "PLANNED_NOT_IMPLEMENTED",
+  "sourceRoot": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source",
+  "scope": "Static source contract review only; no tests, CPU simulation, browser, source edits, Library or Git actions.",
+  "sources": [
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation.ts",
+      "sha256": "9ab2fb0d8aa2dbc48a172d891724ab598cd19e733775e3d600541bd24808ad44",
+      "bytes": 282573,
+      "referencedLineSpans": [
+        [
+          250,
+          294
+        ],
+        [
+          790,
+          798
+        ],
+        [
+          1112,
+          1152
+        ],
+        [
+          1399,
+          1400
+        ],
+        [
+          1445,
+          1459
+        ],
+        [
+          1473,
+          1530
+        ],
+        [
+          1532,
+          1555
+        ],
+        [
+          1582,
+          1596
+        ],
+        [
+          1629,
+          1671
+        ],
+        [
+          1976,
+          2027
+        ],
+        [
+          2260,
+          2285
+        ],
+        [
+          2503,
+          2524
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation/npc-stair-motion.ts",
+      "sha256": "d15db069009834e47d153b3de0b0f6aebb87ab5a2e19d98e09bf6dcb4cb117e1",
+      "bytes": 26924,
+      "referencedLineSpans": [
+        [
+          1,
+          18
+        ],
+        [
+          325,
+          383
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation/extensions.ts",
+      "sha256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+      "bytes": 92823,
+      "referencedLineSpans": [
+        [
+          154,
+          246
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation/clinical.ts",
+      "sha256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "bytes": 44993,
+      "referencedLineSpans": [
+        [
+          49,
+          110
+        ],
+        [
+          160,
+          186
+        ],
+        [
+          193,
+          226
+        ],
+        [
+          254,
+          264
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation/education.ts",
+      "sha256": "f6a81d320179e988f1046a5f511bf3d168907cbdffe828751d888c6849ce5856",
+      "bytes": 46386,
+      "referencedLineSpans": [
+        [
+          28,
+          94
+        ],
+        [
+          219,
+          231
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/simulation/family-education.ts",
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+      "bytes": 29399,
+      "referencedLineSpans": [
+        [
+          66,
+          68
+        ],
+        [
+          135,
+          144
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/types.ts",
+      "sha256": "e5d80387342e0b11a812cc3bc18190768e3a24d51df0052692468acd04e4154b",
+      "bytes": 14605,
+      "referencedLineSpans": [
+        [
+          26,
+          40
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/persistence/partition.ts",
+      "sha256": "d8b7cd4fe963966c8c16dc221e6de7b6880568906d7155a3b047f2ed615051bc",
+      "bytes": 16813,
+      "referencedLineSpans": [
+        [
+          4,
+          4
+        ],
+        [
+          19,
+          29
+        ],
+        [
+          50,
+          78
+        ],
+        [
+          101,
+          126
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/src/persistence/world-layout.ts",
+      "sha256": "678fffc617bf36b96f2169823154ebd9e9f5bfbe6a068b51644f42c4561a8165",
+      "bytes": 5215,
+      "referencedLineSpans": [
+        [
+          10,
+          45
+        ],
+        [
+          49,
+          65
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/adapters/rpg-maker/bridge.ts",
+      "sha256": "9947193bd06f692c9782d54e21c872a7def1fd11669adc6fc7eee3d6c80f7527",
+      "bytes": 15380,
+      "referencedLineSpans": [
+        [
+          24,
+          50
+        ],
+        [
+          79,
+          105
+        ],
+        [
+          154,
+          183
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/adapters/rpg-maker/headless-walker.ts",
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "bytes": 18809,
+      "referencedLineSpans": [
+        [
+          8,
+          14
+        ],
+        [
+          33,
+          40
+        ],
+        [
+          163,
+          205
+        ]
+      ]
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT09-root-production-candidate05-20261004-01/source/adapters/rpg-maker/README.md",
+      "sha256": "c66fc77ed322285bc6ee935a0419911ea1b1db264202717b7297707dc1720575",
+      "bytes": 10002,
+      "referencedLineSpans": [
+        [
+          3,
+          3
+        ],
+        [
+          20,
+          28
+        ],
+        [
+          38,
+          50
+        ],
+        [
+          54,
+          73
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "No private MZ ZIP/plugin inspected; inspected only candidate05 source adapter and its README.",
+    "No independent rpg2d-v1 runtime or save implementation was produced or verified.",
+    "No claim about build/native-rules/browser/macOS validation in this review."
+  ]
+}

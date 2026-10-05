@@ -1,0 +1,30 @@
+✖ actual market-b24 W traverses all floors up and back without resetting feet (247.230905ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 641.831353
+
+✖ failing tests:
+
+test at tests/upper-stair-actual.test.ts:1:4734
+✖ actual market-b24 W traverses all floors up and back without resetting feet (247.230905ms)
+  AssertionError [ERR_ASSERTION]: actual W blocked: {"before":{"x":-404.59997341778063,"y":80,"z":308.791474723644},"target":{"x":-404.6,"y":80.19999999999999,"z":309.00000000000006},"floor":1,"blockedAccess":null}
+      at walk (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:39:7)
+      at <anonymous> (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:71:67)
+      at fixture (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:24:88)
+      at TestContext.<anonymous> (/tmp/yunshan-upper-stair-fix-01/baseline/tests/upper-stair-actual.test.ts:69:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

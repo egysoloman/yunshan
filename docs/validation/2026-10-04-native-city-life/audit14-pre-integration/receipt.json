@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-04T04:31:17.160775+00:00",
+  "endedAt": "2026-10-04T05:44:21.075931+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "scripts/economy-audit.ts",
+    "--days",
+    "14",
+    "--out",
+    "artifacts/root09-post-stair-economy-14d.json"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 244,
+  "inputsStable": true,
+  "rawSHA256": "bab3e31f7deddb3d8d540959304efe24befb6b0ebf2d38069d1c26e2c61b9aed",
+  "ownedPid": 33295,
+  "finalOwnedSessionMembers": [
+    {
+      "pid": 33303,
+      "state": "Z",
+      "parent": 1,
+      "group": 33295,
+      "session": 33295,
+      "startTicks": 1910194
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+}

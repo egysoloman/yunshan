@@ -1,0 +1,19 @@
+{"scope":"one-public-health-player","frame":16,"tick":1520,"clock":6560,"playerHealth":77.23442721803961,"playerNeeds":{"hunger":0,"fatigue":0,"social":0,"fun":15.279999999997964},"petitionStatus":"open","signers":["citizen-22","citizen-220","citizen-286","citizen-550"],"playerCareMinutes":0}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: 商铺休业或库存不足。
+    at <anonymous> (/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/public-health-player-actual.mts:142:85)
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,16 @@
+{
+  "scope": "coherent17 only clinical medicine research test support migration; coherent16 runtime all identical;16 FAIL96/97 original retained",
+  "changes": {
+    "tests/clinical.test.ts": {
+      "before": "bf43396440138e205d70d8a4900ddaab56878f3307af85d39e6cb616c97ed554",
+      "after": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc"
+    }
+  },
+  "previousSnapshotSHA256": "af930373394bafef704fb5c825a4b54419b407f3501044225d2a36dd353a4f41",
+  "originalFailedRawSHA256": "04acfc571ba86c75f66fc151277e1a075227c9548049e2a4a265de653efb117d",
+  "sourceSnapshotSHA256": "33c60e1dda47495a2e0e1693d98808dfb9863f078ad5f57021849fafe3e9736c",
+  "totalInputCount": 116,
+  "sharedExecutableCount": 111,
+  "createdAtUTC": "2026-10-03T03:27:01.513491+00:00",
+  "status": "FROZEN_NOT_YET_RUN"
+}

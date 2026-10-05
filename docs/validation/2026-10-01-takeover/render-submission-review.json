@@ -1,0 +1,233 @@
+{
+  "scope": "Actual WebGL onBeforeRender submissions on Linux SwiftShader at low diagnostic resolution; not FPS/GPU time or macOS claim",
+  "entry": "/assets/index-BRpHvhna.js",
+  "before": {
+    "src/renderer.ts": "77fdc0722e4ebbe42ff1a725a4f05fcf9508e8f8a73fbc8423e97d74cf463dc6",
+    "src/rendering/terrain.ts": "338ad800daacab97c74b5e81caf5ec7a5394473acdb07e240ecef374f3f4dd9a",
+    "src/rendering/architecture-detail.ts": "72768700bd260bdb6b73b36dd35b4d133223efcecb6de7071cf1cb4bf1fff472",
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553"
+  },
+  "after": {
+    "src/renderer.ts": "77fdc0722e4ebbe42ff1a725a4f05fcf9508e8f8a73fbc8423e97d74cf463dc6",
+    "src/rendering/terrain.ts": "338ad800daacab97c74b5e81caf5ec7a5394473acdb07e240ecef374f3f4dd9a",
+    "src/rendering/architecture-detail.ts": "72768700bd260bdb6b73b36dd35b4d133223efcecb6de7071cf1cb4bf1fff472",
+    "src/world.ts": "c56842a1ff8f551c22f23472f64f272704d30da0c0c9d0919aeab20f7b8aa553"
+  },
+  "stable": true,
+  "results": [
+    {
+      "name": "core-waterfall",
+      "eye": [
+        440,
+        325,
+        640
+      ],
+      "target": [
+        210,
+        215,
+        -45
+      ],
+      "info": {
+        "frame": 2,
+        "calls": 226,
+        "triangles": 4604700,
+        "points": 684,
+        "lines": 0
+      },
+      "countedMeshTriangles": 4604700,
+      "groups": [
+        {
+          "name": "山水 · 分层岩壳与连续水系",
+          "triangles": 2477832,
+          "calls": 27
+        },
+        {
+          "name": "unnamed static or dynamic",
+          "triangles": 905736,
+          "calls": 156
+        },
+        {
+          "name": "千灯市集-near",
+          "triangles": 380916,
+          "calls": 8
+        },
+        {
+          "name": "临岚坊-near",
+          "triangles": 367416,
+          "calls": 8
+        },
+        {
+          "name": "瀑云天枢-near",
+          "triangles": 319860,
+          "calls": 8
+        },
+        {
+          "name": "松风里-far",
+          "triangles": 42672,
+          "calls": 3
+        },
+        {
+          "name": "文澜学苑-far",
+          "triangles": 31632,
+          "calls": 5
+        },
+        {
+          "name": "玉衡官署-far",
+          "triangles": 30144,
+          "calls": 5
+        },
+        {
+          "name": "云外星港-far",
+          "triangles": 29328,
+          "calls": 5
+        },
+        {
+          "name": "九霄观云-far",
+          "triangles": 19164,
+          "calls": 3
+        }
+      ]
+    },
+    {
+      "name": "market-street",
+      "eye": [
+        -464.4,
+        72.32,
+        327
+      ],
+      "target": [
+        -469.4,
+        74,
+        292.4
+      ],
+      "info": {
+        "frame": 3,
+        "calls": 186,
+        "triangles": 4658786,
+        "points": 684,
+        "lines": 0
+      },
+      "countedMeshTriangles": 4658786,
+      "groups": [
+        {
+          "name": "山水 · 分层岩壳与连续水系",
+          "triangles": 2167762,
+          "calls": 33
+        },
+        {
+          "name": "unnamed static or dynamic",
+          "triangles": 906012,
+          "calls": 106
+        },
+        {
+          "name": "千灯市集-near",
+          "triangles": 380916,
+          "calls": 8
+        },
+        {
+          "name": "松风里-near",
+          "triangles": 380388,
+          "calls": 8
+        },
+        {
+          "name": "文澜学苑-near",
+          "triangles": 333180,
+          "calls": 8
+        },
+        {
+          "name": "瀑云天枢-near",
+          "triangles": 319860,
+          "calls": 8
+        },
+        {
+          "name": "青铜工坊-near",
+          "triangles": 107088,
+          "calls": 4
+        },
+        {
+          "name": "玉衡官署-far",
+          "triangles": 29568,
+          "calls": 3
+        },
+        {
+          "name": "九霄观云-far",
+          "triangles": 19164,
+          "calls": 3
+        },
+        {
+          "name": "建筑近景 · 按距离生成",
+          "triangles": 14848,
+          "calls": 7
+        }
+      ]
+    },
+    {
+      "name": "core-door",
+      "eye": [
+        435,
+        256.32,
+        -176
+      ],
+      "target": [
+        430,
+        258,
+        -250
+      ],
+      "info": {
+        "frame": 4,
+        "calls": 158,
+        "triangles": 3938506,
+        "points": 684,
+        "lines": 0
+      },
+      "countedMeshTriangles": 3938494,
+      "groups": [
+        {
+          "name": "山水 · 分层岩壳与连续水系",
+          "triangles": 1919154,
+          "calls": 26
+        },
+        {
+          "name": "unnamed static or dynamic",
+          "triangles": 907752,
+          "calls": 87
+        },
+        {
+          "name": "临岚坊-near",
+          "triangles": 367416,
+          "calls": 8
+        },
+        {
+          "name": "瀑云天枢-near",
+          "triangles": 319860,
+          "calls": 8
+        },
+        {
+          "name": "玉衡官署-near",
+          "triangles": 299508,
+          "calls": 8
+        },
+        {
+          "name": "文澜学苑-near",
+          "triangles": 67644,
+          "calls": 3
+        },
+        {
+          "name": "云外星港-far",
+          "triangles": 29328,
+          "calls": 5
+        },
+        {
+          "name": "九霄观云-far",
+          "triangles": 19164,
+          "calls": 3
+        },
+        {
+          "name": "建筑近景 · 按距离生成",
+          "triangles": 8668,
+          "calls": 6
+        }
+      ]
+    }
+  ]
+}

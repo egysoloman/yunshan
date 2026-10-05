@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-04T02:01:06.823478+00:00",
+  "scope": "TEST_ONLY_NATIVE_PAID_WORK_PRECONDITION",
+  "file": "tests/v4-extensions.test.ts",
+  "beforeSHA256": "12d137106c0d0ae0d9f6ccd438b6bde3f1a6e77098e375c5645c24dbea39dff1",
+  "afterSHA256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea",
+  "root07FrozenSourceUnmodified": true,
+  "productionInputsChanged": [],
+  "originalFourBodiesAnd34AssertionsPreserved": true,
+  "originalFirstFailure": "loan121 correctly rejected at native bank.cash=0",
+  "correctedFailureActual": "1 PASS / 0 FAIL / 0 SKIP; actual course plus 720 normal quarter-minute ticks; three native 62 gross / 57.04 net shifts",
+  "sameRoundFourAllPass": false,
+  "legacyProbeFailuresPreserved": true
+}

@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-03T22:23:09.163918+00:00",
+  "executionAvailable": true,
+  "source175": "MATCH shared-final-inputs.json; all runtime/src and audit driver remain ROOT05",
+  "originalEconomy14": {
+    "start": "2026-10-03T20:16:39.614Z",
+    "end": "2026-10-03T21:35:14.772Z",
+    "exitCode": 1,
+    "timedOut": false,
+    "status": "FAIL",
+    "ticks": 10080,
+    "samples": 19,
+    "aliveNPC": 614,
+    "playerAlive": false,
+    "restarted": false
+  },
+  "originalFullSuite": {
+    "start": "2026-10-03T20:16:39.615Z",
+    "end": "2026-10-03T21:46:39.846Z",
+    "status": "TIMEOUT_PARTIAL",
+    "restarted": false,
+    "observedTopLevel": {
+      "pass": 702,
+      "fail": 6,
+      "skip": 4
+    },
+    "noFinalRunnerSummary": true
+  },
+  "ownedProcesses": {
+    "npm261989": "gone",
+    "audit261988": "gone",
+    "auditNode262020": "gone",
+    "group261989ActiveCount": 0,
+    "zombies": [
+      262013,
+      262308
+    ],
+    "cleanupReceipt": "full-suite-orphan-cleanup.json",
+    "allProcGone": false
+  },
+  "originalRecordsUnchanged": true,
+  "archiveIndependentRootVerification": {
+    "CRC": "PASS",
+    "membersExactlyOnce": 1309,
+    "uncompressedBytes": 149073185,
+    "secretMatches": 0
+  },
+  "library": "FAILED_BEFORE_PREPARATION; no new IDs; memo stays version5",
+  "mainLastObserved": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+  "wholeGoalComplete": false
+}

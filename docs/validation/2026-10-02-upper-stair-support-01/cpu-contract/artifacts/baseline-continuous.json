@@ -1,0 +1,3632 @@
+{
+  "worldSHA256": "3812ec418f3345d02bda54e5f5e390b5188bf4d239efbd295dd1d9172de7bdf2",
+  "scope": "Existing actual buildings and normal W motor. One-site projection preserves actual terrain/transport, dimensions, floors, fixtures, stairs, roofs and permissions callback; unrelated buildings omitted. No world regeneration, simulation or GL.",
+  "records": [
+    {
+      "case": "continuous full-height round trip",
+      "id": "market-b24",
+      "kind": "home",
+      "family": "home",
+      "height": 3.4000000000000004,
+      "floors": 3,
+      "start": {
+        "x": -403.6,
+        "y": 76.6,
+        "z": 307.6
+      },
+      "steps": [
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.6,
+            "y": 76.6,
+            "z": 307.6
+          },
+          "after": {
+            "x": -403.66685032174377,
+            "y": 76.6,
+            "z": 307.6267401286975
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.66685032174377,
+            "y": 76.6,
+            "z": 307.6267401286975
+          },
+          "after": {
+            "x": -403.7337006434875,
+            "y": 76.6,
+            "z": 307.653480257395
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.7337006434875,
+            "y": 76.6,
+            "z": 307.653480257395
+          },
+          "after": {
+            "x": -403.80055096523125,
+            "y": 76.6,
+            "z": 307.6802203860925
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.80055096523125,
+            "y": 76.6,
+            "z": 307.6802203860925
+          },
+          "after": {
+            "x": -403.867401286975,
+            "y": 76.6,
+            "z": 307.70696051479
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.867401286975,
+            "y": 76.6,
+            "z": 307.70696051479
+          },
+          "after": {
+            "x": -403.93425160871874,
+            "y": 76.6,
+            "z": 307.7337006434875
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.93425160871874,
+            "y": 76.6,
+            "z": 307.7337006434875
+          },
+          "after": {
+            "x": -404.0011019304625,
+            "y": 76.6,
+            "z": 307.760440772185
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.0011019304625,
+            "y": 76.6,
+            "z": 307.760440772185
+          },
+          "after": {
+            "x": -404.0679522522062,
+            "y": 76.6,
+            "z": 307.7871809008825
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.0679522522062,
+            "y": 76.6,
+            "z": 307.7871809008825
+          },
+          "after": {
+            "x": -404.13480257394997,
+            "y": 76.6,
+            "z": 307.81392102958
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.13480257394997,
+            "y": 76.6,
+            "z": 307.81392102958
+          },
+          "after": {
+            "x": -404.2016528956937,
+            "y": 76.6,
+            "z": 307.8406611582775
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.2016528956937,
+            "y": 76.6,
+            "z": 307.8406611582775
+          },
+          "after": {
+            "x": -404.26850321743746,
+            "y": 76.6,
+            "z": 307.867401286975
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.26850321743746,
+            "y": 76.6,
+            "z": 307.867401286975
+          },
+          "after": {
+            "x": -404.3353535391812,
+            "y": 76.6,
+            "z": 307.8941414156725
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.3353535391812,
+            "y": 76.6,
+            "z": 307.8941414156725
+          },
+          "after": {
+            "x": -404.40220386092494,
+            "y": 76.6,
+            "z": 307.92088154437
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.40220386092494,
+            "y": 76.6,
+            "z": 307.92088154437
+          },
+          "after": {
+            "x": -404.4690541826687,
+            "y": 76.6,
+            "z": 307.9476216730675
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.4690541826687,
+            "y": 76.6,
+            "z": 307.9476216730675
+          },
+          "after": {
+            "x": -404.53590450441243,
+            "y": 76.6,
+            "z": 307.974361801765
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.53590450441243,
+            "y": 76.6,
+            "z": 307.974361801765
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.072
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.072
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.144
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.144
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.216
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.216
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.288
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.288
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.36
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.36
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.432
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.432
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.504
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.504
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.576
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.576
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.648
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.648
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.72
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.72
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.79200000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.6,
+            "z": 308.79200000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 308.86400000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 308.86400000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 308.93600000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 308.93600000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.00000000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.00000000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.07200000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.07200000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.14400000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 76.8,
+            "z": 309.14400000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.21600000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.21600000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.28800000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.28800000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.36000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 4,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.36000000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.40000000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.40000000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.47200000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.47200000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.54400000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77,
+            "z": 309.54400000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.61600000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.61600000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.68800000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.68800000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.76000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 5,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.76000000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.80000000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.87200000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.87200000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.9440000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.19999999999999,
+            "z": 309.9440000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.0160000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.0160000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.0880000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.0880000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.1600000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 6,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.1600000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.20000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.20000000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.27200000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.27200000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.34400000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.39999999999999,
+            "z": 310.34400000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.41600000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.41600000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.48800000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.48800000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.56000000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 7,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.56000000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.6
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.6
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.672
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.672
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.744
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.6,
+            "z": 310.744
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.81600000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.81600000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.88800000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.88800000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.96000000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 8,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 310.96000000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.00000000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.00000000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.07200000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.07200000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.14400000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 77.8,
+            "z": 311.14400000000006
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.21600000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.21600000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.28800000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.28800000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.36000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 9,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.36000000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.40000000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.40000000000003
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.47200000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.47200000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.54400000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78,
+            "z": 311.54400000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.61600000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.61600000000004
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.68800000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.68800000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.76000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 10,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.76000000000005
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.80000000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.87200000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.87200000000007
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.9440000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 311.9440000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.0160000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.0160000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.0880000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.0880000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.1600000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.1600000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.2320000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.2320000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.3040000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.3040000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.3760000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.3760000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.4480000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.4480000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.5200000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.5200000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.5920000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.5920000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.6640000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.6640000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.7360000000001
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 11,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.7360000000001
+          },
+          "after": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.6,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.528,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.528,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.456,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.456,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.384,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.384,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.312,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.312,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.24,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.24,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.168,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.168,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.096,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.096,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -404.024,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -404.024,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.952,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.952,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.88,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.88,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.808,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.808,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.736,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.736,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.664,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.664,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.592,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.592,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.52,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.52,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.448,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.448,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.376,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.376,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.304,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.304,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.23199999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.23199999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.15999999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.15999999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.08799999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.08799999999997,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -403.01599999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -403.01599999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.94399999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -402.94399999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.87199999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -402.87199999999996,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.79999999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -402.79999999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.72799999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -402.72799999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.65599999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 12,
+          "before": {
+            "x": -402.65599999999995,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.80000000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.72800000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.72800000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.65600000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.65600000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.58400000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.58400000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.51200000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.51200000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.44000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.44000000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.36800000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.36800000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.29600000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.29600000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.22400000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.22400000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.15200000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.15200000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.08000000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.08000000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.00800000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.19999999999999,
+            "z": 312.00800000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.93600000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.93600000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.86400000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 13,
+          "before": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.86400000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.80000000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.72800000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.72800000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.65600000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.39999999999999,
+            "z": 311.65600000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.58400000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.58400000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.51200000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.51200000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.44000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 14,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.44000000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.40000000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.40000000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.32800000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.32800000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.25600000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.6,
+            "z": 311.25600000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.184
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.184
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.112
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.112
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.04
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 15,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.04
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.00000000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 311.00000000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 310.92800000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 310.92800000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 310.85600000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 78.8,
+            "z": 310.85600000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.78400000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.78400000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.71200000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.71200000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.64000000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 16,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.64000000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.6
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.6
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.528
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.528
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.456
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79,
+            "z": 310.456
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.384
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.384
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.312
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.312
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.24
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 17,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.24
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.20000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.20000000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.12800000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.12800000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.05600000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.19999999999999,
+            "z": 310.05600000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.98400000000004
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.98400000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.91200000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.91200000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.84000000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 18,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.84000000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.80000000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.80000000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.72800000000007
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.72800000000007
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.65600000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.39999999999999,
+            "z": 309.65600000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.58400000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.58400000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.51200000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.51200000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.44000000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 19,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.44000000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.40000000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.40000000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.32800000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.32800000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.25600000000003
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.6,
+            "z": 309.25600000000003
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.184
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.184
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.112
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.112
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.04
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 20,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.04
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.00000000000006
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 309.00000000000006
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 308.92800000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 308.92800000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 308.85600000000005
+          },
+          "floor": 0,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 79.8,
+            "z": 308.85600000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.78400000000005
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.78400000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.71200000000005
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.71200000000005
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.64000000000004
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 21,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.64000000000004
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.6
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.6
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.528
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.528
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.456
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.456
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.384
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.384
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.312
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.312
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.24
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.24
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.168
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.168
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.096
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 22,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.096
+          },
+          "after": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.024
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.6,
+            "y": 80,
+            "z": 308.024
+          },
+          "after": {
+            "x": -402.6662876644979,
+            "y": 80,
+            "z": 307.99589403025294
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.6662876644979,
+            "y": 80,
+            "z": 307.99589403025294
+          },
+          "after": {
+            "x": -402.7325753289957,
+            "y": 80,
+            "z": 307.9677880605059
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.7325753289957,
+            "y": 80,
+            "z": 307.9677880605059
+          },
+          "after": {
+            "x": -402.7988629934936,
+            "y": 80,
+            "z": 307.9396820907588
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.7988629934936,
+            "y": 80,
+            "z": 307.9396820907588
+          },
+          "after": {
+            "x": -402.8651506579914,
+            "y": 80,
+            "z": 307.91157612101176
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.8651506579914,
+            "y": 80,
+            "z": 307.91157612101176
+          },
+          "after": {
+            "x": -402.93143832248927,
+            "y": 80,
+            "z": 307.8834701512647
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.93143832248927,
+            "y": 80,
+            "z": 307.8834701512647
+          },
+          "after": {
+            "x": -402.9977259869871,
+            "y": 80,
+            "z": 307.8553641815176
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -402.9977259869871,
+            "y": 80,
+            "z": 307.8553641815176
+          },
+          "after": {
+            "x": -403.06401365148497,
+            "y": 80,
+            "z": 307.8272582117705
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.06401365148497,
+            "y": 80,
+            "z": 307.8272582117705
+          },
+          "after": {
+            "x": -403.13030131598276,
+            "y": 80,
+            "z": 307.7991522420234
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.13030131598276,
+            "y": 80,
+            "z": 307.7991522420234
+          },
+          "after": {
+            "x": -403.1965889804806,
+            "y": 80,
+            "z": 307.77104627227635
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.1965889804806,
+            "y": 80,
+            "z": 307.77104627227635
+          },
+          "after": {
+            "x": -403.2628766449784,
+            "y": 80,
+            "z": 307.74294030252923
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.2628766449784,
+            "y": 80,
+            "z": 307.74294030252923
+          },
+          "after": {
+            "x": -403.32916430947625,
+            "y": 80,
+            "z": 307.7148343327822
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.32916430947625,
+            "y": 80,
+            "z": 307.7148343327822
+          },
+          "after": {
+            "x": -403.39545197397405,
+            "y": 80,
+            "z": 307.68672836303506
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.39545197397405,
+            "y": 80,
+            "z": 307.68672836303506
+          },
+          "after": {
+            "x": -403.4617396384719,
+            "y": 80,
+            "z": 307.658622393288
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.4617396384719,
+            "y": 80,
+            "z": 307.658622393288
+          },
+          "after": {
+            "x": -403.5280273029697,
+            "y": 80,
+            "z": 307.6305164235409
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 23,
+          "before": {
+            "x": -403.5280273029697,
+            "y": 80,
+            "z": 307.6305164235409
+          },
+          "after": {
+            "x": -403.59431496746754,
+            "y": 80,
+            "z": 307.6024104537938
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.59431496746754,
+            "y": 80,
+            "z": 307.6024104537938
+          },
+          "after": {
+            "x": -403.66127229552455,
+            "y": 80,
+            "z": 307.62888149871964
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.66127229552455,
+            "y": 80,
+            "z": 307.62888149871964
+          },
+          "after": {
+            "x": -403.72822962358157,
+            "y": 80,
+            "z": 307.65535254364545
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.72822962358157,
+            "y": 80,
+            "z": 307.65535254364545
+          },
+          "after": {
+            "x": -403.7951869516386,
+            "y": 80,
+            "z": 307.68182358857126
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.7951869516386,
+            "y": 80,
+            "z": 307.68182358857126
+          },
+          "after": {
+            "x": -403.8621442796956,
+            "y": 80,
+            "z": 307.7082946334971
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.8621442796956,
+            "y": 80,
+            "z": 307.7082946334971
+          },
+          "after": {
+            "x": -403.9291016077526,
+            "y": 80,
+            "z": 307.7347656784229
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.9291016077526,
+            "y": 80,
+            "z": 307.7347656784229
+          },
+          "after": {
+            "x": -403.99605893580963,
+            "y": 80,
+            "z": 307.7612367233487
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -403.99605893580963,
+            "y": 80,
+            "z": 307.7612367233487
+          },
+          "after": {
+            "x": -404.06301626386664,
+            "y": 80,
+            "z": 307.7877077682745
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.06301626386664,
+            "y": 80,
+            "z": 307.7877077682745
+          },
+          "after": {
+            "x": -404.12997359192366,
+            "y": 80,
+            "z": 307.81417881320033
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.12997359192366,
+            "y": 80,
+            "z": 307.81417881320033
+          },
+          "after": {
+            "x": -404.1969309199807,
+            "y": 80,
+            "z": 307.8406498581261
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.1969309199807,
+            "y": 80,
+            "z": 307.8406498581261
+          },
+          "after": {
+            "x": -404.2638882480377,
+            "y": 80,
+            "z": 307.86712090305184
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.2638882480377,
+            "y": 80,
+            "z": 307.86712090305184
+          },
+          "after": {
+            "x": -404.3308455760947,
+            "y": 80,
+            "z": 307.89359194797765
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.3308455760947,
+            "y": 80,
+            "z": 307.89359194797765
+          },
+          "after": {
+            "x": -404.3978029041517,
+            "y": 80,
+            "z": 307.9200629929034
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.3978029041517,
+            "y": 80,
+            "z": 307.9200629929034
+          },
+          "after": {
+            "x": -404.46476023220873,
+            "y": 80,
+            "z": 307.94653403782917
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.46476023220873,
+            "y": 80,
+            "z": 307.94653403782917
+          },
+          "after": {
+            "x": -404.53171756026575,
+            "y": 80,
+            "z": 307.973005082755
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 1,
+          "before": {
+            "x": -404.53171756026575,
+            "y": 80,
+            "z": 307.973005082755
+          },
+          "after": {
+            "x": -404.59867488832276,
+            "y": 80,
+            "z": 307.99947612768074
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.59867488832276,
+            "y": 80,
+            "z": 307.99947612768074
+          },
+          "after": {
+            "x": -404.59883376262053,
+            "y": 80,
+            "z": 308.07147595239553
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.59883376262053,
+            "y": 80,
+            "z": 308.07147595239553
+          },
+          "after": {
+            "x": -404.59899263691824,
+            "y": 80,
+            "z": 308.1434757771103
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.59899263691824,
+            "y": 80,
+            "z": 308.1434757771103
+          },
+          "after": {
+            "x": -404.599151511216,
+            "y": 80,
+            "z": 308.2154756018251
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.599151511216,
+            "y": 80,
+            "z": 308.2154756018251
+          },
+          "after": {
+            "x": -404.5993103855137,
+            "y": 80,
+            "z": 308.2874754265399
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.5993103855137,
+            "y": 80,
+            "z": 308.2874754265399
+          },
+          "after": {
+            "x": -404.5994692598115,
+            "y": 80,
+            "z": 308.3594752512547
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.5994692598115,
+            "y": 80,
+            "z": 308.3594752512547
+          },
+          "after": {
+            "x": -404.5996281341092,
+            "y": 80,
+            "z": 308.4314750759695
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.5996281341092,
+            "y": 80,
+            "z": 308.4314750759695
+          },
+          "after": {
+            "x": -404.59978700840696,
+            "y": 80,
+            "z": 308.5034749006843
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 2,
+          "before": {
+            "x": -404.59978700840696,
+            "y": 80,
+            "z": 308.5034749006843
+          },
+          "after": {
+            "x": -404.5999458827047,
+            "y": 80,
+            "z": 308.5754747253991
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.5999458827047,
+            "y": 80,
+            "z": 308.5754747253991
+          },
+          "after": {
+            "x": -404.5999550610633,
+            "y": 80,
+            "z": 308.64747472481406
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.5999550610633,
+            "y": 80,
+            "z": 308.64747472481406
+          },
+          "after": {
+            "x": -404.599964239422,
+            "y": 80,
+            "z": 308.71947472422903
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.599964239422,
+            "y": 80,
+            "z": 308.71947472422903
+          },
+          "after": {
+            "x": -404.59997341778063,
+            "y": 80,
+            "z": 308.791474723644
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        },
+        {
+          "waypoint": 3,
+          "before": {
+            "x": -404.59997341778063,
+            "y": 80,
+            "z": 308.791474723644
+          },
+          "after": {
+            "x": -404.59998259613934,
+            "y": 80,
+            "z": 308.791474723644
+          },
+          "floor": 1,
+          "inside": "market-b24",
+          "blockedAccess": null
+        }
+      ],
+      "landings": [
+        {
+          "direction": "up",
+          "floor": 1,
+          "position": {
+            "x": -403.59431496746754,
+            "y": 80,
+            "z": 307.6024104537938
+          }
+        }
+      ]
+    }
+  ]
+}

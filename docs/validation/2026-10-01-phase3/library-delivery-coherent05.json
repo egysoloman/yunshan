@@ -1,0 +1,373 @@
+{
+  "phase": "phase3-coherent05",
+  "recordedAt": "2026-10-02T00:02:08.496960+00:00",
+  "status": "failed-before-upload",
+  "attemptCount": 1,
+  "savedFileCount": 0,
+  "libraryFileIds": [],
+  "officialHelper": {
+    "skill": "openai-library:library",
+    "source": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/SKILL.md",
+    "directory": "/tmp/yunshan-library-current-coherent04",
+    "scriptSHA256": "f362d45d5e4a17a690e5aff1c795eb62e645cf5db5771a52a84fb1850ea06fb1",
+    "orderedBatchCount": 7,
+    "allHelperFilesUnchanged": true,
+    "route": "Required current prepared-upload helper; one ordered seven-create batch with full JSON and EOF",
+    "exitCode": 1,
+    "exactError": "library upload failed: hosted apps tools/list request failed: network",
+    "stdoutBytes": 0,
+    "stderrBytes": 70,
+    "resultReceived": false,
+    "noRetryOrManualFallback": true,
+    "helperFilesUnchangedAfterExecution": true
+  },
+  "localOutputDirectory": "/workspace/yunshan-deliverables/phase3-coherent05",
+  "actualPDFReview": {
+    "reviewedAt": "2026-10-02T00:01:01.451704+00:00",
+    "reviewer": "city_vehicles",
+    "method": "Actual view_image of all five pdftoppm125dpi full pages; CPU only, no Chrome/WebGL",
+    "pages": 5,
+    "allPagesViewed": true,
+    "layoutFindings": "All five pages have legible Chinese text, complete uncropped original images, separated source captions, no text/image overlaps or footer clipping. Page5 distinguishes390 rules/30DOM/11controllednativeflight/6technicalviews+referenceFAIL/14d nonsteady and r10partial not school.",
+    "pdfOriginalBytesUnchanged": true,
+    "pdfSHA256": "03c7d28bbc88b7450bd6f1b0645a5b483ec10568faf96ff9b31362494020e7d6",
+    "pngs": [
+      {
+        "name": "page-1.png",
+        "bytes": 1018427,
+        "sha256": "67e2d984106d56b81cb419adbd73d89321cb4ee27d2e41ef8be57ae06fdb1301"
+      },
+      {
+        "name": "page-2.png",
+        "bytes": 1025406,
+        "sha256": "45a5d7981e8389e1d85ffbfa059f28c9ebf7c4e63757b774a8f8d7822f55ba76"
+      },
+      {
+        "name": "page-3.png",
+        "bytes": 934632,
+        "sha256": "0fb6c86f017f7a6440ee1eb5f8d11d79d4f72c2e3eb1a42d6c39a4b629f980a8"
+      },
+      {
+        "name": "page-4.png",
+        "bytes": 290283,
+        "sha256": "dd9e468df847ae99293d4f3e946a18a938d318da497b65bc50ed63d69f14ae2e"
+      },
+      {
+        "name": "page-5.png",
+        "bytes": 226247,
+        "sha256": "fe2e23b53614e457c2a54bfa2845eb33393d5abc93700ad25e9b0940a9ae6ec7"
+      }
+    ]
+  },
+  "independentValidation": {
+    "checkedAt": "2026-10-01T23:59:51.630356+00:00",
+    "sevenOriginalFiles": [
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-review.pdf",
+        "fileName": "yunshan-phase3-coherent05-review.pdf",
+        "bytes": 29543853,
+        "sha256": "03c7d28bbc88b7450bd6f1b0645a5b483ec10568faf96ff9b31362494020e7d6",
+        "libraryArtifactType": "report"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-review.html",
+        "fileName": "yunshan-phase3-coherent05-review.html",
+        "bytes": 23284852,
+        "sha256": "f74c81bdcdb6f345c85c89a58642a213f32873ca03ba09e31a609ac223fe736d",
+        "libraryArtifactType": "report"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-source.zip",
+        "fileName": "yunshan-phase3-coherent05-source.zip",
+        "bytes": 7400754,
+        "sha256": "f12428227bfcb15e3be97c6bf778d5fd8a8b0efe6009d779d92447902721a070",
+        "libraryArtifactType": "other"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-evidence.zip",
+        "fileName": "yunshan-phase3-coherent05-evidence.zip",
+        "bytes": 14741489,
+        "sha256": "4abcc21522b7d0c41512a6d3c049dbcf613d52efea3e14fdd3fa1f7b5578fad2",
+        "libraryArtifactType": "other"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-memo.md",
+        "fileName": "yunshan-phase3-coherent05-memo.md",
+        "bytes": 96281,
+        "sha256": "7f636923a1153bbe0be1a97038b5cf59c7315fdbbabf7f438c0c1484eda773e0",
+        "libraryArtifactType": "other"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-requirements.md",
+        "fileName": "yunshan-phase3-coherent05-requirements.md",
+        "bytes": 17417,
+        "sha256": "1df7f657b8ffc15ea9465a5c44751122b5ea76ba8675e53646281f5234f52899",
+        "libraryArtifactType": "other"
+      },
+      {
+        "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-original-references.zip",
+        "fileName": "yunshan-original-references.zip",
+        "bytes": 13780759,
+        "sha256": "1342f1c9d126aa073ef0e2a95bd39a8e4236c52e50da64599a8a2c3d46a93f78",
+        "libraryArtifactType": "other"
+      }
+    ],
+    "zipValidation": {
+      "yunshan-phase3-coherent05-source.zip": {
+        "crcPassed": true,
+        "hashedOriginalMembers": 99,
+        "totalMembers": 101,
+        "allSHA256Passed": true
+      },
+      "yunshan-phase3-coherent05-evidence.zip": {
+        "crcPassed": true,
+        "hashedOriginalMembers": 265,
+        "totalMembers": 268,
+        "allSHA256Passed": true
+      },
+      "yunshan-original-references.zip": {
+        "crcPassed": true,
+        "hashedOriginalMembers": 5,
+        "totalMembers": 6,
+        "allSHA256Passed": true
+      }
+    },
+    "scope": {
+      "frozen89OriginalFilesAndDist": true,
+      "frozen9945JourneyAndExternal3c8Separate": true,
+      "canonical05HistoryNativeAndNegativeEvidenceIncluded": true,
+      "prototypeSourceNotIncludedHistoryLinksSHARecorded": true
+    },
+    "sourceStartEnd": {
+      "all89FrozenUnchanged": true,
+      "allProductionSrcAndTestsSharedEqual05": true,
+      "buildSHA256": "9b1f4bced913e77feac1f47ded156beb2c08005688d5daa2709a87f501b7081e"
+    },
+    "htmlOriginalPNGCount": 13,
+    "htmlAllPNGBytesEqual": true,
+    "latestMemoAndMatrixOriginalBytesEqual": true
+  },
+  "files": [
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-review.pdf",
+      "fileName": "yunshan-phase3-coherent05-review.pdf",
+      "bytes": 29543853,
+      "sha256": "03c7d28bbc88b7450bd6f1b0645a5b483ec10568faf96ff9b31362494020e7d6",
+      "libraryArtifactType": "report"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-review.html",
+      "fileName": "yunshan-phase3-coherent05-review.html",
+      "bytes": 23284852,
+      "sha256": "f74c81bdcdb6f345c85c89a58642a213f32873ca03ba09e31a609ac223fe736d",
+      "libraryArtifactType": "report"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-source.zip",
+      "fileName": "yunshan-phase3-coherent05-source.zip",
+      "bytes": 7400754,
+      "sha256": "f12428227bfcb15e3be97c6bf778d5fd8a8b0efe6009d779d92447902721a070",
+      "libraryArtifactType": "other"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-evidence.zip",
+      "fileName": "yunshan-phase3-coherent05-evidence.zip",
+      "bytes": 14741489,
+      "sha256": "4abcc21522b7d0c41512a6d3c049dbcf613d52efea3e14fdd3fa1f7b5578fad2",
+      "libraryArtifactType": "other"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-memo.md",
+      "fileName": "yunshan-phase3-coherent05-memo.md",
+      "bytes": 96281,
+      "sha256": "7f636923a1153bbe0be1a97038b5cf59c7315fdbbabf7f438c0c1484eda773e0",
+      "libraryArtifactType": "other"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-phase3-coherent05-requirements.md",
+      "fileName": "yunshan-phase3-coherent05-requirements.md",
+      "bytes": 17417,
+      "sha256": "1df7f657b8ffc15ea9465a5c44751122b5ea76ba8675e53646281f5234f52899",
+      "libraryArtifactType": "other"
+    },
+    {
+      "localPath": "/workspace/yunshan-deliverables/phase3-coherent05/yunshan-original-references.zip",
+      "fileName": "yunshan-original-references.zip",
+      "bytes": 13780759,
+      "sha256": "1342f1c9d126aa073ef0e2a95bd39a8e4236c52e50da64599a8a2c3d46a93f78",
+      "libraryArtifactType": "other"
+    }
+  ],
+  "originalSevenFileBytesUnchangedAfterHelper": true,
+  "scope": {
+    "rules": {
+      "command": "npm test > artifacts/full-rules.log 2>&1",
+      "session": 38235,
+      "exitCode": 0,
+      "tests": 390,
+      "passed": 390,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "durationMs": 522472.889059,
+      "fullLogSHA256": "e7a5b6dd58d7bf6a5b371a5d5e93f1a4bee3293153f3b5addd175b5f8ba68143"
+    },
+    "ui": {
+      "checks": 30,
+      "cityRenderer": false,
+      "gpuDisabled": true
+    },
+    "browser": {
+      "checks": 11,
+      "errors": [],
+      "exitCode": 0,
+      "controlledLocationAndIdentityFixtures": true
+    },
+    "macro": {
+      "actualScenes": 6,
+      "technical": 6,
+      "visual": "FAIL"
+    },
+    "economy14d": {
+      "status": "passed",
+      "ticks": 10080,
+      "sourceCount": 32,
+      "auditSourceCount": 13,
+      "sourceStable": true,
+      "coreSHA": "faad283bbbecf5729bb79a95110d70f9b9aa2628870d118faa177385cc788649",
+      "NPC": {
+        "total": 616,
+        "alive": 616,
+        "meanHunger": 29.928246753246746,
+        "meanHealth": 86.18449490478211,
+        "poor": 111,
+        "hungryUnder20": 304,
+        "cashRichStarving": 276,
+        "noStoredMeal": 449,
+        "depletedWorkers": 367
+      },
+      "playerAlive": false,
+      "treasury": 11198.788716185003,
+      "moneyResidual": -3.702007234096527e-08,
+      "fiscalResidual": -4.0196027839556336e-08,
+      "freight": {
+        "initialVehicleCargo": 1744,
+        "loadedUnits": 6825.173930101232,
+        "unloadedUnits": 8569.173930101233,
+        "finalVehicleCargo": 0,
+        "cargoResidual": -1.8189894035458565e-12
+      },
+      "actualLoads": 294,
+      "actualCarriers": 44,
+      "everyPickupPhysical": true,
+      "food": {
+        "initial": 17954,
+        "new": 2745.0657008327216,
+        "consumed": 11641,
+        "final": 9058.065700832723,
+        "residual": -1.8189894035458565e-12,
+        "dailyNew": 196.07612148805154,
+        "dailyIdealNeed": 852.9230769230769
+      },
+      "materials": {
+        "initial": 4860,
+        "new": 6332.6247395899945,
+        "consumed": 9305.517255806582,
+        "final": 1887.1074837831482,
+        "residual": 2.6489033189136535e-10
+      },
+      "access": {
+        "poorWalletForEveryInStockFood": 0,
+        "noStockInOwnDistrict": 268,
+        "noOpenStockInOwnDistrict": 268,
+        "noRouteToAnyAffordableOpenFood": 0,
+        "blockedOnlyBy1200CrossDistrict": 236,
+        "nearestActualAffordableOpenFoodOver500": 274,
+        "nearestActualAffordableOpenFoodOver1000": 274,
+        "nearestActualAffordableOpenFoodOver2500": 254,
+        "currentlyChoosingEat": 46,
+        "otherActivityWithNoAdvertisedFood": 226,
+        "advertisedFoodUnsellable": 0
+      },
+      "trend": {
+        "cashChangePercent": 15.981071788719326,
+        "unpaidPrivateWages": 283.3504495234665,
+        "steadyStateEstablished": false
+      },
+      "scope": "Existing fourteen-day guards pass; public/food-access deficits remain, new30/60 not run."
+    },
+    "finalDistrictFreightPoolQuantity": 6785.173930101231,
+    "fullGoalCompleted": false,
+    "macHardwareVerified": false,
+    "statisticsSimulationStreamingComplete": false,
+    "profilesIncluded": false,
+    "prototypesIncluded": false
+  },
+  "frozen89SourceUnchangedAfterUploadAttempt": true,
+  "latestRootDocs": {
+    "memo.md": {
+      "sourcePath": "/workspace/yunshan/开发备忘录.md",
+      "bytes": 96281,
+      "sha256": "7f636923a1153bbe0be1a97038b5cf59c7315fdbbabf7f438c0c1484eda773e0",
+      "rootConfirmedUpdateAt": "2026-10-01 23:52 UTC（根确认的分钟，未提供秒）",
+      "copiedAt": "2026-10-01T23:58:36Z"
+    },
+    "requirements.md": {
+      "sourcePath": "/workspace/yunshan/docs/需求实现验证矩阵.md",
+      "bytes": 17417,
+      "sha256": "1df7f657b8ffc15ea9465a5c44751122b5ea76ba8675e53646281f5234f52899",
+      "rootConfirmedUpdateAt": "2026-10-01 23:52 UTC（根确认的分钟，未提供秒）",
+      "copiedAt": "2026-10-01T23:58:36Z"
+    }
+  },
+  "externalTestedHarness": {
+    "source": "docs/validation/2026-10-01-phase3/player-journey-r10/executed-player-journey.mjs",
+    "sha256": "3c8a0d1ce534ec4d302e2da726914b63c8a6eb5078097b924d641a43150a4f5c",
+    "tested": "r9/r10",
+    "insideFrozen89": false,
+    "frozenOriginalPreserved": "9945c52abeb466471c9b4f39972190ad18313bf1bd6afa56fa450b769bc307fd"
+  },
+  "linkedHistoricalPrototypeArchives": [
+    {
+      "repoPath": "docs/validation/2026-10-01-phase3/forest-canopy-failed-01/original-prototype.zip",
+      "bytes": 4158217,
+      "sha256": "97b87314151d7fbb27d940ae3fd47ae6c362fad456d38b739384c61515e365c0",
+      "embedded": false,
+      "scope": "Historical CPU-only prototype, not production/GL; original is retained in repository at this exact path."
+    },
+    {
+      "repoPath": "docs/validation/2026-10-01-phase3/architecture-prototype-02/original-prototype.zip",
+      "bytes": 1117301,
+      "sha256": "5992a5d805c97077240b12ceb0034bfc62bd6541258e9502300c4626960e5eb4",
+      "embedded": false,
+      "scope": "Historical CPU-only prototype, not production/GL; original is retained in repository at this exact path."
+    }
+  ],
+  "oldCoherent02Untouched": true,
+  "noProfilesOrCredentialsIncluded": true,
+  "rawAttemptPaths": {
+    "request.json": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/request.json",
+    "stdout.json": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/stdout.json",
+    "stderr.log": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/stderr.log",
+    "exit-code.txt": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/exit-code.txt",
+    "attempt-start.json": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/attempt-start.json",
+    "attempt-end.json": "/workspace/yunshan-deliverables/phase3-coherent05/library-upload/attempt-end.json"
+  },
+  "githubPDF": {
+    "repositoryTarget": "docs/validation/2026-10-01-phase3/coherent05-review.pdf",
+    "copyPerformedByThisProducer": false,
+    "published": false,
+    "publicationStatus": "Pending root byte-identical copy and actual commit/push; no published URL claimed"
+  },
+  "rootActualPDFReview": {
+    "allFivePagesViewed": true,
+    "confirmation": "Root independently actually viewed all five final PDF pages; original image/captions/Chinese/scope confirmed, no regeneration requested.",
+    "pdfSHA256": "03c7d28bbc88b7450bd6f1b0645a5b483ec10568faf96ff9b31362494020e7d6",
+    "pdfBytes": 29543853
+  },
+  "pdfTextCheck": {
+    "allCoordinateDigitsRetained": true,
+    "tmpWordRetained": true,
+    "originalPDFUnchanged": true
+  }
+}

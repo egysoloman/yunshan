@@ -1,0 +1,274 @@
+{
+  "name": "market-street",
+  "hour": 12,
+  "eye": [
+    -464.40000000000003,
+    72.32000000000001,
+    327
+  ],
+  "target": [
+    -469.40000000000003,
+    74,
+    292.40000000000003
+  ],
+  "buildingId": "market-b0",
+  "drawCalls": 534,
+  "triangles": 617148,
+  "shadowSubmission": {
+    "scope": "One complete render with forced shadow refresh; not an every-frame timing benchmark",
+    "colourPass": {
+      "calls": 534,
+      "triangles": 617148
+    },
+    "totalPass": {
+      "calls": 599,
+      "triangles": 765998
+    },
+    "shadowCalls": 65,
+    "shadowTriangles": 148850,
+    "pixelRatio": 0.92
+  },
+  "glErrors": [],
+  "residency": {
+    "stats": {
+      "resident": 7,
+      "total": 482,
+      "created": 18,
+      "released": 11,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 7,
+    "actualMeshes": 66,
+    "actualInstances": 9557,
+    "ownedGeometryCount": 66,
+    "interiorBuildingRefs": 10,
+    "hiddenFarMismatch": 0,
+    "residentChunks": [
+      {
+        "id": "-5:3",
+        "buildings": [
+          "market-b0",
+          "market-b4",
+          "market-b24"
+        ]
+      },
+      {
+        "id": "-6:2",
+        "buildings": [
+          "market-b20",
+          "market-b44"
+        ]
+      },
+      {
+        "id": "-6:4",
+        "buildings": [
+          "market-b8"
+        ]
+      },
+      {
+        "id": "-4:4",
+        "buildings": [
+          "market-b54"
+        ]
+      },
+      {
+        "id": "-5:4",
+        "buildings": [
+          "market-b28"
+        ]
+      },
+      {
+        "id": "-5:1",
+        "buildings": [
+          "market-b74"
+        ]
+      },
+      {
+        "id": "-4:3",
+        "buildings": [
+          "market-b30"
+        ]
+      }
+    ],
+    "observed": {
+      "creates": 7,
+      "releases": 11,
+      "geometryDisposals": 104,
+      "instanceDisposals": 104,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 602,
+      "textures": 9
+    }
+  },
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "usedTimes": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "usedTimes": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 15,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "usedTimes": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "usedTimes": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "usedTimes": 2,
+      "diagnostics": null
+    }
+  ],
+  "architectureDetail": {
+    "activeBuildings": 8,
+    "activeBuildingIds": [
+      "market-b0",
+      "market-b4",
+      "market-b24",
+      "market-b20",
+      "market-b8",
+      "market-b54",
+      "market-b44",
+      "market-b28"
+    ],
+    "instances": 3261,
+    "created": 16,
+    "released": 8,
+    "maxBuildings": 8,
+    "maxInstancesPerBuilding": 640,
+    "loadDistance": 180,
+    "lanternEmission": 0.05315558591507113
+  },
+  "terrainLod": {
+    "water": {
+      "continuous": true,
+      "riverVertices": 18,
+      "plungePoolRadius": 50,
+      "waterfallDrop": 153
+    },
+    "lod": {
+      "visibleFineTiles": 9,
+      "cachedFineTiles": 16,
+      "tileMetres": 96,
+      "surfaceStep": 2,
+      "voxelMetres": 0.2,
+      "lowAltitude": true,
+      "proxyStep": 16,
+      "proxyChunkMetres": 384,
+      "forestDetailChunks": 3
+    }
+  },
+  "waterObjects": [
+    "山腰轻云 · 瀑潭水雾",
+    "瀑潭飞沫 · 落水冲击雾",
+    "瀑潭→清溪→水岸 · 共顶点连续水面",
+    "溪岸 · 灰白水蚀石",
+    "溪岸 · 细茎芦苇",
+    "云瀑 · 153m落差水帘",
+    "瀑下潭 · 可见落水与下游接合",
+    "瀑潭 · 体素泡沫"
+  ]
+}

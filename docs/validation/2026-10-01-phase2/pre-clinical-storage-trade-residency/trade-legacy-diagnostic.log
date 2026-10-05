@@ -1,0 +1,29 @@
+✖ live custody saves exactly, malformed lots reject atomically and legacy saves create an empty book (458.266064ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 995.875945
+
+✖ failing tests:
+
+test at tests/trade.test.ts:1:10083
+✖ live custody saves exactly, malformed lots reject atomically and legacy saves create an empty book (458.266064ms)
+  AssertionError [ERR_ASSERTION]: 读档失败：无效存档字段：persisted module bodies and manifest。
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/trade.test.ts:151:76)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

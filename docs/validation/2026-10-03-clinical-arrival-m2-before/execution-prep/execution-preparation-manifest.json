@@ -1,0 +1,87 @@
+{
+  "status": "READY_NOT_RUN",
+  "atUtc": "2026-10-03T06:00:41.542617+00:00",
+  "scope": "root CODEPREP only; awaiting independent CPU GO",
+  "originalApprovedFilesUnchanged": true,
+  "originalAndCopiedBaseline124Unchanged": true,
+  "mirroredDriversRestoreOriginalAllAssertions": true,
+  "executions": {
+    "Node": 0,
+    "Simulation": 0,
+    "syntax": 0,
+    "strict": 0,
+    "tests": 0,
+    "build": 0,
+    "GPU": 0,
+    "ZIP": 0,
+    "Library": 0
+  },
+  "actualPIDs": [],
+  "sourceManifestSha256": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+  "coreSha256": "f9eb39ebf076b8cde34c6e910cbe3e37d3170ff709553292b6dcc67271d4df85",
+  "sourceMembers": 124,
+  "inputBoundMembers": 269,
+  "pendingRuntimeCases": [
+    "D1",
+    "D2"
+  ],
+  "D3": "NOT_READY_NO_AUTHENTIC_INPUT",
+  "contract": "NOT_RUN_NOT_RUNTIME_EVIDENCE",
+  "preparedFiles": [
+    {
+      "relativePath": "drivers/m2-checkpoints.ts",
+      "sha256": "ae8db8cc395868014d87fa7d91e2ac49dda917b0747361231bc0eeab7c84dfa2",
+      "bytes": 2532
+    },
+    {
+      "relativePath": "drivers/m2-doctor-late.test.ts",
+      "sha256": "0d91b876c9c22a31edf91abc12c2352df4bf810669d54dbf16ecf70baa797b64",
+      "bytes": 3537
+    },
+    {
+      "relativePath": "drivers/m2-fixture.ts",
+      "sha256": "712a53746a713de9ecfb68b9324dbe435011d47cdbc69045adfa9c5fa97ea5ab",
+      "bytes": 8501
+    },
+    {
+      "relativePath": "drivers/m2-npc-patient-late.test.ts",
+      "sha256": "41cc0e02b7b3eed118168ea15eb40eac60be36a86bf3dec1e2ee381a1e0751b9",
+      "bytes": 3693
+    },
+    {
+      "relativePath": "drivers/m2-window-contract.ts",
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3",
+      "bytes": 317
+    },
+    {
+      "relativePath": "execution-inputs.json",
+      "sha256": "c6f3e3034a1af3f67f03891d9897973dfecaac4389ae2ee1afc99ec42bb21d05",
+      "bytes": 79793
+    },
+    {
+      "relativePath": "launch-m2-before.sh",
+      "sha256": "ae88f98854965bea53ce9f68578dbea6b28d8c0a93633a17993d81d257c6c8f0",
+      "bytes": 329
+    },
+    {
+      "relativePath": "passive-checkpoints.patch",
+      "sha256": "b93c432c3579a99d8bc318273509d21c4bf0ac8b9fefc4ef56b29873a5ebbcc5",
+      "bytes": 8803
+    },
+    {
+      "relativePath": "run-m2-before.py",
+      "sha256": "a5ad947c1e4752c4378d968eccf9bc3e1ac08d81d0b8552a0997ba0345606610",
+      "bytes": 8929
+    },
+    {
+      "relativePath": "static-passive-mirror-proof.json",
+      "sha256": "25c750733345813d73df2d93ba1a5723ce33e840448dab608de7d3d64f1aead5",
+      "bytes": 1028
+    },
+    {
+      "relativePath": "wrapper-contract.md",
+      "sha256": "ef3d2981c90132b8a3d8b2e545be2b8ba5cb22bf68ce54b237f9e31f0e253f4f",
+      "bytes": 2971
+    }
+  ]
+}

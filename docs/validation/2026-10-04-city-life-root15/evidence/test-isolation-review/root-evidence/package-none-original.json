@@ -1,0 +1,30 @@
+{
+  "name": "yunshan-city",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --import tsx --test --test-isolation=none tests/*.test.ts",
+    "test:browser": "node scripts/browser-test.mjs",
+    "benchmark": "node --expose-gc --import tsx scripts/benchmark.ts",
+    "test:ui": "node scripts/ui-test.mjs",
+    "audit:economy": "node --import tsx scripts/economy-audit.ts --ruleset civic-local-v1"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.180.0",
+    "@types/node": "^24.0.0",
+    "playwright-core": "^1.55.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

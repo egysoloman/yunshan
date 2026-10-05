@@ -1,0 +1,421 @@
+{
+  "atUTC": "2026-10-03T04:47:42.229075+00:00",
+  "scope": "read-only independent evidence-index01 direct SHA verification; no simulation/build/browser",
+  "indexSHA256": "ffa051e8a43a1cffe2b27e534ebac29c3513def240a0571f79d157177893d951",
+  "allReferencedFilesMatch": true,
+  "referencedChecks": [
+    {
+      "path": "/tmp/yunshan-education-course-prep-16-01/frozen/education-course-from16.patch",
+      "expected": "5e8268cee8ef32555e5901713da64041662f6c3c16b307e8b0aba7dc92878471",
+      "actual": "5e8268cee8ef32555e5901713da64041662f6c3c16b307e8b0aba7dc92878471",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-preproof-syntax-only-16-01/source/src/simulation/education.ts",
+      "expected": "bd3d74ff6b453c8bfbab438ac05777f1c68bce900ae3424cb0a7e9cbc7c9f09e",
+      "actual": "bd3d74ff6b453c8bfbab438ac05777f1c68bce900ae3424cb0a7e9cbc7c9f09e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/frozen/source-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/frozen/education-course-from17.patch",
+      "expected": "93ad364c042684b85a3eee1c1f4a9afd3c7b4e680a13c8f27e9f1850bfa73551",
+      "actual": "93ad364c042684b85a3eee1c1f4a9afd3c7b4e680a13c8f27e9f1850bfa73551",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/frozen-final/source-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/frozen-final/education-course-from17.patch",
+      "expected": "75c34be1e532c3e723f2a20df0990d9cb868984ceaea1e9465b83482485392dc",
+      "actual": "75c34be1e532c3e723f2a20df0990d9cb868984ceaea1e9465b83482485392dc",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/frozen-final/metadata.json",
+      "expected": "ff1c9a09e1c49643d2e932f1910ca60d9151b4b06ee9c9fa335bd87717fb5b0e",
+      "actual": "ff1c9a09e1c49643d2e932f1910ca60d9151b4b06ee9c9fa335bd87717fb5b0e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-old15-causal-prep-20261003/run/raw.log",
+      "expected": "56e3914ea5dee000fef62abaebf352f47f7715740ab902b26abeb2446c5e1465",
+      "actual": "56e3914ea5dee000fef62abaebf352f47f7715740ab902b26abeb2446c5e1465",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-old15-causal-prep-20261003/run/receipt.json",
+      "expected": "145b08d5be74f66b0fd7c92aaa1def9bf1e1b25e31514ab0c5182ca299ff6bc2",
+      "actual": "145b08d5be74f66b0fd7c92aaa1def9bf1e1b25e31514ab0c5182ca299ff6bc2",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/before.raw.log",
+      "expected": "cd78d60510cb2208e453fb0e9416bf6bcbdd35c4ecb1b3a0e78e4ad4b2856cbf",
+      "actual": "cd78d60510cb2208e453fb0e9416bf6bcbdd35c4ecb1b3a0e78e4ad4b2856cbf",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/before/same-start.receipt.json",
+      "expected": "d5057ab10ba153119512734d8547f61e057a75a6353a8dcb3ea4bbd36505180b",
+      "actual": "d5057ab10ba153119512734d8547f61e057a75a6353a8dcb3ea4bbd36505180b",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/syntax-reuse.raw.log",
+      "expected": "b13c94a784f8138b30648e6966c303f5756ed61497f43c0371d03cf2cb8b2acf",
+      "actual": "b13c94a784f8138b30648e6966c303f5756ed61497f43c0371d03cf2cb8b2acf",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/before-syntax-reuse/same-start.receipt.json",
+      "expected": "f3f4149adfa53acff1b49ba6164a6afaf5c576d31fe6a4555d11efcae931611c",
+      "actual": "f3f4149adfa53acff1b49ba6164a6afaf5c576d31fe6a4555d11efcae931611c",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/before-syntax-reuse/same-start.genuine.save.json",
+      "expected": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735",
+      "actual": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/before-syntax-reuse/same-start.forged.save.json",
+      "expected": "5e001ceea4f2139adb7c3bdafb62b84160ebd0db04ae25ae0276c80637f57718",
+      "actual": "5e001ceea4f2139adb7c3bdafb62b84160ebd0db04ae25ae0276c80637f57718",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/samebytes-afterfix.audit.json",
+      "expected": "990f66d3a528e89b07db380033763f3f6cbe34e28b32957e6ce4c34d8e5b3995",
+      "actual": "990f66d3a528e89b07db380033763f3f6cbe34e28b32957e6ce4c34d8e5b3995",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-saved-capacity-prep-20261003/run/samebytes-afterfix/receipt.json",
+      "expected": "beea134735b58a9700a29d041eb37b196893b03dcfe2ed4ffb60a39cc57ed5e5",
+      "actual": "beea134735b58a9700a29d041eb37b196893b03dcfe2ed4ffb60a39cc57ed5e5",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/samebytes-afterfix.raw.log",
+      "expected": "c548bca605562cf3668f0cc68215e80ce0f246a7d937880fe45fb75a332c9abf",
+      "actual": "c548bca605562cf3668f0cc68215e80ce0f246a7d937880fe45fb75a332c9abf",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-s1-save-contract-prep-20261003/run/capture-receipt.json",
+      "expected": "42556206bf67663cd6341c974c831eb7718a05006112946f79de8d2a3db18d64",
+      "actual": "42556206bf67663cd6341c974c831eb7718a05006112946f79de8d2a3db18d64",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-s1-save-contract-prep-20261003/run/root17-coursefree.save.json",
+      "expected": "b2f920b5505ddbbd277da02bde824363a2e4712ca6ab3d016362cf66246d2361",
+      "actual": "b2f920b5505ddbbd277da02bde824363a2e4712ca6ab3d016362cf66246d2361",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-s1-save-contract-prep-20261003/input/capture-root17-coursefree.ts",
+      "expected": "58209063088472b2e8320f09a33509929f5575fe7e4c11e1e58599a2205b3517",
+      "actual": "58209063088472b2e8320f09a33509929f5575fe7e4c11e1e58599a2205b3517",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-s1-save-contract-prep-20261003/run/import-receipt.json",
+      "expected": "ab6e4d0b1dc8a536b18280056812d254670b6ac64a935ee8941abe709101b50a",
+      "actual": "ab6e4d0b1dc8a536b18280056812d254670b6ac64a935ee8941abe709101b50a",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-s1-save-contract-prep-20261003/input/import-root17-coursefree.test.ts",
+      "expected": "257c31e1d6c2d7a7b7ef24b866f389bd8bc1a5d1bbf54975a286f2966b81d086",
+      "actual": "257c31e1d6c2d7a7b7ef24b866f389bd8bc1a5d1bbf54975a286f2966b81d086",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/strict01-preserved/strict.raw.log",
+      "expected": "18eec4859b969ad4b42cdc3c703e3116aca41d35f86f25b6eeab6ade1591eb67",
+      "actual": "18eec4859b969ad4b42cdc3c703e3116aca41d35f86f25b6eeab6ade1591eb67",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/strict01-preserved/strict.exit-code.txt",
+      "expected": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+      "actual": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/strict01-preserved/education-course.reconstructed-from5e.test.ts",
+      "expected": "e18cdceb55b38b268dc796bc898aa349874a18c247a7ca1e744296f4aad0d07b",
+      "actual": "e18cdceb55b38b268dc796bc898aa349874a18c247a7ca1e744296f4aad0d07b",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/strict02.raw.log",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/new-course.raw.log",
+      "expected": "006a37f1aa336bb61ceacb6e244f0b2de3f3f38aed1d7444fe594d516a246dca",
+      "actual": "006a37f1aa336bb61ceacb6e244f0b2de3f3f38aed1d7444fe594d516a246dca",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/new-course.source-first-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/new-course.source-last-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/remaining-four.raw.log",
+      "expected": "2d0914e569dbbd7d7ff0b77d7c260af64d168270d08e763f5c50f140f21ae1b6",
+      "actual": "2d0914e569dbbd7d7ff0b77d7c260af64d168270d08e763f5c50f140f21ae1b6",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/remaining-four.source-first-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/remaining-four.source-last-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/root17-coursefree-import.raw.log",
+      "expected": "6b06320db30e0c62a5c941c9e757b5d8cc03c3bcda8f5446e92e9ad977ffe0b6",
+      "actual": "6b06320db30e0c62a5c941c9e757b5d8cc03c3bcda8f5446e92e9ad977ffe0b6",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/root17-coursefree-import.source-first-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision02-17-01/run/root17-coursefree-import.source-last-sha256.txt",
+      "expected": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "actual": "9c9ca9f508a1d1ab7fec328b96d120aec4f08184a06862c02a6a1a163f55f778",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03.raw.log",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03.source-first-sha256.txt",
+      "expected": "550b327bde3d602060002a9b68b6e94b4e592d698c201d807fdc6040dd733688",
+      "actual": "550b327bde3d602060002a9b68b6e94b4e592d698c201d807fdc6040dd733688",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03.source-last-sha256.txt",
+      "expected": "550b327bde3d602060002a9b68b6e94b4e592d698c201d807fdc6040dd733688",
+      "actual": "550b327bde3d602060002a9b68b6e94b4e592d698c201d807fdc6040dd733688",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03final.raw.log",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03final.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/strict03final.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/supported-body-targeted.raw.log",
+      "expected": "c457e01ef4c5654b633cf67cf130336be603d5c7991f6840893ab552f9540cb0",
+      "actual": "c457e01ef4c5654b633cf67cf130336be603d5c7991f6840893ab552f9540cb0",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/supported-body-targeted.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/supported-body-targeted.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/normal-saved-time.raw.log",
+      "expected": "5bac8c4fb0a7c89b832f4d2234034602f07735b2ac4ca65d0e77cfc1b06f178b",
+      "actual": "5bac8c4fb0a7c89b832f4d2234034602f07735b2ac4ca65d0e77cfc1b06f178b",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/normal-saved-time.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/normal-saved-time.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/related-original97.raw.log",
+      "expected": "ff15c905f22e66ea36a2f7228393370e80b416f29ac2fa3c658e40cb24593aaa",
+      "actual": "ff15c905f22e66ea36a2f7228393370e80b416f29ac2fa3c658e40cb24593aaa",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/related-original97.source-first-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    },
+    {
+      "path": "/tmp/yunshan-education-course-revision03-17-01/run/related-original97.source-last-sha256.txt",
+      "expected": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "actual": "342c6eb46b13ff84550e5e8d694a2b5aa6ae2b8e4eec09dca3392718cd03e18e",
+      "ok": true
+    }
+  ],
+  "completedScopeSummary": [
+    {
+      "label": "strict02",
+      "exitCode": 0,
+      "summary": {},
+      "sourceFirstLastEqual": null
+    },
+    {
+      "label": "new-course",
+      "exitCode": 1,
+      "summary": {
+        "tests": 25,
+        "pass": 24,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "remaining-four",
+      "exitCode": 0,
+      "summary": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "root17-coursefree-import",
+      "exitCode": 0,
+      "summary": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "strict03",
+      "exitCode": 0,
+      "summary": {},
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "strict03final",
+      "exitCode": 0,
+      "summary": {},
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "supported-body-targeted",
+      "exitCode": 0,
+      "summary": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "normal-saved-time",
+      "exitCode": 0,
+      "summary": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    },
+    {
+      "label": "related-original97",
+      "exitCode": 0,
+      "summary": {
+        "tests": 97,
+        "pass": 97,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "sourceFirstLastEqual": true
+    }
+  ],
+  "explicitLimitations": [
+    "Original course+legacy run25 contains24 PASS/1 genuine test-fixture FAIL. Separate corrected targeted1 PASS is not a single25 PASS run.",
+    "First strict01 exit2 was only TypeScript test-binding compilation failure, not business execution. Launch-first source hashes were not captured; exact reconstructed test provenance is separate.",
+    "Corrected strict02 exit0 also has no separately field-captured first/last manifests. Its later frozen120 source identity and unchanged runtime comparison are recorded; final strict03 has actual first/last124 capture.",
+    "Short original-samebytes-afterfix scope did not capture its own first/last source manifests. It used immutable read-only revision02; prior completed new-course source-last and later frozen manifest support its source identity.",
+    "First03 strict includes seven inherited16 dist files in a131-file manifest. These are inherited bundles, not an E1 build. Final03 source-only manifest124 excludes them.",
+    "Saved suffix guard is only a necessary capacity bound on explicit new current/retained-history courses plus pending marked player research; archived aggregates and grandfathered records are excluded.",
+    "New native partition/refund-cap/death-bank drafts are not integrated or executed by this index yet."
+  ]
+}

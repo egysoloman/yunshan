@@ -1,0 +1,29 @@
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (46.027348ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (66.930159ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (34.779108ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (84.023342ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (101.032456ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (16.394165ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (2.35152ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (11.403206ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (11.110868ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (263.785502ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (434.938529ms)
+✔ a saved module manifest prevents missing financial custody from being mistaken for a legacy save (184.957799ms)
+✔ starting work holds funded cash; only sixty actual onsite minutes finish and release wages (694.449297ms)
+✔ leaving and display-time changes pause work; cancellation returns only unearned escrow once (263.127874ms)
+✔ tax changes preserve actual net-pay receipts and the original gross wage (2160.341373ms)
+✔ public work uses protected real treasury escrow, releases earnings and refunds the unused remainder (290.244979ms)
+✔ death preserves earned pay and returns unearned employer funds without inventing inheritance (208.848341ms)
+✔ a half-completed funded job saves and resumes exactly; malformed payroll rejects atomically (1709.712528ms)
+✔ new journeys use the current layout and its fingerprint matches the simulation save contract (2419.382143ms)
+✔ a known legacy journey keeps its geometry, financial state, routes, upper floor and edited blocks (4335.055431ms)
+✔ an imported label or arbitrary geometry cannot relax unknown-world or corrupt-save rejection (6738.97527ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20682.329225

@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-04T01:45:24.536386+00:00",
+  "status": "ABORTED_EXCLUSIVE_GPU_CONFLICT_PARTIAL_RETAINED",
+  "reason": "Independent root geometric rules started Chromium21663/session21663; preflight assertion was accidentally masked by subsequent shell command exit. Only this captures01 exact owned ancestry is signaled.",
+  "ownedParentPid": 22652,
+  "before": [],
+  "signals": [],
+  "otherRootBrowserNotSignaled": 21663,
+  "after": [],
+  "activeAfter": [],
+  "endedAt": "2026-10-04T01:45:24.536663+00:00"
+}

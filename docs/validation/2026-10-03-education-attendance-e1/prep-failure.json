@@ -1,0 +1,11 @@
+{
+  "observedAtUTC": "2026-10-03T06:00:54.549881+00:00",
+  "actualToolExitCode": 1,
+  "stage": "Before reading any original bytes or creating ZIP",
+  "actualError": "AssertionError: .",
+  "cause": "Blank index line interpreted as Path empty string, current directory; archive does not exist.",
+  "blankLineNumbers": [
+    1433
+  ],
+  "correction": "Skip blank lines, preserve index and original producer script, use final archive-paths05 index. No source or original evidence edits."
+}

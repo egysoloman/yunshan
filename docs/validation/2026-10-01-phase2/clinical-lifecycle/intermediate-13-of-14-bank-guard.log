@@ -1,0 +1,45 @@
+✔ paid care starts with real adult funding and public clinic presence, without instant health (255.333281ms)
+✔ one observed-price material and twenty actual doctor-patient minutes settle conserved cash and health (383.229619ms)
+✔ leaving the clinic pauses attended minutes and a resumed save continues byte-identically (1096.296494ms)
+✔ a departed, hungry or deceased physician cannot supply attended work (256.902402ms)
+✔ missing or genuinely unaffordable material waits with escrow and creates no health or stock (149.369651ms)
+✔ cancellation refunds only unused money, retaining purchased stock for exactly one later treatment (391.253742ms)
+✔ unused pre-purchase cancellation transfers the same thirty real coins back exactly once (100.668297ms)
+✔ payer and patient deaths both stop care; sunk material costs remain physical clinic stock (184.042506ms)
+✔ a capped refund stays an auditable escrow obligation until the actual payer can receive it (126.173062ms)
+✔ doctor capacity is shared across public and paid care and each patient gets one simultaneous slot (31.515832ms)
+✔ actual simultaneous paid patients occupy only two slots of one attended doctor (260.14868ms)
+✔ finite receipt, escrow, identity, timing and physical inventory corruption rejects atomically (983.889942ms)
+✔ a real heal command delegates into the same clinical lifecycle and module deletion cannot erase escrow (122.184222ms)
+✖ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (63.202155ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4751.692836
+
+✖ failing tests:
+
+test at tests/clinical.test.ts:1:15846
+✖ unrefunded deceased payer escrow prevents premature bank forgiveness until the executor receives cash (63.202155ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/clinical.test.ts:141:68)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

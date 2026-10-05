@@ -1,0 +1,70 @@
+{
+  "status": "PREPARED_NOT_GPU_RUN",
+  "closedAt": "2026-10-05T01:43:42.897703+00:00",
+  "inputReadback": {
+    "baseline325": {
+      "count": 325,
+      "graph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+      "readback": "all byte-identical"
+    },
+    "candidate327": {
+      "count": 327,
+      "graph": "20b3d603c2a71e36cf0c29a5196e672b10a43b4bd9b2a7fd5c6249e04cc96306",
+      "readback": "all byte-identical"
+    }
+  },
+  "syntaxCheck": {
+    "command": "node --check capture.mjs",
+    "exitCode": 0
+  },
+  "pureOpticsWorldSHA": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "SimulationConstructed": 0,
+  "SimulationSteps": 0,
+  "browserLaunches": 0,
+  "rootOwnsGPU": true,
+  "expectedPNGsEach": 16,
+  "eachGPUCapSeconds": 900,
+  "artStatus": "FAIL_PENDING_REAL_IMAGE_REVIEW",
+  "files": {
+    "BASELINE-INPUTS-325.json": {
+      "bytes": 35524,
+      "sha256": "4aa9917b843dfe78b1b998bbd17a6e81282a5b9dbef24d920b03d1f657bb0e09"
+    },
+    "CANDIDATE02-INPUTS-327.json": {
+      "bytes": 35747,
+      "sha256": "fd3c34724c58ed2ee1104a99fc71bda25a8cb4be1981631b5662d72140418f9f"
+    },
+    "ORIGINAL-GPU-REPLAY-PLAN.json": {
+      "bytes": 4666,
+      "sha256": "c22debf9d33eed9a5c28e1b21f6d51fdb91055d9f84b7e347f65e409f7605f43"
+    },
+    "PLAN.json": {
+      "bytes": 7386,
+      "sha256": "58bd7064f064086e2f0ba5fa945af9624bd6d92c738b0db87e263a9e03b68da3"
+    },
+    "README.md": {
+      "bytes": 4411,
+      "sha256": "55d3e64a1ac5e5dfb6e5fa63f3bd59206a075d2fdba4f71bfa707942af7f1afe"
+    },
+    "bed-optics-generated-world.json": {
+      "bytes": 1291,
+      "sha256": "c679cf84d523f1d8a5856a32ae9d4dfc150994120d04b1891b7abfe152e2c4c1"
+    },
+    "bed-optics.json": {
+      "bytes": 1291,
+      "sha256": "f37e53bd6c2a482b397168128ee73e076b26e8c848c74a195db7b1b2b144d755"
+    },
+    "capture.mjs": {
+      "bytes": 22387,
+      "sha256": "ec8eacf6f09c926373b506ae2354e2e74d654cc2593f931c9786f7b0f0cc5e30"
+    },
+    "prepare-optics.mts": {
+      "bytes": 1508,
+      "sha256": "727df1af44b78c5c29122856386b8b1a9d13baf1e724737ebc678b3990706ca1"
+    },
+    "run-phase.py": {
+      "bytes": 3933,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    }
+  }
+}

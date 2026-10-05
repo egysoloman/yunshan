@@ -1,0 +1,10 @@
+{
+  "status": "WRAPPER_REJECTED_BEFORE_SPAWN",
+  "requestedTimeout": 8500,
+  "wrapperMaximum": 7200,
+  "exitCode": 1,
+  "observerChildStarted": false,
+  "originalAuditUntouched": true,
+  "cause": "run-phase-v2.py line7 assert 0 < timeout <= 7200",
+  "asWrittenScriptSHA256": "e1181bbd8e37f08c353dea9aaaf936fb86e9919380c5ce1b76e9b0ea7123c74a"
+}

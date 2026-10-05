@@ -1,0 +1,101 @@
+--- v1/family-fee-ui-root07.mjs
++++ v2/family-fee-ui-root07-v2.mjs
+@@ -61,6 +61,51 @@
+ const out = pathToFileURL(outputDir + path.sep);
+ const results = [], errors = [];
+ let browser, server, page, failure;
++
++const nativeEvidence = [];
++let originalScreenshot;
++async function recordNativeEvidence(stage, pngPath) {
++  const observed = await page.evaluate(() => {
++    const f = window.fee;
++    const saved = f.sim.exportSave(), worldJSON = JSON.stringify(f.world);
++    const next = new (f.sim.constructor)(f.world), imported = next.importSave(saved);
++    const cloneSaved = imported.ok ? next.exportSave() : null;
++    const originalAfterRead = f.sim.exportSave();
++    return {
++      saved, worldJSON, reader: { ok: imported.ok, message: imported.message, exact: cloneSaved === saved },
++      originalSimulationUnchanged: originalAfterRead === saved,
++      tick: f.sim.state.tick, day: f.sim.state.day, hour: f.sim.state.hour,
++      player: { position: { ...f.sim.state.player.position }, money: f.sim.state.player.money, role: f.sim.state.player.role, identities: f.sim.state.player.identities ?? [] },
++      childId: f.child.id, childEducation: f.child.education,
++      childProfile: JSON.parse(JSON.stringify(f.sim.state.extension.actorProfiles[f.child.id])),
++      familyEducation: JSON.parse(JSON.stringify(f.sim.state.familyEducation ?? null)),
++      calls: JSON.parse(JSON.stringify(f.calls)),
++      dom: { appHTML: document.querySelector('#app')?.innerHTML ?? '', contextText: document.querySelector('[data-ref="context-body"]')?.textContent ?? '', familyText: document.querySelector('[data-ref="family-life"]')?.textContent ?? '' }
++    };
++  });
++  assert.equal(observed.originalSimulationUnchanged, true, 'Read-only evidence must leave original simulation bytes unchanged');
++  assert.equal(observed.reader.ok, true, observed.reader.message);
++  assert.equal(observed.reader.exact, true, 'Independent evidence clone must import native save byte exactly');
++  const originalWorld = fixtureRoutes.get('/output/family-fee-education/ui-world.json').bytes;
++  const saveURL = new URL(stage + '.save.json', out), worldURL = new URL(stage + '.world.json', out);
++  await writeFile(saveURL, observed.saved);
++  await writeFile(worldURL, originalWorld);
++  const saveBytes = await readFile(saveURL), worldBytes = await readFile(worldURL);
++  assert.equal(saveBytes.toString('utf8'), observed.saved, 'Persist original native save string without rewriting');
++  assert.deepEqual(worldBytes, originalWorld, 'Persist exact original producer World bytes');
++  const pngBytes = await readFile(pngPath);
++  const { saved, worldJSON, ...details } = observed;
++  const row = {
++    stage, scope: 'Additional read-only native evidence, separate from unchanged original seven DOM assertion groups.',
++    ...details, sourcePath: projectDir, uiSHA256: before['src/ui.ts'],
++    savePath: fileURLToPath(saveURL), saveBytes: saveBytes.length, saveSHA256: digest(saveBytes),
++    worldPath: fileURLToPath(worldURL), worldBytes: worldBytes.length, worldSHA256: digest(worldBytes),
++    actualWorldJSONSHA256: digest(Buffer.from(worldJSON)), actualWorldEqualsOriginal: worldJSON === originalWorld.toString('utf8'),
++    pngPath, pngBytes: pngBytes.length, pngSHA256: digest(pngBytes)
++  };
++  await writeFile(new URL(stage + '.observer.json', out), JSON.stringify(row, null, 2));
++  nativeEvidence.push(row);
++}
+ try {
+   await mkdir(out, { recursive: true });
+   const html = `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><link rel="icon" href="data:,"><body><div id="app"></div><script type="module">
+@@ -105,6 +150,15 @@
+   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+   await page.goto('http://127.0.0.1:4187/family-fee-ui.html', { waitUntil: 'networkidle' });
+   await page.waitForFunction(() => window.ready);
++  originalScreenshot = page.screenshot.bind(page);
++  page.screenshot = async options => {
++    const originalReturn = await originalScreenshot(options);
++    const filename = path.basename(String(options.path ?? ''));
++    const stage = filename === 'family-fee-school-native-ui.png' ? 'school-partial-course'
++      : filename === 'family-fee-household-native-ui.png' ? 'household-cancelled-before-death' : null;
++    if (stage) await recordNativeEvidence(stage, String(options.path));
++    return originalReturn;
++  };
+   const card = '[data-ref="context-body"] [data-family-education-child="resident-1"]';
+   const enroll = `${card} [data-command="enrollFamilyCourse"]`;
+   assert.equal(await page.locator(enroll).isEnabled(), true);
+@@ -171,7 +225,20 @@
+   failure=error;
+   if(page)await page.screenshot({path:fileURLToPath(new URL('family-fee-ui-failure.png',out)),fullPage:true}).catch(()=>{});
+ } finally {
++  // Preserve the actual reached death state before closing the original page.
++  // No simulation command, time advance, position or qualification edit occurs.
++  if (page) {
++    try {
++      const actualChildAlive = await page.evaluate(() => window.fee?.sim.state.extension.actorProfiles[window.fee.child.id]?.alive);
++      if (actualChildAlive === false) {
++        const pngPath = fileURLToPath(new URL('family-fee-after-death-observer.png', out));
++        await (originalScreenshot ?? page.screenshot.bind(page))({ path: pngPath, fullPage: true });
++        await recordNativeEvidence('after-death', pngPath);
++      }
++    } catch (error) { errors.push('Additional read-only native evidence: ' + error.message); if (!failure) failure = error; }
++  }
+   await browser?.close();await server?.close();
++  if (results.length === 7 && nativeEvidence.length !== 3 && !failure) failure = Error('Three actual read-only native evidence stages did not all complete');
+   const after = await inputHashes();
+   const inputsStable = JSON.stringify(before) === JSON.stringify(after);
+   await writeFile(new URL('source-inputs-after.json', out), JSON.stringify(after, null, 2));
+@@ -188,6 +255,9 @@
+   report.fixtureScope = 'Unmodified original producer nine-building World and exact opening save; not fresh current-v6 city or regenerated ROOT07 fixture.';
+   report.legacyAndGuardianScope = 'Frozen UI preserves current-guardian, former-payer/refund and legacy-qualified labels. DOM7 assertions unchanged; separate legacy/care/death Node inputs archived only, no additional DOM cases.';
+ 
++  report.nativeEvidence = nativeEvidence;
++  report.nativeEvidenceStatus = nativeEvidence.length === 3 && nativeEvidence.every(row => row.reader.ok && row.reader.exact && row.originalSimulationUnchanged) ? 'PASS' : 'NOT_COMPLETE';
++  report.nativeEvidenceScope = 'Additional read-only saves/world/DOM/calls after original school and household screenshots plus actual after-death observer. Original seventh saveCheck remains cancelled-before-death; after-death reader evidence is separately identified.';
+   await writeFile(new URL('family-fee-ui-results.json',out),JSON.stringify(report,null,2));
+   console.log(JSON.stringify(report,null,2));
+ }

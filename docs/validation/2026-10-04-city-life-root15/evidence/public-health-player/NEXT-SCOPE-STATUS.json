@@ -1,0 +1,28 @@
+{
+  "groupStatus": "SEALED",
+  "medicalPatientProof": "FAIL_ACTUAL03_ORIGINAL_BOUND_240",
+  "healthOrderTarget": 6,
+  "actualMedicalPatientsServed": 0,
+  "hostOnly512": {
+    "originalPreparationStatus": "PREPARED_NOT_RUN",
+    "currentRootDecision": "PAUSED_NOT_RUN",
+    "reason": "No current actual door-block evidence. Host ref/meal declaration cannot create food, connected NPC routes, material production or current-day funded doctor work.",
+    "actualSimulationExecuted": false,
+    "driver": "public-health-policy-continuation.mts",
+    "driverSHA256": "29825435f94675ed9cda392abf437647a7f7f9bb6f28e39d1158330300c35794"
+  },
+  "giftLifeSupply": {
+    "status": "CONDITIONAL_NOT_RUN",
+    "businessDriverCreated": false,
+    "simulationExecuted": false,
+    "zeroSimMotorRoutePassed": true,
+    "requiresNewScopeAndBound": true,
+    "normalOpenFiniteFutureOfferRequired": true,
+    "realSameFloorLegalBodyRequired": true,
+    "actualCurrentDayPublicReviewRequired": true,
+    "reuseOldDay7DoctorAssignmentForbidden": true
+  },
+  "nextDesign": "After root audits real new-product day demand/supply, formally design verifiable NPC terrain walking/city diagnostics or legal finite physical player delivery. Existing chooseFacility requires finite road walkingTree; zero-Sim player terrain W traversal does not prove NPC reachability. Do not edit graph, needs, inventory or clock as a shortcut.",
+  "coordinationSource": "Root task coordination, not a user prohibition.",
+  "libraryOwner": "Root; no child Library writes performed."
+}

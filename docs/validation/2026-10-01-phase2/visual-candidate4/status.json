@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-01T20:48:03.415935+00:00",
+  "scope": "Targeted CPU geometry/anatomy only. Latest vertex-color, woodland, terrain material normals and age/clothes shaders still need GL validation and actual-pixel acceptance.",
+  "rules": {
+    "rendering": {
+      "pass": 6,
+      "fail": 0,
+      "durationMs": 20150.639154
+    },
+    "citizens": {
+      "pass": 6,
+      "fail": 0,
+      "durationMs": 536.387649
+    }
+  },
+  "visualFailurePreserved": "Immutable macro3 six actual PNGs still fail reference quality. Buried isolated cliff cuboids were removed; count tests for those superseded objects do not establish visual success.",
+  "sourceHashes": {
+    "src/renderer.ts": "3b378f7c108f60d88c01d64bc303e7347489462255b195b27c92c36fe644a2de",
+    "src/rendering/terrain.ts": "ab8d51d135d9c68f77b71271acf1db6a39fa07250fc6dff27d8341fc17a61e0f",
+    "src/rendering/citizen-appearance.ts": "ca911502f3350da2be7535707344d24ec2e182b25a07fcc7ff2111a08ddcd81b",
+    "tests/rendering.test.ts": "8e3283dbd63e967ad6387ccb13e702e5170b170f8d8e5d64df87c5e129b22860",
+    "tests/citizen-appearance.test.ts": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68"
+  }
+}

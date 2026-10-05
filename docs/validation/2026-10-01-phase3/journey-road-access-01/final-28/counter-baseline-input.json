@@ -1,0 +1,186 @@
+{
+  "status": "OLD_COUNTER_ROUTE_FAILURE_REPRODUCED",
+  "scope": "Immutable coherent03 old connector without shared counter guard; provider/controller reproduction only, not native r7.",
+  "sourceCount": 89,
+  "sourceHashesStable": true,
+  "counter": {
+    "id": "test-market-counter-west",
+    "buildingId": "test-market",
+    "position": {
+      "x": -9.600000000000001,
+      "z": 13.200000000000001,
+      "y": 0.5
+    },
+    "localPosition": {
+      "x": -9.600000000000001,
+      "y": 0.5,
+      "z": 13.200000000000001
+    },
+    "size": {
+      "x": 3.2,
+      "y": 1,
+      "z": 1.2
+    },
+    "rotation": 0
+  },
+  "actualFrom": {
+    "x": -13.200000000000001,
+    "y": 0,
+    "z": 13.200000000000001
+  },
+  "oldRoute": {
+    "destination": {
+      "id": "B",
+      "name": "B",
+      "districtId": "town",
+      "position": {
+        "x": 0,
+        "y": 0.6,
+        "z": 40
+      },
+      "nodeId": "B"
+    },
+    "points": [
+      {
+        "x": -13.200000000000001,
+        "y": 0,
+        "z": 13.200000000000001
+      },
+      {
+        "x": 0,
+        "y": 0.6,
+        "z": 13.200000000000001
+      },
+      {
+        "x": 0,
+        "y": 0.6,
+        "z": 40
+      }
+    ],
+    "edgeIds": [
+      "market-street"
+    ],
+    "metres": 40.013629327327145,
+    "stairsFromFloor": null,
+    "originNodeId": "B"
+  },
+  "sharedCounterBlocksConnector": true,
+  "actualController": {
+    "key": "KeyW",
+    "steps": 100,
+    "dt": 0.1,
+    "actualFinal": {
+      "x": -11.76,
+      "y": 0,
+      "z": 13.200000000000001
+    },
+    "unreachedProjection": {
+      "x": 0,
+      "y": 0.6,
+      "z": 13.200000000000001
+    }
+  },
+  "world": {
+    "seed": 1,
+    "voxelSize": 0.2,
+    "size": 4400,
+    "mountains": [],
+    "buildings": [
+      {
+        "id": "test-market",
+        "name": "街边市集",
+        "kind": "market",
+        "districtId": "town",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "width": 32,
+        "depth": 24,
+        "height": 8,
+        "floors": 2,
+        "rotation": 0,
+        "door": {
+          "x": 0,
+          "y": 0.6,
+          "z": 12
+        },
+        "capacity": 50,
+        "seed": 1
+      }
+    ],
+    "spawn": {
+      "x": 0,
+      "y": 0.6,
+      "z": 14
+    },
+    "districts": [],
+    "nodes": [
+      {
+        "id": "A",
+        "name": "A",
+        "districtId": "town",
+        "position": {
+          "x": 0,
+          "y": 0.6,
+          "z": 12
+        },
+        "station": false
+      },
+      {
+        "id": "B",
+        "name": "B",
+        "districtId": "town",
+        "position": {
+          "x": 0,
+          "y": 0.6,
+          "z": 40
+        },
+        "station": true
+      }
+    ],
+    "edges": [
+      {
+        "id": "market-street",
+        "from": "A",
+        "to": "B",
+        "mode": "road",
+        "length": 28,
+        "capacity": 20,
+        "points": [
+          {
+            "x": 0,
+            "y": 0.6,
+            "z": 12
+          },
+          {
+            "x": 0,
+            "y": 0.6,
+            "z": 40
+          }
+        ]
+      }
+    ],
+    "waterfall": {
+      "top": {
+        "x": 500,
+        "y": 100,
+        "z": 500
+      },
+      "bottom": {
+        "x": 500,
+        "y": 0,
+        "z": 500
+      },
+      "width": 10
+    },
+    "river": [
+      {
+        "x": 500,
+        "y": 0,
+        "z": 500
+      }
+    ]
+  }
+}

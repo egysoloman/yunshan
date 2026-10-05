@@ -1,0 +1,24 @@
+
+> yunshan-city@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 72 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.74 kB │ gzip:   0.49 kB
+dist/assets/index-DcKlDqDV.css     31.14 kB │ gzip:   7.68 kB
+dist/assets/three-vwNga81B.js     502.47 kB │ gzip: 126.94 kB │ map: 2,719.38 kB
+dist/assets/index-kEBeq3AA.js   1,201.11 kB │ gzip: 412.90 kB │ map: 3,632.98 kB
+
+(!) Some chunks are larger than 700 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 8.31s
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,267 @@
+{
+  "actualBody": {
+    "position": {
+      "x": -1338.600177956227,
+      "y": 177.4,
+      "z": 26.633866238326608
+    },
+    "floor": 1,
+    "inside": "workshop-b0",
+    "blockedAccess": null,
+    "eye": [
+      -1338.600177956227,
+      179.12,
+      26.633866238326608
+    ],
+    "yaw": -3.1414623909237784,
+    "pitch": -0.8995628543211546
+  },
+  "world": {
+    "seed": 20261001,
+    "layout": "current-v4"
+  },
+  "optics": {
+    "pixelRatio": 1,
+    "fov": 48,
+    "width": 1440,
+    "height": 900,
+    "hour": 12,
+    "speed": 1
+  },
+  "submission": {
+    "scope": "Same fixed scene: main explicitly without shadow refresh, total with forced refresh; no performance claim",
+    "shadowBefore": {
+      "autoUpdate": false,
+      "needsUpdate": false,
+      "sunCastShadow": true
+    },
+    "main": {
+      "calls": 141,
+      "triangles": 326694
+    },
+    "total": {
+      "calls": 185,
+      "triangles": 408234
+    },
+    "shadowCalls": 44,
+    "shadowTriangles": 81540
+  },
+  "glErrors": [],
+  "shaderPrograms": [
+    {
+      "id": 0,
+      "diagnostics": null
+    },
+    {
+      "id": 1,
+      "diagnostics": null
+    },
+    {
+      "id": 2,
+      "diagnostics": null
+    },
+    {
+      "id": 3,
+      "diagnostics": null
+    },
+    {
+      "id": 4,
+      "diagnostics": null
+    },
+    {
+      "id": 5,
+      "diagnostics": null
+    },
+    {
+      "id": 6,
+      "diagnostics": null
+    },
+    {
+      "id": 7,
+      "diagnostics": null
+    },
+    {
+      "id": 8,
+      "diagnostics": null
+    },
+    {
+      "id": 9,
+      "diagnostics": null
+    },
+    {
+      "id": 10,
+      "diagnostics": null
+    },
+    {
+      "id": 11,
+      "diagnostics": null
+    },
+    {
+      "id": 12,
+      "diagnostics": null
+    },
+    {
+      "id": 13,
+      "diagnostics": null
+    },
+    {
+      "id": 14,
+      "diagnostics": null
+    },
+    {
+      "id": 23,
+      "diagnostics": null
+    },
+    {
+      "id": 16,
+      "diagnostics": null
+    },
+    {
+      "id": 17,
+      "diagnostics": null
+    },
+    {
+      "id": 18,
+      "diagnostics": null
+    },
+    {
+      "id": 19,
+      "diagnostics": null
+    },
+    {
+      "id": 20,
+      "diagnostics": null
+    },
+    {
+      "id": 21,
+      "diagnostics": null
+    },
+    {
+      "id": 22,
+      "diagnostics": null
+    },
+    {
+      "id": 24,
+      "diagnostics": null
+    },
+    {
+      "id": 25,
+      "diagnostics": null
+    },
+    {
+      "id": 26,
+      "diagnostics": null
+    },
+    {
+      "id": 27,
+      "diagnostics": null
+    },
+    {
+      "id": 28,
+      "diagnostics": null
+    },
+    {
+      "id": 29,
+      "diagnostics": null
+    },
+    {
+      "id": 30,
+      "diagnostics": null
+    },
+    {
+      "id": 31,
+      "diagnostics": null
+    },
+    {
+      "id": 32,
+      "diagnostics": null
+    },
+    {
+      "id": 33,
+      "diagnostics": null
+    },
+    {
+      "id": 34,
+      "diagnostics": null
+    },
+    {
+      "id": 35,
+      "diagnostics": null
+    },
+    {
+      "id": 36,
+      "diagnostics": null
+    },
+    {
+      "id": 37,
+      "diagnostics": null
+    },
+    {
+      "id": 38,
+      "diagnostics": null
+    },
+    {
+      "id": 39,
+      "diagnostics": null
+    },
+    {
+      "id": 40,
+      "diagnostics": null
+    },
+    {
+      "id": 41,
+      "diagnostics": null
+    }
+  ],
+  "residency": {
+    "stats": {
+      "resident": 8,
+      "total": 482,
+      "created": 20,
+      "released": 12,
+      "maximumResident": 11,
+      "failures": 0,
+      "lastError": "",
+      "disposed": false
+    },
+    "actualSceneGroups": 8,
+    "actualMeshes": 56,
+    "actualInstances": 9481,
+    "ownedGeometryCount": 56,
+    "interiorBuildingRefs": 12,
+    "hiddenFarMismatch": 0,
+    "observed": {
+      "creates": 9,
+      "releases": 12,
+      "geometryDisposals": 82,
+      "instanceDisposals": 82,
+      "initialWatchedGroups": 11
+    },
+    "gpuMemory": {
+      "geometries": 715,
+      "textures": 8
+    }
+  },
+  "verticalHits": [
+    {
+      "probe": {
+        "x": -1338.6000000000001,
+        "y": 177.4,
+        "z": 28,
+        "minY": 177.15,
+        "maxY": 177.65
+      },
+      "nearest": null,
+      "testedProjectedTriangles": 2066,
+      "scope": "Actual visible resident building refs; vertical hits, not authoritative physical support replacement"
+    }
+  ],
+  "name": "v4-workshop-workshop-b0-upper-void",
+  "buildingId": "workshop-b0",
+  "declaredDiagnosticCameraAim": {
+    "x": -1338.6000000000001,
+    "y": 177.4,
+    "z": 28
+  },
+  "scope": "Actual WebGL fixed-source controlled body capture; not a normal player journey or Mac performance/reference-art pass."
+}

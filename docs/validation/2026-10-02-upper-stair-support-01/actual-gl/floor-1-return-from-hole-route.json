@@ -1,0 +1,162 @@
+{
+  "label": "floor-1-return-from-hole",
+  "scope": "Browser controlled diagnostic: actual DOM KeyW listener plus unchanged production controller.step(.015 or less), 4.8m/s motor. No elapsed-frame/native journey claim; no intermediate body/economic/identity/clock writes.",
+  "points": [
+    {
+      "x": -403.59957337928086,
+      "y": 80,
+      "z": 308.0344099144128
+    },
+    {
+      "x": -403.59431496746754,
+      "y": 80,
+      "z": 307.6024104537938
+    }
+  ],
+  "start": {
+    "x": -403.59957337928086,
+    "y": 80,
+    "z": 308.0344099144128
+  },
+  "steps": 6,
+  "motorSeconds": 0.09,
+  "samples": [
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.59957337928086,
+        "y": 80,
+        "z": 308.0344099144128
+      },
+      "after": {
+        "x": -403.59869704113623,
+        "y": 80,
+        "z": 307.9624152477252
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001748,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.59869704113623,
+        "y": 80,
+        "z": 307.9624152477252
+      },
+      "after": {
+        "x": -403.5978207029916,
+        "y": 80,
+        "z": 307.8904205810376
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001748,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.5978207029916,
+        "y": 80,
+        "z": 307.8904205810376
+      },
+      "after": {
+        "x": -403.59694436484693,
+        "y": 80,
+        "z": 307.81842591435
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001817,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.59694436484693,
+        "y": 80,
+        "z": 307.81842591435
+      },
+      "after": {
+        "x": -403.5960680267023,
+        "y": 80,
+        "z": 307.7464312476624
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001748,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.5960680267023,
+        "y": 80,
+        "z": 307.7464312476624
+      },
+      "after": {
+        "x": -403.59519168855763,
+        "y": 80,
+        "z": 307.67443658097477
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001817,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    },
+    {
+      "waypoint": 1,
+      "dt": 0.015,
+      "before": {
+        "x": -403.59519168855763,
+        "y": 80,
+        "z": 307.67443658097477
+      },
+      "after": {
+        "x": -403.594315350413,
+        "y": 80,
+        "z": 307.60244191428717
+      },
+      "floor": 1,
+      "inside": "market-b24",
+      "metres": 0.07200000000001748,
+      "blocked": null,
+      "eyeHeight": 1.7199999999999989
+    }
+  ],
+  "keys": [
+    {
+      "type": "keydown",
+      "code": "KeyW",
+      "at": 124503.79999999702,
+      "isTrusted": false
+    },
+    {
+      "type": "keyup",
+      "code": "KeyW",
+      "at": 124513.89999999851,
+      "isTrusted": false
+    }
+  ],
+  "status": "passed",
+  "end": {
+    "x": -403.594315350413,
+    "y": 80,
+    "z": 307.60244191428717
+  },
+  "floor": 1,
+  "inside": "market-b24",
+  "protectedStateUnchanged": true
+}

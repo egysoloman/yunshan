@@ -1,0 +1,78 @@
+{
+  "scope": "Read-only actual frozen geometry and final native telemetry, not new browser steps",
+  "building": "river-b1",
+  "counters": [
+    {
+      "id": "river-b1-sale-west:counter",
+      "buildingId": "river-b1",
+      "position": {
+        "x": -859.0000000000001,
+        "y": 19.1,
+        "z": 1126
+      },
+      "localPosition": {
+        "x": -12.6,
+        "y": 1.1000000000000014,
+        "z": 3.6
+      },
+      "size": {
+        "x": 3.1999999999999993,
+        "y": 1,
+        "z": 1.2000000000000002
+      },
+      "rotation": 0
+    },
+    {
+      "id": "river-b1-sale-center:counter",
+      "buildingId": "river-b1",
+      "position": {
+        "x": -846.4000000000001,
+        "y": 19.1,
+        "z": 1126
+      },
+      "localPosition": {
+        "x": 0,
+        "y": 1.1000000000000014,
+        "z": 3.6
+      },
+      "size": {
+        "x": 3.2,
+        "y": 1,
+        "z": 1.2000000000000002
+      },
+      "rotation": 0
+    },
+    {
+      "id": "river-b1-sale-east:counter",
+      "buildingId": "river-b1",
+      "position": {
+        "x": -833.8000000000001,
+        "y": 19.1,
+        "z": 1126
+      },
+      "localPosition": {
+        "x": 12.6,
+        "y": 1.1000000000000014,
+        "z": 3.6
+      },
+      "size": {
+        "x": 3.1999999999999993,
+        "y": 1,
+        "z": 1.2000000000000002
+      },
+      "rotation": 0
+    }
+  ],
+  "observed": {
+    "x": -858.5306611193038,
+    "y": 18.6,
+    "z": 1125.0474497894686
+  },
+  "nextNorthToSouth": {
+    "x": -858.5306611193038,
+    "y": 18.6,
+    "z": 1125.1474497894685
+  },
+  "blocksNext": true,
+  "blocksXOnly": false
+}

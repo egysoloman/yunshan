@@ -1,0 +1,36 @@
+{
+  "scope": "CPU release02 actual ground-courtyard edge repair; not GL or normal journey",
+  "snapshot": "/tmp/yunshan-v4-controller-release-02",
+  "inputFiles": 83,
+  "threeWayCaptureEqual": true,
+  "sourceAfterEqual": true,
+  "ownedCurrentStillEqual": true,
+  "rules": {
+    "passed": 25,
+    "failed": 0,
+    "exitCode": 0,
+    "milliseconds": 21884.49489
+  },
+  "strict": {
+    "exitCode": 0
+  },
+  "actualWorldMotor": {
+    "passed": 7,
+    "failed": 0,
+    "exitCode": 0,
+    "ticks": 3240
+  },
+  "exteriorCourt": {
+    "beforeCrossed": false,
+    "afterCrossed": true,
+    "exitCode": 0
+  },
+  "ownedSources": {
+    "src/architecture-floor-plan.ts": "ec3fd0fdc4e9f0b4614a905a58be7ee6bbf0d85d3c92c978c0b80967ca6f895e",
+    "src/access.ts": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+    "src/controller.ts": "9491986a2f037ed85f6b4f4f529786027e014984583b3dab3df864f0154d0ca6",
+    "tests/controller-v4.test.ts": "bcb62d43c56da5f447a9e0c2b8a5fe15fe2013be63b91a8814d7e9485aeb739f",
+    "tests/architecture-floor-plan.test.ts": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6"
+  },
+  "archiveSHA256": "7634b94b9305a933654f1a4af72bed70a141536cd3a8d6d738c96e25ae07c43e"
+}

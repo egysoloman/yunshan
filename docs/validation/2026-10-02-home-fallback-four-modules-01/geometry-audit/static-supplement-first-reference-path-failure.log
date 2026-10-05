@@ -1,0 +1,19 @@
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open '/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/geometry-audit/../references/庭院建筑模块图鉴.png'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at sha (/tmp/yunshan-home-four-module-fit-01/derive-supplement.mts:7:61)
+    at <anonymous> (/tmp/yunshan-home-four-module-fit-01/derive-supplement.mts:37:40)
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/geometry-audit/../references/庭院建筑模块图鉴.png'
+}
+
+Node.js v24.19.0

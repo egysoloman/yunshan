@@ -1,0 +1,223 @@
+{
+  "tick": 1560,
+  "clock": 6720,
+  "day": 4,
+  "hour": 16,
+  "player": {
+    "position": {
+      "x": 32.000000000000014,
+      "y": 0.6,
+      "z": 5.999999999999998
+    },
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "money": 580,
+    "reputation": 0,
+    "needs": {
+      "hunger": 0,
+      "fatigue": 0,
+      "social": 0,
+      "fun": 13.83999999999798
+    },
+    "inventory": {
+      "block": 32
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "profile": {
+    "age": 24.011872146116332,
+    "health": 76.03746287553554,
+    "mood": 0,
+    "stress": 21.48843530765053,
+    "alive": true,
+    "skill": 0,
+    "family": [],
+    "historyTags": [
+      "星际来客"
+    ]
+  },
+  "petition": {
+    "id": "petition-2",
+    "authorId": "player",
+    "topic": "health",
+    "title": "医疗照护现场请愿",
+    "text": "本人在真实公共大厅提出现场医疗照护需求，请街坊居民依法联署，主管部门按真实预算、医生劳动和有限材料安排诊疗。",
+    "siteId": "civic-0-hall",
+    "filedAt": 6348,
+    "replyAt": 7788,
+    "status": "open",
+    "signerIds": [
+      "citizen-22",
+      "citizen-220",
+      "citizen-286",
+      "citizen-550"
+    ],
+    "reply": null,
+    "answeredAt": null,
+    "executionId": null
+  },
+  "doctors": [
+    {
+      "id": "citizen-44",
+      "state": "working",
+      "position": {
+        "x": -136,
+        "y": 0.6,
+        "z": -60
+      },
+      "needs": {
+        "hunger": 96.79999999999922,
+        "fatigue": 78.85999999999991,
+        "social": 79.29881032946763,
+        "fun": 89.92000000000021
+      },
+      "money": 548.2344886450863,
+      "health": 93.72734805692846
+    },
+    {
+      "id": "citizen-110",
+      "state": "attendingService",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "needs": {
+        "hunger": 93.59999999999991,
+        "fatigue": 79.55999999999992,
+        "social": 68.26235685586494,
+        "fun": 97.44000000000005
+      },
+      "money": 421.3994585606271,
+      "health": 100
+    },
+    {
+      "id": "citizen-176",
+      "state": "working",
+      "position": {
+        "x": -136,
+        "y": 0.6,
+        "z": -60
+      },
+      "needs": {
+        "hunger": 96.79999999999922,
+        "fatigue": 82.49999999999993,
+        "social": 100,
+        "fun": 90.00000000000021
+      },
+      "money": 302.0910271624289,
+      "health": 92.72734805692846
+    },
+    {
+      "id": "citizen-308",
+      "state": "attendingService",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "needs": {
+        "hunger": 70.9999999999982,
+        "fatigue": 82.49999999999993,
+        "social": 74.29494369399163,
+        "fun": 96.72000000000007
+      },
+      "money": 402.90922196865176,
+      "health": 91.72734805692846
+    },
+    {
+      "id": "citizen-374",
+      "state": "working",
+      "position": {
+        "x": -136,
+        "y": 0.6,
+        "z": -60
+      },
+      "needs": {
+        "hunger": 87.39999999999908,
+        "fatigue": 83.19999999999993,
+        "social": 81.14197978584387,
+        "fun": 90.4000000000002
+      },
+      "money": 490.1870480476091,
+      "health": 100
+    },
+    {
+      "id": "citizen-440",
+      "state": "working",
+      "position": {
+        "x": -136,
+        "y": 0.6,
+        "z": -60
+      },
+      "needs": {
+        "hunger": 90.59999999999987,
+        "fatigue": 81.93999999999993,
+        "social": 97.55833333333318,
+        "fun": 96.24000000000008
+      },
+      "money": 355.69610549467967,
+      "health": 90.72734805692846
+    },
+    {
+      "id": "citizen-506",
+      "state": "attendingService",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "needs": {
+        "hunger": 72.19999999999821,
+        "fatigue": 80.25999999999992,
+        "social": 69.31948673443934,
+        "fun": 97.20000000000006
+      },
+      "money": 567.7862922292446,
+      "health": 99.72734805692846
+    },
+    {
+      "id": "citizen-572",
+      "state": "attendingService",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "needs": {
+        "hunger": 71.3999999999982,
+        "fatigue": 82.77999999999993,
+        "social": 72.68873417575885,
+        "fun": 96.88000000000007
+      },
+      "money": 449.11526127144896,
+      "health": 89.72734805692846
+    }
+  ],
+  "treasury": 60318.808489020455,
+  "budget": {
+    "cash": 60318.808489020455,
+    "publicWagesDue": 0,
+    "publicWagesEarned": 8688.847252573252,
+    "forecastPayroll": 10146.777600000005,
+    "reservedPayroll": 0,
+    "essentialOperations": 3867.2639999999997,
+    "reserve": 22702.88885257326,
+    "authorizedRemaining": 2.252468897264208,
+    "available": 37613.66716754994
+  },
+  "materialSuppliers": [
+    {
+      "id": "shop-civic-0-workshop",
+      "inventory": 0,
+      "cash": 649.6885684078079,
+      "protectedCash": 374.90129066666645
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+PASS ordinary startup selects the trusted legacy world before restoring body, upper floor, bank, edits and routes {"floor":26,"fingerprint":"c519111b","money":420,"deposit":100,"voxels":1}
+PASS native JSON file import validates and saves a different known layout, then performs a real page reload {"floor":18,"fingerprint":"cf899fc3","money":420,"deposit":100,"position":{"x":406.96,"y":387.2,"z":-264}}
+PASS a second ordinary startup reads the new geographic save without reverting to the legacy slot {}
+PASS unknown layout preserves the exact original slot across timed autosave and real pagehide {"acceptedClock":"08:33","originalSHA256":"d0cd8137ae196e2b3787c75898356c71ed318ec62ec7b9733d2f039f1cffbfd5","manifest":null,"fallback":null}
+4 layout browser checks passed; no diagnostics globals or browser errors.

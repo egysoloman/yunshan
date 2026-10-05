@@ -1,0 +1,4103 @@
+{
+  "checked_references": 819,
+  "all_files_exist": true,
+  "all_line_numbers_in_file": true,
+  "semantic_review": "只读手工核主要renderer/body/transport/aviation定位；自动检查不等于艺术或行为验收",
+  "references": [
+    {
+      "asset_id": "BUILT-001",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "82"
+    },
+    {
+      "asset_id": "BUILT-001",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "263"
+    },
+    {
+      "asset_id": "BUILT-002",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "79"
+    },
+    {
+      "asset_id": "BUILT-002",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "162"
+    },
+    {
+      "asset_id": "BUILT-003",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "82"
+    },
+    {
+      "asset_id": "BUILT-003",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "161"
+    },
+    {
+      "asset_id": "BUILT-004",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "84"
+    },
+    {
+      "asset_id": "BUILT-004",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "245"
+    },
+    {
+      "asset_id": "BUILT-005",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "90"
+    },
+    {
+      "asset_id": "BUILT-005",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "245"
+    },
+    {
+      "asset_id": "BUILT-006",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "88"
+    },
+    {
+      "asset_id": "BUILT-006",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "245"
+    },
+    {
+      "asset_id": "BUILT-007",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "110"
+    },
+    {
+      "asset_id": "BUILT-007",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "196"
+    },
+    {
+      "asset_id": "BUILT-008",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "110"
+    },
+    {
+      "asset_id": "BUILT-008",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "198"
+    },
+    {
+      "asset_id": "BUILT-009",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "110"
+    },
+    {
+      "asset_id": "BUILT-009",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "197"
+    },
+    {
+      "asset_id": "BUILT-010",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "110"
+    },
+    {
+      "asset_id": "BUILT-010",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "195"
+    },
+    {
+      "asset_id": "BUILT-011",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "22"
+    },
+    {
+      "asset_id": "BUILT-011",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "115/187/335"
+    },
+    {
+      "asset_id": "BUILT-012",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "41"
+    },
+    {
+      "asset_id": "BUILT-012",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "115/187/335"
+    },
+    {
+      "asset_id": "BUILT-013",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "41"
+    },
+    {
+      "asset_id": "BUILT-013",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "115/187/335"
+    },
+    {
+      "asset_id": "BUILT-014",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "123/159/187"
+    },
+    {
+      "asset_id": "BUILT-015",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "165/169/229"
+    },
+    {
+      "asset_id": "BUILT-015",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "324"
+    },
+    {
+      "asset_id": "BUILT-016",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "166/169"
+    },
+    {
+      "asset_id": "BUILT-017",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "172/174"
+    },
+    {
+      "asset_id": "BUILT-018",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "130/187"
+    },
+    {
+      "asset_id": "BUILT-018",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "68/89"
+    },
+    {
+      "asset_id": "BUILT-019",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "131/201"
+    },
+    {
+      "asset_id": "BUILT-019",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-020",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "135/201"
+    },
+    {
+      "asset_id": "BUILT-020",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-021",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "138/201"
+    },
+    {
+      "asset_id": "BUILT-021",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-022",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "140/201"
+    },
+    {
+      "asset_id": "BUILT-022",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-023",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "144/201"
+    },
+    {
+      "asset_id": "BUILT-023",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-024",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "151/201"
+    },
+    {
+      "asset_id": "BUILT-024",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "53"
+    },
+    {
+      "asset_id": "BUILT-025",
+      "path": "src/world.ts",
+      "lines": "494/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-025",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-026",
+      "path": "src/world.ts",
+      "lines": "325/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-026",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-027",
+      "path": "src/world.ts",
+      "lines": "495/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-027",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-028",
+      "path": "src/world.ts",
+      "lines": "497/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-028",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-029",
+      "path": "src/world.ts",
+      "lines": "500/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-029",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-030",
+      "path": "src/world.ts",
+      "lines": "498/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-030",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-031",
+      "path": "src/world.ts",
+      "lines": "501/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-031",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-032",
+      "path": "src/world.ts",
+      "lines": "496/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-032",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-033",
+      "path": "src/world.ts",
+      "lines": "499/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-033",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-034",
+      "path": "src/world.ts",
+      "lines": "502/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-034",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-035",
+      "path": "src/world.ts",
+      "lines": "503/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-035",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-036",
+      "path": "src/world.ts",
+      "lines": "504/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-036",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-037",
+      "path": "src/world.ts",
+      "lines": "325/506/507/528/531"
+    },
+    {
+      "asset_id": "BUILT-037",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-038",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "22/36"
+    },
+    {
+      "asset_id": "BUILT-038",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "341"
+    },
+    {
+      "asset_id": "BUILT-039",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "22/30"
+    },
+    {
+      "asset_id": "BUILT-039",
+      "path": "src/architecture-floor-plan.ts",
+      "lines": "344"
+    },
+    {
+      "asset_id": "BUILT-040",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "65/78"
+    },
+    {
+      "asset_id": "BUILT-041",
+      "path": "src/rendering/architecture-bodies.ts",
+      "lines": "56"
+    },
+    {
+      "asset_id": "BUILT-042",
+      "path": "src/world.ts",
+      "lines": "447/463/485/486/509/517"
+    },
+    {
+      "asset_id": "BUILT-043",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "155/156"
+    },
+    {
+      "asset_id": "BUILT-044",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "157/158"
+    },
+    {
+      "asset_id": "BUILT-045",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "166/169"
+    },
+    {
+      "asset_id": "BUILT-046",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "182/183"
+    },
+    {
+      "asset_id": "BUILT-047",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "184/185"
+    },
+    {
+      "asset_id": "BUILT-048",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "186/187"
+    },
+    {
+      "asset_id": "BUILT-049",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "191"
+    },
+    {
+      "asset_id": "BUILT-050",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "192/194"
+    },
+    {
+      "asset_id": "BUILT-051",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "205"
+    },
+    {
+      "asset_id": "BUILT-052",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "206"
+    },
+    {
+      "asset_id": "BUILT-053",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "211/212"
+    },
+    {
+      "asset_id": "BUILT-054",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "159/161/162/163"
+    },
+    {
+      "asset_id": "BUILT-055",
+      "path": "src/renderer.ts",
+      "lines": "321"
+    },
+    {
+      "asset_id": "BUILT-056",
+      "path": "src/renderer.ts",
+      "lines": "323"
+    },
+    {
+      "asset_id": "BUILT-057",
+      "path": "src/renderer.ts",
+      "lines": "364"
+    },
+    {
+      "asset_id": "BUILT-058",
+      "path": "src/renderer.ts",
+      "lines": "375"
+    },
+    {
+      "asset_id": "BUILT-059",
+      "path": "src/renderer.ts",
+      "lines": "393"
+    },
+    {
+      "asset_id": "BUILT-060",
+      "path": "src/renderer.ts",
+      "lines": "394/397/402"
+    },
+    {
+      "asset_id": "BUILT-061",
+      "path": "src/renderer.ts",
+      "lines": "406"
+    },
+    {
+      "asset_id": "BUILT-062",
+      "path": "src/renderer.ts",
+      "lines": "450"
+    },
+    {
+      "asset_id": "BUILT-063",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "255"
+    },
+    {
+      "asset_id": "BUILT-064",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "251/252/259/260"
+    },
+    {
+      "asset_id": "BUILT-065",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "351"
+    },
+    {
+      "asset_id": "BUILT-066",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "282/288"
+    },
+    {
+      "asset_id": "BUILT-067",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "329"
+    },
+    {
+      "asset_id": "BUILT-068",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "339"
+    },
+    {
+      "asset_id": "BUILT-069",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "263/264/267"
+    },
+    {
+      "asset_id": "BUILT-070",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "270/271/272/273/274"
+    },
+    {
+      "asset_id": "BUILT-071",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "230"
+    },
+    {
+      "asset_id": "BUILT-072",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "237"
+    },
+    {
+      "asset_id": "BUILT-073",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "368"
+    },
+    {
+      "asset_id": "BUILT-074",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "376"
+    },
+    {
+      "asset_id": "BUILT-075",
+      "path": "src/renderer.ts",
+      "lines": "466"
+    },
+    {
+      "asset_id": "BUILT-075",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-076",
+      "path": "src/renderer.ts",
+      "lines": "488"
+    },
+    {
+      "asset_id": "BUILT-076",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-077",
+      "path": "src/renderer.ts",
+      "lines": "495"
+    },
+    {
+      "asset_id": "BUILT-077",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-078",
+      "path": "src/renderer.ts",
+      "lines": "503"
+    },
+    {
+      "asset_id": "BUILT-078",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-079",
+      "path": "src/renderer.ts",
+      "lines": "506"
+    },
+    {
+      "asset_id": "BUILT-079",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-080",
+      "path": "src/renderer.ts",
+      "lines": "512"
+    },
+    {
+      "asset_id": "BUILT-080",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-081",
+      "path": "src/renderer.ts",
+      "lines": "515"
+    },
+    {
+      "asset_id": "BUILT-081",
+      "path": "src/rendering/architecture-layout.ts",
+      "lines": "14/20"
+    },
+    {
+      "asset_id": "BUILT-082",
+      "path": "src/renderer.ts",
+      "lines": "467"
+    },
+    {
+      "asset_id": "BUILT-083",
+      "path": "src/renderer.ts",
+      "lines": "312"
+    },
+    {
+      "asset_id": "BUILT-084",
+      "path": "src/renderer.ts",
+      "lines": "501"
+    },
+    {
+      "asset_id": "BUILT-085",
+      "path": "src/renderer.ts",
+      "lines": "288"
+    },
+    {
+      "asset_id": "BUILT-086",
+      "path": "src/world.ts",
+      "lines": "330/538/543/544"
+    },
+    {
+      "asset_id": "BUILT-086",
+      "path": "src/renderer.ts",
+      "lines": "580/584"
+    },
+    {
+      "asset_id": "BUILT-087",
+      "path": "src/world.ts",
+      "lines": "329"
+    },
+    {
+      "asset_id": "BUILT-088",
+      "path": "src/renderer.ts",
+      "lines": "324/325/326/327"
+    },
+    {
+      "asset_id": "BUILT-089",
+      "path": "src/renderer.ts",
+      "lines": "583/584/585"
+    },
+    {
+      "asset_id": "BUILT-090",
+      "path": "src/renderer.ts",
+      "lines": "453/586"
+    },
+    {
+      "asset_id": "BUILT-091",
+      "path": "src/renderer.ts",
+      "lines": "347/361"
+    },
+    {
+      "asset_id": "BUILT-092",
+      "path": "src/renderer.ts",
+      "lines": "674"
+    },
+    {
+      "asset_id": "BUILT-093",
+      "path": "src/renderer.ts",
+      "lines": "329/330/334/335"
+    },
+    {
+      "asset_id": "BUILT-094",
+      "path": "src/renderer.ts",
+      "lines": "689"
+    },
+    {
+      "asset_id": "BUILT-095",
+      "path": "src/renderer.ts",
+      "lines": "690"
+    },
+    {
+      "asset_id": "BUILT-096",
+      "path": "src/renderer.ts",
+      "lines": "530"
+    },
+    {
+      "asset_id": "BUILT-096",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-097",
+      "path": "src/renderer.ts",
+      "lines": "531"
+    },
+    {
+      "asset_id": "BUILT-097",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-098",
+      "path": "src/renderer.ts",
+      "lines": "536"
+    },
+    {
+      "asset_id": "BUILT-098",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-099",
+      "path": "src/renderer.ts",
+      "lines": "540"
+    },
+    {
+      "asset_id": "BUILT-099",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-100",
+      "path": "src/renderer.ts",
+      "lines": "541"
+    },
+    {
+      "asset_id": "BUILT-100",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-101",
+      "path": "src/renderer.ts",
+      "lines": "542"
+    },
+    {
+      "asset_id": "BUILT-101",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-102",
+      "path": "src/renderer.ts",
+      "lines": "554"
+    },
+    {
+      "asset_id": "BUILT-102",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-103",
+      "path": "src/renderer.ts",
+      "lines": "555"
+    },
+    {
+      "asset_id": "BUILT-103",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-104",
+      "path": "src/renderer.ts",
+      "lines": "556"
+    },
+    {
+      "asset_id": "BUILT-104",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-105",
+      "path": "src/renderer.ts",
+      "lines": "558"
+    },
+    {
+      "asset_id": "BUILT-105",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-106",
+      "path": "src/renderer.ts",
+      "lines": "559"
+    },
+    {
+      "asset_id": "BUILT-106",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-107",
+      "path": "src/renderer.ts",
+      "lines": "561"
+    },
+    {
+      "asset_id": "BUILT-107",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-108",
+      "path": "src/renderer.ts",
+      "lines": "563"
+    },
+    {
+      "asset_id": "BUILT-108",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-109",
+      "path": "src/renderer.ts",
+      "lines": "566"
+    },
+    {
+      "asset_id": "BUILT-109",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-110",
+      "path": "src/renderer.ts",
+      "lines": "568"
+    },
+    {
+      "asset_id": "BUILT-110",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-111",
+      "path": "src/renderer.ts",
+      "lines": "570"
+    },
+    {
+      "asset_id": "BUILT-111",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-112",
+      "path": "src/renderer.ts",
+      "lines": "573"
+    },
+    {
+      "asset_id": "BUILT-112",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-113",
+      "path": "src/renderer.ts",
+      "lines": "574"
+    },
+    {
+      "asset_id": "BUILT-113",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-114",
+      "path": "src/renderer.ts",
+      "lines": "575"
+    },
+    {
+      "asset_id": "BUILT-114",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-115",
+      "path": "src/renderer.ts",
+      "lines": "577"
+    },
+    {
+      "asset_id": "BUILT-115",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-116",
+      "path": "src/renderer.ts",
+      "lines": "578"
+    },
+    {
+      "asset_id": "BUILT-116",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-117",
+      "path": "src/renderer.ts",
+      "lines": "459"
+    },
+    {
+      "asset_id": "BUILT-117",
+      "path": "src/renderer.ts",
+      "lines": "280"
+    },
+    {
+      "asset_id": "BUILT-118",
+      "path": "src/renderer.ts",
+      "lines": "150"
+    },
+    {
+      "asset_id": "BUILT-119",
+      "path": "src/renderer.ts",
+      "lines": "164"
+    },
+    {
+      "asset_id": "BUILT-120",
+      "path": "src/renderer.ts",
+      "lines": "164"
+    },
+    {
+      "asset_id": "BUILT-121",
+      "path": "src/renderer.ts",
+      "lines": "190"
+    },
+    {
+      "asset_id": "BUILT-122",
+      "path": "src/renderer.ts",
+      "lines": "150"
+    },
+    {
+      "asset_id": "BUILT-123",
+      "path": "src/renderer.ts",
+      "lines": "150"
+    },
+    {
+      "asset_id": "BUILT-124",
+      "path": "src/renderer.ts",
+      "lines": "150"
+    },
+    {
+      "asset_id": "BUILT-125",
+      "path": "src/renderer.ts",
+      "lines": "16"
+    },
+    {
+      "asset_id": "BUILT-126",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "392"
+    },
+    {
+      "asset_id": "BUILT-127",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "393"
+    },
+    {
+      "asset_id": "BUILT-128",
+      "path": "src/renderer.ts",
+      "lines": "165"
+    },
+    {
+      "asset_id": "BUILT-129",
+      "path": "src/renderer.ts",
+      "lines": "805/826"
+    },
+    {
+      "asset_id": "BUILT-130",
+      "path": "src/rendering/architecture-detail.ts",
+      "lines": "393"
+    },
+    {
+      "asset_id": "BUILT-130",
+      "path": "src/renderer.ts",
+      "lines": "808"
+    },
+    {
+      "asset_id": "BUILT-131",
+      "path": "src/renderer.ts",
+      "lines": "611"
+    },
+    {
+      "asset_id": "BUILT-131",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-132",
+      "path": "src/renderer.ts",
+      "lines": "613"
+    },
+    {
+      "asset_id": "BUILT-132",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-133",
+      "path": "src/renderer.ts",
+      "lines": "623"
+    },
+    {
+      "asset_id": "BUILT-133",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-134",
+      "path": "src/renderer.ts",
+      "lines": "619"
+    },
+    {
+      "asset_id": "BUILT-134",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-135",
+      "path": "src/renderer.ts",
+      "lines": "621"
+    },
+    {
+      "asset_id": "BUILT-135",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-136",
+      "path": "src/renderer.ts",
+      "lines": "626"
+    },
+    {
+      "asset_id": "BUILT-136",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-137",
+      "path": "src/renderer.ts",
+      "lines": "626"
+    },
+    {
+      "asset_id": "BUILT-137",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-138",
+      "path": "src/renderer.ts",
+      "lines": "626"
+    },
+    {
+      "asset_id": "BUILT-138",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-139",
+      "path": "src/renderer.ts",
+      "lines": "626"
+    },
+    {
+      "asset_id": "BUILT-139",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-140",
+      "path": "src/renderer.ts",
+      "lines": "611"
+    },
+    {
+      "asset_id": "BUILT-140",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-141",
+      "path": "src/renderer.ts",
+      "lines": "612"
+    },
+    {
+      "asset_id": "BUILT-141",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-142",
+      "path": "src/renderer.ts",
+      "lines": "619"
+    },
+    {
+      "asset_id": "BUILT-142",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-143",
+      "path": "src/renderer.ts",
+      "lines": "599"
+    },
+    {
+      "asset_id": "BUILT-143",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-144",
+      "path": "src/renderer.ts",
+      "lines": "601"
+    },
+    {
+      "asset_id": "BUILT-144",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-145",
+      "path": "src/renderer.ts",
+      "lines": "607"
+    },
+    {
+      "asset_id": "BUILT-145",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-146",
+      "path": "src/renderer.ts",
+      "lines": "611"
+    },
+    {
+      "asset_id": "BUILT-146",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-147",
+      "path": "src/renderer.ts",
+      "lines": "648"
+    },
+    {
+      "asset_id": "BUILT-147",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-148",
+      "path": "src/renderer.ts",
+      "lines": "650"
+    },
+    {
+      "asset_id": "BUILT-148",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-149",
+      "path": "src/renderer.ts",
+      "lines": "654"
+    },
+    {
+      "asset_id": "BUILT-149",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-150",
+      "path": "src/renderer.ts",
+      "lines": "661"
+    },
+    {
+      "asset_id": "BUILT-150",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-151",
+      "path": "src/renderer.ts",
+      "lines": "662"
+    },
+    {
+      "asset_id": "BUILT-151",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-152",
+      "path": "src/renderer.ts",
+      "lines": "663"
+    },
+    {
+      "asset_id": "BUILT-152",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-153",
+      "path": "src/renderer.ts",
+      "lines": "666"
+    },
+    {
+      "asset_id": "BUILT-153",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-154",
+      "path": "src/renderer.ts",
+      "lines": "632"
+    },
+    {
+      "asset_id": "BUILT-154",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-155",
+      "path": "src/renderer.ts",
+      "lines": "632"
+    },
+    {
+      "asset_id": "BUILT-155",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-156",
+      "path": "src/renderer.ts",
+      "lines": "632"
+    },
+    {
+      "asset_id": "BUILT-156",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-157",
+      "path": "src/renderer.ts",
+      "lines": "633"
+    },
+    {
+      "asset_id": "BUILT-157",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-158",
+      "path": "src/world.ts",
+      "lines": "653/654/656/657"
+    },
+    {
+      "asset_id": "BUILT-158",
+      "path": "src/transport-geometry.ts",
+      "lines": "4"
+    },
+    {
+      "asset_id": "BUILT-158",
+      "path": "src/renderer.ts",
+      "lines": "610/611"
+    },
+    {
+      "asset_id": "BUILT-159",
+      "path": "src/renderer.ts",
+      "lines": "684"
+    },
+    {
+      "asset_id": "BUILT-160",
+      "path": "src/renderer.ts",
+      "lines": "684"
+    },
+    {
+      "asset_id": "BUILT-160",
+      "path": "src/transport-geometry.ts",
+      "lines": "4/31/122"
+    },
+    {
+      "asset_id": "BUILT-161",
+      "path": "src/world.ts",
+      "lines": "345/572/576"
+    },
+    {
+      "asset_id": "BUILT-162",
+      "path": "src/world.ts",
+      "lines": "628/629"
+    },
+    {
+      "asset_id": "BUILT-163",
+      "path": "src/world.ts",
+      "lines": "630/631"
+    },
+    {
+      "asset_id": "BUILT-164",
+      "path": "src/world.ts",
+      "lines": "566/567/633"
+    },
+    {
+      "asset_id": "BUILT-165",
+      "path": "src/world.ts",
+      "lines": "636/637/646/647/650"
+    },
+    {
+      "asset_id": "BUILT-166",
+      "path": "src/world.ts",
+      "lines": "658"
+    },
+    {
+      "asset_id": "BUILT-166",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-167",
+      "path": "src/world.ts",
+      "lines": "659/660"
+    },
+    {
+      "asset_id": "BUILT-168",
+      "path": "src/renderer.ts",
+      "lines": "237/831"
+    },
+    {
+      "asset_id": "BUILT-168",
+      "path": "src/simulation.ts",
+      "lines": "634"
+    },
+    {
+      "asset_id": "BUILT-169",
+      "path": "src/renderer.ts",
+      "lines": "756/839"
+    },
+    {
+      "asset_id": "BUILT-170",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-170",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-171",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-171",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-172",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-172",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-173",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-173",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-174",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-174",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-175",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-175",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-176",
+      "path": "src/renderer.ts",
+      "lines": "839/841"
+    },
+    {
+      "asset_id": "BUILT-176",
+      "path": "src/simulation.ts",
+      "lines": "120/130"
+    },
+    {
+      "asset_id": "BUILT-177",
+      "path": "src/renderer.ts",
+      "lines": "840"
+    },
+    {
+      "asset_id": "BUILT-178",
+      "path": "src/renderer.ts",
+      "lines": "841"
+    },
+    {
+      "asset_id": "BUILT-179",
+      "path": "src/renderer.ts",
+      "lines": "842"
+    },
+    {
+      "asset_id": "BUILT-180",
+      "path": "src/renderer.ts",
+      "lines": "835"
+    },
+    {
+      "asset_id": "BUILT-180",
+      "path": "src/simulation.ts",
+      "lines": "130/693"
+    },
+    {
+      "asset_id": "BUILT-181",
+      "path": "src/aviation-renderer.ts",
+      "lines": "20/23"
+    },
+    {
+      "asset_id": "BUILT-181",
+      "path": "src/aviation.ts",
+      "lines": "23"
+    },
+    {
+      "asset_id": "BUILT-182",
+      "path": "src/aviation-renderer.ts",
+      "lines": "21"
+    },
+    {
+      "asset_id": "BUILT-182",
+      "path": "src/aviation.ts",
+      "lines": "44"
+    },
+    {
+      "asset_id": "BUILT-183",
+      "path": "src/aviation-renderer.ts",
+      "lines": "26/27"
+    },
+    {
+      "asset_id": "BUILT-184",
+      "path": "src/aviation-renderer.ts",
+      "lines": "29/31/40"
+    },
+    {
+      "asset_id": "BUILT-185",
+      "path": "src/aviation-renderer.ts",
+      "lines": "30/31/35"
+    },
+    {
+      "asset_id": "BUILT-186",
+      "path": "src/aviation-renderer.ts",
+      "lines": "43"
+    },
+    {
+      "asset_id": "BUILT-187",
+      "path": "src/aviation-renderer.ts",
+      "lines": "44"
+    },
+    {
+      "asset_id": "BUILT-188",
+      "path": "src/aviation-renderer.ts",
+      "lines": "45"
+    },
+    {
+      "asset_id": "BUILT-189",
+      "path": "src/aviation-renderer.ts",
+      "lines": "33"
+    },
+    {
+      "asset_id": "BUILT-190",
+      "path": "src/aviation-renderer.ts",
+      "lines": "34"
+    },
+    {
+      "asset_id": "BUILT-191",
+      "path": "src/aviation-renderer.ts",
+      "lines": "36"
+    },
+    {
+      "asset_id": "BUILT-192",
+      "path": "src/aviation-renderer.ts",
+      "lines": "37"
+    },
+    {
+      "asset_id": "BUILT-193",
+      "path": "src/aviation-renderer.ts",
+      "lines": "38"
+    },
+    {
+      "asset_id": "BUILT-194",
+      "path": "src/aviation-renderer.ts",
+      "lines": "39"
+    },
+    {
+      "asset_id": "BUILT-195",
+      "path": "src/aviation-renderer.ts",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-196",
+      "path": "src/aviation-renderer.ts",
+      "lines": "51/57"
+    },
+    {
+      "asset_id": "BUILT-197",
+      "path": "src/aviation-renderer.ts",
+      "lines": "52/55"
+    },
+    {
+      "asset_id": "BUILT-197",
+      "path": "src/aviation.ts",
+      "lines": "58"
+    },
+    {
+      "asset_id": "BUILT-198",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-199",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-200",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-201",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-202",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-203",
+      "path": "src/aviation-renderer.ts",
+      "lines": "15/16"
+    },
+    {
+      "asset_id": "BUILT-204",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "21"
+    },
+    {
+      "asset_id": "BUILT-205",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-206",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-207",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-208",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-209",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-210",
+      "path": "/tmp/yunshan-city-structure-audit-01/prototype/src/bridge-structure.ts",
+      "lines": "6/26/80/95/111"
+    },
+    {
+      "asset_id": "BUILT-211",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "94"
+    },
+    {
+      "asset_id": "BUILT-211",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "3"
+    },
+    {
+      "asset_id": "BUILT-212",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "117"
+    },
+    {
+      "asset_id": "BUILT-212",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-213",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "99"
+    },
+    {
+      "asset_id": "BUILT-213",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-214",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-214",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-215",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "124"
+    },
+    {
+      "asset_id": "BUILT-215",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-216",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-216",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-217",
+      "path": "/tmp/yunshan-v5-market-block-01/prototype-01/candidate/src/market-block.ts",
+      "lines": "132"
+    },
+    {
+      "asset_id": "BUILT-217",
+      "path": "docs/validation/2026-10-02-v5-market-prototype/README.md",
+      "lines": "7"
+    },
+    {
+      "asset_id": "BUILT-218",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-218",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-218",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-218",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-218",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-219",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-219",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-219",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-219",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-219",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-220",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-220",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-220",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-220",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-220",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-221",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-221",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-221",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-221",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-221",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-222",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-222",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-222",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-222",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-222",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-223",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-223",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-223",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-223",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-223",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-224",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-224",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-224",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-224",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-224",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-225",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-225",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-225",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-225",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-225",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-226",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-226",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-226",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-226",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-226",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-227",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-227",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-227",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-227",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-227",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-228",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-228",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-228",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-228",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-228",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-229",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-229",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-229",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-229",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-229",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-230",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-230",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-230",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-230",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-230",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-231",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-231",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-231",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-231",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-231",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-232",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-232",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-232",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-232",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-232",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-233",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-233",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-233",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-233",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-233",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-234",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-234",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-234",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-234",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-234",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-235",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-235",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-235",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-235",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-235",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-236",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-236",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-236",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-236",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-236",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-237",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-237",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-237",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-237",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-237",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-238",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-238",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-238",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-238",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-238",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-239",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-239",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-239",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-239",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-239",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-240",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-240",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-240",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-240",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-240",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-241",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-241",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-241",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-241",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-241",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-242",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-242",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-242",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-242",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-242",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-243",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-243",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-243",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-243",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-243",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-244",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-245",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-246",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-247",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-248",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-249",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "32"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "docs/Tripo网页版首批资源交接.md",
+      "lines": "1"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-250",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-251",
+      "path": "docs/体素美术与先图后模型交接.md",
+      "lines": "20/21/26/29/65"
+    },
+    {
+      "asset_id": "BUILT-251",
+      "path": "开发备忘录.md",
+      "lines": "20/40"
+    },
+    {
+      "asset_id": "BUILT-252",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "65/72/78"
+    },
+    {
+      "asset_id": "BUILT-253",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "67/72"
+    },
+    {
+      "asset_id": "BUILT-254",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "66/72/78"
+    },
+    {
+      "asset_id": "BUILT-255",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "69/72"
+    },
+    {
+      "asset_id": "BUILT-256",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "68/72"
+    },
+    {
+      "asset_id": "BUILT-257",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "95"
+    },
+    {
+      "asset_id": "BUILT-258",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "70/72"
+    },
+    {
+      "asset_id": "BUILT-259",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "24/88"
+    },
+    {
+      "asset_id": "BUILT-259",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-259",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-259",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-259",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-260",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "24/88"
+    },
+    {
+      "asset_id": "BUILT-260",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-260",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-260",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-260",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-261",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "24/88"
+    },
+    {
+      "asset_id": "BUILT-261",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-261",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-261",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-261",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-262",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "24/88"
+    },
+    {
+      "asset_id": "BUILT-262",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-262",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-262",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-262",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-263",
+      "path": "docs/美术资源制作规格.md",
+      "lines": "25"
+    },
+    {
+      "asset_id": "BUILT-263",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-263",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-263",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-263",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-264",
+      "path": "提示词.md",
+      "lines": "31"
+    },
+    {
+      "asset_id": "BUILT-264",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-264",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-264",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-264",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-265",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-266",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-267",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-268",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-269",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-270",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-271",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-272",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-273",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-274",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-275",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-276",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-277",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "提示词.md",
+      "lines": "113"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-278",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-279",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-279",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-279",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-279",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-279",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-280",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-280",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-280",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-280",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-280",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-281",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-281",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-281",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-281",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-281",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-282",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-282",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-282",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-282",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-282",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-283",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-283",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-283",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-283",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-283",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-284",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-284",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-284",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-284",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-284",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-285",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-285",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-285",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-285",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-285",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-286",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-286",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-286",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-286",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-286",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-287",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-287",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-287",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-287",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-287",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-288",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-288",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-288",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-288",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-288",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-289",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-289",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-289",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-289",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-289",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-290",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-290",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-290",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-290",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-290",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-291",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-291",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-291",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-291",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-291",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-292",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-292",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-292",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-292",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-292",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-293",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-293",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-293",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-293",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-293",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-294",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-294",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-294",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-294",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-294",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-295",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-295",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-295",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-295",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-295",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-296",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-296",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-296",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-296",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-296",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-297",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-297",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-297",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-297",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-297",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-298",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-298",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-298",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-298",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-298",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-299",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-299",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-299",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-299",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-299",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-300",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-300",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-300",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-300",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-300",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-301",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-301",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-301",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-301",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-301",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-302",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-302",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-302",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-302",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-302",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-303",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-303",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-303",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-303",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-303",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-304",
+      "path": "提示词.md",
+      "lines": "7/9/105/113"
+    },
+    {
+      "asset_id": "BUILT-304",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-304",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-304",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-304",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-305",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-306",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-307",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-308",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-309",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-310",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-311",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-312",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-313",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "提示词.md",
+      "lines": "5/7/31/105"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "开发备忘录.md",
+      "lines": "17"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "src/types.ts",
+      "lines": "13"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "src/world.ts",
+      "lines": "428"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "src/renderer.ts",
+      "lines": "279/592/670"
+    },
+    {
+      "asset_id": "BUILT-314",
+      "path": "src/aviation-renderer.ts",
+      "lines": "6"
+    }
+  ]
+}

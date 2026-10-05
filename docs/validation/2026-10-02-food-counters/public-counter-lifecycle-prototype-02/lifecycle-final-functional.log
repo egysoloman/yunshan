@@ -1,0 +1,26 @@
+✔ paid original attendance can be saved after setting the visible clock back before 17:00 (1275.203494ms)
+✔ real two-official cash reservation creates day1 original assignments; next day continues new segment without erasing paid day0 (1444.594394ms)
+✔ handover requires actual same-site two original workers; each spends one minute and keeps goods, jobs, pay rate (479.378552ms)
+✔ leaving a pending handover pauses actual transfer and cancellation retains every already earned minute (272.580212ms)
+✔ new handover cannot borrow absent staff, fake emit payouts or consumed original daily minutes (325.107203ms)
+✔ closed period, day cap, future-plan and handover mutations reject without changing the destination (888.079154ms)
+✔ real old v1 paid snapshot migrates restricted old evidence without guessing paid history and renews only on the next original day (226.484839ms)
+✔ real carried food changes custodian only after two onsite handling minutes for both original staff (799.100777ms)
+✔ closing after real pay preserves FIFO food until a new original funded day actually walks it back (622.508769ms)
+✔ license reserves actual cap; actual material payment and ten old-contract assembly minutes precede opening (208.020668ms)
+✔ staff actually walks to the native node, loads finite food and returns before any shelf or checkout exists (606.756144ms)
+✔ readonly quote and two-minute-per-unit public-food checkout split actual wallet without paying the public owner twice (470.007044ms)
+✔ pause releases ordinary service and retains carried ownership; closing returns unsold stock to original FIFO without teleport (560.083626ms)
+✔ active carrying and open shelf save exactly and continue 24 real ticks (1096.066595ms)
+✔ new custody/budget/assembly and module presence tampering reject atomically (594.694423ms)
+✔ without a requested counter no new body exists and old save is byte exact (50.649844ms)
+✔ private food remains the actual supplier property until checkout, then real gross splits at frozen H4 (225.080686ms)
+✔ remaining original 1.5 funded minutes bound the task without creating another attendance or wage allowance (542.913954ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6823.540471

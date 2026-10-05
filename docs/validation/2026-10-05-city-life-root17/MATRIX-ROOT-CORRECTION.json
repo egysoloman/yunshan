@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-05T04:17:29.812322+00:00",
+  "status": "LATEST_STATUS_TEXT_CORRECTED_ONLY",
+  "before": {
+    "bytes": 47479,
+    "sha256": "b749f8ca1106f9e41cdd5f6c77a7c48aac52445420fa02e8e481bb904122afb0"
+  },
+  "after": {
+    "bytes": 47596,
+    "sha256": "1ba0021920a81d171f1d74d7d3d1a8fb9831a32d5e5b38cb2445a5debc7b5f05"
+  },
+  "rows": 38,
+  "columns": 11,
+  "originalRequirementCellsPreserved": 228,
+  "changes": [
+    {
+      "id": "SYS-01",
+      "field": "latest_implemented",
+      "before": "既有无renderer数值Simulation/WorldDefinition/固定十阶段；ROOT17 source09集成有限电网/装粮/医护/遗产/修缮/几何，source10再接只读整栋影响诊断与UI按钮，共351输入，功能图74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be；尚非共享安装回执。",
+      "after": "既有无renderer数值Simulation/WorldDefinition/固定十阶段；ROOT17 source09集成有限电网/装粮/医护/遗产/修缮/几何，source10再接只读整栋影响诊断与UI按钮，共351输入，功能图74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be；已按SHARED-INSTALL-RECEIPT安装最终351，46文件增改，原tests/fixture字节不变。"
+    },
+    {
+      "id": "PER-01",
+      "field": "latest_actual_run",
+      "before": "ROOT16 EDF终档whole/787genericparts future24逐字、124World辅助parts物理重组exact；ROOT17最终perf06原EDF16步每save同基准f4b9076c…，约25.74s步耗 vs旧异次26.76s（单case约3.8%），非FPS；/tmp/yunshan-ROOT17-performance-candidate06-20261005-01/REPORT.md。",
+      "after": "ROOT16 EDF终档whole/787genericparts future24逐字、124World辅助parts物理重组exact；ROOT17最终perf06原EDF16步每save同对应基准SHA，16步终档同f4b9076c…，约25.74s步耗 vs旧异次26.76s（单case约3.8%），非FPS；/tmp/yunshan-ROOT17-performance-candidate06-20261005-01/REPORT.md。"
+    },
+    {
+      "id": "VAL-01",
+      "field": "latest_remaining",
+      "before": "当前源码未安装/提交发布回执、当前Library上传尚无新ID；完整域、长期14日财政供粮稳态、自然动态城市、美术/Mac等开放。",
+      "after": "最终351已安装；commit/push/Library以各实际回执另核，当前Library上传尚无新ID；完整域、长期14日财政供粮稳态、自然动态城市、美术/Mac等开放。"
+    }
+  ],
+  "simulationConstructors": 0,
+  "ordinarySteps": 0,
+  "productionSourceChanges": 0,
+  "producerFinalAndZIPPreserved": true,
+  "independentReadOnlyReview": "root17_final_readonly"
+}

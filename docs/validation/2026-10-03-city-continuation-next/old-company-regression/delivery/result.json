@@ -1,0 +1,370 @@
+{
+  "at": "2026-10-04T02:00:39.257720+00:00",
+  "scope": [
+    "v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash",
+    "v4 expansion and hiring use the real company work point without free materials, payroll or completion",
+    "v4 financial fixture uses a real bank service point for listing and finite issued share exchange",
+    "v4 acquisition denies another room and settles actual shareholders at the target work point"
+  ],
+  "originalRun": {
+    "status": "FAIL",
+    "selectedTests": 4,
+    "passed": 3,
+    "failed": 1,
+    "skipped": 0,
+    "timedOut": false,
+    "durationMilliseconds": 749564.803733,
+    "receipt": {
+      "startedAt": "2026-10-04T01:26:47.110079+00:00",
+      "endedAt": "2026-10-04T01:39:18.241203+00:00",
+      "argv": [
+        "env",
+        "OLD_COMPANY_SOURCE=/workspace/yunshan-work/old-company-regression-20261004-01/source",
+        "OLD_COMPANY_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/run01/artifacts",
+        "node",
+        "--import",
+        "tsx",
+        "--import",
+        "/workspace/yunshan-work/old-company-regression-20261004-01/observe.mjs",
+        "--test",
+        "--test-isolation=none",
+        "--test-name-pattern=^(?:v4\\ founding\\ denies\\ a\\ supported\\ far\\ room\\ and\\ its\\ exterior\\ entrance\\ before\\ spending\\ qualified\\ personal\\ cash|v4\\ expansion\\ and\\ hiring\\ use\\ the\\ real\\ company\\ work\\ point\\ without\\ free\\ materials,\\ payroll\\ or\\ completion|v4\\ financial\\ fixture\\ uses\\ a\\ real\\ bank\\ service\\ point\\ for\\ listing\\ and\\ finite\\ issued\\ share\\ exchange|v4\\ acquisition\\ denies\\ another\\ room\\ and\\ settles\\ actual\\ shareholders\\ at\\ the\\ target\\ work\\ point)$",
+        "tests/v4-extensions.test.ts"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 241,
+      "inputsStable": true,
+      "rawSHA256": "1ed7bb00f34277399175b12d46ab2bb746665bff20c94857a6180994ea083a93",
+      "ownedPid": 20252,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 20260,
+          "state": "Z",
+          "parent": 1,
+          "group": 20252,
+          "session": 20252,
+          "startTicks": 803188
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "runtimeAndFrozenUpstreamStable": true,
+    "globalAllNodeModulesGuard": false,
+    "cacheBoundaryAudit": "dependency-cache-boundary-audit.json",
+    "nativeSaveCount": 65
+  },
+  "firstFailure": {
+    "cause": "New legal-asset fixture requested loan121 while the real bank had cash0, no deposits and no original cash reserve to lend. Normal bank guard correctly rejects. Original real course60/1 material and merchant exam have completed.",
+    "nativeSave": "run01/artifacts/sim-1-event-0013-command-loan.save.json",
+    "sha256": "3d233547805eb7e28e00c01ba3d06c0d7326d5a111ed621be5ae0305ad10e51f"
+  },
+  "comparison": {
+    "controlledDeposits": "Actual native depositor arrival probe PASS; two original bank employee wallets deposit100 each through native people phase; loan121 preserves200 deposit claims and20 reserve, bankCash79/wallet601. Controlled bank arrival; not natural economy self-funding.",
+    "paidWork": "Three actual funded merchant shifts,60 minutes each,186 gross/171.12 net/14.88 tax. Genuine first-failure save continuation then actual buy251 and found350 PASS; wallet50.12/education1/loan0. A normal geometric fixture still controls player arrival and seller one-time presence.",
+    "retainedProbeFailures": [
+      "paid-work probe incorrectly required bank to stay cash0; natural NPC deposits made cash500.",
+      "asset-continuation01 used strict binary equality for aggregate gross186; actual185.99999999999773. A new v2 external driver uses the original close1e-7 convention, with no source change or shift replay."
+    ],
+    "assetContinuation02Receipt": {
+      "startedAt": "2026-10-04T01:51:36.243180+00:00",
+      "endedAt": "2026-10-04T01:51:56.423670+00:00",
+      "argv": [
+        "env",
+        "OLD_COMPANY_PROBE_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/asset-continuation02/artifacts",
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/paid-work-asset-continuation-v2.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 241,
+      "inputsStable": true,
+      "rawSHA256": "4f191322ce2915e9dc69aee8c37358dd0752c6fd604c5ca3cecdaa15b6264793",
+      "ownedPid": 23979,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 23987,
+          "state": "Z",
+          "parent": 1,
+          "group": 23979,
+          "session": 23979,
+          "startTicks": 952152
+        },
+        {
+          "pid": 23998,
+          "state": "Z",
+          "parent": 1,
+          "group": 23979,
+          "session": 23979,
+          "startTicks": 952173
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "controlledDepositProbeReceipt": {
+      "startedAt": "2026-10-04T01:42:44.026296+00:00",
+      "endedAt": "2026-10-04T01:42:59.460899+00:00",
+      "argv": [
+        "env",
+        "OLD_COMPANY_PROBE_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-loan-native-deposits/probe01/artifacts",
+        "node",
+        "--import",
+        "tsx",
+        "/workspace/yunshan-work/old-company-regression-20261004-01/candidate-loan-native-deposits/native-deposit-probe.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 241,
+      "inputsStable": true,
+      "rawSHA256": "bf7eb8e4de13470f8ca83418f88b59fa1c98bf4af1310883cbccb58b1e78775f",
+      "ownedPid": 22465,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 22473,
+          "state": "Z",
+          "parent": 1,
+          "group": 22465,
+          "session": 22465,
+          "startTicks": 898930
+        },
+        {
+          "pid": 22485,
+          "state": "Z",
+          "parent": 1,
+          "group": 22465,
+          "session": 22465,
+          "startTicks": 898955
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "retainedFailedProbeReceipts": [
+      {
+        "startedAt": "2026-10-04T01:44:48.217677+00:00",
+        "endedAt": "2026-10-04T01:48:35.794833+00:00",
+        "argv": [
+          "env",
+          "OLD_COMPANY_PROBE_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/probe01/artifacts",
+          "node",
+          "--import",
+          "tsx",
+          "/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/paid-work-probe.ts"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "status": "FAIL",
+        "inputCount": 241,
+        "inputsStable": true,
+        "rawSHA256": "a4c34c3e7184b319b9b42bcb4c7dcb1fae4506692365d412c3725fa85713f698",
+        "ownedPid": 22920,
+        "finalOwnedSessionMembers": [
+          {
+            "pid": 22928,
+            "state": "Z",
+            "parent": 1,
+            "group": 22920,
+            "session": 22920,
+            "startTicks": 911332
+          },
+          {
+            "pid": 22940,
+            "state": "Z",
+            "parent": 1,
+            "group": 22920,
+            "session": 22920,
+            "startTicks": 911346
+          }
+        ],
+        "activeDescendants": [],
+        "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+      },
+      {
+        "startedAt": "2026-10-04T01:50:29.436362+00:00",
+        "endedAt": "2026-10-04T01:50:38.130715+00:00",
+        "argv": [
+          "env",
+          "OLD_COMPANY_PROBE_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/asset-continuation01/artifacts",
+          "node",
+          "--import",
+          "tsx",
+          "/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/paid-work-asset-continuation.ts"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "status": "FAIL",
+        "inputCount": 241,
+        "inputsStable": true,
+        "rawSHA256": "22f439ed8fbcca2198a041ab510925daf092a5043d1209d6c440b539bf6fa3f5",
+        "ownedPid": 23758,
+        "finalOwnedSessionMembers": [
+          {
+            "pid": 23766,
+            "state": "Z",
+            "parent": 1,
+            "group": 23758,
+            "session": 23758,
+            "startTicks": 945433
+          },
+          {
+            "pid": 23778,
+            "state": "Z",
+            "parent": 1,
+            "group": 23758,
+            "session": 23758,
+            "startTicks": 945454
+          }
+        ],
+        "activeDescendants": [],
+        "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+      }
+    ]
+  },
+  "finalSelectedFix": {
+    "file": "candidate-player-paid-work/source/tests/v4-extensions.test.ts",
+    "patch": "candidate-player-paid-work/v4-player-paid-work.patch",
+    "beforeSHA256": "12d137106c0d0ae0d9f6ccd438b6bde3f1a6e77098e375c5645c24dbea39dff1",
+    "afterSHA256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea",
+    "changedFiles": 1,
+    "runtimeSourceChanges": 0,
+    "originalFourBodiesSameAsROOT07": true,
+    "originalAssertionStatementsPreserved": 34,
+    "fullFoundingTargetStatus": "PASS",
+    "foundingReceipt": {
+      "startedAt": "2026-10-04T01:50:39.220630+00:00",
+      "endedAt": "2026-10-04T01:57:49.586181+00:00",
+      "argv": [
+        "env",
+        "OLD_COMPANY_SOURCE=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/source",
+        "OLD_COMPANY_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/founding01/artifacts",
+        "node",
+        "--import",
+        "tsx",
+        "--import",
+        "/workspace/yunshan-work/old-company-regression-20261004-01/observe-paid-work.mjs",
+        "--test",
+        "--test-isolation=none",
+        "--test-name-pattern=^v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash$",
+        "tests/v4-extensions.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 241,
+      "inputsStable": true,
+      "rawSHA256": "e9fd56b443c26d6012c991d0b5e17389281326fe4e8760d45017477953727125",
+      "ownedPid": 23788,
+      "finalOwnedSessionMembers": [
+        {
+          "pid": 23796,
+          "state": "Z",
+          "parent": 1,
+          "group": 23788,
+          "session": 23788,
+          "startTicks": 946423
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "foundingExternalGuard": {
+      "endedAt": "2026-10-04T01:57:50.881194+00:00",
+      "scope": "founding-only",
+      "wrapperReceipt": {
+        "startedAt": "2026-10-04T01:50:39.220630+00:00",
+        "endedAt": "2026-10-04T01:57:49.586181+00:00",
+        "argv": [
+          "env",
+          "OLD_COMPANY_SOURCE=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/source",
+          "OLD_COMPANY_ARTIFACTS=/workspace/yunshan-work/old-company-regression-20261004-01/candidate-player-paid-work/founding01/artifacts",
+          "node",
+          "--import",
+          "tsx",
+          "--import",
+          "/workspace/yunshan-work/old-company-regression-20261004-01/observe-paid-work.mjs",
+          "--test",
+          "--test-isolation=none",
+          "--test-name-pattern=^v4 founding denies a supported far room and its exterior entrance before spending qualified personal cash$",
+          "tests/v4-extensions.test.ts"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "status": "PASS",
+        "inputCount": 241,
+        "inputsStable": true,
+        "rawSHA256": "e9fd56b443c26d6012c991d0b5e17389281326fe4e8760d45017477953727125",
+        "ownedPid": 23788,
+        "finalOwnedSessionMembers": [
+          {
+            "pid": 23796,
+            "state": "Z",
+            "parent": 1,
+            "group": 23788,
+            "session": 23788,
+            "startTicks": 946423
+          }
+        ],
+        "activeDescendants": [],
+        "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+      },
+      "externalDriverNodeAndPrivateDependenciesStable": true,
+      "externalInputCount": 2762,
+      "externalChangedPaths": []
+    },
+    "typecheckReceipt": {
+      "startedAt": "2026-10-04T01:56:50.592958+00:00",
+      "endedAt": "2026-10-04T01:57:15.658878+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 241,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 24301,
+      "finalOwnedSessionMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    "actualFinalNativeSave": {
+      "path": "candidate-player-paid-work/founding01/artifacts/sim-1-event-0027-process-exit.save.json",
+      "bytes": 2824000,
+      "sha256": "a1f95040da01794d3add9d81d819eeb01f40a3087c205a2dcc45ff768d13395e",
+      "ticks": 961,
+      "clock": 720.25,
+      "playerMoney": 50.119999999991705,
+      "playerEducation": 1,
+      "loan": 0,
+      "bankCash": 500,
+      "courseMinutes": 60,
+      "consumedCourseMaterial": 1,
+      "realCompletedWorkShifts": 3,
+      "actualWorkedMinutes": 180,
+      "paidGross": 185.99999999999773,
+      "paidNet": 171.1200000000007,
+      "paidTax": 14.880000000000045
+    }
+  },
+  "historicalResults": "Original ROOT05 four FAIL and original candidate180/120-second TIMEOUT remain unchanged, not verified/pass.",
+  "sharedRoot07Mutation": false,
+  "gitCommitPush": false,
+  "libraryWrites": false,
+  "parentIntegration": {
+    "reportedAt": "2026-10-04T02:01Z",
+    "scope": "Root applied test-only fixture patch to shared working branch; ROOT07 frozen source and all55 src input hashes remain unchanged.",
+    "srcInputCount": 55,
+    "thisAgentWroteShared": false,
+    "sameRunFourOfFourClaim": false
+  }
+}

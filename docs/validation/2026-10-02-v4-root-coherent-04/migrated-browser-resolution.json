@@ -1,0 +1,41 @@
+{
+  "capturedAt": "2026-10-02T05:35:45.445916+00:00",
+  "scope": "Real elapsed native DOM KeyW setup failure records; no source fix, controller speed change, extra third attempt or test assertion relaxation. Original assertion texts remain but after-setup purchase and aviation were not reached. Prepared proof status is preserved as its original historical metadata; executed hashes independently match.",
+  "runs": [
+    {
+      "scope": "v4-coherent04-browser-sale-migrated",
+      "startedAt": "2026-10-02T05:10:29.679005+00:00",
+      "endedAt": "2026-10-02T05:15:07.300270+00:00",
+      "exitCode": 1,
+      "originalChecksPassed": 4,
+      "setup": "FAIL_ACTUAL_NATIVE_W_ROUTE_NOT_REACHED",
+      "originalPurchaseAndFollowingChecks": "NOT_RUN",
+      "assertionCalls": 62,
+      "assertionASTAndTwoSixtySecondWaitsRetained": true,
+      "executedScriptMatchesPreparationProof": true,
+      "source99AndEntryUnchanged": true,
+      "failure": "Error: Actual native W sale setup did not reach {\"x\":-848.8000000000001,\"y\":18.6,\"z\":1131.2}",
+      "evidenceDirectory": "actual-gl/browser-sale-migrated"
+    },
+    {
+      "scope": "v4-coherent04-browser-sale-migrated-v2",
+      "startedAt": "2026-10-02T05:20:05.014841+00:00",
+      "endedAt": "2026-10-02T05:24:18.254946+00:00",
+      "exitCode": 1,
+      "originalChecksPassed": 4,
+      "setup": "FAIL_ACTUAL_NATIVE_W_ROUTE_NOT_REACHED",
+      "originalPurchaseAndFollowingChecks": "NOT_RUN",
+      "assertionCalls": 62,
+      "assertionASTAndTwoSixtySecondWaitsRetained": true,
+      "executedScriptMatchesPreparationProof": true,
+      "source99AndEntryUnchanged": true,
+      "failure": "Error: Actual native W sale setup did not reach {\"x\":-859.0000000000001,\"y\":18.6,\"z\":1127.4}",
+      "evidenceDirectory": "actual-gl/browser-sale-migrated-v2"
+    }
+  ],
+  "v2ActualCause": "Observed actor z1125.047 lies at real sale-west counter north body boundary1125.05; from this position z+.1 is blocked, x-.1 is allowed. Feedback overshot the waypoint to counter backside. Observed metre gaps are multiple frame accumulation, not single controller steps.",
+  "causeEvidence": "actual-gl/browser-sale-migrated-v2/final-counter-cpu-cause.json",
+  "nativeVsControlled": "Controlled .015 motor+real DOM W reaches sale point in separate body run; that result cannot substitute for this elapsed native route. Ordinary URL remains pending.",
+  "art": "FAIL",
+  "fullGoal": "NOT_COMPLETE"
+}

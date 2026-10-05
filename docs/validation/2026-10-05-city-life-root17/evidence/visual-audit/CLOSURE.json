@@ -1,0 +1,84 @@
+{
+  "status": "SEALED_READONLY_AUDIT_ORIGINAL_GPU_FAIL_AND_ART_FAIL_PRESERVED",
+  "sealedAt": "2026-10-05T03:25:17.080872+00:00",
+  "inputOriginalFiles": 174,
+  "originalsUnchanged": true,
+  "newSimulationInstances": 0,
+  "newSteps": 0,
+  "newBrowserGPU": 0,
+  "files": [
+    {
+      "path": "AUDIT-RESULTS.json",
+      "bytes": 46269,
+      "sha256": "a5df0e646e05a04805f2e7ef23e7893bc6f2e4ffcb56f0e1d837b2e8926a11be"
+    },
+    {
+      "path": "ORIGINAL-INPUTS-AFTER.json",
+      "bytes": 36775,
+      "sha256": "910ba5c8f0c5ee2430cb35beb3608cb664d846b00e162134842ff36fdaad8151"
+    },
+    {
+      "path": "ORIGINAL-INPUTS-BEFORE.json",
+      "bytes": 36775,
+      "sha256": "910ba5c8f0c5ee2430cb35beb3608cb664d846b00e162134842ff36fdaad8151"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 11371,
+      "sha256": "d3f1c0554a7b6a603f429def77da5dd379bc9fe321267434dacb0e6511f9a9e5"
+    },
+    {
+      "path": "REQUIREMENTS-AS-READ.json",
+      "bytes": 477,
+      "sha256": "3e8577311fc98544ee88ff78c2bc2710ec2253d281c8493b40d13e2d7848701d"
+    },
+    {
+      "path": "SCREENSHOT-BINDING-32.csv",
+      "bytes": 18754,
+      "sha256": "b859af6558fdfafc67542101e5bbd81dc1b23cd13ad08d408acfab6c6f7770dc"
+    },
+    {
+      "path": "SEAL-PREPARE-FAIL.json",
+      "bytes": 571,
+      "sha256": "0cbbf40c481d265c148a707436c18edbcb47b77a6373c2df1185ad4cfe61b4e6"
+    },
+    {
+      "path": "SOURCE-CAUSE-BINDING.json",
+      "bytes": 1804,
+      "sha256": "9d29eb9bf73f8ca0f2a31626508f134c58f1f722999ef90295ee4b76a7d22165"
+    },
+    {
+      "path": "VISUAL-MATRIX.csv",
+      "bytes": 2623,
+      "sha256": "7356b2ee1016285b57c3600e804cd6ad32a2ec6c46028df796e94fdb4d6b66b1"
+    },
+    {
+      "path": "audit.py",
+      "bytes": 11393,
+      "sha256": "130e4df73b96c01f329c55c35fcd91be8a20081c4fc3e9d18ae49b74410ade0d"
+    },
+    {
+      "path": "baseline-gpu01-SAVE-DIFFS.json",
+      "bytes": 12664373,
+      "sha256": "60d94854cb933ae96eff960cef2bff3d7b01a2999a5e6a492b796d204b8f90bd"
+    },
+    {
+      "path": "baseline-gpu01-WALK-AUDIT.json",
+      "bytes": 12403,
+      "sha256": "24fdda3ab254aa05057a5a4d9f4137b99869d168dd2184042912820eea8b7c0c"
+    },
+    {
+      "path": "candidate-gpu01-SAVE-DIFFS.json",
+      "bytes": 12664373,
+      "sha256": "924a80d93185bca839863d0f81aa17c0da4386e654e802d1a009b5d9af0137a0"
+    },
+    {
+      "path": "candidate-gpu01-WALK-AUDIT.json",
+      "bytes": 12383,
+      "sha256": "7c6953848b44a0d78b2a120efc6979145c7f4f1bda15dd6fc1fa0072588cec59"
+    }
+  ],
+  "outputsTotalBytes": 25520344,
+  "reportSHA256": "d3f1c0554a7b6a603f429def77da5dd379bc9fe321267434dacb0e6511f9a9e5",
+  "library": "Not uploaded by child; root is delivery producer."
+}

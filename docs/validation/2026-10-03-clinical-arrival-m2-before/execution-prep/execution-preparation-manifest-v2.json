@@ -1,0 +1,34 @@
+{
+  "status": "ROOT_CPU_GO_NOT_YET_STARTED",
+  "revision": "v2 proc startTicks + after-wait sameStart/state only",
+  "sourceOrDriverChanges": 0,
+  "baselineSourceCount": 124,
+  "inputMembers": 271,
+  "files": [
+    {
+      "path": "run-m2-before-v2.py",
+      "sha256": "a060d1150c07e178ac57b007e9b5433431de273c29362b07348b3a36516361d9",
+      "bytes": 10245
+    },
+    {
+      "path": "launch-m2-before-v2.sh",
+      "sha256": "359b47117f016e4bb7dcabe89cf9f31b0b4714c56631209cfd6499aec6d3b4ff",
+      "bytes": 332
+    },
+    {
+      "path": "execution-inputs-v2.json",
+      "sha256": "c9763373dea80badfa7e0aaa992de8585d493ff2f00745150d6c129de321e777",
+      "bytes": 80777
+    }
+  ],
+  "v1Preserved": {
+    "wrapper": "a5ad947c1e4752c4378d968eccf9bc3e1ac08d81d0b8552a0997ba0345606610",
+    "spec": "c6f3e3034a1af3f67f03891d9897973dfecaac4389ae2ee1afc99ec42bb21d05",
+    "launch": "ae88f98854965bea53ce9f68578dbea6b28d8c0a93633a17993d81d257c6c8f0"
+  },
+  "pendingCases": [
+    "D1",
+    "D2"
+  ],
+  "D3": "NOT_READY_NOT_RUN"
+}

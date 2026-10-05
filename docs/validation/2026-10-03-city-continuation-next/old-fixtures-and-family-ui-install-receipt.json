@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-04T01:22:25.119358+00:00",
+  "before": {
+    "tests/roads-old22.test.ts": "253c5dd289d4d862c5ee105e89e886b7d706c62878cbbc86b9a7252727edcf7a",
+    "tests/roadworks.test.ts": "87286746f4379056ff9c824535edbd6e05987ad11d393a76d2c446ff55b640cf",
+    "tests/road-routing.test.ts": "501fd7c0d63ba6a963c9a833c5558929bc57f6267902277b6fe630b81ebe0d6f",
+    "src/ui.ts": "30882baf5c4ef2f0d09a9a75757fe7ff6fa4203ce7b5512c78eb3da022aac3dc"
+  },
+  "after": {
+    "tests/roads-old22.test.ts": "3194671218396291fd21f0f463dc048eb511a18aa141cb6bf3e87b4fea2fe1a4",
+    "tests/roadworks.test.ts": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd",
+    "tests/road-routing.test.ts": "41e84afeec4e02d8f078327da6df1cb8a399929be360c824e43509cac872c232",
+    "src/ui.ts": "0a5b600ea4be90b4f5aaa0c919a4a999a7bf84245c13bc7dd39dac31493deecf"
+  },
+  "patches": [
+    [
+      "/workspace/yunshan-work/roadwork-replacement-20261004-01/old-test-corrections/delivery/three-old-tests.patch",
+      "59b121b9de2553046f3f43b69874d7c31e0aa27a2d3e6b3d1d9a2b14aba338bf"
+    ],
+    [
+      "/workspace/yunshan-work/education-family-fee-20261004/output/family-fee-education/family-fee-ui-legacy-source-feedback-increment.patch",
+      "88c6896d08940c554cbb757260a81e637cc721862d56ceced5140280cedafcca"
+    ]
+  ],
+  "allChecksBeforeMutation": true,
+  "note": "Three test semantics corrected from exact causal proof: explicit old v4 world full24 original hashes, real civic income and expense ledger with exact40 and conserved cash, current same-security-phase police dispatch release+single actual kit consumption while all physical departure/old24 guards retained. Family UI separates new formal minutes from legacy attendance and held qualifications."
+}

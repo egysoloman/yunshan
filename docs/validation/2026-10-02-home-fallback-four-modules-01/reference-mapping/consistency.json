@@ -1,0 +1,40 @@
+{
+  "status": "STATIC_ARTIFACT_CHECK_ONLY; NO_RUNTIME_TEST",
+  "reference_rows": 28,
+  "unique_reference_ids": 28,
+  "reference_namespace_is_distinct_from_bom_ids": true,
+  "physical_coverage_rows": 52,
+  "all_formal52_ids_preserved": true,
+  "all_formal52_dictionaries_unchanged_in_coverage": true,
+  "formal_bom_full_rows": 77,
+  "formal_bom_assembly_recipes": 16,
+  "all_furniture_F01_to_F21_preserved": true,
+  "all_mapped_physical_recipe_material_ids_exist": true,
+  "reference_rows_are_not_generation_jobs": true,
+  "new_paid_calls": 0,
+  "new_model_generation_calls": 0,
+  "new_installs": 0,
+  "approved_new_mounts": 0,
+  "runtime_or_cpu_rule_tests_run": 0,
+  "source_hashes_before": {
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/bom-full-revision03.json": "8fedd18c1d2fb126a852efcf75ee5629d280d9ba32b0f6cb91b0b8306fa0cd12",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/reference-interface-revision03.json": "35b9b3497723c45550180f50ba132b336fd75df8fb059e6beb9b844357ebfb2f",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/physical-masters-revision03.csv": "1432b1c682aae16c1c6207e519ca2ec959e57e3440bf1bcfd1e6dd0388dbcc1b",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/reference-access.json": "db21959e760bd40c681381010496832ca2eeabccb558d9c7642d9fe6a57a22b0",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/庭院建筑模块图鉴.png": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/立面与细部组件.png": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe"
+  },
+  "source_hashes_after": {
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/bom-full-revision03.json": "8fedd18c1d2fb126a852efcf75ee5629d280d9ba32b0f6cb91b0b8306fa0cd12",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/reference-interface-revision03.json": "35b9b3497723c45550180f50ba132b336fd75df8fb059e6beb9b844357ebfb2f",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-pilot-market-b24-bom-01/fallback-modules-addendum-03/physical-masters-revision03.csv": "1432b1c682aae16c1c6207e519ca2ec959e57e3440bf1bcfd1e6dd0388dbcc1b",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/reference-access.json": "db21959e760bd40c681381010496832ca2eeabccb558d9c7642d9fe6a57a22b0",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/庭院建筑模块图鉴.png": "c3db472a46275e5072f9d0287c16834c80ff061cc4b97d39e7b96e2abef6fc31",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/references/立面与细部组件.png": "bffedd696fbaadff929d8e7cdbf21c6efedaf26aeaec45194d625bef7b5c0bbe"
+  },
+  "all_input_bytes_unchanged": true,
+  "write_scope": [
+    "/tmp/yunshan-four-modules-reference-map-01",
+    "/workspace/yunshan/docs/validation/2026-10-02-home-fallback-four-modules-01/reference-mapping"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/city-assets.csv",
+    "file_id": "file_00000000481481f69b12710c4bced921",
+    "library_file_id": "libfile_da11a584abfc819183f69ea95de8f88e",
+    "file_name": "city-assets.csv",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_c2849bbd57f88191acf2298777ea4b2c",
+    "mime_type": "text/csv",
+    "library_artifact_type": "sheet",
+    "file_size_bytes": 725477,
+    "external_connectors_accessed": false
+  },
+  "isError": false
+}

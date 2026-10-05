@@ -219,7 +219,11 @@ test('the expanded city has connected purpose-built neighbourhoods and leaves op
   const homes = world.buildings.filter(b => b.kind === 'home');
   assert.ok(homes.length >= 150);
   assert.ok(homes.some(b => b.floors <= 4) && homes.some(b => b.floors >= 12), 'courtyard homes and tall mountain residences serve different households');
-  assert.ok(world.buildings.filter(b => b.height >= 40).length >= world.buildings.length * .2, 'the broader city has a layered skyline beyond a single landmark');
+  assert.ok(world.buildings.filter(b => b.floors >= 8).length >= world.buildings.length * .2, 'the city retains its usable multi-storey residences and offices with realistic storey heights');
+  assert.ok(world.buildings.filter(b => b.floors >= 10).length >= world.buildings.length * .1, 'tall residences and offices retain their real occupied floors');
+  assert.ok(homes.some(b => b.floors >= 12 && b.floors <= 15 && Math.abs(b.height / b.floors - 3.4) < EPSILON), 'the residential skyline uses the shared 3.4m floor geometry rather than renderer scaling');
+  const main = world.buildings.find(b => b.id === 'core-main')!;
+  assert.equal(main.floors, 30); assert.equal(main.height, 234);
   const footprintArea = world.buildings.reduce((area, b) => area + b.width * b.depth, 0);
   assert.ok(footprintArea < world.size ** 2 * .15, 'water, woods and mountain land remain open between buildings');
 });

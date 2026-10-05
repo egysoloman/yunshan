@@ -1,0 +1,344 @@
+{
+  "at": "2026-10-04T02:54:21.823572+00:00",
+  "producer": "/root",
+  "exactOriginalCopies": true,
+  "scope": "Two actually ended scopes; root-level final producer metadata may still be in preparation",
+  "files": [
+    {
+      "path": "family01/wrapper-raw.log",
+      "bytes": 901,
+      "sha256": "b2ed520f91581c0fb51ed1a03a3da5703c89611288efeca96c34b35af3eef756"
+    },
+    {
+      "path": "family01/dist-after.json",
+      "bytes": 706,
+      "sha256": "bc666513cdec1871f73d4d01d5003e5c4df7387745e64b49554fe96c0bbceaab"
+    },
+    {
+      "path": "family01/artifact-provenance.json",
+      "bytes": 25401,
+      "sha256": "4351a7f20e29357535d741a20eb0f0207d976fa17381c24a7606810935872adc"
+    },
+    {
+      "path": "family01/phase-receipt.json",
+      "bytes": 140432,
+      "sha256": "cb1cf27344b05db7f2ecfcf0ce1e3a60ee7435c0fca809d23678c557b71f5ab3"
+    },
+    {
+      "path": "family01/artifacts-before.json",
+      "bytes": 10840,
+      "sha256": "c2b7976f2c116877be6ab1f669aa1cff1dc15dcb0afe5c0fd860ef04c16d1d5f"
+    },
+    {
+      "path": "family01/artifacts-after.json",
+      "bytes": 10840,
+      "sha256": "c2b7976f2c116877be6ab1f669aa1cff1dc15dcb0afe5c0fd860ef04c16d1d5f"
+    },
+    {
+      "path": "family01/dist-before.json",
+      "bytes": 706,
+      "sha256": "bc666513cdec1871f73d4d01d5003e5c4df7387745e64b49554fe96c0bbceaab"
+    },
+    {
+      "path": "family01/authorization-used.json",
+      "bytes": 28247,
+      "sha256": "09e539f4f7c5885145a87d79fbc7d896396f0ec6901c919bd06eb743f40b82b8"
+    },
+    {
+      "path": "family01/run/inputs-before.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "family01/run/owned-process.json",
+      "bytes": 610,
+      "sha256": "a0d5c3fb685d87e5eef41b65c2d8678b00c1800cd897ac6e4fe3f586f065bafe"
+    },
+    {
+      "path": "family01/run/receipt.json",
+      "bytes": 1003,
+      "sha256": "bd7d6dab23bbfba3b464b3317645f0a55045ea24820ffed342830d24e7d35f30"
+    },
+    {
+      "path": "family01/run/raw.log",
+      "bytes": 136867,
+      "sha256": "5ce03091aeeaaf94f7938a5ecebc812cbc8fe9be3019a37e1046cda8f97b8ce9"
+    },
+    {
+      "path": "family01/run/inputs-after.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "family01/family-ui-originals/school-partial-course.observer.json",
+      "bytes": 36712,
+      "sha256": "7abba0317a1feaee8dbc9bb6d911f270a1c5c41b2b0c453f248a5f4bcfb72bff"
+    },
+    {
+      "path": "family01/family-ui-originals/family-fee-ui-results.json",
+      "bytes": 136866,
+      "sha256": "503c4447a1ec3d9b1349351feb254ae47fee961b2196e5dbf9864a2b2b129f41"
+    },
+    {
+      "path": "family01/family-ui-originals/source-inputs-before.json",
+      "bytes": 26084,
+      "sha256": "0baacca7a25cc858af9d016c02cc78962cff1aae4592372e0286a3d774f3f37b"
+    },
+    {
+      "path": "family01/family-ui-originals/family-fee-household-native-ui.png",
+      "bytes": 210028,
+      "sha256": "f1c338bb4cfb5891a27ca96b7b17b065d9d77cd5486f9b44d3cae361330c1b01"
+    },
+    {
+      "path": "family01/family-ui-originals/family-fee-school-native-ui.png",
+      "bytes": 166569,
+      "sha256": "33d92083923c23bc265d3d870da7b56617e6601224fc6c323cc71f0875303479"
+    },
+    {
+      "path": "family01/family-ui-originals/school-partial-course.save.json",
+      "bytes": 450966,
+      "sha256": "914eae488ec4c0bd5edb4cd3dfbfdc40d8af5177b093c5e38d41e130e0d75e9f"
+    },
+    {
+      "path": "family01/family-ui-originals/source-inputs-after.json",
+      "bytes": 26084,
+      "sha256": "0baacca7a25cc858af9d016c02cc78962cff1aae4592372e0286a3d774f3f37b"
+    },
+    {
+      "path": "family01/family-ui-originals/family-fee-after-death-observer.png",
+      "bytes": 221088,
+      "sha256": "b5d97971d8182a5a8daaea3d3b460d3a26f1fe6f004e6c8c3eff8bbd46685e63"
+    },
+    {
+      "path": "family01/family-ui-originals/household-cancelled-before-death.save.json",
+      "bytes": 446127,
+      "sha256": "bbe4377b9ff7bce7bc30898a55d92a63cb7fb09daf0dd0d40c68254b8c4321c2"
+    },
+    {
+      "path": "family01/family-ui-originals/after-death.observer.json",
+      "bytes": 47789,
+      "sha256": "f5a5a611ec63c80826b7943b2c6693ef7753d61a41b0132c725c78589bb78cdc"
+    },
+    {
+      "path": "family01/family-ui-originals/after-death.world.json",
+      "bytes": 6032,
+      "sha256": "983612f2783926d51285d2b33249bc424ca32b7a30079507a8c3f6f559386eb2"
+    },
+    {
+      "path": "family01/family-ui-originals/household-cancelled-before-death.world.json",
+      "bytes": 6032,
+      "sha256": "983612f2783926d51285d2b33249bc424ca32b7a30079507a8c3f6f559386eb2"
+    },
+    {
+      "path": "family01/family-ui-originals/school-partial-course.world.json",
+      "bytes": 6032,
+      "sha256": "983612f2783926d51285d2b33249bc424ca32b7a30079507a8c3f6f559386eb2"
+    },
+    {
+      "path": "family01/family-ui-originals/household-cancelled-before-death.observer.json",
+      "bytes": 47045,
+      "sha256": "8c33b38238c35b590df3d6ad235d0696e737cc6ba22b27f9b99f8847beec3a16"
+    },
+    {
+      "path": "family01/family-ui-originals/producer-fixture-inputs.json",
+      "bytes": 907,
+      "sha256": "26c7caeeae22f8eddca615771bfabdad95e4d75cb153a0c1de4342c34b0184e2"
+    },
+    {
+      "path": "family01/family-ui-originals/after-death.save.json",
+      "bytes": 447418,
+      "sha256": "a67ffdf37023c30e8beaa47575e918563482cf8ac147469ebb40c0b5c4911eab"
+    },
+    {
+      "path": "captures03-context/wrapper-raw.log",
+      "bytes": 1019,
+      "sha256": "fcd78d401d5d3c161f54727990013c7e3e8788e5e6b90e077606289195c1ac28"
+    },
+    {
+      "path": "captures03-context/dist-after.json",
+      "bytes": 706,
+      "sha256": "bc666513cdec1871f73d4d01d5003e5c4df7387745e64b49554fe96c0bbceaab"
+    },
+    {
+      "path": "captures03-context/artifact-provenance.json",
+      "bytes": 25401,
+      "sha256": "4351a7f20e29357535d741a20eb0f0207d976fa17381c24a7606810935872adc"
+    },
+    {
+      "path": "captures03-context/phase-receipt.json",
+      "bytes": 2667,
+      "sha256": "387d7628aae1111811c0c538908f30f934438f1df1a4737633749d926231c14c"
+    },
+    {
+      "path": "captures03-context/artifacts-before.json",
+      "bytes": 10840,
+      "sha256": "c2b7976f2c116877be6ab1f669aa1cff1dc15dcb0afe5c0fd860ef04c16d1d5f"
+    },
+    {
+      "path": "captures03-context/artifacts-after.json",
+      "bytes": 10840,
+      "sha256": "c2b7976f2c116877be6ab1f669aa1cff1dc15dcb0afe5c0fd860ef04c16d1d5f"
+    },
+    {
+      "path": "captures03-context/dist-before.json",
+      "bytes": 706,
+      "sha256": "bc666513cdec1871f73d4d01d5003e5c4df7387745e64b49554fe96c0bbceaab"
+    },
+    {
+      "path": "captures03-context/authorization-used.json",
+      "bytes": 28247,
+      "sha256": "09e539f4f7c5885145a87d79fbc7d896396f0ec6901c919bd06eb743f40b82b8"
+    },
+    {
+      "path": "captures03-context/run/inputs-before.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "captures03-context/run/owned-process.json",
+      "bytes": 732,
+      "sha256": "97fc2efeb485725c8ff246a35aae9cbbadfb1c3fc29880493715136462dbd418"
+    },
+    {
+      "path": "captures03-context/run/receipt.json",
+      "bytes": 1125,
+      "sha256": "cef955ccc720bc1572233c4a1b800e4be53945f99730b9ec3393e3b91b546054"
+    },
+    {
+      "path": "captures03-context/run/raw.log",
+      "bytes": 143,
+      "sha256": "d5c85a8f87173784673b699f0b7b7eb42b5e315356f6d71ecfab5ff3899f971d"
+    },
+    {
+      "path": "captures03-context/run/inputs-after.json",
+      "bytes": 26085,
+      "sha256": "1c400a34c617daf021e3b83a4e7dae60d96ad1a2fb31118d67c7093275d84131"
+    },
+    {
+      "path": "captures03-context/capture-originals/commercial-first-office-floor-context.png",
+      "bytes": 696498,
+      "sha256": "83703b81531876876d3fd075d30e92f0d94a75bfde5dedf77fee81d8b925de58"
+    },
+    {
+      "path": "captures03-context/capture-originals/commercial-ground-bank-reception-context.png",
+      "bytes": 418167,
+      "sha256": "f2d9503c4b19dc9a602eb47515ba879dab499ea9f44a6c68aa7ef3aca2d430f9"
+    },
+    {
+      "path": "captures03-context/capture-originals/preview-raw.log",
+      "bytes": 39,
+      "sha256": "5e2e26bdfa5cbe2bfd5a506a4dffeb0f70ed1718ac466ac3e01900c84467e24e"
+    },
+    {
+      "path": "captures03-context/capture-originals/commercial-ground-bank-reception-context.metadata.json",
+      "bytes": 16568,
+      "sha256": "28f73ff159250357e5e811f59f963e4942ac1bdcbd0d7084c3beafcada25716e"
+    },
+    {
+      "path": "captures03-context/capture-originals/commercial-first-office-floor-context.metadata.json",
+      "bytes": 16763,
+      "sha256": "5f3f0c954728fc15b71af417812deb8c92e95ee60be6107d7170390faf69e977"
+    },
+    {
+      "path": "captures03-context/capture-originals/console-raw.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "captures03-context/capture-originals/capture-results.json",
+      "bytes": 93277,
+      "sha256": "7e215300063f8ccca57e02104c174bf62c386e726deb131c051c102ecac7d177"
+    },
+    {
+      "path": "family-ui-prep/staticcheck.py",
+      "bytes": 11374,
+      "sha256": "96a5e9fecce181c2c1f5a1d3f550b9a6d9ef0efed5cc480b22f833d7410614f6"
+    },
+    {
+      "path": "family-ui-prep/family-v1-staticcheck.json",
+      "bytes": 1387,
+      "sha256": "26a983327f268f9ca0cd35dcbfaac865769e1ecb1c38f0c11f3093b72816b02b"
+    },
+    {
+      "path": "family-ui-prep/original-inline-module-staticcheck.mjs",
+      "bytes": 4105,
+      "sha256": "31870cb63b9ac360549e68d7c11a54b6e61a4cd5bf8628261ddf7b115cb919e2"
+    },
+    {
+      "path": "family-ui-prep/run-phase-v2-original.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    {
+      "path": "family-ui-prep/static-receipt.json",
+      "bytes": 3565,
+      "sha256": "0fa11dceb7a7389dcf839bb1dd809a8524209d1ee4d2d9525ae38191ccc99a6a"
+    },
+    {
+      "path": "family-ui-prep/family-fee-ui-root07.mjs",
+      "bytes": 18226,
+      "sha256": "5ed1329018313a420a71ddbdbdd68ba02860f089d0345c3ecdf39c562b8c0478"
+    },
+    {
+      "path": "family-ui-prep/preparation-manifest.json",
+      "bytes": 134573,
+      "sha256": "063af22b7e9f9c04e8ebed592a60d4bf39244cddde306e58f8cf63f490678279"
+    },
+    {
+      "path": "family-ui-prep/evidence-v2-manifest.json",
+      "bytes": 991,
+      "sha256": "450b295c4de471bfe30b48c860a440dec82fc627fec7aeb768a8f45b671b002e"
+    },
+    {
+      "path": "family-ui-prep/external-adaptation.diff",
+      "bytes": 8917,
+      "sha256": "beeefca3de68c6aa2096d4a054476d35518b3d158f7cf5d063dfa54d4b781d47"
+    },
+    {
+      "path": "family-ui-prep/read-only-evidence-v2.diff",
+      "bytes": 7030,
+      "sha256": "56ddf3e91a130f742416b2604256704e7d00f569932c3e09d987a65851bc97b5"
+    },
+    {
+      "path": "family-ui-prep/family-fee-ui-root07-v2.mjs",
+      "bytes": 23308,
+      "sha256": "2881919d55d86df58508257e9b0c265964d6fb24afd5532c347bd4ae14f41768"
+    },
+    {
+      "path": "family-ui-prep/PREPARATION_INDEX.json",
+      "bytes": 65872,
+      "sha256": "5958e97eb63b7c232314707deee924e943f23e8049da22117dc8cebb524f4dfd"
+    },
+    {
+      "path": "family-ui-prep/README.md",
+      "bytes": 6573,
+      "sha256": "0cb060c1474ae079f2ff5e00694300a5921b11cd25c2fe4b7216a61b722afa7c"
+    },
+    {
+      "path": "capture-context-v3/capture-context-tool-only.patch",
+      "bytes": 8154,
+      "sha256": "502a9e4791025a0f118476df23b2e55c0128a1004bc1eb61ed5fd074bab62349"
+    },
+    {
+      "path": "capture-context-v3/run-phase-v2-original.py",
+      "bytes": 3698,
+      "sha256": "172ad82f311913b039cdfc32263df7946d9f3c20782df22f1064194a0d24f965"
+    },
+    {
+      "path": "capture-context-v3/static-receipt.json",
+      "bytes": 1050,
+      "sha256": "d0ed76fbffaea9b184fcb96d7d4c4622dc33f6c1885eca4e3aa7dce628047222"
+    },
+    {
+      "path": "capture-context-v3/capture-root07-context-v3.mjs",
+      "bytes": 18869,
+      "sha256": "d218c86150b5c196c0e26d08364ff49c397f61c414bcbb36fd090a3f02e32728"
+    },
+    {
+      "path": "capture-context-v3/run-root07-context-v3.py",
+      "bytes": 9461,
+      "sha256": "2926f764792a17305df7dcb15739030cf2d5f56a3714e32328b021113035992d"
+    }
+  ],
+  "completeGoal": false
+}

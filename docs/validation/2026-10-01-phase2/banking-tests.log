@@ -1,0 +1,19 @@
+✔ a new bank has no grant and every deposit, withdrawal, loan and repayment transfers actual cash (53.699536ms)
+✔ finite decimal balances never become negative through tolerance on unaffordable requests (44.332981ms)
+✔ deposit earnings require collected loan interest; accrued receivables and display-time changes create no cash (11.894877ms)
+✔ retained collected interest can be loaned while deposit yields remain capped by available cash (49.776262ms)
+✔ legacy deposits and held investment cash migrate once and redemption has no invented return (65.158785ms)
+✔ a live account cannot be settled as an estate and dead loan debt is paid before deposit inheritance (37.50685ms)
+✔ unclaimed deposits remain owned rights; an insolvent estate records the real loss without charging heirs (5.152563ms)
+✔ capped heirs keep equal pending entitlements instead of losing rights or receiving duplicate distributions (11.982789ms)
+✔ bank investment cannot pay a yield without an actual listed issuer and available shares (13.524942ms)
+✔ bank brokerage acquires actual issued shares and pays the issuer without creating investment principal (314.419504ms)
+✔ bank corruptions reject atomically and a funded ledger resumes with identical fixed ticks (487.423383ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1776.035457

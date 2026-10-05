@@ -1,0 +1,25 @@
+{
+  "status": "APPROVED_ONE_60_CREDIT_PILOT_SHELL_TRIAL_ONLY",
+  "reportedAtUTC": "2026-10-02T06:31:00Z",
+  "source": "Parent /root latest authorization message; user delegated the decision and the single 60-credit pilot dwelling-shell segmentation request was confirmed.",
+  "approvedScope": {
+    "trialCount": 1,
+    "generationCredits": 60,
+    "subject": "Representative pilot dwelling shell single-object segmentation experiment",
+    "executionEnvironment": "Parent/Mac workflow",
+    "referenceSequence": "Parent plans a unified style image first"
+  },
+  "extraPaidGenerationAuthorized": false,
+  "independentComponentSetCapabilityVerified": false,
+  "independentGLBExportAndReassemblyVerified": false,
+  "exportExtraCost": "UNKNOWN",
+  "actualChargeOrGeneratedModelEvidenceIncludedHere": false,
+  "thisBOMProducerGenerationCalls": 0,
+  "thisBOMProducerCreditsSpent": 0,
+  "originalZip": {
+    "path": "/tmp/yunshan-home-pilot-bom-01/market-b24-home-bom-revision02.zip",
+    "sha256": "0224df52f975c19abb7f1db314233296c4faec438079d383ae18c4fc15c96b9b",
+    "libraryFileId": "libfile_cc48d9982cfc81919e129988a7a0a4e7",
+    "note": "Revision02 was produced before this latest authorization was synchronized, so its historical PENDING wording remains. Its bytes and upload are preserved; this addendum updates authorization without regenerating or reuploading the ZIP."
+  }
+}

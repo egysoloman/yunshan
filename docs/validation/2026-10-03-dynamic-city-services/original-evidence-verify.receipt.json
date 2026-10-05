@@ -1,0 +1,39 @@
+{
+  "allMembers": 7132,
+  "crcAllMembers": "PASS",
+  "deliveryScope": "Local archive verification only; no Library upload or application acceptance.",
+  "directSourceShaAllFiles": "PASS",
+  "exceedsGit100MiB": true,
+  "generatedMembers": 5,
+  "git100MiBThresholdBytes": 104857600,
+  "largeArchivePolicy": "Keep the complete ZIP for Library. Root decides any lossless Git parts separately; no historical payload is removed or shortened.",
+  "libraryUploadAttempted": false,
+  "manifestPath": "/tmp/yunshan-dynamic-city-delivery-output-20261003-01/yunshan-dynamic-city-services-original-evidence-20261003.zip.manifest.json",
+  "manifestSha256": "d84c15f819c0eff0c56f9a4dc835b310b199f764e63b5977b376c3c94bd8a6c7",
+  "memberShaAllMembers": "PASS",
+  "originalMembers": 7127,
+  "privateContentOrHitsDisclosed": false,
+  "runtimeExecutedByBundler": false,
+  "schemaVersion": 1,
+  "securityPatternCounts": {
+    "authorization_value": 0,
+    "aws_access_key": 0,
+    "credential_assignment": 0,
+    "credential_url": 0,
+    "private_key": 0,
+    "provider_token": 0,
+    "signed_or_token_url": 0
+  },
+  "skippedCounts": {
+    "symlink": 33
+  },
+  "status": "VERIFIED_BYTE_IDENTITY_CRC_AND_SOURCE_MEMBERSHIP",
+  "symlinksArchived": 0,
+  "uncompressedBytes": 963070961,
+  "unexpectedFiles": 0,
+  "verificationCommand": "independent verify",
+  "verifiedAtUTC": "2026-10-03T10:45:30.058517+00:00",
+  "zipBytes": 367653712,
+  "zipPath": "/tmp/yunshan-dynamic-city-delivery-output-20261003-01/yunshan-dynamic-city-services-original-evidence-20261003.zip",
+  "zipSha256": "86462ab6a015309b5d0d897c50a5be979e6001416cee9f868b74e31fcb705255"
+}

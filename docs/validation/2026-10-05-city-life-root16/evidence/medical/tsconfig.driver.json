@@ -1,0 +1,5 @@
+{
+  "extends": "./source/tsconfig.json",
+  "compilerOptions": { "noEmit": true, "types": ["node"], "allowImportingTsExtensions": true },
+  "include": ["./finite-food-medical-candidate.mts", "./source/src/**/*.ts"]
+}

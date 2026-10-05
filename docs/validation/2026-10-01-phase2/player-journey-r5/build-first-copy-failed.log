@@ -1,0 +1,15 @@
+
+> yunshan-city@0.1.0 build
+> tsc --noEmit && vite build
+
+src/simulation.ts(239,43): error TS2339: Property 'alive' does not exist on type '"" | LifeProfile'.
+  Property 'alive' does not exist on type '""'.
+src/simulation.ts(239,60): error TS2339: Property 'age' does not exist on type '"" | LifeProfile'.
+  Property 'age' does not exist on type '""'.
+src/simulation.ts(239,80): error TS2339: Property 'health' does not exist on type '"" | LifeProfile'.
+  Property 'health' does not exist on type '""'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

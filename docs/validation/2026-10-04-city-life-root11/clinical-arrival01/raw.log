@@ -1,0 +1,12 @@
+{"label":"M2_DOCTOR_LATE","status":"ACTUAL_ONLY_IF_THIS_DRIVER_EXECUTED","record":{"doctor":"citizen-4","patient":"citizen-1","source":"original core route + original wage-earned attestation","meters":12.6,"speed":4.2,"routeUpperBoundMinutes":1,"phase":{"start":484,"end":488},"earned":{"start":487,"end":488,"minutes":1.0000000000000002},"actualTreatmentDeltaMinutes":1,"before":{"clock":484,"worked":0,"health":83.00366401344,"money":570,"reserved":1,"consumed":0},"after":{"clock":488,"worked":1,"patientHealth":83.00732804030376,"money":570,"reserved":1,"consumed":0}}}
+{"label":"M2_NPC_PATIENT_LATE","status":"ACTUAL_ONLY_IF_THIS_DRIVER_EXECUTED","record":{"doctor":"citizen-4","patient":"citizen-1","meters":12.6,"speed":4.2,"patientWindowSource":"derivedUpperBound: original real route distance / unchanged core speed","derivedPatientWindow":{"start":487,"end":488},"earned":{"start":484,"end":488,"minutes":4},"actualTreatmentDeltaMinutes":1,"before":{"clock":484,"worked":0,"health":83.00366401344,"money":570,"reserved":1,"consumed":0},"after":{"clock":488,"worked":1,"patientHealth":83.00732804030376,"money":570,"reserved":1,"consumed":0}}}
+✔ M2 doctor genuine arrival: treatment cannot exceed actual current earned onsite window (273.408032ms)
+✔ M2 NPC patient genuine arrival: treatment cannot reuse the walking portion of the patient budget (91.089086ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 776.627241
