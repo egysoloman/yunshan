@@ -56,3 +56,5 @@ source362 manifest存key顺序compact图1ebd4ee6576b8ee29095598262daae518a31e5ee
 本报告是已完成运行的冻结快照。Library保存和工作分支提交／推送结果另记真实交付回执与[最新开发备忘录](../../../开发备忘录.md)，不预告成功。只按用户本轮授权推takeover-city-life，未新建PR、推main或发起远端merge／部署。
 
 Library实际交付结果：本轮16项保存连接失败，0新的LibraryID，原Library备忘录version7未替换。不得把本目录原文件说成Library附件已送达。报告、七个完整公开原件包及四张原图将按用户授权推工作分支；实际提交／远端readback另存DELIVERY-RECEIPT.json。
+
+实现及本目录原件已实际提交并推送：[90c5487](https://github.com/egysoloman/yunshan/commit/90c5487c0cd4e3536681b2534cf517c36f91edfe)。远端takeover-city-life读取为同SHA，main仍70447c1。工作树在交付回执追加前为空。[实际交付回执](DELIVERY-RECEIPT.json)保留当前实测与可直接接续末档；后续doc-only回执提交不改变source362或原件。Library失败，没有本轮附件ID。
