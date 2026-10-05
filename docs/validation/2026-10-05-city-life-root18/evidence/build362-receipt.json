@@ -1,0 +1,30 @@
+{
+  "startedAt": "2026-10-05T06:09:26.332001+00:00",
+  "endedAt": "2026-10-05T06:09:45.089386+00:00",
+  "argv": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 362,
+  "inputsStable": true,
+  "rawSHA256": "21169f8a5a96e7bfd1023d36dcd94e61aa02b976436ec0b181b17ba2dad9eb95",
+  "ownedPid": 166545,
+  "observedDescendants": 5,
+  "finalOwnedMembers": [
+    {
+      "pid": 166599,
+      "state": "Z",
+      "parent": 1,
+      "group": 166545,
+      "session": 166545,
+      "startTicks": 11140451
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

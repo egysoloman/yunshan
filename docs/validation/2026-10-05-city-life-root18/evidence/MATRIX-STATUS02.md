@@ -1,0 +1,19 @@
+# ROOT18 38项矩阵最终实际快照02
+
+matrix01.csv／preservation01.json／STATUS01.md及原continuation、base audit全部封存未改。matrix02.csv只更新三列ROOT18追加记录；38ID顺序、11旧表头含BOM、418旧数据单元格逐字保持。preservation02.json记录前快照不变SHA、最终证据SHA及完整保留校验。最新状态以matrix02三列ROOT18为准，旧列保持历史原文。
+
+源码精确集成19代码路径，SOURCE362图按stored object key order的紧凑JSON计算为1ebd4ee6576b8ee29095598262daae518a31e5eec7672cdee913499434f16090；lexsorted算法为ccf9e2ce1899d4a0883cef1fd6f3f944795c4889492ee2ebed4977d1cf5221e1，二者不混标。原229测试／助手／夹具SHA不变。targeted16模块104/104、strict tsc和生产build18.757385秒PASS，入口/assets/index-WUxLc_H8.js；不是全suite或38完整领域验收。
+
+最终真实存档恢复PASS：06:22:04.148511→06:26:25.172147 UTC，261.023636秒/cap360，source355与362输入、原World291与d5c9213原档首尾稳定，ownedActive=[]。3个真实Simulation、3次完整原生import，control355full、candidate362full和candidate362physical各24次普通step(.25)，共72calls。所有24帧的三份完整save字节逐次EXACT。原生partitionSave使用完整World产生124parts（global1/player1/spatial121/civic-history1），每块独立写入与读回真实磁盘字节，assemble逐字回原d5c921329a863d40d5293720cd2dcd762f3eec9cd7f3cb6401ad35094ae41554。终tick1408／clock3296／day2 06:56完整save三份逐字相同，SHA d3bc6859ba0849ccbc554782c5f4f6fe932acf706466771a60c098036130dfeb，3260591B。这验证完整存档和物理分件恢复，不等统计聚合、流式cold chunks、不同World施工或长期性能。
+
+最终SOURCE362生产GPU技术PASS：06:13:00.709584→06:16:53.396233 UTC，232.686649秒/cap420、输入362稳定、active[]，绑定entry/assets/index-WUxLc_H8.js SHA4df0c6f281e3bf44b09dd2b12bfec35f4e46f92960111305c48e827ac36264b1。实际fresh boot envelope/runtime delivery双声明；真正旧b0d档原生import完整字节相同并恢复legacy。原生pause／生产rAF、出生场景与明确bank二层desk body视觉夹具／实际mouse，共2张原PNG：754483B、514068B；截图完整save前后相同、GL0error。出生27个程序、办公46个，全部linked且runnable不为false。
+
+最终GPU不是早先351baseline4＋353candidate4匹配窗口的复跑。早先8图四case全save/body/camera跨版EXACT、27program每case及两住宅实际E／service-point租住各80仍保独立范围。只有最终出生case的save e818ea6b…和body/camera支持351／353／362三源对照；最终办公因没有此前两次住宅租住，不做跨源完整save匹配。局部两轴窗帘／桌PASS；出生橋下构图和完整参考美术仍FAIL，Mac硬件NOT_RUN。视觉body夹具不证明出生连续步行或自然一天。
+
+配送仍区分actual01与actual02：source355 actual01 legacy16＋pickup64共80兼容步逐SHA和两终档逐字PASS，但整个窗口在0新delivery call前因driver预期runtime字段顺序FAIL，保首失败。corrected actual02另1Simulation／256普通step、原speed8，240.445448秒/cap600 PASS；截止day2 06:08真实load112／到货56／4笔各14单位FIFO付款gross224／net206.08／tax17.92，cash最大残差1.1641532182693481e-9／food0，另56具名货仍在开放道路车中。原64窗140货全卸0market农场区／supplier钱0的缺陷原件未替换重算。不得合称一个worker的336步。
+
+final未来24到06:56的只读快照为616alive、车辆ALL-goods cargo84、district ALL-goods freight1338、player钱600、最少NPC钱111.65878760162889。这些是后来时点的全部货物与资金快照，不是新增food供应商收据；06:08窗的56在途不得沿用成06:56数量。新fresh factory/main显式启用delivery、旧save恢复原规则；两compact fixture旧账本／旧未来与whole+parts／future24测试PASS，但它们与完整d5c9213真实124parts验收各自独立。
+
+38完整范围全部仍PARTIAL或NOT_RUN，无完成领域结论。真实白天产粮／新日班批准／有限公私工资滚动、公共day-shift与14日财政食品稳态未证明；06:08窗口production0、wagePaid0，2饥饿居民可负担报价不证明真实吃饭路线。教育多年自然学业、能源发电燃料／设备产权／有限施工、医疗药械专科／自然供料、科技七领域产业采用、政治任期／合法预算及司法外交、文化信息和自然日常均仍开放。自然环卫垃圾污水与许可终端、虚构病原合法种源传播诊断隔离、完整家庭自然世代／营养心理成瘾仍欠。拆迁房土权、居民意愿／合法审批、补偿安置、有限钱料实际劳动、火震洪灾救援重建未完成。远区统计↔个体钱物、跨区任务、流式DB／cold chunks／崩溃恢复和Mac真实性能仍欠。沙发／显示器／茶几仍没有入城权威购买、放置和use闭环。
+
+commit／push／Library尚无本阶段完成回执或新LibraryID，等待root实际交付收据。该矩阵工作0新Simulation／step／tests／build／GPU、0共享或memo编辑、0Library调用，只读取已有实际结果并写私有新文件；不需要重复重测试或build。原失败、原图／log／driver及原始矩阵保留。

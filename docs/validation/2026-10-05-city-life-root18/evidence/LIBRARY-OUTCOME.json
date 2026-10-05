@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-05T06:40:00.568667+00:00",
+  "status": "FAILED_BEFORE_ANY_PREPARE_OR_MUTATION",
+  "userMeaning": "Library连接失败，16项原文件未保存，无新的LibraryID；原备忘录version7未替换。原件留存并随授权工作分支交付。",
+  "requestedFiles": 16,
+  "newLibraryIDs": [],
+  "memoExpectedCurrentVersion": 7,
+  "memoReplacementSucceeded": false,
+  "originalBytesStableThroughAttempt": true,
+  "helperInvocations": 1,
+  "directFallbackOrRetry": false,
+  "rawReceiptSHA256": "d3fbb5239b0466594c3bf1cb8c2a89cd319a6ed2fa403787e9d3c33f704c9173",
+  "rawStderrSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "stdoutBytes": 0,
+  "stderrBytes": 70,
+  "wallSeconds": 0.21573691499361303
+}

@@ -1,0 +1,47 @@
+{
+  "startedAt": "2026-10-05T06:13:00.709584+00:00",
+  "endedAt": "2026-10-05T06:16:53.396233+00:00",
+  "argv": [
+    "node",
+    "/tmp/ROOT18-final-gpu-20261005-01/capture-integrated.mjs",
+    "integrated",
+    "/tmp/ROOT18-final-gpu-20261005-01/actual01/artifacts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 362,
+  "inputsStable": true,
+  "rawSHA256": "9c81943165b88f6ecb3e6eccef68359c427251baf7ef37ea440f63c04ce33efc",
+  "ownedPid": 167432,
+  "observedDescendants": 12,
+  "finalOwnedMembers": [
+    {
+      "pid": 167451,
+      "state": "Z",
+      "parent": 1,
+      "group": 167432,
+      "session": 167432,
+      "startTicks": 11160564
+    },
+    {
+      "pid": 167483,
+      "state": "Z",
+      "parent": 1,
+      "group": 167463,
+      "session": 167463,
+      "startTicks": 11160768
+    },
+    {
+      "pid": 167482,
+      "state": "Z",
+      "parent": 1,
+      "group": 167463,
+      "session": 167463,
+      "startTicks": 11160768
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

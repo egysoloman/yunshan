@@ -1,0 +1,86 @@
+{
+  "status": "PASS_GENUINE_TERMINAL_PHYSICAL_PARTITION_AND_THREE_NATIVE_FUTURE24_COMPLETE_BYTES",
+  "at": "2026-10-05T06:26:24.642Z",
+  "counters": {
+    "constructorBegun": 3,
+    "constructorCompleted": 3,
+    "importBegun": 3,
+    "importCompleted": 3,
+    "ordinaryCallsBegun": 72,
+    "ordinaryCallsCompleted": 72,
+    "instances": {
+      "control355full": {
+        "callsBegun": 24,
+        "callsCompleted": 24
+      },
+      "candidate362full": {
+        "callsBegun": 24,
+        "callsCompleted": 24
+      },
+      "candidate362physical": {
+        "callsBegun": 24,
+        "callsCompleted": 24
+      }
+    }
+  },
+  "completedFrames": 24,
+  "partitionEvidence": {
+    "operation": "actual partitionSave(originalTerminal, entireOriginalWorld)",
+    "totalParts": 124,
+    "countsByKind": {
+      "global": 1,
+      "player": 1,
+      "spatial": 121,
+      "civic-history": 1,
+      "other-chunk": 0
+    },
+    "everyNativePartIndividuallyWrittenAndRead": true,
+    "manifestSHA256": "17b8ed1359c1c4e6a0e76b9be4bb3ddfe36d15a8f07e5607feced5150a03821d",
+    "assembledSaveSHA256": "d5c921329a863d40d5293720cd2dcd762f3eec9cd7f3cb6401ad35094ae41554",
+    "assembledBytes": 3340272,
+    "exactOriginalBytes": true,
+    "worldArgument": "entire original WorldDefinition; no projection or geometry edits"
+  },
+  "terminal": {
+    "filename": "FINAL.save.json",
+    "bytes": 3260591,
+    "SHA256": "d3bc6859ba0849ccbc554782c5f4f6fe932acf706466771a60c098036130dfeb",
+    "allThreeNativeCompleteSaveBytesIdentical": true,
+    "tick": 1408,
+    "clock": 3296,
+    "threeNativeSaveSHA256": {
+      "control355full": "d3bc6859ba0849ccbc554782c5f4f6fe932acf706466771a60c098036130dfeb",
+      "candidate362full": "d3bc6859ba0849ccbc554782c5f4f6fe932acf706466771a60c098036130dfeb",
+      "candidate362physical": "d3bc6859ba0849ccbc554782c5f4f6fe932acf706466771a60c098036130dfeb"
+    }
+  },
+  "planSHA256": "aa722ea5c30d0f85d7158b254c9af89bb34dda7102bcbad861ecba239d7a4715",
+  "driverSHA256": "47a0b6e0365541822078815eeaf76812461c3e4e100420196abf64c6f01182d3",
+  "originalWorldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "originalTerminalSHA256": "d5c921329a863d40d5293720cd2dcd762f3eec9cd7f3cb6401ad35094ae41554",
+  "sourceGraphsBeforeAfterStable": true,
+  "originalSourceWorldAndTerminalBytesBeforeAfterStable": true,
+  "controlsRetained": {
+    "speed": 8,
+    "mode": "walk",
+    "detail": 1,
+    "focus": {
+      "x": -740,
+      "y": 18,
+      "z": 980
+    }
+  },
+  "sourceGraphs": {
+    "source355": {
+      "inputCount": 355,
+      "graphSHA256StoredManifestOrder": "6b4999fd5c0ec07348c61ea9fffcf91576bcb6ebfee38e340963074c05c7ec66",
+      "graphSHA256SortedKeys": "c1b299058e2afb403ae8534be741559d2c520019a82d05ac25e649f50e15c490"
+    },
+    "source362": {
+      "inputCount": 362,
+      "graphSHA256StoredManifestOrder": "1ebd4ee6576b8ee29095598262daae518a31e5eec7672cdee913499434f16090",
+      "graphSHA256SortedKeys": "ccf9e2ce1899d4a0883cef1fd6f3f944795c4889492ee2ebed4977d1cf5221e1"
+    }
+  },
+  "scope": "24 ordinary .25-second native calls per real instance at saved speed8; exact complete-byte compatibility and disk-backed physical-part restoration for this genuine terminal. No long-term economy, GPU, performance, or changed-world claim."
+}

@@ -1,0 +1,161 @@
+{
+  "startedAt": "2026-10-05T05:52:33.624230+00:00",
+  "endedAt": "2026-10-05T05:59:12.019845+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/world-generation-pure.test.ts",
+    "tests/world-generation-native.test.ts",
+    "tests/interior-props.test.ts",
+    "tests/freight-delivery-pure.test.ts",
+    "tests/freight-delivery-upgrade-pure.test.ts",
+    "tests/city-life-freight-product.test.ts",
+    "tests/city-life-product.test.ts",
+    "tests/city-ruleset.test.ts",
+    "tests/partition-field-order.test.ts",
+    "tests/freight-access.test.ts",
+    "tests/freight-pickup-policy-pure.test.ts",
+    "tests/freight-native-pickup.test.ts",
+    "tests/architecture-bodies.test.ts",
+    "tests/rendering.test.ts",
+    "tests/interior-lighting.test.ts",
+    "tests/route-encoding.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 362,
+  "inputsStable": true,
+  "rawSHA256": "c402068c3ff934964177ba25b7dec966045fb0544e9b2fbe0143184be33bde9d",
+  "ownedPid": 163931,
+  "observedDescendants": 32,
+  "finalOwnedMembers": [
+    {
+      "pid": 163945,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11037865
+    },
+    {
+      "pid": 163982,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11039211
+    },
+    {
+      "pid": 164004,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11039544
+    },
+    {
+      "pid": 164059,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11041587
+    },
+    {
+      "pid": 164407,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11059750
+    },
+    {
+      "pid": 164456,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11062101
+    },
+    {
+      "pid": 164495,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11062156
+    },
+    {
+      "pid": 164530,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11062740
+    },
+    {
+      "pid": 164553,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11063197
+    },
+    {
+      "pid": 164585,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11063702
+    },
+    {
+      "pid": 164615,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11064985
+    },
+    {
+      "pid": 164634,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11065016
+    },
+    {
+      "pid": 164700,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11067269
+    },
+    {
+      "pid": 164898,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11076994
+    },
+    {
+      "pid": 164919,
+      "state": "Z",
+      "parent": 1,
+      "group": 163931,
+      "session": 163931,
+      "startTicks": 11077604
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

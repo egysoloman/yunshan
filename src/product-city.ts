@@ -5,6 +5,7 @@ import { CONTINUOUS_REFERENCE_COLLISION_POLICY } from './simulation/reference-co
 import { ROAD_FOOD_PICKUP_POLICY } from './simulation/freight-access';
 import { NEARBY_MEAL_ROUTE_POLICY } from './simulation/meal-route';
 import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
+import { upgradeFreightDelivery } from './host/upgrade-freight-delivery';
 
 export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
 
@@ -37,6 +38,20 @@ export async function createCityLifeProductCity(world: WorldDefinition): Promise
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(before));
   const sha256 = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
   const result = await upgradeServiceMaterialScheduling(simulation, sha256);
+  if (!result.ok) throw new Error(result.message);
+  return simulation;
+}
+
+/** Fresh graphical/text recipe with real road delivery to food retailers.
+ * Existing recipes retain their exact contracts. Loading a saved session into
+ * this instance restores that save's declared rules, including legacy delivery.
+ * The two declarations are added by the same production SHA-guarded upgrade
+ * used for existing complete native sessions, before the first ordinary step. */
+export async function createDeliveredCityLifeProductCity(world: WorldDefinition): Promise<Simulation> {
+  const simulation = await createCityLifeProductCity(world), before = simulation.exportSave();
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(before));
+  const sha256 = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+  const result = await upgradeFreightDelivery(simulation, sha256);
   if (!result.ok) throw new Error(result.message);
   return simulation;
 }

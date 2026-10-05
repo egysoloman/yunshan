@@ -200,7 +200,7 @@ export function assembleSave(parts: SavePart[]): string {
   };
   if (hasCityRulesetDeclaration(document)) validateCityRulesetEnvelope(document);
   if (document.version === 4) decodeCivicHistory(document.state.civicHistory, document.state.civicStaffing.enablement.id, document.state.extension?.lastUpdate ?? document.state.day * 1440 + document.state.hour * 60, document.state.tick);
-  for (const policyKey of ['referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId']) if (Object.hasOwn(document, policyKey)) {
+  for (const policyKey of ['referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'freightDeliveryPolicyId']) if (Object.hasOwn(document, policyKey)) {
     for (const path of ['', 'runtime']) {
       if (!Array.isArray(layout.order[path]) || layout.order[path].filter(key => key === policyKey).length !== 1) throw new Error('行程规则不能在存档字段顺序中缺失或重复。');
     }

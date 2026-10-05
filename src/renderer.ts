@@ -20,7 +20,7 @@ import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_T
 
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
 type MaterialKey = keyof typeof PALETTE;
-interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
+interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; clothSurface?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
 type LocalBox = { (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string): void; profile?: (profile: RoofProfile) => void };
 
@@ -34,7 +34,7 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 class BoxBatch {
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
-  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
+  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; clothSurface?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
     if (sx <= 0 || sy <= 0 || sz <= 0) return;
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), rotation), new THREE.Vector3(sx, sy, sz));
     const list = this.parts.get(key) ?? [];
@@ -68,7 +68,9 @@ class BoxBatch {
       }
       const mesh = new THREE.InstancedMesh(geometry, this.materials[key], parts.length);
       if (key === 'wall' || key === 'wood') mesh.geometry.setAttribute('instanceFacade', new THREE.InstancedBufferAttribute(new Float32Array(parts.flatMap(part => [...part.facade ?? [0, 0, 0, 0]])), 4));
-      if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
+      // Reuse the existing finish scalar: 2 distinguishes hanging cloth from
+      // the original bedding finish, while transport retains its zero flag.
+      if (key === 'wall' || key === 'wood' || key === 'stone' || key === 'fabric' || key === 'metal') mesh.geometry.setAttribute('instanceBuildingFinish', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? key === 'fabric' && part.clothSurface ? 2 : 1 : 0)), 1));
       // The same material also paints transport and old furniture. Only the
       // authoritative roof tag enables tile relief. 2 denotes architecture,
       // 1 retains the existing station-canopy response, and 0 is transport.
@@ -456,8 +458,8 @@ export class CityRenderer implements CityRendererAPI {
     if (programParts) {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);
-        batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
-          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1 }, undefined, part.facade, part.template);
+        batch.box(part.material === 'cloth' ? 'fabric' : part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
+          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1, ...(part.material === 'cloth' ? { clothSurface: true } : {}) }, undefined, part.facade, part.template);
       }
       return;
     }

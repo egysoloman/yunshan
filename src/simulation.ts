@@ -6,6 +6,7 @@ import { effectiveCityRuleset, initialCivicOfficials, readonlyCityEnablement, va
 import { createCivicHistory, freezeCivicHistory } from './simulation/civic-history';
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
+import { foodRetailDeliveryOffers, RoadFoodDeliveryRouter, ROAD_FOOD_DELIVERY_POLICY, type FoodDeliveryAccounts, type FreightDeliveryPolicy } from './simulation/freight-delivery';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
@@ -110,6 +111,7 @@ interface Runtime {
   referenceCollisionPolicyId?: ReferenceCollisionPolicy;
   mealRoutePolicyId?: MealRoutePolicy;
   freightPickupPolicyId?: FreightPickupPolicy;
+  freightDeliveryPolicyId?: FreightDeliveryPolicy;
   serviceMaterialSchedulingVersion?: 1;
   npcStairCursors?: Record<string, NpcStairCursor>;
   attendance: Record<string, number>;
@@ -134,6 +136,8 @@ export class Simulation implements SimulationAPI {
   private readonly buildings: Map<string, Building>;
   private readonly edges: Map<string, NetworkEdge>;
   private readonly freightCarriers = new Map<string, { kind: Vehicle['kind']; cargoCapacity: number }>();
+  private readonly freightDeliveryRouter: RoadFoodDeliveryRouter;
+  private freightDeliveryAccounts?: Pick<FoodDeliveryAccounts, 'retail' | 'suppliers'>;
   private readonly fingerprint: string;
   private readonly neighbors = new Map<string, { node: string; edge: NetworkEdge }[]>();
   private readonly routeCache = new Map<string, Vec3[]>();
@@ -162,14 +166,16 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'freightDeliveryPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.freightDeliveryPolicyId !== undefined && (options.freightDeliveryPolicyId !== ROAD_FOOD_DELIVERY_POLICY || options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
     this.edges = new Map(world.edges.map(e => [e.id, e]));
+    this.freightDeliveryRouter = new RoadFoodDeliveryRouter(world);
     this.npcStairMotion = new NpcStairMotion(world);
     for (const node of world.nodes) this.nodeAt.set(this.pointKey(node.position), node.id);
     for (const building of world.buildings) this.doorNodes.set(building.id, this.nearestNode(building.door));
@@ -185,6 +191,7 @@ export class Simulation implements SimulationAPI {
     if (options?.referenceCollisionPolicyId) this.runtime.referenceCollisionPolicyId = options.referenceCollisionPolicyId;
     if (options?.mealRoutePolicyId) this.runtime.mealRoutePolicyId = options.mealRoutePolicyId;
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
+    if (options?.freightDeliveryPolicyId) this.runtime.freightDeliveryPolicyId = options.freightDeliveryPolicyId;
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
@@ -937,7 +944,33 @@ export class Simulation implements SimulationAPI {
     return copy(points[0]);
   }
   private updateSignals() { this.state.signals = Object.fromEntries(this.world.nodes.filter(n => (this.neighbors.get(n.id) ?? []).some(e => e.edge.mode === 'road')).map(n => [n.id, (this.runtime.signalOverrides[n.id] ?? ((Math.floor((this.now + 1e-7) / 6) + hash(n.id) % 4) % 2)) as 0 | 1])); }
+  private usesRoadFoodDelivery(vehicle: Vehicle): boolean {
+    return this.runtime.freightDeliveryPolicyId === ROAD_FOOD_DELIVERY_POLICY && vehicle.kind === 'road' && vehicle.cargo > 0 && !!this.runtime.cargoSources?.[vehicle.id];
+  }
+  private roadFoodDelivery(vehicle: Vehicle, nodeId: string) {
+    if (!this.usesRoadFoodDelivery(vehicle)) return null;
+    const source = this.state.shops.find(shop => shop.id === this.runtime.cargoSources![vehicle.id]);
+    if (!source || this.shopCommodity(source) !== 'food' || !['farm', 'dock'].includes(this.buildings.get(source.buildingId)!.kind)) return null;
+    // quote.quantity concerns the producer's remaining stock; already-loaded
+    // cargo uses its current unitPrice even when that stock is now empty.
+    // Traffic changes custody and producer stock, never shop wallets, payroll
+    // claims or retail stock. Scan those protected accounts once per traffic
+    // phase; queue custody below remains live for every junction decision.
+    const accounts = this.freightDeliveryAccounts ??= {
+      retail: this.state.shops.filter(shop => this.buildings.get(shop.buildingId)!.kind === 'market').map(shop => ({ shopId: shop.id, funds: this.shopFunds(shop), protectedFunds: this.shopProtectedFunds(shop) })),
+      suppliers: this.state.shops.filter(shop => ['farm', 'dock', 'workshop'].includes(this.buildings.get(shop.buildingId)!.kind)).map(shop => ({ shopId: shop.id, funds: this.shopFunds(shop), unitPrice: this.quoteSupply(shop.id, 1).unitPrice })),
+    };
+    const account = accounts.suppliers.find(row => row.shopId === source.id)!;
+    const offers = foodRetailDeliveryOffers(this.world, this.state.shops, {
+      sourceShopId: source.id, sourceFunds: account.funds, unitPrice: account.unitPrice, taxRate: this.state.taxRate,
+      ...accounts,
+      freightTotals: this.runtime.freight,
+      freightLots: this.runtime.freightLots ?? {},
+    });
+    return this.freightDeliveryRouter.route(this.state, nodeId, offers, vehicle.cargo);
+  }
   private traffic() {
+    this.freightDeliveryAccounts = undefined;
     // Keep an imported legacy save byte-identical until real time advances.
     // Materialize its observation clock before a deferred actor can save again,
     // so post-load time survives another import without backfilling old rides.
@@ -958,7 +991,8 @@ export class Simulation implements SimulationAPI {
         releaseRoadExitPermit(this.world, this.state, roadActor, vehicle.position);
         const exits = (this.neighbors.get(nodeId) ?? []).filter(n => n.edge.mode === vehicle.kind && n.edge.id !== edge.id && isRoadOpen(this.state, n.edge.id));
         if (!exits.length) { vehicle.state = 'roadClosed'; if (this.isDriving(vehicle.id)) this.runtime.driving.speed = 0; continue; }
-        const outgoing = this.isDriving(vehicle.id) ? this.chooseTurn(edge, vehicle.progress === 0 ? -1 : 1, nodeId, exits) : exits[Math.floor(this.random() * exits.length)];
+        const directed = !this.isDriving(vehicle.id) && this.usesRoadFoodDelivery(vehicle) ? this.roadFoodDelivery(vehicle, nodeId)?.next : null;
+        const outgoing = directed ?? (this.isDriving(vehicle.id) ? this.chooseTurn(edge, vehicle.progress === 0 ? -1 : 1, nodeId, exits) : exits[Math.floor(this.random() * exits.length)]);
         vehicle.edgeId = outgoing.edge.id; vehicle.direction = outgoing.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1;
         vehicle.state = 'boarding'; vehicle.nextDeparture = Math.max(vehicle.nextDeparture, this.now + (this.isDriving(vehicle.id) ? 2 : 8));
         continue;
@@ -999,7 +1033,8 @@ export class Simulation implements SimulationAPI {
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
         }
-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
+        const directedCargo = this.usesRoadFoodDelivery(vehicle), delivery = directedCargo ? this.roadFoodDelivery(vehicle, nodeId) : null;
+        if (vehicle.cargo > 0 && (!directedCargo || delivery?.arrived)) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id], ...(directedCargo ? { vehicleId: vehicle.id, nodeId } : {}) }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
         const freightCarrier = this.freightCarriers.get(vehicle.id);
         const activePassengers = Object.values(this.runtime.riders).filter(rider => rider.vehicleId === vehicle.id && !rider.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // Empty road carriers retain their existing ten-seat passenger use.
@@ -1023,10 +1058,14 @@ export class Simulation implements SimulationAPI {
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // The departure graph excludes every closed leg, including a reverse.
         candidates = candidates.filter(n => isRoadOpen(this.state, n.edge.id));
-        if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
-        if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
-        else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
-        else { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
+        const directed = !manual && this.usesRoadFoodDelivery(vehicle) ? this.roadFoodDelivery(vehicle, nodeId)?.next : null;
+        if (directed) { vehicle.edgeId = directed.edge.id; vehicle.direction = directed.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
+        else {
+          if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
+          if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
+          else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
+          else { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
+        }
         vehicle.state = 'boarding';
         const maintenance = Object.entries(this.state.culture?.transportMaintenance ?? {}).some(([siteId, item]) => item.maintainedUntil > (this.state.extension?.lastUpdate ?? this.now) && item.units >= 4 && this.state.culture?.orders.some(order => order.id === item.orderId && order.state === 'fulfilled') && this.buildings.get(siteId)?.kind === 'station' && distance(this.buildings.get(siteId)!.door, node.position) <= 40);
         const dwell = manual ? 2 : vehicle.kind === 'flight' ? 75 : vehicle.kind === 'road' ? 8 : this.state.hour >= 22 || this.state.hour < 6 ? 48 : 16;
@@ -2421,10 +2460,11 @@ export class Simulation implements SimulationAPI {
   get referenceCollisionPolicyId(): ReferenceCollisionPolicy | 'legacy' { return this.runtime.referenceCollisionPolicyId ?? 'legacy'; }
   get mealRoutePolicyId(): MealRoutePolicy | 'legacy' { return this.runtime.mealRoutePolicyId ?? 'legacy'; }
   get freightPickupPolicyId(): FreightPickupPolicy | 'legacy' { return this.runtime.freightPickupPolicyId ?? 'legacy'; }
+  get freightDeliveryPolicyId(): FreightDeliveryPolicy | 'legacy' { return this.runtime.freightDeliveryPolicyId ?? 'legacy'; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.freightDeliveryPolicyId ? { freightDeliveryPolicyId: this.runtime.freightDeliveryPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
@@ -2645,6 +2685,10 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+      if (r.freightDeliveryPolicyId === ROAD_FOOD_DELIVERY_POLICY) for (const [id, sourceId] of Object.entries(r.cargoSources ?? {})) {
+        const vehicle = vehicles.find(vehicle => vehicle.id === id), carrier = this.freightCarriers.get(id), source = shops.find(shop => shop.id === sourceId), site = source && this.buildings.get(source.buildingId);
+        if (vehicle?.kind === 'road') ensure(carrier?.kind === 'road' && vehicle.cargo > 0 && vehicle.cargo <= carrier.cargoCapacity && source && site && ['farm', 'dock'].includes(site.kind) && !site.facility, 'declared named food carrier custody/capacity');
+      }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
       for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
@@ -2693,7 +2737,7 @@ export class Simulation implements SimulationAPI {
         }
       }
       if (validateOnly) return { ok: true, message: '完整存档已通过生产读取校验；原城市未改变。' };
-      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
+      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); this.freightDeliveryRouter.clear(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
     } catch (error) { return { ok: false, message: `读档失败：${error instanceof Error ? error.message : '存档格式错误'}` }; }
   }
 }

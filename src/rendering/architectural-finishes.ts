@@ -8,7 +8,7 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
     if (!materials[key]) continue;
     const material = materials[key], previousCompile = material.onBeforeCompile, previousKey = material.customProgramCacheKey.bind(material);
     const inheritedKey = previousKey();
-    material.customProgramCacheKey = () => `${inheritedKey}:street-life-finish-${key}-v3`;
+    material.customProgramCacheKey = () => `${inheritedKey}:street-life-finish-${key}-${key === 'fabric' ? 'v4' : 'v3'}`;
     material.onBeforeCompile = (shader, renderer) => {
       previousCompile.call(material, shader, renderer);
       shader.vertexShader = 'attribute float instanceBuildingFinish;varying vec3 vFinishMetric;varying vec3 vFinishSize;varying vec3 vFinishNormal;varying vec2 vFinishState;\n' + shader.vertexShader;
@@ -28,7 +28,23 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
           vec2 finishSize=abs(vFinishNormal.y)>.5?vFinishSize.xz:abs(vFinishNormal.z)>.5?vFinishSize.xy:vFinishSize.zy;
           vec2 finishPixel=max(fwidth(finishMetric),vec2(.001));
           float finishDetail=1.0-smoothstep(.035,.16,max(finishPixel.x,finishPixel.y));
-          ${key === 'wall' ? `
+          ${key === 'fabric' ? `if(vFinishState.x>1.5){
+            // Hanging cloth uses its existing pleats and a restrained weave.
+            // Quilt squares remain exclusive to the original bedding branch.
+            bool curtainAlongX=vFinishSize.x>=vFinishSize.z;
+            float curtainSpan=curtainAlongX?vFinishMetric.x:vFinishMetric.z;
+            float curtainWidth=curtainAlongX?vFinishSize.x:vFinishSize.z;
+            vec2 curtainMetric=vec2(curtainSpan,vFinishMetric.y);
+            vec2 curtainPixel=max(fwidth(curtainMetric),vec2(.001));
+            float curtainDetail=1.0-smoothstep(.035,.16,max(curtainPixel.x,curtainPixel.y));
+            vec2 curtainWeave=sin(curtainMetric*vec2(470.0,390.0));
+            float curtainWeaveDetail=1.0-smoothstep(.002,.009,max(curtainPixel.x,curtainPixel.y));
+            diffuseColor.rgb*=1.0+(curtainWeave.x+curtainWeave.y)*.028*curtainWeaveDetail;
+            float sideHem=1.0-smoothstep(.012,.028+curtainPixel.x,abs(min(curtainSpan,curtainWidth-curtainSpan)-.025));
+            float lowerHem=1.0-smoothstep(.012,.025+curtainPixel.y,abs(vFinishMetric.y-.045));
+            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.67,.56,.39),max(sideHem,lowerHem)*.20*curtainDetail);
+            finishRoughness=.96;
+          }else{` : ''}${key === 'wall' ? `
             // Lime plaster has sparse trowel marks and worn lower edges. These
             // stains are decoration, not evidence of sanitation or damage.
             float plaster=sin(finishMetric.x*17.0+sin(finishMetric.y*7.0))*sin(finishMetric.y*23.0);
@@ -97,7 +113,7 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
             vec2 hemEdge=min(finishMetric,finishSize-finishMetric);
             float hem=1.0-smoothstep(.018,.045+max(finishPixel.x,finishPixel.y),abs(min(hemEdge.x,hemEdge.y)-.055));
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.86,.79,.63),hem*.38*finishDetail);
-            finishRoughness=.96;`}
+            finishRoughness=.96;`}${key === 'fabric' ? '\n          }' : ''}
         }`);
       shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
         if(vFinishState.x>.5)roughnessFactor=clamp(finishRoughness,.35,1.0);`);

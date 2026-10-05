@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-05T06:22:04.148511+00:00",
+  "endedAt": "2026-10-05T06:26:25.172147+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/tmp/ROOT18-final-persistence-20261005-01/native-final-persistence.mjs"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 362,
+  "inputsStable": true,
+  "rawSHA256": "b9a042a1a099dc27495d192098c800912f28e352a74d221fe3f772ae7862ba57",
+  "ownedPid": 168946,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 168955,
+      "state": "Z",
+      "parent": 1,
+      "group": 168946,
+      "session": 168946,
+      "startTicks": 11214943
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

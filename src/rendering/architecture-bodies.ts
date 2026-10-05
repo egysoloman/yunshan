@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import type { Building, Vec3 } from '../types';
 import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type Rect, type RoofRegion, type WallPanel } from '../architecture-floor-plan';
+import { HOME_CURTAIN_WINDOW_BUDGET, officeDeskFixtureParts, windowCurtainParts, windowGlassBackingTemplate, type InteriorPropAssetId } from './interior-props';
 
 /** Normalized, centre-anchored geometry; one template per roof orientation.
  * Its final instance bounds, rather than a second proxy envelope, describe the
@@ -9,10 +10,12 @@ export interface ArchitectureTemplate {
   key: string; positions: number[]; normals: number[]; uvs: number[]; indices: number[];
 }
 export interface ProgramArchitecturePart {
-  material: 'wall' | 'stone' | 'wood' | 'roof' | 'glass' | 'amber' | 'cyan' | 'red' | 'metal' | 'fabric';
+  material: 'wall' | 'stone' | 'wood' | 'roof' | 'glass' | 'amber' | 'cyan' | 'red' | 'metal' | 'fabric' | 'cloth';
   position: Vec3; size: Vec3; color: string; floor: number; roof: boolean;
-  purpose: 'floor' | 'wall' | 'window' | 'body' | 'roof' | 'furniture' | 'stairs';
+  purpose: 'floor' | 'wall' | 'window' | 'body' | 'roof' | 'furniture' | 'stairs' | 'curtain';
   template?: ArchitectureTemplate; facade?: readonly [number, number, number, number];
+  /** Rendering provenance only; these tags grant no interaction or ownership. */
+  propAssetId?: InteriorPropAssetId; propHostId?: string;
 }
 const roofTemplates = new Map<string, ArchitectureTemplate>();
 let linenTemplate: ArchitectureTemplate | undefined;
@@ -95,7 +98,7 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   const body = getBuildingBody(building); if (!body) return null;
   const parts: ProgramArchitecturePart[] = [];
   const commercial = building.commercialGeometryRevision === 1;
-  const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0;
+  const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0, curtainWindows = 0;
   // A shared material hierarchy follows actual uses: warm lime plaster and
   // timber, neutral mineral plinths, dark jade tiles and cool modern alloy.
   // Seed variation stays within a use's family; it creates no new city identity.
@@ -128,11 +131,18 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
     for (const plan of body.floorPlans) {
       regions(plan.floor <= 0 || commercial ? 'stone' : 'wood', getFloorPlanSlabRegions(plan), plan.y - .2, plan.y,
         commercial ? '#a3a6a0' : plan.floor <= 0 ? '#aaa38b' : '#98704d', plan.floor, 'floor');
-      for (const panel of wallPanels(plan)) {
+      for (const [panelIndex, panel] of wallPanels(plan).entries()) {
         const r = panel.rect;
         const add = (material: ProgramArchitecturePart['material'], low: number, high: number, color: string, purpose: ProgramArchitecturePart['purpose']) => box(material,
           (r.x0 + r.x1) / 2, plan.y + (low + high) / 2, (r.z0 + r.z1) / 2, r.x1 - r.x0, high - low, r.z1 - r.z0, color, plan.floor, purpose);
-        if (panel.kind === 'glass') add('glass', panel.bottom, panel.top, commercial ? '#648c94' : '#648880', 'window');
+        if (panel.kind === 'glass') {
+          add('glass', panel.bottom, panel.top, commercial ? '#648c94' : '#648880', 'window');
+          if (building.kind === 'home' && plan.floor === 0 && curtainWindows < HOME_CURTAIN_WINDOW_BUDGET) {
+            const curtains = windowCurtainParts(panel, plan, `window-panel:${panelIndex}`);
+            const glassBacking = curtains.length ? windowGlassBackingTemplate(panel, plan) : null;
+            if (glassBacking) { parts[parts.length - 1].template = glassBacking; parts.push(...curtains); curtainWindows++; }
+          }
+        }
         else {
           const skirt = Math.min(.8, panel.top);
           if (panel.bottom < skirt) add('stone', panel.bottom, skirt, timberFinish && plan.floor >= 0 ? '#8f9287' : '#939487', 'wall');
@@ -153,6 +163,10 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
       // The table, bed and counter solids also belong to the shared plan.
       // Their display changes no inventory, wages or interaction state.
       for (const fixture of getFloorPlanFixtures(building, plan)) {
+        if (commercial && plan.floor >= 2 && fixture.kind === 'table') {
+          const desk = officeDeskFixtureParts(fixture, plan);
+          if (desk.length) { parts.push(...desk); continue; }
+        }
         const r = fixture.rect, width = r.x1 - r.x0, depth = r.z1 - r.z0, { bottom, top } = fixture, height = top - bottom;
         const firstPart = parts.length;
         // These are resident structural batches, separate from the facade
