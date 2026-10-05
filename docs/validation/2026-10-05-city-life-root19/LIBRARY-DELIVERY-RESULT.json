@@ -1,0 +1,140 @@
+{
+  "status": "BLOCKED_BEFORE_PREPARE_OR_ANY_LIBRARY_WRITE",
+  "timestampUTC": "2026-10-05T10:09:29.222983+00:00",
+  "timestampAsiaShanghai": "2026-10-05T18:09:29.222983+08:00",
+  "plannedOrderedFiles": 31,
+  "newLibraryIDs": [],
+  "existingMemoLibraryFileID": "libfile_7571a326de848191aec330d605a63845",
+  "existingMemoObservedVersion": 7,
+  "memoReplaced": false,
+  "publicReason": "Library connection failed before any file write; no new deliverable LibraryID returned",
+  "requestSHA256": "5186842207e0bbe1b161c2ef3cb0ae6a6335290c86a5ba8faff4db2f487908d1",
+  "orderedSources": [
+    {
+      "fileName": "ROOT19-ORIGINAL-FAILURES-AND-BASELINE.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-ORIGINAL-FAILURES-AND-BASELINE.zip.RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DAY-SHIFT-SERIES.csv",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DAY-SHIFT-OBSERVATIONS.png",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DAY-SHIFT-OBSERVATIONS.pdf",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DAY-SHIFT-PLOT-RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-NATURAL-CITY.save.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-CORRECTED-ROUTES-AND-PAYROLL.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-CORRECTED-ROUTES-AND-PAYROLL.zip.RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "CLOCK-PURE-RESULTS.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "OLD-TEST-PRESERVATION.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "SOURCE-INPUTS-372-final.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "CLASSROOM-REAL-COURSE.png",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "CITY-REAL-STREET.png",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "INSTALL-RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-SOURCE-COURSES-AND-RESTORATION.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-SOURCE-COURSES-AND-RESTORATION.zip.RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "CHECKS.csv",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DELIVERABLE-ORIGINAL-COPY-RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-PRODUCTION-UI-ORIGINALS.zip",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "ROOT19-PRODUCTION-UI-ORIGINALS.zip.RECEIPT.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "MATRIX-38.csv",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "MATRIX-PRESERVATION.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "MATRIX-DISPLAY-PROVENANCE.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "MATRIX-FROZEN-FINAL02.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "REPRODUCE.md",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DELIVERY-INDEX.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "PUSH-READBACK.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "README.md",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "DELIVERY-INDEX-02.json",
+      "purpose": "create_library_file"
+    },
+    {
+      "fileName": "开发备忘录.md",
+      "purpose": "replace_library_file"
+    }
+  ],
+  "noRetryOrDirectFallback": true,
+  "allOriginalsAvailableOnConfirmedGitHubBranch": true
+}

@@ -30,3 +30,7 @@
 [原失败与基线完整包](ROOT19-ORIGINAL-FAILURES-AND-BASELINE.zip)保存原错误driver/原128有限窗口/原下午导入失败、World291与原d3bc；[修复路线与工资完整包](ROOT19-CORRECTED-ROUTES-AND-PAYROLL.zip)保存source364、晨128、126分块恢复72、下午174、逐账公私工资和独立几何/财政核对；[完整源码、课程与恢复原件包](ROOT19-SOURCE-COURSES-AND-RESTORATION.zip)保存原362/课程372/最终显示372全部功能输入、最终生产dist、测试、全部原生课程与两次恢复、失败诊断和formatter验证；[生产界面全部原件包](ROOT19-PRODUCTION-UI-ORIGINALS.zip)保留初次FAIL和两次通过的driver/PLAN/原PNG/每图完整save/DOM/严格全diff。每ZIP有完整逐件字节/SHA清单，打包读回核对；没有依赖、git目录、密钥、Library私有请求或签名URL。
 
 接续时使用自然课程主终档27752…1e83（日索引2/11:12）；恢复验证窗原控制分支278c…27b4是12:00，不能与旧政策off工资终档f108…6859或原INVALID4cb混算。下一步从真实公共教材报价和授权预算修复既有40文只购4.069/6本的受控用例，保留该SKIP和完整正例；继续citizen379实际通勤休息、有限食物及多日现金回补，不能凭空加钱、粮或削弱断言。现World未声明真实物理grid；医疗、科技、治理、环境卫生/病毒、自然出生继承世代、产业变更/道路拆建灾害、真统计区/流式存档、参考美术和Mac仍按矩阵继续，不能因基础入口或短窗通过判全部完成。
+
+功能及原件已提交并推送到takeover-city-life：`6479fe0435d5d7a6edd58f54877fbe09d8c3b7da`，远端读回相同，main保持原SHA。Library保存状态以随后实际交付回执为准。
+
+Library本批实际连接失败，发生在任何文件写入前：无新LibraryID，原备忘录version7未替换。完整原件已经推送到本分支；[Library交付阻碍回执](LIBRARY-DELIVERY-RESULT.json)及[最终文件索引](DELIVERY-INDEX-03.json)记录真实状态。不能把GitHub链接称Library附件。
