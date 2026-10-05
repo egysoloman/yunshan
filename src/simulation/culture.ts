@@ -3,7 +3,7 @@ import type { Simulation } from '../simulation';
 import { closeServiceSupplementalBudgets, proposeSupplementalBudget, reviewSupplementalBudgets, reviewSupplementalByMayor, serviceTotalSpent, supplementalFor, supplementalPurpose, validateSupplementalBudgetState, type SupplementalBudgetState } from './supplemental-budget';
 import { canAccessFloor } from '../access';
 import { FLOOR_PLAN_PROFILE, getBuildingBody, getBuildingUsePoints, floorPlanSupport, blocksFloorPlanMovement } from '../architecture-floor-plan';
-import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
+import { claimClinicalCareMinutes, clinicalDoctorMinutes, clinicalHealthGain, clinicalOpenMinutes, clinicalServiceStationsAtPosition, clinicalVisitDeadline, installClinical } from './clinical';
 import { applyPublicEducationCredential, educationOpenMinutes, educationPairAtStation, educationSlotAvailable, educationStaffMinutes, installEducation, publicEducationMinutes, takeEducationSlot } from './education';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
 import { civicStaffingActorReservedThisTick } from './civic-staffing';
@@ -157,7 +157,8 @@ export function installCulture(simulation: Simulation): void {
   };
   const serve = (order: ServiceOrder, minutes: number) => {
     const site = sites.get(order.siteId)!, staff = staffAt(order, minutes), rule = SERVICE[order.topic];
-    if ((order.topic === 'education' ? educationOpenMinutes(state(), minutes) <= 0 : state().hour < 8 || state().hour >= 17) || !staff.length) { order.lastReason = '已采购材料保留；等候服务开放和合资格人员真实出勤。'; return; }
+    const openMinutes = order.topic === 'education' ? educationOpenMinutes(state(), minutes) : order.topic === 'health' ? clinicalOpenMinutes(state(), minutes) : state().hour >= 8 && state().hour < 17 ? minutes : 0;
+    if (openMinutes <= 0 || !staff.length) { order.lastReason = '已采购材料保留；等候服务开放和合资格人员真实出勤。'; return; }
     for (const person of staff) if (!order.staffIds.includes(person.id)) order.staffIds.push(person.id);
     if (order.topic === 'transport') {
       if (order.receivedUnits - order.consumedUnits < rule.units - 1e-7) return;

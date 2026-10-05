@@ -97,6 +97,7 @@ let blocksVersion = '';
 const matrix = new THREE.Matrix4();
 
 const actions: UIActions = {
+  inspectBuildingAlteration: buildingId => simulation.inspectBuildingAlteration({ buildingId }),
   publicEmploymentStatus: () => simulation.publicServiceCoverage().transferReview ?? null,
   isAtBuildingFunctionPoint(buildingId, purpose) {
     const building = world.buildings.find(site => site.id === buildingId);

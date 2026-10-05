@@ -70,3 +70,17 @@ export function freightPickupAccess(world: WorldDefinition, state: FreightState,
   return Object.freeze({ vehicleId: vehicle.id, edgeId: edge.id, nodeId, siteId: site.id, producerShopId: producer.id,
     districtId: site.districtId, vehiclePosition: Object.freeze({ ...vehicle.position }) });
 }
+
+export const ROAD_FOOD_PICKUP_POLICY = 'road-food-pickup-v1' as const;
+export type FreightPickupPolicy = typeof ROAD_FOOD_PICKUP_POLICY;
+
+/** A new carrier contact contract is explicit in both save layers. Older
+ * undeclared bodies keep their original human-presence loading predicate. */
+export function validateFreightPickupPolicy(data: Record<string, any>): void {
+  const envelope = Object.hasOwn(data, 'freightPickupPolicyId');
+  const runtime = !!data.runtime && Object.hasOwn(data.runtime, 'freightPickupPolicyId');
+  if (!envelope && !runtime) return;
+  if (!envelope || !runtime || data.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY
+    || data.runtime.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY
+    || data.version !== 4 || data.motionVersion !== 2 || data.runtime.npcMotionVersion !== 2) throw new Error('无效存档字段：freight pickup policy pair。');
+}

@@ -267,7 +267,7 @@ export function installExtensions(simulation: Simulation): (minutes: number) => 
       }
     }
   });
-  simulation.onPhase('energy', s => { if (s.power) return; const bonus = tech('energy').level * 1.2 - (100 - ext().environment.waterQuality) * .05 - ext().environment.stormRisk * .03; s.energy = clamp(s.energy + bonus); for (const d of s.districts) d.energy = clamp(d.energy + bonus); });
+  simulation.onPhase('energy', s => { if (s.power || s.powerGrid) return; const bonus = tech('energy').level * 1.2 - (100 - ext().environment.waterQuality) * .05 - ext().environment.stormRisk * .03; s.energy = clamp(s.energy + bonus); for (const d of s.districts) d.energy = clamp(d.energy + bonus); });
   simulation.onPhase('traffic', s => { for (const v of s.vehicles) { const base = ({ road: 18, maglev: 50, lightRail: 25, cable: 6, lift: 4, ferry: 8, bridge: 4, flight: 120 })[v.kind]; v.speed = base * (1 + tech('traffic').level * .035) * (1 - ext().environment.stormRisk * .002); } });
   simulation.onPhase('people', (s, minutes) => {
     const e = ext();

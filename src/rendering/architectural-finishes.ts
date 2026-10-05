@@ -8,7 +8,7 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
     if (!materials[key]) continue;
     const material = materials[key], previousCompile = material.onBeforeCompile, previousKey = material.customProgramCacheKey.bind(material);
     const inheritedKey = previousKey();
-    material.customProgramCacheKey = () => `${inheritedKey}:street-life-finish-${key}-v2`;
+    material.customProgramCacheKey = () => `${inheritedKey}:street-life-finish-${key}-v3`;
     material.onBeforeCompile = (shader, renderer) => {
       previousCompile.call(material, shader, renderer);
       shader.vertexShader = 'attribute float instanceBuildingFinish;varying vec3 vFinishMetric;varying vec3 vFinishSize;varying vec3 vFinishNormal;varying vec2 vFinishState;\n' + shader.vertexShader;
@@ -35,7 +35,8 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
             float lowerWear=(1.0-smoothstep(.0,.34,vFinishMetric.y))*(.045+.04*vFinishState.y);
             vec2 edge=min(finishMetric,finishSize-finishMetric);
             float cornerWear=(1.0-smoothstep(.008,.055,min(edge.x,edge.y)))*.08;
-            diffuseColor.rgb*=1.0+plaster*.022*finishDetail;
+            float plasterCloud=sin(finishMetric.x*1.7+sin(finishMetric.y*1.1))*sin(finishMetric.y*2.3+vFinishState.y*6.28);
+            diffuseColor.rgb*=1.0+plaster*.027*finishDetail+plasterCloud*.032;
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.32,.27,.20),(lowerWear+cornerWear)*finishDetail);
             finishRelief=plaster*.0006*finishDetail;
             finishRoughness=.90+plaster*.025*finishDetail;` : key === 'wood' ? `
@@ -50,11 +51,12 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
             float grainDetail=1.0-smoothstep(.012,.045,max(finishPixel.x,finishPixel.y));
             vec2 edge=min(finishMetric,finishSize-finishMetric);
             float rubbedEdge=1.0-smoothstep(.012,.04+max(finishPixel.x,finishPixel.y),min(edge.x,edge.y));
-            diffuseColor.rgb*=1.0+(grain*.055+fineGrain*.022)*grainDetail;
+            float timberTone=sin(along*1.6+vFinishState.y*6.28)*sin(across*4.7);
+            diffuseColor.rgb*=1.0+(grain*.065+fineGrain*.026)*grainDetail+timberTone*.033*finishDetail;
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.46,.31,.18),rubbedEdge*finishDetail*.24);
             // Varnished timber and rubbed edges receive the same real lights;
             // the relief stays below a millimetre and never moves the solid.
-            finishRelief=(grain*.00065+fineGrain*.00015)*grainDetail;
+            finishRelief=(grain*.0008+fineGrain*.0002)*grainDetail;
             finishRoughness=.69-grain*.035*grainDetail-rubbedEdge*finishDetail*.12;
             if(vCabinet.w>1.5&&vFinishNormal.y>.5){
               // A geometric inlay on the real tabletop, never an invented
@@ -67,7 +69,7 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
             // legible. No extra paving, platform or collision is introduced.
             float mineral=sin(finishMetric.x*9.0+sin(finishMetric.y*13.0))*sin(finishMetric.y*7.0);
             float lowerPatina=(1.0-smoothstep(0.0,.18,vFinishMetric.y))*float(abs(vFinishNormal.y)<.5);
-            diffuseColor.rgb*=1.0+mineral*.035*finishDetail;
+            diffuseColor.rgb*=1.0+mineral*.05*finishDetail;
             diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.27,.28,.23),lowerPatina*finishDetail*.14);
             finishRelief=mineral*.0008*finishDetail;
             finishRoughness=.88+mineral*.04*finishDetail;` : key === 'metal' ? `
@@ -88,7 +90,13 @@ export function installArchitecturalFinishes(materials: Pick<Record<string, THRE
             vec2 clothEdge=min(fract(clothCell),1.0-fract(clothCell))*.2;
             float stitch=1.0-smoothstep(.003,.006+max(finishPixel.x,finishPixel.y),min(clothEdge.x,clothEdge.y));
             diffuseColor.rgb*=1.0+(weave.x+weave.y)*.035*weaveDetail;
-            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.76,.72,.58),stitch*.18*finishDetail);
+            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.76,.72,.58),stitch*.26*finishDetail);
+            // Thin hems and a woven centre stripe distinguish the actual
+            // quilt, pillow and mattress. No personal item or inventory is
+            // added: this pigment remains on their original fixture parts.
+            vec2 hemEdge=min(finishMetric,finishSize-finishMetric);
+            float hem=1.0-smoothstep(.018,.045+max(finishPixel.x,finishPixel.y),abs(min(hemEdge.x,hemEdge.y)-.055));
+            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.86,.79,.63),hem*.38*finishDetail);
             finishRoughness=.96;`}
         }`);
       shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>

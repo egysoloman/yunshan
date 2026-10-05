@@ -43,6 +43,19 @@ export const contains = (r: Rect, x: number, z: number) => x >= r.x0 - eps && x 
 export const containsUnion = (rs: readonly Rect[], x: number, z: number) => rs.some(r => contains(r, x, z));
 export const familyOf = (b: Building): Family => b.kind === 'home' || b.kind === 'farm' ? 'home' : b.kind === 'market' ? 'market' : b.kind === 'workshop' ? 'workshop' : ['hall', 'school', 'police', 'core'].includes(b.kind) ? 'civic-academy' : b.kind === 'bank' || b.kind === 'clinic' ? 'finance-health' : 'transport-waterfront';
 
+const originalArraySome=Array.prototype.some,originalArrayIterator=Array.prototype[Symbol.iterator];
+/** Getters/custom iteration can change geometry during one query. Keep their
+ * original repeated-read path; ordinary mutable data still gets a fresh grid. */
+function plainRectangles(rs:readonly Rect[]):boolean {
+  if(!Array.isArray(rs)||Object.getPrototypeOf(rs)!==Array.prototype||Object.hasOwn(rs,'some')||Object.hasOwn(rs,Symbol.iterator)||rs.some!==originalArraySome||rs[Symbol.iterator]!==originalArrayIterator)return false;
+  for(let i=0;i<rs.length;i++){
+    const member=Object.getOwnPropertyDescriptor(rs,i);if(!member||!('value' in member))return false;
+    const r=member.value;
+    for(const key of ['x0','x1','z0','z1']){const field=Object.getOwnPropertyDescriptor(r,key);if(!field||!('value' in field))return false;}
+  }
+  return true;
+}
+
 /** Rectilinear union boundary, with every intersection split before tracing.
  * This is shared by watertight mesh caps and the wall/collision contract. */
 export function boundaryLoops(regions: readonly Rect[], holes: readonly Rect[] = []): [number, number][][] {
@@ -52,7 +65,14 @@ export function boundaryLoops(regions: readonly Rect[], holes: readonly Rect[] =
   // merges -10.6 and -10.600000000000001 rather than creating a sliver cell.
   const xs = [...new Set([...regions, ...holes].flatMap(r => [q(r.x0), q(r.x1)]))].sort((a, b) => a - b);
   const zs = [...new Set([...regions, ...holes].flatMap(r => [q(r.z0), q(r.z1)]))].sort((a, b) => a - b);
-  const occupied = (i: number, j: number) => i >= 0 && j >= 0 && i < xs.length - 1 && j < zs.length - 1 && containsUnion(regions, (xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2) && !containsUnion(holes, (xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2);
+  const nx=xs.length-1,nz=zs.length-1;
+  // Ordinary data descriptors keep the same values throughout this synchronous
+  // boundary derivation. Evaluate each cell's union once rather
+  // than re-reading every rectangle up to five times. Retain the original
+  // path for unusually large grids so this optimization has bounded storage.
+  const occupancy=nx*nz>=0&&nx*nz<=65536&&plainRectangles(regions)&&plainRectangles(holes)?new Uint8Array(nx*nz):null;
+  if(occupancy)for(let i=0;i<nx;i++)for(let j=0;j<nz;j++)occupancy[i*nz+j]=Number(containsUnion(regions,(xs[i]+xs[i+1])/2,(zs[j]+zs[j+1])/2)&&!containsUnion(holes,(xs[i]+xs[i+1])/2,(zs[j]+zs[j+1])/2));
+  const occupied = (i: number, j: number) => i >= 0 && j >= 0 && i < nx && j < nz && (occupancy?occupancy[i*nz+j]===1:containsUnion(regions, (xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2) && !containsUnion(holes, (xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2));
   const edges = new Map<string, [number, number][]>();
   const add = (a: [number, number], b: [number, number]) => { const k = a.join(','); const list = edges.get(k) ?? []; list.push(b); edges.set(k, list); };
   for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < zs.length - 1; j++) if (occupied(i, j)) {
@@ -243,7 +263,14 @@ export function getBuildingBody(b: Building): BuildingBody | null {
   bodies.set(b,{commercial:b.commercialGeometryRevision===1,continuousStairs:continuousStairs(b),width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
   return body;
 }
-export function getBuildingFloorPlan(b: Building,floor: number): FloorPlan | null { return getBuildingBody(b)?.floorPlans.find(p=>p.floor===floor) ?? null; }
+export function getBuildingFloorPlan(b: Building,floor: number): FloorPlan | null {
+  const body=getBuildingBody(b);if(!body)return null;
+  const plans=body.floorPlans,length=plans.length;
+  // Array.find visits sparse slots and captures the initial length. Keep both
+  // contracts, including first-match order, without a new callback per query.
+  for(let i=0;i<length;i++){const p=plans[i];if(p.floor===floor)return p;}
+  return null;
+}
 /** Local y=0 is the ground floor's authoritative +.6m walking plane. */
 export function buildingLocalPosition(b: Building,p: Vec3): Vec3 { const dx=p.x-b.position.x,dz=p.z-b.position.z,c=Math.cos(b.rotation),s=Math.sin(b.rotation); return {x:dx*c-dz*s,y:p.y-b.position.y-.6,z:dx*s+dz*c}; }
 export function buildingWorldPosition(b: Building,p: Vec3): Vec3 { const c=Math.cos(b.rotation),s=Math.sin(b.rotation);return {x:b.position.x+p.x*c+p.z*s,y:b.position.y+.6+p.y,z:b.position.z-p.x*s+p.z*c}; }
@@ -327,11 +354,29 @@ function uncachedLocalSolids(b:Building,p:FloorPlan):LocalSolid[] {
 }
 function localSolids(b:Building,p:FloorPlan,plans=nearPlans(b,p),surfaces=stairSurfaces(b,p,plans)):LocalSolid[] {
   const cached=localSolidCache.get(p);let index=0,unchanged=!!cached;
-  const check=(rect:Rect,bottom:number,top:number,steppable:boolean)=>{const s=cached?.[index++];if(!s||s.rect!==rect||s.bottom!==bottom||s.top!==top||s.steppable!==steppable)unchanged=false;};
-  for(const f of plans){for(const s of wallPanels(f))check(s.rect,f.y+s.bottom,f.y+s.top,false);for(const s of f.fixtures)check(s.rect,f.y+s.bottom,f.y+s.top,false);}
-  for(const s of surfaces){if(!s)return uncachedLocalSolids(b,p);check(s.rect,s.bottom,s.top,true);}
+  // Keep the public descriptors live on every read. These straight loops avoid
+  // allocating and calling a validation closure for every wall/tread/fixture.
+  for(const f of plans){
+    for(const s of wallPanels(f)){
+      const rect=s.rect,bottom=f.y+s.bottom,top=f.y+s.top,old=cached?.[index++];
+      if(!old||old.rect!==rect||old.bottom!==bottom||old.top!==top||old.steppable!==false)unchanged=false;
+    }
+    for(const s of f.fixtures){
+      const rect=s.rect,bottom=f.y+s.bottom,top=f.y+s.top,old=cached?.[index++];
+      if(!old||old.rect!==rect||old.bottom!==bottom||old.top!==top||old.steppable!==false)unchanged=false;
+    }
+  }
+  for(const s of surfaces){
+    if(!s)return uncachedLocalSolids(b,p);
+    const rect=s.rect,bottom=s.bottom,top=s.top,old=cached?.[index++];
+    if(!old||old.rect!==rect||old.bottom!==bottom||old.top!==top||old.steppable!==true)unchanged=false;
+  }
   // Read the existing slab cache rather than deriving a new slab lifetime.
-  for(const f of plans)if(f.floor>p.floor){const regions=getFloorPlanSlabRegions(f);for(let i=0;i<regions.length;i++){if(!(i in regions))return uncachedLocalSolids(b,p);check(regions[i],f.y-.2,f.y,false);}}
+  for(const f of plans)if(f.floor>p.floor){const regions=getFloorPlanSlabRegions(f);for(let i=0;i<regions.length;i++){
+    if(!(i in regions))return uncachedLocalSolids(b,p);
+    const rect=regions[i],bottom=f.y-.2,top=f.y,old=cached?.[index++];
+    if(!old||old.rect!==rect||old.bottom!==bottom||old.top!==top||old.steppable!==false)unchanged=false;
+  }}
   if(unchanged&&index===cached!.length)return cached!;
   const result:LocalSolid[]=[];
   for(const f of plans){for(const s of wallPanels(f))result.push({rect:s.rect,bottom:f.y+s.bottom,top:f.y+s.top,steppable:false});for(const s of f.fixtures)result.push({rect:s.rect,bottom:f.y+s.bottom,top:f.y+s.top,steppable:false});}
@@ -382,13 +427,19 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
     footprints??=supportFootprints(p,base,surfaces,plans);
     let footprint=footprints.byTop.get(top);
     if(!footprint){const regions:Rect[]=[];for(const slab of footprints.slabs)if(slab.top<=top+.22+eps&&slab.top>=top-.42-eps)regions.push(...slab.regions.map(s=>s.rect));for(const s of surfaces)if(s.top<=top+.22+eps&&s.top>=top-.42-eps)regions.push(s.rect);footprint={regions,boundaries:null};footprints.byTop.set(top,footprint);}
-    const supported=containsUnion(footprint.regions,local.x,local.z)&&(radius===0||(footprint.boundaries??=boundaryLoops(footprint.regions)).every(loop=>loop.every((a,i)=>segmentDistanceSquared(local.x,local.z,a,loop[(i+1)%loop.length])>=radius*radius-eps)));
+    let supported=containsUnion(footprint.regions,local.x,local.z);
+    if(supported&&radius!==0){
+      const loops=footprint.boundaries??=boundaryLoops(footprint.regions),minimum=radius*radius-eps;
+      checkBoundary:for(const loop of loops)for(let i=0;i<loop.length;i++)if(!(segmentDistanceSquared(local.x,local.z,loop[i],loop[(i+1)%loop.length])>=minimum)){supported=false;break checkBoundary;}
+    }
     supportedAt.set(top,supported);return supported;
   };
-  if(!surfaces.some(s=>contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps)&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&diskSupportedAt(p.y)) {
+  let raisedStair=false;
+  for(const s of surfaces)if(contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps){raisedStair=true;break;}
+  if(!raisedStair&&containsUnion(base,local.x,local.z)&&(radius===0||Math.abs(p.y-local.y)<=.42+eps)&&diskSupportedAt(p.y)) {
     const kind=contains(p.stairLanding,local.x,local.z)?'stairs':containsUnion(p.interior,local.x,local.z)?'room':containsUnion(p.circulation,local.x,local.z)?'gallery':'courtyard';choices.push({top:p.y,kind,floor:p.floor});
   }
-  const onStair=surfaces.some(s=>contains(s.rect,local.x,local.z));
+  let onStair=false;for(const s of surfaces)if(contains(s.rect,local.x,local.z)){onStair=true;break;}
   if(onStair)for(const s of surfaces) {
     if(!contains(s.rect,local.x,local.z) || s.top>local.y+.22+eps || s.top<local.y-.42-eps || !diskSupportedAt(s.top))continue;
     const target=getBuildingFloorPlan(b,s.toFloor)!;
@@ -417,8 +468,19 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   if(!(radius>0))for(const f of plans) {
     wallPanels(f);if(f.floor>p.floor)getFloorPlanSlabRegions(f);
   }
-  for(const choice of choices) {
-    if(radius>0&&solids.some(s=>s.top>choice.top+(s.steppable ? .22 : .01)&&s.bottom<choice.top+1.72-eps&&circleRectDistanceSquared(local.x,local.z,s.rect)<radius*radius-eps))continue;
+  const reach=Math.abs(radius)+eps,x0=local.x-reach,x1=local.x+reach,z0=local.z-reach,z1=local.z+reach;
+  chooseSupport:for(const choice of choices) {
+    if(radius>0)for(const s of solids){
+      if(!(s.top>choice.top+(s.steppable ? .22 : .01)&&s.bottom<choice.top+1.72-eps))continue;
+      const r=s.rect,rx0=r.x0,rx1=r.x1,rz0=r.z0,rz1=r.z1;
+      // Only reject ordered rectangles outside the whole disk's bounds. The
+      // original distance still decides every nearby or malformed rectangle.
+      // Descriptors and nested coordinates are read again on every query.
+      if(rx0<=rx1&&rz0<=rz1&&(rx1<x0||rx0>x1||rz1<z0||rz0>z1))continue;
+      // Capture coordinates in the original circle-distance read order. This
+      // also preserves public accessor reads rather than reading a rect again.
+      if(Math.max(rx0-local.x,0,local.x-rx1)**2+Math.max(rz0-local.z,0,local.z-rz1)**2<radius*radius-eps)continue chooseSupport;
+    }
     return {kind:choice.kind,floor:choice.floor,y:b.position.y+.6+choice.top,local:{x:local.x,z:local.z},...(choice.link?{link:choice.link}:{})};
   }return null;
 }

@@ -1,0 +1,48 @@
+{
+  "startedAt": "2026-10-05T01:44:40.599263+00:00",
+  "endedAt": "2026-10-05T01:58:11.195879+00:00",
+  "argv": [
+    "node",
+    "/tmp/ROOT17-visual-gpu-20261005-01/capture.mjs",
+    "baseline325",
+    "/tmp/ROOT17-visual-gpu-20261005-01/baseline-gpu01/artifacts",
+    "4395"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 325,
+  "inputsStable": true,
+  "rawSHA256": "4c74fca7869500ec1b5d76fe89d578ccfd668cb556fe562c84d8ba4bd256b6e6",
+  "ownedPid": 141330,
+  "observedDescendants": 12,
+  "finalOwnedMembers": [
+    {
+      "pid": 141349,
+      "state": "Z",
+      "parent": 1,
+      "group": 141330,
+      "session": 141330,
+      "startTicks": 9550566
+    },
+    {
+      "pid": 141377,
+      "state": "Z",
+      "parent": 1,
+      "group": 141360,
+      "session": 141360,
+      "startTicks": 9550652
+    },
+    {
+      "pid": 141378,
+      "state": "Z",
+      "parent": 1,
+      "group": 141360,
+      "session": 141360,
+      "startTicks": 9550653
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

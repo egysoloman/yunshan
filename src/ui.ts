@@ -18,6 +18,7 @@ import { civicCouncilSourceProof } from './simulation/civic-staffing';
 import { hygieneContent, hygieneSignature } from './hygiene-ui';
 import { HOME_REST_MINUTES, homeRestBlockedReason, homeRestPoints } from './simulation/home-rest';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, UIActions, ViewState, WorldDefinition } from './types';
+import { buildingAlterationSummary, type BuildingAlterationReport } from './simulation/building-alteration';
 
 const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
 const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
@@ -133,6 +134,7 @@ export class CityUI {
   private pane: Pane = 'life';
   private contextKind: ContextKind = 'building';
   private contextSignature = '';
+  private buildingInspection: BuildingAlterationReport | null = null;
   private selectedCitizen: string | null = null;
   private lastPanelRefresh = 0;
   private policyDirty = false;
@@ -380,6 +382,13 @@ export class CityUI {
     const state = this.state;
     const building = this.view?.nearbyBuilding;
     switch (button.dataset.action) {
+      case 'building-impact': {
+        if (building && this.actions.inspectBuildingAlteration) {
+          this.buildingInspection = this.actions.inspectBuildingAlteration(building.id);
+          this.contextSignature = ''; this.refreshContext();
+        }
+        break;
+      }
       case 'panel': this.setPanel(!this.panelOpen); break;
       case 'close-panel': this.setPanel(false); break;
       case 'transit': this.setPanel(true, 'transit'); break;
@@ -1219,6 +1228,19 @@ export class CityUI {
       this.buildingActions(controls, building, !walk);
       if (building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.functionPointHint(building));
       if (controls.childElementCount) body.append(controls);
+      if (this.actions.inspectBuildingAlteration) {
+        const inspect = element('button', 'text-button full-width', '检查整栋改造影响');
+        inspect.type = 'button'; inspect.dataset.action = 'building-impact'; body.append(inspect);
+        if (this.buildingInspection?.buildingId === building.id) {
+          const report = this.buildingInspection, details = element('details', 'relationship-choices');
+          details.dataset.buildingImpact = building.id;
+          details.append(element('summary', '', `改造现状检查 · 第 ${report.observed.tick} tick`));
+          for (const line of buildingAlterationSummary(report)) details.append(element('p', 'note', line));
+          for (const protection of report.protections) details.append(element('p', 'note', `${protection.referenceId}：${protection.reason}`));
+          details.append(element('p', 'note', '这是点击时的现状。城市继续变化后可重新检查；未迁居、付款、拆楼或建路。'));
+          body.append(details);
+        }
+      }
       if (state.playerLabor?.job) body.append(this.laborContent());
       if (building.kind === 'clinic') body.append(this.clinicalContent());
       if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));

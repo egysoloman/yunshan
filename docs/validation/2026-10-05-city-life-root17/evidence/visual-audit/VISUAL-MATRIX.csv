@@ -1,0 +1,17 @@
+id,requirement,evidence,status,evidence_scope,remaining
+V01,第一人称出生山水城市可读,native-birth-original + old-day15.5 + old-night22,FAIL_ART,untouched body and yaw full UI,棚桥柱墙遮挡与合法新初向指引
+V02,实际原五路点离站,native-walk.trace.json + native-walk-leave-station,FAIL_NATIVE_ROUTE,真实可信键鼠前三点到达第四点超时第五点未试,短脉冲与生产frame消费同步后新有界测试
+V03,实际E进入原商铺,controlled-original-interior.json,OBSERVED_ENTERED,受控door+2m然后真实E非出生旅程,自然行走购粮和工作未在本scope验证
+V04,暂停纯渲染全save不变,controlled-original-interior before and after save,FAIL_SAVE_STABILITY,完整284差异不排除focus或tier,真实rAF焦点同步完成后再设before
+V05,宏观多山城市层次,overview-day,PARTIAL_ART_FAIL,受控光学机位无自然旅程,悬崖平台与疏密院落和城市功能形态
+V06,瀑布地标和自然水岸,core-waterfall,PARTIAL_ART_FAIL,受控光学机位原地图不变,潭岸围合地标建筑群平台和植被
+V07,市集近景用途生活细节,market-street + native-walk-leave-station,FAIL_ART,真实步行图与受控光学图分别标注,实际库存商街资产和真实居民表现
+V08,住宅院落室内陈设,residential-first-person + home-window-curtain-gap,FAIL_ART,受控光学不新增租约或ACL,生活家具厨卫窗帘和住宅功能接续
+V09,桥梁公共道路结构,bridge-structure + bridge-public-road,PARTIAL_ART_FAIL,原受挡相机保留补充相机不替换,粗细平台栏杆街巷与桥轨层次
+V10,商业高楼分格区别住宅,commercial-window,VISIBLE_IMPROVEMENT,原buildingId和幕墙bbox不变,按用途办公室楼层入住与营业接口
+V11,既有床被枕倒角,home-bed-linen,VISIBLE_IMPROVEMENT,受控renderer interior不证明租赁睡眠,完整室内资产及合法自然使用
+V12,窗帘资产,home-window-curtain-gap,MISSING,未增加模型或功能,真实窗洞尺度与通行不变的新表现provider
+V13,真实站名牌,station-name-board + station-name-board-near,VISIBLE_IMPROVEMENT,候选真实节点牌原版无牌,近图裁切且远处遮挡完整状态文字未验
+V14,WebGL与shader/link非空,32 per-shot snapshots,OBSERVED_COMPONENT_PASS,SwiftShader已记录错误为空draw非空,不等于两轮overall通过或硬件性能
+V15,macOS实机性能,none,NOT_RUN,Linux软件GPU不能替代,Mac设备SafariChromeFirefox功能性能
+V16,最新组合生产源UI浏览器,source325 and source327 only,NOT_RUN,视觉单候选不代表根347或348集成图,根组合源真实UI浏览器保存与旅程

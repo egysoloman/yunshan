@@ -11,6 +11,7 @@ import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
+import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
 import { marketCounters } from './site-fixtures';
@@ -19,7 +20,7 @@ import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_T
 
 const PALETTE = { wall: '#d2c9b6', stone: '#a0ab9f', wood: '#73533b', roof: '#456760', glass: '#6c938c', amber: '#ffd39a', cyan: '#82d9d0', red: '#954c40', metal: '#a3b1bb', fabric: '#cfc7ad' };
 type MaterialKey = keyof typeof PALETTE;
-interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
+interface Part { matrix: THREE.Matrix4; color: THREE.Color; building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number; distanceDetail?: boolean; facade?: readonly [number, number, number, number]; profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }; template?: ArchitectureTemplate }
 interface InteriorRef { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; ceiling?: boolean }
 type LocalBox = { (key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, floor?: number, roof?: boolean, color?: string): void; profile?: (profile: RoofProfile) => void };
 
@@ -33,7 +34,7 @@ function offsetBox(box: LocalBox, x: number, z: number): LocalBox {
 class BoxBatch {
   private parts = new Map<MaterialKey, Part[]>();
   constructor(private materials: Record<MaterialKey, THREE.MeshStandardMaterial>) {}
-  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
+  box(key: MaterialKey, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation = 0, tag?: { building?: string; floor?: number; roof?: boolean; ceiling?: boolean; windowStyle?: number }, profile?: { form: RoofProfile['form']; simple: boolean; innerHole?: RoofProfile['innerHole'] }, facade?: Part['facade'], template?: ArchitectureTemplate) {
     if (sx <= 0 || sy <= 0 || sz <= 0) return;
     const matrix = new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), rotation), new THREE.Vector3(sx, sy, sz));
     const list = this.parts.get(key) ?? [];
@@ -51,7 +52,7 @@ class BoxBatch {
     for (const [key, allParts] of this.parts) {
       const cells = new Map<string, Part[]>();
       for (const part of allParts) {
-        const cell = (cellSize ? `${Math.floor(part.matrix.elements[12] / cellSize)}:${Math.floor(part.matrix.elements[14] / cellSize)}` : 'all') + (part.distanceDetail ? ':detail' : '') + (part.template ? `:template:${part.template.key}` : part.profile ? `:${part.profile.form}:${part.profile.simple}:${part.profile.innerHole?.join(',') ?? 'solid'}` : ':box');
+        const cell = (cellSize ? `${Math.floor(part.matrix.elements[12] / cellSize)}:${Math.floor(part.matrix.elements[14] / cellSize)}` : 'all') + (part.distanceDetail ? ':detail' : '') + (part.template ? `:${part.roof ? 'template' : 'fixture'}:${part.template.key}` : part.profile ? `:${part.profile.form}:${part.profile.simple}:${part.profile.innerHole?.join(',') ?? 'solid'}` : ':box');
         const list = cells.get(cell) ?? []; list.push(part); cells.set(cell, list);
       }
       for (const [cell, parts] of cells) {
@@ -75,7 +76,7 @@ class BoxBatch {
       if (key === 'roof') mesh.geometry.setAttribute('instanceRoofSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.roof ? part.building ? 2 : 1 : 0)), 1));
       // Only existing building panes receive lattice/illumination. Transport
       // windscreens share the glass material but carry a zero surface flag.
-      if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? 1 : 0)), 1));
+      if (key === 'glass') mesh.geometry.setAttribute('instanceWindowSurface', new THREE.InstancedBufferAttribute(new Float32Array(parts.map(part => part.building ? part.windowStyle ?? 1 : 0)), 1));
       mesh.name = `batch-${key}-${cell}`;
       parts.forEach((part, index) => {
         mesh.setMatrixAt(index, part.matrix); mesh.setColorAt(index, part.color);
@@ -132,6 +133,7 @@ export class CityRenderer implements CityRendererAPI {
   private citizens: CitizenAppearancePool;
   private marketGoods: MarketGoodsPool;
   private marketShopfront: MarketShopfrontPool;
+  private stationWayfinding: StationWayfindingPool;
   private roadClosures: RoadClosureOverlay;
   private signalRed: THREE.InstancedMesh;
   private signalGreen: THREE.InstancedMesh;
@@ -275,7 +277,7 @@ export class CityRenderer implements CityRendererAPI {
       }
     }; }
     this.materials.glass.roughness = .42; this.materials.glass.metalness = .12;
-    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v2';
+    this.materials.glass.customProgramCacheKey = () => 'yunshan-window-lattice-v3';
     this.materials.glass.onBeforeCompile = shader => {
       shader.uniforms.facadeNight = this.facadeNight;
       shader.vertexShader = 'attribute float instanceWindowSurface;varying float vWindowSurface;varying vec3 vWindowMetric;varying vec3 vWindowExtent;varying vec3 vWindowNormal;varying float vWindowSeed;\n' + shader.vertexShader;
@@ -298,14 +300,22 @@ export class CityRenderer implements CityRendererAPI {
           float paneDetail=1.0-smoothstep(.09,.32,max(panePixel.x,panePixel.y));
           vec2 paneEdge=min(paneMetric,paneExtent-paneMetric);
           float frame=1.0-smoothstep(.045,.07+max(panePixel.x,panePixel.y),min(paneEdge.x,paneEdge.y));
-          vec2 latticeCell=paneMetric/vec2(.4,.6);
-          vec2 latticeEdge=min(fract(latticeCell),1.0-fract(latticeCell))*vec2(.4,.6);
+          bool commercialWindow=vWindowSurface>1.5;
+          vec2 moduleSize=commercialWindow?vec2(1.2,3.6):vec2(.4,.6);
+          vec2 latticeCell=paneMetric/moduleSize;
+          vec2 latticeEdge=min(fract(latticeCell),1.0-fract(latticeCell))*moduleSize;
           float lattice=1.0-smoothstep(.015,.033+max(panePixel.x,panePixel.y),min(latticeEdge.x,latticeEdge.y));
           float timber=max(frame,lattice)*paneDetail;
           windowPane=1.0-timber;
-          windowRoughness=mix(.68,.22,windowPane);
+          windowRoughness=mix(commercialWindow?.44:.68,commercialWindow?.16:.22,windowPane);
           windowWarmth=mix(.24,1.0,step(.34,vWindowSeed));
-          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.18,.115,.063),timber*.92);
+          diffuseColor.rgb=mix(diffuseColor.rgb,commercialWindow?vec3(.34,.32,.25):vec3(.23,.14,.073),timber*.92);
+          // Broad commercial panes have alloy mullions and a restrained sky
+          // tint; homes keep timber lattice. Both retain their real openings.
+          if(commercialWindow){
+            float upperSky=smoothstep(0.0,1.0,paneMetric.y/max(.2,paneExtent.y));
+            diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.21,.40,.46),upperSky*windowPane*.2);
+          }
           diffuseColor.rgb*=1.0-(1.0-paneMetric.y/max(.2,paneExtent.y))*.18*windowPane;
           // Illumination follows existing night/energy state. Its static per
           // pane variation is decorative; it does not invent room occupancy.
@@ -314,7 +324,7 @@ export class CityRenderer implements CityRendererAPI {
       shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance+=windowPane*windowWarmth*facadeNight*vec3(.48,.27,.095);');
       shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nif(vWindowSurface>.5)roughnessFactor=windowRoughness;');
     };
-    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v4';
+    this.materials.roof.customProgramCacheKey = () => 'yunshan-tiled-roof-v5';
     this.materials.roof.onBeforeCompile = shader => {
       shader.vertexShader = 'attribute float instanceRoofSurface;varying float vRoofSurface;varying vec3 vRoofMetric;varying vec3 vRoofNormal;\n' + shader.vertexShader;
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
@@ -335,7 +345,8 @@ export class CityRenderer implements CityRendererAPI {
           vec2 soffitEdge=min(fract(soffitMetric/vec2(.6,1.2)),1.0-fract(soffitMetric/vec2(.6,1.2)))*vec2(.6,1.2);
           float soffitDetail=1.0-smoothstep(.12,.45,max(soffitPixel.x,soffitPixel.y));
           float beam=(1.0-smoothstep(.035,.06+max(soffitPixel.x,soffitPixel.y),min(soffitEdge.x,soffitEdge.y)))*soffitDetail;
-          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.29,.18,.10),.9)*(1.0-beam*.28);
+          float boardTone=.5+.5*sin(soffitMetric.x*19.0+sin(soffitMetric.y*1.1)*.9);
+          diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.40,.265,.15),.94)*(1.0-beam*.34+boardTone*.025*soffitDetail);
           roofRelief=beam*.006;
           roofRoughness=.76;
         }else if(vRoofSurface>.5 && abs(vRoofNormal.y)>.18){
@@ -402,6 +413,7 @@ export class CityRenderer implements CityRendererAPI {
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
     this.marketGoods = new MarketGoodsPool(this.scene, world);
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
+    this.stationWayfinding = new StationWayfindingPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
       const capacity = Math.max(32, this.world.edges.filter(edge => edge.mode === kind).length * 3);
       this.vehiclePools.set(kind, this.makePool(capacity, this.materials.roof, this.materials.glass, this.materials.cyan));
@@ -445,7 +457,7 @@ export class CityRenderer implements CityRendererAPI {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);
         batch.box(part.material, position.x, position.y, position.z, part.size.x, part.size.y, part.size.z,
-          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof' }, undefined, part.facade, part.template);
+          part.color, b.rotation, { building: b.id, floor: part.floor, roof: part.roof, ceiling: part.purpose === 'floor' || part.purpose === 'roof', windowStyle: b.commercialGeometryRevision === 1 ? 2 : 1 }, undefined, part.facade, part.template);
       }
       return;
     }
@@ -948,8 +960,8 @@ export class CityRenderer implements CityRendererAPI {
     // A shadow-free low-angle bounce approximation lights actual opaque soffits
     // and bridge undersides. It follows daylight, adds no hidden geometry, and
     // leaves sun shadows and the original road/roof solids intact.
-    this.groundBounce.intensity = .035 + daylight * .35;
-    this.groundBounce.color.set('#8296a0').lerp(new THREE.Color('#d3d5b2'), daylight);
+    this.groundBounce.intensity = .035 + daylight * .44;
+    this.groundBounce.color.set('#8296a0').lerp(new THREE.Color('#dfcfac'), daylight);
     this.groundBounce.position.set(this.camera.position.x - 700, this.camera.position.y - 700, this.camera.position.z + 300);
     this.groundBounce.target.position.copy(this.camera.position);
     const horizon = new THREE.Color('#203b4c').lerp(new THREE.Color('#bdd7dd'), daylight).lerp(new THREE.Color('#e2af86'), twilight * .35);
@@ -1000,6 +1012,7 @@ export class CityRenderer implements CityRendererAPI {
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
+    this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
     const counts = new Map<string, number>();
     for (const vehicle of state.vehicles) {
       const pool = this.vehiclePools.get(vehicle.kind); if (!pool) continue; const n = counts.get(vehicle.kind) ?? 0; if (n >= pool.capacity) continue;
@@ -1048,6 +1061,7 @@ export class CityRenderer implements CityRendererAPI {
     this.citizens.dispose();
     this.marketGoods.dispose();
     this.marketShopfront.dispose();
+    this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();

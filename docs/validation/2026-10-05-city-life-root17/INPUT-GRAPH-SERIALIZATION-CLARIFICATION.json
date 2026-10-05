@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-05T04:21:17.979718+00:00",
+  "status": "SERIALIZATION_DESCRIPTION_CORRECTED_ONLY",
+  "functionalInputGraphSHA256": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "preserveManifestKeyOrder": true,
+  "encoding": "UTF-8 compact JSON, separators comma/colon, no trailing newline",
+  "sortedKeysAlternativeSHA256": "122021e4c5039f4b6240ea9d2645be2fc6706a325b71b316841be9bf988623c0",
+  "sourceFileBytesChanged": 0,
+  "input351EachFileSHA": "PASS",
+  "reason": "Final verification initially sorted keys unlike the frozen manifest serialization. All file hashes already matched; documentary claim of sorted graph corrected."
+}

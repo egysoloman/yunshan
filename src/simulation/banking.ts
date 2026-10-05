@@ -180,6 +180,7 @@ export function settleDeceasedAccount(simulation: Simulation, actorId: string, h
     || s.family?.households.some(household => household.actorIds.includes(actorId) && household.closedAt === null && household.balance > 0)
     || s.family?.pregnancies.some(pregnancy => pregnancy.parentIds.includes(actorId) && pregnancy.escrow > 0)
     || s.clinical?.orders.some(order => order.payerId === actorId && order.escrow > 0)
+    || s.familyEducation?.active.some(course => course.payerId === actorId && course.escrow > EPS)
     || actorId === 'player' && (s.education?.course?.escrow ?? 0) > 0
     || actorId === 'player' && s.power?.repairs.some(job => job.payerId === 'player' && job.escrow > 0)
     || actorId === 'player' && s.hygiene?.jobs.some(job => job.payerId === 'player' && job.escrow > 0)

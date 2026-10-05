@@ -1,0 +1,11 @@
+{
+  "status": "PREPARATION_APPLY_CHECK_FAIL_NO_MUTATION",
+  "at": "2026-10-05T03:22:40.979914+00:00",
+  "source": "/tmp/ROOT17-integration-20261005-01/source08",
+  "base": "/tmp/ROOT17-integration-20261005-01/source07",
+  "patch": "/tmp/ROOT17-medical-estate-close-20261005-01/provider-v5/V4-OVERLAY.patch",
+  "message": "git apply --check: error: dev/null: No such file or directory; missing new file mode metadata on added test",
+  "businessInputsByteEqual": true,
+  "actualSteps": 0,
+  "sharedEdits": 0
+}

@@ -45,7 +45,8 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // The new code-owned street recipe binds actual edge coordinates above;
   // these limits identify its authoritative grading contract. Old text is exact.
   const streets = layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
-  const text = JSON.stringify(streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry);
+  const legacyDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
+  const text = JSON.stringify(world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor);
   let hash = 2166136261;
   for (let index = 0; index < text.length; index++) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
   return (hash >>> 0).toString(16);

@@ -1,0 +1,22 @@
+{
+  "status": "ASSEMBLED_NOT_EXECUTED",
+  "at": "2026-10-05T03:13:51.476065+00:00",
+  "source": "/tmp/ROOT17-integration-20261005-01/source06",
+  "base": "/tmp/ROOT17-integration-20261005-01/source05",
+  "patches": [
+    {
+      "patch": "/tmp/ROOT17-medical-hygiene-power-20261005-01/provider-v4/clinical-grid-overlay.patch",
+      "sha256": "8bf7afc568742a6d645837cae14d62b58dcacc07a78a906315029a76f321d2c3",
+      "applyCheck": 0,
+      "apply": 0
+    },
+    {
+      "patch": "/tmp/ROOT17-family-estate-20261005-01/CANDIDATE.patch",
+      "sha256": "d0f1c975af109758752eeaad1f68b98c40f7b52d90fa78daf4010a461ad88851",
+      "applyCheck": 0,
+      "apply": 0
+    }
+  ],
+  "inputCount": 347,
+  "sharedEdits": 0
+}

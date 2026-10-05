@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-05T04:15:42.135631+00:00",
+  "zipCount": 12,
+  "rootZip02Payloads": 280,
+  "originalPNGs": 34,
+  "indexedOriginals": 269,
+  "CRCAndEveryPayloadByte": "PASS",
+  "sourceInputFiles": 351,
+  "originalTestsAndFixturesByteUnchanged": 207,
+  "credentialShapeFilesChecked": 247,
+  "credentialShapeSuspects": [],
+  "sourceInputGraph": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "rootZip02": {
+    "file": "artifacts/Yunshan_ROOT17_Integration_Originals_20261005_Complete02.zip",
+    "bytes": 37984155,
+    "sha256": "d3b8bdf4d6e8de36800b2f57ab7e88240a6826204d4c369f2161e573ebf00677",
+    "origin": "/tmp/ROOT17-delivery-20261005-01/Yunshan_ROOT17_Integration_Originals_20261005_Complete02.zip",
+    "zipCRCAndEveryPayloadSHA": "PASS",
+    "scope": "Complete root original evidence, including nested GPU images/checkpoint saves; component archives separately indexed."
+  },
+  "documentCut": "ZIP02 immutable, later Library/Git outcomes separate."
+}

@@ -65,6 +65,17 @@ export function architectureFunctionLabel(building: Building): string {
   return ({ home: '家居 · 住宅', market: '买卖 · 食材', workshop: '百工 · 制造', bank: '钱庄 · 金融', hall: '公厅 · 政务', police: '巡警 · 治安', school: '学苑 · 课堂', clinic: '医馆 · 诊疗', station: '驿站 · 乘车', core: '天枢 · 市政', pavilion: '山亭 · 观景', airport: '空港 · 航班', starport: '星港 · 星际', farm: '农庄 · 田作', dock: '水驿 · 渡船' })[building.kind];
 }
 
+/** A large functional title is readable at walking distance. The complete
+ * building name remains on the plaque as its address, never as invented trade
+ * or ownership information. Live operating status stays on the shopfront. */
+export function architecturePlaqueTitle(building: Building): string {
+  if (building.facility) return architectureFunctionLabel(building);
+  return ({ home: '民居客舍', market: '食材商肆', workshop: '百工造物', bank: '钱庄金融',
+    hall: '公厅政务', police: '巡警治安', school: '书院学堂', clinic: '医馆诊疗',
+    station: '山城驿站', core: '天枢公厅', pavilion: '登临山亭', airport: '云山空港',
+    starport: '星际航港', farm: '农庄田作', dock: '水岸渡驿' })[building.kind];
+}
+
 interface ProgramSignPlacement {
   x: number; y: number; z: number; width: number; height: number; vertical: true;
   rotation: [number, number, number]; wall: Wall; from: number; to: number;
@@ -489,18 +500,21 @@ export class ArchitectureDetailManager {
     if (typeof document !== 'undefined' && placement) {
       const canvas = document.createElement('canvas'); canvas.width = placement.vertical ? 512 : 768; canvas.height = placement.vertical ? 1024 : 192; const context = canvas.getContext('2d');
       if (context) {
-        context.fillStyle = '#dcd1ac'; context.fillRect(0, 0, canvas.width, canvas.height);
-        context.strokeStyle = '#6e5238'; context.lineWidth = 9; context.strokeRect(14, 14, canvas.width - 28, canvas.height - 28);
+        context.fillStyle = '#e4d6b3'; context.fillRect(0, 0, canvas.width, canvas.height);
+        for (let y = 0; y < canvas.height; y += 7) { context.fillStyle = y % 3 ? 'rgba(131,103,62,.025)' : 'rgba(255,242,206,.10)'; context.fillRect(0, y, canvas.width, 1); }
+        context.strokeStyle = '#8b7049'; context.lineWidth = 7; context.strokeRect(14, 14, canvas.width - 28, canvas.height - 28);
+        context.lineWidth = 2; context.strokeRect(25, 25, canvas.width - 50, canvas.height - 50);
         context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillStyle = '#4c3928';
         if (placement.vertical) {
-          const characters = Array.from(building.name), step = Math.min(90, 900 / Math.max(1, characters.length));
-          context.font = `600 ${Math.min(82, step * .85)}px "Noto Serif CJK SC", serif`;
-          characters.forEach((character, index) => context.fillText(character, 342, 64 + step * (index + .5), 142));
-          const functionName = architectureFunctionLabel(building).split('·').at(-1)!.trim();
-          context.font = '500 66px "Noto Serif CJK SC", serif';
-          Array.from(functionName).forEach((character, index) => context.fillText(character, 146, 100 + index * 88, 130));
-          context.strokeStyle = '#875b42'; context.lineWidth = 7; context.strokeRect(86, 810, 118, 118);
-          context.font = '500 48px "Noto Serif CJK SC", serif'; context.fillStyle = '#875b42'; context.fillText('云', 145, 870, 100);
+          const title = Array.from(architecturePlaqueTitle(building)), titleStep = Math.min(162, 720 / Math.max(1, title.length));
+          context.fillStyle = '#394c3e'; context.font = `600 ${Math.min(136, titleStep * .9)}px "Noto Serif CJK SC", serif`;
+          title.forEach((character, index) => context.fillText(character, 306, 84 + titleStep * (index + .5), 182));
+          const address = Array.from(building.name), addressStep = Math.min(46, 740 / Math.max(1, address.length));
+          context.fillStyle = '#766048'; context.font = `500 ${Math.min(39, addressStep * .88)}px "Noto Serif CJK SC", serif`;
+          address.forEach((character, index) => context.fillText(character, 101, 91 + addressStep * (index + .5), 88));
+          context.fillStyle = '#bba06c'; context.fillRect(171, 81, 2, 739);
+          context.strokeStyle = '#a15b43'; context.lineWidth = 5; context.strokeRect(263, 865, 86, 86);
+          context.font = '500 54px "Noto Serif CJK SC", serif'; context.fillStyle = '#a15b43'; context.fillText('云', 306, 908, 72);
         } else {
           context.font = '600 54px "Noto Serif CJK SC", serif'; context.fillText(building.name, 384, 68, 706);
           context.font = '400 34px "Noto Sans CJK SC", sans-serif'; context.fillText(architectureFunctionLabel(building), 384, 136, 706);

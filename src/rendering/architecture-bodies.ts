@@ -15,6 +15,30 @@ export interface ProgramArchitecturePart {
   template?: ArchitectureTemplate; facade?: readonly [number, number, number, number];
 }
 const roofTemplates = new Map<string, ArchitectureTemplate>();
+let linenTemplate: ArchitectureTemplate | undefined;
+
+/** Original low-poly linen artwork. Bevels fit inside the exact existing
+ * fixture part box: neither pillows nor mattress introduce a new collision or
+ * enter the reserved bed-side standing space. One geometry serves all beds. */
+export function programLinenTemplate(): ArchitectureTemplate {
+  if (linenTemplate) return linenTemplate;
+  const outline = [[-.38, -.5], [.38, -.5], [.5, -.38], [.5, .38], [.38, .5], [-.38, .5], [-.5, .38], [-.5, -.38]];
+  const positions: number[] = [], indices: number[] = [];
+  for (const [y, scale] of [[-.5, 1], [.18, 1], [.5, .84]]) for (const [x, z] of outline) positions.push(x * scale, y, z * scale);
+  const cap = THREE.ShapeUtils.triangulateShape(outline.map(([x, z]) => new THREE.Vector2(x, z)), []);
+  for (const [a, b, c] of cap) { indices.push(a, b, c); indices.push(a + 16, c + 16, b + 16); }
+  for (let ring = 0; ring < 2; ring++) for (let i = 0; i < 8; i++) {
+    const j = (i + 1) % 8, a = ring * 8 + i, b = ring * 8 + j, c = (ring + 1) * 8 + i, d = (ring + 1) * 8 + j;
+    indices.push(a, c, b, b, c, d);
+  }
+  const indexed = new THREE.BufferGeometry(); indexed.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); indexed.setIndex(indices);
+  const flat = indexed.toNonIndexed(); flat.computeVertexNormals();
+  const vertices = Array.from(flat.getAttribute('position').array), normals = Array.from(flat.getAttribute('normal').array);
+  linenTemplate = { key: 'program-linen-bevel-1', positions: vertices, normals,
+    uvs: vertices.flatMap((_, i) => i % 3 === 0 ? [vertices[i] + .5, vertices[i + 2] + .5] : []),
+    indices: Array.from({ length: vertices.length / 3 }, (_, i) => i) };
+  indexed.dispose(); flat.dispose(); return linenTemplate;
+}
 export const PROGRAM_WALL_FINISH_PANEL_BUDGET = 128;
 export interface ProgramWallFinish { rect: Rect; bottom: number; top: number; material: 'wall' | 'wood' }
 
@@ -136,7 +160,9 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
         // authoritative solid; no cloth or handle can extend into a use point.
         const furniture = (material: ProgramArchitecturePart['material'], x0: number, x1: number, low: number, high: number, z0: number, z1: number, color: string, facade?: ProgramArchitecturePart['facade']) => {
           if (parts.length - firstPart >= 8 || x0 < r.x0 - 1e-7 || x1 > r.x1 + 1e-7 || z0 < r.z0 - 1e-7 || z1 > r.z1 + 1e-7 || low < bottom - 1e-7 || high > top + 1e-7) return;
+          const previous = parts.length;
           box(material, (x0 + x1) / 2, plan.y + (low + high) / 2, (z0 + z1) / 2, x1 - x0, high - low, z1 - z0, color, plan.floor, 'furniture', false, facade);
+          if (material === 'fabric' && parts.length > previous) parts[parts.length - 1].template = programLinenTemplate();
         };
         if (fixture.kind === 'table' && height >= .4 && Math.min(width, depth) >= .4) {
           furniture('wood', r.x0, r.x1, top - .2, top, r.z0, r.z1, '#956f4f', [width, .2, depth, 2]);

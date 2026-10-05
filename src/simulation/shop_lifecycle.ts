@@ -1,4 +1,4 @@
-import type { Simulation } from '../simulation';
+import { isCanonicalNpcWage, type Simulation } from '../simulation';
 import type { Building, Citizen, Company, Command, CommandResult, Player, Role, Shop, SimState, WorldDefinition } from '../types';
 import { homeRestPointBlockedByVoxels } from './home-rest';
 
@@ -415,8 +415,12 @@ const installed = new WeakSet<Simulation>();
 export function installShopLifecycle(simulation: Simulation): void {
   if (installed.has(simulation)) return; installed.add(simulation);
   simulation.registerSaveValidator(candidate => validateShopLifecycle(candidate, simulation.worldDefinition));
+  const seenWages = new WeakSet<object>();
   simulation.onEvent('wage-earned', event => {
-    if (!event.shopId || !event.citizenId || event.citizenId === 'player') return;
+    // Material consumption and reopening require this city's current native
+    // funded attendance, never a generic, foreign or retained notification.
+    if (!isCanonicalNpcWage(event, simulation) || seenWages.has(event)
+      || !event.shopId || !event.citizenId || event.citizenId === 'player') return;
     const title = titleOf(simulation.state, event.shopId), job = title?.reopen, lease = activeLease(simulation.state, event.shopId), at = clock(simulation.state);
     const citizen = simulation.state.citizens.find(citizen => citizen.id === event.citizenId);
     if (title?.state !== 'reopening' || !job || job.completedAt !== null || job.cancelledAt !== null || !citizen || citizen.workId !== title.buildingId || lease?.state === 'defaulted'
@@ -426,6 +430,7 @@ export function installShopLifecycle(simulation: Simulation): void {
     const credited = Math.min(event.minutes, Math.max(0, upper - Math.max(lower, existing?.lastAt ?? lower)), SHOP_REOPEN_MINUTES - job.workedMinutes);
     if (!(credited > EPS)) return;
     const earned = event.amount * credited / event.minutes; if (!(earned > 0)) return;
+    seenWages.add(event);
     const row = existing ?? { citizenId: citizen.id, minutes: 0, earned: 0, lastAt: lower }; if (!existing) job.labor.push(row);
     row.minutes += credited; row.earned += earned; row.lastAt = upper; job.workedMinutes += credited;
     simulation.consumeShopLabor(event.shopId, credited);

@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-05T04:15:38.458381+00:00",
+  "status": "PACKAGING_FILTER_CORRECTED_ONLY",
+  "preservedOriginal01": {
+    "filename": "Yunshan_ROOT17_Integration_Originals_20261005.zip",
+    "sha256": "dbd96f23b938b64f9b9c07e475435ff9de6864f7e6659cc57ddef84dcedb9288",
+    "payloads": 114,
+    "scope": "Reports/receipts only. Original01 excluded any nested artifacts directory and therefore omitted original screenshots and save checkpoints."
+  },
+  "newOriginal02": "Yunshan_ROOT17_Integration_Originals_20261005_Complete02.zip",
+  "correctedFilter": "Exclude only top-level artifacts ZIP store; include nested evidence/**/artifacts/** original files unchanged.",
+  "indexedOriginalsVerified": 269,
+  "inputFilesVerified": 351,
+  "originalTestsAndFixturesByteUnchanged": 207,
+  "currentMemoSHA256": "4d2eba6c0711699d75433fba46bbfe22902a49628c2041ca915f8669b33cea80",
+  "noSimulationOrProductionChange": true,
+  "immutableDocumentCut": "ZIP02 contains the reports and evidence at this cut. Its final package receipt, Library outcome and Git transport readbacks are separate documents."
+}

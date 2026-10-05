@@ -1,0 +1,2079 @@
+{
+  "scope": "Immutable derived potential road-door contacts and producer inventory parameters, 0 Simulation instances / 0 steps; not a real truck trip.",
+  "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "worldFingerprint": "b85fa6ec",
+  "day1SaveSHA256": "db40c8410ed5cd45f308fb12c12a4ef6678c58add40e3122e595a6bdd99efe16",
+  "originalProbeSHA256": "90585748c7b7a20c4cd6822a13e8b5b1a9da14d9ca820471de5c3a1697b17d70",
+  "rows": [
+    {
+      "shopId": "shop-river-b0",
+      "buildingId": "river-b0",
+      "kind": "dock",
+      "edgeId": "road-river-b0-door-river-quarter-0",
+      "nodeId": "river-b0-door",
+      "direction": -1,
+      "door": {
+        "x": -878.8000000000001,
+        "y": 24.6,
+        "z": 809
+      },
+      "nodePosition": {
+        "x": -878.8000000000001,
+        "y": 24.6,
+        "z": 809
+      },
+      "roadEndpointLanePosition": {
+        "x": -877.5000000000001,
+        "y": 24.6,
+        "z": 809
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b3",
+      "buildingId": "river-b3",
+      "kind": "farm",
+      "edgeId": "road-river-b3-door-river-quarter-3",
+      "nodeId": "river-b3-door",
+      "direction": -1,
+      "door": {
+        "x": -564.6,
+        "y": 20.6,
+        "z": 1270.4
+      },
+      "nodePosition": {
+        "x": -564.6,
+        "y": 20.6,
+        "z": 1270.4
+      },
+      "roadEndpointLanePosition": {
+        "x": -563.3000000000001,
+        "y": 20.6,
+        "z": 1270.4
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b6",
+      "buildingId": "river-b6",
+      "kind": "farm",
+      "edgeId": "road-river-b6-door-river-quarter-2",
+      "nodeId": "river-b6-door",
+      "direction": -1,
+      "door": {
+        "x": -651.4000000000001,
+        "y": 32.6,
+        "z": 879.2
+      },
+      "nodePosition": {
+        "x": -651.4000000000001,
+        "y": 32.6,
+        "z": 879.2
+      },
+      "roadEndpointLanePosition": {
+        "x": -650.1000000000001,
+        "y": 32.6,
+        "z": 879.2
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b7",
+      "buildingId": "river-b7",
+      "kind": "dock",
+      "edgeId": "road-river-b7-door-river-quarter-3",
+      "nodeId": "river-b7-door",
+      "direction": -1,
+      "door": {
+        "x": -620.2,
+        "y": 18.6,
+        "z": 1253.8000000000002
+      },
+      "nodePosition": {
+        "x": -620.2,
+        "y": 18.6,
+        "z": 1253.8000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -618.9000000000001,
+        "y": 18.6,
+        "z": 1253.8000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b9",
+      "buildingId": "river-b9",
+      "kind": "farm",
+      "edgeId": "road-river-b9-door-river-quarter-1",
+      "nodeId": "river-b9-door",
+      "direction": -1,
+      "door": {
+        "x": -947.8000000000001,
+        "y": 16.6,
+        "z": 1249.8000000000002
+      },
+      "nodePosition": {
+        "x": -947.8000000000001,
+        "y": 16.6,
+        "z": 1249.8000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -946.5000000000001,
+        "y": 16.6,
+        "z": 1249.8000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b10",
+      "buildingId": "river-b10",
+      "kind": "dock",
+      "edgeId": "road-river-b10-door-river-quarter-2",
+      "nodeId": "river-b10-door",
+      "direction": -1,
+      "door": {
+        "x": -735.2,
+        "y": 30.6,
+        "z": 850
+      },
+      "nodePosition": {
+        "x": -735.2,
+        "y": 30.6,
+        "z": 850
+      },
+      "roadEndpointLanePosition": {
+        "x": -733.9000000000001,
+        "y": 30.6,
+        "z": 850
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b12",
+      "buildingId": "river-b12",
+      "kind": "farm",
+      "edgeId": "road-river-b12-door-river-quarter-0",
+      "nodeId": "river-b12-door",
+      "direction": -1,
+      "door": {
+        "x": -981.2,
+        "y": 24.6,
+        "z": 954.8000000000001
+      },
+      "nodePosition": {
+        "x": -981.2,
+        "y": 24.6,
+        "z": 954.8000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -979.9000000000001,
+        "y": 24.6,
+        "z": 954.8000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b13",
+      "buildingId": "river-b13",
+      "kind": "dock",
+      "edgeId": "road-river-b13-door-river-quarter-1",
+      "nodeId": "river-b13-door",
+      "direction": -1,
+      "door": {
+        "x": -1013.6,
+        "y": 14.600000000000001,
+        "z": 1188.8
+      },
+      "nodePosition": {
+        "x": -1013.6,
+        "y": 14.600000000000001,
+        "z": 1188.8
+      },
+      "roadEndpointLanePosition": {
+        "x": -1012.3000000000001,
+        "y": 14.600000000000001,
+        "z": 1188.8
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b16",
+      "buildingId": "river-b16",
+      "kind": "dock",
+      "edgeId": "road-river-b16-door-river-quarter-0",
+      "nodeId": "river-b16-door",
+      "direction": -1,
+      "door": {
+        "x": -1017.6,
+        "y": 22.6,
+        "z": 872.8000000000001
+      },
+      "nodePosition": {
+        "x": -1017.6,
+        "y": 22.6,
+        "z": 872.8000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -1016.3000000000001,
+        "y": 22.6,
+        "z": 872.8000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b19",
+      "buildingId": "river-b19",
+      "kind": "farm",
+      "edgeId": "road-river-b19-door-river-quarter-3",
+      "nodeId": "river-b19-door",
+      "direction": -1,
+      "door": {
+        "x": -487.40000000000003,
+        "y": 18.6,
+        "z": 1128.4
+      },
+      "nodePosition": {
+        "x": -487.40000000000003,
+        "y": 18.6,
+        "z": 1128.4
+      },
+      "roadEndpointLanePosition": {
+        "x": -486.1,
+        "y": 18.6,
+        "z": 1128.4
+      },
+      "doorDistance": 1.3000000000000114,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b22",
+      "buildingId": "river-b22",
+      "kind": "farm",
+      "edgeId": "road-river-b22-door-river-quarter-2",
+      "nodeId": "river-b22-door",
+      "direction": -1,
+      "door": {
+        "x": -604.8000000000001,
+        "y": 32.2,
+        "z": 734.2
+      },
+      "nodePosition": {
+        "x": -604.8000000000001,
+        "y": 32.2,
+        "z": 734.2
+      },
+      "roadEndpointLanePosition": {
+        "x": -603.5000000000001,
+        "y": 32.2,
+        "z": 734.2
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b23",
+      "buildingId": "river-b23",
+      "kind": "dock",
+      "edgeId": "road-river-b23-door-river-quarter-3",
+      "nodeId": "river-b23-door",
+      "direction": -1,
+      "door": {
+        "x": -460.40000000000003,
+        "y": 20.6,
+        "z": 1189.8
+      },
+      "nodePosition": {
+        "x": -460.40000000000003,
+        "y": 20.6,
+        "z": 1189.8
+      },
+      "roadEndpointLanePosition": {
+        "x": -459.1,
+        "y": 20.6,
+        "z": 1189.8
+      },
+      "doorDistance": 1.3000000000000114,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b25",
+      "buildingId": "river-b25",
+      "kind": "farm",
+      "edgeId": "road-river-b25-door-river-quarter-1",
+      "nodeId": "river-b25-door",
+      "direction": -1,
+      "door": {
+        "x": -779.2,
+        "y": 22.6,
+        "z": 1182.8
+      },
+      "nodePosition": {
+        "x": -779.2,
+        "y": 22.6,
+        "z": 1182.8
+      },
+      "roadEndpointLanePosition": {
+        "x": -777.9000000000001,
+        "y": 22.6,
+        "z": 1182.8
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b26",
+      "buildingId": "river-b26",
+      "kind": "dock",
+      "edgeId": "road-river-b26-door-river-quarter-2",
+      "nodeId": "river-b26-door",
+      "direction": -1,
+      "door": {
+        "x": -581.6,
+        "y": 36.6,
+        "z": 914.6
+      },
+      "nodePosition": {
+        "x": -581.6,
+        "y": 36.6,
+        "z": 914.6
+      },
+      "roadEndpointLanePosition": {
+        "x": -580.3000000000001,
+        "y": 36.6,
+        "z": 914.6
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b28",
+      "buildingId": "river-b28",
+      "kind": "farm",
+      "edgeId": "road-river-b28-door-river-station",
+      "nodeId": "river-b28-door",
+      "direction": -1,
+      "door": {
+        "x": -817.4000000000001,
+        "y": 30.6,
+        "z": 984.8000000000001
+      },
+      "nodePosition": {
+        "x": -817.4000000000001,
+        "y": 30.6,
+        "z": 984.8000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -816.1000000000001,
+        "y": 30.6,
+        "z": 984.8000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b29",
+      "buildingId": "river-b29",
+      "kind": "dock",
+      "edgeId": "road-river-b29-door-river-quarter-1",
+      "nodeId": "river-b29-door",
+      "direction": -1,
+      "door": {
+        "x": -871.8000000000001,
+        "y": 22.6,
+        "z": 1302
+      },
+      "nodePosition": {
+        "x": -871.8000000000001,
+        "y": 22.6,
+        "z": 1302
+      },
+      "roadEndpointLanePosition": {
+        "x": -870.5000000000001,
+        "y": 22.6,
+        "z": 1302
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b32",
+      "buildingId": "river-b32",
+      "kind": "dock",
+      "edgeId": "road-river-b32-door-river-quarter-1",
+      "nodeId": "river-b32-door",
+      "direction": -1,
+      "door": {
+        "x": -962.2,
+        "y": 30.6,
+        "z": 1029
+      },
+      "nodePosition": {
+        "x": -962.2,
+        "y": 30.6,
+        "z": 1029
+      },
+      "roadEndpointLanePosition": {
+        "x": -960.9000000000001,
+        "y": 30.6,
+        "z": 1029
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b35",
+      "buildingId": "river-b35",
+      "kind": "farm",
+      "edgeId": "road-river-b35-door-river-quarter-3",
+      "nodeId": "river-b35-door",
+      "direction": -1,
+      "door": {
+        "x": -713.2,
+        "y": 20.6,
+        "z": 1131.4
+      },
+      "nodePosition": {
+        "x": -713.2,
+        "y": 20.6,
+        "z": 1131.4
+      },
+      "roadEndpointLanePosition": {
+        "x": -711.9000000000001,
+        "y": 20.6,
+        "z": 1131.4
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b38",
+      "buildingId": "river-b38",
+      "kind": "farm",
+      "edgeId": "road-river-b38-door-river-quarter-2",
+      "nodeId": "river-b38-door",
+      "direction": -1,
+      "door": {
+        "x": -780.2,
+        "y": 32.6,
+        "z": 688.4000000000001
+      },
+      "nodePosition": {
+        "x": -780.2,
+        "y": 32.6,
+        "z": 688.4000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -778.9000000000001,
+        "y": 32.6,
+        "z": 688.4000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b39",
+      "buildingId": "river-b39",
+      "kind": "dock",
+      "edgeId": "road-river-b39-door-river-quarter-3",
+      "nodeId": "river-b39-door",
+      "direction": -1,
+      "door": {
+        "x": -512.4,
+        "y": 20.6,
+        "z": 1040.2
+      },
+      "nodePosition": {
+        "x": -512.4,
+        "y": 20.6,
+        "z": 1040.2
+      },
+      "roadEndpointLanePosition": {
+        "x": -511.09999999999997,
+        "y": 20.6,
+        "z": 1040.2
+      },
+      "doorDistance": 1.3000000000000114,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b41",
+      "buildingId": "river-b41",
+      "kind": "farm",
+      "edgeId": "road-river-b41-door-river-quarter-1",
+      "nodeId": "river-b41-door",
+      "direction": -1,
+      "door": {
+        "x": -875.6,
+        "y": 18.6,
+        "z": 1020.4000000000001
+      },
+      "nodePosition": {
+        "x": -875.6,
+        "y": 18.6,
+        "z": 1020.4000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -874.3000000000001,
+        "y": 18.6,
+        "z": 1020.4000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b42",
+      "buildingId": "river-b42",
+      "kind": "dock",
+      "edgeId": "road-river-b42-door-market-quarter-1",
+      "nodeId": "river-b42-door",
+      "direction": -1,
+      "door": {
+        "x": -634.4000000000001,
+        "y": 34.6,
+        "z": 642.8000000000001
+      },
+      "nodePosition": {
+        "x": -634.4000000000001,
+        "y": 34.6,
+        "z": 642.8000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -633.1000000000001,
+        "y": 34.6,
+        "z": 642.8000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b44",
+      "buildingId": "river-b44",
+      "kind": "farm",
+      "edgeId": "road-river-b44-door-river-quarter-0",
+      "nodeId": "river-b44-door",
+      "direction": -1,
+      "door": {
+        "x": -926.4000000000001,
+        "y": 26.6,
+        "z": 730.4000000000001
+      },
+      "nodePosition": {
+        "x": -926.4000000000001,
+        "y": 26.6,
+        "z": 730.4000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -925.1000000000001,
+        "y": 26.6,
+        "z": 730.4000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b45",
+      "buildingId": "river-b45",
+      "kind": "dock",
+      "edgeId": "road-river-b45-door-river-station",
+      "nodeId": "river-b45-door",
+      "direction": -1,
+      "door": {
+        "x": -816.4000000000001,
+        "y": 20.6,
+        "z": 1060.2
+      },
+      "nodePosition": {
+        "x": -816.4000000000001,
+        "y": 20.6,
+        "z": 1060.2
+      },
+      "roadEndpointLanePosition": {
+        "x": -815.1000000000001,
+        "y": 20.6,
+        "z": 1060.2
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b48",
+      "buildingId": "river-b48",
+      "kind": "dock",
+      "edgeId": "road-river-b48-door-river-quarter-1",
+      "nodeId": "river-b48-door",
+      "direction": -1,
+      "door": {
+        "x": -757.8000000000001,
+        "y": 32.6,
+        "z": 1028.6000000000001
+      },
+      "nodePosition": {
+        "x": -757.8000000000001,
+        "y": 32.6,
+        "z": 1028.6000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -756.5000000000001,
+        "y": 32.6,
+        "z": 1028.6000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b51",
+      "buildingId": "river-b51",
+      "kind": "farm",
+      "edgeId": "road-river-b51-door-river-quarter-3",
+      "nodeId": "river-b51-door",
+      "direction": -1,
+      "door": {
+        "x": -627.4000000000001,
+        "y": 26.6,
+        "z": 1391.8000000000002
+      },
+      "nodePosition": {
+        "x": -627.4000000000001,
+        "y": 26.6,
+        "z": 1391.8000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -626.1000000000001,
+        "y": 26.6,
+        "z": 1391.8000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b54",
+      "buildingId": "river-b54",
+      "kind": "farm",
+      "edgeId": "road-river-b54-door-river-quarter-0",
+      "nodeId": "river-b54-door",
+      "direction": -1,
+      "door": {
+        "x": -865,
+        "y": 32.4,
+        "z": 700.2
+      },
+      "nodePosition": {
+        "x": -865,
+        "y": 32.4,
+        "z": 700.2
+      },
+      "roadEndpointLanePosition": {
+        "x": -863.7,
+        "y": 32.4,
+        "z": 700.2
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b55",
+      "buildingId": "river-b55",
+      "kind": "dock",
+      "edgeId": "road-river-b55-door-river-quarter-1",
+      "nodeId": "river-b55-door",
+      "direction": -1,
+      "door": {
+        "x": -779,
+        "y": 24.6,
+        "z": 1234.8000000000002
+      },
+      "nodePosition": {
+        "x": -779,
+        "y": 24.6,
+        "z": 1234.8000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -777.7,
+        "y": 24.6,
+        "z": 1234.8000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b57",
+      "buildingId": "river-b57",
+      "kind": "farm",
+      "edgeId": "road-river-b57-door-river-quarter-1",
+      "nodeId": "river-b57-door",
+      "direction": -1,
+      "door": {
+        "x": -1122.8,
+        "y": 19.6,
+        "z": 1259.8000000000002
+      },
+      "nodePosition": {
+        "x": -1122.8,
+        "y": 19.6,
+        "z": 1259.8000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -1121.5,
+        "y": 19.6,
+        "z": 1259.8000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-river-b58",
+      "buildingId": "river-b58",
+      "kind": "dock",
+      "edgeId": "road-river-b58-door-river-quarter-2",
+      "nodeId": "river-b58-door",
+      "direction": -1,
+      "door": {
+        "x": -800.4000000000001,
+        "y": 29.400000000000002,
+        "z": 619.4000000000001
+      },
+      "nodePosition": {
+        "x": -800.4000000000001,
+        "y": 29.400000000000002,
+        "z": 619.4000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -799.1000000000001,
+        "y": 29.400000000000002,
+        "z": 619.4000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b3",
+      "buildingId": "workshop-b3",
+      "kind": "farm",
+      "edgeId": "road-workshop-b3-door-workshop-quarter-3",
+      "nodeId": "workshop-b3-door",
+      "direction": -1,
+      "door": {
+        "x": -1039,
+        "y": 114.60000000000001,
+        "z": 516
+      },
+      "nodePosition": {
+        "x": -1039,
+        "y": 114.60000000000001,
+        "z": 516
+      },
+      "roadEndpointLanePosition": {
+        "x": -1037.7,
+        "y": 114.60000000000001,
+        "z": 516
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b6",
+      "buildingId": "workshop-b6",
+      "kind": "farm",
+      "edgeId": "road-workshop-b6-door-workshop-quarter-2",
+      "nodeId": "workshop-b6-door",
+      "direction": -1,
+      "door": {
+        "x": -1044.8,
+        "y": 160.60000000000002,
+        "z": 174.60000000000002
+      },
+      "nodePosition": {
+        "x": -1044.8,
+        "y": 160.60000000000002,
+        "z": 174.60000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -1043.5,
+        "y": 160.60000000000002,
+        "z": 174.60000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b9",
+      "buildingId": "workshop-b9",
+      "kind": "farm",
+      "edgeId": "road-workshop-b9-door-workshop-quarter-1",
+      "nodeId": "workshop-b9-door",
+      "direction": -1,
+      "door": {
+        "x": -1474.6000000000001,
+        "y": 122.60000000000001,
+        "z": 437
+      },
+      "nodePosition": {
+        "x": -1474.6000000000001,
+        "y": 122.60000000000001,
+        "z": 437
+      },
+      "roadEndpointLanePosition": {
+        "x": -1473.3000000000002,
+        "y": 122.60000000000001,
+        "z": 437
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b12",
+      "buildingId": "workshop-b12",
+      "kind": "farm",
+      "edgeId": "road-workshop-b12-door-workshop-quarter-0",
+      "nodeId": "workshop-b12-door",
+      "direction": -1,
+      "door": {
+        "x": -1488.2,
+        "y": 168.60000000000002,
+        "z": 106.60000000000001
+      },
+      "nodePosition": {
+        "x": -1488.2,
+        "y": 168.60000000000002,
+        "z": 106.60000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -1486.9,
+        "y": 168.60000000000002,
+        "z": 106.60000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b19",
+      "buildingId": "workshop-b19",
+      "kind": "farm",
+      "edgeId": "road-workshop-b19-door-workshop-quarter-3",
+      "nodeId": "workshop-b19-door",
+      "direction": -1,
+      "door": {
+        "x": -964.2,
+        "y": 112.60000000000001,
+        "z": 383
+      },
+      "nodePosition": {
+        "x": -964.2,
+        "y": 112.60000000000001,
+        "z": 383
+      },
+      "roadEndpointLanePosition": {
+        "x": -962.9000000000001,
+        "y": 112.60000000000001,
+        "z": 383
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b22",
+      "buildingId": "workshop-b22",
+      "kind": "farm",
+      "edgeId": "road-workshop-b22-door-workshop-quarter-2",
+      "nodeId": "workshop-b22-door",
+      "direction": -1,
+      "door": {
+        "x": -922.6,
+        "y": 162.60000000000002,
+        "z": 83.4
+      },
+      "nodePosition": {
+        "x": -922.6,
+        "y": 162.60000000000002,
+        "z": 83.4
+      },
+      "roadEndpointLanePosition": {
+        "x": -921.3000000000001,
+        "y": 162.60000000000002,
+        "z": 83.4
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b25",
+      "buildingId": "workshop-b25",
+      "kind": "farm",
+      "edgeId": "road-workshop-b25-door-workshop-quarter-1",
+      "nodeId": "workshop-b25-door",
+      "direction": -1,
+      "door": {
+        "x": -1298.8000000000002,
+        "y": 128.6,
+        "z": 482
+      },
+      "nodePosition": {
+        "x": -1298.8000000000002,
+        "y": 128.6,
+        "z": 482
+      },
+      "roadEndpointLanePosition": {
+        "x": -1297.5000000000002,
+        "y": 128.6,
+        "z": 482
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b28",
+      "buildingId": "workshop-b28",
+      "kind": "farm",
+      "edgeId": "road-workshop-b28-door-workshop-station",
+      "nodeId": "workshop-b28-door",
+      "direction": -1,
+      "door": {
+        "x": -1345.4,
+        "y": 159.4,
+        "z": 217.20000000000002
+      },
+      "nodePosition": {
+        "x": -1345.4,
+        "y": 159.4,
+        "z": 217.20000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -1344.1000000000001,
+        "y": 159.4,
+        "z": 217.20000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b35",
+      "buildingId": "workshop-b35",
+      "kind": "farm",
+      "edgeId": "road-workshop-b35-door-workshop-quarter-3",
+      "nodeId": "workshop-b35-door",
+      "direction": -1,
+      "door": {
+        "x": -1126.8,
+        "y": 118.80000000000001,
+        "z": 303.8
+      },
+      "nodePosition": {
+        "x": -1126.8,
+        "y": 118.80000000000001,
+        "z": 303.8
+      },
+      "roadEndpointLanePosition": {
+        "x": -1125.5,
+        "y": 118.80000000000001,
+        "z": 303.8
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b38",
+      "buildingId": "workshop-b38",
+      "kind": "farm",
+      "edgeId": "road-workshop-b38-door-workshop-quarter-2",
+      "nodeId": "workshop-b38-door",
+      "direction": -1,
+      "door": {
+        "x": -1038.8,
+        "y": 162.60000000000002,
+        "z": -55.6
+      },
+      "nodePosition": {
+        "x": -1038.8,
+        "y": 162.60000000000002,
+        "z": -55.6
+      },
+      "roadEndpointLanePosition": {
+        "x": -1037.5,
+        "y": 162.60000000000002,
+        "z": -55.6
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b41",
+      "buildingId": "workshop-b41",
+      "kind": "farm",
+      "edgeId": "road-workshop-b41-door-workshop-station",
+      "nodeId": "workshop-b41-door",
+      "direction": -1,
+      "door": {
+        "x": -1301.4,
+        "y": 126.60000000000001,
+        "z": 271.40000000000003
+      },
+      "nodePosition": {
+        "x": -1301.4,
+        "y": 126.60000000000001,
+        "z": 271.40000000000003
+      },
+      "roadEndpointLanePosition": {
+        "x": -1300.1000000000001,
+        "y": 126.60000000000001,
+        "z": 271.40000000000003
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b44",
+      "buildingId": "workshop-b44",
+      "kind": "farm",
+      "edgeId": "road-workshop-b44-door-workshop-quarter-0",
+      "nodeId": "workshop-b44-door",
+      "direction": -1,
+      "door": {
+        "x": -1313.8000000000002,
+        "y": 171,
+        "z": -42.800000000000004
+      },
+      "nodePosition": {
+        "x": -1313.8000000000002,
+        "y": 171,
+        "z": -42.800000000000004
+      },
+      "roadEndpointLanePosition": {
+        "x": -1312.5000000000002,
+        "y": 171,
+        "z": -42.800000000000004
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b51",
+      "buildingId": "workshop-b51",
+      "kind": "farm",
+      "edgeId": "road-workshop-b51-door-workshop-quarter-3",
+      "nodeId": "workshop-b51-door",
+      "direction": -1,
+      "door": {
+        "x": -1207.8,
+        "y": 120.60000000000001,
+        "z": 564.8000000000001
+      },
+      "nodePosition": {
+        "x": -1207.8,
+        "y": 120.60000000000001,
+        "z": 564.8000000000001
+      },
+      "roadEndpointLanePosition": {
+        "x": -1206.5,
+        "y": 120.60000000000001,
+        "z": 564.8000000000001
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b54",
+      "buildingId": "workshop-b54",
+      "kind": "farm",
+      "edgeId": "road-workshop-b54-door-workshop-station",
+      "nodeId": "workshop-b54-door",
+      "direction": -1,
+      "door": {
+        "x": -1216,
+        "y": 162,
+        "z": 27.400000000000002
+      },
+      "nodePosition": {
+        "x": -1216,
+        "y": 162,
+        "z": 27.400000000000002
+      },
+      "roadEndpointLanePosition": {
+        "x": -1214.7,
+        "y": 162,
+        "z": 27.400000000000002
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b57",
+      "buildingId": "workshop-b57",
+      "kind": "farm",
+      "edgeId": "road-workshop-b57-door-workshop-quarter-1",
+      "nodeId": "workshop-b57-door",
+      "direction": -1,
+      "door": {
+        "x": -1623.4,
+        "y": 128.6,
+        "z": 345.20000000000005
+      },
+      "nodePosition": {
+        "x": -1623.4,
+        "y": 128.6,
+        "z": 345.20000000000005
+      },
+      "roadEndpointLanePosition": {
+        "x": -1622.1000000000001,
+        "y": 128.6,
+        "z": 345.20000000000005
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-workshop-b60",
+      "buildingId": "workshop-b60",
+      "kind": "farm",
+      "edgeId": "road-workshop-b60-door-workshop-quarter-1",
+      "nodeId": "workshop-b60-door",
+      "direction": -1,
+      "door": {
+        "x": -1561.6000000000001,
+        "y": 106,
+        "z": -70.4
+      },
+      "nodePosition": {
+        "x": -1561.6000000000001,
+        "y": 106,
+        "z": -70.4
+      },
+      "roadEndpointLanePosition": {
+        "x": -1560.3000000000002,
+        "y": 106,
+        "z": -70.4
+      },
+      "doorDistance": 1.2999999999999545,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    },
+    {
+      "shopId": "shop-core-dock-building",
+      "buildingId": "core-dock-building",
+      "kind": "dock",
+      "edgeId": "road-core-dock-building-door-core-lift-bottom",
+      "nodeId": "core-dock-building-door",
+      "direction": -1,
+      "door": {
+        "x": 125,
+        "y": 94,
+        "z": 165.4
+      },
+      "nodePosition": {
+        "x": 125,
+        "y": 94,
+        "z": 165.4
+      },
+      "roadEndpointLanePosition": {
+        "x": 126.3,
+        "y": 94,
+        "z": 165.4
+      },
+      "doorDistance": 1.2999999999999972,
+      "nodeNear": true,
+      "vehicleNear": false,
+      "nodeSupport": null,
+      "vehicleSupport": null,
+      "loadingConjunction": false,
+      "scope": "potential canonical road-edge arrival coordinates, not an observed vehicle trip"
+    }
+  ],
+  "shops": [
+    {
+      "id": "shop-river-b0",
+      "buildingId": "river-b0",
+      "districtId": "river",
+      "inventory": 99.15988544071445,
+      "price": 9.600949365498888,
+      "revenue": 57.063753268545454,
+      "profit": -15.049910492495254,
+      "customers": 0,
+      "open": true,
+      "employees": 3,
+      "ownerId": "citizen-88",
+      "cash": 22.411819190486707
+    },
+    {
+      "id": "shop-river-b3",
+      "buildingId": "river-b3",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b6",
+      "buildingId": "river-b6",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b7",
+      "buildingId": "river-b7",
+      "districtId": "river",
+      "inventory": 90,
+      "price": 10.279315766177369,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b9",
+      "buildingId": "river-b9",
+      "districtId": "river",
+      "inventory": 156,
+      "price": 9.597413700212881,
+      "revenue": 37.60067928980979,
+      "profit": -18.004797979600006,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b10",
+      "buildingId": "river-b10",
+      "districtId": "river",
+      "inventory": 90,
+      "price": 10.279315766177369,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b12",
+      "buildingId": "river-b12",
+      "districtId": "river",
+      "inventory": 154,
+      "price": 9.597043895070978,
+      "revenue": 56.045964465127334,
+      "profit": -13.352047808423091,
+      "customers": 0,
+      "open": true,
+      "employees": 3,
+      "ownerId": "citizen-22",
+      "cash": 22.955552739602176
+    },
+    {
+      "id": "shop-river-b13",
+      "buildingId": "river-b13",
+      "districtId": "river",
+      "inventory": 98.12019995313949,
+      "price": 9.602946149851677,
+      "revenue": 19.254001255374043,
+      "profit": -29.913918845055978,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-594",
+      "cash": 47.43538714009565
+    },
+    {
+      "id": "shop-river-b16",
+      "buildingId": "river-b16",
+      "districtId": "river",
+      "inventory": 84,
+      "price": 10.788805703418737,
+      "revenue": 57.20053359837628,
+      "profit": 52.62449091050618,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 52.62449091050618
+    },
+    {
+      "id": "shop-river-b19",
+      "buildingId": "river-b19",
+      "districtId": "river",
+      "inventory": 155,
+      "price": 9.63387528979261,
+      "revenue": 46.78795988937756,
+      "profit": -7.1271693462169665,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-33",
+      "cash": 75.44769406119048
+    },
+    {
+      "id": "shop-river-b22",
+      "buildingId": "river-b22",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b23",
+      "buildingId": "river-b23",
+      "districtId": "river",
+      "inventory": 98.34791190405359,
+      "price": 9.60426424134641,
+      "revenue": 85.1586273354075,
+      "profit": 0.5686593138589568,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-528",
+      "cash": 51.879514993888634
+    },
+    {
+      "id": "shop-river-b25",
+      "buildingId": "river-b25",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b26",
+      "buildingId": "river-b26",
+      "districtId": "river",
+      "inventory": 101.57981957929616,
+      "price": 9.600542525285531,
+      "revenue": 28.704938365126946,
+      "profit": -39.34376697935593,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-44",
+      "cash": 27.338091838691415
+    },
+    {
+      "id": "shop-river-b28",
+      "buildingId": "river-b28",
+      "districtId": "river",
+      "inventory": 153,
+      "price": 9.596845857181002,
+      "revenue": 65.14041062746443,
+      "profit": -23.258751852362547,
+      "customers": 0,
+      "open": true,
+      "employees": 4,
+      "ownerId": "citizen-132",
+      "cash": 27.031677903392367
+    },
+    {
+      "id": "shop-river-b29",
+      "buildingId": "river-b29",
+      "districtId": "river",
+      "inventory": 98.37749255841236,
+      "price": 9.600673541557109,
+      "revenue": 28.712092288910675,
+      "profit": -25.419109693898083,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-55",
+      "cash": 28.47689862625495
+    },
+    {
+      "id": "shop-river-b32",
+      "buildingId": "river-b32",
+      "districtId": "river",
+      "inventory": 90,
+      "price": 10.279315766177369,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b35",
+      "buildingId": "river-b35",
+      "districtId": "river",
+      "inventory": 158,
+      "price": 9.597723752263578,
+      "revenue": 18.87465882671929,
+      "profit": -28.138423509047698,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-407",
+      "cash": 54.43568078724866
+    },
+    {
+      "id": "shop-river-b38",
+      "buildingId": "river-b38",
+      "districtId": "river",
+      "inventory": 158,
+      "price": 9.597723752263578,
+      "revenue": 18.87465882671929,
+      "profit": -29.83453580534426,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-330",
+      "cash": 52.739755157618816
+    },
+    {
+      "id": "shop-river-b39",
+      "buildingId": "river-b39",
+      "districtId": "river",
+      "inventory": 98.76629926472548,
+      "price": 9.602334350037344,
+      "revenue": 19.190017238459323,
+      "profit": -33.14795747395088,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-198",
+      "cash": 49.058847859382624
+    },
+    {
+      "id": "shop-river-b41",
+      "buildingId": "river-b41",
+      "districtId": "river",
+      "inventory": 158,
+      "price": 9.597723752263578,
+      "revenue": 18.87465882671929,
+      "profit": -28.770443953492205,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-143",
+      "cash": 53.8034736761374
+    },
+    {
+      "id": "shop-river-b42",
+      "buildingId": "river-b42",
+      "districtId": "river",
+      "inventory": 90,
+      "price": 10.279315766177369,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b44",
+      "buildingId": "river-b44",
+      "districtId": "river",
+      "inventory": 156,
+      "price": 9.597233210736558,
+      "revenue": 37.375460813786,
+      "profit": -8.37663485008207,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-319",
+      "cash": 22.901562740645353
+    },
+    {
+      "id": "shop-river-b45",
+      "buildingId": "river-b45",
+      "districtId": "river",
+      "inventory": 98.12019995313949,
+      "price": 9.603336858131717,
+      "revenue": 19.245865780487627,
+      "profit": -29.921403481951483,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-66",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b48",
+      "buildingId": "river-b48",
+      "districtId": "river",
+      "inventory": 98.08668243660419,
+      "price": 9.602322828859421,
+      "revenue": 38.51050694545371,
+      "profit": -20.01096790646817,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-99",
+      "cash": 30.250792031493503
+    },
+    {
+      "id": "shop-river-b51",
+      "buildingId": "river-b51",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b54",
+      "buildingId": "river-b54",
+      "districtId": "river",
+      "inventory": 157,
+      "price": 9.597422457089982,
+      "revenue": 28.404670011165404,
+      "profit": -48.902169018684276,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-253",
+      "cash": 33.67193527761242
+    },
+    {
+      "id": "shop-river-b55",
+      "buildingId": "river-b55",
+      "districtId": "river",
+      "inventory": 100.97384920197662,
+      "price": 9.602361302496702,
+      "revenue": 38.409317146167055,
+      "profit": -31.3379329192497,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-264",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b57",
+      "buildingId": "river-b57",
+      "districtId": "river",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-11",
+      "cash": 0
+    },
+    {
+      "id": "shop-river-b58",
+      "buildingId": "river-b58",
+      "districtId": "river",
+      "inventory": 96.99043379158935,
+      "price": 9.688703291144186,
+      "revenue": 19.37062269549256,
+      "profit": -24.293205490517153,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-165",
+      "cash": 39.385058806528846
+    },
+    {
+      "id": "shop-workshop-b3",
+      "buildingId": "workshop-b3",
+      "districtId": "workshop",
+      "inventory": 158,
+      "price": 9.597815532094387,
+      "revenue": 18.887672473650518,
+      "profit": -30.76159429823678,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-530",
+      "cash": 49.44539263165925
+    },
+    {
+      "id": "shop-workshop-b6",
+      "buildingId": "workshop-b6",
+      "districtId": "workshop",
+      "inventory": 158,
+      "price": 9.597815532094387,
+      "revenue": 18.887672473650518,
+      "profit": -26.63760035024626,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-332",
+      "cash": 56.3047755930161
+    },
+    {
+      "id": "shop-workshop-b9",
+      "buildingId": "workshop-b9",
+      "districtId": "workshop",
+      "inventory": 126,
+      "price": 9.734863342285106,
+      "revenue": 322.5873869782428,
+      "profit": 249.49042771738277,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-13",
+      "cash": 301.4577874052478
+    },
+    {
+      "id": "shop-workshop-b12",
+      "buildingId": "workshop-b12",
+      "districtId": "workshop",
+      "inventory": 130,
+      "price": 9.670544971981013,
+      "revenue": 286.0133144681557,
+      "profit": 184.2287519840103,
+      "customers": 2,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-24",
+      "cash": 269.37790988471966
+    },
+    {
+      "id": "shop-workshop-b19",
+      "buildingId": "workshop-b19",
+      "districtId": "workshop",
+      "inventory": 137,
+      "price": 9.785849659308752,
+      "revenue": 217.31628787805013,
+      "profit": 150.09382040336172,
+      "customers": 1,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-35",
+      "cash": 200.43084310704603
+    },
+    {
+      "id": "shop-workshop-b22",
+      "buildingId": "workshop-b22",
+      "districtId": "workshop",
+      "inventory": 129,
+      "price": 9.71932503260698,
+      "revenue": 291.70253925504284,
+      "profit": 181.04674338312196,
+      "customers": 1,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-255",
+      "cash": 268.8259881823535
+    },
+    {
+      "id": "shop-workshop-b25",
+      "buildingId": "workshop-b25",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b28",
+      "buildingId": "workshop-b28",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b35",
+      "buildingId": "workshop-b35",
+      "districtId": "workshop",
+      "inventory": 156,
+      "price": 9.597964996319,
+      "revenue": 37.88212394729818,
+      "profit": -44.381832128368856,
+      "customers": 0,
+      "open": true,
+      "employees": 2,
+      "ownerId": "citizen-200",
+      "cash": 38.560566509928925
+    },
+    {
+      "id": "shop-workshop-b38",
+      "buildingId": "workshop-b38",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b41",
+      "buildingId": "workshop-b41",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b44",
+      "buildingId": "workshop-b44",
+      "districtId": "workshop",
+      "inventory": 158,
+      "price": 9.597815532094387,
+      "revenue": 18.887672473650518,
+      "profit": -24.149295934170603,
+      "customers": 0,
+      "open": true,
+      "employees": 1,
+      "ownerId": "citizen-277",
+      "cash": 37.57086570552019
+    },
+    {
+      "id": "shop-workshop-b51",
+      "buildingId": "workshop-b51",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b54",
+      "buildingId": "workshop-b54",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b57",
+      "buildingId": "workshop-b57",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-workshop-b60",
+      "buildingId": "workshop-b60",
+      "districtId": "workshop",
+      "inventory": 160,
+      "price": 9.595521036324163,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-13",
+      "cash": 0
+    },
+    {
+      "id": "shop-core-dock-building",
+      "buildingId": "core-dock-building",
+      "districtId": "core",
+      "inventory": 90,
+      "price": 10.279315766177369,
+      "revenue": 0,
+      "profit": 0,
+      "customers": 0,
+      "open": true,
+      "employees": 0,
+      "ownerId": "citizen-17",
+      "cash": 0
+    }
+  ]
+}

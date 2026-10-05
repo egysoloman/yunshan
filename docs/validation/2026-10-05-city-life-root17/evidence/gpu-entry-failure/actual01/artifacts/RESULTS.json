@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-10-05T03:44:33.425Z",
+  "source": "/tmp/ROOT17-integration-20261005-01/source10",
+  "graph": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "planSHA256": "c0ab2117584d8f044dfccddcc81f9808b41356d3eb9cc6418d55c52fd8bbdd42",
+  "driverSHA256": "43f61dded4ed44031f64cbad7be04664d00c482eda93f6c0a1d8f4acbe6ab27a",
+  "scope": "Linux Chromium SwiftShader source351 true native birth (native pause command only), followed by explicitly controlled original river-b1 door+2m once-only body fixture and actual DOM E admission + DOM building-impact assessment. Real main rAF settlement precedes whole-save equality screenshots. No native city travel, old5waypoint repair, macOS, target FPS, full-art completion or physical demolition claim.",
+  "artStatus": "FAIL: native screenshots do not meet the supplied art references",
+  "captures": [],
+  "previewIdentity": {
+    "pid": 149901,
+    "parent": 149890,
+    "state": "R",
+    "ticks": 10269805
+  },
+  "status": "FAIL",
+  "endedAt": "2026-10-05T03:46:13.296Z",
+  "errors": [
+    {
+      "scope": "fatal",
+      "message": "page.waitForFunction: Timeout 90000ms exceeded.",
+      "stack": "page.waitForFunction: Timeout 90000ms exceeded.\n    at /tmp/ROOT17-integrated-gpu-20261005-01/capture.mjs:67:14"
+    }
+  ]
+}

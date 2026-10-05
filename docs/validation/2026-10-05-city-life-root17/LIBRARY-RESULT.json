@@ -1,0 +1,180 @@
+{
+  "at": "2026-10-05T04:23:36.736014+00:00",
+  "status": "LIBRARY_UNAVAILABLE_BEFORE_PREPARATION",
+  "reason": "Library network request failed before preparation; no uploaded file identifiers or replacement success returned.",
+  "attemptedOrderedItems": 17,
+  "helperInvocations": 1,
+  "successfulNewLibraryIDs": [],
+  "memoReplacementConfirmed": false,
+  "retryOrDirectFallback": false,
+  "immutableDocumentCut": "Original ZIP Final03 predates this outcome. All original bytes preserved; Git workbranch delivery is separate.",
+  "runReceipt": {
+    "startedUTC": "2026-10-05T04:22:18.896374+00:00",
+    "endedUTC": "2026-10-05T04:22:19.060870+00:00",
+    "wallSeconds": 0.16450369499216322,
+    "exitCode": 1,
+    "processOutcome": "COMPLETED_PROCESS",
+    "requestItems": 17,
+    "requestSHA256": "a868beb94de95f52cd71324a668b4ead290a881d3900471507d81eb18d880144",
+    "stdoutBytes": 0,
+    "stderrBytes": 70,
+    "stdin": "completeJSONAndEOFInOneInvocation",
+    "helperInvocations": 1,
+    "directFallbackOrRetry": false
+  },
+  "items": [
+    {
+      "index": 0,
+      "name": "Yunshan_ROOT17_Report_20261005.md",
+      "bytes": 5680,
+      "sha256": "b22ccf37195e067a1554a384ca84da84ef2564e9a4a46df5771efe3bf3520c79",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 1,
+      "name": "Yunshan_ROOT17_Requirements38_20261005.csv",
+      "bytes": 47596,
+      "sha256": "1ba0021920a81d171f1d74d7d3d1a8fb9831a32d5e5b38cb2445a5debc7b5f05",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 2,
+      "name": "Yunshan_ROOT17_Source351_20261005.zip",
+      "bytes": 11414386,
+      "sha256": "0a3c1365e1d000126b7ee8d4881c874336fae0ba82a7735a76fcd717e334c8dd",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 3,
+      "name": "ROOT17-Finite-Power-Originals-20261005-12.zip",
+      "bytes": 13818175,
+      "sha256": "890995784c5fd1acd2af4c6cf3e120acc06db7083f463badf5d17e0a97616b53",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 4,
+      "name": "ROOT17_Medical_Estate_Originals_20261005.zip",
+      "bytes": 13953716,
+      "sha256": "8537d249af0466d1406fce221539ed265a4645608645db0c8e49a160ee900056",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 5,
+      "name": "ROOT17-freight-close-20261005-01.zip",
+      "bytes": 410252,
+      "sha256": "a923d939cb7b7ac704e01679c8885d5619e62686ac90c2887ac36687f692348d",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 6,
+      "name": "ROOT17-default-edf-integration-20261005-02.zip",
+      "bytes": 5009849,
+      "sha256": "43aeaea7d36d109544ef6c6330c429a2fd2182077fd57f4bb2adabd47bcde65e",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 7,
+      "name": "yunshan-ROOT17-performance-evidence-20261005-01.zip",
+      "bytes": 14236344,
+      "sha256": "8c2c0b00db4da10e143805c18e47ce5f23772d2b73321931ded2cfdb22b225bd",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 8,
+      "name": "ROOT18-dynamic-city-original-evidence-20261005-01.zip",
+      "bytes": 24494013,
+      "sha256": "cde50ae20ca4f15365779ee22dd3dc75ec1d2bbe9574cec6268c2181ea9b4128",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 9,
+      "name": "ROOT17_Requirements_38_Originals_20261005.zip",
+      "bytes": 1631722,
+      "sha256": "09e3f63c0b3d53b75a08961e2166cdc7af671752698c46d57082a33d11a67ba9",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 10,
+      "name": "yunshan-ROOT18-original-interior-models-v1.zip",
+      "bytes": 333798,
+      "sha256": "99c2a3625d4831f63636a24d201eaca909025c594ad1e239eb26da68f6f375b2",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 11,
+      "name": "yunshan-ROOT18-interior-props-validated-cpu-kit.zip",
+      "bytes": 17697949,
+      "sha256": "a3add1c35441a68c20bdc3ee4b73d55f3675054ae79b71031c2a30e6634d9dee",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 12,
+      "name": "Yunshan_ROOT17_Integration_Originals_20261005.zip",
+      "bytes": 2456119,
+      "sha256": "dbd96f23b938b64f9b9c07e475435ff9de6864f7e6659cc57ddef84dcedb9288",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 13,
+      "name": "Yunshan_ROOT17_Integration_Originals_20261005_Complete02.zip",
+      "bytes": 37984155,
+      "sha256": "d3b8bdf4d6e8de36800b2f57ab7e88240a6826204d4c369f2161e573ebf00677",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 14,
+      "name": "Yunshan_ROOT17_Integration_Originals_20261005_Final03.zip",
+      "bytes": 38235072,
+      "sha256": "43e54ce60e9fbb6c345937d9c66c06a5288f08e1074cf2ad59733b624a844c79",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 15,
+      "name": "Yunshan_ROOT17_Actual_FirstPerson_Impact_20261005.png",
+      "bytes": 613286,
+      "sha256": "de3d4a5212637e44ea46e810202d96e973f0d0a891eb0db8c063920bc7996b4f",
+      "purpose": "create_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    },
+    {
+      "index": 16,
+      "name": "开发备忘录.md",
+      "bytes": 470687,
+      "sha256": "4d2eba6c0711699d75433fba46bbfe22902a49628c2041ca915f8669b33cea80",
+      "purpose": "replace_library_file",
+      "library_file_id": null,
+      "status": "NOT_SAVED_BEFORE_PREPARATION"
+    }
+  ]
+}

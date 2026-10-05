@@ -3,6 +3,7 @@ import { canAccessFloor, getFloorDimensions } from '../access';
 import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
 import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
 import { actorActivityAvailable, claimActorActivityMinutes } from './activity-minutes';
+import { gridBuildingSupplyRatio } from './power-grid';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 
 export interface ClinicalReceipt { commodity: 'materials'; procurementId: string; purchasedAt: number; paid: number; quantity: number; tax: number; lots: { shopId: string; quantity: number; unitPrice: number; gross: number; net: number }[] }
@@ -123,6 +124,12 @@ function careInterval(state: SimState, minutes: number, earliestAt = 0): CareInt
   const end = clock(state), dayStart = end - state.hour * 60;
   return { start: Math.max(end - Math.max(0, minutes), dayStart + 8 * 60, earliestAt), end: Math.min(end, dayStart + 17 * 60) };
 }
+/** A phase crossing closing time retains only its actual pre-closing tail.
+ * This admission check grants no wages, presence, material or care minutes. */
+export function clinicalOpenMinutes(state: SimState, minutes: number, earliestAt = 0): number {
+  const window = careInterval(state, minutes, earliestAt);
+  return Math.max(0, window.end - window.start);
+}
 function intersection(...ranges: CareInterval[]): CareInterval { return { start: Math.max(...ranges.map(range => range.start)), end: Math.min(...ranges.map(range => range.end)) }; }
 function union(ranges: CareInterval[]): CareInterval[] {
   const merged: CareInterval[] = [];
@@ -199,9 +206,15 @@ export function takeClinicalDoctorSlot(simulation: Simulation, doctorId: string,
   if (!slotAvailable(simulation, doctorId, patientId)) return false;
   const p = carePhase(simulation); p.doctors.set(doctorId, (p.doctors.get(doctorId) ?? 0) + 1); p.patients.add(patientId); return true;
 }
+// A declared clinic load must be fully supplied before an indivisible care
+// operation. Unconfigured legacy worlds retain their original care contract.
+export function clinicalPowerAvailable(state: SimState, siteId: string): boolean {
+  return !state.powerGrid || gridBuildingSupplyRatio(state, siteId) >= 1 - EPS;
+}
 /** Claim one patient window and only the previously uncovered union of the
  * doctor's work intervals. Two overlapping patients consume one doctor clock. */
 export function claimClinicalCareMinutes(simulation: Simulation, site: Building, doctor: Citizen, patientId: string, phaseMinutes: number, earliestAt: number, remainingMinutes: number): number {
+  if (!clinicalPowerAvailable(simulation.state, site.id)) return 0;
   if (!slotAvailable(simulation, doctor.id, patientId) || !clinicalPairAtServiceStation(simulation, site, doctor.id, patientId)) return 0;
   const patient = actor(simulation.state, patientId);
   if (!patient || patient.needs.hunger < 20 || patient.needs.fatigue < 15) return 0;
@@ -320,7 +333,7 @@ function procure(simulation: Simulation, order: ClinicalOrder, site: Building): 
   order.purchasePaid += gross; order.receivedUnits++; order.reservedUnits++; material.receivedUnits++; c.stats.purchasePaid += gross;
   const receipt: ClinicalReceipt = { commodity: 'materials', procurementId: `${order.id}:receipt-1`, purchasedAt: clock(s), paid: gross, quantity: 1, tax, lots: [{ shopId: source.shop.id, quantity: 1, unitPrice: gross, gross, net }] }; order.receipts.push(receipt);
   simulation.emitEvent({ type: 'wholesale', shopId: source.shop.id, districtId: source.shop.districtId, amount: gross, quantity: 1, unitPrice: gross, siteId: site.id, procurementId: receipt.procurementId, purpose: 'clinical-material' });
-  order.state = 'awaitingDoctor'; order.lastReason = '实物已购入并为患者保留；等待医生实际在岗。';
+  order.state = 'awaitingDoctor'; order.lastReason = clinicalPowerAvailable(s, site.id) ? '实物已购入并为患者保留；等待医生实际在岗。' : '已购材料和托管款保留；声明电网未足额供给该诊所，等候当前真实供能。';
 }
 export function installClinical(simulation: Simulation): void {
   const sites = new Map(simulation.worldDefinition.buildings.map(site => [site.id, site]));
@@ -334,9 +347,10 @@ export function installClinical(simulation: Simulation): void {
       if (order.cancelledAt !== null || !profile(s, order.patientId).alive || !profile(s, order.payerId).alive) { stop(simulation, order); continue; }
       const site = sites.get(order.siteId)!;
       if (order.reservedUnits < 1 - EPS) continue;
+      if (!clinicalPowerAvailable(s, site.id)) { order.state = 'awaitingDoctor'; order.lastReason = '已购材料和托管款保留；声明电网未足额供给该诊所，等候当前真实供能。'; continue; }
       const patient = actor(s, order.patientId)!;
       if (clinicalVisitDeadline(s, order.patientId) > clock(s)) { order.state = 'awaitingDoctor'; order.lastReason = '既有公共或付费诊疗复诊间隔尚未结束；物料与托管款保留。'; continue; }
-      if (clock(s) <= order.startedAt + EPS || s.hour < 8 || s.hour >= 17 || !clinicalAtSite(simulation, site, order.patientId) || patient.needs.hunger < 20 || patient.needs.fatigue < 15) { order.state = 'awaitingDoctor'; order.lastReason = '已购材料保留；等候开放时间、患者在场和体力恢复。'; continue; }
+      if (clock(s) <= order.startedAt + EPS || clinicalOpenMinutes(s, minutes) <= 0 || !clinicalAtSite(simulation, site, order.patientId) || patient.needs.hunger < 20 || patient.needs.fatigue < 15) { order.state = 'awaitingDoctor'; order.lastReason = '已购材料保留；等候开放时间、患者在场和体力恢复。'; continue; }
       if (!availableDoctors.has(site.id)) availableDoctors.set(site.id, doctors(simulation, site, true, minutes));
       // Check finite settlement before consuming any shared activity or slot.
       if (s.treasury + order.escrow > MONEY_LIMIT) { order.state = 'awaitingDoctor'; order.lastReason = '公库收款容量已满；未赚服务费保留托管。'; continue; }

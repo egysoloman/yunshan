@@ -1,0 +1,221 @@
+{
+  "status": "DRAFT_NOT_READY_DO_NOT_INSTALL",
+  "recordedAt": "2026-10-05T03:44:35.165425+00:00",
+  "baseSource": "/tmp/yunshan-ROOT17-performance-candidate06-20261005-01/source",
+  "baseSource325Graph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+  "basePerf06ArchitectureSHA256": "7f71e74408f226d891fd86ec6950ef9505fa5ea624948621d58f56cdbb78f458",
+  "sourceCount": 330,
+  "sourceInputsSHA256": "f6a456f80925a2f45707f71d53022d514107e4eae8e26475c97385223b9474a3",
+  "draftPatchSHA256": "3c976292c1aa49c5a978c6faf0c210c8375d4d02666a3b3c8991e3974ad4f45f",
+  "changes": [
+    {
+      "path": "src/access.ts",
+      "expectedBeforeSHA256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "candidateSHA256": "e27cf395a91cd65367d322403fcd6efce2294d548c7bfff9a01d03e4026dcb6d",
+      "bytes": 2568
+    },
+    {
+      "path": "src/architecture-floor-plan.ts",
+      "expectedBeforeSHA256": "7f71e74408f226d891fd86ec6950ef9505fa5ea624948621d58f56cdbb78f458",
+      "candidateSHA256": "db1b444d0297a73b1745e1c027adbba42f730dc6600da4a2f78e2378a3b41550",
+      "bytes": 71743
+    },
+    {
+      "path": "src/commercial-district.ts",
+      "expectedBeforeSHA256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+      "candidateSHA256": "a083b8e187544e60bdc7329e0b60c271c03f4f5212eba9944965d29a067fdae6",
+      "bytes": 5820
+    },
+    {
+      "path": "src/controller.ts",
+      "expectedBeforeSHA256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "candidateSHA256": "bc6287b92b378c35c65307d9b97df3789ab33cff1d907ab67972a09a1a5773a7",
+      "bytes": 28601
+    },
+    {
+      "path": "src/geometry/owned-data.ts",
+      "expectedBeforeSHA256": null,
+      "candidateSHA256": "a5e20cc0065da618b72af878e56cd5046b1115c032928074add039fdeeb66211",
+      "bytes": 2921
+    },
+    {
+      "path": "src/main.ts",
+      "expectedBeforeSHA256": "768fa6b6f4465925306da87e89835e98ccf02788161eb4ef0429d6e04ef1e98f",
+      "candidateSHA256": "32e841400e7c1a4974a22259feaff16b7bc8a34059170f5a235ad9fe8b2fdb26",
+      "bytes": 24693
+    },
+    {
+      "path": "src/persistence/world-layout.ts",
+      "expectedBeforeSHA256": "221b53f6bf27f628f5128d3a520f0437992faf29f1e527bbb2294ff8b38513b7",
+      "candidateSHA256": "1fd95a54cd424a6a245abe150ce134f4dd4e26619e79cbd164970d049f6a6961",
+      "bytes": 6194
+    },
+    {
+      "path": "src/product-city.ts",
+      "expectedBeforeSHA256": "b2c78e24aba7845596b19b5c2e6d00e20d276c62ea87102ff37bad302931b1d7",
+      "candidateSHA256": "6e808b6167710231f3ad1d1e4e2e1f975fb573d285c45174c5e551d2ad919fa8",
+      "bytes": 2848
+    },
+    {
+      "path": "src/renderer.ts",
+      "expectedBeforeSHA256": "6a595c58c77a37ad846f3e14d8ae705c3cbc7d005072dda19b9428d8170121d6",
+      "candidateSHA256": "8779d23081751ef611855a7c019f816d03587e98622b6ba14d399f3f00eeab3f",
+      "bytes": 95709
+    },
+    {
+      "path": "src/rendering/architecture-bodies.ts",
+      "expectedBeforeSHA256": "76d43ef3935a372a5d6e6df5550011fdf45638a6b87db291ed817384a89922cd",
+      "candidateSHA256": "2c1c5895d0e37d3d81b513fd8fea5ac4352f768bdb06304a085e3f4787dc6f50",
+      "bytes": 13625
+    },
+    {
+      "path": "src/rendering/architecture-detail.ts",
+      "expectedBeforeSHA256": "48d03232eefff90191bb95d93b549dd7543a41c1e06843aadc30036f1463ec10",
+      "candidateSHA256": "0364e040646101be51e6fcccd7fc43d34a00ce2163bb9ae9fcd37f4b9749a7d0",
+      "bytes": 42275
+    },
+    {
+      "path": "src/rendering/interior-lighting.ts",
+      "expectedBeforeSHA256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+      "candidateSHA256": "ea0dbfef0afb1da502f993064b40673f81711c3dde05d8f3b489f89d7ffc654e",
+      "bytes": 6005
+    },
+    {
+      "path": "src/rendering/market-shopfront.ts",
+      "expectedBeforeSHA256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+      "candidateSHA256": "c4986bf69bc261200be4f1092aca95776dcb72b7c30d03a8920c74342b467ab6",
+      "bytes": 12555
+    },
+    {
+      "path": "src/simulation/banking.ts",
+      "expectedBeforeSHA256": "dfee0e129b10df8f174929cc731ef44be3f9ef008fd1615848613a193a5a620e",
+      "candidateSHA256": "26c493127c99c6af6cd67a757c641afb776029aed19aca72cd32e2e63965c7c9",
+      "bytes": 22321
+    },
+    {
+      "path": "src/simulation/clinical.ts",
+      "expectedBeforeSHA256": "92faac84e5a409beae005997e889f6cc7cbe60b6846f4a01002ef1f8b29522e0",
+      "candidateSHA256": "428f5e32f3bac3ea471a7a6359963c15814cd9f3cc66bb2529d254d01709d13a",
+      "bytes": 45013
+    },
+    {
+      "path": "src/simulation/culture.ts",
+      "expectedBeforeSHA256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea",
+      "candidateSHA256": "1db5950565e7406cc526d86ae9d8865a36e67993e8931daa0b57033ff26563f1",
+      "bytes": 67737
+    },
+    {
+      "path": "src/simulation/education.ts",
+      "expectedBeforeSHA256": "4f776ad61a78deba289ab7f5de7fc6969f21c522a7b79ed42a15991ebbc360c7",
+      "candidateSHA256": "f148f168e9bd5528e35d5c38733b6d1f497ca6dcd8c619b6a692cfa49b48e86f",
+      "bytes": 48426
+    },
+    {
+      "path": "src/simulation/extensions.ts",
+      "expectedBeforeSHA256": "6813ae17ba8d836bd23f0ddaf1fc735698d782d5a55ee6e5ccbfe69c4f3df868",
+      "candidateSHA256": "dbf0a1c4b3d9f60fb524e0371b50719679d70a30f822fadde9189f2e1c316f3b",
+      "bytes": 92843
+    },
+    {
+      "path": "src/simulation/family-education.ts",
+      "expectedBeforeSHA256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+      "candidateSHA256": "f4d87cefee33cac504e34828f3fe78c786865a935bdc71a3c561938ae7b6a1ce",
+      "bytes": 29419
+    },
+    {
+      "path": "src/simulation/gift-contact.ts",
+      "expectedBeforeSHA256": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e",
+      "candidateSHA256": "6223f64e95b7d208380c2d5a80cbc259211c918f79cc0a845e4f315c44eebed0",
+      "bytes": 12504
+    },
+    {
+      "path": "src/simulation/governance.ts",
+      "expectedBeforeSHA256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "candidateSHA256": "d7f92099c9ab3fe07d619dea9d4838ad534d685b59597626183ef55d7d89d7d1",
+      "bytes": 28895
+    },
+    {
+      "path": "src/simulation/home-rest.ts",
+      "expectedBeforeSHA256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "candidateSHA256": "f1fc5c3dfbade30d2e02ce3228ecbb423cb43d6807daf19ae945dc87dab4a0c0",
+      "bytes": 16949
+    },
+    {
+      "path": "src/simulation/hygiene.ts",
+      "expectedBeforeSHA256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+      "candidateSHA256": "6109dd981d85763fcabbfaea26cc09929732a5b98c3d66d3b64b4854e3f478ae",
+      "bytes": 50797
+    },
+    {
+      "path": "src/simulation/npc-stair-motion.ts",
+      "expectedBeforeSHA256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+      "candidateSHA256": "81eeced261b2074126218c5b41bd4fd5b3f6dccd6f86226226ad159c87077f0c",
+      "bytes": 28965
+    },
+    {
+      "path": "src/simulation/pathology.ts",
+      "expectedBeforeSHA256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "candidateSHA256": "30a3afb306dc32f4234620a630e420b6d274e666fead594215a7ac50c4ed378f",
+      "bytes": 31685
+    },
+    {
+      "path": "src/simulation/player-labor.ts",
+      "expectedBeforeSHA256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+      "candidateSHA256": "eb67cfca976b1f891fd21f2e7d7935d59babd779643b0172ed5fffc337ed8202",
+      "bytes": 15061
+    },
+    {
+      "path": "src/simulation/power.ts",
+      "expectedBeforeSHA256": "a6a3ff625f40707f4cf481e8fef81bb8f48f7805be50754327ab9ac058a6bf10",
+      "candidateSHA256": "04b3c1498f34e212de625afbddb0d4c5083353a46dfad2e90413fd546d5c2c08",
+      "bytes": 59045
+    },
+    {
+      "path": "src/simulation/supplemental-budget.ts",
+      "expectedBeforeSHA256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb",
+      "candidateSHA256": "5113d089fbf5add84181068c8ebf78babefbfce606c3fa629cc4b0cfd8aea6a2",
+      "bytes": 21846
+    },
+    {
+      "path": "src/simulation.ts",
+      "expectedBeforeSHA256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c",
+      "candidateSHA256": "4c5ec302c5e7b41514196d265192c7c01e84d1e909be38e41cf1b50586c85c89",
+      "bytes": 296449
+    },
+    {
+      "path": "src/site-fixtures.ts",
+      "expectedBeforeSHA256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "candidateSHA256": "08721af8d0a6f31c286741935fff04332a819626b531e7c7c73e6646acc87f65",
+      "bytes": 4416
+    },
+    {
+      "path": "src/world.ts",
+      "expectedBeforeSHA256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07",
+      "candidateSHA256": "a305598c05b5ff5215e96a2085c44f534e43c0e6b6d189fbe4556edb2b99c952",
+      "bytes": 56794
+    },
+    {
+      "path": "tests/owned-data.test.ts",
+      "expectedBeforeSHA256": null,
+      "candidateSHA256": "59e4e8f55a702237dd6710710051707a1dabe808b269b964bac65a7a39615eb4",
+      "bytes": 2630
+    },
+    {
+      "path": "tests/owned-geometry.test.ts",
+      "expectedBeforeSHA256": null,
+      "candidateSHA256": "6b65ca6a11d76e96b57a02940158c26dc0120e8c03bdd92de787ac36eebf4968",
+      "bytes": 12513
+    }
+  ],
+  "originalTestsAndFixturesByteIdentical": true,
+  "sharedSourceEdits": 0,
+  "SimulationCount": 0,
+  "GPUCount": 0,
+  "LibraryWrites": 0,
+  "commitOrPush": false,
+  "blocker": "NEW03 strict ownership suite cap120 TIMEOUT_PARTIAL; NEW05 heavy world/geometry/default equivalence NOTRUN/HOLD root queue",
+  "typeReceipt": "types01/receipt.json",
+  "simpleCopierReceipt": "../yunshan-ROOT18-owned-geometry-candidate04-20261005-01/copier-pure01/receipt.json",
+  "simpleCopierScope": "exact same copier module and tests bytes as04; not whole final geometry PASS",
+  "mergeRule": "Use patch + per-file guards/explicit 3-way imports. Do not overwrite root17 simulation/product-city/clinical/banking files wholesale."
+}

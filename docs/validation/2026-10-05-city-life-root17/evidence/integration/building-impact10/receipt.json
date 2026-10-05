@@ -1,0 +1,32 @@
+{
+  "startedAt": "2026-10-05T03:36:54.343853+00:00",
+  "endedAt": "2026-10-05T03:36:56.066669+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "tests/building-alteration.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 351,
+  "inputsStable": true,
+  "rawSHA256": "9fea95f803db181c12eddf804aa3fd74e880a02c21f666f5065025beff382fef",
+  "ownedPid": 148756,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 148782,
+      "state": "Z",
+      "parent": 1,
+      "group": 148756,
+      "session": 148756,
+      "startTicks": 10223921
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

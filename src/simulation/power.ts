@@ -1,3 +1,4 @@
+import { gridBuildingSupplyRatio } from './power-grid';
 import type { Simulation, PublicPurchaseReceipt } from '../simulation';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 import { getWalkHeight } from '../world';
@@ -57,6 +58,7 @@ const ended = (job: PowerRepair) => ['completed', 'cancelled'].includes(job.stat
 const identity = (actor: Citizen | Player): Pick<Player, 'role' | 'identities'> => 'id' in actor ? { role: 'scientist', identities: ['scientist'] } : actor;
 const floorOf = (site: Building, position: Vec3) => Math.floor((position.y - site.position.y + .01) / (site.height / site.floors));
 export function powerBinding(world: WorldDefinition): { source: Building; operator: Building } | null {
+  if (world.powerGrid !== undefined) return null;
   const source = world.buildings.find(site => site.id === 'core-main' && site.kind === 'core' && site.facility === 'mayor');
   const operator = world.buildings.find(site => site.id === 'core-energy-south' && site.kind === 'workshop' && site.facility === 'energy');
   return source && operator && world.districts.some(d => d.id === source.districtId) && world.districts.some(d => d.id === operator.districtId) ? { source, operator } : null;
@@ -100,11 +102,13 @@ export function powerTaskActorIds(state: SimState): ReadonlySet<string> {
 }
 export function powerHasCapacityRoom(state: SimState): boolean { return !state.power || state.power.capacityHistory.length < MAX_WITNESSES - 16; }
 export function powerSupplyAt(state: SimState, siteId: string): boolean {
+  if (state.powerGrid) return gridBuildingSupplyRatio(state, siteId) > EPS;
   if (!state.power) return true;
   const dispatch = state.power.dispatch, meter = state.power.buildingMeters[siteId];
   return !!dispatch && dispatch.tick === state.tick && Math.abs(dispatch.at - clock(state)) <= EPS && !!meter && meter.servedP > EPS;
 }
 export function powerStatus(sim: Simulation) {
+  if (sim.worldDefinition.powerGrid) return { supported: false, reason: '当前地图使用有限储能网络；旧聚合维修不适用，声明网不会免费补电。' };
   const binding = powerBinding(sim.worldDefinition), state = sim.state.power;
   return !binding ? { supported: false, reason: '缺少真实 core-main 或 core-energy-south 功能引用；保持旧聚合契约。' }
     : { supported: true, activated: !!state, lossP: state?.lossP ?? 0, sourceSiteId: binding.source.id, operatorSiteId: binding.operator.id, dispatch: state?.dispatch ?? null, repair: state?.repairs.find(job => !ended(job)) ?? null };
@@ -360,7 +364,7 @@ export function installPower(sim: Simulation, accounting: PowerAccounting): void
   });
   sim.registerCommandHandler(command => {
     if (!['energy', 'cancelEnergy', 'requestEnergyRepair', 'approveEnergyRepair'].includes(command.type)) return null;
-    if (!binding) return command.type === 'energy' ? null : { ok: false, message: powerStatus(sim).reason! };
+    if (!binding) return command.type === 'energy' && !world.powerGrid ? null : { ok: false, message: powerStatus(sim).reason! };
     if (command.type === 'energy') {
       if (!['mayor', 'driver', 'soldier', 'scientist', 'official'].some(role => sim.hasIdentity(role as Role))) return { ok: false, message: '需要原公共工程操作资格。' };
       if (!requestAt(sim, binding, command.targetId)) return { ok: false, message: '请到能源核心或控制院合法功能点申请。' };

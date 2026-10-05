@@ -1,0 +1,1165 @@
+{
+  "name": "market-street",
+  "scope": "Controlled optical inspection; camera/renderer interior fixture. No physical journey, lease or permission grant.",
+  "capturedAt": "2026-10-05T01:54:10.322Z",
+  "sourceGraph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+  "buildEntry": "/assets/index-CDI-dshj.js",
+  "buildSHA256": "7578a56edf196390bd823bf90e71a57fb435824a6079ff17f2817c609fb9f2c1",
+  "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "png": {
+    "bytes": 804175,
+    "sha256": "f9b74f8aa57cc4799a8230b552ef70ea5ac2f8c2a86d1f5e428dbaf3ac7ee34c"
+  },
+  "saveBeforeSHA256": "d41c4b161947b1efd00346f4473f7cbba0b5c8ead69448a91b1bf0741cace682",
+  "saveAfterSHA256": "d41c4b161947b1efd00346f4473f7cbba0b5c8ead69448a91b1bf0741cace682",
+  "saveUnchanged": true,
+  "before": {
+    "tick": 44,
+    "day": 0,
+    "hour": 12,
+    "paused": true,
+    "body": {
+      "x": -846.4000000000001,
+      "y": 18.6,
+      "z": 1134.2
+    },
+    "playerPosition": {
+      "x": -846.4000000000001,
+      "y": 18.6,
+      "z": 1134.2
+    },
+    "mode": "walk",
+    "yaw": 0,
+    "pitch": 0,
+    "floor": 0,
+    "insideId": "river-b1",
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "vehicleId": null,
+    "camera": {
+      "position": [
+        -464.40000000000003,
+        72.32000000000001,
+        327
+      ],
+      "quaternion": [
+        0.023945309977979543,
+        0.07167535851957896,
+        -0.0017212129666654195,
+        0.9971390587761928
+      ],
+      "fov": 48,
+      "aspect": 1.6
+    },
+    "drawCalls": 456,
+    "triangles": 822104,
+    "memory": {
+      "geometries": 895,
+      "textures": 14
+    },
+    "programs": [
+      {
+        "name": "",
+        "id": 0,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 1,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 2,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 3,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 4,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 5,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 6,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 7,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 8,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 9,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 10,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 11,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 12,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 13,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 14,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 15,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 16,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 17,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 44,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 19,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 20,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 21,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 22,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 23,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 24,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 25,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 26,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 27,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 28,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 29,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 30,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 31,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 32,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 33,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 34,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 35,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 36,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 37,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 38,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 39,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 40,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 45,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 42,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 43,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 46,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 47,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 48,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 49,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 50,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 51,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 52,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 53,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 54,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 55,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 56,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 57,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 58,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 65,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 60,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 61,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 62,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 63,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 64,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 66,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      }
+    ],
+    "gl": {
+      "errors": [],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "vendor": "WebKit",
+      "renderer": "WebKit WebGL",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "architectureDetail": {
+      "activeBuildings": 8,
+      "activeBuildingIds": [
+        "market-b0",
+        "market-b4",
+        "market-b24",
+        "market-b20",
+        "market-b8",
+        "market-b54",
+        "market-b44",
+        "market-b28"
+      ],
+      "instances": 2904,
+      "created": 33,
+      "released": 25,
+      "maxBuildings": 8,
+      "maxInstancesPerBuilding": 640,
+      "loadDistance": 180,
+      "lanternEmission": 0.05305438908515708
+    },
+    "terrainLod": {
+      "water": {
+        "continuous": true,
+        "riverVertices": 18,
+        "plungePoolRadius": 50,
+        "waterfallDrop": 153
+      },
+      "woodland": {
+        "stands": 122,
+        "trees": 5200,
+        "canopyLayers": 4,
+        "farCanopyLayers": 2,
+        "distribution": "continuous district rim belts and mountain shoulders",
+        "floatingRockBodies": 0,
+        "sharedCrownGeometries": 2,
+        "nearCrownTriangles": 60,
+        "farCrownTriangles": 36
+      },
+      "lod": {
+        "visibleFineTiles": 9,
+        "cachedFineTiles": 18,
+        "tileMetres": 96,
+        "surfaceStep": 2,
+        "voxelMetres": 0.2,
+        "lowAltitude": true,
+        "proxyStep": 16,
+        "proxyChunkMetres": 384,
+        "forestDetailChunks": 3
+      }
+    },
+    "wayfinding": null,
+    "canvas": {
+      "width": 936,
+      "height": 585
+    }
+  },
+  "after": {
+    "tick": 44,
+    "day": 0,
+    "hour": 12,
+    "paused": true,
+    "body": {
+      "x": -846.4000000000001,
+      "y": 18.6,
+      "z": 1134.2
+    },
+    "playerPosition": {
+      "x": -846.4000000000001,
+      "y": 18.6,
+      "z": 1134.2
+    },
+    "mode": "walk",
+    "yaw": 0,
+    "pitch": 0,
+    "floor": 0,
+    "insideId": "river-b1",
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "vehicleId": null,
+    "camera": {
+      "position": [
+        -464.40000000000003,
+        72.32000000000001,
+        327
+      ],
+      "quaternion": [
+        0.023945309977979543,
+        0.07167535851957896,
+        -0.0017212129666654195,
+        0.9971390587761928
+      ],
+      "fov": 48,
+      "aspect": 1.6
+    },
+    "drawCalls": 456,
+    "triangles": 822104,
+    "memory": {
+      "geometries": 895,
+      "textures": 14
+    },
+    "programs": [
+      {
+        "name": "",
+        "id": 0,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 1,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 2,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 3,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 4,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 5,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 6,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 7,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 8,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 9,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 10,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 11,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 12,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 13,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 14,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 15,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 16,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 17,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 44,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 19,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 20,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 21,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 22,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 23,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 24,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 25,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 26,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 27,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 28,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 29,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 30,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 31,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 32,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 33,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 34,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 35,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 36,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 37,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 38,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 39,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 40,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 45,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 42,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 43,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 46,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 47,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 48,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 49,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 50,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 51,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 52,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 53,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 54,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 55,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 56,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 57,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 58,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 65,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 60,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 61,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 62,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 63,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 64,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      },
+      {
+        "name": "",
+        "id": 66,
+        "diagnostics": null,
+        "linked": true,
+        "log": ""
+      }
+    ],
+    "gl": {
+      "errors": [],
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "vendor": "WebKit",
+      "renderer": "WebKit WebGL",
+      "unmaskedVendor": "Google Inc. (Google)",
+      "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "architectureDetail": {
+      "activeBuildings": 8,
+      "activeBuildingIds": [
+        "market-b0",
+        "market-b4",
+        "market-b24",
+        "market-b20",
+        "market-b8",
+        "market-b54",
+        "market-b44",
+        "market-b28"
+      ],
+      "instances": 2904,
+      "created": 33,
+      "released": 25,
+      "maxBuildings": 8,
+      "maxInstancesPerBuilding": 640,
+      "loadDistance": 180,
+      "lanternEmission": 0.05305438908515708
+    },
+    "terrainLod": {
+      "water": {
+        "continuous": true,
+        "riverVertices": 18,
+        "plungePoolRadius": 50,
+        "waterfallDrop": 153
+      },
+      "woodland": {
+        "stands": 122,
+        "trees": 5200,
+        "canopyLayers": 4,
+        "farCanopyLayers": 2,
+        "distribution": "continuous district rim belts and mountain shoulders",
+        "floatingRockBodies": 0,
+        "sharedCrownGeometries": 2,
+        "nearCrownTriangles": 60,
+        "farCrownTriangles": 36
+      },
+      "lod": {
+        "visibleFineTiles": 9,
+        "cachedFineTiles": 18,
+        "tileMetres": 96,
+        "surfaceStep": 2,
+        "voxelMetres": 0.2,
+        "lowAltitude": true,
+        "proxyStep": 16,
+        "proxyChunkMetres": 384,
+        "forestDetailChunks": 3
+      }
+    },
+    "wayfinding": null,
+    "canvas": {
+      "width": 936,
+      "height": 585
+    }
+  },
+  "details": {
+    "eye": [
+      -464.40000000000003,
+      72.32000000000001,
+      327
+    ],
+    "target": [
+      -469.40000000000003,
+      74,
+      292.40000000000003
+    ],
+    "buildingId": "market-b0",
+    "edgeId": null,
+    "interiorId": null,
+    "meshNames": [
+      {
+        "name": "batch-fabric-all:box",
+        "count": 9,
+        "visible": true
+      },
+      {
+        "name": "batch-fabric-all:box",
+        "count": 15,
+        "visible": true
+      }
+    ],
+    "curtainStatus": "MISSING: no curtain model/function added",
+    "focusScope": "Original controller body remains Simulation focus; no optical eye focus injection"
+  }
+}
