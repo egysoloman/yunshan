@@ -1,0 +1,20 @@
+{
+  "pid": 130405,
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/food-access-observations.test.ts"
+  ],
+  "identity": {
+    "pid": 130405,
+    "state": "R",
+    "parent": 130402,
+    "group": 130405,
+    "session": 130405,
+    "startTicks": 9044704
+  }
+}

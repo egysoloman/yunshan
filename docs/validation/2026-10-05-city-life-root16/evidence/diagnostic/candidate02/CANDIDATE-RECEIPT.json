@@ -1,0 +1,202 @@
+{
+  "status": "READY_FOR_ROOT_REVIEW_NOT_INSTALLED",
+  "baselineInputCount": 322,
+  "all322BaselineBytesPreserved": true,
+  "candidateInputCount": 325,
+  "srcCount": 81,
+  "graph": "0c7aea22807f69ac83450ecd201d5ee6e933dff816e937cf18b0728e97d7a0da",
+  "priorCandidate325AndPhasesUnchanged": true,
+  "oldFiveTestsPreserved": true,
+  "newTests": 2,
+  "CLIBytesUnchanged": true,
+  "files": [
+    {
+      "path": "src/simulation/food-access-observations.ts",
+      "bytes": 14513,
+      "sha256": "b36ae80a51723eef4620d640dbed332fc2e4c018ab1172cab20241ba38f66f55",
+      "action": "NEW"
+    },
+    {
+      "path": "scripts/food-access-audit.ts",
+      "bytes": 6916,
+      "sha256": "3e4a18a8d3ef4a7c16156509c157e6c45018e9526599f9599ea67c9d1af65a28",
+      "action": "NEW"
+    },
+    {
+      "path": "tests/food-access-observations.test.ts",
+      "bytes": 12709,
+      "sha256": "6983f1df8aa587b33d20ce4472a5ef59f8d589b139bcb98b09605e8e3be6698c",
+      "action": "NEW"
+    }
+  ],
+  "patch": {
+    "path": "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate02/FOOD-ACCESS-OBSERVATIONS.patch",
+    "bytes": 35194,
+    "sha256": "329e6deb35d4b60e1153e33b2a5c4f3ca19c1eb921687a4190f3853d2782681f"
+  },
+  "validation": {
+    "type01": {
+      "startedAt": "2026-10-05T00:28:24.797905+00:00",
+      "endedAt": "2026-10-05T00:28:34.933098+00:00",
+      "argv": [
+        "./node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 131171,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "pure-tests01": {
+      "startedAt": "2026-10-05T00:28:24.798957+00:00",
+      "endedAt": "2026-10-05T00:28:25.516529+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "tests/food-access-observations.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "ee4737a1d81c28c0301ec020e7aa50df38dd1ba4e6280c14b37c453a0055452e",
+      "ownedPid": 131172,
+      "observedDescendants": 3,
+      "finalOwnedMembers": [
+        {
+          "pid": 131192,
+          "state": "Z",
+          "parent": 1,
+          "group": 131172,
+          "session": 131172,
+          "startTicks": 9092968
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "cli-original01": {
+      "startedAt": "2026-10-05T00:29:07.701397+00:00",
+      "endedAt": "2026-10-05T00:29:10.866723+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/food-access-audit.ts",
+        "--world",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/pure-query02/artifacts/WORLD-ORIGINAL.json",
+        "--save",
+        "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/artifacts/root15-current-default-day-final.save.json",
+        "--out",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate02/cli-original01/artifacts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "cad471be34dc0603c62464804d53de5081e1c151a3ceceff5d68a7d7cfc5443d",
+      "ownedPid": 131282,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 131303,
+          "state": "Z",
+          "parent": 1,
+          "group": 131282,
+          "session": 131282,
+          "startTicks": 9097251
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "cli-recovered01": {
+      "startedAt": "2026-10-05T00:29:07.702315+00:00",
+      "endedAt": "2026-10-05T00:29:11.232044+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/food-access-audit.ts",
+        "--world",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/pure-query02/artifacts/WORLD-ORIGINAL.json",
+        "--save",
+        "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01/terminal.save.json",
+        "--out",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate02/cli-recovered01/artifacts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "c537425abaf55fa009423bcf5098d987fab6f0d28606b4397e04e995a1e8743a",
+      "ownedPid": 131283,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 131298,
+          "state": "Z",
+          "parent": 1,
+          "group": 131283,
+          "session": 131283,
+          "startTicks": 9097251
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    }
+  },
+  "cliActualReadbacks": {
+    "cli-original01": {
+      "hungryWithoutCarriedFood": 229,
+      "referenceIntegrity": {
+        "status": "KNOWN_CONSISTENT_SHOP_BUILDING_REFERENCES",
+        "unresolvedShopBuildingReferenceCount": 0,
+        "shopBuildingDistrictMismatchCount": 0,
+        "scope": "Food shop counts include only resolved food kinds and retain saved shop district bucketing. An unresolved building reference or inconsistent shop/building districts makes affected district assessment incomplete or inconsistent; such counts cannot certify absence of food shops. This observer does not repair references, infer unknown kinds or reassign districts."
+      },
+      "sourceScope": "saved shop.districtId",
+      "saveSHA256": "db40c8410ed5cd45f308fb12c12a4ef6678c58add40e3122e595a6bdd99efe16",
+      "noFoodDistricts": [
+        "academy",
+        "government",
+        "starport"
+      ]
+    },
+    "cli-recovered01": {
+      "hungryWithoutCarriedFood": 0,
+      "referenceIntegrity": {
+        "status": "KNOWN_CONSISTENT_SHOP_BUILDING_REFERENCES",
+        "unresolvedShopBuildingReferenceCount": 0,
+        "shopBuildingDistrictMismatchCount": 0,
+        "scope": "Food shop counts include only resolved food kinds and retain saved shop district bucketing. An unresolved building reference or inconsistent shop/building districts makes affected district assessment incomplete or inconsistent; such counts cannot certify absence of food shops. This observer does not repair references, infer unknown kinds or reassign districts."
+      },
+      "sourceScope": "saved shop.districtId",
+      "saveSHA256": "edf73ed2aa923b16248f3981092ea78dfe6375e5be1a4d4e3c6914ca84285754",
+      "noFoodDistricts": [
+        "academy",
+        "government",
+        "starport"
+      ]
+    }
+  },
+  "boundary": "NEW candidate02 only. Named missing/mismatched building references and null-prototype counts. No new business state defaults or world repair. 0Simulation/step/GPU/build; shared/old frozen source unchanged by child."
+}

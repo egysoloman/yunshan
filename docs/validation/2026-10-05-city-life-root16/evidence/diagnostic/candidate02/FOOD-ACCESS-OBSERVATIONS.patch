@@ -1,0 +1,451 @@
+diff --git a/src/simulation/food-access-observations.ts b/src/simulation/food-access-observations.ts
+new file mode 100644
+index 0000000..de3a368
+--- /dev/null
++++ b/src/simulation/food-access-observations.ts
+@@ -0,0 +1,175 @@
++import type { Building, Citizen, District, LifeProfile, Needs, NetworkNode, Shop, Vec3 } from '../types';
++
++type FoodKind = 'farm' | 'dock' | 'market';
++type ObservedCitizen = Pick<Citizen, 'id' | 'name' | 'districtId' | 'position' | 'state' | 'destinationId' | 'money' | 'needs' | 'food' | 'route' | 'routeIndex'>;
++type ObservedShop = Pick<Shop, 'id' | 'buildingId' | 'districtId' | 'inventory' | 'price' | 'open'>;
++export interface FoodAccessState {
++  day: number; hour: number; weather: string;
++  citizens: readonly ObservedCitizen[]; shops: readonly ObservedShop[];
++  extension?: { lastUpdate: number; actorProfiles: Readonly<Record<string, Pick<LifeProfile, 'alive'>>> };
++}
++export interface FoodAccessWorld {
++  districts: readonly Pick<District, 'id' | 'name'>[];
++  buildings: readonly Pick<Building, 'id' | 'kind' | 'districtId'>[];
++  nodes: readonly Pick<NetworkNode, 'id' | 'position'>[];
++}
++export interface FoodAccessRuntime {
++  activities?: Readonly<Record<string, string>>;
++  decisionAt?: Readonly<Record<string, number>>;
++  riders?: Readonly<Record<string, { vehicleId: string; stopNodeId: string; arrived?: boolean; arrivedAt?: number }>>;
++  customers?: Readonly<Record<string, string>>;
++}
++
++const FOOD_KINDS: readonly FoodKind[] = ['farm', 'dock', 'market'];
++const finite = (value: unknown, label: string): number => {
++  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`Food access observation requires finite ${label}`);
++  return value;
++};
++const point = (value: Vec3, label: string): Vec3 => {
++  if (!value || typeof value !== 'object') throw new Error(`Food access observation requires ${label} coordinates`);
++  return { x: finite(value.x, `${label}.x`), y: finite(value.y, `${label}.y`), z: finite(value.z, `${label}.z`) };
++};
++const needs = (value: Needs, label: string): Needs => {
++  if (!value || typeof value !== 'object') throw new Error(`Food access observation requires ${label}`);
++  return { hunger: finite(value.hunger, `${label}.hunger`), fatigue: finite(value.fatigue, `${label}.fatigue`), social: finite(value.social, `${label}.social`), fun: finite(value.fun, `${label}.fun`) };
++};
++const distance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
++const countBy = (rows: readonly { state: string }[]) => {
++  const result: Record<string, number> = Object.create(null);
++  for (const row of rows) result[row.state] = (result[row.state] ?? 0) + 1;
++  return result;
++};
++
++/** A pure current-state observation. Finite fields used here are checked; this
++ * does not validate a complete save or execute a future people/traffic phase. */
++export function observeFoodAccess(state: FoodAccessState, world: FoodAccessWorld, runtime: FoodAccessRuntime) {
++  const day = finite(state.day, 'day'), hour = finite(state.hour, 'hour');
++  const displayClock = finite(day * 1440 + hour * 60, 'display clock');
++  const clock = finite(state.extension?.lastUpdate ?? displayClock, 'observation clock');
++  const buildings = new Map(world.buildings.map(building => [building.id, building]));
++  const nodes = new Map(world.nodes.map(node => [node.id, node]));
++  const unresolvedShopBuildingReferences: { shopId: string; buildingId: string; shopDistrictId: string }[] = [];
++  const shopBuildingDistrictMismatches: { shopId: string; buildingId: string; shopDistrictId: string; buildingDistrictId: string; buildingKind: Building['kind'] }[] = [];
++  const foodSites = state.shops.flatMap(shop => {
++    const building = buildings.get(shop.buildingId);
++    if (!building) {
++      unresolvedShopBuildingReferences.push({ shopId: shop.id, buildingId: shop.buildingId, shopDistrictId: shop.districtId });
++      return [];
++    }
++    if (shop.districtId !== building.districtId) shopBuildingDistrictMismatches.push({
++      shopId: shop.id, buildingId: shop.buildingId, shopDistrictId: shop.districtId,
++      buildingDistrictId: building.districtId, buildingKind: building.kind,
++    });
++    if (!FOOD_KINDS.includes(building.kind as FoodKind)) return [];
++    const inventory = finite(shop.inventory, `shop ${shop.id} inventory`), price = finite(shop.price, `shop ${shop.id} price`);
++    const kind = building.kind as FoodKind, closesAtHour = kind === 'market' ? 22 : 20;
++    return [{ id: shop.id, buildingId: shop.buildingId, districtId: shop.districtId, kind, open: shop.open, inventory, price,
++      openStocked: shop.open && inventory >= 1, opensAtHour: 6, closesAtHour,
++      scheduledOpenAtCurrentPhase: hour >= 6 && hour < closesAtHour }];
++  });
++  const sitesByBuilding = new Map(foodSites.map(shop => [shop.buildingId, shop]));
++  const openStocked = foodSites.filter(shop => shop.openStocked);
++  const checkedCitizens = state.citizens.map(actor => {
++    const observedNeeds = needs(actor.needs, `actor ${actor.id} needs`);
++    const money = finite(actor.money, `actor ${actor.id} money`), food = finite(actor.food ?? 0, `actor ${actor.id} carried food`);
++    // This is exactly foodSnapshot's eligibility predicate, including missing
++    // profiles and missing carried food; affordability alone proves no path.
++    const alive = state.extension?.actorProfiles[actor.id]?.alive !== false;
++    return { actor, needs: observedNeeds, money, food, alive, hungry: alive && observedNeeds.hunger < 30 && food < 1 };
++  });
++  const alive = checkedCitizens.filter(row => row.alive);
++  const hungry = checkedCitizens.filter(row => row.hungry);
++  const weatherWalkingSpeed = state.weather === '雨' ? 3.1 : 4.2;
++  const hungryActors = hungry.map(({ actor, needs: observedNeeds, money, food }) => {
++    const route = actor.route ?? [], routeIndex = finite(actor.routeIndex ?? 0, `actor ${actor.id} route index`);
++    if (!Number.isSafeInteger(routeIndex) || routeIndex < 0 || routeIndex > route.length) throw new Error(`Food access observation requires valid actor ${actor.id} route index`);
++    const remainingRoute3D = [point(actor.position, `actor ${actor.id} position`), ...route.slice(routeIndex).map((p, index) => point(p, `actor ${actor.id} route[${routeIndex + index}]`))];
++    const remainingDistance3D = finite(remainingRoute3D.slice(1).reduce((sum, p, index) => sum + distance(remainingRoute3D[index], p), 0), `actor ${actor.id} remaining route distance`);
++    const riding = runtime.riders?.[actor.id], stop = riding ? nodes.get(riding.stopNodeId) : undefined;
++    const rider = riding ? {
++      vehicleId: riding.vehicleId, stopNodeId: riding.stopNodeId,
++      stopPosition: stop ? point(stop.position, `rider ${actor.id} named stop`) : null,
++      stopObservation: stop ? 'NAMED_STOP_FOUND' as const : 'NAMED_STOP_NOT_FOUND' as const,
++      arrived: riding.arrived === true,
++      arrivedAt: riding.arrivedAt === undefined ? null : finite(riding.arrivedAt, `rider ${actor.id} arrivedAt`),
++    } : null;
++    const moving = actor.state === 'moving';
++    const walkingReference = rider || !moving ? {
++      status: 'NOT_ESTIMATED' as const, reason: rider ? 'RIDER' as const : 'STATE_NOT_MOVING' as const, minutes: null,
++    } : { status: 'REFERENCE_ESTIMATED' as const, reason: 'CURRENT_REMAINING_ROUTE_AT_CURRENT_WEATHER' as const,
++      minutes: finite(remainingDistance3D / weatherWalkingSpeed, `actor ${actor.id} walking reference minutes`) };
++    const destinationFoodShop = actor.destinationId ? sitesByBuilding.get(actor.destinationId) ?? null : null;
++    const customerShopId = runtime.customers?.[actor.id] ?? null;
++    const decisionAt = runtime.decisionAt?.[actor.id];
++    const decision = decisionAt === undefined ? { at: null, status: 'NO_SAVED_DEADLINE' as const } : {
++      at: finite(decisionAt, `actor ${actor.id} decisionAt`),
++      status: clock + 1e-7 >= decisionAt ? 'DUE_REQUIRES_FUTURE_PEOPLE_PROCESSING' as const : 'NOT_DUE' as const,
++    };
++    const estimatedArrivalPhaseMinute = walkingReference.minutes === null ? null
++      : finite(hour * 60 + walkingReference.minutes, `actor ${actor.id} arrival phase minute`);
++    const openingReference = destinationFoodShop ? {
++      opensAtHour: destinationFoodShop.opensAtHour, closesAtHour: destinationFoodShop.closesAtHour,
++      scheduledOpenAtCurrentPhase: destinationFoodShop.scheduledOpenAtCurrentPhase,
++      observedOpen: destinationFoodShop.open, estimatedArrivalPhaseMinute,
++      estimatedArrivalBeforeClosing: estimatedArrivalPhaseMinute === null ? null : estimatedArrivalPhaseMinute < destinationFoodShop.closesAtHour * 60,
++      estimatedArrivalWithinScheduledOpening: estimatedArrivalPhaseMinute === null ? null
++        : estimatedArrivalPhaseMinute >= 6 * 60 && estimatedArrivalPhaseMinute < destinationFoodShop.closesAtHour * 60,
++    } : null;
++    const affordableOpenStockedFoodOfferIds = openStocked.filter(shop => money >= shop.price).map(shop => shop.id);
++    return {
++      id: actor.id, name: actor.name, districtId: actor.districtId, alive: true,
++      needs: observedNeeds, money, food, state: actor.state, activity: runtime.activities?.[actor.id] ?? null,
++      destinationId: actor.destinationId, stateShopping: actor.state === 'shopping', decision,
++      destinationFoodShop: destinationFoodShop ? { ...destinationFoodShop, canAffordOneUnit: money >= destinationFoodShop.price } : null,
++      queueObservation: { customerShopId, matchesCurrentDestination: !!destinationFoodShop && customerShopId === destinationFoodShop.id },
++      canAffordAnyStockedOpenFoodOffer: affordableOpenStockedFoodOfferIds.length > 0, affordableOpenStockedFoodOfferIds,
++      route: { routeIndex, remainingRoute3D, remainingDistance3D, weatherWalkingSpeed, walkingReference, rider }, openingReference,
++    };
++  });
++  const districtIds = [...new Set([...world.districts.map(district => district.id), ...state.shops.map(shop => shop.districtId),
++    ...shopBuildingDistrictMismatches.map(reference => reference.buildingDistrictId), ...state.citizens.map(actor => actor.districtId)])];
++  const districts = districtIds.map(districtId => {
++    const localSites = foodSites.filter(shop => shop.districtId === districtId), localAlive = alive.filter(row => row.actor.districtId === districtId);
++    const localHungry = hungryActors.filter(actor => actor.districtId === districtId);
++    const unresolved = unresolvedShopBuildingReferences.filter(reference => reference.shopDistrictId === districtId);
++    const mismatches = shopBuildingDistrictMismatches.filter(reference => reference.shopDistrictId === districtId || reference.buildingDistrictId === districtId);
++    const integrity = unresolved.length ? 'INCOMPLETE_SHOP_BUILDING_REFERENCES' as const
++      : mismatches.length ? 'INCONSISTENT_SHOP_BUILDING_DISTRICTS' as const : 'KNOWN_CONSISTENT_SHOP_BUILDING_REFERENCES' as const;
++    const foodFacilityAssessment = unresolved.length ? 'INCOMPLETE_SHOP_BUILDING_REFERENCES' as const
++      : mismatches.length ? 'INCONSISTENT_SHOP_BUILDING_DISTRICTS' as const
++        : localSites.length ? 'KNOWN_FOOD_SHOPS_OBSERVED' as const : 'NO_FOOD_SHOPS_OBSERVED' as const;
++    return { districtId, name: world.districts.find(district => district.id === districtId)?.name ?? null,
++      integrity, foodFacilityAssessment,
++      unresolvedShopBuildingReferenceCount: unresolved.length, shopBuildingDistrictMismatchCount: mismatches.length,
++      foodShopCount: localSites.length, farmCount: localSites.filter(shop => shop.kind === 'farm').length,
++      dockCount: localSites.filter(shop => shop.kind === 'dock').length, marketCount: localSites.filter(shop => shop.kind === 'market').length,
++      openStockedFoodOfferCount: localSites.filter(shop => shop.openStocked).length,
++      aliveResidents: localAlive.length, hungryWithoutCarriedFood: localHungry.length,
++      hungerZeroAliveResidents: localAlive.filter(row => row.needs.hunger === 0).length,
++      hungryCanAffordAnyStockedOpenFoodOffer: localHungry.filter(actor => actor.canAffordAnyStockedOpenFoodOffer).length,
++    };
++  });
++  return {
++    scope: 'Pure current JSON observation of food offers, named hungry residents, saved decisions, customer queue and remaining 3D route. It does not advance actors or certify a journey, counter receipt or legal reachability.',
++    inputValidationScope: 'Finite needs, cash and carried food for population eligibility; finite food offer inventory/price and clocks; finite diagnosed actor positions, remaining route coordinates/index, deadline and named rider stop fields. This is not complete save validation.',
++    walkingReferenceScope: 'Only a non-rider in state moving gets remaining 3D route length divided by current weather speed (晴/other 4.2, 雨 3.1). Same displayed-day opening reference excludes future weather, traffic, replanning, ACL, body collision, queue and inventory changes. It is not an observed arrival.',
++    decisionScope: 'A due saved deadline requires actual future people-phase processing; this observer never calls chooseFacility or predicts its choice.',
++    queueScope: 'Saved runtime customer requests are queue observations, not settled purchases or meals.',
++    foodOfferDistrictSource: 'saved shop.districtId' as const,
++    unresolvedShopBuildingReferences, shopBuildingDistrictMismatches,
++    referenceIntegrity: {
++      status: unresolvedShopBuildingReferences.length ? 'INCOMPLETE_SHOP_BUILDING_REFERENCES' as const
++        : shopBuildingDistrictMismatches.length ? 'INCONSISTENT_SHOP_BUILDING_DISTRICTS' as const : 'KNOWN_CONSISTENT_SHOP_BUILDING_REFERENCES' as const,
++      unresolvedShopBuildingReferenceCount: unresolvedShopBuildingReferences.length,
++      shopBuildingDistrictMismatchCount: shopBuildingDistrictMismatches.length,
++      scope: 'Food shop counts include only resolved food kinds and retain saved shop district bucketing. An unresolved building reference or inconsistent shop/building districts makes affected district assessment incomplete or inconsistent; such counts cannot certify absence of food shops. This observer does not repair references, infer unknown kinds or reassign districts.',
++    },
++    routeReachability: 'NOT_OBSERVED' as const,
++    clock: { simulationMinutes: clock, displayMinutes: displayClock, day, hour, source: state.extension ? 'extension.lastUpdate' as const : 'day/hour' as const },
++    aliveResidents: alive.length, hungryWithoutCarriedFood: hungryActors.length,
++    hungerZeroAliveResidents: alive.filter(row => row.needs.hunger === 0).length,
++    hungryHungerZero: hungryActors.filter(actor => actor.needs.hunger === 0).length,
++    hungryCanAffordAnyStockedOpenFoodOffer: hungryActors.filter(actor => actor.canAffordAnyStockedOpenFoodOffer).length,
++    hungryStates: countBy(hungryActors), foodSites, districts, hungryActors,
++  };
++}
+diff --git a/scripts/food-access-audit.ts b/scripts/food-access-audit.ts
+new file mode 100644
+index 0000000..1a3d6f7
+--- /dev/null
++++ b/scripts/food-access-audit.ts
+@@ -0,0 +1,90 @@
++import assert from 'node:assert/strict';
++import { createHash } from 'node:crypto';
++import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
++import { dirname, join, relative, resolve } from 'node:path';
++import { fileURLToPath } from 'node:url';
++import { decodeCitizenRoutes } from '../src/persistence/route-encoding';
++import { parseSaveWithinResources } from '../src/persistence/save-resource';
++import { savedWorldFingerprint } from '../src/persistence/world-layout';
++import { observeFoodAccess } from '../src/simulation/food-access-observations';
++import type { SimState, WorldDefinition } from '../src/types';
++
++// This CLI reads an existing world and save. It does not generate a city,
++// initialize a Simulation, import a live game, move a body or advance a tick.
++const startedAt = new Date().toISOString();
++const options = new Map<string, string>();
++assert.equal((process.argv.length - 2) % 2, 0, 'Expected --world PATH --save PATH --out NEW_DIRECTORY.');
++for (let index = 2; index < process.argv.length; index += 2) {
++  const key = process.argv[index], value = process.argv[index + 1];
++  assert.ok(['--world', '--save', '--out'].includes(key) && value && !options.has(key), 'Expected unique --world, --save and --out arguments.');
++  options.set(key, value);
++}
++assert.equal(options.size, 3, 'Expected --world PATH --save PATH --out NEW_DIRECTORY.');
++const worldPath = resolve(options.get('--world')!), savePath = resolve(options.get('--save')!), out = resolve(options.get('--out')!);
++assert.ok(!existsSync(out), 'The output directory already exists; use a new directory to preserve previous evidence.');
++const source = resolve(dirname(fileURLToPath(import.meta.url)), '..');
++for (const name of ['src', 'tests', 'scripts', 'adapters', 'public']) {
++  const protectedPath = join(source, name);
++  assert.ok(out !== protectedPath && !out.startsWith(protectedPath + '/'), 'Write diagnostic evidence outside source input directories.');
++}
++const sha = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
++const inputs = () => {
++  const paths: string[] = [];
++  const visit = (directory: string) => {
++    for (const entry of readdirSync(directory, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
++      const path = join(directory, entry.name);
++      if (entry.isDirectory()) visit(path);
++      else if (entry.isFile()) paths.push(path);
++    }
++  };
++  for (const name of ['src', 'tests', 'scripts', 'adapters', 'public']) if (existsSync(join(source, name))) visit(join(source, name));
++  for (const name of ['package.json', 'package-lock.json', 'tsconfig.json', 'vite.config.ts', 'index.html']) if (existsSync(join(source, name))) paths.push(join(source, name));
++  return Object.fromEntries(paths.sort().map(path => [relative(source, path), sha(readFileSync(path))]));
++};
++const beforeInputs = inputs(), worldBytes = readFileSync(worldPath), saveBytes = readFileSync(savePath);
++const world = JSON.parse(worldBytes.toString()) as WorldDefinition;
++const envelope = parseSaveWithinResources(saveBytes.toString());
++assert.equal(envelope.format, 'yunshan-save', 'Expected a native yunshan-save envelope.');
++assert.ok([1, 2, 3, 4].includes(envelope.version), 'Unsupported native save version.');
++assert.ok(envelope.state && typeof envelope.state === 'object' && !Array.isArray(envelope.state), 'Missing saved state.');
++assert.ok(envelope.runtime && typeof envelope.runtime === 'object' && !Array.isArray(envelope.runtime), 'Missing saved runtime.');
++assert.equal(envelope.worldSeed, world.seed, 'World seed differs from the supplied save.');
++assert.equal(envelope.state.seed, world.seed, 'State seed differs from the supplied world.');
++assert.equal(savedWorldFingerprint(world), envelope.worldFingerprint, 'World geometry fingerprint differs from the supplied save.');
++
++// Decode the parsed copy only. The two input byte buffers and source files
++// remain authoritative originals, and are checked again before any output.
++if (envelope.routeEncoding !== undefined || envelope.routePool !== undefined) decodeCitizenRoutes(envelope.routeEncoding, envelope.routePool, envelope.state.citizens);
++const businessBefore = JSON.stringify({ state: envelope.state, runtime: envelope.runtime }), worldBefore = JSON.stringify(world);
++const observations = observeFoodAccess(envelope.state as SimState, world, envelope.runtime);
++assert.equal(JSON.stringify({ state: envelope.state, runtime: envelope.runtime }), businessBefore, 'Observation changed parsed business state or runtime.');
++assert.equal(JSON.stringify(world), worldBefore, 'Observation changed the supplied world.');
++const afterInputs = inputs();
++assert.deepEqual(afterInputs, beforeInputs, 'Source inputs changed during observation.');
++assert.equal(sha(readFileSync(savePath)), sha(saveBytes), 'Save bytes changed during observation.');
++assert.equal(sha(readFileSync(worldPath)), sha(worldBytes), 'World bytes changed during observation.');
++const originalInputs = {
++  world: { path: worldPath, bytes: worldBytes.length, sha256: sha(worldBytes) },
++  save: { path: savePath, bytes: saveBytes.length, sha256: sha(saveBytes) },
++  worldFingerprint: envelope.worldFingerprint,
++  source: { path: source, inputCount: Object.keys(beforeInputs).length, files: beforeInputs },
++};
++mkdirSync(dirname(out), { recursive: true });
++mkdirSync(out);
++const writeJSON = (name: string, value: unknown) => writeFileSync(join(out, name), JSON.stringify(value, null, 2) + '\n', { flag: 'wx' });
++writeFileSync(join(out, 'WORLD-ORIGINAL.json'), worldBytes, { flag: 'wx' });
++writeFileSync(join(out, 'TERMINAL-ORIGINAL.save.json'), saveBytes, { flag: 'wx' });
++writeJSON('INPUTS-SHA256.json', originalInputs);
++writeJSON('food-access-observations.json', {
++  authority: { saveSHA256: sha(saveBytes), worldSHA256: sha(worldBytes), worldFingerprint: envelope.worldFingerprint,
++    nativeVersion: envelope.version, motionVersion: envelope.motionVersion ?? null,
++    referenceCollisionPolicyId: envelope.referenceCollisionPolicyId ?? null, mealRoutePolicyId: envelope.mealRoutePolicyId ?? null },
++  ...observations,
++});
++const receipt = { status: 'PASS_READONLY_OBSERVATION', startedAt, endedAt: new Date().toISOString(), argv: process.argv.slice(2),
++  sourceInputsUnchanged: true, originalSaveAndWorldBytesUnchanged: true, parsedStateRuntimeWorldUnchangedAfterRouteDecoding: true,
++  simulationsConstructed: 0, createWorldCalls: 0, steps: 0, commands: 0, inputCount: Object.keys(beforeInputs).length,
++  worldSHA256: sha(worldBytes), saveSHA256: sha(saveBytes), worldFingerprint: envelope.worldFingerprint,
++  boundary: 'Finite diagnostic fields and supplied geometry identity were checked. This is not full Simulation save validation, observed arrival, lawful physical reachability, a future continuation or a sustainability verdict.' };
++writeJSON('RECEIPT.json', receipt);
++console.log(JSON.stringify({ ...receipt, outputDirectory: out }));
+diff --git a/tests/food-access-observations.test.ts b/tests/food-access-observations.test.ts
+new file mode 100644
+index 0000000..d5339cf
+--- /dev/null
++++ b/tests/food-access-observations.test.ts
+@@ -0,0 +1,168 @@
++import assert from 'node:assert/strict';
++import test from 'node:test';
++import { observeFoodAccess } from '../src/simulation/food-access-observations';
++import type { FoodAccessRuntime, FoodAccessState, FoodAccessWorld } from '../src/simulation/food-access-observations';
++import { foodSnapshot } from '../scripts/economy-observations';
++import type { Citizen, SimState } from '../src/types';
++
++const citizen = (id: string, hunger = 20, food = 0, districtId = 'uphill'): Citizen => ({
++  id, name: id, districtId, homeId: 'home', workId: 'job', role: '工人',
++  position: { x: 0, y: 0, z: 0 }, state: 'moving', destinationId: 'food-market', money: 12,
++  needs: { hunger, fatigue: 80, social: 50, fun: 60 }, food, tier: 'active', route: [], routeIndex: 0,
++});
++function fixture() {
++  const world: FoodAccessWorld = {
++    districts: [{ id: 'uphill', name: 'Upper' }, { id: 'shore', name: 'Shore' }],
++    buildings: [{ id: 'food-market', districtId: 'uphill', kind: 'market' }, { id: 'food-dock', districtId: 'shore', kind: 'dock' }, { id: 'food-farm', districtId: 'shore', kind: 'farm' }, { id: 'materials', districtId: 'uphill', kind: 'workshop' }],
++    nodes: [{ id: 'named-stop', position: { x: 10, y: 50, z: 30 } }],
++  };
++  const state: FoodAccessState & { player: { inventory: { food: number } } } = {
++    day: 0, hour: 19, weather: '晴',
++    citizens: [citizen('hungry'), citizen('boundary', 30), citizen('carrying', 0, 1), citizen('dead', 0)],
++    shops: [{ id: 'market-shop', buildingId: 'food-market', districtId: 'uphill', inventory: 1, price: 12, open: true }, { id: 'dock-shop', buildingId: 'food-dock', districtId: 'shore', inventory: 5, price: 20, open: true }, { id: 'farm-shop', buildingId: 'food-farm', districtId: 'shore', inventory: .99, price: 1, open: true }, { id: 'material-shop', buildingId: 'materials', districtId: 'uphill', inventory: 100, price: 1, open: true }],
++    extension: { lastUpdate: 1140, actorProfiles: { dead: { alive: false } } }, player: { inventory: { food: 0 } },
++  };
++  const runtime: FoodAccessRuntime = { activities: { hungry: 'eat' }, decisionAt: { hungry: 1140 }, riders: {}, customers: { hungry: 'market-shop' } };
++  return { state, world, runtime };
++}
++function deepFreeze<T>(value: T): T {
++  if (value && typeof value === 'object') { Object.freeze(value); for (const item of Object.values(value)) deepFreeze(item); }
++  return value;
++}
++
++test('pure food access uses exact hungry/alive/carried thresholds and agrees with foodSnapshot on the same state', () => {
++  const input = fixture();
++  input.state.citizens = [citizen('below', 29.999, 0), citizen('at', 30, 0), citizen('carried', 0, 1), citizen('zero', 0, 0), citizen('dead', 0, 0)];
++  const before = structuredClone(input); deepFreeze(input);
++  const output = observeFoodAccess(input.state, input.world, input.runtime);
++  const snapshot = foodSnapshot(input.state as unknown as SimState, new Map(input.world.buildings.map(site => [site.id, site])));
++  assert.deepEqual(output.hungryActors.map(actor => actor.id), ['below', 'zero']);
++  assert.equal(output.hungryWithoutCarriedFood, snapshot.hungryWithoutCarriedFood);
++  assert.equal(output.aliveResidents, snapshot.aliveResidents);
++  assert.equal(output.hungryCanAffordAnyStockedOpenFoodOffer, snapshot.hungryCanAffordAnyStockedOpenFoodOffer);
++  assert.equal(output.hungerZeroAliveResidents, 2); assert.equal(output.hungryHungerZero, 1);
++  assert.equal(output.routeReachability, 'NOT_OBSERVED');
++  assert.deepEqual(input, before);
++  output.hungryActors[0].needs.hunger = 99;
++  output.hungryActors[0].route.remainingRoute3D[0].x = 900;
++  assert.deepEqual(input, before);
++});
++
++test('world and citizen parameters determine district food offers and any-city affordability', () => {
++  const first = fixture();
++  const a = observeFoodAccess(first.state, first.world, first.runtime);
++  assert.deepEqual(a.districts.map(row => [row.districtId, row.foodShopCount, row.openStockedFoodOfferCount]), [['uphill', 1, 1], ['shore', 2, 1]]);
++  assert.deepEqual(a.hungryActors[0].affordableOpenStockedFoodOfferIds, ['market-shop']);
++  const second = fixture();
++  second.world.districts = [{ id: 'remote', name: 'Other generated world' }];
++  second.world.buildings = [{ id: 'other-farm', districtId: 'remote', kind: 'farm' }];
++  second.state.shops = [{ id: 'other-shop', buildingId: 'other-farm', districtId: 'remote', inventory: 2, price: 7, open: false }];
++  second.state.citizens = [citizen('different-resident', 1, 0, 'remote')];
++  second.state.citizens[0].money = 6;
++  const b = observeFoodAccess(second.state, second.world, {});
++  assert.deepEqual(b.districts.map(row => [row.districtId, row.foodShopCount, row.farmCount, row.openStockedFoodOfferCount]), [['remote', 1, 1, 0]]);
++  assert.equal(b.hungryCanAffordAnyStockedOpenFoodOffer, 0);
++  assert.equal(b.hungryActors[0].id, 'different-resident');
++  second.state.shops[0].open = true; second.state.citizens[0].money = 7;
++  assert.equal(observeFoodAccess(second.state, second.world, {}).hungryCanAffordAnyStockedOpenFoodOffer, 1);
++});
++
++test('remaining path uses 3D current position and routeIndex; walking/opening/deadline are explicit references', () => {
++  const { state, world, runtime } = fixture();
++  const actor = state.citizens[0];
++  actor.position = { x: 0, y: 0, z: 0 }; actor.route = [{ x: 999, y: 999, z: 999 }, { x: 3, y: 4, z: 0 }, { x: 3, y: 4, z: 12 }]; actor.routeIndex = 1;
++  const observed = observeFoodAccess(state, world, runtime).hungryActors[0];
++  assert.equal(observed.route.remainingDistance3D, 17);
++  assert.equal(observed.route.remainingRoute3D.length, 3);
++  assert.equal(observed.route.walkingReference.minutes, 17 / 4.2);
++  assert.equal(observed.decision.status, 'DUE_REQUIRES_FUTURE_PEOPLE_PROCESSING');
++  assert.equal(observed.queueObservation.matchesCurrentDestination, true);
++  assert.equal(observed.stateShopping, false);
++  assert.equal(observed.openingReference?.closesAtHour, 22);
++  assert.equal(observed.openingReference?.estimatedArrivalBeforeClosing, true);
++  state.weather = '雨'; state.hour = 19.99; actor.destinationId = 'food-dock';
++  const rainy = observeFoodAccess(state, world, runtime).hungryActors[0];
++  assert.equal(rainy.route.walkingReference.minutes, 17 / 3.1);
++  assert.equal(rainy.openingReference?.scheduledOpenAtCurrentPhase, true);
++  assert.equal(rainy.openingReference?.estimatedArrivalBeforeClosing, false);
++  state.hour = 20;
++  assert.equal(observeFoodAccess(state, world, runtime).hungryActors[0].openingReference?.scheduledOpenAtCurrentPhase, false);
++  actor.destinationId = 'food-market'; state.hour = 22;
++  assert.equal(observeFoodAccess(state, world, runtime).hungryActors[0].openingReference?.scheduledOpenAtCurrentPhase, false);
++});
++
++test('riders expose the named stop and arrival flag while walking time and before-closing stay NOT_ESTIMATED', () => {
++  const { state, world, runtime } = fixture();
++  state.citizens[0].state = 'riding';
++  runtime.riders = { hungry: { vehicleId: 'bus', stopNodeId: 'named-stop', arrived: true, arrivedAt: 1139 } };
++  const actor = observeFoodAccess(state, world, runtime).hungryActors[0];
++  assert.equal(actor.route.walkingReference.status, 'NOT_ESTIMATED'); assert.equal(actor.route.walkingReference.minutes, null);
++  assert.deepEqual(actor.route.rider?.stopPosition, { x: 10, y: 50, z: 30 }); assert.equal(actor.route.rider?.stopNodeId, 'named-stop');
++  assert.equal(actor.route.rider?.arrived, true); assert.equal(actor.openingReference?.estimatedArrivalBeforeClosing, null);
++  state.citizens[0].state = 'moving';
++  assert.equal(observeFoodAccess(state, world, runtime).hungryActors[0].route.walkingReference.status, 'NOT_ESTIMATED');
++  runtime.riders = {}; state.citizens[0].state = 'shopping';
++  const shopping = observeFoodAccess(state, world, runtime).hungryActors[0];
++  assert.equal(shopping.stateShopping, true); assert.equal(shopping.route.walkingReference.status, 'NOT_ESTIMATED');
++});
++
++test('used numeric fields reject NaN without claiming validation of unrelated saved fields', () => {
++  const changes: Array<(input: ReturnType<typeof fixture>) => void> = [
++    x => { x.state.citizens[0].needs.hunger = NaN; }, x => { x.state.citizens[0].needs.fatigue = NaN; },
++    x => { x.state.citizens[0].money = NaN; }, x => { x.state.citizens[0].food = NaN; },
++    x => { x.state.citizens[0].position.y = NaN; }, x => { x.state.citizens[0].route = [{ x: 0, y: NaN, z: 0 }]; },
++    x => { x.state.citizens[0].routeIndex = NaN; }, x => { x.state.shops[0].inventory = NaN; }, x => { x.state.shops[0].price = NaN; },
++    x => { x.state.hour = NaN; }, x => { x.state.extension!.lastUpdate = NaN; }, x => { x.runtime.decisionAt = { hungry: NaN }; },
++    x => { x.runtime.riders = { hungry: { vehicleId: 'bus', stopNodeId: 'named-stop', arrivedAt: NaN } }; },
++    x => { x.runtime.riders = { hungry: { vehicleId: 'bus', stopNodeId: 'named-stop' } }; x.world.nodes[0].position.z = NaN; },
++  ];
++  for (const change of changes) { const input = fixture(); change(input); assert.throws(() => observeFoodAccess(input.state, input.world, input.runtime), /finite/); }
++  const invalidIndex = fixture(); invalidIndex.state.citizens[0].routeIndex = 1;
++  assert.throws(() => observeFoodAccess(invalidIndex.state, invalidIndex.world, invalidIndex.runtime), /valid.*route index/);
++  const noExtension = fixture(); delete noExtension.state.extension;
++  assert.equal(observeFoodAccess(noExtension.state, noExtension.world, {}).clock.source, 'day/hour');
++});
++
++test('missing building references and mismatched districts are named without certifying affected districts lack food shops', () => {
++  const input = fixture();
++  input.world.districts = [...input.world.districts, { id: 'quiet', name: 'No referenced food shop' }];
++  input.world.buildings = input.world.buildings.filter(building => building.id !== 'food-market');
++  input.world.buildings.find(building => building.id === 'food-dock')!.districtId = 'uphill';
++  const before = structuredClone(input); deepFreeze(input);
++  const output = observeFoodAccess(input.state, input.world, input.runtime);
++  assert.deepEqual(output.unresolvedShopBuildingReferences, [{ shopId: 'market-shop', buildingId: 'food-market', shopDistrictId: 'uphill' }]);
++  assert.deepEqual(output.shopBuildingDistrictMismatches, [{ shopId: 'dock-shop', buildingId: 'food-dock', shopDistrictId: 'shore', buildingDistrictId: 'uphill', buildingKind: 'dock' }]);
++  assert.equal(output.foodOfferDistrictSource, 'saved shop.districtId');
++  assert.equal(output.referenceIntegrity.status, 'INCOMPLETE_SHOP_BUILDING_REFERENCES');
++  assert.equal(output.referenceIntegrity.unresolvedShopBuildingReferenceCount, 1);
++  assert.equal(output.referenceIntegrity.shopBuildingDistrictMismatchCount, 1);
++  const uphill = output.districts.find(district => district.districtId === 'uphill')!;
++  assert.equal(uphill.foodShopCount, 0);
++  assert.equal(uphill.integrity, 'INCOMPLETE_SHOP_BUILDING_REFERENCES');
++  assert.equal(uphill.foodFacilityAssessment, 'INCOMPLETE_SHOP_BUILDING_REFERENCES');
++  assert.equal(uphill.shopBuildingDistrictMismatchCount, 1);
++  const shore = output.districts.find(district => district.districtId === 'shore')!;
++  assert.equal(shore.foodShopCount, 2); // Original saved-shop bucketing is retained.
++  assert.equal(shore.integrity, 'INCONSISTENT_SHOP_BUILDING_DISTRICTS');
++  assert.equal(shore.foodFacilityAssessment, 'INCONSISTENT_SHOP_BUILDING_DISTRICTS');
++  assert.equal(output.districts.find(district => district.districtId === 'quiet')!.foodFacilityAssessment, 'NO_FOOD_SHOPS_OBSERVED');
++  assert.equal(output.foodSites.find(shop => shop.id === 'dock-shop')!.districtId, 'shore');
++  assert.deepEqual(input, before);
++  const known = fixture();
++  assert.equal(observeFoodAccess(known.state, known.world, known.runtime).districts[0].foodFacilityAssessment, 'KNOWN_FOOD_SHOPS_OBSERVED');
++});
++
++test('arbitrary state names count as own numeric keys without inheriting constructor or prototype properties', () => {
++  const input = fixture();
++  const names = ['constructor', '__proto__', 'toString', 'hasOwnProperty', 'constructor'];
++  input.state.citizens = names.map((state, index) => ({ ...citizen(`person-${index}`), state }));
++  const before = structuredClone(input); deepFreeze(input);
++  const output = observeFoodAccess(input.state, input.world, input.runtime);
++  assert.equal(Object.getPrototypeOf(output.hungryStates), null);
++  assert.equal(output.hungryStates.constructor, 2);
++  assert.equal(output.hungryStates.__proto__, 1);
++  assert.equal(output.hungryStates.toString, 1);
++  assert.equal(output.hungryStates.hasOwnProperty, 1);
++  assert.deepEqual(Object.entries(output.hungryStates), [['constructor', 2], ['__proto__', 1], ['toString', 1], ['hasOwnProperty', 1]]);
++  assert.deepEqual(input, before);
++});

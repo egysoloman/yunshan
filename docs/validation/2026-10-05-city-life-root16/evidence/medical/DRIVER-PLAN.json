@@ -1,0 +1,79 @@
+{
+  "status": "FROZEN_PREPARED_NOT_RUN",
+  "scope": "NEW finite18food13gift actual03continuation/current322; original240FAIL retained",
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "terminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "driver": "finite-food-medical-candidate.mts",
+  "driverSHA256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4",
+  "bounds": {
+    "mainFrames": 512,
+    "normalRawMainDeltaClamp": 1,
+    "walkingDelta": "min(1,remainingDistance/4.8), unchanged ROOT15actual walk",
+    "cooldownAndOpeningWaitDelta": 0.25,
+    "clinicWaitingDelta": 1,
+    "speed": 16,
+    "tickSeconds": 0.25,
+    "maxInternalMainTicks": 2048,
+    "maxMainGameMinutes": 8192,
+    "wallCapSeconds": 900,
+    "futureReaders": 3,
+    "futureStepsEach": 24,
+    "futureDelta": 0.25,
+    "futureGameMinutesPerReader": 96,
+    "maxTotalInstanceInternalTicksIncludingSuccessFuture": 2120,
+    "oldHOST512quarterScopePreservedNotRun": true
+  },
+  "steps": [
+    "literalfull terminal import/export byteequal; paidrest15 at originalclinic",
+    "originalW/mouse route512m to remote finite sale, ordinary .25 wait to actual06 open",
+    "purchase18 exactly at current livequote/stock/settlement/body; immediate1 meal/carry17",
+    "originalW route319.78m, originalF shaft, nighttime legalhome floor1 to actual actors",
+    "five rounds, firstfour giftfarm11+workshop55+doctor44, fifthdoctor44 only, three actual .25ticks betweenrounds; total13",
+    "originalW/F downshaft and233.78m back to originalclinic; paidrest15",
+    "normal main wait<=1 each: real currentday publicreview and onsite privatecashreview/production/procurement; attend actualhealth service only if all gates",
+    "original20currentcanonical doctor/patient minutes,1material consumption/health+unique waste/actualdoctor wagepaid",
+    "only after real success: actualfull andpartition readers immediate byteequal/+24steps each"
+  ],
+  "protectedOriginals": "inherited-originals source files copied with originalSHA; oldnamespace unchanged",
+  "allowedCommands": [
+    "rest (clinic15)",
+    "purchase (exact18remotefood)",
+    "eat (realcarriedfood)",
+    "gift (4+4+5)",
+    "attendService (originalservice-2)"
+  ],
+  "permittedBodyPublishing": "only ROOT15real Controller W/mouse and legacyphysicalF/normalexactpersistedload",
+  "prohibitedWrites": [
+    "needs",
+    "health",
+    "inventory",
+    "money",
+    "speed",
+    "clock",
+    "NPCposition",
+    "identity",
+    "job",
+    "roads",
+    "budgets",
+    "stock",
+    "policy declarations"
+  ],
+  "runRequires": "Explicit root exclusiveSim resourcewindow after activebaseline finishes",
+  "exampleCommand": [
+    "python3",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/run-phase.py",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source",
+    "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01",
+    "[\"env\", \"ROOT16_MEDICAL_RUN_COORDINATED=1\", \"node\", \"--import\", \"tsx\", \"/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/finite-food-medical-candidate.mts\", \"/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts\"]",
+    "900"
+  ],
+  "openingBatchWaitCorrection": {
+    "previousPreparedDriverSHA256": "7f60844de23dfb2f7282c8ebd84fc8f2f55540e553d18a2970ca6130413feece",
+    "preserved": true,
+    "reason": "Normal shop.open commerce state updates12min; true nextday8 opening batch is06:04, not exactly06:00",
+    "finiteWait": "Ordinary .25frames until actualopen; reject stillclosed through07:00,512total bound unchanged",
+    "simulationExecutedForPreviousPreparedDriver": false
+  },
+  "paidContractRefinement": "Actual shift.day=currentday8+ and approvedSinceSource<=currentclock; lawful previousday preapproval accepted; only contributing actualcare wage ticks in finalevidence",
+  "traceImmutability": "Snapshot doctor body/needs, currentPrivate plans and currentFundedShift copied at observation time; no later mutation of historical witness"
+}

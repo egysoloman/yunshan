@@ -1,0 +1,439 @@
+{
+  "status": "STATIC_READ_COMPLETE_CANDIDATE_PREPARED_NOT_RUN",
+  "zeroSimulation": true,
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "originalTerminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "originalFailPreserved": {
+    "status": "FAIL",
+    "mainFrames": 240,
+    "rawSHA256": "d961c9af3c8d9175bafba95bb8b2ff502200b3cbc119ca64a3c9ec37fce9be1c"
+  },
+  "clock": 10048,
+  "dayIndex": 6,
+  "hour": 23.466666666666665,
+  "speed": 16,
+  "player": {
+    "position": {
+      "x": -135.99999999999994,
+      "y": 0.6,
+      "z": -59.99999999999993
+    },
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "money": 416.02821428458134,
+    "reputation": 0,
+    "needs": {
+      "hunger": 91.51999999999953,
+      "fatigue": 69.4959999999983,
+      "social": 0,
+      "fun": 43.8879999999972
+    },
+    "inventory": {
+      "block": 32,
+      "food": 1
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "selectedActors": [
+    {
+      "id": "citizen-11",
+      "role": "农民",
+      "home": "civic-0-home",
+      "work": "civic-0-farm",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 77.90547424542288,
+        "fun": 98.05034724943378
+      },
+      "food": 0,
+      "money": 660.4882090195193,
+      "health": 97.56277621350877,
+      "alive": true,
+      "age": 31.018203957378375,
+      "activity": "rest"
+    },
+    {
+      "id": "citizen-55",
+      "role": "工人",
+      "home": "civic-0-home",
+      "work": "civic-0-workshop",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 74.01646796371426,
+        "fun": 99.37034724943376
+      },
+      "food": 0,
+      "money": 455.4243792275117,
+      "health": 91.00299147066839,
+      "alive": true,
+      "age": 30.018203957378375,
+      "activity": "rest"
+    },
+    {
+      "id": "citizen-44",
+      "role": "医生",
+      "home": "civic-0-home",
+      "work": "civic-0-clinic",
+      "position": {
+        "x": -2,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "needs": {
+        "hunger": 0,
+        "fatigue": 100,
+        "social": 72.75885162064641,
+        "fun": 100
+      },
+      "food": 0,
+      "money": 676.276210038616,
+      "health": 88.17894943416101,
+      "alive": true,
+      "age": 64.01820395739537,
+      "activity": "rest"
+    },
+    {
+      "id": "citizen-23",
+      "role": "官员",
+      "home": "civic-1-home",
+      "work": "civic-1-hall",
+      "position": {
+        "x": 252,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "needs": {
+        "hunger": 86.59999999999984,
+        "fatigue": 100,
+        "social": 73.70758228176615,
+        "fun": 100
+      },
+      "food": 1,
+      "money": 449.3234789133274,
+      "health": 94.78654943416109,
+      "alive": true,
+      "age": 43.018203957378375,
+      "activity": "rest"
+    },
+    {
+      "id": "citizen-56",
+      "role": "官员",
+      "home": "civic-1-home",
+      "work": "civic-1-hall",
+      "position": {
+        "x": 250,
+        "y": 6.6,
+        "z": 1.2
+      },
+      "needs": {
+        "hunger": 83.99999999999979,
+        "fatigue": 100,
+        "social": 100,
+        "fun": 100
+      },
+      "food": 1,
+      "money": 366.6925913546985,
+      "health": 100,
+      "alive": true,
+      "age": 31.018203957378375,
+      "activity": "rest"
+    }
+  ],
+  "industries": [
+    {
+      "id": "shop-civic-0-farm",
+      "inventory": 0.6963545465176235,
+      "open": false,
+      "price": 17.940500093565205,
+      "cash": 1333.1721111864604,
+      "cashKind": "shop.cash",
+      "earnedDebt": 0,
+      "operatingReserveMinimum": 6.666666666666667,
+      "employees": 9,
+      "districtEnergy": 33.29522932147949,
+      "profit": 1486.3477024591948,
+      "oldShiftDay": 5,
+      "currentShift": false
+    },
+    {
+      "id": "shop-civic-0-workshop",
+      "inventory": 0,
+      "open": false,
+      "price": 17.99999886201164,
+      "cash": 367.2975655990686,
+      "cashKind": "shop.cash",
+      "earnedDebt": 0,
+      "operatingReserveMinimum": 6.666666666666667,
+      "employees": 8,
+      "districtEnergy": 33.29522932147949,
+      "profit": 365.01053036157305,
+      "oldShiftDay": 4,
+      "currentShift": false
+    },
+    {
+      "id": "shop-civic-1-market",
+      "inventory": 27,
+      "open": false,
+      "price": 16.466839896428187,
+      "cash": 137.63730778098022,
+      "cashKind": "shop.cash",
+      "earnedDebt": 3.79402973008928,
+      "operatingReserveMinimum": 6.666666666666667,
+      "employees": 19,
+      "districtEnergy": 33.58627150850954,
+      "profit": -197.56672194909044,
+      "oldShiftDay": 6,
+      "currentShift": true
+    },
+    {
+      "id": "shop-civic-1-farm",
+      "inventory": 0.07645105647749517,
+      "open": false,
+      "price": 16.0408604415288,
+      "cash": 644.5998886149808,
+      "cashKind": "shop.cash",
+      "earnedDebt": 17.16785950753174,
+      "operatingReserveMinimum": 6.666666666666667,
+      "employees": 19,
+      "districtEnergy": 33.58627150850954,
+      "profit": 593.21350080183,
+      "oldShiftDay": 6,
+      "currentShift": true
+    }
+  ],
+  "roadComponents": {
+    "count": 11,
+    "nodesByComponent": [
+      [
+        "civic-0-home-door",
+        "civic-0-workshop-door",
+        "civic-0-clinic-door",
+        "civic-0-school-door",
+        "civic-0-market-door",
+        "civic-0-farm-door",
+        "civic-0-hall-door"
+      ],
+      [
+        "civic-1-home-door",
+        "civic-1-market-door",
+        "civic-1-farm-door",
+        "civic-1-hall-door"
+      ],
+      [
+        "civic-2-home-door",
+        "civic-2-market-door",
+        "civic-2-farm-door",
+        "civic-2-hall-door"
+      ],
+      [
+        "civic-3-home-door",
+        "civic-3-market-door",
+        "civic-3-farm-door",
+        "civic-3-hall-door"
+      ],
+      [
+        "civic-4-home-door",
+        "civic-4-market-door",
+        "civic-4-farm-door",
+        "civic-4-hall-door"
+      ],
+      [
+        "civic-5-home-door",
+        "civic-5-market-door",
+        "civic-5-farm-door",
+        "civic-5-hall-door"
+      ],
+      [
+        "civic-6-home-door",
+        "civic-6-market-door",
+        "civic-6-farm-door",
+        "civic-6-hall-door"
+      ],
+      [
+        "civic-7-home-door",
+        "civic-7-market-door",
+        "civic-7-farm-door",
+        "civic-7-hall-door"
+      ],
+      [
+        "civic-8-home-door",
+        "civic-8-market-door",
+        "civic-8-farm-door",
+        "civic-8-hall-door"
+      ],
+      [
+        "civic-9-home-door",
+        "civic-9-market-door",
+        "civic-9-farm-door",
+        "civic-9-hall-door"
+      ],
+      [
+        "civic-10-home-door",
+        "civic-10-market-door",
+        "civic-10-farm-door",
+        "civic-10-hall-door"
+      ]
+    ],
+    "home0": 0,
+    "market1": 1,
+    "directNPCwalkingComponentSame": false,
+    "scope": "Undirected original47nodes/36edges components, not actual future NPC route or movement proof"
+  },
+  "serviceOrders": [
+    {
+      "id": "service-1",
+      "topic": "education",
+      "state": "fulfilled",
+      "cap": 40,
+      "spent": 40,
+      "received": 6,
+      "consumed": 6,
+      "target": 6,
+      "requiredMinutes": 60
+    },
+    {
+      "id": "service-2",
+      "topic": "health",
+      "state": "awaitingSupply",
+      "cap": 40,
+      "spent": 0,
+      "received": 0,
+      "consumed": 0,
+      "target": 6,
+      "requiredMinutes": 20
+    },
+    {
+      "id": "service-3",
+      "topic": "education",
+      "state": "awaitingSupply",
+      "cap": 40,
+      "spent": 0,
+      "received": 0,
+      "consumed": 0,
+      "target": 6,
+      "requiredMinutes": 60
+    }
+  ],
+  "publicStandingUntilDay": 7,
+  "originalPublicShifts": [
+    {
+      "dayIndex": 7,
+      "approvedAt": 9424,
+      "approvedBy": [
+        "citizen-23",
+        "citizen-56"
+      ],
+      "siteId": "civic-1-hall"
+    }
+  ],
+  "estimatedRoute": {
+    "method": "Inherited zeroSimulation Controller W/F motor path only; phase quantization, actual offer/actors/needs/current paid/energy/review may fail; not Simulation outcome",
+    "meters": 1074.7406721930392,
+    "walkingMotorFrames": 237,
+    "walkingGameMinutes": 3582.468907310155,
+    "marketArrival": {
+      "clock": 11754.666666666659,
+      "dayIndex": 8,
+      "hour": 3.9111111111109795
+    },
+    "normalOpeningHour": 6,
+    "openingWaitGameMinutes": 125.33333333334122,
+    "ownerArrival": {
+      "clock": 12961.234453655074,
+      "dayIndex": 9,
+      "hour": 0.020574227584559898
+    },
+    "after13Gifts": {
+      "clock": 13009.234453655074,
+      "dayIndex": 9,
+      "hour": 0.8205742275845599
+    },
+    "patientClinicArrival": {
+      "clock": 13803.802240643472,
+      "dayIndex": 9,
+      "hour": 14.0633706773912
+    },
+    "ownerHungerAfterFiveRounds": 77.6,
+    "ownerHungerAtReviewPreferenceStartIgnoringMovementAndNaturalConsumption": 57.56172268275367,
+    "doctorHungerAtPatientArrivalIgnoringNaturalConsumption": 57.87161065058007,
+    "threeDoctorGiftsInsufficientAtReturn": 17.871610650580074
+  },
+  "finiteWallet": {
+    "purchaseQuantity": 18,
+    "snapshotUnitPrice": 16.466839896428187,
+    "snapshotGross": 296.40311813570736,
+    "startingMoney": 416.02821428458134,
+    "startClinicRest15": 15,
+    "returnClinicRest15": 15,
+    "snapshotCashAfterPurchaseAndTwoRests": 89.62509614887398,
+    "reservedOptionalFurtherClinicRests": 30,
+    "maximumAllowedUnitPriceForInitialRestAnd30PurchaseReserve": 20.61267857136563,
+    "purchaseImmediatelyConsumes": 1,
+    "carryAdded": 17,
+    "fixedGifts": {
+      "citizen-11": 4,
+      "citizen-55": 4,
+      "citizen-44": 5
+    },
+    "giftsTotal": 13,
+    "carryLeftAfterGiftsBeforeOrdinarySelfMeals": 4,
+    "futurePriceStockOpenSettlementNotGuaranteed": true
+  },
+  "newBounds": {
+    "mainFrames": 512,
+    "normalRawMainDeltaClamp": 1,
+    "walkingDelta": "min(1,remainingDistance/4.8), unchanged ROOT15actual walk",
+    "cooldownAndOpeningWaitDelta": 0.25,
+    "clinicWaitingDelta": 1,
+    "speed": 16,
+    "tickSeconds": 0.25,
+    "maxInternalMainTicks": 2048,
+    "maxMainGameMinutes": 8192,
+    "wallCapSeconds": 900,
+    "futureReaders": 3,
+    "futureStepsEach": 24,
+    "futureDelta": 0.25,
+    "futureGameMinutesPerReader": 96,
+    "maxTotalInstanceInternalTicksIncludingSuccessFuture": 2120,
+    "oldHOST512quarterScopePreservedNotRun": true
+  },
+  "assertions": [
+    "exact18 finite purchase at live quote/open body",
+    "exact13gift,2m supported samefloor ACL and original10min cooldown",
+    "whole cash residual<1e-6",
+    "wholefood=opening+foodproduction-retailinstant-stored-self-gifts residual<1e-6",
+    "wholematerialsupplier=opening+materialproduction-actualprocurement residual<1e-6",
+    "canonical current signedday8+ doctor paid work, no oldday7 reuse",
+    "originaltarget6/cap40/20minutes/1material/healthgain/unique waste1 assertions retained",
+    "full and actualpartition each immediate byteequal and future24originalsteps equal",
+    "any failure preserves truefrontier/raw/receipt rather than increasing bound/resource"
+  ],
+  "driverSHA256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4",
+  "openingBatchWaitCorrection": {
+    "previousPreparedDriverSHA256": "7f60844de23dfb2f7282c8ebd84fc8f2f55540e553d18a2970ca6130413feece",
+    "preserved": true,
+    "reason": "Normal shop.open commerce state updates12min; true nextday8 opening batch is06:04, not exactly06:00",
+    "finiteWait": "Ordinary .25frames until actualopen; reject stillclosed through07:00,512total bound unchanged",
+    "simulationExecutedForPreviousPreparedDriver": false
+  },
+  "paidContractRefinement": "Actual shift.day=currentday8+ and approvedSinceSource<=currentclock; lawful previousday preapproval accepted; only contributing actualcare wage ticks in finalevidence",
+  "traceImmutability": "Snapshot doctor body/needs, currentPrivate plans and currentFundedShift copied at observation time; no later mutation of historical witness"
+}

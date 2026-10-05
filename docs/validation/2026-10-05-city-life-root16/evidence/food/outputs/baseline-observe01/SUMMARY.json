@@ -1,0 +1,54 @@
+{
+  "status": "PASS_DIAGNOSTIC",
+  "actualTicks": 128,
+  "maxTicks": 128,
+  "distinctOriginalTargetsWithReceipt": 70,
+  "targetCounterReceipts": 119,
+  "foodProduced": 39.55340519300031,
+  "counterMeals": 189,
+  "carriedMeals": 109,
+  "maxCashResidual": 4.656612873077393e-10,
+  "maxFoodResidual": 3.893774191965349e-12,
+  "bodyRejections": 0,
+  "terminalSHA256": "ac47bc4c4e43f36e755fa6b9f3447107d6cc75506d90c2aebbe0ab63105b3cc8",
+  "food": {
+    "aliveResidents": 616,
+    "nominalResidentMealsPerDay": 852.9230769230769,
+    "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+    "shopFoodUnits": 15223.076179276652,
+    "residentCarriedFoodUnits": 302,
+    "playerCarriedFoodUnits": 0,
+    "bySiteKind": {
+      "farm": {
+        "sites": 31,
+        "open": 31,
+        "inventoryUnits": 4779,
+        "employees": 28
+      },
+      "dock": {
+        "sites": 16,
+        "open": 16,
+        "inventoryUnits": 1557.0761792766516,
+        "employees": 17
+      },
+      "market": {
+        "sites": 109,
+        "open": 109,
+        "inventoryUnits": 8887,
+        "employees": 145
+      },
+      "workshop": {
+        "sites": 54,
+        "open": 54,
+        "inventoryUnits": 4723.005330726908,
+        "employees": 75
+      }
+    },
+    "hungryWithoutCarriedFood": 159,
+    "hungryCanAffordAnyStockedOpenFoodOffer": 159,
+    "routeReachability": "NOT_OBSERVED",
+    "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+  },
+  "sourceInputsUnchanged": true,
+  "boundary": "This bounded diagnostic does not certify all229 recovered, long term supply, medical treatment, full suite, art or hardware performance."
+}

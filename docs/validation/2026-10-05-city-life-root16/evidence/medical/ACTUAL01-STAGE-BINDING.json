@@ -1,0 +1,52 @@
+{
+  "frozenAt": "2026-10-05T00:21:16.553209+00:00",
+  "status": "FROZEN_READY_FOR_AUTHORIZED_ACTUAL01",
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "sourceInputCount": 322,
+  "sourceMatchesSharedCurrent322": true,
+  "driverSHA256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4",
+  "driverAsRun": "actual01-driver-as-run.mts",
+  "planSHA256": "95de014aa4c7ae5b952fbabdf7dcff3c9dd1a3acd138eafac2cd9f2be5670bf2",
+  "originalTerminalSHA256": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "bounds": {
+    "mainFrames": 512,
+    "normalRawMainDeltaClamp": 1,
+    "walkingDelta": "min(1,remainingDistance/4.8), unchanged ROOT15actual walk",
+    "cooldownAndOpeningWaitDelta": 0.25,
+    "clinicWaitingDelta": 1,
+    "speed": 16,
+    "tickSeconds": 0.25,
+    "maxInternalMainTicks": 2048,
+    "maxMainGameMinutes": 8192,
+    "wallCapSeconds": 900,
+    "futureReaders": 3,
+    "futureStepsEach": 24,
+    "futureDelta": 0.25,
+    "futureGameMinutesPerReader": 96,
+    "maxTotalInstanceInternalTicksIncludingSuccessFuture": 2120,
+    "oldHOST512quarterScopePreservedNotRun": true
+  },
+  "typeReceipt": {
+    "startedAt": "2026-10-05T00:20:49.693240+00:00",
+    "endedAt": "2026-10-05T00:20:59.396658+00:00",
+    "argv": [
+      "./node_modules/.bin/tsc",
+      "--noEmit",
+      "-p",
+      "../tsconfig.driver.json"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 322,
+    "inputsStable": true,
+    "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ownedPid": 130531,
+    "observedDescendants": 1,
+    "finalOwnedMembers": [],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "rootCoordination": "Root explicit exclusivemedicalactual01 window after own all229 and full/partition24 receipts closed;512main<=1/speed16/cap900 fixed"
+}

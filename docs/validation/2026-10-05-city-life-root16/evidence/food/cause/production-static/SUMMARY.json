@@ -1,0 +1,300 @@
+{
+  "scope": "Static authoritative terminal JSON plus frozen pure geometry/source helpers. No Simulation constructed or stepped; no building/worker mutable state edits.",
+  "authority": {
+    "saveSha256": "db40c8410ed5cd45f308fb12c12a4ef6678c58add40e3122e595a6bdd99efe16",
+    "worldOriginalSha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "worldFingerprint": "b85fa6ec",
+    "layout": "current-v6",
+    "saveWorldFingerprint": "b85fa6ec"
+  },
+  "terminal": {
+    "tick": 720,
+    "day": 1,
+    "hour": 8,
+    "clock": 1920,
+    "contractDay": 1,
+    "nextPrivateReviewAt": 1922,
+    "commerceAt": 1930,
+    "payrollAt": 2460,
+    "savedShopLabor": {}
+  },
+  "historicalObservation": {
+    "flows": {
+      "food": {
+        "producedUnits": 125.52277408365093,
+        "productionMinutes": 5590.823412700992,
+        "retailUnits": 961,
+        "retailGross": 10346.456392695514,
+        "counterMeals": 574,
+        "unattributedRetailUnits": 0
+      },
+      "materials": {
+        "producedUnits": 538.3933753832331,
+        "productionMinutes": 23967.148933451135,
+        "retailUnits": 0,
+        "retailGross": 0,
+        "counterMeals": 0,
+        "unattributedRetailUnits": 0
+      },
+      "unknown": {
+        "producedUnits": 0,
+        "productionMinutes": 0,
+        "retailUnits": 0,
+        "retailGross": 0,
+        "counterMeals": 0,
+        "unattributedRetailUnits": 0
+      }
+    },
+    "attendanceBySiteKind": {
+      "farm": {
+        "fundedAttendanceMinutes": 9649.463435900012,
+        "earnedGross": 887.2291060371466,
+        "namedEvents": 3080,
+        "eventsWithActualWindow": 3080
+      },
+      "dock": {
+        "fundedAttendanceMinutes": 5600.823412700992,
+        "earnedGross": 514.9655345284318,
+        "namedEvents": 2809,
+        "eventsWithActualWindow": 2809
+      },
+      "workshop": {
+        "fundedAttendanceMinutes": 24011.86627147382,
+        "earnedGross": 2207.5534665487244,
+        "namedEvents": 1862,
+        "eventsWithActualWindow": 1862
+      },
+      "market": {
+        "fundedAttendanceMinutes": 38283.56955302965,
+        "earnedGross": 3519.9293320535526,
+        "namedEvents": 5471,
+        "eventsWithActualWindow": 5471
+      },
+      "other": {
+        "fundedAttendanceMinutes": 0,
+        "earnedGross": 0,
+        "namedEvents": 0,
+        "eventsWithActualWindow": 0
+      },
+      "unknown": {
+        "fundedAttendanceMinutes": 0,
+        "earnedGross": 0,
+        "namedEvents": 0,
+        "eventsWithActualWindow": 0
+      }
+    },
+    "zeroOutputBatchDisposition": "NOT_OBSERVED",
+    "tradeStats": {
+      "suppliedUnits": 0,
+      "settledUnits": 0,
+      "returnedUnits": 0,
+      "supplierGross": 0,
+      "settlementsByPrice": {}
+    }
+  },
+  "byKind": {
+    "farm": {
+      "shops": 31,
+      "open": 31,
+      "inventory": 4797,
+      "inventoryMin": 126,
+      "inventoryMax": 160,
+      "stockAtOrAboveTarget": 31,
+      "employees": 28,
+      "zeroEmployees": 14,
+      "workerCount": 28,
+      "workerHungerBelow40": 0,
+      "workerHungerBelow30": 0,
+      "workerHungerZero": 0,
+      "workerFatigueBelow35": 0,
+      "workerStates": {
+        "moving": 15,
+        "shopping": 9,
+        "socializing": 1,
+        "reviewingBusiness": 1,
+        "atHome": 1,
+        "working": 1
+      },
+      "workerActivities": {
+        "businessReview": 8,
+        "eat": 15,
+        "social": 3,
+        "rest": 1,
+        "work": 1
+      },
+      "meanHunger": 79.45825933571291,
+      "planStatuses": {
+        "absent": 14,
+        "old-day": 15,
+        "current-day": 2
+      },
+      "currentRemainingMinutes": 1411.3963197172568,
+      "currentWorkedMinutes": 28.603680282743117,
+      "currentAllowanceWorkers": 3,
+      "ownerFailedReviewGateCounts": {
+        "near": 28,
+        "workPoint": 28
+      },
+      "ownerAllPhysicalAndNeedGatesPass": [
+        "shop-river-b19",
+        "shop-workshop-b19",
+        "shop-workshop-b22"
+      ],
+      "ownerLowHunger": [],
+      "observedFundedAttendanceMinutes": 9649.46343590001
+    },
+    "dock": {
+      "shops": 16,
+      "open": 16,
+      "inventory": 1522.522774083651,
+      "inventoryMin": 84,
+      "inventoryMax": 101.57981957929616,
+      "stockAtOrAboveTarget": 0,
+      "employees": 17,
+      "zeroEmployees": 6,
+      "workerCount": 17,
+      "workerHungerBelow40": 0,
+      "workerHungerBelow30": 0,
+      "workerHungerZero": 0,
+      "workerFatigueBelow35": 0,
+      "workerStates": {
+        "moving": 6,
+        "atHome": 2,
+        "shopping": 9
+      },
+      "workerActivities": {
+        "eat": 10,
+        "rest": 3,
+        "businessReview": 3,
+        "social": 1
+      },
+      "meanHunger": 88.30658425999167,
+      "planStatuses": {
+        "old-day": 10,
+        "absent": 6
+      },
+      "currentRemainingMinutes": 0,
+      "currentWorkedMinutes": 0,
+      "currentAllowanceWorkers": 0,
+      "ownerFailedReviewGateCounts": {
+        "near": 16,
+        "workPoint": 16,
+        "hunger": 1
+      },
+      "ownerAllPhysicalAndNeedGatesPass": [],
+      "ownerLowHunger": [
+        "shop-core-dock-building"
+      ],
+      "observedFundedAttendanceMinutes": 5600.823412700993
+    },
+    "market": {
+      "shops": 109,
+      "open": 109,
+      "inventory": 9055,
+      "inventoryMin": 44,
+      "inventoryMax": 90,
+      "stockAtOrAboveTarget": 0,
+      "employees": 145,
+      "zeroEmployees": 43,
+      "workerCount": 145,
+      "workerHungerBelow40": 6,
+      "workerHungerBelow30": 6,
+      "workerHungerZero": 2,
+      "workerFatigueBelow35": 0,
+      "workerStates": {
+        "moving": 92,
+        "shopping": 28,
+        "riding": 4,
+        "atHome": 19,
+        "working": 2
+      },
+      "workerActivities": {
+        "businessReview": 36,
+        "eat": 80,
+        "rest": 20,
+        "work": 9
+      },
+      "meanHunger": 69.5893969983836,
+      "planStatuses": {
+        "old-day": 58,
+        "absent": 46,
+        "current-day": 5
+      },
+      "currentRemainingMinutes": 5916.2897795434055,
+      "currentWorkedMinutes": 55.710220456594826,
+      "currentAllowanceWorkers": 20,
+      "ownerFailedReviewGateCounts": {
+        "near": 104,
+        "workPoint": 104,
+        "hunger": 2
+      },
+      "ownerAllPhysicalAndNeedGatesPass": [
+        "shop-west-b22",
+        "shop-summit-b5",
+        "shop-summit-b8",
+        "shop-east-b5",
+        "shop-airport-b8"
+      ],
+      "ownerLowHunger": [
+        "shop-market-b11",
+        "shop-west-b73"
+      ],
+      "observedFundedAttendanceMinutes": 38283.56955302964
+    },
+    "workshop": {
+      "shops": 54,
+      "open": 54,
+      "inventory": 4720.993375383235,
+      "inventoryMin": 81,
+      "inventoryMax": 87.84,
+      "stockAtOrAboveTarget": 0,
+      "employees": 75,
+      "zeroEmployees": 13,
+      "workerCount": 75,
+      "workerHungerBelow40": 16,
+      "workerHungerBelow30": 16,
+      "workerHungerZero": 5,
+      "workerFatigueBelow35": 0,
+      "workerStates": {
+        "moving": 45,
+        "atHome": 16,
+        "shopping": 13,
+        "riding": 1
+      },
+      "workerActivities": {
+        "businessReview": 14,
+        "rest": 16,
+        "eat": 45
+      },
+      "meanHunger": 57.22969692584792,
+      "planStatuses": {
+        "old-day": 41,
+        "absent": 13
+      },
+      "currentRemainingMinutes": 0,
+      "currentWorkedMinutes": 0,
+      "currentAllowanceWorkers": 0,
+      "ownerFailedReviewGateCounts": {
+        "near": 54,
+        "workPoint": 54,
+        "hunger": 12
+      },
+      "ownerAllPhysicalAndNeedGatesPass": [],
+      "ownerLowHunger": [
+        "shop-workshop-b17",
+        "shop-starport-b1",
+        "shop-starport-b4",
+        "shop-starport-b11",
+        "shop-starport-b14",
+        "shop-starport-b17",
+        "shop-starport-b20",
+        "shop-starport-b27",
+        "shop-starport-b30",
+        "shop-starport-b33",
+        "shop-starport-b36",
+        "shop-starport-b43"
+      ],
+      "observedFundedAttendanceMinutes": 24011.866271473828
+    }
+  }
+}

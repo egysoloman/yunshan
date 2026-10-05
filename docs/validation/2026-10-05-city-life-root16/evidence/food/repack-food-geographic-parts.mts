@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { readFileSync,writeFileSync,mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+const root='/workspace/yunshan-work/ROOT16-food-integration-20261005-01',source=root+'/baseline-source',out=root+'/outputs/geographic-parts01';
+mkdirSync(out,{recursive:true});const sha=(v:string|Buffer)=>createHash('sha256').update(v).digest('hex');
+const raw=readFileSync(root+'/outputs/all229-continuation01/terminal.save.json','utf8'),worldRaw=readFileSync(root+'/originals/WORLD-ORIGINAL.json','utf8');
+assert.equal(sha(raw),'edf73ed2aa923b16248f3981092ea78dfe6375e5be1a4d4e3c6914ca84285754');assert.equal(sha(worldRaw),'2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512');
+const {partitionSave,assembleSave}=await import(pathToFileURL(source+'/src/persistence/partition.ts').href);
+const parts=partitionSave(raw,JSON.parse(worldRaw));writeFileSync(out+'/terminal.geographic.parts.json',JSON.stringify(parts),{flag:'wx'});const physicalRead=JSON.parse(readFileSync(out+'/terminal.geographic.parts.json','utf8'));assert.equal(assembleSave(physicalRead),raw);
+const actualFuture=JSON.parse(readFileSync(root+'/outputs/full-partition24-01/SUMMARY.json','utf8'));assert.equal(actualFuture.status,'PASS');assert.equal(actualFuture.startSHA256,sha(raw));
+const result={status:'PASS_PURE_REPACK',parts:parts.length,partsSHA256:sha(readFileSync(out+'/terminal.geographic.parts.json')),assembledSHA256:sha(assembleSave(physicalRead)),sourceSHA256:sha(raw),worldSHA256:sha(worldRaw),simulations:0,steps:0,previousActualWholePartitionFutureSHA256:actualFuture.futureSHA256,boundary:'World-assisted geographic parts were physically written/read and assembled to the exact already future-tested full bytes; no additional simulation was run for this repack, and this is not streaming or statistical actor unloading.'};writeFileSync(out+'/SUMMARY.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(result));

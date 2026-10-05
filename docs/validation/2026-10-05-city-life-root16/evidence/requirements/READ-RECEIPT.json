@@ -1,0 +1,697 @@
+{
+  "task": "ROOT16 requirements/evidence read-only audit",
+  "at": "2026-10-05T00:11:13.106876+00:00",
+  "repository": "/workspace/yunshan",
+  "baselineHEAD": "a1888cd764cabe250e78f2f4460a7b103dff302a",
+  "observedHEAD": "a1888cd764cabe250e78f2f4460a7b103dff302a",
+  "observedBranch": "takeover-city-life",
+  "observedStatus": [],
+  "sourceDocuments": [
+    {
+      "path": "/workspace/yunshan/AGENTS.md",
+      "bytes": 1726,
+      "lines": 11,
+      "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "path": "/workspace/yunshan/提示词.md",
+      "bytes": 25038,
+      "lines": 184,
+      "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    },
+    {
+      "path": "/workspace/yunshan/开发备忘录.md",
+      "bytes": 448219,
+      "lines": 1546,
+      "sha256": "f895f00d4441abfb6f7394a0bf187b14741fd1a9dff479a1309f142c36510964"
+    },
+    {
+      "path": "/workspace/yunshan/docs/需求实现验证矩阵.md",
+      "bytes": 113330,
+      "lines": 440,
+      "sha256": "8ef560d0dc963d4f80f100f27d7b5b73d66e83ecf39501551eba4490fff18dd5"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/SYSTEM-MATRIX-asof1439.csv",
+      "bytes": 39499,
+      "lines": 39,
+      "sha256": "eb4dbd934e5ded2574d3aabbbfb65990df5c9e2796531213f38e59177bab81a8"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/REQUIREMENTS-MATRIX.md",
+      "bytes": 30493,
+      "lines": 56,
+      "sha256": "00219ccc7d3dc9f6aeb14fc76d6bba6638b9d772d2038e608902ae3f12d77a2c"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/REPORT.md",
+      "bytes": 30631,
+      "lines": 83,
+      "sha256": "3438df01213f87bb05691acac010af3b633a1cca04e57cd1bcffc7cfaee0286b"
+    }
+  ],
+  "allRequestedDocumentsFullyRead": true,
+  "fullMemoReadByTaskTeam": true,
+  "fullMemoSingleReaderClaim": false,
+  "memoCoverage": [
+    {
+      "reader": "memo_early_read",
+      "firstLine": 1,
+      "lastLine": 32,
+      "bytes": 7103,
+      "sha256": "5420093a53f144b887e988b11d97ff58159e0743e26938f100cbc732f3b9f6d8",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 33,
+      "lastLine": 62,
+      "bytes": 7532,
+      "sha256": "aaee2c375b87ef7abf0a927e56eaa31049f64342a043c65e35279729c5086e55",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 63,
+      "lastLine": 90,
+      "bytes": 7393,
+      "sha256": "ea776d15582a6cb365053661481aba2904fa230ac95be0c3dd3b6088f28d2534",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 91,
+      "lastLine": 124,
+      "bytes": 6896,
+      "sha256": "ea7257e3e50516473c4d2b8839103b35c67a2a35c384ab67a514f60d1ada5e12",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 125,
+      "lastLine": 155,
+      "bytes": 7923,
+      "sha256": "1c82e57e254eacd1a6ff0746e32045bfd397db14c2ca82706034ac0d9ebe8cb3",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 156,
+      "lastLine": 187,
+      "bytes": 7562,
+      "sha256": "af2d4a6af7456c60a39df55fa83a2d25d15228cc08ba1ea20c5b066fce55b05a",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 188,
+      "lastLine": 219,
+      "bytes": 7480,
+      "sha256": "276a04231316b7047cd40b5287631d26de7dd27a704a585ec51306756166f83f",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 220,
+      "lastLine": 247,
+      "bytes": 7387,
+      "sha256": "e1eedf560102c4c13bb4765bb6b2c5dc2bd961b5ca1a65166a94917cc848d4ce",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 248,
+      "lastLine": 275,
+      "bytes": 7246,
+      "sha256": "1a3f47d35d4c64e030db02fcc84fed5b8438e21278318103c4b2a12eb84fdc42",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 276,
+      "lastLine": 299,
+      "bytes": 7359,
+      "sha256": "86c1610d75076ff5785f455a0f55211b8a9af912f83b83964f0472f9a0a5c581",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 300,
+      "lastLine": 337,
+      "bytes": 7413,
+      "sha256": "9374d2d0a0729329942097dce004e8c7e4b24e9ac43ae3fcbad0938c67aba78e",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 338,
+      "lastLine": 371,
+      "bytes": 7408,
+      "sha256": "cf27b05540573d6b8a9cb074ead2649c2cfe578b4b64d42ac8e1f18f14c0ec35",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 372,
+      "lastLine": 399,
+      "bytes": 7337,
+      "sha256": "dc90f21ca8cf7ce4fbd61ccbae2eaa6b6ebcf09e8c06ba865bc0bc6f1ee52846",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 400,
+      "lastLine": 424,
+      "bytes": 7584,
+      "sha256": "ee405133bd9b4603445591dcc87f3c96e15ecf21eeabc15c99f6b819bf2f1924",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 425,
+      "lastLine": 455,
+      "bytes": 7128,
+      "sha256": "6995b400e715d40ac2166ea72797d7db3da7c3ee95e8222bb6cf677bd4287fff",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 456,
+      "lastLine": 482,
+      "bytes": 7427,
+      "sha256": "668f3ee53f091f09c11dbe90fc4579404b6de5fa669ac0d629538cceb23a733b",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 483,
+      "lastLine": 513,
+      "bytes": 7770,
+      "sha256": "1046755c19f0ab656b83c1975f975533f371db420e331379b4bcf9fc94fd639b",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 514,
+      "lastLine": 542,
+      "bytes": 7647,
+      "sha256": "fbaf331c5a68bfe610bc7886481bf7f57f39064bfb81c7937753a8c2480803d4",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 543,
+      "lastLine": 580,
+      "bytes": 7366,
+      "sha256": "353127e996ef29f51d7dd956b17f1d4416ce846c7ad7d0d235cd00b5692d3178",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 581,
+      "lastLine": 619,
+      "bytes": 7167,
+      "sha256": "cb1e9d2bec63394e3ce9980cefd7b4838b5505ddbfbe2c38db774c1079a76054",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 620,
+      "lastLine": 649,
+      "bytes": 7572,
+      "sha256": "c8fbd706ebf9ae30dbcbeb6624125432ca369e740fb71b964734aea4af5abd5d",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 650,
+      "lastLine": 675,
+      "bytes": 7550,
+      "sha256": "c250db2ab6daa980eac34116f96d663ff17d30b4e140dac089c6ee25287f4bc9",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "memo_early_read",
+      "firstLine": 676,
+      "lastLine": 700,
+      "bytes": 5999,
+      "sha256": "60cf61f9cf30c0a8ad892ec008d605c21425b7be1f4298c34b97513026d150f8",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 701,
+      "lastLine": 780,
+      "bytes": 17388,
+      "sha256": "ad48cc09d23c21266fd795505d0c21e28fbbc2b055278687f63ac49986a6dd91",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 781,
+      "lastLine": 860,
+      "bytes": 27842,
+      "sha256": "97b3558e2b4511f8668e49506eae368d6ec0ccf54d24ff0d75a8958d3f8aa837",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 861,
+      "lastLine": 940,
+      "bytes": 34381,
+      "sha256": "486a690dfc6815deb43d4449f7ec5a0209f91582d8d47bf982ae6df2635af646",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 941,
+      "lastLine": 1000,
+      "bytes": 32682,
+      "sha256": "a8016efd421d093f098ca64f1b16c04dfd92d7bfaba28f56c9fcf0b82ef99a4a",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1001,
+      "lastLine": 1060,
+      "bytes": 27385,
+      "sha256": "2821fb5dff7a6931fbf2e7c574b0f86a2dd1e86efc022b88b87cd40645f59eef",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1061,
+      "lastLine": 1140,
+      "bytes": 33749,
+      "sha256": "80cd564baacadb4b867a9944ea82ac8356346bfd5638612cb0e1fb496d1f6a7a",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1141,
+      "lastLine": 1220,
+      "bytes": 32972,
+      "sha256": "820fde2093d907c60c59f8a1473c6d68b21284c9d75bfa910d37442d21f37369",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1221,
+      "lastLine": 1280,
+      "bytes": 31775,
+      "sha256": "54e8fca996e684a02bc936419221a46b9b4c2ab671bba06b59d5fbf3a89f3081",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1281,
+      "lastLine": 1380,
+      "bytes": 12811,
+      "sha256": "0b913118ae8b289ccb4c39e1efbd47db461d173ee56e96ab784ea639ec25e7e7",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1381,
+      "lastLine": 1460,
+      "bytes": 11057,
+      "sha256": "015d260cc7464fc917967462db9477c0ac0fbe20feae02a887448e624dcae493",
+      "sourceOutputTruncated": false
+    },
+    {
+      "reader": "root16_requirements_read",
+      "firstLine": 1461,
+      "lastLine": 1546,
+      "bytes": 16928,
+      "sha256": "ed5ea0d8cce73ef1e6b066b1c960468e25f1abeec2a762357b99c91c3823d7ea",
+      "sourceOutputTruncated": false
+    }
+  ],
+  "memoCoverageContiguous1To1546": true,
+  "memoCoverageBytes": 448219,
+  "otherCompleteReadCoverage": {
+    "AGENTS.md": [
+      [
+        1,
+        11
+      ]
+    ],
+    "提示词.md": [
+      [
+        1,
+        184
+      ]
+    ],
+    "docs/需求实现验证矩阵.md": [
+      [
+        1,
+        100
+      ],
+      [
+        101,
+        180
+      ],
+      [
+        181,
+        260
+      ],
+      [
+        261,
+        340
+      ],
+      [
+        341,
+        440
+      ]
+    ],
+    "ROOT13_originalCSV": {
+      "header": true,
+      "rows": [
+        [
+          1,
+          10
+        ],
+        [
+          11,
+          20
+        ],
+        [
+          21,
+          30
+        ],
+        [
+          31,
+          38
+        ]
+      ]
+    },
+    "ROOT15_matrix": [
+      [
+        1,
+        22
+      ],
+      [
+        23,
+        42
+      ],
+      [
+        43,
+        56
+      ]
+    ],
+    "ROOT15_REPORT": [
+      [
+        1,
+        24
+      ],
+      [
+        25,
+        44
+      ],
+      [
+        45,
+        64
+      ],
+      [
+        65,
+        83
+      ]
+    ]
+  },
+  "truncatedSupplementaryAttempts": {
+    "description": "Two initial supplementary matrix/report combined outputs were truncated. They were not used to claim complete coverage; all affected files were subsequently re-read in the smaller complete ranges above. No requested memo source chunk was truncated."
+  },
+  "instructionLocations": {
+    "/workspace/.agents": {
+      "exists": true,
+      "entries": []
+    },
+    "/workspace/yunshan/.agents": {
+      "exists": false
+    },
+    "/workspace/AGENTS.md": {
+      "exists": false
+    }
+  },
+  "matrixAudit": {
+    "originalIDCount": 38,
+    "latestIDCount": 38,
+    "orderedIDsExactMatch": true,
+    "missingIDs": [],
+    "addedIDs": [],
+    "latestIDs": [
+      "SYS-01",
+      "MAP-01",
+      "MAP-02",
+      "MAP-03",
+      "ENG-01",
+      "ENG-02",
+      "MED-01",
+      "MED-02",
+      "HYG-01",
+      "HYG-02",
+      "VIR-01",
+      "TEC-01",
+      "EDU-01",
+      "EDU-02",
+      "POL-01",
+      "POL-02",
+      "POL-03",
+      "ENV-01",
+      "DIS-01",
+      "SHOP-01",
+      "SHOP-02",
+      "BLD-01",
+      "BLD-02",
+      "FOOD-01",
+      "TRA-01",
+      "TRA-02",
+      "TRA-03",
+      "FAM-01",
+      "LIFE-01",
+      "LIFE-02",
+      "LIFE-03",
+      "INF-01",
+      "PER-01",
+      "SAVE-01",
+      "ADP-01",
+      "ART-01",
+      "VAL-01",
+      "MAC-01"
+    ]
+  },
+  "existingReceiptsAndRawChecks": [
+    {
+      "scope": "build01",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-final-integration/build01/receipt.json",
+      "receiptSHA256": "2fe282424a08817504054427b0aaf2e77492d4faca8e7c67cb420a98b65b8ef6",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "8d55fd1916bd1a95d925e19baf402298c0f26363e32ed8fe23b9dc6d869b67b2",
+      "rawDeclaredSHA256": "8d55fd1916bd1a95d925e19baf402298c0f26363e32ed8fe23b9dc6d869b67b2",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "ui01",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-final-integration/ui01/receipt.json",
+      "receiptSHA256": "4f33a9dc527de4f3e7a7ce7a09e7f57a561bed980afe3999f94a92116e47ffd3",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "0eb837a9f2b1172330ec124f4a7a9910a8db32d2c10b4670874461f412977ef3",
+      "rawDeclaredSHA256": "0eb837a9f2b1172330ec124f4a7a9910a8db32d2c10b4670874461f412977ef3",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "education-actual01",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-final-integration/education-actual01/receipt.json",
+      "receiptSHA256": "3082b4ac247d1e6474efb0c2632be776b8bbf9f025bf342a9d9f0dcba8044126",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "032e82bc4a13d3127f66626cd116ddd6179a8279756b4c3698538b5572cbe5a6",
+      "rawDeclaredSHA256": "032e82bc4a13d3127f66626cd116ddd6179a8279756b4c3698538b5572cbe5a6",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "city-life-default-day01",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-final-integration/city-life-default-day01/receipt.json",
+      "receiptSHA256": "7ae23c11e26238130be1751c32a5e3f22bfb696b8a0fb025b9407ad306ee42e8",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "18b3e0b9efa2ccb6e92f6cf66a9f66607e0d69133399648d78c9b5a1806725bf",
+      "rawDeclaredSHA256": "18b3e0b9efa2ccb6e92f6cf66a9f66607e0d69133399648d78c9b5a1806725bf",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "isolated-full-rules01-receipt.json",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/isolated-full-rules01-receipt.json",
+      "receiptSHA256": "37ee7bcb2e41eb182b5a58d6c6698192a3d4d4cb124c8236078814c004fe8705",
+      "status": "TIMEOUT_PARTIAL",
+      "exitCode": -15,
+      "timedOut": true,
+      "inputCount": 318,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "da45819587d5569cf5a0014fcead7367eaf22afb676fbeedabe970c90e8bbb79",
+      "rawDeclaredSHA256": "da45819587d5569cf5a0014fcead7367eaf22afb676fbeedabe970c90e8bbb79",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "original-full-heap-failure-receipt.json",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/original-full-heap-failure-receipt.json",
+      "receiptSHA256": "f170684d3424f9af92fe252320bd031a748a5de67ee4153c0c86870197035b31",
+      "status": "FAIL",
+      "exitCode": 134,
+      "timedOut": false,
+      "inputCount": 318,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a",
+      "rawDeclaredSHA256": "2473a9aa29be0b9f4612535061fb788f91be85db701c3d2e5f335013f91d7b3a",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "public-health-actual03",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/public-health-player/actual03/receipt.json",
+      "receiptSHA256": "83e564c98ad70a4267a550ba209a75786bc32f1812cad7c4e452eca46821dbd3",
+      "status": "FAIL",
+      "exitCode": 1,
+      "timedOut": false,
+      "inputCount": 318,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "d961c9af3c8d9175bafba95bb8b2ff502200b3cbc119ca64a3c9ec37fce9be1c",
+      "rawDeclaredSHA256": "d961c9af3c8d9175bafba95bb8b2ff502200b3cbc119ca64a3c9ec37fce9be1c",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "gift-actual-command01/receipt.json",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-contact-candidate/actual-command01/receipt.json",
+      "receiptSHA256": "b9ecff0a7eb7e1235d8cc10ed5877e136aee6f870900fb7eb016963e12f53a12",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "8704abb0984c8491d2d45cc2a7848d9c70554998e7cb1b4165c5e20e178c679d",
+      "rawDeclaredSHA256": "8704abb0984c8491d2d45cc2a7848d9c70554998e7cb1b4165c5e20e178c679d",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "gift-pure03/rules-run/receipt.json",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-contact-candidate/pure03/rules-run/receipt.json",
+      "receiptSHA256": "3447716aa68e7a7ff80c082fa12bda90afc8d32c62023706fcfa20245970cd9a",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "7bc9a9f81e92070ac537778c23e05dbf4ecf9668b25f6257af4a774f38165fb4",
+      "rawDeclaredSHA256": "7bc9a9f81e92070ac537778c23e05dbf4ecf9668b25f6257af4a774f38165fb4",
+      "rawMatchesReceipt": true
+    },
+    {
+      "scope": "gift-pure03/types-run/receipt.json",
+      "receiptPath": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/evidence/gift-contact-candidate/pure03/types-run/receipt.json",
+      "receiptSHA256": "fe0fa1b79c0d52c8156a97e99c0fec888b6ba1d7f0ea4e8bf2569456429a2196",
+      "status": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 322,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "rawActualSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawDeclaredSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rawMatchesReceipt": true
+    }
+  ],
+  "newExecution": {
+    "Simulation": 0,
+    "GPU": 0,
+    "build": 0,
+    "test": 0,
+    "networkOrExternalWrites": 0,
+    "sharedFileEdits": 0,
+    "publication": 0
+  },
+  "scopeNote": "Existing receipts/raw are read and hashed only. Prior PASS is retained for its immutable input graph, parameters, caps, and assertions; no fresh runtime result is claimed.",
+  "sourceFinalGuard": {
+    "at": "2026-10-05T00:12:06.239653+00:00",
+    "allSourcesStable": true,
+    "documents": [
+      {
+        "path": "/workspace/yunshan/AGENTS.md",
+        "sha256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+        "matchesReadSource": true,
+        "bytes": 1726,
+        "lines": 11
+      },
+      {
+        "path": "/workspace/yunshan/提示词.md",
+        "sha256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+        "matchesReadSource": true,
+        "bytes": 25038,
+        "lines": 184
+      },
+      {
+        "path": "/workspace/yunshan/开发备忘录.md",
+        "sha256": "f895f00d4441abfb6f7394a0bf187b14741fd1a9dff479a1309f142c36510964",
+        "matchesReadSource": true,
+        "bytes": 448219,
+        "lines": 1546
+      },
+      {
+        "path": "/workspace/yunshan/docs/需求实现验证矩阵.md",
+        "sha256": "8ef560d0dc963d4f80f100f27d7b5b73d66e83ecf39501551eba4490fff18dd5",
+        "matchesReadSource": true,
+        "bytes": 113330,
+        "lines": 440
+      },
+      {
+        "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root13/SYSTEM-MATRIX-asof1439.csv",
+        "sha256": "eb4dbd934e5ded2574d3aabbbfb65990df5c9e2796531213f38e59177bab81a8",
+        "matchesReadSource": true,
+        "bytes": 39499,
+        "lines": 39
+      },
+      {
+        "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/REQUIREMENTS-MATRIX.md",
+        "sha256": "00219ccc7d3dc9f6aeb14fc76d6bba6638b9d772d2038e608902ae3f12d77a2c",
+        "matchesReadSource": true,
+        "bytes": 30493,
+        "lines": 56
+      },
+      {
+        "path": "/workspace/yunshan/docs/validation/2026-10-04-city-life-root15/REPORT.md",
+        "sha256": "3438df01213f87bb05691acac010af3b633a1cca04e57cd1bcffc7cfaee0286b",
+        "matchesReadSource": true,
+        "bytes": 30631,
+        "lines": 83
+      }
+    ],
+    "HEAD": "a1888cd764cabe250e78f2f4460a7b103dff302a",
+    "workTreeStatus": []
+  },
+  "earlyReaderReceipt": {
+    "path": "/workspace/yunshan-work/ROOT16-requirements-20261005-01/memo-early-read.md",
+    "sha256": "2718589877203f83c7024c9667dea5fbcc9d8b8069c5ecd5d9b3e06f2aa6a489",
+    "bytes": 24492
+  }
+}

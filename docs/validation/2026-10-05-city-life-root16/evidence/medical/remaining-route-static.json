@@ -1,0 +1,1045 @@
+{
+  "schemaVersion": 1,
+  "scope": "ROOT16-medical-cause-20261005-01 remaining five; zero-Simulation static current snapshot route diagnosis",
+  "method": {
+    "jsonReadOnly": true,
+    "simulationConstructed": false,
+    "simulationImported": false,
+    "simulationSteps": 0,
+    "buildRuns": 0,
+    "testRuns": 0,
+    "gpuRuns": 0,
+    "sharedSourceEdits": 0,
+    "independentGeometryHelper": "Read-only child imported architecture-floor-plan, NpcStairMotion independent geometry interpreter, access, roads; copied walkingPrefix control flow and body floor filtering only; all described prefix/final-route legs legacy, examined bodies school/clinic floor0; both legacy and continuous floor geometry guards false, road guards true, floor ACL true. No Simulation import/construction or advances."
+  },
+  "inputs": {
+    "after24Save": {
+      "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts/complete-one-patient.after24.save.json",
+      "sha256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda"
+    },
+    "world": {
+      "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/inherited-originals/origins/world.json",
+      "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1"
+    },
+    "frozenSources": [
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/simulation.ts",
+        "sha256": "6e8d89df0bae95a27770cc5879098d4ad4b2c78fcebbafec911c0d392808671c"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/simulation/culture.ts",
+        "sha256": "0572972cace2d7747f325ddb7d9524597589edb3e8198eee27f514312ec7e7ea"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/simulation/npc-stair-motion.ts",
+        "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/architecture-floor-plan.ts",
+        "sha256": "9718a583a381e48e9c233ac6b2a621bddb060c2fafbcd8db3ff71240323462ac"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/access.ts",
+        "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/roads.ts",
+        "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90"
+      },
+      {
+        "path": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/source/src/persistence/route-encoding.ts",
+        "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439"
+      }
+    ]
+  },
+  "snapshot": {
+    "tick": 3400,
+    "dayIndex": 9,
+    "hour": 18.666666666666668,
+    "absoluteMinute": 14080.0,
+    "weather": "晴",
+    "motionVersion": 2,
+    "runtimeNpcMotionVersion": 2,
+    "routeEncoding": "pooled-v1",
+    "voxelCount": 0,
+    "roadNetwork": null,
+    "clinicalNextVisitAt": {
+      "player": 13888
+    },
+    "healthOrderId": "service-2",
+    "healthOrderState": "active",
+    "servedIds": [
+      "player"
+    ],
+    "staffIdsHistory": [
+      "citizen-44"
+    ],
+    "serviceClosedAtSnapshot": true
+  },
+  "populationFilters": {
+    "allNaturalHealthBelow65Ids": [
+      "citizen-0",
+      "citizen-418",
+      "citizen-495"
+    ],
+    "below65NaturalOfferEligibleIds": [
+      "citizen-0",
+      "citizen-418"
+    ],
+    "below65H40F35PrerequisiteIds": [
+      "citizen-0"
+    ],
+    "below65CurrentlyAtClinicIds": [],
+    "currentlyObservedRemainingOrderTreatmentCount": 0
+  },
+  "target": {
+    "buildingId": "civic-0-clinic",
+    "door": {
+      "x": -136,
+      "y": 0.6,
+      "z": -41
+    },
+    "graphNodeId": "civic-0-clinic-door",
+    "groundServicePoint": {
+      "x": -136,
+      "y": 0.6,
+      "z": -60
+    },
+    "interiorRoute": [
+      {
+        "x": -136,
+        "y": 0.6,
+        "z": -41
+      },
+      {
+        "x": -136,
+        "y": 0.6,
+        "z": -42
+      },
+      {
+        "x": -136,
+        "y": 0.6,
+        "z": -60
+      }
+    ],
+    "interiorRouteMeters": 19
+  },
+  "actors": [
+    {
+      "id": "citizen-0",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "state": "attendingService",
+      "destinationId": "civic-0-school",
+      "tier": "active",
+      "routeIndex": 14,
+      "savedRouteLength": 14,
+      "health": 63.91927090579553,
+      "age": 20.025875190253544,
+      "alive": true,
+      "hunger": 96.39999999999995,
+      "fatigue": 76.1999999999999,
+      "naturalOfferEligibleAtSnapshot": true,
+      "actualH40F35PatientPrerequisitesAtSnapshot": true,
+      "atClinicServiceStationAtSnapshot": false,
+      "actualPublicServiceMinutesAtSnapshot": 0,
+      "anchors": [
+        {
+          "branch": "profiledInterior",
+          "node": "civic-0-school-door",
+          "prefixPoints": [
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -73
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -42
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "prefixCostMeters": 32.0,
+          "floorPresence": {
+            "buildingId": "civic-0-school",
+            "floor": 0,
+            "kind": "room"
+          },
+          "originalAdmission": "floorPlanRoute non-null and roadPrefixAllowed; independent extra geometry review clear",
+          "graphCostMeters": 302,
+          "edgeIds": [
+            "civic-0-school-road",
+            "civic-0-clinic-road"
+          ],
+          "nodeIds": [
+            "civic-0-school-door",
+            "civic-0-home-door",
+            "civic-0-clinic-door"
+          ],
+          "nodePathPoints": [
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "walkingDistanceCandidateMeters": 334.0
+        }
+      ],
+      "chosenAnchorNode": "civic-0-school-door",
+      "walkingDistanceMeters": 334.0,
+      "clinicGroundServiceInteriorMeters": 19.0,
+      "completeStaticCandidateRouteMeters": 353.0,
+      "completeStaticCandidateRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        }
+      ],
+      "clinicGroundFloorACL": true,
+      "clinicGroundServiceFloor": 0,
+      "clinicGroundServicePointId": "0:program:service",
+      "staticGeometryResult": "CLEAR_FOR_FROZEN_CURRENT_CANDIDATE",
+      "actualFutureArrival": "NOT_OBSERVED",
+      "actualFutureTreatment": "NOT_OBSERVED"
+    },
+    {
+      "id": "citizen-418",
+      "position": {
+        "x": -51.94159381795458,
+        "y": 0.6,
+        "z": -40
+      },
+      "state": "moving",
+      "destinationId": "civic-0-school",
+      "tier": "active",
+      "routeIndex": 68,
+      "savedRouteLength": 73,
+      "health": 64.41607090579556,
+      "age": 33.025875190253544,
+      "alive": true,
+      "hunger": 38.199999999999804,
+      "fatigue": 78.15999999999991,
+      "naturalOfferEligibleAtSnapshot": true,
+      "actualH40F35PatientPrerequisitesAtSnapshot": false,
+      "atClinicServiceStationAtSnapshot": false,
+      "actualPublicServiceMinutesAtSnapshot": 0,
+      "anchors": [
+        {
+          "branch": "existingRoute",
+          "direction": -1,
+          "node": "civic-0-home-door",
+          "prefixPoints": [
+            {
+              "x": -51.94159381795458,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            }
+          ],
+          "prefixCostMeters": 97.94159381795458,
+          "floorPresence": null,
+          "originalAdmission": "walkingPrefixAllowed statically reproduced; all described legs legacy, body floor0 clear, road guard true",
+          "graphCostMeters": 183,
+          "edgeIds": [
+            "civic-0-clinic-road"
+          ],
+          "nodeIds": [
+            "civic-0-home-door",
+            "civic-0-clinic-door"
+          ],
+          "nodePathPoints": [
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "walkingDistanceCandidateMeters": 280.9415938179546
+        },
+        {
+          "branch": "existingRoute",
+          "direction": 1,
+          "node": "civic-0-school-door",
+          "prefixPoints": [
+            {
+              "x": -51.94159381795458,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "prefixCostMeters": 21.058406182045417,
+          "floorPresence": null,
+          "originalAdmission": "walkingPrefixAllowed statically reproduced; all described legs legacy, body floor0 clear, road guard true",
+          "graphCostMeters": 302,
+          "edgeIds": [
+            "civic-0-school-road",
+            "civic-0-clinic-road"
+          ],
+          "nodeIds": [
+            "civic-0-school-door",
+            "civic-0-home-door",
+            "civic-0-clinic-door"
+          ],
+          "nodePathPoints": [
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "walkingDistanceCandidateMeters": 323.0584061820454
+        }
+      ],
+      "chosenAnchorNode": "civic-0-home-door",
+      "walkingDistanceMeters": 280.9415938179546,
+      "clinicGroundServiceInteriorMeters": 19.0,
+      "completeStaticCandidateRouteMeters": 299.9415938179546,
+      "completeStaticCandidateRoutePoints": [
+        {
+          "x": -51.94159381795458,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        }
+      ],
+      "clinicGroundFloorACL": true,
+      "clinicGroundServiceFloor": 0,
+      "clinicGroundServicePointId": "0:program:service",
+      "staticGeometryResult": "CLEAR_FOR_FROZEN_CURRENT_CANDIDATE",
+      "actualFutureArrival": "NOT_OBSERVED",
+      "actualFutureTreatment": "NOT_OBSERVED"
+    },
+    {
+      "id": "citizen-495",
+      "position": {
+        "x": -72,
+        "y": 0.6,
+        "z": -73
+      },
+      "state": "studying",
+      "destinationId": "civic-0-school",
+      "tier": "active",
+      "routeIndex": 12,
+      "savedRouteLength": 12,
+      "health": 64.24967090579563,
+      "age": 20.025875190253544,
+      "alive": true,
+      "hunger": 0,
+      "fatigue": 76.4799999999999,
+      "naturalOfferEligibleAtSnapshot": false,
+      "actualH40F35PatientPrerequisitesAtSnapshot": false,
+      "atClinicServiceStationAtSnapshot": false,
+      "actualPublicServiceMinutesAtSnapshot": 0,
+      "anchors": [
+        {
+          "branch": "profiledInterior",
+          "node": "civic-0-school-door",
+          "prefixPoints": [
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -73
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -42
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "prefixCostMeters": 32.0,
+          "floorPresence": {
+            "buildingId": "civic-0-school",
+            "floor": 0,
+            "kind": "room"
+          },
+          "originalAdmission": "floorPlanRoute non-null and roadPrefixAllowed; independent extra geometry review clear",
+          "graphCostMeters": 302,
+          "edgeIds": [
+            "civic-0-school-road",
+            "civic-0-clinic-road"
+          ],
+          "nodeIds": [
+            "civic-0-school-door",
+            "civic-0-home-door",
+            "civic-0-clinic-door"
+          ],
+          "nodePathPoints": [
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -41
+            },
+            {
+              "x": -72,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": 6
+            },
+            {
+              "x": 0,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -40
+            },
+            {
+              "x": -136,
+              "y": 0.6,
+              "z": -41
+            }
+          ],
+          "walkingDistanceCandidateMeters": 334.0
+        }
+      ],
+      "chosenAnchorNode": "civic-0-school-door",
+      "walkingDistanceMeters": 334.0,
+      "clinicGroundServiceInteriorMeters": 19.0,
+      "completeStaticCandidateRouteMeters": 353.0,
+      "completeStaticCandidateRoutePoints": [
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -73
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -72,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 6
+        },
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -40
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -41
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -42
+        },
+        {
+          "x": -136,
+          "y": 0.6,
+          "z": -60
+        }
+      ],
+      "clinicGroundFloorACL": true,
+      "clinicGroundServiceFloor": 0,
+      "clinicGroundServicePointId": "0:program:service",
+      "staticGeometryResult": "CLEAR_FOR_FROZEN_CURRENT_CANDIDATE",
+      "actualFutureArrival": "NOT_OBSERVED",
+      "actualFutureTreatment": "NOT_OBSERVED"
+    }
+  ],
+  "limitations": [
+    "Finite graph and currently clear static geometry do not observe a future NPC decision, arrival or treatment. All future results remain NOT_OBSERVED.",
+    "Only citizen-0 currently satisfies both natural low-health offer and actual h40/f35 prerequisite; citizen-418 hunger38.2 fails actual hunger40; citizen-495 hunger0 fails both thresholds.",
+    "At hour18:40 service is closed by original8<=hour<17 rule; a finite route provides no present medical service capacity.",
+    "Old-route anchors return before native occupied-polyline fallback; street overlap with clinic-road does not create a graph junction. Therefore school→clinic candidate is353m, and418 best existing-route candidate is299.9415938179546m.",
+    "walkingDistance includes anchor prefix + Dijkstra edge.length, excludes final node-to-door connector and clinic interior. Both clinic target node and door coincide here; interior adds19m.",
+    "Final actual movement still depends on current decisions, finite speed/time, saved/runtime reservations, dynamic obstacles/closures and unchanged ACL. No arrival time or completed20-minute overlap is inferred.",
+    "Clinic public floor0 is eligible; upper floors use official permission and are outside this service route.",
+    "No market body/counter, voxels, closures or physical stair legs occurred on the inspected candidates. This is a bounded frozen-current-route geometry result, not a whole-world future movement proof."
+  ],
+  "sourceRefs": [
+    {
+      "path": "source/src/simulation.ts",
+      "line": 161,
+      "claim": "Door node is nearest node; bidirectional neighbor edges at163."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1082,
+      "claim": "Native walking prefix requires current body admission."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1107,
+      "claim": "Dijkstra uses road/bridge open edge.length."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1128,
+      "claim": "walkingAnchors branch sequence; profiled interior route and road-only prefix."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1148,
+      "claim": "Saved route bidirectional prefixes stop at actual node; existing anchors return at1149."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1176,
+      "claim": "Choose smallest prefix+graph candidate and append actual destination door."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1189,
+      "claim": "walkingDistance omits interior service leg."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1219,
+      "claim": "Profiled destination requires actual legal service point and interior route."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1439,
+      "claim": "Natural active service offer uses h35/f25, age6, health<65."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 1550,
+      "claim": "Actual movement voxel, ACL, furniture/body guards."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 2116,
+      "claim": "Floor presence uses floorPlanSupport and real supported height."
+    },
+    {
+      "path": "source/src/simulation.ts",
+      "line": 2137,
+      "claim": "Pure route uses findBuildingFloorPlanRoute radius.35 and counter predicate."
+    },
+    {
+      "path": "source/src/simulation/culture.ts",
+      "line": 103,
+      "claim": "Patient presence requires alive, age6, no civic reservation, actual public legal function point."
+    },
+    {
+      "path": "source/src/simulation/culture.ts",
+      "line": 157,
+      "claim": "Health service closed outside8–17 and without staff."
+    },
+    {
+      "path": "source/src/simulation/culture.ts",
+      "line": 172,
+      "claim": "Actual patient h40/f35, health<95, unserved and cooldown."
+    },
+    {
+      "path": "source/src/architecture-floor-plan.ts",
+      "line": 371,
+      "claim": "Pure supported floor presence."
+    },
+    {
+      "path": "source/src/architecture-floor-plan.ts",
+      "line": 433,
+      "claim": "Original floor geometry swept-body guard."
+    },
+    {
+      "path": "source/src/architecture-floor-plan.ts",
+      "line": 453,
+      "claim": "Additional continuous geometry guard independently checked."
+    },
+    {
+      "path": "source/src/architecture-floor-plan.ts",
+      "line": 579,
+      "claim": "Pure building floor-plan route."
+    },
+    {
+      "path": "source/src/access.ts",
+      "line": 20,
+      "claim": "Public floor0 admits the actors."
+    },
+    {
+      "path": "source/src/roads.ts",
+      "line": 182,
+      "claim": "Road movement closure guard; no closures in actual snapshot."
+    },
+    {
+      "path": "inherited-originals/origins/world.json",
+      "line": 3500,
+      "claim": "School-road119m through home node."
+    },
+    {
+      "path": "inherited-originals/origins/world.json",
+      "line": 3530,
+      "claim": "Clinic-road183m through home node."
+    }
+  ],
+  "partialScoreComparison": {
+    "kind": "partial_score_comparison",
+    "method": "Arithmetic only from frozen expressions and actual JSON; never called chooseFacility or Simulation. Initial extension opportunity generators, complete meal/social alternatives, employment and home-bed availability were not evaluated. Current final choice is not asserted.",
+    "snapshotHour": 18.666666666666668,
+    "shift": false,
+    "night": false,
+    "activeEducationOrderId": "service-3",
+    "fulfilledEarlierEducationOrderId": "service-1",
+    "rows": [
+      {
+        "id": "citizen-0",
+        "comparison": "partial_score_comparison",
+        "currentSavedActivity": "service",
+        "savedDecisionAt": 14113.117294597905,
+        "minutesUntilSavedDecisionAt": 33.11729459790513,
+        "healthOffer": {
+          "eligible": true,
+          "rawScore": 63.242187282613415,
+          "travelMeters": 334.0,
+          "penalty": 27.833333333333332,
+          "adjustedScore": 35.408853949280086
+        },
+        "schoolEducationService3": {
+          "active": true,
+          "unserved": true,
+          "eligible": true,
+          "rawScore": 84,
+          "travelMeters": 32.0,
+          "penalty": 2.6666666666666665,
+          "adjustedScore": 81.33333333333333
+        },
+        "schoolStudy": {
+          "hourEligible": true,
+          "rawScore": 30.74674531462716,
+          "adjustedScore": 28.08007864796049
+        },
+        "workPreferenceConditionalOnStudentOrIsEmployed": {
+          "unpenalizedScoreAtOffShift": 24.993971167092027,
+          "isEmployedEvaluated": false
+        },
+        "homeRestConditionalOnBedAvailable": {
+          "rawScore": 37.04000000000008,
+          "travelMeters": 151.0,
+          "adjustedScore": 24.45666666666674
+        }
+      },
+      {
+        "id": "citizen-418",
+        "comparison": "partial_score_comparison",
+        "currentSavedActivity": "service",
+        "savedDecisionAt": 14090.249149259878,
+        "minutesUntilSavedDecisionAt": 10.249149259878322,
+        "healthOffer": {
+          "eligible": true,
+          "rawScore": 61.75178728261331,
+          "travelMeters": 280.9415938179546,
+          "penalty": 23.411799484829547,
+          "adjustedScore": 38.33998779778376
+        },
+        "schoolEducationService3": {
+          "active": true,
+          "unserved": true,
+          "eligible": true,
+          "rawScore": 68,
+          "travelMeters": 21.058406182045417,
+          "penalty": 1.754867181837118,
+          "adjustedScore": 66.24513281816289
+        },
+        "schoolStudy": {
+          "hourEligible": true,
+          "rawScore": 19.0,
+          "adjustedScore": 17.245132818162883
+        },
+        "workPreferenceConditionalOnStudentOrIsEmployed": {
+          "unpenalizedScoreAtOffShift": -12.94,
+          "isEmployedEvaluated": false
+        },
+        "homeRestConditionalOnBedAvailable": {
+          "rawScore": 35.47200000000007,
+          "travelMeters": 97.94159381795458,
+          "adjustedScore": 27.31020051517052
+        }
+      },
+      {
+        "id": "citizen-495",
+        "comparison": "partial_score_comparison",
+        "currentSavedActivity": "study",
+        "savedDecisionAt": 14081.203293622704,
+        "minutesUntilSavedDecisionAt": 1.2032936227042228,
+        "healthOffer": {
+          "eligible": false,
+          "rawScore": null,
+          "travelMeters": 334.0,
+          "penalty": 27.833333333333332,
+          "adjustedScore": null
+        },
+        "schoolEducationService3": {
+          "active": true,
+          "unserved": true,
+          "eligible": false,
+          "rawScore": null,
+          "travelMeters": 32.0,
+          "penalty": 2.6666666666666665,
+          "adjustedScore": null
+        },
+        "schoolStudy": {
+          "hourEligible": true,
+          "rawScore": 37.70377142857144,
+          "adjustedScore": 35.03710476190478
+        },
+        "workPreferenceConditionalOnStudentOrIsEmployed": {
+          "unpenalizedScoreAtOffShift": -15.28,
+          "isEmployedEvaluated": false
+        },
+        "homeRestConditionalOnBedAvailable": {
+          "rawScore": 36.816000000000074,
+          "travelMeters": 151.0,
+          "adjustedScore": 24.232666666666738
+        }
+      }
+    ],
+    "implication": "At current snapshot, school public education service beats clinic health offer for both naturally eligible citizens0 and418. Citizen495 fails culture hunger threshold and retains a school study alternative. Existing destination remains school; saved decisionAt for all three is future. Finite clinic route/offer does not imply future clinic selection.",
+    "sourceRefs": [
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1412,
+        "claim": "Facility score minus travel/12 capped150."
+      },
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1422,
+        "claim": "Off-shift student/employed work preference."
+      },
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1439,
+        "claim": "Health/education public-order offers; active education service3."
+      },
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1453,
+        "claim": "School study preference."
+      },
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1457,
+        "claim": "Sort all opportunities by adjusted score; additional options omitted here."
+      },
+      {
+        "path": "source/src/simulation.ts",
+        "line": 1724,
+        "claim": "Chooser invoked only if current reconsideration/decision condition; no invocation in this diagnosis."
+      }
+    ]
+  }
+}

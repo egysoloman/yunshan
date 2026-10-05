@@ -1,0 +1,43 @@
+{
+  "sourceKind": "public-health",
+  "id": "waste-1",
+  "siteId": "civic-0-clinic",
+  "floor": 0,
+  "pointId": "0:program:service",
+  "point": {
+    "x": -136,
+    "y": 0.6,
+    "z": -60
+  },
+  "patientId": "player",
+  "material": "used-clinical-material",
+  "hazard": "used-material",
+  "pathogenSource": null,
+  "generatedUnits": 1,
+  "contaminatedUnits": 1,
+  "reservedUnits": 0,
+  "sealedUnits": 0,
+  "cleaningResidualUnits": 0,
+  "containedUnits": 1,
+  "archivedProcessedUnits": 0,
+  "sourceReceipts": [
+    {
+      "kind": "public-health",
+      "sourceId": "public-health:service-2:1",
+      "orderId": "service-2",
+      "patientId": "player",
+      "completedAt": 13828,
+      "publicConsumedAtOrder": 1,
+      "quantity": 1
+    }
+  ],
+  "sourceArchive": {
+    "count": 0,
+    "firstOrderId": null,
+    "lastOrderId": null,
+    "firstAt": null,
+    "lastAt": null
+  },
+  "firstAt": 13828,
+  "lastAt": 13828
+}

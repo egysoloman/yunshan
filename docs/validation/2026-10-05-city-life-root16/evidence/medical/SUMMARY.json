@@ -1,0 +1,197 @@
+{
+  "status": "PASS_ONE_PLAYER_ONLY_OLD240_FAIL_PRESERVED",
+  "closedAt": "2026-10-05T00:28:32.682414+00:00",
+  "wallSeconds": 236.596711,
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "driverSHA256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4",
+  "source322StillExact": true,
+  "actualMainFrames": 292,
+  "actualMainTicks": 984,
+  "actualMainGameMinutes": 3936,
+  "ordinaryHeldSeconds": 245.9043067068846,
+  "motorMeters": 1074.7406721930406,
+  "foodPurchase": [
+    {
+      "quantity": 18,
+      "at": 11884,
+      "paid": 276.0304831081276,
+      "beforeMoney": 401.02821428458134,
+      "afterMoney": 124.99773117645373,
+      "carry": 17
+    }
+  ],
+  "restCommands": [
+    {
+      "at": 10048,
+      "paid": 15.0,
+      "beforeFatigue": 69.4959999999983,
+      "afterFatigue": 92.4959999999983
+    },
+    {
+      "at": 13808,
+      "paid": 15.0,
+      "beforeFatigue": 24.815999999996095,
+      "afterFatigue": 47.815999999996095
+    },
+    {
+      "at": 13840,
+      "paid": 15.0,
+      "beforeFatigue": 47.23999999999607,
+      "afterFatigue": 70.23999999999607
+    }
+  ],
+  "giftCount": 13,
+  "selfEatCount": 2,
+  "healthOrder": {
+    "id": "service-2",
+    "state": "active",
+    "target": 6,
+    "served": [
+      "player"
+    ],
+    "minutes": {
+      "player": 20
+    },
+    "spent": 40,
+    "received": 4.421864795686247,
+    "consumed": 1,
+    "requiredMinutes": 20
+  },
+  "newMaterialsAllocated": {
+    "health": {
+      "quantity": 4.421864795686247,
+      "paid": 40.0
+    },
+    "education": {
+      "quantity": 4.485773534705813,
+      "paid": 40.0
+    },
+    "public-procurement": {
+      "quantity": 15.192593663515428,
+      "paid": 131.07662035774305
+    }
+  },
+  "physicalAccounts": {
+    "initialFood": 836.4210906218955,
+    "producedFood": 3232.7836679469765,
+    "meals": 3153,
+    "giftsApplied": 13,
+    "currentFood": 903.2047585688697,
+    "foodResidual": -2.2737367544323206e-12,
+    "initialMaterials": 0,
+    "producedMaterials": 25.895293717549915,
+    "procuredMaterials": 25.895293717549915,
+    "currentMaterials": 0,
+    "materialResidual": 0
+  },
+  "maximumResiduals": {
+    "cash": 4.190951585769653e-09,
+    "food": 3.183231456205249e-12,
+    "materials": 4.440892098500626e-16
+  },
+  "limitations": [
+    "ONEplayer served; originalhealthtarget6 remains incomplete",
+    "finite gift intervention, not autonomousNPC healthcare or defaultnewproduct result",
+    "11 disconnected originalNPC roadcomponents unchanged",
+    "wastebatch1 is contaminated storage, not disinfected or disposed",
+    "no normalFPS/Mac/GPU proof",
+    "no sharedsource change/commit/push/Library write"
+  ],
+  "doctorPaid": [
+    {
+      "tick": 3375,
+      "clock": 13980,
+      "event": {
+        "type": "wage-paid",
+        "citizenId": "citizen-44",
+        "districtId": "civic-0",
+        "amount": 46.762879999999974,
+        "requestedAmount": 46.762879999999974
+      }
+    }
+  ],
+  "continuation": {
+    "status": "PASS",
+    "parts": 44,
+    "fullAndPartitionFutureTicks": 24,
+    "completeSHA256": "129bb28c031dbb957962e0f7e32b010420061b7124f3e141173b23337952e1e2",
+    "after24SHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda"
+  },
+  "worldAndHostScope": {
+    "kind": "original customized civic world inherited byteexact from ROOT15",
+    "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/origins/world.json",
+    "buildings": 47,
+    "nodes": 47,
+    "edges": 36,
+    "npcCount": 616,
+    "roadComponents": 11,
+    "clinicComponent": 0,
+    "localHomeComponentNpcCount": 56,
+    "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+    "copiedPath": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/inherited-originals/origins/world.json",
+    "host": "controlled headless original PlayerController / original W mouse F / original main frame clamp",
+    "stairScope": "Original KeyF/useStairs physical shaft and ACL used twice; no new browser session or continuous walking stair proof",
+    "nativeOriginRestore": "exact persisted player body restored to Controller once; subsequent position publication only from Controller walkingPosition"
+  },
+  "newMaterialsAllocatedScope": {
+    "newMaterialsAllocated": "main scope trace-events ends at successful full clock13984; quantity24.10023199390749",
+    "physicalAccounts": "main plus original24 future quarterticks ends atclock14080; produced/procured25.895293717549915",
+    "future24AdditionalProductionAndProcurement": 1.7950617236424264
+  },
+  "remainingCapacityStatic": {
+    "path": "REMAINING-CAPACITY-STATIC.json",
+    "sha256": "b758a34472d74b3939dfca04727f51bfdd2cef6f7b9a9c8dbec04e9f8cc38893",
+    "status": "READ_ONLY_REMAINING_FIVE_NOT_SERVED",
+    "simulationConstructionCount": 0,
+    "simulationStepCount": 0,
+    "inputSHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+    "notServed": 5,
+    "held": 3.421864795686247,
+    "missing": 1.578135204313753,
+    "patientCounts": {
+      "globalHealthBelow65": 3,
+      "localHealthBelow65": 3,
+      "localNaturalOfferNeedsEligible": 2,
+      "localBelow65ActualNeedsEligible": 1,
+      "localBelow95ActualNeedsEligibleBeforePresenceAndStaffExclusion": 19,
+      "localNeeds35Fatigue25": 23
+    },
+    "currentPublicAvailable": 6954.232477667847,
+    "V2HealthRequest": "service-2-supplement-1 cap14 unapproved; two local actual current paid council signatures required",
+    "nextActualMissingEvidence": [
+      "True finite food and lawful contact/eat for doctors, two local council members and workshop/farm owner; original13gift intervention does not certify tomorrow supply.",
+      "Actual current-day onsite private payroll approval and finite material production; workshopstock0 and local food .293 units are presently insufficient.",
+      "True current same-frame paid V2 council approval cap14, then at least1.578135204313753 additional finite materials without changing originalcap40/target6.",
+      "Actual eligible NPC future decision, legal route and clinic service station arrival; only citizen0 passes both low-health/needs today, not five observed patients.",
+      "Nextday actual funded doctor arrival and patient overlap20min each; signed future480 alone is not attendance or food.",
+      "Outstanding contaminated batch requires separate actual20cash/one whole cleaning material/10doctor minutes to sanitize; no completed sanitation here."
+    ]
+  },
+  "remainingRouteStatic": {
+    "path": "remaining-route-static.json",
+    "sha256": "159e4f32048f87dacd5c6c2049b5fcb14ac03a228bd89eff142d77bb55e1a610",
+    "simulationConstructed": false,
+    "simulationSteps": 0,
+    "actualFutureArrival": "NOT_OBSERVED",
+    "routes": [
+      {
+        "id": "citizen-0",
+        "walkingDistanceMeters": 334.0,
+        "completeStaticCandidateRouteMeters": 353.0,
+        "actualFutureArrival": "NOT_OBSERVED"
+      },
+      {
+        "id": "citizen-418",
+        "walkingDistanceMeters": 280.9415938179546,
+        "completeStaticCandidateRouteMeters": 299.9415938179546,
+        "actualFutureArrival": "NOT_OBSERVED"
+      },
+      {
+        "id": "citizen-495",
+        "walkingDistanceMeters": 334.0,
+        "completeStaticCandidateRouteMeters": 353.0,
+        "actualFutureArrival": "NOT_OBSERVED"
+      }
+    ]
+  }
+}

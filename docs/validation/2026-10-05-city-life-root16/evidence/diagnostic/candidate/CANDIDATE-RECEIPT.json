@@ -1,0 +1,186 @@
+{
+  "status": "READY_FOR_ROOT_REVIEW_NOT_INSTALLED",
+  "baselineInputCount": 322,
+  "baselineGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "all322BaselineBytesPreserved": true,
+  "candidateInputCount": 325,
+  "srcCount": 81,
+  "graph": "20507b18e01cef12288107b06769dd3baf8e8d8442436c725d5385a8a26b8e0b",
+  "files": [
+    {
+      "path": "src/simulation/food-access-observations.ts",
+      "bytes": 11800,
+      "sha256": "10bc281b7db151fef865d7a0ac26c9d2a0fa17ebc37b46253f3b322cf0ea650d",
+      "action": "NEW"
+    },
+    {
+      "path": "scripts/food-access-audit.ts",
+      "bytes": 6916,
+      "sha256": "3e4a18a8d3ef4a7c16156509c157e6c45018e9526599f9599ea67c9d1af65a28",
+      "action": "NEW"
+    },
+    {
+      "path": "tests/food-access-observations.test.ts",
+      "bytes": 9425,
+      "sha256": "7c5923f7e4e1b1b3485d88b3ed3a51adecf756a640e093742d8ec65593f0b3f2",
+      "action": "NEW"
+    }
+  ],
+  "patch": {
+    "path": "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate/FOOD-ACCESS-OBSERVATIONS.patch",
+    "bytes": 29124,
+    "sha256": "efbf3c2e305af00d769c5688959b5c09dbd3bc988890c20ab18de22c2154ed70"
+  },
+  "checks": {},
+  "scope": "3 new files only. Pure observer, readonly CLI, 5 pure tests. No business chooser/mover/money/food/body/clock changes. No shared or old frozen source changes. No commit/push.",
+  "validation": {
+    "type01": {
+      "startedAt": "2026-10-05T00:19:27.349698+00:00",
+      "endedAt": "2026-10-05T00:19:38.405336+00:00",
+      "argv": [
+        "./node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 130296,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "pure-tests01": {
+      "startedAt": "2026-10-05T00:20:22.430629+00:00",
+      "endedAt": "2026-10-05T00:20:23.097737+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "tests/food-access-observations.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "26daa8a969f789dbbb0b9fe881330d12d82f623398720f1e7556c5e555901215",
+      "ownedPid": 130405,
+      "observedDescendants": 3,
+      "finalOwnedMembers": [
+        {
+          "pid": 130419,
+          "state": "Z",
+          "parent": 1,
+          "group": 130405,
+          "session": 130405,
+          "startTicks": 9044730
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "cli-original01": {
+      "startedAt": "2026-10-05T00:20:51.853015+00:00",
+      "endedAt": "2026-10-05T00:20:58.452060+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/food-access-audit.ts",
+        "--world",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/pure-query02/artifacts/WORLD-ORIGINAL.json",
+        "--save",
+        "/workspace/yunshan-work/ROOT15-gift-final-integration-20261004-01/source/artifacts/root15-current-default-day-final.save.json",
+        "--out",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate/cli-original01/artifacts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "99faa5e307fcd1030589a1694c76a8f1b4bde2aaea64216445f21762fe4f8a6f",
+      "ownedPid": 130552,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 130568,
+          "state": "Z",
+          "parent": 1,
+          "group": 130552,
+          "session": 130552,
+          "startTicks": 9047674
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "cli-recovered01": {
+      "startedAt": "2026-10-05T00:20:51.864151+00:00",
+      "endedAt": "2026-10-05T00:20:57.714837+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "scripts/food-access-audit.ts",
+        "--world",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/pure-query02/artifacts/WORLD-ORIGINAL.json",
+        "--save",
+        "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01/terminal.save.json",
+        "--out",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate/cli-recovered01/artifacts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "da6671400118b7cf973192695899181a845aef6487fa054fc95c8b42f933af9d",
+      "ownedPid": 130553,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 130574,
+          "state": "Z",
+          "parent": 1,
+          "group": 130553,
+          "session": 130553,
+          "startTicks": 9047677
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "cli-nooverwrite01": {
+      "startedAt": "2026-10-05T00:22:02.927194+00:00",
+      "endedAt": "2026-10-05T00:22:03.278260+00:00",
+      "argv": [
+        "python3",
+        "/workspace/yunshan-work/ROOT16-food-cause-20261005-01/candidate/no-overwrite-guard.py"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 325,
+      "inputsStable": true,
+      "rawSHA256": "433122424da1346d301ecb9ba7235d181f43ba2a3945d43438bb4b16603d8c70",
+      "ownedPid": 130737,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    }
+  }
+}

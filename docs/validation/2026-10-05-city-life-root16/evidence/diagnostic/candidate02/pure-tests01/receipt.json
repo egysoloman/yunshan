@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-05T00:28:24.798957+00:00",
+  "endedAt": "2026-10-05T00:28:25.516529+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/food-access-observations.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 325,
+  "inputsStable": true,
+  "rawSHA256": "ee4737a1d81c28c0301ec020e7aa50df38dd1ba4e6280c14b37c453a0055452e",
+  "ownedPid": 131172,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 131192,
+      "state": "Z",
+      "parent": 1,
+      "group": 131172,
+      "session": 131172,
+      "startTicks": 9092968
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

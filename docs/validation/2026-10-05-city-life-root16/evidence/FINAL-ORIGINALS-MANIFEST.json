@@ -1,0 +1,774 @@
+{
+  "cutAt": "2026-10-05T00:47:33.935676+00:00",
+  "scope": "Public evidence/report cut before Library and Git final results; immutable original producer files preserved in evidence ZIP",
+  "files": {
+    "REPORT.md": {
+      "bytes": 9091,
+      "sha256": "893e0b77a5a03f05fea95e3c0f34e1beb2d65eb8590472d5dd5e3f441bba7899"
+    },
+    "REPRODUCE.md": {
+      "bytes": 2337,
+      "sha256": "985024c36a13dd194cd3317a00846e6913aa1f03befb2b342dfc1f3a050baa0e"
+    },
+    "REQUIREMENTS-MATRIX.md": {
+      "bytes": 56455,
+      "sha256": "e5f49484e50a4e705eb9c51458ccaf912e5bbfaa73996c5c594fc2771edb22b1"
+    },
+    "evidence/INITIAL-ORIGINALS-MANIFEST.json": {
+      "bytes": 19058,
+      "sha256": "f86e0aef0040cf62a7940218dd97e4815d96b78b222f32d47d91b777374212fa"
+    },
+    "evidence/diagnostic/candidate/CANDIDATE-RECEIPT.json": {
+      "bytes": 7144,
+      "sha256": "dbb140b7fd60d53d535137fce952555f073d1515917187acce09ee0dfd197d52"
+    },
+    "evidence/diagnostic/candidate/FOOD-ACCESS-OBSERVATIONS.patch": {
+      "bytes": 29124,
+      "sha256": "efbf3c2e305af00d769c5688959b5c09dbd3bc988890c20ab18de22c2154ed70"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/inputs-after.json": {
+      "bytes": 35524,
+      "sha256": "84df9f4d8239c64f48aa783b4dfc837a292525d19205b608c5d6684c7d8dc483"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/inputs-before.json": {
+      "bytes": 35524,
+      "sha256": "84df9f4d8239c64f48aa783b4dfc837a292525d19205b608c5d6684c7d8dc483"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/owned-descendants.json": {
+      "bytes": 412,
+      "sha256": "d8cc7dabf70c5ff37290808b22980516ad56221d3f3cb49b9997a9d2e240842d"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/owned-process.json": {
+      "bytes": 345,
+      "sha256": "22bf16f951249b0657f9c2517fd6004289a7d21164641bbc02b1340990d0419c"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/raw.log": {
+      "bytes": 687,
+      "sha256": "26daa8a969f789dbbb0b9fe881330d12d82f623398720f1e7556c5e555901215"
+    },
+    "evidence/diagnostic/candidate/pure-tests01/receipt.json": {
+      "bytes": 994,
+      "sha256": "2c681fffc3d97c4f8eafc906edecb4146fa57a00f3d6b9e7e64c248abd767b79"
+    },
+    "evidence/diagnostic/candidate/type01/inputs-after.json": {
+      "bytes": 35524,
+      "sha256": "84df9f4d8239c64f48aa783b4dfc837a292525d19205b608c5d6684c7d8dc483"
+    },
+    "evidence/diagnostic/candidate/type01/inputs-before.json": {
+      "bytes": 35524,
+      "sha256": "84df9f4d8239c64f48aa783b4dfc837a292525d19205b608c5d6684c7d8dc483"
+    },
+    "evidence/diagnostic/candidate/type01/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "9b109b3d72aab775c1706d54123f1e1449853eb663cdb4e4e641d5e1ee6dc3cd"
+    },
+    "evidence/diagnostic/candidate/type01/owned-process.json": {
+      "bytes": 233,
+      "sha256": "91b92d69663d5b79aaab577d6ccc222dd02cff2046fbb2b7057903b90215953f"
+    },
+    "evidence/diagnostic/candidate/type01/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/diagnostic/candidate/type01/receipt.json": {
+      "bytes": 731,
+      "sha256": "7c5d2767fbb3c920927aeadb8e5fb475968399dead35a032cad62927f1a1dfbf"
+    },
+    "evidence/diagnostic/candidate02/CANDIDATE-RECEIPT.json": {
+      "bytes": 8117,
+      "sha256": "400ec02102560d260d5d6bcbb4d461182a1d6c60e0865b8ab1dc218e73cfd573"
+    },
+    "evidence/diagnostic/candidate02/FOOD-ACCESS-OBSERVATIONS.patch": {
+      "bytes": 35194,
+      "sha256": "329e6deb35d4b60e1153e33b2a5c4f3ca19c1eb921687a4190f3853d2782681f"
+    },
+    "evidence/diagnostic/candidate02/OLD-CANDIDATE-IMMUTABLE-READBACK.json": {
+      "bytes": 704,
+      "sha256": "0eaaf36aa1741733a09213ac5af6f2966d17834dfc368c554dd9b25a9aa9b0ed"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/inputs-after.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/inputs-before.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/owned-descendants.json": {
+      "bytes": 412,
+      "sha256": "39ad155b9365ba38e7b463c3d8fd5b525c2544d4692ec8109695cd685c3c6139"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/owned-process.json": {
+      "bytes": 345,
+      "sha256": "4f6eec87666d6514ff40d3623166b3f4fe78649a248ba27c2a31265519390c04"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/raw.log": {
+      "bytes": 938,
+      "sha256": "ee4737a1d81c28c0301ec020e7aa50df38dd1ba4e6280c14b37c453a0055452e"
+    },
+    "evidence/diagnostic/candidate02/pure-tests01/receipt.json": {
+      "bytes": 994,
+      "sha256": "739994d943dcf5d1115ca56729c68beb1060e3b102d16e3fc7c5d47debcbb00b"
+    },
+    "evidence/diagnostic/candidate02/type01/inputs-after.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/diagnostic/candidate02/type01/inputs-before.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/diagnostic/candidate02/type01/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "febbeaf995e7850e2eb1453ab4a5cd0e6fb718c4311c5d257815588139a69d9b"
+    },
+    "evidence/diagnostic/candidate02/type01/owned-process.json": {
+      "bytes": 233,
+      "sha256": "8cc5b339c62398ba446716e05b55d53a24ab1dc2a15137c9a643100d975f1f6d"
+    },
+    "evidence/diagnostic/candidate02/type01/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/diagnostic/candidate02/type01/receipt.json": {
+      "bytes": 731,
+      "sha256": "787ce0ee6341f1a2aeaa2e0a4e01eb39c383317926d240f7d0d19f8602022966"
+    },
+    "evidence/food/ALL229-CONTINUATION-PLAN.json": {
+      "bytes": 560,
+      "sha256": "ff6ce3473b13e0ca30f696f801f6f76a4486e10b02df79ccddaeb888fe15be85"
+    },
+    "evidence/food/BASELINE-INPUTS-322.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/BASELINE-RECEIPT.json": {
+      "bytes": 795,
+      "sha256": "7ff9bc220c99232c4f6c7287bd34a953c4e214020e47ae05ee89e391a036d80e"
+    },
+    "evidence/food/FOOD-DELIVERY-REPORT.md": {
+      "bytes": 3056,
+      "sha256": "52ecf8ab73fc3184ea7373189ed7cb1b8be1865fd5f05d5dfbaf39644b3d5e2e"
+    },
+    "evidence/food/all229-continuation01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/all229-continuation01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/all229-continuation01/owned-descendants.json": {
+      "bytes": 274,
+      "sha256": "462e33bae764858147ae4222aa8a5dcdbd5014673a2f95464a7ca00b7c09262b"
+    },
+    "evidence/food/all229-continuation01/owned-process.json": {
+      "bytes": 826,
+      "sha256": "fff9dc47e943e7cb09dcd23214cc21ce0c8923fccd9f3e674196b21c0b20dc73"
+    },
+    "evidence/food/all229-continuation01/raw.log": {
+      "bytes": 18622,
+      "sha256": "11f70675d4d68da2f7eea29c1f7f36383e62bdee7e462254c67020e58233a5f1"
+    },
+    "evidence/food/all229-continuation01/receipt.json": {
+      "bytes": 1475,
+      "sha256": "83bdaceadce605f018ee7d5edd8d8f7f13e773d66e8f2d634049a27f86fa3b04"
+    },
+    "evidence/food/baseline-observe01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/baseline-observe01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/baseline-observe01/owned-descendants.json": {
+      "bytes": 274,
+      "sha256": "9ba7d0dcf928aca658aff7063bb6fb2bc5b3c1f68ec8bf96a7d214bcdd4c562e"
+    },
+    "evidence/food/baseline-observe01/owned-process.json": {
+      "bytes": 541,
+      "sha256": "69e4091b3bb89c88396b95e913ea1e9c0e686af55ce3fbd4814e395b556f4f6c"
+    },
+    "evidence/food/baseline-observe01/raw.log": {
+      "bytes": 9362,
+      "sha256": "846b988ca1fba68ce84cd506ba0c910d68c3d5f65dec9d671b1802abaf4cf3b8"
+    },
+    "evidence/food/baseline-observe01/receipt.json": {
+      "bytes": 1190,
+      "sha256": "6f76fae9c48f8226d7f5aef2019cfaae5ce4dd8bd8ed809034b9b4e436da9fca"
+    },
+    "evidence/food/cause/ROOT16-FOOD-CAUSE-REPORT.md": {
+      "bytes": 11794,
+      "sha256": "8622478cd0cda15be155eaca4d51059b2da92dcee2d85a92cbe84eabe2c0fbc5"
+    },
+    "evidence/food/cause/production-static/IMPLEMENTATION-HANDOFF.json": {
+      "bytes": 723,
+      "sha256": "5a136a3b939dad4b6535a02cb64aa97272c7a7cb713c0a6db27e5f3a5e9a2b09"
+    },
+    "evidence/food/cause/production-static/RECEIPT.json": {
+      "bytes": 31895,
+      "sha256": "d670851350db0ff2fd10c0c9dd076db539c3643a2f62095d74eaaa59e5048bb9"
+    },
+    "evidence/food/cause/production-static/REPORT.md": {
+      "bytes": 15844,
+      "sha256": "e1571a5fafbf5f5cf5b994aa8010b55013165a161d7cff06e8d4d53eacecd14f"
+    },
+    "evidence/food/cause/production-static/SHOPS.csv": {
+      "bytes": 55569,
+      "sha256": "5b1090e0ed7bb3d91047bbbf4a3fcfac594245e5891647d30ea6456087b6efd4"
+    },
+    "evidence/food/cause/production-static/SUMMARY.json": {
+      "bytes": 7992,
+      "sha256": "9734d204fb3106ff6e7d6a6e5af9766743f258dc612251f0985879b8997aa768"
+    },
+    "evidence/food/cause/production-static/query-static.ts": {
+      "bytes": 14183,
+      "sha256": "9f9028e418867801fc0394ba035e0164897ea8b6d8d885a1309ffabe8dfce62c"
+    },
+    "evidence/food/cause/pure-query01/artifacts/BASE-INPUTS.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/cause/pure-query01/artifacts/DAY-AUDIT-ORIGINAL.json": {
+      "bytes": 133575,
+      "sha256": "96d9a58d78c291876c4de0c68b1466584c9e02ff10d57938d94aabe48008d114"
+    },
+    "evidence/food/cause/pure-query02/artifacts/BASE-INPUTS.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/cause/pure-query02/artifacts/DAY-AUDIT-ORIGINAL.json": {
+      "bytes": 133575,
+      "sha256": "96d9a58d78c291876c4de0c68b1466584c9e02ff10d57938d94aabe48008d114"
+    },
+    "evidence/food/cause/pure-query02/artifacts/FOOD-SITES.json": {
+      "bytes": 313846,
+      "sha256": "66ef08ecbd42e7a027c333b719fe50f3cd289df8398c9f5325035be53396e22b"
+    },
+    "evidence/food/cause/pure-query02/artifacts/QUERY-SUMMARY.json": {
+      "bytes": 3012,
+      "sha256": "a04726b69054a85d0bd88e1c9ee3868e1b5d4940e62f9e238cede8a6f0d654d9"
+    },
+    "evidence/food/cause/pure-query02/artifacts/RESIDENTS-229.csv": {
+      "bytes": 79121,
+      "sha256": "319949611520fe5959c5f65fcb6b6fc6822cdea8edc39ddff4316bfa0fb40fc9"
+    },
+    "evidence/food/continue-food-all229.mts": {
+      "bytes": 14078,
+      "sha256": "a56485ff71bc43fd9f597cfaa23737331d1fbd5d4266b18bc17e946f0cfe99c4"
+    },
+    "evidence/food/full-partition24-01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/full-partition24-01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/full-partition24-01/owned-descendants.json": {
+      "bytes": 274,
+      "sha256": "33f21bd2a0f2806c519ed4e1ab0f11db31412b36e5311d8d297f3382e1cd43ad"
+    },
+    "evidence/food/full-partition24-01/owned-process.json": {
+      "bytes": 323,
+      "sha256": "346183c81a35191ce38b729f0e31d28c4be115a08ca124d1e6d65457d39827f5"
+    },
+    "evidence/food/full-partition24-01/raw.log": {
+      "bytes": 117,
+      "sha256": "5dc1a2f2ae4845f6331829a5a6f37714fdc15f9b6232295c98c867ecfb5608d7"
+    },
+    "evidence/food/full-partition24-01/receipt.json": {
+      "bytes": 972,
+      "sha256": "d9fb194f5afc43ff95f19a54835d1011886bec8f613834ba425c91312a6e321d"
+    },
+    "evidence/food/geographic-parts01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/geographic-parts01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/food/geographic-parts01/owned-descendants.json": {
+      "bytes": 274,
+      "sha256": "5337b01be43b26967cc015b560199cafa693d45ec2f01166431bb8a1e9629efd"
+    },
+    "evidence/food/geographic-parts01/owned-process.json": {
+      "bytes": 325,
+      "sha256": "7fb814a974f25dca429a086bfeb5e153ee6a390bd38d156a22273cad5962a501"
+    },
+    "evidence/food/geographic-parts01/raw.log": {
+      "bytes": 750,
+      "sha256": "66dfa77ca2c68f4cdf37df31ea4e2b5cf96ed8b55b4ca6e393e52286a3bf9d7e"
+    },
+    "evidence/food/geographic-parts01/receipt.json": {
+      "bytes": 974,
+      "sha256": "268ef20868034ee53c9acb03185c1cdb48b1d4b480eb3a2f1cf2ccf9c6a17793"
+    },
+    "evidence/food/observe-food.mts": {
+      "bytes": 12390,
+      "sha256": "52e985e82da7e61bb8062ee9552b790e95adf88eb9b8aaef070c186bf49a466b"
+    },
+    "evidence/food/outputs/all229-continuation01/INHERITED-PROOF.json": {
+      "bytes": 2830,
+      "sha256": "13a930a7d032192ed0461a7c63525ec590b3ce6285eb68f7ea07bdd207d55f02"
+    },
+    "evidence/food/outputs/all229-continuation01/PLAN.json": {
+      "bytes": 5013,
+      "sha256": "7a52c51002aafba126689c72f3c00f1084c1fdb256aaa123c482b65887353f35"
+    },
+    "evidence/food/outputs/all229-continuation01/SUMMARY.json": {
+      "bytes": 2039,
+      "sha256": "68b531b4c4e011ce6af273113f956bd7d6602b662226e7248f923832ad72755d"
+    },
+    "evidence/food/outputs/baseline-observe01/PLAN.json": {
+      "bytes": 4859,
+      "sha256": "af96533ff2f677fd9d2f7322117147a3d3e9854877d056431f874f1b60d7efdd"
+    },
+    "evidence/food/outputs/baseline-observe01/SUMMARY.json": {
+      "bytes": 1943,
+      "sha256": "015f0fb2f34f720c9a8ae34402c31b80a6baa732f5f36489b9cf81ff3333cf55"
+    },
+    "evidence/food/outputs/full-partition24-01/SUMMARY.json": {
+      "bytes": 3899,
+      "sha256": "7be66050c272c2a7f1eb61679aff02d7ef6d2ea7597e59a04b3ecae16dbbcc54"
+    },
+    "evidence/food/outputs/geographic-parts01/SUMMARY.json": {
+      "bytes": 791,
+      "sha256": "bbbddaf9716c3fb06a576258db193f9030de1c9ceb6fcc39c5d6fecc213b3000"
+    },
+    "evidence/food/repack-food-geographic-parts.mts": {
+      "bytes": 2032,
+      "sha256": "b53ce3229a6db56d9c257b9ce25bef6b93d9dfd6a29af592714e51ef400c6676"
+    },
+    "evidence/food/run-phase.py": {
+      "bytes": 3933,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    },
+    "evidence/food/verify-food-continuation24.mts": {
+      "bytes": 2919,
+      "sha256": "0e4e7a939d32b01435050ed8391498becac43fd53a945f238305aa3a8bb43776"
+    },
+    "evidence/integration/INPUTS-325.json": {
+      "bytes": 35524,
+      "sha256": "4aa9917b843dfe78b1b998bbd17a6e81282a5b9dbef24d920b03d1f657bb0e09"
+    },
+    "evidence/integration/INSTALL-RECEIPT.json": {
+      "bytes": 971,
+      "sha256": "0b21fcadef4a777f894b007cd6a0bf570be8488d15f0001b07969b80650baf95"
+    },
+    "evidence/integration/build01/inputs-after.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/integration/build01/inputs-before.json": {
+      "bytes": 35524,
+      "sha256": "1243da250b6eb6600de8c66f42097ce5c0c84596139932aa9af32e28abf4a9f2"
+    },
+    "evidence/integration/build01/owned-descendants.json": {
+      "bytes": 688,
+      "sha256": "99a119eb931b8fae14ea50a4f880ca1c842cd53d3202db7a38aefa0832c7bd25"
+    },
+    "evidence/integration/build01/owned-process.json": {
+      "bytes": 221,
+      "sha256": "c3bd7e7e795c33fec50e41c10a8b36dc05ac389f8983a7313549e1421d6e73a1"
+    },
+    "evidence/integration/build01/raw.log": {
+      "bytes": 1060,
+      "sha256": "7a803a4455859633ff3beeb075ae08bc0cb8c02b665f2d4503c3b476803a4a66"
+    },
+    "evidence/integration/build01/receipt.json": {
+      "bytes": 870,
+      "sha256": "b36810a9458765aee3d606765e15898717a08a6b90944ef4aa830c28e90a5431"
+    },
+    "evidence/integration/run-phase.py": {
+      "bytes": 3933,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    },
+    "evidence/medical/ACTUAL01-STAGE-BINDING.json": {
+      "bytes": 2151,
+      "sha256": "7042d5513e644d6babe223fd4638f49c4cc75ec2c18976117ff1af86ee52b685"
+    },
+    "evidence/medical/ALL-FILES-SHA256.json": {
+      "bytes": 86667,
+      "sha256": "de11a7e103377a73b10578501325130f5ae84266206aed954990b9d51694f1b9"
+    },
+    "evidence/medical/CLOSURE-SUMMARY.json": {
+      "bytes": 48546,
+      "sha256": "506bcd4f7f0be7c58167a15b4be32ad86df9058403141f96fe9eb582e65d3d06"
+    },
+    "evidence/medical/DRIVER-FREEZE.json": {
+      "bytes": 2151,
+      "sha256": "7042d5513e644d6babe223fd4638f49c4cc75ec2c18976117ff1af86ee52b685"
+    },
+    "evidence/medical/DRIVER-PLAN.json": {
+      "bytes": 4064,
+      "sha256": "95de014aa4c7ae5b952fbabdf7dcff3c9dd1a3acd138eafac2cd9f2be5670bf2"
+    },
+    "evidence/medical/INPUT-MANIFEST.json": {
+      "bytes": 4419,
+      "sha256": "540dd7284c1a7e962c3514d4be63e9fc670c90c3cde25cbf9988f7303d1befbb"
+    },
+    "evidence/medical/INPUTS-322.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/MEMO-FRAGMENT.md": {
+      "bytes": 1439,
+      "sha256": "81df0fe41270cecbec71e6f6fbbd099f5dc923510d2246f1bf7edc90863d5b54"
+    },
+    "evidence/medical/PARTITION-DISK-READBACK.json": {
+      "bytes": 15761,
+      "sha256": "592dec7bad2054b158dbe81d50043fb3458e1d7855e4ed8365bb7abc0006e31a"
+    },
+    "evidence/medical/PREPARED-V1-CORRECTION.json": {
+      "bytes": 460,
+      "sha256": "8d37a22afffad00b6065ab544093ebf2fcd840304ac78633128f67e5ad2dbfaf"
+    },
+    "evidence/medical/REMAINING-CAPACITY-STATIC.json": {
+      "bytes": 31304,
+      "sha256": "b758a34472d74b3939dfca04727f51bfdd2cef6f7b9a9c8dbec04e9f8cc38893"
+    },
+    "evidence/medical/REPORT.md": {
+      "bytes": 8540,
+      "sha256": "e2994171ddf3f7f1ed0da828dfc8c9a3d71344edcef7827bdd33ec542c8739f6"
+    },
+    "evidence/medical/RUN-INDEX.json": {
+      "bytes": 6476,
+      "sha256": "e08470d2aa16efe1dfb8f3aa81beea7778debf89db9bfdfa1ec7cddd692e2087"
+    },
+    "evidence/medical/STATIC-DIAGNOSTIC.json": {
+      "bytes": 12196,
+      "sha256": "c7aafc8f2430cbb8c4712d6198f06f62006d65d24e49c514c36952b26d5c67c8"
+    },
+    "evidence/medical/SUMMARY.json": {
+      "bytes": 7367,
+      "sha256": "a1fb811f01a245a93a20c6c9833a9236a4a6321c1ff8c18ff2802f5b4cdb0d01"
+    },
+    "evidence/medical/actual01/artifacts/PASS-summary.json": {
+      "bytes": 16053,
+      "sha256": "229fc35754584075ed22d578160a7eb5ff0b665d15e43d3fc1510d04d74f4e24"
+    },
+    "evidence/medical/actual01/artifacts/frontier.summary.json": {
+      "bytes": 13489,
+      "sha256": "33f1548f20cfb2df78408fc4ed46955f200a7c3c884ed203bb9e95e23d9f37f7"
+    },
+    "evidence/medical/actual01/artifacts/full-partition24.json": {
+      "bytes": 2832,
+      "sha256": "74a52a3e8916985a35d188f42a9231f0a0014b76abe95df414c4804b61071b72"
+    },
+    "evidence/medical/actual01/artifacts/inherited-prefix-bindings.json": {
+      "bytes": 368,
+      "sha256": "36a959d94489d9b0e3fbce9fff20f93ed9bec5ece414f0339c54fe54af815be0"
+    },
+    "evidence/medical/actual01/artifacts/one-patient-health-source.json": {
+      "bytes": 311,
+      "sha256": "6d3560af52c12029012bc05353030f57eda17a109b0b1dcecbe9ba9d0974dd17"
+    },
+    "evidence/medical/actual01/artifacts/one-patient-public-waste.json": {
+      "bytes": 918,
+      "sha256": "0dae2138973931f0b02ac7ec438d45148f549a5eac78f0b5ab32c9d9150d2fef"
+    },
+    "evidence/medical/actual01/artifacts/physical-accounts.json": {
+      "bytes": 353,
+      "sha256": "63abe45b4eb4a314f0b966f40baf1d5a3dc66fdb628b9a0fe2385e28aa3ebbd7"
+    },
+    "evidence/medical/actual01/artifacts/trace-commands.json": {
+      "bytes": 49862,
+      "sha256": "2cf67487e0e8641f2c501967354417d66006115fcfb298348db727f5566428f5"
+    },
+    "evidence/medical/actual01/artifacts/trace-frames.json": {
+      "bytes": 142012,
+      "sha256": "f4d83440086b001e6ef8b5e5bc0284fba55b162d7a36e59b0ba199decb916f98"
+    },
+    "evidence/medical/actual01/artifacts/trace-gates.json": {
+      "bytes": 281229,
+      "sha256": "4f959bb82644f9bbca47fbea87e3ed80dc50653e0bf58c6a937286e51b4be8c5"
+    },
+    "evidence/medical/actual01/artifacts/trace-gifts.json": {
+      "bytes": 82752,
+      "sha256": "98b8bfb710e82b011397db7641ee64265a96fc752efa5bc4e9ba4c2816b65fea"
+    },
+    "evidence/medical/actual01/artifacts/world.json": {
+      "bytes": 71349,
+      "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1"
+    },
+    "evidence/medical/actual01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/actual01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/actual01/owned-descendants.json": {
+      "bytes": 274,
+      "sha256": "7708b73b2b2f95f755d71163e751be95c5d47d38f23367ceae1d2677f240afb2"
+    },
+    "evidence/medical/actual01/owned-process.json": {
+      "bytes": 450,
+      "sha256": "05816cbc2b9795d0588e89f07e961854d2ee24f982412398cda30a71971d05e3"
+    },
+    "evidence/medical/actual01/raw.log": {
+      "bytes": 25045,
+      "sha256": "abb822e518877cf1fd99b246fe97d9bf571efac2302a36ee55ba152cea567555"
+    },
+    "evidence/medical/actual01/receipt.json": {
+      "bytes": 1099,
+      "sha256": "f0c31ee8885a742515cb30af63790698be021fce180d1ae4340ba1aa2845dea5"
+    },
+    "evidence/medical/actual01-driver-as-run.mts": {
+      "bytes": 38113,
+      "sha256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4"
+    },
+    "evidence/medical/close-actual.py": {
+      "bytes": 9655,
+      "sha256": "f8299e42139110e63055f468d0937deef5570679fc95cd1c342334276b96c967"
+    },
+    "evidence/medical/finish-static.py": {
+      "bytes": 11242,
+      "sha256": "47fe1ceb39c71390861b57ed2e1d1332d6a7f2c03fc4121aed9d8e74247e7a78"
+    },
+    "evidence/medical/finite-food-medical-candidate.mts": {
+      "bytes": 38113,
+      "sha256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4"
+    },
+    "evidence/medical/make-candidate.py": {
+      "bytes": 17133,
+      "sha256": "2ae88b2f62640b8feb7f693c2a250b1a13c5c17d27182688bf9dea6ac8af8cb9"
+    },
+    "evidence/medical/persist-actual-parts.mts": {
+      "bytes": 2134,
+      "sha256": "6052fb8a30dec3d00fe2d59bd118cb22abd76f171af6b9e9ba4b684b30227364"
+    },
+    "evidence/medical/prepared-v1-ACTUAL01-STAGE-BINDING.json": {
+      "bytes": 2097,
+      "sha256": "4096e0c3a615f55c98b7d78c8ee91b7180b8b35650e906d73c627db82e5c2cf6"
+    },
+    "evidence/medical/prepared-v1-DRIVER-FREEZE.json": {
+      "bytes": 1061,
+      "sha256": "81ea821358de257e4c44f40d769f45073c2431d829c4b4a07e564d89f10de97e"
+    },
+    "evidence/medical/prepared-v1-DRIVER-PLAN.json": {
+      "bytes": 3245,
+      "sha256": "fb3e9027a916baa32836826682671649ffc9a1a2262ee97d1999109fd8179190"
+    },
+    "evidence/medical/prepared-v1-finite-food-medical-candidate.mts": {
+      "bytes": 37654,
+      "sha256": "7f60844de23dfb2f7282c8ebd84fc8f2f55540e553d18a2970ca6130413feece"
+    },
+    "evidence/medical/prepared-v2-finite-food-medical-candidate.mts": {
+      "bytes": 37717,
+      "sha256": "17d52373a71bb07daa79b5897f66a4e3970fa829a69392f14177063804a27092"
+    },
+    "evidence/medical/prepared-v3-finite-food-medical-candidate.mts": {
+      "bytes": 38021,
+      "sha256": "3bbf90bf1c2b877f3817037d19d76790dafa27274fd53306df85cb5959214fbc"
+    },
+    "evidence/medical/remaining-capacity-static.py": {
+      "bytes": 14443,
+      "sha256": "e6fc9960d0862b2dab77c546473df74de73bcdb97e7cf385251c91690f8cb660"
+    },
+    "evidence/medical/remaining-route-static.json": {
+      "bytes": 29300,
+      "sha256": "159e4f32048f87dacd5c6c2049b5fcb14ac03a228bd89eff142d77bb55e1a610"
+    },
+    "evidence/medical/run-phase.py": {
+      "bytes": 3933,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    },
+    "evidence/medical/seal-final.py": {
+      "bytes": 14320,
+      "sha256": "1aff758f97e3a15f63807d2c47d27ef65ec8ad51d9b924dea7891e50811285b5"
+    },
+    "evidence/medical/tsconfig.driver.json": {
+      "bytes": 216,
+      "sha256": "6a0ede23d6912789763a173c40ba114599666b691c2fae0e25bf53a7b395ef4d"
+    },
+    "evidence/medical/types01/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types01/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types01/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "8e9b543fe50f9bf048f61b81e526ef46cb52a2754d9375d6110a7d5b9f7b7bb1"
+    },
+    "evidence/medical/types01/owned-process.json": {
+      "bytes": 274,
+      "sha256": "bad9ce6f648c0b765a00a2b2e026a8c275fc708b05d8f209fd5352fad51b2994"
+    },
+    "evidence/medical/types01/raw.log": {
+      "bytes": 165,
+      "sha256": "22d754e33e5e414d820e237c9e477c81ec8db495c45ab51f7665351a89a3c783"
+    },
+    "evidence/medical/types01/receipt.json": {
+      "bytes": 772,
+      "sha256": "6a801480138817df2f124fe8a2011ff4c5c4cb6af6f0ad71eb72ec4d8bcedf65"
+    },
+    "evidence/medical/types02/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types02/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types02/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "abede28833b4aa0c835505a9be34b77a59dfb9581a998c478d8549863ab6f1a5"
+    },
+    "evidence/medical/types02/owned-process.json": {
+      "bytes": 274,
+      "sha256": "fe4ca213bb207f1f693d78d07312d9635bab2cad67b6ccb9d0f52bc74c838276"
+    },
+    "evidence/medical/types02/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/medical/types02/receipt.json": {
+      "bytes": 772,
+      "sha256": "dd10a17b68434e70f9f32d346150d46e4e96478232745bfbfd97f6559f980d29"
+    },
+    "evidence/medical/types03/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types03/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types03/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "b7f5a20c0179df5436bda84b2f7559d97403a3c147c154d66f0356ef6c3a2354"
+    },
+    "evidence/medical/types03/owned-process.json": {
+      "bytes": 274,
+      "sha256": "874922c6978e9a759b002ac906498577e6ca2eea1687fb139d9dd759f9c41752"
+    },
+    "evidence/medical/types03/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/medical/types03/receipt.json": {
+      "bytes": 772,
+      "sha256": "2dd3bb357199834c82aa21a92ad2dd98c130821af119936592dfac148c89ac85"
+    },
+    "evidence/medical/types04/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types04/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types04/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "e3980aa94f3a3cbca856d4a67fb5a0b1965e2ff9eab553f57a5f9ed7f3393412"
+    },
+    "evidence/medical/types04/owned-process.json": {
+      "bytes": 274,
+      "sha256": "cee985c9e50a39e770dd0949af3b202b6d16af969ab2e9ebcf35f1bada2bbec0"
+    },
+    "evidence/medical/types04/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/medical/types04/receipt.json": {
+      "bytes": 772,
+      "sha256": "1b19ce1fd4b324a951b621b1863392e42b36a52a31c547cdd977d12c5eb34590"
+    },
+    "evidence/medical/types05/inputs-after.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types05/inputs-before.json": {
+      "bytes": 35194,
+      "sha256": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927"
+    },
+    "evidence/medical/types05/owned-descendants.json": {
+      "bytes": 141,
+      "sha256": "13e288c1fe0b1032d4be54937dcae6cb0ea0508431e114f51c25e59d2eee9e21"
+    },
+    "evidence/medical/types05/owned-process.json": {
+      "bytes": 274,
+      "sha256": "eaae7ea26e82dadd935ee4a1f605d24a50664b681ec06be81a4ca5eb51fea85a"
+    },
+    "evidence/medical/types05/raw.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/medical/types05/receipt.json": {
+      "bytes": 772,
+      "sha256": "5c53135eaec699876ebe249dfab1c1f94b59a3bb6048048c55fbd51ebba5e423"
+    },
+    "evidence/requirements/ARTIFACTS-SHA256.json": {
+      "bytes": 1304,
+      "sha256": "7193d4eacd7b3f875fd3ff9aa11edf7156b29b800a40098956d85b7892575bdd"
+    },
+    "evidence/requirements/AUDIT.md": {
+      "bytes": 8460,
+      "sha256": "4f3ef7844c8a362b085ccb33e529facef1d1a4cd69e0ed175feaf7621113d5f8"
+    },
+    "evidence/requirements/MATRIX-38-AUDIT.csv": {
+      "bytes": 34215,
+      "sha256": "0f0a50e19928fdb2c32685e584e97b2569793a53303483537f7fc686b5d1e930"
+    },
+    "evidence/requirements/MATRIX-DRAFT-CHECK.json": {
+      "bytes": 2902,
+      "sha256": "775a281891bef35672866b83fe4b56c9da2b79e1082e8d4795f57dee091e30b6"
+    },
+    "evidence/requirements/MATRIX-DRAFT-SHA256.json": {
+      "bytes": 1014,
+      "sha256": "b8a636b2eee13001d8acadc8781c7bc453851b3c773c461881e5169bb868f270"
+    },
+    "evidence/requirements/MATRIX-LINK-MAP.json": {
+      "bytes": 2822,
+      "sha256": "1d961e601be3da283d248ef57c84c0197968c54fa7ea42710b2e064cc03f9696"
+    },
+    "evidence/requirements/READ-RECEIPT.json": {
+      "bytes": 21914,
+      "sha256": "96502e3536865702fac2527d18d40d6adb97fe6e25b7eb67c8e2b43a164e8fa8"
+    },
+    "evidence/requirements/READ-RECEIPT.md": {
+      "bytes": 2246,
+      "sha256": "2f86267f67705445c3d9ec8bd0fa4a073acfd1b3c0219b492a3fbb15f8295a62"
+    },
+    "evidence/requirements/REQUIREMENTS-MATRIX.md": {
+      "bytes": 51681,
+      "sha256": "6310a29e90aa828d6f540906bfe20ab49574baad252c80f147c7212ef5ffdca2"
+    },
+    "evidence/requirements/ROOT16-MATRIX-38-DRAFT.csv": {
+      "bytes": 49435,
+      "sha256": "0530eef37b18d7ffb05b5fe3e8f23c13eae8b8ed3f4d96c701fabfcad334b7f3"
+    },
+    "evidence/requirements/build-read-receipt.py": {
+      "bytes": 16543,
+      "sha256": "c144ed89d9bda0e62b8fade511c67b64da637acade4f01c801e7c30523bcd05d"
+    },
+    "evidence/requirements/build-root16-matrix-draft.py": {
+      "bytes": 21807,
+      "sha256": "b68a5a2c2bd35346087e639e694955a52d4e0558580a966379661d47c4813dde"
+    },
+    "evidence/requirements/memo-early-read.md": {
+      "bytes": 24492,
+      "sha256": "2718589877203f83c7024c9667dea5fbcc9d8b8069c5ecd5d9b3e06f2aa6a489"
+    },
+    "figures/229-residents-first-counter-receipt.csv": {
+      "bytes": 27540,
+      "sha256": "4751c1b944d723b4828658cc8f4ec608c33c2e27009a3aed3c86d06d6bd3b2c4"
+    },
+    "figures/229-residents-food-recovery.png": {
+      "bytes": 185512,
+      "sha256": "85918faa573e6170ee5b43d5066e48d17da7d0dbe14bc575b26394abe7a8d997"
+    },
+    "figures/FIGURE-PROVENANCE.json": {
+      "bytes": 1677,
+      "sha256": "f94d7d377fd6f0d937e002451c4ad3060eb6d0de980576a7761a5922f6a0bd42"
+    }
+  }
+}

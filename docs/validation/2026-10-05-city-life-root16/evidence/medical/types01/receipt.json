@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-05T00:15:51.710868+00:00",
+  "endedAt": "2026-10-05T00:15:53.502487+00:00",
+  "argv": [
+    "./node_modules/.bin/tsc",
+    "--noEmit",
+    "-p",
+    "../tsconfig.driver.json"
+  ],
+  "exitCode": 2,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 322,
+  "inputsStable": true,
+  "rawSHA256": "22d754e33e5e414d820e237c9e477c81ec8db495c45ab51f7665351a89a3c783",
+  "ownedPid": 129958,
+  "observedDescendants": 1,
+  "finalOwnedMembers": [],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

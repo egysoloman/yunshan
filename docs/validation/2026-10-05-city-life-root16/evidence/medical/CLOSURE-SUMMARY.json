@@ -1,0 +1,1458 @@
+{
+  "status": "PASS_ONE_PLAYER_ONLY_OLD240_FAIL_PRESERVED",
+  "closedAt": "2026-10-05T00:28:32.682414+00:00",
+  "wallSeconds": 236.596711,
+  "receipt": {
+    "startedAt": "2026-10-05T00:21:16.643074+00:00",
+    "endedAt": "2026-10-05T00:25:13.239785+00:00",
+    "argv": [
+      "env",
+      "ROOT16_MEDICAL_RUN_COORDINATED=1",
+      "node",
+      "--import",
+      "tsx",
+      "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01-driver-as-run.mts",
+      "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/actual01/artifacts"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 322,
+    "inputsStable": true,
+    "rawSHA256": "abb822e518877cf1fd99b246fe97d9bf571efac2302a36ee55ba152cea567555",
+    "ownedPid": 130638,
+    "observedDescendants": 2,
+    "finalOwnedMembers": [
+      {
+        "pid": 130646,
+        "state": "Z",
+        "parent": 1,
+        "group": 130638,
+        "session": 130638,
+        "startTicks": 9050141
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "sourceGraph": "4f1c39d4769b4172f9aed8477b666c480cb1b4be2d7a244d8144d7d1408c9927",
+  "driverSHA256": "f385fcf4ce95331878eadbb1dd525076e33a3fa064be36536ce82408276e78f4",
+  "source322StillExact": true,
+  "originalsStillExact": {
+    "CLOSURE-RECEIPT.json": true,
+    "GIFT-LIFE-SUPPLY-PLAN.md": true,
+    "GIFT-ROUTE-PREPARED.json": true,
+    "HANDOFF.md": true,
+    "NEXT-SCOPE-STATUS.json": true,
+    "REPORT.md": true,
+    "ROUTE-PREP04.json": true,
+    "actual03/artifacts/FAIL-summary.json": true,
+    "actual03/artifacts/frontier.save.json": true,
+    "actual03/artifacts/trace-events.json": true,
+    "actual03/artifacts/trace-frames.json": true,
+    "actual03/receipt.json": true,
+    "origins/opening-policy-v4.save.json": true,
+    "origins/world.json": true
+  },
+  "bodySource": "74b488c8e3c39d762b90613f50c2cf97aa34bd89c54ef8027ebdef2f4cdeccce",
+  "worldSHA256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+  "bounds": {
+    "mainFrames": 512,
+    "normalRawMainDeltaClamp": 1,
+    "walkingDelta": "min(1,remainingDistance/4.8), unchanged ROOT15actual walk",
+    "cooldownAndOpeningWaitDelta": 0.25,
+    "clinicWaitingDelta": 1,
+    "speed": 16,
+    "tickSeconds": 0.25,
+    "maxInternalMainTicks": 2048,
+    "maxMainGameMinutes": 8192,
+    "wallCapSeconds": 900,
+    "futureReaders": 3,
+    "futureStepsEach": 24,
+    "futureDelta": 0.25,
+    "futureGameMinutesPerReader": 96,
+    "maxTotalInstanceInternalTicksIncludingSuccessFuture": 2120,
+    "oldHOST512quarterScopePreservedNotRun": true
+  },
+  "actualMainFrames": 292,
+  "actualMainTicks": 984,
+  "actualMainGameMinutes": 3936,
+  "ordinaryHeldSeconds": 245.9043067068846,
+  "motorMeters": 1074.7406721930406,
+  "foodPurchase": [
+    {
+      "quantity": 18,
+      "at": 11884,
+      "paid": 276.0304831081276,
+      "beforeMoney": 401.02821428458134,
+      "afterMoney": 124.99773117645373,
+      "carry": 17
+    }
+  ],
+  "restCommands": [
+    {
+      "at": 10048,
+      "paid": 15.0,
+      "beforeFatigue": 69.4959999999983,
+      "afterFatigue": 92.4959999999983
+    },
+    {
+      "at": 13808,
+      "paid": 15.0,
+      "beforeFatigue": 24.815999999996095,
+      "afterFatigue": 47.815999999996095
+    },
+    {
+      "at": 13840,
+      "paid": 15.0,
+      "beforeFatigue": 47.23999999999607,
+      "afterFatigue": 70.23999999999607
+    }
+  ],
+  "giftCount": 13,
+  "selfEatCount": 2,
+  "completePlayer": {
+    "position": {
+      "x": -135.99999999999994,
+      "y": 0.6,
+      "z": -59.99999999999988
+    },
+    "role": "traveler",
+    "identities": [
+      "traveler"
+    ],
+    "money": 94.99773117645373,
+    "reputation": 6.5,
+    "needs": {
+      "hunger": 78.4999999999997,
+      "fatigue": 67.64799999999597,
+      "social": 0,
+      "fun": 44.463999999995856
+    },
+    "inventory": {
+      "block": 32,
+      "food": 3,
+      "businesses": 0,
+      "business:civic-0-farm": 0
+    },
+    "homeId": null,
+    "education": 0,
+    "experience": 0,
+    "partnerId": null,
+    "vehicleId": null
+  },
+  "healthOrder": {
+    "id": "service-2",
+    "state": "active",
+    "target": 6,
+    "served": [
+      "player"
+    ],
+    "minutes": {
+      "player": 20
+    },
+    "spent": 40,
+    "received": 4.421864795686247,
+    "consumed": 1,
+    "requiredMinutes": 20
+  },
+  "newPrivateReviews": {
+    "shop-civic-0-farm": {
+      "day": 9,
+      "shopId": "shop-civic-0-farm",
+      "assignments": [
+        {
+          "citizenId": "citizen-11",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 480
+        },
+        {
+          "citizenId": "citizen-77",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 454.67372950082813
+        },
+        {
+          "citizenId": "citizen-143",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 424.3738895467909
+        },
+        {
+          "citizenId": "citizen-209",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 474.62902443685164
+        },
+        {
+          "citizenId": "citizen-275",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 177.15842702843327
+        },
+        {
+          "citizenId": "citizen-341",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 417.15842702843327
+        },
+        {
+          "citizenId": "citizen-407",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 415.33847392365766
+        },
+        {
+          "citizenId": "citizen-473",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 462.62902443685164
+        },
+        {
+          "citizenId": "citizen-539",
+          "ratePerMinute": 0.09625733333333306,
+          "minutesCap": 480,
+          "workedMinutes": 466.62902443685164
+        }
+      ],
+      "reviews": [
+        {
+          "at": 13444,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 200,
+          "earnedDebt": 0,
+          "priorCommitment": 0,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 193.18846799999943
+        },
+        {
+          "at": 13492,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 216.2069913571124,
+          "earnedDebt": 9.598707146434439,
+          "priorCommitment": 183.589760853565,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 15.593687999999956
+        },
+        {
+          "at": 13504,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 232.54256672635958,
+          "earnedDebt": 14.219059146434425,
+          "priorCommitment": 194.56309685356496,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13528,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 248.7206702890354,
+          "earnedDebt": 27.77890578441542,
+          "priorCommitment": 197.46325421558396,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13540,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 265.0693589006741,
+          "earnedDebt": 35.864521784415395,
+          "priorCommitment": 205.83764221558388,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13552,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 281.421659031574,
+          "earnedDebt": 45.10522578441537,
+          "priorCommitment": 213.05694221558386,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13564,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 314.2899735125229,
+          "earnedDebt": 54.73095911774867,
+          "priorCommitment": 219.89121288225056,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 32.9200079999999
+        },
+        {
+          "at": 13576,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 330.64079741966407,
+          "earnedDebt": 63.97166311774863,
+          "priorCommitment": 243.57051688225044,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 15.593687999999956
+        },
+        {
+          "at": 13588,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 347.00135384311733,
+          "earnedDebt": 73.21236711774858,
+          "priorCommitment": 249.92350088225044,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13600,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 363.3622355770483,
+          "earnedDebt": 81.6830124510819,
+          "priorCommitment": 257.91285954891714,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13612,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 379.72311731097926,
+          "earnedDebt": 88.61354045108186,
+          "priorCommitment": 267.442335548917,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13624,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 396.0914414584264,
+          "earnedDebt": 96.69915645108183,
+          "priorCommitment": 275.816723548917,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13636,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 412.46319534633756,
+          "earnedDebt": 104.7847724510818,
+          "priorCommitment": 284.19111154891704,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 16.46000399999995
+        },
+        {
+          "at": 13648,
+          "ownerId": "citizen-11",
+          "ownerPosition": {
+            "x": 62,
+            "y": 0.6,
+            "z": 1.2
+          },
+          "cash": 428.8381465638562,
+          "earnedDebt": 112.8703884510818,
+          "priorCommitment": 292.565499548917,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 10.395791999999968
+        }
+      ]
+    },
+    "shop-civic-0-workshop": {
+      "day": 9,
+      "shopId": "shop-civic-0-workshop",
+      "assignments": [
+        {
+          "citizenId": "citizen-55",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 424
+        },
+        {
+          "citizenId": "citizen-187",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 151.63954919247487
+        },
+        {
+          "citizenId": "citizen-253",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 256.3328851647025
+        },
+        {
+          "citizenId": "citizen-319",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 268.3809523809524
+        },
+        {
+          "citizenId": "citizen-385",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 248.85875886838792
+        },
+        {
+          "citizenId": "citizen-451",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 269.2927771198757
+        },
+        {
+          "citizenId": "citizen-517",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 145.45468509984642
+        },
+        {
+          "citizenId": "citizen-583",
+          "ratePerMinute": 0.09626799999999974,
+          "minutesCap": 480,
+          "workedMinutes": 176.60457693893198
+        }
+      ],
+      "reviews": [
+        {
+          "at": 13540,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 328.0834987531254,
+          "earnedDebt": 0,
+          "priorCommitment": 0,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 321.1500479999991
+        },
+        {
+          "at": 13564,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 329.62368764332643,
+          "earnedDebt": 2.310431999999994,
+          "priorCommitment": 318.8396159999991,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 1.5402879999999959
+        },
+        {
+          "at": 13576,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 330.77682393616834,
+          "earnedDebt": 3.465647999999991,
+          "priorCommitment": 319.22468799999916,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 0.7701439999999979
+        },
+        {
+          "at": 13588,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 331.9283598983665,
+          "earnedDebt": 4.6208639999999885,
+          "priorCommitment": 318.8396159999991,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 1.5402879999999959
+        },
+        {
+          "at": 13600,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 333.0799195952757,
+          "earnedDebt": 5.776079999999986,
+          "priorCommitment": 319.22468799999916,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 0.7701439999999979
+        },
+        {
+          "at": 13612,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 334.2304235146056,
+          "earnedDebt": 6.931295999999984,
+          "priorCommitment": 318.8396159999991,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 1.5402879999999959
+        },
+        {
+          "at": 13624,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 335.3801966296816,
+          "earnedDebt": 8.086511999999981,
+          "priorCommitment": 319.22468799999916,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 0.7701439999999979
+        },
+        {
+          "at": 13636,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 336.528226317447,
+          "earnedDebt": 9.241727999999979,
+          "priorCommitment": 318.83961599999924,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 1.5402879999999959
+        },
+        {
+          "at": 13648,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 337.6762229196341,
+          "earnedDebt": 11.356214608792182,
+          "priorCommitment": 318.26541739120694,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 0.7701439999999979
+        },
+        {
+          "at": 13660,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 340.7391831896833,
+          "earnedDebt": 14.821862608792173,
+          "priorCommitment": 315.56991339120697,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 3.0805759999999918
+        },
+        {
+          "at": 13672,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 344.3980528073728,
+          "earnedDebt": 18.833184845629372,
+          "priorCommitment": 314.6391671543697,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 3.8507199999999893
+        },
+        {
+          "at": 13684,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 349.46491939518364,
+          "earnedDebt": 25.411455034664932,
+          "priorCommitment": 311.9116169653342,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 5.391007999999985
+        },
+        {
+          "at": 13696,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 356.7522562557548,
+          "earnedDebt": 33.133831415163954,
+          "priorCommitment": 309.58024858483515,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 6.931295999999982
+        },
+        {
+          "at": 13708,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 365.1646304823655,
+          "earnedDebt": 41.22034341516393,
+          "priorCommitment": 308.4250325848352,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 8.471583999999977
+        },
+        {
+          "at": 13720,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 373.5261969483855,
+          "earnedDebt": 49.34352893897344,
+          "priorCommitment": 308.77343106102563,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 8.471583999999977
+        },
+        {
+          "at": 13732,
+          "ownerId": "citizen-55",
+          "ownerPosition": {
+            "x": -202,
+            "y": 0.6,
+            "z": -58.8
+          },
+          "cash": 382.29157933205244,
+          "earnedDebt": 58.58525693897341,
+          "priorCommitment": 308.0032870610256,
+          "operatingReserve": 6.666666666666667,
+          "addedCommitment": 3.0805759999999918
+        }
+      ]
+    }
+  },
+  "newMaterialsAllocated": {
+    "health": {
+      "quantity": 4.421864795686247,
+      "paid": 40.0
+    },
+    "education": {
+      "quantity": 4.485773534705813,
+      "paid": 40.0
+    },
+    "public-procurement": {
+      "quantity": 15.192593663515428,
+      "paid": 131.07662035774305
+    }
+  },
+  "physicalAccounts": {
+    "initialFood": 836.4210906218955,
+    "producedFood": 3232.7836679469765,
+    "meals": 3153,
+    "giftsApplied": 13,
+    "currentFood": 903.2047585688697,
+    "foodResidual": -2.2737367544323206e-12,
+    "initialMaterials": 0,
+    "producedMaterials": 25.895293717549915,
+    "procuredMaterials": 25.895293717549915,
+    "currentMaterials": 0,
+    "materialResidual": 0
+  },
+  "maximumResiduals": {
+    "cash": 4.190951585769653e-09,
+    "food": 3.183231456205249e-12,
+    "materials": 4.440892098500626e-16
+  },
+  "publicHealthSource": {
+    "id": "public-health:service-2:1",
+    "orderId": "service-2",
+    "patientId": "player",
+    "siteId": "civic-0-clinic",
+    "consumedAt": 13828,
+    "consumptionIndex": 1,
+    "quantity": 1,
+    "minutes": 20,
+    "floor": 0,
+    "pointId": "0:program:service",
+    "point": {
+      "x": -136,
+      "y": 0.6,
+      "z": -60
+    }
+  },
+  "hygieneBatch": {
+    "sourceKind": "public-health",
+    "id": "waste-1",
+    "siteId": "civic-0-clinic",
+    "floor": 0,
+    "pointId": "0:program:service",
+    "point": {
+      "x": -136,
+      "y": 0.6,
+      "z": -60
+    },
+    "patientId": "player",
+    "material": "used-clinical-material",
+    "hazard": "used-material",
+    "pathogenSource": null,
+    "generatedUnits": 1,
+    "contaminatedUnits": 1,
+    "reservedUnits": 0,
+    "sealedUnits": 0,
+    "cleaningResidualUnits": 0,
+    "containedUnits": 1,
+    "archivedProcessedUnits": 0,
+    "sourceReceipts": [
+      {
+        "kind": "public-health",
+        "sourceId": "public-health:service-2:1",
+        "orderId": "service-2",
+        "patientId": "player",
+        "completedAt": 13828,
+        "publicConsumedAtOrder": 1,
+        "quantity": 1
+      }
+    ],
+    "sourceArchive": {
+      "count": 0,
+      "firstOrderId": null,
+      "lastOrderId": null,
+      "firstAt": null,
+      "lastAt": null
+    },
+    "firstAt": 13828,
+    "lastAt": 13828
+  },
+  "continuation": {
+    "status": "PASS",
+    "parts": 44,
+    "fullAndPartitionFutureTicks": 24,
+    "everyOriginalFutureStepEqual": true,
+    "completeSHA256": "129bb28c031dbb957962e0f7e32b010420061b7124f3e141173b23337952e1e2",
+    "after24SHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+    "future": {
+      "parts": 44,
+      "ordinaryFutureTicks": 24,
+      "delta": 0.25,
+      "originalSpeed": 16,
+      "future": [
+        {
+          "tick": 1,
+          "sha256": "cae667e6fac80f987c946c210c42b85fb8b23662f0d6a912b056e91812a1f5c4"
+        },
+        {
+          "tick": 2,
+          "sha256": "951e39d677228172d2fdbf38afb1b1a1c00ef9bde84c22bebb235caf0a9a42e3"
+        },
+        {
+          "tick": 3,
+          "sha256": "73c81507dd3c7b2fc9befc74575db5a4b0f556163c1717677d804f1b5cd493b9"
+        },
+        {
+          "tick": 4,
+          "sha256": "f9d6011438f4bb414f4d837bd0e75c4943fcd3c51432a9bfd68ec8c974653123"
+        },
+        {
+          "tick": 5,
+          "sha256": "661c644c3893d071efbee4f5833fc1edd2e12d51d692093736a81b2e6642d909"
+        },
+        {
+          "tick": 6,
+          "sha256": "c18217f8510877f53630b1a03de3f3422298639cff65ec9f0f74273c59086dc9"
+        },
+        {
+          "tick": 7,
+          "sha256": "d40d8d20eeea0d3bcbcc4c57361a03d18d0131b9bb9003f307521c305fb843f2"
+        },
+        {
+          "tick": 8,
+          "sha256": "117dca57429f5f0cc0a6f9d40a31d4ed1d08e878b0eac615390908cfcc5ae305"
+        },
+        {
+          "tick": 9,
+          "sha256": "e0fda92710c4ce9ca277794298d89052357d2ddef5ed6c26cf05099d92f488d0"
+        },
+        {
+          "tick": 10,
+          "sha256": "862a676c457c5b90292f973d510bfa40e4a23eae32318289a50c95782beeaa9c"
+        },
+        {
+          "tick": 11,
+          "sha256": "6e1fb84b5639f8128c98444e7616e4dfa1152da0dd094a51b5fad45673651aec"
+        },
+        {
+          "tick": 12,
+          "sha256": "c8ffb4d6726b891247a87db65ba7298a5e675c7c0a4aba1200221ca9f92b12f6"
+        },
+        {
+          "tick": 13,
+          "sha256": "ddf3236645a682da404672bbc9ec0473c2ce2e0fc571b3f9f48e8018e46ab602"
+        },
+        {
+          "tick": 14,
+          "sha256": "0e220ec257e3e95eb270c7968836485b4d34149ee5ee28766c0b19da5e0e3596"
+        },
+        {
+          "tick": 15,
+          "sha256": "747c171fb7d70749dfe599f3a779002f4b963536ae7b7b32210ca7abb1d22d68"
+        },
+        {
+          "tick": 16,
+          "sha256": "b96a6273acccd34ae411bc825d85ad5568c6d3111ef3b7ae9b1ca362f2305727"
+        },
+        {
+          "tick": 17,
+          "sha256": "5cccac88fc5e5ede770557ae37db94094783e76f4e77a28bf3bfbddc80f437b3"
+        },
+        {
+          "tick": 18,
+          "sha256": "836735f90b1efd3ae46c291e6dbed07a6237d242ae133f7abd6a0ee82b7b9bc5"
+        },
+        {
+          "tick": 19,
+          "sha256": "975a1b3a2515d36fc54f3d2a9bac485ee74901832d1ce4100f91ba58568c7265"
+        },
+        {
+          "tick": 20,
+          "sha256": "d7a52069fc32ff812689d5372fc5ab16d87f2885a5ccd09ff7071e9143ec3456"
+        },
+        {
+          "tick": 21,
+          "sha256": "75762cbf6c5648cf3b0713f69032b848dbfd36a1afed0b195d7fcaed184065c0"
+        },
+        {
+          "tick": 22,
+          "sha256": "06d41c7e7eb930f78b1932123df291c28eb4aa945b9583acdb87557fc6a62cc5"
+        },
+        {
+          "tick": 23,
+          "sha256": "ae070fb25761850cdb086925761a439e48d07b27db40bbbc1d9d20e3be02a728"
+        },
+        {
+          "tick": 24,
+          "sha256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda"
+        }
+      ]
+    },
+    "actualDiskReadback": {
+      "status": "PASS",
+      "zeroSimulationSteps": 0,
+      "scope": "Pure actual completed source and actual future24 output partition files write/read/assemble exact; does not repeat or extend medical Simulation.",
+      "records": [
+        {
+          "filename": "complete-one-patient.save.json",
+          "fullSHA256": "129bb28c031dbb957962e0f7e32b010420061b7124f3e141173b23337952e1e2",
+          "parts": 44,
+          "files": [
+            {
+              "name": "part-000.json",
+              "bytes": 528003,
+              "sha256": "d94396fd81ce4d2d1402d6b0f750f6c6db15309d8e7b728f0e30f603477a92fb"
+            },
+            {
+              "name": "part-001.json",
+              "bytes": 3430,
+              "sha256": "6bedecc0b8121f84f26937c9069763e6b6a91401abde72c1bf52013e0b7c01aa"
+            },
+            {
+              "name": "part-002.json",
+              "bytes": 61951,
+              "sha256": "9d362f60325c9f3fe9a2f3d47198d17ac3bded82a48f468a12a8b45faf700b9d"
+            },
+            {
+              "name": "part-003.json",
+              "bytes": 2679,
+              "sha256": "f167c9e1b0733363cb05c0c2370008a3888b7a1b22d7644010c66df1a554f499"
+            },
+            {
+              "name": "part-004.json",
+              "bytes": 24426,
+              "sha256": "9d37d9175f1eccc5672e31bca7386978fdd932dd69d3eba2bae33794ccea9226"
+            },
+            {
+              "name": "part-005.json",
+              "bytes": 46312,
+              "sha256": "055b04d5c5a5b5d306f792f329787833e7791a701180370e63e082335b639aec"
+            },
+            {
+              "name": "part-006.json",
+              "bytes": 46198,
+              "sha256": "64f1b4ced5fc08ff27cf589d45d4676c3dfd5eadf3b0394fe9bb94cf6178dd91"
+            },
+            {
+              "name": "part-007.json",
+              "bytes": 69235,
+              "sha256": "77d2e24e7a788ff2af53d067ca955b095b751fb132deaf56910a247e8f6faf2d"
+            },
+            {
+              "name": "part-008.json",
+              "bytes": 38884,
+              "sha256": "8bd6b16b1d3ec061d2c27f5739eb7a2a3dda759dbe482157cd8d7a790704c8cf"
+            },
+            {
+              "name": "part-009.json",
+              "bytes": 35615,
+              "sha256": "bc6280e51eedbcb8ee49d989d01f4749c53fbb80a558facc69cf97dd7bdb5227"
+            },
+            {
+              "name": "part-010.json",
+              "bytes": 59383,
+              "sha256": "2533bede1e39a84833ba9bec97cb0aaa06ae559913dd3152188b695dfc07ade9"
+            },
+            {
+              "name": "part-011.json",
+              "bytes": 57049,
+              "sha256": "d12f64ccad6c9b1d9d22c850cd5f26a41bbd928e8dd09c7500c2442a4f3d66da"
+            },
+            {
+              "name": "part-012.json",
+              "bytes": 43711,
+              "sha256": "937a707e536550b31f5415d916a8589a967200d7f1f44c8d5aaa8462f5a9efdd"
+            },
+            {
+              "name": "part-013.json",
+              "bytes": 70283,
+              "sha256": "c719c0de98b974dc2c51b600374a51374d6ead03973ccd6d4a73e36749636db5"
+            },
+            {
+              "name": "part-014.json",
+              "bytes": 48615,
+              "sha256": "ea04c89dde796a85cd665f4179e7c760221816897f80291cfd9ddfbf39c1ec96"
+            },
+            {
+              "name": "part-015.json",
+              "bytes": 68138,
+              "sha256": "9e44f48a313197aae2aa350b5060eb3fc132bb1d918f43d44d40b2f5c16f8f60"
+            },
+            {
+              "name": "part-016.json",
+              "bytes": 45854,
+              "sha256": "2beeb1940832fd7318ff2b36662d10167497c24c97c81fcab9bceafdec1177fe"
+            },
+            {
+              "name": "part-017.json",
+              "bytes": 97291,
+              "sha256": "40181926eaf5796b6e35dd0083586001101c75bfbce4a18a22d8eb451c43b212"
+            },
+            {
+              "name": "part-018.json",
+              "bytes": 48412,
+              "sha256": "8dde60e2f4821c97f02363d89bbee23f759ef41617a179062f689c12c614125a"
+            },
+            {
+              "name": "part-019.json",
+              "bytes": 72859,
+              "sha256": "6512ac281d71fe2543430e78b82ec6b2821f11139977a22e2a3d2496c604c91d"
+            },
+            {
+              "name": "part-020.json",
+              "bytes": 46601,
+              "sha256": "a9920da567471c74ef30e9b8a2dd39436460791aa97a84bd35a604850bae5b1a"
+            },
+            {
+              "name": "part-021.json",
+              "bytes": 71494,
+              "sha256": "e02331ca75be83be9f778180e3089a42c63d0573d7034e018dd520ac6127bd2e"
+            },
+            {
+              "name": "part-022.json",
+              "bytes": 46432,
+              "sha256": "d0da6ddf4ba48d9a258d6a6001b19a934c9aecfebfd032b9ebdbff1f7604a106"
+            },
+            {
+              "name": "part-023.json",
+              "bytes": 72681,
+              "sha256": "b4dec14026c861315c526cb4d1400566da1e03c3ab54a60dc881f3f4c34c15c0"
+            },
+            {
+              "name": "part-024.json",
+              "bytes": 52824,
+              "sha256": "18c6abf961449cdf8300930a9a830812e4cbb98187cb92542910fc289922fd09"
+            },
+            {
+              "name": "part-025.json",
+              "bytes": 74392,
+              "sha256": "cde807c6420ab60b9c62b0a62150d5a0be33f3f048dd55eb4d74f44e1010ac8f"
+            },
+            {
+              "name": "part-026.json",
+              "bytes": 252267,
+              "sha256": "f5b07ab02965f6a4f785889b855aaca75d8e286c447f1694e060580588bbb203"
+            },
+            {
+              "name": "part-027.json",
+              "bytes": 263715,
+              "sha256": "04bb55f07ea06014c3df841abe03d7c06d6402ce92de6fb656db797387821621"
+            },
+            {
+              "name": "part-028.json",
+              "bytes": 258339,
+              "sha256": "7c038b21a6cfcf90474333592b653f6cdd39173e395bfc93553ba5375c8d0e86"
+            },
+            {
+              "name": "part-029.json",
+              "bytes": 258049,
+              "sha256": "28a135340999ebc1d07d23b803fc131bc6d3bea11815c38023deab161c7495ca"
+            },
+            {
+              "name": "part-030.json",
+              "bytes": 260393,
+              "sha256": "bd148fd19da6bfec28943cadcd605f7336955b27b11fd26cc256807c9696cef0"
+            },
+            {
+              "name": "part-031.json",
+              "bytes": 258659,
+              "sha256": "f69a866baee83e5f3b16ccfb0655611521a99bf28e57e11c3a6a3b90a73f2040"
+            },
+            {
+              "name": "part-032.json",
+              "bytes": 263712,
+              "sha256": "91fc256519ce2673bd92b96c71af289117a0b560808efc8f0f249e887a8dc7a4"
+            },
+            {
+              "name": "part-033.json",
+              "bytes": 265013,
+              "sha256": "6118a144df739fb6954817b47b8fe4c044d4af3fcae803a18686d55243b14b48"
+            },
+            {
+              "name": "part-034.json",
+              "bytes": 262501,
+              "sha256": "f897cbdae0f4daf58e6106423f284cd052b67c1ccb3ae852d2d9de931d2f8a0d"
+            },
+            {
+              "name": "part-035.json",
+              "bytes": 132302,
+              "sha256": "0ca033b34b417d636bc3894ab7f208a09e403d827c0a83d9863330fd55677f04"
+            },
+            {
+              "name": "part-036.json",
+              "bytes": 132463,
+              "sha256": "dc505777720bc2b757470c80f648f0ff942a31498d7eb5c73c414222a16ec148"
+            },
+            {
+              "name": "part-037.json",
+              "bytes": 48624,
+              "sha256": "4d5a9c2c42872073839880e895d36897a53e6ec615a27973cb4b18a396ea3a96"
+            },
+            {
+              "name": "part-038.json",
+              "bytes": 16583,
+              "sha256": "3f8fc6334d71e2b25d7892599c659ceee41bb969abb4b936a4a9e5e68585ef6a"
+            },
+            {
+              "name": "part-039.json",
+              "bytes": 18290,
+              "sha256": "7df527aefb171a755d0c385ebd13e4a07ed49c8c379e8188e4a7e94bf35d2e1c"
+            },
+            {
+              "name": "part-040.json",
+              "bytes": 132867,
+              "sha256": "e2d8aaea0fd9c48296367120d874d57a792b4b63b66bdb562c13882ae64c4633"
+            },
+            {
+              "name": "part-041.json",
+              "bytes": 132997,
+              "sha256": "03d91ea0b5d9922552db94d84b2e51bf045c1b5aabcc07fa981fdb0236113e11"
+            },
+            {
+              "name": "part-042.json",
+              "bytes": 5853,
+              "sha256": "8c522f13db432d5df5b8bd49faa7357994756a8ad1c9b9182d0997eda26fa307"
+            },
+            {
+              "name": "part-043.json",
+              "bytes": 132518,
+              "sha256": "b7616ee66bf070debd352cbec60da092d90f476116efef09745e73bc3799673a"
+            }
+          ],
+          "assembledReadbackSHA256": "129bb28c031dbb957962e0f7e32b010420061b7124f3e141173b23337952e1e2",
+          "exact": true
+        },
+        {
+          "filename": "complete-one-patient.after24.save.json",
+          "fullSHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+          "parts": 44,
+          "files": [
+            {
+              "name": "part-000.json",
+              "bytes": 560362,
+              "sha256": "a697ac2e54f07e127e90585bddeb3dc21ce70078c39f63fe0515fea9a47e73d4"
+            },
+            {
+              "name": "part-001.json",
+              "bytes": 3429,
+              "sha256": "bb2251ab6aafdde9f126d0ab7208c8877f57bd610b9d2bbd0fa5fcc343b4235a"
+            },
+            {
+              "name": "part-002.json",
+              "bytes": 66262,
+              "sha256": "dfef4a8e3e186dd76843aa90fcf8749673991f3afaa7a3db58b051032373c947"
+            },
+            {
+              "name": "part-003.json",
+              "bytes": 32461,
+              "sha256": "034a368f7f7f57b8462af2b57af56776a7b3fbfb8d34e156b6f525ddd1207235"
+            },
+            {
+              "name": "part-004.json",
+              "bytes": 8004,
+              "sha256": "a1a4a2c3c1bc4220ada0f14e4b5947007c120d711ae56042a02c68240f6175c9"
+            },
+            {
+              "name": "part-005.json",
+              "bytes": 103175,
+              "sha256": "f012611cc9b968a45f88af0ab8c33ce4c6f1f6d1ad17947933855332a3689ba4"
+            },
+            {
+              "name": "part-006.json",
+              "bytes": 670,
+              "sha256": "a32fd40a8e8a5d5194c48473e762d8ee66f79a0d6e9310c47e4c841cd0d3104d"
+            },
+            {
+              "name": "part-007.json",
+              "bytes": 109885,
+              "sha256": "79c3b1c2a806f33ec2ebf20d679ab22fa2fcc4d11db3ff303ecee09309e5e51f"
+            },
+            {
+              "name": "part-008.json",
+              "bytes": 1953,
+              "sha256": "dc4209c8a3e92fab4371d87a04862536cd398424fe7a5d79a70ca981a920254c"
+            },
+            {
+              "name": "part-009.json",
+              "bytes": 48804,
+              "sha256": "d70a9032076cfeaff9249d5be617186f2b26191416603a22b60edd6578b23e8e"
+            },
+            {
+              "name": "part-010.json",
+              "bytes": 471,
+              "sha256": "39a14315c59e9346dcd350cccfb0b4984dcb500b884e5abfbbd0fbe5d1e2433c"
+            },
+            {
+              "name": "part-011.json",
+              "bytes": 114175,
+              "sha256": "cebae1622e2e3eafa0e99793409ba800be5064585953d69c0acaabd41783b911"
+            },
+            {
+              "name": "part-012.json",
+              "bytes": 670,
+              "sha256": "5cb6c0e8f44150a417b19ed6268281885f352ec106bf76a7c7e9e706e38cf756"
+            },
+            {
+              "name": "part-013.json",
+              "bytes": 97273,
+              "sha256": "9d890296717c15e66ce9cdc4c2efae7f2d79fac8f3063d0a3ea2e626824304bd"
+            },
+            {
+              "name": "part-014.json",
+              "bytes": 274,
+              "sha256": "407bfe020bb6f1a76f126204f475a3e4624334802e5e93bdb74a2019a870b23f"
+            },
+            {
+              "name": "part-015.json",
+              "bytes": 112721,
+              "sha256": "bd57e0a2795995115d1cfe3d479e8eaa171165681012347948044026f4a59b4f"
+            },
+            {
+              "name": "part-016.json",
+              "bytes": 1070,
+              "sha256": "30c397e2397e57462f118e5269d7a0a45fe0e79c4328109e143a1404eb9fa402"
+            },
+            {
+              "name": "part-017.json",
+              "bytes": 85731,
+              "sha256": "7aaa1c6807c96fbb9e1329572694246d7105c1c6552de6f62e5e1e08f59cbe89"
+            },
+            {
+              "name": "part-018.json",
+              "bytes": 1066,
+              "sha256": "fad022f02c83c91904c462b6c28e7e17daf8bdca4d5839c5886ee68ebe397105"
+            },
+            {
+              "name": "part-019.json",
+              "bytes": 102469,
+              "sha256": "010c7e8b073037b1aa3029d9a9b7047dd4264d3f61152594e27e4af06eda4979"
+            },
+            {
+              "name": "part-020.json",
+              "bytes": 3035,
+              "sha256": "f5c78c651ea234a1d4d8e8fef29c735b1611fe3b2142eacaa93d652bf9f4144a"
+            },
+            {
+              "name": "part-021.json",
+              "bytes": 96225,
+              "sha256": "36ab51513395945643a10e1b5267b1ae59a01ad8e9c9f33adaf231ea572ade1a"
+            },
+            {
+              "name": "part-022.json",
+              "bytes": 4359,
+              "sha256": "041bf6e605ff4ce1d2627511697a9abfa80c30c4cdb84bdaf94f0fd7064219d5"
+            },
+            {
+              "name": "part-023.json",
+              "bytes": 105657,
+              "sha256": "aee617e001211b98740c04d87ff948a07910279103766a4ebd9d779f72ba0728"
+            },
+            {
+              "name": "part-024.json",
+              "bytes": 272,
+              "sha256": "1ec85ebd284ff72aa5e7e3d135190842f0ac80660374079828c6b35118610860"
+            },
+            {
+              "name": "part-025.json",
+              "bytes": 112280,
+              "sha256": "6345e0ff040e4afd3122dfcc8b5ba284964bee8584ab1e04c362b225038246c3"
+            },
+            {
+              "name": "part-026.json",
+              "bytes": 252267,
+              "sha256": "f5b07ab02965f6a4f785889b855aaca75d8e286c447f1694e060580588bbb203"
+            },
+            {
+              "name": "part-027.json",
+              "bytes": 263715,
+              "sha256": "04bb55f07ea06014c3df841abe03d7c06d6402ce92de6fb656db797387821621"
+            },
+            {
+              "name": "part-028.json",
+              "bytes": 258339,
+              "sha256": "7c038b21a6cfcf90474333592b653f6cdd39173e395bfc93553ba5375c8d0e86"
+            },
+            {
+              "name": "part-029.json",
+              "bytes": 258049,
+              "sha256": "28a135340999ebc1d07d23b803fc131bc6d3bea11815c38023deab161c7495ca"
+            },
+            {
+              "name": "part-030.json",
+              "bytes": 260393,
+              "sha256": "bd148fd19da6bfec28943cadcd605f7336955b27b11fd26cc256807c9696cef0"
+            },
+            {
+              "name": "part-031.json",
+              "bytes": 258659,
+              "sha256": "f69a866baee83e5f3b16ccfb0655611521a99bf28e57e11c3a6a3b90a73f2040"
+            },
+            {
+              "name": "part-032.json",
+              "bytes": 263712,
+              "sha256": "91fc256519ce2673bd92b96c71af289117a0b560808efc8f0f249e887a8dc7a4"
+            },
+            {
+              "name": "part-033.json",
+              "bytes": 265013,
+              "sha256": "6118a144df739fb6954817b47b8fe4c044d4af3fcae803a18686d55243b14b48"
+            },
+            {
+              "name": "part-034.json",
+              "bytes": 262501,
+              "sha256": "f897cbdae0f4daf58e6106423f284cd052b67c1ccb3ae852d2d9de931d2f8a0d"
+            },
+            {
+              "name": "part-035.json",
+              "bytes": 132302,
+              "sha256": "0ca033b34b417d636bc3894ab7f208a09e403d827c0a83d9863330fd55677f04"
+            },
+            {
+              "name": "part-036.json",
+              "bytes": 132463,
+              "sha256": "dc505777720bc2b757470c80f648f0ff942a31498d7eb5c73c414222a16ec148"
+            },
+            {
+              "name": "part-037.json",
+              "bytes": 48624,
+              "sha256": "4d5a9c2c42872073839880e895d36897a53e6ec615a27973cb4b18a396ea3a96"
+            },
+            {
+              "name": "part-038.json",
+              "bytes": 16583,
+              "sha256": "3f8fc6334d71e2b25d7892599c659ceee41bb969abb4b936a4a9e5e68585ef6a"
+            },
+            {
+              "name": "part-039.json",
+              "bytes": 18290,
+              "sha256": "7df527aefb171a755d0c385ebd13e4a07ed49c8c379e8188e4a7e94bf35d2e1c"
+            },
+            {
+              "name": "part-040.json",
+              "bytes": 132867,
+              "sha256": "e2d8aaea0fd9c48296367120d874d57a792b4b63b66bdb562c13882ae64c4633"
+            },
+            {
+              "name": "part-041.json",
+              "bytes": 132997,
+              "sha256": "03d91ea0b5d9922552db94d84b2e51bf045c1b5aabcc07fa981fdb0236113e11"
+            },
+            {
+              "name": "part-042.json",
+              "bytes": 5853,
+              "sha256": "8c522f13db432d5df5b8bd49faa7357994756a8ad1c9b9182d0997eda26fa307"
+            },
+            {
+              "name": "part-043.json",
+              "bytes": 132518,
+              "sha256": "b7616ee66bf070debd352cbec60da092d90f476116efef09745e73bc3799673a"
+            }
+          ],
+          "assembledReadbackSHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+          "exact": true
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "ONEplayer served; originalhealthtarget6 remains incomplete",
+    "finite gift intervention, not autonomousNPC healthcare or defaultnewproduct result",
+    "11 disconnected originalNPC roadcomponents unchanged",
+    "wastebatch1 is contaminated storage, not disinfected or disposed",
+    "no normalFPS/Mac/GPU proof",
+    "no sharedsource change/commit/push/Library write"
+  ],
+  "remainingCandidateHost512QuarterScope": "OriginalROOT15 PAUSED_NOT_RUN unchanged",
+  "worldAndHostScope": {
+    "kind": "original customized civic world inherited byteexact from ROOT15",
+    "originalPath": "/workspace/yunshan-work/ROOT15-public-health-player-20261004-01/origins/world.json",
+    "buildings": 47,
+    "nodes": 47,
+    "edges": 36,
+    "npcCount": 616,
+    "roadComponents": 11,
+    "clinicComponent": 0,
+    "localHomeComponentNpcCount": 56,
+    "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+    "copiedPath": "/workspace/yunshan-work/ROOT16-medical-cause-20261005-01/inherited-originals/origins/world.json",
+    "host": "controlled headless original PlayerController / original W mouse F / original main frame clamp",
+    "stairScope": "Original KeyF/useStairs physical shaft and ACL used twice; no new browser session or continuous walking stair proof",
+    "nativeOriginRestore": "exact persisted player body restored to Controller once; subsequent position publication only from Controller walkingPosition"
+  },
+  "newMaterialsAllocatedScope": {
+    "newMaterialsAllocated": "main scope trace-events ends at successful full clock13984; quantity24.10023199390749",
+    "physicalAccounts": "main plus original24 future quarterticks ends atclock14080; produced/procured25.895293717549915",
+    "future24AdditionalProductionAndProcurement": 1.7950617236424264
+  },
+  "remainingCapacityStatic": {
+    "path": "REMAINING-CAPACITY-STATIC.json",
+    "sha256": "b758a34472d74b3939dfca04727f51bfdd2cef6f7b9a9c8dbec04e9f8cc38893",
+    "status": "READ_ONLY_REMAINING_FIVE_NOT_SERVED",
+    "simulationConstructionCount": 0,
+    "simulationStepCount": 0,
+    "inputSHA256": "92d706cda7ef5ef42e50dee98a30dd8574e6b991fea505fd31bed6838688edda",
+    "notServed": 5,
+    "held": 3.421864795686247,
+    "missing": 1.578135204313753,
+    "patientCounts": {
+      "globalHealthBelow65": 3,
+      "localHealthBelow65": 3,
+      "localNaturalOfferNeedsEligible": 2,
+      "localBelow65ActualNeedsEligible": 1,
+      "localBelow95ActualNeedsEligibleBeforePresenceAndStaffExclusion": 19,
+      "localNeeds35Fatigue25": 23
+    },
+    "currentPublicAvailable": 6954.232477667847,
+    "V2HealthRequest": "service-2-supplement-1 cap14 unapproved; two local actual current paid council signatures required",
+    "nextActualMissingEvidence": [
+      "True finite food and lawful contact/eat for doctors, two local council members and workshop/farm owner; original13gift intervention does not certify tomorrow supply.",
+      "Actual current-day onsite private payroll approval and finite material production; workshopstock0 and local food .293 units are presently insufficient.",
+      "True current same-frame paid V2 council approval cap14, then at least1.578135204313753 additional finite materials without changing originalcap40/target6.",
+      "Actual eligible NPC future decision, legal route and clinic service station arrival; only citizen0 passes both low-health/needs today, not five observed patients.",
+      "Nextday actual funded doctor arrival and patient overlap20min each; signed future480 alone is not attendance or food.",
+      "Outstanding contaminated batch requires separate actual20cash/one whole cleaning material/10doctor minutes to sanitize; no completed sanitation here."
+    ]
+  },
+  "remainingRouteStatic": {
+    "path": "remaining-route-static.json",
+    "sha256": "159e4f32048f87dacd5c6c2049b5fcb14ac03a228bd89eff142d77bb55e1a610",
+    "simulationConstructed": false,
+    "simulationSteps": 0,
+    "actualFutureArrival": "NOT_OBSERVED",
+    "routes": [
+      {
+        "id": "citizen-0",
+        "walkingDistanceMeters": 334.0,
+        "completeStaticCandidateRouteMeters": 353.0,
+        "actualFutureArrival": "NOT_OBSERVED"
+      },
+      {
+        "id": "citizen-418",
+        "walkingDistanceMeters": 280.9415938179546,
+        "completeStaticCandidateRouteMeters": 299.9415938179546,
+        "actualFutureArrival": "NOT_OBSERVED"
+      },
+      {
+        "id": "citizen-495",
+        "walkingDistanceMeters": 334.0,
+        "completeStaticCandidateRouteMeters": 353.0,
+        "actualFutureArrival": "NOT_OBSERVED"
+      }
+    ]
+  },
+  "fullClosureBytes": 2338241,
+  "fullClosureSHA256": "44d2242c4fabbe61704ef6d3c6bcda99efb9a4c38cf39276c2391eb620527413",
+  "fullClosureLocation": "Full immutable evidence ZIP/ROOT16-medical-cause-20261005-01/CLOSURE-RECEIPT.json"
+}

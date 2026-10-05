@@ -1,0 +1,41 @@
+{
+  "startedAt": "2026-10-05T00:10:42.685908+00:00",
+  "endedAt": "2026-10-05T00:13:26.394881+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/continue-food-all229.mts",
+    "--source",
+    "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/baseline-source",
+    "--out",
+    "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/all229-continuation01",
+    "--ticks",
+    "256",
+    "--start-save",
+    "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/baseline-observe01/terminal.save.json",
+    "--prior-receipts",
+    "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/outputs/baseline-observe01/counter-receipts.jsonl"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 322,
+  "inputsStable": true,
+  "rawSHA256": "11f70675d4d68da2f7eea29c1f7f36383e62bdee7e462254c67020e58233a5f1",
+  "ownedPid": 129642,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 129650,
+      "state": "Z",
+      "parent": 1,
+      "group": 129642,
+      "session": 129642,
+      "startTicks": 8986745
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}
