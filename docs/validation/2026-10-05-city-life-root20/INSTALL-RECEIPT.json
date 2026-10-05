@@ -1,0 +1,37 @@
+{
+  "status": "INSTALLED_EXACT_TESTED_FINAL_382",
+  "writtenUTC": "2026-10-05T11:43:32.801559+00:00",
+  "modified": [
+    "src/renderer.ts",
+    "src/rendering/architecture-bodies.ts",
+    "src/rendering/architecture-detail.ts",
+    "src/simulation.ts",
+    "src/simulation/clinical.ts",
+    "src/simulation/power.ts",
+    "src/simulation/service-material-scheduling.ts"
+  ],
+  "added": [
+    "src/rendering/building-light-supply.ts",
+    "src/rendering/city-lighting-profile.ts",
+    "src/rendering/detail-surface-finishes.ts",
+    "tests/building-light-supply.test.ts",
+    "tests/clinical-native-authority.test.ts",
+    "tests/fixtures/resident-public-rest-world291.json",
+    "tests/power-current-wage-source.test.ts",
+    "tests/public-service-budget-quote-wake.test.ts",
+    "tests/reference-city-finishes.test.ts",
+    "tests/resident-public-rest-routing.test.ts"
+  ],
+  "deleted": [],
+  "old242TestsExact": true,
+  "allFunctionalBytesExactFinalPrivateSource": true,
+  "performanceCandidateExcluded": true,
+  "sourceGraph": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+  "gitDiffCheck": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "mainAndBranchRefsUnchanged": true,
+  "scope": "Owned17 functional paths only; memo append history retained. No push/merge/deploy occurred here."
+}

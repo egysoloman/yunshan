@@ -44,6 +44,35 @@ export function programLinenTemplate(): ArchitectureTemplate {
 }
 export const PROGRAM_WALL_FINISH_PANEL_BUDGET = 128;
 export interface ProgramWallFinish { rect: Rect; bottom: number; top: number; material: 'wall' | 'wood' }
+export const CIVIC_WALL_FINISH_PANEL_BUDGET = 64;
+export const CIVIC_WALL_FINISH_MAX_BAYS = 6;
+
+/** A large academy/public-hall plaster panel has real human-scale timber
+ * bays. Each piece partitions its original opaque solid, including the lower
+ * rail and header: no facade overlay, fictitious post, opening or collision is
+ * introduced. At most six bays and nine timber pieces belong to one panel. */
+export function partitionCivicWallFinish(panel: WallPanel, bottom: number, top: number): ProgramWallFinish[] {
+  const r = panel.rect, alongX = r.x1 - r.x0 >= r.z1 - r.z0;
+  const lo = alongX ? r.x0 : r.z0, hi = alongX ? r.x1 : r.z1, span = hi - lo;
+  if (panel.kind !== 'solid') return [];
+  if (span < 1.2 - 1e-7 || top - bottom < 1 - 1e-7) return [{ rect: r, bottom, top, material: 'wall' }];
+  const slice = (from: number, to: number): Rect => alongX ? { ...r, x0: from, x1: to } : { ...r, z0: from, z1: to };
+  const lower = bottom + .2, upper = top - .2;
+  const result: ProgramWallFinish[] = [
+    { rect: r, bottom, top: lower, material: 'wood' },
+    { rect: r, bottom: upper, top, material: 'wood' },
+  ];
+  const bays = Math.min(CIVIC_WALL_FINISH_MAX_BAYS, Math.max(1, Math.ceil(span / 3.2)));
+  let start = lo;
+  for (let i = 0; i <= bays; i++) {
+    const centre = i === 0 ? lo + .1 : i === bays ? hi - .1 : lo + Math.round((span * i / bays) * 5) / 5;
+    const from = centre - .1, to = centre + .1;
+    if (from > start + 1e-7) result.push({ rect: slice(start, from), bottom: lower, top: upper, material: 'wall' });
+    result.push({ rect: slice(from, to), bottom: lower, top: upper, material: 'wood' });
+    start = to;
+  }
+  return result;
+}
 
 /** Material boundaries divide the original opaque wall, never cover a window
  * or add a post outside that wall. All four pieces share its original solid. */
@@ -98,7 +127,9 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
   const body = getBuildingBody(building); if (!body) return null;
   const parts: ProgramArchitecturePart[] = [];
   const commercial = building.commercialGeometryRevision === 1;
-  const timberFinish = building.kind === 'home' || building.kind === 'market'; let finishedPanels = 0, curtainWindows = 0;
+  const timberFinish = building.kind === 'home' || building.kind === 'market';
+  const civicFinish = !commercial && (building.kind === 'school' || building.kind === 'hall' || building.kind === 'police');
+  let finishedPanels = 0, civicFinishedPanels = 0, curtainWindows = 0;
   // A shared material hierarchy follows actual uses: warm lime plaster and
   // timber, neutral mineral plinths, dark jade tiles and cool modern alloy.
   // Seed variation stays within a use's family; it creates no new city identity.
@@ -148,9 +179,11 @@ export function buildProgramArchitecture(building: Building, lod: 'near' | 'far'
           if (panel.bottom < skirt) add('stone', panel.bottom, skirt, timberFinish && plan.floor >= 0 ? '#8f9287' : '#939487', 'wall');
           const low = Math.max(panel.bottom, skirt);
           if (panel.top > low) {
-            const finish = timberFinish && plan.floor >= 0 && finishedPanels < PROGRAM_WALL_FINISH_PANEL_BUDGET ? partitionProgramWallFinish(panel, low, panel.top) : null;
+            const civic = civicFinish && plan.floor >= 0 && civicFinishedPanels < CIVIC_WALL_FINISH_PANEL_BUDGET;
+            const finish = timberFinish && plan.floor >= 0 && finishedPanels < PROGRAM_WALL_FINISH_PANEL_BUDGET ? partitionProgramWallFinish(panel, low, panel.top)
+              : civic ? partitionCivicWallFinish(panel, low, panel.top) : null;
             if (finish && finish.length > 1) {
-              finishedPanels++;
+              if (civic) civicFinishedPanels++; else finishedPanels++;
               for (const piece of finish) {
                 const q = piece.rect;
                 box(piece.material, (q.x0 + q.x1) / 2, plan.y + (piece.bottom + piece.top) / 2, (q.z0 + q.z1) / 2,

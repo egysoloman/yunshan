@@ -14,6 +14,8 @@ import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
+import { cityShadowProfile } from './rendering/city-lighting-profile';
+import { buildingLightSupplyRatio } from './rendering/building-light-supply';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
@@ -156,12 +158,14 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.02;
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
     this.sun.castShadow = true;
-    this.sun.shadow.mapSize.set(512, 512);
-    Object.assign(this.sun.shadow.camera, { left: -100, right: 100, top: 100, bottom: -100, near: 10, far: 7000 });
-    this.sun.shadow.bias = -.0003; this.sun.shadow.normalBias = .35;
+    const shadow = cityShadowProfile(this.quality);
+    this.sun.shadow.mapSize.set(shadow.mapSize, shadow.mapSize);
+    Object.assign(this.sun.shadow.camera, { left: -shadow.halfSpan, right: shadow.halfSpan, top: shadow.halfSpan, bottom: -shadow.halfSpan, near: 10, far: 7000 });
+    this.sun.shadow.bias = shadow.bias; this.sun.shadow.normalBias = shadow.normalBias;
+    this.sun.shadow.camera.updateProjectionMatrix();
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.domElement.setAttribute('aria-label', '云山巨城实时三维世界');
     this.container.appendChild(this.renderer.domElement);
@@ -958,7 +962,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const material of this.landscape.water) if (material.uniforms.light) material.uniforms.light.value = daylight;
     this.sun.position.set(Math.cos(angle) * 2500, altitude * 2500, altitude * 1400); this.moon.position.copy(this.sun.position).multiplyScalar(-1);
     this.sun.intensity = daylight * 2.9; this.moon.intensity = (1 - daylight) * .72; this.fill.intensity = .68 + daylight * .45;
-    this.fill.color.set('#89aec3').lerp(new THREE.Color('#bed5dd'), daylight); this.fill.groundColor.set('#405953').lerp(new THREE.Color('#7e8c7b'), daylight);
+    this.fill.color.set('#89aec3').lerp(new THREE.Color('#bed5dd'), daylight); this.fill.groundColor.set('#405953').lerp(new THREE.Color('#938d7f'), daylight);
     // A shadow-free low-angle bounce approximation lights actual opaque soffits
     // and bridge undersides. It follows daylight, adds no hidden geometry, and
     // leaves sun shadows and the original road/roof solids intact.
@@ -989,9 +993,11 @@ export class CityRenderer implements CityRendererAPI {
     this.architectureDetail.group.traverse(object => { if (object instanceof THREE.Mesh) { object.castShadow = true; object.receiveShadow = true; } });
     const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * 2) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
-    this.architectureDetail.setLighting(daylight, state.energy / 100);
+    const buildingSupply = (buildingId: string) => buildingLightSupplyRatio(this.world, state, buildingId);
+    this.architectureDetail.setLighting(daylight, state.energy / 100, buildingSupply);
     const room = this.insideId ? this.world.buildings.find(b => b.id === this.insideId) : undefined;
-    const roomLights = room ? getInteriorLightConfigurations(room, this.insideFloor, this.camera.position, daylight, state.energy / 100) : [];
+    const roomLights = room ? getInteriorLightConfigurations(room, this.insideFloor, this.camera.position, daylight, buildingSupply(room.id))
+      : this.architectureDetail.getExteriorLightConfigurations(this.camera.position, daylight, buildingSupply, this.interiorLights.length);
     for (let i = 0; i < this.interiorLights.length; i++) {
       const light = this.interiorLights[i], configuration = roomLights[i];
       light.visible = !!configuration && configuration.intensity > 0;
@@ -1055,7 +1061,15 @@ export class CityRenderer implements CityRendererAPI {
     this.renderer.render(this.scene, this.camera);
   }
   resize() { const width = Math.max(1, this.container.clientWidth), height = Math.max(1, this.container.clientHeight); this.camera.aspect = width / height; this.camera.updateProjectionMatrix(); const base = this.quality === 'high' ? 1.8 : this.quality === 'low' ? 1 : 1.35; this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, base) * this.resolutionScale); this.renderer.setSize(width, height); }
-  setQuality(quality: Quality) { this.quality = quality; this.resolutionScale = 1; this.landscape.vegetation.visible = quality !== 'low'; this.resize(); }
+  setQuality(quality: Quality) {
+    this.quality = quality; this.resolutionScale = 1; this.landscape.vegetation.visible = quality !== 'low';
+    const shadow = cityShadowProfile(quality);
+    if (this.sun.shadow.mapSize.x !== shadow.mapSize) { this.sun.shadow.map?.dispose(); this.sun.shadow.map = null; }
+    this.sun.shadow.mapSize.set(shadow.mapSize, shadow.mapSize);
+    Object.assign(this.sun.shadow.camera, { left: -shadow.halfSpan, right: shadow.halfSpan, top: shadow.halfSpan, bottom: -shadow.halfSpan });
+    this.sun.shadow.camera.updateProjectionMatrix(); this.sun.shadow.bias = shadow.bias; this.sun.shadow.normalBias = shadow.normalBias; this.shadowAt = -Infinity;
+    this.resize();
+  }
   setRenderDistance(distance: number) { this.distance = THREE.MathUtils.clamp(distance, 800, 6000); this.camera.far = Math.max(15000, this.distance * 1.6); this.camera.updateProjectionMatrix(); }
   setDynamicResolution(enabled: boolean) { this.dynamicResolution = enabled; if (!enabled) { this.resolutionScale = 1; this.resize(); } }
   dispose() {
@@ -1066,6 +1080,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
+    this.sun?.shadow.dispose();
     this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using

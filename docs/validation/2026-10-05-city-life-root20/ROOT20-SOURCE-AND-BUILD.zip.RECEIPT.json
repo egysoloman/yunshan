@@ -1,0 +1,1577 @@
+{
+  "status": "ALL_MEMBERS_EXACT",
+  "writtenUTC": "2026-10-05T11:48:49.312641+00:00",
+  "zip": "ROOT20-SOURCE-AND-BUILD.zip",
+  "bytes": 14663156,
+  "sha256": "a95da11238969f8ffc0db012484be15024a7cca59e6caacab3b808e28bb3e87f",
+  "functionalSourceCount": 382,
+  "sourceGraph": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+  "members": {
+    "inputs/PRIMARY-1112.save.json": {
+      "sha256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83",
+      "bytes": 3459308
+    },
+    "production-dist382/assets/index-B85IDQEK.js": {
+      "sha256": "d2731165ac21cff77b9e1ef717e42c3a22a32bb4febbfa9fd94d7a5e868bdda6",
+      "bytes": 1334710
+    },
+    "production-dist382/assets/index-B85IDQEK.js.map": {
+      "sha256": "3cd57ad43dda7630c9f9c170a073abe946bc1130f9636c3887274d865fe6dfa8",
+      "bytes": 4053198
+    },
+    "production-dist382/assets/index-DcKlDqDV.css": {
+      "sha256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "bytes": 31135
+    },
+    "production-dist382/assets/three-BvBj6Fe1.js": {
+      "sha256": "7a8d1dacdc0669b679aa908f5cdc2f0c94dd8e06f224604204551a23759eb867",
+      "bytes": 502468
+    },
+    "production-dist382/assets/three-BvBj6Fe1.js.map": {
+      "sha256": "a28a6bdba3bac4b157644de7a79e5fb737dfdc1b0ad30131663c2a355309d937",
+      "bytes": 2719401
+    },
+    "production-dist382/favicon.svg": {
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "bytes": 279
+    },
+    "production-dist382/index.html": {
+      "sha256": "4904d4a6d014d5ad6d03ed451429ad1a0990c2144607aa0b38b1dfadc0c38a55",
+      "bytes": 736
+    },
+    "source382/adapters/rpg-maker/README.md": {
+      "sha256": "c66fc77ed322285bc6ee935a0419911ea1b1db264202717b7297707dc1720575",
+      "bytes": 10002
+    },
+    "source382/adapters/rpg-maker/WORKER-README.md": {
+      "sha256": "b63d503aef27c2780c370f252911c09f8062cb9441766ec0ed44699180b730c7",
+      "bytes": 9055
+    },
+    "source382/adapters/rpg-maker/bridge.test.ts": {
+      "sha256": "08e8f1300930f5ec988312b59404c56d0e7b871ea846dfce3bc63d5ed29bcef0",
+      "bytes": 20342
+    },
+    "source382/adapters/rpg-maker/bridge.ts": {
+      "sha256": "3e6bae1f73509014660c4d7edb593c954fa7d46ea8e79b60ec9ffe148b2d1ff8",
+      "bytes": 15833
+    },
+    "source382/adapters/rpg-maker/browser/YunshanCore.js": {
+      "sha256": "b376c8480b707ef51f109e52b3c2469e41e6d132e217f080423df51b16cee2db",
+      "bytes": 1107024
+    },
+    "source382/adapters/rpg-maker/browser/build-receipt.json": {
+      "sha256": "da3c1e91f10998319d1eb6d1309f697ef6cc6c0b1f083cffd3681662edf8c866",
+      "bytes": 774
+    },
+    "source382/adapters/rpg-maker/browser/bundle-metafile.json": {
+      "sha256": "d10d180202b93da0a5ba966d3533df8bcafb86e9c48c1b1c5cc148fe8aba5c92",
+      "bytes": 24120
+    },
+    "source382/adapters/rpg-maker/browser/contract.json": {
+      "sha256": "8a2f04942d8deda00eb2a2f5bdf185ed035d94825aeedabd93e9e449da478310",
+      "bytes": 3869
+    },
+    "source382/adapters/rpg-maker/browser/initial-core.save.json": {
+      "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+      "bytes": 695178
+    },
+    "source382/adapters/rpg-maker/browser/world-current-v4.json": {
+      "sha256": "a054d6592de8383222caa5174a726cdbce25fbef36fbb2456ee3bb84c667d1e8",
+      "bytes": 1730848
+    },
+    "source382/adapters/rpg-maker/build.mjs": {
+      "sha256": "99aa10e3f8fd167091a716b3a95d6f96da7de114d406e33f835d2a523a38f2d6",
+      "bytes": 4294
+    },
+    "source382/adapters/rpg-maker/client.js": {
+      "sha256": "82ecf431da4e7ef95af36ea200e7f6503228501f62e96a433a0618ce0806415c",
+      "bytes": 10864
+    },
+    "source382/adapters/rpg-maker/core-source-manifest.json": {
+      "sha256": "d6adb60fa49c33011b4de7d0f8b812aa16a6d149d37c533a2c56f8babcfb3aad",
+      "bytes": 4995
+    },
+    "source382/adapters/rpg-maker/headless-walker.ts": {
+      "sha256": "c40553f2489fb19ce30b323c330d386264301451e9287f1b2dc22f8d51b52414",
+      "bytes": 18809
+    },
+    "source382/adapters/rpg-maker/tsconfig.json": {
+      "sha256": "05b7e0178d7ba7fe52e91ccea11a7249753bbaf249391609581cccd4b1d90fa8",
+      "bytes": 118
+    },
+    "source382/adapters/rpg-maker/walker-provenance.md": {
+      "sha256": "5520b08e64d9f0cc2c12a4a823ad90d18d12c6f585c6c8ddd249d03dded7cd44",
+      "bytes": 7382
+    },
+    "source382/adapters/rpg-maker/walker.test.ts": {
+      "sha256": "deb9abf7704fc32a7c516ba99eef736ddcd7f37563bdec127cb77ffcd7465fbb",
+      "bytes": 24008
+    },
+    "source382/adapters/rpg-maker/worker-entry.js": {
+      "sha256": "6ce867661761b0bc6dd1812abb2e44c85d9f25c44d616630d47e824a904a80b1",
+      "bytes": 6554
+    },
+    "source382/adapters/rpg-maker/worker-protocol.test.mjs": {
+      "sha256": "4cd6353646a79b007c6fc6b802ed8640a58431e5205448fd5f2b172b766536ed",
+      "bytes": 16253
+    },
+    "source382/adapters/rpg-maker/worker-thread-host.mjs": {
+      "sha256": "4b0d4798a1b8766cce0f33db6ace763429830e938357788873a377dd669c09f3",
+      "bytes": 1700
+    },
+    "source382/index.html": {
+      "sha256": "03a999c93a5f0b2de82d18f7e3275523cdd9b57a9e3284b8ed163bd16ef627e4",
+      "bytes": 561
+    },
+    "source382/package-lock.json": {
+      "sha256": "94f608721953c4fdb92e5d9fef9de536056401389494ef5b74aaabe654c356f5",
+      "bytes": 40288
+    },
+    "source382/package.json": {
+      "sha256": "5c354ed4cc632ced189e9dd93f40e29c03a7725c136d955d31a27c50fafc5c57",
+      "bytes": 879
+    },
+    "source382/public/favicon.svg": {
+      "sha256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "bytes": 279
+    },
+    "source382/scripts/benchmark.ts": {
+      "sha256": "c19f04917144a0cd21a9db431f8212e5d005b431b55030940b65dadb9144421c",
+      "bytes": 5304
+    },
+    "source382/scripts/browser-test.mjs": {
+      "sha256": "e5e09812badada0731f289dc2d9e717c9ad7bb25b208729fd535dd2b2232d082",
+      "bytes": 32618
+    },
+    "source382/scripts/budget-services-actual.ts": {
+      "sha256": "c83dff603e8f3e3f5647e7dd89438f90808031fb88c647fd751476bad29b2cc8",
+      "bytes": 13231
+    },
+    "source382/scripts/economy-audit.ts": {
+      "sha256": "62a22947659542eacd53c66a51b133bf1b681f30d368466a11c07dfd0a82a283",
+      "bytes": 34835
+    },
+    "source382/scripts/economy-observations.ts": {
+      "sha256": "eb4a961485418537d02709fd8538b55857740e7317373af9061e223a305bf026",
+      "bytes": 7652
+    },
+    "source382/scripts/food-access-audit.ts": {
+      "sha256": "3e4a18a8d3ef4a7c16156509c157e6c45018e9526599f9599ea67c9d1af65a28",
+      "bytes": 6916
+    },
+    "source382/scripts/layout-browser-test.mjs": {
+      "sha256": "872085fe4c8299e77ed95803898279dcce1f063813fdfd098950711362958680",
+      "bytes": 12628
+    },
+    "source382/scripts/player-journey.mjs": {
+      "sha256": "8d5c74a5b6188e293e1a2df607b39969c0c92e3841d9b5f965469191f275a861",
+      "bytes": 46766
+    },
+    "source382/scripts/space-browser-test.mjs": {
+      "sha256": "6a2dcb68094ced78cb7ff5c3711e62e596d7b52dabf47ae1e10d699deee2800f",
+      "bytes": 19455
+    },
+    "source382/scripts/ui-test.mjs": {
+      "sha256": "e25028728825e9cd76a284772ef55d268858df5b525dde03bd33bb50f1bac183",
+      "bytes": 74303
+    },
+    "source382/scripts/visual-review.mjs": {
+      "sha256": "9f6d8d5767225b8138694eb624f8040733d1b3f1f0de7029c8fd34562786450f",
+      "bytes": 9242
+    },
+    "source382/src/access.ts": {
+      "sha256": "5dd84a1541c6247c9d492d91e9f9d5a620e553522fb3c13fe0af2f899c67ecfa",
+      "bytes": 2548
+    },
+    "source382/src/architecture-floor-plan.ts": {
+      "sha256": "387d10d7f59442899bbbbbae3075112b863c5a156faa21c816816d6bf397ce2e",
+      "bytes": 60326
+    },
+    "source382/src/aviation-renderer.ts": {
+      "sha256": "80918465c9a3d75cab398f9a1296b3cd9563096aa7f67b114c5711b1694fa576",
+      "bytes": 4075
+    },
+    "source382/src/aviation.ts": {
+      "sha256": "d655eb265c6c9b3e3abebaef15fb7bdc17ad432454dafe05bb9df5dc20707936",
+      "bytes": 20244
+    },
+    "source382/src/commercial-district.ts": {
+      "sha256": "939004168f4cf8c41a8278afcc2d5c7d62a4d0e92d1d28bc8b932c30a3d56aaa",
+      "bytes": 5800
+    },
+    "source382/src/controller.ts": {
+      "sha256": "7889f416e9cd8ff2fb81c76eb121d2cf286a76c0a16e2ad8cf1bd2fcd1c907ab",
+      "bytes": 28528
+    },
+    "source382/src/geometry/upright-cylinder-sweep.ts": {
+      "sha256": "9cb9693aabbb58abc267d5251c89404ab38584f1302296191a560c4520d6fe7f",
+      "bytes": 4527
+    },
+    "source382/src/host/upgrade-city-ruleset.ts": {
+      "sha256": "9dfe979a9a9efe00682baf67c3857521272c840ebb0fdd1f6b499db3a589583d",
+      "bytes": 2808
+    },
+    "source382/src/host/upgrade-civic-history-format.ts": {
+      "sha256": "81f9ff02fcb5bdf6bfbfd9dc13b6b65445d38d2aadad3a00331909451d37270e",
+      "bytes": 3204
+    },
+    "source382/src/host/upgrade-freight-delivery.ts": {
+      "sha256": "bdfd71ac60110a1205cd1fef31a1161cb1f21e704cde7897a39241a54235aaa0",
+      "bytes": 2095
+    },
+    "source382/src/host/upgrade-freight-pickup.ts": {
+      "sha256": "5ec10f4e501b408f203518a1340094a45b0ce6f97c1b36e5ceb82189de570316",
+      "bytes": 1972
+    },
+    "source382/src/host/upgrade-meal-route.ts": {
+      "sha256": "5dce8a556e89325a69e9d6bb9544562e0ffca18389f215bc376f77e265c4e4a9",
+      "bytes": 1946
+    },
+    "source382/src/host/upgrade-reference-collision.ts": {
+      "sha256": "8e29ecf6eb506d6c17ebf417262d2ad32a6f6cca339be24a613920956148fd7e",
+      "bytes": 2042
+    },
+    "source382/src/host/upgrade-resident-tuition.ts": {
+      "sha256": "78a865d3890a62267536f781b3083b2e3ceefdea55122094fb2b392950ba6aa6",
+      "bytes": 1830
+    },
+    "source382/src/host/upgrade-service-material-scheduling.ts": {
+      "sha256": "ef2da4d9bbfe7970ebb068a0a2503d696326767f9708367b8e0ff5e88c134153",
+      "bytes": 2192
+    },
+    "source382/src/host/world-generation-binding.ts": {
+      "sha256": "1eb0cff17d4e28aa795bdc0fd68300f255dcab8ec08de75d21049d9fe0793ec4",
+      "bytes": 2101
+    },
+    "source382/src/host/world-generation.ts": {
+      "sha256": "4ecca9893aa5aa1446a63a0574d3688b253c2b355338e602aa0fcba33c70d981",
+      "bytes": 17138
+    },
+    "source382/src/hygiene-ui.ts": {
+      "sha256": "eae8fc818168279b76c5eec1052efb6b2772b538f85fd26fe75a888a880a6047",
+      "bytes": 8278
+    },
+    "source382/src/journey.ts": {
+      "sha256": "aaa5803338db6473ac366200ce653150cce36369fb3d35f4371cafdb806d3474",
+      "bytes": 21182
+    },
+    "source382/src/main.ts": {
+      "sha256": "fbc3125ed736a0c68b381ad29f84b48f6ff2f6c309493ab141eb7ff3b55b888f",
+      "bytes": 24775
+    },
+    "source382/src/market-station-apron.ts": {
+      "sha256": "d3e2948eca1fec0320c2cdcf4e516d6bb0bf928e8c4bb339ca4afce029d85046",
+      "bytes": 5802
+    },
+    "source382/src/persistence.ts": {
+      "sha256": "09cb7f5f89bf087efee1be3376f59e516ddce36cf2ce2a8786d9ebc215a96202",
+      "bytes": 24112
+    },
+    "source382/src/persistence/partition.ts": {
+      "sha256": "aadacf7184fe7bcea89c95f0d79bc5addac5f112dee920e87b07df86c8b6e804",
+      "bytes": 21578
+    },
+    "source382/src/persistence/route-encoding.ts": {
+      "sha256": "538e18a248e1113f174e9a95917965c2a7070f63c08c19cedfb4e5f9ebd3b439",
+      "bytes": 4619
+    },
+    "source382/src/persistence/save-resource.ts": {
+      "sha256": "b3d39c56b6d4d928d7be848b4f51fd2226ffc057a4041a4c0c769ab5fb23ed18",
+      "bytes": 1490
+    },
+    "source382/src/persistence/session.ts": {
+      "sha256": "84dd9ee0709423b13e1b8f8dcf344ff591df80537bc8ac2bcbba47fc4c669f6f",
+      "bytes": 6067
+    },
+    "source382/src/persistence/world-layout.ts": {
+      "sha256": "db0a3bd87a0b6929a008ae07f711f16e1e9361803b43cdf785fac5375a4de373",
+      "bytes": 6263
+    },
+    "source382/src/product-city.ts": {
+      "sha256": "f9f681ad921444dcbbeb9478e111e6fb13350ef43f4fc3810f366b9404eabbee",
+      "bytes": 4204
+    },
+    "source382/src/renderer.ts": {
+      "sha256": "6d95b21061be8acc007e971b159f02d1278b5344e65307d53a00c7e0ddd97366",
+      "bytes": 98391
+    },
+    "source382/src/rendering/architectural-finishes.ts": {
+      "sha256": "a782db8029e6f3596dedc85bc2f1feddabc7122b4dcaf4aa47dd9a0678802405",
+      "bytes": 10402
+    },
+    "source382/src/rendering/architecture-bodies.ts": {
+      "sha256": "f96a8f809a5d043ea5ea236dc86fa6407031ea2384cfe93fd89cea7b5495d2a9",
+      "bytes": 18523
+    },
+    "source382/src/rendering/architecture-detail.ts": {
+      "sha256": "4d06276ee342d68133f9288d50c5091e38cbdaa8d220aecf28458ba9b752c1cf",
+      "bytes": 46071
+    },
+    "source382/src/rendering/architecture-layout.ts": {
+      "sha256": "bec8162b1f92f062546c5d3554fdaf2445809218c8871a94d9e1cf4e146dcde0",
+      "bytes": 3055
+    },
+    "source382/src/rendering/building-light-supply.ts": {
+      "sha256": "9e82632ab4b4ae48975723fada3e541617594a0c739b6987164339d01668c2bf",
+      "bytes": 1388
+    },
+    "source382/src/rendering/chunk-residency.ts": {
+      "sha256": "51dc287a135314760c379bbabe01fa7fc07f14182d636dec8b648cfb06d69ea4",
+      "bytes": 10495
+    },
+    "source382/src/rendering/citizen-appearance.ts": {
+      "sha256": "8f8f1a2b7c9c358dd1f8db9a44ddbd81b8e810395b6bfb6a4e6557b06b177393",
+      "bytes": 14638
+    },
+    "source382/src/rendering/city-lighting-profile.ts": {
+      "sha256": "a359d1b5dec9daa32459d35e48299da29d20064797cbc18dab33d0f6d9b071eb",
+      "bytes": 697
+    },
+    "source382/src/rendering/detail-surface-finishes.ts": {
+      "sha256": "370baa3d99d37a73fa93dd90a6a622b68ce1ee89cc99a6772447512f6b9c64ba",
+      "bytes": 3884
+    },
+    "source382/src/rendering/interior-lighting.ts": {
+      "sha256": "9589268507f422bbbdabd3122039fed22d6d85dc5529ff0cc10260934873ac9f",
+      "bytes": 5980
+    },
+    "source382/src/rendering/interior-props.ts": {
+      "sha256": "f1ba7fb8438c235721e48172f923aa1029c61336343fb9f48d7d03eb2e6d3c85",
+      "bytes": 10997
+    },
+    "source382/src/rendering/market-goods.ts": {
+      "sha256": "36c0b14ac873dd963cad165ed47e2b49f5aecd8dbef416dad217af78b8594768",
+      "bytes": 5825
+    },
+    "source382/src/rendering/market-shopfront.ts": {
+      "sha256": "9439f1d84f9d5f44fc3c09e20c1ff48006b1761f28aa610086bb7b4c9a879454",
+      "bytes": 11900
+    },
+    "source382/src/rendering/road-closures.ts": {
+      "sha256": "508398ed3d1fbce707b680f1e249c089f425c3fa7a5eb23b6048060a975f2944",
+      "bytes": 3159
+    },
+    "source382/src/rendering/station-wayfinding.ts": {
+      "sha256": "a6c938d4643f1dead867195e96bcf6187016f86f0b5cb1683a0841600d0b5b28",
+      "bytes": 8150
+    },
+    "source382/src/rendering/terrain.ts": {
+      "sha256": "52809af4b49b82def84d504fd7e13b13e85db55264fe2ee3dff6dddf6d36ebf5",
+      "bytes": 37882
+    },
+    "source382/src/roads.ts": {
+      "sha256": "194a9a9adeb16299008056f73465d41e8ee0451de258ceabc8c9963da4ac5d90",
+      "bytes": 27340
+    },
+    "source382/src/simulation.ts": {
+      "sha256": "34915b8cb5c701ab20e82e70b0e82bca127d9e2d3086f9414da261909b26daea",
+      "bytes": 313276
+    },
+    "source382/src/simulation/activity-capacity.ts": {
+      "sha256": "ab76edbe3e175545c7c5418015f6fe4941426cfd504542d37ab9ed00717a5698",
+      "bytes": 5455
+    },
+    "source382/src/simulation/activity-minutes.ts": {
+      "sha256": "7735d479471620f762a9c4f3320d74ead08e2ea13aec0118d704ccf563042534",
+      "bytes": 2211
+    },
+    "source382/src/simulation/banking.ts": {
+      "sha256": "52a601b5c0c24e884ac4700583f0d6e9d3cad35965ad817c9ca5ed700efaf0e0",
+      "bytes": 22501
+    },
+    "source382/src/simulation/budget-authority.ts": {
+      "sha256": "ab14d14f6cf5dd3406e52d3ebdfdda43f46a14c598c1f3a6877a9671593f53ef",
+      "bytes": 23599
+    },
+    "source382/src/simulation/building-alteration.ts": {
+      "sha256": "07a01a280d2fbe1e20335a1bd1844eb52ebdf069ddc8a34ca74160879102c838",
+      "bytes": 25558
+    },
+    "source382/src/simulation/city-ruleset.ts": {
+      "sha256": "bba993990d9a7a304e02efd442bd2292fd59c977ae42d5d4a75d432a4a7e0d00",
+      "bytes": 13274
+    },
+    "source382/src/simulation/civic-history.ts": {
+      "sha256": "65e6f3b27215ba38073a3e71a63744f74a8fb89af51c10bb3e8ce854e037b01d",
+      "bytes": 32374
+    },
+    "source382/src/simulation/civic-staffing.ts": {
+      "sha256": "b1926fb4f5ef7b115c2b58cc1f271038049268a068ad0da667debe4e96a1c4a5",
+      "bytes": 74161
+    },
+    "source382/src/simulation/clinical.ts": {
+      "sha256": "ff3af7225e40b55906a4f5da5e1f213ac894c2aa523963566e1dfc19f2b3bbc8",
+      "bytes": 46335
+    },
+    "source382/src/simulation/culture.ts": {
+      "sha256": "2ea4f94b5876a06826bdb0f4249c31dfd4c35290ed1702c0d3191862f37ca831",
+      "bytes": 67854
+    },
+    "source382/src/simulation/education.ts": {
+      "sha256": "dd647c997d1697bff1cc99f63ee097aa08da5d68b971ff5834b5c174ae670d97",
+      "bytes": 48446
+    },
+    "source382/src/simulation/extensions.ts": {
+      "sha256": "0890b274c17abbe2b5e50bb24c151ec13928f3cb3c8bd4bfb4a632478a845bc0",
+      "bytes": 92838
+    },
+    "source382/src/simulation/family-education.ts": {
+      "sha256": "1a0f86b640d1b9252b554707389779a96827f7d13111cf54e8d38a3989774557",
+      "bytes": 29399
+    },
+    "source382/src/simulation/family.ts": {
+      "sha256": "c3af107f15d4bdafd3e61afa249f0fe68db0e384e5e4ffdb9cafb57e132546fd",
+      "bytes": 80525
+    },
+    "source382/src/simulation/food-access-observations.ts": {
+      "sha256": "b36ae80a51723eef4620d640dbed332fc2e4c018ab1172cab20241ba38f66f55",
+      "bytes": 14513
+    },
+    "source382/src/simulation/freight-access.ts": {
+      "sha256": "be1d9bd79c9ff6b77c013c985d6d5f59d020cf8bf9738316c9bfd09fee7e547b",
+      "bytes": 5452
+    },
+    "source382/src/simulation/freight-delivery.ts": {
+      "sha256": "d3b309d14e610ae9a41e385d077ca94ca7d868ec65323d0f773c847512e81831",
+      "bytes": 12490
+    },
+    "source382/src/simulation/funded-work.ts": {
+      "sha256": "450dfcc4c87f6522a2cd0684d8ada3dae4c2a07e0e50b1754b2b63775dc798d4",
+      "bytes": 2589
+    },
+    "source382/src/simulation/gift-contact-legacy.ts": {
+      "sha256": "6badb6b9cc24194e50ac56ff8dafe58c0939ea9dc33ea19e2b0fee70aefcd7bb",
+      "bytes": 9103
+    },
+    "source382/src/simulation/gift-contact.ts": {
+      "sha256": "33c7a50100d352fdf9a3a36cda58f25dc8c3f5cd38218c59f8beab2713a8a48e",
+      "bytes": 12403
+    },
+    "source382/src/simulation/governance.ts": {
+      "sha256": "eab0fa32335d8b13d9443e4e4a8109958ff0cfe148150997b5f7e75828715de1",
+      "bytes": 28875
+    },
+    "source382/src/simulation/home-rest.ts": {
+      "sha256": "60b2126e46cc0207ee8ce5de0312b9ca9d8003291325a359d026e9093d0bb006",
+      "bytes": 16924
+    },
+    "source382/src/simulation/hygiene-public.ts": {
+      "sha256": "1f02613e705aeec6432c2e5fe40e958a9da8d5b260d261441a6a5b95bd5af350",
+      "bytes": 20880
+    },
+    "source382/src/simulation/hygiene-transfer.ts": {
+      "sha256": "cab052ea1cb496711ee597a98d03fb29c1769162635ba5e85124d8dd3b472a9a",
+      "bytes": 28130
+    },
+    "source382/src/simulation/hygiene.ts": {
+      "sha256": "c216416543111a26c6db773a89436158f224590676976260a7e722808da6a106",
+      "bytes": 50777
+    },
+    "source382/src/simulation/journeys.ts": {
+      "sha256": "4995a928b5cee0bab87cf1992104ed77a6309281f4f51d4e0cda584618d6410e",
+      "bytes": 5505
+    },
+    "source382/src/simulation/meal-route.ts": {
+      "sha256": "03f42f53bc1a50b4ba164623537b9658c655285a1cfde3781ecbb00facb6b314",
+      "bytes": 1391
+    },
+    "source382/src/simulation/npc-stair-motion.ts": {
+      "sha256": "797f1b3341806bf5cc4ec90fd3abcdadd555b9b412af4256540511f7b1153ab4",
+      "bytes": 26937
+    },
+    "source382/src/simulation/pathology.ts": {
+      "sha256": "8f76ef5e18f1b3a5ff042857a77547a566b5bbfb9e2c4400a1d9632398063005",
+      "bytes": 31665
+    },
+    "source382/src/simulation/player-labor.ts": {
+      "sha256": "8259f30215a0d646ce10070591d164cfc0029f6f696f6d1efbe1c11dc213973b",
+      "bytes": 15041
+    },
+    "source382/src/simulation/police-supplies.ts": {
+      "sha256": "a3020ea89021be481a02925df386600f9183a93eab5dbe2516b616d2bcd5133e",
+      "bytes": 10224
+    },
+    "source382/src/simulation/power-grid.ts": {
+      "sha256": "f2aa556260ef6746251b0b0d72f28ff5ce417a6b522be5e3e014ca34e9fccde1",
+      "bytes": 32875
+    },
+    "source382/src/simulation/power.ts": {
+      "sha256": "a7c3d8126ac17a780f8e14d7498a342d8d4d353321d838d1344fe24c9eca1c6d",
+      "bytes": 59598
+    },
+    "source382/src/simulation/public-employment.ts": {
+      "sha256": "a89c169c1565db4bfc38f7a26fd45d23c017596957e816ef6da9474355d6f8ef",
+      "bytes": 19062
+    },
+    "source382/src/simulation/reference-collision.ts": {
+      "sha256": "285c43bf6cebbe22ae2af26b2bc1bd896c96bfdb2cf14a42c327a98110e720fa",
+      "bytes": 1062
+    },
+    "source382/src/simulation/resident-education.ts": {
+      "sha256": "643acfb3de2779e5d2c714fd8565bf99743b8d6e63107c553db4d8a1e2c5847c",
+      "bytes": 35688
+    },
+    "source382/src/simulation/resident-formal-learning.ts": {
+      "sha256": "0d3d345281d278fbe39f413a3450207d8c7e573d016e60c5b757625c21e497ed",
+      "bytes": 7765
+    },
+    "source382/src/simulation/road-demands.ts": {
+      "sha256": "773299af9510dab1a7d42969663889a89f3bd1a2112c15e1d3069bb6df1b1307",
+      "bytes": 12686
+    },
+    "source382/src/simulation/roadworks.ts": {
+      "sha256": "570c63879b14f0160f56d357c87140855e61c655c396ec5e2c2eeaeaaa4cf09b",
+      "bytes": 64090
+    },
+    "source382/src/simulation/service-material-scheduling.ts": {
+      "sha256": "2237942b51c46f8fd05d51898d4678a8b553cf12107956b6c6f393e700b6b1c3",
+      "bytes": 7677
+    },
+    "source382/src/simulation/shop_lifecycle.ts": {
+      "sha256": "71d5868ca3594be6886fe85d84eb51f53ce1d3ca949abe7cbb334bea57855512",
+      "bytes": 71169
+    },
+    "source382/src/simulation/supplemental-budget.ts": {
+      "sha256": "4c51e6f3b4808260e8337fe19bb6ec634b4f0d64390ac5076c26251d92feecfb",
+      "bytes": 21826
+    },
+    "source382/src/simulation/trade.ts": {
+      "sha256": "b0ee4ddca2693188553dac7f443196c07a84ea07d5e0bc2adde0df6bd72a6fd7",
+      "bytes": 25973
+    },
+    "source382/src/site-fixtures.ts": {
+      "sha256": "d129222e6434e3ce39c7236e3e5babce0d672cc3cb775918a568613576343670",
+      "bytes": 4366
+    },
+    "source382/src/style.css": {
+      "sha256": "3cee73b6bb430ce1bc830b76ef6f8b484a534f042fc7ea56855d0f299b0050bd",
+      "bytes": 38657
+    },
+    "source382/src/transport-geometry.ts": {
+      "sha256": "7acb0420bcbf3fcdebcb44c3ceaf240a331c3a48e9244d5bdfb6b6f00a00fdf8",
+      "bytes": 9370
+    },
+    "source382/src/types.ts": {
+      "sha256": "d170d5656563617f077ad4c908b55e95b2fa921bf57936ba6fd3f55dd6c896f7",
+      "bytes": 15510
+    },
+    "source382/src/ui.ts": {
+      "sha256": "1ac20f4218d42e0ee55d97e4a3df0621ec74a1cba36987feb4701df8222b592d",
+      "bytes": 199771
+    },
+    "source382/src/world.ts": {
+      "sha256": "df9fc9ce981ed2752b9ac7259f2f2247e9d531de52f45f8e12cea1201f831a07",
+      "bytes": 54827
+    },
+    "source382/tests/access.test.ts": {
+      "sha256": "affe40f6a0269ab907a5d32f55db75bd232654e1953ed7321a06a463107968f5",
+      "bytes": 2613
+    },
+    "source382/tests/appointment-funds.test.ts": {
+      "sha256": "0adfe5c71e3a10782e72d76e783ecb45b6721c2a68dfcd168a6f75a7241973fc",
+      "bytes": 12237
+    },
+    "source382/tests/architecture-bodies.test.ts": {
+      "sha256": "5ea256c531902eac4a3dc3a42cfe2ee1d5c1802bffa8c70757ef5213c458005d",
+      "bytes": 11804
+    },
+    "source382/tests/architecture-detail-v4.test.ts": {
+      "sha256": "1882f3014a8968db1e4d752e198740d9e80b5c1b1e114aab4c7c7ccfeb715e6c",
+      "bytes": 9726
+    },
+    "source382/tests/architecture-detail.test.ts": {
+      "sha256": "5093b9b9faf08ebdf0c85ccf18bf447373b7ec57262bb657ecf0ece2afd8795a",
+      "bytes": 12491
+    },
+    "source382/tests/architecture-floor-plan.test.ts": {
+      "sha256": "0280e1f7109610d59c7a1409b5c20ece443f8792b0fd92e6d26713182667f4b6",
+      "bytes": 4446
+    },
+    "source382/tests/architecture-wall-finish.test.ts": {
+      "sha256": "c79de8740057ff13f9ed2947c2bc110e1a81ac7ae9a718ae1a8dcb1e8abd7fc2",
+      "bytes": 8037
+    },
+    "source382/tests/aviation.test.ts": {
+      "sha256": "ab4d77319b1858380ff383f3117404d8db6aa8d50453b05b6f9b2f826261735b",
+      "bytes": 13594
+    },
+    "source382/tests/banking.test.ts": {
+      "sha256": "46ad59024417534be4e2062ac58aef3d7c8cae77155bd1356b758bd72231d4dd",
+      "bytes": 21022
+    },
+    "source382/tests/budget-authority-contract.test.ts": {
+      "sha256": "a502a78421ea416cdb6269c9ce374707d3a04c7a05870daab111256fa7a89e42",
+      "bytes": 6462
+    },
+    "source382/tests/budget-authority-fixture.ts": {
+      "sha256": "d0bac2f99e2718ac1159aca3396e4fed3f269a694b3cf71d2c6cafbfecd607e0",
+      "bytes": 2623
+    },
+    "source382/tests/budget-authority-hash.test.ts": {
+      "sha256": "4ed378aa546751038d6d617c3510111ef9e1cadc406fc2a00423f040b6ff207a",
+      "bytes": 2229
+    },
+    "source382/tests/budget-authority-source.test.ts": {
+      "sha256": "f89b7a2e0e63c227306de3470d96602bf1171740919b35179bc70883150d4919",
+      "bytes": 6753
+    },
+    "source382/tests/building-alteration.test.ts": {
+      "sha256": "ba4b4d97961084f086166cf486b092c41e2dc30c7be21eb3bad9ebc4c8b5fa31",
+      "bytes": 19730
+    },
+    "source382/tests/building-light-supply.test.ts": {
+      "sha256": "e3328fc770af99f81ba54a1cf0be0e6e567d9d8f53ed179bc31cf557e509f6c2",
+      "bytes": 4578
+    },
+    "source382/tests/chunk-residency.test.ts": {
+      "sha256": "db58e6a379ca7c3548f4060e07217aedc16231ddf28b2f54b6cd9d2609538bb0",
+      "bytes": 17203
+    },
+    "source382/tests/citizen-appearance.test.ts": {
+      "sha256": "6db042f82b27e23c97c178f427ecc026c382b4bd01cb7178c21cd9cfe562aa68",
+      "bytes": 7172
+    },
+    "source382/tests/city-life-freight-product.test.ts": {
+      "sha256": "3415da4584b3a8967e47f483b87989228778c399af9abe1719c22f963dcce361",
+      "bytes": 2295
+    },
+    "source382/tests/city-life-product.test.ts": {
+      "sha256": "9e8cceaac2c65c7dcc8a28148ad496ac7ef87c97de22bec84b328ad8cf4f22b7",
+      "bytes": 2717
+    },
+    "source382/tests/city-ruleset.test.ts": {
+      "sha256": "4dd577f55a598bbeab22f25764acadf196c17b4c2d8a0a13d35c09e1e1244ad5",
+      "bytes": 16147
+    },
+    "source382/tests/civic-history-codec.test.ts": {
+      "sha256": "738e0364919ac8cffd8fb3f66f7d8e0e0691cb0c785c31c8299a0d34d05cdd6c",
+      "bytes": 4848
+    },
+    "source382/tests/civic-history-contract.test.ts": {
+      "sha256": "ef38ec359dd1c7aa8ddf395abb15e20f1f7eb4c9fc4e6dbf15773537c147ca7c",
+      "bytes": 13337
+    },
+    "source382/tests/civic-history-paid-source.test.ts": {
+      "sha256": "e11dcae7ed50af1fa3cf70ad22c583f4f69cca15160305bc3c9c813179380fce",
+      "bytes": 7609
+    },
+    "source382/tests/civic-staffing-fixture.ts": {
+      "sha256": "f072f6e97645abf4423d50dab4b4891b4a2de41b51fb23b7a8815eca24ebb6fd",
+      "bytes": 6347
+    },
+    "source382/tests/civic-staffing-two-terms.test.ts": {
+      "sha256": "2182fefe3265ed11eb6bb876d92fefccb7f03b9e4adcbb4a233fb69a13242d16",
+      "bytes": 4586
+    },
+    "source382/tests/civic-staffing.test.ts": {
+      "sha256": "f2b441073c37eb6798dd45d3179edf6e4e20955995f7a993e197765f7fa6e420",
+      "bytes": 14623
+    },
+    "source382/tests/clinical-arrival-contract.test.ts": {
+      "sha256": "0f58c14316248d9b7dd40b76374f951da1406f2b7150a648fe8e8d0670b7bf65",
+      "bytes": 9351
+    },
+    "source382/tests/clinical-arrival-doctor.test.ts": {
+      "sha256": "7f092502054f83a89017ac2bdd70e00e28a5564fef48d35d23907afd755e71de",
+      "bytes": 2806
+    },
+    "source382/tests/clinical-arrival-fixture.ts": {
+      "sha256": "770793d29c2e62d280abfbfac0e1630c0252ad4b40235d0ef03d64dd7e0f9f5b",
+      "bytes": 8448
+    },
+    "source382/tests/clinical-arrival-front-contract.test.ts": {
+      "sha256": "5e8d88ae862fdd74b651a8df548ab33c3fc49f676742e01672e7970b42516603",
+      "bytes": 643
+    },
+    "source382/tests/clinical-arrival-patient.test.ts": {
+      "sha256": "8e65a7cf5342e592d6655ccf3b7eac798619d959887ddeaf35050fcb770594a6",
+      "bytes": 2962
+    },
+    "source382/tests/clinical-arrival-window-contract.ts": {
+      "sha256": "7fe75d1cfbe116ee2cf655c9f6de283ee64ebc5b03d4de59555cb92f0df84ff3",
+      "bytes": 317
+    },
+    "source382/tests/clinical-closing-functional.test.ts": {
+      "sha256": "0914e33ee592d5f50fa39ea7550e5b59f3f8cdf82023b23856f1fe92740fdfe1",
+      "bytes": 7270
+    },
+    "source382/tests/clinical-grid-native-start-functional.test.ts": {
+      "sha256": "2dbaf4e054d1c70dc46742184edd3ed0e65128b8f25572e43f101d2bafa513f6",
+      "bytes": 8486
+    },
+    "source382/tests/clinical-grid-power-pure.test.ts": {
+      "sha256": "86a9317322369778b1c0de6a833f0be4b0db144677b1920d33f7713b4e1b7526",
+      "bytes": 3770
+    },
+    "source382/tests/clinical-native-authority.test.ts": {
+      "sha256": "92382f00282106ae404dba6470b1068484992bc3a38ebcde00801555e3dfd622",
+      "bytes": 9557
+    },
+    "source382/tests/clinical-open-minutes.test.ts": {
+      "sha256": "83165a626cac74d5f7d2cfa3ba04b6fa88ffbe2d2a8c279453e661aac9727e88",
+      "bytes": 2379
+    },
+    "source382/tests/clinical-presence-contract.test.ts": {
+      "sha256": "8a8116872dfff02ce0c08d8981a357259b3c1fb3f3bb892084dab1f9a47b71e1",
+      "bytes": 13936
+    },
+    "source382/tests/clinical-presence-fixture.ts": {
+      "sha256": "242aa19efabfaf79ff14489f95d609bd5e0ec8a1d2d88c5ce35e008f0404a526",
+      "bytes": 11041
+    },
+    "source382/tests/clinical-presence-regression.test.ts": {
+      "sha256": "c21b3bed0a443a8bdf650a1f6376ac067ddd1aea9fff7b293e3cffdb31edd717",
+      "bytes": 8248
+    },
+    "source382/tests/clinical-procurement-power-reason.test.ts": {
+      "sha256": "99cb637abccdea3387903b9d050e5247e6807a7a0552b1e1a26e44bb2780e65b",
+      "bytes": 3450
+    },
+    "source382/tests/clinical.test.ts": {
+      "sha256": "f15b8be3d0010b79dd4be9db7fdf4df1bf6541699d9c100226beebb2434159cc",
+      "bytes": 30100
+    },
+    "source382/tests/controller-input-time.test.ts": {
+      "sha256": "0bede9235981e4f32b140b19fb5c2060083a85de754ff86514c5b3974ef8384f",
+      "bytes": 15536
+    },
+    "source382/tests/controller-v4.test.ts": {
+      "sha256": "5be022e68a1a4490342a9963d14c79577d15152fca794feb58156dd9b6b56e09",
+      "bytes": 13238
+    },
+    "source382/tests/controller.test.ts": {
+      "sha256": "ee50c38134a291c3e3e100ecdd4cfb27fd694bff71781a1b0fddc7c17c51de45",
+      "bytes": 10701
+    },
+    "source382/tests/culture.test.ts": {
+      "sha256": "0ee0893d09ff5acb94cf7f1c69de84a55ba84a1939a1acaff926724ed68e14c3",
+      "bytes": 28415
+    },
+    "source382/tests/economy-observations.test.ts": {
+      "sha256": "d2dcadb6509ad13192d49895c2409dc0776d2682ccd7bb4519d43730c3283df0",
+      "bytes": 6786
+    },
+    "source382/tests/economy.test.ts": {
+      "sha256": "10028da30ea2cb54f0ea5ffba7490d7849235469ec1b1a1616387cf8318877f2",
+      "bytes": 51687
+    },
+    "source382/tests/education-boundary.test.ts": {
+      "sha256": "743679adf0e3a250dfbf44641ef95a169a4a2556516f92ff4911ba37a24f91dd",
+      "bytes": 25936
+    },
+    "source382/tests/education-course.test.ts": {
+      "sha256": "27db5dc919aae8a849b5d0cf22c561a95b2098e4e8bcb6adb322e42294fe5967",
+      "bytes": 37708
+    },
+    "source382/tests/education-fixture.ts": {
+      "sha256": "5b1909683d6a43d7cf87c9e5687ec106008fba4a42eb8aec3efb360817d47e5a",
+      "bytes": 18591
+    },
+    "source382/tests/education-legacy-regression.test.ts": {
+      "sha256": "a7ccc1100a34714ef4a2244769db752ebbe4433c543a6aa825ab40e3527bfda3",
+      "bytes": 4572
+    },
+    "source382/tests/education-saved-time.test.ts": {
+      "sha256": "b3a06d177d31d6021065ad49d39ea5886789ca3031ded7fcdd78551aeb12622e",
+      "bytes": 9383
+    },
+    "source382/tests/extensions.test.ts": {
+      "sha256": "93d3f77a390a820114011e8be994c15bfde438aa4c93b4a8fbacaaa88fde764f",
+      "bytes": 108044
+    },
+    "source382/tests/family-estate-escrow.test.ts": {
+      "sha256": "9c258177766bef25c262c04e9d748308ba1d320ebd3a0f55520709f32a0b7b9a",
+      "bytes": 13002
+    },
+    "source382/tests/family-fee-education-fixture.ts": {
+      "sha256": "9fd74ef3ece793d6f9e42b82eff44848b3a2b29eef2095e5eb3073d22aeeb6b4",
+      "bytes": 12332
+    },
+    "source382/tests/family-fee-education.test.ts": {
+      "sha256": "1579243d5dd7691f905142454ec9bd8bd3fa19d19bbf61ed74263db3563851e0",
+      "bytes": 39537
+    },
+    "source382/tests/family-fee-legacy-qualification.test.ts": {
+      "sha256": "1efe71ae0c959e120b4635104fe6b760c62ccb4b4ab9261a797aa637044be179",
+      "bytes": 6956
+    },
+    "source382/tests/family.test.ts": {
+      "sha256": "6abb29d7454e36933781c9052bdacf2d0b19a1f3c23bed32435d82ded3f7590e",
+      "bytes": 50830
+    },
+    "source382/tests/farm-stock-buffer.test.ts": {
+      "sha256": "3c66a1131dceb418b42a8234bda8dcbc821154cbb09dbcfd746ac88b4461ac42",
+      "bytes": 11641
+    },
+    "source382/tests/fixtures/appointment-old21-after.json": {
+      "sha256": "ccd21438c49f6dd6e76007c9b8f6c0ff4a218492c1082e099b349d3cbc1c91d2",
+      "bytes": 695441
+    },
+    "source382/tests/fixtures/budget-authority/canonical-pair.save.json.gz": {
+      "sha256": "7687e37e5d2959be90e97912482a5f13f909bd94b7bf22682f2459f884318752",
+      "bytes": 277219
+    },
+    "source382/tests/fixtures/budget-authority/original-authorizer-provenance.json": {
+      "sha256": "63d4bf415c3c97807bf1189017dbf28cb5f0b881742cf50ee7cfec1e8c48212f",
+      "bytes": 531
+    },
+    "source382/tests/fixtures/budget-authority/original-authorizer.ts": {
+      "sha256": "fb2123e81aaac21232fbe4acdf35c2073a2b2d4607be6d68f445b95ef8cac9b1",
+      "bytes": 3254
+    },
+    "source382/tests/fixtures/budget-authority/paid-signatures.json": {
+      "sha256": "7e09ab552a48fe6f36699e1c3420c70674645f4b471fad1d5af7fe74cee675cc",
+      "bytes": 3106
+    },
+    "source382/tests/fixtures/budget-authority/provenance.json": {
+      "sha256": "07656752e235983ab0f5499d49da9c01e4edee7735146830a02582deee0a6a57",
+      "bytes": 1304
+    },
+    "source382/tests/fixtures/budget-authority/world.json": {
+      "sha256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+      "bytes": 71349
+    },
+    "source382/tests/fixtures/civic-history/root13-four-day-after-24.save.json": {
+      "sha256": "7d7197eb461109d20e63461ec84314f6a7d8efb83e141c8b43a8811bbb741297",
+      "bytes": 3035686
+    },
+    "source382/tests/fixtures/civic-history/root13-four-day.save.json": {
+      "sha256": "3640274b3e2234b793925a574f825615a89d9c168539d10960510f39f1e1c2c3",
+      "bytes": 3015592
+    },
+    "source382/tests/fixtures/civic-history/root13-four-day.world.json": {
+      "sha256": "78a9b469fb18e4f377151fd679045fdb25b9160d456f25ba8a0027b2b15a0bbe",
+      "bytes": 64700
+    },
+    "source382/tests/fixtures/clinical-arrival-old-D1-measurement-after-step.json": {
+      "sha256": "26ecbed06893a5bffc2f5d73d822b25427dc8f329489dc912a5f093635e7b91e",
+      "bytes": 408224
+    },
+    "source382/tests/fixtures/clinical-arrival-old-D1-measurement-before-step.json": {
+      "sha256": "67c3934829383b8b8d4910fde4135d0b74aeed650ad8bae12508a6ae7973a11e",
+      "bytes": 406423
+    },
+    "source382/tests/fixtures/clinical-arrival-old-D2-measurement-after-step.json": {
+      "sha256": "db7a54f6b5daf45141139d60013450f68c029117ec856a8f23daf2c7d7ef52fa",
+      "bytes": 408483
+    },
+    "source382/tests/fixtures/clinical-arrival-old-D2-measurement-before-step.json": {
+      "sha256": "0353880d31abb82a67d62ba784e36b119bbdc3087852435b32e0a85658011555",
+      "bytes": 406853
+    },
+    "source382/tests/fixtures/clinical-arrival-old-provenance.json": {
+      "sha256": "f43dd80ad53822ffda51fce2332371fde97aa2701926e5e7460ed58347b11a83",
+      "bytes": 2453
+    },
+    "source382/tests/fixtures/clinical-legacy-heal-ee3e7a1.json": {
+      "sha256": "d61c5e4150fd54ad4a4b287283295ecf7b5afd0d16cf0873e29ad6ddda47237e",
+      "bytes": 344441
+    },
+    "source382/tests/fixtures/economy-original14-final.save.json.gz": {
+      "sha256": "3485b80b9f7414dd6d56bbd7a08b1582e0fa85ad30a7896755eaa09b05fe3e39",
+      "bytes": 297493
+    },
+    "source382/tests/fixtures/education-different-start.save.json": {
+      "sha256": "5e7bfcae17a5a9eeba08eea1092d4ae23afddd223956010a413a4f5c4dc9bcb5",
+      "bytes": 497118
+    },
+    "source382/tests/fixtures/education-same-start.save.json": {
+      "sha256": "83d1cd18dc8450149fa461bd283dd12f07e27623c9e62c64c2ff577b4ae40735",
+      "bytes": 497437
+    },
+    "source382/tests/fixtures/education-saved-time-provenance.md": {
+      "sha256": "6548ac00106197b8d559ef2a3c6674943742f118ba550608e84c8439252fd978",
+      "bytes": 3089
+    },
+    "source382/tests/fixtures/family-fee-v1/metadata.json": {
+      "sha256": "b1949aa12c1f838d6866fcd342c1b931c2e0c2a4b22b62b10260fe13be29b6ae",
+      "bytes": 1397
+    },
+    "source382/tests/fixtures/family-fee-v1/oracle-old-v1-held-18.5.save.json.gz": {
+      "sha256": "7fa49ae480d158fe2f20e6e30ae14852b356dd13b78200fc3df95e09f8d94624",
+      "bytes": 34832
+    },
+    "source382/tests/fixtures/family-fee-v1/oracle-old-v1-held-19.5.save.json.gz": {
+      "sha256": "699009cacc72906142963d9b8de901a9c8b4bae10eb7b2027ab2fd63dadb7c89",
+      "bytes": 34832
+    },
+    "source382/tests/fixtures/family-fee-v1/oracle-old-v1-held-both.save.json.gz": {
+      "sha256": "1d515ee86464651c1929a44ed505dabce068d17c2993ea43eb0f01df03724186",
+      "bytes": 34853
+    },
+    "source382/tests/fixtures/family-fee/after24.save.json": {
+      "sha256": "60068fdf834ac124cbda128e4793155dfd17e8239852fd2ed08ff9ceb4b9d1ea",
+      "bytes": 384816
+    },
+    "source382/tests/fixtures/family-fee/before.save.json": {
+      "sha256": "81ccbfe6d4215fb082710532f61f7850a7e58b7ae45195e65b9e546801fd755f",
+      "bytes": 378902
+    },
+    "source382/tests/fixtures/family-fee/metadata.json": {
+      "sha256": "0b89e6a7f98af316605d443d03fa6eb2aa05db7995c708687832c923827cb158",
+      "bytes": 805
+    },
+    "source382/tests/fixtures/freight-native-compact-world.PROVENANCE.md": {
+      "sha256": "b6129352fad867e1acaa4d1e662f2ae02ec5d116cc0987540e3131cb2b128ab5",
+      "bytes": 546
+    },
+    "source382/tests/fixtures/freight-native-compact-world.json": {
+      "sha256": "84f460cfb87372574eabd721198559e26a52245fef8e9035c81f33abf849d63e",
+      "bytes": 4345
+    },
+    "source382/tests/fixtures/freight-road-door-parameters.json": {
+      "sha256": "509e025d94de003afc8b26e06ff8e906907293242d51b144cc2c93832c40c27a",
+      "bytes": 55795
+    },
+    "source382/tests/fixtures/governance-old18/campaign.json": {
+      "sha256": "ff6b23b4bca1e3ef7d4e5126b4d7968c551fe26b5d9c59f780affdfe0bc430bf",
+      "bytes": 398358
+    },
+    "source382/tests/fixtures/governance-old18/cold.json": {
+      "sha256": "ad971fea1c44a21d0286a3b3d8feecf37d17185943fe84d4f9f3b2c1cb86637e",
+      "bytes": 396696
+    },
+    "source382/tests/fixtures/journey/r7-native-ui-export-coherent02.json.gz": {
+      "sha256": "c77967b683a55ee5cff447e738abcb11e6f23dbbe5b5950deb730fe66ca4f42a",
+      "bytes": 264772
+    },
+    "source382/tests/fixtures/market-company-current-lease.json": {
+      "sha256": "c317858741c6a5d76b43aef99209b48f572da621b6313f4e8906177768125332",
+      "bytes": 456997
+    },
+    "source382/tests/fixtures/market-company-current-sale.json": {
+      "sha256": "10dce6b2323e172d1fe1ea04ebdecf7ea7565ba59f6b3cc637499db1a0081f80",
+      "bytes": 531322
+    },
+    "source382/tests/fixtures/market-company-old-lease.json": {
+      "sha256": "f768bb8b8b8ede1f54d6adffba08c7602c358646ca269e576c9b7e452be1f54d",
+      "bytes": 530776
+    },
+    "source382/tests/fixtures/market-company-old-sale.json": {
+      "sha256": "8341af92cb3f88c39934c7f02a10cf4d9aa93e72862dc99efbcdee4891846be3",
+      "bytes": 530302
+    },
+    "source382/tests/fixtures/native-day-writer/actual-day-writer.save.json.gz": {
+      "sha256": "4f7b9a5143af2fc110582fa310bb941a73116418dab8236ff873bf50898a4239",
+      "bytes": 494996
+    },
+    "source382/tests/fixtures/native-day-writer/provenance.json": {
+      "sha256": "4310dfbf2f90fa309284d915c6db943bbb9614ce50c27a6b247ac3ecbcf55b76",
+      "bytes": 566
+    },
+    "source382/tests/fixtures/native-live-reader/actual-browser-writer.save.json.gz": {
+      "sha256": "cbfcc4b27b55073e585f967a2ca4ce607c8263b4781ba9131695242fdb691db2",
+      "bytes": 294580
+    },
+    "source382/tests/fixtures/native-live-reader/provenance.json": {
+      "sha256": "2fc9005a7e2ac69cb350d2d2c224e077b86df3483516049fac019158272cd0a0",
+      "bytes": 994
+    },
+    "source382/tests/fixtures/npc-rest-offer-native.json": {
+      "sha256": "f5b80cab495e62d75923ef37a1ba7cf7492788e634910ff6099419016769e071",
+      "bytes": 8688
+    },
+    "source382/tests/fixtures/police-legacy-response-3ca77b8.json": {
+      "sha256": "0cfabc62e20d2e245cd1aa90e99ed823c0ecc517bd1b71c09a33d56ffbdd61aa",
+      "bytes": 341730
+    },
+    "source382/tests/fixtures/power-grid-legacy/hashes.json": {
+      "sha256": "38c1c07cc4a34e40ad61bae45c1ca9895a7c696771e9f91c7232896e65b0d62c",
+      "bytes": 1259
+    },
+    "source382/tests/fixtures/power-native-old-energy-paid-v1.json": {
+      "sha256": "c3136a29e13a48f7a2ae49320378176f9a91586be9e562bf67712662c7b31041",
+      "bytes": 695260
+    },
+    "source382/tests/fixtures/public-disinfection-old-public-care-a1.json.gz": {
+      "sha256": "07fbe3390daa4470cfadb2a660d56f5c70a179e40ea79ecbba3a16af479e1de3",
+      "bytes": 31538
+    },
+    "source382/tests/fixtures/reference-collision/root14-fourteen-legs.json": {
+      "sha256": "6e5956b5f907f95c0e2f016f2909fe14885527206192dfd3ac711e4842034413",
+      "bytes": 68197
+    },
+    "source382/tests/fixtures/research-city.ts": {
+      "sha256": "1abfa5ee6e7c1665cf79d974991c0ad7fba0ca1c4f7a9e8def5d070202f6ed1c",
+      "bytes": 6833
+    },
+    "source382/tests/fixtures/resident-public-rest-world291.json": {
+      "sha256": "d0edf2e5103214d07f8e831243e5216ccb705ee73c3d14946fe154447c384754",
+      "bytes": 12047
+    },
+    "source382/tests/fixtures/roads-old22/cold.json": {
+      "sha256": "64479d66a295320791bb5f00c20356170f38e1a391c6a5c024446544b9f5bb2b",
+      "bytes": 695178
+    },
+    "source382/tests/fixtures/roads-old22/continuation-sha.json": {
+      "sha256": "bbd7b1d564cde8ecc5e02e7ecbb635cb0490547082294d08bfc7b4e652e7eb49",
+      "bytes": 4194
+    },
+    "source382/tests/fixtures/roads-old22/provenance.json": {
+      "sha256": "002f64a92c9ec5b6a85dc7f93e77f8422b34cb66f05a7ac7d23325c5e24ba3ff",
+      "bytes": 629
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/actual-continuation.json": {
+      "sha256": "e8f2bfef914cb217622d921159f89461538cd8cbc7a33952f72261011fe9f4e3",
+      "bytes": 7844
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/carry-after24.save.json": {
+      "sha256": "1cb4606faf1efa1a7c3f47e531b5ad2b1110b272d9ee49f1bed61517a2331dc2",
+      "bytes": 441296
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/carry.save.json": {
+      "sha256": "9cdfc34fc36410e683b76870979fea63e6597cd0db86716e2ae4905be47866f1",
+      "bytes": 418637
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/death-cancelled-after24.save.json": {
+      "sha256": "d8571cff849cff10b78cb34926abd98907b5356259494275f66c88102b4ac78d",
+      "bytes": 439317
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/death-cancelled.save.json": {
+      "sha256": "465b92861b758222fe0925c15282004182be4c603040879333c746dc3df4b523",
+      "bytes": 419778
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/provenance.json": {
+      "sha256": "4f55d77f05e81c19becbd2ebe6fa129bb56e1846ed6878921d976869b0925fa4",
+      "bytes": 1822
+    },
+    "source382/tests/fixtures/roadwork-replacement-native-v1/world.json": {
+      "sha256": "ee1fc84bb3cb503cc295749bd828ec63983080477e967a6070319ffb7c6e23b1",
+      "bytes": 6923
+    },
+    "source382/tests/fixtures/room-route-starport-b0.json": {
+      "sha256": "ca8c37491dc03549c8804aaa77fe72c730e5749085068af0b81a427151196cea",
+      "bytes": 5658
+    },
+    "source382/tests/fixtures/ruleset-core/compat-native-cold.save.json.gz": {
+      "sha256": "432497dea2b6b0a7c1bf4d5fc716d98d79659630f59a0948316799e48e2e35bc",
+      "bytes": 42114
+    },
+    "source382/tests/fixtures/ruleset-core/compat-native-provenance.json": {
+      "sha256": "0d3459799ff7aaaa9bf62809e77b4e3b306253ba6bb6c589aeee9666b2d51862",
+      "bytes": 3640
+    },
+    "source382/tests/fixtures/shop-native-repair/PROVENANCE.json": {
+      "sha256": "18dcaf8609800b999b1fa06e37d41fcb39b4775d70362ca9ca836a7533afdc2b",
+      "bytes": 676
+    },
+    "source382/tests/fixtures/shop-native-repair/controlled-reopening.save.json": {
+      "sha256": "63670a12ece4f11c5d53d93f46fa48755bb2388522dd5b070867275823c801a2",
+      "bytes": 569397
+    },
+    "source382/tests/fixtures/stair-escape-root07-final.save.json.gz": {
+      "sha256": "51f2b62b3544adb1e1124ba7615e73051dca2fe31af1180f2a39dbcb66484547",
+      "bytes": 570848
+    },
+    "source382/tests/fixtures/stair-escape-root07.json": {
+      "sha256": "da48eead9c4a1ddfa21073edd0478f53aee784acf3ec1680b92c4b0ea82142fb",
+      "bytes": 6392
+    },
+    "source382/tests/fixtures/supplemental-budget/old-three-workshop-partial.save.json": {
+      "sha256": "f82bb76520c70a88034d833c961b5c07909622970dd0fda414a3cd89194943cd",
+      "bytes": 509382
+    },
+    "source382/tests/fixtures/supplemental-budget/provenance.json": {
+      "sha256": "55efcb3262710a57cb1823439b52cad05f514134fd321713ae7cafc4cd4db58f",
+      "bytes": 665
+    },
+    "source382/tests/fixtures/trade-industrial-v1.json": {
+      "sha256": "a6775fb84f8400978560f13e8c824f75477d7ada564c7dc15770056d39e5e7b9",
+      "bytes": 396554
+    },
+    "source382/tests/fixtures/world-layout/commercial-parent-v5-3ca.json": {
+      "sha256": "9128685c0f29d0d20ec4f6acf63a28ad3a88cae374771dd0f90ed928dbfbc14f",
+      "bytes": 3418
+    },
+    "source382/tests/fixtures/world-layout/continuous-stairs-parent-3ca77b8.json": {
+      "sha256": "4757c9df5bf3f498639156f37e9a8323316ad5cf7e737a3c29e8b74b64ba8673",
+      "bytes": 4007
+    },
+    "source382/tests/fixtures/world-layout/current-v2-2024.json.gz": {
+      "sha256": "f689723bed0abf08d95171f7550cffce02e415fb2a8ddcc58f2c4b4d5f156a5a",
+      "bytes": 375492
+    },
+    "source382/tests/fixtures/world-layout/current-v2-20261001.json.gz": {
+      "sha256": "0fd82b55866b37a9c6e6f1cb2ca0ffb1660df0c5cf08eda3dcf6a0bf7523c0d8",
+      "bytes": 379272
+    },
+    "source382/tests/fixtures/world-layout/current-v2-7.json.gz": {
+      "sha256": "105d0dd5a3dbee3cb3622c41352e1aed9cc72b3d4a8707bbb0591d5e989340cc",
+      "bytes": 375643
+    },
+    "source382/tests/fixtures/world-layout/current-v2-r5-2024.json.gz": {
+      "sha256": "8ff0ab08ea7abc900af96a4276707934266b504ab9f6184758c74cf170912d00",
+      "bytes": 321439
+    },
+    "source382/tests/fixtures/world-layout/current-v2-r5-20261001.json.gz": {
+      "sha256": "edf3f646574a3e9a02bdd13673dcde1b95f2042eb096d0ba287c7f8feaa6c989",
+      "bytes": 324477
+    },
+    "source382/tests/fixtures/world-layout/current-v2-r5-7.json.gz": {
+      "sha256": "b1cfc487187aa97b2b6c3745b79552d09084dcee52e235da9fe2d9251e29ff7e",
+      "bytes": 321647
+    },
+    "source382/tests/fixtures/world-layout/current-v3-2024.json.gz": {
+      "sha256": "9a17539ba6dd05b931401dc2f1d5b1d4926838e24a856c03aabdae73399be3a4",
+      "bytes": 704136
+    },
+    "source382/tests/fixtures/world-layout/current-v3-20261001.json.gz": {
+      "sha256": "0af38803d09eab8811464921afddb981435a46e03db42fc54b691200e07ecf2b",
+      "bytes": 715079
+    },
+    "source382/tests/fixtures/world-layout/current-v3-7.json.gz": {
+      "sha256": "d9f4e9c06f1e308340de129a9af5b6467487bfd33f20441a277b1e5dad6c120f",
+      "bytes": 704215
+    },
+    "source382/tests/fixtures/world-layout/legacy-main-proofs.json.gz": {
+      "sha256": "35bbdf59c2f91048927d6d36ec7727689f47693bea00e11eb960bd992d478880",
+      "bytes": 570032
+    },
+    "source382/tests/fixtures/world-layout/r5-native-ui-export-coherent02.json.gz": {
+      "sha256": "413894621dc3f9874b33e3a5e907e4f7adf3bc9e4ce0ae5d533ec9ea85c5434b",
+      "bytes": 273576
+    },
+    "source382/tests/floor-plan-derived-cache.test.ts": {
+      "sha256": "1d87502fa01a13a00514937530bce88008f8f7d866ac27d155d3c9bd53907963",
+      "bytes": 7161
+    },
+    "source382/tests/floor-plan-empty-support.test.ts": {
+      "sha256": "73014d9041182bffbedd094db03a9713db3a8a6818a36e0a1907a4492448ecc8",
+      "bytes": 4848
+    },
+    "source382/tests/floor-plan-selection.test.ts": {
+      "sha256": "e6fecfaacbcef754fe76200b9d49338e16f967176adfcfad6745bee54ed9f762",
+      "bytes": 2914
+    },
+    "source382/tests/floor-plan-self-collision.test.ts": {
+      "sha256": "77b10ed923354af7d57a9ae5c89670345e162893741bedf3dfdaa9400c31a3f1",
+      "bytes": 8493
+    },
+    "source382/tests/floor-plan-support-broadphase.test.ts": {
+      "sha256": "5c1e255c89b2961fb3353132707a3215bf9dfc6563bd2c22862436f2ad3e1270",
+      "bytes": 3227
+    },
+    "source382/tests/food-access-observations.test.ts": {
+      "sha256": "6983f1df8aa587b33d20ce4472a5ef59f8d589b139bcb98b09605e8e3be6698c",
+      "bytes": 12709
+    },
+    "source382/tests/food-hiring-fixture.ts": {
+      "sha256": "d84727664580caa90d40835890c123ed624a46f3033d66ddc41e07fa984b45ac",
+      "bytes": 8276
+    },
+    "source382/tests/food-hiring.test.ts": {
+      "sha256": "2222298dc0a03954ba082038ebedb2b93e672037b9be31c943e1d97c524bf95a",
+      "bytes": 20295
+    },
+    "source382/tests/freight-access.test.ts": {
+      "sha256": "57a9e68536352d3a2ebedfb8a9c544fc5c31996c9f48027b216ed51378c7df4d",
+      "bytes": 11999
+    },
+    "source382/tests/freight-delivery-pure.test.ts": {
+      "sha256": "4276d519df89470dd3d90d5abab15d7cfa406cb6f487b258c61e76e88562f8aa",
+      "bytes": 14652
+    },
+    "source382/tests/freight-delivery-upgrade-pure.test.ts": {
+      "sha256": "ca01dc40bb0a4642929a91f50306e4288c284d221df0c704ef2a6aac07fb5253",
+      "bytes": 8299
+    },
+    "source382/tests/freight-native-pickup.test.ts": {
+      "sha256": "3128edcdeab9976ae2eb5c034b01130b0c4c9476eb730b90e8d7093a08d98e87",
+      "bytes": 9553
+    },
+    "source382/tests/freight-pickup-policy-pure.test.ts": {
+      "sha256": "e2bd6a0331e4a4c502715ad2f10b0db529609483d94fcde68276fdf1a1defeaf",
+      "bytes": 3803
+    },
+    "source382/tests/gift-contact-command.test.ts": {
+      "sha256": "0817b69a5b99429dda70b9a9c366f7fac0e8fa79de86ea8900a61af954ee4e45",
+      "bytes": 27709
+    },
+    "source382/tests/gift-contact-geometry.test.ts": {
+      "sha256": "91eb78a1054b6193d0c7e974718019ab1245fbf089843669f70797bd12a8cdbc",
+      "bytes": 22767
+    },
+    "source382/tests/governance-fixture.ts": {
+      "sha256": "eb36fbcfdecedc02614417826a67a50053bc91eea994fe75023cfe8e58080463",
+      "bytes": 754
+    },
+    "source382/tests/governance.test.ts": {
+      "sha256": "1c5543453c11561e32d5af7bdbeacf1ad676b64abf7ddc736ebd8e412a3c006a",
+      "bytes": 10904
+    },
+    "source382/tests/home-rest.test.ts": {
+      "sha256": "a82f79cca390b95e25e6aff976ef281d8a5b999956869a56647265ad1f899a92",
+      "bytes": 30316
+    },
+    "source382/tests/hygiene-transfer.test.ts": {
+      "sha256": "e67b2d862538e673a407a3b9f8b89e9e5176837c944ddf329f438f809b187da2",
+      "bytes": 24931
+    },
+    "source382/tests/hygiene.test.ts": {
+      "sha256": "fb29a68b58447076e06ade659b7e59cb772064e78ad7a09aa1cced0bbce0a352",
+      "bytes": 33023
+    },
+    "source382/tests/integration.test.ts": {
+      "sha256": "e521b4975dff8727e9b0edbd39a9aa5b38b22c96c94acd343a9cae614cea6ad9",
+      "bytes": 16265
+    },
+    "source382/tests/interior-lighting.test.ts": {
+      "sha256": "87515bf8087044e3149ce3a71167baf2577e9b34aba753ab3c15e95e9bb255de",
+      "bytes": 6728
+    },
+    "source382/tests/interior-props.test.ts": {
+      "sha256": "a6666ffdba24040d34fb33c3a6256613ce73318565bd47d70319c9c7c826734c",
+      "bytes": 13187
+    },
+    "source382/tests/journey.test.ts": {
+      "sha256": "7ffeaeb5bb0b039e3c2176511be9344465785108773907103c76f706fb0ccc08",
+      "bytes": 18627
+    },
+    "source382/tests/market-company-return.test.ts": {
+      "sha256": "8bf389b17e1c4642af483ff1d5417d7c7b33d328d808baa048aa0531e4f9bd22",
+      "bytes": 18387
+    },
+    "source382/tests/market-company-rights.test.ts": {
+      "sha256": "6627c800c0749519b2f75e4dce8c517950ee13ea986434479f53b5069e7759cf",
+      "bytes": 20501
+    },
+    "source382/tests/market-shopfront.test.ts": {
+      "sha256": "f9ed8f508c3c35732fbb1082fd2c572e9dc1a58e374828b501d5c23122be5990",
+      "bytes": 13469
+    },
+    "source382/tests/meal-route-policy.test.ts": {
+      "sha256": "7990743b4b39eaf24021a4dd2e172a0ec01483687fbf1ab054ad30c88dee3973",
+      "bytes": 3482
+    },
+    "source382/tests/native-day-writer.test.ts": {
+      "sha256": "6bbdae09db0ab3209a9de3702afade6e0da3219805072649e7b40c14b1299dd1",
+      "bytes": 11597
+    },
+    "source382/tests/native-door-routes.test.ts": {
+      "sha256": "d3e5fbdb0559d067286580fe0f54db1f3f3746ad33c2c89fb787800f514610dd",
+      "bytes": 10208
+    },
+    "source382/tests/native-live-reader.test.ts": {
+      "sha256": "02a7a1262510dc8974f84f0f1fdcd2a98ad6de03a0beda51d8cf2d3fd4586f9f",
+      "bytes": 11917
+    },
+    "source382/tests/npc-clock.test.ts": {
+      "sha256": "376f69709eda71f881d56486a58bb24b6fa4734a9072e8edd586f0f6f32592ec",
+      "bytes": 24182
+    },
+    "source382/tests/npc-home-rest-voxels.test.ts": {
+      "sha256": "421a0169234fd2dcb465433970f19bbaed8c329a1ad55ce6446cb8f3ad076479",
+      "bytes": 20925
+    },
+    "source382/tests/npc-public-rest.test.ts": {
+      "sha256": "0f2d1e4d86a479846cd9b759ec8b48af1315b491556255a255d083197167a516",
+      "bytes": 9310
+    },
+    "source382/tests/npc-stair-native-activity.test.ts": {
+      "sha256": "6cd649e1f8c23ba52b5e4e134eeee4f952ef6b3fa86c2796df2d24e5121c42a1",
+      "bytes": 13379
+    },
+    "source382/tests/npc-stair-native.test.ts": {
+      "sha256": "596f1bda23e0c39bf0bba0383b400770e3463dab75c01708a4b9c231a7adbe7b",
+      "bytes": 11171
+    },
+    "source382/tests/partition-field-order.test.ts": {
+      "sha256": "36d40e1dc6a363396adc43c55b5b39a07183d97b8d679558ce4d5c8c88f04b95",
+      "bytes": 2183
+    },
+    "source382/tests/persistence.test.ts": {
+      "sha256": "b8208a2f1a17b14194ac3fc967e38412217db3411171c35a2cd3b580c48b34b1",
+      "bytes": 59947
+    },
+    "source382/tests/player-labor.test.ts": {
+      "sha256": "da069713bc684265e358305ba7c2ac14c0aa2dcac4458c7c79c8944a9e224a3c",
+      "bytes": 10006
+    },
+    "source382/tests/police-fulfillment.test.ts": {
+      "sha256": "8c4ccae0bccca5359f447756cfc3b5e0ac2d34929b50fb1d104ddc09b9db91f3",
+      "bytes": 27808
+    },
+    "source382/tests/power-current-wage-source.test.ts": {
+      "sha256": "c7e5f9322a9f6b23e69a626e92cc2c584f5c02937a78a3980e5fcffd82419aa5",
+      "bytes": 9436
+    },
+    "source382/tests/power-fixture.ts": {
+      "sha256": "e34732a76005b85bbe1e3046103c2b02ef3e90e10868364dd3718bee2c8e29d0",
+      "bytes": 7041
+    },
+    "source382/tests/power-grid-fixture.ts": {
+      "sha256": "cde911ec91a373d07371212d32d3d0a6a2235942e9d6afdaa205930abff31aaa",
+      "bytes": 2663
+    },
+    "source382/tests/power-grid-integration.test.ts": {
+      "sha256": "9479aaaa520092cb765003cc99b2a4a48cef473efbb2e3ea4c65ed15c5a20eb4",
+      "bytes": 8812
+    },
+    "source382/tests/power-grid.test.ts": {
+      "sha256": "28a8eefc4ad2d184145466bbd0cab76a729868b96e0adf0b2db5428dbbf56bed",
+      "bytes": 13775
+    },
+    "source382/tests/power.test.ts": {
+      "sha256": "9bfa5dcf2a0a0509036a8ee43b4f9a621f3f5ed1037df3fb532d616a86259911",
+      "bytes": 20623
+    },
+    "source382/tests/public-budget-standing.test.ts": {
+      "sha256": "ff8345699ced1312449d58e2b836369f10ad772c2f16d4928e0c3b76a60ddf73",
+      "bytes": 16239
+    },
+    "source382/tests/public-disinfection.test.ts": {
+      "sha256": "ce9d5928ab997b71f8c5dce4bd8bd9e37b593aa7c833ab40adfbb5a2f674b555",
+      "bytes": 24791
+    },
+    "source382/tests/public-employment-fixture.ts": {
+      "sha256": "fea43f0da8c65334bac9e57a088aaeadd601b1794ddd988cd96b18497ec5aeb7",
+      "bytes": 8522
+    },
+    "source382/tests/public-employment-transfer.test.ts": {
+      "sha256": "4c2480a07eda774cd798d42e17f127bbe96fbe1715344b8d5540b6d907e551a1",
+      "bytes": 12892
+    },
+    "source382/tests/public-health-hygiene.test.ts": {
+      "sha256": "cbd6cfdc965e8e54df3f809b9845d0643addfe84b6cf5fd6423b1402b3687bb8",
+      "bytes": 21032
+    },
+    "source382/tests/public-school-arrival.test.ts": {
+      "sha256": "82c24b4996c797696db7608bce02870e194adaae1d955fc3beebf8644f1eb95c",
+      "bytes": 9536
+    },
+    "source382/tests/public-service-budget-quote-wake.test.ts": {
+      "sha256": "96e20a85364b1fc35f1af4b7c450d8e69df7fb9bdcefcf8466ce8ee54a909015",
+      "bytes": 4390
+    },
+    "source382/tests/reference-city-finishes.test.ts": {
+      "sha256": "6507e753f55c277a3fcb7214206a9c4fdb8fbbab31656c783e841089f9293a85",
+      "bytes": 11639
+    },
+    "source382/tests/reference-collision.test.ts": {
+      "sha256": "f24e71e31533e52e2d7b7b1286ee1e760692cf40979efc13aa68dd451211413b",
+      "bytes": 5866
+    },
+    "source382/tests/rendering-city-readability.test.ts": {
+      "sha256": "4acf0792b0d89c40a48384b13564e9024706c293481da293c2c826fa8d202f1d",
+      "bytes": 10546
+    },
+    "source382/tests/rendering-street-life.test.ts": {
+      "sha256": "3c506ae34ebec8aa11485f0ff3f2edd4aa3225a892279d8f588f4d417621265d",
+      "bytes": 10853
+    },
+    "source382/tests/rendering.test.ts": {
+      "sha256": "582015d1ac62d1df84ca76a1c63a52ccf51787f7304b94fec3d2663d2b71b566",
+      "bytes": 19560
+    },
+    "source382/tests/research-labor.test.ts": {
+      "sha256": "f26b7a4624f0fb110959c0f5609927dab5fedd383ecc94da87f483f75f9a69da",
+      "bytes": 21683
+    },
+    "source382/tests/research-offsite-causal.test.ts": {
+      "sha256": "2a0249874330e2bafde7aef5339b0e23ed3fef8a2ed2548517fdabf2ad8df9fc",
+      "bytes": 2595
+    },
+    "source382/tests/research-task-budget.test.ts": {
+      "sha256": "41efa257baaa5ad72cc0c82cb935ea48c78c7ae934237e54e2f810ff14b8518c",
+      "bytes": 9543
+    },
+    "source382/tests/resident-formal-education.test.ts": {
+      "sha256": "0197e93cd9976840c0db2ecbbe77a47c6b46b9a95b5bfb74dabb8ef2360388fe",
+      "bytes": 34493
+    },
+    "source382/tests/resident-formal-fixture.ts": {
+      "sha256": "b4b76fd2e3c75d1d22baea5e4a3b82e1885adfdcda21e5d9adcf2dccdd6c68b0",
+      "bytes": 3171
+    },
+    "source382/tests/resident-petitions.test.ts": {
+      "sha256": "56fa27ad2dcfb26845fe014618c5a8c8ec3ef9d8c35f8317d0d07abde68fef8e",
+      "bytes": 12798
+    },
+    "source382/tests/resident-public-rest-routing.test.ts": {
+      "sha256": "5b12555612101e001b94bd9b3e90a0277947907d2b9a3ec252b2410956c1266f",
+      "bytes": 9396
+    },
+    "source382/tests/resident-tuition-capacity-pure.test.ts": {
+      "sha256": "874be63e92fe1b6fa7f6850a67101513e4ad529052015198a94b841e7e54c354",
+      "bytes": 2123
+    },
+    "source382/tests/resident-tuition-fixture.ts": {
+      "sha256": "901c699eab90e6a93f680014b64d81ca1397a7931dc2b809762c71bc903744dd",
+      "bytes": 4079
+    },
+    "source382/tests/resident-tuition-product.test.ts": {
+      "sha256": "c18ee0ae70f3b907625330106f1d1bde0bebf8fbb7741f78b5d6c3299a200a6b",
+      "bytes": 3785
+    },
+    "source382/tests/resident-tuition-upgrade-pure.test.ts": {
+      "sha256": "58837a97174e70e0bdea1d6656f3f417d02a8b6a4357e7c82ec2850ab8f94574",
+      "bytes": 7966
+    },
+    "source382/tests/resident-tuition.test.ts": {
+      "sha256": "6dbce2eddc89f4255771a25b52178faa5a60b2a1ee15097e10ae3604ac3dd771",
+      "bytes": 12522
+    },
+    "source382/tests/retail-period.test.ts": {
+      "sha256": "98c3556c24125c1a05a71c19c63c24a3c1521d872aeebb231e77cd7178a98d57",
+      "bytes": 15295
+    },
+    "source382/tests/road-capacity.test.ts": {
+      "sha256": "226c28029e68a2debad1c2c8600d5475699c3037a508a47867422acd580ac74b",
+      "bytes": 6396
+    },
+    "source382/tests/road-demands.test.ts": {
+      "sha256": "043a8659350d6b7bed23ad24b1bf959b8fe0f7571d829f6e3a3e8c91e5be0cc6",
+      "bytes": 15281
+    },
+    "source382/tests/road-estate.test.ts": {
+      "sha256": "86154c2321d24a1e336d3e89877f52615c94a9dca2f0eba63192c66bee995ecf",
+      "bytes": 5344
+    },
+    "source382/tests/road-navigation.test.ts": {
+      "sha256": "3db47bfd96e00c1e001f8072571ededd8656d27c37e5655b3841662f6024211a",
+      "bytes": 14556
+    },
+    "source382/tests/road-routing.test.ts": {
+      "sha256": "41e84afeec4e02d8f078327da6df1cb8a399929be360c824e43509cac872c232",
+      "bytes": 28802
+    },
+    "source382/tests/roads-old22.test.ts": {
+      "sha256": "3194671218396291fd21f0f463dc048eb511a18aa141cb6bf3e87b4fea2fe1a4",
+      "bytes": 1237
+    },
+    "source382/tests/roads.test.ts": {
+      "sha256": "2faff70355c0d73db5bd6297fed1fcd509931069188cf8fc15cf918416aec3bd",
+      "bytes": 18457
+    },
+    "source382/tests/roadwork-replacement.test.ts": {
+      "sha256": "6cb50c0c282dd3e0c39c66718492a6b806d1d9565b64e5bf3f474dacc967dc44",
+      "bytes": 23253
+    },
+    "source382/tests/roadworks-fixture.ts": {
+      "sha256": "4ad68bd48cb3d32703595480a11927d337682eb741c7b5127f54ff4b400a5bc3",
+      "bytes": 9543
+    },
+    "source382/tests/roadworks.test.ts": {
+      "sha256": "ead29aa0edca7df474fae6feb77a8e0d4493bcabf9d13657ca4743391e35e1dd",
+      "bytes": 20738
+    },
+    "source382/tests/room-route-support.test.ts": {
+      "sha256": "74d5ea94b3fd9b31d09fbb88f585b0693c2b0585398242547de5187c2fc80b5a",
+      "bytes": 4229
+    },
+    "source382/tests/route-encoding.test.ts": {
+      "sha256": "24ec425b8153a42b89748f1ced30767703ec01cbd5bee423756db1ba733015f4",
+      "bytes": 10705
+    },
+    "source382/tests/service-material-scheduling.test.ts": {
+      "sha256": "4529fdc41ac71e65e9e3bed6e361aee6d7b526634634b0278287460dc8a930de",
+      "bytes": 16195
+    },
+    "source382/tests/shop-lifecycle.test.ts": {
+      "sha256": "1732f183dbb8caeb951636a2102278fb0d243e6e4595df0481500754398eae33",
+      "bytes": 25874
+    },
+    "source382/tests/shop-native-repair.test.ts": {
+      "sha256": "2ce80214b406a15de6334d465ddcd131d6f3fac7d27f243609a007a6b10e5975",
+      "bytes": 8006
+    },
+    "source382/tests/shop-repeat-distress.test.ts": {
+      "sha256": "61fc3ccd19ce5ba8e46b12c0e70e346299cc3b4149834956ae468a9c4ca8b840",
+      "bytes": 41647
+    },
+    "source382/tests/shop-self-funding.test.ts": {
+      "sha256": "00fbc6b26b85fbbbd24106dbca06639ebae66850b275e4df619962e9ad8cfc97",
+      "bytes": 18454
+    },
+    "source382/tests/simulation.test.ts": {
+      "sha256": "04522e473ebb4d443fb6302f908baec8d2280db2d52ef10023cdd6758e2db6d5",
+      "bytes": 66862
+    },
+    "source382/tests/site-fixtures.test.ts": {
+      "sha256": "c1dde7e3d7c1286d07eeac4f7492ca48ed7852acc266708dd55045746cf0f5be",
+      "bytes": 10119
+    },
+    "source382/tests/stair-continuity.test.ts": {
+      "sha256": "3136a1cecc48b81dd0368f5e81935790455fa362ba9b4ff50ccb077dd7643a44",
+      "bytes": 10300
+    },
+    "source382/tests/stair-escape-origin.test.ts": {
+      "sha256": "b9db5baa19c7edd4b4945ecfd0110973fd2c7f9032ccadc97846c31243c4b2ec",
+      "bytes": 18644
+    },
+    "source382/tests/supplemental-budget.test.ts": {
+      "sha256": "9ce07e587e7f02fe89ca8a31f6ef191b4d5644ddf38cd62970e1f39d0d09ceea",
+      "bytes": 17170
+    },
+    "source382/tests/trade.test.ts": {
+      "sha256": "5f06ffdd905af5a8b698a0e9a3165a153e65467ef7d51e459a93df3f8e47146b",
+      "bytes": 46212
+    },
+    "source382/tests/tree-crowns.test.ts": {
+      "sha256": "4af33874de1d8df12cd4e4a3d8593a0988d30afd6683e72a2bfa5121d4f0f6f1",
+      "bytes": 2175
+    },
+    "source382/tests/v4-extensions.test.ts": {
+      "sha256": "0834ab99a952c506baa6d959a41c43fd00fff77b920d4ce193c608d529e591ea",
+      "bytes": 16985
+    },
+    "source382/tests/v4-services.test.ts": {
+      "sha256": "e637f62f10d27a3d7d0b782812f50b20224e5d5ece5b1f94eb47032232668683",
+      "bytes": 7284
+    },
+    "source382/tests/v4-simulation.test.ts": {
+      "sha256": "b7088b4ad34c9452dafc9736ac0e018092f22006eb26aba20e37ff80fc79e059",
+      "bytes": 16108
+    },
+    "source382/tests/world-generation-native.test.ts": {
+      "sha256": "00ed5cbbdf5220029640e94c89d813b9401869b06ff19a481e3d0a8b129cc462",
+      "bytes": 20152
+    },
+    "source382/tests/world-generation-pure.test.ts": {
+      "sha256": "00ce1f0627c48b33a4e69f14e2c87276021ac0bf42099b206943ebc020c65f9f",
+      "bytes": 6641
+    },
+    "source382/tests/world-layout.test.ts": {
+      "sha256": "8bd848ddfd1866d03078a311f1de3a34df671146a1fccf3241cb53b30f179e67",
+      "bytes": 27934
+    },
+    "source382/tests/world-v4.test.ts": {
+      "sha256": "d7e54d399322213b1a2fd429b8f27f42fcff114679ad1dc631a4b7ff704dfbe7",
+      "bytes": 15373
+    },
+    "source382/tests/world-v5.test.ts": {
+      "sha256": "af70461ff3dc804138ed8fa70fda78bce90d39d302acbf1fbab431aa683f5d61",
+      "bytes": 4455
+    },
+    "source382/tests/world-v6-commercial-routes.test.ts": {
+      "sha256": "eccd0446f775759b8f1a733134abec59894013ad2fb50b13e356f759b29c4dae",
+      "bytes": 9788
+    },
+    "source382/tests/world-v6-commercial.test.ts": {
+      "sha256": "ceb9706bd82a041c7542bf91e27f4b51f975af9c22e3e7243659be9a855c72b1",
+      "bytes": 11801
+    },
+    "source382/tests/world-v6-office.test.ts": {
+      "sha256": "c53b821fb1d74eaaaff69c2c0a443ca6ec904988948470b5366e928e71c59a82",
+      "bytes": 4345
+    },
+    "source382/tests/world.test.ts": {
+      "sha256": "51f5b1ed5d6ddaa7d7b276440dcb144d3ac45937200eefcefc6b2415eae682e6",
+      "bytes": 26120
+    },
+    "source382/tsconfig.json": {
+      "sha256": "506edfff126cc4d7d521efde35873b0ad2a9fbdb0fc07aa665c5566859d200a9",
+      "bytes": 333
+    },
+    "source382/vite.config.ts": {
+      "sha256": "58fccedf064371028dd2a14ee5627d7c1055b54298bbc52adc3b01de9460755f",
+      "bytes": 357
+    },
+    "world/WORLD-ORIGINAL.json": {
+      "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+      "bytes": 1832308
+    }
+  },
+  "source372And373PreservedInEarlierOrExperimentalEvidence": true,
+  "nodeModulesExcluded": true
+}

@@ -1,0 +1,69 @@
+{
+  "status": "PASS_PRIVATE_APPEND_CELL_PRESERVATION_ONLY",
+  "createdAtUTC": "2026-10-05T11:43:37.900738+00:00",
+  "original": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/MATRIX-38.csv",
+    "sha256Before": "85ea7bcfa4ccbb2ab7c0433ad86418a6ced965810202a3b6d9e84fddbbcef6d0",
+    "sha256After": "85ea7bcfa4ccbb2ab7c0433ad86418a6ced965810202a3b6d9e84fddbbcef6d0",
+    "byteLength": 102422,
+    "utf8BOM": true,
+    "recordsIncludingHeader": 39,
+    "domains": 38,
+    "columns": 17
+  },
+  "draft": {
+    "path": "/tmp/ROOT20-delivery-docs-draft-20261005-01/MATRIX-38.csv",
+    "sha256": "eaf6ae97a1a9bc441a87fbb64c185b9af922fec0783868afd97d7c2e77b358bc",
+    "utf8BOM": true,
+    "recordsIncludingHeader": 39,
+    "domains": 38,
+    "columns": 22,
+    "appendColumns": [
+      "ROOT20计划",
+      "ROOT20实现",
+      "ROOT20运行",
+      "ROOT20验证",
+      "ROOT20剩余"
+    ]
+  },
+  "assertions": {
+    "old17HeaderCellsExact": true,
+    "old646DataCellsExact": true,
+    "ROOT19CellsChanged": 0,
+    "all38IdsOrderExact": true,
+    "sharedOriginalBytesUnchanged": true,
+    "privateWritesOnly": true,
+    "all15CompletedRawHashesMatchReceipts": true,
+    "noNewExecutionByReviewer": true
+  },
+  "otherOriginalInputs": [
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/README.md",
+      "sha256": "138d4021b886411dbdfd31205dcd340f504f9df82490ba4dd36069c1f7f2c6dc"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/MATRIX-FROZEN-FINAL02.json",
+      "sha256": "82208fee042365f170013d0f44db82794b4c6e7a0ac6c2aa728c1ca8b1b60f7a"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/OLD-TEST-PRESERVATION.json",
+      "sha256": "5a6c6ed38bb7a6c1002e1e5e1ae37e36310f9972824edd5a5e964c9496456687"
+    },
+    {
+      "path": "/tmp/ROOT20-production-candidate-20261005-01/SOURCE-INPUTS-382.json",
+      "sha256": "6d30a4531911eebce0b7069424cccf9c5cc77c1b71881798a538510015eac90f"
+    },
+    {
+      "path": "/tmp/ROOT20-combination-static-review-20261005-01/PRODUCTION-382-BINDING.json",
+      "sha256": "af24187df89c18ad41d6145920f60b5e49b3c81070c05c316eefaee844f3f744"
+    },
+    {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/originals/WORLD-ORIGINAL.json",
+      "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/ROOT19-NATURAL-CITY.save.json",
+      "sha256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83"
+    }
+  ]
+}

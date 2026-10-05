@@ -1,0 +1,73 @@
+{
+  "status": "FAILED_BEFORE_LIBRARY_PREPARATION",
+  "writtenUTC": "2026-10-05T12:11:50.074615+00:00",
+  "requestCount": 9,
+  "memoExpectedCurrentVersion": 7,
+  "memoLibraryFileId": "libfile_7571a326de848191aec330d605a63845",
+  "memoReplacementWritten": false,
+  "newLibraryIDs": [],
+  "prepareOrFinalizeAttempted": false,
+  "failureStage": "Library upload connection failed before batch preparation",
+  "stdoutBytes": 0,
+  "privateStderrSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "automaticRetry": false,
+  "directFallbackAttempted": false,
+  "filesPreservedLocally": true,
+  "skill": "openai-library:library",
+  "results": [
+    {
+      "local_path": "/workspace/yunshan/开发备忘录.md",
+      "purpose": "replace_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-PRIMARY-1700.save.json",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-CLASSROOM-ORIGINAL.png",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-STREET-ORIGINAL.png",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/MATRIX-38.csv",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ART-REVIEW.md",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-SOURCE-AND-BUILD.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/README.md",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    },
+    {
+      "local_path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-ORIGINAL-VALIDATION.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_STARTED_BEFORE_PREPARATION",
+      "library_file_id": null
+    }
+  ]
+}

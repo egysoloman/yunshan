@@ -1,0 +1,355 @@
+{
+  "createdAtUTC": "2026-10-05T11:42:24.217989+00:00",
+  "reviewer": "/root/root20_reference_art",
+  "scope": "Read-only original PNG comparison and static evidence review; root-owned GPU result not re-executed by reviewer.",
+  "technicalCaptureResult": "PASS",
+  "overallReferenceArtResult": "ART_FAIL",
+  "reportPath": "/tmp/ROOT20-reference-art-review-20261005-01/ART-REVIEW.md",
+  "reportSHA256": "f039dd32ec158421d99e360b778cd43ed2343ed0113668bc9e0dfe6e6599f652",
+  "rootGPUReceiptPath": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/receipt.json",
+  "rootGPUReceiptSHA256": "d429ac2410dba42cea4993689401bf798136b76a5aabb4c47ad424157ae3cb54",
+  "rootGPUReceipt": {
+    "startedAt": "2026-10-05T11:32:06.510032+00:00",
+    "endedAt": "2026-10-05T11:36:59.967492+00:00",
+    "argv": [
+      "node",
+      "/tmp/ROOT20-reference-ui-gpu-20261005-01/capture-reference.mjs",
+      "/tmp/ROOT20-reference-ui-gpu-20261005-01/PLAN.json",
+      "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 382,
+    "inputsStable": true,
+    "rawSHA256": "29ac8e38f5fc2e42a999bb00326fe602e700cd266e52a498eff90786ddb67061",
+    "ownedPid": 198939,
+    "observedDescendants": 12,
+    "finalOwnedMembers": [
+      {
+        "pid": 198966,
+        "state": "Z",
+        "parent": 1,
+        "group": 198939,
+        "session": 198939,
+        "startTicks": 13075274
+      },
+      {
+        "pid": 198994,
+        "state": "Z",
+        "parent": 1,
+        "group": 198977,
+        "session": 198977,
+        "startTicks": 13075385
+      },
+      {
+        "pid": 198995,
+        "state": "Z",
+        "parent": 1,
+        "group": 198977,
+        "session": 198977,
+        "startTicks": 13075385
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "comparisons": [
+    {
+      "scene": "classroom-native-course-ui",
+      "newPNG": {
+        "path": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/classroom-native-course-ui.png",
+        "bytes": 773449,
+        "SHA256": "bc733973d0bf14fc56087922f367d63863c6c5a5f2ce8199d4ffa3add15f65f0",
+        "originalPNGViewedUsingViewImage": true
+      },
+      "oldPNG": {
+        "path": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/classroom-native-course-ui.png",
+        "bytes": 770768,
+        "SHA256": "a53473b8a5652c8e8429463891e18393d3ae6fd1f84dcc55d6f9cf75f796d484",
+        "originalPNGViewedUsingViewImage": true
+      },
+      "saveComparisons": [
+        {
+          "stage": "before",
+          "newPath": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/classroom-native-course-ui.before.save.json",
+          "oldPath": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/classroom-native-course-ui.before.save.json",
+          "bytes": 3458455,
+          "SHA256": "b83a2653c09731d9064836fa5ad46dfb4d2aef7b921f4f56f6cd0e6769ff1c8a",
+          "byteExact": true
+        },
+        {
+          "stage": "after",
+          "newPath": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/classroom-native-course-ui.after.save.json",
+          "oldPath": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/classroom-native-course-ui.after.save.json",
+          "bytes": 3458455,
+          "SHA256": "b83a2653c09731d9064836fa5ad46dfb4d2aef7b921f4f56f6cd0e6769ff1c8a",
+          "byteExact": true
+        }
+      ],
+      "bodyCameraEquality": {
+        "before": {
+          "tick": {
+            "value": 1536,
+            "equalToROOT19": true
+          },
+          "hour": {
+            "value": 11.2,
+            "equalToROOT19": true
+          },
+          "body": {
+            "value": {
+              "x": -302.6,
+              "y": 182.6,
+              "z": -243.20000000000002
+            },
+            "equalToROOT19": true
+          },
+          "camera": {
+            "value": {
+              "position": [
+                -302.6,
+                184.32,
+                -243.20000000000002
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            },
+            "equalToROOT19": true
+          }
+        },
+        "after": {
+          "tick": {
+            "value": 1536,
+            "equalToROOT19": true
+          },
+          "hour": {
+            "value": 11.2,
+            "equalToROOT19": true
+          },
+          "body": {
+            "value": {
+              "x": -302.6,
+              "y": 182.6,
+              "z": -243.20000000000002
+            },
+            "equalToROOT19": true
+          },
+          "camera": {
+            "value": {
+              "position": [
+                -302.6,
+                184.32,
+                -243.20000000000002
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            },
+            "equalToROOT19": true
+          }
+        }
+      },
+      "captureFixture": {
+        "before": {
+          "x": -740,
+          "y": 18,
+          "z": 980
+        },
+        "after": {
+          "x": -302.6,
+          "y": 182.6,
+          "z": -243.20000000000002
+        },
+        "siteId": "academy-b7",
+        "floor": 0,
+        "pointId": "0:program:service",
+        "point": {
+          "x": -302.6,
+          "y": 182.6,
+          "z": -243.20000000000002
+        },
+        "nativePoint": {
+          "id": "0:program:service",
+          "purpose": "service",
+          "floor": 0,
+          "position": {
+            "x": -302.6,
+            "y": 182.6,
+            "z": -243.20000000000002
+          }
+        },
+        "nativePresence": {
+          "kind": "room",
+          "floor": 0,
+          "y": 182.6,
+          "local": {
+            "x": 0,
+            "z": -15.599999999999994
+          }
+        },
+        "legalEvidence": {
+          "canAccessBuilding": true,
+          "publicFloor": true,
+          "blockedVoxel": null,
+          "controllerSupportingSiteId": "academy-b7",
+          "detectedInsideId": "academy-b7",
+          "detectedFloor": 0,
+          "playerRole": "traveler",
+          "playerIdentities": [
+            "traveler"
+          ],
+          "requiredPermission": null,
+          "floorPermissions": null,
+          "publicFloors": null,
+          "voxelCount": 0,
+          "bodyRadius": 0.35,
+          "bodyHeight": 1.72
+        },
+        "scope": "Disclosed controlled legal classroom viewer reposition only; no continuous walking or natural player arrival claim."
+      },
+      "wholeBusinessExactAgainstROOT19": true
+    },
+    {
+      "scene": "city-native-street",
+      "newPNG": {
+        "path": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/city-native-street.png",
+        "bytes": 470460,
+        "SHA256": "bf2460a8c9b31440008908946230ece309f1457ed9515a4f055ff62ff18166e8",
+        "originalPNGViewedUsingViewImage": true
+      },
+      "oldPNG": {
+        "path": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/city-native-street.png",
+        "bytes": 461090,
+        "SHA256": "985be74490cdfa735fe07725f5fcef4b4b2916ac17a46b96076d1dc5fef5939d",
+        "originalPNGViewedUsingViewImage": true
+      },
+      "saveComparisons": [
+        {
+          "stage": "before",
+          "newPath": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/city-native-street.before.save.json",
+          "oldPath": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/city-native-street.before.save.json",
+          "bytes": 3459160,
+          "SHA256": "81836f79905f234e763766ab835b1c88f1ea23b5e4c0ec0c7dd3808ee99775f1",
+          "byteExact": true
+        },
+        {
+          "stage": "after",
+          "newPath": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/city-native-street.after.save.json",
+          "oldPath": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/artifacts/city-native-street.after.save.json",
+          "bytes": 3459160,
+          "SHA256": "81836f79905f234e763766ab835b1c88f1ea23b5e4c0ec0c7dd3808ee99775f1",
+          "byteExact": true
+        }
+      ],
+      "bodyCameraEquality": {
+        "before": {
+          "tick": {
+            "value": 1536,
+            "equalToROOT19": true
+          },
+          "hour": {
+            "value": 11.2,
+            "equalToROOT19": true
+          },
+          "body": {
+            "value": {
+              "x": -740,
+              "y": 18,
+              "z": 980
+            },
+            "equalToROOT19": true
+          },
+          "camera": {
+            "value": {
+              "position": [
+                -740,
+                19.72,
+                980
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            },
+            "equalToROOT19": true
+          }
+        },
+        "after": {
+          "tick": {
+            "value": 1536,
+            "equalToROOT19": true
+          },
+          "hour": {
+            "value": 11.2,
+            "equalToROOT19": true
+          },
+          "body": {
+            "value": {
+              "x": -740,
+              "y": 18,
+              "z": 980
+            },
+            "equalToROOT19": true
+          },
+          "camera": {
+            "value": {
+              "position": [
+                -740,
+                19.72,
+                980
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            },
+            "equalToROOT19": true
+          }
+        }
+      },
+      "captureFixture": null,
+      "wholeBusinessExactAgainstROOT19": true
+    }
+  ],
+  "notRunByReviewer": [
+    "test",
+    "typecheck",
+    "build",
+    "Sim",
+    "browser",
+    "GPU",
+    "profile",
+    "upload"
+  ],
+  "unverified": [
+    "macOS real machine",
+    "natural night light pool",
+    "explicit power-grid island scene",
+    "complete reference city art",
+    "continuous classroom player arrival"
+  ],
+  "filesUnmodified": [
+    "original PNG",
+    "original capture JSON",
+    "original save JSON",
+    "shared repo",
+    "final source"
+  ]
+}

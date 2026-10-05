@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { getFloorDimensions } from '../access';
 import { boundaryLoops, getBuildingBody, getFloorPlanRoofRegions, wallPanels, type BuildingBody, type FloorPlan, type RoofRegion, type Wall } from '../architecture-floor-plan';
 import type { Building, Quality, Vec3 } from '../types';
+import { installDetailSurfaceFinishes } from './detail-surface-finishes';
 
 export const ARCHITECTURE_DETAIL_DISTANCE = 180;
 export const ARCHITECTURE_DETAIL_BUILDINGS = 8;
@@ -12,8 +13,8 @@ export interface ArchitectureDetailPart {
   purpose: 'door' | 'window' | 'frame' | 'bracket' | 'tile' | 'masonry' | 'program' | 'lantern' | 'sign';
   rotation?: [number, number, number]; luminous?: boolean;
 }
-interface DetailReference { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean }
-interface DetailEntry { group: THREE.Group; references: DetailReference[]; floor: number; quality: Quality; instanceCount: number; sign?: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshStandardMaterial>; interiorKey: string }
+interface DetailReference { mesh: THREE.InstancedMesh; index: number; matrix: THREE.Matrix4; floor: number; roof: boolean; luminous: boolean; hidden: boolean }
+interface DetailEntry { group: THREE.Group; references: DetailReference[]; floor: number; quality: Quality; instanceCount: number; sign?: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshStandardMaterial>; lanternMaterial?: THREE.MeshStandardMaterial; interiorKey: string }
 const q = (number: number) => Math.round(number * 5) / 5;
 const WOOD = '#75563c', EDGE = '#b89763', STONE = '#a1a394', DARK = '#42534a', TILE = '#69766a';
 
@@ -437,7 +438,7 @@ export class ArchitectureDetailManager {
   private disposed = false;
   private lastCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   private lastSelection = '';
-  constructor(private readonly buildings: readonly Building[]) { this.group.name = '建筑近景 · 按距离生成'; }
+  constructor(private readonly buildings: readonly Building[]) { this.group.name = '建筑近景 · 按距离生成'; installDetailSurfaceFinishes(this.solid); }
 
   update(camera: Vec3, interior: ArchitectureInterior = { buildingId: null }, quality: Quality = 'balanced'): void {
     if (this.disposed) return;
@@ -462,6 +463,7 @@ export class ArchitectureDetailManager {
         const ceiling = activeFloor !== null && activeFloor < 0 ? activeFloor + 1 : activeFloor;
         for (const reference of entry.references) {
           const hidden = activeFloor !== null && (reference.floor > ceiling! || !getBuildingBody(building) && reference.roof && reference.floor >= activeFloor);
+          reference.hidden = hidden;
           reference.mesh.setMatrixAt(reference.index, hidden ? new THREE.Matrix4().makeScale(0, 0, 0) : reference.matrix);
           reference.mesh.instanceMatrix.needsUpdate = true;
         }
@@ -472,29 +474,69 @@ export class ArchitectureDetailManager {
     this.group.userData = this.getStats();
   }
 
-  setLighting(daylight: number, power: number): void {
+  setLighting(daylight: number, power: number, buildingSupply?: (buildingId: string) => number): void {
     if (this.disposed) return;
-    this.light.emissiveIntensity = THREE.MathUtils.clamp(power, 0, 1) * (.08 + (1 - THREE.MathUtils.clamp(daylight, 0, 1)) * 1.7);
+    const emission = .08 + (1 - THREE.MathUtils.clamp(daylight, 0, 1)) * 1.7;
+    this.light.emissiveIntensity = THREE.MathUtils.clamp(power, 0, 1) * emission;
+    for (const [id, entry] of this.entries) if (entry.lanternMaterial) {
+      const supply = buildingSupply ? buildingSupply(id) : power;
+      entry.lanternMaterial.emissiveIntensity = (Number.isFinite(supply) ? THREE.MathUtils.clamp(supply, 0, 1) : 0) * emission;
+    }
     this.group.userData = this.getStats();
   }
 
-  getStats() { return { activeBuildings: this.entries.size, activeBuildingIds: [...this.entries.keys()], instances: [...this.entries.values()].reduce((sum, entry) => sum + entry.instanceCount, 0), created: this.created, released: this.released, maxBuildings: ARCHITECTURE_DETAIL_BUILDINGS, maxInstancesPerBuilding: ARCHITECTURE_DETAIL_INSTANCES, loadDistance: ARCHITECTURE_DETAIL_DISTANCE, lanternEmission: this.light.emissiveIntensity }; }
+  /** Reuses the renderer's two existing light slots while outdoors. Sources
+   * are the actual resident, visible lantern panels, with their real matrix
+   * and supplied power. This bounded local light has no shadow/GI guarantee. */
+  getExteriorLightConfigurations(camera: Vec3, daylight: number, power: number | ((buildingId: string) => number), limit = 2) {
+    if (this.disposed || typeof power === 'number' && (!Number.isFinite(power) || power <= 0)) return [];
+    const night = 1 - THREE.MathUtils.clamp(Number.isFinite(daylight) ? daylight : 0, 0, 1);
+    const sources: { anchorId: string; source: 'resident-lantern'; position: Vec3; intensity: number; distance: number; decay: 2; color: string; cameraDistance: number }[] = [];
+    for (const [id, entry] of this.entries) {
+      const supply = typeof power === 'function' ? power(id) : power;
+      const supplied = Number.isFinite(supply) ? THREE.MathUtils.clamp(supply, 0, 1) : 0;
+      if (supplied <= 0) continue;
+      entry.group.updateWorldMatrix(true, false);
+      for (const reference of entry.references) {
+        if (!reference.luminous || reference.hidden) continue;
+        const position = new THREE.Vector3().setFromMatrixPosition(reference.matrix).applyMatrix4(entry.group.matrixWorld);
+        const cameraDistance = position.distanceTo(new THREE.Vector3(camera.x, camera.y, camera.z));
+        if (cameraDistance > 7.5) continue;
+        sources.push({ anchorId: `${id}:lantern:${reference.index}`, source: 'resident-lantern', position: { x: position.x, y: position.y, z: position.z },
+          intensity: supplied * (2.4 + night * 29.6), distance: 7.5, decay: 2, color: '#ffdcaa', cameraDistance });
+      }
+    }
+    sources.sort((a, b) => a.cameraDistance - b.cameraDistance || a.anchorId.localeCompare(b.anchorId));
+    return sources.slice(0, Math.max(0, Math.min(2, Math.floor(limit))));
+  }
+
+  getStats() { return { activeBuildings: this.entries.size, activeBuildingIds: [...this.entries.keys()], instances: [...this.entries.values()].reduce((sum, entry) => sum + entry.instanceCount, 0), created: this.created, released: this.released, maxBuildings: ARCHITECTURE_DETAIL_BUILDINGS, maxInstancesPerBuilding: ARCHITECTURE_DETAIL_INSTANCES, loadDistance: ARCHITECTURE_DETAIL_DISTANCE, lanternEmission: this.light.emissiveIntensity,
+    lanternEmissionByBuilding: Object.fromEntries([...this.entries].filter(([, entry]) => entry.lanternMaterial).map(([id, entry]) => [id, entry.lanternMaterial!.emissiveIntensity])) }; }
 
   private create(building: Building, floor: number, quality: Quality): DetailEntry {
     const parts = buildArchitectureDetails(building, floor, quality === 'low' ? 384 : quality === 'high' ? 640 : 576);
     const group = new THREE.Group(); group.name = `细部 · ${building.name}`; group.position.set(building.position.x, building.position.y + .6, building.position.z); group.rotation.y = building.rotation;
     const references: DetailReference[] = [];
+    let lanternMaterial: THREE.MeshStandardMaterial | undefined;
     for (const luminous of [false, true]) {
       const selected = parts.filter(part => !!part.luminous === luminous); if (!selected.length) continue;
-      const mesh = new THREE.InstancedMesh(this.cube, luminous ? this.light : this.solid, selected.length); mesh.name = luminous ? '灯笼暖光' : '木构开间 · 窗棂 · 斗拱 · 砖石 · 门牌';
+      // Per-instance surface tags must not be attached to the shared cube:
+      // another entry/light would otherwise overwrite their live attribute.
+      const geometry = luminous ? this.cube : this.cube.clone();
+      if (!luminous) geometry.setAttribute('instanceDetailSurface', new THREE.InstancedBufferAttribute(new Float32Array(selected.map(part =>
+        part.purpose === 'masonry' ? 2 : part.purpose === 'tile' && [TILE, '#829080'].includes(part.color) ? 3 : 1)), 1));
+      // Each building owns one emission uniform so disconnected feeders can
+      // darken their real paper panels without dimming a supplied neighbour.
+      if (luminous) lanternMaterial = this.light.clone();
+      const mesh = new THREE.InstancedMesh(geometry, luminous ? lanternMaterial! : this.solid, selected.length); mesh.name = luminous ? '灯笼暖光' : '木构开间 · 窗棂 · 斗拱 · 砖石 · 门牌';
       selected.forEach((part, index) => {
         const rotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(...(part.rotation ?? [0, 0, 0])));
         const matrix = new THREE.Matrix4().compose(new THREE.Vector3(part.position.x, part.position.y, part.position.z), rotation, new THREE.Vector3(part.size.x, part.size.y, part.size.z));
-        mesh.setMatrixAt(index, matrix); mesh.setColorAt(index, new THREE.Color(part.color)); references.push({ mesh, index, matrix, floor: part.floor, roof: part.roof });
+        mesh.setMatrixAt(index, matrix); mesh.setColorAt(index, new THREE.Color(part.color)); references.push({ mesh, index, matrix, floor: part.floor, roof: part.roof, luminous: !!part.luminous, hidden: false });
       });
       mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; mesh.computeBoundingSphere(); group.add(mesh);
     }
-    const entry: DetailEntry = { group, references, floor, quality, instanceCount: parts.length, interiorKey: '' };
+    const entry: DetailEntry = { group, references, floor, quality, instanceCount: parts.length, ...(lanternMaterial ? { lanternMaterial } : {}), interiorKey: '' };
     const body = getBuildingBody(building), programPlacement = body ? architectureProgramSignPlacement(building) : null;
     const placement = body ? programPlacement : architectureSignPlacement(building);
     if (typeof document !== 'undefined' && placement) {
@@ -534,7 +576,8 @@ export class ArchitectureDetailManager {
   private release(id: string): void {
     const entry = this.entries.get(id); if (!entry) return;
     this.group.remove(entry.group);
-    for (const object of entry.group.children) if (object instanceof THREE.InstancedMesh) object.dispose();
+    for (const object of entry.group.children) if (object instanceof THREE.InstancedMesh) { if (object.geometry !== this.cube) object.geometry.dispose(); object.dispose(); }
+    entry.lanternMaterial?.dispose();
     if (entry.sign) { entry.sign.geometry.dispose(); entry.sign.material.map?.dispose(); entry.sign.material.dispose(); }
     entry.group.clear(); this.entries.delete(id); this.released++;
   }

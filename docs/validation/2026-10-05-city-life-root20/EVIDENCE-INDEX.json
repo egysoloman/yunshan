@@ -1,0 +1,1024 @@
+{
+  "statusSnapshot": {
+    "draftCreatedAtUTC": "2026-10-05T11:43:37.900738+00:00",
+    "final382Regression": "PASS_ACTUAL_RECEIPT_74_OF_74",
+    "final382Build": "PASS_ACTUAL_RECEIPT",
+    "final382Natural174": "PASS_ACTUAL_RECEIPT_174_STEPS_175_FULL_READERS",
+    "final382GPU": "PASS_ACTUAL_TECHNICAL_RECEIPT_TWO_PNGS_GL0_LINKED",
+    "statusBasis": "completed natural receipt11:31:22.921555 and GPU receipt11:36:59.967492; root actual PNG view reports ART_FAIL; install/commit/push not yet verified",
+    "final382InstallCommitPush": "NOT_VERIFIED_IN_THIS_DRAFT",
+    "macOS": "NOT_RUN",
+    "referenceArtStatus": "ART_FAIL_ROOT_ACTUAL_VISUAL_REVIEW",
+    "referenceArtComplete": false,
+    "fourteenDaySteadyStateComplete": false,
+    "scope": "read-only original artifacts; private text/CSV/JSON assembly; no product import/native/test/validate/tsc/build/GPU executed by this reviewer"
+  },
+  "source": {
+    "candidate": "/tmp/ROOT20-production-candidate-20261005-01/source382",
+    "manifest": "/tmp/ROOT20-production-candidate-20261005-01/SOURCE-INPUTS-382.json",
+    "manifestSHA256": "6d30a4531911eebce0b7069424cccf9c5cc77c1b71881798a538510015eac90f",
+    "inputCount": 382,
+    "sortedCompactObjectGraphSHA256": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+    "baselineHEAD": "f3cda3f6f3107f5ec58597a43188b919c5909262",
+    "baseline372Graph": "53cff00cc41461300b3b80c8259be29a0baad1d639963272e67ed956bb9d5e4d",
+    "modified": 7,
+    "added": 10,
+    "deleted": 0,
+    "originalTestTreeEntriesExact": 242,
+    "staticBinding": "/tmp/ROOT20-combination-static-review-20261005-01/PRODUCTION-382-BINDING.json",
+    "staticBindingSHA256": "af24187df89c18ad41d6145920f60b5e49b3c81070c05c316eefaee844f3f744",
+    "architectureFloorPlanRestoredSHA256": "387d10d7f59442899bbbbbae3075112b863c5a156faa21c816816d6bf397ce2e"
+  },
+  "completedReceipts": [
+    {
+      "id": "C01",
+      "receipt": "/tmp/ROOT20-clinical-causal-before-20261005-01/receipt.json",
+      "receiptSHA256": "207fb13dd3a992611a7c4815273ed2b09d78b006e3f0a16501d751e940b9437a",
+      "raw": "/tmp/ROOT20-clinical-causal-before-20261005-01/raw.log",
+      "rawSHA256": "036c18163a6628c76aac1b6a39be0faaec01125e19097056f735c53f36fd2a40",
+      "rawMatchesReceipt": true,
+      "guardStatus": "FAIL",
+      "exitCode": 1,
+      "timedOut": false,
+      "inputCount": 372,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "372",
+      "startedAt": "2026-10-05T10:42:34.007310+00:00",
+      "endedAt": "2026-10-05T10:42:35.231451+00:00",
+      "elapsedSeconds": 1.224141,
+      "testCounts": {},
+      "meaning": "受控原M2晚到患者；原generic事件误计4分钟，真到场交集只有1分钟；历史FAIL保留。"
+    },
+    {
+      "id": "C02",
+      "receipt": "/tmp/ROOT20-clinical-causal-after-20261005-01/receipt.json",
+      "receiptSHA256": "af2ca02604a14b2d09e38608eeab94aa67d0cb3f22a21c8c93c7dac8e710d824",
+      "raw": "/tmp/ROOT20-clinical-causal-after-20261005-01/raw.log",
+      "rawSHA256": "21f5f16d7b68349b5efcbd469cd6c4393120234bca31afff9215d2ce6c83950b",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:45:09.031944+00:00",
+      "endedAt": "2026-10-05T10:45:10.395514+00:00",
+      "elapsedSeconds": 1.36357,
+      "testCounts": {},
+      "meaning": "相同受控原M2、相同输入；修后严格计1分钟PASS，不是616自然病例。"
+    },
+    {
+      "id": "R01",
+      "receipt": "/tmp/ROOT20-new-regressions-20261005-01/receipt.json",
+      "receiptSHA256": "8305b9902f65b1bb4830683586af07baea9b03932c834ce55b4b9b10b5ac96c0",
+      "raw": "/tmp/ROOT20-new-regressions-20261005-01/raw.log",
+      "rawSHA256": "605ff0c56e7ecbe9c2aac18a4237210fbf1f60935ee678290005896bee97020c",
+      "rawMatchesReceipt": true,
+      "guardStatus": "FAIL",
+      "exitCode": 1,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:45:55.661513+00:00",
+      "endedAt": "2026-10-05T10:46:11.092214+00:00",
+      "elapsedSeconds": 15.430701,
+      "testCounts": {
+        "tests": 26,
+        "pass": 22,
+        "fail": 4,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "meaning": "首次新回归FAIL保留；新测试Facade缺validPosition，之后补齐夹具接口。"
+    },
+    {
+      "id": "R02",
+      "receipt": "/tmp/ROOT20-revised-regressions-20261005-01/receipt.json",
+      "receiptSHA256": "c6bded369880455d41f2f535381389c5752dc8f53690aa26fb8d7ff0d1e5597e",
+      "raw": "/tmp/ROOT20-revised-regressions-20261005-01/raw.log",
+      "rawSHA256": "e0b2f6c9e1e28416ede4267377e65cb0ac17673d376c08bb6cf89c847ef1dc69",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:59:18.408396+00:00",
+      "endedAt": "2026-10-05T10:59:39.672458+00:00",
+      "elapsedSeconds": 21.264062,
+      "testCounts": {
+        "tests": 26,
+        "pass": 26,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "meaning": "修正新Facade后26/26；五个指定新文件，不是全部仓库测试。"
+    },
+    {
+      "id": "L01",
+      "receipt": "/tmp/ROOT20-legacy-architecture-rest-budget-20261005-01/receipt.json",
+      "receiptSHA256": "05c8d8e6d900955ecf1830f3877d4f02ee1bd4e593a37e10c44e62f8ac1151e8",
+      "raw": "/tmp/ROOT20-legacy-architecture-rest-budget-20261005-01/raw.log",
+      "rawSHA256": "b7d48789cefda6601e7c6c197465718fdfbf564aee9c7eff4a0629122c5e493c",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:50:43.373639+00:00",
+      "endedAt": "2026-10-05T10:52:46.308068+00:00",
+      "elapsedSeconds": 122.934429,
+      "testCounts": {
+        "tests": 54,
+        "pass": 54,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "meaning": "指定旧建筑/休息/材料/补款文件54/54；场景边界由各测试控制。"
+    },
+    {
+      "id": "L02",
+      "receipt": "/tmp/ROOT20-legacy-medical-20261005-01/receipt.json",
+      "receiptSHA256": "b55e708b802cd824bb8cffcd6f50a1b9fc3b9ea08aa9d2abd5600524810790ca",
+      "raw": "/tmp/ROOT20-legacy-medical-20261005-01/raw.log",
+      "rawSHA256": "c75a44d3ed8352b6e17eaa8992044f3dde3770014b17ebb8c55d9cec43a8da12",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:46:53.538437+00:00",
+      "endedAt": "2026-10-05T10:47:44.652965+00:00",
+      "elapsedSeconds": 51.114528,
+      "testCounts": {
+        "tests": 75,
+        "pass": 73,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 2,
+        "todo": 0
+      },
+      "meaning": "指定旧医疗/卫生文件73PASS、2原SKIP；SKIP及原文件未削弱。"
+    },
+    {
+      "id": "E01",
+      "receipt": "/tmp/ROOT20-public-material-actual-20261005-01/receipt.json",
+      "receiptSHA256": "5290f131083a2fbfec783a982346e4258bdbe4989aea5abf676b45e76c00e6da",
+      "raw": "/tmp/ROOT20-public-material-actual-20261005-01/raw.log",
+      "rawSHA256": "92d417d7ac9fe06db8a58a11fd2af85342be4b76f8e889ebfa0c6dd4cb478c5e",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 381,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "381",
+      "startedAt": "2026-10-05T10:55:29.648876+00:00",
+      "endedAt": "2026-10-05T10:57:21.876889+00:00",
+      "elapsedSeconds": 112.228013,
+      "testCounts": {},
+      "meaning": "47建筑/616成人既有canonical-pair受控延续，真实工资/库存/六成人60分钟；不是World291学童480分钟。"
+    },
+    {
+      "id": "G01",
+      "receipt": "/tmp/ROOT20-geometry-regressions-20261005-01/receipt.json",
+      "receiptSHA256": "8997735149d11e789f0e67bee8a28c7b6bbb987a270653382a411d08a5fd5a79",
+      "raw": "/tmp/ROOT20-geometry-regressions-20261005-01/raw.log",
+      "rawSHA256": "b1a5589e1725552466faad02ca575963d0dea151ed0d9a58a89b7b9b075b9a9b",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 373,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "373_PRIVATE_WITHDRAWN",
+      "startedAt": "2026-10-05T11:02:39.950137+00:00",
+      "endedAt": "2026-10-05T11:07:45.757717+00:00",
+      "elapsedSeconds": 305.80758,
+      "testCounts": {
+        "tests": 38,
+        "pass": 38,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "meaning": "私有几何缓存分支38/38；该缓存源码和新增性能测试已撤回生产。"
+    },
+    {
+      "id": "G02",
+      "receipt": "/tmp/ROOT20-geometry-equivalence-20261005-01/receipt.json",
+      "receiptSHA256": "12ebd767854c7772fde6583f8bc2291ccd99dc859ea5943f5f97ac4b9b9ccb2f",
+      "raw": "/tmp/ROOT20-geometry-equivalence-20261005-01/raw.log",
+      "rawSHA256": "0e02ca73be808f56d1e58ce15fd058cfc0cc10e35915b8ec871728fb27124494",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 373,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "373_PRIVATE_WITHDRAWN",
+      "startedAt": "2026-10-05T11:09:09.796153+00:00",
+      "endedAt": "2026-10-05T11:11:45.860258+00:00",
+      "elapsedSeconds": 156.064105,
+      "testCounts": {},
+      "meaning": "私有分支与基线40步全save/events逐字相同；+3.205%更慢，未采用。"
+    },
+    {
+      "id": "P01",
+      "receipt": "/tmp/ROOT20-power-causal-before-20261005-01/receipt.json",
+      "receiptSHA256": "8134b881087f4c9f66dabdae8c170d1ac11e685fc3ce2817537d82b948d3d32d",
+      "raw": "/tmp/ROOT20-power-causal-before-20261005-01/raw.log",
+      "rawSHA256": "2d24cef04d5116b20f5f726ccf533aeae1be62e69471769d80125f04b4719d7f",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 372,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "372",
+      "startedAt": "2026-10-05T11:13:31.993603+00:00",
+      "endedAt": "2026-10-05T11:13:32.922809+00:00",
+      "elapsedSeconds": 0.929206,
+      "testCounts": {},
+      "meaning": "guard PASS表示预期重现旧错误：generic事件被接受；不是供电验收PASS。"
+    },
+    {
+      "id": "P02",
+      "receipt": "/tmp/ROOT20-power-causal-after-20261005-01/receipt.json",
+      "receiptSHA256": "722f8bc78ce088d359e72b0085e0f4341bd16c32f5854806f8065f6fc7b3d522",
+      "raw": "/tmp/ROOT20-power-causal-after-20261005-01/raw.log",
+      "rawSHA256": "28683ba9ce946bb11f24b681d39ae990c2c0206f71a0ff91d6692655e4160e9f",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 382,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "382",
+      "startedAt": "2026-10-05T11:20:28.353762+00:00",
+      "endedAt": "2026-10-05T11:20:29.855005+00:00",
+      "elapsedSeconds": 1.501243,
+      "testCounts": {},
+      "meaning": "实际安装callback四种NPC/player、正额/零额generic均被拒；零constructor/import/step，不是自然维修。"
+    },
+    {
+      "id": "F01",
+      "receipt": "/tmp/ROOT20-final-regressions-20261005-01/receipt.json",
+      "receiptSHA256": "f05906ca2b9b96e049def4421240b6f49a5130c74b7706060ea26ed2701f7027",
+      "raw": "/tmp/ROOT20-final-regressions-20261005-01/raw.log",
+      "rawSHA256": "6b4cceae408cfe020a965db359abc78b348a5069a31fa08183cc0f1708a74d06",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 382,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "382",
+      "startedAt": "2026-10-05T11:21:07.708840+00:00",
+      "endedAt": "2026-10-05T11:25:17.347141+00:00",
+      "elapsedSeconds": 249.638301,
+      "testCounts": {
+        "tests": 74,
+        "pass": 74,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "meaning": "指定10测试文件74/74，无SKIP/cancel；实际final382回归，不是完整38域验收。"
+    },
+    {
+      "id": "B01",
+      "receipt": "/tmp/ROOT20-final-build-20261005-01/receipt.json",
+      "receiptSHA256": "bf27f1fbd933832a2eb3aa0088476968e5dc848b1fb5764d9c80f26e85fbe37a",
+      "raw": "/tmp/ROOT20-final-build-20261005-01/raw.log",
+      "rawSHA256": "1b5c9dd759c3824e8ea0a0ce63b67b8b5ab19af869bd74665275d0e51b4840fa",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 382,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "382",
+      "startedAt": "2026-10-05T11:25:39.286589+00:00",
+      "endedAt": "2026-10-05T11:26:01.303568+00:00",
+      "elapsedSeconds": 22.016979,
+      "testCounts": {},
+      "meaning": "npm run build实际完成；tsc --noEmit与Vite构建PASS；不是浏览器/GPU运行。"
+    },
+    {
+      "id": "N01",
+      "receipt": "/tmp/ROOT20-resident-rest-natural-20261005-01/prepared02/actual01/receipt.json",
+      "receiptSHA256": "07cb7846fa1965c66c00b6dff1b34f6b6aaf296566a0265442893361e4e61d08",
+      "raw": "/tmp/ROOT20-resident-rest-natural-20261005-01/prepared02/actual01/raw.log",
+      "rawSHA256": "be09fcb0f6cd73969afd60abb335327d85fd89d1a066227b99838b85d898ab95",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 382,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "382",
+      "startedAt": "2026-10-05T11:26:32.097816+00:00",
+      "endedAt": "2026-10-05T11:31:22.921555+00:00",
+      "elapsedSeconds": 290.823739,
+      "testCounts": {},
+      "meaning": "原27752主线自然174步、175fullreader，真实到场公共休息/尾窗恢复及观察到的钱粮/工资；3552至3900，不是14日稳态。"
+    },
+    {
+      "id": "U01",
+      "receipt": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/receipt.json",
+      "receiptSHA256": "d429ac2410dba42cea4993689401bf798136b76a5aabb4c47ad424157ae3cb54",
+      "raw": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/raw.log",
+      "rawSHA256": "29ac8e38f5fc2e42a999bb00326fe602e700cd266e52a498eff90786ddb67061",
+      "rawMatchesReceipt": true,
+      "guardStatus": "PASS",
+      "exitCode": 0,
+      "timedOut": false,
+      "inputCount": 382,
+      "inputsStable": true,
+      "activeDescendants": [],
+      "sourceScope": "382",
+      "startedAt": "2026-10-05T11:32:06.510032+00:00",
+      "endedAt": "2026-10-05T11:36:59.967492+00:00",
+      "elapsedSeconds": 293.45746,
+      "testCounts": {},
+      "meaning": "真实生产browser/rAF/controller，两原PNG、保存/身体/相机与原ROOT19exact；Linux软件GPU技术PASS，美术root视觉ART_FAIL，非Mac。"
+    }
+  ],
+  "primaryActualCity": {
+    "world": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/originals/WORLD-ORIGINAL.json",
+    "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "layoutVersion": "current-v6",
+    "buildings": 612,
+    "residents": 616,
+    "districts": 11,
+    "explicitPowerGridDeclared": false,
+    "primarySave": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root19/ROOT19-NATURAL-CITY.save.json",
+    "primarySaveSHA256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83",
+    "bytes": 3459308,
+    "clockMinutes": 3552.0,
+    "dayIndex": 2,
+    "hour": 11.2,
+    "display": "第3日 11:12",
+    "naturalClinicalOrderCount": 0,
+    "naturalClinicalCompleted": 0,
+    "residentTuitionCompleted": 3,
+    "notSameBranch": "f108 independent off legacy17:00; never combine with this policy-on primary or E01 compact source"
+  },
+  "publicEducationActualCompactContinuation": {
+    "summary": "/tmp/ROOT20-public-material-actual-20261005-01/artifacts/PASS-summary.json",
+    "summarySHA256": "6b0ea8a97b7f7677c6ef9f142f3a22230f3c00b9783262e504f4421596efa214",
+    "scope": "DECLARED_COMPACT_PRECONSTRUCTOR_WORLD_EXISTING_ACTUAL_SOURCE_CONTINUATION",
+    "sourceInputCount": 381,
+    "worldSHA256": "abce713388422385a3754fc8d760745526d95fdb4268546057e5a748d8df6ea1",
+    "buildings": 47,
+    "residents": 616,
+    "residentMinimumAge": 20.011164383559397,
+    "openingSHA256": "55aff072ee15acc3afca29a24d906f6d1fed64554554ce423a30fb2a02ff5535",
+    "originalMaterialStock": 0,
+    "actualProducedUnits": 31.71215747798961,
+    "actualServiceProcuredUnits": 6,
+    "baseCap": 40,
+    "baseSpent": 40,
+    "receivedUnits": 6,
+    "consumedUnits": 6,
+    "supplementalRequests": [
+      {
+        "id": "service-1-supplement-1",
+        "signatureVersion": 2,
+        "requestedAt": 6616,
+        "approvedAt": 6616,
+        "cap": 11,
+        "spent": 9.870811616545701,
+        "signerIds": [
+          "citizen-22",
+          "citizen-418"
+        ],
+        "signerRoles": [
+          "council",
+          "council"
+        ],
+        "hallIds": [
+          "civic-0-hall",
+          "civic-0-hall"
+        ],
+        "currentPaid": [
+          {
+            "tick": 1534,
+            "startAt": 6612,
+            "endAt": 6616,
+            "minutes": 4,
+            "ratePerMinute": 0.0966546666666666,
+            "earned": 0.3866186666666664
+          },
+          {
+            "tick": 1534,
+            "startAt": 6612,
+            "endAt": 6616,
+            "minutes": 4,
+            "ratePerMinute": 0.0966546666666666,
+            "earned": 0.3866186666666664
+          }
+        ]
+      }
+    ],
+    "formalLearning": [
+      {
+        "actorId": "citizen-0",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-33",
+          "completedAt": 6484,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      },
+      {
+        "actorId": "citizen-121",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-33",
+          "completedAt": 6500,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      },
+      {
+        "actorId": "citizen-440",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-33",
+          "completedAt": 6584,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      },
+      {
+        "actorId": "citizen-165",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-33",
+          "completedAt": 6632,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      },
+      {
+        "actorId": "citizen-561",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-99",
+          "completedAt": 6660,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      },
+      {
+        "actorId": "citizen-297",
+        "receipt": {
+          "orderId": "service-1",
+          "siteId": "civic-0-school",
+          "teacherId": "citizen-33",
+          "completedAt": 6668,
+          "minutes": 60,
+          "minutesPerLevel": 60,
+          "educationGain": 1
+        }
+      }
+    ],
+    "actualCanonicalTeacherMinutes": 846.2880846981823,
+    "actualTeacherPayments": [
+      {
+        "tick": 1575,
+        "clock": 6780,
+        "event": {
+          "type": "wage-paid",
+          "citizenId": "citizen-33",
+          "districtId": "civic-0",
+          "amount": 46.394239999999904,
+          "requestedAmount": 46.394239999999904
+        }
+      },
+      {
+        "tick": 1575,
+        "clock": 6780,
+        "event": {
+          "type": "wage-paid",
+          "citizenId": "citizen-99",
+          "districtId": "civic-0",
+          "amount": 46.3942399999999,
+          "requestedAmount": 46.3942399999999
+        }
+      }
+    ],
+    "moneyConservationResidualBeforeFuture24": 2.0954757928848267e-09,
+    "completeSHA256": "8693e2147b54bdf55130f13031f6381b1eae0352a575471834f68ddfe9133187",
+    "after24SHA256": "983ce60e921a472bb9846c04c2a25dcd73f7e76dfe2002c0dae69c3825931452",
+    "parts": 37,
+    "futureTicksPerBranch": 24,
+    "branches": [
+      "continuation",
+      "full-native-import",
+      "in-memory-partition-native-import"
+    ],
+    "futureEverySaveBytesExact": true,
+    "physicalPartitionFilesWritten": false,
+    "limitations": [
+      "不是World291实际612建筑主城补料",
+      "不是学童480分钟课程",
+      "不是实盘分块/数据库恢复",
+      "不是14日财政供需稳态"
+    ]
+  },
+  "final382Natural174": {
+    "path": "/tmp/ROOT20-resident-rest-natural-20261005-01/prepared02/actual01/artifacts/RESULT.json",
+    "sha256": "d34a857316cfa2cd1679b50174cc9643c97f128eb109e22169ef47a6a149f96a",
+    "scope": "Independent bounded natural regression from untouched truepolicy-on27752 11:12 to17:00. Certifies actual public-rest arrival/remainder recovery and only observed money/food/payroll/course/supply events; no overnight/14day steady state. Final production source382 graph is bound in immutable prepared02; original prepared01 source381 and every original file are retained unchanged.",
+    "status": "PASS_REAL_PRIMARY_174_REST_ARRIVAL_RECOVERY_AND_PAYROLL",
+    "counters": {
+      "constructorsBegun": 1,
+      "constructorsReturned": 1,
+      "importsBegun": 1,
+      "importsReturned": 1,
+      "ordinaryCallsBegun": 174,
+      "ordinaryCallsReturned": 174,
+      "validationsBegun": 175,
+      "validationsPassed": 175,
+      "completedFrames": 174,
+      "commands": 0
+    },
+    "everyFrameFullReader": true,
+    "inputSHA256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83",
+    "terminalSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+    "terminalBytes": 3443220,
+    "clockInitial": 3552,
+    "clockFinal": 3900,
+    "zeroBodyNeedRoleCashClockTierViewSpeedCommandsOrPolicyInjections": true,
+    "choice": {
+      "tick": 1605,
+      "clock": 3690,
+      "chosenSiteId": "summit-b0",
+      "chosenKind": "pavilion",
+      "chosenDistrict": "summit",
+      "chosenActivity": "rest",
+      "nativeNetworkTravel": 266.5423533546453,
+      "nativeHomeNetworkTravel": 1484.3039559926788
+    },
+    "actorId": "citizen-379",
+    "firstRestWindow": {
+      "tick": 1637,
+      "clock": 3754,
+      "actualDeferredElapsed": 32,
+      "arrivedRestMinutes": 30.071438272470427,
+      "rate": 0.12,
+      "decayedFatigue": 0,
+      "expectedFatigue": 3.608572592696451,
+      "positiveRecovery": true,
+      "restWindow": {
+        "startAt": 3723.9285617275295,
+        "endAt": 3754
+      },
+      "paidWageOverlapMinutes": 0
+    },
+    "positiveRestWindowCount": 5,
+    "flows": {
+      "privateWageEarned": 4249.455551319354,
+      "publicWageEarned": 5617.164930268574,
+      "privateWagePaid": 5944.364796448109,
+      "publicWagePaid": 8551.571749576024,
+      "supplierGross": 232,
+      "supplierNet": 213.44000000000003,
+      "supplierTax": 18.559999999999988
+    },
+    "maxCashResidual": 1.2223608791828156e-09,
+    "maxFoodResidual": 3.0411229090532288e-12,
+    "clinicalNaturalOrdersAtTerminal": 0,
+    "steadyStateEstablished": false,
+    "sourceStable": true,
+    "originalWorldAndInputUnchanged": true
+  },
+  "final382TechnicalGPU": {
+    "path": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/RESULTS.json",
+    "sha256": "03be9702232365813331633769b3ee1d01a3049390f7899f5cc07b563435a00e",
+    "status": "PASS_TECHNICAL_READONLY_NATIVE_UI_REFERENCE_RENDER",
+    "scope": "Actual production browser, controller, renderer and rAF. Genuine natural-128 resident courses; separate controlled legal classroom viewer reposition. No claim of continuous natural player travel.",
+    "platform": "Linux headless Chromium, ANGLE SwiftShader software GPU",
+    "macHardwareEvidence": false,
+    "referenceArtCompletionEstablished": false,
+    "inputs": {
+      "source": "/tmp/ROOT20-production-candidate-20261005-01/source382",
+      "functionalCount": 382,
+      "buildReceiptSHA256": "bf27f1fbd933832a2eb3aa0088476968e5dc848b1fb5764d9c80f26e85fbe37a",
+      "graphSHA256StoredOrder": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+      "buildEntry": "/assets/index-B85IDQEK.js",
+      "buildSHA256": "d2731165ac21cff77b9e1ef717e42c3a22a32bb4febbfa9fd94d7a5e868bdda6",
+      "worldFileSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+      "worldJSONSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+      "terminalSaveSHA256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83",
+      "naturalReceiptPath": "/tmp/ROOT19-resident-tuition-natural-20261005-01/actual02/receipt.json",
+      "naturalReceiptSHA256": "278f720b2073e9224715da9db76fd8bca0cff1fc10a3cf3cf0a0325d3748cf5c"
+    },
+    "captures": [
+      {
+        "name": "classroom-native-course-ui",
+        "png": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/classroom-native-course-ui.png",
+        "pngSHA256": "bc733973d0bf14fc56087922f367d63863c6c5a5f2ce8199d4ffa3add15f65f0",
+        "pngBytes": 773449,
+        "saveSHA256": "b83a2653c09731d9064836fa5ad46dfb4d2aef7b921f4f56f6cd0e6769ff1c8a",
+        "wholeBusinessExactAgainstROOT19": true,
+        "checkpoints": [
+          {
+            "phase": "before",
+            "glErrorCount": 0,
+            "programCount": 48,
+            "allLinked": true,
+            "detailAttributeProgramCount": 2,
+            "shadowMap": {
+              "enabled": true,
+              "type": 2,
+              "autoUpdate": false,
+              "needsUpdate": false
+            },
+            "sunShadowMapSize": [
+              1024,
+              1024
+            ],
+            "detailActiveBuildings": 8,
+            "detailMaxBuildings": 8,
+            "detailMaxInstancesPerBuilding": 640,
+            "worldPowerGridKind": "undeclared",
+            "statePowerGridKind": "undeclared",
+            "body": {
+              "x": -302.6,
+              "y": 182.6,
+              "z": -243.20000000000002
+            },
+            "camera": {
+              "position": [
+                -302.6,
+                184.32,
+                -243.20000000000002
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            }
+          },
+          {
+            "phase": "after",
+            "glErrorCount": 0,
+            "programCount": 48,
+            "allLinked": true,
+            "detailAttributeProgramCount": 2,
+            "shadowMap": {
+              "enabled": true,
+              "type": 2,
+              "autoUpdate": false,
+              "needsUpdate": false
+            },
+            "sunShadowMapSize": [
+              1024,
+              1024
+            ],
+            "detailActiveBuildings": 8,
+            "detailMaxBuildings": 8,
+            "detailMaxInstancesPerBuilding": 640,
+            "worldPowerGridKind": "undeclared",
+            "statePowerGridKind": "undeclared",
+            "body": {
+              "x": -302.6,
+              "y": 182.6,
+              "z": -243.20000000000002
+            },
+            "camera": {
+              "position": [
+                -302.6,
+                184.32,
+                -243.20000000000002
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            }
+          }
+        ],
+        "scope": {
+          "before": {
+            "x": -740,
+            "y": 18,
+            "z": 980
+          },
+          "after": {
+            "x": -302.6,
+            "y": 182.6,
+            "z": -243.20000000000002
+          },
+          "siteId": "academy-b7",
+          "floor": 0,
+          "pointId": "0:program:service",
+          "point": {
+            "x": -302.6,
+            "y": 182.6,
+            "z": -243.20000000000002
+          },
+          "nativePoint": {
+            "id": "0:program:service",
+            "purpose": "service",
+            "floor": 0,
+            "position": {
+              "x": -302.6,
+              "y": 182.6,
+              "z": -243.20000000000002
+            }
+          },
+          "nativePresence": {
+            "kind": "room",
+            "floor": 0,
+            "y": 182.6,
+            "local": {
+              "x": 0,
+              "z": -15.599999999999994
+            }
+          },
+          "legalEvidence": {
+            "canAccessBuilding": true,
+            "publicFloor": true,
+            "blockedVoxel": null,
+            "controllerSupportingSiteId": "academy-b7",
+            "detectedInsideId": "academy-b7",
+            "detectedFloor": 0,
+            "playerRole": "traveler",
+            "playerIdentities": [
+              "traveler"
+            ],
+            "requiredPermission": null,
+            "floorPermissions": null,
+            "publicFloors": null,
+            "voxelCount": 0,
+            "bodyRadius": 0.35,
+            "bodyHeight": 1.72
+          },
+          "scope": "Disclosed controlled legal classroom viewer reposition only; no continuous walking or natural player arrival claim."
+        },
+        "sourceCourseId": "resident-course-2",
+        "actualDOM": "顾竹2\n正式学历 / 完成自费课程\n3 级 / 1 份\n本人签约的原课堂\n文澜学苑·南坡院·书院2\n本课状态 / 实际授课\n正式课程已完成 / 60.0 / 60 分钟\n剩余托管 / 实购教材 / 已赚服务 / 已退\n0 云币 / 4 云币 / 36 云币 / 0 云币\n\n本人自费与已付薪教师共同授课60.0/60分钟。\n\n实际教材来源\n南岫空港·西溪院·工坊1 · 1份 × 4 云币\n实际授课教师\n顾宁3 · 60.0 分钟\n全部 1 份原课程记录"
+      },
+      {
+        "name": "city-native-street",
+        "png": "/tmp/ROOT20-reference-ui-gpu-20261005-01/actual01/artifacts/city-native-street.png",
+        "pngSHA256": "bf2460a8c9b31440008908946230ece309f1457ed9515a4f055ff62ff18166e8",
+        "pngBytes": 470460,
+        "saveSHA256": "81836f79905f234e763766ab835b1c88f1ea23b5e4c0ec0c7dd3808ee99775f1",
+        "wholeBusinessExactAgainstROOT19": true,
+        "checkpoints": [
+          {
+            "phase": "before",
+            "glErrorCount": 0,
+            "programCount": 48,
+            "allLinked": true,
+            "detailAttributeProgramCount": 2,
+            "shadowMap": {
+              "enabled": true,
+              "type": 2,
+              "autoUpdate": false,
+              "needsUpdate": false
+            },
+            "sunShadowMapSize": [
+              1024,
+              1024
+            ],
+            "detailActiveBuildings": 8,
+            "detailMaxBuildings": 8,
+            "detailMaxInstancesPerBuilding": 640,
+            "worldPowerGridKind": "undeclared",
+            "statePowerGridKind": "undeclared",
+            "body": {
+              "x": -740,
+              "y": 18,
+              "z": 980
+            },
+            "camera": {
+              "position": [
+                -740,
+                19.72,
+                980
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            }
+          },
+          {
+            "phase": "after",
+            "glErrorCount": 0,
+            "programCount": 48,
+            "allLinked": true,
+            "detailAttributeProgramCount": 2,
+            "shadowMap": {
+              "enabled": true,
+              "type": 2,
+              "autoUpdate": false,
+              "needsUpdate": false
+            },
+            "sunShadowMapSize": [
+              1024,
+              1024
+            ],
+            "detailActiveBuildings": 8,
+            "detailMaxBuildings": 8,
+            "detailMaxInstancesPerBuilding": 640,
+            "worldPowerGridKind": "undeclared",
+            "statePowerGridKind": "undeclared",
+            "body": {
+              "x": -740,
+              "y": 18,
+              "z": 980
+            },
+            "camera": {
+              "position": [
+                -740,
+                19.72,
+                980
+              ],
+              "quaternion": [
+                -0.024191989150678845,
+                -0.25171716574181724,
+                -0.006294240498289998,
+                0.9674779577170685
+              ],
+              "fov": 48
+            }
+          }
+        ],
+        "scope": "Actual street/scene from original saved player position; original production controller and rAF; no scene or PNG edits.",
+        "sourceCourseId": null,
+        "actualDOM": null
+      }
+    ],
+    "rootVisualReview": {
+      "status": "ART_FAIL",
+      "source": "parent /root actual view of both original PNGs, current steering",
+      "reason": "柱/桥棚/高墙/白平台严重遮挡；参考美术未达标",
+      "notGPUExecutionFailure": true
+    },
+    "natural174SaveIsDifferentFromCaptureInput": true,
+    "captureInput": "original27752 clock3552 natural128 course save; separate legal classroom body viewer fixture, not continuous natural travel"
+  },
+  "powerGenericCausal": [
+    {
+      "path": "/tmp/ROOT20-power-causal-before-20261005-01/artifacts/CAUSAL-INSTALLED-CALLBACK.json",
+      "sha256": "7f2d6d877baeeb33709494bc99f79babeb61c292d722a989290bbe5a11eace93",
+      "status": "BASELINE_GENERIC_WAGE_ACCEPTED_CONTROLLED_CALLBACK",
+      "scope": "explicit controlled installed callback envelope; not natural city, native save, paid staff or production proof",
+      "operations": {
+        "constructors": 0,
+        "imports": 0,
+        "steps": 0,
+        "productionValidation": 0,
+        "callbacks": 12
+      },
+      "cases": [
+        {
+          "actorKind": "npc",
+          "zeroAmount": false,
+          "workedMinutes": 2
+        },
+        {
+          "actorKind": "npc",
+          "zeroAmount": true,
+          "workedMinutes": 2
+        },
+        {
+          "actorKind": "player",
+          "zeroAmount": false,
+          "workedMinutes": 2
+        },
+        {
+          "actorKind": "player",
+          "zeroAmount": true,
+          "workedMinutes": 2
+        }
+      ]
+    },
+    {
+      "path": "/tmp/ROOT20-power-causal-after-20261005-01/artifacts/CAUSAL-INSTALLED-CALLBACK.json",
+      "sha256": "849ee2ecefabc3d7dfe47f259b9279408545d386ecdeeb9a710b3bbe241d7129",
+      "status": "PATCH_GENERIC_WAGE_REJECTED_CONTROLLED_CALLBACK",
+      "scope": "explicit controlled installed callback envelope; not natural city, native save, paid staff or production proof",
+      "operations": {
+        "constructors": 0,
+        "imports": 0,
+        "steps": 0,
+        "productionValidation": 0,
+        "callbacks": 12
+      },
+      "cases": [
+        {
+          "actorKind": "npc",
+          "zeroAmount": false,
+          "workedMinutes": 0
+        },
+        {
+          "actorKind": "npc",
+          "zeroAmount": true,
+          "workedMinutes": 0
+        },
+        {
+          "actorKind": "player",
+          "zeroAmount": false,
+          "workedMinutes": 0
+        },
+        {
+          "actorKind": "player",
+          "zeroAmount": true,
+          "workedMinutes": 0
+        }
+      ]
+    }
+  ],
+  "withdrawnPerformanceExperiment": {
+    "status": "PASS_EVERY_FRAME_FULL_BYTES_AND_EVENTS",
+    "scope": "Geometry-only candidate paired Linux40 on unchanged actual current-v6 612/616 primary27752, 2 cities; every full save and all original events exact, every-frame production readers and money/food; diagnostic branch, not a new primary/steady-state/Mac claim",
+    "constructors": 2,
+    "nativeImports": 2,
+    "ordinaryStepsPerCity": 40,
+    "fullReaders": 82,
+    "inputSHA256": "27752e29b1d9ae62f1ecdd7f00b8f362cfae9df847eea4bfe60675ddab8b1e83",
+    "terminalSHA256": "da054f9d6735ea9f0ff75a44cec6454fac522431a6ed364faaa5c8b9f2836c37",
+    "baselineConstructorMilliseconds": 2514.581885,
+    "candidateConstructorMilliseconds": 2469.639711,
+    "baselineStepTotalMilliseconds": 45943.183501000065,
+    "candidateStepTotalMilliseconds": 47415.65585599995,
+    "ratioCandidateOverBaseline": 1.0320498546855776,
+    "readerTotalMilliseconds": 41559.529555,
+    "moneyMaxResidual": 2.3283064365386963e-10,
+    "foodMaxResidual": 1.8189894035458565e-12,
+    "path": "/tmp/ROOT20-geometry-equivalence-20261005-01/artifacts/RESULT.json",
+    "sha256": "bc285e2ed6f002bb082346707fea414d3231848bb550eb785a2f707d4d8aa804",
+    "productionAdopted": false,
+    "withdrawnPaths": [
+      "src/architecture-floor-plan.ts cache changes",
+      "tests/floor-plan-performance-equivalence.test.ts"
+    ],
+    "ratio": 1.0320498546855776,
+    "candidateSlowerPercent": 3.20498546855776
+  },
+  "doNotCombine": [
+    "source381 execution with final382 execution",
+    "main27752 policy-on natural city with f108 legacy-off17:00",
+    "47building adult public consumer with612building main city",
+    "sixadult60minute learning with480minute child education",
+    "in-memory partition assembly withphysicalDB/chunk restoration",
+    "oldROOT19PNG withfinal382GPU orMac performance"
+  ]
+}

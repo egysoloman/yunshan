@@ -1,0 +1,541 @@
+{
+  "provenance": {
+    "world": {
+      "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/originals/WORLD-ORIGINAL.json",
+      "bytes": 1832308,
+      "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    "sampledActor": {
+      "path": "/tmp/ROOT19-corrected-afternoon-20261005-01/actual01/artifacts/ACTORS-SAMPLED.jsonl",
+      "bytes": 7145166,
+      "sha256": "2ed90bd11f88dc691198eefd57047a0ba2fad759e86f061fcb2dd307e6fa2999"
+    },
+    "actorClock": 3712,
+    "actorTick": 1616,
+    "scope": "Original World291 building fragments and actual citizen-379 sampled body/needs/wallet. Controlled test dependencies: empty route/cursor, no food offers, bed availability, graph costs, exterior route and road guard; no native natural replay or state injection is represented."
+  },
+  "actor": {
+    "id": "citizen-379",
+    "name": "顾澄2",
+    "role": "警察",
+    "workId": "government-b4",
+    "homeId": "government-b41",
+    "districtId": "government",
+    "position": {
+      "x": 8.200000000000001,
+      "y": 534.6,
+      "z": -1311.2
+    },
+    "state": "shopping",
+    "destinationId": "summit-b2",
+    "needs": {
+      "hunger": 100,
+      "fatigue": 0,
+      "social": 21.59265990224969,
+      "fun": 27.538187869968233
+    },
+    "money": 344.30152355146936,
+    "food": 1,
+    "route": [],
+    "routeIndex": 0
+  },
+  "actorProfile": {
+    "age": 39.006149162865995,
+    "health": 98.82568752836586,
+    "mood": 17.53657489126425,
+    "stress": 11.761158359312992,
+    "alive": true,
+    "skill": 24.078000000000095,
+    "family": [],
+    "historyTags": [
+      "云山居民"
+    ]
+  },
+  "home": {
+    "id": "government-b41",
+    "districtId": "government",
+    "name": "玉衡官署·西溪院·里居11",
+    "kind": "home",
+    "position": {
+      "x": 489.20000000000005,
+      "y": 306,
+      "z": -601.2
+    },
+    "width": 30,
+    "depth": 27.200000000000003,
+    "height": 27.200000000000003,
+    "floors": 8,
+    "rotation": 0,
+    "door": {
+      "x": 489.20000000000005,
+      "y": 306.6,
+      "z": -587.6
+    },
+    "capacity": 200,
+    "seed": 872525553,
+    "stairGeometryRevision": 2,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 306.6,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 306.6,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 310,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 310,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 313.40000000000003,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 313.40000000000003,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 316.8,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 316.8,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 320.20000000000005,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 320.20000000000005,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "5:program:work",
+        "purpose": "work",
+        "floor": 5,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 323.6,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "5:program:service",
+        "purpose": "service",
+        "floor": 5,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 323.6,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "6:program:work",
+        "purpose": "work",
+        "floor": 6,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 327,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "6:program:service",
+        "purpose": "service",
+        "floor": 6,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 327,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "7:program:work",
+        "purpose": "work",
+        "floor": 7,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 330.40000000000003,
+          "z": -608.2
+        }
+      },
+      {
+        "id": "7:program:service",
+        "purpose": "service",
+        "floor": 7,
+        "position": {
+          "x": 483.20000000000005,
+          "y": 330.40000000000003,
+          "z": -608.2
+        }
+      }
+    ]
+  },
+  "work": {
+    "id": "government-b4",
+    "districtId": "government",
+    "name": "玉衡官署·北岭院·巡警署2",
+    "kind": "police",
+    "position": {
+      "x": 333.20000000000005,
+      "y": 331.20000000000005,
+      "z": -767.2
+    },
+    "width": 41.6,
+    "depth": 34.4,
+    "height": 19,
+    "floors": 5,
+    "rotation": 0,
+    "door": {
+      "x": 333.20000000000005,
+      "y": 331.8,
+      "z": -750
+    },
+    "capacity": 220,
+    "seed": 1697262410,
+    "stairGeometryRevision": 2,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 331.80000000000007,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 331.80000000000007,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 335.6000000000001,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 335.6000000000001,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 339.4000000000001,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 339.4000000000001,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 343.20000000000005,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 343.20000000000005,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 347.00000000000006,
+          "z": -778.8000000000001
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": 333.20000000000005,
+          "y": 347.00000000000006,
+          "z": -778.8000000000001
+        }
+      }
+    ]
+  },
+  "publicRest": {
+    "id": "summit-b0",
+    "districtId": "summit",
+    "name": "九霄观云·北岭院·观云亭1",
+    "kind": "pavilion",
+    "position": {
+      "x": -60,
+      "y": 540,
+      "z": -1355
+    },
+    "width": 23.200000000000003,
+    "depth": 22.8,
+    "height": 12.8,
+    "floors": 1,
+    "rotation": 0,
+    "door": {
+      "x": -60,
+      "y": 540.6,
+      "z": -1343.6000000000001
+    },
+    "capacity": 16,
+    "seed": 2017846157,
+    "stairGeometryRevision": 2
+  },
+  "markedPublicRest": {
+    "id": "core-clinic",
+    "districtId": "core",
+    "name": "天枢急救医馆",
+    "kind": "clinic",
+    "position": {
+      "x": 685,
+      "y": 254,
+      "z": -270
+    },
+    "width": 50,
+    "depth": 42,
+    "height": 36,
+    "floors": 6,
+    "rotation": 0,
+    "door": {
+      "x": 685,
+      "y": 254.60000000000002,
+      "z": -249
+    },
+    "capacity": 390,
+    "seed": 1364965975,
+    "stairGeometryRevision": 2,
+    "floorPlanProfile": "v4-program-bodies-02",
+    "functionPoints": [
+      {
+        "id": "0:program:work",
+        "purpose": "work",
+        "floor": 0,
+        "position": {
+          "x": 685,
+          "y": 254.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "0:program:service",
+        "purpose": "service",
+        "floor": 0,
+        "position": {
+          "x": 685,
+          "y": 254.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "1:program:work",
+        "purpose": "work",
+        "floor": 1,
+        "position": {
+          "x": 685,
+          "y": 260.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "1:program:service",
+        "purpose": "service",
+        "floor": 1,
+        "position": {
+          "x": 685,
+          "y": 260.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "2:program:work",
+        "purpose": "work",
+        "floor": 2,
+        "position": {
+          "x": 685,
+          "y": 266.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "2:program:service",
+        "purpose": "service",
+        "floor": 2,
+        "position": {
+          "x": 685,
+          "y": 266.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "3:program:work",
+        "purpose": "work",
+        "floor": 3,
+        "position": {
+          "x": 685,
+          "y": 272.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "3:program:service",
+        "purpose": "service",
+        "floor": 3,
+        "position": {
+          "x": 685,
+          "y": 272.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "4:program:work",
+        "purpose": "work",
+        "floor": 4,
+        "position": {
+          "x": 685,
+          "y": 278.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "4:program:service",
+        "purpose": "service",
+        "floor": 4,
+        "position": {
+          "x": 685,
+          "y": 278.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "5:program:work",
+        "purpose": "work",
+        "floor": 5,
+        "position": {
+          "x": 685,
+          "y": 284.6,
+          "z": -270
+        }
+      },
+      {
+        "id": "5:program:service",
+        "purpose": "service",
+        "floor": 5,
+        "position": {
+          "x": 685,
+          "y": 284.6,
+          "z": -270
+        }
+      }
+    ]
+  },
+  "homeNetworkTravel": 1465.4738332696013,
+  "publicNetworkTravel": 247.71223063156788
+}

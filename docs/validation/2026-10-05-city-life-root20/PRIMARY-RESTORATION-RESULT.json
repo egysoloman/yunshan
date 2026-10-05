@@ -1,0 +1,111 @@
+{
+  "status": "PASS_REAL_PRIMARY17_THREE_RESTORES_FUTURE72_FULLSAVE_EVENTS_EXACT",
+  "at": "2026-10-05T12:00:53.013Z",
+  "counters": {
+    "constructorsBegun": 3,
+    "constructorsCompleted": 3,
+    "importsBegun": 3,
+    "importsCompleted": 3,
+    "callsBegun": 72,
+    "callsReturned": 72,
+    "callsCompleted": 72,
+    "readersBegun": 75,
+    "readersReturned": 75,
+    "readersPassed": 75,
+    "commands": 0,
+    "policyOrBodyNeedClockRoleCashTierViewSpeedInjections": 0,
+    "branches": {
+      "whole": {
+        "callsBegun": 24,
+        "callsReturned": 24,
+        "callsCompleted": 24,
+        "readersPassed": 25
+      },
+      "rawByteClone": {
+        "callsBegun": 24,
+        "callsReturned": 24,
+        "callsCompleted": 24,
+        "readersPassed": 25
+      },
+      "physicalParts": {
+        "callsBegun": 24,
+        "callsReturned": 24,
+        "callsCompleted": 24,
+        "readersPassed": 25
+      }
+    }
+  },
+  "inputSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+  "inputBytes": 3443220,
+  "startTick": 1710,
+  "startClock": 3900,
+  "terminalProof": [
+    {
+      "branch": "whole",
+      "filename": "whole-TERMINAL.save.json",
+      "SHA256": "734deee5d0c44462787f440ec0c872a7da7d47ee5ac884fc6238b96fd76e98ff",
+      "bytes": 3491645,
+      "tick": 1734,
+      "clock": 3948
+    },
+    {
+      "branch": "rawByteClone",
+      "filename": "rawByteClone-TERMINAL.save.json",
+      "SHA256": "734deee5d0c44462787f440ec0c872a7da7d47ee5ac884fc6238b96fd76e98ff",
+      "bytes": 3491645,
+      "tick": 1734,
+      "clock": 3948
+    },
+    {
+      "branch": "physicalParts",
+      "filename": "physicalParts-TERMINAL.save.json",
+      "SHA256": "734deee5d0c44462787f440ec0c872a7da7d47ee5ac884fc6238b96fd76e98ff",
+      "bytes": 3491645,
+      "tick": 1734,
+      "clock": 3948
+    }
+  ],
+  "partitionProof": {
+    "actualParts": 129,
+    "byKind": {
+      "spatial": 122,
+      "civic-history": 5,
+      "global": 1,
+      "player": 1
+    },
+    "physicalPartBytes": 4458322,
+    "assembledSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+    "assembledBytes": 3443220,
+    "fullInputByteExact": true,
+    "wholeOriginalWorldUsed": true,
+    "missingPart": {
+      "id": "chunk:-1:-1",
+      "rejected": true,
+      "error": {
+        "name": "Error",
+        "message": "缺失存档实体。",
+        "stack": "Error: 缺失存档实体。\n    at assembleSave (/tmp/ROOT20-production-candidate-20261005-01/source382/src/persistence/partition.ts:174:84)\n    at <anonymous> (/tmp/ROOT20-primary17-future-20261005-01/prepared01/driver.mjs:204:9)"
+      },
+      "constructors": 0,
+      "imports": 0,
+      "steps": 0
+    }
+  },
+  "sourceGraphSHA256": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+  "sourceFiles": 382,
+  "sourceStable": true,
+  "originalsStable": true,
+  "everyInitialAndFutureFrameFullReader": true,
+  "nativeFullReaders": 75,
+  "ordinaryCallSeconds": 0.25,
+  "branchesAllFreshlyConstructedAndImported": true,
+  "exactWholeSaveStringsEveryFrame": true,
+  "exactEntryBusArgumentsAndOrderEveryFrame": true,
+  "eventObservation": "structuredClone of complete argument array at entry, before exactly one original emit; original receiver, objects, argument order and native return/throw preserved. Only detached observations compared.",
+  "scope": "Only complete save/read/event equivalence for the next48 native minutes from true4610 17:00. No independent future money/food/FIFO/cash conservation audit or fiscal steady-state claim; natural174 upstream evidence is not expanded by save equivalence.",
+  "inputOrStateRewrites": 0,
+  "commands": 0,
+  "artifactCapBytes": 41943040,
+  "writerChargedBeforeResult": 17111302,
+  "fullPerFrameSaveFiles": 0
+}

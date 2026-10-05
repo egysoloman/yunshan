@@ -65,7 +65,25 @@ export const isCanonicalNpcWage = (event: object, simulation?: Simulation): bool
     && witness.tick === simulation.state.tick
     && witness.at === (simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60));
 };
+// Only the actual player-labor cash writer can certify its funded work notice.
+// No registrar is exported; generic events and copied windows have no source.
+const canonicalPlayerLaborWages = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
+export const isCanonicalPlayerLaborWage = (event: object, simulation: Simulation): boolean => {
+  const witness = canonicalPlayerLaborWages.get(event);
+  return !!witness && witness.simulation === simulation && witness.state === simulation.state
+    && witness.tick === simulation.state.tick
+    && witness.at === (simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60);
+};
 const canonicalResidentEducationPresence = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number }>();
+const canonicalClinicalPresence = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
+/** Only the core's immutable post-movement observation certifies this city's
+ * current medical arrival window. A matching generic event cannot register it. */
+export const isCanonicalClinicalPresence = (event: object, simulation: Simulation): boolean => {
+  const witness = canonicalClinicalPresence.get(event);
+  return !!witness && witness.simulation === simulation && witness.state === simulation.state
+    && witness.tick === simulation.state.tick
+    && witness.at === (simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60);
+};
 const canonicalCivicPresence = new WeakSet<object>();
 /** Only core arrival observations certify unpaid local civic activity. */
 export const isCanonicalCivicPresence = (event: object): boolean => canonicalCivicPresence.has(event);
@@ -475,7 +493,9 @@ export class Simulation implements SimulationAPI {
     const shop = this.state.shops.find(item => item.id === job.employer.shopId), tax = gross * this.state.taxRate;
     this.state.player.money += gross - tax; this.runtime.taxes += tax;
     if (shop) { shop.profit -= gross; const labor = this.runtime.shopLabor ??= {}; labor[shop.id] = (labor[shop.id] ?? 0) + minutes; if (this.state.powerGrid) { const powered = this.runtime.poweredShopLabor ??= {}; powered[shop.id] = (powered[shop.id] ?? 0) + gridPoweredWorkMinutes(this.state, shop.buildingId, interval, minutes); } }
-    this.bus.emit({ type: 'wage-earned', citizenId: 'player', shopId: shop?.id, districtId: job.employer.districtId, amount: gross, minutes, ratePerMinute: job.ratePerMinute, siteId: job.siteId, purpose: job.role, laborJobId: job.id, creditedWorkStartAt: interval.startAt, creditedWorkEndAt: interval.endAt });
+    const earnedEvent: Event = Object.freeze({ type: 'wage-earned', citizenId: 'player', shopId: shop?.id, districtId: job.employer.districtId, amount: gross, minutes, ratePerMinute: job.ratePerMinute, siteId: job.siteId, purpose: job.role, laborJobId: job.id, creditedWorkStartAt: interval.startAt, creditedWorkEndAt: interval.endAt });
+    canonicalPlayerLaborWages.set(earnedEvent, { simulation: this, state: this.state, tick: this.state.tick, at: this.state.extension?.lastUpdate ?? this.now });
+    this.bus.emit(earnedEvent);
     this.bus.emit({ type: 'wage-paid', citizenId: 'player', shopId: shop?.id, districtId: job.employer.districtId, amount: gross, requestedAmount: gross });
     if (job.role === 'police' || job.role === 'soldier') { const district = this.state.districts.find(item => item.id === job.employer.districtId)!; district.safety = clamp(district.safety + minutes / 60); }
     if (job.role === 'teacher') this.state.support = clamp(this.state.support + minutes / 300);
@@ -1473,6 +1493,44 @@ export class Simulation implements SimulationAPI {
     // The previous role records the person's earned qualification; changing an
     // employer does not remove that identity or transfer any previous wage debt.
   }
+  /** Newly offered daytime rest outside the home district must have the same
+   * accessible, supported target and first usable route as setDestination.
+   * This only checks an offer; movement and recovery retain their actual guards. */
+  private publicRestReachable(citizen: Citizen, site: Building, anchors: { node: string; cost: number; points: Vec3[] }[]): boolean {
+    const target = this.buildingNode(site);
+    if (!anchors.some(anchor => finite(anchor.cost + (this.walkingTree(anchor.node).costs.get(target.id) ?? Infinity)))) return false;
+    const role = this.citizenIdentity(citizen), person = { role, identities: [role] };
+    let interior: Vec3[] | null;
+    if (site.floorPlanProfile === FLOOR_PLAN_PROFILE) {
+      const points = this.buildingFunctionPoints(site).filter(point => point.purpose === 'service'
+        && Array.from({ length: point.floor + 1 }, (_, floor) => floor).every(floor => canAccessFloor(site, floor, person))
+        && !site.floorUses?.[point.floor]?.includes('观景'));
+      const offset = hash(`${citizen.id}:${site.id}`) % Math.max(1, points.length), candidates = [...points.slice(offset), ...points.slice(0, offset)];
+      const presence = this.floorPlanPresence(site, citizen.position); interior = null;
+      for (const point of candidates) {
+        const route = this.floorPlanRoute(site, presence?.floor ?? 0, point.floor, presence ? citizen.position : site.door, point.position);
+        if (!route) continue;
+        const support = floorPlanSupport(site, point.floor, point.position, .35);
+        if (!support || !['room', 'stairs'].includes(support.kind) || Math.abs(support.y - point.position.y) > .26
+          || blocksFloorPlanMovement(site, point.floor, point.position, point.position, .35, 1.72)
+          || homeRestPointBlockedByVoxels(point.position, this.state.voxels)
+          || !this.isAtBuildingFunctionPoint(site, point.position, 'service', person)) return false;
+        interior = route; break;
+      }
+      if (!interior) return false;
+      if (presence) return this.roadPrefixAllowed(citizen, interior);
+    } else {
+      const floors = Array.from({ length: site.floors }, (_, floor) => floor).filter(floor => canAccessFloor(site, floor, person) && !site.floorUses?.[floor]?.includes('观景'));
+      if (!floors.length) return false;
+      const floor = floors[hash(`${citizen.id}:${site.id}`) % floors.length], dimensions = getFloorDimensions(site, floor), stair = getStairPosition(site, floor), row = hash(citizen.id) % 5 - 2;
+      const point = { x: site.position.x + row * Math.min(1.8, dimensions.width / 12), y: stair.y, z: site.position.z + Math.min(1.2, dimensions.depth / 10) };
+      if (homeRestPointBlockedByVoxels(point, this.state.voxels) || !this.isAtBuildingFunctionPoint(site, point, 'service', person)) return false;
+      interior = floor > 0 ? [getStairPosition(site, 0), stair, point] : [point];
+    }
+    const outside = this.routeFromCitizen(citizen, site, anchors);
+    if (outside.length <= 1) return false;
+    return this.roadPrefixAllowed(citizen, [...outside, ...(site.floorPlanProfile === FLOOR_PLAN_PROFILE ? interior.slice(1) : interior)]);
+  }
   private chooseFacility(citizen: Citizen): { destination: Building; activity: string } {
     const hour = this.state.hour, night = hour >= 22 || hour < 6, shift = hour >= 7.5 && hour < 17.5;
     const home = this.buildings.get(citizen.homeId)!, work = this.buildings.get(citizen.workId)!;
@@ -1515,7 +1573,9 @@ export class Simulation implements SimulationAPI {
     for (const building of this.world.buildings) {
       if (building.kind === 'clinic' && profile && profile.health < 60 && citizen.money >= 30) add(building, 'heal', (60 - profile.health) * 3 + profile.stress * .1);
       if (building.districtId !== citizen.districtId) {
-        if (night && !homeBedAvailable && ['pavilion', 'station', 'clinic'].includes(building.kind)) add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + 140);
+        const publicRest = ['pavilion', 'station', 'clinic'].includes(building.kind);
+        if (publicRest && (night && !homeBedAvailable || !night && citizen.needs.fatigue < 25 && this.publicRestReachable(citizen, building, anchors)))
+          add(building, 'rest', (100 - citizen.needs.fatigue) * .8 + 110 + (night ? 140 : 0));
         continue;
       }
       const child = this.state.family?.children[citizen.id];
@@ -1826,7 +1886,9 @@ export class Simulation implements SimulationAPI {
       // This optional source event changes no movement, needs or attendance.
       if (destination.kind === 'clinic' && arrivedElapsed > 0) {
         const observedClock = this.state.extension!.lastUpdate;
-        this.bus.emit({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: copy(citizen.position) });
+        const event: Event = Object.freeze({ type: 'clinical-activity-window', citizenId: citizen.id, siteId: destination.id, purpose: this.activityPointPurpose(activity), activityWindowStartAt: observedClock - arrivedElapsed, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+        canonicalClinicalPresence.set(event, { simulation: this, state: this.state, tick: this.state.tick, at: observedClock });
+        this.bus.emit(event);
       }
       if (destination.id === home.id || activity === 'rest') {
         citizen.state = sleeping ? 'sleeping' : 'atHome'; citizen.needs.fatigue = clamp(citizen.needs.fatigue + arrivedElapsed * (sleeping ? .35 : .12)); citizen.needs.fun = clamp(citizen.needs.fun + arrivedElapsed * .07); if (citizen.partnerId) citizen.needs.social = clamp(citizen.needs.social + arrivedElapsed * .08);

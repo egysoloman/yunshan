@@ -61,12 +61,21 @@ export function installServiceMaterialScheduling(simulation: Simulation, callbac
 /** A real supplier offer can wake a stock-blocked service between clock retries.
  * An active service can also exhaust its last usable unit during people; its
  * remaining authorized consumers must not wait for the next clock retry.
+ * An exhausted base budget without a pending or spendable supplement also
+ * needs to observe a real offer before upkeep consumes it. This only wakes
+ * the existing quote/request path; it grants no additional spending authority.
  * Otherwise a 60-minute retry can remain permanently out of phase with a
  * 12-minute commerce batch. Existing order state already persists this wait;
  * no new stock, quote, cash, authorization or minutes are created here. */
 export function serviceMaterialOfferAvailable(simulation: Simulation, order: ServiceOrder): boolean {
+  const requests = simulation.state.culture?.supplementalBudgets?.requests.filter(request => request.orderId === order.id) ?? [];
+  const needsBudgetQuote = order.state === 'awaitingBudget'
+    && Number.isFinite(order.authorizedCap) && order.authorizedCap > 1e-7
+    && Number.isFinite(order.spent) && order.spent >= order.authorizedCap - 1e-7
+    && order.receivedUnits - order.consumedUnits < 1 - 1e-7
+    && !requests.some(request => request.closedAt === null && (request.approvedAt === null || request.spent < request.cap - 1e-7));
   const stockBlocked = order.state === 'awaitingSupply'
-    || order.state === 'active' && order.receivedUnits - order.consumedUnits < 1 - 1e-7;
+    || order.state === 'active' && order.receivedUnits - order.consumedUnits < 1 - 1e-7 || needsBudgetQuote;
   if (!serviceMaterialSchedulingEnabled(simulation.state) || !stockBlocked || order.approvedAt === null
     || !['education','health'].includes(order.topic) || order.receivedUnits >= order.targetUnits - 1e-7) return false;
   return simulation.state.shops.some(shop => {

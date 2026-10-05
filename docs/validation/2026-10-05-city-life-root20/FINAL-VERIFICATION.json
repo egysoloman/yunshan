@@ -1,0 +1,120 @@
+{
+  "status": "EXACT_FINAL_SOURCE_AND_DELIVERABLES",
+  "writtenUTC": "2026-10-05T12:17:14.130981+00:00",
+  "sourceCount": 382,
+  "sourceGraph": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+  "old242TestInputsExact": true,
+  "oldMatrix646CellsExact": true,
+  "headMemoEntirePrefixPreserved": true,
+  "docsMemoExactCurrentRepositoryMemo": true,
+  "temporaryTripoCredentialPatternMatches": 0,
+  "newLibraryIDs": [],
+  "libraryBatch": "FAILED_BEFORE_PREPARATION",
+  "referenceArt": "ART_FAIL",
+  "macHardware": "NOT_RUN",
+  "fullGoalComplete": false,
+  "nextAuditedPrimary": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+  "futureRestoreOnly": "734deee5d0c44462787f440ec0c872a7da7d47ee5ac884fc6238b96fd76e98ff",
+  "files": {
+    "ART-REVIEW-RECEIPT.json": {
+      "sha256": "7f26679df56052bf2b6a8e54588b37446cb6c28022d218c7c1c5ee6702909431",
+      "bytes": 10974
+    },
+    "ART-REVIEW.md": {
+      "sha256": "f039dd32ec158421d99e360b778cd43ed2343ed0113668bc9e0dfe6e6599f652",
+      "bytes": 2541
+    },
+    "DRAFT-MANIFEST.json": {
+      "sha256": "12f205f7f0270580b18d87ec266fa0edb7545eac6106ab680d9bd635ac3d42cd",
+      "bytes": 2100
+    },
+    "EVIDENCE-INDEX.json": {
+      "sha256": "e70581e8038fd72763766dc30345be5b957e2a4ecd810b522bb732fe430e47b0",
+      "bytes": 38412
+    },
+    "INSTALL-RECEIPT.json": {
+      "sha256": "7833263fad1f7288ba5a2073eb96922340ece5e4b20b1aa1586fdd19f989fb6c",
+      "bytes": 1328
+    },
+    "LIBRARY-DELIVERY-RESULT.json": {
+      "sha256": "429aa10f2bf063092e002ebef57620ecfb51a40ab60871c5d41352923574e923",
+      "bytes": 2799
+    },
+    "MATRIX-38.csv": {
+      "sha256": "eaf6ae97a1a9bc441a87fbb64c185b9af922fec0783868afd97d7c2e77b358bc",
+      "bytes": 122522
+    },
+    "ORIGINAL-COPY-RECEIPT-02.json": {
+      "sha256": "1ba3d370fe0eee6627f6923927fb2584989d3bb9a7e9efed6802fff159de6193",
+      "bytes": 2391
+    },
+    "ORIGINAL-COPY-RECEIPT.json": {
+      "sha256": "7908e9a19fd1048a2eb91aafa4c711e3f6c987d4804f4d06c439a6a935b2ccb4",
+      "bytes": 2102
+    },
+    "PACKAGE-SIZE-FAILURE.json": {
+      "sha256": "0bf3d6debd294f15a1955198f2f274652076519bebc2a88b2991f6a7320b2dfa",
+      "bytes": 675
+    },
+    "PRESERVATION-REPORT.json": {
+      "sha256": "964afbae2d60a5f2ebb99aaf6009ed1398c20694136bdb2c51de33bca77731b8",
+      "bytes": 2642
+    },
+    "PRIMARY-RESTORATION-RECEIPT.json": {
+      "sha256": "9e80d7fd606c8fc8649141664cde7189f9cd524b6717cd95e40ec2abdae31cd6",
+      "bytes": 793
+    },
+    "PRIMARY-RESTORATION-RESULT.json": {
+      "sha256": "c7e4641e5eab5317f8c7f0c7987bd19d121c777d3118f172dca6a05606d46e54",
+      "bytes": 3770
+    },
+    "README.md": {
+      "sha256": "9ab0d4af50054b5795d0dc5597aba3277575f7633da5b991cd68e1814805fc17",
+      "bytes": 3985
+    },
+    "REPRODUCE.md": {
+      "sha256": "1a62cb1d1c930727d5bd28bb612e1abe9c2a0377f7447915ad1864e469fe79b4",
+      "bytes": 2282
+    },
+    "ROOT20-APPENDED-CELLS.json": {
+      "sha256": "a2ef6cfd3089c2f8360acf6275cbc8035cc51729a8b85613ec0173f8c36d7719",
+      "bytes": 28874
+    },
+    "ROOT20-CLASSROOM-ORIGINAL.png": {
+      "sha256": "bc733973d0bf14fc56087922f367d63863c6c5a5f2ce8199d4ffa3add15f65f0",
+      "bytes": 773449
+    },
+    "ROOT20-ORIGINAL-VALIDATION.zip": {
+      "sha256": "9c36c0ea20b38959e0bd5994394257965ee57a373aae5d7bfb2ede8ac6224bc8",
+      "bytes": 23068708
+    },
+    "ROOT20-ORIGINAL-VALIDATION.zip.RECEIPT.json": {
+      "sha256": "db3fea75b8cd218b72b7686d52244b89404c1add037ce8d4f8b979b03736ba64",
+      "bytes": 92929
+    },
+    "ROOT20-PRIMARY-1700.save.json": {
+      "sha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+      "bytes": 3443220
+    },
+    "ROOT20-SOURCE-AND-BUILD.zip": {
+      "sha256": "a95da11238969f8ffc0db012484be15024a7cca59e6caacab3b808e28bb3e87f",
+      "bytes": 14663156
+    },
+    "ROOT20-SOURCE-AND-BUILD.zip.RECEIPT.json": {
+      "sha256": "250277986af00fdbe86c1d3ee26ab7ece1c9b9c8817ff3a886e3715419d5543c",
+      "bytes": 65871
+    },
+    "ROOT20-STREET-ORIGINAL.png": {
+      "sha256": "bf2460a8c9b31440008908946230ece309f1457ed9515a4f055ff62ff18166e8",
+      "bytes": 470460
+    },
+    "SOURCE-INPUTS-382.json": {
+      "sha256": "6d30a4531911eebce0b7069424cccf9c5cc77c1b71881798a538510015eac90f",
+      "bytes": 41937
+    },
+    "开发备忘录.md": {
+      "sha256": "ea6299e925c5ea67e29ed78e43b9006e04bfeee324655fd0fee62c545ebae90d",
+      "bytes": 543637
+    }
+  }
+}

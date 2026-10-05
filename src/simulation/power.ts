@@ -1,4 +1,5 @@
 import { gridBuildingSupplyRatio } from './power-grid';
+import { isCanonicalNpcWage, isCanonicalPlayerLaborWage } from '../simulation';
 import type { Simulation, PublicPurchaseReceipt } from '../simulation';
 import type { Building, BuildingFunctionPoint, Citizen, CommandResult, Player, Role, SimState, Vec3, WorldDefinition } from '../types';
 import { getWalkHeight } from '../world';
@@ -288,7 +289,8 @@ export function installPower(sim: Simulation, accounting: PowerAccounting): void
   });
   sim.onEvent('wage-earned', event => {
     if (!binding || observedState !== sim.state || phaseTick !== sim.state.tick || phaseClock !== clock(sim.state) || event.siteId !== binding.operator.id
-      || !event.citizenId || event.citizenId === 'player' && event.purpose !== 'scientist' || !finite(event.minutes) || event.minutes <= 0 || !finite(event.amount) || event.amount < 0
+      || !event.citizenId || (event.citizenId === 'player' ? !isCanonicalPlayerLaborWage(event, sim) : !isCanonicalNpcWage(event, sim))
+      || event.citizenId === 'player' && event.purpose !== 'scientist' || !finite(event.minutes) || event.minutes <= 0 || !finite(event.amount) || event.amount <= 0
       || !finite(event.creditedWorkStartAt) || !finite(event.creditedWorkEndAt) || Math.abs(event.creditedWorkEndAt - event.creditedWorkStartAt - event.minutes) > EPS
       || event.creditedWorkEndAt > phaseClock + EPS) return;
     const rows = wages.get(event.citizenId) ?? []; rows.push({ start: event.creditedWorkStartAt, end: event.creditedWorkEndAt, siteId: event.siteId, ...(event.citizenId === 'player' && event.laborJobId ? { paidWorkClaim: 'paid-work:' + event.laborJobId } : {}) }); wages.set(event.citizenId, rows);

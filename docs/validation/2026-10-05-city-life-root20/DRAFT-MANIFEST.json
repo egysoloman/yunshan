@@ -1,0 +1,46 @@
+{
+  "status": "PRIVATE_TEXT_DRAFT_SNAPSHOT_NOT_PUBLISHED",
+  "createdAtUTC": "2026-10-05T11:43:37.900738+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "ae1002f3dec7c52fc9e278b2be026740fbd3722ac9b5ee84c7d7d64c61c75ce9",
+      "bytes": 3716
+    },
+    "MATRIX-38.csv": {
+      "sha256": "eaf6ae97a1a9bc441a87fbb64c185b9af922fec0783868afd97d7c2e77b358bc",
+      "bytes": 122522
+    },
+    "ROOT20-APPENDED-CELLS.json": {
+      "sha256": "a2ef6cfd3089c2f8360acf6275cbc8035cc51729a8b85613ec0173f8c36d7719",
+      "bytes": 28874
+    },
+    "EVIDENCE-INDEX.json": {
+      "sha256": "e70581e8038fd72763766dc30345be5b957e2a4ecd810b522bb732fe430e47b0",
+      "bytes": 38412
+    },
+    "PRESERVATION-REPORT.json": {
+      "sha256": "964afbae2d60a5f2ebb99aaf6009ed1398c20694136bdb2c51de33bca77731b8",
+      "bytes": 2642
+    }
+  },
+  "assemblyScript": {
+    "path": "/tmp/ROOT20-delivery-docs-draft-20261005-01/write-draft.py",
+    "sha256": "15f5ac105e1208bf0df63627a8367bb58cbcfcfbcf6b55ba175d99db5670cb1f"
+  },
+  "source382ManifestSHA256": "6d30a4531911eebce0b7069424cccf9c5cc77c1b71881798a538510015eac90f",
+  "source382GraphSHA256": "f62b5b223b5974aed128453e0763a99ce5207e947afb7a48ebeaf85cc92a5003",
+  "statusSnapshot": {
+    "draftCreatedAtUTC": "2026-10-05T11:43:37.900738+00:00",
+    "final382Regression": "PASS_ACTUAL_RECEIPT_74_OF_74",
+    "final382Build": "PASS_ACTUAL_RECEIPT",
+    "final382Natural174": "PASS_ACTUAL_RECEIPT_174_STEPS_175_FULL_READERS",
+    "final382GPU": "PASS_ACTUAL_TECHNICAL_RECEIPT_TWO_PNGS_GL0_LINKED",
+    "statusBasis": "completed natural receipt11:31:22.921555 and GPU receipt11:36:59.967492; root actual PNG view reports ART_FAIL; install/commit/push not yet verified",
+    "final382InstallCommitPush": "NOT_VERIFIED_IN_THIS_DRAFT",
+    "macOS": "NOT_RUN",
+    "referenceArtStatus": "ART_FAIL_ROOT_ACTUAL_VISUAL_REVIEW",
+    "referenceArtComplete": false,
+    "fourteenDaySteadyStateComplete": false,
+    "scope": "read-only original artifacts; private text/CSV/JSON assembly; no product import/native/test/validate/tsc/build/GPU executed by this reviewer"
+  }
+}

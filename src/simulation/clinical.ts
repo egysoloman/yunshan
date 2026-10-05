@@ -1,4 +1,4 @@
-import type { Simulation } from '../simulation';
+import { isCanonicalClinicalPresence, isCanonicalNpcWage, type Simulation } from '../simulation';
 import { canAccessFloor, getFloorDimensions } from '../access';
 import { floorPlanSupport, getBuildingBody, getBuildingUsePoints } from '../architecture-floor-plan';
 import { homeRestPointAt, homeRestPointBlockedByVoxels } from './home-rest';
@@ -265,11 +265,13 @@ function installCareWindows(simulation: Simulation): void {
     }
   });
   simulation.onEvent('wage-earned', event => {
+    if (!isCanonicalNpcWage(event, simulation)) return;
     const worker = event.citizenId && simulation.state.citizens.find(person => person.id === event.citizenId), p = carePhase(simulation);
-    if (!worker || !['医生', 'doctor'].includes(worker.role) || !simulation.worldDefinition.buildings.some(site => site.id === worker.workId && site.kind === 'clinic') || event.siteId !== worker.workId || !Number.isFinite(event.minutes) || event.minutes! <= 0 || !Number.isFinite(event.amount) || event.amount! < 0 || !Number.isFinite(event.creditedWorkStartAt) || event.creditedWorkStartAt! < 0 || !Number.isFinite(event.creditedWorkEndAt) || event.creditedWorkEndAt! > p.clock + EPS || event.creditedWorkEndAt! <= event.creditedWorkStartAt! || Math.abs(event.creditedWorkEndAt! - event.creditedWorkStartAt! - event.minutes!) > EPS) return;
+    if (!worker || !['医生', 'doctor'].includes(worker.role) || !simulation.worldDefinition.buildings.some(site => site.id === worker.workId && site.kind === 'clinic') || event.siteId !== worker.workId || !Number.isFinite(event.minutes) || event.minutes! <= 0 || !Number.isFinite(event.amount) || event.amount! <= 0 || !Number.isFinite(event.creditedWorkStartAt) || event.creditedWorkStartAt! < 0 || !Number.isFinite(event.creditedWorkEndAt) || event.creditedWorkEndAt! > p.clock + EPS || event.creditedWorkEndAt! <= event.creditedWorkStartAt! || Math.abs(event.creditedWorkEndAt! - event.creditedWorkStartAt! - event.minutes!) > EPS) return;
     const ranges = p.wages.get(worker.id) ?? []; ranges.push({ start: event.creditedWorkStartAt!, end: event.creditedWorkEndAt!, siteId: event.siteId }); p.wages.set(worker.id, ranges);
   });
   simulation.onEvent('clinical-activity-window', event => {
+    if (!isCanonicalClinicalPresence(event, simulation)) return;
     const worker = event.citizenId && simulation.state.citizens.find(person => person.id === event.citizenId), p = carePhase(simulation), position = event.activityPosition;
     if (!worker || !event.siteId || !position || ![position.x, position.y, position.z].every(Number.isFinite) || event.activityObservedTick !== p.tick || event.activityObservedClock !== p.clock || event.activityWindowEndAt !== p.clock || !Number.isFinite(event.activityWindowStartAt) || event.activityWindowStartAt! < 0 || event.activityWindowStartAt! >= p.clock || !['work', 'service'].includes(event.purpose ?? '') || Math.hypot(worker.position.x - position.x, worker.position.y - position.y, worker.position.z - position.z) > EPS) return;
     p.arrivals.set(worker.id, { start: event.activityWindowStartAt!, end: p.clock, siteId: event.siteId, purpose: event.purpose!, position: { ...position } });
