@@ -7,3 +7,7 @@
 五种室内原模型为artifacts/yunshan-ROOT18-original-interior-models-v1.zip；CPU验证候选整包另列在ARCHIVES。它们尚未全部接入城市权威摆放、购买及用途，也未通过实际GPU美术验收。当前实拍仍ART FAIL，Mac NOT_RUN。
 
 接续入口见REPRODUCE.md和开发备忘录。保持已验证351源码，使用真实原EDF的升级拷贝继续有限窗口审计；不要安装尚未就绪的owned几何候选，或把只读改造诊断当成已经执行拆迁、安置、建路。
+
+## Git实际回读
+
+实现提交`cc893868364197cbeb168110d7dc2b2c2eabe73a`已正常推送`takeover-city-life`，远端精确同HEAD；main仍为`6955d374a7d5bd928d2dadf4d0fdda74d416ca57`。351个提交blob逐SHA同验证源，详见GIT-READBACK。此回执和补充家庭夹具披露晚于Final03原件切片；原13ZIP不覆盖重造。

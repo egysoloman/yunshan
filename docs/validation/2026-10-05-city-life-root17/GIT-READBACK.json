@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-05T04:28:26.195478+00:00",
+  "status": "PUSHED_CODE_COMMIT_AND_351_BLOBS_VERIFIED",
+  "codeCommit": "cc893868364197cbeb168110d7dc2b2c2eabe73a",
+  "branch": "takeover-city-life",
+  "inputFiles": 351,
+  "allCommitInputSHA": "PASS",
+  "functionalInputGraph": "74aee7b713f03c51b9fd7427ed7fbfccdb60b451919c64c36295c75cb627c2be",
+  "sourceChanges": 46,
+  "originalTestsHelpersFixturesPreserved": 207,
+  "pushReadback": {
+    "startedUTC": "2026-10-05T04:25:50.192977+00:00",
+    "endedUTC": "2026-10-05T04:26:06.265919+00:00",
+    "wallSeconds": 16.072957209995366,
+    "branch": "takeover-city-life",
+    "localHEAD": "cc893868364197cbeb168110d7dc2b2c2eabe73a",
+    "pushExitCode": 0,
+    "remoteReadExitCode": 0,
+    "remoteWorkbranch": "cc893868364197cbeb168110d7dc2b2c2eabe73a",
+    "remoteMain": "6955d374a7d5bd928d2dadf4d0fdda74d416ca57",
+    "workbranchEqualsLocalHEAD": true,
+    "mainEqualsPrior": true,
+    "forcePush": false,
+    "mergePRDeploySecurityChange": false,
+    "rawPushSHA256": "2158ef8e5a34b305f99d53c883b51b363a1d7b96edf65b8cbe0ba61014d2bd0e"
+  },
+  "Library": "Unavailable before preparation; new LibraryIDs empty.",
+  "immutableArchives": "Final03 and13 originalZIPs unchanged; subsequent receipts/report clarifications are separate documents."
+}
