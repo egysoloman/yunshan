@@ -10,6 +10,7 @@ import { upgradeServiceMaterialScheduling } from '../src/host/upgrade-service-ma
 import { currentCivicBudgetSignature, validateBudgetSignatureV2, type BudgetSignatureV2 } from '../src/simulation/budget-authority.ts';
 import { civicHistoryView } from '../src/simulation/civic-history.ts';
 import { assembleSave, partitionSave } from '../src/persistence/partition.ts';
+import { residentEducationHeldCash } from '../src/simulation/resident-education';
 import { familyEducationHeldCash } from '../src/simulation/family-education.ts';
 import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle.ts';
 const out = process.argv[2]; assert.ok(out); mkdirSync(out, { recursive: true });
@@ -39,7 +40,7 @@ const moneySupply = () => {
     + s.shops.filter(shop=>!e.companies.some(c=>c.shopBindingReleasedAt===undefined&&c.buildingId===shop.buildingId)).reduce((sum,shop)=>sum+(shop.cash??0),0)
     + e.companies.reduce((sum,c)=>sum+c.capital,0) + e.organizations.reduce((sum,org)=>sum+org.funds,0)
     + (s.playerLabor?.job?.escrow??0) + (s.roadworks?.jobs.reduce((sum,job)=>sum+job.escrow,0)??0) + (s.education?.course?.escrow??0)
-    + familyEducationHeldCash(s) + (s.power?.repairs.reduce((sum,job)=>sum+job.escrow,0)??0) + (s.clinical?.orders.reduce((sum,order)=>sum+order.escrow,0)??0)
+    + familyEducationHeldCash(s) + residentEducationHeldCash(s) + (s.power?.repairs.reduce((sum,job)=>sum+job.escrow,0)??0) + (s.clinical?.orders.reduce((sum,order)=>sum+order.escrow,0)??0)
     + shopLifecycleHeldCash(s) + (s.hygiene?.jobs.reduce((sum,job)=>sum+job.escrow,0)??0) + (s.hygiene?.transfers?.tasks.reduce((sum,task)=>sum+task.escrow,0)??0)
     + (s.family?.pregnancies.reduce((sum,pregnancy)=>sum+pregnancy.escrow,0)??0) + (s.family?.households?.reduce((sum,household)=>sum+household.balance,0)??0);
 };

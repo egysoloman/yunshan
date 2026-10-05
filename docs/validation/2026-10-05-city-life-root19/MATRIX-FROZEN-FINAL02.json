@@ -1,0 +1,56 @@
+{
+  "status": "IMMUTABLE_FINAL02_FINALDISPLAY372_VALIDATED_PRE_ROOT_INSTALL",
+  "frozenUTC": "2026-10-05T09:56:27.455440+00:00",
+  "frozenAsiaShanghai": "2026-10-05T17:56:27.455440+08:00",
+  "outputs": {
+    "DISPLAY-GPU-READONLY-REVIEW.json": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/DISPLAY-GPU-READONLY-REVIEW.json",
+      "SHA256": "2b72ef970e0242801ca35be5662b12f9216ff4463a25d49f6c58cc9427daea7b",
+      "bytes": 4741
+    },
+    "DISPLAY-SOURCE-PROVENANCE.json": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/DISPLAY-SOURCE-PROVENANCE.json",
+      "SHA256": "2f22d0ca91dfc789144eb2ebc6edc9e1d986afc53cb2950251c5c4e1fb51300a",
+      "bytes": 3963
+    },
+    "EVIDENCE-INDEX.json": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/EVIDENCE-INDEX.json",
+      "SHA256": "40c1f91a7c5d839d952ebfcc904794ae5bce520be4e8dc17572249c9e150ccf7",
+      "bytes": 21961
+    },
+    "MATRIX-38-ROOT19-FINAL02.csv": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/MATRIX-38-ROOT19-FINAL02.csv",
+      "SHA256": "85ea7bcfa4ccbb2ab7c0433ad86418a6ced965810202a3b6d9e84fddbbcef6d0",
+      "bytes": 102422
+    },
+    "PRESERVATION-REPORT.json": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/PRESERVATION-REPORT.json",
+      "SHA256": "3bbf254cba88ddcb9ef72c98a6f609918ca29a1aa98e4b94921f3cbac532c8d3",
+      "bytes": 2038
+    },
+    "README.md": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/README.md",
+      "SHA256": "1e1be40e46d5030ce0f4ddf19d5af301116a2a06108a9ef7917932ebca23cd88",
+      "bytes": 2274
+    },
+    "ROOT19-APPENDED-CELLS.json": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/ROOT19-APPENDED-CELLS.json",
+      "SHA256": "8d3def1b5bd933b95af5b8e44f2ae1ed329c84a5fd5b44560b45ba20f6a758d2",
+      "bytes": 25968
+    },
+    "finalize-display.py": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/finalize-display.py",
+      "SHA256": "8d7fd5e299fa227b5ec9a340b477869d1ce678def10e10e961124be4d73d328d",
+      "bytes": 18366
+    }
+  },
+  "inputCount": 86,
+  "allEvidenceInputsActualBytesStableAtFreeze": true,
+  "root18OriginalBytesUnchanged": true,
+  "allPriorDraftAndFinal01OutputsStable": true,
+  "sourceName": "finaldisplay372",
+  "sourceGraphSHA256": "53cff00cc41461300b3b80c8259be29a0baad1d639963272e67ed956bb9d5e4d",
+  "producerNativeExecution": 0,
+  "producerSharedWrites": 0,
+  "installationStatus": "Await root actual shared installation receipt; this immutable file is the pre-install validation-source record."
+}

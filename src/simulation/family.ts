@@ -1,3 +1,4 @@
+import { validateResidentFormalLearning } from './resident-formal-learning';
 import type { Simulation } from '../simulation';
 import { shopLifecycleAssetOwnerId, shopLifecycleCanDispose, shopLifecyclePendingEstateAssets } from './shop_lifecycle';
 import { settleDeceasedAccount } from './banking';
@@ -42,9 +43,13 @@ export interface FamilyTuitionLearningReceipt {
   courseId: string; siteId: string; teacherId: string; completedAt: number;
   minutes: 60; minutesPerLevel: 480; educationGain: number;
 }
+export interface ResidentTuitionLearningReceipt {
+  residentCourseId: string; siteId: string; teacherId: string; completedAt: number;
+  minutes: 60; minutesPerLevel: 60; educationGain: number;
+}
 export interface FormalLearningRecord {
   baselineEducation: number; baselineAttendanceMinutes: number;
-  earnedMinutes: number; receipts: FormalLearningReceipt[]; tuitionPages?: FamilyTuitionLearningReceipt[][];
+  earnedMinutes: number; receipts: FormalLearningReceipt[]; tuitionPages?: FamilyTuitionLearningReceipt[][]; residentTuitionPages?: ResidentTuitionLearningReceipt[][];
   /** Higher qualifications already admitted by the old v1 reader, retained
    * when this resident completes its first real tuition course. */
   legacyEducationCarry?: number;
@@ -84,7 +89,7 @@ export interface FamilyState {
   careGuardians: Record<string, string[]>;
   estateSales: EstateAssetSale[];
   nextEstateSaleId: number;
-  formalLearningVersion?: 1 | 2;
+  formalLearningVersion?: 1 | 2 | 3;
   formalLearning?: Record<string, FormalLearningRecord>;
 }
 type FamilySimState = SimState & { family?: FamilyState };
@@ -648,6 +653,9 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     if (estate.businesses !== undefined) for (const [shopId, heirId] of Object.entries(dict(estate.businesses, candidate.shops.length, '经营权继承回执'))) ensure(candidate.shops.some(shop => shop.id === shopId) && heirs.includes(heirId), '实际经营权与法定继承人');
   }
   if (f.version === 1) { ensure([f.bonds, f.households, f.movePlans, f.ceremonies, f.careGuardians, f.estateSales, f.nextHouseholdId, f.nextCeremonyId, f.nextBondAt, f.nextEstateSaleId, f.formalLearningVersion, f.formalLearning].every(value => value === undefined), '旧家庭版本不能夹带未校验字段'); return; }
+  if (f.formalLearningVersion === 3) validateResidentFormalLearning(candidate, world);
+  else {
+  ensure(!Object.values(f.formalLearning ?? {}).some(record => Object.hasOwn(record, 'residentTuitionPages')), '成年本人正式来源不能降级为旧正式版本');
   ensure(f.formalLearningVersion === undefined ? f.formalLearning === undefined : [1, 2].includes(f.formalLearningVersion) && object(f.formalLearning), '正式授课版本与收据正文必须同时存在');
   if (f.formalLearningVersion === 2) ensure(!!candidate.familyEducation && Object.values(f.formalLearning!).some(record => record.tuitionPages?.flat().length), '正式家庭版本二须至少一份真实学费资格及原托管模块');
   if (f.formalLearning !== undefined) ensure(Object.keys(f.formalLearning).length > 0, '正式授课正文保留至少一份真实资格来源');
@@ -691,6 +699,7 @@ export function validateFamilyState(candidate: SimState, world: WorldDefinition)
     }
     ensure(receipts.length > 0 && earned === record.earnedMinutes && (tuitionPages.length > 0 ? Math.abs((person.education ?? 0) - record.baselineEducation - awarded - legacyEducationCarry) < 1e-7 : (person.education ?? 0) >= record.baselineEducation + awarded - 1e-7), '正式授课时数学历与历史基线一致');
     ensure(child ? Math.abs(child.attendanceMinutes - record.baselineAttendanceMinutes - earned) < 1e-7 : record.baselineAttendanceMinutes === 0, '学校新学时只能来自真实正式课');
+  }
   }
   num(f.nextHouseholdId, 1, 1e9, '共同账户序号', true); num(f.nextCeremonyId, 1, 1e9, '仪式序号', true); num(f.nextBondAt, 0, 1e12, '自主结识时钟');
   num(f.nextEstateSaleId, 1, 1e9, '遗产变卖序号', true);

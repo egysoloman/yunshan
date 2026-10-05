@@ -7,6 +7,7 @@ import { canAccessFloor } from './access';
 import { canReviewPetition, civicSite, publicFloor } from './simulation/culture';
 import { publicDepartures } from './journey';
 import { familyEducationCourses } from './simulation/family-education';
+import { residentEducationCourses } from './simulation/resident-education';
 import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from './simulation/family';
 import { bankingAvailableLoanCash, bankingBalanceSheet, bankingReserveRequired } from './simulation/banking';
 import { shopLifecycleMayIncorporate, shopLifecycleAllowsSpaceUse } from './simulation/shop_lifecycle';
@@ -48,7 +49,10 @@ type Pane = keyof typeof paneNames;
 type ContextKind = 'building' | 'citizen' | 'vehicle' | 'aircraft';
 const money = (n: number) => `${(Math.trunc(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} 云币`;
 const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleString('zh-CN');
-const clock = (hour: number) => `${String(Math.floor(hour) % 24).padStart(2, '0')}:${String(Math.floor((hour % 1) * 60)).padStart(2, '0')}`;
+const clock = (hour: number) => {
+  const totalMinutes = Math.floor(hour * 60 + 1e-7) % 1440;
+  return `${String(Math.floor(totalMinutes / 60)).padStart(2, '0')}:${String(totalMinutes % 60).padStart(2, '0')}`;
+};
 const distance = (a: { x: number; z: number }, b: { x: number; z: number }) => Math.hypot(a.x - b.x, a.z - b.z);
 const spatialDistance = (a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const playerLaborLabel = (state: SimState): string => state.playerLabor?.job ? '已有工班 · 回到原场所继续' : '开始 60 分钟现场工班';
@@ -1174,6 +1178,8 @@ export class CityUI {
     if (citizen.skills) details.append(element('p', 'note', Object.entries(citizen.skills).map(([key, value]) => `${skillLabels[key] ?? key} ${Math.round(value)}`).join(' · ')));
     const profile = this.state?.extension?.actorProfiles[citizen.id];
     if (profile) details.append(field('年龄 / 健康', `${profile.age.toFixed(1)} 岁 / ${Math.round(profile.health)}`), field('心情 / 压力', `${Math.round(profile.mood)} / ${Math.round(profile.stress)}`));
+    const courses = this.state && residentEducationCourses(this.state).filter(course => course.actorId === citizen.id);
+    if (courses?.length) details.append(this.residentEducationContent(undefined, citizen.id));
     const needs = element('div', 'need-grid compact'); this.renderNeeds(needs, citizen.needs); details.append(needs); return details;
   }
   private refreshContext(): void {
@@ -1206,7 +1212,8 @@ export class CityUI {
     const restSignature = [hygieneSignature(state, building?.id), state.homeRest?.session?.state, state.homeRest?.session?.pauseReason, Math.floor((state.homeRest?.session?.progressMinutes ?? 0) * 10), state.homeRest?.history.length, state.education?.course?.id, state.education?.course?.status, state.education?.course?.reason, Math.floor((state.education?.course?.workedMinutes ?? 0) * 10), state.education?.course?.escrow, state.education?.history.length].join(':');
     const familyEducationSignature = building?.kind === 'school' ? [Math.floor(state.hour * 60), state.familyEducation?.nextId, ...state.citizens.filter(c => isFamilyDependent(state, c.id)).map(c => [c.id, c.education, state.extension?.actorProfiles[c.id]?.age, Math.round(c.position.x * 10), Math.round(c.position.y * 10), Math.round(c.position.z * 10), state.family?.children[c.id]?.schoolId, state.family?.children[c.id]?.attendanceMinutes, state.familyEducation?.active.find(course => course.actorId === c.id)?.status, state.familyEducation?.active.find(course => course.actorId === c.id)?.workedMinutes, state.familyEducation?.active.find(course => course.actorId === c.id)?.escrow, state.familyEducation?.active.find(course => course.actorId === c.id)?.reason].join(':'))].join(';') : '';
     const boardingSignature = aircraft ? aircraftBoardingBlockedReason(state, aircraft) : '';
-    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.shopLifecycle?.nextReceiptId, state.shopLifecycle?.nextListingId, state.shopLifecycle?.titles[shop?.id ?? '']?.state, Math.floor((state.shopLifecycle?.titles[shop?.id ?? '']?.reopen?.workedMinutes ?? 0) * 10), state.shopLifecycle?.leases.find(lease => lease.shopId === shop?.id && lease.state !== 'ended')?.arrears, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, restSignature, boardingSignature, familyEducationSignature, functionSignature].join('|');
+    const residentEducationSignature = residentEducationCourses(state).filter(course => this.contextKind === 'citizen' ? course.actorId === citizen?.id : building?.kind === 'school' && course.siteId === building.id).map(course => [course.id, course.status, course.reason, course.workedMinutes, course.escrow, course.purchasePaid, course.serviceFees, course.refunded].join(':')).join(';');
+    const signature = [this.contextKind, building?.id, citizen?.id, vehicle?.id, state.player.role, view.mode, view.inside, shop?.open, Math.round(shop?.price ?? 0), Math.round(shop?.inventory ?? 0), rel?.type, Math.round(rel?.affection ?? 0), Math.round(state.player.money), !!state.player.vehicleId, (state.player.identities ?? []).join(','), state.player.homeId, vehicle?.state, vehicle?.passengers, vehicle?.cargo, vehicle?.speed, Math.round(state.bankBalance), Math.round(state.loan), state.banking?.cash, state.banking?.profitAvailable, state.banking?.legacyInvestmentPrincipal, state.banking?.nextReceiptId, rel?.trust, state.player.partnerId, citizen?.partnerId, state.voxels.length, state.shopLifecycle?.nextReceiptId, state.shopLifecycle?.nextListingId, state.shopLifecycle?.titles[shop?.id ?? '']?.state, Math.floor((state.shopLifecycle?.titles[shop?.id ?? '']?.reopen?.workedMinutes ?? 0) * 10), state.shopLifecycle?.leases.find(lease => lease.shopId === shop?.id && lease.state !== 'ended')?.arrears, state.player.inventory.food, state.crimes.filter(c => c.status !== 'resolved' && spatialDistance(c.position, state.player.position) <= 40).map(c => c.id).join(','), floor, citizen?.state, citizen?.education, Math.round(state.player.position.x), Math.round(state.player.position.z), Math.round(state.treasury), building?.name, citizen?.name, citizen?.role, rel?.romanceStage, rel?.hostilityStage, rel?.romanceSince, rel?.hostilitySince, rel?.encounters, rel?.reconciliations, rel?.consent, this.contextKind === 'citizen' ? Math.floor(this.socialClock()) : '', aircraft?.id, aircraft?.status, aircraft?.reserved, aircraft?.charging, Math.round(aircraft?.battery ?? 0), state.aviation?.activeAircraftId, state.extension?.companies.find(c => c.shopBindingReleasedAt === undefined && c.buildingId === building?.id)?.shareholders.player, job?.id, job?.status, Math.floor((job?.workedMinutes ?? 0) * 10), job?.pauseReason, state.playerLabor?.history.length, clinicalSignature, state.extension?.actorProfiles.player?.health, state.extension?.actorProfiles.player?.age, state.extension?.actorProfiles[citizen?.id ?? '']?.health, restSignature, boardingSignature, familyEducationSignature, residentEducationSignature, functionSignature].join('|');
     if (signature === this.contextSignature) return;
     const focused = document.activeElement;
     if ((focused instanceof HTMLInputElement || focused instanceof HTMLSelectElement) && this.ref('context').contains(focused) && signature.split('|').slice(0, 6).join('|') === this.contextSignature.split('|').slice(0, 6).join('|') && (building?.floorPlanProfile !== FLOOR_PLAN_PROFILE || functionSignature === this.contextSignature.split('|').at(-1))) return;
@@ -1243,7 +1250,7 @@ export class CityUI {
       }
       if (state.playerLabor?.job) body.append(this.laborContent());
       if (building.kind === 'clinic') body.append(this.clinicalContent());
-      if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building));
+      if (building.kind === 'school') body.append(this.educationContent(), this.familyEducationContent(building), this.residentEducationContent(building));
       if (building.kind === 'home' && building.floorPlanProfile === FLOOR_PLAN_PROFILE) body.append(this.homeRestContent(building));
       if (shop) body.append(element('p', 'note', `${building.kind === 'workshop' ? '工业物料' : '食物'} ${money(shop.price)} / 份 · 库存 ${Math.round(shop.inventory)} · 客流 ${shop.customers}`), element('p', 'note', building.kind === 'workshop' ? '工业物料进入背包，用于真实建设或材料用途。' : '购餐会当场吃一份；便携购餐另带一份入袋，可用于后续进食或家庭生活。'));
       if (['school', 'pavilion'].includes(building.kind)) { const link = element('button', 'text-button full-width', '创作与阅读作品 ↗'); link.type = 'button'; link.dataset.action = 'life'; body.append(link); }
@@ -1408,6 +1415,35 @@ export class CityUI {
     }
     const last = state.homeRest?.history.at(-1);
     if (!session && last && (!building || last.buildingId === building.id)) body.append(element('p', 'note', last.state === 'completed' ? `已完成 ${HOME_REST_MINUTES} 分钟休息。` : `上次休息已结束，实际休息 ${(Math.floor(last.progressMinutes * 10) / 10).toFixed(1)} 分钟。`));
+    return body;
+  }
+  /** A read-only view of the same finite contracts used by the simulation. */
+  private residentEducationContent(site?: Building, actorId?: string): HTMLElement {
+    const body = element('section', 'resident-education'), state = this.state!;
+    body.append(element('h4', '', '居民自费正式课程'));
+    const courses = residentEducationCourses(state).filter(course => (!site || course.siteId === site.id) && (!actorId || course.actorId === actorId));
+    if (!courses.length) {
+      body.append(element('p', 'note', '这里尚无居民实付课程记录。课程须由成年学生本人到原公共课堂签约，留足100云币生活费后付40云币托管；实际授课需要1份教材和60分钟共同课堂时间。'));
+      return body;
+    }
+    const names = { awaitingSupply: '等待真实教材', waiting: '等待教师与课堂条件', studying: '正在共同课堂授课', paused: '离场暂停', refundPending: '未赚退款仍托管', completed: '正式课程已完成', cancelled: '已取消并保留原记录' };
+    const actorIds = [...new Set(courses.map(course => course.actorId))];
+    for (const id of actorIds) {
+      const records = courses.filter(course => course.actorId === id), last = records.find(course => state.residentEducation?.active.includes(course)) ?? records.at(-1)!;
+      const resident = state.citizens.find(person => person.id === id), card = element('article', 'company-card');
+      card.dataset.residentEducationActor = id;
+      card.append(element('strong', '', resident?.name ?? id), field('正式学历 / 完成自费课程', `${resident?.education ?? 0} 级 / ${records.filter(course => course.status === 'completed').length} 份`), field('本人签约的原课堂', this.world.buildings.find(building => building.id === last.siteId)?.name ?? last.siteId), field('本课状态 / 实际授课', `${names[last.status]} / ${(Math.floor(last.workedMinutes * 10) / 10).toFixed(1)} / 60 分钟`), field('剩余托管 / 实购教材 / 已赚服务 / 已退', `${money(last.escrow)} / ${money(last.purchasePaid)} / ${money(last.serviceFees)} / ${money(last.refunded)}`), element('p', 'note', last.reason));
+      if (last.receipt) {
+        const supplier = state.shops.find(shop => shop.id === last.receipt!.shopId), supplierSite = this.world.buildings.find(building => building.id === supplier?.buildingId);
+        card.append(field('实际教材来源', `${supplierSite?.name ?? last.receipt.shopId} · 1份 × ${money(last.receipt.unitPrice)}`));
+      }
+      for (const [teacherId, minutes] of Object.entries(last.staffMinutes)) card.append(field('实际授课教师', `${state.citizens.find(person => person.id === teacherId)?.name ?? teacherId} · ${(Math.floor(minutes * 10) / 10).toFixed(1)} 分钟`));
+      const history = element('details', 'relationship-choices');
+      history.append(element('summary', '', `全部 ${records.length} 份原课程记录`));
+      for (const course of records) history.append(field(course.id, `${names[course.status]} · ${(Math.floor(course.workedMinutes * 10) / 10).toFixed(1)} 分钟 · 本人实付 ${money(course.funded)}`));
+      card.append(history); body.append(card);
+    }
+    body.append(element('p', 'note', '成年自费课程与未成年子女课程各自保留来源。子女学校学历仍须累计480分钟；普通自习只增加学习技能。离场不会补算授课或重复收费。'));
     return body;
   }
   private familyEducationContent(site: Building): HTMLElement {

@@ -7,10 +7,12 @@ import { validateFreightDeliveryPolicy, type FreightDeliveryPolicy } from './fre
 import { validateMealRoutePolicy, type MealRoutePolicy } from './meal-route';
 import { hasServiceMaterialRequestEstimate, validateServiceMaterialSchedulingEnvelope } from './service-material-scheduling';
 
+import { validateResidentTuitionPolicy, type ResidentTuitionPolicy } from './resident-education';
+
 export const PRODUCT_RULESET = 'civic-local-v1' as const;
 export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
 export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; freightDeliveryPolicyId?: FreightDeliveryPolicy }
+export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; freightDeliveryPolicyId?: FreightDeliveryPolicy; residentTuitionPolicyId?: ResidentTuitionPolicy }
 type Document = Record<string, any>;
 export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
 const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -26,6 +28,7 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
   validateMealRoutePolicy(data);
   validateFreightPickupPolicy(data);
   validateFreightDeliveryPolicy(data);
+  validateResidentTuitionPolicy(data);
   validateServiceMaterialSchedulingEnvelope(data);
   const state = data.state, runtime = data.runtime;
   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');
@@ -72,10 +75,10 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
 
 /** Generic partition tooling keeps its historical partial-document contract. */
 export function hasCityRulesetDeclaration(data: Document): boolean {
-  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId') || own(data, 'referenceCollisionPolicyId') || own(data, 'mealRoutePolicyId') || own(data, 'freightPickupPolicyId') || own(data, 'freightDeliveryPolicyId') || hasServiceMaterialRequestEstimate(data.state)
-    || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority') || own(data.state, 'civicHistory') || own(data.state, 'serviceMaterialScheduling'))
-    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion') || own(data.runtime, 'referenceCollisionPolicyId') || own(data.runtime, 'mealRoutePolicyId') || own(data.runtime, 'freightPickupPolicyId') || own(data.runtime, 'freightDeliveryPolicyId')
-      || own(data.runtime, 'serviceMaterialSchedulingVersion') || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority' || name === 'civicHistory' || name === 'serviceMaterialScheduling'));
+  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId') || own(data, 'referenceCollisionPolicyId') || own(data, 'mealRoutePolicyId') || own(data, 'freightPickupPolicyId') || own(data, 'freightDeliveryPolicyId') || own(data, 'residentTuitionPolicyId') || hasServiceMaterialRequestEstimate(data.state) || data.state?.family?.formalLearningVersion === 3 || Object.values(data.state?.family?.formalLearning ?? {}).some((record: any) => object(record) && own(record, 'residentTuitionPages'))
+    || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority') || own(data.state, 'civicHistory') || own(data.state, 'serviceMaterialScheduling') || own(data.state, 'residentEducation'))
+    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion') || own(data.runtime, 'referenceCollisionPolicyId') || own(data.runtime, 'mealRoutePolicyId') || own(data.runtime, 'freightPickupPolicyId') || own(data.runtime, 'freightDeliveryPolicyId') || own(data.runtime, 'residentTuitionPolicyId') || own(data.runtime, 'residentEducationVersion')
+      || own(data.runtime, 'serviceMaterialSchedulingVersion') || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority' || name === 'civicHistory' || name === 'serviceMaterialScheduling' || name === 'residentEducation'));
 }
 
 export function effectiveCityRuleset(state: SimState, runtime: { civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1 }): EffectiveRuleset {

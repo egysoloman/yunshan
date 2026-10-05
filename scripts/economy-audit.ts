@@ -1,4 +1,5 @@
 import { shopLifecycleHeldCash } from '../src/simulation/shop_lifecycle';
+import { residentEducationHeldCash } from '../src/simulation/resident-education';
 import { familyEducationHeldCash } from '../src/simulation/family-education';
 import { commodityObserver, foodSnapshot } from './economy-observations';
 import assert from 'node:assert/strict';
@@ -247,6 +248,7 @@ function snapshot() {
     policeSupplies: sim.policeSupplyCoverage(),
     civicRequests: s.culture ? { residentPetitions: s.culture.petitions.filter(p => p.residentOrigin !== undefined).length, openPetitions: s.culture.petitions.filter(p => p.status === 'open').length, orders: s.culture.orders.map(o => ({ id: o.id, topic: o.topic, state: o.state, authorizedCap: o.authorizedCap, spent: o.spent, receivedUnits: o.receivedUnits, consumedUnits: o.consumedUnits, served: o.servedIds.length })) } : null,
     formalLearning: s.family?.formalLearning ? Object.values(s.family.formalLearning).map(record => ({ earnedMinutes: record.earnedMinutes, receipts: record.receipts.length, familyReceipts: record.tuitionPages?.reduce((sum, page) => sum + page.length, 0) ?? 0 })) : [],
+    residentEducation: s.residentEducation ? { heldCash: residentEducationHeldCash(s), active: s.residentEducation.active.map(course => ({ id: course.id, actorId: course.actorId, payerId: course.payerId, status: course.status, workedMinutes: course.workedMinutes, escrow: course.escrow })), retainedPages: s.residentEducation.pages.length, totals: { ...s.residentEducation.totals } } : null,
     familyEducation: s.familyEducation ? { heldCash: familyEducationHeldCash(s), active: s.familyEducation.active.map(course => ({ id: course.id, actorId: course.actorId, payerId: course.payerId, status: course.status, workedMinutes: course.workedMinutes, escrow: course.escrow })), retainedPages: s.familyEducation.pages.length, totals: { ...s.familyEducation.totals } } : null,
     playerLabor: s.playerLabor ? { escrow: s.playerLabor.job?.escrow ?? 0, stats: { ...s.playerLabor.stats } } : null,
     roadworks: s.roadworks ? { escrow: s.roadworks.jobs.reduce((sum, job) => sum + job.escrow, 0), jobs: s.roadworks.jobs.map(job => ({ id: job.id, payerId: job.payerId, status: job.status, workedMinutes: job.workedMinutes, funded: job.funded, purchasePaid: job.purchasePaid, paidGross: job.paidGross, paidTax: job.paidTax, refunded: job.refunded, escrow: job.escrow })) } : null,
@@ -286,7 +288,7 @@ function moneySupply() {
     + (s.playerLabor?.job?.escrow ?? 0)
     + (s.roadworks?.jobs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.education?.course?.escrow ?? 0)
-    + familyEducationHeldCash(s)
+    + familyEducationHeldCash(s) + residentEducationHeldCash(s)
     + (s.power?.repairs.reduce((sum, job) => sum + job.escrow, 0) ?? 0)
     + (s.clinical?.orders.reduce((sum, order) => sum + order.escrow, 0) ?? 0)
     + shopLifecycleHeldCash(s)

@@ -167,7 +167,7 @@ export function inspectBuildingAlteration(world: WorldDefinition, state: SimStat
     if (shopIds.has(supplierId) && vehicle && vehicle.cargo > EPS) protect('consignment', vehicleId, [supplierId], '有限货物仍在实际载具中，来源经营主体及交付权必须保留。', { units: vehicle.cargo });
   }
   for (const order of state.clinical?.orders ?? []) if (order.siteId === site.id && (!terminal(order.state) || order.escrow > EPS)) protect('service', order.id, [order.patientId, order.payerId], '诊疗、退款和已采购物料合同仍有效。', { amount: order.escrow });
-  for (const course of [state.education?.course, ...(state.familyEducation?.active ?? [])]) if (course && course.siteId === site.id && (!terminal(course.status) || course.escrow > EPS)) protect('service', course.id, [course.actorId, course.payerId], '教学、退款和教材合同仍有效。', { amount: course.escrow });
+  for (const course of [state.education?.course, ...(state.familyEducation?.active ?? []), ...(state.residentEducation?.active ?? [])]) if (course && course.siteId === site.id && (!terminal(course.status) || course.escrow > EPS)) protect('service', course.id, [course.actorId, course.payerId], '教学、退款和教材合同仍有效。', { amount: course.escrow });
   for (const order of state.culture?.orders ?? []) if (order.siteId === site.id && !terminal(order.state)) protect('service', order.id, [], '已备案公共服务及有限预算仍须继续或依法结清。', { amount: Math.max(0, order.authorizedCap - order.spent) });
   const extensionRuntime = state.extension && Reflect.get(state.extension, 'runtime') as { researchJobs?: Record<string, ResearchJob>; constructionJobs?: Record<string, { completedAt: number | null; materialUnits: number; consumedUnits: number }> } | undefined;
   for (const [sector, research] of Object.entries(extensionRuntime?.researchJobs ?? {})) if (research.laborVersion === 1 && research.siteId === site.id) protect('service', 'research:' + sector, [research.actorId], '已付科研合同仍绑定原场址和实际出勤记录。', { amount: research.budget });
@@ -175,7 +175,7 @@ export function inspectBuildingAlteration(world: WorldDefinition, state: SimStat
     const construction = extensionRuntime?.constructionJobs?.[company.id];
     if (company.buildingId === site.id && construction && construction.completedAt === null) protect('service', 'construction:' + company.id, [company.ownerId], '原有限公司扩建材料和未完成现场劳动须处理。', { units: construction.materialUnits - construction.consumedUnits });
   }
-  for (const [kind, stocks] of [['clinical', state.clinical?.stock], ['education', state.education?.stock], ['family-education', state.familyEducation?.stock], ['hygiene', state.hygiene?.stock]] as const) {
+  for (const [kind, stocks] of [['clinical', state.clinical?.stock], ['education', state.education?.stock], ['family-education', state.familyEducation?.stock], ['resident-education', state.residentEducation?.stock], ['hygiene', state.hygiene?.stock]] as const) {
     const stock = stocks?.[site.id]; if (stock && stock.availableUnits > EPS) protect('stock', kind + ':' + site.id, [], '已采购且仍可用的服务物料须保留原库存与来源。', { units: stock.availableUnits });
   }
   if (state.playerLabor?.job?.siteId === site.id) protect('service', state.playerLabor.job.id, ['player'], '现场劳动合同与未赚工资托管仍有效。', { amount: state.playerLabor.job.escrow });

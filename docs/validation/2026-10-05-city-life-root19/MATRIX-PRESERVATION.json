@@ -1,0 +1,50 @@
+{
+  "status": "PASS_APPEND_ONLY_EXACT_OLD14_COLUMNS_AND_HISTORY",
+  "baselinePublic": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root18/MATRIX-38.csv",
+    "SHA256": "d9af94d144128274f532b2fae855189a65928e8dff46fac3307973cfb3765408",
+    "bytes": 81927
+  },
+  "baselinePrivateOriginal": {
+    "path": "/tmp/ROOT19-matrix-readonly-20261005-01/draft01/ROOT18-MATRIX-38.original.csv",
+    "SHA256": "d9af94d144128274f532b2fae855189a65928e8dff46fac3307973cfb3765408",
+    "bytes": 81927
+  },
+  "output": {
+    "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final02/MATRIX-38-ROOT19-FINAL02.csv",
+    "SHA256": "85ea7bcfa4ccbb2ab7c0433ad86418a6ced965810202a3b6d9e84fddbbcef6d0",
+    "bytes": 102422
+  },
+  "oldRows": 38,
+  "oldColumns": 14,
+  "newColumns": 17,
+  "all532OldBodyCellsExact": true,
+  "all14OldHeadersExact": true,
+  "all38IDsAndOrderExact": true,
+  "BOMExact": true,
+  "all39OriginalCSVRecordPrefixesAndCRLFExact": true,
+  "fullOriginalReconstructedSHA256": "d9af94d144128274f532b2fae855189a65928e8dff46fac3307973cfb3765408",
+  "allDraft01Draft02Final01FrozenOutputsUnchanged": true,
+  "priorFreezeFiles": {
+    "draft01": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/draft01/FROZEN-DRAFT01.json",
+      "SHA256": "c1f3fbe8c9f4e7137db5ba1285bde6f108c96eaed82a7f2cc7850c7a0e531742",
+      "bytes": 2119
+    },
+    "draft02": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/draft02/FROZEN-DRAFT02.json",
+      "SHA256": "b53b3908dfc7de4f60829070523b9d40239eed2d08dfc7a0fd515b5628a0dbfc",
+      "bytes": 2083
+    },
+    "final01": {
+      "path": "/tmp/ROOT19-matrix-readonly-20261005-01/final01/FROZEN-FINAL01.json",
+      "SHA256": "0a5f086083b7e6f95b35feb43366a2d6c315f201cf9de5e6a2f2a503556d2392",
+      "bytes": 2167
+    }
+  },
+  "finalDisplaySource372ActualBytesMatch": true,
+  "371OtherActualSourceFilesEqualOriginal372": true,
+  "old235ActualTestHelperFixtureBytesPreserved": true,
+  "producerNativeImportsCtorsStepsValidateTestsBuildGPU": 0,
+  "producerSharedWrites": 0
+}

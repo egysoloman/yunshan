@@ -322,6 +322,43 @@ function segmentDistanceSquared(x:number,z:number,a:readonly number[],b:readonly
   const t=Math.max(0,Math.min(1,((x-a[0])*dx+(z-a[1])*dz)/lengthSquared));
   return (x-a[0]-dx*t)**2+(z-a[1]-dz*t)**2;
 }
+/** Minimum distance of two closed planar segments, including crossing and
+ * collinear overlap. Endpoint distances alone miss an interior intersection. */
+function planarSegmentsDistanceSquared(a:readonly number[],b:readonly number[],c:readonly number[],d:readonly number[]):number {
+  const orient=(p:readonly number[],q:readonly number[],r:readonly number[]) => (q[0]-p[0])*(r[1]-p[1])-(q[1]-p[1])*(r[0]-p[0]);
+  const overlap=Math.max(Math.min(a[0],b[0]),Math.min(c[0],d[0]))<=Math.min(Math.max(a[0],b[0]),Math.max(c[0],d[0])) && Math.max(Math.min(a[1],b[1]),Math.min(c[1],d[1]))<=Math.min(Math.max(a[1],b[1]),Math.max(c[1],d[1]));
+  if(overlap && orient(a,b,c)*orient(a,b,d)<=0 && orient(c,d,a)*orient(c,d,b)<=0)return 0;
+  return Math.min(segmentDistanceSquared(a[0],a[1],c,d),segmentDistanceSquared(b[0],b[1],c,d),segmentDistanceSquared(c[0],c[1],a,b),segmentDistanceSquared(d[0],d[1],a,b));
+}
+/** Continuous support for the entire swept foot disk on one local slab.
+ * A finite sampling interval can skip a narrow unsupported hole corner. The
+ * original point/body checks remain authoritative; this adds the union's
+ * boundary clearance between those points, without changing any floor mesh. */
+export function canStandAlongFloorPlan(p:FloorPlan,a:Pick<Vec3,'x'|'z'>,b:Pick<Vec3,'x'|'z'>,radius=.35):boolean {
+  if(![a.x,a.z,b.x,b.z,radius].every(Number.isFinite) || radius<0 || !canStandInFloorPlan(p,a.x,a.z,radius) || !canStandInFloorPlan(p,b.x,b.z,radius))return false;
+  const from=[a.x,a.z],to=[b.x,b.z],minimum=radius*radius-eps;
+  for(const loop of supportCache.get(p)!.boundaries)for(let i=0;i<loop.length;i++) {
+    const distance=planarSegmentsDistanceSquared(from,to,loop[i],loop[(i+1)%loop.length]);
+    if(distance<minimum)return false;
+  }
+  if(minimum>0)return true;
+  // A zero/tiny disk still needs a continuously supported centre. With the
+  // original point epsilon, its squared clearance threshold is nonpositive;
+  // merge exact line-clipped slab intervals instead of rejecting tangency.
+  const intervals:{start:number;end:number}[]=[];
+  for(const rect of getFloorPlanSlabRegions(p)) {
+    let start=0,end=1;
+    for(const [origin,delta,low,high] of [[a.x,b.x-a.x,rect.x0-eps,rect.x1+eps],[a.z,b.z-a.z,rect.z0-eps,rect.z1+eps]]) {
+      if(delta===0){if(origin<low || origin>high){end=-1;break;}continue;}
+      const t1=(low-origin)/delta,t2=(high-origin)/delta;
+      start=Math.max(start,Math.min(t1,t2));end=Math.min(end,Math.max(t1,t2));
+    }
+    if(start<=end)intervals.push({start,end});
+  }
+  intervals.sort((a,b)=>a.start-b.start);let covered=0;
+  for(const interval of intervals){if(interval.start>covered)return false;covered=Math.max(covered,interval.end);if(covered>=1)return true;}
+  return false;
+}
 function circleRectDistanceSquared(x:number,z:number,r:Rect) {return Math.max(r.x0-x,0,x-r.x1)**2+Math.max(r.z0-z,0,z-r.z1)**2;}
 export function canStandInFloorPlan(p:FloorPlan,x:number,z:number,radius=.35):boolean {
   if(!containsUnion(getFloorPlanSlabRegions(p),x,z))return false;
@@ -544,6 +581,7 @@ export function getFloorPlanRoofRegions(body:BuildingBody):RoofRegion[] {
 function localSegmentClear(p:FloorPlan,a:Vec3,b:Vec3,radius:number,building:Building,segmentBlocked?: (from:Vec3,to:Vec3)=>boolean):boolean {
   if(segmentBlocked?.(buildingWorldPosition(building,a),buildingWorldPosition(building,b)))return false;
   if(blocksFloorPlanMovement(building,p.floor,buildingWorldPosition(building,a),buildingWorldPosition(building,b),radius))return false;
+  if(continuousStairs(building) && !canStandAlongFloorPlan(p,a,b,radius))return false;
   const steps=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.z-a.z)/.4));
   for(let i=0;i<=steps;i++){const t=i/steps;if(!canStandInFloorPlan(p,a.x+(b.x-a.x)*t,a.z+(b.z-a.z)*t,radius))return false;}return true;
 }

@@ -1,0 +1,307 @@
+{
+  "id": "starport-b0",
+  "districtId": "starport",
+  "name": "云外星港·北岭院·星际候航殿1",
+  "kind": "starport",
+  "position": {
+    "x": 1370,
+    "y": 388,
+    "z": -1395
+  },
+  "width": 130.4,
+  "depth": 86,
+  "height": 92.4,
+  "floors": 14,
+  "rotation": 0,
+  "door": {
+    "x": 1370,
+    "y": 388.6,
+    "z": -1352
+  },
+  "capacity": 4900,
+  "seed": 939898209,
+  "stairGeometryRevision": 2,
+  "floorPlanProfile": "v4-program-bodies-02",
+  "functionPoints": [
+    {
+      "id": "0:program:work",
+      "purpose": "work",
+      "floor": 0,
+      "position": {
+        "x": 1370,
+        "y": 388.6,
+        "z": -1424.2
+      }
+    },
+    {
+      "id": "0:program:service",
+      "purpose": "service",
+      "floor": 0,
+      "position": {
+        "x": 1370,
+        "y": 388.6,
+        "z": -1424.2
+      }
+    },
+    {
+      "id": "1:program:work",
+      "purpose": "work",
+      "floor": 1,
+      "position": {
+        "x": 1317.8,
+        "y": 395.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "1:program:service",
+      "purpose": "service",
+      "floor": 1,
+      "position": {
+        "x": 1317.8,
+        "y": 395.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "2:program:work",
+      "purpose": "work",
+      "floor": 2,
+      "position": {
+        "x": 1317.8,
+        "y": 401.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "2:program:service",
+      "purpose": "service",
+      "floor": 2,
+      "position": {
+        "x": 1317.8,
+        "y": 401.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "3:program:work",
+      "purpose": "work",
+      "floor": 3,
+      "position": {
+        "x": 1317.8,
+        "y": 408.40000000000003,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "3:program:service",
+      "purpose": "service",
+      "floor": 3,
+      "position": {
+        "x": 1317.8,
+        "y": 408.40000000000003,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "4:program:work",
+      "purpose": "work",
+      "floor": 4,
+      "position": {
+        "x": 1317.8,
+        "y": 415,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "4:program:service",
+      "purpose": "service",
+      "floor": 4,
+      "position": {
+        "x": 1317.8,
+        "y": 415,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "5:program:work",
+      "purpose": "work",
+      "floor": 5,
+      "position": {
+        "x": 1317.8,
+        "y": 421.6,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "5:program:service",
+      "purpose": "service",
+      "floor": 5,
+      "position": {
+        "x": 1317.8,
+        "y": 421.6,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "6:program:work",
+      "purpose": "work",
+      "floor": 6,
+      "position": {
+        "x": 1317.8,
+        "y": 428.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "6:program:service",
+      "purpose": "service",
+      "floor": 6,
+      "position": {
+        "x": 1317.8,
+        "y": 428.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "7:program:work",
+      "purpose": "work",
+      "floor": 7,
+      "position": {
+        "x": 1317.8,
+        "y": 434.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "7:program:service",
+      "purpose": "service",
+      "floor": 7,
+      "position": {
+        "x": 1317.8,
+        "y": 434.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "8:program:work",
+      "purpose": "work",
+      "floor": 8,
+      "position": {
+        "x": 1317.8,
+        "y": 441.40000000000003,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "8:program:service",
+      "purpose": "service",
+      "floor": 8,
+      "position": {
+        "x": 1317.8,
+        "y": 441.40000000000003,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "9:program:work",
+      "purpose": "work",
+      "floor": 9,
+      "position": {
+        "x": 1317.8,
+        "y": 448,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "9:program:service",
+      "purpose": "service",
+      "floor": 9,
+      "position": {
+        "x": 1317.8,
+        "y": 448,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "10:program:work",
+      "purpose": "work",
+      "floor": 10,
+      "position": {
+        "x": 1317.8,
+        "y": 454.6,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "10:program:service",
+      "purpose": "service",
+      "floor": 10,
+      "position": {
+        "x": 1317.8,
+        "y": 454.6,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "11:program:work",
+      "purpose": "work",
+      "floor": 11,
+      "position": {
+        "x": 1317.8,
+        "y": 461.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "11:program:service",
+      "purpose": "service",
+      "floor": 11,
+      "position": {
+        "x": 1317.8,
+        "y": 461.20000000000005,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "12:program:work",
+      "purpose": "work",
+      "floor": 12,
+      "position": {
+        "x": 1317.8,
+        "y": 467.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "12:program:service",
+      "purpose": "service",
+      "floor": 12,
+      "position": {
+        "x": 1317.8,
+        "y": 467.8,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "13:program:work",
+      "purpose": "work",
+      "floor": 13,
+      "position": {
+        "x": 1317.8,
+        "y": 474.40000000000003,
+        "z": -1401.8
+      }
+    },
+    {
+      "id": "13:program:service",
+      "purpose": "service",
+      "floor": 13,
+      "position": {
+        "x": 1317.8,
+        "y": 474.40000000000003,
+        "z": -1401.8
+      }
+    }
+  ]
+}

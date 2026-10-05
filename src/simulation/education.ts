@@ -154,7 +154,7 @@ export function applyFamilyEducationCredential(simulation: Simulation, course: F
     const carry = (person.education ?? 0) - record.baselineEducation - record.receipts.reduce((sum, receipt) => sum + receipt.educationGain, 0);
     if (carry > EPS) record.legacyEducationCarry = carry;
   }
-  family.formalLearningVersion = 2; family.formalLearning ??= {}; family.formalLearning[course.actorId] = record; record.tuitionPages ??= [];
+  if (family.formalLearningVersion !== 3) family.formalLearningVersion = 2; family.formalLearning ??= {}; family.formalLearning[course.actorId] = record; record.tuitionPages ??= [];
   if (!record.tuitionPages.length || record.tuitionPages[record.tuitionPages.length - 1].length === 8) record.tuitionPages.push([]);
   record.tuitionPages[record.tuitionPages.length - 1].push({ courseId: course.id, siteId: course.siteId, teacherId: teacher.id, completedAt: course.completedAt!, minutes: MINUTES, minutesPerLevel: SCHOOL_MINUTES_PER_LEVEL, educationGain: gain });
   record.earnedMinutes += MINUTES; person.education = (person.education ?? 0) + gain; if (child) child.attendanceMinutes += MINUTES;

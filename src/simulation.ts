@@ -26,6 +26,7 @@ import { inspectBuildingAlteration, type BuildingAlterationPlan } from './simula
 import { captureBlockedRoadIntent, roadIntentStillBlocked, installRoadDemands, type RoadBlockWitness } from './simulation/road-demands';
 import { installFamily, isCloseKin, recordSchoolSelfStudy } from './simulation/family';
 import { installCulture, type ServiceOrder } from './simulation/culture';
+import { installResidentEducation, residentEducationNeedsContinuousPeople, RESIDENT_TUITION_POLICY, type ResidentTuitionPolicy } from './simulation/resident-education';
 import { installFamilyEducation, familyEducationOpportunities, familyEducationTaskActorIds, observeFamilyEducationArrival } from './simulation/family-education';
 import { clinicalServiceStationsAtPosition, clinicalTaskActorIds } from './simulation/clinical';
 import { educationNeedsContinuousPeople, educationServiceStationsAtPosition, observePublicEducationArrival } from './simulation/education';
@@ -45,7 +46,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid', 'residentEducation'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -64,6 +65,7 @@ export const isCanonicalNpcWage = (event: object, simulation?: Simulation): bool
     && witness.tick === simulation.state.tick
     && witness.at === (simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60));
 };
+const canonicalResidentEducationPresence = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number }>();
 const canonicalCivicPresence = new WeakSet<object>();
 /** Only core arrival observations certify unpaid local civic activity. */
 export const isCanonicalCivicPresence = (event: object): boolean => canonicalCivicPresence.has(event);
@@ -93,7 +95,7 @@ interface Runtime {
   rng: number; accumulator: number; weatherAt: number; crimeAt: number; payrollAt: number; commerceAt: number; financeAt: number; socialAt: number;
   eventId: number; crimeId: number; focus: Vec3; mode: ViewMode; detail: number; workAt: number; studyAt: number;
   wages: { citizenId: string; amount: number; districtId: string; shopId?: string | null; expenseAccrued?: boolean }[];
-  persistedModules?: string[]; civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1; budgetAuthorityVersion?: 1; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
+  persistedModules?: string[]; civicStaffingVersion?: 1 | 2; civicHistoryVersion?: 1; budgetAuthorityVersion?: 1; roadNetworkVersion?: 1; roadworksVersion?: 1 | 2; roadDemandsVersion?: 1; governanceVersion?: 1; hygieneVersion?: 1 | 2; hygieneTransferVersion?: 1; pathologyVersion?: 1; powerVersion?: 1; legacyEnergyContractVersion?: 1; legacyEnergyContract?: LegacyEnergyContract; educationVersion?: 1; familyEducationVersion?: 1; residentEducationVersion?: 1; playerLaborVersion?: 1; accountingVersion?: 2; wageAccruals?: WageAccrual[]; publicLabor?: PublicLabor; publicLaborReviewAt?: number; privateLabor?: PrivateLabor; publicBudgets?: BudgetAuthorization[];
   wageArrears?: { citizenId: string; shopId: string | null; amount: number }[];
   taxes: number; freight: Record<string, number>; playerBusinesses: string[]; investment: number;
   freightLots?: Record<string, { shopId: string | null; quantity: number }[]>;
@@ -112,6 +114,7 @@ interface Runtime {
   mealRoutePolicyId?: MealRoutePolicy;
   freightPickupPolicyId?: FreightPickupPolicy;
   freightDeliveryPolicyId?: FreightDeliveryPolicy;
+  residentTuitionPolicyId?: ResidentTuitionPolicy;
   serviceMaterialSchedulingVersion?: 1;
   npcStairCursors?: Record<string, NpcStairCursor>;
   attendance: Record<string, number>;
@@ -166,11 +169,12 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'freightDeliveryPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'freightDeliveryPolicyId', 'residentTuitionPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.freightDeliveryPolicyId !== undefined && (options.freightDeliveryPolicyId !== ROAD_FOOD_DELIVERY_POLICY || options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.freightDeliveryPolicyId !== undefined && (options.freightDeliveryPolicyId !== ROAD_FOOD_DELIVERY_POLICY || options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.residentTuitionPolicyId !== undefined && (options.residentTuitionPolicyId !== RESIDENT_TUITION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -192,6 +196,7 @@ export class Simulation implements SimulationAPI {
     if (options?.mealRoutePolicyId) this.runtime.mealRoutePolicyId = options.mealRoutePolicyId;
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
     if (options?.freightDeliveryPolicyId) this.runtime.freightDeliveryPolicyId = options.freightDeliveryPolicyId;
+    if (options?.residentTuitionPolicyId) this.runtime.residentTuitionPolicyId = options.residentTuitionPolicyId;
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
@@ -243,6 +248,7 @@ export class Simulation implements SimulationAPI {
     if (this.state.civicStaffing) { this.state.budgetAuthority = createBudgetAuthorityState(this.state.civicStaffing.enablement, this.runtime.publicBudgets ?? [], this.state.culture); this.runtime.budgetAuthorityVersion = 1; }
     installBudgetAuthority(this, { enabled: () => this.effectiveRuleset === 'civic-local-v1' }, () => this.runtime);
     installFamilyEducation(this);
+    installResidentEducation(this, { enabled: () => this.residentTuitionPolicyId === RESIDENT_TUITION_POLICY, activate: () => { this.runtime.residentEducationVersion = 1; }, isCanonicalWage: event => isCanonicalNpcWage(event, this), isCanonicalPresence: event => { const source = canonicalResidentEducationPresence.get(event); return !!source && source.simulation === this && source.state === this.state && source.tick === this.state.tick; } });
     installHomeRest(this);
     installPower(this, { activate: () => { this.runtime.powerVersion = 1; }, legacy: () => this.legacyEnergyContract(), publicSupply: () => this.runtime.publicSupply ?? 1, isCanonicalDisaster, isCanonicalResearchCompletion });
     installPowerGrid(this);
@@ -1295,7 +1301,7 @@ export class Simulation implements SimulationAPI {
       const clinicalPoints = clinicalWork
         ? points.filter(point => point.floor === 0 && clinicalServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
       const educationWork = action === 'work' && destination.kind === 'school' && ['老师', 'teacher'].includes(citizen.role)
-        && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active') || this.state.familyEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null));
+        && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active') || this.state.familyEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null) || this.state.residentEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null));
       const educationPoints = educationWork ? points.filter(point => point.floor === 0 && educationServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
       const savedPowerPoint = action === 'work' && ['工程师', 'scientist', '科学家'].includes(citizen.role) ? powerRepairPoint(this.state, citizen.id, destination.id) : null;
       const powerPoints = savedPowerPoint ? points.filter(point => point.id === savedPowerPoint.id && point.floor === savedPowerPoint.floor && distance(point.position, savedPowerPoint.position) < 1e-7 && !homeRestPointBlockedByVoxels(point.position, this.state.voxels) && !blocksFloorPlanMovement(destination, point.floor, point.position, point.position, .35, 1.72)) : [];
@@ -1338,7 +1344,7 @@ export class Simulation implements SimulationAPI {
     if (Object.values(research ?? {}).some(raw => (raw as { actorId?: string }).actorId === citizen.id)) return false;
     if (this.state.roadworks?.jobs.some(job => roadworkActorId(job) === citizen.id && job.completedAt === null && job.cancelledAt === null)
       || powerTaskActorIds(this.state).has(citizen.id) || clinicalTaskActorIds(this.state).has(citizen.id)
-      || educationNeedsContinuousPeople(this.state, citizen) || familyEducationTaskActorIds(this.state).has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
+      || educationNeedsContinuousPeople(this.state, citizen) || residentEducationNeedsContinuousPeople(this.state, citizen) || familyEducationTaskActorIds(this.state).has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
     return true;
   }
   private foodHiringWorkDistance(citizen: Citizen, site: Building): number {
@@ -1713,7 +1719,7 @@ export class Simulation implements SimulationAPI {
       // At most seven persisted new research jobs request fine task processing.
       // Preserve tier, ordinary actors' frequency, pending needs and real wages.
       const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || residentEducationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
@@ -1854,6 +1860,11 @@ export class Simulation implements SimulationAPI {
         this.bus.emit({ type: 'customer', citizenId: citizen.id, shopId: this.state.shops.find(s => s.buildingId === destination.id)?.id });
       }
       if (destination.kind === 'school') observePublicEducationArrival(this, citizen, destination, arrivedElapsed);
+      if (this.runtime.residentTuitionPolicyId === RESIDENT_TUITION_POLICY && destination.kind === 'school' && activity === 'study' && arrivedElapsed > 0) {
+        const observedClock = this.state.extension!.lastUpdate, arrivedMinutes = Math.min(this.minutes, arrivedElapsed);
+        const event: Event = Object.freeze({ type: 'resident-education-presence', citizenId: citizen.id, siteId: destination.id, activityWindowStartAt: observedClock - arrivedMinutes, activityWindowEndAt: observedClock, activityObservedTick: this.state.tick, activityObservedClock: observedClock, activityPosition: Object.freeze(copy(citizen.position)) });
+        canonicalResidentEducationPresence.set(event, { simulation: this, state: this.state, tick: this.state.tick }); this.bus.emit(event);
+      }
     }
     const player = this.state.player; player.needs.hunger = clamp(player.needs.hunger - this.minutes * .035); player.needs.fatigue = clamp(player.needs.fatigue - this.minutes * .018); player.needs.social = clamp(player.needs.social - this.minutes * .012); player.needs.fun = clamp(player.needs.fun - this.minutes * .009);
     if (this.now + 1e-7 >= this.runtime.payrollAt) {
@@ -2461,10 +2472,11 @@ export class Simulation implements SimulationAPI {
   get mealRoutePolicyId(): MealRoutePolicy | 'legacy' { return this.runtime.mealRoutePolicyId ?? 'legacy'; }
   get freightPickupPolicyId(): FreightPickupPolicy | 'legacy' { return this.runtime.freightPickupPolicyId ?? 'legacy'; }
   get freightDeliveryPolicyId(): FreightDeliveryPolicy | 'legacy' { return this.runtime.freightDeliveryPolicyId ?? 'legacy'; }
+  get residentTuitionPolicyId(): ResidentTuitionPolicy | 'legacy' { return this.runtime.residentTuitionPolicyId ?? 'legacy'; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.freightDeliveryPolicyId ? { freightDeliveryPolicyId: this.runtime.freightDeliveryPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.freightDeliveryPolicyId ? { freightDeliveryPolicyId: this.runtime.freightDeliveryPolicyId } : {}), ...(this.runtime.residentTuitionPolicyId ? { residentTuitionPolicyId: this.runtime.residentTuitionPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
@@ -2492,6 +2504,7 @@ export class Simulation implements SimulationAPI {
       else ensure(r.npcMotionVersion === undefined && r.npcStairCursors === undefined, 'legacy motion body and version');
       if (s.shopLifecycle !== undefined || r.shopLifecycleVersion !== undefined) ensure(r.persistedModules !== undefined && s.shopLifecycle && r.shopLifecycleVersion === 1, 'shop lifecycle custody manifest');
       if (s.education !== undefined && s.education !== null || r.educationVersion !== undefined) ensure(r.persistedModules !== undefined, 'education persisted manifest');
+      if (s.residentEducation !== undefined || r.residentEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.residentEducation && r.residentEducationVersion === 1, 'resident education custody manifest');
       if (s.familyEducation !== undefined || r.familyEducationVersion !== undefined) ensure(r.persistedModules !== undefined && s.familyEducation && r.familyEducationVersion === 1, 'family education custody manifest');
       if (s.hygiene !== undefined || r.hygieneVersion !== undefined || s.pathology !== undefined || r.pathologyVersion !== undefined) ensure(r.persistedModules !== undefined, 'hygiene/pathology persisted manifest');
       if (s.roadNetwork !== undefined || r.roadNetworkVersion !== undefined || s.roadworks !== undefined || r.roadworksVersion !== undefined || s.roadDemands !== undefined || r.roadDemandsVersion !== undefined) ensure(r.persistedModules !== undefined, 'road network and roadwork persisted manifest');
@@ -2556,6 +2569,7 @@ export class Simulation implements SimulationAPI {
       if (s.playerLabor) ensure(r.playerLaborVersion === 1, 'player payroll custody marker');
       if (r.educationVersion !== undefined) ensure(r.educationVersion === 1 && s.education, 'education custody module');
       if (s.education) ensure(r.educationVersion === 1, 'education custody marker');
+      ensure(s.residentEducation === undefined && r.residentEducationVersion === undefined || s.residentEducation && r.residentEducationVersion === 1, 'resident education body and version');
       ensure(s.familyEducation === undefined && r.familyEducationVersion === undefined || s.familyEducation && r.familyEducationVersion === 1, 'family education body and version');
       if (r.hygieneVersion !== undefined) ensure((r.hygieneVersion === 1 || r.hygieneVersion === 2) && s.hygiene && r.hygieneVersion === s.hygiene.version, 'hygiene custody module');
       if (r.hygieneTransferVersion !== undefined || s.hygiene?.transfers !== undefined) ensure(r.hygieneTransferVersion === 1 && r.hygieneVersion === 2 && s.hygiene?.version === 2 && s.hygiene.transfers, 'hygiene transfer custody manifest');

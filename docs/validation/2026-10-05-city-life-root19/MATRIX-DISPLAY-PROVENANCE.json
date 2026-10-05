@@ -1,0 +1,80 @@
+{
+  "status": "PASS_READONLY_EXACT_SOURCE_AND_ACTUAL_DISPLAY_PHASE_BINDING",
+  "sourceName": "finaldisplay372",
+  "sourceRoot": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01",
+  "sourceGraphSHA256": "53cff00cc41461300b3b80c8259be29a0baad1d639963272e67ed956bb9d5e4d",
+  "sourceManifest": {
+    "path": "/tmp/ROOT19-display-integration-20261005-01/SOURCE-INPUTS-372-display.json",
+    "SHA256": "17c3bec4f228737e1748d3fb53486ef037fc16d865621a86550bcd819cc8a6d6",
+    "bytes": 40794
+  },
+  "originalNativeModelGraph": "83226672713067a8481b72af9bae6019020b5e588d9760958c62a7a72efc7b56",
+  "sourceCount": 372,
+  "onlyChangedFile": "src/ui.ts",
+  "oldUISHA256": "abeb13ea373feae94196e6623feb7be985940425a0dec627d81fcd9a644efa0b",
+  "newUISHA256": "1ac20f4218d42e0ee55d97e4a3df0621ec74a1cba36987feb4701df8222b592d",
+  "371UnchangedActualFiles": true,
+  "old235ActualTestHelperFixtureBytesExact": true,
+  "uiOutsideFormatterDeclarationWholeBytesExact": true,
+  "actualNativeModelPhasesStillBoundToOriginalGraphNotRepeated": true,
+  "actualCLOCK5": {
+    "path": "/tmp/ROOT19-display-integration-20261005-01/CLOCK-PURE-RESULTS.json",
+    "SHA256": "d25960ee48888ad0b0bb107577071098e881e661414c2732180b193c1c6ee430",
+    "bytes": 1801
+  },
+  "actualDisplayBuildReceipt": {
+    "path": "/tmp/ROOT19-display-integration-20261005-01/build01/receipt.json",
+    "SHA256": "6c79aa9d005f1904ba4dded9aaf196cfd337df17238beb30f1fc65c073969e27",
+    "bytes": 871
+  },
+  "actualDisplayGPUReceipt": {
+    "path": "/tmp/ROOT19-education-ui-gpu-20261005-01/prepared03/actual01/receipt.json",
+    "SHA256": "4582324ea0e3b0ca867658128e5a20c7ee9cf54d29e04e88ccd9bf30699b618d",
+    "bytes": 1377
+  },
+  "actualDisplayGPUSourceGraph": "53cff00cc41461300b3b80c8259be29a0baad1d639963272e67ed956bb9d5e4d",
+  "actualDisplayBuildEntry": {
+    "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/index-8-bA7VZj.js",
+    "SHA256": "4516ac34109aac03b1bfa2cdc3831f717e4910ccc706787682b7377865c6497c",
+    "bytes": 1325071
+  },
+  "actualDistFileCount": 7,
+  "actualDistFiles": {
+    "dist/assets/index-8-bA7VZj.js": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/index-8-bA7VZj.js",
+      "SHA256": "4516ac34109aac03b1bfa2cdc3831f717e4910ccc706787682b7377865c6497c",
+      "bytes": 1325071
+    },
+    "dist/assets/index-8-bA7VZj.js.map": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/index-8-bA7VZj.js.map",
+      "SHA256": "e4691e7920de44f3ddbe3072a4dd803660f16137f7ba675a3f5974a06fb92eaf",
+      "bytes": 4023771
+    },
+    "dist/assets/index-DcKlDqDV.css": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/index-DcKlDqDV.css",
+      "SHA256": "350ebb1a6ed798aad004b17e918e03996915c3ca8e8925dcfb7ea638b4bbffbd",
+      "bytes": 31135
+    },
+    "dist/assets/three-vwNga81B.js": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/three-vwNga81B.js",
+      "SHA256": "a4a8412dcc2fd33853eb1dfd309fb11d2c9c56670b67bdcc850ff99cd3affafe",
+      "bytes": 502468
+    },
+    "dist/assets/three-vwNga81B.js.map": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/assets/three-vwNga81B.js.map",
+      "SHA256": "0be3a907e7662561bb9273ebfb6c4b78b1f4a57cbcb1ae3dc13b1fd11b05df72",
+      "bytes": 2719390
+    },
+    "dist/favicon.svg": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/favicon.svg",
+      "SHA256": "856862f640ca94631ec716e49f4c621062df45d851e288385dbb504e35ffa7a6",
+      "bytes": 279
+    },
+    "dist/index.html": {
+      "path": "/tmp/ROOT19-resident-tuition-display-candidate-20261005-01/dist/index.html",
+      "SHA256": "a5bb302a7652550bf11132a72bfff1220b0547549b7e21c198bc944403de6175",
+      "bytes": 736
+    }
+  },
+  "installationStatusAtFreeze": "Pending root actual installation receipt; no shared write by this producer."
+}

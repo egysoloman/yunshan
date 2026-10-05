@@ -6,6 +6,7 @@ import { ROAD_FOOD_PICKUP_POLICY } from './simulation/freight-access';
 import { NEARBY_MEAL_ROUTE_POLICY } from './simulation/meal-route';
 import { upgradeServiceMaterialScheduling } from './host/upgrade-service-material-scheduling';
 import { upgradeFreightDelivery } from './host/upgrade-freight-delivery';
+import { upgradeResidentTuition } from './host/upgrade-resident-tuition';
 
 export const PRODUCT_CITY_LAYOUT = 'current-v6' as const;
 
@@ -52,6 +53,16 @@ export async function createDeliveredCityLifeProductCity(world: WorldDefinition)
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(before));
   const sha256 = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
   const result = await upgradeFreightDelivery(simulation, sha256);
+  if (!result.ok) throw new Error(result.message);
+  return simulation;
+}
+
+/** New fresh recipe. Every earlier factory and imported policy remains intact. */
+export async function createLearningCityLifeProductCity(world: WorldDefinition): Promise<Simulation> {
+  const simulation = await createDeliveredCityLifeProductCity(world), before = simulation.exportSave();
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(before));
+  const sha256 = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+  const result = await upgradeResidentTuition(simulation, sha256);
   if (!result.ok) throw new Error(result.message);
   return simulation;
 }
