@@ -1,0 +1,11 @@
+{
+  "checkedAtUTC": "2026-10-05T12:33:27.985639+00:00",
+  "head": "dd1558d3f1ac1951d1b4a06b84f57d3c17fa25be",
+  "sourceFiles": 382,
+  "allFunctionalHashesExact": true,
+  "workingTreeClean": true,
+  "gitConnectivityExitCodeAfterCleanup": 0,
+  "gitDeclaredGarbageAfterCleanup": 0,
+  "originalPathsAndBytesPreserved": true,
+  "note": "Archive dedup changed duplicate inode sharing only after all original independent restoration executions. Git garbage cleanup removed only unreferenced tmp_pack; no canonical objects or evidence were pruned."
+}

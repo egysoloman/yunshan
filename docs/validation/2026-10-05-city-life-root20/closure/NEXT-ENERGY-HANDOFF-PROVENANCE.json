@@ -1,0 +1,12 @@
+{
+  "copiedAtUTC": "2026-10-05T12:37:46.377462+00:00",
+  "producer": "root20_energy_causal_design",
+  "originalBytes": 12928,
+  "originalSHA256": "1b233f932ac457f0a5b337bb2f8d6b615204c62d5be873d921d68b27141f39a3",
+  "originalReadOnlyHandoffUnchanged": true,
+  "productionSourceCount": 382,
+  "sourceAndGitStatusSnapshotHead": "dd1558d3f1ac1951d1b4a06b84f57d3c17fa25be",
+  "statusSnapshotWasBeforeThisDocumentationClosure": true,
+  "explanation": "Unqualified HEAD/clean working tree statements in the original handoff refer to its earlier read-only production snapshot. Subsequent metadata commit only adds closure documents; it does not change production source, install hydro, or add an execution result.",
+  "firstCopyScriptSyntaxFailurePreserved": "Missing dictionary key value caused parse-time SyntaxError; zero mutations or native/test/build execution. This corrected copy preserves the producer original bytes."
+}

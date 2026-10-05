@@ -1,0 +1,50 @@
+{
+  "createdAtUTC": "2026-10-05T12:29:30.304171+00:00",
+  "purpose": "Preserve every existing original path and byte; share storage for fully SHA-verified duplicates only. Independent restore executions happened before this filesystem deduplication; this does not create new restoration evidence.",
+  "groups": [
+    {
+      "canonical": "/workspace/yunshan-work/ROOT09-delivery-final-originals-20261004-01/Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+      "sameBytesSHA256": "e4f12462404f8eaf0e9d80499b27e681371b79a2bb58477fb7282f6e77dc3d88",
+      "bytesEach": 504545705,
+      "paths": [
+        {
+          "path": "/workspace/yunshan-work/ROOT09-delivery-final-originals-20261004-01/Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+          "inodeBefore": 525411,
+          "linksBefore": 1,
+          "mtimeNsBefore": 1791102964516566529
+        },
+        {
+          "path": "/workspace/yunshan-work/ROOT09-library-originals-current-20261004-01/Yunshan_ROOT09_ROOT10_Delivery_Originals_20261004_01.zip",
+          "inodeBefore": 525430,
+          "linksBefore": 1,
+          "mtimeNsBefore": 1791102964516566529
+        },
+        {
+          "path": "/workspace/yunshan-work/ROOT09-delivery-independent-restored-20261004-01/restored.zip",
+          "inodeBefore": 525428,
+          "linksBefore": 1,
+          "mtimeNsBefore": 1791103017854414299
+        }
+      ]
+    },
+    {
+      "canonical": "/workspace/yunshan-work/ROOT12-delivery-20261004-01/Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip",
+      "sameBytesSHA256": "19c1d6593d8f77e94157a8f68c0a429e11123e378eadcb82079c2193700b2416",
+      "bytesEach": 353283217,
+      "paths": [
+        {
+          "path": "/workspace/yunshan-work/ROOT12-delivery-20261004-01/Yunshan_ROOT11_ROOT12_All_Originals_20261004.zip",
+          "inodeBefore": 664949,
+          "linksBefore": 1,
+          "mtimeNsBefore": 1791115257210431459
+        },
+        {
+          "path": "/workspace/yunshan-work/ROOT12-delivery-20261004-01/Root12-independently-restored-originals.zip",
+          "inodeBefore": 664947,
+          "linksBefore": 1,
+          "mtimeNsBefore": 1791115347418900998
+        }
+      ]
+    }
+  ]
+}

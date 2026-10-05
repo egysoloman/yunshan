@@ -21,3 +21,7 @@
 当前原始验证包保存523份原件，全部成员哈希核对通过，另有完整源码与构建包。新主档129个分块实际落盘读回；三条新恢复分支各24普通步、75次完整读取、逐帧完整存档及事件一致。后48分钟只证明恢复等价，钱粮审计边界仍是17:00。原件归档首次重复带入370个已保存基线源码而超30MiB限制，初产物及失败事实保留；去重复后未删任何独有源码或运行证据。
 
 Library9项批量上传在准备前因连接失败停止，未返回新LibraryID，原备忘录version7也未替换。详细实际结果在 [LIBRARY-DELIVERY-RESULT.json](LIBRARY-DELIVERY-RESULT.json)。本目录与GitHub路径本身不表示附件已送达。
+
+开发分支实际交付：功能与原件已正常推送 [`dd1558d`](https://github.com/egysoloman/yunshan/commit/dd1558d3f1ac1951d1b4a06b84f57d3c17fa25be)，远端 `takeover-city-life` SHA 实际读回一致，main 未改动。[推送回执](closure/PUSH-READBACK.json)与[空间恢复回执](closure/GIT-TEMP-PACK-REMOVAL.json)保存事实；源码及所有原件保留。原有限水力候选仍未集成，阶段交付不等于完整目标完成。
+
+[下一窄阶段能源接续](NEXT-ENERGY-HANDOFF.md)保留独立只读复核：17例仅纯参数，输配集成尚未实现；列出原v1兼容、有限水量与kWh合同、时钟、4096窗容量及合法资产岗位阻碍。
