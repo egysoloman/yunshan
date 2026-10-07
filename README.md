@@ -20,6 +20,10 @@ npm run build
 npm run preview
 ```
 
+### 原生版（Unity）
+
+`unity/` 是 Unity 6 原生客户端。它启动 Node 子进程运行同一份 TypeScript 权威模拟（`src/native-host/sim-host.ts`），存档与网页版通用。打开方式、操作说明和自检见 [unity/README.md](./unity/README.md)。不安装 Unity 也能验证 C# 内核：`cd dotnet && dotnet test`。打包独立程序前，先运行 `npm run build:sim-host`。
+
 资源全部随项目打包；运行不需要账户、密钥或外部贴图。浏览器必须开启硬件加速。画质、渲距、帧率上限、动态分辨率与模拟精度在城市手册的设置页调整。
 
 ## 游览与生活
