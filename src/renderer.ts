@@ -10,6 +10,8 @@ import { buildingWorldPosition, getBuildingFloorPlan } from './architecture-floo
 import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering/architecture-detail';
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
+import { StudioPropPool } from './rendering/studio-props';
+import { studioDressesFixture } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
@@ -132,6 +134,7 @@ export class CityRenderer implements CityRendererAPI {
   private skyMaterial: THREE.ShaderMaterial;
   private citizens: CitizenAppearancePool;
   private marketGoods: MarketGoodsPool;
+  private studioProps: StudioPropPool;
   private marketShopfront: MarketShopfrontPool;
   private stationWayfinding: StationWayfindingPool;
   private roadClosures: RoadClosureOverlay;
@@ -412,6 +415,8 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
     this.marketGoods = new MarketGoodsPool(this.scene, world);
+    this.studioProps = new StudioPropPool(this.scene, world);
+    void this.studioProps.load();
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
@@ -452,7 +457,7 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   private buildHouse(b: Building, batch: BoxBatch, far: boolean) {
-    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near');
+    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near', this.studioProps ? { skipFixture: studioDressesFixture } : {});
     if (programParts) {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);
@@ -1011,6 +1016,7 @@ export class CityRenderer implements CityRendererAPI {
     for (const label of this.labels) label.sprite.visible = label.floor === undefined ? label.sprite.position.distanceTo(this.camera.position) < 450 && this.insideId !== label.building.id && !detailedSigns.has(label.building.id) : this.insideId === label.building.id && this.insideFloor === label.floor;
     this.citizens.update(state, this.camera.position, elapsed, this.distance, this.quality);
     this.marketGoods.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 65 : 110);
+    this.studioProps.update(this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), { id: this.insideId, floor: this.insideFloor }, this.quality === 'low' ? 45 : 90);
     this.marketShopfront.update(state, this.camera.position, new Set(this.chunks.flatMap(chunk => [...chunk.buildingIds])), this.quality === 'low' ? 4 : 8);
     this.stationWayfinding.update(state, this.camera.position, this.quality === 'low' ? 3 : 8);
     const counts = new Map<string, number>();
@@ -1060,6 +1066,7 @@ export class CityRenderer implements CityRendererAPI {
     this.nearChunks.dispose(); this.chunks = []; this.interiors.clear();
     this.citizens.dispose();
     this.marketGoods.dispose();
+    this.studioProps?.dispose();
     this.marketShopfront.dispose();
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();

@@ -1,0 +1,62 @@
+{
+  "format": "yunshan.studio-assets",
+  "version": 1,
+  "sourceRepository": "https://github.com/stars2022/voxel-studio-yunshan",
+  "sourceCommit": "ce111d7a133cb5a88b3d37c002dce3b82350353e",
+  "sourceIndexRun": "refinement-20261007114945",
+  "units": "metres",
+  "upAxis": "Y",
+  "front": "+Z",
+  "assets": [
+    {
+      "id": "LIFE-064",
+      "name": "商铺公共售货柜台",
+      "assetId": "life-064",
+      "revision": 3,
+      "url": "studio-assets/LIFE-064.glb",
+      "source": "projects/production/atlas-20261003063047/exports/LIFE-064/visual.glb",
+      "sha256": "e8de1602c944ee105d37f2b121b2cee9dc9ff9ab2743d8b8a9c0838c55c1d148",
+      "bytes": 315636,
+      "triangles": 3764,
+      "cellSizeM": 0.01,
+      "boundsM": {
+        "min": [
+          -0.02,
+          0,
+          -0.06
+        ],
+        "max": [
+          1.63,
+          1.02,
+          0.72
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "LIFE-032",
+      "name": "通用工作桌",
+      "assetId": "life-032",
+      "revision": 3,
+      "url": "studio-assets/LIFE-032.glb",
+      "source": "projects/production/atlas-20261003063047/exports/LIFE-032/visual.glb",
+      "sha256": "144bad26cbab47ef57655876d8d0e0a3506d9a6a1247b82a67b40808883a7c1b",
+      "bytes": 318052,
+      "triangles": 3806,
+      "cellSizeM": 0.01,
+      "boundsM": {
+        "min": [
+          -0.02,
+          0,
+          -0.04
+        ],
+        "max": [
+          1.6,
+          0.82,
+          0.76
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    }
+  ]
+}
