@@ -48,6 +48,18 @@
      - 夜间窗光。
      - 近景楼宇的名牌。
 
+## 在你的机器上自检
+
+在 Unity 里打开菜单 Window ▸ General ▸ Test Runner，切到 EditMode，点 Run All。`Assets/Yunshan/Tests/Editor/YunshanSmokeTests.cs` 会检查以下几项：
+
+- 能否找到 Node.js 和模拟宿主。
+- 宿主能否打开城市、返回第一帧。
+- 楼宇网格能否生成。
+- 面孔立方体的面是否朝外。
+- 着色器能否通过 `Shader.Find` 找到。
+
+这些是容器里无法验证的部分。
+
 ## 验证情况
 
 - `dotnet test`：18 项测试实际通过。包括数学库、两种世界布局、资产排布、居民外观、第一人称行走路线（穿过街道、门、房间、楼梯，与网页控制器逐字节相同），以及真实子进程中的模拟宿主。

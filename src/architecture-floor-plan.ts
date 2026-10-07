@@ -533,10 +533,10 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   // A centre surface must still be reachable from the current feet. Its full
   // body footprint is evaluated at that surface's landing height, so the next
   // real .2m tread can support the front of a .35m disk over an upper shaft.
-  const supportedAt=new Map<number,boolean>();
+  let supportedAt:Map<number,boolean>|undefined;
   let footprints:SupportFootprints|undefined;
   const diskSupportedAt=(top:number):boolean=>{
-    const cached=supportedAt.get(top);if(cached!==undefined)return cached;
+    const cached=supportedAt?.get(top);if(cached!==undefined)return cached;
     footprints??=supportFootprints(p,base,surfaces,plans);
     let footprint=footprints.byTop.get(top);
     if(!footprint){const regions:Rect[]=[];for(const slab of footprints.slabs)if(slab.top<=top+.22+eps&&slab.top>=top-.42-eps)regions.push(...slab.regions.map(s=>s.rect));for(const s of surfaces)if(s.top<=top+.22+eps&&s.top>=top-.42-eps)regions.push(s.rect);footprint={regions,boundaries:null};footprints.byTop.set(top,footprint);}
@@ -545,7 +545,7 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
       const loops=footprint.boundaries??=boundaryLoops(footprint.regions),minimum=radius*radius-eps;
       checkBoundary:for(const loop of loops)for(let i=0;i<loop.length;i++)if(!(segmentDistanceSquared(local.x,local.z,loop[i],loop[(i+1)%loop.length])>=minimum)){supported=false;break checkBoundary;}
     }
-    supportedAt.set(top,supported);return supported;
+    (supportedAt??=new Map()).set(top,supported);return supported;
   };
   let raisedStair=false;
   for(const s of surfaces)if(contains(s.rect,local.x,local.z)&&s.top>p.y+eps&&s.top<=local.y+.22+eps&&s.top>=local.y-.42-eps){raisedStair=true;break;}
@@ -562,6 +562,9 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
   for(const f of p.fixtures)if(contains(f.rect,local.x,local.z)&&Math.abs(local.y-(p.y+f.top))<.01)choices.push({top:p.y+f.top,kind:'room',floor});
   choices.sort((a,z)=>Math.abs(a.top-local.y)-Math.abs(z.top-local.y)||z.top-a.top);
   if(radius>0&&choices.length===0) {
+    // In a fixed-geometry window, trusted solids were already read in full
+    // (a null member would have thrown there), so no member can be malformed.
+    if(trusted(trustedSolids,p))return null;
     // An obstacle cannot supply a missing support choice. Retain the public
     // descriptor-cache lifetime, including the original positive-radius order.
     for(const f of plans) {
