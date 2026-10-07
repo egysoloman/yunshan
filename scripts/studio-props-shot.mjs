@@ -60,6 +60,17 @@ try {
     report[kind] = { ...view, placed };
     await page.evaluate(() => window.__YUNSHAN__.actions.interact());
   }
+  report.station = await page.evaluate(() => {
+    const { world, simulation, controller } = window.__YUNSHAN__;
+    const node = world.nodes.find(n => n.id === 'river-station') ?? world.nodes.find(n => n.station);
+    const feet = { x: node.position.x + 18, y: node.position.y - .1, z: node.position.z + 24 };
+    simulation.state.player.position = { ...feet }; controller.setMode('walk', feet); Object.assign(controller['feet'], feet);
+    controller.yaw = Math.atan2(18, 24); controller.pitch = -0.1; controller['orient']();
+    return { node: node.id, feet };
+  });
+  await page.waitForTimeout(8000);
+  report.station.placed = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型').userData.studioPlacements);
+  await page.screenshot({ path: 'artifacts/studio-props-station.png', timeout: 180_000 });
   report.errors = errors;
   await writeFile('artifacts/studio-props.json', JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report));

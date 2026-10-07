@@ -407,6 +407,8 @@ export class CityRenderer implements CityRendererAPI {
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
+    this.studioProps = new StudioPropPool(this.scene, world);
+    void this.studioProps.load();
     this.buildCity(); this.buildNetwork(); this.buildGateways(); this.buildCoreLabels();
     this.architectureDetail = new ArchitectureDetailManager(world.buildings); this.scene.add(this.architectureDetail.group);
     const signalCount = this.world.nodes.filter(node => node.station).length;
@@ -415,8 +417,6 @@ export class CityRenderer implements CityRendererAPI {
     for (const signal of [this.signalRed, this.signalGreen]) { signal.instanceMatrix.setUsage(THREE.DynamicDrawUsage); signal.frustumCulled = false; this.scene.add(signal); }
     this.citizens = new CitizenAppearancePool(this.scene, 1024);
     this.marketGoods = new MarketGoodsPool(this.scene, world);
-    this.studioProps = new StudioPropPool(this.scene, world);
-    void this.studioProps.load();
     this.marketShopfront = new MarketShopfrontPool(this.scene, world);
     this.stationWayfinding = new StationWayfindingPool(this.scene, world);
     for (const kind of ['road', 'maglev', 'lightRail', 'cable', 'lift', 'ferry', 'bridge', 'flight']) {
@@ -809,7 +809,8 @@ export class CityRenderer implements CityRendererAPI {
     }
     for (const node of this.world.nodes) {
       const p = node.position;
-      if (node.station) { batch.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); batch.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { batch.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); batch.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } batch.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); batch.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); batch.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
+      // The studio pool draws platform and shelter at the same platform extent.
+      if (node.station) { if (!this.studioProps?.dressesStations) { batch.box('stone', p.x, p.y - .6, p.z, 22, 1, 18); batch.box('cyan', p.x, p.y + .1, p.z + 8, 20, .2, .35); for (const x of [-8, 8]) { batch.box('wood', p.x + x, p.y + 3, p.z, .8, 6, .8); batch.box('amber', p.x + x, p.y + 5.7, p.z, 1.5, .35, 1.5); } batch.box('roof', p.x, p.y + 6.4, p.z, 23, .65, 11, undefined, 0, { roof: true }); } batch.box('wood', p.x + 12, p.y + 1.8, p.z + 11, .35, 3.6, .35); batch.box('wood', p.x + 12, p.y + 3.5, p.z + 11, 1, 1.6, .65); }
       else if (node.id.includes('junction') || node.id.includes('road')) { batch.box('wood', p.x + 4, p.y + 2.2, p.z + 4, .4, 4.4, .4); }
     }
     const group = batch.build(undefined, 384);

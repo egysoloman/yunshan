@@ -60,3 +60,23 @@ export function studioBuildingPlacements(building: Building, assets: ReadonlyMap
   const body = getBuildingBody(building); if (!body) return [];
   return body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets) ?? []));
 }
+
+/** A fixed, world-space studio model (origin = its min corner, yaw about Y). */
+export interface StudioStaticPlacement { asset: string; id: string; position: { x: number; y: number; z: number }; yaw: number }
+
+/** BUILT-154 is the existing 22×1×18m station platform at the same extent as
+ * the original box (centre y−.6, top y−.1). BUILT-155 stands on the
+ * platform's own canopy-foot ports. Signal poles keep their live lamps and
+ * are not replaced. Display only: walking surfaces come from the world. */
+export const STATION_PLATFORM = { asset: 'BUILT-154', min: { x: -11, y: -1.1, z: -9 } } as const;
+export const STATION_SHELTER = { asset: 'BUILT-155', onPlatform: { x: 1.4 - 1.9, y: 1, z: 8.5 - 5 } } as const;
+export function studioStationPlacements(world: { nodes: readonly { id: string; station?: boolean; position: { x: number; y: number; z: number } }[] }, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+  if (!assets.has(STATION_PLATFORM.asset) || !assets.has(STATION_SHELTER.asset)) return [];
+  return world.nodes.filter(node => node.station).flatMap(node => {
+    const p = node.position, platform = { x: p.x + STATION_PLATFORM.min.x, y: p.y + STATION_PLATFORM.min.y, z: p.z + STATION_PLATFORM.min.z };
+    return [
+      { asset: STATION_PLATFORM.asset, id: `${node.id}:platform`, position: platform, yaw: 0 },
+      { asset: STATION_SHELTER.asset, id: `${node.id}:shelter`, position: { x: platform.x + STATION_SHELTER.onPlatform.x, y: platform.y + STATION_SHELTER.onPlatform.y, z: platform.z + STATION_SHELTER.onPlatform.z }, yaw: 0 },
+    ];
+  });
+}

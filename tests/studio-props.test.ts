@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { createWorld } from '../src/world';
 import { getBuildingBody } from '../src/architecture-floor-plan';
 import { buildProgramArchitecture } from '../src/rendering/architecture-bodies';
-import { layoutStudioFixture, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture } from '../src/rendering/studio-prop-layout';
+import { layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioStationPlacements } from '../src/rendering/studio-prop-layout';
 
 const world = createWorld();
 
@@ -58,4 +58,23 @@ test('skipFixture removes only the dressed fixture boxes; the default output is 
     compared++;
   }
   assert.ok(compared > 50);
+});
+
+test('station platform and shelter models occupy the original platform extent and its own canopy ports', () => {
+  const placements = studioStationPlacements(world), stations = world.nodes.filter(node => node.station);
+  assert.equal(placements.length, stations.length * 2);
+  const platform = STUDIO_ASSETS.find(a => a.id === STATION_PLATFORM.asset)!, shelter = STUDIO_ASSETS.find(a => a.id === STATION_SHELTER.asset)!;
+  for (const node of stations) {
+    const p = node.position, base = placements.find(s => s.id === `${node.id}:platform`)!, roof = placements.find(s => s.id === `${node.id}:shelter`)!;
+    // Original box: centre (x, y − .6, z), size 22 × 1 × 18.
+    const lo = [base.position.x + platform.boundsM.min[0], base.position.y + platform.boundsM.min[1], base.position.z + platform.boundsM.min[2]];
+    const hi = [base.position.x + platform.boundsM.max[0], base.position.y + platform.boundsM.max[1], base.position.z + platform.boundsM.max[2]];
+    for (const [k, v] of [[0, p.x - 11], [1, p.y - 1.1], [2, p.z - 9]] as const) assert.ok(Math.abs(lo[k] - v) < 1e-6, `${node.id} min ${k}`);
+    for (const [k, v] of [[0, p.x + 11], [1, p.y - .1], [2, p.z + 9]] as const) assert.ok(Math.abs(hi[k] - v) < 1e-6, `${node.id} max ${k}`);
+    // Shelter feet (1.9|21.1, 0, 5) land on platform ports (1.4|20.6, 1, 8.5).
+    for (const [foot, port] of [[[1.9, 0, 5], [1.4, 1, 8.5]], [[21.1, 0, 5], [20.6, 1, 8.5]]]) {
+      assert.ok(Math.abs(roof.position.x + foot[0] - (base.position.x + port[0])) < 1e-6 && Math.abs(roof.position.y + foot[1] - (base.position.y + port[1])) < 1e-6 && Math.abs(roof.position.z + foot[2] - (base.position.z + port[2])) < 1e-6);
+    }
+    assert.ok(roof.position.y + shelter.boundsM.min[1] >= p.y - .1 - 1e-6, 'shelter stands on the platform top');
+  }
 });
