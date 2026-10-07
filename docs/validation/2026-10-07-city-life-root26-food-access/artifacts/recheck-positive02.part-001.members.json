@@ -1,0 +1,40 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 49867,
+    "file": "recheck-positive02.part-001.zip",
+    "sha256": "363b1f3659fd4e75820d7946ab87f52d34c41140d7db0edf4c1cac9ae0a451ea"
+  },
+  "chunk": 1,
+  "group": "recheck-positive02",
+  "memberCount": 4,
+  "members": [
+    {
+      "archiveName": "actual/recheck-positive02/RESULT.json",
+      "bytes": 1335,
+      "sha256": "43f14cb1611e703cbe2580907c2dbee4bff87fb26de17a16ce9d26a51ac5dd5d",
+      "source": "/tmp/ROOT26-food-access-20261007-01/recheck-positive02/RESULT.json"
+    },
+    {
+      "archiveName": "actual/recheck-positive02/broad-rejected40.json",
+      "bytes": 101298,
+      "sha256": "56037f4446c8a32b734000f5f14ea5f96871787b2d19d66f40d0fc7bfc5e18f1",
+      "source": "/tmp/ROOT26-food-access-20261007-01/recheck-positive02/broad-rejected40.json"
+    },
+    {
+      "archiveName": "actual/recheck-positive02/control80.json",
+      "bytes": 248595,
+      "sha256": "7140be5892658dce41d57652513a7263151d79a4dececb9b5fc1cfeb9816e82e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/recheck-positive02/control80.json"
+    },
+    {
+      "archiveName": "actual/recheck-positive02/narrow48-two-source-segments.json",
+      "bytes": 154934,
+      "sha256": "6ccedb17bea285b3870e5410692d4618db603de194eb670af7fbc5cf790de602",
+      "source": "/tmp/ROOT26-food-access-20261007-01/recheck-positive02/narrow48-two-source-segments.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 506162,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

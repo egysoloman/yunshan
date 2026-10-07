@@ -1,0 +1,916 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 1104675,
+    "file": "gates.part-001.zip",
+    "sha256": "fe4069b65a79ced5ef1263e0301d79577102e6bdd7ec169ab30cd890bc884d87"
+  },
+  "chunk": 1,
+  "group": "gates",
+  "memberCount": 150,
+  "members": [
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/owned-descendants.json",
+      "bytes": 271,
+      "sha256": "cfa2ca2b6026e65c040696c5a501fee2c2cbb014f933f959191be029822789cf",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/owned-process.json",
+      "bytes": 489,
+      "sha256": "632f4270a4a5f0d23fa289d5746149f83f22867203e5dfa3ebab19207b4e9db7",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/raw.log",
+      "bytes": 1095,
+      "sha256": "89731e1968333a8bc4f47bcb4368de8cff22002f9b14cde18f3c82bbcea14b91",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/baseline-home-capture02-gate/receipt.json",
+      "bytes": 991,
+      "sha256": "ad8a484cd2a5de0264d7adddee8025df27a6a206dc9cd251a1c21913f4c196e0",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home-capture02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/owned-descendants.json",
+      "bytes": 401,
+      "sha256": "fa0fe00719dd037c7922b2ee6e0cc3a33d3c646e0387f94b1b8af67aea9941a8",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/owned-process.json",
+      "bytes": 336,
+      "sha256": "31a1d859883f8201cdbf333231552f1e5833eda25005e18cc021172b7c281bfd",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/raw.log",
+      "bytes": 2770,
+      "sha256": "166428d7576c50f7257276ddddc3d85600d93d81b3332bfcded809d38476a415",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/baseline-home01-gate/receipt.json",
+      "bytes": 986,
+      "sha256": "a3dbb2ea62ac1b41f2bc6073939bbf411aac63379cbca7f79844809538acecce",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/baseline-home01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/build01-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/build01-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/build01-gate/owned-descendants.json",
+      "bytes": 669,
+      "sha256": "173909a4b8a210a357f8065152675ad40d25e1e7d6fdefebc73ae31797c7e3fe",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/build01-gate/owned-process.json",
+      "bytes": 216,
+      "sha256": "2bf452b57c0c1fe60d8721dd66c86dfd9e3a9f9f487010e2aea4bb479aedd668",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/build01-gate/raw.log",
+      "bytes": 1061,
+      "sha256": "291f37372fe2bd57e9a6315fac1b651c2f934e616eec3287d327e84ba0e75e1d",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/build01-gate/receipt.json",
+      "bytes": 866,
+      "sha256": "55bfe08f58ba615af9298c829fefe9e263c44a98f09379bedaf0a77db121ad69",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/build01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "90a7c9be7648f97cf2154fdd9617fdb8d8034581fb52c89565f729f6d6c2e671",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/owned-process.json",
+      "bytes": 915,
+      "sha256": "e860679983dabb84d3a3c4ddd0f9dc28b95f295eb2c2726065401f3d4be5842f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/raw.log",
+      "bytes": 135,
+      "sha256": "4493e569a133b8273d0d9198cc34dd120cf12d94f2e5130d1cda0b942b3a08ef",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/compare-originals01-gate/receipt.json",
+      "bytes": 1565,
+      "sha256": "318d215987ba86341de8471eeb786819f56e205509dda7277d611f2bd107b8ca",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/compare-originals01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "b1116bcc066e35adef7818b2416e94c41dcc43dabad5b2de83b222caa221d91a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "b1116bcc066e35adef7818b2416e94c41dcc43dabad5b2de83b222caa221d91a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/owned-descendants.json",
+      "bytes": 665,
+      "sha256": "5796c17cec97bce86277d7ce7796fc2fee23dd7be1a8728411b7f14c212c5933",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/owned-process.json",
+      "bytes": 462,
+      "sha256": "12c047a5681b26c6e20e0c2aff699f940e87027ec066eff8861cb68cf9df9203",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/raw.log",
+      "bytes": 2430,
+      "sha256": "62c6e3f4e3bf54be226d7b9e087b38af3ac3bc59cb1d6c28474ed10c643a24dd",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/home-tests03-gate/receipt.json",
+      "bytes": 1258,
+      "sha256": "5694bf166b7b2788d1e5d0da44bcb35430dfc48ca2224e548a99c0a3cd2f42ed",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests03-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/owned-descendants.json",
+      "bytes": 665,
+      "sha256": "1998db1994e6e81f230e422f2d7be5599e8fe2c7668c1079159f8c3ba962addb",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/owned-process.json",
+      "bytes": 462,
+      "sha256": "bdee62714b58fab92d94b04e483a9217861245410dcf2e450e9dbf34b194ebfd",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/raw.log",
+      "bytes": 2873,
+      "sha256": "1491e1a2522beaf3577310e57d93b15c19b9a435eb75861a8da0ef05886ada5f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/home-tests04-gate/receipt.json",
+      "bytes": 1258,
+      "sha256": "fe20c54709925a6096ffdc6bab6a59c507bad79736e22a9227a6ad6a8d895d41",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/home-tests04-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/inputs-after.json",
+      "bytes": 45968,
+      "sha256": "e62daf6f431ca723b072e1dc38dc224d3bc2fd4f213ace3fba2b759f0696d856",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/inputs-before.json",
+      "bytes": 45968,
+      "sha256": "e62daf6f431ca723b072e1dc38dc224d3bc2fd4f213ace3fba2b759f0696d856",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/owned-descendants.json",
+      "bytes": 799,
+      "sha256": "a04193af810cd08aa5a0ab1c033361c93de5a9db08a5a89c52e99f17bbbb9912",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/owned-process.json",
+      "bytes": 408,
+      "sha256": "bdf461518884ff4e983563a6d3ae199a2f095e2175eca9b552836a73e16f988a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/raw.log",
+      "bytes": 2361,
+      "sha256": "9fa6aea71a40e9fcaa2f850231cf51405aae0d0a7fa091e96c649ae23cf81e1d",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/narrow-tests02-gate/receipt.json",
+      "bytes": 1204,
+      "sha256": "b6d8760b591e411809088d77dbbc85788e161da48bf387a2251a7380a9da973b",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/narrow-tests02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/native01-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/native01-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/native01-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "8f3a40d3bc65069129846b7bced50a80c2256581ec87dcb8db853fe54ee772ab",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/native01-gate/owned-process.json",
+      "bytes": 418,
+      "sha256": "d2c0df303ced19e19c1436f90dda318d67282c8920e6a3ed519cd57038d93fe7",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/native01-gate/raw.log",
+      "bytes": 1336,
+      "sha256": "ecac6527c67374e4301ce878a22aac35976f9a6366bede8162ee60a15ee102e2",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/native01-gate/receipt.json",
+      "bytes": 1068,
+      "sha256": "6d64845b1d070acae9af282f2844946a0a7521303b76541a400097c5f21ffeb3",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/native02-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/native02-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/native02-gate/owned-descendants.json",
+      "bytes": 137,
+      "sha256": "ce05c2f9612aa2e3098692d5dd7f10be50308a1eecfdd451a8f40af8de6792e9",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/native02-gate/owned-process.json",
+      "bytes": 418,
+      "sha256": "f4705c20ef8281082a9688fa6454770d93b22bb1f0ffc1783caa8a5f1c4e6b73",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/native02-gate/raw.log",
+      "bytes": 1488,
+      "sha256": "4c7ef37662202b3f141f85f6047fd004b47fab818f3f70fa9ffea3797d817e13",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/native02-gate/receipt.json",
+      "bytes": 920,
+      "sha256": "a2fdd5c4a32b897b7b8a7ccdba16dc985820227dcc15d1f540afb2bc4fd529e8",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/native03-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/native03-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/native03-gate/owned-descendants.json",
+      "bytes": 137,
+      "sha256": "c231f7e97e1da78af687a9d26db22a8e17f01b8479820fbe64e34670e50f2632",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/native03-gate/owned-process.json",
+      "bytes": 418,
+      "sha256": "7d88eb48118c8b2d01e2ba5943fb93c3715ad0e5708716e0dfc2fccf0f70ef0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/native03-gate/raw.log",
+      "bytes": 1262,
+      "sha256": "b626494a8bea7b78d0ce4dcbbd7bf439a447ac7f33858c17b63d1889cbca36ad",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/native03-gate/receipt.json",
+      "bytes": 920,
+      "sha256": "08c7134f0b27d263820303526645eeede032d755eb9bbd0f6ce942ab28adf9bc",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native03-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/native04-gate/inputs-after.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/native04-gate/inputs-before.json",
+      "bytes": 45754,
+      "sha256": "0900cf3e46b6850af414e0c5e1611edbd57ad71482015d0e84b18275da6fda82",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/native04-gate/owned-descendants.json",
+      "bytes": 137,
+      "sha256": "36023a46ad9da3cbaa1a933c2f8b48db1c1e97137a26f0b15618303916c49808",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/native04-gate/owned-process.json",
+      "bytes": 418,
+      "sha256": "9540a2621cf0d2209b9a59285713a2175f829cbfa5e7f45a905a3a0c472604e8",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/native04-gate/raw.log",
+      "bytes": 1261,
+      "sha256": "02ce5b905e4f2be9e78a800a20e4709e1310f8b6659c3b9855dab327b51b3589",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/native04-gate/receipt.json",
+      "bytes": 920,
+      "sha256": "2e76d87c5fe172de201c4c47b1d1bd4d7e7f48084296d6c872d8d19c1e5a58f2",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/native04-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/patched01-gate/inputs-after.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/patched01-gate/inputs-before.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/patched01-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "0d8ff0bea5564089aa6c8b415e56d9b306b4f68fee8cb2fcf338267b273dacfa",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/patched01-gate/owned-process.json",
+      "bytes": 419,
+      "sha256": "ba10c3b35c557d427c72ce6222c51acd6238ba4ad5c422e609008372f15baf83",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/patched01-gate/raw.log",
+      "bytes": 1297,
+      "sha256": "4a9d3849add1d0c33d838030d4b28b81edbd498ffd2304789ae9ec9f09f40e97",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/patched01-gate/receipt.json",
+      "bytes": 1069,
+      "sha256": "c0e2d5f05140f53778d241e12894c1d30654ef5ec546f440ad4f23466b2e46ba",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/patched02-gate/inputs-after.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/patched02-gate/inputs-before.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/patched02-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "9638b0111ce5067a661943fc1aa402f9b00f4285f3368da424587dce1345b57e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/patched02-gate/owned-process.json",
+      "bytes": 426,
+      "sha256": "9de416fb9c0c8b1cddd7669a10ca21424af128774d0bae4f59f35d21d199458e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/patched02-gate/raw.log",
+      "bytes": 1738,
+      "sha256": "9894bcadba651cf1512131b0fc1f8c58fbeb12bb9064eec3ef7f5ad889d9eea7",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/patched02-gate/receipt.json",
+      "bytes": 1076,
+      "sha256": "2fae56c11ac42bc55450b8fbbd830aa18aaa741cf4fd929f3a0ed32dbff84ba2",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/patched03-gate/inputs-after.json",
+      "bytes": 45968,
+      "sha256": "c43bdcd148c31fce280ba98bc56722c850405a447a2958b88f055850ccbe4f51",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/patched03-gate/inputs-before.json",
+      "bytes": 45968,
+      "sha256": "c43bdcd148c31fce280ba98bc56722c850405a447a2958b88f055850ccbe4f51",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/patched03-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "f1b2f3023fbc130844401cb64d185157ce22a1a61edc1e261c3794b61e068dba",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/patched03-gate/owned-process.json",
+      "bytes": 393,
+      "sha256": "ba520f4435090219b1176a6ee959a39e0bf703246023d81516d1a475cf850215",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/patched03-gate/raw.log",
+      "bytes": 1811,
+      "sha256": "249419cccf8fe8ee7664b423d8152bd87a76377ceb20b27e33c11d0545e759b9",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/patched03-gate/receipt.json",
+      "bytes": 1043,
+      "sha256": "5ec8c9a4df68c509786eecefd590bf42b620eed9dc037326ac1f8e7ab4891286",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched03-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/patched04-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/patched04-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/patched04-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "087423ae025e7346de381cd3a9e1df7d75078e6286b7f0146ca5d3a09e1231de",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/patched04-gate/owned-process.json",
+      "bytes": 393,
+      "sha256": "e955a6b1d5c3ea710255641105fdf112f84509dd56935d3ee0b54d901a2b36c9",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/patched04-gate/raw.log",
+      "bytes": 1484,
+      "sha256": "750910cb4dd31533efb549ccca18c2b9d7676a64a01db8d3c340f4bdcde82e9e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/patched04-gate/receipt.json",
+      "bytes": 1043,
+      "sha256": "75a0926eccfcdec4da8986495a7a14b903833ac5ae1da787e3a8b166b26d6d88",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/patched04-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/plot01-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/plot01-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/plot01-gate/owned-descendants.json",
+      "bytes": 271,
+      "sha256": "77b70067141b43c1c551984df1be57f558d8d86ebad9a53a3cc75098e3236a04",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/plot01-gate/owned-process.json",
+      "bytes": 434,
+      "sha256": "88d597e28bde894e51d14fdc3b3e198ef66d43f7e08fbcd91b03adc3dca5f941",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/plot01-gate/raw.log",
+      "bytes": 2317,
+      "sha256": "a4cd9affc92f8230d7fd0e73653ff9bd26fdbf70ebc53af80a2aed3e358f98e7",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/plot01-gate/receipt.json",
+      "bytes": 936,
+      "sha256": "4ee581d23ff78996710f8117e8688b8e035c13d77fc57c02dbbbf66651064aec",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/plot02-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/plot02-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/plot02-gate/owned-descendants.json",
+      "bytes": 271,
+      "sha256": "052b3c1f981fdcdf3ecfd31664825269303edb83cfe30bcc6c1c3ef72a30f689",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/plot02-gate/owned-process.json",
+      "bytes": 438,
+      "sha256": "58ab1327001abc6b53a5b85a5a4c2054f9da0b3894a2831dd64ba154f8571a21",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/plot02-gate/raw.log",
+      "bytes": 2317,
+      "sha256": "928f163d879845d890688a518994715f4e587125f7f54016cfcf76e46c3f51d9",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/plot02-gate/receipt.json",
+      "bytes": 940,
+      "sha256": "2c2744919abf93b4f9687e09305f6c3c8bc14e3e76778baceeced4ff8164ad98",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/plot03-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/plot03-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/plot03-gate/owned-descendants.json",
+      "bytes": 271,
+      "sha256": "1ff674a74731313c69609d37f019edb5209dcdae59dd59fbf6c33e424abcc20e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/plot03-gate/owned-process.json",
+      "bytes": 438,
+      "sha256": "0f3d8a91b01562bed7344e342dc13025fb3057936caeea39282856d3a6bfeeae",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/plot03-gate/raw.log",
+      "bytes": 2317,
+      "sha256": "287e99016de5466b1c5728f5a7a692d5be8e66fa3d903c2642eb8e6fdd0cb2e7",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/plot03-gate/receipt.json",
+      "bytes": 940,
+      "sha256": "8958f57d3b1c006ed82d2ef9602accf068e18a49427fa1557248a1dd37b72650",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/plot03-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/inputs-after.json",
+      "bytes": 45968,
+      "sha256": "50bb8adbb98d4cc1aacac34a371f645c76dbb5be53c2c0ef89b25bdaf653728c",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/inputs-before.json",
+      "bytes": 45968,
+      "sha256": "50bb8adbb98d4cc1aacac34a371f645c76dbb5be53c2c0ef89b25bdaf653728c",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "62b466aa96661a7a0a272b5233187edc2bb9ae79a519103cfdd2c6010a5f05d1",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/owned-process.json",
+      "bytes": 364,
+      "sha256": "3af31024f079acbe614ceccc5be3c2c5edf8e0e37efc4d4fb1c34d53815853c3",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/raw.log",
+      "bytes": 5914,
+      "sha256": "2cfd0a805decda7e7dfff5b2d8fc3c120ead8b1c015d7f8baa091b94f026d97e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/recheck-negative01-gate/receipt.json",
+      "bytes": 1014,
+      "sha256": "49fcd0c72d79273c32494f271f019474374d790199ce995ad5165e1f33a56dbe",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-negative01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "ff5f9b3b9eef9d7bcd24860b5cb97094e8bdc4d2783e9fdee925110f8e590cf4",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/owned-process.json",
+      "bytes": 368,
+      "sha256": "fee353cc46440ce87a5c963557ea80c2a1729d3d2f56a395ab10100d121912f3",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/raw.log",
+      "bytes": 814,
+      "sha256": "f544d9a01382f932d757627633958f37f35be48ae95fa2eb293f2ebf454ee1df",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/recheck-positive02-gate/receipt.json",
+      "bytes": 1018,
+      "sha256": "bc86ae3db5d5811d2b158a03059e92fccc0fee61c7df7a5751ea093c57a54dfe",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck-positive02-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/inputs-after.json",
+      "bytes": 45858,
+      "sha256": "bc2eb74a942a4534d37c9c6e87443a1cf7866bd859bf38a5491b7e51f0e943aa",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/inputs-before.json",
+      "bytes": 45858,
+      "sha256": "bc2eb74a942a4534d37c9c6e87443a1cf7866bd859bf38a5491b7e51f0e943aa",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/owned-descendants.json",
+      "bytes": 267,
+      "sha256": "08d27bd87d9bdf3f890019046b2875fb9a11f61dce8c80a2130e5ff84ba673c0",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/owned-process.json",
+      "bytes": 584,
+      "sha256": "de3a877c1343882ea7200f89adfbe1a9c1ec0598a81f7a0c7628939f98e89fa4",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/raw.log",
+      "bytes": 146,
+      "sha256": "b829c1ab9026425bcacb7bf8d00b0489a0708fdea02aef8778743ba107dc4205",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/recheck01-gate/receipt.json",
+      "bytes": 1234,
+      "sha256": "5dce82a6d6a3bcf42ac679a26ca3e2a01323f3e1d92add391bf7040f3e0cbc4e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/recheck01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/regression05-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/regression05-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/regression05-gate/owned-descendants.json",
+      "bytes": 1193,
+      "sha256": "54fe7e293a9dab1791c3608434c2768456c8e51d385d46e19a0b2f13e1ea681a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/regression05-gate/owned-process.json",
+      "bytes": 644,
+      "sha256": "5084fa3a0f5b95e4cf25ea4b30c40e38a7cb2a8308ebcd92a9db623fc01de0ab",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/regression05-gate/raw.log",
+      "bytes": 5672,
+      "sha256": "d14fd5043cd313099debbf1311a76a7b0988981611df55cf17ae37e075b1312a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/regression05-gate/receipt.json",
+      "bytes": 1742,
+      "sha256": "1623e77e1e6abb88ae56fb085f16ab813f441e5315776b29741811ff94015d59",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression05-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/inputs-after.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/inputs-before.json",
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/owned-descendants.json",
+      "bytes": 1063,
+      "sha256": "8623dd2ed57fe74a4d10c709d30fea22929f68d5c5dbd1d7a443314430585d81",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/owned-process.json",
+      "bytes": 568,
+      "sha256": "19a5ba412aa6fc9977a58ac70eb652a19f5997b7d556a67911300be41e1d3aab",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/raw.log",
+      "bytes": 3798,
+      "sha256": "f6214069ceb80bfff12e9fc9841747708bd37d77574f34a1cc2782bb1f0946b4",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/regression06-remainder-gate/receipt.json",
+      "bytes": 1510,
+      "sha256": "ad29844681bf2b6712925554f53b86ac616b1919a9762935fc18b2b72adcdb13",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/regression06-remainder-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/tests01-gate/inputs-after.json",
+      "bytes": 45968,
+      "sha256": "b7a77abb6332d392d6d4ec10c17318ca307a5c14f5d31cede7a42cca5ee04e44",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/tests01-gate/inputs-before.json",
+      "bytes": 45968,
+      "sha256": "b7a77abb6332d392d6d4ec10c17318ca307a5c14f5d31cede7a42cca5ee04e44",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/tests01-gate/owned-descendants.json",
+      "bytes": 1591,
+      "sha256": "759e6e53296838ee7486dbb34e4f78f2bd22c0554b5c08b58fc74928a56f7a2e",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/tests01-gate/owned-process.json",
+      "bytes": 549,
+      "sha256": "89d20815a9c430d7deaaaac28882eeb6b3cffc2faed191ccc8d5260ebbf92e64",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/tests01-gate/raw.log",
+      "bytes": 6438,
+      "sha256": "8ae904e2af584b30917162b25ebace6a3dc285622a38aa5d2a9e2bece9aa6f17",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/tests01-gate/receipt.json",
+      "bytes": 1784,
+      "sha256": "0cf3678bf4763196639e22638405177b9c30541b503aeab9caff29787b02d029",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/tests01-gate/receipt.json"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/inputs-after.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/inputs-after.json"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/inputs-before.json",
+      "bytes": 45858,
+      "sha256": "76581bd4c787a1a01a8d36d8f084f0069e43ed1b6d8798e857cb5459e2236236",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/inputs-before.json"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/owned-descendants.json",
+      "bytes": 405,
+      "sha256": "1cd0a5e3cdc023cd37159e51695f7b59aa4678c47db7326b9e2ac8e0aa48da7a",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/owned-descendants.json"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/owned-process.json",
+      "bytes": 219,
+      "sha256": "3a8ac888dc7b1f0d790144034f92721ab4f71f3d0b57c4a2bfff345f0b9ce874",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/owned-process.json"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/raw.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/raw.log"
+    },
+    {
+      "archiveName": "gates/typecheck01-gate/receipt.json",
+      "bytes": 721,
+      "sha256": "e4c660fd61c585a2cc5003d12965e17b3f4ea4aafb7600598b8d8842406fd2cc",
+      "source": "/workspace/yunshan-work/ROOT26-food-access-20261007-01/typecheck01-gate/receipt.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 2404443,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

@@ -1,0 +1,964 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 69395550,
+    "file": "patched03.part-001.zip",
+    "sha256": "202c8bfe35591b838ddebdb362f9da86888844f8b148700fa88552124bd3079b"
+  },
+  "chunk": 1,
+  "group": "patched03",
+  "memberCount": 158,
+  "members": [
+    {
+      "archiveName": "actual/patched03/BASELINE.json",
+      "bytes": 354404,
+      "sha256": "aed6b667bd5729981dacb3637dff553ef5796920a6b5f97f60b4fabb543b5f2f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/BASELINE.json"
+    },
+    {
+      "archiveName": "actual/patched03/DRIVER.original.ts",
+      "bytes": 10921,
+      "sha256": "f85317ba0d719b69581cf5a3f13fd73392de7e8e3eaaedc2c06ccf70a6ed7e0f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/DRIVER.original.ts"
+    },
+    {
+      "archiveName": "actual/patched03/FRAMES.json",
+      "bytes": 56517,
+      "sha256": "0baf8a0a3390eadda7be255ab990df4d35b12cacbab28ce5735f0f16ea38d569",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/FRAMES.json"
+    },
+    {
+      "archiveName": "actual/patched03/INPUT.original.save.json.gz",
+      "bytes": 460610,
+      "sha256": "d3294e0ff6807a927f4f607cc6b28b8d6e9b4189f40021ac6b051c121f2408d8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/INPUT.original.save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/OBSERVER.original.ts",
+      "bytes": 32785,
+      "sha256": "482a4da7679d08af29389c320e5c3c093a507743cdc87bdc1d5f16933a2dd131",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/OBSERVER.original.ts"
+    },
+    {
+      "archiveName": "actual/patched03/PLAN.original.json",
+      "bytes": 3618,
+      "sha256": "1a984136407799ab50d10561c3b3cd7b86f3cd8b22332236ae5b328713505b80",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/PLAN.original.json"
+    },
+    {
+      "archiveName": "actual/patched03/RESULT.json",
+      "bytes": 1649,
+      "sha256": "baba7908930af425757e38cba292c3eb4e34e45e4f23eeab3a8bdb06f3042479",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/RESULT.json"
+    },
+    {
+      "archiveName": "actual/patched03/SHADOW-COLD-IMPORT.json",
+      "bytes": 186,
+      "sha256": "752d1a5005c1e072cb79abbab9a6be2bda51f61bfe35f6635b2f3777817704b9",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/SHADOW-COLD-IMPORT.json"
+    },
+    {
+      "archiveName": "actual/patched03/TERMINAL-FOOD-OBSERVATION.json",
+      "bytes": 539970,
+      "sha256": "1c898d2d606a5ebb7abac4beebed07a80babbbf30d5620ab4fc396d68fa64746",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/TERMINAL-FOOD-OBSERVATION.json"
+    },
+    {
+      "archiveName": "actual/patched03/TERMINAL-PARTS.json",
+      "bytes": 45428,
+      "sha256": "a0b631353403866d4eb816f069b92cc81ee4edc7bdfcb8f718b7bc68c430f506",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/TERMINAL-PARTS.json"
+    },
+    {
+      "archiveName": "actual/patched03/WORLD.original.json",
+      "bytes": 1832308,
+      "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/WORLD.original.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0000-imported/FRAME.json",
+      "bytes": 1266,
+      "sha256": "5acad33baffb2307daa33d823dae3702d6533e404be8ef4f798d0d43b1038fe5",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0000-imported/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0000-imported/all-bus.json.gz",
+      "bytes": 22,
+      "sha256": "21947b02ead137acb20e602e9448c7c453b2836d1a755aadd5e1c61ecd2eb034",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0000-imported/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0000-imported/food-access-trace.json.gz",
+      "bytes": 22,
+      "sha256": "21947b02ead137acb20e602e9448c7c453b2836d1a755aadd5e1c61ecd2eb034",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0000-imported/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0000-imported/stable-phase-custody.json.gz",
+      "bytes": 221,
+      "sha256": "7aef59dcfeb2e972637c49d02b5583c0137c9f01ccba810a345173215fbf5151",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0000-imported/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0000-imported/whole-save.json.gz",
+      "bytes": 460610,
+      "sha256": "d3294e0ff6807a927f4f607cc6b28b8d6e9b4189f40021ac6b051c121f2408d8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0000-imported/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0001-ordinary-001/FRAME.json",
+      "bytes": 1311,
+      "sha256": "a28042bf7034d1e694ef4e95ef23b5430d03754a358e88f0ce2dad0778571c26",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0001-ordinary-001/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0001-ordinary-001/all-bus.json.gz",
+      "bytes": 10302,
+      "sha256": "b32accec6fc01620c6693b44f0dbf5585a80597cb9eb8e7f96bff0c4e2f7f8c2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0001-ordinary-001/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0001-ordinary-001/food-access-trace.json.gz",
+      "bytes": 986075,
+      "sha256": "8005cbdfd60f52b7529af796c4663fd6dc4977aae77a3de855e19934c9aed391",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0001-ordinary-001/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0001-ordinary-001/stable-phase-custody.json.gz",
+      "bytes": 1187681,
+      "sha256": "44cd40b45ed41e3e30cb6749dc3736a162942f22be04e2e5917649bfd051a414",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0001-ordinary-001/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0001-ordinary-001/whole-save.json.gz",
+      "bytes": 457197,
+      "sha256": "49333511fe341093fac1b966e2f1a0edc0a6fe24d85f03cc302c5285482bb6ee",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0001-ordinary-001/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0002-ordinary-002/FRAME.json",
+      "bytes": 1310,
+      "sha256": "b362668f82b794becc44982702bdd01dd1730378002b470492dc9bdb02aa6b8a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0002-ordinary-002/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0002-ordinary-002/all-bus.json.gz",
+      "bytes": 7178,
+      "sha256": "45f33e635b57fd6c72e02cde92378b332382d734f5246d01e620fd934487753f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0002-ordinary-002/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0002-ordinary-002/food-access-trace.json.gz",
+      "bytes": 976791,
+      "sha256": "b79f6e28f1c1fe3defacd26426b702d63fc63186af1ad1105bd85b238ff88f33",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0002-ordinary-002/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0002-ordinary-002/stable-phase-custody.json.gz",
+      "bytes": 1193984,
+      "sha256": "ea295e958d6d1ba7dada7cef6c636e842810cf12b240d0456004d43378ced9d9",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0002-ordinary-002/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0002-ordinary-002/whole-save.json.gz",
+      "bytes": 455869,
+      "sha256": "a0adf5854c8e1a2e5c643ecdf04b5bada1a375335d12c6d9952328f9812784a4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0002-ordinary-002/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0003-ordinary-003/FRAME.json",
+      "bytes": 1311,
+      "sha256": "febf23e628a8b3d08dfc8b2d06807a342267b334b53f80cfae9175f387763cd7",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0003-ordinary-003/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0003-ordinary-003/all-bus.json.gz",
+      "bytes": 11546,
+      "sha256": "f9166266f7e7abce2ff9314ad8ba675cb1d1d24580d24a1a2107ae1b48562396",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0003-ordinary-003/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0003-ordinary-003/food-access-trace.json.gz",
+      "bytes": 960125,
+      "sha256": "7b2f18cc778ab17dcbfb23439ac6ab308fc6c3c9cead2df264c8cdb142a5d801",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0003-ordinary-003/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0003-ordinary-003/stable-phase-custody.json.gz",
+      "bytes": 1188750,
+      "sha256": "981a1bbbfb988b8cdb2dabc3071848cc075f659ce25365375ee590e8e47ea40a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0003-ordinary-003/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0003-ordinary-003/whole-save.json.gz",
+      "bytes": 454448,
+      "sha256": "03ebce28d73a14a290e5e205ee435297af8ac2b8155a5a827992c734dd6b5dfd",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0003-ordinary-003/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0004-ordinary-004/FRAME.json",
+      "bytes": 1310,
+      "sha256": "994923862eed5375cec749d90c7652f8711e6cec154c8374c915353ffaa2caac",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0004-ordinary-004/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0004-ordinary-004/all-bus.json.gz",
+      "bytes": 5569,
+      "sha256": "39145b19401274e202353c097ba4a8c87e3515b0e8eb72127b72ab9e8df1ebeb",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0004-ordinary-004/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0004-ordinary-004/food-access-trace.json.gz",
+      "bytes": 945845,
+      "sha256": "4c58792b43b912b9b163ffc023b0a83209432055c72d471932dd68dde31fb8c4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0004-ordinary-004/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0004-ordinary-004/stable-phase-custody.json.gz",
+      "bytes": 1184614,
+      "sha256": "940fb1d47aa76f96e13ec136a7613820398d5aeb8d5fbee4758787b024cb2fb4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0004-ordinary-004/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0004-ordinary-004/whole-save.json.gz",
+      "bytes": 452712,
+      "sha256": "8b29b54b78c485db971b5361947e404432acf02edce3caa6b72620b1a3b2b543",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0004-ordinary-004/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0005-ordinary-005/FRAME.json",
+      "bytes": 1311,
+      "sha256": "4a23d430af95a826fb2e34be45caf80065caff78c587e84175028238eec31f75",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0005-ordinary-005/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0005-ordinary-005/all-bus.json.gz",
+      "bytes": 10550,
+      "sha256": "754256e13efeac121adf489258afbf4567fb0270c82461975fb7697755ed261d",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0005-ordinary-005/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0005-ordinary-005/food-access-trace.json.gz",
+      "bytes": 944760,
+      "sha256": "158bf18ee2f0dcd5eee0a462d28b8e174b42c5660baa98bd9942fc93a52ad8c6",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0005-ordinary-005/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0005-ordinary-005/stable-phase-custody.json.gz",
+      "bytes": 1198819,
+      "sha256": "090ff7b2ffbf0dfecd8d8486b1a1fa2279e44eb271cae712f0fd4d1a9b0783fd",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0005-ordinary-005/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0005-ordinary-005/whole-save.json.gz",
+      "bytes": 451057,
+      "sha256": "46eb6f0dfb1f60de062daca9e79c9c080e7e39bc2e0486bf6195153caad207c7",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0005-ordinary-005/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0006-ordinary-006/FRAME.json",
+      "bytes": 1310,
+      "sha256": "d65395042417c04dce518727b25537ea5945397bc6b8359630910bc19d595277",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0006-ordinary-006/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0006-ordinary-006/all-bus.json.gz",
+      "bytes": 6380,
+      "sha256": "266e469f937dc8a5ce091923b2122324769baa3413dbe84b3126370db0445f88",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0006-ordinary-006/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0006-ordinary-006/food-access-trace.json.gz",
+      "bytes": 912820,
+      "sha256": "507ac511e13d82e44d38f92afb284852f7421aca7d9b3ddf9a50e65ef9b5e847",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0006-ordinary-006/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0006-ordinary-006/stable-phase-custody.json.gz",
+      "bytes": 1187263,
+      "sha256": "4e5442c6c00ae354c1a948017b4ba22f05729b9b27de2ed83ab920a115c34fbd",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0006-ordinary-006/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0006-ordinary-006/whole-save.json.gz",
+      "bytes": 446675,
+      "sha256": "64c8e972310a59b6cb0cb953ca3afb0700a41d93ea7ebf2c15dd1a9a084c1391",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0006-ordinary-006/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0007-ordinary-007/FRAME.json",
+      "bytes": 1310,
+      "sha256": "157fd95d7781298fa48dd224b98934578aae889ad97d8fa3322b9700b62d5528",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0007-ordinary-007/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0007-ordinary-007/all-bus.json.gz",
+      "bytes": 4976,
+      "sha256": "0e9e9de91b99cec652ef408d8200d6dc5210cdba01fef1dcf4197424db80e293",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0007-ordinary-007/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0007-ordinary-007/food-access-trace.json.gz",
+      "bytes": 889646,
+      "sha256": "3db83e96a2d31b47e23c01d9d644817451acfd79d1fffe7783bce58e28a56bdf",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0007-ordinary-007/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0007-ordinary-007/stable-phase-custody.json.gz",
+      "bytes": 1185876,
+      "sha256": "3ba1d5b8a4eed0c00f56c8e00788b525a4f32a197b502862f74de8c0968e9db5",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0007-ordinary-007/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0007-ordinary-007/whole-save.json.gz",
+      "bytes": 446433,
+      "sha256": "696d3c5b0daea8f53dfb654b0f1743c077a5ff42fd264fc4543d29220c907ca7",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0007-ordinary-007/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0008-ordinary-008/FRAME.json",
+      "bytes": 1310,
+      "sha256": "dc19af078b2b4e09b112b32d4399c5cb2273d56bd3125fa18d75c88f49f3f7ec",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0008-ordinary-008/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0008-ordinary-008/all-bus.json.gz",
+      "bytes": 9864,
+      "sha256": "5ac01850e2ade0a07dbd008f5344f1345c746b693fbd4091ef2dbafc8e462815",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0008-ordinary-008/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0008-ordinary-008/food-access-trace.json.gz",
+      "bytes": 888534,
+      "sha256": "53f3146aac2c87e510ee950582698683464406070de13bdfd9a205e7758f23b9",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0008-ordinary-008/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0008-ordinary-008/stable-phase-custody.json.gz",
+      "bytes": 1198282,
+      "sha256": "4e95980fbed9eefc9343c6ed3ae37c9b392543b8e27791c8cd0b924c8dde6672",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0008-ordinary-008/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0008-ordinary-008/whole-save.json.gz",
+      "bytes": 445120,
+      "sha256": "5a353977d1e3da52f136162cdc3cabb923fb89430e61cd7d633d6dca47309c09",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0008-ordinary-008/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0009-ordinary-009/FRAME.json",
+      "bytes": 1310,
+      "sha256": "c1a3c11dfe9f2337b6553dec959da226d10fe7476be6507b025f7812a9f690de",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0009-ordinary-009/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0009-ordinary-009/all-bus.json.gz",
+      "bytes": 8629,
+      "sha256": "b74b2d4b5dc9663ccbab1320e2d776dcd88c4588f98055bb795fe6ddf3bffad0",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0009-ordinary-009/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0009-ordinary-009/food-access-trace.json.gz",
+      "bytes": 883042,
+      "sha256": "1b1feb99eabeea590b95a10b3c0c4192a1eff869b4a59223f0d91c28d9ec414a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0009-ordinary-009/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0009-ordinary-009/stable-phase-custody.json.gz",
+      "bytes": 1188930,
+      "sha256": "0bcf5d185e212f16e23de2b3bcb77024d27b782f91277c17d01c261afcea7743",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0009-ordinary-009/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0009-ordinary-009/whole-save.json.gz",
+      "bytes": 445829,
+      "sha256": "f006888b0cf4724759d8c37a3bb26cb938fc2935ec055e95f471300da811726b",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0009-ordinary-009/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0010-ordinary-010/FRAME.json",
+      "bytes": 1311,
+      "sha256": "d47dfa52b2b922c4ce3daa9cd5a19744f6926552b78a2a0cade435b860b17bb8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0010-ordinary-010/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0010-ordinary-010/all-bus.json.gz",
+      "bytes": 10062,
+      "sha256": "fb520cd3c879e1f639f9b27cb3af8b1104a7510e3416dcab0f3defeeedb733d2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0010-ordinary-010/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0010-ordinary-010/food-access-trace.json.gz",
+      "bytes": 881768,
+      "sha256": "c6013079c7aa6438159f43dd12cb444de765128849a6ddd8dc0c17468bcd8a71",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0010-ordinary-010/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0010-ordinary-010/stable-phase-custody.json.gz",
+      "bytes": 1191448,
+      "sha256": "d269992eb76d660f8d84fa4ad5b0a8dbd2d01272924e17d1b7594414243cf293",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0010-ordinary-010/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0010-ordinary-010/whole-save.json.gz",
+      "bytes": 445485,
+      "sha256": "f9bf7924b69041b61bfde61090c6dbfdadfe8fc90d023ba30ebe8d08270f4a51",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0010-ordinary-010/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0011-ordinary-011/FRAME.json",
+      "bytes": 1311,
+      "sha256": "b3544e9e70d577c6872a763371015b063f52171dcfc3fde800034ced1cbc83a0",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0011-ordinary-011/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0011-ordinary-011/all-bus.json.gz",
+      "bytes": 11556,
+      "sha256": "5328824a1eae1d0124cd417ea29ee9acf14dad821281ccfa3e329499b4ccca80",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0011-ordinary-011/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0011-ordinary-011/food-access-trace.json.gz",
+      "bytes": 888482,
+      "sha256": "ee9e829c25f9d3e4151f41289c0d024cf5ff428156f7eea6b6d9a3efcdda6078",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0011-ordinary-011/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0011-ordinary-011/stable-phase-custody.json.gz",
+      "bytes": 1201161,
+      "sha256": "8d1166fc8f9289611d07ff622fc0225d2ab33faf7b072dee6082e497112d32b0",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0011-ordinary-011/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0011-ordinary-011/whole-save.json.gz",
+      "bytes": 443712,
+      "sha256": "fe1976ec28e9e2e586694a75c9c1916ec25238a032794b93dc857522c5a9a259",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0011-ordinary-011/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0012-ordinary-012/FRAME.json",
+      "bytes": 1310,
+      "sha256": "fe62692fe748c295c034d0f8285d84928f655b5837f4b1df2bbfdf04456186af",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0012-ordinary-012/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0012-ordinary-012/all-bus.json.gz",
+      "bytes": 7757,
+      "sha256": "61df243d10bec110519c2b4b4bc7d63034fbce427f14b0c5c0b78493ec58631d",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0012-ordinary-012/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0012-ordinary-012/food-access-trace.json.gz",
+      "bytes": 892029,
+      "sha256": "d537b2757f89a7f108ddfd386431b662b46107d8a0be93d2864f5bdaa1cd91f9",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0012-ordinary-012/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0012-ordinary-012/stable-phase-custody.json.gz",
+      "bytes": 1189012,
+      "sha256": "d1da32da85b652b901905fd17ddec53f1418846f457ace5f7dd570baddf4374f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0012-ordinary-012/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0012-ordinary-012/whole-save.json.gz",
+      "bytes": 447025,
+      "sha256": "96eb62289d359892018baf9cb06aa46df2470d4b8f93efa45d473adf9fd4c83a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0012-ordinary-012/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0013-ordinary-013/FRAME.json",
+      "bytes": 1310,
+      "sha256": "67c7fb1f3343640ff1e300489934509a70769f955fd7a4c7f55e2c81524df197",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0013-ordinary-013/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0013-ordinary-013/all-bus.json.gz",
+      "bytes": 6410,
+      "sha256": "afd7990327b86f565a09923d7ec3f814dc2717f38b39375ce786b08f2a0aad5f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0013-ordinary-013/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0013-ordinary-013/food-access-trace.json.gz",
+      "bytes": 871989,
+      "sha256": "58f7c05106d9f7c442b57a2c7cfdd2c80af50c36d99c4da0bfa15b14c4f5572a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0013-ordinary-013/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0013-ordinary-013/stable-phase-custody.json.gz",
+      "bytes": 1187837,
+      "sha256": "a9655c579b24c4350e35aed38a5d34aa6d8825134f2692b1569f20ea2f319b6e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0013-ordinary-013/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0013-ordinary-013/whole-save.json.gz",
+      "bytes": 446982,
+      "sha256": "da1ee54d5505077f62227ec17489f5192529fc97f85d00bcd592d734b0d0b559",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0013-ordinary-013/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0014-ordinary-014/FRAME.json",
+      "bytes": 1310,
+      "sha256": "27b40fc95a859820897dc8126a5de691265d67ef3573996b88f3825858509bd8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0014-ordinary-014/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0014-ordinary-014/all-bus.json.gz",
+      "bytes": 7619,
+      "sha256": "78d1add4209d602682d374a8d56b66e49170f1b2e27932f918155fa49338300c",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0014-ordinary-014/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0014-ordinary-014/food-access-trace.json.gz",
+      "bytes": 835468,
+      "sha256": "87ae3dd1be2270f049e7daddf5003d249ac0e5bcda3c59ec046435ee0cbba8e8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0014-ordinary-014/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0014-ordinary-014/stable-phase-custody.json.gz",
+      "bytes": 1198084,
+      "sha256": "8f1c3dfe1fdb28e2ff1c315704f743a3472979d9d3c13120ea4d5c3e3f110d76",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0014-ordinary-014/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0014-ordinary-014/whole-save.json.gz",
+      "bytes": 445692,
+      "sha256": "09abf76c6258320ed9b444455dd85a7cf6f7f9c7c346f9be6d63280bb9cc6ff4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0014-ordinary-014/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0015-ordinary-015/FRAME.json",
+      "bytes": 1310,
+      "sha256": "09ae53427a232376c3c0e343389dd88e1071e135edd017ebb4b471eae02ce7d9",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0015-ordinary-015/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0015-ordinary-015/all-bus.json.gz",
+      "bytes": 5981,
+      "sha256": "159a4c7a0b46d38ad4c19f9808a39571b61a6c76086f19c8eb8b6ad9f14b61dc",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0015-ordinary-015/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0015-ordinary-015/food-access-trace.json.gz",
+      "bytes": 818179,
+      "sha256": "0db1474b85f0b5742ae98a8c540075dd7b49ed88f078e0012cf12cf2e80a041a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0015-ordinary-015/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0015-ordinary-015/stable-phase-custody.json.gz",
+      "bytes": 1190465,
+      "sha256": "963cf96dd55f4221c9af6735ea8a518aabc9c43778d9feea523f0da695270bde",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0015-ordinary-015/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0015-ordinary-015/whole-save.json.gz",
+      "bytes": 447403,
+      "sha256": "312c38992cf150453932c11ef7ac9441fdde62aec80c066ee2b20b3e7bbfb11c",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0015-ordinary-015/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0016-ordinary-016/FRAME.json",
+      "bytes": 1311,
+      "sha256": "20b0cd9a6719b3eacfeebacf4fda175f77845fcc5041f02efed9668cb35ccff5",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0016-ordinary-016/all-bus.json.gz",
+      "bytes": 10722,
+      "sha256": "1b1072cc3def020358a4fec7483ad83de7a144f4c3bfc25410121f3912ddcb33",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0016-ordinary-016/food-access-trace.json.gz",
+      "bytes": 808607,
+      "sha256": "bd3cdd70629b1377a63d7e89e66ba7f6362d34e3dd92182b21ad4b654b120679",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0016-ordinary-016/stable-phase-custody.json.gz",
+      "bytes": 1194536,
+      "sha256": "8479d569d30d045e0da015245b7ffe55fb26db5fb5043a83d474f5372dc23668",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0016-ordinary-016/whole-save.json.gz",
+      "bytes": 447761,
+      "sha256": "3bd4efb6a72e6d82ee5fd6d21978098558691c21215699ea83f0e6fdfa3f890b",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0017-ordinary-017/FRAME.json",
+      "bytes": 1311,
+      "sha256": "dc167325af79b76038920accb71aa98eac2b3f7354913d96e6ea0a3465bd4762",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0017-ordinary-017/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0017-ordinary-017/all-bus.json.gz",
+      "bytes": 13161,
+      "sha256": "4bc05707dc7705f4258a4b25483b8d0a7528d5df5470cba0b8960c78d4be3036",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0017-ordinary-017/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0017-ordinary-017/food-access-trace.json.gz",
+      "bytes": 796499,
+      "sha256": "5b18da944df16c54c1be71df7ff1a90c6a9322b7cf1e26d3b4af170baf6b3650",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0017-ordinary-017/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0017-ordinary-017/stable-phase-custody.json.gz",
+      "bytes": 1204368,
+      "sha256": "acd80ac6eed7b09b8fce9830a571af2c6c5027278aaae01ae9158f4453d31c5d",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0017-ordinary-017/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0017-ordinary-017/whole-save.json.gz",
+      "bytes": 447532,
+      "sha256": "1d40010c9d2036ab67b0d0a088a4c90a135166d813c8e2f5189e855b3eecc599",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0017-ordinary-017/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0018-ordinary-018/FRAME.json",
+      "bytes": 1310,
+      "sha256": "1b5a22f0072577ae8d95c68a93fabdc57d0ae4e79693b1635548188339f518dc",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0018-ordinary-018/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0018-ordinary-018/all-bus.json.gz",
+      "bytes": 5925,
+      "sha256": "0c938e498f3f84c1ec5256665ff01f399ffd2609bc6849bf416c8d2bc0bb2534",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0018-ordinary-018/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0018-ordinary-018/food-access-trace.json.gz",
+      "bytes": 782336,
+      "sha256": "fc04b5966846e515d77f25ef2da494cbb1a262fd152ed290f72e308a4e44516e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0018-ordinary-018/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0018-ordinary-018/stable-phase-custody.json.gz",
+      "bytes": 1189934,
+      "sha256": "70d5288a522f5c885fbaed639d09fc82b2bef09ab79553bd424c4aa5b2afbb0e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0018-ordinary-018/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0018-ordinary-018/whole-save.json.gz",
+      "bytes": 446923,
+      "sha256": "147138aa91b79ecdf1f0675b69b3cb895aa0aa5b1856aedabfc29412b40b7524",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0018-ordinary-018/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0019-ordinary-019/FRAME.json",
+      "bytes": 1311,
+      "sha256": "e23431014396ecb22a82b0bf12f488e1b1cec57cee46cdaf2ceeb669f5532e31",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0019-ordinary-019/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0019-ordinary-019/all-bus.json.gz",
+      "bytes": 10799,
+      "sha256": "a2cc2f917e2a29b6d72e11dbec50ae72f5d43677d8e6581673d5a4a55aa06aeb",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0019-ordinary-019/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0019-ordinary-019/food-access-trace.json.gz",
+      "bytes": 757041,
+      "sha256": "74c0c7a13a24c279839d240d5c82e55daae10050868f1f4a67b2c93f8e047bb7",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0019-ordinary-019/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0019-ordinary-019/stable-phase-custody.json.gz",
+      "bytes": 1195827,
+      "sha256": "af7d000f14dff54ca02b44b848a249225b583e353b65cfd048d4f7917d3cb7f7",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0019-ordinary-019/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0019-ordinary-019/whole-save.json.gz",
+      "bytes": 445880,
+      "sha256": "7057068ab4fe4dd55ed42c5209890b87d735858dafbaf511105eedc11c83fc99",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0019-ordinary-019/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0020-ordinary-020/FRAME.json",
+      "bytes": 1310,
+      "sha256": "e49a11914acc277c979cff5b01edacf21842267600b2dd6583d885c58fa09ca1",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0020-ordinary-020/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0020-ordinary-020/all-bus.json.gz",
+      "bytes": 9723,
+      "sha256": "20ff1c30d75eeb8a706d7cdf4480c652f0e9e6e066775922e6b911c31efaba11",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0020-ordinary-020/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0020-ordinary-020/food-access-trace.json.gz",
+      "bytes": 742481,
+      "sha256": "77bda908184cb0739391cdd10589030baf3958d9e7a0e5dd6766ed77c4eb1a3b",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0020-ordinary-020/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0020-ordinary-020/stable-phase-custody.json.gz",
+      "bytes": 1204735,
+      "sha256": "167de0bea71b51ad6d9d828d6ea2e0b1eaecd45785a14bd1836bd0a4075e3950",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0020-ordinary-020/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0020-ordinary-020/whole-save.json.gz",
+      "bytes": 442190,
+      "sha256": "0d4b6390dfabc50e07da960028b1acd0e38236c5d790c0a72a994dbd6ed556d1",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0020-ordinary-020/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0021-ordinary-021/FRAME.json",
+      "bytes": 1311,
+      "sha256": "7e62bf31fbf89a88ba5529578c11a5fac33fb76bbe93bab9ddc7f49e7ea20ae8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0021-ordinary-021/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0021-ordinary-021/all-bus.json.gz",
+      "bytes": 12043,
+      "sha256": "bec63da2f6d26d07eaa762e580907e9ae289184c8cee22272a60482fcad26105",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0021-ordinary-021/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0021-ordinary-021/food-access-trace.json.gz",
+      "bytes": 741501,
+      "sha256": "1fd3180f704761cb87e2afb889400c0c987e61423e8b7203ebcfe8854e40bdd2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0021-ordinary-021/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0021-ordinary-021/stable-phase-custody.json.gz",
+      "bytes": 1199531,
+      "sha256": "7272c98ae771aa6f12dd19905b7bdc287380aaa465f9f44c9c3a05110b176d55",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0021-ordinary-021/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0021-ordinary-021/whole-save.json.gz",
+      "bytes": 441581,
+      "sha256": "97135ed7c00ee4cfe5e61275b2ad98cec3f7f3cecf5058bdd06c13be30c1c3f4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0021-ordinary-021/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0022-ordinary-022/FRAME.json",
+      "bytes": 1310,
+      "sha256": "4091129d3ceb35ed0aa3cb7fc82b71a8f1951e4875357d08aa0c2b34a02f9b0f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0022-ordinary-022/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0022-ordinary-022/all-bus.json.gz",
+      "bytes": 6144,
+      "sha256": "f133066bb9637a56002768de691e290f99805c8343635fd13619937deac3499a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0022-ordinary-022/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0022-ordinary-022/food-access-trace.json.gz",
+      "bytes": 739988,
+      "sha256": "60fc6ccccfca97cb357881370fd2b80f03931d60bb6fb8d5f303b6eb8f4021a2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0022-ordinary-022/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0022-ordinary-022/stable-phase-custody.json.gz",
+      "bytes": 1194013,
+      "sha256": "ea1784d00fe2f66a3f3086c41a5a86da0dbfbc065f6189a077eaf49de5855caa",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0022-ordinary-022/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0022-ordinary-022/whole-save.json.gz",
+      "bytes": 444201,
+      "sha256": "c909fad43f62bbbba9081b3fc2a8377534e2cf345f0ebca8ca782d3a8f02c339",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0022-ordinary-022/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0023-ordinary-023/FRAME.json",
+      "bytes": 1310,
+      "sha256": "6f13ef0ffa7a21c48b7f2078fc1869a12c058485dcdaa473326bc96f9c8345ad",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0023-ordinary-023/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0023-ordinary-023/all-bus.json.gz",
+      "bytes": 5906,
+      "sha256": "4b524da45631f9959c4a6049f48244c069812e578eae790b02ebb9d915772a37",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0023-ordinary-023/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0023-ordinary-023/food-access-trace.json.gz",
+      "bytes": 733008,
+      "sha256": "a8a2c4d64bc7f025cfe4724806a899d15ad053fe5b71a22bce8618a764f714fd",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0023-ordinary-023/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0023-ordinary-023/stable-phase-custody.json.gz",
+      "bytes": 1200861,
+      "sha256": "6747b2e262a8a4d9f01cafc29766277d08792973299953c0193b38a97989b277",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0023-ordinary-023/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0023-ordinary-023/whole-save.json.gz",
+      "bytes": 442992,
+      "sha256": "d57c2159adac5026da0de5dd0546d3c229cb4f032747083118370f3d6cef595a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0023-ordinary-023/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0024-ordinary-024/FRAME.json",
+      "bytes": 1310,
+      "sha256": "6d372ee12a37475f858742b5be4d617ee6f2cdb55e29af121bade65e2c2a8f7e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0024-ordinary-024/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0024-ordinary-024/all-bus.json.gz",
+      "bytes": 9866,
+      "sha256": "4482c2c348b1abe4c14eb3d357325f072e2e9548c6d148688b9486f9a122cf1a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0024-ordinary-024/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0024-ordinary-024/food-access-trace.json.gz",
+      "bytes": 724777,
+      "sha256": "66acc9b66722c42ddcb15ae54ed6e2bd4d123070473814e4ebb5b49e86189e3c",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0024-ordinary-024/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0024-ordinary-024/stable-phase-custody.json.gz",
+      "bytes": 1195753,
+      "sha256": "48573a38497ab03841ec9389b9268935291eef074272574ba03732d4928ded32",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0024-ordinary-024/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0024-ordinary-024/whole-save.json.gz",
+      "bytes": 444355,
+      "sha256": "a672682c58730dbcdff2b64a3840e5bf0f6953e5fe6b357c4eeca8bd9718b58b",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0024-ordinary-024/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0025-ordinary-025/FRAME.json",
+      "bytes": 1311,
+      "sha256": "24cd471c2c7a13c4cb9cf5f41e391b96378576bd36a6453d1df97ce623e9b25f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0025-ordinary-025/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0025-ordinary-025/all-bus.json.gz",
+      "bytes": 11395,
+      "sha256": "4515c17cf9f10322e396838b844019a104e5fc4596c232d46fb78d9ac15749db",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0025-ordinary-025/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0025-ordinary-025/food-access-trace.json.gz",
+      "bytes": 721745,
+      "sha256": "77acd4db8a5505d9ae98585a2f734fb9f18b66ca358fd4a572c0f16c9bfcbc71",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0025-ordinary-025/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0025-ordinary-025/stable-phase-custody.json.gz",
+      "bytes": 1198979,
+      "sha256": "6e90b9eb0de98dffbe9d9ff1f76e4564278feb4f8610b371c3db2c751acbf03d",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0025-ordinary-025/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0025-ordinary-025/whole-save.json.gz",
+      "bytes": 445684,
+      "sha256": "91bfa6d24a20216bac5b6150cc8a2f534bab77ab6fc418a80184a5ff87c91908",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0025-ordinary-025/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0026-ordinary-026/FRAME.json",
+      "bytes": 1311,
+      "sha256": "5a6de70c6d2bf0c47aab2cf2f6e917dd82ee5cc5b616eede5295eaef492a53b0",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0026-ordinary-026/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0026-ordinary-026/all-bus.json.gz",
+      "bytes": 10154,
+      "sha256": "69a30a0285c82041d820d47c93addebe50e2e1aa2b1f97d421a510986c8aef2e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0026-ordinary-026/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0026-ordinary-026/food-access-trace.json.gz",
+      "bytes": 714394,
+      "sha256": "22717df0daf552c029a0d483f7d9649ede61f70ff85814ed19083dacef9d38ba",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0026-ordinary-026/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0026-ordinary-026/stable-phase-custody.json.gz",
+      "bytes": 1209043,
+      "sha256": "ad9f9a717d08dc8de9914f7334cae2d7e4c30001061398d3bf1fce9fac438234",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0026-ordinary-026/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0026-ordinary-026/whole-save.json.gz",
+      "bytes": 444874,
+      "sha256": "8a517aee7ea3a925cd1e702b42a23744da8aa77f1012c4bc356a26d2a2ceab25",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0026-ordinary-026/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0027-ordinary-027/FRAME.json",
+      "bytes": 1311,
+      "sha256": "5f0dc3674919d82b1775af3a87c9153638179f644b87c8fd20672dc54634c359",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0027-ordinary-027/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0027-ordinary-027/all-bus.json.gz",
+      "bytes": 11269,
+      "sha256": "6fc203dfcd53e95ef15304da4f016ab756ed36bfb78435b559d1100a1de8b3fa",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0027-ordinary-027/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0027-ordinary-027/food-access-trace.json.gz",
+      "bytes": 707208,
+      "sha256": "915eabc4a95f0345a8a1efeed986ad3bed0b7a06b777313413e582a35a671db5",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0027-ordinary-027/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0027-ordinary-027/stable-phase-custody.json.gz",
+      "bytes": 1201839,
+      "sha256": "56a0593ad486489957c15930c3a22322e4b4c298e4861e7f808143e76b89fc16",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0027-ordinary-027/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0027-ordinary-027/whole-save.json.gz",
+      "bytes": 447082,
+      "sha256": "51a226cfbf849ae19db6f9cd1f5fb13b77fbb6d828a0f18e246e9cffcc5b370b",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0027-ordinary-027/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0028-ordinary-028/FRAME.json",
+      "bytes": 1310,
+      "sha256": "5da1b748a2533f0f88b7b6924084cc62b5cd4e374330c4c2626a95ddc94e2243",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0028-ordinary-028/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0028-ordinary-028/all-bus.json.gz",
+      "bytes": 5029,
+      "sha256": "99e709dc6eff1697319b4b7a60e5a651f766df8985140f586904104eae0277f1",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0028-ordinary-028/all-bus.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0028-ordinary-028/food-access-trace.json.gz",
+      "bytes": 703767,
+      "sha256": "8f0a7b7f71329ad3a0f43ebe82cf0eafc2ea3333c0f52e64196bb59c97ca3fb4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0028-ordinary-028/food-access-trace.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0028-ordinary-028/stable-phase-custody.json.gz",
+      "bytes": 1202141,
+      "sha256": "5b7c642c2510ed4814f45b70fc81143725f9912d755673bfc2952b02d2e9d7cc",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0028-ordinary-028/stable-phase-custody.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0028-ordinary-028/whole-save.json.gz",
+      "bytes": 449397,
+      "sha256": "045ba1ab29b130b230cf03b9a83ac34bad320c025d8642fb1b0420dbe1b85145",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0028-ordinary-028/whole-save.json.gz"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0029-ordinary-029/FRAME.json",
+      "bytes": 1311,
+      "sha256": "18af88d8ba72d01087fc0dc4053013df42a582f7bf38673384ac88881e8b13d3",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0029-ordinary-029/FRAME.json"
+    },
+    {
+      "archiveName": "actual/patched03/frames/0029-ordinary-029/all-bus.json.gz",
+      "bytes": 15808,
+      "sha256": "488c448b947c2c9350d5849fc713916e54fc7b4da639e8e11d44014f6d154d5e",
+      "source": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0029-ordinary-029/all-bus.json.gz"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 73335625,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

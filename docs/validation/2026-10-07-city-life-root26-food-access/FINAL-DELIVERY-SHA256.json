@@ -1,0 +1,445 @@
+{
+  "status": "VALIDATED_FINAL_DELIVERABLE_BYTES_BEFORE_COMMIT",
+  "at": "2026-10-07T11:44:33.332699+00:00",
+  "stage": "ROOT26",
+  "allArtifactGroupsAllChunksRequired": true,
+  "original417419421SourcesSeparated": true,
+  "originalSourcesAfterLibraryFailureAllStillExact": true,
+  "LibraryNewIDs": 0,
+  "LibraryAttachmentDelivered": false,
+  "notOwnManifestRecursiveHash": true,
+  "files": {
+    "src/simulation.ts": {
+      "bytes": 319985,
+      "sha256": "8ffd1b06229e37b2e391eefbe2f80cf190e59af5c9ca6fabab7e8143c23c85f1"
+    },
+    "src/simulation/meal-route.ts": {
+      "bytes": 3092,
+      "sha256": "6ce962358934386151adcd4fc7d2dac10d27e38c946b7525cb77d73377ccf2a4"
+    },
+    "src/simulation/voxel-movement.ts": {
+      "bytes": 7425,
+      "sha256": "1b333416ff0f209d31af29c6d4184849c49ee8b5d6846186cb5622c5ccdc303e"
+    },
+    "scripts/food-access-recheck.ts": {
+      "bytes": 13383,
+      "sha256": "a021c853ea5e8b391982a66cf645e4f136db82d452c61255ec9be1baf0017393"
+    },
+    "tests/urgent-meal-processing.test.ts": {
+      "bytes": 19744,
+      "sha256": "5900101b98e88636715012d7fd76328d13675f149ba8eef8646b9655325cd855"
+    },
+    "tests/voxel-movement.test.ts": {
+      "bytes": 9987,
+      "sha256": "11b0cf1895d57b15742f9da281d581d4ef02343c4e5c4d3ff0f1f0a91e851fcc"
+    },
+    "开发备忘录.md": {
+      "bytes": 626825,
+      "sha256": "1eee2b096869402eedf4fb2ea0bd5c7ad5b9aed310baa2a8b22adda7e0bc981f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/279-trajectories.json": {
+      "bytes": 2233496,
+      "sha256": "09a1c1dc6bcdd52aab8b79ac206497315e57bc11e428d52599525f946bb2a945"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/CORRECTION-RECEIPT.json": {
+      "bytes": 88908,
+      "sha256": "8d26cb62280360125e33f21c731cf0221d6dcfe84a6beb8127bfc5e52ca94a49"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/DRAFT-DELIVERY-SHA256.json": {
+      "bytes": 4753,
+      "sha256": "e53927f3061b6e88814027d2bed0ea2b302d02708652091deae30e9c32a27bd7"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/FINAL-PRESERVATION.json": {
+      "bytes": 125511,
+      "sha256": "e58a7b55b3c101fd99ac098bbee786dcee58732f6a041ca340e970431cff1f65"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/FINAL421-CLOSED-GATES-READONLY.json": {
+      "bytes": 80866,
+      "sha256": "6ceb89c315c66f266b6f5404993294a6f126709476012c8e73563650b0012634"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/INDEPENDENT-READONLY-REVIEW.json": {
+      "bytes": 1322,
+      "sha256": "7141ea2cad9d5b766911a1c0838a94bc6f926f20fdf7e81055e4d9672d0a81b9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/LIBRARY-DELIVERY.json": {
+      "bytes": 24339,
+      "sha256": "ce11be170e793d8a969b9294206e243a820c9b0948c3fc1a69c67069d09d32a4"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/MATRIX-PRESERVATION-ROOT26.json": {
+      "bytes": 386,
+      "sha256": "5f736c00673458228670b9a8700f2e03e9153d90121626e19642f89fe9f64b1f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/MATRIX-ROOT26-APPEND-ONLY.csv": {
+      "bytes": 34116,
+      "sha256": "3ad537e52d2ff0717471dae2efa6c34174417ad3f652c86ecac1e0a610f61c5d"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/MEMO-APPEND-ROOT26-DRAFT.md": {
+      "bytes": 3969,
+      "sha256": "dee6d550f7d26753048ee09f4edceacd54096644218ba5e7aa76ca11fa412574"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/MEMO-FINAL-CLOSURE-APPEND.json": {
+      "bytes": 386,
+      "sha256": "3129d97acae6be445ef6a73b30ef79811fc58e730cf0e99d15bcbdbc0196db4f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/NEXT-COLD-INPUT.json": {
+      "bytes": 1762,
+      "sha256": "74e95d082d04c9736fea847832990ef628e59f82e1d57589c31b5b57ecb05e8a"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/NEXT-COLD-INPUT.save.json.gz": {
+      "bytes": 452880,
+      "sha256": "ed526010ed21dd53f87fc7eebdccf10dd5032e41b2f13f4cc7ce2333366e204c"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/PACK-SUMMARY.json": {
+      "bytes": 1697,
+      "sha256": "8a273f33720ff0e16c2042e4846550798bfabb6228709acd02212eedd6767904"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/PATCHED03-READONLY-CONTROL-SUMMARY.json": {
+      "bytes": 4906,
+      "sha256": "74ad718c23f05ac512c0b8a9d93425c9e3d5d29953bc1b32d8c7a35d606ace66"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/README.md": {
+      "bytes": 2536,
+      "sha256": "deb377b10488f0bcb684a5a450134439a3652ea5957e0244fed195d70223e9b6"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/REPORT.md": {
+      "bytes": 12310,
+      "sha256": "be0cb12f1dc35166d15a8c5d6d3e0c084fd6d97dd0614425d0ca4187176a9e73"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/REQUIREMENTS-38.csv": {
+      "bytes": 311232,
+      "sha256": "9253df699bd3d69a13a3c3d346cb836eed39cf7bdcb429bf67d06da874cdbe0b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/ROOT26-ACTUAL-EVIDENCE-SUMMARY.json": {
+      "bytes": 890195,
+      "sha256": "660f39955abb7249b0796396651fefe23043b894328d9847f7072faa3bbb1fa9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/SOURCE-AFTER-PACK-RECHECK.json": {
+      "bytes": 242,
+      "sha256": "36704ad834499e5510f520f62b60a9ea202f255374a8029b40657f7bf9aedbe5"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/SOURCE-LINEAGE-ORIGINAL261-READONLY.json": {
+      "bytes": 175936,
+      "sha256": "9ff5c4a1ddeb4ffa1e8417f652730d76f88b02287eaea538a5c48a98dc0d617a"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/README.md": {
+      "bytes": 1521,
+      "sha256": "def882f446e760c455a656f6efa8b91a7724e86fa0926a01e17aa214fef0cb85"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/baseline-head417.part-001.members.json": {
+      "bytes": 136847,
+      "sha256": "afbeaa555fca6fc369337604e8045065d7397db3915e5a89d1335c634ba7d79b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/baseline-head417.part-001.zip": {
+      "bytes": 11850021,
+      "sha256": "4420a285b34148f49616bb235160c2b1406dfb7189ddb90bdff0736438df5c41"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/baseline-home-capture02.part-001.members.json": {
+      "bytes": 1407,
+      "sha256": "90b7a49127ea5840ba5944e560b6edb4b369c090d70327ce3258ddfbe69798d9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/baseline-home-capture02.part-001.zip": {
+      "bytes": 168882,
+      "sha256": "625ee83806e042eebe5753feebd88a5af2b0959f7b6146b1e9a607beba16ad96"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/compare-originals01.part-001.members.json": {
+      "bytes": 1582,
+      "sha256": "27bcfdc8530f5f9a12092c733974450ef4c50e37d2df75c15a7716678f446b44"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/compare-originals01.part-001.zip": {
+      "bytes": 183527,
+      "sha256": "0e435ab26cdf3cea62c5166db65df6a9b192ec963a8acdb9c39de8814c9dabab"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/fixed-home04.part-001.members.json": {
+      "bytes": 3319,
+      "sha256": "918dfff8ab46d5a61522d68992906a677ab958c75645ae779444f3c055eaa51d"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/fixed-home04.part-001.zip": {
+      "bytes": 565590,
+      "sha256": "7a78d37da29978ce3dc0849ac4d77eb2effd3e958efea15c7ac5860e7e5bf61f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/gates.part-001.members.json": {
+      "bytes": 43782,
+      "sha256": "71a71d49c1a876c945063ac4fd40b4862a9b3f49dd7f89ea18471950cdcd1ae2"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/gates.part-001.zip": {
+      "bytes": 1104675,
+      "sha256": "fe4069b65a79ced5ef1263e0301d79577102e6bdd7ec169ab30cd890bc884d87"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/home-egress-draft.part-001.members.json": {
+      "bytes": 1324,
+      "sha256": "81a941a93fa3a16d9ae1535da482a5574056c1e2a3465072e57ced5a0527679f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/home-egress-draft.part-001.zip": {
+      "bytes": 11454,
+      "sha256": "1f543261727e88f918343480d12622c6c66bfed4d4c8ad24c5d32ef3e1250d99"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/index.json": {
+      "bytes": 1748322,
+      "sha256": "9e5a858423113a2debc8f6f54a04902a12071c0dea21c1606de36d09b088af0e"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native01.part-001.members.json": {
+      "bytes": 63239,
+      "sha256": "63389c7de0e4f21985862e4f7e8f201a24dd3babb74efe6fb1f4ae1c97445f59"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native01.part-001.zip": {
+      "bytes": 45813248,
+      "sha256": "47e8ff1d059e62c41bc0075faf8be4fc47bfcb0d683326def9473383d444e323"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native02.part-001.members.json": {
+      "bytes": 45845,
+      "sha256": "5fbf344d60df29d31c3a02016d743679b6e19deb8b7beb04c408788b378dcd89"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native02.part-001.zip": {
+      "bytes": 69248260,
+      "sha256": "cdf645aa7364cca936ecbaa688eb026efe73c98aa189b2e3454c22b76d1480e2"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native02.part-002.members.json": {
+      "bytes": 42070,
+      "sha256": "33a052adbb9404c13557dcf403a762c1a78e37459190aaf63b13e15fb51378b9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native02.part-002.zip": {
+      "bytes": 15275499,
+      "sha256": "e3a0f36b96864791e23c9f6c6f8e0e0fc45ecfb86eb33d8950f1a4ed698b2a85"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native03.part-001.members.json": {
+      "bytes": 62954,
+      "sha256": "dede8e2538fe3828b46f0c5bb34d7b6f461889d7b22e5971326f0245ed161939"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native03.part-001.zip": {
+      "bytes": 38618039,
+      "sha256": "c855bd4834ef56a323d9730329cbbe77d05e53d52f9aee047bb2dad2081a74dd"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native04.part-001.members.json": {
+      "bytes": 62706,
+      "sha256": "069b4149df6a54a5d8f2ea7c4e8d5b5c88e9006c58137d7ddfa14341b3e03776"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/native04.part-001.zip": {
+      "bytes": 39998331,
+      "sha256": "40705cea29e20a3cb5c89af856b33394de0c2a7b7796301d1e55fdc4db9298d3"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched01.part-001.members.json": {
+      "bytes": 63405,
+      "sha256": "d68dd68697e0a122fb4a099a69bdb1d27235dc806e3449ce7c18dac5b1a64c49"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched01.part-001.zip": {
+      "bytes": 41327078,
+      "sha256": "444b465e6ef04cecd476320ce1ed84d42ca8685710c75acc9aaa5f9d05fdcdb4"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched02.part-001.members.json": {
+      "bytes": 50209,
+      "sha256": "a9bbf19362283355b712d1bc39dd0514151893949f447de182e41a0e05c9ace1"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched02.part-001.zip": {
+      "bytes": 69220127,
+      "sha256": "37474bc43e7baf06ca0d299275e36911b731ebc3191ecdfae779dd90db11f4ce"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched02.part-002.members.json": {
+      "bytes": 65668,
+      "sha256": "6cb8aa18404e9ac22e5303b6f546a36ce71c259b170b19792726880ee1cf4230"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched02.part-002.zip": {
+      "bytes": 34166696,
+      "sha256": "d09728714740b827336fc46d09d3653a6655ed5105674f0eb01e5ea5ec51af5b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched03.part-001.members.json": {
+      "bytes": 49547,
+      "sha256": "f3aa33563ad8f1974c8f697791473ec4896c44c56b983cde1fe708c0cd58e9f8"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched03.part-001.zip": {
+      "bytes": 69395550,
+      "sha256": "202c8bfe35591b838ddebdb362f9da86888844f8b148700fa88552124bd3079b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched03.part-002.members.json": {
+      "bytes": 66326,
+      "sha256": "3743e9dfc9550e4a146f760841f6f4df87f3b11017fb9a284bcaa4267f579b8a"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched03.part-002.zip": {
+      "bytes": 37358256,
+      "sha256": "e0eff1fc5a9b320ae800996c8d4fe0c3bc46735308926e5159a05efd46f04879"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched04.part-001.members.json": {
+      "bytes": 53319,
+      "sha256": "45b4785269caea96487e2d39f3fea2e821d597d344e8ef1d85e659b21c75c0fa"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/patched04.part-001.zip": {
+      "bytes": 20159251,
+      "sha256": "1a21456db461ccd28fbd84aa0eb95c580e9cb3bfad9fadb6b404b6848e3b01ad"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot01.part-001.members.json": {
+      "bytes": 1196,
+      "sha256": "5d2ed39114f000683523d011113327209895636e1674350f0229886167dc1db5"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot01.part-001.zip": {
+      "bytes": 137050,
+      "sha256": "b0814151f1ccdd512d20fe20c15cd1fa08c6f5762586d27b61a82642c9af3e4f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot02.part-001.members.json": {
+      "bytes": 1196,
+      "sha256": "0bee731b6b02ae545460890b9b4b88ad44407a88e6b2be90343bc19cfba67949"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot02.part-001.zip": {
+      "bytes": 146817,
+      "sha256": "3a8a17e32041e943f0ffb1cf2fc8c10721ba998277fb4e1ab18c72989ca5cf38"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot03.part-001.members.json": {
+      "bytes": 1196,
+      "sha256": "954bab47d04c7563db5d490eb733db69bac665e672c806846d1888c4cfb140d9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/plot03.part-001.zip": {
+      "bytes": 148495,
+      "sha256": "4118b845bf531f9e1b3b03604434c1132e0abe3935bb45f8acd11513bec1d16c"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/private-drivers-proofs.part-001.members.json": {
+      "bytes": 18221,
+      "sha256": "434f22236ace259f8e2094079f228fb87efff94b7f8c57886188ef37b1007f41"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/private-drivers-proofs.part-001.zip": {
+      "bytes": 4114497,
+      "sha256": "dbdb469a7050a2b848406e9247e4a64c828d9621d187f2bdc3fc38fe6503497b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-001.members.json": {
+      "bytes": 97850,
+      "sha256": "10b0139a4812e52f3ad770d988990e0492314868308d5bac17c4d4976ed440e7"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-001.zip": {
+      "bytes": 64701904,
+      "sha256": "b30fff699605ff60dd222e74c482d5e3d7e3adb862b37044ca21f28db62cdd2b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-002.members.json": {
+      "bytes": 95229,
+      "sha256": "72d0eff2faf2f7e99480c92bfee4405f6e71569f2320282478cc799a443eedd9"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-002.zip": {
+      "bytes": 67890130,
+      "sha256": "791bf0776b408706670d7ec432ac6e309f8ff40bb8dfbc90d9d3702fa779887f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-003.members.json": {
+      "bytes": 42861,
+      "sha256": "9cbaedee9d6e2d97341440e44a593f7f1c8b732c7f5952df118f9dcc27162f98"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-negative01.part-003.zip": {
+      "bytes": 4894617,
+      "sha256": "9e9731752bcaa15fcde586d9102631b37a59960d42fd71e700be654092eba955"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-positive02.part-001.members.json": {
+      "bytes": 1580,
+      "sha256": "25ff9a0d2c430081bf61ea6e09897ead5f5dc4e24c6e5f218c23cfd9b1548850"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/recheck-positive02.part-001.zip": {
+      "bytes": 49867,
+      "sha256": "363b1f3659fd4e75820d7946ab87f52d34c41140d7db0edf4c1cac9ae0a451ea"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/report-draft.part-001.members.json": {
+      "bytes": 40701,
+      "sha256": "4a46d4936fd32ed9007fa359c56f103faecc0c267439155c1b4ee19dec71d47d"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/report-draft.part-001.zip": {
+      "bytes": 1912497,
+      "sha256": "e6c0d549abb49d639ae9b36061b65ccb40e31b18a23585f00a130dd64557301b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-after.json": {
+      "bytes": 1028940,
+      "sha256": "faa109c3e81c30ee2d24e570cce69f45c374a44ad0e93e1c2e5f476743e25637"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-before.json": {
+      "bytes": 2531734,
+      "sha256": "1fde8ca30a7c5f18a1767afdcaf025b9f676d4c300cb1004ebe8160151b4ca25"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-final421.part-001.members.json": {
+      "bytes": 138837,
+      "sha256": "ef3c9442c1bd37ec8281df265206cb5907f6cb01e25feb698845deed2491cc38"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-final421.part-001.zip": {
+      "bytes": 11887480,
+      "sha256": "1e64116518d9fc5beb7b9c3fdcbda6393ed874d197c4fdb8c8e2d1290d2d4457"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-narrow-pre-egress.part-001.members.json": {
+      "bytes": 145783,
+      "sha256": "df5569d331fb307c0b5b818db2a418b8dc7d141472e2ab020765bd9c0ab3dbb7"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/source-narrow-pre-egress.part-001.zip": {
+      "bytes": 11889090,
+      "sha256": "06eaa0ea0db4b4a9aa215665e00029548e76ec90af8b3c920ac545196de6764b"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/stair-regression06.part-001.members.json": {
+      "bytes": 7795,
+      "sha256": "49662fd2dd4e8a38a19eb68f4694acde663f4609005ad09dfa12c2fe621cd2f7"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/artifacts/stair-regression06.part-001.zip": {
+      "bytes": 2139451,
+      "sha256": "a3149c9ede181b7e5ca371dfa27d32b5cdf8fd25f114b4bb3d2bfc4e5ae2a93a"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/comparison.json": {
+      "bytes": 48776,
+      "sha256": "d9b5ac74167d56516f99303dd70cf68a775c50b7fd60d91d60b74e1d731dacd8"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/food-access-replay.png": {
+      "bytes": 164067,
+      "sha256": "61a75e5c803bef803a2869284b31e0a3423ce1c41c0e669d1e9cc99865909feb"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/food-access-replay.svg": {
+      "bytes": 25264,
+      "sha256": "256d1063165236c39b139f3ca727765c3f0eec3642ecc450292f453329d79e82"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/inputs-after.json": {
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/inputs-before.json": {
+      "bytes": 46176,
+      "sha256": "af653534c3037159e70a27b3e6372b2165b710bda0a7a9d22e518ef0283d6e0f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/owned-descendants.json": {
+      "bytes": 137,
+      "sha256": "78639f0c402029f9264945df6512ee8400e9401f23adc154685a491a8ac47fd6"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/owned-process.json": {
+      "bytes": 357,
+      "sha256": "df0717115a864b50e8abed16b08e48abf608bdc0a63d17e7d3cce35eac7d3e02"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/raw.log": {
+      "bytes": 1601,
+      "sha256": "875a0a6b5150d80ca7c918b00bb5eafea4620ad778932773bdbcecba0cbccb72"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/pack01-gate/receipt.json": {
+      "bytes": 859,
+      "sha256": "ee934e619534fff03cbaf33aa7307a7e5e7a924ce8aadc490df8f0ea69260ca8"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/plot-metadata.json": {
+      "bytes": 18219,
+      "sha256": "224db82b356e4eed784cca8a013690bf9dbab9f1467f2b6c978c3a8e43d60603"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/prepare-revision11.py": {
+      "bytes": 10379,
+      "sha256": "f3087875d8b8ab2d24d7a3feaee2619f64fd9525fde6b0520841d44fab34459f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/provenance.json": {
+      "bytes": 298974,
+      "sha256": "7b90a0a4f355175ab51a87626b8608856e98230c72d7ce5f3bc3a37264f9314f"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/run-phase.py": {
+      "bytes": 3933,
+      "sha256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/sale-phase-proofs.json": {
+      "bytes": 290370,
+      "sha256": "359a314c7e50f832cb635ba40f8a238f2406081a92b08deef5e090f547be3d05"
+    },
+    "docs/validation/2026-10-07-city-life-root26-food-access/WHITESPACE-CHECK.json": {
+      "bytes": 627,
+      "sha256": "90d4c1f5d80acdd7cb4a15ae23c5eadcf37e6771284899d3ad2c46ef78bef6e0"
+    }
+  },
+  "whitespaceCheck": {
+    "status": "SOURCE_AND_PROSE_WHITESPACE_PASS_ORIGINAL_GENERATED_SVG_WARNINGS_PRESERVED",
+    "at": "2026-10-07T11:47:24.623186+00:00",
+    "fullCachedDiffCheckExitCode": 2,
+    "fullWarningCount": 108,
+    "allFullWarningsOnlyGeneratedSVGTrailingWhitespace": true,
+    "generatedSVGByteExactToOriginalPlotSHA256": "256d1063165236c39b139f3ca727765c3f0eec3642ecc450292f453329d79e82",
+    "sourceProseJSONCheckExcludingOneOriginalGeneratedSVGExitCode": 0,
+    "fullLogSHA256": "505016fd387bc2b4af169c592dda54a02b366aa4b9700ea6256f07dc4e1a7921",
+    "noProductSourceOrOriginalArtifactModified": true,
+    "notAFullAllFilesWhitespacePass": true
+  }
+}

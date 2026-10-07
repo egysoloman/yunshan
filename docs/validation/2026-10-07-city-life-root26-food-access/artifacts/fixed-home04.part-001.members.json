@@ -1,0 +1,76 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 565590,
+    "file": "fixed-home04.part-001.zip",
+    "sha256": "7a78d37da29978ce3dc0849ac4d77eb2effd3e958efea15c7ac5860e7e5bf61f"
+  },
+  "chunk": 1,
+  "group": "fixed-home04",
+  "memberCount": 10,
+  "members": [
+    {
+      "archiveName": "actual/fixed-home04/reservation-continued24.json",
+      "bytes": 418313,
+      "sha256": "b6fa813114859a0cdd2ac149c21b38d876660c13aac0e2913ec7974e18cd509f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/reservation-continued24.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/reservation-saved.json",
+      "bytes": 413605,
+      "sha256": "44d71ea7984e6641b8e1dcb0e5203f051df1d6ff1fd0fd9af6e2a19702451493",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/reservation-saved.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/selection-after-placement-before-tick.json",
+      "bytes": 405192,
+      "sha256": "e521a0aeef7132ac7d8375c138eff2b3c0c1e2599c47d3dd5e7f47b4855d38e2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/selection-after-placement-before-tick.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/selection-before-placement.json",
+      "bytes": 405115,
+      "sha256": "0d2b558617c0d3746ea716a52b9eefbc7e1dacfada78c0a7e4c63f4c82dd71f4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/selection-before-placement.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/selection-final.json",
+      "bytes": 410617,
+      "sha256": "65568e8f37cfcf657c64b218cf56141f0f668f96d28992840771aa8b4bd73206",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/selection-final.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/standing-after-placement-before-tick.json",
+      "bytes": 405192,
+      "sha256": "a8c8730cea608e3af6c1b9a0c9e620d6563275c8263a1330f5334625fa913f91",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/standing-after-placement-before-tick.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/standing-before-placement.json",
+      "bytes": 405115,
+      "sha256": "2e90f31a73df4d14215aee14cc94b89193eab483360b79c104331720ea514e58",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/standing-before-placement.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/standing-continued24.json",
+      "bytes": 411261,
+      "sha256": "abdbeec07a43904ed09a28e916e4488cfbc2ea86df7e27b81c6a3f276e2d82dc",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/standing-continued24.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/standing-final.json",
+      "bytes": 411261,
+      "sha256": "abdbeec07a43904ed09a28e916e4488cfbc2ea86df7e27b81c6a3f276e2d82dc",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/standing-final.json"
+    },
+    {
+      "archiveName": "actual/fixed-home04/standing-saved.json",
+      "bytes": 410533,
+      "sha256": "f353bfdd127b1c892ffb4e16b8813ed9df547e99ec2d59fd692630e18a352c3a",
+      "source": "/tmp/ROOT26-food-access-20261007-01/fixed-home04/standing-saved.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 4096204,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

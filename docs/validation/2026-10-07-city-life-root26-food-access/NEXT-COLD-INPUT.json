@@ -1,0 +1,44 @@
+{
+  "status": "EXACT_ORIGINAL_TERMINAL_COPY",
+  "sourceFrame": {
+    "label": "ordinary-008",
+    "complete": true,
+    "tick": 2137,
+    "clock": 5608,
+    "save": {
+      "file": "frames/0008-ordinary-008/whole-save.json.gz",
+      "rawBytes": 2992776,
+      "rawSHA256": "bbaa6a7a5e0bfcda107d22e62a820c6aa65336b3e0a48266f00846e2306dad29",
+      "encodedBytes": 452880,
+      "encodedSHA256": "ed526010ed21dd53f87fc7eebdccf10dd5032e41b2f13f4cc7ce2333366e204c"
+    },
+    "bus": {
+      "file": "frames/0008-ordinary-008/all-bus.json.gz",
+      "rawBytes": 215624,
+      "rawSHA256": "967a99784d1732c6b7b7e1b9773b38188a1a9b6c8a512723f6161f7cd0f340d7",
+      "encodedBytes": 13211,
+      "encodedSHA256": "b7026fb52c00100f954560f5bb6a3792e30f18f0dad4f618d340952613140290"
+    },
+    "custody": {
+      "file": "frames/0008-ordinary-008/stable-phase-custody.json.gz",
+      "rawBytes": 7793312,
+      "rawSHA256": "8eff3073ffd905922b1a34553e917f268b79927c59b5e739db9869ffc10e0575",
+      "encodedBytes": 1229919,
+      "encodedSHA256": "69c2312f1fb20cc0ea415ed61ad510fc47136fa18a40bc9c1eeb4c4d9e3a0108"
+    },
+    "foodTrace": {
+      "file": "frames/0008-ordinary-008/food-access-trace.json.gz",
+      "rawBytes": 4472609,
+      "rawSHA256": "d07e383cb0e57dc9fe3260ba49e069d9b89d045c20e03f2aa47277ba9d0485e6",
+      "encodedBytes": 467168,
+      "encodedSHA256": "c79b35a4375af2bb8f01431736f7ab800009935d436a00c2dddf8e201442f37c"
+    }
+  },
+  "rawSHA256": "bbaa6a7a5e0bfcda107d22e62a820c6aa65336b3e0a48266f00846e2306dad29",
+  "encodedSHA256": "ed526010ed21dd53f87fc7eebdccf10dd5032e41b2f13f4cc7ce2333366e204c",
+  "clock": 5608,
+  "tick": 2137,
+  "source": "patched04 final421 8-primary-window run",
+  "notBadCursorFixture": true,
+  "zeroSimulationCalls": true
+}

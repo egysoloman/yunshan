@@ -1,0 +1,13 @@
+
+
+### ROOT26 收窄近端餐实际改善；最终421有限兼容闭门（2026-10-07，checkpoint26后追加closure私稿）
+
+保原checkpoint26全文621373bytes/SHAeb83606ecbb17b8bcd821dc8b9b4ac343a54a13ab5fb530230c3a58aa006a393及其原616779bytes prefix；原时间点RUNNING/NOT_RUN保持历史，不回改。此后新增actual：419 narrow03 5416 ce40原档主40+shadow24闭PASS254.753447s/raw249419cc…759b9，2Sim/import/40reader、0注入、400主phase守恒，末5576/t2129/836e6d9f…af363。原89低群5480恢复旧17/新18、全低72/71；5576旧43/新52、全低47/38；279在narrow03的5432真实saleqty2/cost35.93322820152043，5544真实saleqty1/cost18.127046066437075，旧5480未售；原commerce阶段聚合wallet/food/hunger残差各0。频率仅nearby-food-v1/eat/age>=6/food<1/projectedhunger<30，已到站rider或完整参考折线余程<=原walkingSpeed*25min，非eat/长路沿原频率，未写tier/focus或补钱粮。
+
+最终421新增movement-only voxel egress子守卫，.2m块/.35radius/1.72height/.01foot不变；已重叠身体可水平严格向外离开、全sweep拒新重叠，站立/rest/meal/player和原墙/支撑/床权限/门/道路不改。home04实际28/28PASS(21新pure+7原home)60.956525s/raw1491e1a…ada5f；放块明确synthetic placeSnapshotVoxel受控snapshot，非玩家建造UI。原417两legacy床侧FAIL复现与capture02 FAIL保。安装03错误header加载FAIL2files/0behavioralcase及brokenoriginal保，04只去两错header不改谓词断言。reg05 240.263373s TIMEOUT_PARTIAL/40pass0fail4cancel保；reg06 35/35PASS274.111118s/rawf6214069…46b4，含14动态doorway；真native24tick分块/selector/RPG重建case238.364682s，15坏cursor拒，未配置244旧reader分支NOT_RUN。home28+reg05完成40+reg0635名字无重，共103实际final421通过cases，原261是tests/夹具路径不是cases，字节全部原样，不冒whole8filegate一轮PASS。
+
+421 patched04从03原末836档另cold主8+shadow4闭PASS79.828184s/raw750910cb…e9e，2Sim/import/8reader、0注入、80主phase守恒，5576→5608/t2137/末bbaa6a7a5e0bfcda107d22e62a820c6aa65336b3e0a48266f00846e2306dad29；shadow4全档exact/129parts真重建拒缺。419原40+421新8是两源48，不升级成421主40/fresh同源48或原80续。最终421 pure recheck-positive02实际PASS62.253600s/rawf544d9a…e1df：旧80/800phase/850双SHA、已拒宽40/400/343、窄两段48/480/516独立原完整save/feedback/custody/BUS真实sale writer/parts/shadow重核，0Sim/import/step/nativeReader。两段末58/89真实sale恢复，31仍低/全低32，238counter18stored；pure工具不是gameplay repair。最终build01 actualPASS22.328996s/raw291f37372fe2bd57e9a6315fac1b651c2f934e616eec3287d327e84ba0e75e1d，同final421完整图稳定，不能代新浏览器/Mac/14日。
+
+主41940 earned262.77067088031504/paid0，food1.0743647328613164/material2.1510779069859334；最终421另8 earned73.8405644012972/paid0、生产food/mat0。未跨6780payroll。原宽4185576恢复34对旧43/全低56对47，拒作最终游戏修复；宽future24只绑宽源，旧宽前16复现不新加canonical。20 narrowtests02 helperSHA与03不同单独范围；3tamper实际419回归PASS未冒final421重跑。原80/115低群与六零饱足零携粮/210夜闭/153有sale无后stored继续原实情；有限供给分配/夜间服务、原缺phaseFAIL、完整家族能源等38域、ART_FAIL/MacNOT_RUN/14日稳态仍未闭。Library/Git仅以后根实际回执另追加，不预写送达。
+
+最新私稿revision-11-corrected-narrow-sale-final；revision10全原件保留，其narrow279成交串用broad数量金额的文稿错误由实际comparison SHA d9b5ac74167d56516f99303dd70cf68a775c50b7fd60d91d60b74e1d731dacd8校正（不是源码或run修改）。计划同目录canonical REPORT.md/REQUIREMENTS-38.csv；全前稿/FAIL保字节，旧47headers/1786cells/38ID次序exact，全38PARTIAL，作者0Sim/step/tests/build/browser/GPU/共享src或memo写/ZIP/上传。

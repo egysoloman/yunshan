@@ -1,0 +1,34 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 148495,
+    "file": "plot03.part-001.zip",
+    "sha256": "4118b845bf531f9e1b3b03604434c1132e0abe3935bb45f8acd11513bec1d16c"
+  },
+  "chunk": 1,
+  "group": "plot03",
+  "memberCount": 3,
+  "members": [
+    {
+      "archiveName": "actual/plot03/food-access-replay.png",
+      "bytes": 164067,
+      "sha256": "61a75e5c803bef803a2869284b31e0a3423ce1c41c0e669d1e9cc99865909feb",
+      "source": "/tmp/ROOT26-food-access-20261007-01/plot03/food-access-replay.png"
+    },
+    {
+      "archiveName": "actual/plot03/food-access-replay.svg",
+      "bytes": 25264,
+      "sha256": "256d1063165236c39b139f3ca727765c3f0eec3642ecc450292f453329d79e82",
+      "source": "/tmp/ROOT26-food-access-20261007-01/plot03/food-access-replay.svg"
+    },
+    {
+      "archiveName": "actual/plot03/metadata.json",
+      "bytes": 18219,
+      "sha256": "224db82b356e4eed784cca8a013690bf9dbab9f1467f2b6c978c3a8e43d60603",
+      "source": "/tmp/ROOT26-food-access-20261007-01/plot03/metadata.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 207550,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

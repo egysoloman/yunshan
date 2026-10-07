@@ -1,0 +1,126 @@
+{
+  "status": "PURE_FOUR_SEALED_WHOLE_SAVE_READBACK_MATCHES_PARENT_COUNTERFACTUAL",
+  "constructors": 0,
+  "imports": 0,
+  "steps": 0,
+  "inputCheckpointSHA256": "ce40c74205c1126519e08c5d49e32d18f22cc4acf410d07f1fa4e709ff0337b8",
+  "initialLow89": 89,
+  "decodedOriginalWholeSaves": 4,
+  "dualSHAOriginals": {
+    "/tmp/ROOT26-food-access-20261007-01/native02/frames/0019-ordinary-019/whole-save.json.gz": {
+      "encodedSHA256": "729bece4292bcf58a4da033beb42ccb6ed8f56b1c8b6be0ded10be1bfde970e2",
+      "rawSHA256": "16bff75987ba9c8abadc894e496130ad5dab1cc01e8fe4c63279fa37d55569ef",
+      "encodedBytes": 444921,
+      "rawBytes": 3015350
+    },
+    "/tmp/ROOT26-food-access-20261007-01/native03/frames/0011-ordinary-011/whole-save.json.gz": {
+      "encodedSHA256": "d3601c3f2a20b2aeaddd621dad5b0c0419c46cda3bbab1fcfcf4a3123eec4318",
+      "rawSHA256": "e27682cec717ea0a8c37e64946d8090ea4b0f0ceed417173388fe556143e6eb4",
+      "encodedBytes": 453602,
+      "rawBytes": 2996779
+    },
+    "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/whole-save.json.gz": {
+      "encodedSHA256": "3bd4efb6a72e6d82ee5fd6d21978098558691c21215699ea83f0e6fdfa3f890b",
+      "rawSHA256": "ecbd4ef3588c23996b5d217301126a3a9d40a7c7d8899046135a76fbb1dd34f7",
+      "encodedBytes": 447761,
+      "rawBytes": 3039815
+    },
+    "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0040-ordinary-040/whole-save.json.gz": {
+      "encodedSHA256": "caf251f13d2c8b1963b6191c2f8ebb63b9a8b608a436d15ddfcec151d7d9e1b2",
+      "rawSHA256": "836e6d9f99f226ce91a62784e0774203374c8fc2f3b59f31233dad92066af363",
+      "encodedBytes": 451593,
+      "rawBytes": 2989023
+    }
+  },
+  "rows": {
+    "native02@5480": {
+      "clock": 5480,
+      "initialLow89": 89,
+      "cohortRecovered": 17,
+      "allCityLow": 72,
+      "279": {
+        "state": "moving",
+        "hunger": 11.699999999999772,
+        "food": 0,
+        "money": 398.3528692532619,
+        "destinationId": "west-b54",
+        "position": {
+          "x": -1095.9294436581124,
+          "y": 279.08466761026506,
+          "z": -670.7123479591088
+        }
+      },
+      "wholeRawSHA256": "16bff75987ba9c8abadc894e496130ad5dab1cc01e8fe4c63279fa37d55569ef",
+      "wholeRawBytes": 3015350,
+      "wholeEncodedSHA256": "729bece4292bcf58a4da033beb42ccb6ed8f56b1c8b6be0ded10be1bfde970e2",
+      "frameFile": "/tmp/ROOT26-food-access-20261007-01/native02/frames/0019-ordinary-019/whole-save.json.gz"
+    },
+    "native03@5576": {
+      "clock": 5576,
+      "initialLow89": 89,
+      "cohortRecovered": 43,
+      "allCityLow": 47,
+      "279": {
+        "state": "moving",
+        "hunger": 8.499999999999773,
+        "food": 0,
+        "money": 398.3528692532619,
+        "destinationId": "west-b41",
+        "position": {
+          "x": -1174.6561227191632,
+          "y": 285.4658779378228,
+          "z": -528
+        }
+      },
+      "wholeRawSHA256": "e27682cec717ea0a8c37e64946d8090ea4b0f0ceed417173388fe556143e6eb4",
+      "wholeRawBytes": 2996779,
+      "wholeEncodedSHA256": "d3601c3f2a20b2aeaddd621dad5b0c0419c46cda3bbab1fcfcf4a3123eec4318",
+      "frameFile": "/tmp/ROOT26-food-access-20261007-01/native03/frames/0011-ordinary-011/whole-save.json.gz"
+    },
+    "patched03@5480": {
+      "clock": 5480,
+      "initialLow89": 89,
+      "cohortRecovered": 18,
+      "allCityLow": 71,
+      "279": {
+        "state": "moving",
+        "hunger": 63.69999999999978,
+        "food": 1,
+        "money": 362.41964105174145,
+        "destinationId": "west-b54",
+        "position": {
+          "x": -1072,
+          "y": 271.63149540297553,
+          "z": -562.5249233829253
+        }
+      },
+      "wholeRawSHA256": "ecbd4ef3588c23996b5d217301126a3a9d40a7c7d8899046135a76fbb1dd34f7",
+      "wholeRawBytes": 3039815,
+      "wholeEncodedSHA256": "3bd4efb6a72e6d82ee5fd6d21978098558691c21215699ea83f0e6fdfa3f890b",
+      "frameFile": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0016-ordinary-016/whole-save.json.gz"
+    },
+    "patched03@5576": {
+      "clock": 5576,
+      "initialLow89": 89,
+      "cohortRecovered": 52,
+      "allCityLow": 38,
+      "279": {
+        "state": "shopping",
+        "hunger": 100,
+        "food": 1,
+        "money": 344.2925949853044,
+        "destinationId": "west-b41",
+        "position": {
+          "x": -1219,
+          "y": 292.6,
+          "z": -548.4
+        }
+      },
+      "wholeRawSHA256": "836e6d9f99f226ce91a62784e0774203374c8fc2f3b59f31233dad92066af363",
+      "wholeRawBytes": 2989023,
+      "wholeEncodedSHA256": "caf251f13d2c8b1963b6191c2f8ebb63b9a8b608a436d15ddfcec151d7d9e1b2",
+      "frameFile": "/tmp/ROOT26-food-access-20261007-01/patched03/frames/0040-ordinary-040/whole-save.json.gz"
+    }
+  },
+  "scope": "No new Sim, decision or original bus replay. Full original same-clock actor/needs statistics; does not assert every recovered ID sale writer unless separately observed."
+}

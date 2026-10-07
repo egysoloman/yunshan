@@ -1,0 +1,40 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 183527,
+    "file": "compare-originals01.part-001.zip",
+    "sha256": "0e435ab26cdf3cea62c5166db65df6a9b192ec963a8acdb9c39de8814c9dabab"
+  },
+  "chunk": 1,
+  "group": "compare-originals01",
+  "memberCount": 4,
+  "members": [
+    {
+      "archiveName": "actual/compare-originals01/279-trajectories.json",
+      "bytes": 2233496,
+      "sha256": "09a1c1dc6bcdd52aab8b79ac206497315e57bc11e428d52599525f946bb2a945",
+      "source": "/tmp/ROOT26-food-access-20261007-01/compare-originals01/279-trajectories.json"
+    },
+    {
+      "archiveName": "actual/compare-originals01/comparison.json",
+      "bytes": 48776,
+      "sha256": "d9b5ac74167d56516f99303dd70cf68a775c50b7fd60d91d60b74e1d731dacd8",
+      "source": "/tmp/ROOT26-food-access-20261007-01/compare-originals01/comparison.json"
+    },
+    {
+      "archiveName": "actual/compare-originals01/provenance.json",
+      "bytes": 298974,
+      "sha256": "7b90a0a4f355175ab51a87626b8608856e98230c72d7ce5f3bc3a37264f9314f",
+      "source": "/tmp/ROOT26-food-access-20261007-01/compare-originals01/provenance.json"
+    },
+    {
+      "archiveName": "actual/compare-originals01/sale-phase-proofs.json",
+      "bytes": 290370,
+      "sha256": "359a314c7e50f832cb635ba40f8a238f2406081a92b08deef5e090f547be3d05",
+      "source": "/tmp/ROOT26-food-access-20261007-01/compare-originals01/sale-phase-proofs.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 2871616,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}

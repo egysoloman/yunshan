@@ -1,0 +1,32 @@
+{
+  "status": "PURE_IO_CROSS_REVIEW_CONFIRMED",
+  "at": "2026-10-07T11:34:24.805984+00:00",
+  "reviewer": "/root/architecture_review",
+  "method": "Read only the comparison and sale-phase-proofs JSON; no new gzip re-audit or Sim/Node execution.",
+  "comparisonSHA256": "d9b5ac74167d56516f99303dd70cf68a775c50b7fd60d91d60b74e1d731dacd8",
+  "salePhaseProofsSHA256": "359a314c7e50f832cb635ba40f8a238f2406081a92b08deef5e090f547be3d05",
+  "narrow03Citizen279": [
+    {
+      "clock": 5432,
+      "tick": 2093,
+      "quantity": 2,
+      "amount": 35.93322820152043,
+      "busRawSHA256": "82e58bc837380b58aec6fba70a08f1f8d8f5d8dc5d9ec651acec632afbdd52f4",
+      "custodyRawSHA256": "9d08224afed39d1d9ad82456fa1c503cadb1ed124cf6d232dbd2d7e7efe16d86"
+    },
+    {
+      "clock": 5544,
+      "tick": 2121,
+      "quantity": 1,
+      "amount": 18.127046066437075,
+      "busRawSHA256": "144dac5e0fcee95389c3e7db3d5169ba131108a7062fbd0b964617ec6ad72e4c",
+      "custodyRawSHA256": "e3805221390c529a9e81a034bd6b2d3a88bfb76d2ab582040f29a94c45c4ea96"
+    }
+  ],
+  "phaseScope": "172 groups by scenario root+clock+phase+actor aggregate original before/after match, not172 independent per-event body captures and not new test/runtime count.",
+  "matched": 172,
+  "missing": 0,
+  "mismatch": 0,
+  "sharedWrites": 0,
+  "runtimeCalls": 0
+}

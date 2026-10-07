@@ -10,7 +10,7 @@ import { createCivicHistory, freezeCivicHistory } from './simulation/civic-histo
 import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } from './simulation/reference-collision';
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { foodRetailDeliveryOffers, RoadFoodDeliveryRouter, ROAD_FOOD_DELIVERY_POLICY, type FoodDeliveryAccounts, type FreightDeliveryPolicy } from './simulation/freight-delivery';
-import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
+import { chooseNearestTiedMeal, mealNeedsContinuousPeople, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
@@ -39,6 +39,7 @@ import { installBanking } from './simulation/banking';
 import { installJourneys } from './simulation/journeys';
 import { installTrade, supplyConsignment, settleConsignmentSale, quoteConsignmentSale, tradeSignals, quoteSupply, recordOwnedStockPurchase } from './simulation/trade';
 import { installPlayerLabor, type PlayerLaborEmployer, type PlayerLaborJob } from './simulation/player-labor';
+import { blocksVoxelMovement } from './simulation/voxel-movement';
 import { homeRestBedOccupied, homeRestPointAt, homeRestPointBlockedByVoxels, homeRestPoints, installHomeRest } from './simulation/home-rest';
 import { validatePublicDisinfectionBudgetCrossReferences } from './simulation/hygiene-public';
 import { installHygiene, hygieneNeedsContinuousPeople } from './simulation/hygiene';
@@ -1732,7 +1733,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     if (this.runtime.npcMotionVersion === 2) this.runtime.npcStairCursors = this.savedNpcStairCursors();
   }
   private citizenPhysicalSegmentAllowed(citizen: Citizen, from: Vec3, to: Vec3, building?: Building, floor?: number): boolean {
-    if (homeRestPointBlockedByVoxels(to, this.state.voxels)) return false;
+    if (blocksVoxelMovement(from, to, this.state.voxels)) return false;
     if (building && floor !== undefined) {
       const role = this.citizenIdentity(citizen);
       const identity = { role, identities: [role] };
@@ -1830,15 +1831,18 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     const researchActors = researchTaskActorIds(this.state), powerActors = new Set([...powerTaskActorIds(this.state), ...hydroMaintenanceTaskActorIds(this.state)]), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
     for (let i = 0; i < this.state.citizens.length; i++) {
       const citizen = this.state.citizens[i];
-      // At most seven persisted new research jobs request fine task processing.
-      // Preserve tier, ordinary actors' frequency, pending needs and real wages.
+      // A critical meal's final approach, like ongoing service tasks, receives
+      // ordinary fine processing. Keep the tier and every accrued minute; a
+      // timely counter visit never changes walking speed or grants food.
       const researchTask = researchActors.has(citizen.id), roadTask = this.state.roadworks ? roadworkTask(this, citizen.id) : null;
-      const frequency = researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || residentEducationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
+      const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
+      const urgentMeal = mealNeedsContinuousPeople(this.runtime.mealRoutePolicyId, citizen, elapsed, this.state.extension?.actorProfiles[citizen.id]?.age ?? 20,
+        this.runtime.activities[citizen.id], this.runtime.riders[citizen.id]?.arrived === true, this.state.weather === '雨' ? 3.1 : 4.2);
+      const frequency = urgentMeal || researchTask || !!roadTask || powerActors.has(citizen.id) || clinicalActors.has(citizen.id) || familyLearners.has(citizen.id) || residentEducationNeedsContinuousPeople(this.state, citizen) || hygieneNeedsContinuousPeople(this.state, citizen) || educationNeedsContinuousPeople(this.state, citizen) || civicStaffingNeedsContinuousPeople(this.state, citizen) ? 1 : citizen.tier === 'active' ? 1 : citizen.tier === 'regional' ? 4 : 16;
       if (this.state.extension?.actorProfiles[citizen.id]?.alive === false) { delete pendingMinutes[citizen.id]; citizen.state = 'dead'; citizen.destinationId = null; citizen.route = []; citizen.routeIndex = 0; const ride = this.runtime.riders[citizen.id]; if (ride) { const vehicle = this.state.vehicles.find(v => v.id === ride.vehicleId); if (vehicle && !ride.arrived) vehicle.passengers = Math.max(0, vehicle.passengers - 1); delete this.runtime.riders[citizen.id]; } continue; }
       // Accumulate actual ticks while a tier defers this actor. Multiplying by
       // the actor's current tier would lose or duplicate time after a tier or
       // speed change, and would credit time before a new actor existed.
-      const elapsed = (pendingMinutes[citizen.id] ?? 0) + this.minutes;
       if ((this.state.tick + i) % frequency) { pendingMinutes[citizen.id] = elapsed; continue; }
       delete pendingMinutes[citizen.id];
       citizen.needs.hunger = clamp(citizen.needs.hunger - elapsed * .05);

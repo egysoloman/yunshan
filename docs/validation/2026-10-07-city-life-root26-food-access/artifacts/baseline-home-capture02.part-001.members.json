@@ -1,0 +1,34 @@
+{
+  "allChunksRequired": true,
+  "archive": {
+    "bytes": 168882,
+    "file": "baseline-home-capture02.part-001.zip",
+    "sha256": "625ee83806e042eebe5753feebd88a5af2b0959f7b6146b1e9a607beba16ad96"
+  },
+  "chunk": 1,
+  "group": "baseline-home-capture02",
+  "memberCount": 3,
+  "members": [
+    {
+      "archiveName": "actual/baseline-home-capture02/selection-after-placement-before-tick.json",
+      "bytes": 405192,
+      "sha256": "e521a0aeef7132ac7d8375c138eff2b3c0c1e2599c47d3dd5e7f47b4855d38e2",
+      "source": "/tmp/ROOT26-food-access-20261007-01/baseline-home-capture02/selection-after-placement-before-tick.json"
+    },
+    {
+      "archiveName": "actual/baseline-home-capture02/selection-before-placement.json",
+      "bytes": 405115,
+      "sha256": "0d2b558617c0d3746ea716a52b9eefbc7e1dacfada78c0a7e4c63f4c82dd71f4",
+      "source": "/tmp/ROOT26-food-access-20261007-01/baseline-home-capture02/selection-before-placement.json"
+    },
+    {
+      "archiveName": "actual/baseline-home-capture02/selection-final.json",
+      "bytes": 410613,
+      "sha256": "d349e18ea04aa4797f5215e450343fa6f0ca837acaf8513755416ed5b889b150",
+      "source": "/tmp/ROOT26-food-access-20261007-01/baseline-home-capture02/selection-final.json"
+    }
+  ],
+  "schema": "root26-evidence-pack-v1",
+  "uncompressedBytes": 1220920,
+  "verification": "Every decompressed member matches original byte count and SHA-256."
+}
