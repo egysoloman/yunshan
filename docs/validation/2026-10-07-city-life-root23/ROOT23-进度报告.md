@@ -52,7 +52,7 @@ actual120个原生分片独立落盘、读回SHA、assemble全字节等checkpoin
 
 本目录保存报告、数据图/CSV、终态World与完整save、源码及构建ZIP、所有成功/失败原件ZIP、功能SHA、实际检查回执和HANDOFF；ZIP每成员完整读回核SHA，不删失败、原水账、车、店或事件。包在提交收尾前封存，最终Git提交/推送结果以实际readback为准。
 
-Library先前14项上传在prepare之前连接错误失败，0新LibraryID、memo替换未发生；本阶段新原件尚未送达，没有对同一已开始批次直接fallback或自动retry。当前技能规则和原错误位置见[LIBRARY-DELIVERY-STATUS.json](LIBRARY-DELIVERY-STATUS.json)。GitHub开发分支提交与Library附件是两项真实状态，不能互相冒充。
+Library先前ROOT22的14项批次失败仍保留。ROOT23收尾再次只读核实原memo身份/version7，刷新当前三个helper；本阶段15项完整有序**首次**上传exit1/stdout0，同样在prepare之前连接错误失败，0新LibraryID、memo未替换，附件未送达。没有重试ROOT22旧批次、自动retry或direct fallback。状态和原错误SHA见[LIBRARY-DELIVERY-STATUS.json](LIBRARY-DELIVERY-STATUS.json)。代码/原件已正常推送并读回实现commit `f0f17f14f9a3c866c2974d0b33e790f30cc6e5eb`，main保持70447c1；此Library/Git收尾记录为其后文档提交，封存ZIP不重写。GitHub交付与Library附件是两项真实状态。
 
 下一步从原World291+4610主档按公开speed16普通360步到次日17:00，核现金别名/所有escrow、财政、原工资债、真实出勤和完整食品保管。ROOT24只读方案为NOT_RUN/RESOURCE_PROOF_PENDING：须先编制新续档adapter并明确失败原件和事件的容量边界。旧14日现金下降65.14%属于旧源码，不能代证当前仍同故障或当前已稳态。
 

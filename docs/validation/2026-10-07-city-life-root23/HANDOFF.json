@@ -1,5 +1,5 @@
 {
-  "stage": "ROOT23_LOCAL_CHECKS_COMPLETE_ARCHIVE_AND_COMMIT_PENDING",
+  "stage": "ROOT23_IMPLEMENTATION_VERIFIED_PUSHED_LIBRARY_WRITE_BLOCKED",
   "branch": "takeover-city-life",
   "baselineHEAD": "300429bf38bb10c8c18c461b380861b968eab7a5",
   "lastReadMain": "70447c199e9587e379c9620a25591967e9078ee7",
@@ -20,5 +20,11 @@
     "fullSaveSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
   },
   "libraryNewIDs": 0,
-  "publication": "Normal developer-branch commit/push uses user authorization; no PR/main merge/deploy/force/credentials/security sharing changes."
+  "publication": "Normal developer-branch commit/push uses user authorization; no PR/main merge/deploy/force/credentials/security sharing changes.",
+  "implementationCommit": "f0f17f14f9a3c866c2974d0b33e790f30cc6e5eb",
+  "implementationRemoteReadbackExact": true,
+  "root23LibraryFirstBatchItems": 15,
+  "root23LibraryOutcome": "FAIL_BEFORE_PREPARE_0_NEW_IDS",
+  "finalDocumentationClose": "PENDING_NORMAL_DOC_COMMIT",
+  "nextHeavyGate": "ROOT24_NEW_RESUME_ADAPTER_AND_ORIGINAL_EVENT_FRONTIER_RESOURCE_BOUNDARY_REQUIRED"
 }

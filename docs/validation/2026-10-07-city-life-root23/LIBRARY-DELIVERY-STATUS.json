@@ -1,9 +1,9 @@
 {
-  "status": "NOT_DELIVERED_KNOWN_LIBRARY_WRITE_PATH_FAILURE",
+  "status": "ROOT23_FIRST_ORDERED_UPLOAD_FAILED_BEFORE_PREPARE",
   "newLibraryIDs": [],
   "newLibraryIDCount": 0,
   "memoReplacementConfirmed": false,
-  "root23UploadAttempted": false,
+  "root23UploadAttempted": true,
   "previousRoot22SingleOrderedBatchItems": 14,
   "previousExitCode": 1,
   "previousStdoutBytes": 0,
@@ -18,5 +18,14 @@
   "reference": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/references/prepared-uploads.md",
   "instruction": "Never switch a started helper write to a direct action.",
   "originalsPreservedHere": true,
-  "githubNormalDeveloperBranchCommit": "SEPARATE_PENDING_AT_DOCUMENT_SEAL"
+  "githubNormalDeveloperBranchCommit": "f0f17f14f9a3c866c2974d0b33e790f30cc6e5eb_PUSHED_AND_READBACK_CLEAN",
+  "root23FirstOrderedBatchItems": 15,
+  "root23ExitCode": 1,
+  "root23StdoutBytes": 0,
+  "root23ErrorBytes": 70,
+  "root23ErrorSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "root23NewLibraryIDCount": 0,
+  "root23MemoReplacementConfirmed": false,
+  "previousRoot22BatchRetried": false,
+  "finalDocumentationClose": "PENDING_NORMAL_DOC_COMMIT"
 }
