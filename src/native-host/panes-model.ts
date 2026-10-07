@@ -11,6 +11,11 @@ import type { BuildingKind, Company, SimState, Vec3, WorldDefinition } from '../
 import { researchPlayerContextReason, researchProgressInfo } from '../simulation/extensions';
 import { shopLifecycleMayIncorporate } from '../simulation/shop_lifecycle';
 import { powerBinding } from '../simulation/power';
+import { isRoadOpen, roadClosure } from '../roads';
+import { roadworksStatus, roadworkActorId } from '../simulation/roadworks';
+import { civicCouncilSourceProof } from '../simulation/civic-staffing';
+import { electionCounts, governanceSupported } from '../simulation/governance';
+import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from '../simulation/family';
 
 export interface PaneRow { label: string; value: string }
 export interface PaneEntry { id: string; title: string; subtitle: string; detail?: string[]; actions: ContextAction[] }
@@ -84,6 +89,9 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
     section('城区', { entries: state.districts.map(d => ({ id: d.id, title: world.districts.find(def => def.id === d.id)?.name ?? d.id, subtitle: `治安 ${Math.round(d.safety)} · 繁荣 ${Math.round(d.prosperity)} · 居民 ${rounded(d.residents)} · ${d.tier === 'active' ? '活跃' : d.tier === 'regional' ? '区域' : '统计'}`, actions: [] })) }),
     section('未结案件', { entries: crimes.map(crime => ({ id: crime.id, title: `${world.districts.find(d => d.id === crime.districtId)?.name ?? '城区'} · ${crime.status === 'responding' ? '警力响应中' : '待处置'}`, subtitle: `距离 ${rounded(spatial(position, crime.position))} 米`,
       actions: [button('协助处置', 'resolveCrime', crime.id, undefined, !rules.canAct() || !rules.hasRole('police', 'soldier') || spatial(position, crime.position) > 40)] })), notes: crimes.length ? [] : ['目前没有未结案件。'] }),
+    governanceSection(world, state),
+    ...councilSections(world, state),
+    roadSection(rules, world, state),
     powerSection(rules, world, state),
     ...publicSections(rules, state),
   ];
@@ -105,6 +113,13 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
     ...DESTINATION_KINDS.map(kind => section(`附近${kindNames[kind]}`, { entries: world.buildings.filter(b => b.kind === kind).sort((a, b) => spatial(position, a.door) - spatial(position, b.door)).slice(0, 8)
       .map(b => ({ id: b.id, title: b.name, subtitle: `${Math.round(spatial(position, b.door))} m`, actions: travel(b.id) })) })),
     section(`班次 · ${world.nodes.find(n => n.id === stop)?.name ?? '最近站点'}`, { rows: departures.map(d => ({ label: `${modeNames[d.mode]} · ${d.vehicleId}`, value: `${d.from.name} → ${d.to.name} · ${d.reason ?? (d.departed ? `${activity(d.state)} · 预计到站 ${d.arrivalAt === null ? '待确认' : timetable(d.arrivalAt)}` : `发车 ${d.departureAt === null ? '待确认' : timetable(d.departureAt)} · ${d.passengers} 人`)}` })), notes: departures.length ? [] : ['当前停靠点没有可确认的载具班次，请查看其他站点。'] }),
+    rideSection(rules, world, state),
+    section('路口调度', { actions: [
+      { label: '调度附近路口', command: { type: 'signal', value: 1, position: { ...position } }, disabled: rules.view.mode !== 'walk' || !rules.hasRole('police', 'mayor') },
+      { label: '恢复自动调度', command: { type: 'signal', value: 2, position: { ...position } }, disabled: rules.view.mode !== 'walk' || !rules.hasRole('police', 'mayor') }],
+      notes: ['警察与市长可调整附近路口，交通流会响应。'] }),
+    section('航空器与停机位', { entries: (state.aviation?.aircraft ?? []).map(craft => { const context = rules.aircraft(craft); return { id: craft.id, title: context.title, subtitle: context.subtitle, detail: context.notes, actions: context.actions.filter(a => !a.client) }; }),
+      notes: state.aviation?.aircraft.length ? ['登机、起降与返航需在停机位附近；飞行中按 V 返航。'] : ['当前城市没有登记的航空器。'] }),
   ];
 
   // Relations
@@ -123,6 +138,7 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
       button('捐助 · 50 云币', 'donate', o.id, 50, !rules.atKind('school', 'clinic', 'hall', 'core') || player.money < 50),
       button('参加节庆 · 20', 'attendFestival', o.id, undefined, !rules.atKind('market', 'pavilion', 'hall') || player.money < 20)] })),
       notes: ['书院、亭子或官署可入会；节庆在市集、亭子与官署举行。社区捐助支持公共福利与居民健康。'] }),
+    familySection(rules, world, state),
   ];
 
   return { panes: [{ id: 'life', title: '生活', sections: life }, { id: 'city', title: '城市', sections: city }, { id: 'industry', title: '百业', sections: industrySections(rules, world, state) }, { id: 'transit', title: '交通', sections: transit }, { id: 'relations', title: '人脉', sections: relationsPane }] };
@@ -251,4 +267,129 @@ function industrySections(rules: ContextRules, world: WorldDefinition, state: Si
         actions: [100, 200, 500, 1000].map(budget => button(`研究 · ${budget}`, 'research', technology.sector, budget, blocked || state.player.money < budget)) };
     }), notes: ['持科研身份、教育 3 级以上，在书院、天枢或数据中心的工作点进行 120 分钟现场研究；能源科技也可在水能设施研究。'] }),
   ];
+}
+
+/** ui.ts renderGovernance: elections, the mayoral term and recent council motions. */
+function governanceSection(world: WorldDefinition, state: SimState): PaneSection {
+  if (!governanceSupported(world)) return section('选举与议案', { notes: ['当前城市沿原选举与政策规则运行。'] });
+  const government = state.governance;
+  if (!government) return section('选举与议案', { notes: ['在议事功能点登记参选，居民通过市政网络独立投票；议案须由真实议员表决。'] });
+  const rows: PaneRow[] = [], at = state.extension!.lastUpdate, election = government.elections.at(-1), term = government.term;
+  if (election) {
+    const counts = electionCounts(election);
+    rows.push({ label: '具名居民投票', value: `支持 ${counts.candidate} · 保留现治理 ${counts.retain}` }, { label: '投票人数', value: `${counts.turnout} / ${counts.eligible}` },
+      { label: '选举状态', value: election.countedAt === null ? `计票尚余 ${Math.max(0, election.closesAt - at).toFixed(1)} 分钟` : election.result === 'elected' ? '已当选' : election.result === 'noQuorum' ? '未达到投票人数' : '未当选' });
+  }
+  if (term) rows.push({ label: '市长任期', value: term.endedAt === null ? `尚余 ${Math.max(0, term.endsAt - at).toFixed(0)} 分钟` : '已结束' });
+  const statuses: Record<string, string> = { debating: '等候在岗议员独立表决', approved: '已批准，等候生效', applied: '已生效', rejected: '未通过' };
+  for (const motion of government.motions.slice(-3).reverse()) {
+    const yes = motion.ballots.filter(v => v.yes).length;
+    rows.push({ label: `政策议案 ${motion.id}`, value: `税率 ${Math.round(motion.taxRate * 100)}% · 治安 ${Math.round(motion.policeBudget * 100)}% · ${yes} 赞成 / ${motion.ballots.length - yes} 反对 · 需 ${motion.quorum} 赞成 · ${statuses[motion.status] ?? motion.status}` });
+  }
+  return section('选举与议案', { rows });
+}
+
+/** ui.ts renderCivicCouncil: serving local councillors and open by-elections. */
+function councilSections(world: WorldDefinition, state: SimState): PaneSection[] {
+  const civic = state.civicStaffing; if (!civic) return [];
+  const at = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60;
+  const live = civic.terms.flatMap(term => { const source = civicCouncilSourceProof(state, term.actorId, at); return source?.termId === term.id ? [{ term, source }] : []; });
+  const rows: PaneRow[] = live.map(({ term, source }) => ({ label: state.citizens.find(p => p.id === term.actorId)?.name ?? '居民',
+    value: `${world.buildings.find(site => site.id === term.officeId)?.name ?? '公共议事厅'} · 议员任期尚余 ${Math.max(0, (source.endsAt - at) / 1440).toFixed(1)} 天` }));
+  for (const poll of civic.polls.filter(poll => poll.countedAt === null).slice(-3)) {
+    const votes = poll.ballots.filter(ballot => ballot.completedAt !== null);
+    rows.push({ label: `${state.citizens.find(p => p.id === poll.candidateId)?.name ?? '居民'}的补选`, value: `${votes.length} / ${poll.eligible.length} 人已投票 · 尚余 ${Math.max(0, (poll.closesAt - at) / 60).toFixed(1)} 小时` });
+  }
+  return [section('居民补选与地方议会', { rows, notes: [...(live.length ? [] : ['尚无在任地方议员。']), '公务员完成现场工作后，可到公共议事厅登记；居民在两天内现场投票。当选任期十四天，可参与公共服务追加预算联审。'] })];
+}
+
+/** ui.ts roadContent: flood closures, residents' blocked trips and the real repair contracts. */
+function roadSection(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection {
+  const closed = world.edges.filter(edge => !isRoadOpen(state, edge.id));
+  const stages: Record<string, string> = { unbought: '等待实际采购', carried: '居民携料在途', delivered: '已送到工地', consumed: '已用于修复', retained: '保留实际材料资产' };
+  const entries: PaneEntry[] = [];
+  for (const edge of closed) {
+    const closure = roadClosure(state, edge.id); if (!closure) continue;
+    const from = world.nodes.find(node => node.id === edge.from), to = world.nodes.find(node => node.id === edge.to), detail: string[] = ['山洪关闭：新来者须改道；已在路段内的人车沿许可出口离开。'];
+    const demands = state.roadDemands?.demands.filter(demand => demand.closureId === closure.id) ?? [];
+    if (demands.length) detail.push(`居民提出的维修需求：${demands.length} 位居民的真实行程受阻`);
+    for (const demand of demands.slice(-3)) {
+      const linked = state.roadworks?.jobs.find(job => job.id === demand.repairId);
+      const progress = !linked ? '已记录需求，等候可承接的维修订单' : linked.cancelledAt !== null ? '原公共维修订单已取消，受阻记录保留' : linked.approvedAt === null ? '已交公共维修订单，等待实际审批' : '公共维修订单已获批，等待实际搬料与施工';
+      detail.push(`${state.citizens.find(c => c.id === demand.actorId)?.name ?? demand.actorId}：前往${world.buildings.find(b => b.id === demand.goalId)?.name ?? demand.goalId}的原行程受阻，${progress}。`);
+    }
+    const status = roadworksStatus(state, edge.id), job = status.job, actions: ContextAction[] = [];
+    if (job) {
+      if (job.replacement) detail.push(`原施工者（保留合同历史）：${state.citizens.find(c => c.id === job.workerId)?.name ?? job.workerId ?? '尚未签约'} · 接续 ${job.replacement.contracts.length} 任 / ${job.replacement.pickups.length} 次实际领回`);
+      detail.push(`具名施工者：${state.citizens.find(c => c.id === roadworkActorId(job))?.name ?? '等候居民自愿承接'}`, `有效现场施工 ${job.workedMinutes.toFixed(1)} / ${job.requiredMinutes} 分钟 · 材料 ${stages[status.materialStage] ?? '等待履约'} · 未赚托管款 ${job.escrow.toFixed(2)} 云币`, job.reason);
+      if (job.payerId === 'public' && job.completedAt === null && job.cancelledAt === null) actions.push(button('市长现场审批施工预算', 'approveRoadRepair', job.id, 40, !rules.canAct() || !rules.hasRole('mayor')));
+      if (job.completedAt === null && job.cancelledAt === null || job.escrow > 1e-7 && job.cancelledAt !== null) actions.push(button('停止施工 · 结算未赚款', 'cancelRoadRepair', job.id, undefined, !rules.canAct()));
+    }
+    if (!job || job.cancelledAt !== null && job.escrow <= 1e-7) {
+      const near = spatial(state.player.position, closure.worksite) <= 16;
+      actions.push(button('托管100 · 申请道路修复', 'requestRoadRepair', edge.id, 0, !rules.canAct() || !near || state.player.money < 100), button('提出公共修路需求', 'requestRoadRepair', edge.id, 1, !rules.canAct() || !near));
+      detail.push(`工地开放端：${world.nodes.find(n => n.id === closure.worksiteNodeId)?.name ?? closure.worksiteNodeId}，需步行到 16 米内申请。实际采购一份材料，由承接居民步行送到工地；累计60分钟已付薪现场施工才恢复通行。`);
+    }
+    entries.push({ id: edge.id, title: `${from?.name ?? edge.from} ↔ ${to?.name ?? edge.to}`, subtitle: `${modeNames[edge.mode] ?? edge.mode} · 已封闭`, detail, actions });
+  }
+  const completed = (state.roadworks?.jobs.filter(job => job.completedAt !== null).slice(-3) ?? []).map(job => `已完成修路：${job.workedMinutes.toFixed(1)}分钟现场劳动，真实工资${job.paidGross.toFixed(2)}云币。`);
+  return section('道路与现场工程', { entries, notes: [...(closed.length ? [] : ['当前没有因山洪关闭的道路。']), ...completed] });
+}
+
+/** ui.ts renderFamily: partner, pregnancies, household accounts, dependants, ceremonies and estates. */
+function familySection(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection {
+  const family = state.family;
+  if (!family) return section('家庭与下一代', { notes: ['家庭状态尚未建立。'] });
+  const player = state.player, spouse = state.citizens.find(c => c.id === player.partnerId);
+  const rows: PaneRow[] = [], entries: PaneEntry[] = [], actions: ContextAction[] = [], notes: string[] = [];
+  if (spouse) {
+    actions.push(button('与伴侣商议生育', 'planFamily', spouse.id, undefined, !rules.canAct()));
+    notes.push('婚后共同生活、双方健康与意愿、真实扶养储备均需满足；孕期为 270 个游戏日。');
+    const home = world.buildings.find(b => b.kind === 'home' && rules.atBuilding(b.id));
+    if (home) { actions.push(button('双方现场登记共同住所 · 各 20 云币', 'moveHousehold', home.id, undefined, !rules.canAct() || player.money < 120 || spouse.money < 120 || family.households.some(h => h.closedAt === null && h.homeId === home.id && h.actorIds.includes('player')))); notes.push('双方需到场同意，住房容量与原岗位道路通勤均需通过核验；登记后原位置和工作保留。'); }
+  }
+  for (const pregnancy of family.pregnancies.filter(p => p.parentIds.includes('player'))) rows.push({ label: '孕期与扶养储备', value: state.extension?.actorProfiles[pregnancy.carrierId]?.alive === false ? `孕育已中止，托管等待钱包容量或遗产清算后原额退款 · ${money(pregnancy.escrow)}` : `${Math.max(0, Math.ceil((pregnancy.dueAt - family.lastUpdate) / 1440))} 日后预产 · ${money(pregnancy.escrow)}` });
+  for (const account of family.households.filter(h => h.actorIds.includes('player'))) entries.push({ id: account.id, title: `${world.buildings.find(b => b.id === account.homeId)?.name ?? account.homeId} · ${account.closedAt === null ? '有效共同账户' : '已按双方均分结清'}`,
+    subtitle: `共同现金 ${money(account.balance)} · 已消费 ${money(account.spent)} · 已返还 ${money(account.returned)} · 我的存入 ${money(account.contributions.player ?? 0)}`,
+    detail: account.expenses.slice(-3).reverse().map(receipt => `实际照护购食：${state.citizens.find(c => c.id === receipt.targetId)?.name ?? receipt.targetId} · ${receipt.quantity} 份 · ${money(receipt.amount)} → ${receipt.recipientId}`),
+    actions: account.closedAt === null ? [button('在家存入共同资金 · 20 云币', 'fundHousehold', account.id, 20, !rules.atBuilding(account.homeId) || player.money < 120)] : [] });
+  const dependents = state.citizens.filter(c => isFamilyDependent(state, c.id));
+  for (const resident of dependents) {
+    const id = resident.id, child = family.children[id], profile = state.extension?.actorProfiles[id], near = spatial(player.position, resident.position) <= 24;
+    const account = family.households.find(h => h.closedAt === null && h.actorIds.includes('player') && h.homeId === resident.homeId);
+    entries.push({ id, title: resident.name, subtitle: `${Math.floor(profile?.age ?? 0)} 岁 · 教育 ${resident.education ?? 0} · 食物储备 ${resident.food ?? 0} 份`,
+      detail: child ? [`新增正式学时 ${Math.round(family.formalLearning?.[id]?.earnedMinutes ?? 0)} 分钟 · 个人自习 ${Math.round(child.selfStudyMinutes ?? 0)} 分钟`] : [],
+      actions: [button('到场扶养 · 20 云币', 'supportFamily', id, 20, !rules.canAct() || !near || player.money < 20),
+        ...(child ? [button('在书院办理入学 · 40 云币', 'enrollChild', id, undefined, !rules.canAct() || !near || !rules.atKind('school') || !!child.schoolId || (profile?.age ?? 0) < 6 || (profile?.age ?? 0) >= 18 || player.money < 40)] : []),
+        ...(account ? [button('现场照护购食 / 交出背包食物', 'householdMeal', id, undefined, !rules.canAct() || !near || (resident.food ?? 0) >= 6)] : [])] });
+  }
+  const venue = world.buildings.find(b => rules.atBuilding(b.id) && publicFamilyVenue(b, player.position));
+  const ceremonies = family.ceremonies.filter(c => c.organizerId === 'player');
+  if (canHoldFamilyCeremony(state, 'wedding') && !ceremonies.some(c => c.kind === 'wedding' && c.subjectId === spouse?.id)) actions.push(button('亭馆筹办婚礼 · 30 云币与食物 2 份', 'holdCeremony', 'wedding', undefined, !venue || player.money < 30 || (player.inventory.food ?? 0) < 2));
+  for (const [id, estate] of Object.entries(family.estates).filter(([id, estate]) => estate.heirIds.includes('player') || state.extension?.actorProfiles[id]?.family.includes('player'))) {
+    entries.push({ id: `estate-${id}`, title: `${state.citizens.find(c => c.id === id)?.name ?? id} · 遗产`, subtitle: estate.status === 'awaitingExecutor' ? '等待真实继承人 / 执行人' : `已结算现金 ${money(estate.cash)} · ${estate.heirIds.length} 位继承人`,
+      detail: estate.bankSettlement ? [`钱庄清债 ${money(estate.bankSettlement.debtPaid)}；转移存款债权 ${money(estate.bankSettlement.depositClaimsTransferred)}；未收回坏账 ${money(estate.bankSettlement.unpaidLoss)}。`] : [],
+      actions: canHoldFamilyCeremony(state, id) && !ceremonies.some(c => c.kind === 'funeral' && c.subjectId === id) ? [button('亭馆筹办葬礼 · 30 云币与材料 2 块', 'holdCeremony', id, undefined, !venue || player.money < 30 || (player.inventory.block ?? 0) < 2)] : [] });
+  }
+  for (const sale of family.estateSales ?? []) {
+    if (sale.state !== 'offered') continue;
+    const company = state.extension?.companies.find(c => c.id === sale.assetId), shop = state.shops.find(s => s.id === sale.assetId), site = world.buildings.find(b => b.id === (company?.buildingId ?? shop?.buildingId));
+    const validVenue = world.buildings.some(b => rules.atBuilding(b.id) && isEstateSaleVenue(state, sale, b, Math.floor((player.position.y - b.position.y + .01) / (b.height / Math.max(1, b.floors)))));
+    const debt = state.banking?.accounts[sale.deceasedId];
+    entries.push({ id: sale.id, title: `遗产偿债出让 · ${company?.name ?? site?.name ?? sale.assetId}`, subtitle: `余 ${sale.quantity - sale.soldQuantity} ${sale.kind === 'shares' ? '份股份' : '间商铺'} · 每份 ${money(sale.unitPrice)}`,
+      detail: [`亡者实际贷款本金 / 利息 ${money(debt?.loanPrincipal ?? 0)} / ${money(debt?.loanInterest ?? 0)}`, `已收真实货款 ${money(sale.proceeds)}；由亡者账户清偿债务后，余产才会结算继承。`, ...sale.receipts.slice(-3).map(receipt => `实际买家 ${receipt.buyerId} · ${receipt.quantity} 份 · ${money(receipt.paid)}。`)],
+      actions: [button('现场购买一份偿债资产', 'buyEstateAsset', sale.id, 1, !rules.canAct() || !validVenue || player.money < sale.unitPrice + 100)] });
+  }
+  for (const ceremony of ceremonies) rows.push({ label: ceremony.kind === 'wedding' ? '家庭婚礼' : '亲人葬礼', value: `${ceremony.completedAt === null ? `${Math.floor(ceremony.workedMinutes)} / 30 分钟现场筹办` : `已完成 · ${ceremony.guestIds.length} 位亲友实际到场`} · ${world.buildings.find(b => b.id === ceremony.siteId)?.name ?? ceremony.siteId} · 已支付 ${money(ceremony.paid)}` });
+  notes.push(`${dependents.length} 位真实受养家人。出生、共同账户、到校学习、仪式与继承记录随存档恢复。`);
+  return section('家庭与下一代', { rows, entries, actions, notes });
+}
+
+/** ui.ts renderTransit 当前乘坐 and the recorded journey's last real arrival. */
+function rideSection(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection {
+  const vehicle = state.vehicles.find(v => v.id === state.player.vehicleId), recorded = state.journey, rows: PaneRow[] = [];
+  if (recorded?.targetId && recorded.lastArrival) rows.push({ label: '最近真实到站', value: `${world.nodes.find(n => n.id === recorded.lastArrival!.nodeId)?.name ?? recorded.lastArrival.nodeId} · ${recorded.lastArrival.vehicleId}` });
+  if (recorded?.vehicleId) rows.push({ label: '当前实际乘坐', value: `${recorded.vehicleId} · 下一站 ${world.nodes.find(n => n.id === recorded.nextStopNodeId)?.name ?? '查询中'}` });
+  if (vehicle) rows.push({ label: modeNames[vehicle.kind] ?? vehicle.kind, value: `${vehicle.passengers} 人 · ${activity(vehicle.state)}` });
+  return section('当前乘坐', { rows, actions: vehicle ? [button('下车 / 下船', 'leaveVehicle', vehicle.id)] : [], notes: vehicle ? [] : ['尚未乘坐。接近站点或载具，步行视角可购票上车。'] });
 }

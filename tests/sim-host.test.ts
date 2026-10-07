@@ -53,7 +53,11 @@ test('native host drives the authoritative simulation through requests', async (
   assert.deepEqual(panes.panes.map(p => p.id), ['life', 'city', 'industry', 'transit', 'relations']);
   const titles = (id: string) => panes.panes.find(p => p.id === id)!.sections.map(s => s.title);
   assert(titles('life').includes('烹饪'));
-  for (const title of ['水能设施', '公共服务', '审计与司法', '公共账目']) assert(titles('city').includes(title), title);
+  for (const title of ['选举与议案', '居民补选与地方议会', '道路与现场工程', '水能设施', '公共服务', '审计与司法', '公共账目']) assert(titles('city').includes(title), title);
+  for (const title of ['当前乘坐', '路口调度', '航空器与停机位']) assert(titles('transit').includes(title), title);
+  assert(titles('relations').includes('家庭与下一代'));
+  const signal = panes.panes.find(p => p.id === 'transit')!.sections.find(s => s.title === '路口调度')!;
+  assert(signal.actions.every(a => a.disabled), 'only police or the mayor dispatch junctions');
   assert.deepEqual(titles('industry'), ['产业版图', '并购', '交易所', '科技与未来']);
   const industry = panes.panes.find(p => p.id === 'industry')!;
   assert.equal(industry.sections[3].entries.length, 7, 'seven research sectors');
