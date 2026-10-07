@@ -1,0 +1,3464 @@
+{
+  "format": "yunshan.game-art-contract",
+  "version": 1,
+  "generatedFrom": "scripts/export-art-contract.ts reading src/ of the yunshan game",
+  "conventions": {
+    "units": "metres",
+    "upAxis": "Y",
+    "front": "+Z (toward the fixture use point / viewer)",
+    "origin": "asset min corner unless stated",
+    "worldVoxelM": 0.2,
+    "playerEyeHeightM": 1.72,
+    "bodyRadiusM": 0.35,
+    "scaling": "uniform only, 0.9–1; never stretched; never enlarged",
+    "display": "models are display only; collision, walking, stock and use points come from game data"
+  },
+  "floorFixtures": {
+    "rule": "A replacement must fit inside the solid (x × y × z) at real size or within the uniform scale range. Use point lies on the +Z side.",
+    "solids": [
+      {
+        "kind": "counter",
+        "sizeXYZ": [
+          3.2,
+          1,
+          1.2
+        ],
+        "buildingKinds": [
+          "market"
+        ],
+        "countInDefaultWorld": 541
+      },
+      {
+        "kind": "table",
+        "sizeXYZ": [
+          2.4,
+          0.8,
+          1.2
+        ],
+        "buildingKinds": [
+          "airport",
+          "bank",
+          "clinic",
+          "farm",
+          "hall",
+          "home",
+          "police",
+          "school",
+          "starport",
+          "station",
+          "workshop"
+        ],
+        "countInDefaultWorld": 3439
+      },
+      {
+        "kind": "bed",
+        "sizeXYZ": [
+          2.4,
+          0.6,
+          1.2
+        ],
+        "buildingKinds": [
+          "home"
+        ],
+        "countInDefaultWorld": 1644
+      }
+    ],
+    "currentDressing": {
+      "byFixtureKind": {
+        "counter": {
+          "asset": "LIFE-064",
+          "copies": 2
+        },
+        "table": {
+          "asset": "LIFE-032",
+          "copies": 1
+        }
+      },
+      "byBuildingKind": {
+        "police": {
+          "table": {
+            "asset": "LIFE-151",
+            "copies": 1
+          }
+        },
+        "school": {
+          "table": {
+            "asset": "LIFE-111",
+            "copies": 2
+          }
+        }
+      }
+    },
+    "knownGaps": [
+      "bed solid is 0.6m high; a headboard above 0.6m does not fit (LIFE-035 is 1.0m)",
+      "no shelf solids are generated yet",
+      "tabletop items need a separate rule (not inside the solid)"
+    ]
+  },
+  "stations": {
+    "count": 61,
+    "platform": {
+      "asset": "BUILT-154",
+      "minCornerFromNode": {
+        "x": -11,
+        "y": -1.1,
+        "z": -9
+      },
+      "sizeXYZ": [
+        22,
+        1,
+        18
+      ]
+    },
+    "shelter": {
+      "asset": "BUILT-155",
+      "minCornerOnPlatform": {
+        "x": -0.5,
+        "y": 1,
+        "z": 3.5
+      }
+    },
+    "liveSignalLamps": {
+      "note": "driven by state.signals; any pole model must leave these exact lamp boxes visible and must not add its own lamp heads",
+      "redCentreFromNode": [
+        12,
+        3.9,
+        11.4
+      ],
+      "greenCentreFromNode": [
+        12,
+        3.15,
+        11.4
+      ],
+      "lampSizeXYZ": [
+        0.7,
+        0.55,
+        0.35
+      ],
+      "poleBoxes": [
+        {
+          "centre": [
+            12,
+            1.8,
+            11
+          ],
+          "size": [
+            0.35,
+            3.6,
+            0.35
+          ]
+        },
+        {
+          "centre": [
+            12,
+            3.5,
+            11
+          ],
+          "size": [
+            1,
+            1.6,
+            0.65
+          ]
+        }
+      ]
+    },
+    "junctions": {
+      "note": "no traffic-signal logic exists at road junctions; a pole model must not show signal lamps",
+      "poleBox": {
+        "centre": [
+          4,
+          2.2,
+          4
+        ],
+        "size": [
+          0.4,
+          4.4,
+          0.4
+        ]
+      }
+    }
+  },
+  "woodland": {
+    "trees": 5200,
+    "heightRangeM": [
+      16,
+      31
+    ],
+    "heightQuantumM": 0.2,
+    "trunkSectionM": 0.8,
+    "crownTiers": 4,
+    "note": "woodland is display only; studio trees (8–14m) are shorter than game trees and are not used until a matching height family exists at 0.2m voxels"
+  },
+  "citizens": {
+    "note": "parts are boxes on a 0.2m quantum with pivots for walking swing; a model part must match its box and pivot for rigid replacement",
+    "bands": [
+      {
+        "age": 1,
+        "bodyHeight": 0.6,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "feet": {
+                "centre": [
+                  0,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "feet": {
+                "centre": [
+                  0,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "feet": {
+                "centre": [
+                  0,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "feet": {
+                "centre": [
+                  0,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.2
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "age": 4,
+        "bodyHeight": 1,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  0.9,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.2,
+                  0.3
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.2,
+                  0.3
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  0.9,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  0.8,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.4,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  0.8,
+                  0
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "age": 9,
+        "bodyHeight": 1.2,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.8,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.1,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.8,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.4,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.4,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.8,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.4,
+                  0.3
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.4,
+                  0.3
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.1,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  0.8,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.4,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.4,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.4,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.6,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1,
+                  0
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "age": 15,
+        "bodyHeight": 1.6,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.6,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.5,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.6,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.6,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.5,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.1,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.6,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.4,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.4,
+                  0
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "age": 30,
+        "bodyHeight": 1.8,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.7,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.9,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.7,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.9,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              }
+            }
+          }
+        }
+      },
+      {
+        "age": 70,
+        "bodyHeight": 1.8,
+        "poses": {
+          "standing": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.1,
+                  0.1
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.7,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.9,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              }
+            }
+          },
+          "seated": {
+            "near": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "faceTexture": true
+              },
+              "thigh--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf--1": {
+                "centre": [
+                  -0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe--1": {
+                "centre": [
+                  -0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand--1": {
+                "centre": [
+                  -0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "thigh-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.4,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "calf-1": {
+                "centre": [
+                  0.1,
+                  0.7,
+                  0.4
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "shoe-1": {
+                "centre": [
+                  0.1,
+                  0.6,
+                  0.5
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.4
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hand-1": {
+                "centre": [
+                  0.3,
+                  0.9,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "hair-back": {
+                "centre": [
+                  0,
+                  1.7,
+                  -0.2
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "hat": {
+                "centre": [
+                  0,
+                  1.9,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.2,
+                  0.4
+                ]
+              }
+            },
+            "far": {
+              "torso": {
+                "centre": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "size": [
+                  0.4,
+                  0.8,
+                  0.2
+                ]
+              },
+              "head": {
+                "centre": [
+                  0,
+                  1.7,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.2,
+                  0.2
+                ]
+              },
+              "leg--1": {
+                "centre": [
+                  -0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve--1": {
+                "centre": [
+                  -0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  -0.3,
+                  1.6,
+                  0
+                ]
+              },
+              "leg-1": {
+                "centre": [
+                  0.1,
+                  0.5,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.1,
+                  0.8,
+                  0
+                ]
+              },
+              "sleeve-1": {
+                "centre": [
+                  0.3,
+                  1.3,
+                  0
+                ],
+                "size": [
+                  0.2,
+                  0.6,
+                  0.2
+                ],
+                "pivot": [
+                  0.3,
+                  1.6,
+                  0
+                ]
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "importedStudioAssets": [
+    {
+      "id": "LIFE-064",
+      "name": "商铺公共售货柜台",
+      "sha256": "e8de1602c944ee105d37f2b121b2cee9dc9ff9ab2743d8b8a9c0838c55c1d148"
+    },
+    {
+      "id": "LIFE-032",
+      "name": "通用工作桌",
+      "sha256": "144bad26cbab47ef57655876d8d0e0a3506d9a6a1247b82a67b40808883a7c1b"
+    },
+    {
+      "id": "LIFE-151",
+      "name": "警务值班桌",
+      "sha256": "21b5008e1e53a88a97a4fb66936bc310c5ae9ab846a65122284cf3bbaea5a4db"
+    },
+    {
+      "id": "LIFE-111",
+      "name": "教室桌椅排布接口",
+      "sha256": "92378128fb48e3905d5ff27d0f385e033d8af29ae63370d0058f053f31a2174e"
+    },
+    {
+      "id": "BUILT-154",
+      "name": "既有22×18m站台显示件",
+      "sha256": "ff5c493c5498a694e20230e73d405466204d8db1436b4d8e53a58e3fd16fecf1"
+    },
+    {
+      "id": "BUILT-155",
+      "name": "既有站台两柱候车棚",
+      "sha256": "7e0e7cb50bb2a08552d29fc20d74e30454267e05a9f390944a33e02f1e95c59f"
+    }
+  ],
+  "studioSourceCommit": "ce111d7a133cb5a88b3d37c002dce3b82350353e",
+  "rejectedStudioAssets": [
+    {
+      "id": "BUILT-156",
+      "reason": "own lamp head at 4.05–5.15m duplicates the live signal lamps at 2.9–4.2m"
+    },
+    {
+      "id": "BUILT-157",
+      "reason": "unlit red/amber/green lamps where no junction signal logic exists"
+    },
+    {
+      "id": "LIFE-035",
+      "reason": "bed headboard 1.0m exceeds the 0.6m bed solid"
+    },
+    {
+      "id": "CHAR-002…015",
+      "reason": "author-estimated proportions, not the game part boxes; no rig/animation binding"
+    }
+  ]
+}
