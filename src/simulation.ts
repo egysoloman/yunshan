@@ -8,6 +8,7 @@ import { CONTINUOUS_REFERENCE_COLLISION_POLICY, type ReferenceCollisionPolicy } 
 import { freightPickupAccess, ROAD_FOOD_PICKUP_POLICY, type FreightPickupPolicy } from './simulation/freight-access';
 import { chooseNearestTiedMeal, NEARBY_MEAL_ROUTE_POLICY, type MealRoutePolicy } from './simulation/meal-route';
 import { laborMinutesPerUnit, STAFFED_FARM_YIELD_POLICY, type FarmYieldPolicy } from './simulation/farm-yield';
+import { chooseFreightDestination, DEMAND_FOOD_FREIGHT_POLICY, FreightHops, type FoodFreightPolicy, type FreightDemand } from './simulation/freight-delivery';
 import { parseSaveWithinResources } from './persistence/save-resource';
 import { createCivicStaffingState, installCivicStaffing, civicStaffingOpportunities, civicStaffingNeedsContinuousPeople, prepareCivicHistoryArchive } from './simulation/civic-staffing';
 import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetState } from './simulation/supplemental-budget';
@@ -112,6 +113,9 @@ interface Runtime {
   mealRoutePolicyId?: MealRoutePolicy;
   freightPickupPolicyId?: FreightPickupPolicy;
   farmYieldPolicyId?: FarmYieldPolicy;
+  foodFreightPolicyId?: FoodFreightPolicy;
+  /** Declared food freight: destination district of each loaded carrier. */
+  cargoDestinations?: Record<string, string>;
   serviceMaterialSchedulingVersion?: 1;
   npcStairCursors?: Record<string, NpcStairCursor>;
   attendance: Record<string, number>;
@@ -136,6 +140,7 @@ export class Simulation implements SimulationAPI {
   private readonly buildings: Map<string, Building>;
   private readonly edges: Map<string, NetworkEdge>;
   private readonly freightCarriers = new Map<string, { kind: Vehicle['kind']; cargoCapacity: number }>();
+  private freightHopsCache: FreightHops | null = null;
   private readonly fingerprint: string;
   private readonly neighbors = new Map<string, { node: string; edge: NetworkEdge }[]>();
   private readonly routeCache = new Map<string, Vec3[]>();
@@ -165,11 +170,12 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
   constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
-    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
+    if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'farmYieldPolicyId', 'foodFreightPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.freightPickupPolicyId !== undefined && (options.freightPickupPolicyId !== ROAD_FOOD_PICKUP_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
-      || options.farmYieldPolicyId !== undefined && (options.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
+      || options.farmYieldPolicyId !== undefined && (options.farmYieldPolicyId !== STAFFED_FARM_YIELD_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
+      || options.foodFreightPolicyId !== undefined && (options.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || options.historyPolicyId !== 'civic-history-pages-v1'))) throw new Error('不支持的显式城市规则版本。');
     if (!world.districts.length || !world.buildings.length || !world.nodes.length) throw new Error('云山世界需要城区、建筑与连通节点。');
     validatePowerGridDefinition(world);
     this.buildings = new Map(world.buildings.map(b => [b.id, b]));
@@ -190,6 +196,7 @@ export class Simulation implements SimulationAPI {
     if (options?.mealRoutePolicyId) this.runtime.mealRoutePolicyId = options.mealRoutePolicyId;
     if (options?.freightPickupPolicyId) this.runtime.freightPickupPolicyId = options.freightPickupPolicyId;
     if (options?.farmYieldPolicyId) this.runtime.farmYieldPolicyId = options.farmYieldPolicyId;
+    if (options?.foodFreightPolicyId) { this.runtime.foodFreightPolicyId = options.foodFreightPolicyId; this.runtime.cargoDestinations = {}; }
     for (const citizen of this.state.citizens) this.baselineCitizenIds.add(citizen.id);
     this.runtime.customers = {};
     this.runtime.driving = { vehicleId: null, throttle: 0, turn: 0, brake: true, speed: 0 };
@@ -1006,7 +1013,7 @@ export class Simulation implements SimulationAPI {
           const green = this.state.signals?.[nodeId] ?? ((Math.floor((this.now + 1e-7) / 48) + offset) % 2);
           if (green !== (vehicle.direction > 0 ? 1 : 0)) { vehicle.state = 'redLight'; vehicle.nextDeparture = this.now + 2; if (manual) this.runtime.driving.speed = 0; continue; }
         }
-        if (vehicle.cargo > 0) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; }
+        if (vehicle.cargo > 0 && !this.holdFoodFreight(vehicle, nodeId, node.districtId)) { this.bus.emit({ type: 'cargo-arrived', districtId: node.districtId, amount: vehicle.cargo, shopId: this.runtime.cargoSources?.[vehicle.id] }); vehicle.cargo = 0; if (this.runtime.cargoSources) delete this.runtime.cargoSources[vehicle.id]; if (this.runtime.cargoDestinations) delete this.runtime.cargoDestinations[vehicle.id]; }
         const freightCarrier = this.freightCarriers.get(vehicle.id);
         const activePassengers = Object.values(this.runtime.riders).filter(rider => rider.vehicleId === vehicle.id && !rider.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // Empty road carriers retain their existing ten-seat passenger use.
@@ -1030,7 +1037,12 @@ export class Simulation implements SimulationAPI {
         vehicle.passengers = Object.values(this.runtime.riders).filter(r => r.vehicleId === vehicle.id && !r.arrived).length + (this.state.player.vehicleId === vehicle.id ? 1 : 0);
         // The departure graph excludes every closed leg, including a reverse.
         candidates = candidates.filter(n => isRoadOpen(this.state, n.edge.id));
-        if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
+        const freightBound = vehicle.cargo > 0 ? this.runtime.cargoDestinations?.[vehicle.id] : undefined;
+        if (freightBound && !manual && candidates.length) {
+          // A declared food carrier takes the open leg whose far end is fewest hops from its destination district.
+          const hops = this.freightHops.hops(vehicle.kind, freightBound), far = (c: { edge: NetworkEdge }) => hops.get(c.edge.from === nodeId ? c.edge.to : c.edge.from) ?? Infinity;
+          const best = Math.min(...candidates.map(far)); if (finite(best)) candidates = candidates.filter(c => far(c) === best);
+        } else if (vehicle.kind === 'road' && !manual) { const mainRoads = candidates.filter(c => this.world.nodes.find(n => n.id === c.edge.from)?.station && this.world.nodes.find(n => n.id === c.edge.to)?.station); if (mainRoads.length && this.random() < .85) candidates = mainRoads; }
         if (candidates.length && ['road', 'lightRail', 'maglev', 'ferry'].includes(vehicle.kind)) { const chosen = manual ? this.chooseTurn(edge, vehicle.direction, nodeId, candidates) : candidates[Math.floor(this.random() * candidates.length)]; vehicle.edgeId = chosen.edge.id; vehicle.direction = chosen.edge.from === nodeId ? 1 : -1; vehicle.progress = vehicle.direction > 0 ? 0 : 1; }
         else if (isRoadOpen(this.state, edge.id)) vehicle.direction *= -1;
         else { vehicle.state = 'roadClosed'; if (manual) this.runtime.driving.speed = 0; continue; }
@@ -1217,6 +1229,27 @@ export class Simulation implements SimulationAPI {
       committedPayroll: this.state.shops.map(shop => ({ shopId: shop.id, amount: this.shopCommittedPayroll(shop) })),
       freightLots: this.runtime.freightLots ?? {}, cargoSources: this.runtime.cargoSources ?? {},
     });
+  }
+  private get freightHops(): FreightHops { return this.freightHopsCache ??= new FreightHops(this.world); }
+  /** Food per market by district, counting freight waiting there and cargo already bound there. */
+  private foodFreightDemand(): FreightDemand[] {
+    const rows = new Map<string, FreightDemand>();
+    for (const shop of this.state.shops) {
+      if (this.buildings.get(shop.buildingId)?.kind !== 'market' || this.shopCommodity(shop) !== 'food') continue;
+      const row = rows.get(shop.districtId) ?? { districtId: shop.districtId, markets: 0, stock: this.runtime.freight[shop.districtId] ?? 0 };
+      row.markets++; row.stock += shop.inventory; rows.set(shop.districtId, row);
+    }
+    for (const vehicle of this.state.vehicles) { const bound = this.runtime.cargoDestinations?.[vehicle.id]; const row = bound ? rows.get(bound) : undefined; if (row && vehicle.cargo > 0) row.stock += vehicle.cargo; }
+    return [...rows.values()];
+  }
+  /** True while a declared carrier keeps its food for a district further on. */
+  private holdFoodFreight(vehicle: Vehicle, nodeId: string, districtId: string): boolean {
+    if (this.runtime.foodFreightPolicyId !== DEMAND_FOOD_FREIGHT_POLICY || !this.freightCarriers.has(vehicle.id)) return false;
+    const destinations = this.runtime.cargoDestinations ??= {}, bound = destinations[vehicle.id];
+    if (bound) return bound !== districtId && this.freightHops.hops(vehicle.kind, bound).has(nodeId);
+    const chosen = chooseFreightDestination(this.freightHops, vehicle.kind, nodeId, this.foodFreightDemand());
+    if (!chosen || chosen === districtId) return false;
+    destinations[vehicle.id] = chosen; return true;
   }
   private walkingDistance(citizen: Citizen, destination: Building): number { const target = this.buildingNode(destination); return Math.min(...this.walkingAnchors(citizen).map(a => a.cost + (this.walkingTree(a.node).costs.get(target.id) ?? Infinity))); }
   private route(from: Building, to: Building): Vec3[] {
@@ -2441,10 +2474,11 @@ export class Simulation implements SimulationAPI {
   get mealRoutePolicyId(): MealRoutePolicy | 'legacy' { return this.runtime.mealRoutePolicyId ?? 'legacy'; }
   get freightPickupPolicyId(): FreightPickupPolicy | 'legacy' { return this.runtime.freightPickupPolicyId ?? 'legacy'; }
   get farmYieldPolicyId(): FarmYieldPolicy | 'legacy' { return this.runtime.farmYieldPolicyId ?? 'legacy'; }
+  get foodFreightPolicyId(): FoodFreightPolicy | 'legacy' { return this.runtime.foodFreightPolicyId ?? 'legacy'; }
   exportSave(): string {
     const { citizens, routeEncoding, routePool } = encodeCitizenRoutes(this.state.citizens);
     const persistedModules = PERSISTED_MODULES.filter(name => this.state[name] !== undefined && this.state[name] !== null);
-    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
+    return JSON.stringify({ format: 'yunshan-save', version: this.saveVersion, ...(this.saveVersion >= 3 ? { rulesetId: 'civic-local-v1', motionVersion: this.motionVersion, ...(this.saveVersion === 4 ? { historyPolicyId: 'civic-history-pages-v1' } : {}) } : {}), ...(this.runtime.referenceCollisionPolicyId ? { referenceCollisionPolicyId: this.runtime.referenceCollisionPolicyId } : {}), ...(this.runtime.mealRoutePolicyId ? { mealRoutePolicyId: this.runtime.mealRoutePolicyId } : {}), ...(this.runtime.freightPickupPolicyId ? { freightPickupPolicyId: this.runtime.freightPickupPolicyId } : {}), ...(this.runtime.farmYieldPolicyId ? { farmYieldPolicyId: this.runtime.farmYieldPolicyId } : {}), ...(this.runtime.foodFreightPolicyId ? { foodFreightPolicyId: this.runtime.foodFreightPolicyId } : {}), worldSeed: this.world.seed, worldFingerprint: this.fingerprint, routeEncoding, routePool, state: { ...this.state, citizens }, runtime: { ...this.runtime, ...(this.runtime.npcMotionVersion === 2 ? { npcStairCursors: this.savedNpcStairCursors() } : {}), ...(this.state.shopLifecycle ? { shopLifecycleVersion: 1 } : {}), persistedModules } });
   }
   /** Read-only production validation for trusted host format transactions. */
   validateSave(json: string): CommandResult { return this.readSave(json, true); }
@@ -2665,6 +2699,7 @@ export class Simulation implements SimulationAPI {
       }
       if (r.publicSupply !== undefined) number(r.publicSupply, 0, 1, 'public supply fulfillment'); if (r.operationUnitPrice !== undefined) number(r.operationUnitPrice, 4, 1e12, 'observed public material unit price');
       if (r.cargoSources !== undefined) { ensure(r.cargoSources && typeof r.cargoSources === 'object' && !Array.isArray(r.cargoSources), 'cargo ownership'); for (const [id, shopId] of Object.entries(r.cargoSources)) ensure(expectedVehicleIds.has(id) && shopIds.has(shopId as string), 'cargo owner reference'); }
+      if (r.cargoDestinations !== undefined) { ensure(r.foodFreightPolicyId === DEMAND_FOOD_FREIGHT_POLICY && r.cargoDestinations && typeof r.cargoDestinations === 'object' && !Array.isArray(r.cargoDestinations), 'freight destinations declared'); for (const [id, districtId] of Object.entries(r.cargoDestinations)) ensure(this.freightCarriers.has(id) && districtIds.has(districtId as string) && (s.vehicles.find((v: Vehicle) => v.id === id)?.cargo ?? 0) > 0, 'freight destination reference'); }
       if (r.freightLots !== undefined) { ensure(r.freightLots && typeof r.freightLots === 'object' && !Array.isArray(r.freightLots), 'freight ownership'); for (const [id, lots] of Object.entries(r.freightLots)) { ensure(districtIds.has(id), 'freight ownership district'); let total = 0; for (const lot of array(lots, shops.length + 1, 'freight lots')) { ensure(lot && (lot.shopId === null || shopIds.has(lot.shopId)), 'freight owner'); money(lot.quantity, 'freight lot quantity'); total += lot.quantity; } ensure(Math.abs(total - (r.freight[id] ?? 0)) < 1e-6, 'freight stock conservation'); } }
       for (const id of array(r.playerBusinesses, 512, 'businesses')) ensure(shopIds.has(id), 'business id'); ensure(new Set(r.playerBusinesses).size === r.playerBusinesses.length, 'duplicate businesses');
       for (const shop of shops) if (shop.lifecycleVersion === 1) ensure(r.playerBusinesses.includes(shop.id) === (shop.ownerId === 'player' && !s.extension?.companies.some((company: { buildingId: string; shopBindingReleasedAt?: number }) => company.shopBindingReleasedAt === undefined && company.buildingId === shop.buildingId)), 'managed business mirror must reflect actual operating owner');
