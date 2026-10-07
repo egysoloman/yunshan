@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compile-only check of unity/Assets/Yunshan/Runtime against Unity 2021.3
+       reference assemblies (NuGet UnityEngine.Modules). glTFast is a signature
+       stub here. This is not a substitute for compiling inside Unity 6. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DefineConstants>$(DefineConstants);UNITY_EDITOR</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../unity/Assets/Yunshan/Runtime/**/*.cs" />
+    <Compile Include="GltfFastStub.cs" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" PrivateAssets="all" />
+    <ProjectReference Include="../Yunshan.Core/Yunshan.Core.csproj" />
+  </ItemGroup>
+</Project>

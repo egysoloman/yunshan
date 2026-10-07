@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <None Include="Parity/**" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../src/rendering/studio-assets.json" Link="Parity/studio-assets.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

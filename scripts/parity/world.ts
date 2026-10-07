@@ -13,7 +13,9 @@ export function canonical(value: unknown): unknown {
   }
   return value;
 }
+if (process.argv[1]?.endsWith("world.ts")) {
 const layout = (process.argv[3] ?? 'current-v6') as Parameters<typeof createWorld>[1];
 const json = JSON.stringify(canonical(createWorld(20261001, layout)));
 writeFileSync(process.argv[2], gzipSync(json, { level: 9 }));
 console.log(`${layout}: ${json.length} bytes`);
+}
