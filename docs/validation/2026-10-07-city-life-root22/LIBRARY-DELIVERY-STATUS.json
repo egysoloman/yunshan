@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-07T04:58:02.178014+00:00",
+  "state": "BLOCKED_BEFORE_PREPARE",
+  "attempts": 1,
+  "orderedBatchItems": 14,
+  "helperExit": 1,
+  "helperStdoutBytes": 0,
+  "error": "library upload failed: hosted apps tools/list request failed: network",
+  "newLibraryIds": [],
+  "newFilesCreated": 0,
+  "memoReplacementConfirmed": false,
+  "lastReadOnlyMemoIdentity": "libfile_7571a326de848191aec330d605a63845",
+  "lastReadOnlyMemoVersion": 7,
+  "directFallbackPerformed": false,
+  "autoRetryPerformed": false,
+  "attachmentsDelivered": false,
+  "skill": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/SKILL.md",
+  "procedure": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/references/prepared-uploads.md",
+  "procedureQuote": "Never switch a started helper write to a direct action.",
+  "archivesAreFrozenBeforeDeliveryClosure": true
+}

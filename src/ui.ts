@@ -727,6 +727,22 @@ export class CityUI {
   }
   private powerContent(): HTMLElement {
     const card = element('div', 'system-card'), state = this.state!, binding = powerBinding(this.world), power = state.power;
+    if (this.world.powerGrid?.version === 2) {
+      const grid = state.powerGrid?.version === 2 ? state.powerGrid : undefined, maintenance = state.hydroMaintenance, job = maintenance?.job;
+      card.append(element('p', 'note', '有限上下游水库供电，建筑按真实电网分表取电。维修不会补水；水源耗尽后仍须停止发电。'));
+      if (grid) card.append(field('上游水量', `${grid.hydro.upstreamM3.toFixed(2)} m³`), field('累计发电', `${grid.hydro.generatedKWh.toFixed(3)} kWh`));
+      if (grid?.dispatch) card.append(field('当前供电', `${grid.dispatch.servedKW.toFixed(2)} / ${grid.dispatch.demandKW.toFixed(2)} kW`));
+      if (!maintenance) { card.append(element('p', 'note', '地图未声明设备维护规则。')); return card; }
+      const site = this.world.buildings.find(row => row.id === maintenance.operatorSiteId), nearby = this.view!.nearbyBuilding;
+      const onsite = this.canAct() && !!site && nearby?.id === site.id && this.pointAvailable(site);
+      card.append(element('p', 'note', `${site?.name ?? maintenance.operatorSiteId}的初始故障需要1份实购物料、60分钟工程师现场劳动及实际工资结清。成年旅行者可现场出资。`));
+      if (job) {
+        const names = { awaitingSupply: '等候工业材料', working: '工程师维修中', paused: '已暂停', awaitingWageSettlement: '劳动完成，等候工资结清', completed: '已完成', cancelled: '已取消', refundPending: '退款待结清' };
+        card.append(field('设备维修', names[job.status]), field('现场工时', `${job.workedMinutes.toFixed(1)} / 60 分钟`), field('材料', `实购 ${job.receivedUnits} · 已耗 ${job.consumedUnits}`), field('未用托管', money(job.escrow)), field('实际工资结清', job.payment ? money(job.payment.amount) : '尚未完成'), element('p', 'note', job.reason));
+        if (!['completed', 'cancelled'].includes(job.status)) card.append(commandButton('取消并退回未用托管', 'cancelEnergy', job.id, undefined, !this.canAct()));
+      } else card.append(commandButton('托管100 · 申请设备维修', 'requestEnergyRepair', site?.id, undefined, !onsite || state.player.money < 100));
+      return card;
+    }
     if (!binding) { card.append(element('p', 'note', '当前地图沿用原有聚合供给；没有可登记的水能设备与控制院。')); return card; }
     card.append(element('p', 'note', `${binding.source.name}供给城区，由${binding.operator.name}操作。维修须真实故障、1份工业材料与60分钟已付薪技术员工作；健康设备不收费。`));
     card.append(field('未修复设备损失', `${(power?.lossP ?? 0).toFixed(2)} P`));

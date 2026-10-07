@@ -46,7 +46,18 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // these limits identify its authoritative grading contract. Old text is exact.
   const streets = layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
   const legacyDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
-  const text = JSON.stringify(world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor);
+  const descriptor = world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor;
+  const operator = world.hydroMaintenance !== undefined ? world.buildings.find(site => site.id === world.hydroMaintenance!.operatorSiteId) : undefined;
+  const maintenancePhysics = operator ? {
+    operator: [operator.id, operator.kind, operator.facility ?? null, operator.position, operator.door,
+      operator.width, operator.depth, operator.height, operator.floors, operator.rotation,
+      operator.seed, operator.floorPlanProfile ?? null, operator.functionPoints ?? null,
+      operator.floorUses ?? null, operator.floorPermissions ?? null, operator.publicFloors ?? null,
+      operator.requiredPermission ?? null, operator.stairGeometryRevision ?? null,
+      operator.floorFootprints ?? null, operator.basements ?? null, operator.basementUses ?? null],
+    terrain: [world.voxelSize, world.size, world.mountains, world.waterfall, world.river],
+  } : null;
+  const text = JSON.stringify(world.hydroMaintenance !== undefined ? { ...descriptor, hydroMaintenance: world.hydroMaintenance, maintenancePhysics } : descriptor);
   let hash = 2166136261;
   for (let index = 0; index < text.length; index++) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
   return (hash >>> 0).toString(16);

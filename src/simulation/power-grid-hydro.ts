@@ -1,5 +1,6 @@
 import type { SimState, Vec3, WorldDefinition } from '../types';
 import { shopLifecycleAllowsOperation } from './shop_lifecycle';
+import { validateHydroMaintenanceDefinition, validateHydroMaintenanceState, hydroMaintenanceReadyAt, isCanonicalHydroMaintenanceReady, isCanonicalHydroMaintenanceState } from './hydro-maintenance';
 import { Flow, type Arc } from './power-network-flow';
 import { validateFiniteHydroDefinition, type FiniteHydroDefinition } from './power-hydro';
 import {
@@ -39,7 +40,7 @@ export interface HydroPowerGridDispatch {
   availableKW: number; demandKW: number; servedKW: number; unservedKW: number; curtailedKW: number;
   sources: Record<string, HydroGridSourceMeter>; links: Record<string, number>; nodes: Record<string, number>;
   buildings: Record<string, HydroGridMeter>; vehicles: Record<string, HydroGridVehicleMeter>;
-  loadSources: { shops: HydroShopLoadSource[] };
+  loadSources: { shops: HydroShopLoadSource[]; equipmentAvailable?: boolean };
   diagnostics: { unconnectedBuildings: string[]; unconnectedVehicles: string[]; islandNodeIds: string[]; exhaustedSourceIds: string[]; constrainedLinkIds: string[]; constrainedNodeIds: string[] };
 }
 export type HydroGridHistory = PagedHistory<HydroPowerGridDispatch>;
@@ -95,7 +96,16 @@ function bodyOf(state: SimState): HydroPowerGridState | undefined { return state
  * extension clock deliberately retains its independent native-minute sum. */
 export function hydroGridClock(state: SimState): number { return state.day * 1440 + state.hour * 60; }
 function physicalKey(world: WorldDefinition): string {
-  return JSON.stringify([world.buildings.map(site => [site.id, site.kind, site.facility ?? null, site.position, site.door, site.width, site.depth, site.height, site.floors, site.rotation]), world.nodes.map(node => [node.id, node.position]), world.edges.map(edge => [edge.id, edge.from, edge.to, edge.points])]);
+  const parts: unknown[] = [world.buildings.map(site => [site.id, site.kind, site.facility ?? null, site.position, site.door, site.width, site.depth, site.height, site.floors, site.rotation]), world.nodes.map(node => [node.id, node.position]), world.edges.map(edge => [edge.id, edge.from, edge.to, edge.points])];
+  if (world.hydroMaintenance !== undefined) {
+    const operator = world.buildings.find(site => site.id === world.hydroMaintenance!.operatorSiteId);
+    parts.push(world.hydroMaintenance, operator ? [operator.seed, operator.floorPlanProfile ?? null,
+      operator.functionPoints ?? null, operator.floorUses ?? null, operator.floorPermissions ?? null,
+      operator.publicFloors ?? null, operator.requiredPermission ?? null, operator.stairGeometryRevision ?? null,
+      operator.floorFootprints ?? null, operator.basements ?? null, operator.basementUses ?? null] : null,
+      [world.voxelSize, world.size, world.mountains, world.waterfall, world.river]);
+  }
+  return JSON.stringify(parts);
 }
 function loadIdentityKey(state: SimState): string { return JSON.stringify([sorted(state.shops).map(shop => [shop.id, shop.buildingId]), sorted(state.vehicles).map(vehicle => vehicle.id)]); }
 function historyWindowCharBound(world: WorldDefinition, state: SimState): number {
@@ -150,8 +160,9 @@ export function validateHydroGridDefinition(world: WorldDefinition): void {
 
 export function createHydroGridState(world: WorldDefinition, owner?: SimState): HydroPowerGridState | undefined {
   validateHydroGridDefinition(world); const grid = definition(world); if (!grid) return undefined;
+  validateHydroMaintenanceDefinition(world);
   const body: HydroPowerGridState = { version: 2, kind: grid.kind, unit: grid.unit, hydro: createPagedHydro(grid.sources[0].hydro), dispatch: null, totals: { demandedKWh: 0, servedKWh: 0, unservedKWh: 0 }, history: createPagedHistory<HydroPowerGridDispatch>() };
-  freeze(grid); freeze(body);
+  freeze(grid); if (world.hydroMaintenance !== undefined) freeze(world.hydroMaintenance); freeze(body);
   const capability: GridCapability = { world, definition: grid, physicalKey: physicalKey(world), loadIdentityKey: owner ? loadIdentityKey(owner) : null, owner: owner ?? null, runtime: null, pending: null };
   if (owner) { need(owner.tick === 0 && hydroGridClock(owner) === 480, '只在可信初始相位安装资产'); capability.runtime = createPagedHydroRuntime(owner, grid.sources[0].hydro, body.hydro, 480, 0); }
   caps.set(body, capability); return body;
@@ -160,7 +171,9 @@ function capabilityFor(world: WorldDefinition, state: SimState): { body: HydroPo
   const body = bodyOf(state); need(body, '声明水力资产不能缺失'); const capability = caps.get(body);
   need(capability && capability.world === world && capability.definition === definition(world) && Object.isFrozen(body) && physicalKey(world) === capability.physicalKey, '拒绝通用复制、异城、可变或变换后的资产与拓扑');
   if (capability.owner === null) { need(body.history.count === 0 && state.tick === 0 && hydroGridClock(state) === 480, '初始资产只能绑定可信初始城市'); capability.owner = state; capability.loadIdentityKey = loadIdentityKey(state); capability.runtime = createPagedHydroRuntime(state, capability.definition.sources[0].hydro, body.hydro, 480, 0); }
-  need(capability.owner === state && capability.runtime && capability.loadIdentityKey === loadIdentityKey(state), '资产只能属于当前城市状态对象及完整具名负荷集合'); return { body, capability };
+  need(capability.owner === state && capability.runtime && capability.loadIdentityKey === loadIdentityKey(state), '资产只能属于当前城市状态对象及完整具名负荷集合');
+  need(world.hydroMaintenance === undefined || isCanonicalHydroMaintenanceState(state), '维护资产及完整钱料工进度须来自当前城市原写入或完整成功恢复');
+  return { body, capability };
 }
 /** Called before the native time phase. Failure leaves clock, asset/save and
  * pending simulation accumulator unchanged; no water or energy is committed. */
@@ -190,16 +203,19 @@ export function prepareHydroBeforeStep(world: WorldDefinition, state: SimState, 
  * clone can pass a read-only cold reader but cannot earn powered labor. */
 export function isCanonicalHydroDispatch(state: SimState): boolean {
   const body = bodyOf(state); if (!body) return false; const capability = caps.get(body), dispatch = body.dispatch;
-  return !!capability && capability.owner === state && state.powerGrid === body && !!capability.runtime && Object.isFrozen(body) && Object.isFrozen(dispatch) && dispatch?.tick === state.tick && dispatch.at === hydroGridClock(state) && capability.world.powerGrid === capability.definition && physicalKey(capability.world) === capability.physicalKey && loadIdentityKey(state) === capability.loadIdentityKey;
+  return !!capability && capability.owner === state && state.powerGrid === body && !!capability.runtime && Object.isFrozen(body) && Object.isFrozen(dispatch) && dispatch?.tick === state.tick && dispatch.at === hydroGridClock(state) && capability.world.powerGrid === capability.definition && physicalKey(capability.world) === capability.physicalKey && loadIdentityKey(state) === capability.loadIdentityKey && (capability.world.hydroMaintenance === undefined || isCanonicalHydroMaintenanceState(state));
 }
 
 interface Load { key: string; kind: 'building' | 'vehicle'; id: string; nodeId: string | null; demandKW: number; edgeId?: string }
-interface LoadSources { shops: HydroShopLoadSource[]; vehicles: { id: string; edgeId: string }[] }
-function observedSources(state: SimState): LoadSources {
-  return { shops: sorted(state.shops).map(shop => ({ id: shop.id, buildingId: shop.buildingId, allowsOperation: shopLifecycleAllowsOperation(state, shop.id) })), vehicles: sorted(state.vehicles).map(vehicle => ({ id: vehicle.id, edgeId: vehicle.edgeId })) };
+interface LoadSources { shops: HydroShopLoadSource[]; vehicles: { id: string; edgeId: string }[]; equipmentAvailable?: boolean }
+function observedSources(state: SimState, world: WorldDefinition, at: number): LoadSources {
+  const result: LoadSources = { shops: sorted(state.shops).map(shop => ({ id: shop.id, buildingId: shop.buildingId, allowsOperation: shopLifecycleAllowsOperation(state, shop.id) })), vehicles: sorted(state.vehicles).map(vehicle => ({ id: vehicle.id, edgeId: vehicle.edgeId })) };
+  if (world.hydroMaintenance !== undefined) result.equipmentAvailable = isCanonicalHydroMaintenanceReady(state, at, state.tick);
+  return result;
 }
 function solveWindow(world: WorldDefinition, grid: HydroPowerGridDefinition, request: PagedHydroClockRequest, availableKW: number, exhausted: boolean, observations: LoadSources): HydroPowerGridDispatch {
   const minutes = request.at - request.beforeAt, output: HydroPowerGridDispatch = { tick: request.tick, beforeAt: request.beforeAt, at: request.at, nativeMinutes: request.nativeMinutes, minutes, availableKW, demandKW: 0, servedKW: 0, unservedKW: 0, curtailedKW: 0, sources: record(), links: record(), nodes: record(), buildings: record(), vehicles: record(), loadSources: { shops: observations.shops }, diagnostics: { unconnectedBuildings: [], unconnectedVehicles: [], islandNodeIds: [], exhaustedSourceIds: exhausted ? [grid.sources[0].id] : [], constrainedLinkIds: [], constrainedNodeIds: [] } };
+  if (world.hydroMaintenance !== undefined) output.loadSources.equipmentAvailable = observations.equipmentAvailable;
   const flow = new Flow(), source = flow.addNode(), sink = flow.addNode(), nodeRefs = new Map<string, { input: number; output: number }>(), linkArcs = new Map<string, { forward: Arc; backward: Arc }>(), demandArcs = new Map<string, Arc>();
   for (const node of sorted(grid.nodes)) { const input = flow.addNode(), nodeOutput = flow.addNode(); nodeRefs.set(node.id, { input, output: nodeOutput }); flow.edge(input, nodeOutput, node.capacityKW); }
   const asset = grid.sources[0], sourceArc = flow.edge(source, nodeRefs.get(asset.nodeId)!.input, availableKW);
@@ -243,7 +259,8 @@ export function dispatchHydroGrid(world: WorldDefinition, state: SimState, nativ
   const { body, capability } = capabilityFor(world, state), grid = capability.definition;
   if (body.dispatch?.tick === state.tick && body.dispatch.at === hydroGridClock(state)) { need(body.dispatch.nativeMinutes === nativeMinutes, '同相位不得更换原请求'); return body; }
   const request = capability.pending; need(request && request.tick === state.tick && request.at === hydroGridClock(state) && request.nativeMinutes === nativeMinutes, '只能消费原time推进前预检的当前相位');
-  const availableKW = offerPagedHydro(capability.runtime!, state, body.hydro, request), observations = observedSources(state);
+  const physicalOfferKW = offerPagedHydro(capability.runtime!, state, body.hydro, request), observations = observedSources(state, world, request.at);
+  const availableKW = world.hydroMaintenance !== undefined && !observations.equipmentAvailable ? 0 : physicalOfferKW;
   validateObservations(world, state, observations);
   const window = solveWindow(world, grid, request, availableKW, body.hydro.upstreamM3 <= EPS, observations), prepared = preparePagedHydro(capability.runtime!, state, body.hydro, request, window.servedKW);
   window.sources[grid.sources[0].id].transferredM3 = prepared.window.transferredM3;
@@ -279,6 +296,7 @@ function exactData(actual: unknown, expected: unknown): void {
 export function validateHydroGridState(state: SimState, world: WorldDefinition): void {
   validateHydroGridDefinition(world); const grid = definition(world), body = bodyOf(state);
   if (!grid) { need(!body, '未声明水力地图不能带水力资产'); return; }
+  validateHydroMaintenanceState(state, world);
   need(body && state.power === undefined, '声明水力地图须有独立资产，不叠加旧聚合源'); dataObject(body, ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history']);
   need(body.version === 2 && body.kind === grid.kind && body.unit === grid.unit, '账本版本及单位');
   validatePagedHydro(grid.sources[0].hydro, body.hydro, hydroGridClock(state), state.tick);
@@ -288,15 +306,20 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
   const totals = { demandedKWh: 0, servedKWh: 0, unservedKWh: 0 }, water = pagedHydroWindows(body.hydro)[Symbol.iterator](); let at = 480, tick = 0, latest: HydroPowerGridDispatch | null = null;
   for (const window of hydroGridWindows(body)) {
     dataObject(window, DISPATCH_KEYS); need(window.tick === tick + 1 && window.beforeAt === at, '每实际tick连续保留当前和过去分表');
-    dataObject(window.loadSources, ['shops']); dataObject(window.vehicles, state.vehicles.map(vehicle => vehicle.id));
+    dataObject(window.loadSources, world.hydroMaintenance !== undefined ? ['shops', 'equipmentAvailable'] : ['shops']); dataObject(window.vehicles, state.vehicles.map(vehicle => vehicle.id));
     for (const meter of Object.values(window.vehicles)) dataObject(meter, ['nodeId', 'demandKW', 'servedKW', 'unservedKW', 'edgeId']);
     const observations: LoadSources = { shops: window.loadSources.shops, vehicles: Object.entries(window.vehicles).sort(([a], [b]) => a.localeCompare(b)).map(([id, meter]) => ({ id, edgeId: meter.edgeId })) };
+    if (world.hydroMaintenance !== undefined) {
+      observations.equipmentAvailable = hydroMaintenanceReadyAt(state, window.at, window.tick);
+      need(window.loadSources.equipmentAvailable === observations.equipmentAvailable, '历史设备许可须从完整已付款维修账重建');
+    }
     validateObservations(world, state, observations);
     const result = water.next(); need(!result.done, '电网窗不能缺真实转水账'); const hydraulic = result.value;
     need(hydraulic.tick === window.tick && hydraulic.beforeAt === window.beforeAt && hydraulic.at === window.at && hydraulic.nativeMinutes === window.nativeMinutes, '双账时间窗必须相同');
     const request: PagedHydroClockRequest = { tick: window.tick, beforeAt: window.beforeAt, at: window.at, nativeMinutes: window.nativeMinutes, intakeOpen: grid.sources[0].intake.open, outfallOpen: grid.sources[0].outfall.open };
     need(hydraulic.intakeOpen === request.intakeOpen && hydraulic.outfallOpen === request.outfallOpen, '历史水闸不能变换可信声明');
-    const expected = solveWindow(world, grid, request, hydraulic.availableKW, hydraulic.beforeUpstreamM3 <= EPS, observations); expected.sources[grid.sources[0].id].transferredM3 = hydraulic.transferredM3;
+    const effectiveOfferKW = world.hydroMaintenance !== undefined && !observations.equipmentAvailable ? 0 : hydraulic.availableKW;
+    const expected = solveWindow(world, grid, request, effectiveOfferKW, hydraulic.beforeUpstreamM3 <= EPS, observations); expected.sources[grid.sources[0].id].transferredM3 = hydraulic.transferredM3;
     need(hydraulic.acceptedKW === expected.servedKW, '转水只能消耗确定性源弧实际接受量'); exactData(window, expected); verifyConservation(grid, window);
     near(hydraulic.generatedKWh, expected.sources[grid.sources[0].id].generatedKWh);
     totals.demandedKWh += expected.demandKW * expected.minutes / 60; totals.servedKWh += expected.servedKW * expected.minutes / 60; totals.unservedKWh += expected.unservedKW * expected.minutes / 60;
@@ -311,6 +334,6 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
 export function bindHydroGridAfterLoad(world: WorldDefinition, state: SimState): void {
   if (!definition(world)) return;
   validateHydroGridState(state, world); const grid = definition(world)!, body = bodyOf(state)!;
-  freeze(grid); freeze(body); const runtime = createPagedHydroRuntime(state, grid.sources[0].hydro, body.hydro, hydroGridClock(state), state.tick);
+  freeze(grid); if (world.hydroMaintenance !== undefined) freeze(world.hydroMaintenance); freeze(body); const runtime = createPagedHydroRuntime(state, grid.sources[0].hydro, body.hydro, hydroGridClock(state), state.tick);
   caps.set(body, { world, definition: grid, physicalKey: physicalKey(world), loadIdentityKey: loadIdentityKey(state), owner: state, runtime, pending: null });
 }

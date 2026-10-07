@@ -1,5 +1,6 @@
 import type { PowerGridDefinition, StoragePowerGridDefinition, StoragePowerGridState } from './simulation/power-grid';
 import type { HydroPowerGridState } from './simulation/power-grid-hydro';
+import { installHydroMaintenance, hydroMaintenanceTaskActorIds, hydroMaintenanceTaskPoint } from './simulation/hydro-maintenance';
 import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
@@ -48,7 +49,7 @@ import type { Citizen, Command, CommandResult, Crime, NetworkEdge, Player, Relat
 
 const ORDER = ['time', 'environment', 'energy', 'traffic', 'people', 'commerce', 'finance', 'security', 'politics', 'feedback'] as const;
 const ROLES: Role[] = ['traveler', 'police', 'soldier', 'teacher', 'driver', 'merchant', 'mayor', 'scientist', 'official', 'council'];
-const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid', 'residentEducation'] as const;
+const PERSISTED_MODULES = ['extension', 'aviation', 'banking', 'family', 'culture', 'journey', 'trade', 'playerLabor', 'clinical', 'homeRest', 'education', 'power', 'shopLifecycle', 'governance', 'hygiene', 'pathology', 'roadNetwork', 'roadworks', 'roadDemands', 'familyEducation', 'civicStaffing', 'budgetAuthority', 'civicHistory', 'serviceMaterialScheduling', 'powerGrid', 'residentEducation', 'hydroMaintenance'] as const;
 const TICK_SECONDS = .25;
 const ROMANCE_STAGES = ['single', 'crush', 'pursuit', 'dating', 'engaged', 'married', 'family'] as const;
 const HOSTILITY_STAGES = ['none', 'discontent', 'rivalry', 'feud', 'enemy', 'mortalEnemy'] as const;
@@ -58,7 +59,7 @@ const copy = (p: Vec3): Vec3 => ({ x: p.x, y: p.y, z: p.z });
 const finite = (n: unknown): n is number => typeof n === 'number' && Number.isFinite(n);
 const hash = (value: string) => { let h = 2166136261; for (let i = 0; i < value.length; i++) h = Math.imul(h ^ value.charCodeAt(i), 16777619); return h >>> 0; };
 const canonicalNpcWages = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
-/** Only immutable actual native attendance notifications certify paid work.
+/** Only immutable actual native attendance notifications certify earned work.
  * Consumers that change an asset can require this city's current state/frame;
  * the one-argument form retains the original native-notification contract. */
 export const isCanonicalNpcWage = (event: object, simulation?: Simulation): boolean => {
@@ -67,6 +68,34 @@ export const isCanonicalNpcWage = (event: object, simulation?: Simulation): bool
     && witness.tick === simulation.state.tick
     && witness.at === (simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60));
 };
+export interface CanonicalNpcFullSettlement {
+  readonly citizenId: string; readonly shopId: string | null;
+  readonly amount: number; readonly requestedAmount: number; readonly net: number; readonly tax: number;
+  readonly at: number; readonly tick: number; readonly settledThroughAt: number;
+}
+// Minted only by the original cash writer after the full finite source debit,
+// wallet credit and tax queue entry. Attendance debt alone cannot certify this.
+const canonicalNpcFullSettlements = new WeakMap<object, {
+  simulation: Simulation; state: SimState; receipt: Readonly<CanonicalNpcFullSettlement>;
+  districtId: string;
+}>();
+interface CanonicalNpcPayrollSource {
+  simulation: Simulation; state: SimState; tick: number; at: number; amount: number;
+  citizenId: string; shopId: string | null; districtId: string;
+}
+const canonicalNpcPayrollNotices = new WeakMap<object, CanonicalNpcPayrollSource>();
+const canonicalNpcPayrollItems = new WeakMap<object, CanonicalNpcPayrollSource>();
+export function getCanonicalNpcFullSettlement(event: object, simulation: Simulation): Readonly<CanonicalNpcFullSettlement> | null {
+  const witness = canonicalNpcFullSettlements.get(event);
+  if (!witness || witness.simulation !== simulation || witness.state !== simulation.state) return null;
+  const receipt = witness.receipt, now = simulation.state.extension?.lastUpdate ?? simulation.state.day * 1440 + simulation.state.hour * 60;
+  const payload = event as Record<string, unknown>;
+  return receipt.tick === simulation.state.tick && receipt.at === now
+    && payload.type === 'wage-paid' && payload.citizenId === receipt.citizenId
+    && payload.shopId === (receipt.shopId ?? undefined) && payload.districtId === witness.districtId
+    && payload.amount === receipt.amount && payload.requestedAmount === receipt.requestedAmount
+    ? receipt : null;
+}
 // Only the actual player-labor cash writer can certify its funded work notice.
 // No registrar is exported; generic events and copied windows have no source.
 const canonicalPlayerLaborWages = new WeakMap<object, { simulation: Simulation; state: SimState; tick: number; at: number }>();
@@ -274,6 +303,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     installFamilyEducation(this);
     installResidentEducation(this, { enabled: () => this.residentTuitionPolicyId === RESIDENT_TUITION_POLICY, activate: () => { this.runtime.residentEducationVersion = 1; }, isCanonicalWage: event => isCanonicalNpcWage(event, this), isCanonicalPresence: event => { const source = canonicalResidentEducationPresence.get(event); return !!source && source.simulation === this && source.state === this.state && source.tick === this.state.tick; } });
     installHomeRest(this);
+    installHydroMaintenance(this);
     installPower(this, { activate: () => { this.runtime.powerVersion = 1; }, legacy: () => this.legacyEnergyContract(), publicSupply: () => this.runtime.publicSupply ?? 1, isCanonicalDisaster, isCanonicalResearchCompletion });
     installPowerGrid(this);
     installShopLifecycle(this);
@@ -865,7 +895,14 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       const citizen = this.state.citizens.find(c => c.id === e.citizenId), shopId = e.expenseAccrued ? e.shopId ?? null : e.shopId ?? (citizen ? this.state.shops.find(shop => shop.buildingId === citizen.workId)?.id ?? null : null);
       const amount = e.amount ?? 0, shop = this.state.shops.find(s => s.id === shopId);
       if (!e.expenseAccrued) { if (shop) shop.profit -= amount; this.bus.emit({ type: 'wage-earned', citizenId: e.citizenId, shopId: shop?.id, districtId: e.districtId, amount }); }
-      this.runtime.wages.push({ citizenId: e.citizenId, districtId: e.districtId, amount, shopId, expenseAccrued: true });
+      const queued = { citizenId: e.citizenId, districtId: e.districtId, amount, shopId, expenseAccrued: true };
+      const source = canonicalNpcPayrollNotices.get(e);
+      canonicalNpcPayrollNotices.delete(e);
+      if (source && source.simulation === this && source.state === this.state && source.tick === this.state.tick
+        && source.at === (this.state.extension?.lastUpdate ?? this.now) && source.amount === amount
+        && source.citizenId === e.citizenId && source.shopId === shopId && source.districtId === e.districtId && e.expenseAccrued === true)
+        canonicalNpcPayrollItems.set(queued, source);
+      this.runtime.wages.push(queued);
     });
     this.bus.on('sale', e => { this.runtime.taxes += (e.amount ?? 0) * this.state.taxRate; this.state.gdp += e.amount ?? 0; this.state.metrics.trades++; });
     this.bus.on('business-expense', e => { this.state.treasury += e.amount ?? 0; });
@@ -1340,7 +1377,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
       const educationWork = action === 'work' && destination.kind === 'school' && ['老师', 'teacher'].includes(citizen.role)
         && (this.state.education?.course?.siteId === destination.id && this.state.education.course.cancelledAt === null || this.state.culture?.orders.some(order => order.siteId === destination.id && order.topic === 'education' && order.state === 'active') || this.state.familyEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null) || this.state.residentEducation?.active.some(course => course.siteId === destination.id && course.cancelledAt === null));
       const educationPoints = educationWork ? points.filter(point => point.floor === 0 && educationServiceStationsAtPosition(destination, point.position, person, this.state.voxels).some(station => station.floor === point.floor)) : [];
-      const savedPowerPoint = action === 'work' && ['工程师', 'scientist', '科学家'].includes(citizen.role) ? powerRepairPoint(this.state, citizen.id, destination.id) : null;
+      const savedPowerPoint = action === 'work' && ['工程师', 'scientist', '科学家'].includes(citizen.role) ? powerRepairPoint(this.state, citizen.id, destination.id) ?? hydroMaintenanceTaskPoint(this.state, citizen.id, destination.id) : null;
       const powerPoints = savedPowerPoint ? points.filter(point => point.id === savedPowerPoint.id && point.floor === savedPowerPoint.floor && distance(point.position, savedPowerPoint.position) < 1e-7 && !homeRestPointBlockedByVoxels(point.position, this.state.voxels) && !blocksFloorPlanMovement(destination, point.floor, point.position, point.position, .35, 1.72)) : [];
       const sharedServicePoints = savedPowerPoint ? powerPoints : clinicalWork ? clinicalPoints : educationWork ? educationPoints : points;
       const previousTarget = citizen.route?.at(-1);
@@ -1380,7 +1417,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     const research = this.state.extension && Reflect.get(this.state.extension, 'runtime')?.researchJobs;
     if (Object.values(research ?? {}).some(raw => (raw as { actorId?: string }).actorId === citizen.id)) return false;
     if (this.state.roadworks?.jobs.some(job => roadworkActorId(job) === citizen.id && job.completedAt === null && job.cancelledAt === null)
-      || powerTaskActorIds(this.state).has(citizen.id) || clinicalTaskActorIds(this.state).has(citizen.id)
+      || powerTaskActorIds(this.state).has(citizen.id) || hydroMaintenanceTaskActorIds(this.state).has(citizen.id) || clinicalTaskActorIds(this.state).has(citizen.id)
       || educationNeedsContinuousPeople(this.state, citizen) || residentEducationNeedsContinuousPeople(this.state, citizen) || familyEducationTaskActorIds(this.state).has(citizen.id) || hygieneNeedsContinuousPeople(this.state, citizen)) return false;
     return true;
   }
@@ -1790,7 +1827,7 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     this.reviewPrivateShifts();
     const hour = this.state.hour;
     const pendingMinutes = this.runtime.peopleElapsed ??= {};
-    const researchActors = researchTaskActorIds(this.state), powerActors = powerTaskActorIds(this.state), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
+    const researchActors = researchTaskActorIds(this.state), powerActors = new Set([...powerTaskActorIds(this.state), ...hydroMaintenanceTaskActorIds(this.state)]), clinicalActors = clinicalTaskActorIds(this.state), familyLearners = familyEducationTaskActorIds(this.state);
     for (let i = 0; i < this.state.citizens.length; i++) {
       const citizen = this.state.citizens[i];
       // At most seven persisted new research jobs request fine task processing.
@@ -1949,8 +1986,12 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     if (this.now + 1e-7 >= this.runtime.payrollAt) {
       // Earned labour remains payable even after a job change, closure or death.
       // Each contract retains the employer and rate promised on first attendance.
-      for (const claim of this.runtime.wageAccruals ?? []) if (claim.amount > 0)
-        this.bus.emit({ type: 'wage', citizenId: claim.citizenId, shopId: claim.shopId ?? undefined, districtId: claim.districtId, amount: claim.amount, expenseAccrued: true });
+      for (const claim of this.runtime.wageAccruals ?? []) if (claim.amount > 0) {
+        const event = { type: 'wage', citizenId: claim.citizenId, shopId: claim.shopId ?? undefined, districtId: claim.districtId, amount: claim.amount, expenseAccrued: true };
+        canonicalNpcPayrollNotices.set(event, { simulation: this, state: this.state, tick: this.state.tick, at: this.state.extension?.lastUpdate ?? this.now,
+          amount: claim.amount, citizenId: claim.citizenId, shopId: claim.shopId, districtId: claim.districtId });
+        this.bus.emit(event);
+      }
       this.runtime.wageAccruals = [];
       this.runtime.payrollAt = (this.state.day + (hour >= 17 ? 1 : 0)) * 1440 + 17 * 60;
       if (this.runtime.payrollAt <= this.now) this.runtime.payrollAt += 1440;
@@ -2109,8 +2150,28 @@ export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> 
     for (const wage of pending.values()) { if (wage.shopId) privateRequests.set(wage.shopId, (privateRequests.get(wage.shopId) ?? 0) + wage.amount); else publicRequest += wage.amount; }
     const publicRatio = Math.min(1, this.state.treasury / Math.max(1e-9, publicRequest));
     const privateRatios = new Map(this.state.shops.map(shop => [shop.id, Math.min(1, this.shopFunds(shop) / Math.max(1e-9, privateRequests.get(shop.id) ?? 0))]));
+    const payrollAt = this.state.extension?.lastUpdate ?? this.now;
+    const freshPayroll = new Map<string, boolean>();
+    for (const item of this.runtime.wages) {
+      const key = `${item.shopId ?? 'public'}:${item.citizenId}`, source = canonicalNpcPayrollItems.get(item);
+      const current = !!source && source.simulation === this && source.state === this.state
+        && source.tick === this.state.tick && source.at === payrollAt && source.amount === item.amount
+        && source.citizenId === item.citizenId && source.shopId === item.shopId && source.districtId === item.districtId;
+      freshPayroll.set(key, (freshPayroll.get(key) ?? true) && current);
+    }
+    const oldArrears = new Set((this.runtime.wageArrears ?? []).filter(item => item.amount > 0).map(item => `${item.shopId ?? 'public'}:${item.citizenId}`));
     const arrears: NonNullable<Runtime['wageArrears']> = [];
-    for (const wage of pending.values()) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (!citizen) continue; const employer = wage.shopId ? this.state.shops.find(s => s.id === wage.shopId)! : null; const amount = Math.min(employer ? wage.amount * privateRatios.get(employer.id)! : wage.amount * publicRatio, Math.max(0, 1e9 - citizen.money) / (1 - this.state.taxRate)); if (employer) { this.transferShopFunds(employer, -amount); } else this.state.treasury -= amount; const tax = amount * this.state.taxRate; citizen.money = clamp(citizen.money + amount - tax, 0, 1e9); this.runtime.taxes += tax; const unpaid = wage.amount - amount; if (unpaid > 1e-8) arrears.push({ ...wage, amount: unpaid }); if (amount > 0) this.bus.emit({ type: 'wage-paid', citizenId: citizen.id, shopId: employer?.id, districtId: citizen.districtId, amount, requestedAmount: wage.amount }); }
+    for (const wage of pending.values()) { const citizen = this.state.citizens.find(c => c.id === wage.citizenId); if (!citizen) continue; const employer = wage.shopId ? this.state.shops.find(s => s.id === wage.shopId)! : null; const amount = Math.min(employer ? wage.amount * privateRatios.get(employer.id)! : wage.amount * publicRatio, Math.max(0, 1e9 - citizen.money) / (1 - this.state.taxRate)); if (employer) { this.transferShopFunds(employer, -amount); } else this.state.treasury -= amount; const tax = amount * this.state.taxRate; citizen.money = clamp(citizen.money + amount - tax, 0, 1e9); this.runtime.taxes += tax; const unpaid = wage.amount - amount; if (unpaid > 1e-8) arrears.push({ ...wage, amount: unpaid }); if (amount > 0) {
+      const event = { type: 'wage-paid', citizenId: citizen.id, shopId: employer?.id, districtId: citizen.districtId, amount, requestedAmount: wage.amount };
+      const payrollKey = `${employer?.id ?? 'public'}:${citizen.id}`;
+      if (amount === wage.amount && !oldArrears.has(payrollKey) && freshPayroll.get(payrollKey) === true) {
+        const at = this.state.extension?.lastUpdate ?? this.now;
+        const receipt: Readonly<CanonicalNpcFullSettlement> = Object.freeze({ citizenId: citizen.id, shopId: employer?.id ?? null,
+          amount, requestedAmount: wage.amount, net: amount - tax, tax, at, tick: this.state.tick, settledThroughAt: at });
+        canonicalNpcFullSettlements.set(event, { simulation: this, state: this.state, receipt, districtId: citizen.districtId });
+      }
+      this.bus.emit(event);
+    } }
     this.runtime.wageArrears = arrears;
     this.runtime.wages.length = 0;
     this.state.treasury = clamp(this.state.treasury + this.runtime.taxes, 0, 1e12); this.runtime.taxes = 0;

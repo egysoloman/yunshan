@@ -1,0 +1,270 @@
+{
+  "tsc01": {
+    "startedAt": "2026-10-07T04:36:12.710514+00:00",
+    "endedAt": "2026-10-07T04:36:32.971511+00:00",
+    "argv": [
+      "node",
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ownedPid": 8589,
+    "observedDescendants": 1,
+    "finalOwnedMembers": [],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "pure01": {
+    "startedAt": "2026-10-07T04:36:43.950772+00:00",
+    "endedAt": "2026-10-07T04:36:48.813364+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-concurrency=1",
+      "tests/power-hydro.test.ts",
+      "tests/power-hydro-runtime.test.ts",
+      "tests/power-grid-hydro.test.ts",
+      "tests/hydro-maintenance.test.ts"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "2cebaa5c81457239b46077516ec2f197d986a8321c96b0b563f1da87b073aab1",
+    "ownedPid": 8612,
+    "observedDescendants": 6,
+    "finalOwnedMembers": [
+      {
+        "pid": 8626,
+        "state": "Z",
+        "parent": 1,
+        "group": 8612,
+        "session": 8612,
+        "startTicks": 390670
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "native01": {
+    "startedAt": "2026-10-07T04:37:15.824833+00:00",
+    "endedAt": "2026-10-07T04:37:42.330343+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "scripts/hydro-maintenance-actual.ts",
+      "--out",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/native01/artifacts",
+      "--plan",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/PLAN.json"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "b8801fbb14803448ffc52ed7dda6e0da9ccc7078734b1fa20935b7a2f0d763a8",
+    "ownedPid": 8681,
+    "observedDescendants": 2,
+    "finalOwnedMembers": [
+      {
+        "pid": 8689,
+        "state": "Z",
+        "parent": 1,
+        "group": 8681,
+        "session": 8681,
+        "startTicks": 393841
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "legacy-equivalence01": {
+    "startedAt": "2026-10-07T04:38:13.365376+00:00",
+    "endedAt": "2026-10-07T04:38:35.340197+00:00",
+    "argv": [
+      "bash",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/legacy-plan/run-sequential.sh",
+      "--candidate",
+      "/tmp/ROOT22-legacy-compat/candidate-source",
+      "--out",
+      "/tmp/ROOT22-legacy-compat/run01",
+      "--cap-seconds",
+      "120",
+      "--memory-mb",
+      "3072",
+      "--steps",
+      "4"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "8bb0635b9acd5edb01a3f6c37383a0a040bc44a1a8259a5401a2351f2c0c33d5",
+    "ownedPid": 8732,
+    "observedDescendants": 13,
+    "finalOwnedMembers": [
+      {
+        "pid": 8745,
+        "state": "Z",
+        "parent": 1,
+        "group": 8736,
+        "session": 8732,
+        "startTicks": 399611
+      },
+      {
+        "pid": 8767,
+        "state": "Z",
+        "parent": 1,
+        "group": 8758,
+        "session": 8732,
+        "startTicks": 400460
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "legacy-rules01": {
+    "startedAt": "2026-10-07T04:39:32.872094+00:00",
+    "endedAt": "2026-10-07T04:42:30.490984+00:00",
+    "argv": [
+      "node",
+      "--import",
+      "tsx",
+      "--test",
+      "--test-isolation=process",
+      "--test-concurrency=1",
+      "tests/power-grid.test.ts",
+      "tests/power-grid-integration.test.ts",
+      "tests/power.test.ts",
+      "tests/player-labor.test.ts",
+      "tests/power-current-wage-source.test.ts",
+      "tests/building-light-supply.test.ts",
+      "tests/building-alteration.test.ts",
+      "tests/clinical-grid-native-start-functional.test.ts",
+      "tests/clinical-grid-power-pure.test.ts"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "4c9c6921f4e411d52829b94970b7208e4dc362f5b892df0afb4d9b8ee240a143",
+    "ownedPid": 8898,
+    "observedDescendants": 10,
+    "finalOwnedMembers": [],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "build01": {
+    "startedAt": "2026-10-07T04:43:00.240827+00:00",
+    "endedAt": "2026-10-07T04:43:18.890076+00:00",
+    "argv": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 397,
+    "inputsStable": true,
+    "rawSHA256": "eb671ebc557edce5d90a5e537d74ceb636165cfffa82f8204334c54f0487ba71",
+    "ownedPid": 9250,
+    "observedDescendants": 5,
+    "finalOwnedMembers": [
+      {
+        "pid": 9285,
+        "state": "Z",
+        "parent": 1,
+        "group": 9250,
+        "session": 9250,
+        "startTicks": 429631
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "ui01": {
+    "startedAt": "2026-10-07T04:43:55.398028+00:00",
+    "endedAt": "2026-10-07T04:44:03.152445+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/ui-plan/capture-maintenance-ui.mjs",
+      "--source",
+      "/workspace/yunshan",
+      "--world",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/native01/artifacts/World.original.json",
+      "--save",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/native01/artifacts/TERMINAL.raw.json",
+      "--evidence",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/native01/artifacts",
+      "--out",
+      "/workspace/yunshan-work/ROOT22-maintenance-integration-20261007-01/ui01/artifacts",
+      "--port",
+      "4189",
+      "--cap",
+      "110"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "capSeconds": 120.0,
+    "interruptedSignal": null,
+    "elapsedSeconds": 7.98900539799979,
+    "waitTimedOut": false,
+    "finalHashFailure": null,
+    "inputsStable": true,
+    "inputCount": 397,
+    "rawSHA256": "4909b86af0f74d091759b0e73759d22cf817e133eacf7a25b462a0e40a54e0d2",
+    "ownedPid": 9342,
+    "observedDescendants": 11,
+    "activeDescendants": [],
+    "finalOwnedMembers": [
+      {
+        "pid": 9371,
+        "state": "Z",
+        "parent": 1,
+        "group": 9354,
+        "session": 9354,
+        "startTicks": 433957
+      },
+      {
+        "pid": 9372,
+        "state": "Z",
+        "parent": 1,
+        "group": 9354,
+        "session": 9354,
+        "startTicks": 433957
+      },
+      {
+        "pid": 9467,
+        "state": "Z",
+        "parent": 1,
+        "group": 9342,
+        "session": 9342,
+        "startTicks": 434068
+      }
+    ],
+    "ownedLoopbackListenProved": true,
+    "finalPortListeners": [],
+    "wrapperSHA256": "482d448ec1004f020751dd233544868dac283c2e63d88eaa3f4f51f9bd368cd7",
+    "ownershipScope": "Only PID/startTicks descendants discovered by recursive ancestry. No process-name kill, unrelated listener reuse, or unobserved historical ownership claim."
+  }
+}

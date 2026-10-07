@@ -94,6 +94,14 @@ function actualPoint(sim: Simulation, site: Building, actor: Citizen | Player): 
   }
   return null;
 }
+/** Reuse the same authoritative floor, permissions, body support and voxel
+ * checks for explicitly declared maintenance; these do not assign a role. */
+export function powerControlPointAt(sim: Simulation, site: Building, actor: Citizen | Player): PowerControlPoint | null {
+  return actualPoint(sim, site, actor);
+}
+export function powerControlBodyAt(sim: Simulation, site: Building, point: PowerControlPoint, actor: Citizen | Player): boolean {
+  return bodyAt(sim, site, point, actor);
+}
 export function powerRepairPoint(state: SimState, citizenId: string, siteId: string): PowerControlPoint | null {
   if (siteId !== state.power?.operatorSiteId) return null;
   return state.power.repairs.find(job => !ended(job) && job.status !== 'refundPending' && job.technicianId === citizenId)?.point ?? null;

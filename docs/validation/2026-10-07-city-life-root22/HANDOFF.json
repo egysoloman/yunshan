@@ -1,0 +1,74 @@
+{
+  "recordedAt": "2026-10-07T04:58:02.178014+00:00",
+  "stage": "ROOT22",
+  "fullGoalComplete": false,
+  "stageImplementation": "IMPLEMENTED_AND_VALIDATED",
+  "baselineCommit": "8c7a952ed18e03905d5a15d49a2a70504d8bfb71",
+  "targetBranch": "takeover-city-life",
+  "commitPushStateAtThisSnapshot": "PENDING; later external FINAL-PUSH-READBACK.json and actual Git commit are authoritative",
+  "mainLastVerified": "70447c199e9587e379c9620a25591967e9078ee7",
+  "functionalManifest": "FINAL-FUNCTIONAL-SHA256.json",
+  "functionalCount": 397,
+  "unchangedBaselineTestPaths": 254,
+  "memoBaselinePrefixBytes": 559645,
+  "checks": "CHECK-RESULTS.json",
+  "directedRulesPassed": 152,
+  "nativeOrdinaryStepCalls": 232,
+  "nativeMainWindows": 160,
+  "freshRestoresTimes24": 3,
+  "uiSeparateBranch": {
+    "sim": 1,
+    "imports": 4,
+    "steps": 0,
+    "realDomRequests": 1,
+    "originalScreenshots": 6
+  },
+  "archives": [
+    {
+      "filename": "ROOT22-SOURCE-AND-BUILD.zip",
+      "bytes": 15628011,
+      "sha256": "7e5c2fd3bc637dbcadee2c99e98a89b8ea31addc001146eecf4f106b0ea9a157",
+      "memberCount": 428,
+      "zipExpandedMemberBytes": 51482279,
+      "everyMemberReadbackExact": true
+    },
+    {
+      "filename": "ROOT22-ORIGINAL-VALIDATION.zip",
+      "bytes": 37215720,
+      "sha256": "99d990c33d572d33a42072cc649a3bf91c29a7994dc63d90c12324196c69e908",
+      "memberCount": 1079,
+      "zipExpandedMemberBytes": 79265936,
+      "everyMemberReadbackExact": true
+    }
+  ],
+  "archiveDecodedNativeSaveBytes": 173519787,
+  "library": "LIBRARY-DELIVERY-STATUS.json",
+  "preferredDefaultWorld": {
+    "path": "/workspace/yunshan-work/ROOT16-food-integration-20261005-01/originals/WORLD-ORIGINAL.json",
+    "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+  },
+  "preferredDefaultSave": {
+    "path": "docs/validation/2026-10-05-city-life-root20/ROOT20-PRIMARY-1700.save.json",
+    "sha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+  },
+  "otherCityWorld": "ROOT22-OTHER-CITY-WORLD.original.json",
+  "otherCitySave": "ROOT22-OTHER-CITY-1704.save.json",
+  "nextWork": [
+    "explicit optional shared-dispatch history encoding under unchanged complete save bounds; all historical windows must replay exact original physical dispatch",
+    "from untouched original4610 default save, next-day original job approval/attendance/production/real supplier cash/17:00 payroll causal audit"
+  ],
+  "remaining": [
+    "default-city hydro declaration and lawful energy hiring",
+    "purchase/construction/wear/refill/power tariff",
+    "old-arrears later-full maintenance settlement",
+    "alternate-world production GUI import",
+    "dynamic shop ownership, demolition, roads and disasters",
+    "sanitation and virus long-term feedback",
+    "full family lifecycle and culture/information",
+    "actual statistics regions, streaming and chunk persistence",
+    "reference art ART_FAIL",
+    "macOS hardware NOT_RUN",
+    "current 14-day economy stability unverified"
+  ],
+  "authorization": "normal commit and push takeover-city-life only; no force/main/PR/merge/deploy/paid/credential or sharing changes"
+}

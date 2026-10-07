@@ -1,4 +1,5 @@
 import { transferActivityClaims } from './hygiene-transfer';
+import { hydroMaintenanceActivityClaims } from './hydro-maintenance';
 import type { SimState } from '../types';
 
 export interface ActivityCapacityWitness {
@@ -49,6 +50,7 @@ export function collectActorActivityClaims(state: SimState): ActorActivityClaim[
       add({ id: 'hygiene:' + job.id + ':' + actorId, actorId, startedAt: period.startedAt, endedAt: period.endedAt, workedMinutes: period.workedMinutes });
   }
   for (const claim of transferActivityClaims(state)) add(claim);
+  for (const claim of hydroMaintenanceActivityClaims(state)) add(claim);
   return result;
 }
 export function validateJointActorActivityCapacity(state: SimState): void {

@@ -1,0 +1,605 @@
+{
+  "seed": 923,
+  "voxelSize": 0.2,
+  "size": 100,
+  "buildings": [
+    {
+      "id": "other-city-home",
+      "kind": "home",
+      "name": "home",
+      "districtId": "other-city",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 0,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 1
+    },
+    {
+      "id": "other-city-farm",
+      "kind": "farm",
+      "name": "farm",
+      "districtId": "other-city",
+      "position": {
+        "x": 4,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 4,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 2
+    },
+    {
+      "id": "other-city-market",
+      "kind": "market",
+      "name": "market",
+      "districtId": "other-city",
+      "position": {
+        "x": 8,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 8,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 3
+    },
+    {
+      "id": "other-city-clinic",
+      "kind": "clinic",
+      "name": "clinic",
+      "districtId": "other-city",
+      "position": {
+        "x": 12,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 12,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 4
+    },
+    {
+      "id": "other-city-hydro-core",
+      "kind": "core",
+      "facility": "energy",
+      "name": "受控有限水力站",
+      "districtId": "other-city",
+      "position": {
+        "x": 20,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 20,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 5
+    },
+    {
+      "id": "other-city-workshop",
+      "kind": "workshop",
+      "name": "受控工业材料工坊",
+      "districtId": "other-city",
+      "position": {
+        "x": 24,
+        "y": 0,
+        "z": 0
+      },
+      "door": {
+        "x": 24,
+        "y": 0.6,
+        "z": 2
+      },
+      "width": 3,
+      "depth": 3,
+      "height": 3,
+      "floors": 1,
+      "rotation": 0,
+      "capacity": 120,
+      "seed": 6
+    }
+  ],
+  "nodes": [
+    {
+      "id": "other-city-home-door",
+      "districtId": "other-city",
+      "name": "home",
+      "position": {
+        "x": 0,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    },
+    {
+      "id": "other-city-farm-door",
+      "districtId": "other-city",
+      "name": "farm",
+      "position": {
+        "x": 4,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    },
+    {
+      "id": "other-city-market-door",
+      "districtId": "other-city",
+      "name": "market",
+      "position": {
+        "x": 8,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    },
+    {
+      "id": "other-city-clinic-door",
+      "districtId": "other-city",
+      "name": "clinic",
+      "position": {
+        "x": 12,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    },
+    {
+      "id": "other-city-hydro-core-door",
+      "districtId": "other-city",
+      "name": "受控有限水力站",
+      "position": {
+        "x": 20,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    },
+    {
+      "id": "other-city-workshop-door",
+      "districtId": "other-city",
+      "name": "受控工业材料工坊",
+      "position": {
+        "x": 24,
+        "y": 0.6,
+        "z": 2
+      },
+      "station": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "other-road-0",
+      "from": "other-city-home-door",
+      "to": "other-city-farm-door",
+      "mode": "road",
+      "length": 4,
+      "capacity": 20,
+      "points": [
+        {
+          "x": 0,
+          "y": 0.6,
+          "z": 2
+        },
+        {
+          "x": 4,
+          "y": 0.6,
+          "z": 2
+        }
+      ]
+    },
+    {
+      "id": "other-road-1",
+      "from": "other-city-farm-door",
+      "to": "other-city-market-door",
+      "mode": "road",
+      "length": 4,
+      "capacity": 20,
+      "points": [
+        {
+          "x": 4,
+          "y": 0.6,
+          "z": 2
+        },
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 2
+        }
+      ]
+    },
+    {
+      "id": "other-road-2",
+      "from": "other-city-market-door",
+      "to": "other-city-clinic-door",
+      "mode": "road",
+      "length": 4,
+      "capacity": 20,
+      "points": [
+        {
+          "x": 8,
+          "y": 0.6,
+          "z": 2
+        },
+        {
+          "x": 12,
+          "y": 0.6,
+          "z": 2
+        }
+      ]
+    },
+    {
+      "id": "other-hydro-road",
+      "from": "other-city-clinic-door",
+      "to": "other-city-hydro-core-door",
+      "mode": "road",
+      "length": 8,
+      "capacity": 20,
+      "points": [
+        {
+          "x": 12,
+          "y": 0.6,
+          "z": 2
+        },
+        {
+          "x": 20,
+          "y": 0.6,
+          "z": 2
+        }
+      ]
+    },
+    {
+      "id": "other-materials-road",
+      "from": "other-city-hydro-core-door",
+      "to": "other-city-workshop-door",
+      "mode": "road",
+      "length": 4,
+      "capacity": 20,
+      "points": [
+        {
+          "x": 20,
+          "y": 0.6,
+          "z": 2
+        },
+        {
+          "x": 24,
+          "y": 0.6,
+          "z": 2
+        }
+      ]
+    }
+  ],
+  "districts": [
+    {
+      "id": "other-city",
+      "name": "另一城市",
+      "kind": "industry",
+      "center": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "radius": 40,
+      "color": "#ffffff",
+      "population": 384
+    }
+  ],
+  "mountains": [],
+  "spawn": {
+    "x": 0,
+    "y": 0.6,
+    "z": 2
+  },
+  "river": [],
+  "waterfall": {
+    "top": {
+      "x": 30,
+      "y": 10,
+      "z": 30
+    },
+    "bottom": {
+      "x": 30,
+      "y": 0,
+      "z": 30
+    },
+    "width": 2
+  },
+  "powerGrid": {
+    "version": 2,
+    "kind": "finite-hydro-network",
+    "unit": "kW-kWh-v1",
+    "nodes": [
+      {
+        "id": "source",
+        "kind": "junction",
+        "position": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "capacityKW": 100
+      },
+      {
+        "id": "north",
+        "kind": "substation",
+        "position": {
+          "x": 4,
+          "y": 1,
+          "z": 0
+        },
+        "capacityKW": 100
+      },
+      {
+        "id": "south",
+        "kind": "substation",
+        "position": {
+          "x": 8,
+          "y": 1,
+          "z": 0
+        },
+        "capacityKW": 100
+      },
+      {
+        "id": "clinic",
+        "kind": "substation",
+        "position": {
+          "x": 12,
+          "y": 1,
+          "z": 0
+        },
+        "capacityKW": 100
+      },
+      {
+        "id": "island",
+        "kind": "substation",
+        "position": {
+          "x": 16,
+          "y": 1,
+          "z": 0
+        },
+        "capacityKW": 100
+      }
+    ],
+    "links": [
+      {
+        "id": "north-line",
+        "from": "source",
+        "to": "north",
+        "capacityKW": 100,
+        "closed": true,
+        "points": [
+          {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "z": 0
+          }
+        ]
+      },
+      {
+        "id": "south-line",
+        "from": "source",
+        "to": "south",
+        "capacityKW": 100,
+        "closed": true,
+        "points": [
+          {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          {
+            "x": 8,
+            "y": 1,
+            "z": 0
+          }
+        ]
+      },
+      {
+        "id": "clinic-line",
+        "from": "source",
+        "to": "clinic",
+        "capacityKW": 100,
+        "closed": true,
+        "points": [
+          {
+            "x": 0,
+            "y": 1,
+            "z": 0
+          },
+          {
+            "x": 12,
+            "y": 1,
+            "z": 0
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "other-hydro",
+        "buildingId": "other-city-hydro-core",
+        "nodeId": "source",
+        "intake": {
+          "reservoirId": "other-upper-reservoir",
+          "position": {
+            "x": 20,
+            "y": 10,
+            "z": 0
+          },
+          "open": true
+        },
+        "outfall": {
+          "reservoirId": "other-lower-reservoir",
+          "position": {
+            "x": 20,
+            "y": 0,
+            "z": 0
+          },
+          "open": true
+        },
+        "penstockPoints": [
+          {
+            "x": 20,
+            "y": 10,
+            "z": 0
+          },
+          {
+            "x": 20,
+            "y": 0,
+            "z": 0
+          }
+        ],
+        "hydro": {
+          "version": 1,
+          "kind": "finite-constant-head-hydro",
+          "id": "other-hydro",
+          "enabledAt": 480,
+          "upstream": {
+            "id": "other-upper-reservoir",
+            "capacityM3": 10000,
+            "initialM3": 10000
+          },
+          "downstream": {
+            "id": "other-lower-reservoir",
+            "capacityM3": 20000,
+            "initialM3": 0
+          },
+          "headMeters": 10,
+          "efficiency": 0.9,
+          "maximumM3PerMinute": 100,
+          "maximumKW": 100
+        }
+      }
+    ],
+    "buildings": [
+      {
+        "buildingId": "other-city-home",
+        "nodeId": "source",
+        "baseKW": 2,
+        "nightKW": 1,
+        "shopKW": 0.5
+      },
+      {
+        "buildingId": "other-city-farm",
+        "nodeId": "north",
+        "baseKW": 2,
+        "nightKW": 1,
+        "shopKW": 0.5
+      },
+      {
+        "buildingId": "other-city-market",
+        "nodeId": "south",
+        "baseKW": 2,
+        "nightKW": 1,
+        "shopKW": 0.5
+      },
+      {
+        "buildingId": "other-city-clinic",
+        "nodeId": "clinic",
+        "baseKW": 2,
+        "nightKW": 1,
+        "shopKW": 0.5
+      },
+      {
+        "buildingId": "other-city-hydro-core",
+        "nodeId": "source",
+        "baseKW": 0,
+        "nightKW": 0,
+        "shopKW": 0.5
+      },
+      {
+        "buildingId": "other-city-workshop",
+        "nodeId": "source",
+        "baseKW": 2,
+        "nightKW": 1,
+        "shopKW": 0.5
+      }
+    ],
+    "transport": [
+      {
+        "edgeId": "other-road-0",
+        "nodeId": "source",
+        "vehicleKW": 0.08
+      },
+      {
+        "edgeId": "other-road-1",
+        "nodeId": "source",
+        "vehicleKW": 0.08
+      },
+      {
+        "edgeId": "other-road-2",
+        "nodeId": "source",
+        "vehicleKW": 0.08
+      },
+      {
+        "edgeId": "other-hydro-road",
+        "nodeId": "source",
+        "vehicleKW": 0.08
+      },
+      {
+        "edgeId": "other-materials-road",
+        "nodeId": "source",
+        "vehicleKW": 0.08
+      }
+    ]
+  },
+  "hydroMaintenance": {
+    "version": 1,
+    "kind": "paid-hydro-maintenance",
+    "sourceId": "other-hydro",
+    "operatorSiteId": "other-city-hydro-core",
+    "initialNeedsRepair": true,
+    "requiredMinutes": 60,
+    "materialUnits": 1,
+    "playerEscrow": 100
+  }
+}
