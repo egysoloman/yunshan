@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { Simulation, isCanonicalNpcWage } from '../src/simulation';
 import { beginClinicalTreatment, clinicalPairAtServiceStation } from '../src/simulation/clinical';
 import { gridBuildingSupplyRatio } from '../src/simulation/power-grid';
+import type { StoragePowerGridDefinition } from '../src/simulation/power-grid';
+import type { WorldDefinition } from '../src/types';
 import { fixture } from './clinical-presence-fixture';
 import { clock, initialIntent } from './clinical-arrival-fixture';
 
@@ -32,7 +34,7 @@ for (const scenario of cases) test(scenario.name + ': finite power, original pai
     storage: [{ id: 'declared-finite-battery', buildingId: 'pair-clinic', nodeId: node.id, maximumP: scenario.maximum, initialStoredPMinutes: scenario.stored }, { id: 'declared-finite-provider-battery', buildingId: provider.id, nodeId: providerNode.id, maximumP: providerDemandP, initialStoredPMinutes: providerDemandP * 16 }],
     buildings: world.buildings.map(site => ({ buildingId: site.id, nodeId: site.id === 'pair-clinic' ? scenario.connected ? node.id : null : providerNode.id, baseP: 2, nightP: 1, shopP: .5 })),
     transport: [] };
-  const sim = new Simulation(world);
+  const sim = new Simulation<StoragePowerGridDefinition>(world as WorldDefinition & { powerGrid?: StoragePowerGridDefinition });
   assert.equal(sim.state.shops.length, 3); assert.equal(sim.state.vehicles.length, 0);
   assert.equal(sim.state.shops.filter(shop => ['pair-market', 'pair-workshop', 'pair-farm'].includes(shop.buildingId)).length, 3);
   const site = sim.worldDefinition.buildings.find(site => site.id === 'pair-clinic')!;

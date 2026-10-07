@@ -1,3 +1,5 @@
+import type { PowerGridDefinition, StoragePowerGridDefinition, StoragePowerGridState } from './simulation/power-grid';
+import type { HydroPowerGridState } from './simulation/power-grid-hydro';
 import { installPowerGrid, gridBuildingSupplyRatio, gridVehicleSupplyRatio, gridPoweredWorkMinutes, validatePowerGridDefinition } from './simulation/power-grid';
 import { runScheduledServiceProcurement } from './simulation/service-material-scheduling';
 import { giftContactReason } from './simulation/gift-contact';
@@ -150,8 +152,10 @@ interface Runtime {
 type VoxelState = SimState & { voxels: { id: string; position: Vec3; color: string }[] };
 
 /** Deterministic fixed-tick city model. Rendering never drives schedules or transactions. */
-export class Simulation implements SimulationAPI {
-  state: VoxelState;
+type GridStateFor<Definition extends PowerGridDefinition> = Definition extends StoragePowerGridDefinition ? StoragePowerGridState : HydroPowerGridState;
+type VoxelStateFor<Definition extends PowerGridDefinition> = VoxelState & { powerGrid?: GridStateFor<Definition> };
+export class Simulation<Grid extends PowerGridDefinition = PowerGridDefinition> implements SimulationAPI {
+  state: VoxelStateFor<Grid>;
   private runtime: Runtime;
   private readonly bus = new EventBus();
   private readonly buildings: Map<string, Building>;
@@ -171,6 +175,8 @@ export class Simulation implements SimulationAPI {
   private readonly saveValidators: ((candidateState: SimState) => void)[] = [];
   private readonly loadHooks: (() => void)[] = [];
   private readonly commandHandlers: ((command: Command) => CommandResult | null)[] = [];
+  private readonly stepPreflights: ((state: SimState, minutes: number, ticks: number) => void)[] = [];
+  private readonly beforeTickHooks: ((state: SimState, minutes: number) => void)[] = [];
   private readonly baselineCitizenIds = new Set<string>();
   private readonly initialCivicProfessions: CivicInitialProfession[] = [];
   private readonly legacyRiderArrivalAt = new WeakMap<object, number>();
@@ -186,7 +192,7 @@ export class Simulation implements SimulationAPI {
   private foodHiringDemandState?: SimState;
   private foodHiringDemandTick = -1;
   private readonly foodHiringDemand = new Map<string, { id: string; position: Vec3; route: Vec3[] | undefined; routeIndex: number | undefined; travel: number | undefined }[]>();
-  constructor(private readonly world: WorldDefinition, options?: SimulationOptions) {
+  constructor(private readonly world: WorldDefinition & { powerGrid?: Grid }, options?: SimulationOptions) {
     if (options !== undefined && (!options || typeof options !== 'object' || Object.keys(options).some(key => !['rulesetId', 'historyPolicyId', 'referenceCollisionPolicyId', 'mealRoutePolicyId', 'freightPickupPolicyId', 'freightDeliveryPolicyId', 'residentTuitionPolicyId'].includes(key)) || options.rulesetId !== 'civic-local-v1' || options.historyPolicyId !== undefined && options.historyPolicyId !== 'civic-history-pages-v1'
       || options.referenceCollisionPolicyId !== undefined && (options.referenceCollisionPolicyId !== CONTINUOUS_REFERENCE_COLLISION_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
       || options.mealRoutePolicyId !== undefined && (options.mealRoutePolicyId !== NEARBY_MEAL_ROUTE_POLICY || options.historyPolicyId !== 'civic-history-pages-v1')
@@ -891,8 +897,17 @@ export class Simulation implements SimulationAPI {
   }
   step(realSeconds: number) {
     if (!finite(realSeconds) || realSeconds < 0 || realSeconds > 120 || this.state.paused) return;
+    // Optional finite-resource modules inspect the whole requested batch before
+    // accumulator, clock, tick or any persisted state changes. Legacy worlds
+    // register no hooks and retain the original accumulator/phase path.
+    if (this.stepPreflights.length) {
+      let remaining = this.runtime.accumulator + realSeconds, ticks = 0;
+      while (remaining + 1e-10 >= TICK_SECONDS) { remaining = Math.max(0, remaining - TICK_SECONDS); ticks++; }
+      if (ticks) for (const inspect of this.stepPreflights) inspect(this.state, .25 * this.state.speed, ticks);
+    }
     this.runtime.accumulator += realSeconds;
     while (this.runtime.accumulator + 1e-10 >= TICK_SECONDS) {
+      for (const prepare of this.beforeTickHooks) prepare(this.state, .25 * this.state.speed);
       this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
       this.minutes = .25 * this.state.speed;
       this.state.lastSystemOrder = [];
@@ -920,6 +935,8 @@ export class Simulation implements SimulationAPI {
   registerCommandHandler(handler: (command: Command) => CommandResult | null) { this.commandHandlers.push(handler); }
   registerSaveValidator(validator: (candidateState: SimState) => void) { this.saveValidators.push(validator); }
   onLoad(handler: () => void) { this.loadHooks.push(handler); }
+  registerStepPreflight(handler: (state: SimState, minutes: number, ticks: number) => void) { this.stepPreflights.push(handler); }
+  onBeforeTick(handler: (state: SimState, minutes: number) => void) { this.beforeTickHooks.push(handler); }
   private time() { this.state.tick++; this.runtime.relationshipClock = Math.round((this.runtime.relationshipClock + this.minutes) * 1e8) / 1e8; const absolute = Math.round((this.now + this.minutes) * 1e8) / 1e8; this.state.day = Math.floor(absolute / 1440); this.state.hour = (absolute % 1440) / 60; }
   private environment() {
     if (this.now + 1e-7 >= this.runtime.weatherAt) { const r = this.random(); this.state.weather = r < .6 ? '晴' : r < .83 ? '云' : r < .96 ? '雨' : '雾'; this.runtime.weatherAt = this.now + 180 + this.random() * 120; }
@@ -2813,7 +2830,7 @@ export class Simulation implements SimulationAPI {
         }
       }
       if (validateOnly) return { ok: true, message: '完整存档已通过生产读取校验；原城市未改变。' };
-      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelState; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); this.freightDeliveryRouter.clear(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
+      const previousState = this.state, previousRuntime = this.runtime; this.state = s as VoxelStateFor<Grid>; this.runtime = r as Runtime; try { for (const hook of this.loadHooks) hook(); } catch (error) { this.state = previousState; this.runtime = previousRuntime; throw error; } if (this.runtime.npcMotionVersion === 2) for (const [id, cursor] of Object.entries(this.runtime.npcStairCursors!)) this.npcCursorRoutes.set(cursor, this.state.citizens.find(c => c.id === id)!.route!); this.employment.clear(); this.refreshWorkforce(); this.resetRoadRouting(); this.freightDeliveryRouter.clear(); return { ok: true, message: '云山存档已恢复；时钟、随机数、班次与所有模拟实体继续原进程。' };
     } catch (error) { return { ok: false, message: `读档失败：${error instanceof Error ? error.message : '存档格式错误'}` }; }
   }
 }

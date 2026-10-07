@@ -10,6 +10,15 @@ export function buildingLightSupplyRatio(world: Pick<WorldDefinition, 'powerGrid
   state: Pick<SimState, 'powerGrid' | 'energy' | 'tick' | 'day' | 'hour' | 'extension'>, buildingId: string): number {
   if (world.powerGrid === undefined && state.powerGrid === undefined) return clampSupply(state.energy / 100);
   if (!world.powerGrid || !state.powerGrid) return 0;
+  if (world.powerGrid.version !== state.powerGrid.version || world.powerGrid.kind !== state.powerGrid.kind) return 0;
+  if (state.powerGrid.version === 2) {
+    const dispatch = state.powerGrid.dispatch, meter = dispatch?.buildings[buildingId];
+    const now = state.day * 1440 + state.hour * 60;
+    if (!dispatch || dispatch.tick !== state.tick || !Number.isFinite(now) || dispatch.at !== now
+      || !meter || typeof meter.nodeId !== 'string' || !Number.isFinite(meter.demandKW) || !Number.isFinite(meter.servedKW)
+      || meter.demandKW <= 1e-8 || meter.servedKW < 0) return 0;
+    return clampSupply(meter.servedKW / meter.demandKW);
+  }
   const dispatch = state.powerGrid.dispatch, meter = dispatch?.buildings[buildingId];
   const now = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60;
   if (!dispatch || dispatch.tick !== state.tick || !Number.isFinite(now) || !Number.isFinite(dispatch.at) || Math.abs(dispatch.at - now) > 1e-8

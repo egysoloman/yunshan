@@ -1,3 +1,4 @@
+import type { StoragePowerGridDefinition } from '../src/simulation/power-grid';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
@@ -30,7 +31,7 @@ test('declared grid really consumes finite energy, gates shops/paid production a
   emptyAfterOneWorld.powerGrid!.storage[0].initialStoredPMinutes = 9;
   const fed = new Simulation(feedWorld), depleted = new Simulation(emptyAfterOneWorld);
   const produced = { fed: 0, depleted: 0 }, nativeReceipts: unknown[] = [];
-  const setup = (sim: Simulation, name: 'fed' | 'depleted') => {
+  const setup = (sim: Simulation<StoragePowerGridDefinition>, name: 'fed' | 'depleted') => {
     const coldSave = sim.exportSave(), clockJump = sim.command({ type: 'setTime', value: 10 });
     assert.equal(clockJump.ok, false); assert.match(clockJump.message, /逐相位结算实际用电/); assert.equal(sim.exportSave(), coldSave, 'a legal clock jump request is rejected atomically before any finite inventory or time changes');
     assert(sim.state.shops.every(shop => !shop.open), 'cold declared map cannot sell before an actual dispatch');

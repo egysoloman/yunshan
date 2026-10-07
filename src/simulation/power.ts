@@ -109,6 +109,7 @@ export function powerSupplyAt(state: SimState, siteId: string): boolean {
   return !!dispatch && dispatch.tick === state.tick && Math.abs(dispatch.at - clock(state)) <= EPS && !!meter && meter.servedP > EPS;
 }
 export function powerStatus(sim: Simulation) {
+  if (sim.worldDefinition.powerGrid?.version === 2) return { supported: false, reason: '当前地图使用有限双库水电；须由当前建筑分表确认供电，设备采购和维修尚未接入。' };
   if (sim.worldDefinition.powerGrid) return { supported: false, reason: '当前地图使用有限储能网络；旧聚合维修不适用，声明网不会免费补电。' };
   const binding = powerBinding(sim.worldDefinition), state = sim.state.power;
   return !binding ? { supported: false, reason: '缺少真实 core-main 或 core-energy-south 功能引用；保持旧聚合契约。' }

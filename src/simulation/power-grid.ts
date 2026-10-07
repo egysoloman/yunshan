@@ -1,3 +1,10 @@
+import {
+  validateHydroGridDefinition, createHydroGridState, dispatchHydroGrid,
+  validateHydroGridState, bindHydroGridAfterLoad, prepareHydroBeforeStep,
+  prepareHydroBeforeTick, isCanonicalHydroDispatch,
+  type HydroPowerGridDefinition, type HydroPowerGridState,
+} from './power-grid-hydro';
+import { Flow, type Arc } from './power-network-flow';
 import { shopLifecycleAllowsOperation } from './shop_lifecycle';
 import type { Simulation } from '../simulation';
 import type { Command, CommandResult, SimState, Vec3, WorldDefinition } from '../types';
@@ -10,7 +17,7 @@ export interface PowerGridLink { id: string; from: string; to: string; capacityP
 export interface PowerGridStorage { id: string; buildingId: string; nodeId: string; maximumP: number; initialStoredPMinutes: number }
 export interface PowerGridBuildingLoad { buildingId: string; nodeId: string | null; baseP: number; nightP: number; shopP: number }
 export interface PowerGridEdgeConnection { edgeId: string; nodeId: string | null }
-export interface PowerGridDefinition {
+export interface StoragePowerGridDefinition {
   version: 1; kind: 'finite-storage-network'; nodes: PowerGridNode[]; links: PowerGridLink[];
   storage: PowerGridStorage[]; buildings: PowerGridBuildingLoad[]; transport: PowerGridEdgeConnection[];
 }
@@ -23,14 +30,16 @@ export interface PowerGridDispatch {
   buildings: Record<string, GridMeter>; vehicles: Record<string, GridVehicleMeter>;
   diagnostics: { unconnectedBuildings: string[]; unconnectedVehicles: string[]; islandNodeIds: string[]; exhaustedStorageIds: string[]; constrainedLinkIds: string[]; constrainedNodeIds: string[] };
 }
-export interface PowerGridState {
+export interface StoragePowerGridState {
   version: 1; kind: 'finite-storage-network'; storedPMinutes: Record<string, number>; consumedPMinutes: Record<string, number>;
   dispatch: PowerGridDispatch | null;
   totals: { demandedPMinutes: number; servedPMinutes: number; unservedPMinutes: number };
 }
+export type PowerGridDefinition = StoragePowerGridDefinition | HydroPowerGridDefinition;
+export type PowerGridState = StoragePowerGridState | HydroPowerGridState;
 const EPS = 1e-8;
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
-const need = (condition: unknown, message: string) => { if (!condition) throw new Error('电网契约：' + message); };
+const need: (condition: unknown, message: string) => asserts condition = (condition, message) => { if (!condition) throw new Error('电网契约：' + message); };
 const object = (value: unknown, keys: readonly string[]) => need(value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === keys.length && Object.keys(value).every(key => keys.includes(key)), '字段结构');
 const number = (value: unknown, max = 1e9) => need(finite(value) && value >= 0 && value <= max, '有限非负数量');
 const id = (value: unknown) => need(typeof value === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9:_-]{0,119}$/.test(value) && !['constructor', 'prototype', '__proto__'].includes(value), '实体标识');
@@ -44,6 +53,7 @@ const sorted = <T extends { id: string }>(rows: readonly T[]) => [...rows].sort(
  * the map rather than reconnecting it to an implicit city-wide bus. */
 export function validatePowerGridDefinition(world: WorldDefinition): void {
   const grid = world.powerGrid; if (grid === undefined) return;
+  if (grid.version === 2) { validateHydroGridDefinition(world); return; }
   object(grid, ['version', 'kind', 'nodes', 'links', 'storage', 'buildings', 'transport']);
   need(grid.version === 1 && grid.kind === 'finite-storage-network', '不支持的网络版本');
   const list = <T>(value: unknown, max: number): T[] => { need(Array.isArray(value) && value.length <= max, '有界数组'); return value as T[]; };
@@ -63,46 +73,20 @@ export function validatePowerGridDefinition(world: WorldDefinition): void {
   for (const connection of list<PowerGridEdgeConnection>(grid.transport, edges.size)) { object(connection, ['edgeId', 'nodeId']); need(edges.has(connection.edgeId) && !connectedEdges.has(connection.edgeId) && (connection.nodeId === null || nodeIds.has(connection.nodeId)), '交通连接引用'); connectedEdges.add(connection.edgeId); }
   // A missing transport connection is deliberately metered as unconnected.
 }
-export function createPowerGridState(world: WorldDefinition): PowerGridState | undefined {
+export function createPowerGridState(world: WorldDefinition & { powerGrid?: StoragePowerGridDefinition }, owner?: SimState): StoragePowerGridState | undefined;
+export function createPowerGridState(world: WorldDefinition & { powerGrid?: HydroPowerGridDefinition }, owner?: SimState): HydroPowerGridState | undefined;
+export function createPowerGridState(world: WorldDefinition, owner?: SimState): PowerGridState | undefined;
+export function createPowerGridState(world: WorldDefinition, owner?: SimState): PowerGridState | undefined {
   validatePowerGridDefinition(world); const grid = world.powerGrid; if (!grid) return undefined;
+  if (grid.version === 2) return createHydroGridState(world, owner);
   const stored = record<number>(), consumed = record<number>();
   for (const source of sorted(grid.storage)) { stored[source.id] = source.initialStoredPMinutes; consumed[source.id] = 0; }
   return { version: 1, kind: grid.kind, storedPMinutes: stored, consumedPMinutes: consumed, dispatch: null, totals: { demandedPMinutes: 0, servedPMinutes: 0, unservedPMinutes: 0 } };
 }
-interface Arc { to: number; reverse: number; capacity: number; initial: number }
-/** Deterministic capacitated transport model with node throughput constraints.
- * It does not claim voltage, thermal/AC load flow, fairness or cable losses. */
-class Flow {
-  readonly graph: Arc[][] = [];
-  addNode(): number { this.graph.push([]); return this.graph.length - 1; }
-  edge(from: number, to: number, capacity: number): Arc {
-    const forward = { to, reverse: this.graph[to].length, capacity, initial: capacity }, reverse = { to: from, reverse: this.graph[from].length, capacity: 0, initial: 0 };
-    this.graph[from].push(forward); this.graph[to].push(reverse); return forward;
-  }
-  solve(source: number, sink: number): void {
-    const size = this.graph.length;
-    for (;;) {
-      const level = Array<number>(size).fill(-1), queue = [source]; level[source] = 0;
-      for (let q = 0; q < queue.length; q++) for (const arc of this.graph[queue[q]]) if (arc.capacity > EPS && level[arc.to] < 0) { level[arc.to] = level[queue[q]] + 1; queue.push(arc.to); }
-      if (level[sink] < 0) return;
-      const cursor = Array<number>(size).fill(0);
-      const send = (node: number, limit: number): number => {
-        if (node === sink) return limit;
-        for (; cursor[node] < this.graph[node].length; cursor[node]++) {
-          const arc = this.graph[node][cursor[node]]; if (arc.capacity <= EPS || level[arc.to] !== level[node] + 1) continue;
-          const amount = send(arc.to, Math.min(limit, arc.capacity)); if (amount <= EPS) continue;
-          arc.capacity -= amount; this.graph[arc.to][arc.reverse].capacity += amount; return amount;
-        }
-        return 0;
-      };
-      while (send(source, 1e15) > EPS) { /* every augmentation consumes an actual residual capacity */ }
-    }
-  }
-}
 interface Load { key: string; kind: 'building' | 'vehicle'; id: string; nodeId: string | null; demandP: number; edgeId?: string }
 /** Save validation replays achievable flow, so a forged feasible all-zero
  * dispatch cannot pretend a loaded battery was unused. */
-function achievablePower(grid: PowerGridDefinition, offered: Record<string, number>, loads: { id: string; nodeId: string | null; demandP: number }[]): number {
+function achievablePower(grid: StoragePowerGridDefinition, offered: Record<string, number>, loads: { id: string; nodeId: string | null; demandP: number }[]): number {
   const flow = new Flow(), source = flow.addNode(), sink = flow.addNode(), nodes = new Map<string, { input: number; output: number }>();
   for (const node of sorted(grid.nodes)) { const input = flow.addNode(), output = flow.addNode(); nodes.set(node.id, { input, output }); flow.edge(input, output, node.capacityP); }
   const sources: Arc[] = [];
@@ -112,7 +96,11 @@ function achievablePower(grid: PowerGridDefinition, offered: Record<string, numb
   flow.solve(source, sink); return sources.reduce((sum, arc) => sum + arc.initial - arc.capacity, 0);
 }
 
+export function dispatchPowerGrid(world: WorldDefinition & { powerGrid?: StoragePowerGridDefinition }, state: SimState, minutes: number): StoragePowerGridState;
+export function dispatchPowerGrid(world: WorldDefinition & { powerGrid?: HydroPowerGridDefinition }, state: SimState, minutes: number): HydroPowerGridState;
+export function dispatchPowerGrid(world: WorldDefinition, state: SimState, minutes: number): PowerGridState;
 export function dispatchPowerGrid(world: WorldDefinition, state: SimState, minutes: number): PowerGridState {
+  if (world.powerGrid?.version === 2) return dispatchHydroGrid(world, state, minutes);
   validatePowerGridDefinition(world); need(!!world.powerGrid && !!state.powerGrid, '已声明网络及资产状态'); need(finite(minutes) && minutes > 0 && minutes <= 4, '本相位分钟');
   const grid = world.powerGrid!, previous = state.powerGrid!, at = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60;
   need(previous.version === 1 && previous.kind === grid.kind, '有限资产状态版本'); const assetIds = grid.storage.map(item => item.id); object(previous.storedPMinutes, assetIds); object(previous.consumedPMinutes, assetIds); for (const item of grid.storage) { number(previous.storedPMinutes[item.id]); number(previous.consumedPMinutes[item.id]); near(previous.storedPMinutes[item.id] + previous.consumedPMinutes[item.id], item.initialStoredPMinutes); }
@@ -144,12 +132,22 @@ export function dispatchPowerGrid(world: WorldDefinition, state: SimState, minut
 /** The per-building meter takes precedence over legacy city averages. */
 export function gridBuildingSupplyRatio(state: SimState, buildingId: string): number {
   if (!state.powerGrid) return 1;
+  if (state.powerGrid.version === 2) {
+    const dispatch = state.powerGrid.dispatch, now = state.day * 1440 + state.hour * 60, meter = dispatch?.buildings[buildingId];
+    if (!isCanonicalHydroDispatch(state) || !dispatch || dispatch.tick !== state.tick || dispatch.at !== now || !meter || meter.nodeId === null) return 0;
+    return meter.demandKW > EPS ? meter.servedKW / meter.demandKW : 0;
+  }
   const dispatch = state.powerGrid.dispatch, now = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60, meter = dispatch?.buildings[buildingId];
   if (!dispatch || dispatch.tick !== state.tick || Math.abs(dispatch.at - now) > EPS || !meter || meter.nodeId === null) return 0;
   return meter.demandP > EPS ? meter.servedP / meter.demandP : 0;
 }
 export function gridVehicleSupplyRatio(state: SimState, vehicleId: string): number {
   if (!state.powerGrid) return 1;
+  if (state.powerGrid.version === 2) {
+    const dispatch = state.powerGrid.dispatch, now = state.day * 1440 + state.hour * 60, meter = dispatch?.vehicles[vehicleId];
+    if (!isCanonicalHydroDispatch(state) || !dispatch || dispatch.tick !== state.tick || dispatch.at !== now || !meter || meter.nodeId === null) return 0;
+    return meter.demandKW > EPS ? meter.servedKW / meter.demandKW : 0;
+  }
   const dispatch = state.powerGrid.dispatch, now = state.extension?.lastUpdate ?? state.day * 1440 + state.hour * 60, meter = dispatch?.vehicles[vehicleId];
   if (!dispatch || dispatch.tick !== state.tick || Math.abs(dispatch.at - now) > EPS || !meter || meter.nodeId === null) return 0;
   return meter.demandP > EPS ? meter.servedP / meter.demandP : 0;
@@ -159,17 +157,32 @@ export function gridVehicleSupplyRatio(state: SimState, vehicleId: string): numb
  * Far-tier retrospective attendance does not borrow the current four minutes. */
 export function gridPoweredWorkMinutes(state: SimState, buildingId: string, window: { startAt: number; endAt: number }, claimedMinutes: number): number {
   if (!state.powerGrid || !finite(window.startAt) || !finite(window.endAt) || !finite(claimedMinutes) || claimedMinutes <= 0 || window.endAt < window.startAt) return 0;
+  if (state.powerGrid.version === 2) {
+    const dispatch = state.powerGrid.dispatch; if (!dispatch) return 0;
+    const overlap = Math.max(0, Math.min(window.endAt, dispatch.at) - Math.max(window.startAt, dispatch.beforeAt));
+    return Math.min(claimedMinutes, overlap) * gridBuildingSupplyRatio(state, buildingId);
+  }
   const dispatch = state.powerGrid.dispatch; if (!dispatch) return 0;
   const overlap = Math.max(0, Math.min(window.endAt, dispatch.at) - Math.max(window.startAt, dispatch.at - dispatch.minutes));
   return Math.min(claimedMinutes, overlap) * gridBuildingSupplyRatio(state, buildingId);
 }
 export function powerGridStatus(world: WorldDefinition, state?: SimState) {
   if (!world.powerGrid) return { mode: 'legacy-unmodeled' as const, supported: false, reason: '地图未声明物理电网；保留历史聚合规则，不代表已验证电缆、发电或另一城市供电。' };
-  validatePowerGridDefinition(world); return { mode: 'finite-storage-network' as const, supported: true, storageInitialPMinutes: world.powerGrid.storage.reduce((sum, item) => sum + item.initialStoredPMinutes, 0), storageRemainingPMinutes: Object.values(state?.powerGrid?.storedPMinutes ?? {}).reduce((sum, value) => sum + value, 0), dispatch: state?.powerGrid?.dispatch ?? null, generationImplemented: false };
+  validatePowerGridDefinition(world);
+  if (world.powerGrid.version === 2) {
+    const resource = state?.powerGrid?.version === 2 ? state.powerGrid.hydro : undefined;
+    return { mode: 'finite-hydro-network' as const, supported: true, unit: world.powerGrid.unit,
+      generationImplemented: true, finiteWaterOnly: true, refillImplemented: false, maintenanceImplemented: false,
+      upstreamInitialM3: world.powerGrid.sources[0].hydro.upstream.initialM3,
+      upstreamRemainingM3: resource?.upstreamM3 ?? null, generatedKWh: resource?.generatedKWh ?? 0,
+      dispatch: state?.powerGrid?.version === 2 ? state.powerGrid.dispatch : null };
+  }
+  return { mode: 'finite-storage-network' as const, supported: true, storageInitialPMinutes: world.powerGrid.storage.reduce((sum, item) => sum + item.initialStoredPMinutes, 0), storageRemainingPMinutes: Object.values(state?.powerGrid?.version === 1 ? state.powerGrid.storedPMinutes : {}).reduce((sum, value) => sum + value, 0), dispatch: state?.powerGrid?.version === 1 ? state.powerGrid.dispatch : null, generationImplemented: false };
 }
 export function validatePowerGridState(state: SimState, world: WorldDefinition): void {
   const grid = world.powerGrid, body = state.powerGrid; validatePowerGridDefinition(world);
   if (!grid) { need(body === undefined, '未声明地图不能加载电网资产'); return; }
+  if (grid.version === 2) { validateHydroGridState(state, world); return; }
   need(!!body && state.power === undefined, '声明地图须有独立电网，不叠加旧免费聚合源');
   object(body, ['version', 'kind', 'storedPMinutes', 'consumedPMinutes', 'dispatch', 'totals']); need(body!.version === 1 && body!.kind === grid.kind, '资产版本');
   const sourceIds = grid.storage.map(item => item.id); object(body!.storedPMinutes, sourceIds); object(body!.consumedPMinutes, sourceIds);
@@ -204,6 +217,11 @@ export function validatePowerGridState(state: SimState, world: WorldDefinition):
  * reject without mutation instead of fabricating dispatch history. */
 export function powerGridCommandBoundary(world: WorldDefinition, command: Command): CommandResult | null {
   if (!world.powerGrid) return null;
+  if (world.powerGrid.version === 2) {
+    if (command.type === 'setTime') return { ok: false, message: '此地图使用有限双库水电，须按正常时间或倍率逐窗结算水量和用电，不能直接跳转时刻。' };
+    if (['energy', 'requestEnergyRepair', 'approveEnergyRepair', 'cancelEnergy'].includes(command.type)) return { ok: false, message: '此地图使用声明的有限双库水电；补水、设备采购与维修工班尚未接入，未收费或新增资产。' };
+    return null;
+  }
   if (command.type === 'setTime') return { ok: false, message: '此地图使用有限储能电网，不能直接跳转时刻；请用正常时间推进或时间倍率，逐相位结算实际用电。' };
   if (['energy', 'requestEnergyRepair', 'approveEnergyRepair', 'cancelEnergy'].includes(command.type)) return { ok: false, message: '此地图使用声明的有限储能电网；燃料发电、合法采购与维修工班尚未接入，未收费或增电。' };
   return null;
@@ -212,11 +230,27 @@ export function installPowerGrid(simulation: Simulation): void {
   const world = simulation.worldDefinition;
   simulation.registerSaveValidator(candidate => validatePowerGridState(candidate, world));
   if (!world.powerGrid) return;
-  simulation.state.powerGrid = createPowerGridState(world)!;
+  simulation.state.powerGrid = createPowerGridState(world, simulation.state)!;
+  if (world.powerGrid.version === 2) {
+    simulation.registerStepPreflight((state, minutes, ticks) => prepareHydroBeforeStep(world, state, minutes, ticks));
+    simulation.onBeforeTick((state, minutes) => prepareHydroBeforeTick(world, state, minutes));
+    simulation.onLoad(() => bindHydroGridAfterLoad(world, simulation.state));
+  }
   for (const shop of simulation.state.shops) shop.open = false;
   simulation.state.energy = 0; for (const district of simulation.state.districts) district.energy = 0;
   simulation.onPhase('energy', (_state, minutes) => {
     simulation.state.powerGrid = dispatchPowerGrid(world, simulation.state, minutes);
+    if (simulation.state.powerGrid.version === 2) {
+      const measured = simulation.state.powerGrid.dispatch!;
+      for (const shop of simulation.state.shops) if (gridBuildingSupplyRatio(simulation.state, shop.buildingId) <= .25) shop.open = false;
+      simulation.state.energy = measured.demandKW > EPS ? measured.servedKW / measured.demandKW * 100 : 0;
+      for (const district of simulation.state.districts) {
+        const meters = world.buildings.filter(site => site.districtId === district.id).map(site => measured.buildings[site.id]);
+        const demand = meters.reduce((sum, meter) => sum + meter.demandKW, 0), served = meters.reduce((sum, meter) => sum + meter.servedKW, 0);
+        district.energy = demand > EPS ? served / demand * 100 : 0;
+      }
+      return;
+    }
     const dispatch = simulation.state.powerGrid.dispatch!;
     // Close immediately on this feeder's outage; reopening remains the
     // original commerce phase's scheduled/solvent/lifecycle decision.

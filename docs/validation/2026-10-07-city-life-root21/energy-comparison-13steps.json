@@ -1,0 +1,807 @@
+{
+  "version": 1,
+  "cutoffTick": 13,
+  "sources": {
+    "fed": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/fed/FRAMES.json",
+      "bytes": 8451006,
+      "sha256": "6d0acf79b06b5e8db23355d196c3754401cfac667d899badd7d8371a71fc8bc6",
+      "sourceFrameCount": 40,
+      "retainedFrameCount": 14
+    },
+    "depleted": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/depleted/FRAMES.json",
+      "bytes": 1967867,
+      "sha256": "8730ba107bd0e13e74e01c005cda33582e07e657e2e391b70691aaac71457304",
+      "sourceFrameCount": 16,
+      "retainedFrameCount": 14
+    },
+    "result": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/RESULT.json",
+      "bytes": 16877,
+      "sha256": "07b373c7a1fc61850ff8673e6e1d98459a8b1f8c5c96a2db44f7f5872043c210"
+    }
+  },
+  "series": {
+    "fed": [
+      {
+        "tick": 0,
+        "label": "cold-native-initialization",
+        "clockMinutes": 480,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 10000,
+        "downstreamM3": 0,
+        "transferredM3": 0,
+        "generatedKWh": 0,
+        "servedKW": null,
+        "unservedKW": null,
+        "farmServedKW": null,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/648f721521746a4006d7b7e1bce63870d25e96bfa11f33becd2f12dbc4119ebf.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 343595,
+          "sha256": "648f721521746a4006d7b7e1bce63870d25e96bfa11f33becd2f12dbc4119ebf",
+          "encodedBytes": 41175,
+          "encodedSha256": "f5eca9bd1ba71afe609168cacfba99b42a7224c66a8141624b75e2fbe8f6acbf"
+        }
+      },
+      {
+        "tick": 1,
+        "label": "warmup",
+        "clockMinutes": 481.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9993.88379204893,
+        "downstreamM3": 6.116207951070683,
+        "transferredM3": 6.116207951070683,
+        "generatedKWh": 0.15000000000000852,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": -2.184918912462308e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/42dd173506744760c041b68ebfa9a3a2317479e8b3b261422d9e5269ccadd5ea.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 406212,
+          "sha256": "42dd173506744760c041b68ebfa9a3a2317479e8b3b261422d9e5269ccadd5ea",
+          "encodedBytes": 54221,
+          "encodedSha256": "a636d9b1ed32236549daa03354a5fce7d9f3d9f69f112dca94369ed2f853cc6f"
+        }
+      },
+      {
+        "tick": 2,
+        "label": "paid-work-1",
+        "clockMinutes": 482,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9987.767584097859,
+        "downstreamM3": 12.232415902140671,
+        "transferredM3": 12.232415902140671,
+        "generatedKWh": 0.3,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 2.575717417130363e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/406d192d28b74d50e13b061c5c493dc4584028abfc292c16fc094eba74bfd8a5.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 410914,
+          "sha256": "406d192d28b74d50e13b061c5c493dc4584028abfc292c16fc094eba74bfd8a5",
+          "encodedBytes": 54841,
+          "encodedSha256": "4a886d408ebb9db35b035ac34c034366f84e9ec22e16cd6db673a9fa2bb4447c"
+        }
+      },
+      {
+        "tick": 3,
+        "label": "paid-work-2",
+        "clockMinutes": 483.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9981.651376146789,
+        "downstreamM3": 18.348623853211354,
+        "transferredM3": 18.348623853211354,
+        "generatedKWh": 0.4500000000000085,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 3.907985046680551e-14,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/485857e447176080ee38abf025bd82fa08b7f897ed85c47c0765aea748a7abc5.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 417295,
+          "sha256": "485857e447176080ee38abf025bd82fa08b7f897ed85c47c0765aea748a7abc5",
+          "encodedBytes": 55232,
+          "encodedSha256": "13aefa233960fad07926a914fb9fb71617b78b31365e20a26b0e36e7759097e0"
+        }
+      },
+      {
+        "tick": 4,
+        "label": "paid-work-3",
+        "clockMinutes": 484,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9975.535168195718,
+        "downstreamM3": 24.464831804281342,
+        "transferredM3": 24.464831804281342,
+        "generatedKWh": 0.6,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 5.151434834260726e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/e8646258fc1969340b7dc425af0ded9b100d37fe1e0731a4387084ba95b41abf.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 437267,
+          "sha256": "e8646258fc1969340b7dc425af0ded9b100d37fe1e0731a4387084ba95b41abf",
+          "encodedBytes": 56286,
+          "encodedSha256": "75f6facbbf35e08208f8a8c7ec1328f608afc9419ab1bef6f2e9a9a904569f0d"
+        }
+      },
+      {
+        "tick": 5,
+        "label": "paid-work-4",
+        "clockMinutes": 485.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9969.418960244648,
+        "downstreamM3": 30.581039755352023,
+        "transferredM3": 30.581039755352023,
+        "generatedKWh": 0.7500000000000084,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 2.984279490192421e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/d226144134af70fc3b61e6cb69095442e4f27798b5a244bc5a66ee5528a44bef.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 442006,
+          "sha256": "d226144134af70fc3b61e6cb69095442e4f27798b5a244bc5a66ee5528a44bef",
+          "encodedBytes": 56553,
+          "encodedSha256": "509399a28117ba202cf250840aada3f68f23b97fa1af8707e8752908c69e790c"
+        }
+      },
+      {
+        "tick": 6,
+        "label": "paid-work-5",
+        "clockMinutes": 486,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9963.302752293577,
+        "downstreamM3": 36.69724770642201,
+        "transferredM3": 36.69724770642201,
+        "generatedKWh": 0.8999999999999999,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 7.744915819785092e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/9852ca865fa80d294d47320c3dfdc661b13fa5cc11b852e41f8353a9ac0bdd7b.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 464098,
+          "sha256": "9852ca865fa80d294d47320c3dfdc661b13fa5cc11b852e41f8353a9ac0bdd7b",
+          "encodedBytes": 57609,
+          "encodedSha256": "76bd5da0f896b87a6ec1a232cf0fde960790c079d8c584807a0f81ce8c52ee4f"
+        }
+      },
+      {
+        "tick": 7,
+        "label": "paid-work-6",
+        "clockMinutes": 487,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9957.186544342507,
+        "downstreamM3": 42.81345565749235,
+        "transferredM3": 42.81345565749235,
+        "generatedKWh": 1.0499999999999998,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 9.023892744153272e-13,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/cd00b3d8a4952cca3039ed2b61f240fb8f0e184eee9d9894adb119157669f9fc.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 466876,
+          "sha256": "cd00b3d8a4952cca3039ed2b61f240fb8f0e184eee9d9894adb119157669f9fc",
+          "encodedBytes": 57747,
+          "encodedSha256": "b38e330a0b3938c98ff2131c218763fa48769bf044e98473e2a7c994d851ac5c"
+        }
+      },
+      {
+        "tick": 8,
+        "label": "paid-work-7",
+        "clockMinutes": 488,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9951.070336391436,
+        "downstreamM3": 48.929663608562684,
+        "transferredM3": 48.929663608562684,
+        "generatedKWh": 1.1999999999999997,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 1.0302869668521453e-12,
+          "kWh": -2.220446049250313e-16
+        },
+        "completeSave": {
+          "file": "full-saves/40c1cda570cebf4a383245b3539e07c60666739fe970f8507afeb3aeddd1d798.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 467863,
+          "sha256": "40c1cda570cebf4a383245b3539e07c60666739fe970f8507afeb3aeddd1d798",
+          "encodedBytes": 57901,
+          "encodedSha256": "7846b3394410bf040f63964afb7fa135f561c79b6b360ca772528e007ec57573"
+        }
+      },
+      {
+        "tick": 9,
+        "label": "paid-work-8",
+        "clockMinutes": 489,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9944.954128440366,
+        "downstreamM3": 55.04587155963302,
+        "transferredM3": 55.04587155963302,
+        "generatedKWh": 1.3499999999999996,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 1.1581846592889633e-12,
+          "kWh": -2.220446049250313e-16
+        },
+        "completeSave": {
+          "file": "full-saves/ee5641969cf4f3913f963bc54271fa9fb6130553503b67cd00cd3147c8229cda.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 469718,
+          "sha256": "ee5641969cf4f3913f963bc54271fa9fb6130553503b67cd00cd3147c8229cda",
+          "encodedBytes": 57901,
+          "encodedSha256": "5a0507720149dffb393a8fc02fd9fb3804d4d73bef1a4d8007339be8a8306895"
+        }
+      },
+      {
+        "tick": 10,
+        "label": "paid-work-9",
+        "clockMinutes": 489.99999999999994,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9938.837920489295,
+        "downstreamM3": 61.16207951070301,
+        "transferredM3": 61.16207951070301,
+        "generatedKWh": 1.4999999999999911,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 1.6342482922482304e-12,
+          "kWh": -2.220446049250313e-16
+        },
+        "completeSave": {
+          "file": "full-saves/d250600959f3c7023bfacf1830aceab2e871ba8cf64d5f3183139a85c6428923.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 471682,
+          "sha256": "d250600959f3c7023bfacf1830aceab2e871ba8cf64d5f3183139a85c6428923",
+          "encodedBytes": 57934,
+          "encodedSha256": "be4a37b0d22cbdfd9c681849b61308eb72e7fa6f34fdcd1ad1d62fce53bf43f6"
+        }
+      },
+      {
+        "tick": 11,
+        "label": "paid-work-10",
+        "clockMinutes": 491,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 9932.721712538225,
+        "downstreamM3": 67.27828746177369,
+        "transferredM3": 67.27828746177369,
+        "generatedKWh": 1.6499999999999997,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 1.4210854715202004e-12,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/d0d04c7dabd188558b265bdd6b70b0cd628e83e207b6724e991b1e6782b193ab.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 492141,
+          "sha256": "d0d04c7dabd188558b265bdd6b70b0cd628e83e207b6724e991b1e6782b193ab",
+          "encodedBytes": 58897,
+          "encodedSha256": "26ad0124ad8afcf32827005db3f3bd19376e88b585c717533d3d75d87c3b7a55"
+        }
+      },
+      {
+        "tick": 12,
+        "label": "paid-work-11",
+        "clockMinutes": 491.99999999999994,
+        "farmProducedNativeFoodUnits": 0.3666666666666572,
+        "upstreamM3": 9926.605504587154,
+        "downstreamM3": 73.39449541284367,
+        "transferredM3": 73.39449541284367,
+        "generatedKWh": 1.7999999999999912,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": -2.842170943040401e-14,
+          "water": 1.9042545318370685e-12,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/ae793b467d86dadb124b4b953c7305561b182cef746c4b63f11d6ede273359db.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 494105,
+          "sha256": "ae793b467d86dadb124b4b953c7305561b182cef746c4b63f11d6ede273359db",
+          "encodedBytes": 59017,
+          "encodedSha256": "1b8b4bb837e2775da17643c01f549c910fa499c3447c1c605bd9795eb5631cc2"
+        }
+      },
+      {
+        "tick": 13,
+        "label": "paid-work-12",
+        "clockMinutes": 493,
+        "farmProducedNativeFoodUnits": 0.3666666666666572,
+        "upstreamM3": 9920.489296636084,
+        "downstreamM3": 79.51070336391435,
+        "transferredM3": 79.51070336391435,
+        "generatedKWh": 1.9499999999999997,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": -2.842170943040401e-14,
+          "water": 1.6910917111090384e-12,
+          "kWh": 2.220446049250313e-16
+        },
+        "completeSave": {
+          "file": "full-saves/e6689b12f329c9d7ea527e87be2d7e6b3b48b02c5d12bf8f28c5f5571a93ad53.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 495807,
+          "sha256": "e6689b12f329c9d7ea527e87be2d7e6b3b48b02c5d12bf8f28c5f5571a93ad53",
+          "encodedBytes": 59009,
+          "encodedSha256": "2ea0b260c49a9c24925ebcc560ddbfcedffcd78a751bcad2bc072104ea0c82e3"
+        }
+      }
+    ],
+    "depleted": [
+      {
+        "tick": 0,
+        "label": "cold-native-initialization",
+        "clockMinutes": 480,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 7,
+        "downstreamM3": 0,
+        "transferredM3": 0,
+        "generatedKWh": 0,
+        "servedKW": null,
+        "unservedKW": null,
+        "farmServedKW": null,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/77c480da05b98e3479aea046a2d8bf64aaafe4c298aa407db93410e56d796b78.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 343587,
+          "sha256": "77c480da05b98e3479aea046a2d8bf64aaafe4c298aa407db93410e56d796b78",
+          "encodedBytes": 41173,
+          "encodedSha256": "5274ef9343c46aca2a26013fc83b9127bc987ded7aa78e83160819e249238d9c"
+        }
+      },
+      {
+        "tick": 1,
+        "label": "warmup",
+        "clockMinutes": 481.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0.8837920489293172,
+        "downstreamM3": 6.116207951070683,
+        "transferredM3": 6.116207951070683,
+        "generatedKWh": 0.15000000000000852,
+        "servedKW": 9,
+        "unservedKW": 0,
+        "farmServedKW": 2.5,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/1331f5542bbaaf841e26cd22f5d28b6d840a5d7189fe8920761d4b41e835db8a.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 406315,
+          "sha256": "1331f5542bbaaf841e26cd22f5d28b6d840a5d7189fe8920761d4b41e835db8a",
+          "encodedBytes": 54234,
+          "encodedSha256": "6df4692494dbcbe9ef630b1db3740007b1875af2624bd2931ec50b8239f7ffa5"
+        }
+      },
+      {
+        "tick": 2,
+        "label": "paid-work-1",
+        "clockMinutes": 482,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 1.3004999999995643,
+        "unservedKW": 7.699500000000436,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/ce1056a6f6200238a762c5e19815166173321d0efc113e6a7eaed295b4a287cf.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 411252,
+          "sha256": "ce1056a6f6200238a762c5e19815166173321d0efc113e6a7eaed295b4a287cf",
+          "encodedBytes": 54941,
+          "encodedSha256": "a2e6e7ae463c3648c10c05f8a2afa9308970b2d31d4bc2957ce55b67b0459bfc"
+        }
+      },
+      {
+        "tick": 3,
+        "label": "paid-work-2",
+        "clockMinutes": 483.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/65d728768070a7b28ddadf2b3470f3e326742bffc445c1f53b8c8ef7d72cb670.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 417342,
+          "sha256": "65d728768070a7b28ddadf2b3470f3e326742bffc445c1f53b8c8ef7d72cb670",
+          "encodedBytes": 55338,
+          "encodedSha256": "a997cfeceb179cf5d176a4835b557ee5fd4dc29d077dfb0eeaec56cd4b2f8bbd"
+        }
+      },
+      {
+        "tick": 4,
+        "label": "paid-work-3",
+        "clockMinutes": 484,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/39701d9beb577707319e6b0b658717271e157ea9b744eaba883198d4502b2802.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 437243,
+          "sha256": "39701d9beb577707319e6b0b658717271e157ea9b744eaba883198d4502b2802",
+          "encodedBytes": 56369,
+          "encodedSha256": "c4ddc42307665cb778ff5457f0bdcb8f0ac203f302750120d3e999a240de00a3"
+        }
+      },
+      {
+        "tick": 5,
+        "label": "paid-work-4",
+        "clockMinutes": 485.00000000000006,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/5757ab818018a3de0e7c12f3825d4f596c295e99fff96c01fb337c75ee6b71e7.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 441849,
+          "sha256": "5757ab818018a3de0e7c12f3825d4f596c295e99fff96c01fb337c75ee6b71e7",
+          "encodedBytes": 56593,
+          "encodedSha256": "9de196613263fc3d235f68a3cd6510f919aff6b99f395cbae7b7126401896e8a"
+        }
+      },
+      {
+        "tick": 6,
+        "label": "paid-work-5",
+        "clockMinutes": 486,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 0,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/1b02999f64f183c02afe41ef5ee2ec7b8995d034bb9a76999c58a86054f001d9.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 463842,
+          "sha256": "1b02999f64f183c02afe41ef5ee2ec7b8995d034bb9a76999c58a86054f001d9",
+          "encodedBytes": 57626,
+          "encodedSha256": "47d9abc602406ca0c5449543c1259f16b9fb6431ae1b27d16921c727919c895d"
+        }
+      },
+      {
+        "tick": 7,
+        "label": "paid-work-6",
+        "clockMinutes": 487,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/05625d403946b49b6f23e5ca0ab86ee80d63b07f5a44e07791f768ae7e4739c3.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 466562,
+          "sha256": "05625d403946b49b6f23e5ca0ab86ee80d63b07f5a44e07791f768ae7e4739c3",
+          "encodedBytes": 57716,
+          "encodedSha256": "b14907fea0a95ca83ed4ce9479a42fc844d08a47abddf72b8b31a610c0b683dd"
+        }
+      },
+      {
+        "tick": 8,
+        "label": "paid-work-7",
+        "clockMinutes": 488,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/2c361cb8f708ef48f569bb2ed4743987a7d60f5a673e6c4e823ce2aa73d3db9c.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 467443,
+          "sha256": "2c361cb8f708ef48f569bb2ed4743987a7d60f5a673e6c4e823ce2aa73d3db9c",
+          "encodedBytes": 57822,
+          "encodedSha256": "32c485df21fad6bd39fe7165de1fda837cff9da21826bc4419410b6e81e73dac"
+        }
+      },
+      {
+        "tick": 9,
+        "label": "paid-work-8",
+        "clockMinutes": 489,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/b69c8123fdbaaac97bf9d40597259dc7cbf37a035df7aa4114009df8b6dd23e8.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 469237,
+          "sha256": "b69c8123fdbaaac97bf9d40597259dc7cbf37a035df7aa4114009df8b6dd23e8",
+          "encodedBytes": 57780,
+          "encodedSha256": "97d38fda90c067d7ce0d5912a53f64c09a3e11091b847c1bcc0796f9b87ba2e7"
+        }
+      },
+      {
+        "tick": 10,
+        "label": "paid-work-9",
+        "clockMinutes": 489.99999999999994,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 2.9103830456733704e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/f156961683697ed8f72dba139e7ae16903ca257eecddbc433c9a45b67f6aea76.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 471088,
+          "sha256": "f156961683697ed8f72dba139e7ae16903ca257eecddbc433c9a45b67f6aea76",
+          "encodedBytes": 57797,
+          "encodedSha256": "4640a56bc3250e8ef942c92a51405157420be2ed5f6a4e34e735828118db0924"
+        }
+      },
+      {
+        "tick": 11,
+        "label": "paid-work-10",
+        "clockMinutes": 491,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/3165e9ec4e500f7cbc145a6ac33221cbe12815861b95f7515193389bb3a52db9.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 491437,
+          "sha256": "3165e9ec4e500f7cbc145a6ac33221cbe12815861b95f7515193389bb3a52db9",
+          "encodedBytes": 58724,
+          "encodedSha256": "b5d06bccf3bd5511a48da9954a149850a4ed8381c10c167fb7c38a16e462206f"
+        }
+      },
+      {
+        "tick": 12,
+        "label": "paid-work-11",
+        "clockMinutes": 491.99999999999994,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/beef342ac8d1ec5924ca33ab7069a85e13298d9ab8d8192952c7e428f03e53c8.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 493268,
+          "sha256": "beef342ac8d1ec5924ca33ab7069a85e13298d9ab8d8192952c7e428f03e53c8",
+          "encodedBytes": 58791,
+          "encodedSha256": "d05630d64b48d3fdc38df2cafae5ff1d2e887fb3d1e25d6f7aa759bd08176fad"
+        }
+      },
+      {
+        "tick": 13,
+        "label": "paid-work-12",
+        "clockMinutes": 493,
+        "farmProducedNativeFoodUnits": 0,
+        "upstreamM3": 0,
+        "downstreamM3": 7,
+        "transferredM3": 7,
+        "generatedKWh": 0.17167500000000002,
+        "servedKW": 0,
+        "unservedKW": 9,
+        "farmServedKW": 0,
+        "residual": {
+          "money": 5.820766091346741e-11,
+          "food": 0,
+          "water": 0,
+          "kWh": 0
+        },
+        "completeSave": {
+          "file": "full-saves/042746209d552c6815ab1564d217ea7a5ed88779872ae0eae7109005011c75cc.json.gz",
+          "encoding": "gzip-utf8",
+          "bytes": 494860,
+          "sha256": "042746209d552c6815ab1564d217ea7a5ed88779872ae0eae7109005011c75cc",
+          "encodedBytes": 58763,
+          "encodedSha256": "6bf2d0b5b86da2fdc782e5aeae98ba42e8c0d9fb9bb126a0820d846ffe02c1ed"
+        }
+      }
+    ]
+  },
+  "method": {
+    "retainedLabels": [
+      "cold-native-initialization",
+      "warmup",
+      "paid-work-1..12"
+    ],
+    "excluded": [
+      "same-tick command frames",
+      "fed future-1..24"
+    ],
+    "noResimulation": true,
+    "foodUnit": "native food amount; no mass-unit conversion",
+    "water": "cumulative actual upstream-to-downstream transfer, not replenishment",
+    "power": "native dispatch kW, not abstract legacy P",
+    "controlledPremises": [
+      "one doorway setFocus",
+      "speed4",
+      "declared initial assets"
+    ]
+  }
+}

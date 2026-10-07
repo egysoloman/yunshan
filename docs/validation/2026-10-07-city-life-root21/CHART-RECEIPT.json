@@ -1,0 +1,50 @@
+{
+  "status": "GENERATED_FROM_EXISTING_FRAMES",
+  "retainedPointsPerBranch": 14,
+  "stepWindow": [
+    0,
+    13
+  ],
+  "ordinaryStepsPerBranch": 13,
+  "gameExecutions": 0,
+  "sourceReadbackUnchanged": true,
+  "sources": {
+    "fed": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/fed/FRAMES.json",
+      "bytes": 8451006,
+      "sha256": "6d0acf79b06b5e8db23355d196c3754401cfac667d899badd7d8371a71fc8bc6",
+      "sourceFrameCount": 40,
+      "retainedFrameCount": 14
+    },
+    "depleted": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/depleted/FRAMES.json",
+      "bytes": 1967867,
+      "sha256": "8730ba107bd0e13e74e01c005cda33582e07e657e2e391b70691aaac71457304",
+      "sourceFrameCount": 16,
+      "retainedFrameCount": 14
+    },
+    "result": {
+      "path": "/workspace/yunshan-work/ROOT21-energy-integration-20261005-01/native01/artifacts/RESULT.json",
+      "bytes": 16877,
+      "sha256": "07b373c7a1fc61850ff8673e6e1d98459a8b1f8c5c96a2db44f7f5872043c210"
+    }
+  },
+  "outputs": {
+    "energy-comparison-13steps.json": {
+      "bytes": 27669,
+      "sha256": "f64b734496f10c79cf2fcceda1d4be40d80bdc778333e703f503477d7c9b8c23"
+    },
+    "energy-comparison-13steps.png": {
+      "bytes": 354687,
+      "sha256": "82339b405eab73e70562ff9fee8c469401e37b243e6aa31a93d553e0c8e2dae5"
+    },
+    "energy-comparison-13steps.svg": {
+      "bytes": 260939,
+      "sha256": "33e506b5d26817c35530117b5b523f5fbcc806769a9bb0cdbacd4a8fd7c055c3"
+    },
+    "plot-energy-comparison.py": {
+      "bytes": 10544,
+      "sha256": "4e9a8dda4ad94612eb9819b5d33fbf52145b89fbc40edfc2b46e508ba79c3bc0"
+    }
+  }
+}

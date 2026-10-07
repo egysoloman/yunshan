@@ -186,7 +186,10 @@ export function inspectBuildingAlteration(world: WorldDefinition, state: SimStat
     const source = state.hygiene?.batches.find(b => b.id === task.batchId);
     if ((task.destinationSiteId === site.id || source?.siteId === site.id) && (!['received', 'cancelled'].includes(task.state) || task.escrow > EPS)) protect('waste', task.id, ['player'], '用品转运的原来源、目标容器、货物或未退托管仍须处理。', { amount: task.escrow });
   }
-  for (const storage of world.powerGrid?.storage ?? []) if (storage.buildingId === site.id) protect('power', storage.id, [], '有限储能源及供电连接须保留，不能因改造免费补充。', { units: state.powerGrid?.storedPMinutes[storage.id] ?? storage.initialStoredPMinutes });
+  if (world.powerGrid?.version === 1) for (const storage of world.powerGrid.storage) if (storage.buildingId === site.id) protect('power', storage.id, [], '有限储能源及供电连接须保留，不能因改造免费补充。', { units: (state.powerGrid?.version === 1 ? state.powerGrid.storedPMinutes[storage.id] : undefined) ?? storage.initialStoredPMinutes });
+  if (world.powerGrid?.version === 2) for (const source of world.powerGrid.sources) if (source.buildingId === site.id) {
+    protect('power', source.id, [], '有限水力机组、上下游水库、输水管及供电连接须保留；改造不能重建水或电。', { units: state.powerGrid?.version === 2 ? state.powerGrid.hydro.upstreamM3 : source.hydro.upstream.initialM3 });
+  }
   for (const load of world.powerGrid?.buildings ?? []) if (load.buildingId === site.id) protect('power', site.id, [], '建筑用电表及馈线连接仍绑定当前场址。');
 
   const topology = roadPlan(world, state, plan), nodes = new Map(world.buildings.map(b => [b.id, nearestNode(world, b.door)]));
