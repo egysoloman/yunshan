@@ -39,6 +39,8 @@ export interface HostFrame {
   navigation: { destination: string | null; points: Vec3[]; unavailable: string | null } | null;
   /** Food units displayed on each open market's counters (web MarketGoodsPool rule). */
   marketUnits: Record<string, number>;
+  /** [buildingId, open (1/0), price, inventory] for every shop, for shopfront signs. */
+  shops: (string | number)[][];
   /** Network edges currently closed (roads.ts isRoadOpen), for barriers and the map. */
   closedEdges: string[];
   /** Placed voxel positions, omitted (null) when unchanged since `voxelKey`. */
@@ -169,6 +171,7 @@ export class SimHost {
       lastEventId,
       navigation: plan.destination || plan.unavailable ? { destination: plan.destination?.name ?? null, points: navPoints.map(point), unavailable: plan.unavailable } : null,
       marketUnits,
+      shops: state.shops.map(shop => [shop.buildingId, shop.open ? 1 : 0, round(shop.price), Math.floor(shop.inventory)]),
       closedEdges: state.roadNetwork ? world.edges.filter(edge => !isRoadOpen(state, edge.id)).map(edge => edge.id) : [],
       voxels: request.voxelKey === voxelKey ? null : voxels.slice(0, 4096).map(v => [v.position.x, v.position.y, v.position.z]), voxelKey,
       stepMs: round(stepMs), ticks,

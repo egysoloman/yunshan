@@ -36,6 +36,9 @@ namespace Yunshan.Core.Host
         public List<Vec3> Voxels; public string VoxelKey;
         /// <summary>Food units shown on open markets' counters, by building id.</summary>
         public Dictionary<string, int> MarketUnits = new Dictionary<string, int>();
+        public sealed class Shop { public string BuildingId; public bool Open; public double Price, Inventory; }
+        /// <summary>Shop state by building id (shopfront signs).</summary>
+        public Dictionary<string, Shop> Shops = new Dictionary<string, Shop>();
         /// <summary>Closed network edges (barriers at both ends).</summary>
         public List<string> ClosedEdges = new List<string>();
         /// <summary>Refusal of the requested walking position (closed road), else null.</summary>
@@ -98,6 +101,11 @@ namespace Yunshan.Core.Host
             if (voxels != null) { f.Voxels = new List<Vec3>(); foreach (var v in voxels) { var a = (List<object>)v; f.Voxels.Add(new Vec3((double)a[0], (double)a[1], (double)a[2])); } }
             f.VoxelKey = Json.Str(o, "voxelKey"); f.Rejected = Json.Str(o, "rejected");
             foreach (var id in Json.Arr(o, "closedEdges") ?? new List<object>()) if (id is string edgeId) f.ClosedEdges.Add(edgeId);
+            foreach (var row in Json.Arr(o, "shops") ?? new List<object>())
+            {
+                var a = (List<object>)row;
+                f.Shops[(string)a[0]] = new Shop { BuildingId = (string)a[0], Open = (double)a[1] > 0, Price = (double)a[2], Inventory = (double)a[3] };
+            }
             var markets = Json.Obj(o, "marketUnits");
             if (markets != null) foreach (var pair in markets) if (pair.Value is double units) f.MarketUnits[pair.Key] = (int)units;
             return f;

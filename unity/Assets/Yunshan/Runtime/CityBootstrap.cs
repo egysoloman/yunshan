@@ -31,6 +31,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, GameObject> far = new Dictionary<string, GameObject>();
         readonly Dictionary<string, GameObject> near = new Dictionary<string, GameObject>();
         readonly List<Transform> signs = new List<Transform>();
+        readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
@@ -229,6 +230,7 @@ namespace Yunshan.Runtime
             if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             if (signFont != null) { text.font = signFont; sign.GetComponent<MeshRenderer>().sharedMaterial = signFont.material; }
             signs.Add(sign.transform);
+            if (b.Kind == "market" || b.Kind == "workshop" || b.Kind == "farm" || b.Kind == "dock") shopSigns[b.Id] = (text, b);
             return root.gameObject;
         }
 
@@ -386,6 +388,11 @@ namespace Yunshan.Runtime
             var feet = walker.Feet;
             GUI.Label(new UnityEngine.Rect(24, 88, 500, 22), $"{(walker.Walker.Inside != null ? walker.Walker.Inside.Name + $" {walker.Walker.Floor + 1} 层 · " : "")}位置 {feet.X:0.0} / {feet.Y:0.0} / {feet.Z:0.0} · 模拟 {frame.StepMs:0} ms/步 · 实际 {session.EffectiveMinutesPerSecond:0.0} 游戏分/秒（1× 为 1.0）", small);
             GUI.Label(new UnityEngine.Rect(24, 108, 500, 22), frame.NavigationDestination != null ? $"导航至 {frame.NavigationDestination}{(frame.NavigationUnavailable != null ? "（暂不可达）" : "")}" : "", small);
+            // Body warnings use the same needs the simulation applies to the player.
+            var warnings = new List<string>();
+            if (p.Hunger < 25) warnings.Add((p.Inventory.TryGetValue("food", out var food) && food >= 1 ? "饥饿：Tab ▸ 生活 ▸ 饮食，食用随身食物" : "饥饿：去市集购餐（Tab ▸ 交通 ▸ 附近市集）"));
+            if (p.Fatigue < 25) warnings.Add("疲惫：回住处床旁休息，或在医馆、车站、山顶亭休息片刻");
+            if (warnings.Count > 0) { var color = GUI.color; GUI.color = new Color(1f, .72f, .62f); GUI.Label(new UnityEngine.Rect(24, 132, 620, 22), string.Join(" · ", warnings), label); GUI.color = color; }
 
             // Time and save controls
             float x = Screen.width - 430;
@@ -560,6 +567,16 @@ namespace Yunshan.Runtime
         {
             if (view == null) return;
             signs.RemoveAll(t => t == null);
+            // Shopfront: the name plus the shop's actual opening, price and stock.
+            var frame = session?.Frame;
+            foreach (var id in shopSigns.Keys.ToList())
+            {
+                var (text, building) = shopSigns[id];
+                if (text == null) { shopSigns.Remove(id); continue; }
+                if (frame == null || !frame.Shops.TryGetValue(id, out var shop)) continue;
+                var line = $"{building.Name}\n{(shop.Open ? "营业中" : "已打烊")} · {shop.Price:0.#} 云币/份 · 库存 {shop.Inventory:0}";
+                if (text.text != line) text.text = line;
+            }
             foreach (var sign in signs) sign.rotation = Quaternion.LookRotation(sign.position - view.transform.position);
         }
 

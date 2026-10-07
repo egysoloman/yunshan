@@ -52,6 +52,11 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
       actions: [...(job ? [button('结束本人工班', 'cancelWork')] : []), ...(state.education?.course ? [button('取消课堂', 'cancelStudy')] : []), ...(state.homeRest?.session ? [button('结束休息', 'cancelRest')] : [])],
       notes: job || state.education?.course || state.homeRest?.session ? [] : ['在市集、工坊、书院等场所的功能点开始工班或课堂；离开会暂停。'],
     }),
+    section('饮食', {
+      actions: [button(`食用随身食物 · ${player.inventory.food ?? 0} 份`, 'eat', 'food', undefined, !rules.canAct() || (player.inventory.food ?? 0) < 1),
+        ...Object.entries(recipeNames).filter(([id]) => (player.inventory[`dish:${id}`] ?? 0) > 0).map(([id, name]) => button(`享用${name} · ${player.inventory[`dish:${id}`]} 份`, 'eat', id, undefined, !rules.canAct()))],
+      notes: ['随身食物每次实际吃 1 份；无需厨房。购餐并带走的余量可在途中食用。'],
+    }),
     section('最近事件', { rows: state.events.slice(-8).reverse().map(event => ({ label: `#${event.tick}`, value: event.text })) }),
   ];
 
