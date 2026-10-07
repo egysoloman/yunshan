@@ -1,0 +1,2515 @@
+{
+  "capturedAtUTC": "2026-10-07T09:04:04.895737+00:00",
+  "method": "Read-only receipt/RESULT/original SHA checks; 0 Sim, 0 step, 0 browser, no archive creation.",
+  "receiptPath": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser03/receipt.json",
+  "receiptSHA256": "33ff4fe541edb7520310d907163a9e0bee5599b116a5641cef476590ee9fc7e1",
+  "receipt": {
+    "startedAt": "2026-10-07T08:32:49.677914+00:00",
+    "endedAt": "2026-10-07T09:01:15.253463+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/native-reference-browser-v3.mjs",
+      "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-PLAN03.json",
+      "/tmp/ROOT25-reference-browser-originals/native03"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 417,
+    "inputsStable": true,
+    "rawSHA256": "71645b8c180f873b29789c70b469d92e15230e0ed33a7c3e86cd0a5b57f3516f",
+    "ownedPid": 28838,
+    "observedDescendants": 12,
+    "finalOwnedMembers": [
+      {
+        "pid": 28858,
+        "state": "Z",
+        "parent": 1,
+        "group": 28838,
+        "session": 28838,
+        "startTicks": 1807320
+      },
+      {
+        "pid": 28894,
+        "state": "Z",
+        "parent": 1,
+        "group": 28877,
+        "session": 28877,
+        "startTicks": 1807380
+      },
+      {
+        "pid": 28895,
+        "state": "Z",
+        "parent": 1,
+        "group": 28877,
+        "session": 28877,
+        "startTicks": 1807380
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "resultPath": "/tmp/ROOT25-reference-browser-originals/native03/RESULT.json",
+  "resultSHA256": "ab449aab504893737dcea95745d03a6da372d0e0081c3e7643949b41280ce325",
+  "resultSummary": {
+    "status": "PASS_NATIVE_FUNCTION_AND_GRAPHICS",
+    "startedAt": "2026-10-07T08:32:49.736Z",
+    "finishedAt": "2026-10-07T09:01:10.636Z",
+    "elapsedMs": 1700900,
+    "evidenceBytesBeforeReceipt": 82230839,
+    "platform": "Linux Chromium, ANGLE SwiftShader software GPU",
+    "macHardwareEvidence": false,
+    "artResult": "NOT_REVIEWED",
+    "artCompletionEstablished": false,
+    "actualLayout": "current-v8",
+    "planSHA256": "ec42c37d6ecbbc8f923a10bee3fb648b3ab6c90bdda1af9253deb3120edd73ed",
+    "driverSHA256": "864d99e80ea183b53cd4d8b55ca050be082072677014dd3927450a5cd899149b",
+    "referenceViewport": {
+      "width": 1672,
+      "height": 941
+    },
+    "naturalPlayerTravel": true,
+    "actualFirstPersonOnly": true,
+    "injectedGameState": false,
+    "wPulses": 18,
+    "totalWSeconds": 3.6,
+    "totalObservedWSeconds": 3.6033999999910593,
+    "ordinaryTickObserved": true,
+    "worldFingerprint": "8988bd85",
+    "marketBuildingId": "market-b26",
+    "shopId": "shop-market-b26"
+  },
+  "actions": [
+    {
+      "id": "00001-native-ui-pause",
+      "status": "PASS",
+      "label": "native-ui-pause",
+      "beforeSave": {
+        "path": "00001-native-ui-pause.before.save.json.gz",
+        "bytes": 355939,
+        "SHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+        "encoding": "gzip",
+        "decodedBytes": 2176338,
+        "decodedSHA256": "6ada817b1bd105a61972d4c5a8126b2e15b1359670bca843d2fde14ffef8ad3f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00001-native-ui-pause.after.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00002-dismiss-native-welcome",
+      "status": "PASS",
+      "label": "dismiss-native-welcome",
+      "beforeSave": {
+        "path": "00002-dismiss-native-welcome.before.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00002-dismiss-native-welcome.after.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00003-open-native-navigation-panel",
+      "status": "PASS",
+      "label": "open-native-navigation-panel",
+      "beforeSave": {
+        "path": "00003-open-native-navigation-panel.before.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00003-open-native-navigation-panel.after.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00004-native-transit-tab",
+      "status": "PASS",
+      "label": "native-transit-tab",
+      "beforeSave": {
+        "path": "00004-native-transit-tab.before.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00004-native-transit-tab.after.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00005-native-market-filter",
+      "status": "PASS",
+      "label": "native-market-filter",
+      "beforeSave": {
+        "path": "00005-native-market-filter.before.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00005-native-market-filter.after.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00006-native-market-navigation",
+      "status": "PASS",
+      "label": "native-market-navigation",
+      "beforeSave": {
+        "path": "00006-native-market-navigation.before.save.json.gz",
+        "bytes": 357761,
+        "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+        "encoding": "gzip",
+        "decodedBytes": 2189631,
+        "decodedSHA256": "ea2f8ef368ca944f3904b7a82bf1d39c4a50ce4d70b87dade8df2253fd5b0cdb",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00006-native-market-navigation.after.save.json.gz",
+        "bytes": 357770,
+        "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+        "encoding": "gzip",
+        "decodedBytes": 2189641,
+        "decodedSHA256": "44fa4a1be7138486f7c0d0e570c086a59c03ceffe53d6183ceadd0849cc9dc5f",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00007-close-native-navigation-panel",
+      "status": "PASS",
+      "label": "close-native-navigation-panel",
+      "beforeSave": {
+        "path": "00007-close-native-navigation-panel.before.save.json.gz",
+        "bytes": 357770,
+        "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+        "encoding": "gzip",
+        "decodedBytes": 2189641,
+        "decodedSHA256": "44fa4a1be7138486f7c0d0e570c086a59c03ceffe53d6183ceadd0849cc9dc5f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00007-close-native-navigation-panel.after.save.json.gz",
+        "bytes": 357770,
+        "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+        "encoding": "gzip",
+        "decodedBytes": 2189641,
+        "decodedSHA256": "44fa4a1be7138486f7c0d0e570c086a59c03ceffe53d6183ceadd0849cc9dc5f",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00008-native-ui-resume",
+      "status": "PASS",
+      "label": "native-ui-resume",
+      "beforeSave": {
+        "path": "00008-native-ui-resume.before.save.json.gz",
+        "bytes": 357770,
+        "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+        "encoding": "gzip",
+        "decodedBytes": 2189641,
+        "decodedSHA256": "44fa4a1be7138486f7c0d0e570c086a59c03ceffe53d6183ceadd0849cc9dc5f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00008-native-ui-resume.after.save.json.gz",
+        "bytes": 357041,
+        "SHA256": "7f26aacead7090a9a2076406ac18b99d01741f9c75ab53c4a8261e239f3461ad",
+        "encoding": "gzip",
+        "decodedBytes": 2187577,
+        "decodedSHA256": "ca71ecc07a75085a326542e3768e934ed545bf1dededb718f270ed6100ae111a",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00009-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00009-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 354911,
+        "SHA256": "c45a45889570b837a7f1b42f1f40172c4f9c419eed88ea0e1d0723666a3ee805",
+        "encoding": "gzip",
+        "decodedBytes": 2179830,
+        "decodedSHA256": "16ae44fe50cfeb4208046078e7eb62284f16a858901fac0b48d5ac5efd1ab04b",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00009-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 353842,
+        "SHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+        "encoding": "gzip",
+        "decodedBytes": 2177009,
+        "decodedSHA256": "4740ba34c851033a4c37cafe64dff11d6e8be1c41117dbb762494904870fcf08",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00010-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00010-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 353842,
+        "SHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+        "encoding": "gzip",
+        "decodedBytes": 2177009,
+        "decodedSHA256": "4740ba34c851033a4c37cafe64dff11d6e8be1c41117dbb762494904870fcf08",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00010-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 352859,
+        "SHA256": "73cb3f1faec600fa38457e8befbdb62accbcfc21847fd794021e2a51a9804112",
+        "encoding": "gzip",
+        "decodedBytes": 2173854,
+        "decodedSHA256": "2bed38dc76b0e8d245365fe4d7e7ce7025c26c2e2d847f7022cd4da2be59e7fe",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00011-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00011-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 352352,
+        "SHA256": "808c5f854510ee0f1ae28d66114b2e7103be423b984339f17eec6c57933a20d3",
+        "encoding": "gzip",
+        "decodedBytes": 2173125,
+        "decodedSHA256": "0e63745895aa41ea0c48d2c5a2ce0e5b7c2531e630d3115940791d6453616b12",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00011-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 352725,
+        "SHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+        "encoding": "gzip",
+        "decodedBytes": 2173905,
+        "decodedSHA256": "bea37115de849e1ef18dcd46f7b9e3226e6b67c9dd15a8669289c6805157e651",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00012-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00012-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 352725,
+        "SHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+        "encoding": "gzip",
+        "decodedBytes": 2173905,
+        "decodedSHA256": "bea37115de849e1ef18dcd46f7b9e3226e6b67c9dd15a8669289c6805157e651",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00012-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 353043,
+        "SHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+        "encoding": "gzip",
+        "decodedBytes": 2174258,
+        "decodedSHA256": "84c501ade129b84f08ad60a34d17132c0546323ffbbb2c29b3feeedbb530b413",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00013-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00013-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 353043,
+        "SHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+        "encoding": "gzip",
+        "decodedBytes": 2174258,
+        "decodedSHA256": "84c501ade129b84f08ad60a34d17132c0546323ffbbb2c29b3feeedbb530b413",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00013-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 354115,
+        "SHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+        "encoding": "gzip",
+        "decodedBytes": 2180526,
+        "decodedSHA256": "33db1b795bf10c0310f5ea81ecb1da3d63db17f0f2f8492a512cef0ba8d50ba7",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00014-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00014-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 354115,
+        "SHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+        "encoding": "gzip",
+        "decodedBytes": 2180526,
+        "decodedSHA256": "33db1b795bf10c0310f5ea81ecb1da3d63db17f0f2f8492a512cef0ba8d50ba7",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00014-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 354472,
+        "SHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+        "encoding": "gzip",
+        "decodedBytes": 2180834,
+        "decodedSHA256": "d32180ae48b9484896b6aff0db1898d3a2d0d936ac06425523e2bf47b32f1534",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00015-W-public-road-to-market-1",
+      "status": "PASS",
+      "label": "W-public-road-to-market-1",
+      "beforeSave": {
+        "path": "00015-W-public-road-to-market-1.before.save.json.gz",
+        "bytes": 354472,
+        "SHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+        "encoding": "gzip",
+        "decodedBytes": 2180834,
+        "decodedSHA256": "d32180ae48b9484896b6aff0db1898d3a2d0d936ac06425523e2bf47b32f1534",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00015-W-public-road-to-market-1.after.save.json.gz",
+        "bytes": 354776,
+        "SHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+        "encoding": "gzip",
+        "decodedBytes": 2183237,
+        "decodedSHA256": "8ec7d369c50b2e703792fd65422f1df1619b50eed3e08a41029dc63c1583187d",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00016-native-ui-pause",
+      "status": "PASS",
+      "label": "native-ui-pause",
+      "beforeSave": {
+        "path": "00016-native-ui-pause.before.save.json.gz",
+        "bytes": 354776,
+        "SHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+        "encoding": "gzip",
+        "decodedBytes": 2183237,
+        "decodedSHA256": "8ec7d369c50b2e703792fd65422f1df1619b50eed3e08a41029dc63c1583187d",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00016-native-ui-pause.after.save.json.gz",
+        "bytes": 354282,
+        "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+        "encoding": "gzip",
+        "decodedBytes": 2183690,
+        "decodedSHA256": "78db3c3eaa89706f9f4b5a76bd012a90ba14216378c0f5716ceb96ea8bd0dc9c",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00017-E-enter-actual-market",
+      "status": "PASS",
+      "label": "E-enter-actual-market",
+      "beforeSave": {
+        "path": "00017-E-enter-actual-market.before.save.json.gz",
+        "bytes": 354282,
+        "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+        "encoding": "gzip",
+        "decodedBytes": 2183690,
+        "decodedSHA256": "78db3c3eaa89706f9f4b5a76bd012a90ba14216378c0f5716ceb96ea8bd0dc9c",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00017-E-enter-actual-market.after.save.json.gz",
+        "bytes": 354252,
+        "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+        "encoding": "gzip",
+        "decodedBytes": 2183631,
+        "decodedSHA256": "f746eff85be5f217f40b027ac7735692608438630c91675ff478bd2612b4cade",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00018-native-ui-resume",
+      "status": "PASS",
+      "label": "native-ui-resume",
+      "beforeSave": {
+        "path": "00018-native-ui-resume.before.save.json.gz",
+        "bytes": 354252,
+        "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+        "encoding": "gzip",
+        "decodedBytes": 2183631,
+        "decodedSHA256": "f746eff85be5f217f40b027ac7735692608438630c91675ff478bd2612b4cade",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00018-native-ui-resume.after.save.json.gz",
+        "bytes": 355270,
+        "SHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+        "encoding": "gzip",
+        "decodedBytes": 2185048,
+        "decodedSHA256": "02e4a7d68f4debcc95b21f4dc6036994046fd171448cfcf6b63ad654f9e45fb0",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00019-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00019-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 355270,
+        "SHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+        "encoding": "gzip",
+        "decodedBytes": 2185048,
+        "decodedSHA256": "02e4a7d68f4debcc95b21f4dc6036994046fd171448cfcf6b63ad654f9e45fb0",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00019-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 355947,
+        "SHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+        "encoding": "gzip",
+        "decodedBytes": 2190097,
+        "decodedSHA256": "10d595ae511bb3b760adff2647a60395d4cba2d8f3f131c3679ec4a8f26c420a",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00020-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00020-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 355947,
+        "SHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+        "encoding": "gzip",
+        "decodedBytes": 2190097,
+        "decodedSHA256": "10d595ae511bb3b760adff2647a60395d4cba2d8f3f131c3679ec4a8f26c420a",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00020-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 357039,
+        "SHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+        "encoding": "gzip",
+        "decodedBytes": 2200244,
+        "decodedSHA256": "243815f8889884b22ae87a63ec2f40feea43cfd54647c5edfda59783e82e17b6",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00021-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00021-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 357039,
+        "SHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+        "encoding": "gzip",
+        "decodedBytes": 2200244,
+        "decodedSHA256": "243815f8889884b22ae87a63ec2f40feea43cfd54647c5edfda59783e82e17b6",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00021-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 357936,
+        "SHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+        "encoding": "gzip",
+        "decodedBytes": 2212215,
+        "decodedSHA256": "6e2fdf7dd0bba98ba6ebd9aaba8820dbc69c033768db92c076395338cfa4beb8",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00022-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00022-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 357936,
+        "SHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+        "encoding": "gzip",
+        "decodedBytes": 2212215,
+        "decodedSHA256": "6e2fdf7dd0bba98ba6ebd9aaba8820dbc69c033768db92c076395338cfa4beb8",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00022-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 358396,
+        "SHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+        "encoding": "gzip",
+        "decodedBytes": 2218120,
+        "decodedSHA256": "f01a86326a5a133b9e72b1efb1db0760bc32ddd81773b34696928e388679a220",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00023-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00023-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 358396,
+        "SHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+        "encoding": "gzip",
+        "decodedBytes": 2218120,
+        "decodedSHA256": "f01a86326a5a133b9e72b1efb1db0760bc32ddd81773b34696928e388679a220",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00023-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 357889,
+        "SHA256": "67bc67932238d9f41b8aa661072ba16e10536597ff322f60382e95412aebf772",
+        "encoding": "gzip",
+        "decodedBytes": 2218909,
+        "decodedSHA256": "3e6f6bfd9466b932c24b8027c0d98ed9dcbef6efed95a805c6d70ca2879457b3",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00024-W-inside-to-sale-1",
+      "status": "PASS",
+      "label": "W-inside-to-sale-1",
+      "beforeSave": {
+        "path": "00024-W-inside-to-sale-1.before.save.json.gz",
+        "bytes": 359099,
+        "SHA256": "04afbd4f80ab6ac57ae558b78c596d38a68652b4486e0c8a398313de89dc1dd8",
+        "encoding": "gzip",
+        "decodedBytes": 2230073,
+        "decodedSHA256": "88b8497f60a7978ff132317fa722f3070fd89ccc7448327e91506c28482a7804",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00024-W-inside-to-sale-1.after.save.json.gz",
+        "bytes": 362177,
+        "SHA256": "8e704ac06d34231b50b9e7ff5ffe597b032eac7d184d2a17074e3a46f3b783a2",
+        "encoding": "gzip",
+        "decodedBytes": 2252495,
+        "decodedSHA256": "f6798a30a0486b49b5e6ec858c52cd3ded7be96c9f5a080a7f7423bf6ff3f32a",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00025-native-ui-pause",
+      "status": "PASS",
+      "label": "native-ui-pause",
+      "beforeSave": {
+        "path": "00025-native-ui-pause.before.save.json.gz",
+        "bytes": 366428,
+        "SHA256": "1cba5edacc15fa771b355f17d703d0b4fbdc750fc5da1ab1fd140f12ceddef88",
+        "encoding": "gzip",
+        "decodedBytes": 2291163,
+        "decodedSHA256": "c3146e831bcd6a833f892de5e22beb49ac052441b1268f3c0674406af014633a",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00025-native-ui-pause.after.save.json.gz",
+        "bytes": 372561,
+        "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "encoding": "gzip",
+        "decodedBytes": 2337450,
+        "decodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00026-native-building-context",
+      "status": "PASS",
+      "label": "native-building-context",
+      "beforeSave": {
+        "path": "00026-native-building-context.before.save.json.gz",
+        "bytes": 372561,
+        "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "encoding": "gzip",
+        "decodedBytes": 2337450,
+        "decodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00026-native-building-context.after.save.json.gz",
+        "bytes": 372561,
+        "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "encoding": "gzip",
+        "decodedBytes": 2337450,
+        "decodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO",
+      "status": "PASS",
+      "label": "ACTUAL-SHOP-UI-PURCHASE-TWO",
+      "beforeSave": {
+        "path": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO.before.save.json.gz",
+        "bytes": 372561,
+        "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "encoding": "gzip",
+        "decodedBytes": 2337450,
+        "decodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO.after.save.json.gz",
+        "bytes": 372683,
+        "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+        "encoding": "gzip",
+        "decodedBytes": 2337761,
+        "decodedSHA256": "41f086c442c109a2b24c919a2979e835aa8ecb0145b1503e798ee3654b7f0937",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00028-native-ui-resume",
+      "status": "PASS",
+      "label": "native-ui-resume",
+      "beforeSave": {
+        "path": "00028-native-ui-resume.before.save.json.gz",
+        "bytes": 372683,
+        "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+        "encoding": "gzip",
+        "decodedBytes": 2337761,
+        "decodedSHA256": "41f086c442c109a2b24c919a2979e835aa8ecb0145b1503e798ee3654b7f0937",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00028-native-ui-resume.after.save.json.gz",
+        "bytes": 379798,
+        "SHA256": "2d492528590001270f07cdeae8cb71400696ae01761a9373913dc21732d1c23d",
+        "encoding": "gzip",
+        "decodedBytes": 2387938,
+        "decodedSHA256": "3e7ac1f73c8669b916efafc290604c8a27e33e875b8bf74f844a4eb03324aa98",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00029-mouse-turn-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "mouse-turn-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00029-mouse-turn-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 383275,
+        "SHA256": "ebce0195387b23f32f7b36cc8019fb11715702eee064d35dcade4decaa824d07",
+        "encoding": "gzip",
+        "decodedBytes": 2412790,
+        "decodedSHA256": "3cd78af2a6cb1aa97f6af6bb853d973376b1bb4b148f9177712f778038049a07",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00029-mouse-turn-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 426518,
+        "SHA256": "067cc7e8fc305a0db42ef19d2b6113870e82cb5cce1206cf692f2d418a0700bd",
+        "encoding": "gzip",
+        "decodedBytes": 2821037,
+        "decodedSHA256": "acc20b5dcd0f50a41d88ddb080131f678b6d696f78ea7518c9395c8c65871b01",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00030-W-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "W-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00030-W-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 426570,
+        "SHA256": "186d11042a0c9036f8696f257d59cbcfe0524cf5ad6e562daf623084306132e7",
+        "encoding": "gzip",
+        "decodedBytes": 2822485,
+        "decodedSHA256": "ee1398fb0cbfc56f34b2ebd48709cb403ad539f45093bc906f429cdc6c8ee02e",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00030-W-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 426424,
+        "SHA256": "032dcfb6bacda2370c0341fe146128484835ac4812ab016a40d58584a70cebed",
+        "encoding": "gzip",
+        "decodedBytes": 2821976,
+        "decodedSHA256": "ff187c49055db1765943751be2519d90c43561adbe984067dcabfdb19ecf3b0a",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00031-W-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "W-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00031-W-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 428232,
+        "SHA256": "1728705be7dfcfac17d5fcd0819e418e092c47bec1351f1c2d0f3b9cb3ea4b78",
+        "encoding": "gzip",
+        "decodedBytes": 2846379,
+        "decodedSHA256": "988b32868092b5835595b3fadae670a0404910c0ce22d31151db30211b6a321b",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00031-W-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 434482,
+        "SHA256": "11dbbc7f648427858646e799b111f5e22545dd706fbad2a0d82e46569ac386fb",
+        "encoding": "gzip",
+        "decodedBytes": 2923580,
+        "decodedSHA256": "9defe4bcabb43b645dd097f8bb48aa1716135e1b02352f856575c7b242936c54",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00032-W-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "W-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00032-W-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 434688,
+        "SHA256": "9cc260bf0fab4e37f5a7c61f88bb424ee68885c0c004960e3f911733187c386e",
+        "encoding": "gzip",
+        "decodedBytes": 2922727,
+        "decodedSHA256": "26f8ec1359eceb444ebf95215d720001161eb8108b0b212bc20bf6289a4e80c9",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00032-W-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 435574,
+        "SHA256": "bc1f64678553e72493a546f9da2d07b8a9b84b45c7c3ac37169204901a15fa9f",
+        "encoding": "gzip",
+        "decodedBytes": 2928213,
+        "decodedSHA256": "c8ecde0cb10297a851d6b69428e2530802a7bb357ad746cd66d524867e4a3dca",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00033-W-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "W-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00033-W-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 436298,
+        "SHA256": "7b05bd4be300d78d8b5343916d7a3ef69c0e4959e8a9048efef3f75b26193b9d",
+        "encoding": "gzip",
+        "decodedBytes": 2942801,
+        "decodedSHA256": "e16c1eb882c8ff1e74bc80ead315b5921ff30ea9421c68118f118ec493a98c8f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00033-W-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 437261,
+        "SHA256": "016b0caf191db6d1c7cc15d7365020634025c3f55c32da62d0b6374aa1ae279b",
+        "encoding": "gzip",
+        "decodedBytes": 2948017,
+        "decodedSHA256": "09304ebed2a684911fa1b5184f23e601c8e4e1c4a4a784bd484c0aa472937630",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00034-W-inside-to-original-door-1",
+      "status": "PASS",
+      "label": "W-inside-to-original-door-1",
+      "beforeSave": {
+        "path": "00034-W-inside-to-original-door-1.before.save.json.gz",
+        "bytes": 439344,
+        "SHA256": "10ff4f3c9d26e9851e7f04f89c1ef66ec4c4a688bdb2c845059611aacefce8dc",
+        "encoding": "gzip",
+        "decodedBytes": 2980680,
+        "decodedSHA256": "ab1d147d27a88517b5a6991070421805457a76455065677f1a79cc28070a26b8",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00034-W-inside-to-original-door-1.after.save.json.gz",
+        "bytes": 439679,
+        "SHA256": "8dacff13863e530bbe5b782988064aa31960d4e3f59fb13f8d407504fedbe918",
+        "encoding": "gzip",
+        "decodedBytes": 2982185,
+        "decodedSHA256": "a539aa53a206282e2079889c278c9091b8e7ee838b25ed29922d3d3e1ffc16ce",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00035-E-exit-actual-market",
+      "status": "PASS",
+      "label": "E-exit-actual-market",
+      "beforeSave": {
+        "path": "00035-E-exit-actual-market.before.save.json.gz",
+        "bytes": 439888,
+        "SHA256": "cdb6794ab1d75524705e6b89db2dc9c172a51e11d726ef3dfd9ebf81decf3322",
+        "encoding": "gzip",
+        "decodedBytes": 2981811,
+        "decodedSHA256": "c70a113994eff7b8b475ac41ec48bb2a91dcad03360d505bb6aa63a63734041f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00035-E-exit-actual-market.after.save.json.gz",
+        "bytes": 441317,
+        "SHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+        "encoding": "gzip",
+        "decodedBytes": 3002199,
+        "decodedSHA256": "e8ca80c74b0f766025ff35fb84bb6dd4eb13270dd48b501ba759b6ea299b059e",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00036-native-ui-pause",
+      "status": "PASS",
+      "label": "native-ui-pause",
+      "beforeSave": {
+        "path": "00036-native-ui-pause.before.save.json.gz",
+        "bytes": 441317,
+        "SHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+        "encoding": "gzip",
+        "decodedBytes": 3002199,
+        "decodedSHA256": "e8ca80c74b0f766025ff35fb84bb6dd4eb13270dd48b501ba759b6ea299b059e",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00036-native-ui-pause.after.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00037-open-native-save-panel",
+      "status": "PASS",
+      "label": "open-native-save-panel",
+      "beforeSave": {
+        "path": "00037-open-native-save-panel.before.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00037-open-native-save-panel.after.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00038-native-settings-tab",
+      "status": "PASS",
+      "label": "native-settings-tab",
+      "beforeSave": {
+        "path": "00038-native-settings-tab.before.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00038-native-settings-tab.after.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      }
+    },
+    {
+      "id": "00039-ACTUAL-NATIVE-SAVE",
+      "status": "PASS",
+      "label": "ACTUAL-NATIVE-SAVE",
+      "beforeSave": {
+        "path": "00039-ACTUAL-NATIVE-SAVE.before.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00039-ACTUAL-NATIVE-SAVE.after.save.json.gz",
+        "bytes": 441689,
+        "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+        "encoding": "gzip",
+        "decodedBytes": 3007186,
+        "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+        "completeExportSave": true
+      }
+    }
+  ],
+  "actionCount": 39,
+  "allActionStatusPass": true,
+  "captures": [
+    {
+      "label": "ACTUAL-BIRTH-CAMERA",
+      "imageFile": {
+        "path": "capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+        "bytes": 782723,
+        "SHA256": "94006c773af09fe2e63fea232778d4a18014aa2cb51f0cc1392e6ae408dc5e81"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "label": "REAL-WALK-MARKET-DOOR",
+      "imageFile": {
+        "path": "capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+        "bytes": 760502,
+        "SHA256": "cdedfeca59e66dea2ff36836b1903a88657c917b0adc36e40beeaf7ed2cbcf69"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "label": "ACTUAL-E-MARKET-INTERIOR",
+      "imageFile": {
+        "path": "capture-03-ACTUAL-E-MARKET-INTERIOR.ORIGINAL.png",
+        "bytes": 726565,
+        "SHA256": "dece581dab3d60c45ea905751506047a66888fe7159d4406f6aea41e266e2a41"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "label": "REAL-WALK-SALE-POINT",
+      "imageFile": {
+        "path": "capture-04-REAL-WALK-SALE-POINT.ORIGINAL.png",
+        "bytes": 630910,
+        "SHA256": "9461c05c894c7e62e36e8744a41f732c21b122ca7d8618e6a222290edd3f6860"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "label": "ACTUAL-PURCHASED-MARKET-UI",
+      "imageFile": {
+        "path": "capture-05-ACTUAL-PURCHASED-MARKET-UI.ORIGINAL.png",
+        "bytes": 630565,
+        "SHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "label": "ACTUAL-E-EXIT-STREET",
+      "imageFile": {
+        "path": "capture-06-ACTUAL-E-EXIT-STREET.ORIGINAL.png",
+        "bytes": 851067,
+        "SHA256": "c3ba2b6e94f312ae4d2fd150d6154a9d46b3c2b29610bcdbd9ee8bc014fc5ebb"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    }
+  ],
+  "originalEncodedChecks": [
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/before-frozen-inputs.json",
+      "bytes": 47513,
+      "expectedBytes": 47513,
+      "SHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb",
+      "expectedSHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/owned-preview-process.json",
+      "bytes": 135,
+      "expectedBytes": 135,
+      "SHA256": "64a81e9a9e0e768c0806641c31c19f040c5a2f22412e384e928edf79291b0969",
+      "expectedSHA256": "64a81e9a9e0e768c0806641c31c19f040c5a2f22412e384e928edf79291b0969",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-born-WORLD.json",
+      "bytes": 1847642,
+      "expectedBytes": 1847642,
+      "SHA256": "f92fe188038066cdc43326f85d304b12fa5641d14e749cd46c26a35049cc4ffb",
+      "expectedSHA256": "f92fe188038066cdc43326f85d304b12fa5641d14e749cd46c26a35049cc4ffb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-born.save.json.gz",
+      "bytes": 317332,
+      "expectedBytes": 317332,
+      "SHA256": "cf6e1b3a54c5156fbc86cf726fe527c0ed6dc116702c9fd20a32428cfa04fed9",
+      "expectedSHA256": "cf6e1b3a54c5156fbc86cf726fe527c0ed6dc116702c9fd20a32428cfa04fed9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/fresh-context-storage.json",
+      "bytes": 138,
+      "expectedBytes": 138,
+      "SHA256": "4cc87122dccefc056479c24fc7e346bb5ce4491fb81aac14cea6a836f947fe7b",
+      "expectedSHA256": "4cc87122dccefc056479c24fc7e346bb5ce4491fb81aac14cea6a836f947fe7b",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00001-native-ui-pause.before.save.json.gz",
+      "bytes": 355939,
+      "expectedBytes": 355939,
+      "SHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+      "expectedSHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00001-native-ui-pause.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00001-native-ui-pause.action.json",
+      "bytes": 10719,
+      "expectedBytes": 10719,
+      "SHA256": "e6650f654124631b319f12332feeadbd184dbfd8e5c6b084b357748806d8c63d",
+      "expectedSHA256": "e6650f654124631b319f12332feeadbd184dbfd8e5c6b084b357748806d8c63d",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "bytes": 782723,
+      "expectedBytes": 782723,
+      "SHA256": "94006c773af09fe2e63fea232778d4a18014aa2cb51f0cc1392e6ae408dc5e81",
+      "expectedSHA256": "94006c773af09fe2e63fea232778d4a18014aa2cb51f0cc1392e6ae408dc5e81",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.webgl.json",
+      "bytes": 2206793,
+      "expectedBytes": 2206793,
+      "SHA256": "6e7d3d78df5ce9c9fa5ebd54d40610ea1d8b55a6c0a32c7a81295bd8f5cc7483",
+      "expectedSHA256": "6e7d3d78df5ce9c9fa5ebd54d40610ea1d8b55a6c0a32c7a81295bd8f5cc7483",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.capture.json",
+      "bytes": 3661,
+      "expectedBytes": 3661,
+      "SHA256": "b6e4c353f762b233c9486c602f6e1343af213138132c146ae4972368ba200f2f",
+      "expectedSHA256": "b6e4c353f762b233c9486c602f6e1343af213138132c146ae4972368ba200f2f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00002-dismiss-native-welcome.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00002-dismiss-native-welcome.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00002-dismiss-native-welcome.action.json",
+      "bytes": 7510,
+      "expectedBytes": 7510,
+      "SHA256": "70909d821370b76c38a0f732bdb16825906354729e19221f14be1f6abf8df470",
+      "expectedSHA256": "70909d821370b76c38a0f732bdb16825906354729e19221f14be1f6abf8df470",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-market-selection.json",
+      "bytes": 2517,
+      "expectedBytes": 2517,
+      "SHA256": "5410f4eec3e8fe45f2144f0c724b02d29b20e119e53fb69f1abe94301c29f4b1",
+      "expectedSHA256": "5410f4eec3e8fe45f2144f0c724b02d29b20e119e53fb69f1abe94301c29f4b1",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00003-open-native-navigation-panel.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00003-open-native-navigation-panel.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00003-open-native-navigation-panel.action.json",
+      "bytes": 7081,
+      "expectedBytes": 7081,
+      "SHA256": "7c122092c156e6683164564687c12b6e34aa36f46059e0bba6b1f2e11f7c6fe1",
+      "expectedSHA256": "7c122092c156e6683164564687c12b6e34aa36f46059e0bba6b1f2e11f7c6fe1",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00004-native-transit-tab.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00004-native-transit-tab.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00004-native-transit-tab.action.json",
+      "bytes": 7015,
+      "expectedBytes": 7015,
+      "SHA256": "6b0bf4bb59e82024734bcd5da0a618711c12c3fef075a475b0d7a501e80bfc39",
+      "expectedSHA256": "6b0bf4bb59e82024734bcd5da0a618711c12c3fef075a475b0d7a501e80bfc39",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00005-native-market-filter.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00005-native-market-filter.after.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00005-native-market-filter.action.json",
+      "bytes": 3470,
+      "expectedBytes": 3470,
+      "SHA256": "6df7840eec1324dc810621161544a1eae53ff338fc026cf6412d9db6996d067d",
+      "expectedSHA256": "6df7840eec1324dc810621161544a1eae53ff338fc026cf6412d9db6996d067d",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00006-native-market-navigation.before.save.json.gz",
+      "bytes": 357761,
+      "expectedBytes": 357761,
+      "SHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "expectedSHA256": "5e15360e395a66d1c8ab2b66c88e15635f51eb423a76ff178db6d06c8d9dd994",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00006-native-market-navigation.after.save.json.gz",
+      "bytes": 357770,
+      "expectedBytes": 357770,
+      "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "expectedSHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00006-native-market-navigation.action.json",
+      "bytes": 9745,
+      "expectedBytes": 9745,
+      "SHA256": "a8cfd967e5e73d26ff6010d8fd1fac085e2c7a00f521379e732257ec5e8e60d5",
+      "expectedSHA256": "a8cfd967e5e73d26ff6010d8fd1fac085e2c7a00f521379e732257ec5e8e60d5",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-native-walking-journey.json",
+      "bytes": 634,
+      "expectedBytes": 634,
+      "SHA256": "0a11a9ab166a54b824a413f45bd22fc60d2b2e252e04004040c362c4c38be26c",
+      "expectedSHA256": "0a11a9ab166a54b824a413f45bd22fc60d2b2e252e04004040c362c4c38be26c",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00007-close-native-navigation-panel.before.save.json.gz",
+      "bytes": 357770,
+      "expectedBytes": 357770,
+      "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "expectedSHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00007-close-native-navigation-panel.after.save.json.gz",
+      "bytes": 357770,
+      "expectedBytes": 357770,
+      "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "expectedSHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00007-close-native-navigation-panel.action.json",
+      "bytes": 7973,
+      "expectedBytes": 7973,
+      "SHA256": "02f7e4fd8dd6d12550c5febd2025513f9cce68206ba8b6ecedcd968a595b4d51",
+      "expectedSHA256": "02f7e4fd8dd6d12550c5febd2025513f9cce68206ba8b6ecedcd968a595b4d51",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00008-native-ui-resume.before.save.json.gz",
+      "bytes": 357770,
+      "expectedBytes": 357770,
+      "SHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "expectedSHA256": "0de6ec0fb71c2805a054303468c001a190cdd00540c01c4d59279a47f35b2688",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00008-native-ui-resume.after.save.json.gz",
+      "bytes": 357041,
+      "expectedBytes": 357041,
+      "SHA256": "7f26aacead7090a9a2076406ac18b99d01741f9c75ab53c4a8261e239f3461ad",
+      "expectedSHA256": "7f26aacead7090a9a2076406ac18b99d01741f9c75ab53c4a8261e239f3461ad",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00008-native-ui-resume.action.json",
+      "bytes": 9560,
+      "expectedBytes": 9560,
+      "SHA256": "7d961cc9722810d5120fee7d8d80380d22f0ed70ee59e7e5321ea4619b98cf60",
+      "expectedSHA256": "7d961cc9722810d5120fee7d8d80380d22f0ed70ee59e7e5321ea4619b98cf60",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/route-public-road-to-market.json",
+      "bytes": 335,
+      "expectedBytes": 335,
+      "SHA256": "da748052b3f62332b8dd44373c5d7a35a21226665342eb4459520a2d54b434c1",
+      "expectedSHA256": "da748052b3f62332b8dd44373c5d7a35a21226665342eb4459520a2d54b434c1",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00009-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 354911,
+      "expectedBytes": 354911,
+      "SHA256": "c45a45889570b837a7f1b42f1f40172c4f9c419eed88ea0e1d0723666a3ee805",
+      "expectedSHA256": "c45a45889570b837a7f1b42f1f40172c4f9c419eed88ea0e1d0723666a3ee805",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00009-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 353842,
+      "expectedBytes": 353842,
+      "SHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+      "expectedSHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00009-W-public-road-to-market-1.action.json",
+      "bytes": 9096,
+      "expectedBytes": 9096,
+      "SHA256": "d2ed2b656d9d61ba4aebe66c260e849e087219bcfddfbf65d8d14d41c2281afc",
+      "expectedSHA256": "d2ed2b656d9d61ba4aebe66c260e849e087219bcfddfbf65d8d14d41c2281afc",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00010-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 353842,
+      "expectedBytes": 353842,
+      "SHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+      "expectedSHA256": "e25e147c6255d0cb3c51353c4577c589ff7411cb05888f2aaa8c6c22e0af741e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00010-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 352859,
+      "expectedBytes": 352859,
+      "SHA256": "73cb3f1faec600fa38457e8befbdb62accbcfc21847fd794021e2a51a9804112",
+      "expectedSHA256": "73cb3f1faec600fa38457e8befbdb62accbcfc21847fd794021e2a51a9804112",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00010-W-public-road-to-market-1.action.json",
+      "bytes": 9463,
+      "expectedBytes": 9463,
+      "SHA256": "f2568b4ca3246b88f7541a7812bd5ce36e1e61fc4bcf96bbae65ff7082e55848",
+      "expectedSHA256": "f2568b4ca3246b88f7541a7812bd5ce36e1e61fc4bcf96bbae65ff7082e55848",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00011-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 352352,
+      "expectedBytes": 352352,
+      "SHA256": "808c5f854510ee0f1ae28d66114b2e7103be423b984339f17eec6c57933a20d3",
+      "expectedSHA256": "808c5f854510ee0f1ae28d66114b2e7103be423b984339f17eec6c57933a20d3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00011-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 352725,
+      "expectedBytes": 352725,
+      "SHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+      "expectedSHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00011-W-public-road-to-market-1.action.json",
+      "bytes": 8144,
+      "expectedBytes": 8144,
+      "SHA256": "5e73eaa821db837ea2b5be8fa4050578ab80276ee4b1ab8e8a4571b1bd9f7f9c",
+      "expectedSHA256": "5e73eaa821db837ea2b5be8fa4050578ab80276ee4b1ab8e8a4571b1bd9f7f9c",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00012-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 352725,
+      "expectedBytes": 352725,
+      "SHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+      "expectedSHA256": "e0ea0cefef6205529978a64ec3d38f6024d54f9415a527b015a204f6089a71ce",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00012-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 353043,
+      "expectedBytes": 353043,
+      "SHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+      "expectedSHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00012-W-public-road-to-market-1.action.json",
+      "bytes": 8819,
+      "expectedBytes": 8819,
+      "SHA256": "115dd1345aace9321d5d1b3f7a95227e8c31409e1160e672a95ea56f490805e7",
+      "expectedSHA256": "115dd1345aace9321d5d1b3f7a95227e8c31409e1160e672a95ea56f490805e7",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00013-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 353043,
+      "expectedBytes": 353043,
+      "SHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+      "expectedSHA256": "b197882224d43b2f5ea6235826a2d39666ac430a7f471d0eca08adf1fbe1315f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00013-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 354115,
+      "expectedBytes": 354115,
+      "SHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+      "expectedSHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00013-W-public-road-to-market-1.action.json",
+      "bytes": 7999,
+      "expectedBytes": 7999,
+      "SHA256": "95a627c08658d416fc1b3a41baba3165d4a89cc3ea2c89da134b6ee62ce9883c",
+      "expectedSHA256": "95a627c08658d416fc1b3a41baba3165d4a89cc3ea2c89da134b6ee62ce9883c",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00014-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 354115,
+      "expectedBytes": 354115,
+      "SHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+      "expectedSHA256": "c801a3de43b17cdcddf5c3e86a844f2623d3840f26ab5113abdfab28c99841ef",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00014-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 354472,
+      "expectedBytes": 354472,
+      "SHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+      "expectedSHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00014-W-public-road-to-market-1.action.json",
+      "bytes": 8066,
+      "expectedBytes": 8066,
+      "SHA256": "8b91ae7fdb94f82a2da3fd39916c1cc4494ad6fa3804d982732077e2ed5595ce",
+      "expectedSHA256": "8b91ae7fdb94f82a2da3fd39916c1cc4494ad6fa3804d982732077e2ed5595ce",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00015-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 354472,
+      "expectedBytes": 354472,
+      "SHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+      "expectedSHA256": "3afe0b6371f5d828eaf859e25373e327950e1ad6a0526e2bca8bc24663bbf36c",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00015-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 354776,
+      "expectedBytes": 354776,
+      "SHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+      "expectedSHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00015-W-public-road-to-market-1.action.json",
+      "bytes": 7957,
+      "expectedBytes": 7957,
+      "SHA256": "3757ec701f7b4bc96f253dbc70170191dd48b088e9ce47aa1b2b769629136919",
+      "expectedSHA256": "3757ec701f7b4bc96f253dbc70170191dd48b088e9ce47aa1b2b769629136919",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00016-native-ui-pause.before.save.json.gz",
+      "bytes": 354776,
+      "expectedBytes": 354776,
+      "SHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+      "expectedSHA256": "55763c87ba241b8aa1d1abcbc0bdbc6570656579427493a0981813627bd6204f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00016-native-ui-pause.after.save.json.gz",
+      "bytes": 354282,
+      "expectedBytes": 354282,
+      "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "expectedSHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00016-native-ui-pause.action.json",
+      "bytes": 8192,
+      "expectedBytes": 8192,
+      "SHA256": "3a2dc4343aa715a371985764488c139bef221f44d0ce71573730457c48ca2ca8",
+      "expectedSHA256": "3a2dc4343aa715a371985764488c139bef221f44d0ce71573730457c48ca2ca8",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.before.save.json.gz",
+      "bytes": 354282,
+      "expectedBytes": 354282,
+      "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "expectedSHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+      "bytes": 760502,
+      "expectedBytes": 760502,
+      "SHA256": "cdedfeca59e66dea2ff36836b1903a88657c917b0adc36e40beeaf7ed2cbcf69",
+      "expectedSHA256": "cdedfeca59e66dea2ff36836b1903a88657c917b0adc36e40beeaf7ed2cbcf69",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.after.save.json.gz",
+      "bytes": 354282,
+      "expectedBytes": 354282,
+      "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "expectedSHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.webgl.json",
+      "bytes": 4316041,
+      "expectedBytes": 4316041,
+      "SHA256": "59af40e5f0fc7b318d6049c6e1ea4f914529fa93e3f8bfb4e894bb57e6f3604e",
+      "expectedSHA256": "59af40e5f0fc7b318d6049c6e1ea4f914529fa93e3f8bfb4e894bb57e6f3604e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.capture.json",
+      "bytes": 3897,
+      "expectedBytes": 3897,
+      "SHA256": "b0b6c94a91fe65f178365d7797b6eb9eaa0fe840569bdd6e14f484434e5950b8",
+      "expectedSHA256": "b0b6c94a91fe65f178365d7797b6eb9eaa0fe840569bdd6e14f484434e5950b8",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.before.save.json.gz",
+      "bytes": 354282,
+      "expectedBytes": 354282,
+      "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "expectedSHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.after.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.action.json",
+      "bytes": 7199,
+      "expectedBytes": 7199,
+      "SHA256": "ea77985dca739f76beff2a821e472675cb1c797bbf9c08285fae2d016c1ffc1a",
+      "expectedSHA256": "ea77985dca739f76beff2a821e472675cb1c797bbf9c08285fae2d016c1ffc1a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.before.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.ORIGINAL.png",
+      "bytes": 726565,
+      "expectedBytes": 726565,
+      "SHA256": "dece581dab3d60c45ea905751506047a66888fe7159d4406f6aea41e266e2a41",
+      "expectedSHA256": "dece581dab3d60c45ea905751506047a66888fe7159d4406f6aea41e266e2a41",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.after.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.webgl.json",
+      "bytes": 6287285,
+      "expectedBytes": 6287285,
+      "SHA256": "c63677edbf149565efe57b0c5f8a4e5a96a46bbe707032c668eb089eb950f8a9",
+      "expectedSHA256": "c63677edbf149565efe57b0c5f8a4e5a96a46bbe707032c668eb089eb950f8a9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.capture.json",
+      "bytes": 3611,
+      "expectedBytes": 3611,
+      "SHA256": "8a32d8073ec6580f637e58dbbac5c2ca88a21877de662a27778ee809709a94a6",
+      "expectedSHA256": "8a32d8073ec6580f637e58dbbac5c2ca88a21877de662a27778ee809709a94a6",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-sale-function-point.json",
+      "bytes": 147,
+      "expectedBytes": 147,
+      "SHA256": "86111a8ea4761b400abec46e374264e961bf568637f25892116f235f67be4471",
+      "expectedSHA256": "86111a8ea4761b400abec46e374264e961bf568637f25892116f235f67be4471",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/query-inside-to-sale.before.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/query-inside-to-sale.after.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00018-native-ui-resume.before.save.json.gz",
+      "bytes": 354252,
+      "expectedBytes": 354252,
+      "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "expectedSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00018-native-ui-resume.after.save.json.gz",
+      "bytes": 355270,
+      "expectedBytes": 355270,
+      "SHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+      "expectedSHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00018-native-ui-resume.action.json",
+      "bytes": 7527,
+      "expectedBytes": 7527,
+      "SHA256": "78ee6a8642621aef68b421b781a4f02fda71a760010fb5981fd52291be8173ee",
+      "expectedSHA256": "78ee6a8642621aef68b421b781a4f02fda71a760010fb5981fd52291be8173ee",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/route-inside-to-sale.json",
+      "bytes": 343,
+      "expectedBytes": 343,
+      "SHA256": "df8d625792cff4a5edd88c6339d0fe772dbfd0238fde342f5b110909ddd3d668",
+      "expectedSHA256": "df8d625792cff4a5edd88c6339d0fe772dbfd0238fde342f5b110909ddd3d668",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00019-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 355270,
+      "expectedBytes": 355270,
+      "SHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+      "expectedSHA256": "feb272d15e2ea99136c97dd48c14104d25a46c782c76859e73fce051880c2757",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00019-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 355947,
+      "expectedBytes": 355947,
+      "SHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+      "expectedSHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00019-W-inside-to-sale-1.action.json",
+      "bytes": 8588,
+      "expectedBytes": 8588,
+      "SHA256": "412b6b1e79fca2b7e15d094beaf94127f77c08f1a2cf23befda32f776ee278b3",
+      "expectedSHA256": "412b6b1e79fca2b7e15d094beaf94127f77c08f1a2cf23befda32f776ee278b3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00020-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 355947,
+      "expectedBytes": 355947,
+      "SHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+      "expectedSHA256": "79d2e5dd52052ea3b41fba379671326b87cc70bcdbfe2f01c033c4e25bdf5854",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00020-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 357039,
+      "expectedBytes": 357039,
+      "SHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+      "expectedSHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00020-W-inside-to-sale-1.action.json",
+      "bytes": 7361,
+      "expectedBytes": 7361,
+      "SHA256": "48c910bb9c98da2bdfc1a29bc10913513e18b85f245bc5a09937cd2df064b20a",
+      "expectedSHA256": "48c910bb9c98da2bdfc1a29bc10913513e18b85f245bc5a09937cd2df064b20a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00021-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 357039,
+      "expectedBytes": 357039,
+      "SHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+      "expectedSHA256": "fd80ae35863367fd43f0ca02b808a43a50676bf83e5624db168fd5b44b429c02",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00021-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 357936,
+      "expectedBytes": 357936,
+      "SHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+      "expectedSHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00021-W-inside-to-sale-1.action.json",
+      "bytes": 7397,
+      "expectedBytes": 7397,
+      "SHA256": "b23c80be0bee67879962777ebdc389693068b650cd7ca97a984263e3454be231",
+      "expectedSHA256": "b23c80be0bee67879962777ebdc389693068b650cd7ca97a984263e3454be231",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00022-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 357936,
+      "expectedBytes": 357936,
+      "SHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+      "expectedSHA256": "7b88dabbd57472a374a1e0dc59f4a0385148b8c29c6c302a08951e08888354a6",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00022-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 358396,
+      "expectedBytes": 358396,
+      "SHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+      "expectedSHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00022-W-inside-to-sale-1.action.json",
+      "bytes": 7378,
+      "expectedBytes": 7378,
+      "SHA256": "3c78ad1d33be0089ad69dd92c7132117a8af79daf394ec829353f18c90f9c3c3",
+      "expectedSHA256": "3c78ad1d33be0089ad69dd92c7132117a8af79daf394ec829353f18c90f9c3c3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00023-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 358396,
+      "expectedBytes": 358396,
+      "SHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+      "expectedSHA256": "78484b48b6c843fe5530f4015af3ca13c5a996c77e8078c9bf3b725ee079a7c5",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00023-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 357889,
+      "expectedBytes": 357889,
+      "SHA256": "67bc67932238d9f41b8aa661072ba16e10536597ff322f60382e95412aebf772",
+      "expectedSHA256": "67bc67932238d9f41b8aa661072ba16e10536597ff322f60382e95412aebf772",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00023-W-inside-to-sale-1.action.json",
+      "bytes": 8057,
+      "expectedBytes": 8057,
+      "SHA256": "28c2f6eb5b6c1136ecaf6dd8f80936a8f0f86abb5d31b674b8ba3a15a6f51899",
+      "expectedSHA256": "28c2f6eb5b6c1136ecaf6dd8f80936a8f0f86abb5d31b674b8ba3a15a6f51899",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00024-W-inside-to-sale-1.before.save.json.gz",
+      "bytes": 359099,
+      "expectedBytes": 359099,
+      "SHA256": "04afbd4f80ab6ac57ae558b78c596d38a68652b4486e0c8a398313de89dc1dd8",
+      "expectedSHA256": "04afbd4f80ab6ac57ae558b78c596d38a68652b4486e0c8a398313de89dc1dd8",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00024-W-inside-to-sale-1.after.save.json.gz",
+      "bytes": 362177,
+      "expectedBytes": 362177,
+      "SHA256": "8e704ac06d34231b50b9e7ff5ffe597b032eac7d184d2a17074e3a46f3b783a2",
+      "expectedSHA256": "8e704ac06d34231b50b9e7ff5ffe597b032eac7d184d2a17074e3a46f3b783a2",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00024-W-inside-to-sale-1.action.json",
+      "bytes": 9275,
+      "expectedBytes": 9275,
+      "SHA256": "13cd68b786d89a10582d53af99e0388ae35222913c450c98e7f27898b1cef7b3",
+      "expectedSHA256": "13cd68b786d89a10582d53af99e0388ae35222913c450c98e7f27898b1cef7b3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00025-native-ui-pause.before.save.json.gz",
+      "bytes": 366428,
+      "expectedBytes": 366428,
+      "SHA256": "1cba5edacc15fa771b355f17d703d0b4fbdc750fc5da1ab1fd140f12ceddef88",
+      "expectedSHA256": "1cba5edacc15fa771b355f17d703d0b4fbdc750fc5da1ab1fd140f12ceddef88",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00025-native-ui-pause.after.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00025-native-ui-pause.action.json",
+      "bytes": 13269,
+      "expectedBytes": 13269,
+      "SHA256": "e7899aad94c512d33b24cf5bb2d01f7fabb83ec0043227b86ad92977caac9192",
+      "expectedSHA256": "e7899aad94c512d33b24cf5bb2d01f7fabb83ec0043227b86ad92977caac9192",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.before.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.ORIGINAL.png",
+      "bytes": 630910,
+      "expectedBytes": 630910,
+      "SHA256": "9461c05c894c7e62e36e8744a41f732c21b122ca7d8618e6a222290edd3f6860",
+      "expectedSHA256": "9461c05c894c7e62e36e8744a41f732c21b122ca7d8618e6a222290edd3f6860",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.after.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.webgl.json",
+      "bytes": 6394056,
+      "expectedBytes": 6394056,
+      "SHA256": "18be5624237481182956d2ced7857c531cedb11e39f510e9f030614506fdbf92",
+      "expectedSHA256": "18be5624237481182956d2ced7857c531cedb11e39f510e9f030614506fdbf92",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.capture.json",
+      "bytes": 3531,
+      "expectedBytes": 3531,
+      "SHA256": "a0cc57b41fe3b3c21733504e040c739dd191224dbcbbdbf81a855bf74fccc1cb",
+      "expectedSHA256": "a0cc57b41fe3b3c21733504e040c739dd191224dbcbbdbf81a855bf74fccc1cb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00026-native-building-context.before.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00026-native-building-context.after.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00026-native-building-context.action.json",
+      "bytes": 6925,
+      "expectedBytes": 6925,
+      "SHA256": "5c579c9a14c760d39e65edf3d17af13a49baac20d7a17347342952b3b89da310",
+      "expectedSHA256": "5c579c9a14c760d39e65edf3d17af13a49baac20d7a17347342952b3b89da310",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.before.save.json.gz",
+      "bytes": 372561,
+      "expectedBytes": 372561,
+      "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "expectedSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.after.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.action.json",
+      "bytes": 10867,
+      "expectedBytes": 10867,
+      "SHA256": "92c66e60683c27b28642e62f3511b8e97b8e15ecd4d7db31a2b8a21b7e034b73",
+      "expectedSHA256": "92c66e60683c27b28642e62f3511b8e97b8e15ecd4d7db31a2b8a21b7e034b73",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/ACTUAL-SHOP-PURCHASE-PROOF.json",
+      "bytes": 1355,
+      "expectedBytes": 1355,
+      "SHA256": "16d580e179236cab589b04abbbc5387f0c1bc0deeb44162e67d2c1995ad7ced7",
+      "expectedSHA256": "16d580e179236cab589b04abbbc5387f0c1bc0deeb44162e67d2c1995ad7ced7",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.before.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.ORIGINAL.png",
+      "bytes": 630565,
+      "expectedBytes": 630565,
+      "SHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3",
+      "expectedSHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.after.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.webgl.json",
+      "bytes": 6394056,
+      "expectedBytes": 6394056,
+      "SHA256": "55f6bbc10cf44b0537d72b328e5bf33f466ff6cf5ec0d6723ba34a98a12c0e26",
+      "expectedSHA256": "55f6bbc10cf44b0537d72b328e5bf33f466ff6cf5ec0d6723ba34a98a12c0e26",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.capture.json",
+      "bytes": 3665,
+      "expectedBytes": 3665,
+      "SHA256": "bf8191cb42e10faaedf76064398efa387761e9a1f163c06872df1ad4ac287d29",
+      "expectedSHA256": "bf8191cb42e10faaedf76064398efa387761e9a1f163c06872df1ad4ac287d29",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/query-inside-to-original-entry-body.before.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/query-inside-to-original-entry-body.after.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00028-native-ui-resume.before.save.json.gz",
+      "bytes": 372683,
+      "expectedBytes": 372683,
+      "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "expectedSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00028-native-ui-resume.after.save.json.gz",
+      "bytes": 379798,
+      "expectedBytes": 379798,
+      "SHA256": "2d492528590001270f07cdeae8cb71400696ae01761a9373913dc21732d1c23d",
+      "expectedSHA256": "2d492528590001270f07cdeae8cb71400696ae01761a9373913dc21732d1c23d",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00028-native-ui-resume.action.json",
+      "bytes": 10082,
+      "expectedBytes": 10082,
+      "SHA256": "dfc4bc045b2b400a9a97a4f80f75685429c919bc16474dddbfd622af6dcb8b03",
+      "expectedSHA256": "dfc4bc045b2b400a9a97a4f80f75685429c919bc16474dddbfd622af6dcb8b03",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/route-inside-to-original-door.json",
+      "bytes": 351,
+      "expectedBytes": 351,
+      "SHA256": "b12c40075cd12e5bed3f8635b86142ce017d8e5b6a36edf08273dcf1f1ba220a",
+      "expectedSHA256": "b12c40075cd12e5bed3f8635b86142ce017d8e5b6a36edf08273dcf1f1ba220a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00029-mouse-turn-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 383275,
+      "expectedBytes": 383275,
+      "SHA256": "ebce0195387b23f32f7b36cc8019fb11715702eee064d35dcade4decaa824d07",
+      "expectedSHA256": "ebce0195387b23f32f7b36cc8019fb11715702eee064d35dcade4decaa824d07",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00029-mouse-turn-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 426518,
+      "expectedBytes": 426518,
+      "SHA256": "067cc7e8fc305a0db42ef19d2b6113870e82cb5cce1206cf692f2d418a0700bd",
+      "expectedSHA256": "067cc7e8fc305a0db42ef19d2b6113870e82cb5cce1206cf692f2d418a0700bd",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00029-mouse-turn-inside-to-original-door-1.action.json",
+      "bytes": 59006,
+      "expectedBytes": 59006,
+      "SHA256": "d4e0d85edc48a579c7b1ce6015a2c9df7b63c62a33afe5e0b5e14c042375c727",
+      "expectedSHA256": "d4e0d85edc48a579c7b1ce6015a2c9df7b63c62a33afe5e0b5e14c042375c727",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00030-W-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 426570,
+      "expectedBytes": 426570,
+      "SHA256": "186d11042a0c9036f8696f257d59cbcfe0524cf5ad6e562daf623084306132e7",
+      "expectedSHA256": "186d11042a0c9036f8696f257d59cbcfe0524cf5ad6e562daf623084306132e7",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00030-W-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 426424,
+      "expectedBytes": 426424,
+      "SHA256": "032dcfb6bacda2370c0341fe146128484835ac4812ab016a40d58584a70cebed",
+      "expectedSHA256": "032dcfb6bacda2370c0341fe146128484835ac4812ab016a40d58584a70cebed",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00030-W-inside-to-original-door-1.action.json",
+      "bytes": 8376,
+      "expectedBytes": 8376,
+      "SHA256": "5762ecf8c9f4f3c8c57e7821742f635da5386596f19061106fe6280a77f71ec4",
+      "expectedSHA256": "5762ecf8c9f4f3c8c57e7821742f635da5386596f19061106fe6280a77f71ec4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00031-W-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 428232,
+      "expectedBytes": 428232,
+      "SHA256": "1728705be7dfcfac17d5fcd0819e418e092c47bec1351f1c2d0f3b9cb3ea4b78",
+      "expectedSHA256": "1728705be7dfcfac17d5fcd0819e418e092c47bec1351f1c2d0f3b9cb3ea4b78",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00031-W-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 434482,
+      "expectedBytes": 434482,
+      "SHA256": "11dbbc7f648427858646e799b111f5e22545dd706fbad2a0d82e46569ac386fb",
+      "expectedSHA256": "11dbbc7f648427858646e799b111f5e22545dd706fbad2a0d82e46569ac386fb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00031-W-inside-to-original-door-1.action.json",
+      "bytes": 7771,
+      "expectedBytes": 7771,
+      "SHA256": "58e706a00652f9e1452e15fd8e738daa458ef9258e3193cecdd9534cb6d38d29",
+      "expectedSHA256": "58e706a00652f9e1452e15fd8e738daa458ef9258e3193cecdd9534cb6d38d29",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00032-W-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 434688,
+      "expectedBytes": 434688,
+      "SHA256": "9cc260bf0fab4e37f5a7c61f88bb424ee68885c0c004960e3f911733187c386e",
+      "expectedSHA256": "9cc260bf0fab4e37f5a7c61f88bb424ee68885c0c004960e3f911733187c386e",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00032-W-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 435574,
+      "expectedBytes": 435574,
+      "SHA256": "bc1f64678553e72493a546f9da2d07b8a9b84b45c7c3ac37169204901a15fa9f",
+      "expectedSHA256": "bc1f64678553e72493a546f9da2d07b8a9b84b45c7c3ac37169204901a15fa9f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00032-W-inside-to-original-door-1.action.json",
+      "bytes": 9049,
+      "expectedBytes": 9049,
+      "SHA256": "37bb7b277778b1c0a1c77dc6566d7d2f05003a7a60793dc178e784869f302962",
+      "expectedSHA256": "37bb7b277778b1c0a1c77dc6566d7d2f05003a7a60793dc178e784869f302962",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00033-W-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 436298,
+      "expectedBytes": 436298,
+      "SHA256": "7b05bd4be300d78d8b5343916d7a3ef69c0e4959e8a9048efef3f75b26193b9d",
+      "expectedSHA256": "7b05bd4be300d78d8b5343916d7a3ef69c0e4959e8a9048efef3f75b26193b9d",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00033-W-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 437261,
+      "expectedBytes": 437261,
+      "SHA256": "016b0caf191db6d1c7cc15d7365020634025c3f55c32da62d0b6374aa1ae279b",
+      "expectedSHA256": "016b0caf191db6d1c7cc15d7365020634025c3f55c32da62d0b6374aa1ae279b",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00033-W-inside-to-original-door-1.action.json",
+      "bytes": 10458,
+      "expectedBytes": 10458,
+      "SHA256": "e3ed437ce914e4007d19695a9fb51ec949a91aee6252f871eecd36f2e9bab0ff",
+      "expectedSHA256": "e3ed437ce914e4007d19695a9fb51ec949a91aee6252f871eecd36f2e9bab0ff",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00034-W-inside-to-original-door-1.before.save.json.gz",
+      "bytes": 439344,
+      "expectedBytes": 439344,
+      "SHA256": "10ff4f3c9d26e9851e7f04f89c1ef66ec4c4a688bdb2c845059611aacefce8dc",
+      "expectedSHA256": "10ff4f3c9d26e9851e7f04f89c1ef66ec4c4a688bdb2c845059611aacefce8dc",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00034-W-inside-to-original-door-1.after.save.json.gz",
+      "bytes": 439679,
+      "expectedBytes": 439679,
+      "SHA256": "8dacff13863e530bbe5b782988064aa31960d4e3f59fb13f8d407504fedbe918",
+      "expectedSHA256": "8dacff13863e530bbe5b782988064aa31960d4e3f59fb13f8d407504fedbe918",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00034-W-inside-to-original-door-1.action.json",
+      "bytes": 8407,
+      "expectedBytes": 8407,
+      "SHA256": "8b0c48adf7237ec3b56c63b3e332c0c5c831c6c5f63f35b8b7f2213741a8b0fe",
+      "expectedSHA256": "8b0c48adf7237ec3b56c63b3e332c0c5c831c6c5f63f35b8b7f2213741a8b0fe",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00035-E-exit-actual-market.before.save.json.gz",
+      "bytes": 439888,
+      "expectedBytes": 439888,
+      "SHA256": "cdb6794ab1d75524705e6b89db2dc9c172a51e11d726ef3dfd9ebf81decf3322",
+      "expectedSHA256": "cdb6794ab1d75524705e6b89db2dc9c172a51e11d726ef3dfd9ebf81decf3322",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00035-E-exit-actual-market.after.save.json.gz",
+      "bytes": 441317,
+      "expectedBytes": 441317,
+      "SHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+      "expectedSHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00035-E-exit-actual-market.action.json",
+      "bytes": 8408,
+      "expectedBytes": 8408,
+      "SHA256": "a29400274d05d3c268b0120a4a403267acc04b4e3f862d0db369214815c514df",
+      "expectedSHA256": "a29400274d05d3c268b0120a4a403267acc04b4e3f862d0db369214815c514df",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00036-native-ui-pause.before.save.json.gz",
+      "bytes": 441317,
+      "expectedBytes": 441317,
+      "SHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+      "expectedSHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00036-native-ui-pause.after.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00036-native-ui-pause.action.json",
+      "bytes": 9025,
+      "expectedBytes": 9025,
+      "SHA256": "46dd7c6594c7af4e1ba723e4bad8711a8e1fefac1b10c92a07b0219d0e4743d3",
+      "expectedSHA256": "46dd7c6594c7af4e1ba723e4bad8711a8e1fefac1b10c92a07b0219d0e4743d3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-06-ACTUAL-E-EXIT-STREET.before.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-06-ACTUAL-E-EXIT-STREET.ORIGINAL.png",
+      "bytes": 851067,
+      "expectedBytes": 851067,
+      "SHA256": "c3ba2b6e94f312ae4d2fd150d6154a9d46b3c2b29610bcdbd9ee8bc014fc5ebb",
+      "expectedSHA256": "c3ba2b6e94f312ae4d2fd150d6154a9d46b3c2b29610bcdbd9ee8bc014fc5ebb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-06-ACTUAL-E-EXIT-STREET.after.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-06-ACTUAL-E-EXIT-STREET.webgl.json",
+      "bytes": 6419556,
+      "expectedBytes": 6419556,
+      "SHA256": "8f4848f7e5d74f05dec97a778155c347d7107dd13e6cb4ee3d20e2c3890ee98d",
+      "expectedSHA256": "8f4848f7e5d74f05dec97a778155c347d7107dd13e6cb4ee3d20e2c3890ee98d",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-06-ACTUAL-E-EXIT-STREET.capture.json",
+      "bytes": 3865,
+      "expectedBytes": 3865,
+      "SHA256": "4643a38932372efcc553bdf0a317ec31002e6509af5a1772f9c04ca278fb8694",
+      "expectedSHA256": "4643a38932372efcc553bdf0a317ec31002e6509af5a1772f9c04ca278fb8694",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00037-open-native-save-panel.before.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00037-open-native-save-panel.after.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00037-open-native-save-panel.action.json",
+      "bytes": 7883,
+      "expectedBytes": 7883,
+      "SHA256": "1f29d13b959a28e3118770fbca6abb55498f98559c88d5c7f9e4a25244ffb206",
+      "expectedSHA256": "1f29d13b959a28e3118770fbca6abb55498f98559c88d5c7f9e4a25244ffb206",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00038-native-settings-tab.before.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00038-native-settings-tab.after.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00038-native-settings-tab.action.json",
+      "bytes": 7379,
+      "expectedBytes": 7379,
+      "SHA256": "e4baf8e80b3ea6413cbcd9329e74c6b783f3615ea9e94d8533f4f9d74906b5a3",
+      "expectedSHA256": "e4baf8e80b3ea6413cbcd9329e74c6b783f3615ea9e94d8533f4f9d74906b5a3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00039-ACTUAL-NATIVE-SAVE.before.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00039-ACTUAL-NATIVE-SAVE.after.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00039-ACTUAL-NATIVE-SAVE.action.json",
+      "bytes": 7424,
+      "expectedBytes": 7424,
+      "SHA256": "8cc84c136269cade20b76cbfd94788ec015df9be49642e81127d87c80bd79c75",
+      "expectedSHA256": "8cc84c136269cade20b76cbfd94788ec015df9be49642e81127d87c80bd79c75",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-isolated-native-saved-terminal.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-terminal.save.json.gz",
+      "bytes": 441689,
+      "expectedBytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "expectedSHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/actual-terminal-body-camera.json",
+      "bytes": 1166,
+      "expectedBytes": 1166,
+      "SHA256": "730bdb5649f8896f5de5e6fa978e9d653641d6d3b81c714135d41783d609626f",
+      "expectedSHA256": "730bdb5649f8896f5de5e6fa978e9d653641d6d3b81c714135d41783d609626f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/ALL-REAL-INPUT-AND-RAF-OBSERVATIONS.json",
+      "bytes": 262467,
+      "expectedBytes": 262467,
+      "SHA256": "8180b9beb8fb30321112f84551ec27cc6add4f2d9db2e46d98802483a6c77a6a",
+      "expectedSHA256": "8180b9beb8fb30321112f84551ec27cc6add4f2d9db2e46d98802483a6c77a6a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/terminal-complete-webgl-info.json",
+      "bytes": 6419556,
+      "expectedBytes": 6419556,
+      "SHA256": "796e95bef0af662b1cdcc77185221ddc489ef16623590488581dea257e5b010a",
+      "expectedSHA256": "796e95bef0af662b1cdcc77185221ddc489ef16623590488581dea257e5b010a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/ALL-browser-console.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/ALL-pageerrors.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/ALL-requestfailures.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/owned-preview-stdout-stderr.log",
+      "bytes": 40,
+      "expectedBytes": 40,
+      "SHA256": "71f2dc7c81cac14e70964e6ffab7e2583ffa1405bbd7196193ae9605adbd65cd",
+      "expectedSHA256": "71f2dc7c81cac14e70964e6ffab7e2583ffa1405bbd7196193ae9605adbd65cd",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/after-frozen-inputs.json",
+      "bytes": 47513,
+      "expectedBytes": 47513,
+      "SHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb",
+      "expectedSHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb",
+      "encodedReadbackExact": true
+    }
+  ],
+  "allDeclaredOriginalEncodedSHAExact": true,
+  "terminalSaves": [
+    {
+      "kind": "persistedTerminalSave",
+      "path": "actual-isolated-native-saved-terminal.save.json.gz",
+      "bytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encoding": "gzip",
+      "decodedBytes": 3007186,
+      "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+      "completeExportSave": true,
+      "encodedReadbackExact": true,
+      "actualDecodedBytes": 3007186,
+      "actualDecodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+      "decodedReadbackExact": true
+    },
+    {
+      "kind": "terminalSave",
+      "path": "actual-terminal.save.json.gz",
+      "bytes": 441689,
+      "SHA256": "27a1636e533c6feb99fbc1a9a5e4c6b450464740e1ac18d43e002a4b525ae9d4",
+      "encoding": "gzip",
+      "decodedBytes": 3007186,
+      "decodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+      "completeExportSave": true,
+      "encodedReadbackExact": true,
+      "actualDecodedBytes": 3007186,
+      "actualDecodedSHA256": "e06e87e0877032031a6897cc0ae10a5491512f209a2924b3080d1909e52d6917",
+      "decodedReadbackExact": true
+    }
+  ],
+  "persistedAndTerminalWholeDecodedByteExact": true,
+  "actualEExit": {
+    "path": "/tmp/ROOT25-reference-browser-originals/native03/00035-E-exit-actual-market.action.json",
+    "SHA256": "a29400274d05d3c268b0120a4a403267acc04b4e3f862d0db369214815c514df",
+    "status": "PASS",
+    "before": {
+      "tick": 760,
+      "body": {
+        "x": -281.99713022924965,
+        "y": 80.4,
+        "z": 398.0188791495811
+      },
+      "insideId": "market-b26",
+      "paused": false
+    },
+    "after": {
+      "tick": 780,
+      "body": {
+        "x": -281.2121614028417,
+        "y": 80.61522580545692,
+        "z": 402.8382900600361
+      },
+      "insideId": null,
+      "paused": false
+    },
+    "beforeFile": {
+      "path": "00035-E-exit-actual-market.before.save.json.gz",
+      "bytes": 439888,
+      "SHA256": "cdb6794ab1d75524705e6b89db2dc9c172a51e11d726ef3dfd9ebf81decf3322",
+      "encoding": "gzip",
+      "decodedBytes": 2981811,
+      "decodedSHA256": "c70a113994eff7b8b475ac41ec48bb2a91dcad03360d505bb6aa63a63734041f",
+      "completeExportSave": true
+    },
+    "afterFile": {
+      "path": "00035-E-exit-actual-market.after.save.json.gz",
+      "bytes": 441317,
+      "SHA256": "48d68a55cabb8259189b6b43e787adcc82cadf85452e80d264150ecbe6df9c04",
+      "encoding": "gzip",
+      "decodedBytes": 3002199,
+      "decodedSHA256": "e8ca80c74b0f766025ff35fb84bb6dd4eb13270dd48b501ba759b6ea299b059e",
+      "completeExportSave": true
+    }
+  },
+  "nativeSaveAction": {
+    "id": "00039-ACTUAL-NATIVE-SAVE",
+    "status": "PASS",
+    "tickDelta": 0,
+    "bodyMetres": 0
+  },
+  "artActualReview": "ART_FAIL retained from root actual visual review, distinct from RESULT NOT_REVIEWED.",
+  "bounds": "This closed native03 actual fresh v8 route covers lawful first-person W/E entry, finite UI purchase, W return/E exit, native save and terminal whole-byte equality on Linux software GPU. It does not establish new normal-URL default acceptance, UI reload/future24, full-city clearance, reference art completion, Mac hardware performance or long-term economy."
+}

@@ -1,0 +1,118 @@
+{
+  "createdBy": "root file producer",
+  "scope": "All exact captured archive snapshots; live reports/memo have subsequent Library delivery closure. Library failed before preparation: 0 new IDs, complete economy archive not delivered.",
+  "zip_files": [
+    {
+      "file": "ROOT24-25-REPORTS-SCREENSHOTS.zip",
+      "bytes": 8629327,
+      "SHA256": "4b12d02f330fba7c3674ff433d5622e66ee99f6cd6b2c9f95ee5df7de867bedb",
+      "originalFiles": 158,
+      "originalBytes": 8532657,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT24-SELECTED-ORIGINALS.zip",
+      "bytes": 52850074,
+      "SHA256": "767e2ca3f67f663f0b694751d9a22bac8f0eaef7fae317ab948b73b82cd0daee",
+      "originalFiles": 412,
+      "originalBytes": 67526037,
+      "readbackVerified": true,
+      "wholePrefixIncluded": false
+    },
+    {
+      "file": "ROOT25-BROWSER01-ORIGINALS.zip",
+      "bytes": 16170479,
+      "SHA256": "ee4631f55461fb0cd6bee55f0cb84419a2dbc11d711be74889903816ee9d8c79",
+      "originalFiles": 59,
+      "originalBytes": 16142764,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-BROWSER02-ORIGINALS.zip",
+      "bytes": 23931551,
+      "SHA256": "65f4f0533cd7ab6f771b1605c545591479bc8f48ad8a3228dc3f131e4b7dc220",
+      "originalFiles": 73,
+      "originalBytes": 23896528,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-BROWSER03-ORIGINALS.zip",
+      "bytes": 82604073,
+      "SHA256": "30b1be76ee723ab7e47fac7dff8304c71c2fa25536d2fcf71ab3cee781afd7cb",
+      "originalFiles": 182,
+      "originalBytes": 82515139,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-BUILD01-ORIGINAL.zip",
+      "bytes": 9212940,
+      "SHA256": "260bdf1d1add932ab7abafd737da3f2c1039c3c1621b7bafa9639b5884bf5842",
+      "originalFiles": 13,
+      "originalBytes": 9207454,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-BUILD02-ORIGINAL.zip",
+      "bytes": 9212795,
+      "SHA256": "c2b6153893621755d6aa3902403ea3cd0e16a04de4a49a0b09551512a39f8c22",
+      "originalFiles": 13,
+      "originalBytes": 9207309,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-GEOMETRY-ORIGINALS.zip",
+      "bytes": 40302162,
+      "SHA256": "4cce0d191e61b1101764b1b304e5e644eb36d8ab6e8d4c8be24d7113fecdf53e",
+      "originalFiles": 246,
+      "originalBytes": 40185582,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-NORMAL-DEFAULT01-ORIGINALS.zip",
+      "bytes": 9476195,
+      "SHA256": "8ad6323c8fd1f57f757abb5a333d25d80d1d35924c512912152fe27fd67a7134",
+      "originalFiles": 31,
+      "originalBytes": 9461331,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-SOURCE-41702.zip",
+      "bytes": 50215641,
+      "SHA256": "f734dc58c5d91d7442e349e251598cdab4828b1ce9b25a22c820c41d698715e3",
+      "originalFiles": 428,
+      "originalBytes": 50042968,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    },
+    {
+      "file": "ROOT25-SOURCE-FINAL-41703.zip",
+      "bytes": 50221714,
+      "SHA256": "781684660a9b131760d778c0003acaf615a36e736a7f7a51371b7e55748d799c",
+      "originalFiles": 429,
+      "originalBytes": 50048904,
+      "readbackVerified": true,
+      "wholePrefixIncluded": null
+    }
+  ],
+  "complete_economy_archive": {
+    "status": "PASS_ALL_RETAINED_ORIGINALS_ARCHIVED",
+    "at": "2026-10-07T08:35:35.629031+00:00",
+    "archive": "/tmp/ROOT24-25-DELIVERY-20261007/ROOT24-ALL-ECONOMY-ORIGINALS.zip",
+    "archiveBytes": 694912550,
+    "archiveSHA256": "73e23e666f21e248e6d5f68f1a6f5d0f95e7ecc919609c58ec30a458531d3fbc",
+    "originalFiles": 2129,
+    "originalBytes": 693781385,
+    "decodedReadbackVerified": true,
+    "simulationConstructions": 0,
+    "ordinarySteps": 0,
+    "gitIncluded": false
+  }
+}

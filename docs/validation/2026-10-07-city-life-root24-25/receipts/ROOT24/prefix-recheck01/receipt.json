@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-07T07:54:20.421615+00:00",
+  "endedAt": "2026-10-07T07:55:16.250190+00:00",
+  "argv": [
+    "node_modules/.bin/tsx",
+    "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/recheck-prefix.mts",
+    "/tmp/ROOT24-economy-next-day-20261007-01/native03",
+    "/tmp/ROOT24-economy-next-day-20261007-01/prefix-recheck01"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "9eca5805ef0004232b8431de68a822e8b799606629b2f88a619d10f940388353",
+  "ownedPid": 26421,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 26440,
+      "state": "Z",
+      "parent": 1,
+      "group": 26421,
+      "session": 26421,
+      "startTicks": 1576313
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

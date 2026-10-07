@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { CURVED_ROOF_PROFILE_REVISION } from '../geometry/roof-profile';
+import { createCurvedRoofMesh } from '../geometry/roof-profile-mesh';
 import type { Building, Vec3 } from '../types';
 import { getBuildingBody, getFloorPlanFixtures, getFloorPlanRoofRegions, getFloorPlanSlabRegions, rectangleCover, wallPanels, type Rect, type RoofRegion, type WallPanel } from '../architecture-floor-plan';
 import { HOME_CURTAIN_WINDOW_BUDGET, officeDeskFixtureParts, windowCurtainParts, windowGlassBackingTemplate, type InteriorPropAssetId } from './interior-props';
@@ -111,13 +113,22 @@ export function programRoofTemplate(axis: 'x' | 'z'): ArchitectureTemplate {
   indexed.dispose(); flat.dispose(); roofTemplates.set(axis, template); return template;
 }
 
+/** New revision has its own cache key. The old programRoofTemplate function,
+ * key and vertices above are intentionally unchanged for every earlier recipe. */
+export function programCurvedRoofTemplate(axis: 'x' | 'z'): ArchitectureTemplate {
+  const key = `curved-roof:${CURVED_ROOF_PROFILE_REVISION}:${axis}`;
+  const cached = roofTemplates.get(key); if (cached) return cached;
+  const template = createCurvedRoofMesh(axis);
+  roofTemplates.set(key, template); return template;
+}
+
 export function programRoofPart(region: RoofRegion, timberFinish = false): ProgramArchitecturePart {
   const { rect, bottom, top } = region;
   return { material: region.kind === 'gallery-flat' ? 'wood' : 'roof',
     position: { x: (rect.x0 + rect.x1) / 2, y: (bottom + top) / 2, z: (rect.z0 + rect.z1) / 2 },
     size: { x: rect.x1 - rect.x0, y: top - bottom, z: rect.z1 - rect.z0 },
     color: region.kind === 'gallery-flat' ? timberFinish ? '#795039' : '#806548' : timberFinish ? '#355b53' : '#3e5a55', floor: region.floor, roof: true, purpose: 'roof',
-    ...(region.kind === 'gable' ? { template: programRoofTemplate(region.gableAxis!) } : {}) };
+    ...(region.kind === 'gable' ? { template: region.roofGeometryRevision === CURVED_ROOF_PROFILE_REVISION ? programCurvedRoofTemplate(region.gableAxis!) : programRoofTemplate(region.gableAxis!) } : {}) };
 }
 
 /** Null preserves every original emitter for all four historical layouts and

@@ -1,11 +1,13 @@
 import { applyCommercialDistrict } from './commercial-district';
 import { applyMarketStationApron } from './market-station-apron';
+import { applyReferenceCurvedRoofs } from './reference-roof-recipe';
+import { getPublicStreetBirthWalkHeight, PUBLIC_STREET_BIRTH_CHECK_PARAMETERS, selectValidatedPublicStreetBirth } from './geometry/public-street-birth-check';
 import type { Building, BuildingKind, District, NetworkEdge, NetworkNode, SimState, TransportMode, Vec3, WorldDefinition } from './types';
 import { isRoadOpen } from './roads';
 import { getFloorDimensions } from './access';
 import { FLOOR_PLAN_GEOMETRY_VERSION, floorPlanSupport, getFloorPlanRoofSupport, getBuildingEntrance, getBuildingUsePoints } from './architecture-floor-plan';
 
-export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7'] as const;
+export const CITY_LAYOUT_VERSIONS = ['legacy-ee3e7a1', 'current-v2-r5', 'current-v2', 'current-v3', 'current-v4', 'current-v5', 'current-v6', 'current-v7', 'current-v8'] as const;
 export type CityLayoutVersion = typeof CITY_LAYOUT_VERSIONS[number];
 export const CURRENT_CITY_LAYOUT: CityLayoutVersion = 'current-v6';
 export const GEOLOGICAL_GEOMETRY_VERSION = 'yunshan-geology-v3-terraced-cellular-1';
@@ -52,7 +54,7 @@ function indexFor(world: WorldDefinition) {
   if (!index) {
     index = { segments: new Map(), elevated: new Map(), buildings: new Map(), roads: new Map(), indexedEdges: 0, quarters: world.nodes.filter(n => n.id.includes('-quarter-')), landHeights: new Map() };
     const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' ? 70 : 14;
+    const margin = layout === 'current-v2' || layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8' ? 70 : 14;
     for (const b of world.buildings) {
       let halfWidth = b.width / 2, halfDepth = b.depth / 2;
       if (b.floorPlanProfile) {
@@ -206,7 +208,7 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
   const fracture = Math.sin(x * .036 + Math.sin(z * .012) * 1.7) * Math.cos(z * .027) * 3.2 + Math.sin((x + z * .72) * .081) * 1.1;
   y += fracture * reliefWeight;
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
+  if (layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') y += geologicalRelief(x, z, y, world.seed) * reliefWeight;
   if (roadGap < 9) for (const { edge, a, b } of index.segments.get(key(x, z)) ?? []) if (edge.mode === 'road' && !edge.id.includes('runway')) {
     const near = nearestSegment([a, b], x, z);
     if (near.distance > 7) continue;
@@ -245,6 +247,16 @@ export function terrainHeight(world: WorldDefinition, x: number, z: number, incl
 
 /** The floor/road surface is returned without a camera-eye offset. */
 export function getWalkHeight(world: WorldDefinition, x: number, z: number, referenceHeight?: number): number {
+  // Only an accepted explicit v8 arrival uses real rendered road faces in its
+  // finite approach corridor. Every earlier recipe retains the old code below.
+  const arrival = world.referenceCityRecipe?.arrival;
+  if ((world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion === 'current-v8' && arrival && arrival.pathToDoor.length >= 2) {
+    const corridor = nearestSegment(arrival.pathToDoor, x, z);
+    if (corridor.distance <= PUBLIC_STREET_BIRTH_CHECK_PARAMETERS.runtimeCorridorDistance && (referenceHeight === undefined || Math.abs(corridor.y - referenceHeight) <= .6)) {
+      const supported = getPublicStreetBirthWalkHeight(world, x, z);
+      if (supported !== null && Math.abs(supported - corridor.y) <= .26) return supported;
+    }
+  }
   const index = indexFor(world);
   for (const b of index.buildings.get(key(x, z)) ?? []) {
     let halfWidth = b.width / 2, halfDepth = b.depth / 2;
@@ -431,6 +443,23 @@ function routeGround(world: WorldDefinition, start: Vec3, end: Vec3, startBuildi
 
 export function createWorld(seed = 20261001, layoutVersion: CityLayoutVersion = CURRENT_CITY_LAYOUT): WorldDefinition & { layoutVersion: CityLayoutVersion } {
   if (!CITY_LAYOUT_VERSIONS.includes(layoutVersion)) throw new Error('Unknown city layout version');
+  if (layoutVersion === 'current-v8') {
+    // Reference roofs extend the preserved v6 product, not the rejected v7 street trial.
+    const base = createWorld(seed, 'current-v6');
+    base.referenceCityRecipe = { originalSpawn: { ...base.spawn }, streetGuardJoinRevision: 2 };
+    applyReferenceCurvedRoofs(base);
+    // This explicit reference recipe selects only a new city arrival.
+    // Existing saved actors keep their original world and position.
+    const arrival = selectValidatedPublicStreetBirth(base);
+    if (!arrival.ok) throw new Error(`Reference city birth geometry rejected: ${arrival.reason}`);
+    const proposal = arrival.proposal;
+    base.referenceCityRecipe.arrival = { recipe: proposal.recipeVersion, buildingId: proposal.buildingId, edgeId: proposal.edgeId,
+      lookTarget: { ...proposal.lookTarget }, pathToDoor: proposal.pathToDoor.map(point => ({ ...point })) };
+    base.spawn = { ...proposal.birth };
+    base.layoutVersion = 'current-v8';
+    indices.delete(base);
+    return base;
+  }
   if (layoutVersion === 'current-v7') {
     const base = createWorld(seed, 'current-v6');
     applyMarketStationApron(base);

@@ -1,0 +1,52 @@
+✔ native02 inherited police dispatch proves real response work away from employer (56.379567ms)
+✔ original response does not invent a new material-kit requirement (41.844881ms)
+✔ generic, wrong employer, inactive or unrelated dispatch observations are rejected (244.71221ms)
+✔ time, attendance, original frozen debt writer and public caps remain exact (282.391378ms)
+✔ road rejection, body incapacity and routing-anchor fake arrival remain rejected (190.119104ms)
+✔ source-eligible physical wait is recorded without claiming motion or incident arrival (32.505285ms)
+✔ already at the actual incident is genuine response work without a new movement requirement (34.647923ms)
+✔ real b26 join produces the direct 7.6m approach on actual original faces (32.644669ms)
+✖ graded X segment preserves actual shortest-arc crossfall and precise top Y (9.612992ms)
+✔ generic box-top face uses the real curb width, height and world-Y lift (0.233653ms)
+✔ road wrapper retains the original graded, reversed and runway deck faces (0.726072ms)
+✔ actual b26 curb crossing raises the feet and leaving it restores the deck height (6.417156ms)
+✔ a center-only rounded-cap shortcut is rejected as an unbound birth route (12.400145ms)
+✔ an actual middle wall rejects despite clear endpoints and unchanged proposal (2.690075ms)
+✔ actual .35m circle rejects an off-center solid at birth (4.438187ms)
+✔ near bridge endpoint is rejected even when no shared guardrail crosses the route (6.644046ms)
+✔ missing true door connectivity rejects without changing old spawn (0.685465ms)
+✔ explicit v8 approach retains actual foot-circle Y during movement (2.018029ms)
+✔ continuous sweep catches a raised eave that the old .1m samples miss (2.024695ms)
+✔ circular support takes the interval maximum on an upturned tip and clips the orthogonal reach (0.428811ms)
+✔ moving orthogonal reach detects an interior height maximum when both endpoint poses clear (0.322953ms)
+✔ sweep considers head clearance and vertical motion independently of the foot disk (0.348839ms)
+✔ both shared mesh axes are closed with consistent winding and the exact declared top knots (5.047194ms)
+✔ declaring a curved roof creates a new body without changing historical roof descriptors or template keys (3575.151812ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 23
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5872.66041
+
+✖ failing tests:
+
+test at tests/public-street-birth.test.ts:1:2811
+✖ graded X segment preserves actual shortest-arc crossfall and precise top Y (9.612992ms)
+  AssertionError [ERR_ASSERTION]: world-Y lift and rotated top differ from centerline
+      at TestContext.<anonymous> (/workspace/yunshan/tests/public-street-birth.test.ts:39:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

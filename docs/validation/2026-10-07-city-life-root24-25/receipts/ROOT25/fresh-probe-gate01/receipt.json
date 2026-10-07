@@ -1,0 +1,24 @@
+{
+  "startedAt": "2026-10-07T07:58:23.111919+00:00",
+  "endedAt": "2026-10-07T07:58:27.427812+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/fresh-world-probe.mjs",
+    "/workspace/yunshan",
+    "/tmp/ROOT25-reference-fresh-probe/actual01"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "a2f862ec6b43a165e8dcf1f252bba4ffd03da92aabe4bfecb29fc84056e3beb0",
+  "ownedPid": 26611,
+  "observedDescendants": 1,
+  "finalOwnedMembers": [],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

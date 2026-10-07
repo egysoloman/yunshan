@@ -1,0 +1,21 @@
+✔ real b26 join produces the direct 7.6m approach on actual original faces (25.292295ms)
+✔ graded X segment preserves actual shortest-arc crossfall and precise top Y (0.949781ms)
+✔ generic box-top face uses the real curb width, height and world-Y lift (0.343876ms)
+✔ analytic road faces match actual Three matrices for graded, reversed and runway decks (1.111902ms)
+✔ actual descending negative-Z road uses its existing local-bottom upward face (0.700926ms)
+✔ a vertical road face cannot be invented as a walkable height graph (0.670612ms)
+✔ actual b26 curb crossing raises the feet and leaving it restores the deck height (6.670478ms)
+✔ a center-only rounded-cap shortcut is rejected as an unbound birth route (9.655159ms)
+✔ an actual middle wall rejects despite clear endpoints and unchanged proposal (4.014344ms)
+✔ actual .35m circle rejects an off-center solid at birth (5.264182ms)
+✔ near bridge endpoint is rejected even when no shared guardrail crosses the route (4.384418ms)
+✔ missing true door connectivity rejects without changing old spawn (0.278898ms)
+✔ explicit v8 approach retains actual foot-circle Y during movement (1.973368ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 522.900175

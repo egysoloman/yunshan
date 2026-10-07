@@ -1,0 +1,52 @@
+{
+  "startedAt": "2026-10-07T07:12:22.139735+00:00",
+  "endedAt": "2026-10-07T07:12:28.228866+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-isolation=process",
+    "--test-concurrency=1",
+    "tests/economy-resume-earned-observation.test.ts",
+    "tests/reference-roof-profile.test.ts",
+    "tests/public-street-birth.test.ts"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "8cb744d1f749976b142cb18e19ff8fea3a3e6e50600a76e1731d09e8d80e012d",
+  "ownedPid": 23495,
+  "observedDescendants": 7,
+  "finalOwnedMembers": [
+    {
+      "pid": 23509,
+      "state": "Z",
+      "parent": 1,
+      "group": 23495,
+      "session": 23495,
+      "startTicks": 1324481
+    },
+    {
+      "pid": 23529,
+      "state": "Z",
+      "parent": 1,
+      "group": 23495,
+      "session": 23495,
+      "startTicks": 1324629
+    },
+    {
+      "pid": 23548,
+      "state": "Z",
+      "parent": 1,
+      "group": 23495,
+      "session": 23495,
+      "startTicks": 1324662
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

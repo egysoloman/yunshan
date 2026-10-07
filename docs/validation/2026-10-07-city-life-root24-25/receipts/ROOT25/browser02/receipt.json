@@ -1,0 +1,71 @@
+{
+  "startedAt": "2026-10-07T08:22:30.361466+00:00",
+  "endedAt": "2026-10-07T08:32:16.203572+00:00",
+  "argv": [
+    "node",
+    "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/native-reference-browser-v2.mjs",
+    "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-PLAN02.json",
+    "/tmp/ROOT25-reference-browser-originals/native02"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 417,
+  "inputsStable": true,
+  "rawSHA256": "56da7212a8587e89a39433c484a596da8591704b05cadb24937dd1ac35e629a8",
+  "ownedPid": 28302,
+  "observedDescendants": 12,
+  "finalOwnedMembers": [
+    {
+      "pid": 28322,
+      "state": "Z",
+      "parent": 1,
+      "group": 28302,
+      "session": 28302,
+      "startTicks": 1745388
+    },
+    {
+      "pid": 28350,
+      "state": "Z",
+      "parent": 1,
+      "group": 28333,
+      "session": 28333,
+      "startTicks": 1745441
+    },
+    {
+      "pid": 28351,
+      "state": "Z",
+      "parent": 1,
+      "group": 28333,
+      "session": 28333,
+      "startTicks": 1745441
+    },
+    {
+      "pid": 28372,
+      "state": "Z",
+      "parent": 1,
+      "group": 28333,
+      "session": 28333,
+      "startTicks": 1745451
+    },
+    {
+      "pid": 28387,
+      "state": "Z",
+      "parent": 1,
+      "group": 28333,
+      "session": 28333,
+      "startTicks": 1745511
+    },
+    {
+      "pid": 28388,
+      "state": "Z",
+      "parent": 1,
+      "group": 28333,
+      "session": 28333,
+      "startTicks": 1745516
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

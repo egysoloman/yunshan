@@ -28,7 +28,11 @@ let startupReadFailed = false;
 try { previousSave = await readSavedGame(); } catch { startupReadFailed = true; }
 let startupLayoutError = '';
 let selection: ReturnType<typeof selectSavedWorld>;
-try { selection = selectSavedWorld(previousSave, PRODUCT_CITY_LAYOUT); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
+// New graphical sessions start on the verified public street arrival recipe.
+// Existing saved cities select their original geometry by fingerprint; the
+// compatibility/headless product factories retain their declared layout.
+const freshLayout = 'current-v8' as const;
+try { selection = selectSavedWorld(previousSave, freshLayout); } catch (error) { startupLayoutError = error instanceof Error ? error.message : '未知城市布局'; selection = selectSavedWorld(undefined, PRODUCT_CITY_LAYOUT); }
 let autosaveAllowed = !startupReadFailed && !startupLayoutError;
 const world = selection.world;
 const simulation = await createLearningCityLifeProductCity(world);

@@ -1,0 +1,21 @@
+{
+  "startedAt": "2026-10-07T06:19:32.076685+00:00",
+  "endedAt": "2026-10-07T06:19:46.876225+00:00",
+  "argv": [
+    "node",
+    "node_modules/typescript/bin/tsc",
+    "--noEmit"
+  ],
+  "exitCode": 2,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 407,
+  "inputsStable": true,
+  "rawSHA256": "90f9dc0e9611d4b3f7badb9f0d02cb5961480fdbe05f9f533bb0225538e19668",
+  "ownedPid": 19140,
+  "observedDescendants": 1,
+  "finalOwnedMembers": [],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

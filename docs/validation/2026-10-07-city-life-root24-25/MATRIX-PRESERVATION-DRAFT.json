@@ -1,0 +1,27 @@
+{
+  "status": "PASS_ORIGINAL_1406_DATA_CELLS_EXACT",
+  "privateDraftOnly": true,
+  "baseline": "/workspace/yunshan/docs/validation/2026-10-07-city-life-root23/MATRIX-38.csv",
+  "baselineSHA256": "81d983d002bcd218f95711d7a4d0a52c6cc289f9c7bb4f6a107d54fd0f81f7a4",
+  "baselineRows": 38,
+  "baselineColumns": 37,
+  "preservedOriginalDataCells": 1406,
+  "preservedOriginalHeaders": 37,
+  "draftRows": 38,
+  "draftColumns": 47,
+  "addedColumns": [
+    "ROOT24计划",
+    "ROOT24实现",
+    "ROOT24运行",
+    "ROOT24验证",
+    "ROOT24剩余",
+    "ROOT25计划",
+    "ROOT25实现",
+    "ROOT25运行",
+    "ROOT25验证",
+    "ROOT25剩余"
+  ],
+  "all38DomainsRemainPartial": true,
+  "draftSHA256": "ee748f101834c477549f18584d61fd423764813619a22f277ef46973b43084a1",
+  "historicalCells": "All original ROOT23 RUNNING/NOT_RUN values are preserved verbatim; final ROOT23 HANDOFF governs its completed stage, and append columns state current scope."
+}

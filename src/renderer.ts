@@ -426,7 +426,9 @@ export class CityRenderer implements CityRendererAPI {
     }
     const arrivalShop = this.world.buildings.filter(b => b.kind === 'market' && b.districtId === 'market').sort((a, b) => Math.hypot(a.door.x - world.spawn.x, a.door.z - world.spawn.z) - Math.hypot(b.door.x - world.spawn.x, b.door.z - world.spawn.z))[0];
     this.camera.position.set(world.spawn.x, world.spawn.y + 1.72, world.spawn.z);
-    this.camera.lookAt(arrivalShop?.door.x ?? world.spawn.x, world.spawn.y + 1.2, arrivalShop?.door.z ?? world.spawn.z - 60);
+    const referenceArrival = world.referenceCityRecipe?.arrival;
+    if (referenceArrival) this.camera.lookAt(referenceArrival.lookTarget.x, referenceArrival.lookTarget.y + 1.2, referenceArrival.lookTarget.z);
+    else this.camera.lookAt(arrivalShop?.door.x ?? world.spawn.x, world.spawn.y + 1.2, arrivalShop?.door.z ?? world.spawn.z - 60);
     this.resize();
   }
 

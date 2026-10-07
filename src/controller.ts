@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { getWalkHeight } from './world';
+import { referenceStreetExit } from './geometry/reference-street-exit';
 import { getFloorDimensions, getStairPosition } from './access';
 import { getBuildingBody,getBuildingFloorPlan,buildingLocalPosition,buildingWorldPosition,floorPlanSupport,blocksFloorPlanMovement,getFloorPlanStairPosition,getBuildingEntrance,getFloorPlanRoofSupport,getFloorPlanSlabRegions,boundaryLoops,containsUnion,type FloorPlan,type FloorSupport } from './architecture-floor-plan';
 import { blocksTransportBarrier } from './transport-geometry';
@@ -42,6 +43,14 @@ export class PlayerController {
     this.feet = { ...world.spawn };
     this.readAngles();
     this.setMode('walk', world.spawn);
+    // Only the explicitly generated new-city arrival sets this initial view.
+    // Historical worlds/imports have no arrival declaration and keep their
+    // original yaw/pitch path. Later mode switches never relocate to birth.
+    const arrival = world.referenceCityRecipe?.arrival;
+    if (arrival) {
+      this.camera.lookAt(arrival.lookTarget.x, arrival.lookTarget.y + 1.2, arrival.lookTarget.z);
+      this.readAngles();
+    }
     this.listen(window, 'keydown', (event) => {
       const e = event as KeyboardEvent;
       if (e.defaultPrevented) return;
@@ -167,6 +176,17 @@ export class PlayerController {
     if(getBuildingBody(building)) {
       const support=floorPlanSupport(building,0,this.feet,0),isInside=support?.kind==='room'||support?.kind==='stairs';
       if(!isInside&&!this.canAccess(building,0)){this.blockedAccess=`${building.name}需要相应权限。`;return false;}
+      if(isInside) {
+        const exit=referenceStreetExit(this.world,building);
+        if(exit.status==='rejected'){this.blockedAccess=exit.reason;return false;}
+        if(exit.status==='selected') {
+          const next=exit.point;
+          if(blocksFloorPlanMovement(building,0,this.feet,next,BODY_RADIUS,EYE_HEIGHT))return false;
+          if(!this.mayWalkTo(next))return false;
+          this.feet=next;this.floor=0;this.supportingSite=null;this.inside=null;this.discardWalkingInput();
+          this.camera.position.set(next.x,next.y+EYE_HEIGHT,next.z);this.yaw=Math.atan2(-(exit.outwardTarget.x-next.x),-(exit.outwardTarget.z-next.z));this.pitch=0;this.orient();return true;
+        }
+      }
       const local=buildingLocalPosition(building,getBuildingEntrance(building));const next=buildingWorldPosition(building,{...local,z:local.z+(isInside?2:-2)});
       if(blocksFloorPlanMovement(building,0,this.feet,next,BODY_RADIUS,EYE_HEIGHT))return false;
       if(!this.mayWalkTo(next))return false;

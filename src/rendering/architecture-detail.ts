@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { CURVED_ROOF_PROFILE_REVISION, roofProfileTopAt } from '../geometry/roof-profile';
 import { getFloorDimensions } from '../access';
 import { boundaryLoops, getBuildingBody, getFloorPlanRoofRegions, wallPanels, type BuildingBody, type FloorPlan, type RoofRegion, type Wall } from '../architecture-floor-plan';
 import type { Building, Quality, Vec3 } from '../types';
@@ -140,7 +141,7 @@ export function architectureProgramRoofEdges(building: Building): ArchitecturePr
       const roof = group.find(roof => x >= roof.rect.x0 - 1e-7 && x <= roof.rect.x1 + 1e-7 && z >= roof.rect.z0 - 1e-7 && z <= roof.rect.z1 + 1e-7);
       if (!roof || roof.kind === 'gable' && (roof.gableAxis === 'x' ? dx !== 0 : dz !== 0)) continue;
       edges.push({ a: [a[0] + dx * from, a[1] + dz * from], b: [a[0] + dx * to, a[1] + dz * to],
-        y: roof.kind === 'gable' ? q(roof.bottom + .4) : roof.top, floor: roof.floor, region: roof });
+        y: roof.kind === 'gable' ? roof.roofGeometryRevision === CURVED_ROOF_PROFILE_REVISION ? roofProfileTopAt(0, roof.bottom, roof.top) : q(roof.bottom + .4) : roof.top, floor: roof.floor, region: roof });
     }
   }
   return edges;
@@ -228,6 +229,10 @@ function buildProgramArchitectureDetails(building: Building, body: BuildingBody,
     return Number(b.floor === center) - Number(a.floor === center) || d(a) - d(b);
   }).slice(0, cap <= 384 ? 6 : 10);
   for (const edge of roofs) {
+    // Revision two is fully described by the shared closed profile. The old
+    // protruding fascia/tile boxes below are kept for old recipes only; a new
+    // curved eave must not acquire an unshared decorative collision extension.
+    if (edge.region.roofGeometryRevision === CURVED_ROOF_PROFILE_REVISION) continue;
     const wall: Wall = { a: edge.a, b: edge.b, height: .2, thickness: .2 }, { length } = wallBasis(wall);
     const span = Math.min(7.2, length), from = q((length - span) / 2), to = q(from + span);
     mounted('tile', wall, from, to, edge.y - .2, edge.y, 0, .2, WOOD, edge.floor, true);
@@ -438,11 +443,14 @@ export class ArchitectureDetailManager {
   private disposed = false;
   private lastCamera = new THREE.Vector3(Infinity, Infinity, Infinity);
   private lastSelection = '';
-  constructor(private readonly buildings: readonly Building[]) { this.group.name = '建筑近景 · 按距离生成'; installDetailSurfaceFinishes(this.solid); }
+  /** A trusted geometry change stages a new complete session/manager, so this
+   * key is computed once, rather than scanning the whole city every frame. */
+  private readonly roofRevisionKey: string;
+  constructor(private readonly buildings: readonly Building[]) { this.roofRevisionKey = buildings.map(building => `${building.id}:${building.roofGeometryRevision ?? 1}`).join('|'); this.group.name = '建筑近景 · 按距离生成'; installDetailSurfaceFinishes(this.solid); }
 
   update(camera: Vec3, interior: ArchitectureInterior = { buildingId: null }, quality: Quality = 'balanced'): void {
     if (this.disposed) return;
-    const selection = `${quality}:${interior.buildingId}:${interior.floor ?? 0}`;
+    const selection = `${quality}:${interior.buildingId}:${interior.floor ?? 0}:${this.roofRevisionKey}`;
     if (selection === this.lastSelection && this.lastCamera.distanceToSquared(camera) < .64) return;
     this.lastSelection = selection; this.lastCamera.set(camera.x, camera.y, camera.z);
     const candidates = this.buildings.map(building => {
@@ -456,8 +464,9 @@ export class ArchitectureDetailManager {
     for (const id of this.entries.keys()) if (!desired.has(id)) this.release(id);
     for (const { building, floor } of candidates) {
       let entry = this.entries.get(building.id);
+      if (entry && entry.group.userData.roofGeometryRevision !== (building.roofGeometryRevision ?? 1)) { this.release(building.id); entry = undefined; }
       if (entry && (entry.floor !== floor || entry.quality !== quality)) { this.release(building.id); entry = undefined; }
-      if (!entry) { entry = this.create(building, floor, quality); this.entries.set(building.id, entry); this.group.add(entry.group); this.created++; }
+      if (!entry) { entry = this.create(building, floor, quality); entry.group.userData.roofGeometryRevision = building.roofGeometryRevision ?? 1; this.entries.set(building.id, entry); this.group.add(entry.group); this.created++; }
       const activeFloor = interior.buildingId === building.id ? interior.floor ?? 0 : null, key = String(activeFloor);
       if (entry.interiorKey !== key) {
         const ceiling = activeFloor !== null && activeFloor < 0 ? activeFloor + 1 : activeFloor;

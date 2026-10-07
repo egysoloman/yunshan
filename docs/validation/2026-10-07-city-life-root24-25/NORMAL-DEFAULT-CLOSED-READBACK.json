@@ -1,0 +1,405 @@
+{
+  "capturedAtUTC": "2026-10-07T09:10:45.601240+00:00",
+  "method": "Read-only captured originals, gzip and protected-source byte/hash comparison. 0 Sim, 0 step, 0 browser, 0 tests/build.",
+  "receiptPath": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/normal-default01/receipt.json",
+  "receiptSHA256": "37e803dc3c661332114e9051a716655afd0cc06c21749363e3a9c732689c738c",
+  "receipt": {
+    "startedAt": "2026-10-07T09:03:35.393156+00:00",
+    "endedAt": "2026-10-07T09:07:14.622027+00:00",
+    "argv": [
+      "node",
+      "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/native-normal-fresh-default.mjs",
+      "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-NORMAL01.json",
+      "/tmp/ROOT25-reference-browser-originals/normal-default01"
+    ],
+    "exitCode": 0,
+    "timedOut": false,
+    "status": "PASS",
+    "inputCount": 417,
+    "inputsStable": true,
+    "rawSHA256": "9db3cea7ee03dec77f704a4dd942dafdd2de32c6dbdae5d2fb26a5ee287a6eee",
+    "ownedPid": 30097,
+    "observedDescendants": 12,
+    "finalOwnedMembers": [
+      {
+        "pid": 30117,
+        "state": "Z",
+        "parent": 1,
+        "group": 30097,
+        "session": 30097,
+        "startTicks": 1991923
+      },
+      {
+        "pid": 30144,
+        "state": "Z",
+        "parent": 1,
+        "group": 30127,
+        "session": 30127,
+        "startTicks": 1991993
+      },
+      {
+        "pid": 30145,
+        "state": "Z",
+        "parent": 1,
+        "group": 30127,
+        "session": 30127,
+        "startTicks": 1991994
+      }
+    ],
+    "activeDescendants": [],
+    "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+    "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+  },
+  "resultPath": "/tmp/ROOT25-reference-browser-originals/normal-default01/RESULT.json",
+  "resultSHA256": "e665dfe3572de5fc8deb807348c4f96367a19236f59a9c30714b5694081d64a3",
+  "resultSummary": {
+    "status": "PASS_NATIVE_NORMAL_FRESH_DEFAULT_ONLY",
+    "startedAt": "2026-10-07T09:03:35.467Z",
+    "finishedAt": "2026-10-07T09:07:09.957Z",
+    "elapsedMs": 214489,
+    "evidenceBytesBeforeReceipt": 9269999,
+    "scope": "Actual production browser fresh normal URL with debug diagnostics, without cityLayout override. Real native pause and original birth screenshot/full save. Does not repeat movement/purchase/save flow on this build.",
+    "actualLayout": "current-v8",
+    "worldFingerprint": "8988bd85",
+    "ordinaryTickObserved": true,
+    "artResult": "NOT_REVIEWED",
+    "artCompletionEstablished": false,
+    "platform": "Linux Chromium, ANGLE SwiftShader software GPU",
+    "macHardwareEvidence": false,
+    "injectedGameState": false,
+    "naturalPlayerTravel": false,
+    "actualFirstPersonOnly": true
+  },
+  "planPath": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-NORMAL01.json",
+  "planSHA256": "f5a092597fdbd2b0326e00b51b32423ae99cc82d8631443b623aea270996aeff",
+  "inputGraphSHA256": "d5b0b2ed90ae4ed6d559059712d3a200d220b2017646d83bb0b382697ce1e425",
+  "pagePath": "/?debug=1",
+  "noCityLayoutURLOverride": true,
+  "sourceChangedBetween41702And41703": [
+    "src/main.ts"
+  ],
+  "actions": [
+    {
+      "id": "00001-native-ui-pause",
+      "status": "PASS",
+      "label": "native-ui-pause",
+      "beforeSave": {
+        "path": "00001-native-ui-pause.before.save.json.gz",
+        "bytes": 355939,
+        "SHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+        "encoding": "gzip",
+        "decodedBytes": 2176338,
+        "decodedSHA256": "6ada817b1bd105a61972d4c5a8126b2e15b1359670bca843d2fde14ffef8ad3f",
+        "completeExportSave": true
+      },
+      "afterSave": {
+        "path": "00001-native-ui-pause.after.save.json.gz",
+        "bytes": 356994,
+        "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+        "encoding": "gzip",
+        "decodedBytes": 2186745,
+        "decodedSHA256": "e0039462c4c11de12b1325b924b8c7b32c496b461c10e98b8fc23f2634fb94e8",
+        "completeExportSave": true
+      }
+    }
+  ],
+  "captures": [
+    {
+      "label": "ACTUAL-BIRTH-CAMERA",
+      "imageFile": {
+        "path": "capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+        "bytes": 783372,
+        "SHA256": "d00658fb45eb01b94a09f8acc5ee2a1b93d16a4612b41735f415da3ffc53ec65"
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    }
+  ],
+  "originalEncodedChecks": [
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/before-frozen-inputs.json",
+      "bytes": 47513,
+      "expectedBytes": 47513,
+      "SHA256": "93521843ea5a397c4b82fa50cb621eafd1a6b1cec2276fb2c8ae723c8637a6e3",
+      "expectedSHA256": "93521843ea5a397c4b82fa50cb621eafd1a6b1cec2276fb2c8ae723c8637a6e3",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/owned-preview-process.json",
+      "bytes": 135,
+      "expectedBytes": 135,
+      "SHA256": "cba7ff850f761ee34f988ed1e6da639e7da4c92fab6a239c27570219429df95f",
+      "expectedSHA256": "cba7ff850f761ee34f988ed1e6da639e7da4c92fab6a239c27570219429df95f",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/actual-born-WORLD.json",
+      "bytes": 1847642,
+      "expectedBytes": 1847642,
+      "SHA256": "f92fe188038066cdc43326f85d304b12fa5641d14e749cd46c26a35049cc4ffb",
+      "expectedSHA256": "f92fe188038066cdc43326f85d304b12fa5641d14e749cd46c26a35049cc4ffb",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/actual-born.save.json.gz",
+      "bytes": 317332,
+      "expectedBytes": 317332,
+      "SHA256": "cf6e1b3a54c5156fbc86cf726fe527c0ed6dc116702c9fd20a32428cfa04fed9",
+      "expectedSHA256": "cf6e1b3a54c5156fbc86cf726fe527c0ed6dc116702c9fd20a32428cfa04fed9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/fresh-context-storage.json",
+      "bytes": 138,
+      "expectedBytes": 138,
+      "SHA256": "4cc87122dccefc056479c24fc7e346bb5ce4491fb81aac14cea6a836f947fe7b",
+      "expectedSHA256": "4cc87122dccefc056479c24fc7e346bb5ce4491fb81aac14cea6a836f947fe7b",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/00001-native-ui-pause.before.save.json.gz",
+      "bytes": 355939,
+      "expectedBytes": 355939,
+      "SHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+      "expectedSHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/00001-native-ui-pause.after.save.json.gz",
+      "bytes": 356994,
+      "expectedBytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "expectedSHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/00001-native-ui-pause.action.json",
+      "bytes": 10739,
+      "expectedBytes": 10739,
+      "SHA256": "9719cb1e75749696de78b36017121ef2ea24c5f5a6ed98e623c332f3cb5f9f5a",
+      "expectedSHA256": "9719cb1e75749696de78b36017121ef2ea24c5f5a6ed98e623c332f3cb5f9f5a",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/capture-01-ACTUAL-BIRTH-CAMERA.before.save.json.gz",
+      "bytes": 356994,
+      "expectedBytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "expectedSHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "bytes": 783372,
+      "expectedBytes": 783372,
+      "SHA256": "d00658fb45eb01b94a09f8acc5ee2a1b93d16a4612b41735f415da3ffc53ec65",
+      "expectedSHA256": "d00658fb45eb01b94a09f8acc5ee2a1b93d16a4612b41735f415da3ffc53ec65",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/capture-01-ACTUAL-BIRTH-CAMERA.after.save.json.gz",
+      "bytes": 356994,
+      "expectedBytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "expectedSHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/capture-01-ACTUAL-BIRTH-CAMERA.webgl.json",
+      "bytes": 2206802,
+      "expectedBytes": 2206802,
+      "SHA256": "51b29ac7d1e102756a25fab3839f4bc115a1f42ed7e4cd68b4813d81e1538fca",
+      "expectedSHA256": "51b29ac7d1e102756a25fab3839f4bc115a1f42ed7e4cd68b4813d81e1538fca",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/capture-01-ACTUAL-BIRTH-CAMERA.capture.json",
+      "bytes": 3637,
+      "expectedBytes": 3637,
+      "SHA256": "b629021b3ca115abe13f77e7ac7bba96f6c32a2d559dd732ef5ec881addf52e7",
+      "expectedSHA256": "b629021b3ca115abe13f77e7ac7bba96f6c32a2d559dd732ef5ec881addf52e7",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/actual-normal-default-terminal.save.json.gz",
+      "bytes": 356994,
+      "expectedBytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "expectedSHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/actual-normal-default-body-camera.json",
+      "bytes": 1036,
+      "expectedBytes": 1036,
+      "SHA256": "a35664eacfc6d345c844ecfbccf88dd72200b9f8e5773abfb83330278e8eb0f7",
+      "expectedSHA256": "a35664eacfc6d345c844ecfbccf88dd72200b9f8e5773abfb83330278e8eb0f7",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/ALL-REAL-INPUT-AND-RAF-OBSERVATIONS.json",
+      "bytes": 13374,
+      "expectedBytes": 13374,
+      "SHA256": "0836cb3dd02627d25b1c698019d3afe030208f1cc18f32415719e79e01ca32b8",
+      "expectedSHA256": "0836cb3dd02627d25b1c698019d3afe030208f1cc18f32415719e79e01ca32b8",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/terminal-complete-webgl-info.json",
+      "bytes": 2206802,
+      "expectedBytes": 2206802,
+      "SHA256": "f40ba87ffedc0c80c6fcead8753452383cb2b5eb43c04711384733aecad917cf",
+      "expectedSHA256": "f40ba87ffedc0c80c6fcead8753452383cb2b5eb43c04711384733aecad917cf",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/ALL-browser-console.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/ALL-pageerrors.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/ALL-requestfailures.json",
+      "bytes": 3,
+      "expectedBytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "expectedSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/owned-preview-stdout-stderr.log",
+      "bytes": 40,
+      "expectedBytes": 40,
+      "SHA256": "71f2dc7c81cac14e70964e6ffab7e2583ffa1405bbd7196193ae9605adbd65cd",
+      "expectedSHA256": "71f2dc7c81cac14e70964e6ffab7e2583ffa1405bbd7196193ae9605adbd65cd",
+      "encodedReadbackExact": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/normal-default01/after-frozen-inputs.json",
+      "bytes": 47513,
+      "expectedBytes": 47513,
+      "SHA256": "93521843ea5a397c4b82fa50cb621eafd1a6b1cec2276fb2c8ae723c8637a6e3",
+      "expectedSHA256": "93521843ea5a397c4b82fa50cb621eafd1a6b1cec2276fb2c8ae723c8637a6e3",
+      "encodedReadbackExact": true
+    }
+  ],
+  "allDeclaredOriginalEncodedSHAExact": true,
+  "storage": {
+    "storedSave": null,
+    "localStorage": {
+      "yunshan.ui.welcomeSeen.v1": "1"
+    },
+    "cookies": "",
+    "noStorageStateSupplied": true
+  },
+  "worldSpawn": {
+    "x": -279,
+    "y": 80.4,
+    "z": 408
+  },
+  "terminalPlayerPosition": {
+    "x": -279,
+    "y": 80.4,
+    "z": 408
+  },
+  "terminalBodyEntirePointEqualsDeclaredSpawn": true,
+  "terminalSave": {
+    "path": "actual-normal-default-terminal.save.json.gz",
+    "bytes": 356994,
+    "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9",
+    "encoding": "gzip",
+    "decodedBytes": 2186745,
+    "decodedSHA256": "e0039462c4c11de12b1325b924b8c7b32c496b461c10e98b8fc23f2634fb94e8",
+    "completeExportSave": true,
+    "encodedReadbackExact": true,
+    "actualDecodedBytes": 2186745,
+    "actualDecodedSHA256": "e0039462c4c11de12b1325b924b8c7b32c496b461c10e98b8fc23f2634fb94e8",
+    "decodedReadbackExact": true
+  },
+  "preservation": {
+    "producerReceiptPath": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/plan/FINAL-PRESERVATION.json",
+    "producerReceiptSHA256": "eeff2b4386f945d7ef01c8972777a4448887450385d8622061d8139b705c0e08",
+    "producerReceipt": {
+      "sourceBaselineCount": 404,
+      "finalFunctionalCount": 417,
+      "added": [
+        "scripts/economy-resume-actual.ts",
+        "scripts/economy-resume-custody.ts",
+        "src/geometry/public-street-birth-check.ts",
+        "src/geometry/public-street-birth.ts",
+        "src/geometry/reference-street-exit.ts",
+        "src/geometry/roof-profile-mesh.ts",
+        "src/geometry/roof-profile.ts",
+        "src/reference-roof-recipe.ts",
+        "tests/economy-resume-custody.test.ts",
+        "tests/economy-resume-earned-observation.test.ts",
+        "tests/public-street-birth.test.ts",
+        "tests/reference-roof-profile.test.ts",
+        "tests/reference-street-exit.test.ts"
+      ],
+      "modified": [
+        "src/architecture-floor-plan.ts",
+        "src/controller.ts",
+        "src/journey.ts",
+        "src/main.ts",
+        "src/persistence/world-layout.ts",
+        "src/renderer.ts",
+        "src/rendering/architecture-bodies.ts",
+        "src/rendering/architecture-detail.ts",
+        "src/transport-geometry.ts",
+        "src/types.ts",
+        "src/world.ts"
+      ],
+      "deleted": [],
+      "originalTestPathCount": 261,
+      "originalTestsAllExact": true,
+      "originalTestsChanged": [],
+      "originalMemoBytes": 587709,
+      "originalMemoSHA256": "e52fcb18c2675765207993c59c368506032a258755d5db228f2cf17efbf8deae",
+      "memoOriginalPrefixExact": true,
+      "protectedFiles": {
+        "AGENTS.md": true,
+        "提示词.md": true
+      },
+      "baselineSimulationUnchanged": true,
+      "pythonCompactGraphSHA256": "c0fd6026a32322a91c24b6f9d5dc7f31eedcb1df3fe0828c6d3c9ed7d5c1cc8f",
+      "finalInputGraphSHA256": "d5b0b2ed90ae4ed6d559059712d3a200d220b2017646d83bb0b382697ce1e425",
+      "serialization": "finalInputGraphSHA256 uses bound JS JSON.stringify sortedInputs; Python compact map hash separately labelled, maps semantically exact."
+    },
+    "originalTestsReadOnlyRecomputed": {
+      "paths": 261,
+      "changed": [],
+      "allExact": true
+    },
+    "protectedHeadFiles": {
+      "AGENTS.md": {
+        "originalHEADSHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+        "currentSHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7",
+        "entireByteExact": true
+      },
+      "提示词.md": {
+        "originalHEADSHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+        "currentSHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89",
+        "entireByteExact": true
+      }
+    },
+    "memoPrefixReadback": {
+      "originalBytes": 587709,
+      "actualPrefixSHA256": "e52fcb18c2675765207993c59c368506032a258755d5db228f2cf17efbf8deae",
+      "expectedSHA256": "e52fcb18c2675765207993c59c368506032a258755d5db228f2cf17efbf8deae",
+      "prefixExact": true
+    },
+    "simulationSourceByteHashExactVsBaseline": true
+  },
+  "bounds": "Only actual fresh normal URL, native pause, birth PNG and complete terminal save on new 41703 build. 41702 query-v8 closed 39-action route remains separate. No movement/purchase/save-flow repeat, UI reload/future24, Mac performance, art completion or long-term economics claimed."
+}

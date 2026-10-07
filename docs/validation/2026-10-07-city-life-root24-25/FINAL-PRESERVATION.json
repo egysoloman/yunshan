@@ -1,0 +1,47 @@
+{
+  "sourceBaselineCount": 404,
+  "finalFunctionalCount": 417,
+  "added": [
+    "scripts/economy-resume-actual.ts",
+    "scripts/economy-resume-custody.ts",
+    "src/geometry/public-street-birth-check.ts",
+    "src/geometry/public-street-birth.ts",
+    "src/geometry/reference-street-exit.ts",
+    "src/geometry/roof-profile-mesh.ts",
+    "src/geometry/roof-profile.ts",
+    "src/reference-roof-recipe.ts",
+    "tests/economy-resume-custody.test.ts",
+    "tests/economy-resume-earned-observation.test.ts",
+    "tests/public-street-birth.test.ts",
+    "tests/reference-roof-profile.test.ts",
+    "tests/reference-street-exit.test.ts"
+  ],
+  "modified": [
+    "src/architecture-floor-plan.ts",
+    "src/controller.ts",
+    "src/journey.ts",
+    "src/main.ts",
+    "src/persistence/world-layout.ts",
+    "src/renderer.ts",
+    "src/rendering/architecture-bodies.ts",
+    "src/rendering/architecture-detail.ts",
+    "src/transport-geometry.ts",
+    "src/types.ts",
+    "src/world.ts"
+  ],
+  "deleted": [],
+  "originalTestPathCount": 261,
+  "originalTestsAllExact": true,
+  "originalTestsChanged": [],
+  "originalMemoBytes": 587709,
+  "originalMemoSHA256": "e52fcb18c2675765207993c59c368506032a258755d5db228f2cf17efbf8deae",
+  "memoOriginalPrefixExact": true,
+  "protectedFiles": {
+    "AGENTS.md": true,
+    "提示词.md": true
+  },
+  "baselineSimulationUnchanged": true,
+  "pythonCompactGraphSHA256": "c0fd6026a32322a91c24b6f9d5dc7f31eedcb1df3fe0828c6d3c9ed7d5c1cc8f",
+  "finalInputGraphSHA256": "d5b0b2ed90ae4ed6d559059712d3a200d220b2017646d83bb0b382697ce1e425",
+  "serialization": "finalInputGraphSHA256 uses bound JS JSON.stringify sortedInputs; Python compact map hash separately labelled, maps semantically exact."
+}

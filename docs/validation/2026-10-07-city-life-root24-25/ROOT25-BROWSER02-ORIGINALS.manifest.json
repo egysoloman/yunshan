@@ -1,0 +1,455 @@
+{
+  "scope": "Exact captured files only; absent or interrupted observations remain absent.",
+  "sources": {
+    "native02": "/tmp/ROOT25-reference-browser-originals/native02",
+    "gate": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02",
+    "driver": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/native-reference-browser-v2.mjs",
+    "plan": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-PLAN02.json"
+  },
+  "files": [
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00001-native-ui-pause.action.json",
+      "archive_path": "native02/00001-native-ui-pause.action.json",
+      "bytes": 10937,
+      "SHA256": "2ffc26a3f88e073d3c59be26773716e78dc9d5ccf676be5a0314a81d51f4c91d"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00001-native-ui-pause.after.save.json.gz",
+      "archive_path": "native02/00001-native-ui-pause.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00001-native-ui-pause.before.save.json.gz",
+      "archive_path": "native02/00001-native-ui-pause.before.save.json.gz",
+      "bytes": 355939,
+      "SHA256": "d077c93bda557a01219f61945a0d00cbf987403f16eac89e64b3cd4a0880f975"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00002-dismiss-native-welcome.action.json",
+      "archive_path": "native02/00002-dismiss-native-welcome.action.json",
+      "bytes": 7362,
+      "SHA256": "0d029ee4d4de1b989a1036a789aa31f0f10acb098b8352c21695cf196e4f10ef"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00002-dismiss-native-welcome.after.save.json.gz",
+      "archive_path": "native02/00002-dismiss-native-welcome.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00002-dismiss-native-welcome.before.save.json.gz",
+      "archive_path": "native02/00002-dismiss-native-welcome.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00003-open-native-navigation-panel.action.json",
+      "archive_path": "native02/00003-open-native-navigation-panel.action.json",
+      "bytes": 6960,
+      "SHA256": "af0b28f390b0e53041953f65be2a99ec4dbe39503aae3c97abc7e0d7846e631e"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00003-open-native-navigation-panel.after.save.json.gz",
+      "archive_path": "native02/00003-open-native-navigation-panel.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00003-open-native-navigation-panel.before.save.json.gz",
+      "archive_path": "native02/00003-open-native-navigation-panel.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00004-native-transit-tab.action.json",
+      "archive_path": "native02/00004-native-transit-tab.action.json",
+      "bytes": 6841,
+      "SHA256": "f756e60f75d6676ea962a10703c583e25116705205db796e50ebf139fdfc1248"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00004-native-transit-tab.after.save.json.gz",
+      "archive_path": "native02/00004-native-transit-tab.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00004-native-transit-tab.before.save.json.gz",
+      "archive_path": "native02/00004-native-transit-tab.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00005-native-market-filter.action.json",
+      "archive_path": "native02/00005-native-market-filter.action.json",
+      "bytes": 3394,
+      "SHA256": "0afc5190710accaf892d74d05156f8fa00835499c1ba821302a1ca8aed7b54c6"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00005-native-market-filter.after.save.json.gz",
+      "archive_path": "native02/00005-native-market-filter.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00005-native-market-filter.before.save.json.gz",
+      "archive_path": "native02/00005-native-market-filter.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00006-native-market-navigation.action.json",
+      "archive_path": "native02/00006-native-market-navigation.action.json",
+      "bytes": 9537,
+      "SHA256": "e988b9b3b0eb59ba58a5a7017cee4ef6fa9d00626adeeb9f8b88111777c07a3c"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00006-native-market-navigation.after.save.json.gz",
+      "archive_path": "native02/00006-native-market-navigation.after.save.json.gz",
+      "bytes": 357004,
+      "SHA256": "0c5b3a71775df540d0eb9a62364347a20dda6ef1e2525d5aadc8ca3feecf10ac"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00006-native-market-navigation.before.save.json.gz",
+      "archive_path": "native02/00006-native-market-navigation.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00007-close-native-navigation-panel.action.json",
+      "archive_path": "native02/00007-close-native-navigation-panel.action.json",
+      "bytes": 7249,
+      "SHA256": "431990f1357964ff9c2ff974635e9ebe88135223b733f6be1029c7ff7d104a45"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00007-close-native-navigation-panel.after.save.json.gz",
+      "archive_path": "native02/00007-close-native-navigation-panel.after.save.json.gz",
+      "bytes": 357004,
+      "SHA256": "0c5b3a71775df540d0eb9a62364347a20dda6ef1e2525d5aadc8ca3feecf10ac"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00007-close-native-navigation-panel.before.save.json.gz",
+      "archive_path": "native02/00007-close-native-navigation-panel.before.save.json.gz",
+      "bytes": 357004,
+      "SHA256": "0c5b3a71775df540d0eb9a62364347a20dda6ef1e2525d5aadc8ca3feecf10ac"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00008-native-ui-resume.action.json",
+      "archive_path": "native02/00008-native-ui-resume.action.json",
+      "bytes": 9326,
+      "SHA256": "677dc19cceb8b6ca38d8f1d4ee641093abaa141f68bc179878c6b5d9d9aa5b4a"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00008-native-ui-resume.after.save.json.gz",
+      "archive_path": "native02/00008-native-ui-resume.after.save.json.gz",
+      "bytes": 356952,
+      "SHA256": "117f94029676d5bb49e145cebe5d86a4275d302f2de903b20ea7a4b7b9180122"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00008-native-ui-resume.before.save.json.gz",
+      "archive_path": "native02/00008-native-ui-resume.before.save.json.gz",
+      "bytes": 357004,
+      "SHA256": "0c5b3a71775df540d0eb9a62364347a20dda6ef1e2525d5aadc8ca3feecf10ac"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00009-W-public-road-to-market-1.action.json",
+      "archive_path": "native02/00009-W-public-road-to-market-1.action.json",
+      "bytes": 9863,
+      "SHA256": "40dea11898d4bdfe2541778a4006871b60be729a0b305752e598938836191024"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00009-W-public-road-to-market-1.after.save.json.gz",
+      "archive_path": "native02/00009-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 353851,
+      "SHA256": "1f50d8704e0f3ca478ef60ea672673cc200e8b282a4dbe18bc1b388364073a95"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00009-W-public-road-to-market-1.before.save.json.gz",
+      "archive_path": "native02/00009-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 355062,
+      "SHA256": "e88433a75504a3161b6a4eb9207a905ec5793440ce91ef81daa33b190fb4f060"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00010-W-public-road-to-market-1.action.json",
+      "archive_path": "native02/00010-W-public-road-to-market-1.action.json",
+      "bytes": 9985,
+      "SHA256": "8b93552fff9aa1e1c7b176af619cd3686deae05ed96a462e7b6b511ea2facb99"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00010-W-public-road-to-market-1.after.save.json.gz",
+      "archive_path": "native02/00010-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 352323,
+      "SHA256": "3926cd6110b07adcd754d08768311d03adb96bd7515c15248f7dfba9a9093ad5"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00010-W-public-road-to-market-1.before.save.json.gz",
+      "archive_path": "native02/00010-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 353851,
+      "SHA256": "1f50d8704e0f3ca478ef60ea672673cc200e8b282a4dbe18bc1b388364073a95"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00011-mouse-turn-public-road-to-market-1.action.json",
+      "archive_path": "native02/00011-mouse-turn-public-road-to-market-1.action.json",
+      "bytes": 37893,
+      "SHA256": "78aa2d7970444981a2f421a7ef98157376c9e16ee04bba9701677cedc36360d2"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00011-mouse-turn-public-road-to-market-1.after.save.json.gz",
+      "archive_path": "native02/00011-mouse-turn-public-road-to-market-1.after.save.json.gz",
+      "bytes": 355374,
+      "SHA256": "4b4de740a4719e46c8acd56b56bdb3d97c4a60e77656b52ac4d04f0237dd7e25"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00011-mouse-turn-public-road-to-market-1.before.save.json.gz",
+      "archive_path": "native02/00011-mouse-turn-public-road-to-market-1.before.save.json.gz",
+      "bytes": 352323,
+      "SHA256": "3926cd6110b07adcd754d08768311d03adb96bd7515c15248f7dfba9a9093ad5"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00012-W-public-road-to-market-1.action.json",
+      "archive_path": "native02/00012-W-public-road-to-market-1.action.json",
+      "bytes": 7874,
+      "SHA256": "c0f5b15704be664dda6609b67d1bb4217e505e217966da464fd8ad26dbe4fed3"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00012-W-public-road-to-market-1.after.save.json.gz",
+      "archive_path": "native02/00012-W-public-road-to-market-1.after.save.json.gz",
+      "bytes": 355653,
+      "SHA256": "d8d261f54613f1a1c10cd80872249da8f459cce6362ed58258f1cb0f9b86c546"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00012-W-public-road-to-market-1.before.save.json.gz",
+      "archive_path": "native02/00012-W-public-road-to-market-1.before.save.json.gz",
+      "bytes": 355374,
+      "SHA256": "4b4de740a4719e46c8acd56b56bdb3d97c4a60e77656b52ac4d04f0237dd7e25"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00013-native-ui-pause.action.json",
+      "archive_path": "native02/00013-native-ui-pause.action.json",
+      "bytes": 8160,
+      "SHA256": "c1246fe977fbcddb603c393d6d3e168bf9adc7b07c2ac3712f6e97d89ca4e80b"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00013-native-ui-pause.after.save.json.gz",
+      "archive_path": "native02/00013-native-ui-pause.after.save.json.gz",
+      "bytes": 356203,
+      "SHA256": "0875cfaec6a106cb65cc569db7accf614905fc6245b47b552fed87e0232d3996"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00013-native-ui-pause.before.save.json.gz",
+      "archive_path": "native02/00013-native-ui-pause.before.save.json.gz",
+      "bytes": 355653,
+      "SHA256": "d8d261f54613f1a1c10cd80872249da8f459cce6362ed58258f1cb0f9b86c546"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/00014-E-enter-actual-market.before.save.json.gz",
+      "archive_path": "native02/00014-E-enter-actual-market.before.save.json.gz",
+      "bytes": 356203,
+      "SHA256": "0875cfaec6a106cb65cc569db7accf614905fc6245b47b552fed87e0232d3996"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/ALL-browser-console.json",
+      "archive_path": "native02/ALL-browser-console.json",
+      "bytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/ALL-pageerrors.json",
+      "archive_path": "native02/ALL-pageerrors.json",
+      "bytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/ALL-requestfailures.json",
+      "archive_path": "native02/ALL-requestfailures.json",
+      "bytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/RESULT.json",
+      "archive_path": "native02/RESULT.json",
+      "bytes": 34243,
+      "SHA256": "028ddcffa3d03de84c6d36e3c22d51a688d3db05b88a381ea0d8701f623a0c1d"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/actual-born-WORLD.json",
+      "archive_path": "native02/actual-born-WORLD.json",
+      "bytes": 1847642,
+      "SHA256": "f92fe188038066cdc43326f85d304b12fa5641d14e749cd46c26a35049cc4ffb"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/actual-born.save.json.gz",
+      "archive_path": "native02/actual-born.save.json.gz",
+      "bytes": 317332,
+      "SHA256": "cf6e1b3a54c5156fbc86cf726fe527c0ed6dc116702c9fd20a32428cfa04fed9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/actual-market-selection.json",
+      "archive_path": "native02/actual-market-selection.json",
+      "bytes": 2503,
+      "SHA256": "51c4d1604c0915563c55c01852b373a2556d38d739598d0b7a1270b7e6cb5634"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/actual-native-walking-journey.json",
+      "archive_path": "native02/actual-native-walking-journey.json",
+      "bytes": 634,
+      "SHA256": "0a11a9ab166a54b824a413f45bd22fc60d2b2e252e04004040c362c4c38be26c"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/after-frozen-inputs.json",
+      "archive_path": "native02/after-frozen-inputs.json",
+      "bytes": 47513,
+      "SHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/before-frozen-inputs.json",
+      "archive_path": "native02/before-frozen-inputs.json",
+      "bytes": 47513,
+      "SHA256": "06c1d7e2ae58e33cb3f8889986b9312d3cbe10eeb0aa3b66c08483400c97ffdb"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "archive_path": "native02/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "bytes": 783372,
+      "SHA256": "d00658fb45eb01b94a09f8acc5ee2a1b93d16a4612b41735f415da3ffc53ec65"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-01-ACTUAL-BIRTH-CAMERA.after.save.json.gz",
+      "archive_path": "native02/capture-01-ACTUAL-BIRTH-CAMERA.after.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-01-ACTUAL-BIRTH-CAMERA.before.save.json.gz",
+      "archive_path": "native02/capture-01-ACTUAL-BIRTH-CAMERA.before.save.json.gz",
+      "bytes": 356994,
+      "SHA256": "e4a12d6ea14937bedb4d6518c3f1dcbe74c866bd7a5de098843e5c6aadf58db9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-01-ACTUAL-BIRTH-CAMERA.capture.json",
+      "archive_path": "native02/capture-01-ACTUAL-BIRTH-CAMERA.capture.json",
+      "bytes": 3585,
+      "SHA256": "81a6a19cdf2b4b0c4a9758227ee12994bffea5d191fd094e8db1752df63781ec"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-01-ACTUAL-BIRTH-CAMERA.webgl.json",
+      "archive_path": "native02/capture-01-ACTUAL-BIRTH-CAMERA.webgl.json",
+      "bytes": 2206802,
+      "SHA256": "386758665a911aab9a5f363cfbfb574dca9fefd8eb368ad11df5751440fe8f34"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+      "archive_path": "native02/capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+      "bytes": 847472,
+      "SHA256": "a0d666e950db380333c12804a82a9c92f412b54a3be5f109bc775a7b3fe1ac7a"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-02-REAL-WALK-MARKET-DOOR.after.save.json.gz",
+      "archive_path": "native02/capture-02-REAL-WALK-MARKET-DOOR.after.save.json.gz",
+      "bytes": 356203,
+      "SHA256": "0875cfaec6a106cb65cc569db7accf614905fc6245b47b552fed87e0232d3996"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-02-REAL-WALK-MARKET-DOOR.before.save.json.gz",
+      "archive_path": "native02/capture-02-REAL-WALK-MARKET-DOOR.before.save.json.gz",
+      "bytes": 356203,
+      "SHA256": "0875cfaec6a106cb65cc569db7accf614905fc6245b47b552fed87e0232d3996"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-02-REAL-WALK-MARKET-DOOR.capture.json",
+      "archive_path": "native02/capture-02-REAL-WALK-MARKET-DOOR.capture.json",
+      "bytes": 3893,
+      "SHA256": "872942c26549217c2c346dfe473678998314a038a83c1da7b796799dd2e4f46f"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/capture-02-REAL-WALK-MARKET-DOOR.webgl.json",
+      "archive_path": "native02/capture-02-REAL-WALK-MARKET-DOOR.webgl.json",
+      "bytes": 6389067,
+      "SHA256": "f1cd55471ce5efaae5574532c0c730e53f98c1f1284791c51810e97dc7cd65ce"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/fresh-context-storage.json",
+      "archive_path": "native02/fresh-context-storage.json",
+      "bytes": 138,
+      "SHA256": "4cc87122dccefc056479c24fc7e346bb5ce4491fb81aac14cea6a836f947fe7b"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/owned-preview-process.json",
+      "archive_path": "native02/owned-preview-process.json",
+      "bytes": 135,
+      "SHA256": "81497712ddda9fb3666c025ccf412e501d02b59ee8f523ac586ebdb9690b5ed9"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/owned-preview-stdout-stderr.log",
+      "archive_path": "native02/owned-preview-stdout-stderr.log",
+      "bytes": 40,
+      "SHA256": "71f2dc7c81cac14e70964e6ffab7e2583ffa1405bbd7196193ae9605adbd65cd"
+    },
+    {
+      "source": "/tmp/ROOT25-reference-browser-originals/native02/route-public-road-to-market.json",
+      "archive_path": "native02/route-public-road-to-market.json",
+      "bytes": 335,
+      "SHA256": "da748052b3f62332b8dd44373c5d7a35a21226665342eb4459520a2d54b434c1"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/OPERATOR-ABORT-PARTIAL.json",
+      "archive_path": "gate/OPERATOR-ABORT-PARTIAL.json",
+      "bytes": 843,
+      "SHA256": "f7363fbcaaaf34925e6b2c55a775f05000b95d736f7a9cea21e43c38e934bbea"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/inputs-after.json",
+      "archive_path": "gate/inputs-after.json",
+      "bytes": 45754,
+      "SHA256": "86de9f68bbc388fa1cabb62a4d8711455df398cd80bac6a0bef85766b9eacce4"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/inputs-before.json",
+      "archive_path": "gate/inputs-before.json",
+      "bytes": 45754,
+      "SHA256": "86de9f68bbc388fa1cabb62a4d8711455df398cd80bac6a0bef85766b9eacce4"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/owned-descendants.json",
+      "archive_path": "gate/owned-descendants.json",
+      "bytes": 1587,
+      "SHA256": "888d10c6ba020767be9f64772e637784f9772c9ad0ea5eaa102f2a1e9806de1b"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/owned-process.json",
+      "archive_path": "gate/owned-process.json",
+      "bytes": 449,
+      "SHA256": "8064a99f95fb138335520f382d5cd59471c3149d829f1ae34704811694c1d0db"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/raw.log",
+      "archive_path": "gate/raw.log",
+      "bytes": 233,
+      "SHA256": "56da7212a8587e89a39433c484a596da8591704b05cadb24937dd1ac35e629a8"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/browser02/receipt.json",
+      "archive_path": "gate/receipt.json",
+      "bytes": 1830,
+      "SHA256": "b8e2c317a7b3977eb5f69c783fd521b5f795c70828cee6ff27be0d5c1760fda8"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/native-reference-browser-v2.mjs",
+      "archive_path": "driver/native-reference-browser-v2.mjs",
+      "bytes": 42769,
+      "SHA256": "1b9c2dd5b5d9a6ae8a518ec836aaa069dc2a0524292882eb5d024f0206f08d7e"
+    },
+    {
+      "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/ui-plan/BOUND-PLAN02.json",
+      "archive_path": "plan/BOUND-PLAN02.json",
+      "bytes": 50589,
+      "SHA256": "42eaf7fd34cb111fb7c4161ed1ac3861db75749d97f03325bf89f73f770ec394"
+    }
+  ],
+  "archive": "/workspace/yunshan/docs/validation/2026-10-07-city-life-root24-25/ROOT25-BROWSER02-ORIGINALS.zip",
+  "archive_bytes": 23931551,
+  "archive_SHA256": "65f4f0533cd7ab6f771b1605c545591479bc8f48ad8a3228dc3f131e4b7dc220",
+  "file_count": 73,
+  "original_bytes": 23896528,
+  "decoded_SHA256_verified": true
+}

@@ -5,6 +5,11 @@ import { validateCityRulesetEnvelope } from '../simulation/city-ruleset';
 import { getBuildingBody, getFloorPlanRoofRegions } from '../architecture-floor-plan';
 import { COMMERCIAL_RECIPE_VERSION, COMMERCIAL_ROUTE_REVISION } from '../commercial-district';
 import type { CityLayoutVersion } from '../world';
+import { REFERENCE_CURVED_ROOF_RECIPE_VERSION } from '../reference-roof-recipe';
+import { CURVED_ROOF_PROFILE_REVISION, CURVED_ROOF_PROFILE_VERSION, CURVED_ROOF_PROFILE_KNOTS, CURVED_ROOF_MIN_RISE, CURVED_ROOF_MAX_RISE, CURVED_ROOF_SPAN_RISE_RATIO } from '../geometry/roof-profile';
+import { PUBLIC_STREET_BIRTH_RECIPE_VERSION, PUBLIC_STREET_BIRTH_PARAMETERS } from '../geometry/public-street-birth';
+import { PUBLIC_STREET_BIRTH_CHECK_VERSION, PUBLIC_STREET_BIRTH_CHECK_PARAMETERS } from '../geometry/public-street-birth-check';
+import { STREET_GUARD_JOIN_VERSION } from '../transport-geometry';
 import type { WorldDefinition } from '../types';
 
 /** Matches Simulation's saved geometry contract, never geometry supplied by a save. */
@@ -20,7 +25,7 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // selectSavedWorld only calls this with regenerated trusted candidates. An
   // imported file's layout/terrain/geometry labels are never used as inputs.
   const layout = (world as WorldDefinition & { layoutVersion?: CityLayoutVersion }).layoutVersion;
-  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7') ? {
+  const terrain = layout === 'current-v3' || layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') ? {
     algorithm: GEOLOGICAL_GEOMETRY_VERSION,
     voxelSize: world.voxelSize, size: world.size, mountains: world.mountains,
     districts: world.districts.map(district => [district.id, district.center, district.radius]),
@@ -30,8 +35,8 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
   // A v4 identity includes the generated physical rooms, voids, openings and
   // support planes. A marker alone cannot describe their usable geometry.
   // This extra descriptor is deliberately absent from all four old recipes.
-  const architecture = layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7') ? {
-    algorithm: (layout === 'current-v6' || layout === 'current-v7') ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${COMMERCIAL_RECIPE_VERSION}:flight-routes-${COMMERCIAL_ROUTE_REVISION}` : layout === 'current-v5' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2` : ARCHITECTURAL_GEOMETRY_VERSION,
+  const architecture = layout === 'current-v4' || layout === 'current-v5' || (layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') ? {
+    algorithm: (layout === 'current-v6' || layout === 'current-v7' || layout === 'current-v8') ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2:${COMMERCIAL_RECIPE_VERSION}:flight-routes-${COMMERCIAL_ROUTE_REVISION}` : layout === 'current-v5' ? `${ARCHITECTURAL_GEOMETRY_VERSION}:continuous-stairs-2` : ARCHITECTURAL_GEOMETRY_VERSION,
     buildings: world.buildings.map(site => {
       const body = getBuildingBody(site);
       const inputs = [site.id, site.seed, site.floorPlanProfile, site.functionPoints,
@@ -39,13 +44,16 @@ export function savedWorldFingerprint(world: WorldDefinition): string {
         body ? [body.family, body.roofRhythm, body.floorPlans, getFloorPlanRoofRegions(body)] : null];
       // The descriptor is absent from old recipes, preserving their complete
       // original fingerprint text while binding every v5 stair revision.
+      if (layout === 'current-v8') return [...inputs, site.stairGeometryRevision, site.commercialGeometryRevision, site.commercialRouteRevision, site.roofGeometryRevision];
       return (layout === 'current-v6' || layout === 'current-v7') ? [...inputs, site.stairGeometryRevision, site.commercialGeometryRevision, site.commercialRouteRevision] : layout === 'current-v5' ? [...inputs, site.stairGeometryRevision] : inputs;
     }),
   } : undefined;
   // The new code-owned street recipe binds actual edge coordinates above;
   // these limits identify its authoritative grading contract. Old text is exact.
   const streets = layout === 'current-v7' ? { algorithm: MARKET_STATION_APRON_VERSION, maximumGrade: MARKET_STATION_APRON_MAX_GRADE, offsets: MARKET_STATION_APRON_OFFSETS } : undefined;
-  const legacyDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
+  const roofProfile = layout === 'current-v8' ? { algorithm: REFERENCE_CURVED_ROOF_RECIPE_VERSION, revision: CURVED_ROOF_PROFILE_REVISION, profile: CURVED_ROOF_PROFILE_VERSION, knots: CURVED_ROOF_PROFILE_KNOTS, minimumRise: CURVED_ROOF_MIN_RISE, maximumRise: CURVED_ROOF_MAX_RISE, spanRiseRatio: CURVED_ROOF_SPAN_RISE_RATIO, quantization: .2, birthRecipe: { algorithm: PUBLIC_STREET_BIRTH_RECIPE_VERSION, parameters: PUBLIC_STREET_BIRTH_PARAMETERS, checker: PUBLIC_STREET_BIRTH_CHECK_VERSION, checkParameters: PUBLIC_STREET_BIRTH_CHECK_PARAMETERS }, streetGuardJoins: { revision: world.referenceCityRecipe?.streetGuardJoinRevision, algorithm: STREET_GUARD_JOIN_VERSION }, originalSpawn: world.referenceCityRecipe?.originalSpawn, selectedSpawn: world.spawn, arrival: world.referenceCityRecipe?.arrival } : undefined;
+  const previousDescriptor = streets ? { ...geometry, terrain, architecture, streets } : architecture ? { ...geometry, terrain, architecture } : terrain ? { ...geometry, terrain } : geometry;
+  const legacyDescriptor = roofProfile ? { ...previousDescriptor, roofProfile } : previousDescriptor;
   const descriptor = world.powerGrid ? { ...legacyDescriptor, powerGrid: world.powerGrid } : legacyDescriptor;
   const operator = world.hydroMaintenance !== undefined ? world.buildings.find(site => site.id === world.hydroMaintenance!.operatorSiteId) : undefined;
   const maintenancePhysics = operator ? {

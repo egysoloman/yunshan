@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-07T08:07:31.251352+00:00",
+  "endedAt": "2026-10-07T08:07:31.933909+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "--test-concurrency=1",
+    "tests/public-street-birth.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "4ad5704555c88a2bc2b9b9939d04eb01d8ea4423f2f0258c4c853fba427a03bb",
+  "ownedPid": 26941,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 26955,
+      "state": "Z",
+      "parent": 1,
+      "group": 26941,
+      "session": 26941,
+      "startTicks": 1655396
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

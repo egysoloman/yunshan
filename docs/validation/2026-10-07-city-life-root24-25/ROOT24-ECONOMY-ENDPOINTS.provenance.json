@@ -1,0 +1,38 @@
+{
+  "status": "ACTUAL_ORIGINAL_ENDPOINT_PLOT",
+  "simulationConstructions": 0,
+  "ordinarySteps": 0,
+  "source": "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/delivery-draft/NATIVE04-ENDPOINT-STATISTICS.json",
+  "sourceSHA256": "993f185c0c8966b06412a6a44927a9301b1597c7c3214d4bc13a2d3b0e1acdc2",
+  "chartValues": [
+    {
+      "metric": "Resident wallets (thousand yuan)",
+      "values": [
+        197.97968658032897,
+        200.8459284787359
+      ]
+    },
+    {
+      "metric": "Residents with satiety < 30",
+      "values": [
+        14,
+        115
+      ]
+    },
+    {
+      "metric": "Company capital (yuan)",
+      "values": [
+        556.5703556336549,
+        949.2038162962212
+      ]
+    },
+    {
+      "metric": "Saved district employment rate (%)",
+      "values": [
+        80.79710144927536,
+        74.63768115942028
+      ]
+    }
+  ],
+  "limitations": "Endpoint differences, not a 14-day steady state or complete cause attribution. Company count grows 12 to 13. Saved employment rate is not reconstructed individual job eligibility."
+}

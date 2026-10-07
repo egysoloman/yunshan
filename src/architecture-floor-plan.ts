@@ -1,5 +1,6 @@
 import type { Building, BuildingFunctionPoint, Vec3 } from './types';
 import { blocksSweptUprightCylinder } from './geometry/upright-cylinder-sweep';
+import { CURVED_ROOF_PROFILE_REVISION, roofProfileRise, roofProfileCircleMax, roofProfileBlocksSweep } from './geometry/roof-profile';
 
 
 export const FLOOR_PLAN_GEOMETRY_VERSION = 'architecture-v4-program-bodies-02-stairs-v1';
@@ -23,6 +24,7 @@ export interface FloorPlan {
   program: string; permission: string;
 }
 export interface BuildingBody {
+  roofGeometryRevision?: typeof CURVED_ROOF_PROFILE_REVISION;
   buildingId: string; family: Family; candidate: Candidate; needsV4: boolean;
   preserveExistingMesh: boolean;
   immutableDimensions: { width: number; depth: number; height: number; floors: number; basements: number; door: Vec3 };
@@ -239,14 +241,15 @@ function makeBody(b: Building): BuildingBody {
     }
   }
   for(const p of plans)p.fixtures=createFloorFixtures(b,p);
-  return { buildingId: b.id, family, candidate, needsV4: !keepEnvelope, preserveExistingMesh: keepEnvelope, immutableDimensions: { width: b.width, depth: b.depth, height: b.height, floors: b.floors, basements: b.basements ?? 0, door: { ...b.door } }, floorPlans: plans, roofRhythm: commercial ? 'terraced-finance-tower' : ({ home: 'split-gable', market: 'hall-and-shops', workshop: 'industrial-spans', 'civic-academy': 'court-wings', 'finance-health': 'hall-and-service-tower', 'transport-waterfront': 'covered-platform' })[family] as BuildingBody['roofRhythm'] };
+  return { ...(b.roofGeometryRevision === CURVED_ROOF_PROFILE_REVISION ? { roofGeometryRevision: CURVED_ROOF_PROFILE_REVISION } : {}), buildingId: b.id, family, candidate, needsV4: !keepEnvelope, preserveExistingMesh: keepEnvelope, immutableDimensions: { width: b.width, depth: b.depth, height: b.height, floors: b.floors, basements: b.basements ?? 0, door: { ...b.door } }, floorPlans: plans, roofRhythm: commercial ? 'terraced-finance-tower' : ({ home: 'split-gable', market: 'hall-and-shops', workshop: 'industrial-spans', 'civic-academy': 'court-wings', 'finance-health': 'hall-and-service-tower', 'transport-waterfront': 'covered-platform' })[family] as BuildingBody['roofRhythm'] };
 }
 
 
 export interface WallPanel { rect: Rect; bottom: number; top: number; kind: 'solid' | 'glass' }
 export interface FloorSupport { kind: 'room' | 'courtyard' | 'gallery' | 'stairs' | 'roof'; floor: number; y: number; local: { x: number; z: number }; link?: {fromFloor:number;toFloor:number} }
-export interface RoofRegion { rect: Rect; bottom: number; top: number; floor: number; kind: 'gallery-flat' | 'weather-strip' | 'gable'; gableAxis?: 'x' | 'z'; anchor: 'minimum' }
+export interface RoofRegion { rect: Rect; bottom: number; top: number; floor: number; kind: 'gallery-flat' | 'weather-strip' | 'gable'; gableAxis?: 'x' | 'z'; anchor: 'minimum'; roofGeometryRevision?: typeof CURVED_ROOF_PROFILE_REVISION }
 interface BodyCache {
+  roofGeometryRevision: Building['roofGeometryRevision'];
   commercial: boolean;
   continuousStairs: boolean;
   width: number; depth: number; height: number; floors: number; basements: number; rotation: number;
@@ -258,9 +261,9 @@ const bodies = new WeakMap<Building, BodyCache>();
 export function getBuildingBody(b: Building): BuildingBody | null {
   if (b.floorPlanProfile !== FLOOR_PLAN_PROFILE || b.id === 'core-main' || b.kind === 'pavilion') return null;
   const cached=bodies.get(b);
-  if(cached && cached.commercial===(b.commercialGeometryRevision===1) && cached.continuousStairs===continuousStairs(b) && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
+  if(cached && cached.roofGeometryRevision===b.roofGeometryRevision && cached.commercial===(b.commercialGeometryRevision===1) && cached.continuousStairs===continuousStairs(b) && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
   const body=makeBody(b);
-  bodies.set(b,{commercial:b.commercialGeometryRevision===1,continuousStairs:continuousStairs(b),width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
+  bodies.set(b,{roofGeometryRevision:b.roofGeometryRevision,commercial:b.commercialGeometryRevision===1,continuousStairs:continuousStairs(b),width:b.width,depth:b.depth,height:b.height,floors:b.floors,basements:b.basements??0,rotation:b.rotation,x:b.position.x,y:b.position.y,z:b.position.z,kind:b.kind,publicFloors:b.publicFloors,requiredPermission:b.requiredPermission,facility:b.facility,footprints:b.floorFootprints,uses:b.floorUses,permissions:b.floorPermissions,body});
   return body;
 }
 export function getBuildingFloorPlan(b: Building,floor: number): FloorPlan | null {
@@ -575,7 +578,16 @@ export function getFloorPlanRoofRegions(body:BuildingBody):RoofRegion[] {
       if(Math.round(span*5)%2!==0){const strip=alongX?rect(r.x1-.2,r.x1,r.z0,r.z1):rect(r.x0,r.x1,r.z1-.2,r.z1);regions.push({rect:strip,bottom:p.ceilingY,top:q(p.ceilingY+.4),floor:p.floor,kind:'weather-strip',anchor:'minimum'});if(alongX)r.x1=q(r.x1-.2);else r.z1=q(r.z1-.2);}
       if(r.x1>r.x0&&r.z1>r.z0)regions.push({rect:r,bottom:p.ceilingY,top:q(p.ceilingY+1.2),floor:p.floor,kind:'gable',gableAxis:alongX?'x':'z',anchor:'minimum'});
     }
-  }roofCache.set(body,regions);return regions;
+  }
+  // Only the explicitly declared new recipe changes the exposed upper profile.
+  // Original cover rectangles, upper-floor subtraction, courtyard holes, flat
+  // gallery/weather strips and every bottom retain their exact source values.
+  if(body.roofGeometryRevision===CURVED_ROOF_PROFILE_REVISION)for(const roof of regions)if(roof.kind==='gable') {
+    const span=roof.gableAxis==='x'?roof.rect.x1-roof.rect.x0:roof.rect.z1-roof.rect.z0;
+    roof.top=q(roof.bottom+roofProfileRise(span));
+    roof.roofGeometryRevision=CURVED_ROOF_PROFILE_REVISION;
+  }
+  roofCache.set(body,regions);return regions;
 }
 
 function localSegmentClear(p:FloorPlan,a:Vec3,b:Vec3,radius:number,building:Building,segmentBlocked?: (from:Vec3,to:Vec3)=>boolean):boolean {
@@ -710,6 +722,13 @@ export function findBuildingFloorPlanRoute(b:Building,fromFloor:number,toFloor:n
 function roofTopUnderCircle(roof:RoofRegion,x:number,z:number,radius:number):number|null {
   if(circleRectDistanceSquared(x,z,roof.rect)>radius*radius+eps)return null;
   if(roof.kind!=='gable')return roof.top;
+  if(roof.roofGeometryRevision===CURVED_ROOF_PROFILE_REVISION) {
+    const alongX=roof.gableAxis==='x';
+    return roofProfileCircleMax({cross:alongX?x:z,orth:alongX?z:x,radius,
+      crossMin:alongX?roof.rect.x0:roof.rect.z0,crossMax:alongX?roof.rect.x1:roof.rect.z1,
+      orthMin:alongX?roof.rect.z0:roof.rect.x0,orthMax:alongX?roof.rect.z1:roof.rect.x1,
+      bottom:roof.bottom,top:roof.top});
+  }
   const alongX=roof.gableAxis==='x',cross=alongX?x:z,orth=alongX?z:x,min=alongX?roof.rect.x0:roof.rect.z0,max=alongX?roof.rect.x1:roof.rect.z1,orthMin=alongX?roof.rect.z0:roof.rect.x0,orthMax=alongX?roof.rect.z1:roof.rect.x1;
   const d=Math.max(orthMin-orth,0,orth-orthMax),reach=Math.sqrt(Math.max(0,radius*radius-d*d)),lo=Math.max(min,cross-reach),hi=Math.min(max,cross+reach);if(lo>hi+eps)return null;
   const position=Math.max(lo,Math.min(hi,(min+max)/2)),t=(position-min)/(max-min);return roof.bottom+.4+.8*(1-Math.abs(2*t-1));
@@ -723,6 +742,19 @@ export function getFloorPlanRoofSupport(b:Building,reference:Vec3,radius=.35):Fl
 }
 function blocksRoofMovement(b:Building,from:Vec3,to:Vec3,radius:number,eyeHeight:number):boolean {
   const body=getBuildingBody(b);if(!body)return false;const a=buildingLocalPosition(b,from),z=buildingLocalPosition(b,to),steps=Math.max(1,Math.ceil(Math.hypot(z.x-a.x,z.z-a.z)/.1));
+  if(body.roofGeometryRevision===CURVED_ROOF_PROFILE_REVISION) {
+    for(const roof of getFloorPlanRoofRegions(body)) {
+      if(roof.kind==='gable'&&roof.roofGeometryRevision===CURVED_ROOF_PROFILE_REVISION) {
+        const alongX=roof.gableAxis==='x';
+        if(roofProfileBlocksSweep({from:{cross:alongX?a.x:a.z,orth:alongX?a.z:a.x,feet:a.y},to:{cross:alongX?z.x:z.z,orth:alongX?z.z:z.x,feet:z.y},radius,eyeHeight,
+          crossMin:alongX?roof.rect.x0:roof.rect.z0,crossMax:alongX?roof.rect.x1:roof.rect.z1,orthMin:alongX?roof.rect.z0:roof.rect.x0,orthMax:alongX?roof.rect.z1:roof.rect.x1,bottom:roof.bottom,top:roof.top},eps))return true;
+      } else for(let i=0;i<=steps;i++) {
+        const t=i/steps,x=a.x+(z.x-a.x)*t,zz=a.z+(z.z-a.z)*t,feet=a.y+(z.y-a.y)*t,top=roofTopUnderCircle(roof,x,zz,radius);
+        if(top!==null&&feet+eyeHeight>roof.bottom+eps&&feet<top-eps)return true;
+      }
+    }
+    return false;
+  }
   for(const roof of getFloorPlanRoofRegions(body))for(let i=0;i<=steps;i++) {
     const t=i/steps,x=a.x+(z.x-a.x)*t,zz=a.z+(z.z-a.z)*t,feet=a.y+(z.y-a.y)*t,top=roofTopUnderCircle(roof,x,zz,radius);
     if(top!==null&&feet+eyeHeight>roof.bottom+eps&&feet<top-eps)return true;

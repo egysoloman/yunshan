@@ -1,0 +1,27 @@
+✔ production navigation connects the actual supported birth directly to its true doorway (58.901012ms)
+✔ the v8 sidewalk connection still rejects an actual wall between birth and door (20.551199ms)
+✔ a closed actual arrival road cannot be bypassed by the v8 sidewalk connection (3.330168ms)
+✔ the new connection cannot use an unsupported outside corner or an absent road (4.63145ms)
+✔ v6 navigation retains the original centreline route and does not gain the v8 sidewalk (3.743722ms)
+✔ real b26 join produces the direct 7.6m approach on actual original faces (9.492007ms)
+✔ graded X segment preserves actual shortest-arc crossfall and precise top Y (1.28678ms)
+✔ generic box-top face uses the real curb width, height and world-Y lift (0.419262ms)
+✔ analytic road faces match actual Three matrices for graded, reversed and runway decks (1.727108ms)
+✔ actual descending negative-Z road uses its existing local-bottom upward face (1.064846ms)
+✔ a vertical road face cannot be invented as a walkable height graph (0.488826ms)
+✔ actual b26 curb crossing raises the feet and leaving it restores the deck height (5.58142ms)
+✔ a center-only rounded-cap shortcut is rejected as an unbound birth route (4.938301ms)
+✔ an actual middle wall rejects despite clear endpoints and unchanged proposal (2.329992ms)
+✔ actual .35m circle rejects an off-center solid at birth (2.740329ms)
+✔ new reference bends open actual shared rail spans while old spans remain exact (0.628565ms)
+✔ near bridge endpoint is rejected even when no shared guardrail crosses the route (4.177413ms)
+✔ missing true door connectivity rejects without changing old spawn (0.179814ms)
+✔ explicit v8 approach retains actual foot-circle Y during movement (1.261689ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 526.614835

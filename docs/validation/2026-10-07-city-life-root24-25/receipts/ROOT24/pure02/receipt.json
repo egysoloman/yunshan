@@ -1,0 +1,32 @@
+{
+  "startedAt": "2026-10-07T07:53:23.268523+00:00",
+  "endedAt": "2026-10-07T07:53:24.583029+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "--test",
+    "tests/economy-resume-custody.test.ts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "c56d35c40487079cfceedeac4b4331b25102a30b8f6361526a0454cf2deb2788",
+  "ownedPid": 26388,
+  "observedDescendants": 3,
+  "finalOwnedMembers": [
+    {
+      "pid": 26402,
+      "state": "Z",
+      "parent": 1,
+      "group": 26388,
+      "session": 26388,
+      "startTicks": 1570600
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

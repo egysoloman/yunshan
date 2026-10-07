@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-07T07:21:27.949648+00:00",
+  "endedAt": "2026-10-07T07:44:40.522416+00:00",
+  "argv": [
+    "node",
+    "--max-old-space-size=3072",
+    "--import",
+    "tsx",
+    "scripts/economy-resume-actual.ts",
+    "--out",
+    "/tmp/ROOT24-economy-next-day-20261007-01/native03",
+    "--world",
+    "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json",
+    "--save",
+    "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-PRIMARY-1700.save.json",
+    "--plan",
+    "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/ROOT-EXECUTION-PLAN.json"
+  ],
+  "exitCode": 1,
+  "timedOut": false,
+  "status": "FAIL",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "ce21c380f37b87a711881f7c6528c4c20b7ee69d1314d048594de3fb784f3590",
+  "ownedPid": 24338,
+  "observedDescendants": 1,
+  "finalOwnedMembers": [],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

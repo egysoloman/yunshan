@@ -1,0 +1,107 @@
+✔ late W in a slow frame receives only its real held interval, with unchanged eye and speed (16.653467ms)
+✔ a completed 200ms pulse survives early idle time in a five-second frame and delayed keyup delivery (2.753915ms)
+✔ continuous W pays each interval once and a long held stall remains capped at one second (8.299279ms)
+✔ active budget keeps the latest active second in chronological order and ignores idle gaps (4.57351ms)
+✔ sprint, opposite keys and normalized diagonal arrows retain their original speed contracts (2.702241ms)
+✔ epoch timestamps normalize, invalid clocks fall back, and dispatch order clamps backward timestamps (1.54849ms)
+✔ an accepted event later than the supplied rAF timestamp waits for the next frame (1.974919ms)
+✔ a late event before an already consumed frame changes only unconsumed time and cannot roll the body back (2.820487ms)
+✔ blur, visibility and successful setMode discard pending movement while a rejected mode keeps it (2.240341ms)
+✔ paused walking retains the original motor while passenger frames consume without later replay (2.007294ms)
+✔ pre-reset queued presses cannot revive walking through later snapshots or pose changes; old keyup releases held state (2.069966ms)
+✔ native-failure home geometry permits exact timed W to the original exterior approach and E enters from outside (20.575012ms)
+✔ successful pose changes cut old walking budget while retaining held keys; failed doors leave it intact (3.806444ms)
+✔ v4 actual W crosses its real doorway and reaches all three market counters through shared routes (218.162514ms)
+✔ v4 courtyard is genuinely supported outdoor ground and continuous W returns through an actual opening (210.804196ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 3.4m storey height without E or reset (154.014453ms)
+✔ v4 actual W walks both stair flights through 0→1→2→1→0 at 6.6m storey height without E or reset (136.946766ms)
+✔ v4 exact market-b24 upper first-tread pose advances a .35m body by normal W (5.793548ms)
+✔ v4 actual W rejects an unauthorized upper level before rising and E only selects a legal supported landing (22.337344ms)
+✔ v4 rotated entrance has the same physical local door and legacy E preserves arbitrary shaft x/z exactly (77.212459ms)
+✔ v4 exposed roof supports restored feet, blocks its actual volume and remains outside a room (8.100848ms)
+✔ v4 actual W cannot pass the physical market counter or walk off the top-floor stair hole (16.428244ms)
+✔ v4 open ground courtyard merges actual adjacent terrain support while a real cliff remains impassable (33.212277ms)
+✔ restoring an indoor upper or basement position preserves the occupied level during walking (4.891111ms)
+✔ upper-floor collision follows the narrowed occupied footprint and cannot walk off the floor (0.913571ms)
+✔ stairs preserve their shared shaft and skip floors whose permissions have not been earned (1.538791ms)
+✔ placed voxels obstruct the body and removing them restores the same walkable space (0.562712ms)
+✔ a floor-level voxel is a usable step while a taller stack cannot be walked through (0.342186ms)
+✔ a new traveler starts on foot and camera modes require an actual acquired aircraft (0.991793ms)
+✔ bridge handrails stop lateral walking while the shared open ends and longitudinal deck remain usable (2.82045ms)
+✔ same-grade streets have shared visible and physical bridge-side openings, with guards retained elsewhere (3.32089ms)
+✔ a crossing at another level keeps the existing bridge rail and does not invent a junction (1.124652ms)
+✔ the actual repaired river station street can enter and exit its same-level bridge (5038.121968ms)
+✔ production navigation connects the actual supported birth directly to its true doorway (85.923344ms)
+✔ the v8 sidewalk connection still rejects an actual wall between birth and door (13.555463ms)
+✔ a closed actual arrival road cannot be bypassed by the v8 sidewalk connection (2.291656ms)
+✔ the new connection cannot use an unsupported outside corner or an absent road (2.92734ms)
+✖ v6 navigation retains the original centreline route and does not gain the v8 sidewalk (9.518387ms)
+✔ real b26 join produces the direct 7.6m approach on actual original faces (12.684126ms)
+✔ graded X segment preserves actual shortest-arc crossfall and precise top Y (1.452668ms)
+✔ generic box-top face uses the real curb width, height and world-Y lift (0.676249ms)
+✔ analytic road faces match actual Three matrices for graded, reversed and runway decks (1.221901ms)
+✔ actual descending negative-Z road uses its existing local-bottom upward face (0.753152ms)
+✔ a vertical road face cannot be invented as a walkable height graph (0.732215ms)
+✔ actual b26 curb crossing raises the feet and leaving it restores the deck height (3.745334ms)
+✔ a center-only rounded-cap shortcut is rejected as an unbound birth route (5.02965ms)
+✔ an actual middle wall rejects despite clear endpoints and unchanged proposal (1.965499ms)
+✔ actual .35m circle rejects an off-center solid at birth (6.046679ms)
+✔ new reference bends open actual shared rail spans while old spans remain exact (0.819071ms)
+✔ near bridge endpoint is rejected even when no shared guardrail crosses the route (2.350315ms)
+✔ missing true door connectivity rejects without changing old spawn (0.456137ms)
+✔ explicit v8 approach retains actual foot-circle Y during movement (1.426077ms)
+✔ birth E does not relocate, real W/E enters, and supported exit/W returns on the actual strip (120.238582ms)
+✔ missing real exit support rejects E without moving the current room body (50.888086ms)
+✔ a real crossing wall still rejects the supported exit (53.490285ms)
+✔ declared b26 path mismatch rejects instead of using the legacy +2 landing (2.681325ms)
+✔ old v6 door exit keeps the original exact point and heading (40.189276ms)
+✔ existing entry permission cannot be bypassed by the new exit helper (44.700846ms)
+✔ supported exit binds the declared real arrival without a hardcoded building ID (1.996114ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 58
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9641.028155
+
+✖ failing tests:
+
+test at tests/public-street-birth.test.ts:1:5871
+✖ v6 navigation retains the original centreline route and does not gain the v8 sidewalk (9.518387ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      {
+        x: -279,
+        y: 80.4,
+        z: 408
+      },
+      {
+  +     x: -279,
+  +     y: 80.35384615384616,
+  +     z: 408
+  +   },
+  +   {
+        x: -282,
+        y: 80.4,
+        z: 408
+      },
+      {
+  
+      at TestContext.<anonymous> (/workspace/yunshan/tests/public-street-birth.test.ts:92:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { x: -279, y: 80.4, z: 408 }, { x: -279, y: 80.35384615384616, z: 408 }, { x: -282, y: 80.4, z: 408 }, { x: -282, y: 80.4, z: 401 } ],
+    expected: [ { x: -279, y: 80.4, z: 408 }, { x: -282, y: 80.4, z: 408 }, { x: -282, y: 80.4, z: 401 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

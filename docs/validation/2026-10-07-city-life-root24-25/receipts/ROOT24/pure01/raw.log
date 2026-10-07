@@ -1,0 +1,17 @@
+✔ custody reads the original World291/4610 bags without changing either input (253.130533ms)
+✔ bound shop cash and bank claims remain visible without becoming additional money (60.172633ms)
+✔ released company and shop hold separate cash and food inventories (95.502139ms)
+✔ food moves from the real source to cargo and matching district lots without double custody (39.988031ms)
+✔ unknown and industrial cargo sources and mismatched freight lots fail explicitly (191.164765ms)
+✔ trade ownership is an inventory alias; ingredients and cooking have an explicit unsupported boundary (86.188977ms)
+✔ new unclassified accounts and nonfinite money fail rather than entering an other bucket (97.998577ms)
+✔ accessors, symbols and holes are rejected without invoking observer input code (102.191894ms)
+✔ NPC debt preserves old employers and queue metadata through an accrual-to-payroll transfer (2.310159ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1286.628879

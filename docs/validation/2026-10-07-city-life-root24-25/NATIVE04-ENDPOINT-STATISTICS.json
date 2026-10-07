@@ -1,0 +1,1811 @@
+{
+  "status": "READ_ONLY_ENDPOINT_STATISTICS_FROM_ORIGINALS",
+  "simulationConstructions": 0,
+  "ordinarySteps": 0,
+  "worldSource": {
+    "path": "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json",
+    "encoding": "utf8-json",
+    "encodedBytes": 1832308,
+    "encodedSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "decodedBytes": 1832308,
+    "decodedSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+  },
+  "terminalObservationSource": {
+    "path": "/tmp/ROOT24-economy-next-day-20261007-01/native04/TERMINAL-OBSERVATIONS.json",
+    "encoding": "utf8-json",
+    "encodedBytes": 856290,
+    "encodedSHA256": "5c49821c5dc99ec30ccb0c7df1e386a18b6d5ad963f69a1046a3853ccb674330",
+    "decodedBytes": 856290,
+    "decodedSHA256": "5c49821c5dc99ec30ccb0c7df1e386a18b6d5ad963f69a1046a3853ccb674330"
+  },
+  "saveSources": {
+    "originalMain3900": {
+      "path": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0001-imported-main/whole-save.json.gz",
+      "encoding": "gzip-utf8",
+      "encodedBytes": 515552,
+      "encodedSHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24",
+      "decodedBytes": 3443220,
+      "decodedSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+    },
+    "originalCompleteCheckpoint344_5276": {
+      "path": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/whole-save.json.gz",
+      "encoding": "gzip-utf8",
+      "encodedBytes": 493779,
+      "encodedSHA256": "b771cb9afcc34a02b1850d30a2d83b4a349cdb3ae8b95edd5648aa945df771e7",
+      "decodedBytes": 3382174,
+      "decodedSHA256": "f0ea97daef48d4e2357536a3d1ce4b9222dbcbaaa4d5205677bde9483c5a95b6"
+    },
+    "native04ColdImported5276": {
+      "path": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0001-imported-main/whole-save.json.gz",
+      "encoding": "gzip-utf8",
+      "encodedBytes": 493779,
+      "encodedSHA256": "b771cb9afcc34a02b1850d30a2d83b4a349cdb3ae8b95edd5648aa945df771e7",
+      "decodedBytes": 3382174,
+      "decodedSHA256": "f0ea97daef48d4e2357536a3d1ce4b9222dbcbaaa4d5205677bde9483c5a95b6"
+    },
+    "terminal5340": {
+      "path": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/whole-save.json.gz",
+      "encoding": "gzip-utf8",
+      "encodedBytes": 464739,
+      "encodedSHA256": "48dadec6848bc975719e1ea40799c3728d86bff8f758f00cc72d348827cd2793",
+      "decodedBytes": 3207121,
+      "decodedSHA256": "6e4812acde393a9436dfe09f4b3994a3721ccaba6ddb972c9623a9e369d02d48"
+    }
+  },
+  "sourceReadbackChecks": {
+    "original344AndNative04ColdImportedEntireDecodedSaveByteExact": true,
+    "terminalFoodAccessMatchesOriginalObservationEveryRecomputedFieldExact": true,
+    "terminal616CitizenMoneyNeedsWorkRoleFoodPositionMatchesFullSave": true,
+    "terminal210ShopSavedFieldsAndOriginalWorldKindMatchFullSave": true
+  },
+  "interpretation": {
+    "timeline": "Original full save at3900/tick1710 to5340/tick2070: canonical360 windows from344+16, two cold segments,361 physical calls with345 replay. Suffix alone5276 to5340:16 new ordinary windows/64 game minutes.",
+    "hungerDirection": "Saved needs.hunger is fullness: larger values mean less hungry; thresholds below20/30/48 are explicitly observational categories.",
+    "cash": "Resident wallets exclude player, treasury, company/shop operating funds, bank and tax custody. Cash increases/decreases are measured endpoint deltas, not proof of injections or their absence.",
+    "employment": "District rates are original saved commerce output, not new exact endpoint isEmployed evaluations. Capacity/role/assigned shift/working state/earned minutes are not interchangeable.",
+    "food": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice.",
+    "foodAffordability": "Any stocked open food offer with price <=wallet; distance, permissions, routes and arrival NOT_OBSERVED.",
+    "companyCapital": "Capital is an operating account; company/shop inventory are separate fields. Company capitalization cannot be added to bound shop funds as additional cash.",
+    "limits": "No native calls/imports, game code execution, new tests, performance measurements, money/food correction, long-term sustainability or all-domain pass claim."
+  },
+  "snapshots": {
+    "originalMain3900": {
+      "clock": 3900,
+      "tick": 1710,
+      "day": 2,
+      "hour": 17,
+      "speed": 8,
+      "residentCount": 616,
+      "aliveResidentCount": 616,
+      "adultNonStudentCount": 552,
+      "residentCash": {
+        "count": 616,
+        "sum": 197979.68658032882,
+        "preciseSum": 197979.68658032897,
+        "min": 96.86784616643706,
+        "p10": 177.9753356908439,
+        "median": 314.6739404889825,
+        "p90": 450.6667545996574,
+        "max": 2200.976703168346,
+        "mean": 321.3955950979366,
+        "negativeCount": 0,
+        "below1": 0,
+        "below20": 0,
+        "below100": 2
+      },
+      "hunger": {
+        "count": 616,
+        "sum": 50208.57561839823,
+        "preciseSum": 50208.57561839821,
+        "min": 22.40000000000002,
+        "p10": 67.10000000000032,
+        "median": 83.99999999999932,
+        "p90": 95.4000000000001,
+        "max": 100,
+        "mean": 81.50742795194515,
+        "below20": 0,
+        "below30": 14,
+        "below48": 14,
+        "at0": 0
+      },
+      "employment": {
+        "savedDistricts": [
+          {
+            "id": "river",
+            "savedEmployment": 0.32,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 16.0,
+            "savedProsperity": 66.1771999999991
+          },
+          {
+            "id": "market",
+            "savedEmployment": 0.58,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 28.999999999999996,
+            "savedProsperity": 66.03584210526229
+          },
+          {
+            "id": "workshop",
+            "savedEmployment": 0.76,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 38.0,
+            "savedProsperity": 66.15157446808408
+          },
+          {
+            "id": "west",
+            "savedEmployment": 0.78,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 39.0,
+            "savedProsperity": 67.60052631578846
+          },
+          {
+            "id": "academy",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 52,
+            "savedRateTimesEndpointAdultCount": 52,
+            "savedProsperity": 68
+          },
+          {
+            "id": "government",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 68
+          },
+          {
+            "id": "core",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 65.76999999999889
+          },
+          {
+            "id": "summit",
+            "savedEmployment": 0.94,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 47.0,
+            "savedProsperity": 70.27133333333265
+          },
+          {
+            "id": "east",
+            "savedEmployment": 0.82,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 41.0,
+            "savedProsperity": 67.90189473684111
+          },
+          {
+            "id": "airport",
+            "savedEmployment": 0.8,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 40.0,
+            "savedProsperity": 66.41008333333302
+          },
+          {
+            "id": "starport",
+            "savedEmployment": 0.88,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 44.0,
+            "savedProsperity": 65.76999999999889
+          }
+        ],
+        "savedDistrictEmploymentWeightedByEndpointAdultCount": 0.8079710144927537,
+        "shopEmployeesReported": 265,
+        "shopRosterMembersAdultNonStudent": 265,
+        "publicOrNonShopWorkIdsAdultNonStudent": 287,
+        "workingStateResidents": 310,
+        "unemployedStateResidents": 0,
+        "offDutyStateResidents": 3,
+        "currentDayPrivateShiftCount": 130,
+        "currentDayPrivateAssignmentCount": 257,
+        "currentDayPrivateAssignedCitizens": 257,
+        "currentDayPrivateAssignmentsWithRemainingAllowance": 159,
+        "currentDayPrivateAssignmentsWithWorkedMinutes": 237,
+        "currentDayPrivateAssignedMinutesCap": 75524,
+        "currentDayPrivateWorkedMinutes": 59914.445031893854,
+        "publicLaborSerialized": false,
+        "roleCounts": {
+          "学生": 64,
+          "农民": 28,
+          "钱庄职员": 41,
+          "商人": 145,
+          "医生": 51,
+          "官员": 83,
+          "驾驶员": 47,
+          "老师": 34,
+          "警察": 22,
+          "工人": 75,
+          "搬运工": 17,
+          "科研员": 7,
+          "scientist": 2
+        },
+        "stateCounts": {
+          "shopping": 94,
+          "studying": 5,
+          "socializing": 23,
+          "working": 310,
+          "physicalWaiting": 20,
+          "moving": 21,
+          "reviewingBusiness": 67,
+          "attendingCivic": 5,
+          "responding": 5,
+          "atHome": 60,
+          "riding": 3,
+          "offDuty": 3
+        },
+        "scope": "Saved district.employment values, recorded roster/shift capacities and endpoint states only. No reconstructed isEmployed or fresh Simulation; workId/role, employees, worked minutes and remaining allowance are distinct quantities. Missing publicLabor does not deny legacy public employment."
+      },
+      "companyCapital": {
+        "count": 12,
+        "sum": 556.570355633655,
+        "preciseSum": 556.5703556336549,
+        "min": 4.370764927797353,
+        "p10": 4.463340066397057,
+        "median": 6.496118814782442,
+        "p90": 75.74926808404672,
+        "max": 382.9117652314558,
+        "mean": 46.380862969471245,
+        "zeroOrNegativeCount": 0,
+        "below6_666666666666667": 6,
+        "companies": [
+          {
+            "id": "company-1",
+            "name": "清溪水岸·西溪院·梯田农舍3商社",
+            "ownerId": "citizen-11",
+            "buildingId": "river-b9",
+            "capital": 6.999534160813113,
+            "inventory": 153,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-2",
+            "name": "清溪水岸·西溪院·商肆5商社",
+            "ownerId": "citizen-176",
+            "buildingId": "river-b17",
+            "capital": 5.538400827443224,
+            "inventory": 87,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-3",
+            "name": "清溪水岸·南坡院·商肆7商社",
+            "ownerId": "citizen-451",
+            "buildingId": "river-b27",
+            "capital": 4.370764927797353,
+            "inventory": 86,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-4",
+            "name": "清溪水岸·北岭院·商肆10商社",
+            "ownerId": "citizen-583",
+            "buildingId": "river-b36",
+            "capital": 5.545003956980897,
+            "inventory": 87,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-5",
+            "name": "清溪水岸·西溪院·渡口12商社",
+            "ownerId": "citizen-66",
+            "buildingId": "river-b45",
+            "capital": 10.857323817465227,
+            "inventory": 105.75098864639179,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-6",
+            "name": "清溪水岸·南坡院·渡口14商社",
+            "ownerId": "citizen-264",
+            "buildingId": "river-b55",
+            "capital": 5.9927034687517695,
+            "inventory": 111.16760480118174,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-7",
+            "name": "千灯市集·百味街·商肆2商社",
+            "ownerId": "citizen-166",
+            "buildingId": "market-b7",
+            "capital": 7.538801928359376,
+            "inventory": 80,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-8",
+            "name": "千灯市集·钱庄街·商肆6商社",
+            "ownerId": "citizen-155",
+            "buildingId": "market-b20",
+            "capital": 382.9117652314558,
+            "inventory": 48,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-9",
+            "name": "千灯市集·灯市街·商肆9商社",
+            "ownerId": "citizen-56",
+            "buildingId": "market-b33",
+            "capital": 4.413753023731164,
+            "inventory": 86,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-10",
+            "name": "千灯市集·钱庄街·商肆13商社",
+            "ownerId": "citizen-474",
+            "buildingId": "market-b48",
+            "capital": 4.909623450390095,
+            "inventory": 87,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-11",
+            "name": "千灯市集·云锦街·商肆16商社",
+            "ownerId": "citizen-1",
+            "buildingId": "market-b62",
+            "capital": 80,
+            "inventory": 90,
+            "employees": 0,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-12",
+            "name": "青铜工坊·铸造院·工坊1商社",
+            "ownerId": "citizen-134",
+            "buildingId": "workshop-b0",
+            "capital": 37.49268084046697,
+            "inventory": 92.52750326081139,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          }
+        ]
+      },
+      "shopOperatingFunds": {
+        "count": 210,
+        "sum": 17437.283765320397,
+        "preciseSum": 17437.283765320404,
+        "min": 0,
+        "p10": 0.0,
+        "median": 10.586410519296138,
+        "p90": 248.37741419458985,
+        "max": 2322.333980171639,
+        "mean": 83.03468459676382,
+        "activeCompanyBoundShopCount": 12,
+        "scope": "Active company.capital replaces bound shop.cash, exactly per simulation.ts shopFunds; never add company capital to this shop-funds total."
+      },
+      "foodAccess": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "shopFoodUnits": 13883.241185989757,
+        "residentCarriedFoodUnits": 251,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4351.118394550422,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1356.1227914393378,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 8176,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4883.561741869364,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 14,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 14,
+        "routeReachability": "NOT_OBSERVED"
+      },
+      "treasury": 63983.18759107223,
+      "playerCash": 600,
+      "bankCash": 700,
+      "loan": 0,
+      "taxesHeldRuntime": 0,
+      "scheduledNextCommerceAt": 3910,
+      "scheduledNextFinanceAt": 3902,
+      "scheduledNextPayrollAt": 5340
+    },
+    "originalCompleteCheckpoint344_5276": {
+      "clock": 5276.0,
+      "tick": 2054,
+      "day": 3,
+      "hour": 15.933333333333334,
+      "speed": 16,
+      "residentCount": 616,
+      "aliveResidentCount": 616,
+      "adultNonStudentCount": 552,
+      "residentCash": {
+        "count": 616,
+        "sum": 190398.46115909418,
+        "preciseSum": 190398.46115909424,
+        "min": 65.619842348656,
+        "p10": 158.36717901396244,
+        "median": 297.5555271299204,
+        "p90": 436.80158466351406,
+        "max": 2995.6478859715658,
+        "mean": 309.0884109725556,
+        "negativeCount": 0,
+        "below1": 0,
+        "below20": 0,
+        "below100": 15
+      },
+      "hunger": {
+        "count": 616,
+        "sum": 42501.98722944402,
+        "preciseSum": 42501.98722944397,
+        "min": 0,
+        "p10": 21.849999999999852,
+        "median": 78.49999999999989,
+        "p90": 97.59999999999997,
+        "max": 100,
+        "mean": 68.99673251533112,
+        "below20": 48,
+        "below30": 134,
+        "below48": 138,
+        "at0": 1
+      },
+      "employment": {
+        "savedDistricts": [
+          {
+            "id": "river",
+            "savedEmployment": 0.66,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 33.0,
+            "savedProsperity": 65.56706666666574
+          },
+          {
+            "id": "market",
+            "savedEmployment": 0.68,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 34.0,
+            "savedProsperity": 65.34899999999917
+          },
+          {
+            "id": "workshop",
+            "savedEmployment": 0.86,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 43.0,
+            "savedProsperity": 65.57838297872229
+          },
+          {
+            "id": "west",
+            "savedEmployment": 0.64,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 32.0,
+            "savedProsperity": 67.1855789473674
+          },
+          {
+            "id": "academy",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 52,
+            "savedRateTimesEndpointAdultCount": 52,
+            "savedProsperity": 68
+          },
+          {
+            "id": "government",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 68
+          },
+          {
+            "id": "core",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 65.00199999999886
+          },
+          {
+            "id": "summit",
+            "savedEmployment": 0.88,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 44.0,
+            "savedProsperity": 70.99333333333261
+          },
+          {
+            "id": "east",
+            "savedEmployment": 0.8,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 40.0,
+            "savedProsperity": 68.04399999999895
+          },
+          {
+            "id": "airport",
+            "savedEmployment": 0.86,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 43.0,
+            "savedProsperity": 65.90058333333307
+          },
+          {
+            "id": "starport",
+            "savedEmployment": 0.7,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 35.0,
+            "savedProsperity": 65.00199999999886
+          }
+        ],
+        "savedDistrictEmploymentWeightedByEndpointAdultCount": 0.8260869565217391,
+        "shopEmployeesReported": 265,
+        "shopRosterMembersAdultNonStudent": 265,
+        "publicOrNonShopWorkIdsAdultNonStudent": 287,
+        "workingStateResidents": 233,
+        "unemployedStateResidents": 0,
+        "offDutyStateResidents": 2,
+        "currentDayPrivateShiftCount": 126,
+        "currentDayPrivateAssignmentCount": 247,
+        "currentDayPrivateAssignedCitizens": 247,
+        "currentDayPrivateAssignmentsWithRemainingAllowance": 171,
+        "currentDayPrivateAssignmentsWithWorkedMinutes": 224,
+        "currentDayPrivateAssignedMinutesCap": 71706,
+        "currentDayPrivateWorkedMinutes": 51315.67420924385,
+        "publicLaborSerialized": false,
+        "roleCounts": {
+          "学生": 64,
+          "农民": 28,
+          "钱庄职员": 41,
+          "商人": 145,
+          "医生": 51,
+          "官员": 83,
+          "驾驶员": 47,
+          "老师": 34,
+          "警察": 22,
+          "工人": 75,
+          "搬运工": 17,
+          "科研员": 7,
+          "scientist": 2
+        },
+        "stateCounts": {
+          "shopping": 122,
+          "studying": 1,
+          "moving": 133,
+          "reviewingBusiness": 58,
+          "working": 233,
+          "atHome": 27,
+          "riding": 14,
+          "physicalWaiting": 22,
+          "responding": 1,
+          "socializing": 3,
+          "offDuty": 2
+        },
+        "scope": "Saved district.employment values, recorded roster/shift capacities and endpoint states only. No reconstructed isEmployed or fresh Simulation; workId/role, employees, worked minutes and remaining allowance are distinct quantities. Missing publicLabor does not deny legacy public employment."
+      },
+      "companyCapital": {
+        "count": 12,
+        "sum": 885.2029267320213,
+        "preciseSum": 885.2029267320213,
+        "min": 13.678374397893188,
+        "p10": 18.14357174238184,
+        "median": 22.234887394173526,
+        "p90": 82.00871047904248,
+        "max": 533.2320517793265,
+        "mean": 73.76691056100178,
+        "zeroOrNegativeCount": 0,
+        "below6_666666666666667": 0,
+        "companies": [
+          {
+            "id": "company-1",
+            "name": "清溪水岸·西溪院·梯田农舍3商社",
+            "ownerId": "citizen-11",
+            "buildingId": "river-b9",
+            "capital": 22.324391087441125,
+            "inventory": 151,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-2",
+            "name": "清溪水岸·西溪院·商肆5商社",
+            "ownerId": "citizen-176",
+            "buildingId": "river-b17",
+            "capital": 22.14538370090593,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-3",
+            "name": "清溪水岸·南坡院·商肆7商社",
+            "ownerId": "citizen-451",
+            "buildingId": "river-b27",
+            "capital": 21.28801435524347,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-4",
+            "name": "清溪水岸·北岭院·商肆10商社",
+            "ownerId": "citizen-583",
+            "buildingId": "river-b36",
+            "capital": 22.33253368526271,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-5",
+            "name": "清溪水岸·西溪院·渡口12商社",
+            "ownerId": "citizen-66",
+            "buildingId": "river-b45",
+            "capital": 17.79418922984166,
+            "inventory": 107.8522397045669,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-6",
+            "name": "清溪水岸·南坡院·渡口14商社",
+            "ownerId": "citizen-264",
+            "buildingId": "river-b55",
+            "capital": 21.693414833578963,
+            "inventory": 113.06426194585698,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-7",
+            "name": "千灯市集·百味街·商肆2商社",
+            "ownerId": "citizen-166",
+            "buildingId": "market-b7",
+            "capital": 26.512782115969006,
+            "inventory": 78,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-8",
+            "name": "千灯市集·钱庄街·商肆6商社",
+            "ownerId": "citizen-155",
+            "buildingId": "market-b20",
+            "capital": 533.2320517793265,
+            "inventory": 46,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-9",
+            "name": "千灯市集·灯市街·商肆9商社",
+            "ownerId": "citizen-56",
+            "buildingId": "market-b33",
+            "capital": 21.969891014289328,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-10",
+            "name": "千灯市集·钱庄街·商肆13商社",
+            "ownerId": "citizen-474",
+            "buildingId": "market-b48",
+            "capital": 13.678374397893188,
+            "inventory": 86,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-11",
+            "name": "千灯市集·云锦街·商肆16商社",
+            "ownerId": "citizen-1",
+            "buildingId": "market-b62",
+            "capital": 80,
+            "inventory": 90,
+            "employees": 0,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-12",
+            "name": "青铜工坊·铸造院·工坊1商社",
+            "ownerId": "citizen-134",
+            "buildingId": "workshop-b0",
+            "capital": 82.23190053226942,
+            "inventory": 86.66204382897492,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          }
+        ]
+      },
+      "shopOperatingFunds": {
+        "count": 210,
+        "sum": 24628.82449878817,
+        "preciseSum": 24628.824498788177,
+        "min": 0,
+        "p10": 0.0,
+        "median": 32.972681659840255,
+        "p90": 296.6668557483732,
+        "max": 2146.5071066731443,
+        "mean": 117.28011666089608,
+        "activeCompanyBoundShopCount": 12,
+        "scope": "Active company.capital replaces bound shop.cash, exactly per simulation.ts shopFunds; never add company capital to this shop-funds total."
+      },
+      "foodAccess": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "shopFoodUnits": 13409.982228300692,
+        "residentCarriedFoodUnits": 296,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4099.598847040179,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1357.383381260513,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 7953,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4730.121872601485,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 134,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 134,
+        "routeReachability": "NOT_OBSERVED"
+      },
+      "treasury": 64272.87227883457,
+      "playerCash": 600,
+      "bankCash": 800,
+      "loan": 0,
+      "taxesHeldRuntime": 0,
+      "scheduledNextCommerceAt": 5278,
+      "scheduledNextFinanceAt": 5284,
+      "scheduledNextPayrollAt": 5340
+    },
+    "native04ColdImported5276": {
+      "clock": 5276.0,
+      "tick": 2054,
+      "day": 3,
+      "hour": 15.933333333333334,
+      "speed": 16,
+      "residentCount": 616,
+      "aliveResidentCount": 616,
+      "adultNonStudentCount": 552,
+      "residentCash": {
+        "count": 616,
+        "sum": 190398.46115909418,
+        "preciseSum": 190398.46115909424,
+        "min": 65.619842348656,
+        "p10": 158.36717901396244,
+        "median": 297.5555271299204,
+        "p90": 436.80158466351406,
+        "max": 2995.6478859715658,
+        "mean": 309.0884109725556,
+        "negativeCount": 0,
+        "below1": 0,
+        "below20": 0,
+        "below100": 15
+      },
+      "hunger": {
+        "count": 616,
+        "sum": 42501.98722944402,
+        "preciseSum": 42501.98722944397,
+        "min": 0,
+        "p10": 21.849999999999852,
+        "median": 78.49999999999989,
+        "p90": 97.59999999999997,
+        "max": 100,
+        "mean": 68.99673251533112,
+        "below20": 48,
+        "below30": 134,
+        "below48": 138,
+        "at0": 1
+      },
+      "employment": {
+        "savedDistricts": [
+          {
+            "id": "river",
+            "savedEmployment": 0.66,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 33.0,
+            "savedProsperity": 65.56706666666574
+          },
+          {
+            "id": "market",
+            "savedEmployment": 0.68,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 34.0,
+            "savedProsperity": 65.34899999999917
+          },
+          {
+            "id": "workshop",
+            "savedEmployment": 0.86,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 43.0,
+            "savedProsperity": 65.57838297872229
+          },
+          {
+            "id": "west",
+            "savedEmployment": 0.64,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 32.0,
+            "savedProsperity": 67.1855789473674
+          },
+          {
+            "id": "academy",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 52,
+            "savedRateTimesEndpointAdultCount": 52,
+            "savedProsperity": 68
+          },
+          {
+            "id": "government",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 68
+          },
+          {
+            "id": "core",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 65.00199999999886
+          },
+          {
+            "id": "summit",
+            "savedEmployment": 0.88,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 44.0,
+            "savedProsperity": 70.99333333333261
+          },
+          {
+            "id": "east",
+            "savedEmployment": 0.8,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 40.0,
+            "savedProsperity": 68.04399999999895
+          },
+          {
+            "id": "airport",
+            "savedEmployment": 0.86,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 43.0,
+            "savedProsperity": 65.90058333333307
+          },
+          {
+            "id": "starport",
+            "savedEmployment": 0.7,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 35.0,
+            "savedProsperity": 65.00199999999886
+          }
+        ],
+        "savedDistrictEmploymentWeightedByEndpointAdultCount": 0.8260869565217391,
+        "shopEmployeesReported": 265,
+        "shopRosterMembersAdultNonStudent": 265,
+        "publicOrNonShopWorkIdsAdultNonStudent": 287,
+        "workingStateResidents": 233,
+        "unemployedStateResidents": 0,
+        "offDutyStateResidents": 2,
+        "currentDayPrivateShiftCount": 126,
+        "currentDayPrivateAssignmentCount": 247,
+        "currentDayPrivateAssignedCitizens": 247,
+        "currentDayPrivateAssignmentsWithRemainingAllowance": 171,
+        "currentDayPrivateAssignmentsWithWorkedMinutes": 224,
+        "currentDayPrivateAssignedMinutesCap": 71706,
+        "currentDayPrivateWorkedMinutes": 51315.67420924385,
+        "publicLaborSerialized": false,
+        "roleCounts": {
+          "学生": 64,
+          "农民": 28,
+          "钱庄职员": 41,
+          "商人": 145,
+          "医生": 51,
+          "官员": 83,
+          "驾驶员": 47,
+          "老师": 34,
+          "警察": 22,
+          "工人": 75,
+          "搬运工": 17,
+          "科研员": 7,
+          "scientist": 2
+        },
+        "stateCounts": {
+          "shopping": 122,
+          "studying": 1,
+          "moving": 133,
+          "reviewingBusiness": 58,
+          "working": 233,
+          "atHome": 27,
+          "riding": 14,
+          "physicalWaiting": 22,
+          "responding": 1,
+          "socializing": 3,
+          "offDuty": 2
+        },
+        "scope": "Saved district.employment values, recorded roster/shift capacities and endpoint states only. No reconstructed isEmployed or fresh Simulation; workId/role, employees, worked minutes and remaining allowance are distinct quantities. Missing publicLabor does not deny legacy public employment."
+      },
+      "companyCapital": {
+        "count": 12,
+        "sum": 885.2029267320213,
+        "preciseSum": 885.2029267320213,
+        "min": 13.678374397893188,
+        "p10": 18.14357174238184,
+        "median": 22.234887394173526,
+        "p90": 82.00871047904248,
+        "max": 533.2320517793265,
+        "mean": 73.76691056100178,
+        "zeroOrNegativeCount": 0,
+        "below6_666666666666667": 0,
+        "companies": [
+          {
+            "id": "company-1",
+            "name": "清溪水岸·西溪院·梯田农舍3商社",
+            "ownerId": "citizen-11",
+            "buildingId": "river-b9",
+            "capital": 22.324391087441125,
+            "inventory": 151,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-2",
+            "name": "清溪水岸·西溪院·商肆5商社",
+            "ownerId": "citizen-176",
+            "buildingId": "river-b17",
+            "capital": 22.14538370090593,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-3",
+            "name": "清溪水岸·南坡院·商肆7商社",
+            "ownerId": "citizen-451",
+            "buildingId": "river-b27",
+            "capital": 21.28801435524347,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-4",
+            "name": "清溪水岸·北岭院·商肆10商社",
+            "ownerId": "citizen-583",
+            "buildingId": "river-b36",
+            "capital": 22.33253368526271,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-5",
+            "name": "清溪水岸·西溪院·渡口12商社",
+            "ownerId": "citizen-66",
+            "buildingId": "river-b45",
+            "capital": 17.79418922984166,
+            "inventory": 107.8522397045669,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-6",
+            "name": "清溪水岸·南坡院·渡口14商社",
+            "ownerId": "citizen-264",
+            "buildingId": "river-b55",
+            "capital": 21.693414833578963,
+            "inventory": 113.06426194585698,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-7",
+            "name": "千灯市集·百味街·商肆2商社",
+            "ownerId": "citizen-166",
+            "buildingId": "market-b7",
+            "capital": 26.512782115969006,
+            "inventory": 78,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-8",
+            "name": "千灯市集·钱庄街·商肆6商社",
+            "ownerId": "citizen-155",
+            "buildingId": "market-b20",
+            "capital": 533.2320517793265,
+            "inventory": 46,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-9",
+            "name": "千灯市集·灯市街·商肆9商社",
+            "ownerId": "citizen-56",
+            "buildingId": "market-b33",
+            "capital": 21.969891014289328,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-10",
+            "name": "千灯市集·钱庄街·商肆13商社",
+            "ownerId": "citizen-474",
+            "buildingId": "market-b48",
+            "capital": 13.678374397893188,
+            "inventory": 86,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-11",
+            "name": "千灯市集·云锦街·商肆16商社",
+            "ownerId": "citizen-1",
+            "buildingId": "market-b62",
+            "capital": 80,
+            "inventory": 90,
+            "employees": 0,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-12",
+            "name": "青铜工坊·铸造院·工坊1商社",
+            "ownerId": "citizen-134",
+            "buildingId": "workshop-b0",
+            "capital": 82.23190053226942,
+            "inventory": 86.66204382897492,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          }
+        ]
+      },
+      "shopOperatingFunds": {
+        "count": 210,
+        "sum": 24628.82449878817,
+        "preciseSum": 24628.824498788177,
+        "min": 0,
+        "p10": 0.0,
+        "median": 32.972681659840255,
+        "p90": 296.6668557483732,
+        "max": 2146.5071066731443,
+        "mean": 117.28011666089608,
+        "activeCompanyBoundShopCount": 12,
+        "scope": "Active company.capital replaces bound shop.cash, exactly per simulation.ts shopFunds; never add company capital to this shop-funds total."
+      },
+      "foodAccess": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "shopFoodUnits": 13409.982228300692,
+        "residentCarriedFoodUnits": 296,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4099.598847040179,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1357.383381260513,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 7953,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4730.121872601485,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 134,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 134,
+        "routeReachability": "NOT_OBSERVED"
+      },
+      "treasury": 64272.87227883457,
+      "playerCash": 600,
+      "bankCash": 800,
+      "loan": 0,
+      "taxesHeldRuntime": 0,
+      "scheduledNextCommerceAt": 5278,
+      "scheduledNextFinanceAt": 5284,
+      "scheduledNextPayrollAt": 5340
+    },
+    "terminal5340": {
+      "clock": 5340,
+      "tick": 2070,
+      "day": 3,
+      "hour": 17,
+      "speed": 16,
+      "residentCount": 616,
+      "aliveResidentCount": 616,
+      "adultNonStudentCount": 552,
+      "residentCash": {
+        "count": 616,
+        "sum": 200845.9284787359,
+        "preciseSum": 200845.9284787359,
+        "min": 65.619842348656,
+        "p10": 164.20171231605815,
+        "median": 315.5247185307885,
+        "p90": 459.02296161278383,
+        "max": 3101.3547387240656,
+        "mean": 326.0485851927531,
+        "negativeCount": 0,
+        "below1": 0,
+        "below20": 0,
+        "below100": 16
+      },
+      "hunger": {
+        "count": 616,
+        "sum": 42816.98722944404,
+        "preciseSum": 42816.98722944397,
+        "min": 0,
+        "p10": 19.6499999999998,
+        "median": 78.40000000000008,
+        "p90": 96.8,
+        "max": 100,
+        "mean": 69.50809615169476,
+        "below20": 69,
+        "below30": 115,
+        "below48": 118,
+        "at0": 1
+      },
+      "employment": {
+        "savedDistricts": [
+          {
+            "id": "river",
+            "savedEmployment": 0.38,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 19.0,
+            "savedProsperity": 65.50066666666575
+          },
+          {
+            "id": "market",
+            "savedEmployment": 0.6,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 30.0,
+            "savedProsperity": 65.28584210526233
+          },
+          {
+            "id": "workshop",
+            "savedEmployment": 0.8,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 40.0,
+            "savedProsperity": 65.50638297872229
+          },
+          {
+            "id": "west",
+            "savedEmployment": 0.36,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 18.0,
+            "savedProsperity": 67.24621052631477
+          },
+          {
+            "id": "academy",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 52,
+            "savedRateTimesEndpointAdultCount": 52,
+            "savedProsperity": 68
+          },
+          {
+            "id": "government",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 68
+          },
+          {
+            "id": "core",
+            "savedEmployment": 1,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 50,
+            "savedProsperity": 64.92999999999886
+          },
+          {
+            "id": "summit",
+            "savedEmployment": 0.88,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 44.0,
+            "savedProsperity": 71.03333333333262
+          },
+          {
+            "id": "east",
+            "savedEmployment": 0.72,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 36.0,
+            "savedProsperity": 68.12231578947262
+          },
+          {
+            "id": "airport",
+            "savedEmployment": 0.76,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 38.0,
+            "savedProsperity": 65.83908333333308
+          },
+          {
+            "id": "starport",
+            "savedEmployment": 0.7,
+            "observedAdultNonStudentResidents": 50,
+            "savedRateTimesEndpointAdultCount": 35.0,
+            "savedProsperity": 64.92999999999886
+          }
+        ],
+        "savedDistrictEmploymentWeightedByEndpointAdultCount": 0.7463768115942029,
+        "shopEmployeesReported": 265,
+        "shopRosterMembersAdultNonStudent": 265,
+        "publicOrNonShopWorkIdsAdultNonStudent": 287,
+        "workingStateResidents": 217,
+        "unemployedStateResidents": 0,
+        "offDutyStateResidents": 0,
+        "currentDayPrivateShiftCount": 126,
+        "currentDayPrivateAssignmentCount": 247,
+        "currentDayPrivateAssignedCitizens": 247,
+        "currentDayPrivateAssignmentsWithRemainingAllowance": 125,
+        "currentDayPrivateAssignmentsWithWorkedMinutes": 226,
+        "currentDayPrivateAssignedMinutesCap": 73121,
+        "currentDayPrivateWorkedMinutes": 58477.004825961456,
+        "publicLaborSerialized": false,
+        "roleCounts": {
+          "学生": 64,
+          "农民": 28,
+          "钱庄职员": 41,
+          "商人": 144,
+          "医生": 51,
+          "官员": 83,
+          "驾驶员": 47,
+          "老师": 34,
+          "警察": 22,
+          "工人": 75,
+          "搬运工": 17,
+          "科研员": 7,
+          "merchant": 1,
+          "scientist": 2
+        },
+        "stateCounts": {
+          "shopping": 125,
+          "studying": 1,
+          "moving": 144,
+          "reviewingBusiness": 63,
+          "working": 217,
+          "riding": 10,
+          "responding": 8,
+          "atHome": 23,
+          "physicalWaiting": 22,
+          "socializing": 3
+        },
+        "scope": "Saved district.employment values, recorded roster/shift capacities and endpoint states only. No reconstructed isEmployed or fresh Simulation; workId/role, employees, worked minutes and remaining allowance are distinct quantities. Missing publicLabor does not deny legacy public employment."
+      },
+      "companyCapital": {
+        "count": 13,
+        "sum": 949.2038162962212,
+        "preciseSum": 949.2038162962212,
+        "min": 3.931335434239383,
+        "p10": 3.9836428681478586,
+        "median": 5.918627028249809,
+        "p90": 229.62642458947337,
+        "max": 502.76113306259475,
+        "mean": 73.0156781766324,
+        "zeroOrNegativeCount": 0,
+        "below6_666666666666667": 8,
+        "companies": [
+          {
+            "id": "company-1",
+            "name": "清溪水岸·西溪院·梯田农舍3商社",
+            "ownerId": "citizen-11",
+            "buildingId": "river-b9",
+            "capital": 9.94584504171332,
+            "inventory": 150,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-2",
+            "name": "清溪水岸·西溪院·商肆5商社",
+            "ownerId": "citizen-176",
+            "buildingId": "river-b17",
+            "capital": 3.931335434239383,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-3",
+            "name": "清溪水岸·南坡院·商肆7商社",
+            "ownerId": "citizen-451",
+            "buildingId": "river-b27",
+            "capital": 4.080449021910251,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-4",
+            "name": "清溪水岸·北岭院·商肆10商社",
+            "ownerId": "citizen-583",
+            "buildingId": "river-b36",
+            "capital": 3.9594413297072606,
+            "inventory": 85,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-5",
+            "name": "清溪水岸·西溪院·渡口12商社",
+            "ownerId": "citizen-66",
+            "buildingId": "river-b45",
+            "capital": 5.135523066878763,
+            "inventory": 107.8522397045669,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-6",
+            "name": "清溪水岸·南坡院·渡口14商社",
+            "ownerId": "citizen-264",
+            "buildingId": "river-b55",
+            "capital": 6.102151011356843,
+            "inventory": 113.08672804071671,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-7",
+            "name": "千灯市集·百味街·商肆2商社",
+            "ownerId": "citizen-166",
+            "buildingId": "market-b7",
+            "capital": 5.918627028249809,
+            "inventory": 78,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-8",
+            "name": "千灯市集·钱庄街·商肆6商社",
+            "ownerId": "citizen-155",
+            "buildingId": "market-b20",
+            "capital": 502.76113306259475,
+            "inventory": 45,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-9",
+            "name": "千灯市集·灯市街·商肆9商社",
+            "ownerId": "citizen-56",
+            "buildingId": "market-b33",
+            "capital": 4.6908984177981985,
+            "inventory": 84,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-10",
+            "name": "千灯市集·钱庄街·商肆13商社",
+            "ownerId": "citizen-474",
+            "buildingId": "market-b48",
+            "capital": 5.807838503156393,
+            "inventory": 86,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-11",
+            "name": "千灯市集·云锦街·商肆16商社",
+            "ownerId": "citizen-1",
+            "buildingId": "market-b62",
+            "capital": 80,
+            "inventory": 90,
+            "employees": 0,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-12",
+            "name": "青铜工坊·铸造院·工坊1商社",
+            "ownerId": "citizen-134",
+            "buildingId": "workshop-b0",
+            "capital": 49.837543641774744,
+            "inventory": 88.35196645268043,
+            "employees": 1,
+            "shopBindingReleasedAt": null
+          },
+          {
+            "id": "company-13",
+            "name": "林川2百工商社",
+            "ownerId": "citizen-386",
+            "buildingId": "market-b11",
+            "capital": 267.03303073684157,
+            "inventory": 46,
+            "employees": 2,
+            "shopBindingReleasedAt": null
+          }
+        ]
+      },
+      "shopOperatingFunds": {
+        "count": 210,
+        "sum": 19487.693221759153,
+        "preciseSum": 19487.693221759153,
+        "min": 0,
+        "p10": 0.0,
+        "median": 12.857228825848892,
+        "p90": 267.7245071362782,
+        "max": 2169.4825729764584,
+        "mean": 92.79853915123407,
+        "activeCompanyBoundShopCount": 13,
+        "scope": "Active company.capital replaces bound shop.cash, exactly per simulation.ts shopFunds; never add company capital to this shop-funds total."
+      },
+      "foodAccess": {
+        "aliveResidents": 616,
+        "nominalResidentMealsPerDay": 852.9230769230769,
+        "shopFoodUnits": 13385.340939019552,
+        "residentCarriedFoodUnits": 308,
+        "playerCarriedFoodUnits": 0,
+        "bySiteKind": {
+          "farm": {
+            "sites": 31,
+            "open": 31,
+            "inventoryUnits": 4105.661607779905,
+            "employees": 28
+          },
+          "dock": {
+            "sites": 16,
+            "open": 16,
+            "inventoryUnits": 1367.6793312396476,
+            "employees": 17
+          },
+          "market": {
+            "sites": 109,
+            "open": 109,
+            "inventoryUnits": 7912,
+            "employees": 145
+          },
+          "workshop": {
+            "sites": 54,
+            "open": 54,
+            "inventoryUnits": 4779.088942787245,
+            "employees": 75
+          }
+        },
+        "hungryWithoutCarriedFood": 115,
+        "hungryCanAffordAnyStockedOpenFoodOffer": 115,
+        "routeReachability": "NOT_OBSERVED"
+      },
+      "treasury": 58966.536236221225,
+      "playerCash": 600,
+      "bankCash": 800,
+      "loan": 0,
+      "taxesHeldRuntime": 0,
+      "scheduledNextCommerceAt": 5350,
+      "scheduledNextFinanceAt": 5344,
+      "scheduledNextPayrollAt": 6780
+    }
+  },
+  "comparisons": {
+    "wholeCanonicalDay": {
+      "from": "originalMain3900",
+      "to": "terminal5340",
+      "clockMinutes": 1440,
+      "tickDelta": 360,
+      "residentCashDelta": 2866.2418984069373,
+      "residentCashIncreased": 274,
+      "residentCashDecreased": 300,
+      "residentCashUnchanged": 42,
+      "hungerMeanDelta": -11.999331800250388,
+      "hungerBelow30Delta": 101,
+      "carriedFoodUnitsDelta": 57,
+      "shopFoodUnitsDelta": -497.90024697020453,
+      "shopWorkshopMaterialInventoryDelta": -104.4727990821184,
+      "shopEmployeesReportedDelta": 0,
+      "savedWeightedDistrictEmploymentDelta": -0.061594202898550776,
+      "workIdChangedResidents": [],
+      "roleChangedResidents": [
+        "citizen-386"
+      ],
+      "companyCapitalDelta": 392.63346066256634,
+      "addedCompanies": [
+        "company-13"
+      ],
+      "removedCompanies": [],
+      "companyCapitalChanges": [
+        {
+          "id": "company-1",
+          "capitalBefore": 6.999534160813113,
+          "capitalAfter": 9.94584504171332,
+          "deltaCommonCompany": 2.9463108809002065
+        },
+        {
+          "id": "company-10",
+          "capitalBefore": 4.909623450390095,
+          "capitalAfter": 5.807838503156393,
+          "deltaCommonCompany": 0.8982150527662984
+        },
+        {
+          "id": "company-11",
+          "capitalBefore": 80,
+          "capitalAfter": 80,
+          "deltaCommonCompany": 0
+        },
+        {
+          "id": "company-12",
+          "capitalBefore": 37.49268084046697,
+          "capitalAfter": 49.837543641774744,
+          "deltaCommonCompany": 12.344862801307777
+        },
+        {
+          "id": "company-13",
+          "capitalBefore": null,
+          "capitalAfter": 267.03303073684157,
+          "deltaCommonCompany": null
+        },
+        {
+          "id": "company-2",
+          "capitalBefore": 5.538400827443224,
+          "capitalAfter": 3.931335434239383,
+          "deltaCommonCompany": -1.6070653932038415
+        },
+        {
+          "id": "company-3",
+          "capitalBefore": 4.370764927797353,
+          "capitalAfter": 4.080449021910251,
+          "deltaCommonCompany": -0.2903159058871019
+        },
+        {
+          "id": "company-4",
+          "capitalBefore": 5.545003956980897,
+          "capitalAfter": 3.9594413297072606,
+          "deltaCommonCompany": -1.585562627273636
+        },
+        {
+          "id": "company-5",
+          "capitalBefore": 10.857323817465227,
+          "capitalAfter": 5.135523066878763,
+          "deltaCommonCompany": -5.721800750586464
+        },
+        {
+          "id": "company-6",
+          "capitalBefore": 5.9927034687517695,
+          "capitalAfter": 6.102151011356843,
+          "deltaCommonCompany": 0.10944754260507317
+        },
+        {
+          "id": "company-7",
+          "capitalBefore": 7.538801928359376,
+          "capitalAfter": 5.918627028249809,
+          "deltaCommonCompany": -1.6201749001095678
+        },
+        {
+          "id": "company-8",
+          "capitalBefore": 382.9117652314558,
+          "capitalAfter": 502.76113306259475,
+          "deltaCommonCompany": 119.84936783113898
+        },
+        {
+          "id": "company-9",
+          "capitalBefore": 4.413753023731164,
+          "capitalAfter": 4.6908984177981985,
+          "deltaCommonCompany": 0.2771453940670341
+        }
+      ],
+      "shopOperatingFundsDelta": 2050.4094564387487,
+      "treasuryDelta": -5016.651354851005,
+      "playerCashDelta": 0,
+      "scope": "Endpoint difference only; does not attribute cash to wages alone, prove complete resource flow, income distribution sustainability, legal food routes or 14-day steady state."
+    },
+    "newColdSuffixOnly": {
+      "from": "native04ColdImported5276",
+      "to": "terminal5340",
+      "clockMinutes": 64.0,
+      "tickDelta": 16,
+      "residentCashDelta": 10447.46731964167,
+      "residentCashIncreased": 429,
+      "residentCashDecreased": 43,
+      "residentCashUnchanged": 144,
+      "hungerMeanDelta": 0.5113636363636402,
+      "hungerBelow30Delta": -19,
+      "carriedFoodUnitsDelta": 12,
+      "shopFoodUnitsDelta": -24.641289281140416,
+      "shopWorkshopMaterialInventoryDelta": 48.96707018576035,
+      "shopEmployeesReportedDelta": 0,
+      "savedWeightedDistrictEmploymentDelta": -0.07971014492753625,
+      "workIdChangedResidents": [],
+      "roleChangedResidents": [
+        "citizen-386"
+      ],
+      "companyCapitalDelta": 64.00088956419995,
+      "addedCompanies": [
+        "company-13"
+      ],
+      "removedCompanies": [],
+      "companyCapitalChanges": [
+        {
+          "id": "company-1",
+          "capitalBefore": 22.324391087441125,
+          "capitalAfter": 9.94584504171332,
+          "deltaCommonCompany": -12.378546045727806
+        },
+        {
+          "id": "company-10",
+          "capitalBefore": 13.678374397893188,
+          "capitalAfter": 5.807838503156393,
+          "deltaCommonCompany": -7.870535894736795
+        },
+        {
+          "id": "company-11",
+          "capitalBefore": 80,
+          "capitalAfter": 80,
+          "deltaCommonCompany": 0
+        },
+        {
+          "id": "company-12",
+          "capitalBefore": 82.23190053226942,
+          "capitalAfter": 49.837543641774744,
+          "deltaCommonCompany": -32.39435689049468
+        },
+        {
+          "id": "company-13",
+          "capitalBefore": null,
+          "capitalAfter": 267.03303073684157,
+          "deltaCommonCompany": null
+        },
+        {
+          "id": "company-2",
+          "capitalBefore": 22.14538370090593,
+          "capitalAfter": 3.931335434239383,
+          "deltaCommonCompany": -18.21404826666655
+        },
+        {
+          "id": "company-3",
+          "capitalBefore": 21.28801435524347,
+          "capitalAfter": 4.080449021910251,
+          "deltaCommonCompany": -17.207565333333218
+        },
+        {
+          "id": "company-4",
+          "capitalBefore": 22.33253368526271,
+          "capitalAfter": 3.9594413297072606,
+          "deltaCommonCompany": -18.37309235555545
+        },
+        {
+          "id": "company-5",
+          "capitalBefore": 17.79418922984166,
+          "capitalAfter": 5.135523066878763,
+          "deltaCommonCompany": -12.658666162962897
+        },
+        {
+          "id": "company-6",
+          "capitalBefore": 21.693414833578963,
+          "capitalAfter": 6.102151011356843,
+          "deltaCommonCompany": -15.591263822222121
+        },
+        {
+          "id": "company-7",
+          "capitalBefore": 26.512782115969006,
+          "capitalAfter": 5.918627028249809,
+          "deltaCommonCompany": -20.594155087719198
+        },
+        {
+          "id": "company-8",
+          "capitalBefore": 533.2320517793265,
+          "capitalAfter": 502.76113306259475,
+          "deltaCommonCompany": -30.470918716731774
+        },
+        {
+          "id": "company-9",
+          "capitalBefore": 21.969891014289328,
+          "capitalAfter": 4.6908984177981985,
+          "deltaCommonCompany": -17.27899259649113
+        }
+      ],
+      "shopOperatingFundsDelta": -5141.131277029024,
+      "treasuryDelta": -5306.336042613344,
+      "playerCashDelta": 0,
+      "scope": "Endpoint difference only; does not attribute cash to wages alone, prove complete resource flow, income distribution sustainability, legal food routes or 14-day steady state."
+    }
+  },
+  "originalTerminalSuffixObservation": {
+    "foodAccess": {
+      "aliveResidents": 616,
+      "nominalResidentMealsPerDay": 852.9230769230769,
+      "nominalDemandScope": "Current NPC hunger decay .05 per game minute divided by one meal recovery 52; theoretical daily demand, not measured consumption or a sustainability verdict.",
+      "shopFoodUnits": 13385.340939019552,
+      "residentCarriedFoodUnits": 308,
+      "playerCarriedFoodUnits": 0,
+      "bySiteKind": {
+        "farm": {
+          "sites": 31,
+          "open": 31,
+          "inventoryUnits": 4105.661607779905,
+          "employees": 28
+        },
+        "dock": {
+          "sites": 16,
+          "open": 16,
+          "inventoryUnits": 1367.6793312396476,
+          "employees": 17
+        },
+        "market": {
+          "sites": 109,
+          "open": 109,
+          "inventoryUnits": 7912,
+          "employees": 145
+        },
+        "workshop": {
+          "sites": 54,
+          "open": 54,
+          "inventoryUnits": 4779.088942787245,
+          "employees": 75
+        }
+      },
+      "hungryWithoutCarriedFood": 115,
+      "hungryCanAffordAnyStockedOpenFoodOffer": 115,
+      "routeReachability": "NOT_OBSERVED",
+      "inventoryScope": "Shop inventories and personal carried food only; excludes freight custody, ingredients, dishes and separate company stores. Consignment lots are ownership records already included in shop inventory and are not counted twice."
+    },
+    "totals": {
+      "foodProduced": 17.358710718860554,
+      "materialProduced": 72.00707018575996,
+      "storedMeals": 8,
+      "counterMeals": 50,
+      "playerMeals": 0,
+      "npcEarned": 1014.7164857631631,
+      "npcPaid": 12030.179138605872,
+      "publicNpcPaid": 6387.912931100724,
+      "privateNpcPaid": 5642.266207505125,
+      "npcPaymentCount": 438,
+      "canonicalEarnedCount": 690,
+      "fullSettlementCount": 438,
+      "fiscalEvents": -5356.336042612645,
+      "fiscalLedger": 50,
+      "fiscalLifecycle": 0
+    },
+    "maximumResidual": {
+      "cash": 9.89530235528946e-10,
+      "food": 1.8189894035458565e-12,
+      "debt": 1.0913936421275139e-11,
+      "fiscal": 6.994014256633818e-10
+    },
+    "publicBudget": {
+      "cash": 58966.536236221225,
+      "publicWagesDue": 0,
+      "publicWagesEarned": 0,
+      "forecastPayroll": 12600.686693333251,
+      "reservedPayroll": 0,
+      "essentialOperations": 2410.56,
+      "reserve": 15011.24669333325,
+      "authorizedRemaining": 0,
+      "available": 43955.28954288797
+    },
+    "steadyStateClaimed": false,
+    "literalJobs76Claimed": false,
+    "initialFarm120IsUniversalHiringBan": false
+  }
+}

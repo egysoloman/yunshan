@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-07T08:12:42.851068+00:00",
+  "endedAt": "2026-10-07T08:12:43.336755+00:00",
+  "argv": [
+    "node",
+    "--import",
+    "tsx",
+    "/workspace/yunshan-work/ROOT25-reference-visual-20261007-01/plan/V6-ORIGINAL-JOURNEY-COMPARE.mts"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 417,
+  "inputsStable": true,
+  "rawSHA256": "416c5c31bf16d30188e61816b97445bb2aabce47b385661ad9f0797043faa33b",
+  "ownedPid": 27507,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 27515,
+      "state": "Z",
+      "parent": 1,
+      "group": 27507,
+      "session": 27507,
+      "startTicks": 1686545
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

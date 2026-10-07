@@ -1,0 +1,285 @@
+{
+  "capturedAtUTC": "2026-10-07T08:53:32.490934+00:00",
+  "method": "Read-only originals, gzip/hash checks; 0 Sim, 0 step, 0 browser execution.",
+  "nativeOutputRoot": "/tmp/ROOT25-reference-browser-originals/native03",
+  "resultExistsAtRead": false,
+  "completedActionFilesAtRead": 28,
+  "meaning": "Only the two completed local action receipts and existing capture originals below. Overall gate, exit, save and normal URL remain PENDING until their actual originals and terminal receipts.",
+  "artStatus": "ART_FAIL retained from root actual image review; no art PASS inferred.",
+  "actions": [
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.action.json",
+      "bytes": 7199,
+      "SHA256": "ea77985dca739f76beff2a821e472675cb1c797bbf9c08285fae2d016c1ffc1a",
+      "id": "00017-E-enter-actual-market",
+      "label": "E-enter-actual-market",
+      "status": "PASS",
+      "requestedInput": {
+        "kind": "real DOM keyboard",
+        "code": "KeyE",
+        "requestedInsideId": "market-b26"
+      },
+      "tickDelta": 0,
+      "bodyMetres": 2.931203897352714,
+      "realFrameCount": 4,
+      "before": {
+        "tick": 200,
+        "body": {
+          "x": -281.6119685714569,
+          "y": 80.4,
+          "z": 401.9054066665991
+        },
+        "insideId": null,
+        "paused": true
+      },
+      "after": {
+        "tick": 200,
+        "body": {
+          "x": -282,
+          "y": 80.4,
+          "z": 399
+        },
+        "insideId": "market-b26",
+        "paused": true
+      },
+      "beforeFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.before.save.json.gz",
+        "path": "00017-E-enter-actual-market.before.save.json.gz",
+        "bytes": 354282,
+        "SHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+        "encoding": "gzip",
+        "decodedBytes": 2183690,
+        "decodedSHA256": "78db3c3eaa89706f9f4b5a76bd012a90ba14216378c0f5716ceb96ea8bd0dc9c",
+        "completeExportSave": true,
+        "actualSHA256": "767f5190f6d8febe89f2a9eba0033b2f6a041cc1f911cde4a1f9c786bff18207",
+        "actualBytes": 354282,
+        "encodedReadbackExact": true,
+        "actualDecodedSHA256": "78db3c3eaa89706f9f4b5a76bd012a90ba14216378c0f5716ceb96ea8bd0dc9c",
+        "actualDecodedBytes": 2183690,
+        "decodedReadbackExact": true
+      },
+      "afterFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/00017-E-enter-actual-market.after.save.json.gz",
+        "path": "00017-E-enter-actual-market.after.save.json.gz",
+        "bytes": 354252,
+        "SHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+        "encoding": "gzip",
+        "decodedBytes": 2183631,
+        "decodedSHA256": "f746eff85be5f217f40b027ac7735692608438630c91675ff478bd2612b4cade",
+        "completeExportSave": true,
+        "actualSHA256": "f1f21c66afdb45c3cbebdad3eb5314ba6869a221ccc4b83f91c8695e41a111df",
+        "actualBytes": 354252,
+        "encodedReadbackExact": true,
+        "actualDecodedSHA256": "f746eff85be5f217f40b027ac7735692608438630c91675ff478bd2612b4cade",
+        "actualDecodedBytes": 2183631,
+        "decodedReadbackExact": true
+      },
+      "failure": null
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.action.json",
+      "bytes": 10867,
+      "SHA256": "92c66e60683c27b28642e62f3511b8e97b8e15ecd4d7db31a2b8a21b7e034b73",
+      "id": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO",
+      "label": "ACTUAL-SHOP-UI-PURCHASE-TWO",
+      "status": "PASS",
+      "requestedInput": {
+        "kind": "DOM click",
+        "selector": "[data-action=\"purchase-carry\"][data-target=\"market-b26\"]",
+        "quantity": 2
+      },
+      "tickDelta": 0,
+      "bodyMetres": 0,
+      "realFrameCount": 7,
+      "before": {
+        "tick": 360,
+        "body": {
+          "x": -282,
+          "y": 80.4,
+          "z": 393.1766399999848
+        },
+        "insideId": "market-b26",
+        "paused": true
+      },
+      "after": {
+        "tick": 360,
+        "body": {
+          "x": -282,
+          "y": 80.4,
+          "z": 393.1766399999848
+        },
+        "insideId": "market-b26",
+        "paused": true
+      },
+      "beforeFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.before.save.json.gz",
+        "path": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO.before.save.json.gz",
+        "bytes": 372561,
+        "SHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "encoding": "gzip",
+        "decodedBytes": 2337450,
+        "decodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "completeExportSave": true,
+        "actualSHA256": "b52f5fdad23544b7dab6b56bc6728407a6b24b1c956f7c292d1b1eb70655117e",
+        "actualBytes": 372561,
+        "encodedReadbackExact": true,
+        "actualDecodedSHA256": "7b251be2a0bc43e254ffc734525e3d597312e0f234e6bcf228ce9b0acc9a4819",
+        "actualDecodedBytes": 2337450,
+        "decodedReadbackExact": true
+      },
+      "afterFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/00027-ACTUAL-SHOP-UI-PURCHASE-TWO.after.save.json.gz",
+        "path": "00027-ACTUAL-SHOP-UI-PURCHASE-TWO.after.save.json.gz",
+        "bytes": 372683,
+        "SHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+        "encoding": "gzip",
+        "decodedBytes": 2337761,
+        "decodedSHA256": "41f086c442c109a2b24c919a2979e835aa8ecb0145b1503e798ee3654b7f0937",
+        "completeExportSave": true,
+        "actualSHA256": "7e79a2f105d840a9e6d688a784385c72d5a27f8423f5be87dd0e42562c4e614f",
+        "actualBytes": 372683,
+        "encodedReadbackExact": true,
+        "actualDecodedSHA256": "41f086c442c109a2b24c919a2979e835aa8ecb0145b1503e798ee3654b7f0937",
+        "actualDecodedBytes": 2337761,
+        "decodedReadbackExact": true
+      },
+      "failure": null
+    }
+  ],
+  "purchaseProof": {
+    "path": "/tmp/ROOT25-reference-browser-originals/native03/ACTUAL-SHOP-PURCHASE-PROOF.json",
+    "bytes": 1355,
+    "SHA256": "16d580e179236cab589b04abbbc5387f0c1bc0deeb44162e67d2c1995ad7ced7",
+    "original": {
+      "quantity": 2,
+      "cost": 22.945830842826787,
+      "buyerCashBefore": 600,
+      "buyerCashAfter": 577.0541691571732,
+      "stockBefore": 90,
+      "stockAfter": 88,
+      "foodBefore": 0,
+      "foodAfter": 1,
+      "hungerBefore": 81.84999999999775,
+      "hungerAfter": 100,
+      "shopBefore": {
+        "id": "shop-market-b26",
+        "buildingId": "market-b26",
+        "districtId": "market",
+        "inventory": 90,
+        "price": 11.472915421413393,
+        "revenue": 0,
+        "profit": 0,
+        "customers": 0,
+        "open": true,
+        "employees": 1,
+        "ownerId": "citizen-298",
+        "cash": 52.480365440715104
+      },
+      "shopAfter": {
+        "id": "shop-market-b26",
+        "buildingId": "market-b26",
+        "districtId": "market",
+        "inventory": 88,
+        "price": 11.472915421413393,
+        "revenue": 22.945830842826787,
+        "profit": 13.110164375400643,
+        "customers": 2,
+        "open": true,
+        "employees": 1,
+        "ownerId": "citizen-298",
+        "cash": 73.59052981611575
+      },
+      "latestNativeNotice": {
+        "id": 10,
+        "tick": 360,
+        "type": "purchase",
+        "text": "在千灯市集·云锦街·商肆7购买2份食物，花费22.9云币。"
+      },
+      "tickBefore": 360,
+      "tickAfter": 360,
+      "scope": "Actual native UI purchase while natively paused, finite buyer cash and shop inventory. One eaten plus one carried; complete before/after exportSave files contain all settlement/consignment/tax effects."
+    }
+  },
+  "captures": [
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.capture.json",
+      "SHA256": "b6e4c353f762b233c9486c602f6e1343af213138132c146ae4972368ba200f2f",
+      "label": "ACTUAL-BIRTH-CAMERA",
+      "imageFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+        "path": "capture-01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+        "bytes": 782723,
+        "SHA256": "94006c773af09fe2e63fea232778d4a18014aa2cb51f0cc1392e6ae408dc5e81",
+        "actualSHA256": "94006c773af09fe2e63fea232778d4a18014aa2cb51f0cc1392e6ae408dc5e81",
+        "actualBytes": 782723,
+        "encodedReadbackExact": true
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.capture.json",
+      "SHA256": "b0b6c94a91fe65f178365d7797b6eb9eaa0fe840569bdd6e14f484434e5950b8",
+      "label": "REAL-WALK-MARKET-DOOR",
+      "imageFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+        "path": "capture-02-REAL-WALK-MARKET-DOOR.ORIGINAL.png",
+        "bytes": 760502,
+        "SHA256": "cdedfeca59e66dea2ff36836b1903a88657c917b0adc36e40beeaf7ed2cbcf69",
+        "actualSHA256": "cdedfeca59e66dea2ff36836b1903a88657c917b0adc36e40beeaf7ed2cbcf69",
+        "actualBytes": 760502,
+        "encodedReadbackExact": true
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.capture.json",
+      "SHA256": "8a32d8073ec6580f637e58dbbac5c2ca88a21877de662a27778ee809709a94a6",
+      "label": "ACTUAL-E-MARKET-INTERIOR",
+      "imageFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/capture-03-ACTUAL-E-MARKET-INTERIOR.ORIGINAL.png",
+        "path": "capture-03-ACTUAL-E-MARKET-INTERIOR.ORIGINAL.png",
+        "bytes": 726565,
+        "SHA256": "dece581dab3d60c45ea905751506047a66888fe7159d4406f6aea41e266e2a41",
+        "actualSHA256": "dece581dab3d60c45ea905751506047a66888fe7159d4406f6aea41e266e2a41",
+        "actualBytes": 726565,
+        "encodedReadbackExact": true
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.capture.json",
+      "SHA256": "a0cc57b41fe3b3c21733504e040c739dd191224dbcbbdbf81a855bf74fccc1cb",
+      "label": "REAL-WALK-SALE-POINT",
+      "imageFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/capture-04-REAL-WALK-SALE-POINT.ORIGINAL.png",
+        "path": "capture-04-REAL-WALK-SALE-POINT.ORIGINAL.png",
+        "bytes": 630910,
+        "SHA256": "9461c05c894c7e62e36e8744a41f732c21b122ca7d8618e6a222290edd3f6860",
+        "actualSHA256": "9461c05c894c7e62e36e8744a41f732c21b122ca7d8618e6a222290edd3f6860",
+        "actualBytes": 630910,
+        "encodedReadbackExact": true
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    },
+    {
+      "path": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.capture.json",
+      "SHA256": "bf8191cb42e10faaedf76064398efa387761e9a1f163c06872df1ad4ac287d29",
+      "label": "ACTUAL-PURCHASED-MARKET-UI",
+      "imageFile": {
+        "absolutePath": "/tmp/ROOT25-reference-browser-originals/native03/capture-05-ACTUAL-PURCHASED-MARKET-UI.ORIGINAL.png",
+        "path": "capture-05-ACTUAL-PURCHASED-MARKET-UI.ORIGINAL.png",
+        "bytes": 630565,
+        "SHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3",
+        "actualSHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3",
+        "actualBytes": 630565,
+        "encodedReadbackExact": true
+      },
+      "completeSaveUnchanged": true,
+      "cameraUnchanged": true
+    }
+  ]
+}

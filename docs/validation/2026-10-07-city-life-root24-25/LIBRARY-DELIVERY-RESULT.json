@@ -1,0 +1,172 @@
+{
+  "status": "FAILED_BEFORE_PREPARATION",
+  "at": "2026-10-07T09:18:05.382491+00:00",
+  "request": "First and only ROOT24-25 whole ordered batch",
+  "attemptedFiles": 21,
+  "exitCode": 1,
+  "newLibraryIDs": [],
+  "newFileIDs": [],
+  "memoReplacementConfirmed": false,
+  "deliveryConfirmed": false,
+  "userFacingReason": "Library文件保存未完成；本轮未返回任何新文件ID。",
+  "technicalReceipt": {
+    "stdoutBytes": 0,
+    "stderrBytes": 70,
+    "stderrSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+    "reason": "hosted apps tools/list network request failed before prepared uploads"
+  },
+  "retries": 0,
+  "directFallbackWrites": 0,
+  "perItemResults": [
+    {
+      "index": 0,
+      "file": "开发备忘录.md",
+      "purpose": "replace_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "7c2028955af1850557ce95cb36fa5fe20d3be88c3d141994ca842d48df5a1709"
+    },
+    {
+      "index": 1,
+      "file": "ROOT24-25阶段报告.md",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "565b5824a2f37cdea8f8472ed463046a084e93612d27ece64c2b4d4b6ccb40fc"
+    },
+    {
+      "index": 2,
+      "file": "HANDOFF.md",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "60926f49aeecba55e3003699e6b3aa1c5e8fcdf465db2e8ccff3eab53b6bfea5"
+    },
+    {
+      "index": 3,
+      "file": "REQUIREMENTS-38.csv",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "ee748f101834c477549f18584d61fd423764813619a22f277ef46973b43084a1"
+    },
+    {
+      "index": 4,
+      "file": "交付说明.md",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "8e2bc3429c1c037487529edce07a412ee24c86358938bfaa3d4fae05ecf36d18"
+    },
+    {
+      "index": 5,
+      "file": "ROOT24-ECONOMY-ENDPOINTS.png",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "2bfd1a3473d761664c64d444552f4ae6cf18f7dd520b250f597658647cbdf3b2"
+    },
+    {
+      "index": 6,
+      "file": "normal-default01-ACTUAL-BIRTH-CAMERA.ORIGINAL.png",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "d00658fb45eb01b94a09f8acc5ee2a1b93d16a4612b41735f415da3ffc53ec65"
+    },
+    {
+      "index": 7,
+      "file": "capture-05-ACTUAL-PURCHASED-MARKET-UI.ORIGINAL.png",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "600294193f500edf34405bfc2c324e03637dc7db1fe9cebb6d501241c53948e3"
+    },
+    {
+      "index": 8,
+      "file": "capture-06-ACTUAL-E-EXIT-STREET.ORIGINAL.png",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "c3ba2b6e94f312ae4d2fd150d6154a9d46b3c2b29610bcdbd9ee8bc014fc5ebb"
+    },
+    {
+      "index": 9,
+      "file": "ROOT24-25-REPORTS-SCREENSHOTS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "4b12d02f330fba7c3674ff433d5622e66ee99f6cd6b2c9f95ee5df7de867bedb"
+    },
+    {
+      "index": 10,
+      "file": "ROOT25-SOURCE-FINAL-41703.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "781684660a9b131760d778c0003acaf615a36e736a7f7a51371b7e55748d799c"
+    },
+    {
+      "index": 11,
+      "file": "ROOT25-SOURCE-41702.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "f734dc58c5d91d7442e349e251598cdab4828b1ce9b25a22c820c41d698715e3"
+    },
+    {
+      "index": 12,
+      "file": "ROOT25-BUILD02-ORIGINAL.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "c2b6153893621755d6aa3902403ea3cd0e16a04de4a49a0b09551512a39f8c22"
+    },
+    {
+      "index": 13,
+      "file": "ROOT25-BUILD01-ORIGINAL.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "260bdf1d1add932ab7abafd737da3f2c1039c3c1621b7bafa9639b5884bf5842"
+    },
+    {
+      "index": 14,
+      "file": "ROOT25-BROWSER01-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "ee4631f55461fb0cd6bee55f0cb84419a2dbc11d711be74889903816ee9d8c79"
+    },
+    {
+      "index": 15,
+      "file": "ROOT25-BROWSER02-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "65f4f0533cd7ab6f771b1605c545591479bc8f48ad8a3228dc3f131e4b7dc220"
+    },
+    {
+      "index": 16,
+      "file": "ROOT25-BROWSER03-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "30b1be76ee723ab7e47fac7dff8304c71c2fa25536d2fcf71ab3cee781afd7cb"
+    },
+    {
+      "index": 17,
+      "file": "ROOT25-NORMAL-DEFAULT01-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "8ad6323c8fd1f57f757abb5a333d25d80d1d35924c512912152fe27fd67a7134"
+    },
+    {
+      "index": 18,
+      "file": "ROOT25-GEOMETRY-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "4cce0d191e61b1101764b1b304e5e644eb36d8ab6e8d4c8be24d7113fecdf53e"
+    },
+    {
+      "index": 19,
+      "file": "ROOT24-SELECTED-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "767e2ca3f67f663f0b694751d9a22bac8f0eaef7fae317ab948b73b82cd0daee"
+    },
+    {
+      "index": 20,
+      "file": "ROOT24-ALL-ECONOMY-ORIGINALS.zip",
+      "purpose": "create_library_file",
+      "status": "NOT_SAVED_NO_LIBRARY_ID_RETURNED",
+      "SHA256": "73e23e666f21e248e6d5f68f1a6f5d0f95e7ecc919609c58ec30a458531d3fbc"
+    }
+  ],
+  "completeEconomicArchiveDelivered": false,
+  "completeEconomicArchiveLocalSHA256": "73e23e666f21e248e6d5f68f1a6f5d0f95e7ecc919609c58ec30a458531d3fbc",
+  "gitScope": "Selected economic originals, all captured UI runs, geometry originals, source/build, reports/screenshots; complete 694912550B economic archive is not in Git."
+}

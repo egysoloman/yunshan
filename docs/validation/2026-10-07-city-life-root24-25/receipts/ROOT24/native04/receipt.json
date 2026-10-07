@@ -1,0 +1,40 @@
+{
+  "startedAt": "2026-10-07T07:56:06.116719+00:00",
+  "endedAt": "2026-10-07T07:57:00.217410+00:00",
+  "argv": [
+    "node",
+    "--max-old-space-size=3072",
+    "--import",
+    "tsx",
+    "scripts/economy-resume-actual.ts",
+    "--out",
+    "/tmp/ROOT24-economy-next-day-20261007-01/native04",
+    "--world",
+    "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json",
+    "--save",
+    "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03-checkpoint-344.original.save.json",
+    "--plan",
+    "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/NATIVE04-COLD-CONTINUATION-PLAN.json"
+  ],
+  "exitCode": 0,
+  "timedOut": false,
+  "status": "PASS",
+  "inputCount": 415,
+  "inputsStable": true,
+  "rawSHA256": "4cf0b1113da3d306f9674cafc7710d133e563cc78af10c49ba14a09aff0964dd",
+  "ownedPid": 26519,
+  "observedDescendants": 2,
+  "finalOwnedMembers": [
+    {
+      "pid": 26527,
+      "state": "Z",
+      "parent": 1,
+      "group": 26519,
+      "session": 26519,
+      "startTicks": 1586875
+    }
+  ],
+  "activeDescendants": [],
+  "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+  "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+}

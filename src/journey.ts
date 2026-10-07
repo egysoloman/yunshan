@@ -1,6 +1,8 @@
 import { getFloorDimensions, getStairPosition } from './access';
 import { getAviationPads } from './aviation';
 import { getWalkHeight } from './world';
+import { getPublicStreetBirthWalkHeight, PUBLIC_STREET_BIRTH_CHECK_PARAMETERS } from './geometry/public-street-birth-check';
+import { PUBLIC_STREET_BIRTH_RECIPE_VERSION } from './geometry/public-street-birth';
 import { blocksTransportBarrier } from './transport-geometry';
 import { isRoadOpen, roadExitPermit, roadExitRoute, roadMovementAllowed, roadRevision } from './roads';
 import { blocksMarketCounter, marketCounters, type MarketCounter } from './site-fixtures';
@@ -70,6 +72,25 @@ function walkingAccess(world: WorldDefinition, from: Vec3, state?: SimState): Wa
   const exit=state?roadExitRoute(world,state,'player',from):null;
   if(exit)return {anchors:[{nodeId:exit.exitNodeId,points:exit.points.map(p=>({...p})),edgeIds:[exit.edgeId],metres:metres(exit.points)}],stairsFromFloor:null};
   const roadEdges=world.edges.filter(edge=>walkable(edge)&&(!state||isRoadOpen(state,edge.id))),nodeMap=new Map(world.nodes.map(n=>[n.id,n]));
+  // The new arrival is a real sidewalk connection to its actual doorway.
+  // Projecting its supported body to the old road centreline can send it to
+  // an unsupported outside corner. Restrict this access to the certified
+  // finite strip; all older layouts and other positions keep their logic.
+  const arrival=world.referenceCityRecipe?.arrival;
+  if(Reflect.get(world,'layoutVersion')==='current-v8'&&arrival?.recipe===PUBLIC_STREET_BIRTH_RECIPE_VERSION&&arrival.pathToDoor.length===2){
+    const [birth,door]=arrival.pathToDoor,dx=door.x-birth.x,dz=door.z-birth.z,n=dx*dx+dz*dz;
+    const t=n>0?Math.max(0,Math.min(1,((from.x-birth.x)*dx+(from.z-birth.z)*dz)/n)):0;
+    const stripDistance=Math.hypot(from.x-birth.x-t*dx,from.z-birth.z-t*dz);
+    if(n>0&&stripDistance<=PUBLIC_STREET_BIRTH_CHECK_PARAMETERS.runtimeCorridorDistance&&Math.abs(from.y-(birth.y+t*(door.y-birth.y)))<=.26){
+      const building=world.buildings.find(b=>b.id===arrival.buildingId),edge=roadEdges.find(e=>e.id===arrival.edgeId&&e.mode==='road');
+      const doorNode=world.nodes.find(node=>dist(node.position,door)<1e-7&&edge&&(edge.from===node.id||edge.to===node.id));
+      const supported=getPublicStreetBirthWalkHeight(world,from.x,from.z);
+      if(!building||dist(building.door,door)>1e-7||!edge||!doorNode||supported===null||Math.abs(supported-from.y)>.26)return null;
+      const points:Vec3[]=[{...from}];append(points,door);
+      if(!canJoinRoad(world,from,door,state)||!roadConnectionAllowed(world,state,points))return null;
+      return {anchors:[{nodeId:doorNode.id,points,edgeIds:[edge.id],metres:metres(points)}],stairsFromFloor:null};
+    }
+  }
   const prefix:Vec3[]=[{...from}];let position=from,stairsFromFloor:number|null=null;
   const interior=world.buildings.find(b=>{
     if(b.floorPlanProfile===FLOOR_PLAN_PROFILE)return floorPlanWalkingLevel(b,from)!==null;

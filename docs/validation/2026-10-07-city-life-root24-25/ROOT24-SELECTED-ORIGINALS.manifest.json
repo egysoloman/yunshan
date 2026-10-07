@@ -1,0 +1,2484 @@
+{
+  "status": "PASS_SELECTED_ORIGINAL_BYTES",
+  "archiveBytes": 52850074,
+  "archiveSHA256": "767e2ca3f67f663f0b694751d9a22bac8f0eaef7fae317ab948b73b82cd0daee",
+  "originalFiles": 412,
+  "originalBytes": 67526037,
+  "wholePrefixIncluded": false,
+  "allRetainedArchiveSHA256": "73e23e666f21e248e6d5f68f1a6f5d0f95e7ecc919609c58ec30a458531d3fbc",
+  "originalsReadbackVerified": true,
+  "files": [
+    {
+      "archivePath": "ROOT24-originals/native01/ALL-BUS.jsonl.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/ALL-BUS.jsonl.gz",
+      "bytes": 175,
+      "SHA256": "f1c197caee6a3a0de5382676dde6c3eaed40b8ebe700b4a50814cab3cd42f4b0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/DRIVER-PLAN.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/DRIVER-PLAN.json",
+      "bytes": 1190,
+      "SHA256": "16de6e1b7171f1480b42b8aba77c694443b9d32acf2799684e03a039df202c22"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/FAILURE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/FAILURE.json",
+      "bytes": 26186,
+      "SHA256": "847c980e7309749d51be47db07f38a95a21d990e14069742623370672cba6b4d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/FRAMES.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/FRAMES.json",
+      "bytes": 4405,
+      "SHA256": "3c5d3e38d6a4ea926a331d46445487da59772344466fd25ff958b4782ad341a8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/INHERITED-CUSTODY-BASELINE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/INHERITED-CUSTODY-BASELINE.json",
+      "bytes": 263966,
+      "SHA256": "ccc1a037c6a9b2c1d608bad7af730b01046cddd28406f3f3178b580888ee8cec"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/INPUT-MAIN.original.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/INPUT-MAIN.original.json.gz",
+      "bytes": 515552,
+      "SHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/INPUT-RECEIPTS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/INPUT-RECEIPTS.json",
+      "bytes": 1240,
+      "SHA256": "73f4b15cafb6dbd658d4961a626039ccd3535f0b7e3e602affc88a5e615873a0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/ORIGINAL-INPUT-SHA-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/ORIGINAL-INPUT-SHA-AFTER.json",
+      "bytes": 172,
+      "SHA256": "d3ba6fe5ea9607bc265dc159b109b89f8d726b32d08811a9d6f44c938be693a1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/ROOT-EXECUTION-PLAN.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/ROOT-EXECUTION-PLAN.original.json",
+      "bytes": 2225,
+      "SHA256": "6f15c7d403da41bcad76f3da82e753eaffa3d63751f2a6b87a70392385886448"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/SOURCE-INPUTS-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/SOURCE-INPUTS-AFTER.json",
+      "bytes": 60808,
+      "SHA256": "199665c980f82a9d2b098d0f9a3956d7b38eff586b8af530879f1c7b4080996c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/SOURCE-INPUTS-BEFORE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/SOURCE-INPUTS-BEFORE.json",
+      "bytes": 60808,
+      "SHA256": "199665c980f82a9d2b098d0f9a3956d7b38eff586b8af530879f1c7b4080996c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/World.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/World.original.json",
+      "bytes": 1832308,
+      "SHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0000-constructor/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0000-constructor/FRAME.json",
+      "bytes": 1166,
+      "SHA256": "59802dc8a4d1c870077dc0b02f11de624ff9b1d14c985038388b0e525fc4b5c9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0000-constructor/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0000-constructor/all-bus.json.gz",
+      "bytes": 56,
+      "SHA256": "e306d734c7c213892050f2413d3248e18a6bb7e956fb10c1bbe41629e8b9b3fc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0000-constructor/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0000-constructor/stable-phase-custody.json.gz",
+      "bytes": 240,
+      "SHA256": "740b14c238477d8856a1e3d6b14d3777316c1dd692f26738f0c28da28391fc54"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0000-constructor/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0000-constructor/whole-save.json.gz",
+      "bytes": 90617,
+      "SHA256": "2018385d6115eac20ca95d8625877fc06e5a5803605befc4cde1c25ea10beab2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0001-imported-main/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0001-imported-main/FRAME.json",
+      "bytes": 1181,
+      "SHA256": "dcbb6e635f3ab33ea5e1ddf236cba272dcc5fa3bb3115e7e36cc191dcd38062c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0001-imported-main/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0001-imported-main/all-bus.json.gz",
+      "bytes": 58,
+      "SHA256": "6f091840c0d2e3ce7f68549119eec8e951bb768fc4db08b1b0592623817bc7b1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "bytes": 243,
+      "SHA256": "26866926be186581082c5923d12dabcef8835b138312477c2b19f1bceef5b533"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0001-imported-main/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0001-imported-main/whole-save.json.gz",
+      "bytes": 515552,
+      "SHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0002-failure-frontier/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0002-failure-frontier/FRAME.json",
+      "bytes": 1193,
+      "SHA256": "fbbaf6a796da0a824e5d31d0c87a20feb2c82488ee20eef1a415c8c59b892a66"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0002-failure-frontier/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0002-failure-frontier/all-bus.json.gz",
+      "bytes": 61,
+      "SHA256": "0243bd83a18f4ab4bc36d8c056189af055c2691c325c37344da2c8ffd8cac56a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0002-failure-frontier/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0002-failure-frontier/stable-phase-custody.json.gz",
+      "bytes": 243,
+      "SHA256": "4c1b331af3eb28c6bfc74670c46ef9386c88bac5db0357d5c0a29056353e953a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native01/frames/0002-failure-frontier/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native01/frames/0002-failure-frontier/whole-save.json.gz",
+      "bytes": 515571,
+      "SHA256": "08e59f2fc92e28340ee63bd55a4f8875699fa946fbb05c1bfe4201ab2492decb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/ALL-BUS.jsonl.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/ALL-BUS.jsonl.gz",
+      "bytes": 63571,
+      "SHA256": "1eff135f244efe52028229074aae198a88e6ad53db488e66da0f8c3c1c4f4328"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/DRIVER-PLAN.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/DRIVER-PLAN.json",
+      "bytes": 1190,
+      "SHA256": "16de6e1b7171f1480b42b8aba77c694443b9d32acf2799684e03a039df202c22"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/FAILURE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/FAILURE.json",
+      "bytes": 11713,
+      "SHA256": "305d2e3d9592cd0c255e9b0ca7917f09ac13fdb05a0e6525d5df286277e629fb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/FRAMES.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/FRAMES.json",
+      "bytes": 10795,
+      "SHA256": "b81c4aada7108396977c707665de16c10f2ceb4741d2a18b925e8203182d476a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/INHERITED-CUSTODY-BASELINE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/INHERITED-CUSTODY-BASELINE.json",
+      "bytes": 263966,
+      "SHA256": "ccc1a037c6a9b2c1d608bad7af730b01046cddd28406f3f3178b580888ee8cec"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/INPUT-MAIN.original.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/INPUT-MAIN.original.json.gz",
+      "bytes": 515552,
+      "SHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/INPUT-RECEIPTS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/INPUT-RECEIPTS.json",
+      "bytes": 1240,
+      "SHA256": "73f4b15cafb6dbd658d4961a626039ccd3535f0b7e3e602affc88a5e615873a0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/ONLY-PUBLIC-COMMAND.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/ONLY-PUBLIC-COMMAND.json",
+      "bytes": 646,
+      "SHA256": "7206d9695c800041ce27f59454948301dc2b677cb72f9f08c77e7af43b46c2a9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/ORIGINAL-INPUT-SHA-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/ORIGINAL-INPUT-SHA-AFTER.json",
+      "bytes": 172,
+      "SHA256": "d3ba6fe5ea9607bc265dc159b109b89f8d726b32d08811a9d6f44c938be693a1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/ROOT-EXECUTION-PLAN.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/ROOT-EXECUTION-PLAN.original.json",
+      "bytes": 2225,
+      "SHA256": "6f15c7d403da41bcad76f3da82e753eaffa3d63751f2a6b87a70392385886448"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/SOURCE-INPUTS-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/SOURCE-INPUTS-AFTER.json",
+      "bytes": 60808,
+      "SHA256": "400d6066d4c5afa0ca69106a5bba54b4e060e38086d4fed82f897c8907f7c196"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/SOURCE-INPUTS-BEFORE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/SOURCE-INPUTS-BEFORE.json",
+      "bytes": 60808,
+      "SHA256": "400d6066d4c5afa0ca69106a5bba54b4e060e38086d4fed82f897c8907f7c196"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/World.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/World.original.json",
+      "bytes": 1832308,
+      "SHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0000-constructor/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0000-constructor/FRAME.json",
+      "bytes": 1166,
+      "SHA256": "59802dc8a4d1c870077dc0b02f11de624ff9b1d14c985038388b0e525fc4b5c9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0000-constructor/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0000-constructor/all-bus.json.gz",
+      "bytes": 56,
+      "SHA256": "e306d734c7c213892050f2413d3248e18a6bb7e956fb10c1bbe41629e8b9b3fc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0000-constructor/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0000-constructor/stable-phase-custody.json.gz",
+      "bytes": 240,
+      "SHA256": "740b14c238477d8856a1e3d6b14d3777316c1dd692f26738f0c28da28391fc54"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0000-constructor/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0000-constructor/whole-save.json.gz",
+      "bytes": 90617,
+      "SHA256": "2018385d6115eac20ca95d8625877fc06e5a5803605befc4cde1c25ea10beab2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0001-imported-main/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0001-imported-main/FRAME.json",
+      "bytes": 1181,
+      "SHA256": "dcbb6e635f3ab33ea5e1ddf236cba272dcc5fa3bb3115e7e36cc191dcd38062c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0001-imported-main/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0001-imported-main/all-bus.json.gz",
+      "bytes": 58,
+      "SHA256": "6f091840c0d2e3ce7f68549119eec8e951bb768fc4db08b1b0592623817bc7b1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "bytes": 243,
+      "SHA256": "26866926be186581082c5923d12dabcef8835b138312477c2b19f1bceef5b533"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0001-imported-main/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0001-imported-main/whole-save.json.gz",
+      "bytes": 515552,
+      "SHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0002-public-speed16/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0002-public-speed16/FRAME.json",
+      "bytes": 1185,
+      "SHA256": "626a6e96d67e54065e55136b383c6352d3b8b32cd598a1e4be38184bf2f111e9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0002-public-speed16/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0002-public-speed16/all-bus.json.gz",
+      "bytes": 59,
+      "SHA256": "3df49917a4ec0c5a7ecb17d39d7ff349000e183f4be894fd4366a439560cba21"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0002-public-speed16/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0002-public-speed16/stable-phase-custody.json.gz",
+      "bytes": 244,
+      "SHA256": "cda54dadbf5405090701d685e81de53599c6b854cb9cf25f0e308ffc9288e102"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0002-public-speed16/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0002-public-speed16/whole-save.json.gz",
+      "bytes": 515571,
+      "SHA256": "08e59f2fc92e28340ee63bd55a4f8875699fa946fbb05c1bfe4201ab2492decb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0003-ordinary-001/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0003-ordinary-001/ANALYSIS.json",
+      "bytes": 1506,
+      "SHA256": "b76e30f72608118e9729b03c531a940862b43d24bbc083fa722c5baffc237941"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0003-ordinary-001/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0003-ordinary-001/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "b0cbb5e85d5c1c56aeda6c898dc2ca33e61b6c15b2d5afc25e0f3cda50458df1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0003-ordinary-001/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0003-ordinary-001/all-bus.json.gz",
+      "bytes": 19970,
+      "SHA256": "16be3aa5483bc9356dabe81098bf4753b343a2f066eae5e942f8e6a7c98d1a64"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0003-ordinary-001/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0003-ordinary-001/stable-phase-custody.json.gz",
+      "bytes": 1149728,
+      "SHA256": "d11b0bbbb5320d3f0428060f6d15ae2868afc8650226d96ebf28c1d668b600ee"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0003-ordinary-001/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0003-ordinary-001/whole-save.json.gz",
+      "bytes": 518095,
+      "SHA256": "5d8845cbee7396474d9b0f84a599b31b96f7bce35bf9e82866e4649b597f27e9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0004-ordinary-002/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0004-ordinary-002/ANALYSIS.json",
+      "bytes": 1506,
+      "SHA256": "9cd16d1c77338a92257fdd7742464803ec26f4b7c28890a7d8733784acd4a608"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0004-ordinary-002/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0004-ordinary-002/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "621f24972b692b1b8cd14adc50836dd5f9c21d92e7960ced75b63e3e861899e5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0004-ordinary-002/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0004-ordinary-002/all-bus.json.gz",
+      "bytes": 18966,
+      "SHA256": "ba850eb25b828377bdd604c6b53f885d690115a95f10a4a5abfd1acd52594303"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0004-ordinary-002/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0004-ordinary-002/stable-phase-custody.json.gz",
+      "bytes": 1170940,
+      "SHA256": "f4db3441c94d412ad8880896d8ffa26a7db66e7d3702cffcd73339b5e283d1e1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0004-ordinary-002/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0004-ordinary-002/whole-save.json.gz",
+      "bytes": 519648,
+      "SHA256": "10d0fbb53ebdcb2fa0a25bfd138900539aa3fdd9f30bbf7a2d42b89b826b69d8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0005-ordinary-003/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0005-ordinary-003/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "899dddc21962bb6fb17804413f7247c20f1d31533772dff3ea01a37a3925e9d9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0005-ordinary-003/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0005-ordinary-003/all-bus.json.gz",
+      "bytes": 24401,
+      "SHA256": "1ab89ef0cbceacc2c995cd27fabd878824776a7733599c98e4f096280458db68"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0005-ordinary-003/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0005-ordinary-003/stable-phase-custody.json.gz",
+      "bytes": 1195609,
+      "SHA256": "2d0588620fa3dc9f8f24ed52699b12a9ea458105be9e84462418c4bf4d098093"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0005-ordinary-003/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0005-ordinary-003/whole-save.json.gz",
+      "bytes": 519958,
+      "SHA256": "f8666ef9191d716eba9e4b799e302e6cb4c0bed63b67b49e478054cb403973d5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0006-failure-frontier/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0006-failure-frontier/FRAME.json",
+      "bytes": 1195,
+      "SHA256": "94b56dd8e02d3d990ea0aded051e4926a205e3d0b6591dde443eefc77fe9eaeb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0006-failure-frontier/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0006-failure-frontier/all-bus.json.gz",
+      "bytes": 61,
+      "SHA256": "0243bd83a18f4ab4bc36d8c056189af055c2691c325c37344da2c8ffd8cac56a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0006-failure-frontier/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0006-failure-frontier/stable-phase-custody.json.gz",
+      "bytes": 846,
+      "SHA256": "013f992695746d71cd2a4434a675ad3fa665c931c240945d14b524f40be6bc06"
+    },
+    {
+      "archivePath": "ROOT24-originals/native02/frames/0006-failure-frontier/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native02/frames/0006-failure-frontier/whole-save.json.gz",
+      "bytes": 519958,
+      "SHA256": "f8666ef9191d716eba9e4b799e302e6cb4c0bed63b67b49e478054cb403973d5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/ALL-BUS.jsonl.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/ALL-BUS.jsonl.gz",
+      "bytes": 373262,
+      "SHA256": "a4f4ec2b19c18995a8b50f17846b3b00d2d2cd84863c6fc47e81ea673a142584"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/DRIVER-PLAN.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/DRIVER-PLAN.json",
+      "bytes": 1190,
+      "SHA256": "16de6e1b7171f1480b42b8aba77c694443b9d32acf2799684e03a039df202c22"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/EXACT-COLD-CONTINUATION.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/EXACT-COLD-CONTINUATION.json",
+      "bytes": 907,
+      "SHA256": "641511bea6a86053789d9814254b6904b823b0b2722750e6d4fab8a762df7066"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/FRAMES.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/FRAMES.json",
+      "bytes": 28778,
+      "SHA256": "295efdc2a922e30f956e137114f585cee8491aa034466b53f4e5f3918351acdb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/INHERITED-CUSTODY-BASELINE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/INHERITED-CUSTODY-BASELINE.json",
+      "bytes": 540947,
+      "SHA256": "849c2702e5c7978040b8fb019dd8452bd94fa5c8716bfafb2d7cd915ceeb9a37"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/INPUT-MAIN.original.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/INPUT-MAIN.original.json.gz",
+      "bytes": 493779,
+      "SHA256": "b771cb9afcc34a02b1850d30a2d83b4a349cdb3ae8b95edd5648aa945df771e7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/INPUT-RECEIPTS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/INPUT-RECEIPTS.json",
+      "bytes": 1262,
+      "SHA256": "9bc9847b650cb0cf59eaf72bc6c93c8e22d20106fac0bde9a28c801aab3e8723"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/ORIGINAL-INPUT-SHA-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/ORIGINAL-INPUT-SHA-AFTER.json",
+      "bytes": 172,
+      "SHA256": "b28b9bb854795e0ec6b73d3beae6e84e230271b2ca32e0bc747e7993fa0be308"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/RESULT.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/RESULT.json",
+      "bytes": 65514,
+      "SHA256": "3f1ca9abb6a9fa9f4d56cb63b843a836d271f995ad42fa66faa64794e9611bf2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/ROOT-EXECUTION-PLAN.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/ROOT-EXECUTION-PLAN.original.json",
+      "bytes": 3917,
+      "SHA256": "0812bc03a4baa6b3b45a83b8ffbf85d9a784aa8ae24f2979443d31a036ac8c4f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/SOURCE-INPUTS-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/SOURCE-INPUTS-AFTER.json",
+      "bytes": 61997,
+      "SHA256": "adc475cd876adaad7e46bcd57139fc2a137b336dd56d1f0d7ff07863869c3d61"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/SOURCE-INPUTS-BEFORE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/SOURCE-INPUTS-BEFORE.json",
+      "bytes": 61997,
+      "SHA256": "adc475cd876adaad7e46bcd57139fc2a137b336dd56d1f0d7ff07863869c3d61"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/TERMINAL-OBSERVATIONS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/TERMINAL-OBSERVATIONS.json",
+      "bytes": 856290,
+      "SHA256": "5c49821c5dc99ec30ccb0c7df1e386a18b6d5ad963f69a1046a3853ccb674330"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/TERMINAL-PHYSICAL-PARTS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/TERMINAL-PHYSICAL-PARTS.json",
+      "bytes": 52875,
+      "SHA256": "29e19d49a5f8051cd3cba062576c9d44ae4dbe824e8d18e376242c6439f34539"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/World.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/World.original.json",
+      "bytes": 1832308,
+      "SHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0000-constructor/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0000-constructor/FRAME.json",
+      "bytes": 1166,
+      "SHA256": "59802dc8a4d1c870077dc0b02f11de624ff9b1d14c985038388b0e525fc4b5c9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0000-constructor/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0000-constructor/all-bus.json.gz",
+      "bytes": 56,
+      "SHA256": "e306d734c7c213892050f2413d3248e18a6bb7e956fb10c1bbe41629e8b9b3fc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0000-constructor/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0000-constructor/stable-phase-custody.json.gz",
+      "bytes": 240,
+      "SHA256": "740b14c238477d8856a1e3d6b14d3777316c1dd692f26738f0c28da28391fc54"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0000-constructor/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0000-constructor/whole-save.json.gz",
+      "bytes": 90617,
+      "SHA256": "2018385d6115eac20ca95d8625877fc06e5a5803605befc4cde1c25ea10beab2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0001-imported-main/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0001-imported-main/FRAME.json",
+      "bytes": 1181,
+      "SHA256": "1c2323ab5407ed49325c9363940ead19fcffede76a38cc374913f11853612301"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0001-imported-main/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0001-imported-main/all-bus.json.gz",
+      "bytes": 58,
+      "SHA256": "6f091840c0d2e3ce7f68549119eec8e951bb768fc4db08b1b0592623817bc7b1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0001-imported-main/stable-phase-custody.json.gz",
+      "bytes": 243,
+      "SHA256": "26866926be186581082c5923d12dabcef8835b138312477c2b19f1bceef5b533"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0001-imported-main/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0001-imported-main/whole-save.json.gz",
+      "bytes": 493779,
+      "SHA256": "b771cb9afcc34a02b1850d30a2d83b4a349cdb3ae8b95edd5648aa945df771e7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0002-ordinary-001/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0002-ordinary-001/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "ea7a72e76beb4d2d5dcc08f2b06c9ff3a356383091b666a7cd75b3623e5b05c0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0002-ordinary-001/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0002-ordinary-001/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "697c96a173fc601aae851b400df25ed6ad3f33cc2f589e9026c2b4f229a1f70c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0002-ordinary-001/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0002-ordinary-001/all-bus.json.gz",
+      "bytes": 20756,
+      "SHA256": "b6501ff0b5ce1eac5731c14a3bf54373f9759a10c26f69e302c454dd58de1e04"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0002-ordinary-001/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0002-ordinary-001/stable-phase-custody.json.gz",
+      "bytes": 1354566,
+      "SHA256": "381e1400e659b1d8ae099060a92a39fd4b769bf44c865684053dedeab65b8379"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0002-ordinary-001/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0002-ordinary-001/whole-save.json.gz",
+      "bytes": 493429,
+      "SHA256": "91fe9514cec8315663af99593c9491cb13079959473186bc97cafdc30443462c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0003-ordinary-002/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0003-ordinary-002/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "368b76a933ea17285f0a4f6897445df1cde1d936ecb5c003380cccacc9154ff5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0003-ordinary-002/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0003-ordinary-002/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "a4b59363fbabfcaf104a019f07fa236834b9d9f00e9e1843dc4b99864c7ca4ea"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0003-ordinary-002/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0003-ordinary-002/all-bus.json.gz",
+      "bytes": 18611,
+      "SHA256": "e3ef143c51fc785adbb575f584b64aacb8750bb15d2b955d2b439b3fd071c6d2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0003-ordinary-002/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0003-ordinary-002/stable-phase-custody.json.gz",
+      "bytes": 1344221,
+      "SHA256": "3f4a9db35ae37681cdb789180948cb7e699a00a1a715099d69f31a349e620d31"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0003-ordinary-002/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0003-ordinary-002/whole-save.json.gz",
+      "bytes": 493488,
+      "SHA256": "0245ed688da71e1245fe6b764d7b3aa8ab53d03bf131114f363d23130ee4e12e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0004-ordinary-003/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0004-ordinary-003/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "8a1954381582b07a950bafa726a74887a1a4f9521fee9fd35cb4b8f6e0bcb6a7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0004-ordinary-003/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0004-ordinary-003/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "de54515a5a5e2a2511ecb2d498f3e396edda6b6051eb50836797d21c50079aee"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0004-ordinary-003/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0004-ordinary-003/all-bus.json.gz",
+      "bytes": 16855,
+      "SHA256": "e1c53d99b143cdd00c1acac7b0066ae53fc052b137c0851afe47d5bf4f98ab5a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0004-ordinary-003/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0004-ordinary-003/stable-phase-custody.json.gz",
+      "bytes": 1344128,
+      "SHA256": "8c249419405c4d65378e58b5acc03152d1e41da29b8dce4de98adb2ff801157c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0004-ordinary-003/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0004-ordinary-003/whole-save.json.gz",
+      "bytes": 492124,
+      "SHA256": "dd36376d193e773b115f4693c9a31c9d892fe4fe103491f1883388a49e4c79fb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0005-ordinary-004/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0005-ordinary-004/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "980f0a7537a98e5a9f4b194c6d0f82a2a2266ed56055978dfd10bebfc320b281"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0005-ordinary-004/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0005-ordinary-004/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "957c76dd55189e2bf79e48e0d126a49884f8dcc66132abc48cdc53bfd9839aab"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0005-ordinary-004/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0005-ordinary-004/all-bus.json.gz",
+      "bytes": 20229,
+      "SHA256": "7f1992df05973c2650114507377aba7ee9f1afffa2a08088c19967ee420a9762"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0005-ordinary-004/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0005-ordinary-004/stable-phase-custody.json.gz",
+      "bytes": 1353322,
+      "SHA256": "65969d9ba6b8099be7ad4cfe93ae5833dd5f5ef1adcbfceff5ee3270f31fd2da"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0005-ordinary-004/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0005-ordinary-004/whole-save.json.gz",
+      "bytes": 489474,
+      "SHA256": "bc706c0a6b51e6d4d4ed0fb9b0c774745d48acb64d923040f0a801d0ba8e748d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0006-ordinary-005/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0006-ordinary-005/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "cec40033f19824c9459dbcae2e7dbe510176eee81a8e7d0677dbca2f6c8a3c07"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0006-ordinary-005/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0006-ordinary-005/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "b1436c27b91da1ae06ae1f89e7dda064f6afff3f8be2939d566712e7be423f64"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0006-ordinary-005/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0006-ordinary-005/all-bus.json.gz",
+      "bytes": 17289,
+      "SHA256": "21231e4374ab821b1270b76cb90f50de8ee08efad5bd938a3250ef6fc364335a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0006-ordinary-005/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0006-ordinary-005/stable-phase-custody.json.gz",
+      "bytes": 1346209,
+      "SHA256": "2c67b4cc70e40eaff5e44f3a54985124d7ff2e519e27807792d51191cfde47e6"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0006-ordinary-005/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0006-ordinary-005/whole-save.json.gz",
+      "bytes": 490087,
+      "SHA256": "f563905d65e8534702d91c187bc5c39deb8d0a16700097d1c803464157fb0a73"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0007-ordinary-006/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0007-ordinary-006/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "0fbedef746472af838f6c5a7755cbd1c3cef2f7e54d9a12e13f8105cd6763eff"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0007-ordinary-006/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0007-ordinary-006/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "ff1832ee1d7edd353788bcf7127b99a53cffca88fb24b95c85850198bed441b7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0007-ordinary-006/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0007-ordinary-006/all-bus.json.gz",
+      "bytes": 21147,
+      "SHA256": "504acd3f0ec138565c97f807f2933720b68bd0059b3dbf08c66e881df0d40847"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0007-ordinary-006/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0007-ordinary-006/stable-phase-custody.json.gz",
+      "bytes": 1345755,
+      "SHA256": "9f85c612fbc37d9527c66e67fed32791799635741fa1b68810c1a307ccd98155"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0007-ordinary-006/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0007-ordinary-006/whole-save.json.gz",
+      "bytes": 489478,
+      "SHA256": "6bf34a03f8f48d080aa6b4b3912e5665b037b4673128b4310966a29cb50acd83"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0008-ordinary-007/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0008-ordinary-007/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "f5fc621869829b923662bedc447c7efcfa8453d314da99d376eda385ae15d024"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0008-ordinary-007/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0008-ordinary-007/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "a006917f80b38348317a5e2a558ecc33db5b9f47ee4228d2ba76c3da8bf28db8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0008-ordinary-007/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0008-ordinary-007/all-bus.json.gz",
+      "bytes": 22064,
+      "SHA256": "224de17a89364fc3b118dc12a976a240d20d853a624ca6cebe68e40ea66e20a7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0008-ordinary-007/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0008-ordinary-007/stable-phase-custody.json.gz",
+      "bytes": 1352725,
+      "SHA256": "3b3af7927341d14ccf85a9e5cf38248e2f517fda83a9dba3270ac1d8a517a7c9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0008-ordinary-007/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0008-ordinary-007/whole-save.json.gz",
+      "bytes": 489132,
+      "SHA256": "89b7099cadc34c3c5ee01391f345322ff64e995a655137cbbff401d9db140d0a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0009-ordinary-008/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0009-ordinary-008/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "b6df6c0660668f63d3d3ace24a1a37b6b359801f0361802e4e5c13f57d7f139b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0009-ordinary-008/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0009-ordinary-008/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "69864269b1049f62b817b0221585f2df31110663244ad9ae5c32850c2c4eb21a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0009-ordinary-008/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0009-ordinary-008/all-bus.json.gz",
+      "bytes": 15336,
+      "SHA256": "fdd0a805c486da08f156dceb3d5fef669f54f4c40d3611112ff68f6c1cdf2925"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0009-ordinary-008/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0009-ordinary-008/stable-phase-custody.json.gz",
+      "bytes": 1343349,
+      "SHA256": "c51205cf465e333d2cf6c1b729d59cd2e996de2ea59875944e0a442b95c8ff7a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0009-ordinary-008/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0009-ordinary-008/whole-save.json.gz",
+      "bytes": 489242,
+      "SHA256": "5c20a2e3d50c14291b38c0420fae8be45a9609a47d687f2f20dcdc5ddff4fa40"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0010-ordinary-009/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0010-ordinary-009/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "77155df715324c9a5a207f1fd949273511c6714b470f5688ee1c4470c30b3cd7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0010-ordinary-009/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0010-ordinary-009/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "2459ee206fdc308c1d686bcd505d0677c6491afd512b2cbd616263883c120207"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0010-ordinary-009/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0010-ordinary-009/all-bus.json.gz",
+      "bytes": 14555,
+      "SHA256": "ab69d2fa6685dbd41235c4b88a88021aeffa386d6bf1c7ab025d9d3db502c675"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0010-ordinary-009/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0010-ordinary-009/stable-phase-custody.json.gz",
+      "bytes": 1343465,
+      "SHA256": "4eb2d85e86daa7efff965d751ad42727d73ec79a966fe560a5dbb783995aea8f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0010-ordinary-009/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0010-ordinary-009/whole-save.json.gz",
+      "bytes": 486584,
+      "SHA256": "e6943732b5b258cdd1ad6afd02b5237b6f6f8dedaead27e000c39459269d1b36"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0011-ordinary-010/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0011-ordinary-010/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "87341b0922bc1f5c52f70d7be176fc9b462416665c6dc28f6809aa9ca8d64034"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0011-ordinary-010/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0011-ordinary-010/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "a0d3e5322ca310b56e48042889543fefa10969c7b87b9b3c1bae69edb4b8c9f0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0011-ordinary-010/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0011-ordinary-010/all-bus.json.gz",
+      "bytes": 17714,
+      "SHA256": "8a1d3d184e4b180763738ad65d12412cf2b02d148cc062c45213d7506db39bf0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0011-ordinary-010/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0011-ordinary-010/stable-phase-custody.json.gz",
+      "bytes": 1351799,
+      "SHA256": "f6a0ed7dbd86d954ee7efd49eceefea4b7e569da6b14f520c638c55e9c1864ba"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0011-ordinary-010/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0011-ordinary-010/whole-save.json.gz",
+      "bytes": 482157,
+      "SHA256": "9862afef07168dd7355fdce87cb0be56c12028a23808a46c7bfb622fa1fe1efd"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0012-ordinary-011/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0012-ordinary-011/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "34602b60c521fc0284ec4e75a6766fb0569fb673a0c1b1712302631cbfd3d47e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0012-ordinary-011/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0012-ordinary-011/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "f5bd5d607487d08b60bd76aac21664e994c788fba80f3ba228f0cccc2e0dea8d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0012-ordinary-011/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0012-ordinary-011/all-bus.json.gz",
+      "bytes": 16531,
+      "SHA256": "ce499ea335e7172292b9bffe48637bd0c7b4047a6dd427939dd2d6840c9010d0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0012-ordinary-011/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0012-ordinary-011/stable-phase-custody.json.gz",
+      "bytes": 1341094,
+      "SHA256": "4c60687870d572d263cd5c6491107370b53f45f45caf46044a81afae3fd32dfe"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0012-ordinary-011/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0012-ordinary-011/whole-save.json.gz",
+      "bytes": 482183,
+      "SHA256": "4c7d4f4f96da6e58a6a0113e8ad55657e8442fcb2f1da0dfddb9ccc6fcce0593"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0013-ordinary-012/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0013-ordinary-012/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "2cb972399f1fc93ed50102456988b94e172412e7c3dd2fa4464675df0425ad32"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0013-ordinary-012/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0013-ordinary-012/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "4a330f18ec24ce01db682e61733c7da63c8ccc8d04167620bb57fe02f5580ae0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0013-ordinary-012/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0013-ordinary-012/all-bus.json.gz",
+      "bytes": 15003,
+      "SHA256": "6bee4f6884e17f1b7fb46efc0bb2ca5188c9809dfb58fab715fc2174ab33e9ea"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0013-ordinary-012/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0013-ordinary-012/stable-phase-custody.json.gz",
+      "bytes": 1338868,
+      "SHA256": "fbec07c13c326df76d41d7d2de881903ec57839650555e7ca2ec03a346f09c0a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0013-ordinary-012/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0013-ordinary-012/whole-save.json.gz",
+      "bytes": 482510,
+      "SHA256": "094eb097e5621e285803bb3489dbaa78e1cf5c4898563c1f1ffd23deae2b2319"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0014-ordinary-013/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0014-ordinary-013/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "7d34f31fb262baf13ca45a65ebcde56914c84c15574e09d1c9b4cfcdab2406d9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0014-ordinary-013/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0014-ordinary-013/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "fc407ecb81bf05c908e1c3c1a200a7e6e921c6fc044bca0dc50a04fc338da610"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0014-ordinary-013/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0014-ordinary-013/all-bus.json.gz",
+      "bytes": 18321,
+      "SHA256": "ef154b74b1b337904c073fefcf941d01de9df7534d99681c01890513c7f1a0f5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0014-ordinary-013/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0014-ordinary-013/stable-phase-custody.json.gz",
+      "bytes": 1346505,
+      "SHA256": "234841b3b946d40733b7990652b5e8925a799fa5cffe58c733037daa365323e5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0014-ordinary-013/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0014-ordinary-013/whole-save.json.gz",
+      "bytes": 480385,
+      "SHA256": "5d4cc129f29f8d2e606a947ad70f91d3952a09dec1dc764e3260bd57652739b8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0015-ordinary-014/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0015-ordinary-014/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "42484c237f21bfb84174eff2bbdefd4217f88cf712d93365a330c26bc48f5e9b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0015-ordinary-014/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0015-ordinary-014/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "e03a8a289a3ae55fa1f304dd930e213152eef55fa73077e66410e6b7ec23ae68"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0015-ordinary-014/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0015-ordinary-014/all-bus.json.gz",
+      "bytes": 15578,
+      "SHA256": "64c296bf85f44d799f53bb53c8363ff6aadcf1d591c089a78626bc01e250c78b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0015-ordinary-014/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0015-ordinary-014/stable-phase-custody.json.gz",
+      "bytes": 1338826,
+      "SHA256": "33ba740e24c9988a2fc8310a3ac35c3f2386f65bf9d2202f0d0efdebc308203b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0015-ordinary-014/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0015-ordinary-014/whole-save.json.gz",
+      "bytes": 478854,
+      "SHA256": "d8f677c747266a3fda5054509a5cdbfe5ddda32dc6de6ce25455a4b1534603b1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0016-ordinary-015/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0016-ordinary-015/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "34ae1f488bec6cac5d9d9f53c317263e0224be7dab09178744a016174ea20588"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0016-ordinary-015/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0016-ordinary-015/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "b18346a485ebc924a7dbffa2f460cb953730a47dc37232670c3a4cfe3567c2ac"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0016-ordinary-015/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0016-ordinary-015/all-bus.json.gz",
+      "bytes": 12731,
+      "SHA256": "cdc7537eb2775ca3f8781a0607b888b8faa6ee1fa01da40585e953283dc63670"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0016-ordinary-015/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0016-ordinary-015/stable-phase-custody.json.gz",
+      "bytes": 1335829,
+      "SHA256": "1c4b9a3766b7bb0bfead1b1b6e88ddc396a8a669297bf845cc7b017dcdad8d90"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0016-ordinary-015/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0016-ordinary-015/whole-save.json.gz",
+      "bytes": 477943,
+      "SHA256": "43f49c381c7f73338b23708a4925479dc14a236e88ed05ad05fb823757af3008"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0017-ordinary-016/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/ANALYSIS.json",
+      "bytes": 1511,
+      "SHA256": "d3abfb1214152c51ac730acdae3bc84cb889e735547f94598a0976ce3d050bc6"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0017-ordinary-016/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/FRAME.json",
+      "bytes": 1205,
+      "SHA256": "e5e838bca2de7cbbc3b2a16c1cd8267485036573d7e8688bb81043710864b8f5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0017-ordinary-016/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/all-bus.json.gz",
+      "bytes": 110428,
+      "SHA256": "2da856cb5dc3866c44ee1efcbffd81eff32218aa018ea58f7b1224515808da90"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0017-ordinary-016/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/stable-phase-custody.json.gz",
+      "bytes": 1237297,
+      "SHA256": "81c17361e2e32064e840f32b1f96d5a3228f04acd406b026044f9b6a2e24ad30"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/frames/0017-ordinary-016/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/frames/0017-ordinary-016/whole-save.json.gz",
+      "bytes": 464739,
+      "SHA256": "48dadec6848bc975719e1ea40799c3728d86bff8f758f00cc72d348827cd2793"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0000.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0000.json.gz",
+      "bytes": 58338,
+      "SHA256": "bd4b03354653e8e67ca326864bc8fad546395ab0e28869f5951b758139896ff8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0001.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0001.json.gz",
+      "bytes": 715,
+      "SHA256": "31b2d68785ccae3a42089d03bd670c5762cf8d3152c9bc744315608eaac6bee7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0002.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0002.json.gz",
+      "bytes": 296,
+      "SHA256": "2461b05d768a0d4d00b53960536c9967d6a4de563e03736f968813077bf2a35f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0003.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0003.json.gz",
+      "bytes": 2886,
+      "SHA256": "be907e303a727d05dd8437366c71135615e61c58ca9450dd72a04bb53ed27946"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0004.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0004.json.gz",
+      "bytes": 103,
+      "SHA256": "41d82e95a723d2ccf98c87b51a1bbecd28b62495741a696f274cd1868d5579de"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0005.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0005.json.gz",
+      "bytes": 535,
+      "SHA256": "064f99647892e679058125f09599fd8422f67912a069d234e217a67270d8dc01"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0006.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0006.json.gz",
+      "bytes": 3032,
+      "SHA256": "e3a363502993a31ddda2993ef027421c18af96c7390eadca848a07ee1c5d9cfc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0007.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0007.json.gz",
+      "bytes": 6932,
+      "SHA256": "3f0876ed9e2578e9a20b1a51ee1a1b79616b740effe63cffbd0b09497ed25613"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0008.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0008.json.gz",
+      "bytes": 3991,
+      "SHA256": "d2b7fdaed4c11b628fad7c046ac66613bd5431082d9c186f3ae75b9993d76207"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0009.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0009.json.gz",
+      "bytes": 5988,
+      "SHA256": "00631364971a2dc58a778bccceda6a000aa3f47349cc02ea6ca2ce2be3ec636a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0010.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0010.json.gz",
+      "bytes": 8084,
+      "SHA256": "619febf17807489b43d4009c2a1930f9b0453b34a6c482bc7ef19d76fd5fc925"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0011.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0011.json.gz",
+      "bytes": 1060,
+      "SHA256": "de0c2f28f98c12641e70e9d399dd5b2afdaad5535dc913e45d61342800ee020f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0012.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0012.json.gz",
+      "bytes": 626,
+      "SHA256": "037f96b7616ff631f7652689a340fe9db09140f9c2bf2a1345b67e7e59e898e5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0013.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0013.json.gz",
+      "bytes": 5682,
+      "SHA256": "ee6312fdfa1ac9264938ab1d43925e2a9d52ec71e039c304e8fc6502a9b8f497"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0014.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0014.json.gz",
+      "bytes": 2150,
+      "SHA256": "de96959a7f6afb474719fbf23510fb6ec6571e99632efa098c229b733675143e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0015.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0015.json.gz",
+      "bytes": 8995,
+      "SHA256": "afbec4b71c60155125bed404caa79ccb0fe439ee8ed708df4ebc7fe19debe41a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0016.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0016.json.gz",
+      "bytes": 1878,
+      "SHA256": "2454a74c863af701241e0b563248e23b9435fdc635c47714d0116c3c0aed191d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0017.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0017.json.gz",
+      "bytes": 1897,
+      "SHA256": "2bd9f5272e2618a725addf4a6ea05b099c18c311c8f68c436a5474bb73c426e2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0018.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0018.json.gz",
+      "bytes": 10329,
+      "SHA256": "bfad543048f5fea8df8cf65cf8da8192d940e1609c33d99dd5817e1de8e96e0e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0019.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0019.json.gz",
+      "bytes": 7056,
+      "SHA256": "12e69e5b2d3c82882a6b56e3048f30c4f736deb3034065a7849789dbfcb7d233"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0020.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0020.json.gz",
+      "bytes": 3055,
+      "SHA256": "0bdd9f8ddf8a495bf7f2f7a5d443d7bb422c242482cb9d4cbc4dd1dc29007a96"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0021.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0021.json.gz",
+      "bytes": 5015,
+      "SHA256": "f50eb44d35aeac046a93cdb4197e6c398ace814b44bdfaea6f7806cd6005b790"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0022.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0022.json.gz",
+      "bytes": 298,
+      "SHA256": "add90bc283bd6b700ce5eeaade77677f33d135a559fec5c683ec7867f18a45af"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0023.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0023.json.gz",
+      "bytes": 12496,
+      "SHA256": "91439118542322cfa6c713b005d4f24294937d8b0cf894dea9c06e1c9bbdf8c2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0024.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0024.json.gz",
+      "bytes": 568,
+      "SHA256": "d5ed5d5a8b190d0ae3dade6971b4c013798c7b8d90f4a75e3a21f80a288357ca"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0025.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0025.json.gz",
+      "bytes": 275,
+      "SHA256": "98b6257fa0ecdb15dfd86996e0ef8dc53290d7330b5a0c61c27407463ed53e5b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0026.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0026.json.gz",
+      "bytes": 9549,
+      "SHA256": "3c051369ec6f958601687f3c2d4811821a4dfb5f238f390f6c8163a509a316ab"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0027.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0027.json.gz",
+      "bytes": 5355,
+      "SHA256": "ef90ee6ce0565168086fcbe09cdaefbf3166fbfa7dc20be4f669fc330358efbd"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0028.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0028.json.gz",
+      "bytes": 5447,
+      "SHA256": "b9779fd9f805e6d78c591feb94d96f7a6d75a1badb4aad7269adb3fd02ca5e01"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0029.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0029.json.gz",
+      "bytes": 1767,
+      "SHA256": "b6bd58ec8f4e941d46390449593a3df5c033da38a955ec5168b0daec0d110c44"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0030.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0030.json.gz",
+      "bytes": 1918,
+      "SHA256": "ac1a567f853def6d6e9413f81ab629d6b0964dca8bfd718a2e74fa6f4c88cfe8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0031.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0031.json.gz",
+      "bytes": 1737,
+      "SHA256": "f09a23c0d25c511b55d63e3f89e57b2f366972a99610702539ba139c3b44ac9a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0032.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0032.json.gz",
+      "bytes": 14159,
+      "SHA256": "baa3f8194a97fd9304f8329e1f27430b6825e3d549b28226f2b14d249c806d1c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0033.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0033.json.gz",
+      "bytes": 9126,
+      "SHA256": "0593409210bd42ecdddc8999a115b520699257465d73c4276f7f47822a955740"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0034.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0034.json.gz",
+      "bytes": 3293,
+      "SHA256": "989bc051fdfc467942f8e13486d3de1728f5c2c77caddf122c76a7b59b92aa03"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0035.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0035.json.gz",
+      "bytes": 6669,
+      "SHA256": "af3c6049755bc90062fc6608f5587959a67a99fae80c2d16d779a78a307545a9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0036.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0036.json.gz",
+      "bytes": 5339,
+      "SHA256": "1bd6290248584d395d9c738a44300686c660d9497b31b7e55e6983d5d48be4a1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0037.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0037.json.gz",
+      "bytes": 2641,
+      "SHA256": "0100a83147816428cccb8040445d61bd576137481a8c5bb1a68debf6012c8f44"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0038.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0038.json.gz",
+      "bytes": 10002,
+      "SHA256": "e8d2f72e15f9084821b5c3a3f1231f9ee9a473718e1afd1fc9e92fc556b00261"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0039.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0039.json.gz",
+      "bytes": 5051,
+      "SHA256": "59891cdec82026cac5395d998d9c92b44fcd2352d6629b39b41f84152ee9b762"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0040.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0040.json.gz",
+      "bytes": 1547,
+      "SHA256": "c7fa5919b494d026f2562110d03612db8e796975cf6224e3e70c347024640e67"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0041.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0041.json.gz",
+      "bytes": 3597,
+      "SHA256": "45754daed86f0ed6ec63dfa3dd741846b194a2ebbb11d37ca08239e7e173e28e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0042.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0042.json.gz",
+      "bytes": 3247,
+      "SHA256": "77c0592697fa6ffe89617c1dbc9b8c993ea68d2d8924ee28723f210e0a83cbe3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0043.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0043.json.gz",
+      "bytes": 10264,
+      "SHA256": "e633828b303f285064a4c380779846a33acf7a06f7c5fbc97bc0996854494e9a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0044.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0044.json.gz",
+      "bytes": 275,
+      "SHA256": "33e442b5c616d57d28518c0809f4c39b9e83eae1d31198b51cd19e2bfa33656e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0045.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0045.json.gz",
+      "bytes": 3504,
+      "SHA256": "6c7bd6517b06ba154f58bc31714a028ef7c43619c9d716c42e24cf98414bbf6e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0046.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0046.json.gz",
+      "bytes": 3116,
+      "SHA256": "7fd49ce2704f3f923e7cb6309271b57e47194f85575e81e1797e2214343c5309"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0047.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0047.json.gz",
+      "bytes": 294,
+      "SHA256": "579a10a465ce1fe1e654a8042a700f9687cf294ca95bf9251412ee95dfb7216f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0048.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0048.json.gz",
+      "bytes": 1444,
+      "SHA256": "0da4d04e6dd106968f81997ea87c76fd1432c7df35fa1207150dca56d4d2cc53"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0049.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0049.json.gz",
+      "bytes": 1460,
+      "SHA256": "cb0867a364d556d7a1c7215add120de42ceadd1b95d7b98efc7b07b4899f9658"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0050.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0050.json.gz",
+      "bytes": 3826,
+      "SHA256": "69ab09560ce6ca8f042e0b4d56f398badfbe6a2b9e44ef132120d518bb696319"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0051.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0051.json.gz",
+      "bytes": 7404,
+      "SHA256": "6c7f5b36c72e5356ff0157a1c9e54079c0c523161d9a1ba7ac0845ddf5edef55"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0052.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0052.json.gz",
+      "bytes": 5770,
+      "SHA256": "ecfe5c2167e57bb8c5bf61afe5e027f0d423d48c43f3894557df3417e267faa4"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0053.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0053.json.gz",
+      "bytes": 452,
+      "SHA256": "888b6b5873f1dca02189154ea4c5df3ef7abcee66843ddf2f7dad366fb8a6ce0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0054.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0054.json.gz",
+      "bytes": 5129,
+      "SHA256": "7d16d1866abe94d1335795142a20ef5120943a5aa422be2843307878a097d144"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0055.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0055.json.gz",
+      "bytes": 8960,
+      "SHA256": "ce10fd43e0e07f1a519ea23a08a82a58fb1baabea9013514e5746cf9c90937ed"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0056.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0056.json.gz",
+      "bytes": 1924,
+      "SHA256": "4f185793b030ed1d10113ce0d7dcaf51fb8b4512dc74eda51e19f9b80500ab3f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0057.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0057.json.gz",
+      "bytes": 226,
+      "SHA256": "f291041c326a633338be6cf17a32c96d5f9503e0fde739372dff9be212942787"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0058.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0058.json.gz",
+      "bytes": 72,
+      "SHA256": "c854a8a0104d324a270537dcef94de08e44ce7e6d56e4a199878d2029d2c26dd"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0059.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0059.json.gz",
+      "bytes": 2273,
+      "SHA256": "d213ab1f4e1f3a67e391da51524e61ecea706fdc90ef0982d4783a779ca38cca"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0060.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0060.json.gz",
+      "bytes": 1733,
+      "SHA256": "7fa2996be29d3d175f68510a051163c48184a4b6e2dc4932bf4fd23743d9b2b6"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0061.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0061.json.gz",
+      "bytes": 76,
+      "SHA256": "9cfda70e8e3edbc97483a57374ea7a60011b896666dcd5bb144957d07f304a96"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0062.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0062.json.gz",
+      "bytes": 2629,
+      "SHA256": "47be2e1ec492257ee35436478fb9ec44d9ef012af85cc9f6bbe731954f5ac570"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0063.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0063.json.gz",
+      "bytes": 2418,
+      "SHA256": "3b0349e6946bc3f3bcad8786af2b7a2884c81cf8f92d69b00b03de594c47dd83"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0064.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0064.json.gz",
+      "bytes": 2733,
+      "SHA256": "fb288fce752c6b32718fe4805d2e72a61f83e6a968c902c042085ab7db28fe56"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0065.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0065.json.gz",
+      "bytes": 5772,
+      "SHA256": "96b217678beab97395c5169190c5cf2b921ce88462b5262a2e33d4f85ad4366a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0066.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0066.json.gz",
+      "bytes": 4590,
+      "SHA256": "f4aa9dc6ec4ac3fcaccd1f07e32ec766124da747d8a9abfafa478d34553211ba"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0067.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0067.json.gz",
+      "bytes": 11284,
+      "SHA256": "c0c2242f6583e8391ecbb73dd3a26350f092e44b89b10b8a3ffb7eeafd8b6479"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0068.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0068.json.gz",
+      "bytes": 3012,
+      "SHA256": "6b35e4deedd1a543e29f1e1ad627359a201b501f7dcb48c41cc292c55b5c4b4b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0069.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0069.json.gz",
+      "bytes": 1396,
+      "SHA256": "2c562bd6a467b20ca0393792f52f411ea8b889889523e5b59d526112f3d18e2c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0070.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0070.json.gz",
+      "bytes": 74,
+      "SHA256": "b4f0988ba07ebfabc9d58e4b33ce098422afe24839447717dfa9926c5c240e0c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0071.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0071.json.gz",
+      "bytes": 1964,
+      "SHA256": "bf632da4ddfc9045796ea9c1118402cd9750bd7ad22b934e00c864cd6a2b0c2d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0072.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0072.json.gz",
+      "bytes": 749,
+      "SHA256": "e1acb76926795ba5c8289f879efb5f16de241e11f85fb6256920fae5c1379729"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0073.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0073.json.gz",
+      "bytes": 6894,
+      "SHA256": "559fac205c1d376fc3f984ead9b6088e0f16876ba6415923927b4e75d08607e7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0074.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0074.json.gz",
+      "bytes": 9331,
+      "SHA256": "4e0605dea2b8c49fad966a81cae5d3e4ebd73fddb5eb571311492a1bfdf6bfba"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0075.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0075.json.gz",
+      "bytes": 638,
+      "SHA256": "945dbf1422408a6672729fdcd363ae99f755dae9528fa73f36d29951b9f2c7d3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0076.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0076.json.gz",
+      "bytes": 3522,
+      "SHA256": "166c69db58d796b204db42c48a3817bf3872dced91b0425c7f1d1b426ac87a5f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0077.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0077.json.gz",
+      "bytes": 1591,
+      "SHA256": "efa1e7c27d3e7c8ad389d65414d86c89602b86f140a76aff5b18e6dbb8528fdc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0078.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0078.json.gz",
+      "bytes": 2883,
+      "SHA256": "01565e8df80c5848b04c9c7de19bc3c16182e61ff5ce94097c5d47364b9daa1f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0079.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0079.json.gz",
+      "bytes": 3007,
+      "SHA256": "8d8dd348c741d15c8630d8dbd07b0644d877ccc2df5c106fcbe61bc75671d6be"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0080.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0080.json.gz",
+      "bytes": 2452,
+      "SHA256": "de67bafa47cb6bc6e535b18fe6effa5e490f0bd228dd8ad336a079857eafdb24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0081.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0081.json.gz",
+      "bytes": 306,
+      "SHA256": "6a09759ff533b31898012de4683a6507b965edbd8815505b3f19d373f0f03418"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0082.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0082.json.gz",
+      "bytes": 9598,
+      "SHA256": "38d8cd7aa85090413b1d488226d78e16abcfad35fd8c4439a60fd7d4841e9b23"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0083.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0083.json.gz",
+      "bytes": 6576,
+      "SHA256": "060a4c73f02293c0010f9edae64eb00f67631aebd1b6a28fc4199a39de87b254"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0084.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0084.json.gz",
+      "bytes": 5920,
+      "SHA256": "67a3ae87f81262e34624bc69a03dbae87c246308a6307432376c6d947a8add23"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0085.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0085.json.gz",
+      "bytes": 86,
+      "SHA256": "f3b3a8259c9024c3535a44ed8fc7e32c6abba7a51bca32d1f946528637d01365"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0086.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0086.json.gz",
+      "bytes": 73,
+      "SHA256": "df54348e1db4893927d531bbed11faffacaa961d9f13494b8eba25f3ee07744b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0087.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0087.json.gz",
+      "bytes": 554,
+      "SHA256": "2bb8cfec6827a3becfce20efe68761bcbf0c01759358883f21a351561900963b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0088.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0088.json.gz",
+      "bytes": 5351,
+      "SHA256": "07fdeb7360ce64f9c4b6875df73f7e2ae78e93954bc7a71ae91364fc1a3e4abb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0089.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0089.json.gz",
+      "bytes": 6746,
+      "SHA256": "3b05019c395b0ae39a800ab6152eda085fdcc0f64fc6c5ed052ee4546f27bb1c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0090.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0090.json.gz",
+      "bytes": 4586,
+      "SHA256": "fbbb6f7422a241b5b974c0f383874ca8a0381bf49c71553217ab70d5266b6690"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0091.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0091.json.gz",
+      "bytes": 445,
+      "SHA256": "6eaf0efad38ad8afebfd17e77f9d0c2cfaf7dda9711b867e67df8627770c3511"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0092.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0092.json.gz",
+      "bytes": 10482,
+      "SHA256": "108b5f4f6e88104286a0b5c38622075761266563b48832bd9c1e81daaf979978"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0093.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0093.json.gz",
+      "bytes": 33240,
+      "SHA256": "f698db4eb1c299f01b9507741bde47e5006ebcab0d88258d4e63423d5b8ca7f1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0094.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0094.json.gz",
+      "bytes": 84,
+      "SHA256": "32d0e141085c0be00677fa1e0f97b4580bd23d21709b8ff6ce596bf73c84f979"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0095.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0095.json.gz",
+      "bytes": 2417,
+      "SHA256": "a59b66340d07e9a66bd9954b772d0930326f3274f5fddb17d2920e44cd097b48"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0096.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0096.json.gz",
+      "bytes": 1890,
+      "SHA256": "b372bddfaf4dea9ccd1bd42b8ece58f20d5835dcb9f08392094cd4c39a0451cd"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0097.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0097.json.gz",
+      "bytes": 753,
+      "SHA256": "1bbb485bd68aa0fb6f20ab803bc1dad15e5d9dc73a55f3c612c44b6d50bd71ac"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0098.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0098.json.gz",
+      "bytes": 73,
+      "SHA256": "0ec665c5a7f84a57862809b2edc8ca34a973cfd2fb4c33efb6b9060dc7572541"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0099.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0099.json.gz",
+      "bytes": 82,
+      "SHA256": "47912dbd4233d86f4fe3ebb25b8fa34e4327e9726b80f5a8f9745347408b495c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0100.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0100.json.gz",
+      "bytes": 5572,
+      "SHA256": "26ebe17867e570e2db5eb6b8638923a60014369fa8b1b37e2190432dd316c6e3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0101.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0101.json.gz",
+      "bytes": 3181,
+      "SHA256": "985def8b44aaf20a05fdc44257e64c54dec0df9d2610a73cfd622619f43d0fd5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0102.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0102.json.gz",
+      "bytes": 2108,
+      "SHA256": "582e96d2a42138746f2d7e30b9eac429b4cd5010c4ad5ff49bbcd0eba58fbb70"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0103.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0103.json.gz",
+      "bytes": 453,
+      "SHA256": "1392f82d4ed5f4c0b13ab9484181727dba5873918069e36864615f2b2bb57121"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0104.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0104.json.gz",
+      "bytes": 4227,
+      "SHA256": "8d04ee5ce2652932613f45c9b791d50706061c537fee54189f677a3d4896d4ed"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0105.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0105.json.gz",
+      "bytes": 5150,
+      "SHA256": "aa1ce3d1c98d1b0d1c57be4783574f4e30587e292ea9f7bba476073790e40e20"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0106.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0106.json.gz",
+      "bytes": 72,
+      "SHA256": "29445ecc838d6983a68e2a049b5a58009aa87965bdd250eccca8a5fd58886d59"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0107.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0107.json.gz",
+      "bytes": 271,
+      "SHA256": "37e7f95234b94d5b1b32844ddf2eef49b0dec7db487e025bf6b78a8e2d99480b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0108.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0108.json.gz",
+      "bytes": 2614,
+      "SHA256": "a8f7af2c4026f94a994272f8b74421c11afb8c440089686d7571544986880c96"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0109.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0109.json.gz",
+      "bytes": 545,
+      "SHA256": "dfc04af30ceca4c526fc905ffb89c415f470997b78bf6b65f3c38199f9ea220a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0110.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0110.json.gz",
+      "bytes": 227,
+      "SHA256": "c088a4a558bdae1d5df25cf6d4541fb6e3c2433c28fda42cc2f9739e6337ff49"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0111.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0111.json.gz",
+      "bytes": 1723,
+      "SHA256": "470871c1a150fa4333b7d74e9d6d306f66419626da30f3c70236a7e235a743a0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0112.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0112.json.gz",
+      "bytes": 4057,
+      "SHA256": "a7fd5f3cdc635fe512d9487a0a83cf110db7ab925a438669baff76a023b9a843"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0113.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0113.json.gz",
+      "bytes": 3301,
+      "SHA256": "d364986385c1a90c1fba47f726b542b554009244c12cd3b8c3610890eb7da6b2"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0114.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0114.json.gz",
+      "bytes": 5254,
+      "SHA256": "51eb83c7cc775b64abae32034e3c6aee2a93907ef6f51399e66a23a3e54db36e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0115.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0115.json.gz",
+      "bytes": 343,
+      "SHA256": "613a33e33ea72b2fa3a33a63ad46e74d15b30071c2a7b8c58279bc54388cc8bd"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0116.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0116.json.gz",
+      "bytes": 299,
+      "SHA256": "babc62fd8cdd8d73bb55290b6ca2040840fb7adc8bf0063796909e0fd3e856c3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0117.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0117.json.gz",
+      "bytes": 282,
+      "SHA256": "5260d1832e7c1b1bb618859bf510c5a7ede87a077d1c782e07f6401c1f6948be"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0118.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0118.json.gz",
+      "bytes": 539,
+      "SHA256": "227dde0431697a70026dd834ad889c7543d6b054c03373d5580726ee7af6e3a8"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0119.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0119.json.gz",
+      "bytes": 241,
+      "SHA256": "2c5b81d2cea0717c369c620858d0b7573cdb77abf6f671ff2e97a03ac319e5ce"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0120.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0120.json.gz",
+      "bytes": 269,
+      "SHA256": "852485c24e2fcce5f8b7fea800e2fd867590d6253dea82b626211dc3d29c2d6c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0121.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0121.json.gz",
+      "bytes": 3131,
+      "SHA256": "96e891907b878e298064be6185d1be031eb4620aef5d10f3b14aba9570306f79"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0122.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0122.json.gz",
+      "bytes": 6964,
+      "SHA256": "8ae27590d5acbe2e750142d49aa91cebe832c6f72e700576a60e3adadd55e1bc"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0123.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0123.json.gz",
+      "bytes": 6751,
+      "SHA256": "2c8e21e7aacf314ad474f4fed002799a2b87614edf85fa3d0be4a3be148ba9f1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0124.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0124.json.gz",
+      "bytes": 8079,
+      "SHA256": "390478c61478c0476e7deb9a9995fbae3b5b0aa166946d4f7fde0af02fad7834"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0125.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0125.json.gz",
+      "bytes": 7152,
+      "SHA256": "2ed1fb0c908bc1cdc90bfcaaf9b3998f6acfcb76aa73abe07b59ffc29e81a5ba"
+    },
+    {
+      "archivePath": "ROOT24-originals/native04/terminal-parts/0126.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native04/terminal-parts/0126.json.gz",
+      "bytes": 4197,
+      "SHA256": "fb09179fcb1992ae76d86218a8fa7d8c2b3e5c3f01b91bacf5c779478fe87ab3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/ALL-BUS.jsonl.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/ALL-BUS.jsonl.gz",
+      "bytes": 3755806,
+      "SHA256": "a57b15d983d09bfde9266dd31d08f028c1199d5478d432cdf4046a41fdb994e0"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/DRIVER-PLAN.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/DRIVER-PLAN.json",
+      "bytes": 1190,
+      "SHA256": "16de6e1b7171f1480b42b8aba77c694443b9d32acf2799684e03a039df202c22"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/FAILURE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/FAILURE.json",
+      "bytes": 142229,
+      "SHA256": "2d88ad2ff98c17ac5156b39c306c0aec337a0b2efe16b8a48b3995124f59606d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/FRAMES.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/FRAMES.json",
+      "bytes": 557854,
+      "SHA256": "2fc2d3213bf22a09b41d8e74737b2978df55672551d3e83bd75449fd6744da23"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/INHERITED-CUSTODY-BASELINE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/INHERITED-CUSTODY-BASELINE.json",
+      "bytes": 263966,
+      "SHA256": "ccc1a037c6a9b2c1d608bad7af730b01046cddd28406f3f3178b580888ee8cec"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/INPUT-MAIN.original.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/INPUT-MAIN.original.json.gz",
+      "bytes": 515552,
+      "SHA256": "2e38764057680da770158adec41c14c27e10509cc76b5ba9e4c1c1f4adf8ce24"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/INPUT-RECEIPTS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/INPUT-RECEIPTS.json",
+      "bytes": 1240,
+      "SHA256": "1adbce53c0ebb2ee196ff7d536085f0021e6639f13aeb5bb54b7258ae37b0958"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/ONLY-PUBLIC-COMMAND.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/ONLY-PUBLIC-COMMAND.json",
+      "bytes": 646,
+      "SHA256": "7206d9695c800041ce27f59454948301dc2b677cb72f9f08c77e7af43b46c2a9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/ORIGINAL-INPUT-SHA-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/ORIGINAL-INPUT-SHA-AFTER.json",
+      "bytes": 172,
+      "SHA256": "d3ba6fe5ea9607bc265dc159b109b89f8d726b32d08811a9d6f44c938be693a1"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/ROOT-EXECUTION-PLAN.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/ROOT-EXECUTION-PLAN.original.json",
+      "bytes": 3246,
+      "SHA256": "b2695239d827838a9f6e1260145f62649aa65ede0bbe06a1f59df65bf4ac3d2a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/SOURCE-INPUTS-AFTER.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/SOURCE-INPUTS-AFTER.json",
+      "bytes": 61997,
+      "SHA256": "11d66c5606a99fa9574dbcd1fdc1284f5bb6ed695cc55326d547ea044849997e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/SOURCE-INPUTS-BEFORE.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/SOURCE-INPUTS-BEFORE.json",
+      "bytes": 61997,
+      "SHA256": "11d66c5606a99fa9574dbcd1fdc1284f5bb6ed695cc55326d547ea044849997e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/World.original.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/World.original.json",
+      "bytes": 1832308,
+      "SHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0003-ordinary-001/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0003-ordinary-001/ANALYSIS.json",
+      "bytes": 1506,
+      "SHA256": "bba30f4e11019750711cec9870919f4b532d332d1b784fd738fed05b7c1056f3"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0003-ordinary-001/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0003-ordinary-001/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "b51e334f8db831205d02e4e0226f2766dd3765bda77a6e2034ad3f088330d565"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0003-ordinary-001/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0003-ordinary-001/all-bus.json.gz",
+      "bytes": 19970,
+      "SHA256": "16be3aa5483bc9356dabe81098bf4753b343a2f066eae5e942f8e6a7c98d1a64"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0003-ordinary-001/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0003-ordinary-001/stable-phase-custody.json.gz",
+      "bytes": 1156291,
+      "SHA256": "12d1220059e5fdfffe320e7214ca923fb3d3b14e6716de201d104a2a4ff5536f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0003-ordinary-001/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0003-ordinary-001/whole-save.json.gz",
+      "bytes": 518095,
+      "SHA256": "5d8845cbee7396474d9b0f84a599b31b96f7bce35bf9e82866e4649b597f27e9"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0005-ordinary-003/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0005-ordinary-003/ANALYSIS.json",
+      "bytes": 1506,
+      "SHA256": "c76ec43f098c438e1e3f1bcda1c5b9e7bde1a1828d26ce56e8b63cd0dc68616c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0005-ordinary-003/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0005-ordinary-003/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "d92725becff3be0c914a05d71c36e6c94dc006f8bd08d3f3a805e8e79e8ae852"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0005-ordinary-003/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0005-ordinary-003/all-bus.json.gz",
+      "bytes": 28557,
+      "SHA256": "f1bfc930d83e7628f0bf6836ef6c9f2454c4f8a51fefc817964d5204996ed610"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0005-ordinary-003/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0005-ordinary-003/stable-phase-custody.json.gz",
+      "bytes": 1202910,
+      "SHA256": "f6e9c868efea121800c26ad201842d330e40ca6aa433207bcc2c6a884daf0e0b"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0005-ordinary-003/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0005-ordinary-003/whole-save.json.gz",
+      "bytes": 519958,
+      "SHA256": "f8666ef9191d716eba9e4b799e302e6cb4c0bed63b67b49e478054cb403973d5"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0346-ordinary-344/ANALYSIS.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/ANALYSIS.json",
+      "bytes": 1507,
+      "SHA256": "23466aa04499dbbb266dafaced9db83f0dfb5b3810a7c93e2d1de0901c86a43e"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0346-ordinary-344/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/FRAME.json",
+      "bytes": 1201,
+      "SHA256": "aff6932f1696369052f4aea13a33c96058ded6f78b1c6a5f2216d52622470abb"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0346-ordinary-344/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/all-bus.json.gz",
+      "bytes": 17759,
+      "SHA256": "901336d0165804928b6e3de9fff5a0e2ed964bb00a4771da7ae64a3526cf9e2f"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0346-ordinary-344/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/stable-phase-custody.json.gz",
+      "bytes": 1347294,
+      "SHA256": "bf32ce411e57bf48a3b791ce245f9b48e43f60cc0f8ce57e228c5dc99a21be0a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0346-ordinary-344/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0346-ordinary-344/whole-save.json.gz",
+      "bytes": 493779,
+      "SHA256": "b771cb9afcc34a02b1850d30a2d83b4a349cdb3ae8b95edd5648aa945df771e7"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0347-ordinary-345/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0347-ordinary-345/FRAME.json",
+      "bytes": 1200,
+      "SHA256": "5fc3f75fecee12cbb4c1b091115cb9404963c355d3a19d5c006faadf8d44510a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0347-ordinary-345/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0347-ordinary-345/all-bus.json.gz",
+      "bytes": 20776,
+      "SHA256": "fc400ba6a4dc2ab4bdcb457d2bdc819144c2b73b05d8289a57522c6a73fc6f11"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0347-ordinary-345/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0347-ordinary-345/stable-phase-custody.json.gz",
+      "bytes": 635404,
+      "SHA256": "a451a8b3ef664102d96aef7da79707db9cd760b5ca91a7ce8ad2a48781cb5d12"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0347-ordinary-345/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0347-ordinary-345/whole-save.json.gz",
+      "bytes": 493429,
+      "SHA256": "91fe9514cec8315663af99593c9491cb13079959473186bc97cafdc30443462c"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0348-failure-frontier/FRAME.json",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0348-failure-frontier/FRAME.json",
+      "bytes": 1195,
+      "SHA256": "a9397796d7a5290f01a3d09dc5c0dc02c5b82f21af779b1b4f94d89c8fc0394d"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0348-failure-frontier/all-bus.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0348-failure-frontier/all-bus.json.gz",
+      "bytes": 61,
+      "SHA256": "0243bd83a18f4ab4bc36d8c056189af055c2691c325c37344da2c8ffd8cac56a"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0348-failure-frontier/stable-phase-custody.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0348-failure-frontier/stable-phase-custody.json.gz",
+      "bytes": 819,
+      "SHA256": "86740fbd82f19a04714406a51ef2c723489cd4dca02e1e962c60dac9a44d66c6"
+    },
+    {
+      "archivePath": "ROOT24-originals/native03/frames/0348-failure-frontier/whole-save.json.gz",
+      "originalPath": "/tmp/ROOT24-economy-next-day-20261007-01/native03/frames/0348-failure-frontier/whole-save.json.gz",
+      "bytes": 493429,
+      "SHA256": "91fe9514cec8315663af99593c9491cb13079959473186bc97cafdc30443462c"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "78f8ddf06765579487ee21b5a942298238ee90590e4975bae952c8e181c49e9a"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "78f8ddf06765579487ee21b5a942298238ee90590e4975bae952c8e181c49e9a"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "a818f4c14e74b6de258f96b57b5995dc193054185df381e82c7e7e0039d997a2"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/owned-process.json",
+      "bytes": 248,
+      "SHA256": "7ecc4257d7de72a5ba7c96bd1965d239217c356f999fdfd90efa81216ae23b60"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/raw.log",
+      "bytes": 1089,
+      "SHA256": "90f9dc0e9611d4b3f7badb9f0d02cb5961480fdbe05f9f533bb0225538e19668"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc01/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc01/receipt.json",
+      "bytes": 750,
+      "SHA256": "05f68903c3c8dc3a90662007599d6941c21cf02552ddc859f2a72191b251112e"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "3b5ec668cdd229e2b5923c8b6b55a6d4eb91f73ab5a0f385f7677075b5f7bd77"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "3b5ec668cdd229e2b5923c8b6b55a6d4eb91f73ab5a0f385f7677075b5f7bd77"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "c4879406c70404111fcc117aad463871ef3cdd69a6f440baca8884dbde2608d0"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/owned-process.json",
+      "bytes": 248,
+      "SHA256": "a62ac26cf8e3a15db2d446e99440c9d2b89e67941cbbfe2307f016944ab7a768"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/raw.log",
+      "bytes": 188,
+      "SHA256": "8db3104f62adaf704d6505a4a2abc3abf91ed06786857d7fd01a97e050b87076"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc02/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc02/receipt.json",
+      "bytes": 750,
+      "SHA256": "099cf3e195f0957041a84fff63f9f37d8a0de71c80c61b7f274fc5503a0a93ce"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "1e0808eaac646653457fd3fe4902f0e7220ea9961da804e38d1278aa7da81591"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "1e0808eaac646653457fd3fe4902f0e7220ea9961da804e38d1278aa7da81591"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "c965b1d5a53f54c0144001aff5d376d40e971b7018a398e2ff2dd83c86f5776f"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/owned-process.json",
+      "bytes": 248,
+      "SHA256": "8df32007d36013359af8aaf37c062b42f73131b690ab059b1194b224ad3864c6"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc03/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc03/receipt.json",
+      "bytes": 750,
+      "SHA256": "85334e80e3b2597cec26a2949ae014402b822bfb37302b30fa7b848fa3b2c790"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "f4b267f7545ca6a799b9736ed8fe06534fc5b6cfb66424c4dfa678cc4c7304fe"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "f4b267f7545ca6a799b9736ed8fe06534fc5b6cfb66424c4dfa678cc4c7304fe"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "7c353f9403b2eb842a27c356f7836a87753b02012998586b3117f8948c8b2fea"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/owned-process.json",
+      "bytes": 248,
+      "SHA256": "6c7dc85e8d4e529b68ea98bc1019cbf07cdfa73f569a2e8e0f52eda9791d3a28"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc04/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc04/receipt.json",
+      "bytes": 750,
+      "SHA256": "e2acdffb691f53dbca9bf57a53bdd3c090be45a6eeeb878bd926c75671839584"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/inputs-after.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/inputs-before.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "1451712ef30001495a5bc8c90ce7c099304c59e823f4c7bc0e8923d1c1aa40df"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/owned-process.json",
+      "bytes": 226,
+      "SHA256": "388badedb3eefe6acd77546363533a9fb1f72889b7cce882137fd4f8fb5be9f7"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/raw.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archivePath": "ROOT24-gates/tsc05/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/tsc05/receipt.json",
+      "bytes": 728,
+      "SHA256": "e27b6ad93b20865dd865857240d6a4fcc0bd150d37dcaa8b284092932928285c"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "78f8ddf06765579487ee21b5a942298238ee90590e4975bae952c8e181c49e9a"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "78f8ddf06765579487ee21b5a942298238ee90590e4975bae952c8e181c49e9a"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/owned-descendants.json",
+      "bytes": 401,
+      "SHA256": "7f3e83117fc6c1b43cfa6791c66482bad00f5b4947d63afdc2bdff169927308f"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/owned-process.json",
+      "bytes": 338,
+      "SHA256": "3e0144950eaf3c6dae705231776cf084c3e12a4ea9d6022db78f546a2672d7f3"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/raw.log",
+      "bytes": 1034,
+      "SHA256": "a108bbb769db94c93462171d128bd37eb8e8dc21167c3eb046a735f29daf75f1"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure01/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure01/receipt.json",
+      "bytes": 988,
+      "SHA256": "9540df6bea0768d2711a6d0574c10b5b8d61495a69a0be29ca945f0a94182c7d"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/inputs-after.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/inputs-before.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/owned-descendants.json",
+      "bytes": 401,
+      "SHA256": "1dec3183f7caf407ce9d9ef913bb57914a952764752bc6be422447f94f95dc42"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/owned-process.json",
+      "bytes": 278,
+      "SHA256": "fbdffca400c5431d0bff7dea4f2b10231c764c2f51f8b14a326be5a3567faf5f"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/raw.log",
+      "bytes": 1122,
+      "SHA256": "c56d35c40487079cfceedeac4b4331b25102a30b8f6361526a0454cf2deb2788"
+    },
+    {
+      "archivePath": "ROOT24-gates/pure02/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/pure02/receipt.json",
+      "bytes": 928,
+      "SHA256": "8821f4d22636b606cab4f00352f199f6a7beccad19d8d75f6f4a06b7890a8734"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/inputs-after.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/inputs-before.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/owned-descendants.json",
+      "bytes": 401,
+      "SHA256": "10f8008b82165d91ff8223298a5a49f41fadd15fcabcd472923ba4612cce4f5e"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/owned-process.json",
+      "bytes": 418,
+      "SHA256": "fd113b49197781e85be3ead5281215e6dd1ce9f9531ff7e73114451decce5cdf"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/raw.log",
+      "bytes": 112,
+      "SHA256": "9eca5805ef0004232b8431de68a822e8b799606629b2f88a619d10f940388353"
+    },
+    {
+      "archivePath": "ROOT24-gates/prefix-recheck01/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/prefix-recheck01/receipt.json",
+      "bytes": 1068,
+      "SHA256": "cd50379027ac31967af3f81c21079be7f9b98ea3c7712e700488eeab9f485340"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "1e0808eaac646653457fd3fe4902f0e7220ea9961da804e38d1278aa7da81591"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "1e0808eaac646653457fd3fe4902f0e7220ea9961da804e38d1278aa7da81591"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/owned-descendants.json",
+      "bytes": 267,
+      "SHA256": "87cd2f6d5ab5bc680598b7fae5ebd9e9dbb036d0405b1c09d65b3ef999082ab9"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/owned-process.json",
+      "bytes": 712,
+      "SHA256": "60e07fc5ce6be24d6d2fab86491de29114b972dee97238d428db92c1bfe909e0"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/raw.log",
+      "bytes": 25721,
+      "SHA256": "00d295d66673eb05ed2a5c33cd120444065d57e1a6675b3f13549c7422289977"
+    },
+    {
+      "archivePath": "ROOT24-gates/native01/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native01/receipt.json",
+      "bytes": 1362,
+      "SHA256": "fa7c174f6f07b9647c1ae3319c3a6e6cb48e5408aa9614f348e780f47e39e648"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/inputs-after.json",
+      "bytes": 44661,
+      "SHA256": "f4b267f7545ca6a799b9736ed8fe06534fc5b6cfb66424c4dfa678cc4c7304fe"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/inputs-before.json",
+      "bytes": 44661,
+      "SHA256": "f4b267f7545ca6a799b9736ed8fe06534fc5b6cfb66424c4dfa678cc4c7304fe"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/owned-descendants.json",
+      "bytes": 267,
+      "SHA256": "d623f3cf542a0e0ed2d00d67a2d8b51ad9b374021900b9194a3d7fa03cdf8865"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/owned-process.json",
+      "bytes": 712,
+      "SHA256": "3abd48bc06b9bf6be1aa17f43739ac1ea25ea7ff877873a9e186a169fff36f5e"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/raw.log",
+      "bytes": 10615,
+      "SHA256": "03500f60ea5cd49b8c8d12977cbc9142dfc475386c1ae23a6c7e690ccea0131a"
+    },
+    {
+      "archivePath": "ROOT24-gates/native02/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native02/receipt.json",
+      "bytes": 1362,
+      "SHA256": "366701e3ae24fb37d42cb803402036df11ee18e26a1bef207219b44a7e99c957"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/inputs-after.json",
+      "bytes": 45534,
+      "SHA256": "c0fbe2fdc9d94dc0f78e7718ef8a6c3ec8d48edee20ee686d66dfbb3c34682f9"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/inputs-before.json",
+      "bytes": 45534,
+      "SHA256": "c0fbe2fdc9d94dc0f78e7718ef8a6c3ec8d48edee20ee686d66dfbb3c34682f9"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/owned-descendants.json",
+      "bytes": 137,
+      "SHA256": "2ec27221a431496bd418974590bebda3ab73f8b1e71e231dfbf9d5f2faf609dc"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/owned-process.json",
+      "bytes": 712,
+      "SHA256": "e83756e53727259bf596eeac70a89b7bb29fec674537676214ee54c6be3a7c9e"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/raw.log",
+      "bytes": 114106,
+      "SHA256": "ce21c380f37b87a711881f7c6528c4c20b7ee69d1314d048594de3fb784f3590"
+    },
+    {
+      "archivePath": "ROOT24-gates/native03/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03/receipt.json",
+      "bytes": 1214,
+      "SHA256": "6a755d1a20799d43f197f767d95e31f342914af49db2106c0c80812027a14256"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/inputs-after.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/inputs-after.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/inputs-before.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/inputs-before.json",
+      "bytes": 45534,
+      "SHA256": "cbaab4e9434396f00778d4900540d1a625c213ef5cef74c62d5ef079320cef68"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/owned-descendants.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/owned-descendants.json",
+      "bytes": 267,
+      "SHA256": "8ea27dede3128b376753df592428f484de31b54afa9293966172c008a37917f2"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/owned-process.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/owned-process.json",
+      "bytes": 734,
+      "SHA256": "a34c303516b5d5f4c902b652e03e730d69dbe423043bd99f0f2e623410416a63"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/raw.log",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/raw.log",
+      "bytes": 47533,
+      "SHA256": "4cf0b1113da3d306f9674cafc7710d133e563cc78af10c49ba14a09aff0964dd"
+    },
+    {
+      "archivePath": "ROOT24-gates/native04/receipt.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native04/receipt.json",
+      "bytes": 1384,
+      "SHA256": "9d0772c4d53377a32d5c7794de1610b233b9237f3b42c90dd8cf8002ce1c1f9e"
+    },
+    {
+      "archivePath": "ROOT24-bindings/COLD-345-EXACT-REPLAY.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/COLD-345-EXACT-REPLAY.json",
+      "bytes": 539,
+      "SHA256": "404ac197963eed76d14881ac37c46039e0326f5811d101e505533af26ab6b574"
+    },
+    {
+      "archivePath": "ROOT24-bindings/NATIVE04-COLD-CONTINUATION-PLAN.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/NATIVE04-COLD-CONTINUATION-PLAN.json",
+      "bytes": 3917,
+      "SHA256": "0812bc03a4baa6b3b45a83b8ffbf85d9a784aa8ae24f2979443d31a036ac8c4f"
+    },
+    {
+      "archivePath": "ROOT24-bindings/native03-checkpoint-344.original.save.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/native03-checkpoint-344.original.save.json",
+      "bytes": 3382174,
+      "SHA256": "f0ea97daef48d4e2357536a3d1ce4b9222dbcbaaa4d5205677bde9483c5a95b6"
+    },
+    {
+      "archivePath": "ROOT24-bindings/recheck-prefix.mts",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/recheck-prefix.mts",
+      "bytes": 3671,
+      "SHA256": "523ccfa0cef246e4dda173df050e656b9faac8fac21653cbef0a131dab539a36"
+    },
+    {
+      "archivePath": "ROOT24-bindings/BASELINE-404.json",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/BASELINE-404.json",
+      "bytes": 44338,
+      "SHA256": "e0e817e537759d98086f486e75280dc3a98b5256ff42fd23531c63edbbcdf941"
+    },
+    {
+      "archivePath": "ROOT24-bindings/BASELINE-AGENTS.md",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/BASELINE-AGENTS.md",
+      "bytes": 1726,
+      "SHA256": "f98729175106aeb60651166555d03c7a0d53c119c33371adc9956928c7f830f7"
+    },
+    {
+      "archivePath": "ROOT24-bindings/BASELINE-提示词.md",
+      "originalPath": "/workspace/yunshan-work/ROOT24-economy-next-day-20261007-01/BASELINE-提示词.md",
+      "bytes": 25038,
+      "SHA256": "4ec0aa0731002723c49d580c8a2e90c828e4292ea9ca79fe59be8c825cfe8d89"
+    }
+  ]
+}

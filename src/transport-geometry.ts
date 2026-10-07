@@ -14,18 +14,20 @@ export function guardrailOffset(edge: NetworkEdge): number {
 }
 export const GUARDRAIL_THICKNESS = .2;
 export const BRIDGE_OPEN_END = 6;
+export const STREET_GUARD_JOIN_VERSION = 'actual-same-grade-deck-joins-within-participating-segments-v2';
 const SAME_GRADE_TOLERANCE = .26;
 const JOIN_BODY_CLEARANCE = .35;
 interface GuardInterval { start: number; end: number }
 interface GuardLayout { length: number; lengths: number[]; preceding: number[]; intervals: GuardInterval[] }
 interface GuardSegment { edge: NetworkEdge; a: Vec3; b: Vec3; dx: number; dz: number; horizontal: number; length: number; along: number; cells: string[] }
-const layouts = new WeakMap<WorldDefinition, { edgeCount: number; edges: Map<NetworkEdge, GuardLayout> }>();
+const layouts = new WeakMap<WorldDefinition, { edgeCount: number; joinRevision?: 2; edges: Map<NetworkEdge, GuardLayout> }>();
 
 /** Explicit future geometry edits must invalidate shared renderer/body data. */
 export function invalidateTransportGeometry(world: WorldDefinition): void { layouts.delete(world); }
 
 function guardLayouts(world: WorldDefinition): Map<NetworkEdge, GuardLayout> {
-  const cached = layouts.get(world); if (cached?.edgeCount === world.edges.length) return cached.edges;
+  const joinRevision = world.referenceCityRecipe?.streetGuardJoinRevision;
+  const cached = layouts.get(world); if (cached?.edgeCount === world.edges.length && cached.joinRevision === joinRevision) return cached.edges;
   const edges = new Map<NetworkEdge, GuardLayout>(), cuts = new Map<NetworkEdge, GuardInterval[]>(), segments: GuardSegment[] = [], grid = new Map<string, number[]>();
   const cellSize = 64;
   for (const edge of world.edges) {
@@ -44,7 +46,12 @@ function guardLayouts(world: WorldDefinition): Map<NetworkEdge, GuardLayout> {
   for (let index = 0; index < segments.length; index++) {
     const segment = segments[index], candidates = new Set(segment.cells.flatMap(cell => grid.get(cell) ?? []));
     for (const candidate of candidates) {
-      if (candidate <= index) continue; const other = segments[candidate]; if (other.edge === segment.edge) continue;
+      if (candidate <= index) continue; const other = segments[candidate];
+      // Only the new reference recipe opens real same-grade bends of its own
+      // polyline. Their intersecting deck footprint needs the same clearance
+      // as a join between separate edges. Renderer and body read these exact
+      // intervals; old recipes retain their original complete rail spans.
+      if (other.edge === segment.edge && joinRevision !== 2) continue;
       const cross = segment.dx * other.dz - segment.dz * other.dx; if (Math.abs(cross) < 1e-8) continue;
       const dx = other.a.x - segment.a.x, dz = other.a.z - segment.a.z;
       const t = (dx * other.dz - dz * other.dx) / cross, u = (dx * segment.dz - dz * segment.dx) / cross;
@@ -57,7 +64,15 @@ function guardLayouts(world: WorldDefinition): Map<NetworkEdge, GuardLayout> {
         // real deck and a body, including where an oblique deck meets each side.
         const half = (deckWidth(crossing.edge) / 2 + JOIN_BODY_CLEARANCE + guardrailOffset(current.edge) * cos) / sin * current.length / current.horizontal;
         const center = current.along + current.length * progress;
-        cuts.get(current.edge)!.push({ start: center - half, end: center + half });
+        const opening = { start: center - half, end: center + half };
+        if (joinRevision === 2 && current.edge === crossing.edge) {
+          // The intersecting deck belongs to these two physical segments.
+          // A shallow-angle bound may otherwise erase rails on later bends
+          // of the same edge which do not participate in this junction.
+          opening.start = Math.max(opening.start, current.along);
+          opening.end = Math.min(opening.end, current.along + current.length);
+        }
+        cuts.get(current.edge)!.push(opening);
       };
       cut(segment, other, t); cut(other, segment, u);
     }
@@ -70,7 +85,7 @@ function guardLayouts(world: WorldDefinition): Map<NetworkEdge, GuardLayout> {
     ]);
     layout.intervals = intervals;
   }
-  layouts.set(world, { edgeCount: world.edges.length, edges }); return edges;
+  layouts.set(world, { edgeCount: world.edges.length, joinRevision, edges }); return edges;
 }
 
 /** Renderer posts and body collision consume the same closed guard intervals. */
