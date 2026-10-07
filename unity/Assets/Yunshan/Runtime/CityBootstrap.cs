@@ -492,10 +492,41 @@ namespace Yunshan.Runtime
                         }
                 }
                 foreach (var action in section.Actions) ActionButton(action);
+                foreach (var form in section.Forms) DrawForm(form);
                 foreach (var note in section.Notes) GUILayout.Label(note, small);
             }
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+        }
+
+        readonly Dictionary<string, Dictionary<string, string>> formValues = new Dictionary<string, Dictionary<string, string>>();
+        /// <summary>Inputs for a pane form; submit stays disabled until every
+        /// field is in range, and the simulation still validates the command.</summary>
+        void DrawForm(Pane.Form form)
+        {
+            if (!formValues.TryGetValue(form.Id, out var values)) formValues[form.Id] = values = new Dictionary<string, string>();
+            GUILayout.Space(4); GUILayout.Label(form.Label, label);
+            foreach (var field in form.Fields)
+            {
+                values.TryGetValue(field.Key, out var value); value = value ?? "";
+                GUILayout.Label(field.Label, small);
+                if (field.Kind == "select")
+                {
+                    if (value.Length == 0 && field.Options.Count > 0) value = field.Options[0].Value;
+                    int selected = Mathf.Max(0, field.Options.FindIndex(o => o.Value == value));
+                    selected = GUILayout.Toolbar(selected, field.Options.Select(o => o.Label).ToArray());
+                    value = field.Options.Count > 0 ? field.Options[selected].Value : "";
+                }
+                else if (field.Kind == "textarea") value = GUILayout.TextArea(value, field.MaxLength == int.MaxValue ? 4000 : field.MaxLength, GUILayout.MinHeight(64));
+                else value = GUILayout.TextField(value, field.MaxLength == int.MaxValue ? 64 : field.MaxLength);
+                if (field.Kind == "textarea" || field.Kind == "text") GUILayout.Label($"{value.Trim().Length} 字" + (field.MinLength > 0 ? $"（至少 {field.MinLength}）" : ""), small);
+                values[field.Key] = value;
+            }
+            var command = form.Build(values);
+            var old = GUI.enabled; GUI.enabled = old && !form.Disabled && command != null;
+            if (GUILayout.Button(form.Label, GUILayout.MinHeight(24)) && command != null) { Execute(command); formValues.Remove(form.Id); }
+            GUI.enabled = old;
+            if (!string.IsNullOrEmpty(form.Note)) GUILayout.Label(form.Note, small);
         }
 
         /// <summary>City map: terrain, river, network, districts and the player;

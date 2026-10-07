@@ -7,7 +7,8 @@ import type { Simulation } from '../simulation';
 import { publicDepartures } from '../journey';
 import { JourneyNavigation } from '../journey';
 import { ContextRules, activity, button, hostilityNames, hostilityStage, kindNames, modeNames, money, relationshipTitle, roleNames, romanceNames, romanceStage, type ContextAction, type ContextView } from './context-model';
-import type { BuildingKind, Company, SimState, Vec3, WorldDefinition } from '../types';
+import type { Building, BuildingKind, Command, Company, SimState, Vec3, WorldDefinition } from '../types';
+import { canReviewPetition, civicSite, publicFloor } from '../simulation/culture';
 import { researchPlayerContextReason, researchProgressInfo } from '../simulation/extensions';
 import { shopLifecycleMayIncorporate } from '../simulation/shop_lifecycle';
 import { powerBinding } from '../simulation/power';
@@ -15,11 +16,18 @@ import { isRoadOpen, roadClosure } from '../roads';
 import { roadworksStatus, roadworkActorId } from '../simulation/roadworks';
 import { civicCouncilSourceProof } from '../simulation/civic-staffing';
 import { electionCounts, governanceSupported } from '../simulation/governance';
+import { clinicalVisitDeadline } from '../simulation/clinical';
+import { transferredSourceUnits, transferStationOccupied } from '../simulation/hygiene-transfer';
 import { canHoldFamilyCeremony, isEstateSaleVenue, isFamilyDependent, publicFamilyVenue } from '../simulation/family';
 
 export interface PaneRow { label: string; value: string }
 export interface PaneEntry { id: string; title: string; subtitle: string; detail?: string[]; actions: ContextAction[] }
-export interface PaneSection { title: string; rows: PaneRow[]; entries: PaneEntry[]; actions: ContextAction[]; notes: string[] }
+/** A command whose fields the player fills in (text the web takes from inputs).
+ * `command` holds the fixed parts; each field's value is written to `key`.
+ * The client enables submit only when every text field meets its length range. */
+export interface PaneFormField { key: 'targetId' | 'title' | 'text' | 'value'; label: string; kind: 'select' | 'text' | 'textarea' | 'number'; options?: { value: string; label: string }[]; minLength?: number; maxLength?: number; optional?: boolean }
+export interface PaneForm { id: string; label: string; command: Command; fields: PaneFormField[]; disabled: boolean; note?: string }
+export interface PaneSection { title: string; rows: PaneRow[]; entries: PaneEntry[]; actions: ContextAction[]; notes: string[]; forms?: PaneForm[] }
 export interface PanesModel { panes: { id: 'life' | 'city' | 'industry' | 'transit' | 'relations'; title: string; sections: PaneSection[] }[] }
 
 const ingredientNames: Record<string, string> = { grain: '稻米', vegetable: '时蔬', fish: '溪鱼' };
@@ -71,6 +79,8 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
         ...Object.entries(recipeNames).filter(([id]) => (player.inventory[`dish:${id}`] ?? 0) > 0).map(([id, name]) => button(`享用${name} · ${player.inventory[`dish:${id}`]} 份`, 'eat', id, undefined, !rules.canAct()))],
       notes: ['随身食物每次实际吃 1 份；无需厨房。购餐并带走的余量可在途中食用。'],
     }),
+    healthSection(rules, world, state),
+    hygieneSection(rules, world, state),
     cookingSection(rules, state),
     section('最近事件', { rows: state.events.slice(-8).reverse().map(event => ({ label: `#${event.tick}`, value: event.text })) }),
   ];
@@ -139,6 +149,7 @@ export function panesModel(sim: Simulation, world: WorldDefinition, view: Contex
       button('参加节庆 · 20', 'attendFestival', o.id, undefined, !rules.atKind('market', 'pavilion', 'hall') || player.money < 20)] })),
       notes: ['书院、亭子或官署可入会；节庆在市集、亭子与官署举行。社区捐助支持公共福利与居民健康。'] }),
     familySection(rules, world, state),
+    ...cultureSections(rules, world, state),
   ];
 
   return { panes: [{ id: 'life', title: '生活', sections: life }, { id: 'city', title: '城市', sections: city }, { id: 'industry', title: '百业', sections: industrySections(rules, world, state) }, { id: 'transit', title: '交通', sections: transit }, { id: 'relations', title: '人脉', sections: relationsPane }] };
@@ -392,4 +403,139 @@ function rideSection(rules: ContextRules, world: WorldDefinition, state: SimStat
   if (recorded?.vehicleId) rows.push({ label: '当前实际乘坐', value: `${recorded.vehicleId} · 下一站 ${world.nodes.find(n => n.id === recorded.nextStopNodeId)?.name ?? '查询中'}` });
   if (vehicle) rows.push({ label: modeNames[vehicle.kind] ?? vehicle.kind, value: `${vehicle.passengers} 人 · ${activity(vehicle.state)}` });
   return section('当前乘坐', { rows, actions: vehicle ? [button('下车 / 下船', 'leaveVehicle', vehicle.id)] : [], notes: vehicle ? [] : ['尚未乘坐。接近站点或载具，步行视角可购票上车。'] });
+}
+
+/** ui.ts renderLifeSystems 身心 part and clinicalContent: profile, treatment and the player's clinical orders. */
+function healthSection(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection {
+  const extension = state.extension, profile = extension?.actorProfiles.player, rows: PaneRow[] = [], notes: string[] = [];
+  if (profile) rows.push({ label: '年龄 / 健康', value: `${profile.age.toFixed(1)} 岁 / ${Math.round(profile.health)}` }, { label: '心情 / 压力', value: `${Math.round(profile.mood)} / ${Math.round(profile.stress)}` }, { label: '生活技能', value: String(Math.round(profile.skill)) });
+  else notes.push('生活记录尚未初始化。');
+  if (profile?.historyTags.length) notes.push(profile.historyTags.join(' · '));
+  notes.push('须到医馆公共层；材料到货、合资格医生与患者共同完成 20 分钟后才恢复健康。离场暂停。');
+  const wait = Math.ceil(clinicalVisitDeadline(state, 'player') - (extension?.lastUpdate ?? 0));
+  if (wait > 0) notes.push(`复诊间隔还需 ${wait} 分钟，原有诊疗间隔继续保留。`);
+  const nearby = rules.nearbyBuilding();
+  if (nearby?.kind === 'clinic') {
+    const doctors = state.citizens.filter(doctor => doctor.workId === nearby.id && ['医生', 'doctor'].includes(doctor.role) && extension?.actorProfiles[doctor.id]?.alive && (extension.actorProfiles[doctor.id]?.age ?? 0) >= 18);
+    rows.push({ label: '本诊所真实任职成年医生', value: `${doctors.length} 人` });
+    notes.push(doctors.length ? '诊疗还需医生实际出勤与患者共同在场；任职名单不等于正在接诊。' : '本诊所尚无任职的成年医生，当前无法承诺诊疗。');
+  }
+  const names: Record<string, string> = { awaitingSupply: '等待真实材料供货', awaitingDoctor: '等待医生与患者实际在场', inTreatment: '现场诊疗中', refundPending: '退款仍在托管，等待钱包容量', completed: '诊疗已完成', cancelled: '诊疗已取消' };
+  const orders = (state.clinical?.orders ?? []).filter(order => order.payerId === 'player' || order.patientId === 'player').slice(-6).reverse();
+  if (!orders.length) notes.push('暂无个人诊疗订单。30 云币先进入托管，实际采购和诊疗才会结算。');
+  const entries: PaneEntry[] = orders.map(order => {
+    const patient = order.patientId === 'player' ? '自己' : state.citizens.find(person => person.id === order.patientId)?.name ?? order.patientId;
+    const detail = [`场所 ${world.buildings.find(site => site.id === order.siteId)?.name ?? order.siteId} · 医患共同现场 ${Math.floor(order.workedMinutes * 10) / 10} / ${order.requiredMinutes} 分钟`,
+      `剩余托管 ${money(order.escrow)} · 已付材料 ${money(order.purchasePaid)} · 服务费 ${money(order.serviceFee)} · 已退 ${money(order.refunded)}`, `保留材料 ${order.reservedUnits} · 已耗 ${order.consumedUnits} 份`, order.lastReason,
+      ...Object.entries(order.staffMinutes).map(([doctorId, minutes]) => `出勤医生 ${state.citizens.find(person => person.id === doctorId)?.name ?? doctorId} · ${Math.floor(minutes * 10) / 10} 分钟`)];
+    const cancellable = order.payerId === 'player' && !['completed', 'cancelled'].includes(order.state) && order.cancelledAt === null;
+    return { id: order.id, title: `${patient} · ${names[order.state] ?? order.state}`, subtitle: '诊疗订单', detail, actions: cancellable ? [button('取消诊疗，退回未赚托管款', 'cancelTreatment', order.id, undefined, !rules.canAct())] : [] };
+  });
+  return section('身心与诊疗', { rows, entries, actions: [button('登记诊疗 · 30 云币托管', 'heal', 'player', undefined, !rules.canStartTreatment())], notes });
+}
+
+/** src/hygiene-ui.ts hygieneContent: infection status, sealed clinical waste and volunteer transfers. Reads authority only. */
+function hygieneSection(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection {
+  const nearby = rules.nearbyBuilding(), siteId = nearby?.kind === 'clinic' ? nearby.id : undefined, canAct = rules.canAct();
+  const rows: PaneRow[] = [], entries: PaneEntry[] = [], notes: string[] = [];
+  const episode = state.pathology?.episodes.player;
+  if (episode) rows.push({ label: '健康状况', value: `${({ incubating: '潜伏期', symptomatic: '出现症状', recovering: '恢复中', recovered: '恢复后', dead: '已故' } as Record<string, string>)[episode.phase] ?? episode.phase} · 症状 ${Math.round(episode.severity)}/40 · 尚未完成检验` });
+  const h = state.hygiene;
+  const occupied = (site: string, floor: number, point: string, includeReserved = true) => transferStationOccupied(state, site, floor, point, includeReserved);
+  const contained = (site: string, floor: number, point: string) => (h?.batches ?? []).filter(b => b.siteId === site && b.floor === floor && b.pointId === point).reduce((n, b) => n + b.containedUnits, 0);
+  if (h) {
+    const batches = h.batches.filter(batch => siteId ? batch.siteId === siteId : batch.patientId === 'player').slice(-8);
+    if (batches.length || h.transfers?.tasks.length) notes.push('密封处理后，原用品与清洁材料仍需保管。每站点可安全收集8份；未收集的废物会继续留在原站点。');
+    for (const batch of batches) {
+      const job = h.jobs.find(job => job.batchId === batch.id && !['completed', 'cancelled'].includes(job.state)), moved = transferredSourceUnits(state, batch.id), total = batch.generatedUnits + batch.cleaningResidualUnits - moved, unsafe = total - batch.containedUnits;
+      const held = contained(batch.siteId, batch.floor, batch.pointId) + occupied(batch.siteId, batch.floor, batch.pointId, false), reserved = occupied(batch.siteId, batch.floor, batch.pointId) - occupied(batch.siteId, batch.floor, batch.pointId, false);
+      const detail = [`待处理 ${batch.contaminatedUnits} · 累计封存 ${batch.sealedUnits} · 清洁残留 ${batch.cleaningResidualUnits} · 已搬出 ${moved} · 源地 ${total} 份`, `安全入容器 ${batch.containedUnits} · 未安全收集 ${unsafe} 份`, `原站点实存 ${held}/8 · 另预约 ${reserved} 份`,
+        ...(batch.hazard === 'YV1' ? ['污染用品：处理时需要防护，避免接触传播。'] : [])];
+      const actions: ContextAction[] = [];
+      if (job) {
+        detail.push(`实际劳动 ${Math.floor(job.workedMinutes * 10) / 10}/10 分钟 · 托管 ${job.escrow.toFixed(2)} · 采购实付 ${job.purchasePaid.toFixed(2)} · 退款 ${job.refunded.toFixed(2)} 云币`, job.reason);
+        if (job.completedAt === null && job.cancelledAt === null) actions.push(button('取消处理，保留废物与已购物料', 'cancelDisinfection', job.id, undefined, !canAct));
+      } else if (batch.contaminatedUnits > 0) { actions.push(button('现场提交材料采购 · 20 云币托管上限', 'disinfectWaste', batch.id, undefined, !canAct || state.player.money < 20)); detail.push('一份独立实购物料与10个真实在场计薪分钟才封存；未花采购款退回。须在原公共站点提交。'); }
+      if (batch.contaminatedUnits === 0 && batch.sealedUnits * 2 - moved >= 2) {
+        const destinations = world.buildings.filter(b => b.kind === 'clinic' && b.id !== batch.siteId && (b.functionPoints ?? []).some(p => p.floor === 0 && p.purpose === 'service' && contained(b.id, p.floor, p.id) + occupied(b.id, p.floor, p.id) + 3 <= 8))
+          .sort((a, b) => Math.hypot(a.position.x - batch.point.x, a.position.z - batch.point.z) - Math.hypot(b.position.x - batch.point.x, b.position.z - batch.point.z)).slice(0, 3);
+        detail.push('志愿转运：本人20云币采购托管，一份真实运输耗材；两站各需医生2个实薪分钟。本人携带三份，接收站仍限8份。尚无末端处理。');
+        for (const destination of destinations) actions.push(button(`转运保管到${destination.name}`, 'transferWaste', JSON.stringify([batch.id, destination.id]), undefined, !canAct || state.player.money < 20));
+      }
+      entries.push({ id: batch.id, title: `${world.buildings.find(site => site.id === batch.siteId)?.name ?? batch.siteId} · ${batch.id}`, subtitle: '诊疗用品用后保管', detail, actions });
+    }
+    for (const task of h.transfers?.tasks ?? []) {
+      const held = contained(task.destinationSiteId, task.destinationFloor, task.destinationPointId) + occupied(task.destinationSiteId, task.destinationFloor, task.destinationPointId, false);
+      const reserved = occupied(task.destinationSiteId, task.destinationFloor, task.destinationPointId) - occupied(task.destinationSiteId, task.destinationFloor, task.destinationPointId, false);
+      const actions: ContextAction[] = [];
+      if (task.state === 'readyForPickup') actions.push(button('本人现场提取三份封存运输包', 'collectWasteTransfer', task.id, undefined, !canAct));
+      if (task.state === 'carried' || task.state === 'awaitingIntake') actions.push(button('目的诊所现场提交接收', 'deliverWasteTransfer', task.id, undefined, !canAct));
+      if (task.pickedAt === null && task.state !== 'cancelled') actions.push(button('提货前取消，保留已购物料', 'cancelWasteTransfer', task.id, undefined, !canAct));
+      entries.push({ id: task.id, title: `转运与保管 · ${task.id}`, subtitle: `目的 ${world.buildings.find(b => b.id === task.destinationSiteId)?.name ?? task.destinationSiteId}`,
+        detail: [`原站交接 ${task.collectionMinutes}/2 · 接收 ${task.intakeMinutes}/2 分钟 · 实际移动 ${Math.floor(task.traveledDistance)}米`, `本人采购托管 ${task.escrow.toFixed(2)} · 实付 ${task.purchasePaid.toFixed(2)} · 已退 ${task.refunded.toFixed(2)} 云币`, task.reason, `目的站实存 ${held}/8 · 预约 ${reserved} 份；尚无末端处理。`], actions });
+    }
+  }
+  if (!rows.length && !entries.length) notes.push('暂无感染与诊疗用品记录。');
+  return section('卫生与诊疗用品', { rows, entries, notes });
+}
+
+const floorOf = (building: Building, y: number) => Math.floor((y - building.position.y + .01) / (building.height / Math.max(1, building.floors)));
+/** ui.ts renderCulture and its forms: works, reports, petitions and the public service orders they lead to. */
+function cultureSections(rules: ContextRules, world: WorldDefinition, state: SimState): PaneSection[] {
+  const culture = state.culture, player = state.player, canAct = rules.canAct();
+  const atCultureBuilding = (id: string) => { const b = world.buildings.find(x => x.id === id); return !!b && rules.atBuilding(id) && publicFloor(b, floorOf(b, player.position.y)); };
+  const atCultureSite = (...kinds: BuildingKind[]) => world.buildings.some(b => (kinds.includes(b.kind) || kinds.includes('hall') && civicSite(b)) && atCultureBuilding(b.id));
+  const project = culture?.project, site = project && world.buildings.find(b => b.id === project.siteId);
+  const working = state.paused ? '时间暂停' : project && atCultureBuilding(project.siteId) && state.hour >= 7 && state.hour < 22 && player.needs.hunger >= 40 && player.needs.fatigue >= 40 ? '现场创作' : '离场、夜间或休息暂停';
+  const reportNames: Record<string, string> = { water: '水质', safety: '治安', budget: '公开公库' }, statusNames: Record<string, string> = { unchecked: '待核验', verified: '证据一致', false: '已核验不实', corrected: '已更正，旧记录保留' };
+  const topicNames: Record<string, string> = { education: '教育', health: '医疗', transport: '交通' };
+  const works: PaneEntry[] = (culture?.works ?? []).map(work => ({ id: work.id, title: `《${work.title}》`, subtitle: `${work.genre === 'literature' ? '文学' : '绘画'} · 品质 ${Math.round(work.quality)} · ${work.publishedAt === null ? '未公开稿件' : `已有 ${work.readIds.length} 位读者`}`,
+    detail: [work.text, ...(work.publishedAt === null && work.authorId === 'player' ? [] : [`发表地点：${world.buildings.find(b => b.id === work.siteId)?.name ?? '公共场所'}。每位居民需实际在场阅读 15 分钟。`])],
+    actions: work.publishedAt === null && work.authorId === 'player' ? [button('现场发表 · 20 云币', 'publishWork', work.id, undefined, !canAct || !atCultureSite('market', 'pavilion', 'hall') || player.money < 20)] : [] }));
+  const reports: PaneEntry[] = (culture?.reports ?? []).map(report => ({ id: report.id, title: `${reportNames[report.metric] ?? report.metric} · ${statusNames[report.status] ?? report.status}`, subtitle: `主张 ${report.claim.toFixed(2)}`,
+    detail: [report.text, `原主张 ${report.originalClaim.toFixed(2)} · 发布时公开观测 ${report.evidence.observedValue.toFixed(2)}（Tick ${report.evidence.observedTick}）`, `现场读者 ${report.readIds.length} · 传播触达 ${report.reachedIds.length} · 已读更正 ${report.correctionReadIds.length}`],
+    actions: [...(report.status === 'unchecked' ? [button('到书院或大厅核验 · 10 云币', 'verifyReport', report.id, undefined, !canAct || !atCultureSite('school', 'hall') || player.money < 10)] : []),
+      ...(report.status === 'false' && report.authorId === 'player' ? [button('到原发布处或大厅更正 · 5 云币', 'correctReport', report.id, undefined, !canAct || !(atCultureBuilding(report.siteId) || atCultureSite('hall')) || player.money < 5)] : [])] }));
+  const petitions: PaneEntry[] = (culture?.petitions ?? []).map(petition => ({ id: petition.id, title: petition.title, subtitle: `${topicNames[petition.topic] ?? petition.topic} · ${petition.signerIds.length} 位现场联署 · ${petition.status === 'answered' ? '已公开回复' : `还需 ${Math.max(0, Math.ceil((petition.replyAt - culture!.lastUpdate) / 60))} 小时回复`}`,
+    detail: [petition.text, ...(petition.reply ? [petition.reply] : []), ...(petition.executionId ? [`执行记录 ${petition.executionId}；可在“公共服务订单”查看预算、供货与现场服务。`] : [])], actions: [] }));
+  const busy = player.needs.hunger < 40 || player.needs.fatigue < 40;
+  const forms: PaneForm[] = [
+    { id: 'createWork', label: '开始创作 · 60 云币', command: { type: 'createWork' }, disabled: !canAct || !atCultureSite('school', 'pavilion') || player.money < 60 || !!culture?.project || busy, note: '在书院或亭馆公共层现场创作；需饱腹与精力各 40 以上。',
+      fields: [{ key: 'targetId', label: '体裁', kind: 'select', options: [{ value: 'literature', label: '文学 · 120 分钟' }, { value: 'art', label: '绘画 · 180 分钟' }] }, { key: 'title', label: '作品标题', kind: 'text', minLength: 1, maxLength: 40 }, { key: 'text', label: '正文（20–1200 字）', kind: 'textarea', minLength: 20, maxLength: 1200 }] },
+    { id: 'publishReport', label: '发布见闻 · 20 云币', command: { type: 'publishReport' }, disabled: !canAct || !atCultureSite('market', 'pavilion', 'hall') || player.money < 20, note: '在市集、亭馆或大厅发布；公共预算报道须在大厅发布。数值留空则引用当前公开观测。',
+      fields: [{ key: 'targetId', label: '主题', kind: 'select', options: [{ value: 'water', label: '溪水与环境' }, { value: 'safety', label: '城区治安' }, { value: 'budget', label: '公共预算' }] }, { key: 'value', label: '记录数值', kind: 'number', optional: true }, { key: 'text', label: '内容（20–400 字）', kind: 'textarea', minLength: 20, maxLength: 400 }] },
+    { id: 'filePetition', label: '递交请愿 · 10 云币', command: { type: 'filePetition' }, disabled: !canAct || !atCultureSite('hall') || player.money < 10, note: '在大厅公共层备案；联署与公开回复后进入程序审核。',
+      fields: [{ key: 'targetId', label: '议题', kind: 'select', options: [{ value: 'education', label: '教育与书院' }, { value: 'health', label: '医疗与健康' }, { value: 'transport', label: '交通与出行' }] }, { key: 'title', label: '标题', kind: 'text', minLength: 1, maxLength: 40 }, { key: 'text', label: '内容（20–400 字）', kind: 'textarea', minLength: 20, maxLength: 400 }] },
+  ];
+  const orderNames: Record<string, string> = { agenda: '列入议程', awaitingReview: '等待程序审核', awaitingBudget: '等待合法预算', awaitingSupply: '等待实际供货', active: '现场服务中', fulfilled: '服务已完成', rejected: '已驳回' };
+  const decisionSite = world.buildings.find(b => rules.atBuilding(b.id) && canReviewPetition(b, floorOf(b, player.position.y), player));
+  const orders: PaneEntry[] = (culture?.orders ?? []).map(order => {
+    const detail = [order.lastReason, `服务场所 ${world.buildings.find(b => b.id === order.siteId)?.name ?? order.siteId}`, `授权上限 / 实际支出 ${money(order.authorizedCap)} / ${money(order.spent)}`, `到货 / 已消耗 / 目标 ${order.receivedUnits} / ${order.consumedUnits} / ${order.targetUnits} 份`,
+      `受益居民 / 在岗人员 ${order.servedIds.length} / ${order.staffIds.length} · 我的现场服务 ${Math.floor(order.serviceMinutes.player ?? 0)} / ${order.requiredMinutes} 分钟`,
+      ...(order.approvedBy.length ? [`预算署名：${order.approvedBy.map(id => id === 'player' ? '本人' : state.citizens.find(c => c.id === id)?.name ?? id).join('、')}`] : []), ...(order.receipts.length ? [`${order.receipts.length} 笔实际采购回执`] : [])];
+    const actions: ContextAction[] = [];
+    for (const extra of culture?.supplementalBudgets?.requests.filter(r => r.orderId === order.id) ?? []) {
+      detail.push(`独立追加审议 ${extra.id}：上限 ${money(extra.cap)} · 已付 ${money(extra.spent)} · 申请时尚缺 ${extra.missingUnits.toFixed(3)} 份 / 报价 ${money(extra.quotedGross)}`);
+      if (extra.approvedAt !== null) detail.push(`独立署名：${extra.signatures.map(sig => sig.actorId === 'player' ? '当选市长（本人）' : state.citizens.find(c => c.id === sig.actorId)?.name ?? sig.actorId).join('、')} · ${extra.closedAt === null ? '实际采购中' : '已关账，原回执保留'}`);
+      else if (extra.closedAt !== null) detail.push('订单已结束，未批准的申请关闭；没有发生追加开支。');
+      else if (extra.signatureVersion === 2) detail.push('等待同一议事厅的两名在任地方议员实际在岗联审；获批后仍需留足公共工资、运维资金并购买有限材料。');
+      else {
+        const term = state.governance?.term, election = state.governance?.elections.find(e => e.id === term?.electionId);
+        const elected = !!term && term.endedAt === null && culture!.lastUpdate >= term.startsAt && culture!.lastUpdate < term.endsAt && election?.result === 'elected';
+        actions.push(button(`当选市长现场审议 · 追加 ${money(extra.cap)}`, 'reviewPetition', extra.id, undefined, !canAct || !decisionSite || !elected));
+      }
+    }
+    if (['agenda', 'awaitingReview'].includes(order.state)) actions.push(button('市长现场审议 · 上限 40 云币', 'reviewPetition', order.petitionId, 40, !canAct || !decisionSite), button('市长现场驳回', 'reviewPetition', order.petitionId, 0, !canAct || !decisionSite));
+    if (order.state === 'active' && order.topic !== 'transport') actions.push(button(order.servedIds.includes('player') ? '本项服务已经完成' : culture?.playerServiceId === order.id ? '已参加，等待现场服务完成' : '到场接受公共服务', 'attendService', order.id, undefined,
+      !canAct || !atCultureBuilding(order.siteId) || player.needs.hunger < 40 || player.needs.fatigue < 35 || order.servedIds.includes('player') || culture?.playerServiceId === order.id || !!culture?.playerServiceId && culture.playerServiceId !== order.id || order.topic === 'health' && (state.extension?.actorProfiles.player?.health ?? 100) >= 95));
+    const maintenance = culture?.transportMaintenance[order.siteId];
+    if (maintenance) detail.push(`真实维护窗口还余 ${Math.max(0, Math.ceil(maintenance.maintainedUntil - culture!.lastUpdate))} 游戏分钟，影响该站点后续班次间隔。`);
+    return { id: order.id, title: `${topicNames[order.topic] ?? order.topic} · ${orderNames[order.state] ?? order.state}`, subtitle: order.id, detail, actions };
+  });
+  return [
+    section('作品与见闻', { rows: project ? [{ label: `正在创作《${project.title}》`, value: `${Math.floor(project.workedMinutes)} / ${project.requiredMinutes} 现场分钟 · ${site?.name ?? '创作场所'} · ${working}` }] : [],
+      entries: [...works, ...reports], forms: forms.slice(0, 2), notes: project ? [] : ['当前没有创作项目。作品由实际现场时间完成，居民读完后留下记忆与学习反馈。'] }),
+    section('公共信息与请愿', { entries: petitions, forms: forms.slice(2), notes: petitions.length ? [] : ['尚无请愿。'] }),
+    section('公共服务订单', { entries: orders, notes: orders.length ? [] : ['备案、联署与公开回复后进入程序审核；合法预算与实际库存到位后，服务才会开展。'] }),
+  ];
 }

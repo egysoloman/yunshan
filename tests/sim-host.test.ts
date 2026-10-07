@@ -56,6 +56,13 @@ test('native host drives the authoritative simulation through requests', async (
   for (const title of ['选举与议案', '居民补选与地方议会', '道路与现场工程', '水能设施', '公共服务', '审计与司法', '公共账目']) assert(titles('city').includes(title), title);
   for (const title of ['当前乘坐', '路口调度', '航空器与停机位']) assert(titles('transit').includes(title), title);
   assert(titles('relations').includes('家庭与下一代'));
+  for (const title of ['作品与见闻', '公共信息与请愿', '公共服务订单']) assert(titles('relations').includes(title), title);
+  const forms = panes.panes.flatMap(p => p.sections).flatMap(s => s.forms ?? []);
+  assert.deepEqual(forms.map(f => f.id), ['createWork', 'publishReport', 'filePetition']);
+  const petition = forms.find(f => f.id === 'filePetition')!;
+  assert.equal(petition.disabled, true, 'petitions are filed in the hall');
+  const filed = (await host.handle({ id: 13, op: 'command', command: { ...petition.command, targetId: 'education', title: '书院加课', text: '希望书院在傍晚增加一节公开课，方便下工后的居民学习。' } })).result as { result: { ok: boolean; message: string } };
+  assert.equal(filed.result.ok, false, 'the simulation still decides');
   const signal = panes.panes.find(p => p.id === 'transit')!.sections.find(s => s.title === '路口调度')!;
   assert(signal.actions.every(a => a.disabled), 'only police or the mayor dispatch junctions');
   assert.deepEqual(titles('industry'), ['产业版图', '并购', '交易所', '科技与未来']);
