@@ -11,14 +11,22 @@
   - 模拟宿主客户端 `Host/`：JSON 读写、子进程管理、帧解析、Node 路径查找。
 - `../dotnet/`：用 .NET 8 SDK 编译同一批 `Core/*.cs`，运行 xUnit 测试，其中一项会真实启动模拟宿主子进程。不需要 Unity：`cd dotnet && dotnet test`。
 - `Assets/Yunshan/Runtime/`：负责显示、输入、界面和 glb 加载（glTFast），只读取权威数据。
-- `Assets/Yunshan/Editor/`：菜单「云山/复制体素工坊资产到 StreamingAssets」，打包前使用。
+- `Assets/Yunshan/Editor/`：打包前使用的两个菜单（复制体素工坊资产；生成模拟宿主并复制 Node.js），以及缺少模拟宿主时拒绝构建的检查。`../dotnet/Yunshan.EditorCheck` 用 UnityEditor 签名桩做编译检查。
 - `Assets/Yunshan/Resources/Shaders/`：顶点色、实例色、水面和叠加线着色器。放在 Resources 下，打包时会被包含，`Shader.Find` 才能找到。glTFast 自带的着色器需要按 glTFast 文档加入打包（Always Included Shaders 或它提供的 ShaderVariantCollection）。
 
 ## 运行前准备
 
 1. 安装 Node.js 22 或更高版本。macOS 上从 Dock 或 Finder 启动的程序不会读取终端的 PATH，所以会按顺序查找：环境变量 `YUNSHAN_NODE`、`StreamingAssets/yunshan-sim/node/node`、`/opt/homebrew/bin/node`、`/usr/local/bin/node`、nvm 和 volta 的安装目录，最后才是 PATH。
 2. 在仓库根目录执行 `npm install`。
-3. 可选：执行 `npm run build:sim-host`，生成 `Assets/StreamingAssets/yunshan-sim/sim-host.mjs`（约 1.6 MB，已加入 gitignore）。如果没有生成这个文件，编辑器会直接用 `node --import tsx` 运行仓库源码。打包独立程序时必须先生成它。
+3. 可选：执行 `npm run build:sim-host`，生成 `Assets/StreamingAssets/yunshan-sim/sim-host.mjs`（约 1.7 MB，已加入 gitignore）。如果没有生成这个文件，编辑器会直接用 `node --import tsx` 运行仓库源码。
+
+## 打包独立程序
+
+1. 菜单「云山/复制体素工坊资产到 StreamingAssets」。
+2. 菜单「云山/准备独立打包：生成模拟宿主并复制 Node.js」：生成 `sim-host.mjs`，并把本机的 Node.js 复制到 `StreamingAssets/yunshan-sim/node/`。复制的 Node 只适用于与本机相同的系统和 CPU 架构，所以 macOS 版请在 Mac 上打包，Windows 版在 Windows 上打包（或手动替换该目录里的 node）。
+3. 正常 Build。缺少 `sim-host.mjs` 时构建会被拒绝并给出提示；缺少 node 目录只给警告，玩家机器需自行安装 Node.js 22+。
+
+已验证：生成的 `sim-host.mjs` 复制到仓库以外的空目录后，可独立完成 hello/open/step（容器内 Node 22.22）。
 
 ## 打开与运行
 

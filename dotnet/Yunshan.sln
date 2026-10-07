@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yunshan.Core.Tests", "Yunsh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yunshan.UnityCheck", "Yunshan.UnityCheck\Yunshan.UnityCheck.csproj", "{BBA7FF05-C8D2-4ED0-B3E6-54DB7DE3FFE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yunshan.EditorCheck", "Yunshan.EditorCheck\Yunshan.EditorCheck.csproj", "{79F46B15-A348-4185-94D4-B9C6E1414D03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{BBA7FF05-C8D2-4ED0-B3E6-54DB7DE3FFE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBA7FF05-C8D2-4ED0-B3E6-54DB7DE3FFE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBA7FF05-C8D2-4ED0-B3E6-54DB7DE3FFE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F46B15-A348-4185-94D4-B9C6E1414D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F46B15-A348-4185-94D4-B9C6E1414D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F46B15-A348-4185-94D4-B9C6E1414D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F46B15-A348-4185-94D4-B9C6E1414D03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
