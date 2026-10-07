@@ -50,7 +50,17 @@ test('native host drives the authoritative simulation through requests', async (
   for (const section of context.sections) for (const action of section.actions) assert(action.client === 'interact' || typeof action.command?.type === 'string');
 
   const panes = (await host.handle({ id: 11, op: 'panes', view: { mode: 'walk' } })).result as PanesModel;
-  assert.deepEqual(panes.panes.map(p => p.id), ['life', 'city', 'transit', 'relations']);
+  assert.deepEqual(panes.panes.map(p => p.id), ['life', 'city', 'industry', 'transit', 'relations']);
+  const titles = (id: string) => panes.panes.find(p => p.id === id)!.sections.map(s => s.title);
+  assert(titles('life').includes('烹饪'));
+  for (const title of ['水能设施', '公共服务', '审计与司法', '公共账目']) assert(titles('city').includes(title), title);
+  assert.deepEqual(titles('industry'), ['产业版图', '并购', '交易所', '科技与未来']);
+  const industry = panes.panes.find(p => p.id === 'industry')!;
+  assert.equal(industry.sections[3].entries.length, 7, 'seven research sectors');
+  assert(industry.sections[1].entries.length > 0, 'the city has companies to acquire');
+  // A traveller at the spawn cannot found, research, trade shares or audit.
+  for (const action of panes.panes.flatMap(p => p.sections).flatMap(s => [...s.actions, ...s.entries.flatMap(e => e.actions)]))
+    if (['foundCompany', 'research', 'buyShares', 'sellShares', 'audit', 'expandCompany', 'listCompany', 'acquireCompany', 'cook'].includes(action.command?.type ?? '')) assert.equal(action.disabled, true, action.label);
   const transit = panes.panes.find(p => p.id === 'transit')!;
   const travel = transit.sections.flatMap(s => s.entries).flatMap(e => e.actions).find(a => a.command?.type === 'planJourney');
   assert(travel?.command?.targetId, 'transit pane offers real journey targets');

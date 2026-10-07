@@ -459,9 +459,10 @@ namespace Yunshan.Runtime
             float left = 12, top = 140, width = Mathf.Min(560, Screen.width - 440), height = Screen.height - 320;
             GUI.Box(new UnityEngine.Rect(left, top, width, height), GUIContent.none, box);
             paneTab = Mathf.Clamp(paneTab, 0, panes.Count + 1);
-            for (int i = 0; i < panes.Count; i++) if (GUI.Toggle(new UnityEngine.Rect(left + 8 + i * 80, top + 6, 76, 26), paneTab == i, panes[i].Title, GUI.skin.button)) paneTab = i;
-            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + panes.Count * 80, top + 6, 76, 26), paneTab == panes.Count, "设置", GUI.skin.button)) paneTab = panes.Count;
-            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + (panes.Count + 1) * 80, top + 6, 76, 26), paneTab == panes.Count + 1, "地图", GUI.skin.button)) paneTab = panes.Count + 1;
+            float tab = Mathf.Min(80, (width - 16) / (panes.Count + 2));
+            for (int i = 0; i < panes.Count; i++) if (GUI.Toggle(new UnityEngine.Rect(left + 8 + i * tab, top + 6, tab - 4, 26), paneTab == i, panes[i].Title, GUI.skin.button)) paneTab = i;
+            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + panes.Count * tab, top + 6, tab - 4, 26), paneTab == panes.Count, "设置", GUI.skin.button)) paneTab = panes.Count;
+            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + (panes.Count + 1) * tab, top + 6, tab - 4, 26), paneTab == panes.Count + 1, "地图", GUI.skin.button)) paneTab = panes.Count + 1;
             if (paneTab == panes.Count + 1) { DrawMap(new UnityEngine.Rect(left + 8, top + 38, width - 16, height - 46)); return; }
             GUILayout.BeginArea(new UnityEngine.Rect(left + 8, top + 38, width - 16, height - 46));
             panesScroll = GUILayout.BeginScrollView(panesScroll);
@@ -478,8 +479,17 @@ namespace Yunshan.Runtime
                     GUILayout.Label(entry.Title, label); GUILayout.Label(entry.Subtitle, small);
                     foreach (var line in entry.Detail) GUILayout.Label(line, small);
                     GUILayout.EndVertical();
-                    foreach (var action in entry.Actions) ActionButton(action, GUILayout.Width(110));
+                    // Up to two buttons sit beside the entry; more wrap below in rows of three.
+                    bool beside = entry.Actions.Count <= 2;
+                    if (beside) foreach (var action in entry.Actions) ActionButton(action, GUILayout.Width(110));
                     GUILayout.EndHorizontal();
+                    if (!beside)
+                        for (int k = 0; k < entry.Actions.Count; k += 3)
+                        {
+                            GUILayout.BeginHorizontal();
+                            for (int j = k; j < Mathf.Min(k + 3, entry.Actions.Count); j++) ActionButton(entry.Actions[j], GUILayout.Width((width - 40) / 3));
+                            GUILayout.EndHorizontal();
+                        }
                 }
                 foreach (var action in section.Actions) ActionButton(action);
                 foreach (var note in section.Notes) GUILayout.Label(note, small);

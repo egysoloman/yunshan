@@ -77,6 +77,14 @@ export class ContextRules {
     if (inside) return true;
     return Math.hypot(p.x - building.door.x, p.y - building.door.y, p.z - building.door.z) <= 32;
   }
+  atKindPoint(purpose: BuildingFunctionPoint['purpose'], ...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id, purpose)); }
+  atFacility(...facilities: NonNullable<Building['facility']>[]): boolean { return this.world.buildings.some(b => !!b.facility && facilities.includes(b.facility) && this.atBuilding(b.id)); }
+  atFacilityPoint(purpose: BuildingFunctionPoint['purpose'], ...facilities: NonNullable<Building['facility']>[]): boolean { return this.world.buildings.some(b => !!b.facility && facilities.includes(b.facility) && this.atBuilding(b.id, purpose)); }
+  /** The building the context panel shows: the one entered, else the nearest door within 18 m. */
+  nearbyBuilding(): Building | undefined {
+    const position = this.state.player.position, inside = this.view.inside ? this.world.buildings.find(b => b.id === this.view.inside) : undefined;
+    return inside ?? this.world.buildings.filter(b => spatialDistance(position, b.door) < 18).sort((a, b) => spatialDistance(position, a.door) - spatialDistance(position, b.door))[0];
+  }
   atKind(...kinds: BuildingKind[]): boolean { return this.world.buildings.some(b => kinds.includes(b.kind) && this.atBuilding(b.id)); }
   pointAvailable(building: Building, purpose?: BuildingFunctionPoint['purpose']): boolean { return building.floorPlanProfile !== FLOOR_PLAN_PROFILE || this.atBuilding(building.id, purpose); }
   canStartTreatment(patientId = 'player'): boolean {
