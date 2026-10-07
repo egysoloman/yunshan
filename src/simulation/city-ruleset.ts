@@ -4,12 +4,13 @@ import type { Citizen, SimState, WorldDefinition } from '../types';
 import { validateReferenceCollisionPolicy, type ReferenceCollisionPolicy } from './reference-collision';
 import { validateFreightPickupPolicy, type FreightPickupPolicy } from './freight-access';
 import { validateMealRoutePolicy, type MealRoutePolicy } from './meal-route';
+import { validateFarmYieldPolicy, type FarmYieldPolicy } from './farm-yield';
 import { hasServiceMaterialRequestEstimate, validateServiceMaterialSchedulingEnvelope } from './service-material-scheduling';
 
 export const PRODUCT_RULESET = 'civic-local-v1' as const;
 export type EffectiveRuleset = 'legacy' | typeof PRODUCT_RULESET;
 export const CIVIC_HISTORY_POLICY = 'civic-history-pages-v1' as const;
-export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy }
+export interface SimulationOptions { rulesetId: typeof PRODUCT_RULESET; historyPolicyId?: typeof CIVIC_HISTORY_POLICY; referenceCollisionPolicyId?: ReferenceCollisionPolicy; mealRoutePolicyId?: MealRoutePolicy; freightPickupPolicyId?: FreightPickupPolicy; farmYieldPolicyId?: FarmYieldPolicy }
 type Document = Record<string, any>;
 export type CivicInitialProfession = Pick<Citizen, 'id' | 'role' | 'workId' | 'districtId' | 'education'>;
 const object = (value: unknown): value is Document => !!value && typeof value === 'object' && !Array.isArray(value);
@@ -24,6 +25,7 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
   validateReferenceCollisionPolicy(data);
   validateMealRoutePolicy(data);
   validateFreightPickupPolicy(data);
+  validateFarmYieldPolicy(data);
   validateServiceMaterialSchedulingEnvelope(data);
   const state = data.state, runtime = data.runtime;
   const listed = Array.isArray(runtime.persistedModules) && runtime.persistedModules.includes('civicStaffing');
@@ -70,9 +72,9 @@ export function validateCityRulesetEnvelope(data: Document): 1 | 2 {
 
 /** Generic partition tooling keeps its historical partial-document contract. */
 export function hasCityRulesetDeclaration(data: Document): boolean {
-  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId') || own(data, 'referenceCollisionPolicyId') || own(data, 'mealRoutePolicyId') || own(data, 'freightPickupPolicyId') || hasServiceMaterialRequestEstimate(data.state)
+  return data.version === 3 || data.version === 4 || own(data, 'rulesetId') || own(data, 'motionVersion') || own(data, 'historyPolicyId') || own(data, 'referenceCollisionPolicyId') || own(data, 'mealRoutePolicyId') || own(data, 'freightPickupPolicyId') || own(data, 'farmYieldPolicyId') || hasServiceMaterialRequestEstimate(data.state)
     || object(data.state) && (own(data.state, 'civicStaffing') || own(data.state, 'budgetAuthority') || own(data.state, 'civicHistory') || own(data.state, 'serviceMaterialScheduling'))
-    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion') || own(data.runtime, 'referenceCollisionPolicyId') || own(data.runtime, 'mealRoutePolicyId') || own(data.runtime, 'freightPickupPolicyId')
+    || object(data.runtime) && (own(data.runtime, 'civicStaffingVersion') || own(data.runtime, 'budgetAuthorityVersion') || own(data.runtime, 'civicHistoryVersion') || own(data.runtime, 'referenceCollisionPolicyId') || own(data.runtime, 'mealRoutePolicyId') || own(data.runtime, 'freightPickupPolicyId') || own(data.runtime, 'farmYieldPolicyId')
       || own(data.runtime, 'serviceMaterialSchedulingVersion') || Array.isArray(data.runtime.persistedModules) && data.runtime.persistedModules.some((name: unknown) => name === 'civicStaffing' || name === 'budgetAuthority' || name === 'civicHistory' || name === 'serviceMaterialScheduling'));
 }
 
