@@ -384,7 +384,7 @@ namespace Yunshan.Runtime
             GUI.Label(new UnityEngine.Rect(24, 42, 500, 24), $"{(RoleNames.TryGetValue(p.Role ?? "", out var role) ? role : p.Role)} · {p.Money:0.##} 云币 · 声望 {p.Reputation:0}{(p.Alive ? "" : " · 生命已结束")}", label);
             GUI.Label(new UnityEngine.Rect(24, 66, 500, 22), $"饥饿 {p.Hunger:0}  精力 {p.Fatigue:0}  社交 {p.Social:0}  娱乐 {p.Fun:0}  ·  居民 {life?.Residents ?? 0} 位在视野", small);
             var feet = walker.Feet;
-            GUI.Label(new UnityEngine.Rect(24, 88, 500, 22), $"{(walker.Walker.Inside != null ? walker.Walker.Inside.Name + $" {walker.Walker.Floor + 1} 层 · " : "")}位置 {feet.X:0.0} / {feet.Y:0.0} / {feet.Z:0.0} · 模拟 {frame.StepMs:0} ms/步", small);
+            GUI.Label(new UnityEngine.Rect(24, 88, 500, 22), $"{(walker.Walker.Inside != null ? walker.Walker.Inside.Name + $" {walker.Walker.Floor + 1} 层 · " : "")}位置 {feet.X:0.0} / {feet.Y:0.0} / {feet.Z:0.0} · 模拟 {frame.StepMs:0} ms/步 · 实际 {session.EffectiveMinutesPerSecond:0.0} 游戏分/秒（1× 为 1.0）", small);
             GUI.Label(new UnityEngine.Rect(24, 108, 500, 22), frame.NavigationDestination != null ? $"导航至 {frame.NavigationDestination}{(frame.NavigationUnavailable != null ? "（暂不可达）" : "")}" : "", small);
 
             // Time and save controls

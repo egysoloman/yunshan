@@ -32,6 +32,9 @@ namespace Yunshan.Runtime
         public string Notice; public bool NoticeOk = true; public float NoticeAt;
         public List<Vec3> Voxels = new List<Vec3>();
         public double BankAmount = 100;
+        /// <summary>Game minutes advanced per real second over the last few seconds.</summary>
+        public double EffectiveMinutesPerSecond { get; private set; }
+        readonly Queue<(float at, double minutes)> rate = new Queue<(float, double)>();
         /// <summary>Raised on the main thread after the player is moved by the
         /// simulation (vehicles, aircraft, loads) or a walking step was refused.</summary>
         public event Action<SimFrame> PlayerMovedBySimulation;
@@ -85,6 +88,11 @@ namespace Yunshan.Runtime
 
         void Accept(SimFrame frame, bool moved)
         {
+            float at = Time.unscaledTime;
+            rate.Enqueue((at, frame.Ticks * .25 * frame.Speed));
+            while (rate.Count > 0 && at - rate.Peek().at > 5) rate.Dequeue();
+            double minutes = 0; foreach (var r in rate) minutes += r.minutes;
+            EffectiveMinutesPerSecond = rate.Count > 1 ? minutes / Math.Max(.5, at - rate.Peek().at) : EffectiveMinutesPerSecond;
             PreviousFrame = Frame ?? frame; Frame = frame;
             float now = Time.unscaledTime; FrameInterval = Mathf.Clamp(now - FrameArrivedAt, .05f, 2f); FrameArrivedAt = now;
             foreach (var e in frame.Events) if (e.Id > lastEventId) EventLog.Add(e);
