@@ -33,6 +33,7 @@ namespace Yunshan.Runtime
         readonly List<Transform> signs = new List<Transform>();
         readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
+        StationSignPool stationSigns; float nextStationSigns;
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
         int paneTab;
@@ -105,6 +106,8 @@ namespace Yunshan.Runtime
                 walker.PointerOverUi = PointerOverUi;
                 if (session.Frame != null) OnPlayerMovedBySimulation(session.Frame);
                 life = new CityLifeView(world, transform);
+                if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+                stationSigns = new StationSignPool(stationRoot, world, signFont);
                 status = null;
                 _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
@@ -577,10 +580,11 @@ namespace Yunshan.Runtime
                 var line = $"{building.Name}\n{(shop.Open ? "营业中" : "已打烊")} · {shop.Price:0.#} 云币/份 · 库存 {shop.Inventory:0}";
                 if (text.text != line) text.text = line;
             }
+            if (stationSigns != null && Time.unscaledTime >= nextStationSigns) { nextStationSigns = Time.unscaledTime + .25f; stationSigns.Update(frame, view.transform.position); }
             foreach (var sign in signs) sign.rotation = Quaternion.LookRotation(sign.position - view.transform.position);
         }
 
-        void OnDestroy() => session?.Dispose();
+        void OnDestroy() { stationSigns?.Dispose(); session?.Dispose(); }
         void OnApplicationQuit() => session?.Dispose();
     }
 }
