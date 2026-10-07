@@ -12,6 +12,7 @@ import { educationAtPosition, educationServiceStationsAtPosition } from '../simu
 import { clinicalAtPosition, clinicalVisitDeadline } from '../simulation/clinical';
 import { shopLifecycleAllowsSpaceUse } from '../simulation/shop_lifecycle';
 import { powerBinding } from '../simulation/power';
+import { governanceSupported } from '../simulation/governance';
 import type { AerialVehicle, Building, BuildingFunctionPoint, BuildingKind, Citizen, Command, Company, Relationship, Role, SimState, TransportMode, Vec3, Vehicle, ViewMode, WorldDefinition } from '../types';
 
 export interface ContextView { mode?: ViewMode; inside?: string | null; bankAmount?: number }
@@ -45,6 +46,21 @@ export class ContextRules {
   readonly state: SimState;
   constructor(readonly sim: Simulation, readonly world: WorldDefinition, readonly view: Required<Pick<ContextView, 'mode'>> & ContextView) { this.state = sim.state; }
   hasRole(...roles: string[]): boolean { const player = this.state.player; return roles.some(role => (player.identities ?? [player.role]).includes(role as Role)); }
+  /** The web 公共治理 panel without sliders: each button submits the whole
+   * proposed scheme one step away, through the same 'policy' command. */
+  policyActions(building: Building, actions: ContextAction[], notes: string[]): void {
+    const state = this.state, motion = state.governance?.motions.find(m => ['debating', 'approved'].includes(m.status));
+    const base = motion ?? state.policyPending ?? state, tax = Math.round(base.taxRate * 100), police = Math.round(base.policeBudget * 100);
+    notes.push(`市政方案：营业税率 ${tax}% · 治安预算 ${police}%${motion || state.policyPending ? `（待生效；现行 ${Math.round(state.taxRate * 100)}% / ${Math.round(state.policeBudget * 100)}%）` : ''}。`);
+    notes.push(motion ? '当前议案等待议员表决与生效，不可用新方案覆盖。' : governanceSupported(this.world) && this.hasRole('mayor') ? '请在议事功能点提交方案；过半且至少两名具名议员现场赞成后，最早两小时生效。' : state.policyPending ? `方案待执行 · 当前税率 ${Math.round(state.taxRate * 100)}%，治安预算 ${Math.round(state.policeBudget * 100)}%。` : this.hasRole('mayor') ? '请在官署提交方案；两个游戏小时后影响税收与公共治安。' : '到官署参选成为市长后，可提交治理方案。');
+    if (!this.hasRole('mayor')) return;
+    const disabled = this.view.mode !== 'walk' || !!motion;
+    const scheme = (label: string, taxPercent: number, policePercent: number, blocked: boolean): ContextAction =>
+      ({ label, command: { type: 'policy', targetId: building.id, taxRate: taxPercent / 100, policeBudget: policePercent / 100 }, disabled: disabled || blocked });
+    actions.push(
+      scheme(`提交税率 ${tax - 1}%`, tax - 1, police, tax <= 0), scheme(`提交税率 ${tax + 1}%`, tax + 1, police, tax >= 30),
+      scheme(`提交治安预算 ${police - 5}%`, tax, police - 5, police < 5), scheme(`提交治安预算 ${police + 5}%`, tax, police + 5, police > 95));
+  }
   canWorkAt(kind: BuildingKind): boolean {
     const workplaces: Record<string, BuildingKind[]> = { traveler: ['market', 'workshop', 'farm', 'dock'], police: ['police'], soldier: ['police', 'starport'], teacher: ['school'], driver: ['station', 'airport', 'starport', 'dock'], merchant: ['market', 'workshop', 'farm'], mayor: ['hall', 'core'], scientist: ['school', 'core', 'workshop'], official: ['hall', 'core'], council: ['hall', 'core'] };
     return Object.entries(workplaces).some(([role, kinds]) => this.hasRole(role) && kinds.includes(kind));
@@ -129,6 +145,7 @@ export class ContextRules {
     if (['station', 'airport'].includes(kind)) actions.push(button('驾驶员考核 · 80 云币', 'exam', 'driver', 4, siteDisabled));
     if (kind === 'market') actions.push(button('商人考核 · 80 云币', 'exam', 'merchant', 5, siteDisabled));
     if (['hall', 'core'].includes(kind)) actions.push(button('参加竞选 · 120 云币', 'election', building.id, undefined, siteDisabled));
+    if (['hall', 'core'].includes(kind)) this.policyActions(building, actions, notes);
     if (['school', 'station', 'airport', 'police', 'hall', 'core', 'starport'].includes(kind) && this.canWorkAt(kind)) actions.push(button(playerLaborLabel(state), 'work', building.id, undefined, workDisabled || !!state.playerLabor?.job));
     if (state.playerLabor?.job) actions.push(button('结束本人工班', 'cancelWork'));
     if (['pavilion', 'clinic', 'station'].includes(kind)) actions.push(button('休息片刻', 'rest', building.id, undefined, serviceDisabled));

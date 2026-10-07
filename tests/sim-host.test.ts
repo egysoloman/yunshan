@@ -4,7 +4,9 @@ import { spawn } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import { SimHost, type HostFrame } from '../src/native-host/sim-host';
-import type { ContextModelResult } from '../src/native-host/context-model';
+import { ContextRules, type ContextAction, type ContextModelResult } from '../src/native-host/context-model';
+import type { Simulation } from '../src/simulation';
+import type { WorldDefinition } from '../src/types';
 import type { PanesModel } from '../src/native-host/panes-model';
 
 test('native host drives the authoritative simulation through requests', async () => {
@@ -55,6 +57,29 @@ test('native host drives the authoritative simulation through requests', async (
   const planned = (await host.handle({ id: 12, op: 'command', command: travel!.command })).result as { result: { ok: boolean; message: string }; frame: HostFrame };
   assert.equal(planned.result.ok, true, planned.result.message);
   assert(planned.frame.navigation?.destination, 'the frame carries the planned navigation line');
+
+  // Mayor scheme buttons: one step from the proposed scheme, sent as the
+  // simulation's own 'policy' command (which still checks the hall point).
+  const { sim, world } = host as unknown as { sim: Simulation; world: WorldDefinition };
+  const hall = world.buildings.find(b => b.kind === 'hall')!;
+  const rules = () => new ContextRules(sim, world, { mode: 'walk' });
+  const visitor: ContextAction[] = [], visitorNotes: string[] = [];
+  rules().policyActions(hall, visitor, visitorNotes);
+  assert.equal(visitor.length, 0); assert.match(visitorNotes.join(''), /参选成为市长/);
+  sim.state.player.identities = [...(sim.state.player.identities ?? [sim.state.player.role]), 'mayor'];
+  const mayor: ContextAction[] = [], mayorNotes: string[] = [];
+  rules().policyActions(hall, mayor, mayorNotes);
+  const tax = Math.round(sim.state.taxRate * 100), police = Math.round(sim.state.policeBudget * 100);
+  assert.deepEqual(mayor.map(a => [a.command?.taxRate, a.command?.policeBudget]), [[(tax - 1) / 100, police / 100], [(tax + 1) / 100, police / 100], [tax / 100, (police - 5) / 100], [tax / 100, (police + 5) / 100]]);
+  assert(mayor.every(a => a.command?.type === 'policy' && a.command.targetId === hall.id && !a.disabled));
+  const away = sim.command(mayor[1].command!);
+  assert.equal(away.ok, false); assert.match(away.message, /议事/);
+  sim.state.policyPending = { taxRate: .2, policeBudget: .5, applyAt: sim.state.tick + 120 };
+  const pending: ContextAction[] = [], pendingNotes: string[] = [];
+  rules().policyActions(hall, pending, pendingNotes);
+  assert.equal(pending[1].command?.taxRate, .21, 'the next step starts from the pending scheme');
+  assert.match(pendingNotes[0], /待生效/);
+  delete sim.state.policyPending;
 
   const unknown = await host.handle({ id: 10, op: 'teleport' });
   assert.equal(unknown.ok, false);
