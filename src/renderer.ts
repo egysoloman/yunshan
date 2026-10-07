@@ -994,6 +994,7 @@ export class CityRenderer implements CityRendererAPI {
     const energy = Math.max(.18, state.energy / 100); this.materials.cyan.emissiveIntensity = (.22 + (1 - daylight) * 2) * energy; this.materials.amber.emissiveIntensity = .45 + (1 - daylight) * 3;
     this.facadeNight.value = (1 - daylight) * Math.max(0, state.energy / 100) * .8;
     this.architectureDetail.setLighting(daylight, state.energy / 100);
+    this.studioProps?.setLighting(daylight, state.energy / 100);
     const room = this.insideId ? this.world.buildings.find(b => b.id === this.insideId) : undefined;
     const roomLights = room ? getInteriorLightConfigurations(room, this.insideFloor, this.camera.position, daylight, state.energy / 100) : [];
     for (let i = 0; i < this.interiorLights.length; i++) {

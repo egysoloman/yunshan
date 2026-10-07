@@ -3,6 +3,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
 import { STUDIO_ASSETS, studioBuildingPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
+/** Fraction of an authored emissive maximum shown for a supply and daylight. */
+export function studioEmissiveFactor(daylight: number, power: number): number {
+  const p = Math.min(1, Math.max(0, power)), d = Math.min(1, Math.max(0, daylight));
+  return p * (.35 + .65 * (1 - d));
+}
+
 interface AssetDraw { asset: StudioAsset; meshes: { mesh: THREE.InstancedMesh; bake: THREE.Matrix4 }[]; loaded: boolean }
 
 /** Instanced voxel-studio models for floor-plan fixtures of resident
@@ -18,6 +24,7 @@ export class StudioPropPool {
   private readonly placeholderMaterial = new THREE.MeshStandardMaterial({ color: '#846346', roughness: .9 });
   private readonly statics: StudioStaticPlacement[];
   private signature = '';
+  private lighting = { daylight: 1, power: 1 };
   private disposed = false;
   constructor(parent: THREE.Group | THREE.Scene, world: WorldDefinition, private readonly capacity = 384) {
     this.group.name = '体素工坊 · 楼层设施模型';
@@ -47,6 +54,9 @@ export class StudioPropPool {
           meshes.push({ mesh, bake: object.matrixWorld.clone() });
         });
         if (!meshes.length) throw new Error('no meshes');
+        // Authored glow is a maximum; setLighting scales it by real supply.
+        for (const { mesh } of meshes) for (const material of [mesh.material].flat()) if (material instanceof THREE.MeshStandardMaterial && material.emissiveIntensity > 0 && !material.emissive.equals(new THREE.Color(0, 0, 0))) material.userData.authoredEmissive = material.emissiveIntensity;
+        this.applyLighting(meshes.map(m => m.mesh));
         for (const { mesh } of draw.meshes) this.group.remove(mesh);
         draw.meshes = meshes; draw.loaded = true; loaded.push(draw.asset.id);
         this.signature = '';
@@ -61,6 +71,16 @@ export class StudioPropPool {
 
   /** True when this pool draws the station platform and shelter. */
   get dressesStations(): boolean { return this.statics.length > 0; }
+
+  /** Lamp cores glow only with city power, brighter as daylight falls. */
+  setLighting(daylight: number, power: number): void {
+    this.lighting = { daylight: THREE.MathUtils.clamp(daylight, 0, 1), power: THREE.MathUtils.clamp(power, 0, 1) };
+    this.applyLighting([...this.draws.values()].flatMap(draw => draw.loaded ? draw.meshes.map(m => m.mesh) : []));
+  }
+  private applyLighting(meshes: THREE.InstancedMesh[]): void {
+    const factor = studioEmissiveFactor(this.lighting.daylight, this.lighting.power);
+    for (const mesh of meshes) for (const material of [mesh.material].flat()) if (material instanceof THREE.MeshStandardMaterial && material.userData.authoredEmissive !== undefined) material.emissiveIntensity = material.userData.authoredEmissive * factor;
+  }
 
   update(camera: Vec3, residentBuildingIds: ReadonlySet<string>, inside: { id: string | null; floor: number }, range: number, staticRange = range * 6): void {
     if (this.disposed) return;

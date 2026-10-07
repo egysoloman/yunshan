@@ -72,6 +72,13 @@ try {
       });
       await page.waitForTimeout(6000);
       await page.screenshot({ path: `artifacts/studio-props-${kind}-ceiling.png`, timeout: 180_000 });
+      const glow = () => page.evaluate(() => { const { city, simulation } = window.__YUNSHAN__; const m = city.scene.getObjectByName('体素工坊 · 楼层设施模型').children.filter(x => x.name.startsWith('LIFE-028')).flatMap(x => [x.material].flat()).filter(x => x.userData.authoredEmissive !== undefined); return { hour: simulation.state.hour, energy: simulation.state.energy, emissive: m.map(x => Math.round(x.emissiveIntensity * 1000) / 1000), authored: m.map(x => x.userData.authoredEmissive) }; });
+      report[`${kind}-glow-noon`] = await glow();
+      await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'setTime', value: 22 }));
+      await page.waitForTimeout(6000);
+      report[`${kind}-glow-night`] = await glow();
+      await page.screenshot({ path: `artifacts/studio-props-${kind}-ceiling-night.png`, timeout: 180_000 });
+      await page.evaluate(() => window.__YUNSHAN__.actions.command({ type: 'setTime', value: 12 }));
     }
     await page.evaluate(() => window.__YUNSHAN__.actions.interact());
   }

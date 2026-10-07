@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { createWorld } from '../src/world';
 import { contains, getBuildingBody, getFloorPlanSlabRegions } from '../src/architecture-floor-plan';
 import { buildProgramArchitecture } from '../src/rendering/architecture-bodies';
+import { studioEmissiveFactor } from '../src/rendering/studio-props';
 import { CEILING_LAMP, layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioCeilingLampPlacements, studioDressing, studioStationPlacements } from '../src/rendering/studio-prop-layout';
 
 const world = createWorld();
@@ -95,4 +96,12 @@ test('ceiling lamps hang flush under a real slab above interior use points, clea
   }
   assert.ok(count > 500, String(count));
   console.log(JSON.stringify({ scope: 'default-world', ceilingLamps: count }));
+});
+
+test('studio lamp glow follows real power and daylight', () => {
+  assert.equal(studioEmissiveFactor(1, 0), 0, 'no power, no glow');
+  assert.equal(studioEmissiveFactor(0, 0), 0);
+  assert.equal(studioEmissiveFactor(0, 1), 1, 'full power at night shows the authored maximum');
+  assert.ok(studioEmissiveFactor(1, 1) < studioEmissiveFactor(.5, 1) && studioEmissiveFactor(.5, 1) < 1);
+  assert.equal(studioEmissiveFactor(0, 2), 1, 'inputs are clamped');
 });
