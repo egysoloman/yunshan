@@ -17,7 +17,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, NetworkEdge> edges = new Dictionary<string, NetworkEdge>();
         readonly List<NetworkNode> stations = new List<NetworkNode>();
         readonly Dictionary<string, List<MarketCounter>> counters = new Dictionary<string, List<MarketCounter>>();
-        readonly InstancedBoxes bodies, lamps, voxels;
+        readonly InstancedBoxes bodies, lamps, voxels, faces;
         readonly Dictionary<string, Motion> motion = new Dictionary<string, Motion>();
         readonly Dictionary<string, List<CitizenAppearance.Part>> templates = new Dictionary<string, List<CitizenAppearance.Part>>();
         readonly Dictionary<string, SimFrame.Citizen> previousCitizens = new Dictionary<string, SimFrame.Citizen>();
@@ -38,6 +38,14 @@ namespace Yunshan.Runtime
             var glow = new Material(shader) { name = "云山 · 信号灯" }; glow.SetFloat("_Emission", 1.6f);
             lamps = new InstancedBoxes(glow) { CastShadows = false };
             voxels = new InstancedBoxes(new Material(shader) { name = "云山 · 体素" });
+            var faceShader = Shader.Find("Yunshan/CitizenFace");
+            if (faceShader != null)
+            {
+                var atlas = new Texture2D(CitizenFaceTexture.Width, CitizenFaceTexture.Height, TextureFormat.RGBA32, false, false) { name = "居民面孔图集", filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+                atlas.LoadRawTextureData(CitizenFaceTexture.Pixels()); atlas.Apply();
+                var faceMaterial = new Material(faceShader) { name = "云山 · 居民面孔" }; faceMaterial.SetTexture("_FaceTex", atlas);
+                faces = new InstancedBoxes(faceMaterial, InstancedBoxes.FaceCube(), "_FaceStyle");
+            }
             var line = new GameObject("导航金线", typeof(LineRenderer)); line.transform.SetParent(parent, false);
             navigation = line.GetComponent<LineRenderer>();
             var overlay = Shader.Find("Yunshan/UnlitColor"); if (overlay == null) overlay = Shader.Find("Sprites/Default");
@@ -59,7 +67,7 @@ namespace Yunshan.Runtime
                 indexed = frame;
             }
             double t = Mathf.Clamp01((Time.unscaledTime - session.FrameArrivedAt) / session.FrameInterval);
-            bodies.Clear(); lamps.Clear(); voxels.Clear();
+            bodies.Clear(); lamps.Clear(); voxels.Clear(); faces?.Clear();
             DrawCitizens(frame, t, camera);
             DrawVehicles(frame, t, camera);
             DrawSignals(frame);
@@ -67,7 +75,7 @@ namespace Yunshan.Runtime
             DrawMarketGoods(frame, camera);
             DrawClosures(frame);
             foreach (var v in session.Voxels) voxels.Add(Space.ToUnity(v.X, v.Y + .1, v.Z), Quaternion.identity, Vector3.one * .2f, Space.Hex("#d0b784"));
-            bodies.Draw(); lamps.Draw(); voxels.Draw();
+            bodies.Draw(); lamps.Draw(); voxels.Draw(); faces?.Draw();
             navigation.positionCount = frame.NavigationPoints.Count;
             for (int i = 0; i < frame.NavigationPoints.Count; i++) { var p = frame.NavigationPoints[i]; navigation.SetPosition(i, Space.ToUnity(p.X, p.Y + .3, p.Z)); }
         }
@@ -111,7 +119,10 @@ namespace Yunshan.Runtime
                     if (dead) { double priorY = y; y = .1 - z; z = priorY; }
                     var world = Space.ToUnity(position.X + x * cy + z * sy, position.Y + y, position.Z + z * cy - x * sy);
                     var rotation = yawRotation * Quaternion.AngleAxis((float)((rotationX + (dead ? Math.PI / 2 : 0)) * Mathf.Rad2Deg), Vector3.right);
-                    bodies.Add(world, rotation, new Vector3((float)part.Size.X, (float)part.Size.Y, (float)part.Size.Z), Space.Hex(part.Color));
+                    var size = new Vector3((float)part.Size.X, (float)part.Size.Y, (float)part.Size.Z);
+                    // Faces within the web's balanced face range (85 m) use the ink atlas.
+                    if (part.Face && faces != null && range <= 85) faces.Add(world, rotation, size, Space.Hex(part.Color), CitizenAppearance.FaceStyle(c.Age, c.Mood, c.Stress));
+                    else bodies.Add(world, rotation, size, Space.Hex(part.Color));
                 }
                 Residents++;
             }

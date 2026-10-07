@@ -32,4 +32,14 @@ public class CitizenAppearanceParityTests
         Assert.Equal(expected.Length, actual.Length);
         Assert.True(expected == actual, "citizen appearance differs from TypeScript");
     }
+
+    [Fact]
+    public void FaceTextureMatchesTypeScript()
+    {
+        // scripts/parity/face.ts: SHA-256 of createCitizenFaceTexture().image.data
+        var bytes = CitizenFaceTexture.Pixels();
+        Assert.Equal(CitizenFaceTexture.Width * CitizenFaceTexture.Height * 4, bytes.Length);
+        var sha = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes)).ToLowerInvariant();
+        Assert.Equal("deda18464cd13631e61f9d64b27e1110abdbe1f08db110a0558abf39ccef8832", sha);
+    }
 }
