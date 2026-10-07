@@ -17,7 +17,10 @@ namespace Yunshan.Runtime
         public Vec3 AircraftPosition;   // set while in an aircraft
         public double JetSpeed = 85;
         public float MouseSensitivity = 1;
+        /// <summary>True while the pointer is over an on-screen panel.</summary>
+        public Func<bool> PointerOverUi = () => false;
         Camera view;
+        float lastClick = -1;
 
         public Vec3 Feet => Walker.Feet;
         public string Mode => Walker.Mode;
@@ -48,9 +51,15 @@ namespace Yunshan.Runtime
         void Update()
         {
             if (Walker == null) return;
-            if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+            // As the web: drag to look, double-click the scene to lock the pointer.
+            bool overUi = Cursor.lockState != CursorLockMode.Locked && PointerOverUi();
+            if (Input.GetMouseButtonDown(0) && !overUi)
+            {
+                if (Time.unscaledTime - lastClick < .35f) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+                lastClick = Time.unscaledTime;
+            }
             if (Input.GetKeyDown(KeyCode.Escape)) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
-            if (Cursor.lockState == CursorLockMode.Locked || Input.GetMouseButton(1))
+            if (Cursor.lockState == CursorLockMode.Locked || !overUi && (Input.GetMouseButton(0) || Input.GetMouseButton(1)))
             {
                 // The web turns 0.003 rad per pixel horizontally and 0.0025 vertically.
                 Walker.Yaw -= Input.GetAxis("Mouse X") * .03 * MouseSensitivity;

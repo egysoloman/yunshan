@@ -120,3 +120,41 @@ namespace Yunshan.Core.Host
         }
     }
 }
+
+namespace Yunshan.Core.Host
+{
+    /// <summary>Overview panes (src/native-host/panes-model.ts).</summary>
+    public sealed class Pane
+    {
+        public sealed class Row { public string Label, Value; }
+        public sealed class Entry { public string Id, Title, Subtitle; public List<string> Detail = new List<string>(); public List<ContextAction> Actions = new List<ContextAction>(); }
+        public sealed class Section { public string Title; public List<Row> Rows = new List<Row>(); public List<Entry> Entries = new List<Entry>(); public List<ContextAction> Actions = new List<ContextAction>(); public List<string> Notes = new List<string>(); }
+        public string Id, Title; public List<Section> Sections = new List<Section>();
+
+        static List<ContextAction> Actions(object o, string key)
+        {
+            var list = new List<ContextAction>();
+            foreach (var a in Json.Arr(o, key) ?? new List<object>()) list.Add(new ContextAction { Label = Json.Str(a, "label", ""), Disabled = Json.Bool(a, "disabled"), Client = Json.Str(a, "client"), Command = Json.Obj(a, "command") });
+            return list;
+        }
+        static List<string> Strings(object o, string key) { var list = new List<string>(); foreach (var s in Json.Arr(o, key) ?? new List<object>()) if (s is string text) list.Add(text); return list; }
+
+        public static List<Pane> ListFrom(object o)
+        {
+            var panes = new List<Pane>();
+            foreach (var p in Json.Arr(o, "panes") ?? new List<object>())
+            {
+                var pane = new Pane { Id = Json.Str(p, "id"), Title = Json.Str(p, "title", "") };
+                foreach (var s in Json.Arr(p, "sections") ?? new List<object>())
+                {
+                    var section = new Section { Title = Json.Str(s, "title", ""), Actions = Actions(s, "actions"), Notes = Strings(s, "notes") };
+                    foreach (var r in Json.Arr(s, "rows") ?? new List<object>()) section.Rows.Add(new Row { Label = Json.Str(r, "label", ""), Value = Json.Str(r, "value", "") });
+                    foreach (var e in Json.Arr(s, "entries") ?? new List<object>()) section.Entries.Add(new Entry { Id = Json.Str(e, "id"), Title = Json.Str(e, "title", ""), Subtitle = Json.Str(e, "subtitle", ""), Detail = Strings(e, "detail"), Actions = Actions(e, "actions") });
+                    pane.Sections.Add(section);
+                }
+                panes.Add(pane);
+            }
+            return panes;
+        }
+    }
+}

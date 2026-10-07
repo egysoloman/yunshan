@@ -135,6 +135,9 @@ namespace Yunshan.Core.Host
         public async Task<List<ContextSection>> Context(string mode, string insideBuildingId, double bankAmount = 100)
             => ContextSection.ListFrom(await Request("context", new Dictionary<string, object> { ["view"] = new Dictionary<string, object> { ["mode"] = mode, ["inside"] = insideBuildingId, ["bankAmount"] = bankAmount } }).ConfigureAwait(false));
 
+        public async Task<List<Pane>> Panes(string mode, string insideBuildingId)
+            => Pane.ListFrom(await Request("panes", new Dictionary<string, object> { ["view"] = new Dictionary<string, object> { ["mode"] = mode, ["inside"] = insideBuildingId } }).ConfigureAwait(false));
+
         public async Task<string> Save() => Json.Str(await Request("save").ConfigureAwait(false), "save");
 
         /// <summary>Loads a save of the same city layout; (ok, message, reopen).</summary>

@@ -48,6 +48,16 @@ export class NpcStairMotion {
 
   stats() { return { ...this.counters }; }
 
+  // Within one simulation tick the world's floor plans are fixed: no phase
+  // edits geometry. Geometry fingerprints and body supports are then
+  // remembered for the rest of that tick only; every new tick (and every call
+  // outside a tick) reads the public descriptors again.
+  private tick: { geometry: Map<string, string>; support: Map<string, FloorSupport | null> } | null = null;
+  withinTick<T>(run: () => T): T {
+    const outer = this.tick; this.tick = outer ?? { geometry: new Map(), support: new Map() };
+    try { return run(); } finally { this.tick = outer; }
+  }
+
   private plans(b: Building, floors: readonly number[]): FloorPlan[] { return floors.map(floor => getBuildingFloorPlan(b, floor)).filter((plan): plan is FloorPlan => !!plan); }
 
   private member(b: Building): boolean {
@@ -63,6 +73,12 @@ export class NpcStairMotion {
   private geometry(b: Building, floors: readonly number[]): string {
     this.counters.geometryChecks++;
     if (!this.member(b)) throw new Error('physical stair building no longer belongs to this world');
+    const memo = this.tick?.geometry, key = memo ? `${this.memberIndex.get(b)}:${floors.join(',')}` : '';
+    const known = memo?.get(key); if (known !== undefined) return known;
+    const value = this.fingerprint(b, floors); memo?.set(key, value); return value;
+  }
+
+  private fingerprint(b: Building, floors: readonly number[]): string {
     // Floor plans are public mutable descriptors. Include their values rather
     // than relying on array identity, and inspect only this leg's nearby floors.
     return JSON.stringify([b.id, b.floorPlanProfile, b.stairGeometryRevision, b.commercialGeometryRevision, b.commercialRouteRevision,
@@ -72,6 +88,14 @@ export class NpcStairMotion {
 
   private support(b: Building, position: Vec3): FloorSupport | null {
     if (!finitePoint(position)) return null;
+    const memo = this.tick?.support;
+    if (!memo) return this.measuredSupport(b, position);
+    const coordinate = (n: number) => Object.is(n, -0) ? '-0' : String(n), key = `${this.memberIndex.get(b) ?? b.id}|${coordinate(position.x)}|${coordinate(position.y)}|${coordinate(position.z)}`;
+    if (memo.has(key)) return memo.get(key)!;
+    const value = this.measuredSupport(b, position); memo.set(key, value); return value;
+  }
+
+  private measuredSupport(b: Building, position: Vec3): FloorSupport | null {
     const nominal = Math.round((position.y - b.position.y - .6) / (b.height / b.floors));
     let best: FloorSupport | null = null;
     for (const floor of [nominal, nominal - 1, nominal + 1]) {
@@ -149,11 +173,16 @@ export class NpcStairMotion {
       }
     }
 
-    const witnesses: Witness[] = [];
+    const witnesses: Witness[] = [], length = Math.hypot(to.x - from.x, to.z - from.z);
     for (const b of this.world.buildings) {
       this.counters.buildingScans++;
-      const a = buildingLocalPosition(b, from), z = buildingLocalPosition(b, to);
       const margin = Math.max(b.width, b.depth) / 2 + 3;
+      // Every point of the leg's local bounding box lies within the leg's length
+      // of its start. Beyond the square's circumradius plus that length (and a
+      // metre for rotation rounding) the box test below must reject the site.
+      const reach = margin * Math.SQRT2 + length + 1, ox = from.x - b.position.x, oz = from.z - b.position.z;
+      if (Number.isFinite(reach) && ox * ox + oz * oz > reach * reach) continue;
+      const a = buildingLocalPosition(b, from), z = buildingLocalPosition(b, to);
       if (Math.min(a.x, z.x) > margin || Math.max(a.x, z.x) < -margin || Math.min(a.z, z.z) > margin || Math.max(a.z, z.z) < -margin) continue;
       const height = b.height / b.floors;
       if (!(height > 0) || !Number.isFinite(height)) continue;
@@ -177,7 +206,7 @@ export class NpcStairMotion {
       try {
         geometry = this.geometry(b, floors);
         if (high - low + 1 <= 7) {
-          const leg = this.materialize(b, floors, route, index);
+          const leg = this.sharedLeg(b, floors, geometry, route, index);
           if (leg) result = { kind: 'physical', leg };
         }
       } catch { geometry = ''; }
@@ -186,6 +215,23 @@ export class NpcStairMotion {
     }
     const result: NpcStairDescription = { kind: 'legacy', bodies: witnesses.filter(witness => witness.building.floorPlanProfile === 'v4-program-bodies-02').map(witness => ({ building: witness.building, floors: witness.floors })) };
     entries.set(index, { from: { ...from }, to: { ...to }, result, witnesses, collection: this.world.buildings, collectionLength: this.world.buildings.length }); return result;
+  }
+
+  // Materialized legs depend only on the building's local geometry (the same
+  // fingerprint that validates every cached leg), the two reference points and
+  // whether the route's prefix is the actual origin. Replanned routes reuse
+  // them while that fingerprint is unchanged; the route index is the caller's.
+  private readonly legs = new Map<string, { geometry: string; byPoints: Map<string, NpcStairLeg | null> }>();
+  private sharedLeg(b: Building, floors: number[], geometry: string, route: Vec3[], index: number): NpcStairLeg | null {
+    const coordinate = (n: number) => Object.is(n, -0) ? '-0' : String(n), point = (p: Vec3) => `${coordinate(p.x)},${coordinate(p.y)},${coordinate(p.z)}`;
+    const from = route[index - 1], origin = route.slice(0, index).every(position => samePoint(position, from));
+    const bucketKey = `${this.memberIndex.get(b) ?? b.id}:${floors.join(',')}`, key = `${point(from)}|${point(route[index])}|${origin ? 1 : 0}`;
+    let bucket = this.legs.get(bucketKey);
+    if (!bucket || bucket.geometry !== geometry) { bucket = { geometry, byPoints: new Map() }; this.legs.set(bucketKey, bucket); }
+    if (bucket.byPoints.has(key)) { const leg = bucket.byPoints.get(key)!; return leg && { ...leg, routeIndex: index }; }
+    const leg = this.materialize(b, floors, route, index);
+    if (bucket.byPoints.size >= 4096) bucket.byPoints.clear();
+    bucket.byPoints.set(key, leg); return leg;
   }
 
   private materialize(b: Building, floors: number[], route: Vec3[], index: number): NpcStairLeg | null {

@@ -15,6 +15,7 @@ import { releaseRoadExitPermit, roadMovementAllowed } from '../roads';
 import { activeAircraft, setAircraftControls } from '../aviation';
 import { JourneyNavigation } from '../journey';
 import { contextModel, type ContextView } from './context-model';
+import { panesModel } from './panes-model';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
 
 export const HOST_PROTOCOL = 1;
@@ -73,6 +74,7 @@ export class SimHost {
         return { result, frame: this.frame(request, 0, 0) };
       }
       case 'context': return contextModel(this.requireSim(), this.world!, request.view as ContextView);
+      case 'panes': return panesModel(this.requireSim(), this.world!, request.view as ContextView);
       case 'save': return { save: this.requireSim().exportSave() };
       case 'load': {
         const save = request.save;

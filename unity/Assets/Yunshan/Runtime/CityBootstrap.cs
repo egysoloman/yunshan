@@ -25,16 +25,27 @@ namespace Yunshan.Runtime
         SimSession session;
         CityLifeView life;
         Light sun;
+        readonly Light[] roomLights = new Light[InteriorLighting.Slots];
         Camera view;
         string status = "正在生成云山巨城……";
         readonly Dictionary<string, GameObject> far = new Dictionary<string, GameObject>();
         readonly Dictionary<string, GameObject> near = new Dictionary<string, GameObject>();
-        Vector2 contextScroll;
+        readonly List<Transform> signs = new List<Transform>();
+        Font signFont;
+        Vector2 contextScroll, panesScroll;
+        int paneTab;
         int contextTab;
         bool showHelp = true;
 
+        static bool subscribed;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void AutoStart()
+        {
+            Ensure();
+            // A reloaded scene (for example "新开城市") starts the city again.
+            if (!subscribed) { subscribed = true; UnityEngine.SceneManagement.SceneManager.sceneLoaded += (_, __) => Ensure(); }
+        }
+        static void Ensure()
         {
             if (FindAnyObjectByType<CityBootstrap>() != null) return;
             new GameObject("云山巨城").AddComponent<CityBootstrap>();
@@ -89,6 +100,7 @@ namespace Yunshan.Runtime
 
                 walker = view.gameObject.AddComponent<FirstPersonController>();
                 walker.Initialise(world, view, CanAccess, () => session.Voxels);
+                walker.PointerOverUi = PointerOverUi;
                 if (session.Frame != null) OnPlayerMovedBySimulation(session.Frame);
                 life = new CityLifeView(world, transform);
                 status = null;
@@ -99,6 +111,16 @@ namespace Yunshan.Runtime
                 status = "启动失败：" + error.Message;
                 Debug.LogException(error);
             }
+        }
+
+        /// <summary>Screen regions occupied by the HUD (GUI coordinates, y down).</summary>
+        bool PointerOverUi()
+        {
+            var m = Input.mousePosition; float x = m.x, y = Screen.height - m.y;
+            if (y < 140 && (x < 540 || x > Screen.width - 540)) return true;
+            if (session != null && session.Context.Count > 0 && x > Screen.width - 420 && y < 620) return true;
+            if (session != null && session.PanesOpen && x < 580 && y > 130 && y < Screen.height - 170) return true;
+            return y > Screen.height - 170 && (x < 590 || Mathf.Abs(x - Screen.width / 2f) < 380);
         }
 
         bool CanAccess(Building building, int floor)
@@ -185,6 +207,15 @@ namespace Yunshan.Runtime
             if (meshes.Glass != null) Show(root, meshes.Glass, glassMaterial);
             foreach (var p in StudioPropLayout.BuildingPlacements(b, studio.Bounds))
                 studio.Place(p.Asset, root, ArchitectureFloorPlan.BuildingWorldPosition(b, p.Local), b.Rotation, p.Scale);
+            // Name sign above the real entrance (billboarded in LateUpdate).
+            var sign = new GameObject(b.Name + " · 名牌", typeof(TextMesh)); sign.transform.SetParent(root, false);
+            var entrance = ArchitectureFloorPlan.GetBuildingEntrance(b);
+            sign.transform.position = Space.ToUnity(entrance.X, entrance.Y + 4.2, entrance.Z);
+            var text = sign.GetComponent<TextMesh>(); text.text = b.Name; text.anchor = TextAnchor.MiddleCenter; text.alignment = TextAlignment.Center;
+            text.fontSize = 64; text.characterSize = .06f; text.color = new Color(.96f, .9f, .74f);
+            if (signFont == null) signFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            if (signFont != null) { text.font = signFont; sign.GetComponent<MeshRenderer>().sharedMaterial = signFont.material; }
+            signs.Add(sign.transform);
             return root.gameObject;
         }
 
@@ -211,6 +242,7 @@ namespace Yunshan.Runtime
             if (Input.GetKeyDown(KeyCode.E)) Interact();
             if (Input.GetKeyDown(KeyCode.F) && session.Frame != null) session.Command(Cmd("pause", session.Frame.Paused ? 0 : 1));
             if (Input.GetKeyDown(KeyCode.H)) showHelp = !showHelp;
+            if (Input.GetKeyDown(KeyCode.Tab)) { session.PanesOpen = !session.PanesOpen; if (session.PanesOpen) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; } }
             if (Input.GetKeyDown(KeyCode.T)) walker.Walker.Pitch = -.05;
             if (Input.GetKeyDown(KeyCode.V) && session.Frame != null)
             {
@@ -293,6 +325,25 @@ namespace Yunshan.Runtime
             RenderSettings.fogDensity = .0005f + (1 - visibility) * .0008f;
             if (view != null) { view.clearFlags = CameraClearFlags.SolidColor; view.backgroundColor = RenderSettings.fogColor; }
             studio?.SetLighting(daylight, Mathf.Clamp01(energy));
+            UpdateRoomLights(daylight, energy);
+        }
+
+        /// <summary>Task lights of the occupied floor (web getInteriorLightConfigurations).</summary>
+        void UpdateRoomLights(float daylight, float energy)
+        {
+            var room = walker?.Walker?.Inside;
+            var configs = room != null ? InteriorLighting.Configure(room, walker.Walker.Floor, walker.Feet, daylight, energy) : new List<InteriorLight>();
+            for (int i = 0; i < roomLights.Length; i++)
+            {
+                if (roomLights[i] == null) { roomLights[i] = new GameObject($"室内任务灯 {i}", typeof(Light)).GetComponent<Light>(); roomLights[i].type = LightType.Point; roomLights[i].shadows = LightShadows.None; roomLights[i].transform.SetParent(transform, false); }
+                var light = roomLights[i]; var config = i < configs.Count ? configs[i] : null;
+                light.enabled = config != null && config.Target > 0;
+                if (!light.enabled) continue;
+                light.transform.position = Space.ToUnity(config.Position);
+                // Unity's built-in point falloff differs from three.js; drive the
+                // intended eye-level level (Target) directly over the same range.
+                light.intensity = (float)(config.Target * 1.6); light.range = (float)config.Distance; ColorUtility.TryParseHtmlString(config.Color, out var lightColor); light.color = lightColor; // Light.color is sRGB
+            }
         }
 
         // ───────────────────────────── HUD ─────────────────────────────
@@ -330,6 +381,8 @@ namespace Yunshan.Runtime
             if (GUI.Button(new UnityEngine.Rect(x + 354, 14, 66, 28), "读档")) session.Load();
 
             DrawContext(frame);
+            if (GUI.Button(new UnityEngine.Rect(x - 100, 14, 92, 28), session.PanesOpen ? "收起 · Tab" : "总览 · Tab")) session.PanesOpen = !session.PanesOpen;
+            if (session.PanesOpen) DrawPanes();
 
             // Notice and events
             if (session.Notice != null && Time.unscaledTime - session.NoticeAt < 8)
@@ -342,7 +395,7 @@ namespace Yunshan.Runtime
             var events = session.EventLog.Skip(Math.Max(0, session.EventLog.Count - 6)).ToList();
             GUI.Box(new UnityEngine.Rect(12, Screen.height - 20 - events.Count * 20 - 12, 560, events.Count * 20 + 16), GUIContent.none, box);
             for (int i = 0; i < events.Count; i++) GUI.Label(new UnityEngine.Rect(22, Screen.height - 24 - (events.Count - i) * 20, 548, 20), events[i].Text, small);
-            if (showHelp) GUI.Label(new UnityEngine.Rect(Screen.width / 2f - 360, Screen.height - 34, 760, 24), "点击锁定鼠标 · WASD 行走 · Shift 冲刺 · E 门/楼梯/上下车 · F 暂停 · B/X 放置/回收体素 · V 航空器返航 · H 隐藏提示 · Esc 释放鼠标", small);
+            if (showHelp) GUI.Label(new UnityEngine.Rect(Screen.width / 2f - 360, Screen.height - 34, 760, 24), "拖动或双击锁定鼠标环顾 · WASD 行走 · Shift 冲刺 · E 门/楼梯/上下车 · F 暂停 · B/X 放置/回收体素 · V 航空器返航 · Tab 城市总览 · H 隐藏提示 · Esc 释放鼠标", small);
         }
 
         void DrawContext(SimFrame frame)
@@ -363,16 +416,7 @@ namespace Yunshan.Runtime
             GUILayout.Label(section.Eyebrow, small);
             GUILayout.Label(section.Title, title);
             if (!string.IsNullOrEmpty(section.Subtitle)) GUILayout.Label(section.Subtitle, small);
-            foreach (var action in section.Actions)
-            {
-                GUI.enabled = !action.Disabled;
-                if (GUILayout.Button(action.Label, GUILayout.MinHeight(26)))
-                {
-                    if (action.Client == "interact") Interact();
-                    else if (action.Command != null) Execute(new Dictionary<string, object>(action.Command));
-                }
-                GUI.enabled = true;
-            }
+            foreach (var action in section.Actions) ActionButton(action);
             if (section.Kind == "building" && section.Actions.Any(a => a.Command != null && (string)a.Command["type"] == "deposit"))
             {
                 GUILayout.BeginHorizontal();
@@ -382,6 +426,79 @@ namespace Yunshan.Runtime
             foreach (var note in section.Notes) GUILayout.Label(note, small);
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+        }
+
+        void DrawPanes()
+        {
+            var panes = session.Panes;
+            float left = 12, top = 140, width = Mathf.Min(560, Screen.width - 440), height = Screen.height - 320;
+            GUI.Box(new UnityEngine.Rect(left, top, width, height), GUIContent.none, box);
+            paneTab = Mathf.Clamp(paneTab, 0, panes.Count);
+            for (int i = 0; i < panes.Count; i++) if (GUI.Toggle(new UnityEngine.Rect(left + 8 + i * 80, top + 6, 76, 26), paneTab == i, panes[i].Title, GUI.skin.button)) paneTab = i;
+            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + panes.Count * 80, top + 6, 76, 26), paneTab == panes.Count, "设置", GUI.skin.button)) paneTab = panes.Count;
+            GUILayout.BeginArea(new UnityEngine.Rect(left + 8, top + 38, width - 16, height - 46));
+            panesScroll = GUILayout.BeginScrollView(panesScroll);
+            if (paneTab == panes.Count) { DrawSettings(); GUILayout.EndScrollView(); GUILayout.EndArea(); return; }
+            if (panes.Count == 0) { GUILayout.Label("正在读取城市总览……", label); GUILayout.EndScrollView(); GUILayout.EndArea(); return; }
+            foreach (var section in panes[paneTab].Sections)
+            {
+                GUILayout.Space(6); GUILayout.Label(section.Title, title);
+                foreach (var row in section.Rows) { GUILayout.BeginHorizontal(); GUILayout.Label(row.Label, small, GUILayout.Width(170)); GUILayout.Label(row.Value, small); GUILayout.EndHorizontal(); }
+                foreach (var entry in section.Entries)
+                {
+                    GUILayout.BeginHorizontal();
+                    GUILayout.BeginVertical();
+                    GUILayout.Label(entry.Title, label); GUILayout.Label(entry.Subtitle, small);
+                    foreach (var line in entry.Detail) GUILayout.Label(line, small);
+                    GUILayout.EndVertical();
+                    foreach (var action in entry.Actions) ActionButton(action, GUILayout.Width(110));
+                    GUILayout.EndHorizontal();
+                }
+                foreach (var action in section.Actions) ActionButton(action);
+                foreach (var note in section.Notes) GUILayout.Label(note, small);
+            }
+            GUILayout.EndScrollView();
+            GUILayout.EndArea();
+        }
+
+        float newCityArmedAt = -10;
+        void DrawSettings()
+        {
+            GUILayout.Label("画面与操作", title);
+            GUILayout.Label($"视距 {view.farClipPlane:0} m", small);
+            view.farClipPlane = GUILayout.HorizontalSlider(view.farClipPlane, 800, 6000);
+            GUILayout.Label($"阴影距离 {QualitySettings.shadowDistance:0} m（0 关闭）", small);
+            QualitySettings.shadowDistance = Mathf.Round(GUILayout.HorizontalSlider(QualitySettings.shadowDistance, 0, 400));
+            GUILayout.Label($"近景楼宇半径 {NearBuildingRadius:0} m · 数量 {NearBuildingLimit}", small);
+            NearBuildingRadius = Mathf.Round(GUILayout.HorizontalSlider(NearBuildingRadius, 60, 320));
+            NearBuildingLimit = Mathf.RoundToInt(GUILayout.HorizontalSlider(NearBuildingLimit, 4, 40));
+            if (walker != null) { GUILayout.Label($"鼠标灵敏度 {walker.MouseSensitivity:0.00}", small); walker.MouseSensitivity = GUILayout.HorizontalSlider(walker.MouseSensitivity, .2f, 3f); }
+            GUILayout.Space(10); GUILayout.Label("旅程", title);
+            GUILayout.Label("存档位于 " + Application.persistentDataPath + "（与网页版存档格式相同，可互相导入）。", small);
+            bool armed = Time.unscaledTime - newCityArmedAt < 5;
+            if (GUILayout.Button(armed ? "再次点击确认：删除存档并开新城" : "新开城市", GUILayout.MinHeight(26)))
+            {
+                if (!armed) newCityArmedAt = Time.unscaledTime;
+                else { session.DeleteSave(); session.Dispose(); UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex); }
+            }
+        }
+
+        void ActionButton(ContextAction action, params GUILayoutOption[] options)
+        {
+            GUI.enabled = !action.Disabled;
+            if (GUILayout.Button(action.Label, options.Length > 0 ? options : new[] { GUILayout.MinHeight(24) }))
+            {
+                if (action.Client == "interact") Interact();
+                else if (action.Command != null) Execute(new Dictionary<string, object>(action.Command));
+            }
+            GUI.enabled = true;
+        }
+
+        void LateUpdate()
+        {
+            if (view == null) return;
+            signs.RemoveAll(t => t == null);
+            foreach (var sign in signs) sign.rotation = Quaternion.LookRotation(sign.position - view.transform.position);
         }
 
         void OnDestroy() => session?.Dispose();

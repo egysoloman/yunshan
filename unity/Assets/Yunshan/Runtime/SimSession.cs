@@ -25,6 +25,9 @@ namespace Yunshan.Runtime
         public float FrameArrivedAt { get; private set; }
         public float FrameInterval { get; private set; } = .25f;
         public List<ContextSection> Context { get; private set; } = new List<ContextSection>();
+        /// <summary>Overview panes; refreshed about once a second while <see cref="PanesOpen"/>.</summary>
+        public List<Pane> Panes { get; private set; } = new List<Pane>();
+        public bool PanesOpen;
         public readonly List<SimFrame.Event> EventLog = new List<SimFrame.Event>();
         public string Notice; public bool NoticeOk = true; public float NoticeAt;
         public List<Vec3> Voxels = new List<Vec3>();
@@ -36,7 +39,8 @@ namespace Yunshan.Runtime
         static string SavePath => Path.Combine(Application.persistentDataPath, "yunshan-save.json");
         readonly ConcurrentQueue<Action> mainThread = new ConcurrentQueue<Action>();
         SimClient client;
-        bool stepPending, contextPending;
+        bool stepPending, contextPending, panesPending;
+        float panesAt;
         double accumulated, lastEventId;
         float contextAt, autosaveAt;
         string voxelKey = "";
@@ -111,6 +115,11 @@ namespace Yunshan.Runtime
                 contextPending = true; contextAt = Time.unscaledTime;
                 Run(client.Context(mode, insideBuildingId, BankAmount), sections => { contextPending = false; Context = sections; }, () => contextPending = false);
             }
+            if (PanesOpen && !panesPending && Time.unscaledTime - panesAt > 1f)
+            {
+                panesPending = true; panesAt = Time.unscaledTime;
+                Run(client.Panes(mode, insideBuildingId), panes => { panesPending = false; Panes = panes; }, () => panesPending = false);
+            }
             if (Time.unscaledTime - autosaveAt > 30) { autosaveAt = Time.unscaledTime; Save(false); }
         }
 
@@ -131,7 +140,7 @@ namespace Yunshan.Runtime
             {
                 Say(result.message, result.ok); Accept(result.frame, result.ok);
                 after?.Invoke(result.ok);
-                contextAt = 0;
+                contextAt = 0; panesAt = 0;
             }, null);
         }
 
@@ -158,6 +167,13 @@ namespace Yunshan.Runtime
             }, null);
         }
 
-        public void Dispose() { client?.Dispose(); client = null; }
+        /// <summary>Removes the saved journey (the next start opens a new city).</summary>
+        public void DeleteSave()
+        {
+            try { if (File.Exists(SavePath)) File.Delete(SavePath); autosaveAt = float.PositiveInfinity; }
+            catch (Exception error) { Say("无法删除存档：" + error.Message, false); }
+        }
+
+        public void Dispose() { client?.Dispose(); client = null; State = Phase.Failed; Status = "模拟已关闭。"; }
     }
 }

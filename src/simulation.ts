@@ -13,7 +13,7 @@ import { validateSupplementalBudgetCrossReferences, validateSupplementalBudgetSt
 import { NpcStairMotion, type NpcStairCursor } from './simulation/npc-stair-motion';
 import { archivePoliceSupplies, consumePoliceSupply, createPoliceSupplies, policeSupplyReady, recordPolicePurchase, validatePoliceSupplies, type PoliceSupplies } from './simulation/police-supplies';
 import { canAccessFloor, getFloorDimensions, getStairPosition } from './access';
-import { FLOOR_PLAN_PROFILE, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, blocksFloorPlanReferenceMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
+import { FLOOR_PLAN_PROFILE, pureSegmentBlocker, withFixedFloorPlans, buildingLocalPosition, contains, findBuildingFloorPlanRoute, floorPlanSupport, blocksFloorPlanMovement, blocksFloorPlanReferenceMovement, getBuildingFloorPlan, getBuildingUsePoints } from './architecture-floor-plan';
 import { blocksMarketCounter, marketCounters } from './site-fixtures';
 import { installExtensions, researchTaskActorIds, isCanonicalDisaster, isCanonicalResearchCompletion } from './simulation/extensions';
 import { installPower, powerBinding, powerHasCapacityRoom, powerRepairPoint, powerTaskActorIds, validateLegacyEnergyContract, validatePowerBudgetCrossReferences, type LegacyEnergyContract } from './simulation/power';
@@ -153,6 +153,7 @@ export class Simulation implements SimulationAPI {
   private readonly npcStairMotion: NpcStairMotion;
   private readonly npcCursorRoutes = new WeakMap<NpcStairCursor, Vec3[]>();
   private readonly citizenArrivalMinutes = new WeakMap<Citizen, number>();
+  private readonly counterBlockers = new WeakMap<Building, ((a: Vec3, b: Vec3) => boolean) | undefined>();
   private minutes = .25;
   private employment = new Set<string>();
   private accrualIndexSource?: WageAccrual[];
@@ -863,8 +864,10 @@ export class Simulation implements SimulationAPI {
       this.runtime.accumulator = Math.max(0, this.runtime.accumulator - TICK_SECONDS);
       this.minutes = .25 * this.state.speed;
       this.state.lastSystemOrder = [];
-      for (const phase of ORDER) { this.state.lastSystemOrder.push(phase); this.bus.emit({ type: `system:${phase}`, minutes: this.minutes }); }
-      this.pruneNpcStairCursors();
+      this.npcStairMotion.withinTick(() => withFixedFloorPlans(() => {
+        for (const phase of ORDER) { this.state.lastSystemOrder.push(phase); this.bus.emit({ type: `system:${phase}`, minutes: this.minutes }); }
+        this.pruneNpcStairCursors();
+      }));
     }
   }
   setFocus(position: Vec3, mode: ViewMode) {
@@ -2142,6 +2145,12 @@ export class Simulation implements SimulationAPI {
     return Math.abs(x) <= dimensions.width / 2 && Math.abs(z) <= dimensions.depth / 2 && position.y >= building.position.y - floorHeight * (building.basements ?? 0) - .5 && position.y <= building.position.y + building.height + .5;
   }
   private floorPlanPresence(building: Building, position: Vec3) {
+    // Every slab, stair and fixture rectangle lies inside the site's own
+    // footprint, so a body beyond the whole diagonal has no support there.
+    let width = building.width, depth = building.depth;
+    for (const footprint of building.floorFootprints ?? []) { if (footprint && footprint.width > width) width = footprint.width; if (footprint && footprint.depth > depth) depth = footprint.depth; }
+    const dx = position.x - building.position.x, dz = position.z - building.position.z, reach = Math.hypot(width, depth) + 24;
+    if (dx * dx + dz * dz > reach * reach) return null;
     const floor = Math.round((position.y - building.position.y - .6) / (building.height / building.floors));
     for (const candidate of [floor, floor - 1, floor + 1]) {
       const support = floorPlanSupport(building, candidate, position);
@@ -2162,13 +2171,19 @@ export class Simulation implements SimulationAPI {
     const presence = this.floorPlanPresence(building, position);
     return !!presence && (presence.kind === 'room' || presence.kind === 'stairs') && this.buildingFunctionPoints(building).some(point => point.floor === presence.floor && (!purpose || point.purpose === purpose) && canAccessFloor(building, point.floor, person) && distance(position, point.position) <= radius);
   }
+  /** Market counters are fixed world geometry, so one pure guard per site. */
+  private counterBlocker(building: Building): ((a: Vec3, b: Vec3) => boolean) | undefined {
+    if (this.counterBlockers.has(building)) return this.counterBlockers.get(building);
+    const counters = marketCounters(this.world, building);
+    const blocker = counters.length ? pureSegmentBlocker((a: Vec3, b: Vec3) => blocksMarketCounter(counters, a, b, .35, 1.72)) : undefined;
+    this.counterBlockers.set(building, blocker); return blocker;
+  }
   private floorPlanRoute(building: Building, fromFloor: number, toFloor: number, from: Vec3, to: Vec3): Vec3[] | null {
     this.ensureRoadRouting();
     const key = `floor:${building.id}:${fromFloor}>${toFloor}:${this.pointKey(from)}>${this.pointKey(to)}`;
     const cached = this.state.voxels.length === 0 ? this.routeCache.get(key) : undefined;
     if (cached && (this.runtime.npcMotionVersion !== 2 || cached[0]?.x === from.x && cached[0]?.y === from.y && cached[0]?.z === from.z)) return cached.map(copy);
-    const counters = marketCounters(this.world, building);
-    const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, counters.length ? (a, b) => blocksMarketCounter(counters, a, b, .35, 1.72) : undefined);
+    const route = findBuildingFloorPlanRoute(building, fromFloor, toFloor, from, to, .35, this.counterBlocker(building));
     // Native opening phases bind to the actual body's exact origin. A local
     // coordinate round trip can lose one ULP without changing the geometry;
     // keep the original bits instead of adding a free connector or moving it.

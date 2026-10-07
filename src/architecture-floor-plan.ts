@@ -255,8 +255,20 @@ interface BodyCache {
   footprints: Building['floorFootprints']; uses: Building['floorUses']; permissions: Building['floorPermissions']; body: BuildingBody;
 }
 const bodies = new WeakMap<Building, BodyCache>();
+// A fixed-geometry window (one simulation tick: no phase edits buildings or
+// floor plans). Derived views validated once inside the window are trusted
+// for its remainder; outside any window every read validates as before.
+let fixedEpoch=0,fixedDepth=0;
+export function withFixedFloorPlans<T>(run:()=>T):T{if(fixedDepth++===0)fixedEpoch++;try{return run();}finally{fixedDepth--;}}
+const trustedBodies=new WeakMap<Building,number>(),trustedSolids=new WeakMap<FloorPlan,number>(),trustedNearby=new WeakMap<FloorPlan,number>(),trustedSurfaces=new WeakMap<FloorPlan,number>(),trustedFootprints=new WeakMap<FloorPlan,number>();
+const trusted=<K extends object>(marks:WeakMap<K,number>,key:K)=>fixedDepth>0&&marks.get(key)===fixedEpoch;
+const trust=<K extends object>(marks:WeakMap<K,number>,key:K)=>{if(fixedDepth>0)marks.set(key,fixedEpoch);};
 export function getBuildingBody(b: Building): BuildingBody | null {
   if (b.floorPlanProfile !== FLOOR_PLAN_PROFILE || b.id === 'core-main' || b.kind === 'pavilion') return null;
+  if(trusted(trustedBodies,b))return bodies.get(b)!.body;
+  const body=validatedBuildingBody(b);trust(trustedBodies,b);return body;
+}
+function validatedBuildingBody(b: Building): BuildingBody {
   const cached=bodies.get(b);
   if(cached && cached.commercial===(b.commercialGeometryRevision===1) && cached.continuousStairs===continuousStairs(b) && cached.width===b.width && cached.depth===b.depth && cached.height===b.height && cached.floors===b.floors && cached.basements===(b.basements??0) && cached.rotation===b.rotation && cached.x===b.position.x && cached.y===b.position.y && cached.z===b.position.z && cached.kind===b.kind && cached.publicFloors===b.publicFloors && cached.requiredPermission===b.requiredPermission && cached.facility===b.facility && cached.footprints===b.floorFootprints && cached.uses===b.floorUses && cached.permissions===b.floorPermissions) return cached.body;
   const body=makeBody(b);
@@ -326,12 +338,21 @@ function circleRectDistanceSquared(x:number,z:number,r:Rect) {return Math.max(r.
 export function canStandInFloorPlan(p:FloorPlan,x:number,z:number,radius=.35):boolean {
   if(!containsUnion(getFloorPlanSlabRegions(p),x,z))return false;
   if(radius>0)for(const loop of supportCache.get(p)!.boundaries)for(let i=0;i<loop.length;i++) if(segmentDistanceSquared(x,z,loop[i],loop[(i+1)%loop.length])<radius*radius-eps)return false;
-  return ![...wallPanels(p),...p.fixtures].some(w=>w.bottom<1.72&&w.top>.05&&(radius===0?contains(w.rect,x,z):circleRectDistanceSquared(x,z,w.rect)<radius*radius-eps));
+  // Same members and order as the former spread+some, without a per-query array.
+  const blocked=(w:{bottom:number;top:number;rect:Rect})=>w.bottom<1.72&&w.top>.05&&(radius===0?contains(w.rect,x,z):circleRectDistanceSquared(x,z,w.rect)<radius*radius-eps);
+  const walls=wallPanels(p),fixtures=p.fixtures;
+  for(const w of walls)if(blocked(w))return false;
+  for(const w of fixtures)if(blocked(w))return false;
+  return true;
 }
 // These lists are private derived views. FloorPlan and the existing wall/slab
 // cache results stay public and mutable, so membership is checked on each read.
 const nearbyCache=new WeakMap<FloorPlan,FloorPlan[]>();
 function nearPlans(b:Building,p:FloorPlan):FloorPlan[] {
+  if(trusted(trustedNearby,p))return nearbyCache.get(p)!;
+  const result=validatedNearPlans(b,p);trust(trustedNearby,p);return result;
+}
+function validatedNearPlans(b:Building,p:FloorPlan):FloorPlan[] {
   const plans=getBuildingBody(b)!.floorPlans,cached=nearbyCache.get(p);let index=0,unchanged=!!cached;
   for(let i=0;i<plans.length;i++)if(i in plans){const f=plans[i];if(Math.abs(f.floor-p.floor)<=1){if(cached?.[index]!==f)unchanged=false;index++;}}
   if(unchanged&&index===cached!.length)return cached!;
@@ -339,6 +360,10 @@ function nearPlans(b:Building,p:FloorPlan):FloorPlan[] {
 }
 const stairSurfaceCache=new WeakMap<FloorPlan,StairSurface[]>();
 function stairSurfaces(b:Building,p:FloorPlan,plans=nearPlans(b,p)):StairSurface[]{
+  if(trusted(trustedSurfaces,p))return stairSurfaceCache.get(p)!;
+  const result=validatedStairSurfaces(p,plans);trust(trustedSurfaces,p);return result;
+}
+function validatedStairSurfaces(p:FloorPlan,plans:FloorPlan[]):StairSurface[]{
   const cached=stairSurfaceCache.get(p);let index=0,unchanged=!!cached;
   for(const f of plans){for(const s of f.stairTreads){if(cached?.[index]!==s)unchanged=false;index++;}for(const s of f.stairLandings){if(cached?.[index]!==s)unchanged=false;index++;}}
   if(unchanged&&index===cached!.length)return cached!;
@@ -353,6 +378,12 @@ function uncachedLocalSolids(b:Building,p:FloorPlan):LocalSolid[] {
   return result;
 }
 function localSolids(b:Building,p:FloorPlan,plans=nearPlans(b,p),surfaces=stairSurfaces(b,p,plans)):LocalSolid[] {
+  if(trusted(trustedSolids,p))return localSolidCache.get(p)!;
+  const result=validatedLocalSolids(b,p,plans,surfaces);
+  // A malformed descriptor took the uncached path; never trust that result.
+  if(localSolidCache.get(p)===result)trust(trustedSolids,p);return result;
+}
+function validatedLocalSolids(b:Building,p:FloorPlan,plans:FloorPlan[],surfaces:StairSurface[]):LocalSolid[] {
   const cached=localSolidCache.get(p);let index=0,unchanged=!!cached;
   // Keep the public descriptors live on every read. These straight loops avoid
   // allocating and calling a validation closure for every wall/tread/fixture.
@@ -386,6 +417,36 @@ function localSolids(b:Building,p:FloorPlan,plans=nearPlans(b,p),surfaces=stairS
   // changing a copied height/member is detected by the checks above.
   localSolidCache.set(p,result);return result;
 }
+/** Uniform 2m grid over a trusted solids list (fixed-geometry window only).
+ * A query returns every solid whose rectangle can meet the box, plus any
+ * malformed rectangle; callers still apply their original exact predicate. */
+interface SolidIndex {x0:number;z0:number;nx:number;nz:number;cells:number[][];loose:number[];stamp:Uint32Array;visit:number;found:Int32Array;count:number}
+const SOLID_CELL=2,solidIndexes=new WeakMap<LocalSolid[],SolidIndex>();
+const orderedRect=(r:Rect)=>Number.isFinite(r.x0)&&Number.isFinite(r.x1)&&Number.isFinite(r.z0)&&Number.isFinite(r.z1)&&r.x0<=r.x1&&r.z0<=r.z1;
+function solidIndex(solids:LocalSolid[]):SolidIndex {
+  let index=solidIndexes.get(solids);if(index)return index;
+  let x0=Infinity,x1=-Infinity,z0=Infinity,z1=-Infinity;
+  for(const s of solids)if(orderedRect(s.rect)){x0=Math.min(x0,s.rect.x0);x1=Math.max(x1,s.rect.x1);z0=Math.min(z0,s.rect.z0);z1=Math.max(z1,s.rect.z1);}
+  if(!(x1>=x0))x0=x1=z0=z1=0;
+  const nx=Math.max(1,Math.floor((x1-x0)/SOLID_CELL)+1),nz=Math.max(1,Math.floor((z1-z0)/SOLID_CELL)+1),cells:number[][]=Array.from({length:nx*nz},()=>[]),loose:number[]=[];
+  solids.forEach((s,i)=>{
+    if(!orderedRect(s.rect)){loose.push(i);return;}
+    const ix0=Math.floor((s.rect.x0-x0)/SOLID_CELL),ix1=Math.floor((s.rect.x1-x0)/SOLID_CELL),iz0=Math.floor((s.rect.z0-z0)/SOLID_CELL),iz1=Math.floor((s.rect.z1-z0)/SOLID_CELL);
+    for(let ix=ix0;ix<=ix1;ix++)for(let iz=iz0;iz<=iz1;iz++)cells[ix*nz+iz].push(i);
+  });
+  index={x0,z0,nx,nz,cells,loose,stamp:new Uint32Array(solids.length),visit:0,found:new Int32Array(solids.length),count:0};solidIndexes.set(solids,index);return index;
+}
+/** Solids that may meet [qx0,qx1]×[qz0,qz1] (any order; the callers' tests
+ * are order-free existence checks). The result buffer is reused per index. */
+function solidsNear(solids:LocalSolid[],qx0:number,qx1:number,qz0:number,qz1:number):SolidIndex|null {
+  if(!(qx0<=qx1&&qz0<=qz1)||!Number.isFinite(qx0)||!Number.isFinite(qx1)||!Number.isFinite(qz0)||!Number.isFinite(qz1))return null;
+  const index=solidIndex(solids),found=index.found;let count=0;
+  if(++index.visit===0xffffffff){index.stamp.fill(0);index.visit=1;}
+  for(const i of index.loose){index.stamp[i]=index.visit;found[count++]=i;}
+  const ix0=Math.max(0,Math.floor((qx0-index.x0)/SOLID_CELL)),ix1=Math.min(index.nx-1,Math.floor((qx1-index.x0)/SOLID_CELL)),iz0=Math.max(0,Math.floor((qz0-index.z0)/SOLID_CELL)),iz1=Math.min(index.nz-1,Math.floor((qz1-index.z0)/SOLID_CELL));
+  for(let ix=ix0;ix<=ix1;ix++)for(let iz=iz0;iz<=iz1;iz++){const cell=index.cells[ix*index.nz+iz];for(let k=0;k<cell.length;k++){const i=cell[k];if(index.stamp[i]!==index.visit){index.stamp[i]=index.visit;found[count++]=i;}}}
+  index.count=count;return index;
+}
 interface RectSnapshot {rect:Rect;x0:number;x1:number;z0:number;z1:number}
 interface SupportFootprint {regions:Rect[];boundaries:[number,number][][]|null}
 interface SupportFootprints {y:number;base:RectSnapshot[];slabs:{plan:FloorPlan;top:number;regions:RectSnapshot[]}[];stairs:(RectSnapshot&{top:number})[];byTop:Map<number,SupportFootprint>}
@@ -393,6 +454,10 @@ const supportFootprintCache=new WeakMap<FloorPlan,SupportFootprints>();
 const snapshotRect=(r:Rect):RectSnapshot=>({rect:r,x0:r.x0,x1:r.x1,z0:r.z0,z1:r.z1});
 const sameRect=(saved:RectSnapshot,r:Rect)=>saved.rect===r&&saved.x0===r.x0&&saved.x1===r.x1&&saved.z0===r.z0&&saved.z1===r.z1;
 function supportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurface[],plans:FloorPlan[]):SupportFootprints {
+  if(trusted(trustedFootprints,p))return supportFootprintCache.get(p)!;
+  const result=validatedSupportFootprints(p,base,surfaces,plans);trust(trustedFootprints,p);return result;
+}
+function validatedSupportFootprints(p:FloorPlan,base:Rect[],surfaces:StairSurface[],plans:FloorPlan[]):SupportFootprints {
   const cached=supportFootprintCache.get(p);
   let unchanged=!!cached&&cached.y===p.y&&cached.base.length===base.length&&cached.stairs.length===surfaces.length;
   if(unchanged)for(let i=0;i<base.length;i++)if((i in base)!==(i in cached!.base)||(i in base&&!sameRect(cached!.base[i],base[i]))){unchanged=false;break;}
@@ -469,8 +534,10 @@ export function floorPlanSupport(b:Building,floor:number,worldPosition:Vec3,radi
     wallPanels(f);if(f.floor>p.floor)getFloorPlanSlabRegions(f);
   }
   const reach=Math.abs(radius)+eps,x0=local.x-reach,x1=local.x+reach,z0=local.z-reach,z1=local.z+reach;
+  // In a fixed-geometry window only solids near the disk need the exact test below.
+  const near=radius>0&&trusted(trustedSolids,p)?solidsNear(solids,x0-1,x1+1,z0-1,z1+1):null,candidates=near?near.count:solids.length;
   chooseSupport:for(const choice of choices) {
-    if(radius>0)for(const s of solids){
+    if(radius>0)for(let k=0;k<candidates;k++){const s=near?solids[near.found[k]]:solids[k];
       if(!(s.top>choice.top+(s.steppable ? .22 : .01)&&s.bottom<choice.top+1.72-eps))continue;
       const r=s.rect,rx0=r.x0,rx1=r.x1,rz0=r.z0,rz1=r.z1;
       // Only reject ordered rectangles outside the whole disk's bounds. The
@@ -498,7 +565,8 @@ export function blocksFloorPlanMovement(b:Building,floor:number,from:Vec3,to:Vec
   // This is only a conservative rejection; retain the original exact segment,
   // endpoint/corner distance, height, roof and mutable-derived-view checks.
   const reach=Number.isFinite(radius)&&Number.isFinite(a.x)&&Number.isFinite(a.z)&&Number.isFinite(z.x)&&Number.isFinite(z.z)?Math.abs(radius)+eps:Infinity,x0=Math.min(a.x,z.x)-reach,x1=Math.max(a.x,z.x)+reach,z0=Math.min(a.z,z.z)-reach,z1=Math.max(a.z,z.z)+reach;
-  for(const w of localSolids(b,p)) {
+  const solids=localSolids(b,p),near=reach!==Infinity&&trusted(trustedSolids,p)?solidsNear(solids,x0-1,x1+1,z0-1,z1+1):null,candidates=near?near.count:solids.length;
+  for(let k=0;k<candidates;k++) {const w=near?solids[near.found[k]]:solids[k];
     if(w.top<=Math.max(a.y,z.y)+(w.steppable ? .22 : .01) || w.bottom>=Math.max(a.y,z.y)+eyeHeight)continue;
     const r=w.rect;
     if(Number.isFinite(r.x0)&&Number.isFinite(r.x1)&&Number.isFinite(r.z0)&&Number.isFinite(r.z1)&&(Math.max(r.x0,r.x1)<x0 || Math.min(r.x0,r.x1)>x1 || Math.max(r.z0,r.z1)<z0 || Math.min(r.z0,r.z1)>z1))continue;
@@ -547,7 +615,13 @@ function localSegmentClear(p:FloorPlan,a:Vec3,b:Vec3,radius:number,building:Buil
   const steps=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.z-a.z)/.4));
   for(let i=0;i<=steps;i++){const t=i/steps;if(!canStandInFloorPlan(p,a.x+(b.x-a.x)*t,a.z+(b.z-a.z)*t,radius))return false;}return true;
 }
-interface RouteGrid { x0:number;z0:number;nx:number;nz:number;step:number;walkable:Uint8Array }
+interface RouteGrid { x0:number;z0:number;nx:number;nz:number;step:number;walkable:Uint8Array;edges?:Map<((from:Vec3,to:Vec3)=>boolean)|undefined,Uint8Array> }
+/** A segment guard whose answer depends only on its two endpoints (fixed
+ * geometry). Route searches may then remember each grid edge's clearance per
+ * floor plan, exactly like the grid's own walkable cells. Other guards are
+ * called on every query, as before. */
+const pureSegmentBlockers=new WeakSet<(from:Vec3,to:Vec3)=>boolean>();
+export function pureSegmentBlocker<T extends (from:Vec3,to:Vec3)=>boolean>(blocker:T):T{pureSegmentBlockers.add(blocker);return blocker;}
 const routeGrids=new WeakMap<FloorPlan,Map<number,RouteGrid>>();
 function routeGrid(p:FloorPlan,radius:number):RouteGrid {
   let maps=routeGrids.get(p);if(!maps){maps=new Map();routeGrids.set(p,maps);}const found=maps.get(radius);if(found)return found;
@@ -612,9 +686,17 @@ export function findFloorPlanRoute(b:Building,floor:number,fromWorld:Vec3,toWorl
     };
     const start=attach(from),goal=attach(to);if(start===null||goal===null)return null;
     const previous=new Int32Array(g.walkable.length).fill(-1),queue=new Int32Array(g.walkable.length);let head=0,tail=0;previous[start]=start;queue[tail++]=start;
-    while(head<tail&&previous[goal]===-1){const id=queue[head++],x=id%g.nx,z=Math.floor(id/g.nx);for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){
+    // Directed grid-edge clearance (0 unknown, 1 clear, 2 blocked) for fixed geometry.
+    let edges:Uint8Array|undefined;
+    if(!segmentBlocked||pureSegmentBlockers.has(segmentBlocked)){g.edges??=new Map();edges=g.edges.get(segmentBlocked);if(!edges){edges=new Uint8Array(g.walkable.length*4);g.edges.set(segmentBlocked,edges);}}
+    const directions=[[1,0],[-1,0],[0,1],[0,-1]];
+    while(head<tail&&previous[goal]===-1){const id=queue[head++],x=id%g.nx,z=Math.floor(id/g.nx);for(let d=0;d<4;d++){const dx=directions[d][0],dz=directions[d][1];
       const xx=x+dx,zz=z+dz;if(xx<0||xx>=g.nx||zz<0||zz>=g.nz)continue;const next=zz*g.nx+xx;
-      if(previous[next]!==-1||!g.walkable[next]||!localSegmentClear(p,point(id),point(next),radius,b,segmentBlocked))continue;previous[next]=id;queue[tail++]=next;
+      if(previous[next]!==-1||!g.walkable[next])continue;
+      let clear:boolean;
+      if(edges){const known=edges[id*4+d];if(known)clear=known===1;else{clear=localSegmentClear(p,point(id),point(next),radius,b,segmentBlocked);edges[id*4+d]=clear?1:2;}}
+      else clear=localSegmentClear(p,point(id),point(next),radius,b,segmentBlocked);
+      if(!clear)continue;previous[next]=id;queue[tail++]=next;
     }}
     if(previous[goal]===-1)return null;const path:Vec3[]=[];for(let id=goal;;id=previous[id]){path.push(point(id));if(id===start)break;}path.reverse();
     const raw=[from,...path,to];local=[raw[0]];let anchor=0;while(anchor<raw.length-1){let next=raw.length-1;while(next>anchor+1&&!localSegmentClear(p,raw[anchor],raw[next],radius,b,segmentBlocked))next--;local.push(raw[next]);anchor=next;}

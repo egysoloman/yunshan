@@ -20,28 +20,28 @@ export interface ContextAction { label: string; command?: Command; client?: 'int
 export interface ContextSection { kind: 'building' | 'citizen' | 'vehicle' | 'aircraft'; id: string; eyebrow: string; title: string; subtitle: string; actions: ContextAction[]; notes: string[] }
 export interface ContextModelResult { sections: ContextSection[] }
 
-const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
-const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
-const modeNames: Record<TransportMode, string> = { road: '道路', maglev: '磁悬浮', lightRail: '轻轨', cable: '缆车', lift: '升降井', ferry: '渡船', bridge: '索桥', flight: '航班' };
+export const roleNames: Record<string, string> = { traveler: '星际旅行者', police: '警察', soldier: '卫士', teacher: '教师', driver: '驾驶员', merchant: '商人', mayor: '市长', scientist: '科研人员', official: '公务员', council: '议员' };
+export const kindNames: Record<BuildingKind, string> = { home: '住宅', market: '市集', workshop: '工坊', bank: '钱庄', hall: '官署', police: '巡检司', school: '书院', clinic: '医馆', station: '车站', core: '市政中枢', pavilion: '山顶亭', airport: '机场', starport: '星港', farm: '农场', dock: '码头' };
+export const modeNames: Record<TransportMode, string> = { road: '道路', maglev: '磁悬浮', lightRail: '轻轨', cable: '缆车', lift: '升降井', ferry: '渡船', bridge: '索桥', flight: '航班' };
 const activityNames: Record<string, string> = { sleeping: '睡眠中', working: '工作中', moving: '行进中', atHome: '在家', shopping: '购物中', socializing: '社交中', studying: '学习中', healing: '诊疗中', riding: '乘车中', dead: '已故', waiting: '等待发车', boarding: '登乘中', departing: '正在离站', arriving: '正在进站', congested: '拥堵等待' };
 const relationNames: Record<string, string> = { stranger: '陌生人', acquaintance: '相识', friend: '朋友', closeFriend: '好友', lover: '恋人', spouse: '配偶', rival: '竞争者', foe: '仇敌', enemy: '敌人' };
-const romanceNames = { single: '单身', crush: '暗恋', pursuit: '追求中', dating: '交往中', engaged: '订婚', married: '已婚', family: '共同家庭' };
-const hostilityNames = { none: '无敌意', discontent: '不满', rivalry: '竞争', feud: '仇敌', enemy: '敌人', mortalEnemy: '死敌' };
+export const romanceNames = { single: '单身', crush: '暗恋', pursuit: '追求中', dating: '交往中', engaged: '订婚', married: '已婚', family: '共同家庭' };
+export const hostilityNames = { none: '无敌意', discontent: '不满', rivalry: '竞争', feud: '仇敌', enemy: '敌人', mortalEnemy: '死敌' };
 const hostilityRank = { none: 0, discontent: 1, rivalry: 2, feud: 3, enemy: 4, mortalEnemy: 5 };
-const activity = (value: string) => activityNames[value] ?? value;
-const romanceStage = (rel: Relationship): keyof typeof romanceNames => rel.romanceStage ?? (rel.type === 'spouse' ? 'married' : rel.type === 'lover' ? 'dating' : 'single');
-const hostilityStage = (rel: Relationship): keyof typeof hostilityNames => rel.hostilityStage ?? (rel.type === 'enemy' ? 'enemy' : rel.type === 'foe' ? 'feud' : rel.type === 'rival' ? 'rivalry' : 'none');
-const relationshipTitle = (rel: Relationship): string => {
+export const activity = (value: string) => activityNames[value] ?? value;
+export const romanceStage = (rel: Relationship): keyof typeof romanceNames => rel.romanceStage ?? (rel.type === 'spouse' ? 'married' : rel.type === 'lover' ? 'dating' : 'single');
+export const hostilityStage = (rel: Relationship): keyof typeof hostilityNames => rel.hostilityStage ?? (rel.type === 'enemy' ? 'enemy' : rel.type === 'foe' ? 'feud' : rel.type === 'rival' ? 'rivalry' : 'none');
+export const relationshipTitle = (rel: Relationship): string => {
   const romance = romanceStage(rel), hostility = hostilityStage(rel);
   return [...new Set([relationNames[rel.type] ?? rel.type, ...(romance !== 'single' ? [romanceNames[romance]] : []), ...(hostility !== 'none' ? [hostilityNames[hostility]] : [])])].join(' · ');
 };
-const money = (n: number) => `${(Math.trunc(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} 云币`;
+export const money = (n: number) => `${(Math.trunc(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 })} 云币`;
 const rounded = (n: number) => Math.round(Number.isFinite(n) ? n : 0).toLocaleString('zh-CN');
 const spatialDistance = (a: Vec3, b: Vec3) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
 const playerLaborLabel = (state: SimState): string => state.playerLabor?.job ? '已有工班 · 回到原场所继续' : '开始 60 分钟现场工班';
-const button = (label: string, type: Command['type'], targetId?: string, value?: number, disabled = false): ContextAction => ({ label, command: { type, ...(targetId ? { targetId } : {}), ...(value !== undefined ? { value } : {}) }, disabled });
+export const button = (label: string, type: Command['type'], targetId?: string, value?: number, disabled = false): ContextAction => ({ label, command: { type, ...(targetId ? { targetId } : {}), ...(value !== undefined ? { value } : {}) }, disabled });
 
-class ContextRules {
+export class ContextRules {
   readonly state: SimState;
   constructor(readonly sim: Simulation, readonly world: WorldDefinition, readonly view: Required<Pick<ContextView, 'mode'>> & ContextView) { this.state = sim.state; }
   hasRole(...roles: string[]): boolean { const player = this.state.player; return roles.some(role => (player.identities ?? [player.role]).includes(role as Role)); }

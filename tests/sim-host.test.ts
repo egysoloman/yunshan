@@ -5,6 +5,7 @@ import { createInterface } from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import { SimHost, type HostFrame } from '../src/native-host/sim-host';
 import type { ContextModelResult } from '../src/native-host/context-model';
+import type { PanesModel } from '../src/native-host/panes-model';
 
 test('native host drives the authoritative simulation through requests', async () => {
   const host = new SimHost();
@@ -43,6 +44,15 @@ test('native host drives the authoritative simulation through requests', async (
   const context = (await host.handle({ id: 9, op: 'context', view: { mode: 'walk' } })).result as ContextModelResult;
   assert(Array.isArray(context.sections));
   for (const section of context.sections) for (const action of section.actions) assert(action.client === 'interact' || typeof action.command?.type === 'string');
+
+  const panes = (await host.handle({ id: 11, op: 'panes', view: { mode: 'walk' } })).result as PanesModel;
+  assert.deepEqual(panes.panes.map(p => p.id), ['life', 'city', 'transit', 'relations']);
+  const transit = panes.panes.find(p => p.id === 'transit')!;
+  const travel = transit.sections.flatMap(s => s.entries).flatMap(e => e.actions).find(a => a.command?.type === 'planJourney');
+  assert(travel?.command?.targetId, 'transit pane offers real journey targets');
+  const planned = (await host.handle({ id: 12, op: 'command', command: travel!.command })).result as { result: { ok: boolean; message: string }; frame: HostFrame };
+  assert.equal(planned.result.ok, true, planned.result.message);
+  assert(planned.frame.navigation?.destination, 'the frame carries the planned navigation line');
 
   const unknown = await host.handle({ id: 10, op: 'teleport' });
   assert.equal(unknown.ok, false);
