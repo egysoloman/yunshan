@@ -3,9 +3,9 @@ import test from 'node:test';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createWorld } from '../src/world';
-import { getBuildingBody } from '../src/architecture-floor-plan';
+import { contains, getBuildingBody, getFloorPlanSlabRegions } from '../src/architecture-floor-plan';
 import { buildProgramArchitecture } from '../src/rendering/architecture-bodies';
-import { layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioDressing, studioStationPlacements } from '../src/rendering/studio-prop-layout';
+import { CEILING_LAMP, layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioCeilingLampPlacements, studioDressing, studioStationPlacements } from '../src/rendering/studio-prop-layout';
 
 const world = createWorld();
 
@@ -77,4 +77,22 @@ test('station platform and shelter models occupy the original platform extent an
     }
     assert.ok(roof.position.y + shelter.boundsM.min[1] >= p.y - .1 - 1e-6, 'shelter stands on the platform top');
   }
+});
+
+test('ceiling lamps hang flush under a real slab above interior use points, clear of a standing eye', () => {
+  const lamp = STUDIO_ASSETS.find(a => a.id === CEILING_LAMP.asset)!; let count = 0;
+  for (const building of world.buildings) {
+    const body = getBuildingBody(building); if (!body) continue;
+    for (const p of studioCeilingLampPlacements(building)) {
+      const plan = body.floorPlans.find(f => f.floor === p.floor)!, above = body.floorPlans.find(f => f.floor === p.floor + 1)!;
+      const bottom = p.local.y + lamp.boundsM.min[1], top = p.local.y + lamp.boundsM.max[1];
+      assert.ok(Math.abs(top - (plan.ceilingY - CEILING_LAMP.slabThickness)) < 1e-7, `${building.id} flush mount`);
+      assert.ok(bottom >= plan.y + 1.72, `${building.id} eye clearance`);
+      const slabs = getFloorPlanSlabRegions(above);
+      for (const [x, z] of [[lamp.boundsM.min[0], lamp.boundsM.min[2]], [lamp.boundsM.max[0], lamp.boundsM.max[2]]]) assert.ok(slabs.some(r => contains(r, p.local.x + x, p.local.z + z)), `${building.id} slab cover`);
+      count++;
+    }
+  }
+  assert.ok(count > 500, String(count));
+  console.log(JSON.stringify({ scope: 'default-world', ceilingLamps: count }));
 });

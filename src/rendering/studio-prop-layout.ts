@@ -1,5 +1,5 @@
 import type { Building, BuildingKind } from '../types';
-import { getBuildingBody, getFloorPlanFixtures, type FloorFixture } from '../architecture-floor-plan';
+import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, type FloorFixture } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
 
 /** One imported voxel-studio GLB. Bounds are measured from the file at import. */
@@ -64,10 +64,30 @@ export function studioDressesFixture(fixture: FloorFixture, buildingKind?: Build
   return layoutStudioFixture(fixture, 0, 0, assets, buildingKind) !== null;
 }
 
-/** Every studio placement of a building's floor-plan fixtures. */
+/** LIFE-028 is mounted flush under the next floor's slab (ceilingY − .2)
+ * above each interior use point, where the renderer's task light serves that
+ * point. Only points actually covered by a slab get one; a top floor under a
+ * pitched roof has no flat mount and is left without a model. */
+export const CEILING_LAMP = { asset: 'LIFE-028', slabThickness: .2, eyeClearance: 1.72 } as const;
+export function studioCeilingLampPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] {
+  const body = getBuildingBody(building), asset = assets.get(CEILING_LAMP.asset); if (!body || !asset) return [];
+  const { min, max } = asset.boundsM;
+  return body.floorPlans.flatMap(plan => {
+    const above = body.floorPlans.find(next => next.floor === plan.floor + 1); if (!above) return [];
+    const slabs = getFloorPlanSlabRegions(above), top = plan.ceilingY - CEILING_LAMP.slabThickness, y = top - max[1];
+    if (y + min[1] < plan.y + CEILING_LAMP.eyeClearance) return [];
+    return plan.usePoints.filter(point => plan.interior.some(region => contains(region, point.x, point.z))
+      && [[min[0], min[2]], [max[0], min[2]], [min[0], max[2]], [max[0], max[2]]].every(([dx, dz]) => slabs.some(region => contains(region, point.x + dx - (min[0] + max[0]) / 2, point.z + dz - (min[2] + max[2]) / 2))))
+      .map(point => ({ asset: asset.id, fixtureId: `${point.id}:ceiling-lamp`, floor: plan.floor, scale: 1,
+        local: { x: point.x - (min[0] + max[0]) / 2, y, z: point.z - (min[2] + max[2]) / 2 } }));
+  });
+}
+
+/** Every studio placement of a building's floor-plan fixtures and lamps. */
 export function studioBuildingPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] {
   const body = getBuildingBody(building); if (!body) return [];
-  return body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets, building.kind) ?? []));
+  return [...body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets, building.kind) ?? [])),
+    ...studioCeilingLampPlacements(building, assets)];
 }
 
 /** A fixed, world-space studio model (origin = its min corner, yaw about Y). */

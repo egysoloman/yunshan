@@ -59,6 +59,20 @@ try {
     });
     await page.screenshot({ path: `artifacts/studio-props-${kind}.png`, timeout: 180_000 });
     report[kind] = { ...view, placed };
+    if (kind === 'home' || kind === 'school') {
+      report[`${kind}-lamp`] = await page.evaluate(() => {
+        const { city, controller } = window.__YUNSHAN__, camera = controller.camera;
+        const mesh = city.scene.getObjectByName('体素工坊 · 楼层设施模型').children.find(m => m.visible && m.name.startsWith('LIFE-028'));
+        if (!mesh) return null;
+        const M = new camera.matrix.constructor(), p = new camera.position.constructor(); let best = null;
+        for (let i = 0; i < mesh.count; i++) { mesh.getMatrixAt(i, M); p.setFromMatrixPosition(M); const d = p.distanceTo(camera.position); if (!best || d < best.d) best = { d, x: p.x, y: p.y, z: p.z }; }
+        const dx = best.x - camera.position.x, dy = best.y - camera.position.y, dz = best.z - camera.position.z;
+        controller.yaw = Math.atan2(-dx, -dz); controller.pitch = Math.atan2(dy, Math.hypot(dx, dz)); controller['orient']();
+        return best;
+      });
+      await page.waitForTimeout(6000);
+      await page.screenshot({ path: `artifacts/studio-props-${kind}-ceiling.png`, timeout: 180_000 });
+    }
     await page.evaluate(() => window.__YUNSHAN__.actions.interact());
   }
   report.station = await page.evaluate(() => {
