@@ -34,6 +34,10 @@ namespace Yunshan.Core.Host
         public string NavigationDestination, NavigationUnavailable; public List<Vec3> NavigationPoints = new List<Vec3>();
         /// <summary>Null when unchanged since the voxelKey the client sent.</summary>
         public List<Vec3> Voxels; public string VoxelKey;
+        /// <summary>Food units shown on open markets' counters, by building id.</summary>
+        public Dictionary<string, int> MarketUnits = new Dictionary<string, int>();
+        /// <summary>Closed network edges (barriers at both ends).</summary>
+        public List<string> ClosedEdges = new List<string>();
         /// <summary>Refusal of the requested walking position (closed road), else null.</summary>
         public string Rejected;
 
@@ -93,6 +97,9 @@ namespace Yunshan.Core.Host
             var voxels = Json.Arr(o, "voxels");
             if (voxels != null) { f.Voxels = new List<Vec3>(); foreach (var v in voxels) { var a = (List<object>)v; f.Voxels.Add(new Vec3((double)a[0], (double)a[1], (double)a[2])); } }
             f.VoxelKey = Json.Str(o, "voxelKey"); f.Rejected = Json.Str(o, "rejected");
+            foreach (var id in Json.Arr(o, "closedEdges") ?? new List<object>()) if (id is string edgeId) f.ClosedEdges.Add(edgeId);
+            var markets = Json.Obj(o, "marketUnits");
+            if (markets != null) foreach (var pair in markets) if (pair.Value is double units) f.MarketUnits[pair.Key] = (int)units;
             return f;
         }
     }

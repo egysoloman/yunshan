@@ -18,6 +18,8 @@ for (let i = 0; i < ticks; i++) {
 }
 const sorted = [...ms].sort((a, b) => a - b);
 const late = ms.slice(Math.floor(ms.length / 2)).sort((a, b) => a - b);
-const result = { ticks, speed, finalTick: sim.state.tick, medianMs: sorted[Math.floor(sorted.length / 2)], meanMs: ms.reduce((a, b) => a + b, 0) / ms.length, secondHalfMedianMs: late[Math.floor(late.length / 2)], secondHalfP95Ms: late[Math.floor(late.length * .95)], first5Ms: ms.slice(0, 5), ms, shas };
+if (typeof globalThis.gc === 'function') globalThis.gc();
+const memory = process.memoryUsage();
+const result = { ticks, speed, heapUsedMiB: Math.round(memory.heapUsed / 1048576), rssMiB: Math.round(memory.rss / 1048576), finalTick: sim.state.tick, medianMs: sorted[Math.floor(sorted.length / 2)], meanMs: ms.reduce((a, b) => a + b, 0) / ms.length, secondHalfMedianMs: late[Math.floor(late.length / 2)], secondHalfP95Ms: late[Math.floor(late.length * .95)], first5Ms: ms.slice(0, 5), ms, shas };
 if (out) writeFileSync(out, JSON.stringify(result, null, 1));
 console.log(JSON.stringify({ ...result, ms: undefined, shas: [shas[0], shas.at(-1)] }));

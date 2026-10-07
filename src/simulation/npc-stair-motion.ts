@@ -206,7 +206,7 @@ export class NpcStairMotion {
       try {
         geometry = this.geometry(b, floors);
         if (high - low + 1 <= 7) {
-          const leg = this.sharedLeg(b, floors, geometry, route, index);
+          const leg = this.materialize(b, floors, route, index);
           if (leg) result = { kind: 'physical', leg };
         }
       } catch { geometry = ''; }
@@ -215,23 +215,6 @@ export class NpcStairMotion {
     }
     const result: NpcStairDescription = { kind: 'legacy', bodies: witnesses.filter(witness => witness.building.floorPlanProfile === 'v4-program-bodies-02').map(witness => ({ building: witness.building, floors: witness.floors })) };
     entries.set(index, { from: { ...from }, to: { ...to }, result, witnesses, collection: this.world.buildings, collectionLength: this.world.buildings.length }); return result;
-  }
-
-  // Materialized legs depend only on the building's local geometry (the same
-  // fingerprint that validates every cached leg), the two reference points and
-  // whether the route's prefix is the actual origin. Replanned routes reuse
-  // them while that fingerprint is unchanged; the route index is the caller's.
-  private readonly legs = new Map<string, { geometry: string; byPoints: Map<string, NpcStairLeg | null> }>();
-  private sharedLeg(b: Building, floors: number[], geometry: string, route: Vec3[], index: number): NpcStairLeg | null {
-    const coordinate = (n: number) => Object.is(n, -0) ? '-0' : String(n), point = (p: Vec3) => `${coordinate(p.x)},${coordinate(p.y)},${coordinate(p.z)}`;
-    const from = route[index - 1], origin = route.slice(0, index).every(position => samePoint(position, from));
-    const bucketKey = `${this.memberIndex.get(b) ?? b.id}:${floors.join(',')}`, key = `${point(from)}|${point(route[index])}|${origin ? 1 : 0}`;
-    let bucket = this.legs.get(bucketKey);
-    if (!bucket || bucket.geometry !== geometry) { bucket = { geometry, byPoints: new Map() }; this.legs.set(bucketKey, bucket); }
-    if (bucket.byPoints.has(key)) { const leg = bucket.byPoints.get(key)!; return leg && { ...leg, routeIndex: index }; }
-    const leg = this.materialize(b, floors, route, index);
-    if (bucket.byPoints.size >= 4096) bucket.byPoints.clear();
-    bucket.byPoints.set(key, leg); return leg;
   }
 
   private materialize(b: Building, floors: number[], route: Vec3[], index: number): NpcStairLeg | null {

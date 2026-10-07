@@ -16,8 +16,10 @@ namespace Yunshan.Runtime
         readonly WorldDefinition world;
         readonly Dictionary<string, NetworkEdge> edges = new Dictionary<string, NetworkEdge>();
         readonly List<NetworkNode> stations = new List<NetworkNode>();
+        readonly Dictionary<string, List<MarketCounter>> counters = new Dictionary<string, List<MarketCounter>>();
         readonly InstancedBoxes bodies, lamps, voxels;
         readonly Dictionary<string, Motion> motion = new Dictionary<string, Motion>();
+        readonly Dictionary<string, List<CitizenAppearance.Part>> templates = new Dictionary<string, List<CitizenAppearance.Part>>();
         readonly Dictionary<string, SimFrame.Citizen> previousCitizens = new Dictionary<string, SimFrame.Citizen>();
         readonly Dictionary<string, SimFrame.Vehicle> previousVehicles = new Dictionary<string, SimFrame.Vehicle>();
         readonly LineRenderer navigation;
@@ -29,6 +31,7 @@ namespace Yunshan.Runtime
             this.world = world;
             foreach (var e in world.Edges) edges[e.Id] = e;
             foreach (var n in world.Nodes) if (n.Station) stations.Add(n);
+            foreach (var b in world.Buildings) if (b.Kind == "market") counters[b.Id] = SiteFixtures.MarketCounters(world, b);
             var shader = Shader.Find("Yunshan/InstancedColor");
             if (shader == null) shader = Shader.Find("Standard");
             bodies = new InstancedBoxes(new Material(shader) { name = "云山 · 居民与载具" });
@@ -37,7 +40,8 @@ namespace Yunshan.Runtime
             voxels = new InstancedBoxes(new Material(shader) { name = "云山 · 体素" });
             var line = new GameObject("导航金线", typeof(LineRenderer)); line.transform.SetParent(parent, false);
             navigation = line.GetComponent<LineRenderer>();
-            navigation.material = new Material(Shader.Find("Sprites/Default")); navigation.widthMultiplier = .35f;
+            var overlay = Shader.Find("Yunshan/UnlitColor"); if (overlay == null) overlay = Shader.Find("Sprites/Default");
+            navigation.material = new Material(overlay); navigation.widthMultiplier = .35f;
             navigation.startColor = navigation.endColor = new Color(.92f, .76f, .43f, .75f); navigation.positionCount = 0;
         }
 
@@ -60,6 +64,8 @@ namespace Yunshan.Runtime
             DrawVehicles(frame, t, camera);
             DrawSignals(frame);
             DrawAircraft(frame);
+            DrawMarketGoods(frame, camera);
+            DrawClosures(frame);
             foreach (var v in session.Voxels) voxels.Add(Space.ToUnity(v.X, v.Y + .1, v.Z), Quaternion.identity, Vector3.one * .2f, Space.Hex("#d0b784"));
             bodies.Draw(); lamps.Draw(); voxels.Draw();
             navigation.positionCount = frame.NavigationPoints.Count;
@@ -82,20 +88,29 @@ namespace Yunshan.Runtime
                 motion[c.Id] = new Motion { Position = position, Yaw = yaw, Phase = phase };
                 double range = Distance(position, camera);
                 bool near = !dead && range <= 110;
-                var parts = CitizenAppearance.Describe(c.Id, c.Role ?? "", c.Age, new CitizenAppearance.Pose { Yaw = yaw, Phase = phase, Walking = walking, Seated = seated, Dead = dead }, near);
+                // Parts are cached per appearance; a walking stride only scales the
+                // template's swing (taken at phase π/2) by sin(phase).
+                string key = $"{c.Id}|{c.Role}|{c.Age}|{(near ? 1 : 0)}{(walking ? 1 : 0)}{(seated ? 1 : 0)}{(dead ? 1 : 0)}";
+                if (!templates.TryGetValue(key, out var parts))
+                {
+                    if (templates.Count > 4096) templates.Clear();
+                    parts = CitizenAppearance.Describe(c.Id, c.Role ?? "", c.Age, new CitizenAppearance.Pose { Phase = Math.PI / 2, Walking = walking, Seated = seated, Dead = dead }, near);
+                    templates[key] = parts;
+                }
+                double stride = walking ? Math.Sin(phase) : 1;
                 double cy = Math.Cos(yaw), sy = Math.Sin(yaw);
                 var yawRotation = Space.Yaw(yaw);
                 foreach (var part in parts)
                 {
-                    double x = part.Position.X, y = part.Position.Y, z = part.Position.Z;
-                    if (part.Pivot != null && part.RotationX != 0)
+                    double x = part.Position.X, y = part.Position.Y, z = part.Position.Z, rotationX = part.RotationX * stride;
+                    if (part.Pivot != null && rotationX != 0)
                     {
-                        double py = y - part.Pivot.Y, pz = z - part.Pivot.Z, c2 = Math.Cos(part.RotationX), s2 = Math.Sin(part.RotationX);
+                        double py = y - part.Pivot.Y, pz = z - part.Pivot.Z, c2 = Math.Cos(rotationX), s2 = Math.Sin(rotationX);
                         y = part.Pivot.Y + py * c2 - pz * s2; z = part.Pivot.Z + py * s2 + pz * c2;
                     }
                     if (dead) { double priorY = y; y = .1 - z; z = priorY; }
                     var world = Space.ToUnity(position.X + x * cy + z * sy, position.Y + y, position.Z + z * cy - x * sy);
-                    var rotation = yawRotation * Quaternion.AngleAxis((float)((part.RotationX + (dead ? Math.PI / 2 : 0)) * Mathf.Rad2Deg), Vector3.right);
+                    var rotation = yawRotation * Quaternion.AngleAxis((float)((rotationX + (dead ? Math.PI / 2 : 0)) * Mathf.Rad2Deg), Vector3.right);
                     bodies.Add(world, rotation, new Vector3((float)part.Size.X, (float)part.Size.Y, (float)part.Size.Z), Space.Hex(part.Color));
                 }
                 Residents++;
@@ -123,6 +138,45 @@ namespace Yunshan.Runtime
                 bodies.Add(Space.ToUnity(p.X, p.Y + 1.1 + lift, p.Z), rotation, new Vector3((float)width, flight ? .8f : 1.5f, (float)length), Space.Hex(flight ? "#d5c7aa" : train ? "#d0b985" : "#a77851"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + 2.1 + lift, p.Z), rotation, new Vector3((float)(flight ? 3 : width * .85), flight ? 1.8f : .8f, (float)(length * .68)), Space.Hex("#517f82"));
                 bodies.Add(Space.ToUnity(p.X, p.Y + .6 + lift, p.Z), rotation, new Vector3((float)(width + .25), .2f, (float)(length * .85)), Space.Hex("#3f6f73"));
+            }
+        }
+
+        /// <summary>Web MarketGoodsPool: up to 8 real food units per open market,
+        /// two rows on its counters, within 110 m of the camera.</summary>
+        void DrawMarketGoods(SimFrame frame, Vec3 camera)
+        {
+            foreach (var pair in frame.MarketUnits)
+            {
+                if (!counters.TryGetValue(pair.Key, out var list) || list.Count == 0) continue;
+                for (int unit = 0; unit < pair.Value; unit++)
+                {
+                    var counter = list[unit % list.Count];
+                    if (camera != null && Distance(camera, counter.Position) > 110) continue;
+                    int columns = Math.Max(1, Math.Min(4, (int)Math.Floor((counter.Size.X - .4) / .6) + 1)), slot = unit / list.Count, row = slot / columns;
+                    if (row > 1) continue;
+                    double x = (slot % columns - (columns - 1) / 2.0) * .6, z = (row - .5) * .4, c = Math.Cos(counter.Rotation), s = Math.Sin(counter.Rotation);
+                    var position = Space.ToUnity(counter.Position.X + x * c + z * s, counter.Position.Y + counter.Size.Y / 2 + .1, counter.Position.Z + z * c - x * s);
+                    bodies.Add(position, Space.Yaw(counter.Rotation), new Vector3(.4f, .2f, .4f), Space.Hex(unit % 2 == 1 ? "#d5bb8d" : "#b9c4a4"));
+                }
+            }
+        }
+
+        /// <summary>Web RoadClosureOverlay: a warning beam on two feet near each end.</summary>
+        void DrawClosures(SimFrame frame)
+        {
+            foreach (var id in frame.ClosedEdges)
+            {
+                if (!edges.TryGetValue(id, out var edge) || edge.Points.Count < 2) continue;
+                double length = Math.Max(1, edge.Length);
+                foreach (var progress in new[] { Math.Min(.02, 2 / length), Math.Max(.98, 1 - 2 / length) })
+                {
+                    var at = World.SamplePolyline(edge.Points, progress); var before = World.SamplePolyline(edge.Points, Math.Max(0, progress - .001)); var after = World.SamplePolyline(edge.Points, Math.Min(1, progress + .001));
+                    var rotation = Space.Yaw(Math.Atan2(after.X - before.X, after.Z - before.Z));
+                    double width = Math.Min(10, TransportGeometry.DeckWidth(edge) - 1);
+                    var origin = Space.ToUnity(at);
+                    bodies.Add(origin + rotation * new Vector3(0, .9f, 0), rotation, new Vector3((float)width, .26f, .18f), Space.Hex("#dfad50"));
+                    foreach (var x in new[] { -width * .4, width * .4 }) bodies.Add(origin + rotation * new Vector3(-(float)x, .45f, 0), rotation, new Vector3(.12f, .9f, .5f), Space.Hex("#3f423b"));
+                }
             }
         }
 

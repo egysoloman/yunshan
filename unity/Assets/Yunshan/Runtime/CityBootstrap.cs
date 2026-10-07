@@ -33,6 +33,7 @@ namespace Yunshan.Runtime
         readonly List<Transform> signs = new List<Transform>();
         Font signFont;
         Vector2 contextScroll, panesScroll;
+        CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
         int paneTab;
         int contextTab;
         bool showHelp = true;
@@ -104,6 +105,7 @@ namespace Yunshan.Runtime
                 if (session.Frame != null) OnPlayerMovedBySimulation(session.Frame);
                 life = new CityLifeView(world, transform);
                 status = null;
+                _ = BuildMapAsync();
                 StartCoroutine(NearDetailLoop());
             }
             catch (Exception error)
@@ -121,6 +123,16 @@ namespace Yunshan.Runtime
             if (session != null && session.Context.Count > 0 && x > Screen.width - 420 && y < 620) return true;
             if (session != null && session.PanesOpen && x < 580 && y > 130 && y < Screen.height - 170) return true;
             return y > Screen.height - 170 && (x < 590 || Mathf.Abs(x - Screen.width / 2f) < 380);
+        }
+
+        async Task BuildMapAsync()
+        {
+            var image = await Task.Run(() => CityMapImage.Render(world));
+            var texture = new Texture2D(image.Size, image.Size, TextureFormat.RGBA32, false) { name = "云山地图", filterMode = FilterMode.Bilinear, wrapMode = TextureWrapMode.Clamp };
+            var flipped = new byte[image.Pixels.Length]; int row = image.Size * 4;
+            for (int j = 0; j < image.Size; j++) Buffer.BlockCopy(image.Pixels, j * row, flipped, (image.Size - 1 - j) * row, row);
+            texture.LoadRawTextureData(flipped); texture.Apply();
+            mapImage = image; mapTexture = texture;
         }
 
         bool CanAccess(Building building, int floor)
@@ -155,7 +167,8 @@ namespace Yunshan.Runtime
             solidMaterial = new Material(vertexColor) { name = "云山 · 顶点色" };
             glassMaterial = new Material(vertexColor) { name = "云山 · 玻璃" };
             glassMaterial.SetFloat("_Glossiness", .8f);
-            waterMaterial = new Material(Shader.Find("Standard")) { name = "云山 · 水", color = Space.Hex("#4f8d93") };
+            var water = Shader.Find("Yunshan/Water"); if (water == null) water = Shader.Find("Standard");
+            waterMaterial = new Material(water) { name = "云山 · 水", color = Space.Hex("#4f8d93") };
             waterMaterial.SetFloat("_Glossiness", .92f);
         }
 
@@ -325,6 +338,8 @@ namespace Yunshan.Runtime
             RenderSettings.fogDensity = .0005f + (1 - visibility) * .0008f;
             if (view != null) { view.clearFlags = CameraClearFlags.SolidColor; view.backgroundColor = RenderSettings.fogColor; }
             studio?.SetLighting(daylight, Mathf.Clamp01(energy));
+            // Lit windows at night, as the web facade night term: (1 − daylight) × power × 0.8.
+            glassMaterial.SetFloat("_Emission", (1 - daylight) * Mathf.Clamp01(energy) * .8f);
             UpdateRoomLights(daylight, energy);
         }
 
@@ -433,9 +448,11 @@ namespace Yunshan.Runtime
             var panes = session.Panes;
             float left = 12, top = 140, width = Mathf.Min(560, Screen.width - 440), height = Screen.height - 320;
             GUI.Box(new UnityEngine.Rect(left, top, width, height), GUIContent.none, box);
-            paneTab = Mathf.Clamp(paneTab, 0, panes.Count);
+            paneTab = Mathf.Clamp(paneTab, 0, panes.Count + 1);
             for (int i = 0; i < panes.Count; i++) if (GUI.Toggle(new UnityEngine.Rect(left + 8 + i * 80, top + 6, 76, 26), paneTab == i, panes[i].Title, GUI.skin.button)) paneTab = i;
             if (GUI.Toggle(new UnityEngine.Rect(left + 8 + panes.Count * 80, top + 6, 76, 26), paneTab == panes.Count, "设置", GUI.skin.button)) paneTab = panes.Count;
+            if (GUI.Toggle(new UnityEngine.Rect(left + 8 + (panes.Count + 1) * 80, top + 6, 76, 26), paneTab == panes.Count + 1, "地图", GUI.skin.button)) paneTab = panes.Count + 1;
+            if (paneTab == panes.Count + 1) { DrawMap(new UnityEngine.Rect(left + 8, top + 38, width - 16, height - 46)); return; }
             GUILayout.BeginArea(new UnityEngine.Rect(left + 8, top + 38, width - 16, height - 46));
             panesScroll = GUILayout.BeginScrollView(panesScroll);
             if (paneTab == panes.Count) { DrawSettings(); GUILayout.EndScrollView(); GUILayout.EndArea(); return; }
@@ -458,6 +475,51 @@ namespace Yunshan.Runtime
                 foreach (var note in section.Notes) GUILayout.Label(note, small);
             }
             GUILayout.EndScrollView();
+            GUILayout.EndArea();
+        }
+
+        /// <summary>City map: terrain, river, network, districts and the player;
+        /// clicking a district or building offers a journey (planJourney).</summary>
+        void DrawMap(UnityEngine.Rect area)
+        {
+            if (mapTexture == null) { GUI.Label(area, "正在绘制城市地图……", label); return; }
+            float side = Mathf.Min(area.width, area.height - 90);
+            var map = new UnityEngine.Rect(area.x + (area.width - side) / 2, area.y, side, side);
+            GUI.DrawTexture(map, mapTexture);
+            Vector2 At(double x, double z) { var (u, v) = mapImage.Project(x, z); return new Vector2(map.x + (float)u * side, map.y + (float)v * side); }
+            void Mark(Vector2 p, float r, Color color) { var old = GUI.color; GUI.color = color; GUI.DrawTexture(new UnityEngine.Rect(p.x - r, p.y - r, 2 * r, 2 * r), Texture2D.whiteTexture); GUI.color = old; }
+            foreach (var d in world.Districts) { var p = At(d.Center.X, d.Center.Z); Mark(p, d.Id == mapSelection ? 6 : 4, d.Id == mapSelection ? new Color(.73f, .53f, .26f) : new Color(.25f, .43f, .38f)); GUI.Label(new UnityEngine.Rect(p.x + 6, p.y - 9, 120, 18), d.Name, small); }
+            var frame = session.Frame;
+            if (frame != null && frame.NavigationPoints.Count > 0) { var end = frame.NavigationPoints[frame.NavigationPoints.Count - 1]; Mark(At(end.X, end.Z), 5, new Color(.92f, .76f, .43f)); }
+            if (frame != null) foreach (var id in frame.ClosedEdges)
+            {
+                var edge = world.Edges.FirstOrDefault(e => e.Id == id); if (edge == null) continue;
+                foreach (var p in edge.Points) Mark(At(p.X, p.Z), 2, new Color(.68f, .25f, .18f));
+            }
+            var feet = walker.Feet; Mark(At(feet.X, feet.Z), 5, new Color(.81f, .57f, .28f)); Mark(At(feet.X, feet.Z), 2.5f, Color.white);
+            var e = Event.current;
+            if (e.type == EventType.MouseDown && map.Contains(e.mousePosition))
+            {
+                var (x, z) = mapImage.Unproject((e.mousePosition.x - map.x) / side, (e.mousePosition.y - map.y) / side);
+                double Near(double px, double pz) => Math.Sqrt((px - x) * (px - x) + (pz - z) * (pz - z));
+                var building = world.Buildings.OrderBy(b => Near(b.Door.X, b.Door.Z)).First();
+                var district = world.Districts.OrderBy(d => Near(d.Center.X, d.Center.Z)).First();
+                mapSelection = Near(building.Door.X, building.Door.Z) * side / mapImage.Span < 6 ? building.Id : district.Id;
+                e.Use();
+            }
+            var below = new UnityEngine.Rect(area.x, map.yMax + 6, area.width, 80);
+            GUILayout.BeginArea(below);
+            if (mapSelection != null)
+            {
+                var name = world.Buildings.FirstOrDefault(b => b.Id == mapSelection)?.Name ?? world.Districts.FirstOrDefault(d => d.Id == mapSelection)?.Name ?? mapSelection;
+                GUILayout.Label("已选：" + name, label);
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("步行导航")) Execute(new Dictionary<string, object> { ["type"] = "planJourney", ["targetId"] = mapSelection, ["value"] = 0d });
+                if (GUILayout.Button("公共交通")) Execute(new Dictionary<string, object> { ["type"] = "planJourney", ["targetId"] = mapSelection, ["value"] = 1d });
+                if (GUILayout.Button("取消行程")) Execute(new Dictionary<string, object> { ["type"] = "cancelJourney" });
+                GUILayout.EndHorizontal();
+            }
+            else GUILayout.Label("点击地图上的城区或建筑，规划步行或公共交通行程。", small);
             GUILayout.EndArea();
         }
 

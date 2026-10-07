@@ -16,6 +16,7 @@ import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
 import { getInteriorLightConfigurations, INTERIOR_LIGHT_SLOTS } from './rendering/interior-lighting';
+import { vehicleShape } from './rendering/vehicle-shapes';
 import { marketCounters } from './site-fixtures';
 import { createBuildingRenderChunks, disposeNearChunkGroup, NearChunkResidency } from './rendering/chunk-residency';
 import { deckWidth, guardrailOffset, guardrailSpans, hasGuardrailAt, GUARDRAIL_THICKNESS } from './transport-geometry';
@@ -1028,10 +1029,10 @@ export class CityRenderer implements CityRendererAPI {
       if (Math.hypot(vehicle.position.x - this.camera.position.x, vehicle.position.z - this.camera.position.z) > this.distance + 600) continue;
       const edge = this.edges.get(vehicle.edgeId); let direction = 0;
       if (edge && edge.points.length > 1) { const t = Math.max(0, Math.min(.99999, vehicle.progress)), i = Math.min(edge.points.length - 2, Math.floor(t * (edge.points.length - 1))), a = edge.points[i], b = edge.points[i + 1]; direction = Math.atan2(b.x - a.x, b.z - a.z) + (vehicle.direction < 0 ? Math.PI : 0); }
-      const p = vehicle.position, flight = vehicle.kind === 'flight', train = vehicle.kind === 'maglev' || vehicle.kind === 'lightRail', boat = vehicle.kind === 'ferry', length = flight ? 17 : train ? 16 : boat ? 11 : vehicle.kind === 'cable' ? 3.5 : 5.5, width = flight ? 14 : train ? 3.3 : boat ? 4.5 : 2.5, lift = vehicle.kind === 'cable' ? 2.5 : 0;
-      this.put(pool.body, n, p.x, p.y + 1.1 + lift, p.z, width, flight ? .8 : 1.5, length, direction, flight ? '#d5c7aa' : train ? '#d0b985' : '#a77851');
-      this.put(pool.head, n, p.x, p.y + 2.1 + lift, p.z, flight ? 3 : width * .85, flight ? 1.8 : .8, length * .68, direction, '#517f82');
-      this.put(pool.trim, n, p.x, p.y + .6 + lift, p.z, width + .25, .2, length * .85, direction); counts.set(vehicle.kind, n + 1);
+      const p = vehicle.position, { body, head, trim } = vehicleShape(vehicle.kind);
+      this.put(pool.body, n, p.x, p.y + body.y, p.z, body.width, body.height, body.length, direction, body.color);
+      this.put(pool.head, n, p.x, p.y + head.y, p.z, head.width, head.height, head.length, direction, head.color);
+      this.put(pool.trim, n, p.x, p.y + trim.y, p.z, trim.width, trim.height, trim.length, direction); counts.set(vehicle.kind, n + 1);
     }
     for (const [kind, pool] of this.vehiclePools) for (const mesh of [pool.body, pool.head, pool.trim]) { mesh.count = counts.get(kind) ?? 0; mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true; }
   }

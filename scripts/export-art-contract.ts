@@ -12,6 +12,7 @@ import { getBuildingBody } from '../src/architecture-floor-plan';
 import { citizenBodyHeight, describeCitizen } from '../src/rendering/citizen-appearance';
 import { STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, STUDIO_PROGRAM_DRESSING } from '../src/rendering/studio-prop-layout';
 import manifest from '../src/rendering/studio-assets.json';
+import { vehicleShape } from '../src/rendering/vehicle-shapes';
 import type { Citizen } from '../src/types';
 
 const world = createWorld();
@@ -71,6 +72,11 @@ const contract = {
   woodland: {
     trees: 5200, heightRangeM: [16, 31], heightQuantumM: world.voxelSize, trunkSectionM: .8, crownTiers: 4,
     note: 'woodland is display only; studio trees (8–14m) are shorter than game trees and are not used until a matching height family exists at 0.2m voxels',
+  },
+  vehicles: {
+    note: 'network vehicles are display only: position, edge, direction and state come from the simulation; origin at the vehicle position on its edge, +Z along travel; boxes are centred at y above that position',
+    shapes: Object.fromEntries((['road', 'maglev', 'lightRail', 'cable', 'ferry', 'flight'] as const).map(kind => [kind, vehicleShape(kind)])),
+    rejected: [{ id: 'BUILT-170…175', reason: 'traffic proxy variants are the same three boxes (48 triangles); no visual gain' }, { id: 'BUILT-280/281/284/285', reason: 'complete vehicle masters are author-sized (e.g. carriage about 15×29m vs 3.3×16m) and cannot be fitted by uniform scale' }],
   },
   citizens: {
     note: 'parts are boxes on a 0.2m quantum with pivots for walking swing; a model part must match its box and pivot for rigid replacement',

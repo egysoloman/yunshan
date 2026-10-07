@@ -25,6 +25,8 @@ test('native host drives the authoritative simulation through requests', async (
   assert(frame.events.some(e => e.type === 'arrival'), 'first frame carries the arrival notice');
   assert(Object.values(frame.signals).every(p => p === 0 || p === 1));
   assert.equal(frame.player.alive, true);
+  assert(Object.values(frame.marketUnits).every(units => Number.isInteger(units) && units >= 1 && units <= 8), 'market samples follow the 8-unit display rule');
+  assert(Array.isArray(frame.closedEdges));
 
   const bad = await host.handle({ id: 4, op: 'step', seconds: 99 });
   assert.equal(bad.ok, false, 'out-of-range real time is refused, not clamped silently');

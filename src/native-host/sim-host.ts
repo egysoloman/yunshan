@@ -11,9 +11,11 @@ import { createInterface } from 'node:readline';
 import { Simulation } from '../simulation';
 import { createCityLifeProductCity, PRODUCT_CITY_LAYOUT } from '../product-city';
 import { savedWorldFingerprint, selectSavedWorld } from '../persistence/world-layout';
-import { releaseRoadExitPermit, roadMovementAllowed } from '../roads';
+import { isRoadOpen, releaseRoadExitPermit, roadMovementAllowed } from '../roads';
 import { activeAircraft, setAircraftControls } from '../aviation';
 import { JourneyNavigation } from '../journey';
+import { marketDisplayUnits } from '../site-fixtures';
+import { shopLifecycleAllowsOperation } from '../simulation/shop_lifecycle';
 import { contextModel, type ContextView } from './context-model';
 import { panesModel } from './panes-model';
 import type { AviationControls, Command, SimState, Vec3, ViewMode, WorldDefinition } from '../types';
@@ -35,6 +37,10 @@ export interface HostFrame {
   events: { id: number; tick: number; type: string; text: string }[];
   lastEventId: number;
   navigation: { destination: string | null; points: Vec3[]; unavailable: string | null } | null;
+  /** Food units displayed on each open market's counters (web MarketGoodsPool rule). */
+  marketUnits: Record<string, number>;
+  /** Network edges currently closed (roads.ts isRoadOpen), for barriers and the map. */
+  closedEdges: string[];
   /** Placed voxel positions, omitted (null) when unchanged since `voxelKey`. */
   voxels: number[][] | null; voxelKey: string;
   /** Set when the requested walking position crossed a closed road. */
@@ -52,6 +58,7 @@ export class SimHost {
   private world: WorldDefinition | null = null;
   private navigation: JourneyNavigation | null = null;
   private layout = '';
+  private marketIds: Set<string> | null = null;
 
   async handle(request: HostRequest): Promise<HostResponse> {
     const id = request.id;
@@ -93,6 +100,7 @@ export class SimHost {
     const world = selection.world, sim = await createCityLifeProductCity(world);
     if (save) { const result = sim.importSave(save); if (!result.ok) throw new Error(result.message); }
     this.sim = sim; this.world = world; this.layout = selection.layout; this.navigation = new JourneyNavigation(world);
+    this.marketIds = new Set(world.buildings.filter(b => b.kind === 'market').map(b => b.id));
     return { layout: this.layout, seed: world.seed, fingerprint: savedWorldFingerprint(world), buildings: world.buildings.length, nodes: world.nodes.length, edges: world.edges.length, citizens: sim.state.citizens.length, vehicles: sim.state.vehicles.length };
   }
 
@@ -143,6 +151,11 @@ export class SimHost {
     const plan = this.navigation!.read(state);
     const navPoints = plan.walking?.points ?? [];
     const lastEventId = state.events.at(-1)?.id ?? 0;
+    const marketUnits: Record<string, number> = {};
+    for (const shop of state.shops) {
+      if (!this.marketIds!.has(shop.buildingId) || !shop.open || !shopLifecycleAllowsOperation(state, shop.id)) continue;
+      const units = marketDisplayUnits(shop.inventory); if (units > 0) marketUnits[shop.buildingId] = units;
+    }
     const voxels = (state as SimState & { voxels?: { position: Vec3 }[] }).voxels ?? [], lastVoxel = voxels.at(-1)?.position;
     const voxelKey = `${voxels.length}:${lastVoxel?.x}:${lastVoxel?.y}:${lastVoxel?.z}`;
     return {
@@ -155,6 +168,8 @@ export class SimHost {
       events: state.events.filter(e => e.id > since).map(e => ({ id: e.id, tick: e.tick, type: e.type, text: e.text })),
       lastEventId,
       navigation: plan.destination || plan.unavailable ? { destination: plan.destination?.name ?? null, points: navPoints.map(point), unavailable: plan.unavailable } : null,
+      marketUnits,
+      closedEdges: state.roadNetwork ? world.edges.filter(edge => !isRoadOpen(state, edge.id)).map(edge => edge.id) : [],
       voxels: request.voxelKey === voxelKey ? null : voxels.slice(0, 4096).map(v => [v.position.x, v.position.y, v.position.z]), voxelKey,
       stepMs: round(stepMs), ticks,
     };

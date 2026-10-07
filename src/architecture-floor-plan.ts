@@ -335,7 +335,55 @@ function segmentDistanceSquared(x:number,z:number,a:readonly number[],b:readonly
   return (x-a[0]-dx*t)**2+(z-a[1]-dz*t)**2;
 }
 function circleRectDistanceSquared(x:number,z:number,r:Rect) {return Math.max(r.x0-x,0,x-r.x1)**2+Math.max(r.z0-z,0,z-r.z1)**2;}
+/** Per-window grid over a plan's slab boundary segments and body-height
+ * blockers (walls, glass, fixtures). Rebuilt in every fixed-geometry window
+ * and whenever the fixtures list itself is replaced or resized. */
+interface StandIndex {epoch:number;fixtures:FloorFixture[];fixtureCount:number;x0:number;z0:number;nx:number;nz:number;segments:number[][];blockers:number[][];looseSegments:number[];looseBlockers:number[];ax:Float64Array;az:Float64Array;bx:Float64Array;bz:Float64Array;rects:{rect:Rect;bottom:number;top:number}[];stamp:Uint32Array;visit:number}
+const STAND_CELL=2,standIndexes=new WeakMap<FloorPlan,StandIndex>();
+function standIndex(p:FloorPlan):StandIndex {
+  const cached=standIndexes.get(p),fixtures=p.fixtures;
+  if(cached&&cached.epoch===fixedEpoch&&cached.fixtures===fixtures&&cached.fixtureCount===fixtures.length)return cached;
+  getFloorPlanSlabRegions(p);
+  const loops=supportCache.get(p)!.boundaries,ax:number[]=[],az:number[]=[],bx:number[]=[],bz:number[]=[];
+  for(const loop of loops)for(let i=0;i<loop.length;i++){const a=loop[i],b=loop[(i+1)%loop.length];ax.push(a[0]);az.push(a[1]);bx.push(b[0]);bz.push(b[1]);}
+  const rects:{rect:Rect;bottom:number;top:number}[]=[...wallPanels(p),...fixtures];
+  let x0=Infinity,x1=-Infinity,z0=Infinity,z1=-Infinity;
+  const finiteBox=(a:number,b:number,c:number,d:number)=>Number.isFinite(a)&&Number.isFinite(b)&&Number.isFinite(c)&&Number.isFinite(d)&&a<=b&&c<=d;
+  for(let i=0;i<ax.length;i++){const lx=Math.min(ax[i],bx[i]),hx=Math.max(ax[i],bx[i]),lz=Math.min(az[i],bz[i]),hz=Math.max(az[i],bz[i]);if(finiteBox(lx,hx,lz,hz)){x0=Math.min(x0,lx);x1=Math.max(x1,hx);z0=Math.min(z0,lz);z1=Math.max(z1,hz);}}
+  for(const w of rects){const r=w.rect;if(finiteBox(r.x0,r.x1,r.z0,r.z1)){x0=Math.min(x0,r.x0);x1=Math.max(x1,r.x1);z0=Math.min(z0,r.z0);z1=Math.max(z1,r.z1);}}
+  if(!(x1>=x0))x0=x1=z0=z1=0;
+  const nx=Math.max(1,Math.floor((x1-x0)/STAND_CELL)+1),nz=Math.max(1,Math.floor((z1-z0)/STAND_CELL)+1);
+  const segments:number[][]=Array.from({length:nx*nz},()=>[]),blockers:number[][]=Array.from({length:nx*nz},()=>[]),looseSegments:number[]=[],looseBlockers:number[]=[];
+  const place=(cells:number[][],loose:number[],i:number,lx:number,hx:number,lz:number,hz:number)=>{
+    if(!finiteBox(lx,hx,lz,hz)){loose.push(i);return;}
+    for(let ix=Math.floor((lx-x0)/STAND_CELL);ix<=Math.floor((hx-x0)/STAND_CELL);ix++)for(let iz=Math.floor((lz-z0)/STAND_CELL);iz<=Math.floor((hz-z0)/STAND_CELL);iz++)cells[ix*nz+iz].push(i);
+  };
+  for(let i=0;i<ax.length;i++)place(segments,looseSegments,i,Math.min(ax[i],bx[i]),Math.max(ax[i],bx[i]),Math.min(az[i],bz[i]),Math.max(az[i],bz[i]));
+  rects.forEach((w,i)=>{if(w.bottom<1.72&&w.top>.05)place(blockers,looseBlockers,i,w.rect.x0,w.rect.x1,w.rect.z0,w.rect.z1);else if(!(w.bottom>=1.72||w.top<=.05))looseBlockers.push(i);});
+  const index:StandIndex={epoch:fixedEpoch,fixtures,fixtureCount:fixtures.length,x0,z0,nx,nz,segments,blockers,looseSegments,looseBlockers,ax:Float64Array.from(ax),az:Float64Array.from(az),bx:Float64Array.from(bx),bz:Float64Array.from(bz),rects,stamp:new Uint32Array(Math.max(ax.length,rects.length)),visit:0};
+  standIndexes.set(p,index);return index;
+}
+function indexedCanStand(p:FloorPlan,x:number,z:number,radius:number):boolean {
+  if(!containsUnion(getFloorPlanSlabRegions(p),x,z))return false;
+  const index=standIndex(p),reach=Math.abs(radius)+eps+1e-9;
+  if(!Number.isFinite(x)||!Number.isFinite(z)||!Number.isFinite(reach))return canStandScan(p,x,z,radius);
+  const ix0=Math.max(0,Math.floor((x-reach-index.x0)/STAND_CELL)),ix1=Math.min(index.nx-1,Math.floor((x+reach-index.x0)/STAND_CELL)),iz0=Math.max(0,Math.floor((z-reach-index.z0)/STAND_CELL)),iz1=Math.min(index.nz-1,Math.floor((z+reach-index.z0)/STAND_CELL));
+  if(radius>0){
+    const limit=radius*radius-eps;
+    for(const i of index.looseSegments)if(standSegmentHit(index,i,x,z,limit))return false;
+    for(let ix=ix0;ix<=ix1;ix++)for(let iz=iz0;iz<=iz1;iz++)for(const i of index.segments[ix*index.nz+iz])if(standSegmentHit(index,i,x,z,limit))return false;
+  }
+  for(const i of index.looseBlockers)if(standBlocked(index.rects[i],x,z,radius))return false;
+  for(let ix=ix0;ix<=ix1;ix++)for(let iz=iz0;iz<=iz1;iz++)for(const i of index.blockers[ix*index.nz+iz])if(standBlocked(index.rects[i],x,z,radius))return false;
+  return true;
+}
+function standSegmentHit(index:StandIndex,i:number,x:number,z:number,limit:number):boolean {return segmentDistanceSquared(x,z,[index.ax[i],index.az[i]],[index.bx[i],index.bz[i]])<limit;}
+function standBlocked(w:{rect:Rect;bottom:number;top:number},x:number,z:number,radius:number):boolean {return w.bottom<1.72&&w.top>.05&&(radius===0?contains(w.rect,x,z):circleRectDistanceSquared(x,z,w.rect)<radius*radius-eps);}
 export function canStandInFloorPlan(p:FloorPlan,x:number,z:number,radius=.35):boolean {
+  // In a fixed-geometry window only nearby boundaries and blockers can matter.
+  return fixedDepth>0?indexedCanStand(p,x,z,radius):canStandScan(p,x,z,radius);
+}
+function canStandScan(p:FloorPlan,x:number,z:number,radius:number):boolean {
   if(!containsUnion(getFloorPlanSlabRegions(p),x,z))return false;
   if(radius>0)for(const loop of supportCache.get(p)!.boundaries)for(let i=0;i<loop.length;i++) if(segmentDistanceSquared(x,z,loop[i],loop[(i+1)%loop.length])<radius*radius-eps)return false;
   // Same members and order as the former spread+some, without a per-query array.
@@ -767,8 +815,15 @@ export function getFloorPlanRoofSupport(b:Building,reference:Vec3,radius=.35):Fl
 }
 function blocksRoofMovement(b:Building,from:Vec3,to:Vec3,radius:number,eyeHeight:number):boolean {
   const body=getBuildingBody(b);if(!body)return false;const a=buildingLocalPosition(b,from),z=buildingLocalPosition(b,to),steps=Math.max(1,Math.ceil(Math.hypot(z.x-a.x,z.z-a.z)/.1));
-  for(const roof of getFloorPlanRoofRegions(body))for(let i=0;i<=steps;i++) {
+  // Every sample lies in the leg's box; a roof beyond the body's reach of that
+  // box, or wholly above the highest head, cannot be met by any sample.
+  const reach=Math.sqrt(radius*radius+eps)+1e-6,lowX=Math.min(a.x,z.x)-reach,highX=Math.max(a.x,z.x)+reach,lowZ=Math.min(a.z,z.z)-reach,highZ=Math.max(a.z,z.z)+reach,head=Math.max(a.y,z.y)+eyeHeight;
+  const bounded=[lowX,highX,lowZ,highZ,head].every(Number.isFinite);
+  for(const roof of getFloorPlanRoofRegions(body)){
+    const r=roof.rect;
+    if(bounded&&[r.x0,r.x1,r.z0,r.z1,roof.bottom].every(Number.isFinite)&&r.x0<=r.x1&&r.z0<=r.z1&&(r.x0>highX||r.x1<lowX||r.z0>highZ||r.z1<lowZ||head+1e-6<=roof.bottom+eps))continue;
+    for(let i=0;i<=steps;i++) {
     const t=i/steps,x=a.x+(z.x-a.x)*t,zz=a.z+(z.z-a.z)*t,feet=a.y+(z.y-a.y)*t,top=roofTopUnderCircle(roof,x,zz,radius);
     if(top!==null&&feet+eyeHeight>roof.bottom+eps&&feet<top-eps)return true;
-  }return false;
+  }}return false;
 }
