@@ -11,7 +11,7 @@ import { createInterface } from 'node:readline';
 import { Simulation } from '../simulation';
 import { createCityLifeProductCity, PRODUCT_CITY_LAYOUT } from '../product-city';
 import { savedWorldFingerprint, selectSavedWorld } from '../persistence/world-layout';
-import { releaseRoadExitPermit } from '../roads';
+import { releaseRoadExitPermit, roadMovementAllowed } from '../roads';
 import { activeAircraft, setAircraftControls } from '../aviation';
 import { JourneyNavigation } from '../journey';
 import { contextModel, type ContextView } from './context-model';
@@ -34,6 +34,10 @@ export interface HostFrame {
   events: { id: number; tick: number; type: string; text: string }[];
   lastEventId: number;
   navigation: { destination: string | null; points: Vec3[]; unavailable: string | null } | null;
+  /** Placed voxel positions, omitted (null) when unchanged since `voxelKey`. */
+  voxels: number[][] | null; voxelKey: string;
+  /** Set when the requested walking position crossed a closed road. */
+  rejected?: string | null;
   stepMs: number; ticks: number;
 }
 
@@ -96,9 +100,15 @@ export class SimHost {
     if (!Number.isFinite(seconds) || seconds < 0 || seconds > 2) throw new Error('步长须为 0 至 2 秒。');
     const mode = MODES.includes(request.mode as ViewMode) ? request.mode as ViewMode : 'walk';
     // Walking input is the player's body, exactly as the web App writes it each frame.
+    // Road closures stay authoritative: a walk that crosses a closed carriageway
+    // since the previous step is refused and the client is returned to its body.
+    let rejected: string | null = null;
     if (finiteVec(request.player) && mode === 'walk' && !state.player.vehicleId && !activeAircraft(state)) {
-      state.player.position = { x: request.player.x, y: request.player.y, z: request.player.z };
-      releaseRoadExitPermit(this.world!, state, 'player', state.player.position);
+      const to = { x: request.player.x, y: request.player.y, z: request.player.z };
+      if (roadMovementAllowed(this.world!, state, 'player', state.player.position, to)) {
+        state.player.position = to;
+        releaseRoadExitPermit(this.world!, state, 'player', state.player.position);
+      } else rejected = '道路已关闭；请等待通行，已在封闭路段内的行人须沿许可方向退出。';
     }
     const aviation = request.aviation as AviationControls | undefined;
     if (aviation && activeAircraft(state)) setAircraftControls(state, aviation);
@@ -108,7 +118,7 @@ export class SimHost {
     if (drive.isDriving?.()) drive.driveInput?.(Number(driving?.throttle ?? 0), Number(driving?.turn ?? 0), driving?.brake ?? true);
     const before = state.tick, started = performance.now();
     sim.step(seconds);
-    return this.frame(request, performance.now() - started, sim.state.tick - before);
+    return { ...this.frame(request, performance.now() - started, sim.state.tick - before), rejected };
   }
 
   frame(request: HostRequest, stepMs: number, ticks: number): HostFrame {
@@ -131,6 +141,8 @@ export class SimHost {
     const plan = this.navigation!.read(state);
     const navPoints = plan.walking?.points ?? [];
     const lastEventId = state.events.at(-1)?.id ?? 0;
+    const voxels = (state as SimState & { voxels?: { position: Vec3 }[] }).voxels ?? [], lastVoxel = voxels.at(-1)?.position;
+    const voxelKey = `${voxels.length}:${lastVoxel?.x}:${lastVoxel?.y}:${lastVoxel?.z}`;
     return {
       tick: state.tick, day: state.day, hour: round(state.hour), paused: state.paused, speed: state.speed, weather: state.weather, visibility: state.visibility, energy: round(state.energy), treasury: round(state.treasury), support: round(state.support),
       player: { position: point(state.player.position), role: state.player.role, identities: state.player.identities ?? [state.player.role], money: round(state.player.money), reputation: state.player.reputation, needs: state.player.needs, inventory: state.player.inventory, homeId: state.player.homeId, vehicleId: state.player.vehicleId, education: state.player.education, driving: !!(sim as Simulation & { isDriving?: () => boolean }).isDriving?.(), alive: profiles.player?.alive !== false },
@@ -141,6 +153,7 @@ export class SimHost {
       events: state.events.filter(e => e.id > since).map(e => ({ id: e.id, tick: e.tick, type: e.type, text: e.text })),
       lastEventId,
       navigation: plan.destination || plan.unavailable ? { destination: plan.destination?.name ?? null, points: navPoints.map(point), unavailable: plan.unavailable } : null,
+      voxels: request.voxelKey === voxelKey ? null : voxels.slice(0, 4096).map(v => [v.position.x, v.position.y, v.position.z]), voxelKey,
       stepMs: round(stepMs), ticks,
     };
   }

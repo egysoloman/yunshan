@@ -1,71 +1,86 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Yunshan.Core;
 
 namespace Yunshan.Runtime
 {
-    /// <summary>First-person walking on the authoritative surfaces: feet height
-    /// comes from World.GetWalkHeight and walls/fixtures from the shared floor
-    /// plan (ArchitectureFloorPlan.BlocksFloorPlanMovement). Speeds match the
-    /// web controller: 4.8 m/s walking, 10 m/s with Shift.</summary>
+    /// <summary>Input and camera for the player's body. Walking uses the C#
+    /// port of the web controller (PlayerWalker: doors, stairs, permissions,
+    /// counters, rails, voxels) at 4.8 m/s or 10 m/s with Shift. While riding,
+    /// driving or flying the simulation moves the body and this only looks.</summary>
     public sealed class FirstPersonController : MonoBehaviour
     {
-        public const float EyeHeight = 1.72f, BodyRadius = .35f, WalkSpeed = 4.8f, SprintSpeed = 10f;
-        WorldDefinition world;
+        public PlayerWalker Walker { get; private set; }
+        public bool Passenger;          // riding or driving a vehicle (simulation moves the body)
+        public bool Driving;            // the player holds the driving controls
+        public Vec3 AircraftPosition;   // set while in an aircraft
+        public double JetSpeed = 85;
+        public float MouseSensitivity = 1;
         Camera view;
-        Vec3 feet;
-        float yaw, pitch = -.1f;
-        public Vec3 Feet => feet;
 
-        public void Initialise(WorldDefinition world, Vec3 spawn, Camera camera)
+        public Vec3 Feet => Walker.Feet;
+        public string Mode => Walker.Mode;
+
+        public void Initialise(WorldDefinition world, Camera camera, Func<Building, int, bool> canAccess, Func<IReadOnlyList<Vec3>> voxels)
         {
-            this.world = world; view = camera; feet = spawn.Copy();
+            view = camera;
+            Walker = new PlayerWalker(world, canAccess, voxels);
             Apply();
         }
+
+        static float Key(KeyCode a, KeyCode b) => Input.GetKey(a) || Input.GetKey(b) ? 1 : 0;
+        public float Forward => Key(KeyCode.W, KeyCode.UpArrow) - Key(KeyCode.S, KeyCode.DownArrow);
+        public float Strafe => Key(KeyCode.D, KeyCode.RightArrow) - Key(KeyCode.A, KeyCode.LeftArrow);
+        bool Sprint => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
+        /// <summary>Same fields as the web controller's drivingControls.</summary>
+        public Dictionary<string, object> DrivingControls() => new Dictionary<string, object> { ["throttle"] = (double)Forward, ["turn"] = (double)Strafe, ["brake"] = Input.GetKey(KeyCode.Space) };
+
+        /// <summary>Same fields as the web controller's aviationControls.</summary>
+        public Dictionary<string, object> AviationControls() => new Dictionary<string, object>
+        {
+            ["forward"] = (double)Forward, ["strafe"] = (double)Strafe,
+            ["climb"] = (double)(Key(KeyCode.R, KeyCode.Space) - Key(KeyCode.Q, KeyCode.LeftControl)),
+            ["yaw"] = Walker.Yaw, ["pitch"] = Walker.Pitch, ["speed"] = JetSpeed, ["boost"] = Sprint,
+        };
 
         void Update()
         {
-            if (world == null) return;
-            if (Input.GetMouseButtonDown(0)) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+            if (Walker == null) return;
+            if (Input.GetMouseButtonDown(0) && GUIUtility.hotControl == 0) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
             if (Input.GetKeyDown(KeyCode.Escape)) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
             if (Cursor.lockState == CursorLockMode.Locked || Input.GetMouseButton(1))
             {
-                yaw += Input.GetAxis("Mouse X") * 2.2f;
-                pitch = Mathf.Clamp(pitch + Input.GetAxis("Mouse Y") * 2.2f, -85f, 85f);
+                // The web turns 0.003 rad per pixel horizontally and 0.0025 vertically.
+                Walker.Yaw -= Input.GetAxis("Mouse X") * .03 * MouseSensitivity;
+                Walker.Pitch = Math.Max(-1.48, Math.Min(1.48, Walker.Pitch + Input.GetAxis("Mouse Y") * .025 * MouseSensitivity));
             }
-            float forward = (Input.GetKey(KeyCode.W) ? 1 : 0) - (Input.GetKey(KeyCode.S) ? 1 : 0);
-            float strafe = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0);
-            if (forward != 0 || strafe != 0)
+            float wheel = Input.mouseScrollDelta.y;
+            if (wheel != 0 && Mode != "walk") JetSpeed = Math.Max(25, Math.Min(Mode == "jet" ? 250 : 150, JetSpeed + wheel * 6));
+            if (Mode == "walk" && !Passenger && (Forward != 0 || Strafe != 0))
             {
-                float speed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? SprintSpeed : WalkSpeed;
-                // Unity yaw rotates the view about +Y; derive the move in Unity space then map back.
-                var direction = Quaternion.Euler(0, yaw, 0) * new Vector3(strafe, 0, forward).normalized;
-                var unityStep = direction * speed * Mathf.Min(Time.deltaTime, .1f);
-                var target = new Vec3(feet.X - unityStep.x, feet.Y, feet.Z + unityStep.z);
-                TryMove(target);
+                // Replay the frame in ≤1/30 s collision slices, at most one second.
+                double remaining = Math.Min(Time.deltaTime, 1);
+                while (remaining > 1e-8) { double dt = Math.Min(remaining, 1.0 / 30); Walker.Step(dt, Forward, Strafe, Sprint, false); remaining -= dt; }
             }
             Apply();
-        }
-
-        void TryMove(Vec3 target)
-        {
-            double y = World.GetWalkHeight(world, target.X, target.Z, feet.Y);
-            // A step higher than 0.6 m (stairs are 0.2 m treads) is a wall or ledge.
-            if (y - feet.Y > .6) return;
-            var to = new Vec3(target.X, y, target.Z);
-            foreach (var b in world.Buildings)
-            {
-                if (System.Math.Abs(b.Position.X - feet.X) > b.Width / 2 + b.Depth / 2 + 4 || System.Math.Abs(b.Position.Z - feet.Z) > b.Width / 2 + b.Depth / 2 + 4) continue;
-                if (ArchitectureFloorPlan.GetBuildingBody(b) == null) continue;
-                int floor = (int)System.Math.Max(-(b.Basements ?? 0), System.Math.Min(b.Floors - 1, JsMath.Round((feet.Y - b.Position.Y - .6) / (b.Height / b.Floors))));
-                if (ArchitectureFloorPlan.BlocksFloorPlanMovement(b, floor, feet, to, BodyRadius)) return;
-            }
-            feet = to;
         }
 
         void Apply()
         {
-            if (view == null) return;
-            view.transform.SetPositionAndRotation(Space.ToUnity(feet) + Vector3.up * EyeHeight, Quaternion.Euler(-pitch, yaw, 0));
+            if (view == null || Walker == null) return;
+            var feet = Walker.Feet;
+            Vector3 eye = Mode != "walk" && AircraftPosition != null ? Space.ToUnity(AircraftPosition.X, AircraftPosition.Y + 1.15, AircraftPosition.Z)
+                : Space.ToUnity(feet.X, feet.Y + PlayerWalker.EyeHeight + (Passenger ? .5 : 0), feet.Z);
+            view.transform.SetPositionAndRotation(eye, Space.Camera(Walker.Yaw, Walker.Pitch));
+        }
+
+        /// <summary>Camera direction in game space (for placing voxels).</summary>
+        public Vec3 GameDirection()
+        {
+            double c = Math.Cos(Walker.Pitch);
+            return new Vec3(-Math.Sin(Walker.Yaw) * c, Math.Sin(Walker.Pitch), -Math.Cos(Walker.Yaw) * c);
         }
     }
 }

@@ -74,13 +74,38 @@ namespace Yunshan.Runtime
                     var template = new GameObject($"{entry.id} {entry.name}");
                     template.transform.SetParent(templateRoot, false);
                     if (!await gltf.InstantiateMainSceneAsync(template.transform)) throw new InvalidOperationException("glTF instantiate failed");
-                    templates[entry.id] = template; Loaded.Add(entry.id);
+                    templates[entry.id] = template; Loaded.Add(entry.id); CollectEmission(template);
                 }
                 catch (Exception error) { Failed.Add(entry.id); Debug.LogWarning($"云山：{entry.id} 加载失败，保留程序几何：{error.Message}"); }
             }
         }
 
         public bool Has(string id) => templates.ContainsKey(id);
+
+        // Authored emission per template material (copies share these materials).
+        readonly List<(Material material, string property, Color authored)> emissive = new List<(Material, string, Color)>();
+        float lastFactor = -1;
+
+        void CollectEmission(GameObject template)
+        {
+            foreach (var renderer in template.GetComponentsInChildren<Renderer>(true))
+                foreach (var material in renderer.sharedMaterials)
+                {
+                    if (material == null) continue;
+                    foreach (var property in new[] { "emissiveFactor", "_EmissionColor" })
+                        if (material.HasProperty(property)) { var color = material.GetColor(property); if (color.maxColorComponent > 0) emissive.Add((material, property, color)); break; }
+                }
+        }
+
+        /// <summary>Studio lamps glow only with city power, more at night:
+        /// power × (0.35 + 0.65 × (1 − daylight)), as the web asset pool.</summary>
+        public void SetLighting(float daylight, float power)
+        {
+            float factor = Mathf.Clamp01(power) * (.35f + .65f * (1 - Mathf.Clamp01(daylight)));
+            if (Mathf.Abs(factor - lastFactor) < .005f) return;
+            lastFactor = factor;
+            foreach (var (material, property, authored) in emissive) material.SetColor(property, authored * factor);
+        }
 
         /// <summary>Instantiates at a game-space origin with game yaw and uniform scale.</summary>
         public GameObject Place(string id, Transform parent, Vec3 gameOrigin, double gameYaw, double scale)

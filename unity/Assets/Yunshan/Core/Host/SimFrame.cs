@@ -32,6 +32,10 @@ namespace Yunshan.Core.Host
         public Dictionary<string, int> Signals = new Dictionary<string, int>();
         public List<Event> Events = new List<Event>();
         public string NavigationDestination, NavigationUnavailable; public List<Vec3> NavigationPoints = new List<Vec3>();
+        /// <summary>Null when unchanged since the voxelKey the client sent.</summary>
+        public List<Vec3> Voxels; public string VoxelKey;
+        /// <summary>Refusal of the requested walking position (closed road), else null.</summary>
+        public string Rejected;
 
         public static SimFrame From(object o)
         {
@@ -86,6 +90,9 @@ namespace Yunshan.Core.Host
                 f.NavigationDestination = Json.Str(nav, "destination"); f.NavigationUnavailable = Json.Str(nav, "unavailable");
                 foreach (var point in Json.Arr(nav, "points") ?? new List<object>()) f.NavigationPoints.Add(Json.Vec(point));
             }
+            var voxels = Json.Arr(o, "voxels");
+            if (voxels != null) { f.Voxels = new List<Vec3>(); foreach (var v in voxels) { var a = (List<object>)v; f.Voxels.Add(new Vec3((double)a[0], (double)a[1], (double)a[2])); } }
+            f.VoxelKey = Json.Str(o, "voxelKey"); f.Rejected = Json.Str(o, "rejected");
             return f;
         }
     }
