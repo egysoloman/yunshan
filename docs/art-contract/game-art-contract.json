@@ -178,6 +178,29 @@
       }
     }
   },
+  "entranceLantern": {
+    "note": "program buildings hang one lantern beside the entrance opening; its whole envelope (bracket, caps, core) must fit this box, and nothing may hang lower into the pedestrian approach",
+    "envelopeAlongWallM": 0.8,
+    "envelopeHeightM": 1,
+    "projectionFromWallFaceM": 0.8,
+    "verticalRange": "y − .6 … y + .4 where y = max(2.4, entrance height − .4) above the ground floor",
+    "luminousCoreM": [
+      0.4,
+      0.6,
+      0.6
+    ],
+    "glow": "driven by city power and daylight",
+    "rejected": [
+      {
+        "id": "BUILT-071",
+        "reason": "1.44m high; fits only at 0.69 scale or hangs to 1.36m, below eye height"
+      },
+      {
+        "id": "BUILT-249",
+        "reason": "1.2m high; needs 0.83 scale"
+      }
+    ]
+  },
   "woodland": {
     "trees": 5200,
     "heightRangeM": [
@@ -3430,6 +3453,11 @@
       "id": "LIFE-111",
       "name": "教室桌椅排布接口",
       "sha256": "92378128fb48e3905d5ff27d0f385e033d8af29ae63370d0058f053f31a2174e"
+    },
+    {
+      "id": "LIFE-028",
+      "name": "室内顶灯",
+      "sha256": "904dc2635c46dbf442f015076d1b81f253591d893e32c856acb648152ba37e40"
     },
     {
       "id": "BUILT-154",

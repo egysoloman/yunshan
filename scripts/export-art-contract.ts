@@ -61,6 +61,13 @@ const contract = {
     liveSignalLamps: { note: 'driven by state.signals; any pole model must leave these exact lamp boxes visible and must not add its own lamp heads', redCentreFromNode: [12, 3.9, 11.4], greenCentreFromNode: [12, 3.15, 11.4], lampSizeXYZ: [.7, .55, .35], poleBoxes: [{ centre: [12, 1.8, 11], size: [.35, 3.6, .35] }, { centre: [12, 3.5, 11], size: [1, 1.6, .65] }] },
     junctions: { note: 'no traffic-signal logic exists at road junctions; a pole model must not show signal lamps', poleBox: { centre: [4, 2.2, 4], size: [.4, 4.4, .4] } },
   },
+  entranceLantern: {
+    note: 'program buildings hang one lantern beside the entrance opening; its whole envelope (bracket, caps, core) must fit this box, and nothing may hang lower into the pedestrian approach',
+    envelopeAlongWallM: .8, envelopeHeightM: 1, projectionFromWallFaceM: .8,
+    verticalRange: 'y − .6 … y + .4 where y = max(2.4, entrance height − .4) above the ground floor',
+    luminousCoreM: [.4, .6, .6], glow: 'driven by city power and daylight',
+    rejected: [{ id: 'BUILT-071', reason: '1.44m high; fits only at 0.69 scale or hangs to 1.36m, below eye height' }, { id: 'BUILT-249', reason: '1.2m high; needs 0.83 scale' }],
+  },
   woodland: {
     trees: 5200, heightRangeM: [16, 31], heightQuantumM: world.voxelSize, trunkSectionM: .8, crownTiers: 4,
     note: 'woodland is display only; studio trees (8–14m) are shorter than game trees and are not used until a matching height family exists at 0.2m voxels',
