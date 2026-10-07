@@ -1,0 +1,16 @@
+{
+  "status": "ACTUAL_FAILED_OR_PARTIAL",
+  "error": {
+    "name": "AssertionError",
+    "message": "full native traffic actually changes its complete vehicle load observations",
+    "stack": "AssertionError [ERR_ASSERTION]: full native traffic actually changes its complete vehicle load observations\n    at runHydroDispatchHistoryActual (/workspace/yunshan/scripts/hydro-dispatch-history-actual.ts:276:5)\n    at <anonymous> (/workspace/yunshan/scripts/hydro-dispatch-history-actual.ts:301:18)\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)"
+  },
+  "stepCalls": 359,
+  "constructors": 10,
+  "imports": 9,
+  "readers": 380,
+  "smallWindows": 96,
+  "largeWindows": 32,
+  "bytes": 40467654,
+  "elapsedMilliseconds": 302315
+}

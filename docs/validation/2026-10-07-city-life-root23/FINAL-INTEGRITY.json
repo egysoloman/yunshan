@@ -1,0 +1,27 @@
+{
+  "status": "PASS_FINAL_FUNCTIONAL_AND_PROTECTED_ORIGINALS",
+  "functionalCount": 404,
+  "baselineCount": 397,
+  "added": [
+    "scripts/hydro-dispatch-history-actual.ts",
+    "src/simulation/hydro-dispatch-history.ts",
+    "src/simulation/hydro-grid-budget.ts",
+    "tests/hydro-dispatch-history-fixture.ts",
+    "tests/hydro-dispatch-history-grid.test.ts",
+    "tests/hydro-dispatch-history.test.ts",
+    "tests/hydro-grid-budget.test.ts"
+  ],
+  "modifiedExistingFunctional": [
+    "src/simulation/power-grid-hydro.ts"
+  ],
+  "deleted": [],
+  "oldTestPathsByteExact": 257,
+  "AGENTSAndPromptByteExact": true,
+  "memoOriginalPrefixBytes": 571269,
+  "memoOriginalPrefixSHA256": "02982c7408381d902a5579d475ffb368cb9f34c37de898601b295d72376cd222",
+  "memoPrefixByteExact": true,
+  "pure02ToCurrentOnlyNewDriverControlDiff": true,
+  "finalBuildExactCurrent404": true,
+  "memoBytesAtSeal": 583301,
+  "memoSHA256AtSeal": "6c270840350a5e145efb22a77c86844a8cbd61e581af3932b3c1091629d885d8"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "missing-snapshots",
+    "preview": {
+      "ok": false,
+      "message": "读档失败：水力电网契约：完整数据字段"
+    },
+    "loaded": {
+      "ok": false,
+      "message": "读档失败：水力电网契约：完整数据字段"
+    },
+    "bad": {
+      "file": "cold-rejected/full-saves/8ce208fda31dd0a96016413b973d3ec7ae48a28b18b3b6519f9ad8406c5138d6.json.gz",
+      "encoding": "gzip-utf8",
+      "bytes": 2312106,
+      "sha256": "8ce208fda31dd0a96016413b973d3ec7ae48a28b18b3b6519f9ad8406c5138d6",
+      "encodedBytes": 363663,
+      "encodedSha256": "3ffef834c8893ebab2922233b830ad241d07aaeeb93404caa97862a466cbb6be"
+    },
+    "completeLiveSaveUnchanged": true
+  },
+  {
+    "name": "wrong-original-generated-kwh",
+    "preview": {
+      "ok": false,
+      "message": "读档失败：水力电网契约：历史确定性重演数值不符"
+    },
+    "loaded": {
+      "ok": false,
+      "message": "读档失败：水力电网契约：历史确定性重演数值不符"
+    },
+    "bad": {
+      "file": "cold-rejected/full-saves/c33f7cd8f0dfb6ab2bafe1dbc307a70545e5a421b990d2f8e0da23d3a44b600a.json.gz",
+      "encoding": "gzip-utf8",
+      "bytes": 2826541,
+      "sha256": "c33f7cd8f0dfb6ab2bafe1dbc307a70545e5a421b990d2f8e0da23d3a44b600a",
+      "encodedBytes": 392655,
+      "encodedSha256": "1e77d2a39fbc6c9a687a7995b52311f85c32be607f21c9b07ba32f10a95524ae"
+    },
+    "completeLiveSaveUnchanged": true
+  },
+  {
+    "name": "missing-water-row",
+    "preview": {
+      "ok": false,
+      "message": "读档失败：分页水力契约：完整连续分页"
+    },
+    "loaded": {
+      "ok": false,
+      "message": "读档失败：分页水力契约：完整连续分页"
+    },
+    "bad": {
+      "file": "cold-rejected/full-saves/530bae1eb130106ddcd0b22b703733471f7e31fa2f9e117d8e9f63af281dfe5a.json.gz",
+      "encoding": "gzip-utf8",
+      "bytes": 2826163,
+      "sha256": "530bae1eb130106ddcd0b22b703733471f7e31fa2f9e117d8e9f63af281dfe5a",
+      "encodedBytes": 392644,
+      "encodedSha256": "84b892bc74161eab5d34b5bc667938f5526d0c8125ee48fbdb6379aeb692c465"
+    },
+    "completeLiveSaveUnchanged": true
+  }
+]

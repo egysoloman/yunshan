@@ -1,0 +1,840 @@
+{
+  "scope": "ROOT23_CURRENT_EXACT_404",
+  "checks": {
+    "tsc01": {
+      "startedAt": "2026-10-07T05:18:42.277972+00:00",
+      "endedAt": "2026-10-07T05:18:55.076516+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 2,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "75099d75085e4c61396a617e878b6244d6fca7d74e17825ce6a925dad85bc814",
+      "ownedPid": 12627,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "tsc02": {
+      "startedAt": "2026-10-07T05:19:44.379575+00:00",
+      "endedAt": "2026-10-07T05:19:58.084782+00:00",
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 12675,
+      "observedDescendants": 1,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "pure01": {
+      "startedAt": "2026-10-07T05:20:10.956122+00:00",
+      "endedAt": "2026-10-07T05:20:18.423744+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "tests/power-hydro.test.ts",
+        "tests/power-hydro-runtime.test.ts",
+        "tests/power-grid-hydro.test.ts",
+        "tests/hydro-maintenance.test.ts",
+        "tests/hydro-dispatch-history.test.ts",
+        "tests/hydro-dispatch-history-grid.test.ts",
+        "tests/hydro-grid-budget.test.ts"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "90b95e1471718baaef7b9697e33aea04c33c253638b5421957b6842f440c6688",
+      "ownedPid": 12726,
+      "observedDescendants": 11,
+      "finalOwnedMembers": [
+        {
+          "pid": 12740,
+          "state": "Z",
+          "parent": 1,
+          "group": 12726,
+          "session": 12726,
+          "startTicks": 651366
+        },
+        {
+          "pid": 12760,
+          "state": "Z",
+          "parent": 1,
+          "group": 12726,
+          "session": 12726,
+          "startTicks": 651509
+        },
+        {
+          "pid": 12780,
+          "state": "Z",
+          "parent": 1,
+          "group": 12726,
+          "session": 12726,
+          "startTicks": 651535
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "pure02": {
+      "startedAt": "2026-10-07T05:21:46.882222+00:00",
+      "endedAt": "2026-10-07T05:21:53.797422+00:00",
+      "argv": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-isolation=process",
+        "--test-concurrency=1",
+        "tests/power-hydro.test.ts",
+        "tests/power-hydro-runtime.test.ts",
+        "tests/power-grid-hydro.test.ts",
+        "tests/hydro-maintenance.test.ts",
+        "tests/hydro-dispatch-history.test.ts",
+        "tests/hydro-dispatch-history-grid.test.ts",
+        "tests/hydro-grid-budget.test.ts"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "2fdee747b921e85f06a471cabc41ce0c98474f62a5a2b209500d3ecbd6fbae48",
+      "ownedPid": 12882,
+      "observedDescendants": 9,
+      "finalOwnedMembers": [
+        {
+          "pid": 12896,
+          "state": "Z",
+          "parent": 1,
+          "group": 12882,
+          "session": 12882,
+          "startTicks": 660957
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "native01": {
+      "startedAt": "2026-10-07T05:22:58.391398+00:00",
+      "endedAt": "2026-10-07T05:28:01.656699+00:00",
+      "argv": [
+        "node",
+        "--max-old-space-size=3072",
+        "--import",
+        "tsx",
+        "scripts/hydro-dispatch-history-actual.ts",
+        "--out",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native01/artifacts",
+        "--plan",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/PLAN.json",
+        "--world",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "ef7c36a27b4e0694512941dafcffd176ff6e6a9fac13df28cfeae49cfffba5c1",
+      "ownedPid": 12964,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 12972,
+          "state": "Z",
+          "parent": 1,
+          "group": 12964,
+          "session": 12964,
+          "startTicks": 668099
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "native02": {
+      "startedAt": "2026-10-07T05:37:31.957225+00:00",
+      "endedAt": "2026-10-07T05:43:07.964641+00:00",
+      "argv": [
+        "node",
+        "--max-old-space-size=3072",
+        "--import",
+        "tsx",
+        "scripts/hydro-dispatch-history-actual.ts",
+        "--out",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native02/artifacts",
+        "--plan",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/FOCUSED-LARGE-PLAN.json",
+        "--world",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json",
+        "--case",
+        "large-only"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "41dc0749cd6da3ebfd881867b2b11d7af75ced96eb51747883c8214d8074bdf2",
+      "ownedPid": 14693,
+      "observedDescendants": 2,
+      "finalOwnedMembers": [
+        {
+          "pid": 14701,
+          "state": "Z",
+          "parent": 1,
+          "group": 14693,
+          "session": 14693,
+          "startTicks": 755461
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "legacy-equivalence01": {
+      "startedAt": "2026-10-07T05:43:23.752515+00:00",
+      "endedAt": "2026-10-07T05:43:47.407484+00:00",
+      "argv": [
+        "bash",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/legacy-plan/run-sequential.sh",
+        "/tmp/ROOT23-legacy-compat/candidate-source",
+        "/tmp/ROOT23-legacy-compat/run01"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "status": "FAIL",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ownedPid": 15300,
+      "observedDescendants": 13,
+      "finalOwnedMembers": [
+        {
+          "pid": 15314,
+          "state": "Z",
+          "parent": 1,
+          "group": 15304,
+          "session": 15300,
+          "startTicks": 790652
+        },
+        {
+          "pid": 15367,
+          "state": "Z",
+          "parent": 1,
+          "group": 15358,
+          "session": 15300,
+          "startTicks": 791554
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "legacy-equivalence02": {
+      "startedAt": "2026-10-07T05:45:21.683391+00:00",
+      "endedAt": "2026-10-07T05:45:23.999722+00:00",
+      "argv": [
+        "bash",
+        "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/legacy-plan/run-maintenance-only.sh",
+        "/tmp/ROOT23-legacy-compat/run02"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "1decfd19e962469bbc497f8461dc4bcdf3aaca2c1e0d7e703d06eb64d081d673",
+      "ownedPid": 15546,
+      "observedDescendants": 8,
+      "finalOwnedMembers": [],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    },
+    "build01": {
+      "startedAt": "2026-10-07T05:46:31.960223+00:00",
+      "endedAt": "2026-10-07T05:46:56.612091+00:00",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "status": "PASS",
+      "inputCount": 404,
+      "inputsStable": true,
+      "rawSHA256": "98d99505d9e158f4bd40da977e1b8db51e15e57f193625623a2efceaa96b13b0",
+      "ownedPid": 15600,
+      "observedDescendants": 5,
+      "finalOwnedMembers": [
+        {
+          "pid": 15636,
+          "state": "Z",
+          "parent": 1,
+          "group": 15600,
+          "session": 15600,
+          "startTicks": 810971
+        }
+      ],
+      "activeDescendants": [],
+      "wrapperSHA256": "c53609fd7a6b132768b01b66a4206ac0a018658734075d558a7299a0d7dfe9cd",
+      "ownershipScope": "PID/start-time identities discovered through recursive ancestry, including children that create new process groups/sessions; no unobserved historical process claim."
+    }
+  },
+  "retainedFailures": [
+    "tsc01",
+    "pure01",
+    "native01",
+    "legacy-equivalence01"
+  ],
+  "native02": {
+    "status": "ACTUAL_COMPLETED",
+    "selectedCase": "large-only",
+    "smallPrimaryWindows": 0,
+    "smallPrimaryContinuationWindows": 0,
+    "largePrimaryWindows": 32,
+    "largeBoundary": {
+      "stopped": false,
+      "reason": null
+    },
+    "oldLargeLegalWindows": 2,
+    "oldLargeRejectedCall": 3,
+    "stepCalls": 47,
+    "constructors": 5,
+    "imports": 6,
+    "completeReaderCalls": 60,
+    "fullSaveBytes": 18482886,
+    "expandedFullSaveBytes": 129846727,
+    "physicalOriginalBytesBeforeResult": 23073221,
+    "physicalOriginalBytes": 23074349,
+    "wallMillisecondsBeforeResult": 335090,
+    "freshRestoreBranches": [
+      "whole",
+      "rawclone",
+      "physicalParts"
+    ],
+    "smallFuturePerBranch": 0,
+    "largeFuturePerBranch": 4,
+    "sourceInputsStable": true,
+    "clockJumps": 0,
+    "directBodyMoneyNeedsStockIdentityEdits": 0,
+    "removedVehicleShopHistoryEntries": 0,
+    "originalWorldSha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "largeVehicleObservationVersions": 4,
+    "smallPositiveWaterKWh": null,
+    "nativeNightShopClosingOrExhaustionClaimed": false,
+    "physicalParts": {
+      "small": null,
+      "large": 120
+    }
+  },
+  "legacyComparison": {
+    "primary": {
+      "status": "PASS_EXACT_FULL_SAVES_EVENTS_PHASES",
+      "baseline": "/tmp/ROOT23-legacy-compat/run01/baseline-primary",
+      "candidate": "/tmp/ROOT23-legacy-compat/run01/candidate-primary",
+      "mode": "primary-no-grid",
+      "stepsPerSource": 4,
+      "constructorCount": 2,
+      "importCount": 2,
+      "nativeReaderChecks": 10,
+      "initialClock": 3900,
+      "finalClock": 3908,
+      "allRetainedArtifactCount": 17,
+      "differentFiles": [],
+      "fullStructuralDifferenceCount": 0,
+      "receipts": [
+        {
+          "file": "constructor.save.json.gz",
+          "equal": true,
+          "baselineBytes": 695220,
+          "candidateBytes": 695220,
+          "baselineSha256": "c38595057fae2b3997794a4e48ee92ac94d9a1f939fc024971a1a23e577e23ec",
+          "candidateSha256": "c38595057fae2b3997794a4e48ee92ac94d9a1f939fc024971a1a23e577e23ec"
+        },
+        {
+          "file": "frame-000.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3443220,
+          "candidateBytes": 3443220,
+          "baselineSha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+          "candidateSha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+        },
+        {
+          "file": "frame-001.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 102640,
+          "candidateBytes": 102640,
+          "baselineSha256": "51dd56f27ff92f2f6663de9f849e92f3109823382f06642c353fa7e47d654459",
+          "candidateSha256": "51dd56f27ff92f2f6663de9f849e92f3109823382f06642c353fa7e47d654459"
+        },
+        {
+          "file": "frame-001.phases.json",
+          "equal": true,
+          "baselineBytes": 2024,
+          "candidateBytes": 2024,
+          "baselineSha256": "e06a0cdc9f829ba434e89e6b9648d642cc5a33257b76263decaf68c6de2fed28",
+          "candidateSha256": "e06a0cdc9f829ba434e89e6b9648d642cc5a33257b76263decaf68c6de2fed28"
+        },
+        {
+          "file": "frame-001.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3456317,
+          "candidateBytes": 3456317,
+          "baselineSha256": "f22095e4516ff6597a9ed1f003dbf700b41406bd0b57f093ad9fcb6c7ff565c7",
+          "candidateSha256": "f22095e4516ff6597a9ed1f003dbf700b41406bd0b57f093ad9fcb6c7ff565c7"
+        },
+        {
+          "file": "frame-002.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 96963,
+          "candidateBytes": 96963,
+          "baselineSha256": "bd3546223b866673c25b2573828b0ad35d41509461e009b41341a86c8059c0b5",
+          "candidateSha256": "bd3546223b866673c25b2573828b0ad35d41509461e009b41341a86c8059c0b5"
+        },
+        {
+          "file": "frame-002.phases.json",
+          "equal": true,
+          "baselineBytes": 2024,
+          "candidateBytes": 2024,
+          "baselineSha256": "510ac510c91f54e3903826d51a83b928a90cf04ee4a3a156716d859ffaefe7cf",
+          "candidateSha256": "510ac510c91f54e3903826d51a83b928a90cf04ee4a3a156716d859ffaefe7cf"
+        },
+        {
+          "file": "frame-002.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3463171,
+          "candidateBytes": 3463171,
+          "baselineSha256": "fc65423a0ea26840037bf61a422de94c7dbaff8841a38f772442cc46c068d299",
+          "candidateSha256": "fc65423a0ea26840037bf61a422de94c7dbaff8841a38f772442cc46c068d299"
+        },
+        {
+          "file": "frame-003.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 107464,
+          "candidateBytes": 107464,
+          "baselineSha256": "76ca4eb45c269d3ab9cd630fe4708fb3c002df55b5ae004e293f5b1ff8a8953a",
+          "candidateSha256": "76ca4eb45c269d3ab9cd630fe4708fb3c002df55b5ae004e293f5b1ff8a8953a"
+        },
+        {
+          "file": "frame-003.phases.json",
+          "equal": true,
+          "baselineBytes": 2024,
+          "candidateBytes": 2024,
+          "baselineSha256": "b0a60e7297ae2b3929738ef19d045c3cd19ab4cc2d24056026e00b07a7479a53",
+          "candidateSha256": "b0a60e7297ae2b3929738ef19d045c3cd19ab4cc2d24056026e00b07a7479a53"
+        },
+        {
+          "file": "frame-003.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3471752,
+          "candidateBytes": 3471752,
+          "baselineSha256": "8f21716ca929e7939c5073251f017ce723c3b728e63968c532ba25ff6e938081",
+          "candidateSha256": "8f21716ca929e7939c5073251f017ce723c3b728e63968c532ba25ff6e938081"
+        },
+        {
+          "file": "frame-004.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 83994,
+          "candidateBytes": 83994,
+          "baselineSha256": "f7c27d6ee94d172400f322cf7ff6609d6d53df644fc7d32d3a4a489dad27d3d5",
+          "candidateSha256": "f7c27d6ee94d172400f322cf7ff6609d6d53df644fc7d32d3a4a489dad27d3d5"
+        },
+        {
+          "file": "frame-004.phases.json",
+          "equal": true,
+          "baselineBytes": 2024,
+          "candidateBytes": 2024,
+          "baselineSha256": "047cf97513b3cb4b4806604e1fcc131fddcb065447674f17f50e2e21466ca76e",
+          "candidateSha256": "047cf97513b3cb4b4806604e1fcc131fddcb065447674f17f50e2e21466ca76e"
+        },
+        {
+          "file": "frame-004.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3476152,
+          "candidateBytes": 3476152,
+          "baselineSha256": "96d4b951a0c422501ce3d48a5f18d5861039ed028c050d67c44c4db271312357",
+          "candidateSha256": "96d4b951a0c422501ce3d48a5f18d5861039ed028c050d67c44c4db271312357"
+        },
+        {
+          "file": "original-full-input.save.json.gz",
+          "equal": true,
+          "baselineBytes": 3443220,
+          "candidateBytes": 3443220,
+          "baselineSha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+          "candidateSha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+        },
+        {
+          "file": "startup.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 0,
+          "candidateBytes": 0,
+          "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "candidateSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "world-input.json.gz",
+          "equal": true,
+          "baselineBytes": 1832308,
+          "candidateBytes": 1832308,
+          "baselineSha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+          "candidateSha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+        }
+      ],
+      "baselineSourceManifestSha256": "0b1d887342169d7dc2bfdd921c376662c0cfa20103a2b900833c4f7cc7d32586",
+      "candidateSourceManifestSha256": "6db20d6f8324a810c82ef0f1882a66fc899d315320536ad6e82f59ea1d44a0be",
+      "decodedGzipProofsVerified": true,
+      "allFullSavesAndAllEventRecordsRetained": true,
+      "moneyFoodCausalAudit": "NOT_PERFORMED_NO_BALANCE_OR_SUSTAINABILITY_CLAIM",
+      "scope": "Only this original-input ordinary-step compatibility window; no new money-food causal balance, long-run economy, GPU or Mac conclusion."
+    },
+    "v1": {
+      "status": "PASS_EXACT_FULL_SAVES_EVENTS_PHASES",
+      "baseline": "/tmp/ROOT23-legacy-compat/run01/baseline-v1",
+      "candidate": "/tmp/ROOT23-legacy-compat/run01/candidate-v1",
+      "mode": "storage-v1",
+      "stepsPerSource": 4,
+      "constructorCount": 2,
+      "importCount": 2,
+      "nativeReaderChecks": 10,
+      "initialClock": 480,
+      "finalClock": 481,
+      "allRetainedArtifactCount": 17,
+      "differentFiles": [],
+      "fullStructuralDifferenceCount": 0,
+      "receipts": [
+        {
+          "file": "constructor.save.json.gz",
+          "equal": true,
+          "baselineBytes": 342516,
+          "candidateBytes": 342516,
+          "baselineSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883",
+          "candidateSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883"
+        },
+        {
+          "file": "frame-000.save.json.gz",
+          "equal": true,
+          "baselineBytes": 342516,
+          "candidateBytes": 342516,
+          "baselineSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883",
+          "candidateSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883"
+        },
+        {
+          "file": "frame-001.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 3645,
+          "candidateBytes": 3645,
+          "baselineSha256": "94d5db575357d5ca72e0a75319a3c1c7d5eecc5eabfb88e7d0a983bfa6fa9aba",
+          "candidateSha256": "94d5db575357d5ca72e0a75319a3c1c7d5eecc5eabfb88e7d0a983bfa6fa9aba"
+        },
+        {
+          "file": "frame-001.phases.json",
+          "equal": true,
+          "baselineBytes": 2044,
+          "candidateBytes": 2044,
+          "baselineSha256": "52f3ed4229b1c34a5e7dffd4a27ccf78b407050de1c2030b4a22395d7a82014f",
+          "candidateSha256": "52f3ed4229b1c34a5e7dffd4a27ccf78b407050de1c2030b4a22395d7a82014f"
+        },
+        {
+          "file": "frame-001.save.json.gz",
+          "equal": true,
+          "baselineBytes": 408367,
+          "candidateBytes": 408367,
+          "baselineSha256": "efeaddf8454ec8f8f2da382879abf2d48ca25e52a9c3d535d0f638fd3721d187",
+          "candidateSha256": "efeaddf8454ec8f8f2da382879abf2d48ca25e52a9c3d535d0f638fd3721d187"
+        },
+        {
+          "file": "frame-002.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 3649,
+          "candidateBytes": 3649,
+          "baselineSha256": "445b19863d8b58bafc53a6817531e13ef6aaf1deaa58701f5a6be4fb5fada34d",
+          "candidateSha256": "445b19863d8b58bafc53a6817531e13ef6aaf1deaa58701f5a6be4fb5fada34d"
+        },
+        {
+          "file": "frame-002.phases.json",
+          "equal": true,
+          "baselineBytes": 2034,
+          "candidateBytes": 2034,
+          "baselineSha256": "0dc120995f5c5ce0672ffafa2dbfc4e23014f56cccb662ba230821363037648a",
+          "candidateSha256": "0dc120995f5c5ce0672ffafa2dbfc4e23014f56cccb662ba230821363037648a"
+        },
+        {
+          "file": "frame-002.save.json.gz",
+          "equal": true,
+          "baselineBytes": 403583,
+          "candidateBytes": 403583,
+          "baselineSha256": "40d2e0a7715cac978439151a956157aeb236bad616cfa83f68ea4916337ddba2",
+          "candidateSha256": "40d2e0a7715cac978439151a956157aeb236bad616cfa83f68ea4916337ddba2"
+        },
+        {
+          "file": "frame-003.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 3658,
+          "candidateBytes": 3658,
+          "baselineSha256": "c98b742303d7d2d384badb57e1a5e342fb4ae5c45efd16864622f3545074fdd0",
+          "candidateSha256": "c98b742303d7d2d384badb57e1a5e342fb4ae5c45efd16864622f3545074fdd0"
+        },
+        {
+          "file": "frame-003.phases.json",
+          "equal": true,
+          "baselineBytes": 2044,
+          "candidateBytes": 2044,
+          "baselineSha256": "f6d157d5134740cd416cc73494aed76dcbbf1de98bd85c3ef8860edefd0317b9",
+          "candidateSha256": "f6d157d5134740cd416cc73494aed76dcbbf1de98bd85c3ef8860edefd0317b9"
+        },
+        {
+          "file": "frame-003.save.json.gz",
+          "equal": true,
+          "baselineBytes": 405970,
+          "candidateBytes": 405970,
+          "baselineSha256": "ec468dc2012ae3fe0821ba6a597e0dd1da931872963f84224ae3e4fe3d8c834b",
+          "candidateSha256": "ec468dc2012ae3fe0821ba6a597e0dd1da931872963f84224ae3e4fe3d8c834b"
+        },
+        {
+          "file": "frame-004.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 3629,
+          "candidateBytes": 3629,
+          "baselineSha256": "f193574b30818540dbcaaa429108f0d54c14b6e570f20e65b8522ba99eb23d04",
+          "candidateSha256": "f193574b30818540dbcaaa429108f0d54c14b6e570f20e65b8522ba99eb23d04"
+        },
+        {
+          "file": "frame-004.phases.json",
+          "equal": true,
+          "baselineBytes": 2014,
+          "candidateBytes": 2014,
+          "baselineSha256": "e49768e8cb65280a5098f759d1ae6d966433853f046bb1394d458ff3bfb7987c",
+          "candidateSha256": "e49768e8cb65280a5098f759d1ae6d966433853f046bb1394d458ff3bfb7987c"
+        },
+        {
+          "file": "frame-004.save.json.gz",
+          "equal": true,
+          "baselineBytes": 403797,
+          "candidateBytes": 403797,
+          "baselineSha256": "fa9e6f10415a39ec79acae5f03815aa7837dec924b45bd026295f565485cb72d",
+          "candidateSha256": "fa9e6f10415a39ec79acae5f03815aa7837dec924b45bd026295f565485cb72d"
+        },
+        {
+          "file": "original-full-input.save.json.gz",
+          "equal": true,
+          "baselineBytes": 342516,
+          "candidateBytes": 342516,
+          "baselineSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883",
+          "candidateSha256": "94512a7abe4f44992761f795f5fb9faa78ed33f637fb4a1604f170ea29f5e883"
+        },
+        {
+          "file": "startup.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 0,
+          "candidateBytes": 0,
+          "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "candidateSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "world-input.json.gz",
+          "equal": true,
+          "baselineBytes": 3556,
+          "candidateBytes": 3556,
+          "baselineSha256": "733e3d3a1b3b6e009ff3c60b25957270de996ce555e87de7100a6afd1cc23587",
+          "candidateSha256": "733e3d3a1b3b6e009ff3c60b25957270de996ce555e87de7100a6afd1cc23587"
+        }
+      ],
+      "baselineSourceManifestSha256": "0b1d887342169d7dc2bfdd921c376662c0cfa20103a2b900833c4f7cc7d32586",
+      "candidateSourceManifestSha256": "6db20d6f8324a810c82ef0f1882a66fc899d315320536ad6e82f59ea1d44a0be",
+      "decodedGzipProofsVerified": true,
+      "allFullSavesAndAllEventRecordsRetained": true,
+      "moneyFoodCausalAudit": "NOT_PERFORMED_NO_BALANCE_OR_SUSTAINABILITY_CLAIM",
+      "scope": "Only this original-input ordinary-step compatibility window; no new money-food causal balance, long-run economy, GPU or Mac conclusion."
+    },
+    "maintenance": {
+      "status": "PASS_EXACT_FULL_SAVES_EVENTS_PHASES",
+      "baseline": "/tmp/ROOT23-legacy-compat/run02/baseline-maintenance",
+      "candidate": "/tmp/ROOT23-legacy-compat/run02/candidate-maintenance",
+      "mode": "maintenance-v2",
+      "stepsPerSource": 4,
+      "constructorCount": 2,
+      "importCount": 2,
+      "nativeReaderChecks": 10,
+      "initialClock": 1024,
+      "finalClock": 1040,
+      "allRetainedArtifactCount": 17,
+      "differentFiles": [],
+      "fullStructuralDifferenceCount": 0,
+      "receipts": [
+        {
+          "file": "constructor.save.json.gz",
+          "equal": true,
+          "baselineBytes": 344093,
+          "candidateBytes": 344093,
+          "baselineSha256": "ab1fc36f30747cfe0ed4ac6d5e6c5340d0f2621540d1a2b511abbc51f4e861ff",
+          "candidateSha256": "ab1fc36f30747cfe0ed4ac6d5e6c5340d0f2621540d1a2b511abbc51f4e861ff"
+        },
+        {
+          "file": "frame-000.save.json.gz",
+          "equal": true,
+          "baselineBytes": 751201,
+          "candidateBytes": 751201,
+          "baselineSha256": "37719d547436072f9a9a74ead3e7a077299a80f531a9123db79a36e72d338089",
+          "candidateSha256": "37719d547436072f9a9a74ead3e7a077299a80f531a9123db79a36e72d338089"
+        },
+        {
+          "file": "frame-001.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 264214,
+          "candidateBytes": 264214,
+          "baselineSha256": "5cd9146527b42c94421ecbe7a6a106fd053d2c63ccb0052a7922dfb227663bef",
+          "candidateSha256": "5cd9146527b42c94421ecbe7a6a106fd053d2c63ccb0052a7922dfb227663bef"
+        },
+        {
+          "file": "frame-001.phases.json",
+          "equal": true,
+          "baselineBytes": 2014,
+          "candidateBytes": 2014,
+          "baselineSha256": "dc599277e72ba2d619f7f9b976969233b341d85ccdb834a075f6f409165ceabd",
+          "candidateSha256": "dc599277e72ba2d619f7f9b976969233b341d85ccdb834a075f6f409165ceabd"
+        },
+        {
+          "file": "frame-001.save.json.gz",
+          "equal": true,
+          "baselineBytes": 753151,
+          "candidateBytes": 753151,
+          "baselineSha256": "aaa3d0beb557c4f92205f5bffa0734f98b06b2a80eb2a59657878c9ae52ac9e2",
+          "candidateSha256": "aaa3d0beb557c4f92205f5bffa0734f98b06b2a80eb2a59657878c9ae52ac9e2"
+        },
+        {
+          "file": "frame-002.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 268391,
+          "candidateBytes": 268391,
+          "baselineSha256": "9d6a45f460274a83fac729e572a3712b5b79c6ab8b08c7fd00266fd56611750a",
+          "candidateSha256": "9d6a45f460274a83fac729e572a3712b5b79c6ab8b08c7fd00266fd56611750a"
+        },
+        {
+          "file": "frame-002.phases.json",
+          "equal": true,
+          "baselineBytes": 2014,
+          "candidateBytes": 2014,
+          "baselineSha256": "e7c6f21ffcfedda4c7c6ea5ae9725184c0ebfc82a1305b3e711e2999771103cb",
+          "candidateSha256": "e7c6f21ffcfedda4c7c6ea5ae9725184c0ebfc82a1305b3e711e2999771103cb"
+        },
+        {
+          "file": "frame-002.save.json.gz",
+          "equal": true,
+          "baselineBytes": 755357,
+          "candidateBytes": 755357,
+          "baselineSha256": "2766be8b100afa11d16964cb669da5df488f3bb1ec392102345180389ec36054",
+          "candidateSha256": "2766be8b100afa11d16964cb669da5df488f3bb1ec392102345180389ec36054"
+        },
+        {
+          "file": "frame-003.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 280453,
+          "candidateBytes": 280453,
+          "baselineSha256": "634abfce4fb67f9768688d3b38228f3f2f08fb43ad39654216d90942f130cafd",
+          "candidateSha256": "634abfce4fb67f9768688d3b38228f3f2f08fb43ad39654216d90942f130cafd"
+        },
+        {
+          "file": "frame-003.phases.json",
+          "equal": true,
+          "baselineBytes": 2014,
+          "candidateBytes": 2014,
+          "baselineSha256": "91c524868c1b45dd4b69be4403abbb4b26e7cd1e1f01769104e6a0c545963f09",
+          "candidateSha256": "91c524868c1b45dd4b69be4403abbb4b26e7cd1e1f01769104e6a0c545963f09"
+        },
+        {
+          "file": "frame-003.save.json.gz",
+          "equal": true,
+          "baselineBytes": 756638,
+          "candidateBytes": 756638,
+          "baselineSha256": "87594452129500ec2c36786fbf2f6647d7affc8b316cd708fd9615b1058954c7",
+          "candidateSha256": "87594452129500ec2c36786fbf2f6647d7affc8b316cd708fd9615b1058954c7"
+        },
+        {
+          "file": "frame-004.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 287497,
+          "candidateBytes": 287497,
+          "baselineSha256": "b2a504adde0125151230d9fa8611932dda6c94467acc4c6b9d9e001f5b648a9d",
+          "candidateSha256": "b2a504adde0125151230d9fa8611932dda6c94467acc4c6b9d9e001f5b648a9d"
+        },
+        {
+          "file": "frame-004.phases.json",
+          "equal": true,
+          "baselineBytes": 2014,
+          "candidateBytes": 2014,
+          "baselineSha256": "25d4588f8483f4a79236f10decb704da164b011725bb3bb45dae2c3f38a9f66d",
+          "candidateSha256": "25d4588f8483f4a79236f10decb704da164b011725bb3bb45dae2c3f38a9f66d"
+        },
+        {
+          "file": "frame-004.save.json.gz",
+          "equal": true,
+          "baselineBytes": 760184,
+          "candidateBytes": 760184,
+          "baselineSha256": "411869df1494f0c840dd9fdbddd8217f6b2a3e6b853740d616912a2bebe5dc71",
+          "candidateSha256": "411869df1494f0c840dd9fdbddd8217f6b2a3e6b853740d616912a2bebe5dc71"
+        },
+        {
+          "file": "original-full-input.save.json.gz",
+          "equal": true,
+          "baselineBytes": 751201,
+          "candidateBytes": 751201,
+          "baselineSha256": "37719d547436072f9a9a74ead3e7a077299a80f531a9123db79a36e72d338089",
+          "candidateSha256": "37719d547436072f9a9a74ead3e7a077299a80f531a9123db79a36e72d338089"
+        },
+        {
+          "file": "startup.events.jsonl.gz",
+          "equal": true,
+          "baselineBytes": 0,
+          "candidateBytes": 0,
+          "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "candidateSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "world-input.json.gz",
+          "equal": true,
+          "baselineBytes": 11450,
+          "candidateBytes": 11450,
+          "baselineSha256": "8dd7c9d61f639c1ef2d9d76ff02445ab283195430446e66d47114b8ffb71ffd3",
+          "candidateSha256": "8dd7c9d61f639c1ef2d9d76ff02445ab283195430446e66d47114b8ffb71ffd3"
+        }
+      ],
+      "baselineSourceManifestSha256": "0b1d887342169d7dc2bfdd921c376662c0cfa20103a2b900833c4f7cc7d32586",
+      "candidateSourceManifestSha256": "6db20d6f8324a810c82ef0f1882a66fc899d315320536ad6e82f59ea1d44a0be",
+      "decodedGzipProofsVerified": true,
+      "allFullSavesAndAllEventRecordsRetained": true,
+      "moneyFoodCausalAudit": "NOT_PERFORMED_NO_BALANCE_OR_SUSTAINABILITY_CLAIM",
+      "scope": "Only this original-input ordinary-step compatibility window; no new money-food causal balance, long-run economy, GPU or Mac conclusion."
+    }
+  },
+  "uiRendererMac": "NOT_RUN_NO_UI_SOURCE_CHANGE",
+  "economyNextDay": "NOT_RUN_RESOURCE_PROOF_PENDING",
+  "full38Domains": "PARTIAL"
+}

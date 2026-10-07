@@ -1,0 +1,22 @@
+{
+  "status": "NOT_DELIVERED_KNOWN_LIBRARY_WRITE_PATH_FAILURE",
+  "newLibraryIDs": [],
+  "newLibraryIDCount": 0,
+  "memoReplacementConfirmed": false,
+  "root23UploadAttempted": false,
+  "previousRoot22SingleOrderedBatchItems": 14,
+  "previousExitCode": 1,
+  "previousStdoutBytes": 0,
+  "previousErrorBytes": 70,
+  "previousErrorSHA256": "f8815fbe9a5d49fb41e8962cd0a809642839a39c7ef230d7dcc118ed161622cf",
+  "failureBeforePrepareFinalize": true,
+  "error": "Library upload connection failure",
+  "connectReconnectReasonObserved": false,
+  "autoReviewRejectionObserved": false,
+  "directFallbackOrAutomaticRetry": false,
+  "skill": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/SKILL.md",
+  "reference": "skill://plugin_connector_1p_1b8ff8edfc1481918b252c8277e23125/library/references/prepared-uploads.md",
+  "instruction": "Never switch a started helper write to a direct action.",
+  "originalsPreservedHere": true,
+  "githubNormalDeveloperBranchCommit": "SEPARATE_PENDING_AT_DOCUMENT_SEAL"
+}

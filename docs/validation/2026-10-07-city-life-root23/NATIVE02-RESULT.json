@@ -1,0 +1,41 @@
+{
+  "status": "ACTUAL_COMPLETED",
+  "selectedCase": "large-only",
+  "smallPrimaryWindows": 0,
+  "smallPrimaryContinuationWindows": 0,
+  "largePrimaryWindows": 32,
+  "largeBoundary": {
+    "stopped": false,
+    "reason": null
+  },
+  "oldLargeLegalWindows": 2,
+  "oldLargeRejectedCall": 3,
+  "stepCalls": 47,
+  "constructors": 5,
+  "imports": 6,
+  "completeReaderCalls": 60,
+  "fullSaveBytes": 18482886,
+  "expandedFullSaveBytes": 129846727,
+  "physicalOriginalBytesBeforeResult": 23073221,
+  "physicalOriginalBytes": 23074349,
+  "wallMillisecondsBeforeResult": 335090,
+  "freshRestoreBranches": [
+    "whole",
+    "rawclone",
+    "physicalParts"
+  ],
+  "smallFuturePerBranch": 0,
+  "largeFuturePerBranch": 4,
+  "sourceInputsStable": true,
+  "clockJumps": 0,
+  "directBodyMoneyNeedsStockIdentityEdits": 0,
+  "removedVehicleShopHistoryEntries": 0,
+  "originalWorldSha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "largeVehicleObservationVersions": 4,
+  "smallPositiveWaterKWh": null,
+  "nativeNightShopClosingOrExhaustionClaimed": false,
+  "physicalParts": {
+    "small": null,
+    "large": 120
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "status": "NOT_RUN_PLAN_ONLY",
+  "productChanges": 0,
+  "newProductScripts": 0,
+  "executedSimulationCalls": 0,
+  "executedTestsBuildsBrowsers": 0,
+  "inputSaveSHA": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a",
+  "inputWorldSHA": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+  "root23MustFinishBeforeRoot24": true,
+  "resourceReadiness": "RESOURCE_PROOF_PENDING",
+  "chronology": {
+    "initialClock": 3900,
+    "initialTick": 1710,
+    "originalSpeed": 8,
+    "publicSpeedCommand": 16,
+    "ordinarySeconds": 0.25,
+    "minutesPerSuccessfulTick": 4,
+    "successfulTicksMaximum": 360,
+    "attemptsMaximum": 361,
+    "targetClock": 5340,
+    "targetTick": 2070,
+    "targetDay": 3,
+    "targetHour": 17,
+    "futureBranchesAdded": 0
+  },
+  "capsProposedForRootFreeze": {
+    "wallSeconds": 1800,
+    "ordinaryWorkStopsAfterSeconds": 1740,
+    "proposedFailurePersistenceReserveSeconds": 60,
+    "failurePersistenceReserveProved": false,
+    "nodeMaxOldSpaceMiB": 3072,
+    "totalOriginalEvidenceBytes": 536870912,
+    "failureOriginalReserveBytes": null,
+    "failureOriginalReserveStatus": "NOT_PROVED: actual one-step frontier/all-events/cleanup upper bound must be established before gate; no 8MiB fallback",
+    "legalSaveUTF8CoarseUpperBoundBytes": 74331648,
+    "postStepInvalidFrontierBoundProven": false,
+    "allBusBoundProven": false,
+    "completeFailurePersistenceGuaranteed": false,
+    "liveUTF16chars": 8000000,
+    "civicArchiveUTF8bytes": 16777216,
+    "fullSaveUTF16chars": 24777216,
+    "visited": 2000000,
+    "depth": 24,
+    "moneyAndFoodConservationTolerance": 1e-06
+  },
+  "successCriteria": [
+    "Full actual360nextday17:00 ordinary windows, unchanged phase schedule",
+    "Every frame production coldreader and full raw/gzip/SHA original",
+    "Complete cash/food/fiscal/payroll and causality guards",
+    "All616 baseline NPCs remain alive; genuine deaths retain FAIL frontier",
+    "Owned PID/start-time ancestry cleanup, source/input SHA stable",
+    "No event occurrence or economic trend fabricated"
+  ],
+  "failureHandling": [
+    "Before gate prove original writer one-step frontier+all-event+cleanup bounds and reserve sufficient disk/time before each ordinary step; otherwise do not start and report RESOURCE_PROOF_PENDING",
+    "Stop on native domain/archive/array capacity or poststep whole save-reader failure; distinguish atomic rejection from already advanced frontier",
+    "Write complete current save/event originals before analysis; reserve finite failure budget",
+    "Never delete debt/history/routes/people/vehicles/shops or weaken old guards",
+    "Do not truncate original failed logs or overwrite/retry run dir",
+    "Never label shortwindow asfullnextday or14day steady state"
+  ],
+  "adapters": {
+    "reuse": [
+      "scripts/economy-observations.ts",
+      "scripts/hydro-maintenance-actual.ts moneySupply and direct payroll observer",
+      "scripts/economy-audit.ts event/ledger selectors with preserved initial balances",
+      "src/simulation/food-access-observations.ts pure qualified diagnostic only",
+      "src/persistence/save-resource.ts/partition original v4 resource model",
+      "ROOT23 run-phase.py original owned process gate"
+    ],
+    "forbiddenDirectCLI": "scripts/economy-audit.ts creates new city and rewrites initial policies/focus, so a separately authorized NEW restore-only adapter is required later."
+  },
+  "historicalCompressionEstimate": {
+    "referenceSchema": "Original no-grid World291 legacy-independent actual full frames000-004; not ROOT23smallhydro",
+    "encodedBytesMinimum": 515552,
+    "encodedBytesMaximum": 519589,
+    "fullSaveCountEstimate": 363,
+    "estimateAllFullSavesBytes": 188610807,
+    "estimateIsUpperBound": false,
+    "actualDiskCapMustBeCheckedEveryOriginal": true
+  },
+  "fiscalIdentity": "Δ(T+taxQueue)=provednewtax/fare/utility/fee/service/refund public inflows−actualpublicNPCwages−actualpublicprocurement−otherprovedpublicdebits, no inherited/summary/duplicateledger doublecounts",
+  "payrollIdentity": "Lend−Lstart=canonicalNPCearned−actualNPCpaid; L=sum arrears+accruals+wages by original employer",
+  "foodIdentity": "Fend=Fstart+positivefoodproduction−storedmeal−actualnamedNPCfoodcounters−playerfoodconsumed; transfercustody and mirrorrecords counted once atstablephaseboundary",
+  "cashIdentity": "Cend=Cstart for the full proved custody model, including all actual escrows and banking/shop-company aliases",
+  "causalityPitfalls": [
+    "cargo-arrived event occurs before vehiclecargo iscleared; do stablephase masschecks",
+    "zerooutput stock>=120 still earns original funded onsite工资; do not infer noattendance from no production events",
+    "stock>=120 onlyblocks shortage-hire specialcase, sold>0 normal offers stilllegal",
+    "jobs76 not present in thisoriginal input; count actual future jobs/moves only",
+    "null fresh/full settlement receipt can coexist with legitimate partial/oldarrears pay",
+    "v4full JSON can legally exceed8M if original civicHistory fits16MiB; do not raise native caps or impose a false8Mfullguard"
+  ],
+  "readyCommand": "NOT_IMPLEMENTED / NOT_RUN / RESOURCE_PROOF_PENDING: root must finish ROOT23, prepare a NEW restore-only driver and prove one-step frontier/all-events/failure-persistence bounds, freeze final source+plan+inputs, then use existing owned wrapper with explicit --world/--save SHA inputs; no current economy CLI substitute."
+}

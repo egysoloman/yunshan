@@ -1,0 +1,24 @@
+{
+  "stage": "ROOT23_LOCAL_CHECKS_COMPLETE_ARCHIVE_AND_COMMIT_PENDING",
+  "branch": "takeover-city-life",
+  "baselineHEAD": "300429bf38bb10c8c18c461b380861b968eab7a5",
+  "lastReadMain": "70447c199e9587e379c9620a25591967e9078ee7",
+  "functionalCount": 404,
+  "oldTestPathsUnchanged": 257,
+  "noRemovedFunctional": true,
+  "frozenFunctional": "FINAL-FUNCTIONAL-SHA256.json",
+  "stageResult": "100_PURE_PASS_LARGE47_PASS_LEGACY24_EXACT_BUILD_PASS_WITH_PRIOR_FAILURES_PRESERVED",
+  "retainedNative01": "NATIVE01-FAILURE.original.json",
+  "newSharedCapacityBoundary": "NOT_REACHED_AT32",
+  "all38Domains": "PARTIAL",
+  "ART": "FAIL",
+  "Mac": "NOT_RUN",
+  "defaultNextDayEconomy": "NOT_RUN_RESOURCE_PROOF_PENDING",
+  "nextPlan": "ROOT24-NOT-RUN-PLAN/PLAN.md",
+  "nextInputs": {
+    "worldSHA256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512",
+    "fullSaveSHA256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+  },
+  "libraryNewIDs": 0,
+  "publication": "Normal developer-branch commit/push uses user authorization; no PR/main merge/deploy/force/credentials/security sharing changes."
+}

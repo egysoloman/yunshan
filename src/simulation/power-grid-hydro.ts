@@ -2,6 +2,11 @@ import type { SimState, Vec3, WorldDefinition } from '../types';
 import { shopLifecycleAllowsOperation } from './shop_lifecycle';
 import { validateHydroMaintenanceDefinition, validateHydroMaintenanceState, hydroMaintenanceReadyAt, isCanonicalHydroMaintenanceReady, isCanonicalHydroMaintenanceState } from './hydro-maintenance';
 import { Flow, type Arc } from './power-network-flow';
+import { sharedHydroAppendCharUpperBound } from './hydro-grid-budget';
+import {
+  appendSharedHydroDispatch, readSharedHydroDispatches, pagedHistoryAppendCharDelta,
+  type SharedHydroSnapshot, type SharedHydroReference,
+} from './hydro-dispatch-history';
 import { validateFiniteHydroDefinition, type FiniteHydroDefinition } from './power-hydro';
 import {
   createPagedHydro, createPagedHydroRuntime, validatePagedHydro, pagedHydroWindows,
@@ -30,6 +35,7 @@ export interface HydroPowerGridDefinition {
   version: 2; kind: 'finite-hydro-network'; unit: 'kW-kWh-v1';
   nodes: HydroGridNode[]; links: HydroGridLink[]; sources: HydroGridSource[];
   buildings: HydroGridBuildingLoad[]; transport: HydroGridTransportConnection[];
+  historyEncoding?: 'shared-dispatch-v1';
 }
 export interface HydroGridMeter { nodeId: string | null; demandKW: number; servedKW: number; unservedKW: number }
 export interface HydroGridVehicleMeter extends HydroGridMeter { edgeId: string }
@@ -43,12 +49,14 @@ export interface HydroPowerGridDispatch {
   loadSources: { shops: HydroShopLoadSource[]; equipmentAvailable?: boolean };
   diagnostics: { unconnectedBuildings: string[]; unconnectedVehicles: string[]; islandNodeIds: string[]; exhaustedSourceIds: string[]; constrainedLinkIds: string[]; constrainedNodeIds: string[] };
 }
-export type HydroGridHistory = PagedHistory<HydroPowerGridDispatch>;
+export type HydroGridHistory = PagedHistory<HydroPowerGridDispatch> | PagedHistory<SharedHydroReference>;
 export interface HydroPowerGridState {
   version: 2; kind: 'finite-hydro-network'; unit: 'kW-kWh-v1';
   hydro: PagedHydroState; dispatch: HydroPowerGridDispatch | null;
   totals: { demandedKWh: number; servedKWh: number; unservedKWh: number };
   history: HydroGridHistory;
+  historyEncoding?: 'shared-dispatch-v1';
+  snapshots?: PagedHistory<SharedHydroSnapshot>;
 }
 
 const EPS = 1e-8;
@@ -61,7 +69,7 @@ const caps = new WeakMap<HydroPowerGridState, GridCapability>();
 // Only this traversal can certify descendants. Object.isFrozen certifies the
 // outer object alone; callers can supply an unfamiliar shallow-frozen object.
 const deeplyFrozen = new WeakSet<object>();
-interface GridCapability { world: WorldDefinition; definition: HydroPowerGridDefinition; physicalKey: string; loadIdentityKey: string | null; owner: SimState | null; runtime: PagedHydroRuntime | null; pending: PagedHydroClockRequest | null }
+interface GridCapability { world: WorldDefinition; definition: HydroPowerGridDefinition; physicalKey: string; loadIdentityKey: string | null; owner: SimState | null; runtime: PagedHydroRuntime | null; pending: PagedHydroClockRequest | null; ledgerCharacters?: number; appendCharacterReserve?: number }
 const record = <T>(): Record<string, T> => Object.create(null) as Record<string, T>;
 const sorted = <T extends { id: string }>(rows: readonly T[]) => [...rows].sort((a, b) => a.id.localeCompare(b.id));
 function need(condition: unknown, message: string): asserts condition { if (!condition) throw new Error('水力电网契约：' + message); }
@@ -114,12 +122,28 @@ function historyWindowCharBound(world: WorldDefinition, state: SimState): number
   // water window, both dispatch copies, diagnostics and shallow page indices.
   return 8192 + world.buildings.length * 1024 + state.vehicles.length * 1536 + state.shops.length * 1024 + definition(world)!.nodes.length * 512 + definition(world)!.links.length * 512;
 }
-function checkHistoryBudget(world: WorldDefinition, state: SimState, count: number): void {
-  need(count * historyWindowCharBound(world, state) <= HYDRO_GRID_LEDGER_CHAR_BUDGET, '完整双账达到本域保守原生保存预算，须在原time推进前停止');
+function checkHistoryBudget(world: WorldDefinition, state: SimState, count: number, capability?: GridCapability): void {
+  if (definition(world)!.historyEncoding === 'shared-dispatch-v1') {
+    const body = bodyOf(state)!;
+    // Hot callers have a private exact count tied to the frozen current body.
+    // Cold callers run this only after every descendant has been validated.
+    const characters = capability?.ledgerCharacters ?? JSON.stringify(body).length;
+    const futureWindows = count - body.history.count;
+    need(Number.isSafeInteger(characters) && characters >= 0 && futureWindows >= 0,
+      '完整共享账必须有当前实际字符与非负未来窗');
+    // Reserve the full future schema, including every allowed diagnostic and
+    // vehicle edge. Reuse is not predicted. Cold readers have zero future rows.
+    const reserve = capability?.appendCharacterReserve ?? 0;
+    need(futureWindows === 0 || (Number.isSafeInteger(reserve) && reserve > 0), '共享账未来必须有私有完整单窗界');
+    need(characters + futureWindows * reserve <= HYDRO_GRID_LEDGER_CHAR_BUDGET,
+      '完整共享双账达到本域原生保存预算，须在原time推进前停止');
+  } else need(count * historyWindowCharBound(world, state) <= HYDRO_GRID_LEDGER_CHAR_BUDGET, '完整双账达到本域保守原生保存预算，须在原time推进前停止');
 }
 export function validateHydroGridDefinition(world: WorldDefinition): void {
   const grid = definition(world); if (!grid) { need(world.powerGrid === undefined || world.powerGrid.version === 1, '不支持的水力网络'); return; }
-  dataObject(grid, ['version', 'kind', 'unit', 'nodes', 'links', 'sources', 'buildings', 'transport']);
+  const shared = Object.hasOwn(grid, 'historyEncoding');
+  dataObject(grid, shared ? ['version', 'kind', 'unit', 'nodes', 'links', 'sources', 'buildings', 'transport', 'historyEncoding'] : ['version', 'kind', 'unit', 'nodes', 'links', 'sources', 'buildings', 'transport']);
+  if (shared) need(grid.historyEncoding === 'shared-dispatch-v1', '明确支持的共享完整调度编码');
   need(grid.version === 2 && grid.kind === 'finite-hydro-network' && grid.unit === 'kW-kWh-v1', '明确第二版水力单位');
   dataArray<HydroGridNode>(grid.nodes, 1024); dataArray<HydroGridLink>(grid.links, 4096); dataArray<HydroGridSource>(grid.sources, 1); need(grid.sources.length === 1, '本版只允许一台独立双库机组');
   const nodeIds = new Set<string>(), linkIds = new Set<string>();
@@ -162,15 +186,24 @@ export function createHydroGridState(world: WorldDefinition, owner?: SimState): 
   validateHydroGridDefinition(world); const grid = definition(world); if (!grid) return undefined;
   validateHydroMaintenanceDefinition(world);
   const body: HydroPowerGridState = { version: 2, kind: grid.kind, unit: grid.unit, hydro: createPagedHydro(grid.sources[0].hydro), dispatch: null, totals: { demandedKWh: 0, servedKWh: 0, unservedKWh: 0 }, history: createPagedHistory<HydroPowerGridDispatch>() };
+  if (grid.historyEncoding === 'shared-dispatch-v1') {
+    body.historyEncoding = grid.historyEncoding;
+    body.snapshots = createPagedHistory<SharedHydroSnapshot>();
+    body.history = createPagedHistory<SharedHydroReference>();
+  }
   freeze(grid); if (world.hydroMaintenance !== undefined) freeze(world.hydroMaintenance); freeze(body);
   const capability: GridCapability = { world, definition: grid, physicalKey: physicalKey(world), loadIdentityKey: owner ? loadIdentityKey(owner) : null, owner: owner ?? null, runtime: null, pending: null };
+  if (body.historyEncoding === 'shared-dispatch-v1') {
+    capability.ledgerCharacters = JSON.stringify(body).length;
+    if (owner) capability.appendCharacterReserve = sharedHydroAppendCharUpperBound(world, owner);
+  }
   if (owner) { need(owner.tick === 0 && hydroGridClock(owner) === 480, '只在可信初始相位安装资产'); capability.runtime = createPagedHydroRuntime(owner, grid.sources[0].hydro, body.hydro, 480, 0); }
   caps.set(body, capability); return body;
 }
 function capabilityFor(world: WorldDefinition, state: SimState): { body: HydroPowerGridState; capability: GridCapability } {
   const body = bodyOf(state); need(body, '声明水力资产不能缺失'); const capability = caps.get(body);
   need(capability && capability.world === world && capability.definition === definition(world) && Object.isFrozen(body) && physicalKey(world) === capability.physicalKey, '拒绝通用复制、异城、可变或变换后的资产与拓扑');
-  if (capability.owner === null) { need(body.history.count === 0 && state.tick === 0 && hydroGridClock(state) === 480, '初始资产只能绑定可信初始城市'); capability.owner = state; capability.loadIdentityKey = loadIdentityKey(state); capability.runtime = createPagedHydroRuntime(state, capability.definition.sources[0].hydro, body.hydro, 480, 0); }
+  if (capability.owner === null) { need(body.history.count === 0 && state.tick === 0 && hydroGridClock(state) === 480, '初始资产只能绑定可信初始城市'); capability.owner = state; capability.loadIdentityKey = loadIdentityKey(state); capability.runtime = createPagedHydroRuntime(state, capability.definition.sources[0].hydro, body.hydro, 480, 0); if (body.historyEncoding === 'shared-dispatch-v1') capability.appendCharacterReserve = sharedHydroAppendCharUpperBound(world, state); }
   need(capability.owner === state && capability.runtime && capability.loadIdentityKey === loadIdentityKey(state), '资产只能属于当前城市状态对象及完整具名负荷集合');
   need(world.hydroMaintenance === undefined || isCanonicalHydroMaintenanceState(state), '维护资产及完整钱料工进度须来自当前城市原写入或完整成功恢复');
   return { body, capability };
@@ -182,7 +215,7 @@ export function prepareHydroBeforeTick(world: WorldDefinition, state: SimState, 
   const { body, capability } = capabilityFor(world, state), source = capability.definition.sources[0];
   quantity(nativeMinutes, 4, .0625); need(state.tick === body.hydro.tick && hydroGridClock(state) === body.hydro.at, '能源账必须在原推进前相位');
   need(body.history.count === body.hydro.history.count && body.history.count < PAGED_HYDRO_MAX_WINDOWS, '完整分表容量必须在原time推进前停止');
-  checkHistoryBudget(world, state, body.history.count + 1);
+  checkHistoryBudget(world, state, body.history.count + 1, capability);
   const request: PagedHydroClockRequest = { tick: state.tick + 1, beforeAt: body.hydro.at, at: pagedHydroEndAt(body.hydro.at, nativeMinutes), nativeMinutes, intakeOpen: source.intake.open, outfallOpen: source.outfall.open };
   need(request.at - request.beforeAt >= .06, '实际供电窗须满足已声明的浮点分辨率下界');
   preflightPagedHydro(capability.runtime!, state, body.hydro, request); capability.pending = request;
@@ -194,7 +227,7 @@ export function prepareHydroBeforeStep(world: WorldDefinition, state: SimState, 
   const { body, capability } = capabilityFor(world, state); quantity(nativeMinutes, 4, .0625);
   need(Number.isSafeInteger(tickCount) && tickCount >= 0 && tickCount <= 480 && body.hydro.tick === state.tick && body.hydro.at === hydroGridClock(state), '原step必须从当前完整能源相位开始');
   need(body.history.count === body.hydro.history.count && body.history.count + tickCount <= PAGED_HYDRO_MAX_WINDOWS && state.tick + tickCount <= 1e10, '完整双账的整个step须在容量边界内');
-  checkHistoryBudget(world, state, body.history.count + tickCount);
+  checkHistoryBudget(world, state, body.history.count + tickCount, capability);
   let beforeAt = body.hydro.at;
   for (let index = 0; index < tickCount; index++) { const at = pagedHydroEndAt(beforeAt, nativeMinutes); quantity(at, 1e7); need(at - beforeAt >= .06 && beforeAt + (at - beforeAt) === at, '实际未来原时钟窗及浮点分辨率'); beforeAt = at; }
   if (tickCount > 0) { const source = capability.definition.sources[0]; preflightPagedHydro(capability.runtime!, state, body.hydro, { tick: state.tick + 1, beforeAt: body.hydro.at, at: pagedHydroEndAt(body.hydro.at, nativeMinutes), nativeMinutes, intakeOpen: source.intake.open, outfallOpen: source.outfall.open }); }
@@ -253,7 +286,23 @@ function verifyConservation(grid: HydroPowerGridDefinition, window: HydroPowerGr
 /** Public cold enumeration preserves every page/window; normal dispatch never
  * traverses these historical pages or calls a complete replay validator. */
 export function* hydroGridWindows(body: HydroPowerGridState): Generator<HydroPowerGridDispatch> {
-  yield* pagedHistoryWindows(body.history);
+  const encoding = Object.getOwnPropertyDescriptor(body, 'historyEncoding');
+  need(!encoding || ('value' in encoding && encoding.enumerable && encoding.value === 'shared-dispatch-v1'), '明确自身数据编码');
+  dataObject(body, encoding ? ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history', 'historyEncoding', 'snapshots'] : ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history']);
+  if (encoding) {
+    need(body.snapshots, '完整共享快照缺失');
+    yield* readSharedHydroDispatches({ snapshots: body.snapshots, history: body.history as PagedHistory<SharedHydroReference>, hydro: body.hydro });
+  } else yield* pagedHistoryWindows(body.history as PagedHistory<HydroPowerGridDispatch>);
+}
+// Header differences and page append deltas preserve the exact JSON length
+// without walking old windows. Field names/commas omitted from both headers
+// cancel; all retained descendants have already been privately deep frozen.
+function gridHeaderCharacters(body: HydroPowerGridState): number {
+  const { hydro: _hydro, history: _history, snapshots: _snapshots, ...header } = body;
+  return JSON.stringify(header).length;
+}
+function hydroHeaderCharacters(body: PagedHydroState): number {
+  const { history: _history, ...header } = body; return JSON.stringify(header).length;
 }
 export function dispatchHydroGrid(world: WorldDefinition, state: SimState, nativeMinutes: number): HydroPowerGridState {
   const { body, capability } = capabilityFor(world, state), grid = capability.definition;
@@ -266,9 +315,21 @@ export function dispatchHydroGrid(world: WorldDefinition, state: SimState, nativ
   window.sources[grid.sources[0].id].transferredM3 = prepared.window.transferredM3;
   near(prepared.window.suppliedKW, window.servedKW); near(prepared.window.generatedKWh, window.sources[grid.sources[0].id].generatedKWh); verifyConservation(grid, window);
   freeze(window);
-  const next: HydroPowerGridState = { version: body.version, kind: body.kind, unit: body.unit, hydro: prepared.state, dispatch: window, totals: { demandedKWh: body.totals.demandedKWh + window.demandKW * window.minutes / 60, servedKWh: body.totals.servedKWh + window.servedKW * window.minutes / 60, unservedKWh: body.totals.unservedKWh + window.unservedKW * window.minutes / 60 }, history: appendPagedHistory(body.history, window) };
+  const shared = grid.historyEncoding === 'shared-dispatch-v1'
+    ? appendSharedHydroDispatch(body.snapshots!, body.history as PagedHistory<SharedHydroReference>, window) : null;
+  const next: HydroPowerGridState = { version: body.version, kind: body.kind, unit: body.unit, hydro: prepared.state, dispatch: window, totals: { demandedKWh: body.totals.demandedKWh + window.demandKW * window.minutes / 60, servedKWh: body.totals.servedKWh + window.servedKW * window.minutes / 60, unservedKWh: body.totals.unservedKWh + window.unservedKW * window.minutes / 60 }, history: shared ? shared.history : appendPagedHistory(body.history as PagedHistory<HydroPowerGridDispatch>, window) };
+  let ledgerCharacters: number | undefined;
+  if (shared) {
+    next.historyEncoding = grid.historyEncoding; next.snapshots = shared.snapshots;
+    ledgerCharacters = capability.ledgerCharacters! + gridHeaderCharacters(next) - gridHeaderCharacters(body)
+      + hydroHeaderCharacters(next.hydro) - hydroHeaderCharacters(body.hydro)
+      + pagedHistoryAppendCharDelta(body.hydro.history, prepared.window)
+      + pagedHistoryAppendCharDelta(body.history as PagedHistory<SharedHydroReference>, shared.reference)
+      + (shared.snapshotAdded ? pagedHistoryAppendCharDelta(body.snapshots!, shared.snapshot) : 0);
+    need(ledgerCharacters <= HYDRO_GRID_LEDGER_CHAR_BUDGET, '完整共享双账的实际字符不得超出已预检的本域边界');
+  }
   freeze(next); commitPagedHydro(capability.runtime!, state, body.hydro, prepared);
-  caps.set(next, { ...capability, pending: null }); caps.delete(body); return next;
+  caps.set(next, { ...capability, pending: null, ...(shared ? { ledgerCharacters } : {}) }); caps.delete(body); return next;
 }
 
 function validateObservations(world: WorldDefinition, state: SimState, observations: LoadSources): void {
@@ -297,11 +358,15 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
   validateHydroGridDefinition(world); const grid = definition(world), body = bodyOf(state);
   if (!grid) { need(!body, '未声明水力地图不能带水力资产'); return; }
   validateHydroMaintenanceState(state, world);
-  need(body && state.power === undefined, '声明水力地图须有独立资产，不叠加旧聚合源'); dataObject(body, ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history']);
+  need(body && state.power === undefined, '声明水力地图须有独立资产，不叠加旧聚合源');
+  const shared = grid.historyEncoding === 'shared-dispatch-v1';
+  dataObject(body, shared ? ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history', 'historyEncoding', 'snapshots'] : ['version', 'kind', 'unit', 'hydro', 'dispatch', 'totals', 'history']);
+  if (shared) need(body.historyEncoding === grid.historyEncoding && body.snapshots, '地图与完整共享账编码必须一致');
+  if (shared) dataObject(body.history, ['count', 'pages']);
   need(body.version === 2 && body.kind === grid.kind && body.unit === grid.unit, '账本版本及单位');
   validatePagedHydro(grid.sources[0].hydro, body.hydro, hydroGridClock(state), state.tick);
   need(body.history.count === body.hydro.history.count, '资源账和完整电网窗数量必须相同');
-  checkHistoryBudget(world, state, body.history.count);
+  if (!shared) checkHistoryBudget(world, state, body.history.count);
   dataObject(body.totals, ['demandedKWh', 'servedKWh', 'unservedKWh']); for (const value of Object.values(body.totals)) quantity(value, 1e15);
   const totals = { demandedKWh: 0, servedKWh: 0, unservedKWh: 0 }, water = pagedHydroWindows(body.hydro)[Symbol.iterator](); let at = 480, tick = 0, latest: HydroPowerGridDispatch | null = null;
   for (const window of hydroGridWindows(body)) {
@@ -328,6 +393,7 @@ export function validateHydroGridState(state: SimState, world: WorldDefinition):
   need(water.next().done && at === hydroGridClock(state) && tick === state.tick, '完整历史必须结束于当前实际相位'); exactData(body.totals, totals); exactData(body.dispatch, latest);
   if (latest === null) need(state.tick === 0 && hydroGridClock(state) === 480, '只有可信初始资产可以没有分表');
   near(body.totals.servedKWh, body.hydro.generatedKWh); near(body.totals.demandedKWh, body.totals.servedKWh + body.totals.unservedKWh);
+  if (shared) checkHistoryBudget(world, state, body.history.count);
 }
 /** Installation calls this only after the host has accepted and replaced its
  * complete save. A validator/preview only reads and never invokes this hook. */
@@ -336,4 +402,8 @@ export function bindHydroGridAfterLoad(world: WorldDefinition, state: SimState):
   validateHydroGridState(state, world); const grid = definition(world)!, body = bodyOf(state)!;
   freeze(grid); if (world.hydroMaintenance !== undefined) freeze(world.hydroMaintenance); freeze(body); const runtime = createPagedHydroRuntime(state, grid.sources[0].hydro, body.hydro, hydroGridClock(state), state.tick);
   caps.set(body, { world, definition: grid, physicalKey: physicalKey(world), loadIdentityKey: loadIdentityKey(state), owner: state, runtime, pending: null });
+  if (body.historyEncoding === 'shared-dispatch-v1') {
+    caps.get(body)!.ledgerCharacters = JSON.stringify(body).length;
+    caps.get(body)!.appendCharacterReserve = sharedHydroAppendCharUpperBound(world, state);
+  }
 }

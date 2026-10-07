@@ -1,0 +1,116 @@
+{
+  "status": "STATIC_READ_ONLY_NOT_RUN",
+  "reviewMethod": "Existing JSON parse/hash/tree traversal only; no worldgen/Simulation/test/build/browser/import",
+  "world": {
+    "path": "/workspace/yunshan-work/ROOT23-ledger-scaling-20261007-01/native-plan/static-inputs/WORLD291.original.json",
+    "bytes": 1832308,
+    "sha256": "2912839d3a854202d45fd1585d24d367ff6c15e8f5399bc8a669b1c91b4c8512"
+  },
+  "save": {
+    "path": "/workspace/yunshan/docs/validation/2026-10-05-city-life-root20/ROOT20-PRIMARY-1700.save.json",
+    "bytes": 3443220,
+    "sha256": "4610ab1059b52cfd4bbfa17badf209a7a33ab986735d83b8a5da8c8a9e5ddf6a"
+  },
+  "envelope": {
+    "format": "yunshan-save",
+    "version": 4,
+    "rulesetId": "civic-local-v1",
+    "motionVersion": 2,
+    "historyPolicyId": "civic-history-pages-v1",
+    "referenceCollisionPolicyId": "continuous-upright-v1",
+    "mealRoutePolicyId": "nearby-food-v1",
+    "freightPickupPolicyId": "road-food-pickup-v1",
+    "freightDeliveryPolicyId": "road-food-delivery-v1",
+    "residentTuitionPolicyId": "resident-formal-tuition-v1",
+    "worldSeed": 20261001,
+    "worldFingerprint": "b85fa6ec",
+    "routeEncoding": "pooled-v1"
+  },
+  "state": {
+    "tick": 1710,
+    "day": 2,
+    "hour": 17,
+    "clock": 3900,
+    "speed": 8,
+    "paused": false,
+    "buildings": 612,
+    "roadNodes": 674,
+    "transportEdges": 691,
+    "districts": 11,
+    "citizens": 616,
+    "vehicles": 344,
+    "shops": 210,
+    "powerGridDeclared": false,
+    "hydroMaintenanceDeclared": false
+  },
+  "resources": {
+    "fullUTF8Bytes": 3443220,
+    "fullUTF16Chars": 3415046,
+    "liveUTF16Chars": 3053985,
+    "civicArchiveUTF8Bytes": 361145,
+    "visited": 253931,
+    "depth": 9,
+    "resourceModel": "Original v4: live8M chars, civicHistory16MiB UTF8, full<=24777216chars, all-tree2Mvisited/depth24; exact archived source value spans used for live/archive JSON length, no representation replacement."
+  },
+  "runtime": {
+    "payrollAt": 5340,
+    "commerceAt": 3910,
+    "financeAt": 3902,
+    "taxQueue": 0,
+    "wagesCount": 0,
+    "wageAccrualCount": 0,
+    "wageArrearsCount": 0,
+    "publicLaborAbsent": true,
+    "publicLaborReviewAt": 3902,
+    "privateLaborVersion": 1,
+    "privateLaborNextReviewAt": 3902,
+    "privateLaborShiftCount": 136,
+    "publicLedgerCount": 253
+  },
+  "cashCustody": {
+    "total": 280736.1579367216,
+    "treasury": 63983.18759107223,
+    "citizens": 197979.68658032897,
+    "player": 600,
+    "bankCash": 700,
+    "nonaliasedShopCash": 16880.71340968675,
+    "companyCapital": 556.5703556336549,
+    "residentEducationEscrow": 36,
+    "otherEnumeratedCashAndTaxQueue": 0
+  },
+  "foodCustody": {
+    "total": 15814.241185989758,
+    "foodShopInventory": 13883.241185989758,
+    "allCitizenFood": 251,
+    "playerFood": 0,
+    "classifiedVehicleFood": 426,
+    "vehicleFoodBySourceKind": {
+      "dock": 230,
+      "farm": 196,
+      "materials": 0,
+      "unknown": 0
+    },
+    "districtFreightAliasOnce": 1254,
+    "allFreightLotOwners": null,
+    "allCompanyCount": 12,
+    "allCompanyInventoryIsActiveShopAlias": true,
+    "cooking": null
+  },
+  "naturalHiringScope": {
+    "publicJobsRegistryPresent": false,
+    "candidateCountFromOriginalReviewPredicate": 287,
+    "publicThreeDayThreshold": 45434.774471578785,
+    "job76": "Not an input fact or fixed production threshold; citizen76 is an original official; only future natural jobs/moves are observations.",
+    "farmCount": 31,
+    "farmInventoryAtLeast120": 26,
+    "farmStockTotal": 4351.118394550422,
+    "farmInventoryMin": 69.4888079255587,
+    "farmInventoryMax": 160,
+    "farmNativeEmployees": 28,
+    "farmZeroEmployeeShops": 14,
+    "dockCount": 16,
+    "dockNativeEmployees": 17,
+    "dockZeroEmployeeShops": 6,
+    "qualification": "These are original static values, not a new native hiring or zero-output failure result."
+  }
+}
