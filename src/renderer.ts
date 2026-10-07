@@ -457,7 +457,7 @@ export class CityRenderer implements CityRendererAPI {
   }
 
   private buildHouse(b: Building, batch: BoxBatch, far: boolean) {
-    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near', this.studioProps ? { skipFixture: studioDressesFixture } : {});
+    const programParts = buildProgramArchitecture(b, far ? 'far' : 'near', this.studioProps ? { skipFixture: fixture => studioDressesFixture(fixture, b.kind) } : {});
     if (programParts) {
       for (const part of programParts) {
         const position = buildingWorldPosition(b, part.position);

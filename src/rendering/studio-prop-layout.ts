@@ -1,4 +1,4 @@
-import type { Building } from '../types';
+import type { Building, BuildingKind } from '../types';
 import { getBuildingBody, getFloorPlanFixtures, type FloorFixture } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
 
@@ -17,6 +17,15 @@ export const STUDIO_FIXTURE_DRESSING: Partial<Record<FloorFixture['kind'], { ass
   counter: { asset: 'LIFE-064', copies: 2 },
   table: { asset: 'LIFE-032', copies: 1 },
 };
+/** Program-specific furniture for the same fixture solid, by building use. */
+export const STUDIO_PROGRAM_DRESSING: Partial<Record<BuildingKind, Partial<Record<FloorFixture['kind'], { asset: string; copies: number }>>>> = {
+  police: { table: { asset: 'LIFE-151', copies: 1 } },
+  school: { table: { asset: 'LIFE-111', copies: 2 } },
+};
+export function studioDressing(kind: FloorFixture['kind'], buildingKind?: BuildingKind, assets: ReadonlyMap<string, StudioAsset> = assetById) {
+  const program = buildingKind && STUDIO_PROGRAM_DRESSING[buildingKind]?.[kind];
+  return program && assets.has(program.asset) ? program : STUDIO_FIXTURE_DRESSING[kind];
+}
 /** Below this a model would read as a toy inside a larger invisible solid. */
 export const STUDIO_MIN_FIT_SCALE = .9;
 
@@ -31,8 +40,8 @@ const assetById = new Map(STUDIO_ASSETS.map(asset => [asset.id, asset]));
 /** Places the asset copies inside the fixture solid with their +Z front
  * toward the fixture's use point. Returns null when a uniform fit would fall
  * below STUDIO_MIN_FIT_SCALE, so the caller keeps the procedural furniture. */
-export function layoutStudioFixture(fixture: FloorFixture, floor: number, floorY: number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] | null {
-  const dressing = STUDIO_FIXTURE_DRESSING[fixture.kind], asset = dressing && assets.get(dressing.asset);
+export function layoutStudioFixture(fixture: FloorFixture, floor: number, floorY: number, assets: ReadonlyMap<string, StudioAsset> = assetById, buildingKind?: BuildingKind): StudioPropPlacement[] | null {
+  const dressing = studioDressing(fixture.kind, buildingKind, assets), asset = dressing && assets.get(dressing.asset);
   if (!dressing || !asset) return null;
   const { min, max } = asset.boundsM, r = fixture.rect;
   const width = max[0] - min[0], height = max[1] - min[1], depth = max[2] - min[2];
@@ -51,14 +60,14 @@ export function layoutStudioFixture(fixture: FloorFixture, floor: number, floorY
 }
 
 /** True when the fixture is shown by a studio asset instead of boxes. */
-export function studioDressesFixture(fixture: FloorFixture, assets: ReadonlyMap<string, StudioAsset> = assetById): boolean {
-  return layoutStudioFixture(fixture, 0, 0, assets) !== null;
+export function studioDressesFixture(fixture: FloorFixture, buildingKind?: BuildingKind, assets: ReadonlyMap<string, StudioAsset> = assetById): boolean {
+  return layoutStudioFixture(fixture, 0, 0, assets, buildingKind) !== null;
 }
 
 /** Every studio placement of a building's floor-plan fixtures. */
 export function studioBuildingPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] {
   const body = getBuildingBody(building); if (!body) return [];
-  return body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets) ?? []));
+  return body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets, building.kind) ?? []));
 }
 
 /** A fixed, world-space studio model (origin = its min corner, yaw about Y). */

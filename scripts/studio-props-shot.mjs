@@ -21,7 +21,8 @@ try {
   await page.waitForFunction(() => window.__YUNSHAN__?.simulation?.state?.tick >= 1, null, { timeout: 120_000 });
   await page.waitForFunction(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型')?.userData.studioAssets, null, { timeout: 120_000 });
   report.assets = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型').userData.studioAssets);
-  for (const kind of ['market', 'home']) {
+  const shots = { market: 'LIFE-064', home: 'LIFE-032', police: 'LIFE-151', school: 'LIFE-111' };
+  for (const kind of Object.keys(shots)) {
     const view = await page.evaluate(kind => {
       const { world, simulation, controller, actions, getView } = window.__YUNSHAN__;
       actions.command({ type: 'setTime', value: 12 });
@@ -49,7 +50,7 @@ try {
       const dx = target.x - feet.x, dz = target.z - feet.z;
       controller.yaw = Math.atan2(-dx, -dz); controller.pitch = -0.45; controller['orient']();
       return { mesh: mesh.name, instance: best.i, feet, target };
-    }, kind === 'market' ? 'LIFE-064' : 'LIFE-032');
+    }, shots[kind]);
     await page.waitForTimeout(8000);
     const placed = await page.evaluate(() => {
       const { city, controller } = window.__YUNSHAN__, group = city.scene.getObjectByName('体素工坊 · 楼层设施模型'), M = new controller.camera.matrix.constructor();

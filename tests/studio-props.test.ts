@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { createWorld } from '../src/world';
 import { getBuildingBody } from '../src/architecture-floor-plan';
 import { buildProgramArchitecture } from '../src/rendering/architecture-bodies';
-import { layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioStationPlacements } from '../src/rendering/studio-prop-layout';
+import { layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioDressing, studioStationPlacements } from '../src/rendering/studio-prop-layout';
 
 const world = createWorld();
 
@@ -25,8 +25,8 @@ test('every studio placement stays inside its authoritative fixture solid at uni
   for (const building of world.buildings) {
     const body = getBuildingBody(building); if (!body) continue;
     for (const plan of body.floorPlans) for (const fixture of plan.fixtures) {
-      const placements = layoutStudioFixture(fixture, plan.floor, plan.y); if (!placements) continue;
-      const dressing = STUDIO_FIXTURE_DRESSING[fixture.kind]!, asset = STUDIO_ASSETS.find(a => a.id === dressing.asset)!;
+      const placements = layoutStudioFixture(fixture, plan.floor, plan.y, undefined, building.kind); if (!placements) continue;
+      const dressing = studioDressing(fixture.kind, building.kind)!, asset = STUDIO_ASSETS.find(a => a.id === dressing.asset)!;
       assert.equal(placements.length, dressing.copies);
       for (const p of placements) {
         assert.ok(p.scale >= STUDIO_MIN_FIT_SCALE && p.scale <= 1);
@@ -36,10 +36,10 @@ test('every studio placement stays inside its authoritative fixture solid at uni
         assert.ok(lo.x >= r.x0 - e && hi.x <= r.x1 + e && lo.z >= r.z0 - e && hi.z <= r.z1 + e, `${building.id}/${fixture.id} footprint`);
         assert.ok(Math.abs(lo.y - (plan.y + fixture.bottom)) < 1e-7 && hi.y <= plan.y + fixture.top + e, `${building.id}/${fixture.id} height`);
       }
-      counts[fixture.kind] = (counts[fixture.kind] ?? 0) + 1;
+      counts[dressing.asset] = (counts[dressing.asset] ?? 0) + 1;
     }
   }
-  assert.ok((counts.counter ?? 0) > 0 && (counts.table ?? 0) > 0, JSON.stringify(counts));
+  for (const id of ['LIFE-064', 'LIFE-032', 'LIFE-151', 'LIFE-111']) assert.ok((counts[id] ?? 0) > 0, `${id}: ${JSON.stringify(counts)}`);
   assert.equal(JSON.stringify(world), original);
   console.log(JSON.stringify({ scope: 'default-world', dressedFixtures: counts }));
 });
@@ -48,10 +48,10 @@ test('skipFixture removes only the dressed fixture boxes; the default output is 
   let compared = 0;
   for (const building of world.buildings) {
     const before = buildProgramArchitecture(building, 'near'); if (!before) continue;
-    const plain = buildProgramArchitecture(building, 'near', {}), skipped = buildProgramArchitecture(building, 'near', { skipFixture: studioDressesFixture })!;
+    const plain = buildProgramArchitecture(building, 'near', {}), skipped = buildProgramArchitecture(building, 'near', { skipFixture: f => studioDressesFixture(f, building.kind) })!;
     assert.deepEqual(plain, before);
     const body = getBuildingBody(building)!;
-    const dressed = body.floorPlans.flatMap(plan => plan.fixtures.filter(f => studioDressesFixture(f)).map(f => ({ plan, f })));
+    const dressed = body.floorPlans.flatMap(plan => plan.fixtures.filter(f => studioDressesFixture(f, building.kind)).map(f => ({ plan, f })));
     const inside = (part: (typeof before)[number]) => dressed.some(({ plan, f }) => part.purpose === 'furniture' && part.floor === plan.floor
       && part.position.x > f.rect.x0 && part.position.x < f.rect.x1 && part.position.z > f.rect.z0 && part.position.z < f.rect.z1);
     assert.deepEqual(skipped, before.filter(part => !inside(part)), building.id);
