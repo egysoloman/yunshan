@@ -254,7 +254,7 @@ namespace Yunshan.Runtime
             Show(root, meshes.Solid, solidMaterial);
             if (meshes.Glass != null) Show(root, meshes.Glass, glassMaterial);
             foreach (var p in StudioPropLayout.BuildingPlacements(b, studio.Bounds))
-                studio.Place(p.Asset, root, ArchitectureFloorPlan.BuildingWorldPosition(b, p.Local), b.Rotation, p.Scale);
+                studio.Place(p.Asset, root, ArchitectureFloorPlan.BuildingWorldPosition(b, p.Local), b.Rotation + p.Yaw, p.Scale);
             // Name sign above the real entrance (billboarded in LateUpdate).
             var sign = new GameObject(b.Name + " · 名牌", typeof(TextMesh)); sign.transform.SetParent(root, false);
             var entrance = ArchitectureFloorPlan.GetBuildingEntrance(b);

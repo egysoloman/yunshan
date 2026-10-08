@@ -29,7 +29,7 @@ public class StudioLayoutParityTests
         var assets = Manifest(); var world = World.CreateWorld(); var roads = StudioPropLayout.RoadTilePlacements(world, assets);
         var tree = new Obj()
             .Put("buildings", world.Buildings.Select(b => new Obj().Put("id", b.Id).Put("placements", StudioPropLayout.BuildingPlacements(b, assets)
-                .Select(p => new Obj().Put("asset", p.Asset).Put("fixtureId", p.FixtureId).Put("floor", (double)p.Floor).Put("scale", p.Scale).Put("local", Vec(p.Local))).ToList())).ToList())
+                .Select(p => new Obj().Put("asset", p.Asset).Put("fixtureId", p.FixtureId).Put("floor", (double)p.Floor).Put("scale", p.Scale).Put("local", Vec(p.Local)).Put("yaw", p.FixtureId.StartsWith("decor:") ? (object)p.Yaw : null)).ToList())).ToList())
             .Put("stations", StudioPropLayout.StationPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
             .Put("landmarks", StudioPropLayout.LandmarkPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
             .Put("decks", StudioPropLayout.DeckTilePlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("pitch", s.Pitch).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())

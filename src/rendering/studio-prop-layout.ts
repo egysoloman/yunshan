@@ -1,5 +1,5 @@
 import type { Building, BuildingKind } from '../types';
-import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, wallPanels, type FloorFixture } from '../architecture-floor-plan';
+import { contains, getBuildingBody, getFloorPlanFixtures, getFloorPlanSlabRegions, wallPanels, type FloorFixture, type Rect } from '../architecture-floor-plan';
 import manifest from './studio-assets.json';
 
 /** One imported voxel-studio GLB. Bounds are measured from the file at import. */
@@ -41,6 +41,8 @@ export interface StudioPropPlacement {
   asset: string; fixtureId: string; floor: number; scale: number;
   /** Building-local position of the asset origin; building yaw applies after. */
   local: { x: number; y: number; z: number };
+  /** Building-local turn about Y at the origin (décor only); 0 when absent. */
+  yaw?: number;
 }
 
 const assetById = new Map(STUDIO_ASSETS.map(asset => [asset.id, asset]));
@@ -104,7 +106,7 @@ export function studioCeilingLampPlacements(building: Building, assets: Readonly
 export function studioBuildingPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioPropPlacement[] {
   const body = getBuildingBody(building); if (!body) return [];
   return [...body.floorPlans.flatMap(plan => getFloorPlanFixtures(building, plan).flatMap(fixture => layoutStudioFixture(fixture, plan.floor, plan.y, assets, building.kind) ?? [])),
-    ...studioCeilingLampPlacements(building, assets)];
+    ...studioCeilingLampPlacements(building, assets), ...studioDecorPlacements(building, assets)];
 }
 
 /** A fixed, world-space studio model (origin = its min corner, yaw about Y). */
@@ -279,16 +281,18 @@ export const STUDIO_DECOR: Partial<Record<BuildingKind, readonly StudioDecorSet[
   school: [set('LIFE-109', ['LIFE-107']), set('LIFE-110'), set('LIFE-112', ['LIFE-114']), set('LIFE-116'), set('LIFE-113'), set('LIFE-112', ['LIFE-115']), set('LIFE-169'), set('LIFE-170'), set('LIFE-182'), set('LIFE-183'), set('LIFE-180')],
   hall: CIVIC_DECOR, core: CIVIC_DECOR,
   police: [set('LIFE-152'), set('LIFE-155'), set('LIFE-157', ['LIFE-158']), set('LIFE-156'), set('LIFE-159')],
-  clinic: [set('LIFE-123', ['LIFE-096']), set('LIFE-124'), set('LIFE-125', [], 'LIFE-121'), set('LIFE-127'), set('LIFE-122')],
+  clinic: [set('LIFE-123', ['LIFE-096']), set('LIFE-124'), set('LIFE-125'), set('LIFE-127', [], 'LIFE-121'), set('LIFE-122')],
   bank: [set('LIFE-089'), set('LIFE-149', ['LIFE-090']), set('LIFE-146'), set('LIFE-149', ['LIFE-019']), set('LIFE-144')],
   station: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140'), set('LIFE-091')],
   dock: [set('LIFE-087'), set('LIFE-088'), set('LIFE-075', ['LIFE-095']), set('LIFE-071')],
   airport: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140')], starport: [set('LIFE-147'), set('LIFE-193'), set('LIFE-140')],
-  pavilion: [set('ENV-098'), set('LIFE-192', ['LIFE-049']), set('ENV-104')],
 };
 export const STUDIO_DECOR_PER_FLOOR = 4;
+/** Outdoor furniture in ground-floor courtyard corners (benches and stone lamps), at most two per building. */
+export const STUDIO_COURTYARD_DECOR: readonly StudioDecorSet[] = [set('ENV-098'), set('ENV-104')];
+export const STUDIO_COURTYARD_DECOR_PER_BUILDING = 2;
 const DECOR_INSET = .22;
-export interface StudioDecorPlacement extends StudioPropPlacement { yaw: number }
+export type StudioDecorPlacement = StudioPropPlacement & { yaw: number };
 type R = { x0: number; x1: number; z0: number; z1: number };
 const overlaps = (a: R, b: R, grow = 0) => a.x0 < b.x1 + grow - 1e-9 && a.x1 > b.x0 - grow + 1e-9 && a.z0 < b.z1 + grow - 1e-9 && a.z1 > b.z0 - grow + 1e-9;
 const rectPointDistance = (r: R, x: number, z: number) => Math.hypot(Math.max(r.x0 - x, 0, x - r.x1), Math.max(r.z0 - z, 0, z - r.z1));
@@ -298,50 +302,63 @@ function rectSegmentDistance(r: R, ax: number, az: number, bx: number, bz: numbe
 export function studioDecorSeed(id: string) { let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 1000003; return h; }
 
 export function studioDecorPlacements(building: Building, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioDecorPlacement[] {
-  const sets = STUDIO_DECOR[building.kind], body = getBuildingBody(building); if (!sets?.length || !body) return [];
-  const usable = sets.filter(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : [])].every(id => assets.has(id))); if (!usable.length) return [];
+  const body = getBuildingBody(building); if (!body) return [];
+  const usableOf = (sets: readonly StudioDecorSet[] | undefined) => (sets ?? []).filter(s => [s.base, ...(s.tops ?? []), ...(s.above ? [s.above] : [])].every(id => assets.has(id)));
+  const usable = usableOf(STUDIO_DECOR[building.kind]), outdoor = usableOf(STUDIO_COURTYARD_DECOR);
   const result: StudioDecorPlacement[] = [];
-  let cursor = studioDecorSeed(building.id) % usable.length;
+  const seed = studioDecorSeed(building.id);
+  let cursor = usable.length ? seed % usable.length : 0, outdoorCursor = outdoor.length ? seed % outdoor.length : 0, outdoorPlaced = 0;
   for (const plan of body.floorPlans) {
-    const height = plan.ceilingY - plan.y, taken: R[] = [];
-    const blockers: R[] = [...plan.circulation, ...plan.courtyard, ...(plan.stairHole ? [plan.stairHole] : []), plan.stairLanding, ...plan.stairTreads.map(t => t.rect), ...plan.stairLandings.map(t => t.rect)];
-    const walls = wallPanels(plan).map(p => p.rect), fixtures = plan.fixtures.map(f => f.rect);
+    const taken: R[] = [];
+    const above = body.floorPlans.find(next => next.floor === plan.floor + 1), aboveSlabs = above ? getFloorPlanSlabRegions(above) : [];
+    const walls = wallPanels(plan).map(p => p.rect), fixtures = plan.fixtures.map(f => f.rect), stairs = [...(plan.stairHole ? [plan.stairHole] : []), plan.stairLanding, ...plan.stairTreads.map(t => t.rect), ...plan.stairLandings.map(t => t.rect)];
     const doors = plan.walls.flatMap(w => { if (!w.opening) return []; const length = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]), dx = (w.b[0] - w.a[0]) / length, dz = (w.b[1] - w.a[1]) / length; return [[w.a[0] + dx * w.opening.from, w.a[1] + dz * w.opening.from, w.a[0] + dx * w.opening.to, w.a[1] + dz * w.opening.to]]; });
     const points = [...plan.usePoints, plan.stair];
-    const inside = (r: R) => [[r.x0, r.z0], [r.x1, r.z0], [r.x0, r.z1], [r.x1, r.z1], [(r.x0 + r.x1) / 2, (r.z0 + r.z1) / 2]].every(([x, z]) => plan.interior.some(region => contains(region, x, z)));
-    let placedOnFloor = 0;
-    for (const room of plan.interior) for (const [cx, cz, sx, sz] of [[room.x0, room.z0, 1, 1], [room.x1, room.z0, -1, 1], [room.x1, room.z1, -1, -1], [room.x0, room.z1, 1, -1]] as const) {
-      if (placedOnFloor >= STUDIO_DECOR_PER_FLOOR) break;
-      for (let attempt = 0; attempt < usable.length; attempt++) {
-        const decor = usable[(cursor + attempt) % usable.length], base = assets.get(decor.base)!, b = base.boundsM;
-        const w = b.max[0] - b.min[0], d = b.max[2] - b.min[2], yaw = sz > 0 ? 0 : Math.PI;
-        const x0 = sx > 0 ? cx + DECOR_INSET : cx - DECOR_INSET - w, z0 = sz > 0 ? cz + DECOR_INSET : cz - DECOR_INSET - d, footprint = { x0, x1: x0 + w, z0, z1: z0 + d };
-        // Stack heights: every top stands centred on the one below, inside its footprint.
-        let topY = b.max[1] - b.min[1], below = base, fits = true; const stack: { asset: StudioAsset; y: number }[] = [];
-        for (const id of decor.tops ?? []) { const a = assets.get(id)!, ab = a.boundsM, bb = below.boundsM;
-          if (ab.max[0] - ab.min[0] > bb.max[0] - bb.min[0] + .02 || ab.max[2] - ab.min[2] > bb.max[2] - bb.min[2] + .02) { fits = false; break; }
-          stack.push({ asset: a, y: topY }); topY += ab.max[1] - ab.min[1]; below = a; }
-        const hung = decor.above ? assets.get(decor.above)! : undefined, hungY = b.max[1] - b.min[1] + .3;
-        const top = Math.max(topY, hung ? hungY + hung.boundsM.max[1] - hung.boundsM.min[1] : 0);
-        if (!fits || top > height - .1 || (hung && hung.boundsM.max[0] - hung.boundsM.min[0] > w + .02)) continue;
-        if (!inside(footprint) || blockers.some(r => overlaps(footprint, r)) || walls.some(r => overlaps(footprint, r)) || fixtures.some(r => overlaps(footprint, r, .6)) || taken.some(r => overlaps(footprint, r, .1))) continue;
-        if (points.some(p => rectPointDistance(footprint, p.x, p.z) < 1) || doors.some(([ax, az, bx, bz]) => rectSegmentDistance(footprint, ax, az, bx, bz) < 1.2)) continue;
-        // Local position of an origin so that the model's own bounds land in `footprint`, front (+Z) into the room.
-        const centreX = (x0 + x0 + w) / 2, centreZ = (z0 + z0 + d) / 2, c = Math.cos(yaw), s = Math.sin(yaw);
-        const origin = (a: StudioAsset, y: number) => { const ab = a.boundsM, mx = (ab.min[0] + ab.max[0]) / 2, mz = (ab.min[2] + ab.max[2]) / 2;
-          // Rotate the model-space centre offset by yaw about Y (three.js rotY), then subtract.
-          const ox = mx * c + mz * s, oz = -mx * s + mz * c; return { x: centreX - ox, y: plan.y + y - ab.min[1], z: centreZ - oz }; };
-        const backOffset = (a: StudioAsset) => { const depth = a.boundsM.max[2] - a.boundsM.min[2]; return (d - depth) / 2; };
-        const add = (a: StudioAsset, y: number, id: string, flushBack: boolean) => {
-          const o = origin(a, y), shift = flushBack ? backOffset(a) : 0;
-          // Flush with the base's back face: move toward the back (−front) by half the depth difference.
-          result.push({ asset: a.id, fixtureId: `decor:${plan.floor}:${id}`, floor: plan.floor, scale: 1, yaw, local: { x: o.x, y: o.y, z: o.z - shift * (sz > 0 ? 1 : -1) } });
-        };
-        const key = `${result.length}`;
-        add(base, 0, `${key}:base`, false);
-        stack.forEach((item, i) => add(item.asset, item.y, `${key}:top${i}`, false));
-        if (hung) add(hung, hungY, `${key}:above`, true);
-        taken.push(footprint); placedOnFloor++; cursor = (cursor + attempt + 1) % usable.length; break;
+    // Rooms: under the plan's own ceiling. Courtyards (ground floor only): open sky unless the floor above covers the spot.
+    const passes: { rooms: Rect[]; blockers: Rect[]; sets: StudioDecorSet[]; limit: number; outdoor: boolean }[] = [
+      { rooms: plan.interior, blockers: [...plan.circulation, ...plan.courtyard, ...stairs], sets: usable, limit: STUDIO_DECOR_PER_FLOOR, outdoor: false },
+      ...(plan.floor === 0 ? [{ rooms: plan.courtyard, blockers: [...plan.circulation, ...plan.interior, ...stairs], sets: outdoor, limit: STUDIO_COURTYARD_DECOR_PER_BUILDING, outdoor: true }] : []),
+    ];
+    for (const pass of passes) {
+      if (!pass.sets.length) continue;
+      const inside = (r: R) => [[r.x0, r.z0], [r.x1, r.z0], [r.x0, r.z1], [r.x1, r.z1], [(r.x0 + r.x1) / 2, (r.z0 + r.z1) / 2]].every(([x, z]) => pass.rooms.some(region => contains(region, x, z)));
+      const covered = (r: R) => [[r.x0, r.z0], [r.x1, r.z0], [r.x0, r.z1], [r.x1, r.z1], [(r.x0 + r.x1) / 2, (r.z0 + r.z1) / 2]].some(([x, z]) => aboveSlabs.some(region => contains(region, x, z)));
+      let placed = 0;
+      for (const room of pass.rooms) for (const [cx, cz, sx, sz] of [[room.x0, room.z0, 1, 1], [room.x1, room.z0, -1, 1], [room.x1, room.z1, -1, -1], [room.x0, room.z1, 1, -1]] as const) {
+        if (placed >= pass.limit || (pass.outdoor && outdoorPlaced >= pass.limit)) break;
+        const start = pass.outdoor ? outdoorCursor : cursor;
+        for (let attempt = 0; attempt < pass.sets.length; attempt++) {
+          const decor = pass.sets[(start + attempt) % pass.sets.length], base = assets.get(decor.base)!, b = base.boundsM;
+          const w = b.max[0] - b.min[0], d = b.max[2] - b.min[2], yaw = sz > 0 ? 0 : Math.PI;
+          const x0 = sx > 0 ? cx + DECOR_INSET : cx - DECOR_INSET - w, z0 = sz > 0 ? cz + DECOR_INSET : cz - DECOR_INSET - d;
+          // Stack heights: every top stands centred on the one below, inside its footprint.
+          let topY = b.max[1] - b.min[1], below = base, fits = true; const stack: { asset: StudioAsset; y: number }[] = [];
+          for (const id of decor.tops ?? []) { const a = assets.get(id)!, ab = a.boundsM, bb = below.boundsM;
+            if (ab.max[0] - ab.min[0] > bb.max[0] - bb.min[0] + .02 || ab.max[2] - ab.min[2] > bb.max[2] - bb.min[2] + .02) { fits = false; break; }
+            stack.push({ asset: a, y: topY }); topY += ab.max[1] - ab.min[1]; below = a; }
+          const hung = decor.above ? assets.get(decor.above)! : undefined, hungY = b.max[1] - b.min[1] + .3;
+          const top = Math.max(topY, hung ? hungY + hung.boundsM.max[1] - hung.boundsM.min[1] : 0);
+          // A wall object may be wider than its base: every check uses the union of both footprints.
+          const hw = hung ? Math.max(0, (hung.boundsM.max[0] - hung.boundsM.min[0] - w) / 2) : 0, extent = { x0: x0 - hw, x1: x0 + w + hw, z0, z1: z0 + d };
+          if (!fits || (!pass.outdoor || covered(extent)) && top > plan.ceilingY - plan.y - .1) continue;
+          if (!inside(extent) || pass.blockers.some(r => overlaps(extent, r)) || walls.some(r => overlaps(extent, r)) || fixtures.some(r => overlaps(extent, r, .6)) || taken.some(r => overlaps(extent, r, .1))) continue;
+          if (points.some(p => rectPointDistance(extent, p.x, p.z) < 1) || doors.some(([ax, az, bx, bz]) => rectSegmentDistance(extent, ax, az, bx, bz) < 1.2)) continue;
+          // Local origin so that the model's own bounds land in the footprint, front (+Z) into the room.
+          const centreX = x0 + w / 2, centreZ = z0 + d / 2, c = Math.cos(yaw), s = Math.sin(yaw);
+          const add = (a: StudioAsset, y: number, id: string, flushBack: boolean) => {
+            const ab = a.boundsM, mx = (ab.min[0] + ab.max[0]) / 2, mz = (ab.min[2] + ab.max[2]) / 2, ox = mx * c + mz * s, oz = -mx * s + mz * c;
+            // A wall object's back is flush with the base's back face.
+            const shift = flushBack ? (d - (ab.max[2] - ab.min[2])) / 2 * (sz > 0 ? 1 : -1) : 0;
+            result.push({ asset: a.id, fixtureId: `decor:${plan.floor}:${id}`, floor: plan.floor, scale: 1, yaw, local: { x: centreX - ox, y: plan.y + y - ab.min[1], z: centreZ - oz - shift } });
+          };
+          const key = `${result.length}`;
+          add(base, 0, `${key}:base`, false);
+          stack.forEach((item, i) => add(item.asset, item.y, `${key}:top${i}`, false));
+          if (hung) add(hung, hungY, `${key}:above`, true);
+          taken.push(extent); placed++;
+          if (pass.outdoor) { outdoorPlaced++; outdoorCursor = (start + attempt + 1) % pass.sets.length; } else cursor = (start + attempt + 1) % pass.sets.length;
+          break;
+        }
       }
     }
   }

@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
 import { deckWidth } from '../transport-geometry';
 import { terrainHeight } from '../world';
-import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, STUDIO_DECOR, STUDIO_COURTYARD_DECOR, studioBuildingPlacements, studioLandmarkPlacements, studioNetworkDetailPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -39,7 +39,8 @@ export class StudioPropPool {
     this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles, ...studioNetworkDetailPlacements(world, deckWidth, (x, z) => terrainHeight(world, x, z))];
     for (const tile of tiles) this.permanentCount.set(tile.asset, (this.permanentCount.get(tile.asset) ?? 0) + 1);
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
-    const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset)]);
+    const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset),
+      ...[...Object.values(STUDIO_DECOR), STUDIO_COURTYARD_DECOR].flatMap(sets => sets!.flatMap(d => [d.base, ...(d.tops ?? []), ...(d.above ? [d.above] : [])]))]);
     for (const asset of STUDIO_ASSETS.filter(asset => used.has(asset.id))) {
       const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, this.capacityFor(asset.id));
       this.prepare(mesh, `${asset.id} ${asset.name} · 占位`);
@@ -109,7 +110,8 @@ export class StudioPropPool {
       for (const placement of placements) {
         if (placement.floor > retained) continue;
         const distance = Math.hypot(camera.x - building.position.x, camera.y - building.position.y - placement.local.y, camera.z - building.position.z);
-        if (distance > range + Math.hypot(building.width, building.depth) / 2) continue;
+        // Décor (no fixture behind it) is near detail: half the fixture range.
+        if (distance > (placement.fixtureId.startsWith('decor:') ? range / 2 : range) + Math.hypot(building.width, building.depth) / 2) continue;
         const list = selected.get(placement.asset) ?? []; list.push({ building, placement, distance }); selected.set(placement.asset, list);
       }
     }
@@ -131,6 +133,7 @@ export class StudioPropPool {
       const fixtures = (selected.get(id) ?? []).map(({ building, placement, distance }) => ({ distance, at: (m: THREE.Matrix4) => m.makeTranslation(building.position.x, building.position.y + .6, building.position.z)
         .multiply(yaw.makeRotationY(building.rotation))
         .multiply(part.makeTranslation(placement.local.x, placement.local.y, placement.local.z))
+        .multiply(part.makeRotationY(placement.yaw ?? 0))
         .multiply(part.makeScale(placement.scale, placement.scale, placement.scale)) }));
       const statics = (fixed.get(id) ?? []).map(({ placement, distance }) => ({ distance, at: (m: THREE.Matrix4) => m.makeTranslation(placement.position.x, placement.position.y, placement.position.z).multiply(yaw.makeRotationY(placement.yaw)).multiply(part.makeRotationX(placement.pitch ?? 0)) }));
       const list = [...fixtures, ...statics].sort((a, b) => a.distance - b.distance).slice(0, this.capacityFor(id));
