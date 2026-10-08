@@ -86,6 +86,18 @@
             "asset": "LIFE-111",
             "copies": 2
           }
+        },
+        "workshop": {
+          "table": {
+            "asset": "LIFE-072",
+            "copies": 2
+          }
+        },
+        "farm": {
+          "table": {
+            "asset": "LIFE-072",
+            "copies": 2
+          }
         }
       }
     },
@@ -3695,6 +3707,31 @@
       "id": "BUILT-092",
       "name": "天枢前院灯旗铺地组合",
       "sha256": "a7cd4feaff33f369d2b80c92f28360534799b709bb96ac493e0a1d7b11467a48"
+    },
+    {
+      "id": "LIFE-072",
+      "name": "仓储货箱",
+      "sha256": "db1fdcdbfa802ee6c784bdf8c5dd2c91b3fe3d55b549a2190d036ea950cef304"
+    },
+    {
+      "id": "LIFE-119",
+      "name": "医学诊疗器械盘",
+      "sha256": "d43376fe8db28ce4239da99301e86d443bbd709b3bf0013443a3642635c973f6"
+    },
+    {
+      "id": "LIFE-106",
+      "name": "书册母版",
+      "sha256": "eda63fc76be66e25843cfa6bbf3725127a4e21549d8b968c2e7d0d68ba10eeed"
+    },
+    {
+      "id": "LIFE-171",
+      "name": "书法纸砚及笔架",
+      "sha256": "1455da426833526e6ef699b6de9412bd0c2d13d9bb1dc076e9cc5d6a131ccbbb"
+    },
+    {
+      "id": "LIFE-020",
+      "name": "书桌灯",
+      "sha256": "e0fdfa48574c089488fb45f34dc7756f72eba922066fd75b13b5f9f3c7f0a116"
     }
   ],
   "studioSourceCommit": "ce111d7a133cb5a88b3d37c002dce3b82350353e",

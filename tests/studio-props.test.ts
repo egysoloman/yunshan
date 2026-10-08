@@ -6,7 +6,7 @@ import { createWorld } from '../src/world';
 import { contains, getBuildingBody, getFloorPlanSlabRegions } from '../src/architecture-floor-plan';
 import { buildProgramArchitecture } from '../src/rendering/architecture-bodies';
 import { studioEmissiveFactor } from '../src/rendering/studio-props';
-import { CEILING_LAMP, layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioCeilingLampPlacements, studioDressing, studioStationPlacements } from '../src/rendering/studio-prop-layout';
+import { CEILING_LAMP, layoutStudioFixture, STATION_PLATFORM, STATION_SHELTER, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_MIN_FIT_SCALE, studioDressesFixture, studioCeilingLampPlacements, studioDressing, studioStationPlacements, STUDIO_TABLETOP_BASE } from '../src/rendering/studio-prop-layout';
 
 const world = createWorld();
 
@@ -28,8 +28,18 @@ test('every studio placement stays inside its authoritative fixture solid at uni
     for (const plan of body.floorPlans) for (const fixture of plan.fixtures) {
       const placements = layoutStudioFixture(fixture, plan.floor, plan.y, undefined, building.kind); if (!placements) continue;
       const dressing = studioDressing(fixture.kind, building.kind)!, asset = STUDIO_ASSETS.find(a => a.id === dressing.asset)!;
-      assert.equal(placements.length, dressing.copies);
-      for (const p of placements) {
+      const base = placements.filter(p => !p.fixtureId.endsWith(':top')), tops = placements.filter(p => p.fixtureId.endsWith(':top'));
+      assert.equal(base.length, dressing.copies);
+      assert.ok(tops.length <= 1);
+      for (const t of tops) {
+        // A tabletop object rests on the scaled table model's top, inside the table footprint.
+        const top = STUDIO_ASSETS.find(a => a.id === t.asset)!, r = fixture.rect, e = 1e-7, surface = plan.y + fixture.bottom + base[0].scale * (asset.boundsM.max[1] - asset.boundsM.min[1]);
+        assert.equal(t.scale, 1); assert.equal(dressing.asset, STUDIO_TABLETOP_BASE);
+        assert.ok(t.local.x + top.boundsM.min[0] >= r.x0 - e && t.local.x + top.boundsM.max[0] <= r.x1 + e && t.local.z + top.boundsM.min[2] >= r.z0 - e && t.local.z + top.boundsM.max[2] <= r.z1 + e, `${building.id}/${t.fixtureId} on the table`);
+        assert.ok(Math.abs(t.local.y + top.boundsM.min[1] - surface) < 1e-7 && surface <= plan.y + fixture.top + e, `${building.id}/${t.fixtureId} rests on the top`);
+        counts[t.asset] = (counts[t.asset] ?? 0) + 1;
+      }
+      for (const p of base) {
         assert.ok(p.scale >= STUDIO_MIN_FIT_SCALE && p.scale <= 1);
         const min = asset.boundsM.min.map(v => v * p.scale), max = asset.boundsM.max.map(v => v * p.scale);
         const lo = { x: p.local.x + min[0], y: p.local.y + min[1], z: p.local.z + min[2] }, hi = { x: p.local.x + max[0], y: p.local.y + max[1], z: p.local.z + max[2] };
@@ -40,7 +50,7 @@ test('every studio placement stays inside its authoritative fixture solid at uni
       counts[dressing.asset] = (counts[dressing.asset] ?? 0) + 1;
     }
   }
-  for (const id of ['LIFE-064', 'LIFE-032', 'LIFE-151', 'LIFE-111']) assert.ok((counts[id] ?? 0) > 0, `${id}: ${JSON.stringify(counts)}`);
+  for (const id of ['LIFE-064', 'LIFE-032', 'LIFE-151', 'LIFE-111', 'LIFE-072', 'LIFE-119', 'LIFE-106', 'LIFE-171', 'LIFE-020']) assert.ok((counts[id] ?? 0) > 0, `${id}: ${JSON.stringify(counts)}`);
   assert.equal(JSON.stringify(world), original);
   console.log(JSON.stringify({ scope: 'default-world', dressedFixtures: counts }));
 });

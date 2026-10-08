@@ -21,7 +21,15 @@ export const STUDIO_FIXTURE_DRESSING: Partial<Record<FloorFixture['kind'], { ass
 export const STUDIO_PROGRAM_DRESSING: Partial<Record<BuildingKind, Partial<Record<FloorFixture['kind'], { asset: string; copies: number }>>>> = {
   police: { table: { asset: 'LIFE-151', copies: 1 } },
   school: { table: { asset: 'LIFE-111', copies: 2 } },
+  // Two storage crates fill the 2.4×0.8×1.2m work-table solid exactly.
+  workshop: { table: { asset: 'LIFE-072', copies: 2 } },
+  farm: { table: { asset: 'LIFE-072', copies: 2 } },
 };
+/** One small object on the flat top of a general table model (LIFE-032),
+ * by building use. It sits on the table surface, inside the table's own
+ * footprint; nothing reaches below the top or into the use point. */
+export const STUDIO_TABLETOP: Partial<Record<BuildingKind, string>> = { clinic: 'LIFE-119', bank: 'LIFE-106', hall: 'LIFE-171', home: 'LIFE-020' };
+export const STUDIO_TABLETOP_BASE = 'LIFE-032';
 export function studioDressing(kind: FloorFixture['kind'], buildingKind?: BuildingKind, assets: ReadonlyMap<string, StudioAsset> = assetById) {
   const program = buildingKind && STUDIO_PROGRAM_DRESSING[buildingKind]?.[kind];
   return program && assets.has(program.asset) ? program : STUDIO_FIXTURE_DRESSING[kind];
@@ -49,7 +57,7 @@ export function layoutStudioFixture(fixture: FloorFixture, floor: number, floorY
   const scale = Math.min(1, slot / width, (r.z1 - r.z0) / depth, (fixture.top - fixture.bottom) / height);
   if (!(scale >= STUDIO_MIN_FIT_SCALE)) return null;
   const centerZ = (r.z0 + r.z1) / 2;
-  return Array.from({ length: dressing.copies }, (_, copy) => ({
+  const placements: StudioPropPlacement[] = Array.from({ length: dressing.copies }, (_, copy) => ({
     asset: asset.id, fixtureId: fixture.id, floor, scale,
     local: {
       x: r.x0 + slot * (copy + .5) - scale * (min[0] + max[0]) / 2,
@@ -57,6 +65,15 @@ export function layoutStudioFixture(fixture: FloorFixture, floor: number, floorY
       z: centerZ - scale * (min[2] + max[2]) / 2,
     },
   }));
+  const top = fixture.kind === 'table' && asset.id === STUDIO_TABLETOP_BASE && buildingKind ? assets.get(STUDIO_TABLETOP[buildingKind] ?? '') : undefined;
+  if (top) {
+    const b = top.boundsM, footprint = asset.boundsM;
+    // Only when the object stands within the scaled table top.
+    if (b.max[0] - b.min[0] <= scale * (footprint.max[0] - footprint.min[0]) && b.max[2] - b.min[2] <= scale * (footprint.max[2] - footprint.min[2]))
+      placements.push({ asset: top.id, fixtureId: `${fixture.id}:top`, floor, scale: 1,
+        local: { x: (r.x0 + r.x1) / 2 - (b.min[0] + b.max[0]) / 2, y: floorY + fixture.bottom + scale * (footprint.max[1] - footprint.min[1]) - b.min[1], z: centerZ - (b.min[2] + b.max[2]) / 2 } });
+  }
+  return placements;
 }
 
 /** True when the fixture is shown by a studio asset instead of boxes. */

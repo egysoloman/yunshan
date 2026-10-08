@@ -42,7 +42,12 @@ namespace Yunshan.Core
         {
             ["police"] = new Dictionary<string, (string, int)> { ["table"] = ("LIFE-151", 1) },
             ["school"] = new Dictionary<string, (string, int)> { ["table"] = ("LIFE-111", 2) },
+            ["workshop"] = new Dictionary<string, (string, int)> { ["table"] = ("LIFE-072", 2) },
+            ["farm"] = new Dictionary<string, (string, int)> { ["table"] = ("LIFE-072", 2) },
         };
+        /// <summary>Port of STUDIO_TABLETOP: one object on a general table model's top.</summary>
+        public static readonly Dictionary<string, string> Tabletop = new Dictionary<string, string> { ["clinic"] = "LIFE-119", ["bank"] = "LIFE-106", ["hall"] = "LIFE-171", ["home"] = "LIFE-020" };
+        public const string TabletopBase = "LIFE-032";
         public const string CeilingLampAsset = "LIFE-028";
         public const double CeilingLampSlabThickness = .2, CeilingLampEyeClearance = 1.72;
         public const string StationPlatformAsset = "BUILT-154", StationShelterAsset = "BUILT-155";
@@ -65,11 +70,19 @@ namespace Yunshan.Core
             double scale = JsMath.Min(JsMath.Min(JsMath.Min(1, slot / width), (r.Z1 - r.Z0) / depth), (fixture.Top - fixture.Bottom) / height);
             if (!(scale >= MinFitScale)) return null;
             double centerZ = (r.Z0 + r.Z1) / 2;
-            return Enumerable.Range(0, dressing.Value.Copies).Select(copy => new StudioPropPlacement
+            var placements = Enumerable.Range(0, dressing.Value.Copies).Select(copy => new StudioPropPlacement
             {
                 Asset = asset.Id, FixtureId = fixture.Id, Floor = floor, Scale = scale,
                 Local = new Vec3(r.X0 + slot * (copy + .5) - scale * (min[0] + max[0]) / 2, floorY + fixture.Bottom - scale * min[1], centerZ - scale * (min[2] + max[2]) / 2),
             }).ToList();
+            if (fixture.Kind == "table" && asset.Id == TabletopBase && buildingKind != null && Tabletop.TryGetValue(buildingKind, out var topId) && assets.TryGetValue(topId, out var top))
+            {
+                double[] bmin = top.Min, bmax = top.Max;
+                if (bmax[0] - bmin[0] <= scale * (max[0] - min[0]) && bmax[2] - bmin[2] <= scale * (max[2] - min[2]))
+                    placements.Add(new StudioPropPlacement { Asset = top.Id, FixtureId = fixture.Id + ":top", Floor = floor, Scale = 1,
+                        Local = new Vec3((r.X0 + r.X1) / 2 - (bmin[0] + bmax[0]) / 2, floorY + fixture.Bottom + scale * (max[1] - min[1]) - bmin[1], centerZ - (bmin[2] + bmax[2]) / 2) });
+            }
+            return placements;
         }
 
         public static bool DressesFixture(FloorFixture fixture, string buildingKind, IReadOnlyDictionary<string, StudioAssetBounds> assets) => LayoutFixture(fixture, 0, 0, assets, buildingKind) != null;

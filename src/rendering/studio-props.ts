@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
-import { CEILING_LAMP, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { CEILING_LAMP, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -31,7 +31,7 @@ export class StudioPropPool {
     for (const building of world.buildings) this.buildings.set(building.id, building);
     this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world)];
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
-    const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...this.statics.map(p => p.asset)]);
+    const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset)]);
     for (const asset of STUDIO_ASSETS.filter(asset => used.has(asset.id))) {
       const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, capacity);
       this.prepare(mesh, `${asset.id} ${asset.name} · 占位`);
