@@ -110,6 +110,26 @@ namespace Yunshan.Core
             return edges;
         }
 
+        /// <summary>Port of guardrailSpans: the visible rail pieces of one segment,
+        /// split where a same-level street crosses the side rail.</summary>
+        public static List<(Vec3 A, Vec3 B)> GuardrailSpans(WorldDefinition world, NetworkEdge edge, int segmentIndex)
+        {
+            var result = new List<(Vec3, Vec3)>();
+            if (segmentIndex - 1 < 0 || segmentIndex >= edge.Points.Count) return result;
+            Vec3 a = edge.Points[segmentIndex - 1], b = edge.Points[segmentIndex];
+            if (edge.Mode != "road" && edge.Mode != "bridge") { result.Add((a, b)); return result; }
+            if (!GuardLayouts(world).TryGetValue(edge, out var layout)) return result;
+            double preceding = layout.Preceding[segmentIndex - 1], length = layout.Lengths[segmentIndex - 1];
+            if (length < 1e-8) return result;
+            Vec3 At(double along) { double t = (along - preceding) / length; return new Vec3(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t, a.Z + (b.Z - a.Z) * t); }
+            foreach (var interval in layout.Intervals)
+            {
+                double start = System.Math.Max(interval.Start, preceding), end = System.Math.Min(interval.End, preceding + length);
+                if (end > start + 1e-8) result.Add((At(start), At(end)));
+            }
+            return result;
+        }
+
         public static bool HasGuardrailAt(WorldDefinition world, NetworkEdge edge, double along)
         {
             if (!GuardLayouts(world).TryGetValue(edge, out var layout)) return false;

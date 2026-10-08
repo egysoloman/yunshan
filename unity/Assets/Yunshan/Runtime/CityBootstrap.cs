@@ -96,7 +96,12 @@ namespace Yunshan.Runtime
                 // Landmarks drawn by studio models (runway slab, core forecourt) replace their own strips.
                 var landmarks = StudioPropLayout.LandmarkPlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList();
                 bool runwayDressed = landmarks.Any(p => p.Id.EndsWith(":runway"));
-                Show(transform, CityGeometry.NetworkMesh(world, edge => runwayDressed && edge.Id == StudioPropLayout.RunwayEdgeId), solidMaterial);
+                // The web renderer's network boxes (decks, rails, guardrails, supports,
+                // bridges, lifts, cables, junction poles), emitted off the main thread.
+                bool stationsDressed = studio.Has(StudioPropLayout.StationPlatformAsset) && studio.Has(StudioPropLayout.StationShelterAsset);
+                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed); return sink; });
+                var networkRoot = new GameObject("路网结构").transform; networkRoot.SetParent(transform, false);
+                foreach (var (mesh, glow) in network.Build()) Show(networkRoot, mesh, glow ? glassMaterial : solidMaterial);
                 Show(transform, CityGeometry.WaterMesh(world), waterMaterial);
                 var landmarkRoot = new GameObject("体素工坊地标").transform; landmarkRoot.SetParent(transform, false);
                 foreach (var l in landmarks) studio.Place(l.Asset, landmarkRoot, l.Position, l.Yaw, 1);
