@@ -1,0 +1,79 @@
+import type { Vec3, WorldDefinition } from '../types';
+import { getWaterfallPath, terrainHeight } from '../world';
+
+/** Shared woodland placement for the web renderer and the Unity client (C#
+ * Core/WoodlandLayout.cs, parity-tested). Trees and shrubs are display only:
+ * no collision, walking surface or stock comes from them.
+ *
+ * Sizes are the voxel-studio models' own (user decision 2026-10-08: trees use
+ * the assets' original size, never enlarged), so a tree's height is the
+ * height of the model its species selects. */
+export const WOODLAND_TILE = 96;
+export const WOODLAND_MAX_TREES = 5200;
+/** Species index (0–8, as the original woodland) → studio tree model. */
+export const WOODLAND_SPECIES_ASSETS = ['ENV-057', 'ENV-056', 'ENV-050', 'ENV-054', 'ENV-054', 'ENV-055', 'ENV-055', 'ENV-050', 'ENV-050'] as const;
+export const WOODLAND_SHRUB_ASSET = 'ENV-060';
+/** Heights of those models (studio-assets.json bounds), used for the far proxy and the contract. */
+export const WOODLAND_ASSET_HEIGHTS: Readonly<Record<string, number>> = { 'ENV-050': 16, 'ENV-054': 14, 'ENV-055': 14, 'ENV-056': 8.4, 'ENV-057': 10, 'ENV-060': 1.8 };
+
+export interface WoodlandTree { id: number; asset: string; species: number; x: number; y: number; z: number; height: number; yaw: number }
+export interface WoodlandShrub { id: number; asset: string; x: number; y: number; z: number; yaw: number }
+interface Segment { a: Vec3; b: Vec3; width: number }
+
+const quantize = (value: number) => Math.round(value / .2) * .2;
+export function woodlandHash(x: number, z: number, seed: number) { const value = Math.sin(x * 12.9898 + z * 78.233 + seed * .113) * 43758.5453; return value - Math.floor(value); }
+function progress(x: number, z: number, a: Vec3, b: Vec3) { const dx = b.x - a.x, dz = b.z - a.z; return Math.min(1, Math.max(0, ((x - a.x) * dx + (z - a.z) * dz) / (dx * dx + dz * dz || 1))); }
+function distanceToSegment(x: number, z: number, a: Vec3, b: Vec3) { const t = progress(x, z, a, b); return Math.hypot(x - a.x - (b.x - a.x) * t, z - a.z - (b.z - a.z) * t); }
+
+/** Ground clearance used by trees and other terrain dressing: off building
+ * footprints, roads, the waterfall path, the river and the plunge pool. */
+export function createGroundClearance(world: WorldDefinition) {
+  const buildings = new Map<string, typeof world.buildings>(), roads = new Map<string, Segment[]>();
+  const indexItem = <T>(map: Map<string, T[]>, item: T, ax: number, az: number, bx: number, bz: number, margin: number) => {
+    for (let x = Math.floor((Math.min(ax, bx) - margin) / WOODLAND_TILE); x <= Math.floor((Math.max(ax, bx) + margin) / WOODLAND_TILE); x++) for (let z = Math.floor((Math.min(az, bz) - margin) / WOODLAND_TILE); z <= Math.floor((Math.max(az, bz) + margin) / WOODLAND_TILE); z++) { const key = `${x}:${z}`, list = map.get(key) ?? []; list.push(item); map.set(key, list); }
+  };
+  for (const b of world.buildings) indexItem(buildings, b, b.position.x - b.width / 2, b.position.z - b.depth / 2, b.position.x + b.width / 2, b.position.z + b.depth / 2, 12);
+  for (const edge of world.edges) if (['road', 'bridge', 'lightRail'].includes(edge.mode)) for (let i = 1; i < edge.points.length; i++) {
+    const segment = { a: edge.points[i - 1], b: edge.points[i], width: edge.id.includes('airport-runway-strip') ? 22 : 5 };
+    indexItem(roads, segment, segment.a.x, segment.a.z, segment.b.x, segment.b.z, segment.width + 14);
+  }
+  const river: Segment[] = world.river.slice(1).map((point, i) => ({ a: world.river[i], b: point, width: 12 + Math.min(i + 1, 5) * .6 }));
+  const fallProfile = getWaterfallPath(world);
+  const bucket = (x: number, z: number) => `${Math.floor(x / WOODLAND_TILE)}:${Math.floor(z / WOODLAND_TILE)}`;
+  const riverAt = (x: number, z: number) => {
+    let best = { distance: Infinity, width: 14 };
+    for (const s of river) { const dist = distanceToSegment(x, z, s.a, s.b); if (dist < best.distance) best = { distance: dist, width: s.width }; }
+    return best;
+  };
+  return (x: number, z: number, margin: number) => {
+    if ((buildings.get(bucket(x, z)) ?? []).some(b => Math.abs(x - b.position.x) < b.width / 2 + margin && Math.abs(z - b.position.z) < b.depth / 2 + margin)) return false;
+    if ((roads.get(bucket(x, z)) ?? []).some(s => distanceToSegment(x, z, s.a, s.b) < s.width + margin)) return false;
+    if (fallProfile.slice(1).some((point, i) => distanceToSegment(x, z, fallProfile[i], point) < 46 + margin)) return false;
+    const r = riverAt(x, z); return r.distance > r.width + margin && Math.hypot(x - world.waterfall.bottom.x, z - world.waterfall.bottom.z) > 56;
+  };
+}
+
+/** Woodland grows in overlapping stands along the actual neighbourhood edge
+ * and the mountain shoulder (the original stand and sampling rules). */
+export function woodlandLayout(world: WorldDefinition): { trees: WoodlandTree[]; shrubs: WoodlandShrub[]; stands: number } {
+  const clear = createGroundClearance(world), surface = (x: number, z: number) => quantize(terrainHeight(world, x, z, true));
+  const stands = world.districts.filter(district => !['airport', 'starport'].includes(district.kind)).flatMap((district, index) => Array.from({ length: 8 }, (_, side) => {
+    const angle = side / 8 * Math.PI * 2 + index * .21, distance = district.radius * .86;
+    return { x: district.center.x + Math.cos(angle) * distance, z: district.center.z + Math.sin(angle) * distance, radius: 100 };
+  }));
+  for (const mountain of world.mountains) for (let side = 0; side < 5; side++) { const angle = side / 5 * Math.PI * 2; stands.push({ x: mountain.x + Math.cos(angle) * mountain.radius * .54, z: mountain.z + Math.sin(angle) * mountain.radius * .54, radius: 65 }); }
+  if (!stands.length) stands.push({ x: 0, z: 0, radius: world.size * .35 });
+  const trees: WoodlandTree[] = [], shrubs: WoodlandShrub[] = [];
+  for (let i = 0; i < 70000 && trees.length < WOODLAND_MAX_TREES; i++) {
+    const stand = stands[i % stands.length], angle = woodlandHash(i, 38, world.seed) * Math.PI * 2, radius = Math.sqrt(woodlandHash(i, 73, world.seed)) * stand.radius;
+    const x = quantize(stand.x + Math.cos(angle) * radius), z = quantize(stand.z + Math.sin(angle) * radius), y = surface(x, z);
+    if (y < 8 || y > 630 || !clear(x, z, 3)) continue;
+    if (Math.abs(surface(x + 2, z) - y) > 8 || Math.abs(surface(x, z + 2) - y) > 8) continue;
+    const species = Math.floor(i / stands.length) % 9, asset = WOODLAND_SPECIES_ASSETS[species];
+    // Quarter turns keep the 0.2m voxel grid of the model aligned with the world.
+    const yaw = Math.floor(woodlandHash(i, 94, world.seed) * 4) * Math.PI / 2;
+    trees.push({ id: i, asset, species, x, y, z, height: WOODLAND_ASSET_HEIGHTS[asset], yaw });
+    if (i % 2 === 0) shrubs.push({ id: i, asset: WOODLAND_SHRUB_ASSET, x: quantize(x + 3.2), y: surface(quantize(x + 3.2), quantize(z + 2)), z: quantize(z + 2), yaw: Math.floor(woodlandHash(i, 95, world.seed) * 4) * Math.PI / 2 });
+  }
+  return { trees, shrubs, stands: stands.length };
+}

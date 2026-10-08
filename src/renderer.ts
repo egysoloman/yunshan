@@ -11,6 +11,7 @@ import { ArchitectureDetailManager, architectureFacadeLayout } from './rendering
 import { CitizenAppearancePool } from './rendering/citizen-appearance';
 import { MarketGoodsPool } from './rendering/market-goods';
 import { StudioPropPool } from './rendering/studio-props';
+import { WoodlandModelPool } from './rendering/woodland-models';
 import { studioDressesFixture } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
@@ -103,6 +104,7 @@ export class CityRenderer implements CityRendererAPI {
   readonly renderer: THREE.WebGLRenderer;
   private materials: Record<MaterialKey, THREE.MeshStandardMaterial>;
   private landscape: ReturnType<typeof buildLandscape>;
+  private woodlandModels: WoodlandModelPool;
   private architectureDetail: ArchitectureDetailManager;
   private chunks: CityChunk[] = [];
   private nearChunks!: NearChunkResidency<NearCityResource>;
@@ -407,6 +409,8 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
+    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled);
+    void this.woodlandModels.load();
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
     this.studioProps = new StudioPropPool(this.scene, world);
     void this.studioProps.load();
@@ -956,6 +960,7 @@ export class CityRenderer implements CityRendererAPI {
     this.chunks = residents.map(({ chunk, resource }) => ({ center: { ...chunk.center }, radius: chunk.radius, detail: resource.group, near: true, buildingIds: new Set(chunk.buildingIds) }));
     this.scene.userData.buildingResidency = this.nearChunks.getStats();
     this.landscape.update(this.camera.position, this.quality);
+    this.woodlandModels.update(this.camera.position, this.quality);
     for (const mesh of this.distanceDetails) { const bounds = mesh.boundingSphere!; mesh.visible = bounds.center.distanceTo(this.camera.position) < bounds.radius + (this.quality === 'high' ? 300 : this.quality === 'low' ? 90 : 180); }
     this.architectureDetail.update(this.camera.position, { buildingId: this.insideId, floor: this.insideFloor }, this.quality);
     for (const material of this.landscape.water) if (material.uniforms.time) material.uniforms.time.value = elapsed;
@@ -1074,7 +1079,7 @@ export class CityRenderer implements CityRendererAPI {
     this.stationWayfinding?.dispose();
     this.scene.remove(this.roadClosures.group); this.roadClosures.dispose();
     this.architectureDetail.dispose();
-    this.scene.remove(this.landscape.group); this.landscape.dispose();
+    this.woodlandModels.dispose(); this.scene.remove(this.landscape.group); this.landscape.dispose();
     const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>();
     // Palette materials are renderer-owned even after every near chunk using
     // one of them has been evicted. Dispose them once with attached materials.

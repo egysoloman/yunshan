@@ -6,6 +6,7 @@
  *
  *   npx tsx scripts/export-art-contract.ts
  */
+import { WOODLAND_ASSET_HEIGHTS, WOODLAND_SHRUB_ASSET, WOODLAND_SPECIES_ASSETS } from '../src/rendering/woodland-layout';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { createWorld } from '../src/world';
 import { getBuildingBody } from '../src/architecture-floor-plan';
@@ -70,8 +71,10 @@ const contract = {
     rejected: [{ id: 'BUILT-071', reason: '1.44m high; fits only at 0.69 scale or hangs to 1.36m, below eye height' }, { id: 'BUILT-249', reason: '1.2m high; needs 0.83 scale' }],
   },
   woodland: {
-    trees: 5200, heightRangeM: [16, 31], heightQuantumM: world.voxelSize, trunkSectionM: .8, crownTiers: 4,
-    note: 'woodland is display only; studio trees (8–14m) are shorter than game trees and are not used until a matching height family exists at 0.2m voxels',
+    trees: 5200, heightQuantumM: world.voxelSize, layout: 'src/rendering/woodland-layout.ts (C# Core/WoodlandLayout.cs, parity-tested)',
+    speciesAssets: WOODLAND_SPECIES_ASSETS, shrubAsset: WOODLAND_SHRUB_ASSET, assetHeightsM: WOODLAND_ASSET_HEIGHTS,
+    origin: 'trunk base at the model origin, placed on the quantized terrain surface; yaw in quarter turns',
+    note: 'woodland is display only. User decision 2026-10-08: trees use the studio models at their original size (8.4–16m), never enlarged; the earlier 16–31m procedural heights were replaced. Near trees draw the GLB, farther trees a trunk and crown proxy at the same height.',
   },
   vehicles: {
     note: 'network vehicles are display only: position, edge, direction and state come from the simulation; origin at the vehicle position on its edge, +Z along travel; boxes are centred at y above that position',

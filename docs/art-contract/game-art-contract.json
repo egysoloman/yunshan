@@ -203,14 +203,30 @@
   },
   "woodland": {
     "trees": 5200,
-    "heightRangeM": [
-      16,
-      31
-    ],
     "heightQuantumM": 0.2,
-    "trunkSectionM": 0.8,
-    "crownTiers": 4,
-    "note": "woodland is display only; studio trees (8–14m) are shorter than game trees and are not used until a matching height family exists at 0.2m voxels"
+    "layout": "src/rendering/woodland-layout.ts (C# Core/WoodlandLayout.cs, parity-tested)",
+    "speciesAssets": [
+      "ENV-057",
+      "ENV-056",
+      "ENV-050",
+      "ENV-054",
+      "ENV-054",
+      "ENV-055",
+      "ENV-055",
+      "ENV-050",
+      "ENV-050"
+    ],
+    "shrubAsset": "ENV-060",
+    "assetHeightsM": {
+      "ENV-050": 16,
+      "ENV-054": 14,
+      "ENV-055": 14,
+      "ENV-056": 8.4,
+      "ENV-057": 10,
+      "ENV-060": 1.8
+    },
+    "origin": "trunk base at the model origin, placed on the quantized terrain surface; yaw in quarter turns",
+    "note": "woodland is display only. User decision 2026-10-08: trees use the studio models at their original size (8.4–16m), never enlarged; the earlier 16–31m procedural heights were replaced. Near trees draw the GLB, farther trees a trunk and crown proxy at the same height."
   },
   "vehicles": {
     "note": "network vehicles are display only: position, edge, direction and state come from the simulation; origin at the vehicle position on its edge, +Z along travel; boxes are centred at y above that position",
@@ -3639,6 +3655,36 @@
       "id": "BUILT-155",
       "name": "既有站台两柱候车棚",
       "sha256": "7e0e7cb50bb2a08552d29fc20d74e30454267e05a9f390944a33e02f1e95c59f"
+    },
+    {
+      "id": "ENV-050",
+      "name": "既有量化乔木树干与错层冠母版",
+      "sha256": "5bc23e40bf7200477dbf37c2d1d36d9a02ffb6188bec1b93f36d2bc1737868df"
+    },
+    {
+      "id": "ENV-054",
+      "name": "松类体素分枝树母版",
+      "sha256": "cd61a20e1e8c25bcb67d7cb67edffbc5b19e17462dbf5377cd3876394b31df80"
+    },
+    {
+      "id": "ENV-055",
+      "name": "柏类柱冠树母版",
+      "sha256": "768d2ebff72dda7f23654fba3d008e143d2394a7331eff61a7f26eea1ea1842d"
+    },
+    {
+      "id": "ENV-056",
+      "name": "竹竿竹节与叶簇母版",
+      "sha256": "caa2965e54a356f3d8276b35bd2ea1a7e3b495a98bc7e66f98c7f6312595a727"
+    },
+    {
+      "id": "ENV-057",
+      "name": "阔叶分枝与开阔树冠母版",
+      "sha256": "81ae74b5f10b3e85b7230c3be7bac0a908cb22fca4d5a5be1c920bed8be55976"
+    },
+    {
+      "id": "ENV-060",
+      "name": "既有灌木低冠组件",
+      "sha256": "7e3ec0129dd99ca3b79997d46b6e922b63e2ec2db1712a075608cc95c39275e8"
     }
   ],
   "studioSourceCommit": "ce111d7a133cb5a88b3d37c002dce3b82350353e",

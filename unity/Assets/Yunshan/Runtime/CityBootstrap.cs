@@ -34,6 +34,7 @@ namespace Yunshan.Runtime
         readonly Dictionary<string, (TextMesh text, Building building)> shopSigns = new Dictionary<string, (TextMesh, Building)>();
         Font signFont;
         StationSignPool stationSigns; float nextStationSigns;
+        WoodlandView woodland;
         Vector2 contextScroll, panesScroll;
         CityMapImage mapImage; Texture2D mapTexture; string mapSelection;
         int paneTab;
@@ -100,6 +101,9 @@ namespace Yunshan.Runtime
                 foreach (var b in world.Buildings) far[b.Id] = Show(farRoot, CityGeometry.FarBuildingMesh(b), solidMaterial);
                 var stationRoot = new GameObject("站台与候车棚").transform; stationRoot.SetParent(transform, false);
                 foreach (var s in StudioPropLayout.StationPlacements(world, studio.Bounds)) studio.Place(s.Asset, stationRoot, s.Position, s.Yaw, 1);
+                status = "山林……";
+                var woodlandLayout = await Task.Run(() => WoodlandLayout.Layout(world));
+                woodland = new WoodlandView(woodlandLayout, studio, transform);
 
                 walker = view.gameObject.AddComponent<FirstPersonController>();
                 walker.Initialise(world, view, CanAccess, () => session.Voxels);
@@ -253,6 +257,7 @@ namespace Yunshan.Runtime
             if (walker != null && GUIUtility.keyboardControl == 0) HandleKeys();
             UpdateSky();
             if (life != null && session.Frame != null) life.Draw(session, feet);
+            if (woodland != null) woodland.Update(view.transform.position);
         }
 
         void HandleKeys()
