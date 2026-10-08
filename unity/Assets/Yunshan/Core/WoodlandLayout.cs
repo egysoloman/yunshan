@@ -93,5 +93,34 @@ namespace Yunshan.Core
             }
             return result;
         }
+
+        public sealed class Block { public double X, Y, Z, W, H, D; }
+        public sealed class Dressing { public List<Block> Stones = new List<Block>(), Reeds = new List<Block>(), Foam = new List<Block>(); }
+        /// <summary>Port of riverDressing: creek bank stones and reeds, plunge-pool foam.</summary>
+        public static Dressing RiverDressing(WorldDefinition world)
+        {
+            var clear = GroundClearance(world); var result = new Dressing();
+            double Surface(double x, double z) => Quantize(World.TerrainHeight(world, x, z, true));
+            for (int i = 1; i < world.River.Count; i++)
+            {
+                Vec3 p = world.River[i], before = world.River[i - 1]; double width = 12 + System.Math.Min(i, 5) * .6;
+                double segmentLength = JsMath.Hypot(p.X - before.X, p.Z - before.Z), tangentX = -(p.Z - before.Z) / segmentLength, tangentZ = (p.X - before.X) / segmentLength;
+                for (double along = 0; along < segmentLength; along += 5.6) foreach (var side in new[] { -1, 1 })
+                {
+                    double t = along / segmentLength;
+                    double x = Quantize(before.X + (p.X - before.X) * t + tangentX * (width + 2 + Hash(along, i, world.Seed) * 3) * side), z = Quantize(before.Z + (p.Z - before.Z) * t + tangentZ * (width + 2 + Hash(along, i, world.Seed) * 3) * side), y = Surface(x, z);
+                    if (!clear(x, z, 1.2) || y > before.Y + (p.Y - before.Y) * t + 9) continue;
+                    result.Stones.Add(new Block { X = x, Y = y + .35, Z = z, W = Quantize(1.2 + Hash(along, i + 2, world.Seed) * 2.8), H = .6, D = Quantize(1 + Hash(along, i + 3, world.Seed) * 2) });
+                    if (along % 11.2 < 1) for (int stem = 0; stem < 4; stem++) result.Reeds.Add(new Block { X = x + stem * .4, Y = y + .8, Z = z + stem % 2 * .4, W = .2, H = 1.6, D = .2 });
+                }
+            }
+            var bottom = world.Waterfall.Bottom;
+            for (int i = 0; i < 80; i++)
+            {
+                double angle = i * 2.39996, r = 3 + Hash(i, 805, world.Seed) * 21;
+                result.Foam.Add(new Block { X = Quantize(bottom.X + JsMath.Cos(angle) * r), Y = bottom.Y + .72, Z = Quantize(bottom.Z + JsMath.Sin(angle) * r), W = Quantize(.8 + Hash(i, 806, world.Seed) * 2), H = .2, D = .4 });
+            }
+            return result;
+        }
     }
 }

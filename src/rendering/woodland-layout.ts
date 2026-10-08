@@ -77,3 +77,25 @@ export function woodlandLayout(world: WorldDefinition): { trees: WoodlandTree[];
   }
   return { trees, shrubs, stands: stands.length };
 }
+
+export interface DressingBlock { x: number; y: number; z: number; w: number; h: number; d: number }
+/** Riverbank stones and reeds along the creek, and the plunge-pool foam
+ * (the terrain's original rules; also drawn by Unity via
+ * Core/WoodlandLayout.RiverDressing, parity-tested). Display only. */
+export function riverDressing(world: WorldDefinition): { stones: DressingBlock[]; reeds: DressingBlock[]; foam: DressingBlock[] } {
+  const clear = createGroundClearance(world), surface = (x: number, z: number) => quantize(terrainHeight(world, x, z, true));
+  const stones: DressingBlock[] = [], reeds: DressingBlock[] = [], foam: DressingBlock[] = [];
+  for (let i = 1; i < world.river.length; i++) {
+    const p = world.river[i], before = world.river[i - 1], width = 12 + Math.min(i, 5) * .6;
+    const segmentLength = Math.hypot(p.x - before.x, p.z - before.z), tangentX = -(p.z - before.z) / segmentLength, tangentZ = (p.x - before.x) / segmentLength;
+    for (let along = 0; along < segmentLength; along += 5.6) for (const side of [-1, 1]) {
+      const t = along / segmentLength, x = quantize(before.x + (p.x - before.x) * t + tangentX * (width + 2 + woodlandHash(along, i, world.seed) * 3) * side), z = quantize(before.z + (p.z - before.z) * t + tangentZ * (width + 2 + woodlandHash(along, i, world.seed) * 3) * side), y = surface(x, z);
+      if (!clear(x, z, 1.2) || y > before.y + (p.y - before.y) * t + 9) continue;
+      stones.push({ x, y: y + .35, z, w: quantize(1.2 + woodlandHash(along, i + 2, world.seed) * 2.8), h: .6, d: quantize(1 + woodlandHash(along, i + 3, world.seed) * 2) });
+      if (along % 11.2 < 1) for (let stem = 0; stem < 4; stem++) reeds.push({ x: x + stem * .4, y: y + .8, z: z + stem % 2 * .4, w: .2, h: 1.6, d: .2 });
+    }
+  }
+  const bottom = world.waterfall.bottom;
+  for (let i = 0; i < 80; i++) { const angle = i * 2.39996, r = 3 + woodlandHash(i, 805, world.seed) * 21; foam.push({ x: quantize(bottom.x + Math.cos(angle) * r), y: bottom.y + .72, z: quantize(bottom.z + Math.sin(angle) * r), w: quantize(.8 + woodlandHash(i, 806, world.seed) * 2), h: .2, d: .4 }); }
+  return { stones, reeds, foam };
+}

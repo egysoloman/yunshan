@@ -115,6 +115,12 @@ namespace Yunshan.Runtime
                 status = "山林……";
                 var woodlandLayout = await Task.Run(() => WoodlandLayout.Layout(world));
                 woodland = new WoodlandView(woodlandLayout, studio, transform);
+                // Creek bank stones, reeds and plunge-pool foam (parity with the web terrain).
+                var dressing = await Task.Run(() => WoodlandLayout.RiverDressing(world));
+                var banks = new GameMeshBuilder();
+                void Blocks(List<WoodlandLayout.Block> blocks, string hex) { var c = Space.Hex(hex); foreach (var b in blocks) banks.Box(b.X - b.W / 2, b.Y - b.H / 2, b.Z - b.D / 2, b.X + b.W / 2, b.Y + b.H / 2, b.Z + b.D / 2, c); }
+                Blocks(dressing.Stones, "#a5aaa0"); Blocks(dressing.Reeds, "#849a6b"); Blocks(dressing.Foam, "#d3e9df");
+                Show(transform, banks.Build("溪岸石、芦苇与瀑潭泡沫"), solidMaterial);
 
                 walker = view.gameObject.AddComponent<FirstPersonController>();
                 walker.Initialise(world, view, CanAccess, () => session.Voxels);

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { Quality, Vec3, WorldDefinition } from '../types';
 import { getWaterfallPath, terrainHeight } from '../world';
-import { woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
+import { riverDressing, woodlandLayout, type WoodlandShrub, type WoodlandTree } from './woodland-layout';
 
 interface Block { x: number; y: number; z: number; w: number; h: number; d: number; color: THREE.Color; id?: number }
 interface Segment { a: Vec3; b: Vec3; width: number; cutting?: boolean; bridge?: boolean }
@@ -316,21 +316,15 @@ export function buildLandscape(world: WorldDefinition): {
   // world-space material normals and the near shell keeps real stepped faces.
 
   const water: THREE.ShaderMaterial[] = [createWater(false), createWater(true)]; materials.add(water[0]); materials.add(water[1]);
-  const bankBlocks: Block[] = [], reeds: Block[] = [];
+  // Bank stones, reeds and foam come from the shared dressing (also drawn by Unity).
+  const dressing = riverDressing(world);
+  const bankBlocks: Block[] = dressing.stones.map(b => ({ ...b, color: new THREE.Color('#a5aaa0') })), reeds: Block[] = dressing.reeds.map(b => ({ ...b, color: new THREE.Color('#849a6b') }));
   const vertices: number[] = [], uvs: number[] = [], indices: number[] = []; let flowDistance = 0;
   for (let i = 0; i < world.river.length; i++) {
     const p = world.river[i], before = world.river[Math.max(0, i - 1)], after = world.river[Math.min(world.river.length - 1, i + 1)]; if (i) flowDistance += Math.hypot(p.x - before.x, p.z - before.z);
     const dx = after.x - before.x, dz = after.z - before.z, length = Math.hypot(dx, dz) || 1, nx = -dz / length, nz = dx / length, width = 12 + Math.min(i, 5) * .6;
     vertices.push(p.x + nx * width, p.y + .55, p.z + nz * width, p.x - nx * width, p.y + .55, p.z - nz * width); uvs.push(0, flowDistance / 40, 1, flowDistance / 40);
     if (i) { const n = i * 2; indices.push(n - 2, n, n - 1, n - 1, n, n + 1); }
-    if (!i) continue;
-    const segmentLength = Math.hypot(p.x - before.x, p.z - before.z), tangentX = -(p.z - before.z) / segmentLength, tangentZ = (p.x - before.x) / segmentLength;
-    for (let along = 0; along < segmentLength; along += 5.6) for (const side of [-1, 1]) {
-      const t = along / segmentLength, x = quantize(before.x + (p.x - before.x) * t + tangentX * (width + 2 + hash(along, i, world.seed) * 3) * side), z = quantize(before.z + (p.z - before.z) * t + tangentZ * (width + 2 + hash(along, i, world.seed) * 3) * side), y = surfaceHeight(x, z);
-      if (!clearGround(x, z, 1.2) || y > before.y + (p.y - before.y) * t + 9) continue;
-      bankBlocks.push({ x, y: y + .35, z, w: quantize(1.2 + hash(along, i + 2, world.seed) * 2.8), h: .6, d: quantize(1 + hash(along, i + 3, world.seed) * 2), color: new THREE.Color('#a5aaa0') });
-      if (along % 11.2 < 1) for (let stem = 0; stem < 4; stem++) reeds.push({ x: x + stem * .4, y: y + .8, z: z + stem % 2 * .4, w: .2, h: 1.6, d: .2, color: new THREE.Color('#849a6b') });
-    }
   }
   const streamGeometry = new THREE.BufferGeometry(); streamGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); streamGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2)); streamGeometry.setIndex(indices); streamGeometry.computeVertexNormals(); geometries.add(streamGeometry);
   const creek = new THREE.Mesh(streamGeometry, water[0]); creek.name = '瀑潭→清溪→水岸 · 共顶点连续水面'; creek.renderOrder = 2; group.add(creek);
@@ -343,8 +337,7 @@ export function buildLandscape(world: WorldDefinition): {
   const fall = new THREE.Mesh(fallGeometry, water[1]); fall.name = '云瀑 · 153m落差水帘'; fall.renderOrder = 3; group.add(fall);
   const poolGeometry = new THREE.CircleGeometry(50, 24); poolGeometry.rotateX(-Math.PI / 2); geometries.add(poolGeometry);
   const pool = new THREE.Mesh(poolGeometry, water[0]); pool.position.set(bottom.x, bottom.y + .6, bottom.z); pool.name = '瀑下潭 · 可见落水与下游接合'; pool.renderOrder = 2; group.add(pool);
-  const foam: Block[] = [];
-  for (let i = 0; i < 80; i++) { const angle = i * 2.39996, r = 3 + hash(i, 805, world.seed) * 21; foam.push({ x: quantize(bottom.x + Math.cos(angle) * r), y: bottom.y + .72, z: quantize(bottom.z + Math.sin(angle) * r), w: quantize(.8 + hash(i, 806, world.seed) * 2), h: .2, d: .4, color: new THREE.Color('#d3e9df') }); }
+  const foam: Block[] = dressing.foam.map(b => ({ ...b, color: new THREE.Color('#d3e9df') }));
   batch('瀑潭 · 体素泡沫', foam, rock);
   // Surface samples are build-time scratch data. Keeping all resolutions in a
   // permanent map would turn a landscape stream into an unbounded height cache.

@@ -29,3 +29,20 @@ public class WoodlandParityTests
         }
     }
 }
+
+public class RiverDressingParityTests
+{
+    [Fact]
+    public void RiverDressingMatchesTypeScript()
+    {
+        string expected;
+        using (var file = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Parity", "river-dressing-v6.json.gz")))
+        using (var gzip = new GZipStream(file, CompressionMode.Decompress))
+        using (var reader = new StreamReader(gzip, Encoding.UTF8)) expected = reader.ReadToEnd();
+        var d = WoodlandLayout.RiverDressing(World.CreateWorld());
+        object Rows(List<WoodlandLayout.Block> blocks) => blocks.Select(b => (object)new Obj().Put("x", b.X).Put("y", b.Y).Put("z", b.Z).Put("w", b.W).Put("h", b.H).Put("d", b.D)).ToList();
+        var actual = Write(new Obj().Put("stones", Rows(d.Stones)).Put("reeds", Rows(d.Reeds)).Put("foam", Rows(d.Foam)));
+        Assert.Equal(712, d.Stones.Count); Assert.Equal(700, d.Reeds.Count); Assert.Equal(80, d.Foam.Count);
+        Assert.True(expected == actual, "river dressing differs from TypeScript");
+    }
+}
