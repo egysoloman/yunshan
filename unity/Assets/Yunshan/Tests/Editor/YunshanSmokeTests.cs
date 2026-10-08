@@ -51,6 +51,40 @@ namespace Yunshan.Tests
         }
 
         [Test]
+        public void NetworkStructuresBuildCellMeshes()
+        {
+            var world = World.CreateWorld(); var sink = new NetworkStructureMeshes();
+            NetworkStructures.Emit(world, sink, true, true); GatewayStructures.Emit(world, sink, true);
+            var meshes = sink.Build().ToList();
+            Assert.Greater(meshes.Count, 10);
+            Assert.IsTrue(meshes.All(m => m.Mesh.vertexCount > 0));
+            // Every segment box keeps unit-length normals after the X mirror.
+            var normals = meshes[0].Mesh.normals; Assert.IsTrue(normals.All(n => Mathf.Abs(n.magnitude - 1) < 1e-3f));
+        }
+
+        [Test]
+        public void WoodlandAndRiverDressingAreLaidOut()
+        {
+            var world = World.CreateWorld();
+            var woodland = WoodlandLayout.Layout(world);
+            Assert.AreEqual(5200, woodland.Trees.Count);
+            var dressing = WoodlandLayout.RiverDressing(world);
+            Assert.AreEqual(712, dressing.Stones.Count); Assert.AreEqual(80, dressing.Foam.Count);
+        }
+
+        [Test]
+        public void NearBuildingsCarryFacadeDetails()
+        {
+            var world = World.CreateWorld();
+            var building = world.Buildings.First(b => b.Kind == "home" && ArchitectureFloorPlan.GetBuildingBody(b) != null);
+            var details = ArchitectureDetail.ProgramDetails(building, 0);
+            Assert.IsTrue(details.Any(p => p.Purpose == "lantern" && p.Luminous), "entrance lantern core");
+            Assert.IsTrue(details.Any(p => p.Purpose == "door"));
+            var meshes = CityGeometry.NearBuilding(building, new System.Collections.Generic.Dictionary<string, StudioAssetBounds>());
+            Assert.NotNull(meshes.Glass, "glass carries windows and the lantern core");
+        }
+
+        [Test]
         public void FaceCubeFacesOutward()
         {
             var mesh = InstancedBoxes.FaceCube();
