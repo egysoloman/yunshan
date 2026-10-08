@@ -20,7 +20,7 @@ namespace Yunshan.Core
     {
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
 
-        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false)
+        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false, bool dressesRoadDeck = false)
         {
             foreach (var edge in world.Edges)
             {
@@ -44,16 +44,18 @@ namespace Yunshan.Core
                     bool rail = edge.Mode == "maglev" || edge.Mode == "lightRail";
                     double width = TransportGeometry.DeckWidth(edge);
                     bool dressedDeck = edge.Id == "road-airport-runway-strip" && dressesRunway || rail && dressesRailDeck || edge.Mode == "bridge" && dressesBridgeDeck;
-                    if (!dressedDeck) sink.Segment("stone", a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : "#969987");
+                    // Near studio road tiles (BUILT-131/132/134) sit at the exact deck, line and kerb extents; these boxes shrink slightly.
+                    bool roadTiled = edge.Mode == "road" && !edge.Id.Contains("runway") && dressesRoadDeck;
+                    if (!dressedDeck) sink.Segment("stone", a, b, roadTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : roadTiled ? -.28 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : roadTiled ? "#555f61" : "#969987");
                     if (rail) { sink.Segment("cyan", V(a.X - 1.8, a.Y, a.Z), V(b.X - 1.8, b.Y, b.Z), .28, .24, .16); sink.Segment("cyan", V(a.X + 1.8, a.Y, a.Z), V(b.X + 1.8, b.Y, b.Z), .28, .24, .16); }
-                    else if (edge.Mode != "bridge") sink.Segment("stone", a, b, .16, .08, .07, "#d1c6a1");
+                    else if (edge.Mode != "bridge") sink.Segment("stone", a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, "#d1c6a1");
                     double dx = b.X - a.X, dz = b.Z - a.Z, horizontal = JsMath.Hypot(dx, dz); if (horizontal == 0) horizontal = 1;
                     double nx = -dz / horizontal, nz = dx / horizontal;
                     foreach (var side in new[] { -1, 1 })
                     {
                         double offset = TransportGeometry.GuardrailOffset(edge);
                         var aa = V(a.X + nx * offset * side, a.Y, a.Z + nz * offset * side); var bb = V(b.X + nx * offset * side, b.Y, b.Z + nz * offset * side);
-                        sink.Segment("stone", aa, bb, rail ? .35 : .4, rail ? .5 : .2, rail ? -.1 : .12, "#c0c2ac");
+                        sink.Segment("stone", aa, bb, rail ? .35 : roadTiled ? .36 : .4, rail ? .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, "#c0c2ac");
                         bool elevated = (a.Y + b.Y) / 2 - World.TerrainHeight(world, (a.X + b.X) / 2, (a.Z + b.Z) / 2) > 4;
                         if (edge.Mode == "bridge" || rail || elevated && edge.Mode == "road")
                             foreach (var span in TransportGeometry.GuardrailSpans(world, edge, i))

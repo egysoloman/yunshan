@@ -17,6 +17,9 @@ namespace Yunshan.Runtime
         // Ground dressing (understorey, bank plants, mountain-foot rocks): near models only, no block form.
         public float GroundRange = 70, RockRange = 280; public int GroundCount = 120, RockCount = 50;
         readonly List<WoodlandLayout.GroundItem> ground;
+        // Studio road surface, centre line and kerbs (BUILT-131/132/134) near the camera, as the web pool road tier.
+        public float RoadRange = 60; public int RoadCount = 1080;
+        readonly List<StudioStaticPlacement> roads;
         readonly WoodlandLayout.Result layout;
         readonly StudioAssets studio;
         readonly Transform root;
@@ -29,9 +32,9 @@ namespace Yunshan.Runtime
         public int ModelledTrees => modelledTrees.Count;
         public int Trees => layout.Trees.Count;
 
-        public WoodlandView(WoodlandLayout.Result layout, StudioAssets studio, Transform parent, List<WoodlandLayout.GroundItem> ground = null)
+        public WoodlandView(WoodlandLayout.Result layout, StudioAssets studio, Transform parent, List<WoodlandLayout.GroundItem> ground = null, List<StudioStaticPlacement> roads = null)
         {
-            this.layout = layout; this.studio = studio; this.ground = ground ?? new List<WoodlandLayout.GroundItem>();
+            this.layout = layout; this.studio = studio; this.ground = ground ?? new List<WoodlandLayout.GroundItem>(); this.roads = roads ?? new List<StudioStaticPlacement>();
             root = new GameObject("山林 · 原尺寸体素工坊林木").transform; root.SetParent(parent, false);
             var shader = Shader.Find("Yunshan/InstancedColor");
             trunks = new InstancedBoxes(new Material(shader) { name = "云山 · 林木树干代理" });
@@ -56,6 +59,8 @@ namespace Yunshan.Runtime
             List<WoodlandLayout.GroundItem> NearGround(string tier, float range, int count) => ground.Where(g => g.Tier == tier && studio.Has(g.Asset)).Select(g => (g, d: Distance(g.X, g.Z))).Where(e => e.d <= range)
                 .OrderBy(e => e.d).ThenBy(e => e.g.Id).Take(count).Select(e => e.g).ToList();
             var nearGround = NearGround("ground", GroundRange, GroundCount).Concat(NearGround("rock", RockRange, RockCount)).ToList();
+            var nearRoads = roads.Select((r, i) => (r, i)).Where(e => studio.Has(e.r.Asset)).Select(e => (e.r, e.i, d: Distance(e.r.Position.X, e.r.Position.Z))).Where(e => e.d <= RoadRange)
+                .OrderBy(e => e.d).ThenBy(e => e.i).Take(RoadCount).Select(e => e.r).ToList();
             var used = new Dictionary<string, int>();
             GameObject Take(string asset)
             {
@@ -66,6 +71,7 @@ namespace Yunshan.Runtime
             }
             foreach (var t in nearTrees) { var go = Take(t.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(t.X, t.Y, t.Z), Space.Yaw(t.Yaw)); }
             foreach (var s in nearShrubs) { var go = Take(s.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(s.X, s.Y, s.Z), Space.Yaw(s.Yaw)); }
+            foreach (var r in nearRoads) { var go = Take(r.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(r.Position), Space.Yaw(r.Yaw) * Quaternion.Euler((float)(r.Pitch * Mathf.Rad2Deg), 0, 0)); }
             foreach (var g in nearGround) { var go = Take(g.Asset); go.transform.SetPositionAndRotation(Space.ToUnity(g.X, g.Y, g.Z), Space.Yaw(g.Yaw)); }
             foreach (var pair in pool) { used.TryGetValue(pair.Key, out int n); for (int i = n; i < pair.Value.Count; i++) pair.Value[i].SetActive(false); }
             modelledTrees.Clear(); foreach (var t in nearTrees) modelledTrees.Add(t.Id);

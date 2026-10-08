@@ -12,7 +12,7 @@ export interface NetworkSink {
   box(key: NetworkMaterial, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation?: number, tag?: { roof?: boolean }): void;
   segment(key: NetworkMaterial, a: Vec3, b: Vec3, width: number, height: number, lift?: number, color?: string): void;
 }
-export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean }
+export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean; dressesRoadDeck?: boolean }
 
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
@@ -35,15 +35,19 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         const width = deckWidth(edge);
         // The studio runway slab (BUILT-158) replaces the strip's own deck box at the same extent.
         const dressedDeck = edge.id === 'road-airport-runway-strip' && options.dressesRunway || rail && !!options.dressesRailDeck || edge.mode === 'bridge' && !!options.dressesBridgeDeck;
-        if (!dressedDeck) sink.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
+        // Near the camera the studio road modules (BUILT-131/132/134) are drawn at the exact extents
+        // of the deck, centre line and kerbs; those boxes shrink slightly so the two never z-fight, and the far deck takes
+        // the module's own slate concrete (#555f61, its top-face texel) so there is no colour seam.
+        const roadTiled = edge.mode === 'road' && !edge.id.includes('runway') && !!options.dressesRoadDeck;
+        if (!dressedDeck) sink.segment('stone', a, b, roadTiled ? width - .04 : width, rail ? 1.4 : .5, rail ? -.9 : roadTiled ? -.28 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : roadTiled ? '#555f61' : '#969987');
         if (rail) { sink.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); sink.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
-        else if (edge.mode !== 'bridge') sink.segment('stone', a, b, .16, .08, .07, '#d1c6a1');
+        else if (edge.mode !== 'bridge') sink.segment('stone', a, b, roadTiled ? .12 : .16, roadTiled ? .06 : .08, roadTiled ? .06 : .07, '#d1c6a1');
         // Curbs, paving seams and separate shoulders make the travelled deck
         // legible at body height without widening the shared collision surface.
         const dx = b.x - a.x, dz = b.z - a.z, horizontal = Math.hypot(dx, dz) || 1, nx = -dz / horizontal, nz = dx / horizontal;
         for (const side of [-1, 1]) {
           const offset = guardrailOffset(edge), aa = { x: a.x + nx * offset * side, y: a.y, z: a.z + nz * offset * side }, bb = { x: b.x + nx * offset * side, y: b.y, z: b.z + nz * offset * side };
-          sink.segment('stone', aa, bb, rail ? .35 : .4, rail ? .5 : .2, rail ? -.1 : .12, '#c0c2ac');
+          sink.segment('stone', aa, bb, rail ? .35 : roadTiled ? .36 : .4, rail ? .5 : roadTiled ? .18 : .2, rail ? -.1 : roadTiled ? .11 : .12, '#c0c2ac');
           const elevated = (a.y + b.y) / 2 - terrainHeight(world, (a.x + b.x) / 2, (a.z + b.z) / 2) > 4;
           if (edge.mode === 'bridge' || rail || elevated && edge.mode === 'road') for (const span of guardrailSpans(world, edge, i)) sink.segment('wood', { x: span.a.x + nx * offset * side, y: span.a.y, z: span.a.z + nz * offset * side }, { x: span.b.x + nx * offset * side, y: span.b.y, z: span.b.z + nz * offset * side }, GUARDRAIL_THICKNESS, .2, 1.1, '#6b7771');
         }

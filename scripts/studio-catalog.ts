@@ -53,7 +53,7 @@ const gaps: Record<string, string> = {
   prop: 'no game slot: a new fixture or use point would have to be added to the shared floor plan first',
   facade: 'authored for the legacy facade; 605 of 612 buildings use program walls whose bays (windows 1.6×1.4m) differ',
   stair: 'program stairs are generated from the shared floor plan; fixed stair modules do not match its treads and landings',
-  road: 'fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching',
+  road: 'fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)',
   rail: 'fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)',
   bridge: 'fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)',
   'cable-lift': 'fixed module; lift shafts and cable spans vary with the network',

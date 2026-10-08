@@ -101,9 +101,9 @@ namespace Yunshan.Runtime
                 bool stationsDressed = studio.Has(StudioPropLayout.StationPlatformAsset) && studio.Has(StudioPropLayout.StationShelterAsset);
                 bool forecourtDressed = landmarks.Any(p => p.Id.EndsWith(":forecourt"));
                 // Rail beds and bridge decks tiled with BUILT-140 / BUILT-146 replace their deck boxes.
-                bool railDeckDressed = studio.Has("BUILT-140"), bridgeDeckDressed = studio.Has("BUILT-146");
+                bool railDeckDressed = studio.Has("BUILT-140"), bridgeDeckDressed = studio.Has("BUILT-146"), roadDeckDressed = studio.Has(StudioPropLayout.RoadDeckAsset);
                 var decks = await Task.Run(() => StudioPropLayout.DeckTilePlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList());
-                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed, railDeckDressed, bridgeDeckDressed); GatewayStructures.Emit(world, sink, forecourtDressed); return sink; });
+                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed, railDeckDressed, bridgeDeckDressed, roadDeckDressed); GatewayStructures.Emit(world, sink, forecourtDressed); return sink; });
                 var networkRoot = new GameObject("路网结构").transform; networkRoot.SetParent(transform, false);
                 foreach (var (mesh, glow) in network.Build()) Show(networkRoot, mesh, glow ? glassMaterial : solidMaterial);
                 Show(transform, CityGeometry.WaterMesh(world), waterMaterial);
@@ -120,7 +120,8 @@ namespace Yunshan.Runtime
                 status = "山林……";
                 var woodlandLayout = await Task.Run(() => WoodlandLayout.Layout(world));
                 var groundItems = await Task.Run(() => WoodlandLayout.GroundDressing(world, woodlandLayout.Trees));
-                woodland = new WoodlandView(woodlandLayout, studio, transform, groundItems);
+                var roadTiles = await Task.Run(() => StudioPropLayout.RoadTilePlacements(world, studio.Bounds));
+                woodland = new WoodlandView(woodlandLayout, studio, transform, groundItems, roadTiles);
                 // Creek bank stones, reeds and plunge-pool foam (parity with the web terrain).
                 var dressing = await Task.Run(() => WoodlandLayout.RiverDressing(world));
                 var banks = new GameMeshBuilder();

@@ -9,15 +9,17 @@ import type { GroundDressingItem, WoodlandShrub, WoodlandTree } from './woodland
  * terrain's block woodland (built from the same layout and heights).
  * Ground dressing (understorey, bank plants, mountain-foot rocks) has no
  * block form: it is near detail only, like the terrain's near gravel. */
-export const WOODLAND_MODEL_RANGE: Record<Quality, { trees: number; treeCount: number; shrubs: number; shrubCount: number; ground: number; groundCount: number; rocks: number; rockCount: number }> = {
-  high: { trees: 240, treeCount: 220, shrubs: 110, shrubCount: 220, ground: 110, groundCount: 220, rocks: 420, rockCount: 80 },
-  balanced: { trees: 160, treeCount: 120, shrubs: 70, shrubCount: 120, ground: 70, groundCount: 120, rocks: 280, rockCount: 50 },
-  low: { trees: 0, treeCount: 0, shrubs: 0, shrubCount: 0, ground: 0, groundCount: 0, rocks: 0, rockCount: 0 },
+export const WOODLAND_MODEL_RANGE: Record<Quality, { trees: number; treeCount: number; shrubs: number; shrubCount: number; ground: number; groundCount: number; rocks: number; rockCount: number; roads: number; roadCount: number }> = {
+  high: { trees: 240, treeCount: 220, shrubs: 110, shrubCount: 220, ground: 110, groundCount: 220, rocks: 420, rockCount: 80, roads: 100, roadCount: 2400 },
+  balanced: { trees: 160, treeCount: 120, shrubs: 70, shrubCount: 120, ground: 70, groundCount: 120, rocks: 280, rockCount: 50, roads: 60, roadCount: 1080 },
+  low: { trees: 0, treeCount: 0, shrubs: 0, shrubCount: 0, ground: 0, groundCount: 0, rocks: 0, rockCount: 0, roads: 0, roadCount: 0 },
 };
 
 interface Draw { asset: StudioAsset; meshes: { mesh: THREE.InstancedMesh; bake: THREE.Matrix4 }[] }
-type Tier = 'tree' | 'shrub' | 'ground' | 'rock';
-type Plant = { id: number; asset: string; x: number; y: number; z: number; yaw: number; tier: Tier };
+type Tier = 'tree' | 'shrub' | 'ground' | 'rock' | 'road';
+type Plant = { id: number; asset: string; x: number; y: number; z: number; yaw: number; pitch?: number; tier: Tier };
+/** A studio road-surface tile (studioRoadTilePlacements), drawn near the camera only. */
+export interface NearRoadTile { id: number; asset: string; x: number; y: number; z: number; yaw: number; pitch: number }
 
 export class WoodlandModelPool {
   readonly group = new THREE.Group();
@@ -25,9 +27,9 @@ export class WoodlandModelPool {
   private readonly plants: Plant[];
   private lastKey = '';
   private disposed = false;
-  constructor(parent: THREE.Object3D, trees: readonly WoodlandTree[], shrubs: readonly WoodlandShrub[], private readonly setModelled: (trees: ReadonlySet<number>, shrubs: ReadonlySet<number>) => void, dressing: readonly GroundDressingItem[] = []) {
+  constructor(parent: THREE.Object3D, trees: readonly WoodlandTree[], shrubs: readonly WoodlandShrub[], private readonly setModelled: (trees: ReadonlySet<number>, shrubs: ReadonlySet<number>) => void, dressing: readonly GroundDressingItem[] = [], roads: readonly NearRoadTile[] = []) {
     this.group.name = '体素工坊 · 原尺寸林木';
-    this.plants = [...trees.map(t => ({ ...t, tier: 'tree' as Tier })), ...shrubs.map(s => ({ ...s, tier: 'shrub' as Tier })), ...dressing.map(d => ({ ...d }))];
+    this.plants = [...trees.map(t => ({ ...t, tier: 'tree' as Tier })), ...shrubs.map(s => ({ ...s, tier: 'shrub' as Tier })), ...dressing.map(d => ({ ...d })), ...roads.map(r => ({ ...r, tier: 'road' as Tier }))];
     parent.add(this.group);
   }
 
@@ -61,7 +63,7 @@ export class WoodlandModelPool {
       .filter(p => p.tier === tier && this.draws.has(p.asset))
       .map(p => ({ p, d: Math.hypot(p.x - camera.x, p.z - camera.z) })).filter(e => e.d <= radius)
       .sort((a, b) => a.d - b.d || a.p.id - b.p.id).slice(0, count).map(e => e.p);
-    const chosen = [...near('tree', range.trees, range.treeCount), ...near('shrub', range.shrubs, range.shrubCount), ...near('ground', range.ground, range.groundCount), ...near('rock', range.rocks, range.rockCount)];
+    const chosen = [...near('tree', range.trees, range.treeCount), ...near('shrub', range.shrubs, range.shrubCount), ...near('ground', range.ground, range.groundCount), ...near('rock', range.rocks, range.rockCount), ...near('road', range.roads, range.roadCount)];
     const byAsset = new Map<string, Plant[]>();
     for (const plant of chosen) { const list = byAsset.get(plant.asset) ?? []; list.push(plant); byAsset.set(plant.asset, list); }
     const place = new THREE.Matrix4(), part = new THREE.Matrix4();
@@ -69,6 +71,7 @@ export class WoodlandModelPool {
       const list = byAsset.get(id) ?? [];
       list.forEach((plant, index) => {
         place.makeTranslation(plant.x, plant.y, plant.z).multiply(part.makeRotationY(plant.yaw));
+        if (plant.pitch) place.multiply(part.makeRotationX(plant.pitch));
         for (const { mesh, bake } of draw.meshes) mesh.setMatrixAt(index, part.multiplyMatrices(place, bake));
       });
       for (const { mesh } of draw.meshes) { mesh.count = list.length; mesh.visible = list.length > 0; mesh.instanceMatrix.needsUpdate = true; if (list.length) mesh.computeBoundingSphere(); }

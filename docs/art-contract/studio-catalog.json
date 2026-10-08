@@ -17,8 +17,8 @@
    "CHAR": 238
   },
   "byStatus": {
-   "unassigned": 757,
-   "placed": 31,
+   "unassigned": 754,
+   "placed": 34,
    "rejected": 5
   },
   "byFamily": {
@@ -3154,7 +3154,7 @@
     "triangles": 2112
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "护栏保留床架夹口；底部夹座位于局部 Y=-0.08m。面板可分选但没有升降、折叠或解锁动画，也未实现病床安全联锁。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -7901,8 +7901,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 2242
    },
-   "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "status": "placed",
    "studioNote": "作者2m长直段，路面总宽10m厚0.5m；非实心地基。中心线132、横缝133及双路肩134单独安装。edge曲线采样和游戏道路系统尚未接入。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -7939,8 +7938,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 180
    },
-   "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "status": "placed",
    "studioNote": "严格保留清单0.08m厚度，以实物嵌条表达，不冒称薄漆。作者段长2m，沿道路轴重复；没有车道逻辑。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -7978,7 +7976,7 @@
     "triangles": 1402
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "嵌入131预留槽，顶面齐平；实体宽0.12m高0.08m为作者尺寸。密封条与桥梁支座、轮胎橡胶角色独立，不具备实际伸缩模拟。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8015,8 +8013,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 1304
    },
-   "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "status": "placed",
    "studioNote": "两条路肩是一件成对组件；相对道路中线各4.75m。10mm网格保留安装偏移0.05m，不能和20mm道路直接用同格距connect；用实际米制放置验证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8054,7 +8051,7 @@
     "triangles": 310
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "只制作水平横杆；栏柱是BUILT-147，不能重复烘入此母版。安装中心高1.1m、交口断开通过实例验证；未实现自动cut算法或护栏受力计算。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9759,7 +9756,7 @@
     "triangles": 412
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "直线straight与转角corner共用清单ID；原13rail为描述数量，未伪造原路线。0.35m半径和1.72m身体只在明确作者路径样例检查。尺寸为作者接口样件，原隔离descriptor/terrain采样未提供。保留原巨块/ray负例与lowerdeck pier冲突；不声称原游戏最终PASS、三桥全净空或已集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9911,7 +9908,7 @@
     "triangles": 98
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "kerb与treeRing分别选择；路缘高0.2m，不能用虚构大碰撞盒冒充实体。原MarketSurface/MarketSolid及地形场未提供；本件是明确米制作者样件，碰撞来自同一体素占用。未接原getWalkHeight/step控制器，不声称24tick运行或美术通过。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10899,7 +10896,7 @@
     "triangles": 1050
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "作者直径1.2m，轮胎厚0.4m、含轴套总深0.8m；轮组最低点为0。速度/steering未绑定，不改变任何原Vehicle碰撞；只验证作者前轴样件。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -10937,7 +10934,7 @@
     "triangles": 726
    },
    "status": "unassigned",
-   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching",
+   "gap": "fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching (the 2m surface BUILT-131, centre line BUILT-132 and kerbs BUILT-134 are tiled along every road and drawn near the camera)",
    "studioNote": "固定打开姿态的作者门壳，叶和框用真实铰接耳连通；不包含门动画或权限逻辑。装在M020作者轨道舱外侧，保持原177门洞，不由视觉模型改写body。 已按图重建候选，待人工美术验收。"
   },
   {

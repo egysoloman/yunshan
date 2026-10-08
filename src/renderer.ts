@@ -14,7 +14,7 @@ import { StudioPropPool } from './rendering/studio-props';
 import { WoodlandModelPool } from './rendering/woodland-models';
 import { groundDressing } from './rendering/woodland-layout';
 import { emitNetworkStructures } from './rendering/network-structures';
-import { studioDressesFixture } from './rendering/studio-prop-layout';
+import { studioDressesFixture, studioRoadTilePlacements } from './rendering/studio-prop-layout';
 import { MarketShopfrontPool } from './rendering/market-shopfront';
 import { StationWayfindingPool } from './rendering/station-wayfinding';
 import { installArchitecturalFinishes } from './rendering/architectural-finishes';
@@ -107,6 +107,9 @@ export class CityRenderer implements CityRendererAPI {
   private materials: Record<MaterialKey, THREE.MeshStandardMaterial>;
   private landscape: ReturnType<typeof buildLandscape>;
   private woodlandModels: WoodlandModelPool;
+  /** BUILT-131 road surface along every road; the woodland pool draws the near ones. */
+  private roadTileCache?: ReturnType<typeof studioRoadTilePlacements>;
+  private get roadTiles() { return this.roadTileCache ??= studioRoadTilePlacements(this.world, deckWidth); }
   private architectureDetail: ArchitectureDetailManager;
   private chunks: CityChunk[] = [];
   private nearChunks!: NearChunkResidency<NearCityResource>;
@@ -411,7 +414,7 @@ export class CityRenderer implements CityRendererAPI {
     this.mist = this.buildMist(); this.scene.add(this.mist);
     this.spray = this.buildSpray(); this.scene.add(this.spray);
     this.landscape = buildLandscape(world); this.scene.add(this.landscape.group);
-    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, groundDressing(world, this.landscape.woodland.trees));
+    this.woodlandModels = new WoodlandModelPool(this.landscape.vegetation, this.landscape.woodland.trees, this.landscape.woodland.shrubs, this.landscape.woodland.setModelled, groundDressing(world, this.landscape.woodland.trees), this.roadTiles.map((t, id) => ({ id, asset: t.asset, ...t.position, yaw: t.yaw, pitch: t.pitch ?? 0 })));
     void this.woodlandModels.load();
     this.roadClosures = new RoadClosureOverlay(world); this.scene.add(this.roadClosures.group);
     this.studioProps = new StudioPropPool(this.scene, world);
@@ -779,7 +782,7 @@ export class CityRenderer implements CityRendererAPI {
   private buildNetwork() {
     const batch = new BoxBatch(this.materials);
     for (const edge of this.world.edges) this.edges.set(edge.id, edge);
-    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge') });
+    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge'), dressesRoadDeck: this.roadTiles.length > 0 });
     const group = batch.build(undefined, 384);
     group.traverse(object => { if (object instanceof THREE.InstancedMesh && object.userData.distanceDetail) this.distanceDetails.push(object); });
     this.scene.add(group);

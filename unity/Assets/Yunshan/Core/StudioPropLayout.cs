@@ -169,30 +169,54 @@ namespace Yunshan.Core
             foreach (var tile in DeckTiles)
             {
                 if (!assets.TryGetValue(tile.Asset, out var asset)) continue;
-                double[] min = asset.Min, max = asset.Max; double width = max[0] - min[0], height = max[1] - min[1], length = max[2] - min[2];
-                double cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
-                foreach (var edge in world.Edges)
-                {
-                    if (!tile.Modes.Contains(edge.Mode)) continue;
-                    if (Math.Abs(TransportGeometry.DeckWidth(edge) - width) > 1e-6 || Math.Abs(tile.Height - height) > 1e-6) continue;
-                    var spans = new List<double>();
-                    for (int i = 1; i < edge.Points.Count; i++) { Vec3 p = edge.Points[i - 1], q = edge.Points[i]; spans.Add(JsMath.Hypot(q.X - p.X, q.Y - p.Y, q.Z - p.Z)); }
-                    double total = 0; foreach (var v in spans) total += v; if (total < .01) continue;
-                    int count = (int)Math.Max(1, Math.Ceiling(total / length));
-                    for (int k = 0; k < count; k++)
-                    {
-                        double s = total < length ? total / 2 : Math.Min(k * length + length / 2, total - length / 2);
-                        int i = 0; double before = 0; while (i < spans.Count - 1 && before + spans[i] < s) { before += spans[i]; i++; }
-                        Vec3 a = edge.Points[i], b = edge.Points[i + 1]; double dx = b.X - a.X, dy = b.Y - a.Y, dz = b.Z - a.Z, t = spans[i] > 0 ? (s - before) / spans[i] : 0;
-                        double yaw = JsMath.Atan2(dx, dz), pitch = -JsMath.Atan2(dy, JsMath.Hypot(dx, dz));
-                        double cosY = JsMath.Cos(yaw), sinY = JsMath.Sin(yaw), cosP = JsMath.Cos(pitch), sinP = JsMath.Sin(pitch);
-                        double r1y = cy * cosP - cz * sinP, r1z = cy * sinP + cz * cosP, rcx = cx * cosY + r1z * sinY, rcy = r1y, rcz = -cx * sinY + r1z * cosY;
-                        double x = a.X + dx * t, y = a.Y + dy * t + tile.Lift, z = a.Z + dz * t;
-                        result.Add(new StudioStaticPlacement { Asset = tile.Asset, Id = $"{edge.Id}:{tile.Kind}-deck:{k}", Position = new Vec3(x - rcx, y - rcy, z - rcz), Yaw = yaw, Pitch = pitch });
-                    }
-                }
+                foreach (var edge in world.Edges) if (tile.Modes.Contains(edge.Mode)) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, TransportGeometry.DeckWidth(edge), result);
             }
             return result;
+        }
+
+        /// <summary>Port of studioRoadTilePlacements: BUILT-131 surface, BUILT-132 centre
+        /// line and BUILT-134 kerbs every 2m along every road but the runway strip
+        /// (renderers draw only the near ones).</summary>
+        public const string RoadDeckAsset = "BUILT-131";
+        public static readonly (string Kind, string Asset, double Width, double Height, double Lift)[] RoadTiles =
+        {
+            ("road", "BUILT-131", 10, .5, -.25),
+            ("road-line", "BUILT-132", .16, .08, .07),
+            ("road-kerb", "BUILT-134", 9.9, .2, .12),
+        };
+        public static List<StudioStaticPlacement> RoadTilePlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
+        {
+            var result = new List<StudioStaticPlacement>();
+            foreach (var tile in RoadTiles)
+            {
+                if (!assets.TryGetValue(tile.Asset, out var asset)) continue;
+                foreach (var edge in world.Edges) if (edge.Mode == "road" && !edge.Id.Contains("runway") && TransportGeometry.DeckWidth(edge) == 10) TileEdgePath(edge, tile.Kind, tile.Asset, asset, tile.Height, tile.Lift, tile.Width, result);
+            }
+            return result;
+        }
+
+        static void TileEdgePath(NetworkEdge edge, string kind, string assetId, StudioAssetBounds asset, double tileHeight, double lift, double crossWidth, List<StudioStaticPlacement> result)
+        {
+            double[] min = asset.Min, max = asset.Max; double width = max[0] - min[0], height = max[1] - min[1], length = max[2] - min[2];
+            double cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
+            if (Math.Abs(crossWidth - width) > 1e-6 || Math.Abs(tileHeight - height) > 1e-6) return;
+            var spans = new List<double>();
+            for (int n = 1; n < edge.Points.Count; n++) { Vec3 p = edge.Points[n - 1], q = edge.Points[n]; spans.Add(JsMath.Hypot(q.X - p.X, q.Y - p.Y, q.Z - p.Z)); }
+            double total = 0; foreach (var v in spans) total += v; if (total < .01) return;
+            int count = (int)Math.Max(1, Math.Ceiling(total / length));
+            int i = 0; double before = 0;
+            for (int k = 0; k < count; k++)
+            {
+                double s = total < length ? total / 2 : Math.Min(k * length + length / 2, total - length / 2);
+                if (s < before) { i = 0; before = 0; }
+                while (i < spans.Count - 1 && before + spans[i] < s) { before += spans[i]; i++; }
+                Vec3 a = edge.Points[i], b = edge.Points[i + 1]; double dx = b.X - a.X, dy = b.Y - a.Y, dz = b.Z - a.Z, t = spans[i] > 0 ? (s - before) / spans[i] : 0;
+                double yaw = JsMath.Atan2(dx, dz), pitch = -JsMath.Atan2(dy, JsMath.Hypot(dx, dz));
+                double cosY = JsMath.Cos(yaw), sinY = JsMath.Sin(yaw), cosP = JsMath.Cos(pitch), sinP = JsMath.Sin(pitch);
+                double r1y = cy * cosP - cz * sinP, r1z = cy * sinP + cz * cosP, rcx = cx * cosY + r1z * sinY, rcy = r1y, rcz = -cx * sinY + r1z * cosY;
+                double x = a.X + dx * t, y = a.Y + dy * t + lift, z = a.Z + dz * t;
+                result.Add(new StudioStaticPlacement { Asset = assetId, Id = $"{edge.Id}:{kind}-deck:{k}", Position = new Vec3(x - rcx, y - rcy, z - rcz), Yaw = yaw, Pitch = pitch });
+            }
         }
 
         /// <summary>Lamp glow fraction for city power and daylight (both clamped 0..1).</summary>
