@@ -108,11 +108,13 @@ namespace Yunshan.Runtime
         }
 
         /// <summary>Instantiates at a game-space origin with game yaw and uniform scale.</summary>
-        public GameObject Place(string id, Transform parent, Vec3 gameOrigin, double gameYaw, double scale)
+        /// Pitch is about the model's local X after yaw (game rotY(yaw)·rotX(pitch));
+        /// the X mirror leaves a rotation about X unchanged.
+        public GameObject Place(string id, Transform parent, Vec3 gameOrigin, double gameYaw, double scale, double gamePitch = 0)
         {
             if (!templates.TryGetValue(id, out var template)) return null;
             var copy = UnityEngine.Object.Instantiate(template, parent);
-            copy.transform.SetPositionAndRotation(Space.ToUnity(gameOrigin), Space.Yaw(gameYaw));
+            copy.transform.SetPositionAndRotation(Space.ToUnity(gameOrigin), Space.Yaw(gameYaw) * Quaternion.Euler((float)(gamePitch * Mathf.Rad2Deg), 0, 0));
             copy.transform.localScale = Vector3.one * (float)scale;
             return copy;
         }

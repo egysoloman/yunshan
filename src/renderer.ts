@@ -778,7 +778,7 @@ export class CityRenderer implements CityRendererAPI {
   private buildNetwork() {
     const batch = new BoxBatch(this.materials);
     for (const edge of this.world.edges) this.edges.set(edge.id, edge);
-    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway') });
+    emitNetworkStructures(this.world, batch, { dressesStations: !!this.studioProps?.dressesStations, dressesRunway: !!this.studioProps?.dressesLandmark('runway'), dressesRailDeck: !!this.studioProps?.dressesDeck('rail'), dressesBridgeDeck: !!this.studioProps?.dressesDeck('bridge') });
     const group = batch.build(undefined, 384);
     group.traverse(object => { if (object instanceof THREE.InstancedMesh && object.userData.distanceDetail) this.distanceDetails.push(object); });
     this.scene.add(group);

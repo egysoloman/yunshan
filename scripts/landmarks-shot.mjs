@@ -1,5 +1,5 @@
 // Real-browser check that the studio landmarks (BUILT-158 runway, BUILT-092
-// core forecourt) load and draw in place of their boxes. Writes
+// core forecourt, BUILT-140 rail bed and BUILT-146 bridge deck tiles) load and draw in place of their boxes. Writes
 // artifacts/landmark-*.png and artifacts/landmarks-report.json. Software WebGL
 // here is a functional check only, not performance evidence.
 import { chromium } from 'playwright-core';
@@ -24,14 +24,21 @@ try {
   report.assets = await page.evaluate(() => window.__YUNSHAN__.city.scene.getObjectByName('体素工坊 · 楼层设施模型').userData.studioAssets);
   const views = {
     runway: { feet: { x: 1180, z: 1430 }, look: { x: 1300, y: 14.6, z: 1490 } },
-    forecourt: null,
+    forecourt: null, rail: null, bridge: null,
   };
-  for (const name of ['runway', 'forecourt']) {
+  for (const name of ['runway', 'forecourt', 'rail', 'bridge']) {
     report[name] = await page.evaluate(([name, view]) => {
       const { world, controller, simulation, actions } = window.__YUNSHAN__;
       actions.command({ type: 'setTime', value: 11 });
       let feet, look;
       if (name === 'forecourt') { const core = world.buildings.find(b => b.kind === 'core'); feet = { x: core.position.x + 25, y: core.position.y, z: core.door.z + 100 }; look = { x: core.position.x - 10, y: core.position.y + 2, z: core.door.z + 50 }; }
+      else if (name === 'rail' || name === 'bridge') {
+        const modes = name === 'rail' ? ['lightRail', 'maglev'] : ['bridge'];
+        const edge = world.edges.filter(e => modes.includes(e.mode) && e.points.length >= 2).sort((a, b) => b.points.length - a.points.length)[0];
+        const p = edge.points[Math.floor(edge.points.length / 2)], q = edge.points[Math.floor(edge.points.length / 2) + 1] ?? edge.points[0];
+        const len = Math.hypot(q.x - p.x, q.z - p.z) || 1, nx = -(q.z - p.z) / len, nz = (q.x - p.x) / len;
+        feet = { x: p.x + nx * 14 - (q.x - p.x) / len * 10, y: p.y, z: p.z + nz * 14 - (q.z - p.z) / len * 10 }; look = { x: p.x + (q.x - p.x) / len * 12, y: p.y, z: p.z + (q.z - p.z) / len * 12 };
+      }
       else { feet = { ...view.feet, y: 14.6 }; look = view.look; }
       simulation.state.player.position = { ...feet };
       controller.setMode('walk', feet); Object.assign(controller['feet'], feet);

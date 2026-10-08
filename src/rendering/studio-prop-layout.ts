@@ -108,7 +108,7 @@ export function studioBuildingPlacements(building: Building, assets: ReadonlyMap
 }
 
 /** A fixed, world-space studio model (origin = its min corner, yaw about Y). */
-export interface StudioStaticPlacement { asset: string; id: string; position: { x: number; y: number; z: number }; yaw: number }
+export interface StudioStaticPlacement { asset: string; id: string; position: { x: number; y: number; z: number }; yaw: number; /** Rotation about the model's own X after yaw (deck slope); 0 when absent. */ pitch?: number }
 
 /** BUILT-154 is the existing 22×1×18m station platform at the same extent as
  * the original box (centre y−.6, top y−.1). BUILT-155 stands on the
@@ -145,5 +145,47 @@ export function studioLandmarkPlacements(world: { buildings: readonly Building[]
   }
   const core = world.buildings.find(b => b.kind === 'core'), court = assets.get(FORECOURT_LANDMARK.asset);
   if (core && court) placements.push({ asset: court.id, id: `${core.id}:forecourt`, position: { x: core.position.x, y: core.position.y, z: core.door.z + FORECOURT_LANDMARK.doorOffsetZ }, yaw: 0 });
+  return placements;
+}
+
+/** Deck modules authored at the game's exact deck cross-sections, repeated
+ * along every rail or bridge segment (repeated, never stretched): BUILT-140
+ * rail bed 6×1.4m and BUILT-146 bridge deck 9×0.5m, each 8m long. Every piece
+ * follows its segment's heading and slope (rigid rotation); the last piece of
+ * a segment overlaps backwards to end flush. The network emitter leaves out
+ * its own deck box for a mode dressed here. Display only. */
+export const DECK_TILES = {
+  rail: { asset: 'BUILT-140', modes: ['maglev', 'lightRail'], height: 1.4, lift: -.9 },
+  bridge: { asset: 'BUILT-146', modes: ['bridge'], height: .5, lift: -.25 },
+} as const;
+export function studioDeckTilePlacements(world: { edges: readonly { id: string; mode: string; points: readonly { x: number; y: number; z: number }[] }[] }, deckWidth: (edge: any) => number, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+  const placements: StudioStaticPlacement[] = [];
+  for (const [kind, tile] of Object.entries(DECK_TILES)) {
+    const asset = assets.get(tile.asset); if (!asset) continue;
+    const { min, max } = asset.boundsM, width = max[0] - min[0], height = max[1] - min[1], length = max[2] - min[2];
+    const cx = (min[0] + max[0]) / 2, cy = (min[1] + max[1]) / 2, cz = (min[2] + max[2]) / 2;
+    for (const edge of world.edges) {
+      if (!(tile.modes as readonly string[]).includes(edge.mode)) continue;
+      // Only an exact cross-section is dressed; anything else keeps its deck box.
+      if (Math.abs(deckWidth(edge) - width) > 1e-6 || Math.abs(tile.height - height) > 1e-6) continue;
+      // Tiles run along the whole edge path (the world samples rails every 4m),
+      // each turned to the segment its centre lies on; the last overlaps backwards.
+      const spans: number[] = [];
+      for (let i = 1; i < edge.points.length; i++) { const a = edge.points[i - 1], b = edge.points[i]; spans.push(Math.hypot(b.x - a.x, b.y - a.y, b.z - a.z)); }
+      const total = spans.reduce((sum, n) => sum + n, 0); if (total < .01) continue;
+      const count = Math.max(1, Math.ceil(total / length));
+      for (let k = 0; k < count; k++) {
+        const s = total < length ? total / 2 : Math.min(k * length + length / 2, total - length / 2);
+        let i = 0, before = 0; while (i < spans.length - 1 && before + spans[i] < s) { before += spans[i]; i++; }
+        const a = edge.points[i], b = edge.points[i + 1], dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z, t = spans[i] > 0 ? (s - before) / spans[i] : 0;
+        const yaw = Math.atan2(dx, dz), pitch = -Math.atan2(dy, Math.hypot(dx, dz));
+        const cosY = Math.cos(yaw), sinY = Math.sin(yaw), cosP = Math.cos(pitch), sinP = Math.sin(pitch);
+        // R·c for R = rotY(yaw)·rotX(pitch), so the model's centre lands on the deck centre.
+        const r1y = cy * cosP - cz * sinP, r1z = cy * sinP + cz * cosP, rcx = cx * cosY + r1z * sinY, rcy = r1y, rcz = -cx * sinY + r1z * cosY;
+        const centre = { x: a.x + dx * t, y: a.y + dy * t + tile.lift, z: a.z + dz * t };
+        placements.push({ asset: asset.id, id: `${edge.id}:${kind}-deck:${k}`, position: { x: centre.x - rcx, y: centre.y - rcy, z: centre.z - rcz }, yaw, pitch });
+      }
+    }
+  }
   return placements;
 }

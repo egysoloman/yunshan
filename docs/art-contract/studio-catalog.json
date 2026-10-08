@@ -17,8 +17,8 @@
    "CHAR": 238
   },
   "byStatus": {
-   "unassigned": 768,
-   "placed": 20,
+   "unassigned": 766,
+   "placed": 22,
    "rejected": 5
   },
   "byFamily": {
@@ -349,7 +349,7 @@
     "triangles": 3140
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "M001第一轮参考精修候选；连续倒角/曲面、独立最小块件和真实纹理。旧母版另存；人工美术验收未完成。"
   },
   {
@@ -8130,7 +8130,7 @@
     "triangles": 680
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "3m为柱芯截面；侧耳各出挑0.2m，总宽3.4m。作者高32m以验证高于25m时16m拉结层；4m道路柱、地形适配和其他高度未声称完成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8168,7 +8168,7 @@
     "triangles": 320
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "3m柱芯中心承托7m墩帽；1.8m包含顶层0.2m橡胶支座。道路11m规格另需变体验证，未做结构安全认证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8206,7 +8206,7 @@
     "triangles": 116
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "为两根3m柱、柱轴距9m的作者场景，木梁端坐在137的16m层承耳上。25m阈值和每16m规则已记录并验证一层；非自动桥梁生成器。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8243,8 +8243,7 @@
     "sizeOnWorldVoxels": true,
     "triangles": 844
    },
-   "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "status": "placed",
    "studioNote": "作者8m长直段；清单中心偏-0.9m按Y向解释：路床几何中心低于线路基准0.9m，顶面低0.2m；线路基准接口另列。141导轨与142侧缘保护条下一批独立制作，不算进本件；无列车或动力学。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8282,7 +8281,7 @@
     "triangles": 1394
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "8m作者直段，导轨轴相对轨道中线±1.8m；0.08m安装脚使钢梁中心位于路床顶面上0.2m的线路基准。无磁浮机制或车辆仿真。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8320,7 +8319,7 @@
     "triangles": 8100
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "2m作者段；5mm网格保留0.35m条宽和±2.75m轴偏的半格边界。钢箱为真实空腔，不缩成实心墙；平台侧开口通过分段留空验证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8434,7 +8433,7 @@
     "triangles": 826
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "作者24m高，由安装位置Y=0.8m至24.8m；轴位为井架中线x+3.2m。井架与乘舱路线独立，不把光线当机械升降能力。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8471,8 +8470,7 @@
     "sizeOnWorldVoxels": false,
     "triangles": 540
    },
-   "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "status": "placed",
    "studioNote": "作者8m长段，保留9m显示面宽0.5m厚；147栏柱和135横杆另装。不含整桥悬索、塔柱或自动道路body，不因一块桥面就判定完整桥受力通过。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8510,7 +8508,7 @@
     "triangles": 556
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "单柱母版；约8m节奏通过实例放置，横杆135另装。横杆槽是安装凹口，不能误标成永远保持空的通行洞；不包含整段栏杆或玻璃板。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8548,7 +8546,7 @@
     "triangles": 26108
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "作者跨长160m满足旧阈值>140m；塔位25.6/134.4m，中央最低点12m，两侧曲线是两组有意分离部件。只验证静态连接与锚座，不声称索力、地形/车辆或自动悬桥系统完整。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8586,7 +8584,7 @@
     "triangles": 248
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "默认主缆中心12m，吊杆有效端点差10.9m；总高12.4m含夹箍。验证12.4/12.8m两规格用于中央8m节距示例，不将尺寸版本或重复吊杆计为新母版。实际受拉承载尚未验算。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8662,7 +8660,7 @@
     "triangles": 872
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "2m柱身前铜扣另出0.1m；安装在基础顶-1m时柱顶为桥面基准+32m。塔沿160m跨长的0.16/0.84处复用；主索槽用于安装148，不能称净空通行洞。未实现自动地形适配。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8700,7 +8698,7 @@
     "triangles": 828
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "2m塔柱轴距11m，中央9m通行宽度；1.6m为梁体厚度，2.6m含小屋冠。安装在柱顶+32m，不能占桥面车辆通行层；未实现结构受力验证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -8738,7 +8736,7 @@
     "triangles": 2808
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "基础端块高max(1,deck-terrain)，本件明确采用deck=3m、terrain=0m；上部门架使总高8.4m。没有把历史154.6m高桥负例改称已解决，未接入游戏body或实时地形。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9571,7 +9569,7 @@
     "triangles": 340
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "默认8m板段，另验0.2m缝段；6板5缝为复用实例。世界底254、顶254.6m。保留原游戏巨块/ray负例及新增低pier冲突；本孤立候选不等于原游戏最终PASS或合入。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9609,7 +9607,7 @@
     "triangles": 684
    },
    "status": "unassigned",
-   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain",
+   "gap": "fixed module; bridge towers, cables and abutments vary with deck height and terrain (the 8m deck BUILT-146 is tiled along every bridge path)",
    "studioNote": "6梁复用；梁底252.8m、顶254m，禁止误写252.6。端托使实体进深8.2m（局部Z−0.1至8.1）；原游戏pier冲突与巨块/ray负例未在此解决。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -9685,7 +9683,7 @@
     "triangles": 1324
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "本件为pier；9m墩帽cap另选，6pier/8cap仅记录原描述数量，未编造原放置坐标。尺寸为作者接口样件，原隔离descriptor/terrain采样未提供。保留原巨块/ray负例与lowerdeck pier冲突；不声称原游戏最终PASS、三桥全净空或已集成。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11015,7 +11013,7 @@
     "triangles": 2772
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "作者轮踏半径0.5m/轮缘0.55m，最下轮缘Y0、踏面Y0.05；安装到真实双钢轨头，不借橡胶车胎。原Vehicle/AerialVehicle、SimState、NetworkEdge、停稳/权限/登离/飞行/转向状态及机型规格未提供；均为明确作者米制接口样件，不宣称原游戏W运行、驾驶、动画、浮力或受力认证。 已按图重建候选，待人工美术验收。"
   },
   {
@@ -11433,7 +11431,7 @@
     "triangles": 280
    },
    "status": "unassigned",
-   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching",
+   "gap": "fixed module; elevated decks and piers vary with terrain and the contract forbids stretching (the 8m rail bed BUILT-140 is tiled along every rail path)",
    "studioNote": "局部顶1.2m、双承载垫0.4–0.6m，明确墩→帽→垫→梁→板层级；未解决原共享桥逻辑的历史失败。原Vehicle/AerialVehicle、SimState、NetworkEdge、停稳/权限/登离/飞行/转向状态及机型规格未提供；均为明确作者米制接口样件，不宣称原游戏W运行、驾驶、动画、浮力或受力认证。 已按图重建候选，待人工美术验收。"
   },
   {

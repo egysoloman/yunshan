@@ -12,7 +12,7 @@ export interface NetworkSink {
   box(key: NetworkMaterial, x: number, y: number, z: number, sx: number, sy: number, sz: number, color?: string, rotation?: number, tag?: { roof?: boolean }): void;
   segment(key: NetworkMaterial, a: Vec3, b: Vec3, width: number, height: number, lift?: number, color?: string): void;
 }
-export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean }
+export interface NetworkStructureOptions { dressesStations: boolean; dressesRunway: boolean; dressesRailDeck?: boolean; dressesBridgeDeck?: boolean }
 
 /** Roads, rails, bridges, lifts, cables, supports, guardrails, station
  * platforms and junction poles, as the renderer has always drawn them. */
@@ -34,7 +34,8 @@ export function emitNetworkStructures(world: WorldDefinition, sink: NetworkSink,
         const rail = edge.mode === 'maglev' || edge.mode === 'lightRail';
         const width = deckWidth(edge);
         // The studio runway slab (BUILT-158) replaces the strip's own deck box at the same extent.
-        if (!(edge.id === 'road-airport-runway-strip' && options.dressesRunway)) sink.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
+        const dressedDeck = edge.id === 'road-airport-runway-strip' && options.dressesRunway || rail && !!options.dressesRailDeck || edge.mode === 'bridge' && !!options.dressesBridgeDeck;
+        if (!dressedDeck) sink.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
         if (rail) { sink.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); sink.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
         else if (edge.mode !== 'bridge') sink.segment('stone', a, b, .16, .08, .07, '#d1c6a1');
         // Curbs, paving seams and separate shoulders make the travelled deck

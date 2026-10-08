@@ -20,7 +20,7 @@ namespace Yunshan.Core
     {
         static Vec3 V(double x, double y, double z) => new Vec3(x, y, z);
 
-        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway)
+        public static void Emit(WorldDefinition world, INetworkSink sink, bool dressesStations, bool dressesRunway, bool dressesRailDeck = false, bool dressesBridgeDeck = false)
         {
             foreach (var edge in world.Edges)
             {
@@ -43,7 +43,8 @@ namespace Yunshan.Core
                     }
                     bool rail = edge.Mode == "maglev" || edge.Mode == "lightRail";
                     double width = TransportGeometry.DeckWidth(edge);
-                    if (!(edge.Id == "road-airport-runway-strip" && dressesRunway)) sink.Segment("stone", a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : "#969987");
+                    bool dressedDeck = edge.Id == "road-airport-runway-strip" && dressesRunway || rail && dressesRailDeck || edge.Mode == "bridge" && dressesBridgeDeck;
+                    if (!dressedDeck) sink.Segment("stone", a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? "#84948e" : edge.Mode == "bridge" ? "#b8b3a0" : "#969987");
                     if (rail) { sink.Segment("cyan", V(a.X - 1.8, a.Y, a.Z), V(b.X - 1.8, b.Y, b.Z), .28, .24, .16); sink.Segment("cyan", V(a.X + 1.8, a.Y, a.Z), V(b.X + 1.8, b.Y, b.Z), .28, .24, .16); }
                     else if (edge.Mode != "bridge") sink.Segment("stone", a, b, .16, .08, .07, "#d1c6a1");
                     double dx = b.X - a.X, dz = b.Z - a.Z, horizontal = JsMath.Hypot(dx, dz); if (horizontal == 0) horizontal = 1;

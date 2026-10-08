@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
-import { CEILING_LAMP, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { deckWidth } from '../transport-geometry';
+import { CEILING_LAMP, DECK_TILES, studioDeckTilePlacements, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, STUDIO_TABLETOP, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -23,17 +24,23 @@ export class StudioPropPool {
   private readonly placeholder = new THREE.BoxGeometry(1, 1, 1);
   private readonly placeholderMaterial = new THREE.MeshStandardMaterial({ color: '#846346', roughness: .9 });
   private readonly statics: StudioStaticPlacement[];
+  private readonly permanentCount = new Map<string, number>();
+  private capacityFor(id: string): number { return this.capacity + (this.permanentCount.get(id) ?? 0); }
+  private static permanent(placement: StudioStaticPlacement): boolean { return placement.id.includes('-deck:'); }
   private signature = '';
   private lighting = { daylight: 1, power: 1 };
   private disposed = false;
   constructor(parent: THREE.Group | THREE.Scene, world: WorldDefinition, private readonly capacity = 384) {
     this.group.name = '体素工坊 · 楼层设施模型';
     for (const building of world.buildings) this.buildings.set(building.id, building);
-    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world)];
+    // Deck tiles are drawn everywhere (they replace the network's deck boxes); the rest by distance.
+    const tiles = studioDeckTilePlacements(world, deckWidth);
+    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world), ...tiles];
+    for (const tile of tiles) this.permanentCount.set(tile.asset, (this.permanentCount.get(tile.asset) ?? 0) + 1);
     // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
     const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...Object.values(STUDIO_TABLETOP) as string[], ...this.statics.map(p => p.asset)]);
     for (const asset of STUDIO_ASSETS.filter(asset => used.has(asset.id))) {
-      const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, capacity);
+      const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, this.capacityFor(asset.id));
       this.prepare(mesh, `${asset.id} ${asset.name} · 占位`);
       this.draws.set(asset.id, { asset, meshes: [{ mesh, bake: new THREE.Matrix4() }], loaded: false });
     }
@@ -51,7 +58,7 @@ export class StudioPropPool {
         const meshes: AssetDraw['meshes'] = [];
         gltf.scene.traverse(object => {
           if (!(object instanceof THREE.Mesh)) return;
-          const mesh = new THREE.InstancedMesh(object.geometry, object.material, this.capacity);
+          const mesh = new THREE.InstancedMesh(object.geometry, object.material, this.capacityFor(draw.asset.id));
           this.prepare(mesh, `${draw.asset.id} ${draw.asset.name}`);
           meshes.push({ mesh, bake: object.matrixWorld.clone() });
         });
@@ -75,6 +82,8 @@ export class StudioPropPool {
   get dressesStations(): boolean { return this.statics.some(p => p.id.endsWith(':platform')); }
   /** True when this pool draws the given landmark (runway or forecourt). */
   dressesLandmark(suffix: 'runway' | 'forecourt'): boolean { return this.statics.some(p => p.id.endsWith(`:${suffix}`)); }
+  /** True when studio deck tiles replace the network's own deck boxes for this kind. */
+  dressesDeck(kind: keyof typeof DECK_TILES): boolean { return this.statics.some(p => p.id.includes(`:${kind}-deck:`)); }
 
   /** Lamp cores glow only with city power, brighter as daylight falls. */
   setLighting(daylight: number, power: number): void {
@@ -107,11 +116,11 @@ export class StudioPropPool {
       const bounds = this.draws.get(placement.asset)?.asset.boundsM, p = placement.position;
       const centre = bounds ? { x: p.x + (bounds.min[0] + bounds.max[0]) / 2, y: p.y + (bounds.min[1] + bounds.max[1]) / 2, z: p.z + (bounds.min[2] + bounds.max[2]) / 2 } : p;
       const radius = bounds ? Math.hypot(bounds.max[0] - bounds.min[0], bounds.max[1] - bounds.min[1], bounds.max[2] - bounds.min[2]) / 2 : 0;
-      const distance = Math.max(0, Math.hypot(camera.x - centre.x, camera.y - centre.y, camera.z - centre.z) - radius);
+      const distance = StudioPropPool.permanent(placement) ? 0 : Math.max(0, Math.hypot(camera.x - centre.x, camera.y - centre.y, camera.z - centre.z) - radius);
       if (distance > staticRange) continue;
       const list = fixed.get(placement.asset) ?? []; list.push({ placement, distance }); fixed.set(placement.asset, list);
     }
-    const signature = [...this.draws.keys()].map(id => `${id}:${this.draws.get(id)!.loaded}:${(selected.get(id) ?? []).map(s => `${s.building.id}/${s.placement.fixtureId}/${s.placement.local.x}`).join(',')}:${(fixed.get(id) ?? []).map(s => s.placement.id).join(',')}`).join('|');
+    const signature = [...this.draws.keys()].map(id => `${id}:${this.draws.get(id)!.loaded}:${(selected.get(id) ?? []).map(s => `${s.building.id}/${s.placement.fixtureId}/${s.placement.local.x}`).join(',')}:${(fixed.get(id) ?? []).filter(s => !StudioPropPool.permanent(s.placement)).map(s => s.placement.id).join(',')}`).join('|');
     if (signature === this.signature) return;
     this.signature = signature;
     const place = new THREE.Matrix4(), part = new THREE.Matrix4(), yaw = new THREE.Matrix4();
@@ -120,8 +129,8 @@ export class StudioPropPool {
         .multiply(yaw.makeRotationY(building.rotation))
         .multiply(part.makeTranslation(placement.local.x, placement.local.y, placement.local.z))
         .multiply(part.makeScale(placement.scale, placement.scale, placement.scale)) }));
-      const statics = (fixed.get(id) ?? []).map(({ placement, distance }) => ({ distance, at: (m: THREE.Matrix4) => m.makeTranslation(placement.position.x, placement.position.y, placement.position.z).multiply(yaw.makeRotationY(placement.yaw)) }));
-      const list = [...fixtures, ...statics].sort((a, b) => a.distance - b.distance).slice(0, this.capacity);
+      const statics = (fixed.get(id) ?? []).map(({ placement, distance }) => ({ distance, at: (m: THREE.Matrix4) => m.makeTranslation(placement.position.x, placement.position.y, placement.position.z).multiply(yaw.makeRotationY(placement.yaw)).multiply(part.makeRotationX(placement.pitch ?? 0)) }));
+      const list = [...fixtures, ...statics].sort((a, b) => a.distance - b.distance).slice(0, this.capacityFor(id));
       const { min, max } = draw.asset.boundsM;
       list.forEach(({ at }, index) => {
         at(place);
@@ -135,7 +144,7 @@ export class StudioPropPool {
         if (list.length) mesh.computeBoundingSphere();
       }
     }
-    this.group.userData.studioPlacements = Object.fromEntries([...this.draws.keys()].map(id => [id, Math.min(this.capacity, (selected.get(id)?.length ?? 0) + (fixed.get(id)?.length ?? 0))]));
+    this.group.userData.studioPlacements = Object.fromEntries([...this.draws.keys()].map(id => [id, Math.min(this.capacityFor(id), (selected.get(id)?.length ?? 0) + (fixed.get(id)?.length ?? 0))]));
   }
 
   dispose(): void {

@@ -100,12 +100,17 @@ namespace Yunshan.Runtime
                 // bridges, lifts, cables, junction poles), emitted off the main thread.
                 bool stationsDressed = studio.Has(StudioPropLayout.StationPlatformAsset) && studio.Has(StudioPropLayout.StationShelterAsset);
                 bool forecourtDressed = landmarks.Any(p => p.Id.EndsWith(":forecourt"));
-                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed); GatewayStructures.Emit(world, sink, forecourtDressed); return sink; });
+                // Rail beds and bridge decks tiled with BUILT-140 / BUILT-146 replace their deck boxes.
+                bool railDeckDressed = studio.Has("BUILT-140"), bridgeDeckDressed = studio.Has("BUILT-146");
+                var decks = await Task.Run(() => StudioPropLayout.DeckTilePlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList());
+                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed, railDeckDressed, bridgeDeckDressed); GatewayStructures.Emit(world, sink, forecourtDressed); return sink; });
                 var networkRoot = new GameObject("路网结构").transform; networkRoot.SetParent(transform, false);
                 foreach (var (mesh, glow) in network.Build()) Show(networkRoot, mesh, glow ? glassMaterial : solidMaterial);
                 Show(transform, CityGeometry.WaterMesh(world), waterMaterial);
                 var landmarkRoot = new GameObject("体素工坊地标").transform; landmarkRoot.SetParent(transform, false);
                 foreach (var l in landmarks) studio.Place(l.Asset, landmarkRoot, l.Position, l.Yaw, 1);
+                var deckRoot = new GameObject("体素工坊轨床与桥面").transform; deckRoot.SetParent(transform, false);
+                foreach (var d in decks) studio.Place(d.Asset, deckRoot, d.Position, d.Yaw, 1, d.Pitch);
 
                 status = "楼宇远景……";
                 var farRoot = new GameObject("楼宇远景").transform; farRoot.SetParent(transform, false);
