@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { Building, Vec3, WorldDefinition } from '../types';
-import { STUDIO_ASSETS, studioBuildingPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
+import { CEILING_LAMP, STUDIO_ASSETS, STUDIO_FIXTURE_DRESSING, STUDIO_PROGRAM_DRESSING, studioBuildingPlacements, studioLandmarkPlacements, studioStationPlacements, type StudioAsset, type StudioPropPlacement, type StudioStaticPlacement } from './studio-prop-layout';
 
 /** Fraction of an authored emissive maximum shown for a supply and daylight. */
 export function studioEmissiveFactor(daylight: number, power: number): number {
@@ -29,8 +29,10 @@ export class StudioPropPool {
   constructor(parent: THREE.Group | THREE.Scene, world: WorldDefinition, private readonly capacity = 384) {
     this.group.name = '体素工坊 · 楼层设施模型';
     for (const building of world.buildings) this.buildings.set(building.id, building);
-    this.statics = studioStationPlacements(world);
-    for (const asset of STUDIO_ASSETS) {
+    this.statics = [...studioStationPlacements(world), ...studioLandmarkPlacements(world)];
+    // Woodland models belong to WoodlandModelPool; this pool loads only what it places.
+    const used = new Set([CEILING_LAMP.asset as string, ...Object.values(STUDIO_FIXTURE_DRESSING).map(d => d!.asset), ...Object.values(STUDIO_PROGRAM_DRESSING).flatMap(byKind => Object.values(byKind!).map(d => d!.asset)), ...this.statics.map(p => p.asset)]);
+    for (const asset of STUDIO_ASSETS.filter(asset => used.has(asset.id))) {
       const mesh = new THREE.InstancedMesh(this.placeholder, this.placeholderMaterial, capacity);
       this.prepare(mesh, `${asset.id} ${asset.name} · 占位`);
       this.draws.set(asset.id, { asset, meshes: [{ mesh, bake: new THREE.Matrix4() }], loaded: false });
@@ -70,7 +72,9 @@ export class StudioPropPool {
   }
 
   /** True when this pool draws the station platform and shelter. */
-  get dressesStations(): boolean { return this.statics.length > 0; }
+  get dressesStations(): boolean { return this.statics.some(p => p.id.endsWith(':platform')); }
+  /** True when this pool draws the given landmark (runway or forecourt). */
+  dressesLandmark(suffix: 'runway' | 'forecourt'): boolean { return this.statics.some(p => p.id.endsWith(`:${suffix}`)); }
 
   /** Lamp cores glow only with city power, brighter as daylight falls. */
   setLighting(daylight: number, power: number): void {
@@ -99,7 +103,11 @@ export class StudioPropPool {
     }
     const fixed = new Map<string, { placement: StudioStaticPlacement; distance: number }[]>();
     for (const placement of this.statics) {
-      const p = placement.position, distance = Math.hypot(camera.x - p.x, camera.y - p.y, camera.z - p.z);
+      // Distance to the model's own bounds, so a 960m runway does not vanish from its far end.
+      const bounds = this.draws.get(placement.asset)?.asset.boundsM, p = placement.position;
+      const centre = bounds ? { x: p.x + (bounds.min[0] + bounds.max[0]) / 2, y: p.y + (bounds.min[1] + bounds.max[1]) / 2, z: p.z + (bounds.min[2] + bounds.max[2]) / 2 } : p;
+      const radius = bounds ? Math.hypot(bounds.max[0] - bounds.min[0], bounds.max[1] - bounds.min[1], bounds.max[2] - bounds.min[2]) / 2 : 0;
+      const distance = Math.max(0, Math.hypot(camera.x - centre.x, camera.y - centre.y, camera.z - centre.z) - radius);
       if (distance > staticRange) continue;
       const list = fixed.get(placement.asset) ?? []; list.push({ placement, distance }); fixed.set(placement.asset, list);
     }

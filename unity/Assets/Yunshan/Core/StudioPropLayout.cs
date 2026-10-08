@@ -120,6 +120,27 @@ namespace Yunshan.Core
             return result;
         }
 
+        /// <summary>Port of studioLandmarkPlacements: BUILT-158 runway slab (top at
+        /// the runway deck top) and BUILT-092 forecourt centred at door + 67m.</summary>
+        public const string RunwayAsset = "BUILT-158", RunwayEdgeId = "road-airport-runway-strip", ForecourtAsset = "BUILT-092";
+        public const double ForecourtDoorOffsetZ = 67;
+        public static List<StudioStaticPlacement> LandmarkPlacements(WorldDefinition world, IReadOnlyDictionary<string, StudioAssetBounds> assets)
+        {
+            var result = new List<StudioStaticPlacement>();
+            var runway = world.Edges.FirstOrDefault(e => e.Id == RunwayEdgeId);
+            if (runway != null && assets.TryGetValue(RunwayAsset, out var slab) && runway.Points.Count == 2)
+            {
+                Vec3 a = runway.Points[0], b = runway.Points[1];
+                double length = JsMath.Hypot(b.X - a.X, b.Z - a.Z), width = slab.Max[2] - slab.Min[2];
+                if (System.Math.Abs(length - (slab.Max[0] - slab.Min[0])) < 1e-6 && System.Math.Abs(a.Y - b.Y) < 1e-6 && System.Math.Abs(a.Z - b.Z) < 1e-6 && b.X > a.X)
+                    result.Add(new StudioStaticPlacement { Asset = RunwayAsset, Id = runway.Id + ":runway", Position = new Vec3(a.X - slab.Min[0], a.Y - slab.Max[1], a.Z - width / 2 - slab.Min[2]), Yaw = 0 });
+            }
+            var core = world.Buildings.FirstOrDefault(b => b.Kind == "core");
+            if (core != null && assets.ContainsKey(ForecourtAsset))
+                result.Add(new StudioStaticPlacement { Asset = ForecourtAsset, Id = core.Id + ":forecourt", Position = new Vec3(core.Position.X, core.Position.Y, core.Door.Z + ForecourtDoorOffsetZ), Yaw = 0 });
+            return result;
+        }
+
         /// <summary>Lamp glow fraction for city power and daylight (both clamped 0..1).</summary>
         public static double EmissiveFactor(double daylight, double power)
         {

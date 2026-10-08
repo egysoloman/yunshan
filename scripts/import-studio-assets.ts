@@ -8,7 +8,7 @@
  * Blobs are read with `git show`, so a blobless partial clone works and only
  * the selected files are downloaded.
  *
- *   npx tsx scripts/import-studio-assets.ts --repo <checkout> --ids LIFE-064,LIFE-032
+ *   npx tsx scripts/import-studio-assets.ts --repo <checkout> --ids LIFE-064,LIFE-032 [--assemblies BUILT-092]
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -22,6 +22,8 @@ interface GltfNode { mesh?: number; translation?: Vec3; rotation?: [number, numb
 const args = process.argv.slice(2);
 const option = (name: string) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
 const repo = option('repo'), ids = option('ids')?.split(',').map(id => id.trim()).filter(Boolean);
+/** Assemblies (whole studio compositions) are imported only when named here. */
+const assemblies = new Set(option('assemblies')?.split(',').map(id => id.trim()).filter(Boolean) ?? []);
 if (!repo || !ids?.length) throw new Error('usage: --repo <voxel-studio checkout> --ids LIFE-064,LIFE-032');
 
 const git = (...command: string[]) => execFileSync('git', ['-C', repo, ...command], { maxBuffer: 256 * 1024 * 1024 });
@@ -72,7 +74,7 @@ const round = (v: number) => Math.round(v * 1e6) / 1e6;
 const assets = ids.map(id => {
   const entry = index.entries.find(e => e.id === id);
   if (!entry?.file) throw new Error(`${id}: not in the effective atlas index`);
-  if (entry.kind) throw new Error(`${id}: ${entry.kind} entries are not single masters`);
+  if (entry.kind && !(entry.kind === 'assembly' && assemblies.has(id))) throw new Error(`${id}: ${entry.kind} entries are not single masters (pass --assemblies ${id} for a whole assembly)`);
   const run = /^(.*?-\d{14})-/.exec(entry.file)?.[1];
   const source = [`artifacts/atlas/${run}/exports/${id}/visual.glb`, `projects/production/${run}/exports/${id}/visual.glb`].find(path => tree.has(path));
   if (!source) throw new Error(`${id}: no export for run ${run}`);

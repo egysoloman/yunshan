@@ -88,13 +88,18 @@ namespace Yunshan.Runtime
                 var terrainRoot = new GameObject("地形").transform; terrainRoot.SetParent(transform, false);
                 foreach (var chunk in chunks) Show(terrainRoot, CityGeometry.TerrainMesh(chunk), solidMaterial);
 
-                status = "路网与水系……";
-                Show(transform, CityGeometry.NetworkMesh(world), solidMaterial);
-                Show(transform, CityGeometry.WaterMesh(world), waterMaterial);
-
                 status = "加载体素工坊资产……";
                 studio = new StudioAssets(transform);
                 await studio.LoadAsync();
+
+                status = "路网与水系……";
+                // Landmarks drawn by studio models (runway slab, core forecourt) replace their own strips.
+                var landmarks = StudioPropLayout.LandmarkPlacements(world, studio.Bounds).Where(p => studio.Has(p.Asset)).ToList();
+                bool runwayDressed = landmarks.Any(p => p.Id.EndsWith(":runway"));
+                Show(transform, CityGeometry.NetworkMesh(world, edge => runwayDressed && edge.Id == StudioPropLayout.RunwayEdgeId), solidMaterial);
+                Show(transform, CityGeometry.WaterMesh(world), waterMaterial);
+                var landmarkRoot = new GameObject("体素工坊地标").transform; landmarkRoot.SetParent(transform, false);
+                foreach (var l in landmarks) studio.Place(l.Asset, landmarkRoot, l.Position, l.Yaw, 1);
 
                 status = "楼宇远景……";
                 var farRoot = new GameObject("楼宇远景").transform; farRoot.SetParent(transform, false);

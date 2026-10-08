@@ -44,13 +44,14 @@ namespace Yunshan.Runtime
         }
 
         /// <summary>Roads, bridges, rails and runways as strips at their authoritative points.</summary>
-        public static Mesh NetworkMesh(WorldDefinition world)
+        public static Mesh NetworkMesh(WorldDefinition world, Func<NetworkEdge, bool> skip = null)
         {
             var builder = new GameMeshBuilder();
             Color road = Space.Hex("#6f716a"), bridge = Space.Hex("#7d7468"), rail = Space.Hex("#5c6766"), runway = Space.Hex("#5d605d"), pier = Space.Hex("#a0aaa0");
             foreach (var edge in world.Edges)
             {
                 if (edge.Mode == "flight" || edge.Mode == "lift" || edge.Mode == "ferry" || edge.Mode == "cable") continue;
+                if (skip != null && skip(edge)) continue;
                 bool isRail = edge.Mode == "maglev" || edge.Mode == "lightRail";
                 double width = edge.Id.Contains("airport-runway-strip") ? 44 : edge.Mode == "bridge" ? 9 : isRail ? 6 : 10;
                 Color color = edge.Id.Contains("runway") ? runway : edge.Mode == "bridge" ? bridge : isRail ? rail : road;

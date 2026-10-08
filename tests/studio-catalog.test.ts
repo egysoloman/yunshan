@@ -12,8 +12,7 @@ test('the studio catalogue and the imported manifest describe the same studio co
   assert.equal(new Set(catalog.entries.map((e: { id: string }) => e.id)).size, catalog.entries.length, 'one row per master');
   for (const entry of catalog.entries) {
     assert(['placed', 'rejected', 'unassigned'].includes(entry.status), entry.id);
-    assert(entry.checks.exported, `${entry.id} has a GLB export`);
-    assert(entry.sizeM.every((v: number) => v > 0), entry.id);
+    if (entry.kind === 'master' || entry.status === 'placed') { assert(entry.checks.exported, `${entry.id} has a GLB export`); assert(entry.sizeM.every((v: number) => v > 0), entry.id); }
   }
   for (const asset of manifest.assets) {
     const row = catalog.entries.find((e: { id: string }) => e.id === asset.id);

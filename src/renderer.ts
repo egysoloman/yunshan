@@ -792,7 +792,8 @@ export class CityRenderer implements CityRendererAPI {
         }
         const rail = edge.mode === 'maglev' || edge.mode === 'lightRail';
         const width = deckWidth(edge);
-        batch.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
+        // The studio runway slab (BUILT-158) replaces the strip's own deck box at the same extent.
+        if (!(edge.id === 'road-airport-runway-strip' && this.studioProps?.dressesLandmark('runway'))) batch.segment('stone', a, b, width, rail ? 1.4 : .5, rail ? -.9 : -.25, rail ? '#84948e' : edge.mode === 'bridge' ? '#b8b3a0' : '#969987');
         if (rail) { batch.segment('cyan', { ...a, x: a.x - 1.8 }, { ...b, x: b.x - 1.8 }, .28, .24, .16); batch.segment('cyan', { ...a, x: a.x + 1.8 }, { ...b, x: b.x + 1.8 }, .28, .24, .16); }
         else if (edge.mode !== 'bridge') batch.segment('stone', a, b, .16, .08, .07, '#d1c6a1');
         // Curbs, paving seams and separate shoulders make the travelled deck
@@ -856,7 +857,8 @@ export class CityRenderer implements CityRendererAPI {
   private buildGateways() {
     const batch = new BoxBatch(this.materials);
     const civic = this.world.buildings.find(b => b.kind === 'core');
-    if (civic) {
+    // The studio forecourt (BUILT-092) carries the same paving, lamps and flags.
+    if (civic && !this.studioProps?.dressesLandmark('forecourt')) {
       const x = civic.position.x, z = civic.door.z + 67, y = civic.position.y;
       batch.box('stone', x, y + .04, z, 96, .12, 84, '#82958a');
       for (const side of [-1, 1]) for (const offset of [-30, 0, 30]) {

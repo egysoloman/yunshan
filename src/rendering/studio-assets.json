@@ -332,6 +332,54 @@
         ]
       },
       "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "BUILT-158",
+      "name": "既有南岫960×44m跑道",
+      "assetId": "built-158",
+      "revision": 3,
+      "url": "studio-assets/BUILT-158.glb",
+      "source": "projects/production/atlas-20261003185344/exports/BUILT-158/visual.glb",
+      "sha256": "6452cfe68119b443d68d2cf54c5c9faf697d89a91dc94c294ee40ff0223331e1",
+      "bytes": 755228,
+      "triangles": 9300,
+      "cellSizeM": 0.5,
+      "boundsM": {
+        "min": [
+          0,
+          0,
+          0
+        ],
+        "max": [
+          960,
+          1.5,
+          44
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
+    },
+    {
+      "id": "BUILT-092",
+      "name": "天枢前院灯旗铺地组合",
+      "revision": 1,
+      "url": "studio-assets/BUILT-092.glb",
+      "source": "projects/production/atlas-20261005061141/exports/BUILT-092/visual.glb",
+      "sha256": "a7cd4feaff33f369d2b80c92f28360534799b709bb96ac493e0a1d7b11467a48",
+      "bytes": 224332,
+      "triangles": 2292,
+      "boundsM": {
+        "min": [
+          -48,
+          -0.4,
+          -42
+        ],
+        "max": [
+          48,
+          9.3,
+          42
+        ]
+      },
+      "review": "candidate: studio human art acceptance 0"
     }
   ]
 }

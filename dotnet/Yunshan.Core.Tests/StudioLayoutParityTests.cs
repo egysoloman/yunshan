@@ -30,7 +30,9 @@ public class StudioLayoutParityTests
         var tree = new Obj()
             .Put("buildings", world.Buildings.Select(b => new Obj().Put("id", b.Id).Put("placements", StudioPropLayout.BuildingPlacements(b, assets)
                 .Select(p => new Obj().Put("asset", p.Asset).Put("fixtureId", p.FixtureId).Put("floor", (double)p.Floor).Put("scale", p.Scale).Put("local", Vec(p.Local))).ToList())).ToList())
-            .Put("stations", StudioPropLayout.StationPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList());
+            .Put("stations", StudioPropLayout.StationPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList())
+            .Put("landmarks", StudioPropLayout.LandmarkPlacements(world, assets).Select(s => new Obj().Put("asset", s.Asset).Put("id", s.Id).Put("position", Vec(s.Position)).Put("yaw", s.Yaw)).ToList());
+        Assert.Equal(2, StudioPropLayout.LandmarkPlacements(world, assets).Count);
         var actual = Write(tree);
         Assert.Equal(expected.Length, actual.Length);
         Assert.True(expected == actual, "studio placements differ from TypeScript");

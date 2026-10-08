@@ -109,3 +109,24 @@ export function studioStationPlacements(world: { nodes: readonly { id: string; s
     ];
   });
 }
+
+/** One-off studio landmarks authored at the game's own fixed dimensions:
+ * BUILT-158 is the 960×44m 南岫 runway (its 1.5m slab top at the runway deck
+ * top), and BUILT-092 the 96×84m forecourt with lamps and flags before the
+ * core, centred where the renderer's forecourt is (door + 67m). The renderer
+ * leaves out its own boxes for any landmark returned here. Display only. */
+export const RUNWAY_LANDMARK = { asset: 'BUILT-158', edgeId: 'road-airport-runway-strip' } as const;
+export const FORECOURT_LANDMARK = { asset: 'BUILT-092', doorOffsetZ: 67 } as const;
+export function studioLandmarkPlacements(world: { buildings: readonly Building[]; edges: readonly { id: string; points: readonly { x: number; y: number; z: number }[] }[] }, assets: ReadonlyMap<string, StudioAsset> = assetById): StudioStaticPlacement[] {
+  const placements: StudioStaticPlacement[] = [];
+  const runway = world.edges.find(edge => edge.id === RUNWAY_LANDMARK.edgeId), slab = assets.get(RUNWAY_LANDMARK.asset);
+  if (runway && slab && runway.points.length === 2) {
+    const [a, b] = runway.points, length = Math.hypot(b.x - a.x, b.z - a.z), width = slab.boundsM.max[2] - slab.boundsM.min[2];
+    // Only a straight, level strip of exactly the model's length is dressed.
+    if (Math.abs(length - (slab.boundsM.max[0] - slab.boundsM.min[0])) < 1e-6 && Math.abs(a.y - b.y) < 1e-6 && Math.abs(a.z - b.z) < 1e-6 && b.x > a.x)
+      placements.push({ asset: slab.id, id: `${runway.id}:runway`, position: { x: a.x - slab.boundsM.min[0], y: a.y - slab.boundsM.max[1], z: a.z - width / 2 - slab.boundsM.min[2] }, yaw: 0 });
+  }
+  const core = world.buildings.find(b => b.kind === 'core'), court = assets.get(FORECOURT_LANDMARK.asset);
+  if (core && court) placements.push({ asset: court.id, id: `${core.id}:forecourt`, position: { x: core.position.x, y: core.position.y, z: core.door.z + FORECOURT_LANDMARK.doorOffsetZ }, yaw: 0 });
+  return placements;
+}
