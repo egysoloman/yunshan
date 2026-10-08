@@ -44,6 +44,32 @@ const families: [string, RegExp][] = [
 ];
 const family = (id: string, name: string) => id.startsWith('CHAR-') ? 'character' : families.find(([, pattern]) => pattern.test(name))?.[0] ?? (id.startsWith('LIFE-') ? 'prop' : 'other');
 const placed = new Set(manifest.assets.map(a => a.id));
+/** Why an unplaced entry is not in the game yet, by work family (the measured
+ * fit studies are recorded in 开发备忘录.md STUDIO07–10). Each names the
+ * decision or authoring that would place it. */
+const gaps: Record<string, string> = {
+  character: 'needs a rig decision: CHAR-002…015 part sizes differ from the game part boxes beyond the 0.9 scale floor, and CHAR-059…178 need skeletal animation the game does not have',
+  furniture: 'no floor-plan fixture solid of this size within the 0.9–1 uniform scale (fixtures are tables 2.4×0.8×1.2, beds 2.4×0.6×1.2, counters 3.2×1.0×1.2)',
+  prop: 'no game slot: a new fixture or use point would have to be added to the shared floor plan first',
+  facade: 'authored for the legacy facade; 605 of 612 buildings use program walls whose bays (windows 1.6×1.4m) differ',
+  stair: 'program stairs are generated from the shared floor plan; fixed stair modules do not match its treads and landings',
+  road: 'fixed 2–10m module; road decks follow variable-length, sloped segments and the contract forbids stretching',
+  rail: 'fixed module; elevated decks and piers vary with terrain and the contract forbids stretching',
+  bridge: 'fixed module; bridge towers, cables and abutments vary with deck height and terrain',
+  'cable-lift': 'fixed module; lift shafts and cable spans vary with the network',
+  airport: 'no matching game part at the same fixed size (the runway slab BUILT-158 is placed)',
+  starport: 'size differs: the game starport ring has a 78m radius, BUILT-094 is 88m across',
+  station: 'station signal and junction poles carry their own lamps where the game has live or no signals (contract rejection)',
+  waterfront: 'dock parts have no fixed-size game counterpart',
+  vehicle: 'complete vehicle masters are author-sized and cannot be fitted by uniform scale to the game vehicle boxes',
+  tree: 'only the five species models and one shrub are used; others have no woodland species slot',
+  plant: 'ground cover is generated per terrain tile at the 0.2m grid; no model slot',
+  rock: 'the terrain is one continuous generated shell; rock masters have no anchor in it',
+  water: 'river, waterfall and pool surfaces are generated from the world; no model slot',
+  'terrain-edge': 'terrain edges are generated with the shell; no model slot',
+  sky: 'the renderer draws a procedural sky',
+  other: 'no game slot identified',
+};
 const rejected = new Map([...contract.rejectedStudioAssets, ...contract.entranceLantern.rejected].map(r => [r.id, r.reason]));
 const voxel = contract.conventions.worldVoxelM, round = (v: number) => Math.round(v * 1e4) / 1e4;
 const onGrid = (v: number) => Math.abs(v / voxel - Math.round(v / voxel)) < 1e-6;
@@ -63,7 +89,7 @@ const entries = index.entries.map(entry => {
     id: entry.id, kind: entry.kind ?? 'master', ...(entry.parentCatalogId ? { parent: entry.parentCatalogId } : {}), name: label?.name ?? entry.id, category: entry.id.split('-')[0], family: family(entry.id, label?.name ?? ''), sheet: entry.sheet ?? null, theme: label?.theme ?? null,
     revision: entry.revision ?? null, representation: entry.representation ?? null, sizeM: size, boundsM: { min: bounds.min.map(round), max: bounds.max.map(round) },
     source: source ?? null, checks,
-    status: placed.has(entry.id) ? 'placed' : rejected.has(entry.id) ? 'rejected' : 'unassigned', ...(rejected.has(entry.id) ? { reason: rejected.get(entry.id) } : {}),
+    status: placed.has(entry.id) ? 'placed' : rejected.has(entry.id) ? 'rejected' : 'unassigned', ...(rejected.has(entry.id) ? { reason: rejected.get(entry.id) } : !placed.has(entry.id) ? { gap: entry.kind === 'variant' || entry.kind === 'assembly' ? 'whole studio composition with its own collision; game buildings and networks keep their authoritative geometry' : gaps[family(entry.id, label?.name ?? '')] ?? gaps.other } : {}),
     studioNote: entry.note ?? null,
   };
 });
