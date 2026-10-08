@@ -176,14 +176,28 @@ namespace Yunshan.Runtime
             Color wall = Space.Hex(WallColor(b)), stone = Space.Hex("#aaa38b"), wood = Space.Hex("#98704d"), roof = Space.Hex(b.CommercialGeometryRevision == 1 ? "#344f51" : "#3f4f4c"), pane = Space.Hex("#7fa3a6"), stair = Space.Hex("#a39a83"), furniture = Space.Hex("#846346"), linen = Space.Hex("#d7d0b9");
             var body = ArchitectureFloorPlan.GetBuildingBody(b);
             if (body == null) { LegacyBuilding(solid, b, wall, roof); return new NearBuildingMeshes { Solid = solid.Build(b.Name), Glass = null }; }
+            bool timberFinish = b.Kind == "home" || b.Kind == "market"; int finishedPanels = 0; var timberColor = Space.Hex("#76482f");
             foreach (var plan in body.FloorPlans)
             {
                 foreach (var r in ArchitectureFloorPlan.GetFloorPlanSlabRegions(plan)) solid.LocalBox(frame, r.X0, plan.Y - .2, r.Z0, r.X1, plan.Y, r.Z1, plan.Floor <= 0 ? stone : wood, bottom: true);
                 foreach (var panel in ArchitectureFloorPlan.WallPanels(plan))
                 {
                     var r = panel.Rect;
-                    if (panel.Kind == "glass") glass.LocalBox(frame, r.X0, plan.Y + panel.Bottom, r.Z0, r.X1, plan.Y + panel.Top, r.Z1, pane);
-                    else solid.LocalBox(frame, r.X0, plan.Y + panel.Bottom, r.Z0, r.X1, plan.Y + panel.Top, r.Z1, plan.Floor < 0 ? stone : wall);
+                    if (panel.Kind == "glass") { glass.LocalBox(frame, r.X0, plan.Y + panel.Bottom, r.Z0, r.X1, plan.Y + panel.Top, r.Z1, pane); continue; }
+                    // As buildProgramArchitecture: a stone skirt to .8m, then on homes and
+                    // markets a timber frame (top beam, two posts) round a plaster infill,
+                    // for at most PROGRAM_WALL_FINISH_PANEL_BUDGET panels per building.
+                    double skirt = Math.Min(.8, panel.Top);
+                    if (panel.Bottom < skirt) solid.LocalBox(frame, r.X0, plan.Y + panel.Bottom, r.Z0, r.X1, plan.Y + skirt, r.Z1, Space.Hex(timberFinish && plan.Floor >= 0 ? "#8f9287" : "#939487"));
+                    double low = Math.Max(panel.Bottom, skirt);
+                    if (panel.Top <= low) continue;
+                    var finish = timberFinish && plan.Floor >= 0 && finishedPanels < ProgramWallFinishPanelBudget ? PartitionWallFinish(panel, low, panel.Top) : null;
+                    if (finish != null && finish.Count > 1)
+                    {
+                        finishedPanels++;
+                        foreach (var (q, bottom, top, timber) in finish) solid.LocalBox(frame, q.X0, plan.Y + bottom, q.Z0, q.X1, plan.Y + top, q.Z1, timber ? timberColor : wall);
+                    }
+                    else solid.LocalBox(frame, r.X0, plan.Y + low, r.Z0, r.X1, plan.Y + panel.Top, r.Z1, wall);
                 }
                 foreach (var s in plan.StairTreads.Concat(plan.StairLandings)) solid.LocalBox(frame, s.Rect.X0, s.Bottom, s.Rect.Z0, s.Rect.X1, s.Top, s.Rect.Z1, stair);
                 foreach (var f in plan.Fixtures)
@@ -212,6 +226,22 @@ namespace Yunshan.Runtime
                 GableRidge(solid, frame, region, roof);
             }
             return new NearBuildingMeshes { Solid = solid.Build(b.Name), Glass = glass.VertexCount > 0 ? glass.Build(b.Name + " · 玻璃") : null };
+        }
+
+        public const int ProgramWallFinishPanelBudget = 128;
+        /// <summary>Port of partitionProgramWallFinish (src/rendering/architecture-bodies.ts).</summary>
+        public static List<(CoreRect Rect, double Bottom, double Top, bool Timber)> PartitionWallFinish(WallPanel panel, double bottom, double top)
+        {
+            var r = panel.Rect; bool alongX = r.X1 - r.X0 >= r.Z1 - r.Z0; double lo = alongX ? r.X0 : r.Z0, hi = alongX ? r.X1 : r.Z1;
+            var result = new List<(CoreRect, double, double, bool)>();
+            if (panel.Kind != "solid") return result;
+            if (hi - lo < .8 - 1e-7 || top - bottom < .4 - 1e-7) { result.Add((r, bottom, top, false)); return result; }
+            CoreRect Slice(double from, double to) => alongX ? new CoreRect(from, to, r.Z0, r.Z1) : new CoreRect(r.X0, r.X1, from, to);
+            result.Add((r, top - .2, top, true));
+            result.Add((Slice(lo, lo + .2), bottom, top - .2, true));
+            result.Add((Slice(hi - .2, hi), bottom, top - .2, true));
+            result.Add((Slice(lo + .2, hi - .2), bottom, top - .2, false));
+            return result;
         }
 
         /// <summary>Triangular prism whose height follows the shared roof support profile.</summary>

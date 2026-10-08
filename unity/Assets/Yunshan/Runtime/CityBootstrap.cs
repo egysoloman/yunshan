@@ -99,7 +99,8 @@ namespace Yunshan.Runtime
                 // The web renderer's network boxes (decks, rails, guardrails, supports,
                 // bridges, lifts, cables, junction poles), emitted off the main thread.
                 bool stationsDressed = studio.Has(StudioPropLayout.StationPlatformAsset) && studio.Has(StudioPropLayout.StationShelterAsset);
-                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed); return sink; });
+                bool forecourtDressed = landmarks.Any(p => p.Id.EndsWith(":forecourt"));
+                var network = await Task.Run(() => { var sink = new NetworkStructureMeshes(); NetworkStructures.Emit(world, sink, stationsDressed, runwayDressed); GatewayStructures.Emit(world, sink, forecourtDressed); return sink; });
                 var networkRoot = new GameObject("路网结构").transform; networkRoot.SetParent(transform, false);
                 foreach (var (mesh, glow) in network.Build()) Show(networkRoot, mesh, glow ? glassMaterial : solidMaterial);
                 Show(transform, CityGeometry.WaterMesh(world), waterMaterial);

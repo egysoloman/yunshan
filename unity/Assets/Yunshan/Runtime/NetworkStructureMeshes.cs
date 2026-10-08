@@ -12,7 +12,7 @@ namespace Yunshan.Runtime
     public sealed class NetworkStructureMeshes : INetworkSink
     {
         const double Cell = 384;
-        static readonly Dictionary<string, string> Palette = new Dictionary<string, string> { ["stone"] = "#a0ab9f", ["wood"] = "#73533b", ["roof"] = "#456760", ["amber"] = "#ffd39a", ["cyan"] = "#82d9d0" };
+        static readonly Dictionary<string, string> Palette = new Dictionary<string, string> { ["stone"] = "#a0ab9f", ["wood"] = "#73533b", ["roof"] = "#456760", ["amber"] = "#ffd39a", ["cyan"] = "#82d9d0", ["red"] = "#954c40" };
         readonly Dictionary<(long, long), GameMeshBuilder> cells = new Dictionary<(long, long), GameMeshBuilder>();
         readonly Dictionary<(long, long), GameMeshBuilder> glowCells = new Dictionary<(long, long), GameMeshBuilder>();
 
